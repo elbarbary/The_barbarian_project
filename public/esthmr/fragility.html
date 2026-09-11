@@ -992,6 +992,217 @@ body {
     </div>
   </section>
 
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       ALERT EPISODE AUDIT & FALSE ALARM LEDGER
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="fe-card" id="episodes-ledger" style="margin-bottom:32px;">
+    <div class="fe-section-header">
+      <p class="fe-kicker">Exhaustive Empirical Audit</p>
+      <h2>Alert Episode Audit &amp; False Alarm Ledger</h2>
+      <p style="font-size:0.85rem; color:var(--fe-t2); margin-top:4px;">
+        Transparent audit of all 76 alert episodes fired by Challenger C-v2 across 18.1 years (4,518 EGX trading sessions).
+        Inspect exact trigger dates, duration, forward maximum drawdowns (MAE<sub>25</sub>), and real-world outcomes.
+      </p>
+    </div>
+
+    <!-- Summary KPI Cards -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; margin-bottom:24px;">
+      <div style="background:var(--fe-bg); border:1px solid var(--fe-edge); border-radius:10px; padding:14px;">
+        <div style="font-family:var(--fe-mono); font-size:0.68rem; color:var(--fe-faint); text-transform:uppercase; margin-bottom:4px;">Total Alert Episodes</div>
+        <div style="font-family:var(--fe-display); font-size:1.5rem; font-weight:700; color:var(--fe-ink);">76</div>
+        <div style="font-size:0.75rem; color:var(--fe-t2);">12.53% market occupancy (~1 in 8 days)</div>
+      </div>
+      <div style="background:#F0F7F6; border:1px solid rgba(18,107,117,0.3); border-radius:10px; padding:14px;">
+        <div style="font-family:var(--fe-mono); font-size:0.68rem; color:var(--fe-accent); text-transform:uppercase; margin-bottom:4px;">Strict Early Hits</div>
+        <div style="font-family:var(--fe-display); font-size:1.5rem; font-weight:700; color:var(--fe-accent);">16 / 17 <small style="font-size:0.9rem;">(94.1%)</small></div>
+        <div style="font-size:0.75rem; color:var(--fe-accent); font-weight:600;">17/17 Broad (100%) · 17.5d median lead</div>
+      </div>
+      <div style="background:var(--fe-bg); border:1px solid var(--fe-edge); border-radius:10px; padding:14px;">
+        <div style="font-family:var(--fe-mono); font-size:0.68rem; color:var(--fe-faint); text-transform:uppercase; margin-bottom:4px;">Reactive In-Crash</div>
+        <div style="font-family:var(--fe-display); font-size:1.5rem; font-weight:700; color:var(--fe-ink);">20</div>
+        <div style="font-size:0.75rem; color:var(--fe-t2);">Capital protection during ongoing collapses</div>
+      </div>
+      <div style="background:#FFFBF0; border:1px solid rgba(217,119,6,0.25); border-radius:10px; padding:14px;">
+        <div style="font-family:var(--fe-mono); font-size:0.68rem; color:#D97706; text-transform:uppercase; margin-bottom:4px;">Sub-Threshold Near-Misses</div>
+        <div style="font-family:var(--fe-display); font-size:1.5rem; font-weight:700; color:#D97706;">8</div>
+        <div style="font-size:0.75rem; color:var(--fe-t2);">Avg -11.0% drop (real market stress)</div>
+      </div>
+      <div style="background:#FFF5F5; border:1px solid rgba(229,62,62,0.25); border-radius:10px; padding:14px;">
+        <div style="font-family:var(--fe-mono); font-size:0.68rem; color:var(--fe-down); text-transform:uppercase; margin-bottom:4px;">Hard False Alarms</div>
+        <div style="font-family:var(--fe-display); font-size:1.5rem; font-weight:700; color:var(--fe-down);">31 <small style="font-size:0.9rem;">(1.72 / yr)</small></div>
+        <div style="font-size:0.75rem; color:var(--fe-up); font-weight:600;">0.77 / yr in modern era (2015–2026)</div>
+      </div>
+    </div>
+
+    <!-- Yearly Timeline Strip -->
+    <div style="background:rgba(27,25,23,0.02); border:1px solid var(--fe-edge); border-radius:10px; padding:16px; margin-bottom:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;">
+        <h4 style="font-size:0.85rem; font-weight:700; color:var(--fe-ink); margin:0;">Yearly False Alarm Distribution &amp; Modern Regime Stabilization</h4>
+        <span style="font-family:var(--fe-mono); font-size:0.72rem; color:var(--fe-faint);">18 Years Audited (2008–2026)</span>
+      </div>
+      <p style="font-size:0.78rem; color:var(--fe-t2); margin-bottom:12px; line-height:1.4;">
+        False alarms are heavily clustered in <strong>2014 (8 episodes)</strong> during the post-2013 transition bull run where violent domestic turnover triggered domestic fragility gates. 
+        Across the modern walk-forward era (2015–2026), Challenger C-v2 averaged only <strong>0.77 hard false alarms per year</strong>, with <strong>9 separate years recording zero hard false alarms</strong>.
+      </p>
+      
+      <!-- Interactive Mini Bar Grid -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(46px, 1fr)); gap:6px; text-align:center;">
+
+    <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">08</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#D97706; margin-top:2px;">1 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">9 ep</div>
+    </div>
+
+    <div style="background:#FEF2F2; border:1px solid #FECACA; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">09</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#DC2626; margin-top:2px;">4 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">9 ep</div>
+    </div>
+
+    <div style="background:#FEF2F2; border:1px solid #FECACA; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">10</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#DC2626; margin-top:2px;">4 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">8 ep</div>
+    </div>
+
+    <div style="background:#ECFDF5; border:1px solid #A7F3D0; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">11</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#059669; margin-top:2px;">0 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">6 ep</div>
+    </div>
+
+    <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">12</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#D97706; margin-top:2px;">2 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">8 ep</div>
+    </div>
+
+    <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">13</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#D97706; margin-top:2px;">3 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">3 ep</div>
+    </div>
+
+    <div style="background:#FEF2F2; border:1px solid #FECACA; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">14</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#DC2626; margin-top:2px;">8 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">9 ep</div>
+    </div>
+
+    <div style="background:#ECFDF5; border:1px solid #A7F3D0; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">15</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#059669; margin-top:2px;">0 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">4 ep</div>
+    </div>
+
+    <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">16</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#D97706; margin-top:2px;">3 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">3 ep</div>
+    </div>
+
+    <div style="background:#F3F4F6; border:1px solid #E5E7EB; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">17</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#9CA3AF; margin-top:2px;">0</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">0 ep</div>
+    </div>
+
+    <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">18</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#D97706; margin-top:2px;">3 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">6 ep</div>
+    </div>
+
+    <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">19</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#D97706; margin-top:2px;">1 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">1 ep</div>
+    </div>
+
+    <div style="background:#ECFDF5; border:1px solid #A7F3D0; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">20</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#059669; margin-top:2px;">0 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">2 ep</div>
+    </div>
+
+    <div style="background:#F3F4F6; border:1px solid #E5E7EB; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">21</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#9CA3AF; margin-top:2px;">0</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">0 ep</div>
+    </div>
+
+    <div style="background:#ECFDF5; border:1px solid #A7F3D0; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">22</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#059669; margin-top:2px;">0 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">2 ep</div>
+    </div>
+
+    <div style="background:#ECFDF5; border:1px solid #A7F3D0; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">23</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#059669; margin-top:2px;">0 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">1 ep</div>
+    </div>
+
+    <div style="background:#ECFDF5; border:1px solid #A7F3D0; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">24</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#059669; margin-top:2px;">0 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">2 ep</div>
+    </div>
+
+    <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">25</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#D97706; margin-top:2px;">2 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">2 ep</div>
+    </div>
+
+    <div style="background:#ECFDF5; border:1px solid #A7F3D0; border-radius:6px; padding:6px 4px; font-family:var(--fe-mono);">
+      <div style="font-size:0.68rem; font-weight:700; color:var(--fe-ink);">26</div>
+      <div style="font-size:0.75rem; font-weight:700; color:#059669; margin-top:2px;">0 FA</div>
+      <div style="font-size:0.62rem; color:var(--fe-faint); margin-top:1px;">1 ep</div>
+    </div>
+      </div>
+    </div>
+
+    <!-- Filter Buttons & Search -->
+    <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; margin-bottom:16px;">
+      <div style="display:flex; flex-wrap:wrap; gap:6px;" id="epFilterBar">
+        <button class="fe-btn-sc is-active" data-filter="ALL">All Episodes (76)</button>
+        <button class="fe-btn-sc" data-filter="STRICT_EARLY">Early Hits (16)</button>
+        <button class="fe-btn-sc" data-filter="REACTIVE">Reactive (20)</button>
+        <button class="fe-btn-sc" data-filter="NEAR_MISS">Near-Misses (8)</button>
+        <button class="fe-btn-sc" data-filter="HARD_FALSE_ALARM">Hard False Alarms (31)</button>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <input type="text" id="epSearchInput" placeholder="Filter by date, year, event..." 
+               style="padding:6px 12px; border-radius:6px; border:1px solid var(--fe-edge); font-size:0.8rem; outline:none; width:220px; font-family:var(--fe-mono);" />
+        <span id="epFilteredCount" style="font-family:var(--fe-mono); font-size:0.75rem; color:var(--fe-faint);">Showing 76</span>
+      </div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="fe-table-scroll" style="max-height:500px; overflow-y:auto; border:1px solid var(--fe-edge); border-radius:8px;">
+      <table class="fe-datatable" style="margin:0;">
+        <thead style="position:sticky; top:0; background:#F8FAFB; z-index:2;">
+          <tr>
+            <th style="width:45px;">Ep #</th>
+            <th>Fired Date</th>
+            <th>Exit Date</th>
+            <th>Dur.</th>
+            <th>Classification</th>
+            <th>Event / Context</th>
+            <th>MAE<sub>25</sub> (Max Drop)</th>
+            <th>Holding Opp. Cost</th>
+          </tr>
+        </thead>
+        <tbody id="epTableBody">
+          <!-- Dynamically populated -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer style="text-align:center; padding:24px 0; font-family:var(--fe-mono); font-size:0.75rem; color:var(--fe-faint);">
     ESTHMR · Egyptian Exchange Intelligence · <a href="index.html" style="color:var(--fe-accent); text-decoration:none;">esthmr.com</a>
@@ -1628,6 +1839,84 @@ body {
     .catch(err => {
       console.warn("Could not load simulation series:", err);
     });
+
+
+  // ═══════════════════════════════════════════════════════════════
+  // ALERT EPISODE AUDIT TABLE LOGIC
+  // ═══════════════════════════════════════════════════════════════
+  const C_V2_EPISODES = [{"id": 1, "start": "2008-01-03", "end": "2008-01-16", "dur": 8, "type": "NEAR_MISS", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -10.15, "mfe": 2.86, "opp": 1.11, "desc": "Near-Miss Sub-Threshold Correction (MAE25: -10.15%)"}, {"id": 2, "start": "2008-02-14", "end": "2008-02-25", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": 0.0, "mfe": 11.9, "opp": 10.47, "desc": "Hard False Alarm (MAE25: 0.0%, OppCost: 10.47%)"}, {"id": 3, "start": "2008-03-26", "end": "2008-04-06", "dur": 8, "type": "STRICT_EARLY", "crisis_id": 12, "crisis_name": "Crisis 12: 2008 GFC Wave 1", "lead": 25, "mae": 0.0, "mfe": 7.4, "opp": 3.68, "desc": "Hit: Crisis 12: 2008 GFC Wave 1 (25d early lead)"}, {"id": 4, "start": "2008-05-08", "end": "2008-05-19", "dur": 8, "type": "REACTIVE", "crisis_id": 12, "crisis_name": "Crisis 12: 2008 GFC Wave 1", "lead": -3, "mae": -11.93, "mfe": 0.0, "opp": -10.18, "desc": "Reactive Capital Protection during ongoing Crisis 12: 2008 GFC Wave 1"}, {"id": 5, "start": "2008-06-17", "end": "2008-06-26", "dur": 8, "type": "REACTIVE", "crisis_id": 12, "crisis_name": "Crisis 12: 2008 GFC Wave 1", "lead": -31, "mae": -12.54, "mfe": 0.0, "opp": -6.67, "desc": "Reactive Capital Protection during ongoing Crisis 12: 2008 GFC Wave 1"}, {"id": 6, "start": "2008-07-29", "end": "2008-08-07", "dur": 8, "type": "STRICT_EARLY", "crisis_id": 13, "crisis_name": "Crisis 13: 2008 Lehman Crash", "lead": 6, "mae": -15.17, "mfe": 0.65, "opp": -6.87, "desc": "Hit: Crisis 13: 2008 Lehman Crash (6d early lead)"}, {"id": 7, "start": "2008-09-07", "end": "2008-09-16", "dur": 8, "type": "REACTIVE", "crisis_id": 13, "crisis_name": "Crisis 13: 2008 Lehman Crash", "lead": -22, "mae": -34.33, "mfe": 1.66, "opp": -14.48, "desc": "Reactive Capital Protection during ongoing Crisis 13: 2008 Lehman Crash"}, {"id": 8, "start": "2008-10-22", "end": "2008-11-02", "dur": 8, "type": "REACTIVE", "crisis_id": 13, "crisis_name": "Crisis 13: 2008 Lehman Crash", "lead": -50, "mae": -27.89, "mfe": 4.92, "opp": -10.99, "desc": "Reactive Capital Protection during ongoing Crisis 13: 2008 Lehman Crash"}, {"id": 9, "start": "2008-12-01", "end": "2008-12-15", "dur": 8, "type": "STRICT_EARLY", "crisis_id": 14, "crisis_name": "Crisis 14: 2009 GFC Aftershock", "lead": 20, "mae": -2.11, "mfe": 17.62, "opp": 3.82, "desc": "Hit: Crisis 14: 2009 GFC Aftershock (20d early lead)"}, {"id": 10, "start": "2009-01-18", "end": "2009-01-27", "dur": 8, "type": "REACTIVE", "crisis_id": 14, "crisis_name": "Crisis 14: 2009 GFC Aftershock", "lead": -8, "mae": -21.19, "mfe": 0.0, "opp": -10.75, "desc": "Reactive Capital Protection during ongoing Crisis 14: 2009 GFC Aftershock"}, {"id": 11, "start": "2009-02-25", "end": "2009-03-08", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -1.26, "mfe": 22.5, "opp": 3.28, "desc": "Hard False Alarm (MAE25: -1.26%, OppCost: 3.28%)"}, {"id": 12, "start": "2009-04-07", "end": "2009-04-16", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -0.88, "mfe": 23.59, "opp": 3.15, "desc": "Hard False Alarm (MAE25: -0.88%, OppCost: 3.15%)"}, {"id": 13, "start": "2009-05-19", "end": "2009-05-28", "dur": 8, "type": "STRICT_EARLY", "crisis_id": 15, "crisis_name": "Crisis 15: 2009 Summer Correction", "lead": 20, "mae": -6.02, "mfe": 6.69, "opp": -1.69, "desc": "Hit: Crisis 15: 2009 Summer Correction (20d early lead)"}, {"id": 14, "start": "2009-06-30", "end": "2009-07-12", "dur": 8, "type": "REACTIVE", "crisis_id": 15, "crisis_name": "Crisis 15: 2009 Summer Correction", "lead": -10, "mae": -8.3, "mfe": 14.49, "opp": -4.46, "desc": "Reactive Capital Protection during ongoing Crisis 15: 2009 Summer Correction"}, {"id": 15, "start": "2009-08-11", "end": "2009-08-20", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -3.27, "mfe": 6.01, "opp": -2.83, "desc": "Hard False Alarm (MAE25: -3.27%, OppCost: -2.83%)"}, {"id": 16, "start": "2009-09-30", "end": "2009-10-12", "dur": 8, "type": "STRICT_EARLY", "crisis_id": 16, "crisis_name": "Crisis 16: 2009 Dubai Debt Shock", "lead": 17, "mae": -3.11, "mfe": 7.21, "opp": 0.35, "desc": "Hit: Crisis 16: 2009 Dubai Debt Shock (17d early lead)"}, {"id": 17, "start": "2009-11-10", "end": "2009-11-19", "dur": 8, "type": "REACTIVE", "crisis_id": 16, "crisis_name": "Crisis 16: 2009 Dubai Debt Shock", "lead": -11, "mae": -14.47, "mfe": 0.03, "opp": -7.75, "desc": "Reactive Capital Protection during ongoing Crisis 16: 2009 Dubai Debt Shock"}, {"id": 18, "start": "2009-12-22", "end": "2009-12-31", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -4.49, "mfe": 6.91, "opp": -3.17, "desc": "Hard False Alarm (MAE25: -4.49%, OppCost: -3.17%)"}, {"id": 19, "start": "2010-02-02", "end": "2010-02-11", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -5.09, "mfe": 1.96, "opp": 1.93, "desc": "Hard False Alarm (MAE25: -5.09%, OppCost: 1.93%)"}, {"id": 20, "start": "2010-03-24", "end": "2010-04-06", "dur": 8, "type": "STRICT_EARLY", "crisis_id": 17, "crisis_name": "Crisis 17: 2010 Eurozone Crisis", "lead": 21, "mae": 0.0, "mfe": 13.19, "opp": 5.89, "desc": "Hit: Crisis 17: 2010 Eurozone Crisis (21d early lead)"}, {"id": 21, "start": "2010-05-06", "end": "2010-05-17", "dur": 8, "type": "REACTIVE", "crisis_id": 17, "crisis_name": "Crisis 17: 2010 Eurozone Crisis", "lead": -7, "mae": -16.57, "mfe": 0.0, "opp": -7.45, "desc": "Reactive Capital Protection during ongoing Crisis 17: 2010 Eurozone Crisis"}, {"id": 22, "start": "2010-06-17", "end": "2010-06-28", "dur": 8, "type": "NEAR_MISS", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -8.85, "mfe": 2.01, "opp": -1.45, "desc": "Near-Miss Sub-Threshold Correction (MAE25: -8.85%)"}, {"id": 23, "start": "2010-07-28", "end": "2010-08-08", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": 0.0, "mfe": 4.51, "opp": 3.16, "desc": "Hard False Alarm (MAE25: 0.0%, OppCost: 3.16%)"}, {"id": 24, "start": "2010-09-06", "end": "2010-09-19", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -1.07, "mfe": 5.89, "opp": 0.61, "desc": "Hard False Alarm (MAE25: -1.07%, OppCost: 0.61%)"}, {"id": 25, "start": "2010-10-19", "end": "2010-10-28", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -3.07, "mfe": 2.28, "opp": -2.16, "desc": "Hard False Alarm (MAE25: -3.07%, OppCost: -2.16%)"}, {"id": 26, "start": "2010-12-01", "end": "2010-12-13", "dur": 8, "type": "STRICT_EARLY", "crisis_id": 18, "crisis_name": "Crisis 18: 2011 Jan 25 Revolution", "lead": 24, "mae": 0.0, "mfe": 7.9, "opp": 3.48, "desc": "Hit: Crisis 18: 2011 Jan 25 Revolution (24d early lead)"}, {"id": 27, "start": "2011-01-27", "end": "2011-03-31", "dur": 8, "type": "REACTIVE", "crisis_id": 18, "crisis_name": "Crisis 18: 2011 Jan 25 Revolution", "lead": -14, "mae": -12.32, "mfe": 0.0, "opp": -13.42, "desc": "Reactive Capital Protection during ongoing Crisis 18: 2011 Jan 25 Revolution"}, {"id": 28, "start": "2011-05-26", "end": "2011-06-06", "dur": 8, "type": "STRICT_EARLY", "crisis_id": 19, "crisis_name": "Crisis 19: 2011 Cabinet Reshuffle", "lead": 16, "mae": -2.36, "mfe": 4.0, "opp": 0.94, "desc": "Hit: Crisis 19: 2011 Cabinet Reshuffle (16d early lead)"}, {"id": 29, "start": "2011-07-19", "end": "2011-07-27", "dur": 6, "type": "REACTIVE", "crisis_id": 19, "crisis_name": "Crisis 19: 2011 Cabinet Reshuffle", "lead": -22, "mae": -12.95, "mfe": 0.0, "opp": -2.43, "desc": "Reactive Capital Protection during ongoing Crisis 19: 2011 Cabinet Reshuffle"}, {"id": 30, "start": "2011-08-25", "end": "2011-09-08", "dur": 8, "type": "STRICT_EARLY", "crisis_id": 20, "crisis_name": "Crisis 20: 2011 Maspero Clashes", "lead": 9, "mae": -13.91, "mfe": 1.68, "opp": 1.93, "desc": "Hit: Crisis 20: 2011 Maspero Clashes (9d early lead)"}, {"id": 31, "start": "2011-10-10", "end": "2011-10-16", "dur": 5, "type": "REACTIVE", "crisis_id": 20, "crisis_name": "Crisis 20: 2011 Maspero Clashes", "lead": -19, "mae": 0.0, "mfe": 13.07, "opp": 4.6, "desc": "Reactive Capital Protection during ongoing Crisis 20: 2011 Maspero Clashes"}, {"id": 32, "start": "2011-11-30", "end": "2011-12-06", "dur": 5, "type": "NEAR_MISS", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -10.79, "mfe": 1.69, "opp": 0.93, "desc": "Near-Miss Sub-Threshold Correction (MAE25: -10.79%)"}, {"id": 33, "start": "2012-01-15", "end": "2012-01-19", "dur": 5, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -0.2, "mfe": 34.18, "opp": 2.4, "desc": "Hard False Alarm (MAE25: -0.2%, OppCost: 2.4%)"}, {"id": 34, "start": "2012-02-29", "end": "2012-03-11", "dur": 8, "type": "STRICT_EARLY", "crisis_id": 21, "crisis_name": "Crisis 21: 2012 Post-Election Drift", "lead": 16, "mae": -9.56, "mfe": 1.91, "opp": 1.44, "desc": "Hit: Crisis 21: 2012 Post-Election Drift (16d early lead)"}, {"id": 35, "start": "2012-04-09", "end": "2012-04-22", "dur": 8, "type": "REACTIVE", "crisis_id": 21, "crisis_name": "Crisis 21: 2012 Post-Election Drift", "lead": -12, "mae": -0.76, "mfe": 10.66, "opp": 2.26, "desc": "Reactive Capital Protection during ongoing Crisis 21: 2012 Post-Election Drift"}, {"id": 36, "start": "2012-05-24", "end": "2012-06-04", "dur": 8, "type": "REACTIVE", "crisis_id": 21, "crisis_name": "Crisis 21: 2012 Post-Election Drift", "lead": -41, "mae": -18.91, "mfe": 0.0, "opp": -6.35, "desc": "Reactive Capital Protection during ongoing Crisis 21: 2012 Post-Election Drift"}, {"id": 37, "start": "2012-07-05", "end": "2012-07-16", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -5.07, "mfe": 2.02, "opp": -3.55, "desc": "Hard False Alarm (MAE25: -5.07%, OppCost: -3.55%)"}, {"id": 38, "start": "2012-09-02", "end": "2012-09-11", "dur": 8, "type": "STRICT_EARLY", "crisis_id": 22, "crisis_name": "Crisis 22: 2012 Constitutional Turmoil", "lead": 18, "mae": 0.0, "mfe": 10.04, "opp": 6.85, "desc": "Hit: Crisis 22: 2012 Constitutional Turmoil (18d early lead)"}, {"id": 39, "start": "2012-10-14", "end": "2012-10-23", "dur": 8, "type": "REACTIVE", "crisis_id": 22, "crisis_name": "Crisis 22: 2012 Constitutional Turmoil", "lead": -11, "mae": -5.47, "mfe": 2.97, "opp": -0.68, "desc": "Reactive Capital Protection during ongoing Crisis 22: 2012 Constitutional Turmoil"}, {"id": 40, "start": "2012-11-26", "end": "2012-12-05", "dur": 8, "type": "REACTIVE", "crisis_id": 22, "crisis_name": "Crisis 22: 2012 Constitutional Turmoil", "lead": -39, "mae": -4.75, "mfe": 8.23, "opp": 3.14, "desc": "Reactive Capital Protection during ongoing Crisis 22: 2012 Constitutional Turmoil"}, {"id": 41, "start": "2013-09-05", "end": "2013-09-16", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": 0.0, "mfe": 15.8, "opp": 6.79, "desc": "Hard False Alarm (MAE25: 0.0%, OppCost: 6.79%)"}, {"id": 42, "start": "2013-10-22", "end": "2013-10-31", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -2.11, "mfe": 4.78, "opp": 1.52, "desc": "Hard False Alarm (MAE25: -2.11%, OppCost: 1.52%)"}, {"id": 43, "start": "2013-12-10", "end": "2013-12-19", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": 0.0, "mfe": 11.41, "opp": 4.33, "desc": "Hard False Alarm (MAE25: 0.0%, OppCost: 4.33%)"}, {"id": 44, "start": "2014-01-26", "end": "2014-02-04", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": 0.0, "mfe": 12.6, "opp": 0.75, "desc": "Hard False Alarm (MAE25: 0.0%, OppCost: 0.75%)"}, {"id": 45, "start": "2014-03-05", "end": "2014-03-16", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -6.24, "mfe": 5.94, "opp": 2.43, "desc": "Hard False Alarm (MAE25: -6.24%, OppCost: 2.43%)"}, {"id": 46, "start": "2014-04-14", "end": "2014-04-28", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": 0.0, "mfe": 11.12, "opp": 3.69, "desc": "Hard False Alarm (MAE25: 0.0%, OppCost: 3.69%)"}, {"id": 47, "start": "2014-05-29", "end": "2014-06-10", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -4.22, "mfe": 6.11, "opp": 0.34, "desc": "Hard False Alarm (MAE25: -4.22%, OppCost: 0.34%)"}, {"id": 48, "start": "2014-07-10", "end": "2014-07-21", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -0.66, "mfe": 11.67, "opp": -0.29, "desc": "Hard False Alarm (MAE25: -0.66%, OppCost: -0.29%)"}, {"id": 49, "start": "2014-08-28", "end": "2014-09-08", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -0.08, "mfe": 3.99, "opp": 3.51, "desc": "Hard False Alarm (MAE25: -0.08%, OppCost: 3.51%)"}, {"id": 50, "start": "2014-10-13", "end": "2014-10-22", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -6.49, "mfe": 4.55, "opp": -3.84, "desc": "Hard False Alarm (MAE25: -6.49%, OppCost: -3.84%)"}, {"id": 51, "start": "2014-11-20", "end": "2014-12-01", "dur": 8, "type": "NEAR_MISS", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -12.24, "mfe": 3.45, "opp": 0.15, "desc": "Near-Miss Sub-Threshold Correction (MAE25: -12.24%)"}, {"id": 52, "start": "2014-12-30", "end": "2015-01-12", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -2.3, "mfe": 11.55, "opp": 1.69, "desc": "Hard False Alarm (MAE25: -2.3%, OppCost: 1.69%)"}, {"id": 53, "start": "2015-05-03", "end": "2015-05-12", "dur": 8, "type": "STRICT_EARLY", "crisis_id": 23, "crisis_name": "Crisis 23: 2015 Foreign FX Squeeze", "lead": 15, "mae": -3.53, "mfe": 6.53, "opp": 0.02, "desc": "Hit: Crisis 23: 2015 Foreign FX Squeeze (15d early lead)"}, {"id": 54, "start": "2015-07-27", "end": "2015-08-03", "dur": 6, "type": "REACTIVE", "crisis_id": 23, "crisis_name": "Crisis 23: 2015 Foreign FX Squeeze", "lead": -41, "mae": -15.64, "mfe": 3.85, "opp": 1.03, "desc": "Reactive Capital Protection during ongoing Crisis 23: 2015 Foreign FX Squeeze"}, {"id": 55, "start": "2015-09-07", "end": "2015-09-16", "dur": 8, "type": "EARLY_FRAGILITY_BUILDUP", "crisis_id": 24, "crisis_name": "Crisis 24: 2015 Oil Collapse & FX Cap", "lead": 27, "mae": -3.38, "mfe": 7.01, "opp": -0.1, "desc": "Early Buildup Hit: Crisis 24: 2015 Oil Collapse & FX Cap (27d lead)"}, {"id": 56, "start": "2015-12-03", "end": "2015-12-09", "dur": 5, "type": "REACTIVE", "crisis_id": 24, "crisis_name": "Crisis 24: 2015 Oil Collapse & FX Cap", "lead": -31, "mae": -5.67, "mfe": 4.57, "opp": -0.31, "desc": "Reactive Capital Protection during ongoing Crisis 24: 2015 Oil Collapse & FX Cap"}, {"id": 57, "start": "2016-01-17", "end": "2016-01-27", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -0.81, "mfe": 7.67, "opp": 1.76, "desc": "Hard False Alarm (MAE25: -0.81%, OppCost: 1.76%)"}, {"id": 58, "start": "2016-03-07", "end": "2016-03-16", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": 0.0, "mfe": 22.3, "opp": 16.31, "desc": "Hard False Alarm (MAE25: 0.0%, OppCost: 16.31%)"}, {"id": 59, "start": "2016-04-27", "end": "2016-05-09", "dur": 7, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -6.24, "mfe": 0.0, "opp": -3.05, "desc": "Hard False Alarm (MAE25: -6.24%, OppCost: -3.05%)"}, {"id": 60, "start": "2018-02-07", "end": "2018-02-13", "dur": 5, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -2.04, "mfe": 12.98, "opp": 0.08, "desc": "Hard False Alarm (MAE25: -2.04%, OppCost: 0.08%)"}, {"id": 61, "start": "2018-05-03", "end": "2018-05-14", "dur": 8, "type": "NEAR_MISS", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -10.79, "mfe": 0.0, "opp": -6.54, "desc": "Near-Miss Sub-Threshold Correction (MAE25: -10.79%)"}, {"id": 62, "start": "2018-06-20", "end": "2018-07-02", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -5.93, "mfe": 1.95, "opp": 1.83, "desc": "Hard False Alarm (MAE25: -5.93%, OppCost: 1.83%)"}, {"id": 63, "start": "2018-08-12", "end": "2018-08-16", "dur": 5, "type": "STRICT_EARLY", "crisis_id": 25, "crisis_name": "Crisis 25: 2018 EM Contagion", "lead": 10, "mae": -10.51, "mfe": 1.72, "opp": -3.94, "desc": "Hit: Crisis 25: 2018 EM Contagion (10d early lead)"}, {"id": 64, "start": "2018-10-09", "end": "2018-10-18", "dur": 8, "type": "REACTIVE", "crisis_id": 25, "crisis_name": "Crisis 25: 2018 EM Contagion", "lead": -26, "mae": -4.47, "mfe": 1.67, "opp": 0.3, "desc": "Reactive Capital Protection during ongoing Crisis 25: 2018 EM Contagion"}, {"id": 65, "start": "2018-11-26", "end": "2018-12-04", "dur": 7, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -6.97, "mfe": 2.07, "opp": -4.02, "desc": "Hard False Alarm (MAE25: -6.97%, OppCost: -4.02%)"}, {"id": 66, "start": "2019-09-23", "end": "2019-10-02", "dur": 8, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -4.24, "mfe": 5.41, "opp": 3.03, "desc": "Hard False Alarm (MAE25: -4.24%, OppCost: 3.03%)"}, {"id": 67, "start": "2020-01-06", "end": "2020-01-13", "dur": 5, "type": "STRICT_EARLY", "crisis_id": 26, "crisis_name": "Crisis 26: 2020 COVID-19 Pandemic", "lead": 23, "mae": 0.0, "mfe": 6.78, "opp": 3.12, "desc": "Hit: Crisis 26: 2020 COVID-19 Pandemic (23d early lead)"}, {"id": 68, "start": "2020-03-01", "end": "2020-03-10", "dur": 8, "type": "REACTIVE", "crisis_id": 26, "crisis_name": "Crisis 26: 2020 COVID-19 Pandemic", "lead": -15, "mae": -28.36, "mfe": 1.61, "opp": -13.91, "desc": "Reactive Capital Protection during ongoing Crisis 26: 2020 COVID-19 Pandemic"}, {"id": 69, "start": "2022-02-24", "end": "2022-03-07", "dur": 8, "type": "STRICT_EARLY", "crisis_id": 27, "crisis_name": "Crisis 27: 2022 Ukraine War & Float", "lead": 19, "mae": -4.54, "mfe": 7.83, "opp": -5.31, "desc": "Hit: Crisis 27: 2022 Ukraine War & Float (19d early lead)"}, {"id": 70, "start": "2022-04-26", "end": "2022-05-12", "dur": 8, "type": "REACTIVE", "crisis_id": 27, "crisis_name": "Crisis 27: 2022 Ukraine War & Float", "lead": -22, "mae": -6.53, "mfe": 4.0, "opp": 1.24, "desc": "Reactive Capital Protection during ongoing Crisis 27: 2022 Ukraine War & Float"}, {"id": 71, "start": "2023-02-26", "end": "2023-03-02", "dur": 5, "type": "NEAR_MISS", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -14.71, "mfe": 0.0, "opp": -0.92, "desc": "Near-Miss Sub-Threshold Correction (MAE25: -14.71%)"}, {"id": 72, "start": "2024-02-28", "end": "2024-03-05", "dur": 5, "type": "STRICT_EARLY", "crisis_id": 28, "crisis_name": "Crisis 28: 2024 Post-Float Correction", "lead": 8, "mae": -6.9, "mfe": 15.6, "opp": 5.01, "desc": "Hit: Crisis 28: 2024 Post-Float Correction (8d early lead)"}, {"id": 73, "start": "2024-04-21", "end": "2024-04-28", "dur": 5, "type": "NEAR_MISS", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -14.58, "mfe": 0.0, "opp": -13.04, "desc": "Near-Miss Sub-Threshold Correction (MAE25: -14.58%)"}, {"id": 74, "start": "2025-04-10", "end": "2025-04-16", "dur": 5, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": 0.0, "mfe": 5.0, "opp": 3.16, "desc": "Hard False Alarm (MAE25: 0.0%, OppCost: 3.16%)"}, {"id": 75, "start": "2025-06-19", "end": "2025-06-25", "dur": 5, "type": "HARD_FALSE_ALARM", "crisis_id": null, "crisis_name": null, "lead": null, "mae": 0.0, "mfe": 14.23, "opp": 7.02, "desc": "Hard False Alarm (MAE25: 0.0%, OppCost: 7.02%)"}, {"id": 76, "start": "2026-02-26", "end": "2026-03-09", "dur": 8, "type": "NEAR_MISS", "crisis_id": null, "crisis_name": null, "lead": null, "mae": -8.18, "mfe": 0.0, "opp": -5.3, "desc": "Near-Miss Sub-Threshold Correction (MAE25: -8.18%)"}];
+  let currentEpFilter = "ALL";
+  let currentEpSearch = "";
+
+  const epTableBody = document.getElementById("epTableBody");
+  const epFilteredCount = document.getElementById("epFilteredCount");
+  const epSearchInput = document.getElementById("epSearchInput");
+  const epFilterBar = document.getElementById("epFilterBar");
+
+  function renderEpisodeTable() {
+    if (!epTableBody) return;
+    const q = currentEpSearch.toLowerCase().trim();
+    const filtered = C_V2_EPISODES.filter(ep => {
+      // Filter check
+      if (currentEpFilter === "STRICT_EARLY" && ep.type !== "STRICT_EARLY" && ep.type !== "EARLY_FRAGILITY_BUILDUP") return false;
+      if (currentEpFilter === "REACTIVE" && ep.type !== "REACTIVE") return false;
+      if (currentEpFilter === "NEAR_MISS" && ep.type !== "NEAR_MISS") return false;
+      if (currentEpFilter === "HARD_FALSE_ALARM" && ep.type !== "HARD_FALSE_ALARM") return false;
+
+      // Search check
+      if (q) {
+        const str = `${ep.id} ${ep.start} ${ep.end} ${ep.type} ${ep.crisis_name || ''} ${ep.desc || ''}`.toLowerCase();
+        if (!str.includes(q)) return false;
+      }
+      return true;
+    });
+
+    epFilteredCount.textContent = `Showing ${filtered.length} of 76`;
+
+    epTableBody.innerHTML = filtered.map(ep => {
+      let bClass = "fe-b-good", bLbl = "Early Hit";
+      if (ep.type === "EARLY_FRAGILITY_BUILDUP") { bClass = "fe-b-good"; bLbl = "Buildup Hit"; }
+      else if (ep.type === "REACTIVE") { bClass = "fe-b-warn"; bLbl = "Reactive Protection"; }
+      else if (ep.type === "NEAR_MISS") { bClass = "fe-b-warn"; bLbl = "Near-Miss (-11% avg)"; }
+      else if (ep.type === "HARD_FALSE_ALARM") { bClass = "fe-b-alert"; bLbl = "Hard False Alarm"; }
+
+      const maeClass = ep.mae <= -18.0 ? "color:var(--fe-down); font-weight:700;" : (ep.mae <= -8.0 ? "color:#D97706; font-weight:600;" : "color:var(--fe-faint);");
+      const oppClass = ep.opp > 2.0 ? "color:var(--fe-down);" : (ep.opp < -2.0 ? "color:var(--fe-up); font-weight:600;" : "color:var(--fe-ink);");
+
+      return `
+        <tr>
+          <td style="font-family:var(--fe-mono); font-size:0.75rem; color:var(--fe-faint);">#${ep.id}</td>
+          <td style="font-family:var(--fe-mono); font-size:0.8rem; font-weight:600; color:var(--fe-ink);">${ep.start}</td>
+          <td style="font-family:var(--fe-mono); font-size:0.8rem; color:var(--fe-t2);">${ep.end}</td>
+          <td style="font-family:var(--fe-mono); font-size:0.78rem;">${ep.dur}d</td>
+          <td><span class="fe-badge-metric ${bClass}">${bLbl}</span></td>
+          <td style="font-size:0.82rem; color:var(--fe-ink);">${ep.crisis_name || ep.desc}</td>
+          <td style="font-family:var(--fe-mono); font-size:0.82rem; ${maeClass}">${ep.mae.toFixed(2)}%</td>
+          <td style="font-family:var(--fe-mono); font-size:0.82rem; ${oppClass}">${ep.opp >= 0 ? '+' : ''}${ep.opp.toFixed(2)}%</td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  if (epFilterBar) {
+    epFilterBar.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        epFilterBar.querySelectorAll("button").forEach(b => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        currentEpFilter = btn.dataset.filter;
+        renderEpisodeTable();
+      });
+    });
+  }
+
+  if (epSearchInput) {
+    epSearchInput.addEventListener("input", (e) => {
+      currentEpSearch = e.target.value;
+      renderEpisodeTable();
+    });
+  }
+
+  renderEpisodeTable();
 
 })();
 </script>
