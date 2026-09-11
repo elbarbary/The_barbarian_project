@@ -263,16 +263,43 @@ def issuer_name(form: dict, ticker: str) -> str:
     return ""
 
 
-def usable_name(value) -> bool:
-    if not isinstance(value, str):
-        return False
-    name = value.strip()
-    if len(name) < 6 or len(name) > 120:
+# One name's worth of characters. Past it, the field has almost always caught
+# a sentence rather than a name — except when it has caught SEVERAL names.
+NAME_CEILING = 120
+
+
+def _one_name(name: str) -> bool:
+    if len(name) < 6 or len(name) > NAME_CEILING:
         return False
     if NOT_A_NAME.match(name):
         return False
     # A person's name here is at least two words in either script.
     return len(name.split()) >= 2
+
+
+def usable_name(value) -> bool:
+    """True when this field holds a name — or a list of them.
+
+    A joint holding is filed as one party under every name in it, in one field:
+    NARE's register prints `هشام محمد مدحت يوسف الفار ، فاطمة الزهراء على السيد
+    على ، ... ، Regional Investment Holding` — seven names and 206 characters
+    against one percentage. Refused on length, that threw away the whole
+    register of two companies.
+
+    The ceiling is still right for what it was built to catch, so the rule is
+    not to raise it but to ask what the length is made of: a list of names is
+    usable when every one of its parts is, and a paragraph with no commas in it
+    is still refused. Nothing is split apart here — the form prints one
+    percentage for the group and dividing it between them would state a stake
+    no document gives.
+    """
+    if not isinstance(value, str):
+        return False
+    name = value.strip()
+    if len(name) <= NAME_CEILING:
+        return _one_name(name)
+    parts = [p.strip() for p in re.split(r"[،,]", name) if p.strip()]
+    return len(parts) > 1 and all(_one_name(p) for p in parts)
 
 
 def vet(reading: dict, expected_ticker: str, summary: dict | None,

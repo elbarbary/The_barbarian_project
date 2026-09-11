@@ -272,3 +272,56 @@ class SharedBacklog(unittest.TestCase):
             structure.named.fetch_pdf = real_fetch
         self.assertEqual(len(self.store(shard).get("readings") or {}), 1,
                          "the first document was lost with the second")
+
+
+class NamesOnTheForm(unittest.TestCase):
+    """Two things these forms print that a name rule has to allow for."""
+
+    def test_a_joint_holding_is_one_party_under_every_name_in_it(self):
+        # NARE's register prints seven names against one percentage, 206
+        # characters in one field. Refused on length, the whole register goes.
+        group = ("هشام محمد مدحت يوسف الفار ، فاطمة الزهراء على السيد على ، "
+                 "محمد على السيد على ، على يوسف محمد مدحت يوسف الفار ، "
+                 "لى لى يوسف محمد مدحت يوسف الفار ، "
+                 "جيزيل يوسف محمد مدحت يوسف الفار ، Regional Investment Holding")
+        self.assertGreater(len(group), structure.named.NAME_CEILING)
+        self.assertIsNone(structure.vet(form(shareholders=[
+            {"nameArabic": group, "percent": 41.0, "shares": None, "kind": "person"}]),
+            "NARE", ISSUER))
+
+    def test_the_group_is_not_split_into_a_stake_each(self):
+        # The form gives one percentage for the group. Dividing it between the
+        # names would state a holding no document prints.
+        group = "أحمد محمد على حسن ، فاطمة الزهراء السيد على ، محمد على السيد على " * 3
+        kept = structure.owning([{ "nameArabic": group, "percent": 41.0,
+                                   "shares": None, "kind": "person"}])
+        self.assertEqual(len(kept), 1)
+        self.assertEqual(kept[0]["percent"], 41.0)
+
+    def test_a_paragraph_is_still_not_a_name(self):
+        # The ceiling was built to catch a sentence captured instead of a name,
+        # and that is still what it catches — length alone is not the test.
+        prose = "هذا نص طويل جدا يصف حالة الشركة وأعمالها خلال العام الماضي " * 4
+        self.assertGreater(len(prose), structure.named.NAME_CEILING)
+        why = structure.vet(form(shareholders=[
+            {"nameArabic": prose, "percent": 10.0, "shares": None, "kind": "person"}]),
+            "AAA", ISSUER)
+        self.assertIn("no usable name", why or "")
+
+    def test_a_seat_the_form_does_not_name_keeps_the_register(self):
+        # NIPH prints `عضو مجلس الإدارة الممثل عن الشركة القابضة` with the name
+        # column blank. Refusing the document over it is the same mistake the
+        # zero-percent director once made twelve times over.
+        reading = form(board=[])
+        reading["board"] = [
+            {"nameArabic": "أ/ سامي عبد الرحيم فؤاد", "role": "رئيس", "representing": None},
+            {"nameArabic": None, "role": "عضو مجلس الإدارة الممثل عن الشركة القابضة",
+             "representing": "الشركة القابضة"}]
+        self.assertIsNone(structure.vet(reading, "NIPH", ISSUER))
+
+    def test_a_seat_with_neither_a_name_nor_a_role_is_still_refused(self):
+        # That row says nothing at all, which is a reading that went wrong
+        # rather than a board with a vacancy on it.
+        reading = form()
+        reading["board"] = [{"nameArabic": None, "role": None, "representing": None}]
+        self.assertIn("no usable name", structure.vet(reading, "AAA", ISSUER) or "")

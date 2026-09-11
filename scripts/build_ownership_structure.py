@@ -151,7 +151,18 @@ def vet(reading: dict, ticker: str, issuer: str) -> str | None:
         return "the form yielded neither a director nor a holder"
 
     for row in board:
-        if not isinstance(row, dict) or not named.usable_name(row.get("nameArabic")):
+        if not isinstance(row, dict):
+            return f"a director is not an object: {row!r}"
+        # A seat the form itself does not name — `عضو مجلس الإدارة الممثل عن
+        # الشركة القابضة` with the name column blank — is a fact about the
+        # board, not a bad reading. Refusing the document over it threw away
+        # NIPH's whole register, which is the same mistake the zero-percent
+        # director once cost twelve of them. The seat is kept apart below
+        # rather than dropped, so the count of seats stays honest about how
+        # many the form printed.
+        if row.get("nameArabic") is None and (row.get("role") or "").strip():
+            continue
+        if not named.usable_name(row.get("nameArabic")):
             return f"a director has no usable name: {row!r}"
 
     total = _number(reading.get("totalShares"))
@@ -258,7 +269,9 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--limit", type=int, default=5,
                     help="how many forms to read this run")
-    ap.add_argument("--refresh", default="", help="re-read one filing id")
+    ap.add_argument("--refresh", default="",
+                    help="re-read these filing ids (comma separated), refused "
+                         "ones included")
     ap.add_argument("--engine", choices=("agy", "vertex"), default="agy")
     ap.add_argument("--check", action="store_true",
                     help="report what is outstanding and write nothing")
@@ -291,10 +304,16 @@ def main(argv=None) -> int:
     # worker start the backlog again from the beginning.
     done = (set(shared["readings"]) | set(shared["refused"])
             | set(store["readings"]) | set(store["refused"]))
-    if args.refresh:
-        done.discard(args.refresh)
-        store["readings"].pop(args.refresh, None)
-        store["refused"].pop(args.refresh, None)
+    for filing in (f.strip() for f in args.refresh.split(",")):
+        # A refusal is permanent by design — the document contradicted itself
+        # and we cannot know which of its two numbers is wrong. Asking again is
+        # for when the failure looks like a transcription slip rather than the
+        # page, and it is a deliberate act with a name on it, not a retry loop.
+        if not filing:
+            continue
+        done.discard(filing)
+        store["readings"].pop(filing, None)
+        store["refused"].pop(filing, None)
 
     # Oldest company first, so a long backlog is worked through in a stable
     # order and a run that stops halfway leaves the same place to resume.
@@ -371,7 +390,14 @@ def main(argv=None) -> int:
             "companyArabic": reading.get("companyArabic"),
             "asOfDate": reading.get("asOfDate"),
             "totalShares": _number(reading.get("totalShares")),
-            "board": reading.get("board") or [],
+            "board": [r for r in (reading.get("board") or [])
+                      if isinstance(r, dict) and r.get("nameArabic")],
+            # Seats the form printed without a name on them. Kept so a reader
+            # can ask how many the board has, and not counted as people.
+            "seatsWithoutAName": [
+                {"role": r.get("role"), "representing": r.get("representing")}
+                for r in (reading.get("board") or [])
+                if isinstance(r, dict) and not r.get("nameArabic")],
             "shareholders": owning(reading.get("shareholders")),
             # Named on the form with no holding — a director who owns none of
             # the company he sits on the board of. Kept apart rather than
