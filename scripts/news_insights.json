@@ -2624,6 +2624,10 @@
     "meaning": "Capital spending of this scale allocates corporate cash flows directly into technology supply chains, focusing on data center infrastructure, specialized semiconductor procurement, and compute-power resources.",
     "meaning_ar": "يوجه الإنفاق الرأسمالي بهذا الحجم التدفقات النقدية للشركات نحو سلاسل إمداد التكنولوجيا، وتحديداً البنية التحتية لمراكز البيانات، وتوريد أشباه الموصلات المتخصصة، وموارد الحوسبة."
   },
+  "تقرير: اليابان قد تعيد توجيه 55 مليار دولار من الخزانه الامريكيه": {
+    "meaning": "Reallocating sovereign foreign exchange reserves shifts capital away from U.S. Treasury debt holdings into other sovereign or domestic asset classes.",
+    "meaning_ar": "تتضمن إعادة توجيه احتياطيات النقد الأجنبي السيادية تحويل رؤوس الأموال من حيازات سندات الخزانة الأمريكية إلى فئات أصول سيادية أو محلية أخرى."
+  },
   "تقرير: اوروبا تضع اموال البنوك المركزيه في قلب الاسواق المرمزه": {
     "meaning": "European central banks integrate wholesale central bank digital currency (wCBDC) directly into distributed ledger technology (DLT) platforms for the settlement of tokenised financial assets. This operational framework provides central bank money as the primary risk-free settlement asset for on-chain institutional transactions.",
     "meaning_ar": "تدمج البنوك المركزية الأوروبية أموال البنك المركزي الرقمية المخصصة للمؤسسات مباشرة في منصات تقنية السجلات الموزعة لتسوية الأصول المالية المرمّزة. وتوفر هذه الآلية التشغيلية أموال البنك المركزي كأصل تسوية أساسي وخالٍ من المخاطر للمعاملات المؤسسية على شبكات البلوكتشين."
@@ -3524,6 +3528,10 @@
   "عوايد سندات الخزانه الامريكيه تقترب من 5%": {
     "meaning": "Higher US Treasury bond yields raise the global risk-free benchmark rate, which increases external borrowing costs for emerging markets and drives international capital allocation toward US dollar-denominated sovereign instruments.",
     "meaning_ar": "يؤدي ارتفاع عوائد سندات الخزانة الأمريكية إلى رفع العائد المرجعي الخالي من المخاطر عالمياً، مما يرفع تكاليف الاقتراض للأسواق الناشئة ويوجه السيولة نحو الأصول السيادية المقومة بالدولار."
+  },
+  "عوايد سندات الخزانه الامريكيه تقترب من 5% بعد تسارع التضخم": {
+    "meaning": "Higher US Treasury yields raise the baseline cost of global capital and trigger capital reallocations from emerging markets into dollar-denominated fixed-income assets, while increasing sovereign external borrowing costs.",
+    "meaning_ar": "يؤدي ارتفاع عوائد سندات الخزانة الأمريكية إلى زيادة التكلفة الأساسية للتمويل عالمياً وتحفيز إعادة توجيه السيولة من الأسواق الناشئة نحو الأصول المقومة بالدولار، إلى جانب رفع تكاليف الاقتراض الخارجي للدول."
   },
   "غاده والي: مواجهه الازمات في افريقيا تتطلب التركيز علي الشباب ودعم القطاع الخاص": {
     "meaning": "Economic crisis management frameworks in developing markets involve directing resources toward human capital development and expanding private enterprise financing channels.",
