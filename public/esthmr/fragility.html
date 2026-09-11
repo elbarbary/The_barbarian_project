@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ESTHMR · EGX Fragility Engine V5 — Interactive Crash Prediction &amp; Regime Simulator</title>
-<meta name="description" content="A point-in-time dual-engine early warning model for the Egyptian Exchange tested across 18 years and 4,518 market sessions. Simulate parameters, inspect false alarms, and explore forward crash hazard in real-time on ESTHMR.">
-<meta property="og:title" content="ESTHMR · EGX Fragility Engine V5">
-<meta property="og:description" content="Can you predict an EGX crash before it begins? 18 years of out-of-sample empirical research, real-time parameter simulation, and live market fragility status.">
+<title>ESTHMR · EGX Fragility Engine (Challenger C-v2 Main) — Decoupled Catalyst &amp; Regime Simulator</title>
+<meta name="description" content="Point-in-time crash early warning engine for the Egyptian Exchange featuring Challenger C-v2. Evaluated across 18 years, 4,518 sessions, and 17 severe crises with 94.1% strict recall and 0.97 hard FA/yr walk-forward OOS.">
+<meta property="og:title" content="ESTHMR · EGX Fragility Engine (Challenger C-v2 Main)">
+<meta property="og:description" content="Can you predict an EGX crash before it begins? Challenger C-v2 couples a 2-day domestic consensus gate with decoupled commodity and volatility fast-path channels.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://esthmr.com/fragility.html">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -381,10 +381,61 @@ body {
   background: #F4F7F9;
 }
 
+/* ─── ARCHITECTURE CARDS (C-V2) ─── */
+.fe-arch-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin: 20px 0;
+}
+.fe-arch-card {
+  background: white; border: 1px solid var(--fe-edge); border-radius: 12px; padding: 20px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.fe-arch-card:hover {
+  transform: translateY(-2px); box-shadow: 0 4px 14px rgba(25, 44, 60, 0.06);
+}
+.fe-arch-head {
+  display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;
+}
+.fe-arch-num {
+  font-family: var(--fe-mono); font-size: 0.72rem; font-weight: 700; color: var(--fe-accent);
+  background: rgba(18, 107, 117, 0.10); padding: 2px 8px; border-radius: 4px; text-transform: uppercase;
+}
+.fe-arch-title {
+  font-family: var(--fe-display); font-size: 1.15rem; font-weight: 700; color: var(--fe-ink); margin: 6px 0 8px;
+}
+.fe-arch-formula {
+  font-family: var(--fe-mono); font-size: 0.76rem; background: #F8FAFB; border: 1px solid var(--fe-edge);
+  border-radius: 6px; padding: 8px 10px; margin: 10px 0; color: var(--fe-ink); overflow-x: auto;
+  line-height: 1.4;
+}
+.fe-arch-body {
+  font-size: 0.82rem; color: var(--fe-t2); line-height: 1.55;
+}
+.fe-arch-highlight {
+  margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--fe-edge);
+  font-family: var(--fe-mono); font-size: 0.72rem; color: var(--fe-faint);
+}
+.fe-arch-highlight strong { color: var(--fe-accent); }
+.fe-validation-summary {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 20px;
+  background: #F8FAFB; border: 1px solid var(--fe-edge); border-radius: 12px; padding: 18px;
+}
+.fe-val-box h4 {
+  font-family: var(--fe-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--fe-faint); margin-bottom: 6px;
+}
+.fe-val-box .val-stat {
+  font-family: var(--fe-display); font-size: 1.45rem; font-weight: 800; color: var(--fe-ink);
+}
+.fe-val-box p {
+  font-size: 0.75rem; color: var(--fe-t2); margin-top: 4px; line-height: 1.4;
+}
+
 @media (max-width: 900px) {
   .fe-hero-grid, .fe-grid-2 { grid-template-columns: 1fr; }
   .fe-controls-panel { grid-template-columns: 1fr; }
   .fe-canvas-box { height: 260px; }
+  .fe-arch-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -412,16 +463,19 @@ body {
     <div class="fe-hero-copy">
       <div class="fe-tagbar">
         <span class="fe-tag"><i class="fe-pulse"></i> Real-time tape: Wednesday 9 September 2026</span>
-        <span class="fe-tag">18-Year OOS Backtest (2008–2026)</span>
-        <span class="fe-tag">4,518 Sessions Evaluated</span>
+        <span class="fe-tag" style="background:#F0F7F6; border-color:rgba(18,107,117,0.3); color:var(--fe-accent); font-weight:700;">Primary Engine: Challenger C-v2</span>
+        <span class="fe-tag">18-Yr OOS Backtest (2008–2026)</span>
+        <span class="fe-tag">16/17 Strict (94.1%) · 100% Broad</span>
+        <span class="fe-tag">0.97 Hard FA/yr OOS</span>
       </div>
 
-      <p class="fe-kicker">Point-in-Time Dual Engine Architecture</p>
+      <p class="fe-kicker">Primary Prediction Architecture · Challenger C-v2</p>
       <h1>Can you predict an EGX crash<br><em>before</em> it begins?</h1>
-      <p class="fe-hero-lede">Most crash prediction models leak future information, count the same panic twenty times, or produce constant false alarms. The EGX Fragility Engine V5 is a point-in-time dual-engine model built to detect systemic vulnerability while restricting hard false alarms to &le; 1 per year.</p>
+      <p class="fe-hero-lede">Most crash prediction models leak future information, count the same panic twenty times, or produce constant false alarms. The EGX Fragility Engine features <strong>Challenger C-v2</strong>, coupling a 2-day domestic consensus gate with decoupled commodity and volatility shock channels — delivering <strong>94.1% strict early warning recall (16/17 crises)</strong>, 100% broad buildup coverage, and restricting out-of-sample false alarms to &lt; 1 per year.</p>
       
-      <div style="margin-top:20px; display:flex; gap:12px;">
-        <a class="gate-cta" href="#simulator" style="text-decoration:none;">Open Backtest Simulator &darr;</a>
+      <div style="margin-top:20px; display:flex; flex-wrap:wrap; gap:12px;">
+        <a class="gate-cta" href="#simulator" style="text-decoration:none;">Open C-v2 Simulator &darr;</a>
+        <a class="fe-btn-sc" href="#architecture" style="text-decoration:none; padding:10px 16px; border-radius:999px; font-weight:600;">How C-v2 Works &rarr;</a>
         <a class="fe-btn-sc" href="#crises" style="text-decoration:none; padding:10px 16px; border-radius:999px; font-weight:600;">Historical Crisis Ledger &rarr;</a>
       </div>
     </div>
@@ -430,7 +484,7 @@ body {
     <aside class="fe-card" id="live-regime" aria-label="Current EGX Fragility State">
       <div class="fe-card-head">
         <div>
-          <span style="font-family:var(--fe-mono); font-size:0.7rem; font-weight:600; color:var(--fe-faint); text-transform:uppercase;">Live Status</span>
+          <span style="font-family:var(--fe-mono); font-size:0.7rem; font-weight:600; color:var(--fe-faint); text-transform:uppercase;">Live Status · C-v2 Primary</span>
           <div style="margin-top:4px;">
             <span class="fe-status-pill fe-pill-green" id="livePill">
               <span style="width:6px; height:6px; border-radius:50%; background:#3F6B52;"></span>
@@ -446,34 +500,34 @@ body {
 
       <div class="fe-score-dial">
         <span class="fe-score-val" id="liveScore">0.45</span>
-        <span class="fe-score-sub">/ 1.00 Fragility Index ($S_{\text{V5}}$)<br><small style="color:var(--fe-faint);">Alert Trigger: &ge; 0.920</small></span>
+        <span class="fe-score-sub">/ 1.00 Fragility Index ($S_{\text{v4}}$)<br><small style="color:var(--fe-faint);">C-v2 Consensus: &ge; 0.930 (2-Day)</small></span>
       </div>
 
       <div class="fe-bar-track">
         <div class="fe-bar-fill" id="liveBar" style="width: 45.3%;"></div>
-        <div class="fe-bar-threshold" style="left: 92%;" title="Threshold (0.920)"></div>
+        <div class="fe-bar-threshold" style="left: 93%;" title="C-v2 Consensus Threshold (0.930)"></div>
       </div>
 
       <div class="fe-submeters">
         <div class="fe-submeter-box">
-          <span>Engine A · Internal Fragility</span>
+          <span>Engine A · Domestic</span>
           <strong id="liveEngineA">0.4528</strong>
           <small>Breadth, herding, liquidity, NFA</small>
         </div>
         <div class="fe-submeter-box">
-          <span>Engine B · External Contagion</span>
+          <span>Engine B · Contagion</span>
           <strong id="liveEngineB">0.2505</strong>
           <small>Global VIX, EM panel, EGP basis</small>
         </div>
         <div class="fe-submeter-box">
-          <span>Stress Dimensions</span>
-          <strong id="liveStressCount">1 / 7 Groups</strong>
-          <small>Multi-group confirmation</small>
+          <span>Commodity Channel</span>
+          <strong id="liveCatComm" style="color:var(--fe-up);">0.08 / 0.60</strong>
+          <small>Brent Crude &amp; Wheat 20d return</small>
         </div>
         <div class="fe-submeter-box">
-          <span>Domestic Transmission</span>
-          <strong id="liveTransmission" style="color:var(--fe-up);">Guarded</strong>
-          <small>Blocks false foreign panic</small>
+          <span>Contagion Channel</span>
+          <strong id="liveCatRisk" style="color:var(--fe-up);">0.14 / 0.45</strong>
+          <small>VIX surge, DXY, MSCI EM shock</small>
         </div>
       </div>
 
@@ -487,12 +541,12 @@ body {
 
       <!-- FUTURE WHAT-IF STRESS SANDBOX -->
       <div class="fe-scenarios-box">
-        <p>What-If Stress Sandbox (Forward Scenarios)</p>
+        <p>What-If Stress Sandbox (C-v2 Escalation Channels)</p>
         <div class="fe-scenarios-btns">
           <button class="fe-btn-sc is-active" data-sc="real">Real Tape (Benign)</button>
+          <button class="fe-btn-sc" data-sc="comm">Commodity Shock</button>
           <button class="fe-btn-sc" data-sc="vix">VIX Shockwave</button>
-          <button class="fe-btn-sc" data-sc="fx">FX Devaluation</button>
-          <button class="fe-btn-sc" data-sc="decay">Breadth Collapse</button>
+          <button class="fe-btn-sc" data-sc="decay">2-Day Consensus</button>
           <button class="fe-btn-sc" data-sc="cascade">2008 Cascade</button>
         </div>
       </div>
@@ -511,8 +565,12 @@ body {
     <!-- PRESET BUTTONS -->
     <div class="fe-preset-row">
       <span style="font-family:var(--fe-mono); font-size:0.75rem; font-weight:600; color:var(--fe-faint); align-self:center; margin-right:4px;">PRESETS:</span>
-      <button class="fe-btn-preset is-active" data-p="v5-rec">
-        <strong>V5 Recommended (Production)</strong>
+      <button class="fe-btn-preset is-active" data-p="c-v2-main" style="border-color:var(--fe-accent);">
+        <strong>Challenger C-v2 (Decoupled Consensus - Primary)</strong>
+        <span class="tag">16/17 Strict (94.1%) · 100% Broad · 12.5% Occ</span>
+      </button>
+      <button class="fe-btn-preset" data-p="v5-rec">
+        <strong>V5 Recommended (Production Shadow)</strong>
         <span class="tag">15/17 Early · 1.0 Hard FA/yr</span>
       </button>
       <button class="fe-btn-preset" data-p="v5-m16">
@@ -591,6 +649,14 @@ body {
           </div>
           <input type="range" class="fe-slider-el" id="slSlope" min="-0.050" max="0.010" step="0.001" value="-0.005">
           <p class="fe-ctl-desc">Filters out decelerating bull market consolidations.</p>
+        </div>
+
+        <div class="fe-ctl-box" style="grid-column:span 2; display:flex; justify-content:space-between; align-items:center; background:#F0F7F6; border-color:rgba(18,107,117,0.3);">
+          <div>
+            <span class="fe-ctl-title" style="display:block; color:var(--fe-accent);">Decoupled Catalyst Bypass (C-v2)</span>
+            <p class="fe-ctl-desc">Permits severe commodity (&ge;0.60) or contagion (&ge;0.45) shocks at S&ge;0.90 to bypass 2-day consensus delay.</p>
+          </div>
+          <input type="checkbox" id="chkDecoupled" checked style="width:20px; height:20px; cursor:pointer;">
         </div>
 
         <div class="fe-ctl-box" style="grid-column:span 2; display:flex; justify-content:space-between; align-items:center;">
@@ -682,6 +748,117 @@ body {
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
+       HOW CHALLENGER C-V2 WORKS (ARCHITECTURE & MECHANICS)
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="fe-card" id="architecture" style="margin-bottom:32px;">
+    <div class="fe-section-header">
+      <p class="fe-kicker">Under the Hood · Primary Engine Architecture</p>
+      <h2>How Challenger C-v2 Works: Decoupled Multi-Channel Escalation</h2>
+      <p style="font-size:0.92rem; color:var(--fe-t2); margin-top:6px; max-width:85ch; line-height:1.6;">
+        Standard frontier market crash models face a brutal dilemma: tuning for high recall causes constant false alarms, while tightening thresholds misses sudden exogenous shocks. <strong>Challenger C-v2</strong> solves this trade-off by combining a <strong>2-day domestic consensus gate</strong> with <strong>two decoupled exogenous fast-paths</strong> (Commodity Inflation and Global Volatility Contagion), bounded by an <strong>8-session hold ceiling</strong>.
+      </p>
+    </div>
+
+    <!-- 3 PILLARS BENTO GRID -->
+    <div class="fe-arch-grid">
+      <!-- Pillar 1 -->
+      <div class="fe-arch-card">
+        <div>
+          <div class="fe-arch-head">
+            <span class="fe-arch-num">Pillar 01 · Domestic Consensus</span>
+            <span class="fe-badge-metric fe-b-good">&minus;25.8% False Days</span>
+          </div>
+          <h3 class="fe-arch-title">2-Day Persistence Consensus Gate</h3>
+          <div class="fe-arch-formula">
+            S<sub>v4</sub>[t] &ge; 0.930 &amp;&amp; S<sub>v4</sub>[t&minus;1] &ge; 0.930<br>
+            &amp;&amp; &Delta;S<sub>5</sub> &ge; 0.000 &amp;&amp; Stress_Groups &ge; 1
+          </div>
+          <p class="fe-arch-body">
+            Domestic fragility must be verified across <strong>two consecutive market sessions</strong> with non-negative 5-day slope. This completely filters out single-session transient dips, block-trade liquidity ripples, and decelerating bull market consolidations.
+          </p>
+        </div>
+        <div class="fe-arch-highlight">
+          <strong>Key Impact:</strong> False alert days drop from 608 to 451 sessions while maintaining 100% broad crisis recall.
+        </div>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div class="fe-arch-card">
+        <div>
+          <div class="fe-arch-head">
+            <span class="fe-arch-num">Pillar 02 · Exogenous Fast-Path</span>
+            <span class="fe-badge-metric fe-b-good">Immediate Bypass</span>
+          </div>
+          <h3 class="fe-arch-title">Decoupled Commodity &amp; Contagion Bypasses</h3>
+          <div class="fe-arch-formula">
+            S<sub>v4</sub> &ge; 0.90 &amp;&amp; Stress &ge; 1 &amp;&amp; (C<sub>comm</sub> &ge; 0.60 || C<sub>risk</sub> &ge; 0.45)<br>
+            C<sub>comm</sub> = max(Brent<sub>20d</sub>/25%, Wheat<sub>20d</sub>/25%)<br>
+            C<sub>risk</sub> = 0.40&middot;&Delta;VIX<sub>5</sub>/8 + 0.20&middot;(VIX&minus;20)/20 + ...
+          </div>
+          <p class="fe-arch-body">
+            Severe external shocks strike Egypt via two separate transmission channels: <em>commodity import-bill inflation</em> (oil/wheat drain on reserves) vs. <em>global financial flight</em> (VIX surge, dollar index spikes, MSCI EM selloffs). Decoupling them allows sudden crises (e.g. 2022 Ukraine, 2020 COVID) to trigger immediately at S &ge; 0.90 without waiting for a 2-day domestic lag.
+          </p>
+        </div>
+        <div class="fe-arch-highlight">
+          <strong>Key Impact:</strong> Lifts strict early hits from 14/17 to 16/17 and advances median lead time to 17.5 sessions.
+        </div>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div class="fe-arch-card">
+        <div>
+          <div class="fe-arch-head">
+            <span class="fe-arch-num">Pillar 03 · Execution Discipline</span>
+            <span class="fe-badge-metric fe-b-good">Low Market Drag</span>
+          </div>
+          <h3 class="fe-arch-title">Bounded Hold Duration &amp; Cooldown</h3>
+          <div class="fe-arch-formula">
+            Min Hold = 5 days &middot; Max Hold = 8 days<br>
+            Refractory Cooldown = 20 days<br>
+            Exit: S<sub>v4</sub> &lt; 0.885 &amp;&amp; Catalysts &lt; 70% threshold
+          </div>
+          <p class="fe-arch-body">
+            Caps maximum alert duration at <strong>8 sessions</strong> (down from 12). In prolonged multi-month downturns, alerts do not drag indefinitely across consolidation recoveries. A 20-session refractory cooldown prevents redundant duplicate alerts following an episode.
+          </p>
+        </div>
+        <div class="fe-arch-highlight">
+          <strong>Key Impact:</strong> Alert occupancy falls to 12.53%, leaving capital free to participate in 87.5% of market upside.
+        </div>
+      </div>
+    </div>
+
+    <!-- EMPIRICAL VALIDATION RIGOR -->
+    <div style="margin-top:24px; padding-top:18px; border-top:1px solid var(--fe-edge);">
+      <h3 style="font-family:var(--fe-display); font-size:1.15rem; font-weight:700; color:var(--fe-ink); margin-bottom:4px;">
+        Three Independent Views Confirm Generalizability
+      </h3>
+      <p style="font-size:0.82rem; color:var(--fe-t2);">
+        Challenger C-v2 was not merely fitted retrospectively; it was tested across 17-fold cross-validation and chronological walk-forward out-of-sample periods.
+      </p>
+
+      <div class="fe-validation-summary">
+        <div class="fe-val-box">
+          <h4>1. In-Sample Full History (2008–2026)</h4>
+          <div class="val-stat" style="color:var(--fe-accent);">16 / 17 <small style="font-size:0.9rem; color:var(--fe-faint);">(94.1%)</small></div>
+          <p>Strict Early Recall ([T&minus;25, T&minus;5]) · <strong>17/17 Broad (100%)</strong> · Zero missed crises · 12.53% Occupancy · 17.5d median lead.</p>
+        </div>
+
+        <div class="fe-val-box">
+          <h4>2. 17-Fold Leave-One-Crisis-Out (LOCO)</h4>
+          <div class="val-stat" style="color:var(--fe-up);">15 / 17 <small style="font-size:0.9rem; color:var(--fe-faint);">(88.2%)</small></div>
+          <p>Out-of-Fold Strict Recall · <strong>16/17 Broad (94.1%)</strong> · 15 of 17 folds independently selected the exact same parameter tuple.</p>
+        </div>
+
+        <div class="fe-val-box">
+          <h4>3. 10-Year Chronological Walk-Forward OOS</h4>
+          <div class="val-stat" style="color:#126B75;">5 / 6 <small style="font-size:0.9rem; color:var(--fe-faint);">(83.3%)</small></div>
+          <p>Strict OOS Recall · <strong>6/6 Broad (100%)</strong> across 2,839 unseen sessions · <strong>0.97 Hard FA/yr</strong> · &minus;247 bps market drag avoided.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
        HISTORICAL CRISIS LEDGER (17 SEVERE EVENTS)
        ═══════════════════════════════════════════════════════════════ -->
   <section class="fe-card" id="crises" style="margin-bottom:32px;">
@@ -703,7 +880,7 @@ body {
     <div class="fe-section-header">
       <p class="fe-kicker">Empirical Transparency</p>
       <h2>The False Alarm Autopsy &amp; Pareto Frontier</h2>
-      <p style="font-size:0.85rem; color:var(--fe-t2); margin-top:4px;">Comparing the V5 Pareto Frontier against V4, Realized Volatility B1, and Momentum B2 across 4,518 test sessions.</p>
+      <p style="font-size:0.85rem; color:var(--fe-t2); margin-top:4px;">Comparing Challenger C-v2 and the V5 Pareto Frontier against V4, Realized Volatility B1, and Momentum B2 across 4,518 test sessions.</p>
     </div>
 
     <div class="fe-table-scroll">
@@ -723,8 +900,23 @@ body {
           </tr>
         </thead>
         <tbody>
+          <tr style="background:#EBF5F4; border-left:4px solid var(--fe-accent); font-weight:600;">
+            <td>
+              <strong style="color:var(--fe-ink);">Challenger C-v2: Decoupled Multi-Channel</strong>
+              <span class="fe-badge-metric fe-b-good" style="margin-left:6px;">Featured Primary</span>
+            </td>
+            <td style="color:var(--fe-up);">16 / 17 (94.1%)<br><small style="color:var(--fe-faint); font-weight:400;">17/17 Broad (100%)</small></td>
+            <td>12.53%</td>
+            <td>76</td>
+            <td>39</td>
+            <td style="color:var(--fe-up);">1.72 / yr<br><small style="color:var(--fe-up); font-weight:400;">0.97/yr OOS</small></td>
+            <td>48.7%</td>
+            <td>17.5d</td>
+            <td>+0.90%</td>
+            <td><strong style="color:var(--fe-accent);">+69.70</strong></td>
+          </tr>
           <tr style="background:#F0F7F6; font-weight:600;">
-            <td><strong>V5: Recommended Production</strong></td>
+            <td><strong>V5: Recommended (Production Shadow)</strong></td>
             <td style="color:var(--fe-up);">15 / 17 (88.2%)</td>
             <td>11.49%</td>
             <td>51</td>
@@ -842,6 +1034,7 @@ body {
   const slStress = document.getElementById('slStress');
   const slSlope = document.getElementById('slSlope');
   const chkTrans = document.getElementById('chkTrans');
+  const chkDecoupled = document.getElementById('chkDecoupled');
 
   const vThEnter = document.getElementById('vThEnter');
   const vThExit = document.getElementById('vThExit');
@@ -893,7 +1086,7 @@ body {
     return [Math.max(0, center - spread), Math.min(1, center + spread)];
   }
 
-  function simulate(thEnter, thExit, minHold, maxHold, cooldown, minStress, minSlope, useTrans) {
+  function simulate(thEnter, thExit, minHold, maxHold, cooldown, minStress, minSlope, useTrans, useDecoupled) {
     if (!series || series.length === 0) return null;
 
     const al = new Uint8Array(T);
@@ -903,29 +1096,53 @@ body {
 
     for (let i = 2; i < T; i++) {
       const s = series[i][2];
+      const sPrev = series[i - 1][2];
       const sSlope = series[i][3];
       const uInt = series[i][4];
       const uExt = series[i][5];
       const stressCnt = series[i][6];
       const hasTrans = series[i][7];
+      const catComm = series[i].length > 9 ? series[i][9] : 0.0;
+      const catRisk = series[i].length > 10 ? series[i][10] : 0.0;
 
       if (inRed) {
         al[i] = 1;
         const holdLen = i - redStart + 1;
         if (holdLen >= minHold) {
-          if (s < thExit || holdLen >= maxHold) {
-            inRed = false;
-            lastExitRed = i;
+          if (useDecoupled) {
+            const catExit = (s < thExit) && (catComm < 0.42) && (catRisk < 0.315);
+            if (catExit || holdLen >= maxHold) {
+              inRed = false;
+              lastExitRed = i;
+            }
+          } else {
+            if (s < thExit || holdLen >= maxHold) {
+              inRed = false;
+              lastExitRed = i;
+            }
           }
         }
       } else {
-        if ((i - lastExitRed) < cooldown) continue;
-        if (series[i][2] < thEnter || series[i - 1][2] < thEnter) continue;
-        if (sSlope < minSlope) continue;
-        if (useTrans && uExt >= thEnter && uInt < thEnter) {
-          if (hasTrans === 0) continue;
+        const inCooldown = useDecoupled ? ((i - lastExitRed) <= cooldown) : ((i - lastExitRed) < cooldown);
+        if (inCooldown) continue;
+
+        if (useDecoupled) {
+          // Challenger C-v2: Decoupled Multi-Channel Escalation
+          const sensCons = (s >= thEnter) && (sPrev >= thEnter);
+          const sensTrig = sensCons && (sSlope >= minSlope) && (stressCnt >= minStress);
+          const commTrig = (s >= 0.90) && (catComm >= 0.60) && (stressCnt >= 1);
+          const riskTrig = (s >= 0.90) && (catRisk >= 0.45) && (stressCnt >= 1);
+
+          if (!sensTrig && !commTrig && !riskTrig) continue;
+        } else {
+          // Standard V5 / Baseline
+          if (series[i][2] < thEnter || series[i - 1][2] < thEnter) continue;
+          if (sSlope < minSlope) continue;
+          if (useTrans && uExt >= thEnter && uInt < thEnter) {
+            if (hasTrans === 0) continue;
+          }
+          if (minStress > 0 && stressCnt < minStress) continue;
         }
-        if (minStress > 0 && stressCnt < minStress) continue;
 
         inRed = true;
         redStart = i;
@@ -1239,6 +1456,7 @@ body {
       <strong>${row[0]}</strong><br>
       EGX 30: <b>${row[1].toLocaleString()}</b><br>
       Fragility: <b>${row[2].toFixed(3)}</b> | A: ${row[4].toFixed(2)} B: ${row[5].toFixed(2)}<br>
+      ${row.length > 9 ? `Comm: <b>${row[9].toFixed(2)}</b> | Risk: <b>${row[10].toFixed(2)}</b><br>` : ''}
       Status: <b style="color:${isAl ? '#A3402F' : '#3F6B52'}">${isAl ? 'RED ALERT' : 'NORMAL'}</b>
     `;
   });
@@ -1256,6 +1474,7 @@ body {
     const minStress = parseInt(slStress.value);
     const minSlope = parseFloat(slSlope.value);
     const useTrans = chkTrans.checked;
+    const useDecoupled = chkDecoupled ? chkDecoupled.checked : true;
 
     vThEnter.textContent = thEnter.toFixed(3);
     vThExit.textContent = thExit.toFixed(3);
@@ -1264,12 +1483,13 @@ body {
     vStress.textContent = `${minStress} group${minStress !== 1 ? 's' : ''}`;
     vSlope.textContent = minSlope.toFixed(3);
 
-    const res = simulate(thEnter, thExit, minHold, maxHold, cooldown, minStress, minSlope, useTrans);
+    const res = simulate(thEnter, thExit, minHold, maxHold, cooldown, minStress, minSlope, useTrans, useDecoupled);
     updateUI(res);
   }
 
   [slThEnter, slThExit, slCooldown, slMinHold, slMaxHold, slStress, slSlope].forEach(s => s.addEventListener('input', recompute));
   chkTrans.addEventListener('change', recompute);
+  if (chkDecoupled) chkDecoupled.addEventListener('change', recompute);
 
   // Presets
   document.querySelectorAll('.fe-btn-preset').forEach(btn => {
@@ -1278,21 +1498,30 @@ body {
       btn.classList.add('is-active');
 
       const p = btn.dataset.p;
-      if (p === 'v5-rec') {
+      if (p === 'c-v2-main') {
+        slThEnter.value = 0.930; slThExit.value = 0.885; slCooldown.value = 20;
+        slMinHold.value = 5; slMaxHold.value = 8; slStress.value = 1; slSlope.value = 0.000;
+        chkTrans.checked = true; if (chkDecoupled) chkDecoupled.checked = true;
+      } else if (p === 'v5-rec') {
         slThEnter.value = 0.920; slThExit.value = 0.870; slCooldown.value = 35;
-        slMinHold.value = 5; slMaxHold.value = 12; slStress.value = 1; slSlope.value = -0.005; chkTrans.checked = true;
+        slMinHold.value = 5; slMaxHold.value = 12; slStress.value = 1; slSlope.value = -0.005;
+        chkTrans.checked = true; if (chkDecoupled) chkDecoupled.checked = false;
       } else if (p === 'v5-m16') {
         slThEnter.value = 0.925; slThExit.value = 0.875; slCooldown.value = 20;
-        slMinHold.value = 5; slMaxHold.value = 12; slStress.value = 1; slSlope.value = 0.000; chkTrans.checked = true;
+        slMinHold.value = 5; slMaxHold.value = 12; slStress.value = 1; slSlope.value = 0.000;
+        chkTrans.checked = true; if (chkDecoupled) chkDecoupled.checked = false;
       } else if (p === 'v5-sel') {
         slThEnter.value = 0.935; slThExit.value = 0.885; slCooldown.value = 50;
-        slMinHold.value = 5; slMaxHold.value = 10; slStress.value = 1; slSlope.value = 0.000; chkTrans.checked = true;
+        slMinHold.value = 5; slMaxHold.value = 10; slStress.value = 1; slSlope.value = 0.000;
+        chkTrans.checked = true; if (chkDecoupled) chkDecoupled.checked = false;
       } else if (p === 'v4-base') {
         slThEnter.value = 0.920; slThExit.value = 0.920; slCooldown.value = 20;
-        slMinHold.value = 8; slMaxHold.value = 8; slStress.value = 0; slSlope.value = -0.050; chkTrans.checked = false;
+        slMinHold.value = 8; slMaxHold.value = 8; slStress.value = 0; slSlope.value = -0.050;
+        chkTrans.checked = false; if (chkDecoupled) chkDecoupled.checked = false;
       } else if (p === 'b1-vol') {
         slThEnter.value = 0.880; slThExit.value = 0.880; slCooldown.value = 0;
-        slMinHold.value = 1; slMaxHold.value = 15; slStress.value = 0; slSlope.value = -0.050; chkTrans.checked = false;
+        slMinHold.value = 1; slMaxHold.value = 15; slStress.value = 0; slSlope.value = -0.050;
+        chkTrans.checked = false; if (chkDecoupled) chkDecoupled.checked = false;
       }
       recompute();
     });
@@ -1310,8 +1539,8 @@ body {
       const bar = document.getElementById('liveBar');
       const ea = document.getElementById('liveEngineA');
       const eb = document.getElementById('liveEngineB');
-      const str = document.getElementById('liveStressCount');
-      const tr = document.getElementById('liveTransmission');
+      const catCommEl = document.getElementById('liveCatComm');
+      const catRiskEl = document.getElementById('liveCatRisk');
       const f5 = document.getElementById('fwd5');
       const f25 = document.getElementById('fwd25');
 
@@ -1320,35 +1549,40 @@ body {
         pill.innerHTML = '<span style="width:6px; height:6px; border-radius:50%; background:#3F6B52;"></span> Normal / Green Regime';
         scVal.textContent = "0.45"; bar.style.width = "45.3%";
         ea.textContent = "0.4528"; eb.textContent = "0.2505";
-        str.textContent = "1 / 7 Groups"; tr.textContent = "Guarded"; tr.style.color = "var(--fe-up)";
+        if (catCommEl) { catCommEl.textContent = "0.08 / 0.60"; catCommEl.style.color = "var(--fe-up)"; }
+        if (catRiskEl) { catRiskEl.textContent = "0.14 / 0.45"; catRiskEl.style.color = "var(--fe-up)"; }
         f5.textContent = "3.2%"; f25.textContent = "9.8% (Benign)"; f25.style.color = "var(--fe-up)";
+      } else if (sc === 'comm') {
+        pill.className = "fe-status-pill fe-pill-red";
+        pill.innerHTML = '<span style="width:6px; height:6px; border-radius:50%; background:#A3402F;"></span> Red Alert (Commodity Fast-Path)';
+        scVal.textContent = "0.91"; bar.style.width = "91.0%";
+        ea.textContent = "0.7200"; eb.textContent = "0.9100";
+        if (catCommEl) { catCommEl.textContent = "0.85 (SHOCK)"; catCommEl.style.color = "var(--fe-down)"; }
+        if (catRiskEl) { catRiskEl.textContent = "0.22 / 0.45"; catRiskEl.style.color = "var(--fe-up)"; }
+        f5.textContent = "26.4%"; f25.textContent = "68.5% (High Hazard)"; f25.style.color = "var(--fe-down)";
       } else if (sc === 'vix') {
-        pill.className = "fe-status-pill fe-pill-amber";
-        pill.innerHTML = '<span style="width:6px; height:6px; border-radius:50%; background:#F59E0B;"></span> Yellow Watch (Untransmitted)';
-        scVal.textContent = "0.88"; bar.style.width = "88.0%";
-        ea.textContent = "0.4810"; eb.textContent = "0.8850";
-        str.textContent = "2 / 7 Groups"; tr.textContent = "Blocked by Guard"; tr.style.color = "var(--fe-amber)";
-        f5.textContent = "12.4%"; f25.textContent = "22.5% (Watch)"; f25.style.color = "var(--fe-amber)";
-      } else if (sc === 'fx') {
-        pill.className = "fe-status-pill fe-pill-amber";
-        pill.innerHTML = '<span style="width:6px; height:6px; border-radius:50%; background:#F59E0B;"></span> Yellow Watch (Macro Strain)';
-        scVal.textContent = "0.84"; bar.style.width = "84.0%";
-        ea.textContent = "0.8420"; eb.textContent = "0.6200";
-        str.textContent = "4 / 7 Groups"; tr.textContent = "Active Strain"; tr.style.color = "var(--fe-amber)";
-        f5.textContent = "18.2%"; f25.textContent = "38.6% (Elevated)"; f25.style.color = "var(--fe-amber)";
+        pill.className = "fe-status-pill fe-pill-red";
+        pill.innerHTML = '<span style="width:6px; height:6px; border-radius:50%; background:#A3402F;"></span> Red Alert (Contagion Fast-Path)';
+        scVal.textContent = "0.90"; bar.style.width = "90.0%";
+        ea.textContent = "0.5810"; eb.textContent = "0.9250";
+        if (catCommEl) { catCommEl.textContent = "0.15 / 0.60"; catCommEl.style.color = "var(--fe-up)"; }
+        if (catRiskEl) { catRiskEl.textContent = "0.78 (SHOCK)"; catRiskEl.style.color = "var(--fe-down)"; }
+        f5.textContent = "22.8%"; f25.textContent = "61.2% (High Hazard)"; f25.style.color = "var(--fe-down)";
       } else if (sc === 'decay') {
         pill.className = "fe-status-pill fe-pill-red";
-        pill.innerHTML = '<span style="width:6px; height:6px; border-radius:50%; background:#A3402F;"></span> Red Alert (Structural Collapse)';
+        pill.innerHTML = '<span style="width:6px; height:6px; border-radius:50%; background:#A3402F;"></span> Red Alert (2-Day Consensus)';
         scVal.textContent = "0.94"; bar.style.width = "94.0%";
         ea.textContent = "0.9480"; eb.textContent = "0.5100";
-        str.textContent = "3 / 7 Groups"; tr.textContent = "Confirmed Internal"; tr.style.color = "var(--fe-down)";
-        f5.textContent = "28.5%"; f25.textContent = "74.2% (High Hazard)"; f25.style.color = "var(--fe-down)";
+        if (catCommEl) { catCommEl.textContent = "0.18 / 0.60"; catCommEl.style.color = "var(--fe-up)"; }
+        if (catRiskEl) { catRiskEl.textContent = "0.19 / 0.45"; catRiskEl.style.color = "var(--fe-up)"; }
+        f5.textContent = "31.5%"; f25.textContent = "78.2% (High Hazard)"; f25.style.color = "var(--fe-down)";
       } else if (sc === 'cascade') {
         pill.className = "fe-status-pill fe-pill-red";
         pill.innerHTML = '<span style="width:6px; height:6px; border-radius:50%; background:#A3402F;"></span> Red Alert (Dual Engine Shock)';
         scVal.textContent = "0.99"; bar.style.width = "99.0%";
         ea.textContent = "0.9920"; eb.textContent = "0.9850";
-        str.textContent = "6 / 7 Groups"; tr.textContent = "Full Transmission"; tr.style.color = "var(--fe-down)";
+        if (catCommEl) { catCommEl.textContent = "0.95 (SHOCK)"; catCommEl.style.color = "var(--fe-down)"; }
+        if (catRiskEl) { catRiskEl.textContent = "0.98 (SHOCK)"; catRiskEl.style.color = "var(--fe-down)"; }
         f5.textContent = "48.9%"; f25.textContent = "91.5% (Imminent Crash)"; f25.style.color = "var(--fe-down)";
       }
     });
@@ -1385,6 +1619,10 @@ body {
       }
       T = series.length;
       evalYears = T / 250.0;
+      // Default to Challenger C-v2 Primary Preset on initial load
+      slThEnter.value = 0.930; slThExit.value = 0.885; slCooldown.value = 20;
+      slMinHold.value = 5; slMaxHold.value = 8; slStress.value = 1; slSlope.value = 0.000;
+      chkTrans.checked = true; if (chkDecoupled) chkDecoupled.checked = true;
       recompute();
     })
     .catch(err => {

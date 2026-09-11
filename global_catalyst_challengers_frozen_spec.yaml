@@ -1,0 +1,184 @@
+specification_metadata:
+  title: 'ESTHMR Global Catalyst Observatory: Frozen Challenger & Sentinel Specification'
+  track_name: ESTHMR Global Catalyst Observatory (Engine C Parallel Research Track)
+  freeze_timestamp_utc: '2026-09-11T11:08:51.892154+00:00'
+  freeze_verdict: RESEARCH_FROZEN_STOP_HISTORICAL_OPTIMIZATION
+  prospective_activation_date: '2026-09-13'
+  production_root_isolation: ABSOLUTE (V6.1.3a-R1P remains 100% untouched)
+  official_governance_label: RESEARCH_ONLY_NOT_OFFICIAL
+systems:
+  frozen_benchmarks:
+    sensitive_mode:
+      identifier: V5_RECOMMENDED
+      role: Production Shadow Benchmark (Sensitive)
+      governance_status: LOCKED_OFFICIAL_PRODUCTION_ROOT
+      threshold_enter: 0.92
+      threshold_exit: 0.87
+      cooldown_sessions: 35
+      broad_recall_pct: 82.35
+      strict_recall_pct: 64.71
+      occupancy_pct: 11.49
+      hard_fa_year: 1.0
+      median_lead_sessions: 14.0
+    conservative_mode:
+      identifier: V5_HIGH_SELECTIVITY
+      role: Production Shadow Benchmark (Conservative)
+      governance_status: LOCKED_OFFICIAL_PRODUCTION_ROOT
+      threshold_enter: 0.935
+      threshold_exit: 0.885
+      cooldown_sessions: 50
+      broad_recall_pct: 76.47
+      strict_recall_pct: 70.59
+      occupancy_pct: 7.48
+      hard_fa_year: 0.61
+      median_lead_sessions: 16.0
+    v4_authoritative_baseline:
+      identifier: V4_AUTHORITATIVE_BASELINE
+      role: Historical Fragility Baseline
+      governance_status: HISTORICAL_REFERENCE_ONLY
+      score_threshold: 0.88
+      cooldown_sessions: 25
+      broad_recall_pct: 94.12
+      strict_recall_pct: 82.35
+      occupancy_pct: 13.46
+      hard_fa_year: 1.94
+      median_lead_sessions: 17.0
+  frozen_catalyst_challengers:
+    challenger_e_efficiency:
+      identifier: CHALLENGER_E_EFFICIENCY
+      role: Efficiency-Maximized Research Challenger
+      governance_status: RESEARCH_ONLY_NOT_OFFICIAL
+      architecture: Two-Stage Gated Fragility-Catalyst Escalation
+      evidence_tier: POINT_IN_TIME_VALID
+      active_features:
+      - s_v4 (Internal Domestic Fragility)
+      - c14_brent_oil_ret20 (ICE Brent 20d Return)
+      - c16_cbot_wheat_ret20 (CBOT Wheat 20d Return)
+      - c19_vix_delta5 (Cboe VIX 5d Surge)
+      - c21_dxy_momentum20 (ICE US Dollar Index 20d Momentum)
+      gating_rules:
+        fragility_gate_enter: 0.9
+        catalyst_threshold_enter: 0.45
+        fragility_exit: 0.87
+        catalyst_exit_ratio: 0.75
+        min_hold_sessions: 5
+        max_hold_sessions: 12
+        cooldown_sessions: 30
+      performance_audited:
+        in_sample_broad_recall: 14/17 (82.35%)
+        in_sample_strict_recall: 11/17 (64.71%)
+        loco_out_of_fold_broad: 15/17 (88.24%)
+        loco_out_of_fold_strict: 11/17 (64.71%)
+        warning_occupancy_pct: 13.63
+        hard_fa_year: 1.27
+        median_lead_sessions: 19.0
+      research_mandate: Evaluate whether PIT-valid external catalysts can achieve
+        high out-of-fold recall with lower false alarms than V4.
+    challenger_c_coverage:
+      identifier: CHALLENGER_C_COVERAGE
+      role: Coverage-Maximized Research Challenger
+      governance_status: RESEARCH_ONLY_NOT_OFFICIAL
+      architecture: Two-Stage Gated Fragility-Catalyst Escalation
+      evidence_tier: POINT_IN_TIME_VALID
+      active_features:
+      - s_v4 (Internal Domestic Fragility)
+      - c14_brent_oil_ret20 (ICE Brent 20d Return)
+      - c16_cbot_wheat_ret20 (CBOT Wheat 20d Return)
+      - c19_vix_delta5 (Cboe VIX 5d Surge)
+      - c21_dxy_momentum20 (ICE US Dollar Index 20d Momentum)
+      predefined_ceilings:
+        max_warning_occupancy_pct: 17.0
+        max_hard_fa_per_year: 1.75
+      gating_rules:
+        fragility_gate_enter: 0.88
+        catalyst_threshold_enter: 0.45
+        fragility_exit: 0.87
+        catalyst_exit_ratio: 0.75
+        min_hold_sessions: 5
+        max_hold_sessions: 12
+        cooldown_sessions: 20
+      performance_audited:
+        in_sample_broad_recall: 17/17 (100.0%)
+        in_sample_strict_recall: 14/17 (82.35%)
+        loco_out_of_fold_broad: 15/17 (88.24%)
+        loco_out_of_fold_strict: 12/17 (70.59%)
+        warning_occupancy_pct: 16.73
+        hard_fa_year: 1.72
+        median_lead_sessions: 15.5
+      research_mandate: Evaluate maximum feasible crisis warning coverage subject
+        to the 17% occupancy and 1.75 FA/yr ceilings.
+    challenger_c_v2_decoupled:
+      identifier: CHALLENGER_C_V2_DECOUPLED
+      role: Decoupled Catalyst & Domestic Consensus Research Challenger
+      governance_status: RESEARCH_ONLY_NOT_OFFICIAL
+      architecture: Hierarchical Consensus Domestic Gate + Decoupled Commodity/Contagion Channels
+      evidence_tier: POINT_IN_TIME_VALID
+      active_features:
+      - s_v4 (Internal Domestic Fragility)
+      - s_slope5 (5-Day Fragility Velocity)
+      - stress_count (Multi-Indicator Stress Count)
+      - c14_brent_oil_ret20 (ICE Brent 20d Return)
+      - c16_cbot_wheat_ret20 (CBOT Wheat 20d Return)
+      - c19_vix_delta5 (Cboe VIX 5d Surge)
+      - c21_dxy_momentum20 (ICE US Dollar Index 20d Momentum)
+      - c22_msci_em_ret20 (MSCI Emerging Markets 20d Return)
+      gating_rules:
+        domestic_consensus_sessions: 2
+        domestic_fragility_enter: 0.930
+        domestic_min_slope: 0.000
+        commodity_fragility_gate: 0.90
+        commodity_threshold_enter: 0.60
+        volatility_fragility_gate: 0.90
+        volatility_threshold_enter: 0.45
+        min_stress_count: 1
+        min_hold_sessions: 5
+        max_hold_sessions: 8
+        cooldown_sessions: 20
+        exit_fragility_threshold: 0.885
+        exit_catalyst_ratio: 0.70
+      performance_audited:
+        in_sample_broad_recall: 17/17 (100.0%)
+        in_sample_strict_recall: 16/17 (94.12%)
+        loco_out_of_fold_broad: 16/17 (94.12%)
+        loco_out_of_fold_strict: 15/17 (88.24%)
+        walk_forward_out_of_sample_broad: 6/6 (100.0%)
+        walk_forward_out_of_sample_strict: 5/6 (83.33%)
+        warning_occupancy_pct: 12.53
+        hard_fa_year: 1.72
+        median_lead_sessions: 17.5
+      research_mandate: Evaluate decoupled commodity vs. contagion escalation with 2-day domestic consensus to maximize out-of-fold crisis warning lead time while reducing occupancy.
+  prospective_shock_sentinel:
+    identifier: SHOCK_SENTINEL_PROSPECTIVE
+    role: Prospective High-Frequency Geopolitical / Maritime Shock Monitor
+    governance_status: RESEARCH_ONLY_NOT_OFFICIAL
+    historical_optimization: NONE (Strictly Zero Backtest Tuning)
+    evidence_tier: PROSPECTIVE_REAL_TIME_ARCHIVE
+    data_streams:
+    - stream_name: Suez Canal & Bab el-Mandeb AIS Transits
+      provider: IMF PortWatch / UN Global Platform AIS
+      trigger_condition: 7-day rolling vessel transit volume drop >= 30.0%
+    - stream_name: Red Sea Maritime & Naval Attacks
+      provider: UK Maritime Trade Operations (UKMTO)
+      trigger_condition: Naval / kinetic incident count >= 2 in rolling 7 days
+    - stream_name: High-Frequency News Velocity & Negative Tone
+      provider: GDELT 2.0 Global Knowledge Graph (15-min feeds)
+      trigger_condition: Egypt negative tone z-score >= 2.50 standard deviations
+    - stream_name: Domestic Civil Unrest Acceleration
+      provider: ACLED (Real-Time Weekly Ingest)
+      trigger_condition: Protest / unrest event velocity >= 2.00 standard deviations
+    - stream_name: Critical Infrastructure & Telecommunications Outage
+      provider: Cloudflare Radar API
+      trigger_condition: Egypt nationwide BGP / netflow connectivity drop >= 25.0%
+    state_machine_logic:
+      states:
+      - NORMAL
+      - SHOCK_ADVISORY
+      - SEVERE_SHOCK_WARNING
+      transitions:
+        NORMAL_TO_ADVISORY: Exactly 1 shock trigger active
+        NORMAL_TO_SEVERE: '>= 2 concurrent shock triggers active OR single catastrophic
+          trigger (e.g. Suez drop >= 50%)'
+        EXIT_TO_NORMAL: Zero triggers active for 3 consecutive days
+    research_mandate: Build an uncompromised live prospective dataset from September
+      13 onward to test whether real-time external intelligence catches sudden exogenous
+      shocks without historical backtest ambiguity.
