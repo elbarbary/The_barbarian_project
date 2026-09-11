@@ -116,8 +116,8 @@ Two things, and the second is the one that matters.
 The first is honesty about provenance: a reader who wants to know where a number
 came from can find out, and a number with no entry here should not be on screen.
 
-The second is that **it makes the limits visible**. Al Mal and Zawya are listed
-with nothing beside them — tried, unreachable, and named for it. GDELT is listed
+The second is that **it makes the limits visible**. Zawya is listed
+with nothing beside it — tried, unreachable, and named for it. GDELT is listed
 with the condition attached to it: it works with a narrow query and returns
 filler with a broad one, so what was adopted is the queries rather than the
 source. Oil is collected from somewhere with no independent second reading, and
