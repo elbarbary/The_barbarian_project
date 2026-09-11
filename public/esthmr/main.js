@@ -358,10 +358,21 @@ document.getElementById('signout').onclick = async () => {
       const owner = readerVersion;
       flowAttemptVersion = version;
       component.state.flowLoading = true;
-      data.flowTrackers().then(flowTrackers => {
+      // The sector-ownership document rides with it: both belong to these two
+      // screens and neither is wanted anywhere else. Its own failure must not
+      // take the trackers down with it, so it resolves to null rather than
+      // rejecting the pair.
+      Promise.all([
+        data.flowTrackers(),
+        data.sectorOwnership ? data.sectorOwnership().catch(() => null)
+                             : Promise.resolve(null),
+      ]).then(([flowTrackers, sectorOwnership]) => {
         if (version === loadVersion && owner === readerVersion && reader && !component.data().demo) {
           component.state.flowLoading = false;
-          component.setData({ ...component.data(), flowTrackers });
+          component.setData({
+            ...component.data(), flowTrackers,
+            ...(sectorOwnership ? { sectorOwnership } : {}),
+          });
         }
       }).catch(() => {
         if (version === loadVersion && owner === readerVersion) {

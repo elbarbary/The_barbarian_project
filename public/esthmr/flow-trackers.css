@@ -638,10 +638,13 @@ body.om-sheet-open { overflow: hidden; }
   color: var(--t2); white-space: nowrap; }
 .om-reg-head { margin: 10px 0 2px; font-size: 9.5px; color: var(--faint);
   letter-spacing: .07em; text-transform: uppercase; }
-.om-seat { padding: 5px 4px; display: grid; border-bottom: 1px solid var(--rule2); }
-.om-seat:last-child { border-bottom: 0; }
-.om-seat strong { font-size: 11px; font-weight: 500; }
-.om-seat small { font-size: 9.5px; color: var(--faint); overflow: hidden;
+/* A board member in the register list. The seat on the BOARD is `.om-seat`,
+   an SVG group, and these two shared a class until one of them noticed. */
+.om-board-seat { padding: 5px 4px; display: grid;
+  border-bottom: 1px solid var(--rule2); }
+.om-board-seat:last-child { border-bottom: 0; }
+.om-board-seat strong { font-size: 11px; font-weight: 500; }
+.om-board-seat small { font-size: 9.5px; color: var(--faint); overflow: hidden;
   text-overflow: ellipsis; }
 .om-reg-none { margin: 6px 2px; font-size: 11px; color: var(--faint); }
 .om-card { padding: 14px 16px; border-radius: 18px; background: var(--sunk);
@@ -733,4 +736,76 @@ button.om-holder-row:hover span { color: var(--accent); }
   .om-pan-hint { display: block; }
 }
 
+/* ── the sector lens ────────────────────────────────────────────────────────
+   Months of money, where it rotated, and which sectors own each other. */
+.sl-block { margin-bottom: 28px; }
+.sl-months, .sl-ring { width: 100%; height: auto; display: block; }
+.sl-months { margin: 8px 0 4px; }
+.sl-col { cursor: pointer; }
+/* Selection is a stroke, never a fill. A fill here beat the column's own
+   colour and emptied the month the reader had just picked. */
+.sl-col rect { transition: opacity .15s ease; }
+.sl-col:hover rect { opacity: .78; }
+.sl-col-on rect { stroke: var(--accent); stroke-width: 1.2; }
+.sl-col:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* One row per sector, always every sector: the bar grows either side of a
+   centre line so a fall is a fall and not a shorter rise. */
+.sl-rotation { display: grid; gap: 2px; margin-top: 12px; }
+.sl-rot-row { display: grid; align-items: center; gap: 10px;
+  grid-template-columns: minmax(0, 1.6fr) 56px minmax(90px, 1fr) 82px;
+  padding: 7px 10px; border: 1px solid transparent; border-radius: 10px;
+  background: none; text-align: start; cursor: pointer; font: inherit;
+  color: var(--t1); }
+.sl-rot-row:hover { background: var(--sunk); }
+.sl-rot-on { border-color: var(--edge); background: var(--sunk); }
+.sl-rot-name { font-size: 12.5px; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap; }
+.sl-rot-share { font-family: 'IBM Plex Mono', monospace; font-size: 12px;
+  color: var(--t2); text-align: end; }
+.sl-rot-bar { position: relative; height: 8px; border-radius: 4px;
+  background: var(--sunk); box-shadow: inset 0 0 0 1px var(--edgeIn); }
+.sl-rot-bar i { position: absolute; top: 0; bottom: 0; border-radius: 4px; }
+.sl-rot-bar .sl-pos { background: var(--up); }
+.sl-rot-bar .sl-neg { background: var(--down); }
+.sl-rot-delta { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
+  text-align: end; }
+
+/* The ring, and the register under it. */
+.sl-flow path { transition: opacity .2s ease; }
+.sl-node { cursor: pointer; }
+.sl-node:hover circle { stroke: var(--accent); }
+.sl-node:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.sl-links { display: grid; gap: 14px; margin-top: 18px; }
+.sl-owner { border-top: 1px solid var(--edgeIn); padding-top: 12px; }
+.sl-owner-head { display: flex; align-items: baseline; gap: 8px;
+  flex-wrap: wrap; margin-bottom: 6px; }
+.sl-owner-name { font-weight: 650; font-size: 13px; }
+.sl-owner-head small { color: var(--t2); font-size: 11px; }
+.sl-link { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+  padding: 5px 0 5px 14px; font-size: 12px; }
+.sl-arrow { color: var(--t2); }
+.sl-held-name { font-weight: 550; }
+.sl-held-sector { color: var(--t2); font-size: 11px; }
+.sl-held-value { font-family: 'IBM Plex Mono', monospace; color: var(--t2); }
+.sl-link small { color: var(--t2); font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px; }
+.sl-link a { color: var(--accent); font-size: 11px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sl-flow circle { display: none; }
 }
+
+@media (max-width: 768px) {
+  .sl-rot-row { grid-template-columns: minmax(0, 1fr) 52px 74px;
+    column-gap: 8px; }
+  /* The diverging bar is the first thing to go: at 120px it reads as noise,
+     and the number beside it says the same thing exactly. */
+  .sl-rot-bar { display: none; }
+  .sl-links { gap: 10px; }
+  .sl-link { padding-inline-start: 8px; }
+}
+
+/* Which scale the months are drawn on. Sits above the chart because it
+   changes what the chart means, not how it is filtered. */
+.sl-scale { margin: 10px 0 2px; }

@@ -1,12 +1,15 @@
 import { React as R } from './react-shim.js';
 
 import * as OM from './ownership-map.js';
+import * as SL from './sector-lens.js';
 
 const h = R.createElement;
 const finite = v => typeof v === 'number' && Number.isFinite(v);
 const signed = v => finite(v) ? `${v > 0 ? '+' : ''}${v.toFixed(2)}%` : '—';
 const compact = v => finite(v) ? new Intl.NumberFormat('en', { notation:'compact', maximumFractionDigits:2 }).format(v) : '—';
 const tone = v => v > 0 ? 'var(--up)' : v < 0 ? 'var(--down)' : 'var(--t2)';
+// `1 filed stakes` is a typo the reader sees every time a sector holds one.
+const plural = (n, word) => (n === 1 ? word : `${word}s`);
 const direction = action => ({bought:1, sold:-1, treasury_purchase:1, treasury_sale:-1})[action] || 0;
 const safeLink = link => /^https:\/\/(www\.)?egx\.com\.eg\//i.test(link || '') ? link : null;
 
@@ -776,7 +779,14 @@ function renderOwnershipMap(doc, ar, t, component) {
   // The window on the board, in the board's own units. Zooming moves this
   // rather than scaling the element: the vectors stay sharp and, more to the
   // point, a click still lands where the reader aimed it.
-  let win = null;
+  //
+  // And it lives in the component for the third time on this panel, for the
+  // reason focus and the week already do: picking a company scopes the list
+  // below, which is a `setState`, which builds this whole board again. Left in
+  // the closure, a reader who zoomed in to find a company and then pressed it
+  // was thrown back out to the whole exchange by the press itself.
+  let win = st.ownershipWin && finite(st.ownershipWin.w)
+    ? { ...st.ownershipWin } : null;
   const board = () => OM.VIEW;
   const wholeBoard = () => ({ x: 0, y: 0, w: OM.VIEW.w, h: OM.VIEW.h });
 
@@ -948,6 +958,10 @@ function renderOwnershipMap(doc, ar, t, component) {
     paint();
   }
 
+  // The handle the last draw returned, so a zoom can resize its marks
+  // instead of asking for the board again.
+  let painted = null;
+
   const clampWindow = () => {
     const full = board();
     const min = 0.14;                       // about seven times in
@@ -963,6 +977,11 @@ function renderOwnershipMap(doc, ar, t, component) {
     svg.setAttribute('viewBox', `${win.x} ${win.y} ${win.w} ${win.h}`);
     const full = board();
     const times = full.w / win.w;
+    // Zoomed in, the marks are drawn smaller. Growing everything by the zoom
+    // factor put three rings across the screen and hid exactly the crowding
+    // a reader zoomed in to see through.
+    if (painted) painted.rescale(OM.markFor(times));
+    component.state.ownershipWin = { ...win };
     if (zoomOut) zoomOut.disabled = times <= 1.001;
     if (zoomLabel) zoomLabel.textContent = `${times.toFixed(1)}×`;
   };
@@ -986,7 +1005,7 @@ function renderOwnershipMap(doc, ar, t, component) {
       b.classList.toggle('om-period-on', on);
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
-    OM.renderMap(svg, model, {
+    painted = OM.renderMap(svg, model, {
       holdings: positions, bridges, labelOf, focus, t, ar, named,
       moves: week ? OM.movesIn(doc, week) : null,
       onPick: (id) => {
@@ -1096,7 +1115,10 @@ function renderOwnershipMap(doc, ar, t, component) {
                                         .map((p) => p.ticker))];
       if (mine.length === 1) [ticker] = mine;
     }
-    const patch = { ownershipFocus: focus, ownershipNamed: named, ownershipWeek: week };
+    const patch = {
+      ownershipFocus: focus, ownershipNamed: named, ownershipWeek: week,
+      ownershipWin: win ? { ...win } : null,
+    };
     if ((component.state.ownershipTicker || '') !== ticker) {
       patch.ownershipTicker = ticker;
       patch.ownershipPage = 0;
@@ -1155,7 +1177,12 @@ function renderOwnershipMap(doc, ar, t, component) {
         list.appendChild(head);
         seats.forEach((seat) => {
           const el = document.createElement('div');
-          el.className = 'om-seat';
+          // Not `om-seat`. That class already names the SVG group a holder
+          // sits in out on the water, and both were picking up both rule
+          // sets — `display: grid` landing on a `<g>`, a list row inheriting
+          // the board's hover. The same collision that made every zoom
+          // control on this panel invisible for a day.
+          el.className = 'om-board-seat';
           const nm = document.createElement('strong');
           nm.textContent = seat.name;
           el.appendChild(nm);
@@ -1416,6 +1443,218 @@ function renderOwnershipMap(doc, ar, t, component) {
 }
 
 
+/* ── the sector lens ──────────────────────────────────────────────────────────
+ *
+ * Three blocks that answer one question between them: where does the money on
+ * this exchange actually go? Months first, because "how much moves" has a
+ * denominator; then how the shares of it changed, which is rotation and is a
+ * record; then which sectors own each other, which is the register's answer to
+ * the same question.
+ *
+ * The section says out loud that it does not forecast. Asked for a predicted
+ * next sector, this is what can honestly be built instead: the publisher is
+ * not licensed by the FRA, and a named sector presented as the next one is a
+ * recommendation however it is worded.
+ */
+const monthName = (month, ar) => {
+  const { name, year } = SL.monthLabel(month, ar);
+  return `${name} 20${year}`;
+};
+
+function renderMonthsOfMoney(d, sectors, selected, month, mode, ar, t, onPickMonth, onPickMode) {
+  const monthly = d.monthly;
+  if (!monthly || !Array.isArray(monthly.months) || monthly.months.length < 2) return null;
+  const rows = SL.monthRows(monthly, selected);
+  const at = rows.find((r) => r.month === month) || rows[rows.length - 1];
+  const chart = SL.monthsChart(monthly, selected, {
+    ar, t, mode, month: at.month, onPick: onPickMonth,
+  });
+  const total = rows.reduce((n, r) => n + (r.value || 0), 0);
+  const sectorName = selected ? (ar ? (selected.nameAr || selected.name) : selected.name) : null;
+
+  return h('section', { className: 'ft-detail sl-block' },
+    h('div', { className: 'ft-section-heading' },
+      h('div', null,
+        h('span', { className: 'ft-eyebrow' }, t('MONTHS OF MONEY', 'المال شهراً بشهر')),
+        h('h2', null, t('How much traded, month by month', 'كم تداولت السوق شهراً بشهر'))
+      ),
+      h('span', { className: 'ft-range-badge', dir: 'ltr' },
+        `${rows[0].month} → ${rows[rows.length - 1].month}`)
+    ),
+    h('p', { className: 'ft-note' }, t(
+      `EGP ${compact(total)} changed hands across ${rows.length} months in the sectors this site covers. `
+      + (mode === 'sector'
+        ? 'Each column is one month of the sector named above, on its own scale. '
+        : 'Each column is one month of the whole covered exchange; the filled part is the sector selected below. ')
+      + 'Hatched columns are months that cannot be compared with a whole one — the month still running, '
+      + 'or one the archive joins partway through.',
+      `تداولت السوق ${compact(total)} جنيه خلال ${rows.length} شهراً في القطاعات التي يغطيها الموقع. `
+      + 'كل عمود شهر كامل للسوق المغطاة، والجزء المملوء هو القطاع المختار أدناه. '
+      + 'الأعمدة المهشّرة شهور لا تُقارن بشهر كامل: الشهر الجاري، أو شهر يبدأ فيه السجل من منتصفه.')),
+    h('div', { className: 'ft-pills sl-scale' },
+      button(t('Whole market', 'السوق كلها'), () => onPickMode('market'), mode !== 'sector'),
+      selected && button(
+        ar ? (selected.nameAr || selected.name) : selected.name,
+        () => onPickMode('sector'), mode === 'sector')
+    ),
+    chart,
+    h('div', { className: 'ft-metrics' },
+      metric(t('Month', 'الشهر'), monthName(at.month, ar),
+        `${at.sessions} ${t('sessions', 'جلسة')} · ${at.companies} ${t('companies traded', 'شركة تداولت')}`
+        + (at.partial ? ` · ${t('part month', 'شهر ناقص')}` : '')),
+      metric(t('Traded that month · EGP', 'تداول الشهر · ج.م'), compact(at.value),
+        `${t('Coverage', 'التغطية')} ${at.coverage}%`),
+      sectorName ? metric(sectorName, compact(at.part),
+        finite(at.share) ? `${at.share.toFixed(1)}% ${t('of the month', 'من الشهر')}` : '—') : null,
+      metric(t('Months published', 'شهور منشورة'), String(rows.length),
+        monthly.held && monthly.held.length
+          ? `${monthly.held.length} ${t('earlier months held back for thin coverage', 'شهراً سابقاً محجوبة لضعف التغطية')}`
+          : t('every month the archive can compare', 'كل شهر يمكن مقارنته'))
+    )
+  );
+}
+
+function renderRotation(d, sectors, month, ar, t, onPickSector, selectedId) {
+  const monthly = d.monthly;
+  if (!monthly || !Array.isArray(monthly.months) || monthly.months.length < 2) return null;
+  const { rows, now, before } = SL.rotation(monthly, sectors, month, ar);
+  if (!rows.length || !before) return null;
+  const widest = Math.max(...rows.map((r) => Math.abs(r.change || 0)), 0.5);
+
+  return h('section', { className: 'ft-detail sl-block' },
+    h('div', { className: 'ft-section-heading' },
+      h('div', null,
+        h('span', { className: 'ft-eyebrow' }, t('WHERE IT ROTATED', 'إلى أين تحوّل')),
+        h('h2', null, t('Share of the month\u2019s trading, against the month before',
+                        'نصيب القطاع من تداول الشهر، مقابل الشهر السابق'))
+      ),
+      h('span', { className: 'ft-range-badge', dir: 'ltr' }, `${before.month} → ${now.month}`)
+    ),
+    h('p', { className: 'ft-note' }, t(
+      'Every sector with a figure in either month, in alphabetical order. '
+      + 'This is a record of where trading has already been, and nothing here says which sector is next: '
+      + 'ESTHMR is not licensed by the Financial Regulatory Authority and publishes no forecast or recommendation. '
+      + 'A share can rise because a sector traded more or because the rest of the market traded less.',
+      'كل قطاع له رقم في أي من الشهرين، بالترتيب الأبجدي. '
+      + 'هذا سجل لما تداولته السوق فعلاً، ولا شيء هنا يقول أي قطاع هو التالي: '
+      + 'استثمر غير مرخّص من الهيئة العامة للرقابة المالية ولا ينشر توقعات أو توصيات. '
+      + 'وقد يرتفع النصيب لأن القطاع تداول أكثر أو لأن بقية السوق تداولت أقل.')),
+    h('div', { className: 'sl-rotation' },
+      rows.map((r) => h('button', {
+        key: r.id, type: 'button',
+        className: `sl-rot-row${selectedId === r.id ? ' sl-rot-on' : ''}`,
+        onClick: () => onPickSector(r.id),
+        'aria-pressed': String(selectedId === r.id),
+      },
+        h('span', { className: 'sl-rot-name' }, r.name),
+        h('span', { className: 'sl-rot-share', dir: 'ltr' },
+          finite(r.share) ? `${r.share.toFixed(1)}%` : '—'),
+        h('span', { className: 'sl-rot-bar', 'aria-hidden': 'true' },
+          h('i', {
+            className: finite(r.change) && r.change < 0 ? 'sl-neg' : 'sl-pos',
+            style: {
+              width: `${Math.min(50, Math.abs(r.change || 0) / widest * 50)}%`,
+              [finite(r.change) && r.change < 0 ? 'right' : 'left']: '50%',
+            },
+          })),
+        h('span', {
+          className: 'sl-rot-delta', dir: 'ltr',
+          style: { color: tone(r.change) },
+        }, finite(r.change)
+          ? `${r.change > 0 ? '+' : ''}${r.change.toFixed(2)} pp`
+          : t('new', 'جديد'))
+      ))
+    )
+  );
+}
+
+function renderSectorsInsideSectors(doc, ar, t, focus, onPick, onCompany) {
+  if (!doc || !Array.isArray(doc.links)) return null;
+  if (!doc.links.length) {
+    return h('section', { className: 'ft-detail sl-block' },
+      h('h2', null, t('Sectors inside sectors', 'قطاعات داخل قطاعات')),
+      h('p', { className: 'ft-note' }, t(
+        'No filed register names one listed company as a holder of another yet.',
+        'لا يوجد سجل مُفصح عنه يسمّي شركة مقيدة مالكةً في شركة مقيدة أخرى بعد.')));
+  }
+  const shown = focus
+    ? doc.links.filter((l) => l.ownerSector === focus || l.heldSector === focus)
+    : doc.links;
+  const valued = shown.filter((l) => finite(l.value));
+  const byOwner = new Map();
+  shown.forEach((l) => {
+    if (!byOwner.has(l.owner)) byOwner.set(l.owner, []);
+    byOwner.get(l.owner).push(l);
+  });
+
+  return h('section', { className: 'ft-detail sl-block' },
+    h('div', { className: 'ft-section-heading' },
+      h('div', null,
+        h('span', { className: 'ft-eyebrow' }, t('SECTORS INSIDE SECTORS', 'قطاعات داخل قطاعات')),
+        h('h2', null, t('Which sectors own each other', 'أي القطاعات تملك بعضها'))
+      ),
+      h('span', { className: 'ft-range-badge', dir: 'ltr' },
+        `${doc.linkCount} ${t('stakes', 'حصة')}`)
+    ),
+    h('p', { className: 'ft-note' }, t(
+      `${doc.linkCount} ${plural(doc.linkCount, 'filed stake')} are one listed `
+      + 'company\u2019s holding in another. '
+      + 'A line runs from the owner to the owned and is weighted by what the stake is worth — '
+      + 'percentages belong to one company each and are never added together, but money can be. '
+      + `${doc.outsideHolderCount} other disclosed corporate holders are not companies listed here.`,
+      `${doc.linkCount} حصة مُفصح عنها تملكها شركة مقيدة في شركة مقيدة أخرى. `
+      + 'يمتد الخط من المالك إلى المملوك وسماكته بقيمة الحصة، '
+      + 'فالنسب تخص شركة واحدة ولا تُجمع، أما المبالغ فتُجمع. '
+      + `و${doc.outsideHolderCount} من المالكين المُفصح عنهم ليسوا شركات مقيدة هنا.`)),
+    SL.ownershipRing(doc, { ar, t, focus, onPick }),
+    focus && h('button', {
+      type: 'button', className: 'ft-chip', onClick: () => onPick(null),
+    }, t('Show every sector', 'اعرض كل القطاعات')),
+    h('div', { className: 'sl-links' },
+      [...byOwner.entries()].map(([owner, links]) => h('div', {
+        key: owner, className: 'sl-owner',
+      },
+        h('div', { className: 'sl-owner-head' },
+          h('button', {
+            type: 'button', className: 'ft-stock-ticker-btn',
+            onClick: () => onCompany(owner),
+          }, owner),
+          h('span', { className: 'sl-owner-name' },
+            ar ? links[0].ownerNameAr : links[0].ownerName),
+          h('small', null, ar ? links[0].ownerSectorAr : links[0].ownerSector)
+        ),
+        links.map((l) => h('div', { key: `${l.owner}-${l.held}`, className: 'sl-link' },
+          h('span', { className: 'sl-arrow', 'aria-hidden': 'true' }, '→'),
+          h('button', {
+            type: 'button', className: 'ft-stock-ticker-btn',
+            onClick: () => onCompany(l.held),
+          }, l.held),
+          h('span', { className: 'sl-held-name' }, ar ? l.heldNameAr : l.heldName),
+          h('span', { className: 'sl-held-sector' }, ar ? l.heldSectorAr : l.heldSector),
+          h('strong', { dir: 'ltr' }, `${l.percent.toFixed(2)}%`),
+          h('span', { className: 'sl-held-value', dir: 'ltr' },
+            finite(l.value) ? `${compact(l.value)} EGP` : t('no published size', 'بلا قيمة منشورة')),
+          h('small', { dir: 'ltr' }, l.asOf || ''),
+          safeLink(l.source) && h('a', {
+            href: safeLink(l.source), target: '_blank', rel: 'noopener noreferrer',
+          }, t('form', 'النموذج'))
+        ))
+      ))
+    ),
+    h('p', { className: 'ft-note' },
+      `${valued.length}/${shown.length} ` + t(
+        'of the stakes shown have a published market value behind them; the rest are drawn without one rather than estimated.',
+        'من الحصص المعروضة لها قيمة سوقية منشورة، والباقي يُرسم بدونها بدلاً من تقديرها.')
+      + (doc.refused && doc.refused.length
+        ? ` ${doc.refused.length} ` + t(
+          `${plural(doc.refused.length, 'candidate holder')} `
+          + (doc.refused.length === 1 ? 'was' : 'were')
+          + ' refused because a name alone could not prove which company they are.',
+          'مالكاً محتملاً مرفوضاً لأن الاسم وحده لا يثبت أي شركة هو.')
+        : ''))
+  );
+}
+
 export function flowTrackers(component, data, ar) {
   const t = (en, arabic) => ar ? arabic : en;
   const st = component.state;
@@ -1575,6 +1814,16 @@ export function flowTrackers(component, data, ar) {
     });
 
     const selected = rows.find(s => s.id === st.flowSector) || rows[0];
+    // The month the reader has picked out of the months chart, and the sector
+    // they have picked out of the ownership ring. Both default to what the
+    // published data ends on rather than to nothing, so the blocks below read
+    // as a finished statement on first sight.
+    const monthList = (d.monthly && d.monthly.months) || [];
+    const month = monthList.some(m => m.month === st.flowMonth)
+      ? st.flowMonth
+      : (monthList.length ? monthList[monthList.length - 1].month : null);
+    const ringFocus = st.flowRingSector || null;
+    const monthMode = st.flowMonthView === 'sector' ? 'sector' : 'market';
 
     // Summary market breadth across all covered sectors
     const totalTradedAcross = rows.reduce((acc, s) => acc + (s.latest.value || 0), 0);
@@ -1698,6 +1947,13 @@ export function flowTrackers(component, data, ar) {
             h('strong', { dir: 'ltr', style: { color: 'var(--down)' } }, compact(totalDecliningVal) + ' EGP')
           )
         ),
+        renderMonthsOfMoney(d, rows, selected, month, monthMode, ar, t,
+          (m) => component.setState({ flowMonth: m }),
+          (v) => component.setState({ flowMonthView: v })),
+        renderRotation(d, rows, month, ar, t, openSector, selected && selected.id),
+        renderSectorsInsideSectors(data.sectorOwnership, ar, t, ringFocus,
+          (id) => component.setState({ flowRingSector: id }),
+          (ticker) => component.setState({ screen: 'company', ticker })),
         renderSectorFlowMap(rows, selected, openSector, ar, t),
         h('div', { className: 'ft-toolbar' },
           h('div', { className: 'ft-pills' },

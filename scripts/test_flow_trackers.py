@@ -95,3 +95,98 @@ class FlowTrackersTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class MonthsOfMoney(unittest.TestCase):
+    """Turnover added up by calendar month, and what makes a month comparable.
+
+    The trap every one of these guards is the same: the archive has more
+    companies in it now than it had a year ago, so a month aggregated without a
+    coverage floor shows money arriving when what arrived was data.
+    """
+
+    def month_fixture(self, history_a, history_b=None, as_of='2026-09-10'):
+        companies = {'companies': [
+            {'ticker': 'A', 'sector': 'Banks', 'market_cap': 900},
+            {'ticker': 'B', 'sector': 'Banks', 'market_cap': 100}]}
+        market = {'date': as_of, 'is_close': True, 'stocks': {}}
+        docs = {'A': {'profile': {}, 'market': {}, 'price_history': history_a},
+                'B': {'profile': {}, 'market': {},
+                      'price_history': history_b if history_b is not None else []}}
+        return build(companies, market, docs, {'asOf': as_of, 'items': []})
+
+    @staticmethod
+    def bars(dates, close=10, volume=10):
+        return [{'date': d, 'close': close, 'volume': volume} for d in dates]
+
+    def full(self, month, days=(2, 10, 20, 27)):
+        return [f'{month}-{d:02d}' for d in days]
+
+    def test_a_month_is_the_sum_of_the_sessions_in_it(self):
+        result = self.month_fixture(
+            self.bars(self.full('2026-07') + self.full('2026-08')),
+            self.bars(self.full('2026-07') + self.full('2026-08')))
+        months = {m['month']: m for m in result['sectors'][0]['months']}
+        # Two companies at 10 x 10 over four sessions each.
+        self.assertEqual(months['2026-07']['value'], 800)
+        self.assertEqual(months['2026-07']['sessions'], 4)
+        self.assertEqual(months['2026-07']['companies'], 2)
+
+    def test_a_month_carries_no_return_of_any_kind(self):
+        # Compounding a month of daily moves at today's fixed market-cap
+        # weights would state a sector return this project does not publish.
+        result = self.month_fixture(self.bars(self.full('2026-07')))
+        for month in result['sectors'][0]['months']:
+            for key in month:
+                self.assertNotIn(key, ('change', 'return', 'performance'))
+
+    def test_a_thinly_covered_month_is_held_back_and_named(self):
+        # July has one of the sector's two companies in it — 50%, under the
+        # floor. August has both.
+        result = self.month_fixture(
+            self.bars(self.full('2026-07') + self.full('2026-08')),
+            self.bars(self.full('2026-08')))
+        self.assertEqual(result['monthly']['from_'], '2026-08')
+        self.assertIn('2026-07', result['monthly']['held'])
+        self.assertEqual([m['month'] for m in result['sectors'][0]['months']],
+                         ['2026-08'])
+
+    def test_every_sector_starts_at_the_same_month(self):
+        companies = {'companies': [
+            {'ticker': 'A', 'sector': 'Banks', 'market_cap': 900},
+            {'ticker': 'C', 'sector': 'Food', 'market_cap': 500}]}
+        docs = {'A': {'profile': {}, 'market': {},
+                      'price_history': self.bars(self.full('2026-07') + self.full('2026-08'))},
+                'C': {'profile': {}, 'market': {},
+                      'price_history': self.bars(self.full('2026-07') + self.full('2026-08'))}}
+        result = build(companies, {'date': '2026-09-10', 'stocks': {}}, docs,
+                       {'asOf': '2026-09-10', 'items': []})
+        starts = {s['id']: s['months'][0]['month'] for s in result['sectors']
+                  if s['months']}
+        self.assertEqual(len(set(starts.values())), 1, starts)
+
+    def test_the_running_month_and_a_half_month_are_both_marked_partial(self):
+        result = self.month_fixture(
+            self.bars(self.full('2026-07')                 # whole month
+                      + ['2026-08-18', '2026-08-27']       # joined late
+                      + ['2026-09-01', '2026-09-08']),     # still running
+            self.bars(self.full('2026-07')
+                      + ['2026-08-18', '2026-08-27']
+                      + ['2026-09-01', '2026-09-08']))
+        months = {m['month']: m for m in result['sectors'][0]['months']}
+        self.assertFalse(months['2026-07']['partial'])
+        self.assertTrue(months['2026-08']['partial'], 'a month joined on the 18th')
+        self.assertTrue(months['2026-09']['partial'], 'the month still running')
+
+    def test_the_exchange_total_is_what_the_sectors_hold(self):
+        result = self.month_fixture(
+            self.bars(self.full('2026-07') + self.full('2026-08')),
+            self.bars(self.full('2026-07') + self.full('2026-08')))
+        for row in result['monthly']['months']:
+            mine = sum(m['value'] for s in result['sectors']
+                       for m in s['months'] if m['month'] == row['month'])
+            self.assertAlmostEqual(row['value'], round(mine, 2), places=2)
+
+    def test_no_months_at_all_rather_than_one_uncomparable_month(self):
+        result = self.month_fixture([], [])
+        self.assertEqual(result['monthly']['months'], [])

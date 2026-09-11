@@ -1526,6 +1526,15 @@ export async function flowPreview() {
   return d;
 }
 
+/** Which listed companies hold stakes in one another, read sector to sector. */
+export async function sectorOwnership() {
+  const d = await doc('sector-ownership.json');
+  if (d?.schemaVersion !== 1 || !Array.isArray(d.links) || !Array.isArray(d.flows)) {
+    throw new Error('Invalid sector ownership snapshot');
+  }
+  return d;
+}
+
 /** The named parties behind the post-execution filings, and their stakes. */
 export async function insiderPeople() {
   const d = await doc('insider-people.json');

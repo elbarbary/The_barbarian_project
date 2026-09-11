@@ -312,6 +312,11 @@ STEPS = [
     ("Shareholder structure", "build_ownership_structure.py", True,
      ["--limit", "6", "--engine", "agy"]),
     ("Insider people", "build_insider_people.py", True),
+    # Which of those named holders are themselves listed companies, read sector
+    # to sector. A local transform over the two documents above — no network,
+    # no model — so a failure here means this repository is wrong, not that a
+    # host was slow.
+    ("Sector ownership", "build_sector_ownership.py", True),
     ("Sector liquidity and ownership", "build_flow_trackers.py", True),
     ("Manifest + fixtures", "build_fixtures.py", False),
     # Last, and best-effort. Both read and extend the permanent archive, and

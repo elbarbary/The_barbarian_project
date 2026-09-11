@@ -56,6 +56,20 @@ export function hueOf(id) {
 
 export const keyOf = (holder, ticker) => `${holder}|${ticker}`;
 
+/* How big a mark should be drawn when the board is zoomed in.
+ *
+ * Zooming makes the board bigger. It should not make every mark on it bigger
+ * by the same amount: at three times in, a ring that was already the widest
+ * thing in its lake fills the screen and the gaps a reader zoomed in to look
+ * INTO close up. Marks are drawn smaller as the board grows, so their size on
+ * screen still rises — a zoom that shrank everything would be no zoom — but
+ * sub-linearly, which is what opens the board up.
+ */
+export function markFor(times) {
+  const z = finite(times) && times > 1 ? times : 1;
+  return Math.max(0.34, Math.pow(z, -0.55));
+}
+
 /** Every standing stake: the last filed level, zeros dropped from the board. */
 export function standing(doc) {
   return ((doc && doc.positions) || []).filter((p) => (p.percent || 0) > 0);
@@ -403,6 +417,11 @@ export function renderMap(svg, model, opts) {
   const gName = svgEl('g', { class: 'om-names' }, svg);
   const gPop = svgEl('g', { class: 'om-pop' }, svg);
 
+  // Every mark that shrinks when the board is zoomed, with the point it keeps
+  // still while it does. Collected as they are built rather than queried back
+  // out of the layers: the same nodes, no selector, and nothing to go stale.
+  const marks = [];
+
   // What the focus is related to: a company lights its holders, a holder
   // lights every company they are in.
   const lit = new Set();
@@ -535,6 +554,7 @@ export function renderMap(svg, model, opts) {
       }, travel);
 
       const g = svgEl('g', { class: 'om-seat', 'data-id': p.holder }, gSeat);
+      marks.push({ node: g, x: seatAt.x, y: seatAt.y });
       svgEl('circle', {
         cx: seatAt.x, cy: seatAt.y, r: seatAt.r, fill: hueOf(p.holder),
         stroke: 'var(--surface)', 'stroke-width': 1.6,
@@ -646,6 +666,7 @@ export function renderMap(svg, model, opts) {
 
       // Where the owner stands, drawn last so the spokes run under it.
       const g = svgEl('g', { class: 'om-seat', 'data-id': focus }, gSeat);
+      marks.push({ node: g, x: seat.x, y: seat.y });
       svgEl('circle', {
         cx: seat.x, cy: seat.y, r: seat.r, fill: hueOf(focus),
         stroke: 'var(--surface)', 'stroke-width': 2,
@@ -671,6 +692,7 @@ export function renderMap(svg, model, opts) {
 
   model.placed.forEach((n) => {
     const g = svgEl('g', { class: `om-co${cls(n.ticker)}`, 'data-id': n.ticker }, gCo);
+    marks.push({ node: g, x: n.x, y: n.y });
     const r0 = n.r - BAND / 2;
     const r1 = n.r + BAND / 2;
     const mine = (byTicker.get(n.ticker) || []).slice().sort((a, b) => b.percent - a.percent);
@@ -778,6 +800,8 @@ export function renderMap(svg, model, opts) {
       class: `om-dot${cls(dot.holder, dot.ticker)}`, 'data-id': dot.holder,
       tabindex: 0, role: 'button',
     }, gDot);
+    dotEls.push(g);
+    marks.push({ node: g, x: dot.x, y: dot.y });
     svgEl('circle', {
       cx: dot.x, cy: dot.y, r: dot.r, fill: hueOf(dot.holder),
       stroke: 'var(--surface)', 'stroke-width': 1,
@@ -838,6 +862,27 @@ export function renderMap(svg, model, opts) {
   // on the water with their names on the lines, and a holder in focus has a
   // seat of their own — pinning the same names a third time beside the ring
   // said them twice over.
+
+  /* Resize every mark without redrawing the board.
+   *
+   * Each mark is scaled about the point it is anchored to — a ring about its
+   * own centre, a dot about where it sits on its ring — so positions do not
+   * move and only the marks change size. That is one attribute per mark on a
+   * wheel tick instead of a rebuild of five thousand nodes, which is the
+   * difference between a zoom that tracks the cursor and one that stutters.
+   */
+  const rescale = (k) => {
+    const m = finite(k) && k > 0 ? Math.min(1, k) : 1;
+    marks.forEach(({ node, x, y }) => {
+      if (m === 1) node.removeAttribute('transform');
+      else {
+        node.setAttribute('transform',
+          `translate(${(x * (1 - m)).toFixed(2)} ${(y * (1 - m)).toFixed(2)}) `
+          + `scale(${m.toFixed(3)})`);
+      }
+    });
+  };
+  return { rescale, marks: marks.length };
 }
 
 /* One holder's name pinned beside the ring it belongs to.

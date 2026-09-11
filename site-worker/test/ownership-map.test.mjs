@@ -558,8 +558,8 @@ test('a holder colour follows the name, not its place in a sorted list', () => {
 
 /* ── the panel around it ─────────────────────────────────────────────────── */
 
-function panel(lang = 'en') {
-  const c = new Component({});
+function panel(lang = 'en', reader = null) {
+  const c = reader || new Component({});
   Object.assign(c.state, { lang, screen: 'ownership' });
   c.setData({
     demo: false, series: [], fins: [],
@@ -568,6 +568,7 @@ function panel(lang = 'en') {
     flowTrackers: { schemaVersion: 1, sectors: [], events: [], asOf: '2026-09-10' },
     insiderPeople: published,
   });
+  panel.reader = c;
   return flowTrackers(c, c.data(), lang === 'ar').screen;
 }
 
@@ -636,4 +637,118 @@ test('a company whose only named holder has sold out keeps an empty ring', () =>
   assert.ok(gone.length > 0, 'the published file has no fully exited company to check');
   const drawn = new Set(nodesWithClass(panel(), 'om-co').map((n) => n.attrs['data-id']));
   gone.forEach((t) => assert.ok(drawn.has(t), `${t} was dropped from the board`));
+});
+
+test('zooming in draws the marks smaller, and still bigger on screen', () => {
+  // Both halves matter. A mark that kept its size grew with the board and
+  // buried the gaps a reader zoomed in to look into; a mark that shrank as
+  // fast as the board grew would make zooming do nothing at all.
+  assert.equal(OM.markFor(1), 1);
+  assert.equal(OM.markFor(0.4), 1, 'zoomed out is not a licence to grow marks');
+  for (const times of [1.4, 2, 3, 5, 7]) {
+    assert.ok(OM.markFor(times) < 1, `${times}x left the marks full size`);
+    assert.ok(times * OM.markFor(times) > 1,
+              `${times}x made the marks smaller on screen than at rest`);
+  }
+  // Monotone: further in is never bigger than less far in.
+  const ladder = [1, 1.4, 2, 3, 5, 7].map(OM.markFor);
+  ladder.forEach((v, i) => { if (i) assert.ok(v <= ladder[i - 1]); });
+});
+
+test('a rescale shrinks every company, dot and seat about its own centre', () => {
+  const { svg, model } = draw({ focus: 'AAA' });
+  const handle = OM.renderMap(svg, model, {
+    holdings: HOLDINGS,
+    bridges: [],
+    moves: null,
+    labelOf: (id) => id,
+    onPick: () => {},
+    focus: 'AAA',
+    t: (en) => en,
+    ar: false,
+  });
+  const scalable = () => ['om-co', 'om-dot', 'om-seat']
+    .flatMap((name) => nodesWithClass(svg, name));
+  assert.ok(scalable().length > 5, 'nothing on the board was collected to rescale');
+
+  handle.rescale(0.5);
+  scalable().forEach((node) => {
+    const tr = node.getAttribute('transform');
+    assert.ok(tr, `${node.attrs['data-id']} was left at full size`);
+    const [, tx, ty, k] = tr.match(
+      /translate\((-?[\d.]+) (-?[\d.]+)\) scale\(([\d.]+)\)/) || [];
+    assert.ok(k, `unreadable transform: ${tr}`);
+    // Scaling about a point p is translate(p - kp) then scale(k). Recovering
+    // p from the transform proves the mark stayed where it was drawn.
+    const k1 = Number(k);
+    assert.ok(Math.abs(k1 - 0.5) < 1e-6);
+    const px = Number(tx) / (1 - k1);
+    const py = Number(ty) / (1 - k1);
+    assert.ok(Number.isFinite(px) && Number.isFinite(py));
+    assert.ok(px >= -1 && px <= model.view.w + 1, `anchor off the board: ${px}`);
+    assert.ok(py >= -1 && py <= model.view.h + 1, `anchor off the board: ${py}`);
+  });
+
+  // And back to full size leaves nothing behind.
+  handle.rescale(1);
+  scalable().forEach((node) => assert.equal(node.getAttribute('transform'), null));
+});
+
+test('the zoom controls resize the marks, not just the frame', () => {
+  // The wiring, not the arithmetic: a rescale that the zoom never calls is a
+  // function nobody runs.
+  const view = panel();
+  const svg = all(view, 'svg').find((n) => String(n.attrs.class || '').includes('om-map'))
+    || all(view, 'svg')[0];
+  const before = nodesWithClass(svg, 'om-co')
+    .filter((n) => n.getAttribute('transform')).length;
+  assert.equal(before, 0, 'the board started out already rescaled');
+  const zoomIn = nodesWithClass(view, 'om-map-tools').flatMap((n) => all(n, 'button'))
+    .find((b) => (b.text || '') === '+');
+  assert.ok(zoomIn, 'no zoom-in control on the board');
+  zoomIn.events.click?.({ preventDefault() {}, stopPropagation() {} });
+  const after = nodesWithClass(svg, 'om-co')
+    .filter((n) => n.getAttribute('transform')).length;
+  assert.ok(after > 0, 'zooming in left every ring at full size');
+});
+
+test('a zoomed board survives the press that scopes the list below it', () => {
+  // Picking a company also scopes the disclosure list, and that is a setState
+  // — which builds this whole panel again. With the window left in the
+  // closure, a reader who zoomed in to find a company was thrown back out to
+  // the whole exchange by the act of pressing it. Focus and the week were both
+  // fixed for this reason already; this is the same bug one field along.
+  const board = panel();
+  const c = panel.reader;
+  const zoomIn = nodesWithClass(board, 'om-map-tools').flatMap((n) => all(n, 'button'))
+    .find((b) => (b.text || '') === '+');
+  zoomIn.events.click({ preventDefault() {}, stopPropagation() {} });
+  assert.ok(c.state.ownershipWin, 'zooming recorded no window on the component');
+  const zoomed = { ...c.state.ownershipWin };
+  assert.ok(zoomed.w < 1000);
+
+  // Now the panel is built again, the way a setState builds it.
+  const again = panel(undefined, c);
+  const tools = nodesWithClass(again, 'om-map-tools');
+  const level = tools.flatMap((n) => all(n, 'output'))[0];
+  assert.match(level.text || '', /1\.4×/, 'the board came back at full fit');
+  assert.equal(c.state.ownershipWin.w, zoomed.w);
+});
+
+test('no class means two different things on this panel', () => {
+  // A board member's row in the register list carried `om-seat`, which is the
+  // SVG group a holder sits in out on the water. Both rule sets applied to
+  // both: `display: grid` on a `<g>`, the board's hover on a list row. The
+  // last collision like this made every zoom control invisible for a day.
+  // Seats exist only on a focused board, and the register list only fills in
+  // when a company with a filed board is the thing in focus.
+  const withBoard = published.boards.find((b) => (b.seats || []).length > 1);
+  assert.ok(withBoard, 'the published file names no board to check');
+  const c = new Component({});
+  c.state.ownershipFocus = withBoard.ticker;
+  const view = panel('en', c);
+  const inSvg = nodesWithClass(view, 'om-seat');
+  assert.ok(inSvg.length > 0, 'no seat was drawn to check');
+  inSvg.forEach((node) => assert.equal(node.tag, 'g',
+    `a ${node.tag} is wearing the board's seat class`));
 });

@@ -33,6 +33,7 @@ class StubNode {
   // watch the shim set an attribute and never check WHICH — which is how a
   // `viewBox` hyphenated into nothing survived every chart the site drew.
   getAttribute(name) { return name in this.attrs ? this.attrs[name] : null; }
+  removeAttribute(name) { delete this.attrs[name]; }
   // `className` and `class` are the same attribute, and modules set both.
   // Kept in one place so a test reading `attrs.class` sees what a module
   // assigned through the property, and `classList` agrees with both.

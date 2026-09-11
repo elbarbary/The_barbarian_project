@@ -1,0 +1,760 @@
+{
+ "schemaVersion": 1,
+ "generated": "2026-09-11T11:56:42Z",
+ "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
+ "asOf": "2026-09-11T10:20:01+00:00",
+ "basis": "A link is one listed company's filed stake in another, at the level the last form printed. Percentages belong to one company each and are never added together; sector totals are the market value of the stakes, which is money and can be.",
+ "basisAr": "كل خط حصة مُفصح عنها لشركة مقيدة في شركة مقيدة أخرى، بالنسبة التي أثبتها آخر نموذج. النسب تخص شركة واحدة ولا تُجمع؛ إجماليات القطاعات بالقيمة السوقية للحصص، وهي مبالغ تُجمع.",
+ "linkCount": 22,
+ "outsideHolderCount": 377,
+ "links": [
+  {
+   "owner": "CANA",
+   "ownerName": "Suez Canal Bank SAE",
+   "ownerNameAr": "بنك قناة السويس",
+   "ownerSector": "Banks",
+   "ownerSectorAr": "بنوك",
+   "held": "NHPS",
+   "heldName": "National Housing for Professional Syndicates",
+   "heldNameAr": "الوطنية للاسكان للنقابات المهنية",
+   "heldSector": "Real Estate",
+   "heldSectorAr": "عقارات",
+   "holder": "بنك قناة السويس",
+   "percent": 9.7,
+   "value": 127372640.0,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291024",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340720_1.pdf"
+  },
+  {
+   "owner": "CANA",
+   "ownerName": "Suez Canal Bank SAE",
+   "ownerNameAr": "بنك قناة السويس",
+   "ownerSector": "Banks",
+   "ownerSectorAr": "بنوك",
+   "held": "SDTI",
+   "heldName": "Sharm Dreams Co. for Tourism Investment",
+   "heldNameAr": "استدراك من شارم دريمز للاستثمار السياحى",
+   "heldSector": "Travel & Leisure",
+   "heldSectorAr": "سياحة وترفيه",
+   "holder": "بنك قناة السويس",
+   "percent": 9.73,
+   "value": 374649113.7,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291439",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341134_1.pdf"
+  },
+  {
+   "owner": "FAIT",
+   "ownerName": "Faisal Islamic Bank of Egypt",
+   "ownerNameAr": "بنك فيصل الإسلامي المصري",
+   "ownerSector": "Banks",
+   "ownerSectorAr": "بنوك",
+   "held": "INFI",
+   "heldName": "Ismailia National Food Industries",
+   "heldNameAr": "الاسماعيلية الوطنية للصناعات الغذائية (فوديكو)",
+   "heldSector": "Food, Beverages and Tobacco",
+   "heldSectorAr": "أغذية و مشروبات و تبغ",
+   "holder": "بنك فيصل الاسلامى المصرى",
+   "percent": 34.72,
+   "value": 1035937949.2,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291352",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341004_1.pdf"
+  },
+  {
+   "owner": "SAUD",
+   "ownerName": "Al Baraka Bank Egypt",
+   "ownerNameAr": "بنك البركة مصر",
+   "ownerSector": "Banks",
+   "ownerSectorAr": "بنوك",
+   "held": "ATLC",
+   "heldName": "Al Tawfeek Leasing Company-A.T.LEASE",
+   "heldNameAr": "A.T.LEASE التوفيق للتأجير التمويلي -أية.تي.ليس",
+   "heldSector": "Non-bank financial services",
+   "heldSectorAr": "خدمات مالية غير مصرفية",
+   "holder": "بنك البركة - مصر",
+   "percent": 7.632,
+   "value": 219801600.0,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291259",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340950_1.pdf"
+  },
+  {
+   "owner": "GDWA",
+   "ownerName": "Gadwa For Industrial Development",
+   "ownerNameAr": "جدوى للتنمية الصناعية",
+   "ownerSector": "Industrial Goods , Services and Automobiles",
+   "ownerSectorAr": "خدمات و منتجات صناعية وسيارات",
+   "held": "UNIP",
+   "heldName": "Universal Co. for Paper & Packaging Materials-Unipack",
+   "heldNameAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
+   "heldSector": "Paper & Packaging",
+   "heldSectorAr": "ورق ومواد تعبئة و تغليف",
+   "holder": "جدوى للتنمية الصناعية",
+   "percent": 17.79,
+   "value": 156944341.25,
+   "asOf": "2026-08-25",
+   "basis": "trade",
+   "filingId": "293882",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/343441_1.pdf"
+  },
+  {
+   "owner": "AMIA",
+   "ownerName": "Arab Moltaqa Investments Company",
+   "ownerNameAr": "الملتقى العربي للاستثمارات",
+   "ownerSector": "Non-bank financial services",
+   "ownerSectorAr": "خدمات مالية غير مصرفية",
+   "held": "ATLC",
+   "heldName": "Al Tawfeek Leasing Company-A.T.LEASE",
+   "heldNameAr": "A.T.LEASE التوفيق للتأجير التمويلي -أية.تي.ليس",
+   "heldSector": "Non-bank financial services",
+   "heldSectorAr": "خدمات مالية غير مصرفية",
+   "holder": "شركة الملتقى العربي للاستثمارات",
+   "percent": 68.4177,
+   "value": 1970429760.0,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291259",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340950_1.pdf"
+  },
+  {
+   "owner": "BINV",
+   "ownerName": "B Investments Holding SAE",
+   "ownerNameAr": "بى انفستمنتس القابضة",
+   "ownerSector": "Non-bank financial services",
+   "ownerSectorAr": "خدمات مالية غير مصرفية",
+   "held": "OFH",
+   "heldName": "O B Financial Holding",
+   "heldNameAr": "أو بي المالية القابضة ش.م.م",
+   "heldSector": "Non-bank financial services",
+   "heldSectorAr": "خدمات مالية غير مصرفية",
+   "holder": "بي انفستمنتس القابضة ش.م.م B-INVESTMENTS HOLDING SAE",
+   "percent": 68.58,
+   "value": 3395099624.35,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291425",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341104_1.pdf"
+  },
+  {
+   "owner": "ODIN",
+   "ownerName": "ODIN Investments",
+   "ownerNameAr": "أودن للاستثمارات المالية",
+   "ownerSector": "Non-bank financial services",
+   "ownerSectorAr": "خدمات مالية غير مصرفية",
+   "held": "EGREF",
+   "heldName": "Egyptians Real Estate Fund",
+   "heldNameAr": "صندوق المصريين للاستثمار العقاري",
+   "heldSector": "Non-bank financial services",
+   "heldSectorAr": "خدمات مالية غير مصرفية",
+   "holder": "شركة أودن للإستثمارات المالية.",
+   "percent": 6.94,
+   "value": 35634546.95,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291442",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341139_1.pdf"
+  },
+  {
+   "owner": "SEIG",
+   "ownerName": "Saudi Egyptian Investment & Finance Co. SAE",
+   "ownerNameAr": "السعودية المصرية للاستثمار والتمويل",
+   "ownerSector": "Non-bank financial services",
+   "ownerSectorAr": "خدمات مالية غير مصرفية",
+   "held": "PHAR",
+   "heldName": "Egyptian International Pharmaceutical Industries Co.",
+   "heldNameAr": "المصرية الدولية للصناعات الدوائية - ايبيكو",
+   "heldSector": "Health Care & Pharmaceuticals",
+   "heldSectorAr": "رعاية صحية و ادوية",
+   "holder": "السعودية المصرية للإستثمار والتمويل",
+   "percent": 0.086,
+   "value": 18401025.73,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291422",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341094_1.pdf"
+  },
+  {
+   "owner": "ELKA",
+   "ownerName": "El Kahera Housing",
+   "ownerNameAr": "القاهرة للاسكان والتعمير",
+   "ownerSector": "Real Estate",
+   "ownerSectorAr": "عقارات",
+   "held": "UNIT",
+   "heldName": "United Housing Construction SA",
+   "heldNameAr": "المتحدة للاسكان والتعمير",
+   "heldSector": "Real Estate",
+   "heldSectorAr": "عقارات",
+   "holder": "شركة القاهرة للاسكان والتعمير (مجموعة مرتبطة )",
+   "percent": 23.31,
+   "value": 1015777789.96,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291030",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340734_1.pdf"
+  },
+  {
+   "owner": "MASR",
+   "ownerName": "Madinet Masr for Housing & Development",
+   "ownerNameAr": "مدينة مصر للاسكان والتعمير",
+   "ownerSector": "Real Estate",
+   "ownerSectorAr": "عقارات",
+   "held": "NCCW",
+   "heldName": "Nasr Co. for Civil Works",
+   "heldNameAr": "النصر للأعمال المدنية",
+   "heldSector": "Contracting & Construction Engineering",
+   "heldSectorAr": "مقاولات و إنشاءات هندسية",
+   "holder": "شركة مدينة مصر للإسكان والتعمير",
+   "percent": 52.456,
+   "value": 1004637312.0,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291354",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341027_1.pdf"
+  },
+  {
+   "owner": "PHDC",
+   "ownerName": "Palm Hills Development Co.",
+   "ownerNameAr": "بالم هيلز للتعمير",
+   "ownerSector": "Real Estate",
+   "ownerSectorAr": "عقارات",
+   "held": "TALM",
+   "heldName": "Taaleem Management Services S.A.E",
+   "heldNameAr": "تعليم لخدمات الإدارة",
+   "heldSector": "Education Services",
+   "heldSectorAr": "خدمات تعليمية",
+   "holder": "بالم هيلز للتعمير ش م م",
+   "percent": 32.446,
+   "value": 4286982725.85,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291103",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340724_1.pdf"
+  },
+  {
+   "owner": "PRDC",
+   "ownerName": "Pioneers Properties for Urban Development",
+   "ownerNameAr": "بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب",
+   "ownerSector": "Real Estate",
+   "ownerSectorAr": "عقارات",
+   "held": "UEGC",
+   "heldName": "El-Saeed Contracting & Real Estate Investment Co. SCCD",
+   "heldNameAr": "الصعيد العامة للمقاولات والاستثمار العقاري SCCD",
+   "heldSector": "Real Estate",
+   "heldSectorAr": "عقارات",
+   "holder": "شركة بايونيرز بروبرتيز للتنمية العمرانية بي ار اى جروب PRE Group",
+   "percent": 5.688,
+   "value": 72189561.92,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291441",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341138_1.pdf"
+  },
+  {
+   "owner": "PRDC",
+   "ownerName": "Pioneers Properties for Urban Development",
+   "ownerNameAr": "بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب",
+   "ownerSector": "Real Estate",
+   "ownerSectorAr": "عقارات",
+   "held": "UNIT",
+   "heldName": "United Housing Construction SA",
+   "heldNameAr": "المتحدة للاسكان والتعمير",
+   "heldSector": "Real Estate",
+   "heldSectorAr": "عقارات",
+   "holder": "بايونيرز بروبرتيز للتنمية العمرانية بي ار اى جروب ش م م",
+   "percent": 19.71,
+   "value": 858900911.2,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291030",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340734_1.pdf"
+  },
+  {
+   "owner": "ACGC",
+   "ownerName": "Arab Cotton Ginning Co.",
+   "ownerNameAr": "العربية لحليج الأقطان",
+   "ownerSector": "Textile & Durables",
+   "ownerSectorAr": "منسوجات و سلع معمرة",
+   "held": "SPIN",
+   "heldName": "Alexandria Spinning & Weaving",
+   "heldNameAr": "الاسكندرية للغزل والنسيج (سبينالكس)",
+   "heldSector": "Textile & Durables",
+   "heldSectorAr": "منسوجات و سلع معمرة",
+   "holder": "الشركة العربية لحليج الاقطان",
+   "percent": 1.071,
+   "value": 72553167.57,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291190",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340899_1.pdf"
+  },
+  {
+   "owner": "KABO",
+   "ownerName": "El Nasr Clothing & Textiles Co.",
+   "ownerNameAr": "النصر للملابس والمنسوجات - كابو",
+   "ownerSector": "Textile & Durables",
+   "ownerSectorAr": "منسوجات و سلع معمرة",
+   "held": "SPIN",
+   "heldName": "Alexandria Spinning & Weaving",
+   "heldNameAr": "الاسكندرية للغزل والنسيج (سبينالكس)",
+   "heldSector": "Textile & Durables",
+   "heldSectorAr": "منسوجات و سلع معمرة",
+   "holder": "شركة النصر للملابس والمنسوجات كابو",
+   "percent": 20.0,
+   "value": 1354867741.72,
+   "asOf": "2026-08-19",
+   "basis": "trade",
+   "filingId": "293605",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/343157_1.pdf"
+  },
+  {
+   "owner": "MLIC",
+   "ownerName": "Misr Life Insurance",
+   "ownerNameAr": "مصر لتأمينات الحياة",
+   "ownerSector": "Unclassified",
+   "ownerSectorAr": "Unclassified",
+   "held": "MCQE",
+   "heldName": "Misr Cement Co. (Qena)",
+   "heldNameAr": "مصر قنا للأسمنت",
+   "heldSector": "Building Materials",
+   "heldSectorAr": "مواد البناء",
+   "holder": "Misr Life Insurance Company",
+   "percent": 9.37,
+   "value": 2113872000.0,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291369",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341059_1.pdf"
+  },
+  {
+   "owner": "MLIC",
+   "ownerName": "Misr Life Insurance",
+   "ownerNameAr": "مصر لتأمينات الحياة",
+   "ownerSector": "Unclassified",
+   "ownerSectorAr": "Unclassified",
+   "held": "SAIB",
+   "heldName": "Societe Arabe Internationale de Banque",
+   "heldNameAr": "بنك الشركة المصرفية العربية الدولية شركة مساهمة مصرية",
+   "heldSector": "Finance",
+   "heldSectorAr": "Finance",
+   "holder": "شركة مصر لتأمينات الحياة (مجموعة مرتبطة )",
+   "percent": 10.27,
+   "value": 451025474.41,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291094",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340823_1.pdf"
+  },
+  {
+   "owner": "MLIC",
+   "ownerName": "Misr Life Insurance",
+   "ownerNameAr": "مصر لتأمينات الحياة",
+   "ownerSector": "Unclassified",
+   "ownerSectorAr": "Unclassified",
+   "held": "SAUD",
+   "heldName": "Al Baraka Bank Egypt",
+   "heldNameAr": "بنك البركة مصر",
+   "heldSector": "Banks",
+   "heldSectorAr": "بنوك",
+   "holder": "MISR LIFE Insurance Co.",
+   "percent": 7.27,
+   "value": 1248095778.27,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291091",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340819_1.pdf"
+  },
+  {
+   "owner": "MLIC",
+   "ownerName": "Misr Life Insurance",
+   "ownerNameAr": "مصر لتأمينات الحياة",
+   "ownerSector": "Unclassified",
+   "ownerSectorAr": "Unclassified",
+   "held": "SCTS",
+   "heldName": "Sues Canal Co. for Technology Settling",
+   "heldNameAr": "قناة السويس لتوطين التكنولوجيا",
+   "heldSector": "Education Services",
+   "heldSectorAr": "خدمات تعليمية",
+   "holder": "شركة مصر لتأمينات الحياة (مجموعة مرتبطة )",
+   "percent": 8.67,
+   "value": 4901212557.0,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291368",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341058_1.pdf"
+  },
+  {
+   "owner": "MLIC",
+   "ownerName": "Misr Life Insurance",
+   "ownerNameAr": "مصر لتأمينات الحياة",
+   "ownerSector": "Unclassified",
+   "ownerSectorAr": "Unclassified",
+   "held": "SUGR",
+   "heldName": "Delta Sugar",
+   "heldNameAr": "الدلتا للسكر",
+   "heldSector": "Food, Beverages and Tobacco",
+   "heldSectorAr": "أغذية و مشروبات و تبغ",
+   "holder": "شركة مصر لتأمينات الحياة (مجموعة مرتبطة )",
+   "percent": 9.07,
+   "value": 812534020.36,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291099",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340774_1.pdf"
+  },
+  {
+   "owner": "MLIC",
+   "ownerName": "Misr Life Insurance",
+   "ownerNameAr": "مصر لتأمينات الحياة",
+   "ownerSector": "Unclassified",
+   "ownerSectorAr": "Unclassified",
+   "held": "UNIT",
+   "heldName": "United Housing Construction SA",
+   "heldNameAr": "المتحدة للاسكان والتعمير",
+   "heldSector": "Real Estate",
+   "heldSectorAr": "عقارات",
+   "holder": "شركة مصر لتأمينات الحياة (مجموعة مرتبطة )",
+   "percent": 9.1,
+   "value": 396549887.97,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291030",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340734_1.pdf"
+  }
+ ],
+ "flows": [
+  {
+   "fromSector": "Banks",
+   "fromSectorAr": "بنوك",
+   "toSector": "Real Estate",
+   "toSectorAr": "عقارات",
+   "links": 1,
+   "value": 127372640.0,
+   "valued": 1,
+   "companies": [
+    "NHPS"
+   ]
+  },
+  {
+   "fromSector": "Banks",
+   "fromSectorAr": "بنوك",
+   "toSector": "Travel & Leisure",
+   "toSectorAr": "سياحة وترفيه",
+   "links": 1,
+   "value": 374649113.7,
+   "valued": 1,
+   "companies": [
+    "SDTI"
+   ]
+  },
+  {
+   "fromSector": "Banks",
+   "fromSectorAr": "بنوك",
+   "toSector": "Food, Beverages and Tobacco",
+   "toSectorAr": "أغذية و مشروبات و تبغ",
+   "links": 1,
+   "value": 1035937949.2,
+   "valued": 1,
+   "companies": [
+    "INFI"
+   ]
+  },
+  {
+   "fromSector": "Banks",
+   "fromSectorAr": "بنوك",
+   "toSector": "Non-bank financial services",
+   "toSectorAr": "خدمات مالية غير مصرفية",
+   "links": 1,
+   "value": 219801600.0,
+   "valued": 1,
+   "companies": [
+    "ATLC"
+   ]
+  },
+  {
+   "fromSector": "Industrial Goods , Services and Automobiles",
+   "fromSectorAr": "خدمات و منتجات صناعية وسيارات",
+   "toSector": "Paper & Packaging",
+   "toSectorAr": "ورق ومواد تعبئة و تغليف",
+   "links": 1,
+   "value": 156944341.25,
+   "valued": 1,
+   "companies": [
+    "UNIP"
+   ]
+  },
+  {
+   "fromSector": "Non-bank financial services",
+   "fromSectorAr": "خدمات مالية غير مصرفية",
+   "toSector": "Non-bank financial services",
+   "toSectorAr": "خدمات مالية غير مصرفية",
+   "links": 3,
+   "value": 5401163931.3,
+   "valued": 3,
+   "companies": [
+    "ATLC",
+    "OFH",
+    "EGREF"
+   ]
+  },
+  {
+   "fromSector": "Non-bank financial services",
+   "fromSectorAr": "خدمات مالية غير مصرفية",
+   "toSector": "Health Care & Pharmaceuticals",
+   "toSectorAr": "رعاية صحية و ادوية",
+   "links": 1,
+   "value": 18401025.73,
+   "valued": 1,
+   "companies": [
+    "PHAR"
+   ]
+  },
+  {
+   "fromSector": "Real Estate",
+   "fromSectorAr": "عقارات",
+   "toSector": "Real Estate",
+   "toSectorAr": "عقارات",
+   "links": 3,
+   "value": 1946868263.08,
+   "valued": 3,
+   "companies": [
+    "UNIT",
+    "UEGC"
+   ]
+  },
+  {
+   "fromSector": "Real Estate",
+   "fromSectorAr": "عقارات",
+   "toSector": "Contracting & Construction Engineering",
+   "toSectorAr": "مقاولات و إنشاءات هندسية",
+   "links": 1,
+   "value": 1004637312.0,
+   "valued": 1,
+   "companies": [
+    "NCCW"
+   ]
+  },
+  {
+   "fromSector": "Real Estate",
+   "fromSectorAr": "عقارات",
+   "toSector": "Education Services",
+   "toSectorAr": "خدمات تعليمية",
+   "links": 1,
+   "value": 4286982725.85,
+   "valued": 1,
+   "companies": [
+    "TALM"
+   ]
+  },
+  {
+   "fromSector": "Textile & Durables",
+   "fromSectorAr": "منسوجات و سلع معمرة",
+   "toSector": "Textile & Durables",
+   "toSectorAr": "منسوجات و سلع معمرة",
+   "links": 2,
+   "value": 1427420909.29,
+   "valued": 2,
+   "companies": [
+    "SPIN"
+   ]
+  },
+  {
+   "fromSector": "Unclassified",
+   "fromSectorAr": "Unclassified",
+   "toSector": "Building Materials",
+   "toSectorAr": "مواد البناء",
+   "links": 1,
+   "value": 2113872000.0,
+   "valued": 1,
+   "companies": [
+    "MCQE"
+   ]
+  },
+  {
+   "fromSector": "Unclassified",
+   "fromSectorAr": "Unclassified",
+   "toSector": "Finance",
+   "toSectorAr": "Finance",
+   "links": 1,
+   "value": 451025474.41,
+   "valued": 1,
+   "companies": [
+    "SAIB"
+   ]
+  },
+  {
+   "fromSector": "Unclassified",
+   "fromSectorAr": "Unclassified",
+   "toSector": "Banks",
+   "toSectorAr": "بنوك",
+   "links": 1,
+   "value": 1248095778.27,
+   "valued": 1,
+   "companies": [
+    "SAUD"
+   ]
+  },
+  {
+   "fromSector": "Unclassified",
+   "fromSectorAr": "Unclassified",
+   "toSector": "Education Services",
+   "toSectorAr": "خدمات تعليمية",
+   "links": 1,
+   "value": 4901212557.0,
+   "valued": 1,
+   "companies": [
+    "SCTS"
+   ]
+  },
+  {
+   "fromSector": "Unclassified",
+   "fromSectorAr": "Unclassified",
+   "toSector": "Food, Beverages and Tobacco",
+   "toSectorAr": "أغذية و مشروبات و تبغ",
+   "links": 1,
+   "value": 812534020.36,
+   "valued": 1,
+   "companies": [
+    "SUGR"
+   ]
+  },
+  {
+   "fromSector": "Unclassified",
+   "fromSectorAr": "Unclassified",
+   "toSector": "Real Estate",
+   "toSectorAr": "عقارات",
+   "links": 1,
+   "value": 396549887.97,
+   "valued": 1,
+   "companies": [
+    "UNIT"
+   ]
+  }
+ ],
+ "sectors": [
+  {
+   "id": "Banks",
+   "nameAr": "بنوك",
+   "companies": 12,
+   "cap": 976092684697.44,
+   "holds": 4,
+   "heldBy": 1
+  },
+  {
+   "id": "Building Materials",
+   "nameAr": "مواد البناء",
+   "companies": 11,
+   "cap": 122055677716.78,
+   "holds": 0,
+   "heldBy": 1
+  },
+  {
+   "id": "Contracting & Construction Engineering",
+   "nameAr": "مقاولات و إنشاءات هندسية",
+   "companies": 12,
+   "cap": 134642411929.68,
+   "holds": 0,
+   "heldBy": 1
+  },
+  {
+   "id": "Education Services",
+   "nameAr": "خدمات تعليمية",
+   "companies": 5,
+   "cap": 93658666463.0,
+   "holds": 0,
+   "heldBy": 2
+  },
+  {
+   "id": "Finance",
+   "nameAr": "Finance",
+   "companies": 10,
+   "cap": 56351464313.21,
+   "holds": 0,
+   "heldBy": 1
+  },
+  {
+   "id": "Food, Beverages and Tobacco",
+   "nameAr": "أغذية و مشروبات و تبغ",
+   "companies": 30,
+   "cap": 288947112551.5,
+   "holds": 0,
+   "heldBy": 2
+  },
+  {
+   "id": "Health Care & Pharmaceuticals",
+   "nameAr": "رعاية صحية و ادوية",
+   "companies": 20,
+   "cap": 190960742602.84,
+   "holds": 0,
+   "heldBy": 1
+  },
+  {
+   "id": "Industrial Goods , Services and Automobiles",
+   "nameAr": "خدمات و منتجات صناعية وسيارات",
+   "companies": 7,
+   "cap": 320396285983.42,
+   "holds": 1,
+   "heldBy": 0
+  },
+  {
+   "id": "Non-bank financial services",
+   "nameAr": "خدمات مالية غير مصرفية",
+   "companies": 32,
+   "cap": 271860845292.0,
+   "holds": 4,
+   "heldBy": 4
+  },
+  {
+   "id": "Paper & Packaging",
+   "nameAr": "ورق ومواد تعبئة و تغليف",
+   "companies": 2,
+   "cap": 1563205403.31,
+   "holds": 0,
+   "heldBy": 1
+  },
+  {
+   "id": "Real Estate",
+   "nameAr": "عقارات",
+   "companies": 32,
+   "cap": 548453605179.72,
+   "holds": 5,
+   "heldBy": 5
+  },
+  {
+   "id": "Textile & Durables",
+   "nameAr": "منسوجات و سلع معمرة",
+   "companies": 9,
+   "cap": 48558391772.97,
+   "holds": 2,
+   "heldBy": 2
+  },
+  {
+   "id": "Travel & Leisure",
+   "nameAr": "سياحة وترفيه",
+   "companies": 8,
+   "cap": 47751096660.2,
+   "holds": 0,
+   "heldBy": 1
+  },
+  {
+   "id": "Unclassified",
+   "nameAr": "Unclassified",
+   "companies": 24,
+   "cap": null,
+   "holds": 6,
+   "heldBy": 0
+  }
+ ],
+ "refused": [
+  {
+   "holder": "بنك قطر الوطني",
+   "ticker": "QNBE",
+   "why": "the filer's name is the issuer's own, which reads as a same-named parent rather than a company holding itself"
+  }
+ ]
+}

@@ -89,6 +89,10 @@ _FIRM_TOKENS_EN = {
 }
 
 
+# Words that say a name is a company, which is exactly why a name made of
+# nothing else cannot say WHICH company.
+_GENERIC_TOKENS = _FIRM_TOKENS_AR | _FIRM_TOKENS_EN
+
 # `شركة الحصن للاستشارات (مجموعة مرتبطة)` and `الحصن للاستشارات` are one firm;
 # the bracket says how the filer is related, not who they are.
 _QUALIFIER = re.compile(r"[(（][^)）]*[)）]")
@@ -118,6 +122,61 @@ def fold(name: str) -> str:
     # compares token lists would otherwise read one as longer than the other.
     text = re.sub(r"\bعبد\s+(?=\S)", "عبد", text)
     return " ".join(text.split())
+
+
+# ── is this holder one of the listed companies? ───────────────────────────────
+#
+# A different question from `name_matches`, and a stricter one. That rule asks
+# whether two FILINGS name the same party, where both come from the same kind
+# of document and a shared-token overlap is good evidence. This asks whether a
+# holder named on one company's register IS another company on the exchange —
+# a claim that puts one issuer's name on another issuer's ownership — and there
+# the overlap rule is wrong in a way that matters.
+#
+# Egyptian corporate names are a brand word followed by a legal category, and
+# the category is shared by dozens of listed companies:
+#
+#     توسع القابضة للاستثمارات المالية      Tawasoa Holding for Financial Investments
+#     راية القابضة للاستثمارات المالية      Raya  Holding for Financial Investments
+#     برايم القابضة للاستثمارات المالية     Prime Holding for Financial Investments
+#
+# Three tokens out of four are identical and the one that differs is the only
+# one that says which company it is. An overlap rule joins all three. So the
+# rule here is token-set EQUALITY after the words that say how a company is
+# incorporated are removed — and a key made of nothing but category words is
+# refused outright, which is the same defence a second time.
+_CORPORATE_NOISE = {
+    "شركه", "شركات", "الشركه", "ش", "م", "مم", "شمم", "مساهمه", "مصريه",
+    "مقفله", "ذ", "sae", "s", "a", "e", "sa", "plc", "ltd", "llc", "inc",
+    "co", "company", "limited", "of", "the", "and", "&",
+}
+_ARABIC_LETTER = re.compile(r"[\u0600-\u06ff]")
+
+
+def company_keys(name: str) -> set:
+    """Every token set that could stand for this company's identity.
+
+    Registers name foreign and local holders in both scripts at once —
+    `بي انفستمنتس القابضة ش.م.م B-INVESTMENTS HOLDING SAE` is one company
+    written twice in one field — so each script is offered as its own key and
+    either may carry the match.
+    """
+    tokens = [t for t in _fold_letters(name).split()
+              if len(t) > 1 and t not in _CORPORATE_NOISE]
+    arabic = [t for t in tokens if _ARABIC_LETTER.search(t)]
+    latin = [t for t in tokens if not _ARABIC_LETTER.search(t)]
+    keys = set()
+    for group in (tokens, arabic, latin):
+        # One word is not a corporate identity, and neither is a key made
+        # entirely of the words every holding company shares.
+        if len(group) >= 2 and any(t not in _GENERIC_TOKENS for t in group):
+            keys.add(frozenset(group))
+    return keys
+
+
+def names_one_company(a: str, b: str) -> bool:
+    """True when both names name the same listed company."""
+    return bool(company_keys(a) & company_keys(b))
 
 
 def is_firm(name: str, name_en: str | None = None) -> bool:

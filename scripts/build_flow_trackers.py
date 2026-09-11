@@ -6,7 +6,7 @@ historical share capital. Unknowns remain null; estimates are explicitly named.
 """
 import json
 import math
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,6 +18,91 @@ def number(v):
 
 def positive(v):
     return number(v) and v > 0
+
+
+# The share of a sector's companies that must have traded in a month before
+# that month is published. Price history reaches back years for a handful of
+# companies and eight months for nearly all of them: aggregated without a
+# floor, the exchange's traded value appears to grow twentyfold in August 2025,
+# which is the archive filling up and not money arriving.
+MONTH_COVERAGE_FLOOR = 0.6
+
+
+def monthly(days, member_count, as_of):
+    """A sector's traded value by calendar month, with what it was measured on.
+
+    Turnover is money changing hands, so summing a month of it is sound in a
+    way that summing a month of price moves is not — the weighted daily move
+    already exists and compounding it across a month with fixed current weights
+    would state a return this project does not claim. So months carry value,
+    the sessions behind it, and the companies that reported, and nothing else.
+    """
+    buckets = OrderedDict()
+    for date in sorted(days):
+        rows = days[date]
+        values = [b['value'] for _, b in rows if b['value'] is not None]
+        month = buckets.setdefault(date[:7], dict(month=date[:7], value=0.0,
+            sessions=0, tickers=set(), first=date, last=date,
+            upValue=0.0, downValue=0.0))
+        month['sessions'] += 1
+        month['last'] = date
+        month['value'] += sum(values)
+        month['tickers'].update(m['ticker'] for m, b in rows if b['value'] is not None)
+        month['upValue'] += sum(b['value'] or 0 for m, b in rows
+                                if number(b['change']) and b['change'] > 0)
+        month['downValue'] += sum(b['value'] or 0 for m, b in rows
+                                  if number(b['change']) and b['change'] < 0)
+    out = []
+    for month in buckets.values():
+        companies = len(month.pop('tickers'))
+        first, last = month.pop('first'), month.pop('last')
+        out.append(dict(month=month['month'], sessions=month['sessions'],
+            companies=companies,
+            coverage=round(companies / member_count * 100, 1) if member_count else None,
+            # A month the reader can only half compare: the one still running,
+            # or one the archive joins or leaves in the middle of.
+            partial=(month['month'] == (as_of or '')[:7]
+                     or int(first[8:10]) > 5 or int(last[8:10]) < 25),
+            value=round(month['value'], 2),
+            upValue=round(month['upValue'], 2),
+            downValue=round(month['downValue'], 2)))
+    return out
+
+
+def trim_months(sectors, as_of):
+    """One shared first month for every sector, and the reason it is that one.
+
+    Sectors joined the archive at different times, so trimming each to its own
+    coverage would put thirty series on one axis starting in thirty different
+    months and invite a reader to compare a full sector against a third of
+    another. The exchange's own coverage decides, once, for all of them.
+    """
+    counted = defaultdict(lambda: [0, 0])
+    for sec in sectors:
+        members = len(sec['members']) or 1
+        for month in sec.get('months', ()):
+            counted[month['month']][0] += month['companies']
+            counted[month['month']][1] += members
+    good = [m for m, (have, want) in sorted(counted.items())
+            if want and have / want >= MONTH_COVERAGE_FLOOR]
+    start = good[0] if good else None
+    for sec in sectors:
+        sec['months'] = [m for m in sec.get('months', ())
+                         if start and m['month'] >= start]
+    months = []
+    for month, (have, want) in sorted(counted.items()):
+        if start and month < start:
+            continue
+        value = sum(m['value'] for sec in sectors for m in sec['months']
+                    if m['month'] == month)
+        sessions = max((m['sessions'] for sec in sectors for m in sec['months']
+                        if m['month'] == month), default=0)
+        months.append(dict(month=month, value=round(value, 2), sessions=sessions,
+            companies=have, coverage=round(have / want * 100, 1) if want else None,
+            partial=any(m['partial'] for sec in sectors for m in sec['months']
+                        if m['month'] == month)))
+    return dict(months=months, from_=start, coverageFloor=MONTH_COVERAGE_FLOOR * 100,
+                held=sorted(m for m in counted if start and m < start))
 
 
 def build(directory, market, documents, insiders):
@@ -100,6 +185,7 @@ def build(directory, market, documents, insiders):
             for b in daily_bars:
                 days[b['date']].append((m, b))
         sec['members'].sort(key=lambda x: (x['cap'] is not None, x['cap'] or 0), reverse=True)
+        sec['months'] = monthly(days, len(members), as_of)
         for date, rows in sorted(days.items())[-130:]:
             values = [b['value'] for _, b in rows if b['value'] is not None]
             weighted = [(m['cap'], b['change']) for m, b in rows
@@ -281,6 +367,9 @@ def build(directory, market, documents, insiders):
             s['sizeWeightedReturn'] = latest.get('change')
             s['velocity'] = latest.get('turnoverToCap')
 
+    # Money by month, once the archive is deep enough to compare months.
+    months = trim_months(list(sectors.values()), as_of)
+
     # Top entities for graph visualization
     top_entity_ids = [l['source'] for l in ownership_links]
     entities_list = [named_entities_dict[eid] for eid in dict.fromkeys(top_entity_ids) if eid in named_entities_dict]
@@ -294,7 +383,7 @@ def build(directory, market, documents, insiders):
         insidersAsOf=insiders.get('asOf'), source='Published company histories and official EGX insider disclosures',
         excludedCurrencyCount=sum(p['currency'] != 'EGP' for p in profiles.values()),
         sectors=list(sectors.values()), profiles=profiles, events=events,
-        ownershipGraph=ownership_graph)
+        ownershipGraph=ownership_graph, monthly=months)
 
 
 def main():

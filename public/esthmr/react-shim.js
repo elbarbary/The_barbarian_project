@@ -8,7 +8,13 @@
  */
 const SVG = 'http://www.w3.org/2000/svg';
 const SVG_TAGS = new Set(['svg', 'path', 'line', 'g', 'defs', 'linearGradient',
-  'stop', 'circle', 'rect', 'text', 'polyline', 'polygon', 'ellipse', 'clipPath']);
+  'stop', 'circle', 'rect', 'text', 'polyline', 'polygon', 'ellipse', 'clipPath',
+  // Missing from this list, a tag is built with `createElement` — an unknown
+  // HTML element inside an SVG tree, which renders nothing and reports no
+  // error. `radialGradient` had been absent all along, so the sector map's two
+  // glow gradients were resolving to nothing every time it drew.
+  'radialGradient', 'radialgradient', 'pattern', 'animateMotion', 'title',
+  'tspan', 'marker', 'use']);
 
 // Most SVG attributes are hyphenated; the design writes them the way JSX does.
 const kebab = (name) => name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
