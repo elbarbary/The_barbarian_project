@@ -558,7 +558,7 @@ test('a holder colour follows the name, not its place in a sorted list', () => {
 
 /* ── the panel around it ─────────────────────────────────────────────────── */
 
-function panel(lang = 'en', reader = null) {
+function panel(lang = 'en', reader = null, doc = published) {
   const c = reader || new Component({});
   Object.assign(c.state, { lang, screen: 'ownership' });
   c.setData({
@@ -566,7 +566,7 @@ function panel(lang = 'en', reader = null) {
     companies: [{ ticker: 'AAA', cap: 2e10, sector: 'Banks', sectorAr: 'بنوك',
                   name: { en: 'Alpha', ar: 'ألفا' } }],
     flowTrackers: { schemaVersion: 1, sectors: [], events: [], asOf: '2026-09-10' },
-    insiderPeople: published,
+    insiderPeople: doc,
   });
   panel.reader = c;
   return flowTrackers(c, c.data(), lang === 'ar').screen;
@@ -582,15 +582,48 @@ test('the panel says a stake belongs to one company and is not added up', () => 
   assert.match(text(panel()), /percentage of ONE company/);
 });
 
+/* A document of our own, for the claims the published file cannot always show.
+ *
+ * A company whose named holders have ALL sold out is a real case and a rare
+ * one — with 232 registers read, every company on the board now carries at
+ * least one live stake, and for a while these two tests asserted against a
+ * market that happened to contain three exited companies rather than against
+ * the rule. A rule that only holds while the data is shaped a certain way is
+ * not being tested at all.
+ */
+const EXITED = {
+  schemaVersion: 1,
+  people: [{ id: 'one', name: 'one', kind: 'person', tickers: ['LIVE'], trades: [] },
+           { id: 'two', name: 'two', kind: 'firm', tickers: ['GONE'], trades: [] }],
+  positions: [
+    { holder: 'one', kind: 'person', ticker: 'LIVE', percent: 30,
+      asOf: '2026-08-20', basis: 'register' },
+    { holder: 'two', kind: 'firm', ticker: 'GONE', percent: 0,
+      asOf: '2026-08-21', basis: 'trade' },
+  ],
+  periods: [], boards: [],
+};
+
 test('the standing headline counts the companies that carry a stake, not the rings', () => {
-  // Three rings are on the board only because a named holder has since sold
-  // out of them; counting them as companies with a standing stake would state
-  // a holding that nobody has.
+  // A ring is on the board only because a named holder has since sold out of
+  // it; counting it as a company with a standing stake would state a holding
+  // that nobody has.
+  const out = text(panel('en', null, EXITED));
+  assert.match(out, /standing stakes across 1 companies/);
+  assert.match(out, /1 more a named holder has left/);
+
+  // And on the published file, where the clause belongs only if the market
+  // actually holds such a company.
   const withStake = new Set(OM.standing(published).map((p) => p.ticker)).size;
   const rings = new Set(published.positions.map((p) => p.ticker)).size;
-  const out = text(panel());
-  assert.match(out, new RegExp(`standing stakes across ${withStake} companies`));
-  assert.match(out, new RegExp(`${rings - withStake} more a named holder has left`));
+  const live = text(panel());
+  assert.match(live, new RegExp(`standing stakes across ${withStake} companies`));
+  if (rings > withStake) {
+    assert.match(live, new RegExp(`${rings - withStake} more a named holder has left`));
+  } else {
+    assert.doesNotMatch(live, /more a named holder has left/,
+                        'the clause is there with nobody to have left');
+  }
 });
 
 test('one formatter decides what a stake reads as', () => {
@@ -631,12 +664,18 @@ test('the panel draws a ring for every company a form has named a holder in', ()
 test('a company whose only named holder has sold out keeps an empty ring', () => {
   // Dropping it would say nobody ever disclosed a stake there, and would take
   // with it the week in which they left — the week a reader most wants.
+  const drawn = new Set(nodesWithClass(panel('en', null, EXITED), 'om-co')
+    .map((n) => n.attrs['data-id']));
+  assert.ok(drawn.has('GONE'), 'the exited company was dropped from the board');
+  assert.ok(drawn.has('LIVE'));
+
+  // The same of the published file, for whichever companies are in that state
+  // today — there may be none, and that is not a failure.
   const exited = new Set(published.positions.filter((p) => !p.percent).map((p) => p.ticker));
   const live = new Set(OM.standing(published).map((p) => p.ticker));
   const gone = [...exited].filter((t) => !live.has(t));
-  assert.ok(gone.length > 0, 'the published file has no fully exited company to check');
-  const drawn = new Set(nodesWithClass(panel(), 'om-co').map((n) => n.attrs['data-id']));
-  gone.forEach((t) => assert.ok(drawn.has(t), `${t} was dropped from the board`));
+  const board = new Set(nodesWithClass(panel(), 'om-co').map((n) => n.attrs['data-id']));
+  gone.forEach((t) => assert.ok(board.has(t), `${t} was dropped from the board`));
 });
 
 test('zooming in draws the marks smaller, and still bigger on screen', () => {

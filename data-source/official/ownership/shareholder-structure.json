@@ -16712,6 +16712,5300 @@
     }
    ],
    "namedWithoutAStake": []
+  },
+  "291520": {
+   "filingId": "291520",
+   "ticker": "SCFM",
+   "publishedAt": "2026-07-19T09:41:47",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341215_1.pdf",
+   "companyArabic": "شركة مطاحن ومخابز جنوب القاهرة والجيزة",
+   "asOfDate": "2026-06-30",
+   "totalShares": 6000000.0,
+   "board": [
+    {
+     "nameArabic": "لواء/ احمد ضيف محمود محمد صقر",
+     "role": "رئيس مجلس الادارة غير متفرغ",
+     "representing": "الشركة القابضة للصناعات الغذائية"
+    },
+    {
+     "nameArabic": "الاستاذ/ احمد عبده السيد سلام",
+     "role": "الرئيس التنفيذى",
+     "representing": "الشركة القابضة للصناعات الغذائية"
+    },
+    {
+     "nameArabic": "المحاسب/ مجد طاهر على عزيز",
+     "role": "عضو منتدب للشئون المالية والادارية",
+     "representing": "الشركة القابضة للصناعات الغذائية"
+    },
+    {
+     "nameArabic": "الاستاذ/ محمود محمد محمد محمد العشماوى",
+     "role": "عضو مجلس ادارة غير متفرغ",
+     "representing": null
+    },
+    {
+     "nameArabic": "المهندس/ محمود على محمود ابوسيف",
+     "role": "عضو مجلس ادارة غير متفرغ ممثل القطاع الخاص والافراد المساهمين",
+     "representing": "القطاع الخاص والافراد المساهمين"
+    },
+    {
+     "nameArabic": "الاستاذه/ ياسمين احمد ضياء الدين (شركة الاهلى للاستثمار)",
+     "role": "عضو مجلس ادارة غير متفرغ ممثل القطاع الخاص والافراد المساهمين",
+     "representing": "القطاع الخاص والافراد المساهمين"
+    },
+    {
+     "nameArabic": "السيد/ احمد السيد عبد المجيد",
+     "role": "عضو مجلس ادارة منتخب عن اتحاد المساهمين",
+     "representing": "اتحاد المساهمين"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "الشركة القابضة للصناعات الغذائية",
+     "percent": 51.0,
+     "shares": 3060000,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "محمود على محمود ابوسيف",
+     "percent": 15.0,
+     "shares": 900000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شركة الاهلى للاستثمار",
+     "percent": 12.191,
+     "shares": 731465,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "اتحاد العاملين المساهمين",
+     "percent": 10.0,
+     "shares": 600000,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291524": {
+   "filingId": "291524",
+   "ticker": "EBSC",
+   "publishedAt": "2026-07-19T10:23:00",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341221_1.pdf",
+   "companyArabic": null,
+   "asOfDate": "2026-06-30",
+   "totalShares": 522663550.0,
+   "board": [
+    {
+     "nameArabic": "أيمن محمد صبري عبد الجيد سيد",
+     "role": "رئيس مجلس الادارة",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "سيد نشأت الدسوقي كمال",
+     "role": "عضو مجلس الإدارة المنتدب",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "نشأت محمد صبري حسن سالم",
+     "role": "عضو مجلس ادارة",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "احمد كمال احمد منصور",
+     "role": "عضو مجلس الادارة المنتدب للاشراف على فروع الشركة",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "عفراء حميد عبد على الحياني",
+     "role": "عضو مجلس ادارة",
+     "representing": "نفسها"
+    },
+    {
+     "nameArabic": "وجيه سيد يحيى قناوى",
+     "role": "عضو مجلس ادارة",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "مروه احمد القرنى عبد الجيد سيد",
+     "role": "عضو مجلس ادارة",
+     "representing": "نفسها"
+    },
+    {
+     "nameArabic": "وليد احمد القرنى عبد الجيد سيد",
+     "role": "عضو مجلس ادارة",
+     "representing": "نفسه"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "شركه اصول القابضه للاستثمارات الماليه ش م م",
+     "percent": 56.75,
+     "shares": 296612368,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "اماس للاستثمار شركه الشخص الواحد ذ م م",
+     "percent": 22.35,
+     "shares": 116822429,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "حمزه محمد خميس موسي عصفور",
+     "percent": 7.27,
+     "shares": 38000000,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291613": {
+   "filingId": "291613",
+   "ticker": "MEGM",
+   "publishedAt": "2026-07-20T11:47:17",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341328_1.pdf",
+   "companyArabic": "شركة الشرق الأوسط لصناعة الزجاج",
+   "asOfDate": "2026-07-15",
+   "totalShares": 62627993.0,
+   "board": [
+    {
+     "nameArabic": "عبد الجليل بشر",
+     "role": "رئيس مجلس الإدارة",
+     "representing": "Mena Glass Holdings Limited"
+    },
+    {
+     "nameArabic": "بيتر جيمس كاربنتر",
+     "role": "عضو مجلس الإدارة",
+     "representing": "Mena Glass Holdings Limited"
+    },
+    {
+     "nameArabic": "دانيا بشر",
+     "role": "عضو مجلس الإدارة",
+     "representing": "Mena Glass Holdings Limited"
+    },
+    {
+     "nameArabic": "هايل عبدالحق بشر",
+     "role": "عضو مجلس الإدارة",
+     "representing": "Mena Glass Holdings Limited"
+    },
+    {
+     "nameArabic": "ماجد هايل عبدالحق بشر",
+     "role": "عضو مجلس الإدارة",
+     "representing": "Mena Glass Holdings Limited"
+    },
+    {
+     "nameArabic": "حاتم عبد المنعم محمد منتصر",
+     "role": "عضو مجلس الإدارة",
+     "representing": "Mena Glass Holdings Limited"
+    },
+    {
+     "nameArabic": "راميش رامان",
+     "role": "عضو مجلس الإدارة",
+     "representing": "Mena Glass Holdings Limited"
+    },
+    {
+     "nameArabic": "نهى هشام محمد أمين الغزالي",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "سامي فؤاد عبد الحق بشر",
+     "role": "عضو مجلس الإدارة",
+     "representing": "Mena Glass Holdings Limited"
+    },
+    {
+     "nameArabic": "وليد محسن عبد القادر الحناوى",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "MENA Glass Holding Limited",
+     "percent": 93.01,
+     "shares": 58250357,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "IGC HOLDINGS LIMITED",
+     "percent": 6.336,
+     "shares": 3968175,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291727": {
+   "filingId": "291727",
+   "ticker": "ISMQ",
+   "publishedAt": "2026-07-21T11:37:36",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340851_1.pdf",
+   "companyArabic": "شركة الحديد والصلب للمناجم والمحاجر",
+   "asOfDate": "2026-06-30",
+   "totalShares": 976872278.0,
+   "board": [
+    {
+     "nameArabic": "أ . د / مرتضى مراد طه العارف",
+     "role": "رئيس مجلس الإدارة – غير تنفيذي",
+     "representing": "القابضة للصناعات المعدنية"
+    },
+    {
+     "nameArabic": "مهندس / طارق كمال خليل الباجوري",
+     "role": "العضو المنتدب التنفيذي",
+     "representing": "القابضة للصناعات المعدنية"
+    },
+    {
+     "nameArabic": "محاسب / محمد عبد الظاهر سيد",
+     "role": "عضو مجلس الإدارة",
+     "representing": "القابضة للصناعات المعدنية"
+    },
+    {
+     "nameArabic": "د.ج / محمد عبد العزيز خليل",
+     "role": "عضو مجلس الإدارة",
+     "representing": "القابضة للصناعات المعدنية"
+    },
+    {
+     "nameArabic": "أ / أحمد ثابت رمضان",
+     "role": "عضو مجلس الإدارة",
+     "representing": "ممثل العاملين"
+    },
+    {
+     "nameArabic": "د/ منى عبد الحكيم رجب",
+     "role": "عضو مجلس الإدارة",
+     "representing": "مستقل"
+    },
+    {
+     "nameArabic": "د. ج / محمود علي فهمي علي",
+     "role": "عضو مجلس الإدارة",
+     "representing": "مستقل"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "القابضة للصناعات المعدنية - مساهم رئيسي",
+     "percent": 82.48124,
+     "shares": 805736398,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "النصر للتعدين - مجموعة مرتبطة",
+     "percent": 0.99437,
+     "shares": 9713701,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "292481": {
+   "filingId": "292481",
+   "ticker": "OBRI",
+   "publishedAt": "2026-08-05T10:19:19",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/342128_1.pdf",
+   "companyArabic": "العبور للاستثمار العقارى",
+   "asOfDate": "2026-06-30",
+   "totalShares": 40000000.0,
+   "board": [
+    {
+     "nameArabic": "ياسر محمود سامى عبد الحميد",
+     "role": "رئيس مجلس الادارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "كريم طارق عبد الحميد عيسى",
+     "role": "العضو المنتدب",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "تامر محمد صفى الدين حامد",
+     "role": "عضو منتدب لقطاع الإستثمار العقارى",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "وائل محمد فريد فهمى",
+     "role": "عضو منتدب لقطاع المقاولات",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "عاطف عبد الحميد غالب",
+     "role": "عضو مجلس الادارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "على مصطفى على حسن سالم",
+     "role": "عضو مجلس الادارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "مصطفى احمد عادل احمد مطاوع",
+     "role": "عضو مجلس الادارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "رهام فؤاد محمد ثنيان الغانم",
+     "role": "عضو مجلس الادارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "هالة عزيز حسن جوهر",
+     "role": "عضو مجلس الادارة",
+     "representing": "عن نفسه"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "فؤاد محمد ثنيان الغانم",
+     "percent": 46.62585,
+     "shares": 18650341,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمد اشرف عمر عمر",
+     "percent": 17.65646,
+     "shares": 7062584,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "كريم طارق عبد الحميد عيسى",
+     "percent": 6.229878,
+     "shares": 2491951,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "احمد طارق عبد الحميد عيسى",
+     "percent": 0.573865,
+     "shares": 229546,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عاطف عبد الحميد غالب الشرقاوي",
+     "percent": 0.0075,
+     "shares": 3000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمد عبد الحميد غالب الشرقاوي",
+     "percent": 1.0,
+     "shares": 400000,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": [
+    "شهد محمد عبد الحميد غالب"
+   ]
+  },
+  "291615": {
+   "filingId": "291615",
+   "ticker": "OLFI",
+   "publishedAt": "2026-07-20T11:53:19",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341364_1.pdf",
+   "companyArabic": "شركة عبور لاند للصناعات الغذائية (ش.م.م)",
+   "asOfDate": "2026-06-30",
+   "totalShares": 400000000.0,
+   "board": [
+    {
+     "nameArabic": "السيد / محمد حامد محمد ابراهيم شريف",
+     "role": "رئيس مجلس الإداره",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد / اشرف محمد حامد شريف",
+     "role": "نائب رئيس مجلس الإداره وعضو منتدب",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد / ايمن محمد حامد محمد شريف",
+     "role": "عضو مجلس إدارة منتدب",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذة/ غاده محمد حامد شريف",
+     "role": "عضو مجلس إدارة غير تنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذة / عبير محمد حامد محمد شريف",
+     "role": "عضو مجلس إدارة غير تنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد / محمد يحيي عبد الحميد",
+     "role": "عضو مجلس إدارة غير تنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد / زياد احمد موفق محمد ابراهيم",
+     "role": "عضو مجلس إدارة مستقل",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد / حازم عبد التواب احمد حسنين",
+     "role": "عضو مجلس إدارة مستقل",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد / ياسر يحيي عبد الحميد عبد ربه",
+     "role": "عضو مجلس إدارة غير تنفيذي",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "محمد حامد محمد ابراهيم شريف",
+     "percent": 21.332,
+     "shares": 85327044,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ساميه الشافعي صادق الكفراوي",
+     "percent": 3.242,
+     "shares": 12969264,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عبير محمد حامد محمد شريف",
+     "percent": 3.242,
+     "shares": 12969264,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "رشا محمد حامد محمد شريف",
+     "percent": 3.242,
+     "shares": 12969264,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "غاده محمد حامد شريف",
+     "percent": 3.242,
+     "shares": 12969264,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "اشرف محمد حامد شريف",
+     "percent": 15.86,
+     "shares": 63438690,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ايمن محمد حامد محمد شريف",
+     "percent": 11.0238,
+     "shares": 44095000,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291643": {
+   "filingId": "291643",
+   "ticker": "COPR",
+   "publishedAt": "2026-07-20T14:48:26",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341330_1.pdf",
+   "companyArabic": "شركة كوبر للاستثمار التجارى والتطوير العقارى",
+   "asOfDate": "2026-06-30",
+   "totalShares": 1576642320.0,
+   "board": [
+    {
+     "nameArabic": "ايمن ابراهيم عبد المنعم النحاس",
+     "role": "رئيس مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "هشام ابراهيم عبد المنعم النحاس",
+     "role": "نائب رئيس مجلس الادارة والعضو المنتدب",
+     "representing": null
+    },
+    {
+     "nameArabic": "محمد ابراهيم عبد المنعم النحاس",
+     "role": "عضو مجلس الادارة والعضو المنتدب لشئون الاستثمار",
+     "representing": null
+    },
+    {
+     "nameArabic": "محمد بدر محمد محمد",
+     "role": "عضو مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "سلمى عبد الرحمن حسن عبد الرحمن",
+     "role": "عضو مجلس الادارة من ذوى الخبرة",
+     "representing": null
+    },
+    {
+     "nameArabic": "مفايا مجدى حسين حلمى",
+     "role": "عضو مجلس الادارة من ذوى الخبرة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "محمد ابراهيم عبد المنعم النحاس",
+     "percent": 9.513,
+     "shares": 150000000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "هشام ابراهيم عبد المنعم النحاس",
+     "percent": 2.537,
+     "shares": 40000000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "لى لى محمد ابراهيم النحاس",
+     "percent": 11.733,
+     "shares": 185000000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "المتوكل على الله جمعة محمد ابراهيم",
+     "percent": 1.442,
+     "shares": 22739015,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291737": {
+   "filingId": "291737",
+   "ticker": "KRDI",
+   "publishedAt": "2026-07-21T12:30:23",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341427_1.pdf",
+   "companyArabic": "نهر الخير للتنميه والاستثمار الزراعى والخدمات البيئيه (ش.م.م)",
+   "asOfDate": "2026-06-30",
+   "totalShares": 2000000000.0,
+   "board": [
+    {
+     "nameArabic": "احمد محمد رفقى احمد عبد الرحيم",
+     "role": "رئيس مجلس الاداره",
+     "representing": "الشركة"
+    },
+    {
+     "nameArabic": "احمد محمد سيد",
+     "role": "نائب رئيس مجلس الادارة والعضو المنتدب",
+     "representing": "الشركة"
+    },
+    {
+     "nameArabic": "رانيا محمد اسامة محمود",
+     "role": "عضو مجلس ادارة",
+     "representing": "الشركة"
+    },
+    {
+     "nameArabic": "مدحت محمد حسن حسانين القاضي",
+     "role": "عضو مجلس ادارة",
+     "representing": "الشركة"
+    },
+    {
+     "nameArabic": "ليندا مجدى منير راغب",
+     "role": "عضو مجلس ادارة",
+     "representing": "الشركة"
+    },
+    {
+     "nameArabic": "صلاح الدين محمود ابراهيم المعداوى",
+     "role": "عضو مجلس ادارة",
+     "representing": "الشركة"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "أحمد محمد سيد",
+     "percent": 24.762,
+     "shares": 495240383,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ولاء سيد حسين محمود",
+     "percent": 0.45,
+     "shares": 9133250,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "رنا أحمد محمد سيد",
+     "percent": 0.3,
+     "shares": 6101000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "فادى امجد بسطا خليل عبدالملاك",
+     "percent": 2.7e-05,
+     "shares": 534,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": [
+    "عمار احمد محمد سيد",
+    "امجد بسطا خليل عبدالملاك"
+   ]
+  },
+  "291775": {
+   "filingId": "291775",
+   "ticker": "RACC",
+   "publishedAt": "2026-07-21T15:01:29",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341506_1.pdf",
+   "companyArabic": "راية لخدمات مراكز الاتصالات ش.م.م.",
+   "asOfDate": "2026-06-30",
+   "totalShares": 199206202.0,
+   "board": [
+    {
+     "nameArabic": "السيد / مدحت محمد إبراهيم خليل",
+     "role": "رئيس مجلس الإدارة",
+     "representing": "شركة راية القابضة للاستثمارات المالية ش.م.م."
+    },
+    {
+     "nameArabic": "السيد / أحمد مدحت محمد إبراهيم خليل",
+     "role": "نائب رئيس مجلس",
+     "representing": "شركة راية القابضة للاستثمارات المالية ش.م.م."
+    },
+    {
+     "nameArabic": "السيد/ علاء احمد فؤاد كمال الخشن",
+     "role": "عضو مجلس الادارة والرئيس التنفيذى",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد/ حسام الدين عبدالحميد سيف الدين",
+     "role": "عضو مجلس الادارة غير تنفيذي -مستقل من ذوى الخبرة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيدة/ شاهيناز محمد طلعت محمد عيسي غازى",
+     "role": "عضو مجلس الادارة غير تنفيذي -مستقل من ذوى الخبرة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيدة/ نجية محمد رفعت محمد نعسان الحراكى",
+     "role": "عضو مجلس الادارة غير تنفيذي -مستقل من ذوى الخبرة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد/ عمرو محمد سعيد ابراهيم الدسوقى",
+     "role": "عضو مجلس الادارة غير تنفيذي -مستقل من ذوى الخبرة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد/ ياسر زكى هاشم",
+     "role": "غير تنفيذي عضو مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد/ حاتم محسن محمد صبرى يوسف",
+     "role": "عضو مجلس الادارة- مستقل من ذوى الخبرة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "شركة راية القابضة للاستثمارات المالية ش.م.م.",
+     "percent": 61.71,
+     "shares": 122935909,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركه رايه للنظم ش.م.م",
+     "percent": 0.19,
+     "shares": 379569,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركه رايه للتوزيع ش.م.م",
+     "percent": 0.012,
+     "shares": 25304,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "ايهاب خليل خليفه خليفه",
+     "percent": 0.17,
+     "shares": 232023,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291824": {
+   "filingId": "291824",
+   "ticker": "EFID",
+   "publishedAt": "2026-07-22T12:29:52",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341550_1.pdf",
+   "companyArabic": "إيديتا للصناعات الغذائية",
+   "asOfDate": "2026-06-30",
+   "totalShares": 1400027312.0,
+   "board": [
+    {
+     "nameArabic": "المهندس / هاني نبيه عزيز برزي",
+     "role": "رئيس مجلس الإدارة ممثلا عن شركة كوانتم انفستمنت بي.في.",
+     "representing": "شركة كوانتم انفستمنت بي.في."
+    },
+    {
+     "nameArabic": "الأستاذ / سمير نبيه عزيز برزي",
+     "role": "نائب رئيس مجلس الإدارة ممثلا عن شركة كوانتم انفستمنت بي.في.",
+     "representing": "شركة كوانتم انفستمنت بي.في."
+    },
+    {
+     "nameArabic": "الأستاذ / منير امين فخرى عبد النور",
+     "role": "عضو مجلس الإدارة ممثلا عن شركة كوانتم انفستمنت بي.في.",
+     "representing": "شركة كوانتم انفستمنت بي.في."
+    },
+    {
+     "nameArabic": "الأستاذ/ احمد فاروق حامد غنيم",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذة/ مروة محمد كمال الدين محمد عباس",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذة / جيهان ممدوح محمد صالح",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "الاستاذ / شريف هشام محمد الخولي",
+     "role": "عضو مجلس الاداره",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "Quantum Investment B. V ( عضو مجلس اداره)",
+     "percent": 48.75,
+     "shares": 682523990,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "RIMCO E G T INVESTMENT L L C",
+     "percent": 10.08,
+     "shares": 141127054,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "KINGSWAY FUND FRONTIER CONSUMER FRANCHISES",
+     "percent": 4.15,
+     "shares": 58220302,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "KINGSWAY FUND FRONTIER CONSUMER FRANCHISES EXTOBA",
+     "percent": 0.82,
+     "shares": 11504159,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291623": {
+   "filingId": "291623",
+   "ticker": "ETEL",
+   "publishedAt": "2026-07-20T12:34:45",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341389_1.pdf",
+   "companyArabic": "المصرية للاتصالات",
+   "asOfDate": "2026-06-30",
+   "totalShares": 1707071600.0,
+   "board": [
+    {
+     "nameArabic": "Lobna Mohamed Helal Abdel Kader Khalil",
+     "role": "Chairman",
+     "representing": "The State"
+    },
+    {
+     "nameArabic": "Tamer Mokhtar Ahmed El Mahdy",
+     "role": "Managing Director & CEO",
+     "representing": "The State"
+    },
+    {
+     "nameArabic": "Ahmed Saied Yousif Abdel Rahman",
+     "role": "Member",
+     "representing": "The State"
+    },
+    {
+     "nameArabic": "Tarek Mohamed Mohy- Eldin Abdel Aziz Abo Alaam",
+     "role": "Member",
+     "representing": "The State"
+    },
+    {
+     "nameArabic": "Tarek Mohamed Salah Eldin Mohamed Tantawy",
+     "role": "Member",
+     "representing": "The State"
+    },
+    {
+     "nameArabic": "Hany Ahmed Mgady Mohamed Al Samraa",
+     "role": "Member",
+     "representing": "The State"
+    },
+    {
+     "nameArabic": "Islam Osama Bahgat Zekry",
+     "role": "Member",
+     "representing": "The State"
+    },
+    {
+     "nameArabic": "Mohamed Hanafy Abdel Moneim Abdel Hamid",
+     "role": "Member",
+     "representing": "Labor Representative"
+    },
+    {
+     "nameArabic": "Mohamed Kamal Eldin Barakat",
+     "role": "Member",
+     "representing": "Independent"
+    },
+    {
+     "nameArabic": "Akef Abdel Latif El Maghrabi",
+     "role": "Member",
+     "representing": "Independent"
+    },
+    {
+     "nameArabic": "Hossam Abdelhamid Seifeldin",
+     "role": "Member",
+     "representing": "Independent"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "The State",
+     "percent": 70,
+     "shares": 1194951831,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291747": {
+   "filingId": "291747",
+   "ticker": "EPPK",
+   "publishedAt": "2026-07-21T13:12:28",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341423_1.pdf",
+   "companyArabic": "الأهرام للطباعة والتغليف",
+   "asOfDate": "2026-06-30",
+   "totalShares": 8320000.0,
+   "board": [
+    {
+     "nameArabic": "السيد / عبد الله بن علي بن عبد الله الغامدي",
+     "role": "رئيس مجلس الإدارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "السيد / نسيم محي الدين عرفات الجلاد",
+     "role": "عضو مجلس الإدارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "السيد / أحمد عزت عبدالعزيز عبدالمجيد",
+     "role": "عضو مجلس إدارة من ذوي الخبرة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "السيدة / ارجوان بنت عبد الله بن علي الغامدي",
+     "role": "عضو مجلس إدارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "السيدة / شيماء وفقي شوقي",
+     "role": "عضو مجلس إدارة من ذوي الخبرة",
+     "representing": "عن نفسه"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "عبدالله بن علي بن عبدالله",
+     "percent": 3.4,
+     "shares": 283421,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "نسيم محي الدين عرفات",
+     "percent": 0.6,
+     "shares": 50000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "علي نسيم محي الدين عرفات",
+     "percent": 16.59,
+     "shares": 1380345,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمود حسن جاب الله حسان",
+     "percent": 5.46,
+     "shares": 455015,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمد محمود حسن جاب الله",
+     "percent": 4.41,
+     "shares": 367236,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "سامح محمود حسن جاب الله",
+     "percent": 1.47,
+     "shares": 122394,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "سيف محمود حسن جاب الله",
+     "percent": 12.93,
+     "shares": 1076338,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "حازم محمود حسن جاب الله",
+     "percent": 1.03,
+     "shares": 85917,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "293437": {
+   "filingId": "293437",
+   "ticker": "ASPI",
+   "publishedAt": "2026-08-18T09:09:40",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/343023_1.pdf",
+   "companyArabic": "اسباير كابيتال القابضة للاستثمارات المالية",
+   "asOfDate": "2026-06-30",
+   "totalShares": 2000000000.0,
+   "board": [
+    {
+     "nameArabic": "السيدة / هناء محمد جمال احمد الهلالي",
+     "role": "رئيس مجلس الإدارة",
+     "representing": "شركة وزاكي م م ح"
+    },
+    {
+     "nameArabic": "السيد/ مصطفي ابراهيم حسين ابراهيم فوزي",
+     "role": "عضو منتدب",
+     "representing": "شركة وزاكي م م ح"
+    },
+    {
+     "nameArabic": "السيد/ عبدالمنعم علي محمد عمران",
+     "role": "عضو منتدب للاستثمار",
+     "representing": "شركة وزاكي م م ح"
+    },
+    {
+     "nameArabic": "السيد / محمود حسين لطفي عبد العزيز الخشاب",
+     "role": "عضو مجلس الادارة",
+     "representing": "شركة وزاكي م م ح"
+    },
+    {
+     "nameArabic": "السيد/ يحيي شحاته علي الديب",
+     "role": "عضو مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد/ ابراهيم محمد حلمي ابراهيم",
+     "role": "عضو مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيدة/ بسنت حسين حسني عيد",
+     "role": "عضو مجلس الادارة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "أ/ وليد محمد زكي",
+     "percent": 27.81,
+     "shares": 556271393,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ حسام محمد زكي",
+     "percent": 4.008,
+     "shares": 80161150,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ ياسر محمد زكي",
+     "percent": 0.93,
+     "shares": 18670981,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ محمد وليد محمد زكي",
+     "percent": 0.004,
+     "shares": 89318,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ عمر وليد محمد زكي",
+     "percent": 5e-05,
+     "shares": 1000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ نور وليد محمد زكي",
+     "percent": 5e-05,
+     "shares": 1000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "وزاكي م م ح",
+     "percent": 0.57,
+     "shares": 11471500,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "بلتون ذو العائد التراكمي للاستثمار في أسهم مؤشر EGX100",
+     "percent": 5.33,
+     "shares": 106559712,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291605": {
+   "filingId": "291605",
+   "ticker": "ETRS",
+   "publishedAt": "2026-07-20T11:03:21",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341340_1.pdf",
+   "companyArabic": "الشركة المصرية لخدمات النقل والتجارة (إيجيترانس نوسكو)",
+   "asOfDate": "2026-06-30",
+   "totalShares": 224949817.0,
+   "board": [
+    {
+     "nameArabic": "الأستاذ/ ماجد شوقي سوريال",
+     "role": "رئيس مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "المهندسة / عبير وائل صديق لهيطه",
+     "role": "العضو المنتدب للخدمات المشتركة",
+     "representing": null
+    },
+    {
+     "nameArabic": "المهندس / محمد مازن نديم",
+     "role": "العضو المنتدب للشئون التجارية والعمليات",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذ / سامر عبد الفتاح محمد الوزيري",
+     "role": "عضو مجلس إدارة",
+     "representing": "بشخصه"
+    },
+    {
+     "nameArabic": "الأستاذة / نعمت جمال الدين أحمد العطيفي",
+     "role": "عضو مجلس إدارة",
+     "representing": "بشخصه"
+    },
+    {
+     "nameArabic": "الأستاذ / نهاد أبو الفضل سليمان أبو الفضل",
+     "role": "عضو مجلس إدارة",
+     "representing": "بشخصه"
+    },
+    {
+     "nameArabic": "المهندس / محمد حاتم شوقي توكل",
+     "role": "عضو مجلس إدارة",
+     "representing": "بشخصه"
+    },
+    {
+     "nameArabic": "المهندس / على عبد الله على عبد الله",
+     "role": "عضو مجلس إدارة",
+     "representing": "بشخصه"
+    },
+    {
+     "nameArabic": "الأستاذ / فتحى نادى سيد عبد العزيز",
+     "role": "عضو مجلس إدارة",
+     "representing": "ممثل بنك الإستثمار القومي"
+    },
+    {
+     "nameArabic": "الأستاذة/ نهاد فاروق فؤاد مكي",
+     "role": "عضو مجلس إدارة",
+     "representing": "ممثل بنك الإستثمار القومي"
+    },
+    {
+     "nameArabic": "الأستاذ / أشرف مجدى محمد",
+     "role": "عضو مجلس إدارة",
+     "representing": "ممثل بنك الإستثمار القومي"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "بنك الاستثمار القومي",
+     "percent": 18.3,
+     "shares": 41184534,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "بهي الدين أنور عبد الحليم البارودي",
+     "percent": 5.97,
+     "shares": 13422927,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمد طارق ماجد نديم",
+     "percent": 3.98,
+     "shares": 8944144,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شيرين عيسي حامد عليش",
+     "percent": 3.1,
+     "shares": 6979944,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شهيرة محمد مجدي إبراهيم",
+     "percent": 2.98,
+     "shares": 6707593,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "بهيرة محمد مجدي إبراهيم",
+     "percent": 2.98,
+     "shares": 6707593,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "حامد عيسى حامد عليش",
+     "percent": 2.82,
+     "shares": 6348038,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمد مازن نديم محمد",
+     "percent": 2.75,
+     "shares": 6183070,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شيرين ماجد نديم محمد",
+     "percent": 1.99,
+     "shares": 4478783,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "انجي مازن نديم محمد",
+     "percent": 1.38,
+     "shares": 3094857,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "دينا مازن نديم محمد",
+     "percent": 1.37,
+     "shares": 3083671,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مازن نديم محمد محمد",
+     "percent": 0.47,
+     "shares": 1061328,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شادية فتحي المسلمي",
+     "percent": 0.04,
+     "shares": 94922,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "سهير احمد زكي",
+     "percent": 0.003,
+     "shares": 6063,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عبير وائل صديق لهيطه",
+     "percent": 3.31,
+     "shares": 7454380,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "هبه وائل صديق لهيطه",
+     "percent": 2.94,
+     "shares": 6625920,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أماني وائل صديق لهيطه",
+     "percent": 1.5,
+     "shares": 3380440,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291668": {
+   "filingId": "291668",
+   "ticker": "CAED",
+   "publishedAt": "2026-07-21T09:18:52",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341432_1.pdf",
+   "companyArabic": "القاهرة للخدمات التعليمية",
+   "asOfDate": "2026-07-18",
+   "totalShares": 12000000.0,
+   "board": [
+    {
+     "nameArabic": "د/ حسن حسن القلا",
+     "role": "رئيس مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "ا/ محمد حسن القلا",
+     "role": "نائب رئيس مجلس ادارة",
+     "representing": "سيرا للتعليم"
+    },
+    {
+     "nameArabic": "ا/ سارة حسن القلا",
+     "role": "العضو المنتدب",
+     "representing": null
+    },
+    {
+     "nameArabic": "م/ مازن حسن القلا",
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "د/ دينا احمد اسماعيل",
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "ا/ ليلى محمد حافظ",
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "ا/مالك ايهاب سلطان",
+     "role": "عضو مستقل",
+     "representing": null
+    },
+    {
+     "nameArabic": "د / احمد رافت حسين",
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "القاهرة للاستثمار والتنمية العقارية سيرا للتعليم",
+     "percent": 69.4,
+     "shares": 8329190,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291777": {
+   "filingId": "291777",
+   "ticker": "ARVA",
+   "publishedAt": "2026-07-21T15:05:26",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341508_1.pdf",
+   "companyArabic": "الشركة العربية للصناعات المعدنية والإستثمارات الصناعية ش.م.م (الشركة العربية للمحابس سابقاً)",
+   "asOfDate": "2026-06-30",
+   "totalShares": 74942787.0,
+   "board": [
+    {
+     "nameArabic": "محمد محمد سمير عبد الفتاح البربري",
+     "role": "رئيس مجلس الإدارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "محمد أحمد عبد الوهاب محمد",
+     "role": "عضو منتدب",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "ماجد بن مازن بن محمد",
+     "role": "عضو",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "معتز جمعة كامل محمد",
+     "role": "عضو",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "أحمد محمد محمد عاطف قديح",
+     "role": "عضو",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "وليد محمد كمال أحمد الصاوي",
+     "role": "عضو",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "خالد بن مازن بن محمد السعيد",
+     "role": "عضو",
+     "representing": "عن نفسه"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "مازن بن محمد بن عبد الرحمن السعيد",
+     "percent": 20.09,
+     "shares": 15057130,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ماجد بن مازن بن محمد",
+     "percent": 1.92,
+     "shares": 1439240,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "الثغر للتجارة والإنشاءات",
+     "percent": 6.29,
+     "shares": 4717198,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "أحمد علي علي الجمل",
+     "percent": 2.53,
+     "shares": 1895614,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مازن محمود علي الجمل",
+     "percent": 1.57,
+     "shares": 1176500,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "الجمل للاستثمارات والتنمية",
+     "percent": 1.42,
+     "shares": 1060897,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "سلمى أحمد علي الجمل",
+     "percent": 0.05,
+     "shares": 34000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمد علي علي الجمل",
+     "percent": 0.01,
+     "shares": 7999,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "علي أحمد علي الجمل",
+     "percent": 0.01,
+     "shares": 5000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمد شرف الدين جمعة",
+     "percent": 8.51,
+     "shares": 6378143,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عمر محمد شرف الدين جمعة",
+     "percent": 0.36,
+     "shares": 272571,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "جهاد السيد صابر السيد",
+     "percent": 4.87,
+     "shares": 3650000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "تولين السيد صابر السيد",
+     "percent": 1.81,
+     "shares": 1355000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شركة دراية المالية — مساهمة مقفلة",
+     "percent": 10.01,
+     "shares": 7504124,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": [
+    "مروان محمود علي الجمل",
+    "محمود علي علي الجمل",
+    "السيد صابر السيد"
+   ]
+  },
+  "291625": {
+   "filingId": "291625",
+   "ticker": "EAST",
+   "publishedAt": "2026-07-20T12:39:11",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341395_1.pdf",
+   "companyArabic": "الشركة الشرقية \" ايسترن كومبانى \"",
+   "asOfDate": "2026-06-30",
+   "totalShares": 3000000000.0,
+   "board": [
+    {
+     "nameArabic": "السيد المهندس / تامر عبد العزيز جادهللا",
+     "role": "رئيس مجلس االداره – غير تنفيذي",
+     "representing": "مستقل"
+    },
+    {
+     "nameArabic": "السيد االستاذ / هانى أمان حسين عطية",
+     "role": "الرئيس التنفيذي والعضو المنتدب",
+     "representing": "غلوبال لالستثمارات القابضه المحدوده"
+    },
+    {
+     "nameArabic": "السيد االستاذ / احمد سعد الليثي ناصف",
+     "role": "غير تنفيذي",
+     "representing": "غلوبال لالستثمارات القابضه المحدوده"
+    },
+    {
+     "nameArabic": "السيد الدكتور/عالء الدين حسن مصطفي",
+     "role": "غير تنفيذي",
+     "representing": "غلوبال لالستثمارات القابضه المحدوده"
+    },
+    {
+     "nameArabic": "السيد االستاذ / سامح أحمد سيد خضير",
+     "role": "غير تنفيذي",
+     "representing": "الشركة القــــــــابضة للصناعات الكيماوية"
+    },
+    {
+     "nameArabic": "السيد الدكتور/ محمدغازي صابر إبراهيم",
+     "role": "غير تنفيذي",
+     "representing": "الشركة القابضة للصناعات الكيماوية"
+    },
+    {
+     "nameArabic": "السيد االستاذ / جمال محمد صالح",
+     "role": "غير تنفيذى",
+     "representing": "منتخب /مستقل"
+    },
+    {
+     "nameArabic": "السيد االستاذ / سميح محمد بهجت",
+     "role": "غير تنفيذي",
+     "representing": "منتخب /مستقل"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "جلوبال لالستثمار القابضه",
+     "percent": 30.0,
+     "shares": 899999999,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "االريج العالميه لالستثمار (م. مرتبطه)",
+     "percent": 0.0033,
+     "shares": 100000,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "صندوق تامين العاملين بالشركه الشرقيه – مرتبطه",
+     "percent": 0.00498,
+     "shares": 149411,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "الشركة القابضة للصناعات الكيماوية",
+     "percent": 20.95,
+     "shares": 628587443,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "صناديق استثمار ALLAN GRAY",
+     "percent": 5.63,
+     "shares": 168706389,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "FIDELITY INVESTMENTS FZC",
+     "percent": 5.2,
+     "shares": 156101827,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291767": {
+   "filingId": "291767",
+   "ticker": "PHTV",
+   "publishedAt": "2026-07-21T14:37:18",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341336_1.pdf",
+   "companyArabic": "بيراميزا للفنادق والقري السياحية",
+   "asOfDate": "2026-06-30",
+   "totalShares": 25350000.0,
+   "board": [
+    {
+     "nameArabic": "مجدي محمد محمود عزب",
+     "role": "رئيس مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "محمد مجدي محمد عزب",
+     "role": "نائب رئيس مجلس الادارة للشئون المالية",
+     "representing": null
+    },
+    {
+     "nameArabic": "اسلام ناجي محمد عزب",
+     "role": "عضو مجلس ادارة للشئون الفندقية",
+     "representing": null
+    },
+    {
+     "nameArabic": "امل محمد محمود عزب",
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "هيام محمد محمود عزب",
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "محمود محمود عزب",
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "شهيرة محمد مجدي زيد",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة إم زد للاستثمارات"
+    },
+    {
+     "nameArabic": "احمد شريف عزت الاعصر",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة مصر للاستثمار العقاري والسياحي"
+    },
+    {
+     "nameArabic": "مختار توفيق عباس ندا",
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "علي عبد المجيد محمد غنيم",
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "مجدي محمد محمود عزب",
+     "percent": 14.23,
+     "shares": 3608890,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شركة إم زد للإستثمارات",
+     "percent": 9.8,
+     "shares": 2486293,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركة مصر للإستثمار العقاري",
+     "percent": 11.27,
+     "shares": 2857552,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "محمد رشدي محمود حسني",
+     "percent": 11.06,
+     "shares": 2804100,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "إسلام ناجي محمد عزب",
+     "percent": 5.63,
+     "shares": 1428937,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "سيف الله ناجي محمد عزب",
+     "percent": 5.18,
+     "shares": 1313570,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "هيام محمد محمود عزب",
+     "percent": 3.48,
+     "shares": 882640,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أمل محمد محمود عزب",
+     "percent": 4.6,
+     "shares": 1167659,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمد مجدي محمد عزب",
+     "percent": 2.078,
+     "shares": 527000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عمر مجدي محمد عزب",
+     "percent": 2.068,
+     "shares": 524400,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "خالد مجدي محمد عزب",
+     "percent": 2.078,
+     "shares": 527000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "دينا عمرو إبراهيم الدسوقي",
+     "percent": 1.56,
+     "shares": 395746,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أحمد حازم عبد الستار",
+     "percent": 1.49,
+     "shares": 378026,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ياسمين عمرو احمد حسن",
+     "percent": 0.118,
+     "shares": 29989,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "حبيبة ناجي محمد محمود عزب",
+     "percent": 2.47,
+     "shares": 627119,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عزه عبد الجليل بدوي",
+     "percent": 1.38,
+     "shares": 350856,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عادل خالد مجدي محمد عزب",
+     "percent": 0.051,
+     "shares": 13000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "علي عمر مجدي محمد عزب",
+     "percent": 0.051,
+     "shares": 13000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "كريم محمد مجدي محمد عزب",
+     "percent": 0.051,
+     "shares": 13000,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291815": {
+   "filingId": "291815",
+   "ticker": "RAYA",
+   "publishedAt": "2026-07-22T10:00:24",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341551_1.pdf",
+   "companyArabic": "راية القابضة للاستثمارات المالية ش.م.م.",
+   "asOfDate": "2026-06-30",
+   "totalShares": 4281297768.0,
+   "board": [
+    {
+     "nameArabic": "مدحت محمد إبراهيم خليل",
+     "role": "رئيس مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "محمد هوا",
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "أشرف محمود عبده خير الدين",
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "أحمد مدحت محمد إبراهيم خليل",
+     "role": "العضو المنتدب",
+     "representing": null
+    },
+    {
+     "nameArabic": "حامد محمود حامد محمود شمه",
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "عمرو محمد أحمد الطويل",
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "هند مدحت محمد إبراهيم خليل",
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "سيف الله قطري سعدي حسن قطري",
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "أحمد علاء الدين علي الجندي",
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "عمرو إبراهيم محمد أبو عش",
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "نهى هشام محمد أمين الغزالي",
+     "role": "عضو مجلس إدارة مستقل",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "الفرعونيه للاستثمار العقاري مني خير الدين و شركاه",
+     "percent": 26.59,
+     "shares": 1138385260,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "مني محمود عبده خير الدين",
+     "percent": 6.1,
+     "shares": 261069894,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مدحت محمد إبراهيم خليل",
+     "percent": 17.05,
+     "shares": 729888306,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "احمد مدحت محمد ابراهيم خليل",
+     "percent": 3.03,
+     "shares": 129676980,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "هند مدحت محمد ابراهيم خليل",
+     "percent": 1.72,
+     "shares": 73776080,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "هاني محمد ابراهيم خليل",
+     "percent": 0.19,
+     "shares": 8000000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمود حامد محمود حامد محمود شمه",
+     "percent": 0.47,
+     "shares": 20086704,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مدحت حامد محمود حامد محمود شمه",
+     "percent": 0.47,
+     "shares": 20086702,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "حامد محمود حامد محمود شمه",
+     "percent": 0.44,
+     "shares": 19005652,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ياسمين ايمن عبدالعزيز حسن سعودي",
+     "percent": 0.1,
+     "shares": 4248660,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "سليم احمد مدحت محمد ابراهيم خليل",
+     "percent": 0.1,
+     "shares": 4248660,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "منصور احمد مدحت محمد ابراهيم خليل",
+     "percent": 0.1,
+     "shares": 4248660,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عبدالعزيز ايمن عبدالعزيز حسن سعودي",
+     "percent": 0.1,
+     "shares": 4248660,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "نايف بن عبدالله بن سليمان الراجحي",
+     "percent": 12.07,
+     "shares": 516650760,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أشرف محمود عبده خير الدين",
+     "percent": 10.63,
+     "shares": 454919702,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "TRIANGLE ENERGY INTERNATIONAL LIMITED",
+     "percent": 5.96,
+     "shares": 255000000,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "ناديه هانم عبد العزيز سعيد",
+     "percent": 0.65,
+     "shares": 27805400,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291852": {
+   "filingId": "291852",
+   "ticker": "NAPR",
+   "publishedAt": "2026-07-26T09:12:35",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341565_1.pdf",
+   "companyArabic": "شركة الوطنية للطباعة",
+   "asOfDate": "2026-06-30",
+   "totalShares": 215338669.0,
+   "board": [
+    {
+     "nameArabic": "مهندس / ابراهيم محمد المعلم",
+     "role": "رئيس مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "الاستاذ / شريف ابراهيم المعلم",
+     "role": "العضو المنتدب",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيدة / اميرة احمد كمال ابو المجد",
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "دكتور / احمد محمد حسنين هيكل",
+     "role": "عضو مجلس ادارة",
+     "representing": "برنتنج برس ليمتد"
+    },
+    {
+     "nameArabic": "السيدة / ماريان رمزى غالي",
+     "role": "عضو مجلس ادارة",
+     "representing": "برنتنج برس ليمتد"
+    },
+    {
+     "nameArabic": "السيد / محمد هوا",
+     "role": "عضو مجلس ادارة",
+     "representing": "فاينانشال هولدنج ليمتد"
+    },
+    {
+     "nameArabic": "السيد / نادر صالح الدخيل",
+     "role": "عضو مجلس ادارة",
+     "representing": "فاينانشال هولدنج ليمتد"
+    },
+    {
+     "nameArabic": "السيد / هشام سعد مكاوي",
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "الاستاذ / عادل محمد عبد الشافي اللبان",
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "برنتينج برس ليمتد",
+     "percent": 26.75,
+     "shares": 57602440,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "فاينانشال هولدينج انترناشيونال ليمتد",
+     "percent": 23.162,
+     "shares": 49877330,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "ابراهيم محمد المعلم",
+     "percent": 21.848,
+     "shares": 47046750,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "المجموعة المرتبطة - دار الشروق",
+     "percent": 1.685,
+     "shares": 3628289,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شريف ابراهيم المعلم",
+     "percent": 10.93,
+     "shares": 23537490,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عمران بن محمد بن عبدالرحمن العمران",
+     "percent": 8.776,
+     "shares": 18898410,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291521": {
+   "filingId": "291521",
+   "ticker": "ELKA",
+   "publishedAt": "2026-07-19T09:44:41",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341216_1.pdf",
+   "companyArabic": "القاهرة للاسكان والتعمير",
+   "asOfDate": "2026-06-30",
+   "totalShares": 1856764556.0,
+   "board": [
+    {
+     "nameArabic": "السيد / ياسر محمد زكي ابراهيم",
+     "role": "رئيس مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد / وليد محمد زكي ابراهيم",
+     "role": "عضو مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد / احمد محمد مصطفي سليمان القـدري",
+     "role": "الرئيس التنفيذي والعضو المنتدب",
+     "representing": "شركة بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب ( PRE GROUP )"
+    },
+    {
+     "nameArabic": "السيد / احمد مجاهد ذكي محمد مجاهد",
+     "role": "العضو المنتدب للشئون المالية والادارية",
+     "representing": "شركة بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب ( PRE GROUP )"
+    },
+    {
+     "nameArabic": "السيد / عبدالعزيز ابراهيم عبدالعزيز حسين",
+     "role": "عضو مجلس الادارة المشرف علي قطاع متابعة الاعمال",
+     "representing": "شركة وادى للاستشارات"
+    },
+    {
+     "nameArabic": "السيد / خالد عبدالعال عبدالحافظ",
+     "role": "عضو مجلس الادارة",
+     "representing": "شركة بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب ( PRE GROUP )"
+    },
+    {
+     "nameArabic": "الاستاذة / نور وليد محمد زكي",
+     "role": "عضو مجلس الادارة",
+     "representing": "شركة بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب ( PRE GROUP )"
+    },
+    {
+     "nameArabic": "الاستاذة / فريدة محمود جابر محمود المغربي",
+     "role": "عضو مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد / عصام عرفات عبدالحميد حلاوة",
+     "role": "عضو مجلس الادارة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "شركة بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب ( PRE GROUP ) ش . م . م",
+     "percent": 31.5,
+     "shares": 584894641,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركة وادى للاستشارات ش.م.م",
+     "percent": 27.42,
+     "shares": 509206488,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركة مشارق للاستثمار العقارى ش . م .م",
+     "percent": 15,
+     "shares": 278562499,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركة سمو للاستشارات ش . م . م",
+     "percent": 1.08,
+     "shares": 20166999,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291703": {
+   "filingId": "291703",
+   "ticker": "GOUR",
+   "publishedAt": "2026-07-21T10:40:12",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341457_1.pdf",
+   "companyArabic": "جورمية إيجيبت دوت كوم للأغذية ش.م.م",
+   "asOfDate": "2026-06-30",
+   "totalShares": 400000000.0,
+   "board": [
+    {
+     "nameArabic": "مايكل ستيوارت رايت",
+     "role": "رئيس مجلس إدارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "مصطفى عبدالسلام مصطفى الأنور",
+     "role": "نائب رئيس مجلس الإدارة",
+     "representing": "شركة بي انفرستمنتس القابضة"
+    },
+    {
+     "nameArabic": "شادي سامي ابو سعد",
+     "role": "عضو مجلس إدارة منتدب",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "محمد حازم عادل محمد فتح الله بركات",
+     "role": "عضو مجلس الإدارة",
+     "representing": "شركة بي انفرستمنتس القابضة"
+    },
+    {
+     "nameArabic": "يحيي أحمد حسين عبد المجيد عمر",
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة بي انفرستمنتس القابضة"
+    },
+    {
+     "nameArabic": "داليا فؤاد محمد سلطان سلام",
+     "role": "عضو مجلس إدارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "محمد شهاب الدين محمد عاطف النواوي",
+     "role": "عضو مجلس إدارة مستقل",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "داليا فوزي وهبه سليمان",
+     "role": "عضو مجلس إدارة مستقل",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "كريم حامد الشيتي محمد على الشيتي",
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة ترافكو جروب انترناشيونال القابضة ش.م.م"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "بي انفستمنتس القابضه ش م م B INVESTMENTS HOLDING SAE",
+     "percent": 40,
+     "shares": 160000000,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "محمد حازم عادل محمد فتح الله بركات",
+     "percent": 0.311802,
+     "shares": 1247209,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ناديه محمد قنديل",
+     "percent": 0.25,
+     "shares": 1000000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "احمد حسين عبد المجيد عمر",
+     "percent": 0.195035,
+     "shares": 780140,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "يحيي احمد حسين عبد المجيد عمر",
+     "percent": 0.101622,
+     "shares": 406486,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مصطفي عبد السلام مصطفي الانور",
+     "percent": 0.075,
+     "shares": 300000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عمر محمد حازم عادل بركات",
+     "percent": 0.059585,
+     "shares": 238341,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمد عبد المنعم عبد الفتاح محمد عمران",
+     "percent": 0.038568,
+     "shares": 154270,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عاليه رفيق محمد الدفراوي",
+     "percent": 0.036232,
+     "shares": 144928,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "انسي نجيب انسي ساويرس",
+     "percent": 0.03602,
+     "shares": 144079,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مني محمد محمود عثمان",
+     "percent": 0.036232,
+     "shares": 144928,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "فؤاد محمد ثنيان الغانم",
+     "percent": 0.03125,
+     "shares": 125000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ترافكو جروب انترناشيونال القابضه ش م م",
+     "percent": 10.01625,
+     "shares": 40065000,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "جلال أبو غزالة JALAL ABU GAZALEH",
+     "percent": 5.962291,
+     "shares": 23849162,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "باسم خليل محمود ابو غزاله",
+     "percent": 3.696618,
+     "shares": 14786470,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "امجد فؤاد محمد سلطان سلام",
+     "percent": 1.372926,
+     "shares": 5491704,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ديمه باسم خليل ابو غزاله",
+     "percent": 1.33896,
+     "shares": 5355840,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "داليا فؤاد محمد سلطان سلام",
+     "percent": 0.034415,
+     "shares": 137658,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ناديه محمود احمد سعيد",
+     "percent": 0.023732,
+     "shares": 94928,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291818": {
+   "filingId": "291818",
+   "ticker": "KORA",
+   "publishedAt": "2026-07-22T10:52:04",
+   "sessionDate": "2026-07-21",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341543_1.pdf",
+   "companyArabic": "قرة لمشروعات الطاقة والاستثمار",
+   "asOfDate": "2026-06-30",
+   "totalShares": 2250000000.0,
+   "board": [
+    {
+     "nameArabic": "أحمد محمود عثمان درويش",
+     "role": "رئيس مجلس الإدارة غير التنفيذي",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "محمد أيمن كمال الدين محمد عبد الخالق قرة",
+     "role": "الرئيس التنفيذي",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "هبة محمد أيمن كمال الدين قرة",
+     "role": "عضو مجلس الإدارة المنتدب",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "أحمد محمد أيمن كمال الدين قرة",
+     "role": "عضو مجلس الإدارة المنتدب",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "هاني سيد محمد ضاحي",
+     "role": "عضو مجلس إدارة من ذوي الخبرة غير تنفيذي",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "عمرو محمد علي القاضي",
+     "role": "عضو مجلس إدارة من ذوي الخبرة غير تنفيذي",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "شاهيناز نبيل أمين فوده",
+     "role": "عضو مجلس إدارة من ذوي الخبرة غير تنفيذي",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "عمرو محمد عبد الرحيم عبد الله",
+     "role": "عضو مجلس إدارة من ذوي الخبرة غير تنفيذي",
+     "representing": "عن نفسه"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "محمد ايمن كمال الدين محمد عبد الخالق قره",
+     "percent": 75,
+     "shares": 1687500000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "هبة محمد ايمن كمال الدين قره",
+     "percent": 5,
+     "shares": 112500000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ايمان محمد كمال الدين قره",
+     "percent": 5,
+     "shares": 112500000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "نادية حسين زكي",
+     "percent": 2,
+     "shares": 45000000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "احمد محمد ايمن كمال الدين قره",
+     "percent": 2,
+     "shares": 45000000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أحمد وجدي محمود السيسي",
+     "percent": 0.000639,
+     "shares": 14378,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمد مدحت عبدالرحمن عطا",
+     "percent": 0.000415,
+     "shares": 9347,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "سمير محمد الهجرسي سليم",
+     "percent": 0.000228,
+     "shares": 5141,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "292242": {
+   "filingId": "292242",
+   "ticker": "MMAT",
+   "publishedAt": "2026-07-30T16:01:27",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341976_1.pdf",
+   "companyArabic": "مرسي مرسي علم للتنمية السياحية",
+   "asOfDate": "2026-06-30",
+   "totalShares": 50000000.0,
+   "board": [
+    {
+     "nameArabic": "السيدة/ شاهيناز محمد سالم",
+     "role": "رئيس مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد/ محمد يونس مجاهد عبد الصمد",
+     "role": "عضو مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد/ عمرو عباس حليم مصطفي كامل سرور",
+     "role": "عضو مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيدة / جيهان محمد امين المنسي",
+     "role": "عضو مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد/ محمد فوزان ابراهيم محمد سيد احمد",
+     "role": "عضو مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد/ حازم عمرو عباس سرور",
+     "role": "عضو مجلس الادارة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "شاهيناز محمد سالم مصطفي",
+     "percent": 14.312,
+     "shares": 7155825,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "السيده نبيله السيد صبري عبدالرحيم احمد",
+     "percent": 0.001,
+     "shares": 293,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عمر احمد كمال محمد العليمي",
+     "percent": 26.244,
+     "shares": 13122005,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شادن احمد كمال محمد العليمي",
+     "percent": 14.322,
+     "shares": 7161003,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "اسامه عبد الستار عبد الجواد السيد",
+     "percent": 1.0,
+     "shares": 500000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "حازم عمرو عباس سرور",
+     "percent": 0.011,
+     "shares": 5500,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "خالد عبدالله محمد عبدالله سلام",
+     "percent": 13.432884,
+     "shares": 6716442,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "اوربنت تورز للقري و الفنادق السياحيه",
+     "percent": 17.93,
+     "shares": 8966442,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "بيت الخبره القابضه كامار",
+     "percent": 0.897,
+     "shares": 448491,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "292429": {
+   "filingId": "292429",
+   "ticker": "RREI",
+   "publishedAt": "2026-08-03T15:48:38",
+   "sessionDate": "2026-07-21",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/342050_1.pdf",
+   "companyArabic": "شركة الإستثمار العقارى العربى - اليكو",
+   "asOfDate": "2026-06-30",
+   "totalShares": 246400000.0,
+   "board": [
+    {
+     "nameArabic": "أ/ طارق احمد طه محمود",
+     "role": "رئيس مجلس الإدارة",
+     "representing": "وممثل عن المهندسون"
+    },
+    {
+     "nameArabic": "أ/ محمود علي هندي",
+     "role": "عضو مجلس الإدارة",
+     "representing": "ممثل عن المراكز التجارية"
+    },
+    {
+     "nameArabic": "أ/ مصطفى كمال عبد الله",
+     "role": "عضو مجلس الإدارة",
+     "representing": "مساهم"
+    },
+    {
+     "nameArabic": "أ/ هدي محمد نجف انور",
+     "role": "عضو مجلس الإدارة",
+     "representing": "وممثل عن المهندسون"
+    },
+    {
+     "nameArabic": "أ/ اشرف ابراهيم محمد احمد الجبروني",
+     "role": "عضو منتدب",
+     "representing": "ممثل عن المهندسون المصريون للاسكان"
+    },
+    {
+     "nameArabic": "أ/ يسرا ابراهيم محمد احمد",
+     "role": "عضو مجلس الإدارة",
+     "representing": "عن المهندسون المصريون للمقاولات"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "شركة المهندسون المصريون للمقاولات والاسكان المتكامل",
+     "percent": 6.51,
+     "shares": 16042560,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "دينا محمد يسري سعد زغلول",
+     "percent": 4.689,
+     "shares": 11553135,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "هالة سعد زغلول محمد عويضة",
+     "percent": 1.265,
+     "shares": 3117974,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291527": {
+   "filingId": "291527",
+   "ticker": "RMDA",
+   "publishedAt": "2026-07-19T11:10:13",
+   "sessionDate": "2026-07-06",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341228_1.pdf",
+   "companyArabic": "العاشر من رمضان للصناعات الدوائية والمستحضرات التشخيصية - راميدا",
+   "asOfDate": "2026-07-06",
+   "totalShares": 2032817336.0,
+   "board": [
+    {
+     "nameArabic": "شريف احمد محمد السيد الأخضر",
+     "role": "رئيس مجلس اداره",
+     "representing": "شركة LVP Pharma"
+    },
+    {
+     "nameArabic": "ايمن ممدوح محمد فتحي عباس",
+     "role": "عضو مجلس اداره",
+     "representing": "شركة اكوينوكس فارما هولدنج ليميتد"
+    },
+    {
+     "nameArabic": "شامل فهيم لطفي ابو الفضل",
+     "role": "نائب رئيس مجلس اداره",
+     "representing": "شركة اكوينوكس فارما هولدنج ليميتد"
+    },
+    {
+     "nameArabic": "كريم ممدوح محمد زهران",
+     "role": "عضو مجلس اداره",
+     "representing": "شركة اكوينوكس فارما هولدنج ليميتد"
+    },
+    {
+     "nameArabic": "داليا السيد محمد المنسي الشال",
+     "role": "عضو مجلس اداره",
+     "representing": "شركة LVP Pharma"
+    },
+    {
+     "nameArabic": "عمرو عبدالله مرسي",
+     "role": "عضو منتدب",
+     "representing": "شركة اكوينوكس فارما هولدنج ليميتد"
+    },
+    {
+     "nameArabic": "محمود مصطفي محمود صلاح الدين",
+     "role": "عضو منتدب للشئون الماليه",
+     "representing": "شركة اكوينوكس فارما هولدنج ليميتد"
+    },
+    {
+     "nameArabic": "محمد فاروق محمد عبد المجيد",
+     "role": "عضو مجلس اداره",
+     "representing": "شركة اكوينوكس فارما هولدنج ليميتد"
+    },
+    {
+     "nameArabic": "أحمد سعد الدين عبدة ابو هندية",
+     "role": "عضو مجلس اداره",
+     "representing": "شركة LVP Pharma"
+    },
+    {
+     "nameArabic": "محمد جلال احمد الشورة",
+     "role": "عضو مجلس اداره",
+     "representing": "شركة EKUITY B V"
+    },
+    {
+     "nameArabic": "دانيال لي غرايس",
+     "role": "عضو مجلس اداره",
+     "representing": "الشركة السعودية السابعة للأستثمار"
+    },
+    {
+     "nameArabic": "حاتم سليمان",
+     "role": null,
+     "representing": null
+    },
+    {
+     "nameArabic": "ميرنا عارف",
+     "role": null,
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "LVP PHARMA",
+     "percent": 30.989759,
+     "shares": 629965200,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "الشركه السعوديه السابعه للاستثمار",
+     "percent": 10.919776,
+     "shares": 221979095,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "EKUITY B V/",
+     "percent": 9.913579,
+     "shares": 201524956,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291604": {
+   "filingId": "291604",
+   "ticker": "GTWL",
+   "publishedAt": "2026-07-20T10:59:18",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341335_1.pdf",
+   "companyArabic": null,
+   "asOfDate": "2026-06-30",
+   "totalShares": 14283363.0,
+   "board": [
+    {
+     "nameArabic": "م/ أمين أحمد محمد عثمان أباظة",
+     "role": "رئيس مجلس الإدارة",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "د/علاء احمد عبد المقصود عرفه",
+     "role": "نائب رئيس مجلس الإدارة والعضو المنتدب",
+     "representing": "شركة جيتكس للاستثمارات التجاريه والصناعيه ش.م.م"
+    },
+    {
+     "nameArabic": "أ/ محمد احمد السيد مرسي",
+     "role": "عضو مجلس إدارة منتدب",
+     "representing": "شركة جيتكس للاستثمارات التجاريه والصناعيه ش.م.م"
+    },
+    {
+     "nameArabic": "أ/ شيرين احمد عبد المقصود عرفه",
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة جيتكس للاستثمارات التجاريه والصناعيه ش.م.م"
+    },
+    {
+     "nameArabic": "شركة جيتكس للاستثمارات التجاريه والصناعيه",
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة جيتكس للاستثمارات التجاريه والصناعيه ش.م.م"
+    },
+    {
+     "nameArabic": "شركة جيتكس للاستثمارات التجاريه والصناعيه",
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة جيتكس للاستثمارات التجاريه والصناعيه ش.م.م"
+    },
+    {
+     "nameArabic": "شركة جيتكس للاستثمارات التجاريه والصناعيه",
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة جيتكس للاستثمارات التجاريه والصناعيه ش.م.م"
+    },
+    {
+     "nameArabic": "أ/ محمد احمد عبد اللطيف اللبده",
+     "role": "عضو مجلس إدارة",
+     "representing": "بنك مصر"
+    },
+    {
+     "nameArabic": "أ/ بهاء صلاح محمود عرفه",
+     "role": "عضو مجلس إدارة",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "أ/ احمد مختار مصطفي عبد المقصود عرفة",
+     "role": "عضو مجلس إدارة",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "أ/ شيرين محمد حامد محمد",
+     "role": "عضو مجلس إدارة",
+     "representing": "نفسه"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "شركة جيتكس للاستثمارات التجاريه والصناعيه",
+     "percent": 48.946,
+     "shares": 6991144,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "سماء عبد الجواد محمد رجب",
+     "percent": 0.038,
+     "shares": 5407,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أشرف أحمد عبد المقصود عرفه",
+     "percent": 0.04,
+     "shares": 5661,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "علاء أحمد عبد المقصود عرفه",
+     "percent": 0.038,
+     "shares": 5407,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شيرين أحمد عبد المقصود عرفه",
+     "percent": 0.002,
+     "shares": 254,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "بنك مصر",
+     "percent": 11.141,
+     "shares": 1591350,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291753": {
+   "filingId": "291753",
+   "ticker": "ARAB",
+   "publishedAt": "2026-07-21T13:27:53",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341422_1.pdf",
+   "companyArabic": "المطورون العرب القابضة",
+   "asOfDate": "2026-06-30",
+   "totalShares": 13902963390.0,
+   "board": [
+    {
+     "nameArabic": "جمال عبد القادر عبد البصير",
+     "role": "رئيس مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "جمال فوزي محمد فتح الله",
+     "role": "نائب رئيس مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "أيمن بن مختار بن إبراهيم خليفة",
+     "role": "الرئيس التنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "أحمد طارق خليل علي",
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "منى محمد الأمين رجب أحمد",
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "عمرو محمد الشافعي محمد",
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "أيمن محمد الطيب سليمان",
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "رنا جميل سعيد عبادي",
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "أحمد طارق خليل علي",
+     "percent": 27.04,
+     "shares": 3758739412,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "جمال عبد القادر عبد البصير",
+     "percent": 14.44,
+     "shares": 2007081732,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مجموعه الجارحي للاستثمار والتطوير",
+     "percent": 7.53,
+     "shares": 1046337710,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "الشركه المصريه للصلب",
+     "percent": 2.36,
+     "shares": 328704588,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "عبد السلام مسعود عبد الكريم",
+     "percent": 7.19,
+     "shares": 1000000012,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": [
+    "أسماك م م ح"
+   ]
+  },
+  "291806": {
+   "filingId": "291806",
+   "ticker": "MBSC",
+   "publishedAt": "2026-07-22T09:31:37",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341531_1.pdf",
+   "companyArabic": "شركه مصر بنى سويف للأسمنت \"ش.م.م\"",
+   "asOfDate": "2026-06-30",
+   "totalShares": 55022327.0,
+   "board": [
+    {
+     "nameArabic": "أ/ شريف محمد على أحمد",
+     "role": "رئيس مجلس الإدارة",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "م/ أسامه السيد على محمد",
+     "role": "العضو المنتدب",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "أ/ ياسر فاروق مصطفى محمد",
+     "role": "العضو المنتدب",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "د/ محمد فايق إبراهيم القصراوى",
+     "role": "العضو المنتدب",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "م/ أيمن السيد على محمد",
+     "role": "عضو مجلس الادارة",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "أ/ داليا فاروق مصطفى محمد",
+     "role": "عضو مجلس الادارة",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "أ/ أحمد فايق ابراهيم السيد القصراوى",
+     "role": "عضو مجلس الادارة",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "أ/ طارق محمود أحمد الجندى",
+     "role": "عضو مجلس الادارة",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "أ/ ياسمين أحمد عوض موافى",
+     "role": "عضو مجلس الادارة",
+     "representing": "نفسه"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "أولا: أ/ ياسر فاروق مصطفى محمد",
+     "percent": 6.495,
+     "shares": 3573921,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ فاروق مصطفى محمد",
+     "percent": 6.261,
+     "shares": 3445346,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ داليا فاروق مصطفى محمد",
+     "percent": 5.002,
+     "shares": 2752340,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ مايسه فاروق مصطفى محمد",
+     "percent": 5.06,
+     "shares": 2784254,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "الشركه الاهليه للخزف والصيني",
+     "percent": 1.447,
+     "shares": 796252,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "ثانيا: د/ محمد فايق إبراهيم القصراوى",
+     "percent": 2.422,
+     "shares": 1332771,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ فايق ابراهيم السيد القصراوي",
+     "percent": 8.048,
+     "shares": 4428581,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ احمد فايق ابراهيم القصراوي",
+     "percent": 2.518,
+     "shares": 1385984,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ شيرين فايق ابراهيم القصراوي",
+     "percent": 1.225,
+     "shares": 674038,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ نيفين فايق ابراهيم القصراوي",
+     "percent": 1.224,
+     "shares": 674000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ ناديه علي محمد احمد",
+     "percent": 4.687,
+     "shares": 2578897,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شركه مصر الدوليه للسيراميك",
+     "percent": 1.615,
+     "shares": 888900,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "ثالثاً: م/ أسامه السيد على محمد",
+     "percent": 1.274,
+     "shares": 701353,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ السيد على محمد أحمد",
+     "percent": 6.815,
+     "shares": 3750000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ ناهد محمد رياض سلامه",
+     "percent": 0.039,
+     "shares": 21402,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "م/ معتز السيد على محمد",
+     "percent": 0.159,
+     "shares": 87600,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "م/ أيمن السيد على محمد",
+     "percent": 0.159,
+     "shares": 87600,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شركه جنرال للهندسه والمحركات",
+     "percent": 2.493,
+     "shares": 1371433,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "رابعاً: أ/ شريف محمد على أحمد",
+     "percent": 0.729,
+     "shares": 401625,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ا/ محمد على محمد أحمد",
+     "percent": 6.915,
+     "shares": 3804930,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ رشا محمد على أحمد",
+     "percent": 0.385,
+     "shares": 212062,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ مها أحمد توفيق البكرى",
+     "percent": 0.589,
+     "shares": 324142,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "خامساً: أ/ مجدى عبد العال عباس بكر",
+     "percent": 0.363,
+     "shares": 199650,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ وجدى عبد العال عباس بكر",
+     "percent": 5.686,
+     "shares": 3128685,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291833": {
+   "filingId": "291833",
+   "ticker": "SCEM",
+   "publishedAt": "2026-07-22T15:03:24",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341573_1.pdf",
+   "companyArabic": "شركة أسمنت سيناء",
+   "asOfDate": "2026-06-30",
+   "totalShares": 260812477.0,
+   "board": [
+    {
+     "nameArabic": "السيد/ هادي سمير عياد",
+     "role": "رئيس مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد/ جي دومينيك سيدوس",
+     "role": "نائب رئيس مجلس الادارة عن فيكا مصر لصناعة الاسمنت",
+     "representing": "فيكا مصر لصناعة الاسمنت"
+    },
+    {
+     "nameArabic": "السيد/ لوى جاك مارسورون فيكا",
+     "role": "عضو عن فيكا مصر لصناعة الاسمنت",
+     "representing": "فيكا مصر لصناعة الاسمنت"
+    },
+    {
+     "nameArabic": "السيد/ بيترو كالا",
+     "role": "عضو مجلس ادارة منتدب عن فيكا مصر لصناعة الاسمنت",
+     "representing": "فيكا مصر لصناعة الاسمنت"
+    },
+    {
+     "nameArabic": "السيد/ مجدى محب كميل قصبجي",
+     "role": "ممثلا عن شركة ريلاينس سمنت وريلاينس لوجيستكس وريلاينس كابيتال للاستثمارات الصناعية",
+     "representing": "شركة ريلاينس سمنت وريلاينس لوجيستكس وريلاينس كابيتال للاستثمارات الصناعية"
+    },
+    {
+     "nameArabic": "الاستاذ/ محمد علاء الدين عبد الله",
+     "role": "الصندوق الاجتماعي للعاملين بالقطاع الحكومي",
+     "representing": "الصندوق الاجتماعي للعاملين بالقطاع الحكومي"
+    },
+    {
+     "nameArabic": "السيد/ جيانفرانكو تانترديني",
+     "role": "عضو عن فيكا مصر لصناعة الاسمنت",
+     "representing": "فيكا مصر لصناعة الاسمنت"
+    },
+    {
+     "nameArabic": "السيد/ جاك ماري مارسورون فيكا",
+     "role": "عضو عن فيكا مصر لصناعة الاسمنت",
+     "representing": "فيكا مصر لصناعة الاسمنت"
+    },
+    {
+     "nameArabic": "السيدة/ صوفي مارسورون فيكا سيدوس",
+     "role": "عضو عن فيكا مصر لصناعة الاسمنت",
+     "representing": "فيكا مصر لصناعة الاسمنت"
+    },
+    {
+     "nameArabic": "السيدة/ رشا قناوي",
+     "role": "من ذوي الخبرة (من غير المساهمين)",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد/ طاهر محمد خلف",
+     "role": "من ذوي الخبرة (من غير المساهمين)",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "فيكا مصر لصناعة الأسمنت ش.م.م",
+     "percent": 77.6,
+     "shares": 202395813,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "ريلاينس سمنت ش.م.م",
+     "percent": 4.289,
+     "shares": 11187800,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "ريلاينس لوجيستكس",
+     "percent": 1.972,
+     "shares": 5143773,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "ريلاينس كابيتال للاستثمارات الصناعية ش.م.م",
+     "percent": 0.569,
+     "shares": 1484190,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291857": {
+   "filingId": "291857",
+   "ticker": "MOED",
+   "publishedAt": "2026-07-26T09:30:25",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341607_1.pdf",
+   "companyArabic": "الشركة المصرية لنظم التعليم الحديثة",
+   "asOfDate": "2026-07-12",
+   "totalShares": 1005000000.0,
+   "board": [
+    {
+     "nameArabic": "بسنت احمد رافت احمد القواس",
+     "role": "رئيس مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "وليد يوسف حسن محمد",
+     "role": "العضو المنتدب",
+     "representing": null
+    },
+    {
+     "nameArabic": "محمد نبيل ابراهيم محمود",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "بسنت احمد رأفت احمد",
+     "percent": 0.103,
+     "shares": 1042617,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "وليد يوسف حسن محمد",
+     "percent": 1.197,
+     "shares": 12033907,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "يوسف وليد يوسف حسن",
+     "percent": 8.186,
+     "shares": 82273062,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "جنى وليد يوسف حسن",
+     "percent": 0.116,
+     "shares": 1166249,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "صباح يوسف حسن محمد",
+     "percent": 0.297,
+     "shares": 2990837,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمد حسن ابراهيم حمدى",
+     "percent": 0.009,
+     "shares": 97000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "احمد محمد حسن ابراهيم",
+     "percent": 0.056,
+     "shares": 554125,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "292170": {
+   "filingId": "292170",
+   "ticker": "CPME",
+   "publishedAt": "2026-07-30T10:11:52",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341906_1.pdf",
+   "companyArabic": "كاتليست بارتنرز ميديل ايست ش م م",
+   "asOfDate": "2026-06-30",
+   "totalShares": 301901933.0,
+   "board": [
+    {
+     "nameArabic": "الأستاذ/ ماجد شوقي سوريال بولس",
+     "role": "رئيس مجلس الإدارة تنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذ/ طارق شريف سيد عفت",
+     "role": "عضو مجلس إدارة منتدب",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذ/ عبد العزيز محمد علاء الدين",
+     "role": "عضو مجلس إدارة غير تنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذ/ رامي كمال الدين عثمان",
+     "role": "عضو مجلس إدارة غير تنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذ/ محب مجدي محب قصبي",
+     "role": "عضو مجلس إدارة غير تنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذة/ نيفان عمرو كمال مرنجي",
+     "role": "عضو مجلس إدارة مستقل",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذة/ رانيا محمود صلاح الدين عفيفي",
+     "role": "عضو مجلس إدارة مستقل",
+     "representing": null
+    },
+    {
+     "nameArabic": "نهلة احمد محمد كمال إبراهيم",
+     "role": "عضو مجلس إدارة مستقل",
+     "representing": null
+    },
+    {
+     "nameArabic": "محمد وائل سعيد محمد الفخراني",
+     "role": "عضو مجلس إدارة مستقل",
+     "representing": null
+    },
+    {
+     "nameArabic": "شريف محسن محمود كرارة",
+     "role": "عضو مجلس إدارة مستقل",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "سي بي سي للاستشارات CPC Advisory",
+     "percent": 50.457839,
+     "shares": 152333191,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "QARDY HOLDINGS LIMITED",
+     "percent": 37.189329,
+     "shares": 112275302,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "ريلاينس لوجيستكس RELIANCE LOGISTICS COMPANY",
+     "percent": 0.03644,
+     "shares": 110000,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "WHITE FIELD VENTURES LTD",
+     "percent": 0.65385,
+     "shares": 1974000,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "ماجد شوقي سوريال بولس",
+     "percent": 0.0265,
+     "shares": 80000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "رامي كمال الدين عثمان سليمان",
+     "percent": 0.2033,
+     "shares": 613755,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "طارق شريف سيد عفت",
+     "percent": 0.20329,
+     "shares": 613722,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عبد العزيز محمود علاء الدين عبد النبي",
+     "percent": 0.376225,
+     "shares": 1135832,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "292341": {
+   "filingId": "292341",
+   "ticker": "HBCO",
+   "publishedAt": "2026-08-02T13:56:25",
+   "sessionDate": "2026-07-19",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341804_1.pdf",
+   "companyArabic": "هيبكو للاستثمارات التجارية والتنمية العقارية",
+   "asOfDate": "2026-07-19",
+   "totalShares": 72000000.0,
+   "board": [
+    {
+     "nameArabic": "م / ابراهيم محمد ابراهيم احمد هيبه",
+     "role": "رئيس مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد / مصطفى محمود مصطفى قناوى",
+     "role": "العضو المنتدب",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد / احمد عبد الرحمن امام الشاهد",
+     "role": "عضو",
+     "representing": "شركة / تو جى اتش للتوريدات العمومية"
+    },
+    {
+     "nameArabic": "السيد / شادى محمد السعيد ابو والى",
+     "role": "عضو",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذة / ميرنا مجدى عز الدين",
+     "role": "عضو",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيدة / جيهان حسن السعيد الأمشاطى",
+     "role": "عضو",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "م/ ابراهيم محمد ابراهيم أحمد هيبه",
+     "percent": 48.03,
+     "shares": 34578000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "١- شركة تو جى اتش للتوريدات العمومية",
+     "percent": 0.255,
+     "shares": 183600,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "٢- شركة دلبيردى لاب",
+     "percent": 0.255,
+     "shares": 183416,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "٣- نبيلة اسماعيل محمد البرهامي",
+     "percent": 15.17,
+     "shares": 10924200,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "٤- سمر محمد ابراهيم هيبه",
+     "percent": 4.85,
+     "shares": 3488400,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "السيد / محمد أشرف عمر عمر",
+     "percent": 9.25,
+     "shares": 6660000,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "292754": {
+   "filingId": "292754",
+   "ticker": "FTNS",
+   "publishedAt": "2026-08-11T10:30:26",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/342401_1.pdf",
+   "companyArabic": "شركة فتنس برايم للأندية الصحية (ش.م.م)",
+   "asOfDate": null,
+   "totalShares": 164300000.0,
+   "board": [
+    {
+     "nameArabic": "طارق جمال الدين محمود حسن",
+     "role": "رئيس مجلس إدارة - غير تنفيذى - غير مستقل",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "راوية يحيى مصطفى",
+     "role": "عضو مجلس إدارة - غير تنفيذى - غير مستقل",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "هانى على على درويش",
+     "role": "عضو مجلس إدارة - غير تنفيذى - غير مستقل",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "يحيى أحمد عبد العزيز",
+     "role": "عضو منتدب - تنفيذى",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "وسام محمد وجدى",
+     "role": "عضو مجلس إدارة - غير تنفيذى - غير مستقل",
+     "representing": "عن نفسه"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "سامح حسنى أحمد المنجورى",
+     "percent": 14.47,
+     "shares": 23779600,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "نرمين سامح حسنى المنجورى",
+     "percent": 0.269,
+     "shares": 442000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "سارة سامح حسنى المنجورى",
+     "percent": 0.269,
+     "shares": 442000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شريف حسنى احمد المنجورى",
+     "percent": 3.22,
+     "shares": 5304000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مصطفى محمد محمد عبد الحليم",
+     "percent": 1.004,
+     "shares": 1650266,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مها محمد فوزى عامر",
+     "percent": 0.269,
+     "shares": 442000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "طارق جمال الدين محمود حسن",
+     "percent": 22.72,
+     "shares": 37324000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "راوية يحيى مصطفى",
+     "percent": 8.071,
+     "shares": 13260000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عبد المحسن بن عبد العزيز الحكير",
+     "percent": 5.07,
+     "shares": 8325702,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291528": {
+   "filingId": "291528",
+   "ticker": "MOIN",
+   "publishedAt": "2026-07-19T11:37:26",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341230_1.pdf",
+   "companyArabic": "المهندس للتأمين",
+   "asOfDate": "2026-06-30",
+   "totalShares": 260000000.0,
+   "board": [
+    {
+     "nameArabic": "الأستاذ / معتز محمود طلبة محمد الرجيبي",
+     "role": "غير تنفيذي",
+     "representing": "صندوق المعاشات والإعانات بنقابة المهندسين"
+    },
+    {
+     "nameArabic": "مهندس /كريم محمد عبدالحميد ابراهيم محمد الكسار",
+     "role": "غير تنفيذي",
+     "representing": "صندوق المعاشات والإعانات بنقابة المهندسين"
+    },
+    {
+     "nameArabic": "المهندس / هشام محمد أمين",
+     "role": "غير تنفيذي",
+     "representing": "صندوق المعاشات والإعانات بنقابة المهندسين"
+    },
+    {
+     "nameArabic": "الدكتورة / غادة مصطفى لبيب عبدالغني أبو زيد",
+     "role": "غير تنفيذي",
+     "representing": "صندوق المعاشات والإعانات بنقابة المهندسين"
+    },
+    {
+     "nameArabic": "الأستاذ / نزهى غليوم عبد المسيح أرمانيوس",
+     "role": "غير تنفيذي",
+     "representing": "شركة فالمور القابضة للإستثمار"
+    },
+    {
+     "nameArabic": "الأستاذة الدكتورة / منى مكرم عبيد",
+     "role": "غير تنفيذي",
+     "representing": "شركة فالمور القابضة للإستثمار"
+    },
+    {
+     "nameArabic": "أحمد بغدادي أحمد بغدادي محمد",
+     "role": "غير تنفيذي",
+     "representing": "شركة فالمور القابضة للإستثمار"
+    },
+    {
+     "nameArabic": "الأستاذ / محمد رأفت عبد الحميد احمد علي",
+     "role": "غير تنفيذي",
+     "representing": "بيت الخبرة للتأجير التمويلي"
+    },
+    {
+     "nameArabic": "الأستاذ / عبد الله خالد عبد الله محمد عبد الله",
+     "role": "غير تنفيذي",
+     "representing": "بيت الخبرة للتأجير التمويلي"
+    },
+    {
+     "nameArabic": "الأستاذ / محمد خالد عبد الله محمد عبد الله",
+     "role": "غير تنفيذي",
+     "representing": "بيت الخبرة للتأجير التمويلي"
+    },
+    {
+     "nameArabic": "الأستاذة / حنان فوزي عبد الفتاح سالم",
+     "role": "غير تنفيذي",
+     "representing": "صندوق التأمين الخاص بالعاملين بهيئة قناة السويس"
+    },
+    {
+     "nameArabic": "الاستاذ / خالد محمد محمود عبد الصادق",
+     "role": "نائب رئيس مجلس الإدارة و عضو مجلس الإدارة المنتدب",
+     "representing": null
+    },
+    {
+     "nameArabic": "الاستاذة / نهال سامي محمد عبد المعطي عفيقي",
+     "role": "عضو مجلس ادارة مستقل",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "صندوق المعاشات والاعانات بنقابة المهندسين",
+     "percent": 33.2,
+     "shares": 86319993,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركة فالمور القابضة للإستثمار",
+     "percent": 24.99,
+     "shares": 64973993,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "بيت الخبرة للتأجير التمويلي فاست",
+     "percent": 20.71,
+     "shares": 53857142,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "عبدالله خالد عبدالله محمد عبدالله سلام",
+     "percent": 0.36,
+     "shares": 928570,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "بيت الخبرة للتخصيم تكنو فاكتورنج",
+     "percent": 0.35,
+     "shares": 922998,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "بيت الخبرة كارما",
+     "percent": 0.88,
+     "shares": 2276683,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "بيت الخبرة للإستثمار الأقتصادي تكنو انفستمنت",
+     "percent": 0.001,
+     "shares": 3368,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "صندوق التأمين الخاص بالعاملين بهيئة قناة السويس",
+     "percent": 9.99,
+     "shares": 25999992,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": [
+    "أورينت تورز للقرى والفنادق السياحية"
+   ]
+  },
+  "291666": {
+   "filingId": "291666",
+   "ticker": "ACTF",
+   "publishedAt": "2026-07-21T09:08:11",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341420_1.pdf",
+   "companyArabic": null,
+   "asOfDate": "2026-07-15",
+   "totalShares": 1142571282.0,
+   "board": [
+    {
+     "nameArabic": "طارق محمد محمود محمود يوسف",
+     "role": "رئيس مجلس الادارة",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "باسم إبراهيم عزب إبراهيم",
+     "role": "الرئيس التنفيذي و العضو المنتدب",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "كريم جورج فيكتور نعمه",
+     "role": "العضو المنتدب لشؤون الاستثمار",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "مصطفى احمد عبد العزيز",
+     "role": "العضو المنتدب لشؤون تطوير الاعمال",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "محمد مدحت حسن علام",
+     "role": "عضو مجلس إدارة",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "عمر محمد عبد الجواد محمود",
+     "role": "عضو مجلس إدارة",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "هدى حسن أمين والي",
+     "role": "عضو مجلس إدارة",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "أمل محمد احمد سيد احمد موسي",
+     "role": "عضو مجلس إدارة",
+     "representing": "نفسه"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "طارق محمد محمود محمد يوسف",
+     "percent": 8.55,
+     "shares": 97683553,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "دينا عصام الخولى",
+     "percent": 1.5,
+     "shares": 17200000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "باسم ابراهيم عزب ابراهيم",
+     "percent": 13.18,
+     "shares": 150621470,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مديحة هود عبد القادر",
+     "percent": 1.18,
+     "shares": 13507968,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "زينة باسم ابراهيم عزب ابراهيم",
+     "percent": 0.0043,
+     "shares": 50000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "احمد مصطفي العيسي",
+     "percent": 0.0028,
+     "shares": 32098,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "رأى مصطفي عيسي",
+     "percent": 0.0002,
+     "shares": 2347,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمد مدحت حسن علام",
+     "percent": 8.79,
+     "shares": 100518978,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "رأفت سمير الخناجري",
+     "percent": 4.36,
+     "shares": 49774136,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ماجد سمير منير الخناجري",
+     "percent": 2.23,
+     "shares": 25480412,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "رامز سمير منير الخناجري",
+     "percent": 1.09,
+     "shares": 12436381,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "كريم جورج فيكتور نعمه",
+     "percent": 7.18,
+     "shares": 82089607,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مصطفى احمد عبد العزيز عز الدين احمد حسين",
+     "percent": 6.48,
+     "shares": 74085627,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "292045": {
+   "filingId": "292045",
+   "ticker": "ORWE",
+   "publishedAt": "2026-07-28T11:07:47",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341801_1.pdf",
+   "companyArabic": "النساجون الشرقيون للسجاد",
+   "asOfDate": "2026-06-30",
+   "totalShares": 665107268.0,
+   "board": [
+    {
+     "nameArabic": "ياسمين محمد فريد فؤاد خميس",
+     "role": "رئيس مجلس الإدارة الغير تنفيذي",
+     "representing": "نفسه"
+    },
+    {
+     "nameArabic": "فريدة محمد فريد فؤاد خميس",
+     "role": "نائب رئيس مجلس الإدارة الغير تنفيذي",
+     "representing": "ممثل عن شركة FYK Limited"
+    },
+    {
+     "nameArabic": "الأستاذ/ حازم شوقي يس محمد الزفزاف",
+     "role": "العضو المنتدب والرئيس التنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "مدحت حسين عبد الحليم حسن",
+     "role": "عضو",
+     "representing": "ممثلا عن شركة FYK Limited"
+    },
+    {
+     "nameArabic": "ياسر يحيى عبد الحميد عبد ربه",
+     "role": "عضو",
+     "representing": "شركة مجموعة فتيحي القابضة"
+    },
+    {
+     "nameArabic": "أيه ن إسماعيل سليمان",
+     "role": "عضو",
+     "representing": null
+    },
+    {
+     "nameArabic": "خالد عبد العزيز حجازي",
+     "role": "عضو",
+     "representing": null
+    },
+    {
+     "nameArabic": "أشرف محسن بكري",
+     "role": "عضو",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "FYK LIMITED",
+     "percent": 24.619,
+     "shares": 163743208,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "ياسمين محمد فريد فؤاد خميس",
+     "percent": 0.001,
+     "shares": 5000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "فريدة محمد فريد فؤاد خميس",
+     "percent": 0.001,
+     "shares": 5000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عمر راجي المهدي",
+     "percent": 0.155,
+     "shares": 1029720,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ملك راجي المهدي",
+     "percent": 0.15,
+     "shares": 1000000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "اسامة بلبل البار",
+     "percent": 0.098,
+     "shares": 650000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمد محمد فؤاد فريد خميس",
+     "percent": 23.538,
+     "shares": 156552282,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ميلوسلافا خميس",
+     "percent": 5.563,
+     "shares": 36999259,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "فرع شركة مجموعة فتيحي",
+     "percent": 11.481,
+     "shares": 76361250,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "أحمد بن حسن بن أحمد فتيحي",
+     "percent": 0.323,
+     "shares": 2148846,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مصر الوطنية للصلب",
+     "percent": 1.353,
+     "shares": 9000000,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "المصرية لمنتجات الحديد والصلب",
+     "percent": 1.031,
+     "shares": 6855000,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "دينا جمال عبد القادر",
+     "percent": 0.578,
+     "shares": 3844600,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مريم جمال عبد القادر",
+     "percent": 0.453,
+     "shares": 3011100,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "داليا جمال عبد القادر",
+     "percent": 0.569,
+     "shares": 3786875,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "جمال عبد القادر عبد البصير",
+     "percent": 0.604,
+     "shares": 4017940,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مجموعة الجارحي للإستثمار والتطوير",
+     "percent": 0.439,
+     "shares": 2920837,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "292241": {
+   "filingId": "292241",
+   "ticker": "EGTS",
+   "publishedAt": "2026-07-30T15:59:48",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341975_1.pdf",
+   "companyArabic": "الشركة المصرية للمنتجعات السياحية",
+   "asOfDate": "2026-06-30",
+   "totalShares": 1050000000.0,
+   "board": [
+    {
+     "nameArabic": "م/ محمود محمد جمعه محمد أنور زيتون",
+     "role": "رئيس مجلس الادارة",
+     "representing": "شركة كواترو للاستثمار السياحي"
+    },
+    {
+     "nameArabic": "أ/ محمود محمد محمود علي وهيب",
+     "role": "نائب رئيس مجلس الادارة",
+     "representing": "شركة هاى اتشيفرز للاستثمار العقاري"
+    },
+    {
+     "nameArabic": "أ/أحمد سعد الدين عبده أبو هنديه",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة هاى اتشيفرز للاستثمار العقاري"
+    },
+    {
+     "nameArabic": "أ/ محمد حاتم محمد احمد القورى",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة هاى اتشيفرز للاستثمار العقاري"
+    },
+    {
+     "nameArabic": "أ/فريال محمود محمد محمود",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة هاى اتشيفرز للاستثمار العقاري"
+    },
+    {
+     "nameArabic": "أ/ حمدي عبد الناصر محمد محمود",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة هاى اتشيفرز للاستثمار العقاري"
+    },
+    {
+     "nameArabic": "أ/ محمد فوزان إبراهيم محمد سيد",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة كواترو للاستثمار السياحي"
+    },
+    {
+     "nameArabic": "م/ محمد محمد جمعه محمد أنور زيتون",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة كواترو للاستثمار السياحي"
+    },
+    {
+     "nameArabic": "أ/ محمد مسعود إبراهيم الديب",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة بيت الخبرة القابضة - كامار"
+    },
+    {
+     "nameArabic": "أ/ محمد عبد اللطيف سيد فرج",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة بيت الخبرة القابضة - كامار"
+    },
+    {
+     "nameArabic": "أ/ سحر عادل على سليمان",
+     "role": "عضو مجلس ادارة",
+     "representing": "نفسة"
+    },
+    {
+     "nameArabic": "شركة جي تي جروب - مقعد شاغر",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة جي تي جروب"
+    },
+    {
+     "nameArabic": "أ/ محمد عادل عبد ربه على",
+     "role": "عضو مجلس الإدارة",
+     "representing": "مستقل"
+    },
+    {
+     "nameArabic": "أ/ خالد حسين احمد سليمان",
+     "role": "عضو مجلس الإدارة",
+     "representing": "مستقل"
+    },
+    {
+     "nameArabic": "أ/ ناصر محمد صابر عثمان ادريس",
+     "role": "عضو مجلس الإدارة",
+     "representing": "مستقل"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "سحر عادل على سليمان",
+     "percent": 7.45,
+     "shares": 78266259,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شركة GT GROUP FZC",
+     "percent": 3.4,
+     "shares": 35697098,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "+كريم مصطفي راضي احمد",
+     "percent": 0.48,
+     "shares": 5000000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "+ هدير مصطفي راضي احمد",
+     "percent": 0.48,
+     "shares": 5000000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "+يوسف اشرف عادل علي سليمان",
+     "percent": 4.1,
+     "shares": 42998079,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "+على اشرف عادل علي سليمان",
+     "percent": 4.1,
+     "shares": 42998078,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "+ طارق محمدي ناصف",
+     "percent": 2.53,
+     "shares": 26531098,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "+جيهان عادل علي سليمان",
+     "percent": 0.01,
+     "shares": 100000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "+ انجي طارق محمدي",
+     "percent": 1.12,
+     "shares": 11728382,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "+ آية طارق محمدي",
+     "percent": 1.27,
+     "shares": 13314500,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "+اميرة طارق محمدي ناصف منصور",
+     "percent": 0.12,
+     "shares": 1270000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شركة بيت الخبرة القابضة كامار",
+     "percent": 11.01,
+     "shares": 115647968,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "+شركة اورينت تورز للقرى والفنادق السياحية",
+     "percent": 4.52,
+     "shares": 47412145,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "+شركة بيت الخبرة للاستثمار الاقتصادي - تكنو انفستمنت",
+     "percent": 1.9,
+     "shares": 19914545,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "+شركة بيت الخبرة للتخصيم – تكنو فاكتورنج",
+     "percent": 3.68,
+     "shares": 38621592,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "+خالد عبد الله محمد عبد الله سلام",
+     "percent": 1.65,
+     "shares": 17375335,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "+عبد الله خالد عبد الله محمد عبد الله سلام",
+     "percent": 0.78,
+     "shares": 8200806,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شركة كواترو للاستثمار السياحي",
+     "percent": 0.001,
+     "shares": 10000,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "+ محمد جمعه محمد أنور زيتون",
+     "percent": 6.0,
+     "shares": 62999130,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "+ محمود محمد جمعه محمد أنور زيتون",
+     "percent": 6.59,
+     "shares": 69208304,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "+ محمد محمد جمعه محمد أنور زيتون",
+     "percent": 2.85,
+     "shares": 29969000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "+سارة محمد جمعه محمد أنور جمعه",
+     "percent": 3.2,
+     "shares": 33620000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شركة هاى اتشيفرز للاستثمار العقاري",
+     "percent": 0.01,
+     "shares": 60000,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "+محمود محمد محمود علي وهيب",
+     "percent": 9.96,
+     "shares": 104560962,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "+احمد محمود محمد وهيب",
+     "percent": 1.78,
+     "shares": 18658253,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "+ساره محمود محمد محمود",
+     "percent": 0.72,
+     "shares": 7600000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "+مريم محمود محمد محمود",
+     "percent": 0.72,
+     "shares": 7600000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "+هاجر محمود محمد محمود",
+     "percent": 0.58,
+     "shares": 6100000,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": [
+    "+ عمر مصطفي راضي احمد",
+    "+محمد عبد اللطيف سيد فرج",
+    "+محمد فوزان إبراهيم محمد"
+   ]
+  },
+  "292394": {
+   "filingId": "292394",
+   "ticker": "BTFH",
+   "publishedAt": "2026-08-03T10:31:26",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/342051_1.pdf",
+   "companyArabic": "بلتون القابضة ش.م.م Beltone Holding",
+   "asOfDate": "2026-06-30",
+   "totalShares": 10718106944.0,
+   "board": [
+    {
+     "nameArabic": "سيد بصر شعيب سيد شعيب",
+     "role": "رئيس مجلس الإدارة",
+     "representing": "CHIMPE 1 INVESTMENT SPV RSC LTD"
+    },
+    {
+     "nameArabic": "داليا حازم جميل خورشيد",
+     "role": "الرئيس التنفيذي والعضو المنتدب",
+     "representing": "CHIMPE 1 INVESTMENT SPV RSC LTD"
+    },
+    {
+     "nameArabic": "محمد محمد هشام عبد المنعم",
+     "role": "عضو مجلس إدارة",
+     "representing": "CHIMPE 1 INVESTMENT SPV RSC LTD"
+    },
+    {
+     "nameArabic": "ميريان خلف",
+     "role": "عضو مجلس إدارة",
+     "representing": "CHIMPE 1 INVESTMENT SPV RSC LTD"
+    },
+    {
+     "nameArabic": "وائل مصطفى سيد عبد الله",
+     "role": "عضو مجلس إدارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "حسين أمين حسين مرعي",
+     "role": "عضو مجلس إدارة",
+     "representing": "عن نفسه"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "CHIMPE 1 INVESTMENT SPV RSC LTD",
+     "percent": 56.54,
+     "shares": 6059579564,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "اكت فاينانشال للاستشارات ش م م ACT FINANCIAL",
+     "percent": 6.73,
+     "shares": 721177587,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "محمد مدحت حسن علام",
+     "percent": 0.42,
+     "shares": 45283250,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "احمد حمدي ابو هشيمه عبد العزيز",
+     "percent": 5.06,
+     "shares": 541924000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "صندوق التامين الاجتماعي للعاملين بالقطاع الحكومي",
+     "percent": 4.89,
+     "shares": 524548436,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291530": {
+   "filingId": "291530",
+   "ticker": "GGCC",
+   "publishedAt": "2026-07-19T11:48:51",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341235_1.pdf",
+   "companyArabic": "شركة الجيزة العامة للمقاولات والإستثمار العقاري ش.م.م",
+   "asOfDate": "2026-06-30",
+   "totalShares": 2164070000.0,
+   "board": [
+    {
+     "nameArabic": "السيد / احمد عبدالحميد احمد عبدالواحد",
+     "role": "العضو المنتدب والرئيس التنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "محاسب / أحمد محمد مصطفى سليمان القدرى",
+     "role": "رئيس مجلس الإدارة",
+     "representing": "شركة بايونيرز بروبرتيز للتنمية العمرانية"
+    },
+    {
+     "nameArabic": "الاستاذ / هانى ابراهيم عبدالرحمن مصطفى",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "محاسب / محمد على سيد احمد السويفي",
+     "role": "العضو المنتدب للشئون المالية والإدارية",
+     "representing": "شركة وادي للاستشارات"
+    },
+    {
+     "nameArabic": "الأستاذة / كريسيتنا سمير حنين حرز",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "المهندس / باسم السيد حسين عبدالرحمن",
+     "role": "عضو مجلس الإدارة",
+     "representing": "شركة نمو للاستشارات"
+    },
+    {
+     "nameArabic": "محاسب / ياسر محمد زكي ابراهيم",
+     "role": "نائب رئيس مجلس الإدارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "الأستاذة / شيماء عباس عبدالرازق احمد",
+     "role": "عضو مجلس الإدارة",
+     "representing": "عن نفسها"
+    },
+    {
+     "nameArabic": "الاستاذ / محمد عادل عبدالمولى",
+     "role": "عضو مجلس الإدارة",
+     "representing": "عن نفسه"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "بايونيرز بروبرتيز للتنمية العمرانية بي ار اى جروب",
+     "percent": 60.01,
+     "shares": 1298574600,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "وادى للاستشارات",
+     "percent": 3.01,
+     "shares": 65150090,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "الحصن للاستشارات",
+     "percent": 1.8,
+     "shares": 39000084,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "بى اف ايه للاستشارات",
+     "percent": 1.9,
+     "shares": 41040073,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "نمو للاستشارات",
+     "percent": 0.0003,
+     "shares": 7312,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291624": {
+   "filingId": "291624",
+   "ticker": "EFIH",
+   "publishedAt": "2026-07-20T12:37:32",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341390_1.pdf",
+   "companyArabic": null,
+   "asOfDate": null,
+   "totalShares": 3466666667.0,
+   "board": [
+    {
+     "nameArabic": "Ibrahim Sarhan",
+     "role": "Executive",
+     "representing": null
+    },
+    {
+     "nameArabic": "Ibrahim Abdelsalam",
+     "role": null,
+     "representing": "Independent"
+    },
+    {
+     "nameArabic": "Ahmed Elsaeed",
+     "role": "Non Executive",
+     "representing": "National Bank of Egypt"
+    },
+    {
+     "nameArabic": "Ayman Hussein",
+     "role": "Non Executive",
+     "representing": "Egyptian Banks Company"
+    },
+    {
+     "nameArabic": "Khaled AlHossan",
+     "role": "Non Executive",
+     "representing": "Saudi Egyptian Investment Company**"
+    },
+    {
+     "nameArabic": "Dalia Moustafa",
+     "role": "Non Executive",
+     "representing": "National Investment Bank"
+    },
+    {
+     "nameArabic": "Ziad Bin Bandar Alyoussef",
+     "role": "Non Executive",
+     "representing": "Saudi Egyptian Investment Company**"
+    },
+    {
+     "nameArabic": "Tarek Elmahmoudy",
+     "role": null,
+     "representing": "Independent"
+    },
+    {
+     "nameArabic": "Mohamed Sherif",
+     "role": "Non Executive",
+     "representing": "Banque Misr"
+    },
+    {
+     "nameArabic": "Nada Wasfy",
+     "role": null,
+     "representing": "Independent"
+    },
+    {
+     "nameArabic": "Hala Mahmoud Mohamed",
+     "role": "Non Executive",
+     "representing": "National Investment Bank"
+    },
+    {
+     "nameArabic": "Hesham Shaarawy",
+     "role": "Non Executive",
+     "representing": "Egyptian Co. for Investment Projects"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "Saudi Egyptian Investment Company",
+     "percent": 25.75,
+     "shares": 892525653,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "National Investment Bank",
+     "percent": 21.81,
+     "shares": 756061528,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "Banque Misr",
+     "percent": 6.7,
+     "shares": 231817951,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "Investment portfolios and accounts of the bank",
+     "percent": 0.69,
+     "shares": 23853881,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "Egyptian Co. for Investment Projects",
+     "percent": 6.7,
+     "shares": 231817951,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "Egyptian Banks Company",
+     "percent": 6.7,
+     "shares": 231817948,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "National Bank of Egypt",
+     "percent": 6.7,
+     "shares": 231817948,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291773": {
+   "filingId": "291773",
+   "ticker": "ELEC",
+   "publishedAt": "2026-07-21T14:58:59",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341503_1.pdf",
+   "companyArabic": "شركة الكابلات الكهربائية المصرية",
+   "asOfDate": "2026-06-30",
+   "totalShares": 3313540373.0,
+   "board": [
+    {
+     "nameArabic": "الأستاذ /ياسر محمد زكى",
+     "role": "رئيس مجلس الادارة",
+     "representing": "جدوى للتنمية الصناعية"
+    },
+    {
+     "nameArabic": "الأستاذ / محمد محمود إبراهيم",
+     "role": "عضو مجلس الإدارة والعضو المنتدب",
+     "representing": "جدوى للتنمية الصناعية"
+    },
+    {
+     "nameArabic": "الأستاذة / داليا محمد زكى",
+     "role": "عضو مجلس الإدارة",
+     "representing": "جدوى للتنمية الصناعية"
+    },
+    {
+     "nameArabic": "المهندس / محمد حسين عاشور",
+     "role": "عضو مجلس الإدارة",
+     "representing": "سمو للاستشارات"
+    },
+    {
+     "nameArabic": "الأستاذة / شيماء عباس عبد الرازق",
+     "role": "عضو مجلس الإدارة",
+     "representing": "الحصن للاستشارات"
+    },
+    {
+     "nameArabic": "الأستاذة / نورهان محمد عبد الخالق",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذ / احمد امين سعد امين",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "جدوى للتنميه الصناعيه",
+     "percent": 25.3,
+     "shares": 838794470,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "الحصن للاستشارات",
+     "percent": 22.5,
+     "shares": 746076110,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "سمو للاستشارات",
+     "percent": 21.0,
+     "shares": 697371795,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "فرسال للتخطيط العمراني",
+     "percent": 0.37,
+     "shares": 12250000,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "نمو للاستشارات",
+     "percent": 0.1,
+     "shares": 4273090,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291776": {
+   "filingId": "291776",
+   "ticker": "DGTZ",
+   "publishedAt": "2026-07-21T15:03:10",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341436_1.pdf",
+   "companyArabic": "ديجيتايز للإستثمار والتقنية",
+   "asOfDate": "2026-06-30",
+   "totalShares": 108000000.0,
+   "board": [
+    {
+     "nameArabic": "يسرى محمود عبد الحميد عتلم",
+     "role": "رئيس مجلس الإدارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "أسامة فؤاد يسين السيد",
+     "role": "عضو مجلس إدارة منتدب",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "أحمد محمود عبد الحميد عتلم",
+     "role": "عضو مجلس إدارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "سهام السيد مصطفى عثمان",
+     "role": "عضو مجلس إدارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "إيمان محمود يوسف جنيدى",
+     "role": "عضو مجلس إدارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "علاء الدين أحمد عطوة",
+     "role": "عضو مجلس إدارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "أحمد سمير على حميدة",
+     "role": "عضو مجلس إدارة",
+     "representing": "عن نفسه"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "يسرى محمود عبد الحميد عتلم",
+     "percent": 10.04,
+     "shares": 10843926,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أحمد محمود عبد الحميد عتلم",
+     "percent": 6.498,
+     "shares": 7018294,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أية محمود عبد الحميد عتلم",
+     "percent": 4.31,
+     "shares": 4658501,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "سهام السيد مصطفى عثمان",
+     "percent": 3.684,
+     "shares": 3979530,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أحمد حمدى عبد العظيم",
+     "percent": 0.000833,
+     "shares": 900,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "المتوكل على الله جمعة محمد إبراهيم",
+     "percent": 10.649,
+     "shares": 11501238,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291793": {
+   "filingId": "291793",
+   "ticker": "BONY",
+   "publishedAt": "2026-07-21T15:42:06",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341504_1.pdf",
+   "companyArabic": "بنيان للتنمية والتجارة",
+   "asOfDate": "2026-06-30",
+   "totalShares": 1704403226.0,
+   "board": [
+    {
+     "nameArabic": "عمرو محمد الشافعي محمد فوزي حسن",
+     "role": "رئيس مجلس الإدارة",
+     "representing": "Sky Realty Holding Limited"
+    },
+    {
+     "nameArabic": "شامل فهيم لطفي أبو الفضل",
+     "role": "الرئيس التنفيذي و العضو المنتدب",
+     "representing": "Sky Realty Holding Limited"
+    },
+    {
+     "nameArabic": "طارق محمد مدحت عبد الهادي عبد الرحمن",
+     "role": "عضو منتدب",
+     "representing": "Sky Realty Holding Limited"
+    },
+    {
+     "nameArabic": "فادي كريم عدلي رأفت",
+     "role": "عضو منتدب للشئون المالية",
+     "representing": "Sky Realty Holding Limited"
+    },
+    {
+     "nameArabic": "محمد فاروق محمد عبد المجيد عبد الخالق",
+     "role": "عضو مجلس إدارة",
+     "representing": "Sky Realty Holding Limited"
+    },
+    {
+     "nameArabic": "كريم ممدوح محمد زهران",
+     "role": "عضو مجلس إدارة",
+     "representing": "Sky Realty Holding Limited"
+    },
+    {
+     "nameArabic": "محمود مصطفي محمود صلاح الدين مصطفي فايق",
+     "role": "عضو مجلس إدارة",
+     "representing": "Sky Realty Holding Limited"
+    },
+    {
+     "nameArabic": "سارة مراد فؤاد الشاهد",
+     "role": "عضو مجلس إدارة",
+     "representing": "Sky Realty Holding Limited"
+    },
+    {
+     "nameArabic": "نادر فريد محمد ابو شادى",
+     "role": "عضو مجلس إدارة",
+     "representing": "Sky Realty Holding Limited"
+    },
+    {
+     "nameArabic": "منه الله ايمن محمد صادق",
+     "role": "عضو مجلس إدارة مستقل",
+     "representing": null
+    },
+    {
+     "nameArabic": "حاتم احمد السيد سليمان",
+     "role": "عضو مجلس إدارة مستقل",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "سكاي ريلتي هولدنج ليميتد",
+     "percent": 78.71,
+     "shares": 1341499800,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "المجموعة المرتبطة (شامل فهيم لطفي أبو الفضل)",
+     "percent": 6e-06,
+     "shares": 100,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "المجموعة المرتبطة (سارة مراد فؤاد الشاهد)",
+     "percent": 0.0118,
+     "shares": 201613,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "المجموعة المرتبطة (نادر فريد محمد ابو شادى)",
+     "percent": 0.0015,
+     "shares": 26160,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291800": {
+   "filingId": "291800",
+   "ticker": "SVCE",
+   "publishedAt": "2026-07-21T16:15:14",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341525_1.pdf",
+   "companyArabic": "جنوب الوادي للاسمنت",
+   "asOfDate": "2026-06-30",
+   "totalShares": 482256840.0,
+   "board": [
+    {
+     "nameArabic": "السيد/ فهد حسين شبكشي",
+     "role": "رئيس مجلس إدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيدة/ سمر فوزى عبد الجواد",
+     "role": "نائب رئيس مجلس إدارة والعضو المنتدب",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد/ محمد فؤاد أبو اليزيد",
+     "role": "عضو مجلس إدارة ذو خبرة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد/ هشام فاروق منصور على القبانى",
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة بلو نايل ليمتد"
+    },
+    {
+     "nameArabic": "السيد / محمد ابراهيم عبد الحميد",
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد/ علاء محمد محمود الفص",
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة النهلة للتجارة والمقاولات"
+    },
+    {
+     "nameArabic": "السيد/ على محمود احمد طنطاوى",
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة المنار المصرية للتنمية العقارية"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "شركة بلو نايل ليمتد",
+     "percent": 37.73,
+     "shares": 181952241,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركه النهله للتجاره والمقاولات",
+     "percent": 8.15,
+     "shares": 39296645,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "GAZELLE LTD INC",
+     "percent": 9.33,
+     "shares": 45002437,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291802": {
+   "filingId": "291802",
+   "ticker": "AIFI",
+   "publishedAt": "2026-07-22T09:05:14",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341505_1.pdf",
+   "companyArabic": "اطلس للاستثمار والصناعات الغذائية (ش.م.م)",
+   "asOfDate": "2026-06-30",
+   "totalShares": 1151285400.0,
+   "board": [
+    {
+     "nameArabic": "أ/ عصام عادل جرجس",
+     "role": "رئيس مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "أ/ شريف عدلى كيرلس بولس",
+     "role": "نائب رئيس مجلس ادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "أ/ محمد سامح فكرى البدوى",
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "أ/ وليد سيد عبدالكريم حسانين",
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيد/ تامر فاروق حسين احمد",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة نيوكيمت ميديا للدعاية والاعلان"
+    },
+    {
+     "nameArabic": "السيد / يحيى زكريا عبد المنعم ابراهيم",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة اميرالد للاتصالات وتكنولوجيا المعلومات"
+    },
+    {
+     "nameArabic": "أ/ محمد نجم الدين محمد نور الدين عكاشة",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة اموال العربية للاقطان"
+    },
+    {
+     "nameArabic": "أ/ امنيه محمد شريف محمود على",
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "أ/ ايناس محمد صلاح الدين عبد الحميد مناع",
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "امون للعقارات والتنمية السياحية",
+     "percent": 28.29,
+     "shares": 325694102,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "مارينا عصام عادل جرجس",
+     "percent": 7.68,
+     "shares": 88399219,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "جولينا عصام عادل جرجس عبيد",
+     "percent": 7.68,
+     "shares": 88399219,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عصام عادل جرجس عبيد",
+     "percent": 1.15,
+     "shares": 13191887,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شريف عدلى كيرلس بولس",
+     "percent": 6.0,
+     "shares": 69089623,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "زادى للاستثمارات",
+     "percent": 3.63,
+     "shares": 41743931,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شريف محمد نجم الدين محمد نور الدين عكاشة",
+     "percent": 0.17,
+     "shares": 1958073,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمد نجم الدين محمد نور الدين عكاشة",
+     "percent": 0.14,
+     "shares": 1602910,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "اسكوم للاستثمار العقارى ش م م",
+     "percent": 0.17,
+     "shares": 1923129,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "اموال العربية للاقطان",
+     "percent": 0.39,
+     "shares": 4432871,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "اميرالد للاتصالات وتكنولوجيا المعلومات",
+     "percent": 9.83,
+     "shares": 113147195,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291814": {
+   "filingId": "291814",
+   "ticker": "EGAL",
+   "publishedAt": "2026-07-22T09:56:49",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341548_1.pdf",
+   "companyArabic": "شركة مصر للألومنيوم",
+   "asOfDate": "2026-06-30",
+   "totalShares": 412500000.0,
+   "board": [
+    {
+     "nameArabic": "د . مهندس / محمود عبدالعليم عجور",
+     "role": "العضو المنتدب",
+     "representing": "شركة الصناعات المعدنية"
+    },
+    {
+     "nameArabic": "مهندسة / زينب هاشم محمود أحمد",
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة الصناعات المعدنية"
+    },
+    {
+     "nameArabic": "أستاذ . دكتور / سيد أحمد كاسب",
+     "role": "رئيس مجلس الإدارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "محاسب / خالد عبدالوهاب حماد",
+     "role": "عضو مجلس إدارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "مهندس / مؤمن مصطفى ياسين",
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة مصر للألومنيوم"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "شركة الصناعات المعدنية ش.ق.م.م",
+     "percent": 89.8372,
+     "shares": 370578435,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركة النصر للتعدين",
+     "percent": 2.2,
+     "shares": 9075000,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "صندوق التأمين الإجتماعي للعاملين بالقطاع الحكومى",
+     "percent": 2.5,
+     "shares": 10312500,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "صندوق التأمين للعاملين بقطاع الأعمال العام والخاص",
+     "percent": 2.5,
+     "shares": 10312500,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "صندوق التأمين الإجتماعي للعاملين بالقطاع الحكومى ۳",
+     "percent": 0.012108,
+     "shares": 49944,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "صندوق التأمين الإجتماعي للعاملين بالقطاع الحكومى ٤",
+     "percent": 0.008707,
+     "shares": 35917,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "صندوق للعاملين بقطاع الأعمال",
+     "percent": 0.002832,
+     "shares": 11683,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291851": {
+   "filingId": "291851",
+   "ticker": "CIRA",
+   "publishedAt": "2026-07-26T09:10:26",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341564_1.pdf",
+   "companyArabic": "القاهرة لاستثمار والتنمية العقارية سيرا للتعليم",
+   "asOfDate": null,
+   "totalShares": 582790325.0,
+   "board": [
+    {
+     "nameArabic": "حسن حسن القلا",
+     "role": "رئيس مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "محمد حسن القلا",
+     "role": "العضو المنتدب",
+     "representing": null
+    },
+    {
+     "nameArabic": "احمد حسن القلا",
+     "role": "عضو مجلس ادارة ممثلا عن SIC",
+     "representing": "SIC"
+    },
+    {
+     "nameArabic": "محمد السيد محمد سليمان",
+     "role": "عضو مجلس ادارة ممثلا عن SIC",
+     "representing": "SIC"
+    },
+    {
+     "nameArabic": "شريف سمير سامى",
+     "role": "عضو مستقل",
+     "representing": null
+    },
+    {
+     "nameArabic": "سارة حسن حسن القلا",
+     "role": "عضو مجلس ادارة ممثلا عن SIC",
+     "representing": "SIC"
+    },
+    {
+     "nameArabic": "طارق مجدى احمد عبد الرؤوف حشيش",
+     "role": "مستقل عضو مجلس ادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "محمد فاروق محمد عبد الخالق",
+     "role": "عضو مجلس ادارة ممثلا عن SIC",
+     "representing": "SIC"
+    },
+    {
+     "nameArabic": "محمود محمد صفوت محى الدين",
+     "role": "عضو مجلس ادارة ممثلا عن SIC",
+     "representing": "SIC"
+    },
+    {
+     "nameArabic": "Martin Ngombwa",
+     "role": "عضو مجلس ادارة ممثلا عن SIC",
+     "representing": "SIC"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "Social impact capital ltd",
+     "percent": 88.68,
+     "shares": 516841762,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "292093": {
+   "filingId": "292093",
+   "ticker": "CIEB",
+   "publishedAt": "2026-07-28T15:29:05",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341818_1.pdf",
+   "companyArabic": "بنك كريدى اجريكول - مصر",
+   "asOfDate": "2026-06-30",
+   "totalShares": 1250000000.0,
+   "board": [
+    {
+     "nameArabic": "السيد / جون بيير ترينيل",
+     "role": "عضو منتدب - تنفيذي",
+     "representing": "كريدى اجريكول فرنسا"
+    },
+    {
+     "nameArabic": "السيد / ميشيل لو ماسون",
+     "role": "نائب رئيس مجلس إدارة - عضو غير تنفيذي",
+     "representing": "كريدى اجريكول فرنسا"
+    },
+    {
+     "nameArabic": "السيد/ باسكال ديزاميه",
+     "role": "عضو غير تنفيذي",
+     "representing": "كريدى اجريكول فرنسا"
+    },
+    {
+     "nameArabic": "السيد / نيقولاس تافرنييه",
+     "role": "عضو غير تنفيذي",
+     "representing": "كريدى اجريكول فرنسا"
+    },
+    {
+     "nameArabic": "السيد / ديدييه ريبول",
+     "role": "عضو غير تنفيذي",
+     "representing": "كريدى اجريكول فرنسا"
+    },
+    {
+     "nameArabic": "السيد/ حاتم المصمودي",
+     "role": "عضو غير تنفيذي",
+     "representing": "كريدي اجريكول فرنسا سى أى بى"
+    },
+    {
+     "nameArabic": "السيد/ حسن على دايخ",
+     "role": "عضو غير تنفيذي",
+     "representing": "رولاكو أي جي بي للاستثمار لمالكها علي حسن علي دايخ شركة الشخص الواحد ش ذ م م"
+    },
+    {
+     "nameArabic": "السيد/ أسامة عبد المنعم محمود صالح",
+     "role": "رئيس مجلس الإدارة - غير تنفيذي",
+     "representing": "مستقل"
+    },
+    {
+     "nameArabic": "السيد/ نديم حبيب غانم",
+     "role": "عضو غير تنفيذي",
+     "representing": "مستقل"
+    },
+    {
+     "nameArabic": "الدكتورة/ منى الجرف",
+     "role": "عضو غير تنفيذي",
+     "representing": "مستقل"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "كريدي اجريكول – فرنسا",
+     "percent": 52.185,
+     "shares": 652318110,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "كريدي اجريكول – كوربريت اند انفستمنت بنك",
+     "percent": 13.066,
+     "shares": 163327560,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "رولاكو اي جي بي للاستثمار لمالكها علي حسن علي دايخ",
+     "percent": 9.967,
+     "shares": 124585543,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "الدكتور / علي حسن علي دايخ اسهم شخصية",
+     "percent": 0.012,
+     "shares": 148962,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "صندوق التامين الاجتماعي للعاملين بالقطاع الحكومي",
+     "percent": 7.982,
+     "shares": 99778768,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي حساب 6",
+     "percent": 0.013,
+     "shares": 161750,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": [
+    "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي 4",
+    "صندوق العاملين بالقطاع الحكومي",
+    "الهيئه القوميه للتامين الاجتماعي حساب رقم اربعه",
+    "الهيئه القوميه للتامين الاجتماعي حساب",
+    "الهيئه القوميه للتامين الاجتماعي حساب",
+    "صندوق التامين الاجتماعي للعاملين بالقطاع الحكومي 3",
+    "صندوق التامين الاجتماعي للعاملين بالقطاع الحكومي 5",
+    "الهيئه القوميه للتامين الاجتماعي حساب",
+    "صندوق التامين الاجتماعي للعاملين بقطاع الاعمال العام و الخاص حساب 3",
+    "صندوق التامين الاجتماعي للعاملين بالقطاع الحكومي حساب 7",
+    "صندوق التامين الاجتماعي للعاملين بقطاع الاعمال العام والخاص حساب 4"
+   ]
+  },
+  "291642": {
+   "filingId": "291642",
+   "ticker": "CCRS",
+   "publishedAt": "2026-07-20T14:45:37",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341333_1.pdf",
+   "companyArabic": "الخليجية الكندية للاستثمار العقاري العربي",
+   "asOfDate": "2026-07-14",
+   "totalShares": 210000000.0,
+   "board": [
+    {
+     "nameArabic": "باهر محمد خورشيد العدناني",
+     "role": "رئيس /غير تنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "عامر محمود عامر",
+     "role": "عضو منتدب/ تنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "أحمد أحمد إبراهيم جادالله",
+     "role": "عضو /غير تنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "رامز عبد الحميد رامز",
+     "role": "عضو /غير تنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "عمر باهر خورشيد العدناني",
+     "role": "عضو /غير تنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "ابتسام محمد صبحي الأيوبي",
+     "role": "عضو مستقل/غير تنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "سلوى محمد على حسين",
+     "role": "عضو مستقل/غير تنفيذي",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "باهر محمد خورشيد العدناني",
+     "percent": 16.67,
+     "shares": 35006958,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عمر باهر محمد العدناني",
+     "percent": 1.43,
+     "shares": 3000000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "سمر محمد العدناني",
+     "percent": 8.6,
+     "shares": 18061433,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "رامز عبد الحميد بعاصيري",
+     "percent": 2.965,
+     "shares": 6227814,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "سامر عبد الحميد بعاصيري",
+     "percent": 0.767,
+     "shares": 1609704,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ريم عبد الحميد بعاصيري",
+     "percent": 0.38,
+     "shares": 804852,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "عبد الحميد بعاصيري",
+     "percent": 0.38,
+     "shares": 804852,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "بشار محمد رشاد محمد",
+     "percent": 2.007,
+     "shares": 4214395,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291454": {
+   "filingId": "291454",
+   "ticker": "AFDI",
+   "publishedAt": "2026-07-16T10:26:13",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341159_1.pdf",
+   "companyArabic": "شركة الأهلى للتنمية والأستثمار",
+   "asOfDate": "2026-06-30",
+   "totalShares": 18000000.0,
+   "board": [
+    {
+     "nameArabic": "أحمد سعد الدين عبده أبو هنديه",
+     "role": "رئيس مجلس الادارة",
+     "representing": "مستقل من ذوي الخبره"
+    },
+    {
+     "nameArabic": "توفيق صلاح الدين احمد دياب",
+     "role": "نائب رئيس مجلس الادارة و العضو المنتدب",
+     "representing": "من ذوي الخبرة"
+    },
+    {
+     "nameArabic": "هشام إبراهيم محمد حسن",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة بيكو للاستثمارات"
+    },
+    {
+     "nameArabic": "سمر فوزي عبد الجواد",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة جنوب الوادي للاسمنت"
+    },
+    {
+     "nameArabic": "محمد فؤاد أبو اليزيد",
+     "role": "عضو مجلس ادارة",
+     "representing": "شركة جولدن بيراميدز بلازا"
+    },
+    {
+     "nameArabic": "عمرو علي مصطفي البدري",
+     "role": "عضو مجلس ادارة من ذوي الخبرة",
+     "representing": "من ذوي الخبرة"
+    },
+    {
+     "nameArabic": "أمين مصطفي محمد امين علوه",
+     "role": "عضو مجلس ادارة",
+     "representing": "مساهم عن نفسه"
+    },
+    {
+     "nameArabic": "خالد عبد العزيز محمد حجازي",
+     "role": "عضو مجلس إدارة مستقل من ذوي الخبرة",
+     "representing": "مستقل من ذوي الخبره"
+    },
+    {
+     "nameArabic": "نيره نزيه احمد امين",
+     "role": "عضو مجلس إدارة مستقل من ذوي الخبرة",
+     "representing": "مستقل من ذوي الخبره"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "توفيق صلاح الدين احمد دياب",
+     "percent": 6.967,
+     "shares": 1254142,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شركة بيكو للاستثمارات",
+     "percent": 15.855,
+     "shares": 2853881,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركة بيكو اينيرجي القابضة للاستثمارات المالية",
+     "percent": 2.987,
+     "shares": 537586,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركه جولدن بيراميدز بلازا",
+     "percent": 5.75,
+     "shares": 1035000,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
   }
  },
  "refused": {
@@ -16723,6 +22017,9 @@
   "291160": "a director has no usable name: {'nameArabic': None, 'role': 'عضو مجلس الإدارة الممثل عن الشركة القابضة', 'representing': 'الشركة القابضة'}",
   "291163": "a holder has no usable name: 'هشام محمد مدحت يوسف الفار ، فاطمة الزهراء علي السيد علي ، محمد علي السيد علي ، دينا محمد نشأت يوسف الفار ، Regional Investment Holding'",
   "291387": "'محفظة أكسا رقم 13 صندوق مؤشر EGX30' holds 1,811,956 of 25,000,000 shares, which is 7.25% and not the 32.56% printed",
-  "291519": "'شركة الحصن للاستشارات' holds 308,070,587 of 500,000,000 shares, which is 61.61% and not the 6.16% printed"
+  "291519": "'شركة الحصن للاستشارات' holds 308,070,587 of 500,000,000 shares, which is 61.61% and not the 6.16% printed",
+  "291854": "'على محمود عبد اللطيف محجوب' holds 19,018,048 of 40,000,000 shares, which is 47.55% and not the 4.75% printed",
+  "291611": "'اتحاد العاملين المساهمين بشركة مصر للزيوت والصابون' holds 1,000,000 of 6,000,000 shares, which is 16.67% and not the 16.17% printed",
+  "291435": "the named holders add to 163.90% of the company"
  }
 }
