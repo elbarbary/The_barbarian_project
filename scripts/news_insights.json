@@ -2347,6 +2347,10 @@
     "meaning": "A subsidiary of MNT-Halan submits a listing application to the Egyptian Exchange (EGX), initiating the formal regulatory review process to register its shares under local market listing and disclosure rules.",
     "meaning_ar": "تتقدم إحدى الشركات التابعة لـ«إم إن تى حالا» بطلب رسمي لقيد أسهمها في البورصة المصرية، لتبدأ بذلك إجراءات المراجعة التنظيمية استيفاءً لقواعد القيد والإفصاح المعمول بها في السوق."
   },
+  "تاسيس غرفه تجاره مشتركه مصريه هنديه لتعزيز التجاره والاستثمار": {
+    "meaning": "A joint chamber of commerce serves as a bilateral institutional platform connecting private enterprises, coordinating direct B2B matchmaking, and sharing regulatory, trade, and customs information between Egyptian and Indian markets.",
+    "meaning_ar": "تُمثل غرفة التجارة المشتركة منصة مؤسسية ثنائية تربط بين شركات القطاع الخاص، وتتولى تنظيم لقاءات الأعمال المباشرة وتبادل البيانات المتعلقة بالتنظيمات التجارية والتشريعات الجمركية بين السوقين المصري والهندي."
+  },
   "تايلاند تطلق برنامجا لتوسيع نطاق وصول الجمهور الي ادوات الذكاء الاصطناعي": {
     "meaning": "The initiative establishes a state-supported digital infrastructure framework that distributes artificial intelligence tools and computing resources across public and commercial channels.",
     "meaning_ar": "تؤسس المبادرة إطاراً للبنية التحتية الرقمية المدعومة حكومياً لتوزيع أدوات الذكاء الاصطناعي وموارد الحوسبة عبر القنوات العامة والتجارية."
@@ -4220,6 +4224,10 @@
   "نايب رييس الوزراء: نتطلع لزياده استثمارات الاوروبي لاعاده الاعمار في السوق المصريه": {
     "meaning": "Partnerships with multilateral development institutions like the EBRD inject direct foreign financing and long-term concessional lending into domestic infrastructure and private sector projects.",
     "meaning_ar": "توفر الشراكات مع مؤسسات التنمية متعددة الأطراف مثل البنك الأوروبي لإعادة الإعمار تمويلاً أجنبياً مباشراً وقروضاً ميسرة طويلة الأجل لمشروعات البنية التحتية والقطاع الخاص المحلي."
+  },
+  "نايب محافظ الاسماعيليه يشهد احتفاليه عيد الفلاح الرابع والسبعين ويكرم عددا من المزارعين المتميزين": {
+    "meaning": "This event reflects government engagement with the local agricultural sector, which operates as a foundational supplier of raw materials to domestic agro-industrial and food processing businesses.",
+    "meaning_ar": "تعكس هذه الفعالية التواصل الحكومي مع القطاع الزراعي المحلي، الذي يعمل كمورد أساسي للمواد الخام للشركات المحلية في قطاعي الصناعات الغذائية والزراعية."
   },
   "نبيل عماشه: فترات السداد الطويله تحمل العميل والمطور مخاطر مضاعفه": {
     "meaning": "Extended real estate installment plans lengthen the project cash collection cycle and increase developer exposure to construction cost inflation, while tying buyers to multi-year payment obligations across changing macroeconomic conditions.",
