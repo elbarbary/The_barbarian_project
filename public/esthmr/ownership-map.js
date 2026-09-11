@@ -207,34 +207,18 @@ export function placeHolders(model, holdings, opts = {}) {
   return dots.sort((a, b) => b.percent - a.percent);
 }
 
-/* How many of those dots can be named without a name landing on another.
+/* Nothing here decides WHICH holders get a name.
  *
- * Not a top-N: the number that fits is whatever fits, and it changes with the
- * size of the board. A fixed count would show the same twelve names on a
- * phone and in full screen, and would quietly become a ranking of holders
- * rather than a consequence of the room available.
+ * An earlier version drew a name over every dot whose label box did not
+ * collide with one already placed, which sounds adaptive and is not: at this
+ * density it named nineteen of eight hundred and seventy-six, and a reader
+ * cannot tell why those nineteen. It is a ranking produced by geometry, and a
+ * ranking of named parties is exactly what this project does not publish.
+ *
+ * So no name is drawn at rest. Every holder has a dot, pointing at a dot
+ * names it, and the register beside the board lists all of them in an order
+ * that is stated. Zoom changes how big things are, never who is named.
  */
-export function labelWhatFits(dots, taken, view, opts = {}) {
-  const size = opts.fontSize ?? 8;
-  const per = opts.charWidth ?? 4.6;
-  const lift = opts.lift ?? 5.5;
-  const boxes = taken.slice();
-  const hits = (box) => boxes.some((b) => box.x < b.x + b.w && b.x < box.x + box.w
-                                       && box.y < b.y + b.h && b.y < box.y + box.h);
-  const out = [];
-  dots.forEach((dot) => {
-    const text = opts.labelOf(dot.holder);
-    if (!text) return;
-    const trimmed = text.length > 24 ? `${text.slice(0, 22)}…` : text;
-    const w = trimmed.length * per;
-    const box = { x: dot.x - w / 2, y: dot.y - dot.r - lift - size, w, h: size + 1.5 };
-    if (box.x < 2 || box.x + box.w > view.w - 2 || box.y < 2) return;
-    if (hits(box)) return;
-    boxes.push(box);
-    out.push({ dot, text: trimmed, x: dot.x, y: box.y + size });
-  });
-  return out;
-}
 
 
 export function arcPath(cx, cy, r0, r1, a0, a1) {
@@ -309,6 +293,7 @@ export function renderMap(svg, model, opts) {
   const gBridge = svgEl('g', { class: 'om-bridges' }, svg);
   const gCo = svgEl('g', { class: 'om-cos' }, svg);
   const gDot = svgEl('g', { class: 'om-dots' }, svg);
+  const gName = svgEl('g', { class: 'om-names' }, svg);
   const gPop = svgEl('g', { class: 'om-pop' }, svg);
 
   // What the focus is related to: a company lights its holders, a holder
@@ -347,11 +332,10 @@ export function renderMap(svg, model, opts) {
 
   // ── a holder who is in more than one company ──────────────────────────────
   //
-  // The only genuinely graph-shaped thing in the data — 59 of the 66 named
-  // holders appear in exactly one company, and for them the slice on the ring
-  // already says everything a separate node would. These seven are drawn as
-  // the curves they are.
-  bridges.forEach((b) => {
+  // Only for the holder in focus. Drawn for everyone at rest they were a
+  // hundred and nineteen curves across twenty-five sector cells — a texture
+  // rather than a fact. One holder's spokes, on request, are the fact.
+  bridges.filter((b) => focus && b.holder === focus).forEach((b) => {
     for (let i = 0; i < b.tickers.length - 1; i += 1) {
       const a = nodes.get(b.tickers[i]);
       const c = nodes.get(b.tickers[i + 1]);
@@ -359,11 +343,44 @@ export function renderMap(svg, model, opts) {
       const { d } = edgePath(a, c);
       svgEl('path', {
         d, fill: 'none', stroke: hueOf(b.holder), 'stroke-width': 1.6,
-        'stroke-linecap': 'round', opacity: 0.75,
-        class: `om-bridge${cls(b.holder)}`,
+        'stroke-linecap': 'round', opacity: 0.8, class: 'om-bridge',
       }, gBridge);
     }
   });
+
+  /* A line between two companies says they are connected and nothing else —
+   * not who holds whom, and not how much. So when a holder is in focus, each
+   * company they hold is tagged with the stake they hold of it, and the tag
+   * carries the holder's own colour. Read together the board says "this party,
+   * this much of this company", which is the sentence the curve was standing
+   * in for.
+   */
+  if (focus) {
+    holdings.filter((p) => p.holder === focus && p.percent > 0).forEach((p) => {
+      const n = nodes.get(p.ticker);
+      if (!n) return;
+      // A stake read down to three thousandths of a company is not zero, and
+      // "0.00%" says it is. El Hosn's 0.003% of UNIP is the real figure.
+      const label = p.percent < 0.01 ? '<0.01%'
+        : `${p.percent.toFixed(p.percent < 10 ? 2 : 1)}%`;
+      const w = label.length * 5.6 + 9;
+      const x = Math.min(view.w - w / 2 - 2, Math.max(w / 2 + 2, n.x));
+      const y = n.y + n.r + BAND / 2 + 13;
+      const g = svgEl('g', { class: 'om-stake-tag' }, gBridge);
+      svgEl('rect', {
+        x: x - w / 2, y: y - 9, width: w, height: 12.5, rx: 6,
+        fill: hueOf(focus), opacity: 0.94,
+      }, g);
+      const text = svgEl('text', {
+        x, y, 'text-anchor': 'middle', 'font-size': 8.5, 'font-weight': 600,
+        fill: 'var(--surface)', direction: 'ltr',
+      }, g);
+      text.textContent = label;
+      const title = svgEl('title', {}, g);
+      title.textContent = t(`${labelOf(focus)} holds ${p.percent}% of ${p.ticker}`,
+                            `${labelOf(focus)} يملك ${p.percent}٪ من ${p.ticker}`);
+    });
+  }
 
   // ── the companies ─────────────────────────────────────────────────────────
   const byTicker = new Map();
@@ -475,9 +492,11 @@ export function renderMap(svg, model, opts) {
   // as the board has room for. The slices already carry the same fact as
   // colour; this is the half a reader can read out loud.
   const dots = placeHolders(model, holdings);
+  const dotEls = [];
   dots.forEach((dot) => {
     const g = svgEl('g', {
       class: `om-dot${cls(dot.holder, dot.ticker)}`, 'data-id': dot.holder,
+      tabindex: 0, role: 'button',
     }, gDot);
     svgEl('circle', {
       cx: dot.x, cy: dot.y, r: dot.r, fill: hueOf(dot.holder),
@@ -491,25 +510,45 @@ export function renderMap(svg, model, opts) {
   // A name may not land on a ring, on a ring's ticker, or on a sector's
   // caption. The reserved box is the RING, not the text inside it: reserving
   // only the ticker put "Wadi Lilistithmarat" straight across GGCC's band.
-  const taken = model.placed.map((n) => {
-    const reach = n.r + BAND / 2 + 2;
-    return { x: n.x - reach, y: n.y - reach, w: reach * 2, h: reach * 2 };
-  }).concat(cells.map((c) => ({ x: c.x, y: c.y, w: c.w, h: CELL_LABEL })));
-  labelWhatFits(dots, taken, view, {
-    labelOf, fontSize: dense ? 8.5 : 8, charWidth: dense ? 4.9 : 4.6,
-  }).forEach(({ dot, text, x, y }) => {
-    const g = svgEl('g', {
-      class: `om-dot-name${cls(dot.holder, dot.ticker)}`, 'data-id': dot.holder,
-    }, gDot);
-    const label = svgEl('text', {
-      x, y, 'text-anchor': 'middle', 'font-size': dense ? 8.5 : 8,
-      fill: 'var(--t2)', direction: 'ltr',
-    }, g);
-    label.textContent = text;
-    const title = svgEl('title', {}, g);
-    title.textContent = labelOf(dot.holder);
-    g.addEventListener('click', (e) => { e.stopPropagation(); onPick(dot.holder); });
+  // A name on demand, over the dot the pointer is on. Built once and moved,
+  // because a label created per hover is a node per hover.
+  const hover = svgEl('g', { class: 'om-hover', visibility: 'hidden' }, gName);
+  const plate = svgEl('rect', { rx: 7, class: 'om-pin-plate' }, hover);
+  const hoverText = svgEl('text', {
+    'text-anchor': 'middle', 'font-size': 9.5, fill: 'var(--ink)', direction: 'ltr',
+  }, hover);
+  const nameAt = (dot) => {
+    const label = `${dot.percent.toFixed(2)}%  ${labelOf(dot.holder)}`;
+    hoverText.textContent = label;
+    const w = (typeof hoverText.getComputedTextLength === 'function'
+      && hoverText.getComputedTextLength() > 0)
+      ? hoverText.getComputedTextLength() : label.length * 5.2;
+    const x = Math.max(w / 2 + 4, Math.min(view.w - w / 2 - 4, dot.x));
+    const y = Math.max(14, dot.y - dot.r - 7);
+    hoverText.setAttribute('x', x);
+    hoverText.setAttribute('y', y);
+    plate.setAttribute('x', x - w / 2 - 5);
+    plate.setAttribute('y', y - 9.5);
+    plate.setAttribute('width', w + 10);
+    plate.setAttribute('height', 13);
+    hover.setAttribute('visibility', 'visible');
+  };
+  const clearName = () => hover.setAttribute('visibility', 'hidden');
+  // The elements as they were built, rather than queried back out of the
+  // layer: the same order, no selector, and nothing to go stale.
+  dotEls.forEach((g, i) => {
+    const dot = dots[i];
+    if (!dot) return;
+    g.addEventListener('pointerenter', () => nameAt(dot));
+    g.addEventListener('pointerleave', clearName);
+    g.addEventListener('focus', () => nameAt(dot));
+    g.addEventListener('blur', clearName);
   });
+  if (opts.named) {
+    const shown = dots.find((d) => d.holder === opts.named.holder
+                                && d.ticker === opts.named.ticker);
+    if (shown) nameAt(shown);
+  }
 
   // ── who is in the company you picked ──────────────────────────────────────
   //

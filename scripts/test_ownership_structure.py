@@ -63,8 +63,32 @@ class Reading(unittest.TestCase):
             "AAA", "شركة ألفا")
         self.assertIn("115.00%", why or "")
 
+    def test_a_director_who_owns_nothing_does_not_void_the_register(self):
+        # These forms print the board in the same table as the holders, and a
+        # director with no shares is printed at zero. Refusing the document
+        # over that threw away twelve complete registers — every one of them
+        # naming people who DO hold.
+        self.assertIsNone(structure.vet(form(totalShares=None, shareholders=[
+            {"nameArabic": "هشام حسين الخازندار", "percent": 0.0, "shares": None,
+             "kind": "person"},
+            {"nameArabic": "محمد اشرف عمر عمر", "percent": 12.5, "shares": None,
+             "kind": "person"}]), "AAA", "شركة ألفا للاستثمار"))
+
+    def test_a_row_with_no_stake_is_not_published_as_a_holding(self):
+        rows = [{"nameArabic": "هشام حسين الخازندار", "percent": 0.0},
+                {"nameArabic": "ليلي رمزي نجيب خله", "percent": None},
+                {"nameArabic": "محمد اشرف عمر عمر", "percent": 12.5}]
+        self.assertEqual([r["nameArabic"] for r in structure.owning(rows)],
+                         ["محمد اشرف عمر عمر"])
+
+    def test_a_form_of_nothing_but_zero_holders_and_no_board_is_still_refused(self):
+        why = structure.vet(form(board=[], totalShares=None, shareholders=[
+            {"nameArabic": "هشام حسين الخازندار", "percent": 0.0}]),
+            "AAA", "شركة ألفا للاستثمار")
+        self.assertIn("neither a director nor a holder", why or "")
+
     def test_a_stake_outside_nought_to_a_hundred_is_refused(self):
-        for bad in (0, -3, 140):
+        for bad in (-3, 140):
             why = structure.vet(form(totalShares=None, shareholders=[
                 {"nameArabic": "أحمد محمد علي حسن", "percent": bad, "shares": None,
                  "kind": "person"}]), "AAA", "شركة ألفا")

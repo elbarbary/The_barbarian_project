@@ -57,6 +57,31 @@ class Classifying(unittest.TestCase):
     def test_a_four_part_personal_name_is_a_person(self):
         self.assertFalse(ii.is_firm("محمد اشرف عمر عمر", "Mohamed Ashraf Omar Omar"))
 
+    def test_a_latin_institutional_name_is_a_firm(self):
+        # Registers list foreign and institutional holders in Latin script.
+        # Reading only the Arabic branch made people of 173 of the 193 of
+        # them — Bank Misr and Goldman Sachs among them.
+        for firm in ("Bank Misr", "Goldman Sachs International", "MLM FOUNDATION",
+                     "Care Healthcare LTD", "Arab Contractors For Investments",
+                     "WAFA ASSURANCE"):
+            self.assertTrue(ii.is_firm(firm), firm)
+
+    def test_a_dotted_abbreviation_is_read_as_one_token(self):
+        # After the punctuation strip `B.V` is the letters "b" and "v", which
+        # match nothing.
+        self.assertTrue(ii.is_firm("TRIQUEAR B.V"))
+        self.assertTrue(ii.is_firm("Taad S.A.E"))
+
+    def test_compacting_the_whole_name_is_not_how_that_is_done(self):
+        # A suffix test over a de-spaced name would make a firm of everyone
+        # whose family name happens to end in one.
+        self.assertFalse(ii.is_firm("Ahmed Moussa Ali Hassan"))
+        self.assertFalse(ii.is_firm("Mona Issa Mahmoud"))
+
+    def test_a_latin_personal_name_is_still_a_person(self):
+        self.assertFalse(ii.is_firm("Khaled Gamaleldin Mohamed Mahmoud"))
+        self.assertFalse(ii.is_firm("Ali Ben Hassan Ben Aly Dayekh"))
+
     def test_a_titled_personal_name_is_a_person(self):
         self.assertFalse(ii.is_firm("د/ هاشم السيد هاشم دسوقى.",
                                     "Dr. Hashem El Sayed Hashem Desouky"))

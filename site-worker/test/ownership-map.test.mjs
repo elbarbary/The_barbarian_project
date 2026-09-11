@@ -197,13 +197,29 @@ test('an ordinary ring is not marked as over-disclosed', () => {
   assert.match(text(ring), /40\.0% in named hands/);
 });
 
-test('the whole published market has no company whose filings exceed it', () => {
+test('every company whose filings exceed it is declared, not left to be noticed', () => {
+  // Merging the registers in made this possible: a register in English and a
+  // trade form in Arabic can name one firm twice, and no folding reaches
+  // across a translation. The claim is not that it never happens — it is that
+  // when it does, the file says so.
   const byTicker = new Map();
   OM.standing(published).forEach((p) => {
     byTicker.set(p.ticker, (byTicker.get(p.ticker) || 0) + p.percent);
   });
-  const over = [...byTicker.entries()].filter(([, pct]) => pct > 100.0001);
-  assert.deepEqual(over, []);
+  const over = [...byTicker.entries()].filter(([, pct]) => pct > 100.0001)
+    .map(([t]) => t).sort();
+  const declared = (published.overDisclosed || []).map((r) => r.ticker).sort();
+  assert.deepEqual(over, declared);
+});
+
+test('an over-disclosed company is marked on the board and named in the panel', () => {
+  const over = (published.overDisclosed || [])[0];
+  if (!over) return;                       // nothing to check today
+  const out = panel();
+  const ring = nodesWithClass(out, 'om-co').find((n) => n.attrs['data-id'] === over.ticker);
+  assert.ok(String(ring.attrs.class).includes('om-over'),
+            `${over.ticker} adds to ${over.percent}% and is not marked`);
+  assert.match(text(ring), /which is more than the company/);
 });
 
 test('a crowded board still keeps its rings inside their slots', () => {
@@ -232,9 +248,17 @@ test('a holding read down to zero leaves the board', () => {
   assert.deepEqual(OM.standing(doc).map((p) => p.ticker), ['BBB']);
 });
 
-test('a holder in two companies is joined by a curve, not merged into one node', () => {
-  const { svg } = draw();
-  assert.equal(nodesWithClass(svg, 'om-bridge').length, 2);
+test('no curve is drawn until a holder is asked about', () => {
+  // Drawn for every multi-company holder at rest they were a texture, not a
+  // fact: a hundred and nineteen curves across twenty-five sector cells.
+  assert.equal(nodesWithClass(draw().svg, 'om-bridge').length, 0);
+});
+
+test('the holder in focus gets their own spokes and nobody else does', () => {
+  const { svg } = draw({ focus: 'one' });
+  const drawn = nodesWithClass(svg, 'om-bridge');
+  assert.equal(drawn.length, 1, 'one holder in two companies is one spoke');
+  assert.equal(drawn[0].attrs.stroke, OM.hueOf('one'));
 });
 
 test('focusing a company fades everything unrelated to it', () => {
@@ -326,61 +350,70 @@ test('no two holder names are drawn on top of each other', () => {
   }
 });
 
-test('a holder name is never drawn across a company ring', () => {
-  const model = board(ROWS);
-  const taken = model.placed.map((n) => ({ x: n.x, y: n.y, r: n.r + 3.5 }));
-  const labels = OM.labelWhatFits(OM.placeHolders(model, HOLDINGS), [], model.view,
-                                  { labelOf: (id) => id });
-  labels.forEach((l) => {
-    const w = l.text.length * 4.6;
-    taken.forEach((n) => {
-      const nearest = { x: Math.max(l.x - w / 2, Math.min(n.x, l.x + w / 2)),
-                        y: Math.max(l.y - 8, Math.min(n.y, l.y + 1.5)) };
-      // The label layer is given the rings as reserved boxes by renderMap;
-      // here we only check the helper never emits one off the canvas.
-      assert.ok(l.x - w / 2 >= 0 && l.x + w / 2 <= model.view.w, `"${l.text}" runs off the board`);
-      void nearest;
-    });
+test('no holder is named on the resting board', () => {
+  // Naming whichever labels did not collide named nineteen of eight hundred
+  // and seventy-six, and a reader cannot tell why those nineteen. A ranking
+  // of named parties is not something this project publishes, and one
+  // produced by geometry is still one.
+  const rows = Array.from({ length: 30 }, (_, i) => ({
+    ticker: `T${i}`, name: `Company ${i}`, sector: `S${i % 6}`, cap: 1e9, disclosed: 24,
+  }));
+  const holdings = rows.flatMap((r, i) => [0, 1, 2, 3].map((k) => ({
+    holder: `Holder ${i}-${k}`, ticker: r.ticker, percent: 6,
+  })));
+  const svg = document.createElementNS('', 'svg');
+  OM.renderMap(svg, board(rows), {
+    holdings, bridges: [], moves: null, labelOf: (id) => id,
+    onPick: () => {}, focus: null, t: (en) => en, ar: false,
   });
+  assert.equal(nodesWithClass(svg, 'om-dot').length, holdings.length,
+               'every holding still has a dot');
+  assert.equal(nodesWithClass(svg, 'om-dot-name').length, 0);
 });
 
-test('a bigger board carries more names, because more of them fit', () => {
-  // This is what full screen is FOR. Scaling a picture up cannot add a name to
-  // it; laying it out again at a wider shape can.
-  const rows = Array.from({ length: 40 }, (_, i) => ({
-    ticker: `T${i}`, name: `Company ${i}`, sector: `S${i % 8}`,
-    cap: 1e9 + i * 1e8, disclosed: 18,
-  }));
-  // Three holders each, with the length of a real Egyptian corporate name.
-  // One apiece is not a crowd and every label fits at any size.
-  const holdings = rows.flatMap((r, i) => [0, 1, 2].map((k) => ({
-    holder: `Sharikat Al Istithmarat Al Maliyyah ${i}-${k}`,
-    ticker: r.ticker, percent: 6,
-  })));
-  const count = (view) => {
-    const model = OM.layout(rows, view);
-    return OM.labelWhatFits(OM.placeHolders(model, holdings), [], view,
-                            { labelOf: (id) => id }).length;
-  };
-  const small = count(OM.VIEW);
-  const large = count({ w: 1760, h: 940 });
-  assert.ok(large > small, `full screen showed ${large} names against ${small}`);
+test('a dot carries its holder and stake for the pointer to find', () => {
+  const { svg } = draw();
+  const titles = nodesWithClass(svg, 'om-dot').map((g) => text(g));
+  assert.ok(titles.some((x) => /one — 40\.00% of AAA/.test(x)),
+            `no dot named its holder: ${titles.slice(0, 3).join(' | ')}`);
 });
 
-test('the number of names shown is whatever fits, not a fixed count', () => {
-  // A fixed N would be the same on a phone and in full screen, and would
-  // quietly become a ranking of holders rather than a use of the room.
-  const rows = Array.from({ length: 12 }, (_, i) => ({
-    ticker: `T${i}`, name: `C${i}`, sector: `S${i % 4}`, cap: 1e9, disclosed: 15,
-  }));
-  const holdings = rows.flatMap((r, i) => [0, 1, 2].map((k) => ({
-    holder: `Sharikat Al Istithmarat ${i}-${k}`, ticker: r.ticker, percent: 5,
-  })));
-  const roomy = OM.labelWhatFits(OM.placeHolders(OM.layout(rows, OM.VIEW), holdings), [],
-                                 OM.VIEW, { labelOf: (id) => id }).length;
-  const cramped = OM.labelWhatFits(OM.placeHolders(OM.layout(rows, { w: 320, h: 220 }), holdings),
-                                   [], { w: 320, h: 220 }, { labelOf: (id) => id }).length;
-  assert.ok(roomy > cramped, `${roomy} names in the room, ${cramped} in the corner`);
+test('a pinned name is drawn, and only the pinned one', () => {
+  const { svg } = draw({ named: { holder: 'two', ticker: 'BBB' } });
+  const shown = nodesWithClass(svg, 'om-hover');
+  assert.equal(shown.length, 1);
+  assert.equal(shown[0].attrs.visibility, 'visible');
+  assert.match(text(shown[0]), /12\.00%\s+two/);
+});
+
+test('nothing is pinned unless it was asked for', () => {
+  const hover = nodesWithClass(draw().svg, 'om-hover');
+  assert.equal(hover.length, 1, 'the label exists, built once');
+  assert.equal(hover[0].attrs.visibility, 'hidden');
+});
+
+test('the focused holder tags each company with the stake they hold of it', () => {
+  // A curve says two companies are connected. It does not say who holds whom,
+  // or how much, which is the whole question.
+  const { svg } = draw({ focus: 'one' });
+  const tags = nodesWithClass(svg, 'om-stake-tag');
+  assert.equal(tags.length, 2, 'one holder, two holdings, two tags');
+  const said = tags.map((g) => text(g)).join(' ');
+  assert.match(said, /40\.0%/);
+  assert.match(said, /60\.0%/);
+  assert.match(said, /holds 40% of AAA/);
+});
+
+test('a stake too small to round is said to be small, not said to be zero', () => {
+  const { svg } = draw({
+    holdings: [{ holder: 'one', ticker: 'AAA', percent: 0.003, asOf: '2026-08-16' }],
+    focus: 'one',
+  });
+  assert.match(text(nodesWithClass(svg, 'om-stake-tag')[0]), /<0\.01%/);
+});
+
+test('nothing is tagged until a holder is in focus', () => {
+  assert.equal(nodesWithClass(draw().svg, 'om-stake-tag').length, 0);
 });
 
 test('a holder colour follows the name, not its place in a sorted list', () => {

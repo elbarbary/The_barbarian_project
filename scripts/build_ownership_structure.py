@@ -154,6 +154,7 @@ def vet(reading: dict, ticker: str, issuer: str) -> str | None:
 
     seen: set[str] = set()
     running = 0.0
+    kept = 0
     for row in holders:
         if not isinstance(row, dict):
             return f"a holder is not an object: {row!r}"
@@ -164,15 +165,25 @@ def vet(reading: dict, ticker: str, issuer: str) -> str | None:
         # a different form and are not what this one is printing.
         if named.is_the_issuer(name, issuer):
             return f"a holder is the issuer itself: {name!r}"
+
+        percent = _number(row.get("percent"))
+        # A director who owns nothing is on these forms, in the same table,
+        # printed at zero — `هشام حسين الخازندار` among them. That is a fact
+        # about the board, not a bad reading, and refusing the document over
+        # it threw away twelve complete registers. Such a row is not a
+        # shareholding, so it leaves the list; the document stays.
+        if percent is None or percent == 0:
+            continue
+        # Out of range IS a misread, and the document goes with it.
+        if not 0 < percent <= 100:
+            return f"a stake outside 0-100%: {row.get('percent')!r} for {name!r}"
+
         key = named.skeleton(name)
         if key in seen:
             return f"the same holder is listed twice: {name!r}"
         seen.add(key)
-
-        percent = _number(row.get("percent"))
-        if percent is None or not 0 < percent <= 100:
-            return f"a stake outside 0-100%: {row.get('percent')!r} for {name!r}"
         running += percent
+        kept += 1
 
         shares = _number(row.get("shares"))
         if shares is not None and shares <= 0:
@@ -186,7 +197,20 @@ def vet(reading: dict, ticker: str, issuer: str) -> str | None:
 
     if running > 100 + OVER_ALLOWANCE_PP:
         return f"the named holders add to {running:.2f}% of the company"
+    if not board and not kept:
+        return "the form yielded neither a director nor a holder"
     return None
+
+
+def owning(holders) -> list:
+    """The rows that are actually a shareholding.
+
+    Same rule `vet` applies, so what is published is what was checked: a row
+    printed at zero, or with no percentage at all, names somebody on the form
+    without naming a holding.
+    """
+    return [row for row in holders or []
+            if isinstance(row, dict) and (_number(row.get("percent")) or 0) > 0]
 
 
 def held() -> dict:
@@ -271,10 +295,15 @@ def main(argv=None) -> int:
             "asOfDate": reading.get("asOfDate"),
             "totalShares": _number(reading.get("totalShares")),
             "board": reading.get("board") or [],
-            "shareholders": reading.get("shareholders") or [],
+            "shareholders": owning(reading.get("shareholders")),
+            # Named on the form with no holding — a director who owns none of
+            # the company he sits on the board of. Kept apart rather than
+            # dropped: it is the sort of thing worth being able to ask about.
+            "namedWithoutAStake": [r.get("nameArabic") for r in (reading.get("shareholders") or [])
+                                   if isinstance(r, dict) and not (_number(r.get("percent")) or 0) > 0],
         }
         seats = len(reading.get("board") or [])
-        holders = len(reading.get("shareholders") or [])
+        holders = len(owning(reading.get("shareholders")))
         print(f"   {filing} {ticker}: {seats} directors, {holders} holders")
         kept += 1
 

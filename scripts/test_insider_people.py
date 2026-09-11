@@ -33,25 +33,48 @@ def reading(filing, name, ticker, date, before, after, shares=1000, price=10.0,
     }
 
 
-def build(readings, companies=None):
-    """Run the builder against a throwaway store and read back what it wrote."""
+def register(ticker, holders, board=(), as_of="2026-06-30", filing="900"):
+    return {
+        "filingId": filing, "ticker": ticker, "asOfDate": as_of,
+        "publishedAt": f"{as_of}T10:00:00", "sessionDate": as_of,
+        "source": f"https://example.invalid/{filing}.pdf", "totalShares": 100_000_000,
+        "board": [{"nameArabic": n, "role": r, "representing": None}
+                  for n, r in board],
+        "shareholders": [{"nameArabic": n, "percent": p, "shares": None,
+                          "kind": "person"} for n, p in holders],
+    }
+
+
+def build(readings, companies=None, books=()):
+    """Run the builder against throwaway stores and read back what it wrote.
+
+    `REGISTERS` has to be redirected with the rest. Left pointing at the real
+    file, every test in here silently merged in the whole exchange — which is
+    how a test asking for one position got a filing id from a company it had
+    never heard of.
+    """
     with tempfile.TemporaryDirectory() as tmp:
         root = pathlib.Path(tmp)
         store, out = root / "store.json", root / "out.json"
         companies_file = root / "companies.json"
+        registers_file = root / "registers.json"
         store.write_text(json.dumps({"readings": {r["filingId"]: r for r in readings}}),
                          encoding="utf-8")
+        registers_file.write_text(
+            json.dumps({"readings": {b["filingId"]: b for b in books}}), encoding="utf-8")
         companies_file.write_text(json.dumps({"companies": companies or []}),
                                   encoding="utf-8")
-        saved = (bip.STORE, bip.OUT, bip.FIXTURE, bip.COMPANIES)
+        saved = (bip.STORE, bip.OUT, bip.FIXTURE, bip.COMPANIES, bip.REGISTERS)
         bip.STORE, bip.OUT, bip.COMPANIES = store, out, companies_file
+        bip.REGISTERS = registers_file
         bip.FIXTURE = root / "missing" / "fixture.json"
         try:
             with contextlib.redirect_stdout(io.StringIO()):
                 bip.main([])
             return json.loads(out.read_text(encoding="utf-8"))
         finally:
-            bip.STORE, bip.OUT, bip.FIXTURE, bip.COMPANIES = saved
+            (bip.STORE, bip.OUT, bip.FIXTURE, bip.COMPANIES,
+             bip.REGISTERS) = saved
 
 
 AMWAL = "شركة اموال العربيه للاقطان"
@@ -199,15 +222,19 @@ class NeverShrinks(unittest.TestCase):
             store.write_text(json.dumps({"readings": {r["filingId"]: r for r in readings}}),
                              encoding="utf-8")
             companies_file.write_text(json.dumps({"companies": []}), encoding="utf-8")
-            saved = (bip.STORE, bip.OUT, bip.FIXTURE, bip.COMPANIES)
+            registers_file = root / "registers.json"
+            registers_file.write_text(json.dumps({"readings": {}}), encoding="utf-8")
+            saved = (bip.STORE, bip.OUT, bip.FIXTURE, bip.COMPANIES, bip.REGISTERS)
             bip.STORE, bip.OUT, bip.COMPANIES = store, out, companies_file
+            bip.REGISTERS = registers_file
             bip.FIXTURE = root / "missing" / "fixture.json"
             try:
                 with contextlib.redirect_stdout(io.StringIO()) as said:
                     bip.main(["--force"] if force else [])
                 return said.getvalue()
             finally:
-                bip.STORE, bip.OUT, bip.FIXTURE, bip.COMPANIES = saved
+                (bip.STORE, bip.OUT, bip.FIXTURE, bip.COMPANIES,
+                 bip.REGISTERS) = saved
 
     def _fat(self, out):
         self._build_into(out, [
@@ -257,6 +284,86 @@ class NeverShrinks(unittest.TestCase):
             self.assertEqual(json.loads(out.read_text(encoding="utf-8"))["peopleCount"], 1)
 
 
+class TheRegister(unittest.TestCase):
+    """The other form: the board and the whole shareholder structure."""
+
+    def test_a_holder_who_never_traded_still_gets_a_position(self):
+        # The point of reading registers: most holders of most companies have
+        # never filed a trade, and nothing else on this site can name them.
+        doc = build([], books=[register("AALR", [("سعيد محمد على حسن", 41.5)])])
+        self.assertEqual([(p["ticker"], p["percent"], p["basis"]) for p in doc["positions"]],
+                         [("AALR", 41.5, "register")])
+
+    def test_a_newer_register_supersedes_an_older_trade(self):
+        doc = build([reading("1", "محمد اشرف عمر عمر", "HBCO", "2026-05-01", 12.0, 11.0)],
+                    books=[register("HBCO", [("محمد اشرف عمر عمر", 9.25)],
+                                    as_of="2026-06-30")])
+        self.assertEqual([(p["percent"], p["basis"]) for p in doc["positions"]],
+                         [(9.25, "register")])
+
+    def test_a_newer_trade_beats_an_older_register(self):
+        doc = build([reading("1", "محمد اشرف عمر عمر", "HBCO", "2026-08-17", 12.0, 11.0)],
+                    books=[register("HBCO", [("محمد اشرف عمر عمر", 9.25)],
+                                    as_of="2026-06-30")])
+        self.assertEqual([(p["percent"], p["basis"]) for p in doc["positions"]],
+                         [(11.0, "trade")])
+
+    def test_a_register_of_the_same_date_beats_the_trade(self):
+        # One states the holding; the other states what a single transaction
+        # left behind. On the same day the register is the better answer.
+        doc = build([reading("1", "محمد اشرف عمر عمر", "HBCO", "2026-06-30", 12.0, 11.0)],
+                    books=[register("HBCO", [("محمد اشرف عمر عمر", 9.25)],
+                                    as_of="2026-06-30")])
+        self.assertEqual([(p["percent"], p["basis"]) for p in doc["positions"]],
+                         [(9.25, "register")])
+
+    def test_a_register_row_at_zero_is_not_a_holding(self):
+        # `build_ownership_structure` strips these before they reach the store,
+        # but a store written by an older build still has them, and a director
+        # at zero is not an owner of anything.
+        doc = build([], books=[register("AALR", [("سعيد محمد على حسن", 41.5),
+                                                 ("هشام حسين الخازندار", 0.0)])])
+        self.assertEqual([p["holder"] for p in doc["positions"]], ["سعيد محمد على حسن"])
+
+    def test_one_holder_in_both_documents_is_one_holder(self):
+        doc = build([reading("1", "محمد اشرف عمر عمر", "HBCO", "2026-05-01", 12.0, 11.0)],
+                    books=[register("HBCO", [("محمد اشرف عمر عمر", 9.25)])])
+        self.assertEqual(doc["peopleCount"], 1)
+        self.assertEqual(len(doc["positions"]), 1)
+
+    def test_the_board_is_published_and_is_not_a_shareholding(self):
+        doc = build([], books=[register(
+            "AALR", [("سعيد محمد على حسن", 41.5)],
+            board=[("علاء محمد سالم الغاوي", "رئيس مجلس الاداره"),
+                   ("حمدي محمد الشاطر محمود", "عضو منتدب")])])
+        self.assertEqual(doc["seatCount"], 2)
+        self.assertEqual([s["name"] for s in doc["boards"][0]["seats"]],
+                         ["علاء محمد سالم الغاوي", "حمدي محمد الشاطر محمود"])
+        # Two directors, one holder. A seat is not a stake.
+        self.assertEqual(len(doc["positions"]), 1)
+
+    def test_a_director_who_also_holds_is_joined_to_their_holding(self):
+        doc = build([], books=[register(
+            "AALR", [("علاء محمد سالم الغاوي", 12.0)],
+            board=[("علاء محمد سالم الغاوي", "رئيس مجلس الاداره")])])
+        seat = doc["boards"][0]["seats"][0]
+        self.assertEqual(seat["holder"], doc["positions"][0]["holder"])
+
+    def test_a_company_owned_twice_over_is_declared_rather_than_scaled(self):
+        doc = build(
+            [reading("1", "القلعة للاستشارات المالية", "ASCM", "2026-08-17", 55.0, 50.76)],
+            books=[register("ASCM", [("Citadel Capital", 53.35),
+                                     ("Financial Holdings International LTD", 15.83)])])
+        self.assertEqual([(r["ticker"], r["holders"]) for r in doc["overDisclosed"]],
+                         [("ASCM", 3)])
+        self.assertGreater(doc["overDisclosed"][0]["percent"], 100)
+
+    def test_a_company_that_adds_up_is_not_declared(self):
+        doc = build([], books=[register("AALR", [("سعيد محمد على حسن", 41.5),
+                                                 ("محمود عاطف محمود عيسي", 12.0)])])
+        self.assertEqual(doc["overDisclosed"], [])
+
+
 class TheAudit(unittest.TestCase):
     """The published file is checked for the contradiction the merge prevents."""
 
@@ -281,11 +388,17 @@ class TheAudit(unittest.TestCase):
             {"holder": "gone", "ticker": "HBCO", "percent": 0.0},
         ]}), [])
 
-    def test_the_published_file_holds_no_such_contradiction(self):
+    def test_every_contradiction_in_the_published_file_is_declared(self):
+        # Merging the filed registers in made this reachable: a register in
+        # English and a trade form in Arabic can name one firm twice, and no
+        # folding crosses a translation. The claim is not that it never
+        # happens — it is that the file never hides it.
         published = json.loads(
             (pathlib.Path(bip.REPO) / "public" / "data" / "v1"
              / "insider-people.json").read_text(encoding="utf-8"))
-        self.assertEqual(audit_accuracy.audit_ownership(published), [])
+        found = sorted(f["ticker"] for f in audit_accuracy.audit_ownership(published))
+        declared = sorted(r["ticker"] for r in published.get("overDisclosed") or ())
+        self.assertEqual(found, declared)
 
 
 if __name__ == "__main__":

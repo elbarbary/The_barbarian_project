@@ -78,6 +78,14 @@ _FIRM_TOKENS_EN = {
     "property", "systems", "business", "sharikat", "sandooq", "sundooq",
     "sondooq", "lilistithmarat", "lilistisharat", "ltd", "llc", "plc", "inc",
     "sae", "for",
+    # A register names foreign and institutional holders in Latin script, and
+    # the Arabic branch has nothing to read in "Bank Misr" or "TRIQUEAR B.V".
+    "bank", "banque", "assurance", "assurances", "insurance", "foundation",
+    "international", "industries", "industrial", "contractors", "engineering",
+    "healthcare", "pharma", "pharmaceuticals", "bv", "nv", "gmbh", "sa", "sarl",
+    "ag", "spa", "pjsc", "psc", "wll", "kscc", "kscp", "limited", "partners",
+    "associates", "ventures", "equity", "asset", "assets", "securities",
+    "brokerage", "leasing", "mills", "poultry", "textiles", "cement", "steel",
 }
 
 
@@ -123,7 +131,22 @@ def is_firm(name: str, name_en: str | None = None) -> bool:
     # trip it.
     if any(tok.startswith("لل") and len(tok) >= 5 for tok in tokens):
         return True
-    en = _PUNCT.sub(" ", unicodedata.normalize("NFKC", name_en or "")).casefold()
+    # A filed name may itself be Latin — registers list foreign institutions
+    # that way — so the name is its own transliteration when none was given.
+    # Without this, `is_firm` read the Arabic branch of "Goldman Sachs
+    # International", found no Arabic, and called it a person; 173 of the 193
+    # Latin-named holders came out that way.
+    raw = unicodedata.normalize("NFKC", name_en or name or "").casefold()
+    # `B.V` and `S.A.E` are one token wearing dots. Collapsed before the
+    # punctuation strip, because after it they are the letters "b" and "v",
+    # which match nothing. Only a dot BETWEEN two single letters is removed —
+    # compacting the whole string would make a firm of anyone called Moussa.
+    while True:
+        joined = re.sub(r"(?<=\b[a-z])\.(?=[a-z]\b)", "", raw)
+        if joined == raw:
+            break
+        raw = joined
+    en = _PUNCT.sub(" ", raw)
     return any(tok in _FIRM_TOKENS_EN for tok in en.split())
 
 

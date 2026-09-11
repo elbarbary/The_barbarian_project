@@ -628,6 +628,7 @@ function renderNamedPeople(doc, ar, t, onPick) {
  * manages itself.
  */
 function renderOwnershipMap(doc, ar, t, component) {
+  const st = component.state || {};
   const people = (doc && doc.people) || [];
   // Every position ever filed, INCLUDING the ones read down to zero. A company
   // whose only named holder has since sold out still belongs on the board as
@@ -635,6 +636,10 @@ function renderOwnershipMap(doc, ar, t, component) {
   // are different facts, and dropping it also loses the week in which they
   // left — which is exactly the week a reader would want to see.
   const positions = (doc && doc.positions) || [];
+  // Who sits on each board, by ticker. A director is not a shareholder and
+  // gets no dot on the map; the register shows the two lists apart.
+  const boards = {};
+  ((doc && doc.boards) || []).forEach((b) => { boards[b.ticker] = b; });
   const holdings = OM.standing(doc);
   if (!people.length || positions.length < 2) return null;
 
@@ -701,15 +706,16 @@ function renderOwnershipMap(doc, ar, t, component) {
     .filter(([, tickers]) => tickers.length > 1)
     .map(([holder, tickers]) => ({ holder, tickers }));
 
-  // Two boards, not one drawing scaled up. Full screen re-runs the layout at
-  // the wider shape, so the sector cells grow, the slots inside them grow, and
-  // names that had nowhere to go on a 1200-wide board have somewhere to go on
-  // a 1760-wide one. Scaling a picture cannot add a name to it.
-  const BOARDS = {
-    inline: OM.VIEW,
-    full: { w: 1760, h: 940 },
-  };
-  let model = OM.layout(rows, BOARDS.inline);
+  // ONE atlas, laid out once. Full screen shows the same board larger; it
+  // does not lay it out again.
+  //
+  // It used to: a wider shape made the sector cells bigger, which made room
+  // for more names. That was worth having only while names were chosen by
+  // what fitted — and choosing them that way was the thing wrong with the
+  // screen. Re-running the treemap moved every company between the inline
+  // board and the full-screen one, which breaks the promise this map is built
+  // on: nothing moves unless the data moved.
+  const model = OM.layout(rows, OM.VIEW);
   const valueOf = (p) => (finite(co[p.ticker] && co[p.ticker].cap)
     ? (p.percent / 100) * co[p.ticker].cap : null);
 
@@ -745,19 +751,30 @@ function renderOwnershipMap(doc, ar, t, component) {
   stage.append(scroller, hint);
   const side = document.createElement('div');
   side.className = 'om-side';
+  const cards = document.createElement('div');
+  cards.className = 'om-side-cards';
+  side.appendChild(cards);
   host.append(strip, stage, side);
   slot.appendChild(host);
 
   let week = null;          // null is the standing board with nothing lit
-  let focus = null;
+  // Focus lives in the component, not in this closure.
+  //
+  // Picking a company also scopes the disclosure list below, and that is a
+  // `setState` — which rebuilds this whole panel and would hand the board a
+  // fresh closure with nothing selected. The symptom was a board showing one
+  // holder's spokes beside a register that had forgotten them.
+  let focus = st.ownershipFocus || null;
+  let named = st.ownershipNamed || null;   // the one dot whose label is pinned
+  let query = '';
   let timer = null;
   let big = false;
   // The window on the board, in the board's own units. Zooming moves this
   // rather than scaling the element: the vectors stay sharp and, more to the
   // point, a click still lands where the reader aimed it.
   let win = null;
-  const board = () => (big ? BOARDS.full : BOARDS.inline);
-  const wholeBoard = () => ({ x: 0, y: 0, w: board().w, h: board().h });
+  const board = () => OM.VIEW;
+  const wholeBoard = () => ({ x: 0, y: 0, w: OM.VIEW.w, h: OM.VIEW.h });
 
   const buttons = [];
   const chip = (key, text, sub) => {
@@ -889,8 +906,6 @@ function renderOwnershipMap(doc, ar, t, component) {
   const onKey = (e) => { if (e.key === 'Escape' && big) toggleFull(); };
   function toggleFull() {
     big = !big;
-    model = OM.layout(rows, board());
-    win = wholeBoard();
     expand.textContent = big ? '✕' : '⛶';
     expand.title = big ? t('Close', 'إغلاق') : t('Explore full screen', 'استكشف بملء الشاشة');
     expand.setAttribute('aria-label', expand.title);
@@ -949,13 +964,229 @@ function renderOwnershipMap(doc, ar, t, component) {
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
     OM.renderMap(svg, model, {
-      holdings: positions, bridges, labelOf, focus, t, ar, dense: big,
+      holdings: positions, bridges, labelOf, focus, t, ar, named,
       moves: week ? OM.movesIn(doc, week) : null,
-      onPick: (id) => { focus = focus === id ? null : id; paint(); },
+      onPick: (id) => {
+        focus = focus === id ? null : id;
+        named = null;
+        // The disclosure list further down this screen has always had a
+        // company filter; nothing was setting it. Picking a company on the
+        // board now scopes that list to it, so the two halves of the screen
+        // are looking at the same company instead of at each other.
+        scopeDealings(focus);
+        paint();
+      },
     });
     applyWindow();
     drawSide();
+    drawRegister();
   };
+
+  /* ── the register ─────────────────────────────────────────────────────────
+   *
+   * The board is a map. This is the index to it, and between them every filed
+   * name is reachable: alphabetically, by search, or by pointing at a dot.
+   *
+   * Alphabetical on purpose. Any other order — by stake, by value, by number
+   * of companies — is a ranking of named parties, and this project does not
+   * publish one. The order is stated at the top so a reader knows it is not a
+   * league table.
+   */
+  const collator = new Intl.Collator(ar ? 'ar' : 'en', { sensitivity: 'base' });
+  const everyHolder = [...new Set(positions.filter((p) => p.percent > 0)
+                                           .map((p) => p.holder))]
+    .map((id) => ({
+      id,
+      label: labelOf(id),
+      kind: kindOf[id] || 'person',
+      tickers: positions.filter((p) => p.holder === id && p.percent > 0)
+                        .map((p) => p.ticker),
+    }))
+    .sort((a, b) => collator.compare(a.label, b.label) || (a.id < b.id ? -1 : 1));
+
+  const register = document.createElement('div');
+  register.className = 'om-register';
+  const search = document.createElement('input');
+  search.type = 'search';
+  search.className = 'om-search';
+  search.placeholder = t('Search every filed name', 'ابحث في كل الأسماء');
+  search.setAttribute('aria-label', search.placeholder);
+  search.addEventListener('input', () => { query = search.value.trim(); drawRegister(); });
+  const crumb = document.createElement('div');
+  crumb.className = 'om-crumb';
+  const list = document.createElement('div');
+  list.className = 'om-register-list';
+  const count = document.createElement('p');
+  count.className = 'om-register-count';
+  register.append(search, crumb, count, list);
+  // Appended here rather than beside `cards` above, where `register` is still
+  // in its temporal dead zone and reading it threw before the panel drew.
+  side.appendChild(register);
+
+  const registerRow = (parent, { colour, title, sub, right, onClick, on }) => {
+    const el = document.createElement('button');
+    el.type = 'button';
+    el.className = on ? 'om-reg-row om-reg-row-on' : 'om-reg-row';
+    const dot = document.createElement('i');
+    dot.style.background = colour;
+    const text = document.createElement('span');
+    const strong = document.createElement('strong');
+    strong.textContent = title;
+    text.appendChild(strong);
+    if (sub) {
+      const small = document.createElement('small');
+      small.textContent = sub;
+      text.appendChild(small);
+    }
+    const b = document.createElement('b');
+    b.dir = 'ltr';
+    b.textContent = right || '';
+    el.append(dot, text, b);
+    el.addEventListener('click', onClick);
+    parent.appendChild(el);
+    return el;
+  };
+
+  const matches = (holder) => {
+    if (!query) return true;
+    const needle = query.toLowerCase();
+    return holder.label.toLowerCase().includes(needle)
+        || holder.id.toLowerCase().includes(needle)
+        || holder.tickers.some((tk) => tk.toLowerCase().includes(needle));
+  };
+
+  /* Point the disclosure list below the map at whatever the board is showing.
+   *
+   * A company scopes it to that company. A holder scopes it to the one company
+   * they hold, when they hold exactly one — a list filtered to a holder in
+   * three companies would be three companies' dealings under one name, which
+   * is not what the filter says it does. Clearing the board clears the list.
+   */
+  const scopeDealings = (id) => {
+    let ticker = '';
+    if (id && byTicker.has(id)) ticker = id;
+    else if (id && spread.has(id)) {
+      const mine = [...new Set(positions.filter((p) => p.holder === id && p.percent > 0)
+                                        .map((p) => p.ticker))];
+      if (mine.length === 1) [ticker] = mine;
+    }
+    const patch = { ownershipFocus: focus, ownershipNamed: named };
+    if ((component.state.ownershipTicker || '') !== ticker) {
+      patch.ownershipTicker = ticker;
+      patch.ownershipPage = 0;
+    }
+    component.setState(patch);
+  };
+
+  const drawRegister = () => {
+    crumb.textContent = '';
+    list.textContent = '';
+
+    // Scope: a company narrows the register to its own holders, a holder to
+    // their own companies. Both are reversible from the breadcrumb, so a
+    // reader is never stuck inside a selection they did not mean to make.
+    const scope = focus && byTicker.has(focus) ? 'company'
+      : focus && spread.has(focus) ? 'holder' : 'all';
+    if (scope !== 'all') {
+      const back = document.createElement('button');
+      back.type = 'button';
+      back.className = 'om-crumb-clear';
+      back.textContent = scope === 'company'
+        ? `${focus} · ${t('clear', 'إلغاء')}`
+        : `${labelOf(focus)} · ${t('clear', 'إلغاء')}`;
+      back.addEventListener('click', () => {
+        focus = null; named = null; scopeDealings(null); paint();
+      });
+      crumb.appendChild(back);
+    }
+
+    if (scope === 'company') {
+      const row = byTicker.get(focus);
+      const holders = row.holders.filter((h) => h.percent > 0)
+        .sort((a, b) => collator.compare(labelOf(a.holder), labelOf(b.holder)));
+      count.textContent = t(
+        `${holders.length} disclosed holders of ${focus}, A–Z`,
+        `${holders.length} مالك معلوم في ${focus}، أبجدياً`);
+      holders.forEach((h) => registerRow(list, {
+        colour: OM.hueOf(h.holder),
+        title: labelOf(h.holder),
+        sub: `${h.asOf} · ${basisWord(h.basis)}`,
+        right: `${h.percent.toFixed(2)}%`,
+        on: named && named.holder === h.holder && named.ticker === h.ticker,
+        onClick: () => {
+          named = { holder: h.holder, ticker: h.ticker };
+          focus = h.holder;
+          scopeDealings(focus);
+          paint();
+        },
+      }));
+      const seats = (boards[focus] || {}).seats || [];
+      if (seats.length) {
+        const head = document.createElement('p');
+        head.className = 'om-reg-head';
+        head.textContent = t(`Board of ${focus} — ${seats.length} seats`,
+                             `مجلس إدارة ${focus} — ${seats.length} مقعداً`);
+        list.appendChild(head);
+        seats.forEach((seat) => {
+          const el = document.createElement('div');
+          el.className = 'om-seat';
+          const nm = document.createElement('strong');
+          nm.textContent = seat.name;
+          el.appendChild(nm);
+          if (seat.role) {
+            const r = document.createElement('small');
+            r.textContent = seat.representing && seat.representing !== seat.name
+              ? `${seat.role} · ${seat.representing}` : seat.role;
+            el.appendChild(r);
+          }
+          list.appendChild(el);
+        });
+      }
+      return;
+    }
+
+    const shown = (scope === 'holder'
+      ? everyHolder.filter((h) => h.id === focus)
+      : everyHolder.filter(matches));
+    count.textContent = scope === 'holder'
+      ? t('Every company this holder is filed in', 'كل شركة ورد فيها اسم هذا المالك')
+      : t(`${shown.length} of ${everyHolder.length} filed names, A–Z`,
+          `${shown.length} من ${everyHolder.length} اسماً، أبجدياً`);
+
+    if (scope === 'holder') {
+      const mine = positions.filter((p) => p.holder === focus && p.percent > 0)
+        .sort((a, b) => collator.compare(a.ticker, b.ticker));
+      mine.forEach((p) => registerRow(list, {
+        colour: OM.hueOf(focus),
+        title: `${p.ticker} · ${(co[p.ticker] && co[p.ticker].name) || ''}`,
+        sub: `${p.asOf} · ${basisWord(p.basis)}`,
+        right: `${p.percent.toFixed(2)}%`,
+        on: named && named.ticker === p.ticker,
+        onClick: () => { named = { holder: focus, ticker: p.ticker }; paint(); },
+      }));
+      return;
+    }
+
+    if (!shown.length) {
+      const none = document.createElement('p');
+      none.className = 'om-reg-none';
+      none.textContent = t('No filed name matches that.', 'لا اسم مطابق.');
+      list.appendChild(none);
+      return;
+    }
+    shown.forEach((h) => registerRow(list, {
+      colour: OM.hueOf(h.id),
+      title: h.label,
+      sub: h.tickers.length > 1
+        ? t(`${h.tickers.length} companies`, `${h.tickers.length} شركات`)
+        : h.tickers[0],
+      right: h.kind === 'firm' ? t('firm', 'شركة') : t('person', 'فرد'),
+      onClick: () => { focus = h.id; named = null; scopeDealings(focus); paint(); },
+    }));
+  };
+
+  const basisWord = (basis) => (basis === 'register'
+    ? t('filed register', 'سجل مودع') : t('after a trade', 'بعد صفقة'));
 
   const card = (title, body) => {
     const el = document.createElement('div');
@@ -964,7 +1195,7 @@ function renderOwnershipMap(doc, ar, t, component) {
     h4.textContent = title;
     el.appendChild(h4);
     body(el);
-    side.appendChild(el);
+    cards.appendChild(el);
     return el;
   };
   const row = (parent, colour, text, right, onClick) => {
@@ -983,7 +1214,7 @@ function renderOwnershipMap(doc, ar, t, component) {
   };
 
   const drawSide = () => {
-    side.textContent = '';
+    cards.textContent = '';
     const moves = week ? OM.movesIn(doc, week) : null;
     const chosen = week ? weeks.find((w) => w.start === week) : null;
 
@@ -1003,8 +1234,16 @@ function renderOwnershipMap(doc, ar, t, component) {
         bar.textContent = `${r.disclosed.toFixed(2)}%`;
         el.appendChild(bar);
         const small = document.createElement('small');
-        small.textContent = t('of the company is in hands a filing has named',
-                              'من الشركة في أيدٍ ذكرها إفصاح');
+        // Said plainly rather than left to a tooltip. A ring that adds to more
+        // than its company is two documents naming one party twice — usually a
+        // register in English against a trade form in Arabic — and a reader
+        // looking at both names can see it where no string comparison can.
+        small.textContent = r.disclosed > 100.0001
+          ? t('which is more than the company. Two filings almost certainly name one holder twice, under a name each spells differently.',
+              'وهو أكثر من الشركة نفسها. على الأرجح يذكر إفصاحان مالكاً واحداً مرتين باسمين مختلفي الكتابة.')
+          : t('of the company is in hands a filing has named',
+              'من الشركة في أيدٍ ذكرها إفصاح');
+        if (r.disclosed > 100.0001) small.className = 'om-card-warn';
         el.appendChild(small);
       });
       card(t('Named holders', 'الملاك المعروفون'), (el) => {
@@ -1106,7 +1345,10 @@ function renderOwnershipMap(doc, ar, t, component) {
   };
 
   paint();
-  svg.addEventListener('click', () => { if (focus) { focus = null; paint(); } });
+  svg.addEventListener('click', () => {
+    if (!focus) return;
+    focus = null; named = null; scopeDealings(null); paint();
+  });
 
   const held = holdings.map(valueOf).filter(finite).reduce((s, v) => s + v, 0);
 
@@ -1121,8 +1363,8 @@ function renderOwnershipMap(doc, ar, t, component) {
         `${rows.length} · ${doc.peopleCount} · ${compact(held)} EGP`)
     ),
     h('p', { className: 'ft-note' }, t(
-      'Every company a post-execution form has named a holder in, drawn at the stake that stands today. Pick a week and the holdings that changed in it light up; the board itself does not move.',
-      'كل شركة ورد في نموذج إفصاح بعد التنفيذ اسم مالك فيها، مرسومة بالحصة القائمة اليوم. اختر أسبوعاً فتضيء الحصص التي تغيّرت فيه، دون أن تتحرك اللوحة نفسها.')),
+      'Every company a filing has named a holder in, at the stake that stands today. Most come from the board-and-shareholder-structure form, which prints a company\u2019s whole register at once; the rest from post-execution forms, which print what one trade left behind. Point at a holder to read their name, pick one to see every company they are in, and choose a week to light the holdings that changed in it. The board itself never moves.',
+      '\u0643\u0644 \u0634\u0631\u0643\u0629 \u0648\u0631\u062f \u0641\u064a \u0625\u0641\u0635\u0627\u062d \u0627\u0633\u0645 \u0645\u0627\u0644\u0643 \u0641\u064a\u0647\u0627\u060c \u0628\u0627\u0644\u062d\u0635\u0629 \u0627\u0644\u0642\u0627\u0626\u0645\u0629 \u0627\u0644\u064a\u0648\u0645. \u0645\u0639\u0638\u0645\u0647\u0627 \u0645\u0646 \u0646\u0645\u0648\u0630\u062c \u0645\u062c\u0644\u0633 \u0627\u0644\u0625\u062f\u0627\u0631\u0629 \u0648\u0647\u064a\u0643\u0644 \u0627\u0644\u0645\u0633\u0627\u0647\u0645\u064a\u0646\u060c \u0627\u0644\u0630\u064a \u064a\u0637\u0628\u0639 \u0633\u062c\u0644 \u0627\u0644\u0634\u0631\u0643\u0629 \u0643\u0627\u0645\u0644\u0627\u064b\u060c \u0648\u0628\u0642\u064a\u062a\u0647\u0627 \u0645\u0646 \u0646\u0645\u0627\u0630\u062c \u0627\u0644\u0625\u0641\u0635\u0627\u062d \u0628\u0639\u062f \u0627\u0644\u062a\u0646\u0641\u064a\u0630. \u0623\u0634\u0631 \u0625\u0644\u0649 \u0645\u0627\u0644\u0643 \u0644\u062a\u0642\u0631\u0623 \u0627\u0633\u0645\u0647\u060c \u0648\u0627\u062e\u062a\u0631\u0647 \u0644\u062a\u0631\u0649 \u0643\u0644 \u0634\u0631\u0643\u0627\u062a\u0647\u060c \u0648\u0627\u062e\u062a\u0631 \u0623\u0633\u0628\u0648\u0639\u0627\u064b \u0644\u062a\u0636\u064a\u0621 \u0627\u0644\u062d\u0635\u0635 \u0627\u0644\u062a\u064a \u062a\u063a\u064a\u0651\u0631\u062a \u0641\u064a\u0647. \u0648\u0627\u0644\u0644\u0648\u062d\u0629 \u0646\u0641\u0633\u0647\u0627 \u0644\u0627 \u062a\u062a\u062d\u0631\u0643 \u0623\u0628\u062f\u0627\u064b.')),
     slot,
     h('div', { className: 'om-legend' },
       h('span', { className: 'om-key om-key-ring' },
@@ -1134,9 +1376,12 @@ function renderOwnershipMap(doc, ar, t, component) {
       h('span', { className: 'om-key om-key-arc' },
         t('An outer arc is what that holding gained or gave up in the chosen week.',
           'القوس الخارجي هو ما اكتسبته الحصة أو تخلّت عنه في الأسبوع المختار.')),
+      h('span', { className: 'om-key om-key-dot' },
+        t('A dot is one holder\u2019s stake in one company. Point at it for the name.',
+          '\u0627\u0644\u0646\u0642\u0637\u0629 \u062d\u0635\u0629 \u0645\u0627\u0644\u0643 \u0648\u0627\u062d\u062f \u0641\u064a \u0634\u0631\u0643\u0629 \u0648\u0627\u062d\u062f\u0629. \u0623\u0634\u0631 \u0625\u0644\u064a\u0647\u0627 \u0644\u064a\u0638\u0647\u0631 \u0627\u0644\u0627\u0633\u0645.')),
       h('span', { className: 'om-key om-key-bridge' },
-        t('A curve joins the companies one holder appears in.',
-          'المنحنى يصل بين الشركات التي يظهر فيها مالك واحد.'))
+        t('Pick a holder and a spoke runs to each company they are in, tagged with the stake they hold of it.',
+          '\u0627\u062e\u062a\u0631 \u0645\u0627\u0644\u0643\u0627\u064b \u064a\u0645\u062a\u062f \u062e\u0637 \u0625\u0644\u0649 \u0643\u0644 \u0634\u0631\u0643\u0629 \u0647\u0648 \u0641\u064a\u0647\u0627\u060c \u0645\u0639\u0644\u0651\u0645\u0627\u064b \u0628\u062d\u0635\u062a\u0647 \u0645\u0646\u0647\u0627.'))
     ),
     h('p', { className: 'ft-note' }, t(
       'A stake is a percentage of ONE company: nothing here adds two of them together, and a holder in three companies is drawn three times with no combined percentage. Each figure is the closing stake on the most recent form filed for it, not a running total of trades. A company with no published market value is drawn at the smallest size with a dashed centre rather than dropped.',

@@ -37,6 +37,7 @@ import insider_identity
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 STORE = REPO / "data-source" / "official" / "ownership" / "named-insiders.json"
+REGISTERS = REPO / "data-source" / "official" / "ownership" / "shareholder-structure.json"
 OUT = REPO / "public" / "data" / "v1" / "insider-people.json"
 FIXTURE = REPO / "app" / "assets" / "fixtures" / "insider-people.json"
 COMPANIES = REPO / "public" / "data" / "v1" / "companies.json"
@@ -76,6 +77,44 @@ def week_label(start: str, end: str, months) -> str:
     return f"{a.day} {months[a.month - 1]} – {b.day} {months[b.month - 1]}"
 
 
+def registers() -> dict:
+    """The filed shareholder structures, keyed by ticker.
+
+    Only the reading for each company is kept, not the whole store, and the
+    date is the one the form itself states — `asOfDate` — falling back to the
+    session it was filed for and then to the day it was published. A register
+    dated by our fetch rather than by the document would claim a freshness the
+    document does not have.
+    """
+    if not REGISTERS.exists():
+        return {}
+    try:
+        held = json.loads(REGISTERS.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    out = {}
+    for reading in (held.get("readings") or {}).values():
+        ticker = reading.get("ticker")
+        if not ticker:
+            continue
+        asof = (reading.get("asOfDate") or reading.get("sessionDate")
+                or (reading.get("publishedAt") or "")[:10]) or None
+        held_row = out.get(ticker)
+        if held_row and (held_row.get("asOf") or "") >= (asof or ""):
+            continue
+        out[ticker] = {
+            "ticker": ticker,
+            "asOf": asof,
+            "filingId": reading.get("filingId"),
+            "source": reading.get("source"),
+            "totalShares": reading.get("totalShares"),
+            "board": reading.get("board") or [],
+            "shareholders": reading.get("shareholders") or [],
+            "namedWithoutAStake": reading.get("namedWithoutAStake") or [],
+        }
+    return out
+
+
 def _dedupe(trades):
     """One executed trade, however many times the exchange filed it.
 
@@ -101,13 +140,20 @@ def main(argv=None) -> int:
     ap.add_argument("--force", action="store_true",
                     help="publish even if it knows less than what is published")
     args = ap.parse_args(argv)
-    if not STORE.exists():
-        print("no named-insider store yet — run build_named_insiders.py")
-        return 0
-    held = json.loads(STORE.read_text(encoding="utf-8"))
-    readings = list((held.get("readings") or {}).values())
-    if not readings:
-        print("the store holds no readings")
+    # Either store is enough. Trades were the only source once; registers now
+    # carry most of the holders, and a machine that has read registers and no
+    # trade forms has plenty to publish.
+    readings = []
+    if STORE.exists():
+        try:
+            readings = list((json.loads(STORE.read_text(encoding="utf-8"))
+                             .get("readings") or {}).values())
+        except json.JSONDecodeError:
+            readings = []
+    books_present = REGISTERS.exists()
+    if not readings and not books_present:
+        print("nothing read yet — run build_named_insiders.py "
+              "and build_ownership_structure.py")
         return 0
 
     names = {}
@@ -147,11 +193,27 @@ def main(argv=None) -> int:
     # list, and their stakes read as separate holdings — `شركة اموال العربيه
     # للاقطان` and `شركه ...`, one letter apart, made KABO look 82% disclosed
     # when one firm holds 41% of it.
+    books = registers()
+
+    # Register holders go through the SAME identity resolution as the traders,
+    # so a man who filed a trade in August and appears in his company's October
+    # register is one holder and not two. They carry no trades, so nothing can
+    # corroborate a fuzzy match for them: only an identical folded spelling
+    # merges a register name into a trading one, which is the conservative way
+    # round — two nodes for one person is a smaller error than one node for two.
     filed = [{"id": k, "nameEn": p.get("nameEn"), "trades": p["trades"]}
              for k, p in people.items()]
+    known = {k for k in people}
+    for book in books.values():
+        for row in book["shareholders"]:
+            name = key(row.get("nameArabic"))
+            if name and name not in known:
+                known.add(name)
+                filed.append({"id": name, "nameEn": None, "trades": []})
     groups = insider_identity.resolve(filed)
 
     rows = []
+    holder_of = {}
     for group in groups:
         trades = _dedupe(sorted(
             [t for member in group for t in member["trades"]],
@@ -160,13 +222,17 @@ def main(argv=None) -> int:
         # forms of one session disagree. Every spelling is kept beside it: the
         # reader who searches the name they saw on the exchange's site has to
         # find this row.
+        # A register holder has no trades, so `max` over an empty sequence is
+        # the ordinary case here rather than the odd one.
         variants = sorted(
             group,
-            key=lambda m: (max((t["date"] or "") for t in m["trades"]),
+            key=lambda m: (max((t["date"] or "") for t in m["trades"]) if m["trades"] else "",
                            len(m["id"].split())),
             reverse=True)
         head = variants[0]
-        source = people[head["id"]]
+        source = people.get(head["id"], {})
+        for member in group:
+            holder_of[member["id"]] = head["id"]
         paired = [t for t in trades if t["stakeBefore"] is not None and t["stakeAfter"] is not None]
         tickers = sorted({t["ticker"] for t in trades if t["ticker"]})
         # A stake is a percentage OF ONE COMPANY. Summing across companies
@@ -182,7 +248,7 @@ def main(argv=None) -> int:
             }
         rows.append({
             "id": head["id"],
-            "name": source["name"], "nameEn": head.get("nameEn"),
+            "name": source.get("name") or head["id"], "nameEn": head.get("nameEn"),
             "script": source.get("script"),
             # A person or a firm, read off the name. The map draws them
             # differently because "who owns the exchange" is a different
@@ -206,7 +272,7 @@ def main(argv=None) -> int:
     # a level the document prints, not a running total of movements. A holding
     # read down to zero stays in the list at zero: "sold out" and "never held"
     # are different facts and the second one is not ours to claim.
-    positions = []
+    held = {}
     for r in rows:
         by_ticker = collections.defaultdict(list)
         for t in r["trades"]:
@@ -215,19 +281,93 @@ def main(argv=None) -> int:
         for ticker, hist in sorted(by_ticker.items()):
             hist.sort(key=lambda t: (t["date"] or "", str(t["filingId"] or "")))
             last = hist[-1]
-            positions.append({
+            held[(r["id"], ticker)] = {
                 "holder": r["id"],
                 "kind": r["kind"],
                 "ticker": ticker,
                 "percent": last["stakeAfter"],
                 "asOf": last["date"],
+                # What kind of document said so. A trade form states the stake
+                # one transaction left behind; a register states the holding.
+                "basis": "trade",
                 "filingId": last["filingId"],
                 "source": last["source"],
                 "openedAt": hist[0]["date"],
                 "openingPercent": hist[0]["stakeBefore"],
                 "history": [{"date": t["date"], "percent": t["stakeAfter"]} for t in hist],
-            })
-    positions.sort(key=lambda p: (-(p["percent"] or 0), p["ticker"]))
+            }
+
+    kind_of = {r["id"]: r["kind"] for r in rows}
+    for book in books.values():
+        for row in book["shareholders"]:
+            name = key(row.get("nameArabic"))
+            holder = holder_of.get(name)
+            percent = row.get("percent")
+            if not holder or not isinstance(percent, (int, float)) or percent <= 0:
+                continue
+            mark = (holder, book["ticker"])
+            standing = held.get(mark)
+            # The newer document wins, and a register that ties with a trade
+            # wins too: one states the holding, the other states what a single
+            # transaction left behind.
+            if standing and (standing["asOf"] or "") > (book["asOf"] or ""):
+                continue
+            held[mark] = {
+                "holder": holder,
+                "kind": kind_of.get(holder, "person"),
+                "ticker": book["ticker"],
+                "percent": float(percent),
+                "asOf": book["asOf"],
+                "basis": "register",
+                "filingId": book["filingId"],
+                "source": book["source"],
+                "shares": row.get("shares"),
+                "openedAt": (standing or {}).get("openedAt"),
+                "openingPercent": (standing or {}).get("openingPercent"),
+                "history": (standing or {}).get("history") or [],
+            }
+    positions = sorted(held.values(),
+                       key=lambda p: (-(p["percent"] or 0), p["ticker"]))
+
+    # Companies whose named holders add to more than the company.
+    #
+    # Every one of these is two documents naming one party twice, and the two
+    # found so far are the same shape: a register in English against a trade
+    # form in Arabic. `Citadel Capital` at 53.35% and `القلعة للاستشارات
+    # المالية` at 50.76% are one firm, and nothing in a name can prove it —
+    # a translation is not a transliteration and no folding reaches across.
+    #
+    # So it is published as a contradiction rather than resolved by guess. The
+    # map marks the ring and the panel says the sum; a reader who can see the
+    # two names can see what happened, which is more than a silently scaled
+    # ring would give them.
+    claimed = collections.defaultdict(float)
+    counted = collections.Counter()
+    for position in positions:
+        if (position["percent"] or 0) > 0:
+            claimed[position["ticker"]] += position["percent"]
+            counted[position["ticker"]] += 1
+    over = [{"ticker": t, "percent": round(v, 2), "holders": counted[t]}
+            for t, v in sorted(claimed.items()) if v > 100.0001]
+
+    # Who sits on each board. A director is NOT a shareholder and is not
+    # counted as one; where the same name appears in both, `holder` joins them.
+    boards = []
+    for ticker, book in sorted(books.items()):
+        if not book["board"]:
+            continue
+        boards.append({
+            "ticker": ticker,
+            "asOf": book["asOf"],
+            "filingId": book["filingId"],
+            "source": book["source"],
+            "seats": [{
+                "name": (seat.get("nameArabic") or "").strip(),
+                "holder": holder_of.get(key(seat.get("nameArabic"))),
+                "role": seat.get("role") or None,
+                "representing": seat.get("representing") or None,
+            } for seat in book["board"] if (seat.get("nameArabic") or "").strip()],
+        })
 
     # ── what moved, a trading week at a time ─────────────────────────────────
     #
@@ -277,28 +417,46 @@ def main(argv=None) -> int:
     doc = {
         "schemaVersion": 1,
         "generated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
-        "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ)",
-        "basis": ("Read from the individual scanned filing, which is the only "
-                  "document that names the party. The daily EGX summary gives "
-                  "the relationship and never the name."),
-        "basisAr": ("مقروءة من نموذج الإفصاح بعد التنفيذ، وهو المستند الوحيد "
-                    "الذي يذكر اسم المتعامل. الملخص اليومي للبورصة يذكر صفة "
-                    "المتعامل ولا يذكر اسمه."),
+        "source": ("EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) "
+                   "and board & shareholder-structure forms "
+                   "(نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)"),
+        "basis": ("Read from the scanned filings themselves, which are the only "
+                  "documents that name the party: a post-execution form states "
+                  "the stake one trade left behind, and a structure form states "
+                  "the register. The daily EGX summary gives the relationship "
+                  "and never the name."),
+        "basisAr": ("مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة "
+                    "التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد "
+                    "الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي "
+                    "للبورصة يذكر صفة المتعامل ولا يذكر اسمه."),
         "peopleCount": len(rows),
         "tradeCount": sum(r["tradeCount"] for r in rows),
-        "tickerCount": len({t for r in rows for t in r["tickers"]}),
+        # Every company we can name a holder of, not just the ones somebody
+        # traded. It read 51 while the file carried ownership for 162.
+        "tickerCount": len({p["ticker"] for p in positions}),
+        "tradedTickerCount": len({t for r in rows for t in r["tickers"]}),
         "firmCount": sum(1 for r in rows if r["kind"] == "firm"),
         "personCount": sum(1 for r in rows if r["kind"] == "person"),
         "aliasCount": sum(len(r["aliases"] or ()) for r in rows),
+        "registerCount": len(books),
+        "overDisclosed": over,
+        "seatCount": sum(len(b["seats"]) for b in boards),
         "people": rows,
         "positions": positions,
         "periods": periods,
+        "boards": boards,
     }
     live = [p for p in positions if (p["percent"] or 0) > 0]
     print(f"   {len(rows)} holders ({doc['personCount']} people, "
           f"{doc['firmCount']} firms, {doc['aliasCount']} spellings merged), "
           f"{doc['tradeCount']} trades, {doc['tickerCount']} companies")
-    print(f"   {len(live)} standing stakes, {len(periods)} trading weeks")
+    print(f"   {len(live)} standing stakes across "
+          f"{len({p['ticker'] for p in live})} companies, "
+          f"{len(periods)} trading weeks")
+    print(f"   {doc['registerCount']} filed registers, {doc['seatCount']} board seats")
+    for row in over:
+        print(f"   ! {row['ticker']}: {row['holders']} named holders add to "
+              f"{row['percent']}% — two documents naming one party twice")
     if args.check:
         # Everything above ran; only the write is skipped. A dry run that
         # skipped the work would report a health it never tested.
