@@ -1,12 +1,12 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-11T11:56:42Z",
+ "generated": "2026-09-11T12:26:01Z",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
- "asOf": "2026-09-11T10:20:01+00:00",
+ "asOf": "2026-09-11T12:26:01+00:00",
  "basis": "A link is one listed company's filed stake in another, at the level the last form printed. Percentages belong to one company each and are never added together; sector totals are the market value of the stakes, which is money and can be.",
  "basisAr": "كل خط حصة مُفصح عنها لشركة مقيدة في شركة مقيدة أخرى، بالنسبة التي أثبتها آخر نموذج. النسب تخص شركة واحدة ولا تُجمع؛ إجماليات القطاعات بالقيمة السوقية للحصص، وهي مبالغ تُجمع.",
- "linkCount": 22,
- "outsideHolderCount": 377,
+ "linkCount": 24,
+ "outsideHolderCount": 420,
  "links": [
   {
    "owner": "CANA",
@@ -52,6 +52,25 @@
    "ownerNameAr": "بنك فيصل الإسلامي المصري",
    "ownerSector": "Banks",
    "ownerSectorAr": "بنوك",
+   "held": "ICLE",
+   "heldName": "International Co. for Leasing SAE",
+   "heldNameAr": "الدولية للتأجير التمويلي (إنكوليس)",
+   "heldSector": "Finance",
+   "heldSectorAr": "Finance",
+   "holder": "بنك فيصل الاسلامى المصرى",
+   "percent": 9.3643,
+   "value": 73790685.03,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291452",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341152_1.pdf"
+  },
+  {
+   "owner": "FAIT",
+   "ownerName": "Faisal Islamic Bank of Egypt",
+   "ownerNameAr": "بنك فيصل الإسلامي المصري",
+   "ownerSector": "Banks",
+   "ownerSectorAr": "بنوك",
    "held": "INFI",
    "heldName": "Ismailia National Food Industries",
    "heldNameAr": "الاسماعيلية الوطنية للصناعات الغذائية (فوديكو)",
@@ -83,6 +102,25 @@
    "basis": "register",
    "filingId": "291259",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340950_1.pdf"
+  },
+  {
+   "owner": "SAIB",
+   "ownerName": "Societe Arabe Internationale de Banque",
+   "ownerNameAr": "بنك الشركة المصرفية العربية الدولية شركة مساهمة مصرية",
+   "ownerSector": "Finance",
+   "ownerSectorAr": "Finance",
+   "held": "ICLE",
+   "heldName": "International Co. for Leasing SAE",
+   "heldNameAr": "الدولية للتأجير التمويلي (إنكوليس)",
+   "heldSector": "Finance",
+   "heldSectorAr": "Finance",
+   "holder": "بنك الشركة المصرفية العربية الدولية",
+   "percent": 21.0079,
+   "value": 165542254.31,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291452",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341152_1.pdf"
   },
   {
    "owner": "GDWA",
@@ -455,6 +493,18 @@
   {
    "fromSector": "Banks",
    "fromSectorAr": "بنوك",
+   "toSector": "Finance",
+   "toSectorAr": "Finance",
+   "links": 1,
+   "value": 73790685.03,
+   "valued": 1,
+   "companies": [
+    "ICLE"
+   ]
+  },
+  {
+   "fromSector": "Banks",
+   "fromSectorAr": "بنوك",
    "toSector": "Food, Beverages and Tobacco",
    "toSectorAr": "أغذية و مشروبات و تبغ",
    "links": 1,
@@ -474,6 +524,18 @@
    "valued": 1,
    "companies": [
     "ATLC"
+   ]
+  },
+  {
+   "fromSector": "Finance",
+   "fromSectorAr": "Finance",
+   "toSector": "Finance",
+   "toSectorAr": "Finance",
+   "links": 1,
+   "value": 165542254.31,
+   "valued": 1,
+   "companies": [
+    "ICLE"
    ]
   },
   {
@@ -642,7 +704,7 @@
    "nameAr": "بنوك",
    "companies": 12,
    "cap": 976092684697.44,
-   "holds": 4,
+   "holds": 5,
    "heldBy": 1
   },
   {
@@ -674,8 +736,8 @@
    "nameAr": "Finance",
    "companies": 10,
    "cap": 56351464313.21,
-   "holds": 0,
-   "heldBy": 1
+   "holds": 1,
+   "heldBy": 3
   },
   {
    "id": "Food, Beverages and Tobacco",

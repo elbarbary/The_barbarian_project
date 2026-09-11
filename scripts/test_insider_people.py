@@ -468,3 +468,39 @@ class TheAudit(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PartylessNames(unittest.TestCase):
+    """One phrase on nine registers is nine bodies, not one holder."""
+
+    UNION = "اتحاد العاملين المساهمين"
+
+    def test_a_union_named_on_three_registers_is_three_holders(self):
+        # Drawn as one, the board asserts a party holding stakes in three
+        # companies that no document puts together.
+        out = build([], books=[
+            register("AAA", [(self.UNION, 10.0)], filing="901"),
+            register("BBB", [(self.UNION, 12.0)], filing="902"),
+            register("CCC", [(self.UNION, 8.0)], filing="903"),
+        ])
+        holders = {p["holder"] for p in out["positions"]}
+        self.assertEqual(len(holders), 3, holders)
+        for holder in holders:
+            mine = {p["ticker"] for p in out["positions"] if p["holder"] == holder}
+            self.assertEqual(len(mine), 1, f"{holder} was drawn in {mine}")
+
+    def test_each_one_says_which_company_it_belongs_to(self):
+        out = build([], books=[register("AAA", [(self.UNION, 10.0)], filing="901")])
+        self.assertIn("AAA", out["positions"][0]["holder"])
+
+    def test_the_same_phrase_naming_a_company_is_left_alone(self):
+        named = "اتحاد العاملين المساهمين بشركة مصر للأسواق الحرة"
+        out = build([], books=[register("MFSC", [(named, 76.5)], filing="901")])
+        self.assertEqual(out["positions"][0]["holder"], named)
+
+    def test_two_spellings_of_a_real_holder_still_become_one(self):
+        out = build([], books=[
+            register("AAA", [(AMWAL, 41.0)], filing="901"),
+            register("BBB", [(AMWAL_HAA, 12.0)], filing="902"),
+        ])
+        self.assertEqual(len({p["holder"] for p in out["positions"]}, ), 1)

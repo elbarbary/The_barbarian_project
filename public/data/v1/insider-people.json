@@ -1,17 +1,17 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-11T10:20:01+00:00",
+ "generated": "2026-09-11T12:26:01+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 884,
+ "peopleCount": 967,
  "tradeCount": 105,
- "tickerCount": 187,
+ "tickerCount": 201,
  "tradedTickerCount": 51,
- "firmCount": 317,
- "personCount": 567,
- "aliasCount": 85,
- "registerCount": 165,
+ "firmCount": 350,
+ "personCount": 617,
+ "aliasCount": 96,
+ "registerCount": 181,
  "overDisclosed": [],
  "supersededByRegister": [
   {
@@ -31,7 +31,7 @@
    "why": "the filed register for ASCM does not list this name, and counting both made the company 119.94% owned"
   }
  ],
- "seatCount": 1383,
+ "seatCount": 1520,
  "people": [
   {
    "id": "جدوى للتنمية الصناعية",
@@ -1665,7 +1665,7 @@
      "date": "2026-09-01",
      "ticker": "EHDR",
      "company": null,
-     "companyAr": "المصريين للاسكان والتنمية والتعمير ش م م",
+     "companyAr": null,
      "action": "buy",
      "shares": 2000000,
      "price": 2.957,
@@ -1679,7 +1679,7 @@
      "date": "2026-09-03",
      "ticker": "EHDR",
      "company": null,
-     "companyAr": "المصريين للاسكان والتنمية والتعمير ش م م",
+     "companyAr": null,
      "action": "buy",
      "shares": 2800000,
      "price": 3.098,
@@ -2301,7 +2301,9 @@
    "nameEn": "Osama Fawzy Mohamed Saeed",
    "script": "ar",
    "kind": "person",
-   "aliases": null,
+   "aliases": [
+    "أسامة فوزى محمد سعيد"
+   ],
    "tickers": [
     "FIRE"
    ],
@@ -3809,11 +3811,11 @@
    "trades": []
   },
   {
-   "id": "اتحاد العاملين المساهمين",
-   "name": "اتحاد العاملين المساهمين",
+   "id": "اتحاد العاملين المساهمين (KZPC)",
+   "name": "اتحاد العاملين المساهمين (KZPC)",
    "nameEn": null,
    "script": null,
-   "kind": "person",
+   "kind": "firm",
    "aliases": null,
    "tickers": [],
    "tradeCount": 0,
@@ -4030,6 +4032,21 @@
    "trades": []
   },
   {
+   "id": "اتحاد العاملين المساهمين (CEFM)",
+   "name": "اتحاد العاملين المساهمين (CEFM)",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
    "id": "أوراسكوم القابضة للتنمية إيه جي",
    "name": "أوراسكوم القابضة للتنمية إيه جي",
    "nameEn": null,
@@ -4124,7 +4141,7 @@
    "name": "اتحاد العاملين المساهمين بشركة مطاحن شرق الدلتا",
    "nameEn": null,
    "script": null,
-   "kind": "person",
+   "kind": "firm",
    "aliases": null,
    "tickers": [],
    "tradeCount": 0,
@@ -4269,7 +4286,8 @@
    "script": null,
    "kind": "firm",
    "aliases": [
-    "شركة مصر للتأمين"
+    "شركة مصر للتأمين",
+    "مصر للتأمين"
    ],
    "tickers": [],
    "tradeCount": 0,
@@ -5903,6 +5921,21 @@
    "trades": []
   },
   {
+   "id": "اتحاد العاملين المساهمين (WCDF)",
+   "name": "اتحاد العاملين المساهمين (WCDF)",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
    "id": "محمد عبد الحميد احمد لطفي الفقي",
    "name": "محمد عبد الحميد احمد لطفي الفقي",
    "nameEn": null,
@@ -6008,12 +6041,14 @@
    "trades": []
   },
   {
-   "id": "عبد السلام عبد السلام مصطفى الجبلى",
-   "name": "عبد السلام عبد السلام مصطفى الجبلى",
+   "id": "عبد السلام عبد السلام مصطفي الجبلي (مجموعة مرتبطة )",
+   "name": "عبد السلام عبد السلام مصطفي الجبلي (مجموعة مرتبطة )",
    "nameEn": null,
    "script": null,
    "kind": "person",
-   "aliases": null,
+   "aliases": [
+    "عبد السلام عبد السلام مصطفى الجبلى"
+   ],
    "tickers": [],
    "tradeCount": 0,
    "boughtCount": 0,
@@ -6148,7 +6183,9 @@
    "nameEn": null,
    "script": null,
    "kind": "person",
-   "aliases": null,
+   "aliases": [
+    "هدي مجدي عبدالسلام الجبلي"
+   ],
    "tickers": [],
    "tradeCount": 0,
    "boughtCount": 0,
@@ -6203,12 +6240,14 @@
    "trades": []
   },
   {
-   "id": "شريف مصطفى الجبلى",
-   "name": "شريف مصطفى الجبلى",
+   "id": "شريف مصطفي الجبلي (مجموعة مرتبطة )",
+   "name": "شريف مصطفي الجبلي (مجموعة مرتبطة )",
    "nameEn": null,
    "script": null,
    "kind": "person",
-   "aliases": null,
+   "aliases": [
+    "شريف مصطفى الجبلى"
+   ],
    "tickers": [],
    "tradeCount": 0,
    "boughtCount": 0,
@@ -6842,7 +6881,9 @@
    "nameEn": null,
    "script": null,
    "kind": "firm",
-   "aliases": null,
+   "aliases": [
+    "شركه الطارق للتجاره واستيراد وتوزيع السيارات الطارق"
+   ],
    "tickers": [],
    "tradeCount": 0,
    "boughtCount": 0,
@@ -6857,7 +6898,9 @@
    "nameEn": null,
    "script": null,
    "kind": "person",
-   "aliases": null,
+   "aliases": [
+    "محمد طارق محمد محمد اسماعيل"
+   ],
    "tickers": [],
    "tradeCount": 0,
    "boughtCount": 0,
@@ -6992,6 +7035,21 @@
    "nameEn": null,
    "script": null,
    "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "اتحاد العاملين المساهمين (AFMC)",
+   "name": "اتحاد العاملين المساهمين (AFMC)",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
    "aliases": null,
    "tickers": [],
    "tradeCount": 0,
@@ -7353,7 +7411,7 @@
    "name": "اتحاد المساهمين العاملين بشركة مطاحن مصر العليا",
    "nameEn": null,
    "script": null,
-   "kind": "person",
+   "kind": "firm",
    "aliases": null,
    "tickers": [],
    "tradeCount": 0,
@@ -7394,11 +7452,26 @@
    "trades": []
   },
   {
-   "id": "اتحاد العاملين المساهمين بالشركة",
-   "name": "اتحاد العاملين المساهمين بالشركة",
+   "id": "اتحاد العاملين المساهمين بالشركة (MILS)",
+   "name": "اتحاد العاملين المساهمين بالشركة (MILS)",
    "nameEn": null,
    "script": null,
-   "kind": "person",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "اتحاد العاملين المساهمين (CPCI)",
+   "name": "اتحاد العاملين المساهمين (CPCI)",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
    "aliases": null,
    "tickers": [],
    "tradeCount": 0,
@@ -8876,7 +8949,9 @@
    "nameEn": null,
    "script": null,
    "kind": "firm",
-   "aliases": null,
+   "aliases": [
+    "الشركة المصرية القابضة للغازات الطبيعية (إيجاس)"
+   ],
    "tickers": [],
    "tradeCount": 0,
    "boughtCount": 0,
@@ -9463,7 +9538,9 @@
    "nameEn": null,
    "script": null,
    "kind": "firm",
-   "aliases": null,
+   "aliases": [
+    "الشركة السعوديه المصريه للاستثمار"
+   ],
    "tickers": [],
    "tradeCount": 0,
    "boughtCount": 0,
@@ -10035,12 +10112,14 @@
    "trades": []
   },
   {
-   "id": "الشركة المصرية القابضة للبتروكيماويات",
-   "name": "الشركة المصرية القابضة للبتروكيماويات",
+   "id": "الشركة المصرية القابضة للبتروكيماويات (ايكم)",
+   "name": "الشركة المصرية القابضة للبتروكيماويات (ايكم)",
    "nameEn": null,
    "script": null,
    "kind": "firm",
-   "aliases": null,
+   "aliases": [
+    "الشركة المصرية القابضة للبتروكيماويات"
+   ],
    "tickers": [],
    "tradeCount": 0,
    "boughtCount": 0,
@@ -10712,6 +10791,21 @@
    "trades": []
   },
   {
+   "id": "اتحاد العاملين المساهمين (GSSC)",
+   "name": "اتحاد العاملين المساهمين (GSSC)",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
    "id": "Citadel Capital",
    "name": "Citadel Capital",
    "nameEn": null,
@@ -10727,8 +10821,8 @@
    "trades": []
   },
   {
-   "id": "Financial Holdings International LTD",
-   "name": "Financial Holdings International LTD",
+   "id": "Financial Holdings International LTD (ASCM)",
+   "name": "Financial Holdings International LTD (ASCM)",
    "nameEn": null,
    "script": null,
    "kind": "firm",
@@ -11122,7 +11216,9 @@
    "nameEn": null,
    "script": null,
    "kind": "firm",
-   "aliases": null,
+   "aliases": [
+    "بنك فيصل الاسلامي المصرى"
+   ],
    "tickers": [],
    "tradeCount": 0,
    "boughtCount": 0,
@@ -12068,6 +12164,21 @@
    "trades": []
   },
   {
+   "id": "اتحاد العاملين المساهمين (MPCI)",
+   "name": "اتحاد العاملين المساهمين (MPCI)",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
    "id": "Waleed M Zaki",
    "name": "Waleed M Zaki",
    "nameEn": null,
@@ -12143,8 +12254,8 @@
    "trades": []
   },
   {
-   "id": "W Z Investment",
-   "name": "W Z Investment",
+   "id": "W Z Investment (PRDC)",
+   "name": "W Z Investment (PRDC)",
    "nameEn": null,
    "script": null,
    "kind": "firm",
@@ -12327,7 +12438,7 @@
    "name": "اتحاد نقابات المهن الطبية",
    "nameEn": null,
    "script": null,
-   "kind": "person",
+   "kind": "firm",
    "aliases": null,
    "tickers": [],
    "tradeCount": 0,
@@ -13017,8 +13128,8 @@
    "trades": []
   },
   {
-   "id": "B I G Investment Group Ltd",
-   "name": "B I G Investment Group Ltd",
+   "id": "B I G Investment Group Ltd (MASR)",
+   "name": "B I G Investment Group Ltd (MASR)",
    "nameEn": null,
    "script": null,
    "kind": "firm",
@@ -13032,8 +13143,8 @@
    "trades": []
   },
   {
-   "id": "B Investments Holding",
-   "name": "B Investments Holding",
+   "id": "B Investments Holding (MASR)",
+   "name": "B Investments Holding (MASR)",
    "nameEn": null,
    "script": null,
    "kind": "firm",
@@ -13559,6 +13670,21 @@
   {
    "id": "الوطنية للتجارة والتنمية (انتاد)",
    "name": "الوطنية للتجارة والتنمية (انتاد)",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "اتحاد العاملين المساهمين (ADCI)",
+   "name": "اتحاد العاملين المساهمين (ADCI)",
    "nameEn": null,
    "script": null,
    "kind": "firm",
@@ -15400,6 +15526,1146 @@
    "value": null,
    "singleCompanyMove": null,
    "trades": []
+  },
+  {
+   "id": "شركة الياسمين القابضة للأستثمارات المالية",
+   "name": "شركة الياسمين القابضة للأستثمارات المالية",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "مصطفى أمين مصطفى يحيى",
+   "name": "مصطفى أمين مصطفى يحيى",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "هشام حسنى محمود حسن حمودة",
+   "name": "هشام حسنى محمود حسن حمودة",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "اتحاد العاملين المساهمين (ZEOT)",
+   "name": "اتحاد العاملين المساهمين (ZEOT)",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "شركة الفا اوركس ليميتد",
+   "name": "شركة الفا اوركس ليميتد",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "المجموعة المرتبطة : الشركة المصرية للغازات الطبيعية (جاسكو)",
+   "name": "المجموعة المرتبطة : الشركة المصرية للغازات الطبيعية (جاسكو)",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "الشركة الدولية للاسمدة والكيماويات ( مساهم رئيسى ) والمجموعة المرتبطة",
+   "name": "الشركة الدولية للاسمدة والكيماويات ( مساهم رئيسى ) والمجموعة المرتبطة",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "صالح عبد السلام عبد السلام مصطفي الجبلي ( مجموعة مرتبطة )",
+   "name": "صالح عبد السلام عبد السلام مصطفي الجبلي ( مجموعة مرتبطة )",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "نيفين عبد المنعم سيف",
+   "name": "نيفين عبد المنعم سيف",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "نهله عبد السلام م عبد السلام م مصطفي الجبلي",
+   "name": "نهله عبد السلام م عبد السلام م مصطفي الجبلي",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "نورهان عبد السلام م عبد السلام م مصطفي الجبلي",
+   "name": "نورهان عبد السلام م عبد السلام م مصطفي الجبلي",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "عزه محمد عبدالرحيم شعبان سليم",
+   "name": "عزه محمد عبدالرحيم شعبان سليم",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "اميره عبد السلام م مصطفي الجبلي",
+   "name": "اميره عبد السلام م مصطفي الجبلي",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "راويه عبد السلام م مصطفي الجبلي",
+   "name": "راويه عبد السلام م مصطفي الجبلي",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "احمد محمد محي الدين محمد علي بهجت",
+   "name": "احمد محمد محي الدين محمد علي بهجت",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "الهام احمد رامي",
+   "name": "الهام احمد رامي",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "الصفا للاستثمار و التوكيلات التجاريه ( مساهم رئيسى ) والمجموعة المرتبطة",
+   "name": "الصفا للاستثمار و التوكيلات التجاريه ( مساهم رئيسى ) والمجموعة المرتبطة",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "دعاء صلاح احمد محمد الحصري",
+   "name": "دعاء صلاح احمد محمد الحصري",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "نافع فهمي فهمي عبد المجيد",
+   "name": "نافع فهمي فهمي عبد المجيد",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "احمد نافع فهمي فهمي عبد المجيد",
+   "name": "احمد نافع فهمي فهمي عبد المجيد",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "حسناء حسن محمد طمان",
+   "name": "حسناء حسن محمد طمان",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "وسام عبد العزيز صلاح احمد محمد الحصري",
+   "name": "وسام عبد العزيز صلاح احمد محمد الحصري",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "منه الله نافع فهمي عبد المجيد",
+   "name": "منه الله نافع فهمي عبد المجيد",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "صلاح نافع فهمي فهمي عبد المجيد",
+   "name": "صلاح نافع فهمي فهمي عبد المجيد",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "شركة المنصور والمغربي لالستثمار والتنمية",
+   "name": "شركة المنصور والمغربي لالستثمار والتنمية",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "يس إبراهيم لطفي منصور",
+   "name": "يس إبراهيم لطفي منصور",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "محمود لطفي إسماعيل محمود لطفي منصور",
+   "name": "محمود لطفي إسماعيل محمود لطفي منصور",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "رويال للتأمين",
+   "name": "رويال للتأمين",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "حسن محمد حسن درويش",
+   "name": "حسن محمد حسن درويش",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "البنك العربي األفريقي الدولي",
+   "name": "البنك العربي األفريقي الدولي",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "وائل طارق محمد مجمد إسماعيل",
+   "name": "وائل طارق محمد مجمد إسماعيل",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "ليدر للوساطه التامينيه LEADER INSURANCE BROKERAGE LIB ش م م",
+   "name": "ليدر للوساطه التامينيه LEADER INSURANCE BROKERAGE LIB ش م م",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "بالم القابضه للاستثمارات الماليه ش م م",
+   "name": "بالم القابضه للاستثمارات الماليه ش م م",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "شركة الطارق للتجارة واستيراد وتوزيع السيارات",
+   "name": "شركة الطارق للتجارة واستيراد وتوزيع السيارات",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "بنك الشركة المصرفية العربية الدولية",
+   "name": "بنك الشركة المصرفية العربية الدولية",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "أولاً: شركة أبناء محمد فتح الله السعودي",
+   "name": "أولاً: شركة أبناء محمد فتح الله السعودي",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "صلاح محمد فتح الله السعودي(مرتبط)",
+   "name": "صلاح محمد فتح الله السعودي(مرتبط)",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "فهيمة محمد فتح الله السعودي(مرتبط)",
+   "name": "فهيمة محمد فتح الله السعودي(مرتبط)",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "جمال محمد فتح الله السعودي(مرتبط)",
+   "name": "جمال محمد فتح الله السعودي(مرتبط)",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "سحر محمود مرسي الجوهري (مرتبط)",
+   "name": "سحر محمود مرسي الجوهري (مرتبط)",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "ثانياً: المجموعة الإستثمارية العقارية الكويتية",
+   "name": "ثانياً: المجموعة الإستثمارية العقارية الكويتية",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "القابضة للتشييد والتعمير",
+   "name": "القابضة للتشييد والتعمير",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "م/حسام عبد القادر سلامه احمد",
+   "name": "م/حسام عبد القادر سلامه احمد",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "علا حسام عبدالقادر سلامه",
+   "name": "علا حسام عبدالقادر سلامه",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "مور للاستثمارات المتنوعه",
+   "name": "مور للاستثمارات المتنوعه",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "امال عبدالله حسب النبي",
+   "name": "امال عبدالله حسب النبي",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "طه عبدالمولي احمد عبدالوهاب",
+   "name": "طه عبدالمولي احمد عبدالوهاب",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "سلمي طه عبدالمولي احمد",
+   "name": "سلمي طه عبدالمولي احمد",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "فرح طه عبدالمولي احمد",
+   "name": "فرح طه عبدالمولي احمد",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "اميره طه عبد المولي احمد",
+   "name": "اميره طه عبد المولي احمد",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "بالما للاستثمار",
+   "name": "بالما للاستثمار",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "رمزى فؤاد بخيت",
+   "name": "رمزى فؤاد بخيت",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "شوقي فؤاد بخيت",
+   "name": "شوقي فؤاد بخيت",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "فؤاد رمزى بخيت",
+   "name": "فؤاد رمزى بخيت",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "اندرو رمزى فؤاد",
+   "name": "اندرو رمزى فؤاد",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "محمود سامي الكفراوى",
+   "name": "محمود سامي الكفراوى",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "احمد سامي الكفراوى",
+   "name": "احمد سامي الكفراوى",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "تامر فؤاد عثمان محمد",
+   "name": "تامر فؤاد عثمان محمد",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "داليا عمر حسن محمد",
+   "name": "داليا عمر حسن محمد",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "سهيلة تامر فؤاد عثمان",
+   "name": "سهيلة تامر فؤاد عثمان",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "هنا تامر فؤاد عثمان",
+   "name": "هنا تامر فؤاد عثمان",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "مهندس / وجدي قلته ميخائيل",
+   "name": "مهندس / وجدي قلته ميخائيل",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "مينا وجدي قلته",
+   "name": "مينا وجدي قلته",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "ابراهيم سيد أحمد سيد أحمد الطحان",
+   "name": "ابراهيم سيد أحمد سيد أحمد الطحان",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "إيهاب إبراهيم سيد أحمد الطحان",
+   "name": "إيهاب إبراهيم سيد أحمد الطحان",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "نعمات مصطفي إسماعيل الصنفاوي",
+   "name": "نعمات مصطفي إسماعيل الصنفاوي",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "حسام عبد المنعم عوض أبو طالب",
+   "name": "حسام عبد المنعم عوض أبو طالب",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "إيمان إبراهيم سيد أحمد الطحان",
+   "name": "إيمان إبراهيم سيد أحمد الطحان",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "أيمن أحمد مبارك",
+   "name": "أيمن أحمد مبارك",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "محمد النوبي أحمد سليم",
+   "name": "محمد النوبي أحمد سليم",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "شركة مجموعة جلاكسو المحدودة",
+   "name": "شركة مجموعة جلاكسو المحدودة",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "بنك قطر الوطني الأهلي",
+   "name": "بنك قطر الوطني الأهلي",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "Memphis World Wide Hotel L.T.D",
+   "name": "Memphis World Wide Hotel L.T.D",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "Lady Well Corporation",
+   "name": "Lady Well Corporation",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "Blue Nile Limited",
+   "name": "Blue Nile Limited",
+   "nameEn": null,
+   "script": null,
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
+  },
+  {
+   "id": "عبد الرحمن بن حسن بن عباس شربتلي",
+   "name": "عبد الرحمن بن حسن بن عباس شربتلي",
+   "nameEn": null,
+   "script": null,
+   "kind": "person",
+   "aliases": null,
+   "tickers": [],
+   "tradeCount": 0,
+   "boughtCount": 0,
+   "soldCount": 0,
+   "value": null,
+   "singleCompanyMove": null,
+   "trades": []
   }
  ],
  "positions": [
@@ -15455,6 +16721,20 @@
    "filingId": "291353",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340949_1.pdf",
    "shares": 275114062,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "شركة مجموعة جلاكسو المحدودة",
+   "kind": "firm",
+   "ticker": "BIOC",
+   "percent": 91.2,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291511",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341229_1.pdf",
+   "shares": 76161378,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -15665,6 +16945,20 @@
    "filingId": "291266",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340962_1.pdf",
    "shares": 3938951240,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "الشركة القابضة للتشييد والتعمير (مساهم رئيسي)",
+   "kind": "firm",
+   "ticker": "HELI",
+   "percent": 72.251,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291481",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341092_1.pdf",
+   "shares": 2893840812,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -16108,6 +17402,20 @@
    "history": []
   },
   {
+   "holder": "الشركة القابضة للصناعات الكيماوية",
+   "kind": "firm",
+   "ticker": "MICH",
+   "percent": 53.18,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291504",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341188_1.pdf",
+   "shares": 58331818,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "شركة مدينة مصر للإسكان والتعمير",
    "kind": "firm",
    "ticker": "NCCW",
@@ -16344,6 +17652,20 @@
    ]
   },
   {
+   "holder": "القابضة للتشييد والتعمير",
+   "kind": "firm",
+   "ticker": "ELSH",
+   "percent": 44.54,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291479",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341146_1.pdf",
+   "shares": 101045122,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "شركة دله البركة القابضة ش.م.ب مقفلة",
    "kind": "firm",
    "ticker": "AMIA",
@@ -16381,6 +17703,20 @@
    "filingId": "291445",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341142_1.pdf",
    "shares": 890566601,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "أولاً: شركة أبناء محمد فتح الله السعودي",
+   "kind": "firm",
+   "ticker": "CERA",
+   "percent": 42.14786,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291478",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341063_1.pdf",
+   "shares": 454406568,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -16482,6 +17818,20 @@
    "history": []
   },
   {
+   "holder": "شركة المنصور والمغربي لالستثمار والتنمية",
+   "kind": "firm",
+   "ticker": "PHDC",
+   "percent": 38.64,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291477",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341099_1.pdf",
+   "shares": 1105282331,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "شركة بيت التوفيق للتنمية القابضة ذ.م.م",
    "kind": "firm",
    "ticker": "AMIA",
@@ -16505,6 +17855,20 @@
    "filingId": "291383",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341071_1.pdf",
    "shares": 1081126725,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "ابراهيم سيد أحمد سيد أحمد الطحان",
+   "kind": "person",
+   "ticker": "IBCT",
+   "percent": 36.0,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291510",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341231_1.pdf",
+   "shares": 8762400,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -16547,6 +17911,20 @@
    "filingId": "291352",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341004_1.pdf",
    "shares": 7071465,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "بالم القابضه للاستثمارات الماليه ش م م",
+   "kind": "firm",
+   "ticker": "ICLE",
+   "percent": 34.3218,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291452",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341152_1.pdf",
+   "shares": 17160918,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -16678,6 +18056,20 @@
    "history": []
   },
   {
+   "holder": "Memphis World Wide Hotel L.T.D",
+   "kind": "firm",
+   "ticker": "GPPL",
+   "percent": 32.61248,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291512",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341236_1.pdf",
+   "shares": 188366875,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "بالم هيلز للتعمير ش م م",
    "kind": "firm",
    "ticker": "TALM",
@@ -16701,6 +18093,20 @@
    "filingId": "291070",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340797_1.pdf",
    "shares": 46712125,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "طه عبدالمولي احمد عبدالوهاب",
+   "kind": "person",
+   "ticker": "GGRN",
+   "percent": 32.04116,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291480",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341160_1.pdf",
+   "shares": 448584510,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -16748,7 +18154,7 @@
    "history": []
   },
   {
-   "holder": "عبد السلام عبد السلام مصطفى الجبلى",
+   "holder": "عبد السلام عبد السلام مصطفي الجبلي (مجموعة مرتبطة )",
    "kind": "person",
    "ticker": "ICFC",
    "percent": 31.75,
@@ -16804,6 +18210,34 @@
    "history": []
   },
   {
+   "holder": "الشركة المصرية القابضة للبتروكيماويات (ايكم)",
+   "kind": "firm",
+   "ticker": "MFPC",
+   "percent": 31.47,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291451",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341150_1.pdf",
+   "shares": 902688489,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "الشركة القابضة للصناعات الغذائية",
+   "kind": "firm",
+   "ticker": "ZEOT",
+   "percent": 30.85,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291014",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340705_1.pdf",
+   "shares": 61700000,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "الشركة العربية للصناعات الدوائية والمستلزمات الطبية -اكديما",
    "kind": "firm",
    "ticker": "OCPH",
@@ -16827,6 +18261,20 @@
    "filingId": "291031",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340738_1.pdf",
    "shares": 1722915,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "م/حسام عبد القادر سلامه احمد",
+   "kind": "person",
+   "ticker": "GGRN",
+   "percent": 30.7333,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291480",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341160_1.pdf",
+   "shares": 430279719,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -17268,6 +18716,20 @@
    "history": []
   },
   {
+   "holder": "بالما للاستثمار",
+   "kind": "firm",
+   "ticker": "MEPA",
+   "percent": 24.885,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291484",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341095_1.pdf",
+   "shares": 163000000,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "شركة جازل ليمتد إنك",
    "kind": "firm",
    "ticker": "SPHT",
@@ -17324,6 +18786,20 @@
    "history": []
   },
   {
+   "holder": "ثانياً: المجموعة الإستثمارية العقارية الكويتية",
+   "kind": "person",
+   "ticker": "CERA",
+   "percent": 24.388,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291478",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341063_1.pdf",
+   "shares": 262932432,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "أيوب عدلى أيوب",
    "kind": "person",
    "ticker": "RTVC",
@@ -17366,6 +18842,20 @@
    "history": []
   },
   {
+   "holder": "الشركة السعودية المصرية للأستثمار",
+   "kind": "firm",
+   "ticker": "MFPC",
+   "percent": 24.04,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291451",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341150_1.pdf",
+   "shares": 689402596,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "شركة أودن للإستثمارات المالية.",
    "kind": "firm",
    "ticker": "EHDR",
@@ -17382,6 +18872,20 @@
      "percent": 23.98
     }
    ]
+  },
+  {
+   "holder": "شركة الطارق للتجارة واستيراد وتوزيع السيارات",
+   "kind": "firm",
+   "ticker": "ICLE",
+   "percent": 23.9309,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291452",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341152_1.pdf",
+   "shares": 11965455,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
   },
   {
    "holder": "الشركة القابضة للتشييد والتعمير (مساهم رئيسي)",
@@ -17435,6 +18939,20 @@
    "filingId": "291100",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340830_1.pdf",
    "shares": 314679781,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "شركة الياسمين القابضة للأستثمارات المالية",
+   "kind": "firm",
+   "ticker": "ZEOT",
+   "percent": 23.0,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291014",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340705_1.pdf",
+   "shares": 46000000,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -17510,6 +19028,20 @@
    "history": []
   },
   {
+   "holder": "الشركة الدولية للاسمدة والكيماويات ( مساهم رئيسى ) والمجموعة المرتبطة",
+   "kind": "firm",
+   "ticker": "IFAP",
+   "percent": 21.99316,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 109369443,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "OTMT ACQUISITION SARL",
    "kind": "firm",
    "ticker": "BINV",
@@ -17552,6 +19084,20 @@
    "history": []
   },
   {
+   "holder": "عبد الرحمن بن حسن بن عباس شربتلي",
+   "kind": "person",
+   "ticker": "GPPL",
+   "percent": 21.70395,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291512",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341236_1.pdf",
+   "shares": 125358064,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "شركة ألفا أوريكس ليميتد",
    "kind": "firm",
    "ticker": "ABUK",
@@ -17580,7 +19126,7 @@
    "history": []
   },
   {
-   "holder": "W Z Investment",
+   "holder": "W Z Investment (PRDC)",
    "kind": "firm",
    "ticker": "PRDC",
    "percent": 21.26,
@@ -17603,6 +19149,20 @@
    "filingId": "291301",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341000_1.pdf",
    "shares": 566744999,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "بنك الشركة المصرفية العربية الدولية",
+   "kind": "firm",
+   "ticker": "ICLE",
+   "percent": 21.0079,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291452",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341152_1.pdf",
+   "shares": 10503963,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -17724,7 +19284,7 @@
    "history": []
   },
   {
-   "holder": "B I G Investment Group Ltd",
+   "holder": "B I G Investment Group Ltd (MASR)",
    "kind": "firm",
    "ticker": "MASR",
    "percent": 20.39,
@@ -17756,7 +19316,21 @@
    ]
   },
   {
-   "holder": "الشركة المصرية القابضة للبتروكيماويات",
+   "holder": "شركة الفا اوركس ليميتد",
+   "kind": "firm",
+   "ticker": "MFPC",
+   "percent": 20.0,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291451",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341150_1.pdf",
+   "shares": 573628046,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "الشركة المصرية القابضة للبتروكيماويات (ايكم)",
    "kind": "firm",
    "ticker": "SKPC",
    "percent": 20.0,
@@ -17845,7 +19419,7 @@
   },
   {
    "holder": "اتحاد المساهمين العاملين بشركة مطاحن مصر العليا",
-   "kind": "person",
+   "kind": "firm",
    "ticker": "UEFM",
    "percent": 19.8135,
    "asOf": "2026-06-30",
@@ -18256,6 +19830,34 @@
    "history": []
   },
   {
+   "holder": "سهيلة تامر فؤاد عثمان",
+   "kind": "person",
+   "ticker": "INEG",
+   "percent": 16.682823,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291491",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341155_1.pdf",
+   "shares": 83414116,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "هنا تامر فؤاد عثمان",
+   "kind": "person",
+   "ticker": "INEG",
+   "percent": 16.642823,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291491",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341155_1.pdf",
+   "shares": 83214115,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "شركة الأهلي للاستثمارات",
    "kind": "firm",
    "ticker": "SCTS",
@@ -18312,6 +19914,20 @@
    "history": []
   },
   {
+   "holder": "بنك مصر",
+   "kind": "firm",
+   "ticker": "MICH",
+   "percent": 16.36,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291504",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341188_1.pdf",
+   "shares": 17948769,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "خالد ابراهيم محمد ابراهيم",
    "kind": "person",
    "ticker": "VERT",
@@ -18349,6 +19965,20 @@
    "filingId": "291256",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340946_1.pdf",
    "shares": 191208995,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "إيهاب إبراهيم سيد أحمد الطحان",
+   "kind": "person",
+   "ticker": "IBCT",
+   "percent": 16.225,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291510",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341231_1.pdf",
+   "shares": 3949165,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -18410,7 +20040,21 @@
    "history": []
   },
   {
-   "holder": "Financial Holdings International LTD",
+   "holder": "شركة مصر للتامين",
+   "kind": "firm",
+   "ticker": "ELSH",
+   "percent": 15.86,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291479",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341146_1.pdf",
+   "shares": 35984572,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "Financial Holdings International LTD (ASCM)",
    "kind": "firm",
    "ticker": "ASCM",
    "percent": 15.83,
@@ -18433,6 +20077,20 @@
    "filingId": "291444",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341141_1.pdf",
    "shares": 1894720,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "محمود سامي الكفراوى",
+   "kind": "person",
+   "ticker": "MEPA",
+   "percent": 15.679,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291484",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341095_1.pdf",
+   "shares": 102700000,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -18475,6 +20133,20 @@
    "filingId": "291443",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341140_1.pdf",
    "shares": 332290813,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "نعمات مصطفي إسماعيل الصنفاوي",
+   "kind": "person",
+   "ticker": "IBCT",
+   "percent": 15.5,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291510",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341231_1.pdf",
+   "shares": 3772700,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -18750,6 +20422,20 @@
    "history": []
   },
   {
+   "holder": "يس إبراهيم لطفي منصور",
+   "kind": "person",
+   "ticker": "PHDC",
+   "percent": 14.0,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291477",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341099_1.pdf",
+   "shares": 400500721,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "بنك فيصل الإسلامي",
    "kind": "firm",
    "ticker": "ISPH",
@@ -18890,6 +20576,20 @@
    "history": []
   },
   {
+   "holder": "البنك العربي األفريقي الدولي",
+   "kind": "person",
+   "ticker": "PHDC",
+   "percent": 13.35,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291477",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341099_1.pdf",
+   "shares": 381902938,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "أ. شيرمين سعد الدين الحكيم",
    "kind": "person",
    "ticker": "MBEG",
@@ -18946,8 +20646,8 @@
    "history": []
   },
   {
-   "holder": "اتحاد العاملين المساهمين",
-   "kind": "person",
+   "holder": "اتحاد العاملين المساهمين (WCDF)",
+   "kind": "firm",
    "ticker": "WCDF",
    "percent": 13.095,
    "asOf": "2026-06-30",
@@ -18974,7 +20674,7 @@
    "history": []
   },
   {
-   "holder": "شريف مصطفى الجبلى",
+   "holder": "شريف مصطفي الجبلي (مجموعة مرتبطة )",
    "kind": "person",
    "ticker": "ICFC",
    "percent": 13.05,
@@ -19564,6 +21264,20 @@
    "history": []
   },
   {
+   "holder": "Lady Well Corporation",
+   "kind": "firm",
+   "ticker": "GPPL",
+   "percent": 11.10824,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291512",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341236_1.pdf",
+   "shares": 64160236,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "شركة مهند الخرافي للتجارة العامة",
    "kind": "firm",
    "ticker": "ALUM",
@@ -19739,6 +21453,20 @@
    "filingId": "291253",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340943_1.pdf",
    "shares": 3093100,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "وائل طارق محمد محمد إسماعيل",
+   "kind": "person",
+   "ticker": "ICLE",
+   "percent": 10.3007,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291452",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341152_1.pdf",
+   "shares": 5150348,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -20038,8 +21766,8 @@
    "history": []
   },
   {
-   "holder": "اتحاد العاملين المساهمين",
-   "kind": "person",
+   "holder": "اتحاد العاملين المساهمين (ADCI)",
+   "kind": "firm",
    "ticker": "ADCI",
    "percent": 10.0,
    "asOf": "2026-06-30",
@@ -20052,8 +21780,8 @@
    "history": []
   },
   {
-   "holder": "اتحاد العاملين المساهمين",
-   "kind": "person",
+   "holder": "اتحاد العاملين المساهمين (CPCI)",
+   "kind": "firm",
    "ticker": "CPCI",
    "percent": 10.0,
    "asOf": "2026-06-30",
@@ -20067,7 +21795,7 @@
   },
   {
    "holder": "اتحاد العاملين المساهمين بشركة مطاحن شرق الدلتا",
-   "kind": "person",
+   "kind": "firm",
    "ticker": "EDFM",
    "percent": 10.0,
    "asOf": "2026-06-30",
@@ -20098,8 +21826,8 @@
    ]
   },
   {
-   "holder": "اتحاد العاملين المساهمين",
-   "kind": "person",
+   "holder": "اتحاد العاملين المساهمين (GSSC)",
+   "kind": "firm",
    "ticker": "GSSC",
    "percent": 10.0,
    "asOf": "2026-06-30",
@@ -20233,6 +21961,20 @@
    "filingId": "291003",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340701_1.pdf",
    "shares": 9300000,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "الشركه المصريه القابضه للغازات الطبيعيه (إيجاس)",
+   "kind": "firm",
+   "ticker": "MFPC",
+   "percent": 9.89,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291451",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341150_1.pdf",
+   "shares": 283695208,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -20600,6 +22342,20 @@
    ]
   },
   {
+   "holder": "أيمن أحمد مبارك",
+   "kind": "person",
+   "ticker": "FIRE",
+   "percent": 9.44,
+   "asOf": "2024-06-30",
+   "basis": "register",
+   "filingId": "291483",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341096_1.pdf",
+   "shares": 1298063,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "شمس علاء احمد عرفه",
    "kind": "person",
    "ticker": "CFGH",
@@ -20679,6 +22435,20 @@
    "filingId": "291369",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341059_1.pdf",
    "shares": 8998451,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "بنك فيصل الاسلامى المصرى",
+   "kind": "firm",
+   "ticker": "ICLE",
+   "percent": 9.3643,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291452",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341152_1.pdf",
+   "shares": 4682132,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -20889,6 +22659,20 @@
    "filingId": "291057",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340764_1.pdf",
    "shares": 1560039,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "مصطفى أمين مصطفى يحيى",
+   "kind": "person",
+   "ticker": "ZEOT",
+   "percent": 9.0,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291014",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340705_1.pdf",
+   "shares": 18000000,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -21140,6 +22924,20 @@
    "history": []
   },
   {
+   "holder": "هشام حسنى محمود حسن حمودة",
+   "kind": "person",
+   "ticker": "ZEOT",
+   "percent": 8.059,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291014",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340705_1.pdf",
+   "shares": 16118909,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "شركة الإسكندرية للإنشاءات",
    "kind": "firm",
    "ticker": "TMGH",
@@ -21252,6 +23050,20 @@
    "history": []
   },
   {
+   "holder": "عبد السلام عبد السلام مصطفي الجبلي (مجموعة مرتبطة )",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 7.82551,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 38915361,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
    "kind": "firm",
    "ticker": "COMI",
@@ -21261,6 +23073,20 @@
    "filingId": "291275",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340982_1.pdf",
    "shares": 265653271,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "شريف مصطفي الجبلي (مجموعة مرتبطة )",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 7.78348,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 38706334,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -21289,6 +23115,34 @@
    "filingId": "291152",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340847_1.pdf",
    "shares": 1825619,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "حسام عبد المنعم عوض أبو طالب",
+   "kind": "person",
+   "ticker": "IBCT",
+   "percent": 7.75,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291510",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341231_1.pdf",
+   "shares": 1886350,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "إيمان إبراهيم سيد أحمد الطحان",
+   "kind": "person",
+   "ticker": "IBCT",
+   "percent": 7.75,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291510",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341231_1.pdf",
+   "shares": 1886350,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -21344,7 +23198,7 @@
    "history": []
   },
   {
-   "holder": "B Investments Holding",
+   "holder": "B Investments Holding (MASR)",
    "kind": "firm",
    "ticker": "MASR",
    "percent": 7.66,
@@ -21468,6 +23322,20 @@
    ]
   },
   {
+   "holder": "Blue Nile Limited",
+   "kind": "firm",
+   "ticker": "GPPL",
+   "percent": 7.5780784,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291512",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341236_1.pdf",
+   "shares": 43770328,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "National Bank of Egypt",
    "kind": "firm",
    "ticker": "EGSA",
@@ -21566,8 +23434,8 @@
    "history": []
   },
   {
-   "holder": "اتحاد العاملين المساهمين",
-   "kind": "person",
+   "holder": "اتحاد العاملين المساهمين (MPCI)",
+   "kind": "firm",
    "ticker": "MPCI",
    "percent": 7.27967,
    "asOf": "2026-06-30",
@@ -21645,6 +23513,20 @@
    "filingId": "291031",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340738_1.pdf",
    "shares": 398295,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "مهندس / وجدي قلته ميخائيل",
+   "kind": "person",
+   "ticker": "MICH",
+   "percent": 7.07,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291504",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341188_1.pdf",
+   "shares": 7764031,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -21888,6 +23770,20 @@
    "history": []
   },
   {
+   "holder": "رمزى فؤاد بخيت",
+   "kind": "person",
+   "ticker": "MEPA",
+   "percent": 6.706,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291484",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341095_1.pdf",
+   "shares": 43923980,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "QNB Financial Services",
    "kind": "firm",
    "ticker": "MCQE",
@@ -21986,8 +23882,8 @@
    "history": []
   },
   {
-   "holder": "اتحاد العاملين المساهمين",
-   "kind": "person",
+   "holder": "اتحاد العاملين المساهمين (CEFM)",
+   "kind": "firm",
    "ticker": "CEFM",
    "percent": 6.534,
    "asOf": "2026-06-30",
@@ -22154,6 +24050,20 @@
    "history": []
   },
   {
+   "holder": "محمد النوبي أحمد سليم",
+   "kind": "person",
+   "ticker": "FIRE",
+   "percent": 6.18,
+   "asOf": "2024-06-30",
+   "basis": "register",
+   "filingId": "291483",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341096_1.pdf",
+   "shares": 850000,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "AMER WAKF LTD",
    "kind": "firm",
    "ticker": "AMER",
@@ -22204,8 +24114,22 @@
    "history": []
   },
   {
-   "holder": "اتحاد العاملين المساهمين",
+   "holder": "صالح عبد السلام عبد السلام مصطفي الجبلي ( مجموعة مرتبطة )",
    "kind": "person",
+   "ticker": "IFAP",
+   "percent": 6.15394,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 30602849,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "اتحاد العاملين المساهمين (AFMC)",
+   "kind": "firm",
    "ticker": "AFMC",
    "percent": 6.15199,
    "asOf": "2026-06-30",
@@ -22260,8 +24184,8 @@
    "history": []
   },
   {
-   "holder": "اتحاد العاملين المساهمين بالشركة",
-   "kind": "person",
+   "holder": "اتحاد العاملين المساهمين بالشركة (MILS)",
+   "kind": "firm",
    "ticker": "MILS",
    "percent": 6.058,
    "asOf": "2026-06-30",
@@ -22469,6 +24393,20 @@
    "filingId": "291269",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340968_1.pdf",
    "shares": 74477970,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "بنك قطر الوطني الأهلي",
+   "kind": "firm",
+   "ticker": "BIOC",
+   "percent": 5.89,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291511",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341229_1.pdf",
+   "shares": 4918550,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -23354,8 +25292,8 @@
    ]
   },
   {
-   "holder": "اتحاد العاملين المساهمين",
-   "kind": "person",
+   "holder": "اتحاد العاملين المساهمين (KZPC)",
+   "kind": "firm",
    "ticker": "KZPC",
    "percent": 5.02,
    "asOf": "2026-06-30",
@@ -23391,6 +25329,20 @@
    "filingId": "291310",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341020_1.pdf",
    "shares": 391000,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "اتحاد العاملين المساهمين (ZEOT)",
+   "kind": "firm",
+   "ticker": "ZEOT",
+   "percent": 5.011,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291014",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340705_1.pdf",
+   "shares": 10021819,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -23545,6 +25497,20 @@
    "filingId": "286156",
    "source": "https://www.egx.com.eg/downloads/Bulletins/336438_1.pdf",
    "shares": 2860000,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "نيفين عبد المنعم سيف",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 4.91779,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 24455589,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -23729,6 +25695,20 @@
    "filingId": "291313",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341024_1.pdf",
    "shares": 14220473,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "الصفا للاستثمار و التوكيلات التجاريه ( مساهم رئيسى ) والمجموعة المرتبطة",
+   "kind": "firm",
+   "ticker": "IFAP",
+   "percent": 4.66859,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 23216349,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -24136,6 +26116,20 @@
    "history": []
   },
   {
+   "holder": "دعاء صلاح احمد محمد الحصري",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 3.89439,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 19366337,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "شركة نمو للاستشارات (مجموعة مرتبطة )",
    "kind": "firm",
    "ticker": "UNIT",
@@ -24159,6 +26153,20 @@
    "filingId": "291153",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340848_1.pdf",
    "shares": 10220426,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "ميدفيرت مصر للاستثمار ش م م",
+   "kind": "firm",
+   "ticker": "IFAP",
+   "percent": 3.83329,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 19062506,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -24355,7 +26363,7 @@
   },
   {
    "holder": "اتحاد نقابات المهن الطبية",
-   "kind": "person",
+   "kind": "firm",
    "ticker": "PHAR",
    "percent": 3.49,
    "asOf": "2026-06-30",
@@ -24476,6 +26484,20 @@
    "history": []
   },
   {
+   "holder": "نافع فهمي فهمي عبد المجيد",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 3.27075,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 16265084,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "بيت الخبرة للاستثمار الاقتصادي - تكنو انفستمنت",
    "kind": "firm",
    "ticker": "NINH",
@@ -24513,6 +26535,34 @@
    "filingId": "286586",
    "source": "https://www.egx.com.eg/downloads/Bulletins/336839_1.pdf",
    "shares": 437733548,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "نهله عبد السلام م عبد السلام م مصطفي الجبلي",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 3.07697,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 15301424,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "نورهان عبد السلام م عبد السلام م مصطفي الجبلي",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 3.07697,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 15301424,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -24902,6 +26952,20 @@
    "history": []
   },
   {
+   "holder": "وائل طارق محمد مجمد إسماعيل",
+   "kind": "person",
+   "ticker": "PHDC",
+   "percent": 2.49,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291477",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341099_1.pdf",
+   "shares": 71352406,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "صفاء ابراهيم ابراهيم الصعيدي",
    "kind": "person",
    "ticker": "ACGC",
@@ -25065,6 +27129,20 @@
    "filingId": "291340",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341038_1.pdf",
    "shares": 46076549,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "عزه محمد عبدالرحيم شعبان سليم",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 2.09837,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 10434946,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -25282,6 +27360,20 @@
    ]
   },
   {
+   "holder": "شوقي فؤاد بخيت",
+   "kind": "person",
+   "ticker": "MEPA",
+   "percent": 1.913,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291484",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341095_1.pdf",
+   "shares": 12532654,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "شركة اورينت تورز للفنادق والقرى السياحية",
    "kind": "firm",
    "ticker": "INFI",
@@ -25436,6 +27528,20 @@
    "history": []
   },
   {
+   "holder": "احمد نافع فهمي فهمي عبد المجيد",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 1.74232,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 8664339,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "GILBERT NICOLAS GARGOUR",
    "kind": "person",
    "ticker": "LCSW",
@@ -25499,6 +27605,20 @@
    "filingId": "291153",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340848_1.pdf",
    "shares": 4441399,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "محمد طارق محمد محمد إسماعيل",
+   "kind": "person",
+   "ticker": "PHDC",
+   "percent": 1.67,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291477",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341099_1.pdf",
+   "shares": 47925602,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -25714,6 +27834,20 @@
    "history": []
   },
   {
+   "holder": "حسناء حسن محمد طمان",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 1.4019,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 6971477,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "Salaheldin Amr Salaheldin Mohamed Mahmoud",
    "kind": "person",
    "ticker": "MTIE",
@@ -25742,6 +27876,20 @@
    "history": []
   },
   {
+   "holder": "شركة الطارق للتجارة واستيراد وتوزيع السيارات الطارق",
+   "kind": "firm",
+   "ticker": "PHDC",
+   "percent": 1.35,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291477",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341099_1.pdf",
+   "shares": 38613463,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "هدي محمد محسن محمد محجوب",
    "kind": "person",
    "ticker": "ISPH",
@@ -25751,6 +27899,20 @@
    "filingId": "291162",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340864_1.pdf",
    "shares": 13200658,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "سحر محمود مرسي الجوهري (مرتبط)",
+   "kind": "person",
+   "ticker": "CERA",
+   "percent": 1.29525,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291478",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341063_1.pdf",
+   "shares": 13964424,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -25868,6 +28030,20 @@
    "history": []
   },
   {
+   "holder": "وسام عبد العزيز صلاح احمد محمد الحصري",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 1.15338,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 5735630,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "محمود حسن جاب الله حسان",
    "kind": "person",
    "ticker": "AREH",
@@ -25909,6 +28085,20 @@
    "filingId": "291453",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341154_1.pdf",
    "shares": 37612200,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "اندرو رمزى فؤاد",
+   "kind": "person",
+   "ticker": "MEPA",
+   "percent": 1.099,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291484",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341095_1.pdf",
+   "shares": 7200000,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -25970,6 +28160,20 @@
    "history": []
   },
   {
+   "holder": "شركة فيصل للاستثمارات المالية",
+   "kind": "firm",
+   "ticker": "ICLE",
+   "percent": 1.0405,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291452",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341152_1.pdf",
+   "shares": 520237,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "يوسف هشام محمد مدحت يوسف الفار",
    "kind": "person",
    "ticker": "TANM",
@@ -26025,6 +28229,20 @@
    "filingId": "291409",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341087_1.pdf",
    "shares": 416271,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "فؤاد رمزى بخيت",
+   "kind": "person",
+   "ticker": "MEPA",
+   "percent": 0.992,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291484",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341095_1.pdf",
+   "shares": 6500000,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -26532,6 +28750,20 @@
    "history": []
   },
   {
+   "holder": "محمود لطفي إسماعيل محمود لطفي منصور",
+   "kind": "person",
+   "ticker": "PHDC",
+   "percent": 0.66,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291477",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341099_1.pdf",
+   "shares": 18900000,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "عرفه علي أبو زيد محمد إبراهيم (مجموعه مرتبطة)",
    "kind": "person",
    "ticker": "ACAMD",
@@ -26872,6 +29104,20 @@
    "history": []
   },
   {
+   "holder": "المجموعة المرتبطة : الشركة المصرية للغازات الطبيعية (جاسكو)",
+   "kind": "firm",
+   "ticker": "MFPC",
+   "percent": 0.48,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291451",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341150_1.pdf",
+   "shares": 13794547,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "ياسمين محمد أبو زيد محمد إبراهيم (مجموعه مرتبطة)",
    "kind": "person",
    "ticker": "ACAMD",
@@ -26960,6 +29206,20 @@
    "history": []
   },
   {
+   "holder": "ليدر للوساطه التامينيه LEADER INSURANCE BROKERAGE LIB ش م م",
+   "kind": "firm",
+   "ticker": "PHDC",
+   "percent": 0.45,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291477",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341099_1.pdf",
+   "shares": 13100000,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "شركة انترناشونال بيزنس سيستمز للتوزيع",
    "kind": "firm",
    "ticker": "SPIN",
@@ -26997,6 +29257,20 @@
    "filingId": "291153",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340848_1.pdf",
    "shares": 1126705,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "رويال للتأمين",
+   "kind": "firm",
+   "ticker": "PHDC",
+   "percent": 0.42,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291477",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341099_1.pdf",
+   "shares": 12066666,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -27630,6 +29904,20 @@
    "history": []
   },
   {
+   "holder": "مور للاستثمارات المتنوعه",
+   "kind": "firm",
+   "ticker": "GGRN",
+   "percent": 0.1955,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291480",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341160_1.pdf",
+   "shares": 2736980,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "محمد محمود حسن جاب الله",
    "kind": "person",
    "ticker": "AIDC",
@@ -27653,6 +29941,20 @@
    "filingId": "291352",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341004_1.pdf",
    "shares": 38367,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "منه الله نافع فهمي عبد المجيد",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 0.1894,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 941871,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -28064,6 +30366,20 @@
    "history": []
   },
   {
+   "holder": "احمد محمد محي الدين محمد علي بهجت",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 0.08929,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 444008,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "أ/ رانيا عصام محمد",
    "kind": "person",
    "ticker": "EHDR",
@@ -28143,6 +30459,76 @@
    "filingId": "291256",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340946_1.pdf",
    "shares": 973332,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "علا حسام عبدالقادر سلامه",
+   "kind": "person",
+   "ticker": "GGRN",
+   "percent": 0.07857,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291480",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341160_1.pdf",
+   "shares": 1100000,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "امال عبدالله حسب النبي",
+   "kind": "person",
+   "ticker": "GGRN",
+   "percent": 0.07857,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291480",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341160_1.pdf",
+   "shares": 1100000,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "سلمي طه عبدالمولي احمد",
+   "kind": "person",
+   "ticker": "GGRN",
+   "percent": 0.0785,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291480",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341160_1.pdf",
+   "shares": 1100000,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "فرح طه عبدالمولي احمد",
+   "kind": "person",
+   "ticker": "GGRN",
+   "percent": 0.0785,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291480",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341160_1.pdf",
+   "shares": 1100000,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "اميره طه عبد المولي احمد",
+   "kind": "person",
+   "ticker": "GGRN",
+   "percent": 0.0785,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291480",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341160_1.pdf",
+   "shares": 1100000,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -28358,6 +30744,48 @@
    "history": []
   },
   {
+   "holder": "حسن محمد حسن درويش",
+   "kind": "person",
+   "ticker": "PHDC",
+   "percent": 0.063,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291477",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341099_1.pdf",
+   "shares": 1826298,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "صلاح محمد فتح الله السعودي(مرتبط)",
+   "kind": "person",
+   "ticker": "CERA",
+   "percent": 0.06133,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291478",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341063_1.pdf",
+   "shares": 661188,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "جمال محمد فتح الله السعودي(مرتبط)",
+   "kind": "person",
+   "ticker": "CERA",
+   "percent": 0.06133,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291478",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341063_1.pdf",
+   "shares": 661224,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "عصام حسن محمد سمور",
    "kind": "person",
    "ticker": "NINH",
@@ -28367,6 +30795,20 @@
    "filingId": "291313",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341024_1.pdf",
    "shares": 174024,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "صلاح نافع فهمي فهمي عبد المجيد",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 0.05627,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 279843,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -28442,6 +30884,20 @@
    "history": []
   },
   {
+   "holder": "مينا وجدي قلته",
+   "kind": "person",
+   "ticker": "MICH",
+   "percent": 0.046,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291504",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341188_1.pdf",
+   "shares": 50015,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "رانيه احمد ابراهيم ابو شادي",
    "kind": "person",
    "ticker": "NINH",
@@ -28479,6 +30935,20 @@
    "filingId": "291397",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341113_1.pdf",
    "shares": 625000,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "راويه عبد السلام م مصطفي الجبلي",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 0.04185,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 208097,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -28610,6 +31080,20 @@
    "history": []
   },
   {
+   "holder": "شريف مجدي عبد السلام الجبلي",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 0.03196,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 158953,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "Nora bint Mohammed bin Abdullah Al-Dughaim",
    "kind": "person",
    "ticker": "JUFO",
@@ -28675,6 +31159,20 @@
    "filingId": "291258",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340948_1.pdf",
    "shares": 650000,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "الهام احمد رامي",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 0.02792,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 138824,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -28815,6 +31313,34 @@
    "filingId": "291397",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341113_1.pdf",
    "shares": 288000,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "تامر فؤاد عثمان محمد",
+   "kind": "person",
+   "ticker": "INEG",
+   "percent": 0.02,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291491",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341155_1.pdf",
+   "shares": 100000,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "داليا عمر حسن محمد",
+   "kind": "person",
+   "ticker": "INEG",
+   "percent": 0.02,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291491",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341155_1.pdf",
+   "shares": 100000,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -29058,6 +31584,20 @@
    "history": []
   },
   {
+   "holder": "فهيمة محمد فتح الله السعودي(مرتبط)",
+   "kind": "person",
+   "ticker": "CERA",
+   "percent": 0.01655,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291478",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341063_1.pdf",
+   "shares": 178387,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "بيت الخبرة للتخصيم تكنوفاكتورينج",
    "kind": "firm",
    "ticker": "INFI",
@@ -29282,6 +31822,20 @@
    "history": []
   },
   {
+   "holder": "اميره عبد السلام م مصطفي الجبلي",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 0.00933,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 46383,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
    "holder": "جمال محمود عبد اللطيف محجوب",
    "kind": "person",
    "ticker": "ROTO",
@@ -29347,6 +31901,20 @@
    "filingId": "291034",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340718_1.pdf",
    "shares": 1611,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "احمد سامي الكفراوى",
+   "kind": "person",
+   "ticker": "MEPA",
+   "percent": 0.007,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291484",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341095_1.pdf",
+   "shares": 50000,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -30093,6 +32661,20 @@
    "filingId": "291168",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340858_1.pdf",
    "shares": 9,
+   "openedAt": null,
+   "openingPercent": null,
+   "history": []
+  },
+  {
+   "holder": "هدي مجدي عبد السلام الجبلي",
+   "kind": "person",
+   "ticker": "IFAP",
+   "percent": 0.00028,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "shares": 1403,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -33120,6 +35702,62 @@
    ]
   },
   {
+   "ticker": "BIOC",
+   "asOf": "2026-06-30",
+   "filingId": "291511",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341229_1.pdf",
+   "seats": [
+    {
+     "name": "الدكتور/ سامر محمد طلعت فهيم الفلكي",
+     "holder": null,
+     "role": "رئيس مجلس الإدارة",
+     "representing": "شركة مجموعة جلاكسو المحدودة"
+    },
+    {
+     "name": "الدكتور/ شريف محمد محمد أمين صالح",
+     "holder": null,
+     "role": "الرئيس التنفيذي",
+     "representing": "شركة مجموعة جلاكسو المحدودة"
+    },
+    {
+     "name": "الاستاذه/ هبة أمجد إبراهيم قليني المرشدي",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة مجموعة جلاكسو المحدودة"
+    },
+    {
+     "name": "الدكتور/ محمد علي عبد العظيم",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة مجموعة جلاكسو المحدودة"
+    },
+    {
+     "name": "الاستاذ/ عمر سامح حسن شكري",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة مجموعة جلاكسو المحدودة"
+    },
+    {
+     "name": "الاستاذه/ شيرين الأنصاري",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "بنك قطر الوطني الأهلي"
+    },
+    {
+     "name": "الاستاذه/ أمنية سعد عبد الرحمن قلج",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "name": "الاستاذه/ ساره محمد حسني محمد",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    }
+   ]
+  },
+  {
    "ticker": "CANA",
    "asOf": "2026-06-30",
    "filingId": "291401",
@@ -33240,6 +35878,62 @@
      "holder": null,
      "role": "عضو مجلس ادارة منتخب",
      "representing": "اتحاد العاملين المساهمين"
+    }
+   ]
+  },
+  {
+   "ticker": "CERA",
+   "asOf": "2026-06-30",
+   "filingId": "291478",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341063_1.pdf",
+   "seats": [
+    {
+     "name": "السيد / صلاح محمد فتح الله السعودي",
+     "holder": null,
+     "role": "رئيس مجلس الإدارة",
+     "representing": "شركة أبناء محمد فتح الله السعودي"
+    },
+    {
+     "name": "السيد / محمد عبد الله النصار",
+     "holder": null,
+     "role": "نائب رئيس مجلس الإدارة",
+     "representing": "المجموعة الإستثمارية العقارية الكويتية"
+    },
+    {
+     "name": "السيد / أحمد صلاح محمد فتح الله السعودي",
+     "holder": null,
+     "role": "العضو المنتدب",
+     "representing": "شركة أبناءمحمد فتح الله السعودي"
+    },
+    {
+     "name": "الأستاذة / آية صلاح محمد فتح الله السعودي",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة أبناءمحمد فتح الله السعودي"
+    },
+    {
+     "name": "السيد / مصطفى ابراهيم محمد ابراهيم حجاب",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة أبناءمحمد فتح الله السعودي"
+    },
+    {
+     "name": "السيدة / مها عادل مبارك العصفور",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "المجموعة الإستثمارية العقارية الكويتية"
+    },
+    {
+     "name": "السيدة / دلال عبد الغني الملا",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "المجموعة الإستثمارية العقارية الكويتية"
+    },
+    {
+     "name": "السيد / محمد صلاح محمد فتح الله السعودي",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة أبناءمحمد فتح الله السعودي"
     }
    ]
   },
@@ -34708,6 +37402,56 @@
    ]
   },
   {
+   "ticker": "ELSH",
+   "asOf": "2026-06-30",
+   "filingId": "291479",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341146_1.pdf",
+   "seats": [
+    {
+     "name": "الاستاذ / خالد محمد شديد",
+     "holder": null,
+     "role": "رئيس مجلس الادارة",
+     "representing": "الشركة القابضة للتشييد والتعمير"
+    },
+    {
+     "name": "الاستاذ / محمد أحمد جلال",
+     "holder": null,
+     "role": "الرئيس التنفيذي",
+     "representing": null
+    },
+    {
+     "name": "الاستاذ / محمد سامي حسونة",
+     "holder": null,
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "name": "الأستاذ/ عبد الكريم محمود العدلي",
+     "holder": null,
+     "role": "عضو مجلس الإدارة",
+     "representing": "شركة مصر للتأمين"
+    },
+    {
+     "name": "الأستاذ / السيد محمد عبد السلام",
+     "holder": null,
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "name": "الاستاذة /امل صالح خلف صالح",
+     "holder": null,
+     "role": "عضو مجلس الإدارة- ذوي الخبرة",
+     "representing": null
+    },
+    {
+     "name": "الاستاذ / وليد عباس عبد القوي",
+     "holder": null,
+     "role": "عضو مجلس الإدارة- ذوي الخبرة",
+     "representing": null
+    }
+   ]
+  },
+  {
    "ticker": "ELWA",
    "asOf": "2026-06-30",
    "filingId": "291326",
@@ -35174,6 +37918,44 @@
    ]
   },
   {
+   "ticker": "FIRE",
+   "asOf": "2024-06-30",
+   "filingId": "291483",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341096_1.pdf",
+   "seats": [
+    {
+     "name": "ماهر أنور محمد إبراهيم",
+     "holder": null,
+     "role": "رئيس مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "name": "محمد رأفت أحمد الخريبي",
+     "holder": null,
+     "role": "عضو مجلس إدارة منتدب",
+     "representing": null
+    },
+    {
+     "name": "نهي محمد توفيق",
+     "holder": null,
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "name": "يحيى عبد الوهاب محمد",
+     "holder": null,
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "name": "يوسف حسنى يوسف",
+     "holder": null,
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    }
+   ]
+  },
+  {
    "ticker": "FNAR",
    "asOf": "2026-06-30",
    "filingId": "291277",
@@ -35398,6 +38180,68 @@
    ]
   },
   {
+   "ticker": "GGRN",
+   "asOf": "2026-06-30",
+   "filingId": "291480",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341160_1.pdf",
+   "seats": [
+    {
+     "name": "ا/ طه عبد المولي احمد عبد الوهاب",
+     "holder": null,
+     "role": "رئيس مجلس الادارة",
+     "representing": "نفسه"
+    },
+    {
+     "name": "ا/ حسام عبد القادر سلامه احمد",
+     "holder": null,
+     "role": "عضو منتدب للشئون الفنية والمالية",
+     "representing": "نفسه"
+    },
+    {
+     "name": "ا/ خالد عبد القادر محمد سلامه",
+     "holder": null,
+     "role": "عضو منتدب للشئون الادارية",
+     "representing": "نفسه"
+    },
+    {
+     "name": "ا/ محمد توفيق حافظ بدوي",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": "نفسه"
+    },
+    {
+     "name": "ا/ ابو العزم محمد حسن ابراهيم",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": "نفسه"
+    },
+    {
+     "name": "ا/ امال عبد الله حسب النبي عيد",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": "نفسه"
+    },
+    {
+     "name": "ا/ طارق مهدي عبد التواب",
+     "holder": null,
+     "role": "عضو مجلس اداره من ذوي الخبرة",
+     "representing": "نفسه"
+    },
+    {
+     "name": "ا/ رجب صلاح ابراهيم احمد",
+     "holder": null,
+     "role": "عضو مجلس اداره من ذوي الخبرة",
+     "representing": "نفسه"
+    },
+    {
+     "name": "ا/ ايمان عبد الحليم اسماعيل محمد",
+     "holder": null,
+     "role": "عضو مجلس اداره",
+     "representing": "نفسه"
+    }
+   ]
+  },
+  {
    "ticker": "GIHD",
    "asOf": "2026-06-30",
    "filingId": "291059",
@@ -35573,6 +38417,80 @@
     },
     {
      "name": "كريمه مظهر كامل",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    }
+   ]
+  },
+  {
+   "ticker": "GPPL",
+   "asOf": "2026-06-30",
+   "filingId": "291512",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341236_1.pdf",
+   "seats": [
+    {
+     "name": "عبد الرحمن بن حسن بن عباس شربتلي",
+     "holder": "عبد الرحمن بن حسن بن عباس شربتلي",
+     "role": "رئيس مجلس إدارة",
+     "representing": null
+    },
+    {
+     "name": "حسن بن عبد الرحمن بن حسن شربتلي",
+     "holder": null,
+     "role": "نائب رئيس مجلس إدارة وعضو منتدب",
+     "representing": null
+    },
+    {
+     "name": "إبراهيم بن حسن بن عباس شربتلي",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "name": "شركة النهلة للتجارة والمقاولات",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "name": "ياسر بن حسن بن عباس شربتلي",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "name": "شركة النهلة للتجارة والمقاولات",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "name": "زينب تيلوفر محمد حمدي",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "name": "ياسمين محمود عمرو محمد حمدي",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "name": "محمد فؤاد أبو اليزيد بشته",
+     "holder": null,
+     "role": "عضو مجلس إدارة منتدب للشئون المالية والإدارية",
+     "representing": null
+    },
+    {
+     "name": "فهد بن حسين بن علي شبكشي",
+     "holder": null,
+     "role": "نائب رئيس مجلس إدارة وعضو منتدب",
+     "representing": null
+    },
+    {
+     "name": "جواكيم ليوس باتيستا سيماو",
      "holder": null,
      "role": "عضو مجلس إدارة",
      "representing": null
@@ -35852,6 +38770,68 @@
    ]
   },
   {
+   "ticker": "HELI",
+   "asOf": "2026-06-30",
+   "filingId": "291481",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341092_1.pdf",
+   "seats": [
+    {
+     "name": "محمد عبد المنعم علي صالح المنشاوي",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "الشركة القابضة للتشييد والتعمير"
+    },
+    {
+     "name": "الدكتور / سامح السيد إبراهيم السيد",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "الشركة القابضة للتشييد والتعمير"
+    },
+    {
+     "name": "خالد زكريا العادلى أمام",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "الشركة القابضة للتشييد والتعمير"
+    },
+    {
+     "name": "جيهان ممدوح محمد صالح",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "الشركة القابضة للتشييد والتعمير"
+    },
+    {
+     "name": "عصام عبد الفتاح محمد",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "الشركة القابضة للتشييد والتعمير"
+    },
+    {
+     "name": "عمرو ابراهيم ابو العيون",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "الشركة القابضة للتشييد والتعمير"
+    },
+    {
+     "name": "حسن علي محمد على الشوربجي",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "الشركة القابضة للتشييد والتعمير"
+    },
+    {
+     "name": "أحمد أشرف على كجوك",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "name": "نيفين على صبور",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    }
+   ]
+  },
+  {
    "ticker": "HRHO",
    "asOf": "2026-06-30",
    "filingId": "291397",
@@ -35932,6 +38912,50 @@
    ]
   },
   {
+   "ticker": "IBCT",
+   "asOf": "2026-06-30",
+   "filingId": "291510",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341231_1.pdf",
+   "seats": [
+    {
+     "name": "إبراهيم سيد أحمد سيد أحمد الطحان",
+     "holder": null,
+     "role": "رئيس مجلس الاداره",
+     "representing": "عن نفسه"
+    },
+    {
+     "name": "ايهاب ابراهيم سيد أحمد الطحان",
+     "holder": null,
+     "role": "عضو مجلس اداره منتدب",
+     "representing": "عن نفسه"
+    },
+    {
+     "name": "حسام عبدالمنعم عوض أبوطالب",
+     "holder": null,
+     "role": "عضو مجلس اداره منتدب",
+     "representing": "عن نفسه"
+    },
+    {
+     "name": "ايمان ابراهيم سيد احمد الطحان",
+     "holder": null,
+     "role": "عضو مجاس اداره",
+     "representing": "عن نفسه"
+    },
+    {
+     "name": "محمد ايهاب ابراهيم",
+     "holder": null,
+     "role": "عضو مجاس اداره",
+     "representing": null
+    },
+    {
+     "name": "مريم حسام عبدالمنعم",
+     "holder": null,
+     "role": "عضو مجاس اداره",
+     "representing": null
+    }
+   ]
+  },
+  {
    "ticker": "ICFC",
    "asOf": "2026-06-30",
    "filingId": "291069",
@@ -35939,13 +38963,13 @@
    "seats": [
     {
      "name": "عبد السلام عبد السلام مصطفى الجبلى",
-     "holder": "عبد السلام عبد السلام مصطفى الجبلى",
+     "holder": "عبد السلام عبد السلام مصطفي الجبلي (مجموعة مرتبطة )",
      "role": "رئيس مجلس الادارة غير تنفيذي ولا يقوم بأعمال الادارة",
      "representing": null
     },
     {
      "name": "شريف مصطفى الجبلى",
-     "holder": "شريف مصطفى الجبلى",
+     "holder": "شريف مصطفي الجبلي (مجموعة مرتبطة )",
      "role": "عضو مجلس ادارة",
      "representing": null
     },
@@ -36046,6 +39070,80 @@
      "holder": null,
      "role": "عضو مجلس إدارة",
      "representing": "صندوق التأمين الخاص للعاملين بالهيئات القضائية والجهات المعاونة لها"
+    }
+   ]
+  },
+  {
+   "ticker": "ICLE",
+   "asOf": "2026-06-30",
+   "filingId": "291452",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341152_1.pdf",
+   "seats": [
+    {
+     "name": "محمد محسن محمد محجوب",
+     "holder": "محمد محسن محمد محجوب",
+     "role": "رئيس مجلس الادارة - غير تنفيذي",
+     "representing": null
+    },
+    {
+     "name": "خالد احمد محمد سرحان",
+     "holder": null,
+     "role": "عضو مجلس الادارة المنتدب والرئيس التنفيذي",
+     "representing": null
+    },
+    {
+     "name": "حازم محمد مجدي خليل بدران",
+     "holder": null,
+     "role": "عضو مجلس ادارة - غير تنفيذي",
+     "representing": "بنك فيصل الاسلامي المصري"
+    },
+    {
+     "name": "علي ثابت سيد فرغلي",
+     "holder": null,
+     "role": "عضو مجلس ادارة - غير تنفيذي",
+     "representing": "شركة بالم القابضة للإستثمارات الماليه ش م م"
+    },
+    {
+     "name": "محمد طارق محمد محمد إسماعيل",
+     "holder": "محمد طارق محمد محمد إسماعيل",
+     "role": "عضو مجلس ادارة - غير تنفيذي",
+     "representing": "شركة بالم القابضة للإستثمارات الماليه ش م م"
+    },
+    {
+     "name": "نهي طارق صلاح الدين محمد عامر",
+     "holder": null,
+     "role": "عضو مجلس ادارة - غير تنفيذي",
+     "representing": "شركة الطارق للتجارة واستيراد وتوزيع السيارات"
+    },
+    {
+     "name": "محمد طلعت محمد عبد العال",
+     "holder": null,
+     "role": "عضو مجلس ادارة - غير تنفيذي",
+     "representing": "شركة الطارق للتجارة واستيراد وتوزيع السيارات"
+    },
+    {
+     "name": "طارق مصطفى إبراهيم عبده",
+     "holder": null,
+     "role": "عضو مجلس ادارة - غير تنفيذي",
+     "representing": "بنك الشركة المصرفية العربية الدولية"
+    },
+    {
+     "name": "وائل طارق محمد محمد إسماعيل",
+     "holder": "وائل طارق محمد محمد إسماعيل",
+     "role": "عضو مجلس ادارة - غير تنفيذي",
+     "representing": "بالأصالة عن نفسه"
+    },
+    {
+     "name": "شهاب عزت عبد الرحيم زيدان",
+     "holder": null,
+     "role": "عضو مجلس ادارة - غير تنفيذي",
+     "representing": "مستقل"
+    },
+    {
+     "name": "شيرين ممدوح احمد خلاف",
+     "holder": null,
+     "role": "عضو مجلس ادارة - غير تنفيذي",
+     "representing": "مستقل"
     }
    ]
   },
@@ -36189,6 +39287,112 @@
      "name": "الأستاذة / مها عبد الرازق محمد حسن",
      "holder": null,
      "role": "عضو مجلس إدارة",
+     "representing": null
+    }
+   ]
+  },
+  {
+   "ticker": "IFAP",
+   "asOf": "2026-06-30",
+   "filingId": "291457",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341166_1.pdf",
+   "seats": [
+    {
+     "name": "م/ عبد السلام عبد السلام مصطفي الجبلي",
+     "holder": null,
+     "role": "رئيس مجلس الإدارة - غير تنفيذي",
+     "representing": "نفسه"
+    },
+    {
+     "name": "ا/ احمد شوقي محمد السيد منتصر",
+     "holder": null,
+     "role": "العضو المنتدب والرئيس التنفيذي",
+     "representing": "نفسه"
+    },
+    {
+     "name": "نورهان عبدالسلام عبدالسلام مصطفى الجبلى",
+     "holder": null,
+     "role": "عضو منتدب",
+     "representing": "عن الشركة الدولية للاسمدة والكيماويات"
+    },
+    {
+     "name": "أ / نهلة عبدالسلام عبدالسلام مصطفى الجبلى",
+     "holder": null,
+     "role": "عضو مجلس إدارة غير تنفيذي",
+     "representing": "عن الشركة الدولية للاسمدة والكيماويات"
+    },
+    {
+     "name": "محمد عبد الله شريف فرج",
+     "holder": null,
+     "role": "عضو مجلس الادارة",
+     "representing": "نفسه"
+    },
+    {
+     "name": "محمد عبد الفتاح محمد عبد السلام",
+     "holder": null,
+     "role": "عضو مجلس الإدارة - غير تنفيذي ( غير متفرغ )",
+     "representing": "نفسه"
+    },
+    {
+     "name": "مجدي محمد نبيل محمود عيسي",
+     "holder": null,
+     "role": "عضو مجلس الإدارة - غير تنفيذي",
+     "representing": "نفسه"
+    },
+    {
+     "name": "حمدي عبداللطيف عبدالسلام عبداللطيف",
+     "holder": null,
+     "role": "عضو مجلس إدارة - غير تنفيذي - مستقل",
+     "representing": "نفسه"
+    },
+    {
+     "name": "عبدالحميد بدر محمد الشابورى",
+     "holder": null,
+     "role": "عضو مجلس إدارة - غير تنفيذي - مستقل",
+     "representing": "نفسه"
+    },
+    {
+     "name": "نافع فهمي فهمي عبدالمجيد",
+     "holder": null,
+     "role": "عضو مجلس إدارة غير تنفيذي ممثل عن ( ميدفيرت مصر للاستثمار)",
+     "representing": "عن ميدفيرت مصر للاستثمار"
+    }
+   ]
+  },
+  {
+   "ticker": "INEG",
+   "asOf": "2026-06-30",
+   "filingId": "291491",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341155_1.pdf",
+   "seats": [
+    {
+     "name": "تامر فؤاد عثمان",
+     "holder": null,
+     "role": "رئيس مجلس الإدارة",
+     "representing": "نفسه"
+    },
+    {
+     "name": "داليا عمر حسن",
+     "holder": null,
+     "role": "العضو المنتدب",
+     "representing": "نفسه"
+    },
+    {
+     "name": "عماد محمد صفوت",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    },
+    {
+     "name": "اميرة عبد العاطى سلامة",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    },
+    {
+     "name": "دينا حسن نجم",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
      "representing": null
     }
    ]
@@ -37022,6 +40226,142 @@
    ]
   },
   {
+   "ticker": "MEPA",
+   "asOf": "2026-06-30",
+   "filingId": "291484",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341095_1.pdf",
+   "seats": [
+    {
+     "name": "محمود سامى الكفراوى",
+     "holder": null,
+     "role": "رئيس مجلس االدارة",
+     "representing": "نفسه"
+    },
+    {
+     "name": "احمد سامى الكفراوى",
+     "holder": null,
+     "role": "العضو المنتدب",
+     "representing": "نفسه"
+    },
+    {
+     "name": "عمر مختار محمد الخطيب",
+     "holder": null,
+     "role": "العضو المنتدب",
+     "representing": "نفسه"
+    },
+    {
+     "name": "حاتم على محمد المنصورى",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": "نفسه"
+    },
+    {
+     "name": "حسام الدين محمد حسين",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": "نفسه"
+    },
+    {
+     "name": "ندى طارق صلاح الدين محمد",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": "نفسه"
+    },
+    {
+     "name": "حسن جعفر ابو الحمد على",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": "نفسه"
+    },
+    {
+     "name": "اسماعيل ابو العنين عبد المعطى",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": "نفسه"
+    },
+    {
+     "name": "هبة عيد محمد قطب",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": "نفسه"
+    }
+   ]
+  },
+  {
+   "ticker": "MFPC",
+   "asOf": "2026-06-30",
+   "filingId": "291451",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341150_1.pdf",
+   "seats": [
+    {
+     "name": "احمد محمود محمد السيد",
+     "holder": null,
+     "role": "رئيس مجلس الإدارة والعضو المنتدب",
+     "representing": "من ذوى الخبرة"
+    },
+    {
+     "name": "محمد محمود زكى محمد",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "الشركة المصرية القابضة للبتروكيماويات"
+    },
+    {
+     "name": "شريف محمد كمال محمد محمد الشاذلى",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "الشركة المصرية القابضة للبتروكيماويات"
+    },
+    {
+     "name": "رشا عبد الفتاح السيد رمضان",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "الشركة المصرية القابضة للبتروكيماويات"
+    },
+    {
+     "name": "خالد بن عبدالعزيز بن عمر العبدالكريم",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "الشركة السعوديه المصريه للاستثمار"
+    },
+    {
+     "name": "حسين محمد عبدالسلام حسن بدوى",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "الشركة السعوديه المصريه للاستثمار"
+    },
+    {
+     "name": "نادر جان مارى نقولا نصرى توتونجى",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة الفا اوريكس ليميتد"
+    },
+    {
+     "name": "ايمن عاطف انور على",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة الفا اوريكس ليميتد"
+    },
+    {
+     "name": "ممثل الشركة المصرية القابضة للغازات الطبيعية (إيجاس)",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "الشركة المصرية القابضة للغازات الطبيعية (إيجاس)"
+    },
+    {
+     "name": "طارق مجدى احمد عبدالرؤف حشيش",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "من ذوى الخبرة"
+    },
+    {
+     "name": "حسن شوقى حسن كامل سيد",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "الإكتتاب العام"
+    }
+   ]
+  },
+  {
    "ticker": "MFSC",
    "asOf": "2026-06-30",
    "filingId": "291003",
@@ -37106,6 +40446,68 @@
      "holder": null,
      "role": "عضو مجلس ادارة",
      "representing": "ذوي خبرة"
+    }
+   ]
+  },
+  {
+   "ticker": "MICH",
+   "asOf": "2026-06-30",
+   "filingId": "291504",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341188_1.pdf",
+   "seats": [
+    {
+     "name": "دكتور / وائل محمد حسن شمس الدين",
+     "holder": null,
+     "role": "رئيس مجلس الادارة",
+     "representing": null
+    },
+    {
+     "name": "لواء أ.ح /محمود عبد الرحمن عشماوي",
+     "holder": null,
+     "role": "العضو المنتدب والرئيس التنفيذي",
+     "representing": "الشركة القابضة للصناعات الكيماوية"
+    },
+    {
+     "name": "المهندس / زينهم زكي محمد",
+     "holder": null,
+     "role": "العضو المنتدب للشئون الفنية",
+     "representing": "الشركة القابضة للصناعات الكيماوية"
+    },
+    {
+     "name": "الدكتورة / هانم عبد الرحمن سباق",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": "الشركة القابضة للصناعات الكيماوية"
+    },
+    {
+     "name": "المهندس / حسام انور عبده حميدة",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": "الشركة القابضة للصناعات الكيماوية"
+    },
+    {
+     "name": "المحاسب / احمد محمد عبدالقادر",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": "بنك مصر"
+    },
+    {
+     "name": "المحاسب / محمد ابو الفتوح محمد",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": "بنك مصر"
+    },
+    {
+     "name": "المهندسة / ليلي عبد المجيد عامر الغزالي",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": null
+    },
+    {
+     "name": "المحاسب/ صلاح الدين محمد سرور",
+     "holder": null,
+     "role": "عضو مجلس ادارة",
+     "representing": null
     }
    ]
   },
@@ -38358,6 +41760,86 @@
    ]
   },
   {
+   "ticker": "PHDC",
+   "asOf": "2026-06-30",
+   "filingId": "291477",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341099_1.pdf",
+   "seats": [
+    {
+     "name": "يس إبراهيم لطفي منصور",
+     "holder": "يس إبراهيم لطفي منصور",
+     "role": "رئيس مجلس اإلدارة والعضو المنتدب",
+     "representing": null
+    },
+    {
+     "name": "محمد األمين اسماعيل لطفي منصور",
+     "holder": null,
+     "role": "نائب رئيس مجلس اإلدارة",
+     "representing": "شركة المنصور والمغربي لالستثمار والتنمية"
+    },
+    {
+     "name": "حسن محمد حسن درويش",
+     "holder": "حسن محمد حسن درويش",
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة المنصور والمغربي لالستثمار والتنمية"
+    },
+    {
+     "name": "محمود لطفى إسماعيل محمود لطفى منصور",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة المنصور والمغربي لالستثمار والتنمية"
+    },
+    {
+     "name": "إسماعيل ياسين لطفى منصور",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "شركة المنصور والمغربي لالستثمار والتنمية"
+    },
+    {
+     "name": "حازم محمد مجدى خليل بدران",
+     "holder": null,
+     "role": "عضو مجلس إدارة منتدب",
+     "representing": null
+    },
+    {
+     "name": "علي ثابت سيد فرغلي",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "name": "عزة جليل الدين البنداري",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": null
+    },
+    {
+     "name": "نبيل توفيق صادق",
+     "holder": null,
+     "role": "عضو مجلس إدارة من ذوي الخبرة",
+     "representing": null
+    },
+    {
+     "name": "عمرو على الجارحي",
+     "holder": null,
+     "role": "عضو مجلس إدارة من ذوي الخبرة",
+     "representing": null
+    },
+    {
+     "name": "تامر محمد سليمان إبراهيم خليفة",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "البنك العربي األفريقي الدولي"
+    },
+    {
+     "name": "إنجى أحمد شوكت جميع",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "البنك العربي األفريقي الدولي"
+    }
+   ]
+  },
+  {
    "ticker": "PHGC",
    "asOf": "2026-06-30",
    "filingId": "291410",
@@ -39439,7 +42921,7 @@
     },
     {
      "name": "صلاح نافع فهمي فهمي عبد المجيد",
-     "holder": null,
+     "holder": "صلاح نافع فهمي فهمي عبد المجيد",
      "role": "نائب رئيس مجلس الإدارة",
      "representing": "ميد فيرت مصر للإستثمار"
     },
@@ -39873,7 +43355,7 @@
    "seats": [
     {
      "name": "يس إبراهيم لطفي منصور",
-     "holder": null,
+     "holder": "يس إبراهيم لطفي منصور",
      "role": "رئيس مجلس الإدارة",
      "representing": "شركة بالم هيلز للتعمير"
     },
@@ -39921,7 +43403,7 @@
     },
     {
      "name": "محمد طارق محمد محمد اسماعيل",
-     "holder": null,
+     "holder": "محمد طارق محمد محمد إسماعيل",
      "role": "عضو مجلس إدارة",
      "representing": null
     },
@@ -40898,6 +44380,56 @@
      "holder": null,
      "role": null,
      "representing": "جهاز مستقبل مصر"
+    }
+   ]
+  },
+  {
+   "ticker": "ZEOT",
+   "asOf": "2026-06-30",
+   "filingId": "291014",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340705_1.pdf",
+   "seats": [
+    {
+     "name": "محمود مجدى محمد فتحى حجازى",
+     "holder": null,
+     "role": "رئيس مجلس الإدارة (غير متفرغ)",
+     "representing": "القابضة للصناعات الغذائية"
+    },
+    {
+     "name": "محمد رفعت احمد سليمان حجاب",
+     "holder": null,
+     "role": "العضو المنتدب التنفيذى",
+     "representing": "القابضة للصناعات الغذائية"
+    },
+    {
+     "name": "ناجى فرج عبد العزيز محمد",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "القابضة للصناعات الغذائية"
+    },
+    {
+     "name": "ايمن السعيد يونس دعبس",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "مساهم"
+    },
+    {
+     "name": "مدحت محمد سعد الدين دقماق",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "مساهم"
+    },
+    {
+     "name": "محمد عبد الموجود حسين عليوة",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "مساهم"
+    },
+    {
+     "name": "سعيد سيد احمد ركابى",
+     "holder": null,
+     "role": "عضو مجلس إدارة",
+     "representing": "مساهم"
     }
    ]
   },

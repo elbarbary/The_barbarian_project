@@ -64,6 +64,8 @@ _FIRM_TOKENS_AR = {
     "شركه", "شركات", "الشركه", "صندوق", "الصندوق", "صناديق", "مجموعه",
     "القابضه", "قابضه", "مؤسسه", "موسسه", "بروبرتيز", "هولدنج", "جروب",
     "بنك", "مساهمه", "مقفله", "ش م م",
+    # A union or syndicate holding shares is a body, not an individual.
+    "اتحاد", "نقابه", "النقابه", "جمعيه", "الجمعيه",
 }
 
 # The transliteration the reader of the scan wrote out. It is a second,
@@ -151,6 +153,36 @@ _CORPORATE_NOISE = {
     "co", "company", "limited", "of", "the", "and", "&",
 }
 _ARABIC_LETTER = re.compile(r"[\u0600-\u06ff]")
+
+
+# Words that say what KIND of body a holder is, and never which one.
+_BODY_WORDS = {
+    "اتحاد", "اتحادات", "العاملين", "عاملين", "العاملون", "المساهمين",
+    "مساهمين", "المساهمون", "بالشركه", "بالشركات", "نقابه", "النقابه",
+    "جمعيه", "الجمعيه", "اعضاء", "الاعضاء", "موظفي", "الموظفين",
+}
+
+
+def names_no_party(name: str) -> bool:
+    """True when a name says what kind of holder this is and never which one.
+
+    `اتحاد العاملين المساهمين` — the shareholding employees' union — is printed
+    on eleven registers, and on most of them without the company's name after
+    it. Resolved as one party it becomes a single holder with stakes in eight
+    different companies, which is false in the way this board most needs to
+    avoid: each company's union is its own body, and the drawing would assert
+    a cross-holding that nobody filed.
+
+    So a name made of nothing but category words names no party, and the caller
+    scopes it to the document it came from rather than merging it with the next
+    register that prints the same phrase. The same rule as
+    `company_keys` refusing a key of {investments, holding}, one layer down.
+    """
+    tokens = [t for t in _fold_letters(name).split()
+              if len(t) > 1 and t not in _CORPORATE_NOISE]
+    if not tokens:
+        return True
+    return all(t in _GENERIC_TOKENS or t in _BODY_WORDS for t in tokens)
 
 
 def company_keys(name: str) -> set:
@@ -316,15 +348,22 @@ def resolve(people):
         if ra != rb:
             parent[max(ra, rb)] = min(ra, rb)
 
+    # A name that names no party is not evidence of anything, so the identical
+    # spellings that merge automatically below must not include it. Nine
+    # registers print `اتحاد العاملين المساهمين`; the caller has already scoped
+    # each to its own company, and folding strips the bracket it used to do it,
+    # which would hand them all back to one holder.
+    same = [p for p in people if not names_no_party(p["id"])]
+
     by_fold = {}
-    for p in people:
+    for p in same:
         by_fold.setdefault(fold(p["id"]), []).append(p)
     for group in by_fold.values():
         for other in group[1:]:
             union(group[0]["id"], other["id"])
 
-    for i, a in enumerate(people):
-        for b in people[i + 1:]:
+    for i, a in enumerate(same):
+        for b in same[i + 1:]:
             if find(a["id"]) == find(b["id"]):
                 continue
             if not name_matches(a["id"], b["id"], a.get("nameEn"), b.get("nameEn")):

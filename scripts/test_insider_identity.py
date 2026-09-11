@@ -222,3 +222,43 @@ class Resolving(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class NamesNoParty(unittest.TestCase):
+    """A phrase that says what kind of holder this is, and never which one."""
+
+    def test_a_shareholding_employees_union_names_no_party(self):
+        # Eleven registers print this, most without saying whose union it is.
+        for name in ("اتحاد العاملين المساهمين",
+                     "اتحاد العاملين المساهمين بالشركة",
+                     "اتحاد العاملين المساهمين (KZPC)"):
+            self.assertTrue(ii.names_no_party(name), name)
+
+    def test_the_same_phrase_with_a_company_after_it_names_one(self):
+        self.assertFalse(ii.names_no_party(
+            "اتحاد العاملين المساهمين بشركة مصر للأسواق الحرة"))
+        self.assertFalse(ii.names_no_party(
+            "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي"))
+
+    def test_an_ordinary_holder_names_a_party(self):
+        for name in ("محمد بكر محمود بكر", "شركة الأهلي للاستثمارات",
+                     "الشركة القابضة للصناعات الغذائية"):
+            self.assertFalse(ii.names_no_party(name), name)
+
+    def test_a_union_is_a_body_and_not_an_individual(self):
+        self.assertTrue(ii.is_firm("اتحاد العاملين المساهمين"))
+
+    def test_two_scoped_copies_of_one_phrase_are_never_merged(self):
+        # Folding strips the bracket the caller scoped them with, so identical
+        # spellings would hand all nine back to a single holder — one party
+        # drawn as holding eight companies it was never filed against.
+        filed = [{"id": "اتحاد العاملين المساهمين (AAA)", "nameEn": None, "trades": []},
+                 {"id": "اتحاد العاملين المساهمين (BBB)", "nameEn": None, "trades": []},
+                 {"id": "اتحاد العاملين المساهمين (CCC)", "nameEn": None, "trades": []}]
+        groups = ii.resolve(filed)
+        self.assertEqual(len(groups), 3, groups)
+
+    def test_two_spellings_of_a_real_name_still_merge(self):
+        filed = [{"id": "شركة اموال العربيه للاقطان", "nameEn": None, "trades": []},
+                 {"id": "شركه اموال العربية للاقطان", "nameEn": None, "trades": []}]
+        self.assertEqual(len(ii.resolve(filed)), 1)
+

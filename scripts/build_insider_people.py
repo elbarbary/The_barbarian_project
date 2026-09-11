@@ -52,6 +52,21 @@ def key(name: str) -> str:
     return " ".join((name or "").split())
 
 
+def filer(name: str, ticker: str) -> str:
+    """The party a filing names, scoped to the company when it names none.
+
+    Most names identify somebody. `اتحاد العاملين المساهمين` does not: it is
+    the phrase for a company's shareholding employees' union and eleven
+    registers print it, most without saying whose. Merged on the spelling it
+    becomes one holder with stakes in eight companies — a cross-holding nobody
+    filed. Scoped to the ticker it stays what the document actually said.
+    """
+    plain = key(name)
+    if plain and ticker and insider_identity.names_no_party(plain):
+        return f"{plain} ({ticker})"
+    return plain
+
+
 def week_of(date: str) -> str:
     """The Sunday that opens this date's trading week.
 
@@ -165,7 +180,7 @@ def main(argv=None) -> int:
 
     people = collections.defaultdict(lambda: {"trades": []})
     for r in readings:
-        k = key(r.get("investorName"))
+        k = filer(r.get("investorName"), r.get("ticker"))
         if not k:
             continue
         p = people[k]
@@ -206,7 +221,7 @@ def main(argv=None) -> int:
     known = {k for k in people}
     for book in books.values():
         for row in book["shareholders"]:
-            name = key(row.get("nameArabic"))
+            name = filer(row.get("nameArabic"), book["ticker"])
             if name and name not in known:
                 known.add(name)
                 filed.append({"id": name, "nameEn": None, "trades": []})
@@ -300,7 +315,7 @@ def main(argv=None) -> int:
     kind_of = {r["id"]: r["kind"] for r in rows}
     for book in books.values():
         for row in book["shareholders"]:
-            name = key(row.get("nameArabic"))
+            name = filer(row.get("nameArabic"), book["ticker"])
             holder = holder_of.get(name)
             percent = row.get("percent")
             if not holder or not isinstance(percent, (int, float)) or percent <= 0:
@@ -407,7 +422,8 @@ def main(argv=None) -> int:
             "source": book["source"],
             "seats": [{
                 "name": (seat.get("nameArabic") or "").strip(),
-                "holder": holder_of.get(key(seat.get("nameArabic"))),
+                "holder": holder_of.get(filer(seat.get("nameArabic"),
+                                                book["ticker"])),
                 "role": seat.get("role") or None,
                 "representing": seat.get("representing") or None,
             } for seat in book["board"] if (seat.get("nameArabic") or "").strip()],
