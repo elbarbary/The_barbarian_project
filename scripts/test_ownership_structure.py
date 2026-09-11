@@ -11,6 +11,11 @@ Run: python3 -m unittest discover -s scripts -p 'test_*.py'
 
 from __future__ import annotations
 
+import contextlib
+import io
+import json
+import pathlib
+import tempfile
 import unittest
 
 import build_ownership_structure as structure
@@ -165,3 +170,105 @@ class Queue(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SharedBacklog(unittest.TestCase):
+    """Several workers on one backlog, and the file they must not share.
+
+    The store is read once at the start of a run and written at the end, so two
+    runs against the same file lose one run's work. Shards give each worker its
+    own file and a disjoint slice; `merge` folds them back.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = pathlib.Path(self.tmp.name)
+        self.saved = (structure.STORE, structure.LEDGER, structure.PDF_DIR)
+        structure.STORE = self.root / "shared.json"
+        structure.LEDGER = self.root / "ledger.json"
+        structure.PDF_DIR = self.root / "pdfs"
+        self.addCleanup(self.restore)
+        docs = [{"filingId": str(900 + i), "kind": "ownership_structure",
+                 "ticker": f"T{i:02d}", "publishedAt": f"2026-06-{i + 1:02d}T10:00:00",
+                 "sessionDate": "2026-06-30",
+                 "attachments": [f"https://example.invalid/{900 + i}.pdf"]}
+                for i in range(9)]
+        structure.LEDGER.write_text(json.dumps(
+            {"schemaVersion": 1, "documents": docs}), encoding="utf-8")
+
+    def restore(self):
+        structure.STORE, structure.LEDGER, structure.PDF_DIR = self.saved
+
+    def run_builder(self, argv):
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            structure.main(argv)
+        return out.getvalue()
+
+    def store(self, path=None):
+        path = path or structure.STORE
+        return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+
+    def test_three_shards_divide_the_backlog_and_do_not_overlap(self):
+        taken = []
+        for part in range(3):
+            out = self.run_builder(["--check", "--shard", f"{part}/3"])
+            taken.append(out)
+        # `--check` reports the slice without reading anything.
+        for part, out in enumerate(taken):
+            self.assertIn(f"shard {part + 1} of 3: 3 of them", out)
+
+    def test_a_shard_skips_what_the_shared_store_already_holds(self):
+        structure.STORE.write_text(json.dumps({
+            "schemaVersion": 1,
+            "readings": {"900": {"ticker": "T00"}, "901": {"ticker": "T01"}},
+            "refused": {"902": "unreadable"}}), encoding="utf-8")
+        out = self.run_builder(["--check", "--shard", "0/2"])
+        self.assertIn("6 outstanding", out)
+        self.assertIn("shard 1 of 2: 3 of them", out)
+
+    def test_merge_folds_the_shards_in_and_never_overwrites(self):
+        structure.STORE.write_text(json.dumps({
+            "schemaVersion": 1,
+            "readings": {"900": {"ticker": "T00", "from": "shared"}},
+            "refused": {}}), encoding="utf-8")
+        one = self.root / "shard-0.json"
+        one.write_text(json.dumps({
+            "schemaVersion": 1,
+            "readings": {"900": {"ticker": "T00", "from": "worker"},
+                         "901": {"ticker": "T01", "from": "worker"}},
+            "refused": {"902": "a share count that contradicts itself"}}),
+            encoding="utf-8")
+        self.run_builder(["--merge", str(one)])
+        held = self.store()
+        # The shared reading wins: the same scan read twice is not the same
+        # text, and replacing a vetted reading buys nothing.
+        self.assertEqual(held["readings"]["900"]["from"], "shared")
+        self.assertEqual(held["readings"]["901"]["from"], "worker")
+        self.assertIn("902", held["refused"])
+
+    def test_a_worker_writes_after_every_document_not_at_the_end(self):
+        # A read is minutes of somebody else's machine. Written once at the
+        # end, a batch of twenty holds an hour of work that one kill signal
+        # throws away — which is how the batch this replaced was lost.
+        shard = self.root / "shard.json"
+        seen = []
+
+        def reader(pdf):
+            seen.append(pdf)
+            if len(seen) == 2:
+                raise KeyboardInterrupt("killed halfway")
+            return form()
+
+        real_reader, real_fetch = structure.read_structure_agy, structure.named.fetch_pdf
+        structure.read_structure_agy = reader
+        structure.named.fetch_pdf = lambda url, path: path.write_bytes(b"%PDF-") or True
+        try:
+            with contextlib.redirect_stdout(io.StringIO()):
+                with self.assertRaises(KeyboardInterrupt):
+                    structure.main(["--limit", "5", "--store", str(shard)])
+        finally:
+            structure.read_structure_agy = real_reader
+            structure.named.fetch_pdf = real_fetch
+        self.assertEqual(len(self.store(shard).get("readings") or {}), 1,
+                         "the first document was lost with the second")

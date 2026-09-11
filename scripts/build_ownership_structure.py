@@ -213,13 +213,39 @@ def owning(holders) -> list:
             if isinstance(row, dict) and (_number(row.get("percent")) or 0) > 0]
 
 
-def held() -> dict:
-    if STORE.exists():
+def held(path: pathlib.Path | None = None) -> dict:
+    path = path or STORE
+    if path.exists():
         try:
-            return json.loads(STORE.read_text(encoding="utf-8"))
+            return json.loads(path.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             pass
     return {"schemaVersion": 1, "readings": {}, "refused": {}}
+
+
+def merge(shards) -> int:
+    """Fold finished shard stores into the shared one.
+
+    A reading already in the shared store wins. A worker that re-read a form
+    another had finished would otherwise replace a vetted reading with a second
+    opinion for no reason, and the two are not always identical: the same scan
+    read twice can differ in a name's spelling.
+    """
+    store = held()
+    added = kept = 0
+    for name in shards:
+        part = held(pathlib.Path(name))
+        for bucket in ("readings", "refused"):
+            for filing, value in (part.get(bucket) or {}).items():
+                if filing in store["readings"] or filing in store["refused"]:
+                    kept += 1
+                    continue
+                store[bucket][filing] = value
+                added += 1
+    STORE.write_text(json.dumps(store, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"   merged {added} new readings from {len(shards)} shard(s); "
+          f"{kept} were already held; {len(store['readings'])} companies read in all")
+    return 0
 
 
 def main(argv=None) -> int:
@@ -230,15 +256,35 @@ def main(argv=None) -> int:
     ap.add_argument("--engine", choices=("agy", "vertex"), default="agy")
     ap.add_argument("--check", action="store_true",
                     help="report what is outstanding and write nothing")
+    # Reading 57 scans one after another is a day's work, and the reader is the
+    # slow part, not this. Several workers can share the backlog as long as
+    # they never share the file: the store is read once at the start and
+    # written once at the end, so two runs against it lose one run's work.
+    # A shard takes every nth document and writes its own store; `--merge`
+    # folds those back into the shared one when they are all finished.
+    ap.add_argument("--store", default="",
+                    help="write to this file instead of the shared store")
+    ap.add_argument("--shard", default="",
+                    help="i/n — take every nth outstanding document")
+    ap.add_argument("--merge", nargs="*", default=None,
+                    help="fold these shard stores into the shared store and exit")
     args = ap.parse_args(argv)
+
+    if args.merge is not None:
+        return merge(args.merge)
 
     if not LEDGER.exists():
         print("no ownership ledger yet — run ownership_ledger.py")
         return 0
     ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
     newest = latest_per_company(ledger)
-    store = held()
-    done = set(store["readings"]) | set(store["refused"])
+    shared = held()
+    store = held(pathlib.Path(args.store)) if args.store else shared
+    # What this worker must not read: everything the shared store already has,
+    # AND everything its own shard has. Skipping only its own would make every
+    # worker start the backlog again from the beginning.
+    done = (set(shared["readings"]) | set(shared["refused"])
+            | set(store["readings"]) | set(store["refused"]))
     if args.refresh:
         done.discard(args.refresh)
         store["readings"].pop(args.refresh, None)
@@ -250,12 +296,36 @@ def main(argv=None) -> int:
              if str(d.get("filingId")) not in done]
     print(f"   {len(newest)} companies have filed a structure form; "
           f"{len(newest) - len(queue)} read, {len(queue)} outstanding")
+    if args.shard:
+        part, whole = (int(n) for n in args.shard.split("/"))
+        if not 0 <= part < whole:
+            print(f"   --shard {args.shard} is not a share of the work")
+            return 1
+        queue = queue[part::whole]
+        print(f"   shard {part + 1} of {whole}: {len(queue)} of them")
     if args.check or not queue:
         return 0
 
     PDF_DIR.mkdir(parents=True, exist_ok=True)
     reader = read_structure_agy if args.engine == "agy" else None
     kept = refused = unreachable = 0
+
+    out = pathlib.Path(args.store) if args.store else STORE
+
+    def save():
+        """After every document, not at the end of the run.
+
+        A read is three to five minutes of somebody else's machine. Written
+        once at the end, a batch of twenty holds an hour of work that a kill
+        signal, a full disk or a reboot throws away — which is exactly what
+        happened to the batch this replaced.
+        """
+        out.parent.mkdir(parents=True, exist_ok=True)
+        tmp = out.with_suffix(".tmp")
+        tmp.write_text(json.dumps(store, ensure_ascii=False, indent=1),
+                       encoding="utf-8")
+        tmp.replace(out)
+
     for doc in queue[: max(0, args.limit)]:
         filing = str(doc.get("filingId"))
         ticker = doc.get("ticker")
@@ -282,7 +352,8 @@ def main(argv=None) -> int:
         why = vet(reading, ticker, issuer)
         if why:
             store["refused"][filing] = why
-            print(f"   {filing} {ticker}: refused — {why}")
+            save()
+            print(f"   {filing} {ticker}: refused — {why}", flush=True)
             refused += 1
             continue
         store["readings"][filing] = {
@@ -302,13 +373,13 @@ def main(argv=None) -> int:
             "namedWithoutAStake": [r.get("nameArabic") for r in (reading.get("shareholders") or [])
                                    if isinstance(r, dict) and not (_number(r.get("percent")) or 0) > 0],
         }
+        save()
         seats = len(reading.get("board") or [])
         holders = len(owning(reading.get("shareholders")))
-        print(f"   {filing} {ticker}: {seats} directors, {holders} holders")
+        print(f"   {filing} {ticker}: {seats} directors, {holders} holders", flush=True)
         kept += 1
 
-    STORE.parent.mkdir(parents=True, exist_ok=True)
-    STORE.write_text(json.dumps(store, ensure_ascii=False, indent=1), encoding="utf-8")
+    save()
     print(f"   kept {kept}, refused {refused}, unreachable {unreachable}; "
           f"{len(store['readings'])} companies read in all")
     return 0

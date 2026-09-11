@@ -420,7 +420,17 @@ export function renderMap(svg, model, opts) {
   // Every mark that shrinks when the board is zoomed, with the point it keeps
   // still while it does. Collected as they are built rather than queried back
   // out of the layers: the same nodes, no selector, and nothing to go stale.
+  //
+  // A dot's anchor is its COMPANY's centre, not its own. A dot sits on the
+  // ring it belongs to; scaled about itself it stayed on the old radius while
+  // the ring shrank away from under it, and fifty companies' worth of them
+  // came loose into a halo around the board.
   const marks = [];
+  // And the things that cannot be grouped, because they run BETWEEN two
+  // anchors: a line's width, a travelling dot's radius. Left alone they were
+  // the only things on the board still growing with the zoom.
+  const sized = [];
+  const sizes = (node, attr, base) => { sized.push({ node, attr, base }); return node; };
 
   // What the focus is related to: a company lights its holders, a holder
   // lights every company they are in.
@@ -472,6 +482,7 @@ export function renderMap(svg, model, opts) {
     // The name sits on the water above the companies, not in a corner and
     // not in the middle, which is now full of them.
     const plate = svgEl('g', { class: 'om-lake-name' }, gLakeName);
+    marks.push({ node: plate, x: lake.cx, y: lake.cy });
     const label = svgEl('text', {
       x: lake.cx, y: lake.cy - lake.ry * shoreAt(lake.seed, -Math.PI / 2) - 5,
       fill: 'var(--faint)', 'font-size': 9,
@@ -498,13 +509,13 @@ export function renderMap(svg, model, opts) {
         const to = nodes.get(b.tickers[i + 1]);
         if (!from || !to) continue;
         const { d } = edgePath(from, to, 0.16);
-        svgEl('path', {
+        sizes(svgEl('path', {
           d, fill: 'none', stroke: hueOf(b.holder), 'stroke-width': 0.7,
           'stroke-linecap': 'round', opacity: 0.22, class: 'om-bridge om-bridge-rest',
-        }, gBridge);
-        const drift = svgEl('circle', {
+        }, gBridge), 'stroke-width', 0.7);
+        const drift = sizes(svgEl('circle', {
           r: 1.7, fill: hueOf(b.holder), opacity: 0.55, class: 'om-flow-dot',
-        }, gBridge);
+        }, gBridge), 'r', 1.7);
         svgEl('animateMotion', {
           dur: `${(3.4 + ((i + b.tickers.length) % 4) * 0.6).toFixed(1)}s`,
           repeatCount: 'indefinite', path: d,
@@ -542,13 +553,14 @@ export function renderMap(svg, model, opts) {
       const changed = mv && finite(mv.change) && Math.abs(mv.change) > 0.0005;
       const colour = changed
         ? (mv.change > 0 ? 'var(--up)' : 'var(--down)') : hueOf(p.holder);
-      svgEl('path', {
+      sizes(svgEl('path', {
         d, fill: 'none', stroke: colour, 'stroke-width': changed ? 1.8 : 1.5,
         'stroke-dasharray': changed ? '5 4' : null,
         'stroke-linecap': 'round', opacity: 0.85, class: 'om-bridge',
         'data-to': focus,
-      }, gSeat);
-      const travel = svgEl('circle', { r: 2.4, fill: colour, class: 'om-flow-dot' }, gSeat);
+      }, gSeat), 'stroke-width', changed ? 1.8 : 1.5);
+      const travel = sizes(
+        svgEl('circle', { r: 2.4, fill: colour, class: 'om-flow-dot' }, gSeat), 'r', 2.4);
       svgEl('animateMotion', {
         dur: `${(2.1 + (i % 3) * 0.4).toFixed(2)}s`, repeatCount: 'indefinite', path: d,
       }, travel);
@@ -576,11 +588,11 @@ export function renderMap(svg, model, opts) {
           const other = nodes.get(q.ticker);
           if (!other) return;
           const onward = edgePath(seatAt, other, 0.14);
-          svgEl('path', {
+          sizes(svgEl('path', {
             d: onward.d, fill: 'none', stroke: hueOf(p.holder), 'stroke-width': 1.1,
             'stroke-linecap': 'round', opacity: 0.55, class: 'om-bridge om-bridge-onward',
             'data-to': q.ticker,
-          }, gSeat);
+          }, gSeat), 'stroke-width', 1.1);
         });
     });
   }
@@ -620,15 +632,15 @@ export function renderMap(svg, model, opts) {
         const changed = mv && finite(mv.change) && Math.abs(mv.change) > 0.0005;
         const grew = changed && mv.change > 0;
         const colour = changed ? (grew ? 'var(--up)' : 'var(--down)') : hueOf(focus);
-        const spoke = svgEl('path', {
+        const spoke = sizes(svgEl('path', {
           d, fill: 'none', stroke: colour, 'stroke-width': changed ? 1.9 : 1.7,
           'stroke-dasharray': changed ? '5 4' : null,
           'stroke-linecap': 'round', opacity: 0.88,
           class: `om-bridge${changed ? (grew ? ' om-bridge-up' : ' om-bridge-down') : ''}`,
-        }, gSeat);
-        const travel = svgEl('circle', {
+        }, gSeat), 'stroke-width', changed ? 1.9 : 1.7);
+        const travel = sizes(svgEl('circle', {
           r: 2.6, fill: colour, class: 'om-flow-dot',
-        }, gSeat);
+        }, gSeat), 'r', 2.6);
         svgEl('animateMotion', {
           dur: `${(2.2 + (i % 3) * 0.35).toFixed(2)}s`,
           repeatCount: 'indefinite', path: d,
@@ -645,6 +657,7 @@ export function renderMap(svg, model, opts) {
         const tx = Math.min(view.w - w / 2 - 2, Math.max(w / 2 + 2, n.x));
         const ty = n.y + n.r + BAND / 2 + 12;
         const tag = svgEl('g', { class: 'om-stake-tag' }, gSeat);
+        marks.push({ node: tag, x: tx, y: ty });
         svgEl('rect', {
           x: tx - w / 2, y: ty - 9, width: w, height: 12.5, rx: 6,
           fill: colour, opacity: 0.94,
@@ -801,7 +814,8 @@ export function renderMap(svg, model, opts) {
       tabindex: 0, role: 'button',
     }, gDot);
     dotEls.push(g);
-    marks.push({ node: g, x: dot.x, y: dot.y });
+    marks.push({ node: g, x: dot.node ? dot.node.x : dot.x,
+                 y: dot.node ? dot.node.y : dot.y });
     svgEl('circle', {
       cx: dot.x, cy: dot.y, r: dot.r, fill: hueOf(dot.holder),
       stroke: 'var(--surface)', 'stroke-width': 1,
@@ -818,9 +832,9 @@ export function renderMap(svg, model, opts) {
   // because a label created per hover is a node per hover.
   const hover = svgEl('g', { class: 'om-hover', visibility: 'hidden' }, gName);
   const plate = svgEl('rect', { rx: 7, class: 'om-pin-plate' }, hover);
-  const hoverText = svgEl('text', {
+  const hoverText = sizes(svgEl('text', {
     'text-anchor': 'middle', 'font-size': 9.5, fill: 'var(--ink)', direction: 'ltr',
-  }, hover);
+  }, hover), 'font-size', 9.5);
   const nameAt = (dot) => {
     const label = `${stakeText(dot.percent)}  ${labelOf(dot.holder)}`;
     hoverText.textContent = label;
@@ -880,6 +894,11 @@ export function renderMap(svg, model, opts) {
           `translate(${(x * (1 - m)).toFixed(2)} ${(y * (1 - m)).toFixed(2)}) `
           + `scale(${m.toFixed(3)})`);
       }
+    });
+    // A line cannot be scaled about a point — it has two of them — so its
+    // width and the dot running along it are set instead.
+    sized.forEach(({ node, attr, base }) => {
+      node.setAttribute(attr, (base * m).toFixed(2));
     });
   };
   return { rescale, marks: marks.length };

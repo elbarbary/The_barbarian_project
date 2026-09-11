@@ -1054,7 +1054,8 @@ function renderOwnershipMap(doc, ar, t, component) {
   const search = document.createElement('input');
   search.type = 'search';
   search.className = 'om-search';
-  search.placeholder = t('Search every filed name', 'ابحث في كل الأسماء');
+  search.placeholder = t('Search a company or a filed name',
+                        'ابحث عن شركة أو اسم مودع');
   search.setAttribute('aria-label', search.placeholder);
   search.addEventListener('input', () => { query = search.value.trim(); drawRegister(); });
   const crumb = document.createElement('div');
@@ -1092,6 +1093,44 @@ function renderOwnershipMap(doc, ar, t, component) {
     return el;
   };
 
+  /* Every company the reader could mean, whether it is on the board or not.
+   *
+   * The board draws a ring only where a form has named a holder, so a company
+   * with no filed register has no ring — and a search that silently returned
+   * nothing for it would read as "no such company".
+   */
+  const companiesMatching = (text) => {
+    const needle = text.trim().toLowerCase();
+    if (!needle) return [];
+    const seen = new Set();
+    const out = [];
+    const add = (ticker) => {
+      if (seen.has(ticker)) return;
+      seen.add(ticker);
+      const row = byTicker.get(ticker);
+      out.push({
+        ticker,
+        name: (co[ticker] && co[ticker].name) || ticker,
+        onBoard: !!row,
+        holders: row ? row.holders.filter((h) => h.percent > 0).length : 0,
+        disclosed: row ? row.disclosed : 0,
+      });
+    };
+    Object.keys(co).forEach((ticker) => {
+      const name = (co[ticker].name || '').toLowerCase();
+      if (ticker.toLowerCase().includes(needle) || name.includes(needle)) add(ticker);
+    });
+    byTicker.forEach((row, ticker) => {
+      if (ticker.toLowerCase().includes(needle)
+          || (row.name || '').toLowerCase().includes(needle)) add(ticker);
+    });
+    // Exact ticker first, then the ones that are drawn, then the alphabet.
+    return out.sort((a, b) => (b.ticker.toLowerCase() === needle)
+                            - (a.ticker.toLowerCase() === needle)
+                            || (b.onBoard - a.onBoard)
+                            || collator.compare(a.ticker, b.ticker)).slice(0, 12);
+  };
+
   const matches = (holder) => {
     if (!query) return true;
     const needle = query.toLowerCase();
@@ -1124,6 +1163,24 @@ function renderOwnershipMap(doc, ar, t, component) {
       patch.ownershipPage = 0;
     }
     component.setState(patch);
+  };
+
+  /* Put a company in the middle of the window the reader is looking through.
+   *
+   * Fifty rings on one board and a search that only filtered a list beside it
+   * left the reader to find the ring themselves — at three times in, with the
+   * company somewhere off the edge. Picking a company now moves the window to
+   * it and keeps the zoom, which is the difference between a search that finds
+   * a company and one that tells you it exists.
+   */
+  const bringTo = (id) => {
+    const n = model.nodes.get(id);
+    if (!n || !win) return;
+    const full = board();
+    if (win.w >= full.w) return;          // the whole board is already on screen
+    win.x = n.x - win.w / 2;
+    win.y = n.y - win.h / 2;
+    clampWindow();
   };
 
   const drawRegister = () => {
@@ -1220,10 +1277,55 @@ function renderOwnershipMap(doc, ar, t, component) {
       return;
     }
 
-    if (!shown.length) {
+    // Companies first when something has been typed. A reader hunting for a
+    // ring is hunting for a ticker, and the filed names are the long list.
+    const hits = query ? companiesMatching(query) : [];
+    if (hits.length) {
+      const head = document.createElement('p');
+      head.className = 'om-reg-head';
+      head.textContent = t(`Companies · ${hits.length}`, `شركات · ${hits.length}`);
+      list.appendChild(head);
+      hits.forEach((row) => {
+        if (!row.onBoard) {
+          // It exists, it is simply not drawn — no form has named a holder in
+          // it. Saying so is the answer to "why can I not find it".
+          const none = document.createElement('p');
+          none.className = 'om-reg-none';
+          none.textContent = t(
+            `${row.ticker} · ${row.name} — no filed holder yet`,
+            `${row.ticker} · ${row.name} — لا مالك مُفصح عنه بعد`);
+          list.appendChild(none);
+          return;
+        }
+        registerRow(list, {
+          colour: 'var(--accent)',
+          title: `${row.ticker} · ${row.name}`,
+          sub: t(`${row.holders} disclosed holders`,
+                 `${row.holders} مالكاً معلوماً`),
+          right: stake(row.disclosed),
+          onClick: () => {
+            focus = row.ticker;
+            named = null;
+            bringTo(row.ticker);
+            scopeDealings(focus);
+            paint();
+          },
+        });
+      });
+      if (shown.length) {
+        const names = document.createElement('p');
+        names.className = 'om-reg-head';
+        names.textContent = t(`Filed names · ${shown.length}`,
+                              `أسماء مودعة · ${shown.length}`);
+        list.appendChild(names);
+      }
+    }
+
+    if (!shown.length && !hits.length) {
       const none = document.createElement('p');
       none.className = 'om-reg-none';
-      none.textContent = t('No filed name matches that.', 'لا اسم مطابق.');
+      none.textContent = t('No company or filed name matches that.',
+                           'لا شركة ولا اسم مطابق.');
       list.appendChild(none);
       return;
     }

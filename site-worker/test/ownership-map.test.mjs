@@ -752,3 +752,130 @@ test('no class means two different things on this panel', () => {
   inSvg.forEach((node) => assert.equal(node.tag, 'g',
     `a ${node.tag} is wearing the board's seat class`));
 });
+
+test('a holder dot stays on the ring it belongs to as the board shrinks', () => {
+  // A dot scaled about ITSELF keeps the radius it was placed at while the ring
+  // shrinks out from under it: fifty companies' worth of them come loose into
+  // a halo. The anchor has to be the company's centre, so the dot travels in
+  // with the ring it orbits.
+  const model = board(ROWS);
+  const svg = document.createElementNS('', 'svg');
+  const handle = OM.renderMap(svg, model, {
+    holdings: HOLDINGS, bridges: [], moves: null, labelOf: (id) => id,
+    onPick: () => {}, focus: null, t: (en) => en, ar: false,
+  });
+  const m = 0.5;
+  handle.rescale(m);
+  const dots = nodesWithClass(svg, 'om-dot');
+  assert.ok(dots.length > 2, 'no dots to check');
+  dots.forEach((g) => {
+    const circle = g.children.find((n) => n.tag === 'circle');
+    const [, tx, ty, k] = (g.getAttribute('transform') || '').match(
+      /translate\((-?[\d.]+) (-?[\d.]+)\) scale\(([\d.]+)\)/) || [];
+    assert.ok(k, 'a dot was left at full size');
+    const anchor = { x: Number(tx) / (1 - m), y: Number(ty) / (1 - m) };
+    // The anchor is a company centre, and the dot is NOT at it.
+    const home = [...model.nodes.values()].find(
+      (n) => Math.abs(n.x - anchor.x) < 0.01 && Math.abs(n.y - anchor.y) < 0.01);
+    assert.ok(home, `a dot is anchored at ${anchor.x},${anchor.y}, which is no company`);
+    const before = Math.hypot(Number(circle.attrs.cx) - home.x,
+                              Number(circle.attrs.cy) - home.y);
+    assert.ok(before > 1, 'the dot was placed on its own company centre');
+    // Drawn position after the transform: centre + m x the old offset, which
+    // is exactly where the shrunken ring now is.
+    const after = before * m;
+    assert.ok(Math.abs(after - before * m) < 1e-9);
+  });
+});
+
+test('a line and the dot running along it shrink with everything else', () => {
+  // A line joins two anchors, so it cannot be scaled about a point. Left out,
+  // its width and its travelling dot were the only things on the board still
+  // growing with the zoom — which is most of what "all over the place" was.
+  const model = board(ROWS);
+  const svg = document.createElementNS('', 'svg');
+  const handle = OM.renderMap(svg, model, {
+    holdings: HOLDINGS,
+    bridges: [{ holder: 'one', tickers: ['AAA', 'CCC'] }],
+    moves: null, labelOf: (id) => id, onPick: () => {},
+    focus: 'AAA', t: (en) => en, ar: false,
+  });
+  const lines = nodesWithClass(svg, 'om-bridge');
+  const flow = nodesWithClass(svg, 'om-flow-dot');
+  assert.ok(lines.length > 0 && flow.length > 0, 'nothing joined to check');
+  const widths = lines.map((n) => Number(n.attrs['stroke-width']));
+  const radii = flow.map((n) => Number(n.attrs.r));
+  handle.rescale(0.5);
+  lines.forEach((n, i) => assert.ok(
+    Math.abs(Number(n.attrs['stroke-width']) - widths[i] / 2) < 0.01,
+    `a line kept its width: ${n.attrs['stroke-width']} from ${widths[i]}`));
+  flow.forEach((n, i) => assert.ok(
+    Math.abs(Number(n.attrs.r) - radii[i] / 2) < 0.01,
+    `a travelling dot kept its size: ${n.attrs.r} from ${radii[i]}`));
+  handle.rescale(1);
+  lines.forEach((n, i) => assert.ok(
+    Math.abs(Number(n.attrs['stroke-width']) - widths[i]) < 0.01));
+});
+
+/* ── finding a company ────────────────────────────────────────────────────── */
+
+function searchIn(view) {
+  return nodesWithClass(view, 'om-search')[0];
+}
+
+test('the search finds a company, not only a filed name', () => {
+  const view = panel();
+  const box = searchIn(view);
+  assert.ok(box, 'no search box on the panel');
+  assert.match(box.attrs.placeholder || box.placeholder || '', /compan/i);
+  const ticker = published.positions.find((p) => p.percent > 0).ticker;
+  box.value = ticker;
+  box.events.input();
+  const rows = nodesWithClass(view, 'om-reg-row').map(text);
+  assert.ok(rows.some((row) => row.includes(ticker)),
+            `nothing matched ${ticker}: ${rows.slice(0, 3).join(' | ')}`);
+  const heads = nodesWithClass(view, 'om-reg-head').map(text);
+  assert.ok(heads.some((h) => /Companies/.test(h)), heads.join(' | '));
+});
+
+test('a company with no filed holder says so rather than going missing', () => {
+  // The board draws a ring only where a form has named a holder. Returning
+  // nothing for a company that simply has no register reads as "no such
+  // company", which is a different and untrue statement.
+  const view = panel();
+  const drawn = new Set(published.positions.map((p) => p.ticker));
+  assert.ok(!drawn.has('AAA'), 'the fixture ticker is on the board after all');
+  const box = searchIn(view);
+  box.value = 'AAA';
+  box.events.input();
+  const out = text(view);
+  assert.match(out, /AAA[^]*no filed holder yet/);
+});
+
+test('picking a company from the search brings the board to it', () => {
+  // A search that only filters the list beside the board leaves the reader to
+  // find the ring themselves — at three times in, with the company off the
+  // edge of the window.
+  const view = panel();
+  const c = panel.reader;
+  const zoomIn = nodesWithClass(view, 'om-map-tools').flatMap((n) => all(n, 'button'))
+    .find((b) => (b.text || '') === '+');
+  zoomIn.events.click({ preventDefault() {}, stopPropagation() {} });
+  zoomIn.events.click({ preventDefault() {}, stopPropagation() {} });
+  const before = { ...c.state.ownershipWin };
+
+  const ticker = published.positions.find((p) => p.percent > 0).ticker;
+  const box = searchIn(view);
+  box.value = ticker;
+  box.events.input();
+  const row = nodesWithClass(view, 'om-reg-row').find((r) => text(r).includes(ticker));
+  assert.ok(row, `no row for ${ticker}`);
+  row.events.click();
+
+  const after = c.state.ownershipWin;
+  assert.ok(after, 'the window was lost');
+  assert.ok(Math.abs(after.w - before.w) < 0.01, 'the zoom changed');
+  assert.ok(after.x !== before.x || after.y !== before.y,
+            'the window never moved to the company that was picked');
+  assert.equal(c.state.ownershipFocus, ticker);
+});
