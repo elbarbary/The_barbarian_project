@@ -755,6 +755,10 @@
     "meaning": "Higher fuel prices raise the direct operational costs of agricultural machinery, transport, and energy-intensive inputs for farming businesses.",
     "meaning_ar": "يؤدي ارتفاع أسعار الوقود إلى زيادة تكاليف التشغيل المباشرة للآلات الزراعية وعمليات النقل والمدخلات كثيفة الاستهلاك للطاقة في قطاع الزراعة."
   },
+  "ارتفاع الاسهم الاوروبيه في مستهل اخر جلسات الاسبوع": {
+    "meaning": "An early-session rise in European equities reflects net capital inflows and higher opening bid prices across European bourses, signaling the current international risk-sentiment context for global trading desks.",
+    "meaning_ar": "يعكس ارتفاع الأسهم الأوروبية في مستهل التعاملات تدفقات رأسمالية موجبة وأسعار طلب افتتاحية أعلى عبر البورصات الأوروبية، وهو ما يحدد اتجاهات سيولة المخاطرة في التداولات الدولية الحالية."
+  },
   "ارتفاع الاسهم الاوروبيه قبيل صدور قرار الفايده": {
     "meaning": "Equity prices reflect market positioning and the repricing of capital costs ahead of central bank monetary policy announcements, where interest rate decisions directly establish baseline borrowing costs and corporate valuation discount rates across the economy.",
     "meaning_ar": "تعكس أسعار الأسهم مراكز التداول وإعادة تسعير تكلفة رأس المال قبيل إعلانات السياسة النقدية للبنوك المركزية، حيث تحدد قرارات أسعار الفائدة تكاليف الاقتراض الأساسية ومعدلات خصم التقييم للشركات في السوق."
@@ -1494,6 +1498,10 @@
   "الذهب قرب ادني مستوي في اسبوع قبيل صدور بيانات تضخم امريكيه": {
     "meaning": "Global gold prices track shifts in US dollar strength and interest rate expectations, where forthcoming inflation data determines the holding cost of non-yielding bullion. The domestic gold market directly incorporates these international price movements alongside the official and parallel USD/EGP exchange rates.",
     "meaning_ar": "تتحرك أسعار الذهب العالمية تبعاً لتغيرات قوة الدولار الأمريكي وتوقعات أسعار الفائدة، حيث تحدد بيانات التضخم تكلفة الفرصة البديلة لحيازة المعدن غير المدر للعائد، بينما تعكس السوق المحلية هذه الأسعار العالمية مقترنة بسعر صرف الجنيه المصري أمام الدولار."
+  },
+  "الذهب يتجه لتسجيل ثالث خساره اسبوعيه مع ترقب بيانات التضخم الامريكيه": {
+    "meaning": "Expectations surrounding US inflation metrics influence global interest rate trajectories, altering the opportunity cost of holding non-yielding gold and directly dictating pricing in the local precious metals market.",
+    "meaning_ar": "تؤثر بيانات التضخم الأمريكية على مسار أسعار الفائدة العالمية وتكلفة الفرصة البديلة لحيازة الذهب غير المدر لعائد، مما ينعكس بصورة مباشرة على تسعير المعدن في السوق المحلي."
   },
   "الذهب يتجه لمكاسب اسبوعيه طفيفه وسط ترقب بيانات الوظايف الامريكيه": {
     "meaning": "Gold prices trade with narrow weekly gains as market participants price in interest rate expectations ahead of official US employment data.",
@@ -2676,6 +2684,10 @@
     "meaning": "Cross-border industrial partnerships pair local manufacturing infrastructure and distribution networks with foreign technical expertise and capital equipment via joint ventures or co-manufacturing frameworks.",
     "meaning_ar": "تقوم الشراكات الصناعية الدولية على دمج البنية التحتية وشبكات التوزيع المحلية مع الخبرات التقنية والمعدات الرأسمالية الأجنبية من خلال تأسيس مشروعات مشتركة أو اتفاقيات تصنيع تعاقدي."
   },
+  "خام الحديد يتجه لتسجيل اكبر خساره اسبوعيه منذ يونيو": {
+    "meaning": "A decline in international iron ore spot prices lowers raw material procurement costs for primary steel manufacturers and directly alters input pricing across the metals and construction supply chains.",
+    "meaning_ar": "يؤدي تراجع الأسعار الفورية لخام الحديد عالمياً إلى خفض تكلفة شراء المواد الخام لشركات إنتاج الصلب المتكاملة، كما يؤثر مباشرة على تسعير المدخلات الإنتاجية في سلاسل إمداد قطاعي المعادن والتشييد."
+  },
   "خبيره تمويل: مصر تستطيع خفض تكلفه الدين ب «سندات طريق الحرير»": {
     "meaning": "Silk Road bonds (Panda bonds) are renminbi-denominated debt instruments issued in the Chinese onshore market, offering sovereign issuers an alternative funding venue with interest rates linked to Chinese market benchmarks rather than US dollar or euro rates.",
     "meaning_ar": "سندات طريق الحرير (سندات الباندا) هي أدوات دين مقومة باليوان الصيني يتم إصدارها في السوق الصينية المحلية، مما يتيح للجهات السيادية مصادر تمويل مرتبطة بأسعار الفائدة القياسية الصينية كبديل عن أسواق الدين المقومة بالدولار أو اليورو."
@@ -3468,6 +3480,10 @@
   "كاثرين ثوربيك تكتب: هل تتجاوز النماذج المفتوحه مخاوف الثقه في «الذكاء الاصطناعي الصيني»؟": {
     "meaning": "Open-source software distribution exposes artificial intelligence model architecture and source code for public auditing, which directly alters technology adoption dynamics and counterparty risk evaluation in cross-border software markets.",
     "meaning_ar": "يتيح نموذج توزيع البرمجيات مفتوحة المصدر تدقيق الهيكل البرمجي ونظم الذكاء الاصطناعي بشكل علني، مما يغير آليات تبني التكنولوجيا وتقييم مخاطر التعامل التجاري في أسواق البرمجيات الدولية."
+  },
+  "كامل الوزير: التوسع في توطين صناعات النقل وانشاء مصنع جديد لانتاج الفلنكات": {
+    "meaning": "Establishing a new railway sleeper manufacturing plant expands domestic industrial capacity and integrates production into the local transport infrastructure supply chain, substituting imported components with locally manufactured inputs.",
+    "meaning_ar": "يؤدي إنشاء مصنع جديد لإنتاج فلنكات السكك الحديدية إلى توسيع الطاقة الإنتاجية الصناعية المحلية ودمج التصنيع ضمن سلسلة إمداد قطاع النقل، مستبدلاً المكونات المستوردة بمدخلات مصنعة محلياً."
   },
   "كبلر: الصين تصدر اول شحنه حمض كبريتيك منذ مايو": {
     "meaning": "The resumption of Chinese sulfuric acid exports reintroduces physical supply from the world's largest producer into the global seaborne spot market, serving as a primary raw material for phosphate fertilizer production and chemical manufacturing.",
@@ -4268,6 +4284,10 @@
   "وزير الزراعه يوجه قطاعات الوزاره بالتفاعل الفوري مع طلبات نواب الشعب": {
     "meaning": "The directive establishes a direct operational channel between the Ministry of Agriculture and parliamentary representatives to process legislative and constituency requests regarding agricultural services and inputs.",
     "meaning_ar": "يحدد التوجيه قناة تشغيلية مباشرة بين وزارة الزراعة ونواب البرلمان لمتابعة ومعالجة الطلبات الرقابية والخدمية المتعلقة بقطاع الزراعة ومستلزمات الإنتاج."
+  },
+  "وزير الزراعه: تقديم كافه التسهيلات للشركات الفرنسيه الراغبه في الاستثمار بالسوق المصري": {
+    "meaning": "Government administrative facilities for foreign agribusinesses lower regulatory entry barriers and streamline licensing procedures, directly connecting international capital and agricultural technology with domestic supply chains.",
+    "meaning_ar": "يؤدي تقديم التسهيلات الإدارية الحكومية للشركات الزراعية الأجنبية إلى خفض حواجز الدخول التنظيمية وتبسيط إجراءات التراخيص، مما يربط رؤوس الأموال والتقنيات الزراعية الدولية بسلاسل التوريد المحلية."
   },
   "وزير الزراعه: لا توجد سوق سوداء للاسمده": {
     "meaning": "Fertilizer distribution operates through state-monitored channels and subsidized quota allocations, enforcing official pricing mechanisms across domestic agricultural networks.",
