@@ -14886,6 +14886,333 @@
     }
    ],
    "namedWithoutAStake": []
+  },
+  "291449": {
+   "filingId": "291449",
+   "ticker": "EHDR",
+   "publishedAt": "2026-07-16T10:06:30",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341147_1.pdf",
+   "companyArabic": "المصريين للإسكان والتنمية والتعمير",
+   "asOfDate": "2026-06-30",
+   "totalShares": 672000000.0,
+   "board": [
+    {
+     "nameArabic": "د/ إبراهيم فوزي عبد الواحد",
+     "role": "رئيس مجلس الإدارة",
+     "representing": "شركة أودن للإستثمارات المالية"
+    },
+    {
+     "nameArabic": "أ/ أحمد كمال حافظ إسماعيل",
+     "role": "نائب رئيس مجلس الإدارة والعضو المنتدب للإستثمار وتنمية المشروعات",
+     "representing": "شركة أودن للإستثمارات المالية"
+    },
+    {
+     "nameArabic": "أ/ كريم هاشم السيد هاشم",
+     "role": "عضو مجلس الإدارة",
+     "representing": "عن نفسه"
+    },
+    {
+     "nameArabic": "أ/ محمد يحيي السيد مصطفي",
+     "role": "عضو مجلس الإدارة المنتدب للشئون المالية والإدارية",
+     "representing": "شركة أودن للإستثمارات المالية"
+    },
+    {
+     "nameArabic": "أ/ عماد الدين عبد العظيم",
+     "role": "عضو مجلس الإدارة المنتدب للمشروعات التجارية",
+     "representing": "شركة أمواج للإستثمار العقاري والسياحي"
+    },
+    {
+     "nameArabic": "أ/ علاء الدين يحيي عطوه",
+     "role": "عضو مجلس الادارة",
+     "representing": "شركة أودن للإستثمارات المالية"
+    },
+    {
+     "nameArabic": "م/ هبه سعد زغلول الشمارقه",
+     "role": "عضو مجلس الادارة",
+     "representing": "شركة أودن للإستثمارات المالية"
+    },
+    {
+     "nameArabic": "أ/ يارا هاشم السيد هاشم",
+     "role": "عضو مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "م/ إيهاب إبراهيم فريد خميس",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "د/ أحمد أحمد صقر عاشور",
+     "role": "عضو مجلس الادارة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "شركة أودن للإستثمارات المالية",
+     "percent": 22.92,
+     "shares": 154054569,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "د/ هاشم السيد هاشم",
+     "percent": 2.853,
+     "shares": 19170978,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "م/ هشام سعد الشمارقة",
+     "percent": 0.075,
+     "shares": 505183,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ محمد يحي السيد",
+     "percent": 0.735,
+     "shares": 4941188,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ احمد كمال حافظ",
+     "percent": 0.735,
+     "shares": 4941188,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ رانيا عصام محمد",
+     "percent": 0.089,
+     "shares": 600000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ كريم هاشم السيد",
+     "percent": 0.116,
+     "shares": 781075,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ يارا هاشم السيد",
+     "percent": 0.045,
+     "shares": 300000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شركة صندوق المصريين للإستثمار العقاري",
+     "percent": 0.893,
+     "shares": 6000000,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "أ/ منى يحيى عبد الحميد أحمد",
+     "percent": 0.089,
+     "shares": 600190,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ شريف محمد شوق طه الكاتب",
+     "percent": 0.033,
+     "shares": 220026,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ ولاء محمد حسين أمين",
+     "percent": 0.031,
+     "shares": 210000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شركة أمواج للإستثمار العقاري والسياحي",
+     "percent": 17.34,
+     "shares": 116503877,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "أ/ عماد الدين عبد العظيم إبراهيم",
+     "percent": 0.216,
+     "shares": 1450571,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أ/ فوزي فؤاد بخيت نخلة إبراهيم",
+     "percent": 2.475,
+     "shares": 16635286,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مارتينا فوزي فؤاد بخيت نخله إبراهيم",
+     "percent": 1.743,
+     "shares": 11715199,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "فؤاد فوزي فؤاد بخيت",
+     "percent": 0.006,
+     "shares": 41324,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "فؤاد رمزي فؤاد بخيت نخله",
+     "percent": 0.186,
+     "shares": 1250000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "رمزي فؤاد بخيت نخله",
+     "percent": 0.631,
+     "shares": 4241800,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شوقي فؤاد بخيت نخله",
+     "percent": 0.126,
+     "shares": 845000,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": [
+    "بيتر فوزي فؤاد بخيت",
+    "كيرلس نصيف فؤاد بخيت نخله",
+    "يوسف نصيف فؤاد بخيت نخله",
+    "جيسيكا فؤاد فوزي فؤاد بخيت"
+   ]
+  },
+  "291450": {
+   "filingId": "291450",
+   "ticker": "EGCH",
+   "publishedAt": "2026-07-16T10:10:47",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341148_1.pdf",
+   "companyArabic": "شركة الصناعات الكيماوية المصرية \"كيما\"",
+   "asOfDate": "2026-06-30",
+   "totalShares": 1986578999.0,
+   "board": [
+    {
+     "nameArabic": "أ/ محمود منتصر إبراهيم",
+     "role": "رئيس مجلس الإدارة غير متفرغ",
+     "representing": "الشركة القابضة"
+    },
+    {
+     "nameArabic": "م/ سامح طلعت محمد حسن",
+     "role": "العضو المنتدب التنفيذي",
+     "representing": "الشركة القابضة"
+    },
+    {
+     "nameArabic": "محاسب/ أحمد فايز عبدالمحسن",
+     "role": "عضو معين غير متفرغ",
+     "representing": "الشركة القابضة"
+    },
+    {
+     "nameArabic": "أ/ محمد ياسين عبدالقادر",
+     "role": "عضو معين غير متفرغ",
+     "representing": "هيئة التأمينات"
+    },
+    {
+     "nameArabic": "أ/ عماد محمد الصاوى",
+     "role": "عضو معين غير متفرغ",
+     "representing": "هيئة التأمينات"
+    },
+    {
+     "nameArabic": "ك/ حجازى محمد حجازى",
+     "role": "عضو منتخب ممثل العاملين",
+     "representing": "ممثل العاملين"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "القابضة للصناعات الكيماوية",
+     "percent": 69.825,
+     "shares": 1387131513,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
+     "percent": 19.27,
+     "shares": 382824059,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "صندوق التأمين الاجتماعي للعاملين بقطاع الأعمال العام والخاص",
+     "percent": 0.94,
+     "shares": 18767325,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291453": {
+   "filingId": "291453",
+   "ticker": "MCRO",
+   "publishedAt": "2026-07-16T10:23:32",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341154_1.pdf",
+   "companyArabic": "ماكرو جروب للمستحضرات الطبية (ماكرو كابيتال) ش.م.م",
+   "asOfDate": "2026-06-30",
+   "totalShares": 3421238736.0,
+   "board": [
+    {
+     "nameArabic": "أحمد محمود أحمد محمد النايب",
+     "role": "رئيس مجلس الادارة",
+     "representing": "شركة ليو 1"
+    },
+    {
+     "nameArabic": "خالد مصطفى كامل",
+     "role": "العضو المنتدب",
+     "representing": "شركة ليو 1"
+    },
+    {
+     "nameArabic": "نوربرت لوررز",
+     "role": "نائب رئيس مجلس الادارة",
+     "representing": "شركة ليو 1"
+    },
+    {
+     "nameArabic": "تامر سعيد",
+     "role": "عضو مجلس الادارة",
+     "representing": "شركة ليو 1"
+    },
+    {
+     "nameArabic": "أحمد عز الدين محمود",
+     "role": "عضو مجلس الادارة",
+     "representing": "شركة ليو 1"
+    },
+    {
+     "nameArabic": "سامية بهي الدين البارودي",
+     "role": "عضو مجلس الادارة",
+     "representing": "مستقل"
+    },
+    {
+     "nameArabic": "سحر محمد على السلاب",
+     "role": "عضو مجلس الادارة",
+     "representing": "مستقل"
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "CHI CONSUMER HEALTHCARE INV",
+     "percent": 43.857,
+     "shares": 1500471628,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "RIMCO EGT INVESTMENT LLC",
+     "percent": 12.011,
+     "shares": 410952858,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "ENVERSON INTERNATIONAL COMPANY",
+     "percent": 10.573,
+     "shares": 361732092,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "احمد محمود احمد محمد النايب",
+     "percent": 1.099,
+     "shares": 37612200,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
   }
  },
  "refused": {

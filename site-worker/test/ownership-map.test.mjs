@@ -360,6 +360,34 @@ test('focusing a company seats its holders where they can be read', () => {
   assert.match(text(seats[0]), /one/);
 });
 
+test('an owner is drawn above the companies, so pressing one selects the owner', () => {
+  // The seats lived in the bridge layer, which is drawn first. Wherever a
+  // seat landed over another company's ring, that ring's own hit circle was
+  // on top and took the click: selecting an owner selected whatever company
+  // happened to be behind them.
+  const { svg } = draw({ focus: 'AAA' });
+  const order = svg.children.map((g) => g.attrs.class);
+  assert.ok(order.indexOf('om-seats') > order.indexOf('om-cos'),
+            `the seat layer is under the companies: ${order.join(' < ')}`);
+  // ...and every seat has to actually be IN it. Checking only the layer order
+  // let a seat be drawn into the bridge layer and still pass.
+  const layer = svg.children.find((g) => g.attrs.class === 'om-seats');
+  assert.equal(nodesWithClass(layer, 'om-seat').length,
+               nodesWithClass(svg, 'om-seat').length,
+               'a seat was drawn outside the seat layer');
+  assert.ok(nodesWithClass(layer, 'om-seat').length > 0, 'no seat was drawn');
+  assert.ok(typeof nodesWithClass(layer, 'om-seat')[0].events.click === 'function',
+            'the seat takes no click');
+
+  // The same for the other direction: a HOLDER in focus has a seat too.
+  const held = draw({ focus: 'one' }).svg;
+  const heldLayer = held.children.find((g) => g.attrs.class === 'om-seats');
+  assert.equal(nodesWithClass(heldLayer, 'om-seat').length,
+               nodesWithClass(held, 'om-seat').length,
+               'the owner\u2019s own seat was drawn outside the seat layer');
+  assert.equal(nodesWithClass(heldLayer, 'om-seat').length, 1);
+});
+
 test('a company shows where its holders are ALSO invested', () => {
   // "Who is in this company" is half answered until you can see where else
   // they are. `one` holds AAA and CCC.

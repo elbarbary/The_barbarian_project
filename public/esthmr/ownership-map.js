@@ -394,6 +394,11 @@ export function renderMap(svg, model, opts) {
   // reader needs before anything else, and 143 resting lines crossed it.
   const gLakeName = svgEl('g', { class: 'om-lake-names' }, svg);
   const gCo = svgEl('g', { class: 'om-cos' }, svg);
+  // Above the companies. The seats and their lines used to live in the bridge
+  // layer, which is drawn first — so wherever a seat landed over another
+  // company's ring, the ring's own hit circle was on top and took the click.
+  // Selecting an owner selected whatever company happened to be behind them.
+  const gSeat = svgEl('g', { class: 'om-seats' }, svg);
   const gDot = svgEl('g', { class: 'om-dots' }, svg);
   const gName = svgEl('g', { class: 'om-names' }, svg);
   const gPop = svgEl('g', { class: 'om-pop' }, svg);
@@ -523,13 +528,13 @@ export function renderMap(svg, model, opts) {
         'stroke-dasharray': changed ? '5 4' : null,
         'stroke-linecap': 'round', opacity: 0.85, class: 'om-bridge',
         'data-to': focus,
-      }, gBridge);
-      const travel = svgEl('circle', { r: 2.4, fill: colour, class: 'om-flow-dot' }, gBridge);
+      }, gSeat);
+      const travel = svgEl('circle', { r: 2.4, fill: colour, class: 'om-flow-dot' }, gSeat);
       svgEl('animateMotion', {
         dur: `${(2.1 + (i % 3) * 0.4).toFixed(2)}s`, repeatCount: 'indefinite', path: d,
       }, travel);
 
-      const g = svgEl('g', { class: 'om-seat', 'data-id': p.holder }, gBridge);
+      const g = svgEl('g', { class: 'om-seat', 'data-id': p.holder }, gSeat);
       svgEl('circle', {
         cx: seatAt.x, cy: seatAt.y, r: seatAt.r, fill: hueOf(p.holder),
         stroke: 'var(--surface)', 'stroke-width': 1.6,
@@ -555,7 +560,7 @@ export function renderMap(svg, model, opts) {
             d: onward.d, fill: 'none', stroke: hueOf(p.holder), 'stroke-width': 1.1,
             'stroke-linecap': 'round', opacity: 0.55, class: 'om-bridge om-bridge-onward',
             'data-to': q.ticker,
-          }, gBridge);
+          }, gSeat);
         });
     });
   }
@@ -600,10 +605,10 @@ export function renderMap(svg, model, opts) {
           'stroke-dasharray': changed ? '5 4' : null,
           'stroke-linecap': 'round', opacity: 0.88,
           class: `om-bridge${changed ? (grew ? ' om-bridge-up' : ' om-bridge-down') : ''}`,
-        }, gBridge);
+        }, gSeat);
         const travel = svgEl('circle', {
           r: 2.6, fill: colour, class: 'om-flow-dot',
-        }, gBridge);
+        }, gSeat);
         svgEl('animateMotion', {
           dur: `${(2.2 + (i % 3) * 0.35).toFixed(2)}s`,
           repeatCount: 'indefinite', path: d,
@@ -619,7 +624,7 @@ export function renderMap(svg, model, opts) {
         const w = label.length * 5.6 + 9;
         const tx = Math.min(view.w - w / 2 - 2, Math.max(w / 2 + 2, n.x));
         const ty = n.y + n.r + BAND / 2 + 12;
-        const tag = svgEl('g', { class: 'om-stake-tag' }, gBridge);
+        const tag = svgEl('g', { class: 'om-stake-tag' }, gSeat);
         svgEl('rect', {
           x: tx - w / 2, y: ty - 9, width: w, height: 12.5, rx: 6,
           fill: colour, opacity: 0.94,
@@ -640,7 +645,7 @@ export function renderMap(svg, model, opts) {
       });
 
       // Where the owner stands, drawn last so the spokes run under it.
-      const g = svgEl('g', { class: 'om-seat', 'data-id': focus }, gBridge);
+      const g = svgEl('g', { class: 'om-seat', 'data-id': focus }, gSeat);
       svgEl('circle', {
         cx: seat.x, cy: seat.y, r: seat.r, fill: hueOf(focus),
         stroke: 'var(--surface)', 'stroke-width': 2,

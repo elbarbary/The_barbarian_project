@@ -879,28 +879,43 @@ function renderOwnershipMap(doc, ar, t, component) {
     });
   }, { passive: false });
 
+  /* Pan, without eating the click.
+   *
+   * The capture used to be taken on pointerdown. `setPointerCapture` sends
+   * every later pointer event to the element that took it, so once the board
+   * was zoomed in the SVG swallowed them all and no company underneath ever
+   * saw a click — the one state where a reader most wants to press something.
+   *
+   * The capture is now taken only once the pointer has actually travelled far
+   * enough to be a pan. A press that does not move is a press.
+   */
+  const PAN_SLOP = 4;                 // CSS pixels before it counts as a drag
   let drag = null;
   svg.addEventListener('pointerdown', (e) => {
     if (!win || win.w >= board().w) return;      // nothing to pan at full fit
-    drag = { x: e.clientX, y: e.clientY, from: { ...win }, moved: false };
-    svg.setPointerCapture(e.pointerId);
+    drag = { x: e.clientX, y: e.clientY, from: { ...win }, moved: false, id: e.pointerId };
   });
   svg.addEventListener('pointermove', (e) => {
     if (!drag) return;
+    if (!drag.moved) {
+      if (Math.abs(e.clientX - drag.x) + Math.abs(e.clientY - drag.y) < PAN_SLOP) return;
+      drag.moved = true;
+      try { svg.setPointerCapture(drag.id); } catch { /* pointer already gone */ }
+    }
     const box = svg.getBoundingClientRect();
-    const dx = (e.clientX - drag.x) / box.width * win.w;
-    const dy = (e.clientY - drag.y) / box.height * win.h;
-    if (Math.abs(dx) + Math.abs(dy) > 2) drag.moved = true;
-    win.x = drag.from.x - dx;
-    win.y = drag.from.y - dy;
+    win.x = drag.from.x - (e.clientX - drag.x) / box.width * win.w;
+    win.y = drag.from.y - (e.clientY - drag.y) / box.height * win.h;
     applyWindow();
   });
   const endDrag = (e) => {
     if (!drag) return;
+    const moved = drag.moved;
+    if (moved) {
+      try { svg.releasePointerCapture(drag.id); } catch { /* already released */ }
+    }
+    drag = null;
     // A drag that moved is a pan, not a click on whatever was under the
     // finger when it stopped.
-    const moved = drag.moved;
-    drag = null;
     if (moved) e.stopPropagation();
   };
   svg.addEventListener('pointerup', endDrag);
