@@ -431,6 +431,16 @@ export function renderMap(svg, model, opts) {
   // the only things on the board still growing with the zoom.
   const sized = [];
   const sizes = (node, attr, base) => { sized.push({ node, attr, base }); return node; };
+  // And the lines themselves. `edgePath` starts a line at the ring's EDGE —
+  // `r + 4` from its centre — so shrinking the ring without redrawing the line
+  // leaves the line hanging in the water where the ring used to be. Every wire
+  // is kept with the two ends it joins so its path can be recut at the size
+  // the rings are actually drawn at.
+  const wires = [];
+  const wire = (node, from, to, bend, motion) => {
+    wires.push({ node, from, to, bend, motion });
+    return node;
+  };
 
   // What the focus is related to: a company lights its holders, a holder
   // lights every company they are in.
@@ -509,17 +519,18 @@ export function renderMap(svg, model, opts) {
         const to = nodes.get(b.tickers[i + 1]);
         if (!from || !to) continue;
         const { d } = edgePath(from, to, 0.16);
-        sizes(svgEl('path', {
+        const line = sizes(svgEl('path', {
           d, fill: 'none', stroke: hueOf(b.holder), 'stroke-width': 0.7,
           'stroke-linecap': 'round', opacity: 0.22, class: 'om-bridge om-bridge-rest',
         }, gBridge), 'stroke-width', 0.7);
         const drift = sizes(svgEl('circle', {
           r: 1.7, fill: hueOf(b.holder), opacity: 0.55, class: 'om-flow-dot',
         }, gBridge), 'r', 1.7);
-        svgEl('animateMotion', {
+        const motion = svgEl('animateMotion', {
           dur: `${(3.4 + ((i + b.tickers.length) % 4) * 0.6).toFixed(1)}s`,
           repeatCount: 'indefinite', path: d,
         }, drift);
+        wire(line, from, to, 0.16, motion);
       }
     });
   }
@@ -553,7 +564,7 @@ export function renderMap(svg, model, opts) {
       const changed = mv && finite(mv.change) && Math.abs(mv.change) > 0.0005;
       const colour = changed
         ? (mv.change > 0 ? 'var(--up)' : 'var(--down)') : hueOf(p.holder);
-      sizes(svgEl('path', {
+      const spoke = sizes(svgEl('path', {
         d, fill: 'none', stroke: colour, 'stroke-width': changed ? 1.8 : 1.5,
         'stroke-dasharray': changed ? '5 4' : null,
         'stroke-linecap': 'round', opacity: 0.85, class: 'om-bridge',
@@ -561,9 +572,10 @@ export function renderMap(svg, model, opts) {
       }, gSeat), 'stroke-width', changed ? 1.8 : 1.5);
       const travel = sizes(
         svgEl('circle', { r: 2.4, fill: colour, class: 'om-flow-dot' }, gSeat), 'r', 2.4);
-      svgEl('animateMotion', {
+      const run = svgEl('animateMotion', {
         dur: `${(2.1 + (i % 3) * 0.4).toFixed(2)}s`, repeatCount: 'indefinite', path: d,
       }, travel);
+      wire(spoke, seatAt, n, 0.08, run);
 
       const g = svgEl('g', { class: 'om-seat', 'data-id': p.holder }, gSeat);
       marks.push({ node: g, x: seatAt.x, y: seatAt.y });
@@ -588,11 +600,11 @@ export function renderMap(svg, model, opts) {
           const other = nodes.get(q.ticker);
           if (!other) return;
           const onward = edgePath(seatAt, other, 0.14);
-          sizes(svgEl('path', {
+          wire(sizes(svgEl('path', {
             d: onward.d, fill: 'none', stroke: hueOf(p.holder), 'stroke-width': 1.1,
             'stroke-linecap': 'round', opacity: 0.55, class: 'om-bridge om-bridge-onward',
             'data-to': q.ticker,
-          }, gSeat), 'stroke-width', 1.1);
+          }, gSeat), 'stroke-width', 1.1), seatAt, other, 0.14);
         });
     });
   }
@@ -641,10 +653,11 @@ export function renderMap(svg, model, opts) {
         const travel = sizes(svgEl('circle', {
           r: 2.6, fill: colour, class: 'om-flow-dot',
         }, gSeat), 'r', 2.6);
-        svgEl('animateMotion', {
+        const run = svgEl('animateMotion', {
           dur: `${(2.2 + (i % 3) * 0.35).toFixed(2)}s`,
           repeatCount: 'indefinite', path: d,
         }, travel);
+        wire(spoke, seat, n, 0.1, run);
         spoke.setAttribute('data-to', p.ticker);
 
         // The stake this line carries, at the end it arrives at. A line says
@@ -899,6 +912,15 @@ export function renderMap(svg, model, opts) {
     // width and the dot running along it are set instead.
     sized.forEach(({ node, attr, base }) => {
       node.setAttribute(attr, (base * m).toFixed(2));
+    });
+    // And its path is cut again against the rings at the size they are now
+    // drawn at, so both ends still meet what they join. The dot travelling
+    // along it is moved onto the new path too, or it runs down the old one.
+    wires.forEach(({ node, from, to, bend, motion }) => {
+      const at = (end) => ({ x: end.x, y: end.y, r: (end.r || 0) * m });
+      const { d } = edgePath(at(from), at(to), bend);
+      node.setAttribute('d', d);
+      if (motion) motion.setAttribute('path', d);
     });
   };
   return { rescale, marks: marks.length };

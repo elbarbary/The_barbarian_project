@@ -88,9 +88,15 @@ def read_structure_agy(pdf: pathlib.Path) -> dict | None:
             [str(named.AGY), "--dangerously-skip-permissions",
              "--add-dir", str(pdf.parent),
              "--model", "gemini-3.8-flash-low",
-             "--print-timeout", "5m",
+             # Ten, not five. A scan that reads in twenty-three seconds on a
+             # quiet machine returned nothing at all when five of these ran at
+             # once — the CLI prints what it has when the clock runs out, and
+             # with the model's turn still in progress that is an empty string.
+             # Thirty-five of fifty-three documents were lost that way and read
+             # perfectly on the next attempt.
+             "--print-timeout", "10m",
              "-p", f"Read the scanned PDF at {pdf}. {PROMPT}"],
-            capture_output=True, text=True, timeout=420, cwd=str(pdf.parent),
+            capture_output=True, text=True, timeout=700, cwd=str(pdf.parent),
         )
     except (subprocess.SubprocessError, OSError):
         return None

@@ -879,3 +879,62 @@ test('picking a company from the search brings the board to it', () => {
             'the window never moved to the company that was picked');
   assert.equal(c.state.ownershipFocus, ticker);
 });
+
+test('a line still touches the rings it joins after the board shrinks', () => {
+  // `edgePath` starts a line at the ring's EDGE — r + 4 from its centre. Shrink
+  // the ring without recutting the line and the line hangs in the water where
+  // the ring used to be: at a third of size, a thirty-unit gap between a
+  // company and every line that reaches it.
+  const model = board(ROWS);
+  const svg = document.createElementNS('', 'svg');
+  const handle = OM.renderMap(svg, model, {
+    holdings: HOLDINGS,
+    bridges: [{ holder: 'one', tickers: ['AAA', 'CCC'] },
+              { holder: 'three', tickers: ['DDD', 'EEE'] }],
+    moves: null, labelOf: (id) => id, onPick: () => {},
+    focus: null, t: (en) => en, ar: false,
+  });
+  const start = (node) => {
+    const [, x, y] = (node.attrs.d || '').match(/^M(-?[\d.]+) (-?[\d.]+)/) || [];
+    return { x: Number(x), y: Number(y) };
+  };
+  const lines = nodesWithClass(svg, 'om-bridge-rest');
+  assert.ok(lines.length > 0, 'no resting line to check');
+
+  const gapAt = (m) => {
+    handle.rescale(m);
+    return lines.map((line) => {
+      const head = start(line);
+      // The nearest company to that end, and how far the line stops short of
+      // the circle as it is actually drawn.
+      const near = [...model.nodes.values()]
+        .map((n) => ({ n, d: Math.hypot(n.x - head.x, n.y - head.y) }))
+        .sort((a, b) => a.d - b.d)[0];
+      return near.d - near.n.r * m;
+    });
+  };
+  // At full size the line starts 4 units clear of the ring, by design.
+  gapAt(1).forEach((gap) => assert.ok(Math.abs(gap - 4) < 0.01, `gap ${gap} at 1x`));
+  // And at a third of size it is still 4 units clear — not thirty.
+  gapAt(0.34).forEach((gap) => assert.ok(Math.abs(gap - 4) < 0.01, `gap ${gap} at 0.34x`));
+  gapAt(0.6).forEach((gap) => assert.ok(Math.abs(gap - 4) < 0.01, `gap ${gap} at 0.6x`));
+});
+
+test('the dot travelling a line is moved onto the line that was recut', () => {
+  const model = board(ROWS);
+  const svg = document.createElementNS('', 'svg');
+  const handle = OM.renderMap(svg, model, {
+    holdings: HOLDINGS,
+    bridges: [{ holder: 'one', tickers: ['AAA', 'CCC'] }],
+    moves: null, labelOf: (id) => id, onPick: () => {},
+    focus: null, t: (en) => en, ar: false,
+  });
+  const motions = all(svg, 'animateMotion');
+  const lines = nodesWithClass(svg, 'om-bridge-rest');
+  assert.ok(motions.length > 0 && lines.length > 0);
+  handle.rescale(0.5);
+  motions.forEach((motion) => {
+    assert.ok(lines.some((line) => line.attrs.d === motion.attrs.path),
+              'a travelling dot is still running down the old path');
+  });
+});
