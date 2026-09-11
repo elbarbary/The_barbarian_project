@@ -1587,6 +1587,10 @@
     "meaning": "This corporate action allocates EGP 1 billion in capital expenditures across the company's pharmaceutical production infrastructure and operational assets through 2027.",
     "meaning_ar": "يخصص هذا الإجراء المؤسسي مليار جنيه كمصروفات رأسمالية لتطوير البنية التحتية لإنتاج الأدوية والأصول التشغيلية للشركة حتى عام 2027."
   },
+  "الرييس السيسي يصل نيودلهي للمشاركه في اعمال القمه ال18 لتجمع «البريكس»": {
+    "meaning": "Participation in the BRICS summit connects Egypt to multilateral frameworks that utilise alternative trade settlement mechanisms, local currency clearing systems, and financing facilities through the New Development Bank.",
+    "meaning_ar": "تربط المشاركة في قمة «البريكس» مصر بأطر متعددة الأطراف تعتمد آليات بديلة لتسوية المعاملات التجارية، وأنظمة مقاصة بالعملات المحلية، وقنوات تمويلية عبر بنك التنمية الجديد."
+  },
   "الرييس السيسي يفتتح النسخه الثانيه من معرض العلمين الدولي للطيران والفضاء 2026": {
     "meaning": "International aviation and defense exhibitions serve as direct B2B platforms for commercial procurement agreements, defense contracting, technology transfer, and industrial partnership deals between global aerospace manufacturers and local entities.",
     "meaning_ar": "تعمل معارض الطيران والدفاع الدولية كمنصات مباشرة لإبرام صفقات الشراء التجاري، وعقود التوريد الدفاعي، ونقل التكنولوجيا، والشراكات الصناعية بين مصنعي الفضاء العالميين والجهات المحلية."
@@ -2118,6 +2122,10 @@
   "بروتوكول تعاون بين الرقابه الماليه والبريد المصري لاتاحه خدمه بريدي للمراسلات الرسميه الالكترونيه": {
     "meaning": "The protocol establishes a standardized digital infrastructure between the Financial Regulatory Authority and Egypt Post to automate official regulatory correspondence, thereby lowering operational transaction costs and accelerating communication workflows across the non-banking financial sector.",
     "meaning_ar": "يؤسس البروتوكول بنية تحتية رقمية موحدة بين الهيئة العامة للرقابة المالية والبريد المصري لأتمتة المراسلات الرسمية، مما يقلل التكاليف التشغيلية ويسرع الإجراءات الإدارية داخل القطاع المالي غير المصرفي."
+  },
+  "بروتوكول تعاون بين النقل والطيران لربط رحلات ايركايرو بالقطار الكهربايي السريع": {
+    "meaning": "The protocol establishes an intermodal transport integration system between Air Cairo flights and the high-speed electric rail network through unified ticketing and synchronized transit scheduling.",
+    "meaning_ar": "يؤسس البروتوكول منظومة ربط للنقل متعدد الوسائط بين رحلات شركة إير كايرو وشبكة القطار الكهربائي السريع عبر إصدار تذاكر موحدة وجدولة حركة الترانزيت."
   },
   "بريطانيا تحذر من تلاعب الذكاء الاصطناعي بسوق الكهرباء": {
     "meaning": "Automated algorithmic trading systems using artificial intelligence in wholesale electricity markets execute high-frequency bidding strategies, which triggers regulatory scrutiny over pricing mechanisms and physical capacity withholding.",
