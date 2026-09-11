@@ -2187,6 +2187,10 @@
     "meaning": "The protocol establishes a standardized digital infrastructure between the Financial Regulatory Authority and Egypt Post to automate official regulatory correspondence, thereby lowering operational transaction costs and accelerating communication workflows across the non-banking financial sector.",
     "meaning_ar": "يؤسس البروتوكول بنية تحتية رقمية موحدة بين الهيئة العامة للرقابة المالية والبريد المصري لأتمتة المراسلات الرسمية، مما يقلل التكاليف التشغيلية ويسرع الإجراءات الإدارية داخل القطاع المالي غير المصرفي."
   },
+  "بروتوكول تعاون بين النقل والطيران لربط رحلات اير كايرو بالقطار الكهربايي السريع": {
+    "meaning": "This agreement establishes an intermodal transport link integrating Air Cairo flight bookings with High-Speed Electric Train ticketing across shared transit hubs.",
+    "meaning_ar": "يؤسس هذا البروتوكول منظومة ربط للنقل متعدد الوسائط تدمج حجوزات رحلات شركة إير كايرو مع تذاكر القطار الكهربائي السريع عبر محطات تبادلية مشتركة."
+  },
   "بروتوكول تعاون بين النقل والطيران لربط رحلات ايركايرو بالقطار الكهربايي السريع": {
     "meaning": "The protocol establishes an intermodal transport integration system between Air Cairo flights and the high-speed electric rail network through unified ticketing and synchronized transit scheduling.",
     "meaning_ar": "يؤسس البروتوكول منظومة ربط للنقل متعدد الوسائط بين رحلات شركة إير كايرو وشبكة القطار الكهربائي السريع عبر إصدار تذاكر موحدة وجدولة حركة الترانزيت."
@@ -3796,6 +3800,10 @@
   "محمود محيي الدين: قيمه المدن الجديده تقاس بالنشاط الاقتصادي وفرص التنميه وليس بالمباني": {
     "meaning": "Urban development valuation and economic productivity derive from functional commercial operations, employment generation, and industrial capacity rather than physical construction volume alone.",
     "meaning_ar": "تتحدد القيمة الاقتصادية للمدن والتنمية العمرانية عبر حجم النشاط التجاري والإنتاجي والتشغيلي القائم بها، بدلاً من الاقتصار على حجم الكتلة البنائية والأصول الإنشائية."
+  },
+  "محيي الدين: مصر تحتاج خلال اسابيع برنامجا اقتصاديا جديدا يتجاوز اداره الموشرات الماليه والنقديه": {
+    "meaning": "The proposal refers to expanding economic policy beyond monetary and fiscal metrics, such as interest rates and budget deficits, to target real-sector structural shifts, including industrial capacity, regulatory conditions, and export infrastructure.",
+    "meaning_ar": "يشير المقترح إلى توسيع نطاق السياسات الاقتصادية ليتجاوز المؤشرات النقدية والمالية، مثل أسعار الفائدة وعجز الموازنة، ليركز على تعديلات هيكلية في القطاع الحقيقي تشمل الطاقة الصناعية، وتعديل البيئة التنظيمية، والبنية التحتية التصديرية."
   },
   "مخاوف الامدادات تدفع اسعار الغاز الاوروبيه لاعلي مستوي في 3 سنوات": {
     "meaning": "Perceived supply chain disruptions lead to elevated global natural gas benchmark prices, directly altering import costs for energy-dependent markets and operating costs for gas-intensive industrial sectors.",
