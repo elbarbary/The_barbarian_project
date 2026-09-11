@@ -689,7 +689,9 @@ button.om-holder-row:hover span { color: var(--accent); }
 
 /* Focus is expressed by fading everything else, so the thing you asked about
    keeps its own colour rather than gaining a highlight nothing else has. */
-.om-dim { opacity: .1; }
+/* Faded, not erased. At .1 a board of nine hundred dots went to a haze and
+   the sectors around the answer stopped being readable as context. */
+.om-dim { opacity: .17; }
 .om-co, .om-slice, .om-bridge { transition: opacity .18s ease; }
 .om-co, .om-hit { cursor: pointer; }
 .om-pin { cursor: pointer; }
@@ -697,7 +699,15 @@ button.om-holder-row:hover span { color: var(--accent); }
 /* A name read against a ring is not read. The plate is the page's own ground
    so the label sits on the board rather than in it. */
 .om-pin-plate { fill: var(--surface); stroke: var(--rule2); stroke-width: .7; }
-.om-moved-ring { pointer-events: none; }
+.om-moved-ring, .om-flow-dot, .om-move-line { pointer-events: none; }
+/* Motion is the direction of a holding, not decoration — but it is still
+   motion, and a reader who has asked their machine for less of it gets the
+   lines and the colours without the travelling dots. */
+@media (prefers-reduced-motion: reduce) {
+  .om-flow-dot { display: none; }
+}
+.om-seat { cursor: pointer; }
+.om-seat:hover circle { stroke: var(--accent); }
 
 @media (max-width: 900px) {
   .om-map-host { grid-template-columns: minmax(0, 1fr);

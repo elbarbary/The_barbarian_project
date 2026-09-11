@@ -110,7 +110,7 @@ export function layout(rows, view = VIEW) {
 
   const capVals = rows.map((r) => r.cap).filter((v) => finite(v) && v > 0);
   const capMax = capVals.length ? Math.max(...capVals) : 0;
-  const radius = (cap) => (finite(cap) && cap > 0 && capMax > 0
+  const radiusOf = (cap) => (finite(cap) && cap > 0 && capMax > 0
     ? R_MIN + Math.sqrt(cap / capMax) * (R_MAX - R_MIN)
     : R_MIN);
 
@@ -119,32 +119,100 @@ export function layout(rows, view = VIEW) {
   cells.forEach((cell) => {
     const list = cell.list.slice().sort((a, b) => (b.disclosed - a.disclosed) || (b.cap - a.cap));
     const inner = { x: cell.x, y: cell.y + CELL_LABEL, w: cell.w, h: cell.h - CELL_LABEL };
-    // Columns chosen so the slots come out near square, which is what keeps a
-    // ring from being clipped by a slot that is tall and thin.
-    const cols = Math.max(1, Math.min(list.length,
-      Math.round(Math.sqrt(list.length * (inner.w / Math.max(inner.h, 1)))) || 1));
-    const outRows = Math.ceil(list.length / cols);
-    const slotW = inner.w / cols;
-    const slotH = inner.h / outRows;
-    const room = Math.max(6, Math.min(slotW, slotH) / 2 - 9);
-    list.forEach((r, i) => {
-      const col = i % cols;
-      const row = Math.floor(i / cols);
-      // The last row is centred rather than left-aligned, so a sector of five
-      // in a three-wide grid does not hang two rings off one edge.
-      const inRow = Math.min(cols, list.length - row * cols);
-      const offset = (cols - inRow) * slotW / 2;
-      const node = {
-        ...r,
-        x: inner.x + offset + slotW * (col + 0.5),
-        y: inner.y + slotH * (row + 0.5),
-        r: Math.min(room, radius(r.cap)),
-        hasCap: finite(r.cap) && r.cap > 0,
-      };
-      nodes.set(r.ticker, node);
-      placed.push(node);
+    const cx = inner.x + inner.w / 2;
+    const cy = inner.y + inner.h / 2;
+
+    /* A sector is a ring of its companies, not a grid of them.
+     *
+     * The grid read as a spreadsheet: rows and columns say "row 2, column 3",
+     * which is nothing about a sector. A ring says "these belong together" and
+     * leaves the middle clear, which is where the sector's name now sits and
+     * where a spoke can cross without landing on a company.
+     *
+     * The radius is whatever fits the cell, and the ring holds as many as can
+     * stand on it without touching. Past that they go on a second ring inside
+     * the first, still ordered by disclosed ownership, so a sector of thirty
+     * is two rings rather than a crowd.
+     */
+    const spread = Math.min(inner.w, inner.h) / 2;
+
+    /* A sector is a ring of its companies, not a grid of them.
+     *
+     * The grid read as a spreadsheet: "row 2, column 3" says nothing about a
+     * sector. A ring says these belong together and leaves the middle clear —
+     * which is where the sector's name sits and where a spoke can cross
+     * without landing on a company.
+     *
+     * Rings are laid outside-in with a fixed gap, and only ONE company may
+     * stand at the centre. An earlier version dropped everything that did not
+     * fit into a ring of radius zero, which is not a ring: eleven companies
+     * shared a point, and ICMI overlapped KASABF by nine pixels.
+     */
+    const rings = [];
+    let left = list.slice();
+    // Enough rings for everything, spaced evenly. A cell holding a whole
+    // exchange gets many thin rings rather than one impossible circle; the
+    // companies come out small, which is honest about the room they have.
+    const perRing = (r) => Math.max(3, Math.floor((TAU * r) / (R_MIN * 1.7)));
+    let ringCount = 1;
+    while (ringCount < 24) {
+      let room = 0;
+      for (let k = 0; k < ringCount; k += 1) {
+        room += perRing(spread * 0.64 * (1 - k / (ringCount + 0.6)));
+      }
+      if (room >= list.length - 1) break;      // -1: one may sit at the centre
+      ringCount += 1;
+    }
+    for (let k = 0; k < ringCount && left.length; k += 1) {
+      const r = spread * 0.64 * (1 - k / (ringCount + 0.6));
+      if (left.length === 1 && k > 0) break;   // the last one takes the middle
+      const take = Math.min(left.length, perRing(r));
+      rings.push({ radius: r, list: left.slice(0, take) });
+      left = left.slice(take);
+    }
+    if (left.length) rings.push({ radius: 0, list: left.slice(0, 1) });
+    if (left.length > 1) rings[rings.length - 1].list = left;   // nowhere else
+
+    rings.forEach((ring, depth) => {
+      const step = ring.list.length ? TAU / ring.list.length : TAU;
+      const nextIn = rings[depth + 1] ? rings[depth + 1].radius : 0;
+      const inner_r = depth > 0 ? rings[depth - 1].radius : null;
+      // Half the gap to the ring OUTSIDE this one as well. Capping only
+      // against the ring inside let a wide innermost node meet a wide node on
+      // the ring above it wherever their angles happened to line up — which
+      // on the published board they nearly did, at 0.7px.
+      const outward = inner_r === null ? Infinity : (inner_r - ring.radius) / 2 - 2;
+      // The tightest of: half the chord to its neighbour on this ring, half
+      // the gap to the ring inside, and the distance to the cell's edge.
+      // Geometry decides the size, with only a hair of floor: a node that has
+      // to be three pixels to avoid touching its neighbour is drawn at three
+      // pixels. Flooring it higher draws a lie about the room a sector has.
+      const room = ring.radius === 0
+        ? Math.max(1, Math.min(inner_r === null ? spread : inner_r - 2,
+                               outward === Infinity ? spread : outward * 2))
+        : Math.max(1, Math.min(
+          ring.list.length > 1 ? Math.sin(Math.PI / ring.list.length) * ring.radius - 2 : spread,
+          (ring.radius - nextIn) / 2 - 2,
+          outward,
+          spread - ring.radius - 2));
+      ring.list.forEach((r, i) => {
+        // Start at the top and go clockwise, so the largest disclosed holding
+        // in a sector is the first thing read.
+        const angle = -Math.PI / 2 + i * step;
+        const node = {
+          ...r,
+          x: ring.radius === 0 ? cx : cx + Math.cos(angle) * ring.radius,
+          y: ring.radius === 0 ? cy : cy + Math.sin(angle) * ring.radius,
+          r: Math.max(6, Math.min(room, radiusOf(r.cap))),
+          hasCap: finite(r.cap) && r.cap > 0,
+          sectorAt: { x: cx, y: cy },
+        };
+        nodes.set(r.ticker, node);
+        placed.push(node);
+      });
     });
   });
+
   return { cells, nodes, placed, view };
 }
 
@@ -275,6 +343,13 @@ export function fitText(node, text, room, ar) {
   return node;
 }
 
+/* A stake, as text. One place, because it was three: the tag on the board
+ * said `<0.01%`, the dot's own tooltip said `0.00%`, and the panel beside
+ * them said `0.00%` — all about the same three thousandths of a company. */
+export const stakeText = (v) => (v > 0 && v < 0.01
+  ? '<0.01%'
+  : `${(v || 0).toFixed(2)}%`);
+
 const compact = (v) => (finite(v) && v > 0
   ? new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(v)
   : '—');
@@ -330,56 +405,115 @@ export function renderMap(svg, model, opts) {
     fitText(label, ar ? cell.sector : cell.sector.toUpperCase(), cell.w - 14, ar);
   });
 
-  // ── a holder who is in more than one company ──────────────────────────────
-  //
-  // Only for the holder in focus. Drawn for everyone at rest they were a
-  // hundred and nineteen curves across twenty-five sector cells — a texture
-  // rather than a fact. One holder's spokes, on request, are the fact.
-  bridges.filter((b) => focus && b.holder === focus).forEach((b) => {
-    for (let i = 0; i < b.tickers.length - 1; i += 1) {
-      const a = nodes.get(b.tickers[i]);
-      const c = nodes.get(b.tickers[i + 1]);
-      if (!a || !c) continue;
-      const { d } = edgePath(a, c);
-      svgEl('path', {
-        d, fill: 'none', stroke: hueOf(b.holder), 'stroke-width': 1.6,
-        'stroke-linecap': 'round', opacity: 0.8, class: 'om-bridge',
-      }, gBridge);
-    }
-  });
-
-  /* A line between two companies says they are connected and nothing else —
-   * not who holds whom, and not how much. So when a holder is in focus, each
-   * company they hold is tagged with the stake they hold of it, and the tag
-   * carries the holder's own colour. Read together the board says "this party,
-   * this much of this company", which is the sentence the curve was standing
-   * in for.
+  /* Owner, and owned.
+   *
+   * A holder has a dot at every company they hold, because a stake is a
+   * percentage of ONE company and there is no point on this board that means
+   * "everything they own". But when one holder is asked about, the question
+   * changes from "what is in this company" to "what does this person hold",
+   * and for that they need somewhere to stand: a single node, with a line to
+   * each company, each line tagged with the stake it carries.
+   *
+   * The travelling dot is the direction. A line between two things says they
+   * are related; a dot leaving the owner and arriving at the company says
+   * which way the holding runs. It is suppressed for readers who have asked
+   * their machine for less motion.
    */
-  if (focus) {
-    holdings.filter((p) => p.holder === focus && p.percent > 0).forEach((p) => {
-      const n = nodes.get(p.ticker);
-      if (!n) return;
-      // A stake read down to three thousandths of a company is not zero, and
-      // "0.00%" says it is. El Hosn's 0.003% of UNIP is the real figure.
-      const label = p.percent < 0.01 ? '<0.01%'
-        : `${p.percent.toFixed(p.percent < 10 ? 2 : 1)}%`;
-      const w = label.length * 5.6 + 9;
-      const x = Math.min(view.w - w / 2 - 2, Math.max(w / 2 + 2, n.x));
-      const y = n.y + n.r + BAND / 2 + 13;
-      const g = svgEl('g', { class: 'om-stake-tag' }, gBridge);
-      svgEl('rect', {
-        x: x - w / 2, y: y - 9, width: w, height: 12.5, rx: 6,
-        fill: hueOf(focus), opacity: 0.94,
+  const owned = focus ? holdings.filter((p) => p.holder === focus && p.percent > 0) : [];
+  let seat = null;
+  if (owned.length) {
+    const ends = owned.map((p) => nodes.get(p.ticker)).filter(Boolean);
+    if (ends.length) {
+      // Where the owner stands: the middle of what they hold, pushed off any
+      // company that happens to be there.
+      let sx = ends.reduce((t, n) => t + n.x, 0) / ends.length;
+      let sy = ends.reduce((t, n) => t + n.y, 0) / ends.length;
+      const clash = model.placed.find((n) => Math.hypot(n.x - sx, n.y - sy) < n.r + 24);
+      if (clash) {
+        const away = Math.hypot(sx - clash.x, sy - clash.y) || 1;
+        sx = clash.x + ((sx - clash.x) / away) * (clash.r + 26);
+        sy = clash.y + ((sy - clash.y) / away) * (clash.r + 26);
+      }
+      seat = {
+        x: Math.max(60, Math.min(view.w - 60, sx)),
+        y: Math.max(26, Math.min(view.h - 26, sy)),
+        r: 9,
+      };
+      ends.forEach((n, i) => {
+        const p = owned[i];
+        const { d } = edgePath(seat, n, 0.1);
+        /* A line that CHANGED in the chosen week is drawn as a change:
+         * dashed, and green or red for the direction it went. A holding that
+         * did not move that week stays solid in the holder's own colour.
+         *
+         * An earlier attempt drew a separate dashed line per move, from the
+         * holder's dot to the ring it already orbits — ten pixels of line
+         * between two things that were touching. A line has to go somewhere.
+         */
+        const mv = moves && moves.get(keyOf(focus, p.ticker));
+        const changed = mv && finite(mv.change) && Math.abs(mv.change) > 0.0005;
+        const grew = changed && mv.change > 0;
+        const colour = changed ? (grew ? 'var(--up)' : 'var(--down)') : hueOf(focus);
+        const spoke = svgEl('path', {
+          d, fill: 'none', stroke: colour, 'stroke-width': changed ? 1.9 : 1.7,
+          'stroke-dasharray': changed ? '5 4' : null,
+          'stroke-linecap': 'round', opacity: 0.88,
+          class: `om-bridge${changed ? (grew ? ' om-bridge-up' : ' om-bridge-down') : ''}`,
+        }, gBridge);
+        const travel = svgEl('circle', {
+          r: 2.6, fill: colour, class: 'om-flow-dot',
+        }, gBridge);
+        svgEl('animateMotion', {
+          dur: `${(2.2 + (i % 3) * 0.35).toFixed(2)}s`,
+          repeatCount: 'indefinite', path: d,
+        }, travel);
+        spoke.setAttribute('data-to', p.ticker);
+
+        // The stake this line carries, at the end it arrives at. A line says
+        // two things are related; the tag says how much of which.
+        //
+        // A stake read down to three thousandths of a company is not zero,
+        // and "0.00%" says it is.
+        const label = stakeText(p.percent);
+        const w = label.length * 5.6 + 9;
+        const tx = Math.min(view.w - w / 2 - 2, Math.max(w / 2 + 2, n.x));
+        const ty = n.y + n.r + BAND / 2 + 12;
+        const tag = svgEl('g', { class: 'om-stake-tag' }, gBridge);
+        svgEl('rect', {
+          x: tx - w / 2, y: ty - 9, width: w, height: 12.5, rx: 6,
+          fill: colour, opacity: 0.94,
+        }, tag);
+        const text = svgEl('text', {
+          x: tx, y: ty, 'text-anchor': 'middle', 'font-size': 8.5,
+          'font-weight': 600, fill: 'var(--surface)', direction: 'ltr',
+        }, tag);
+        text.textContent = label;
+        const title = svgEl('title', {}, tag);
+        title.textContent = changed
+          ? t(`${labelOf(focus)} holds ${p.percent}% of ${p.ticker}, `
+              + `${grew ? 'up' : 'down'} ${Math.abs(mv.change).toFixed(2)} points that week`,
+              `${labelOf(focus)} يملك ${p.percent}٪ من ${p.ticker}، `
+              + `${grew ? 'بزيادة' : 'بنقصان'} ${Math.abs(mv.change).toFixed(2)} نقطة ذلك الأسبوع`)
+          : t(`${labelOf(focus)} holds ${p.percent}% of ${p.ticker}`,
+              `${labelOf(focus)} يملك ${p.percent}٪ من ${p.ticker}`);
+      });
+
+      // Where the owner stands, drawn last so the spokes run under it.
+      const g = svgEl('g', { class: 'om-seat', 'data-id': focus }, gBridge);
+      svgEl('circle', {
+        cx: seat.x, cy: seat.y, r: seat.r, fill: hueOf(focus),
+        stroke: 'var(--surface)', 'stroke-width': 2,
       }, g);
-      const text = svgEl('text', {
-        x, y, 'text-anchor': 'middle', 'font-size': 8.5, 'font-weight': 600,
-        fill: 'var(--surface)', direction: 'ltr',
+      const who = svgEl('text', {
+        x: seat.x, y: seat.y - seat.r - 6, 'text-anchor': 'middle',
+        'font-size': 10, 'font-weight': 600, fill: 'var(--ink)', direction: 'ltr',
       }, g);
-      text.textContent = label;
-      const title = svgEl('title', {}, g);
-      title.textContent = t(`${labelOf(focus)} holds ${p.percent}% of ${p.ticker}`,
-                            `${labelOf(focus)} يملك ${p.percent}٪ من ${p.ticker}`);
-    });
+      const full = labelOf(focus);
+      who.textContent = full.length > 30 ? `${full.slice(0, 28)}…` : full;
+      const seatTitle = svgEl('title', {}, g);
+      seatTitle.textContent = full;
+      g.addEventListener('click', (e) => { e.stopPropagation(); onPick(focus); });
+    }
   }
 
   // ── the companies ─────────────────────────────────────────────────────────
@@ -503,7 +637,7 @@ export function renderMap(svg, model, opts) {
       stroke: 'var(--surface)', 'stroke-width': 1,
     }, g);
     const title = svgEl('title', {}, g);
-    title.textContent = `${labelOf(dot.holder)} — ${dot.percent.toFixed(2)}% ${t('of', 'من')} ${dot.ticker}`;
+    title.textContent = `${labelOf(dot.holder)} — ${stakeText(dot.percent)} ${t('of', 'من')} ${dot.ticker}`;
     g.addEventListener('click', (e) => { e.stopPropagation(); onPick(dot.holder); });
   });
 
@@ -518,7 +652,7 @@ export function renderMap(svg, model, opts) {
     'text-anchor': 'middle', 'font-size': 9.5, fill: 'var(--ink)', direction: 'ltr',
   }, hover);
   const nameAt = (dot) => {
-    const label = `${dot.percent.toFixed(2)}%  ${labelOf(dot.holder)}`;
+    const label = `${stakeText(dot.percent)}  ${labelOf(dot.holder)}`;
     hoverText.textContent = label;
     const w = (typeof hoverText.getComputedTextLength === 'function'
       && hoverText.getComputedTextLength() > 0)
@@ -554,13 +688,11 @@ export function renderMap(svg, model, opts) {
   //
   // Names only for the focused company, and only then. Sixty-six of them
   // permanently on the board would bury the board.
+  // Only for a company. A HOLDER in focus is already answered by the seat,
+  // its spokes and the stake tag at each end; pinning the same name again
+  // beside every company said it twice.
   if (focus && nodes.has(focus)) {
     popOut(gPop, nodes.get(focus), (byTicker.get(focus) || []), labelOf, onPick, view);
-  } else if (focus) {
-    holdings.filter((p) => p.holder === focus).forEach((p) => {
-      const n = nodes.get(p.ticker);
-      if (n) popOut(gPop, n, [p], labelOf, onPick, view);
-    });
   }
 }
 

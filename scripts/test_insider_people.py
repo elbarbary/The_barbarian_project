@@ -349,19 +349,84 @@ class TheRegister(unittest.TestCase):
         seat = doc["boards"][0]["seats"][0]
         self.assertEqual(seat["holder"], doc["positions"][0]["holder"])
 
-    def test_a_company_owned_twice_over_is_declared_rather_than_scaled(self):
-        doc = build(
-            [reading("1", "القلعة للاستشارات المالية", "ASCM", "2026-08-17", 55.0, 50.76)],
-            books=[register("ASCM", [("Citadel Capital", 53.35),
-                                     ("Financial Holdings International LTD", 15.83)])])
+    def test_a_register_that_contradicts_itself_is_declared_rather_than_scaled(self):
+        # Two names inside ONE register, adding to more than the company.
+        # Nothing can adjudicate that — both came from the same document, so
+        # there is no better document to prefer. It is published as the
+        # contradiction it is, and the map marks the ring.
+        doc = build([], books=[register("ASCM", [("Citadel Capital", 60.0),
+                                                 ("القلعة للاستشارات المالية", 50.76)])])
         self.assertEqual([(r["ticker"], r["holders"]) for r in doc["overDisclosed"]],
-                         [("ASCM", 3)])
+                         [("ASCM", 2)])
         self.assertGreater(doc["overDisclosed"][0]["percent"], 100)
+        self.assertEqual(doc["supersededByRegister"], [],
+                         "there is no trade form here to set aside")
 
     def test_a_company_that_adds_up_is_not_declared(self):
         doc = build([], books=[register("AALR", [("سعيد محمد على حسن", 41.5),
                                                  ("محمود عاطف محمود عيسي", 12.0)])])
         self.assertEqual(doc["overDisclosed"], [])
+
+
+class OnePartyTwoAlphabets(unittest.TestCase):
+    """`Citadel Capital` and `القلعة للاستشارات المالية` are one firm.
+
+    القلعة IS citadel. A translation is not a transliteration and no folding
+    of letters reaches from one to the other, so the names cannot settle it.
+    What settles it is the kind of document: a register enumerates a company's
+    holders in one internally consistent filing, and a trade form names one
+    party and says nothing about who else holds.
+    """
+
+    def _both(self, register_pct, trade_pct):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            store, books = root / "store.json", root / "books.json"
+            out, companies_file = root / "out.json", root / "companies.json"
+            store.write_text(json.dumps({"readings": {"1": reading(
+                "1", "القلعة للاستشارات المالية", "ASCM", "2026-08-17",
+                trade_pct + 2.6, trade_pct)}}), encoding="utf-8")
+            books.write_text(json.dumps({"readings": {"9": {
+                "filingId": "9", "ticker": "ASCM", "asOfDate": "2026-06-30",
+                "publishedAt": "2026-07-01T00:00:00", "source": "x",
+                "totalShares": None, "board": [],
+                "shareholders": [
+                    {"nameArabic": "Citadel Capital", "percent": register_pct},
+                    {"nameArabic": "Financial Holdings International LTD",
+                     "percent": 15.83},
+                ],
+            }}}), encoding="utf-8")
+            companies_file.write_text(json.dumps({"companies": []}), encoding="utf-8")
+            saved = (bip.STORE, bip.REGISTERS, bip.OUT, bip.FIXTURE, bip.COMPANIES)
+            bip.STORE, bip.REGISTERS, bip.OUT = store, books, out
+            bip.COMPANIES = companies_file
+            bip.FIXTURE = root / "missing" / "fixture.json"
+            try:
+                with contextlib.redirect_stdout(io.StringIO()):
+                    bip.main([])
+                return json.loads(out.read_text(encoding="utf-8"))
+            finally:
+                bip.STORE, bip.REGISTERS, bip.OUT, bip.FIXTURE, bip.COMPANIES = saved
+
+    def test_the_register_wins_when_both_cannot_be_true(self):
+        doc = self._both(53.35, 50.76)          # 119.94% between them
+        held = sum(p["percent"] for p in doc["positions"] if p["ticker"] == "ASCM")
+        self.assertLessEqual(held, 100.0001)
+        self.assertEqual([p["holder"] for p in doc["positions"]
+                          if p["basis"] == "trade"], [])
+
+    def test_what_was_set_aside_is_published_with_its_reason(self):
+        doc = self._both(53.35, 50.76)
+        aside = doc["supersededByRegister"]
+        self.assertEqual([x["holder"] for x in aside], ["القلعة للاستشارات المالية"])
+        self.assertIn("119.94%", aside[0]["why"])
+
+    def test_a_trade_the_register_leaves_room_for_is_kept(self):
+        # Below the disclosure threshold, or acquired after the register was
+        # filed. Nothing contradicts it, so nothing is set aside.
+        doc = self._both(20.0, 9.0)             # 44.83% between them
+        self.assertIn("trade", [p["basis"] for p in doc["positions"]])
+        self.assertEqual(doc["supersededByRegister"], [])
 
 
 class TheAudit(unittest.TestCase):

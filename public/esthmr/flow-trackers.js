@@ -757,7 +757,11 @@ function renderOwnershipMap(doc, ar, t, component) {
   host.append(strip, stage, side);
   slot.appendChild(host);
 
-  let week = null;          // null is the standing board with nothing lit
+  // The chosen week lives in the component for the same reason focus does:
+  // picking a holder scopes the list below, which is a `setState`, which
+  // rebuilds this panel. Left in the closure, choosing a week and then a
+  // holder snapped the board back to Standing and the spokes came out solid.
+  let week = st.ownershipWeek || null;   // null is the standing board
   // Focus lives in the component, not in this closure.
   //
   // Picking a company also scopes the disclosure list below, and that is a
@@ -790,7 +794,11 @@ function renderOwnershipMap(doc, ar, t, component) {
       small.textContent = sub;
       b.appendChild(small);
     }
-    b.addEventListener('click', () => { stop(); week = key; paint(); });
+    b.addEventListener('click', () => {
+      stop(); week = key;
+      component.state.ownershipWeek = week;   // survives the next re-render
+      paint();
+    });
     buttons.push(b);
     strip.appendChild(b);
     return b;
@@ -993,6 +1001,9 @@ function renderOwnershipMap(doc, ar, t, component) {
    * league table.
    */
   const collator = new Intl.Collator(ar ? 'ar' : 'en', { sensitivity: 'base' });
+  // The map's own formatter, so the board and the panel beside it cannot
+  // disagree about the same holding.
+  const stake = OM.stakeText;
   const everyHolder = [...new Set(positions.filter((p) => p.percent > 0)
                                            .map((p) => p.holder))]
     .map((id) => ({
@@ -1070,7 +1081,7 @@ function renderOwnershipMap(doc, ar, t, component) {
                                         .map((p) => p.ticker))];
       if (mine.length === 1) [ticker] = mine;
     }
-    const patch = { ownershipFocus: focus, ownershipNamed: named };
+    const patch = { ownershipFocus: focus, ownershipNamed: named, ownershipWeek: week };
     if ((component.state.ownershipTicker || '') !== ticker) {
       patch.ownershipTicker = ticker;
       patch.ownershipPage = 0;
@@ -1111,7 +1122,7 @@ function renderOwnershipMap(doc, ar, t, component) {
         colour: OM.hueOf(h.holder),
         title: labelOf(h.holder),
         sub: `${h.asOf} · ${basisWord(h.basis)}`,
-        right: `${h.percent.toFixed(2)}%`,
+        right: stake(h.percent),
         on: named && named.holder === h.holder && named.ticker === h.ticker,
         onClick: () => {
           named = { holder: h.holder, ticker: h.ticker };
@@ -1160,7 +1171,7 @@ function renderOwnershipMap(doc, ar, t, component) {
         colour: OM.hueOf(focus),
         title: `${p.ticker} · ${(co[p.ticker] && co[p.ticker].name) || ''}`,
         sub: `${p.asOf} · ${basisWord(p.basis)}`,
-        right: `${p.percent.toFixed(2)}%`,
+        right: stake(p.percent),
         on: named && named.ticker === p.ticker,
         onClick: () => { named = { holder: focus, ticker: p.ticker }; paint(); },
       }));
@@ -1253,7 +1264,7 @@ function renderOwnershipMap(doc, ar, t, component) {
             ? `  ${mv.change > 0 ? '+' : ''}${mv.change.toFixed(2)}` : '';
           row(el, OM.hueOf(p.holder),
               `${labelOf(p.holder)} · ${p.asOf}`,
-              `${p.percent.toFixed(2)}%${change}`,
+              `${stake(p.percent)}${change}`,
               () => { focus = p.holder; paint(); });
         });
       });
@@ -1285,7 +1296,7 @@ function renderOwnershipMap(doc, ar, t, component) {
         mine.slice().sort((a, b) => b.percent - a.percent).forEach((p) => {
           row(el, OM.hueOf(focus),
               `${p.ticker} · ${(co[p.ticker] && co[p.ticker].name) || ''}`,
-              `${p.percent.toFixed(2)}%`,
+              stake(p.percent),
               () => { focus = p.ticker; paint(); });
         });
       });

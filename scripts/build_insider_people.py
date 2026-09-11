@@ -326,6 +326,50 @@ def main(argv=None) -> int:
                 "openingPercent": (standing or {}).get("openingPercent"),
                 "history": (standing or {}).get("history") or [],
             }
+    # ── one party, two alphabets ─────────────────────────────────────────────
+    #
+    # `Citadel Capital` in ASEC Mining's filed register and `القلعة للاستشارات
+    # المالية` in a post-execution form are the same firm. القلعة IS citadel —
+    # a translation, not a transliteration, and no folding of letters reaches
+    # from one to the other. Counted apart they gave ASEC Mining 119.94% of
+    # itself. Upper Egypt Mills the same, at 108.40%.
+    #
+    # Nothing in the two names can prove they are one party, so the names are
+    # not what decides it. A REGISTER is different in kind from a trade form:
+    # it enumerates a company's holders at a date, in one document, internally
+    # consistent. A trade form names one party and says nothing about who else
+    # holds. So where a company has filed a register, and adding the
+    # trade-named holders it does not list would make the company more than
+    # wholly owned, the register is kept and those positions are set aside —
+    # published as superseded rather than deleted, because a reader who can
+    # see both names can see what happened, and we cannot say which is which.
+    superseded = []
+    by_company = collections.defaultdict(list)
+    for position in held.values():
+        by_company[position["ticker"]].append(position)
+    for ticker, rows_here in by_company.items():
+        if ticker not in books:
+            continue
+        from_register = [p for p in rows_here if p["basis"] == "register"]
+        from_trades = [p for p in rows_here if p["basis"] != "register"]
+        if not from_register or not from_trades:
+            continue
+        total = sum(p["percent"] or 0 for p in rows_here)
+        if total <= 100.0001:
+            continue
+        for position in from_trades:
+            del held[(position["holder"], ticker)]
+            superseded.append({
+                "holder": position["holder"],
+                "ticker": ticker,
+                "percent": position["percent"],
+                "asOf": position["asOf"],
+                "filingId": position["filingId"],
+                "why": (f"the filed register for {ticker} does not list this "
+                        f"name, and counting both made the company "
+                        f"{total:.2f}% owned"),
+            })
+
     positions = sorted(held.values(),
                        key=lambda p: (-(p["percent"] or 0), p["ticker"]))
 
@@ -440,6 +484,7 @@ def main(argv=None) -> int:
         "aliasCount": sum(len(r["aliases"] or ()) for r in rows),
         "registerCount": len(books),
         "overDisclosed": over,
+        "supersededByRegister": superseded,
         "seatCount": sum(len(b["seats"]) for b in boards),
         "people": rows,
         "positions": positions,

@@ -145,6 +145,42 @@ test('a holder who has since sold out still shows the week they moved', () => {
   assert.ok(!/NaN/.test(arcs[0].attrs.d));
 });
 
+test('a holding that moved this week is drawn as a change, not as a holding', () => {
+  const { svg } = draw({
+    focus: 'one',
+    moves: new Map([
+      [OM.keyOf('one', 'AAA'), { holder: 'one', ticker: 'AAA', change: -2.4 }],
+      [OM.keyOf('one', 'CCC'), { holder: 'one', ticker: 'CCC', change: 1.8 }],
+    ]),
+  });
+  const spokes = nodesWithClass(svg, 'om-bridge');
+  assert.equal(spokes.length, 2);
+  assert.ok(spokes.every((l) => l.attrs['stroke-dasharray']), 'a change is dashed');
+  assert.deepEqual(spokes.map((l) => l.attrs.stroke).sort(),
+                   ['var(--down)', 'var(--up)']);
+});
+
+test('a holding that did not move keeps the holder\u2019s own colour, solid', () => {
+  const { svg } = draw({
+    focus: 'one',
+    moves: new Map([[OM.keyOf('one', 'AAA'), { holder: 'one', ticker: 'AAA', change: -2.4 }]]),
+  });
+  const solid = nodesWithClass(svg, 'om-bridge')
+    .filter((l) => !l.attrs['stroke-dasharray']);
+  assert.equal(solid.length, 1, 'CCC did not move that week');
+  assert.equal(solid[0].attrs.stroke, OM.hueOf('one'));
+});
+
+test('the tag takes the colour of the line it ends, so the two agree', () => {
+  const { svg } = draw({
+    focus: 'one',
+    moves: new Map([[OM.keyOf('one', 'AAA'), { holder: 'one', ticker: 'AAA', change: -2.4 }]]),
+  });
+  const fills = nodesWithClass(svg, 'om-stake-tag')
+    .map((g) => g.children.find((c) => c.tag === 'rect').attrs.fill).sort();
+  assert.deepEqual(fills, [OM.hueOf('one'), 'var(--down)'].sort());
+});
+
 test('a stake that grew is marked apart from one that shrank', () => {
   const { svg } = draw({
     moves: new Map([[OM.keyOf('two', 'BBB'), { holder: 'two', ticker: 'BBB', change: 1.8 }]]),
@@ -254,11 +290,28 @@ test('no curve is drawn until a holder is asked about', () => {
   assert.equal(nodesWithClass(draw().svg, 'om-bridge').length, 0);
 });
 
-test('the holder in focus gets their own spokes and nobody else does', () => {
+test('the holder in focus gets a line to each company they hold', () => {
   const { svg } = draw({ focus: 'one' });
   const drawn = nodesWithClass(svg, 'om-bridge');
-  assert.equal(drawn.length, 1, 'one holder in two companies is one spoke');
+  assert.equal(drawn.length, 2, 'one owner, two holdings, two lines');
+  assert.deepEqual(drawn.map((p) => p.attrs['data-to']).sort(), ['AAA', 'CCC']);
   assert.equal(drawn[0].attrs.stroke, OM.hueOf('one'));
+});
+
+test('the owner has one place to stand, named', () => {
+  const seats = nodesWithClass(draw({ focus: 'one' }).svg, 'om-seat');
+  assert.equal(seats.length, 1, 'a holder in two companies still has one seat');
+  assert.match(text(seats[0]), /one/);
+});
+
+test('each line carries a dot that travels it', () => {
+  const { svg } = draw({ focus: 'one' });
+  const dots = nodesWithClass(svg, 'om-flow-dot');
+  assert.equal(dots.length, 2);
+  const motion = dots[0].children.find((c) => c.tag === 'animateMotion');
+  assert.ok(motion, 'the dot has nothing to travel along');
+  assert.equal(motion.attrs.path, nodesWithClass(svg, 'om-bridge')[0].attrs.d,
+               'the dot travels the line it belongs to');
 });
 
 test('focusing a company fades everything unrelated to it', () => {
@@ -399,8 +452,8 @@ test('the focused holder tags each company with the stake they hold of it', () =
   const tags = nodesWithClass(svg, 'om-stake-tag');
   assert.equal(tags.length, 2, 'one holder, two holdings, two tags');
   const said = tags.map((g) => text(g)).join(' ');
-  assert.match(said, /40\.0%/);
-  assert.match(said, /60\.0%/);
+  assert.match(said, /40\.00%/);
+  assert.match(said, /60\.00%/);
   assert.match(said, /holds 40% of AAA/);
 });
 
@@ -456,6 +509,26 @@ test('the standing headline counts the companies that carry a stake, not the rin
   const out = text(panel());
   assert.match(out, new RegExp(`standing stakes across ${withStake} companies`));
   assert.match(out, new RegExp(`${rings - withStake} more a named holder has left`));
+});
+
+test('one formatter decides what a stake reads as', () => {
+  // It was three: the tag on the board said `<0.01%`, the dot's own tooltip
+  // said `0.00%`, and the panel beside them said `0.00%` — about the same
+  // three thousandths of a company.
+  assert.equal(OM.stakeText(0.003), '<0.01%');
+  assert.equal(OM.stakeText(0.0099), '<0.01%');
+  assert.equal(OM.stakeText(0.01), '0.01%');
+  assert.equal(OM.stakeText(40), '40.00%');
+  // A holding that really is gone is zero, and says so. "Sold out" and "too
+  // small to round" are different facts.
+  assert.equal(OM.stakeText(0), '0.00%');
+});
+
+test('a holding too small to round reaches the screen as such', () => {
+  const tiny = published.positions.filter((p) => p.percent > 0 && p.percent < 0.01);
+  assert.ok(tiny.length > 0, 'the published file has no sub-hundredth stake to check');
+  const out = text(panel());
+  assert.match(out, /<0\.01%/, 'nothing on the screen used the small-stake form');
 });
 
 test('the panel offers a standing view alongside the weeks', () => {

@@ -36,6 +36,16 @@ class Folding(unittest.TestCase):
         self.assertEqual(ii.fold("شركه اموال العربيه للاقطان"),
                          ii.fold("اموال العربيه للاقطان"))
 
+    def test_a_bracketed_qualifier_is_not_part_of_the_name(self):
+        # `(مجموعة مرتبطة)` says how the filer is related to the company, not
+        # who they are, and it put El Hosn on the board twice.
+        self.assertEqual(ii.fold("شركة الحصن للاستشارات (مجموعة مرتبطة )"),
+                         ii.fold("الحصن للاستشارات"))
+
+    def test_dropping_the_bracket_does_not_merge_two_real_firms(self):
+        self.assertNotEqual(ii.fold("الشركة الوطنية للتجارة والتنمية (انتاد)"),
+                            ii.fold("الشركة الوطنية للاستثمار"))
+
     def test_two_different_names_do_not_fold_together(self):
         self.assertNotEqual(ii.fold("محمد تيسير محمد على طباخ"),
                             ii.fold("محمد تيسير محمد علي طباع"))

@@ -89,9 +89,14 @@ _FIRM_TOKENS_EN = {
 }
 
 
+# `شركة الحصن للاستشارات (مجموعة مرتبطة)` and `الحصن للاستشارات` are one firm;
+# the bracket says how the filer is related, not who they are.
+_QUALIFIER = re.compile(r"[(（][^)）]*[)）]")
+
+
 def _fold_letters(name: str) -> str:
     """Spelling only: diacritics, hamza shapes, taa marbuta, punctuation."""
-    text = unicodedata.normalize("NFKC", name or "")
+    text = _QUALIFIER.sub(" ", unicodedata.normalize("NFKC", name or ""))
     text = _DIACRITIC.sub("", text)
     for src, dst in _LETTER_FOLD.items():
         text = text.replace(src, dst)
