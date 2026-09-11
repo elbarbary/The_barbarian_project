@@ -1,102 +1,102 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-09-10T09:54:44.974228+00:00",
+  "fetchedAt": "2026-09-11T05:32:25.234834+00:00",
   "sources": {
     "exchangeRates": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
     "interbank": "https://www.cbe.org.eg/en/economic-research/statistics/daily-interbank-rates-and-volumes"
   },
   "exchangeRates": {
-    "ratesForDate": "09/09/2026",
+    "ratesForDate": "10/09/2026",
     "currencies": [
       {
         "currency": "US Dollar",
-        "buy": 51.1426,
-        "sell": 51.2786
+        "buy": 51.2721,
+        "sell": 51.4103
       },
       {
         "currency": "Euro",
-        "buy": 59.4789,
-        "sell": 59.6421
+        "buy": 59.614,
+        "sell": 59.7799
       },
       {
         "currency": "Pound Sterling",
-        "buy": 69.2216,
-        "sell": 69.4209
+        "buy": 69.4019,
+        "sell": 69.6147
       },
       {
         "currency": "Canadian Dollar",
-        "buy": 37.1002,
-        "sell": 37.2096
+        "buy": 37.1053,
+        "sell": 37.2107
       },
       {
         "currency": "Danish Krone",
-        "buy": 7.9572,
-        "sell": 7.9787
+        "buy": 7.9743,
+        "sell": 7.9979
       },
       {
         "currency": "Norwegian Krone",
-        "buy": 5.554,
-        "sell": 5.5692
+        "buy": 5.5454,
+        "sell": 5.5681
       },
       {
         "currency": "Swedish Krona",
-        "buy": 5.3305,
-        "sell": 5.3452
+        "buy": 5.3331,
+        "sell": 5.348
       },
       {
         "currency": "Swiss Franc",
-        "buy": 63.1781,
-        "sell": 63.3695
+        "buy": 63.1974,
+        "sell": 63.3912
       },
       {
         "currency": "Japanese Yen 100",
-        "buy": 33.3047,
-        "sell": 33.3954
+        "buy": 33.2719,
+        "sell": 33.3703
       },
       {
         "currency": "Saudi Riyal",
-        "buy": 13.6199,
-        "sell": 13.6568
+        "buy": 13.6543,
+        "sell": 13.6919
       },
       {
         "currency": "Kuwaiti Dinar",
-        "buy": 166.7514,
-        "sell": 167.2491
+        "buy": 167.1734,
+        "sell": 167.6787
       },
       {
         "currency": "UAE Dirham",
-        "buy": 13.9251,
-        "sell": 13.9629
+        "buy": 13.9584,
+        "sell": 13.9976
       },
       {
         "currency": "Australian Dollar",
-        "buy": 36.8943,
-        "sell": 36.9975
+        "buy": 36.9056,
+        "sell": 37.0257
       },
       {
         "currency": "Bahraini Dinar",
-        "buy": 135.6389,
-        "sell": 136.0174
+        "buy": 135.9822,
+        "sell": 136.3668
       },
       {
         "currency": "Omani Riyal",
-        "buy": 132.838,
-        "sell": 133.5379
+        "buy": 133.1638,
+        "sell": 133.5401
       },
       {
         "currency": "Qatari Riyal",
-        "buy": 14.029,
-        "sell": 14.0682
+        "buy": 14.0645,
+        "sell": 14.1043
       },
       {
         "currency": "Jordanian Dinar",
-        "buy": 72.0319,
-        "sell": 72.4274
+        "buy": 72.2142,
+        "sell": 72.6134
       },
       {
         "currency": "Chinese Yuan",
-        "buy": 7.6242,
-        "sell": 7.6447
+        "buy": 7.6452,
+        "sell": 7.6661
       }
     ]
   },
