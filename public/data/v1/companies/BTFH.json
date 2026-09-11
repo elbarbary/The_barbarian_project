@@ -1318,24 +1318,31 @@
  ],
  "profile": {
   "shares_outstanding": 10718106944,
-  "free_float": 0.31143200000000004,
   "float_shares": 3337961481.783808,
   "perf_1w": -1.6556291390728417,
   "perf_1m": -3.8834951456310574,
   "perf_3m": -2.622950819672119,
   "avg_volume_30d": 53275220.59999998,
   "relative_volume_10d": 0.5186168750460036,
-  "median_volume_20d": 30877554.5,
-  "rv20": 0.4605056724942385,
-  "normal_value_30d": 119981053.82,
-  "five_session_change": -1.9801980198019709,
-  "history_bars": 120,
+  "history_bars": 0,
   "market_cap": 31832777623.68,
   "market_cap_source": "EGX",
   "trades": 1077,
   "turnover": 42119577,
+  "median_volume_20d": 30877554.5,
+  "rv20": 0.4605056724942385,
+  "normal_value_30d": 119981053.82,
+  "five_session_change": -1.9801980198019709,
+  "free_float": 0.31143200000000004,
   "shares_outstanding_source": "EGX"
  },
+ "profile_carried": [
+  "five_session_change",
+  "free_float",
+  "median_volume_20d",
+  "normal_value_30d",
+  "rv20"
+ ],
  "financials": {
   "annual": [
    {
