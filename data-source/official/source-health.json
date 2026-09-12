@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-12T05:34:52.603621+00:00",
+  "builtAt": "2026-09-12T09:31:58.936507+00:00",
   "sources": {
     "egxCheckpointArchive": {
       "path": "data-source/egx-beta/snapshot-history/manifest.jsonl",
-      "observedAt": "2026-09-12T05:33:24Z",
-      "observations": 19,
+      "observedAt": "2026-09-12T09:30:27Z",
+      "observations": 20,
       "status": "available",
-      "ageHours": 0.025
+      "ageHours": 0.026
     },
     "ownershipLedger": {
       "path": "data-source/official/ownership/ownership-ledger.json",
@@ -20,14 +20,14 @@
     },
     "fraLedger": {
       "path": "data-source/official/fra/fra-ledger.json",
-      "observedAt": "2026-09-12T05:33:06.911403+00:00",
+      "observedAt": "2026-09-12T09:30:13.829284+00:00",
       "items": 596,
       "status": "available",
       "ageHours": 0.029
     },
     "mcdrRegistry": {
       "path": "data-source/official/mcdr/issuer-registry.json",
-      "observedAt": "2026-09-12T05:33:18.678935+00:00",
+      "observedAt": "2026-09-12T09:30:25.165569+00:00",
       "matchedAtMcdr": 247,
       "exactIsinsQueried": 260,
       "notYetIndividuallyQueried": 0,
@@ -36,7 +36,7 @@
     },
     "filingCompleteness": {
       "path": "data-source/official/filing-completeness.json",
-      "observedAt": "2026-09-12T05:34:52.344178+00:00",
+      "observedAt": "2026-09-12T09:31:58.640859+00:00",
       "issuers": 283,
       "verifiedIrArchives": 0,
       "status": "partial",
@@ -44,7 +44,7 @@
     },
     "cbeContext": {
       "path": "data-source/official/cbe/cbe-context.json",
-      "observedAt": "2026-09-12T05:33:16.378112+00:00",
+      "observedAt": "2026-09-12T09:30:22.658964+00:00",
       "officialFxDate": "10/09/2026",
       "status": "available",
       "ageHours": 0.027
@@ -53,7 +53,7 @@
   "capabilities": {
     "officialCheckpointOhlcv": true,
     "officialCumulativeTradedValue": true,
-    "sameClockVolumePace": false,
+    "sameClockVolumePace": true,
     "fiveMinuteStockBars": false,
     "bestBidAsk": false,
     "orderBookDepth": false,

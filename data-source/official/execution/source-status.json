@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-12T05:34:49.557244+00:00",
+  "updatedAt": "2026-09-12T09:31:55.757918+00:00",
   "publicEgx": {
     "source": "beta.egx market-watch timestamped archive",
-    "checkpointObservations": 19,
+    "checkpointObservations": 20,
     "emptyCaptures": 7,
     "firstCheckpoint": "2026-08-28T15:52:16Z",
-    "latestCheckpoint": "2026-09-12T05:33:24Z",
+    "latestCheckpoint": "2026-09-12T09:30:27Z",
     "fields": {
       "cumulativeSessionOhlcv": true,
       "actualCumulativeTradedValue": true,
       "numberOfTrades": true,
       "fiveMinuteStockBars": false,
-      "historicalSameTimeVolume": false,
+      "historicalSameTimeVolume": true,
       "bestBidAsk": false,
       "orderBookDepth": false,
       "individualTradeTape": false
