@@ -3,6 +3,10 @@
     "meaning": "The alignment of the agricultural sector with national decent work frameworks establishes structured labor standards, formal employment guidelines, and social protection mechanisms across agribusiness supply chains.",
     "meaning_ar": "يحدد موائمة القطاع الزراعي مع أطر العمل اللائق الوطنية معايير تشغيل منظمة وإرشادات للتوظيف الرسمي وآليات للحماية الاجتماعية عبر سلاسل إمداد الصناعات الزراعية."
   },
+  "\"الزراعه\" تقدم خدمات الرعايه التناسليه لاكثر من 39 الف راس ماشيه خلال اغسطس": {
+    "meaning": "The provision of state reproductive veterinary services directly addresses livestock breeding rates and operational herd health within the agricultural supply chain.",
+    "meaning_ar": "يمثل تقديم خدمات الرعاية التناسلية البيطرية الحكومية دعماً مباشراً لمعدلات تناسل الثروة الحيوانية والحالة التشغيلية للقطيع ضمن سلاسل الإمداد الزراعية."
+  },
   "\"العمل\" تحذر الشباب من صفحات وفيديوهات وهميه تروج للسفر الي ايطاليا": {
     "meaning": "The Ministry of Labor regulates official overseas employment channels and issues public compliance alerts to restrict fraudulent, unlicensed recruitment activities targeting the domestic labor force.",
     "meaning_ar": "تنظم وزارة العمل قنوات التوظيف والتشغيل بالخارج وتصدر إخطارات رقابية رسمية لمكافحة أنشطة استقدام العمالة غير المرخصة وخارج الأطر القانونية المعتمدة."
@@ -879,6 +883,10 @@
     "meaning": "Feed represents the primary direct operational input cost for the poultry and livestock industries, directly impacting production costs, producer operating margins, and end-market protein prices.",
     "meaning_ar": "تمثل الأعلاف عنصر التكلفة التشغيلية المباشرة الرئيسي لقطاعي الدواجن والثروة الحيوانية، مما يؤثر بشكل مباشر على تكلفة الإنتاج وهوامش ربح المربين والمنتجين وأسعار السلع النهائية."
   },
+  "اسعار الاعلاف والخامات البرازيليه والبلديه اليوم السبت 12-9-2026": {
+    "meaning": "Daily spot pricing for imported Brazilian and domestic feed inputs directly reflects prevailing raw material costs for agricultural and poultry sector operators.",
+    "meaning_ar": "تعكس الأسعار الفورية اليومية لخامات الأعلاف المستوردة من البرازيل والمحلية تكاليف المدخلات المباشرة لشركات القطاعين الزراعي والداجني."
+  },
   "اسعار البيض اليوم الاثنين 7-9-2026 في مصر": {
     "meaning": "Daily poultry exchange quotes reflect prevailing market prices for table eggs, determined by daily supply volumes from farms against retail consumer demand and input feed costs.",
     "meaning_ar": "تعكس أسعار بورصة الدواجن اليومية القيمة السوقية الحالية لبيض المائدة، والتي تتحدد بناءً على حجم المعروض اليومي من المزارع مقابل طلب تجزئة المستهلكين وتكاليف الأعلاف."
@@ -926,6 +934,10 @@
   "اسعار الخضار والفاكهه اليوم في مصر.. الخميس 10/9/2026": {
     "meaning": "Daily wholesale and retail produce pricing reflects prevailing local agricultural supply volumes, transport logistics expenses, and wholesale market auction rates across transit hubs.",
     "meaning_ar": "تعكس الأسعار اليومية لتداول الخضار والفاكهة حجم المعروض الزراعي المحلي، وتكاليف النقل اللوجستي، ومستويات التسعير المحددة عبر مزادات أسواق الجملة المركزية."
+  },
+  "اسعار الخضار والفاكهه اليوم في مصر.. السبت 12/9/2026": {
+    "meaning": "Daily wholesale and retail produce pricing reflects real-time agricultural supply chain dynamics, transport costs, and spot market liquidity across domestic Egyptian distribution hubs.",
+    "meaning_ar": "تعكس الأسعار اليومية لتداول الخضار والفاكهة محددات سلاسل الإمداد الزراعية وتكاليف النقل ومستويات السيولة الفورية في أسواق الجملة والتجزئة المحلية."
   },
   "اسعار الخضار والفاكهه اليوم في مصر.. تحديث سوق العبور": {
     "meaning": "Obour Market functions as the primary wholesale price-discovery hub for fresh produce in Egypt, where daily spot clearing prices establish the baseline input costs for downstream retail food supply chains.",
