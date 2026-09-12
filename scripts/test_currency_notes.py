@@ -204,12 +204,62 @@ class Agreement(unittest.TestCase):
         self.assertEqual(list(kept["position"]), ["USD"])
         self.assertIn("only one of the two reads", dropped[0]["why"])
 
-    def test_a_figure_the_two_reads_disagree_on_is_dropped(self):
-        first = reading([{"code": "USD", "net": 785782}])
-        second = reading([{"code": "USD", "net": 785_872}])       # two digits swapped
+    def test_a_disagreement_that_changes_the_published_figure_is_dropped(self):
+        # BIOC's two reads gave 207,103,972 and 207,013,972 — a transposition,
+        # and 207.104 against 207.014 once published.
+        first = reading(result=207103972)
+        second = reading(result=207013972)
         kept, dropped = notes.agree(first, second, set())
-        self.assertEqual(kept["position"], {})
+        self.assertIsNone(kept["fxResult"])
         self.assertIn("disagree", dropped[0]["why"])
+        self.assertEqual(dropped[0]["first"], 207.103972)
+        self.assertEqual(dropped[0]["second"], 207.013972)
+
+    def test_agreement_is_judged_at_the_precision_the_document_publishes(self):
+        # The two have to move together. Loosened by one place, agreement is
+        # judged to the nearest ten thousand pounds while the screen still
+        # prints thousands — and the published figure stops being the thing
+        # the two readers agreed on, which is the only claim this makes.
+        a, b = 207104100, 207104900        # 207.104 against 207.105, but both 207.10
+        self.assertNotEqual(round(a * 1e-6, notes.PLACES), round(b * 1e-6, notes.PLACES))
+        kept, dropped = notes.agree(reading(result=a), reading(result=b), set())
+        self.assertIsNone(kept["fxResult"], "agreed on a figure it does not publish")
+        self.assertIn("disagree", dropped[0]["why"])
+
+    def test_what_is_published_is_rounded_to_that_same_precision(self):
+        store = {"291": {"position": {"USD": 1.0825551}, "fxResult": 1.0825551,
+                         "ticker": "AAAA"}}
+        filings = {"291": {"ticker": "AAAA", "period_end": "2026-06-30", "fields": {}}}
+        with publishing(store, filings) as document:
+            row = document["companies"][0]
+            self.assertEqual(row["fxResult"], round(1.0825551, notes.PLACES))
+            self.assertEqual(row["position"][0]["net"], round(1.0825551, notes.PLACES))
+
+    def test_a_disagreement_below_the_published_figure_is_kept_and_written_down(self):
+        # These are scans, and the last digit is the one an eye gets wrong:
+        # BONY's reads gave 1,082,172 and 1,082,173. Both support the same
+        # published number, so dropping them threw away a figure neither
+        # reading contradicts — but the tolerance is recorded, because a
+        # tolerance nobody can see afterwards looks like no check at all.
+        kept, dropped = notes.agree(reading(result=1082172),
+                                    reading(result=1082173), set())
+        self.assertEqual(kept["fxResult"], 1.082172)
+        self.assertEqual(dropped, [])
+        self.assertEqual(kept["narrowed"],
+                         [{"what": "fxResult", "first": 1.082172, "second": 1.082173}])
+
+    def test_agreement_to_the_digit_is_not_written_down(self):
+        kept, _ = notes.agree(reading(result=1082172), reading(result=1082172), set())
+        self.assertEqual(kept["narrowed"], [])
+
+    def test_a_figure_that_rounds_away_to_nothing_is_not_a_figure(self):
+        # CIRA's two reads put its sterling position at 311 and 211 pounds.
+        # Both publish as 0.000, and a row saying GBP 0.000m is noise wearing
+        # the clothes of a disclosure.
+        rows = [{"code": "GBP", "net": 311}]
+        kept, dropped = notes.agree(reading(rows), reading(rows), set())
+        self.assertEqual(kept["position"], {})
+        self.assertIn("rounds away", dropped[0]["why"])
 
     def test_reads_that_share_the_digits_but_not_the_magnitude_are_dropped(self):
         # The failure this is here for: both readers see 121 034, one reads the
@@ -302,6 +352,19 @@ class TheQueue(unittest.TestCase):
         # not also re-read companies that already answered.
         answered = {"a2": {"ticker": "AAAA", "position": {"USD": 1.0}, "fxResult": None}}
         self.assertEqual(self.queue(answered), [("BBBB", "b2"), ("BBBB", "b1")])
+
+    def test_refresh_reaches_a_filing_the_queue_would_otherwise_skip(self):
+        # A filing asked for again is usually one whose figures were dropped,
+        # so its company has often already answered on a newer filing — which
+        # is precisely what the skip rule uses to pass over the older one.
+        answered = {"a2": {"ticker": "AAAA", "position": {"USD": 1.0}, "fxResult": None},
+                    "a1": {"ticker": "AAAA", "position": {}, "fxResult": None}}
+        plain = [(t, f) for t, f, _ in
+                 notes.outstanding(self.FILINGS, {"readings": answered}, set(), set())]
+        self.assertNotIn(("AAAA", "a1"), plain)
+        asked = [(t, f) for t, f, _ in
+                 notes.outstanding(self.FILINGS, {"readings": answered}, set(), {"a1"})]
+        self.assertIn(("AAAA", "a1"), asked)
 
     def test_a_company_whose_newest_filing_said_nothing_is_asked_the_one_before(self):
         silent = {"a2": {"ticker": "AAAA", "position": {}, "fxResult": None},

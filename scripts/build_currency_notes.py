@@ -407,23 +407,55 @@ def _result(reading):
     return in_millions(block.get("amount"), block.get("unit"))
 
 
-def _same(a, b) -> bool:
-    """Two readings of one printed number, at the precision it was PRINTED to.
+# Everything here is published to three decimals of a million — the nearest
+# thousand pounds — and that is also where agreement is judged.
+PLACES = 3
 
-    Not at the precision it is published to. Rounding to the three decimal
-    places of a million these figures are published in compares them to the
-    nearest thousand pounds, so a reader that misread 785 782 as 785 872 would
-    be agreed with. The published figure is rounded; the check is not.
+
+def _same(a, b) -> bool:
+    """Two readings agree when they support the same PUBLISHED figure.
+
+    This was full printed precision for a while, and it was too strict in a way
+    that quietly cost about a tenth of the harvest. These are scans, and the
+    last digit of a scanned figure is the one an eye gets wrong: BONY's two
+    reads gave 1,082,172 and 1,082,173, AMIA's 1,133,239 and 1,133,229. Both
+    pairs publish as the same number, so dropping them threw away a figure that
+    neither reading contradicts.
+
+    What the rule protects is the number a reader is shown, and it still does:
+    BIOC's 207,103,972 against 207,013,972 publish as 207.104 and 207.014 and
+    are dropped, as is DSCW's 32.30 against 33.60. Where the two differ BELOW
+    what is published, the store keeps both so the disagreement is not lost.
     """
     if a is None or b is None:
         return False
-    return math.isclose(a, b, rel_tol=1e-9, abs_tol=1e-12)
+    return round(a, PLACES) == round(b, PLACES)
+
+
+def _worth_printing(value) -> bool:
+    """A figure that rounds away to nothing is not a figure.
+
+    CIRA's two reads gave a sterling position of 311 and 211 pounds. Both
+    publish as 0.000, and a row saying a company holds GBP 0.000m is noise
+    wearing the clothes of a disclosure.
+    """
+    return isinstance(value, (int, float)) and round(value, PLACES) != 0
 
 
 def agree(first: dict, second: dict, tokens: set[str]) -> tuple[dict, list[dict]]:
     """What both reads saw, and what fell out on the way."""
-    kept: dict = {"position": {}, "fxResult": None}
+    kept: dict = {"position": {}, "fxResult": None, "narrowed": []}
     dropped: list[dict] = []
+
+    def note(what, a, b):
+        """A difference the published precision swallows, kept on the record.
+
+        The rule below tolerates it, so the two readings are written down: a
+        tolerance nobody can see afterwards is indistinguishable from not
+        having checked.
+        """
+        if a != b:
+            kept["narrowed"].append({"what": what, "first": a, "second": b})
 
     # A position table can be printed in the foreign currency itself or in its
     # pound equivalent, and the two differ by roughly fifty times. Taking the
@@ -443,8 +475,15 @@ def agree(first: dict, second: dict, tokens: set[str]) -> tuple[dict, list[dict]
                             "why": "only one of the two reads saw it"})
             continue
         if not _same(one[code], two[code]):
-            dropped.append({"what": f"position {code}", "why": "the two reads "
+            dropped.append({"what": f"position {code}", "first": one[code],
+                            "second": two[code], "why": "the two reads "
                             f"disagree: {one[code]} against {two[code]}"})
+            continue
+        note(f"position {code}", one[code], two[code])
+        if not _worth_printing(one[code]):
+            dropped.append({"what": f"position {code}", "first": one[code],
+                            "why": "the figure rounds away at the precision "
+                                   "this publishes in"})
             continue
         raw = _raw_position(first, code)
         if tokens and not printed(raw, tokens):
@@ -459,12 +498,18 @@ def agree(first: dict, second: dict, tokens: set[str]) -> tuple[dict, list[dict]
             dropped.append({"what": "fxResult",
                             "why": "only one of the two reads saw it"})
     elif not _same(one_result, two_result):
-        dropped.append({"what": "fxResult", "why": "the two reads disagree: "
+        dropped.append({"what": "fxResult", "first": one_result,
+                        "second": two_result, "why": "the two reads disagree: "
                         f"{one_result} against {two_result}"})
+    elif not _worth_printing(one_result):
+        dropped.append({"what": "fxResult", "first": one_result,
+                        "why": "the figure rounds away at the precision "
+                               "this publishes in"})
     elif tokens and not printed((first.get("fxResult") or {}).get("amount"), tokens):
         dropped.append({"what": "fxResult",
                         "why": "the figure is not printed in the document's text"})
     else:
+        note("fxResult", one_result, two_result)
         kept["fxResult"] = one_result
     return kept, dropped
 
@@ -636,11 +681,19 @@ def outstanding(filings: dict, store: dict, wanted: set, again: set) -> list[tup
             if depth >= len(rows):
                 continue
             added = True
+            filing = rows[depth]["filingId"]
+            # --refresh names a filing outright and is answered before any of
+            # the skipping below: a filing asked for again is usually one whose
+            # figures were dropped, and its company has therefore often already
+            # answered on a newer filing — which is exactly what the next test
+            # would use to skip it.
+            if filing in again:
+                queue.append((ticker, filing, rows[depth]))
+                continue
             if depth and any(has_a_figure(store["readings"].get(r["filingId"]))
                              for r in rows[:depth]):
                 continue
-            filing = rows[depth]["filingId"]
-            if filing in store["readings"] and filing not in again:
+            if filing in store["readings"]:
                 continue
             queue.append((ticker, filing, rows[depth]))
         if not added:
