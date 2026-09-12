@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-12T14:59:36+00:00",
+ "generated": "2026-09-12T15:37:22+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",

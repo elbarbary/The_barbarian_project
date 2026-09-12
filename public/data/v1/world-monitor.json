@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-12T15:39:35Z",
+ "generated": "2026-09-12T15:33:45Z",
  "basis": "A move is placed against its own two years of same-length moves — a record of what has already happened, never a statement about the next one. Each list of companies is the complete set that filed the figure, in alphabetical order, with the filing beside it. Nothing here says what any of it means for a share price.",
  "basisAr": "تُقاس كل حركة مقابل سنتين من حركات بالطول نفسه — سجل لما حدث بالفعل، وليس قولاً عما سيحدث. وكل قائمة شركات هي المجموعة الكاملة التي أودعت الرقم، بالترتيب الأبجدي، ومعها الإفصاح الذي جاء منه. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
  "windows": [
@@ -3780,7 +3780,7 @@
    "questionAr": "أين تصل حركة الجنيه؟",
    "filter": "every company whose filed foreign-currency note prints a figure — a net position held in another currency, or an exchange gain or loss already taken",
    "filterAr": "كل شركة يطبع إيضاح العملات الأجنبية في قوائمها رقماً — صافي مركز بعملة أخرى، أو أرباح أو خسائر فروق عملة تم الاعتراف بها",
-   "count": 127,
+   "count": 125,
    "today": {
     "asOf": "2026-09-12",
     "rates": [
@@ -4093,18 +4093,18 @@
      "ticker": "ARCC",
      "name": "Arabian Cement Company",
      "sector": "Building Materials",
-     "fxResult": 64.662,
-     "netIncome": 2159.489,
-     "shareOfNetIncome": 3.0,
+     "fxResult": 6.766,
+     "netIncome": 937.901,
+     "shareOfNetIncome": 0.7,
      "largerThanTheProfit": null,
      "position": [],
      "denominatedIn": null,
      "positionAsOf": null,
-     "printed": "أرباح / (خسائر) تقييم عملات أجنبية",
-     "period": "H1 2026",
-     "periodEnd": "2026-06-30",
-     "filingId": "293208",
-     "source": "https://foudalens.com/disclosures/ARCC.CA/financial_statement/2026-08-16_293207_1.pdf"
+     "printed": "Foreign currency exchange gains / (losses)",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "289226",
+     "source": "https://foudalens.com/disclosures/ARCC.CA/financial_statement/2026-06-01_339125_1.pdf"
     },
     {
      "ticker": "ASCM",
@@ -4290,18 +4290,18 @@
      "ticker": "BONY",
      "name": "Bonyan for Development and Trade",
      "sector": "Real Estate",
-     "fxResult": -1.082,
-     "netIncome": 1042.235,
-     "shareOfNetIncome": -0.1,
+     "fxResult": 2.819,
+     "netIncome": 593.347,
+     "shareOfNetIncome": 0.5,
      "largerThanTheProfit": null,
      "position": [],
      "denominatedIn": null,
      "positionAsOf": null,
-     "printed": "خسائر فروق تقييم عملات أجنبية",
-     "period": "H1 2026",
-     "periodEnd": "2026-06-30",
-     "filingId": "293074",
-     "source": "https://foudalens.com/disclosures/BONY.CA/financial_statement/2026-08-13_293073_1.pdf"
+     "printed": "أرباح فروق تقييم عملات أجنبية",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "288731",
+     "source": "https://foudalens.com/disclosures/BONY.CA/financial_statement/2026-05-21_338776_1.pdf"
     },
     {
      "ticker": "CANA",
@@ -4405,9 +4405,9 @@
      "ticker": "CIRA",
      "name": "Cairo For Investment And Real Estate Developments -CIRA Education",
      "sector": "Education Services",
-     "fxResult": null,
+     "fxResult": 17.364,
      "netIncome": 1239.004,
-     "shareOfNetIncome": null,
+     "shareOfNetIncome": 1.4,
      "largerThanTheProfit": null,
      "position": [
       {
@@ -4425,7 +4425,7 @@
      ],
      "denominatedIn": "egp",
      "positionAsOf": "2026-05-31",
-     "printed": null,
+     "printed": "أرباح (خسائر) فروق عملة",
      "period": "9M 2026 (to 31 May)",
      "periodEnd": "2026-05-31",
      "filingId": "291733",
@@ -4622,18 +4622,18 @@
      "ticker": "EAST",
      "name": "Eastern Company",
      "sector": "Food, Beverages and Tobacco",
-     "fxResult": 87.5,
-     "netIncome": 1253.311,
-     "shareOfNetIncome": 7.0,
+     "fxResult": 3.0,
+     "netIncome": 6048.733,
+     "shareOfNetIncome": 0.0,
      "largerThanTheProfit": null,
      "position": [],
      "denominatedIn": null,
      "positionAsOf": null,
-     "printed": "(٤) أرباح وخسائر فروق عملة",
-     "period": "Q1 2026",
-     "periodEnd": "2026-03-31",
-     "filingId": "EAST-Q1 2026-2026-03-31",
-     "source": "https://foudalens.com/disclosures/EAST.CA/financial_statement/2026-06-17_289979_1.pdf"
+     "printed": "ارباح/ خسائر فروق عملة",
+     "period": "H1 2025 (to 31 Dec)",
+     "periodEnd": "2025-12-31",
+     "filingId": "285917",
+     "source": "https://foudalens.com/disclosures/EAST.CA/financial_statement/2026-04-05_336199_1.pdf"
     },
     {
      "ticker": "ECAP",
@@ -4821,23 +4821,6 @@
      "periodEnd": "2026-06-30",
      "filingId": "293041",
      "source": "https://foudalens.com/disclosures/EGBE.CA/financial_statement/2026-08-13_293040_1.pdf"
-    },
-    {
-     "ticker": "EGCH",
-     "name": "Egyptian Chemical Industries",
-     "sector": "Basic Resources",
-     "fxResult": -1071.975,
-     "netIncome": 531.31,
-     "shareOfNetIncome": -201.8,
-     "largerThanTheProfit": true,
-     "position": [],
-     "denominatedIn": null,
-     "positionAsOf": null,
-     "printed": "مكسب (خسائر) فروق عمله",
-     "period": "9M 2026 (to 31 Mar)",
-     "periodEnd": "2026-03-31",
-     "filingId": "288832",
-     "source": "https://foudalens.com/disclosures/EGCH.CA/financial_statement/2026-05-24_338778_1.pdf"
     },
     {
      "ticker": "EGTS",
@@ -5089,18 +5072,9 @@
      "netIncome": 1055.639,
      "shareOfNetIncome": -2.2,
      "largerThanTheProfit": null,
-     "position": [
-      {
-       "currency": "EUR",
-       "net": 91.777
-      },
-      {
-       "currency": "USD",
-       "net": -1853.57
-      }
-     ],
-     "denominatedIn": "egp",
-     "positionAsOf": "2026-06-30",
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
      "printed": "Foreign exchange (Losses) / Gain",
      "period": "H1 2026",
      "periodEnd": "2026-06-30",
@@ -5360,23 +5334,6 @@
      "source": "https://foudalens.com/disclosures/KABO.CA/financial_statement/2026-06-25_290396_1.pdf"
     },
     {
-     "ticker": "KORA",
-     "name": "KORRA",
-     "sector": "Contracting & Construction Engineering",
-     "fxResult": -25.586,
-     "netIncome": 139.013,
-     "shareOfNetIncome": -18.4,
-     "largerThanTheProfit": null,
-     "position": [],
-     "denominatedIn": null,
-     "positionAsOf": null,
-     "printed": "(خسائر) أرباح تقييم عملات أجنبية",
-     "period": "H1 2026",
-     "periodEnd": "2026-06-30",
-     "filingId": "293566",
-     "source": "https://foudalens.com/disclosures/KORA.CA/financial_statement/2026-08-19_293565_1.pdf"
-    },
-    {
      "ticker": "KRDI",
      "name": "Al Khair River for Development Agriculture Investment and Environmental Services",
      "sector": "Food, Beverages and Tobacco",
@@ -5419,10 +5376,6 @@
      "shareOfNetIncome": 0.1,
      "largerThanTheProfit": null,
      "position": [
-      {
-       "currency": "EUR",
-       "net": -0.01
-      },
       {
        "currency": "USD",
        "net": 5.15
