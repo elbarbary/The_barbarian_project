@@ -982,6 +982,11 @@ function renderOwnershipMap(doc, ar, t, component) {
     // a reader zoomed in to see through.
     if (painted) painted.rescale(OM.markFor(times));
     component.state.ownershipWin = { ...win };
+    // Zoomed in, this element handles the gesture and the browser must not.
+    // At full fit the board is wider than a phone and the browser's own
+    // sideways scroll is the only way to move it.
+    if (times > 1.001) svg.setAttribute('data-panning', '');
+    else svg.removeAttribute('data-panning');
     if (zoomOut) zoomOut.disabled = times <= 1.001;
     if (zoomLabel) zoomLabel.textContent = `${times.toFixed(1)}×`;
   };

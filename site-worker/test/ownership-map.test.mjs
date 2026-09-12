@@ -17,6 +17,7 @@ const { Component } = await import('../../public/esthmr/logic.js');
 
 const file = (path) => readFile(new URL('../../' + path, import.meta.url), 'utf8');
 const published = JSON.parse(await file('public/data/v1/insider-people.json'));
+const stylesheet = await file('public/esthmr/flow-trackers.css');
 
 const text = (node) => [node?.text || '', ...(node?.children || []).map(text)].join(' ');
 const all = (node, tag) => [
@@ -976,4 +977,46 @@ test('the dot travelling a line is moved onto the line that was recut', () => {
     assert.ok(lines.some((line) => line.attrs.d === motion.attrs.path),
               'a travelling dot is still running down the old path');
   });
+});
+
+/* ── the board on a phone ─────────────────────────────────────────────────── */
+
+test('the browser scrolls the board at full fit, and stops when a zoom starts', () => {
+  // `touch-action: none` is right only while the drag handler is panning the
+  // viewBox. At full fit the board is wider than a phone and is meant to be
+  // scrolled natively — `none` stopped that too, so on a phone the board could
+  // not be moved at all, by either route.
+  const view = panel();
+  const svg = nodesWithClass(view, 'om-map-svg')[0];
+  assert.ok(svg, 'no board on the panel');
+  assert.equal(svg.getAttribute('data-panning'), null, 'the board starts captured');
+
+  const tool = (label) => nodesWithClass(view, 'om-map-tools')
+    .flatMap((n) => all(n, 'button')).find((b) => (b.text || '') === label);
+  tool('+').events.click({ preventDefault() {}, stopPropagation() {} });
+  assert.equal(svg.getAttribute('data-panning'), '', 'a zoomed board left the gesture to the browser');
+  tool('⤢').events.click({ preventDefault() {}, stopPropagation() {} });
+  assert.equal(svg.getAttribute('data-panning'), null, 'back at full fit and still captured');
+
+  assert.match(stylesheet, /\.om-map-svg\s*\{[^}]*touch-action:\s*pan-x pan-y/);
+  assert.match(stylesheet, /\.om-map-svg\[data-panning\]\s*\{[^}]*touch-action:\s*none/);
+});
+
+test('full screen on a phone stacks, and the board keeps its proportions', () => {
+  // `.om-sheet .om-map-host` is more specific than the mobile rule above it,
+  // so full screen kept the desktop's two columns while the areas had become
+  // one: every area landed in a 104px first column with 360px of nothing
+  // beside it, and the board was drawn two pixels tall.
+  const mobile = stylesheet.slice(stylesheet.indexOf('@media (max-width: 900px)'));
+  assert.ok(mobile.length > 200, 'no mobile block in the stylesheet');
+  const rule = (selector) => {
+    const at = mobile.indexOf(selector);
+    return at < 0 ? '' : mobile.slice(at, mobile.indexOf('}', at));
+  };
+  assert.match(rule('.om-sheet .om-map-host'), /grid-template-columns:\s*minmax\(0, 1fr\)/);
+  // A squat stage stretched the board inside its own 880px canvas: two hundred
+  // blank pixels down one side and the rest of the exchange off the other.
+  assert.match(rule('.om-sheet .om-map-svg'), /height:\s*auto/);
+  // And the register needs a ceiling of its own once nothing is scrolling it.
+  assert.match(rule('.om-sheet .om-register-list'), /max-height:\s*\d/);
 });

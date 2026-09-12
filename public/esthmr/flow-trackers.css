@@ -595,7 +595,12 @@ body.om-sheet-open { overflow: hidden; }
   color: var(--faint); }
 .om-map-scroll { min-width: 0; border-radius: 22px; background: var(--sunk);
   border: 1px solid var(--rule2); overflow: hidden; }
-.om-map-svg { width: 100%; height: auto; display: block; touch-action: none; }
+/* `touch-action: none` is right only while the reader is zoomed in, when the
+   drag handler is panning the viewBox itself. At full fit the board is wider
+   than a phone and is meant to be scrolled natively — and `none` stopped that
+   too, so on a phone the board could not be moved at all, by either route. */
+.om-map-svg { width: 100%; height: auto; display: block; touch-action: pan-x pan-y; }
+.om-map-svg[data-panning] { touch-action: none; }
 .om-map-scroll:has(.om-map-svg) { cursor: grab; }
 .om-map-scroll:active { cursor: grabbing; }
 
@@ -719,6 +724,26 @@ button.om-holder-row:hover span { color: var(--accent); }
 @media (max-width: 900px) {
   .om-map-host { grid-template-columns: minmax(0, 1fr);
     grid-template-areas: "strip" "stage" "side"; }
+  /* The sheet's own rule is more specific than the one above it, so full
+     screen on a phone kept the desktop's two columns while the areas had
+     become one: every area landed in a 104px first column with 360px of
+     nothing beside it, and the board was drawn two pixels tall. The strip,
+     the board and the register stack here like everywhere else on a phone,
+     and the board keeps the height. */
+  .om-sheet .om-map-host { grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(300px, 1fr) auto; }
+  .om-sheet .om-side { overflow: visible; }
+  .om-sheet .om-map-scroll { min-height: 300px; }
+  /* Stacked, the sheet has no column to scroll the register inside, so the
+     list keeps a ceiling of its own. Without one the full-screen board was a
+     fifty-thousand-pixel page with a map at the top of it. */
+  .om-sheet .om-register-list { max-height: 44vh; }
+  /* And the board keeps its own proportions. Stretched to the height of a
+     squat stage it was letterboxed inside its 880px canvas — two hundred
+     blank pixels down the left, and the right-hand third of the exchange off
+     the edge. It is 880 by 563 here and the stage scrolls to it. */
+  .om-sheet .om-map-svg { height: auto; }
+  .om-sheet .om-map-scroll { overflow: auto; }
   /* Two-up rather than a single column of near-empty cards under a wide map. */
   .om-side { grid-template-columns: 1fr 1fr; }
   .om-legend { font-size: 10.5px; }
