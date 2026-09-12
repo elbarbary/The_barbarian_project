@@ -2075,6 +2075,10 @@
     "meaning": "Submitting a listing application initiates the regulatory review process to register the company's shares on the Egyptian Exchange, placing the entity under official market disclosure rules and establishing the legal framework for public trading.",
     "meaning_ar": "يُطلق التقدم بطلب القيد الإجراءات التنظيمية لتسجيل أسهم الشركة في البورصة المصرية، مما يُخضعها لمعايير الإفصاح والحوكمة المنظمة ويؤسس الإطار القانوني لتداول ملكيتها في السوق الرسمي."
   },
+  "امريكا تتجه لفرض رسوم جمركيه علي واردات الالواح الشمسيه من 3 دول": {
+    "meaning": "Tariffs impose additional import duties on solar panels from specified origins, shifting procurement costs and altering international supply chain flows for renewable energy components.",
+    "meaning_ar": "تفرض الرسوم الجمركية تكاليف استيراد إضافية على الألواح الشمسية من الدول المحددة، مما يغير تكاليف التوريد ومسارات سلاسل الإمداد العالمية لمكونات الطاقة المتجددة."
+  },
   "امريكا تحدد مواعيد لمرور الناقلات التي تبحر عبر مضيق هرمز": {
     "meaning": "Establishing specific transit schedules through the Strait of Hormuz regulates vessel traffic flows and alters logistics timelines, tanker turnaround rates, and operational maritime insurance structures.",
     "meaning_ar": "يؤدي تحديد جداول زمنية لعبور السفن عبر مضيق هرمز إلى تنظيم تدفقات الملاحة، وتعديل الجداول اللوجستية، ومعدلات دوران الناقلات، بالإضافة إلى هياكل التأمين البحري التشغيلية."
@@ -2182,6 +2186,10 @@
   "ايطاليا تدعو البنوك وشركات الطاقه لدعم الماليه العامه": {
     "meaning": "Government calls for contributions from the banking and energy sectors involve fiscal mechanisms such as solidarity levies, windfall taxes, or pre-paid tax arrangements, transferring liquidity directly from corporate balance sheets to the state treasury.",
     "meaning_ar": "تتضمن دعوات الحكومات للمساهمة المالية من قطاعي البنوك والطاقة آليات مالية مثل الضرائب الاستثنائية على الأرباح أو الرسوم التضامنية، مما ينقل السيولة مباشرة من الميزانيات العمومية للشركات إلى الخزانة العامة للدولة."
+  },
+  "ايطاليا تسرع مشروعات النفط والغاز لتعزيز امن الطاقه": {
+    "meaning": "Accelerating domestic oil and gas development involves shortening administrative licensing timelines, deploying additional capital expenditures to upstream infrastructure, and expanding pipeline and LNG regasification throughput.",
+    "meaning_ar": "يتضمن تسريع مشروعات النفط والغاز تقليص المدد الزمنية للتراخيص الإدارية، وتوجيه نفقات رأسمالية إضافية للبنية التحتية لقطاع الاستكشاف والإنتاج، وتوسيع الطاقة التشغيلية لخطوط الأنابيب ومحطات تغويز الغاز المسال."
   },
   "ايطاليا: الناتج المحلي يقترب من تحقيق نمو بنسبه 1% في عام 2026": {
     "meaning": "Gross Domestic Product metrics measure aggregate economic output and baseline commercial activity within an external sovereign market. For international trade partners, foreign GDP data serves as an operational benchmark for economic capacity and cross-border trade activity.",
@@ -2607,6 +2615,10 @@
   "تشديد الدخول والخروج ينذر بعوده طوابير الانتظار علي حدود الاتحاد الاوروبي": {
     "meaning": "Tighter border controls introduce operational processing delays at European Union entry and exit points, extending transit times for cross-border logistics and freight transport.",
     "meaning_ar": "يؤدي تشديد إجراءات التفتيش على نقاط الدخول والخروج في الاتحاد الأوروبي إلى تأخيرات تشغيلية في المعابر الحدودية، مما يطيل المدد الزمنية لعمليات الشحن ونقل البضائع."
+  },
+  "تشريع امريكي محتمل يشدد الرقابه علي اخطر نماذج الذكاء الاصطناعي": {
+    "meaning": "Proposed regulatory frameworks establish mandatory compliance standards, audit requirements, and operational oversight for advanced artificial intelligence developers, directly adding recurring administrative and risk-management costs to technology sector cost structures.",
+    "meaning_ar": "تفرض الأطر التشريعية المقترحة معايير امتثال وإجراءات تدقيق ورقابة تشغيلية إلزامية على مطوري نماذج الذكاء الاصطناعي المتقدمة، مما يضيف تكاليف إدارية وتكاليف إدارة مخاطر دورية إلى هيكل تكاليف قطاع التكنولوجيا."
   },
   "تشكيل مجلس الاعمال المصري السوري برياسه المهندس محمد سعده": {
     "meaning": "The formation of the Egyptian-Syrian Business Council establishes an institutional framework for direct bilateral coordination between private sector companies in both markets, serving as a channel for trade logistics and cross-border joint ventures.",
@@ -3544,6 +3556,10 @@
   "عاجل.. الرقابه الماليه تصدر دليلا شاملا لقواعد وضوابط التمويل الاستهلاكي": {
     "meaning": "The Financial Regulatory Authority establishes a unified regulatory and operational framework defining licensing criteria, credit risk assessment rules, and compliance requirements for consumer finance companies operating in Egypt.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً تنظيمياً وتشغيلياً موحداً يحدد معايير الترخيص، وضوابط التقييم الائتماني، ومتطلبات الامتثال وإدارة المخاطر لشركات التمويل الاستهلاكي في مصر."
+  },
+  "عاجل.. الرقابه الماليه تلزم شركات التمويل الاستهلاكي وتمويل المشروعات بالربط اللحظي مع «اي سكور»": {
+    "meaning": "This regulatory directive requires consumer and microfinance companies to integrate their core systems via an API for real-time credit data exchange with I-Score, enabling instant updates to borrower liability profiles and default histories.",
+    "meaning_ar": "يلزم هذا التوجيه الرقابي شركات التمويل الاستهلاكي وتمويل المشروعات بالربط التقني المباشر لأنظمتها مع شركة الاستعلام الائتماني (آي سكور)، مما يتيح التحديث الفوري للبيانات الائتمانية وسجلات مديونيات وتعثر العملاء."
   },
   "عاجل.. الرقابه الماليه تلزم شركات التمويل الاستهلاكي وتمويل المشروعات بالربط اللحظي مع “اي سكور”": {
     "meaning": "The directive requires consumer and microfinance companies to integrate their credit databases with the Egyptian Credit Bureau (I-Score) via real-time data feeds, establishing instantaneous information exchange for credit risk assessment.",
