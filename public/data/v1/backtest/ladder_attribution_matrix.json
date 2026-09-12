@@ -1,0 +1,308 @@
+{
+  "metadata": {
+    "title": "C-v2 Drawdown Accumulation Ladder Attribution & Sensitivity Matrix",
+    "evaluation_period": "2008-01-01 to 2026-03-05",
+    "total_sessions": 4518,
+    "evaluation_years": 18.072,
+    "transaction_friction_bps": 20,
+    "execution_model": "T+1 Open with Close observation",
+    "status": "FROZEN_RESEARCH_BENCHMARK",
+    "author": "Barbary / ESTHMR Quantitative Research",
+    "regulatory_disclaimer": "Academic & historical backtest research under Egyptian Capital Market Law No. 95/1992 and executive regulations through 2025. Not an offer, solicitation, or personalized financial advice."
+  },
+  "attribution_matrix": {
+    "buy_and_hold": {
+      "cagr": 9.71,
+      "max_dd": -71.6,
+      "vol": 24.53,
+      "mean_w": 100.0,
+      "turnover": 0.0,
+      "cagr_static": 9.71,
+      "max_dd_static": -71.6,
+      "timing_value_bps": 0.0,
+      "wealth_100k": 533326.0,
+      "wealth_100k_static": 533326.0
+    },
+    "c_v2_full_ladder": {
+      "cagr": 14.43,
+      "max_dd": -50.44,
+      "vol": 19.44,
+      "mean_w": 79.3,
+      "turnover": 796.8,
+      "cagr_static": 11.29,
+      "max_dd_static": -62.07,
+      "timing_value_bps": 314.3,
+      "wealth_100k": 1143442.0,
+      "wealth_100k_static": 691203.0
+    },
+    "c_v2_cash_until_sma20": {
+      "cagr": 14.49,
+      "max_dd": -50.44,
+      "vol": 19.19,
+      "mean_w": 78.5,
+      "turnover": 796.8,
+      "cagr_static": 11.34,
+      "max_dd_static": -61.67,
+      "timing_value_bps": 314.8,
+      "wealth_100k": 1153799.0,
+      "wealth_100k_static": 697118.0
+    },
+    "c_v2_ladder_no_sma20": {
+      "cagr": 9.73,
+      "max_dd": -61.77,
+      "vol": 22.2,
+      "mean_w": 87.5,
+      "turnover": 841.1,
+      "cagr_static": 10.69,
+      "max_dd_static": -66.15,
+      "timing_value_bps": -96.2,
+      "wealth_100k": 535739.0,
+      "wealth_100k_static": 627304.0
+    },
+    "sma20_alone": {
+      "cagr": 27.24,
+      "max_dd": -19.22,
+      "vol": 15.4,
+      "mean_w": 58.2,
+      "turnover": 2158.0,
+      "cagr_static": 12.62,
+      "max_dd_static": -49.46,
+      "timing_value_bps": 1461.3,
+      "wealth_100k": 7772411.0,
+      "wealth_100k_static": 857118.0
+    },
+    "placebo_1000_monte_carlo": {
+      "cagr_mean": 10.65,
+      "cagr_median": 10.39,
+      "cagr_p5": 5.95,
+      "cagr_p95": 15.75,
+      "max_dd_mean": -63.97,
+      "max_dd_median": -64.72,
+      "timing_value_mean": -40.6,
+      "timing_value_median": -65.8,
+      "timing_value_p5": -500.0,
+      "timing_value_p95": 461.3,
+      "pval_cagr": 0.115,
+      "pval_timing": 0.129,
+      "pval_maxdd": 0.049
+    }
+  },
+  "performance_decomposition": {
+    "buy_and_hold_baseline_cagr": 9.71,
+    "passive_tbill_carry_bps": 158.0,
+    "pure_timing_alpha_bps": 314.3,
+    "sma20_recovery_shield_bps": 470.0,
+    "total_strategy_cagr": 14.43,
+    "net_outperformance_bps": 472.0
+  },
+  "sensitivity_grid": [
+    [
+      {
+        "step": 8.0,
+        "tranche": 20.0,
+        "cagr": 14.0,
+        "max_dd": -50.44,
+        "timing_value_bps": 281.1,
+        "mean_equity_pct": 80.7,
+        "turnover": 796.8
+      },
+      {
+        "step": 8.0,
+        "tranche": 25.0,
+        "cagr": 13.71,
+        "max_dd": -50.44,
+        "timing_value_bps": 255.2,
+        "mean_equity_pct": 81.2,
+        "turnover": 796.8
+      },
+      {
+        "step": 8.0,
+        "tranche": 33.3,
+        "cagr": 13.46,
+        "max_dd": -51.24,
+        "timing_value_bps": 235.8,
+        "mean_equity_pct": 81.9,
+        "turnover": 796.8
+      }
+    ],
+    [
+      {
+        "step": 10.0,
+        "tranche": 20.0,
+        "cagr": 14.35,
+        "max_dd": -50.44,
+        "timing_value_bps": 312.0,
+        "mean_equity_pct": 80.1,
+        "turnover": 796.8
+      },
+      {
+        "step": 10.0,
+        "tranche": 25.0,
+        "cagr": 14.29,
+        "max_dd": -50.44,
+        "timing_value_bps": 308.6,
+        "mean_equity_pct": 80.5,
+        "turnover": 796.8
+      },
+      {
+        "step": 10.0,
+        "tranche": 33.3,
+        "cagr": 14.0,
+        "max_dd": -50.44,
+        "timing_value_bps": 284.0,
+        "mean_equity_pct": 81.1,
+        "turnover": 796.8
+      }
+    ],
+    [
+      {
+        "step": 12.0,
+        "tranche": 20.0,
+        "cagr": 14.59,
+        "max_dd": -50.44,
+        "timing_value_bps": 333.3,
+        "mean_equity_pct": 79.7,
+        "turnover": 796.8
+      },
+      {
+        "step": 12.0,
+        "tranche": 25.0,
+        "cagr": 14.6,
+        "max_dd": -50.44,
+        "timing_value_bps": 336.2,
+        "mean_equity_pct": 80.0,
+        "turnover": 796.8
+      },
+      {
+        "step": 12.0,
+        "tranche": 33.3,
+        "cagr": 14.6,
+        "max_dd": -50.44,
+        "timing_value_bps": 339.4,
+        "mean_equity_pct": 80.5,
+        "turnover": 796.8
+      }
+    ],
+    [
+      {
+        "step": 15.0,
+        "tranche": 20.0,
+        "cagr": 14.45,
+        "max_dd": -50.44,
+        "timing_value_bps": 315.3,
+        "mean_equity_pct": 79.1,
+        "turnover": 796.8
+      },
+      {
+        "step": 15.0,
+        "tranche": 25.0,
+        "cagr": 14.43,
+        "max_dd": -50.44,
+        "timing_value_bps": 314.3,
+        "mean_equity_pct": 79.3,
+        "turnover": 796.8
+      },
+      {
+        "step": 15.0,
+        "tranche": 33.3,
+        "cagr": 14.39,
+        "max_dd": -50.44,
+        "timing_value_bps": 311.7,
+        "mean_equity_pct": 79.5,
+        "turnover": 796.8
+      }
+    ],
+    [
+      {
+        "step": 20.0,
+        "tranche": 20.0,
+        "cagr": 14.63,
+        "max_dd": -50.44,
+        "timing_value_bps": 331.0,
+        "mean_equity_pct": 78.8,
+        "turnover": 796.8
+      },
+      {
+        "step": 20.0,
+        "tranche": 25.0,
+        "cagr": 14.66,
+        "max_dd": -50.44,
+        "timing_value_bps": 334.6,
+        "mean_equity_pct": 78.9,
+        "turnover": 796.8
+      },
+      {
+        "step": 20.0,
+        "tranche": 33.3,
+        "cagr": 14.71,
+        "max_dd": -50.44,
+        "timing_value_bps": 340.2,
+        "mean_equity_pct": 79.0,
+        "turnover": 796.8
+      }
+    ]
+  ],
+  "cash_sleeve_audit": {
+    "gross_1y_tbill": {
+      "cagr": 14.43,
+      "max_dd": -50.44,
+      "vol": 19.44,
+      "mean_w": 79.3,
+      "turnover": 796.8,
+      "cagr_static": 11.29,
+      "max_dd_static": -62.07,
+      "timing_value_bps": 314.3,
+      "wealth_100k": 1143442.0,
+      "wealth_100k_static": 691203.0
+    },
+    "taxed_20pct_tbill": {
+      "cagr": 13.9,
+      "max_dd": -50.75,
+      "vol": 19.45,
+      "mean_w": 79.3,
+      "turnover": 796.8,
+      "cagr_static": 10.7,
+      "max_dd_static": -62.17,
+      "timing_value_bps": 320.3,
+      "wealth_100k": 1050499.0,
+      "wealth_100k_static": 627329.0
+    },
+    "liquid_money_market_85pct": {
+      "cagr": 14.03,
+      "max_dd": -50.67,
+      "vol": 19.44,
+      "mean_w": 79.3,
+      "turnover": 796.8,
+      "cagr_static": 10.85,
+      "max_dd_static": -62.15,
+      "timing_value_bps": 318.8,
+      "wealth_100k": 1073213.0,
+      "wealth_100k_static": 642890.0
+    },
+    "zero_interest_cash": {
+      "cagr": 11.64,
+      "max_dd": -52.02,
+      "vol": 19.45,
+      "mean_w": 79.3,
+      "turnover": 796.8,
+      "cagr_static": 8.16,
+      "max_dd_static": -62.62,
+      "timing_value_bps": 347.9,
+      "wealth_100k": 731503.0,
+      "wealth_100k_static": 412792.0
+    }
+  },
+  "forensic_drawdown_event": {
+    "max_dd_pct": -50.44,
+    "peak_date": "2014-09-30",
+    "peak_portfolio_wealth": 1.6636,
+    "peak_egx30_price": 9811.4,
+    "trough_date": "2016-02-14",
+    "trough_portfolio_wealth": 0.8244,
+    "trough_egx30_price": 5753.74,
+    "duration_sessions": 336,
+    "egx30_drop_pct": -41.36,
+    "mean_equity_during_dd": 78.3,
+    "macro_context": "Prolonged oil crash & Egyptian foreign currency scarcity (Episodes 50 to 57) preceding the historic November 2016 currency floatation."
+  }
+}
