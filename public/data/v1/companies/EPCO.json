@@ -777,7 +777,7 @@
   },
   {
    "date": "2026-03-30",
-   "close": 8.31,
+   "close": 8.32,
    "volume": 559795
   },
   {
@@ -972,7 +972,7 @@
   },
   {
    "date": "2026-06-02",
-   "close": 9.1,
+   "close": 9.09,
    "volume": 339080
   },
   {
@@ -1187,7 +1187,7 @@
   },
   {
    "date": "2026-08-05",
-   "close": 11.11,
+   "close": 11.15,
    "volume": 760782
   },
   {
@@ -1323,16 +1323,22 @@
   "perf_3m": 30.22222222222223,
   "avg_volume_30d": 1846607.6000000099,
   "relative_volume_10d": 14.033988430378537,
-  "median_volume_20d": 950440,
-  "rv20": 8.71885968604015,
-  "normal_value_30d": 12688890.95,
-  "five_session_change": 5.680793507664572,
-  "history_bars": 120,
+  "history_bars": 0,
   "market_cap": 498920400.0,
   "market_cap_source": "EGX",
   "trades": 3368,
-  "turnover": 97914823
+  "turnover": 97914823,
+  "median_volume_20d": 950440,
+  "rv20": 8.71885968604015,
+  "normal_value_30d": 12688890.95,
+  "five_session_change": 5.680793507664572
  },
+ "profile_carried": [
+  "five_session_change",
+  "median_volume_20d",
+  "normal_value_30d",
+  "rv20"
+ ],
  "financials": {
   "annual": [
    {
