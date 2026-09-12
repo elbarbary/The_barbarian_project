@@ -352,7 +352,7 @@ document.getElementById('signout').onclick = async () => {
     // Full histories belong to the destination, not the Home payload.
     // A retry advances loadVersion; a late response cannot cross readers.
     if (reader && !component.state.dataLoading && !component.data().demo
-        && ['liquidity', 'ownership'].includes(component.state.screen)
+        && ['liquidity', 'ownership', 'world'].includes(component.state.screen)
         && !component.data().flowTrackers && flowAttemptVersion !== loadVersion) {
       const version = loadVersion;
       const owner = readerVersion;
@@ -366,12 +366,15 @@ document.getElementById('signout').onclick = async () => {
         data.flowTrackers(),
         data.sectorOwnership ? data.sectorOwnership().catch(() => null)
                              : Promise.resolve(null),
-      ]).then(([flowTrackers, sectorOwnership]) => {
+        data.worldMonitor ? data.worldMonitor().catch(() => null)
+                          : Promise.resolve(null),
+      ]).then(([flowTrackers, sectorOwnership, worldMonitor]) => {
         if (version === loadVersion && owner === readerVersion && reader && !component.data().demo) {
           component.state.flowLoading = false;
           component.setData({
             ...component.data(), flowTrackers,
             ...(sectorOwnership ? { sectorOwnership } : {}),
+            ...(worldMonitor ? { worldMonitor } : {}),
           });
         }
       }).catch(() => {

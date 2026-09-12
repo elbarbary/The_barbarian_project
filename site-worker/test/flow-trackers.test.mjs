@@ -87,5 +87,11 @@ test('heavy histories are lazy-loaded and existing auth files are not involved',
   const source=await file('public/esthmr/main.js');
   assert.match(source,/slice\(data\.flowPreview\(\)/);
   assert.doesNotMatch(source,/slice\(data\.flowTrackers\(\)/);
-  assert.match(source,/\['liquidity', 'ownership'\]\.includes/);
+  // The screens whose documents are too heavy for the Home payload. Matched
+  // one at a time rather than as a literal list, so adding a screen to the
+  // lazy path does not fail a test about lazy loading.
+  const lazy=source.match(/\[([^\]]*)\]\.includes\(component\.state\.screen\)/);
+  assert.ok(lazy,'nothing is gated on the screen being open');
+  for(const screen of ['liquidity','ownership','world'])
+    assert.match(lazy[1],new RegExp(`'${screen}'`),screen);
 });

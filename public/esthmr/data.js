@@ -1526,6 +1526,15 @@ export async function flowPreview() {
   return d;
 }
 
+/** What moved outside Egypt, and the filings each move reaches. */
+export async function worldMonitor() {
+  const d = await doc('world-monitor.json');
+  if (d?.schemaVersion !== 1 || !Array.isArray(d.world) || !Array.isArray(d.channels)) {
+    throw new Error('Invalid world monitor snapshot');
+  }
+  return d;
+}
+
 /** Which listed companies hold stakes in one another, read sector to sector. */
 export async function sectorOwnership() {
   const d = await doc('sector-ownership.json');

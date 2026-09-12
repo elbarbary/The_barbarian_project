@@ -51,6 +51,11 @@
 .ft-pills{display:flex;flex-wrap:wrap;gap:6px}
 .ft-pill,.ft-pagination button,.ft-select select{font:inherit;color:var(--ink);border:1px solid var(--edge);background:var(--surface);border-radius:14px;min-height:42px;padding:8px 14px;cursor:pointer;transition:transform .12s ease,background-color .12s ease}
 .ft-pill:active,.ft-pagination button:active{transform:scale(0.97)}
+/* `#app button{color:inherit}` in journal.css is (1,0,1) and this was (0,2,0),
+   so the pressed pill took the page's ink for its text AND for its background:
+   every active pill on this site was a solid dark box with an invisible label
+   in it. The id is here to outrank that rule, not for scoping. */
+#app .ft-pill[aria-pressed=true],
 .ft-pill[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:600}
 .ft-select{display:grid;gap:5px;min-width:0;max-width:100%;flex:1 1 180px;font-size:11.5px;color:var(--t2)}
 .ft-select select{width:100%;max-width:100%;font-size:13px}
@@ -834,3 +839,56 @@ button.om-holder-row:hover span { color: var(--accent); }
 /* Which scale the months are drawn on. Sits above the chart because it
    changes what the chart means, not how it is filtered. */
 .sl-scale { margin: 10px 0 2px; }
+
+/* ── the world monitor ──────────────────────────────────────────────────────
+   What moved outside Egypt, and which filings it reaches. */
+.wm-screen .wm-block { margin-bottom: 22px; }
+.wm-windows { margin: 14px 0 18px; }
+.wm-moves { display: grid; gap: 2px; margin-top: 10px; }
+/* The bar is how UNUSUAL the move was, never how big — a reader who reads it
+   as size has oil and the EGX 30 the wrong way round this week. */
+.wm-move { display: grid; align-items: center; gap: 10px;
+  grid-template-columns: minmax(0, 1.2fr) 76px minmax(80px, 0.8fr) minmax(0, 1.4fr);
+  padding: 8px 10px; border-radius: 10px; }
+.wm-move:nth-child(odd) { background: var(--sunk); }
+.wm-move-name { display: grid; min-width: 0; }
+.wm-move-name strong { font-size: 13px; }
+.wm-move-name small { font-size: 10px; color: var(--t2);
+  font-family: 'IBM Plex Mono', monospace; }
+.wm-move-change { font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+  text-align: end; }
+.wm-move-bar { height: 7px; border-radius: 4px; background: var(--sunk);
+  box-shadow: inset 0 0 0 1px var(--edgeIn); overflow: hidden; }
+.wm-move-bar i { display: block; height: 100%; background: var(--accent);
+  border-radius: 4px; }
+.wm-move-against { font-size: 11px; color: var(--t2); }
+
+.wm-channel .om-search { margin-top: 12px; }
+.wm-rows { display: grid; gap: 2px; margin-top: 8px;
+  max-height: 60vh; overflow-y: auto; }
+.wm-row { display: grid; align-items: center; gap: 10px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr) 90px;
+  padding: 8px 10px; border-radius: 10px; }
+.wm-row:nth-child(odd) { background: var(--sunk); }
+.wm-row-who { display: grid; min-width: 0; }
+.wm-row-who strong { font-size: 12.5px; }
+.wm-row-who small { font-size: 10.5px; color: var(--t2); overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; }
+.wm-row-figures { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px; }
+.wm-row-figures span { display: grid; min-width: 0; }
+.wm-row-figures small { font-size: 9.5px; color: var(--faint); }
+.wm-row-figures b { font-size: 12px; font-weight: 600;
+  font-family: 'IBM Plex Mono', monospace; }
+.wm-row-filed { font-size: 10px; color: var(--t2); text-align: end;
+  font-family: 'IBM Plex Mono', monospace; }
+/* Two filed numbers that do not describe each other, said out loud. */
+.wm-row-warn { grid-column: 1 / -1; font-size: 10.5px; color: var(--down); }
+
+@media (max-width: 768px) {
+  .wm-move { grid-template-columns: minmax(0, 1fr) 70px; }
+  .wm-move-bar { display: none; }
+  .wm-move-against { grid-column: 1 / -1; }
+  .wm-row { grid-template-columns: minmax(0, 1fr); }
+  .wm-row-filed { text-align: start; }
+}

@@ -1,6 +1,6 @@
 const SCREENS = new Set(['home', 'market', 'company', 'today', 'investors',
   'heat', 'watchlist', 'sectors', 'calendar', 'exchange', 'tools', 'research', 'crossings',
-  'pairs', 'valuation', 'liquidity', 'ownership']);
+  'pairs', 'valuation', 'liquidity', 'ownership', 'world']);
 const RANK_METRICS = new Set(['cap','close','dividend_yield','profit','debt_equity']);
 
 export function readRoute(search) {

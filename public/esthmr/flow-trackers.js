@@ -2,6 +2,7 @@ import { React as R } from './react-shim.js';
 
 import * as OM from './ownership-map.js';
 import * as SL from './sector-lens.js';
+import { worldMonitor } from './world-monitor.js';
 
 const h = R.createElement;
 const finite = v => typeof v === 'number' && Number.isFinite(v);
@@ -1765,6 +1766,11 @@ function renderSectorsInsideSectors(doc, ar, t, focus, onPick, onCompany) {
 export function flowTrackers(component, data, ar) {
   const t = (en, arabic) => ar ? arabic : en;
   const st = component.state;
+  // Its own module: this file is already the longest on the site, and the
+  // monitor shares nothing with the trackers but the screen slot.
+  if (st.screen === 'world') {
+    return { home: null, screen: worldMonitor(component, data, ar) };
+  }
   const d = data.flowTrackers;
   const go = screen => component.setState({ screen });
   const sectorTitle = t('Sector pulse', 'نبض سيولة القطاعات');
