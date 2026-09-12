@@ -112,7 +112,16 @@ SCHEMA = """{"position": {"page": <pdf page number>,
               "amount": <number as printed; a loss is negative>,
               "printed": "<the line as printed>"}}"""
 
+# Both prompts are given the period the filing covers, and it is load-bearing.
+# The note prints the current period beside its comparative, and without being
+# told which is wanted the two readers pick different columns and agree on
+# nothing: LCSW's readers took 30 June 2026 and 31 December 2025 and all four
+# of its currencies were dropped as a disagreement while both were right.
 DISCOVERY_PROMPT = """You are reading one filed Egyptian financial statement, in Arabic.
+
+This filing covers the period ending {period_end}. Every table here prints
+that period beside the comparative period before it. Report ONLY the column
+for {period_end}, and never the comparative.
 
 Find the note stating the company's FOREIGN CURRENCY POSITION: the table of
 monetary assets and liabilities held in currencies other than the Egyptian
@@ -135,11 +144,16 @@ Use null for "position" if no such table of figures is printed, and null for
 "fxResult" if no such amount is printed. Report every number exactly as it is
 printed, without rescaling it, and set "unit" from the column heading. Set
 "denominatedIn" to "foreign" when the table is in the foreign currency itself
-and "EGP" when it is the Egyptian pound equivalent. Never report a figure you
-did not read.""" % SCHEMA
+and "EGP" when it is the Egyptian pound equivalent. A line labelled as a loss
+(خسائر) is negative even where it is printed without a sign, and a figure
+printed in brackets is negative. Never report a figure you did not read.""" % SCHEMA
 
 AUDIT_PROMPT = """These images are pages from one filed Egyptian financial statement,
 in Arabic. Read the foreign-currency figures printed on them.
+
+The filing covers the period ending {period_end}. These tables print that
+period beside the comparative period before it. Report ONLY the column for
+{period_end}, and never the comparative.
 
 Report the foreign currency position table (monetary assets and liabilities by
 currency, or the surplus / deficit per currency) and the foreign exchange gain
@@ -152,8 +166,10 @@ Return ONLY this JSON object, no prose and no code fence:
 
 %s
 
-Report every number exactly as printed, without rescaling it. Use null for
-anything that is not printed on these pages.""" % SCHEMA
+Report every number exactly as printed, without rescaling it. A line labelled
+as a loss (خسائر) is negative even where it is printed without a sign, and a
+figure printed in brackets is negative. Use null for anything that is not
+printed on these pages.""" % SCHEMA
 
 BIDI = dict.fromkeys(map(ord, "​‌‍‎‏‪‫"
                               "‬‭‮⁦⁧⁨⁩ـ"))
@@ -308,11 +324,11 @@ def _ask(parts: list[dict], *, timeout: int = 300) -> dict | None:
     return _json_from(text)
 
 
-def discover(pdf: pathlib.Path) -> dict | None:
+def discover(pdf: pathlib.Path, period_end: str) -> dict | None:
     return _ask([
         {"inlineData": {"mimeType": "application/pdf",
                         "data": base64.b64encode(pdf.read_bytes()).decode()}},
-        {"text": DISCOVERY_PROMPT},
+        {"text": DISCOVERY_PROMPT.replace("{period_end}", period_end or "the period stated")},
     ])
 
 
@@ -330,7 +346,7 @@ def render(pdf: pathlib.Path, pages: list[int], folder: pathlib.Path) -> list[tu
     return out
 
 
-def audit(pages: list[tuple[int, pathlib.Path]]) -> dict | None:
+def audit(pages: list[tuple[int, pathlib.Path]], period_end: str) -> dict | None:
     """The second pair of eyes — the pages only, never the first read's answer.
 
     Handing the audit the numbers to confirm is how a two-read check becomes
@@ -342,7 +358,7 @@ def audit(pages: list[tuple[int, pathlib.Path]]) -> dict | None:
         parts.append({"text": f"The next image is PDF page {page}."})
         parts.append({"inlineData": {"mimeType": "image/png",
                                      "data": base64.b64encode(image.read_bytes()).decode()}})
-    parts.append({"text": AUDIT_PROMPT})
+    parts.append({"text": AUDIT_PROMPT.replace("{period_end}", period_end or "the period stated")})
     return _ask(parts)
 
 
@@ -536,8 +552,8 @@ def fetch_pdf(url: str, filing: str, ticker: str) -> pathlib.Path | None:
     return target if target.is_file() else None
 
 
-def read_filing(pdf: pathlib.Path) -> tuple[dict | None, list[dict]]:
-    first = discover(pdf)
+def read_filing(pdf: pathlib.Path, period_end: str) -> tuple[dict | None, list[dict]]:
+    first = discover(pdf, period_end)
     if not isinstance(first, dict):
         return None, []
     pages = []
@@ -553,15 +569,19 @@ def read_filing(pdf: pathlib.Path) -> tuple[dict | None, list[dict]]:
         images = render(pdf, pages, pathlib.Path(folder))
         if not images:
             return None, []
-        second = audit(images)
+        second = audit(images, period_end)
     if not isinstance(second, dict):
         return None, []
     kept, dropped = agree(first, second, checkable(page_text(pdf, pages)))
+    # Only what survived gets a citation. A date or a printed line kept beside
+    # a figure that was dropped says the note was read for something this does
+    # not publish, which is the opposite of what a citation is for.
     kept["pages"] = sorted(set(pages))
-    kept["asOf"] = (first.get("position") or {}).get("asOf") if isinstance(first.get("position"), dict) else None
+    position = first.get("position") if isinstance(first.get("position"), dict) else {}
+    result = first.get("fxResult") if isinstance(first.get("fxResult"), dict) else {}
+    kept["asOf"] = position.get("asOf") if kept["position"] else None
     kept["denominatedIn"] = _denomination(first) if kept["position"] else None
-    kept["printed"] = ((first.get("fxResult") or {}).get("printed")
-                       if isinstance(first.get("fxResult"), dict) else None)
+    kept["printed"] = result.get("printed") if kept["fxResult"] is not None else None
     return kept, dropped
 
 
@@ -667,6 +687,9 @@ def publish(store: dict, filings: dict) -> dict:
         dominant = bool(share is not None and abs(share) > 100) or None
         position = [{"currency": code, "net": round(value, 3)}
                     for code, value in sorted((reading.get("position") or {}).items())]
+        # Enforced here as well as at reading time, so a store written before
+        # that rule existed cannot publish a citation for a dropped figure.
+        cited = reading.get("printed") if shown_result is not None else None
         companies.append({
             "ticker": ticker,
             "name": names.get(ticker),
@@ -676,9 +699,9 @@ def publish(store: dict, filings: dict) -> dict:
             "shareOfNetIncome": share,
             "largerThanTheProfit": dominant,
             "position": position,
-            "denominatedIn": reading.get("denominatedIn"),
-            "positionAsOf": reading.get("asOf"),
-            "printed": reading.get("printed"),
+            "denominatedIn": reading.get("denominatedIn") if position else None,
+            "positionAsOf": reading.get("asOf") if position else None,
+            "printed": cited,
             "period": row.get("period"),
             "periodEnd": row.get("period_end"),
             "filingId": reading.get("filingId"),
@@ -781,7 +804,7 @@ def main(argv=None) -> int:
             print(f"   {ticker} {filing}: the filing could not be reached — will retry")
             continue
         try:
-            reading, dropped = read_filing(pdf)
+            reading, dropped = read_filing(pdf, row.get("period_end") or "")
         except Exception as error:  # a reader that fell over is a retry, not a reading
             print(f"   {ticker} {filing}: {type(error).__name__} — will retry")
             continue

@@ -111,6 +111,33 @@ class ColumnsAndNumbers(unittest.TestCase):
         self.assertGreaterEqual(len(notes.checkable(table)), notes.NUMERIC_PAGE)
 
 
+class WhichColumn(unittest.TestCase):
+    def test_both_readers_are_told_which_period_to_read(self):
+        # The note prints the current period beside its comparative. Told
+        # neither, LCSW's two readers took 30 June 2026 and 31 December 2025 —
+        # both correct — and all four of its currencies were thrown away as a
+        # disagreement.
+        seen = []
+
+        def remember(parts, **kw):
+            seen.append(" ".join(p.get("text", "") for p in parts))
+            return None
+
+        with mock.patch.object(notes, "_ask", remember):
+            notes.discover(pathlib.Path(__file__), "2026-06-30")
+            notes.audit([], "2026-06-30")
+        self.assertEqual(len(seen), 2)
+        for prompt in seen:
+            self.assertIn("2026-06-30", prompt)
+            self.assertIn("never the comparative", prompt)
+        self.assertNotIn("{period_end}", " ".join(seen))
+
+    def test_a_loss_is_negative_even_where_it_is_printed_without_a_sign(self):
+        for prompt in (notes.DISCOVERY_PROMPT, notes.AUDIT_PROMPT):
+            self.assertIn("خسائر", prompt)
+            self.assertIn("negative", prompt)
+
+
 class WhichDocument(unittest.TestCase):
     def test_the_filing_is_the_document_the_statement_was_read_from(self):
         # One filing id names several attachments and they are different
@@ -302,6 +329,22 @@ class Publishing(unittest.TestCase):
             row = document["companies"][0]
             self.assertIsNone(row["shareOfNetIncome"])
             self.assertEqual(row["netIncome"], -40.0)
+
+    def test_a_dropped_figure_takes_its_citation_with_it(self):
+        # A reading whose fx result the two reads disagreed on still holds the
+        # line the first read quoted. Published beside no figure, that line
+        # says the note was read for something this document does not carry.
+        store = {"291": {"position": {}, "fxResult": None, "ticker": "AAAA",
+                         "printed": "أرباح فروق عملة", "asOf": "2026-06-30",
+                         "denominatedIn": "EGP"}}
+        filings = {"291": {"ticker": "AAAA", "period_end": "2026-06-30", "fields": {}}}
+        with publishing(store, filings) as document:
+            self.assertEqual(document["companyCount"], 0)
+        store["291"]["position"] = {"USD": 1.0}
+        with publishing(store, filings) as document:
+            row = document["companies"][0]
+            self.assertIsNone(row["printed"], "a citation without its figure")
+            self.assertEqual(row["positionAsOf"], "2026-06-30")
 
     def test_the_newest_filing_wins(self):
         store = {"1": {"position": {}, "fxResult": 5.0, "ticker": "AAAA"},

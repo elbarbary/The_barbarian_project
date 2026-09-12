@@ -11,7 +11,9 @@ Run: python3 -m unittest discover -s scripts -p 'test_*.py'
 
 from __future__ import annotations
 
+import json
 import unittest
+from unittest import mock
 
 import build_world_monitor as monitor
 
@@ -134,3 +136,33 @@ class Published(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TheCurrencyChannel(unittest.TestCase):
+    """The one channel fed by a separate, manual harvest."""
+
+    def channels(self, rows):
+        with mock.patch.object(monitor, "currency_notes", lambda: rows):
+            return {c["id"]: c for c in monitor.build()["channels"]}
+
+    def test_a_channel_with_nothing_in_it_is_not_published(self):
+        # The reading is its own harvest, run by hand. A build taken before it
+        # has run — or while it is part-way through a re-read — would otherwise
+        # publish a heading, a count of nought and a search box over an empty
+        # list, which reads as "no company on this exchange has a currency
+        # figure" rather than "this has not been read yet".
+        self.assertNotIn("currency", self.channels([]))
+        self.assertIn("rates", self.channels([]))
+
+    def test_a_channel_with_companies_carries_its_count_and_the_day_s_rate(self):
+        rows = [{"ticker": "AAAA", "fxResult": 1.0, "position": []}]
+        channel = self.channels(rows)["currency"]
+        self.assertEqual(channel["count"], 1)
+        self.assertEqual(channel["companies"], rows)
+        # And the pound is a level with a date, never a percentile: this site
+        # keeps no history for a currency to place it against.
+        today = channel["today"]
+        if today is not None:
+            self.assertRegex(today["asOf"], r"^\d{4}-\d{2}-\d{2}$")
+            self.assertNotIn("percentile", json.dumps(today))
+            self.assertIn("keeps no history", today["note"])

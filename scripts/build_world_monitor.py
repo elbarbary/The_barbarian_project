@@ -368,7 +368,7 @@ def build() -> dict:
                 "count": len(margin_rows),
                 "companies": margin_rows,
             },
-            {
+            *([{
                 "id": "currency",
                 "question": "Where does a move in the pound land?",
                 "questionAr": "أين تصل حركة الجنيه؟",
@@ -381,7 +381,12 @@ def build() -> dict:
                 "count": len(currency_rows),
                 "today": pound_today(),
                 "companies": currency_rows,
-            },
+            # A channel with nothing in it is not a channel. The reading is a
+            # separate, manual harvest, so a run taken while it is part-way
+            # through — or one where it has not been run at all — would
+            # otherwise publish a heading, a count of nought and a search box
+            # over an empty list.
+            }] if currency_rows else []),
         ],
         "foreignMoney": foreign_money(),
     }
