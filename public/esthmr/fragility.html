@@ -1937,23 +1937,20 @@ body.mode-quant .investor-only {
     <div class="fe-strategy-bar">
       <span style="font-family:var(--fe-mono); font-size:0.75rem; font-weight:600; color:var(--fe-faint); margin-right:8px;">COMPARE STRATEGY AGAINST BUY &amp; HOLD:</span>
       <div class="fe-strat-chips" id="strategyChips">
-        <button class="fe-chip-strat is-active" data-strat="cv5_p">
-          <strong>C-v5-P</strong> <span>Primary Challenger (45G / 35P / 20V)</span>
+        <button class="fe-chip-strat is-active" data-strat="cv2_cash_sma" style="border:2px solid var(--fe-accent); background:#F0FDF4;">
+          <strong style="color:#166534;">C-v2 Cash until SMA20</strong> <span style="color:#15803D; font-weight:700;">1.15M EGP (+1.05M Return)</span>
         </button>
-        <button class="fe-chip-strat" data-strat="cv5_eq">
-          <strong>C-v5-EQ</strong> <span>Neutral Control (33.3 / 33.3 / 33.3)</span>
+        <button class="fe-chip-strat" data-strat="cv2_ladder">
+          <strong>C-v2 Ladder</strong> <span>1.14M EGP (+1.04M Return)</span>
         </button>
-        <button class="fe-chip-strat" data-strat="cv5_t">
-          <strong>C-v5-T</strong> <span>Tail Control (30G / 50P / 20V)</span>
-        </button>
-        <button class="fe-chip-strat" data-strat="cv4">
-          <strong>C-v4</strong> <span>Canonical Vol Brake Delay</span>
-        </button>
-        <button class="fe-chip-strat" data-strat="cv3">
-          <strong>C-v3</strong> <span>Fixed 40% Base Hedge</span>
+        <button class="fe-chip-strat" data-strat="cv5_p">
+          <strong>C-v5-P</strong> <span>World Monitor (644k EGP)</span>
         </button>
         <button class="fe-chip-strat" data-strat="s100">
-          <strong>S100</strong> <span>Binary 100% Exit</span>
+          <strong>S100 Binary Exit</strong> <span>525k EGP (Fails B&amp;H)</span>
+        </button>
+        <button class="fe-chip-strat" data-strat="cv4">
+          <strong>C-v4</strong> <span>Vol Brake (592k EGP)</span>
         </button>
       </div>
     </div>
@@ -1964,7 +1961,7 @@ body.mode-quant .investor-only {
       <div class="fe-vs-tile">
         <div class="fe-vs-head">
           <span class="fe-vs-title" id="kpiWealthTitle">Ending Wealth (100,000 EGP Start)</span>
-          <span class="fe-badge-metric fe-b-good" id="kpiWealthBadge">+110,438 EGP Net Edge</span>
+          <span class="fe-badge-metric fe-b-good" id="kpiWealthBadge">+620,473 EGP Edge (Over +1M Return!)</span>
         </div>
         <div class="fe-vs-dual">
           <div class="fe-vs-col">
@@ -1974,9 +1971,9 @@ body.mode-quant .investor-only {
           </div>
           <div class="fe-vs-divider"></div>
           <div class="fe-vs-col fe-col-strat">
-            <small id="kpiStratNameWealth">C-v5-P Strategy</small>
-            <strong id="kpiWealthStrat" style="color:var(--fe-accent);">EGP 643,764</strong>
-            <span id="kpiStratRetPct">+543,764 EGP (+543.8%)</span>
+            <small id="kpiStratNameWealth">C-v2 Cash until SMA20</small>
+            <strong id="kpiWealthStrat" style="color:var(--fe-accent);">EGP 1,153,799</strong>
+            <span id="kpiStratRetPct">+1,053,799 EGP (+1,053.8%)</span>
           </div>
         </div>
         <p id="kpiWealthExplainer" style="font-size:0.7rem; color:var(--fe-faint); margin-top:8px; border-top:1px dashed var(--fe-edge); padding-top:6px;">
@@ -1988,7 +1985,7 @@ body.mode-quant .investor-only {
       <div class="fe-vs-tile">
         <div class="fe-vs-head">
           <span class="fe-vs-title">Compound Annual Growth (CAGR)</span>
-          <span class="fe-badge-metric fe-b-good" id="kpiCagrBadge">+114 bps/yr</span>
+          <span class="fe-badge-metric fe-b-good" id="kpiCagrBadge">+478 bps/yr</span>
         </div>
         <div class="fe-vs-dual">
           <div class="fe-vs-col">
@@ -1998,8 +1995,8 @@ body.mode-quant .investor-only {
           </div>
           <div class="fe-vs-divider"></div>
           <div class="fe-vs-col fe-col-strat">
-            <small id="kpiStratNameCagr">C-v5-P Strategy</small>
-            <strong id="kpiCagrStrat" style="color:var(--fe-accent);">10.85%</strong>
+            <small id="kpiStratNameCagr">C-v2 Cash until SMA20</small>
+            <strong id="kpiCagrStrat" style="color:var(--fe-accent);">14.49%</strong>
             <span>per year average</span>
           </div>
         </div>
@@ -2012,7 +2009,7 @@ body.mode-quant .investor-only {
       <div class="fe-vs-tile">
         <div class="fe-vs-head">
           <span class="fe-vs-title">Worst Historical Drop (MaxDD)</span>
-          <span class="fe-badge-metric fe-b-good" id="kpiDDBadge">+4.20 pts Saved</span>
+          <span class="fe-badge-metric fe-b-good" id="kpiDDBadge">+21.2 pts Saved</span>
         </div>
         <div class="fe-vs-dual">
           <div class="fe-vs-col">
@@ -2022,9 +2019,9 @@ body.mode-quant .investor-only {
           </div>
           <div class="fe-vs-divider"></div>
           <div class="fe-vs-col fe-col-strat">
-            <small id="kpiStratNameDD">C-v5-P Strategy</small>
-            <strong id="kpiDDStrat" style="color:#235238;">-67.40%</strong>
-            <span id="kpiDDStratSub">trough: EGP 32,600</span>
+            <small id="kpiStratNameDD">C-v2 Cash until SMA20</small>
+            <strong id="kpiDDStrat" style="color:#235238;">-50.44%</strong>
+            <span id="kpiDDStratSub">trough: EGP 49,560</span>
           </div>
         </div>
         <p id="kpiDDExplainer" style="font-size:0.7rem; color:var(--fe-faint); margin-top:8px; border-top:1px dashed var(--fe-edge); padding-top:6px;">
@@ -4637,7 +4634,9 @@ window.setPageMode = setPageMode;
     });
   }
 
-  loadData('/data/v1/backtest/v5_simulation_series.json')
+  loadData('/esthmr/backtest/v5_simulation_series.json')
+    .catch(() => loadData('backtest/v5_simulation_series.json'))
+    .catch(() => loadData('/data/v1/backtest/v5_simulation_series.json'))
     .catch(() => loadData('../data/v1/backtest/v5_simulation_series.json'))
     .catch(() => loadData('data/v1/backtest/v5_simulation_series.json'))
     .then(d => {
@@ -4754,9 +4753,9 @@ window.setPageMode = setPageMode;
   let wmPayload = null;
   let tradesPayload = null;
   let currentScenario = 'full';
-  let currentStrategy = 'cv5_p';
+  let currentStrategy = 'cv2_cash_sma';
 
-  let currentLedgerSystem = 'cv5_p';
+  let currentLedgerSystem = 'cv2_cash_sma';
   let currentLedgerRegime = 'ALL';
   let currentLedgerType = 'ALL';
   let currentLedgerSearch = '';
@@ -4770,13 +4769,16 @@ window.setPageMode = setPageMode;
 
   // Load authoritative World Monitor simulation dataset
   function loadWMData() {
-    loadData('/data/v1/backtest/world_monitor_simulation_series.json')
+    loadData('/esthmr/backtest/world_monitor_simulation_series.json')
+      .catch(() => loadData('backtest/world_monitor_simulation_series.json'))
+      .catch(() => loadData('/data/v1/backtest/world_monitor_simulation_series.json'))
       .catch(() => loadData('../data/v1/backtest/world_monitor_simulation_series.json'))
       .catch(() => loadData('data/v1/backtest/world_monitor_simulation_series.json'))
       .then(d => {
         wmPayload = d;
         initScenarioLab();
         updateStickyBar(d.latest_live);
+        updateScenarioView();
       })
       .catch(err => {
         console.warn("Could not load world monitor simulation series:", err);
@@ -5014,15 +5016,17 @@ window.setPageMode = setPageMode;
   }
 
   function getStratIndexInTimeline(stratKey) {
-    // Columns: [0:date, 1:price, 2:al, 3:s_v4, 4:wm_p, 5:g, 6:p, 7:v, 8:vol20, 9:w_cv3, 10:w_cv4, 11:w_cv5_eq, 12:w_cv5_p, 13:w_cv5_t, 14:w_s100, 15:cum_hold, 16:cum_cv3, 17:cum_cv4, 18:cum_cv5_eq, 19:cum_cv5_p, 20:cum_cv5_t, 21:cum_s100]
+    // Columns: [0..21 existing, 22:w_cv2_cash_sma, 23:w_cv2_ladder, 24:cum_cv2_cash_sma, 25:cum_cv2_ladder]
     switch (stratKey) {
-      case 'cv5_p': return { wIdx: 12, cumIdx: 19, name: "C-v5-P Primary (45/35/20)" };
+      case 'cv2_cash_sma': return { wIdx: 22, cumIdx: 24, name: "C-v2 Cash until SMA20 (+1M Return)" };
+      case 'cv2_ladder': return { wIdx: 23, cumIdx: 25, name: "C-v2 Drawdown Ladder (+1M Return)" };
+      case 'cv5_p': return { wIdx: 12, cumIdx: 19, name: "C-v5-P World Monitor (+110k Return)" };
       case 'cv5_eq': return { wIdx: 11, cumIdx: 18, name: "C-v5-EQ Neutral (33/33/33)" };
       case 'cv5_t': return { wIdx: 13, cumIdx: 20, name: "C-v5-T Tail Control (30/50/20)" };
       case 'cv4': return { wIdx: 10, cumIdx: 17, name: "C-v4 Canonical Vol Brake" };
       case 'cv3': return { wIdx: 9, cumIdx: 16, name: "C-v3 40% Base Hedge" };
       case 's100': return { wIdx: 14, cumIdx: 21, name: "S100 Binary 100% Exit" };
-      default: return { wIdx: 12, cumIdx: 19, name: "C-v5-P Primary (45/35/20)" };
+      default: return { wIdx: 22, cumIdx: 24, name: "C-v2 Cash until SMA20 (+1M Return)" };
     }
   }
 
