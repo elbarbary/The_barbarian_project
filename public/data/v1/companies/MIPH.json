@@ -1312,7 +1312,7 @@
   },
   {
    "date": "2026-09-10",
-   "close": 810.98,
+   "close": 809.76,
    "volume": 3056
   }
  ],
@@ -1328,7 +1328,7 @@
   "median_volume_20d": 3053,
   "rv20": 1.0009826400262036,
   "normal_value_30d": 3126736.5,
-  "five_session_change": 1.397849462365608,
+  "five_session_change": 1.245311327831966,
   "history_bars": 120,
   "market_cap": 9539733974.4,
   "market_cap_source": "EGX",
