@@ -1655,6 +1655,10 @@
     "meaning": "The regulatory sandbox operates as a controlled testing framework where non-banking financial institutions and FinTech entities deploy and validate digital products and operational models under direct supervisory oversight.",
     "meaning_ar": "يوفر المختبر التنظيمي إطار عمل تجريبي خاضع لإشراف الهيئة يتيح للمؤسسات المالية غير المصرفية وشركات التكنولوجيا المالية تشغيل واختبار المنتجات والنماذج الرقمية ضمن محددات رقابية وضوابط محددة."
   },
+  "الرقابه الماليه: تشكيل لجنه لوضع نموذج موحد للنظام الاساسي لمجمعات التامين": {
+    "meaning": "The Financial Regulatory Authority establishes a standard governance framework for insurance pools, standardizing operational rules, capital management, and risk-sharing structures across participating insurers.",
+    "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً حوكمياً موحداً لمجمعات التأمين، يحدد القواعد التشغيلية وإدارة رؤوس الأموال وهياكل توزيع المخاطر بين الشركات المشاركة."
+  },
   "الرييس التنفيذي ل«داف»: تطبيق التتبع الدوايي تدريجيا لضمان استقرار توافر الادويه": {
     "meaning": "A phased track-and-trace rollout introduces digital serialization and verification standards incrementally across pharmaceutical supply chains, distributing operational compliance adjustments across manufacturing and distribution networks without interrupting current logistics flows.",
     "meaning_ar": "يتضمن التطبيق التدريجي لمنظومة التتبع الدوائي إدخال معايير التسلسل والتحقق الرقمي عبر سلاسل إمداد الدواء على مراحل، مما يوزع متطلبات الامتثال التشغيلي عبر شبكات التصنيع والتوزيع دون إيقاف التدفقات اللوجستية القائمة."
@@ -3084,6 +3088,10 @@
     "meaning": "The state IPO program transfers equity stakes in state-owned enterprises to private and institutional investors via the Egyptian Exchange or direct strategic sales, altering corporate ownership structures and capital distribution.",
     "meaning_ar": "يقوم برنامج الطروحات الحكومية على نقل حصص من ملكية الشركات المملوكة للدولة إلى مستثمرين من القطاع الخاص والمؤسسات عبر البورصة المصرية أو الصفقات المباشرة، مما يغير هيكل الملكية وتوزيع رأس المال في تلك الشركات."
   },
+  "رييس الوزراء: الحكومه تواصل العمل لتحسين جوده الخدمات المقدمه للمواطنين": {
+    "meaning": "Government initiatives to enhance public service quality involve public expenditure allocations toward infrastructure, digital platforms, and utility operations that interact with private sector contracting and service delivery frameworks.",
+    "meaning_ar": "تتضمن المبادرات الحكومية لتحسين جودة الخدمات العامة توجيه مخصصات من الإنفاق العام نحو البنية التحتية والمنصات الرقمية ومرافق التشغيل، وهو ما يرتبط بأطر التعاقد وتقديم الخدمات مع القطاع الخاص."
+  },
   "رييس الوزراء: العام المالي 2025/2026 شهد تحقيق معدل نمو 5.1%": {
     "meaning": "A 5.1% gross domestic product growth rate measures the annual rate of expansion in aggregate economic output across productive and service sectors relative to the prior fiscal year.",
     "meaning_ar": "يعكس معدل نمو الناتج المحلي الإجمالي البالغ 5.1% نسبة التوسع السنوي في إجمالي حجم الإنتاج الاقتصادي عبر مختلف القطاعات الإنتاجية والخدمية مقارنة بالعام المالي السابق."
@@ -3585,6 +3593,10 @@
     "meaning": "A market index reaching a new historical peak reflects an increase in the aggregate market capitalization of its constituent listed companies, driven by trades executing at higher settlement prices across the exchange.",
     "meaning_ar": "يعكس تسجيل مؤشر السوق لقمة تاريخية جديدة ارتفاعاً في القيمة السوقية الإجمالية للشركات المدرجة المكونة له، نتيجة تنفيذ العمليات عند مستويات سعرية أعلى عبر منصة التداول."
   },
+  "عجز الموازنه الامريكيه يقترب من تريليوني دولار في 11 شهرا": {
+    "meaning": "A widening sovereign budget deficit expands government debt issuance in international debt markets, which directly affects global benchmark yield curves and sovereign debt service costs across emerging markets.",
+    "meaning_ar": "يؤدي اتساع عجز الموازنة السيادية إلى زيادة إصدارات أدوات الدين الحكومي في الأسواق العالمية، وهو ما يؤثر مباشرة على منحنيات العائد القياسية وتكاليف خدمة الدين الخارجي في الأسواق الناشئة."
+  },
   "عزاء ابنه نجلاء فتحي بمسجد عمر بن عبد العزيز في مصر الجديده": {
     "meaning": "This headline reports a personal social event and contains no operational, financial, or corporate mechanisms impacting capital markets or listed companies.",
     "meaning_ar": "يتناول هذا الخبر مناسبة اجتماعية وشخصية، ولا يتضمن أي آليات تشغيلية أو مالية تؤثر على الشركات المدرجة أو أسواق المال."
@@ -3972,6 +3984,10 @@
   "مدبولي: افريقيا ليست مجرد انتماء جغرافي لمصر.. بل تاريخ مشترك ومصير واحد": {
     "meaning": "High-level economic engagement with African nations frames regional trade policy, bilateral commercial agreements, and cross-border infrastructure initiatives for Egyptian enterprises operating in continental markets.",
     "meaning_ar": "تحدد الدبلوماسية الاقتصادية والتعاون المؤسسي مع الدول الأفريقية السياسات التجارية الإقليمية والاتفاقيات الثنائية ومشاريع الربط اللوجستي للشركات المصرية العاملة في الأسواق القارية."
+  },
+  "مدبولي: الحفاظ علي الاصول التي انفقت عليها الدوله استثمارات ضخمه لا يقل اهميه عن تنفيذها": {
+    "meaning": "This operational focus prioritizes asset management frameworks and maintenance allocations to mitigate physical asset depreciation across public capital projects. It directs operational workflows and potential management partnerships toward facility maintenance and life-cycle preservation rather than initiating new capital expenditures.",
+    "meaning_ar": "يُركز هذا التوجه التشغيلي على أطر إدارة الأصول ومخصصات الصيانة الدورية للحد من الإهلاك المادي للأصول الرأسمالية العامة، حيث يوجه مسارات العمل ونماذج الشراكة الإدارية نحو صيانة المرافق واستدامة دورة حياتها التشغيلية بدلاً من ضخ استثمارات رأسمالية جديدة."
   },
   "مدبولي: انتهاء مشروعات 926 قريه ضمن المرحله الاولي من مبادره حياه كريمه": {
     "meaning": "The completion of rural infrastructure packages marks the transition of contracting and building materials companies from project execution to inspection, billing, and warranty phases.",
@@ -4629,6 +4645,10 @@
     "meaning": "Establishing a domestic alternative soil manufacturing plant introduces local agricultural input production and replaces direct import reliance with domestic industrial supply.",
     "meaning_ar": "يؤدي إنشاء مصنع محلي لإنتاج التربة البديلة إلى توفير مدخلات زراعية مصنعة محلياً وإحلال التوريد الصناعي المحلي محل الاعتماد المباشر على الاستيراد."
   },
+  "وزير الصناعه يدرس انشاء مناطق صناعيه تجمع كافه مدخلات ومكملات صناعه الاثاث": {
+    "meaning": "Establishing integrated industrial zones concentrates upstream component suppliers, raw materials, and assembly facilities within a single geographic cluster, linking intermediate input providers directly with end-product furniture manufacturers.",
+    "meaning_ar": "يؤدي إنشاء مناطق صناعية متكاملة إلى تجميع موردي الخامات ومستلزمات الإنتاج ومصانع التجميع في نطاق جغرافي واحد، مما يربط سلاسل توريد السلع الوسيطة مباشرة بمصنعي الأثاث النهائي."
+  },
   "وزير الصناعه: الشركات الصغيره والمتوسطه محرك رييسي للتنميه المستدامه": {
     "meaning": "Small and medium-sized enterprises (SMEs) function as feeder suppliers and subcontracting partners within industrial supply chains, providing operational inputs to larger manufacturing entities.",
     "meaning_ar": "تعمل الشركات الصغيرة والمتوسطة كموردين وسيطين وشركاء بالباطن ضمن سلاسل التوريد الصناعية، حيث توفر مدخلات تشغيلية لكيانات التصنيع الأكبر."
@@ -4792,6 +4812,10 @@
   "“الشباب والرياضه” يبحث مع “Blue Ribbon” تطوير اداره وتشغيل الانديه": {
     "meaning": "The Ministry of Youth and Sports discusses public-private partnership frameworks with Blue Ribbon to outsource the management, operations, and facility services of sports clubs to a specialized private entity.",
     "meaning_ar": "تبحث وزارة الشباب والرياضة أطر الشراكة بين القطاعين العام والخاص مع شركة \"بلو ريبون\" لإسناد مهام الإدارة والتشغيل والخدمات اللوجستية للأندية الرياضية إلى كيان متخصص من القطاع الخاص."
+  },
+  "“الصناعه” تبحث تطوير قطاع الاثاث وتعزيز تنافسيته محليا ودوليا": {
+    "meaning": "Government initiatives to develop the furniture sector involve reviewing industrial standards, assessing raw material supply chains, and coordinating export logistics between local manufacturers and trade authorities.",
+    "meaning_ar": "تتضمن المبادرات الحكومية لتطوير قطاع الأثاث مراجعة المواصفات القياسية الصناعية، وتقييم سلاسل إمداد المواد الخام، والتنسيق اللوجستي لعمليات التصدير بين المصنعين المحليين والجهات التجارية."
   },
   "“العامه للاستثمار”: ايطاليا رابع اكبر مستثمر اجنبي في مصر ب23.4 مليار دولار": {
     "meaning": "Official data ranks Italy as Egypt's fourth-largest foreign direct investment source with an accumulated capital base of $23.4 billion, concentrated primarily in energy, manufacturing, and infrastructure operations.",
