@@ -1928,7 +1928,7 @@ body.mode-quant .investor-only {
         <div class="fe-story-badge" id="storyBadge">HISTORICAL REGIME STORY</div>
         <h4 id="storyTitle">Full 18-Year History (2008–2026): The Complete Picture</h4>
         <p id="storyDesc">
-          Covers every major event in modern Egyptian economic history: the 2008 global financial meltdown, the 2011 January 25 revolution (where the exchange froze for 2 months), the 2016 floatation boom, the 2020 COVID crash, and the 2024 devaluation to 50 EGP/USD. The strategy did not stop deep crashes (-67.4% vs -71.6%), but disciplined partial hedging generated +110,438 EGP in extra wealth and +68.8 bps/yr of timing alpha beyond static T-bill carry.
+          Covers every major event in modern Egyptian economic history: the 2008 Lehman crash, the 2011 Revolution, the 2016 floatation, the 2020 COVID panic, and the 2024 devaluation to 50 EGP/USD. By augmenting domestic fragility metrics with <strong>external stress factors</strong> (Cboe VIX, US 10Y yields, DXY, Wheat &amp; Oil commodity shocks, and EM peer contagion), the engine detected 16 of 17 systemic crashes. The disciplined strategy (<code style="background:#F1F5F9; padding:2px 6px; border-radius:4px; font-family:var(--fe-mono);">C-v2 Cash until SMA20</code>) turned <strong>100k EGP into 1,153,799 EGP (+1,053,799 EGP net gain / 14.49% CAGR)</strong> vs 533,326 EGP for Buy &amp; Hold. <em>Key scientific discovery:</em> The creator's intuition was to catch falling knives by laddering at -15% &amp; -30% (which yielded 1.14M across 153 trades), but the AI model proved that parking 100% in high-yielding Egyptian Treasury Bills (10%–27% carry) until trend confirmation saved 9 trades and produced superior net wealth.
         </p>
       </div>
     </div>
@@ -2294,17 +2294,17 @@ body.mode-quant .investor-only {
 
     <!-- SYSTEM SELECTOR TABS -->
     <div class="fe-system-tabs" id="tradesSystemTabs">
-      <button class="fe-btn-systab is-active" data-sys="cv5_p">
-        <span>C-v5-P (World Monitor Multi-Regime)</span>
-        <span class="sys-badge">465 actions · 10.85% CAGR</span>
-      </button>
-      <button class="fe-btn-systab" data-sys="cv2_cash_sma">
+      <button class="fe-btn-systab is-active" data-sys="cv2_cash_sma">
         <span>C-v2 Cash-until-SMA20 (Pure Persistence)</span>
         <span class="sys-badge">144 actions · 14.49% CAGR</span>
       </button>
       <button class="fe-btn-systab" data-sys="cv2_ladder">
         <span>C-v2 Full Ladder (Dip Accumulation)</span>
         <span class="sys-badge">153 actions · 14.43% CAGR</span>
+      </button>
+      <button class="fe-btn-systab" data-sys="cv5_p">
+        <span>C-v5-P (World Monitor Multi-Regime)</span>
+        <span class="sys-badge">465 actions · 10.85% CAGR</span>
       </button>
       <button class="fe-btn-systab" data-sys="s100">
         <span>S100 (Naive Panic Exit)</span>
@@ -2320,33 +2320,33 @@ body.mode-quant .investor-only {
     <div class="fe-trades-summary-strip" id="tradesSummaryStrip">
       <div class="fe-ts-item">
         <small>Ending Portfolio Value</small>
-        <strong id="tsEndingWealth" style="color:var(--fe-accent);">EGP 643,764</strong>
-        <span id="tsWealthMult">6.44x initial capital</span>
+        <strong id="tsEndingWealth" style="color:var(--fe-accent);">EGP 1,153,799</strong>
+        <span id="tsWealthMult">11.54x initial capital</span>
       </div>
       <div class="fe-ts-item">
         <small>Net Profit on Your Capital</small>
-        <strong id="tsNetProfit" style="color:#166534;">+543,764 EGP</strong>
-        <span id="tsProfitPct">+543.8% cumulative gain</span>
+        <strong id="tsNetProfit" style="color:#166534;">+1,053,799 EGP</strong>
+        <span id="tsProfitPct">+1,053.8% cumulative gain</span>
       </div>
       <div class="fe-ts-item">
         <small>18-Year Compound Return (CAGR)</small>
-        <strong id="tsCagr">10.85%</strong>
-        <span id="tsCagrEdge">+1.14% / yr over Buy &amp; Hold</span>
+        <strong id="tsCagr">14.49%</strong>
+        <span id="tsCagrEdge">+4.78% / yr over Buy &amp; Hold</span>
       </div>
       <div class="fe-ts-item">
         <small>Worst Crash Drawdown (MaxDD)</small>
-        <strong id="tsMaxDD" style="color:var(--fe-down);">-67.40%</strong>
-        <span id="tsDDSaved">+4.20 pts protected vs -71.60%</span>
+        <strong id="tsMaxDD" style="color:var(--fe-down);">-50.44%</strong>
+        <span id="tsDDSaved">+21.21 pts protected vs -71.65%</span>
       </div>
       <div class="fe-ts-item">
         <small>Total Trade Actions</small>
-        <strong id="tsTradeCount">465</strong>
-        <span id="tsAnnualTrades">~25 actions / year</span>
+        <strong id="tsTradeCount">144</strong>
+        <span id="tsAnnualTrades">~8 actions / year</span>
       </div>
       <div class="fe-ts-item">
         <small>Average Capital Allocation</small>
-        <strong id="tsAllocation">94.3% Eq / 5.7% Cash</strong>
-        <span id="tsTurnover">Turnover: 358.1% / yr</span>
+        <strong id="tsAllocation">78.5% Eq / 21.5% T-Bills</strong>
+        <span id="tsTurnover">Turnover: 796.8% / yr</span>
       </div>
     </div>
 
