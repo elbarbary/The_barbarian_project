@@ -319,6 +319,33 @@ class BuildOrderTest(unittest.TestCase):
 
     WORKFLOWS = REPO / ".github" / "workflows"
 
+    def test_a_resolved_push_race_rebuilds_the_crossings(self):
+        """Order is not enough when a conflict resolver can split the pair.
+
+        `publish-live-data` resolves a push race FILE BY FILE, asking which
+        side of each generated document is newer. `connections.json` is
+        derived from `disclosures/latest.json`, so a race can keep one side's
+        feed beside the other side's crossings and commit a pair that
+        disagrees about a real company — GIHD and TAQA named as each other's
+        only peers at 16:33 on 12 Sep 2026, with an MBSC insider filing from
+        the same day sitting in the feed beside them.
+
+        `PublishedTest` above then fails on that commit, and every job that
+        runs the suite fails with it. `publish-prices` runs it before writing
+        a quote, which is how three of the six price publishes of 10 Sep 2026
+        failed and the prices did not move for a trading session.
+        """
+        source = (self.WORKFLOWS / "publish-live-data.yml").read_text(encoding="utf-8")
+        resolve = source.index("git rebase --continue")
+        after = source[resolve:]
+        self.assertIn("build_connections_api.py", after,
+                      "a resolved race can leave the feed and the crossings "
+                      "describing different days")
+        self.assertLess(after.index("build_connections_api.py"),
+                        after.index("build_fixtures.py"),
+                        "the fingerprint is computed before the crossings it "
+                        "is supposed to describe")
+
     def test_connections_is_never_built_before_the_feed_it_reads(self):
         for path in sorted(self.WORKFLOWS.glob("*.yml")):
             source = path.read_text(encoding="utf-8")

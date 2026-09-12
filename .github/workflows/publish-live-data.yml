@@ -269,6 +269,22 @@ jobs:
               rm -rf "$tmp"
             done
             GIT_EDITOR=true git rebase --continue >/dev/null 2>&1 || true
+            # The crossings are DERIVED from the disclosures feed, and the
+            # resolver above chooses a side for each file on its own — so a
+            # race can keep one side's feed beside the other side's
+            # connections.json, and the pair then disagrees about a real
+            # company. That is not theoretical: the commit at 16:33 on 12 Sep
+            # 2026 named GIHD and TAQA as each other's only peers while the
+            # feed committed beside them carried an MBSC insider filing from
+            # the same day. Every job that runs the test suite against such a
+            # commit goes red, and `publish-prices` runs it before it writes a
+            # quote — which is how three of the six price publishes of 10 Sep
+            # failed and the prices did not move.
+            #
+            # So rebuild the crossings from whichever feed won, for the same
+            # reason the fingerprint below is recomputed: what is committed has
+            # to describe the bytes that actually ended up here.
+            python3 scripts/build_connections_api.py >/dev/null 2>&1 || true
             # The fingerprint has to describe the bytes that actually ended up
             # here, so it is recomputed after any merge and folded in.
             python3 scripts/build_fixtures.py >/dev/null 2>&1 || true
