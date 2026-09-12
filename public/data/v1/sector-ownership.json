@@ -1,12 +1,12 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-11T19:34:41Z",
+ "generated": "2026-09-12T10:28:01Z",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
- "asOf": "2026-09-11T19:34:41+00:00",
+ "asOf": "2026-09-12T10:28:01+00:00",
  "basis": "A link is one listed company's filed stake in another, at the level the last form printed. Percentages belong to one company each and are never added together; sector totals are the market value of the stakes, which is money and can be.",
  "basisAr": "كل خط حصة مُفصح عنها لشركة مقيدة في شركة مقيدة أخرى، بالنسبة التي أثبتها آخر نموذج. النسب تخص شركة واحدة ولا تُجمع؛ إجماليات القطاعات بالقيمة السوقية للحصص، وهي مبالغ تُجمع.",
- "linkCount": 34,
- "outsideHolderCount": 518,
+ "linkCount": 37,
+ "outsideHolderCount": 531,
  "links": [
   {
    "owner": "CANA",
@@ -123,6 +123,25 @@
    "source": "https://www.egx.com.eg/downloads/Bulletins/341801_1.pdf"
   },
   {
+   "owner": "KORA",
+   "ownerName": "KORRA",
+   "ownerNameAr": "قرة لمشروعات الطاقة والاستثمار",
+   "ownerSector": "Contracting & Construction Engineering",
+   "ownerSectorAr": "مقاولات و إنشاءات هندسية",
+   "held": "COSG",
+   "heldName": "Cairo Oils & Soap",
+   "heldNameAr": "القاهرة للزيوت والصابون",
+   "heldSector": "Food, Beverages and Tobacco",
+   "heldSectorAr": "أغذية و مشروبات و تبغ",
+   "holder": "شركة قرة لمشروعات الطاقة والاستثمار",
+   "percent": 34.5377,
+   "value": 409478971.2,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "290997",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340697_1.pdf"
+  },
+  {
    "owner": "GPPL",
    "ownerName": "Golden Pyramids Plaza",
    "ownerNameAr": "جولدن بيراميدز بلازا",
@@ -159,6 +178,25 @@
    "basis": "register",
    "filingId": "291452",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341152_1.pdf"
+  },
+  {
+   "owner": "GDWA",
+   "ownerName": "Gadwa For Industrial Development",
+   "ownerNameAr": "جدوى للتنمية الصناعية",
+   "ownerSector": "Industrial Goods , Services and Automobiles",
+   "ownerSectorAr": "خدمات و منتجات صناعية وسيارات",
+   "held": "ADPC",
+   "heldName": "Arab Dairy Products Co. Arab Dairy - Panda",
+   "heldNameAr": "العربية لمنتجات الألبان\" آراب ديرى - باندا\" (آراب ديري-باندا)",
+   "heldSector": "Food, Beverages and Tobacco",
+   "heldSectorAr": "أغذية و مشروبات و تبغ",
+   "holder": "جدوى للتنمية الصناعية",
+   "percent": 36.218,
+   "value": 698330268.27,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291519",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341214_1.pdf"
   },
   {
    "owner": "GDWA",
@@ -273,6 +311,25 @@
    "basis": "register",
    "filingId": "291425",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341104_1.pdf"
+  },
+  {
+   "owner": "NAHO",
+   "ownerName": "Naeem Holding Co.",
+   "ownerNameAr": "النعيم القابضة للاستثمارات",
+   "ownerSector": "Non-bank financial services",
+   "ownerSectorAr": "خدمات مالية غير مصرفية",
+   "held": "NARE",
+   "heldName": "Naeem Real Estate Holding Group",
+   "heldNameAr": "مجموعة النعيم العقارية القابضة",
+   "heldSector": "Real Estate",
+   "heldSectorAr": "عقارات",
+   "holder": "شركة النعيم القابضة للاستثمارات",
+   "percent": 48.21,
+   "value": 1052502819.78,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291073",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340800_1.pdf"
   },
   {
    "owner": "ODIN",
@@ -729,6 +786,18 @@
    ]
   },
   {
+   "fromSector": "Contracting & Construction Engineering",
+   "fromSectorAr": "مقاولات و إنشاءات هندسية",
+   "toSector": "Food, Beverages and Tobacco",
+   "toSectorAr": "أغذية و مشروبات و تبغ",
+   "links": 1,
+   "value": 409478971.2,
+   "valued": 1,
+   "companies": [
+    "COSG"
+   ]
+  },
+  {
    "fromSector": "Finance",
    "fromSectorAr": "Finance",
    "toSector": "Non-bank financial services",
@@ -750,6 +819,18 @@
    "valued": 1,
    "companies": [
     "ICLE"
+   ]
+  },
+  {
+   "fromSector": "Industrial Goods , Services and Automobiles",
+   "fromSectorAr": "خدمات و منتجات صناعية وسيارات",
+   "toSector": "Food, Beverages and Tobacco",
+   "toSectorAr": "أغذية و مشروبات و تبغ",
+   "links": 1,
+   "value": 698330268.27,
+   "valued": 1,
+   "companies": [
+    "ADPC"
    ]
   },
   {
@@ -802,6 +883,18 @@
    "valued": 1,
    "companies": [
     "GOUR"
+   ]
+  },
+  {
+   "fromSector": "Non-bank financial services",
+   "fromSectorAr": "خدمات مالية غير مصرفية",
+   "toSector": "Real Estate",
+   "toSectorAr": "عقارات",
+   "links": 1,
+   "value": 1052502819.78,
+   "valued": 1,
+   "companies": [
+    "NARE"
    ]
   },
   {
@@ -983,7 +1076,7 @@
    "nameAr": "مقاولات و إنشاءات هندسية",
    "companies": 12,
    "cap": 134642411929.68,
-   "holds": 0,
+   "holds": 1,
    "heldBy": 2
   },
   {
@@ -1008,7 +1101,7 @@
    "companies": 30,
    "cap": 288947112551.5,
    "holds": 0,
-   "heldBy": 2
+   "heldBy": 4
   },
   {
    "id": "Health Care & Pharmaceuticals",
@@ -1031,7 +1124,7 @@
    "nameAr": "خدمات و منتجات صناعية وسيارات",
    "companies": 7,
    "cap": 320396285983.42,
-   "holds": 2,
+   "holds": 3,
    "heldBy": 1
   },
   {
@@ -1039,7 +1132,7 @@
    "nameAr": "خدمات مالية غير مصرفية",
    "companies": 32,
    "cap": 271860845292.0,
-   "holds": 8,
+   "holds": 9,
    "heldBy": 7
   },
   {
@@ -1056,7 +1149,7 @@
    "companies": 32,
    "cap": 548453605179.72,
    "holds": 7,
-   "heldBy": 6
+   "heldBy": 7
   },
   {
    "id": "Textile & Durables",

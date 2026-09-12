@@ -22006,20 +22006,680 @@
     }
    ],
    "namedWithoutAStake": []
+  },
+  "290997": {
+   "filingId": "290997",
+   "ticker": "COSG",
+   "publishedAt": "2026-07-07T14:50:18",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340697_1.pdf",
+   "companyArabic": "القاهرة للزيوت والصابون",
+   "asOfDate": "2026-06-30",
+   "totalShares": 624000000.0,
+   "board": [
+    {
+     "nameArabic": "الأستاذ / منير أمين فخري عبد النور",
+     "role": "رئيس مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذ / عمرو يحي محمد هيبة",
+     "role": "نائب رئيس مجلس الإدارة والعضو المنتدب",
+     "representing": "شركة قره لمشروعات الطاقة والاستثمار"
+    },
+    {
+     "nameArabic": "مهندس/ محمد أيمن كمال الدين محمد قره",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "المهندس/طارق محمد عبد العزيز قابيل",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيدة / شاهيناز نبيل أمين فوده",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذ/حاتم إسماعيل صبري زعزوع",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "السيدة / ليلى عمر احمد حسن",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "شركة قرة لمشروعات الطاقة والاستثمار",
+     "percent": 34.5377,
+     "shares": 215515685,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291106": {
+   "filingId": "291106",
+   "ticker": "UPMS",
+   "publishedAt": "2026-07-09T11:37:35",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340771_1.pdf",
+   "companyArabic": "الاتحاد الصيدلي للخدمات الطبية والاستثمار",
+   "asOfDate": "2026-06-30",
+   "totalShares": 13661400.0,
+   "board": [
+    {
+     "nameArabic": "انور محمود عبد العال شحاته",
+     "role": "رئيس مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "اشرف عثمان عبد الرحمن",
+     "role": "العضو المنتدب",
+     "representing": null
+    },
+    {
+     "nameArabic": "ايهاب فتحي عبد الحافظ محمد",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "أحمد عثمان عبد الرحمن",
+     "role": "نائب رئيس مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "علي جمعة علي حسين",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "ياسر احمد محمد احمد",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "باسم السيد محمد عبد الوهاب",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "رانيه محمود علي محمود الجندي",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "محمد عبد المطلب أبو سريع يونس",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "سمر محمد عادل حسنين محمد",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "محمود علي ابراهيم فرج",
+     "percent": 8.112,
+     "shares": 1108277,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "اشرف عثمان عبدالرحمن",
+     "percent": 5.957,
+     "shares": 813817,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "وائل حسين سيد احمد ابراهيم القط",
+     "percent": 10.372,
+     "shares": 1417653,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291133": {
+   "filingId": "291133",
+   "ticker": "EALR",
+   "publishedAt": "2026-07-09T13:59:03",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340803_1.pdf",
+   "companyArabic": "الشركة العربية لاستصلاح الأراضى",
+   "asOfDate": "2026-06-30",
+   "totalShares": 5200000.0,
+   "board": [
+    {
+     "nameArabic": "الاستاذ / عمرو على الجارحي",
+     "role": "رئيس مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "مهندس / سليمان سليمان السيد",
+     "role": "الرئيس التنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "الاستاذ / خالد السيد محمد هلال",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "مهندس /عمرو اسماعيل ابراهيم",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "الاستاذ / تامر محمد فوزي عبدالشافي",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "جهاز مستقبل مصر للتنمية المستدامة",
+     "percent": 89.66,
+     "shares": 4662320,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291140": {
+   "filingId": "291140",
+   "ticker": "MENA",
+   "publishedAt": "2026-07-09T15:04:07",
+   "sessionDate": "2026-03-31",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340849_1.pdf",
+   "companyArabic": "مينا للاستثمار السياحي والعقاري",
+   "asOfDate": "2026-06-30",
+   "totalShares": 241921635.0,
+   "board": [
+    {
+     "nameArabic": "أ/ خليفة بطي المهيري",
+     "role": "رئيس مجلس الإدارة",
+     "representing": "شركة اماس للاستثمار"
+    },
+    {
+     "nameArabic": "أ/ أيمن صبري عبد الجيد",
+     "role": "نائب رئيس المجلس",
+     "representing": "شركة اصول للاستثمارات"
+    },
+    {
+     "nameArabic": "أ/ محمد أحمد عباس",
+     "role": "عضو مجلس الادارة والرئيس التنفيذي",
+     "representing": "شركة اصول للاستثمارات"
+    },
+    {
+     "nameArabic": "أ/ بدر مفرج السراهيد",
+     "role": "عضو مجلس",
+     "representing": "مجموعة عtarget_representing مجموعة عارف الاستثمارية"
+    }
+   ],
+   "shareholders": [],
+   "namedWithoutAStake": []
+  },
+  "291160": {
+   "filingId": "291160",
+   "ticker": "NIPH",
+   "publishedAt": "2026-07-12T09:47:33",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340860_1.pdf",
+   "companyArabic": "شركة النيل للأدوية والصناعات الكيماوية",
+   "asOfDate": "2026-06-30",
+   "totalShares": 50000000.0,
+   "board": [
+    {
+     "nameArabic": "أ / محمد عبد العال السيد حسن",
+     "role": "رئيس مجلس الادارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "د/ خالد صلاح الدين محمود حجاج",
+     "role": "الرئيس التنفيذي",
+     "representing": null
+    },
+    {
+     "nameArabic": "د. نهلة شحاته قطب",
+     "role": "عضو مجلس الإدارة الممثل عن الشركة القابضة",
+     "representing": "الشركة القابضة"
+    },
+    {
+     "nameArabic": "أ / عبد الله خالد عبد الله محمد",
+     "role": "عضو مجلس ادارة عن المجموعة المرتبطة بيت الخبرة",
+     "representing": "المجموعة المرتبطة بيت الخبرة"
+    },
+    {
+     "nameArabic": "د/ايمان جابر محمد حجاج",
+     "role": "من ذوي الخبرة",
+     "representing": null
+    },
+    {
+     "nameArabic": "أ/وليد فؤاد زكريا",
+     "role": "من ذوي الخبرة",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "الشركة القابضة للأدوية",
+     "percent": 66.68882,
+     "shares": 33344408,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "عبد الله خالد عبد الله",
+     "percent": 0.781232,
+     "shares": 390616,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "بيت الخبرة القابضة كامار",
+     "percent": 1.73366,
+     "shares": 868308,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "محمد خالد عبد الله و مجموعته المرتبطة",
+     "percent": 1.02792,
+     "shares": 513960,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "(بيت الخبرة للتخصيم (تكنوفاكتورنج",
+     "percent": 0.35357,
+     "shares": 176785,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "خالد عبد الله محمد عبدالله",
+     "percent": 3.798212,
+     "shares": 1899106,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "أورينت تورز للقري و الفنادق السياحية",
+     "percent": 1.6366,
+     "shares": 816830,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291519": {
+   "filingId": "291519",
+   "ticker": "ADPC",
+   "publishedAt": "2026-07-19T09:38:48",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341214_1.pdf",
+   "companyArabic": "العربية لمنتجات الألبان آراب ديري باندا",
+   "asOfDate": "2026-06-30",
+   "totalShares": 500000000.0,
+   "board": [
+    {
+     "nameArabic": "احمد عبد الحليم رشدي العروسي",
+     "role": "غير تنفيذي",
+     "representing": "شركة جدوى للتنمية الصناعية"
+    },
+    {
+     "nameArabic": "ياسر محمد زكي ابراهيم",
+     "role": "تنفيذي",
+     "representing": "شركة جدوى للتنمية الصناعية"
+    },
+    {
+     "nameArabic": "خالد محمد أسامة محمد الصادق",
+     "role": "تنفيذي",
+     "representing": "شركة جدوى للتنمية الصناعية"
+    },
+    {
+     "nameArabic": "أحمد محمد صلاح أحمد صالح",
+     "role": "غير تنفيذي",
+     "representing": "شركة جدوى للتنمية الصناعية"
+    },
+    {
+     "nameArabic": "أسماء محمد إبراهيم العطار",
+     "role": "غير تنفيذي",
+     "representing": "شركة بركة للتجارة والاستثمار"
+    },
+    {
+     "nameArabic": "يارا محمد هشام مصطفي كمال",
+     "role": "غير تنفيذي",
+     "representing": "شركة بي أف أيه للاستشارات PFA"
+    },
+    {
+     "nameArabic": "هاني ابراهيم عبد الرحمن مصطفى",
+     "role": "غير تنفيذي",
+     "representing": "شركة بي أف أيه للاستشارات PFA"
+    },
+    {
+     "nameArabic": "أحمد مصطفي محمود علي منصور",
+     "role": "مستقل",
+     "representing": null
+    },
+    {
+     "nameArabic": "احمد عبد الرحمن محمد محمد",
+     "role": "مستقل",
+     "representing": null
+    }
+   ],
+   "shareholders": [
+    {
+     "nameArabic": "جدوى للتنمية الصناعية",
+     "percent": 36.218,
+     "shares": 181093734,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركة الحصن للاستشارات",
+     "percent": 6.161,
+     "shares": 30807587,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركة الصفوة للاستشارات والتنمية",
+     "percent": 0.010553,
+     "shares": 52763,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركة نمو للاستشارات",
+     "percent": 0.000965,
+     "shares": 4824,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركة وادي للاستشارات",
+     "percent": 0.017,
+     "shares": 86206,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركة سمو للاستشارات",
+     "percent": 0.599,
+     "shares": 2998723,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "شركة بي اف ايه للاستشارات PFA",
+     "percent": 0.000661,
+     "shares": 3303,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "بركة للتجارة والاستثمار",
+     "percent": 12.188,
+     "shares": 60938806,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "محمد العباس السيد السيد الجوهري",
+     "percent": 3.817,
+     "shares": 19086458,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمد الناصر السيد السيد الجوهري",
+     "percent": 3.817,
+     "shares": 19086455,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "محمد المأمون السيد السيد الجوهري",
+     "percent": 3.817,
+     "shares": 19086455,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "السيد السيد الجوهري",
+     "percent": 1.455,
+     "shares": 7276113,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مارتينا فوزي فؤاد بخيت نخله ابراهيم",
+     "percent": 4.1057,
+     "shares": 20528609,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "فوزي فؤاد بخيت نخله ابراهيم",
+     "percent": 1.9187,
+     "shares": 9593840,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "شوقي فؤاد بخيت نخله",
+     "percent": 0.68,
+     "shares": 3400000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "فؤاد فوزي فؤاد بخيت",
+     "percent": 2.9904,
+     "shares": 14952159,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "مارينا الفي عزيز اسحاق",
+     "percent": 0.8626,
+     "shares": 4313428,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "بيتر فوزي فؤاد بخيت",
+     "percent": 2.9866,
+     "shares": 14933124,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "اندرو رمزي فؤاد بخيت",
+     "percent": 0.092,
+     "shares": 460000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "رمزي فؤاد بخيت نخله",
+     "percent": 0.475,
+     "shares": 2375337,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "فؤاد رمزي فؤاد بخيت",
+     "percent": 0.015,
+     "shares": 75000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "كارولين ناجي حبيب اسكندر",
+     "percent": 0.044,
+     "shares": 220000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "جاكلين لويس جورجي ميخائيل",
+     "percent": 0.08,
+     "shares": 400000,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "جيسيكا فؤاد فوزي فؤاد بخيت",
+     "percent": 0.2699,
+     "shares": 1349502,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "يوسف نصيف فؤاد بخيت نخله",
+     "percent": 0.02,
+     "shares": 100000,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
+  },
+  "291073": {
+   "filingId": "291073",
+   "ticker": "NARE",
+   "publishedAt": "2026-07-09T10:15:44",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340800_1.pdf",
+   "companyArabic": "مجموعة النعيم العقارية القابضة",
+   "asOfDate": "2026-06-30",
+   "totalShares": 127745048.0,
+   "board": [
+    {
+     "nameArabic": "يوسف محمد مدحت يوسف الفار",
+     "role": "رئيس مجلس الإدارة",
+     "representing": "شخصه"
+    },
+    {
+     "nameArabic": "طلال محمد عقيل وشاح",
+     "role": "نائب رئيس مجلس الإدارة",
+     "representing": "شخصه"
+    },
+    {
+     "nameArabic": "حسين بن على بن حسين شبكشى",
+     "role": "عضو مجلس الإدارة المنتدب",
+     "representing": "النعيم القابضة للاستثمارات"
+    },
+    {
+     "nameArabic": "هشام محمد مدحت يوسف الفار",
+     "role": "عضو مجلس الإدارة",
+     "representing": "شخصه"
+    },
+    {
+     "nameArabic": "أمنية سعد عبد الرحمن قلج",
+     "role": "عضو مجلس الإدارة",
+     "representing": "شخصها"
+    },
+    {
+     "nameArabic": "نانسى وهيب فرج صليب",
+     "role": "عضو مجلس الإدارة",
+     "representing": "شخصها"
+    },
+    {
+     "nameArabic": "شريف عمر عبد الرحمن صالح",
+     "role": "عضو مجلس الإدارة",
+     "representing": "شخصه"
+    }
+   ],
+   "seatsWithoutAName": [],
+   "shareholders": [
+    {
+     "nameArabic": "شركة النعيم القابضة للاستثمارات",
+     "percent": 48.21,
+     "shares": 61596612,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "يوسف محمد مدحت يوسف الفار",
+     "percent": 19.86,
+     "shares": 25379766,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ALNAEEM FOR REAL ESTATE INVESTMENT MANAGEMENT LIMITED",
+     "percent": 10.43,
+     "shares": 13324706,
+     "kind": "firm"
+    }
+   ],
+   "namedWithoutAStake": [
+    "هشام محمد مدحت يوسف الفار ، فاطمة الزهراء على السيد على ، محمد على السيد على ، على يوسف محمد مدحت يوسف الفار ، لى لى يوسف محمد مدحت يوسف الفار ، جيزيل يوسف محمد مدحت يوسف الفار ، Regional Investment Holding"
+   ]
+  },
+  "291163": {
+   "filingId": "291163",
+   "ticker": "NAHO",
+   "publishedAt": "2026-07-12T10:01:02",
+   "sessionDate": "2026-06-30",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340865_1.pdf",
+   "companyArabic": "النعيم القابضة للإستثمارات",
+   "asOfDate": "2026-06-30",
+   "totalShares": 350414638.0,
+   "board": [
+    {
+     "nameArabic": "الأستاذ / حسين بن على بن حسين شبكشى",
+     "role": "رئيس مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذ / يوسف محمد مدحت يوسف الفار",
+     "role": "نائب رئيس مجلس الإدارة والعضو المنتدب",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذة/ أمنية سعد عبد الرحمن قلج",
+     "role": "عضو مجلس الإدارة ونائب العضو المنتدب",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذ/ فهد بن فالح بن حسين الدامر",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "Regional Investment Holding SPC ويمثلها الأستاذ/ محمد على السيد",
+     "role": "عضو مجلس الإدارة",
+     "representing": "Regional Investment Holding SPC"
+    },
+    {
+     "nameArabic": "الأستاذة / نانسى وهيب فرج صليب",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    },
+    {
+     "nameArabic": "الأستاذ/ مارك حكيم (Marc Hakim)",
+     "role": "عضو مجلس الإدارة",
+     "representing": null
+    }
+   ],
+   "seatsWithoutAName": [],
+   "shareholders": [
+    {
+     "nameArabic": "يحيي منير رزق فتيان",
+     "percent": 6.61,
+     "shares": 23175310,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "يوسف محمد مدحت يوسف الفار",
+     "percent": 33.15,
+     "shares": 116191705,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "هشام محمد مدحت يوسف الفار ، فاطمة الزهراء على السيد على ، محمد على السيد على ، دينا محمد نشأت يوسف الفار ، Regional Investment Holding",
+     "percent": 2.17,
+     "shares": 7627814,
+     "kind": "firm"
+    },
+    {
+     "nameArabic": "ناصر بن عبد الله بن ناصر المهوس",
+     "percent": 9.84,
+     "shares": 34499770,
+     "kind": "person"
+    },
+    {
+     "nameArabic": "ياسر ناصر عبد الله المهوس و عبد الله بن ناصر بن عبد الله المهوس",
+     "percent": 0.08,
+     "shares": 292487,
+     "kind": "person"
+    }
+   ],
+   "namedWithoutAStake": []
   }
  },
  "refused": {
-  "290997": "'شركة قره لمشروعات الطاقة والاستثمار' holds 215,515,685 of 62,400,000 shares, which is 345.38% and not the 34.54% printed",
-  "291073": "a holder has no usable name: 'هشام محمد مدحت يوسف الفار ، فاطمة الزهراء على السيد على ، محمد على السيد على ، على يوسف محمد مدحت يوسف الفار ، لى لى يوسف محمد مدحت يوسف الفار ، جيزيل يوسف محمد مدحت يوسف الفار ، Regional Investment Holding'",
-  "291106": "'وائل حسين سيد احمد ابراهيم القط' holds 1,417,653 of 13,661,400 shares, which is 10.38% and not the 10.77% printed",
-  "291133": "'جهاز مستقبل مصر للتنمية المستدامة' holds 4,662,320 of 5,300,000 shares, which is 87.97% and not the 89.66% printed",
-  "291140": "'اصول كوربوريشين ليمتد للاستثمارات' holds 10,052,000 of 241,921,635 shares, which is 4.16% and not the 4.36% printed",
-  "291160": "a director has no usable name: {'nameArabic': None, 'role': 'عضو مجلس الإدارة الممثل عن الشركة القابضة', 'representing': 'الشركة القابضة'}",
-  "291163": "a holder has no usable name: 'هشام محمد مدحت يوسف الفار ، فاطمة الزهراء علي السيد علي ، محمد علي السيد علي ، دينا محمد نشأت يوسف الفار ، Regional Investment Holding'",
   "291387": "'محفظة أكسا رقم 13 صندوق مؤشر EGX30' holds 1,811,956 of 25,000,000 shares, which is 7.25% and not the 32.56% printed",
-  "291519": "'شركة الحصن للاستشارات' holds 308,070,587 of 500,000,000 shares, which is 61.61% and not the 6.16% printed",
-  "291854": "'على محمود عبد اللطيف محجوب' holds 19,018,048 of 40,000,000 shares, which is 47.55% and not the 4.75% printed",
   "291611": "'اتحاد العاملين المساهمين بشركة مصر للزيوت والصابون' holds 1,000,000 of 6,000,000 shares, which is 16.67% and not the 16.17% printed",
+  "291854": "'على محمود عبد اللطيف محجوب' holds 19,018,048 of 40,000,000 shares, which is 47.55% and not the 4.75% printed",
   "291435": "the named holders add to 163.90% of the company"
  }
 }
