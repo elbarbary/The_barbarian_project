@@ -2147,6 +2147,10 @@
     "meaning": "The start of the cotton harvest in Upper Egypt marks the operational beginning of domestic raw material supply for local ginning, spinning, and textile manufacturing facilities, as well as the opening of the state-regulated auction system for crop trading.",
     "meaning_ar": "يمثل انطلاق موسم حصاد القطن في شمال الصعيد بدء الإمداد التشغيلي للمحصول المحلي لمحالج القطن ومصانع الغزل والنسيج، إلى جانب تفعيل منظومة المزادات العلنية لتداول المحصول."
   },
+  "انهيار الباذنجان.. اسعار الخضروات والفاكهه اليوم السبت 12-9-2026": {
+    "meaning": "Wholesale fresh produce markets operate on spot pricing determined by immediate supply volumes and daily perishability constraints, where high harvest intake drives spot-market clearing prices downward.",
+    "meaning_ar": "تعمل أسواق الجملة للخضروات بنظام التسعير الفوري المحدد بحجم المعروض اليومي وسرعة تلف السلع، حيث تؤدي وفرة التوريد إلى انخفاض أسعار التداول الفورية لتصريف البضائع."
+  },
   "انهيار مطور عقاري استرالي يهز سوق الايتمان الخاص": {
     "meaning": "The collapse of a major real estate developer exposes private credit funds to non-performing debt assets and prompts direct lenders to reprice risk across non-bank lending portfolios.",
     "meaning_ar": "يؤدي انهيار مطور عقاري إلى تعريض صناديق الائتمان الخاص لأصول ديون متعثرة، ويدفع جهات الإقراض المباشر إلى إعادة تسعير المخاطر عبر محافظ التمويل غير المصرفي."
@@ -2575,6 +2579,10 @@
   "تراجع موشرات البورصه المصريه بختام التعاملات.. والثلاثيني يهبط 0.80%": {
     "meaning": "The decline in broad market indices, including the EGX30 benchmark falling by 0.80%, reflects net selling pressure across constituent equities, which reduces aggregate listed market capitalization at the daily market close.",
     "meaning_ar": "يعكس تراجع المؤشرات الرئيسية، بما في ذلك هبوط مؤشر إيجي إكس 30 بنسبة 0.80%، زيادة في ضغوط البيع على الأسهم المكونة للمؤشر، مما يؤدي إلى انخفاض القيمة السوقية الإجمالية للشركات المدرجة بختام التعاملات اليومية."
+  },
+  "ترامب يبدي انفتاحا علي تصنيع الصين سياراتها في اميركا قبل زياره شي": {
+    "meaning": "Establishing foreign-owned manufacturing facilities inside a domestic market shifts automotive supply chains from cross-border imports to local production lines, altering tariff exposure, capital expenditure allocation, and domestic labor utilization.",
+    "meaning_ar": "يؤدي تأسيس منشآت تصنيع أجنبية داخل السوق المحلي إلى تحويل سلاسل إمداد السيارات من الاستيراد عبر الحدود إلى خطوط الإنتاج المحلية، مما يغير هيكل التعرض للرسوم الجمركية وتوزيع النفقات الرأسمالية واستخدام العمالة المحلية."
   },
   "ترامب يشعل حرب الرسوم مع كندا.. 50% علي واردات ب20 مليار دولار و«اوتاوا» ترد": {
     "meaning": "Tariffs impose a direct border tax on imported cross-border goods, raising landed procurement costs for importers and triggering reciprocal trade barriers on corresponding export categories.",
@@ -3107,6 +3115,10 @@
   "رييس الوزراء: تكليف جميع المحافظات بزياده المسطحات الخضراء وزراعه الاشجار": {
     "meaning": "Government directives to expand green spaces involve municipal procurement of seedlings, nursery stock, landscape maintenance services, and localized irrigation equipment across governorates.",
     "meaning_ar": "تتضمن التوجيهات الحكومية لزيادة المساحات الخضراء مشتريات محلية للشتلات الزراعية، ومستلزمات المشاتل، وخدمات تنسيق الحدائق، ومعدات شبكات الري عبر المحافظات."
+  },
+  "رييس الوزراء: مجمعات الخدمات الحكوميه تستهدف تقريب الخدمه من المواطن": {
+    "meaning": "Government service complexes consolidate administrative and documentation procedures into unified regional hubs, centralising public sector transaction processing and reducing physical transit between disparate municipal entities.",
+    "meaning_ar": "تعمل مجمعات الخدمات الحكومية على تجميع الإجراءات الإدارية والتوثيقية في مراكز إقليمية موحدة، مما يؤدي إلى مركزية معالجة المعاملات العامة وتقليص التنقل الفعلي بين الجهات الحكومية المختلفة."
   },
   "رييس الوزراء: مستمرون في تنفيذ برنامج الطروحات لتعزيز الشراكه مع القطاع الخاص": {
     "meaning": "The state privatization and listing program transfers ownership stakes in state-owned enterprises to private and institutional investors through public equity offerings and strategic sales on the EGX.",
@@ -4097,6 +4109,10 @@
     "meaning": "Postponing a major real estate exhibition suspends a centralized direct sales and marketing platform that brings developers and property buyers together for project launches.",
     "meaning_ar": "يؤدي تأجيل المعرض العقاري إلى تعليق منصة تسويق وبيع مباشر مركزية تجمع بين المطورين العقاريين والمشترين لطرح المشروعات."
   },
+  "مصادر: مجموعه بريكس تتفق علي بيان مشترك": {
+    "meaning": "Agreement on a joint BRICS declaration coordinates multilateral policy frameworks and standardizes cooperation protocols among member states, establishing formalized channels for cross-border trade settlements and economic alignment.",
+    "meaning_ar": "يحدد الاتفاق على بيان مشترك لمجموعة بريكس أطر السياسات متعددة الأطراف ويوحد بروتوكولات التعاون بين الدول الأعضاء، مما يؤسس مسارات رسمية لتسوية المعاملات التجارية البينية والتنسيق الاقتصادي."
+  },
   "مصافي الصين تتنافس علي خام اسبو الروسي": {
     "meaning": "Chinese refineries are competing for Russian ESPO crude shipments, a mechanism in which buyers bid for discounted, geographically proximate pipeline and seaborne feedstocks to lower direct refining input costs.",
     "meaning_ar": "تتنافس مصافي التكرير الصينية على شحنات خام إسبو الروسي، وهي آلية يقدم فيها المشترون عروضاً لشراء لقائم نفطية قريبة جغرافياً ومخفضة السعر لخفض تكاليف مدخلات التكرير المباشرة."
@@ -4676,6 +4692,10 @@
   "وزير الطيران يبحث مع «LACAC» توظيف الذكاء الاصطناعي في تطوير قطاع النقل الجوي": {
     "meaning": "The discussions focus on technical cooperation between the Ministry of Civil Aviation and the Latin American Civil Aviation Commission (LACAC) regarding the integration of artificial intelligence tools into air traffic management, airport operations, and aviation infrastructure.",
     "meaning_ar": "تركز المباحثات على التعاون الفني بين وزارة الطيران المدني والمنظمة اللاتينية للطيران المدني (LACAC) بشأن دمج أدوات الذكاء الاصطناعي في إدارة الحركة الجوية وعمليات المطارات والبنية التحتية لقطاع الطيران."
+  },
+  "وزير الطيران يعقد لقاءات ثناييه مع وزراء النقل والطيران بعدد من الدول العربيه": {
+    "meaning": "Bilateral aviation discussions govern operational frameworks, including air service agreements, flight frequency allocations, codeshare arrangements, and regional transit coordination between national carriers.",
+    "meaning_ar": "تحدد المباحثات الثنائية في قطاع الطيران الأطر التشغيلية المنظمة لاتفاقيات النقل الجوي، وتوزيع الحصص وسعات الرحلات، وترتيبات المشاركة بالرمز، والتنسيق الفني المشترك بين الناقلات الجوية."
   },
   "وزير الطيران: الصاله الرابعه بمطار القاهره تضيف 40 مليون راكب الي الطاقه الاستيعابيه": {
     "meaning": "Constructing a fourth passenger terminal expands the physical processing capacity and operational handling throughput of Cairo International Airport by 40 million passengers annually.",
