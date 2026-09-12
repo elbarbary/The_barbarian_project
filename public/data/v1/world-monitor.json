@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-12T14:57:56Z",
+ "generated": "2026-09-12T15:39:35Z",
  "basis": "A move is placed against its own two years of same-length moves — a record of what has already happened, never a statement about the next one. Each list of companies is the complete set that filed the figure, in alphabetical order, with the filing beside it. Nothing here says what any of it means for a share price.",
  "basisAr": "تُقاس كل حركة مقابل سنتين من حركات بالطول نفسه — سجل لما حدث بالفعل، وليس قولاً عما سيحدث. وكل قائمة شركات هي المجموعة الكاملة التي أودعت الرقم، بالترتيب الأبجدي، ومعها الإفصاح الذي جاء منه. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
  "windows": [
@@ -3771,6 +3771,2704 @@
      "periodEnd": "2026-06-30",
      "filingId": "ZMID-H1 2026-2026-06-30",
      "source": "https://foudalens.com/disclosures/ZMID.CA/financial_statement/2026-08-12_292826_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "currency",
+   "question": "Where does a move in the pound land?",
+   "questionAr": "أين تصل حركة الجنيه؟",
+   "filter": "every company whose filed foreign-currency note prints a figure — a net position held in another currency, or an exchange gain or loss already taken",
+   "filterAr": "كل شركة يطبع إيضاح العملات الأجنبية في قوائمها رقماً — صافي مركز بعملة أخرى، أو أرباح أو خسائر فروق عملة تم الاعتراف بها",
+   "count": 127,
+   "today": {
+    "asOf": "2026-09-12",
+    "rates": [
+     {
+      "code": "USD",
+      "label": "US dollar",
+      "labelAr": "الدولار الأمريكي",
+      "token": "EGP 51.3511"
+     },
+     {
+      "code": "EUR",
+      "label": "Euro",
+      "labelAr": "اليورو",
+      "token": "EGP 59.5708"
+     },
+     {
+      "code": "GBP",
+      "label": "Pound sterling",
+      "labelAr": "الجنيه الإسترليني",
+      "token": "EGP 69.4387"
+     },
+     {
+      "code": "SAR",
+      "label": "Saudi riyal",
+      "labelAr": "الريال السعودي",
+      "token": "EGP 13.6936"
+     },
+     {
+      "code": "AED",
+      "label": "UAE dirham",
+      "labelAr": "الدرهم الإماراتي",
+      "token": "EGP 13.9826"
+     }
+    ],
+    "note": "The rate on the day this was built. This site keeps no history for the pound, so unlike every other figure here it is not placed against its own past and nothing is claimed about it.",
+    "noteAr": "سعر الصرف يوم إعداد هذه الصفحة. لا يحتفظ هذا الموقع بتاريخ لسعر الجنيه، ولذلك — خلافاً لكل رقم آخر هنا — لا يُقاس مقابل ماضيه ولا يُقال عنه شيء."
+   },
+   "companies": [
+    {
+     "ticker": "ACGC",
+     "name": "Arab Cotton Ginning Co.",
+     "sector": "Textile & Durables",
+     "fxResult": -0.166,
+     "netIncome": 32.491,
+     "shareOfNetIncome": -0.5,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق تقييم عملة",
+     "period": "9M 2026 (to 31 Mar)",
+     "periodEnd": "2026-03-31",
+     "filingId": "289686",
+     "source": "https://foudalens.com/disclosures/ACGC.CA/financial_statement/2026-06-11_289685_1.pdf"
+    },
+    {
+     "ticker": "ACTF",
+     "name": "Act Financial",
+     "sector": "Non-bank financial services",
+     "fxResult": 0.163,
+     "netIncome": -197.668,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293122",
+     "source": "https://foudalens.com/disclosures/ACTF.CA/financial_statement/2026-08-13_293121_1.pdf"
+    },
+    {
+     "ticker": "ADCI",
+     "name": "Arab Pharmaceuticals",
+     "sector": "Health Care & Pharmaceuticals",
+     "fxResult": -2.327,
+     "netIncome": 196.371,
+     "shareOfNetIncome": -1.2,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "ارباح (خسائر ) فروق عملة",
+     "period": "9M 2026 (to 31 Mar)",
+     "periodEnd": "2026-03-31",
+     "filingId": "288708",
+     "source": "https://foudalens.com/disclosures/ADCI.CA/financial_statement/2026-05-21_338782_1.pdf"
+    },
+    {
+     "ticker": "ADIB",
+     "name": "Abu Dhabi Islamic Bank-Egypt",
+     "sector": "Banks",
+     "fxResult": 548.888,
+     "netIncome": 7550.833,
+     "shareOfNetIncome": 7.3,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": -95.68
+      },
+      {
+       "currency": "GBP",
+       "net": 12.535
+      },
+      {
+       "currency": "JPY",
+       "net": 90.432
+      },
+      {
+       "currency": "OTHER",
+       "net": -1644.709
+      },
+      {
+       "currency": "USD",
+       "net": 3677.725
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-06-30",
+     "printed": "أرباح المعاملات بالعملات الأجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292295",
+     "source": "https://foudalens.com/disclosures/ADIB.CA/financial_statement/2026-08-02_292294_1.pdf"
+    },
+    {
+     "ticker": "ADPC",
+     "name": "Arab Dairy Products Co. Arab Dairy - Panda",
+     "sector": "Food, Beverages and Tobacco",
+     "fxResult": null,
+     "netIncome": -125.918,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "USD",
+       "net": 146.717
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-03-31",
+     "printed": null,
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "290212",
+     "source": "https://foudalens.com/disclosures/ADPC.CA/financial_statement/2026-06-23_290211_1.pdf"
+    },
+    {
+     "ticker": "AFMC",
+     "name": "Alexandria Flour Mills Co.",
+     "sector": "Food, Beverages and Tobacco",
+     "fxResult": -1.024,
+     "netIncome": 39.234,
+     "shareOfNetIncome": -2.6,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "= خسائر ( أرباح) تقييم العملات الأجنبية",
+     "period": "9M 2026 (to 31 Mar)",
+     "periodEnd": "2026-03-31",
+     "filingId": "287647",
+     "source": "https://foudalens.com/disclosures/AFMC.CA/financial_statement/2026-05-05_337844_1.pdf"
+    },
+    {
+     "ticker": "AIDC",
+     "name": "Arabia for Investment and Development",
+     "sector": "Non-bank financial services",
+     "fxResult": 2.525,
+     "netIncome": -15.12,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح / (خسائر) فروق تقييم عملات أجنبية",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "289921",
+     "source": "https://foudalens.com/disclosures/AIDC.CA/financial_statement/2026-06-16_289920_1.pdf"
+    },
+    {
+     "ticker": "AJWA",
+     "name": "Ajwa for Food Industries Co. Egypt",
+     "sector": "Food, Beverages and Tobacco",
+     "fxResult": -1.478,
+     "netIncome": 37.39,
+     "shareOfNetIncome": -4.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق عملات أجنبية دائنة",
+     "period": "H1 2025",
+     "periodEnd": "2025-06-30",
+     "filingId": "285315",
+     "source": "https://foudalens.com/disclosures/AJWA.CA/financial_statement/2026-03-25_335701_1.pdf"
+    },
+    {
+     "ticker": "ALCN",
+     "name": "Alexandria Containers & Goods",
+     "sector": "Shipping & Transportation Services",
+     "fxResult": 21.433,
+     "netIncome": 3798.388,
+     "shareOfNetIncome": 0.6,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "Foreign currency translation differences",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "ALCN-H1 2026-2026-06-30",
+     "source": "https://foudalens.com/disclosures/ALCN.CA/other/2026-08-17_293353_1.pdf"
+    },
+    {
+     "ticker": "ALUM",
+     "name": "Arab Aluminum Co. SAE",
+     "sector": "Basic Resources",
+     "fxResult": 1.478,
+     "netIncome": 6.858,
+     "shareOfNetIncome": 21.6,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": 0.001
+      },
+      {
+       "currency": "USD",
+       "net": 0.366
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": "فروق تقييم عملات اجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293286",
+     "source": "https://foudalens.com/disclosures/ALUM.CA/financial_statement/2026-08-16_293285_1.pdf"
+    },
+    {
+     "ticker": "AMES",
+     "name": "Alexandria New Medical Center Co.",
+     "sector": "Health Care & Pharmaceuticals",
+     "fxResult": 0.07,
+     "netIncome": 20.777,
+     "shareOfNetIncome": 0.3,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "USD",
+       "net": 0.065
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": "فروق ترجمة أرصدة بالعملات الأجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292980",
+     "source": "https://foudalens.com/disclosures/AMES.CA/financial_statement/2026-08-13_292979_1.pdf"
+    },
+    {
+     "ticker": "AMIA",
+     "name": "Arab Moltaqa Investments Company",
+     "sector": "Non-bank financial services",
+     "fxResult": 1.133,
+     "netIncome": 268.678,
+     "shareOfNetIncome": 0.4,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": 0.133
+      },
+      {
+       "currency": "USD",
+       "net": 31.514
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-06-30",
+     "printed": "فروق ترجمة أرصدة بالعملات الأجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292928",
+     "source": "https://foudalens.com/disclosures/AMIA.CA/financial_statement/2026-08-13_292927_1.pdf"
+    },
+    {
+     "ticker": "AMOC",
+     "name": "Alexandria Mineral Oils Co.",
+     "sector": "Energy & Support Services",
+     "fxResult": 51.807,
+     "netIncome": 1634.682,
+     "shareOfNetIncome": 3.2,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح فروق عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293300",
+     "source": "https://foudalens.com/disclosures/AMOC.CA/financial_statement/2026-08-16_293299_1.pdf"
+    },
+    {
+     "ticker": "ARCC",
+     "name": "Arabian Cement Company",
+     "sector": "Building Materials",
+     "fxResult": 64.662,
+     "netIncome": 2159.489,
+     "shareOfNetIncome": 3.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح / (خسائر) تقييم عملات أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293208",
+     "source": "https://foudalens.com/disclosures/ARCC.CA/financial_statement/2026-08-16_293207_1.pdf"
+    },
+    {
+     "ticker": "ASCM",
+     "name": "ASEC Co. for Mining",
+     "sector": "Basic Resources",
+     "fxResult": -191.887,
+     "netIncome": 373.243,
+     "shareOfNetIncome": -51.4,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": -52.907
+      },
+      {
+       "currency": "GBP",
+       "net": -0.006
+      },
+      {
+       "currency": "USD",
+       "net": -20.536
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2025-09-30",
+     "printed": "أرباح / خسائر فروق أسعار الصرف للعملات الأجنبية",
+     "period": "9M 2025",
+     "periodEnd": "2025-09-30",
+     "filingId": "285301",
+     "source": "https://foudalens.com/disclosures/ASCM.CA/financial_statement/2026-03-25_335589_1.pdf"
+    },
+    {
+     "ticker": "ASPI",
+     "name": "Aspire Capital Holding for Financial Investments",
+     "sector": "Non-bank financial services",
+     "fxResult": 0.058,
+     "netIncome": 6.104,
+     "shareOfNetIncome": 1.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق تقييم عملة",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "292494",
+     "source": "https://foudalens.com/disclosures/ASPI.CA/financial_statement/2026-08-05_292493_1.pdf"
+    },
+    {
+     "ticker": "ATLC",
+     "name": "Al Tawfeek Leasing Company-A.T.LEASE",
+     "sector": "Non-bank financial services",
+     "fxResult": 0.9,
+     "netIncome": 89.014,
+     "shareOfNetIncome": 1.0,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": 0.133
+      },
+      {
+       "currency": "USD",
+       "net": 24.986
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-06-30",
+     "printed": "فروق ترجمة الأرصدة بالعملات الأجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292857",
+     "source": "https://foudalens.com/disclosures/ATLC.CA/financial_statement/2026-08-12_292856_1.pdf"
+    },
+    {
+     "ticker": "ATQA",
+     "name": "Misr National Steel",
+     "sector": "Basic Resources",
+     "fxResult": -68.214,
+     "netIncome": 95.751,
+     "shareOfNetIncome": -71.2,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "USD",
+       "net": 2.032
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": "اعادة تقييم عملات اجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "ATQA-H1 2026-2026-06-30",
+     "source": "https://foudalens.com/disclosures/ATQA.CA/financial_statement/2026-08-16_293283_1.pdf"
+    },
+    {
+     "ticker": "AXPH",
+     "name": "Alexandria Company for Pharmaceuticals and Chemical Industries",
+     "sector": "Health Care & Pharmaceuticals",
+     "fxResult": 4.963,
+     "netIncome": 431.241,
+     "shareOfNetIncome": 1.2,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح (خسائر) فروق عملة",
+     "period": "9M 2026 (to 31 Mar)",
+     "periodEnd": "2026-03-31",
+     "filingId": "288419",
+     "source": "https://foudalens.com/disclosures/AXPH.CA/financial_statement/2026-05-18_338535_1.pdf"
+    },
+    {
+     "ticker": "BIGP",
+     "name": "ElBarbary Investment Group",
+     "sector": "Distribution Services",
+     "fxResult": 0.0,
+     "netIncome": 0.391,
+     "shareOfNetIncome": 0.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح فروق تقييم عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293174",
+     "source": "https://foudalens.com/disclosures/BIGP.CA/financial_statement/2026-08-16_293173_1.pdf"
+    },
+    {
+     "ticker": "BINV",
+     "name": "B Investments Holding SAE",
+     "sector": "Non-bank financial services",
+     "fxResult": 99.036,
+     "netIncome": 369.696,
+     "shareOfNetIncome": 26.8,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "Foreign exchange gains / (Loss)",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293139",
+     "source": "https://foudalens.com/disclosures/BINV.CA/financial_statement/2026-08-13_293138_2.pdf"
+    },
+    {
+     "ticker": "BIOC",
+     "name": "GlaxoSmithKline S.A.E.",
+     "sector": "Health Care & Pharmaceuticals",
+     "fxResult": null,
+     "netIncome": 43.899,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "CHF",
+       "net": -0.053
+      },
+      {
+       "currency": "EUR",
+       "net": -0.812
+      },
+      {
+       "currency": "GBP",
+       "net": -0.103
+      },
+      {
+       "currency": "USD",
+       "net": 1.531
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": null,
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293081",
+     "source": "https://foudalens.com/disclosures/BIOC.CA/financial_statement/2026-08-13_293080_1.pdf"
+    },
+    {
+     "ticker": "BONY",
+     "name": "Bonyan for Development and Trade",
+     "sector": "Real Estate",
+     "fxResult": -1.082,
+     "netIncome": 1042.235,
+     "shareOfNetIncome": -0.1,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "خسائر فروق تقييم عملات أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293074",
+     "source": "https://foudalens.com/disclosures/BONY.CA/financial_statement/2026-08-13_293073_1.pdf"
+    },
+    {
+     "ticker": "CANA",
+     "name": "Suez Canal Bank SAE",
+     "sector": "Banks",
+     "fxResult": null,
+     "netIncome": 3628.903,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": -189.249
+      },
+      {
+       "currency": "GBP",
+       "net": -0.533
+      },
+      {
+       "currency": "USD",
+       "net": -13942.252
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-06-30",
+     "printed": null,
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292704",
+     "source": "https://foudalens.com/disclosures/CANA.CA/financial_statement/2026-08-10_292703_1.pdf"
+    },
+    {
+     "ticker": "CERA",
+     "name": "Arab Ceramic Co. - Ceramica Remas",
+     "sector": "Building Materials",
+     "fxResult": -17.219,
+     "netIncome": 5.864,
+     "shareOfNetIncome": -293.6,
+     "largerThanTheProfit": true,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "(خسائر) فروق عمله",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293241",
+     "source": "https://foudalens.com/disclosures/CERA.CA/financial_statement/2026-08-16_293240_1.pdf"
+    },
+    {
+     "ticker": "CICH",
+     "name": "CI Capital Holding for Financial Investments",
+     "sector": "Non-bank financial services",
+     "fxResult": -3.381,
+     "netIncome": 790.082,
+     "shareOfNetIncome": -0.4,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "Foreign currency exchange differences",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292963",
+     "source": "https://foudalens.com/disclosures/CICH.CA/financial_statement/2026-08-13_292962_1.pdf"
+    },
+    {
+     "ticker": "CIEB",
+     "name": "Credit Agricole Egypt",
+     "sector": "Banks",
+     "fxResult": 419.874,
+     "netIncome": 3588.019,
+     "shareOfNetIncome": 11.7,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "CHF",
+       "net": 1.958
+      },
+      {
+       "currency": "EUR",
+       "net": -1208.745
+      },
+      {
+       "currency": "GBP",
+       "net": 58.934
+      },
+      {
+       "currency": "USD",
+       "net": 1030.488
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-06-30",
+     "printed": "Gains from foreign currencies transactions",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292096",
+     "source": "https://foudalens.com/disclosures/CIEB.CA/financial_statement/2026-07-29_292095_1.pdf"
+    },
+    {
+     "ticker": "CIRA",
+     "name": "Cairo For Investment And Real Estate Developments -CIRA Education",
+     "sector": "Education Services",
+     "fxResult": null,
+     "netIncome": 1239.004,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "AED",
+       "net": 0.2
+      },
+      {
+       "currency": "EUR",
+       "net": -0.591
+      },
+      {
+       "currency": "USD",
+       "net": 19.517
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-05-31",
+     "printed": null,
+     "period": "9M 2026 (to 31 May)",
+     "periodEnd": "2026-05-31",
+     "filingId": "291733",
+     "source": "https://foudalens.com/disclosures/CIRA.CA/financial_statement/2026-07-21_291732_1.pdf"
+    },
+    {
+     "ticker": "CNFN",
+     "name": "Contact Financial Holding SAE",
+     "sector": "Non-bank financial services",
+     "fxResult": 14.781,
+     "netIncome": 151.812,
+     "shareOfNetIncome": 9.7,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق ترجمة عمالت أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293033",
+     "source": "https://foudalens.com/disclosures/CNFN.CA/financial_statement/2026-08-13_293032_1.pdf"
+    },
+    {
+     "ticker": "COMI",
+     "name": "Commercial International Bank - Egypt (CIB) S.A.E.",
+     "sector": "Banks",
+     "fxResult": 1585.05,
+     "netIncome": 39235.078,
+     "shareOfNetIncome": 4.0,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "CHF",
+       "net": 4.175
+      },
+      {
+       "currency": "EUR",
+       "net": 123.41
+      },
+      {
+       "currency": "GBP",
+       "net": 16.822
+      },
+      {
+       "currency": "JPY",
+       "net": -0.235
+      },
+      {
+       "currency": "SAR",
+       "net": -511.75
+      },
+      {
+       "currency": "USD",
+       "net": -1752.73
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-06-30",
+     "printed": "Profit (Loss) from foreign exchange transactions",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "291711",
+     "source": "https://foudalens.com/disclosures/COMI.CA/financial_statement/2026-07-21_291710_1.pdf"
+    },
+    {
+     "ticker": "COSG",
+     "name": "Cairo Oils & Soap",
+     "sector": "Food, Beverages and Tobacco",
+     "fxResult": 0.0,
+     "netIncome": 0.156,
+     "shareOfNetIncome": 0.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق عملة محققة وغير محققة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292950",
+     "source": "https://foudalens.com/disclosures/COSG.CA/financial_statement/2026-08-13_292949_1.pdf"
+    },
+    {
+     "ticker": "CPME",
+     "name": "Catalyst Partners Middle East",
+     "sector": "Non-bank financial services",
+     "fxResult": 0.256,
+     "netIncome": 117.083,
+     "shareOfNetIncome": 0.2,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "اثر التغير في اسعار الصرف",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293513",
+     "source": "https://foudalens.com/disclosures/CPME.CA/financial_statement/2026-08-18_293512_1.pdf"
+    },
+    {
+     "ticker": "DAPH",
+     "name": "Development & Engineering Consultants",
+     "sector": "Real Estate",
+     "fxResult": 4.848,
+     "netIncome": 94.278,
+     "shareOfNetIncome": 5.1,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق تقييم عملة",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "289964",
+     "source": "https://foudalens.com/disclosures/DAPH.CA/financial_statement/2026-06-16_289963_1.pdf"
+    },
+    {
+     "ticker": "DEIN",
+     "name": "Delta Insurance",
+     "sector": "Non-bank financial services",
+     "fxResult": 65.73,
+     "netIncome": 442.619,
+     "shareOfNetIncome": 14.9,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح بيع فروق العملة",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "289483",
+     "source": "https://foudalens.com/disclosures/DEIN.CA/financial_statement/2026-06-07_339355_1.pdf"
+    },
+    {
+     "ticker": "DOMT",
+     "name": "Arabian Food Industries Co.",
+     "sector": "Food, Beverages and Tobacco",
+     "fxResult": -33.504,
+     "netIncome": 72.194,
+     "shareOfNetIncome": -46.4,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "خسائر فروق تقييم عملة",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "288852",
+     "source": "https://foudalens.com/disclosures/DOMT.CA/financial_statement/2026-05-24_338880_1.pdf"
+    },
+    {
+     "ticker": "DSCW",
+     "name": "Dice Sports & Casual Wear Manufacturers SAE",
+     "sector": "Textile & Durables",
+     "fxResult": null,
+     "netIncome": 70.23,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": 5.378
+      },
+      {
+       "currency": "USD",
+       "net": -35.521
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": null,
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293203",
+     "source": "https://foudalens.com/disclosures/DSCW.CA/financial_statement/2026-08-16_293202_2.pdf"
+    },
+    {
+     "ticker": "EASB",
+     "name": "Egyptian Arabian Company for Securities Brokerage EAC",
+     "sector": "Non-bank financial services",
+     "fxResult": 0.386,
+     "netIncome": 19.445,
+     "shareOfNetIncome": 2.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح / (خسائر) فروق تقييم عملات أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "EASB-H1 2026-2026-06-30",
+     "source": "https://foudalens.com/disclosures/EASB.CA/financial_statement/2026-08-13_293062_1.pdf"
+    },
+    {
+     "ticker": "EAST",
+     "name": "Eastern Company",
+     "sector": "Food, Beverages and Tobacco",
+     "fxResult": 87.5,
+     "netIncome": 1253.311,
+     "shareOfNetIncome": 7.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "(٤) أرباح وخسائر فروق عملة",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "EAST-Q1 2026-2026-03-31",
+     "source": "https://foudalens.com/disclosures/EAST.CA/financial_statement/2026-06-17_289979_1.pdf"
+    },
+    {
+     "ticker": "ECAP",
+     "name": "El Ezz Ceramics & Porcelain Co. (Gemma)",
+     "sector": "Building Materials",
+     "fxResult": -11.314,
+     "netIncome": -69.363,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "AED",
+       "net": 0.017
+      },
+      {
+       "currency": "EUR",
+       "net": -237.944
+      },
+      {
+       "currency": "SAR",
+       "net": 0.31
+      },
+      {
+       "currency": "USD",
+       "net": -88.169
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": "FOREX (Losses)",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292522",
+     "source": "https://foudalens.com/disclosures/ECAP.CA/financial_statement/2026-08-06_292521_1.pdf"
+    },
+    {
+     "ticker": "EEII",
+     "name": "El Arabia Engineering Industries",
+     "sector": "Industrial Goods , Services and Automobiles",
+     "fxResult": 0.723,
+     "netIncome": 4.945,
+     "shareOfNetIncome": 14.6,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "GBP",
+       "net": 0.0
+      },
+      {
+       "currency": "USD",
+       "net": 0.039
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": "ارباح (خسائر) تقييم العملة الأجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292806",
+     "source": "https://foudalens.com/disclosures/EEII.CA/financial_statement/2026-08-12_292805_1.pdf"
+    },
+    {
+     "ticker": "EFID",
+     "name": "Edita Food Industries SAE",
+     "sector": "Food, Beverages and Tobacco",
+     "fxResult": -28.335,
+     "netIncome": 1613.909,
+     "shareOfNetIncome": -1.8,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "(خسائر) أرباح تقييم فروق عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293114",
+     "source": "https://foudalens.com/disclosures/EFID.CA/other/2026-08-13_293113_1.pdf"
+    },
+    {
+     "ticker": "EFIH",
+     "name": "e-finance for Digital and Financial Investments S.A.E.",
+     "sector": "IT , Media & Communication Services",
+     "fxResult": 3.31,
+     "netIncome": 1253.865,
+     "shareOfNetIncome": 0.3,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "Foreign currencies exchange gain",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292813",
+     "source": "https://foudalens.com/disclosures/EFIH.CA/financial_statement/2026-08-12_292812_1.pdf"
+    },
+    {
+     "ticker": "EGAL",
+     "name": "Egypt Aluminum",
+     "sector": "Basic Resources",
+     "fxResult": 682.0,
+     "netIncome": 10447.306,
+     "shareOfNetIncome": 6.5,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أسفر التغير فى اسعار صرف العملات عن ربح بلغ ٦٨٢ مليون جنيه مقابل ربح بلغ ۲۱۷ مليون جنيه عن الفترة المماثلة من العام السابق",
+     "period": "9M 2026 (to 31 Mar)",
+     "periodEnd": "2026-03-31",
+     "filingId": "290050",
+     "source": "https://foudalens.com/disclosures/EGAL.CA/financial_statement/2026-06-21_290050_3.pdf"
+    },
+    {
+     "ticker": "EGAS",
+     "name": "Egypt Gas Co.",
+     "sector": "Utilities",
+     "fxResult": -0.942,
+     "netIncome": 234.687,
+     "shareOfNetIncome": -0.4,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "AED",
+       "net": 0.0
+      },
+      {
+       "currency": "EUR",
+       "net": 0.058
+      },
+      {
+       "currency": "GBP",
+       "net": 0.001
+      },
+      {
+       "currency": "JOD",
+       "net": 0.118
+      },
+      {
+       "currency": "OMR",
+       "net": 0.03
+      },
+      {
+       "currency": "SAR",
+       "net": 1.696
+      },
+      {
+       "currency": "USD",
+       "net": 2.862
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": "(loss) exchange gain",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293160",
+     "source": "https://foudalens.com/disclosures/EGAS.CA/financial_statement/2026-08-16_293159_1.pdf"
+    },
+    {
+     "ticker": "EGBE",
+     "name": "Egyptian Gulf Bank",
+     "sector": "Banks",
+     "fxResult": 226.342,
+     "netIncome": 2209.161,
+     "shareOfNetIncome": 10.2,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": -478.637
+      },
+      {
+       "currency": "GBP",
+       "net": -89.614
+      },
+      {
+       "currency": "USD",
+       "net": -2509.39
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-06-30",
+     "printed": "Gain from foreign exchange",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293041",
+     "source": "https://foudalens.com/disclosures/EGBE.CA/financial_statement/2026-08-13_293040_1.pdf"
+    },
+    {
+     "ticker": "EGCH",
+     "name": "Egyptian Chemical Industries",
+     "sector": "Basic Resources",
+     "fxResult": -1071.975,
+     "netIncome": 531.31,
+     "shareOfNetIncome": -201.8,
+     "largerThanTheProfit": true,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "مكسب (خسائر) فروق عمله",
+     "period": "9M 2026 (to 31 Mar)",
+     "periodEnd": "2026-03-31",
+     "filingId": "288832",
+     "source": "https://foudalens.com/disclosures/EGCH.CA/financial_statement/2026-05-24_338778_1.pdf"
+    },
+    {
+     "ticker": "EGTS",
+     "name": "Egyptian for Tourism Resorts",
+     "sector": "Travel & Leisure",
+     "fxResult": 270.776,
+     "netIncome": 9.782,
+     "shareOfNetIncome": 2768.1,
+     "largerThanTheProfit": true,
+     "position": [
+      {
+       "currency": "USD",
+       "net": 37.56
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-03-31",
+     "printed": "فروق ترجمة الأرصدة بالعملات الأجنبية",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "293459",
+     "source": "https://foudalens.com/disclosures/EGTS.CA/financial_statement/2026-08-18_293458_1.pdf"
+    },
+    {
+     "ticker": "EHDR",
+     "name": null,
+     "sector": null,
+     "fxResult": -0.0,
+     "netIncome": 40.875,
+     "shareOfNetIncome": -0.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق ترجمة الأرصدة بالعملات الأجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292975",
+     "source": "https://foudalens.com/disclosures/EHDR.CA/financial_statement/2026-08-13_292974_1.pdf"
+    },
+    {
+     "ticker": "ELEC",
+     "name": "Electro Cable Egypt",
+     "sector": "Industrial Goods , Services and Automobiles",
+     "fxResult": -25.988,
+     "netIncome": -50.821,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق تقييم عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "ELEC-H1 2026-2026-06-30",
+     "source": "https://foudalens.com/disclosures/ELEC.CA/financial_statement/2026-08-16_293306_1.pdf"
+    },
+    {
+     "ticker": "ELKA",
+     "name": "El Kahera Housing",
+     "sector": "Real Estate",
+     "fxResult": 0.089,
+     "netIncome": 463.797,
+     "shareOfNetIncome": 0.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق تقييم عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293659",
+     "source": "https://foudalens.com/disclosures/ELKA.CA/financial_statement/2026-08-20_293658_1.pdf"
+    },
+    {
+     "ticker": "ELSH",
+     "name": "El-Shams Housing & Development SA",
+     "sector": "Real Estate",
+     "fxResult": 0.002,
+     "netIncome": 89.053,
+     "shareOfNetIncome": 0.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق تقييم عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293186",
+     "source": "https://foudalens.com/disclosures/ELSH.CA/financial_statement/2026-08-16_293185_1.pdf"
+    },
+    {
+     "ticker": "EMFD",
+     "name": "Emaar Misr for Development SAE",
+     "sector": "Real Estate",
+     "fxResult": 1573.926,
+     "netIncome": 5555.902,
+     "shareOfNetIncome": 28.3,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "Net Foreign exchange gains (losses)",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292587",
+     "source": "https://foudalens.com/disclosures/EMFD.CA/financial_statement/2026-08-09_292586_1.pdf"
+    },
+    {
+     "ticker": "EOSB",
+     "name": "El Orouba Securities Brokerage",
+     "sector": "Non-bank financial services",
+     "fxResult": 0.017,
+     "netIncome": 0.918,
+     "shareOfNetIncome": 1.9,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق تقيم عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "EOSB-H1 2026-2026-06-30",
+     "source": "https://foudalens.com/disclosures/EOSB.CA/financial_statement/2026-08-16_293336_1.pdf"
+    },
+    {
+     "ticker": "EPPK",
+     "name": "El Ahram Co. for Printing & Packing",
+     "sector": "Process Industries",
+     "fxResult": 0.0,
+     "netIncome": -1.506,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق عمله",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293383",
+     "source": "https://foudalens.com/disclosures/EPPK.CA/financial_statement/2026-08-17_293382_1.pdf"
+    },
+    {
+     "ticker": "ETEL",
+     "name": "Telecom Egypt",
+     "sector": "IT , Media & Communication Services",
+     "fxResult": -2165.063,
+     "netIncome": 15409.984,
+     "shareOfNetIncome": -14.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "خسائر ترجمة الأرصدة والمعاملات بالعملة الأجنبية بمبلغ ٢١٦٥٠٦٣ ألف جنيه مصري",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293087",
+     "source": "https://foudalens.com/disclosures/ETEL.CA/financial_statement/2026-08-13_293086_1.pdf"
+    },
+    {
+     "ticker": "ETRS",
+     "name": "Egyptian Transport And Commercial Services Co. (Egytrans Nosco)",
+     "sector": "Shipping & Transportation Services",
+     "fxResult": null,
+     "netIncome": 85.004,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "AED",
+       "net": -0.0
+      },
+      {
+       "currency": "AUD",
+       "net": -0.001
+      },
+      {
+       "currency": "EUR",
+       "net": 0.535
+      },
+      {
+       "currency": "GBP",
+       "net": 0.049
+      },
+      {
+       "currency": "JOD",
+       "net": 0.0
+      },
+      {
+       "currency": "JPY",
+       "net": -0.472
+      },
+      {
+       "currency": "SAR",
+       "net": 0.029
+      },
+      {
+       "currency": "USD",
+       "net": 10.327
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": null,
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293118",
+     "source": "https://foudalens.com/disclosures/ETRS.CA/financial_statement/2026-08-13_293117_1.pdf"
+    },
+    {
+     "ticker": "FNAR",
+     "name": "Al Fanar Contracting Construction Trade Import & Export Co.",
+     "sector": "Industrial Services",
+     "fxResult": 0.001,
+     "netIncome": 0.684,
+     "shareOfNetIncome": 0.1,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "ارباح او خسائر فروق العمله",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293039",
+     "source": "https://foudalens.com/disclosures/FNAR.CA/financial_statement/2026-08-13_293038_1.pdf"
+    },
+    {
+     "ticker": "FWRY",
+     "name": "Fawry For Banking Technology And Electronic Payment",
+     "sector": "IT , Media & Communication Services",
+     "fxResult": -2.239,
+     "netIncome": 1295.449,
+     "shareOfNetIncome": -0.2,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "Foreign currency exchange differencies",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292988",
+     "source": "https://foudalens.com/disclosures/FWRY.CA/financial_statement/2026-08-13_292987_1.pdf"
+    },
+    {
+     "ticker": "GBCO",
+     "name": "GB Corp",
+     "sector": "Industrial Goods , Services and Automobiles",
+     "fxResult": -23.429,
+     "netIncome": 1055.639,
+     "shareOfNetIncome": -2.2,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": 91.777
+      },
+      {
+       "currency": "USD",
+       "net": -1853.57
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-06-30",
+     "printed": "Foreign exchange (Losses) / Gain",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293166",
+     "source": "https://foudalens.com/disclosures/GBCO.CA/financial_statement/2026-08-16_293165_1.pdf"
+    },
+    {
+     "ticker": "GDWA",
+     "name": "Gadwa For Industrial Development",
+     "sector": "Industrial Goods , Services and Automobiles",
+     "fxResult": -4.461,
+     "netIncome": -257.206,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "USD",
+       "net": -57.615
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-03-31",
+     "printed": "فروق تقييم عملة",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "290609",
+     "source": "https://foudalens.com/disclosures/GDWA.CA/financial_statement/2026-06-30_290608_1.pdf"
+    },
+    {
+     "ticker": "GOUR",
+     "name": "Gourmet Egypt.Com Foods",
+     "sector": "Trade & Distributors",
+     "fxResult": 0.921,
+     "netIncome": 69.729,
+     "shareOfNetIncome": 1.3,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح فروق عملة",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "289550",
+     "source": "https://foudalens.com/disclosures/GOUR.CA/financial_statement/2026-06-08_339367_1.pdf"
+    },
+    {
+     "ticker": "GRCA",
+     "name": "Grand Investment Capital",
+     "sector": "Non-bank financial services",
+     "fxResult": 0.0,
+     "netIncome": 0.147,
+     "shareOfNetIncome": 0.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق عملة",
+     "period": "Q2 2026 (to 30 Jun)",
+     "periodEnd": "2026-06-30",
+     "filingId": "292946",
+     "source": "https://foudalens.com/disclosures/GRCA.CA/financial_statement/2026-08-13_292945_1.pdf"
+    },
+    {
+     "ticker": "HDBK",
+     "name": "Housing & Development Bank",
+     "sector": "Banks",
+     "fxResult": 5.14,
+     "netIncome": 9923.52,
+     "shareOfNetIncome": 0.1,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": -0.093
+      },
+      {
+       "currency": "GBP",
+       "net": -0.009
+      },
+      {
+       "currency": "OTHER",
+       "net": 1.03
+      },
+      {
+       "currency": "USD",
+       "net": 0.611
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": "Revaluation profits of assets and liabilities balances in foreign currencies with monetary nature other than held at fair value through profit and loss or classified at inception at fair value through profit and loss",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292793",
+     "source": "https://foudalens.com/disclosures/HDBK.CA/financial_statement/2026-08-12_292792_1.pdf"
+    },
+    {
+     "ticker": "HELI",
+     "name": "Heliopolis Housing",
+     "sector": "Real Estate",
+     "fxResult": 1.077,
+     "netIncome": 1358.399,
+     "shareOfNetIncome": 0.1,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح فروق العملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292780",
+     "source": "https://foudalens.com/disclosures/HELI.CA/financial_statement/2026-08-11_292779_1.pdf"
+    },
+    {
+     "ticker": "HRHO",
+     "name": "EFG Holding S.A.E.",
+     "sector": "Non-bank financial services",
+     "fxResult": 593.832,
+     "netIncome": 2898.967,
+     "shareOfNetIncome": 20.5,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": -75.691
+      },
+      {
+       "currency": "GBP",
+       "net": -0.438
+      },
+      {
+       "currency": "OTHER",
+       "net": 55.242
+      },
+      {
+       "currency": "USD",
+       "net": -721.161
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-06-30",
+     "printed": "فروق ترجمة األرصدة بالعمالت األجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293826",
+     "source": "https://foudalens.com/disclosures/HRHO.CA/financial_statement/2026-08-24_293825_1.pdf"
+    },
+    {
+     "ticker": "ICFC",
+     "name": "International Co. for Fertilizers & Chemicals",
+     "sector": "Trade & Distributors",
+     "fxResult": 0.548,
+     "netIncome": 162.397,
+     "shareOfNetIncome": 0.3,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح / خسائر فروق عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293226",
+     "source": "https://foudalens.com/disclosures/ICFC.CA/other/2026-08-16_293225_1.pdf"
+    },
+    {
+     "ticker": "ICLE",
+     "name": "International Co. for Leasing SAE",
+     "sector": "Finance",
+     "fxResult": 21.769,
+     "netIncome": 89.108,
+     "shareOfNetIncome": 24.4,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح / (خسائر) فروق تقييم العملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292942",
+     "source": "https://foudalens.com/disclosures/ICLE.CA/financial_statement/2026-08-13_292941_1.pdf"
+    },
+    {
+     "ticker": "IFAP",
+     "name": "International Agricultural Products",
+     "sector": "Trade & Distributors",
+     "fxResult": -9.602,
+     "netIncome": 384.056,
+     "shareOfNetIncome": -2.5,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "(خسائر) / أرباح فروق تقييم عملة",
+     "period": "9M 2026 (to 31 Mar)",
+     "periodEnd": "2026-03-31",
+     "filingId": "IFAP-9M 2026 (to 31 Mar)-2026-03-31",
+     "source": "https://foudalens.com/disclosures/IFAP.CA/financial_statement/2026-06-15_289843_1.pdf"
+    },
+    {
+     "ticker": "ISPH",
+     "name": "Ibnsina Pharma",
+     "sector": "Health Care & Pharmaceuticals",
+     "fxResult": -0.359,
+     "netIncome": 511.299,
+     "shareOfNetIncome": -0.1,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "(خسائر) ارباح فروق اعادة تقييم عملات أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292881",
+     "source": "https://foudalens.com/disclosures/ISPH.CA/financial_statement/2026-08-12_292880_1.pdf"
+    },
+    {
+     "ticker": "JUFO",
+     "name": "Juhayna Food Industries",
+     "sector": "Food, Beverages and Tobacco",
+     "fxResult": null,
+     "netIncome": 1381.83,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": -3.868
+      },
+      {
+       "currency": "USD",
+       "net": -14.684
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": null,
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292486",
+     "source": "https://foudalens.com/disclosures/JUFO.CA/financial_statement/2026-08-05_292485_1.pdf"
+    },
+    {
+     "ticker": "KABO",
+     "name": "El Nasr Clothing & Textiles Co.",
+     "sector": "Textile & Durables",
+     "fxResult": 2.711,
+     "netIncome": 53.789,
+     "shareOfNetIncome": 5.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح (خسائر) فروق عملة أجنبية",
+     "period": "9M 2026 (to 31 Mar)",
+     "periodEnd": "2026-03-31",
+     "filingId": "KABO-9M 2026 (to 31 Mar)-2026-03-31",
+     "source": "https://foudalens.com/disclosures/KABO.CA/financial_statement/2026-06-25_290396_1.pdf"
+    },
+    {
+     "ticker": "KORA",
+     "name": "KORRA",
+     "sector": "Contracting & Construction Engineering",
+     "fxResult": -25.586,
+     "netIncome": 139.013,
+     "shareOfNetIncome": -18.4,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "(خسائر) أرباح تقييم عملات أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293566",
+     "source": "https://foudalens.com/disclosures/KORA.CA/financial_statement/2026-08-19_293565_1.pdf"
+    },
+    {
+     "ticker": "KRDI",
+     "name": "Al Khair River for Development Agriculture Investment and Environmental Services",
+     "sector": "Food, Beverages and Tobacco",
+     "fxResult": 0.008,
+     "netIncome": 42.495,
+     "shareOfNetIncome": 0.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293657",
+     "source": "https://foudalens.com/disclosures/KRDI.CA/financial_statement/2026-08-20_293656_1.pdf"
+    },
+    {
+     "ticker": "KWIN",
+     "name": "El Kahera El Watania Investment",
+     "sector": "Non-bank financial services",
+     "fxResult": -0.014,
+     "netIncome": 10.035,
+     "shareOfNetIncome": -0.1,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "(أرباح) / خسائر فروق ترجمة عملات أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292574",
+     "source": "https://foudalens.com/disclosures/KWIN.CA/financial_statement/2026-08-09_292573_1.pdf"
+    },
+    {
+     "ticker": "KZPC",
+     "name": "Kafr El Zayat Pesticides & Chemical Co.",
+     "sector": "Basic Resources",
+     "fxResult": 0.112,
+     "netIncome": 78.644,
+     "shareOfNetIncome": 0.1,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": -0.01
+      },
+      {
+       "currency": "USD",
+       "net": 5.15
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": "فروق ترجمة ارصده بالعملات الأجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293001",
+     "source": "https://foudalens.com/disclosures/KZPC.CA/financial_statement/2026-08-13_293000_1.pdf"
+    },
+    {
+     "ticker": "LCSW",
+     "name": "Lecico Egypt SAE",
+     "sector": "Building Materials",
+     "fxResult": null,
+     "netIncome": 147.521,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "GBP",
+       "net": -0.233
+      },
+      {
+       "currency": "USD",
+       "net": 0.376
+      },
+      {
+       "currency": "ZAR",
+       "net": 6.994
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": null,
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "LCSW-H1 2026-2026-06-30",
+     "source": "https://foudalens.com/disclosures/LCSW.CA/financial_statement/2026-08-16_293325_1.pdf"
+    },
+    {
+     "ticker": "MAAL",
+     "name": "Marseilla Al Masreia Al Khalegeya for Holding Investment",
+     "sector": "Real Estate",
+     "fxResult": null,
+     "netIncome": 126.024,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "USD",
+       "net": 0.032
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": null,
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "MAAL-H1 2026-2026-06-30",
+     "source": "https://foudalens.com/disclosures/MAAL.CA/financial_statement/2026-08-23_293702_1.pdf"
+    },
+    {
+     "ticker": "MASR",
+     "name": "Madinet Masr for Housing & Development",
+     "sector": "Real Estate",
+     "fxResult": 17.887,
+     "netIncome": 1027.387,
+     "shareOfNetIncome": 1.7,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح فروق عملات أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293745",
+     "source": "https://foudalens.com/disclosures/MASR.CA/other/2026-08-23_293744_1.pdf"
+    },
+    {
+     "ticker": "MBSC",
+     "name": "Misr Beni Suef Cement Co. SAE",
+     "sector": "Building Materials",
+     "fxResult": -6.221,
+     "netIncome": 1250.769,
+     "shareOfNetIncome": -0.5,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق عملة مدينة / دائنة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292891",
+     "source": "https://foudalens.com/disclosures/MBSC.CA/financial_statement/2026-08-12_292890_1.pdf"
+    },
+    {
+     "ticker": "MCQE",
+     "name": "Misr Cement Co. (Qena)",
+     "sector": "Building Materials",
+     "fxResult": -63.334,
+     "netIncome": 1430.132,
+     "shareOfNetIncome": -4.4,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق تقييم عملات أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292529",
+     "source": "https://foudalens.com/disclosures/MCQE.CA/financial_statement/2026-08-06_292528_1.pdf"
+    },
+    {
+     "ticker": "MCRO",
+     "name": "Macro Group Pharmaceutical S.A.E.",
+     "sector": "Health Care & Pharmaceuticals",
+     "fxResult": -12.573,
+     "netIncome": 84.419,
+     "shareOfNetIncome": -14.9,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "خسائر فروق ترجمة عملات أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293103",
+     "source": "https://foudalens.com/disclosures/MCRO.CA/financial_statement/2026-08-13_293102_1.pdf"
+    },
+    {
+     "ticker": "MEGM",
+     "name": "Middle East Glass Manufacturing SAE",
+     "sector": "Process Industries",
+     "fxResult": -91.292,
+     "netIncome": 454.942,
+     "shareOfNetIncome": -20.1,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "(خسائر)/أرباح ترجمة عملات أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292160",
+     "source": "https://foudalens.com/disclosures/MEGM.CA/financial_statement/2026-07-29_292159_1.pdf"
+    },
+    {
+     "ticker": "MEPA",
+     "name": "Medical Packaging Company",
+     "sector": "Health Care & Pharmaceuticals",
+     "fxResult": 0.172,
+     "netIncome": 4.399,
+     "shareOfNetIncome": 3.9,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "(خسائر) فروق تدبير عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293022",
+     "source": "https://foudalens.com/disclosures/MEPA.CA/financial_statement/2026-08-13_293021_1.pdf"
+    },
+    {
+     "ticker": "MFPC",
+     "name": "Misr Fertilizers Production Company MOPCO",
+     "sector": "Basic Resources",
+     "fxResult": 374.946,
+     "netIncome": 9903.834,
+     "shareOfNetIncome": 3.8,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "صافي أرباح / (خسائر) فروق ترجمة أرصدة بعملات أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292977",
+     "source": "https://foudalens.com/disclosures/MFPC.CA/financial_statement/2026-08-13_292976_1.pdf"
+    },
+    {
+     "ticker": "MHOT",
+     "name": "Misr Hotels Co.",
+     "sector": "Travel & Leisure",
+     "fxResult": 41.831,
+     "netIncome": 1148.436,
+     "shareOfNetIncome": 3.6,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "ارباح وخسائر فروق اعادة تقييم عملة",
+     "period": "9M 2026 (to 31 Mar)",
+     "periodEnd": "2026-03-31",
+     "filingId": "288239",
+     "source": "https://foudalens.com/disclosures/MHOT.CA/financial_statement/2026-05-17_288238_1.pdf"
+    },
+    {
+     "ticker": "MILS",
+     "name": "North Cairo Mills Co.",
+     "sector": "Food, Beverages and Tobacco",
+     "fxResult": -0.975,
+     "netIncome": 33.923,
+     "shareOfNetIncome": -2.9,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "(٩٧٥) الف جنيه فرق سعر عملة",
+     "period": "9M 2026 (to 31 Mar)",
+     "periodEnd": "2026-03-31",
+     "filingId": "287972",
+     "source": "https://foudalens.com/disclosures/MILS.CA/financial_statement/2026-05-12_338176_1.pdf"
+    },
+    {
+     "ticker": "MISR",
+     "name": "MISR Intercontinental for Granite & Marble",
+     "sector": "Non-Energy Minerals",
+     "fxResult": 0.211,
+     "netIncome": 0.028,
+     "shareOfNetIncome": 753.6,
+     "largerThanTheProfit": true,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق ترجمة عملات أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "MISR-H1 2026-2026-06-30",
+     "source": "https://foudalens.com/disclosures/MISR.CA/financial_statement/2026-08-06_292538_1.pdf"
+    },
+    {
+     "ticker": "MMAT",
+     "name": "Marsa Marsa Alam for Tourism Development",
+     "sector": "Consumer Services",
+     "fxResult": 0.043,
+     "netIncome": -2.599,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "خسائر فروق عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293776",
+     "source": "https://foudalens.com/disclosures/MMAT.CA/financial_statement/2026-08-24_293775_1.pdf"
+    },
+    {
+     "ticker": "MOIN",
+     "name": "Mohandes Insurance Co.",
+     "sector": "Non-bank financial services",
+     "fxResult": 12.601,
+     "netIncome": 117.325,
+     "shareOfNetIncome": 10.7,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق أسعار عملات",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "MOIN-H1 2026-2026-06-30",
+     "source": "https://foudalens.com/disclosures/MOIN.CA/financial_statement/2026-08-16_293294_1.pdf"
+    },
+    {
+     "ticker": "MOSC",
+     "name": "Misr Oils & Soap Co.",
+     "sector": "Food, Beverages and Tobacco",
+     "fxResult": 0.046,
+     "netIncome": 17.311,
+     "shareOfNetIncome": 0.3,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق عمله",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293429",
+     "source": "https://foudalens.com/disclosures/MOSC.CA/financial_statement/2026-08-17_293428_1.pdf"
+    },
+    {
+     "ticker": "MPCO",
+     "name": "Mansourah Poultry Co.",
+     "sector": "Food, Beverages and Tobacco",
+     "fxResult": 0.015,
+     "netIncome": -41.637,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح فروق عملة",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "289253",
+     "source": "https://foudalens.com/disclosures/MPCO.CA/financial_statement/2026-06-01_339142_1.pdf"
+    },
+    {
+     "ticker": "MTIE",
+     "name": "MM Group for Industry & International Trade",
+     "sector": "Trade & Distributors",
+     "fxResult": 16.491,
+     "netIncome": 465.1,
+     "shareOfNetIncome": 3.5,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "Foreign currency exchange gains",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293224",
+     "source": "https://foudalens.com/disclosures/MTIE.CA/financial_statement/2026-08-16_293223_1.pdf"
+    },
+    {
+     "ticker": "NARE",
+     "name": "Naeem Real Estate Holding Group",
+     "sector": "Real Estate",
+     "fxResult": -3.701,
+     "netIncome": 53.31,
+     "shareOfNetIncome": -6.9,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق تقييم عملات أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292820",
+     "source": "https://foudalens.com/disclosures/NARE.CA/financial_statement/2026-08-12_292819_1.pdf"
+    },
+    {
+     "ticker": "NCCW",
+     "name": "Nasr Co. for Civil Works",
+     "sector": "Contracting & Construction Engineering",
+     "fxResult": 0.126,
+     "netIncome": 1.424,
+     "shareOfNetIncome": 8.8,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فرق تقييم عملة",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "288924",
+     "source": "https://foudalens.com/disclosures/NCCW.CA/financial_statement/2026-05-25_338972_1.pdf"
+    },
+    {
+     "ticker": "NHPS",
+     "name": "National Housing for Professional Syndicates",
+     "sector": "Real Estate",
+     "fxResult": -0.388,
+     "netIncome": 13.361,
+     "shareOfNetIncome": -2.9,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "NHPS-H1 2026-2026-06-30",
+     "source": "https://foudalens.com/disclosures/NHPS.CA/financial_statement/2026-08-11_292734_1.pdf"
+    },
+    {
+     "ticker": "NIPH",
+     "name": "El-Nile Co. for Pharmaceuticals & Chemical Industries",
+     "sector": "Health Care & Pharmaceuticals",
+     "fxResult": -1.207,
+     "netIncome": 239.065,
+     "shareOfNetIncome": -0.5,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "تقلبات اسعار العملات",
+     "period": "9M 2026 (to 31 Mar)",
+     "periodEnd": "2026-03-31",
+     "filingId": "288752",
+     "source": "https://foudalens.com/disclosures/NIPH.CA/financial_statement/2026-05-21_338818_1.pdf"
+    },
+    {
+     "ticker": "OBRI",
+     "name": "El Obour Real Estate Investment",
+     "sector": "Real Estate",
+     "fxResult": -0.031,
+     "netIncome": 43.102,
+     "shareOfNetIncome": -0.1,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق ترجمة عملة أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293755",
+     "source": "https://foudalens.com/disclosures/OBRI.CA/financial_statement/2026-08-23_293754_1.pdf"
+    },
+    {
+     "ticker": "OCDI",
+     "name": "Six of October Development & Investment (SODIC)",
+     "sector": "Real Estate",
+     "fxResult": 30.883,
+     "netIncome": 837.219,
+     "shareOfNetIncome": 3.7,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": 0.205
+      },
+      {
+       "currency": "GBP",
+       "net": 0.037
+      },
+      {
+       "currency": "USD",
+       "net": 24.356
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": "ارباح فروق ترجمة األرصدة بالعمالت األجنبیة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292082",
+     "source": "https://foudalens.com/disclosures/OCDI.CA/other/2026-07-28_292081_1.pdf"
+    },
+    {
+     "ticker": "OCPH",
+     "name": "October Pharma Co.",
+     "sector": "Health Care & Pharmaceuticals",
+     "fxResult": -0.274,
+     "netIncome": 143.835,
+     "shareOfNetIncome": -0.2,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "ارباح/ (خسائر) فروق العملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293189",
+     "source": "https://foudalens.com/disclosures/OCPH.CA/financial_statement/2026-08-16_293188_1.pdf"
+    },
+    {
+     "ticker": "ODIN",
+     "name": "ODIN Investments",
+     "sector": "Non-bank financial services",
+     "fxResult": -0.967,
+     "netIncome": 59.898,
+     "shareOfNetIncome": -1.6,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293030",
+     "source": "https://foudalens.com/disclosures/ODIN.CA/financial_statement/2026-08-13_293029_1.pdf"
+    },
+    {
+     "ticker": "OLFI",
+     "name": "Obour Land for Food Industries",
+     "sector": "Food, Beverages and Tobacco",
+     "fxResult": -121.525,
+     "netIncome": 409.226,
+     "shareOfNetIncome": -29.7,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "USD",
+       "net": -22.625
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": "Revaluation of foreign currency",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292778",
+     "source": "https://foudalens.com/disclosures/OLFI.CA/financial_statement/2026-08-11_292777_2.pdf"
+    },
+    {
+     "ticker": "ORHD",
+     "name": "Orascom Development Egypt (S.A.E)",
+     "sector": "Real Estate",
+     "fxResult": 177.0,
+     "netIncome": 2114.449,
+     "shareOfNetIncome": 8.4,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "Net forex gain with an amount of EGP 177 million during the current period, compared to an amount of EGP 556.2 million gain for the same period last year.",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292863",
+     "source": "https://foudalens.com/disclosures/ORHD.CA/financial_statement/2026-08-12_292862_1.pdf"
+    },
+    {
+     "ticker": "ORWE",
+     "name": "Oriental Weavers Carpet",
+     "sector": "Textile & Durables",
+     "fxResult": -21.392,
+     "netIncome": 1852.73,
+     "shareOfNetIncome": -1.2,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": -0.536
+      },
+      {
+       "currency": "GBP",
+       "net": 0.0
+      },
+      {
+       "currency": "USD",
+       "net": 15.439
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": "فروق تقييم عملات أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292849",
+     "source": "https://foudalens.com/disclosures/ORWE.CA/financial_statement/2026-08-12_292848_1.pdf"
+    },
+    {
+     "ticker": "PHAR",
+     "name": "Egyptian International Pharmaceutical Industries Co.",
+     "sector": "Health Care & Pharmaceuticals",
+     "fxResult": null,
+     "netIncome": 433.404,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": -489.645
+      },
+      {
+       "currency": "USD",
+       "net": 569.966
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-06-30",
+     "printed": null,
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293147",
+     "source": "https://foudalens.com/disclosures/PHAR.CA/financial_statement/2026-08-16_293146_2.pdf"
+    },
+    {
+     "ticker": "PHTV",
+     "name": "Pyramisa Hotels",
+     "sector": "Travel & Leisure",
+     "fxResult": 20.246,
+     "netIncome": 407.66,
+     "shareOfNetIncome": 5.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "Foreign Exchange Valuation Differences",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293264",
+     "source": "https://foudalens.com/disclosures/PHTV.CA/financial_statement/2026-08-16_293263_2.pdf"
+    },
+    {
+     "ticker": "PRDC",
+     "name": "Pioneers Properties for Urban Development",
+     "sector": "Real Estate",
+     "fxResult": null,
+     "netIncome": 318.622,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": 8.241
+      },
+      {
+       "currency": "GBP",
+       "net": 0.192
+      },
+      {
+       "currency": "USD",
+       "net": -284.614
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-06-30",
+     "printed": null,
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293707",
+     "source": "https://foudalens.com/disclosures/PRDC.CA/financial_statement/2026-08-23_293706_1.pdf"
+    },
+    {
+     "ticker": "PRMH",
+     "name": "Prime Holding",
+     "sector": "Non-bank financial services",
+     "fxResult": 1.96,
+     "netIncome": 43.731,
+     "shareOfNetIncome": 4.5,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق تقييم عملات اجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292446",
+     "source": "https://foudalens.com/disclosures/PRMH.CA/financial_statement/2026-08-04_292445_1.pdf"
+    },
+    {
+     "ticker": "QNBE",
+     "name": "Qatar National Bank",
+     "sector": "Banks",
+     "fxResult": null,
+     "netIncome": 17789.348,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": 40.412
+      },
+      {
+       "currency": "GBP",
+       "net": 11.077
+      },
+      {
+       "currency": "OTHER",
+       "net": 13.26
+      },
+      {
+       "currency": "USD",
+       "net": 13732.893
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-06-30",
+     "printed": null,
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "291077",
+     "source": "https://foudalens.com/disclosures/QNBE.CA/financial_statement/2026-07-09_291076_2.pdf"
+    },
+    {
+     "ticker": "RACC",
+     "name": "Raya Contact Center",
+     "sector": "IT , Media & Communication Services",
+     "fxResult": -7.377,
+     "netIncome": 133.887,
+     "shareOfNetIncome": -5.5,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق تقييم عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292902",
+     "source": "https://foudalens.com/disclosures/RACC.CA/financial_statement/2026-08-12_292901_1.pdf"
+    },
+    {
+     "ticker": "RAYA",
+     "name": "Raya Holding for Financial Investments SAE",
+     "sector": "Non-bank financial services",
+     "fxResult": -0.094,
+     "netIncome": 1259.854,
+     "shareOfNetIncome": -0.0,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": 0.079
+      },
+      {
+       "currency": "GBP",
+       "net": 0.005
+      },
+      {
+       "currency": "USD",
+       "net": 6.913
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-06-30",
+     "printed": "فروق تقييم العملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293054",
+     "source": "https://foudalens.com/disclosures/RAYA.CA/financial_statement/2026-08-13_293053_1.pdf"
+    },
+    {
+     "ticker": "RMDA",
+     "name": "Tenth of Ramadan Pharmaceutical Industries & Diagnostic-Rameda",
+     "sector": "Health Care & Pharmaceuticals",
+     "fxResult": -0.471,
+     "netIncome": 204.297,
+     "shareOfNetIncome": -0.2,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "Net foreign exchange gain",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "RMDA-H1 2026-2026-06-30",
+     "source": "https://foudalens.com/disclosures/RMDA.CA/other/2026-08-16_293227_1.pdf"
+    },
+    {
+     "ticker": "RUBX",
+     "name": "Rubex International for Plastic & Acrylic Manufacturing",
+     "sector": "Building Materials",
+     "fxResult": -3.331,
+     "netIncome": -6.833,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": -0.088
+      },
+      {
+       "currency": "USD",
+       "net": -0.391
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-06-30",
+     "printed": "فروق تقييم المعاملات والأرصدة بالعملات الأجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "RUBX-H1 2026-2026-06-30",
+     "source": "https://foudalens.com/disclosures/RUBX.CA/financial_statement/2026-08-05_292516_1.pdf"
+    },
+    {
+     "ticker": "SAUD",
+     "name": "Al Baraka Bank Egypt",
+     "sector": "Banks",
+     "fxResult": 105.984,
+     "netIncome": 1851.959,
+     "shareOfNetIncome": 5.7,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": 2.088
+      },
+      {
+       "currency": "GBP",
+       "net": -0.184
+      },
+      {
+       "currency": "USD",
+       "net": -10.894
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-06-30",
+     "printed": "أرباح المعاملات بالعملات الأجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292741",
+     "source": "https://foudalens.com/disclosures/SAUD.CA/financial_statement/2026-08-11_292740_1.pdf"
+    },
+    {
+     "ticker": "SCTS",
+     "name": "Sues Canal Co. for Technology Settling",
+     "sector": "Education Services",
+     "fxResult": 93.31,
+     "netIncome": 1781.183,
+     "shareOfNetIncome": 5.2,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": 0.011
+      },
+      {
+       "currency": "USD",
+       "net": 25.086
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-05-31",
+     "printed": "فروق ترجمة المعاملات والأرصدة بالعملة الاجنبية",
+     "period": "9M 2026 (to 31 May)",
+     "periodEnd": "2026-05-31",
+     "filingId": "291176",
+     "source": "https://foudalens.com/disclosures/SCTS.CA/financial_statement/2026-07-12_291175_1.pdf"
+    },
+    {
+     "ticker": "SIPC",
+     "name": "Sabaa International Company for Pharmaceutial and Chemical Industry",
+     "sector": "Health Care & Pharmaceuticals",
+     "fxResult": -0.577,
+     "netIncome": 0.003,
+     "shareOfNetIncome": -19233.3,
+     "largerThanTheProfit": true,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق عملات أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292997",
+     "source": "https://foudalens.com/disclosures/SIPC.CA/financial_statement/2026-08-13_292996_1.pdf"
+    },
+    {
+     "ticker": "SKPC",
+     "name": "Sidi Kerir Petrochemicals",
+     "sector": "Basic Resources",
+     "fxResult": 25.626,
+     "netIncome": 507.605,
+     "shareOfNetIncome": 5.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "Foreign currency gain",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292935",
+     "source": "https://foudalens.com/disclosures/SKPC.CA/financial_statement/2026-08-13_292934_1.pdf"
+    },
+    {
+     "ticker": "SPIN",
+     "name": "Alexandria Spinning & Weaving",
+     "sector": "Textile & Durables",
+     "fxResult": -2.133,
+     "netIncome": 0.563,
+     "shareOfNetIncome": -378.9,
+     "largerThanTheProfit": true,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "(خسائر) أرباح فروق ترجمة عملة أجنبية",
+     "period": "H1 2025 (to 31 Dec)",
+     "periodEnd": "2025-12-31",
+     "filingId": "292453",
+     "source": "https://foudalens.com/disclosures/SPIN.CA/financial_statement/2026-08-04_292452_1.pdf"
+    },
+    {
+     "ticker": "SVCE",
+     "name": "South Valley Cement Co.",
+     "sector": "Building Materials",
+     "fxResult": 23.583,
+     "netIncome": 122.497,
+     "shareOfNetIncome": 19.3,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق تقييم عمله",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "292003",
+     "source": "https://foudalens.com/disclosures/SVCE.CA/financial_statement/2026-07-27_292002_1.pdf"
+    },
+    {
+     "ticker": "SWDY",
+     "name": "El Sewedy Electric Company",
+     "sector": "Industrial Goods , Services and Automobiles",
+     "fxResult": 119.696,
+     "netIncome": 10646.715,
+     "shareOfNetIncome": 1.1,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح فروق عمالت أجنبية",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292867",
+     "source": "https://foudalens.com/disclosures/SWDY.CA/financial_statement/2026-08-12_292866_1.pdf"
+    },
+    {
+     "ticker": "TAQA",
+     "name": "TAQA Arabia",
+     "sector": "Utilities",
+     "fxResult": 2.245,
+     "netIncome": 13.507,
+     "shareOfNetIncome": 16.6,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح (خسائر) فروق عملة - بالصافي",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293097",
+     "source": "https://foudalens.com/disclosures/TAQA.CA/financial_statement/2026-08-13_293096_1.pdf"
+    },
+    {
+     "ticker": "TMGH",
+     "name": "Talaat Moustafa Group Holding",
+     "sector": "Real Estate",
+     "fxResult": 0.193,
+     "netIncome": 285.408,
+     "shareOfNetIncome": 0.1,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "Foreign currency exchange (loss) Gains",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292933",
+     "source": "https://foudalens.com/disclosures/TMGH.CA/financial_statement/2026-08-13_292932_1.pdf"
+    },
+    {
+     "ticker": "TRTO",
+     "name": "TransOceans Tours",
+     "sector": "Travel & Leisure",
+     "fxResult": 0.919,
+     "netIncome": 1.41,
+     "shareOfNetIncome": 65.2,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح ( خسائر ) فروق عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "292910",
+     "source": "https://foudalens.com/disclosures/TRTO.CA/financial_statement/2026-08-12_292909_1.pdf"
+    },
+    {
+     "ticker": "UBEE",
+     "name": "United Bank SAE",
+     "sector": "Banks",
+     "fxResult": -11.983,
+     "netIncome": 1331.901,
+     "shareOfNetIncome": -0.9,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "EUR",
+       "net": 755.331
+      },
+      {
+       "currency": "GBP",
+       "net": 0.819
+      },
+      {
+       "currency": "USD",
+       "net": 292.713
+      }
+     ],
+     "denominatedIn": "egp",
+     "positionAsOf": "2026-06-30",
+     "printed": "ارباح )خسائر( تقييم أرصدة االصول وااللتزامات بالعمالت االجنبية ذات الطبيعة النقدية بخالف تلك التى بالقيمة العادلة من خالل األرباح والخسائر",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293217",
+     "source": "https://foudalens.com/disclosures/UBEE.CA/financial_statement/2026-08-16_293216_1.pdf"
+    },
+    {
+     "ticker": "UEGC",
+     "name": "El-Saeed Contracting & Real Estate Investment Co. SCCD",
+     "sector": "Real Estate",
+     "fxResult": 1.628,
+     "netIncome": 35.56,
+     "shareOfNetIncome": 4.6,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق تقييم عملة",
+     "period": "H1 2026",
+     "periodEnd": "2026-06-30",
+     "filingId": "293611",
+     "source": "https://foudalens.com/disclosures/UEGC.CA/financial_statement/2026-08-19_293610_1.pdf"
+    },
+    {
+     "ticker": "UTOP",
+     "name": "Utopia Real Estate Investment & Tourism SAE",
+     "sector": "Finance",
+     "fxResult": 0.002,
+     "netIncome": 9.06,
+     "shareOfNetIncome": 0.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح / (خسائر) فروق العملات الأجنبية",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "288947",
+     "source": "https://foudalens.com/disclosures/UTOP.CA/financial_statement/2026-05-25_338992_1.pdf"
+    },
+    {
+     "ticker": "VALU",
+     "name": "U Consumer Finance S.A.E",
+     "sector": "Non-bank financial services",
+     "fxResult": 3.163,
+     "netIncome": 220.597,
+     "shareOfNetIncome": 1.4,
+     "largerThanTheProfit": null,
+     "position": [
+      {
+       "currency": "USD",
+       "net": 0.144
+      }
+     ],
+     "denominatedIn": "foreign",
+     "positionAsOf": "2026-03-31",
+     "printed": "Foreign currency exchange differences",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "288127",
+     "source": "https://foudalens.com/disclosures/VALU.CA/financial_statement/2026-05-14_338313_1.pdf"
+    },
+    {
+     "ticker": "ZEOT",
+     "name": "Extracted Oils & Derivatives Co.",
+     "sector": "Food, Beverages and Tobacco",
+     "fxResult": 1.104,
+     "netIncome": 44.622,
+     "shareOfNetIncome": 2.5,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح / خسائر فروق عملة",
+     "period": "9M 2026 (to 31 Mar)",
+     "periodEnd": "2026-03-31",
+     "filingId": "289396",
+     "source": "https://foudalens.com/disclosures/ZEOT.CA/financial_statement/2026-06-03_339287_1.pdf"
     }
    ]
   }

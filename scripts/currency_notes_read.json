@@ -127,20 +127,16 @@
   },
   "293074": {
    "position": {},
-   "fxResult": null,
+   "fxResult": -1.082173,
+   "narrowed": [],
    "pages": [
     23
    ],
    "asOf": null,
    "denominatedIn": null,
-   "printed": null,
+   "printed": "خسائر فروق تقييم عملات أجنبية",
    "ticker": "BONY",
-   "dropped": [
-    {
-     "what": "fxResult",
-     "why": "the two reads disagree: -1.082172 against -1.082173"
-    }
-   ]
+   "dropped": []
   },
   "293322": {
    "position": {},
@@ -307,20 +303,24 @@
    "dropped": []
   },
   "293166": {
-   "position": {},
+   "position": {
+    "EUR": 91.777,
+    "USD": -1853.57
+   },
    "fxResult": -23.429,
+   "narrowed": [],
    "pages": [
     16,
     30
    ],
-   "asOf": null,
-   "denominatedIn": null,
+   "asOf": "2026-06-30",
+   "denominatedIn": "egp",
    "printed": "Foreign exchange (Losses) / Gain",
    "ticker": "GBCO",
    "dropped": [
     {
-     "what": "position",
-     "why": "the two reads disagree about what the table is denominated in: foreign against egp"
+     "what": "position OTHER",
+     "why": "only one of the two reads saw it"
     }
    ]
   },
@@ -422,26 +422,36 @@
   },
   "293566": {
    "position": {},
-   "fxResult": null,
+   "fxResult": -25.586394,
+   "narrowed": [
+    {
+     "what": "fxResult",
+     "first": -25.586394,
+     "second": -25.586314
+    }
+   ],
    "pages": [
     5
    ],
    "asOf": null,
    "denominatedIn": null,
-   "printed": null,
+   "printed": "(خسائر) أرباح تقييم عملات أجنبية",
    "ticker": "KORA",
-   "dropped": [
-    {
-     "what": "fxResult",
-     "why": "the two reads disagree: -25.586394 against -25.586314"
-    }
-   ]
+   "dropped": []
   },
   "293001": {
    "position": {
+    "EUR": -0.009786,
     "USD": 5.150308
    },
    "fxResult": 0.111906,
+   "narrowed": [
+    {
+     "what": "position EUR",
+     "first": -0.009786,
+     "second": -0.009768
+    }
+   ],
    "pages": [
     23,
     38
@@ -454,10 +464,6 @@
     {
      "what": "position AED",
      "why": "only one of the two reads saw it"
-    },
-    {
-     "what": "position EUR",
-     "why": "the two reads disagree: -0.009786 against -0.009768"
     }
    ]
   },
@@ -466,6 +472,7 @@
     "USD": 0.031923
    },
    "fxResult": null,
+   "narrowed": [],
    "pages": [
     23,
     52
@@ -477,6 +484,8 @@
    "dropped": [
     {
      "what": "fxResult",
+     "first": -0.836263,
+     "second": -0.263836,
      "why": "the two reads disagree: -0.836263 against -0.263836"
     }
    ]
@@ -687,6 +696,7 @@
   "293331": {
    "position": {},
    "fxResult": null,
+   "narrowed": [],
    "pages": [
     5,
     37
@@ -698,15 +708,21 @@
    "dropped": [
     {
      "what": "position EUR",
+     "first": -0.998118,
+     "second": 1.158019,
      "why": "the two reads disagree: -0.998118 against 1.158019"
     },
     {
      "what": "position USD",
-     "why": "the two reads disagree: 6.048223 against 59.938318"
+     "first": 6.048223,
+     "second": 60.488318,
+     "why": "the two reads disagree: 6.048223 against 60.488318"
     },
     {
      "what": "fxResult",
-     "why": "the two reads disagree: 106.937689 against 106.933689"
+     "first": 1060.937689,
+     "second": 106.932689,
+     "why": "the two reads disagree: 1060.937689 against 106.932689"
     }
    ]
   },
@@ -725,6 +741,7 @@
   "SUGR-H1 2026-2026-06-30": {
    "position": {},
    "fxResult": null,
+   "narrowed": [],
    "pages": [
     24
    ],
@@ -735,7 +752,9 @@
    "dropped": [
     {
      "what": "fxResult",
-     "why": "the two reads disagree: -65.400218 against 202.872662"
+     "first": 20.387662,
+     "second": 202.872662,
+     "why": "the two reads disagree: 20.387662 against 202.872662"
     }
    ]
   },
@@ -1236,6 +1255,7 @@
   "292813": {
    "position": {},
    "fxResult": 3.310437,
+   "narrowed": [],
    "pages": [
     25,
     30
@@ -1410,6 +1430,7 @@
     "USD": -14.683964
    },
    "fxResult": null,
+   "narrowed": [],
    "pages": [
     27,
     53
@@ -1421,6 +1442,8 @@
    "dropped": [
     {
      "what": "fxResult",
+     "first": 66.497344,
+     "second": -66.497344,
      "why": "the two reads disagree: 66.497344 against -66.497344"
     }
    ]
@@ -1444,6 +1467,13 @@
     "ZAR": 6.993669
    },
    "fxResult": null,
+   "narrowed": [
+    {
+     "what": "position EUR",
+     "first": 6.320548,
+     "second": 6.320547
+    }
+   ],
    "pages": [
     20,
     37
@@ -1455,10 +1485,12 @@
    "dropped": [
     {
      "what": "position EUR",
-     "why": "the two reads disagree: 6.320548 against 6.320547"
+     "why": "the figure is not printed in the document's text"
     },
     {
      "what": "fxResult",
+     "first": 7.167676,
+     "second": -7.167676,
      "why": "the two reads disagree: 7.167676 against -7.167676"
     }
    ]
@@ -1490,6 +1522,7 @@
   "292767": {
    "position": {},
    "fxResult": null,
+   "narrowed": [],
    "pages": [
     5
    ],
@@ -1500,6 +1533,8 @@
    "dropped": [
     {
      "what": "fxResult",
+     "first": 0.000278,
+     "second": 0.278,
      "why": "the two reads disagree: 0.000278 against 0.278"
     }
    ]
@@ -1604,6 +1639,7 @@
     "USD": 569.965622
    },
    "fxResult": null,
+   "narrowed": [],
    "pages": [
     6,
     31
@@ -1615,6 +1651,8 @@
    "dropped": [
     {
      "what": "fxResult",
+     "first": 33.809038,
+     "second": 23.809038,
      "why": "the two reads disagree: 33.809038 against 23.809038"
     }
    ]
@@ -1634,6 +1672,7 @@
     "USD": 13732.892685
    },
    "fxResult": null,
+   "narrowed": [],
    "pages": [
     34,
     44
@@ -1645,6 +1684,8 @@
    "dropped": [
     {
      "what": "fxResult",
+     "first": 318.160229,
+     "second": 637.302627,
      "why": "the two reads disagree: 318.160229 against 637.302627"
     }
    ]
@@ -1957,20 +1998,22 @@
   },
   "293208": {
    "position": {},
-   "fxResult": null,
+   "fxResult": 64.661504,
+   "narrowed": [
+    {
+     "what": "fxResult",
+     "first": 64.661504,
+     "second": 64.66152
+    }
+   ],
    "pages": [
     5
    ],
    "asOf": null,
    "denominatedIn": null,
-   "printed": null,
+   "printed": "أرباح / (خسائر) تقييم عملات أجنبية",
    "ticker": "ARCC",
-   "dropped": [
-    {
-     "what": "fxResult",
-     "why": "the two reads disagree: 64.661504 against 64.66152"
-    }
-   ]
+   "dropped": []
   },
   "292494": {
    "position": {},
@@ -2004,6 +2047,7 @@
     "USD": 1.530864
    },
    "fxResult": null,
+   "narrowed": [],
    "pages": [
     6,
     20
@@ -2015,7 +2059,9 @@
    "dropped": [
     {
      "what": "fxResult",
-     "why": "the two reads disagree: -207.103972 against -207.013972"
+     "first": -207.103972,
+     "second": -2070.103972,
+     "why": "the two reads disagree: -207.103972 against -2070.103972"
     }
    ]
   },
@@ -2063,19 +2109,27 @@
     "EUR": -0.590573,
     "USD": 19.5168
    },
-   "fxResult": 17.363559,
+   "fxResult": null,
+   "narrowed": [],
    "pages": [
     11,
     35
    ],
    "asOf": "2026-05-31",
    "denominatedIn": "egp",
-   "printed": "أرباح (خسائر) فروق عملة",
+   "printed": null,
    "ticker": "CIRA",
    "dropped": [
     {
      "what": "position GBP",
-     "why": "the two reads disagree: -0.000311 against -0.000211"
+     "first": -0.000211,
+     "why": "the figure rounds away at the precision this publishes in"
+    },
+    {
+     "what": "fxResult",
+     "first": 17.363559,
+     "second": 17.363059,
+     "why": "the two reads disagree: 17.363559 against 17.363059"
     }
    ]
   },
@@ -2124,6 +2178,7 @@
     "USD": -35.521473
    },
    "fxResult": null,
+   "narrowed": [],
    "pages": [
     6,
     38
@@ -2135,29 +2190,28 @@
    "dropped": [
     {
      "what": "fxResult",
-     "why": "the two reads disagree: -32.301259 against -33.601359"
+     "first": -32.301259,
+     "second": -32.601359,
+     "why": "the two reads disagree: -32.301259 against -32.601359"
     }
    ]
   },
   "EAST-Q1 2026-2026-03-31": {
    "position": {},
-   "fxResult": null,
+   "fxResult": 87.5,
+   "narrowed": [],
    "pages": [
-    29,
-    49
+    10,
+    29
    ],
    "asOf": null,
    "denominatedIn": null,
-   "printed": null,
+   "printed": "(٤) أرباح وخسائر فروق عملة",
    "ticker": "EAST",
    "dropped": [
     {
      "what": "position",
      "why": "the two reads disagree about what the table is denominated in: foreign against egp"
-    },
-    {
-     "what": "fxResult",
-     "why": "the two reads disagree: 24.407 against 67.041"
     }
    ]
   },
@@ -2191,20 +2245,16 @@
   },
   "288832": {
    "position": {},
-   "fxResult": null,
+   "fxResult": -1071.975,
+   "narrowed": [],
    "pages": [
     13
    ],
    "asOf": null,
    "denominatedIn": null,
-   "printed": null,
+   "printed": "مكسب (خسائر) فروق عمله",
    "ticker": "EGCH",
-   "dropped": [
-    {
-     "what": "fxResult",
-     "why": "the two reads disagree: -10719.75 against -1071.975"
-    }
-   ]
+   "dropped": []
   },
   "292975": {
    "position": {},
@@ -2470,6 +2520,7 @@
   "288764": {
    "position": {},
    "fxResult": null,
+   "narrowed": [],
    "pages": [
     5
    ],
@@ -2480,7 +2531,7 @@
    "dropped": [
     {
      "what": "fxResult",
-     "why": "the two reads disagree: -0.981806 against 0.981806"
+     "why": "the figure is not printed in the document's text"
     }
    ]
   },
@@ -2547,19 +2598,9 @@
   "293548": {
    "position": {},
    "fxResult": null,
-   "pages": [
-    7
-   ],
-   "asOf": null,
-   "denominatedIn": null,
-   "printed": null,
+   "pages": [],
    "ticker": "PHDC",
-   "dropped": [
-    {
-     "what": "fxResult",
-     "why": "the two reads disagree: 1012.850488 against 101.285488"
-    }
-   ]
+   "dropped": []
   },
   "293707": {
    "position": {
@@ -2632,6 +2673,7 @@
   "292748": {
    "position": {},
    "fxResult": null,
+   "narrowed": [],
    "pages": [
     6
    ],
@@ -2642,7 +2684,9 @@
    "dropped": [
     {
      "what": "fxResult",
-     "why": "the two reads disagree: -0.390393 against 0.501784"
+     "first": -0.00039,
+     "second": 0.501784,
+     "why": "the two reads disagree: -0.00039 against 0.501784"
     }
    ]
   },
