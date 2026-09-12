@@ -1611,6 +1611,10 @@
     "meaning": "Securities lending for the purpose of sale establishes a standardized regulatory framework that allows market participants to borrow listed shares from lenders to execute transactions under defined collateral, margin, and settlement requirements.",
     "meaning_ar": "يضع تنظيم اقتراض الأوراق المالية بغرض البيع إطاراً تنظيمياً يتيح للمتعاملين اقتراض أسهم مقيدة من المقرضين لتنفيذ المعاملات وفق متطلبات محددة للضمانات ونسب الهامش والتسوية."
   },
+  "الرقابه الماليه تقرر الربط اللحظي بين شركات التمويل الاستهلاكي وتمويل المشروعات و«اي سكور»": {
+    "meaning": "The regulatory decision establishes real-time technical integration between consumer finance and micro/SME finance companies and the Egyptian Credit Bureau (I-Score), automating instant data exchange on client credit history and outstanding liabilities at the point of loan origination.",
+    "meaning_ar": "يقضي القرار بالربط الفني واللحظي بين شركات التمويل الاستهلاكي وتمويل المشروعات والشركة المصرية للاستعلام الائتماني (آي سكور)، مما يتيح التبادل الفوري لبيانات السجل الائتماني والالتزامات القائمة للعملاء عند منح التمويل."
+  },
   "الرقابه الماليه تقرر وقف نشاط بيتا كابيتال كونسالتينج لمده 15 يوما": {
     "meaning": "A regulatory suspension temporarily freezes a financial advisory firm's operating license and services, halting its market transactions while it resolves compliance requirements with the Financial Regulatory Authority.",
     "meaning_ar": "يُمثّل قرار الإيقاف تجميداً مؤقتاً للترخيص التشغيلي والأنشطة الاستشارية للشركة في السوق لحين استيفاء المتطلبات الرقابية للهيئة العامة للرقابة المالية."
@@ -3000,6 +3004,10 @@
     "meaning": "Aircraft engine overhaul operations represent high-value industrial maintenance services that rely on specialized technical infrastructure and certified engineering labor, positioning state-owned industrial entities within the domestic aerospace maintenance, repair, and overhaul (MRO) supply chain.",
     "meaning_ar": "تمثل عمليات عَمْرة محركات الطائرات خدمات صيانة صناعية ذات قيمة مضافة عالية تعتمد على بنية تحتية تقنية متخصصة وعمالة هندسية معتمدة، مما يدرج الكيانات الصناعية التابعة للدولة ضمن سلاسل إمداد خدمات الصيانة والإصلاح والفحص الفني (MRO) لقطاع الطيران محلياً."
   },
+  "رييس الوزراء البريطاني يواجه اختبارا اقتصاديا قبل موازنه اكتوبر": {
+    "meaning": "Government budget preparations involve setting fiscal targets, tax policies, and sovereign debt issuance plans, which directly determine sovereign bond yields, currency valuations, and public spending allocations.",
+    "meaning_ar": "تتضمن الاستعدادات للموازنة العامة تحديد المستهدفات المالية، والسياسات الضريبية، وخطط إصدار أدوات الدين السيادية، وهي عوامل تحدد عوائد السندات الحكومية، وتقييمات العملة، وتوزيعات الإنفاق العام."
+  },
   "رييس الوزراء يبحث مع رييس الرقابه الماليه تطورات القطاع المالي غير المصرفي وجهود حمايه المتعاملين": {
     "meaning": "The meeting involves government oversight of the non-banking financial sector's regulatory framework, covering operational activities such as capital markets, insurance, and non-bank financing alongside institutional market conduct supervision.",
     "meaning_ar": "يتناول الاجتماع المتابعة الحكومية للأطر التنظيمية للقطاع المالي غير المصرفي، والتي تشمل أنشطة أسواق المال والتأمين والتمويل غير المصرفي إلى جانب آليات الرقابة على تعاملات الأسواق."
@@ -3608,6 +3616,10 @@
   "فخ التكلفه الرخيصه للواجهات يرفع فاتوره “حرايق المولات”": {
     "meaning": "Lowering upfront construction capital expenditures through the procurement of non-fire-rated cladding materials increases structural fire vulnerability, shifting liabilities to operational repair expenses, asset replacement costs, and commercial property insurance claims.",
     "meaning_ar": "يؤدي خفض النفقات الرأسمالية للبناء عبر استخدام مواد واجهات غير مطابقة لمواصفات مقاومة الحريق إلى زيادة المخاطر التشغيلية، مما ينقل الأعباء المالية إلى تكاليف إصلاح الأصول المتضررة وأقساط التأمين التجاري."
+  },
+  "فرنسا تتوقع ارتفاع اعباء فوايد الديون بنسبه 25% خلال 2026": {
+    "meaning": "Higher debt-servicing costs directly increase sovereign fiscal outflows toward existing liabilities, altering public expenditure allocation within the macro economy.",
+    "meaning_ar": "يؤدي ارتفاع تكاليف خدمة الدين إلى زيادة التدفقات المالية العامة الموجهة للالتزامات القائمة، مما يعيد توزيع هيكل الإنفاق الحكومي في الاقتصاد الكلي."
   },
   "فرنسا تحظر استيراد جميع منتجات المستوطنات الاسراييليه في الضفه الغربيه": {
     "meaning": "This measure restricts market access for goods originating from West Bank settlements by halting customs clearance and commercial distribution within the French market.",
@@ -4613,6 +4625,10 @@
     "meaning": "Expanding digital labor linkage networks establishes a unified operational channel between domestic employment databases and regional host markets, centralizing the processing of cross-border contract authentication and foreign worker deployment data.",
     "meaning_ar": "يؤدي التوسع في شبكات الربط الإلكتروني للعمالة إلى إنشاء مسار تشغيلي موحد بين قواعد بيانات التوظيف المحلية وأسواق العمل الإقليمية، مما يركز عمليات توثيق العقود وتدقيق بيانات العمالة المغادرة عبر منظومة رقمية مباشرة."
   },
+  "وزير الماليه: تسجيل مليون وحده عقاريه عبر “الموبايل ابلكيشن”": {
+    "meaning": "Digital registration integrates assets into the formal property tax registry, creating verifiable digital records for property valuation and assessment across the real estate sector.",
+    "meaning_ar": "يؤدي التسجيل الرقمي إلى دمج الأصول العقارية ضمن قاعدة بيانات الضرائب العقارية الرسمية، مما يوفر سجلات رقمية موثقة لتقييم العقارات وحصرها عبر القطاع."
+  },
   "وزير الماليه: تعزيز الشراكه مع بنك AIIB لدعم اولويات التنميه والاستثمار": {
     "meaning": "Partnership frameworks with multilateral development lenders like the Asian Infrastructure Investment Bank (AIIB) provide long-term concessional financing facilities for state infrastructure and green transition projects, diversifying external funding mechanisms for sovereign capital expenditures.",
     "meaning_ar": "توفر أطر الشراكة مع بنوك التنمية متعددة الأطراف مثل البنك الآسيوي للاستثمار في البنية التحتية تسهيلات تمويلية ميسرة طويلة الأجل لمشروعات البنية التحتية والتحول الأخضر الحكومية، مما ينوع آليات التمويل الخارجي للإنفاق الرأسمالي السيادي."
@@ -4788,6 +4804,10 @@
   "“انثروبيك” توسع تسهيلها الايتماني الي 15 مليار دولار قبل الطرح": {
     "meaning": "Expanding a credit facility increases available debt-based liquidity on the balance sheet prior to a public listing. This structure provides access to committed capital for operational and infrastructure expenditures without altering the existing equity ownership ratio.",
     "meaning_ar": "يؤدي توسيع التسهيل الائتماني إلى رفع حجم السيولة المتاحة القائمة على الاقتراض في الميزانية العمومية قبل الطرح العام. يوفر هذا الترتيب تمويلاً للنفقات التشغيلية والرأسمالية دون إحداث تغيير فوري في هيكل ملكية الأسهم."
+  },
+  "“انفيديا” تجري محادثات لاستثمار 10 مليارات دولار في طرح “انثروبيك”": {
+    "meaning": "Large-scale equity financing rounds in artificial intelligence developers integrate specialized chip suppliers with model creators through direct balance-sheet capital allocation.",
+    "meaning_ar": "تُمثل جولات التمويل الكبرى في شركات تطوير الذكاء الاصطناعي آلية لربط موردي الرقائق المتخصصة بنماذج الحوسبة عبر توظيف مباشر لرؤوس الأموال في الميزانية العمومية."
   },
   "“اودن” تشتري 2.8 مليون سهم *المصريين للاسكان”": {
     "meaning": "This transaction represents an equity stake acquisition that increases Odin's ownership and voting interest in Egyptians for Housing & Development, altering the firm's shareholder structure and reducing the volume of freely traded shares on the exchange.",
