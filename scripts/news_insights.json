@@ -1171,6 +1171,10 @@
     "meaning": "An export restriction on European aluminum scrap retains secondary raw material within the EU market, which alters global scrap trade flows and affects input procurement dynamics for international recyclers and smelters.",
     "meaning_ar": "يُبقي فرض قيود على تصدير خردة الألومنيوم الأوروبية المواد الخام الثانوية داخل السوق الأوروبية، مما يغير مسارات التجارة العالمية للخردة ويؤثر على آليات توريد المدخلات لشركات الصهر وإعادة التدوير دولياً."
   },
+  "الاتحاد الاوروبي يلغي فرض رسوم تصدير علي خرده الالومنيوم بضغط هندي": {
+    "meaning": "The cancellation of export duties maintains the cross-border flow of European aluminum scrap without additional tariff costs, securing existing raw material supply chains for external smelting and recycling markets.",
+    "meaning_ar": "يُبقي إلغاء رسوم التصدير على التدفق التجاري لخردة الألومنيوم الأوروبية دون تكاليف جمركية إضافية، مما يحافظ على سلاسل إمداد المواد الخام القائمة لأسواق الصهر وإعادة التدوير الخارجية."
+  },
   "الاتحاد الاوروبي ينضم الي حمله واشنطن لخنق شرايين ايران الماليه": {
     "meaning": "The expansion of coordinated multilateral financial sanctions restricts cross-border banking transactions, limits foreign currency access, and enforces asset freezes across European and US jurisdictions.",
     "meaning_ar": "يؤدي تنسيق وتوسيع نطاق العقوبات المالية متعددة الأطراف إلى تقييد المعاملات المصرفية عبر الحدود، وتحديد الوصول إلى العملات الأجنبية، وتطبيق تجميد الأصول ضمن النطاقات القضائية للاتحاد الأوروبي والولايات المتحدة."
@@ -1738,6 +1742,10 @@
   "السكه الحديد توضح حقيقه ما نشر عن مستوي مقاعد الركاب بالمحطات": {
     "meaning": "The Egyptian National Railways addresses public reports regarding station seating infrastructure, reflecting routine public relations and operational oversight of passenger facilities within the state-owned transport sector.",
     "meaning_ar": "توضح الهيئة القومية لسكك حديد مصر حقيقة ما تم تداوله حول البنية التحتية لمقاعد المحطات، وهو ما يمثل متابعة تشغيلية وإعلامية لمرافق الركاب ضمن قطاع النقل العام."
+  },
+  "السن ب465 جنيها .. اسعار اللحوم في الهيبرماركت ومحال الجزاره اليوم السبت 12-9-2026": {
+    "meaning": "Retail meat price reporting reflects prevailing wholesale livestock procurement costs, feed supply dynamics, and distributor operating margins across modern trade and traditional butcher segments.",
+    "meaning_ar": "تعكس بيانات أسعار التجزئة للحوم تكاليف توريد الماشية من أسواق الجملة وتكاليف الأعلاف وهامش التشغيل لدى سلاسل التجارة الحديثة ومحال الجزارة التقليدية."
   },
   "السويد تبرم صفقه ب729 مليون دولار لشراء منظومه هيمارس الصاروخيه الامريكيه": {
     "meaning": "This transaction represents a cross-border government procurement contract in the global defense sector, involving sovereign capital expenditure in exchange for advanced military equipment and manufacturer delivery commitments.",
@@ -3477,6 +3485,10 @@
     "meaning": "Net foreign assets represent the total foreign currency assets held by the central bank and commercial banks minus their foreign liabilities. A level above $28.4 billion reflects a net surplus balance sheet position where foreign currency holdings exceed external obligations across the banking system.",
     "meaning_ar": "يمثل صافي الأصول الأجنبية إجمالي الأصول بالعملات الأجنبية لدى البنك المركزي والبنوك التجارية مطروحاً منها الالتزامات الأجنبية المستحقة، ويعكس هذا الرقم مركزاً مالياً موجباً تتجاوز فيه الأصول الأجنبية حجم الخصوم والالتزامات الخارجية للقطاع المصرفي."
   },
+  "صدمه امدادات الطاقه تهدد اوروبا بشتاء قاس": {
+    "meaning": "Disruptions in energy supply restrict available industrial inputs and heating fuels, which raises operational baseline costs across European supply chains and drives utilities to adjust wholesale procurement prices.",
+    "meaning_ar": "تؤدي اضطرابات إمدادات الطاقة إلى تقليص المدخلات الصناعية ووقود التدفئة المتاح، مما يرفع تكاليف التشغيل الأساسية في سلاسل الإمداد الأوروبية ويدفع شركات المرافق لتعديل أسعار الشراء بالجملة."
+  },
   "صرف 8.19 مليار جنيه من مستحقات المصدرين خلال 6 اشهر": {
     "meaning": "Government export rebate initiatives disburse accrued subsidy dues directly to eligible exporting firms, converting state receivables into immediate liquid cash balances on corporate balance sheets.",
     "meaning_ar": "تقوم مبادرات رد أعباء الصادرات الحكومية بسداد المستحقات المتأخرة للشركات المصدرة، مما يحول الحسابات المدينة المستحقة لدى الدولة إلى سيولة نقدية في الميزانيات العمومية للشركات."
@@ -4804,6 +4816,10 @@
   "“السيادي النرويجي” يتجه لتقليص حيازته من سندات الخزانه الامريكيه": {
     "meaning": "A reduction in sovereign bond holdings represents an asset reallocation process where the sovereign fund decreases its balance-sheet exposure to US dollar-denominated sovereign debt instruments within its global fixed-income portfolio.",
     "meaning_ar": "يمثل خفض حيازة السندات الحكومية عملية إعادة توزيع للأصول الاستثمارية، حيث يقلص الصندوق السيادي نسبة انكشافه على أدوات الدين الحكومية المقومة بالدولار الأمريكي ضمن محفظة أدوات الدخل الثابت."
+  },
+  "“السيسي” يبحث مع شركات هنديه فرص توسعها في مصر": {
+    "meaning": "Official discussions regarding foreign direct investment map operational conditions, industrial licensing, and infrastructure access for multinational corporations entering or expanding within domestic industrial zones.",
+    "meaning_ar": "تحدد المباحثات الرسمية بشأن الاستثمار الأجنبي المباشر الشروط التشغيلية وإجراءات التراخيص الصناعية وتوافر البنية التحتية للشركات متعددة الجنسيات داخل المناطق الصناعية المحلية."
   },
   "“السيسي” يوكد اهميه دعم موسسات التمويل للاقتصادات الناشيه في مواجهه الصدمات": {
     "meaning": "Multilateral development financing provides foreign currency liquidity and concessionary credit lines to emerging market central banks and governments during external trade and capital balance shocks.",
