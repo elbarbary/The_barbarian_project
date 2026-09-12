@@ -1043,6 +1043,10 @@
     "meaning": "Daily fish price updates reflect wholesale and retail commodity valuations driven by seasonal catch volumes, fuel and transport logistics costs, and spot aquaculture supply dynamics.",
     "meaning_ar": "تعكس التحديثات اليومية لأسعار الأسماك تقييمات السلع في أسواق الجملة والتجزئة وفقاً لحجم الصيد الموسمي، وتكاليف النقل والوقود، وتدفقات معروض الاستزراع المائي الفورية."
   },
+  "اسعار السمك اليوم السبت 12-9-2026 في مصر": {
+    "meaning": "This reports daily retail and wholesale prices for fish, which reflect prevailing local supply from fisheries and aquaculture alongside commercial transport and distribution costs in Egypt's food sector.",
+    "meaning_ar": "يعرض هذا التقرير أسعار بيع الأسماك بالجملة والتجزئة يومياً، والتي تعكس حجم المعروض المحلي من المصايد والمزارع السمكية بالإضافة إلى تكاليف النقل والتوزيع التجاري في قطاع الأغذية المصري."
+  },
   "اسعار السمك اليوم السبت 5-9-2026 في مصر": {
     "meaning": "Daily fish price updates reflect spot pricing across wholesale and retail markets, determined by daily supply volumes from aquaculture and commercial landings alongside transportation costs.",
     "meaning_ar": "تعكس تحديثات أسعار الأسماك اليومية مستويات التسعير الفوري في أسواق الجملة والتجزئة، وتحددها أحجام المعروض اليومي من الاستزراع السمكي والصيد إلى جانب تكاليف النقل."
@@ -3343,6 +3347,10 @@
   "سعر كرتونه البيض اليوم 11/9/2026 للمستهلك في السوق المحليه": {
     "meaning": "Egg retail pricing reflects direct input costs, primarily feed and transportation, as poultry supply chain operators transfer wholesale farm-gate rates to consumer distribution networks.",
     "meaning_ar": "تعكس أسعار بيع البيض للمستهلك التكاليف المباشرة لمدخلات الإنتاج، وبخاصة الأعلاف والنقل، حيث تنقل سلاسل إمداد الدواجن أسعار المزرعة إلى شبكات التوزيع والتجزئة."
+  },
+  "سعر كرتونه البيض اليوم 12/9/2026 للمستهلك في السوق المحليه": {
+    "meaning": "Egg retail pricing reflects the daily pass-through of farm-gate production costs, feed input expenses, and distribution margins to end consumers in the domestic market.",
+    "meaning_ar": "يعكس سعر بيع بيض المائدة للمستهلك النهائي التمرير اليومي لتكاليف الإنتاج من المزارع، ومصروفات الأعلاف، وهامش أرباح سلاسل النقل والتوزيع في السوق المحلية."
   },
   "سعر كرتونه البيض اليوم 4/9/2026 للمستهلك في السوق المحليه": {
     "meaning": "This reflects the daily domestic retail pricing updates for table eggs, driven by poultry feed supply costs, farm-gate production expenses, and local consumer demand dynamics.",
