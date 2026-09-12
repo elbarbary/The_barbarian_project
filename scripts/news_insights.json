@@ -1095,6 +1095,10 @@
     "meaning": "Daily spot prices on the poultry exchange represent the wholesale market-clearing rate determined by current farmgate supply and retail distribution demand. These benchmark figures serve as the base pricing reference across domestic livestock supply chains and consumer retail channels.",
     "meaning_ar": "تعكس الأسعار الفورية المعلنة في بورصة الدواجن معدلات التداول اليومية في سوق الجملة وفق توازن المعروض من المزارع والطلب لدى الموزعين، وتعمل كمرجع تسعيري لتكاليف الإمداد في منافذ التجزئة بالسوق المحلي."
   },
+  "اسعار الفراخ في بورصه الدواجن اليوم السبت 12-9-2026": {
+    "meaning": "Poultry exchange price bulletins reflect the spot equilibrium rate for wholesale live birds, determined by farmgate production costs, feedstock availability, and daily trade volumes across commercial distribution channels.",
+    "meaning_ar": "تعكس نشرات بورصة الدواجن السعر الفوري لتداول الطيور الحية بالجملة، والذي يتحدد بناءً على تكاليف الإنتاج من أرض المزرعة، ومدخلات الأعلاف، وأحجام التداول اليومية عبر قنوات التوزيع التجارية."
+  },
   "اسعار الفراخ في بورصه الدواجن اليوم السبت 5-9-2026": {
     "meaning": "The poultry exchange publishes daily spot wholesale prices, establishing the benchmark reference rate for trading live birds between commercial farms, distributors, and retail markets.",
     "meaning_ar": "تحدد بورصة الدواجن الأسعار اليومية الفورية لتداول الدواجن الحية بالجملة، مما يوفر السعر المرجعي المنظم للتعاملات بين المزارع والموزعين ومنافذ البيع بالتجزئة."
@@ -3456,6 +3460,10 @@
   "شراكه بين سيتي ايدج ومدن مصر لتقديم خدمات اداره المنشات في مشروعات بالعلمين الجديده": {
     "meaning": "The agreement establishes an operational partnership to deliver facility management, asset maintenance, and infrastructure support services across designated development projects in New Alamein.",
     "meaning_ar": "تنص هذه الشراكة على إطار تشغيلي مشترك لإدارة وصيانة المرافق وتشغيل الأصول العقارية في مشروعات محددة بمدينة العلمين الجديدة."
+  },
+  "شراكه بين مدينه مصر وريدي للتطوير لتسويق وبيع مشروع في الساحل الشمالي": {
+    "meaning": "This agreement operates as a commercial co-development and marketing mandate, where Madinet Masr provides sales and marketing infrastructure for Redcon's North Coast inventory under a shared operational framework.",
+    "meaning_ar": "تمثل هذه الاتفاقية شراكة تجارية للتسويق والتطوير المشترك، حيث تتيح شبكة المبيعات والتسويق لشركة مدينة مصر لتصريف وحدات مشروع شركة ريدي في الساحل الشمالي وفق إطار تشغيلي مشترك."
   },
   "شراكه بين “ڤودافون” و”السويدي” و”كاساڤا” لانشاء مركز بيانات باستثمارات مليار دولار": {
     "meaning": "This joint venture pools capital and technical infrastructure across the telecommunications, industrial, and digital technology sectors to construct large-scale data hosting capacity.",
