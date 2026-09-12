@@ -2854,13 +2854,13 @@ body.mode-quant .investor-only {
         </div>
         
         <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
-          <a href="/data/v1/backtest/ladder_attribution_engine.py" download="ladder_attribution_engine.py" style="display:inline-flex; align-items:center; gap:6px; background:#126B75; color:white; padding:6px 12px; border-radius:6px; font-size:0.76rem; font-weight:600; text-decoration:none;">
+          <a href="/esthmr/backtest/ladder_attribution_engine.py" download="ladder_attribution_engine.py" style="display:inline-flex; align-items:center; gap:6px; background:#126B75; color:white; padding:6px 12px; border-radius:6px; font-size:0.76rem; font-weight:600; text-decoration:none;">
             📥 Download Python Script (.py)
           </a>
-          <a href="/data/v1/backtest/executed_trades_history.json" target="_blank" download="executed_trades_history.json" style="display:inline-flex; align-items:center; gap:6px; background:#F1F5F9; color:#0F172A; border:1px solid #CBD5E1; padding:6px 12px; border-radius:6px; font-size:0.76rem; font-weight:600; text-decoration:none;">
+          <a href="/esthmr/backtest/executed_trades_history.json" target="_blank" download="executed_trades_history.json" style="display:inline-flex; align-items:center; gap:6px; background:#F1F5F9; color:#0F172A; border:1px solid #CBD5E1; padding:6px 12px; border-radius:6px; font-size:0.76rem; font-weight:600; text-decoration:none;">
             📊 Executed Trades (JSON)
           </a>
-          <a href="/data/v1/backtest/ladder_attribution_matrix.json" target="_blank" download="ladder_attribution_matrix.json" style="display:inline-flex; align-items:center; gap:6px; background:#F1F5F9; color:#0F172A; border:1px solid #CBD5E1; padding:6px 12px; border-radius:6px; font-size:0.76rem; font-weight:600; text-decoration:none;">
+          <a href="/esthmr/backtest/ladder_attribution_matrix.json" target="_blank" download="ladder_attribution_matrix.json" style="display:inline-flex; align-items:center; gap:6px; background:#F1F5F9; color:#0F172A; border:1px solid #CBD5E1; padding:6px 12px; border-radius:6px; font-size:0.76rem; font-weight:600; text-decoration:none;">
             🔬 Attribution Matrix (JSON)
           </a>
         </div>
@@ -4786,7 +4786,9 @@ window.setPageMode = setPageMode;
 
   // Load authoritative Executed Trades Ledger dataset
   function loadTradesData() {
-    loadData('/data/v1/backtest/executed_trades_history.json')
+    loadData('/esthmr/backtest/executed_trades_history.json')
+      .catch(() => loadData('backtest/executed_trades_history.json'))
+      .catch(() => loadData('/data/v1/backtest/executed_trades_history.json'))
       .catch(() => loadData('../data/v1/backtest/executed_trades_history.json'))
       .catch(() => loadData('data/v1/backtest/executed_trades_history.json'))
       .then(d => {
