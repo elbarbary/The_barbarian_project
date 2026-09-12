@@ -743,6 +743,10 @@
     "meaning": "This target outlines a reallocation of domestic capital expenditures, establishing private sector funding as the primary source of national gross fixed capital formation relative to state-led investments.",
     "meaning_ar": "يحدد هذا المستهدف إعادة توزيع لنفقات الاستثمار الرأسمالي محلياً، بجعل تمويلات القطاع الخاص المصدر الأساسي لتكوين رأس المال الثابت الإجمالي مقارنة بالاستثمارات الحكومية."
   },
+  "احمد طارق خليل يقترب من الاستحواذ علي «ابو الهول لخدمات الحراسه»": {
+    "meaning": "The transaction represents an acquisition of equity that transfers operational control and ownership of Abu Simbel/Sphinx Guarding Services to an individual investor.",
+    "meaning_ar": "تمثل العملية صفقة استحواذ على حصة ملكية تنقل السيطرة التشغيلية والإدارية لشركة أبو الهول لخدمات الحراسة إلى مستثمر فرد."
+  },
   "اداره ترامب تهدد بالغاء الاعفاءات الضريبيه للموسسات التعليميه": {
     "meaning": "Revoking tax-exempt status subjects educational institutions to corporate income tax on operating surpluses and investment income, while eliminating the tax deductibility of incoming philanthropic donations.",
     "meaning_ar": "يؤدي إلغاء الإعفاء الضريبي إلى إخضاع المؤسسات التعليمية لضريبة الدخل على الفوائض التشغيلية وعوائد الاستثمار، مع إسقاط ميزة الخصم الضريبي عن التبرعات الموجهة إليها."
@@ -1082,6 +1086,10 @@
   "اسعار الطماطم تكبح صادرات الصلصه والمركزات": {
     "meaning": "Higher domestic prices for fresh tomatoes increase raw material procurement costs for food processing companies, raising the final production cost of tomato paste and concentrates relative to international market price levels.",
     "meaning_ar": "يؤدي ارتفاع الأسعار المحلية للطماطم الطازجة إلى زيادة تكاليف شراء المواد الخام لشركات التصنيع الغذائي، مما يرفع تكلفة الإنتاج الإجمالية لمعجون الطماطم والمركزات مقارنة بمستويات الأسعار في الأسواق الدولية."
+  },
+  "اسعار العملات اليوم.. الدينار الكويتي يتصدر والدولار عند 51.37 جنيه": {
+    "meaning": "Official exchange rate movements establish the baseline transaction costs for commercial banks, directly setting valuation metrics for foreign currency-denominated debt and import settlement costs.",
+    "meaning_ar": "تحدد تحركات أسعار الصرف الرسمية التكلفة الأساسية للتعاملات بين البنوك، وتؤثر بشكل مباشر على تقييم الالتزامات المقومة بالعملات الأجنبية وتكاليف تسوية الواردات."
   },
   "اسعار الغاز الاوروبي ترتفع 2% مع تصاعد مخاطر مضيق هرمز ونقص المخزونات": {
     "meaning": "Geopolitical risks in key maritime transit corridors combined with lower storage levels tighten available energy buffers, which adds a risk premium to natural gas benchmark pricing.",
@@ -4108,6 +4116,10 @@
   "مدبولي: حريصون علي تذليل التحديات امام مشروعات راس الحكمه لضمان تنفيذها وفق الجداول الزمنيه": {
     "meaning": "Government administrative intervention directly manages regulatory approvals, infrastructure access, and site logistics to align execution with contracted delivery milestones.",
     "meaning_ar": "يتضمن هذا التوجيه تدخلاً إدارياً حكومياً لتسريع الإجراءات التنظيمية وتوفير متطلبات البنية التحتية واللوجستيات لمطابقة مراحل التنفيذ مع الجداول الزمنية المحددة."
+  },
+  "مدبولي: نستهدف تعظيم الاستفاده من المناطق التجاريه واللوجستيه وجذب استثمارات متنوعه": {
+    "meaning": "Developing commercial and logistics zones operates through allocating land to private operators, integrating warehousing with transport corridors, and clustering retail distribution hubs to structure domestic supply chains.",
+    "meaning_ar": "يقوم تطوير المناطق التجارية واللوجستية على تخصيص الأراضي للمشغلين من القطاع الخاص، وربط شبكات التخزين بممرات النقل، وتجميع مراكز التوزيع لتنظيم سلاسل الإمداد والتداول السلعي محلياً."
   },
   "مدبولي: نواصل اعاده هيكله الشركات المملوكه للدوله لتحسين ادايها وتعظيم الاستفاده من اصولها": {
     "meaning": "State-owned enterprise restructuring involves auditing corporate balance sheets, reorganizing administrative and operating models, and reallocating capital or real estate assets across public sector portfolios.",
