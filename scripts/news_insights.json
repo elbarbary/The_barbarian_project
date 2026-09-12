@@ -911,6 +911,10 @@
     "meaning": "Egg price quotations reflect spot market rates driven by domestic feed input costs, farm-gate production volumes, and poultry distribution expenses.",
     "meaning_ar": "تعكس أسعار البيض المعلنة تعاملات السوق الفورية القائمة على تكاليف الأعلاف وحجم الإنتاج في المزارع ومصروفات سلاسل التوزيع."
   },
+  "اسعار البيض اليوم السبت 12-9-2026 في مصر": {
+    "meaning": "Egg price reporting tracks spot rates set by poultry farm exchanges and wholesale distribution networks, reflecting daily feed input costs and live-stock supply balances across the consumer food sector.",
+    "meaning_ar": "ترصد أسعار البيض أسعار التداول الفورية المحددة عبر بورصات الدواجن وشبكات التوزيع بالجملة، مما يعكس التكاليف اليومية للأعلاف ومدخلات الإنتاج وحجم المعروض في قطاع السلع الغذائية."
+  },
   "اسعار البيض اليوم السبت 5-9-2026 في مصر": {
     "meaning": "Daily egg price reporting reflects current wholesale farm-gate and retail market clearing rates shaped by poultry feed input costs and daily supply chain distribution volumes.",
     "meaning_ar": "يعكس رصد أسعار بيض المائدة اليومية مستويات التوازن السعرية الحالية في المزارع ومنافذ التجزئة، والتي تتحدد بناءً على تكاليف مدخلات الأعلاف وحجم المعروض اليومي في سلاسل الإمداد."
@@ -2747,6 +2751,10 @@
   "تقرير: تصدير 64 الف طن قطن منذ بدايه الموسم": {
     "meaning": "This indicates the cumulative volume of raw cotton cleared for export markets by local trading and ginning companies since the start of the current harvest season.",
     "meaning_ar": "يوضح هذا الحجم التراكمي لمحصول القطن الخام الموجه إلى أسواق التصدير عبر شركات التجارة والحلج المحلية منذ بداية الموسم الحالي."
+  },
+  "تقرير: توترات الشرق الاوسط تضغط علي الاصول عاليه المخاطر": {
+    "meaning": "Geopolitical tensions trigger broad risk-off sentiment, leading institutional capital to reallocate from high-beta equities to defensive cash and sovereign debt instruments.",
+    "meaning_ar": "تؤدي التوترات الجيوسياسية إلى تراجع الرغبة في المخاطرة، مما يدفع السيولة المؤسسية للتحول من الأسهم عالية التقلب إلى الأدوات النقدية وأدوات الدين السيادية."
   },
   "تقرير: صمود اقتصاد اوروبا يدعم الايتمان.. ومخاطر الدين تهدد البنوك": {
     "meaning": "Economic resilience sustains corporate cash flows and debt-servicing capacity, while high sovereign debt levels directly increase valuation and default risks on commercial banks' sovereign bond portfolios.",
