@@ -2968,6 +2968,10 @@
     "meaning": "A change in executive leadership places operational governance, regional manufacturing coordination, and supply chain oversight for Egypt and African markets under a new management mandate.",
     "meaning_ar": "يضع تغيير القيادة التنفيذية الحوكمة التشغيلية وتنسيق عمليات التصنيع الإقليمية وإدارة سلاسل الإمداد لأسواق مصر وإفريقيا تحت مظلة إدارة جديدة."
   },
+  "رويترز : \"انفيديا\" تدرس استثمار 10 مليارات دولار في اسهم \"انثروبيك\"": {
+    "meaning": "A direct equity acquisition of this scale represents a strategic capital allocation that links specialized semiconductor manufacturing infrastructure directly with foundation model development.",
+    "meaning_ar": "يمثل الاستحواذ المباشر على حصص ملكية بهذا الحجم توزيعاً استراتيجياً لرأس المال يربط بين البنية التحتية لتصنيع الرقائق المتخصصة وتطوير نماذج الذكاء الاصطناعي التأسيسية."
+  },
   "ريمت تطلق خدمه الايداع المباشر لحوالات ويسترن يونيون في الحسابات البنكيه والمحافظ الالكترونيه": {
     "meaning": "The service integrates cross-border remittance flows directly into domestic banking infrastructure and mobile wallets, routing foreign transfers into automated digital settlements rather than physical cash pickups.",
     "meaning_ar": "تربط هذه الخدمة تدفقات الحوالات المالية الواردة من الخارج بالبنية التحتية للحسابات المصرفية والمحافظ الإلكترونية المحلية، مما يحول مسار استلام الأموال إلى تسوية رقمية مباشرة دون الحاجة للصرف النقدي."
@@ -3223,6 +3227,10 @@
   "سعر اليورو في مصر اليوم الخميس 10/9/2026.. قرب 60 جنيها": {
     "meaning": "A euro exchange rate approaching 60 Egyptian pounds raises the local-currency cost of European imports and adjusts the conversion rate for foreign currency assets and liabilities denominated in euros on corporate balance sheets.",
     "meaning_ar": "يؤدي اقتراب سعر صرف اليورو من مستوى 60 جنيهاً مصرياً إلى رفع تكلفة الواردات الأوروبية بالعملة المحلية، وتعديل تقييم الأصول والالتزامات المقومة باليورو في الميزانيات العمومية للشركات."
+  },
+  "سعر اليورو في مصر اليوم السبت 12/9/2026": {
+    "meaning": "Official foreign exchange rates published by banks establish the operational valuation benchmark for settling euro-denominated commercial transactions and corporate balance sheet conversions. During bank weekend closures, rates reflect the closing quotes from the preceding business day.",
+    "meaning_ar": "تحدد أسعار صرف النقد الأجنبي المعلنة في البنوك المعيار المحاسبي لتسوية المعاملات التجارية المقومة باليورو وتقييم بنود الميزانيات العمومية، وتعتمد تعاملات العطلات الأسبوعية على أسعار إغلاق يوم العمل السابق."
   },
   "سعر خام الحديد يتجاوز 100 دولار للطن في سنغافوره": {
     "meaning": "Iron ore acts as the primary raw material for integrated steel manufacturers, directly determining input costs across heavy industrial supply chains.",
