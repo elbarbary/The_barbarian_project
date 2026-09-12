@@ -699,6 +699,11 @@
     "meaning": "An increase in China's foreign exchange reserves reflects trade surplus inflows, foreign direct investment, and central bank asset valuation adjustments denominated in foreign currencies.",
     "meaning_ar": "يعكس ارتفاع احتياطيات النقد الأجنبي في الصين تدفقات الفائض التجاري والاستثمار الأجنبي المباشر وتغيرات تقييم الأصول المقومة بالعملات الأجنبية لدى البنك المركزي."
   },
+  "احتياطيات الهند من النقد الاجنبي تقفز الي 785.7 مليار دولار": {
+    "meaning": "",
+    "meaning_ar": "",
+    "refused": 1
+  },
   "احتياطيات اليابان تهبط 79.6 مليار دولار في اغسطس": {
     "meaning": "A decline in foreign exchange reserves reflects central bank balance sheet adjustments driven by foreign exchange market interventions, revaluations of foreign securities, or external payment settlements.",
     "meaning_ar": "يعكس انخفاض احتياطيات النقد الأجنبي تسويات في الميزانية العمومية للبنك المركزي ناتجة عن التدخلات في سوق الصرف، أو إعادة تقييم الأصول والسندات الأجنبية، أو سداد التزامات دولية."
@@ -4724,6 +4729,10 @@
   "“الرقابه الماليه” تشكل مجموعه عمل لتعزيز المسووليه المجتمعيه": {
     "meaning": "The Financial Regulatory Authority (FRA) forms a dedicated working group to draft regulatory frameworks and standards for corporate social responsibility (CSR) and ESG integration across non-banking financial institutions and listed entities.",
     "meaning_ar": "تُشكّل الهيئة العامة للرقابة المالية مجموعة عمل متخصصة لوضع الأطر والمعايير التنظيمية المنظمة لممارسات المسؤولية المجتمعية والحوكمة البيئية والاجتماعية للشركات المقيدة والمؤسسات المالية غير المصرفية."
+  },
+  "“الرقابه الماليه” تلزم شركات التمويل بالربط اللحظي مع “اي سكور”": {
+    "meaning": "The Financial Regulatory Authority mandates that non-banking financial institutions integrate their systems via real-time data feeds with the Egyptian Credit Bureau (I-Score), automating the immediate verification and reporting of borrower credit exposures and liabilities.",
+    "meaning_ar": "تُلزم الهيئة العامة للرقابة المالية شركات التمويل غير المصرفي بالربط التقني المباشر والفوري مع الشركة المصرية للاستعلام الائتماني (آي سكور)، مما يتيح التحديث والتحقق اللحظي من التاريخ الائتماني وحجم مديونيات العملاء."
   },
   "“الزراعه” تتعاون مع “الفاو” لتطوير قطاع الزيتون في مصر": {
     "meaning": "This institutional cooperation applies Food and Agriculture Organization technical assistance and standardisation frameworks to local olive farming and post-harvest supply chains.",
