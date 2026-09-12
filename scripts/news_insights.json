@@ -19,6 +19,10 @@
     "meaning": "The platform enforces content and catalog moderation policies by restricting the listing and sale of non-compliant medical products across its digital marketplace.",
     "meaning_ar": "تطبق المنصة سياسات تدقيق المعروضات الرقمية عبر حظر إدراج وتداول فئات محددة من المنتجات الطبية داخل سوقها الإلكتروني."
   },
+  "\"جوله كفرالشيخ\".. مدبولي يتفقد توسعات محطه مياه الشرب الشماليه بمطوبس ضمن \"حياه كريمه\"": {
+    "meaning": "Government inspection of public utility expansions represents the execution phase of state-financed infrastructure contracts under the 'Decent Life' initiative, driving direct operational procurement for construction and water treatment contractors.",
+    "meaning_ar": "تمثل الجولات التفقدية لمشروعات المرافق العامة مرحلة التنفيذ الفعلي لعقود البنية التحتية الممولة حكومياً ضمن مبادرة 'حياة كريمة'، وهو ما يحرك التوريدات والعمليات التشغيلية المباشرة لشركات المقاولات ومعالجة المياه."
+  },
   "\"طاقه عربيه\" تنفذ بيع 2 مليون سهم خزينه": {
     "meaning": "The execution transfers 2 million treasury shares back into the open market, which restores these shares to active circulation, increases the company's free float, and records the transaction proceeds in equity.",
     "meaning_ar": "تؤدي هذه العملية إلى إعادة طرح مليوني سهم من أسهم الخزينة للتداول في السوق المفتوحة، مما يرفع نسبة الأسهم حرة التداول ويثبت المتحصلات النقدية ضمن حقوق الملكية."
@@ -700,9 +704,8 @@
     "meaning_ar": "يعكس ارتفاع احتياطيات النقد الأجنبي في الصين تدفقات الفائض التجاري والاستثمار الأجنبي المباشر وتغيرات تقييم الأصول المقومة بالعملات الأجنبية لدى البنك المركزي."
   },
   "احتياطيات الهند من النقد الاجنبي تقفز الي 785.7 مليار دولار": {
-    "meaning": "",
-    "meaning_ar": "",
-    "refused": 1
+    "meaning": "Foreign exchange reserves represent external assets held by the central bank to settle international balance-of-payments liabilities and manage domestic currency volatility. A total of $785.7 billion expands the liquidity buffer available to absorb external trade imbalances and meet short-term debt servicing commitments.",
+    "meaning_ar": "تمثل احتياطيات النقد الأجنبي الأصول الخارجية التي يحتفظ بها البنك المركزي لتسوية التزامات ميزان المدفوعات الدولي وإدارة تقلبات العملة المحلية، حيث يعكس وصولها إلى 785.7 مليار دولار زيادة في حجم السيولة الوقائية المتاحة لتغطية الواردات وسداد التزامات الديون الخارجية قصيرة الأجل."
   },
   "احتياطيات اليابان تهبط 79.6 مليار دولار في اغسطس": {
     "meaning": "A decline in foreign exchange reserves reflects central bank balance sheet adjustments driven by foreign exchange market interventions, revaluations of foreign securities, or external payment settlements.",
@@ -3021,6 +3024,10 @@
     "meaning": "Government field inspections of national urban developments monitor project execution timelines and coordinate infrastructure delivery across real estate, construction, and utility contractors on site.",
     "meaning_ar": "تتابع الجولات الميدانية الحكومية لمشروعات التطوير العمراني معدلات التنفيذ على أرض الواقع وتنسق تسليم أعمال البنية التحتية بين شركات المقاولات والتطوير العقاري والمرافق العامة."
   },
+  "رييس الوزراء يبدا جوله موسعه لتفقد مشروعات خدميه وتنمويه في محافظه كفر الشيخ": {
+    "meaning": "Government inspection tours monitor the operational progress of public infrastructure and utility contracts, verifying execution timelines across state-funded projects in the region.",
+    "meaning_ar": "تتابع الجولات التفقدية الحكومية الموقف التنفيذي لعقود مشروعات البنية التحتية والمرافق العامة، وتتحقق من الجداول الزمنية لتسليم المشروعات الممولة من الدولة في المحافظة."
+  },
   "رييس الوزراء يتابع المشروعات الحاليه والمستقبليه في قطاع الطاقه الجديده والمتجدده": {
     "meaning": "Government reviews of renewable energy pipelines involve monitoring public-private partnership contracts, land allocation frameworks, and grid integration schedules for solar and wind generation assets.",
     "meaning_ar": "تتضمن المتابعة الحكومية لمشروعات الطاقة المتجددة مراجعة عقود الشراكة بين القطاعين العام والخاص، وأطر تخصيص الأراضي، والجداول الزمنية لربط محطات توليد الرياح والطاقة الشمسية بالشبكة القومية للكهرباء."
@@ -3537,6 +3544,10 @@
   "عاجل.. الرقابه الماليه تصدر دليلا شاملا لقواعد وضوابط التمويل الاستهلاكي": {
     "meaning": "The Financial Regulatory Authority establishes a unified regulatory and operational framework defining licensing criteria, credit risk assessment rules, and compliance requirements for consumer finance companies operating in Egypt.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً تنظيمياً وتشغيلياً موحداً يحدد معايير الترخيص، وضوابط التقييم الائتماني، ومتطلبات الامتثال وإدارة المخاطر لشركات التمويل الاستهلاكي في مصر."
+  },
+  "عاجل.. الرقابه الماليه تلزم شركات التمويل الاستهلاكي وتمويل المشروعات بالربط اللحظي مع “اي سكور”": {
+    "meaning": "The directive requires consumer and microfinance companies to integrate their credit databases with the Egyptian Credit Bureau (I-Score) via real-time data feeds, establishing instantaneous information exchange for credit risk assessment.",
+    "meaning_ar": "يُلزم القرار شركات التمويل الاستهلاكي وتمويل المشروعات بربط قواعد بياناتها الائتمانية لحظيًا مع الشركة المصرية للاستعلام الائتماني (آي سكور)، مما يتيح التبادل الفوري للمعلومات لتقييم الجدارة الائتمانية."
   },
   "عاجل.. تضخم اسعار المستهلكين بمدن مصر يتباطا الي 14.5% في اغسطس": {
     "meaning": "A deceleration in urban consumer price inflation to 14.5% reflects a slower pace of price increases across standard consumer baskets, stabilizing wholesale procurement costs and operating expenses across domestic supply chains.",
