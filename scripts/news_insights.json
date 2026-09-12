@@ -1779,6 +1779,10 @@
     "meaning": "Capital allocation toward education and human capital involves directing public and private expenditures into educational infrastructure, curriculum development, and vocational training frameworks, which directly engages the operational capacity of the education services sector and the labor supply chain.",
     "meaning_ar": "يتضمن الاستثمار في رأس المال البشري توجيه النفقات الرأسمالية الحكومية والخاصة نحو البنية التحتية للتعليم وتطوير المناهج والتدريب المهني، وهو ما يرتبط مباشرة بالطاقة التشغيلية لقطاع الخدمات التعليمية وسلاسل إمداد سوق العمل."
   },
+  "السيسي: تجمع البريكس يكتسب اهميه خاصه باعتباره اطارا يجمع دولا رييسيه في الجنوب العالمي": {
+    "meaning": "BRICS membership establishes an intergovernmental trade and financing framework among member states, facilitating cross-border settlements in local currencies and enabling project funding through the New Development Bank.",
+    "meaning_ar": "تؤسس عضوية تجمع البريكس إطاراً حكومياً للتبادل التجاري والتمويل بين الدول الأعضاء، يتيح تسوية المعاملات العابرة للحدود بالعملات المحلية ويوفر تمويلاً للمشروعات عبر بنك التنمية الجديد."
+  },
   "السيوله المحليه M2 ترتفع الي 15.5 تريليون جنيه بنهايه يوليو": {
     "meaning": "An increase in domestic liquidity (M2) to 15.5 trillion EGP represents an expansion in the broad money supply circulating within the banking sector and the economy, comprising currency in circulation and total deposits in local and foreign currencies.",
     "meaning_ar": "يمثل ارتفاع السيولة المحلية (M2) إلى 15.5 تريليون جنيه توسعاً في إجمالي المعروض النقدي المتداول في القطاع المصرفي والاقتصاد، والذي يضم النقد المتداول خارج البنوك وإجمالي الودائع بالعملتين المحلية والأجنبية."
@@ -3745,6 +3749,10 @@
     "meaning": "This consortium combines telecommunications connectivity, electrical engineering, and digital technology platforms to execute joint infrastructure and operational projects.",
     "meaning_ar": "يمثل هذا التحالف دمجاً بين شبكات الاتصالات والبنية التحتية الكهربائية ومنصات التكنولوجيا الرقمية لتنفيذ مشروعات بنية تحتية وتشغيلية مشتركة."
   },
+  "فوزي عبد الجليل: مشاركه مصر في قمه «بريكس» تعزز فرص التجاره والاستثمار": {
+    "meaning": "Participation in the BRICS summit connects Egyptian state and private entities to institutional frameworks for cross-border settlement in local currencies and project financing via the New Development Bank.",
+    "meaning_ar": "تربط المشاركة في قمة «بريكس» الكيانات المصرية بأطر مؤسسية للتسويات التجارية البينية بالعملات المحلية وقنوات تمويل المشروعات عبر بنك التنمية الجديد."
+  },
   "فول الصويا يضع الصين امام اختبار جديد قبل قمه «شي» و«ترامب»": {
     "meaning": "Soybean import volumes and tariff policies function as a key bilateral trade mechanism and negotiation benchmark between US agricultural exporters and Chinese commodity purchasers.",
     "meaning_ar": "تمثل واردات وسياسات تسعير فول الصويا أداة تجارية رئيسية وآلية تفاوضية في حركة السلع الزراعية الثنائية بين المصدرين في الولايات المتحدة والمستوردين في الصين."
@@ -4812,6 +4820,10 @@
   "“اتحاد التامين” يوصي بوضع نظام متكامل وموحد لمكافحه الحرايق والوقايه منها": {
     "meaning": "The recommendation establishes standardized risk assessment and fire safety protocols across commercial and industrial properties, aligning underwriting guidelines and claim verification procedures across the non-life insurance sector.",
     "meaning_ar": "تضع هذه التوصية معايير موحدة لتقييم المخاطر وإجراءات السلامة من الحرائق في المنشآت، مما يوحد ضوابط الاكتتاب وإجراءات التحقق من المطالبات لدى شركات التأمين على الممتلكات."
+  },
+  "“اس اند بي” تثبت تصنيف السعوديه رغم ضغوط الحرب ومخاطر صادرات النفط": {
+    "meaning": "S&P maintains Saudi Arabia's sovereign credit rating unchanged, reflecting an assessment where existing fiscal buffers and sovereign net asset positions offset current regional geopolitical tensions and oil export exposure.",
+    "meaning_ar": "تثبت وكالة \"إس آند بي\" التصنيف الائتماني السيادي للسعودية دون تغيير، استناداً إلى المصدات المالية والمركز الصافي للأصول السيادية في مواجهة الضغوط الجيوسياسية الإقليمية ومخاطر صادرات النفط القائمة."
   },
   "“اقتصاديه القناه” تطرح مخازن وورش ميناء غرب بورسعيد للشراكه مع القطاع الخاص": {
     "meaning": "The Suez Canal Economic Zone tenders logistics assets, specifically warehouses and workshops at West Port Said Port, under public-private partnership (PPP) models, transferring the management, operation, and utilization of these facilities to private sector operators.",
