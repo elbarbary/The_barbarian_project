@@ -3180,6 +3180,10 @@
     "meaning": "Official executive inspections assess domestic manufacturing operations and evaluate supply-chain inputs for the local maritime equipment sector.",
     "meaning_ar": "ترصد الجولات التفقدية الحكومية سير العمليات التشغيلية في المصانع المحلية، وتتابع مدخلات سلاسل الإمداد الخاصة بقطاع معدات الصيد البحري."
   },
+  "رييس الوزراء يحسم جدل رواتب الخريجين: العمل بالمصانع ومواقع الانتاج هو المستقبل الحقيقي": {
+    "meaning": "The statement reflects state economic policy directed toward channeling graduate labor into industrial and manufacturing activities rather than administrative and clerical employment, directly impacting the allocation of the domestic workforce across sectors.",
+    "meaning_ar": "يعكس التصريح توجهاً للسياسة الاقتصادية الحكومية نحو توجيه القوى العاملة من الخريجين إلى الأنشطة الصناعية ومواقع الإنتاج بدلاً من الوظائف الإدارية، وهو ما يحدد مسار توزيع العمالة المحلية بين القطاعات المختلفة."
+  },
   "رييس الوزراء يشهد حفل افتتاح الدوره الثانيه عشره للالعاب الافريقيه للجامعات": {
     "meaning": "Hosting regional multi-sport events utilizes domestic sports infrastructure and coordinates operational activity across the hospitality, logistics, and transportation sectors.",
     "meaning_ar": "تتضمن استضافة الفعاليات الرياضية الإقليمية تشغيل البنية التحتية الرياضية وتنسيق الأنشطة التشغيلية عبر قطاعات الضيافة والنقل والخدمات اللوجستية."
@@ -3363,6 +3367,10 @@
   "سعر الفايده علي الرهن العقاري في امريكا يتجاوز 7%": {
     "meaning": "Mortgage rates exceeding 7% raise the borrowing cost for home financing, increasing monthly debt service expenses for property buyers in the US market.",
     "meaning_ar": "تجاوز أسعار الفائدة على الرهن العقاري 7% يرفع تكلفة الاقتراض للتمويل السكني، مما يزيد من أعباء خدمة الدين الشهرية على مشتري العقارات في السوق الأمريكي."
+  },
+  "سعر الفضه يخسر 1% في اسبوع.. تعرف علي قيمه عيار 999 في مصر": {
+    "meaning": "Local silver pricing directly tracks international precious metal spot rates adjusted for the domestic USD/EGP exchange rate, reflecting global benchmark movements across purity grades such as 999.",
+    "meaning_ar": "تتبع أسعار الفضة في السوق المحلية تحركات العقود الفورية العالمية للمعدن مقومة بسعر صرف الجنيه المصري مقابل الدولار، وهو ما ينعكس بصورة مباشرة على تسعير مختلف الأعيرة ومنها عيار 999."
   },
   "سعر اليورو اليوم الاربعاء 9-9-2026 في بدايه التعاملات": {
     "meaning": "The headline tracks the opening foreign exchange spot rate of the Euro against the Egyptian Pound, which serves as a pricing benchmark for international trade settlements, corporate FX exposures, and commercial bank treasury operations.",
