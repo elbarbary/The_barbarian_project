@@ -8,6 +8,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { generateKeyPairSync, createSign } from 'node:crypto';
+import { readFile } from 'node:fs/promises';
 
 const module_ = await import('../index.js');
 const { verifyGoogleToken, resetGoogleKeys } = module_;
@@ -179,4 +180,56 @@ test('the config endpoint offers the client id and nothing else', async () => {
   const body = await response.json();
   assert.deepEqual(body, { google: CLIENT });
   assert.equal(JSON.stringify(body).includes('secret'), false);
+});
+
+/* ── what the deployment is configured with ──────────────────────────────── */
+
+/** JSONC without a comment-stripper that eats `"/data/v1/*"`. */
+function readJsonc(raw) {
+  let out = '';
+  let i = 0;
+  let inString = false;
+  while (i < raw.length) {
+    const c = raw[i];
+    if (inString) {
+      out += c;
+      if (c === '\\') { out += raw[i + 1]; i += 2; continue; }
+      if (c === '"') inString = false;
+      i += 1;
+      continue;
+    }
+    if (c === '"') { inString = true; out += c; i += 1; continue; }
+    if (raw.startsWith('//', i)) { const at = raw.indexOf('\n', i); i = at < 0 ? raw.length : at; continue; }
+    if (raw.startsWith('/*', i)) { const at = raw.indexOf('*/', i + 2); i = at < 0 ? raw.length : at + 2; continue; }
+    out += c;
+    i += 1;
+  }
+  return JSON.parse(out);
+}
+
+test('the deployment carries a well-formed Google client id', async () => {
+  // The button only appears when `/auth/config` has an id to give it, so a
+  // typo here is a sign-in method that silently never renders. And a WRONG id
+  // is worse than none: the button draws, Google signs a token for the wrong
+  // audience, and `verifyGoogleToken` refuses every reader who presses it.
+  const config = readJsonc(await readFile(
+    new URL('../../public/wrangler.jsonc', import.meta.url), 'utf8'));
+  const id = config.vars?.GOOGLE_CLIENT_ID;
+  assert.ok(id, 'no GOOGLE_CLIENT_ID configured — the button will never render');
+  assert.match(id, /^\d+-[a-z0-9]+\.apps\.googleusercontent\.com$/,
+               `not a Google client id: ${id}`);
+});
+
+test('no client secret is stored anywhere on this site', async () => {
+  // This is the ID-token flow: the Worker verifies Google's signature itself.
+  // A client secret belongs to the authorization-code flow, which this site
+  // does not use, so one sitting in the config would be a credential with no
+  // job — and every credential with no job is a credential to leak.
+  const files = ['public/wrangler.jsonc', 'site-worker/index.js', 'public/esthmr/auth.js'];
+  for (const path of files) {
+    const text = await readFile(new URL('../../' + path, import.meta.url), 'utf8');
+    assert.doesNotMatch(text, /GOCSPX-[\w-]+/, `a Google client secret is in ${path}`);
+    assert.doesNotMatch(text, /client[_ ]?secret\s*[:=]\s*["'][^"']{8,}/i,
+                        `something is storing a client secret in ${path}`);
+  }
 });

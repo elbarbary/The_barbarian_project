@@ -85,6 +85,23 @@
    * 4. Remaining resend keys follow automatically if all three above fail.
    *
    * If BREVO_API_KEY is not set, brevo is silently omitted without error. */
-  "vars": { "MAIL_ORDER": "resend#3,brevo,sendpulse" },
+  /* The Google sign-in client id.
+   *
+   * Public by design and not a secret: `/esthmr/api/auth/config` serves it to
+   * every browser that opens the sign-in sheet, and Google's own button script
+   * needs it in the page. It lives here rather than in a dashboard setting so
+   * it survives a redeploy and can be read in review.
+   *
+   * There is deliberately no client SECRET anywhere. This is the ID-token
+   * flow: the browser gets a signed token from Google, the Worker verifies its
+   * signature against Google's published keys and checks the audience, issuer
+   * and expiry itself. A client secret belongs to the authorization-code flow,
+   * which this site does not use — storing one would be a credential with no
+   * job, and every credential with no job is a credential to leak.
+   */
+  "vars": {
+    "MAIL_ORDER": "resend#3,brevo,sendpulse",
+    "GOOGLE_CLIENT_ID": "604618997878-laj91c5vosl5tq919arn197tvf0i9g1o.apps.googleusercontent.com"
+  },
   "compatibility_flags": ["nodejs_compat"]
 }
