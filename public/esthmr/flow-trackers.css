@@ -884,6 +884,24 @@ button.om-holder-row:hover span { color: var(--accent); }
   font-family: 'IBM Plex Mono', monospace; }
 /* Two filed numbers that do not describe each other, said out loud. */
 .wm-row-warn { grid-column: 1 / -1; font-size: 10.5px; color: var(--down); }
+/* The currency note prints however many currencies it prints, so the position
+   runs across the row rather than fighting the three figure columns. */
+.wm-row-fx { grid-column: 1 / -1; display: flex; flex-wrap: wrap;
+  align-items: baseline; gap: 6px; }
+.wm-row-fx > small { font-size: 9.5px; color: var(--faint); }
+/* Today's rate, so a net dollar position has something to mean. */
+.wm-today { margin-top: 10px; padding: 10px; border-radius: 10px;
+  background: var(--sunk); }
+.wm-today-rates { display: flex; flex-wrap: wrap; gap: 14px; }
+.wm-today-rates span { display: grid; }
+.wm-today-rates small { font-size: 9.5px; color: var(--faint); }
+.wm-today-rates b { font-size: 12px; font-weight: 600;
+  font-family: 'IBM Plex Mono', monospace; }
+.wm-today-note { display: block; margin-top: 8px; font-size: 10.5px;
+  color: var(--t2); }
+.wm-fx-chip { font-size: 11px; font-weight: 600; padding: 1px 6px;
+  border: 1px solid var(--line); border-radius: 999px;
+  font-family: 'IBM Plex Mono', monospace; }
 
 @media (max-width: 768px) {
   .wm-move { grid-template-columns: minmax(0, 1fr) 70px; }

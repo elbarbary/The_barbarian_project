@@ -123,3 +123,6 @@ data-source/official/mcdr/issuer-registry-*.json.gz
 # and committed. Re-fetch with scripts/fetch_simulator_intraday.mjs.
 data-source/intraday-research/
 data-source/simulator/
+
+# Derived on every build from scripts/currency_notes_read.json, which is committed.
+scripts/currency_notes.json

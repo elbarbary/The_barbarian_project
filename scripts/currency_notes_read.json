@@ -1,0 +1,918 @@
+{
+ "schemaVersion": 1,
+ "readings": {
+  "293025": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "ABUK",
+   "dropped": []
+  },
+  "293122": {
+   "position": {},
+   "fxResult": 0.162556,
+   "pages": [
+    5
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "فروق عملة",
+   "ticker": "ACTF",
+   "dropped": []
+  },
+  "290212": {
+   "position": {
+    "USD": 146.717144
+   },
+   "fxResult": null,
+   "pages": [
+    5,
+    30
+   ],
+   "asOf": "2026-03-31",
+   "denominatedIn": "egp",
+   "printed": "Foreign exchange differences",
+   "ticker": "ADPC",
+   "dropped": [
+    {
+     "what": "position EUR",
+     "why": "the figure is not printed in the document's text"
+    },
+    {
+     "what": "fxResult",
+     "why": "the figure is not printed in the document's text"
+    }
+   ]
+  },
+  "289921": {
+   "position": {},
+   "fxResult": 2.524782,
+   "pages": [
+    6
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "أرباح / (خسائر) فروق تقييم عملات أجنبية",
+   "ticker": "AIDC",
+   "dropped": []
+  },
+  "ALCN-H1 2026-2026-06-30": {
+   "position": {},
+   "fxResult": 21.433,
+   "pages": [
+    6
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "Foreign currency translation differences",
+   "ticker": "ALCN",
+   "dropped": []
+  },
+  "292980": {
+   "position": {
+    "USD": 0.065119
+   },
+   "fxResult": 0.069522,
+   "pages": [
+    15,
+    27
+   ],
+   "asOf": "2026-06-30",
+   "denominatedIn": "foreign",
+   "printed": "فروق ترجمة أرصدة بالعملات الأجنبية",
+   "ticker": "AMES",
+   "dropped": []
+  },
+  "AMPI-H1 2026-2026-06-30": {
+   "position": {},
+   "fxResult": null,
+   "pages": [
+    6
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "ارباح فروق تقييم العملة الاجنبية",
+   "ticker": "AMPI",
+   "dropped": [
+    {
+     "what": "fxResult",
+     "why": "the two reads disagree: 0.0 against 0.000289"
+    }
+   ]
+  },
+  "293018": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "AREH",
+   "dropped": []
+  },
+  "292857": {
+   "position": {
+    "USD": 24.986302
+   },
+   "fxResult": 0.900495,
+   "pages": [
+    5,
+    29
+   ],
+   "asOf": "2026-06-30",
+   "denominatedIn": "egp",
+   "printed": "فروق ترجمة الأرصدة بالعملات الأجنبية",
+   "ticker": "ATLC",
+   "dropped": [
+    {
+     "what": "position EUR",
+     "why": "the two reads disagree: 0.132502 against 0.133003"
+    }
+   ]
+  },
+  "293174": {
+   "position": {},
+   "fxResult": 0.0,
+   "pages": [
+    6
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "أرباح فروق تقييم عملة",
+   "ticker": "BIGP",
+   "dropped": []
+  },
+  "293074": {
+   "position": {},
+   "fxResult": null,
+   "pages": [
+    23
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "خسائر فروق تقييم عملات أجنبية",
+   "ticker": "BONY",
+   "dropped": [
+    {
+     "what": "fxResult",
+     "why": "the two reads disagree: -1.082173 against 1.082173"
+    }
+   ]
+  },
+  "293322": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "CCRS",
+   "dropped": []
+  },
+  "292963": {
+   "position": {},
+   "fxResult": -3.381376,
+   "pages": [
+    6,
+    40
+   ],
+   "asOf": "2026-06-30",
+   "denominatedIn": null,
+   "printed": "Foreign currency exchange differences",
+   "ticker": "CICH",
+   "dropped": []
+  },
+  "289473": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "CLHO",
+   "dropped": []
+  },
+  "293423": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "COPR",
+   "dropped": []
+  },
+  "293513": {
+   "position": {},
+   "fxResult": 0.25583,
+   "pages": [
+    6
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "اثر التغير في اسعار الصرف",
+   "ticker": "CPME",
+   "dropped": []
+  },
+  "292653": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "ACAP",
+   "dropped": []
+  },
+  "288708": {
+   "position": {},
+   "fxResult": -2.32683,
+   "pages": [
+    8
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "ارباح (خسائر ) فروق عملة",
+   "ticker": "ADCI",
+   "dropped": []
+  },
+  "ADRI-H1 2026-2026-06-30": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "ADRI",
+   "dropped": []
+  },
+  "291075": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "AIFI",
+   "dropped": []
+  },
+  "293286": {
+   "position": {
+    "EUR": 0.001303,
+    "USD": 0.366345
+   },
+   "fxResult": 1.4783,
+   "pages": [
+    5,
+    26
+   ],
+   "asOf": "2026-06-30",
+   "denominatedIn": "foreign",
+   "printed": "فروق تقييم عملات اجنبية",
+   "ticker": "ALUM",
+   "dropped": []
+  },
+  "292928": {
+   "position": {
+    "EUR": 0.133003,
+    "USD": 31.513589
+   },
+   "fxResult": null,
+   "pages": [
+    5,
+    33
+   ],
+   "asOf": "2026-06-30",
+   "denominatedIn": "egp",
+   "printed": "فروق ترجمة أرصدة بالعملات الأجنبية",
+   "ticker": "AMIA",
+   "dropped": [
+    {
+     "what": "fxResult",
+     "why": "the two reads disagree: 1.133239 against 1.133229"
+    }
+   ]
+  },
+  "285301": {
+   "position": {
+    "EUR": -52.90652,
+    "GBP": -0.00596,
+    "USD": -20.536424
+   },
+   "fxResult": -191.887281,
+   "pages": [
+    25,
+    26
+   ],
+   "asOf": "2025-09-30",
+   "denominatedIn": "egp",
+   "printed": "صافي (خسارة) ربح ترجمة العملات الأجنبية",
+   "ticker": "ASCM",
+   "dropped": []
+  },
+  "ATQA-H1 2026-2026-06-30": {
+   "position": {},
+   "fxResult": -68.213623,
+   "pages": [
+    5
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "اعادة تقييم عملات اجنبية",
+   "ticker": "ATQA",
+   "dropped": []
+  },
+  "293139": {
+   "position": {},
+   "fxResult": 99.035737,
+   "pages": [
+    4
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "Foreign exchange gains / (Loss)",
+   "ticker": "BINV",
+   "dropped": []
+  },
+  "291779": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "CAED",
+   "dropped": []
+  },
+  "288134": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "CEFM",
+   "dropped": []
+  },
+  "292096": {
+   "position": {
+    "CHF": 1.958,
+    "EUR": -1208.745,
+    "GBP": 58.934,
+    "OTHER": -3.909,
+    "USD": 1030.488
+   },
+   "fxResult": 419.874,
+   "pages": [
+    17,
+    24
+   ],
+   "asOf": "2026-06-30",
+   "denominatedIn": "egp",
+   "printed": "Gains from foreign currencies transactions",
+   "ticker": "CIEB",
+   "dropped": []
+  },
+  "293033": {
+   "position": {},
+   "fxResult": 14.781059,
+   "pages": [
+    5
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "فروق ترجمة عمالت أجنبية",
+   "ticker": "CNFN",
+   "dropped": []
+  },
+  "292950": {
+   "position": {},
+   "fxResult": 0.000201,
+   "pages": [
+    5
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "فروق عملة محققة وغير محققة",
+   "ticker": "COSG",
+   "dropped": []
+  },
+  "288951": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "CRST",
+   "dropped": []
+  },
+  "288852": {
+   "position": {},
+   "fxResult": -33.503981,
+   "pages": [
+    43
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "خسائر فروق تقييم عملة",
+   "ticker": "DOMT",
+   "dropped": []
+  },
+  "EASB-H1 2026-2026-06-30": {
+   "position": {},
+   "fxResult": 0.38591,
+   "pages": [
+    6
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "أرباح (خسائر) فروق تقييم عملات أجنبية",
+   "ticker": "EASB",
+   "dropped": []
+  },
+  "288002": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "EDFM",
+   "dropped": []
+  },
+  "289686": {
+   "position": {},
+   "fxResult": -0.16563,
+   "pages": [
+    7
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "فروق تقييم عملة",
+   "ticker": "ACGC",
+   "dropped": []
+  },
+  "292295": {
+   "position": {
+    "EUR": -95.68,
+    "GBP": 12.535,
+    "OTHER": -1644.709,
+    "USD": 3677.725
+   },
+   "fxResult": 548.888,
+   "pages": [
+    15,
+    21
+   ],
+   "asOf": "2026-06-30",
+   "denominatedIn": "egp",
+   "printed": "أرباح المعاملات بالعملات الأجنبية",
+   "ticker": "ADIB",
+   "dropped": [
+    {
+     "what": "position JPY",
+     "why": "the two reads disagree: 90.792 against 90.432"
+    }
+   ]
+  },
+  "287647": {
+   "position": {},
+   "fxResult": -1.024,
+   "pages": [
+    20
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "خسائر ( أرباح) تقييم العملات الأجنبية",
+   "ticker": "AFMC",
+   "dropped": []
+  },
+  "285315": {
+   "position": {},
+   "fxResult": -1.478179,
+   "pages": [
+    6
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "فروق عملات أجنبية دائنة",
+   "ticker": "AJWA",
+   "dropped": []
+  },
+  "293137": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "AMER",
+   "dropped": []
+  },
+  "293300": {
+   "position": {},
+   "fxResult": null,
+   "pages": [
+    12
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "أرباح فروق عملة",
+   "ticker": "AMOC",
+   "dropped": [
+    {
+     "what": "fxResult",
+     "why": "only one of the two reads saw it"
+    }
+   ]
+  },
+  "293208": {
+   "position": {},
+   "fxResult": null,
+   "pages": [
+    5
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "أرباح / (خسائر) تقييم عملات أجنبية",
+   "ticker": "ARCC",
+   "dropped": [
+    {
+     "what": "fxResult",
+     "why": "the two reads disagree: 64.661504 against -63.689314"
+    }
+   ]
+  },
+  "292494": {
+   "position": {},
+   "fxResult": 0.057875,
+   "pages": [
+    5
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "فروق تقييم عملة",
+   "ticker": "ASPI",
+   "dropped": []
+  },
+  "288419": {
+   "position": {},
+   "fxResult": 4.962621,
+   "pages": [
+    17
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "أرباح (خسائر) فروق عملة",
+   "ticker": "AXPH",
+   "dropped": []
+  },
+  "289483": {
+   "position": {},
+   "fxResult": 65.730198,
+   "pages": [
+    42
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "أرباح بيع فروق العملة",
+   "ticker": "DEIN",
+   "dropped": []
+  },
+  "292522": {
+   "position": {},
+   "fxResult": null,
+   "pages": [
+    6,
+    23
+   ],
+   "asOf": "2026-06-30",
+   "denominatedIn": null,
+   "printed": "FOREX (Losses)",
+   "ticker": "ECAP",
+   "dropped": [
+    {
+     "what": "position",
+     "why": "the two reads disagree about what the table is denominated in: foreign against egp"
+    },
+    {
+     "what": "fxResult",
+     "why": "only one of the two reads saw it"
+    }
+   ]
+  },
+  "293114": {
+   "position": {},
+   "fxResult": -28.335268,
+   "pages": [
+    5
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "(خسائر) أرباح تقييم فروق عملة",
+   "ticker": "EFID",
+   "dropped": []
+  },
+  "293160": {
+   "position": {
+    "AED": 0.000173,
+    "EUR": 0.058487,
+    "GBP": 0.00085,
+    "JOD": 0.118295,
+    "OMR": 0.029878,
+    "SAR": 1.695901,
+    "USD": 2.861729
+   },
+   "fxResult": -0.942251,
+   "pages": [
+    6,
+    44
+   ],
+   "asOf": "2026-06-30",
+   "denominatedIn": "foreign",
+   "printed": "(loss) exchange gain",
+   "ticker": "EGAS",
+   "dropped": []
+  },
+  "292968": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "EGREF",
+   "dropped": []
+  },
+  "ELEC-H1 2026-2026-06-30": {
+   "position": {},
+   "fxResult": -25.988307,
+   "pages": [
+    5
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "فروق تقييم عملة",
+   "ticker": "ELEC",
+   "dropped": []
+  },
+  "292587": {
+   "position": {},
+   "fxResult": 1573.925644,
+   "pages": [
+    18
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "Net Foreign exchange gains (losses)",
+   "ticker": "EMFD",
+   "dropped": []
+  },
+  "293383": {
+   "position": {},
+   "fxResult": 0.0,
+   "pages": [
+    6
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "فروق عمله",
+   "ticker": "EPPK",
+   "dropped": []
+  },
+  "293128": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "EXPA",
+   "dropped": []
+  },
+  "293166": {
+   "position": {
+    "EUR": 91.777,
+    "USD": -1853.57
+   },
+   "fxResult": -23.429,
+   "pages": [
+    16,
+    30
+   ],
+   "asOf": "2026-06-30",
+   "denominatedIn": "egp",
+   "printed": "Foreign exchange (Losses) / Gain",
+   "ticker": "GBCO",
+   "dropped": [
+    {
+     "what": "position OTHER",
+     "why": "only one of the two reads saw it"
+    }
+   ]
+  },
+  "287120": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "GGRN",
+   "dropped": []
+  },
+  "292813": {
+   "position": {},
+   "fxResult": 3.310437,
+   "pages": [
+    25,
+    30
+   ],
+   "asOf": "2026-06-30",
+   "denominatedIn": null,
+   "printed": "Foreign currencies exchange gain",
+   "ticker": "EFIH",
+   "dropped": [
+    {
+     "what": "position",
+     "why": "the two reads disagree about what the table is denominated in: foreign against egp"
+    }
+   ]
+  },
+  "293459": {
+   "position": {
+    "USD": 37.560291
+   },
+   "fxResult": null,
+   "pages": [
+    6,
+    25
+   ],
+   "asOf": "2026-03-31",
+   "denominatedIn": "foreign",
+   "printed": "فروق ترجمة الأرصدة بالعملات الأجنبية",
+   "ticker": "EGTS",
+   "dropped": [
+    {
+     "what": "fxResult",
+     "why": "only one of the two reads saw it"
+    }
+   ]
+  },
+  "293659": {
+   "position": {},
+   "fxResult": 0.088918,
+   "pages": [
+    5
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "فروق تقييم عملة",
+   "ticker": "ELKA",
+   "dropped": []
+  },
+  "EOSB-H1 2026-2026-06-30": {
+   "position": {},
+   "fxResult": null,
+   "pages": [
+    5
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "فروق تقيم عملة",
+   "ticker": "EOSB",
+   "dropped": [
+    {
+     "what": "fxResult",
+     "why": "only one of the two reads saw it"
+    }
+   ]
+  },
+  "293087": {
+   "position": {},
+   "fxResult": -2165.063,
+   "pages": [
+    15
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "خسائر ترجمة الأرصدة والمعاملات بالعملة الأجنبية بمبلغ ٢١٦٥٠٦٣ ألف جنيه مصري",
+   "ticker": "ETEL",
+   "dropped": []
+  },
+  "293039": {
+   "position": {},
+   "fxResult": 0.000613,
+   "pages": [
+    5
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "ارباح او خسائر فروق العمله",
+   "ticker": "FNAR",
+   "dropped": []
+  },
+  "293081": {
+   "position": {
+    "CHF": -0.053097,
+    "EUR": -0.811535,
+    "GBP": -0.103302,
+    "USD": 1.530864
+   },
+   "fxResult": -207.103972,
+   "pages": [
+    6,
+    20
+   ],
+   "asOf": "2026-06-30",
+   "denominatedIn": "foreign",
+   "printed": "صافي فروق ترجمة عملة أجنبية",
+   "ticker": "BIOC",
+   "dropped": []
+  },
+  "292704": {
+   "position": {
+    "EUR": -189.249,
+    "GBP": -0.533,
+    "USD": -13942.252
+   },
+   "fxResult": -60.465,
+   "pages": [
+    13,
+    17
+   ],
+   "asOf": "2026-06-30",
+   "denominatedIn": "egp",
+   "printed": "فروق تقييم أصول والتزامات المركز المالي بالعمالت األجنبية ذات الطبيعة النقدية",
+   "ticker": "CANA",
+   "dropped": [
+    {
+     "what": "position OTHER",
+     "why": "only one of the two reads saw it"
+    }
+   ]
+  },
+  "293241": {
+   "position": {},
+   "fxResult": -17.219149,
+   "pages": [
+    5
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "(خسائر) فروق عمله",
+   "ticker": "CERA",
+   "dropped": []
+  },
+  "291733": {
+   "position": {
+    "AED": 0.200244,
+    "EUR": -0.590573,
+    "GBP": -0.000211,
+    "USD": 19.5168
+   },
+   "fxResult": 17.363559,
+   "pages": [
+    11,
+    35
+   ],
+   "asOf": "2026-05-31",
+   "denominatedIn": "egp",
+   "printed": "أرباح (خسائر) فروق عملة",
+   "ticker": "CIRA",
+   "dropped": []
+  },
+  "291711": {
+   "position": {
+    "EUR": 11753.74,
+    "GBP": 47.758,
+    "OTHER": -899.963,
+    "USD": 27616.172
+   },
+   "fxResult": 1585.05,
+   "pages": [
+    16,
+    20
+   ],
+   "asOf": "2026-06-30",
+   "denominatedIn": "egp",
+   "printed": "Profit (Loss) from foreign exchange transactions",
+   "ticker": "COMI",
+   "dropped": []
+  },
+  "288255": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "CPCI",
+   "dropped": []
+  },
+  "289964": {
+   "position": {},
+   "fxResult": 4.848411,
+   "pages": [
+    5
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "فروق تقييم عملة",
+   "ticker": "DAPH",
+   "dropped": []
+  },
+  "293203": {
+   "position": {
+    "EUR": 5.378207,
+    "USD": -35.521473
+   },
+   "fxResult": null,
+   "pages": [
+    6,
+    38
+   ],
+   "asOf": "2026-06-30",
+   "denominatedIn": "foreign",
+   "printed": "فروق ترجمة العملات والأرصدة بعملات الأجنبية",
+   "ticker": "DSCW",
+   "dropped": [
+    {
+     "what": "fxResult",
+     "why": "the two reads disagree: -32.601259 against -33.601359"
+    }
+   ]
+  },
+  "EAST-Q1 2026-2026-03-31": {
+   "position": {
+    "CHF": 0.003,
+    "EUR": -3.129,
+    "GBP": 0.003,
+    "USD": -19.325
+   },
+   "fxResult": 87.5,
+   "pages": [
+    10,
+    29
+   ],
+   "asOf": "2026-03-31",
+   "denominatedIn": "foreign",
+   "printed": "(٤) ارباح وخسائر فروق عملة",
+   "ticker": "EAST",
+   "dropped": []
+  }
+ }
+}

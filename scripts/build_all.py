@@ -247,9 +247,16 @@ STEPS = [
     # is not a name, and the site has already shipped a chart of the wrong
     # instrument once.
     ("Rate history", "rate_history.py", True),
+    # The foreign-currency note, republished from what has already been read.
+    # The READING is two model passes over a whole filed statement and is run
+    # by hand the way build_pdf_statements.py is; this step spends no model
+    # call and exists so the channel is rebuilt from the store on every run
+    # rather than going missing the day a harvest was short.
+    ("Currency notes", "build_currency_notes.py", True, ["--publish"]),
     # What moved outside Egypt, joined to the filings it reaches. Needs the
-    # world history above it and the filed statements below the company
-    # documents, so it runs after both and reads nothing from the network.
+    # world history above it, the filed statements below the company
+    # documents, and the currency notes just above, so it runs after all three
+    # and reads nothing from the network.
     ("World monitor", "build_world_monitor.py", True),
     # Last, and reporting only. It reads what every step above published and
     # counts what is wrong with it — a market value that is not its own price

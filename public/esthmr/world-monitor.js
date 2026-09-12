@@ -68,18 +68,75 @@ function moveRow(row, window_, ar, t) {
   );
 }
 
+/* Each channel names the three figures it shows and the words above them.
+ *
+ * This was a `rates ? ... : ...` while there were two of them, which is the
+ * shape that quietly decides there will never be a third. A channel is a
+ * question plus three filed numbers, so it is written as one. */
+const CHANNELS = {
+  rates: {
+    eyebrow: ['THE COST OF MONEY', 'تكلفة الاقتراض'],
+    figures: (c, t) => [
+      [t('Borrowings', 'القروض'), filed(c.borrowings)],
+      [t('Reprices within a year', 'تُسعّر خلال عام'),
+        finite(c.repricingWithinAYear) ? `${c.repricingWithinAYear}%` : '—'],
+      [t('Interest cover', 'تغطية الفوائد'),
+        finite(c.cover) ? `${c.cover.toFixed(2)}×` : '—'],
+    ],
+    warn: (c, t) => c.costExceedsBorrowings && t(
+      'filed a finance cost larger than the borrowings it pays for',
+      'أودعت تكلفة تمويل أكبر من القروض التي تخصها'),
+  },
+  inputs: {
+    eyebrow: ['THE COST OF THINGS', 'تكلفة المدخلات'],
+    figures: (c, t) => [
+      [t('Revenue', 'الإيرادات'), filed(c.revenue)],
+      [t('Gross profit', 'مجمل الربح'), filed(c.grossProfit)],
+      [t('Cushion', 'الفارق'), finite(c.grossMargin) ? `${c.grossMargin}%` : '—'],
+    ],
+  },
+  currency: {
+    eyebrow: ['THE PRICE OF THE POUND', 'سعر الجنيه'],
+    figures: (c, t) => [
+      [t('Currency result filed', 'فروق العملة المودعة'), filed(c.fxResult),
+        tone(c.fxResult)],
+      [t('Of the period’s profit', 'من ربح الفترة'),
+        finite(c.shareOfNetIncome) ? `${c.shareOfNetIncome}%` : '—'],
+      [t('Profit filed', 'الربح المودع'), filed(c.netIncome)],
+    ],
+    // The position is however many currencies the note printed, so it is a
+    // row of its own rather than a fourth figure squeezed into three slots.
+    extra: (c, t) => (c.position || []).length ? h('div', { className: 'wm-row-fx' },
+      h('small', null, t('Held in', 'محتفظ به بـ')),
+      c.position.map((p) => h('span', {
+        key: p.currency, className: 'wm-fx-chip', dir: 'ltr',
+        style: { color: tone(p.net) },
+      // The note groups everything it did not name under one heading, and
+      // "OTHER" printed beside USD and EUR reads as a currency code.
+      }, `${p.currency === 'OTHER' ? t('Other', 'أخرى') : p.currency} `
+         + `${p.net > 0 ? '+' : ''}${money(p.net * 1e6)}`
+         + (c.denominatedIn === 'foreign' ? '' : ' EGP'))
+      )) : null,
+    warn: (c, t) => c.largerThanTheProfit && t(
+      'the currency line filed is larger than the period’s whole profit',
+      'فروق العملة المودعة أكبر من ربح الفترة كله'),
+  },
+};
+
 function channelPanel(channel, query, onSearch, ar, t) {
   const needle = (query || '').trim().toLowerCase();
   const rows = (channel.companies || []).filter((c) => !needle
     || (c.ticker || '').toLowerCase().includes(needle)
     || (c.name || '').toLowerCase().includes(needle));
-  const rates = channel.id === 'rates';
+  const spec = CHANNELS[channel.id];
+  if (!spec) return null;
+  const warn = spec.warn || (() => null);
+  const extra = spec.extra || (() => null);
 
   return h('section', { className: 'ft-detail wm-channel' },
     h('div', { className: 'ft-section-heading' },
       h('div', null,
-        h('span', { className: 'ft-eyebrow' },
-          rates ? t('THE COST OF MONEY', 'تكلفة الاقتراض') : t('THE COST OF THINGS', 'تكلفة المدخلات')),
+        h('span', { className: 'ft-eyebrow' }, t(spec.eyebrow[0], spec.eyebrow[1])),
         h('h2', null, ar ? channel.questionAr : channel.question)
       ),
       h('span', { className: 'ft-range-badge', dir: 'ltr' }, `${channel.count}`)
@@ -87,6 +144,16 @@ function channelPanel(channel, query, onSearch, ar, t) {
     h('p', { className: 'ft-note' },
       t(`All ${channel.count} — ${channel.filter}. In alphabetical order, with the filing each number came from. Nothing here says what a move means for a share price.`,
         `كل الـ${channel.count} — ${channel.filterAr}. بالترتيب الأبجدي، ومع كل رقم الإفصاح الذي جاء منه. ولا شيء هنا يقول ماذا تعني أي حركة لسعر السهم.`)),
+    // Deliberately a level and not a move. Every other figure on this screen
+    // is placed against its own two years; the pound has no history kept here,
+    // so it gets a date and no percentile — and says as much.
+    channel.today && h('div', { className: 'wm-today' },
+      h('div', { className: 'wm-today-rates' },
+        channel.today.rates.map((r) => h('span', { key: r.code },
+          h('small', null, ar ? r.labelAr : r.label),
+          h('b', { dir: 'ltr' }, r.token)))),
+      h('small', { className: 'wm-today-note' },
+        `${channel.today.asOf} · ${ar ? channel.today.noteAr : channel.today.note}`)),
     h('input', {
       type: 'search', className: 'om-search',
       placeholder: t('Search a company', 'ابحث عن شركة'),
@@ -102,30 +169,18 @@ function channelPanel(channel, query, onSearch, ar, t) {
           h('strong', null, c.ticker),
           h('small', null, c.name || '')
         ),
-        rates
-          ? h('div', { className: 'wm-row-figures' },
-              h('span', null, h('small', null, t('Borrowings', 'القروض')),
-                h('b', { dir: 'ltr' }, filed(c.borrowings))),
-              h('span', null, h('small', null, t('Reprices within a year', 'تُسعّر خلال عام')),
-                h('b', { dir: 'ltr' }, finite(c.repricingWithinAYear)
-                  ? `${c.repricingWithinAYear}%` : '—')),
-              h('span', null, h('small', null, t('Interest cover', 'تغطية الفوائد')),
-                h('b', { dir: 'ltr' }, finite(c.cover) ? `${c.cover.toFixed(2)}×` : '—'))
-            )
-          : h('div', { className: 'wm-row-figures' },
-              h('span', null, h('small', null, t('Revenue', 'الإيرادات')),
-                h('b', { dir: 'ltr' }, filed(c.revenue))),
-              h('span', null, h('small', null, t('Gross profit', 'مجمل الربح')),
-                h('b', { dir: 'ltr' }, filed(c.grossProfit))),
-              h('span', null, h('small', null, t('Cushion', 'الفارق')),
-                h('b', { dir: 'ltr' }, finite(c.grossMargin) ? `${c.grossMargin}%` : '—'))
-            ),
+        h('div', { className: 'wm-row-figures' },
+          spec.figures(c, t).map(([label, value, colour]) => h('span', { key: label },
+            h('small', null, label),
+            h('b', { dir: 'ltr', style: colour ? { color: colour } : null }, value)))),
+        // Before the extra, not after it: the extra spans the whole row, so a
+        // filing date placed behind it starts a fresh grid row and lands under
+        // the figures instead of beside them.
         h('small', { className: 'wm-row-filed', dir: 'ltr' }, c.period || ''),
+        extra(c, t),
         // A company that filed two numbers which do not describe each other is
         // told on, rather than read as if one of them stood alone.
-        c.costExceedsBorrowings && h('small', { className: 'wm-row-warn' },
-          t('filed a finance cost larger than the borrowings it pays for',
-            'أودعت تكلفة تمويل أكبر من القروض التي تخصها'))
+        warn(c, t) && h('small', { className: 'wm-row-warn' }, warn(c, t))
       )) : h('p', { className: 'om-reg-none' },
         t('No company here matches that.', 'لا شركة مطابقة هنا.'))
     )

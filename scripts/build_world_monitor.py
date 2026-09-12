@@ -13,14 +13,22 @@ So this joins two things that are both documents:
     becomes "a fall bigger than 94% of the weeks behind it". A record of the
     past, never a statement about the next one.
 
-  · who filed a figure that the move reaches. Two channels, and only two,
-    because these are the two the filings actually carry:
+  · who filed a figure that the move reaches. Three channels, because these
+    are the three the filings actually carry:
 
       RATES     borrowings, how much of them reprice within a year, and what
                 the company already pays to carry them against what it earns.
       INPUTS    the gross margin — the cushion a company filed between what it
                 sells for and what it cost to make. A company that filed an 8%
                 margin has less room for any input cost than one that filed 60%.
+      CURRENCY  the foreign-currency note: the net position held in each
+                currency, and the exchange gain or loss already recognised,
+                against the profit of the same filing. Read by
+                build_currency_notes.py, which keeps a figure only where two
+                independent reads of the filing produced it. The translation
+                policy every statement carries is not an exposure and is not
+                counted — it would make all 193 companies "currency exposed",
+                which is true and useless.
 
 WHAT THIS REFUSES TO DO
 -----------------------
@@ -47,6 +55,7 @@ INDEX_HISTORY = DATA / "market-history.json"
 COMPANIES = DATA / "companies"
 DIRECTORY = DATA / "companies.json"
 INVESTORS = DATA / "investors.json"
+CURRENCY = pathlib.Path(__file__).resolve().parent / "currency_notes.json"
 STATEMENTS = pathlib.Path(__file__).resolve().parent / "pdf_statements_filed.json"
 OUT = DATA / "world-monitor.json"
 
@@ -233,6 +242,72 @@ def margins(names: dict) -> list[dict]:
     return rows
 
 
+def currency_notes() -> list[dict]:
+    """Every company whose filed note prints a foreign-currency figure.
+
+    Read here rather than re-derived: build_currency_notes.py owns the reading
+    and the two-read agreement behind it, and a second place computing the
+    share of profit is a second place for the two to drift apart.
+    """
+    if not CURRENCY.exists():
+        return []
+    try:
+        document = json.loads(CURRENCY.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return []
+    return list(document.get("companies") or [])
+
+
+# The exchange rate page names the currency in words; the filed note names it
+# in an ISO code. Closed on purpose, like the vocabulary in the reader.
+CURRENCY_CODES = {
+    "US dollar": "USD", "Euro": "EUR", "Pound sterling": "GBP",
+    "Saudi riyal": "SAR", "UAE dirham": "AED", "Kuwaiti dinar": "KWD",
+    "Japanese yen": "JPY", "Chinese yuan": "CNY", "Swiss franc": "CHF",
+}
+
+
+def pound_today() -> dict | None:
+    """What the pound was worth on the day this was built — a level, not a move.
+
+    Every other figure on this screen is placed against its own two years of
+    history. The pound cannot be: rate_history.py keeps daily closes for oil,
+    copper, gold and three stock indices, and none at all for a currency, so
+    there is no distribution here to say whether today's rate is unusual. That
+    is a gap, and the honest way to show it is a level with a date on it and no
+    percentile beside it.
+
+    It is here at all because the channel is unreadable without it. A company
+    that filed a net dollar position of 3,678 million says nothing to a reader
+    who does not know what a dollar costs.
+    """
+    if not RATES_LATEST.exists():
+        return None
+    try:
+        document = json.loads(RATES_LATEST.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    rows = []
+    for row in document.get("currencies") or []:
+        code = CURRENCY_CODES.get(row.get("label"))
+        if not code or not row.get("token"):
+            continue
+        rows.append({"code": code, "label": row.get("label"),
+                     "labelAr": row.get("label_ar"), "token": row.get("token")})
+    if not rows:
+        return None
+    return {
+        "asOf": (document.get("fetched_at") or "")[:10],
+        "rates": rows,
+        "note": "The rate on the day this was built. This site keeps no history "
+                "for the pound, so unlike every other figure here it is not "
+                "placed against its own past and nothing is claimed about it.",
+        "noteAr": "سعر الصرف يوم إعداد هذه الصفحة. لا يحتفظ هذا الموقع بتاريخ "
+                  "لسعر الجنيه، ولذلك — خلافاً لكل رقم آخر هنا — لا يُقاس مقابل "
+                  "ماضيه ولا يُقال عنه شيء.",
+    }
+
+
 def foreign_money() -> dict | None:
     if not INVESTORS.exists():
         return None
@@ -254,6 +329,7 @@ def build() -> dict:
              for c in directory if c.get("ticker")}
     debt_rows = carrying_debt(names)
     margin_rows = margins(names)
+    currency_rows = currency_notes()
     return {
         "schemaVersion": 1,
         "generated": datetime.datetime.now(datetime.timezone.utc)
@@ -291,6 +367,20 @@ def build() -> dict:
                             "فيظهر الفارق بينهما",
                 "count": len(margin_rows),
                 "companies": margin_rows,
+            },
+            {
+                "id": "currency",
+                "question": "Where does a move in the pound land?",
+                "questionAr": "أين تصل حركة الجنيه؟",
+                "filter": "every company whose filed foreign-currency note "
+                          "prints a figure — a net position held in another "
+                          "currency, or an exchange gain or loss already taken",
+                "filterAr": "كل شركة يطبع إيضاح العملات الأجنبية في قوائمها رقماً "
+                            "— صافي مركز بعملة أخرى، أو أرباح أو خسائر فروق عملة "
+                            "تم الاعتراف بها",
+                "count": len(currency_rows),
+                "today": pound_today(),
+                "companies": currency_rows,
             },
         ],
         "foreignMoney": foreign_money(),

@@ -159,3 +159,113 @@ test('a figure filed in millions is not printed as thousands of millions', () =>
   assert.doesNotMatch(out, /\d[KMB]m\b/, 'a compact figure still carries a stray unit');
   assert.match(out, /\d+(\.\d+)?[KMBT]? EGP/, 'no figure carries its currency');
 });
+
+/* The currency channel.
+ *
+ * Built against a constructed document rather than the published one. The
+ * ownership board taught this the hard way: two tests there found their case
+ * by searching the published file, and both went red the day the data got
+ * better. A rule is tested against a document written to exercise it.
+ */
+const CURRENCY = {
+  id: 'currency',
+  question: 'Where does a move in the pound land?',
+  questionAr: 'أين تصل حركة الجنيه؟',
+  filter: 'every company whose filed foreign-currency note prints a figure',
+  filterAr: 'كل شركة يطبع إيضاح العملات الأجنبية في قوائمها رقماً',
+  count: 3,
+  companies: [
+    { ticker: 'AAAA', name: 'Alpha Co.', fxResult: 18.003, netIncome: 47.5,
+      shareOfNetIncome: 37.9, period: 'H1 2026', denominatedIn: 'foreign',
+      position: [{ currency: 'USD', net: 0.786 }, { currency: 'GBP', net: -0.233 }] },
+    { ticker: 'MMMM', name: 'Mu Co.', fxResult: 121.034, netIncome: 60.0,
+      shareOfNetIncome: 201.7, largerThanTheProfit: true, period: 'H1 2026',
+      denominatedIn: 'EGP', position: [{ currency: 'EUR', net: 5.71 }] },
+    { ticker: 'ZZZZ', name: 'Zeta Co.', fxResult: -1.024, netIncome: -40.0,
+      shareOfNetIncome: null, period: 'Q1 2026', position: [] },
+  ],
+};
+CURRENCY.today = {
+  asOf: '2026-09-11',
+  rates: [{ code: 'USD', label: 'US dollar', labelAr: 'الدولار الأمريكي', token: 'EGP 51.3365' },
+          { code: 'EUR', label: 'Euro', labelAr: 'اليورو', token: 'EGP 59.6425' }],
+  note: 'The rate on the day this was built. This site keeps no history for the pound, so unlike every other figure here it is not placed against its own past and nothing is claimed about it.',
+  noteAr: 'سعر الصرف يوم إعداد هذه الصفحة.',
+};
+const withCurrency = { ...published, channels: [...published.channels, CURRENCY] };
+const currencyPanel = () => withClass(screen({}, 'en', withCurrency), 'wm-channel').at(-1);
+
+test('the currency channel draws one chip per currency the note printed', () => {
+  const rows = withClass(currencyPanel(), 'wm-row');
+  assert.equal(rows.length, 3);
+  const chips = (i) => withClass(rows[i], 'wm-fx-chip').map((c) => text(c).trim());
+  assert.deepEqual(chips(0), ['USD +786K', 'GBP -233K']);
+  assert.deepEqual(chips(2), [], 'a company with no position table drew one anyway');
+});
+
+test('a position is labelled with the currency it is denominated in', () => {
+  // The note prints the table either in the foreign currency or in its pound
+  // equivalent, and those differ by about fifty times. Printing "USD +786K
+  // EGP" on a dollar table would be the single most misleading thing here.
+  const rows = withClass(currencyPanel(), 'wm-row');
+  assert.doesNotMatch(text(withClass(rows[0], 'wm-fx-chip')[0]), /EGP/);
+  assert.match(text(withClass(rows[1], 'wm-fx-chip')[0]), /EUR \+5\.71M EGP/);
+});
+
+test('the share of profit shown is the two figures printed beside it', () => {
+  // Read off the rendered row, not the document: a screen that printed the
+  // share of revenue instead would pass a test that checked the document.
+  const row = withClass(currencyPanel(), 'wm-row')[0];
+  const figures = withClass(row, 'wm-row-figures')[0].children.map((n) => text(n).trim());
+  const money = (s) => Number(String(s).match(/(-?[\d.]+)M/)?.[1]);
+  const share = Number(String(figures[1]).match(/(-?[\d.]+)%/)?.[1]);
+  assert.ok(Math.abs(share - money(figures[0]) / money(figures[2]) * 100) < 0.6,
+            figures.join(' | '));
+});
+
+test('a currency line larger than the whole profit is told on', () => {
+  const rows = withClass(currencyPanel(), 'wm-row');
+  assert.match(text(rows[1]), /larger than the period’s whole profit/);
+  assert.doesNotMatch(text(rows[0]), /larger than the period’s whole profit/);
+});
+
+test('the currency channel refuses to rank and says how many there are', () => {
+  const panel = currencyPanel();
+  const drawn = withClass(panel, 'wm-row').map(
+    (row) => text(withClass(row, 'wm-row-who')[0].children
+      .find((n) => n.tag === 'strong')).trim());
+  assert.deepEqual(drawn, [...drawn].sort());
+  assert.match(text(panel), /All 3/);
+  assert.match(text(panel), /Nothing here says what a move means for a share price/);
+});
+
+test('a channel the screen has no figures for is left undrawn, not half-drawn', () => {
+  const unknown = { ...withCurrency,
+    channels: [...published.channels, { ...CURRENCY, id: 'weather' }] };
+  const panels = withClass(screen({}, 'en', unknown), 'wm-channel');
+  assert.equal(panels.length, published.channels.length);
+});
+
+test('the pound is shown as a dated level, and says it is not a percentile', () => {
+  // Everything else on this screen is placed against its own two years of
+  // moves. rate_history.py keeps none for a currency, so the one figure that
+  // cannot be is the one the channel is about — and it has to say so rather
+  // than borrow the authority of the bars above it.
+  const panel = currencyPanel();
+  const today = withClass(panel, 'wm-today')[0];
+  assert.ok(today, 'the currency channel shows no rate at all');
+  assert.equal(withClass(today, 'wm-today-rates')[0].children.length, 2);
+  assert.match(text(today), /EGP 51\.3365/);
+  assert.match(text(today), /2026-09-11/);
+  assert.match(text(today), /keeps no history for the pound/);
+  // And no bar, which on this screen means "this is how unusual it was".
+  assert.equal(withClass(today, 'wm-move-bar').length, 0);
+});
+
+test('a channel with no rate block of its own draws none', () => {
+  const bare = { ...withCurrency,
+    channels: [...published.channels, { ...CURRENCY, today: null }] };
+  const panel = withClass(screen({}, 'en', bare), 'wm-channel').at(-1);
+  assert.equal(withClass(panel, 'wm-today').length, 0);
+  assert.ok(withClass(panel, 'wm-row').length > 0, 'and drew no companies either');
+});
