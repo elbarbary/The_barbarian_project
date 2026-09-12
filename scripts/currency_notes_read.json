@@ -3002,6 +3002,338 @@
    "printed": "فروق ترجمة الأرصدة بالعملات الأجنبية",
    "ticker": "EHDR",
    "dropped": []
+  },
+  "288493": {
+   "position": {},
+   "fxResult": 162.177,
+   "narrowed": [],
+   "pages": [
+    39
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "أرباح التعامل في العملات الأجنبية",
+   "ticker": "EXPA",
+   "dropped": []
+  },
+  "288881": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "GPIM",
+   "dropped": []
+  },
+  "289207": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "IEEC",
+   "dropped": []
+  },
+  "288024": {
+   "position": {},
+   "fxResult": null,
+   "narrowed": [],
+   "pages": [
+    5
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": null,
+   "ticker": "ISMA",
+   "dropped": []
+  },
+  "288362": {
+   "position": {},
+   "fxResult": 0.001268,
+   "narrowed": [],
+   "pages": [
+    5
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "فروق تقييم عملة",
+   "ticker": "MENA",
+   "dropped": []
+  },
+  "289646": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "MIPH",
+   "dropped": []
+  },
+  "289117": {
+   "position": {},
+   "fxResult": 129.706,
+   "narrowed": [],
+   "pages": [
+    4
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "صافي فروق ترجمة أرصدة بعملات أجنبية",
+   "ticker": "OFH",
+   "dropped": []
+  },
+  "287836": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "RKAZ",
+   "dropped": []
+  },
+  "288139": {
+   "position": {},
+   "fxResult": 0.501784,
+   "narrowed": [],
+   "pages": [
+    4
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "فروق تقييم عملة",
+   "ticker": "SMFR",
+   "dropped": []
+  },
+  "287952": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "TWSA",
+   "dropped": []
+  },
+  "UPMS-Q1 2026-2026-03-31": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "UPMS",
+   "dropped": []
+  },
+  "286048": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "HBCO",
+   "dropped": []
+  },
+  "286697": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "UPMS",
+   "dropped": []
+  },
+  "289014": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "UEFM",
+   "dropped": []
+  },
+  "288313": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "HBCO",
+   "dropped": []
+  },
+  "289832": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "INEG",
+   "dropped": []
+  },
+  "285887": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "LUTS",
+   "dropped": []
+  },
+  "289793": {
+   "position": {},
+   "fxResult": -6.461324,
+   "narrowed": [],
+   "pages": [
+    6
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "أرباح (خسائر) فروق العملة",
+   "ticker": "MFSC",
+   "dropped": []
+  },
+  "288661": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "PHDC",
+   "dropped": []
+  },
+  "291179": {
+   "position": {},
+   "fxResult": -0.047457,
+   "narrowed": [],
+   "pages": [
+    7
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "فروق تقيم عمله",
+   "ticker": "ROTO",
+   "dropped": []
+  },
+  "284770": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "SPMD",
+   "dropped": []
+  },
+  "289141": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "TYCN",
+   "dropped": []
+  },
+  "289087": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "VERT",
+   "dropped": []
+  },
+  "285437": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "MENA",
+   "dropped": []
+  },
+  "285397": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "EPCO",
+   "dropped": []
+  },
+  "288991": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "GIHD",
+   "dropped": []
+  },
+  "289231": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "IDRE",
+   "dropped": []
+  },
+  "288379": {
+   "position": {},
+   "fxResult": 2.42728,
+   "narrowed": [],
+   "pages": [
+    6
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "فروق ترجمة عملات اجنبية",
+   "ticker": "INFI",
+   "dropped": []
+  },
+  "289680": {
+   "position": {},
+   "fxResult": -3.44111,
+   "narrowed": [],
+   "pages": [
+    31
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "خسائر فروق العملة",
+   "ticker": "MBEG",
+   "dropped": []
+  },
+  "288670": {
+   "position": {},
+   "fxResult": null,
+   "narrowed": [],
+   "pages": [
+    9
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": null,
+   "ticker": "MICH",
+   "dropped": [
+    {
+     "what": "fxResult",
+     "first": 0.007264,
+     "second": 7.634,
+     "why": "the two reads disagree: 0.007264 against 7.634"
+    }
+   ]
+  },
+  "287641": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "NINH",
+   "dropped": []
+  },
+  "288183": {
+   "position": {},
+   "fxResult": -1.033334,
+   "narrowed": [],
+   "pages": [
+    5
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "خسائر فروق إعادة تقييم عملات أجنبية",
+   "ticker": "POUL",
+   "dropped": []
+  },
+  "287989": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "SCEM",
+   "dropped": []
+  },
+  "287962": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "TANM",
+   "dropped": []
+  },
+  "290201": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "UNIT",
+   "dropped": []
+  },
+  "288726": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "ZMID",
+   "dropped": []
+  },
+  "285983": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "OFH",
+   "dropped": []
   }
  }
 }

@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-12T16:07:14Z",
+ "generated": "2026-09-12T20:41:59Z",
  "basis": "A move is placed against its own two years of same-length moves — a record of what has already happened, never a statement about the next one. Each list of companies is the complete set that filed the figure, in alphabetical order, with the filing beside it. Nothing here says what any of it means for a share price.",
  "basisAr": "تُقاس كل حركة مقابل سنتين من حركات بالطول نفسه — سجل لما حدث بالفعل، وليس قولاً عما سيحدث. وكل قائمة شركات هي المجموعة الكاملة التي أودعت الرقم، بالترتيب الأبجدي، ومعها الإفصاح الذي جاء منه. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
  "windows": [
@@ -3780,7 +3780,7 @@
    "questionAr": "أين تصل حركة الجنيه؟",
    "filter": "every company whose filed foreign-currency note prints a figure — a net position held in another currency, or an exchange gain or loss already taken",
    "filterAr": "كل شركة يطبع إيضاح العملات الأجنبية في قوائمها رقماً — صافي مركز بعملة أخرى، أو أرباح أو خسائر فروق عملة تم الاعتراف بها",
-   "count": 127,
+   "count": 136,
    "today": {
     "asOf": "2026-09-12",
     "rates": [
@@ -5048,6 +5048,23 @@
      "source": "https://foudalens.com/disclosures/ETRS.CA/financial_statement/2026-08-13_293117_1.pdf"
     },
     {
+     "ticker": "EXPA",
+     "name": "Export Development Bank of Egypt",
+     "sector": "Banks",
+     "fxResult": 162.177,
+     "netIncome": 2856.635,
+     "shareOfNetIncome": 5.7,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح التعامل في العملات الأجنبية",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "288493",
+     "source": "https://foudalens.com/disclosures/EXPA.CA/financial_statement/2026-05-19_338574_1.pdf"
+    },
+    {
      "ticker": "FNAR",
      "name": "Al Fanar Contracting Construction Trade Import & Export Co.",
      "sector": "Industrial Services",
@@ -5300,6 +5317,23 @@
      "source": "https://foudalens.com/disclosures/IFAP.CA/financial_statement/2026-06-15_289843_1.pdf"
     },
     {
+     "ticker": "INFI",
+     "name": "Ismailia National Food Industries",
+     "sector": "Food, Beverages and Tobacco",
+     "fxResult": 2.427,
+     "netIncome": 18.246,
+     "shareOfNetIncome": 13.3,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق ترجمة عملات اجنبية",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "288379",
+     "source": "https://foudalens.com/disclosures/INFI.CA/financial_statement/2026-05-17_338289_1.pdf"
+    },
+    {
      "ticker": "ISPH",
      "name": "Ibnsina Pharma",
      "sector": "Health Care & Pharmaceuticals",
@@ -5506,6 +5540,23 @@
      "source": "https://foudalens.com/disclosures/MASR.CA/other/2026-08-23_293744_1.pdf"
     },
     {
+     "ticker": "MBEG",
+     "name": "MB for Engineering & Contracting",
+     "sector": "Industrial Goods , Services and Automobiles",
+     "fxResult": -3.441,
+     "netIncome": 4.985,
+     "shareOfNetIncome": -69.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "خسائر فروق العملة",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "289680",
+     "source": "https://foudalens.com/disclosures/MBEG.CA/financial_statement/2026-06-11_289679_1.pdf"
+    },
+    {
      "ticker": "MBSC",
      "name": "Misr Beni Suef Cement Co. SAE",
      "sector": "Building Materials",
@@ -5574,6 +5625,23 @@
      "source": "https://foudalens.com/disclosures/MEGM.CA/financial_statement/2026-07-29_292159_1.pdf"
     },
     {
+     "ticker": "MENA",
+     "name": "Mena Touristic & Real Estate Investment",
+     "sector": "Real Estate",
+     "fxResult": 0.001,
+     "netIncome": 13.96,
+     "shareOfNetIncome": 0.0,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق تقييم عملة",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "288362",
+     "source": "https://foudalens.com/disclosures/MENA.CA/financial_statement/2026-05-17_338428_1.pdf"
+    },
+    {
      "ticker": "MEPA",
      "name": "Medical Packaging Company",
      "sector": "Health Care & Pharmaceuticals",
@@ -5606,6 +5674,23 @@
      "periodEnd": "2026-06-30",
      "filingId": "292977",
      "source": "https://foudalens.com/disclosures/MFPC.CA/financial_statement/2026-08-13_292976_1.pdf"
+    },
+    {
+     "ticker": "MFSC",
+     "name": "Misr Duty Free Shops Co.",
+     "sector": "Trade & Distributors",
+     "fxResult": -6.461,
+     "netIncome": 220.671,
+     "shareOfNetIncome": -2.9,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "أرباح (خسائر) فروق العملة",
+     "period": "9M 2026 (to 31 Mar)",
+     "periodEnd": "2026-03-31",
+     "filingId": "289793",
+     "source": "https://foudalens.com/disclosures/MFSC.CA/financial_statement/2026-06-14_289792_1.pdf"
     },
     {
      "ticker": "MHOT",
@@ -5893,6 +5978,23 @@
      "source": "https://foudalens.com/disclosures/ODIN.CA/financial_statement/2026-08-13_293029_1.pdf"
     },
     {
+     "ticker": "OFH",
+     "name": "O B Financial Holding",
+     "sector": "Non-bank financial services",
+     "fxResult": 129.706,
+     "netIncome": 106.682,
+     "shareOfNetIncome": 121.6,
+     "largerThanTheProfit": true,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "صافي فروق ترجمة أرصدة بعملات أجنبية",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "289117",
+     "source": "https://foudalens.com/disclosures/OFH.CA/financial_statement/2026-06-01_339119_1.pdf"
+    },
+    {
      "ticker": "OLFI",
      "name": "Obour Land for Food Industries",
      "sector": "Food, Beverages and Tobacco",
@@ -6003,6 +6105,23 @@
      "periodEnd": "2026-06-30",
      "filingId": "293264",
      "source": "https://foudalens.com/disclosures/PHTV.CA/financial_statement/2026-08-16_293263_2.pdf"
+    },
+    {
+     "ticker": "POUL",
+     "name": "Cairo Poultry Co.",
+     "sector": "Food, Beverages and Tobacco",
+     "fxResult": -1.033,
+     "netIncome": 32.834,
+     "shareOfNetIncome": -3.1,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "خسائر فروق إعادة تقييم عملات أجنبية",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "288183",
+     "source": "https://foudalens.com/disclosures/POUL.CA/financial_statement/2026-05-14_338329_1.pdf"
     },
     {
      "ticker": "PRDC",
@@ -6150,6 +6269,23 @@
      "source": "https://foudalens.com/disclosures/RMDA.CA/other/2026-08-16_293227_1.pdf"
     },
     {
+     "ticker": "ROTO",
+     "name": "Rowad Tourism (Al Rowad) Co",
+     "sector": "Travel & Leisure",
+     "fxResult": -0.047,
+     "netIncome": -3.18,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق تقيم عمله",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "291179",
+     "source": "https://foudalens.com/disclosures/ROTO.CA/financial_statement/2026-07-12_291178_1.pdf"
+    },
+    {
      "ticker": "RUBX",
      "name": "Rubex International for Plastic & Acrylic Manufacturing",
      "sector": "Building Materials",
@@ -6264,6 +6400,23 @@
      "periodEnd": "2026-06-30",
      "filingId": "292935",
      "source": "https://foudalens.com/disclosures/SKPC.CA/financial_statement/2026-08-13_292934_1.pdf"
+    },
+    {
+     "ticker": "SMFR",
+     "name": "Samad Misr-EGYFERT",
+     "sector": "Trade & Distributors",
+     "fxResult": 0.502,
+     "netIncome": 3.648,
+     "shareOfNetIncome": 13.8,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "فروق تقييم عملة",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "288139",
+     "source": "https://foudalens.com/disclosures/SMFR.CA/financial_statement/2026-05-14_338296_1.pdf"
     },
     {
      "ticker": "SPIN",
