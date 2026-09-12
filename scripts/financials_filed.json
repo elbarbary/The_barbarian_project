@@ -152,6 +152,25 @@
    "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=293025",
    "ticker": "ABUK"
   },
+  "293074": {
+   "basis": null,
+   "currency": "جنيه مصري",
+   "filed_on": "2026-08-13",
+   "isin": "EGS656M1C010",
+   "months": 6,
+   "name_ar": "بنيان للتنمية والتجارة",
+   "net_profit_egp": 1042235436.0,
+   "news_id": "293074",
+   "period": "H1 2026",
+   "period_end": "2026-06-30",
+   "period_start": "2026-01-01",
+   "prior_net_profit_egp": 1025876666.0,
+   "prior_period": "H1 2025",
+   "prior_period_end": "2025-06-30",
+   "prior_period_start": "2025-01-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=293074",
+   "ticker": "BONY"
+  },
   "293079": {
    "basis": "standalone",
    "currency": "جنيه مصري",
@@ -941,6 +960,7 @@
   "292980": "2026-08-13",
   "293018": "2026-08-13",
   "293025": "2026-08-13",
+  "293074": "2026-08-13",
   "293079": "2026-08-13",
   "293081": "2026-08-13",
   "293122": "2026-08-13",
