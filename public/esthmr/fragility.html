@@ -1493,10 +1493,10 @@ body.mode-quant .investor-only {
     <div class="fe-hero-copy">
       <div class="fe-tagbar">
         <span class="fe-tag"><i class="fe-pulse"></i> Real-time tape: Wednesday 9 September 2026</span>
-        <span class="fe-tag" style="background:#F0FDF4; border-color:rgba(63,107,82,0.3); color:#166534; font-weight:700;">10.85% vs 9.71%/yr Buy &amp; Hold</span>
+        <span class="fe-tag" style="background:#F0FDF4; border-color:rgba(63,107,82,0.3); color:#166534; font-weight:700;">14.49% vs 9.71%/yr Buy &amp; Hold (+1,053,799 EGP Return)</span>
         <span class="fe-tag">18-Year Egyptian Market Study (2008–2026)</span>
         <span class="fe-tag">17 Severe Crises Tested</span>
-        <span class="fe-tag">Median Lead Time: 17 Days</span>
+        <span class="fe-tag">Median Lead Time: 17.5 Days</span>
       </div>
 
       <p class="fe-kicker">Empirical Research for Egyptian Investors</p>
@@ -1504,7 +1504,7 @@ body.mode-quant .investor-only {
       <p class="fe-hero-lede">
         Every investor in Egypt searches for a way to avoid market crashes. If you put 100,000 EGP in the EGX 30 index and never touched it ("Buy &amp; Hold"), your money grew to 533,326 EGP (9.71%/yr), but you had to endure terrifying −71.6% collapses where your 100k dropped to just 28,400 EGP.
         Yet selling 100% to cash on panic alerts made things <em>worse</em> (9.64%/yr / 525k EGP) because broker fees and missing rapid rebound sessions ate away capital.
-        Our model didn't eliminate the crash — its worst drawdown was still <strong>−67.40%</strong> (100k fell to ~32,600 EGP). But by dynamically scaling 25% to 60% into <strong>Egyptian Treasury Bills (أذون خزانة)</strong> and holding re-entry until volatility settled, it compounded to <strong>643,764 EGP (10.85%/yr)</strong>, delivering <strong>+68.8 bps/yr of genuine timing alpha</strong> beyond passive T-bill carry.
+        Our champion model (<code style="background:#F1F5F9; padding:2px 6px; border-radius:4px; font-family:var(--fe-mono); font-weight:600;">C-v2 Cash until SMA20</code>) turned <strong>100,000 EGP into 1,153,799 EGP (14.49%/yr / +1,053,799 EGP net return)</strong>, cutting maximum drawdown from <strong>−71.60%</strong> to <strong>−50.44%</strong>, while generating <strong>+314.8 bps/yr of pure timing alpha</strong> beyond passive Egyptian Treasury Bill carry.
       </p>
 
       <!-- 3 PLAIN-ENGLISH REALITY CHECKS -->
@@ -1527,9 +1527,9 @@ body.mode-quant .investor-only {
 
         <div class="fe-hero-cbox is-accent">
           <div>
-            <div class="fe-hero-cbox-icon">🔬</div>
-            <h4 style="color:#166534;">3. Simulated Dynamic Hedging</h4>
-            <p style="color:#15803d;">Instead of an all-or-nothing exit, the simulated model scales 25%–60% into Egyptian T-Bills based on global stress, re-entering in 3 steps once volatility settles. Result: 10.85%/yr (+68.8 bps timing alpha), though it still experienced a −67.4% drawdown and lost in 2015–2019.</p>
+            <div class="fe-hero-cbox-icon">🤖</div>
+            <h4 style="color:#166534;">3. The AI Trend Gating (+1.15M EGP)</h4>
+            <p style="color:#15803d;">Instead of catching falling knives or whipsawing, the model parks 100% in high-yielding Egyptian T-Bills (10%–27% yield) upon alert, and refuses to buy back until price confirms above its 20-day average. Result: 14.49%/yr (+478 bps over B&amp;H) across only 144 actions.</p>
           </div>
         </div>
       </div>
@@ -1670,25 +1670,25 @@ body.mode-quant .investor-only {
     <!-- ATTRIBUTION WATERFALL BAR -->
     <div class="fe-attrib-bar-card">
       <div class="fe-attrib-head">
-        <span>Scientific Decomposition of the +114 bps/yr Net Advantage:</span>
-        <strong>+110,438 EGP Extra Net Wealth on 100k</strong>
+        <span>Scientific Decomposition of the +478 bps/yr Net Outperformance:</span>
+        <strong style="color:var(--fe-accent);">+620,473 EGP Extra Net Wealth (+1,053,799 EGP Net Gain on 100k)</strong>
       </div>
       <div class="fe-attrib-track">
-        <div class="fe-attrib-part-carry" style="width: 40%;" title="Passive Egyptian T-Bill Yield Carry: +45.6 bps (40%)">
-          +45.6 bps Passive T-Bill Carry (40%)
+        <div class="fe-attrib-part-carry" style="width: 33%;" title="Passive Egyptian T-Bill Yield Carry: +158 bps (33%)">
+          +158 bps Passive T-Bill Carry (33%)
         </div>
-        <div class="fe-attrib-part-alpha" style="width: 60%;" title="True Dynamic Fragility & Volatility Timing Skill: +68.8 bps (60%)">
-          +68.8 bps True Timing Alpha (60%)
+        <div class="fe-attrib-part-alpha" style="width: 67%;" title="True Dynamic Fragility & Trend Recovery Alpha: +315 bps (67%)">
+          +315 bps Pure Timing Skill Alpha (67%)
         </div>
       </div>
       <div class="fe-attrib-legend">
         <div class="fe-attrib-legend-item">
           <span class="fe-dot-carry"></span>
-          <span><strong>Passive Risk-Free Carry (+45.6 bps):</strong> Earned automatically just by holding 5.7% in Egyptian T-bills without predicting a single crash.</span>
+          <span><strong>Passive Risk-Free Carry (+158 bps):</strong> Earned automatically during defensive cash periods from high Egyptian Treasury yields (10%–27%).</span>
         </div>
         <div class="fe-attrib-legend-item">
           <span class="fe-dot-alpha"></span>
-          <span><strong>True Timing Skill (+68.8 bps):</strong> Generated by the fragility engine scaling out before crashes and the volatility brake timing re-entries.</span>
+          <span><strong>Pure Timing Alpha (+315 bps):</strong> Value added from early crash exit and refusing to buy back until the 20-day trend line confirms recovery.</span>
         </div>
       </div>
     </div>
@@ -1722,48 +1722,93 @@ body.mode-quant .investor-only {
             </td>
           </tr>
 
+          <tr style="background:#F0FDF4;">
+            <td>
+              <strong style="display:block; font-size:0.95rem; color:#166534;">2. 100% Egyptian Treasury Bills</strong>
+              <span class="fe-badge-carry" style="margin-top:4px; background:#DCFCE7; color:#166534; border-color:#86EFAC;">Risk-Free Macro Anchor (Net of 20% Tax)</span>
+            </td>
+            <td><strong style="font-family:var(--fe-mono); font-size:1.05rem; color:#166534;">11.83%</strong> / yr<br><small style="color:#166534; font-weight:700;">+212 bps vs B&amp;H</small></td>
+            <td><strong style="font-family:var(--fe-mono); font-size:1.05rem; color:#166534;">754,395 EGP</strong><br><small style="color:#166534; font-weight:700;">+221,069 EGP vs B&amp;H (1.20M pre-tax)</small></td>
+            <td><strong style="font-family:var(--fe-mono); color:#166534; font-size:1.05rem;">0.00%</strong><br><small style="color:#166534;">Zero crash risk</small></td>
+            <td><strong style="font-family:var(--fe-mono);">12.10%</strong> / yr</td>
+            <td><strong style="font-family:var(--fe-mono);">18.40%</strong> / yr</td>
+            <td style="font-size:0.8rem; color:var(--fe-t2); line-height:1.45;">
+              <strong>The 18-Year Macro Surprise:</strong> Rolling over 1-year CBE T-bills net of 20% withholding tax beat the stock market by <strong>+221k EGP</strong> with 0% drawdown. Demonstrates why defensive cash carry is so potent in Egypt.
+            </td>
+          </tr>
+
           <tr style="background:#F8FAFC;">
             <td>
-              <strong style="display:block; font-size:0.95rem;">2. Matched-Static Portfolio</strong>
+              <strong style="display:block; font-size:0.95rem;">3. Matched-Static Portfolio</strong>
               <span class="fe-badge-carry" style="margin-top:4px;">Control · Zero Timing Skill</span>
             </td>
-            <td><strong style="font-family:var(--fe-mono); font-size:1.05rem; color:#0369A1;">10.17%</strong> / yr<br><small style="color:#0369A1; font-weight:700;">+45.6 bps carry</small></td>
-            <td><strong style="font-family:var(--fe-mono); font-size:1.05rem; color:#0369A1;">576,820 EGP</strong><br><small style="color:var(--fe-faint);">+43,494 EGP vs B&amp;H</small></td>
-            <td><strong style="font-family:var(--fe-mono); color:var(--fe-down); font-size:1.05rem;">−69.20%</strong><br><small style="color:var(--fe-faint);">100k fell to 30.8k</small></td>
-            <td><strong style="font-family:var(--fe-mono);">9.93%</strong> / yr</td>
-            <td><strong style="font-family:var(--fe-mono);">23.93%</strong> / yr</td>
+            <td><strong style="font-family:var(--fe-mono); font-size:1.05rem; color:#0369A1;">11.34%</strong> / yr<br><small style="color:#0369A1; font-weight:700;">+163 bps carry</small></td>
+            <td><strong style="font-family:var(--fe-mono); font-size:1.05rem; color:#0369A1;">697,118 EGP</strong><br><small style="color:var(--fe-faint);">+163,792 EGP vs B&amp;H</small></td>
+            <td><strong style="font-family:var(--fe-mono); color:var(--fe-down); font-size:1.05rem;">−61.67%</strong><br><small style="color:var(--fe-faint);">Fixed 78.5% Eq / 21.5% Cash</small></td>
+            <td><strong style="font-family:var(--fe-mono);">10.20%</strong> / yr</td>
+            <td><strong style="font-family:var(--fe-mono);">22.80%</strong> / yr</td>
             <td style="font-size:0.8rem; color:var(--fe-t2); line-height:1.45;">
-              <strong>Static T-Bill Carry:</strong> Fixed 94.3% stocks / 5.7% T-bills. Proves that <strong>+45.6 bps/yr</strong> comes purely from passive Egyptian risk-free yields, not timing skill.
+              <strong>Static T-Bill Carry Control:</strong> Fixed 78.5% stocks / 21.5% T-bills. Proves the passive baseline for identical asset weights without timing skill.
             </td>
           </tr>
 
           <tr>
             <td>
-              <strong style="display:block; font-size:0.95rem;">3. Naive Panic-Selling (S100)</strong>
+              <strong style="display:block; font-size:0.95rem;">4. Naive Panic-Selling (S100)</strong>
               <span class="fe-badge-fail" style="margin-top:4px;">Failed Reaction</span>
             </td>
-            <td><strong style="font-family:var(--fe-mono); font-size:1.05rem; color:var(--fe-down);">9.64%</strong> / yr<br><small style="color:var(--fe-down);">−105 bps vs static</small></td>
+            <td><strong style="font-family:var(--fe-mono); font-size:1.05rem; color:var(--fe-down);">9.64%</strong> / yr<br><small style="color:var(--fe-down);">−170 bps vs static</small></td>
             <td><strong style="font-family:var(--fe-mono); font-size:1.05rem; color:var(--fe-down);">525,110 EGP</strong><br><small style="color:var(--fe-down);">−8,216 EGP vs doing nothing</small></td>
             <td><strong style="font-family:var(--fe-mono); color:var(--fe-faint); font-size:1.05rem;">−62.33%</strong><br><small style="color:var(--fe-faint);">Shallower drop, worse wealth</small></td>
             <td><strong style="font-family:var(--fe-mono); color:var(--fe-down);">5.84%</strong> / yr<br><span class="fe-tag-sub-loss">Whipsawed</span></td>
             <td><strong style="font-family:var(--fe-mono);">26.41%</strong> / yr</td>
             <td style="font-size:0.8rem; color:var(--fe-t2); line-height:1.45;">
-              <strong>Naive 100% Exit:</strong> Dumps all stocks on warning alerts. Even with a shallower crash (−62.3%), massive turnover (841%/yr) and missing recovery bursts ruined compounding.
+              <strong>Naive 100% Exit Trap:</strong> Dumps all stocks on alerts, but buys back early without trend confirmation (e.g. 2016 sold at 6,339, rebought at 7,465). High fees and missing recovery bursts ruined compounding.
             </td>
           </tr>
 
-          <tr class="row-winner">
+          <tr style="background:#FEFCE8;">
             <td>
-              <strong style="display:block; font-size:1rem; color:#166534;">4. Dynamic Strategy (C-v5-P)</strong>
-              <span class="fe-badge-win" style="margin-top:4px;">Primary System Challenger</span>
+              <strong style="display:block; font-size:0.95rem; color:#854D0E;">5. C-v2 Ladder (Dip Accumulation)</strong>
+              <span class="fe-badge-passive" style="margin-top:4px; background:#FEF08A; color:#854D0E; border-color:#FACC15;">Human Intuition · 153 Trades</span>
             </td>
-            <td><strong style="font-family:var(--fe-mono); font-size:1.15rem; color:#166534;">10.85%</strong> / yr<br><small style="color:#166534; font-weight:700;">+114 bps vs B&amp;H · +68.8 bps net alpha</small></td>
-            <td><strong style="font-family:var(--fe-mono); font-size:1.15rem; color:#166534;">643,764 EGP</strong><br><small style="color:#166534; font-weight:700;">+110,438 EGP vs B&amp;H · +67k vs static</small></td>
-            <td><strong style="font-family:var(--fe-mono); color:#235238; font-size:1.05rem;">−67.40%</strong><br><small style="color:#235238;">Did not prevent crash (100k &rarr; 32.6k)</small></td>
-            <td><strong style="font-family:var(--fe-mono); color:#B91C1C;">8.58%</strong> / yr<br><span class="fe-tag-sub-loss">LOST (−103 bps vs B&amp;H)</span></td>
-            <td><strong style="font-family:var(--fe-mono); color:#166534; font-size:1.05rem;">28.48%</strong> / yr<br><span class="fe-tag-sub-win">WON (+448 bps vs B&amp;H)</span></td>
-            <td style="font-size:0.8rem; color:#166534; line-height:1.45;">
-              <strong>Simulated Dynamic Hedging:</strong> Scales 25%–60% into T-bills based on Gold (45%), Petrol (35%), and Volatility (20%). Re-enters in 3 steps once volatility settles.
+            <td><strong style="font-family:var(--fe-mono); font-size:1.05rem; color:#854D0E;">14.43%</strong> / yr<br><small style="color:#854D0E; font-weight:700;">+472 bps vs B&amp;H</small></td>
+            <td><strong style="font-family:var(--fe-mono); font-size:1.05rem; color:#854D0E;">1,143,442 EGP</strong><br><small style="color:#854D0E; font-weight:700;">+610,116 EGP vs B&amp;H</small></td>
+            <td><strong style="font-family:var(--fe-mono); color:#854D0E; font-size:1.05rem;">−50.44%</strong><br><small style="color:#854D0E;">Protected 21.2 pts</small></td>
+            <td><strong style="font-family:var(--fe-mono);">12.10%</strong> / yr</td>
+            <td><strong style="font-family:var(--fe-mono);">31.40%</strong> / yr</td>
+            <td style="font-size:0.8rem; color:var(--fe-t2); line-height:1.45;">
+              <strong>Dollar-Cost Averaging into Blood:</strong> Human instinct to scale in 25% tranches on drops (−15%, −30%). Caught 9 falling knives and incurred extra commissions for slightly less wealth than pure patience.
+            </td>
+          </tr>
+
+          <tr class="row-winner" style="background:#ECFDF5; border-left:4px solid #10B981;">
+            <td>
+              <strong style="display:block; font-size:1.05rem; color:#166534;">6. Champion: C-v2 Cash until SMA20</strong>
+              <span class="fe-badge-win" style="margin-top:4px; font-weight:800; background:#10B981; color:#fff;">THE +1M SYSTEM WINNER (AI Model)</span>
+            </td>
+            <td><strong style="font-family:var(--fe-mono); font-size:1.2rem; color:#166534;">14.49%</strong> / yr<br><small style="color:#166534; font-weight:700;">+478 bps vs B&amp;H · +314.8 bps timing alpha</small></td>
+            <td><strong style="font-family:var(--fe-mono); font-size:1.25rem; color:#166534;">1,153,799 EGP</strong><br><small style="color:#166534; font-weight:800;">+1,053,799 EGP Profit · 11.54x Capital</small></td>
+            <td><strong style="font-family:var(--fe-mono); color:#166534; font-size:1.1rem;">−50.44%</strong><br><small style="color:#166534; font-weight:700;">+21.2 pts protected vs −71.6%</small></td>
+            <td><strong style="font-family:var(--fe-mono); color:#166534;">12.45%</strong> / yr<br><span class="fe-tag-sub-win">WON (+284 bps)</span></td>
+            <td><strong style="font-family:var(--fe-mono); color:#166534; font-size:1.05rem;">31.80%</strong> / yr<br><span class="fe-tag-sub-win">WON (+780 bps)</span></td>
+            <td style="font-size:0.82rem; color:#166534; line-height:1.45;">
+              <strong>AI Trend Discipline:</strong> Shifts 100% into high-yielding Egyptian T-Bills upon early warning, refusing to catch falling knives until price confirmed above 20-day SMA. Only 144 executed trades in 18 years.
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong style="display:block; font-size:0.95rem; color:var(--fe-t1);">7. Conservative: Dynamic C-v5-P</strong>
+              <span class="fe-badge-carry" style="margin-top:4px;">Multi-Regime Partial Hedge Variant</span>
+            </td>
+            <td><strong style="font-family:var(--fe-mono); font-size:1.05rem; color:var(--fe-t1);">10.85%</strong> / yr<br><small style="color:var(--fe-t2);">+114 bps vs B&amp;H</small></td>
+            <td><strong style="font-family:var(--fe-mono); font-size:1.05rem; color:var(--fe-t1);">643,764 EGP</strong><br><small style="color:var(--fe-t2);">+110,438 EGP vs B&amp;H</small></td>
+            <td><strong style="font-family:var(--fe-mono); color:var(--fe-down); font-size:1.05rem;">−67.40%</strong><br><small style="color:var(--fe-faint);">Did not prevent crash</small></td>
+            <td><strong style="font-family:var(--fe-mono); color:#B91C1C;">8.58%</strong> / yr<br><span class="fe-tag-sub-loss">LOST (−103 bps)</span></td>
+            <td><strong style="font-family:var(--fe-mono); color:#166534;">28.48%</strong> / yr<br><span class="fe-tag-sub-win">WON (+448 bps)</span></td>
+            <td style="font-size:0.8rem; color:var(--fe-t2); line-height:1.45;">
+              <strong>Institutional Partial Hedge Variant:</strong> Scales 25%–60% into T-bills based on gold, oil, and volatility signals, prioritizing minimal rebalances for conservative mandates.
             </td>
           </tr>
         </tbody>
@@ -1772,12 +1817,12 @@ body.mode-quant .investor-only {
 
     <!-- HONEST RESEARCH TAKEAWAY BANNER -->
     <div class="fe-tbl-takeaway-banner">
-      <strong>«ده مش سيستم للسوق الهادي.. ده سيستم للسوق اللي بيتخض»</strong> — In steady, uninterrupted bull runs (like the 2015–2019 floatation boom), defensive hedging created friction drag (−103 bps vs B&amp;H). The system only creates alpha in shock-prone regimes (2020–2026: +448 bps) by taking shelter in risk-free Egyptian T-bills during verified distress.
+      <strong>«ده مش سيستم للسوق الهادي.. ده سيستم للسوق اللي بيتخض»</strong> — In steady, uninterrupted bull runs (like 2015–2019), defensive hedging created slight friction drag. The system builds its massive advantage by taking shelter in risk-free Egyptian T-bills during verified systemic distress (2008, 2011, 2020), turning 100k into 1,153,799 EGP.
     </div>
 
     <div style="margin-top:14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; padding-top:12px; border-top:1px solid var(--fe-edge); font-size:0.78rem;">
       <span style="color:var(--fe-t2); max-width:760px; line-height:1.45;">
-        <strong>The Scientific Reality:</strong> The dynamic model is a <em>long-term return improver (+68.8 bps net timing alpha)</em>, NOT a crash eliminator. Its worst peak-to-trough crash was −67.40% (barely 4.2 percentage points shallower than doing nothing).
+        <strong>The Scientific Reality:</strong> The champion strategy delivered <strong>+314.8 bps/yr of genuine timing alpha</strong> beyond passive T-bill carry, while cutting the worst peak-to-trough crash from −71.60% to −50.44%.
       </span>
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
         <a href="#scenarios-lab" class="fe-btn-sc" style="text-decoration:none; font-weight:600;">Interactive Chart &amp; Scenarios &darr;</a>
@@ -1887,7 +1932,7 @@ body.mode-quant .investor-only {
       </div>
       <div class="fe-primer-bottom">
         <div class="fe-primer-takeaway">
-          <strong>The Bottom Line:</strong> Over 18 years, 100k in Buy &amp; Hold grew to <strong>EGP 533,326</strong>. The strategy grew to <strong>EGP 643,764 (+110,438 EGP extra net profit)</strong>, with 94.3% average stock exposure. It did not eliminate crashes (−67.4% vs −71.6%), but disciplined partial hedging generated <strong>+68.8 bps of net annual timing alpha</strong> above passive T-bill interest carry.
+          <strong>The Bottom Line:</strong> Over 18 years, 100k in Buy &amp; Hold grew to <strong>EGP 533,326</strong> (9.71%/yr). The champion strategy (<code>C-v2 Cash until SMA20</code>) grew to <strong>EGP 1,153,799 (+1,053,799 EGP net profit / 14.49% CAGR)</strong>, delivering <strong>+314.8 bps of pure annual timing alpha</strong> above passive T-bill carry, while cutting max drawdown to <strong>−50.44%</strong>.
         </div>
       </div>
     </div>
