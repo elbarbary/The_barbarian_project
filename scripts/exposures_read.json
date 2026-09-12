@@ -1,0 +1,68 @@
+{
+ "schemaVersion": 1,
+ "readings": {
+  "ABUK": {
+   "ticker": "ABUK",
+   "exposures": [],
+   "dropped": [],
+   "source": "https://english.mubasher.info/markets/EGX/stocks/ABUK/profile"
+  },
+  "CIRA": {
+   "ticker": "CIRA",
+   "exposures": [],
+   "dropped": [],
+   "source": "https://english.mubasher.info/markets/EGX/stocks/CIRA/profile"
+  },
+  "EAST": {
+   "ticker": "EAST",
+   "exposures": [],
+   "dropped": [],
+   "source": "https://english.mubasher.info/markets/EGX/stocks/EAST/profile"
+  },
+  "ETEL": {
+   "ticker": "ETEL",
+   "exposures": [
+    {
+     "factor": "foreign_demand",
+     "evidence": "It owns subsidiaries across British Islands, Western Europe, Northern Africa, and the Middle East, including TE Infraco Limited, Telecom Egypt - France, TE Investment Holding, and Telecom Egypt Data."
+    }
+   ],
+   "dropped": [],
+   "source": "https://english.mubasher.info/markets/EGX/stocks/ETEL/profile"
+  },
+  "ORAS": {
+   "ticker": "ORAS",
+   "exposures": [
+    {
+     "factor": "foreign_demand",
+     "evidence": "Established in January 2015 and based in Dubai, UAE, Orascom Construction PLC operates in the Capital Goods sector focusing on Construction and Engineering."
+    }
+   ],
+   "dropped": [],
+   "source": "https://english.mubasher.info/markets/EGX/stocks/ORAS/profile"
+  },
+  "PHDC": {
+   "ticker": "PHDC",
+   "exposures": [
+    {
+     "factor": "tourism",
+     "evidence": "Incorporated in 2005, Palm Hills Development Co. operates in integrated residential, commercial, and resort projects across Egypt, including West Cairo, East Cairo, Alexandria, and the North Coast, with a 29 million sqm land bank."
+    }
+   ],
+   "dropped": [],
+   "source": "https://english.mubasher.info/markets/EGX/stocks/PHDC/profile"
+  },
+  "SWDY": {
+   "ticker": "SWDY",
+   "exposures": [],
+   "dropped": [],
+   "source": "https://english.mubasher.info/markets/EGX/stocks/SWDY/profile"
+  },
+  "TMGH": {
+   "ticker": "TMGH",
+   "exposures": [],
+   "dropped": [],
+   "source": "https://english.mubasher.info/markets/EGX/stocks/TMGH/profile"
+  }
+ }
+}

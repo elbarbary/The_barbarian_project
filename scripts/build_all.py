@@ -247,6 +247,10 @@ STEPS = [
     # is not a name, and the site has already shipped a chart of the wrong
     # instrument once.
     ("Rate history", "rate_history.py", True),
+    # What moved outside Egypt, joined to the filings it reaches. Needs the
+    # world history above it and the filed statements below the company
+    # documents, so it runs after both and reads nothing from the network.
+    ("World monitor", "build_world_monitor.py", True),
     # Last, and reporting only. It reads what every step above published and
     # counts what is wrong with it — a market value that is not its own price
     # times its own shares, a directory and a document disagreeing about the
