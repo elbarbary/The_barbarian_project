@@ -891,6 +891,10 @@
     "meaning": "The expansion in annual net profit to EGP 1.79 billion reflects higher operational revenues relative to production costs and financing expenses at the industrial chemicals producer, increasing total retained equity on the balance sheet.",
     "meaning_ar": "يعكس ارتفاع صافي الربح السنوي إلى 1.79 مليار جنيه زيادة الإيرادات التشغيلية مقارنة بتكاليف الإنتاج والأعباء التمويلية لشركة الكيماويات، مما يرفع حجم الأرباح المحتجزة ضمن حقوق الملكية في الميزانية العمومية."
   },
+  "ارباح مطاحن ومخابز الاسكندريه تتراجع 18% خلال العام المالي الماضي": {
+    "meaning": "An 18% decline in annual net profit reflects compressed operating margins driven by higher procurement and production costs relative to regulated output prices.",
+    "meaning_ar": "يعكس تراجع صافي الأرباح السنوية بنسبة 18% انكماش هوامش التشغيل نتيجة ارتفاع تكاليف التوريد والإنتاج مقارنة بأسعار البيع المحددة للسلع المنتجة."
+  },
   "ارباح “الدوليه للمحاصيل” السنويه تتراجع الي 451.7 مليون جنيه": {
     "meaning": "The decline in annual net profit to 451.7 million EGP reflects a contraction in bottom-line earnings after accounting for operating costs, input prices, and financing expenses across the financial year.",
     "meaning_ar": "يعكس تراجع صافي الأرباح السنوية إلى 451.7 مليون جنيه انخفاضاً في الأرباح الصافية المحققة بعد احتساب تكاليف التشغيل وأسعار مدخلات الإنتاج والمصروفات التمويلية خلال العام المالي."
@@ -2631,6 +2635,10 @@
     "meaning": "The protocol establishes an operational partnership between EgyptAir In-Flight Services and Egyptian Aviation Services (EAS) to upgrade and manage transit hotel infrastructure at Cairo International Airport.",
     "meaning_ar": "يحدد البروتوكول شراكة تشغيلية بين شركة مصر للطيران للخدمات الجوية والشركة المصرية لخدمات الطيران (EAS) لتطوير وإدارة البنية التحتية لفندق الترانزيت في مطار القاهرة الدولي."
   },
+  "بريدفاست تطلق خدمه توصيل طلبات المطاعم": {
+    "meaning": "This operational expansion integrates prepared food delivery into the company's existing logistics and dark-store network, placing it in direct competition with specialized food aggregators in the on-demand delivery market.",
+    "meaning_ar": "يدمج هذا التوسع التشغيلي خدمة توصيل الأطعمة الجاهزة ضمن شبكة الخدمات اللوجستية والمتاجر المظلمة القائمة للشركة، مما يضعها في منافسة مباشرة مع منصات التوصيل المتخصصة في سوق الطلب الفوري."
+  },
   "بريطانيا تحذر من تلاعب الذكاء الاصطناعي بسوق الكهرباء": {
     "meaning": "Automated algorithmic trading systems using artificial intelligence in wholesale electricity markets execute high-frequency bidding strategies, which triggers regulatory scrutiny over pricing mechanisms and physical capacity withholding.",
     "meaning_ar": "تعتمد أسواق الكهرباء بالجملة على خوارزميات الذكاء الاصطناعي في تنفيذ استراتيجيات عروض الأسعار وإدارة الإمدادات آلياً، مما يضع آليات التسعير الفوري وتوزيع القدرات التشغيلية تحت طائلة الرقابة والتنظيم."
@@ -2666,6 +2674,10 @@
   "بكين تندد بقانون فرنسي يقمع شركات التجاره الالكترونيه الصينيه": {
     "meaning": "Regulatory measures of this nature introduce non-tariff barriers, additional compliance costs, or import restrictions on cross-border e-commerce platforms, altering operational frameworks and competitive dynamics between domestic and foreign vendors within the target market.",
     "meaning_ar": "تفرض هذه الإجراءات التنظيمية حواجز غير جمركية وتكاليف امتثال إضافية أو قيوداً على منصات التجارة الإلكترونية العابرة للحدود، مما يغير أطر العمل التشغيلية والمنافسة السعرية بين الموردين المحليين والأجانب داخل السوق المستهدف."
+  },
+  "بمشاركه 9 دول.. CFA Egypt تنظم لاول مره “مسابقه البحوث الاقليميه” بالمقر التاريخي للبورصه المصريه": {
+    "meaning": "The Egyptian Exchange hosts the CFA regional research competition with participants from nine countries, which provides an educational platform for regional equity research practices and standardizes analytical methodologies among university teams.",
+    "meaning_ar": "تستضيف البورصة المصرية مسابقة أبحاث معهد المحللين الماليين المعتمدين الإقليمية بمشاركة تسع دول، مما يتيح منصة تعليمية لممارسات بحوث أسهم الشركات وتوحيد منهجيات التحليل المالي بين الفرق الجامعية المشاركة."
   },
   "بمشاركه قيادات مجتمع الاعمال.. انطلاق موتمر \"موريشيوس: المركز المالي الدولي\" بالقاهره": {
     "meaning": "The conference serves as a bilateral platform for cross-border financial structuring, providing Egyptian businesses with operational frameworks for corporate holding structures, cross-border tax treaties, and international investment routing through Mauritius.",
@@ -3311,6 +3323,10 @@
   "حمايه المستهلك: 788 حمله رقابيه تضبط 251 طن سلع مخالفه خلال اغسطس": {
     "meaning": "Regulatory enforcement campaigns conduct market inspections and confiscate non-compliant inventory, directly enforcing legal product standards and circulation controls across wholesale and retail supply chains.",
     "meaning_ar": "تتضمن الحملات التفتيشية مصادرة البضائع غير المطابقة للمواصفات، مما يطبق المعايير الرقابية والاشتراطات القانونية لتداول السلع داخل سلاسل الإمداد والتجارة المحلية."
+  },
+  "حمايه المنافسه يوافق علي 4 طلبات استحواذ": {
+    "meaning": "Regulatory approval from the competition authority clears the legal prerequisite for executing mergers and acquisitions, allowing the transfer of ownership, assets, and operational control between the involved corporate entities.",
+    "meaning_ar": "يمثل حصول الشركات على موافقة جهاز حماية المنافسة استيفاءً للمتطلب القانوني الإلزامي لإتمام صفقات الاستحواذ، مما يتيح نقل ملكية الأصول والحصص والسيطرة التشغيلية بين الكيانات المعنية."
   },
   "حمايه المنافسه يوافق علي استحواذ اندوسويز للتجاره العامه علي 51% من فنار فودز": {
     "meaning": "The regulatory approval permits Indosuez General Trading to acquire a controlling 51% stake in Fanar Foods, consolidating operational and governance control within the food manufacturing business.",
