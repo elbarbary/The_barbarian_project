@@ -475,6 +475,10 @@
     "meaning": "A regulatory trading suspension temporarily halts the execution of all buy and sell orders on the company's shares on the exchange floor. This administrative action freezes secondary market liquidity for the security until specified regulatory inquiries or corporate disclosure requirements are fulfilled.",
     "meaning_ar": "يؤدي قرار الإيقاف الرقابي للتداول إلى تجميد تنفيذ كافة أوامر البيع والشراء على أسهم الشركة مؤقتاً داخل البورصة، مما يوقف سيولة السهم في السوق الثانوي حتى استيفاء متطلبات الإفصاح أو الإجراءات التنظيمية المقررة من الهيئة."
   },
+  "from overcrowded classrooms to ai egypt edtech sector enters new era": {
+    "meaning": "Educational technology companies in Egypt deploy artificial intelligence platforms and digital learning tools to address high student-to-teacher ratios in the domestic education sector.",
+    "meaning_ar": "تعتمد شركات تكنولوجيا التعليم في مصر على منصات الذكاء الاصطناعي وأدوات التعلم الرقمي للتعامل مع الكثافات الطلابية المرتفعة مقارنة بأعداد المعلمين في قطاع التعليم المحلي."
+  },
   "gafi and al habtoor group explore investment opportunities in egypt": {
     "meaning": "Preliminary discussions between GAFI and a multinational conglomerate involve reviewing available state-sponsored projects, regulatory frameworks, and foreign direct investment incentives across target sectors.",
     "meaning_ar": "تتضمن المباحثات التمهيدية بين الهيئة العامة للاستثمار ومجموعة دولية استعراض المشروعات المتاحة، والأطر التنظيمية، وحوافز الاستثمار الأجنبي المباشر في القطاعات المستهدفة."
@@ -486,6 +490,10 @@
   "ifap consolidated profits drop in fiscal year 2025 2026": {
     "meaning": "A decline in consolidated profit reflects lower net earnings across the parent entity and its subsidiaries, resulting from higher operating costs, financing expenses, or changes in revenue during the fiscal period.",
     "meaning_ar": "يعكس تراجع الأرباح المجمعة انخفاض صافي الدخل عبر الشركة الأم والشركات التابعة لها، نتيجة تغيرات في الإيرادات أو ارتفاع تكاليف التشغيل والتمويل خلال السنة المالية."
+  },
+  "iwg egypt urban expansion is driving the next wave of flexible offices": {
+    "meaning": "Urban expansion spreads commercial activity across new geographic nodes, prompting flexible office operators to secure commercial real estate inventory outside traditional central business districts.",
+    "meaning_ar": "يؤدي التوسع العمراني إلى توزيع النشاط التجاري عبر مراكز جغرافية جديدة، مما يدفع مشغلي المكاتب المرنة إلى توفير مساحات إدارية خارج مناطق الأعمال المركزية التقليدية."
   },
   "kima logs profits in fiscal year 2025 2026 audited results": {
     "meaning": "Audited annual financial results reflect that the company generates revenues exceeding its total operating costs, depreciation, and financing expenses over the fiscal year, thereby adding net positive retained earnings to shareholder equity on the balance sheet.",
@@ -638,6 +646,10 @@
   "«العربيه العالميه» لمنتجات الحبوب تستهدف 3 مليارات جنيه مبيعات": {
     "meaning": "Setting a sales target establishes an internal benchmark for annual production volume and distribution capacity within the local grain processing sector.",
     "meaning_ar": "يحدد استهداف حجم مبيعات معين معياراً تشغيلياً لحجم الإنتاج السنوي والقدرة التوزيعية للشركة ضمن قطاع تصنيع الحبوب المحلي."
+  },
+  "«اميل عبد الله» تعتزم اطلاق صندوق عقاري بقيمه مليار جنيه": {
+    "meaning": "The establishment of a real estate investment fund pools capital to acquire income-generating property assets, converting direct real estate holdings into tradable fund units under Egyptian capital market regulations.",
+    "meaning_ar": "يُمثّل تأسيس صندوق استثمار عقاري أداة لتجميع رؤوس الأموال بهدف الاستحواذ على أصول عقارية مدرة للدخل، وتحويل الملكيات العقارية المباشرة إلى وثائق استثمار قابلة للتداول وفقاً للوائح سوق المال المصرية."
   },
   "«انروبيتش» الهنديه تختار مصر بوابه للتصنيع والتوسع في افريقيا": {
     "meaning": "Establishing manufacturing operations in Egypt sets up local production capacity and utilizes Egyptian regional trade agreements for distribution into African markets.",
@@ -3736,6 +3748,10 @@
   "صافي الاصول الاجنبيه للقطاع المصرفي يتجاوز 28.4 مليار دولار خلال يوليو": {
     "meaning": "Net foreign assets represent the total foreign currency assets held by the central bank and commercial banks minus their foreign liabilities. A level above $28.4 billion reflects a net surplus balance sheet position where foreign currency holdings exceed external obligations across the banking system.",
     "meaning_ar": "يمثل صافي الأصول الأجنبية إجمالي الأصول بالعملات الأجنبية لدى البنك المركزي والبنوك التجارية مطروحاً منها الالتزامات الأجنبية المستحقة، ويعكس هذا الرقم مركزاً مالياً موجباً تتجاوز فيه الأصول الأجنبية حجم الخصوم والالتزامات الخارجية للقطاع المصرفي."
+  },
+  "صافي الاصول الاجنبيه للقطاع المصرفي يرتفع %61.5 خلال عام": {
+    "meaning": "An increase in net foreign assets reflects an expansion of foreign currency holdings at the central bank and commercial banks relative to their foreign liabilities, expanding foreign exchange liquidity across the banking system.",
+    "meaning_ar": "يعكس ارتفاع صافي الأصول الأجنبية نمو حيازات البنك المركزي والبنوك التجارية من العملات الأجنبية مقارنة بالتزاماتها الخارجية، مما يوسع حجم السيولة بالنقد الأجنبي داخل القطاع المصرفي."
   },
   "صدمه امدادات الطاقه تهدد اوروبا بشتاء قاس": {
     "meaning": "Disruptions in energy supply restrict available industrial inputs and heating fuels, which raises operational baseline costs across European supply chains and drives utilities to adjust wholesale procurement prices.",
