@@ -110,6 +110,75 @@ export function applyFilter(channel, key) {
   return (channel.companies || []).filter(rule[3]);
 }
 
+/* The corridor the MPC set, with the rate banks actually paid inside it.
+ *
+ * Four of these five numbers are not series and never will be: a policy rate
+ * does not move between decisions, so a line of it is flat and a percentile
+ * of it is meaningless. Drawn as one figure instead — two walls and a marker
+ * — because the relationship IS the fact. "19.433%" alone says nothing; the
+ * same number shown sitting just above a floor of 19.00 says the market is
+ * pricing money at the cheap end of what the committee allows.
+ *
+ * The two dates differ on purpose and both are printed. The walls were set in
+ * February and are still in force; the marker is one day's trading.
+ */
+function corridorFigure(c, ar, t) {
+  if (!c || !c.floor || !c.ceiling) return null;
+  const name = (r) => (ar ? (r.labelAr || r.label) : r.label);
+  const at = finite(c.at) ? c.at : null;
+  const other = [c.main, c.discount].filter(Boolean);
+  return h('div', { className: 'wm-corridor' },
+    h('div', { className: 'wm-corridor-head' },
+      h('strong', null, t('What the committee set', 'ما حددته اللجنة')),
+      h('small', { dir: 'ltr' }, c.floor.asOf)
+    ),
+    h('div', { className: 'wm-corridor-track', 'aria-hidden': 'true' },
+      h('i', { className: 'wm-corridor-band' }),
+      // Filled from the floor up to the rate, not just ticked at it. A tick
+      // alone is a mark a reader has to measure against two ends by eye; a
+      // fill is the distance itself, and "just above the floor" is the whole
+      // thing this figure has to say.
+      at === null ? null : h('i', {
+        className: 'wm-corridor-fill',
+        // Percent, not pixels: the track is fluid and a pixel width computed
+        // against a size nobody measured lands wherever the column happens to
+        // be wide today — and in a pane, where it is read before mount, at 0.
+        style: { inlineSize: `${(at * 100).toFixed(2)}%` },
+      }),
+      at === null ? null : h('i', {
+        className: 'wm-corridor-mark',
+        style: { insetInlineStart: `${(at * 100).toFixed(2)}%` },
+      })
+    ),
+    h('div', { className: 'wm-corridor-ends' },
+      h('span', null, h('strong', { dir: 'ltr' }, c.floor.token),
+        h('small', null, name(c.floor))),
+      h('span', { className: 'wm-corridor-end-hi' },
+        h('strong', { dir: 'ltr' }, c.ceiling.token),
+        h('small', null, name(c.ceiling)))
+    ),
+    !c.paid ? null : h('p', { className: 'wm-corridor-paid' },
+      h('strong', { dir: 'ltr' }, c.paid.token),
+      h('span', null,
+        t(` — what banks actually paid each other, ${c.paid.asOf}`,
+          ` — ما أقرضت به البنوك بعضها فعلاً، ${c.paid.asOf}`))),
+    !other.length ? null : h('div', { className: 'wm-corridor-rest' },
+      other.map((r) => h('span', { key: r.label },
+        h('small', null, name(r)), h('strong', { dir: 'ltr' }, r.token)))),
+    // Said in words, because a reader who takes this for "the rate a company
+    // pays its bank" has read the whole figure wrong.
+    h('p', { className: 'ft-note' },
+      t('The floor is what a bank earns leaving money at the central bank and '
+        + 'the ceiling is what it pays to borrow there, so no bank deals with '
+        + 'another outside them. None of these is the rate a company pays on '
+        + 'its own loan.',
+        'الحد الأدنى هو ما يكسبه البنك من إيداع أمواله لدى البنك المركزي، '
+        + 'والحد الأقصى ما يدفعه للاقتراض منه، فلا يتعامل بنك مع آخر خارجهما. '
+        + 'وليس أي منها السعر الذي تدفعه شركة على قرضها.')),
+    h('p', { className: 'ft-note', dir: 'ltr' }, c.source)
+  );
+}
+
 function moveRow(row, window_, ar, t) {
   const move = (row.moves || {})[window_];
   if (!move) return null;
@@ -371,9 +440,18 @@ export function worldMonitor(component, data, ar) {
       // not feel like a monitor of anything.
       GROUPS.map(([id, en, arabic]) => {
         const rows = (doc.world || []).filter((r) => (r.group || 'world') === id);
-        if (!rows.length) return null;
+        // Egypt keeps its heading when the corridor is all there is. The one
+        // series in that group comes from a vendor that answers 403 from a
+        // datacentre, and the four rates in the figure come from the central
+        // bank's own page — so the day the series is missing is exactly the
+        // day the walls are the only Egyptian numbers on the screen.
+        const figure = id === 'egypt' ? corridorFigure(doc.corridor, ar, t) : null;
+        if (!rows.length && !figure) return null;
         return h('div', { key: id, className: 'wm-group' },
           h('h3', { className: 'wm-group-head' }, t(en, arabic)),
+          // Above the row, not beside it: the walls are what make the one
+          // moving number legible, so a reader meets them first.
+          figure,
           h('div', { className: 'wm-moves' },
             rows.map((row) => moveRow(row, window_, ar, t)).filter(Boolean)));
       })

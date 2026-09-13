@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-13T12:15:54Z",
+ "generated": "2026-09-13T12:49:39Z",
  "basis": "A move is placed against its own two years of same-length moves — a record of what has already happened, never a statement about the next one. Each list of companies is the complete set that filed the figure, in alphabetical order, with the filing beside it. Nothing here says what any of it means for a share price.",
  "basisAr": "تُقاس كل حركة مقابل سنتين من حركات بالطول نفسه — سجل لما حدث بالفعل، وليس قولاً عما سيحدث. وكل قائمة شركات هي المجموعة الكاملة التي أودعت الرقم، بالترتيب الأبجدي، ومعها الإفصاح الذي جاء منه. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
  "windows": [
@@ -17,6 +17,51 @@
    "sessions": 63
   }
  ],
+ "corridor": {
+  "floor": {
+   "label": "Overnight deposit rate",
+   "labelAr": "سعر الإيداع لليلة واحدة",
+   "percent": 19.0,
+   "token": "19.00%",
+   "asOf": "2026-02-15",
+   "carried": false
+  },
+  "ceiling": {
+   "label": "Overnight lending rate",
+   "labelAr": "سعر الإقراض لليلة واحدة",
+   "percent": 20.0,
+   "token": "20.00%",
+   "asOf": "2026-02-15",
+   "carried": false
+  },
+  "main": {
+   "label": "Main operation rate",
+   "labelAr": "سعر العملية الرئيسية",
+   "percent": 19.5,
+   "token": "19.50%",
+   "asOf": "2026-02-15",
+   "carried": false
+  },
+  "discount": {
+   "label": "Discount rate",
+   "labelAr": "سعر الخصم",
+   "percent": 19.5,
+   "token": "19.50%",
+   "asOf": "2026-02-15",
+   "carried": false
+  },
+  "paid": {
+   "label": "Overnight interbank",
+   "labelAr": "سعر الإقراض بين البنوك لليلة واحدة",
+   "percent": 19.433,
+   "token": "19.433%",
+   "asOf": "2026-09-10",
+   "carried": false
+  },
+  "source": "cbe.org.eg monetary policy, effective 2026-02-15",
+  "at": 0.433,
+  "inside": true
+ },
  "world": [
   {
    "id": "EGY_ON",
@@ -466,29 +511,29 @@
    "id": "EGX30",
    "label": "EGX 30",
    "asOf": "2026-09-13",
-   "close": 55776.1,
+   "close": 55664.8,
    "sessions": 203,
    "moves": {
     "week": {
-     "change": -1.59,
+     "change": -1.78,
      "against": {
-      "percentile": 43.4,
+      "percentile": 47.5,
       "observations": 198,
       "typical": 1.87
      }
     },
     "month": {
-     "change": 0.95,
+     "change": 0.75,
      "against": {
-      "percentile": 14.3,
+      "percentile": 9.9,
       "observations": 182,
       "typical": 4.19
      }
     },
     "quarter": {
-     "change": 9.75,
+     "change": 9.54,
      "against": {
-      "percentile": 52.1,
+      "percentile": 51.4,
       "observations": 140,
       "typical": 9.34
      }
@@ -499,29 +544,29 @@
    "id": "EGX70EWI",
    "label": "EGX 70",
    "asOf": "2026-09-13",
-   "close": 21423.5,
+   "close": 21192.7,
    "sessions": 203,
    "moves": {
     "week": {
-     "change": -0.9,
+     "change": -1.97,
      "against": {
-      "percentile": 19.2,
+      "percentile": 43.4,
       "observations": 198,
       "typical": 2.22
      }
     },
     "month": {
-     "change": -0.77,
+     "change": -1.84,
      "against": {
-      "percentile": 5.5,
+      "percentile": 13.7,
       "observations": 182,
       "typical": 5.99
      }
     },
     "quarter": {
-     "change": 42.95,
+     "change": 41.41,
      "against": {
-      "percentile": 90.7,
+      "percentile": 86.4,
       "observations": 140,
       "typical": 20.04
      }
@@ -532,29 +577,29 @@
    "id": "EGX100EWI",
    "label": "EGX 100",
    "asOf": "2026-09-13",
-   "close": 27948.8,
+   "close": 27705.1,
    "sessions": 203,
    "moves": {
     "week": {
-     "change": -0.94,
+     "change": -1.8,
      "against": {
-      "percentile": 23.2,
+      "percentile": 43.4,
       "observations": 198,
       "typical": 2.14
      }
     },
     "month": {
-     "change": 0.18,
+     "change": -0.69,
      "against": {
-      "percentile": 2.2,
+      "percentile": 6.6,
       "observations": 182,
       "typical": 5.42
      }
     },
     "quarter": {
-     "change": 35.57,
+     "change": 34.38,
      "against": {
-      "percentile": 92.9,
+      "percentile": 91.4,
       "observations": 140,
       "typical": 18.22
      }
@@ -4721,7 +4766,7 @@
     {
      "ticker": "CPME",
      "name": "Catalyst Partners Middle East",
-     "sector": "Non-bank financial services",
+     "sector": "Finance",
      "fxResult": 0.256,
      "netIncome": 117.083,
      "shareOfNetIncome": 0.2,

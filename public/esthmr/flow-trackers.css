@@ -1021,3 +1021,67 @@ button.om-holder-row:hover span { color: var(--accent); }
 .wm-group + .wm-group { margin-top: 18px; }
 .wm-group-head { margin: 0 0 6px; font-size: 11px; font-weight: 600;
   letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
+
+/* ── the corridor the MPC set ───────────────────────────────────────────────
+   Two walls and a marker. Four of the five rates here are not series and
+   never will be — a policy rate does not move between decisions — so they are
+   drawn as one figure rather than as four flat lines in the list below. */
+.wm-corridor { margin: 0 0 12px; padding: 12px 12px 10px; border-radius: 12px;
+  background: var(--sunk); box-shadow: inset 0 0 0 1px var(--edgeIn); }
+.wm-corridor-head { display: flex; align-items: baseline; gap: 8px;
+  justify-content: space-between; }
+.wm-corridor-head strong { font-size: 12px; }
+.wm-corridor-head small { font-size: 10px; color: var(--t2);
+  font-family: 'IBM Plex Mono', monospace; }
+
+/* The track is the corridor itself, floor at one end and ceiling at the
+   other. `position: relative` is what the marker's percentage offset is
+   measured against; without it the marker walks to the edge of the screen. */
+.wm-corridor-track { position: relative; height: 10px; margin: 10px 0 6px; }
+.wm-corridor-band { position: absolute; inset: 2px 0; border-radius: 5px;
+  background: var(--sunk); box-shadow: inset 0 0 0 1px var(--thread); }
+/* How far up the corridor the market's own rate sits, drawn from the floor.
+   A tick on its own is a mark the reader has to measure against two ends by
+   eye; the fill IS the distance, and "just above the floor" is the only thing
+   this figure has to say. */
+.wm-corridor-fill { position: absolute; inset-block: 2px;
+  inset-inline-start: 0; border-radius: 5px 0 0 5px;
+  background: color-mix(in srgb, var(--accent) 45%, transparent); }
+[dir="rtl"] .wm-corridor-fill { border-radius: 0 5px 5px 0; }
+/* Centred on its own position rather than starting there, so the marker sits
+   ON the rate instead of just to the right of it — at the floor that is a
+   half-width of error, which is the whole width of the claim. */
+.wm-corridor-mark { position: absolute; top: -2px; width: 3px; height: 14px;
+  border-radius: 2px; background: var(--ink); transform: translateX(-50%); }
+[dir="rtl"] .wm-corridor-mark { transform: translateX(50%); }
+
+.wm-corridor-ends { display: flex; justify-content: space-between; gap: 10px; }
+.wm-corridor-ends span { display: grid; min-width: 0; }
+.wm-corridor-ends .wm-corridor-end-hi { text-align: end; justify-items: end; }
+.wm-corridor-ends strong { font-size: 12.5px;
+  font-family: 'IBM Plex Mono', monospace; }
+.wm-corridor-ends small { font-size: 10px; color: var(--t2); }
+
+.wm-corridor-paid { margin: 8px 0 0; font-size: 12px; color: var(--t2); }
+.wm-corridor-paid strong { font-size: 15px; color: var(--ink);
+  font-family: 'IBM Plex Mono', monospace; }
+.wm-corridor-rest { display: flex; flex-wrap: wrap; gap: 6px 16px;
+  margin-top: 8px; padding-top: 8px;
+  border-top: 1px solid var(--edgeIn); }
+.wm-corridor-rest span { display: flex; align-items: baseline; gap: 6px; }
+.wm-corridor-rest small { font-size: 10.5px; color: var(--t2); }
+.wm-corridor-rest strong { font-size: 12px;
+  font-family: 'IBM Plex Mono', monospace; }
+/* Sized to the figure rather than to the page. At the site's own note size
+   the two explanatory lines were taller than everything they explain — six
+   lines of body text under a track 10px high. */
+.wm-corridor .ft-note { margin: 8px 0 0; font-size: 11px; line-height: 1.55;
+  color: var(--faint); }
+
+/* On a phone the two end labels are the first thing to collide — "Overnight
+   deposit rate" and "Overnight lending rate" are long, and the figure is
+   worthless if they wrap into each other. */
+@media (max-width: 460px) {
+  .wm-corridor-ends { gap: 6px; }
+  .wm-corridor-ends small { font-size: 9.5px; line-height: 1.3; }
+}

@@ -169,3 +169,109 @@ class TheCurrencyChannel(unittest.TestCase):
             # It said "this site keeps no history for the pound" until
             # rate_history.py went and fetched the five pairs.
             self.assertNotIn("keeps no history", today["note"])
+
+def rates_doc(**over):
+    """rates/latest.json as build_rates_api publishes it, egypt block only."""
+    rows = {
+        "EGY_DEPOSIT": {"id": "EGY_DEPOSIT", "label": "Overnight deposit rate",
+                        "label_ar": "الإيداع", "percent": 19.0, "token": "19.00%",
+                        "as_of": "2026-02-15",
+                        "source": "cbe.org.eg monetary policy, effective 2026-02-15"},
+        "EGY_LENDING": {"id": "EGY_LENDING", "label": "Overnight lending rate",
+                        "label_ar": "الإقراض", "percent": 20.0, "token": "20.00%",
+                        "as_of": "2026-02-15"},
+        "EGY_MAIN": {"id": "EGY_MAIN", "label": "Main operation rate",
+                     "label_ar": "الرئيسية", "percent": 19.5, "token": "19.50%",
+                     "as_of": "2026-02-15"},
+        "EGY_DISCOUNT": {"id": "EGY_DISCOUNT", "label": "Discount rate",
+                         "label_ar": "الخصم", "percent": 19.5, "token": "19.50%",
+                         "as_of": "2026-02-15"},
+        "EGY_ON": {"id": "EGY_ON", "label": "Overnight interbank",
+                   "label_ar": "بين البنوك", "percent": 19.433, "token": "19.433%",
+                   "as_of": "2026-09-10"},
+    }
+    for key, value in over.items():
+        if value is None:
+            rows.pop(key, None)
+        else:
+            rows[key] = {**rows[key], **value}
+    return {"egypt": list(rows.values())}
+
+
+class TheCorridor(unittest.TestCase):
+    """The four rates the MPC sets, drawn as walls rather than as lines.
+
+    A policy rate does not move between decisions, so a series of one is flat
+    and a percentile of it is meaningless — which is why these do not go
+    through `world()` with everything else. The claim the figure makes is a
+    relationship: where the one rate that moves sits between two that do not.
+    """
+
+    def corridor(self, document):
+        with mock.patch.object(monitor, "RATES_LATEST") as path:
+            path.exists.return_value = True
+            path.read_text.return_value = json.dumps(document)
+            return monitor.corridor()
+
+    def test_the_marker_sits_where_the_rate_does(self):
+        # 19.433 in a corridor of 19.00 to 20.00 is 43.3% of the way up. Drawn
+        # from the numbers rather than passed through as one, because the two
+        # walls move independently of it.
+        out = self.corridor(rates_doc())
+        self.assertAlmostEqual(out["at"], 0.433, places=3)
+        self.assertTrue(out["inside"])
+        self.assertEqual(out["floor"]["token"], "19.00%")
+        self.assertEqual(out["ceiling"]["token"], "20.00%")
+        self.assertEqual(out["paid"]["token"], "19.433%")
+
+    def test_the_marker_is_placed_against_the_walls_that_are_published(self):
+        # Not against a remembered 19–20. When the committee moves the
+        # corridor the same rate is at a different place inside it, and a
+        # figure that did not move with it would be quietly wrong.
+        out = self.corridor(rates_doc(
+            EGY_DEPOSIT={"percent": 18.0, "token": "18.00%"},
+            EGY_LENDING={"percent": 19.5, "token": "19.50%"}))
+        self.assertAlmostEqual(out["at"], (19.433 - 18.0) / 1.5, places=4)
+
+    def test_one_wall_is_not_a_corridor(self):
+        # Drawing a floor alone invites a reader to read the ceiling off where
+        # the marker sits, which is a number nobody published.
+        self.assertIsNone(self.corridor(rates_doc(EGY_LENDING=None)))
+        self.assertIsNone(self.corridor(rates_doc(EGY_DEPOSIT=None)))
+
+    def test_walls_the_wrong_way_round_are_refused(self):
+        # A ceiling below its floor is a parse, not a corridor, and the
+        # marker's own arithmetic would divide by a negative span and place it
+        # off the far end.
+        self.assertIsNone(self.corridor(rates_doc(
+            EGY_LENDING={"percent": 18.0, "token": "18.00%"})))
+
+    def test_the_walls_are_published_without_the_rate_that_moves(self):
+        # The one series in this group comes from a vendor that answers 403
+        # from a datacentre; the walls come from the central bank's own page.
+        # The day the series is missing is exactly the day they are the only
+        # Egyptian numbers on the screen.
+        out = self.corridor(rates_doc(EGY_ON=None))
+        self.assertIsNotNone(out)
+        self.assertIsNone(out["paid"])
+        self.assertNotIn("at", out)
+
+    def test_a_rate_outside_the_walls_is_marked_at_the_end_and_said_so(self):
+        # build_rates_api already refuses a reading more than a point outside,
+        # so this is the last percent of slack rather than a parse. The marker
+        # is clamped to the figure and `inside` carries the fact, because a
+        # marker halfway off the track is a worse way to say it than the
+        # number printed beside it.
+        out = self.corridor(rates_doc(
+            EGY_ON={"percent": 20.4, "token": "20.400%"}))
+        self.assertEqual(out["at"], 1.0)
+        self.assertFalse(out["inside"])
+
+    def test_the_published_document_carries_the_figure(self):
+        doc = Published.doc if getattr(Published, "doc", None) else monitor.build()
+        corridor = doc.get("corridor")
+        self.assertIsNotNone(corridor, "the monitor publishes no corridor")
+        self.assertIn("cbe.org.eg", corridor["source"])
+        # The walls and the marker are dated separately on purpose: the walls
+        # were set in February and are still in force, the marker is one day.
+        self.assertNotEqual(corridor["floor"]["asOf"], corridor["paid"]["asOf"])

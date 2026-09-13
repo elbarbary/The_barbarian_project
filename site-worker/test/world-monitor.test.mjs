@@ -449,3 +449,91 @@ test('the pound is measured the same way as everything else', () => {
   const out = text(screen());
   assert.match(out, /US dollar/);
 });
+
+/* ── the corridor ─────────────────────────────────────────────────────────── */
+
+const style = (node) => String(node?.attrs?.style || '');
+
+test('the corridor is drawn where the Egyptian rows are, above them', () => {
+  const view = screen();
+  const figure = withClass(view, 'wm-corridor')[0];
+  assert.ok(figure, 'the monitor draws no corridor');
+  // Both walls named and priced, so the track is readable without the JSON.
+  assert.match(text(figure), /19\.00%/);
+  assert.match(text(figure), /20\.00%/);
+  assert.match(text(figure), /Overnight deposit rate/);
+  assert.match(text(figure), /Overnight lending rate/);
+  // And what banks actually paid, which is the one number that moves.
+  assert.match(text(figure), /19\.433%/);
+  assert.match(text(figure), /what banks actually paid each other, 2026-09-10/);
+});
+
+test('the marker is placed as a percentage of the track, not in pixels', () => {
+  // The track is fluid. A pixel offset computed against a width nobody
+  // measured lands wherever the column happens to be wide today — and in a
+  // browser pane, where it is measured before mount, at zero.
+  const mark = withClass(screen(), 'wm-corridor-mark')[0];
+  assert.ok(mark, 'no marker on the track');
+  assert.match(style(mark), /inset-inline-start:\s*43\.30%/,
+    `the marker sits at "${style(mark)}" rather than 43.3% of the way up`);
+});
+
+test('the fill runs from the floor to the rate, not just a tick at it', () => {
+  // A tick alone is a mark a reader has to measure against two ends by eye.
+  // The fill is the distance itself — which is the whole claim: the market is
+  // paying near the cheap end of what the committee allows.
+  const fill = withClass(screen(), 'wm-corridor-fill')[0];
+  assert.ok(fill, 'the corridor is drawn as an empty track');
+  assert.match(style(fill), /inline-size:\s*43\.30%/,
+    `the fill reaches "${style(fill)}" rather than 43.3% of the corridor`);
+});
+
+test('the figure says these are not the rate a company pays', () => {
+  // A reader who takes the corridor for what their own loan costs has read
+  // the whole thing wrong, and it is four numbers with no sentence otherwise.
+  const figure = withClass(screen(), 'wm-corridor')[0];
+  assert.match(text(figure), /None of these is the rate a company pays/);
+  // And why the two walls bind at all, which is the only thing that makes a
+  // marker between them mean anything.
+  assert.match(text(figure), /what a bank earns leaving money at the central bank/);
+  assert.match(text(figure), /what it pays to borrow there/);
+  assert.match(text(figure), /cbe\.org\.eg/);
+});
+
+test('the corridor stands on its own when the series behind it is missing', () => {
+  // Investing.com answers 403 from a datacentre, so the one Egyptian series
+  // can go absent while the central bank's own four rates are fine. That is
+  // exactly the day the walls are the only Egyptian numbers on the screen,
+  // and the group used to disappear with the row.
+  const without = { ...published, world: (published.world || []).filter((r) => r.group !== 'egypt') };
+  const view = screen({}, 'en', without);
+  assert.ok(withClass(view, 'wm-corridor').length, 'the corridor went with the row');
+  assert.match(text(view), /The price of money in Egypt/);
+});
+
+test('no corridor published draws no figure rather than an empty one', () => {
+  const view = screen({}, 'en', { ...published, corridor: null });
+  assert.equal(withClass(view, 'wm-corridor').length, 0);
+  // The Egyptian series is still a row like any other.
+  assert.match(text(view), /Overnight interbank/);
+});
+
+test('one wall on its own is not drawn as a corridor', () => {
+  // The builder refuses this, and the screen refuses it again. A floor drawn
+  // alone invites a reader to read the ceiling off where the marker sits,
+  // which is a number nobody published — and the marker's own offset is a
+  // fraction of a span that does not exist.
+  const half = { ...published, corridor: { ...published.corridor, ceiling: null } };
+  assert.equal(withClass(screen({}, 'en', half), 'wm-corridor').length, 0);
+  const other = { ...published, corridor: { ...published.corridor, floor: null } };
+  assert.equal(withClass(screen({}, 'en', other), 'wm-corridor').length, 0);
+});
+
+test('the corridor reads in Arabic', () => {
+  const figure = withClass(screen({}, 'ar'), 'wm-corridor')[0];
+  assert.ok(figure, 'no corridor in Arabic');
+  assert.match(text(figure), /ما حددته اللجنة/);
+  // The figures stay in Latin digits and LTR, like every other number here.
+  assert.match(text(figure), /19\.00%/);
+  assert.doesNotMatch(text(figure), /What the committee set/);
+});

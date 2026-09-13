@@ -102,6 +102,79 @@ def series_moves(sessions: list[dict]) -> dict:
     return out
 
 
+# The four rates the MPC sets, as they are published in rates/latest.json.
+#
+# Keyed by the id build_rates_api gives them rather than by label, because a
+# label is display text somebody will reword and an id is a join.
+CORRIDOR_IDS = {"floor": "EGY_DEPOSIT", "ceiling": "EGY_LENDING",
+                "main": "EGY_MAIN", "discount": "EGY_DISCOUNT",
+                "paid": "EGY_ON"}
+
+
+def corridor() -> dict | None:
+    """Where the market's own rate sits between the walls the committee set.
+
+    The monitor draws series, and four of these five are not series: a policy
+    rate does not move between decisions, so a line of it is a flat line and a
+    percentile of it is meaningless. They are published here as one figure
+    instead — a floor, a ceiling, and the one number that moves shown at its
+    place between them.
+
+    The reason it belongs on this screen at all is that every other row is
+    somewhere else. A reader looking at copper and the S&P to decide about an
+    Egyptian company needs to know what money costs here, because that is the
+    rate every listed company's borrowings are priced off and the return a
+    saver gets for not owning any of them.
+    """
+    if not RATES_LATEST.exists():
+        return None
+    try:
+        document = json.loads(RATES_LATEST.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    by_id = {row.get("id"): row for row in document.get("egypt") or []}
+    have = {name: by_id.get(code) for name, code in CORRIDOR_IDS.items()}
+    floor, ceiling = have["floor"], have["ceiling"]
+    # A floor without a ceiling is not a corridor, and drawing one wall would
+    # invite a reader to read the other from where the marker sits.
+    if not floor or not ceiling:
+        return None
+    if not isinstance(floor.get("percent"), (int, float)):
+        return None
+    if not isinstance(ceiling.get("percent"), (int, float)):
+        return None
+    if ceiling["percent"] <= floor["percent"]:
+        return None
+
+    def rate(row):
+        if not row or not isinstance(row.get("percent"), (int, float)):
+            return None
+        return {"label": row.get("label"), "labelAr": row.get("label_ar"),
+                "percent": row["percent"], "token": row.get("token"),
+                "asOf": row.get("as_of"),
+                "carried": bool(row.get("carried"))}
+
+    paid = rate(have["paid"])
+    out = {
+        "floor": rate(floor),
+        "ceiling": rate(ceiling),
+        "main": rate(have["main"]),
+        "discount": rate(have["discount"]),
+        "paid": paid,
+        "source": floor.get("source"),
+    }
+    if paid:
+        # Where the marker goes, 0 at the floor and 1 at the ceiling. Clamped,
+        # because build_rates_api already refuses a reading more than a point
+        # outside the walls and a marker half off the figure would be a worse
+        # way to say the same thing than the number beside it.
+        span = ceiling["percent"] - floor["percent"]
+        raw = (paid["percent"] - floor["percent"]) / span
+        out["at"] = round(min(1.0, max(0.0, raw)), 4)
+        out["inside"] = 0.0 <= raw <= 1.0
+    return out
+
+
 def world() -> list[dict]:
     if not RATES_HISTORY.exists():
         return []
@@ -355,6 +428,7 @@ def build() -> dict:
                    "الكاملة التي أودعت الرقم، بالترتيب الأبجدي، ومعها الإفصاح "
                    "الذي جاء منه. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
         "windows": [{"id": name, "sessions": span} for name, span in WINDOWS],
+        "corridor": corridor(),
         "world": world(),
         "exchange": exchange(),
         "channels": [
