@@ -1472,8 +1472,8 @@
     "meaning_ar": "تعقد البورصة المصرية جلسات مع شركات ناشئة خاصة لاستعراض متطلبات القيد، وآليات طرح الأسهم، وقنوات سوق المشروعات الصغيرة والمتوسطة كبدائل لتمويل رؤوس الأموال عبر حقوق الملكية والديون غير المصرفية."
   },
   "البورصه المصريه تحاول استعاده المسار الصاعد رغم التوترات الجيوسياسيه": {
-    "meaning": "Trading activity reflects an inflow of purchasing liquidity confronting heightened geopolitical risk premiums, where market participants price localized equity valuations against broader regional uncertainty.",
-    "meaning_ar": "تعكس حركة التداول تدفقات سيولة شرائية تواجه علاوات مخاطر جيوسياسية مرتفعة، حيث يجري تسعير القيم السوقية للأسهم المحلية في مواجهة حالة عدم اليقين الإقليمية."
+    "meaning": "Trading sessions reflect an increase in local purchasing volumes countering the downward price pressure typically associated with regional geopolitical risk premiums.",
+    "meaning_ar": "تشهد جلسات التداول ارتفاعاً في أحجام الطلب المحلي يقابل ضغوط البيع الناتجة عن علاوة المخاطر الجيوسياسية الإقليمية."
   },
   "البورصه المصريه تختتم تعاملات الاربعاء علي تباين في الموشرات": {
     "meaning": "Divergence across market indices reflects split trading dynamics, where capital flows into large-cap constituents of the main benchmark while small and mid-cap equities move inversely, or vice versa, based on differing liquidity allocation across segments.",
@@ -3830,8 +3830,8 @@
     "meaning_ar": "تتسبب الظروف المناخية المصاحبة لظاهرة 'إل نينيو' في تقلبات تؤثر على حجم المحاصيل الزراعية في مناطق إنتاج الشاي الرئيسية مثل نيلجيري بالهند، مما ينعكس مباشرة على معروض المواد الخام في أسواق السلع العالمية."
   },
   "عاجل.. 5.3 جنيه القيمه العادله لسهم بنك القاهره": {
-    "meaning": "Financial valuation models estimate the underlying net equity worth per share of Banque du Caire at 5.3 Egyptian pounds based on its assets, balance sheet metrics, and operational earnings.",
-    "meaning_ar": "تحدد نماذج التقييم المالي صافي حقوق الملكية لكل سهم في بنك القاهرة بمستوى 5.3 جنيه مصري بناءً على أصوله وبيانات ميزانيته العمومية وأرباحه التشغيلية."
+    "meaning": "An equity valuation assesses Banque du Caire's underlying assets, loan book, and capital structure to establish a baseline per-share financial benchmark.",
+    "meaning_ar": "يحدد التقييم المالي معياراً محاسبياً لقيمة السهم بناءً على فحص الأصول الرأسمالية والمحفظة الائتمانية وهيكل حقوق الملكية الخاص ببنك القاهرة."
   },
   "عاجل.. اعتماد منهجيه دراسه القيمه العادله لبنك القاهره": {
     "meaning": "The approval of the independent financial valuation methodology establishes the formal valuation parameters and regulatory baseline required for offering shares or executing corporate capital transactions under the oversight of the Financial Regulatory Authority.",
@@ -4282,8 +4282,8 @@
     "meaning_ar": "تحدد الدبلوماسية الاقتصادية والتعاون المؤسسي مع الدول الأفريقية السياسات التجارية الإقليمية والاتفاقيات الثنائية ومشاريع الربط اللوجستي للشركات المصرية العاملة في الأسواق القارية."
   },
   "مدبولي: التوسع في اتاحه خدمات علاج الاورام بالمحافظات لتخفيف الاعباء عن المرضي وذويهم": {
-    "meaning": "Geographic expansion of oncology centers decentralizes specialized public healthcare delivery and broadens the operational footprint of government medical infrastructure across provincial governorates.",
-    "meaning_ar": "يؤدي التوسع الجغرافي لمراكز علاج الأورام إلى تطبيق اللامركزية في تقديم الرعاية الصحية المتخصصة، وتوسيع النطاق التشغيلي للبنية التحتية الطبية الحكومية عبر المحافظات."
+    "meaning": "The expansion decentralizes oncology infrastructure across governorates, distributing public healthcare procurement budgets and clinical operational capacity across regional medical centers rather than central facilities.",
+    "meaning_ar": "تؤدي هذه التوسعات إلى إلغاء مركزية البنية التحتية لعلاج الأورام بالمحافظات، وتوزيع مخصصات الشراء الطبي الحكومي والطاقة التشغيلية الإكلينيكية على المراكز الإقليمية بدلاً من المرافق المركزية."
   },
   "مدبولي: الحفاظ علي الاصول التي انفقت عليها الدوله استثمارات ضخمه لا يقل اهميه عن تنفيذها": {
     "meaning": "This operational focus prioritizes asset management frameworks and maintenance allocations to mitigate physical asset depreciation across public capital projects. It directs operational workflows and potential management partnerships toward facility maintenance and life-cycle preservation rather than initiating new capital expenditures.",
@@ -4530,8 +4530,8 @@
     "meaning_ar": "يرتبط التنسيق الدبلوماسي الثنائي بشأن الاستقرار الإقليمي باستمرارية تشغيل سلاسل الإمداد، وممرات الشحن والملاحة البحرية، وتدفقات التبادل التجاري بين مصر وتركيا."
   },
   "مصر وروسيا تبحثان توسيع التعاون في الطاقه والتجاره والاستثمار": {
-    "meaning": "Bilateral government discussions on energy, trade, and investment establish cross-border framework agreements that structure trade flows, import-export settlement mechanisms, and joint development terms for industrial and infrastructure assets.",
-    "meaning_ar": "تضع المباحثات الثنائية بين الحكومات في مجالات الطاقة والتجارة والاستثمار اتفاقيات إطارية تنظم تدفقات التبادل التجاري، وآليات تسوية الواردات والصادرات، وشروط التطوير المشترك للأصول الصناعية ومشاريع البنية التحتية."
+    "meaning": "Bilateral discussions focus on regulatory frameworks, trade settlement mechanisms, and joint ventures in industrial zones and energy infrastructure.",
+    "meaning_ar": "تركز المباحثات الثنائية على الأطر التنظيمية، وآليات التسوية التجارية، والمشروعات المشتركة في البنية التحتية للطاقة والمناطق الصناعية."
   },
   "مصر وعمان تبحثان تعزيز التجاره عبر خط بحري مباشر": {
     "meaning": "Direct maritime shipping routes connect Egyptian and Omani ports via point-to-point freight transport, eliminating intermediate transshipment hubs in bilateral maritime logistics.",
