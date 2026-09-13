@@ -417,7 +417,7 @@ export function shareLines(doc, { ar, t, focus, onPick, months = LINE_MONTHS }) 
 
   const ticks = [0, 0.5, 1].map((f) => f * top);
 
-  return h('svg', {
+  return h('div', { className: 'sl-lines-wrap' }, h('svg', {
     className: 'sl-lines', viewBox: `0 0 ${view.w} ${view.h}`,
     role: 'img', preserveAspectRatio: 'xMidYMid meet',
     'aria-label': t(
@@ -452,10 +452,10 @@ export function shareLines(doc, { ar, t, focus, onPick, months = LINE_MONTHS }) 
 
     ends.map((e) => h('text', {
       key: e.sector, x: view.w - pad.r + 6, y: e.at + 3,
-      'font-size': 9, className: 'sl-line-label',
+      'font-size': 10, className: 'sl-line-label',
       fill: !focus || focus === e.sector ? lineColour(e.i, drawn.length) : 'var(--faint)',
       'font-weight': focus === e.sector ? 700 : 500,
       onClick: () => onPick && onPick(e.sector),
     }, e.sector.length > 26 ? `${e.sector.slice(0, 25)}…` : e.sector))
-  );
+  ));
 }
