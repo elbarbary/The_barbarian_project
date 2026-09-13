@@ -775,6 +775,10 @@
     "meaning": "A direct capital deployment of $2 billion to establish a dedicated tire manufacturing complex introduces large-scale domestic production capacity to Egypt's automotive supply chain.",
     "meaning_ar": "يُمثل ضخ استثمارات رأسمالية بقيمة ملياري دولار لإنشاء مجمع صناعي لإطارات السيارات إضافة لطاقات إنتاجية محلية واسعة النطاق داخل سلاسل إمداد قطاع السيارات في مصر."
   },
+  "«مانا فارما» للادويه تخطط لرفع مبيعاتها 20% بنهايه العام الحالي": {
+    "meaning": "Setting a sales volume expansion target involves scaling up pharmaceutical production throughput, widening distribution networks across domestic pharmacies, and increasing inventory turnover.",
+    "meaning_ar": "يتضمن استهداف زيادة حجم المبيعات رفع معدلات الإنتاج الدوائي، وتوسيع شبكات التوزيع في الصيدليات المحلية، وزيادة معدل دوران المخزون."
+  },
   "«مستثمرو العاشر» و«الماليه» تطلقان مبادره لتسويه المستحقات التصديريه ل 5 الاف مصنع": {
     "meaning": "This initiative establishes a framework between the Ministry of Finance and the 10th of Ramadan Investors Association to disburse overdue export subsidy rebates to 5,000 industrial facilities, directly settling government payables and injecting working capital into manufacturing balance sheets.",
     "meaning_ar": "تؤسس هذه المبادرة آلية بين وزارة المالية وجمعية مستثمري العاشر من رمضان لصرف متأخرات أعباء الصادرات لـ 5 آلاف منشأة صناعية، مما يسوي المستحقات الحكومية ويضخ سيولة نقدية مباشرة ضمن رأس المال العامل للشركات المصنعة."
@@ -5484,6 +5488,10 @@
   "وزير الصحه يتفقد المخزون الاستراتيجي من المستلزمات الطبيه": {
     "meaning": "Government inspection of strategic medical reserves tracks supply chain fulfillment, procurement cycles, and operational inventory levels across public healthcare networks.",
     "meaning_ar": "المتابعة الحكومية للمخزون الاستراتيجي للمستلزمات الطبية ترصد مستويات التوريد وجداول الشراء والجاهزية التشغيلية للمخازن ضمن سلاسل إمداد القطاع الصحي."
+  },
+  "وزير الصحه: المجلس الوطني للتعليم منصه لدعم تكامل البحث العلمي والابتكار": {
+    "meaning": "The institutional framework links state academic research directly to industrial applications within the healthcare and pharmaceutical sectors, establishing centralized governance for domestic medical research and development assets.",
+    "meaning_ar": "يربط هذا الإطار المؤسسي بين الأبحاث الأكاديمية الحكومية والتطبيقات الصناعية في قطاعي الرعاية الصحية والأدوية، مما ينشئ حوكمة مركزية لأصول البحث والتطوير الطبي محلياً."
   },
   "وزير الصناعه ومحافظ الجيزه يبحثان تقنين الاوضاع بمنطقتي جرزا وعرب ابوساعد الصناعيتين": {
     "meaning": "Regularising industrial zones integrates informal manufacturing units into the formal economy, providing facilities with legal operating licences, utility connections, and access to regulated industrial infrastructure.",
