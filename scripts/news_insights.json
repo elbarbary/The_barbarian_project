@@ -655,6 +655,10 @@
     "meaning": "This transaction constitutes a capital expenditure (CapEx) of EGP 40 million on equipment, allocating funds to property, plant, and equipment for internal transport machinery that transfers containers between berths and storage yards.",
     "meaning_ar": "يمثل هذا الإجراء إنفاقاً رأسمالياً بقيمة 40 مليون جنيه لشراء أصول ومعدات تشغيلية، تُستخدم في عمليات النقل الداخلي للحاويات بين أرصفة الشحن وساحات التخزين داخل المحطة."
   },
+  "«البورصه السلعيه» تتداول 1000 طن قمح ديورم في ثاني جلسه": {
+    "meaning": "The Egyptian Commodities Exchange (EGYCOMEX) executes spot transactions for durum wheat through an electronic platform, functioning as an organized wholesale distribution channel directly linking state silos and commercial pasta producers.",
+    "meaning_ar": "تنفذ البورصة المصرية للسلع تعاملات فورية على قمح الديورم عبر منصة إلكترونية، لتعمل كقناة تداول جملة منظمة تربط الصوامع الحكومية بشركات إنتاج المكرونة بشكل مباشر."
+  },
   "«التخطيط» تستهدف توسيع الشراكات الاستثماريه مع الامارات عبر 5 قطاعات ذات اولويه": {
     "meaning": "The Ministry of Planning coordinates cross-border capital deployment and joint ventures between Egypt and the UAE across five designated priority sectors.",
     "meaning_ar": "تنسق وزارة التخطيط تدفقات رؤوس الأموال عبر الحدود والمشروعات المشتركة بين مصر والإمارات ضمن خمسة قطاعات محددة ذات أولوية."
@@ -1931,6 +1935,10 @@
     "meaning": "A regulatory suspension temporarily halts a brokerage firm's operational license to execute trade orders on the exchange, freezing its client-facing dealing activities for the duration of the sanction.",
     "meaning_ar": "يؤدي الإيقاف الرقابي إلى تجميد رخصة شركة الوساطة في تنفيذ أوامر التداول بالبورصة بشكل مؤقت، مما يوقف أنشطة التعامل وتنفيذ الصفقات للعملاء طوال مدة الجزاء."
   },
+  "الرقابه الماليه تيسر قواعد مراقبي حسابات الشركات المهنيه في التامين": {
+    "meaning": "The regulatory decision modifies the eligibility and registration criteria for certified accounting and auditing firms operating in the insurance sector, altering the regulatory compliance framework for external assurance providers.",
+    "meaning_ar": "يعدل القرار الرقابي معايير القيد والتأهيل المطبقة على مكاتب وشركات المحاسبة والمراجعة العاملة في قطاع التأمين، مما يعيد ضبط متطلبات الامتثال التنظيمي لجهات التدقيق الخارجي."
+  },
   "الرقابه الماليه وستارت اب ايجيبت تتعاونان لتطوير منصه رقميه لدعم الشركات الناشيه": {
     "meaning": "The Financial Regulatory Authority (FRA) and Startup Egypt establish a shared digital infrastructure that centralizes regulatory compliance, licensing procedures, and operational resources for emerging enterprises.",
     "meaning_ar": "تؤسس الهيئة العامة للرقابة المالية ومؤسسة ستارت أب إيجيبت بنية تحتية رقمية مشتركة لمركزية إجراءات الامتثال التنظيمي والتراخيص والموارد التشغيلية للشركات الناشئة."
@@ -2454,6 +2462,10 @@
   "الين الياباني يصعد لاعلي مستوي في 7 اشهر": {
     "meaning": "The Japanese yen's appreciation raises the cost of importing Japanese goods, components, and machinery for Egyptian businesses and increases the local-currency debt service on yen-denominated financing facilities.",
     "meaning_ar": "يؤدي ارتفاع الين الياباني إلى زيادة تكلفة استيراد السلع والآلات والمكونات اليابانية للشركات المصرية، ورفع قيمة خدمة الديون المقومة بالين بالعملة المحلية."
+  },
+  "الين يسجل اقوي مستوياته منذ فبراير مع عوده المضاربين للشراء": {
+    "meaning": "Capital inflows directed into the Japanese yen driven by speculative trading volume expand market liquidity and raise the currency's exchange rate against major global currencies.",
+    "meaning_ar": "تؤدي التدفقات النقدية الموجهة نحو الين الياباني بفعل تداولات المضاربين إلى زيادة السيولة النقدية ورفع سعر صرف العملة مقابل العملات العالمية الرئيسية."
   },
   "الين يصعد 5% في اسبوع ويقترب من اعلي مستوي في 7 اشهر": {
     "meaning": "A sharp appreciation of the Japanese yen raises the settlement cost of yen-denominated liabilities and imports while unwinding cross-currency carry-trade positions across global financial markets.",
