@@ -122,9 +122,13 @@ def world() -> list[dict]:
         })
     # Grouped by what the thing IS, then alphabetically inside each group. Flat
     # alphabetical put the euro between copper and the FTSE, which reads as a
-    # list of twelve unrelated numbers rather than as three kinds of thing.
-    # Never by size of move: that would be a ranking of what mattered today.
-    order = {"world": 0, "metals": 1, "currencies": 2}
+    # list of unrelated numbers rather than as kinds of thing. Never by size of
+    # move: that would be a ranking of what mattered today.
+    #
+    # Egypt's own rate first and the pound second, because this is a screen for
+    # somebody deciding about Egyptian companies: what money costs here, and
+    # what a pound buys, come before what copper did.
+    order = {"egypt": 0, "currencies": 1, "world": 2, "metals": 3}
     return sorted(rows, key=lambda r: (order.get(r["group"], 9), r["label"] or ""))
 
 

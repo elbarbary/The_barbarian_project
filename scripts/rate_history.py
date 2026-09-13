@@ -108,6 +108,19 @@ INSTRUMENTS = [
     ("GBP", 1749, "currencies", "Pound sterling"),
     ("SAR", 10082, "currencies", "Saudi riyal"),
     ("AED", 9325, "currencies", "UAE dirham"),
+    # The price of money in Egypt, and the row this file said it could not
+    # have. It could not while nothing published a level to check a series
+    # against; harvest_cbe.py has been taking the central bank's own daily
+    # interbank page all along, and build_rates_api.py now publishes the
+    # newest dated reading from it. That is a genuinely different source from
+    # the one below, which is the whole of the test.
+    #
+    # Verified 13 Sep 2026 against the CBE's own 10 September figure:
+    #   Egypt Overnight  40647   19.430  vs the CBE's 19.433   0.0%
+    # The two bond yields that came back from the same search are the reason
+    # the check exists: Egypt 1-Year closed 25.320 and Egypt 10-Year 23.020
+    # against the same 19.433, and both were refused.
+    ("EGY_ON", 40647, "egypt", "Overnight interbank"),
 ]
 
 
@@ -131,6 +144,11 @@ def published() -> dict[str, float]:
     for row in doc.get("currencies") or []:
         if isinstance(row.get("egp"), (int, float)):
             out[str(row.get("label"))] = float(row["egp"])
+    # Egypt's own rate, from the central bank's page rather than from the
+    # source the series below comes from.
+    for row in doc.get("egypt") or []:
+        if isinstance(row.get("percent"), (int, float)):
+            out[str(row.get("label"))] = float(row["percent"])
     return out
 
 

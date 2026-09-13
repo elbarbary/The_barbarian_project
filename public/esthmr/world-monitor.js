@@ -35,9 +35,10 @@ const tone = (v) => (v > 0 ? 'var(--up)' : v < 0 ? 'var(--down)' : 'var(--t2)');
 
 /* What the rows are, in the order a reader meets them. */
 export const GROUPS = [
+  ['egypt', 'The price of money in Egypt', 'سعر المال في مصر'],
+  ['currencies', 'Against the pound', 'مقابل الجنيه'],
   ['world', 'Commodities and indices', 'السلع والمؤشرات'],
   ['metals', 'Metals', 'المعادن'],
-  ['currencies', 'Against the pound', 'مقابل الجنيه'],
 ];
 
 export const WINDOWS = [

@@ -524,6 +524,71 @@ def carry_forward(fresh: list[dict], before: list[dict], what: str) -> list[dict
     return kept
 
 
+
+# The CBE's own daily interbank page, harvested by harvest_cbe.py into
+# data-source/official/cbe. It is here for one reason beyond showing it: the
+# world monitor places every figure against its own two years, and the one
+# Egyptian number that could not be placed was the price of money. A series
+# needs a level from a DIFFERENT source to be checked against, and this is it.
+CBE_CONTEXT = (REPO / "data-source" / "official" / "cbe" / "cbe-context.json")
+
+
+def egypt() -> list[dict]:
+    """Egypt's overnight interbank rate, as the central bank published it.
+
+    The CBE prints a month at a time, day by day, with the days it has not
+    reached yet left empty. The newest dated value is the reading; an empty
+    cell is not a zero and is never treated as one.
+    """
+    try:
+        document = json.loads(CBE_CONTEXT.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    interbank = document.get("interbank") or {}
+    year = interbank.get("year")
+    tenor = next((r for r in interbank.get("rates") or []
+                  if str(r.get("tenor", "")).strip().lower() == "overnight"), None)
+    if not tenor or not year:
+        return []
+    dated = [o for o in tenor.get("observations") or []
+             if isinstance(o.get("value"), (int, float))]
+    if not dated:
+        return []
+    newest = dated[-1]
+    # "10/09" is a day and a month; the year is the page's.
+    try:
+        day, month = (int(part) for part in str(newest["date"]).split("/"))
+        stamp = f"{int(year):04d}-{month:02d}-{day:02d}"
+    except (ValueError, TypeError):
+        return []
+    # Stored as a fraction — 0.19433 is 19.433% — which the collector's own
+    # units block says in as many words.
+    percent = round(float(newest["value"]) * 100, 3)
+    return [{
+        "id": "EGY_ON",
+        "code": "EGY_ON",
+        "label": "Overnight interbank",
+        "label_ar": "سعر الإقراض بين البنوك لليلة واحدة",
+        "percent": percent,
+        "plain": f"Banks lent to each other overnight at {percent:.3f}%.",
+        "plain_ar": f"أقرضت البنوك بعضها لليلة واحدة بسعر {percent:.3f}٪.",
+        "token": f"{percent:.3f}%",
+        "workings": f"{newest['value']} as the central bank publishes it\n"
+                    f"× 100\n= {percent:.3f}%",
+        "workings_ar": f"{percent:.3f}٪ كما تنشره البنك المركزي",
+        "yardstick": "What banks charge each other for money overnight. It is not "
+                     "the rate a company pays its bank, and not the central "
+                     "bank's policy rate — it is the market's own price, which "
+                     "is why it moves daily while the policy rate does not.",
+        "yardstick_ar": "ما تتقاضاه البنوك من بعضها مقابل المال لليلة واحدة. ليس "
+                        "السعر الذي تدفعه شركة لبنكها، ولا سعر السياسة النقدية — "
+                        "بل سعر السوق نفسه، ولذلك يتحرك يومياً بينما لا يتحرك سعر "
+                        "السياسة.",
+        "source": f"cbe.org.eg daily interbank rates, {stamp}",
+        "as_of": stamp,
+    }]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
@@ -548,11 +613,18 @@ def main() -> int:
     metal_rows = metals(usd_egp)
     print(f"   {len(metal_rows)}")
 
+    print("── The price of money in Egypt")
+    egypt_rows = egypt()
+    print(f"   {len(egypt_rows)}"
+          + ("" if egypt_rows else " — no dated CBE reading held"))
+
     # Whatever the hosts would not answer for this run keeps its last published
     # reading rather than disappearing off the screen.
     was = published()
     currency_rows = carry_forward(currency_rows, was.get("currencies") or [], "the pound")
     metal_rows = carry_forward(metal_rows, was.get("metals") or [], "metals")
+
+    egypt_rows = carry_forward(egypt_rows, was.get("egypt") or [], "Egypt's rate")
 
     if not (index_rows or currency_rows or metal_rows or world_rows):
         print("nothing fetched — leaving the published document alone")
@@ -564,10 +636,11 @@ def main() -> int:
         "world": world_rows,
         "currencies": currency_rows,
         "metals": metal_rows,
+        "egypt": egypt_rows,
     }
 
     print(f"── fetched_at {fetched_at}")
-    for row in index_rows + world_rows + currency_rows + metal_rows:
+    for row in index_rows + world_rows + currency_rows + metal_rows + egypt_rows:
         # The stamp beside the sentence, so a --check run shows what the
         # screen will be able to say about each card's age.
         print(f"   {row.get('label'):14} {row.get('as_of') or 'no source stamp':25}  {row['plain']}")
