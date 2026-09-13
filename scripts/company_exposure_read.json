@@ -2312,11 +2312,37 @@
     "inputs"
    ]
   },
+  "EAST": {
+   "ticker": "EAST",
+   "says": [
+    "For Q1 2026, the company faces the rates channel with borrowings it owes of 7.94B EGP, of that repricing within a year being 100.0%.",
+    "The inputs channel reaches it through revenue filed of 8.53B EGP, gross profit filed of 2.87B EGP, and a gross margin of 33.6%.",
+    "The currency channel also affects it, with a currency gain or loss filed of 87.5M EGP against profit filed for the period of 1.25B EGP, making that currency line as a share of the profit 7.0%."
+   ],
+   "dropped": [],
+   "channels": [
+    "rates",
+    "inputs",
+    "currency"
+   ]
+  },
+  "NARE": {
+   "ticker": "NARE",
+   "says": [
+    "The currency channel reached the company in H1 2026, with a filed currency gain or loss of -3.7M EGP against a profit of 53.31M EGP, making that line -6.9% of profit.",
+    "The company filed no figures for rates or inputs in the provided data."
+   ],
+   "dropped": [],
+   "channels": [
+    "currency"
+   ]
+  },
   "NINH": {
    "ticker": "NINH",
    "says": [
-    "The inputs channel reaches this company, which filed revenue of 280.4M EGP, gross profit of 93.57M EGP, and a gross margin of 33.4% for H1 2026.",
-    "The company filed nothing for the rates channel or the currency channel."
+    "For the inputs channel covering H1 2026, the company filed revenue of 280.4M EGP, gross profit of 93.57M EGP, and a gross margin of 33.4%.",
+    "The company filed nothing for the rates channel regarding what it owes.",
+    "The company filed nothing for the currency channel regarding holdings or obligations outside the pound."
    ],
    "dropped": [],
    "channels": [
@@ -2326,8 +2352,8 @@
   "SKPC": {
    "ticker": "SKPC",
    "says": [
-    "For H1 2026, the company filed 2.39B EGP in borrowings with 87.3% repricing within a year and interest cover of 3.48× under rates, alongside revenue filed of 8.53B EGP, gross profit filed of 1.18B EGP, and a gross margin of 13.9% under inputs.",
-    "For currency, it reported a currency gain or loss filed of 25.63M EGP against profit filed for the period of 507.61M EGP, giving that currency line as a share of the profit of 5.0%, but it filed no figures for what it holds or owes in a currency other than the pound."
+    "For H1 2026, the company reported rates figures of 2.39B EGP in borrowings with 87.3% repricing within a year and interest cover of 3.48×, alongside inputs figures showing revenue filed of 8.53B EGP, gross profit filed of 1.18B EGP, and a gross margin of 13.9%.",
+    "Its H1 2026 currency line recorded a currency gain or loss filed of 25.63M EGP, representing 5.0% of the profit filed for the period of 507.61M EGP, while the company filed nothing for what it holds or owes in a currency other than the pound."
    ],
    "dropped": [],
    "channels": [

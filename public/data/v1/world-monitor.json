@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-13T12:49:39Z",
+ "generated": "2026-09-13T12:53:48Z",
  "basis": "A move is placed against its own two years of same-length moves — a record of what has already happened, never a statement about the next one. Each list of companies is the complete set that filed the figure, in alphabetical order, with the filing beside it. Nothing here says what any of it means for a share price.",
  "basisAr": "تُقاس كل حركة مقابل سنتين من حركات بالطول نفسه — سجل لما حدث بالفعل، وليس قولاً عما سيحدث. وكل قائمة شركات هي المجموعة الكاملة التي أودعت الرقم، بالترتيب الأبجدي، ومعها الإفصاح الذي جاء منه. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
  "windows": [
@@ -17,51 +17,6 @@
    "sessions": 63
   }
  ],
- "corridor": {
-  "floor": {
-   "label": "Overnight deposit rate",
-   "labelAr": "سعر الإيداع لليلة واحدة",
-   "percent": 19.0,
-   "token": "19.00%",
-   "asOf": "2026-02-15",
-   "carried": false
-  },
-  "ceiling": {
-   "label": "Overnight lending rate",
-   "labelAr": "سعر الإقراض لليلة واحدة",
-   "percent": 20.0,
-   "token": "20.00%",
-   "asOf": "2026-02-15",
-   "carried": false
-  },
-  "main": {
-   "label": "Main operation rate",
-   "labelAr": "سعر العملية الرئيسية",
-   "percent": 19.5,
-   "token": "19.50%",
-   "asOf": "2026-02-15",
-   "carried": false
-  },
-  "discount": {
-   "label": "Discount rate",
-   "labelAr": "سعر الخصم",
-   "percent": 19.5,
-   "token": "19.50%",
-   "asOf": "2026-02-15",
-   "carried": false
-  },
-  "paid": {
-   "label": "Overnight interbank",
-   "labelAr": "سعر الإقراض بين البنوك لليلة واحدة",
-   "percent": 19.433,
-   "token": "19.433%",
-   "asOf": "2026-09-10",
-   "carried": false
-  },
-  "source": "cbe.org.eg monetary policy, effective 2026-02-15",
-  "at": 0.433,
-  "inside": true
- },
  "world": [
   {
    "id": "EGY_ON",
@@ -4766,7 +4721,7 @@
     {
      "ticker": "CPME",
      "name": "Catalyst Partners Middle East",
-     "sector": "Finance",
+     "sector": "Non-bank financial services",
      "fxResult": 0.256,
      "netIncome": 117.083,
      "shareOfNetIncome": 0.2,
