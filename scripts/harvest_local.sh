@@ -61,7 +61,23 @@ if [ ! -d "$TREE/.git" ]; then
 fi
 
 cd "$TREE" || { say "!! cannot enter $TREE"; exit 1; }
-git fetch --quiet origin main || { say "!! fetch failed"; exit 1; }
+# Retried, because the first attempt of the day is made by a Mac that has
+# just woken up. On Sunday 13 September 2026 — a trading day — the 09:00 run
+# reached `git fetch` before Wi-Fi was up, failed with "Could not resolve host:
+# github.com", and exited without harvesting anything. Nothing else feeds the
+# staleness guard that early, and from 08:00 UTC that guard is what stops the
+# daily build outright: one DNS lookup lost at wake would have cost the whole
+# session's published data.
+#
+# Six tries over about a minute and a half, which is roughly how long the
+# network takes to come up after a lid opens, and still fails loudly after.
+fetched=0
+for attempt in 1 2 3 4 5 6; do
+  if git fetch --quiet origin main; then fetched=1; break; fi
+  say "   fetch attempt $attempt failed — the network may still be coming up"
+  sleep 15
+done
+[ "$fetched" = 1 ] || { say "!! fetch failed after 6 attempts"; exit 1; }
 git reset --hard --quiet origin/main || { say "!! reset failed"; exit 1; }
 
 MONTH="$(date +%Y-%m)"
