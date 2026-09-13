@@ -1851,6 +1851,10 @@
     "meaning": "Regional geopolitical stability directly determines the sovereign risk premium, cross-border trade flows, and foreign direct investment allocations across Middle Eastern capital markets. Geopolitical de-escalation stabilizes operational environments for supply chains, tourism operations, and infrastructure development in adjacent economies.",
     "meaning_ar": "يحدد الاستقرار الجيوسياسي الإقليمي بشكل مباشر علاوة المخاطر السيادية، وحركة التجارة عبر الحدود، وتدفقات الاستثمار الأجنبي المباشر في الأسواق المالية بالشرق الأوسط. تسهم التهدئة الإقليمية في تثبيت البيئة التشغيلية لسلاسل الإمداد وقطاعات السياحة وتطوير البنية التحتية في الاقتصادات المجاورة."
   },
+  "الرييس السيسي: التحولات المتسارعه والتحديات توكد اهميه بناء اقتصادات اكثر قدره علي الصمود": {
+    "meaning": "Building resilient economies involves prioritizing domestic manufacturing, reducing import dependency on critical goods, and maintaining foreign exchange liquidity buffers against external supply disruptions.",
+    "meaning_ar": "يرتكز بناء اقتصادات مرنة على تعزيز التصنيع المحلي، وخفض الاعتماد على استيراد السلع الحيوية، وتوفير هوامش أمان من السيولة بالنقد الأجنبي لمواجهة اضطرابات سلاسل الإمداد الخارجية."
+  },
   "الرييس السيسي: اهميه الارتقاء بالتعاون البناء مع قبرص في المجالات التجاريه والاستثماريه": {
     "meaning": "Bilateral commercial cooperation agreements between Egypt and Cyprus establish institutional frameworks for cross-border trade flows, joint infrastructure coordination, and direct investments between Mediterranean markets.",
     "meaning_ar": "تؤسس اتفاقيات التعاون التجاري الثنائي بين مصر وقبرص أطراً مؤسسية لحركة التبادل التجاري عبر الحدود، وتنسيق مشروعات البنية التحتية المشتركة، والاستثمارات المباشرة بين أسواق منطقة شرق المتوسط."
@@ -3463,6 +3467,10 @@
   "سعر الريال السعودي في مصر اليوم الاثنين 7/9/2026.. استقرار صباحي": {
     "meaning": "Stable morning exchange rates for the Saudi Riyal in the Egyptian banking sector reflect a balance between market liquidity and currency demand for bilateral trade, remittances, and travel operations.",
     "meaning_ar": "يعكس استقرار سعر صرف الريال السعودي في البنوك المصرية توازن السيولة المعروضة مع مستويات الطلب على العملة لتغطية المعاملات التجارية البينية والتحويلات ونفقات السفر."
+  },
+  "سعر الريال السعودي في مصر اليوم الاحد 13/9/2026": {
+    "meaning": "Official and parallel market exchange rates for the Saudi Riyal determine the direct Egyptian Pound clearing costs for bilateral trade, outbound religious tourism logistics, and the conversion value of expat remittances from Saudi Arabia.",
+    "meaning_ar": "تحدد أسعار صرف الريال السعودي مقابل الجنيه المصري تكاليف التسوية المباشرة للتبادل التجاري، والترتيبات اللوجستية لبرامج السياحة الدينية، وقيمة التحويلات المالية للمصريين العاملين في المملكة."
   },
   "سعر الريال السعودي في مصر اليوم الاحد 6/9/2026.. استقرار بالختام": {
     "meaning": "The closing stability of the Saudi Riyal against the Egyptian Pound reflects a balance between foreign currency supply and demand within the banking system, fixing daily settlement rates for bilateral trade invoices, remittance conversions, and religious travel operational costs.",
