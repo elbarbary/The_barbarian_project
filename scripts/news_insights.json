@@ -1995,6 +1995,10 @@
     "meaning": "Sector rotation reallocates trading capital across different industry groups, maintaining aggregate market turnover and driving upward movement in the benchmark EGX30 index.",
     "meaning_ar": "تعيد عمليات التدوير القطاعي توزيع السيولة النقدية بين مختلف القطاعات، مما يحافظ على إجمالي قيم التداول في السوق ويدفع مؤشر EGX30 الرئيسي نحو مستويات أعلى."
   },
+  "الشركات الالمانيه تزيد استثماراتها في الصين مع تراجع حاد في استثماراتها بامريكا": {
+    "meaning": "This shift represents a geographical reallocation of corporate capital expenditure, where German multinational firms concentrate asset deployment and direct foreign investment in the Chinese market while reducing capital allocations to US operations.",
+    "meaning_ar": "يمثل هذا التحول إعادة توزيع جغرافي للإنفاق الرأسمالي للشركات، حيث تركز الشركات الألمانية متعددة الجنسيات أصولها واستثماراتها الأجنبية المباشرة في السوق الصينية مقابل تقليص المخصصات الرأسمالية لعملياتها في الولايات المتحدة."
+  },
   "الشركات السعوديه تتجاوز نظيرتها العالميه في تبني الرقمنه لتطوير التجاره": {
     "meaning": "Higher enterprise adoption rates of digital platforms automate trade settlement, inventory tracking, and supply chain management at a faster pace than international baseline averages.",
     "meaning_ar": "يؤدي ارتفاع معدلات تبني الشركات للمنصات الرقمية إلى أتمتة عمليات التسوية التجارية وتتبع المخزون وإدارة سلاسل الإمداد بوتيرة أسرع من المتوسطات العالمية المرجعية."
@@ -3107,6 +3111,10 @@
   "جدوي للتنميه الصناعيه تتحول للخساره خلال النصف الاول من 2026": {
     "meaning": "A shift to a net loss occurs when total operational and financing expenses exceed generated revenues during the specified reporting period, which directly impacts the company's accumulated retained earnings on the balance sheet.",
     "meaning_ar": "يحدث التحول إلى صافي خسارة عندما تتجاوز التكاليف التشغيلية والتمويلية الإجمالية الإيرادات المحققة خلال الفترة المالية المحددة، مما يؤثر مباشرة على رصيد الأرباح المرحلة في الميزانية العمومية للشركة."
+  },
+  "جدوي للتنميه تقلص نسبه مساهمتها بيونيباك": {
+    "meaning": "A reduction in equity stake constitutes a partial divestment that alters the company's capital ownership structure, redistributing voting rights and financial exposure between the parent entity and the investee.",
+    "meaning_ar": "يُعد تخفيض نسبة المساهمة تخارجاً جزئياً يُغيّر هيكل ملكية رأس المال، ويعيد توزيع حقوق التصويت وحجم التعرض المالي بين الشركة الأم والشركة التابعة."
   },
   "جمعيه رجال الاعمال تفتتح منتدي الاعمال المصري الموريشي وتبحث فرص تعزيز الاستثمار": {
     "meaning": "Bilateral business forums serve as institutional platforms for direct cross-border corporate networking, information exchange on regulatory frameworks, and identification of joint commercial partnerships between the two countries.",
