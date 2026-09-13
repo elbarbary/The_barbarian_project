@@ -1779,6 +1779,10 @@
     "meaning": "A regulatory suspension temporarily freezes a financial advisory firm's operating license and services, halting its market transactions while it resolves compliance requirements with the Financial Regulatory Authority.",
     "meaning_ar": "يُمثّل قرار الإيقاف تجميداً مؤقتاً للترخيص التشغيلي والأنشطة الاستشارية للشركة في السوق لحين استيفاء المتطلبات الرقابية للهيئة العامة للرقابة المالية."
   },
+  "الرقابه الماليه تلزم شركات التمويل الاستهلاكي بالربط الالكتروني مع اي سكور": {
+    "meaning": "This regulatory mandate establishes a direct technical interface between consumer finance companies and the credit bureau (I-Score), automating the exchange of customer indebtedness data and credit histories at the point of origination.",
+    "meaning_ar": "يُلزم هذا القرار الرقابي شركات التمويل الاستهلاكي بإنشاء ربط تقني مباشر مع الشركة المصرية للاستعلام الائتماني (آي سكور)، مما يتيح التبادل الآلي والفوري لبيانات الجدارة الائتمانية ومعدلات مديونية العملاء عند منح التمويل."
+  },
   "الرقابه الماليه تمنح 4 شركات موافقات لمزاوله انشطه غير مصرفيه باستخدام التكنولوجيا الماليه": {
     "meaning": "The regulatory approvals authorize four companies to deploy digital platforms and automated systems for non-banking financial operations, including credit assessment, onboarding, and transaction processing under the Financial Regulatory Authority's fintech framework.",
     "meaning_ar": "تمنح هذه الموافقات الرقابية الشركات الأربع ترخيصاً رسمياً لتشغيل منصات رقمية وأنظمة مؤتمتة لتقديم الخدمات المالية غير المصرفية، بما يشمل التقييم الائتماني والتعاقد وتنفيذ المعاملات وفقاً للأطر التنظيمية للهيئة العامة للرقابة المالية."
@@ -3725,6 +3729,10 @@
     "meaning": "This bilateral agreement pools capital and technical infrastructure across the Egyptian and Saudi aerospace sectors to co-develop satellite manufacturing assets. The arrangement establishes a joint engineering framework that shares research, development, and operational assembly costs between both markets.",
     "meaning_ar": "تجمع هذه الاتفاقية الثنائية بين رؤوس الأموال والبنية التحتية التقنية في قطاعي الفضاء المصري والسعودي لتطوير أصول تصنيع الأقمار الصناعية بشكل مشترك. وتؤسس هذه الشراكة إطاراً هندسياً يوزع تكاليف البحث والتطوير والتجميع التشغيلي بين الجانبين."
   },
+  "شراكه مصريه صينيه لانشاء مصنع للبطاريات باستثمارات 2 مليار جنيه للمرحله الاولي": {
+    "meaning": "This cross-border joint venture establishes a localized battery manufacturing facility financed through a 2 billion EGP initial capital expenditure allocation, transferring production capabilities and technical assets directly into the domestic industrial supply chain.",
+    "meaning_ar": "يمثل هذا المشروع المشترك إنشاء وحدة تصنيع محلي للبطاريات بتمويل عبر إنفاق رأسمالي مبدئي قدره مليارا جنيه، مما ينقل القدرات الإنتاجية والأصول الفنية مباشرة إلى سلاسل التوريد الصناعية المحلية."
+  },
   "شركات الادويه الهنديه تراهن علي مصر كبوابه للتوسع الاقليمي": {
     "meaning": "Foreign pharmaceutical manufacturers establish local production facilities and joint ventures in Egypt to utilize existing free trade agreements for regional distribution across African and Middle Eastern markets.",
     "meaning_ar": "تؤسس شركات الأدوية الأجنبية منشآت تصنيع محلي وشراكات في مصر للاستفادة من اتفاقيات التجارة الحرة القائمة في عمليات التوزيع وإعادة التصدير لأسواق إفريقيا والشرق الأوسط."
@@ -3916,6 +3924,10 @@
   "عاجل.. تضخم اسعار المستهلكين بمدن مصر يتباطا الي 14.5% في اغسطس": {
     "meaning": "A deceleration in urban consumer price inflation to 14.5% reflects a slower pace of price increases across standard consumer baskets, stabilizing wholesale procurement costs and operating expenses across domestic supply chains.",
     "meaning_ar": "يعكس تباطؤ تضخم أسعار المستهلكين في المدن إلى 14.5% تراجع وتيرة الزيادة في أسعار سلة السلع الاستهلاكية، مما يحد من وتيرة تصاعد تكاليف الشراء بالجملة والمصروفات التشغيلية عبر سلاسل الإمداد المحلية."
+  },
+  "عاجل.. توقيع عقد انشاء مصنع لانتاج البطاريات الكهرباييه في مصر باستثمارات تتجاوز 2 مليار جنيه": {
+    "meaning": "The contract establishes local industrial capital expenditure of over EGP 2 billion for domestic battery assembly, which shifts procurement from direct imports to domestic manufacturing within the industrial value chain.",
+    "meaning_ar": "يُمثل العقد إنفاقاً رأسمالياً محلياً يتجاوز ملياري جنيه لإنشاء خطوط تجميع وتصنيع للبطاريات، مما يُحول تدبير هذه المنتجات من الاستيراد المباشر إلى الإنتاج داخل سلاسل الإمداد الصناعية المحلية."
   },
   "عاجل.. هييه ميناء الاسكندريه والقابضه للنقل البحري ترفضان بيع حصتيهما في الاسكندريه لتداول الحاويات": {
     "meaning": "This decision preserves the company's current ownership structure and majority state control, keeping its maritime operational management unchanged and halting any transfer of controlling equity to external parties.",
@@ -4380,6 +4392,10 @@
   "مديرو الثروات يديرون ظهورهم لارتفاع الاسهم الاوروبيه": {
     "meaning": "Wealth managers reallocate capital away from rising European equities into other asset classes or regional markets, adjusting portfolio exposure according to institutional mandates.",
     "meaning_ar": "يُعيد مديرو الثروات توجيه السيولة ورؤوس الأموال بعيداً عن الأسهم الأوروبية الصاعدة نحو فئات أصول أو أسواق أخرى، وذلك لتعديل نسب أوزان المحافظ المالية وفقاً للأطر المؤسسية المعتمدة."
+  },
+  "مدينه مصر تسجل اول حضور لها في الساحل الشمالي": {
+    "meaning": "This marks Madinet Masr's initial geographic diversification outside the Greater Cairo real estate market, establishing an active land development footprint in the North Coast coastal housing segment.",
+    "meaning_ar": "يمثل هذا التوسع أول تنويع جغرافي لمحفظة مشروعات شركة مدينة مصر خارج نطاق القاهرة الكبرى، مدخلاً الشركة فعلياً في شريحة التطوير العقاري الساحلي بالساحل الشمالي."
   },
   "مرسوم للتطوير تعتزم ضخ استثمارات بقيمه 50 مليار جنيه في مشروع central gate غرب القاهره": {
     "meaning": "This capital allocation represents a commitment of EGP 50 billion in capital expenditure toward infrastructure, contracting agreements, and construction works for the Central Gate development in West Cairo.",
@@ -5308,6 +5324,10 @@
   "“اي اف چي هيرميس” تتيح التحقق الرقمي للاجانب عبر جوازات السفر الالكترونيه": {
     "meaning": "EFG Hermes integrates digital biometric passport verification into its onboarding infrastructure, establishing a remote identity authentication mechanism for foreign investors without physical branch verification.",
     "meaning_ar": "تدمج 'إي إف چي هيرميس' تقنية التحقق الرقمي من جوازات السفر البيومترية ضمن بنيتها التحتية لتسجيل العملاء، مما يوفر آلية للتحقق من هوية المستثمرين الأجانب عن بُعد دون الحاجة إلى التواجد الفعلي في الفروع."
+  },
+  "“اي فاينانس” تقترح توزيع 410.6 مليون جنيه علي المساهمين": {
+    "meaning": "The board's cash dividend proposal represents a direct distribution of accumulated retained earnings to equity holders, reducing corporate cash reserves and total balance sheet equity by EGP 410.6 million upon general assembly approval.",
+    "meaning_ar": "يمثل اقتراح توزيع الأرباح النقدية تحويلاً مباشراً لجزء من الأرباح المرحلة إلى المساهمين، مما يترتب عليه خفض السيولة النقدية وحقوق الملكية في الميزانية العمومية بمقدار 410.6 مليون جنيه فور اعتماد الجمعية العامة."
   },
   "“بايونيرز بروبرتيز” تشتري 2.5 مليون سهم خزينه": {
     "meaning": "This transaction reallocates corporate cash reserves to absorb existing shares from the open market, which are then held on the balance sheet as non-voting treasury shares and deducted from total equity.",
