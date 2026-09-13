@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-12T21:34:35Z",
+ "generated": "2026-09-13T06:43:34Z",
  "basis": "A move is placed against its own two years of same-length moves — a record of what has already happened, never a statement about the next one. Each list of companies is the complete set that filed the figure, in alphabetical order, with the filing beside it. Nothing here says what any of it means for a share price.",
  "basisAr": "تُقاس كل حركة مقابل سنتين من حركات بالطول نفسه — سجل لما حدث بالفعل، وليس قولاً عما سيحدث. وكل قائمة شركات هي المجموعة الكاملة التي أودعت الرقم، بالترتيب الأبجدي، ومعها الإفصاح الذي جاء منه. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
  "windows": [
@@ -28,8 +28,8 @@
     "week": {
      "change": -1.8,
      "against": {
-      "percentile": 41.9,
-      "observations": 515,
+      "percentile": 42.0,
+      "observations": 514,
       "typical": 2.12
      }
     },
@@ -37,7 +37,7 @@
      "change": -0.91,
      "against": {
       "percentile": 9.4,
-      "observations": 499,
+      "observations": 498,
       "typical": 4.94
      }
     },
@@ -45,8 +45,8 @@
      "change": 0.92,
      "against": {
       "percentile": 5.0,
-      "observations": 457,
-      "typical": 7.9
+      "observations": 456,
+      "typical": 8.0
      }
     }
    }
@@ -62,23 +62,23 @@
      "change": -1.67,
      "against": {
       "percentile": 76.4,
-      "observations": 501,
+      "observations": 500,
       "typical": 0.91
      }
     },
     "month": {
      "change": -1.69,
      "against": {
-      "percentile": 41.6,
-      "observations": 485,
+      "percentile": 41.5,
+      "observations": 484,
       "typical": 2.11
      }
     },
     "quarter": {
      "change": 2.11,
      "against": {
-      "percentile": 27.5,
-      "observations": 443,
+      "percentile": 27.4,
+      "observations": 442,
       "typical": 4.55
      }
     }
@@ -94,8 +94,8 @@
     "week": {
      "change": -1.84,
      "against": {
-      "percentile": 45.7,
-      "observations": 514,
+      "percentile": 45.6,
+      "observations": 513,
       "typical": 1.95
      }
     },
@@ -103,7 +103,7 @@
      "change": -0.06,
      "against": {
       "percentile": 0.6,
-      "observations": 498,
+      "observations": 497,
       "typical": 4.21
      }
     },
@@ -111,8 +111,8 @@
      "change": 0.4,
      "against": {
       "percentile": 2.9,
-      "observations": 456,
-      "typical": 11.53
+      "observations": 455,
+      "typical": 11.55
      }
     }
    }
@@ -127,8 +127,8 @@
     "week": {
      "change": -0.94,
      "against": {
-      "percentile": 28.6,
-      "observations": 496,
+      "percentile": 28.7,
+      "observations": 495,
       "typical": 1.66
      }
     },
@@ -136,7 +136,7 @@
      "change": -0.96,
      "against": {
       "percentile": 14.0,
-      "observations": 480,
+      "observations": 479,
       "typical": 3.33
      }
     },
@@ -144,8 +144,8 @@
      "change": 2.03,
      "against": {
       "percentile": 13.0,
-      "observations": 438,
-      "typical": 8.06
+      "observations": 437,
+      "typical": 8.05
      }
     }
    }
@@ -161,24 +161,24 @@
      "change": 8.64,
      "against": {
       "percentile": 86.7,
-      "observations": 512,
-      "typical": 3.17
+      "observations": 511,
+      "typical": 3.15
      }
     },
     "month": {
      "change": 21.42,
      "against": {
       "percentile": 90.7,
-      "observations": 496,
-      "typical": 5.47
+      "observations": 495,
+      "typical": 5.46
      }
     },
     "quarter": {
      "change": 30.29,
      "against": {
       "percentile": 85.0,
-      "observations": 454,
-      "typical": 9.24
+      "observations": 453,
+      "typical": 9.27
      }
     }
    }
@@ -193,25 +193,25 @@
     "week": {
      "change": -1.17,
      "against": {
-      "percentile": 50.8,
-      "observations": 496,
+      "percentile": 50.9,
+      "observations": 495,
       "typical": 1.15
      }
     },
     "month": {
      "change": -1.18,
      "against": {
-      "percentile": 25.6,
-      "observations": 480,
-      "typical": 2.47
+      "percentile": 25.7,
+      "observations": 479,
+      "typical": 2.46
      }
     },
     "quarter": {
      "change": 3.55,
      "against": {
       "percentile": 30.4,
-      "observations": 438,
-      "typical": 5.38
+      "observations": 437,
+      "typical": 5.37
      }
     }
    }
@@ -227,23 +227,23 @@
      "change": -2.61,
      "against": {
       "percentile": 40.9,
-      "observations": 514,
-      "typical": 3.44
+      "observations": 513,
+      "typical": 3.45
      }
     },
     "month": {
      "change": 0.0,
      "against": {
       "percentile": 0.2,
-      "observations": 498,
-      "typical": 6.53
+      "observations": 497,
+      "typical": 6.55
      }
     },
     "quarter": {
      "change": -8.14,
      "against": {
-      "percentile": 30.3,
-      "observations": 456,
+      "percentile": 30.1,
+      "observations": 455,
       "typical": 14.9
      }
     }
@@ -3782,37 +3782,37 @@
    "filterAr": "كل شركة يطبع إيضاح العملات الأجنبية في قوائمها رقماً — صافي مركز بعملة أخرى، أو أرباح أو خسائر فروق عملة تم الاعتراف بها",
    "count": 136,
    "today": {
-    "asOf": "2026-09-12",
+    "asOf": "2026-09-13",
     "rates": [
      {
       "code": "USD",
       "label": "US dollar",
       "labelAr": "الدولار الأمريكي",
-      "token": "EGP 51.3511"
+      "token": "EGP 51.3422"
      },
      {
       "code": "EUR",
       "label": "Euro",
       "labelAr": "اليورو",
-      "token": "EGP 59.5708"
+      "token": "EGP 59.5729"
      },
      {
       "code": "GBP",
       "label": "Pound sterling",
       "labelAr": "الجنيه الإسترليني",
-      "token": "EGP 69.4387"
+      "token": "EGP 69.4330"
      },
      {
       "code": "SAR",
       "label": "Saudi riyal",
       "labelAr": "الريال السعودي",
-      "token": "EGP 13.6936"
+      "token": "EGP 13.6912"
      },
      {
       "code": "AED",
       "label": "UAE dirham",
       "labelAr": "الدرهم الإماراتي",
-      "token": "EGP 13.9826"
+      "token": "EGP 13.9802"
      }
     ],
     "note": "The rate on the day this was built. This site keeps no history for the pound, so unlike every other figure here it is not placed against its own past and nothing is claimed about it.",
