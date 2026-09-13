@@ -33,6 +33,13 @@ const filed = (v) => (finite(v) ? `${money(v * 1e6)} EGP` : '—');
 const upper = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 const tone = (v) => (v > 0 ? 'var(--up)' : v < 0 ? 'var(--down)' : 'var(--t2)');
 
+/* What the rows are, in the order a reader meets them. */
+export const GROUPS = [
+  ['world', 'Commodities and indices', 'السلع والمؤشرات'],
+  ['metals', 'Metals', 'المعادن'],
+  ['currencies', 'Against the pound', 'مقابل الجنيه'],
+];
+
 export const WINDOWS = [
   ['week', 'This week', 'هذا الأسبوع'],
   ['month', 'This month', 'هذا الشهر'],
@@ -185,6 +192,34 @@ const CHANNELS = {
  * one is its question and the number of companies that filed an answer to it,
  * which is the part a reader chooses from.
  */
+/* What the outside reaches ONE company through.
+ *
+ * The screen said oil moved unusually, and separately listed 147 companies
+ * with a filed gross margin, and left the reader to join them. The join is the
+ * product. Opening a company here puts all three channels' figures for it in
+ * one place, with a sentence saying which of them actually reach it.
+ *
+ * The sentence is written by a model FROM THOSE FIGURES and may use no others:
+ * every number in it is one of the figures printed underneath it, character
+ * for character, and a sentence using any other number never left the builder.
+ * See build_company_exposure.py — a rounded figure reading as the filed one is
+ * the failure that guard exists for.
+ */
+function exposureCard(card, ar, t) {
+  if (!card) return null;
+  return h('div', { className: 'wm-card' },
+    (card.says || []).map((said, i) => h('p', { key: i, className: 'wm-card-says' }, said)),
+    h('dl', { className: 'wm-card-figures' },
+      Object.entries(card.figures || {}).map(([label, shown]) => [
+        h('dt', { key: `k${label}` }, label),
+        h('dd', { key: `v${label}`, dir: 'ltr' }, shown),
+      ])),
+    h('p', { className: 'wm-card-note' },
+      t('Every number above is one of the figures listed with it, as filed. Nothing here says what any of it means for a share price.',
+        'كل رقم أعلاه هو أحد الأرقام المذكورة معه كما أُودعت. ولا شيء هنا يقول ماذا يعني أي منها لسعر أي سهم.'))
+  );
+}
+
 function channelPanel(channel, state, on, ar, t) {
   const spec = CHANNELS[channel.id];
   if (!spec) return null;
@@ -251,7 +286,19 @@ function channelPanel(channel, state, on, ar, t) {
           : t(`${rows.length} of ${channel.count} — ${rule ? rule[1] : ''}`,
               `${rows.length} من ${channel.count} — ${rule ? rule[2] : ''}`)),
       h('div', { className: 'wm-rows' },
-        rows.length ? rows.map((c) => h('div', { key: c.ticker, className: 'wm-row' },
+        rows.length ? rows.map((c) => h('div', {
+          key: c.ticker,
+          className: `wm-row${state.card === c.ticker ? ' wm-row-open' : ''}`,
+          role: 'button', tabIndex: 0,
+          'aria-expanded': String(state.card === c.ticker),
+          onClick: () => on.card(state.card === c.ticker ? null : c.ticker),
+          onKeyDown: (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              on.card(state.card === c.ticker ? null : c.ticker);
+            }
+          },
+        },
           h('div', { className: 'wm-row-who' },
             h('strong', null, c.ticker),
             h('small', null, c.name || '')
@@ -262,7 +309,10 @@ function channelPanel(channel, state, on, ar, t) {
               h('b', { dir: 'ltr', style: colour ? { color: colour } : null }, value)))),
           h('small', { className: 'wm-row-filed', dir: 'ltr' }, c.period || ''),
           extra(c, t),
-          warn(c, t) && h('small', { className: 'wm-row-warn' }, warn(c, t))
+          warn(c, t) && h('small', { className: 'wm-row-warn' }, warn(c, t)),
+          state.card === c.ticker
+            ? exposureCard((state.cards || {})[c.ticker], ar, t)
+            : null
         )) : h('p', { className: 'om-reg-none' },
           t('No company here matches that.', 'لا شركة مطابقة هنا.'))
       )
@@ -285,6 +335,10 @@ export function worldMonitor(component, data, ar) {
               'سجّل الدخول لقراءة ما فعله العالم وأي الإفصاحات يصل إليها.')
           : t('The world monitor has not arrived yet.', 'لم تصل بيانات المرصد بعد.')));
   }
+
+  // Keyed by ticker so a row can find its own card without a scan.
+  const cards = Object.fromEntries(
+    ((data.companyExposure || {}).companies || []).map((c) => [c.ticker, c]));
 
   const setWindow = (id) => component.setState({ worldWindow: id });
   const search = (id, value) => component.setState({ [`world${id}Search`]: value });
@@ -310,8 +364,18 @@ export function worldMonitor(component, data, ar) {
 
     h('section', { className: 'ft-detail wm-block' },
       h('h2', null, t('Outside Egypt', 'خارج مصر')),
-      h('div', { className: 'wm-moves' },
-        (doc.world || []).map((row) => moveRow(row, window_, ar, t)).filter(Boolean))
+      // Grouped by what the thing is. Flat alphabetical put the euro between
+      // copper and the FTSE, and twelve unrelated numbers read as a list
+      // rather than as three kinds of thing — which is most of why this did
+      // not feel like a monitor of anything.
+      GROUPS.map(([id, en, arabic]) => {
+        const rows = (doc.world || []).filter((r) => (r.group || 'world') === id);
+        if (!rows.length) return null;
+        return h('div', { key: id, className: 'wm-group' },
+          h('h3', { className: 'wm-group-head' }, t(en, arabic)),
+          h('div', { className: 'wm-moves' },
+            rows.map((row) => moveRow(row, window_, ar, t)).filter(Boolean)));
+      })
     ),
 
     h('section', { className: 'ft-detail wm-block' },
@@ -327,10 +391,13 @@ export function worldMonitor(component, data, ar) {
       open: !!st[`world${channel.id}Open`],
       filter: st[`world${channel.id}Filter`],
       query: st[`world${channel.id}Search`],
+      card: st[`world${channel.id}Card`],
+      cards,
     }, {
       toggle: (v) => component.setState({ [`world${channel.id}Open`]: v }),
       filter: (k) => component.setState({ [`world${channel.id}Filter`]: k }),
       search: (v) => search(channel.id, v),
+      card: (ticker) => component.setState({ [`world${channel.id}Card`]: ticker }),
     }, ar, t)),
 
     doc.foreignMoney && h('section', { className: 'ft-detail wm-block' },

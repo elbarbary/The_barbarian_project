@@ -26,19 +26,40 @@ def rates() -> dict:
                       .read_text(encoding="utf-8"))
 
 
+def published_ids(doc) -> set:
+    """Every id rates/latest.json offers a series to join on.
+
+    The currency rows call it `code`, not `id` — a row for the dollar is
+    `{"code": "USD", "label": "US dollar", "egp": 51.34}`. Collecting only
+    `id` is the same joins-to-nothing trap this whole file exists for, one
+    level up: the five pairs were fetched, verified and published, and this
+    guard said they matched no row because it was looking at the wrong key.
+    """
+    out = {row.get("id") for key in ("indices", "world", "metals")
+           for row in doc.get(key) or []}
+    out |= {row.get("code") for row in doc.get("currencies") or []}
+    return out - {None}
+
+
+def published_labels(doc) -> dict:
+    by = {row.get("id"): row.get("label") for key in ("world", "metals")
+          for row in doc.get(key) or []}
+    by.update({row.get("code"): row.get("label")
+               for row in doc.get("currencies") or []})
+    return by
+
+
 class IdsTest(unittest.TestCase):
     def test_every_series_id_names_a_row_the_site_publishes(self):
         doc = rates()
-        known = {row.get("id") for key in ("indices", "world", "metals")
-                 for row in doc.get(key) or []}
+        known = published_ids(doc)
         for our_id, _instrument, _where, label in rh.INSTRUMENTS:
             self.assertIn(our_id, known,
                           f"{label}: no row in rates/latest.json is called {our_id}")
 
     def test_every_series_id_names_the_row_it_claims_to(self):
         doc = rates()
-        label_of = {row.get("id"): row.get("label") for key in ("world", "metals")
-                    for row in doc.get(key) or []}
+        label_of = published_labels(doc)
         for our_id, _instrument, _where, label in rh.INSTRUMENTS:
             self.assertEqual(label_of.get(our_id), label)
 
@@ -47,8 +68,7 @@ class IdsTest(unittest.TestCase):
         if not path.exists():
             self.skipTest("no history committed yet")
         doc = rates()
-        known = {row.get("id") for key in ("indices", "world", "metals")
-                 for row in doc.get(key) or []}
+        known = published_ids(doc)
         history = json.loads(path.read_text(encoding="utf-8"))
         self.assertTrue(history["series"])
         for series in history["series"]:

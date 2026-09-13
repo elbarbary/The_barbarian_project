@@ -165,4 +165,7 @@ class TheCurrencyChannel(unittest.TestCase):
         if today is not None:
             self.assertRegex(today["asOf"], r"^\d{4}-\d{2}-\d{2}$")
             self.assertNotIn("percentile", json.dumps(today))
-            self.assertIn("keeps no history", today["note"])
+            self.assertIn("for reading the positions below against", today["note"])
+            # It said "this site keeps no history for the pound" until
+            # rate_history.py went and fetched the five pairs.
+            self.assertNotIn("keeps no history", today["note"])

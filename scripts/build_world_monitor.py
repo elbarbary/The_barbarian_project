@@ -114,12 +114,18 @@ def world() -> list[dict]:
         rows.append({
             "id": series.get("id"),
             "label": series.get("label"),
+            "group": series.get("group") or "world",
             "source": series.get("source"),
             "asOf": sessions[-1]["date"],
             "close": sessions[-1]["close"],
             "moves": series_moves(sessions),
         })
-    return sorted(rows, key=lambda r: r["label"] or "")
+    # Grouped by what the thing IS, then alphabetically inside each group. Flat
+    # alphabetical put the euro between copper and the FTSE, which reads as a
+    # list of twelve unrelated numbers rather than as three kinds of thing.
+    # Never by size of move: that would be a ranking of what mattered today.
+    order = {"world": 0, "metals": 1, "currencies": 2}
+    return sorted(rows, key=lambda r: (order.get(r["group"], 9), r["label"] or ""))
 
 
 # The market history is one row per session carrying every index, rather than
@@ -268,16 +274,15 @@ CURRENCY_CODES = {
 
 
 def pound_today() -> dict | None:
-    """What the pound was worth on the day this was built — a level, not a move.
+    """What the pound is worth, beside the channel about the pound.
 
-    Every other figure on this screen is placed against its own two years of
-    history. The pound cannot be: rate_history.py keeps daily closes for oil,
-    copper, gold and three stock indices, and none at all for a currency, so
-    there is no distribution here to say whether today's rate is unusual. That
-    is a gap, and the honest way to show it is a level with a date on it and no
-    percentile beside it.
+    This used to carry a paragraph explaining that the pound was the one figure
+    on the screen with no history to be placed against — true when it was
+    written, and the reason rate_history.py now fetches the five pairs. They
+    are measured like every other row above: the dollar's week sits at the 79th
+    percentile of its own two years, where the middle week moves 0.33%.
 
-    It is here at all because the channel is unreadable without it. A company
+    The level stays because the channel is unreadable without it. A company
     that filed a net dollar position of 3,678 million says nothing to a reader
     who does not know what a dollar costs.
     """
@@ -299,12 +304,13 @@ def pound_today() -> dict | None:
     return {
         "asOf": (document.get("fetched_at") or "")[:10],
         "rates": rows,
-        "note": "The rate on the day this was built. This site keeps no history "
-                "for the pound, so unlike every other figure here it is not "
-                "placed against its own past and nothing is claimed about it.",
-        "noteAr": "سعر الصرف يوم إعداد هذه الصفحة. لا يحتفظ هذا الموقع بتاريخ "
-                  "لسعر الجنيه، ولذلك — خلافاً لكل رقم آخر هنا — لا يُقاس مقابل "
-                  "ماضيه ولا يُقال عنه شيء.",
+        "note": "The rate on the day this was built, for reading the positions "
+                "below against. How unusual this week's move in each of these "
+                "was is at the top of the screen, measured the same way as "
+                "everything else there.",
+        "noteAr": "سعر الصرف يوم إعداد هذه الصفحة، لتُقرأ المراكز أدناه في ضوئه. "
+                  "أما مدى استثنائية حركة كل منها هذا الأسبوع فهي أعلى الشاشة، "
+                  "مقيسة بالطريقة نفسها المستعملة لكل ما هناك.",
     }
 
 

@@ -1,0 +1,94 @@
+{
+ "schemaVersion": 1,
+ "readings": {
+  "ABUK": {
+   "ticker": "ABUK",
+   "says": [
+    "For inputs covering H1 2026, the company filed revenue of 23.52B EGP, gross profit of 12.97B EGP, and a gross margin of 55.1%.",
+    "The company filed nothing for rates regarding what it owes and how soon that reprices.",
+    "It also filed nothing for currency regarding what it holds or owes in a currency other than the pound."
+   ],
+   "dropped": [],
+   "channels": [
+    "inputs"
+   ]
+  },
+  "ACGC": {
+   "ticker": "ACGC",
+   "says": [
+    "For 9M 2026 (to 31 Mar), the rates channel reflects borrowings it owes of 7.24M EGP, with 26.9% repricing within a year and interest cover of 19.76×.",
+    "The inputs channel shows revenue filed of 169.33M EGP, gross profit filed of 51.49M EGP, and a gross margin of 30.4%.",
+    "The currency channel shows a currency gain or loss filed of -166K EGP against profit filed for the period of 32.49M EGP, representing -0.5% of that profit."
+   ],
+   "dropped": [],
+   "channels": [
+    "rates",
+    "inputs",
+    "currency"
+   ]
+  },
+  "ACTF": {
+   "ticker": "ACTF",
+   "says": [
+    "The rates channel reaches the company through borrowings it owes of 167K EGP, with 100.0% of that repricing within a year and interest cover of -0.73× for H1 2026.",
+    "The currency channel also reaches the company with a currency gain or loss filed of 163K EGP and profit filed for the period of -197.67M EGP for H1 2026.",
+    "For the inputs channel, the company filed nothing."
+   ],
+   "dropped": [],
+   "channels": [
+    "rates",
+    "currency"
+   ]
+  },
+  "ADCI": {
+   "ticker": "ADCI",
+   "says": [
+    "For 9M 2026 (to 31 Mar), the rates channel reaches the company through borrowings it owes of 461M EGP, with 52.6% of that repricing within a year, while the inputs channel shows revenue filed of 1.03B EGP, gross profit filed of 397.77M EGP, and a gross margin of 38.6%.",
+    "The currency channel also reaches the company, with a currency gain or loss filed of -2.33M EGP against profit filed for the period of 196.37M EGP, making that currency line as a share of the profit -1.2% for 9M 2026 (to 31 Mar), though the company filed nothing for what it holds or owes in a currency other than the pound."
+   ],
+   "dropped": [],
+   "channels": [
+    "rates",
+    "inputs",
+    "currency"
+   ]
+  },
+  "ADIB": {
+   "ticker": "ADIB",
+   "says": [
+    "For currency, the company filed a currency gain or loss of 548.89M EGP for H1 2026, which represents 7.3% of the profit filed for the period of 7.55B EGP, alongside net foreign currency positions including 3.68B EGP held in USD.",
+    "The company filed nothing for rates or inputs in the provided figures."
+   ],
+   "dropped": [],
+   "channels": [
+    "currency"
+   ]
+  },
+  "ADPC": {
+   "ticker": "ADPC",
+   "says": [
+    "All three channels reach this company, with borrowings it owes of 1.42B EGP of that repricing within a year at 96.5% and an interest cover of -1.04× for rates.",
+    "On inputs, it filed revenue of 564.04M EGP, gross profit of 34.75M EGP, and a gross margin of 6.2% for Q1 2026.",
+    "For currency, the company held a net position held in USD of 146.72M EGP, alongside a profit filed for the period of -125.92M EGP."
+   ],
+   "dropped": [],
+   "channels": [
+    "rates",
+    "inputs",
+    "currency"
+   ]
+  },
+  "ADRI": {
+   "ticker": "ADRI",
+   "says": [
+    "For inputs, the company filed revenue filed: 4.11M EGP, gross profit filed: 1.75M EGP, and a gross margin: 42.5% for H1 2026.",
+    "The company filed nothing for rates.",
+    "The company filed nothing for currency."
+   ],
+   "dropped": [],
+   "channels": [
+    "inputs"
+   ]
+  }
+ }
+}

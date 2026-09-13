@@ -197,7 +197,7 @@ CURRENCY.today = {
   asOf: '2026-09-11',
   rates: [{ code: 'USD', label: 'US dollar', labelAr: 'الدولار الأمريكي', token: 'EGP 51.3365' },
           { code: 'EUR', label: 'Euro', labelAr: 'اليورو', token: 'EGP 59.6425' }],
-  note: 'The rate on the day this was built. This site keeps no history for the pound, so unlike every other figure here it is not placed against its own past and nothing is claimed about it.',
+  note: 'The rate on the day this was built, for reading the positions below against. How unusual this week\'s move in each of these was is at the top of the screen, measured the same way as everything else there.',
   noteAr: 'سعر الصرف يوم إعداد هذه الصفحة.',
 };
 const withCurrency = { ...published, channels: [...published.channels, CURRENCY] };
@@ -255,18 +255,19 @@ test('a channel the screen has no figures for is left undrawn, not half-drawn', 
   assert.equal(panels.length, published.channels.length);
 });
 
-test('the pound is shown as a dated level, and says it is not a percentile', () => {
-  // Everything else on this screen is placed against its own two years of
-  // moves. rate_history.py keeps none for a currency, so the one figure that
-  // cannot be is the one the channel is about — and it has to say so rather
-  // than borrow the authority of the bars above it.
+test('the pound is shown as a dated level, beside a channel about the pound', () => {
+  // It used to say "this site keeps no history for the pound". rate_history.py
+  // fetches the five pairs now and they are measured like every other row, so
+  // the level is here to read the positions against and the percentile is at
+  // the top of the screen with the rest.
   const panel = currencyPanel();
   const today = withClass(panel, 'wm-today')[0];
   assert.ok(today, 'the currency channel shows no rate at all');
   assert.equal(withClass(today, 'wm-today-rates')[0].children.length, 2);
   assert.match(text(today), /EGP 51\.3365/);
   assert.match(text(today), /2026-09-11/);
-  assert.match(text(today), /keeps no history for the pound/);
+  assert.match(text(today), /for reading the positions below against/);
+  assert.doesNotMatch(text(today), /keeps no history/);
   // And no bar, which on this screen means "this is how unusual it was".
   assert.equal(withClass(today, 'wm-move-bar').length, 0);
 });
@@ -346,4 +347,105 @@ test('the rate block survives inside the channel it belongs to', () => {
   // looked for it noticed.
   const panel = currencyPanel();
   assert.ok(withClass(panel, 'wm-today').length, 'the pound rate is gone again');
+});
+
+/* The join, on one company — what the whole screen was missing. */
+
+const EXPOSURE = {
+  schemaVersion: 1,
+  companies: [{
+    ticker: 'ACGC', name: 'Arab Cotton Ginning Co.',
+    says: ['For 9M 2026, rates reach the company through borrowings it owes of 7.24M EGP.',
+           'Inputs reach it with a gross margin of 30.4%.'],
+    figures: { 'borrowings it owes': '7.24M EGP', 'gross margin': '30.4%' },
+    channels: ['rates', 'inputs'],
+  }],
+};
+
+function withCards(state = {}) {
+  const c = new Component({});
+  Object.assign(c.state, { lang: 'en', screen: 'world', worldratesOpen: true }, state);
+  c.setData({ demo: false, companies: [], series: [], fins: [],
+              worldMonitor: published, companyExposure: EXPOSURE });
+  return c;
+}
+
+test('a company row opens the join for that company', () => {
+  const c = withCards();
+  const view = flowTrackers(c, c.data(), false).screen;
+  const row = withClass(view, 'wm-row').find((r) => text(r).includes('ACGC'));
+  assert.ok(row, 'ACGC is not in the rates channel');
+  assert.equal(withClass(row, 'wm-card').length, 0, 'the card was open already');
+  assert.equal(row.attrs['aria-expanded'], 'false');
+  row.events.click();
+  assert.equal(c.state.worldratesCard, 'ACGC');
+  const again = flowTrackers(c, c.data(), false).screen;
+  const open = withClass(again, 'wm-row').find((r) => text(r).includes('ACGC'));
+  const card = withClass(open, 'wm-card')[0];
+  assert.ok(card, 'nothing opened');
+  assert.match(text(card), /borrowings it owes of 7\.24M EGP/);
+  assert.match(text(card), /gross margin of 30\.4%/);
+});
+
+test('every number in the sentences is printed beside them', () => {
+  // The whole reason a model may write these at all: it may use no figure it
+  // was not given, and the reader can check that without leaving the card.
+  const c = withCards({ worldratesCard: 'ACGC' });
+  const card = withClass(flowTrackers(c, c.data(), false).screen, 'wm-card')[0];
+  const said = withClass(card, 'wm-card-says').map(text).join(' ');
+  const listed = all(card, 'dd').map((n) => text(n).trim());
+  const numbers = said.match(/-?\d(?:[\d,]*\d)?(?:\.\d+)?\s*(?:[%×]|[BMK]?\s*EGP)?/g) || [];
+  numbers.forEach((raw) => {
+    const token = raw.trim();
+    if (/^-?\d{1,2}$/.test(token)) return;          // counting, not a figure
+    assert.ok(listed.some((v) => v.includes(token)) || /20\d\d/.test(token),
+              `"${token}" is in the sentences and in no figure beside them`);
+  });
+  assert.ok(listed.length >= 2);
+});
+
+test('the card says it is not advice', () => {
+  const c = withCards({ worldratesCard: 'ACGC' });
+  const card = withClass(flowTrackers(c, c.data(), false).screen, 'wm-card')[0];
+  assert.match(text(card), /Nothing here says what any of it means for a share price/);
+});
+
+test('a company with no card opens nothing rather than an empty one', () => {
+  const c = withCards({ worldratesCard: 'ADPC' });   // not in EXPOSURE
+  const view = flowTrackers(c, c.data(), false).screen;
+  assert.equal(withClass(view, 'wm-card').length, 0);
+  // and the row is still there to be read
+  assert.ok(withClass(view, 'wm-row').some((r) => text(r).includes('ADPC')));
+});
+
+test('the world rows are grouped by what the thing is', () => {
+  // Flat alphabetical put the euro between copper and the FTSE. Twelve
+  // unrelated numbers read as a list, which is most of why this did not feel
+  // like a monitor of anything.
+  const view = screen();
+  const heads = withClass(view, 'wm-group-head').map((n) => text(n).trim());
+  assert.ok(heads.includes('Against the pound'), heads.join(' | '));
+  const groups = withClass(view, 'wm-group');
+  assert.ok(groups.length >= 2, `${groups.length} groups`);
+  // Inside a group, alphabetical — never by the size of today's move.
+  groups.forEach((g) => {
+    const names = withClass(g, 'wm-move-name')
+      .map((n) => text(all(n, 'strong')[0]).trim());
+    assert.deepEqual(names, [...names].sort(), names.join(' | '));
+  });
+});
+
+test('the pound is measured the same way as everything else', () => {
+  // It was the one figure on the screen that could not be, on the screen most
+  // about it. rate_history.py fetches the five pairs now.
+  const pairs = (published.world || []).filter((r) => r.group === 'currencies');
+  assert.ok(pairs.length >= 3, `${pairs.length} currency rows published`);
+  pairs.forEach((row) => {
+    const against = (row.moves.week || {}).against;
+    assert.ok(against && Number.isFinite(against.percentile),
+              `${row.label} has no percentile`);
+    assert.ok(against.observations >= 120, `${row.label}: ${against.observations}`);
+  });
+  const out = text(screen());
+  assert.match(out, /US dollar/);
 });

@@ -21,11 +21,28 @@ published 11,238 — so the tolerance below is loose enough to allow the real ga
 between an intraday reading and the previous session's close, and nowhere near
 loose enough to let a different instrument through.
 
-WHAT IS NOT HERE, AND WHY
-Tadawul and the five currency pairs. No candidate id matched their published
-level, and open.er-api.com — where the pound rates come from — publishes today
-and no history at all. They keep their number and get no curve. A drawn line is
-a claim about the past; there is no honest one to draw.
+THE FIVE CURRENCY PAIRS, FOUND AT LAST
+They were absent for a while under the note "no candidate id matched their
+published level". That was true and the conclusion was wrong: the ids had never
+been found, not disproved. Investing's own search endpoint names them —
+USD/EGP is 2122, and a blind probe of 2080-2120 had stopped two short — and
+every one of the five then passed the same check as the rest, within 0.08% of
+the level this site already publishes from a different source entirely
+(open.er-api.com). Two sources agreeing is the whole test, and they agree.
+
+It matters more than the other rows. Everything on the world screen is placed
+against its own two years, and the pound was the one figure that could not be,
+on the screen most about it: a reader was shown a dated level and told plainly
+that nothing was claimed. It is measured like everything else now.
+
+WHAT IS STILL NOT HERE, AND WHY
+Tadawul, and any Egyptian interest rate. Tadawul has no id that matches. The
+rate is the more painful gap — it is a whole channel of the world monitor —
+but this site publishes no policy rate, T-bill yield or bond yield anywhere,
+so there is nothing to check a fetched series against. Taking one source's word
+for both the level and its history is precisely what the rule above forbids,
+and a curve nobody can check is worth less than no curve. It needs a published
+Egyptian rate from an independent source first.
 
 Usage:
     python3 scripts/rate_history.py [--since 2025-01-01] [--check]
@@ -76,6 +93,21 @@ INSTRUMENTS = [
     ("COMEX_HG1!", 8831, "world", "Copper"),
     ("XAU", 68, "metals", "Gold"),
     ("XAG", 69, "metals", "Silver"),
+    # Verified 13 Sep 2026 against rates/latest.json's own `egp` figure, which
+    # comes from open.er-api.com and not from here:
+    #   USD/EGP  2122   51.3600  vs ours 51.3422   0.03%
+    #   EUR/EGP  1634   59.5800  vs ours 59.5729   0.01%
+    #   GBP/EGP  1749   69.4400  vs ours 69.4330   0.01%
+    #   SAR/EGP 10082   13.6800  vs ours 13.6912   0.08%
+    #   AED/EGP  9325   13.9800  vs ours 13.9802   0.00%
+    # The id on the left is the CODE in that document, because that is what the
+    # site joins on — the same trap that left four of the first seven fetched,
+    # verified, published and joined to nothing.
+    ("USD", 2122, "currencies", "US dollar"),
+    ("EUR", 1634, "currencies", "Euro"),
+    ("GBP", 1749, "currencies", "Pound sterling"),
+    ("SAR", 10082, "currencies", "Saudi riyal"),
+    ("AED", 9325, "currencies", "UAE dirham"),
 ]
 
 
@@ -93,6 +125,12 @@ def published() -> dict[str, float]:
     for row in doc.get("metals") or []:
         if isinstance(row.get("usd_ounce"), (int, float)):
             out[str(row.get("label"))] = float(row["usd_ounce"])
+    # The pound's own rows carry their level as `egp`, and it comes from a
+    # different source than the histories below — which is what makes checking
+    # one against the other worth anything.
+    for row in doc.get("currencies") or []:
+        if isinstance(row.get("egp"), (int, float)):
+            out[str(row.get("label"))] = float(row["egp"])
     return out
 
 
@@ -145,7 +183,7 @@ def build(since: str) -> dict:
             held = {}
 
     out = []
-    for our_id, instrument, _where, label in INSTRUMENTS:
+    for our_id, instrument, group, label in INSTRUMENTS:
         level = levels.get(label)
         if level is None:
             print(f"   ! {label}: nothing published to check it against — skipped")
@@ -162,7 +200,8 @@ def build(since: str) -> dict:
             continue
         sessions = [{"date": d, "close": c} for d, c in sorted(rows.items())]
         out.append({"id": our_id, "label": label, "instrument": instrument,
-                    "source": "investing.com", "sessions": sessions})
+                    "source": "investing.com", "group": group,
+                    "sessions": sessions})
         print(f"   {label}: {len(sessions)} sessions,"
               f" {sessions[0]['date']} → {sessions[-1]['date']}")
     return {"updated_at": datetime.datetime.now(datetime.UTC).isoformat(timespec="seconds"),
