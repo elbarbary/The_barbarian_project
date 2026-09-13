@@ -901,12 +901,69 @@ function renderOwnershipMap(doc, ar, t, component) {
    * enough to be a pan. A press that does not move is a press.
    */
   const PAN_SLOP = 4;                 // CSS pixels before it counts as a drag
+  const active = new Map();           // every finger currently on the board
   let drag = null;
+  let pinch = null;
+
+  const midpoint = () => {
+    const [a, b] = [...active.values()];
+    return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+  };
+  const fingerGap = () => {
+    const [a, b] = [...active.values()];
+    return Math.hypot(a.x - b.x, a.y - b.y) || 1;
+  };
+  /* Where a screen point falls on the board, so a pinch keeps what is between
+     the fingers between the fingers. */
+  const boardPoint = (client) => {
+    const box = svg.getBoundingClientRect();
+    const w = win || wholeBoard();
+    return {
+      x: w.x + ((client.x - box.left) / box.width) * w.w,
+      y: w.y + ((client.y - box.top) / box.height) * w.h,
+    };
+  };
+
   svg.addEventListener('pointerdown', (e) => {
-    if (!win || win.w >= board().w) return;      // nothing to pan at full fit
-    drag = { x: e.clientX, y: e.clientY, from: { ...win }, moved: false, id: e.pointerId };
+    active.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (active.size === 2) {
+      // Two fingers: a pinch, and no longer a pan or a press.
+      drag = null;
+      pinch = { gap: fingerGap(), w: (win || wholeBoard()).w, at: boardPoint(midpoint()) };
+      svg.setAttribute('data-panning', '');
+      return;
+    }
+    if (active.size !== 1) return;
+    // A drag at ANY zoom, not only when zoomed in. At full fit the board is
+    // wider than a phone and used to be left to the container's own sideways
+    // scroll, which is what "it doesn't go all the way" was: the gesture
+    // belonged to the browser and ended wherever the browser decided. Panned
+    // here, the end of the board is the end of the board.
+    drag = {
+      x: e.clientX, y: e.clientY, moved: false, id: e.pointerId,
+      from: { ...(win || wholeBoard()) },
+      scroll: scroller ? scroller.scrollLeft : 0,
+    };
   });
+
   svg.addEventListener('pointermove', (e) => {
+    if (active.has(e.pointerId)) active.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    if (pinch && active.size === 2) {
+      e.preventDefault();
+      if (!win) win = wholeBoard();
+      const factor = fingerGap() / pinch.gap;
+      win.w = pinch.w / factor;
+      win.h = win.w * (board().h / board().w);
+      // Hold the point between the fingers still, the way a map does.
+      const box = svg.getBoundingClientRect();
+      const mid = midpoint();
+      win.x = pinch.at.x - ((mid.x - box.left) / box.width) * win.w;
+      win.y = pinch.at.y - ((mid.y - box.top) / box.height) * win.h;
+      applyWindow();
+      return;
+    }
+
     if (!drag) return;
     if (!drag.moved) {
       if (Math.abs(e.clientX - drag.x) + Math.abs(e.clientY - drag.y) < PAN_SLOP) return;
@@ -914,11 +971,28 @@ function renderOwnershipMap(doc, ar, t, component) {
       try { svg.setPointerCapture(drag.id); } catch { /* pointer already gone */ }
     }
     const box = svg.getBoundingClientRect();
-    win.x = drag.from.x - (e.clientX - drag.x) / box.width * win.w;
-    win.y = drag.from.y - (e.clientY - drag.y) / box.height * win.h;
-    applyWindow();
-  });
-  const endDrag = (e) => {
+    const dx = e.clientX - drag.x;
+    const zoomed = drag.from.w < board().w - 0.5;
+    if (zoomed) {
+      win.x = drag.from.x - dx / box.width * win.w;
+      win.y = drag.from.y - (e.clientY - drag.y) / box.height * win.h;
+      applyWindow();
+    } else if (scroller) {
+      // At full fit the viewBox has nowhere to go, so the drag moves the box
+      // the board is drawn in — and clamps to its real end rather than to
+      // wherever a flick ran out.
+      const most = scroller.scrollWidth - scroller.clientWidth;
+      scroller.scrollLeft = Math.max(0, Math.min(most, drag.scroll - dx));
+    }
+  }, { passive: false });
+
+  const endPointer = (e) => {
+    active.delete(e.pointerId);
+    if (active.size < 2 && pinch) {
+      pinch = null;
+      // Hand the gesture back unless the reader is still zoomed in.
+      applyWindow();
+    }
     if (!drag) return;
     const moved = drag.moved;
     if (moved) {
@@ -929,8 +1003,8 @@ function renderOwnershipMap(doc, ar, t, component) {
     // finger when it stopped.
     if (moved) e.stopPropagation();
   };
-  svg.addEventListener('pointerup', endDrag);
-  svg.addEventListener('pointercancel', endDrag);
+  svg.addEventListener('pointerup', endPointer);
+  svg.addEventListener('pointercancel', endPointer);
 
   // Full screen holds the LIVE board, not a copy of it. The map answers
   // "who is in this company" by being clicked, and a clone cannot be.

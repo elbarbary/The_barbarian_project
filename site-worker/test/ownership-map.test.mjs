@@ -981,11 +981,12 @@ test('the dot travelling a line is moved onto the line that was recut', () => {
 
 /* ── the board on a phone ─────────────────────────────────────────────────── */
 
-test('the browser scrolls the board at full fit, and stops when a zoom starts', () => {
-  // `touch-action: none` is right only while the drag handler is panning the
-  // viewBox. At full fit the board is wider than a phone and is meant to be
-  // scrolled natively — `none` stopped that too, so on a phone the board could
-  // not be moved at all, by either route.
+test('the board takes the sideways gesture and leaves the page its own', () => {
+  // `pan-y` and not `pan-x pan-y`. Handing the sideways drag to the container
+  // is what "it doesn't go all the way" was: a native flick ends where the
+  // browser decides, not at the edge of the exchange. The board pans itself at
+  // every zoom now; the browser keeps only up-and-down, so a reader can still
+  // scroll past the board rather than being trapped on it.
   const view = panel();
   const svg = nodesWithClass(view, 'om-map-svg')[0];
   assert.ok(svg, 'no board on the panel');
@@ -998,7 +999,8 @@ test('the browser scrolls the board at full fit, and stops when a zoom starts', 
   tool('⤢').events.click({ preventDefault() {}, stopPropagation() {} });
   assert.equal(svg.getAttribute('data-panning'), null, 'back at full fit and still captured');
 
-  assert.match(stylesheet, /\.om-map-svg\s*\{[^}]*touch-action:\s*pan-x pan-y/);
+  assert.match(stylesheet, /\.om-map-svg\s*\{[^}]*touch-action:\s*pan-y/);
+  assert.doesNotMatch(stylesheet, /\.om-map-svg\s*\{[^}]*touch-action:\s*pan-x/);
   assert.match(stylesheet, /\.om-map-svg\[data-panning\]\s*\{[^}]*touch-action:\s*none/);
 });
 
@@ -1019,4 +1021,77 @@ test('full screen on a phone stacks, and the board keeps its proportions', () =>
   assert.match(rule('.om-sheet .om-map-svg'), /height:\s*auto/);
   // And the register needs a ceiling of its own once nothing is scrolling it.
   assert.match(rule('.om-sheet .om-register-list'), /max-height:\s*\d/);
+});
+
+/* Two fingers, and a pan that reaches the edge. */
+
+const fingers = (svg) => {
+  // The stub has no layout, so the board is given one: the gesture maths reads
+  // the drawn box to turn screen points into board points.
+  svg.getBoundingClientRect = () => ({ left: 0, top: 0, width: 880, height: 557 });
+  const send = (type, id, x, y) => svg.events[type] && svg.events[type]({
+    pointerId: id, clientX: x, clientY: y,
+    preventDefault() {}, stopPropagation() {},
+  });
+  return { send };
+};
+
+test('two fingers spreading apart zoom the board in', () => {
+  const view = panel();
+  const svg = nodesWithClass(view, 'om-map-svg')[0];
+  const before = svg.getAttribute('viewBox');
+  const { send } = fingers(svg);
+  send('pointerdown', 1, 100, 100);
+  send('pointerdown', 2, 200, 100);          // 100 apart
+  send('pointermove', 2, 300, 100);          // now 200 apart — twice
+  const after = svg.getAttribute('viewBox');
+  assert.notEqual(after, before, 'a pinch moved nothing');
+  const width = (box) => Number(String(box).split(/\s+/)[2]);
+  assert.ok(width(after) < width(before),
+            `${width(after)} is not narrower than ${width(before)}`);
+  // And while two fingers are down the browser must not also be panning.
+  assert.equal(svg.getAttribute('data-panning'), '');
+});
+
+test('two fingers coming together zoom back out, and stop at the whole board', () => {
+  const view = panel();
+  const svg = nodesWithClass(view, 'om-map-svg')[0];
+  const { send } = fingers(svg);
+  send('pointerdown', 1, 100, 100);
+  send('pointerdown', 2, 300, 100);
+  send('pointermove', 2, 140, 100);          // squeezed right down
+  const box = String(svg.getAttribute('viewBox')).split(/\s+/).map(Number);
+  // Never wider than the board itself: clamped, so a pinch cannot fling the
+  // exchange off into grey space.
+  assert.ok(box[2] <= 1200.5, `width ${box[2]} is wider than the board`);
+  assert.ok(box[0] >= -0.5 && box[1] >= -0.5, `origin ${box[0]},${box[1]} is outside it`);
+});
+
+test('a pinch keeps the point between the fingers between the fingers', () => {
+  const view = panel();
+  const svg = nodesWithClass(view, 'om-map-svg')[0];
+  const { send } = fingers(svg);
+  // Pinch about a midpoint well off centre; the board must move toward it.
+  send('pointerdown', 1, 40, 60);
+  send('pointerdown', 2, 60, 60);
+  send('pointermove', 2, 180, 60);
+  const [x, y, w] = String(svg.getAttribute('viewBox')).split(/\s+/).map(Number);
+  assert.ok(w < 1200, 'it did not zoom at all');
+  // Zooming about a point near the left edge keeps the window near it.
+  assert.ok(x < 1200 - w, `window pinned to the right edge at ${x}`);
+  assert.ok(Number.isFinite(y));
+});
+
+test('lifting one finger ends the pinch without ending the board', () => {
+  const view = panel();
+  const svg = nodesWithClass(view, 'om-map-svg')[0];
+  const { send } = fingers(svg);
+  send('pointerdown', 1, 100, 100);
+  send('pointerdown', 2, 200, 100);
+  send('pointermove', 2, 320, 100);
+  const zoomed = svg.getAttribute('viewBox');
+  send('pointerup', 2, 320, 100);
+  send('pointerup', 1, 100, 100);
+  assert.equal(svg.getAttribute('viewBox'), zoomed,
+               'letting go snapped the board somewhere else');
 });

@@ -600,11 +600,14 @@ body.om-sheet-open { overflow: hidden; }
   color: var(--faint); }
 .om-map-scroll { min-width: 0; border-radius: 22px; background: var(--sunk);
   border: 1px solid var(--rule2); overflow: hidden; }
-/* `touch-action: none` is right only while the reader is zoomed in, when the
-   drag handler is panning the viewBox itself. At full fit the board is wider
-   than a phone and is meant to be scrolled natively — and `none` stopped that
-   too, so on a phone the board could not be moved at all, by either route. */
-.om-map-svg { width: 100%; height: auto; display: block; touch-action: pan-x pan-y; }
+/* `pan-y` and not `pan-x pan-y`: the board takes the sideways gesture itself
+   now, at every zoom, and the browser keeps only the up-and-down one so a
+   reader can still scroll past the board without being trapped on it.
+   Handing the sideways drag to the container was what "it doesn't go all the
+   way" was — the gesture ended wherever a native flick decided, not at the
+   edge of the exchange. `none` while two fingers are down, so a pinch is a
+   pinch rather than the page zooming underneath it. */
+.om-map-svg { width: 100%; height: auto; display: block; touch-action: pan-y; }
 .om-map-svg[data-panning] { touch-action: none; }
 .om-map-scroll:has(.om-map-svg) { cursor: grab; }
 .om-map-scroll:active { cursor: grabbing; }
