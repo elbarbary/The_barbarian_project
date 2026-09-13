@@ -111,6 +111,10 @@
     "meaning": "Export data shows that the volume of Egyptian raw cotton exports is currently concentrated among three Asian buyer markets, which absorb the majority of outbound shipments for the current agricultural season.",
     "meaning_ar": "تُظهر بيانات التصدير تركز الجانب الأكبر من شحنات القطن المصري الخام لدى ثلاث أسواق آسيوية تستحوذ على معظم الكميات المشحونة منذ بداية الموسم الزراعي الحالي."
   },
+  "3.3 مليار جنيه ايرادات مستهدفه ل«المصريه لمرافق النقل» بنهايه 2026": {
+    "meaning": "Setting a medium-term operational revenue baseline outlines the company's internal operational capacity and contract execution schedule across transport utility projects.",
+    "meaning_ar": "يحدد وضع مستهدف للإيرادات التشغيلية متوسطة الأجل الطاقة التشغيلية الداخلية للشركة والجدول الزمني لتنفيذ العقود ضمن مشروعات مرافق النقل."
+  },
   "34 الف طن صادرات البضايع العامه بميناء الاسكندريه خلال 24 ساعه": {
     "meaning": "This daily operational throughput reflects current outbound general cargo handling capacity and logistics flow through the Port of Alexandria.",
     "meaning_ar": "يعكس حجم التداول اليومي هذا الطاقة التشغيلية الحالية لمناولة بضائع الصب العام وحركة التدفقات اللوجستية للصادرات عبر ميناء الإسكندرية."
@@ -3160,6 +3164,10 @@
     "meaning": "Discount school supply markets and wholesale hubs operate on direct manufacturer distribution and high sales volumes, which eliminates intermediary markups relative to traditional retail outlets during seasonal peak cycles.",
     "meaning_ar": "تعتمد منافذ بيع المستلزمات المدرسية المخفضة وأسواق الجملة على سلاسل إمداد مباشرة من المصنعين مع خفض هوامش الوسطاء مقارنة بمتاجر التجزئة التقليدية خلال المواسم الدراسية."
   },
+  "تعرف علي السن المطلوب للتقديم في وظايف وزاره العمل": {
+    "meaning": "Ministry of Labor employment announcements specify demographic criteria that define the eligible pool of job applicants in the domestic labor market, reflecting public sector recruitment standards.",
+    "meaning_ar": "تحدد إعلانات التوظيف الصادرة عن وزارة العمل المعايير الديموغرافية المؤهلة للتقدم للوظائف في سوق العمل المحلي، مما يحدد شروط التعيين في الجهاز الإداري."
+  },
   "تعرف علي حصيله صادرات القطن منذ بدايه الموسم": {
     "meaning": "The headline refers to cumulative export data for Egyptian raw cotton over the current agricultural season, which reflects foreign currency inflows into the agricultural and textile export sectors and tracks inventory clearance from local spinning mills and export aggregators.",
     "meaning_ar": "يشير العنوان إلى البيانات التراكمية لصادرات القطن المصري الخام منذ بداية الموسم الزراعي الحالي، وهو ما يعكس تدفقات النقد الأجنبي لقطاع تصدير الحاصلات الزراعية والغزل، ويوضح وتيرة تصريف المخزون لدى المجمعين والمحالج."
@@ -3172,13 +3180,25 @@
     "meaning": "Anti-dumping duties apply additional import tariffs on Dutch cheese shipments at Egyptian customs, raising the landed cost of imported dairy products relative to domestically produced alternatives.",
     "meaning_ar": "تفرض رسوم مكافحة الإغراق تعريفات جمركية إضافية على شحنات الجبن الهولندي في المنافذ الجمركية المصرية، مما يرفع التكلفة النهائية للمنتجات المستوردة مقارنة بالبدائل المصنعة محلياً."
   },
+  "تعرف علي علامات تكشف زيوت السيارات المغشوشه قبل الشراء": {
+    "meaning": "Consumer identification of counterfeit lubricants affects informal distribution channels, inventory verification protocols, and sales volume retention for licensed downstream petroleum and lubricant producers.",
+    "meaning_ar": "يؤثر رصد المستهلكين لزيوت المحركات المقلدة على قنوات التوزيع الموازية غير الرسمية، وإجراءات التحقق من المخزون، وحصص التوزيع الميداني للشركات المرخصة لإنتاج وتداول المشتقات البترولية."
+  },
   "تعرف علي كيفيه تقديم شكوي عماليه الي وزاره العمل": {
     "meaning": "Official labor complaint channels provide a formal administrative mechanism for resolving industrial disputes, establishing institutional oversight on corporate compliance with employment contracts and labor regulations.",
     "meaning_ar": "توفر القنوات الرسمية للشكاوى العمالية آلية إدارية لتسوية النزاعات في بيئة العمل، وتفرض رقابة مؤسسية على امتثال الشركات لعقود التوظيف والتشريعات المنظمة للعمل."
   },
+  "تعرف علي مخاطر استخدام زيوت السيارات المعاد تدويرها علي محرك سيارتك": {
+    "meaning": "Awareness of the mechanical risks associated with recycled engine oils directly influences consumer product choices between informal re-refined lubricants and certified virgin base oils supplied by registered EGX-listed downstream energy distributors.",
+    "meaning_ar": "يؤثر الوعي بالمخاطر الميكانيكية لزيوت المحركات المعاد تدويرها بشكل مباشر على اختيارات المستهلكين بين زيوت التشحيم المعاد تكريرها غير الرسمية والزيوت البكر المعتمدة من شركات توزيع المنتجات البترولية المقيدة في البورصة المصرية."
+  },
   "تعرف علي مهله المستوردين للمشاركه في تحقيق مكافحه اغراق الجبن الهولندي": {
     "meaning": "Trade authorities establish a formal regulatory timeframe for importers to submit pricing data, import volumes, and operational records as part of an active anti-dumping investigation into Dutch cheese. This procedural step determines market participation in the trade defense process and establishes the factual basis for potential tariff measures on imported dairy products.",
     "meaning_ar": "تحدد سلطات التجارة مهلة تنظيمية رسمية للمستوردين لتقديم بيانات الأسعار وأحجام الاستيراد والسجلات التشغيلية ضمن تحقيق مكافحة إغراق الجبن الهولندي. تحدد هذه الخطوة الإجرائية مشاركة الأطراف المعنية في مسار المعالجة التجارية، وتشكل الأساس البياني لتقييم فرض تدابير جمركية على منتجات الألبان المستوردة."
+  },
+  "تعرف علي وظايف ذوي الهمم التي توفرها وزاره العمل": {
+    "meaning": "The initiative links corporate labor demand with regulatory compliance under Egyptian labor law, which mandates a 5% employment quota for persons with disabilities in private sector firms with 20 or more employees.",
+    "meaning_ar": "تربط هذه المبادرة بين احتياجات الشركات من العمالة والامتثال لقانون العمل المصري، الذي يُلزم منشآت القطاع الخاص التي تضم 20 عاملاً فأكثر باستيفاء نسبة تشغيل تبلغ 5% لذوي الهمم."
   },
   "تقرير دولي: حصه الصين من الدين الامريكي تهبط من 10% الي 2%": {
     "meaning": "This shift reflects a structural reallocation of China's foreign exchange reserves away from US Treasury securities toward other currencies, physical assets, or alternative sovereign debt instruments, changing the composition of foreign ownership in the US sovereign debt market.",
@@ -4416,6 +4436,10 @@
   "فخ التكلفه الرخيصه للواجهات يرفع فاتوره “حرايق المولات”": {
     "meaning": "Lowering upfront construction capital expenditures through the procurement of non-fire-rated cladding materials increases structural fire vulnerability, shifting liabilities to operational repair expenses, asset replacement costs, and commercial property insurance claims.",
     "meaning_ar": "يؤدي خفض النفقات الرأسمالية للبناء عبر استخدام مواد واجهات غير مطابقة لمواصفات مقاومة الحريق إلى زيادة المخاطر التشغيلية، مما ينقل الأعباء المالية إلى تكاليف إصلاح الأصول المتضررة وأقساط التأمين التجاري."
+  },
+  "فرص عمل للمصريين بالخارج.. تعرف علي الدول التي توفرها وزاره العمل": {
+    "meaning": "Official external labor export agreements allocate domestic human capital to overseas markets, functioning as a formalized channel for cross-border labor mobility and foreign currency remittances within the national balance of payments.",
+    "meaning_ar": "تعمل اتفاقيات إلحاق العمالة بالخارج كإطار رسمي لتنظيم حركة العمالة ونقل القوى البشرية محلياً إلى أسواق خارجية، وهو ما يمثل مساراً نظامياً لتدفقات تحويلات العاملين بالعملة الأجنبية ضمن ميزان المدفوعات."
   },
   "فرنسا تتوقع ارتفاع اعباء فوايد الديون بنسبه 25% خلال 2026": {
     "meaning": "Higher debt-servicing costs directly increase sovereign fiscal outflows toward existing liabilities, altering public expenditure allocation within the macro economy.",
@@ -5868,6 +5892,10 @@
   "“انفيديا” تجري محادثات لاستثمار 10 مليارات دولار في طرح “انثروبيك”": {
     "meaning": "Large-scale equity financing rounds in artificial intelligence developers integrate specialized chip suppliers with model creators through direct balance-sheet capital allocation.",
     "meaning_ar": "تُمثل جولات التمويل الكبرى في شركات تطوير الذكاء الاصطناعي آلية لربط موردي الرقائق المتخصصة بنماذج الحوسبة عبر توظيف مباشر لرؤوس الأموال في الميزانية العمومية."
+  },
+  "“اوباما” يحذر من مخاطر الذكاء الاصطناعي ويدعو الديمقراطيين الي تشديد الحوكمه": {
+    "meaning": "Calls for tighter governance on artificial intelligence involve the establishment of regulatory compliance frameworks, operational oversight standards, and risk management requirements for technology firms.",
+    "meaning_ar": "تتضمن الدعوات لتشديد الحوكمة على الذكاء الاصطناعي وضع أطر للامتثال التنظيمي، ومعايير للرقابة التشغيلية، ومتطلبات لإدارة المخاطر لدى شركات التكنولوجيا."
   },
   "“اودن” تشتري 2.8 مليون سهم *المصريين للاسكان”": {
     "meaning": "This transaction represents an equity stake acquisition that increases Odin's ownership and voting interest in Egyptians for Housing & Development, altering the firm's shareholder structure and reducing the volume of freely traded shares on the exchange.",
