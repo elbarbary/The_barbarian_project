@@ -12,7 +12,7 @@
   "open": 32.25,
   "high": 32.9,
   "low": 31.8,
-  "volume": 608176
+  "volume": 726643
  },
  "price_history": [
   {
@@ -1062,7 +1062,7 @@
   },
   {
    "date": "2026-06-29",
-   "close": 28.99,
+   "close": 29.0,
    "volume": 322075
   },
   {
@@ -1318,30 +1318,23 @@
  ],
  "profile": {
   "shares_outstanding": 89856499,
+  "free_float": 0.19851500000000002,
   "float_shares": 17837862.898985002,
   "perf_1w": -4.162923030847561,
   "perf_1m": -8.309455587392547,
   "perf_3m": 4.1666666666666705,
-  "avg_volume_30d": 792532.7999999985,
-  "relative_volume_10d": 0.7921649424915298,
-  "history_bars": 0,
-  "market_cap": 2875407968.0,
-  "market_cap_source": "EGX",
-  "trades": 644,
-  "turnover": 21316481,
+  "avg_volume_30d": 796481.6999999986,
+  "relative_volume_10d": 0.946471268690104,
   "median_volume_20d": 548496,
   "rv20": 4.9047048656690295,
   "normal_value_30d": 18170312.744999997,
   "five_session_change": -3.4141958670260597,
-  "free_float": 0.19851500000000002
+  "history_bars": 120,
+  "market_cap": 2873610838.02,
+  "market_cap_source": "EGX",
+  "trades": 754,
+  "turnover": 24783222
  },
- "profile_carried": [
-  "five_session_change",
-  "free_float",
-  "median_volume_20d",
-  "normal_value_30d",
-  "rv20"
- ],
  "financials": {
   "annual": [
    {
