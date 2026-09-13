@@ -555,6 +555,10 @@
     "meaning": "This acquisition consolidates digital payment processing infrastructure and merchant portfolios across the MENA region under a single fintech operator.",
     "meaning_ar": "تدمج عملية الاستحواذ هذه البنية التحتية لمعالجة المدفوعات الرقمية ومحافظ التجار في منطقة الشرق الأوسط وشمال أفريقيا تحت مظلة مشغل تكنولوجيا مالية واحد."
   },
+  "qalaa holdings moves to double erc stake": {
+    "meaning": "Qalaa Holdings expands its direct equity ownership in the Egyptian Refining Company (ERC), raising its operational control and proportion of consolidated assets from the hydrocracking refining project.",
+    "meaning_ar": "ترفع شركة القلعة القابضة نسبة ملكيتها المباشرة في الشركة المصرية للتكرير، مما يزيد من حصتها في الأصول المجمعة ومستوى سيطرتها التشغيلية على مشروع التكسير الهيدروجيني لتكرير البترول."
+  },
   "taqa arabia to invest in petroleum products storage depot in greater cairo": {
     "meaning": "Establishing a petroleum products storage depot expands midstream logistics infrastructure, adding liquid fuel inventory capacity and physical distribution facilities within the Greater Cairo consumption area.",
     "meaning_ar": "يُمثّل إنشاء مستودع لتخزين المنتجات البترولية توسعاً في البنية التحتية للخدمات اللوجستية، حيث يضيف سعات لتخزين وتوزيع الوقود السائل ضمن النطاق الجغرافي والاستهلاكي للقاهرة الكبرى."
@@ -4788,6 +4792,10 @@
   "موشرا البحرين العام والاسلامي يغلقان علي ارتفاع": {
     "meaning": "The headline reports an upward daily movement in the Bahrain Bourse benchmark and Sharia-compliant indices, reflecting net positive price changes across constituent listed equities during the trading session.",
     "meaning_ar": "يشير الخبر إلى تسجيل المؤشر العام ومؤشر البحرين الإسلامي مكاسب بنهاية الجلسة، ما يعكس محصلة إيجابية لتغيرات أسعار الأسهم المدرجة المكونة لهما خلال التداولات اليومية."
+  },
+  "موشرات البورصه تتباين في مستهل تعاملات الاحد .. وEGX30 يتراجع بنسبه 0.46%": {
+    "meaning": "The headline describes divergent opening trading activity across market indices, where net downward price adjustments in constituent large-cap equities lower the EGX30 index by 0.46% while other segments record differing price trajectories.",
+    "meaning_ar": "يوضح العنوان تبايناً في اتجاهات التداول عبر مؤشرات السوق عند الافتتاح، حيث تؤدي تحركات الأسعار الهابطة في الأسهم القيادية المكونة لمؤشر EGX30 إلى تراجعه بنسبة 0.46% بالتزامن مع تسجيل قطاعات أخرى مسارات سعرية مختلفة."
   },
   "موشرات قوه سوق العمل تعزز احتمالات التشديد النقدي في امريكا": {
     "meaning": "Strong labor market indicators reflect low unemployment and persistent wage pressures, which align with central bank monetary policy frameworks that maintain higher benchmark interest rates to manage inflation.",
