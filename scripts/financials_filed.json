@@ -968,6 +968,25 @@
    "prior_period_start": "2024-01-01",
    "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294580",
    "ticker": "RREI"
+  },
+  "294613": {
+   "basis": "standalone",
+   "currency": "جنيه مصري",
+   "filed_on": "2026-09-13",
+   "isin": "EGS743O1C013",
+   "months": 6,
+   "name_ar": "اي فاينانس للاستثمارات المالية والرقمية",
+   "net_profit_egp": 1414299905.0,
+   "news_id": "294613",
+   "period": "H1 2026",
+   "period_end": "2026-06-30",
+   "period_start": "2026-01-01",
+   "prior_net_profit_egp": 840734408.0,
+   "prior_period": "H1 2025",
+   "prior_period_end": "2025-06-30",
+   "prior_period_start": "2025-01-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294613",
+   "ticker": "EFIH"
   }
  },
  "read": {
@@ -1060,6 +1079,7 @@
   "294592": "2026-09-13",
   "294596": "2026-09-13",
   "294606": "2026-09-13",
-  "294608": "2026-09-13"
+  "294608": "2026-09-13",
+  "294613": "2026-09-13"
  }
 }

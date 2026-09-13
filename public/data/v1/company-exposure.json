@@ -1,9 +1,9 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-13T13:48:36Z",
+ "generated": "2026-09-13T15:17:04Z",
  "basis": "Each card joins what one company filed across three channels — what it owes and how soon that reprices, the cushion between what it sells for and what that cost, and what it holds in another currency. The sentences are written from those figures and may use no others: every number in them is one of the figures printed beside it, character for character, and a sentence using any other number is dropped before publishing. Nothing here says what any of it means for a share price.",
  "basisAr": "تجمع كل بطاقة ما أودعته الشركة في ثلاثة محاور — ما عليها من قروض ومتى يُعاد تسعيرها، والفارق بين ما تبيع به وما كلّفها، وما تحتفظ به بعملة أخرى. والجمل مكتوبة من هذه الأرقام ولا يجوز أن تستعمل غيرها: كل رقم فيها هو أحد الأرقام المطبوعة بجوارها حرفاً بحرف، وتُحذف أي جملة تستعمل رقماً آخر قبل النشر. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
- "companyCount": 182,
+ "companyCount": 183,
  "companies": [
   {
    "ticker": "ABUK",
@@ -3047,6 +3047,23 @@
    ]
   },
   {
+   "ticker": "NARE",
+   "name": "Naeem Real Estate Holding Group",
+   "says": [
+    "The currency channel reached the company in H1 2026, with a filed currency gain or loss of -3.7M EGP against a profit of 53.31M EGP, making that line -6.9% of profit.",
+    "The company filed no figures for rates or inputs in the provided data."
+   ],
+   "figures": {
+    "currency gain or loss filed": "-3.7M EGP",
+    "profit filed for the period": "53.31M EGP",
+    "that currency line as a share of the profit": "-6.9%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency"
+   ]
+  },
+  {
    "ticker": "NCCW",
    "name": "Nasr Co. for Civil Works",
    "says": [
@@ -3093,8 +3110,9 @@
    "ticker": "NINH",
    "name": "Nozha International Hospital",
    "says": [
-    "The inputs channel reaches this company, which filed revenue of 280.4M EGP, gross profit of 93.57M EGP, and a gross margin of 33.4% for H1 2026.",
-    "The company filed nothing for the rates channel or the currency channel."
+    "For the inputs channel covering H1 2026, the company filed revenue of 280.4M EGP, gross profit of 93.57M EGP, and a gross margin of 33.4%.",
+    "The company filed nothing for the rates channel regarding what it owes.",
+    "The company filed nothing for the currency channel regarding holdings or obligations outside the pound."
    ],
    "figures": {
     "revenue filed": "280.4M EGP",
@@ -3794,8 +3812,8 @@
    "ticker": "SKPC",
    "name": "Sidi Kerir Petrochemicals",
    "says": [
-    "For H1 2026, the company filed 2.39B EGP in borrowings with 87.3% repricing within a year and interest cover of 3.48× under rates, alongside revenue filed of 8.53B EGP, gross profit filed of 1.18B EGP, and a gross margin of 13.9% under inputs.",
-    "For currency, it reported a currency gain or loss filed of 25.63M EGP against profit filed for the period of 507.61M EGP, giving that currency line as a share of the profit of 5.0%, but it filed no figures for what it holds or owes in a currency other than the pound."
+    "For H1 2026, the company reported rates figures of 2.39B EGP in borrowings with 87.3% repricing within a year and interest cover of 3.48×, alongside inputs figures showing revenue filed of 8.53B EGP, gross profit filed of 1.18B EGP, and a gross margin of 13.9%.",
+    "Its H1 2026 currency line recorded a currency gain or loss filed of 25.63M EGP, representing 5.0% of the profit filed for the period of 507.61M EGP, while the company filed nothing for what it holds or owes in a currency other than the pound."
    ],
    "figures": {
     "borrowings it owes": "2.39B EGP",
