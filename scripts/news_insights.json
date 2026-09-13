@@ -1327,6 +1327,10 @@
     "meaning": "Sanction threats by a sovereign state against offshore energy operations create jurisdictional and regulatory disputes that alter the operating and legal frameworks for concession holders.",
     "meaning_ar": "تؤدي التهديدات بفرض عقوبات سيادية على عمليات الطاقة البحرية إلى نشوء نزاعات تنظيمية وقانونية تغير الأطر التشغيلية لشركات الامتياز."
   },
+  "الاستثمار تعزز تمويل الشركات الناشيه وتدعم التوسع خارج السوق المصريه": {
+    "meaning": "The Ministry of Investment provides capital channels and regulatory backing for early-stage ventures while establishing operational frameworks for cross-border expansion.",
+    "meaning_ar": "توفر وزارة الاستثمار قنوات تمويلية وأطراً تنظيمية للشركات الناشئة مع إتاحة مسارات مؤسسية لنقل وتوسيع العمليات خارج الحدود المحلية."
+  },
   "الاستثمار: تاسيس 26.5 الف شركه برووس اموال 97.5 مليار جنيه النصف الاول 2026": {
     "meaning": "Company establishment data tracks the volume of newly registered legal entities and committed capital entering the formal economy across commercial sectors during the reporting period.",
     "meaning_ar": "تعكس بيانات تأسيس الشركات حجم الكيانات القانونية المسجلة حديثاً ورؤوس الأموال المصدرة التي تدخل الاقتصاد الرسمي عبر مختلف القطاعات التجارية خلال الفترة المحددة."
@@ -1722,6 +1726,10 @@
   "الدينار الكويتي عند 167.26 جنيه.. اين وصل سعره في البنوك الاخري؟": {
     "meaning": "The exchange rate reflects the current interbank pricing of the Kuwaiti Dinar against the Egyptian Pound, establishing the daily foreign currency valuation across Egyptian commercial banks for trade settlements, remittances, and balance sheet revaluations.",
     "meaning_ar": "يعكس سعر الصرف التسعير اللحظي الحالي للدينار الكويتي مقابل الجنيه المصري في المعاملات بين البنوك (الإنتربنك)، وهو ما يحدد التقييم اليومي للعملة الأجنبية لدى البنوك التجارية المصرية لتسوية المعاملات التجارية، وتحويلات العاملين، وإعادة تقييم البنود بالعملة الأجنبية في القوائم المالية."
+  },
+  "الدينار الكويتي يتربع علي القمه.. اسعار العملات اليوم الاحد 13-9-2026": {
+    "meaning": "Official foreign exchange pricing mechanisms position the Kuwaiti Dinar at the highest nominal exchange rate per single currency unit against the Egyptian Pound across banking system boards.",
+    "meaning_ar": "تُظهر آليات تسعير الصرف الرسمية تصدّر الدينار الكويتي لأعلى سعر صرف اسمي للوحدة الواحدة مقابل الجنيه المصري في شاشات تسعير القطاع المصرفي."
   },
   "الذهب قرب ادني مستوي في اسبوع قبيل صدور بيانات تضخم امريكيه": {
     "meaning": "Global gold prices track shifts in US dollar strength and interest rate expectations, where forthcoming inflation data determines the holding cost of non-yielding bullion. The domestic gold market directly incorporates these international price movements alongside the official and parallel USD/EGP exchange rates.",
@@ -2410,6 +2418,10 @@
   "ايفاد: نعمل في نحو 100 دوله واستثماراتنا تستهدف صغار المزارعين": {
     "meaning": "The International Fund for Agricultural Development (IFAD) deploys development financing and concessional funding structures across a global network of approximately 100 countries, directly allocating capital toward smallholder agricultural supply chains and rural production infrastructure.",
     "meaning_ar": "يوجه الصندوق الدولي للتنمية الزراعية (إيفاد) تمويلات تنموية وتسهيلات تمويلية عبر شبكة عالمية تضم نحو 100 دولة، حيث يخصص رأس المال مباشرة لسلاسل الإمداد الزراعية لصغار المزارعين والبنية التحتية للإنتاج الريفي."
+  },
+  "اين وصل سعر الدينار الكويتي اليوم الاحد في البنوك؟": {
+    "meaning": "Official foreign exchange quotations reflect the daily clearing rates between the Egyptian Pound and the Kuwaiti Dinar within the formal banking sector, which directly determine conversion costs for expatriate remittances and import settlement charges from Kuwait.",
+    "meaning_ar": "تعكس أسعار الصرف الرسمية المعلنة أسعار المقاصة اليومية بين الجنيه المصري والدينار الكويتي داخل القطاع المصرفي، وهي الآلية التي تحدد تكلفة تحويلات العاملين بالخارج وتسوية المدفوعات التجارية للواردات من دولة الكويت."
   },
   "اين يباع ارخص كيلو لحمه في مصر؟": {
     "meaning": "State-run consumer complexes and government distribution outlets supply staple proteins, such as meat, below private retail market rates by utilizing direct public procurement channels and subsidized logistics networks.",
@@ -3460,6 +3472,10 @@
     "meaning": "The end-of-day exchange rate for the Saudi Riyal reflects the closing market-clearing price against the Egyptian Pound, serving as the official benchmark for cross-border settlements, remittance conversions, and bilateral trade accounting.",
     "meaning_ar": "يعكس سعر صرف الريال السعودي في ختام التعاملات سعر التسوية المرجعي بين الجنيه المصري والريال، ويُستخدم كمقياس رسمي في تسوية المعاملات المالية المباشرة، وتحويلات العاملين، والعمليات التجارية بين البلدين."
   },
+  "سعر الريال السعودي اليوم.. اين سجلت البنوك اعلي وادني سعر للشراء؟": {
+    "meaning": "Egyptian commercial banks quote differentiated bid and ask exchange rates for the Saudi Riyal based on institutional foreign currency liquidity and interbank market supply.",
+    "meaning_ar": "تحدد البنوك التجارية المصرية أسعاراً متفاوتة لشراء وبيع الريال السعودي بناءً على مستويات سيولة النقد الأجنبي المتاحة لديها وآليات العرض والطلب في سوق الإنتربنك."
+  },
   "سعر الريال السعودي في مصر اليوم الاثنين 7/9/2026.. ارتفاع بالختام": {
     "meaning": "An increase in the Saudi Riyal exchange rate against the Egyptian Pound directly raises the local currency cost of trade imports, religious travel obligations, and cross-border payment settlements denominated in SAR.",
     "meaning_ar": "يؤدي ارتفاع سعر صرف الريال السعودي مقابل الجنيه المصري إلى زيادة التكلفة الفعلية بالعملة المحلية للواردات التجارية ونفقات رحلات العمرة وتسوية المعاملات المالية المحددة بالريال."
@@ -3531,6 +3547,10 @@
   "سعر اليورو في مصر اليوم الاثنين 7/9/2026.. زياده جديده": {
     "meaning": "An increase in the EUR/EGP exchange rate raises the local currency cost of importing European goods, services, and raw materials, while expanding the Egyptian pound value of euro-denominated receivables, export revenues, and debt service obligations.",
     "meaning_ar": "يؤدي ارتفاع سعر صرف اليورو مقابل الجنيه المصري إلى زيادة تكلفة استيراد السلع والخدمات والمواد الخام الأوروبية بالعملة المحلية، بالتوازي مع زيادة القيمة المعادلة بالجنيه للإيرادات التصديرية والالتزامات المالية المقومة باليورو."
+  },
+  "سعر اليورو في مصر اليوم الاحد 13/9/2026": {
+    "meaning": "Official and commercial banking rates establish the daily conversion parity between the euro and the Egyptian pound, settling trade transactions, foreign currency liabilities, and import valuations directly tied to the eurozone.",
+    "meaning_ar": "تحدد أسعار الصرف الرسمية والتجارية في البنوك معادلة التحويل اليومية بين اليورو والجنيه المصري، وتُستخدم في تسوية العمليات التجارية، والالتزامات القائمة بالعملة الأجنبية، وتقييم واردات السلع المرتبطة بمنطقة اليورو."
   },
   "سعر اليورو في مصر اليوم الاحد 6/9/2026.. استقرار بالختام": {
     "meaning": "Stability in the euro's exchange rate reflects steady supply and demand dynamics across the local banking sector, keeping import and foreign currency settlement costs unchanged for European trade transactions.",
