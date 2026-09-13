@@ -851,6 +851,10 @@
     "meaning": "The decline in annual net profit to 451.7 million EGP reflects a contraction in bottom-line earnings after accounting for operating costs, input prices, and financing expenses across the financial year.",
     "meaning_ar": "يعكس تراجع صافي الأرباح السنوية إلى 451.7 مليون جنيه انخفاضاً في الأرباح الصافية المحققة بعد احتساب تكاليف التشغيل وأسعار مدخلات الإنتاج والمصروفات التمويلية خلال العام المالي."
   },
+  "ارباح “العربيه للادويه” السنويه ترتفع 16% الي 264.7 مليون جنيه": {
+    "meaning": "An annual net profit increase of 16% to EGP 264.7 million reflects higher operational net earnings after deducting production costs, financial expenses, and taxes relative to the prior fiscal year.",
+    "meaning_ar": "يعكس ارتفاع صافي الأرباح السنوية بنسبة 16% لتسجل 264.7 مليون جنيه زيادة الفائض المحقق من العمليات التشغيلية بعد خصم تكاليف الإنتاج والمصروفات التمويلية والضرائب مقارنة بالعام المالي السابق."
+  },
   "ارباح “الماليه والصناعيه” تنمو 42% في النصف الاول": {
     "meaning": "The company's semi-annual financial results record a 42% year-over-year rise in net profit, reflecting higher operational output, realized product pricing, or operating margin efficiency during the six-month period.",
     "meaning_ar": "تُظهر القوائم المالية نصف السنوية للشركة نموًا بنسبة 42% في صافي الأرباح مقارنة بالفترة المقابلة من العام السابق، وهو ما يعكس زيادة في حجم الإنتاج التشغيلي، أو أسعار بيع المنتجات، أو كفاءة هوامش التشغيل خلال فترة الستة أشهر."
@@ -3044,6 +3048,10 @@
     "meaning": "The cancellation of the Cityscape exhibition removes a centralized marketing and direct-sales channel for real estate developers, shifting project promotion to private sales events and digital marketing platforms.",
     "meaning_ar": "يؤدي إلغاء معرض سيتي سكيب إلى غياب قناة تسويقية وبيعية مركزية ومباشرة للمطورين العقاريين، مما ينقل ترويج المشروعات إلى المعارض الخاصة ومنصات التسويق الرقمي."
   },
+  "جدوي للتنميه الصناعيه تتحول الي الخساره النصفيه": {
+    "meaning": "This transition to a semi-annual net loss reflects an operational and financial performance where total operating expenses, financing costs, or asset impairments exceed total revenues over the six-month period, reducing retained earnings on the balance sheet.",
+    "meaning_ar": "يعكس التحول إلى تسجيل صافي خسائر نصف سنوية وضعاً تتجاوز فيه المصروفات التشغيلية أو تكاليف التمويل إجمالي الإيرادات المحققة خلال فترة الستة أشهر، مما يؤدي إلى خفض الأرباح المرحلة في الميزانية العمومية."
+  },
   "جدوي للتنميه الصناعيه تتحول للخساره بقيمه 378.5 مليون جنيه بالنصف الاول": {
     "meaning": "The company's operational revenues for the first half of the year are insufficient to offset its total production, operating, and financing costs, resulting in a net negative balance on the income statement that directly reduces retained earnings.",
     "meaning_ar": "تعجز الإيرادات التشغيلية للشركة خلال النصف الأول عن تغطية إجمالي تكاليف الإنتاج والتشغيل والأعباء التمويلية، مما يسفر عن رصيد صافٍ سالب في قائمة الدخل يخفض مباشرة من الأرباح المرحلة في حقوق الملكية."
@@ -3941,6 +3949,10 @@
     "meaning": "The directive requires consumer and microfinance companies to integrate their credit databases with the Egyptian Credit Bureau (I-Score) via real-time data feeds, establishing instantaneous information exchange for credit risk assessment.",
     "meaning_ar": "يُلزم القرار شركات التمويل الاستهلاكي وتمويل المشروعات بربط قواعد بياناتها الائتمانية لحظيًا مع الشركة المصرية للاستعلام الائتماني (آي سكور)، مما يتيح التبادل الفوري للمعلومات لتقييم الجدارة الائتمانية."
   },
+  "عاجل.. القلعه تقرر شراء حصه اضافيه في المصريه للتكرير": {
+    "meaning": "Acquiring an additional equity stake in an operational subsidiary expands the parent company's consolidated ownership percentage, voting control, and direct proportional entitlement to the refining facility's underlying financial results.",
+    "meaning_ar": "يؤدي الاستحواذ على حصة إضافية في شركة تابعة قائمة إلى زيادة نسبة ملكية الشركة الأم وحقوق التصويت التابعة لها، ويرفع حصتها المباشرة في القوائم المالية المجمعة لنتائج أعمال مصفاة التكرير."
+  },
   "عاجل.. تضخم اسعار المستهلكين بمدن مصر يتباطا الي 14.5% في اغسطس": {
     "meaning": "A deceleration in urban consumer price inflation to 14.5% reflects a slower pace of price increases across standard consumer baskets, stabilizing wholesale procurement costs and operating expenses across domestic supply chains.",
     "meaning_ar": "يعكس تباطؤ تضخم أسعار المستهلكين في المدن إلى 14.5% تراجع وتيرة الزيادة في أسعار سلة السلع الاستهلاكية، مما يحد من وتيرة تصاعد تكاليف الشراء بالجملة والمصروفات التشغيلية عبر سلاسل الإمداد المحلية."
@@ -4504,6 +4516,10 @@
   "مصر السيادي يطلق صندوقا للاستثمار الصناعي براس مال مرخص 10 مليارات جنيه": {
     "meaning": "The Sovereign Fund of Egypt establishes a dedicated industrial investment vehicle with an authorized capital framework of EGP 10 billion, providing direct equity participation and structuring co-investments in manufacturing assets.",
     "meaning_ar": "يؤسس صندوق مصر السيادي وعاءً استثماريًا متخصصًا برأس مال مرخص يبلغ 10 مليارات جنيه لضخ مساهمات رأسمالية مباشرة وإبرام شراكات في الأصول والمنشآت الصناعية."
+  },
+  "مصر تبحث التعاون مع “الاوروبي لاعاده الاعمار” في ترفيق المناطق الصناعيه": {
+    "meaning": "Partnership discussions with the EBRD involve securing multilateral development financing and technical frameworks to install core utilities—such as power, water, and road networks—across designated industrial zones.",
+    "meaning_ar": "تتضمن المباحثات مع البنك الأوروبي لإعادة الإعمار والتنمية توفير تمويلات تنموية وأطر فنية لمد شبكات المرافق الأساسية، مثل الكهرباء والمياه والطرق، داخل المناطق الصناعية المحددة."
   },
   "مصر تبحث توسيع التعاون مع البنك الاسيوي": {
     "meaning": "Cooperation with the Asian Infrastructure Investment Bank involves securing multilateral development financing and technical assistance for domestic infrastructure, energy, and transportation projects.",
