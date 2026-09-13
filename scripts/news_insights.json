@@ -2259,6 +2259,10 @@
     "meaning": "An interest rate hike by the European Central Bank increases borrowing costs for euro-denominated debt and raises financing expenses for companies trading with the eurozone.",
     "meaning_ar": "يؤدي رفع البنك المركزي الأوروبي لأسعار الفائدة إلى زيادة تكلفة الاقتراض للديون المقومة باليورو، ورفع أعباء التمويل للشركات التي تجري تعاملات تجارية مع منطقة اليورو."
   },
+  "المركزي الاوروبي: صدمه التضخم الحاليه اطول امدا.. والفايده قد ترتفع مجددا": {
+    "meaning": "Persistent inflation extends tight monetary policy cycles, maintaining elevated international borrowing costs and tighter global liquidity conditions.",
+    "meaning_ar": "استمرار الضغوط التضخمية يطيل أمد دورات التشدد النقدي، وهو ما يبقي تكاليف الاقتراض الدولي عند مستويات مرتفعة ويحد من مستويات السيولة العالمية."
+  },
   "المركزي التركي يبقي اسعار الفايده دون تغيير عند 37%": {
     "meaning": "Maintaining the benchmark interest rate at 37% keeps borrowing costs, debt service terms, and banking system liquidity conditions unchanged for Turkish commercial lenders and corporate balance sheets.",
     "meaning_ar": "يُبقي تثبيت سعر الفائدة الأساسي عند 37% على تكاليف الاقتراض وشروط خدمة الدين ومستويات السيولة في القطاع المصرفي التركي دون تغيير."
@@ -2634,6 +2638,10 @@
   "بنك ABC مصر يضخ 4.5 مليارات جنيه تمويلا مستداما خلال 2025": {
     "meaning": "This operational allocation directs 4.5 billion EGP of Bank ABC Egypt's credit portfolio toward projects meeting ESG and sustainable finance criteria, expanding the green lending component of its balance sheet.",
     "meaning_ar": "يخصص هذا الإجراء التشغيلي 4.5 مليارات جنيه من المحفظة الائتمانية لبنك ABC مصر للمشروعات المستوفية لمعايير التمويل المستدام، مما يوسع بند الإقراض الأخضر في ميزانيته العمومية."
+  },
+  "بنك HSBC يرصد تباينا باسواق الدين.. لماذا لم تتاثر هوامش ايتمان الشركات بارتفاع الفايده": {
+    "meaning": "Corporate credit spreads remain resilient against high benchmark interest rates when corporate balance sheets hold high cash reserves, strong debt service coverage ratios, and low debt-refinancing rollover needs.",
+    "meaning_ar": "تستقر هوامش الائتمان للشركات رغم ارتفاع أسعار الفائدة الأساسية نتيجة احتفاظ الشركات بسيولة نقدية كافية، ومستويات قوية لتغطية خدمة الدين، مع انخفاض متطلبات إعادة التمويل قصيرة الأجل."
   },
   "بنك استثمار: 40 مليار دولار فقط من الاصول المرمزه عالميا حتي الان": {
     "meaning": "Tokenized assets represent traditional financial instruments and real-world assets converted into digital tokens on distributed ledger networks, with the current global market value standing at $40 billion.",
@@ -3132,6 +3140,10 @@
     "meaning": "Local automotive assembly expands manufacturing lines to include new completely-knocked-down (CKD) or semi-knocked-down (SKD) operations within domestic facilities. This setup utilizes local component suppliers and operates under domestic manufacturing customs frameworks rather than finished vehicle import duties.",
     "meaning_ar": "يتضمن التجميع المحلي للسيارات إضافة خطوط إنتاج لتجميع فئات جديدة بنظام الأجزاء المفككة داخل المنشآت الصناعية المحلية. وتعتمد هذه الآلية التشغيلية على موردي المكونات المحلية وتخضع للأطر الجمركية والضريبية الخاصة بالتصنيع المحلي بدلاً من رسوم استيراد السيارات كاملة الصنع."
   },
+  "تيسير من “الرقابه الماليه” علي الشركات المهنيه في مجال التامين": {
+    "meaning": "The Financial Regulatory Authority adjusts regulatory compliance requirements and operational procedures for specialized insurance service providers operating in the market.",
+    "meaning_ar": "تعدل الهيئة العامة للرقابة المالية متطلبات الامتثال التنظيمي والإجراءات التشغيلية للشركات والمهن المتخصصة العاملة في قطاع التأمين."
+  },
   "تيلدا تتيح ربط بطاقتها بتطبيق انستاباي بالتعاون مع بنك القاهره": {
     "meaning": "This integration connects Telda prepaid cards directly to the Central Bank of Egypt's Instant Payment Network (IPN) through Banque du Caire as the sponsoring settlement bank, enabling real-time fund transfers between Telda accounts and the domestic banking network.",
     "meaning_ar": "يربط هذا التكامل بطاقات تيلدا مسبقة الدفع مباشرة بشبكة المدفوعات اللحظية (IPN) التابعة للبنك المركزي المصري عبر بنك القاهرة كبنك راعٍ للتسوية، مما يتيح التحويلات المالية الفورية بين حسابات تيلدا والشبكة المصرفية المحلية."
@@ -3223,6 +3235,10 @@
   "حرب الرسوم بين واشنطن واوتاوا تنعش قطاعات غير متوقعه في كندا": {
     "meaning": "Tariff disputes redirect cross-border supply chains and substitute imported goods with domestic alternatives, shifting procurement flows toward secondary local producers.",
     "meaning_ar": "تؤدي النزاعات الجمركية إلى إعادة توجيه سلاسل التوريد البينية واستبدال السلع المستوردة ببدائل محلية، مما يحول مسار المشتريات نحو المنتجين المحليين في قطاعات غير أساسية."
+  },
+  "حسين ابوصدام : السحابه السوداء تلقي بظلالها علي الفلاحين في عيدهم ال74": {
+    "meaning": "The seasonal enforcement of agricultural burning regulations imposes direct compliance costs, machinery rental fees for biomass shredding, and regulatory fines on smallholder farming operations.",
+    "meaning_ar": "يفرض التطبيق الموسمي للضوابط البيئية المنظمة للتخلص من المخلفات الزراعية تكاليف تشغيلية مباشرة تشمل استئجار معدات فرم وتدوير القش بالإضافة إلى الغرامات التنظيمية على المزارعين."
   },
   "حمايه المستهلك يضبط مصنعا غير مرخص لتجهيز وتقطيع وحفظ هياكل واجزاء دواجن فاسده": {
     "meaning": "Regulatory enforcement against informal poultry processing facilities halts unauthorized supply in the food value chain and channels meat processing activity through licensed operators subject to state inspection and hygiene standards.",
@@ -4137,6 +4153,10 @@
     "meaning": "Industrial zones such as Sokhna operate under special economic frameworks that provide integrated logistics, port infrastructure, and regulatory facilities to industrial tenants.",
     "meaning_ar": "تعمل المناطق الصناعية مثل السخنة وفق أطر اقتصادية خاصة توفر بنية تحتية لوجستية وموانئ وتسهيلات تنظيمية للشركات الصناعية المتواجدة بها."
   },
+  "عموميه الملتقي العربي تقر مبادله اسهمها في «التوفيق» استجابه لعرض بنك البركه": {
+    "meaning": "This transaction executes a share-swap acquisition where Arab Moltaka Investments transfers its equity holding in Al Tawfeek Leasing to Al Baraka Bank in exchange for newly issued or swapped shares. The deal shifts the ownership structure of the target entity and reallocates the asset composition on Arab Moltaka's balance sheet from direct operating equity to a stake in the acquiring bank.",
+    "meaning_ar": "تنفذ هذه المعاملة صفقة مبادلة أسهم تنقل بموجبها شركة الملتقى العربي للاستثمارات حصتها في شركة التوفيق للتأجير التمويلي إلى بنك البركة مقابل أسهم، مما يعيد هيكلة ملكية الشركة التابعة ويغير تصنيف الأصول في الميزانية العمومية لشركة الملتقى من حصة تشغيلية مباشرة إلى مساهمة في البنك الدامج."
+  },
   "عموميه راكتا تناقش مد فتره التصفيه وتجديد عمل المصفي العام 30 سبتمبر": {
     "meaning": "Extending the liquidation period and renewing the liquidator's mandate continues the formal legal and operational process of inventorying, valuing, and selling company assets to settle outstanding liabilities under statutory oversight.",
     "meaning_ar": "يؤدي مد فترة التصفية وتجديد تفويض المصفي القانوني إلى استمرار الإجراءات النظامية لحصر أصول الشركة وتقييمها وبيعها لسداد الالتزامات المالية والديون تحت إشراف الجمعية العامة."
@@ -4412,6 +4432,10 @@
   "مبيعات السيارات في مصر تقفز 29.7% اول 7 اشهر من 2026": {
     "meaning": "An expansion in automotive sales volumes reflects higher delivery throughput across local dealership networks and increased import and local assembly rates compared to the prior period.",
     "meaning_ar": "يعكس ارتفاع حجم مبيعات السيارات زيادة في معدلات تسليم المركبات عبر شبكات التوزيع المحلية وارتفاع وتيرة الاستيراد والتجميع المحلي مقارنة بالفترة السابقة."
+  },
+  "مبيعات العرب تخفض بموشرات السوق بختام تعاملات الاحد": {
+    "meaning": "Net capital outflows from Arab non-resident portfolios increase the volume of equity supply relative to local absorption, which registers as a downward adjustment across headline price indices during the session.",
+    "meaning_ar": "تؤدي التدفقات الرأسمالية الخارجة وصافي تعاملات البيع للمستثمرين العرب إلى زيادة المعروض من الأسهم مقارنة بحجم الطلب، مما ينعكس في انخفاض المؤشرات السعرية العامة للسوق عند الإغلاق."
   },
   "مبيعات سوق السيارات في مصر ترتفع 29.7% خلال اول 7 اشهر من 2026 (جراف)": {
     "meaning": "The recorded increase reflects higher inventory turnover and distribution volumes across local dealerships compared to the prior period, driven by the operational fulfillment of vehicle assembly quotas and import shipments.",
@@ -5041,6 +5065,10 @@
     "meaning": "Daily wholesale and retail produce pricing reflects direct spot market clearing based on perishable inventory levels, transportation logistics, and immediate supply-demand matching at physical trading hubs.",
     "meaning_ar": "يعكس التسعير اليومي للخضراوات والفاكهة في أسواق الجملة والتجزئة آلية التوازن الفوري بناءً على حجم المعروض من السلع سريعة التلف، وتكاليف النقل، ومعدلات التداول المباشر في أسواق العبور والتجزئة."
   },
+  "هل استقرت اسعار الخضروات والفاكهه اليوم الاحد 13 سبتمبر 2026؟": {
+    "meaning": "The headline tracks daily wholesale and retail pricing dynamics for fresh agricultural commodities, reflecting immediate equilibrium adjustments between daily farm harvests, logistics flows, and consumer demand.",
+    "meaning_ar": "يرصد العنوان حركة الأسعار اليومية لسلع الخضر والفاكهة في أسواق الجملة والتجزئة، والتي تعكس التوازن الآني بين حجم المعروض من المحاصيل الزراعية وتكاليف النقل ومستويات الاستهلاك."
+  },
   "هل تغلق تعديلات قواعد القيد باب استغلال المعلومات الداخليه؟": {
     "meaning": "EGX listing rule amendments introduce regulatory restrictions and reporting obligations designed to control access to material non-public information and govern trading activities by corporate insiders.",
     "meaning_ar": "تتضمن تعديلات قواعد القيد بالبورصة المصرية قيوداً تنظيمية والتزامات إفصاح تحكم التعامل على المعلومات الجوهرية غير المعلنة وتنظم تداولات المطلعين بالشركات المقيدة."
@@ -5480,6 +5508,10 @@
   "“الفنار للمقاولات” تتعاقد علي تنفيذ اعمال ترابيه في راس الحكمه ب11.6 مليون جنيه": {
     "meaning": "This agreement assigns earthwork and site preparation operations in Ras El Hekma to Al Fanar Contracting, adding 11.6 million EGP in contract value to the company's active construction backlog.",
     "meaning_ar": "يقضي هذا التعاقد بإسناد أعمال الحفر وتسوية التربة في رأس الحكمة لشركة الفنار للمقاولات، مما يضيف قيمة تعاقدية قدرها 11.6 مليون جنيه إلى محفظة العمليات الإنشائية قيد التنفيذ بالشركة."
+  },
+  "“القلعه” تضاعف حصتها في “المصريه للتكرير” الي 27.1%": {
+    "meaning": "Increasing the ownership stake to 27.1% raises the parent company's proportional share of the refinery's equity, operational cash flows, and balance sheet assets under standard equity accounting.",
+    "meaning_ar": "رفع نسبة الملكية إلى 27.1% يرفع الحصة التناسبية للشركة القابضة في حقوق الملكية والتدفقات التشغيلية وأصول ميزانية مصفاة التكرير وفق المعايير المحاسبية للملكية."
   },
   "“القومي لتنظيم الاعلانات” يواصل جولاته لرصد تطبيق المنظومه بمحافظه الجيزه": {
     "meaning": "Regulatory inspections enforce standardized outdoor advertising rules and licensing compliance for media agencies and billboard operators across Giza.",
