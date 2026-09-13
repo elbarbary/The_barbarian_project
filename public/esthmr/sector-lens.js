@@ -171,102 +171,6 @@ export function ringLayout(doc, view = { w: 720, h: 520 }) {
 }
 
 /** The months chart: the exchange's turnover a month at a time, one sector lit. */
-export function monthsChart(monthly, sector, { ar, t, onPick, month, mode }) {
-  const rows = monthRows(monthly, sector);
-  if (rows.length < 2) return null;
-  // Two scales, because one cannot answer both questions. Against the whole
-  // exchange a sector worth a tenth of it is a tenth of a column — true, and
-  // unreadable as a shape. On its own scale its own months are legible and the
-  // market is gone. The reader picks; neither view is the default truth.
-  const alone = mode === 'sector' && !!sector;
-  const top = (alone
-    ? Math.max(...rows.map((r) => r.part || 0))
-    : Math.max(...rows.map((r) => r.value || 0))) * 1.08 || 1;
-  const view = { w: 720, h: 230 };
-  const pad = { l: 46, r: 8, t: 14, b: 34 };
-  const band = (view.w - pad.l - pad.r) / rows.length;
-  const width = Math.min(band * 0.62, 44);
-  const floor = view.h - pad.b;
-  const yOf = (v) => floor - (v / top) * (floor - pad.t);
-  const ticks = [0, 0.5, 1].map((f) => f * top);
-  const colour = sector ? hueOf(sector.id) : 'var(--accent)';
-
-  return h('svg', {
-    className: 'sl-months', viewBox: `0 0 ${view.w} ${view.h}`,
-    role: 'img', preserveAspectRatio: 'xMidYMid meet',
-    'aria-label': t(
-      `Covered turnover by month, ${rows[0].month} to ${rows[rows.length - 1].month}`,
-      `قيمة التداول المغطاة شهرياً من ${rows[0].month} إلى ${rows[rows.length - 1].month}`),
-  },
-    h('defs', null,
-      // Hatching, not a lighter colour: a month that is still running or that
-      // the archive joins halfway through cannot be compared with a full one,
-      // and a legend nobody reads should not be the only place that says so.
-      h('pattern', {
-        id: 'sl-partial', width: 5, height: 5,
-        patternTransform: 'rotate(45)', patternUnits: 'userSpaceOnUse',
-      }, h('line', {
-        x1: 0, y1: 0, x2: 0, y2: 5, stroke: 'var(--rule)', 'stroke-width': 2.4,
-      }))
-    ),
-    ticks.map((v) => h('g', { key: `t${v}` },
-      h('line', {
-        x1: pad.l, x2: view.w - pad.r, y1: yOf(v), y2: yOf(v),
-        stroke: 'var(--rule)', 'stroke-width': 0.6, opacity: 0.7,
-      }),
-      h('text', {
-        x: pad.l - 6, y: yOf(v) + 3, 'text-anchor': 'end',
-        'font-size': 8.5, fill: 'var(--faint)', direction: 'ltr',
-      }, money(v))
-    )),
-    rows.map((r, i) => {
-      const x = pad.l + band * i + (band - width) / 2;
-      const ground = alone ? (r.part || 0) : (r.value || 0);
-      const full = yOf(ground);
-      const part = !alone && finite(r.part) ? yOf(r.part) : null;
-      const label = monthLabel(r.month, ar);
-      const on = month === r.month;
-      return h('g', {
-        key: r.month, className: `sl-col${on ? ' sl-col-on' : ''}`,
-        role: 'button', tabIndex: 0,
-        onClick: () => onPick && onPick(r.month),
-        onKeyDown: (e) => {
-          if (onPick && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); onPick(r.month); }
-        },
-      },
-        h('title', null,
-          `${r.month} · ${money(ground)} EGP`
-          + (alone ? ` (${finite(r.share) ? r.share.toFixed(1) : '—'}% `
-                     + `${t('of the month', 'من الشهر')})` : '')
-          + ` · ${r.sessions} ` + t('sessions', 'جلسة') + ` · ${r.companies} `
-          + t('companies traded', 'شركة تداولت')
-          + (r.partial ? ` · ${t('part month', 'شهر ناقص')}` : '')),
-        h('rect', {
-          x, y: full, width, height: Math.max(0, floor - full),
-          rx: 2,
-          fill: r.partial ? 'url(#sl-partial)' : (alone ? colour : 'var(--own-cell)'),
-          opacity: alone && !r.partial ? 0.92 : 1,
-          stroke: 'var(--rule)', 'stroke-width': 0.6,
-        }),
-        part !== null && r.part > 0 && h('rect', {
-          x, y: part, width, height: Math.max(0.8, floor - part),
-          rx: 2, fill: colour, opacity: 0.92,
-        }),
-        h('text', {
-          x: x + width / 2, y: view.h - 14, 'text-anchor': 'middle',
-          'font-size': 8.5, fill: on ? 'var(--ink)' : 'var(--faint)',
-          'font-weight': on ? 700 : 400,
-        }, label.name),
-        (i === 0 || label.name === (ar ? 'ينا' : 'Jan')) && h('text', {
-          x: x + width / 2, y: view.h - 4, 'text-anchor': 'middle',
-          'font-size': 7.5, fill: 'var(--faint)', direction: 'ltr',
-        }, `'${label.year}`)
-      );
-    })
-  );
-}
-
-/** The ownership ring: sectors, and the stakes they hold in one another. */
 export function ownershipRing(doc, { ar, t, focus, onPick }) {
   const model = ringLayout(doc);
   if (!model.nodes.length) return null;
@@ -342,5 +246,120 @@ export function ownershipRing(doc, { ar, t, focus, onPick }) {
         );
       })
     )
+  );
+}
+
+/* ── Changes in trading share ──────────────────────────────────────────────
+ *
+ * What replaced the months-of-money chart, and why.
+ *
+ * That chart plotted absolute turnover, which is two things added together: a
+ * month where the whole market was busier, and a month where this sector took
+ * a bigger slice of it. A reader cannot separate them by looking. It also
+ * changed scale between two views, so the height of a bar meant one thing and
+ * then another, and it hatched the months that could not be compared while
+ * still drawing them the same height.
+ *
+ * This draws one thing: how many points of the exchange's traded value each
+ * sector gained or lost against the month before. The number is printed in the
+ * cell, so the colour is a second reading of it and never the only one.
+ */
+
+const MONTHS_SHOWN = 12;
+
+/** The window of months on screen, newest last. */
+export function windowOf(rows, size = MONTHS_SHOWN, end) {
+  const withChange = rows.filter((r) => r && r.changes);
+  if (!withChange.length) return [];
+  const last = end ? withChange.findIndex((r) => r.month === end) : withChange.length - 1;
+  const stop = last < 0 ? withChange.length - 1 : last;
+  return withChange.slice(Math.max(0, stop - size + 1), stop + 1);
+}
+
+/** Sectors that actually moved in the window — a filter, never a ranking. */
+export function movers(window_, sectors, notable) {
+  const bar = finite(notable) ? notable : 1;
+  return sectors.filter((s) =>
+    window_.some((r) => Math.abs((r.changes || {})[s] || 0) >= bar));
+}
+
+/** How strongly to ink a cell: the number carries it, the colour agrees. */
+export function inkFor(points, notable) {
+  const bar = (finite(notable) ? notable : 1) * 3;
+  const weight = Math.min(1, Math.abs(points || 0) / bar);
+  if (!points || weight < 0.08) return null;
+  return { colour: points > 0 ? 'var(--up)' : 'var(--down)', weight };
+}
+
+export function shareHeatmap(doc, { ar, t, onPick, month, focus }) {
+  const rows = windowOf(doc.months, MONTHS_SHOWN, month);
+  if (rows.length < 2) return null;
+  const shown = movers(rows, doc.sectors || [], doc.notable);
+  const quiet = (doc.sectors || []).length - shown.length;
+
+  return h('div', { className: 'sl-heat-wrap' },
+    h('table', { className: 'sl-heat' },
+      h('caption', { className: 'sl-heat-cap' },
+        t(`Points of the exchange's traded value gained or lost against the month before. `
+          + `${shown.length} sectors moved at least ${doc.notable} point in these months; `
+          + `${quiet} stayed inside it.`,
+          `نقاط من قيمة تداول البورصة كسبها القطاع أو خسرها مقارنة بالشهر السابق. `
+          + `تحرك ${shown.length} قطاعاً نقطة واحدة على الأقل في هذه الشهور، `
+          + `وظل ${quiet} داخل هذا الحد.`)),
+      h('thead', null, h('tr', null,
+        h('th', { scope: 'col', className: 'sl-heat-side' }, t('Sector', 'القطاع')),
+        rows.map((r) => h('th', {
+          key: r.month, scope: 'col', className: 'sl-heat-month', dir: 'ltr',
+        }, r.month.slice(2)))
+      )),
+      h('tbody', null, shown.map((s) => h('tr', {
+        key: s,
+        className: `sl-heat-row${focus === s ? ' sl-heat-on' : ''}`,
+        onClick: () => onPick && onPick(s),
+      },
+        h('th', { scope: 'row', className: 'sl-heat-side', title: s }, s),
+        rows.map((r) => {
+          const v = (r.changes || {})[s];
+          const ink = inkFor(v, doc.notable);
+          return h('td', {
+            key: r.month, dir: 'ltr',
+            className: 'sl-heat-cell',
+            style: ink ? { color: ink.colour, fontWeight: 600 } : null,
+            title: `${s} · ${r.month} · ${finite(v) ? v.toFixed(2) : '0'} pp`,
+          }, finite(v) && Math.abs(v) >= 0.05
+            ? `${v > 0 ? '+' : ''}${v.toFixed(1)}` : '·');
+        })
+      )))
+    )
+  );
+}
+
+/** Every earlier month this sector gained share, and what the next month did. */
+export function followedPanel(doc, sector, { ar, t }) {
+  const record = (doc.followed || {})[sector];
+  if (!record) return null;
+  const cases = (record.cases || []).slice().reverse();
+
+  return h('div', { className: 'sl-followed' },
+    h('h3', null, t('What followed, the other times', 'ماذا تلا ذلك في المرات الأخرى')),
+    h('p', { className: 'ft-note' },
+      record.count === 0
+        ? t(`This sector has not gained ${record.qualify} points of share in a single month in this record.`,
+            `لم يكسب هذا القطاع ${record.qualify} نقطة من النصيب في شهر واحد في هذا السجل.`)
+        : record.share === null
+          // One case is a case. Rounding it to a percentage is how a single
+          // month becomes a claim about the market.
+          ? t(`${record.count} earlier month${record.count === 1 ? '' : 's'} in this record — too few to put a rate on. They are listed below.`,
+              `${record.count} شهراً سابقاً في هذا السجل — أقل من أن يُبنى عليها معدل. وهي مذكورة أدناه.`)
+          : t(`It gained at least ${record.qualify} points of share in ${record.count} earlier months. Its share fell the month after in ${record.gaveBack} of them.`,
+              `كسب ما لا يقل عن ${record.qualify} نقطة من النصيب في ${record.count} شهراً سابقاً. وتراجع نصيبه في الشهر التالي في ${record.gaveBack} منها.`)),
+    cases.length ? h('ul', { className: 'sl-cases' },
+      cases.map((c) => h('li', { key: c.month },
+        h('span', { dir: 'ltr' }, c.month),
+        h('b', { dir: 'ltr', style: { color: 'var(--up)' } }, `+${c.rose.toFixed(1)}`),
+        h('small', null, t('then', 'ثم')),
+        h('b', { dir: 'ltr', style: { color: c.then < 0 ? 'var(--down)' : 'var(--up)' } },
+          `${c.then > 0 ? '+' : ''}${c.then.toFixed(1)}`)
+      ))) : null
   );
 }

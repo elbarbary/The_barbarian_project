@@ -1535,6 +1535,15 @@ export async function worldMonitor() {
   return d;
 }
 
+/** Where trading attention moved between sectors, and what followed before. */
+export async function sectorRotation() {
+  const d = await doc('sector-rotation.json');
+  if (d?.schemaVersion !== 1 || !Array.isArray(d.months) || !Array.isArray(d.sectors)) {
+    throw new Error('Invalid sector rotation snapshot');
+  }
+  return d;
+}
+
 /** Which listed companies hold stakes in one another, read sector to sector. */
 export async function sectorOwnership() {
   const d = await doc('sector-ownership.json');

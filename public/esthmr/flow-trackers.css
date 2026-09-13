@@ -910,3 +910,42 @@ button.om-holder-row:hover span { color: var(--accent); }
   .wm-row { grid-template-columns: minmax(0, 1fr); }
   .wm-row-filed { text-align: start; }
 }
+
+/* Changes in trading share — a table, because the numbers are the reading and
+   the colour only agrees with them. */
+.sl-heat-wrap { margin-top: 12px; overflow-x: auto; }
+.sl-heat { border-collapse: collapse; width: 100%; min-width: 520px;
+  font-size: 11px; font-family: 'IBM Plex Mono', monospace; }
+.sl-heat-cap { caption-side: bottom; padding-top: 10px; text-align: start;
+  font-family: 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  font-size: 11.5px; color: var(--t2); line-height: 1.55; }
+.sl-heat th, .sl-heat td { padding: 4px 6px; text-align: end; }
+.sl-heat-month { font-size: 9.5px; color: var(--faint); font-weight: 500; }
+.sl-heat-side { text-align: start; font-weight: 500; font-size: 10.5px;
+  font-family: 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  max-width: 168px; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap; position: sticky; inset-inline-start: 0;
+  background: var(--bg); }
+.sl-heat-row { cursor: pointer; }
+.sl-heat-row:nth-child(odd) { background: var(--sunk); }
+.sl-heat-row:nth-child(odd) .sl-heat-side { background: var(--sunk); }
+.sl-heat-row:hover { outline: 1px solid var(--line); }
+.sl-heat-on { outline: 1.5px solid var(--ink); }
+.sl-heat-cell { color: var(--t2); }
+
+.sl-rate { margin-top: 12px; font-size: 13.5px; line-height: 1.6; }
+.sl-eras, .sl-refuses { margin-top: 6px; }
+.sl-refuses { border-inline-start: 2px solid var(--line); padding-inline-start: 10px; }
+
+.sl-followed { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+.sl-followed h3 { font-size: 13px; margin: 0 0 4px; }
+.sl-cases { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 2px; }
+.sl-cases li { display: grid; grid-template-columns: 64px 52px auto 52px;
+  gap: 8px; align-items: baseline; padding: 4px 8px; border-radius: 8px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; }
+.sl-cases li:nth-child(odd) { background: var(--sunk); }
+.sl-cases small { color: var(--faint); font-size: 10px; }
+
+@media (max-width: 768px) {
+  .sl-heat-side { max-width: 104px; }
+}

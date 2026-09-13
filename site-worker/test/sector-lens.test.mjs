@@ -20,6 +20,7 @@ const { Component } = await import('../../public/esthmr/logic.js');
 const file = (path) => readFile(new URL('../../' + path, import.meta.url), 'utf8');
 const published = JSON.parse(await file('public/data/v1/flow-trackers.json'));
 const owned = JSON.parse(await file('public/data/v1/sector-ownership.json'));
+const rotation = JSON.parse(await file('public/data/v1/sector-rotation.json'));
 const stylesheet = await file('public/esthmr/flow-trackers.css');
 
 const text = (node) => [node?.text || '', ...(node?.children || []).map(text)].join(' ');
@@ -37,7 +38,7 @@ function screen(state = {}, lang = 'en') {
   Object.assign(c.state, { lang, screen: 'liquidity' }, state);
   c.setData({
     demo: false, companies: [], series: [], fins: [],
-    flowTrackers: published, sectorOwnership: owned,
+    flowTrackers: published, sectorOwnership: owned, sectorRotation: rotation,
   });
   return flowTrackers(c, c.data(), lang === 'ar').screen;
 }
@@ -58,21 +59,13 @@ const MONTHLY = { months: [
   { month: '2026-08', value: 100, sessions: 10, companies: 200, coverage: 90, partial: true },
 ] };
 
-test('a month the archive only half covers is drawn as uncomparable', () => {
-  // 2026-08 holds ten sessions against July's twenty-one. Drawn identically,
-  // a half month reads as the market halving.
+test('a month the archive only half covers is marked uncomparable', () => {
+  // 2026-08 holds ten sessions against July's twenty-one. Counted identically,
+  // a half month reads as the market halving. The chart that drew this with a
+  // hatch is gone; the flag it drew is still what logic.js reads.
   const rows = SL.monthRows(MONTHLY, SECTORS[0]);
   assert.equal(rows[1].partial, true);
-  const svg = SL.monthsChart(MONTHLY, SECTORS[0], {
-    ar: false, t: (en) => en, month: '2026-08', onPick: () => {},
-  });
-  const cols = withClass(svg, 'sl-col');
-  assert.equal(cols.length, 2);
-  const fills = cols.map((c) => all(c, 'rect')[0].attrs.fill);
-  assert.equal(fills[0], 'var(--own-cell)');
-  assert.match(fills[1], /url\(#sl-partial\)/);
-  // And the hatch it points at exists, rather than resolving to nothing.
-  assert.equal(all(svg, 'pattern').filter((p) => p.attrs.id === 'sl-partial').length, 1);
+  assert.equal(rows[0].partial, false);
 });
 
 test('a sector never draws more of a month than the whole month held', () => {
@@ -187,7 +180,7 @@ test('the liquidity screen draws all three blocks with the published files', () 
     const view = screen({}, lang);
     const out = text(view);
     assert.doesNotMatch(out, /NaN|undefined|Infinity/);
-    assert.ok(withClass(view, 'sl-months').length, `${lang}: no months chart`);
+    assert.ok(withClass(view, 'sl-heat').length, `${lang}: no trading-share grid`);
     assert.ok(withClass(view, 'sl-rotation').length, `${lang}: no rotation list`);
     assert.ok(withClass(view, 'sl-ring').length, `${lang}: no ownership ring`);
     all(view, 'path').forEach((p) => assert.doesNotMatch(p.attrs.d || '', /NaN|Infinity/));
@@ -197,78 +190,108 @@ test('the liquidity screen draws all three blocks with the published files', () 
 test('the screen still draws when the ownership file never arrives', () => {
   const c = new Component({});
   Object.assign(c.state, { lang: 'en', screen: 'liquidity' });
-  c.setData({ demo: false, companies: [], series: [], fins: [], flowTrackers: published });
+  c.setData({ demo: false, companies: [], series: [], fins: [], flowTrackers: published,
+              sectorRotation: rotation });
   const view = flowTrackers(c, c.data(), false).screen;
-  assert.ok(withClass(view, 'sl-months').length);
+  assert.ok(withClass(view, 'sl-heat').length);
   assert.equal(withClass(view, 'sl-ring').length, 0);
   assert.doesNotMatch(text(view), /NaN|undefined/);
 });
 
-test('picking a month moves the chart and the rotation with it', () => {
+
+/* Changes in trading share — what replaced the months chart.
+ *
+ * The reader who commissioned the screen could not read the old one. These
+ * hold the three things that made it unreadable from coming back: a mark whose
+ * meaning changes between views, colour as the only carrier of a value, and a
+ * shape that implies a transfer between two sectors the record cannot evidence.
+ */
+
+test('the grid shows change in share, not how busy the market was', () => {
+  // The old chart's fault: a bar mixed "the whole market was busier" with
+  // "this sector took a bigger slice", and no reader can separate them.
+  const view = screen();
+  const grid = withClass(view, 'sl-heat')[0];
+  assert.ok(grid, 'no trading-share grid');
+  const cells = withClass(grid, 'sl-heat-cell').map((c) => text(c).trim());
+  assert.ok(cells.length > 10, `only ${cells.length} cells`);
+  // Every cell is a signed point figure or the quiet marker — never EGP.
+  cells.forEach((c) => assert.match(c, /^([+-]\d+\.\d|·)$/, `cell reads "${c}"`));
+  assert.doesNotMatch(text(grid), /EGP|جنيه/);
+});
+
+test('the number is the reading and the colour only agrees with it', () => {
+  // Colour as the sole carrier fails for a colour-blind reader and in print.
+  const grid = withClass(screen(), 'sl-heat')[0];
+  const styleOf = (n) => {
+    const s = n.attrs?.style;
+    return typeof s === 'string' ? s : JSON.stringify(s || '');
+  };
+  const inked = withClass(grid, 'sl-heat-cell')
+    .filter((c) => /--(up|down)\b/.test(styleOf(c)));
+  assert.ok(inked.length, 'nothing is inked at all');
+  inked.forEach((c) => {
+    const shown = text(c).trim();
+    assert.match(shown, /^[+-]\d/, 'an inked cell with no number in it');
+    const up = /--up\b/.test(styleOf(c));
+    assert.equal(shown.startsWith('+'), up, `${shown} inked the wrong way`);
+  });
+});
+
+test('the sectors shown are a stated filter, never a ranking', () => {
+  // §8: a filter that returns however many it returns is a filter. A list cut
+  // to a rank makes the publisher the one choosing who is at the top.
+  const grid = withClass(screen(), 'sl-heat')[0];
+  const names = withClass(grid, 'sl-heat-side')
+    .map((n) => text(n).trim()).filter((n) => n && n !== 'Sector');
+  assert.deepEqual(names, [...names].sort(), 'the grid is ordered by size');
+  assert.match(text(grid), /moved at least/);
+  assert.match(text(grid), /stayed inside it/);
+});
+
+test('no arrow, flow or pair between two sectors is drawn', () => {
+  // Tested and refused: the strongest lead-lag pair in the record is the
+  // median of shuffled noise. See build_sector_rotation.py.
+  const view = screen();
+  const out = text(view);
+  assert.match(out, /No arrow, flow or pair between sectors is published/);
+  assert.doesNotMatch(out, /moved from .* to .*sector/i);
+});
+
+test('the base rate names its cases and the halves of the record', () => {
+  const out = text(screen());
+  const rate = out.match(/in (\d+) of (\d+) cases/);
+  assert.ok(rate, 'the headline frequency states no case count');
+  assert.ok(Number(rate[2]) >= 30, `a rate over only ${rate[2]} cases`);
+  assert.match(out, /Split in half so a reader can see whether it held/);
+});
+
+test('picking a sector row lists the months behind its own record', () => {
   const c = new Component({});
   Object.assign(c.state, { lang: 'en', screen: 'liquidity' });
   c.setData({ demo: false, companies: [], series: [], fins: [], flowTrackers: published,
-              sectorOwnership: owned });
+              sectorOwnership: owned, sectorRotation: rotation });
   const view = flowTrackers(c, c.data(), false).screen;
-  const cols = withClass(view, 'sl-col');
-  assert.ok(cols.length > 3);
-  const earlier = published.monthly.months[1].month;
-  cols.find((col) => text(col).includes(earlier.slice(0, 4)) || true);
-  const target = cols[1];
-  target.events.click();
-  assert.equal(c.state.flowMonth, published.monthly.months[1].month);
+  const rows = withClass(view, 'sl-heat-row');
+  assert.ok(rows.length, 'no rows to pick');
+  rows[0].events.click();
+  assert.ok(c.state.flowShareSector, 'picking a row selected nothing');
   const again = flowTrackers(c, c.data(), false).screen;
-  const badge = withClass(again, 'ft-range-badge').map(text).join(' ');
-  assert.match(badge, new RegExp(published.monthly.months[1].month));
+  const panel = withClass(again, 'sl-followed')[0];
+  assert.ok(panel, 'no record panel for the picked sector');
+  const cases = withClass(panel, 'sl-cases');
+  const said = text(panel);
+  // Either it lists the cases, or it says there are too few to rate — never a
+  // percentage with nothing behind it.
+  assert.ok(cases.length || /too few|has not gained/.test(said), said.slice(0, 120));
 });
 
-test('a sector can be drawn on its own scale without leaving the market behind', () => {
-  // Against the whole exchange a sector worth a tenth of it is a tenth of a
-  // column — true, and unreadable. The toggle exists so both readings are
-  // available; neither may quietly become the other.
-  const market = SL.monthsChart(MONTHLY, SECTORS[0], {
-    ar: false, t: (en) => en, month: '2026-08', mode: 'market', onPick: () => {},
-  });
-  const alone = SL.monthsChart(MONTHLY, SECTORS[0], {
-    ar: false, t: (en) => en, month: '2026-08', mode: 'sector', onPick: () => {},
-  });
-  const rects = (svg) => withClass(svg, 'sl-col').map((c) => all(c, 'rect').length);
-  // Two rects a column in the market view: the month, and the sector's part.
-  assert.deepEqual(rects(market), [2, 2]);
-  // One in the sector view — the sector IS the column, so a part of itself
-  // drawn on top of it would be the same bar twice.
-  assert.deepEqual(rects(alone), [1, 1]);
-  const height = (svg, i) => Number(withClass(svg, 'sl-col')[i]
-    .children.find((n) => n.tag === 'rect').attrs.height);
-  // July is 30 of the market's 100 and August 25 of 100: on its own scale the
-  // sector's July column is the taller one, which the market view cannot show.
-  assert.ok(height(alone, 0) > height(alone, 1));
-  assert.ok(height(market, 0) > height(market, 1) === false
-            || Math.abs(height(market, 0) - height(market, 1)) < 1);
-});
-
-test('the scale toggle reaches the screen and moves', () => {
-  const c = new Component({});
-  Object.assign(c.state, { lang: 'en', screen: 'liquidity' });
-  c.setData({ demo: false, companies: [], series: [], fins: [], flowTrackers: published,
-              sectorOwnership: owned });
-  const view = flowTrackers(c, c.data(), false).screen;
-  const pills = withClass(view, 'sl-scale')[0];
-  assert.ok(pills, 'no scale control on the months chart');
-  const buttons = all(pills, 'button');
-  assert.equal(buttons.length, 2);
-  buttons[1].events.click();
-  assert.equal(c.state.flowMonthView, 'sector');
-  const again = flowTrackers(c, c.data(), false).screen;
-  assert.equal(withClass(withClass(again, 'sl-months')[0], 'sl-col')[0]
-    .children.filter((n) => n.tag === 'rect').length, 1);
-});
-
-test('the month a reader picks keeps its colour', () => {
-  // Selection used to be drawn as a fill, and a fill in the stylesheet beats
-  // the column's own: picking a month emptied it.
-  const css = stylesheet;
-  assert.doesNotMatch(css, /\.sl-col[^{]*(hover|-on)[^{]*\{[^}]*\bfill\s*:/,
-    'the selected or hovered column is given a fill, which overrides its own');
-  assert.match(css, /\.sl-col-on rect \{[^}]*stroke:/);
+test('a rate is never quoted over a single month', () => {
+  const thin = { ...rotation, followed: { ...rotation.followed,
+    Probe: { qualify: 2, count: 1, gaveBack: 1, share: null,
+             cases: [{ month: '2024-02', rose: 3, next: '2024-03', then: -2 }] } } };
+  const panel = SL.followedPanel(thin, 'Probe', { ar: false, t: (en) => en });
+  const said = text(panel);
+  assert.match(said, /too few to put a rate on/);
+  assert.doesNotMatch(said, /100%/);
 });

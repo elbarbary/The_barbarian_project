@@ -368,13 +368,16 @@ document.getElementById('signout').onclick = async () => {
                              : Promise.resolve(null),
         data.worldMonitor ? data.worldMonitor().catch(() => null)
                           : Promise.resolve(null),
-      ]).then(([flowTrackers, sectorOwnership, worldMonitor]) => {
+        data.sectorRotation ? data.sectorRotation().catch(() => null)
+                            : Promise.resolve(null),
+      ]).then(([flowTrackers, sectorOwnership, worldMonitor, sectorRotation]) => {
         if (version === loadVersion && owner === readerVersion && reader && !component.data().demo) {
           component.state.flowLoading = false;
           component.setData({
             ...component.data(), flowTrackers,
             ...(sectorOwnership ? { sectorOwnership } : {}),
             ...(worldMonitor ? { worldMonitor } : {}),
+            ...(sectorRotation ? { sectorRotation } : {}),
           });
         }
       }).catch(() => {

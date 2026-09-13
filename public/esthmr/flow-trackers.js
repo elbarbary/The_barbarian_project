@@ -1569,56 +1569,61 @@ const monthName = (month, ar) => {
   return `${name} 20${year}`;
 };
 
-function renderMonthsOfMoney(d, sectors, selected, month, mode, ar, t, onPickMonth, onPickMode) {
-  const monthly = d.monthly;
-  if (!monthly || !Array.isArray(monthly.months) || monthly.months.length < 2) return null;
-  const rows = SL.monthRows(monthly, selected);
-  const at = rows.find((r) => r.month === month) || rows[rows.length - 1];
-  const chart = SL.monthsChart(monthly, selected, {
-    ar, t, mode, month: at.month, onPick: onPickMonth,
-  });
-  const total = rows.reduce((n, r) => n + (r.value || 0), 0);
-  const sectorName = selected ? (ar ? (selected.nameAr || selected.name) : selected.name) : null;
+/* Changes in trading share, and what followed the other times.
+ *
+ * This replaced "months of money", a bar chart of absolute turnover on a
+ * switchable scale. Two things were wrong with it and the second is the one
+ * that mattered: a bar mixed "the whole market was busier" with "this sector
+ * took a bigger slice", and the reader could not pull them apart by looking.
+ * The person who commissioned the screen could not read it.
+ *
+ * What is drawn instead is the slice, and only the slice — points of the
+ * exchange's traded value gained or lost against the month before, printed as
+ * a number in every cell so the colour is a second reading and never the only
+ * one.
+ *
+ * NO ARROW IS DRAWN BETWEEN TWO SECTORS, and that is a finding rather than a
+ * caution. The strongest lead-lag pair in fourteen years — one sector losing
+ * share this month, another gaining it next — lifts that sector's own base
+ * rate by 16.8 points. Shuffling each sector's months two hundred times, which
+ * keeps how often it moves and destroys when, gives a best pair of 16.7. It is
+ * the best of some nine hundred pairs. See build_sector_rotation.py.
+ */
+function renderTradingShare(doc, selected, ar, t, onPick, focusId) {
+  if (!doc || !Array.isArray(doc.months) || doc.months.length < 2) return null;
+  const focus = focusId
+    || (selected && (doc.sectors || []).includes(selected.id) ? selected.id : null);
+  const rows = doc.months;
+  const reverted = doc.reverted || {};
 
   return h('section', { className: 'ft-detail sl-block' },
     h('div', { className: 'ft-section-heading' },
       h('div', null,
-        h('span', { className: 'ft-eyebrow' }, t('MONTHS OF MONEY', 'المال شهراً بشهر')),
-        h('h2', null, t('How much traded, month by month', 'كم تداولت السوق شهراً بشهر'))
+        h('span', { className: 'ft-eyebrow' }, t('CHANGES IN TRADING SHARE', 'تغيّر نصيب التداول')),
+        h('h2', null, t('Where the trading moved', 'أين انتقل التداول'))
       ),
       h('span', { className: 'ft-range-badge', dir: 'ltr' },
         `${rows[0].month} → ${rows[rows.length - 1].month}`)
     ),
-    h('p', { className: 'ft-note' }, t(
-      `EGP ${compact(total)} changed hands across ${rows.length} months in the sectors this site covers. `
-      + (mode === 'sector'
-        ? 'Each column is one month of the sector named above, on its own scale. '
-        : 'Each column is one month of the whole covered exchange; the filled part is the sector selected below. ')
-      + 'Hatched columns are months that cannot be compared with a whole one — the month still running, '
-      + 'or one the archive joins partway through.',
-      `تداولت السوق ${compact(total)} جنيه خلال ${rows.length} شهراً في القطاعات التي يغطيها الموقع. `
-      + 'كل عمود شهر كامل للسوق المغطاة، والجزء المملوء هو القطاع المختار أدناه. '
-      + 'الأعمدة المهشّرة شهور لا تُقارن بشهر كامل: الشهر الجاري، أو شهر يبدأ فيه السجل من منتصفه.')),
-    h('div', { className: 'ft-pills sl-scale' },
-      button(t('Whole market', 'السوق كلها'), () => onPickMode('market'), mode !== 'sector'),
-      selected && button(
-        ar ? (selected.nameAr || selected.name) : selected.name,
-        () => onPickMode('sector'), mode === 'sector')
-    ),
-    chart,
-    h('div', { className: 'ft-metrics' },
-      metric(t('Month', 'الشهر'), monthName(at.month, ar),
-        `${at.sessions} ${t('sessions', 'جلسة')} · ${at.companies} ${t('companies traded', 'شركة تداولت')}`
-        + (at.partial ? ` · ${t('part month', 'شهر ناقص')}` : '')),
-      metric(t('Traded that month · EGP', 'تداول الشهر · ج.م'), compact(at.value),
-        `${t('Coverage', 'التغطية')} ${at.coverage}%`),
-      sectorName ? metric(sectorName, compact(at.part),
-        finite(at.share) ? `${at.share.toFixed(1)}% ${t('of the month', 'من الشهر')}` : '—') : null,
-      metric(t('Months published', 'شهور منشورة'), String(rows.length),
-        monthly.held && monthly.held.length
-          ? `${monthly.held.length} ${t('earlier months held back for thin coverage', 'شهراً سابقاً محجوبة لضعف التغطية')}`
-          : t('every month the archive can compare', 'كل شهر يمكن مقارنته'))
-    )
+    h('p', { className: 'ft-note' }, ar ? doc.basisAr : doc.basis),
+    SL.shareHeatmap(doc, { ar, t, focus, onPick }),
+    // The headline frequency, stated as a frequency over named cases.
+    reverted.share !== null && reverted.share !== undefined
+      ? h('p', { className: 'sl-rate' }, t(
+          `Across the whole record, a sector that took ${doc.notable} point or more of the `
+          + `exchange's turnover in a month had a smaller share the month after in `
+          + `${reverted.gaveBack} of ${reverted.cases} cases.`,
+          `على امتداد السجل كله، القطاع الذي أخذ ${doc.notable} نقطة أو أكثر من تداول `
+          + `البورصة في شهر، تراجع نصيبه في الشهر التالي في ${reverted.gaveBack} من `
+          + `${reverted.cases} حالة.`)) : null,
+    (doc.byEra || []).length === 2 ? h('p', { className: 'ft-note sl-eras' }, t(
+      `Split in half so a reader can see whether it held: `
+      + (doc.byEra.map((e) => `${e.from}–${e.to}, ${e.gaveBack} of ${e.cases}`).join('; ')) + '.',
+      `مقسوم نصفين ليرى القارئ إن كان ثابتاً: `
+      + (doc.byEra.map((e) => `${e.from}–${e.to}، ${e.gaveBack} من ${e.cases}`).join('؛ ')) + '.')) : null,
+    // Said out loud, because the reader came looking for exactly this.
+    h('p', { className: 'ft-note sl-refuses' }, ar ? doc.refusesAr : doc.refuses),
+    focus ? SL.followedPanel(doc, focus, { ar, t }) : null
   );
 }
 
@@ -2060,9 +2065,9 @@ export function flowTrackers(component, data, ar) {
             h('strong', { dir: 'ltr', style: { color: 'var(--down)' } }, compact(totalDecliningVal) + ' EGP')
           )
         ),
-        renderMonthsOfMoney(d, rows, selected, month, monthMode, ar, t,
-          (m) => component.setState({ flowMonth: m }),
-          (v) => component.setState({ flowMonthView: v })),
+        renderTradingShare(data.sectorRotation, selected, ar, t,
+          (id) => component.setState({ flowShareSector: id }),
+          st.flowShareSector),
         renderRotation(d, rows, month, ar, t, openSector, selected && selected.id),
         renderSectorsInsideSectors(data.sectorOwnership, ar, t, ringFocus,
           (id) => component.setState({ flowRingSector: id }),
