@@ -285,6 +285,13 @@ STEPS = [
     # commits, neither from CI. It is a no-op on every run where the stage has
     # not moved, which is most of them.
     ("Deep prices", "build_prices_api.py", True),
+    # Sector rotation, straight after the store it reads.
+    #
+    # It reads `data-source/prices` rather than the fourteen months
+    # build_flow_trackers publishes, because fourteen months cannot evidence a
+    # base rate and the deep store holds twenty-five years. Ninety-four of them
+    # clear the coverage bar.
+    ("Sector rotation", "build_sector_rotation.py", True),
     # After Market and Rates: it reads what they published and writes one row
     # per session, which is the only way this app will ever have an index
     # series or a breadth history.
