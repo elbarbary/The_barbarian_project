@@ -2711,14 +2711,14 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/GDWA/profile",
   "record": {
-   "filings": 281,
+   "filings": 284,
    "first_filing": "2021-10-11",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
    "capital_increases": 1,
    "general_assemblies": 22,
-   "periods_reported": 27,
-   "loss_making_periods": 1
+   "periods_reported": 28,
+   "loss_making_periods": 2
   },
   "generated": "2026-08-24"
  },
@@ -4085,7 +4085,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/MILS/profile",
   "record": {
-   "filings": 808,
+   "filings": 809,
    "first_filing": "2010-02-16",
    "trading_suspensions": 20,
    "trading_resumptions": 18,
@@ -5052,7 +5052,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/PHGC/profile",
   "record": {
-   "filings": 152,
+   "filings": 153,
    "first_filing": "2024-11-26",
    "trading_suspensions": 8,
    "trading_resumptions": 7,
@@ -6340,7 +6340,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/UNIP/profile",
   "record": {
-   "filings": 573,
+   "filings": 574,
    "first_filing": "2010-01-03",
    "trading_suspensions": 4,
    "trading_resumptions": 3,

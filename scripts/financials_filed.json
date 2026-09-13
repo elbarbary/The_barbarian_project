@@ -949,6 +949,25 @@
    "prior_period_start": "2025-01-01",
    "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294566",
    "ticker": "ARAB"
+  },
+  "294580": {
+   "basis": null,
+   "currency": "جنيه مصري",
+   "filed_on": "2026-09-13",
+   "isin": "EGS65011C016",
+   "months": 12,
+   "name_ar": "الاستثمار العقاري العربي - اليكو",
+   "net_profit_egp": 37579445.0,
+   "news_id": "294580",
+   "period": "FY 2025",
+   "period_end": "2025-12-31",
+   "period_start": "2025-01-01",
+   "prior_net_profit_egp": 5756663.0,
+   "prior_period": "FY 2024",
+   "prior_period_end": "2024-12-31",
+   "prior_period_start": "2024-01-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294580",
+   "ticker": "RREI"
   }
  },
  "read": {
@@ -1035,6 +1054,7 @@
   "294546": "2026-09-10",
   "294549": "2026-09-10",
   "294563": "2026-09-10",
-  "294566": "2026-09-10"
+  "294566": "2026-09-10",
+  "294580": "2026-09-13"
  }
 }
