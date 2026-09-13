@@ -1,9 +1,9 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-13T11:12:27Z",
+ "generated": "2026-09-13T11:42:10Z",
  "basis": "Each card joins what one company filed across three channels — what it owes and how soon that reprices, the cushion between what it sells for and what that cost, and what it holds in another currency. The sentences are written from those figures and may use no others: every number in them is one of the figures printed beside it, character for character, and a sentence using any other number is dropped before publishing. Nothing here says what any of it means for a share price.",
  "basisAr": "تجمع كل بطاقة ما أودعته الشركة في ثلاثة محاور — ما عليها من قروض ومتى يُعاد تسعيرها، والفارق بين ما تبيع به وما كلّفها، وما تحتفظ به بعملة أخرى. والجمل مكتوبة من هذه الأرقام ولا يجوز أن تستعمل غيرها: كل رقم فيها هو أحد الأرقام المطبوعة بجوارها حرفاً بحرف، وتُحذف أي جملة تستعمل رقماً آخر قبل النشر. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
- "companyCount": 179,
+ "companyCount": 182,
  "companies": [
   {
    "ticker": "ABUK",
@@ -1161,6 +1161,33 @@
     "profit filed for the period": "19.45M EGP",
     "that currency line as a share of the profit": "2.0%",
     "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "EAST",
+   "name": "Eastern Company",
+   "says": [
+    "For Q1 2026, the company faces the rates channel with borrowings it owes of 7.94B EGP, of that repricing within a year being 100.0%.",
+    "The inputs channel reaches it through revenue filed of 8.53B EGP, gross profit filed of 2.87B EGP, and a gross margin of 33.6%.",
+    "The currency channel also affects it, with a currency gain or loss filed of 87.5M EGP against profit filed for the period of 1.25B EGP, making that currency line as a share of the profit 7.0%."
+   ],
+   "figures": {
+    "borrowings it owes": "7.94B EGP",
+    "of that repricing within a year": "100.0%",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "8.53B EGP",
+    "gross profit filed": "2.87B EGP",
+    "gross margin": "33.6%",
+    "period the inputs figures cover": "Q1 2026",
+    "currency gain or loss filed": "87.5M EGP",
+    "profit filed for the period": "1.25B EGP",
+    "that currency line as a share of the profit": "7.0%",
+    "period the currency figures cover": "Q1 2026"
    },
    "channels": [
     "currency",
@@ -3021,6 +3048,23 @@
    ]
   },
   {
+   "ticker": "NARE",
+   "name": "Naeem Real Estate Holding Group",
+   "says": [
+    "The currency channel reached the company in H1 2026, with a filed currency gain or loss of -3.7M EGP against a profit of 53.31M EGP, making that line -6.9% of profit.",
+    "The company filed no figures for rates or inputs in the provided data."
+   ],
+   "figures": {
+    "currency gain or loss filed": "-3.7M EGP",
+    "profit filed for the period": "53.31M EGP",
+    "that currency line as a share of the profit": "-6.9%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency"
+   ]
+  },
+  {
    "ticker": "NCCW",
    "name": "Nasr Co. for Civil Works",
    "says": [
@@ -3061,6 +3105,24 @@
    },
    "channels": [
     "currency"
+   ]
+  },
+  {
+   "ticker": "NINH",
+   "name": "Nozha International Hospital",
+   "says": [
+    "For the inputs channel covering H1 2026, the company filed revenue of 280.4M EGP, gross profit of 93.57M EGP, and a gross margin of 33.4%.",
+    "The company filed nothing for the rates channel regarding what it owes.",
+    "The company filed nothing for the currency channel regarding holdings or obligations outside the pound."
+   ],
+   "figures": {
+    "revenue filed": "280.4M EGP",
+    "gross profit filed": "93.57M EGP",
+    "gross margin": "33.4%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs"
    ]
   },
   {

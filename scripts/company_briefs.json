@@ -137,7 +137,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/ACTF/profile",
   "record": {
-   "filings": 128,
+   "filings": 129,
    "first_filing": "2024-04-24",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
@@ -157,7 +157,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/ADCI/profile",
   "record": {
-   "filings": 834,
+   "filings": 835,
    "first_filing": "2010-02-09",
    "trading_suspensions": 4,
    "trading_resumptions": 5,
@@ -207,14 +207,14 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/ADPC/profile",
   "record": {
-   "filings": 673,
+   "filings": 676,
    "first_filing": "2011-06-13",
    "trading_suspensions": 10,
    "trading_resumptions": 10,
    "capital_increases": 3,
    "general_assemblies": 78,
-   "periods_reported": 58,
-   "loss_making_periods": 18
+   "periods_reported": 59,
+   "loss_making_periods": 19
   },
   "generated": "2026-08-24"
  },
@@ -549,12 +549,12 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/AMIA/profile",
   "record": {
-   "filings": 502,
+   "filings": 503,
    "first_filing": "2012-02-27",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
    "capital_increases": 1,
-   "general_assemblies": 54,
+   "general_assemblies": 55,
    "periods_reported": 64,
    "loss_making_periods": 0
   },
@@ -1428,12 +1428,12 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/CRST/profile",
   "record": {
-   "filings": 99,
+   "filings": 100,
    "first_filing": "2025-03-26",
    "trading_suspensions": 1,
    "trading_resumptions": 1,
    "capital_increases": 0,
-   "general_assemblies": 13,
+   "general_assemblies": 14,
    "periods_reported": 18,
    "loss_making_periods": 9
   },
@@ -1738,7 +1738,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/EDFM/profile",
   "record": {
-   "filings": 686,
+   "filings": 687,
    "first_filing": "2010-02-14",
    "trading_suspensions": 15,
    "trading_resumptions": 14,
@@ -1892,7 +1892,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/EFIH/profile",
   "record": {
-   "filings": 324,
+   "filings": 325,
    "first_filing": "2021-10-05",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
@@ -2711,7 +2711,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/GDWA/profile",
   "record": {
-   "filings": 284,
+   "filings": 285,
    "first_filing": "2021-10-11",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
@@ -4065,7 +4065,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/MICH/profile",
   "record": {
-   "filings": 904,
+   "filings": 905,
    "first_filing": "2010-02-09",
    "trading_suspensions": 3,
    "trading_resumptions": 3,
@@ -5586,7 +5586,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/SCFM/profile",
   "record": {
-   "filings": 716,
+   "filings": 717,
    "first_filing": "2010-02-15",
    "trading_suspensions": 25,
    "trading_resumptions": 24,
@@ -6260,7 +6260,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/TYCN/profile",
   "record": {
-   "filings": 13,
+   "filings": 14,
    "first_filing": "2026-05-12",
    "trading_suspensions": 0,
    "trading_resumptions": 5,
