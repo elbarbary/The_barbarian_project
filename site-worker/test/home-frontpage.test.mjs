@@ -555,3 +555,23 @@ test('J18 a title nobody vetted is not shown either — only the builder\'s true
     for (const s of item.strands) assert.equal(typeof s.title_ok, 'boolean', `${item.ticker} ${s.id} has no title_ok`);
   }
 });
+
+test('the day comes before the standing boards on Home', async () => {
+  // Home reads top to bottom as a day: what moved, who traded it, what traded
+  // unusually. The sector-liquidity and ownership blocks are standing boards —
+  // they answer a question a reader arrives with, not one the session raised —
+  // and they sat above all three, so the first thing on the page after the
+  // indices was a board that had not changed since yesterday.
+  const page = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+  const shelf = page.indexOf('class="insight-shelf"');
+  const boards = page.indexOf('{{ flowViews.home }}');
+  assert.ok(shelf > 0, 'the insight shelf is gone from Home');
+  assert.ok(boards > 0, 'the flow-tracker blocks are gone from Home');
+  assert.ok(boards > shelf,
+            'the standing boards are back above the session the page is about');
+  // And all three of the day's cards are inside that shelf, above them.
+  const inShelf = page.slice(shelf, boards);
+  for (const key of ['{{ insightHeading }}', '{{ L.investorsWho }}', '{{ L.busiest }}']) {
+    assert.ok(inShelf.includes(key), `${key} is no longer above the standing boards`);
+  }
+});
