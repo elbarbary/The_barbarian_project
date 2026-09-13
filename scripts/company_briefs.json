@@ -2696,7 +2696,7 @@
    "trading_suspensions": 0,
    "trading_resumptions": 0,
    "capital_increases": 0,
-   "general_assemblies": 8,
+   "general_assemblies": 7,
    "periods_reported": 26,
    "loss_making_periods": 2
   },
@@ -3975,7 +3975,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/MEPA/profile",
   "record": {
-   "filings": 583,
+   "filings": 584,
    "first_filing": "2011-08-04",
    "trading_suspensions": 17,
    "trading_resumptions": 18,

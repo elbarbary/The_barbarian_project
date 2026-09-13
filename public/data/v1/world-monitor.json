@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-13T06:43:34Z",
+ "generated": "2026-09-13T07:48:26Z",
  "basis": "A move is placed against its own two years of same-length moves — a record of what has already happened, never a statement about the next one. Each list of companies is the complete set that filed the figure, in alphabetical order, with the filing beside it. Nothing here says what any of it means for a share price.",
  "basisAr": "تُقاس كل حركة مقابل سنتين من حركات بالطول نفسه — سجل لما حدث بالفعل، وليس قولاً عما سيحدث. وكل قائمة شركات هي المجموعة الكاملة التي أودعت الرقم، بالترتيب الأبجدي، ومعها الإفصاح الذي جاء منه. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
  "windows": [
@@ -254,32 +254,32 @@
   {
    "id": "EGX30",
    "label": "EGX 30",
-   "asOf": "2026-09-10",
+   "asOf": "2026-09-13",
    "close": 56280.2,
-   "sessions": 204,
+   "sessions": 203,
    "moves": {
     "week": {
-     "change": 0.02,
+     "change": -0.7,
      "against": {
-      "percentile": 1.5,
-      "observations": 199,
-      "typical": 1.86
+      "percentile": 17.2,
+      "observations": 198,
+      "typical": 1.87
      }
     },
     "month": {
-     "change": 2.25,
+     "change": 1.86,
      "against": {
-      "percentile": 24.0,
-      "observations": 183,
-      "typical": 4.26
+      "percentile": 22.0,
+      "observations": 182,
+      "typical": 4.19
      }
     },
     "quarter": {
-     "change": 9.8,
+     "change": 10.75,
      "against": {
-      "percentile": 52.5,
-      "observations": 141,
-      "typical": 9.36
+      "percentile": 56.4,
+      "observations": 140,
+      "typical": 9.34
      }
     }
    }
@@ -287,32 +287,32 @@
   {
    "id": "EGX70EWI",
    "label": "EGX 70",
-   "asOf": "2026-09-10",
+   "asOf": "2026-09-13",
    "close": 21403.3,
-   "sessions": 204,
+   "sessions": 203,
    "moves": {
     "week": {
-     "change": 0.47,
+     "change": -0.99,
      "against": {
-      "percentile": 10.1,
-      "observations": 199,
+      "percentile": 20.7,
+      "observations": 198,
       "typical": 2.22
      }
     },
     "month": {
-     "change": -1.05,
+     "change": -0.86,
      "against": {
-      "percentile": 7.7,
-      "observations": 183,
-      "typical": 6.01
+      "percentile": 6.6,
+      "observations": 182,
+      "typical": 5.99
      }
     },
     "quarter": {
-     "change": 40.75,
+     "change": 42.81,
      "against": {
-      "percentile": 85.8,
-      "observations": 141,
-      "typical": 18.42
+      "percentile": 90.0,
+      "observations": 140,
+      "typical": 20.04
      }
     }
    }
@@ -320,32 +320,32 @@
   {
    "id": "EGX100EWI",
    "label": "EGX 100",
-   "asOf": "2026-09-10",
+   "asOf": "2026-09-13",
    "close": 27997.3,
-   "sessions": 204,
+   "sessions": 203,
    "moves": {
     "week": {
-     "change": 0.35,
+     "change": -0.77,
      "against": {
-      "percentile": 7.0,
-      "observations": 199,
-      "typical": 2.12
+      "percentile": 19.2,
+      "observations": 198,
+      "typical": 2.14
      }
     },
     "month": {
-     "change": 0.29,
+     "change": 0.36,
      "against": {
-      "percentile": 2.2,
-      "observations": 183,
-      "typical": 5.44
+      "percentile": 3.3,
+      "observations": 182,
+      "typical": 5.42
      }
     },
     "quarter": {
-     "change": 33.89,
+     "change": 35.8,
      "against": {
-      "percentile": 90.8,
-      "observations": 141,
-      "typical": 17.88
+      "percentile": 93.6,
+      "observations": 140,
+      "typical": 18.22
      }
     }
    }
@@ -753,7 +753,7 @@
     {
      "ticker": "CPME",
      "name": "Catalyst Partners Middle East",
-     "sector": "Non-bank financial services",
+     "sector": "Finance",
      "borrowings": 783.907,
      "shortTerm": 415.51,
      "repricingWithinAYear": 53.0,
@@ -4510,7 +4510,7 @@
     {
      "ticker": "CPME",
      "name": "Catalyst Partners Middle East",
-     "sector": "Non-bank financial services",
+     "sector": "Finance",
      "fxResult": 0.256,
      "netIncome": 117.083,
      "shareOfNetIncome": 0.2,
@@ -4544,7 +4544,7 @@
     {
      "ticker": "DEIN",
      "name": "Delta Insurance",
-     "sector": "Non-bank financial services",
+     "sector": "Finance",
      "fxResult": 65.73,
      "netIncome": 442.619,
      "shareOfNetIncome": 14.9,
@@ -6627,52 +6627,52 @@
   }
  ],
  "foreignMoney": {
-  "asOf": null,
+  "asOf": "2026-09-13T10:25:22",
   "basis": "period to date, as published by the exchange",
   "source": "beta.egx.com.eg /api/bff/egx/investor-full-statistics",
   "byNationality": [
    {
     "party": "Egyptians",
     "party_ar": "مصريين",
-    "buy_percent": 78.26,
-    "sell_percent": 66.48,
-    "percent": 72.37,
-    "buy": 40837943062.3643,
-    "sell": 34690565866.2893,
-    "net": 6147377196.075,
+    "buy_percent": 97.24,
+    "sell_percent": 96.88,
+    "percent": 97.06,
+    "buy": 2976662768.923,
+    "sell": 2965573957.7969,
+    "net": 11088811.1261,
     "combined": false
    },
    {
     "party": "Arab",
     "party_ar": "عرب",
-    "buy_percent": 7.54,
-    "sell_percent": 9.13,
-    "percent": 8.34,
-    "buy": 3934973997.8381,
-    "sell": 4766425825.1081,
-    "net": -831451827.27,
+    "buy_percent": 2.07,
+    "sell_percent": 2.9,
+    "percent": 2.48,
+    "buy": 63378014.8769,
+    "sell": 88732792.273,
+    "net": -25354777.3961,
     "combined": false
    },
    {
     "party": "Non-Arab Foreigners",
     "party_ar": "أجانب",
-    "buy_percent": 14.2,
-    "sell_percent": 24.39,
-    "percent": 19.29,
-    "buy": 7410696419.965,
-    "sell": 12726621788.77,
-    "net": -5315925368.805,
+    "buy_percent": 0.69,
+    "sell_percent": 0.22,
+    "percent": 0.45,
+    "buy": 21057916.02,
+    "sell": 6791949.75,
+    "net": 14265966.27,
     "combined": false
    },
    {
     "party": "Arabs & Foreigners",
     "party_ar": "عرب وأجانب",
-    "buy_percent": 21.74,
-    "sell_percent": 33.52,
-    "percent": 27.63,
-    "buy": 11345670417.8031,
-    "sell": 17493047613.8781,
-    "net": -6147377196.075,
+    "buy_percent": 2.76,
+    "sell_percent": 3.12,
+    "percent": 2.93,
+    "buy": 84435930.8969,
+    "sell": 95524742.023,
+    "net": -11088811.1261,
     "combined": true
    }
   ],
