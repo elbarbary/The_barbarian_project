@@ -2267,6 +2267,10 @@
     "meaning": "The commercial integration between the high-speed rail network and Air Cairo connects rail schedules with domestic and international flight arrivals, channeling transit passengers directly into the rail transport system.",
     "meaning_ar": "يربط التكامل التجاري بين شبكة القطار السريع وشركة «إير كايرو» مواعيد رحلات القطارات بحركة وصول الرحلات الجوية الداخلية والدولية، مما يوجه ركاب الترانزيت مباشرة إلى منظومة النقل السككي."
   },
+  "القطن يترقب تشكيل اللجنه التنفيذيه لمتابعه حلقات التجميع والمزادات": {
+    "meaning": "The executive committee administers the operational oversight of raw cotton collection centers and organizes the public auction system that connects farmers with trading and textile companies.",
+    "meaning_ar": "تتولى اللجنة التنفيذية الإشراف التشغيلي على مراكز تجميع القطن الخام وتنظيم منظومة المزادات العلنية التي تربط المزارعين بشركات التجارة والغزل."
+  },
   "القلعه ترفع حصتها في المصريه للتكرير وتقرر زياده راسمالها الي 25 مليار جنيه": {
     "meaning": "This corporate action raises the holding company's ownership stake and equity base in its primary refining asset while expanding its total authorized or issued share capital to 25 billion Egyptian pounds. The transaction restructures the company's balance sheet by replacing debt obligations with new equity or injecting direct capital into the underlying operational subsidiary.",
     "meaning_ar": "يمثل هذا الإجراء المؤسسي رفعاً لنسبة ملكية الشركة القابضة وقاعدتها الرأسمالية في أصل التكرير التابع لها مع زيادة رأسمالها إلى 25 مليار جنيه مصري. وتعمل هذه الخطوة على إعادة هيكلة المركز المالي عبر تحويل التزامات تمويلية إلى أسهم أو ضخ سيولة رأسمالية مباشرة في الشركة التشغيلية."
@@ -5140,6 +5144,10 @@
   "موديوباي تستهدف ضخ مزيدا من الاستثمارات بمجال تصنيع البطاقات": {
     "meaning": "Capital allocation toward card manufacturing expands operational capacity and physical infrastructure in the payment instruments sector.",
     "meaning_ar": "يمثل تخصيص رأس المال لتصنيع البطاقات توسيعاً للطاقة التشغيلية والبنية التحتية المادية في قطاع أدوات الدفع."
+  },
+  "موديوباي تستهدف ضخ مزيدا من الاستثمارات بمنظومه المدفوعات": {
+    "meaning": "Capital deployment into digital payment infrastructure involves expanding technical architecture, point-of-sale hardware networks, and processing capacity within the financial technology ecosystem.",
+    "meaning_ar": "يتمثل ضخ رؤوس الأموال في البنية التحتية للمدفوعات الرقمية في توسيع الأنظمة التقنية وشبكات نقاط البيع وزيادة القدرة الاستيعابية لمعالجة المعاملات المالية في قطاع التكنولوجيا المالية."
   },
   "موسسه البترول الكويتيه تعرض نقل شحنات من سفينه لاخري خارج مضيق هرمز": {
     "meaning": "Ship-to-ship (STS) cargo transfer outside the Strait of Hormuz establishes an alternative maritime logistics mechanism that shifts crude oil loading operations beyond a regional chokepoint.",
