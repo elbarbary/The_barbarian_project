@@ -4629,6 +4629,10 @@
     "meaning": "Public healthcare tenders and institutional procurement frameworks allocate pharmaceutical supply contracts based on structured criteria prioritizing clinical efficacy, safety standards, and cost-efficiency metrics across the state-administered medical network.",
     "meaning_ar": "تعتمد المناقصات الحكومية والمشتريات المؤسسية للقطاع الصحي معايير محددة لترسية عقود التوريد تقوم على الفاعلية السريرية، ومعايير الأمان، وكفاءة التكلفة، مما ينظم تدفق المنتجات الدوائية داخل المنظومة الصحية التابعة للدولة."
   },
+  "متحدث الصحه: عدد الاطباء العاملين في القطاع الحكومي ارتفع الي 97 الفا": {
+    "meaning": "An increase in public sector physician headcount expands operational service capacity in state-run healthcare facilities while allocating a larger share of public health expenditure to personnel compensation.",
+    "meaning_ar": "يؤدي ارتفاع عدد الأطباء في القطاع الحكومي إلى زيادة الطاقة التشغيلية للمنشآت الصحية التابعة للدولة، مع توجيه حصة أكبر من الإنفاق الصحي العام لبند الأجور والتعويضات."
+  },
   "متوسط الفايده علي اذون الخزانه يسجل تراجعات متتاليه ليصل الي %25.058": {
     "meaning": "Lower treasury bill yields reduce the government's short-term borrowing costs on newly issued debt while lowering the fixed-income return rates available to institutional buyers in the primary market.",
     "meaning_ar": "يؤدي انخفاض متوسط العائد على أذون الخزانة إلى خفض تكلفة الاقتراض الحكومي قصير الأجل للإصدارات الجديدة، ويقلل في الوقت نفسه معدلات العائد الثابت المتاحة للمؤسسات المكتتبة في السوق الأولي."
@@ -5120,6 +5124,10 @@
   "مواعيد القطارات من القاهره الي محافظات الصعيد اليوم 12-9-2026": {
     "meaning": "Train schedules define daily domestic transport capacity and intercity passenger transit operations managed by the Egyptian National Railways between Cairo and Upper Egypt.",
     "meaning_ar": "تحدد جداول مواعيد القطارات الطاقة التشغيلية اليومية لشبكة النقل السككي الداخلي وحركة نقل الركاب التي تديرها الهيئة القومية لسكك حديد مصر بين القاهرة ومحافظات الصعيد."
+  },
+  "مواعيد القطارات من القاهره الي محافظات الصعيد اليوم 13-9-2026": {
+    "meaning": "Publishing daily train schedules reflects the operational availability of state-run passenger transit capacity, which facilitates the routine intercity movement of labor and commercial traffic between Cairo and Upper Egypt.",
+    "meaning_ar": "يعكس إعلان جداول القطارات اليومية الطاقة التشغيلية المتاحة لشبكة السكك الحديدية لنقل الركاب، وهو ما ينظم حركة تنقل الأفراد والنشاط التجاري بين القاهرة ومحافظات الصعيد."
   },
   "موجه بيع السندات تعيد توزيع فاتوره الدين عالميا": {
     "meaning": "A widespread drop in bond prices raises benchmark yields, which alters the structure of borrowing costs and debt service obligations for sovereign and corporate issuers across global markets.",
@@ -5913,6 +5921,10 @@
     "meaning": "The service integrates inward cross-border remittance processing directly into local commercial bank accounts and electronic mobile wallets, automating clearing and settlement between international transfer networks and domestic payment infrastructure.",
     "meaning_ar": "تربط هذه الخدمة معالجة الحوالات المالية الواردة من الخارج مباشرة بالحسابات المصرفية المحلية والمحافظ الإلكترونية، مما يتيح المقاصة والتسوية الآلية بين شبكات التحويل الدولية والبنية التحتية للمدفوعات المحلية."
   },
+  "“زيتا” للادويه تستهدف 3 مليارات جنيه مبيعات بنهايه 2026": {
+    "meaning": "Setting a medium-term sales target establishes a corporate benchmark that ties operational capacity, distribution networks, and production volume to a defined revenue scale within the pharmaceutical sector.",
+    "meaning_ar": "يحدد استهداف مستوى مبيعات متوسط الأجل معياراً تشغيلياً يربط الطاقة الإنتاجية للشركة وشبكات التوزيع وحجم الإنتاج بنطاق إيرادات محدد داخل قطاع الأدوية."
+  },
   "“سبرينتس” تستهدف تدريب مليون طالب.. وتطلق منصه مدعومه بالذكاء الاصطناعي": {
     "meaning": "The company expands its operational capacity in the educational technology sector by deploying an artificial intelligence-driven platform to scale up student training volume.",
     "meaning_ar": "توسع الشركة قدرتها التشغيلية في قطاع تكنولوجيا التعليم عبر إطلاق منصة معتمدة على الذكاء الاصطناعي لزيادة حجم تدريب الطلاب."
@@ -6024,6 +6036,10 @@
   "“نور” طلعت مصطفي تشعل السوشيال ميديا.. اشاده بالاعلان والتزام الشركه في التسليم": {
     "meaning": "Adherence to delivery schedules in off-plan real estate operationalizes the conversion of unearned revenue into recognized revenue upon unit handover, while promotional campaigns register as selling and marketing expenditures.",
     "meaning_ar": "يعكس الالتزام بجداول التسليم في المشروعات العقارية آلية تحويل الإيرادات المؤجلة إلى إيرادات محققة ومثبتة دفترياً عند التسليم الفعلي للوحدات، بينما تُسجل الحملات الترويجية كبند ضمن المصروفات التسويقية."
+  },
+  "“نور” في عيون سكانها.. سمعه “طلعت مصطفي” مصدر ثقه.. والمدينه فاقت التوقعات.. فيديو": {
+    "meaning": "Operational delivery and occupancy progression in flagship real estate developments reflect project execution rates and brand equity recognition within the developer's operating model.",
+    "meaning_ar": "يعكس بدء تسليم الوحدات وتقدم الإشغال الفعلي في المشروعات العقارية الكبرى معدلات التنفيذ التشغيلي ورصيد العلامة التجارية ضمن نموذج أعمال المطور."
   },
   "“هاير للاجهزه الكهرباييه” تفتتح المرحله الثانيه من مجمع “العاشر” نوفمبر المقبل": {
     "meaning": "The launch of the second phase expands the company's manufacturing footprint in the 10th of Ramadan industrial zone and adds new domestic assembly lines to its existing production complex.",
