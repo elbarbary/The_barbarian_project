@@ -1591,6 +1591,10 @@
     "meaning": "The headline indicates broad-based buying activity across all major market indices at the market open, resulting in simultaneous price increases for constituents across diverse sectors.",
     "meaning_ar": "يشير الخبر إلى نشاط شرائي واسع النطاق عبر كافة المؤشرات الرئيسية في مستهل جلسة التداول، مما يسفر عن صعود متزامن في أسعار أسهم قطاعات السوق المختلفة."
   },
+  "البورصه المصريه تستضيف مسابقه البحوث الاقليميه لجمعيات التحليل المالي بمشاركه 9 دول": {
+    "meaning": "The Egyptian Exchange serves as the host venue for a multi-jurisdiction financial analysis research competition, gathering industry practitioners and professional societies from nine countries for equity evaluation benchmarks.",
+    "meaning_ar": "تستضيف البورصة المصرية مسابقة إقليمية لبحوث التحليل المالي تجمع جمعيات مهنية ومشاركين من تسع دول لتطبيق معايير التقييم المالي للأوراق المالية."
+  },
   "البورصه المصريه تنهي تعاملات الاحد بالمنطقه الخضراء والثلاثيني يصعد": {
     "meaning": "A positive close for the trading session reflects net buying liquidity exceeding selling volume across listed equities, raising aggregate market capitalisation and lifting the benchmark index.",
     "meaning_ar": "يعكس إغلاق السوق في المنطقة الخضراء تجاوز أحجام الشراء لعروض البيع خلال جلسة التداول، مما يرفع القيمة السوقية الإجمالية للأسهم ويدفع المؤشر الرئيسي للصعود."
@@ -2642,6 +2646,10 @@
   "بريطانيا تحذر من تلاعب الذكاء الاصطناعي بسوق الكهرباء": {
     "meaning": "Automated algorithmic trading systems using artificial intelligence in wholesale electricity markets execute high-frequency bidding strategies, which triggers regulatory scrutiny over pricing mechanisms and physical capacity withholding.",
     "meaning_ar": "تعتمد أسواق الكهرباء بالجملة على خوارزميات الذكاء الاصطناعي في تنفيذ استراتيجيات عروض الأسعار وإدارة الإمدادات آلياً، مما يضع آليات التسعير الفوري وتوزيع القدرات التشغيلية تحت طائلة الرقابة والتنظيم."
+  },
+  "بريطانيا تخطط لاستثمارات تتجاوز 150 مليار استرليني لتحديث شبكه الكهرباء": {
+    "meaning": "This plan constitutes a large-scale capital expenditure programme in national utility infrastructure, involving direct procurement contracts for grid equipment, high-voltage cabling, and engineering services.",
+    "meaning_ar": "يمثل هذا البرنامج خطة إنفاق رأسمالي واسعة النطاق في البنية التحتية لقطاع المرافق، تتضمن عقود توريد لمعدات الشبكات وكابلات الضغط العالي وخدمات الهندسة والمقاولات."
   },
   "بريطانيا تخفف قواعد الموافقه علي مشروعات البنيه التحتيه لتعزيز الاستثمار": {
     "meaning": "Easing regulatory approval frameworks streamlines the planning process and reduces the administrative lead time required to initiate infrastructure developments.",
@@ -4269,6 +4277,10 @@
     "meaning": "This transaction executes a share-swap acquisition where Arab Moltaka Investments transfers its equity holding in Al Tawfeek Leasing to Al Baraka Bank in exchange for newly issued or swapped shares. The deal shifts the ownership structure of the target entity and reallocates the asset composition on Arab Moltaka's balance sheet from direct operating equity to a stake in the acquiring bank.",
     "meaning_ar": "تنفذ هذه المعاملة صفقة مبادلة أسهم تنقل بموجبها شركة الملتقى العربي للاستثمارات حصتها في شركة التوفيق للتأجير التمويلي إلى بنك البركة مقابل أسهم، مما يعيد هيكلة ملكية الشركة التابعة ويغير تصنيف الأصول في الميزانية العمومية لشركة الملتقى من حصة تشغيلية مباشرة إلى مساهمة في البنك الدامج."
   },
+  "عموميه تنميه الصناعات الكيماويه سيد توافق علي السير في اجراءات طرح الشركه في البورصه المصريه": {
+    "meaning": "An extraordinary general assembly approval initiates the formal regulatory, valuation, and listing procedures required under Financial Regulatory Authority (FRA) rules to offer a stake of the state-owned pharmaceutical manufacturer's equity on the Egyptian Exchange.",
+    "meaning_ar": "تمثل موافقة الجمعية العامة غير العادية بدء الإجراءات التنظيمية والتقييمية ومتطلبات القيد المحددة من قِبل الهيئة العامة للرقابة المالية لطرح حصة من رأسمال شركة الصناعات الدوائية المملوكة للدولة للتداول في البورصة المصرية."
+  },
   "عموميه راكتا تناقش مد فتره التصفيه وتجديد عمل المصفي العام 30 سبتمبر": {
     "meaning": "Extending the liquidation period and renewing the liquidator's mandate continues the formal legal and operational process of inventorying, valuing, and selling company assets to settle outstanding liabilities under statutory oversight.",
     "meaning_ar": "يؤدي مد فترة التصفية وتجديد تفويض المصفي القانوني إلى استمرار الإجراءات النظامية لحصر أصول الشركة وتقييمها وبيعها لسداد الالتزامات المالية والديون تحت إشراف الجمعية العامة."
@@ -5276,6 +5288,10 @@
   "وزاره الدوله للاعلام تبدا التنسيق مع الوزارات لتحقيق تدفق ودقه المعلومات لوسايل الاعلام": {
     "meaning": "This operational coordination establishes a centralized framework across government entities for official information disclosure and public communication channels.",
     "meaning_ar": "يضع هذا التنسيق المؤسسي إطار عمل مركزي بين الجهات الحكومية للإفصاح عن المعلومات الرسمية وإدارة قنوات التواصل الإعلامي."
+  },
+  "وزاره الزراعه: انطلاق حصاد الذره الشاميه بتوقعات انتاجيه تتجاوز 8 ملايين طن": {
+    "meaning": "The commencement of the domestic maize harvest directly increases the physical supply of raw grain available to local feed manufacturers and poultry operations, serving as an operational domestic alternative to imported bulk grain.",
+    "meaning_ar": "يؤدي انطلاق موسم حصاد الذرة الشامية محلياً إلى توفير إمدادات مباشرة من الحبوب لمصانع الأعلاف ومنشآت الدواجن، لتمثل بديلاً تشغيلياً محلياً للشحنات المستوردة."
   },
   "وزاره العمل: تقييم 57 منشاه يثبت تحسن الامتثال لمعايير العمل الدوليه": {
     "meaning": "The evaluation of enterprise compliance with international labor standards formalizes human capital governance and fulfills standardized regulatory criteria required within global supply chain frameworks.",
