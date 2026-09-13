@@ -851,6 +851,10 @@
     "meaning": "Carrying forward profits retains net earnings within the equity section of the balance sheet as retained earnings rather than distributing cash dividends to shareholders, keeping internal cash within the company.",
     "meaning_ar": "يعني ترحيل الأرباح إبقاء صافي الدخل المحقق ضمن بند الأرباح المرحلة في حقوق الملكية بالميزانية بدلاً من توزيعه كأرباح نقدية على المساهمين، مما يحافظ على السيولة داخل الشركة."
   },
+  "ارباح العربيه للادويه ترتفع 16% خلال العام المالي 2025-2026": {
+    "meaning": "A 16% increase in annual net profit reflects operational revenue growth outpacing the cost of goods sold and operating expenses over the fiscal year.",
+    "meaning_ar": "يعكس نمو صافي الأرباح السنوية بنسبة 16% زيادة الإيرادات التشغيلية بمعدل يفوق تكلفة المبيعات والمصروفات التشغيلية خلال العام المالي."
+  },
   "ارباح كيما ترتفع الي 1.79 مليار جنيه خلال العام المالي الماضي": {
     "meaning": "The expansion in annual net profit to EGP 1.79 billion reflects higher operational revenues relative to production costs and financing expenses at the industrial chemicals producer, increasing total retained equity on the balance sheet.",
     "meaning_ar": "يعكس ارتفاع صافي الربح السنوي إلى 1.79 مليار جنيه زيادة الإيرادات التشغيلية مقارنة بتكاليف الإنتاج والأعباء التمويلية لشركة الكيماويات، مما يرفع حجم الأرباح المحتجزة ضمن حقوق الملكية في الميزانية العمومية."
@@ -954,6 +958,10 @@
   "ازمه الوقود تضاعف مبيعات السيارات الكهرباييه في روسيا": {
     "meaning": "Traditional fuel supply constraints drive consumer substitution toward alternative powertrains, directly shifting automotive retail volumes from internal combustion engine vehicles to electric models.",
     "meaning_ar": "تؤدي اختناقات إمدادات الوقود التقليدي إلى تحول نمط الاستهلاك نحو بدائل الطاقة، مما ينعكس في زيادة حصة مبيعات السيارات الكهربائية مقارنة بمركبات الاحتراق الداخلي."
+  },
+  "ازمه مضيق هرمز تدفع اليابان لاعاده تقييم امنها الطاقي": {
+    "meaning": "Disruptions along the Strait of Hormuz maritime corridor interrupt crude oil supply flows to import-dependent economies, prompting state utilities to diversify procurement sources, adjust strategic reserve allocations, and alter long-term shipping contracts.",
+    "meaning_ar": "تؤدي اضطرابات الملاحة في مضيق هرمز إلى قطع تدفقات إمدادات النفط الخام للدول المعتمدة على الاستيراد، مما يدفع قطاعات الطاقة لإعادة هيكلة مصادر التوريد، وتعديل استخدامات المخزون الاستراتيجي، وتغيير شروط تعاقدات الشحن طويلة الأجل."
   },
   "اس اند بي تتوقع عجزا ماليا للسعوديه عند 5.8% من الناتج المحلي الاجمالي في 2026": {
     "meaning": "A projected fiscal deficit reflects public expenditures exceeding state revenues, requiring governments to bridge the financing gap through sovereign debt issuance or withdrawals from foreign exchange reserves.",
@@ -1302,6 +1310,10 @@
   "افتتاح مصنع “نا ترانس للاسمده” في “اقتصاديه القناه” باستثمارات 10 ملايين دولار": {
     "meaning": "The commissioning of the $10 million production facility adds fertilizer manufacturing capacity within the Suez Canal Economic Zone, integrating industrial operations with the zone's logistics and export infrastructure.",
     "meaning_ar": "يُضيف تشغيل المنشأة الإنتاجية باستثمارات تبلغ 10 ملايين دولار طاقة تصنيعية جديدة للأسمدة داخل المنطقة الاقتصادية لقناة السويس، مع ربط العمليات الصناعية بالبنية التحتية اللوجستية والتصديرية للمنطقة."
+  },
+  "اكبر منتج عالمي للشوكولاته يتوقع استقرار اسعار الكاكاو": {
+    "meaning": "Cocoa serves as a primary raw material input for confectionery manufacturing, where commodity price stabilization standardizes procurement expenses and direct production cost structures across the supply chain.",
+    "meaning_ar": "يُمثل الكاكاو المدخل الإنتاجي الأساسي في تصنيع الشوكولاتة، حيث يُرسي استقرار أسعار السلع الأولية ثباتاً في تكاليف التوريد والمصروفات التشغيلية المباشرة ضمن سلاسل الإمداد لشركات الأغذية."
   },
   "اكبر منشاه لاحتجاز الكربون في اوروبا تبدا التشغيل من هولندا بطاقه 800 الف طن سنويا": {
     "meaning": "The commercial commissioning of an industrial carbon capture facility establishes physical carbon management infrastructure with an operational processing capacity of 800,000 tons per year.",
@@ -1895,6 +1907,10 @@
     "meaning": "Broadening cooperation with multilateral development institutions like the AIIB provides state and private projects with access to direct financing lines and concessionary lending facilities across multiple infrastructure sectors.",
     "meaning_ar": "يتيح توسيع التعاون مع مؤسسات التنمية متعددة الأطراف مثل البنك الآسيوي للاستثمار في البنية التحتية خطوط تمويل مباشرة وتسهيلات ائتمانية ميسرة لمشروعات البنية التحتية في مختلف القطاعات."
   },
+  "الرييس السيسي: نستهدف رفع حجم التبادل التجاري مع الهند الي 12 مليار دولار": {
+    "meaning": "Bilateral trade targets establish institutional frameworks for customs coordination, export-import credit facilities, and cross-border commercial agreements between Egyptian and Indian enterprises across key sectors including chemicals, pharmaceuticals, and engineering goods.",
+    "meaning_ar": "تحدد الأهداف التجارية الثنائية أطراً مؤسسية للتنسيق الجمركي، وتسهيلات الائتمان الخاصة بالتصدير والاستيراد، والاتفاقيات التجارية بين الشركات المصرية والهندية في قطاعات رئيسية تشمل الكيماويات والأدوية والسلع الهندسية."
+  },
   "الزراعه : انتاج 79 الف طن تقاوي معتمده لدعم المساحات خلال موسم 2025 – 2026": {
     "meaning": "The supply of 79,000 tonnes of certified seeds establishes the domestic volume of agricultural inputs allocated for the 2025–2026 planting season, directly providing the primary raw material base for targeted crop acreage.",
     "meaning_ar": "يوفر إنتاج 79 ألف طن من التقاوي المعتمدة حجم المدخلات الزراعية المحلية المخصصة للموسم الزراعي 2025–2026، مما يشكل قاعدة المواد الخام الأساسية للمساحات المستهدفة."
@@ -2154,6 +2170,10 @@
   "الكويت تصدر مليون برميل نفط يوميا مع تعافي حركه الناقلات عبر هرمز": {
     "meaning": "The resumption of maritime tanker traffic through the Strait of Hormuz maintains Kuwaiti crude oil export flows at an operational volume of one million barrels per day.",
     "meaning_ar": "يتيح انتظام حركة ناقلات النفط عبر مضيق هرمز استمرار تدفقات صادرات النفط الخام الكويتي بمعدل تشغيلي يبلغ مليون برميل يومياً."
+  },
+  "اللجنه المختصه توافق علي تحديث دراسه القيمه العادله": {
+    "meaning": "The regulatory committee authorizes a revised valuation assessment to re-evaluate the company's assets and financial position using updated financial statements and current market parameters.",
+    "meaning_ar": "تعتمد اللجنة المختصة تحديث التقييم المالي لإعادة احتساب أصول الشركة ومركزها المالي بالاستناد إلى القوائم المالية المحدثة ومعايير السوق الحالية."
   },
   "الماليه والصناعيه المصريه تحقق 343.8 مليون جنيه ارباحا مستقله بالنصف الاول بارتفاع 42%": {
     "meaning": "The company's standalone financial results record a 42% year-on-year increase in net profit for the first half, reaching EGP 343.8 million from its direct core manufacturing and commercial operations.",
@@ -3071,6 +3091,10 @@
   "جدوي للتنميه الصناعيه تتحول للخساره بقيمه 378.5 مليون جنيه بالنصف الاول": {
     "meaning": "The company's operational revenues for the first half of the year are insufficient to offset its total production, operating, and financing costs, resulting in a net negative balance on the income statement that directly reduces retained earnings.",
     "meaning_ar": "تعجز الإيرادات التشغيلية للشركة خلال النصف الأول عن تغطية إجمالي تكاليف الإنتاج والتشغيل والأعباء التمويلية، مما يسفر عن رصيد صافٍ سالب في قائمة الدخل يخفض مباشرة من الأرباح المرحلة في حقوق الملكية."
+  },
+  "جدوي للتنميه الصناعيه تتحول للخساره خلال النصف الاول من 2026": {
+    "meaning": "A shift to a net loss occurs when total operational and financing expenses exceed generated revenues during the specified reporting period, which directly impacts the company's accumulated retained earnings on the balance sheet.",
+    "meaning_ar": "يحدث التحول إلى صافي خسارة عندما تتجاوز التكاليف التشغيلية والتمويلية الإجمالية الإيرادات المحققة خلال الفترة المالية المحددة، مما يؤثر مباشرة على رصيد الأرباح المرحلة في الميزانية العمومية للشركة."
   },
   "جمعيه رجال الاعمال تفتتح منتدي الاعمال المصري الموريشي وتبحث فرص تعزيز الاستثمار": {
     "meaning": "Bilateral business forums serve as institutional platforms for direct cross-border corporate networking, information exchange on regulatory frameworks, and identification of joint commercial partnerships between the two countries.",
@@ -4557,6 +4581,10 @@
     "meaning": "Cooperation with the Asian Infrastructure Investment Bank involves securing multilateral development financing and technical assistance for domestic infrastructure, energy, and transportation projects.",
     "meaning_ar": "يتضمن التعاون مع البنك الآسيوي للاستثمار في البنية التحتية توفير تمويلات تنموية متعددة الأطراف ودعم فني لمشروعات البنية التحتية والطاقة والنقل المحلية."
   },
+  "مصر تبحث مع الاوروبي لاعاده الاعمار تمويل التحول الصناعي الاخضر": {
+    "meaning": "The discussions involve multilateral concessional financing and credit lines from the EBRD directed toward capital expenditure for industrial energy efficiency, emissions abatement, and renewable energy adoption across Egyptian manufacturing facilities.",
+    "meaning_ar": "تتناول المباحثات آليات تمويل ميسر وخطوط ائتمان من البنك الأوروبي لإعادة الإعمار والتنمية مخصصة للإنفاق الرأسمالي على كفاءة الطاقة الصناعية، وخفض الانبعاثات، وتجهيزات الطاقة المتجددة في المنشآت التصنيعية المصرية."
+  },
   "مصر تتعاون مع «OECD» لاعداد الاستراتيجيه الوطنيه للذكاء الاصطناعي": {
     "meaning": "The partnership aligns Egypt's artificial intelligence regulatory framework and digital governance standards with the policy benchmarks established by the OECD.",
     "meaning_ar": "تربط هذه الشراكة بين الأطر التنظيمية ومعايير الحوكمة الرقمية للذكاء الاصطناعي في مصر والسياسات المعتمدة لدى منظمة التعاون الاقتصادي والتنمية."
@@ -4924,6 +4952,10 @@
   "هيوماين السعوديه تبدا خطوات طرح اسهمها للاكتتاب العام": {
     "meaning": "An initial public offering (IPO) process involves listing a company's shares on a public exchange to raise equity capital from institutional and retail investors, transitioning the firm from private ownership to a publicly traded entity subject to regulatory disclosure requirements.",
     "meaning_ar": "تتضمن إجراءات الطرح العام الأولي إدراج أسهم الشركة في البورصة لجمع رأس مال ملكية من المستثمرين المؤسسيين والأفراد، مما ينقل الشركة من الملكية الخاصة إلى كيان مدرج يخضع لمتطلبات الإفصاح والتنظيم المالي."
+  },
+  "هيونداي توجل اطلاق نظام القياده الذاتيه الي 2029 وتلجا الي انفيديا": {
+    "meaning": "This operational shift relies on external semiconductor and software architecture from Nvidia instead of in-house development, extending the commercial deployment timeline of the technology.",
+    "meaning_ar": "يمثل هذا الإجراء تحولاً تشغيلياً يعتمد على البنية التحتية البرمجية وتوريد الرقائق من طرف خارجي بدلاً من التطوير الداخلي، مع تمديد الإطار الزمني للطرح التجاري."
   },
   "هييه الاستثمار تبحث مع “مجموعه الحبتور” فرص التوسع في مصر": {
     "meaning": "The General Authority for Investment and Free Zones (GAFI) engages in direct bilateral discussions with multinational conglomerates to present targeted sector portfolios and regulatory incentives for foreign direct investment entry.",
@@ -5340,6 +5372,10 @@
   "“المركزي” يحذر من استهداف عملاء “انستاباي”": {
     "meaning": "The Central Bank of Egypt enforces operational security directives across the national Instant Payment Network (InstaPay) to mitigate electronic fraud and protect digital banking infrastructure. This operational framework mandates adherence to strict cybersecurity protocols and customer data verification mechanisms across participating banks.",
     "meaning_ar": "يُفعّل البنك المركزي المصري توجيهات الأمان التشغيلي عبر شبكة المدفوعات اللحظية (إنستاباي) للحد من الاحتيال الإلكتروني وتأمين البنية التحتية المصرفية الرقمية. يُلزم هذا الإطار التشغيلي البنوك المشاركة بتطبيق بروتوكولات الأمن السيبراني وآليات التحقق من بيانات العملاء."
+  },
+  "“المركزي” يطلق النسخه الرابعه من مسابقه FinTech Got Talent 2026": {
+    "meaning": "The Central Bank of Egypt operates this recurring regulatory initiative to source and evaluate early-stage financial technology applications from university students within the domestic banking ecosystem.",
+    "meaning_ar": "يُدير البنك المركزي المصري هذه المبادرة التنظيمية الدورية لاستقطاب وتقييم تطبيقات التكنولوجيا المالية في مراحلها الأولية من طلاب الجامعات ضمن منظومة القطاع المصرفي المحلي."
   },
   "“الملتقي العربي” تعتمد دراسه القيمه العادله لسهم “التوفيق للتاجير”": {
     "meaning": "The board of a parent company formally approves an independent valuation benchmark for a subsidiary's equity, establishing an official baseline for corporate transactions, internal accounting adjustments, and regulatory disclosure requirements.",
