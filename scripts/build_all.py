@@ -247,12 +247,19 @@ STEPS = [
     # is not a name, and the site has already shipped a chart of the wrong
     # instrument once.
     ("Rate history", "rate_history.py", True),
-    # The foreign-currency note, republished from what has already been read.
-    # The READING is two model passes over a whole filed statement and is run
-    # by hand the way build_pdf_statements.py is; this step spends no model
-    # call and exists so the channel is rebuilt from the store on every run
-    # rather than going missing the day a harvest was short.
-    ("Currency notes", "build_currency_notes.py", True, ["--publish"]),
+    # The foreign-currency note. Three filings a run, then republish.
+    #
+    # This was `--publish` only, so the READING happened on one laptop and the
+    # channel went stale the moment a company filed. CI already holds the
+    # credential it needs — `publish-app-data` authenticates to the same
+    # funded Vertex project by workload identity, for the filing typing above
+    # — so there was never a reason it had to be a laptop.
+    #
+    # Three, because each filing costs two passes over a whole scanned PDF and
+    # this runs several times a day. The store is committed (it is in STORES),
+    # so the work accumulates instead of being redone; without that this step
+    # would pay for the same three readings on every run forever.
+    ("Currency notes", "build_currency_notes.py", True, ["--limit", "3"]),
     # What moved outside Egypt, joined to the filings it reaches. Needs the
     # world history above it, the filed statements below the company
     # documents, and the currency notes just above, so it runs after all three
