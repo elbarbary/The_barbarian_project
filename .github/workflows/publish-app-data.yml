@@ -126,6 +126,8 @@ env:
     scripts/translations_en.json
     scripts/insider_bulletin_rows.json
     scripts/currency_notes_read.json
+    scripts/sector_reads.json
+    scripts/extract_unit_cache.json
 
 permissions:
   contents: write

@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import ast
 import pathlib
 import re
 import subprocess
@@ -246,3 +247,76 @@ class LiveDataGate(unittest.TestCase):
         for name in re.findall(r"\btest_[a-z_]+\b", block):
             self.assertTrue((HERE / f"{name}.py").exists(),
                             f"the gate names {name}, which is not a test module")
+
+
+class StoresSurviveTheRunner(unittest.TestCase):
+    """A store the daily build writes and does not commit is work thrown away.
+
+    `publish-app-data` stages named paths, not `git add -A` over the tree, so a
+    tracked file a step rewrites and the list does not name is left in the
+    runner and discarded. Two were: `sector_reads.json`, which is a model's
+    paragraph about each sector, and `extract_unit_cache.json`, which is the
+    model's reading of the filings whose figures are stated in thousands. Both
+    were rebuilt on every run and thrown away every run, so CI bought the same
+    readings again the next time — their git history has only local commits,
+    never github-actions[bot].
+
+    The rule is mechanical, so it is checked mechanically rather than by
+    keeping a list in somebody's head: find what each step writes, and require
+    that anything git tracks is named. Anything untracked is derived on every
+    run and is right to leave out.
+    """
+
+    REPO = pathlib.Path(__file__).resolve().parent.parent
+    WORKFLOW = REPO / ".github" / "workflows" / "publish-app-data.yml"
+    # `.write_text(`, `.open("w"`, or a bare `open(` on the same line as the path.
+    WRITE = r'(\.write_text\s*\(|\.open\s*\(\s*["\']w|open\s*\()'
+
+    def stores(self) -> set[str]:
+        block = re.search(r"STORES: >-\n((?:\s{4}\S+\n)+)",
+                          self.WORKFLOW.read_text(encoding="utf-8"))
+        self.assertIsNotNone(block, "the workflow no longer lists its stores")
+        return set(block.group(1).split())
+
+    def written_by_a_step(self) -> dict[str, set[str]]:
+        here = self.REPO / "scripts"
+        source = (here / "build_all.py").read_text(encoding="utf-8")
+        steps = {script for _, script in
+                 re.findall(r'\("([^"]+)",\s*"([a-z_0-9]+\.py)"', source)}
+        found: dict[str, set[str]] = {}
+        for script in sorted(steps):
+            path = here / script
+            if not path.exists():
+                continue
+            text = path.read_text(encoding="utf-8")
+            for node in ast.walk(ast.parse(text)):
+                if not (isinstance(node, ast.Assign)
+                        and isinstance(node.targets[0], ast.Name)):
+                    continue
+                expr = ast.unparse(node.value)
+                named = re.search(r"""['"]([a-z_0-9]+\.json)['"]""", expr)
+                if not named or "parent" not in expr:
+                    continue
+                var = node.targets[0].id
+                if re.search(rf"\b{var}\b[^\n]*{self.WRITE}", text):
+                    found.setdefault(f"scripts/{named.group(1)}", set()).add(script)
+        return found
+
+    def test_the_detector_finds_the_stores_that_are_already_named(self):
+        # Guards the test itself: a detector that finds nothing would pass the
+        # one below no matter what the workflow dropped.
+        written = self.written_by_a_step()
+        self.assertGreaterEqual(len(written), 10, written)
+        self.assertIn("scripts/sector_reads.json", written)
+
+    def test_every_store_a_step_writes_and_git_tracks_is_committed(self):
+        stores = self.stores()
+        missing = []
+        for store, writers in sorted(self.written_by_a_step().items()):
+            tracked = subprocess.run(
+                ["git", "ls-files", "--error-unmatch", store],
+                capture_output=True, cwd=self.REPO).returncode == 0
+            if tracked and store not in stores:
+                missing.append(f"{store} (written by {', '.join(sorted(writers))})")
+        self.assertEqual(missing, [], "the daily build rewrites these and the "
+                         "job never commits them, so every run redoes the work")
