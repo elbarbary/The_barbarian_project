@@ -363,6 +363,10 @@
     "meaning": "Settling the scheduled land installment fulfills a contractual capital liability to the state developer, maintaining legal tenure over the agricultural project assets and reducing the company's cash reserves.",
     "meaning_ar": "يُسدد سداد قسط الأرض التزاماً رأسمالياً مجدولاً لصالح شركة تنمية الريف المصري، مما يُثبت الحيازة القانونية للأصول الزراعية ويُخفض رصيد السيولة النقدية للشركة."
   },
+  "arab dairy consolidated losses widen in h1 2026": {
+    "meaning": "Widening consolidated losses reflect total operating and non-operating expenses outpacing revenues across all corporate subsidiaries during the six-month period, which reduces retained earnings on the balance sheet.",
+    "meaning_ar": "يعكس اتساع الخسائر المجمعة تجاوز إجمالي المصروفات التشغيلية وغير التشغيلية للإيرادات عبر جميع الشركات التابعة خلال فترة الستة أشهر، مما يؤدي إلى خفض الأرباح المرحلة في الميزانية العمومية."
+  },
   "arab moltaqa investments approves fair value for al baraka bank egypt a t lease share swap offer": {
     "meaning": "Approving the independent valuation sets the exchange ratio for the transaction, enabling the company to swap equity in one entity for shares in another without cash settlement.",
     "meaning_ar": "اعتماد التقييم المستقل يحدد معامل مبادلة الأسهم للعملية، مما يتيح للشركة مبادلة حصص ملكية في كيان مقابل أسهم في كيان آخر دون تسوية نقدية."
@@ -890,6 +894,10 @@
   "ارتفاع اسعار الغاز الاوروبيه لاعلي مستوياتها منذ يناير 2023": {
     "meaning": "Higher European natural gas benchmarks raise the pricing base for international LNG contracts, shifting the input cost structure for energy-intensive manufacturing and altering the landed price of imported LNG supplies.",
     "meaning_ar": "يؤدي ارتفاع المؤشرات القياسية للغاز الطبيعي الأوروبي إلى رفع الأساس السعري لعقود الغاز المسال العالمية، مما يغير هيكل تكاليف التشغيل للمصانع كثيفة الاستهلاك للطاقة ويعدل التكلفة الإجمالية لشحنات الغاز المسال المستوردة."
+  },
+  "ارتفاع اسعار الغاز يهدد الاسهم الاوروبيه.. وسيتي يستبعد تكرار صدمه 2022": {
+    "meaning": "Higher natural gas prices raise operational energy costs for European industrial corporations and compress current profit margins across energy-intensive sectors, while existing supply diversification and elevated gas storage levels differentiate current market conditions from 2022.",
+    "meaning_ar": "يؤدي ارتفاع أسعار الغاز الطبيعي إلى زيادة تكاليف الطاقة التشغيلية للشركات الصناعية الأوروبية والضغط على هوامش الأرباح الحالية للقطاعات كثيفة الاستهلاك، بينما تختلف ظروف السوق الحالية عن عام 2022 في ظل تنوع مصادر الإمداد وارتفاع مستويات المخزون."
   },
   "ارتفاع اسعار الوقود في اوروبا يهدد بزياده الضغوط التضخميه مع نقص قدرات التكرير": {
     "meaning": "Refinery capacity shortages restrict the supply of refined petroleum products, raising fuel prices and directly increasing transportation and operational input costs across supply chains.",
@@ -1995,6 +2003,10 @@
     "meaning": "Sector rotation reallocates trading capital across different industry groups, maintaining aggregate market turnover and driving upward movement in the benchmark EGX30 index.",
     "meaning_ar": "تعيد عمليات التدوير القطاعي توزيع السيولة النقدية بين مختلف القطاعات، مما يحافظ على إجمالي قيم التداول في السوق ويدفع مؤشر EGX30 الرئيسي نحو مستويات أعلى."
   },
+  "الشركات الالمانيه تزيد استثماراتها في الصين": {
+    "meaning": "German corporations expand capital expenditure and allocate operational assets directly within the Chinese market, deepening their manufacturing presence and local supply chain integration.",
+    "meaning_ar": "توسع الشركات الألمانية إنفاقها الرأسمالي وتخصص أصولاً تشغيلية داخل السوق الصينية، مما يعزز وجودها التصنيعي ويدمج سلاسل الإمداد المحلية."
+  },
   "الشركات الالمانيه تزيد استثماراتها في الصين مع تراجع حاد في استثماراتها بامريكا": {
     "meaning": "This shift represents a geographical reallocation of corporate capital expenditure, where German multinational firms concentrate asset deployment and direct foreign investment in the Chinese market while reducing capital allocations to US operations.",
     "meaning_ar": "يمثل هذا التحول إعادة توزيع جغرافي للإنفاق الرأسمالي للشركات، حيث تركز الشركات الألمانية متعددة الجنسيات أصولها واستثماراتها الأجنبية المباشرة في السوق الصينية مقابل تقليص المخصصات الرأسمالية لعملياتها في الولايات المتحدة."
@@ -2166,6 +2178,10 @@
   "القطار السريع يراهن علي «ايركايرو» لزياده الاشغال وتسريع استرداد التكلفه": {
     "meaning": "The commercial integration between the high-speed rail network and Air Cairo connects rail schedules with domestic and international flight arrivals, channeling transit passengers directly into the rail transport system.",
     "meaning_ar": "يربط التكامل التجاري بين شبكة القطار السريع وشركة «إير كايرو» مواعيد رحلات القطارات بحركة وصول الرحلات الجوية الداخلية والدولية، مما يوجه ركاب الترانزيت مباشرة إلى منظومة النقل السككي."
+  },
+  "القلعه تضاعف حصتها غير المباشره في المصريه للتكرير": {
+    "meaning": "Qalaa Holdings increases its effective equity ownership in the Egyptian Refining Company through intermediary holding entities, altering the proportion of refinery earnings and operational cash flows consolidated or recognized on its financial statements.",
+    "meaning_ar": "ترفع شركة القلعة القابضة نسبة ملكيتها الفعلية في الشركة المصرية للتكرير عبر كيانات تابعة وسيطة، مما يغير حصتها من النتائج المالية والتدفقات التشغيلية للمصفاة في قوائمها المالية."
   },
   "الكاكاو يتجه لخساره اسبوعيه مع تقييم افاق السوق": {
     "meaning": "Cocoa futures experience price adjustments as global commodity markets reassess underlying supply and demand fundamentals, directly determining raw material procurement benchmarks for food and confectionery manufacturers.",
@@ -3112,6 +3128,10 @@
     "meaning": "A shift to a net loss occurs when total operational and financing expenses exceed generated revenues during the specified reporting period, which directly impacts the company's accumulated retained earnings on the balance sheet.",
     "meaning_ar": "يحدث التحول إلى صافي خسارة عندما تتجاوز التكاليف التشغيلية والتمويلية الإجمالية الإيرادات المحققة خلال الفترة المالية المحددة، مما يؤثر مباشرة على رصيد الأرباح المرحلة في الميزانية العمومية للشركة."
   },
+  "جدوي للتنميه الصناعيه تخفض حصتها في راسمال يونيباك الي 13.87%": {
+    "meaning": "This transaction represents a partial divestment of equity, lowering the major shareholder's voting power and direct ownership balance in the target company's share capital.",
+    "meaning_ar": "يمثل هذا الإجراء تخارجاً جزئياً من حقوق الملكية، مما يخفض القوة التصويتية ونسبة المساهمة المباشرة للمساهم الرئيسي في رأس مال الشركة."
+  },
   "جدوي للتنميه تقلص نسبه مساهمتها بيونيباك": {
     "meaning": "A reduction in equity stake constitutes a partial divestment that alters the company's capital ownership structure, redistributing voting rights and financial exposure between the parent entity and the investee.",
     "meaning_ar": "يُعد تخفيض نسبة المساهمة تخارجاً جزئياً يُغيّر هيكل ملكية رأس المال، ويعيد توزيع حقوق التصويت وحجم التعرض المالي بين الشركة الأم والشركة التابعة."
@@ -3785,6 +3805,10 @@
     "meaning": "African trade operates through regional commercial agreements and tariff reduction frameworks that establish cross-border supply chains and export channels across member states.",
     "meaning_ar": "ترتكز التجارة الإفريقية على اتفاقيات تجارية إقليمية وأطر لتخفيض التعريفات الجمركية تنظم سلاسل التوريد وقنوات التصدير عبر الحدود بين الدول الأعضاء."
   },
+  "سيراميكا ريماس: المجموعه الاستثماريه العقاريه الكويتيه تخفض حصتها في الشركه الي 23.83%": {
+    "meaning": "A major shareholder reduces its equity stake in the company, which alters the distribution of voting rights and ownership concentration on the shareholder register.",
+    "meaning_ar": "يؤدي خفض مساهم رئيسي لحصته في رأسمال الشركة إلى تعديل هيكل الملكية وتوزيع حقوق التصويت في سجل المساهمين."
+  },
   "سيطره امريكا علي نفط فنزويلا تهدد مليارات الدولارات المستحقه للصين": {
     "meaning": "US control over Venezuelan oil assets directly alters the repayment mechanism for oil-backed loans, redirecting crude flows and related cash revenues away from Chinese state creditors.",
     "meaning_ar": "تؤدي السيطرة الأمريكية على الأصول النفطية الفنزويلية إلى تعديل آلية سداد القروض المضمونة بالنفط، مما يعيد توجيه تدفقات الخام والإيرادات النقدية المرتبطة به بعيداً عن الدائنين الصينيين."
@@ -3848,6 +3872,10 @@
   "شركه 2B موزعا معتمدا لمنتجات Apple في مصر": {
     "meaning": "An authorized distributor agreement integrates the local retailer directly into the manufacturer's official regional supply chain, standardizing inventory procurement, warranty fulfillment, and retail pricing directly from the brand.",
     "meaning_ar": "يُدرج عقد التوزيع المعتمد شركة التجزئة المحلية مباشرة ضمن سلاسل الإمداد والتوريد الرسمية للشركة المصنعة، مما ينظم عمليات استلام المخزون، وتقديم خدمات الضمان، وتسعير المنتجات وفقاً لسياسات العلامة التجارية."
+  },
+  "شركه ACT تستهدف استثمار 10 ملايين دولار للتوسع في افريفيا واسيا": {
+    "meaning": "This plan entails a capital expenditure of 10 million dollars allocated to establish operational and commercial presence in regional markets across Africa and Asia.",
+    "meaning_ar": "تتضمن هذه الخطة تخصيص إنفاق رأسمالي بقيمة 10 ملايين دولار لإنشاء بنية تشغيلية وتجارية في أسواق إقليمية عبر قارتي إفريقيا وآسيا."
   },
   "شركه مدعومه من وادي السيليكون تطلق صاروخا منخفض التكلفه وتستهدف انتاج 12 الف وحده سنويا": {
     "meaning": "Venture capital backing finances the transition from defense prototype development to high-volume manufacturing, utilizing standardized, low-cost components to establish an annual assembly line capacity of 12,000 units.",
@@ -4384,6 +4412,10 @@
   "محمد المهندس: الصناعه تحتاج الي نظره عميقه لاحتياجاتها": {
     "meaning": "The statement addresses operational conditions in the industrial sector, which involve assessing supply chain inputs, production costs, licensing procedures, and local manufacturing requirements.",
     "meaning_ar": "يتناول التصريح المتطلبات التشغيلية للقطاع الصناعي، والتي تشمل دراسة مدخلات سلاسل الإمداد، وتكاليف الإنتاج، وإجراءات التراخيص، واحتياجات التصنيع المحلي."
+  },
+  "محمد توفيق: مليارا جنيه حجم ايرادات ACT خلال النصف الاول بارتفاع 75%": {
+    "meaning": "ACT generates EGP 2 billion in top-line revenue for the first half of the year, marking a 75% increase in operational billings and completed contract volume compared to the prior-year period.",
+    "meaning_ar": "سجلت شركة أكت إيرادات نصف سنوية بقيمة ملياري جنيه، وهو ما يعكس نمواً في حجم الفواتير التشغيلية والعقود المنفذة بنسبة 75% مقارنة بالفترة نفسها من العام السابق."
   },
   "محمد زلط: هدف برنامج التحول الاقتصادي تعزيز دور القطاعات الانتاجيه في دعم النمو": {
     "meaning": "Economic transformation programs reallocate capital and policy resources toward manufacturing, agriculture, and industrial activities, shifting the operational base away from consumption-led drivers.",
