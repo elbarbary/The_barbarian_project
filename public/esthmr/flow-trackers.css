@@ -750,8 +750,9 @@ button.om-holder-row:hover span { color: var(--accent); }
      squat stage it was letterboxed inside its 880px canvas — two hundred
      blank pixels down the left, and the right-hand third of the exchange off
      the edge. It is 880 by 563 here and the stage scrolls to it. */
-  .om-sheet .om-map-svg { height: auto; }
-  .om-sheet .om-map-scroll { overflow: auto; }
+  /* Full screen is the same one coordinate system, with a taller frame. */
+  .om-sheet .om-map-svg { height: 100%; min-height: 0; }
+  .om-sheet .om-map-scroll { overflow: hidden; }
   /* Two-up rather than a single column of near-empty cards under a wide map. */
   .om-side { grid-template-columns: 1fr 1fr; }
   .om-legend { font-size: 10.5px; }
@@ -763,9 +764,17 @@ button.om-holder-row:hover span { color: var(--accent); }
      So the board keeps a width it can be read at and pans inside its own box,
      and the page itself still never scrolls sideways. The list beside it is
      the readable interface on a phone; the board is the picture. */
-  .om-map-scroll { overflow-x: auto; overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch; }
-  .om-map-svg { min-width: 880px; }
+  /* NO container scroll, and no 880px element behind a 343px window.
+     That was two offsets for one gesture: the reader's finger moved the
+     viewBox and the board's own ends belonged to `scrollLeft`, so the
+     furthest east that could be got on screen was unit 1053 of 1200 and a
+     hundred pixels of finger moved the board twenty-seven units instead of
+     seventy. The board now keeps a frame and pans inside it, and the script
+     fits the window to that frame — the whole height, at a scale a ring can
+     be read at, with the rest of the market a drag away. */
+  .om-map-scroll { overflow: hidden; }
+  .om-map-svg { min-width: 0; width: 100%;
+    height: min(62vh, 520px); min-height: 320px; }
   .om-pan-hint { display: block; }
 }
 

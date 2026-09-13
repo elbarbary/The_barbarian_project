@@ -8,7 +8,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { installDom } from './dom-stub.mjs';
+import { installDom, layoutHappened } from './dom-stub.mjs';
 installDom();
 
 const OM = await import('../../public/esthmr/ownership-map.js');
@@ -1018,7 +1018,14 @@ test('full screen on a phone stacks, and the board keeps its proportions', () =>
   assert.match(rule('.om-sheet .om-map-host'), /grid-template-columns:\s*minmax\(0, 1fr\)/);
   // A squat stage stretched the board inside its own 880px canvas: two hundred
   // blank pixels down one side and the rest of the exchange off the other.
-  assert.match(rule('.om-sheet .om-map-svg'), /height:\s*auto/);
+  //
+  // This asserted `height: auto` — the shape that kept the ELEMENT at the
+  // board's proportions so that `meet` had nothing to letterbox. The element
+  // no longer carries the proportions; the window does, fitted to whatever
+  // box the frame turns out to be, which is the guarantee `height: auto` was
+  // standing in for and a stronger one. So the box is free to be any shape
+  // and the property itself is checked below.
+  assert.match(rule('.om-sheet .om-map-svg'), /height:\s*100%/);
   // And the register needs a ceiling of its own once nothing is scrolling it.
   assert.match(rule('.om-sheet .om-register-list'), /max-height:\s*\d/);
 });
@@ -1094,4 +1101,186 @@ test('lifting one finger ends the pinch without ending the board', () => {
   send('pointerup', 1, 100, 100);
   assert.equal(svg.getAttribute('viewBox'), zoomed,
                'letting go snapped the board somewhere else');
+});
+
+/* ── a phone-sized frame ──────────────────────────────────────────────────
+ *
+ * Everything above gives the board an 880-pixel box. That is the ELEMENT's
+ * width on a phone — `.om-map-svg { min-width: 880px }` — and not what the
+ * reader can see. The scroller around it is the width of the screen, so the
+ * board is read through a 343-pixel keyhole into an 880-pixel element and
+ * there are two independent horizontal offsets: the container's `scrollLeft`
+ * and the viewBox's own `x`.
+ *
+ * These model both, and ask the only question that matters: which board units
+ * can the reader actually get on screen?
+ */
+const FRAME = 343;                      // a phone, inside the page's padding
+
+function phone(view, { frame = FRAME } = {}) {
+  const svg = nodesWithClass(view, 'om-map-svg')[0];
+  const scroll = nodesWithClass(view, 'om-map-scroll')[0];
+  // The element is as wide as the stylesheet makes it, which may be wider
+  // than the frame. Whatever the fix does to that, this reads it back.
+  const elementWidth = () => (/min-width:\s*880px/.test(
+    (stylesheet.slice(stylesheet.indexOf('@media (max-width: 900px)'))
+      .match(/\.om-map-svg\s*\{[^}]*\}/g) || []).join(' ')) ? 880 : frame);
+  let height = 557;
+  svg.getBoundingClientRect = () => ({ left: 0, top: 0, width: elementWidth(), height });
+  Object.assign(scroll, {
+    clientWidth: frame, clientHeight: height,
+    get scrollWidth() { return elementWidth(); },
+  });
+  if (typeof scroll.scrollLeft !== 'number') scroll.scrollLeft = 0;
+
+  const send = (type, id, x, y) => svg.events[type] && svg.events[type]({
+    pointerId: id, clientX: x, clientY: y,
+    preventDefault() {}, stopPropagation() {},
+  });
+  const win = () => String(svg.getAttribute('viewBox')).split(/\s+/).map(Number);
+  /* Which board units are on the reader's screen — the viewBox seen through
+     whatever slice of the element the container happens to be scrolled to. */
+  const visible = () => {
+    const [x, y, w, h] = win();
+    const element = elementWidth();
+    const from = (scroll.scrollLeft || 0) / element;
+    const to = Math.min(1, ((scroll.scrollLeft || 0) + frame) / element);
+    return { x0: x + from * w, x1: x + to * w, y0: y, y1: y + h };
+  };
+  const drag = (fromX, fromY, toX, toY) => {
+    send('pointerdown', 9, fromX, fromY);
+    send('pointermove', 9, toX, toY);
+    send('pointerup', 9, toX, toY);
+  };
+  const pinchIn = () => {
+    send('pointerdown', 1, 100, 200);
+    send('pointerdown', 2, 140, 200);
+    send('pointermove', 2, 300, 200);
+    send('pointerup', 1, 100, 200);
+    send('pointerup', 2, 300, 200);
+  };
+  /* What the ResizeObserver delivers the moment the element has a box. The
+     stub has no layout, so the board's first paint measures zero and the real
+     frame arrives afterwards — which is exactly the browser's order too. */
+  const laidOut = () => layoutHappened();
+  return { svg, scroll, send, win, visible, drag, pinchIn, laidOut };
+}
+
+test('zoomed in on a phone, the reader can still reach both ends of the board', () => {
+  // The board is 1200 units wide. Zoomed in, the drag pans the viewBox and
+  // the viewBox stops at the edge of the ELEMENT — of which the reader sees
+  // 39%. The last unit on screen was 1200 minus most of a window, and the
+  // east of the exchange could not be got to at all.
+  const view = panel();
+  const { drag, visible, pinchIn } = phone(view);
+  pinchIn();
+  for (let i = 0; i < 16; i++) drag(300, 300, 20, 300);
+  assert.ok(visible().x1 >= 1200 - 1,
+            `the furthest east on screen is ${visible().x1.toFixed(1)} of 1200`);
+  for (let i = 0; i < 16; i++) drag(20, 300, 300, 300);
+  assert.ok(visible().x0 <= 1,
+            `the furthest west on screen is ${visible().x0.toFixed(1)} of 0`);
+});
+
+test('zoomed in on a phone, the reader can reach the top and the bottom', () => {
+  const view = panel();
+  const { drag, visible, pinchIn } = phone(view);
+  pinchIn();
+  for (let i = 0; i < 16; i++) drag(200, 500, 200, 40);
+  assert.ok(visible().y1 >= 760 - 1,
+            `the furthest south on screen is ${visible().y1.toFixed(1)} of 760`);
+  for (let i = 0; i < 16; i++) drag(200, 40, 200, 500);
+  assert.ok(visible().y0 <= 1,
+            `the furthest north on screen is ${visible().y0.toFixed(1)} of 0`);
+});
+
+test('the board moves as far as the finger does', () => {
+  // The pan divided the finger by the ELEMENT's width while the finger could
+  // only cross the frame, so a full swipe moved the board about two fifths of
+  // what the hand asked for. A board that lags the finger reads as stuck.
+  const view = panel();
+  const { drag, win, pinchIn } = phone(view);
+  pinchIn();
+  const [x0, , w0] = win();
+  const perPixel = w0 / FRAME;            // board units under one CSS pixel
+  drag(280, 300, 180, 300);               // 100 pixels of finger
+  const moved = win()[0] - x0;
+  assert.ok(Math.abs(moved - 100 * perPixel) < 100 * perPixel * 0.08,
+            `100px of finger moved the board ${moved.toFixed(1)} units, `
+            + `not the ${(100 * perPixel).toFixed(1)} under it`);
+});
+
+test('the window keeps the frame\u2019s proportions, so nothing is letterboxed', () => {
+  // `meet` draws the window inside the box and pads whichever axis is spare.
+  // A window shaped like the board inside a frame shaped like a phone is two
+  // hundred blank pixels down one side — which is what a squat full-screen
+  // stage used to do, and what a portrait phone would do now that the element
+  // no longer carries the board's shape itself.
+  for (const box of [{ w: 343, h: 557 }, { w: 900, h: 300 }, { w: 700, h: 700 }]) {
+    const view = panel();
+    const svg = nodesWithClass(view, 'om-map-svg')[0];
+    svg.getBoundingClientRect = () => ({ left: 0, top: 0, width: box.w, height: box.h });
+    // Any gesture repaints the window against the box it is really drawn in.
+    svg.events.pointerdown({ pointerId: 3, clientX: 10, clientY: 10,
+                             preventDefault() {}, stopPropagation() {} });
+    svg.events.pointermove({ pointerId: 3, clientX: 40, clientY: 10,
+                             preventDefault() {}, stopPropagation() {} });
+    svg.events.pointerup({ pointerId: 3, clientX: 40, clientY: 10,
+                           preventDefault() {}, stopPropagation() {} });
+    const [, , w, h] = String(svg.getAttribute('viewBox')).split(/\s+/).map(Number);
+    assert.ok(Math.abs((h / w) - (box.h / box.w)) < 0.01,
+      `a ${box.w}\u00d7${box.h} frame drew a ${w.toFixed(0)}\u00d7${h.toFixed(0)} window`);
+  }
+});
+
+test('a phone sees the whole height of the board without zooming', () => {
+  // The sideways drag is the one the hint promises. Losing the top and bottom
+  // as well would make the default view a keyhole in both directions, and the
+  // board is read by looking at where the clusters are.
+  const view = panel();
+  const { win, laidOut } = phone(view);
+  laidOut();
+  const [, y, w, h] = win();
+  assert.ok(h >= 760 - 1 && y <= 1, `a phone opens on ${h.toFixed(0)} of 760 units tall`);
+  assert.ok(w < 760, `and on ${w.toFixed(0)} units wide, which is the whole board`);
+});
+
+test('a phone opens un-captured, so the reader can scroll past the board', () => {
+  // `data-panning` is `touch-action: none`. Set at the first paint — which is
+  // what measuring the zoom against the whole board rather than against the
+  // fitted window would do — a reader who only wanted to reach the register
+  // below would be stuck on the map.
+  const view = panel();
+  const { svg, win, laidOut } = phone(view);
+  laidOut();
+  assert.ok(win()[2] < 760, 'the frame was not treated as a phone');
+  assert.equal(svg.getAttribute('data-panning'), null,
+    'a phone opens with the gesture already taken');
+});
+
+test('a zoomed phone keeps its window shape across the press that rebuilds it', () => {
+  // Picking a company is a setState, which builds the whole panel again — and
+  // the first paint of that rebuild happens while the element is detached,
+  // where every measurement is zero. Reshaping the restored window against
+  // that fallback gives it the BOARD's proportions inside a phone's frame,
+  // which `meet` then letterboxes: the reader's own view, thrown away and
+  // padded, between two renders of the same board.
+  const view = panel();
+  const c = panel.reader;
+  const { laidOut, pinchIn, win } = phone(view);
+  laidOut();
+  pinchIn();
+  const kept = { ...c.state.ownershipWin };
+  const shape = kept.h / kept.w;
+  assert.ok(Math.abs(shape - 557 / 343) < 0.01,
+            `a phone zoomed to a ${shape.toFixed(2)} window, not the frame's 1.62`);
+
+  // Built again, detached, before any layout arrives.
+  const again = panel(undefined, c);
+  const svg = nodesWithClass(again, 'om-map-svg')[0];
+  const [, , w, h] = String(svg.getAttribute('viewBox')).split(/\s+/).map(Number);
+  assert.ok(Math.abs((h / w) - shape) < 0.01,
+            `the rebuild drew a ${(h / w).toFixed(2)} window over the reader's ${shape.toFixed(2)}`);
+  assert.ok(Math.abs(w - kept.w) < 0.5, 'and it changed how far in the reader was');
+  void win;
 });

@@ -789,7 +789,45 @@ function renderOwnershipMap(doc, ar, t, component) {
   let win = st.ownershipWin && finite(st.ownershipWin.w)
     ? { ...st.ownershipWin } : null;
   const board = () => OM.VIEW;
-  const wholeBoard = () => ({ x: 0, y: 0, w: OM.VIEW.w, h: OM.VIEW.h });
+  /* The box the board is actually DRAWN in, in CSS pixels.
+   *
+   * Zero before the element is laid out — a detached SVG measures nothing —
+   * so everything below falls back to the board's own proportions until
+   * there is a real box to read. */
+  const frame = () => {
+    const box = svg.getBoundingClientRect
+      ? svg.getBoundingClientRect() : { width: 0, height: 0 };
+    return (box.width > 0 && box.height > 0)
+      ? { w: box.width, h: box.height, measured: true }
+      : { w: OM.VIEW.w, h: OM.VIEW.h, measured: false };
+  };
+
+  /* The window the board sits at when nobody has zoomed.
+   *
+   * Fit the HEIGHT and take whatever width that gives, capped at the board.
+   * One rule, two answers. On a desktop the frame has the board's own
+   * proportions, so the width comes back at 1200 and the whole exchange is on
+   * screen. On a phone the frame is portrait, so the same rule returns about
+   * 470 units — the whole height at a scale a ring can be read at, and the
+   * rest of the market a sideways drag away.
+   *
+   * This used to be `wholeBoard()` at every size, and the phone got its scale
+   * from a CSS `min-width: 880px` on the element instead. That made the board
+   * an 880-pixel picture behind a 343-pixel window, with the container's
+   * `scrollLeft` moving one and the viewBox moving the other. Two offsets for
+   * one gesture is what "it doesn't go all the way from all sides" was: the
+   * viewBox stopped at the edge of the ELEMENT, of which the reader saw two
+   * fifths, so the last unit that could be got on screen was 1053 of 1200 and
+   * the east of the exchange was unreachable at any zoom.
+   */
+  const fitWindow = () => {
+    const full = board();
+    const box = frame();
+    const h = full.h;
+    const w = Math.min(full.w, h * (box.w / box.h));
+    return { x: (full.w - w) / 2, y: 0, w, h };
+  };
+  const wholeBoard = fitWindow;
 
   const buttons = [];
   const chip = (key, text, sub) => {
@@ -970,20 +1008,15 @@ function renderOwnershipMap(doc, ar, t, component) {
       drag.moved = true;
       try { svg.setPointerCapture(drag.id); } catch { /* pointer already gone */ }
     }
+    // Always the viewBox, at every zoom. The other half of this used to move
+    // the container's `scrollLeft` instead, which is the second offset: the
+    // reader's finger moved one of them and the board's own ends belonged to
+    // the other. One gesture, one coordinate system, and the end of the
+    // window is the end of the exchange.
     const box = svg.getBoundingClientRect();
-    const dx = e.clientX - drag.x;
-    const zoomed = drag.from.w < board().w - 0.5;
-    if (zoomed) {
-      win.x = drag.from.x - dx / box.width * win.w;
-      win.y = drag.from.y - (e.clientY - drag.y) / box.height * win.h;
-      applyWindow();
-    } else if (scroller) {
-      // At full fit the viewBox has nowhere to go, so the drag moves the box
-      // the board is drawn in — and clamps to its real end rather than to
-      // wherever a flick ran out.
-      const most = scroller.scrollWidth - scroller.clientWidth;
-      scroller.scrollLeft = Math.max(0, Math.min(most, drag.scroll - dx));
-    }
+    win.x = drag.from.x - (e.clientX - drag.x) / box.width * win.w;
+    win.y = drag.from.y - (e.clientY - drag.y) / box.height * win.h;
+    applyWindow();
   }, { passive: false });
 
   const endPointer = (e) => {
@@ -1039,19 +1072,43 @@ function renderOwnershipMap(doc, ar, t, component) {
 
   const clampWindow = () => {
     const full = board();
+    const fit = fitWindow();
     const min = 0.14;                       // about seven times in
-    win.w = Math.max(full.w * min, Math.min(full.w, win.w));
-    win.h = win.w * (full.h / full.w);
-    win.x = Math.max(0, Math.min(full.w - win.w, win.x));
-    win.y = Math.max(0, Math.min(full.h - win.h, win.y));
+    // Out stops at the window that fits the frame, not at the whole board. On
+    // a phone the whole board inside a portrait frame is a letterboxed strip
+    // at a third of a pixel per unit, which is a picture of nothing.
+    win.w = Math.max(full.w * min, Math.min(fit.w, win.w));
+    // The window keeps the FRAME's proportions, not the board's. They are the
+    // same thing on a desktop and nothing like it on a phone, and a window
+    // shaped like the board inside a frame shaped like a phone is drawn with
+    // `meet` — which letterboxes it and hands back the scale this just spent
+    // the line above protecting.
+    const box = frame();
+    // Only when there is a real box to read. The first paint happens while
+    // the element is still detached, where every measurement is zero — so a
+    // restored window would be reshaped to the fallback's proportions and the
+    // reader's own view thrown away between two renders. The observer below
+    // re-fits the moment the box exists.
+    if (box.measured) win.h = win.w * (box.h / box.w);
+    // Centred on an axis where the window is larger than the board, so the
+    // blank is shared rather than all of it falling below the board.
+    win.x = win.w >= full.w ? (full.w - win.w) / 2
+      : Math.max(0, Math.min(full.w - win.w, win.x));
+    win.y = win.h >= full.h ? (full.h - win.h) / 2
+      : Math.max(0, Math.min(full.h - win.h, win.y));
   };
 
   const applyWindow = () => {
     if (!win) win = wholeBoard();
     clampWindow();
     svg.setAttribute('viewBox', `${win.x} ${win.y} ${win.w} ${win.h}`);
-    const full = board();
-    const times = full.w / win.w;
+    // How far IN the reader has gone from where the board sits by default —
+    // not from the whole exchange. Measured against the board, a phone would
+    // read 2.6x before anybody touched it: the marks would be drawn for a
+    // zoom nobody asked for and the gesture would be captured from the first
+    // paint, trapping a reader who only wanted to scroll past.
+    const fit = fitWindow();
+    const times = fit.w / win.w;
     // Zoomed in, the marks are drawn smaller. Growing everything by the zoom
     // factor put three rings across the screen and hid exactly the crowding
     // a reader zoomed in to see through.
@@ -1065,6 +1122,37 @@ function renderOwnershipMap(doc, ar, t, component) {
     if (zoomOut) zoomOut.disabled = times <= 1.001;
     if (zoomLabel) zoomLabel.textContent = `${times.toFixed(1)}×`;
   };
+
+  /* Re-fit when the box appears, and whenever it changes shape.
+   *
+   * The first paint runs while the element is detached, so `fitWindow` has
+   * nothing to fit to and falls back to the board's own proportions — which
+   * on a phone is the whole exchange letterboxed into a portrait frame at a
+   * third of a pixel per unit. Until the reader dragged. This is also what
+   * turning the phone is: portrait fits about 470 units across, landscape
+   * most of the board, and the window has to follow the frame.
+   *
+   * A ResizeObserver rather than a frame callback on purpose: a board in a
+   * hidden tab never gets a frame, and this has to be right the moment it is
+   * shown rather than the moment it is drawn.
+   */
+  let lastFrame = '';
+  if (typeof ResizeObserver === 'function') {
+    const watch = new ResizeObserver(() => {
+      const box = frame();
+      if (!box.measured) return;
+      const shape = `${Math.round(box.w)}x${Math.round(box.h)}`;
+      if (shape === lastFrame) return;
+      const grew = !lastFrame;
+      lastFrame = shape;
+      // The very first measurement is not a resize, it is the layout this was
+      // waiting for: take the fit outright rather than reshaping a window
+      // that was only ever a placeholder.
+      if (grew && !(st.ownershipWin && finite(st.ownershipWin.w))) win = fitWindow();
+      applyWindow();
+    });
+    watch.observe(svg);
+  }
 
   const zoomBy = (factor, at) => {
     if (!win) win = wholeBoard();

@@ -64,7 +64,30 @@ class StubNode {
   }
 }
 
+/* Layout, as far as this stub has any.
+ *
+ * A component that fits itself to the box it is drawn in has to be told when
+ * that box appears — the first paint happens while the element is detached and
+ * measures zero. Real browsers say so with a ResizeObserver; this records the
+ * callbacks so a test can deliver the same moment deliberately, which is also
+ * how a test says "and now the phone was turned".
+ */
+class StubResizeObserver {
+  constructor(fn) { this.fn = fn; this.targets = []; StubResizeObserver.all.push(this); }
+  observe(node) { this.targets.push(node); }
+  disconnect() { this.targets = []; }
+}
+StubResizeObserver.all = [];
+/** Deliver a layout to everything watching, the way a browser would. */
+export function layoutHappened() {
+  for (const observer of StubResizeObserver.all) {
+    if (observer.targets.length) observer.fn(observer.targets.map((t) => ({ target: t })));
+  }
+}
+
 export function installDom() {
+  StubResizeObserver.all = [];
+  globalThis.ResizeObserver = StubResizeObserver;
   globalThis.Node = StubNode;
   globalThis.document = {
     createElement: (tag) => new StubNode(tag),
