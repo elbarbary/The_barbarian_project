@@ -115,6 +115,10 @@
     "meaning": "This daily operational throughput reflects current outbound general cargo handling capacity and logistics flow through the Port of Alexandria.",
     "meaning_ar": "يعكس حجم التداول اليومي هذا الطاقة التشغيلية الحالية لمناولة بضائع الصب العام وحركة التدفقات اللوجستية للصادرات عبر ميناء الإسكندرية."
   },
+  "35.5 الف طن صادرات البضايع العامه بميناء دمياط خلال 24 ساعه": {
+    "meaning": "This throughput measures the daily outbound operational volume of general cargo handled through Damietta Port infrastructure, directly reflecting current export freight flows and maritime logistics activity.",
+    "meaning_ar": "يقيس هذا المعدل حجم التداول اليومي الفعلي لصادرات البضائع العامة المنقولة عبر البنية التحتية لميناء دمياط، وهو ما يعكس حركة الشحن التصديري والنشاط اللوجستي البحري الراهن."
+  },
   "4 تحديات تواجه مراكز البيانات في الفضاء قبل طفره الذكاء الاصطناعي": {
     "meaning": "Operating orbital data centers for artificial intelligence workloads involves specific structural constraints, including high launch capital expenditures, in-orbit thermal management, radiation shielding requirements, and ground-to-space transmission bandwidth limitations.",
     "meaning_ar": "يتطلب تشغيل مراكز البيانات الفضائية لمعالجة أعباء عمل الذكاء الاصطناعي التعامل مع محددات هيكلية وتقنية، تشمل النفقات الرأسمالية للإطلاق، والإدارة الحرارية في المدار، وتدريع الإشعاع، وسعات نقل البيانات بين الفضاء والأرض."
