@@ -155,9 +155,21 @@
     "meaning": "An initial public offering process involves updating asset valuation metrics based on audited financial statements before scheduling the share sale execution window on the exchange.",
     "meaning_ar": "تتضمن إجراءات الطرح العام الأولي تحديث التقييم المالي للأصول بالاعتماد على أحدث القوائم المالية قبل تحديد الجدول الزمني لتنفيذ بيع الأسهم في البورصة."
   },
+  "BdC’s updated valuation study has been approved by a cabinet committee, marking a step closer to IPO": {
+    "meaning": "Cabinet approval of the updated valuation establishes the official baseline pricing reference required under state privatization procedures for listing Banque du Caire on the Egyptian Exchange.",
+    "meaning_ar": "يمثل اعتماد مجلس الوزراء لدراسة التقييم المحدثة إقراراً للمرجع السعري الأساسي المطلوب بموجب إجراءات الطروحات الحكومية لإدراج بنك القاهرة في البورصة المصرية."
+  },
   "Beijing and Cairo put working tracks around their relationship": {
     "meaning": "Establishing structured bilateral working tracks sets up standardized administrative channels for institutional coordination between Egyptian and Chinese entities on industrial projects, trade agreements, and joint infrastructure initiatives.",
     "meaning_ar": "يؤسس تحديد مسارات العمل الثنائية قنوات إدارية منظمة للتنسيق المؤسسي بين الكيانات المصرية والصينية في مجالات المشاريع الصناعية والاتفاقيات التجارية والمبادرات الاستثمارية المشتركة."
+  },
+  "Beltone Venture Capital is closing three deals and readying an EGP-denominated startup fund for early 2027": {
+    "meaning": "The firm expands its private equity operational portfolio through direct equity transactions while structuring an Egyptian pound vehicle to deploy domestic currency into early-stage enterprises.",
+    "meaning_ar": "توسع الشركة محفظتها التشغيلية للاستثمار المباشر عبر صفقات مساهمة مباشرة، بالتزامن مع هيكلة صندوق بالجنيه المصري لتوجيه السيولة بالعملة المحلية إلى الشركات الناشئة."
+  },
+  "Brics leaders facing their widest divisions yet in New Delhi this week, as UAE and Iran back peace call": {
+    "meaning": "Geopolitical divergence within multilateral trade blocs complicates unified policy coordination on alternative payment frameworks and cross-border settlement mechanisms.",
+    "meaning_ar": "يؤدي التباين الجيوسياسي داخل التكتلات التجارية متعددة الأطراف إلى تعقيد التنسيق المشترك للسياسات المتعلقة بأطر الدفع البديلة وآليات التسوية عبر الحدود."
   },
   "CI Capital Asset Management plans to launch Egypt’s first equity hedge fund": {
     "meaning": "The establishment of an equity hedge fund introduces alternative investment strategies, including long and short equity positions and derivative hedging techniques, to the domestic asset management industry alongside conventional long-only funds.",
@@ -174,6 +186,10 @@
   "DeepSeek تقترب من بورصه شنغهاي بتقييم 75 مليار دولار": {
     "meaning": "An initial public offering on a stock exchange transitions a private entity into a publicly traded company, establishing its market capitalization based on the formal equity valuation at listing.",
     "meaning_ar": "يمثل الطرح العام الأولي في البورصة تحولاً للشركة من كيان خاص إلى التداول العام، حيث يحدد القيمة السوقية للشركة وفقاً للتقييم المبدئي لأسهمها."
+  },
+  "EAEF continues Fawry exit as its congressional mandate nears its end": {
+    "meaning": "The Egyptian-American Enterprise Fund liquidates its equity holdings in Fawry on the exchange to return capital to investors pursuant to its fixed-term statutory mandate. This transaction transfers ownership blocks to public market or institutional participants, altering the company's shareholder register and free float.",
+    "meaning_ar": "يقوم صندوق المشاريع المصري الأمريكي بتسييل حصصه في شركة فوري عبر البورصة لإعادة رأس المال وفقاً لتفويضه القانوني محدد المدة. تؤدي هذه الصفقة إلى نقل ملكية كتل من الأسهم إلى متداولي السوق أو المستثمرين المؤسسيين، مما يغير هيكل مساهمي الشركة ونسبة الأسهم حرة التداول."
   },
   "EM debt fares well amid US Treasury selloff": {
     "meaning": "Emerging market debt instruments maintain relative price stability and resilient yield spreads during periods of declining US Treasury prices and rising benchmark yields.",
@@ -194,6 +210,10 @@
   "Egyptian-UK fintech Zeal raises USD 10 mn to back expansion plans": {
     "meaning": "This equity capital injection increases the company's balance sheet liquidity and paid-in capital, providing funding for operational expansion, hiring, and technology infrastructure without creating debt obligations.",
     "meaning_ar": "تؤدي هذه الزيادة في رأس المال إلى تعزيز السيولة النقدية ورأس المال المدفوع في الميزانية العمومية، مما يوفر تمويلاً للتوسع التشغيلي والتوظيف والبنية التحتية التقنية دون تحميل الشركة التزامات ديون."
+  },
+  "FRA mandates event-by-event credit reporting for non-bank lenders": {
+    "meaning": "Non-bank financial institutions transmit real-time customer borrowing and default data directly to credit bureaus upon occurrence rather than through periodic batch updates, altering compliance workflows and integrating operational reporting systems with the regulator's network.",
+    "meaning_ar": "تقوم المؤسسات المالية غير المصرفية بإرسال بيانات الاقتراض والتعثر الخاصة بالعملاء لحظياً إلى شركات الاستعلام الائتماني فور حدوثها بدلاً من التحديثات الدورية المجمعة، مما يغير إجراءات الامتثال ويربط الأنظمة التشغيلية للشركات بشبكة الهيئة الرقابية."
   },
   "Five years into RISE, safety metric frozen as World Bank ratchets up fiduciary risk on Egypt’s railway loan": {
     "meaning": "An elevated fiduciary risk rating tied to multilateral railway financing triggers tighter loan conditionality, enhanced oversight procedures, and potential delays in capital disbursements for infrastructure modernisation projects.",
@@ -286,6 +306,10 @@
   "Six Sigma meets supply chain strategy": {
     "meaning": "Integrating Six Sigma methodologies into supply chain strategy standardizes operational workflows and applies statistical quality control across procurement, manufacturing, and distribution processes.",
     "meaning_ar": "يؤدي دمج منهجيات \"سيكس سيجما\" في استراتيجية سلاسل الإمداد إلى توحيد تدفقات العمليات التشغيلية وتطبيق معايير الرقابة الإحصائية على الجودة عبر مراحل التوريد والتصنيع والتوزيع."
+  },
+  "Ten sessions for the people side of management": {
+    "meaning": "The program consists of structured managerial training focused on human resources and internal team administration, allocating corporate capital toward human capital development through operational workshops.",
+    "meaning_ar": "يتضمن البرنامج دورات تدريبية إدارية منظمة متخصصة في إدارة الموارد البشرية وفرق العمل، مما يمثل توجيهاً للنفقات التشغيلية نحو تطوير رأس المال البشري."
   },
   "The business you don’t hear when you press play": {
     "meaning": "Digital streaming platforms operate through backend intellectual property licensing, infrastructure hosting, and automated royalty settlement systems distributed among content creators, aggregators, and service operators.",
