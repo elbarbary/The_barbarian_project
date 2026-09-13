@@ -467,6 +467,10 @@
     "meaning": "The Financial Regulatory Authority establishes a unified regulatory and operational framework that defines licensing requirements, risk management standards, and compliance rules for consumer finance entities in Egypt.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً تنظيمياً وتشيغلياً موحداً يحدد متطلبات الترخيص ومعايير إدارة المخاطر وقواعد الامتثال للشركات العاملة في قطاع التمويل الاستهلاكي في مصر."
   },
+  "fra mandates real time iscore links for consumer and msme finance companies": {
+    "meaning": "The Financial Regulatory Authority requires direct electronic integration between non-bank lenders and the credit bureau, automating instantaneous credit history checks and loan exposure reporting at the point of underwriting.",
+    "meaning_ar": "تُلزم الهيئة العامة للرقابة المالية شركات التمويل الاستهلاكي وتمويل المشروعات بالربط الإلكتروني المباشر واللحظي مع شركة الاستعلام الائتماني (آي سكور)، مما يفعل الاستعلام الفوري عن الجدارة الائتمانية للعملاء وتحديث سجلات الائتمان تلقائياً أثناء منح التمويل."
+  },
   "fra suspends trading on el ahram for Printing until september 24": {
     "meaning": "A regulatory trading suspension temporarily halts the execution of all buy and sell orders on the company's shares on the exchange floor. This administrative action freezes secondary market liquidity for the security until specified regulatory inquiries or corporate disclosure requirements are fulfilled.",
     "meaning_ar": "يؤدي قرار الإيقاف الرقابي للتداول إلى تجميد تنفيذ كافة أوامر البيع والشراء على أسهم الشركة مؤقتاً داخل البورصة، مما يوقف سيولة السهم في السوق الثانوي حتى استيفاء متطلبات الإفصاح أو الإجراءات التنظيمية المقررة من الهيئة."
@@ -2006,6 +2010,10 @@
   "العدد 400": {
     "meaning": "The publication of issue number 400 represents a recurring media or reporting milestone within standard operational scheduling, carrying no direct impact on underlying corporate capital structures or market trading mechanics.",
     "meaning_ar": "يمثل إصدار العدد رقم 400 علامة توثيقية دورية ضمن جداول النشر والمتابعة المعتادة، دون أن يترتب عليه أي تغيير في الهياكل التمويلية للشركات أو آليات التداول في السوق."
+  },
+  "العدد 401": {
+    "meaning": "This headline identifies a specific periodic publication or release number, which serves as a sequential index for regulatory, statistical, or market reporting disclosures.",
+    "meaning_ar": "يشير هذا العنوان إلى رقم إصدار دوري محدد، يُستخدم كمرجع تسلسلي لنشر التقارير والإفصاحات والبيانات الإحصائية الخاصة بالسوق."
   },
   "العراق يسعي لزياده كبيره في حصه انتاجه خلال مراجعه “اوبك+”": {
     "meaning": "An OPEC+ production quota review directly sets a member nation's baseline extraction limits, defining the operational volume of crude oil supply it contributes to the international market.",
