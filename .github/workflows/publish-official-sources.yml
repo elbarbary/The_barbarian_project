@@ -92,6 +92,24 @@ jobs:
       #
       # The order is the dependency order: the two ledgers that read the others
       # come last.
+      - name: Test the parsers
+        # These collectors read four public pages and write a committed ledger,
+        # and every one of them is a parse of somebody else's HTML. A
+        # regression here does not crash: it stores a wrong number about the
+        # regulator, the central bank or the depository, and the build that
+        # reads it has no way to know.
+        #
+        # This job had no test step at all. The gate below is computed from
+        # the scripts this workflow actually runs, so a collector added to the
+        # steps above with no test module of its own fails the gate rather
+        # than passing it quietly.
+        run: |
+          set -o pipefail
+          modules=$(python3 scripts/tests_for_workflow.py \
+            .github/workflows/publish-official-sources.yml)
+          echo "gate: $modules"
+          cd scripts && python3 -m unittest $modules
+
       - name: Collect from the official sources
         run: |
           # The regulator. Year-to-date every run, deliberately: the ledger

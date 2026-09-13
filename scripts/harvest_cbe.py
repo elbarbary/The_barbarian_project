@@ -37,6 +37,10 @@ INTERBANK_URL = (
     "https://www.cbe.org.eg/en/economic-research/statistics/"
     "daily-interbank-rates-and-volumes"
 )
+# The rates the MPC sets, which is what somebody means by "the interest
+# rate in Egypt". The interbank page above is the price banks actually
+# dealt at; this is the corridor that price has to live inside.
+POLICY_URL = "https://www.cbe.org.eg/en/monetary-policy/mpc-meetings-schedule"
 
 
 class TableParser(HTMLParser):
@@ -155,6 +159,65 @@ def parse_interbank(page: str) -> dict:
             "rates": rates, "volumesEgpMillions": volumes}
 
 
+# The month names the CBE writes out in full, in the order they number.
+MONTHS = ["january", "february", "march", "april", "may", "june", "july",
+          "august", "september", "october", "november", "december"]
+
+# What the four cards are called on the page, and what this project calls them.
+#
+# Keyed by the page's own heading lowercased, because the page writes
+# "MAIN OPERATION" in capitals and "Overnight Deposit Rate" in title case.
+POLICY_NAMES = {
+    "overnight deposit rate": "overnightDeposit",
+    "overnight lending rate": "overnightLending",
+    "main operation": "mainOperation",
+    "discount rates": "discount",
+    "discount rate": "discount",
+}
+
+
+def _effective_from(page: str) -> str | None:
+    """The date the published corridor took effect.
+
+    NOT the "Last Updated" stamp in the banner above it, which said 23 Mar
+    2023 on a page carrying rates effective 15 February 2026 — the banner
+    is the CMS author's field and nobody has touched it in three years.
+    Reading it would date every rate this project publishes to 2023.
+    """
+    match = re.search(
+        r"Effective\s+from\s+(\d{1,2})(?:st|nd|rd|th)?\s+of\s+([A-Za-z]+)\s+(\d{4})",
+        page, re.I)
+    if not match:
+        return None
+    day, month, year = match.group(1), match.group(2).lower(), match.group(3)
+    if month not in MONTHS:
+        return None
+    return f"{int(year):04d}-{MONTHS.index(month) + 1:02d}-{int(day):02d}"
+
+
+def parse_policy(page: str) -> dict:
+    """The four rates the MPC sets, off the cards that carry them.
+
+    Each card is a heading and a percentage; a card whose percentage does not
+    parse is dropped rather than stored as a zero, for the same reason the
+    interbank matrix drops one: a policy rate of 0% in a country whose
+    overnight rate is 19.5% is a number a reader would act on.
+    """
+    rates = {}
+    for card in re.findall(r'<div class="mpc-card">(.*?)</div>\s*</div>', page, re.S):
+        heading = re.search(r'class="card-heading"[^>]*>(.*?)</span>', card, re.S)
+        percent = re.search(r'class="percentage"[^>]*>(.*?)</span>', card, re.S)
+        if not heading or not percent:
+            continue
+        name = " ".join(re.sub(r"<[^>]+>", " ", heading.group(1)).split()).lower()
+        value = numeric(" ".join(re.sub(r"<[^>]+>", " ", percent.group(1)).split()),
+                        percent=True)
+        key = POLICY_NAMES.get(name)
+        if key and value is not None:
+            rates[key] = value
+    return {"effectiveFrom": _effective_from(page), "rates": rates}
+
+
 def fetch_pages() -> dict[str, str]:
     helper = """
 import json, sys
@@ -171,7 +234,8 @@ print(json.dumps(out))
         if not SCRAPLING_PYTHON:
             raise RuntimeError(scrapling_python.missing_note())
         result = subprocess.run(
-            [str(SCRAPLING_PYTHON), handle.name, FX_URL, INTERBANK_URL],
+            [str(SCRAPLING_PYTHON), handle.name, FX_URL, INTERBANK_URL,
+             POLICY_URL],
             capture_output=True, text=True, timeout=240,
         )
     if result.returncode:
@@ -185,9 +249,11 @@ def build(pages: dict[str, str], *, fetched_at: str | None = None) -> dict:
     return {
         "schemaVersion": 1,
         "fetchedAt": fetched_at or dt.datetime.now(dt.timezone.utc).isoformat(),
-        "sources": {"exchangeRates": FX_URL, "interbank": INTERBANK_URL},
+        "sources": {"exchangeRates": FX_URL, "interbank": INTERBANK_URL,
+                    "policyRates": POLICY_URL},
         "exchangeRates": parse_fx(pages.get(FX_URL, "")),
         "interbank": parse_interbank(pages.get(INTERBANK_URL, "")),
+        "policyRates": parse_policy(pages.get(POLICY_URL, "")),
         "units": {
             "exchangeRates": "EGP per unit of foreign currency",
             "interbankRates": "decimal fraction; 0.19623 means 19.623%. "
@@ -195,6 +261,7 @@ def build(pages: dict[str, str], *, fetched_at: str | None = None) -> dict:
                               "the CBE prints 0.000% there and this market's "
                               "overnight rate is 19.5%.",
             "interbankVolumes": "EGP millions",
+            "policyRates": "decimal fraction, as the interbank rates are; 0.19 means 19.00%. These change only when the MPC decides, so `effectiveFrom` is the date that matters and the collector timestamp is not.",
         },
         "limitations": [
             "This is market context, not a stock catalyst and awards zero opportunity-score points.",
@@ -214,7 +281,7 @@ KEEP_CAPTURES = 14
 def prune_captures() -> int:
     """Drop all but the newest KEEP_CAPTURES of each page. Returns how many went."""
     dropped = 0
-    for label in ("exchange-rates", "interbank"):
+    for label in ("exchange-rates", "interbank", "policy-rates"):
         held = sorted(OUT.glob(f"{label}-*.html.gz"))
         for path in held[:-KEEP_CAPTURES] if len(held) > KEEP_CAPTURES else []:
             path.unlink()
@@ -247,6 +314,8 @@ def main() -> int:
         "currencies": len(document["exchangeRates"]["currencies"]),
         "interbankRateTenors": len(document["interbank"]["rates"]),
         "interbankVolumeTenors": len(document["interbank"]["volumesEgpMillions"]),
+        "policyRates": len(document["policyRates"]["rates"]),
+        "policyEffectiveFrom": document["policyRates"]["effectiveFrom"],
     }
     print(json.dumps(summary, indent=2))
     if args.check:
@@ -256,7 +325,8 @@ def main() -> int:
         json.dumps(document, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     stamp = dt.datetime.fromisoformat(document["fetchedAt"]).strftime("%Y%m%dT%H%M%SZ")
-    for label, url in (("exchange-rates", FX_URL), ("interbank", INTERBANK_URL)):
+    for label, url in (("exchange-rates", FX_URL), ("interbank", INTERBANK_URL),
+                       ("policy-rates", POLICY_URL)):
         raw = pages.get(url, "").encode()
         (OUT / f"{label}-{stamp}.html.gz").write_bytes(gzip.compress(raw, mtime=0))
     prune_captures()

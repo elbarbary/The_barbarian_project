@@ -533,20 +533,99 @@ def carry_forward(fresh: list[dict], before: list[dict], what: str) -> list[dict
 CBE_CONTEXT = (REPO / "data-source" / "official" / "cbe" / "cbe-context.json")
 
 
-def egypt() -> list[dict]:
+# The four rates the MPC sets, in the order the central bank's own page puts
+# them, with what each one is FOR. A reader who hears "Egypt raised rates"
+# heard about one of these, and almost never knows which.
+POLICY_RATES = [
+    ("EGY_DEPOSIT", "overnightDeposit", "Overnight deposit rate",
+     "سعر الإيداع لليلة واحدة",
+     "The floor. What a bank earns for parking money at the central bank "
+     "overnight — so no bank lends to anyone else for less, which is why "
+     "this number sets the bottom of every other rate in the country."),
+    ("EGY_LENDING", "overnightLending", "Overnight lending rate",
+     "سعر الإقراض لليلة واحدة",
+     "The ceiling. What a bank pays to borrow from the central bank "
+     "overnight — so no bank pays another more than this, which is why it "
+     "sets the top."),
+    ("EGY_MAIN", "mainOperation", "Main operation rate",
+     "سعر العملية الرئيسية",
+     "The middle of the corridor, and the rate the central bank actually "
+     "deals at in its weekly operation. When the headline says the MPC "
+     "moved rates by a hundred points, this is usually the number that "
+     "moved."),
+    ("EGY_DISCOUNT", "discount", "Discount rate",
+     "سعر الخصم",
+     "The rate Egyptian law and a great many contracts point at by name, "
+     "for late payment and statutory interest. It tracks the main "
+     "operation rate and is quoted separately because of what cites it."),
+]
+
+# How far outside the corridor the market's own rate is allowed to sit before
+# this refuses to publish it.
+#
+# The corridor is binding by construction: a bank will not lend to another
+# below what the central bank pays it, nor pay another more than the central
+# bank charges. So the interbank rate lives inside, and a reading that does
+# not is a parse, not a market. The failures worth catching are large — a
+# decimal place (1.9433), the volume table read as the rate table (12,345 EGP
+# millions becoming 1,234,500%), the wrong tenor row. A full percentage point
+# of slack catches every one of those and refuses nothing real.
+CORRIDOR_SLACK = 1.0
+
+
+def policy(document: dict) -> tuple[list[dict], str | None]:
+    """The corridor, and the date it took effect.
+
+    Returns no rows rather than stale ones when the collector could not read
+    the page: these change only when the MPC decides, so an unreadable page
+    is an unreadable page, never an argument for last month's number.
+    """
+    block = document.get("policyRates") or {}
+    effective = block.get("effectiveFrom")
+    filed = block.get("rates") or {}
+    if not effective or not filed:
+        return [], None
+    rows = []
+    for code, key, label, label_ar, yardstick in POLICY_RATES:
+        value = filed.get(key)
+        if not isinstance(value, (int, float)):
+            continue
+        percent = round(float(value) * 100, 3)
+        rows.append({
+            "id": code,
+            "code": code,
+            "label": label,
+            "label_ar": label_ar,
+            "percent": percent,
+            "plain": f"The central bank's {label.lower()} is {percent:.2f}%.",
+            "plain_ar": f"{label_ar} لدى البنك المركزي {percent:.2f}٪.",
+            "token": f"{percent:.2f}%",
+            "workings": f"Set by the Monetary Policy Committee\n"
+                        f"effective {effective}\n= {percent:.2f}%",
+            "workings_ar": f"حدّدتها لجنة السياسة النقدية اعتباراً من {effective}",
+            "yardstick": yardstick,
+            "source": f"cbe.org.eg monetary policy, effective {effective}",
+            "as_of": effective,
+            "kind": "policy",
+        })
+    return rows, effective
+
+
+def interbank(document: dict, corridor: dict[str, float]) -> list[dict]:
     """Egypt's overnight interbank rate, as the central bank published it.
 
     The CBE prints a month at a time, day by day, with the days it has not
     reached yet left empty. The newest dated value is the reading; an empty
     cell is not a zero and is never treated as one.
+
+    Checked against the corridor before it is published. The corridor is the
+    harder fact — four numbers set by a decision, changed a few times a year
+    — and this is a daily parse off a matrix of six tenors and ten columns.
+    When they disagree it is this that is wrong.
     """
-    try:
-        document = json.loads(CBE_CONTEXT.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        return []
-    interbank = document.get("interbank") or {}
-    year = interbank.get("year")
-    tenor = next((r for r in interbank.get("rates") or []
+    block = document.get("interbank") or {}
+    year = block.get("year")
+    tenor = next((r for r in block.get("rates") or []
                   if str(r.get("tenor", "")).strip().lower() == "overnight"), None)
     if not tenor or not year:
         return []
@@ -564,6 +643,20 @@ def egypt() -> list[dict]:
     # Stored as a fraction — 0.19433 is 19.433% — which the collector's own
     # units block says in as many words.
     percent = round(float(newest["value"]) * 100, 3)
+
+    floor, ceiling = corridor.get("EGY_DEPOSIT"), corridor.get("EGY_LENDING")
+    if floor is not None and ceiling is not None:
+        if not (floor - CORRIDOR_SLACK <= percent <= ceiling + CORRIDOR_SLACK):
+            print(f"   refused: {percent:.3f}% is outside the "
+                  f"{floor:.2f}–{ceiling:.2f}% corridor the MPC set")
+            return []
+        inside = (f"The Monetary Policy Committee's corridor runs "
+                  f"{floor:.2f}% to {ceiling:.2f}%, and this sits inside it.")
+        inside_ar = (f"حدّدت لجنة السياسة النقدية نطاقاً من {floor:.2f}٪ إلى "
+                     f"{ceiling:.2f}٪، وهذا السعر داخله.")
+    else:
+        inside = inside_ar = ""
+
     return [{
         "id": "EGY_ON",
         "code": "EGY_ON",
@@ -576,17 +669,34 @@ def egypt() -> list[dict]:
         "workings": f"{newest['value']} as the central bank publishes it\n"
                     f"× 100\n= {percent:.3f}%",
         "workings_ar": f"{percent:.3f}٪ كما تنشره البنك المركزي",
-        "yardstick": "What banks charge each other for money overnight. It is not "
-                     "the rate a company pays its bank, and not the central "
-                     "bank's policy rate — it is the market's own price, which "
-                     "is why it moves daily while the policy rate does not.",
-        "yardstick_ar": "ما تتقاضاه البنوك من بعضها مقابل المال لليلة واحدة. ليس "
-                        "السعر الذي تدفعه شركة لبنكها، ولا سعر السياسة النقدية — "
-                        "بل سعر السوق نفسه، ولذلك يتحرك يومياً بينما لا يتحرك سعر "
-                        "السياسة.",
+        "yardstick": ("What banks charge each other for money overnight — the "
+                      "market's own price rather than a rate anybody set, "
+                      "which is why it moves daily while the four above it do "
+                      "not. " + inside).strip(),
+        "yardstick_ar": ("ما تتقاضاه البنوك من بعضها مقابل المال لليلة واحدة — "
+                         "سعر السوق نفسه لا سعراً يحدده أحد، ولذلك يتحرك يومياً "
+                         "بينما لا تتحرك الأسعار الأربعة فوقه. " + inside_ar).strip(),
         "source": f"cbe.org.eg daily interbank rates, {stamp}",
         "as_of": stamp,
+        "kind": "market",
     }]
+
+
+def egypt() -> list[dict]:
+    """What money costs in Egypt: the four rates set, then the one paid.
+
+    The order is the argument. The corridor comes first because it is what
+    somebody means by "the interest rate", and the interbank rate last
+    because it is the one that moves — and because it is only worth reading
+    once you know the walls it moves between.
+    """
+    try:
+        document = json.loads(CBE_CONTEXT.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    rows, _effective = policy(document)
+    corridor = {row["id"]: row["percent"] for row in rows}
+    return rows + interbank(document, corridor)
 
 
 def main() -> int:

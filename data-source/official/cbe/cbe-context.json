@@ -1,102 +1,103 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-09-13T10:26:35.045315+00:00",
+  "fetchedAt": "2026-09-13T11:55:50.378779+00:00",
   "sources": {
     "exchangeRates": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
-    "interbank": "https://www.cbe.org.eg/en/economic-research/statistics/daily-interbank-rates-and-volumes"
+    "interbank": "https://www.cbe.org.eg/en/economic-research/statistics/daily-interbank-rates-and-volumes",
+    "policyRates": "https://www.cbe.org.eg/en/monetary-policy/mpc-meetings-schedule"
   },
   "exchangeRates": {
-    "ratesForDate": "10/09/2026",
+    "ratesForDate": "13/09/2026",
     "currencies": [
       {
         "currency": "US Dollar",
-        "buy": 51.2721,
-        "sell": 51.4103
+        "buy": 51.3068,
+        "sell": 51.4443
       },
       {
         "currency": "Euro",
-        "buy": 59.614,
-        "sell": 59.7799
+        "buy": 59.5056,
+        "sell": 59.6857
       },
       {
         "currency": "Pound Sterling",
-        "buy": 69.4019,
-        "sell": 69.6147
+        "buy": 69.3565,
+        "sell": 69.5578
       },
       {
         "currency": "Canadian Dollar",
-        "buy": 37.1053,
-        "sell": 37.2107
+        "buy": 36.9805,
+        "sell": 37.093
       },
       {
         "currency": "Danish Krone",
-        "buy": 7.9743,
-        "sell": 7.9979
+        "buy": 7.9605,
+        "sell": 7.983
       },
       {
         "currency": "Norwegian Krone",
-        "buy": 5.5454,
-        "sell": 5.5681
+        "buy": 5.5283,
+        "sell": 5.5455
       },
       {
         "currency": "Swedish Krona",
-        "buy": 5.3331,
-        "sell": 5.348
+        "buy": 5.2909,
+        "sell": 5.3068
       },
       {
         "currency": "Swiss Franc",
-        "buy": 63.1974,
-        "sell": 63.3912
+        "buy": 62.8221,
+        "sell": 63.0367
       },
       {
         "currency": "Japanese Yen 100",
-        "buy": 33.2719,
-        "sell": 33.3703
+        "buy": 33.4137,
+        "sell": 33.5055
       },
       {
         "currency": "Saudi Riyal",
-        "buy": 13.6543,
-        "sell": 13.6919
+        "buy": 13.6629,
+        "sell": 13.7009
       },
       {
         "currency": "Kuwaiti Dinar",
-        "buy": 167.1734,
-        "sell": 167.6787
+        "buy": 167.232,
+        "sell": 167.7349
       },
       {
         "currency": "UAE Dirham",
-        "buy": 13.9584,
-        "sell": 13.9976
+        "buy": 13.9667,
+        "sell": 14.008
       },
       {
         "currency": "Australian Dollar",
-        "buy": 36.9056,
-        "sell": 37.0257
+        "buy": 36.7767,
+        "sell": 36.8958
       },
       {
         "currency": "Bahraini Dinar",
-        "buy": 135.9822,
-        "sell": 136.3668
+        "buy": 136.0814,
+        "sell": 136.4679
       },
       {
         "currency": "Omani Riyal",
-        "buy": 133.1638,
-        "sell": 133.5401
+        "buy": 133.2194,
+        "sell": 133.6597
       },
       {
         "currency": "Qatari Riyal",
-        "buy": 14.0645,
-        "sell": 14.1043
+        "buy": 14.0644,
+        "sell": 14.1253
       },
       {
         "currency": "Jordanian Dinar",
-        "buy": 72.2142,
-        "sell": 72.6134
+        "buy": 72.2631,
+        "sell": 72.6614
       },
       {
         "currency": "Chinese Yuan",
-        "buy": 7.6452,
-        "sell": 7.6661
+        "buy": 7.648,
+        "sell": 7.6691
       }
     ]
   },
@@ -692,10 +693,20 @@
       }
     ]
   },
+  "policyRates": {
+    "effectiveFrom": "2026-02-15",
+    "rates": {
+      "overnightDeposit": 0.19,
+      "overnightLending": 0.2,
+      "mainOperation": 0.195,
+      "discount": 0.195
+    }
+  },
   "units": {
     "exchangeRates": "EGP per unit of foreign currency",
     "interbankRates": "decimal fraction; 0.19623 means 19.623%. A tenor nothing traded at is null, never zero: the CBE prints 0.000% there and this market's overnight rate is 19.5%.",
-    "interbankVolumes": "EGP millions"
+    "interbankVolumes": "EGP millions",
+    "policyRates": "decimal fraction, as the interbank rates are; 0.19 means 19.00%. These change only when the MPC decides, so `effectiveFrom` is the date that matters and the collector timestamp is not."
   },
   "limitations": [
     "This is market context, not a stock catalyst and awards zero opportunity-score points.",

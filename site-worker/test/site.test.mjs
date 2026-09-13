@@ -1343,6 +1343,32 @@ test('the pound and the metals reach the Exchange screen', async () => {
   assert.match(by['EGX 30'].plain, /EGX 30 (rose|fell)/);
 });
 
+test('what money costs in Egypt reaches the Exchange screen', async () => {
+  // Same bug as the one above, one source later. rates/latest.json gained an
+  // `egypt` block — the four rates the MPC sets and the one banks actually
+  // paid each other — and exchange() mapped `indices`, `world`, `currencies`
+  // and `metals`. Five rows would have shipped to every reader's phone and
+  // rendered nowhere.
+  const ex = await fromDisk(() => data.exchange());
+  const by = Object.fromEntries(ex.rates.map((r) => [r.label, r]));
+  for (const label of ['Overnight deposit rate', 'Overnight lending rate',
+                       'Main operation rate', 'Discount rate',
+                       'Overnight interbank']) {
+    assert.ok(by[label], `${label} is not on the screen`);
+    assert.match(by[label].value, /^\d+(\.\d+)?%$/,
+      `${label} shows "${by[label].value}" rather than a percent`);
+    assert.ok(by[label].plain, `${label} carries no sentence`);
+  }
+  // Ahead of the world rows, because it is the one rate that prices an
+  // Egyptian company's debt.
+  const at = (label) => ex.rates.findIndex((r) => r.label === label);
+  assert.ok(at('Overnight interbank') < at('US dollar'),
+    'the price of money in Egypt sits below the dollar');
+  // No arrow: four of the five do not move between MPC decisions, and a move
+  // in the fifth is what the world monitor draws.
+  assert.equal(by['Discount rate'].pct, '');
+});
+
 test('a price with no session move gets no arrow rather than a red one', () => {
   const rates = [{ label: 'EGX 30', value: '1', pct: '-0.31%', color: 'var(--down)' },
                  { label: 'US dollar', value: '50.25', pct: '', color: 'var(--ink)' }];

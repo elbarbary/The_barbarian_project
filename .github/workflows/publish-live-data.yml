@@ -185,6 +185,7 @@ jobs:
           python3 -m unittest -v \
             test_news_context test_news_evidence test_news_insights \
             test_connections test_rates_carry test_rates_dates \
+            test_rate_history \
             test_macro test_flow_trackers
         working-directory: scripts
 

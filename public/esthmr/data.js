@@ -1089,8 +1089,27 @@ export async function exchange() {
     // 21-karat is what a Cairo shop window quotes; 24 and 18 come with it.
     karats: (x.karats || []).map((k) => ({ karat: k.karat + 'k', value: money(k.egp_gram, 2) })),
   });
+  // What money costs in Egypt: the four rates the MPC sets and the one banks
+  // actually paid each other. A percent, so neither the `level`+`change_percent`
+  // shape of an index nor the pounds-per-unit shape of a currency fits — and
+  // there is no day-on-day change to show, because the four that are set do
+  // not move between decisions and a move in the fifth is what the world
+  // monitor is for.
+  const cost = (x) => ({
+    label: x.label, labelAr: x.label_ar || x.label,
+    id: x.id || '',
+    value: x.token || '', pct: '', color: 'var(--ink)', unit: '',
+    plain: x.plain || '', plainAr: x.plain_ar || '',
+    workings: x.workings || '', workingsAr: x.workings_ar || x.workings || '',
+    points: series.get(x.id) || [],
+  });
   const rates = [
     ...(r.indices || []).map(level),
+    // First. Every other row on this screen is somewhere else — an index, a
+    // metal, a foreign currency — and this is the one number that prices
+    // every Egyptian company's debt and every Egyptian saver's alternative
+    // to owning one.
+    ...(r.egypt || []).map(cost),
     ...(r.world || []).map(level),
     ...(r.currencies || []).map(currency),
     ...(r.metals || []).map(metal),
