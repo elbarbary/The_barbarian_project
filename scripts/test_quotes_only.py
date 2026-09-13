@@ -197,3 +197,40 @@ class TheCaptureNeverGoesBackwards(Harness):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class TheSameMoveInTwoDirections(Harness):
+    """A quote whose change and change_percent disagree in sign is refused.
+
+    `build_market_api` checks this before it writes, and its own comment says
+    why: the check used to sit after the write, so the run that refused the
+    contradiction had already published it. SWDY once went out as change +0.07
+    against change_percent -2.93%.
+
+    Nothing tested it. The whole suite passed with the refusal deleted, which
+    means it was guarding the prices and nothing was guarding it — found while
+    narrowing the price job's test gate to what that job actually writes, where
+    an untested guard is the one thing narrowing cannot afford.
+    """
+
+    def force_disagreement(self):
+        """A previous close that contradicts the percent the scan reported."""
+        return mock.patch.object(bma, "previous_close",
+                                 lambda history, session, close, pct: close - 1)
+
+    def test_it_refuses_and_publishes_nothing(self):
+        body = scan(records=3)
+        for record in body["records"]:
+            record["change"] = -5.0          # the scan says down five per cent
+        with self.force_disagreement():      # the close says up one pound
+            self.assertEqual(self.run_build(body, quotes_only=True), 1)
+        self.assertEqual(self.published(), [],
+                         "a contradiction reached the published documents")
+
+    def test_a_quote_that_agrees_is_let_through(self):
+        body = scan(records=3)
+        for record in body["records"]:
+            record["change"] = 5.0
+        with self.force_disagreement():      # up one pound, up five per cent
+            self.assertEqual(self.run_build(body, quotes_only=True), 0)
+        self.assertTrue(self.published(), "nothing was published at all")

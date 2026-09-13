@@ -111,8 +111,30 @@ jobs:
         # The same reasoning as the daily build: a regression here publishes a
         # wrong number about a real company rather than crashing. These are
         # seconds.
+        #
+        # THE PARSERS, though — not every test in the repository, which is what
+        # this ran for as long as it existed. This job writes `market.json` and
+        # the manifest and touches nothing else, and it was being stopped by
+        # tests about documents it cannot write: `test_connections` compares
+        # the crossings against the disclosures feed, and when another job
+        # commits one without the other that comparison fails for everybody.
+        # It cost three price publishes on 10 Sep 2026 and a fourth at 07:01 on
+        # 13 Sep — a trading session where the quotes did not move because two
+        # unrelated documents disagreed.
+        #
+        # The selection is derived from this file rather than listed in it, so
+        # adding a script to this job brings its tests with it. It fails closed:
+        # too few modules and the helper exits non-zero rather than quietly
+        # publishing behind a gate that is no longer there.
+        #
+        # Nothing that guards the price path is left out — every test module
+        # that imports `build_market_api` or `build_fixtures` is selected, and
+        # none outside the selection imports either.
         run: |
-          python3 -m unittest discover -s scripts -p 'test_*.py'
+          set -o pipefail
+          modules=$(python3 scripts/tests_for_workflow.py .github/workflows/publish-prices.yml)
+          echo "gate: $modules"
+          cd scripts && python3 -m unittest $modules
 
       - name: Build the quotes
         # Plain `run:`, no `|| true`. Every refusal this script makes now
