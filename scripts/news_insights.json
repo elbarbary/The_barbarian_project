@@ -979,6 +979,10 @@
     "meaning": "An increase in Italy's industrial production index reflects month-on-month volume expansion across manufacturing, mining, and utility outputs, directly impacting bilateral trade flows with Egyptian importers and exporters of intermediate goods and machinery.",
     "meaning_ar": "يعكس ارتفاع مؤشر الإنتاج الصناعي في إيطاليا نمواً في أحجام إنتاج قطاعات التصنيع والتعدين والمرافق على أساس شهري، وهو ما يرتبط بحجم التبادل التجاري للسلع الوسيطة والآلات بين السوقين الإيطالي والمصري."
   },
+  "ارتفاع موشر بورصه قطر في ختام التعاملات": {
+    "meaning": "The headline reports a net appreciation in Qatar's primary equity benchmark at market close, reflecting an aggregate daily balance of trade where executed buying volumes outpace executed selling volumes across constituent shares.",
+    "meaning_ar": "يشير الخبر إلى تسجيل المؤشر الرئيسي لبورصة قطر مكاسب صافية مع إغلاق جلسة التداول، وهو ما يعكس محصلة يومية تجاوزت فيها أحجام الشراء المنفذة أحجام البيع عبر الأسهم المكونة للمؤشر."
+  },
   "ارتفاع موشرات البورصه المصريه بشكل جماعي في ختام تعاملات الاحد": {
     "meaning": "A collective rise across EGX benchmark indices reflects aggregate net buying liquidity exceeding selling pressure across broad market segments, resulting in an increase in total listed market capitalization at market close.",
     "meaning_ar": "يعكس الارتفاع الجماعي لمؤشرات البورصة المصرية تفوق أحجام السيولة الشرائية على قوى البيع عبر مختلف قطاعات الشركات المقيدة، مما يؤدي إلى زيادة القيمة السوقية الإجمالية للأسهم عند الإغلاق."
@@ -1723,6 +1727,10 @@
     "meaning": "The government offers administrative, regulatory, or tax frameworks designed to register and integrate offshore-operating Egyptian startups into the domestic jurisdiction, establishing their operational bases and fiscal reporting within the local corporate registry.",
     "meaning_ar": "توفر الحكومة أطراً إدارية وتنظيمية وضريبية لإعادة تسجيل ودمج الشركات الناشئة المصرية المؤسسة بالخارج داخل النطاق المحلي، مما يتيح نقل مقراتها التشغيلية وإدراج قوائمها المالية بالسجل التجاري المصري."
   },
+  "الحكومه تعتمد نظام تداول القطن الزهر لموسم 2026-2027 وتشكيل لجنه لاداره المنظومه": {
+    "meaning": "The decision establishes the regulatory framework and centralized auction system for trading seed cotton for the 2026-2027 season under the supervision of a dedicated management committee.",
+    "meaning_ar": "يحدد القرار الإطار التنظيمي ومنظومة المزادات المركزية لتداول أقطان الزهر لموسم 2026-2027 تحت إشراف لجنة تنفيذية مخصصة لإدارة المنظومة."
+  },
   "الحكومه تعلن عن تعيين 43 الف معلم دفعه واحده الفتره المقبله": {
     "meaning": "The appointment of 43,000 public sector teachers increases government operational expenditures and the public payroll allocation within the state budget, while addressing staffing capacity in the public education system.",
     "meaning_ar": "يؤدي تعيين 43 ألف معلم في القطاع الحكومي إلى زيادة النفقات التشغيلية ومخصصات الأجور في الموازنة العامة للدولة، بالتوازي مع معالجة الطاقة الاستيعابية للكادر الوظيفي في منظومة التعليم العام."
@@ -2226,6 +2234,10 @@
   "القلعه تضاعف حصتها غير المباشره في المصريه للتكرير": {
     "meaning": "Qalaa Holdings increases its effective equity ownership in the Egyptian Refining Company through intermediary holding entities, altering the proportion of refinery earnings and operational cash flows consolidated or recognized on its financial statements.",
     "meaning_ar": "ترفع شركة القلعة القابضة نسبة ملكيتها الفعلية في الشركة المصرية للتكرير عبر كيانات تابعة وسيطة، مما يغير حصتها من النتائج المالية والتدفقات التشغيلية للمصفاة في قوائمها المالية."
+  },
+  "القناه للتوكيلات الملاحيه تستهدف زياده ايراداتها 10%": {
+    "meaning": "The company sets an internal operational target to expand its maritime agency, freight, and cargo handling turnover by 10% through higher service volume or adjusted tariff structures.",
+    "meaning_ar": "تحدد الشركة هدفاً تشغيلياً لزيادة حجم أعمالها في خدمات الوكالة الملاحية وتداول البضائع بنسبة 10% عبر التوسع في حجم الخدمات المؤداة أو تعديل هيكل التعريفات."
   },
   "الكاكاو يتجه لخساره اسبوعيه مع تقييم افاق السوق": {
     "meaning": "Cocoa futures experience price adjustments as global commodity markets reassess underlying supply and demand fundamentals, directly determining raw material procurement benchmarks for food and confectionery manufacturers.",
@@ -3287,6 +3299,10 @@
   "حمايه المستهلك: 788 حمله رقابيه تضبط 251 طن سلع مخالفه خلال اغسطس": {
     "meaning": "Regulatory enforcement campaigns conduct market inspections and confiscate non-compliant inventory, directly enforcing legal product standards and circulation controls across wholesale and retail supply chains.",
     "meaning_ar": "تتضمن الحملات التفتيشية مصادرة البضائع غير المطابقة للمواصفات، مما يطبق المعايير الرقابية والاشتراطات القانونية لتداول السلع داخل سلاسل الإمداد والتجارة المحلية."
+  },
+  "حمايه المنافسه يوافق علي استحواذ اندوسويز للتجاره العامه علي 51% من فنار فودز": {
+    "meaning": "The regulatory approval permits Indosuez General Trading to acquire a controlling 51% stake in Fanar Foods, consolidating operational and governance control within the food manufacturing business.",
+    "meaning_ar": "يمنح القرار التنفيذي شركة إندوسويز للتجارة العامة حق الاستحواذ على حصة حاكمة بنسبة 51% في شركة فنار فودز، مما يتيح لها توحيد السيطرة التشغيلية والإدارية على الشركة المستهدفة."
   },
   "حمايه المنافسه يوافق علي استحواذ جينيل انرجي البريطانيه علي اصول كابريكورن في مصر": {
     "meaning": "Antitrust approval clears the regulatory condition for Genel Energy to take operational control and ownership of Capricorn Energy's upstream oil and gas concession interests in Egypt.",
@@ -4680,6 +4696,10 @@
   "مرسوم للتطوير تعتزم ضخ استثمارات بقيمه 50 مليار جنيه في مشروع central gate غرب القاهره": {
     "meaning": "This capital allocation represents a commitment of EGP 50 billion in capital expenditure toward infrastructure, contracting agreements, and construction works for the Central Gate development in West Cairo.",
     "meaning_ar": "يمثل هذا التخصيص الرأسمالي توجيه إنفاق استثماري بقيمة 50 مليار جنيه نحو أعمال البنية التحتية، والتعاقدات الإنشائية، والتنفيذ الميداني لمشروع \"سنترال جيت\" في غرب القاهرة."
+  },
+  "مسار العمله الاوروبيه الان.. احدث تحركات اليورو في الشاشات المصرفيه اليوم": {
+    "meaning": "Commercial banks update their foreign exchange rate boards to reflect intraday trading movements of the euro against the Egyptian pound, which directly determines the immediate transaction costs for euro-denominated import settlements and commercial currency conversions.",
+    "meaning_ar": "تُحدّث البنوك التجارية شاشات أسعار الصرف لتعكس تحركات التداول اللحظية لليورو مقابل الجنيه المصري، وهو ما يحدد تكاليف المعاملات الفورية لتسوية الواردات والتحويلات التجارية المقومة بالعملة الأوروبية."
   },
   "مساعد وزير الصناعه للشيون الاستراتيجيه: صناعه السيارات منظومه متكامله وقاطره لنمو قطاعات عديده": {
     "meaning": "The automotive industry operates as a multi-tier manufacturing ecosystem that sources inputs from domestic feeding industries, including metallurgy, plastics, electronics, and glass manufacturing. Assembly operations generate backward supply chain linkages across these industrial segments.",
