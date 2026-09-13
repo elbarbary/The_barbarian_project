@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-13T10:28:39.165093+00:00",
+  "builtAt": "2026-09-13T12:08:47.426718+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 192272,
+    "items": 192284,
     "withoutTickerInHeading": 36163,
     "tickerNotInThisDirectory": 29400,
-    "attributedToAnIssuer": 126709,
+    "attributedToAnIssuer": 126721,
     "months": [
       {
         "month": "2005-01",
@@ -1831,8 +1831,8 @@
       {
         "month": "2026-09",
         "harvested": "2026-09-13",
-        "items": 383,
-        "expected": 383,
+        "items": 395,
+        "expected": 395,
         "status": "complete"
       }
     ],
@@ -1840,7 +1840,7 @@
   },
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
-    "items": 599,
+    "items": 600,
     "failures": {}
   },
   "issuers": [
@@ -1934,9 +1934,9 @@
     },
     {
       "ticker": "ACTF",
-      "egxFilingCount": 128,
-      "latestEgxFilingId": "294453",
-      "latestEgxFilingAt": "2026-09-08T14:02:44",
+      "egxFilingCount": 129,
+      "latestEgxFilingId": "294604",
+      "latestEgxFilingAt": "2026-09-13T13:46:00",
       "candidateIssuerWebsite": "https://www.act-fin.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ACTF/profile",
       "websiteStatus": {
@@ -1950,9 +1950,9 @@
     },
     {
       "ticker": "ADCI",
-      "egxFilingCount": 834,
-      "latestEgxFilingId": "294242",
-      "latestEgxFilingAt": "2026-09-02T08:55:16",
+      "egxFilingCount": 835,
+      "latestEgxFilingId": "294602",
+      "latestEgxFilingAt": "2026-09-13T13:28:59",
       "candidateIssuerWebsite": "https://www.adcopharma-eg.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ADCI/profile",
       "websiteStatus": {
@@ -1982,9 +1982,9 @@
     },
     {
       "ticker": "ADPC",
-      "egxFilingCount": 673,
-      "latestEgxFilingId": "293728",
-      "latestEgxFilingAt": "2026-08-23T10:59:18",
+      "egxFilingCount": 676,
+      "latestEgxFilingId": "294608",
+      "latestEgxFilingAt": "2026-09-13T14:02:10",
       "candidateIssuerWebsite": "https://www.arabdairy.net/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ADPC/profile",
       "websiteStatus": {
@@ -2192,9 +2192,9 @@
     },
     {
       "ticker": "AMIA",
-      "egxFilingCount": 502,
-      "latestEgxFilingId": "294341",
-      "latestEgxFilingAt": "2026-09-06T09:49:59",
+      "egxFilingCount": 503,
+      "latestEgxFilingId": "294609",
+      "latestEgxFilingAt": "2026-09-13T14:05:27",
       "candidateIssuerWebsite": "https://www.amic-eg.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AMIA/profile",
       "websiteStatus": null,
@@ -2590,9 +2590,9 @@
     },
     {
       "ticker": "CRST",
-      "egxFilingCount": 99,
-      "latestEgxFilingId": "294210",
-      "latestEgxFilingAt": "2026-09-01T10:34:21",
+      "egxFilingCount": 100,
+      "latestEgxFilingId": "294598",
+      "latestEgxFilingAt": "2026-09-13T13:09:31",
       "candidateIssuerWebsite": "https://www.creastmark.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CRST/profile",
       "websiteStatus": null,
@@ -2740,9 +2740,9 @@
     },
     {
       "ticker": "EDFM",
-      "egxFilingCount": 686,
-      "latestEgxFilingId": "294544",
-      "latestEgxFilingAt": "2026-09-10T11:16:33",
+      "egxFilingCount": 687,
+      "latestEgxFilingId": "294599",
+      "latestEgxFilingAt": "2026-09-13T13:13:48",
       "candidateIssuerWebsite": "https://www.eastdelta-mills.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EDFM/profile",
       "websiteStatus": null,
@@ -2802,9 +2802,9 @@
     },
     {
       "ticker": "EFIH",
-      "egxFilingCount": 324,
-      "latestEgxFilingId": "293769",
-      "latestEgxFilingAt": "2026-08-24T09:32:34",
+      "egxFilingCount": 325,
+      "latestEgxFilingId": "294597",
+      "latestEgxFilingAt": "2026-09-13T13:06:07",
       "candidateIssuerWebsite": "https://www.efinanceinvestment.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EFIH/profile",
       "websiteStatus": null,
@@ -3148,9 +3148,9 @@
     },
     {
       "ticker": "GDWA",
-      "egxFilingCount": 284,
-      "latestEgxFilingId": "294592",
-      "latestEgxFilingAt": "2026-09-13T12:41:00",
+      "egxFilingCount": 285,
+      "latestEgxFilingId": "294596",
+      "latestEgxFilingAt": "2026-09-13T13:02:46",
       "candidateIssuerWebsite": "https://www.gadwa.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GDWA/profile",
       "websiteStatus": null,
@@ -4372,9 +4372,9 @@
     },
     {
       "ticker": "SCFM",
-      "egxFilingCount": 716,
-      "latestEgxFilingId": "294223",
-      "latestEgxFilingAt": "2026-09-01T12:06:25",
+      "egxFilingCount": 717,
+      "latestEgxFilingId": "294601",
+      "latestEgxFilingAt": "2026-09-13T13:23:01",
       "candidateIssuerWebsite": "https://www.scgmills.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SCFM/profile",
       "websiteStatus": null,
@@ -4656,9 +4656,9 @@
     },
     {
       "ticker": "TYCN",
-      "egxFilingCount": 11,
-      "latestEgxFilingId": "293686",
-      "latestEgxFilingAt": "2026-08-20T14:52:45",
+      "egxFilingCount": 12,
+      "latestEgxFilingId": "294600",
+      "latestEgxFilingAt": "2026-09-13T13:17:47",
       "candidateIssuerWebsite": "https://tycoonholding.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/TYCN/profile",
       "websiteStatus": null,
