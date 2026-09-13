@@ -403,6 +403,10 @@
     "meaning": "Bilateral investment frameworks establish structured capital allocation channels, co-financing mechanisms, and regulatory coordination across designated industries between participating state and private entities.",
     "meaning_ar": "تؤسس أطر الاستثمار الثنائي قنوات لتوجيه تدفقات رؤوس الأموال، وآليات للتمويل المشترك، وتنسيقاً تنظيمياً عبر القطاعات المحددة بين الكيانات الحكومية والخاصة المشاركة."
   },
+  "egypt based bme and chinese catl to build electric battery factory": {
+    "meaning": "This joint venture establishes a localized manufacturing facility for electric vehicle batteries through foreign direct investment and industrial technology transfer between the two entities.",
+    "meaning_ar": "يؤسس هذا المشروع المشترك منشأة تصنيع محلية لبطاريات المركبات الكهربائية عبر تدفقات الاستثمار الأجنبي المباشر ونقل التكنولوجيا الصناعية بين الكيانين."
+  },
   "egypt mobile wallet boom in h1 2026": {
     "meaning": "An expansion in mobile wallet usage processes a higher volume of digital financial transactions through telecom operators and commercial banks, shifting cash-based settlement into formal electronic payment infrastructure.",
     "meaning_ar": "تؤدي زيادة استخدام محافظ الهاتف المحمول إلى معالجة حجم أكبر من المعاملات المالية الرقمية عبر شبكات مشغلي الاتصالات والبنوك التجارية، مما يحول التسويات النقدية إلى بنية المدفوعات الإلكترونية الرسمية."
@@ -2263,6 +2267,10 @@
     "meaning": "A large-scale bilateral investment agreement establishes formal mechanisms for cross-border capital allocation, joint venture funding, and supply chain integration between participating nations across targeted sectors.",
     "meaning_ar": "يحدد الاتفاق الاستثماري الثنائي آليات رسمية لتوجيه تدفقات رؤوس الأموال عبر الحدود، والتمويل المشترك للمشروعات، والربط التشغيلي لسلاسل التوريد بين الدولتين في قطاعات محددة."
   },
+  "اليكو تقفز بارباحها السنويه": {
+    "meaning": "The company records higher full-year bottom-line net income on its income statement, reflecting an expansion in operating revenues, enhanced cost-structure efficiencies, or non-operating gains relative to the previous financial year.",
+    "meaning_ar": "تسجل الشركة نمواً في صافي أرباحها بنهاية سنتها المالية بقائمة الدخل، نتيجة توسع الإيرادات التشغيلية، أو انخفاض التكاليف، أو قيد أرباح غير تشغيلية مقارنة بالسنة السابقة."
+  },
   "الين الياباني يصعد لاعلي مستوي في 7 اشهر": {
     "meaning": "The Japanese yen's appreciation raises the cost of importing Japanese goods, components, and machinery for Egyptian businesses and increases the local-currency debt service on yen-denominated financing facilities.",
     "meaning_ar": "يؤدي ارتفاع الين الياباني إلى زيادة تكلفة استيراد السلع والآلات والمكونات اليابانية للشركات المصرية، ورفع قيمة خدمة الديون المقومة بالين بالعملة المحلية."
@@ -3360,6 +3368,10 @@
     "meaning": "The statement reflects state economic policy directed toward channeling graduate labor into industrial and manufacturing activities rather than administrative and clerical employment, directly impacting the allocation of the domestic workforce across sectors.",
     "meaning_ar": "يعكس التصريح توجهاً للسياسة الاقتصادية الحكومية نحو توجيه القوى العاملة من الخريجين إلى الأنشطة الصناعية ومواقع الإنتاج بدلاً من الوظائف الإدارية، وهو ما يحدد مسار توزيع العمالة المحلية بين القطاعات المختلفة."
   },
+  "رييس الوزراء يشهد توقيع انشاء مصنع لانتاج البطاريات الكهرباييه بمختلف انواعها مع اكبر شركه عالميه": {
+    "meaning": "Establishing an electric battery manufacturing facility introduces localized production capacity for energy storage components, integrating international industrial technology into the domestic supply chain.",
+    "meaning_ar": "يؤدي إنشاء مصنع لإنتاج البطاريات الكهربائية إلى إدخال طاقة إنتاجية محلية لمكونات تخزين الطاقة، مع دمج التكنولوجيا الصناعية الدولية في سلاسل التوريد المحلية."
+  },
   "رييس الوزراء يشهد حفل افتتاح الدوره الثانيه عشره للالعاب الافريقيه للجامعات": {
     "meaning": "Hosting regional multi-sport events utilizes domestic sports infrastructure and coordinates operational activity across the hospitality, logistics, and transportation sectors.",
     "meaning_ar": "تتضمن استضافة الفعاليات الرياضية الإقليمية تشغيل البنية التحتية الرياضية وتنسيق الأنشطة التشغيلية عبر قطاعات الضيافة والنقل والخدمات اللوجستية."
@@ -3439,6 +3451,10 @@
   "ساروج كومار جها يكتب: 28% من موازنات المياه لا تنفق.. اين تتعطل الاستثمارات؟": {
     "meaning": "An unspent rate of 28% in water sector budgets reflects capital expenditure underutilization driven by administrative, procurement, and execution bottlenecks in infrastructure projects despite allocated funding.",
     "meaning_ar": "يعكس عدم إنفاق 28% من مخصصات قطاع المياه ضعف معدلات استغلال الإنفاق الرأسمالي المتاح، وذلك نتيجة معوقات إجرائية وإدارية في ترسية وتنفيذ مشروعات البنية التحتية."
+  },
+  "سام التمان: الطرح العام الاولي ل”اوبن ايه اي” لن يكون في 2026": {
+    "meaning": "Deferring an initial public offering keeps the company operating as a privately held entity, funded through private equity rounds rather than public equity markets. This operational status limits financial reporting and governance requirements to private corporate disclosure standards.",
+    "meaning_ar": "يُبقي تأجيل الطرح العام الأولي الشركة ككيان خاص يعتمد على جولات التمويل والاستثمار الخاص بدلاً من أسواق الأسهم العامة، مما يحصر متطلبات الإفصاح المالي والحوكمة ضمن المعايير المفروضة على الشركات المغلقة."
   },
   "ستاندرد تشارترد: اعاده شراء السندات الامريكيه لن تغير مسار العوايد طويل الاجل": {
     "meaning": "Sovereign debt buyback programs manage secondary market liquidity and cash balances without altering the underlying macroeconomic fundamentals and monetary policy trajectories that determine long-term benchmark yield curves.",
@@ -4217,6 +4233,10 @@
     "meaning": "The mechanism involves restructuring retail pharmacy operations through corporate consolidation, franchise management models, and regulatory compliance to meet stock exchange listing criteria under Egyptian law.",
     "meaning_ar": "تتمثل الآلية في إعادة هيكلة أنشطة صيدليات التجزئة عبر الاندماج المؤسسي، ونماذج إدارة الامتياز التجاري، والتوافق التنظيمي لاستيفاء معايير القيد بالبورصة وفقاً للقانون المصري."
   },
+  "لاري اليسون يلغي خطه لبيع 50 مليون سهم في “اوراكل”": {
+    "meaning": "The cancellation of a planned insider share disposition maintains the current insider ownership percentage and prevents the entry of additional existing shares into the open market float.",
+    "meaning_ar": "يؤدي إلغاء خطة تخارج أحد كبار المساهمين الداخليين إلى الإبقاء على نسبة ملكيته الحالية دون تغيير، ويمنع طرح حصة إضافية من الأسهم القائمة للتداول الحر في السوق."
+  },
   "لايم فست بارتنرز تقلص حصتها في الاسكندريه للخدمات الطبيه الي": {
     "meaning": "A shareholder reducing its equity ownership alters the company's ownership structure and shifts the proportion of shares held as free float on the exchange.",
     "meaning_ar": "يؤدي تقليص أحد المساهمين لنسبة ملكيته إلى تعديل هيكل ملكية الشركة وتغيير نسبة الأسهم المتاحة للتداول الحر في البورصة."
@@ -4740,6 +4760,10 @@
   "موشر البورصه الرييسي يتراجع 0.09% والتداولات تتخطي 19 مليار جنيه": {
     "meaning": "A marginal dip in the benchmark EGX30 index alongside trading turnover exceeding EGP 19 billion reflects high daily market liquidity and substantial execution volume across listed securities without significant net directional movement in the headline index.",
     "meaning_ar": "يعكس التراجع الطفيف للمؤشر الرئيسي للبورصة مع تجاوز قيم التداول 19 مليار جنيه سيولة نقدية مرتفعة وحجم تنفيذات واسع على الأوراق المالية المقيدة خلال جلسة التداول دون تسجيل تحرك سعري حاد في الاتجاه العام للمؤشر."
+  },
+  "موشر البورصه الرييسي يتراجع 0.42% والسبعيني يرتفع 0.38%": {
+    "meaning": "This divergence reflects institutional trading pressure on large-cap constituents within the EGX30 alongside concurrent retail and domestic liquidity allocation into small- and mid-cap equities tracked by the EGX70.",
+    "meaning_ar": "يعكس هذا التباين ضغوطاً بيعية من المؤسسات على الأسهم القيادية المدرجة في مؤشر إيجي إكس 30، بالتزامن مع توجيه سيولة الأفراد نحو أسهم الشركات الصغيرة والمتوسطة المكونة لمؤشر إيجي إكس 70."
   },
   "موشر البورصه الرييسي يتراجع 0.8% والسبعيني ينخفض 1.24%": {
     "meaning": "The decline in the benchmark EGX30 and the small-and-medium-cap EGX70 indices reflects a broad contraction in aggregate market capitalisation across both blue-chip corporations and mid-tier listed equities during the trading session.",
@@ -5484,6 +5508,10 @@
   "“كينجدوم” الصينيه تعتزم تشغيل مصنع للكتان في مصر الربع الاول 2027": {
     "meaning": "The setup establishes an industrial manufacturing base for flax processing within the Egyptian textiles sector, scheduled for commercial operation in the first quarter of 2027.",
     "meaning_ar": "يُمثّل هذا الإجراء إنشاء قاعدة تصنيع صناعية لمعالجة الكتان داخل قطاع الغزل والنسيج المصري، والمحدد بدء تشغيلها التجاري في الربع الأول من عام 2027."
+  },
+  "“لاجارد” تتوقع استمرار ارتفاع تضخم منطقه اليورو بفعل صدمه الطاقه": {
+    "meaning": "Persistent energy price shocks maintain high operational and input costs across European industries, reinforcing monetary tightening policies that influence global capital flows and import pricing.",
+    "meaning_ar": "تؤدي صدمات أسعار الطاقة المستمرة إلى إبقاء تكاليف التشغيل والمدخلات مرتفعة في القطاعات الأوروبية، وهو ما يرسخ سياسات التشديد النقدي المؤثرة على تدفقات رؤوس الأموال العالمية وأسعار السلع المستوردة."
   },
   "“لايم فست” تخفض حصتها في “المركز الطبي” الي 59.4%": {
     "meaning": "This equity transaction reduces LimeVest's ownership and voting rights while maintaining its majority controlling position above 50%. The divestment redistributes equity to other market participants or expands the company's free-float shares on the exchange.",
