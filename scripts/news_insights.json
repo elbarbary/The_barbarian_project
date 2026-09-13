@@ -395,6 +395,10 @@
     "meaning": "Board approval of interim dividends allocates a portion of accumulated retained earnings for distribution to shareholders, which reduces the company's cash balances and book equity upon execution.",
     "meaning_ar": "يمثل اعتماد مجلس الإدارة لتوزيعات الأرباح المرحلية تخصيصاً لجزء من الأرباح المحتجزة لتوزيعها على المساهمين، مما يترتب عليه خفض الأرصدة النقدية وحقوق الملكية الدفترية للشركة عند التنفيذ."
   },
+  "egx closes sunday september 13 in red zone": {
+    "meaning": "Trading on the exchange concludes with benchmark equity indices recording net declines relative to the previous session's base values, reflecting aggregate transaction prices executed below prior settlement levels across listed securities.",
+    "meaning_ar": "تُنهي البورصة جلسة التداول بتسجيل مؤشرات الأسهم الرئيسية تراجعاً مقارنة بمستويات إغلاق الجلسة السابقة، وهو ما يمثل تنفيذ المعاملات عند مستويات أسعار تقل عن أسعار التسوية السابقة للأسهم المدرجة."
+  },
   "egx shows positive performance on sunday sep 6": {
     "meaning": "The main market indices close higher at the end of the trading session, reflecting an aggregate increase in executed transaction prices across listed equities.",
     "meaning_ar": "تغلق مؤشرات السوق الرئيسية على ارتفاع بنهاية جلسة التداول، مما يعكس زيادة إجمالية في أسعار الصفقات المنفذة عبر الأسهم المقيدة."
@@ -586,6 +590,10 @@
   "technovision opens two medical equipment plants in sczone": {
     "meaning": "Opening two manufacturing facilities in the Suez Canal Economic Zone (SCZone) establishes localized medical equipment production lines and integrates the company directly into the zone's trade and logistics infrastructure.",
     "meaning_ar": "يؤدي افتتاح منشأتين صناعيتين في المنطقة الاقتصادية لقناة السويس إلى إنشاء خطوط إنتاج محلية للمستلزمات الطبية، ودمج الشركة مباشرة ضمن البنية التحتية واللوجستية بالمنطقة."
+  },
+  "usd rises against egp at egyptian banks on september 13": {
+    "meaning": "A higher USD/EGP exchange rate increases the local currency cost of imported raw materials and foreign-currency debt service for domestic companies, while raising the local currency value of foreign revenue.",
+    "meaning_ar": "يؤدي ارتفاع سعر صرف الدولار مقابل الجنيه إلى زيادة تكلفة المواد الخام المستوردة وأعباء خدمة الديون بالعملة الأجنبية على الشركات المحلية، بينما يرفع قيمة الإيرادات المحققة بالعملات الأجنبية عند تقويمها بالجنيه."
   },
   "usd trades below 51 on september 6": {
     "meaning": "The exchange rate for the US dollar sits under 51 Egyptian pounds in the banking system, which determines the local currency cost of foreign currency settlements for importers and foreign-denominated obligations.",
@@ -1002,6 +1010,10 @@
   "استجابه لتصريحات بشان اسعار الفايده..عوايد سندات الخزانه الامريكيه تتراجع الخميس": {
     "meaning": "Lower US Treasury yields reflect higher bond prices following monetary policy commentary, setting the global benchmark rate for sovereign and corporate debt pricing.",
     "meaning_ar": "يعكس انخفاض عوائد سندات الخزانة الأمريكية ارتفاع أسعارها استجابةً لتصريحات السياسة النقدية، وهو ما يحدد السعر المرجعي لتسعير أدوات الدين السيادية وتكاليف اقتراض الشركات عالمياً."
+  },
+  "استراتيجيه المصريه للاتصالات الجديده تدفع السهم فوق 125 جنيها لترتفع القيمه السوقيه الي 46 مليار جنيه": {
+    "meaning": "Market valuation reflects immediate equity repricing based on company corporate strategy announcements, adjusting Telecom Egypt's total aggregate capitalization on the EGX.",
+    "meaning_ar": "يعكس تقييم السوق إعادة تسعير فورية لأسهم الشركة في ضوء إعلانات استراتيجية الأعمال، مما يرفع إجمالي القيمة السوقية للمصرية للاتصالات في البورصة المصرية."
   },
   "استقرار بختام الاسبوع.. اسعار العملات الاجنبيه والعربيه اليوم الجمعه": {
     "meaning": "Official foreign exchange rates remain unchanged at commercial banks during the weekend closure, maintaining fixed conversion rates for cross-border trade settlements, corporate treasury valuations, and imported inventory pricing until interbank operations resume.",
@@ -2535,6 +2547,10 @@
     "meaning": "Gross Domestic Product metrics measure aggregate economic output and baseline commercial activity within an external sovereign market. For international trade partners, foreign GDP data serves as an operational benchmark for economic capacity and cross-border trade activity.",
     "meaning_ar": "يقيس مؤشر الناتج المحلي الإجمالي حجم الإنتاج الكلي والنشاط الاقتصادي الأساسي داخل الأسواق الخارجية، ويمثل معياراً مرجعياً لتتبع مستويات الطاقة الاقتصادية وحركة التبادل التجاري الدولي."
   },
+  "ايطاليا: رفع الفايده الاوروبيه يعيق السيطره علي الدين": {
+    "meaning": "Higher European Central Bank interest rates directly raise sovereign borrowing yields, thereby increasing the periodic debt servicing costs for highly leveraged member states.",
+    "meaning_ar": "يؤدي رفع أسعار الفائدة من قبل البنك المركزي الأوروبي إلى زيادة عوائد الاقتراض السيادي، مما يرفع تكلفة خدمة الديون الدورية على الدول ذات المديونية المرتفعة."
+  },
   "ايفاد: نعمل في نحو 100 دوله واستثماراتنا تستهدف صغار المزارعين": {
     "meaning": "The International Fund for Agricultural Development (IFAD) deploys development financing and concessional funding structures across a global network of approximately 100 countries, directly allocating capital toward smallholder agricultural supply chains and rural production infrastructure.",
     "meaning_ar": "يوجه الصندوق الدولي للتنمية الزراعية (إيفاد) تمويلات تنموية وتسهيلات تمويلية عبر شبكة عالمية تضم نحو 100 دولة، حيث يخصص رأس المال مباشرة لسلاسل الإمداد الزراعية لصغار المزارعين والبنية التحتية للإنتاج الريفي."
@@ -3416,6 +3432,10 @@
     "meaning": "Tax facilitation packages establish administrative frameworks for settling tax disputes, simplifying filing procedures, and standardizing compliance protocols for registered businesses.",
     "meaning_ar": "تتضمن حزم التيسيرات الضريبية أطراً إدارية لإنهاء النزاعات الضريبية وتبسيط إجراءات تقديم الإقرارات وتوحيد آليات الامتثال للمؤسسات المسجلة."
   },
+  "رغم تراجع يونيو.. الاسمده المصريه تحقق 1.69 مليار دولار صادرات في 6 اشهر": {
+    "meaning": "Egyptian fertilizer producers generate foreign currency revenue by exporting output to global markets, while monthly export totals fluctuate based on operational gas feedstock allocations and global commodity price cycles.",
+    "meaning_ar": "تولد شركات الأسمدة المصرية إيرادات بالعملة الأجنبية عبر تصدير منتجاتها للأسواق العالمية، بينما تتفاوت حصيلة الصادرات الشهرية وفقاً لمخصصات الغاز الطبيعي التشغيلية ودورات أسعار السلع عالمياً."
+  },
   "روسنفت: الصين ساهمت في استقرار اسواق النفط العالميه خلال ازمه هرمز": {
     "meaning": "Large-scale strategic petroleum reserves and diversified import logistics in major consumer nations absorb maritime transit disruptions and maintain equilibrium in physical crude supply chains.",
     "meaning_ar": "تمتص الاحتياطيات البترولية الاستراتيجية وتنوع مسارات الاستيراد في الدول المستهلكة الكبرى اضطرابات الملاحة البحرية، مما يحافظ على توازن سلاسل إمداد النفط الخام الفعلية."
@@ -3584,6 +3604,10 @@
     "meaning": "Operational site visits track project execution milestones, infrastructure development, and workflow integration across state-led agricultural and industrial production facilities.",
     "meaning_ar": "تتضمن الجولات الميدانية متابعة الموقف التنفيذي للبنية التحتية ومسارات العمل ومراحل الإنتاج الفعلي في المشروعات الزراعية والصناعية التابعة للجهاز."
   },
+  "رييس هييه الرقابه الماليه: الشراكه مع البنك الاوروبي توثر بالايجاب علي جهود الشمول المالي والنمو المستدام": {
+    "meaning": "The partnership provides technical assistance, funding frameworks, and regulatory capacity building from the European Bank for Reconstruction and Development to Egypt's non-banking financial sector.",
+    "meaning_ar": "توفر الشراكة دعماً فنياً وأطراً تمويلية وبناءً للقدرات الرقابية من البنك الأوروبي لإعادة الإعمار والتنمية للقطاع المالي غير المصرفي في مصر."
+  },
   "زياده راتب رييس وزراء سنغافوره بمقدار 1.1 مليون دولار سنويا": {
     "meaning": "Public sector executive compensation adjustments link senior government remuneration to private sector benchmarks, aligning state administrative costs directly with prevailing executive market pay scales.",
     "meaning_ar": "يعتمد تعديل مخصصات رواتب القيادات الحكومية على ربط أجور القطاع العام بمؤشرات ومتوسطات رواتب كبار التنفيذيين في القطاع الخاص كمعيار للمحاكاة المالية."
@@ -3676,6 +3700,10 @@
     "meaning": "Official and parallel market exchange rates for the Saudi Riyal determine the direct Egyptian Pound clearing costs for bilateral trade, outbound religious tourism logistics, and the conversion value of expat remittances from Saudi Arabia.",
     "meaning_ar": "تحدد أسعار صرف الريال السعودي مقابل الجنيه المصري تكاليف التسوية المباشرة للتبادل التجاري، والترتيبات اللوجستية لبرامج السياحة الدينية، وقيمة التحويلات المالية للمصريين العاملين في المملكة."
   },
+  "سعر الريال السعودي في مصر اليوم الاحد 13/9/2026.. مكاسب جديده": {
+    "meaning": "An appreciation of the Saudi Riyal against the Egyptian Pound directly increases the local currency cost of imports and services denominated in SAR, while raising the Egyptian Pound value of cash remittances sent from workers in Saudi Arabia.",
+    "meaning_ar": "يؤدي ارتفاع سعر صرف الريال السعودي مقابل الجنيه المصري إلى زيادة التكلفة بالعملة المحلية للواردات والخدمات المقومة بالريال، مع رفع القيمة المحققة بالجنيه للتحويلات النقدية الواردة من العاملين في المملكة العربية السعودية."
+  },
   "سعر الريال السعودي في مصر اليوم الاحد 6/9/2026.. استقرار بالختام": {
     "meaning": "The closing stability of the Saudi Riyal against the Egyptian Pound reflects a balance between foreign currency supply and demand within the banking system, fixing daily settlement rates for bilateral trade invoices, remittance conversions, and religious travel operational costs.",
     "meaning_ar": "يعكس استقرار سعر صرف الريال السعودي أمام الجنيه المصري عند الإغلاق توازن المعروض والطلب على العملة داخل القطاع المصرفي، مما يثبت أسعار التسوية اليومية لفواتير التبادل التجاري، وتحويلات العاملين، والتكاليف التشغيلية لبرامج السفر الديني."
@@ -3739,6 +3767,10 @@
   "سعر اليورو في مصر اليوم الاحد 13/9/2026": {
     "meaning": "Official and commercial banking rates establish the daily conversion parity between the euro and the Egyptian pound, settling trade transactions, foreign currency liabilities, and import valuations directly tied to the eurozone.",
     "meaning_ar": "تحدد أسعار الصرف الرسمية والتجارية في البنوك معادلة التحويل اليومية بين اليورو والجنيه المصري، وتُستخدم في تسوية العمليات التجارية، والالتزامات القائمة بالعملة الأجنبية، وتقييم واردات السلع المرتبطة بمنطقة اليورو."
+  },
+  "سعر اليورو في مصر اليوم الاحد 13/9/2026.. تراجع بالختام": {
+    "meaning": "A decline in the EUR/EGP exchange rate reduces the local currency cost of clearing Euro-denominated import invoices and obligations while lowering the Egyptian pound value of incoming Euro receivables.",
+    "meaning_ar": "يؤدي انخفاض سعر صرف اليورو مقابل الجنيه المصري إلى تقليل التكلفة بالعملة المحلية لتسوية الالتزامات والفواتير الاستيرادية المقومة باليورو، مع خفض القيمة الدفترية بالجنيه للمتحصلات بتلك العملة."
   },
   "سعر اليورو في مصر اليوم الاحد 6/9/2026.. استقرار بالختام": {
     "meaning": "Stability in the euro's exchange rate reflects steady supply and demand dynamics across the local banking sector, keeping import and foreign currency settlement costs unchanged for European trade transactions.",
@@ -3968,6 +4000,10 @@
   "شعبه المواد الغذاييه: تطوير المحلات المنضمه الي كاري اون علي حساب التاجر": {
     "meaning": "Under this retail partnership model, participating grocery merchants fund their own store upgrades and capital expenditures directly, while the CarryOn platform provides the branding, operational standards, and digital network integration.",
     "meaning_ar": "بموجب هذا النموذج التجاري، يتحمل التجار المنضمون التكاليف الرأسمالية وأعمال التطوير لمتاجرهم بشكل مباشر، بينما تقدم منصة «كاري أون» معايير التشغيل، والهوية التجارية، والربط بالشبكة الرقمية."
+  },
+  "شي يطرح رويته للذكاء الاصطناعي في “بريكس” مع احتدام المنافسه مع امريكا": {
+    "meaning": "The proposal coordinates technical standards, shared computing infrastructure, and AI governance frameworks among BRICS member states amid bilateral technology export controls with the United States.",
+    "meaning_ar": "يطرح المقترح تنسيقاً للمعايير التقنية، والبنية التحتية المشتركة للحوسبة، وأطر حوكمة الذكاء الاصطناعي بين دول مجموعة بريكس في ظل القيود الثنائية المفروضة على تصدير التكنولوجيا مع الولايات المتحدة."
   },
   "صادرات الذره الارجنتينيه تقفز لمستوي قياسي مع صعود الطلب من مصر وشمال افريقيا": {
     "meaning": "Egypt's animal feed and poultry processing sectors rely on imported yellow corn to meet domestic production needs, sourcing bulk grain volumes from international agricultural suppliers such as Argentina.",
@@ -5261,6 +5297,10 @@
     "meaning": "This represents an internal administrative action within the public education sector concerning state school management and workforce governance, carrying no direct mechanism for capital markets or commercial enterprises.",
     "meaning_ar": "يمثل هذا الإجراء نشاطاً إدارياً داخلياً ضمن قطاع التعليم العام يخص إدارة الكوادر والقيادات في المدارس الحكومية، دون وجود آلية تشغيلية ترتبط بسوق المال أو الشركات التجارية."
   },
+  "وزير التموين يوجه بتكثيف ضخ السلع الاكثر اقبالا في مبادره تخفيض الاسعار": {
+    "meaning": "This operational directive increases state-managed inventory allocation and distribution frequency for high-turnover staple goods through public consumer complexes within government price-stabilisation channels.",
+    "meaning_ar": "يمثل هذا التوجيه التنفيذي زيادة في معدلات ضخ وتوزيع المخزون السلعي للسلع الأساسية سريعة الدوران عبر المجمعات الاستهلاكية ومنافذ مبادرات خفض الأسعار التابعة للدولة."
+  },
   "وزير التموين: سرعه بحث طلبات النواب بما يحقق صالح المواطنين": {
     "meaning": "The Ministry of Supply coordinates administrative and regulatory oversight over subsidized commodity distribution and consumer supply chains through legislative feedback channels.",
     "meaning_ar": "تتولى وزارة التموين التنسيق والرقابة الإدارية والتنظيمية على سلاسل إمداد السلع والمنظومة التموينية عبر قنوات المتابعة والتواصل البرلماني."
@@ -5477,6 +5517,10 @@
     "meaning": "The Suez Canal Economic Zone tenders logistics assets, specifically warehouses and workshops at West Port Said Port, under public-private partnership (PPP) models, transferring the management, operation, and utilization of these facilities to private sector operators.",
     "meaning_ar": "تطرح الهيئة العامة للمنطقة الاقتصادية لقناة السويس أصولاً لوجستية تشمل مخازن وورش صيانة بميناء غرب بورسعيد بنظام الشراكة مع القطاع الخاص، حيث يتولى مشغلو القطاع الخاص إدارة هذه المرافق وتشغيلها وتقديم الخدمات المرتبطة بها."
   },
+  "“اكت فاينانشال” تشتري وحدات عقاريه في القاهره الجديده ب200.4 مليون جنيه": {
+    "meaning": "This transaction reallocates 200.4 million Egyptian pounds of corporate liquid capital into tangible real estate holdings on the balance sheet, altering the company's asset composition between cash reserves and non-current property assets.",
+    "meaning_ar": "تعمل هذه الصفقة على إعادة توزيع 200.4 مليون جنيه من السيولة النقدية للشركة إلى أصول عقارية ملموسة ضمن الميزانية العمومية، مما يغير هيكل الأصول بين الاحتياطيات النقدية والأصول العقارية غير المتداولة."
+  },
   "“الاستثمار والتجاره” تطلق منحه لدعم تاهيل الشركات المصدره": {
     "meaning": "The Ministry of Investment and Foreign Trade provides non-reimbursable financing to cover the costs of quality certifications, international standards compliance, and technical readiness for export-oriented enterprises.",
     "meaning_ar": "تقدم وزارة الاستثمار والتجارة الخارجية تمويلاً غير مسترد لتغطية تكاليف الحصول على شهادات الجودة والامتثال للمعايير الدولية والجاهزية الفنية للشركات الموجهة للتصدير."
@@ -5496,6 +5540,10 @@
   "“الدلتا للتامين” تربح 302.1 مليون جنيه في النصف الاول": {
     "meaning": "Delta Insurance records a net profit of EGP 302.1 million for the first half of the fiscal period, reflecting the net operational surplus from underwriting activities combined with returns generated on its invested portfolio.",
     "meaning_ar": "سجلت شركة الدلتا للتأمين صافي أرباح قدره 302.1 مليون جنيه خلال النصف الأول، وهو ما يعكس الفائض التشغيلي المحقق من أنشطة الاكتتاب التأميني مضافاً إليه عوائد استثمار المحفظة المالية للشركة."
+  },
+  "“الرقابه الماليه” تبحث مع البنك الاوروبي تعزيز جاذبيه القطاع المالي غير المصرفي": {
+    "meaning": "Institutional coordination between the Financial Regulatory Authority and international development lenders involves reviewing regulatory frameworks, aligning local governance standards with international criteria, and designing technical assistance programs for non-banking financial institutions.",
+    "meaning_ar": "يتضمن التنسيق المؤسسي بين الهيئة العامة للرقابة المالية ومؤسسات التمويل الدولية مراجعة الأطر التنظيمية، ومواءمة معايير الحوكمة المحلية مع المعايير الدولية، وإعداد برامج الدعم الفني للمؤسسات المالية غير المصرفية."
   },
   "“الرقابه الماليه” تشكل مجموعه عمل لتعزيز المسووليه المجتمعيه": {
     "meaning": "The Financial Regulatory Authority (FRA) forms a dedicated working group to draft regulatory frameworks and standards for corporate social responsibility (CSR) and ESG integration across non-banking financial institutions and listed entities.",
