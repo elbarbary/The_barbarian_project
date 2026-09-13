@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Fly Traded Bitcoin · 1930s Cartoon Storyboard by ESTHMR</title>
+  <meta name="description" content="A lost 1930s rubber-hose cartoon sketchbook about a fruit fly analyst discovering the Egyptian Stock Exchange, Bloomberg, Claude, and ESTHMR.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F4EFE6;
+      --card-bg: #FCF9F2;
+      --ink: #181614;
+      --muted: #6E655C;
+      --border: #D8CFBE;
+      --accent: #15803D;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      background-image: radial-gradient(#D6CEBF 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: var(--ink);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 48px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .top-nav {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.86rem;
+      font-weight: 600;
+      margin-left: 14px;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* CAROUSEL CONTAINER */
+    .sketchbook-deck {
+      width: 100%;
+      max-width: 680px;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 16px 40px -12px rgba(40, 32, 20, 0.15), 0 2px 6px rgba(0,0,0,0.04);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide-viewport {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      position: relative;
+      background: #FDFBF7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide-viewport img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .slide-viewport img.active {
+      display: block;
+      animation: fadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.985); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* CONTROLS BAR */
+    .controls-bar {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      background: #FAF6ED;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .counter {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dot.active {
+      width: 24px;
+      border-radius: 999px;
+      background: var(--ink);
+    }
+
+    .buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--ink);
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .btn:hover:not(:disabled) {
+      background: var(--ink);
+      color: white;
+      border-color: var(--ink);
+    }
+    .btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .btn.primary {
+      background: var(--ink);
+      color: white;
+    }
+    .btn.primary:hover {
+      background: #2E2924;
+    }
+
+    /* CAPTION ACCORDION */
+    .caption-box {
+      width: 100%;
+      max-width: 680px;
+      margin-top: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .caption-box h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .caption-content {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #38322B;
+      white-space: pre-line;
+      background: #FAF6EE;
+      padding: 14px 18px;
+      border-radius: 10px;
+      border: 1px dashed var(--border);
+      margin-top: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.84rem;
+    }
+
+    .copy-btn {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: white;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .copy-btn:hover { background: #eee; }
+
+    .bottom-cta {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .bottom-cta a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .bottom-cta a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <div class="pill">
+      🪰 ESTHMR Studio · 1930s Sketchbook
+    </div>
+    <div class="nav-links">
+      <a href="/esthmr/terminal-vs-esthmr">Terminal Comparison</a>
+      <a href="/esthmr/fragility">Fragility Research</a>
+      <a href="https://esthmr.com">Live App &rarr;</a>
+    </div>
+  </nav>
+
+  <main class="sketchbook-deck">
+    <div class="slide-viewport" id="viewport">
+      <img src="/esthmr/assets/fly/slide_1.jpg" alt="Slide 1: We gave the fly the EGX" class="active" data-slide="1">
+      <img src="/esthmr/assets/fly/slide_2.jpg" alt="Slide 2: First, we gave it Bloomberg" data-slide="2">
+      <img src="/esthmr/assets/fly/slide_3.jpg" alt="Slide 3: Then we gave it Claude" data-slide="3">
+      <img src="/esthmr/assets/fly/slide_4.jpg" alt="Slide 4: Then the fly discovered Egypt" data-slide="4">
+      <img src="/esthmr/assets/fly/slide_5.jpg" alt="Slide 5: So we built the context first" data-slide="5">
+      <img src="/esthmr/assets/fly/slide_6.jpg" alt="Slide 6: The Three Professors" data-slide="6">
+      <img src="/esthmr/assets/fly/slide_7.jpg" alt="Slide 7: Then the fly learned about 20%+ T-Bills" data-slide="7">
+      <img src="/esthmr/assets/fly/slide_8.jpg" alt="Slide 8: Bloomberg knows the world. ESTHMR is obsessed with Egypt" data-slide="8">
+    </div>
+
+    <div class="controls-bar">
+      <span class="counter" id="counter">01 / 08</span>
+      <div class="dots" id="dotsContainer"></div>
+      <div class="buttons">
+        <button class="btn" id="prevBtn" disabled>&larr; Prev</button>
+        <button class="btn primary" id="nextBtn">Next &rarr;</button>
+        <a class="btn" id="downloadBtn" href="/esthmr/assets/fly/slide_1.jpg" download="fly_slide_1.jpg" title="Download current slide">📥 HD</a>
+      </div>
+    </div>
+  </main>
+
+  <section class="caption-box">
+    <h3>
+      <span>Instagram / LinkedIn Caption</span>
+      <button class="copy-btn" id="copyCaptionBtn">📋 Copy Caption</button>
+    </h3>
+    <div class="caption-content" id="captionText">We gave a tiny fruit fly analyst with literally one brain cell the Egyptian Stock Exchange (EGX). 🪰📉
+
+Slide 1: Traded Bitcoin. Promoted to EGX.
+Slide 2: Gave it Bloomberg (47,000 buttons, 0 context).
+Slide 3: Gave it Claude (9-foot scroll saying "it depends").
+Slide 4: Discovered Egypt (Stocks ↑, EGP ↓, T-Bills 20%+).
+Slide 5: Built ESTHMR (Synthesizing filings, carry & liquidity into context).
+Slide 6: The 3 Professors (Bloomberg has data, Claude can reason, ESTHMR knows which weird Egyptian stuff matters).
+Slide 7: Discovered 20%+ T-Bills ("WAIT. I GET PAID TO WAIT?!").
+Slide 8: The fly is now Head of Research.
+
+Bloomberg knows the world. Claude can think about the world. ESTHMR is obsessed with Egypt. 🇪🇬⚡
+
+Explore the quantitative models & trade logs:
+👉 esthmr.com</div>
+  </section>
+
+  <div class="bottom-cta">
+    Swipe with finger on mobile or use &larr; &rarr; arrow keys. Built with love by <a href="https://esthmr.com">ESTHMR</a>.
+  </div>
+
+  <script>
+    const images = Array.from(document.querySelectorAll('#viewport img'));
+    const dotsContainer = document.getElementById('dotsContainer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const counter = document.getElementById('counter');
+    const downloadBtn = document.getElementById('downloadBtn');
+    let currentIndex = 0;
+
+    // Build dots
+    images.forEach((_, idx) => {
+      const dot = document.createElement('div');
+      dot.className = `dot ${idx === 0 ? 'active' : ''}`;
+      dot.addEventListener('click', () => goTo(idx));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = Array.from(document.querySelectorAll('.dot'));
+
+    function update() {
+      images.forEach((img, idx) => {
+        img.classList.toggle('active', idx === currentIndex);
+      });
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentIndex);
+      });
+      counter.textContent = `${String(currentIndex + 1).padStart(2, '0')} / ${String(images.length).padStart(2, '0')}`;
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === images.length - 1;
+      
+      const currentImg = images[currentIndex];
+      downloadBtn.href = currentImg.src;
+      downloadBtn.download = `fly_slide_${currentIndex + 1}.jpg`;
+    }
+
+    function goTo(idx) {
+      if (idx >= 0 && idx < images.length) {
+        currentIndex = idx;
+        update();
+      }
+    }
+
+    prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+    nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+
+    // Keyboard navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        goTo(currentIndex + 1);
+      } else if (e.key === 'ArrowLeft') {
+        goTo(currentIndex - 1);
+      }
+    });
+
+    // Touch swipe
+    let touchStartX = 0;
+    const viewport = document.getElementById('viewport');
+    viewport.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    viewport.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (diff > 40) goTo(currentIndex + 1);
+      else if (diff < -40) goTo(currentIndex - 1);
+    }, { passive: true });
+
+    // Copy caption
+    document.getElementById('copyCaptionBtn').addEventListener('click', () => {
+      const text = document.getElementById('captionText').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copyCaptionBtn');
+        btn.textContent = '✅ Copied!';
+        setTimeout(() => btn.textContent = '📋 Copy Caption', 2000);
+      });
+    });
+  </script>
+</body>
+</html>
