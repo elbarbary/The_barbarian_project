@@ -471,6 +471,10 @@
     "meaning": "A reduction in equity holding decreases the parent company's ownership percentage and voting control in the investee entity while converting a portion of the asset value into cash or receivables on its balance sheet.",
     "meaning_ar": "يؤدي خفض الحصة إلى تقليص نسبة ملكية الشركة وحقوق التصويت التابعة لها في الكيان المستثمر فيه، مع تحويل جزء من قيمة هذا الأصل إلى نقدية أو مستحقات في ميزانيتها العمومية."
   },
+  "fawry and dms integrate pos solutions with medical management system": {
+    "meaning": "The integration connects Fawry's point-of-sale payment infrastructure directly into DMS's healthcare management software, enabling automated processing and reconciliation of medical transactions across the provider network.",
+    "meaning_ar": "يربط هذا التكامل بين البنية التحتية لنقاط البيع الإلكترونية التابعة لشركة فوري وبرمجيات الإدارة الطبية لشركة دي إم إس، مما يتيح معالجة المدفوعات وتسويتها آلياً عبر شبكة مقدمي الخدمات الصحية."
+  },
   "fertilizers and building materials prices mixed on september 7": {
     "meaning": "Mixed price movements across fertilizers and building materials reflect divergent input costs, localized supply chain dynamics, and distinct domestic demand conditions across individual industrial commodity segments.",
     "meaning_ar": "يعكس التباين في أسعار الأسمدة ومواد البناء اختلاف تكاليف المدخلات الإنتاجية، وديناميكيات سلاسل الإمداد، ومستويات الطلب المحلي الخاصة بكل قطاع صناعي على حدة."
@@ -1574,6 +1578,10 @@
   "البورصه تتحدي ضغوط المبيعات وجني الارباح لاستعاده المسار الصاعد": {
     "meaning": "During market sessions characterized by profit-taking, incoming buy orders absorb the volume of executed sell orders, which directly determines the net movement of benchmark indices.",
     "meaning_ar": "خلال جلسات التداول التي تشهد عمليات جني أرباح، تستوعب طلبات الشراء أحجام أوامر البيع المنفذة، مما يحدد الاتجاه الصافي لحركة مؤشرات السوق."
+  },
+  "البورصه تتراجع اكثر من 1% واحجام التداول تسجل نحو 11 مليار جنيه": {
+    "meaning": "The market benchmark index decreases by over 1% alongside total daily trading turnover of approximately EGP 11 billion across listed equities and fixed-income instruments.",
+    "meaning_ar": "يتراجع المؤشر الرئيسي للسوق بأكثر من 1% بالتزامن مع تسجيل إجمالي قيم تداولات يومية تقارب 11 مليار جنيه عبر الأسهم وأدوات الدخل الثابت المقيدة."
   },
   "البورصه تختبر حاجز 57 الف نقطه تحت ضغط مبيعات الموسسات": {
     "meaning": "Institutional portfolio reallocations and high-volume liquidation orders create downward pricing pressure across constituent equities, bringing the benchmark index to the 57,000-point technical threshold.",
@@ -2880,6 +2888,10 @@
     "meaning": "Broad declines across indices reflect net capital outflows from equities during the trading session, where downward price adjustments across constituent stocks reduce aggregate market capitalization.",
     "meaning_ar": "يعكس التراجع الجماعي للمؤشرات خروج صافي تدفقات نقدية من الأسهم خلال جلسة التداول، حيث تؤدي انخفاضات أسعار الأسهم المكونة للمؤشرات إلى تقليص القيمة السوقية الإجمالية."
   },
+  "تراجع جماعي لموشرات البورصه بختام التعاملات.. و «EGX30» يهبط 1.09%": {
+    "meaning": "Trading volume shifts toward net liquidations across listed equities, resulting in downward index repricing as the benchmark EGX30 closes 1.09% lower.",
+    "meaning_ar": "تشهد جلسة التداول غلبة لعمليات التسييل عبر الأسهم المدرجة، مما يؤدي إلى إعادة تسعير المؤشرات نزولاً مع إغلاق مؤشر EGX30 الرئيسي على انخفاض قدره 1.09%."
+  },
   "تراجع جماعي لموشرات البورصه في منتصف تعاملات اليوم": {
     "meaning": "A collective decline in market indices reflects a simultaneous decrease in the weighted share prices of listed companies across the exchange, driven by aggregate transaction values where execution prices are lower than previous closing levels during mid-session trading.",
     "meaning_ar": "يعكس التراجع الجماعي للمؤشرات انخفاضاً متزامناً في الأسعار السوقية المرجحة لأسهم الشركات المقيدة، نتيجة تسجيل صفقات تداول بأسعار تقل عن أسعار الإغلاق السابقة في منتصف الجلسة."
@@ -3079,6 +3091,10 @@
   "تقييم بنك القاهره يرتفع": {
     "meaning": "An increase in Banque du Caire's valuation reflects higher assessed net asset value or updated multiples applied to its financial fundamentals by market assessors.",
     "meaning_ar": "يعكس ارتفاع تقييم بنك القاهرة زيادة في القيمة الصافية المقدرة لأصوله أو تطبيق مضاعفات تقييم أعلى على مؤشراته المالية الأساسية من قبل جهات التقييم."
+  },
+  "تكامل مباشر بين انظمه": {
+    "meaning": "Direct system integration establishes automated, real-time data communication protocols between separate operating platforms, removing manual data entry steps from transaction processing workflows.",
+    "meaning_ar": "يؤسس الربط الإلكتروني المباشر قنوات اتصال آلية ولحظية لنقل البيانات بين الأنظمة التشغيلية المختلفة، مما يلغي إجراءات إدخال البيانات يدوياً في دورة معالجة المعاملات."
   },
   "تكنوفيجن تضخ 16 مليون دولار في تصنيع سيارات الاسعاف وتجميع اجهزه الاسنان": {
     "meaning": "This direct capital deployment allocates $16 million in capital expenditure to establish local assembly and manufacturing operations for ambulance vehicles and dental equipment within the domestic medical equipment sector.",
@@ -3483,6 +3499,10 @@
   "رييس الوزراء يتفقد الشركه المصريه لتصنيع الشباك وادوات الصيد": {
     "meaning": "Official executive inspections assess domestic manufacturing operations and evaluate supply-chain inputs for the local maritime equipment sector.",
     "meaning_ar": "ترصد الجولات التفقدية الحكومية سير العمليات التشغيلية في المصانع المحلية، وتتابع مدخلات سلاسل الإمداد الخاصة بقطاع معدات الصيد البحري."
+  },
+  "رييس الوزراء يتفقد تنفيذ الخط الاول من القطار الكهربايي السريع": {
+    "meaning": "Government field inspections of national infrastructure projects track operational milestones, deployment schedules, and contractor progress for listed construction and building materials companies involved in civil works.",
+    "meaning_ar": "تتابع الجولات التفقدية الحكومية لمشاريع البنية التحتية القومية معدلات التنفيذ الميدانية وجداول التشغيل ومراحل عمل شركات المقاولات ومواد البناء المقيدة في البورصة والمشاركة في الأعمال المدنية."
   },
   "رييس الوزراء يحسم جدل رواتب الخريجين: العمل بالمصانع ومواقع الانتاج هو المستقبل الحقيقي": {
     "meaning": "The statement reflects state economic policy directed toward channeling graduate labor into industrial and manufacturing activities rather than administrative and clerical employment, directly impacting the allocation of the domestic workforce across sectors.",
@@ -4877,6 +4897,10 @@
     "meaning": "This project represents a $5 million capital expenditure to establish a domestic manufacturing asset for calcium carbonate in the Sokhna industrial zone, adding local processing capacity for industrial mineral inputs.",
     "meaning_ar": "يمثل المشروع إنفاقاً رأسمالياً بقيمة 5 ملايين دولار لإنشاء أصل تصنيعي محلي لإنتاج كربونات الكالسيوم بالمنطقة الصناعية في السخنة، مما يضيف طاقة تشغيلية محلية لمعالجة الخامات الصناعية."
   },
+  "مطاحن الاسكندريه تتراجع بارباحها بنهايه يونيو": {
+    "meaning": "The company's full-year or fiscal period financial statements reflect a decrease in net income at the close of June, indicating that total revenues grew at a slower pace than operating expenses and production inputs such as wheat and energy.",
+    "meaning_ar": "تُظهر القوائم المالية للشركة تراجعاً في صافي أرباح الفترة المنتهية في يونيو، وهو ما يعكس نمو الإيرادات بمعدل أقل من التكاليف التشغيلية ومدخلات الإنتاج مثل القمح والطاقة."
+  },
   "مطالبات بفرص عادله لشركات الطاقه الصغيره والمتوسطه في مبادره شمس الصناعه": {
     "meaning": "The initiative allocates industrial solar energy contracts and procurement quotas among market participants, determining the eligibility and access criteria for small and medium-sized enterprises alongside larger developers.",
     "meaning_ar": "تحدد المبادرة حصص التوريد وعقود الطاقة الشمسية للقطاع الصناعي بين الشركات العاملة، وترسي معايير الأهلية والمشاركة للشركات الصغيرة والمتوسطة إلى جانب المطورين الكبار."
@@ -4924,6 +4948,10 @@
   "موجه بيع السندات تعيد توزيع فاتوره الدين عالميا": {
     "meaning": "A widespread drop in bond prices raises benchmark yields, which alters the structure of borrowing costs and debt service obligations for sovereign and corporate issuers across global markets.",
     "meaning_ar": "يؤدي انخفاض أسعار السندات إلى ارتفاع العوائد القياسية، مما يغير هيكل تكاليف الاقتراض وخدمة الدين للجهات السيادية والشركات عبر الأسواق المالية العالمية."
+  },
+  "موديوباي تستهدف ضخ مزيدا من الاستثمارات بمجال تصنيع البطاقات": {
+    "meaning": "Capital allocation toward card manufacturing expands operational capacity and physical infrastructure in the payment instruments sector.",
+    "meaning_ar": "يمثل تخصيص رأس المال لتصنيع البطاقات توسيعاً للطاقة التشغيلية والبنية التحتية المادية في قطاع أدوات الدفع."
   },
   "موسسه البترول الكويتيه تعرض نقل شحنات من سفينه لاخري خارج مضيق هرمز": {
     "meaning": "Ship-to-ship (STS) cargo transfer outside the Strait of Hormuz establishes an alternative maritime logistics mechanism that shifts crude oil loading operations beyond a regional chokepoint.",
