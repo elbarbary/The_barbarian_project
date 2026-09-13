@@ -7,12 +7,12 @@
  "sector": "Trade & Distributors",
  "sector_ar": "تجارة و موزعون",
  "market": {
-  "last_close": 249,
+  "last_close": 251.59,
   "date": "2026-09-13",
   "open": 251.22,
   "high": 252,
   "low": 247,
-  "volume": 2371
+  "volume": 4059
  },
  "price_history": [
   {
@@ -1318,16 +1318,16 @@
  ],
  "profile": {
   "shares_outstanding": 9600000,
-  "perf_1w": -1.7518939393939386,
-  "perf_1m": -5.746082216670454,
-  "perf_3m": 23.84362876753208,
-  "avg_volume_30d": 94052.70000000003,
-  "relative_volume_10d": 0.05491845616830851,
+  "perf_1w": -0.7299558080808058,
+  "perf_1m": -4.765690059807708,
+  "perf_3m": 25.131801452302795,
+  "avg_volume_30d": 94108.9666666667,
+  "relative_volume_10d": 0.09401687624933118,
   "history_bars": 0,
-  "market_cap": 2385696000.0,
+  "market_cap": 2384544000.0,
   "market_cap_source": "EGX",
-  "trades": 39,
-  "turnover": 773203,
+  "trades": 68,
+  "turnover": 1071877,
   "median_volume_20d": 33233,
   "rv20": 0.8276412000120362,
   "normal_value_30d": 10753077.205000002,
