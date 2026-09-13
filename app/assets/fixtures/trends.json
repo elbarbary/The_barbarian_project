@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-09-10",
   "window_sessions": 250,
-  "count": 268,
+  "count": 269,
   "items": {
     "AALR": {
       "ticker": "AALR",
@@ -1693,6 +1693,25 @@
       "isNearHigh52": false,
       "isNewHigh": false,
       "sessions": 126
+    },
+    "EGS924K1C018": {
+      "ticker": "EGS924K1C018",
+      "close": 0.792,
+      "date": "2026-09-10",
+      "high52": 0.89,
+      "high52Date": "2026-09-01",
+      "low52": 0.7,
+      "low52Date": "2026-09-07",
+      "distHigh52": -10.7,
+      "distLow52": 12.7,
+      "chg1m": -10.7,
+      "chg3m": -10.7,
+      "chg1y": -10.7,
+      "ma50": 0.76,
+      "aboveMa50": true,
+      "isNearHigh52": false,
+      "isNewHigh": false,
+      "sessions": 8
     },
     "EGSA": {
       "ticker": "EGSA",
