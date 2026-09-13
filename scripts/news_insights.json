@@ -47,6 +47,10 @@
     "meaning": "The transaction executes an internal restructuring by transferring a 25% equity stake in Egyptian Financial & Industrial Company between related investment entities, shifting direct ownership and voting rights on the shareholder registry without altering the company's core operations.",
     "meaning_ar": "تنفذ الصفقة إعادة هيكلة ملكية داخلية عبر نقل حصة 25% من أسهم شركة المالية والصناعية المصرية بين كيانات استثمارية مرتبطة، مما يعيد توزيع الملكية المباشرة وحقوق التصويت في سجل المساهمين دون تغيير في العمليات التشغيلية الأساسية للشركة."
   },
+  "%3.4 معدل التضخم في سلطنه عمان خلال اغسطس 2026": {
+    "meaning": "A 3.4% inflation rate measures the annual pace of consumer price level changes across goods and services in Oman, serving as a macroeconomic indicator for regional purchasing power and cross-border trade pricing.",
+    "meaning_ar": "يعكس معدل التضخم البالغ 3.4% وتيرة التغير السنوي في المستوى العام لأسعار سلع وخدمات المستهلكين في سلطنة عُمان، ويحدد معياراً للاستقرار النقدي وتسعير التبادل التجاري الإقليمي."
+  },
   "%33 نموا بتراخيص السيارات الملاكي اول 8 اشهر من 2026": {
     "meaning": "A 33% increase in private car licensing reflects higher transaction volumes and vehicle registrations across traffic units, directly linking to automotive distribution inventory turnover, import flow, and consumer auto financing activity.",
     "meaning_ar": "يعكس نمو تراخيص السيارات الملاكي بنسبة 33% زيادة في حجم مبيعات وتسجيل المركبات لدى وحدات المرور، وهو ما يرتبط بمعدلات تدوير مخزون شبكات توزيع السيارات وتدفقات الاستيراد ونشاط التمويل الاستهلاكي."
@@ -1831,6 +1835,10 @@
     "meaning": "Higher US interest rates increase the yield on fixed-income dollar assets, raising the opportunity cost of holding non-yielding commodities like gold and exerting downward price pressure on the metal.",
     "meaning_ar": "يؤدي رفع أسعار الفائدة الأمريكية إلى زيادة عائد الأصول الدولارية ذات الدخل الثابت، مما يرفع تكلفة الفرصة البديلة لحيازة الذهب كأصل لا يدر عائدًا ويضغط على أسعاره عالميًا."
   },
+  "الرقابه الماليه تتعاون مع الاوروبي لاعاده الاعمار لزياده جاذبيه القطاع غير المصرفي": {
+    "meaning": "The partnership provides technical assistance and institutional support from the European Bank for Reconstruction and Development to the Financial Regulatory Authority, updating the regulatory frameworks and governance standards governing non-banking financial institutions.",
+    "meaning_ar": "توفر هذه الشراكة دعماً فنياً ومؤسسياً من البنك الأوروبي لإعادة الإعمار والتنمية للهيئة العامة للرقابة المالية، وتعمل على تحديث الأطر التنظيمية ومعايير الحوكمة المنظمة للأنشطة المالية غير المصرفية."
+  },
   "الرقابه الماليه تخفف اشتراطات مراقبي حسابات الشركات المهنيه في مجال التامين": {
     "meaning": "The Financial Regulatory Authority lowers the eligibility criteria for professional accounting firms auditing insurance entities, which expands the registry of accredited statutory auditors serving the sector.",
     "meaning_ar": "تُخفّض الهيئة العامة للرقابة المالية معايير القيد لمكاتب المحاسبة والشركات المهنية المراجِعة للجهات التأمينية، مما يوسع قاعدة مراقبي الحسابات المعتمدين لمزاولة أعمال التدقيق في القطاع."
@@ -3275,6 +3283,10 @@
   "جي بي كوربوريشن تعين نيفين الطاهري عضوا مستقلا بمجلس الاداره": {
     "meaning": "The appointment of an independent board member adds non-executive oversight to the company's governance structure, aligning corporate management with regulatory board-composition standards on the EGX.",
     "meaning_ar": "يضيف تعيين عضو مستقل في مجلس الإدارة رقابة غير تنفيذية إلى هيكل حوكمة الشركة، بما يتوافق مع المعايير التنظيمية لتشكيل مجالس الإدارة في البورصة المصرية."
+  },
+  "جي بي كوربوريشن توافق علي تقديم تمويل الي GB Auto Tanzania لدعم عملياتها وانشطتها التجاريه": {
+    "meaning": "This intra-group financing operates as parent-company working capital liquidity for an offshore subsidiary, structured on the consolidated balance sheet as an intercompany loan.",
+    "meaning_ar": "يُمثل هذا الإجراء تمويلاً داخلياً بين أطراف ذات علاقة، حيث تُقدّم الشركة الأم سيولة لتغطية رأس المال العامل لتابعتها الخارجية، ويُسجّل محاسبياً كقرض بيني ضمن القوائم المالية المجمعة."
   },
   "جي بي مورجان: 870 مليار دولار انفاق شركات الذكاء الاصطناعي خلال اخر 12 شهرا": {
     "meaning": "This volume of expenditure reflects large-scale capital deployment by technology firms into computing infrastructure, data centers, specialized hardware procurement, and research operations.",
@@ -4985,6 +4997,10 @@
     "meaning": "Global macroeconomic shocks, including imported commodity price inflation and exchange rate fluctuations, directly transmit into the domestic cost structure, offsetting the transmission of aggregate fiscal stabilization to consumer-level purchasing power.",
     "meaning_ar": "تنتقل الصدمات الاقتصادية العالمية، كارتفاع أسعار السلع المستوردة وتقلبات أسعار الصرف، مباشرة إلى هيكل التكاليف المحلي، مما يعوض أثر استقرار المؤشرات المالية الكلية على القوة الشرائية للمستهلكين."
   },
+  "مكاسب بختام التعاملات.. اسعار الريال السعودي بالتزامن مع رحلات العمره": {
+    "meaning": "Seasonal demand for foreign currency to cover Umrah travel expenses directly absorbs retail foreign exchange liquidity and drives price movements in the Saudi Riyal exchange rate.",
+    "meaning_ar": "يؤدي الطلب الموسمي على العملة الأجنبية لتغطية نفقات رحلات العمرة إلى امتصاص السيولة النقدية المتاحة من الريال السعودي، مما يحدد اتجاهات أسعار صرفه في السوق المصرفي."
+  },
   "ملف.. صناع يعلقون امالا واسعه علي برنامج التحول الاقتصادي": {
     "meaning": "Economic transformation programs alter the operational framework for manufacturers through structural adjustments, including industrial incentives, infrastructure updates, and regulatory revisions. These measures directly modify input costs, localized production capacities, and capital allocation models across the industrial sector.",
     "meaning_ar": "تحدد برامج التحول الاقتصادي الأطر التشغيلية للمصنعين عبر تعديلات هيكلية تشمل الحوافز الصناعية، وتحديثات البنية التحتية، والأطر التنظيمية، مما يؤثر على تكاليف المدخلات ونسب المكون المحلي وهياكل تخصيص رأس المال في القطاع الصناعي."
@@ -5329,6 +5345,10 @@
     "meaning": "This represents an internal administrative action within the public education sector concerning state school management and workforce governance, carrying no direct mechanism for capital markets or commercial enterprises.",
     "meaning_ar": "يمثل هذا الإجراء نشاطاً إدارياً داخلياً ضمن قطاع التعليم العام يخص إدارة الكوادر والقيادات في المدارس الحكومية، دون وجود آلية تشغيلية ترتبط بسوق المال أو الشركات التجارية."
   },
+  "وزير التموين يوجه بتكثيف ضخ السلع الاكثر اقبالا ضمن مبادره خفض الاسعار": {
+    "meaning": "The directive increases the volume and frequency of inventory distributions through state-affiliated retail channels, shifting public procurement and logistics capacities toward high-turnover consumer staples under pre-agreed pricing structures.",
+    "meaning_ar": "يقضي التوجيه بزيادة وتيرة وضخ كميات المخزون السلعي عبر منافذ التوزيع التابعة للدولة، مع توجيه القدرات اللوجستية وعمليات الشراء الحكومي نحو السلع الاستهلاكية الأساسية ذات معدلات الدوران المرتفعة وفق أطر سعرية محددة مسبقاً."
+  },
   "وزير التموين يوجه بتكثيف ضخ السلع الاكثر اقبالا في مبادره تخفيض الاسعار": {
     "meaning": "This operational directive increases state-managed inventory allocation and distribution frequency for high-turnover staple goods through public consumer complexes within government price-stabilisation channels.",
     "meaning_ar": "يمثل هذا التوجيه التنفيذي زيادة في معدلات ضخ وتوزيع المخزون السلعي للسلع الأساسية سريعة الدوران عبر المجمعات الاستهلاكية ومنافذ مبادرات خفض الأسعار التابعة للدولة."
@@ -5496,6 +5516,10 @@
   "وكاله الطاقه: الطلب العالمي علي الفحم يتجه لتسجيل مستوي قياسي": {
     "meaning": "Global coal demand directly influences international benchmark energy prices, which form the base input cost for heavy industries such as cement manufacturers relying on imported coal for clinker production.",
     "meaning_ar": "يؤثر الطلب العالمي على الفحم بشكل مباشر على الأسعار المرجعية الدولية للطاقة، والتي تمثل تكلفة المدخلات الأساسية للصناعات الثقيلة مثل شركات الأسمنت التي تعتمد على الفحم المستورد في إنتاج الكلنكر."
+  },
+  "يتجاوز 169 جنيها للبيع.. سعر الدينار الكويتي اليوم الاحد 13-9-2026 بالبنوك": {
+    "meaning": "The exchange rate of the Kuwaiti Dinar crossing 169 Egyptian Pounds reflects the current interbank pricing dynamics and currency valuation, directly determining the domestic currency cost of imports, debt settlements, and foreign remittances denominated in KWD.",
+    "meaning_ar": "يعكس تجاوز سعر صرف الدينار الكويتي 169 جنيهًا مصريًا آليات التسعير الحالية بين البنوك وتقييم العملة، وهو ما يحدد بصورة مباشرة تكلفة الواردات وتسوية الالتزامات وتحويلات العاملين بالخارج المقومة بالدينار بالعملة المحلية."
   },
   "يو بي اس يعيد شراء ديون علي كريدي سويس بقيمه 7.9 مليار دولار": {
     "meaning": "The bank repurchases outstanding debt securities issued by Credit Suisse prior to maturity, extinguishing these obligations from its consolidated balance sheet and modifying its total liabilities and financing costs.",
