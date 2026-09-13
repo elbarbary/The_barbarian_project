@@ -383,6 +383,10 @@
     "meaning": "A decline in consolidated profits for an insurer reflects a contraction in net underwriting results, driven by higher claims paid and operational expenses, or lower net investment returns across the parent and subsidiary entities.",
     "meaning_ar": "يعكس تراجع الأرباح المجمعة لشركة التأمين انخفاضاً في نتائج الاكتتاب التأميني جراء ارتفاع التعويضات المسددة والتكاليف التشغيلية، أو تراجع عوائد المحفظة الاستثمارية للشركة الأم وتابعيها."
   },
+  "e finance board clears h1 2026 dividends": {
+    "meaning": "Board approval of interim dividends allocates a portion of accumulated retained earnings for distribution to shareholders, which reduces the company's cash balances and book equity upon execution.",
+    "meaning_ar": "يمثل اعتماد مجلس الإدارة لتوزيعات الأرباح المرحلية تخصيصاً لجزء من الأرباح المحتجزة لتوزيعها على المساهمين، مما يترتب عليه خفض الأرصدة النقدية وحقوق الملكية الدفترية للشركة عند التنفيذ."
+  },
   "egx shows positive performance on sunday sep 6": {
     "meaning": "The main market indices close higher at the end of the trading session, reflecting an aggregate increase in executed transaction prices across listed equities.",
     "meaning_ar": "تغلق مؤشرات السوق الرئيسية على ارتفاع بنهاية جلسة التداول، مما يعكس زيادة إجمالية في أسعار الصفقات المنفذة عبر الأسهم المقيدة."
@@ -3072,6 +3076,10 @@
     "meaning": "Local automotive assembly expands manufacturing lines to include new completely-knocked-down (CKD) or semi-knocked-down (SKD) operations within domestic facilities. This setup utilizes local component suppliers and operates under domestic manufacturing customs frameworks rather than finished vehicle import duties.",
     "meaning_ar": "يتضمن التجميع المحلي للسيارات إضافة خطوط إنتاج لتجميع فئات جديدة بنظام الأجزاء المفككة داخل المنشآت الصناعية المحلية. وتعتمد هذه الآلية التشغيلية على موردي المكونات المحلية وتخضع للأطر الجمركية والضريبية الخاصة بالتصنيع المحلي بدلاً من رسوم استيراد السيارات كاملة الصنع."
   },
+  "تيلدا تتيح ربط بطاقتها بتطبيق انستاباي بالتعاون مع بنك القاهره": {
+    "meaning": "This integration connects Telda prepaid cards directly to the Central Bank of Egypt's Instant Payment Network (IPN) through Banque du Caire as the sponsoring settlement bank, enabling real-time fund transfers between Telda accounts and the domestic banking network.",
+    "meaning_ar": "يربط هذا التكامل بطاقات تيلدا مسبقة الدفع مباشرة بشبكة المدفوعات اللحظية (IPN) التابعة للبنك المركزي المصري عبر بنك القاهرة كبنك راعٍ للتسوية، مما يتيح التحويلات المالية الفورية بين حسابات تيلدا والشبكة المصرفية المحلية."
+  },
   "ثاندر تعتزم تاسيس صندوق عقاري متعدد الاصدارات قبل نهايه العام": {
     "meaning": "Establishing a multi-issuance real estate investment fund creates a legal structure that pools investor capital across separate tranches to acquire and manage real estate assets under a single operational umbrella.",
     "meaning_ar": "يتضمن تأسيس صندوق استثمار عقاري متعدد الإصدارات إنشاء هيكل قانوني يجمع رؤوس أموال المستثمرين عبر شرائح منفصلة للاستحواذ على أصول عقارية وإدارتها تحت مظلة تشغيلية واحدة."
@@ -5268,6 +5276,10 @@
   "يوني كريديت: تقليص الاعتماد علي الدولار يعيد تشكيل الطلب علي سندات الخزانه الامريكيه": {
     "meaning": "Central banks and international institutions reallocate foreign exchange reserves away from the US dollar into alternative currencies and assets, directly altering the composition and geographical distribution of institutional buying for US sovereign debt instruments.",
     "meaning_ar": "تعيد البنوك المركزية والمؤسسات الدولية توزيع احتياطياتها من النقد الأجنبي بعيداً عن الدولار الأمريكي نحو عملات وأصول بديلة، مما يغير التركيبة الهيكلية والتوزيع الجغرافي للمشترين المؤسسيين لأدوات الدين السيادي الأمريكي."
+  },
+  "يونيباك: جدوي للتنميه الصناعيه تخفض حصتها في الشركه الي 13.87%": {
+    "meaning": "This transaction represents a change in the company's equity ownership structure, altering the major shareholder's voting weight and the composition of the firm's free float on the exchange.",
+    "meaning_ar": "يمثل هذا الإجراء تغيراً في هيكل ملكية رأسمال الشركة، بما يُعدّل الوزن التصويتي للمساهم الرئيسي ونسبة الأسهم حرة التداول المتاحة في البورصة."
   },
   "ڤاليو تطلق رسميا اول مرحله من اعمالها في الاردن": {
     "meaning": "This operational rollout establishes cross-border geographic expansion, deploying the company's consumer finance technology platform and merchant partner network into the Jordanian market.",
