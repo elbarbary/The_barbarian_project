@@ -3748,6 +3748,10 @@
     "meaning": "Egg retail pricing reflects the daily pass-through of farm-gate production costs, feed input expenses, and distribution margins to end consumers in the domestic market.",
     "meaning_ar": "يعكس سعر بيع بيض المائدة للمستهلك النهائي التمرير اليومي لتكاليف الإنتاج من المزارع، ومصروفات الأعلاف، وهامش أرباح سلاسل النقل والتوزيع في السوق المحلية."
   },
+  "سعر كرتونه البيض اليوم 13/9/2026 للمستهلك في السوق المحليه": {
+    "meaning": "This headline reports the daily consumer retail pricing for table eggs, which reflects farm-gate supply volumes, feed input costs, and distribution markups across the local poultry sector.",
+    "meaning_ar": "يعرض هذا العنوان أسعار التجزئة اليومية لبيض المائدة للمستهلك، والتي تعكس حجم المعروض من المزارع وتكاليف مدخلات الأعلاف وهامش التوزيع في قطاع الدواجن المحلي."
+  },
   "سعر كرتونه البيض اليوم 4/9/2026 للمستهلك في السوق المحليه": {
     "meaning": "This reflects the daily domestic retail pricing updates for table eggs, driven by poultry feed supply costs, farm-gate production expenses, and local consumer demand dynamics.",
     "meaning_ar": "يعكس هذا تحديثات أسعار التجزئة اليومية لبيض المائدة في السوق المحلي، والتي تتحدد بناءً على تكاليف الأعلاف ومصروفات الإنتاج في المزارع ومستويات الطلب الاستهلاكي."
@@ -4384,6 +4388,10 @@
   "ما هي ابرز القطاعات الاكثر تاثرا بتبني الذكاء الاصطناعي عالميا؟": {
     "meaning": "Global adoption of artificial intelligence alters core operating models across sectors such as technology, financial services, and healthcare by automating workflows and shifting operational expenditure toward computational infrastructure and software licensing.",
     "meaning_ar": "يُغير تبني الذكاء الاصطناعي عالميًا نماذج التشغيل الأساسية في قطاعات مثل التكنولوجيا والخدمات المالية والرعاية الصحية من خلال أتمتة تدفقات العمل وإعادة توجيه النفقات التشغيلية نحو البنية التحتية الحاسوبية وتراخيص البرمجيات."
+  },
+  "ما هي اسعار اللحوم بالمنافذ ومحلات الجزاره والسلاسل التجاريه اليوم الاحد 13 سبتمر 2026؟": {
+    "meaning": "Tracking meat prices across state-subsidized outlets, independent butcher shops, and modern retail chains reflects the consumer food inflation basket and structural differences in procurement costs and supply chain margins across distribution channels.",
+    "meaning_ar": "يعكس رصد أسعار اللحوم عبر المنافذ الحكومية ومحلات الجزارة والسلاسل التجارية حركة سلة التضخم الغذائي، ويُظهر الفروق الهيكلية في تكاليف التوريد وهوامش سلاسل الإمداد بين قنوات التوزيع المختلفة."
   },
   "ماريدايف تتحول للربحيه بقيمه 4.55 مليون دولار بالنصف الاول": {
     "meaning": "A transition to net profitability indicates that total operational revenues generated during the six-month period exceed aggregate operating expenses, financing costs, and taxes, shifting the company's bottom-line result on the income statement from a net loss to a net profit.",
