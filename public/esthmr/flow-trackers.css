@@ -949,3 +949,18 @@ button.om-holder-row:hover span { color: var(--accent); }
 @media (max-width: 768px) {
   .sl-heat-side { max-width: 104px; }
 }
+
+/* A channel, shut until it is asked for. Open, the three of them put four
+   hundred rows between the reader and the rest of the page. */
+.wm-channel-head { display: flex; width: 100%; align-items: center; gap: 12px;
+  justify-content: space-between; background: none; border: 0; padding: 0;
+  text-align: start; cursor: pointer; font: inherit; color: inherit; }
+.wm-channel-head h2 { margin: 2px 0 0; }
+.wm-channel-head > div > small { display: block; margin-top: 4px;
+  font-size: 11px; color: var(--t2); }
+.wm-chevron { font-size: 20px; line-height: 1; color: var(--t2);
+  width: 28px; height: 28px; display: grid; place-items: center;
+  border: 1px solid var(--line); border-radius: 999px; flex: none; }
+.wm-channel-head:hover .wm-chevron { color: var(--ink); border-color: var(--ink); }
+.wm-channel-body { margin-top: 14px; }
+.wm-filters { margin-top: 10px; }

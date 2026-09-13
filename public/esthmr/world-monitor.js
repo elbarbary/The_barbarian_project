@@ -30,6 +30,7 @@ const money = (v) => (finite(v)
    "m" after it gives ADPC "1.42Km" — one and a half thousand million, written
    as if it were a typo. The scale is applied before the formatter instead. */
 const filed = (v) => (finite(v) ? `${money(v * 1e6)} EGP` : '—');
+const upper = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 const tone = (v) => (v > 0 ? 'var(--up)' : v < 0 ? 'var(--down)' : 'var(--t2)');
 
 export const WINDOWS = [
@@ -38,14 +39,67 @@ export const WINDOWS = [
   ['quarter', 'This quarter', 'هذا الربع'],
 ];
 
-/** How remarkable a move was, in words a reader can check against the number. */
+/** How remarkable a move was, in words a reader can check against the number.
+ *
+ * Says what it is measuring, because both halves were doing work the reader
+ * could not see. "Bigger" is bigger IN SIZE — a fall of 6% and a rise of 6%
+ * are the same move here, which is what stops every crash reading as ordinary.
+ * And "typical" is the middle move of that history, not a mean, so a single
+ * violent week cannot drag it.
+ */
 export function remark(against, t) {
   if (!against || !finite(against.percentile)) {
     return t('not enough history to compare', 'لا يوجد تاريخ كافٍ للمقارنة');
   }
   return t(
-    `bigger than ${against.percentile.toFixed(0)}% of them, where a typical one is ${against.typical}%`,
-    `أكبر من ${against.percentile.toFixed(0)}٪ منها، والمعتاد ${against.typical}٪`);
+    `larger, up or down, than ${against.percentile.toFixed(0)}% of them; `
+    + `the middle one moved ${against.typical}%`,
+    `أكبر، صعوداً أو هبوطاً، من ${against.percentile.toFixed(0)}٪ منها؛ `
+    + `وتحرك الأوسط ${against.typical}٪`);
+}
+
+/* Stated filters, never a ranking.
+ *
+ * The three channels arrived as 403 alphabetical rows a reader had to scroll
+ * past to find anything — correct, and a wall. A filter that names its rule
+ * and returns however many companies meet it is the §8-safe way to cut that
+ * down: the rule does the choosing, and the count is whatever the market
+ * makes it. A list cut to a fixed length would make the publisher the one
+ * deciding who is at the top.
+ */
+export const FILTERS = {
+  rates: [
+    ['all', 'All of them', 'كلها', () => true],
+    ['soon', 'More than half reprices within a year', 'أكثر من نصفها يُعاد تسعيره خلال عام',
+      (c) => finite(c.repricingWithinAYear) && c.repricingWithinAYear > 50],
+    ['thin', 'Earns less than twice what it pays to borrow', 'تكسب أقل من ضعف ما تدفعه فائدةً',
+      (c) => finite(c.cover) && c.cover > 0 && c.cover < 2],
+  ],
+  inputs: [
+    ['all', 'All of them', 'كلها', () => true],
+    ['tight', 'Filed a gross margin under 10%', 'أودعت هامش ربح إجمالي أقل من ١٠٪',
+      (c) => finite(c.grossMargin) && c.grossMargin < 10],
+    ['wide', 'Filed a gross margin over 40%', 'أودعت هامش ربح إجمالي أكثر من ٤٠٪',
+      (c) => finite(c.grossMargin) && c.grossMargin > 40],
+  ],
+  currency: [
+    ['all', 'All of them', 'كلها', () => true],
+    ['held', 'Holds a net position in another currency', 'تحتفظ بصافي مركز بعملة أخرى',
+      (c) => (c.position || []).length > 0],
+    ['tenth', 'Currency was more than a tenth of the period’s profit',
+      'فروق العملة تجاوزت عُشر ربح الفترة',
+      (c) => finite(c.shareOfNetIncome) && Math.abs(c.shareOfNetIncome) > 10],
+  ],
+};
+
+export function filtersFor(id) {
+  return FILTERS[id] || [['all', 'All of them', 'كلها', () => true]];
+}
+
+export function applyFilter(channel, key) {
+  const rule = filtersFor(channel.id).find(([k]) => k === key)
+    || filtersFor(channel.id)[0];
+  return (channel.companies || []).filter(rule[3]);
 }
 
 function moveRow(row, window_, ar, t) {
@@ -123,67 +177,96 @@ const CHANNELS = {
   },
 };
 
-function channelPanel(channel, query, onSearch, ar, t) {
-  const needle = (query || '').trim().toLowerCase();
-  const rows = (channel.companies || []).filter((c) => !needle
-    || (c.ticker || '').toLowerCase().includes(needle)
-    || (c.name || '').toLowerCase().includes(needle));
+/* A channel, shut until it is asked for.
+ *
+ * The three of them arrived open, which put 403 alphabetical rows between the
+ * reader and anything else on the page. Correct, and a wall — the screen
+ * answered "what moved" and then made the reader assemble the rest. Shut, each
+ * one is its question and the number of companies that filed an answer to it,
+ * which is the part a reader chooses from.
+ */
+function channelPanel(channel, state, on, ar, t) {
   const spec = CHANNELS[channel.id];
   if (!spec) return null;
+  const open = !!state.open;
+  const key = state.filter || 'all';
+  const needle = (state.query || '').trim().toLowerCase();
   const warn = spec.warn || (() => null);
   const extra = spec.extra || (() => null);
+  const rule = filtersFor(channel.id).find(([k]) => k === key);
+  const matching = applyFilter(channel, key);
+  const rows = matching.filter((c) => !needle
+    || (c.ticker || '').toLowerCase().includes(needle)
+    || (c.name || '').toLowerCase().includes(needle));
 
-  return h('section', { className: 'ft-detail wm-channel' },
-    h('div', { className: 'ft-section-heading' },
+  return h('section', { className: `ft-detail wm-channel${open ? ' wm-open' : ''}` },
+    h('button', {
+      type: 'button', className: 'wm-channel-head',
+      'aria-expanded': String(open),
+      onClick: () => on.toggle(!open),
+    },
       h('div', null,
         h('span', { className: 'ft-eyebrow' }, t(spec.eyebrow[0], spec.eyebrow[1])),
-        h('h2', null, ar ? channel.questionAr : channel.question)
+        h('h2', null, ar ? channel.questionAr : channel.question),
+        h('small', null, t(`${channel.count} companies filed a figure`,
+                           `${channel.count} شركة أودعت رقماً`))
       ),
-      h('span', { className: 'ft-range-badge', dir: 'ltr' }, `${channel.count}`)
+      h('span', { className: 'wm-chevron', 'aria-hidden': 'true' }, open ? '−' : '+')
     ),
-    h('p', { className: 'ft-note' },
-      t(`All ${channel.count} — ${channel.filter}. In alphabetical order, with the filing each number came from. Nothing here says what a move means for a share price.`,
-        `كل الـ${channel.count} — ${channel.filterAr}. بالترتيب الأبجدي، ومع كل رقم الإفصاح الذي جاء منه. ولا شيء هنا يقول ماذا تعني أي حركة لسعر السهم.`)),
-    // Deliberately a level and not a move. Every other figure on this screen
-    // is placed against its own two years; the pound has no history kept here,
-    // so it gets a date and no percentile — and says as much.
-    channel.today && h('div', { className: 'wm-today' },
-      h('div', { className: 'wm-today-rates' },
-        channel.today.rates.map((r) => h('span', { key: r.code },
-          h('small', null, ar ? r.labelAr : r.label),
-          h('b', { dir: 'ltr' }, r.token)))),
-      h('small', { className: 'wm-today-note' },
-        `${channel.today.asOf} · ${ar ? channel.today.noteAr : channel.today.note}`)),
-    h('input', {
-      type: 'search', className: 'om-search',
-      placeholder: t('Search a company', 'ابحث عن شركة'),
-      'aria-label': t('Search a company', 'ابحث عن شركة'),
-      value: query || '',
-      onInput: (e) => onSearch(e.target.value),
-    }),
-    h('p', { className: 'om-register-count' },
-      t(`${rows.length} of ${channel.count}`, `${rows.length} من ${channel.count}`)),
-    h('div', { className: 'wm-rows' },
-      rows.length ? rows.map((c) => h('div', { key: c.ticker, className: 'wm-row' },
-        h('div', { className: 'wm-row-who' },
-          h('strong', null, c.ticker),
-          h('small', null, c.name || '')
-        ),
-        h('div', { className: 'wm-row-figures' },
-          spec.figures(c, t).map(([label, value, colour]) => h('span', { key: label },
-            h('small', null, label),
-            h('b', { dir: 'ltr', style: colour ? { color: colour } : null }, value)))),
-        // Before the extra, not after it: the extra spans the whole row, so a
-        // filing date placed behind it starts a fresh grid row and lands under
-        // the figures instead of beside them.
-        h('small', { className: 'wm-row-filed', dir: 'ltr' }, c.period || ''),
-        extra(c, t),
-        // A company that filed two numbers which do not describe each other is
-        // told on, rather than read as if one of them stood alone.
-        warn(c, t) && h('small', { className: 'wm-row-warn' }, warn(c, t))
-      )) : h('p', { className: 'om-reg-none' },
-        t('No company here matches that.', 'لا شركة مطابقة هنا.'))
-    )
+    open ? h('div', { className: 'wm-channel-body' },
+      h('p', { className: 'ft-note' },
+        // The filter reads as a sentence now that "All 119 —" no longer opens
+        // it; the count moved to the header, where it is visible shut.
+        t(`${upper(channel.filter)}. In alphabetical order, with the filing each number came from. Nothing here says what a move means for a share price.`,
+          `${channel.filterAr}. بالترتيب الأبجدي، ومع كل رقم الإفصاح الذي جاء منه. ولا شيء هنا يقول ماذا تعني أي حركة لسعر السهم.`)),
+      // Deliberately a level and not a move. Every other figure on this screen
+      // is placed against its own two years; the pound has no history kept
+      // here, so it gets a date and no percentile — and says as much.
+      channel.today && h('div', { className: 'wm-today' },
+        h('div', { className: 'wm-today-rates' },
+          channel.today.rates.map((r) => h('span', { key: r.code },
+            h('small', null, ar ? r.labelAr : r.label),
+            h('b', { dir: 'ltr' }, r.token)))),
+        h('small', { className: 'wm-today-note' },
+          `${channel.today.asOf} · ${ar ? channel.today.noteAr : channel.today.note}`)),
+      // Each pill names its rule and returns however many meet it. The rule
+      // chooses; the count is whatever the market makes it.
+      h('div', { className: 'ft-pills wm-filters' },
+        filtersFor(channel.id).map(([k, en, arabic]) => h('button', {
+          key: k, type: 'button', className: 'ft-pill',
+          'aria-pressed': String(k === key),
+          onClick: () => on.filter(k),
+        }, t(en, arabic)))
+      ),
+      h('input', {
+        type: 'search', className: 'om-search',
+        placeholder: t('Search a company', 'ابحث عن شركة'),
+        'aria-label': t('Search a company', 'ابحث عن شركة'),
+        value: state.query || '',
+        onInput: (e) => on.search(e.target.value),
+      }),
+      h('p', { className: 'om-register-count' },
+        key === 'all'
+          ? t(`${rows.length} of ${channel.count}`, `${rows.length} من ${channel.count}`)
+          : t(`${rows.length} of ${channel.count} — ${rule ? rule[1] : ''}`,
+              `${rows.length} من ${channel.count} — ${rule ? rule[2] : ''}`)),
+      h('div', { className: 'wm-rows' },
+        rows.length ? rows.map((c) => h('div', { key: c.ticker, className: 'wm-row' },
+          h('div', { className: 'wm-row-who' },
+            h('strong', null, c.ticker),
+            h('small', null, c.name || '')
+          ),
+          h('div', { className: 'wm-row-figures' },
+            spec.figures(c, t).map(([label, value, colour]) => h('span', { key: label },
+              h('small', null, label),
+              h('b', { dir: 'ltr', style: colour ? { color: colour } : null }, value)))),
+          h('small', { className: 'wm-row-filed', dir: 'ltr' }, c.period || ''),
+          extra(c, t),
+          warn(c, t) && h('small', { className: 'wm-row-warn' }, warn(c, t))
+        )) : h('p', { className: 'om-reg-none' },
+          t('No company here matches that.', 'لا شركة مطابقة هنا.'))
+      )
+    ) : null
   );
 }
 
@@ -240,9 +323,15 @@ export function worldMonitor(component, data, ar) {
         (doc.exchange || []).map((row) => moveRow(row, window_, ar, t)).filter(Boolean))
     ),
 
-    (doc.channels || []).map((channel) => channelPanel(
-      channel, st[`world${channel.id}Search`],
-      (value) => search(channel.id, value), ar, t)),
+    (doc.channels || []).map((channel) => channelPanel(channel, {
+      open: !!st[`world${channel.id}Open`],
+      filter: st[`world${channel.id}Filter`],
+      query: st[`world${channel.id}Search`],
+    }, {
+      toggle: (v) => component.setState({ [`world${channel.id}Open`]: v }),
+      filter: (k) => component.setState({ [`world${channel.id}Filter`]: k }),
+      search: (v) => search(channel.id, v),
+    }, ar, t)),
 
     doc.foreignMoney && h('section', { className: 'ft-detail wm-block' },
       h('h2', null, t('Who was on each side', 'من كان في كل جانب')),

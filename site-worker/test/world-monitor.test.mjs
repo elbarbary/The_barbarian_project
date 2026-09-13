@@ -29,6 +29,10 @@ function withClass(node, name) {
   return [...hit, ...(node?.children || []).flatMap((n) => withClass(n, name))];
 }
 
+/** Every channel open — most of these tests are about what is inside one. */
+const opened = (doc = published) => Object.fromEntries(
+  (doc.channels || []).map((c) => [`world${c.id}Open`, true]));
+
 function screen(state = {}, lang = 'en', doc = published) {
   const c = new Component({});
   Object.assign(c.state, { lang, screen: 'world' }, state);
@@ -73,14 +77,16 @@ test('a move with no history behind it says so instead of drawing a bar of nothi
   const t = (en) => en;
   assert.match(WM.remark(null, t), /not enough history/);
   assert.match(WM.remark({ percentile: 87.3, typical: 3.17 }, t), /87% of them/);
-  assert.match(WM.remark({ percentile: 87.3, typical: 3.17 }, t), /typical one is 3.17%/);
+  // Says what it measures: size regardless of direction, and the MIDDLE move.
+  assert.match(WM.remark({ percentile: 87.3, typical: 3.17 }, t), /up or down/);
+  assert.match(WM.remark({ percentile: 87.3, typical: 3.17 }, t), /middle one moved 3.17%/);
 });
 
 test('every company list is complete and alphabetical, and ranks nobody', () => {
   // Asserted on what the SCREEN draws, not on what the document holds. A first
   // version of this test read the published file and a screen that reordered
   // its rows by size of exposure passed it without a murmur.
-  const view = screen();
+  const view = screen(opened());
   const panels = withClass(view, 'wm-channel');
   assert.equal(panels.length, published.channels.length);
   panels.forEach((panel, i) => {
@@ -92,13 +98,15 @@ test('every company list is complete and alphabetical, and ranks nobody', () => 
     assert.deepEqual(drawn, [...drawn].sort(),
                      `${channel.id} is drawn in some order other than the alphabet`);
     assert.deepEqual(drawn, channel.companies.map((c) => c.ticker), channel.id);
-    // And the screen says the count out loud, so a reader knows it is all of them.
-    assert.match(text(panel), new RegExp(`All ${channel.count}`));
+    // And the screen says the count out loud, twice: in the shut header, and
+    // again against however many the chosen filter returns.
+    assert.match(text(panel), new RegExp(`${channel.count} companies filed a figure`));
+    assert.match(text(panel), new RegExp(`${channel.count} of ${channel.count}`));
   });
 });
 
 test('searching a channel narrows it without reordering it', () => {
-  const view = screen();
+  const view = screen(opened());
   const rates = published.channels.find((c) => c.id === 'rates');
   const box = all(view, 'input').find((n) => n.attrs.placeholder?.includes('company'));
   assert.ok(box, 'no search box on a channel');
@@ -124,12 +132,12 @@ test('a company whose two filed numbers disagree is told on', () => {
   const odd = published.channels.flatMap((c) => c.companies)
     .filter((c) => c.costExceedsBorrowings);
   assert.ok(odd.length > 0, 'the published file has no contradiction to check');
-  const out = text(screen());
-  assert.match(out, /finile|finance cost larger than the borrowings/);
+  const out = text(screen(opened()));
+  assert.match(out, /finance cost larger than the borrowings/);
 });
 
 test('nothing on the screen tells a reader what to do', () => {
-  const out = text(screen());
+  const out = text(screen(opened()));
   const claims = out.split(/(?<=[.:;])\s+/)
     .filter((line) => !/\b(no|not|never|nothing|neither)\b/i.test(line));
   claims.forEach((line) => assert.doesNotMatch(
@@ -139,7 +147,7 @@ test('nothing on the screen tells a reader what to do', () => {
 });
 
 test('the Arabic screen carries the same refusal', () => {
-  assert.match(text(screen({}, 'ar')), /ولا شيء هنا يقول ماذا تعني أي حركة لسعر السهم/);
+  assert.match(text(screen(opened(), 'ar')), /ولا شيء هنا يقول ماذا تعني أي حركة لسعر السهم/);
 });
 
 test('without the document the screen says so rather than drawing an empty one', () => {
@@ -155,7 +163,7 @@ test('a figure filed in millions is not printed as thousands of millions', () =>
   // ADPC filed borrowings of 1,420 million. Formatted compactly and given an
   // "m", that reached the screen as "1.42Km" — one and a half thousand
   // million, written as if it were a typo.
-  const out = text(screen());
+  const out = text(screen(opened()));
   assert.doesNotMatch(out, /\d[KMB]m\b/, 'a compact figure still carries a stray unit');
   assert.match(out, /\d+(\.\d+)?[KMBT]? EGP/, 'no figure carries its currency');
 });
@@ -193,7 +201,8 @@ CURRENCY.today = {
   noteAr: 'سعر الصرف يوم إعداد هذه الصفحة.',
 };
 const withCurrency = { ...published, channels: [...published.channels, CURRENCY] };
-const currencyPanel = () => withClass(screen({}, 'en', withCurrency), 'wm-channel').at(-1);
+const currencyPanel = () => withClass(
+  screen(opened(withCurrency), 'en', withCurrency), 'wm-channel').at(-1);
 
 test('the currency channel draws one chip per currency the note printed', () => {
   const rows = withClass(currencyPanel(), 'wm-row');
@@ -235,14 +244,14 @@ test('the currency channel refuses to rank and says how many there are', () => {
     (row) => text(withClass(row, 'wm-row-who')[0].children
       .find((n) => n.tag === 'strong')).trim());
   assert.deepEqual(drawn, [...drawn].sort());
-  assert.match(text(panel), /All 3/);
+  assert.match(text(panel), /3 companies filed a figure/);
   assert.match(text(panel), /Nothing here says what a move means for a share price/);
 });
 
 test('a channel the screen has no figures for is left undrawn, not half-drawn', () => {
   const unknown = { ...withCurrency,
     channels: [...published.channels, { ...CURRENCY, id: 'weather' }] };
-  const panels = withClass(screen({}, 'en', unknown), 'wm-channel');
+  const panels = withClass(screen(opened(unknown), 'en', unknown), 'wm-channel');
   assert.equal(panels.length, published.channels.length);
 });
 
@@ -265,7 +274,76 @@ test('the pound is shown as a dated level, and says it is not a percentile', () 
 test('a channel with no rate block of its own draws none', () => {
   const bare = { ...withCurrency,
     channels: [...published.channels, { ...CURRENCY, today: null }] };
-  const panel = withClass(screen({}, 'en', bare), 'wm-channel').at(-1);
+  const panel = withClass(screen(opened(bare), 'en', bare), 'wm-channel').at(-1);
   assert.equal(withClass(panel, 'wm-today').length, 0);
   assert.ok(withClass(panel, 'wm-row').length > 0, 'and drew no companies either');
+});
+
+/* Shut by default, and a filter that names its own rule. */
+
+test('the channels are shut until a reader asks for one', () => {
+  // Open, the three of them put 403 alphabetical rows between the reader and
+  // everything else on the page. The screen answered "what moved" and then
+  // made the reader assemble the rest.
+  const view = screen();
+  assert.equal(withClass(view, 'wm-row').length, 0, 'a channel opened itself');
+  const heads = withClass(view, 'wm-channel-head');
+  assert.equal(heads.length, published.channels.length);
+  heads.forEach((head, i) => {
+    assert.equal(head.attrs['aria-expanded'], 'false');
+    // Shut, it still says what it holds and how much of it.
+    assert.match(text(head),
+                 new RegExp(`${published.channels[i].count} companies filed a figure`));
+  });
+});
+
+test('opening one leaves the others shut', () => {
+  const c = new Component({});
+  Object.assign(c.state, { lang: 'en', screen: 'world' });
+  c.setData({ demo: false, companies: [], series: [], fins: [], worldMonitor: published });
+  const view = flowTrackers(c, c.data(), false).screen;
+  withClass(view, 'wm-channel-head')[0].events.click();
+  assert.equal(c.state[`world${published.channels[0].id}Open`], true);
+  const again = flowTrackers(c, c.data(), false).screen;
+  const panels = withClass(again, 'wm-channel');
+  assert.ok(withClass(panels[0], 'wm-row').length > 0, 'the one picked stayed shut');
+  assert.equal(withClass(panels[1], 'wm-row').length, 0, 'the others opened too');
+});
+
+test('a filter states its rule and returns however many meet it', () => {
+  // §8: the rule does the choosing, so the count is whatever the market makes
+  // it. A list cut to a fixed length would make us the ones at the top.
+  const rates = published.channels.find((c) => c.id === 'rates');
+  const rule = WM.filtersFor('rates').find(([k]) => k === 'soon');
+  assert.ok(rule, 'the repricing filter is gone');
+  const matching = WM.applyFilter(rates, 'soon');
+  assert.deepEqual(matching.map((c) => c.ticker), [...matching.map((c) => c.ticker)].sort(),
+                   'filtering reordered the companies');
+  matching.forEach((c) => assert.ok(c.repricingWithinAYear > 50, c.ticker));
+  // Every company that meets it is there — none dropped to make a round number.
+  const should = rates.companies.filter((c) => c.repricingWithinAYear > 50);
+  assert.equal(matching.length, should.length);
+});
+
+test('choosing a filter narrows the rows and says which rule did it', () => {
+  const c = new Component({});
+  Object.assign(c.state, { lang: 'en', screen: 'world', worldratesOpen: true });
+  c.setData({ demo: false, companies: [], series: [], fins: [], worldMonitor: published });
+  const view = flowTrackers(c, c.data(), false).screen;
+  const panel = withClass(view, 'wm-channel')[0];
+  const total = withClass(panel, 'wm-row').length;
+  const pills = all(withClass(panel, 'wm-filters')[0], 'button');
+  pills[1].events.click();
+  assert.equal(c.state.worldratesFilter, 'soon');
+  const again = withClass(flowTrackers(c, c.data(), false).screen, 'wm-channel')[0];
+  const narrowed = withClass(again, 'wm-row').length;
+  assert.ok(narrowed > 0 && narrowed < total, `${narrowed} of ${total}`);
+  assert.match(text(again), /More than half reprices within a year/);
+});
+
+test('the rate block survives inside the channel it belongs to', () => {
+  // It was lost once while the panel was being rebuilt, and only a test that
+  // looked for it noticed.
+  const panel = currencyPanel();
+  assert.ok(withClass(panel, 'wm-today').length, 'the pound rate is gone again');
 });
