@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-09-13T12:31:36.162Z",
+ "updated_at": "2026-09-13T13:11:28.748Z",
  "sessions": [
   {
    "date": "2025-11-12",
@@ -2932,9 +2932,9 @@
     "EGX100EWI": 27705.1
    },
    "breadth": {
-    "up": 59,
+    "up": 61,
     "down": 171,
-    "flat": 53,
+    "flat": 51,
     "counted": 283,
     "basis": "session"
    },

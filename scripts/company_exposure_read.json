@@ -2361,6 +2361,19 @@
     "inputs",
     "currency"
    ]
+  },
+  "EAST": {
+   "ticker": "EAST",
+   "says": [
+    "For Q1 2026, the company filed borrowings it owes of 7.94B EGP with 100.0% of that repricing within a year under rates, alongside revenue filed of 8.53B EGP, gross profit filed of 2.87B EGP, and a gross margin of 33.6% under inputs.",
+    "Under currency, it filed a currency gain or loss filed of 87.5M EGP against profit filed for the period of 1.25B EGP, making that currency line as a share of the profit 7.0% for Q1 2026."
+   ],
+   "dropped": [],
+   "channels": [
+    "rates",
+    "inputs",
+    "currency"
+   ]
   }
  }
 }
