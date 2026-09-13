@@ -371,6 +371,10 @@
     "meaning": "The start of the academic year activates annual operational cycles for listed private education operators, educational publishers, and consumer stationery suppliers, involving tuition fee billing and inventory distribution.",
     "meaning_ar": "يتزامن بدء العام الدراسي مع تفعيل الدورات التشغيلية السنوية لمشغلي التعليم الخاص المدرجين ودور النشر التعليمية وموردي الأدوات المكتبية، والتي تشمل تحصيل الرسوم الدراسية وتوزيع المخزون السلعي."
   },
+  "banque du caire and telda connect prepaid mastercard to instapay": {
+    "meaning": "The integration links Telda's prepaid Mastercard issued via Banque du Caire directly to the National Instant Payment Network (IPN), enabling real-time peer-to-peer and account-to-card transfers between Egyptian bank accounts and the digital wallet.",
+    "meaning_ar": "يربط هذا التكامل بطاقات تيلدا المدفوعة مقدماً، والمصدرة عبر بنك القاهرة، مباشرة بشبكة المدفوعات اللحظية الوطنية (إنستاباي)، مما يتيح التحويلات الفورية بين الحسابات المصرفية المصرية والمحفظة الرقمية."
+  },
   "cairo poultry approves aman stake sale, and cairo financial leasing liquidation": {
     "meaning": "Divesting the equity stake in Aman and initiating the liquidation of Cairo Financial Leasing reallocates balance-sheet capital away from non-core financial services toward primary agribusiness operations while converting investment assets into cash balances.",
     "meaning_ar": "يُعيد التخارج من حصة شركة \"أمان\" وتصفية شركة \"القاهرة للتأجير التمويلي\" توجيه رأس مال الميزانية العمومية بعيداً عن الخدمات المالية غير الأساسية نحو العمليات التشغيلية الرئيسية للشركة، مع تحويل الأصول الاستثمارية إلى أرصدة نقدية."
@@ -5472,6 +5476,10 @@
   "“بيتي للصناعات الغذاييه” تعتزم ضخ 6 مليارات جنيه استثمارات في مصر": {
     "meaning": "This capital expenditure commitment allocates corporate funds directly into expanding production lines, processing facilities, and supply chain infrastructure within the domestic food manufacturing sector.",
     "meaning_ar": "يتضمن هذا التخصيص الرأسمالي توجيه سيولة نقدية مباشرة نحو توسيع خطوط الإنتاج، ومرافق التصنيع، والبنية التحتية لسلاسل التوريد داخل قطاع الصناعات الغذائية المحلي."
+  },
+  "“تاسي” دون عتبه 11 الاف نقطه بضغط من قطاع الطاقه": {
+    "meaning": "The Saudi Stock Exchange benchmark index (TASI) declines below the 11,000-point level, reflecting downward price movements in energy sector constituents that carry significant index weight.",
+    "meaning_ar": "يسجل المؤشر الرئيسي للسوق المالية السعودية (تاسي) تراجعاً دون مستوى 11 ألف نقطة، متأثراً بحركة هبوط في أسعار أسهم قطاع الطاقة التي تستحوذ على وزن نسبي مؤثر في تركيبة المؤشر."
   },
   "“ترامب” يدفع الحلفاء بعيدا عن امريكا": {
     "meaning": "Changes in international trade and geopolitical policies lead partner nations to diversify trade agreements, bilateral settlement currencies, and cross-border supply chains to decrease reliance on a single market.",
