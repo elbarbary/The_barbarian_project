@@ -967,3 +967,30 @@ button.om-holder-row:hover span { color: var(--accent); }
 .wm-channel-head:hover .wm-chevron { color: var(--ink); border-color: var(--ink); }
 .wm-channel-body { margin-top: 14px; }
 .wm-filters { margin-top: 10px; }
+
+/* One line a sector, labelled at its own end rather than in a legend. */
+.sl-lines { width: 100%; height: auto; display: block; margin-top: 12px; }
+.sl-line { cursor: pointer; }
+.sl-line:hover { stroke-width: 2.6; }
+.sl-line-label { cursor: pointer; font-family: 'IBM Plex Sans Arabic', system-ui, sans-serif; }
+.sl-line-label:hover { text-decoration: underline; }
+
+/* "What is this?" on a figure that needs it. A <details>, not a hover
+   tooltip: a tooltip does not exist on a phone, and this screen is read on
+   one. Shut it is a 22px mark; open it is a sentence under the number. */
+.ft-ribbon-card { position: relative; }
+.ft-what { margin-top: 6px; }
+.ft-what > summary {
+  list-style: none; cursor: pointer; width: 20px; height: 20px;
+  display: grid; place-items: center; border-radius: 999px;
+  border: 1px solid var(--line); color: var(--t2);
+  font-size: 11px; font-weight: 700; line-height: 1;
+}
+.ft-what > summary::-webkit-details-marker { display: none; }
+.ft-what > summary:hover, .ft-what[open] > summary {
+  color: var(--bg); background: var(--ink); border-color: var(--ink);
+}
+.ft-what > p {
+  margin: 8px 0 0; font-size: 11.5px; line-height: 1.6; color: var(--t2);
+  max-width: 44ch;
+}

@@ -1663,6 +1663,29 @@ const monthName = (month, ar) => {
  * keeps how often it moves and destroys when, gives a best pair of 16.7. It is
  * the best of some nine hundred pairs. See build_sector_rotation.py.
  */
+/* A figure at the top of a screen with no way to ask what it is.
+ *
+ * These three are the first thing on the sector screen and the least
+ * explained: "Advancing Capital Flow" sounds like money arriving, and it is
+ * turnover in companies that happened to close up — the buyer and the seller
+ * are both inside it. The mark opens the sentence that says so.
+ *
+ * A <details> rather than a hover tooltip: a tooltip does not exist on a
+ * phone, and this is a screen people read on a phone.
+ */
+function ribbonCard(label, value, colour, note, t) {
+  return h('div', { className: 'ft-ribbon-card' },
+    h('span', null, label),
+    h('strong', { dir: 'ltr', style: colour ? { color: colour } : null }, value),
+    h('details', { className: 'ft-what' },
+      h('summary', {
+        'aria-label': t(`What is ${label}?`, `ما معنى ${label}؟`),
+        title: t(`What is ${label}?`, `ما معنى ${label}؟`),
+      }, '?'),
+      h('p', null, note))
+  );
+}
+
 function renderTradingShare(doc, selected, ar, t, onPick, focusId) {
   if (!doc || !Array.isArray(doc.months) || doc.months.length < 2) return null;
   const focus = focusId
@@ -1680,6 +1703,11 @@ function renderTradingShare(doc, selected, ar, t, onPick, focusId) {
         `${rows[0].month} → ${rows[rows.length - 1].month}`)
     ),
     h('p', { className: 'ft-note' }, ar ? doc.basisAr : doc.basis),
+    // The shape first: a line rising while another falls IS the movement, and
+    // a reader sees it without counting anything.
+    SL.shareLines(doc, { ar, t, focus, onPick }),
+    // Then the exact points, because a line read off a chart is an estimate
+    // and the question underneath this screen is "by how much".
     SL.shareHeatmap(doc, { ar, t, focus, onPick }),
     // The headline frequency, stated as a frequency over named cases.
     reverted.share !== null && reverted.share !== undefined
@@ -2126,18 +2154,18 @@ export function flowTrackers(component, data, ar) {
       screen: h('section', { className: 'ft-screen' },
         header(sectorTitle),
         h('div', { className: 'ft-market-ribbon' },
-          h('div', { className: 'ft-ribbon-card' },
-            h('span', null, t('Market Covered Turnover', 'إجمالي تداول السوق المغطى')),
-            h('strong', { dir: 'ltr' }, compact(totalTradedAcross) + ' EGP')
-          ),
-          h('div', { className: 'ft-ribbon-card' },
-            h('span', null, t('Advancing Capital Flow', 'سيولة رأس المال الصاعد')),
-            h('strong', { dir: 'ltr', style: { color: 'var(--up)' } }, compact(totalAdvancingVal) + ' EGP')
-          ),
-          h('div', { className: 'ft-ribbon-card' },
-            h('span', null, t('Declining Capital Flow', 'سيولة رأس المال الهابط')),
-            h('strong', { dir: 'ltr', style: { color: 'var(--down)' } }, compact(totalDecliningVal) + ' EGP')
-          )
+          ribbonCard(t('Market Covered Turnover', 'إجمالي تداول السوق المغطى'),
+            compact(totalTradedAcross) + ' EGP', null,
+            t('Every trade on the exchange, added up, in the sectors this site covers — price times shares for each company, then summed. It is turnover, not money entering the market: a share bought and sold again the same day counts twice.',
+              'كل ما جرى تداوله في البورصة مجموعاً، في القطاعات التي يغطيها الموقع — سعر السهم في عدد الأسهم لكل شركة ثم الحاصل مجموعاً. هي قيمة تداول لا أموال داخلة إلى السوق: السهم الذي يُشترى ويُباع في اليوم نفسه يُحتسب مرتين.'), t),
+          ribbonCard(t('Advancing Capital Flow', 'سيولة رأس المال الصاعد'),
+            compact(totalAdvancingVal) + ' EGP', 'var(--up)',
+            t('The part of that turnover done in companies whose price closed higher than the session before. It says where the trading was, not that anybody made money: the buyer and the seller are both in this number.',
+              'الجزء من قيمة التداول الذي جرى في شركات أغلقت أعلى من الجلسة السابقة. يبيّن أين جرى التداول، لا أن أحداً ربح: المشتري والبائع كلاهما داخل هذا الرقم.'), t),
+          ribbonCard(t('Declining Capital Flow', 'سيولة رأس المال الهابط'),
+            compact(totalDecliningVal) + ' EGP', 'var(--down)',
+            t('The same total for companies that closed lower. Advancing and declining do not add to the covered turnover: anything that closed unchanged, or had no previous close to compare with, is in neither.',
+              'المجموع نفسه للشركات التي أغلقت أدنى. الصاعد والهابط لا يساويان مجموع التداول المغطى: ما أغلق دون تغيّر، أو ما لا إغلاق سابق له للمقارنة، ليس في أيٍّ منهما.'), t)
         ),
         renderTradingShare(data.sectorRotation, selected, ar, t,
           (id) => component.setState({ flowShareSector: id }),

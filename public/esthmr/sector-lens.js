@@ -363,3 +363,99 @@ export function followedPanel(doc, sector, { ar, t }) {
       ))) : null
   );
 }
+
+/* ── Trading share over time, one line a sector ─────────────────────────────
+ *
+ * The grid says what changed last month. This says the shape of it: a line
+ * rising while another falls IS money moving between sectors, drawn without
+ * anybody having to claim a transfer that the record cannot evidence.
+ *
+ * The lines are labelled at their own right-hand ends rather than in a legend.
+ * A legend makes colour the key, and thirteen keyed colours is a memory test
+ * a reader should not have to sit — worse for anyone who cannot separate two
+ * of them. Labelled in place, the colour is only there to help the eye follow
+ * one line across the others.
+ */
+
+// Every sector that has ever taken this much of a month's turnover. A stated
+// filter: it returns however many clear it, and the rest are drawn as one
+// muted line so the chart still adds to the whole market.
+const LINE_FLOOR = 5;
+const LINE_MONTHS = 36;
+
+export function lineSectors(rows, sectors, floor = LINE_FLOOR) {
+  const peak = (s) => Math.max(...rows.map((r) => (r.shares || {})[s] || 0));
+  return sectors.filter((s) => peak(s) >= floor);
+}
+
+/** Evenly spread hues, assigned alphabetically so the colour never ranks. */
+export function lineColour(index, total) {
+  const step = 360 / Math.max(1, total);
+  return `hsl(${Math.round((index * step + 12) % 360)} 62% 42%)`;
+}
+
+export function shareLines(doc, { ar, t, focus, onPick, months = LINE_MONTHS }) {
+  const rows = (doc.months || []).slice(-months);
+  if (rows.length < 3) return null;
+  const drawn = lineSectors(rows, doc.sectors || []);
+  if (!drawn.length) return null;
+
+  const view = { w: 760, h: 340 };
+  const pad = { l: 34, r: 168, t: 14, b: 26 };
+  const top = Math.max(...drawn.map((s) =>
+    Math.max(...rows.map((r) => (r.shares || {})[s] || 0)))) * 1.06 || 1;
+  const xOf = (i) => pad.l + (i / (rows.length - 1)) * (view.w - pad.l - pad.r);
+  const yOf = (v) => view.h - pad.b - (v / top) * (view.h - pad.t - pad.b);
+
+  // Where each label sits, pushed apart so two lines ending together do not
+  // print on top of one another.
+  const ends = drawn.map((s, i) => ({
+    sector: s, i, y: yOf((rows[rows.length - 1].shares || {})[s] || 0),
+  })).sort((a, b) => a.y - b.y);
+  let last = -99;
+  ends.forEach((e) => { e.at = Math.max(e.y, last + 11); last = e.at; });
+
+  const ticks = [0, 0.5, 1].map((f) => f * top);
+
+  return h('svg', {
+    className: 'sl-lines', viewBox: `0 0 ${view.w} ${view.h}`,
+    role: 'img', preserveAspectRatio: 'xMidYMid meet',
+    'aria-label': t(
+      `Each sector's share of the exchange's traded value, ${rows[0].month} to ${rows[rows.length - 1].month}`,
+      `نصيب كل قطاع من قيمة تداول البورصة من ${rows[0].month} إلى ${rows[rows.length - 1].month}`),
+  },
+    ticks.map((v) => h('g', { key: `t${v}` },
+      h('line', { x1: pad.l, x2: view.w - pad.r, y1: yOf(v), y2: yOf(v),
+        stroke: 'var(--rule)', 'stroke-width': 0.6, opacity: 0.75 }),
+      h('text', { x: pad.l - 5, y: yOf(v) + 3, 'text-anchor': 'end',
+        'font-size': 8.5, fill: 'var(--faint)', direction: 'ltr' }, `${v.toFixed(0)}%`)
+    )),
+    h('text', { x: pad.l, y: view.h - 7, 'font-size': 8.5, fill: 'var(--faint)',
+      direction: 'ltr' }, rows[0].month),
+    h('text', { x: view.w - pad.r, y: view.h - 7, 'text-anchor': 'end',
+      'font-size': 8.5, fill: 'var(--faint)', direction: 'ltr' },
+      rows[rows.length - 1].month),
+
+    drawn.map((s, i) => {
+      const on = focus === s;
+      const d = rows.map((r, n) =>
+        `${n ? 'L' : 'M'}${xOf(n).toFixed(1)} ${yOf((r.shares || {})[s] || 0).toFixed(1)}`).join(' ');
+      return h('path', {
+        key: s, d, fill: 'none', stroke: lineColour(i, drawn.length),
+        'stroke-width': on ? 2.6 : 1.3,
+        'stroke-linejoin': 'round', 'stroke-linecap': 'round',
+        opacity: !focus || on ? 1 : 0.22,
+        className: 'sl-line',
+        onClick: () => onPick && onPick(s),
+      }, h('title', null, `${s} · ${((rows[rows.length - 1].shares || {})[s] || 0).toFixed(1)}%`));
+    }),
+
+    ends.map((e) => h('text', {
+      key: e.sector, x: view.w - pad.r + 6, y: e.at + 3,
+      'font-size': 9, className: 'sl-line-label',
+      fill: !focus || focus === e.sector ? lineColour(e.i, drawn.length) : 'var(--faint)',
+      'font-weight': focus === e.sector ? 700 : 500,
+      onClick: () => onPick && onPick(e.sector),
+    }, e.sector.length > 26 ? `${e.sector.slice(0, 25)}…` : e.sector))
+  );
+}

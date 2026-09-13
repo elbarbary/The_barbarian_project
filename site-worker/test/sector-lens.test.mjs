@@ -295,3 +295,65 @@ test('a rate is never quoted over a single month', () => {
   assert.match(said, /too few to put a rate on/);
   assert.doesNotMatch(said, /100%/);
 });
+
+/* The three figures at the top of the screen, and the line charting them. */
+
+test('every figure at the top of the screen can be asked what it is', () => {
+  const view = screen();
+  const cards = withClass(view, 'ft-ribbon-card');
+  assert.equal(cards.length, 3);
+  cards.forEach((card) => {
+    const what = withClass(card, 'ft-what')[0];
+    assert.ok(what, `${text(card).slice(0, 30)} has no explanation`);
+    const mark = all(what, 'summary')[0];
+    assert.equal(text(mark).trim(), '?');
+    // A label for anyone who cannot see the mark.
+    assert.match(String(mark.attrs['aria-label'] || ''), /What is/);
+    const said = text(all(what, 'p')[0]);
+    assert.ok(said.length > 60, `a note of ${said.length} characters`);
+  });
+});
+
+test('the notes say what the figures are NOT, which is the part that misleads', () => {
+  // "Advancing Capital Flow" reads as money arriving. It is turnover in
+  // companies that closed up, and the buyer and the seller are both in it.
+  const out = text(withClass(screen(), 'ft-market-ribbon')[0]);
+  assert.match(out, /not money entering the market/);
+  assert.match(out, /counts twice/);
+  assert.match(out, /not that anybody made money/);
+  assert.match(out, /do not add to the covered turnover/);
+});
+
+test('one line a sector, labelled on the line rather than in a legend', () => {
+  // Thirteen keyed colours is a memory test, and a worse one for a reader who
+  // cannot separate two of them.
+  const view = screen();
+  const chart = withClass(view, 'sl-lines')[0];
+  assert.ok(chart, 'no share chart');
+  const lines = withClass(chart, 'sl-line');
+  const labels = withClass(chart, 'sl-line-label');
+  assert.ok(lines.length >= 6, `${lines.length} lines`);
+  assert.equal(labels.length, lines.length, 'a line with no name on it');
+  all(chart, 'path').forEach((p) => assert.doesNotMatch(p.attrs.d || '', /NaN|Infinity/));
+});
+
+test('the labels never print on top of one another', () => {
+  const chart = withClass(screen(), 'sl-lines')[0];
+  const ys = withClass(chart, 'sl-line-label')
+    .map((n) => Number(n.attrs.y)).sort((a, b) => a - b);
+  ys.slice(1).forEach((y, i) => assert.ok(y - ys[i] >= 10,
+    `two labels ${(y - ys[i]).toFixed(1)} apart`));
+});
+
+test('the sectors drawn are a stated floor, not the biggest few', () => {
+  const rows = rotation.months.slice(-36);
+  const drawn = SL.lineSectors(rows, rotation.sectors);
+  drawn.forEach((s) => {
+    const peak = Math.max(...rows.map((r) => (r.shares || {})[s] || 0));
+    assert.ok(peak >= 5, `${s} peaks at ${peak.toFixed(1)}%`);
+  });
+  // And nothing that clears the floor is left out to make a round number.
+  const should = rotation.sectors.filter((s) =>
+    Math.max(...rows.map((r) => (r.shares || {})[s] || 0)) >= 5);
+  assert.equal(drawn.length, should.length);
+});
