@@ -60,10 +60,13 @@ import subprocess
 import sys
 import tempfile
 import unicodedata
+import urllib.parse
+import urllib.request
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import gemini  # noqa: E402
+import pdf_from_page  # noqa: E402
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 DATA = REPO / "public" / "data" / "v1"
@@ -522,6 +525,14 @@ def _raw_position(reading: dict, code: str):
     return None
 
 
+# A filing whose document cannot be retrieved is asked again, but not forever.
+# Ten of these are attachments the statements store recorded as `local-proof:`
+# — a file that was on disk once and is not now — or filings the mirror never
+# copied. Left in the queue they sit at the head of it, and a bounded run that
+# reads three filings would spend all three on the same ten every time.
+GIVE_UP_AFTER = 3
+
+
 def held(path: pathlib.Path | None = None) -> dict:
     path = path or STORE
     if path.exists():
@@ -529,7 +540,7 @@ def held(path: pathlib.Path | None = None) -> dict:
             return json.loads(path.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             pass
-    return {"schemaVersion": 1, "readings": {}}
+    return {"schemaVersion": 1, "readings": {}, "unreachable": {}}
 
 
 def save(store: dict, path: pathlib.Path | None = None) -> None:
@@ -546,8 +557,12 @@ def save(store: dict, path: pathlib.Path | None = None) -> None:
 def merge(paths: list[pathlib.Path]) -> dict:
     store = held()
     for path in paths:
-        for filing, reading in (held(path).get("readings") or {}).items():
+        other = held(path)
+        for filing, reading in (other.get("readings") or {}).items():
             store["readings"].setdefault(filing, reading)
+        for filing, tries in (other.get("unreachable") or {}).items():
+            store.setdefault("unreachable", {})
+            store["unreachable"][filing] = max(store["unreachable"].get(filing, 0), tries)
     save(store)
     return store
 
@@ -584,17 +599,107 @@ def local_pdf(row: dict) -> pathlib.Path | None:
     return _cached_documents().get(want) if want else None
 
 
-def fetch_pdf(url: str, filing: str, ticker: str) -> pathlib.Path | None:
+def _body(url: str) -> bytes:
+    """One GET, as a browser would make it, with the bytes handed back whole.
+
+    `download_mirror_pdf` throws the body away the moment it is not a PDF,
+    which is precisely when it is worth reading.
+    """
+    import build_pdf_statements as statements
+    request = urllib.request.Request(url, headers={
+        "User-Agent": statements.BROWSER_UA,
+        "Accept": "application/pdf,text/html;q=0.9,*/*;q=0.8",
+    })
+    with urllib.request.urlopen(request, timeout=120) as response:
+        return response.read()
+
+
+def fetch_pdf(url: str, filing: str, ticker: str,
+              row_filed_on: str | None = None) -> pathlib.Path | None:
     import build_pdf_statements as statements
     NOTES_CACHE.mkdir(parents=True, exist_ok=True)
     target = NOTES_CACHE / f"{ticker}-egx-{filing}.pdf"
     try:
         statements.download_mirror_pdf(url, target)
+        return target if target.is_file() else None
     except Exception:
-        if target.exists():
-            target.unlink()
-        return None
-    return target if target.is_file() else None
+        target.unlink(missing_ok=True)
+
+    # A link that answers with a page is naming the PDF rather than refusing
+    # it — the rule in pdf_from_page. egx.com.eg does exactly this to a
+    # scripted request, and six of the twelve filings this reader could not
+    # reach were never blocked at all, only answered with the page that lists
+    # the file.
+    try:
+        served = pdf_from_page.fetch(url, target, get=_body)
+        if served != url:
+            print(f"      ↳ the page named {served}")
+        return target if target.is_file() else None
+    except Exception:
+        target.unlink(missing_ok=True)
+
+    # The exchange answers a scripted request with an F5 challenge — a page
+    # with one link, to the challenge itself — so there is nothing on it to
+    # follow. The mirror holds the same filing and answers plainly, and
+    # build_pdf_statements already knows how to find the copies.
+    for mirror in _mirrors(filing, ticker, row_filed_on):
+        try:
+            statements.download_mirror_pdf(mirror, target)
+        except Exception:
+            target.unlink(missing_ok=True)
+            continue
+        print(f"      ↳ the mirror holds it: {mirror}")
+        return target
+
+    # Last, a real browser. The wall is a TSPD javascript challenge, not a
+    # refusal: these same URLs open in a browser — a little slowly, while it
+    # works the challenge — and then serve the PDF. `f5_pdf_download.py`
+    # exists for exactly that and is what build_pdf_statements uses, so the
+    # escalation is the same one the statements pipeline already makes.
+    #
+    # It needs a headed Chrome and the Scrapling environment, so it is a
+    # laptop's last resort and not CI's: on a runner it raises and this
+    # returns None, which is the honest answer there.
+    if url.startswith("http") and _walled(url):
+        if _through_a_browser(url, target):
+            print("      ↳ a browser cleared the challenge")
+            return target
+    return None
+
+
+def _walled(url: str) -> bool:
+    return (urllib.parse.urlparse(url).hostname or "").lower().endswith("egx.com.eg")
+
+
+def _through_a_browser(url: str, target: pathlib.Path) -> bool:
+    import build_pdf_statements as statements
+    with tempfile.TemporaryDirectory() as folder:
+        manifest = pathlib.Path(folder) / "jobs.json"
+        try:
+            rows = statements.download_official_batch(
+                [{"url": url, "output": str(target)}], manifest)
+        except Exception as error:
+            print(f"      ↳ no browser here ({type(error).__name__})")
+            return False
+    row = rows.get(url) or {}
+    if not row.get("ok") or not target.is_file():
+        target.unlink(missing_ok=True)
+        return False
+    if target.read_bytes()[:4] != b"%PDF" or target.stat().st_size < 10_000:
+        target.unlink(missing_ok=True)
+        return False
+    return True
+
+
+def _mirrors(filing: str, ticker: str, filed_on: str | None) -> list[str]:
+    import build_pdf_statements as statements
+    code = filing if filing.isdigit() else ""
+    if not code:
+        return []
+    try:
+        return statements.resolve_mirror_candidates(code, ticker, filed_on)
+    except Exception:
+        return []
 
 
 def read_filing(pdf: pathlib.Path, period_end: str) -> tuple[dict | None, list[dict]]:
@@ -694,6 +799,8 @@ def outstanding(filings: dict, store: dict, wanted: set, again: set) -> list[tup
                              for r in rows[:depth]):
                 continue
             if filing in store["readings"]:
+                continue
+            if (store.get("unreachable") or {}).get(filing, 0) >= GIVE_UP_AFTER:
                 continue
             queue.append((ticker, filing, rows[depth]))
         if not added:
@@ -852,9 +959,16 @@ def main(argv=None) -> int:
     for ticker, filing, row in queue[: max(0, args.limit)]:
         pdf = local_pdf(row)
         if pdf is None and not args.local_only:
-            pdf = fetch_pdf(row.get("attachment_url") or "", filing, ticker)
+            pdf = fetch_pdf(row.get("attachment_url") or "", filing, ticker,
+                            row.get("filed_on"))
         if pdf is None:
-            print(f"   {ticker} {filing}: the filing could not be reached — will retry")
+            tries = (store.setdefault("unreachable", {}).get(filing, 0)) + 1
+            store["unreachable"][filing] = tries
+            save(store, where)
+            left = GIVE_UP_AFTER - tries
+            print(f"   {ticker} {filing}: the filing could not be reached — "
+                  + (f"{left} more attempt(s)" if left > 0
+                     else "asked for the last time; --refresh to ask again"))
             continue
         try:
             reading, dropped = read_filing(pdf, row.get("period_end") or "")
@@ -864,6 +978,7 @@ def main(argv=None) -> int:
         if reading is None:
             print(f"   {ticker} {filing}: the reader gave no usable answer — will retry")
             continue
+        (store.get("unreachable") or {}).pop(filing, None)
         store["readings"][filing] = dict(reading, ticker=ticker, dropped=dropped)
         save(store, where)
         read += 1

@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-13T07:48:26Z",
+ "generated": "2026-09-13T08:02:22Z",
  "basis": "A move is placed against its own two years of same-length moves — a record of what has already happened, never a statement about the next one. Each list of companies is the complete set that filed the figure, in alphabetical order, with the filing beside it. Nothing here says what any of it means for a share price.",
  "basisAr": "تُقاس كل حركة مقابل سنتين من حركات بالطول نفسه — سجل لما حدث بالفعل، وليس قولاً عما سيحدث. وكل قائمة شركات هي المجموعة الكاملة التي أودعت الرقم، بالترتيب الأبجدي، ومعها الإفصاح الذي جاء منه. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
  "windows": [
@@ -255,29 +255,29 @@
    "id": "EGX30",
    "label": "EGX 30",
    "asOf": "2026-09-13",
-   "close": 56280.2,
+   "close": 56088.2,
    "sessions": 203,
    "moves": {
     "week": {
-     "change": -0.7,
+     "change": -1.04,
      "against": {
-      "percentile": 17.2,
+      "percentile": 30.3,
       "observations": 198,
       "typical": 1.87
      }
     },
     "month": {
-     "change": 1.86,
+     "change": 1.51,
      "against": {
-      "percentile": 22.0,
+      "percentile": 20.3,
       "observations": 182,
       "typical": 4.19
      }
     },
     "quarter": {
-     "change": 10.75,
+     "change": 10.37,
      "against": {
-      "percentile": 56.4,
+      "percentile": 55.7,
       "observations": 140,
       "typical": 9.34
      }
@@ -288,29 +288,29 @@
    "id": "EGX70EWI",
    "label": "EGX 70",
    "asOf": "2026-09-13",
-   "close": 21403.3,
+   "close": 21512.6,
    "sessions": 203,
    "moves": {
     "week": {
-     "change": -0.99,
+     "change": -0.49,
      "against": {
-      "percentile": 20.7,
+      "percentile": 10.6,
       "observations": 198,
       "typical": 2.22
      }
     },
     "month": {
-     "change": -0.86,
+     "change": -0.35,
      "against": {
-      "percentile": 6.6,
+      "percentile": 2.2,
       "observations": 182,
       "typical": 5.99
      }
     },
     "quarter": {
-     "change": 42.81,
+     "change": 43.54,
      "against": {
-      "percentile": 90.0,
+      "percentile": 90.7,
       "observations": 140,
       "typical": 20.04
      }
@@ -321,29 +321,29 @@
    "id": "EGX100EWI",
    "label": "EGX 100",
    "asOf": "2026-09-13",
-   "close": 27997.3,
+   "close": 28092.9,
    "sessions": 203,
    "moves": {
     "week": {
-     "change": -0.77,
+     "change": -0.43,
      "against": {
-      "percentile": 19.2,
+      "percentile": 8.6,
       "observations": 198,
       "typical": 2.14
      }
     },
     "month": {
-     "change": 0.36,
+     "change": 0.7,
      "against": {
-      "percentile": 3.3,
+      "percentile": 6.6,
       "observations": 182,
       "typical": 5.42
      }
     },
     "quarter": {
-     "change": 35.8,
+     "change": 36.27,
      "against": {
-      "percentile": 93.6,
+      "percentile": 94.3,
       "observations": 140,
       "typical": 18.22
      }
@@ -3780,7 +3780,7 @@
    "questionAr": "أين تصل حركة الجنيه؟",
    "filter": "every company whose filed foreign-currency note prints a figure — a net position held in another currency, or an exchange gain or loss already taken",
    "filterAr": "كل شركة يطبع إيضاح العملات الأجنبية في قوائمها رقماً — صافي مركز بعملة أخرى، أو أرباح أو خسائر فروق عملة تم الاعتراف بها",
-   "count": 136,
+   "count": 137,
    "today": {
     "asOf": "2026-09-13",
     "rates": [
@@ -6366,6 +6366,23 @@
      "periodEnd": "2026-05-31",
      "filingId": "291176",
      "source": "https://foudalens.com/disclosures/SCTS.CA/financial_statement/2026-07-12_291175_1.pdf"
+    },
+    {
+     "ticker": "SDTI",
+     "name": "Sharm Dreams Co. for Tourism Investment",
+     "sector": "Travel & Leisure",
+     "fxResult": -237.305,
+     "netIncome": -197.597,
+     "shareOfNetIncome": null,
+     "largerThanTheProfit": null,
+     "position": [],
+     "denominatedIn": null,
+     "positionAsOf": null,
+     "printed": "(خسائر) / ارباح فروق تقييم عملة - غير محققة",
+     "period": "Q1 2026",
+     "periodEnd": "2026-03-31",
+     "filingId": "289021",
+     "source": "https://www.egx.com.eg/downloads/News/188619_093817.pdf"
     },
     {
      "ticker": "SIPC",

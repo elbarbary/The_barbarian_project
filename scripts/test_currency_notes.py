@@ -353,6 +353,29 @@ class TheQueue(unittest.TestCase):
         answered = {"a2": {"ticker": "AAAA", "position": {"USD": 1.0}, "fxResult": None}}
         self.assertEqual(self.queue(answered), [("BBBB", "b2"), ("BBBB", "b1")])
 
+    def test_a_filing_that_cannot_be_reached_stops_being_asked(self):
+        # Ten filings name an attachment that is a `local-proof:` reference to
+        # a file no longer on disk, or one the mirror never copied. Left in the
+        # queue they sit at its head, and a bounded CI run reading three
+        # filings would spend all three on the same ten every time.
+        store = {"readings": {}, "unreachable": {"a2": notes.GIVE_UP_AFTER}}
+        asked = [f for _, f, _ in
+                 notes.outstanding(self.FILINGS, store, set(), set())]
+        self.assertNotIn("a2", asked)
+        self.assertIn("a1", asked, "it gave up on the company, not the filing")
+
+    def test_it_is_still_asked_while_attempts_remain(self):
+        store = {"readings": {}, "unreachable": {"a2": notes.GIVE_UP_AFTER - 1}}
+        asked = [f for _, f, _ in
+                 notes.outstanding(self.FILINGS, store, set(), set())]
+        self.assertIn("a2", asked)
+
+    def test_refresh_asks_one_it_gave_up_on(self):
+        store = {"readings": {}, "unreachable": {"a2": 99}}
+        asked = [f for _, f, _ in
+                 notes.outstanding(self.FILINGS, store, set(), {"a2"})]
+        self.assertIn("a2", asked)
+
     def test_refresh_reaches_a_filing_the_queue_would_otherwise_skip(self):
         # A filing asked for again is usually one whose figures were dropped,
         # so its company has often already answered on a newer filing — which
@@ -429,6 +452,40 @@ class Publishing(unittest.TestCase):
         with publishing(store, filings) as document:
             self.assertEqual([c["ticker"] for c in document["companies"]],
                              ["AAAA", "MMMM", "ZZZZ"])
+
+
+class WhereTheReadingsSurvive(unittest.TestCase):
+    """A store CI writes and does not commit is work paid for and thrown away."""
+
+    WORKFLOW = pathlib.Path(__file__).resolve().parent.parent / ".github" \
+        / "workflows" / "publish-app-data.yml"
+
+    def stores(self):
+        source = self.WORKFLOW.read_text(encoding="utf-8")
+        block = re.search(r"STORES: >-\n((?:\s{4}\S+\n)+)", source)
+        self.assertIsNotNone(block, "the workflow no longer lists its stores")
+        return set(block.group(1).split())
+
+    def test_the_reading_store_is_committed_by_the_job_that_writes_it(self):
+        # `git add` in that job names its paths, so a tracked file it modifies
+        # and does not name is left in the runner and discarded. This step
+        # spends two model passes per filing: undone every run, it would pay
+        # for the same three readings forever and never accumulate.
+        self.assertIn("scripts/currency_notes_read.json", self.stores())
+
+    def test_the_derived_document_is_not_committed(self):
+        # The opposite mistake. currency_notes.json is rebuilt from the store
+        # on every run and is gitignored; committing it would put a generated
+        # file in every diff.
+        self.assertNotIn("scripts/currency_notes.json", self.stores())
+
+    def test_the_step_reads_rather_than_only_republishing(self):
+        source = (pathlib.Path(__file__).resolve().parent
+                  / "build_all.py").read_text(encoding="utf-8")
+        step = re.search(r'\("Currency notes",[^)]*\)', source)
+        self.assertIsNotNone(step, "the daily build no longer runs this at all")
+        self.assertIn("--limit", step.group(0),
+                      "the reading happens on one laptop again")
 
 
 class WhatTheWordsPromise(unittest.TestCase):

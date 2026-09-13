@@ -3334,6 +3334,72 @@
    "pages": [],
    "ticker": "OFH",
    "dropped": []
+  },
+  "292738": {
+   "position": {},
+   "fxResult": null,
+   "narrowed": [],
+   "pages": [
+    4
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": null,
+   "ticker": "DTPP",
+   "dropped": [
+    {
+     "what": "fxResult",
+     "why": "only one of the two reads saw it"
+    }
+   ]
+  },
+  "292415": {
+   "position": {},
+   "fxResult": null,
+   "narrowed": [],
+   "pages": [
+    6
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": null,
+   "ticker": "INFI",
+   "dropped": [
+    {
+     "what": "fxResult",
+     "why": "the figure is not printed in the document's text"
+    }
+   ]
+  },
+  "289021": {
+   "position": {},
+   "fxResult": -237.305,
+   "narrowed": [],
+   "pages": [
+    6
+   ],
+   "asOf": null,
+   "denominatedIn": null,
+   "printed": "(خسائر) / ارباح فروق تقييم عملة - غير محققة",
+   "ticker": "SDTI",
+   "dropped": []
+  },
+  "284924": {
+   "position": {},
+   "fxResult": null,
+   "pages": [],
+   "ticker": "UNIP",
+   "dropped": []
   }
+ },
+ "unreachable": {
+  "APSW-Q1 2026-2026-03-31": 3,
+  "INEG-H1 2026-2026-06-30": 3,
+  "MPRC-H1 2026-2026-06-30": 3,
+  "SNFC-H1 2026-2026-06-30": 3,
+  "WKOL-9M 2026 (to 31 Mar)-2026-03-31": 3,
+  "288441": 5,
+  "284921": 5,
+  "MPRC-Q1 2026-2026-03-31": 3
  }
 }
