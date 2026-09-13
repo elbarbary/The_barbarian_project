@@ -1,0 +1,4263 @@
+{
+ "schemaVersion": 1,
+ "generated": "2026-09-13T11:12:27Z",
+ "basis": "Each card joins what one company filed across three channels — what it owes and how soon that reprices, the cushion between what it sells for and what that cost, and what it holds in another currency. The sentences are written from those figures and may use no others: every number in them is one of the figures printed beside it, character for character, and a sentence using any other number is dropped before publishing. Nothing here says what any of it means for a share price.",
+ "basisAr": "تجمع كل بطاقة ما أودعته الشركة في ثلاثة محاور — ما عليها من قروض ومتى يُعاد تسعيرها، والفارق بين ما تبيع به وما كلّفها، وما تحتفظ به بعملة أخرى. والجمل مكتوبة من هذه الأرقام ولا يجوز أن تستعمل غيرها: كل رقم فيها هو أحد الأرقام المطبوعة بجوارها حرفاً بحرف، وتُحذف أي جملة تستعمل رقماً آخر قبل النشر. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
+ "companyCount": 179,
+ "companies": [
+  {
+   "ticker": "ABUK",
+   "name": "Abou Kir Fertilizers & Chemical Industries Co.",
+   "says": [
+    "For inputs covering H1 2026, the company filed revenue of 23.52B EGP, gross profit of 12.97B EGP, and a gross margin of 55.1%.",
+    "The company filed nothing for rates regarding what it owes and how soon that reprices.",
+    "It also filed nothing for currency regarding what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "revenue filed": "23.52B EGP",
+    "gross profit filed": "12.97B EGP",
+    "gross margin": "55.1%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "ACGC",
+   "name": "Arab Cotton Ginning Co.",
+   "says": [
+    "For 9M 2026 (to 31 Mar), the rates channel reflects borrowings it owes of 7.24M EGP, with 26.9% repricing within a year and interest cover of 19.76×.",
+    "The inputs channel shows revenue filed of 169.33M EGP, gross profit filed of 51.49M EGP, and a gross margin of 30.4%.",
+    "The currency channel shows a currency gain or loss filed of -166K EGP against profit filed for the period of 32.49M EGP, representing -0.5% of that profit."
+   ],
+   "figures": {
+    "borrowings it owes": "7.24M EGP",
+    "of that repricing within a year": "26.9%",
+    "interest cover": "19.76×",
+    "period the rates figures cover": "9M 2026 (to 31 Mar)",
+    "revenue filed": "169.33M EGP",
+    "gross profit filed": "51.49M EGP",
+    "gross margin": "30.4%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)",
+    "currency gain or loss filed": "-166K EGP",
+    "profit filed for the period": "32.49M EGP",
+    "that currency line as a share of the profit": "-0.5%",
+    "period the currency figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ACTF",
+   "name": "Act Financial",
+   "says": [
+    "The rates channel reaches the company through borrowings it owes of 167K EGP, with 100.0% of that repricing within a year and interest cover of -0.73× for H1 2026.",
+    "The currency channel also reaches the company with a currency gain or loss filed of 163K EGP and profit filed for the period of -197.67M EGP for H1 2026.",
+    "For the inputs channel, the company filed nothing."
+   ],
+   "figures": {
+    "borrowings it owes": "167K EGP",
+    "of that repricing within a year": "100.0%",
+    "interest cover": "-0.73×",
+    "period the rates figures cover": "H1 2026",
+    "currency gain or loss filed": "163K EGP",
+    "profit filed for the period": "-197.67M EGP",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ADCI",
+   "name": "Arab Pharmaceuticals",
+   "says": [
+    "For 9M 2026 (to 31 Mar), the rates channel reaches the company through borrowings it owes of 461M EGP, with 52.6% of that repricing within a year, while the inputs channel shows revenue filed of 1.03B EGP, gross profit filed of 397.77M EGP, and a gross margin of 38.6%.",
+    "The currency channel also reaches the company, with a currency gain or loss filed of -2.33M EGP against profit filed for the period of 196.37M EGP, making that currency line as a share of the profit -1.2% for 9M 2026 (to 31 Mar), though the company filed nothing for what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "461M EGP",
+    "of that repricing within a year": "52.6%",
+    "period the rates figures cover": "9M 2026 (to 31 Mar)",
+    "revenue filed": "1.03B EGP",
+    "gross profit filed": "397.77M EGP",
+    "gross margin": "38.6%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)",
+    "currency gain or loss filed": "-2.33M EGP",
+    "profit filed for the period": "196.37M EGP",
+    "that currency line as a share of the profit": "-1.2%",
+    "period the currency figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ADIB",
+   "name": "Abu Dhabi Islamic Bank-Egypt",
+   "says": [
+    "For currency, the company filed a currency gain or loss of 548.89M EGP for H1 2026, which represents 7.3% of the profit filed for the period of 7.55B EGP, alongside net foreign currency positions including 3.68B EGP held in USD.",
+    "The company filed nothing for rates or inputs in the provided figures."
+   ],
+   "figures": {
+    "net position held in EUR": "-95.68M EGP",
+    "net position held in GBP": "12.54M EGP",
+    "net position held in JPY": "90.43M EGP",
+    "net position held in OTHER": "-1.64B EGP",
+    "net position held in USD": "3.68B EGP",
+    "currency gain or loss filed": "548.89M EGP",
+    "profit filed for the period": "7.55B EGP",
+    "that currency line as a share of the profit": "7.3%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency"
+   ]
+  },
+  {
+   "ticker": "ADPC",
+   "name": "Arab Dairy Products Co. Arab Dairy - Panda",
+   "says": [
+    "All three channels reach this company, with borrowings it owes of 1.42B EGP of that repricing within a year at 96.5% and an interest cover of -1.04× for rates.",
+    "On inputs, it filed revenue of 564.04M EGP, gross profit of 34.75M EGP, and a gross margin of 6.2% for Q1 2026.",
+    "For currency, the company held a net position held in USD of 146.72M EGP, alongside a profit filed for the period of -125.92M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "1.42B EGP",
+    "of that repricing within a year": "96.5%",
+    "interest cover": "-1.04×",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "564.04M EGP",
+    "gross profit filed": "34.75M EGP",
+    "gross margin": "6.2%",
+    "period the inputs figures cover": "Q1 2026",
+    "net position held in USD": "146.72M EGP",
+    "profit filed for the period": "-125.92M EGP",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ADRI",
+   "name": "Arab Development & Real Estate Investment",
+   "says": [
+    "For inputs, the company filed revenue filed: 4.11M EGP, gross profit filed: 1.75M EGP, and a gross margin: 42.5% for H1 2026.",
+    "The company filed nothing for rates.",
+    "The company filed nothing for currency."
+   ],
+   "figures": {
+    "revenue filed": "4.11M EGP",
+    "gross profit filed": "1.75M EGP",
+    "gross margin": "42.5%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "AFMC",
+   "name": "Alexandria Flour Mills Co.",
+   "says": [
+    "For 9M 2026 (to 31 Mar), the inputs channel is visible in revenue filed of 292.02M EGP, gross profit filed of 62.16M EGP, and a gross margin of 21.3%.",
+    "Over 9M 2026 (to 31 Mar), the currency channel appears in a currency gain or loss filed of -1.02M EGP alongside profit filed for the period of 39.23M EGP, making that currency line as a share of the profit -2.6%.",
+    "The company filed nothing for the rates channel."
+   ],
+   "figures": {
+    "revenue filed": "292.02M EGP",
+    "gross profit filed": "62.16M EGP",
+    "gross margin": "21.3%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)",
+    "currency gain or loss filed": "-1.02M EGP",
+    "profit filed for the period": "39.23M EGP",
+    "that currency line as a share of the profit": "-2.6%",
+    "period the currency figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "AIDC",
+   "name": "Arabia for Investment and Development",
+   "says": [
+    "For rates in Q1 2026, the company filed borrowings it owes of 139.65M EGP with 81.6% repricing within a year and interest cover of -0.91×.",
+    "For inputs in Q1 2026, it reported revenue filed of 73.66M EGP, gross profit filed of 8.69M EGP, and a gross margin of 11.8%.",
+    "For currency, the filings include a currency gain or loss filed of 2.52M EGP alongside a profit filed for the period of -15.12M EGP for Q1 2026, but file nothing on what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "139.65M EGP",
+    "of that repricing within a year": "81.6%",
+    "interest cover": "-0.91×",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "73.66M EGP",
+    "gross profit filed": "8.69M EGP",
+    "gross margin": "11.8%",
+    "period the inputs figures cover": "Q1 2026",
+    "currency gain or loss filed": "2.52M EGP",
+    "profit filed for the period": "-15.12M EGP",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "AIFI",
+   "name": "Atlas for Investment & Food Industries SAE",
+   "says": [
+    "Inputs reaches the company, which filed revenue filed of 8.8M EGP, gross profit filed of 1.16M EGP, and a gross margin of 13.2% for Q1 2026.",
+    "The company filed nothing for rates and filed nothing for currency."
+   ],
+   "figures": {
+    "revenue filed": "8.8M EGP",
+    "gross profit filed": "1.16M EGP",
+    "gross margin": "13.2%",
+    "period the inputs figures cover": "Q1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "AJWA",
+   "name": "Ajwa for Food Industries Co. Egypt",
+   "says": [
+    "For inputs in H1 2025, revenue filed was 873.62M EGP, gross profit filed was 301.94M EGP, and the gross margin was 34.6%.",
+    "The currency channel reflects an impact in H1 2025, with a currency gain or loss filed of -1.48M EGP, profit filed for the period of 37.39M EGP, and that currency line as a share of the profit at -4.0%.",
+    "For the rates channel in H1 2025, borrowings it owes stood at 6.13M EGP, but the company filed nothing for how soon that reprices."
+   ],
+   "figures": {
+    "borrowings it owes": "6.13M EGP",
+    "period the rates figures cover": "H1 2025",
+    "revenue filed": "873.62M EGP",
+    "gross profit filed": "301.94M EGP",
+    "gross margin": "34.6%",
+    "period the inputs figures cover": "H1 2025",
+    "currency gain or loss filed": "-1.48M EGP",
+    "profit filed for the period": "37.39M EGP",
+    "that currency line as a share of the profit": "-4.0%",
+    "period the currency figures cover": "H1 2025"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ALCN",
+   "name": "Alexandria Containers & Goods",
+   "says": [
+    "For H1 2026, the company reported borrowings of 32.84M EGP with 100.0% repricing within a year and an interest cover of 135.61×, while inputs show revenue of 4.58B EGP, gross profit of 3.54B EGP, and a gross margin of 77.4%.",
+    "The currency channel shows a currency gain or loss filed of 21.43M EGP against profit of 3.8B EGP, representing 0.6% of that profit for H1 2026."
+   ],
+   "figures": {
+    "borrowings it owes": "32.84M EGP",
+    "of that repricing within a year": "100.0%",
+    "interest cover": "135.61×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "4.58B EGP",
+    "gross profit filed": "3.54B EGP",
+    "gross margin": "77.4%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "21.43M EGP",
+    "profit filed for the period": "3.8B EGP",
+    "that currency line as a share of the profit": "0.6%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ALUM",
+   "name": "Arab Aluminum Co. SAE",
+   "says": [
+    "All three channels reach the company in H1 2026, with the rates channel shown by borrowings it owes of 68.23M EGP where 100.0% reprices within a year.",
+    "The inputs channel is reflected in a gross profit filed of 32.45M EGP on revenue filed of 279.65M EGP, giving a gross margin of 11.6%.",
+    "The currency channel reaches it through a net position held in EUR of 1K EGP, a net position held in USD of 366K EGP, and a currency gain or loss filed of 1.48M EGP, which is 21.6% of the profit filed for the period of 6.86M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "68.23M EGP",
+    "of that repricing within a year": "100.0%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "279.65M EGP",
+    "gross profit filed": "32.45M EGP",
+    "gross margin": "11.6%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in EUR": "1K EGP",
+    "net position held in USD": "366K EGP",
+    "currency gain or loss filed": "1.48M EGP",
+    "profit filed for the period": "6.86M EGP",
+    "that currency line as a share of the profit": "21.6%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "AMER",
+   "name": "Amer Group Holding",
+   "says": [
+    "The rates channel reaches this company, which reported borrowings it owes of 1.69B EGP for H1 2026.",
+    "The company filed nothing for the inputs channel, which covers the cushion between selling prices and costs.",
+    "The company also filed nothing for the currency channel regarding what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "1.69B EGP",
+    "period the rates figures cover": "H1 2026"
+   },
+   "channels": [
+    "rates"
+   ]
+  },
+  {
+   "ticker": "AMES",
+   "name": "Alexandria New Medical Center Co.",
+   "says": [
+    "For inputs in H1 2026, the company filed revenue of 239.5M EGP, gross profit of 73.91M EGP, and a gross margin of 30.9%.",
+    "For currency in H1 2026, it held a net position in USD of 65K EGP, filed a currency gain or loss of 70K EGP, and recorded profit for the period of 20.78M EGP, making that currency line 0.3% of profit.",
+    "For rates, the company filed nothing."
+   ],
+   "figures": {
+    "revenue filed": "239.5M EGP",
+    "gross profit filed": "73.91M EGP",
+    "gross margin": "30.9%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in USD": "65K EGP",
+    "currency gain or loss filed": "70K EGP",
+    "profit filed for the period": "20.78M EGP",
+    "that currency line as a share of the profit": "0.3%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "AMIA",
+   "name": "Arab Moltaqa Investments Company",
+   "says": [
+    "For rates, the company filed borrowings it owes of 7.11B EGP with 33.8% repricing within a year for H1 2026.",
+    "For inputs, it reported revenue filed of 1.24B EGP, gross profit filed of 438.1M EGP, and a gross margin of 35.4% for H1 2026.",
+    "For currency in H1 2026, it held a net position held in USD of 31.51M EGP and a net position held in EUR of 133K EGP, with currency gain or loss filed of 1.13M EGP representing 0.4% of profit filed for the period of 268.68M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "7.11B EGP",
+    "of that repricing within a year": "33.8%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "1.24B EGP",
+    "gross profit filed": "438.1M EGP",
+    "gross margin": "35.4%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in EUR": "133K EGP",
+    "net position held in USD": "31.51M EGP",
+    "currency gain or loss filed": "1.13M EGP",
+    "profit filed for the period": "268.68M EGP",
+    "that currency line as a share of the profit": "0.4%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "AMOC",
+   "name": "Alexandria Mineral Oils Co.",
+   "says": [
+    "For rates, borrowings it owes stand at 19.18M EGP, with 34.3% repricing within a year and interest cover of 1298.08× for H1 2026.",
+    "For inputs in H1 2026, revenue filed was 25.6B EGP and gross profit filed was 2.79B EGP, making the gross margin 10.9%.",
+    "For currency in H1 2026, the currency gain or loss filed was 51.81M EGP against profit filed for the period of 1.63B EGP, representing 3.2% of that profit."
+   ],
+   "figures": {
+    "borrowings it owes": "19.18M EGP",
+    "of that repricing within a year": "34.3%",
+    "interest cover": "1298.08×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "25.6B EGP",
+    "gross profit filed": "2.79B EGP",
+    "gross margin": "10.9%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "51.81M EGP",
+    "profit filed for the period": "1.63B EGP",
+    "that currency line as a share of the profit": "3.2%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "AMPI",
+   "name": "AL Moasher Pay for Electronic Payment and Collection (S.A.E)",
+   "says": [
+    "The inputs channel reaches this company, which filed revenue of 377K EGP, gross profit of -730K EGP, and a gross margin of -193.6% for H1 2026.",
+    "The company filed nothing for rates and nothing for currency."
+   ],
+   "figures": {
+    "revenue filed": "377K EGP",
+    "gross profit filed": "-730K EGP",
+    "gross margin": "-193.6%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "APSW",
+   "name": "Arab Polvara Spinning & Weaving Co.",
+   "says": [
+    "For rates, the company filed borrowings it owes of 6.52M EGP covering Q1 2026, while for inputs covering Q1 2026 it filed revenue filed of 19.81M EGP, gross profit filed of -13.54M EGP, and a gross margin of -68.4%.",
+    "For currency, the company filed nothing."
+   ],
+   "figures": {
+    "borrowings it owes": "6.52M EGP",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "19.81M EGP",
+    "gross profit filed": "-13.54M EGP",
+    "gross margin": "-68.4%",
+    "period the inputs figures cover": "Q1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ARCC",
+   "name": "Arabian Cement Company",
+   "says": [
+    "For H1 2026, the company filed 1.28B EGP in borrowings with 40.7% repricing within a year, and it filed revenue of 6.01B EGP against gross profit of 2.51B EGP, yielding a gross margin of 41.7%.",
+    "In the same period, it recorded a currency gain or loss of 64.66M EGP against profit of 2.16B EGP, making that line 3.0% of profit, but it filed no figures for what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "1.28B EGP",
+    "of that repricing within a year": "40.7%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "6.01B EGP",
+    "gross profit filed": "2.51B EGP",
+    "gross margin": "41.7%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "64.66M EGP",
+    "profit filed for the period": "2.16B EGP",
+    "that currency line as a share of the profit": "3.0%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "AREH",
+   "name": "Egyptian Real Estate Group",
+   "says": [
+    "The inputs channel reaches this company, which filed revenue filed of 7.35M EGP, gross profit filed of 6.71M EGP, and a gross margin of 91.3% for H1 2026.",
+    "The rates channel does not reach this description, as the company filed nothing for what it owes or how soon that reprices.",
+    "The currency channel also does not reach it, because the company filed nothing for what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "revenue filed": "7.35M EGP",
+    "gross profit filed": "6.71M EGP",
+    "gross margin": "91.3%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "ASCM",
+   "name": "ASEC Co. for Mining",
+   "says": [
+    "All three channels reach this company in 9M 2025.",
+    "The rates channel shows borrowings it owes of 3.91B EGP with 82.1% repricing within a year, while the inputs channel shows revenue filed of 3.03B EGP against gross profit filed of 583.9M EGP for a gross margin of 19.3%.",
+    "The currency channel reflects a currency gain or loss filed of -191.89M EGP, representing -51.4% of the profit filed for the period of 373.24M EGP, alongside net foreign currency positions of -52.91M EGP in EUR, -6K EGP in GBP, and -20.54M EGP in USD."
+   ],
+   "figures": {
+    "borrowings it owes": "3.91B EGP",
+    "of that repricing within a year": "82.1%",
+    "period the rates figures cover": "9M 2025",
+    "revenue filed": "3.03B EGP",
+    "gross profit filed": "583.9M EGP",
+    "gross margin": "19.3%",
+    "period the inputs figures cover": "9M 2025",
+    "net position held in EUR": "-52.91M EGP",
+    "net position held in GBP": "-6K EGP",
+    "net position held in USD": "-20.54M EGP",
+    "currency gain or loss filed": "-191.89M EGP",
+    "profit filed for the period": "373.24M EGP",
+    "that currency line as a share of the profit": "-51.4%",
+    "period the currency figures cover": "9M 2025"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ASPI",
+   "name": "Aspire Capital Holding for Financial Investments",
+   "says": [
+    "For Q1 2026, inputs reach the company, which filed revenue filed of 18.35M EGP, gross profit filed of 16.79M EGP, and a gross margin of 91.5%.",
+    "Currency also reaches it, with currency gain or loss filed of 58K EGP, profit filed for the period of 6.1M EGP, and that currency line as a share of the profit of 1.0% for Q1 2026.",
+    "The company filed nothing for rates."
+   ],
+   "figures": {
+    "revenue filed": "18.35M EGP",
+    "gross profit filed": "16.79M EGP",
+    "gross margin": "91.5%",
+    "period the inputs figures cover": "Q1 2026",
+    "currency gain or loss filed": "58K EGP",
+    "profit filed for the period": "6.1M EGP",
+    "that currency line as a share of the profit": "1.0%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "ATLC",
+   "name": "Al Tawfeek Leasing Company-A.T.LEASE",
+   "says": [
+    "All three channels reach the company in H1 2026, with the rates channel reflecting borrowings it owes of 4.71B EGP.",
+    "For inputs, it filed revenue of 924.31M EGP and gross profit of 205.06M EGP, giving a gross margin of 22.2%.",
+    "The currency channel shows a net position held in EUR of 133K EGP, a net position held in USD of 24.99M EGP, and a currency gain or loss filed of 900K EGP, which is 1.0% of the profit filed for the period of 89.01M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "4.71B EGP",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "924.31M EGP",
+    "gross profit filed": "205.06M EGP",
+    "gross margin": "22.2%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in EUR": "133K EGP",
+    "net position held in USD": "24.99M EGP",
+    "currency gain or loss filed": "900K EGP",
+    "profit filed for the period": "89.01M EGP",
+    "that currency line as a share of the profit": "1.0%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ATQA",
+   "name": "Misr National Steel",
+   "says": [
+    "All three channels reach the company in H1 2026.",
+    "Rates reach it through borrowings it owes of 1.19B EGP with 100.0% repricing within a year and interest cover of 0.38×, while inputs reach it through revenue filed of 1.8B EGP, gross profit filed of 134.32M EGP, and a gross margin of 7.5%.",
+    "Currency also reaches it through a net position held in USD of 2.03M EGP, a currency gain or loss filed of -68.21M EGP, profit filed for the period of 95.75M EGP, and that currency line as a share of the profit of -71.2%."
+   ],
+   "figures": {
+    "borrowings it owes": "1.19B EGP",
+    "of that repricing within a year": "100.0%",
+    "interest cover": "0.38×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "1.8B EGP",
+    "gross profit filed": "134.32M EGP",
+    "gross margin": "7.5%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in USD": "2.03M EGP",
+    "currency gain or loss filed": "-68.21M EGP",
+    "profit filed for the period": "95.75M EGP",
+    "that currency line as a share of the profit": "-71.2%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "AXPH",
+   "name": "Alexandria Company for Pharmaceuticals and Chemical Industries",
+   "says": [
+    "For inputs covering 9M 2026 (to 31 Mar), the company filed revenue of 2.6B EGP, gross profit of 664.84M EGP, and a gross margin of 25.6%.",
+    "For currency covering 9M 2026 (to 31 Mar), it filed profit of 431.24M EGP and a currency gain or loss of 4.96M EGP, which is 1.2% of that profit.",
+    "The company filed nothing for rates."
+   ],
+   "figures": {
+    "revenue filed": "2.6B EGP",
+    "gross profit filed": "664.84M EGP",
+    "gross margin": "25.6%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)",
+    "currency gain or loss filed": "4.96M EGP",
+    "profit filed for the period": "431.24M EGP",
+    "that currency line as a share of the profit": "1.2%",
+    "period the currency figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "BIGP",
+   "name": "ElBarbary Investment Group",
+   "says": [
+    "Inputs reach the company, which filed revenue filed of 3.53M EGP, gross profit filed of 1.04M EGP, and a gross margin of 29.5% for H1 2026.",
+    "Currency reaches the company with currency gain or loss filed of 0 EGP, profit filed for the period of 391K EGP, and that currency line as a share of the profit of 0.0% for H1 2026.",
+    "The company filed nothing for rates."
+   ],
+   "figures": {
+    "revenue filed": "3.53M EGP",
+    "gross profit filed": "1.04M EGP",
+    "gross margin": "29.5%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "0 EGP",
+    "profit filed for the period": "391K EGP",
+    "that currency line as a share of the profit": "0.0%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "BINV",
+   "name": "B Investments Holding SAE",
+   "says": [
+    "For rates, the company filed borrowings it owes of 20.74M EGP with 93.9% repricing within a year for H1 2026.",
+    "For currency, it filed a currency gain or loss filed of 99.04M EGP, profit filed for the period of 369.7M EGP, and that currency line as a share of the profit of 26.8% for H1 2026.",
+    "For inputs, the company filed nothing."
+   ],
+   "figures": {
+    "borrowings it owes": "20.74M EGP",
+    "of that repricing within a year": "93.9%",
+    "period the rates figures cover": "H1 2026",
+    "currency gain or loss filed": "99.04M EGP",
+    "profit filed for the period": "369.7M EGP",
+    "that currency line as a share of the profit": "26.8%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "BIOC",
+   "name": "GlaxoSmithKline S.A.E.",
+   "says": [
+    "All three channels reach the company based on its filings for H1 2026.",
+    "The rates channel reflects borrowings it owes of 1.75B EGP, with 100.0% of that repricing within a year and an interest cover of 5.86×, while inputs show revenue filed of 1.77B EGP, gross profit filed of 420.12M EGP, and a gross margin of 23.7%.",
+    "The currency channel reaches the company through net positions held of -53K EGP in CHF, -812K EGP in EUR, -103K EGP in GBP, and 1.53M EGP in USD, alongside profit filed for the period of 43.9M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "1.75B EGP",
+    "of that repricing within a year": "100.0%",
+    "interest cover": "5.86×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "1.77B EGP",
+    "gross profit filed": "420.12M EGP",
+    "gross margin": "23.7%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in CHF": "-53K EGP",
+    "net position held in EUR": "-812K EGP",
+    "net position held in GBP": "-103K EGP",
+    "net position held in USD": "1.53M EGP",
+    "profit filed for the period": "43.9M EGP",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "BONY",
+   "name": "Bonyan for Development and Trade",
+   "says": [
+    "For rates, the company owes borrowings of 873.97M EGP with 20.7% repricing within a year and an interest cover of 14.73× for H1 2026.",
+    "For inputs, it reported revenue of 605.28M EGP and gross profit of 346.66M EGP, giving a gross margin of 57.3% for H1 2026.",
+    "For currency, it reported a currency gain or loss of -1.08M EGP against profit of 1.04B EGP, making that line -0.1% of profit for H1 2026, but it filed no figures for what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "873.97M EGP",
+    "of that repricing within a year": "20.7%",
+    "interest cover": "14.73×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "605.28M EGP",
+    "gross profit filed": "346.66M EGP",
+    "gross margin": "57.3%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-1.08M EGP",
+    "profit filed for the period": "1.04B EGP",
+    "that currency line as a share of the profit": "-0.1%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "CAED",
+   "name": "Cairo Educational Services",
+   "says": [
+    "For inputs, the company filed revenue of 146.81M EGP, gross profit of 43.85M EGP, and a gross margin of 29.9% for 9M 2026 (to 31 May).",
+    "The company filed nothing for rates regarding what it owes and repricing.",
+    "The company filed nothing for currency regarding holdings or obligations outside the pound."
+   ],
+   "figures": {
+    "revenue filed": "146.81M EGP",
+    "gross profit filed": "43.85M EGP",
+    "gross margin": "29.9%",
+    "period the inputs figures cover": "9M 2026 (to 31 May)"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "CANA",
+   "name": "Suez Canal Bank SAE",
+   "says": [
+    "Rates reach the company through borrowings it owes of 7.57B EGP, with 8.6% repricing within a year for Q1 2026.",
+    "Currency reaches it through H1 2026 net positions of -189.25M EGP held in EUR, -533K EGP held in GBP, and -13.94B EGP held in USD.",
+    "The company filed nothing for the inputs channel."
+   ],
+   "figures": {
+    "borrowings it owes": "7.57B EGP",
+    "of that repricing within a year": "8.6%",
+    "period the rates figures cover": "Q1 2026",
+    "net position held in EUR": "-189.25M EGP",
+    "net position held in GBP": "-533K EGP",
+    "net position held in USD": "-13.94B EGP",
+    "profit filed for the period": "3.63B EGP",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "CEFM",
+   "name": "Middle Egypt Flour Mills",
+   "says": [
+    "Inputs reaches the company, which reported revenue filed of 631.33M EGP, gross profit filed of 166.59M EGP, and a gross margin of 26.4% for 9M 2026 (to 31 Mar).",
+    "The company filed nothing for rates regarding what it owes and how soon that reprices.",
+    "The company also filed nothing for currency regarding holdings or obligations in currencies other than the pound."
+   ],
+   "figures": {
+    "revenue filed": "631.33M EGP",
+    "gross profit filed": "166.59M EGP",
+    "gross margin": "26.4%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "CERA",
+   "name": "Arab Ceramic Co. - Ceramica Remas",
+   "says": [
+    "All three channels reach the company based on its filings for H1 2026.",
+    "The rates channel reflects borrowings it owes of 72.31M EGP, while the inputs channel shows revenue filed of 1.18B EGP alongside gross profit filed of 103.13M EGP and a gross margin of 8.7%.",
+    "The currency channel appears through a currency gain or loss filed of -17.22M EGP against profit filed for the period of 5.86M EGP, giving that currency line as a share of the profit of -293.6%."
+   ],
+   "figures": {
+    "borrowings it owes": "72.31M EGP",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "1.18B EGP",
+    "gross profit filed": "103.13M EGP",
+    "gross margin": "8.7%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-17.22M EGP",
+    "profit filed for the period": "5.86M EGP",
+    "that currency line as a share of the profit": "-293.6%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "CICH",
+   "name": "CI Capital Holding for Financial Investments",
+   "says": [
+    "For rates, the company filed borrowings it owes of 562K EGP with 100.0% of that repricing within a year for H1 2026.",
+    "For currency, it filed a currency gain or loss of -3.38M EGP against profit filed for the period of 790.08M EGP, making that currency line -0.4% of the profit for H1 2026.",
+    "For inputs, the company filed no figures."
+   ],
+   "figures": {
+    "borrowings it owes": "562K EGP",
+    "of that repricing within a year": "100.0%",
+    "period the rates figures cover": "H1 2026",
+    "currency gain or loss filed": "-3.38M EGP",
+    "profit filed for the period": "790.08M EGP",
+    "that currency line as a share of the profit": "-0.4%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "CIEB",
+   "name": "Credit Agricole Egypt",
+   "says": [
+    "The currency channel reaches the company, which filed a net position held in USD of 1.03B EGP, a net position held in EUR of -1.21B EGP, a net position held in GBP of 58.93M EGP, and a net position held in CHF of 1.96M EGP for H1 2026.",
+    "The company also filed a currency gain or loss filed of 419.87M EGP, representing 11.7% of its profit filed for the period of 3.59B EGP.",
+    "The company filed nothing for the rates channel or the inputs channel."
+   ],
+   "figures": {
+    "net position held in CHF": "1.96M EGP",
+    "net position held in EUR": "-1.21B EGP",
+    "net position held in GBP": "58.93M EGP",
+    "net position held in USD": "1.03B EGP",
+    "currency gain or loss filed": "419.87M EGP",
+    "profit filed for the period": "3.59B EGP",
+    "that currency line as a share of the profit": "11.7%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency"
+   ]
+  },
+  {
+   "ticker": "CIRA",
+   "name": "Cairo For Investment And Real Estate Developments -CIRA Education",
+   "says": [
+    "All three channels reach this company based on its filings for 9M 2026 (to 31 May).",
+    "The rates channel shows borrowings it owes of 3.99B EGP with 43.5% repricing within a year, while the inputs channel reflects revenue filed of 4.91B EGP, gross profit filed of 2.68B EGP, and a gross margin of 54.5%.",
+    "The currency channel reaches it through foreign holdings, including a net position held in AED of 200K EGP, a net position held in EUR of -591K EGP, and a net position held in USD of 19.52M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "3.99B EGP",
+    "of that repricing within a year": "43.5%",
+    "period the rates figures cover": "9M 2026 (to 31 May)",
+    "revenue filed": "4.91B EGP",
+    "gross profit filed": "2.68B EGP",
+    "gross margin": "54.5%",
+    "period the inputs figures cover": "9M 2026 (to 31 May)",
+    "net position held in AED": "200K EGP",
+    "net position held in EUR": "-591K EGP",
+    "net position held in USD": "19.52M EGP",
+    "profit filed for the period": "1.24B EGP",
+    "period the currency figures cover": "9M 2026 (to 31 May)"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "CLHO",
+   "name": "Cleopatra Hospital Company",
+   "says": [
+    "For rates, the company filed borrowings it owes of 3.91B EGP with 26.4% of that repricing within a year, an interest cover of 3.93×, and for inputs it filed revenue of 1.97B EGP, gross profit of 644.6M EGP, and a gross margin of 32.7%, with both channels covering Q1 2026.",
+    "For currency, the company filed no figures for what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "3.91B EGP",
+    "of that repricing within a year": "26.4%",
+    "interest cover": "3.93×",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "1.97B EGP",
+    "gross profit filed": "644.6M EGP",
+    "gross margin": "32.7%",
+    "period the inputs figures cover": "Q1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "CNFN",
+   "name": "Contact Financial Holding SAE",
+   "says": [
+    "For rates, the company filed borrowings it owes of 289.35M EGP and interest cover of -0.76× for Q1 2026.",
+    "For currency, it filed a currency gain or loss filed of 14.78M EGP against profit filed for the period of 151.81M EGP, making that currency line as a share of the profit 9.7% for H1 2026.",
+    "The company filed nothing for inputs."
+   ],
+   "figures": {
+    "borrowings it owes": "289.35M EGP",
+    "interest cover": "-0.76×",
+    "period the rates figures cover": "Q1 2026",
+    "currency gain or loss filed": "14.78M EGP",
+    "profit filed for the period": "151.81M EGP",
+    "that currency line as a share of the profit": "9.7%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "COMI",
+   "name": "Commercial International Bank - Egypt (CIB) S.A.E.",
+   "says": [
+    "The currency channel reaches this company, which filed a net position held in USD of -1.75B EGP and a currency gain or loss filed of 1.59B EGP for H1 2026.",
+    "The company filed nothing for the rates channel and nothing for the inputs channel."
+   ],
+   "figures": {
+    "net position held in CHF": "4.17M EGP",
+    "net position held in EUR": "123.41M EGP",
+    "net position held in GBP": "16.82M EGP",
+    "net position held in JPY": "-235K EGP",
+    "net position held in SAR": "-511.75M EGP",
+    "net position held in USD": "-1.75B EGP",
+    "currency gain or loss filed": "1.59B EGP",
+    "profit filed for the period": "39.24B EGP",
+    "that currency line as a share of the profit": "4.0%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency"
+   ]
+  },
+  {
+   "ticker": "COSG",
+   "name": "Cairo Oils & Soap",
+   "says": [
+    "For rates in H1 2026, the company filed borrowings it owes of 255.47M EGP with 98.1% of that repricing within a year and interest cover of 0.97×, while inputs show revenue filed of 491.35M EGP, gross profit filed of 54.51M EGP, and a gross margin of 11.1%.",
+    "For currency in H1 2026, it filed a currency gain or loss of 0 EGP on profit filed for the period of 156K EGP, making that currency line as a share of the profit 0.0%."
+   ],
+   "figures": {
+    "borrowings it owes": "255.47M EGP",
+    "of that repricing within a year": "98.1%",
+    "interest cover": "0.97×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "491.35M EGP",
+    "gross profit filed": "54.51M EGP",
+    "gross margin": "11.1%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "0 EGP",
+    "profit filed for the period": "156K EGP",
+    "that currency line as a share of the profit": "0.0%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "CPME",
+   "name": "Catalyst Partners Middle East",
+   "says": [
+    "For H1 2026, rates reach the company through borrowings it owes of 783.91M EGP, of that repricing within a year being 53.0%.",
+    "Currency reaches the company with a currency gain or loss filed of 256K EGP, which is 0.2% of its profit filed for the period of 117.08M EGP for H1 2026.",
+    "The company filed nothing for the inputs channel."
+   ],
+   "figures": {
+    "borrowings it owes": "783.91M EGP",
+    "of that repricing within a year": "53.0%",
+    "period the rates figures cover": "H1 2026",
+    "currency gain or loss filed": "256K EGP",
+    "profit filed for the period": "117.08M EGP",
+    "that currency line as a share of the profit": "0.2%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "CRST",
+   "name": "Creast Mark For Contracting And Real Estate Development",
+   "says": [
+    "For rates in Q1 2026, the company filed borrowings it owes of 13.71M EGP with 30.7% repricing within a year and an interest cover of 527.01×.",
+    "For inputs in Q1 2026, it reported revenue filed of 88.2M EGP, gross profit filed of 58.79M EGP, and a gross margin of 66.7%.",
+    "For currency, the company filed no figures."
+   ],
+   "figures": {
+    "borrowings it owes": "13.71M EGP",
+    "of that repricing within a year": "30.7%",
+    "interest cover": "527.01×",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "88.2M EGP",
+    "gross profit filed": "58.79M EGP",
+    "gross margin": "66.7%",
+    "period the inputs figures cover": "Q1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "DAPH",
+   "name": "Development & Engineering Consultants",
+   "says": [
+    "All three channels reach the company in Q1 2026.",
+    "Rates reach it through borrowings it owes of 807M EGP with 10.1% of that repricing within a year, while inputs reach it through revenue filed of 28.05M EGP, gross profit filed of 16.78M EGP, and a gross margin of 59.8%.",
+    "Currency reaches it through a currency gain or loss filed of 4.85M EGP, which is 5.1% of its profit filed for the period of 94.28M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "807M EGP",
+    "of that repricing within a year": "10.1%",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "28.05M EGP",
+    "gross profit filed": "16.78M EGP",
+    "gross margin": "59.8%",
+    "period the inputs figures cover": "Q1 2026",
+    "currency gain or loss filed": "4.85M EGP",
+    "profit filed for the period": "94.28M EGP",
+    "that currency line as a share of the profit": "5.1%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "DEIN",
+   "name": "Delta Insurance",
+   "says": [
+    "The currency channel reaches the company, with a currency gain or loss filed of 65.73M EGP for Q1 2026, representing 14.9% of the 442.62M EGP profit filed for the period.",
+    "The company filed nothing for the rates channel or the inputs channel."
+   ],
+   "figures": {
+    "currency gain or loss filed": "65.73M EGP",
+    "profit filed for the period": "442.62M EGP",
+    "that currency line as a share of the profit": "14.9%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency"
+   ]
+  },
+  {
+   "ticker": "DOMT",
+   "name": "Arabian Food Industries Co.",
+   "says": [
+    "For Q1 2026, rates reach the company through borrowings it owes of 2.32B EGP, with 93.4% of that repricing within a year and interest cover at 1.78×.",
+    "Inputs reach it with revenue filed at 2.56B EGP, gross profit filed at 627.84M EGP, and a gross margin of 24.5%.",
+    "Currency also reaches it, showing profit filed for the period of 72.19M EGP alongside a currency gain or loss filed of -33.5M EGP, which stands at -46.4% as a share of the profit."
+   ],
+   "figures": {
+    "borrowings it owes": "2.32B EGP",
+    "of that repricing within a year": "93.4%",
+    "interest cover": "1.78×",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "2.56B EGP",
+    "gross profit filed": "627.84M EGP",
+    "gross margin": "24.5%",
+    "period the inputs figures cover": "Q1 2026",
+    "currency gain or loss filed": "-33.5M EGP",
+    "profit filed for the period": "72.19M EGP",
+    "that currency line as a share of the profit": "-46.4%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "DSCW",
+   "name": "Dice Sports & Casual Wear Manufacturers SAE",
+   "says": [
+    "All three channels reach the company based on its H1 2026 filings.",
+    "For rates, it owes 4.36B EGP in borrowings with 85.5% repricing within a year, while inputs show revenue filed of 3.39B EGP, gross profit filed of 650.41M EGP, and a gross margin of 19.2%.",
+    "For currency, it holds a net position held in EUR of 5.38M EGP and a net position held in USD of -35.52M EGP, alongside profit filed for the period of 70.23M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "4.36B EGP",
+    "of that repricing within a year": "85.5%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "3.39B EGP",
+    "gross profit filed": "650.41M EGP",
+    "gross margin": "19.2%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in EUR": "5.38M EGP",
+    "net position held in USD": "-35.52M EGP",
+    "profit filed for the period": "70.23M EGP",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "DTPP",
+   "name": "Delta for Printing & Packaging",
+   "says": [
+    "For inputs covering H1 2026, the company filed revenue of 502.13M EGP, gross profit of 174M EGP, and a gross margin of 34.7%.",
+    "The company filed nothing for rates regarding what it owes and how soon that reprices.",
+    "The company also filed nothing for currency regarding what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "revenue filed": "502.13M EGP",
+    "gross profit filed": "174M EGP",
+    "gross margin": "34.7%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "EASB",
+   "name": "Egyptian Arabian Company for Securities Brokerage EAC",
+   "says": [
+    "For H1 2026, the company filed borrowings it owes of 4.64M EGP with 41.6% repricing within a year, while revenue filed and gross profit filed were both 34.63M EGP, yielding a gross margin of 100.0%.",
+    "Across the currency channel for H1 2026, it reported a currency gain or loss filed of 386K EGP, which represents 2.0% of the 19.45M EGP profit filed for the period."
+   ],
+   "figures": {
+    "borrowings it owes": "4.64M EGP",
+    "of that repricing within a year": "41.6%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "34.63M EGP",
+    "gross profit filed": "34.63M EGP",
+    "gross margin": "100.0%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "386K EGP",
+    "profit filed for the period": "19.45M EGP",
+    "that currency line as a share of the profit": "2.0%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ECAP",
+   "name": "El Ezz Ceramics & Porcelain Co. (Gemma)",
+   "says": [
+    "Inputs reach the company, which filed revenue of 1.54B EGP, gross profit of 284.47M EGP, and a gross margin of 18.5% for H1 2026.",
+    "Currency also reaches it, with H1 2026 net positions of 17K EGP in AED, -237.94M EGP in EUR, 310K EGP in SAR, and -88.17M EGP in USD, alongside a currency gain or loss of -11.31M EGP and profit of -69.36M EGP.",
+    "The company filed nothing for rates."
+   ],
+   "figures": {
+    "revenue filed": "1.54B EGP",
+    "gross profit filed": "284.47M EGP",
+    "gross margin": "18.5%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in AED": "17K EGP",
+    "net position held in EUR": "-237.94M EGP",
+    "net position held in SAR": "310K EGP",
+    "net position held in USD": "-88.17M EGP",
+    "currency gain or loss filed": "-11.31M EGP",
+    "profit filed for the period": "-69.36M EGP",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "EEII",
+   "name": "El Arabia Engineering Industries",
+   "says": [
+    "For H1 2026, the inputs channel reached the company with revenue filed of 99.05M EGP, gross profit filed of 19.15M EGP, and a gross margin of 19.3%.",
+    "The currency channel also reached it in H1 2026 through a net position held in USD of 39K EGP, a net position held in GBP of 0 EGP, and a currency gain or loss filed of 723K EGP, which was 14.6% of the profit filed for the period of 4.95M EGP.",
+    "The company filed nothing for the rates channel."
+   ],
+   "figures": {
+    "revenue filed": "99.05M EGP",
+    "gross profit filed": "19.15M EGP",
+    "gross margin": "19.3%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in GBP": "0 EGP",
+    "net position held in USD": "39K EGP",
+    "currency gain or loss filed": "723K EGP",
+    "profit filed for the period": "4.95M EGP",
+    "that currency line as a share of the profit": "14.6%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "EFID",
+   "name": "Edita Food Industries SAE",
+   "says": [
+    "For H1 2026, the rates channel reaches the company through borrowings it owes of 6.23B EGP, with 44.6% repricing within a year, while the inputs channel shows revenue filed of 12.25B EGP, gross profit filed of 4.19B EGP, and a gross margin of 34.2%.",
+    "The currency channel also reaches it, with a currency gain or loss filed of -28.34M EGP against profit filed for the period of 1.61B EGP, making that currency line as a share of the profit -1.8%."
+   ],
+   "figures": {
+    "borrowings it owes": "6.23B EGP",
+    "of that repricing within a year": "44.6%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "12.25B EGP",
+    "gross profit filed": "4.19B EGP",
+    "gross margin": "34.2%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-28.34M EGP",
+    "profit filed for the period": "1.61B EGP",
+    "that currency line as a share of the profit": "-1.8%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "EFIH",
+   "name": "e-finance for Digital and Financial Investments S.A.E.",
+   "says": [
+    "For H1 2026, the rates channel shows borrowings it owes of 10.17M EGP, with 34.6% of that repricing within a year and interest cover of 553.26×.",
+    "The inputs channel shows revenue filed of 1.41B EGP, gross profit filed of 1.21B EGP, and a gross margin of 85.6% for H1 2026.",
+    "For the currency channel covering H1 2026, currency gain or loss filed was 3.31M EGP against profit filed for the period of 1.25B EGP, making that currency line as a share of the profit 0.3%."
+   ],
+   "figures": {
+    "borrowings it owes": "10.17M EGP",
+    "of that repricing within a year": "34.6%",
+    "interest cover": "553.26×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "1.41B EGP",
+    "gross profit filed": "1.21B EGP",
+    "gross margin": "85.6%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "3.31M EGP",
+    "profit filed for the period": "1.25B EGP",
+    "that currency line as a share of the profit": "0.3%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "EGAL",
+   "name": "Egypt Aluminum",
+   "says": [
+    "For inputs, the company filed revenue filed of 36.73B EGP, gross profit filed of 12.28B EGP, and a gross margin of 33.4% for the period 9M 2026 (to 31 Mar).",
+    "For currency, it reported currency gain or loss filed of 682M EGP, profit filed for the period of 10.45B EGP, and that currency line as a share of the profit of 6.5% for 9M 2026 (to 31 Mar).",
+    "For rates, the company filed nothing."
+   ],
+   "figures": {
+    "revenue filed": "36.73B EGP",
+    "gross profit filed": "12.28B EGP",
+    "gross margin": "33.4%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)",
+    "currency gain or loss filed": "682M EGP",
+    "profit filed for the period": "10.45B EGP",
+    "that currency line as a share of the profit": "6.5%",
+    "period the currency figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "EGAS",
+   "name": "Egypt Gas Co.",
+   "says": [
+    "For H1 2026, the rates channel reaches the company through borrowings it owes of 986.85M EGP, with 100.0% of that repricing within a year.",
+    "The inputs channel reaches it through revenue filed of 4.7B EGP, gross profit filed of -78.24M EGP, and a gross margin of -1.7%.",
+    "The currency channel reaches it through holdings including a net position held in USD of 2.86M EGP, yielding a currency gain or loss filed of -942K EGP against profit filed for the period of 234.69M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "986.85M EGP",
+    "of that repricing within a year": "100.0%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "4.7B EGP",
+    "gross profit filed": "-78.24M EGP",
+    "gross margin": "-1.7%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in AED": "0 EGP",
+    "net position held in EUR": "58K EGP",
+    "net position held in GBP": "1K EGP",
+    "net position held in JOD": "118K EGP",
+    "net position held in OMR": "30K EGP",
+    "net position held in SAR": "1.7M EGP",
+    "net position held in USD": "2.86M EGP",
+    "currency gain or loss filed": "-942K EGP",
+    "profit filed for the period": "234.69M EGP",
+    "that currency line as a share of the profit": "-0.4%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "EGBE",
+   "name": "Egyptian Gulf Bank",
+   "says": [
+    "The currency channel reaches the company, which filed a currency gain or loss filed of 226.34M EGP for H1 2026, alongside a net position held in USD of -2.51B EGP, a net position held in EUR of -478.64M EGP, and a net position held in GBP of -89.61M EGP against a profit filed for the period of 2.21B EGP, making that currency line as a share of the profit 10.2%.",
+    "The company filed nothing for the rates channel or the inputs channel in the provided figures."
+   ],
+   "figures": {
+    "net position held in EUR": "-478.64M EGP",
+    "net position held in GBP": "-89.61M EGP",
+    "net position held in USD": "-2.51B EGP",
+    "currency gain or loss filed": "226.34M EGP",
+    "profit filed for the period": "2.21B EGP",
+    "that currency line as a share of the profit": "10.2%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency"
+   ]
+  },
+  {
+   "ticker": "EGCH",
+   "name": "Egyptian Chemical Industries",
+   "says": [
+    "All three channels reach the company in the filings for 9M 2026 (to 31 Mar).",
+    "Rates reach it through borrowings it owes of 14.64B EGP with 1.4% repricing within a year and interest cover of 1.09×, while inputs show revenue filed of 7.31B EGP against gross profit filed of 3.13B EGP for a gross margin of 42.9%.",
+    "Currency reaches it through a currency gain or loss filed of -1.07B EGP, which is -201.8% of the profit filed for the period of 531.31M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "14.64B EGP",
+    "of that repricing within a year": "1.4%",
+    "interest cover": "1.09×",
+    "period the rates figures cover": "9M 2026 (to 31 Mar)",
+    "revenue filed": "7.31B EGP",
+    "gross profit filed": "3.13B EGP",
+    "gross margin": "42.9%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)",
+    "currency gain or loss filed": "-1.07B EGP",
+    "profit filed for the period": "531.31M EGP",
+    "that currency line as a share of the profit": "-201.8%",
+    "period the currency figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "EGTS",
+   "name": "Egyptian for Tourism Resorts",
+   "says": [
+    "For inputs, the company filed revenue filed of 68.99M EGP, gross profit filed of 1.31M EGP, and a gross margin of 1.9% for Q1 2026.",
+    "For currency, the Q1 2026 filings show a net position held in USD of 37.56M EGP, a currency gain or loss filed of 270.78M EGP, profit filed for the period of 9.78M EGP, and that currency line as a share of the profit of 2768.1%.",
+    "For rates, the company filed nothing."
+   ],
+   "figures": {
+    "revenue filed": "68.99M EGP",
+    "gross profit filed": "1.31M EGP",
+    "gross margin": "1.9%",
+    "period the inputs figures cover": "Q1 2026",
+    "net position held in USD": "37.56M EGP",
+    "currency gain or loss filed": "270.78M EGP",
+    "profit filed for the period": "9.78M EGP",
+    "that currency line as a share of the profit": "2768.1%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "EHDR",
+   "name": null,
+   "says": [
+    "For inputs, the company reported revenue filed of 132.78M EGP, gross profit filed of 78.41M EGP, and a gross margin of 59.1% for H1 2026.",
+    "For currency, it reported currency gain or loss filed of -0 EGP against profit filed for the period of 40.88M EGP, making that currency line as a share of the profit -0.0% for H1 2026.",
+    "The company filed nothing for rates."
+   ],
+   "figures": {
+    "revenue filed": "132.78M EGP",
+    "gross profit filed": "78.41M EGP",
+    "gross margin": "59.1%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-0 EGP",
+    "profit filed for the period": "40.88M EGP",
+    "that currency line as a share of the profit": "-0.0%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "ELEC",
+   "name": "Electro Cable Egypt",
+   "says": [
+    "Rates reach the company through borrowings it owes of 3.81B EGP, of that repricing within a year of 94.0%, and interest cover of 0.11× for H1 2026.",
+    "Inputs reach it with revenue filed of 2.05B EGP, gross profit filed of 100.68M EGP, and a gross margin of 4.9% for H1 2026.",
+    "Currency reaches it through a currency gain or loss filed of -25.99M EGP alongside profit filed for the period of -50.82M EGP for H1 2026."
+   ],
+   "figures": {
+    "borrowings it owes": "3.81B EGP",
+    "of that repricing within a year": "94.0%",
+    "interest cover": "0.11×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "2.05B EGP",
+    "gross profit filed": "100.68M EGP",
+    "gross margin": "4.9%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-25.99M EGP",
+    "profit filed for the period": "-50.82M EGP",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ELKA",
+   "name": "El Kahera Housing",
+   "says": [
+    "For H1 2026, the rates channel reaches the company through borrowings it owes of 848.89M EGP with 27.1% repricing within a year and interest cover of 7.51×.",
+    "The inputs channel shows revenue filed of 179.75M EGP, gross profit filed of 138.99M EGP, and a gross margin of 77.3%.",
+    "The currency channel reflects a currency gain or loss filed of 89K EGP against profit filed for the period of 463.8M EGP, representing 0.0% of that profit."
+   ],
+   "figures": {
+    "borrowings it owes": "848.89M EGP",
+    "of that repricing within a year": "27.1%",
+    "interest cover": "7.51×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "179.75M EGP",
+    "gross profit filed": "138.99M EGP",
+    "gross margin": "77.3%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "89K EGP",
+    "profit filed for the period": "463.8M EGP",
+    "that currency line as a share of the profit": "0.0%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ELSH",
+   "name": "El-Shams Housing & Development SA",
+   "says": [
+    "For H1 2026, the company filed inputs channel figures showing revenue filed of 147.65M EGP, gross profit filed of 137.3M EGP, and a gross margin of 93.0%.",
+    "Its currency channel filings for H1 2026 reported a currency gain or loss filed of 2K EGP alongside profit filed for the period of 89.05M EGP, making that currency line as a share of the profit 0.0%.",
+    "The company filed nothing for the rates channel."
+   ],
+   "figures": {
+    "revenue filed": "147.65M EGP",
+    "gross profit filed": "137.3M EGP",
+    "gross margin": "93.0%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "2K EGP",
+    "profit filed for the period": "89.05M EGP",
+    "that currency line as a share of the profit": "0.0%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "EMFD",
+   "name": "Emaar Misr for Development SAE",
+   "says": [
+    "All three channels reach this company.",
+    "Under rates, borrowings it owes stand at 3.35B EGP with 99.0% repricing within a year for Q1 2026.",
+    "For inputs, H1 2026 revenue filed is 11.08B EGP, gross profit filed is 6.12B EGP, and gross margin is 55.3%, while currency shows a currency gain or loss filed of 1.57B EGP, profit filed for the period of 5.56B EGP, and that currency line as a share of the profit at 28.3% for H1 2026."
+   ],
+   "figures": {
+    "borrowings it owes": "3.35B EGP",
+    "of that repricing within a year": "99.0%",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "11.08B EGP",
+    "gross profit filed": "6.12B EGP",
+    "gross margin": "55.3%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "1.57B EGP",
+    "profit filed for the period": "5.56B EGP",
+    "that currency line as a share of the profit": "28.3%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "EOSB",
+   "name": "El Orouba Securities Brokerage",
+   "says": [
+    "For H1 2026, the company filed borrowings it owes of 10.27M EGP with 2.6% repricing within a year, revenue filed of 4.84M EGP, gross profit filed of 2.74M EGP, and a gross margin of 56.5%.",
+    "Its filings for H1 2026 also show a currency gain or loss filed of 17K EGP, profit filed for the period of 918K EGP, and that currency line as a share of the profit of 1.9%."
+   ],
+   "figures": {
+    "borrowings it owes": "10.27M EGP",
+    "of that repricing within a year": "2.6%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "4.84M EGP",
+    "gross profit filed": "2.74M EGP",
+    "gross margin": "56.5%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "17K EGP",
+    "profit filed for the period": "918K EGP",
+    "that currency line as a share of the profit": "1.9%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "EPCO",
+   "name": "Egypt for Poultry Co.",
+   "says": [
+    "Inputs reach this company, with gross profit filed at 204K EGP on revenue filed of 1.23M EGP, representing a gross margin of 16.7% for Q1 2026.",
+    "The company filed nothing for rates and filed nothing for currency."
+   ],
+   "figures": {
+    "revenue filed": "1.23M EGP",
+    "gross profit filed": "204K EGP",
+    "gross margin": "16.7%",
+    "period the inputs figures cover": "Q1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "EPPK",
+   "name": "El Ahram Co. for Printing & Packing",
+   "says": [
+    "For H1 2026, rates reach the company through borrowings it owes of 47.49M EGP, with 100.0% of that repricing within a year, while inputs reach it through revenue filed of 8.95M EGP and gross profit filed of 252K EGP, yielding a gross margin of 2.8%.",
+    "The filings report profit filed for the period of -1.51M EGP and currency gain or loss filed of 0 EGP for H1 2026, but the company filed nothing for what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "47.49M EGP",
+    "of that repricing within a year": "100.0%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "8.95M EGP",
+    "gross profit filed": "252K EGP",
+    "gross margin": "2.8%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "0 EGP",
+    "profit filed for the period": "-1.51M EGP",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ETEL",
+   "name": "Telecom Egypt",
+   "says": [
+    "All three channels reach the company in H1 2026, as it owes 43.07B EGP in borrowings with 100.0% repricing within a year and an interest cover of 2.40×.",
+    "For inputs, it filed revenue of 59.22B EGP, gross profit of 25.49B EGP, and a gross margin of 43.0%.",
+    "For currency, it reported a currency gain or loss of -2.17B EGP, which equals -14.0% of its filed profit of 15.41B EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "43.07B EGP",
+    "of that repricing within a year": "100.0%",
+    "interest cover": "2.40×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "59.22B EGP",
+    "gross profit filed": "25.49B EGP",
+    "gross margin": "43.0%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-2.17B EGP",
+    "profit filed for the period": "15.41B EGP",
+    "that currency line as a share of the profit": "-14.0%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ETRS",
+   "name": "Egyptian Transport And Commercial Services Co. (Egytrans Nosco)",
+   "says": [
+    "All three channels reach the company in H1 2026.",
+    "The rates channel shows borrowings it owes of 133.61M EGP with 70.1% repricing within a year, while the inputs channel shows revenue filed of 802.69M EGP against gross profit filed of 264.39M EGP.",
+    "The currency channel reaches it through foreign holdings, including a net position held in USD of 10.33M EGP and a net position held in EUR of 535K EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "133.61M EGP",
+    "of that repricing within a year": "70.1%",
+    "interest cover": "8.91×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "802.69M EGP",
+    "gross profit filed": "264.39M EGP",
+    "gross margin": "32.9%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in AED": "-0 EGP",
+    "net position held in AUD": "-1K EGP",
+    "net position held in EUR": "535K EGP",
+    "net position held in GBP": "49K EGP",
+    "net position held in JOD": "0 EGP",
+    "net position held in JPY": "-472K EGP",
+    "net position held in SAR": "29K EGP",
+    "net position held in USD": "10.33M EGP",
+    "profit filed for the period": "85M EGP",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "EXPA",
+   "name": "Export Development Bank of Egypt",
+   "says": [
+    "The currency channel reached the company in Q1 2026, when it filed a currency gain or loss of 162.18M EGP, representing 5.7% of its profit filed for the period of 2.86B EGP.",
+    "The company filed nothing for the rates channel or the inputs channel."
+   ],
+   "figures": {
+    "currency gain or loss filed": "162.18M EGP",
+    "profit filed for the period": "2.86B EGP",
+    "that currency line as a share of the profit": "5.7%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency"
+   ]
+  },
+  {
+   "ticker": "FNAR",
+   "name": "Al Fanar Contracting Construction Trade Import & Export Co.",
+   "says": [
+    "For inputs in H1 2026, the company filed revenue of 71.36M EGP, gross profit of 7.08M EGP, and a gross margin of 9.9%.",
+    "For currency in H1 2026, it reported a currency gain or loss of 1K EGP alongside profit for the period of 684K EGP, making that currency line 0.1% of profit.",
+    "For rates, the company filed nothing."
+   ],
+   "figures": {
+    "revenue filed": "71.36M EGP",
+    "gross profit filed": "7.08M EGP",
+    "gross margin": "9.9%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "1K EGP",
+    "profit filed for the period": "684K EGP",
+    "that currency line as a share of the profit": "0.1%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "FWRY",
+   "name": "Fawry For Banking Technology And Electronic Payment",
+   "says": [
+    "For H1 2026, the company filed borrowings it owes of 479.96M EGP with 68.2% repricing within a year, an interest cover of 36.51×, and revenue filed of 3.15B EGP against gross profit filed of 2.05B EGP yielding a gross margin of 64.9%.",
+    "A currency gain or loss filed of -2.24M EGP represents -0.2% of its profit filed for the period of 1.3B EGP, but the company filed nothing on what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "479.96M EGP",
+    "of that repricing within a year": "68.2%",
+    "interest cover": "36.51×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "3.15B EGP",
+    "gross profit filed": "2.05B EGP",
+    "gross margin": "64.9%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-2.24M EGP",
+    "profit filed for the period": "1.3B EGP",
+    "that currency line as a share of the profit": "-0.2%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "GBCO",
+   "name": "GB Corp",
+   "says": [
+    "All three channels reach this company in H1 2026.",
+    "The rates channel operates through borrowings it owes of 44.57B EGP with 65.2% repricing within a year and interest cover of 1.60×, while the inputs channel shows revenue filed of 48.47B EGP, gross profit filed of 7.42B EGP, and a gross margin of 15.3%.",
+    "The currency channel reflects a net position held in USD of -1.85B EGP, a net position held in EUR of 91.78M EGP, and a currency gain or loss filed of -23.43M EGP against profit filed for the period of 1.06B EGP, making that currency line as a share of the profit -2.2%."
+   ],
+   "figures": {
+    "borrowings it owes": "44.57B EGP",
+    "of that repricing within a year": "65.2%",
+    "interest cover": "1.60×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "48.47B EGP",
+    "gross profit filed": "7.42B EGP",
+    "gross margin": "15.3%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in EUR": "91.78M EGP",
+    "net position held in USD": "-1.85B EGP",
+    "currency gain or loss filed": "-23.43M EGP",
+    "profit filed for the period": "1.06B EGP",
+    "that currency line as a share of the profit": "-2.2%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "GDWA",
+   "name": "Gadwa For Industrial Development",
+   "says": [
+    "For Q1 2026, the company filed borrowings it owes of 24.94M EGP with 14.3% of that repricing within a year and interest cover of -71.62×, showing that rates reach it.",
+    "It filed a net position held in USD of -57.62M EGP, a currency gain or loss filed of -4.46M EGP, and a profit filed for the period of -257.21M EGP for Q1 2026, showing that currency reaches it.",
+    "The company filed nothing for inputs."
+   ],
+   "figures": {
+    "borrowings it owes": "24.94M EGP",
+    "of that repricing within a year": "14.3%",
+    "interest cover": "-71.62×",
+    "period the rates figures cover": "Q1 2026",
+    "net position held in USD": "-57.62M EGP",
+    "currency gain or loss filed": "-4.46M EGP",
+    "profit filed for the period": "-257.21M EGP",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "GGCC",
+   "name": "Giza General Contracting & Real Estate Investment",
+   "says": [
+    "For inputs covering Q1 2026, the company filed revenue of 401.41M EGP, gross profit of 80.89M EGP, and a gross margin of 20.2%.",
+    "The company filed nothing for rates or currency."
+   ],
+   "figures": {
+    "revenue filed": "401.41M EGP",
+    "gross profit filed": "80.89M EGP",
+    "gross margin": "20.2%",
+    "period the inputs figures cover": "Q1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "GIHD",
+   "name": "Gharbia Islamic Housing Development",
+   "says": [
+    "For inputs, the company filed revenue of 11M EGP, gross profit of 8.12M EGP, and a gross margin of 73.9% for H1 2026.",
+    "The company filed nothing for rates and filed nothing for currency."
+   ],
+   "figures": {
+    "revenue filed": "11M EGP",
+    "gross profit filed": "8.12M EGP",
+    "gross margin": "73.9%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "GMCI",
+   "name": "GMC Group for Industrial Commercial & Financial Investments",
+   "says": [
+    "For 9M 2025, the rates channel reaches the company through 67K EGP in borrowings it owes, with 19.4% of that repricing within a year.",
+    "The inputs channel reaches it through 543K EGP in revenue filed, 11K EGP in gross profit filed, and a gross margin of 2.0% for 9M 2025.",
+    "The company filed nothing for the currency channel."
+   ],
+   "figures": {
+    "borrowings it owes": "67K EGP",
+    "of that repricing within a year": "19.4%",
+    "period the rates figures cover": "9M 2025",
+    "revenue filed": "543K EGP",
+    "gross profit filed": "11K EGP",
+    "gross margin": "2.0%",
+    "period the inputs figures cover": "9M 2025"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "GOUR",
+   "name": "Gourmet Egypt.Com Foods",
+   "says": [
+    "For Q1 2026, the rates channel shows borrowings it owes of 200.88M EGP with 22.4% repricing within a year and interest cover of 9.70×, while the inputs channel reflects revenue filed of 796.1M EGP, gross profit filed of 264.05M EGP, and a gross margin of 33.2%.",
+    "The currency channel reports a currency gain or loss filed of 921K EGP, which represents 1.3% of the profit filed for the period of 69.73M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "200.88M EGP",
+    "of that repricing within a year": "22.4%",
+    "interest cover": "9.70×",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "796.1M EGP",
+    "gross profit filed": "264.05M EGP",
+    "gross margin": "33.2%",
+    "period the inputs figures cover": "Q1 2026",
+    "currency gain or loss filed": "921K EGP",
+    "profit filed for the period": "69.73M EGP",
+    "that currency line as a share of the profit": "1.3%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "GPIM",
+   "name": "GPI For Urban Growth",
+   "says": [
+    "For inputs, the company filed revenue filed of 9.98M EGP, gross profit filed of 7.63M EGP, and a gross margin of 76.5% for H1 2026.",
+    "The company filed nothing for rates.",
+    "The company filed nothing for currency."
+   ],
+   "figures": {
+    "revenue filed": "9.98M EGP",
+    "gross profit filed": "7.63M EGP",
+    "gross margin": "76.5%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "GRCA",
+   "name": "Grand Investment Capital",
+   "says": [
+    "For inputs covering Q2 2026 (to 30 Jun), the company filed revenue of 339K EGP, gross profit of 188K EGP, and a gross margin of 55.5%.",
+    "For currency covering Q2 2026 (to 30 Jun), it filed a currency gain or loss of 0 EGP, profit for the period of 147K EGP, and that currency line as a share of the profit of 0.0%.",
+    "For rates, the company filed nothing."
+   ],
+   "figures": {
+    "revenue filed": "339K EGP",
+    "gross profit filed": "188K EGP",
+    "gross margin": "55.5%",
+    "period the inputs figures cover": "Q2 2026 (to 30 Jun)",
+    "currency gain or loss filed": "0 EGP",
+    "profit filed for the period": "147K EGP",
+    "that currency line as a share of the profit": "0.0%",
+    "period the currency figures cover": "Q2 2026 (to 30 Jun)"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "GTWL",
+   "name": "Golden Textiles & Clothes Wool",
+   "says": [
+    "For Q1 2026, rates reach the company through borrowings it owes of 848.13M EGP, with 85.5% of that repricing within a year and interest cover at 1.79×.",
+    "Inputs also reach it, with revenue filed of 213.84M EGP, gross profit filed of 61.43M EGP, and a gross margin of 28.7% for Q1 2026.",
+    "The company filed nothing for currency holdings or obligations in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "848.13M EGP",
+    "of that repricing within a year": "85.5%",
+    "interest cover": "1.79×",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "213.84M EGP",
+    "gross profit filed": "61.43M EGP",
+    "gross margin": "28.7%",
+    "period the inputs figures cover": "Q1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "HBCO",
+   "name": "Heibco Npv",
+   "says": [
+    "For H1 2026, the company filed borrowings it owes of 80.7M EGP with 100.0% of that repricing within a year, while its inputs channel shows revenue filed of 189.78M EGP, gross profit filed of 69.68M EGP, and a gross margin of 36.7%.",
+    "The company filed nothing for the currency channel, so no figures are reported for holdings or debts in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "80.7M EGP",
+    "of that repricing within a year": "100.0%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "189.78M EGP",
+    "gross profit filed": "69.68M EGP",
+    "gross margin": "36.7%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "HDBK",
+   "name": "Housing & Development Bank",
+   "says": [
+    "The rates channel reaches the company through borrowings it owes of 165.92M EGP, of that repricing within a year being 28.7% for Q1 2026.",
+    "The currency channel also reaches it, with a currency gain or loss filed of 5.14M EGP against a profit filed for the period of 9.92B EGP for H1 2026, alongside net positions of 611K EGP held in USD, -93K EGP in EUR, -9K EGP in GBP, and 1.03M EGP in OTHER.",
+    "The company filed nothing for the inputs channel."
+   ],
+   "figures": {
+    "borrowings it owes": "165.92M EGP",
+    "of that repricing within a year": "28.7%",
+    "period the rates figures cover": "Q1 2026",
+    "net position held in EUR": "-93K EGP",
+    "net position held in GBP": "-9K EGP",
+    "net position held in OTHER": "1.03M EGP",
+    "net position held in USD": "611K EGP",
+    "currency gain or loss filed": "5.14M EGP",
+    "profit filed for the period": "9.92B EGP",
+    "that currency line as a share of the profit": "0.1%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "HELI",
+   "name": "Heliopolis Housing",
+   "says": [
+    "For Q1 2026, the company filed 469.7M EGP in borrowings, with 100.0% repricing within a year.",
+    "For H1 2026, revenue was 2.24B EGP against gross profit of 1.92B EGP, giving a gross margin of 85.8%.",
+    "The currency gain or loss was 1.08M EGP out of profit of 1.36B EGP for H1 2026, making that currency line 0.1% of profit, while the company filed nothing for what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "469.7M EGP",
+    "of that repricing within a year": "100.0%",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "2.24B EGP",
+    "gross profit filed": "1.92B EGP",
+    "gross margin": "85.8%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "1.08M EGP",
+    "profit filed for the period": "1.36B EGP",
+    "that currency line as a share of the profit": "0.1%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "HRHO",
+   "name": "EFG Holding S.A.E.",
+   "says": [
+    "The currency channel reaches this company, which filed a net position held in USD of -721.16M EGP, a net position held in EUR of -75.69M EGP, a net position held in GBP of -438K EGP, and a net position held in OTHER of 55.24M EGP for H1 2026.",
+    "For that period, the company filed a currency gain or loss filed of 593.83M EGP, profit filed for the period of 2.9B EGP, and that currency line as a share of the profit of 20.5%.",
+    "The company filed nothing for the rates channel or the inputs channel."
+   ],
+   "figures": {
+    "net position held in EUR": "-75.69M EGP",
+    "net position held in GBP": "-438K EGP",
+    "net position held in OTHER": "55.24M EGP",
+    "net position held in USD": "-721.16M EGP",
+    "currency gain or loss filed": "593.83M EGP",
+    "profit filed for the period": "2.9B EGP",
+    "that currency line as a share of the profit": "20.5%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency"
+   ]
+  },
+  {
+   "ticker": "IBCT",
+   "name": "International Business Corp. for Trading & Agencies",
+   "says": [
+    "For rates, filings for Q1 2026 report borrowings it owes of 82.31M EGP, with 99.0% of that repricing within a year.",
+    "For inputs, filings for Q1 2026 report revenue filed of 47.3M EGP, gross profit filed of 17.97M EGP, and a gross margin of 38.0%.",
+    "For currency, the company filed nothing."
+   ],
+   "figures": {
+    "borrowings it owes": "82.31M EGP",
+    "of that repricing within a year": "99.0%",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "47.3M EGP",
+    "gross profit filed": "17.97M EGP",
+    "gross margin": "38.0%",
+    "period the inputs figures cover": "Q1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ICFC",
+   "name": "International Co. for Fertilizers & Chemicals",
+   "says": [
+    "For rates in H1 2026, the company owes borrowings of 27.54M EGP, with 100.0% of that repricing within a year.",
+    "For inputs in H1 2026, it reported revenue of 1.95B EGP and gross profit of 143.67M EGP, giving a gross margin of 7.4%.",
+    "For currency in H1 2026, it filed a currency gain or loss of 548K EGP against profit of 162.4M EGP, making that line 0.3% of the profit, but it filed no figures for what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "27.54M EGP",
+    "of that repricing within a year": "100.0%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "1.95B EGP",
+    "gross profit filed": "143.67M EGP",
+    "gross margin": "7.4%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "548K EGP",
+    "profit filed for the period": "162.4M EGP",
+    "that currency line as a share of the profit": "0.3%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ICID",
+   "name": "International Company for Investment & Development",
+   "says": [
+    "For inputs, the company reported revenue filed of 6.28M EGP and gross profit filed of 6.28M EGP, which results in a gross margin of 100.0% for H1 2026.",
+    "The company filed nothing for rates and currency."
+   ],
+   "figures": {
+    "revenue filed": "6.28M EGP",
+    "gross profit filed": "6.28M EGP",
+    "gross margin": "100.0%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "ICLE",
+   "name": "International Co. for Leasing SAE",
+   "says": [
+    "For rates, the company reported borrowings it owes of 11.38B EGP with 26.7% repricing within a year for H1 2026.",
+    "For inputs, it filed revenue of 1.4B EGP and gross profit of 343.25M EGP, representing a gross margin of 24.5% for H1 2026.",
+    "For currency, it reported a currency gain or loss of 21.77M EGP, which is 24.4% of its profit of 89.11M EGP for H1 2026."
+   ],
+   "figures": {
+    "borrowings it owes": "11.38B EGP",
+    "of that repricing within a year": "26.7%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "1.4B EGP",
+    "gross profit filed": "343.25M EGP",
+    "gross margin": "24.5%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "21.77M EGP",
+    "profit filed for the period": "89.11M EGP",
+    "that currency line as a share of the profit": "24.4%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "IDRE",
+   "name": "Ismailia Development & Real Estate Co.",
+   "says": [
+    "The inputs channel reaches the company through filed revenue of 1.28M EGP, gross profit filed of 590K EGP, and a gross margin of 46.2% for H1 2026.",
+    "The company filed nothing for the rates channel and nothing for the currency channel."
+   ],
+   "figures": {
+    "revenue filed": "1.28M EGP",
+    "gross profit filed": "590K EGP",
+    "gross margin": "46.2%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "IEEC",
+   "name": "Industrial & Engineering Enterprises Co.",
+   "says": [
+    "For rates, filings for H1 2026 report borrowings it owes of 11.04M EGP, with 8.2% of that repricing within a year.",
+    "For inputs, H1 2026 filings show revenue filed of 421.69M EGP, gross profit filed of 29.93M EGP, and a gross margin of 7.1%.",
+    "For currency, the company filed nothing."
+   ],
+   "figures": {
+    "borrowings it owes": "11.04M EGP",
+    "of that repricing within a year": "8.2%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "421.69M EGP",
+    "gross profit filed": "29.93M EGP",
+    "gross margin": "7.1%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "IFAP",
+   "name": "International Agricultural Products",
+   "says": [
+    "All three channels reach the company in 9M 2026 (to 31 Mar), with rates exposure from borrowings it owes of 288.87M EGP, of that repricing within a year being 37.3%, and interest cover of 3.36×.",
+    "The inputs channel registers revenue filed of 1.95B EGP against gross profit filed of 84.06M EGP, resulting in a gross margin of 4.3%.",
+    "The currency channel shows a currency gain or loss filed of -9.6M EGP against profit filed for the period of 384.06M EGP, which makes that currency line as a share of the profit -2.5%."
+   ],
+   "figures": {
+    "borrowings it owes": "288.87M EGP",
+    "of that repricing within a year": "37.3%",
+    "interest cover": "3.36×",
+    "period the rates figures cover": "9M 2026 (to 31 Mar)",
+    "revenue filed": "1.95B EGP",
+    "gross profit filed": "84.06M EGP",
+    "gross margin": "4.3%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)",
+    "currency gain or loss filed": "-9.6M EGP",
+    "profit filed for the period": "384.06M EGP",
+    "that currency line as a share of the profit": "-2.5%",
+    "period the currency figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "INEG",
+   "name": "Integrated Engineering Group S.A.E",
+   "says": [
+    "For rates in H1 2026, the company filed borrowings it owes of 301K EGP, with 90.0% of that repricing within a year.",
+    "For inputs in H1 2026, it reported revenue filed of 12.72M EGP, gross profit filed of 3.18M EGP, and a gross margin of 25.0%.",
+    "For currency, the company filed no figures."
+   ],
+   "figures": {
+    "borrowings it owes": "301K EGP",
+    "of that repricing within a year": "90.0%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "12.72M EGP",
+    "gross profit filed": "3.18M EGP",
+    "gross margin": "25.0%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "INFI",
+   "name": "Ismailia National Food Industries",
+   "says": [
+    "For inputs in H1 2026, the company filed revenue of 199.54M EGP and gross profit of 51.25M EGP, giving a gross margin of 25.7%.",
+    "For currency in Q1 2026, it reported a currency gain or loss of 2.43M EGP, profit of 18.25M EGP, and that currency line as a share of the profit of 13.3%.",
+    "For rates in H1 2026, borrowings it owes are 3.24M EGP, but it filed nothing showing how soon that reprices or what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "3.24M EGP",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "199.54M EGP",
+    "gross profit filed": "51.25M EGP",
+    "gross margin": "25.7%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "2.43M EGP",
+    "profit filed for the period": "18.25M EGP",
+    "that currency line as a share of the profit": "13.3%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ISMA",
+   "name": "Ismailia Misr Poultry",
+   "says": [
+    "For inputs, the filings report revenue filed of 28.25M EGP, gross profit filed of 24.86M EGP, and a gross margin of 88.0% for H1 2026.",
+    "The company filed nothing for rates regarding what it owes and how soon that reprices.",
+    "The company also filed nothing for currency regarding what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "revenue filed": "28.25M EGP",
+    "gross profit filed": "24.86M EGP",
+    "gross margin": "88.0%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "ISPH",
+   "name": "Ibnsina Pharma",
+   "says": [
+    "For rates, the company filed borrowings of 1.88B EGP with an interest cover of 1.54× for H1 2026, though it filed nothing on repricing timing.",
+    "For inputs, H1 2026 revenue was 41.49B EGP and gross profit was 3.33B EGP, giving a gross margin of 8.0%.",
+    "For currency, it reported a currency loss of -359K EGP against profit of 511.3M EGP for H1 2026, which is -0.1% of profit, while filing no balance figures for holdings or debts in non-pound currencies."
+   ],
+   "figures": {
+    "borrowings it owes": "1.88B EGP",
+    "interest cover": "1.54×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "41.49B EGP",
+    "gross profit filed": "3.33B EGP",
+    "gross margin": "8.0%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-359K EGP",
+    "profit filed for the period": "511.3M EGP",
+    "that currency line as a share of the profit": "-0.1%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "JUFO",
+   "name": "Juhayna Food Industries",
+   "says": [
+    "All three channels reach this company.",
+    "Under rates, borrowings it owes stand at 8.27B EGP with 74.3% repricing within a year, while under inputs, revenue filed is 17.68B EGP against gross profit filed of 4.33B EGP.",
+    "Under currency, the company holds net positions of -3.87M EGP in EUR and -14.68M EGP in USD."
+   ],
+   "figures": {
+    "borrowings it owes": "8.27B EGP",
+    "of that repricing within a year": "74.3%",
+    "interest cover": "3.51×",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "17.68B EGP",
+    "gross profit filed": "4.33B EGP",
+    "gross margin": "24.5%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in EUR": "-3.87M EGP",
+    "net position held in USD": "-14.68M EGP",
+    "profit filed for the period": "1.38B EGP",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "KABO",
+   "name": "El Nasr Clothing & Textiles Co.",
+   "says": [
+    "For 9M 2026 (to 31 Mar), the rates channel reaches the company through borrowings it owes of 287.12M EGP with 91.9% repricing within a year and an interest cover of 0.20×.",
+    "The inputs channel reflects revenue filed of 448.93M EGP, gross profit filed of 131.63M EGP, and a gross margin of 29.3%.",
+    "The currency channel shows a currency gain or loss filed of 2.71M EGP, which is 5.0% of the 53.79M EGP profit filed for the period, but the filings report no figure for what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "287.12M EGP",
+    "of that repricing within a year": "91.9%",
+    "interest cover": "0.20×",
+    "period the rates figures cover": "9M 2026 (to 31 Mar)",
+    "revenue filed": "448.93M EGP",
+    "gross profit filed": "131.63M EGP",
+    "gross margin": "29.3%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)",
+    "currency gain or loss filed": "2.71M EGP",
+    "profit filed for the period": "53.79M EGP",
+    "that currency line as a share of the profit": "5.0%",
+    "period the currency figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "KORA",
+   "name": "KORRA",
+   "says": [
+    "All three channels reach the company in H1 2026.",
+    "The rates channel reaches it through borrowings it owes of 1.87B EGP with 96.1% repricing within a year and interest cover of 1.92×, while inputs show revenue filed of 3.24B EGP, gross profit filed of 665M EGP, and a gross margin of 20.5%.",
+    "The currency channel reaches it with a currency gain or loss filed of -25.59M EGP against profit filed for the period of 139.01M EGP, making that currency line as a share of the profit -18.4%."
+   ],
+   "figures": {
+    "borrowings it owes": "1.87B EGP",
+    "of that repricing within a year": "96.1%",
+    "interest cover": "1.92×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "3.24B EGP",
+    "gross profit filed": "665M EGP",
+    "gross margin": "20.5%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-25.59M EGP",
+    "profit filed for the period": "139.01M EGP",
+    "that currency line as a share of the profit": "-18.4%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "KRDI",
+   "name": "Al Khair River for Development Agriculture Investment and Environmental Services",
+   "says": [
+    "For H1 2026, the rates channel reaches the company through borrowings it owes of 108.2M EGP, with 100.0% of that repricing within a year.",
+    "The inputs channel is present with revenue filed of 208.3M EGP, gross profit filed of 68.42M EGP, and a gross margin of 32.8%.",
+    "The currency channel shows little effect, as the currency gain or loss filed was 8K EGP, representing 0.0% of the profit filed for the period of 42.49M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "108.2M EGP",
+    "of that repricing within a year": "100.0%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "208.3M EGP",
+    "gross profit filed": "68.42M EGP",
+    "gross margin": "32.8%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "8K EGP",
+    "profit filed for the period": "42.49M EGP",
+    "that currency line as a share of the profit": "0.0%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "KWIN",
+   "name": "El Kahera El Watania Investment",
+   "says": [
+    "In H1 2026, the currency channel reached the company with a currency gain or loss of -14K EGP, which was -0.1% of its profit of 10.04M EGP.",
+    "The company filed nothing for rates or inputs."
+   ],
+   "figures": {
+    "currency gain or loss filed": "-14K EGP",
+    "profit filed for the period": "10.04M EGP",
+    "that currency line as a share of the profit": "-0.1%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency"
+   ]
+  },
+  {
+   "ticker": "KZPC",
+   "name": "Kafr El Zayat Pesticides & Chemical Co.",
+   "says": [
+    "All three channels reach the company in H1 2026.",
+    "Rates reach it through borrowings it owes of 1.72B EGP with 100.0% repricing within a year and interest cover of 1.24×, while inputs reach it through revenue filed of 1.06B EGP and a gross margin of 30.9%.",
+    "Currency reaches it with a net position held in USD of 5.15M EGP, a net position held in EUR of -10K EGP, and a currency gain or loss filed of 112K EGP, which is 0.1% of the 78.64M EGP profit filed for the period."
+   ],
+   "figures": {
+    "borrowings it owes": "1.72B EGP",
+    "of that repricing within a year": "100.0%",
+    "interest cover": "1.24×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "1.06B EGP",
+    "gross profit filed": "328.72M EGP",
+    "gross margin": "30.9%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in EUR": "-10K EGP",
+    "net position held in USD": "5.15M EGP",
+    "currency gain or loss filed": "112K EGP",
+    "profit filed for the period": "78.64M EGP",
+    "that currency line as a share of the profit": "0.1%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "LCSW",
+   "name": "Lecico Egypt SAE",
+   "says": [
+    "All three channels reach this company, with rates covering 2.58B EGP in borrowings where 96.4% reprices within a year for H1 2026.",
+    "For inputs, it filed revenue of 4.39B EGP, gross profit of 960.88M EGP, and a gross margin of 21.9% for H1 2026.",
+    "For currency in H1 2026, it held a net position of -233K EGP in GBP, 376K EGP in USD, and 6.99M EGP in ZAR alongside profit for the period of 147.52M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "2.58B EGP",
+    "of that repricing within a year": "96.4%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "4.39B EGP",
+    "gross profit filed": "960.88M EGP",
+    "gross margin": "21.9%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in GBP": "-233K EGP",
+    "net position held in USD": "376K EGP",
+    "net position held in ZAR": "6.99M EGP",
+    "profit filed for the period": "147.52M EGP",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "LUTS",
+   "name": "Lotus For Agricultural Investments And Development",
+   "says": [
+    "For Q1 2026, the rates channel shows borrowings of 213.86M EGP with 47.2% repricing within a year and interest cover of -0.27×.",
+    "The inputs channel shows Q1 2026 revenue of 10.04M EGP, gross profit of 2.63M EGP, and a gross margin of 26.2%.",
+    "The company filed nothing for the currency channel."
+   ],
+   "figures": {
+    "borrowings it owes": "213.86M EGP",
+    "of that repricing within a year": "47.2%",
+    "interest cover": "-0.27×",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "10.04M EGP",
+    "gross profit filed": "2.63M EGP",
+    "gross margin": "26.2%",
+    "period the inputs figures cover": "Q1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "MAAL",
+   "name": "Marseilla Al Masreia Al Khalegeya for Holding Investment",
+   "says": [
+    "Inputs reach the company through H1 2026 revenue filed of 1.03B EGP, gross profit filed of 282.54M EGP, and a gross margin of 27.5%, alongside profit filed for the period of 126.02M EGP.",
+    "Currency reaches the company through a net position held in USD of 32K EGP for H1 2026.",
+    "Rates do not reach the company because it filed nothing for what it owes or when that reprices."
+   ],
+   "figures": {
+    "revenue filed": "1.03B EGP",
+    "gross profit filed": "282.54M EGP",
+    "gross margin": "27.5%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in USD": "32K EGP",
+    "profit filed for the period": "126.02M EGP",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "MASR",
+   "name": "Madinet Masr for Housing & Development",
+   "says": [
+    "For H1 2026, rates reach the company through borrowings it owes of 3.04B EGP and interest cover of 3.81×, while inputs show revenue filed of 5.13B EGP, gross profit filed of 2.69B EGP, and a gross margin of 52.4%.",
+    "Currency also reaches it with a currency gain or loss filed of 17.89M EGP alongside profit filed for the period of 1.03B EGP, making that currency line as a share of the profit 1.7% for H1 2026."
+   ],
+   "figures": {
+    "borrowings it owes": "3.04B EGP",
+    "interest cover": "3.81×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "5.13B EGP",
+    "gross profit filed": "2.69B EGP",
+    "gross margin": "52.4%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "17.89M EGP",
+    "profit filed for the period": "1.03B EGP",
+    "that currency line as a share of the profit": "1.7%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "MBEG",
+   "name": "MB for Engineering & Contracting",
+   "says": [
+    "For H1 2026, rates reach the company through 64.67M EGP in borrowings, with 37.6% repricing within a year and interest cover at 2.46×.",
+    "Currency also reaches it, with Q1 2026 filings showing a currency gain or loss of -3.44M EGP against profit of 4.99M EGP, representing -69.0% of that profit.",
+    "The company filed nothing for inputs."
+   ],
+   "figures": {
+    "borrowings it owes": "64.67M EGP",
+    "of that repricing within a year": "37.6%",
+    "interest cover": "2.46×",
+    "period the rates figures cover": "H1 2026",
+    "currency gain or loss filed": "-3.44M EGP",
+    "profit filed for the period": "4.99M EGP",
+    "that currency line as a share of the profit": "-69.0%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "MBSC",
+   "name": "Misr Beni Suef Cement Co. SAE",
+   "says": [
+    "For inputs in H1 2026, the company filed revenue of 2.99B EGP, gross profit of 1.55B EGP, and a gross margin of 52.0%.",
+    "For currency in H1 2026, it reported a currency gain or loss filed of -6.22M EGP against profit filed for the period of 1.25B EGP, making that line -0.5% of profit.",
+    "For rates, the company filed nothing."
+   ],
+   "figures": {
+    "revenue filed": "2.99B EGP",
+    "gross profit filed": "1.55B EGP",
+    "gross margin": "52.0%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-6.22M EGP",
+    "profit filed for the period": "1.25B EGP",
+    "that currency line as a share of the profit": "-0.5%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "MCQE",
+   "name": "Misr Cement Co. (Qena)",
+   "says": [
+    "For inputs in H1 2026, the company filed revenue of 4.94B EGP and gross profit of 2.02B EGP, giving a gross margin of 40.8%.",
+    "For currency in H1 2026, it filed a currency gain or loss of -63.33M EGP against a profit filed for the period of 1.43B EGP, making that currency line as a share of the profit -4.4%.",
+    "The company filed nothing for rates."
+   ],
+   "figures": {
+    "revenue filed": "4.94B EGP",
+    "gross profit filed": "2.02B EGP",
+    "gross margin": "40.8%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-63.33M EGP",
+    "profit filed for the period": "1.43B EGP",
+    "that currency line as a share of the profit": "-4.4%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "MCRO",
+   "name": "Macro Group Pharmaceutical S.A.E.",
+   "says": [
+    "In H1 2026, the rates channel reached the company through borrowings it owes of 50.03M EGP, with 24.5% repricing within a year and interest cover of 5.53×.",
+    "The inputs channel showed revenue filed of 575.21M EGP, gross profit filed of 406.15M EGP, and a gross margin of 70.6%.",
+    "The currency channel reached it with a currency gain or loss filed of -12.57M EGP alongside profit filed for the period of 84.42M EGP, making that currency line as a share of the profit -14.9%."
+   ],
+   "figures": {
+    "borrowings it owes": "50.03M EGP",
+    "of that repricing within a year": "24.5%",
+    "interest cover": "5.53×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "575.21M EGP",
+    "gross profit filed": "406.15M EGP",
+    "gross margin": "70.6%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-12.57M EGP",
+    "profit filed for the period": "84.42M EGP",
+    "that currency line as a share of the profit": "-14.9%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "MEGM",
+   "name": "Middle East Glass Manufacturing SAE",
+   "says": [
+    "For rates, the company filed borrowings of 3.19B EGP with 71.5% repricing within a year and an interest cover of 4.63× for Q1 2026.",
+    "For currency, it filed a currency gain or loss of -91.29M EGP against profit of 454.94M EGP, making that line -20.1% of profit for H1 2026.",
+    "For inputs, the company filed no figures."
+   ],
+   "figures": {
+    "borrowings it owes": "3.19B EGP",
+    "of that repricing within a year": "71.5%",
+    "interest cover": "4.63×",
+    "period the rates figures cover": "Q1 2026",
+    "currency gain or loss filed": "-91.29M EGP",
+    "profit filed for the period": "454.94M EGP",
+    "that currency line as a share of the profit": "-20.1%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "MENA",
+   "name": "Mena Touristic & Real Estate Investment",
+   "says": [
+    "For rates, borrowings it owes stood at 901K EGP for Q1 2026, with 58.3% repricing within a year.",
+    "For inputs, H1 2026 revenue filed was 23.91M EGP and gross profit filed was 15.67M EGP, leaving a gross margin of 65.5%.",
+    "For currency, the currency gain or loss filed was 1K EGP for Q1 2026, which represents 0.0% of the 13.96M EGP profit filed for the period."
+   ],
+   "figures": {
+    "borrowings it owes": "901K EGP",
+    "of that repricing within a year": "58.3%",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "23.91M EGP",
+    "gross profit filed": "15.67M EGP",
+    "gross margin": "65.5%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "1K EGP",
+    "profit filed for the period": "13.96M EGP",
+    "that currency line as a share of the profit": "0.0%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "MEPA",
+   "name": "Medical Packaging Company",
+   "says": [
+    "All three channels reach the company in H1 2026.",
+    "The rates channel shows borrowings it owes of 38.66M EGP with 52.5% repricing within a year and interest cover of 0.77×, while the inputs channel shows revenue filed of 45.69M EGP, gross profit filed of 14.14M EGP, and a gross margin of 30.9%.",
+    "The currency channel also reaches the company, with a currency gain or loss filed of 172K EGP against profit filed for the period of 4.4M EGP, making that currency line as a share of the profit 3.9%."
+   ],
+   "figures": {
+    "borrowings it owes": "38.66M EGP",
+    "of that repricing within a year": "52.5%",
+    "interest cover": "0.77×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "45.69M EGP",
+    "gross profit filed": "14.14M EGP",
+    "gross margin": "30.9%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "172K EGP",
+    "profit filed for the period": "4.4M EGP",
+    "that currency line as a share of the profit": "3.9%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "MFPC",
+   "name": "Misr Fertilizers Production Company MOPCO",
+   "says": [
+    "For H1 2026, the company filed borrowings it owes of 139.1M EGP with 23.4% of that repricing within a year, interest cover of 156.24×, revenue filed of 20.21B EGP, gross profit filed of 12.18B EGP, and a gross margin of 60.3%.",
+    "Its filings for H1 2026 also show a currency gain or loss filed of 374.95M EGP, profit filed for the period of 9.9B EGP, and that currency line as a share of the profit of 3.8%."
+   ],
+   "figures": {
+    "borrowings it owes": "139.1M EGP",
+    "of that repricing within a year": "23.4%",
+    "interest cover": "156.24×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "20.21B EGP",
+    "gross profit filed": "12.18B EGP",
+    "gross margin": "60.3%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "374.95M EGP",
+    "profit filed for the period": "9.9B EGP",
+    "that currency line as a share of the profit": "3.8%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "MFSC",
+   "name": "Misr Duty Free Shops Co.",
+   "says": [
+    "The inputs channel reaches the company, with revenue filed of 1.44B EGP, gross profit filed of 499.18M EGP, and a gross margin of 34.6% for FY 2026 (to 30 Jun).",
+    "The currency channel also reaches it, showing currency gain or loss filed of -6.46M EGP against profit filed for the period of 220.67M EGP, making that currency line as a share of the profit -2.9% for 9M 2026 (to 31 Mar).",
+    "For the rates channel, the company filed nothing."
+   ],
+   "figures": {
+    "revenue filed": "1.44B EGP",
+    "gross profit filed": "499.18M EGP",
+    "gross margin": "34.6%",
+    "period the inputs figures cover": "FY 2026 (to 30 Jun)",
+    "currency gain or loss filed": "-6.46M EGP",
+    "profit filed for the period": "220.67M EGP",
+    "that currency line as a share of the profit": "-2.9%",
+    "period the currency figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "MHOT",
+   "name": "Misr Hotels Co.",
+   "says": [
+    "For inputs, the company filed revenue filed: 1.51B EGP, gross profit filed: 1.43B EGP, and a gross margin: 94.9% for the period the inputs figures cover: 9M 2026 (to 31 Mar).",
+    "For currency, it reported currency gain or loss filed: 41.83M EGP alongside profit filed for the period: 1.15B EGP, making that currency line as a share of the profit: 3.6% for the period the currency figures cover: 9M 2026 (to 31 Mar).",
+    "The company filed nothing for rates."
+   ],
+   "figures": {
+    "revenue filed": "1.51B EGP",
+    "gross profit filed": "1.43B EGP",
+    "gross margin": "94.9%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)",
+    "currency gain or loss filed": "41.83M EGP",
+    "profit filed for the period": "1.15B EGP",
+    "that currency line as a share of the profit": "3.6%",
+    "period the currency figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "MICH",
+   "name": "Misr Chemical Industries Ltd.",
+   "says": [
+    "The rates channel reaches this company, which reports borrowings it owes of 182.73M EGP, of that repricing within a year of 41.9%, and interest cover of 21.69× for 9M 2026 (to 31 Mar).",
+    "The company filed nothing for the inputs channel and nothing for the currency channel."
+   ],
+   "figures": {
+    "borrowings it owes": "182.73M EGP",
+    "of that repricing within a year": "41.9%",
+    "interest cover": "21.69×",
+    "period the rates figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "rates"
+   ]
+  },
+  {
+   "ticker": "MILS",
+   "name": "North Cairo Mills Co.",
+   "says": [
+    "For inputs, the company filed revenue of 861.18M EGP, gross profit of 150.79M EGP, and a gross margin of 17.5% for 9M 2026 (to 31 Mar).",
+    "The currency channel shows a currency gain or loss filed of -975K EGP against profit filed for the period of 33.92M EGP, making that line -2.9% of profit for 9M 2026 (to 31 Mar).",
+    "The company filed nothing for rates."
+   ],
+   "figures": {
+    "revenue filed": "861.18M EGP",
+    "gross profit filed": "150.79M EGP",
+    "gross margin": "17.5%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)",
+    "currency gain or loss filed": "-975K EGP",
+    "profit filed for the period": "33.92M EGP",
+    "that currency line as a share of the profit": "-2.9%",
+    "period the currency figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "MISR",
+   "name": "MISR Intercontinental for Granite & Marble",
+   "says": [
+    "For inputs in H1 2026, the company filed revenue of 543K EGP and gross profit of 169K EGP, giving a gross margin of 31.1%.",
+    "For currency in H1 2026, it filed a currency gain or loss of 211K EGP alongside profit for the period of 28K EGP, with that currency line as a share of the profit at 753.6%.",
+    "For rates, the company filed nothing."
+   ],
+   "figures": {
+    "revenue filed": "543K EGP",
+    "gross profit filed": "169K EGP",
+    "gross margin": "31.1%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "211K EGP",
+    "profit filed for the period": "28K EGP",
+    "that currency line as a share of the profit": "753.6%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "MMAT",
+   "name": "Marsa Marsa Alam for Tourism Development",
+   "says": [
+    "For H1 2026, the currency channel reached the company, which filed a currency gain or loss of 43K EGP alongside a profit of -2.6M EGP.",
+    "The company filed nothing for the rates channel or the inputs channel."
+   ],
+   "figures": {
+    "currency gain or loss filed": "43K EGP",
+    "profit filed for the period": "-2.6M EGP",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency"
+   ]
+  },
+  {
+   "ticker": "MOED",
+   "name": "Egyptian Modern Education Systems",
+   "says": [
+    "For the inputs channel, the company filed revenue of 38.16M EGP, gross profit of 10.8M EGP, and a gross margin of 28.3% for 9M 2026 (to 31 Mar).",
+    "The company filed nothing for the rates channel and filed nothing for the currency channel."
+   ],
+   "figures": {
+    "revenue filed": "38.16M EGP",
+    "gross profit filed": "10.8M EGP",
+    "gross margin": "28.3%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "MOIN",
+   "name": "Mohandes Insurance Co.",
+   "says": [
+    "For rates, filings for H1 2026 report borrowings it owes of 3.37M EGP, while the company filed nothing for inputs.",
+    "For currency, H1 2026 filings show a currency gain or loss filed of 12.6M EGP, representing 10.7% of the profit filed for the period of 117.33M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "3.37M EGP",
+    "period the rates figures cover": "H1 2026",
+    "currency gain or loss filed": "12.6M EGP",
+    "profit filed for the period": "117.33M EGP",
+    "that currency line as a share of the profit": "10.7%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "MOSC",
+   "name": "Misr Oils & Soap Co.",
+   "says": [
+    "For inputs in H1 2026, the company filed revenue of 1.75B EGP, gross profit of 46.4M EGP, and a gross margin of 2.7%.",
+    "For currency in H1 2026, it filed a currency gain or loss of 46K EGP, profit of 17.31M EGP, and that currency line represented 0.3% of the profit.",
+    "For rates, the company filed nothing."
+   ],
+   "figures": {
+    "revenue filed": "1.75B EGP",
+    "gross profit filed": "46.4M EGP",
+    "gross margin": "2.7%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "46K EGP",
+    "profit filed for the period": "17.31M EGP",
+    "that currency line as a share of the profit": "0.3%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "MPCI",
+   "name": "Memphis Pharmaceutical & Chemical Industries",
+   "says": [
+    "For rates, the company owes borrowings of 78.5M EGP, with 27.9% of that repricing within a year for 9M 2026 (to 31 Mar).",
+    "For inputs, it filed revenue of 1.39B EGP, gross profit of 542.54M EGP, and a gross margin of 39.0% for 9M 2026 (to 31 Mar).",
+    "For currency, the company filed nothing."
+   ],
+   "figures": {
+    "borrowings it owes": "78.5M EGP",
+    "of that repricing within a year": "27.9%",
+    "period the rates figures cover": "9M 2026 (to 31 Mar)",
+    "revenue filed": "1.39B EGP",
+    "gross profit filed": "542.54M EGP",
+    "gross margin": "39.0%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "MPCO",
+   "name": "Mansourah Poultry Co.",
+   "says": [
+    "For Q1 2026, rates reach the company through borrowings it owes of 56.48M EGP, of that repricing within a year of 100.0%, and an interest cover of -21.61×.",
+    "Inputs also reach it, with revenue filed of 122.95M EGP, gross profit filed of -35.8M EGP, and a gross margin of -29.1% for Q1 2026.",
+    "The company filed a currency gain or loss filed of 15K EGP alongside profit filed for the period of -41.64M EGP for Q1 2026, but filed nothing showing what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "56.48M EGP",
+    "of that repricing within a year": "100.0%",
+    "interest cover": "-21.61×",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "122.95M EGP",
+    "gross profit filed": "-35.8M EGP",
+    "gross margin": "-29.1%",
+    "period the inputs figures cover": "Q1 2026",
+    "currency gain or loss filed": "15K EGP",
+    "profit filed for the period": "-41.64M EGP",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "MPRC",
+   "name": "Egyptian Media Production City",
+   "says": [
+    "For rates in Q1 2026, the company filed borrowings it owes of 9.14M EGP, with 100.0% of that repricing within a year and an interest cover of 242.61×.",
+    "For inputs in H1 2026, it reported revenue filed of 723.72M EGP, gross profit filed of 506.65M EGP, and a gross margin of 70.0%.",
+    "For currency, the company filed nothing."
+   ],
+   "figures": {
+    "borrowings it owes": "9.14M EGP",
+    "of that repricing within a year": "100.0%",
+    "interest cover": "242.61×",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "723.72M EGP",
+    "gross profit filed": "506.65M EGP",
+    "gross margin": "70.0%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "MTIE",
+   "name": "MM Group for Industry & International Trade",
+   "says": [
+    "For H1 2026, the company filed borrowings it owes of 88.91M EGP with 24.4% repricing within a year and interest cover of 54.69×.",
+    "For inputs in H1 2026, it reported revenue filed of 8.06B EGP, gross profit filed of 884.7M EGP, and a gross margin of 11.0%.",
+    "For currency in H1 2026, it recorded a currency gain or loss filed of 16.49M EGP, profit filed for the period of 465.1M EGP, and that currency line as a share of the profit of 3.5%."
+   ],
+   "figures": {
+    "borrowings it owes": "88.91M EGP",
+    "of that repricing within a year": "24.4%",
+    "interest cover": "54.69×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "8.06B EGP",
+    "gross profit filed": "884.7M EGP",
+    "gross margin": "11.0%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "16.49M EGP",
+    "profit filed for the period": "465.1M EGP",
+    "that currency line as a share of the profit": "3.5%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "NCCW",
+   "name": "Nasr Co. for Civil Works",
+   "says": [
+    "For Q1 2026, the company filed 1.22M EGP in borrowings with 51.8% repricing within a year, and it reported a gross profit of 3.84M EGP on revenue of 43.3M EGP, representing a gross margin of 8.9%.",
+    "The currency channel also reaches it, with a currency gain or loss filed of 126K EGP, which is 8.8% of its profit filed for the period of 1.42M EGP in Q1 2026."
+   ],
+   "figures": {
+    "borrowings it owes": "1.22M EGP",
+    "of that repricing within a year": "51.8%",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "43.3M EGP",
+    "gross profit filed": "3.84M EGP",
+    "gross margin": "8.9%",
+    "period the inputs figures cover": "Q1 2026",
+    "currency gain or loss filed": "126K EGP",
+    "profit filed for the period": "1.42M EGP",
+    "that currency line as a share of the profit": "8.8%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "NHPS",
+   "name": "National Housing for Professional Syndicates",
+   "says": [
+    "The currency channel reaches the company, which filed a currency gain or loss of -388K EGP against a profit of 13.36M EGP for H1 2026, representing -2.9% of that profit.",
+    "The company filed nothing for the rates channel or the inputs channel."
+   ],
+   "figures": {
+    "currency gain or loss filed": "-388K EGP",
+    "profit filed for the period": "13.36M EGP",
+    "that currency line as a share of the profit": "-2.9%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency"
+   ]
+  },
+  {
+   "ticker": "NIPH",
+   "name": "El-Nile Co. for Pharmaceuticals & Chemical Industries",
+   "says": [
+    "For 9M 2026 (to 31 Mar), the inputs channel shows revenue filed of 1.92B EGP, gross profit filed of 595.57M EGP, and a gross margin of 31.1%.",
+    "For the rates channel, the company owes borrowings of 422.11M EGP, though it filed no figures for how soon that reprices.",
+    "The currency channel shows a currency gain or loss filed of -1.21M EGP, which is -0.5% as a share of the profit filed for the period of 239.06M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "422.11M EGP",
+    "period the rates figures cover": "9M 2026 (to 31 Mar)",
+    "revenue filed": "1.92B EGP",
+    "gross profit filed": "595.57M EGP",
+    "gross margin": "31.1%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)",
+    "currency gain or loss filed": "-1.21M EGP",
+    "profit filed for the period": "239.06M EGP",
+    "that currency line as a share of the profit": "-0.5%",
+    "period the currency figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "OBRI",
+   "name": "El Obour Real Estate Investment",
+   "says": [
+    "For H1 2026, the company filed borrowings it owes of 45.1M EGP with 97.7% repricing within a year, while its currency gain or loss filed was -31K EGP against a profit filed for the period of 43.1M EGP, making that currency line -0.1% of profit.",
+    "The filings contain no figures for the inputs channel."
+   ],
+   "figures": {
+    "borrowings it owes": "45.1M EGP",
+    "of that repricing within a year": "97.7%",
+    "period the rates figures cover": "H1 2026",
+    "currency gain or loss filed": "-31K EGP",
+    "profit filed for the period": "43.1M EGP",
+    "that currency line as a share of the profit": "-0.1%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "OCDI",
+   "name": "Six of October Development & Investment (SODIC)",
+   "says": [
+    "For inputs in H1 2026, the company reported revenue filed of 5.98B EGP, gross profit filed of 1.63B EGP, and a gross margin of 27.2%.",
+    "For currency in H1 2026, it held a net position held in USD of 24.36M EGP, a net position held in EUR of 205K EGP, and a net position held in GBP of 37K EGP, with a currency gain or loss filed of 30.88M EGP against a profit filed for the period of 837.22M EGP, representing 3.7%.",
+    "The company filed nothing for rates."
+   ],
+   "figures": {
+    "revenue filed": "5.98B EGP",
+    "gross profit filed": "1.63B EGP",
+    "gross margin": "27.2%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in EUR": "205K EGP",
+    "net position held in GBP": "37K EGP",
+    "net position held in USD": "24.36M EGP",
+    "currency gain or loss filed": "30.88M EGP",
+    "profit filed for the period": "837.22M EGP",
+    "that currency line as a share of the profit": "3.7%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "OCPH",
+   "name": "October Pharma Co.",
+   "says": [
+    "For rates, filings for H1 2026 report borrowings it owes of 271.65M EGP with 97.0% repricing within a year and interest cover of 8.37×.",
+    "For inputs, H1 2026 revenue filed was 820.62M EGP and gross profit filed was 352.48M EGP, giving a gross margin of 43.0%.",
+    "For currency, the company filed a currency gain or loss filed of -274K EGP, which was -0.2% of the 143.84M EGP profit filed for the period in H1 2026, but it filed no figures for what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "271.65M EGP",
+    "of that repricing within a year": "97.0%",
+    "interest cover": "8.37×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "820.62M EGP",
+    "gross profit filed": "352.48M EGP",
+    "gross margin": "43.0%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-274K EGP",
+    "profit filed for the period": "143.84M EGP",
+    "that currency line as a share of the profit": "-0.2%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ODIN",
+   "name": "ODIN Investments",
+   "says": [
+    "Inputs and currency channels reach this company, while it filed nothing for the rates channel.",
+    "For inputs in H1 2026, it filed revenue of 98.39M EGP, gross profit of 65.72M EGP, and a gross margin of 66.8%.",
+    "For currency in H1 2026, it filed a currency gain or loss of -967K EGP, profit of 59.9M EGP, and that currency line was -1.6% of the profit."
+   ],
+   "figures": {
+    "revenue filed": "98.39M EGP",
+    "gross profit filed": "65.72M EGP",
+    "gross margin": "66.8%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-967K EGP",
+    "profit filed for the period": "59.9M EGP",
+    "that currency line as a share of the profit": "-1.6%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "OFH",
+   "name": "O B Financial Holding",
+   "says": [
+    "For rates, the company filed borrowings of 2.4M EGP for Q1 2026, with 32.9% repricing within a year and interest cover of -179.94×.",
+    "For currency, the filings for Q1 2026 show a currency gain or loss of 129.71M EGP against profit of 106.68M EGP, making that line 121.6% of profit.",
+    "The company filed nothing for the inputs channel."
+   ],
+   "figures": {
+    "borrowings it owes": "2.4M EGP",
+    "of that repricing within a year": "32.9%",
+    "interest cover": "-179.94×",
+    "period the rates figures cover": "Q1 2026",
+    "currency gain or loss filed": "129.71M EGP",
+    "profit filed for the period": "106.68M EGP",
+    "that currency line as a share of the profit": "121.6%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "OLFI",
+   "name": "Obour Land for Food Industries",
+   "says": [
+    "All three channels reach the company in its filings.",
+    "For rates in Q1 2026, borrowings it owes are 4.38B EGP with 99.6% repricing within a year and interest cover of 4.51×, while inputs for H1 2026 show revenue filed of 6.04B EGP, gross profit filed of 1.47B EGP, and a gross margin of 24.3%.",
+    "For currency in H1 2026, its net position held in USD is -22.62M EGP, alongside a currency gain or loss filed of -121.53M EGP, profit filed for the period of 409.23M EGP, and that currency line as a share of the profit of -29.7%."
+   ],
+   "figures": {
+    "borrowings it owes": "4.38B EGP",
+    "of that repricing within a year": "99.6%",
+    "interest cover": "4.51×",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "6.04B EGP",
+    "gross profit filed": "1.47B EGP",
+    "gross margin": "24.3%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in USD": "-22.62M EGP",
+    "currency gain or loss filed": "-121.53M EGP",
+    "profit filed for the period": "409.23M EGP",
+    "that currency line as a share of the profit": "-29.7%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ORHD",
+   "name": "Orascom Development Egypt (S.A.E)",
+   "says": [
+    "All three channels reach this company in H1 2026.",
+    "The rates channel shows borrowings it owes of 6.25B EGP with 16.9% repricing within a year, while the inputs channel reflects revenue filed of 5.21B EGP, gross profit filed of 2.95B EGP, and a gross margin of 56.6%.",
+    "The currency channel appears through a currency gain or loss filed of 177M EGP, which represents 8.4% of the profit filed for the period of 2.11B EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "6.25B EGP",
+    "of that repricing within a year": "16.9%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "5.21B EGP",
+    "gross profit filed": "2.95B EGP",
+    "gross margin": "56.6%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "177M EGP",
+    "profit filed for the period": "2.11B EGP",
+    "that currency line as a share of the profit": "8.4%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ORWE",
+   "name": "Oriental Weavers Carpet",
+   "says": [
+    "All three channels reach this company in H1 2026.",
+    "Rates reach it through borrowings it owes of 1.33B EGP with 75.6% repricing within a year, while inputs show revenue filed of 4.59B EGP, gross profit filed of 470.3M EGP, and a gross margin of 10.2%.",
+    "Currency reaches it through a net position held in EUR of -536K EGP, a net position held in GBP of 0 EGP, a net position held in USD of 15.44M EGP, and a currency gain or loss filed of -21.39M EGP against profit filed for the period of 1.85B EGP, or -1.2% of that profit."
+   ],
+   "figures": {
+    "borrowings it owes": "1.33B EGP",
+    "of that repricing within a year": "75.6%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "4.59B EGP",
+    "gross profit filed": "470.3M EGP",
+    "gross margin": "10.2%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in EUR": "-536K EGP",
+    "net position held in GBP": "0 EGP",
+    "net position held in USD": "15.44M EGP",
+    "currency gain or loss filed": "-21.39M EGP",
+    "profit filed for the period": "1.85B EGP",
+    "that currency line as a share of the profit": "-1.2%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "PHAR",
+   "name": "Egyptian International Pharmaceutical Industries Co.",
+   "says": [
+    "All three channels reach this company in H1 2026.",
+    "For rates, it owes 9.92B EGP in borrowings with 67.4% repricing within a year, while inputs show revenue filed of 4.93B EGP, gross profit filed of 1.97B EGP, and a gross margin of 39.9%.",
+    "The currency channel also reaches the company, with a net position held in EUR of -489.64M EGP, a net position held in USD of 569.97M EGP, and profit filed for the period of 433.4M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "9.92B EGP",
+    "of that repricing within a year": "67.4%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "4.93B EGP",
+    "gross profit filed": "1.97B EGP",
+    "gross margin": "39.9%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in EUR": "-489.64M EGP",
+    "net position held in USD": "569.97M EGP",
+    "profit filed for the period": "433.4M EGP",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "PHDC",
+   "name": "Palm Hills Development Co.",
+   "says": [
+    "For rates, the company filed borrowings of 2.89B EGP with 58.2% repricing within a year for Q1 2026.",
+    "For inputs, it reported revenue of 19.53B EGP, gross profit of 6.93B EGP, and a gross margin of 35.5% for H1 2026.",
+    "The company filed nothing for currency."
+   ],
+   "figures": {
+    "borrowings it owes": "2.89B EGP",
+    "of that repricing within a year": "58.2%",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "19.53B EGP",
+    "gross profit filed": "6.93B EGP",
+    "gross margin": "35.5%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "PHTV",
+   "name": "Pyramisa Hotels",
+   "says": [
+    "For inputs in H1 2026, the company filed revenue of 1.55B EGP and gross profit of 651.04M EGP, resulting in a gross margin of 42.1%.",
+    "For currency in H1 2026, it filed a currency gain or loss of 20.25M EGP, which represents 5.0% of its profit filed for the period of 407.66M EGP.",
+    "The company filed nothing for the rates channel."
+   ],
+   "figures": {
+    "revenue filed": "1.55B EGP",
+    "gross profit filed": "651.04M EGP",
+    "gross margin": "42.1%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "20.25M EGP",
+    "profit filed for the period": "407.66M EGP",
+    "that currency line as a share of the profit": "5.0%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "POUL",
+   "name": "Cairo Poultry Co.",
+   "says": [
+    "For H1 2026, the company filed borrowings it owes of 210.16M EGP with 69.3% repricing within a year, an interest cover of 57.22×, revenue filed of 8.01B EGP, gross profit filed of 1.23B EGP, and a gross margin of 15.3%.",
+    "For Q1 2026, it filed a currency gain or loss filed of -1.03M EGP against profit filed for the period of 32.83M EGP, making that currency line as a share of the profit -3.1%."
+   ],
+   "figures": {
+    "borrowings it owes": "210.16M EGP",
+    "of that repricing within a year": "69.3%",
+    "interest cover": "57.22×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "8.01B EGP",
+    "gross profit filed": "1.23B EGP",
+    "gross margin": "15.3%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-1.03M EGP",
+    "profit filed for the period": "32.83M EGP",
+    "that currency line as a share of the profit": "-3.1%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "PRDC",
+   "name": "Pioneers Properties for Urban Development",
+   "says": [
+    "All three channels reach the company in H1 2026.",
+    "The rates channel applies through borrowings it owes of 384.25M EGP with 87.9% of that repricing within a year and interest cover of 11.80×, while the inputs channel shows revenue filed of 404.48M EGP, gross profit filed of 403.07M EGP, and a gross margin of 99.6%.",
+    "The currency channel reaches it through a net position held in EUR of 8.24M EGP, a net position held in GBP of 192K EGP, and a net position held in USD of -284.61M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "384.25M EGP",
+    "of that repricing within a year": "87.9%",
+    "interest cover": "11.80×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "404.48M EGP",
+    "gross profit filed": "403.07M EGP",
+    "gross margin": "99.6%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in EUR": "8.24M EGP",
+    "net position held in GBP": "192K EGP",
+    "net position held in USD": "-284.61M EGP",
+    "profit filed for the period": "318.62M EGP",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "PRMH",
+   "name": "Prime Holding",
+   "says": [
+    "For Q1 2026, the rates channel reached the company through borrowings it owes of 110.33M EGP, with 96.4% repricing within a year.",
+    "For H1 2026, the currency channel reached it with a currency gain or loss filed of 1.96M EGP, which was 4.5% of the profit filed for the period of 43.73M EGP.",
+    "The company filed nothing for the inputs channel."
+   ],
+   "figures": {
+    "borrowings it owes": "110.33M EGP",
+    "of that repricing within a year": "96.4%",
+    "period the rates figures cover": "Q1 2026",
+    "currency gain or loss filed": "1.96M EGP",
+    "profit filed for the period": "43.73M EGP",
+    "that currency line as a share of the profit": "4.5%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "QNBE",
+   "name": "Qatar National Bank",
+   "says": [
+    "For H1 2026, the rates channel reaches the company through borrowings it owes of 828.13M EGP, while the currency channel reaches it through net positions held of 13.73B EGP in USD, 40.41M EGP in EUR, 11.08M EGP in GBP, and 13.26M EGP in OTHER alongside profit filed for the period of 17.79B EGP.",
+    "The company filed nothing for the inputs channel."
+   ],
+   "figures": {
+    "borrowings it owes": "828.13M EGP",
+    "period the rates figures cover": "H1 2026",
+    "net position held in EUR": "40.41M EGP",
+    "net position held in GBP": "11.08M EGP",
+    "net position held in OTHER": "13.26M EGP",
+    "net position held in USD": "13.73B EGP",
+    "profit filed for the period": "17.79B EGP",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "RACC",
+   "name": "Raya Contact Center",
+   "says": [
+    "For H1 2026, the company reported borrowings it owes of 470.88M EGP under rates, but filed nothing showing how soon that reprices.",
+    "The inputs channel shows revenue filed of 1.7B EGP, gross profit filed of 723.89M EGP, and a gross margin of 42.5% for H1 2026.",
+    "The currency channel reaches the company with a currency gain or loss filed of -7.38M EGP, which is -5.5% of the 133.89M EGP profit filed for the period in H1 2026."
+   ],
+   "figures": {
+    "borrowings it owes": "470.88M EGP",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "1.7B EGP",
+    "gross profit filed": "723.89M EGP",
+    "gross margin": "42.5%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-7.38M EGP",
+    "profit filed for the period": "133.89M EGP",
+    "that currency line as a share of the profit": "-5.5%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "RAYA",
+   "name": "Raya Holding for Financial Investments SAE",
+   "says": [
+    "For rates, the company owes borrowings of 3.37B EGP with 14.5% repricing within a year for H1 2026, while the filings provide no figures for inputs.",
+    "For currency, it holds a net position of 6.91M EGP in USD, 79K EGP in EUR, and 5K EGP in GBP during H1 2026, with a filed currency gain or loss of -94K EGP representing -0.0% of its profit of 1.26B EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "3.37B EGP",
+    "of that repricing within a year": "14.5%",
+    "period the rates figures cover": "H1 2026",
+    "net position held in EUR": "79K EGP",
+    "net position held in GBP": "5K EGP",
+    "net position held in USD": "6.91M EGP",
+    "currency gain or loss filed": "-94K EGP",
+    "profit filed for the period": "1.26B EGP",
+    "that currency line as a share of the profit": "-0.0%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "RKAZ",
+   "name": "REKAZ Financial Holding",
+   "says": [
+    "For rates, the company filed borrowings it owes of 803K EGP for the period H1 2026.",
+    "For inputs, it reported revenue filed of 734K EGP, gross profit filed of 544K EGP, and a gross margin of 74.1% for H1 2026.",
+    "For the currency channel, the company filed nothing."
+   ],
+   "figures": {
+    "borrowings it owes": "803K EGP",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "734K EGP",
+    "gross profit filed": "544K EGP",
+    "gross margin": "74.1%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "RMDA",
+   "name": "Tenth of Ramadan Pharmaceutical Industries & Diagnostic-Rameda",
+   "says": [
+    "For H1 2026, the rates channel reaches the company through 2.35B EGP of borrowings with 96.8% repricing within a year and interest cover of 2.22×, while inputs reach it through revenue filed of 2.12B EGP, gross profit filed of 1.08B EGP, and a gross margin of 50.7%.",
+    "The currency channel also reaches it with a currency gain or loss filed of -471K EGP, profit filed for the period of 204.3M EGP, and that currency line as a share of the profit of -0.2%."
+   ],
+   "figures": {
+    "borrowings it owes": "2.35B EGP",
+    "of that repricing within a year": "96.8%",
+    "interest cover": "2.22×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "2.12B EGP",
+    "gross profit filed": "1.08B EGP",
+    "gross margin": "50.7%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-471K EGP",
+    "profit filed for the period": "204.3M EGP",
+    "that currency line as a share of the profit": "-0.2%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "ROTO",
+   "name": "Rowad Tourism (Al Rowad) Co",
+   "says": [
+    "Rates reach the company through borrowings it owes of 37.3M EGP with 2.9% of that repricing within a year and interest cover of -1.32× for Q1 2026.",
+    "Inputs reach it through revenue filed of 1.7M EGP, gross profit filed of 1.5M EGP, and a gross margin of 88.6% for H1 2026.",
+    "Currency reaches it through a currency gain or loss filed of -47K EGP alongside a profit filed for the period of -3.18M EGP for Q1 2026, though the company filed no figures for what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "37.3M EGP",
+    "of that repricing within a year": "2.9%",
+    "interest cover": "-1.32×",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "1.7M EGP",
+    "gross profit filed": "1.5M EGP",
+    "gross margin": "88.6%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-47K EGP",
+    "profit filed for the period": "-3.18M EGP",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "RUBX",
+   "name": "Rubex International for Plastic & Acrylic Manufacturing",
+   "says": [
+    "All three channels reach the company in H1 2026, with 78.05M EGP in borrowings owed, 98.9% repricing within a year, and interest cover of 0.43×.",
+    "For inputs, it filed revenue of 208.74M EGP and gross profit of 44.83M EGP, leaving a gross margin of 21.5%.",
+    "For currency, it reported net positions of -88K EGP held in EUR and -391K EGP held in USD, with a currency gain or loss filed of -3.33M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "78.05M EGP",
+    "of that repricing within a year": "98.9%",
+    "interest cover": "0.43×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "208.74M EGP",
+    "gross profit filed": "44.83M EGP",
+    "gross margin": "21.5%",
+    "period the inputs figures cover": "H1 2026",
+    "net position held in EUR": "-88K EGP",
+    "net position held in USD": "-391K EGP",
+    "currency gain or loss filed": "-3.33M EGP",
+    "profit filed for the period": "-6.83M EGP",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "SAUD",
+   "name": "Al Baraka Bank Egypt",
+   "says": [
+    "The rates channel reaches the company through borrowings it owes of 1.99B EGP filed for Q1 2026, while the company filed nothing for the inputs channel.",
+    "The currency channel reaches it through H1 2026 net positions of 2.09M EGP held in EUR, -184K EGP held in GBP, and -10.89M EGP held in USD, alongside a currency gain or loss filed of 105.98M EGP which was 5.7% of its profit filed for the period of 1.85B EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "1.99B EGP",
+    "period the rates figures cover": "Q1 2026",
+    "net position held in EUR": "2.09M EGP",
+    "net position held in GBP": "-184K EGP",
+    "net position held in USD": "-10.89M EGP",
+    "currency gain or loss filed": "105.98M EGP",
+    "profit filed for the period": "1.85B EGP",
+    "that currency line as a share of the profit": "5.7%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "SCEM",
+   "name": "Sinai Cement Co.",
+   "says": [
+    "For rates in H1 2026, the company filed borrowings it owes of 133.5M EGP, with 7.0% repricing within a year and an interest cover of 324.02×.",
+    "For inputs in H1 2026, it reported revenue filed of 4.75B EGP, gross profit filed of 2.41B EGP, and a gross margin of 50.8%.",
+    "For currency, the company filed nothing."
+   ],
+   "figures": {
+    "borrowings it owes": "133.5M EGP",
+    "of that repricing within a year": "7.0%",
+    "interest cover": "324.02×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "4.75B EGP",
+    "gross profit filed": "2.41B EGP",
+    "gross margin": "50.8%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "SCTS",
+   "name": "Sues Canal Co. for Technology Settling",
+   "says": [
+    "For inputs, the company reported revenue filed of 2.48B EGP and gross profit filed of 1.99B EGP, resulting in a gross margin of 80.0% for 9M 2026 (to 31 May).",
+    "For currency, it held a net position held in USD of 25.09M EGP and a net position held in EUR of 11K EGP, with a currency gain or loss filed of 93.31M EGP representing 5.2% of its profit filed for the period of 1.78B EGP for 9M 2026 (to 31 May).",
+    "For rates, the company filed nothing."
+   ],
+   "figures": {
+    "revenue filed": "2.48B EGP",
+    "gross profit filed": "1.99B EGP",
+    "gross margin": "80.0%",
+    "period the inputs figures cover": "9M 2026 (to 31 May)",
+    "net position held in EUR": "11K EGP",
+    "net position held in USD": "25.09M EGP",
+    "currency gain or loss filed": "93.31M EGP",
+    "profit filed for the period": "1.78B EGP",
+    "that currency line as a share of the profit": "5.2%",
+    "period the currency figures cover": "9M 2026 (to 31 May)"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "SDTI",
+   "name": "Sharm Dreams Co. for Tourism Investment",
+   "says": [
+    "All three channels reach this company in Q1 2026.",
+    "The rates channel shows borrowings it owes of 1.87B EGP with 11.3% repricing within a year and interest cover of 2.14×, while the inputs channel reflects revenue filed of 98.91M EGP, gross profit filed of 85.62M EGP, and a gross margin of 86.6%.",
+    "The currency channel also reaches it, with currency gain or loss filed at -237.31M EGP alongside profit filed for the period of -197.6M EGP."
+   ],
+   "figures": {
+    "borrowings it owes": "1.87B EGP",
+    "of that repricing within a year": "11.3%",
+    "interest cover": "2.14×",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "98.91M EGP",
+    "gross profit filed": "85.62M EGP",
+    "gross margin": "86.6%",
+    "period the inputs figures cover": "Q1 2026",
+    "currency gain or loss filed": "-237.31M EGP",
+    "profit filed for the period": "-197.6M EGP",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "SIPC",
+   "name": "Sabaa International Company for Pharmaceutial and Chemical Industry",
+   "says": [
+    "For Q1 2026, the rates channel shows borrowings it owes of 22.43M EGP with 100.0% of that repricing within a year and interest cover of -0.72×.",
+    "For H1 2026, the inputs channel reaches the company through revenue filed of 15.76M EGP, gross profit filed of 6.02M EGP, and a gross margin of 38.2%, alongside a currency gain or loss filed of -577K EGP against profit filed for the period of 3K EGP, making that currency line as a share of the profit -19233.3%."
+   ],
+   "figures": {
+    "borrowings it owes": "22.43M EGP",
+    "of that repricing within a year": "100.0%",
+    "interest cover": "-0.72×",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "15.76M EGP",
+    "gross profit filed": "6.02M EGP",
+    "gross margin": "38.2%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "-577K EGP",
+    "profit filed for the period": "3K EGP",
+    "that currency line as a share of the profit": "-19233.3%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "SMFR",
+   "name": "Samad Misr-EGYFERT",
+   "says": [
+    "For inputs in H1 2026, the company filed revenue of 375.34M EGP, gross profit of 19.14M EGP, and a gross margin of 5.1%.",
+    "For currency in Q1 2026, it reported a currency gain or loss of 502K EGP, profit of 3.65M EGP, and that currency line as 13.8% of the profit.",
+    "For rates, the company filed nothing."
+   ],
+   "figures": {
+    "revenue filed": "375.34M EGP",
+    "gross profit filed": "19.14M EGP",
+    "gross margin": "5.1%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "502K EGP",
+    "profit filed for the period": "3.65M EGP",
+    "that currency line as a share of the profit": "13.8%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "SNFC",
+   "name": "Sharkia National Food",
+   "says": [
+    "For inputs, the company filed revenue of 9.61M EGP and gross profit of 2.94M EGP, giving a gross margin of 30.6% for H1 2026.",
+    "The company filed nothing for rates and filed nothing for currency."
+   ],
+   "figures": {
+    "revenue filed": "9.61M EGP",
+    "gross profit filed": "2.94M EGP",
+    "gross margin": "30.6%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "SPIN",
+   "name": "Alexandria Spinning & Weaving",
+   "says": [
+    "All three channels reach this company in its filings for H1 2025 (to 31 Dec).",
+    "Under rates, it owes borrowings of 280.7M EGP with 80.9% repricing within a year and interest cover of 0.95×, while inputs show revenue filed of 290.97M EGP, gross profit filed of 64.72M EGP, and a gross margin of 22.2%.",
+    "Under currency, it reported a currency gain or loss filed of -2.13M EGP against profit filed for the period of 563K EGP, making that currency line as a share of the profit -378.9%."
+   ],
+   "figures": {
+    "borrowings it owes": "280.7M EGP",
+    "of that repricing within a year": "80.9%",
+    "interest cover": "0.95×",
+    "period the rates figures cover": "H1 2025 (to 31 Dec)",
+    "revenue filed": "290.97M EGP",
+    "gross profit filed": "64.72M EGP",
+    "gross margin": "22.2%",
+    "period the inputs figures cover": "H1 2025 (to 31 Dec)",
+    "currency gain or loss filed": "-2.13M EGP",
+    "profit filed for the period": "563K EGP",
+    "that currency line as a share of the profit": "-378.9%",
+    "period the currency figures cover": "H1 2025 (to 31 Dec)"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "SPMD",
+   "name": "Speed Medical SAE",
+   "says": [
+    "For 9M 2025, the rates channel reaches the company through borrowings it owes of 81.28M EGP, of that repricing within a year of 78.0%, and interest cover of -2.98×.",
+    "For FY 2025, the inputs channel shows revenue filed of 42.84M EGP, gross profit filed of -22.06M EGP, and a gross margin of -51.5%.",
+    "The company filed nothing for the currency channel."
+   ],
+   "figures": {
+    "borrowings it owes": "81.28M EGP",
+    "of that repricing within a year": "78.0%",
+    "interest cover": "-2.98×",
+    "period the rates figures cover": "9M 2025",
+    "revenue filed": "42.84M EGP",
+    "gross profit filed": "-22.06M EGP",
+    "gross margin": "-51.5%",
+    "period the inputs figures cover": "FY 2025"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "SUGR",
+   "name": "Delta Sugar",
+   "says": [
+    "For rates, the company filed borrowings it owes of 6.19B EGP with 100.0% of that repricing within a year for H1 2026.",
+    "For inputs, it reported revenue filed of 5.69B EGP, gross profit filed of 642.33M EGP, and a gross margin of 11.3% for H1 2026.",
+    "For currency, the company filed nothing."
+   ],
+   "figures": {
+    "borrowings it owes": "6.19B EGP",
+    "of that repricing within a year": "100.0%",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "5.69B EGP",
+    "gross profit filed": "642.33M EGP",
+    "gross margin": "11.3%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "SVCE",
+   "name": "South Valley Cement Co.",
+   "says": [
+    "For Q1 2026, the company filed revenue of 794.3M EGP, gross profit of 137.55M EGP, and a gross margin of 17.3%, while rates exposure appears through borrowings it owes of 431.17M EGP with 3.6% repricing within a year.",
+    "A currency channel also reaches the company, with a currency gain or loss filed of 23.58M EGP against profit filed for the period of 122.5M EGP, representing 19.3% of that profit."
+   ],
+   "figures": {
+    "borrowings it owes": "431.17M EGP",
+    "of that repricing within a year": "3.6%",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "794.3M EGP",
+    "gross profit filed": "137.55M EGP",
+    "gross margin": "17.3%",
+    "period the inputs figures cover": "Q1 2026",
+    "currency gain or loss filed": "23.58M EGP",
+    "profit filed for the period": "122.5M EGP",
+    "that currency line as a share of the profit": "19.3%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "SWDY",
+   "name": "El Sewedy Electric Company",
+   "says": [
+    "For H1 2026, the company is reached by rates through 84.01B EGP in borrowings with 90.4% repricing within a year and interest cover of 4.41×, alongside inputs showing 163.32B EGP in revenue, 26.33B EGP in gross profit, and a gross margin of 16.1%.",
+    "Currency results reach it through a currency gain or loss filed of 119.7M EGP, representing 1.1% of its 10.65B EGP profit filed for the period, but the filings report nothing for what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "84.01B EGP",
+    "of that repricing within a year": "90.4%",
+    "interest cover": "4.41×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "163.32B EGP",
+    "gross profit filed": "26.33B EGP",
+    "gross margin": "16.1%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "119.7M EGP",
+    "profit filed for the period": "10.65B EGP",
+    "that currency line as a share of the profit": "1.1%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "TANM",
+   "name": "Tanmiya for Real Estate Investment",
+   "says": [
+    "Inputs reaches this company, which filed revenue of 14.7M EGP, gross profit of 14.29M EGP, and a gross margin of 97.2% for H1 2026.",
+    "The company filed nothing for rates regarding what it owes and how soon that reprices.",
+    "The company also filed nothing for currency regarding holdings or obligations in currencies other than the pound."
+   ],
+   "figures": {
+    "revenue filed": "14.7M EGP",
+    "gross profit filed": "14.29M EGP",
+    "gross margin": "97.2%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "TAQA",
+   "name": "TAQA Arabia",
+   "says": [
+    "For rates, the company owes borrowings of 11.15M EGP, with 15.0% of that repricing within a year for H1 2026.",
+    "For currency, it filed a currency gain or loss of 2.25M EGP against a profit of 13.51M EGP for H1 2026, making that currency line 16.6% of the profit.",
+    "For inputs, the company filed nothing."
+   ],
+   "figures": {
+    "borrowings it owes": "11.15M EGP",
+    "of that repricing within a year": "15.0%",
+    "period the rates figures cover": "H1 2026",
+    "currency gain or loss filed": "2.25M EGP",
+    "profit filed for the period": "13.51M EGP",
+    "that currency line as a share of the profit": "16.6%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "TMGH",
+   "name": "Talaat Moustafa Group Holding",
+   "says": [
+    "The currency channel reaches this company, with a currency gain or loss filed of 193K EGP for H1 2026, which represents 0.1% of the profit filed for the period of 285.41M EGP.",
+    "The company filed nothing for the rates channel or the inputs channel."
+   ],
+   "figures": {
+    "currency gain or loss filed": "193K EGP",
+    "profit filed for the period": "285.41M EGP",
+    "that currency line as a share of the profit": "0.1%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency"
+   ]
+  },
+  {
+   "ticker": "TRTO",
+   "name": "TransOceans Tours",
+   "says": [
+    "For H1 2026, the inputs channel reached the company with revenue filed of 13.05M EGP, gross profit filed of 9.09M EGP, and a gross margin of 69.7%.",
+    "The currency channel also reached it in H1 2026 through a currency gain or loss filed of 919K EGP, a profit filed for the period of 1.41M EGP, and that currency line as a share of the profit of 65.2%.",
+    "The company filed nothing for the rates channel."
+   ],
+   "figures": {
+    "revenue filed": "13.05M EGP",
+    "gross profit filed": "9.09M EGP",
+    "gross margin": "69.7%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "919K EGP",
+    "profit filed for the period": "1.41M EGP",
+    "that currency line as a share of the profit": "65.2%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "TWSA",
+   "name": "Tawasoa Factoring",
+   "says": [
+    "For the rates channel, the company reported borrowings of 63.05M EGP for Q1 2026, with 100.0% repricing within a year.",
+    "For the inputs channel, filings for H1 2026 show revenue of 24M EGP, gross profit of 20.41M EGP, and a gross margin of 85.0%.",
+    "The company filed nothing for the currency channel."
+   ],
+   "figures": {
+    "borrowings it owes": "63.05M EGP",
+    "of that repricing within a year": "100.0%",
+    "period the rates figures cover": "Q1 2026",
+    "revenue filed": "24M EGP",
+    "gross profit filed": "20.41M EGP",
+    "gross margin": "85.0%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "TYCN",
+   "name": "Tycoon Holding Company For Financial Investments",
+   "says": [
+    "The rates channel reaches the company, which reported borrowings it owes of 242K EGP for H1 2026 with 100.0% of that repricing within a year.",
+    "The company filed nothing for inputs or currency."
+   ],
+   "figures": {
+    "borrowings it owes": "242K EGP",
+    "of that repricing within a year": "100.0%",
+    "period the rates figures cover": "H1 2026"
+   },
+   "channels": [
+    "rates"
+   ]
+  },
+  {
+   "ticker": "UBEE",
+   "name": "United Bank SAE",
+   "says": [
+    "The currency channel reaches this company, which reported for H1 2026 a net position held in EUR of 755.33M EGP, in GBP of 819K EGP, and in USD of 292.71M EGP, alongside a currency gain or loss filed of -11.98M EGP against a profit filed for the period of 1.33B EGP, representing -0.9%.",
+    "The company filed nothing for the rates channel or the inputs channel."
+   ],
+   "figures": {
+    "net position held in EUR": "755.33M EGP",
+    "net position held in GBP": "819K EGP",
+    "net position held in USD": "292.71M EGP",
+    "currency gain or loss filed": "-11.98M EGP",
+    "profit filed for the period": "1.33B EGP",
+    "that currency line as a share of the profit": "-0.9%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency"
+   ]
+  },
+  {
+   "ticker": "UEGC",
+   "name": "El-Saeed Contracting & Real Estate Investment Co. SCCD",
+   "says": [
+    "For rates, the company owes borrowings of 1.67B EGP with 98.8% repricing within a year and interest cover of 1.21× for H1 2026.",
+    "For inputs, it reported revenue of 895.29M EGP, gross profit of 281.3M EGP, and a gross margin of 31.4% for H1 2026.",
+    "For currency, it filed a currency gain or loss of 1.63M EGP against a profit of 35.56M EGP, which is 4.6% of that profit for H1 2026, but it filed nothing showing what it holds or owes in a currency other than the pound."
+   ],
+   "figures": {
+    "borrowings it owes": "1.67B EGP",
+    "of that repricing within a year": "98.8%",
+    "interest cover": "1.21×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "895.29M EGP",
+    "gross profit filed": "281.3M EGP",
+    "gross margin": "31.4%",
+    "period the inputs figures cover": "H1 2026",
+    "currency gain or loss filed": "1.63M EGP",
+    "profit filed for the period": "35.56M EGP",
+    "that currency line as a share of the profit": "4.6%",
+    "period the currency figures cover": "H1 2026"
+   },
+   "channels": [
+    "currency",
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "UNIT",
+   "name": "United Housing Construction SA",
+   "says": [
+    "For rates, the company filed borrowings it owes of 371.2M EGP for H1 2026, with 12.3% of that repricing within a year and interest cover of 2.48×.",
+    "For inputs, it filed H1 2026 revenue filed of 185.11M EGP, gross profit filed of 172.84M EGP, and a gross margin of 93.4%.",
+    "For currency, the company filed nothing."
+   ],
+   "figures": {
+    "borrowings it owes": "371.2M EGP",
+    "of that repricing within a year": "12.3%",
+    "interest cover": "2.48×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "185.11M EGP",
+    "gross profit filed": "172.84M EGP",
+    "gross margin": "93.4%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "UPMS",
+   "name": "Union Pharmacist Company For Medical Services And Investment",
+   "says": [
+    "The inputs channel reaches this company, which filed revenue of 140K EGP, gross profit of 8K EGP, and a gross margin of 5.7% for H1 2026.",
+    "The company filed nothing for rates or currency, so those two channels do not reach it based on these figures."
+   ],
+   "figures": {
+    "revenue filed": "140K EGP",
+    "gross profit filed": "8K EGP",
+    "gross margin": "5.7%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "UTOP",
+   "name": "Utopia Real Estate Investment & Tourism SAE",
+   "says": [
+    "For Q1 2026, the company filed borrowings it owes of 1.16M EGP with 13.2% of that repricing within a year, while filing a currency gain or loss of 2K EGP against profit of 9.06M EGP, making that line 0.0% of profit.",
+    "The rates and currency channels reach the company through these filed figures, but the company filed nothing for the inputs channel."
+   ],
+   "figures": {
+    "borrowings it owes": "1.16M EGP",
+    "of that repricing within a year": "13.2%",
+    "period the rates figures cover": "Q1 2026",
+    "currency gain or loss filed": "2K EGP",
+    "profit filed for the period": "9.06M EGP",
+    "that currency line as a share of the profit": "0.0%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "VALU",
+   "name": "U Consumer Finance S.A.E",
+   "says": [
+    "For Q1 2026, the company filed 12.73B EGP in borrowings with 60.4% repricing within a year under the rates channel, while under currency it reported a net position held in USD of 144K EGP, a currency gain or loss filed of 3.16M EGP, a profit filed for the period of 220.6M EGP, and that currency line as a share of the profit of 1.4%.",
+    "The company filed nothing for the inputs channel."
+   ],
+   "figures": {
+    "borrowings it owes": "12.73B EGP",
+    "of that repricing within a year": "60.4%",
+    "period the rates figures cover": "Q1 2026",
+    "net position held in USD": "144K EGP",
+    "currency gain or loss filed": "3.16M EGP",
+    "profit filed for the period": "220.6M EGP",
+    "that currency line as a share of the profit": "1.4%",
+    "period the currency figures cover": "Q1 2026"
+   },
+   "channels": [
+    "currency",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "VERT",
+   "name": "Vertika for Industry & Trade",
+   "says": [
+    "For rates, the company filed borrowings it owes of 29K EGP with 100.0% of that repricing within a year and an interest cover of 22.06× for H1 2026.",
+    "For inputs, its H1 2026 filings show revenue filed of 10.28M EGP, gross profit filed of 3.47M EGP, and a gross margin of 33.8%.",
+    "For currency, the company filed nothing."
+   ],
+   "figures": {
+    "borrowings it owes": "29K EGP",
+    "of that repricing within a year": "100.0%",
+    "interest cover": "22.06×",
+    "period the rates figures cover": "H1 2026",
+    "revenue filed": "10.28M EGP",
+    "gross profit filed": "3.47M EGP",
+    "gross margin": "33.8%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs",
+    "rates"
+   ]
+  },
+  {
+   "ticker": "WCDF",
+   "name": "Middle & West Delta Flour Mills Co.",
+   "says": [
+    "For inputs, the company filed revenue of 2.09B EGP, gross profit of 485.64M EGP, and a gross margin of 23.2% covering the period 9M 2026 (to 31 Mar).",
+    "The company filed nothing for rates and filed nothing for currency."
+   ],
+   "figures": {
+    "revenue filed": "2.09B EGP",
+    "gross profit filed": "485.64M EGP",
+    "gross margin": "23.2%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "WKOL",
+   "name": "Wadi Kom Ombo Land Reclamation",
+   "says": [
+    "The inputs channel reaches the company, which filed revenue of 171.18M EGP, gross profit of 64.88M EGP, and a gross margin of 37.9% for 9M 2026 (to 31 Mar).",
+    "The rates and currency channels do not reach it here, as the company filed nothing for what it owes or holds in other currencies."
+   ],
+   "figures": {
+    "revenue filed": "171.18M EGP",
+    "gross profit filed": "64.88M EGP",
+    "gross margin": "37.9%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "ZEOT",
+   "name": "Extracted Oils & Derivatives Co.",
+   "says": [
+    "Inputs reach the company, with revenue filed of 3.45B EGP, gross profit filed of 176.44M EGP, and a gross margin of 5.1% for 9M 2026 (to 31 Mar).",
+    "Currency also reaches it, with a currency gain or loss filed of 1.1M EGP representing 2.5% of the profit filed for the period of 44.62M EGP for 9M 2026 (to 31 Mar).",
+    "The company filed nothing for rates."
+   ],
+   "figures": {
+    "revenue filed": "3.45B EGP",
+    "gross profit filed": "176.44M EGP",
+    "gross margin": "5.1%",
+    "period the inputs figures cover": "9M 2026 (to 31 Mar)",
+    "currency gain or loss filed": "1.1M EGP",
+    "profit filed for the period": "44.62M EGP",
+    "that currency line as a share of the profit": "2.5%",
+    "period the currency figures cover": "9M 2026 (to 31 Mar)"
+   },
+   "channels": [
+    "currency",
+    "inputs"
+   ]
+  },
+  {
+   "ticker": "ZMID",
+   "name": "Zahraa Maadi Investment & Development",
+   "says": [
+    "The inputs channel reaches this company, which filed revenue of 652M EGP, gross profit of 588.19M EGP, and a gross margin of 90.2% for H1 2026.",
+    "The company filed nothing for the rates channel or the currency channel."
+   ],
+   "figures": {
+    "revenue filed": "652M EGP",
+    "gross profit filed": "588.19M EGP",
+    "gross margin": "90.2%",
+    "period the inputs figures cover": "H1 2026"
+   },
+   "channels": [
+    "inputs"
+   ]
+  }
+ ]
+}

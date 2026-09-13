@@ -370,7 +370,10 @@ document.getElementById('signout').onclick = async () => {
                           : Promise.resolve(null),
         data.sectorRotation ? data.sectorRotation().catch(() => null)
                             : Promise.resolve(null),
-      ]).then(([flowTrackers, sectorOwnership, worldMonitor, sectorRotation]) => {
+        data.companyExposure ? data.companyExposure().catch(() => null)
+                             : Promise.resolve(null),
+      ]).then(([flowTrackers, sectorOwnership, worldMonitor, sectorRotation,
+                companyExposure]) => {
         if (version === loadVersion && owner === readerVersion && reader && !component.data().demo) {
           component.state.flowLoading = false;
           component.setData({
@@ -378,6 +381,7 @@ document.getElementById('signout').onclick = async () => {
             ...(sectorOwnership ? { sectorOwnership } : {}),
             ...(worldMonitor ? { worldMonitor } : {}),
             ...(sectorRotation ? { sectorRotation } : {}),
+            ...(companyExposure ? { companyExposure } : {}),
           });
         }
       }).catch(() => {

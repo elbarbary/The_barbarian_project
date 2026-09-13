@@ -1535,6 +1535,15 @@ export async function worldMonitor() {
   return d;
 }
 
+/** What the outside world reaches one company through, in its own filings. */
+export async function companyExposure() {
+  const d = await doc('company-exposure.json');
+  if (d?.schemaVersion !== 1 || !Array.isArray(d.companies)) {
+    throw new Error('Invalid company exposure snapshot');
+  }
+  return d;
+}
+
 /** Where trading attention moved between sectors, and what followed before. */
 export async function sectorRotation() {
   const d = await doc('sector-rotation.json');

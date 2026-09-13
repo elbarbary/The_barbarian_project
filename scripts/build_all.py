@@ -265,6 +265,14 @@ STEPS = [
     # documents, and the currency notes just above, so it runs after all three
     # and reads nothing from the network.
     ("World monitor", "build_world_monitor.py", True),
+    # The join, per company, and the only step here that asks a model to write
+    # a sentence rather than read a number. It runs after World monitor because
+    # it reads that document: the three channels are its whole input.
+    #
+    # Six a run. Every number it may use is handed to it already formatted and
+    # checked against that list afterwards, so the model cannot introduce one —
+    # see build_company_exposure.py.
+    ("Company exposure", "build_company_exposure.py", True, ["--limit", "6"]),
     # Last, and reporting only. It reads what every step above published and
     # counts what is wrong with it — a market value that is not its own price
     # times its own shares, a directory and a document disagreeing about the

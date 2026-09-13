@@ -128,6 +128,7 @@ env:
     scripts/currency_notes_read.json
     scripts/sector_reads.json
     scripts/extract_unit_cache.json
+    scripts/company_exposure_read.json
 
 permissions:
   contents: write
