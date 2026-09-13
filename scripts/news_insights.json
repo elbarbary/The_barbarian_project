@@ -611,6 +611,10 @@
     "meaning": "The fast track is an administrative framework that expedites regulatory approvals, licensing, utility connections, and land allocation procedures for enterprises operating within designated industrial clusters.",
     "meaning_ar": "يُعد «المسار السريع» آلية إدارية تعمل على تسريع إجراءات إصدار التراخيص والموافقات الحكومية وتخصيص الأراضي وتوصيل المرافق للمنشآت العاملة داخل التجمعات الصناعية المحددة."
   },
+  "«التمويل الدوليه» تستهدف استثمار 1.6 مليار دولار في مصر": {
+    "meaning": "This target allocates foreign capital from a multilateral development institution directly into Egyptian private sector enterprises through equity participations, debt financing, and credit facilities.",
+    "meaning_ar": "يُوجّه هذا المستهدف رأس مال أجنبي من مؤسسة تنموية دولية مباشرة إلى شركات القطاع الخاص المصري عبر مساهمات في رأس المال، وتمويلات ائتمانية، وتسهيلات ديون."
+  },
   "«الرقابه الماليه» تشكل لجنه لاعداد نموذج موحد للنظام الاساسي لمجمعات التامين": {
     "meaning": "The Financial Regulatory Authority establishes a standardized operational and governance framework for insurance pools across the sector. This aligns administrative guidelines, risk-sharing structures, and compliance standards across participating underwriters.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً تشغيلياً وحوكمياً موحداً لمجمعات التأمين في القطاع، مما يوحد القواعد الإدارية، وهياكل توزيع المخاطر، ومعايير الامتثال بين الشركات المشاركة."
@@ -646,6 +650,10 @@
   "«العربيه العالميه» لمنتجات الحبوب تستهدف 3 مليارات جنيه مبيعات": {
     "meaning": "Setting a sales target establishes an internal benchmark for annual production volume and distribution capacity within the local grain processing sector.",
     "meaning_ar": "يحدد استهداف حجم مبيعات معين معياراً تشغيلياً لحجم الإنتاج السنوي والقدرة التوزيعية للشركة ضمن قطاع تصنيع الحبوب المحلي."
+  },
+  "«المستريح».. خطر يهدد الاستثمار الرسمي لمدخرات المصريين": {
+    "meaning": "Unlicensed capital-pooling operations divert domestic household liquidity away from regulated banking channels and capital market instruments into the informal financial sector.",
+    "meaning_ar": "تؤدي أنشطة توظيف الأموال غير المرخصة إلى سحب السيولة النقدية من القطاع المصرفي وأدوات سوق المال المنظمة وتوجيهها نحو الاقتصاد المالي غير الرسمي."
   },
   "«اميل عبد الله» تعتزم اطلاق صندوق عقاري بقيمه مليار جنيه": {
     "meaning": "The establishment of a real estate investment fund pools capital to acquire income-generating property assets, converting direct real estate holdings into tradable fund units under Egyptian capital market regulations.",
@@ -4872,6 +4880,10 @@
   "وزير الاتصالات: نستهدف بناء شركات ناشيه مستدامه تتوسع من مصر للاسواق العالميه": {
     "meaning": "The state's policy directs resources toward the domestic technology ecosystem, establishing incubator infrastructure and cross-border commercial channels for Egyptian technology startups operating in foreign markets.",
     "meaning_ar": "توجه السياسة الحكومية الموارد نحو منظومة التكنولوجيا المحلية، عبر إنشاء بنية تحتية للحاضنات وتوفير قنوات تجارية عابرة للحدود للشركات الناشئة المصرية العاملة في الأسواق الخارجية."
+  },
+  "وزير الاستثمار يبحث مع مجتمع الاعمال الجنوب افريقي فرص الاستثمار في مصر": {
+    "meaning": "Official bilateral discussions between government authorities and foreign business delegations establish formal communication channels regarding regulatory frameworks, cross-border capital flows, and joint venture mechanisms between both markets.",
+    "meaning_ar": "تؤسس المباحثات الثنائية بين الجهات الحكومية ومجتمع الأعمال الأجنبي قنوات اتصال رسمية لمراجعة الأطر التنظيمية، وآليات تدفق رؤوس الأموال عبر الحدود، وفرص المشروعات المشتركة بين السوقين."
   },
   "وزير الاستثمار يصدر قرارا بتاسيس «صندوق مصر الفرعي للاستثمار الصناعي»": {
     "meaning": "This ministerial decree establishes a dedicated sub-fund under the Sovereign Fund of Egypt focused on direct equity and mezzanine financing for industrial assets and manufacturing infrastructure.",
