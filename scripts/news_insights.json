@@ -2983,6 +2983,10 @@
     "meaning": "Geopolitical tensions between the US and Iran create asset price divergence across European equity sectors, reflecting differing exposures to energy price fluctuations and global trade routes.",
     "meaning_ar": "تؤدي التوترات الجيوسياسية بين الولايات المتحدة وإيران إلى تباين في حركة أسعار الأسهم عبر القطاعات الأوروبية، تبعاً لمدى تأثر كل قطاع بتقلبات أسعار الطاقة وطرق التجارة العالمية."
   },
+  "تباين الموشرات اليابانيه مع خساير قطاع التكنولوجيا": {
+    "meaning": "Divergence in Japanese indices reflects sectoral rebalancing, where price declines in technology shares offset gains across non-tech industry components within index weightings.",
+    "meaning_ar": "يعكس تباين المؤشرات اليابانية إعادة توزيع للأوزان النسبية بين القطاعات، حيث توازن التراجعات السعرية لأسهم التكنولوجيا المكاسب المحققة في المكونات الصناعية الأخرى داخل المؤشر."
+  },
   "تباين في اداء شركات المطاحن خلال العام المالي 2025/2026": {
     "meaning": "Performance divergence across milling companies reflects operational differences in procurement costs, production capacities, and the breakdown between subsidized and free-market flour output across individual firms.",
     "meaning_ar": "يعكس تباين أداء شركات المطاحن اختلافات تشغيلية في تكاليف شراء القمح، والطاقات الإنتاجية، ونسب توزيع الإنتاج بين الدقيق المدعم والدقيق الحر لدى كل شركة."
@@ -3103,6 +3107,10 @@
   "تراجع جماعي لموشرات البورصه المصريه .. وEGX30 ينخفض 0.33%": {
     "meaning": "Broad declines across indices reflect net capital outflows from equities during the trading session, where downward price adjustments across constituent stocks reduce aggregate market capitalization.",
     "meaning_ar": "يعكس التراجع الجماعي للمؤشرات خروج صافي تدفقات نقدية من الأسهم خلال جلسة التداول، حيث تؤدي انخفاضات أسعار الأسهم المكونة للمؤشرات إلى تقليص القيمة السوقية الإجمالية."
+  },
+  "تراجع جماعي لموشرات البورصه بالتعاملات الصباحيه والثلاثيني ينخفض 0.64%": {
+    "meaning": "Broad declines across major indices reflect an excess of market-wide ask volume over bid volume during early trading, which reprices benchmark constituent equities downward and lowers composite market capitalization.",
+    "meaning_ar": "يعكس التراجع الجماعي للمؤشرات تفوق حجم عروض البيع على طلبات الشراء خلال التعاملات المبكرة، مما يؤدي إلى إعادة تسعير أسهم الشركات المكونة للمؤشر بمستويات سعرية أقل وخفض القيمة السوقية الإجمالية."
   },
   "تراجع جماعي لموشرات البورصه بختام التعاملات.. و «EGX30» يهبط 1.09%": {
     "meaning": "Trading volume shifts toward net liquidations across listed equities, resulting in downward index repricing as the benchmark EGX30 closes 1.09% lower.",
@@ -3927,6 +3935,10 @@
   "سعر الذهب العالمي يغلق منخفضا وسط توقعات قويه برفع الفايده الامريكيه": {
     "meaning": "Higher US interest rates increase the opportunity cost of holding non-yielding bullion and strengthen the US dollar, an asset inversely correlated with dollar-denominated gold prices.",
     "meaning_ar": "تؤدي زيادة أسعار الفائدة الأمريكية إلى رفع تكلفة الفرصة البديلة لحيازة الذهب كأصل عديم العائد وتعزيز قوة الدولار، مما يضغط سلبًا على تسعير السلع المقومة بالعملة الأمريكية."
+  },
+  "سعر الذهب العالمي يهبط مع عوده مخاوف التضخم وترقب قرار المركزي الامريكي": {
+    "meaning": "Persistent inflation data keeps US interest rates elevated, which increases sovereign bond yields and raises the opportunity cost of holding non-yielding gold.",
+    "meaning_ar": "يؤدي استمرار الضغوط التضخمية إلى الإبقاء على أسعار الفائدة الأمريكية مرتفعة، مما يرفع عوائد السندات السيادية ويزيد من تكلفة الفرصة البديلة لحيازة الذهب غير المدر لعائد."
   },
   "سعر الريال السعودي اليوم الاثنين 7-9-2026 في بدايه التعاملات": {
     "meaning": "Official opening exchange rate data for the Saudi Riyal reflects the current interbank foreign currency pricing mechanism, determining the direct transaction costs for bilateral trade settlements, travel expenditures, and cross-border remittances between Egypt and Saudi Arabia.",
@@ -5901,6 +5913,10 @@
     "meaning": "Regulatory approval allows the company to amend its corporate purpose to include the commercial supply and distribution of electricity, formally integrating power generation and distribution into its authorized operating activities.",
     "meaning_ar": "تتيح الموافقة الرقابية للشركة تعديل غرضها المؤسسي لإدراج نشاط بيع وتوزيع الطاقة الكهربائية، مما يدمج عمليات توليد وتوريد الكهرباء ضمن أنشطتها التشغيلية المرخصة رسمياً."
   },
+  "​الرقابه الماليه تعلن مواعيد اكتتاب زياده راسمال شركه هيبكو الي 108 ملايين جنيه": {
+    "meaning": "The Financial Regulatory Authority establishes the subscription timeline for HEPCO to issue new shares, raising its issued capital to EGP 108 million through equity financing from existing or new shareholders.",
+    "meaning_ar": "تحدد الهيئة العامة للرقابة المالية الجدول الزمني لاكتتاب شركة هيبكو في أسهم جديدة، مما يرفع رأسمالها المصدر إلى 108 ملايين جنيه عبر التمويل بحقوق الملكية من المساهمين الحاليين أو الجدد."
+  },
   "“ADIB-Egypt” يفتتح مدرسه “مصرف ابو ظبي الاسلامي بالنزهه الجديده” عقب تطويرها": {
     "meaning": "The bank allocates non-operating capital to corporate social responsibility (CSR) programs, directing funds toward public education infrastructure and community development projects.",
     "meaning_ar": "يوجه البنك مخصصات مالية من ميزانية المسؤولية المجتمعية لتطوير البنية التحتية للمدارس الحكومية ومشاريع التنمية المجتمعية."
@@ -6145,6 +6161,10 @@
     "meaning": "Regulatory tightening in China's property sector constrains developer liquidity and reduces purchasing activity at government land auctions, directly contracting municipal fiscal revenues derived from land transfers.",
     "meaning_ar": "تؤدي الإجراءات التنظيمية المشددة في القطاع العقاري الصيني إلى تقييد السيولة النقدية للمطورين وخفض مشاركتهم في المزادات العامة، مما يقلص الإيرادات المالية للحكومات المحلية الناتجة عن مبيعات الأراضي."
   },
+  "“جي بي كورب” تقر تمويلا ل”جي بي اوتو تنزانيا”": {
+    "meaning": "This intra-group financing allocates corporate capital from the parent company, GB Corp, to fund the operational activities and working capital requirements of its Tanzanian subsidiary.",
+    "meaning_ar": "يمثل هذا الإجراء تمويلاً داخلياً بين الشركات التابعة للمجموعة، حيث تخصص الشركة الأم (جي بي كورب) سيولة نقدية لتغطية الالتزامات التشغيلية ومتطلبات رأس المال العامل لتابعتها في تنزانيا."
+  },
   "“جي بي مورجان” يتوقع رفع المركزي الاوروبي الفايده للمره الثالثه في ديسمبر": {
     "meaning": "A policy rate increase by the European Central Bank raises the benchmark cost of borrowing in euros and alters yield differentials across international debt markets.",
     "meaning_ar": "رفع سعر الفائدة من قبل البنك المركزي الأوروبي يحدد تكلفة إقراض مرجعية أعلى للتمويلات باليورو ويعدل فروق العوائد في أسواق الدين الدولية."
@@ -6192,6 +6212,10 @@
   "“صندوق” تبدا التشغيل الفعلي لمنصتها الرقميه لمقارنه وتحليل صناديق الاستثمار": {
     "meaning": "The operational launch establishes a digital financial technology platform that aggregates and analyzes performance metrics across Egyptian investment funds, centralizing comparative fund data for market participants.",
     "meaning_ar": "يمثل هذا الإطلاق التشغيل الفعلي لمنصة تكنولوجيا مالية تجمع وتحلل مؤشرات أداء صناديق الاستثمار المصرية، موفرة قاعدة بيانات رقمية موحدة للمقارنة بين أدوات الاستثمار المتاحة في السوق."
+  },
+  "“عامر جروب” تعتمد اعاده هيكله “اي ان سي” التابعه تمهيدا لقيدها بالبورصه": {
+    "meaning": "Internal corporate restructuring separates the subsidiary's operational assets and liabilities from the parent company to satisfy regulatory listing requirements for an initial public offering on the stock exchange.",
+    "meaning_ar": "تفصل إعادة الهيكلة الداخلية الأصول والالتزامات التشغيلية للشركة التابعة عن الشركة الأم لتلبية المتطلبات التنظيمية للطرح والقيد في البورصة."
   },
   "“عبدالغفار” ل”البورصه”: “الصحه” تستثمر 1.9 مليار جنيه لاضافه الفي حضانه بنهايه 2030": {
     "meaning": "The Ministry of Health allocates EGP 1.9 billion in public capital expenditure through 2030 to expand neonatal intensive care infrastructure by 2,000 incubators, directing state funding into medical equipment procurement and healthcare facility capacity.",
