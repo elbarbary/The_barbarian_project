@@ -75,6 +75,10 @@
     "meaning": "This capital allocation represents direct capital expenditure across multiple manufacturing facilities in the Ain Sokhna industrial zone, adding operational physical assets and production infrastructure to the local industrial base.",
     "meaning_ar": "يمثل هذا التخصيص الرأسمالي إنفاقاً رأسمالياً مباشراً عبر عدة منشآت تصنيعية في منطقة العين السخنة الصناعية، مما يضيف أصولاً تشغيلية مادية وبنية تحتية إنتاجية للقاعدة الصناعية المحلية."
   },
+  "111.4 مليون جنيه صافي ارباح «جي اي جي مصر – حياه تكافل» النصف الاول 2026": {
+    "meaning": "Takaful life insurance operations generate net earnings through underwriting surpluses from policyholder funds combined with returns on Sharia-compliant investment portfolios over the six-month period.",
+    "meaning_ar": "تتحقق الأرباح الصافية في نشاط تأمينات الحياة التكافلية عبر فائض النشاط التأميني من اشتراكات الوثائق مضافاً إليه عوائد استثمار الأموال في محافظ متوافقة مع الشريعة خلال فترة الستة أشهر."
+  },
   "14.6% ارتفاعا في صادرات مصر الي اليونان خلال النصف الاول من 2026": {
     "meaning": "The expansion in export volumes to Greece increases bilateral trade turnover and reflects higher foreign currency inflows from outbound shipments into the balance of trade.",
     "meaning_ar": "تؤدي زيادة حجم الصادرات المصرية إلى اليونان إلى رفع وتيرة التبادل التجاري الثنائي وتدفق النقد الأجنبي من الشحنات المصدرة ضمن الميزان التجاري."
@@ -2847,6 +2851,10 @@
     "meaning": "Mandating investment banks to arrange a multi-tranche euro-denominated debt issuance accesses the European institutional bond market to raise foreign-currency capital across varied maturity profiles.",
     "meaning_ar": "يمثل تفويض بنوك استثمار لترتيب طرح سندات دين متعددة الشرائح مقومة باليورو آلية لدخول سوق السندات المؤسسية الأوروبية وجمع سيولة بالعملة الأجنبية عبر آجال استحقاق مختلفة."
   },
+  "اوتاوا تسرع الاحكام الضريبيه للاستثمارات الكبري بقيمه مليار دولار كندي": {
+    "meaning": "Expedited tax rulings provide binding administrative determinations on tax liabilities for capital projects exceeding one billion Canadian dollars prior to asset deployment. This process shortens the regulatory review phase and incorporates verified fiscal parameters directly into corporate balance sheet planning.",
+    "meaning_ar": "يوفر التسريع الإجرائي للأحكام الضريبية قرارات إدارية ملزمة تحدد المعاملة الضريبية للمشاريع الرأسمالية الكبرى قبل البدء في تخصيص السيولة. وتعمل هذه الآلية على تقليص دورة المراجعة التنظيمية وإدراج بنود الالتزامات الضريبية المؤكدة ضمن التخطيط المالي للشركات."
+  },
   "اوروبا تنفق 7.28 مليار يورو علي الغاز الروسي المسال خلال 8 اشهر": {
     "meaning": "European utilities continue off-taking Russian liquefied natural gas under existing supply arrangements, directing commercial payments through active maritime energy trade channels to maintain storage inventories.",
     "meaning_ar": "تستمر شركات المرافق الأوروبية في استلام شحنات الغاز الطبيعي المسال الروسي بموجب ترتيبات التوريد الحالية، مع توجيه المدفوعات التجارية عبر قنوات التجارة البحرية للطاقة لتغذية المخزونات."
@@ -3596,6 +3604,10 @@
     "meaning": "Multilateral climate finance frameworks aggregate public and private capital commitments to fund cross-border energy transition and adaptation infrastructure, where political friction between major sovereign donors halts funding pledges and implementation agreements.",
     "meaning_ar": "تعتمد أطر تمويل المناخ متعددة الأطراف على تجميع تعهدات رؤوس الأموال الحكومية والخاصة لتمويل مشاريع البنية التحتية للتحول الطاقي، حيث تؤدي الخلافات السياسية بين الدول المانحة الرئيسية إلى وقف تدفق هذه المخصصات والاتفاقيات التنفيذية."
   },
+  "تمويل برنامج الاغذيه العالمي للسودان يتراجع 50% مع تفاقم ازمه الجوع": {
+    "meaning": "A 50% funding cut directly contracts the World Food Programme's cross-border bulk procurement volumes, impacting regional food commodity suppliers and transport logistics corridors operating between Egypt and Sudan.",
+    "meaning_ar": "يؤدي تراجع التمويل بنسبة 50% إلى تقليص حجم المشتريات والسلع الغذائية التي يتعاقد عليها برنامج الأغذية العالمي، مما ينعكس مباشرة على حركة النقل والخدمات اللوجستية وتوريدات السلع عبر الممرات الحدودية بين مصر والسودان."
+  },
   "تموين الاسماعيليه تضبط مخبزا استولي علي طن دقيق مدعم وتحرر 125 مخالفه اليوم": {
     "meaning": "Regulatory inspections enforce compliance within the subsidized bread distribution network by penalizing illicit flour diversion and tracking quotas, directly controlling public grain supply chains and operational leakage.",
     "meaning_ar": "تفرض الحملات التفتيشية الامتثال التشغيلي داخل شبكة توزيع الخبز المدعم عبر ضبط محاولات تسريب الدقيق وتتبع الحصص التموينية، مما يمثل آلية رقابية مباشرة لضبط سلاسل إمداد الحبوب الحكومية."
@@ -3883,6 +3895,10 @@
   "داو الامريكيه تدرس التخارج من شراكه مع ارامكو بقيمه 20 مليار دولار": {
     "meaning": "An equity exit from a joint venture involves restructuring asset ownership and capital commitments between operating partners in petrochemical manufacturing facilities. This process reconfigures the corporate governance, shareholding base, and ongoing operational financing of the shared chemical complex.",
     "meaning_ar": "تتضمن دراسة التخارج من الشراكة إعادة هيكلة لحصص الملكية والالتزامات الرأسمالية بين الشركاء في مجمعات التصنيع البتروكيماوي المشتركة. يترتب على هذا الإجراء تعديل في هيكل المساهمين، والحوكمة المؤسسية، وترتيبات التمويل التشغيلي للأصول القائمة."
+  },
+  "دراسه: انخفاض اسعار الادويه في امريكا قد يطيل فترات انتظار المرضي الاوروبيين": {
+    "meaning": "Pharmaceutical manufacturers allocate commercial launch timelines and supply volumes based on jurisdictional pricing tiers, where reductions in reference prices alter product distribution prioritization across regional markets.",
+    "meaning_ar": "تحدد شركات صناعة الأدوية أولويات التوزيع وجداول الإطلاق التجاري بناءً على مستويات التسعير في الأسواق، حيث يؤدي خفض الأسعار المرجعية إلى إعادة ترتيب حصص التوريد بين المناطق الجغرافية."
   },
   "درجات الحراره غدا.. طقس حار ورطب علي اغلب الانحاء وشديد الحراره جنوبا": {
     "meaning": "Elevated temperatures drive electricity load requirements on the national power grid and operational cooling needs across industrial and agricultural facilities.",
