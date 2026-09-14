@@ -163,6 +163,10 @@
     "meaning": "The transition from strategy to execution represents the operational deployment of artificial intelligence infrastructure and software into core business workflows. This process involves capital expenditure allocations for technology procurement, systems integration, and workforce technical onboarding.",
     "meaning_ar": "يمثل الانتقال من الاستراتيجية إلى التنفيذ التطبيق التشغيلي للبنية التحتية والبرمجيات الخاصة بالذكاء الاصطناعي ضمن مسارات العمل الأساسية في الشركات. وتتضمن هذه العملية تخصيص نفقات رأسمالية لشراء التكنولوجيا، ودمج الأنظمة، وتدريب الكوادر الفنية."
   },
+  "BME signs contract with China’s CATL for EGP 2 bn battery systems plant": {
+    "meaning": "This agreement establishes a joint industrial partnership that commits EGP 2 billion in capital expenditure toward localized battery systems manufacturing and integrates international technology into domestic operations.",
+    "meaning_ar": "تؤسس هذه الاتفاقية شراكة صناعية تخصص إنفاقاً رأسمالياً بقيمة ملياري جنيه مصري لتوطين تصنيع أنظمة البطاريات ودمج التكنولوجيا العالمية في العمليات التشغيلية المحلية."
+  },
   "BTC’s rally shows signs of running out of steam": {
     "meaning": "The upward price movement of Bitcoin decelerates as trading volume diminishes and buying activity encounters equivalent selling pressure at current price levels.",
     "meaning_ar": "يتباطأ الزخم الصعودي لسعر البيتكوين مع انخفاض أحجام التداول ومواجهة عمليات الشراء لضغوط بيعية مكافئة عند مستويات الأسعار الحالية."
@@ -287,9 +291,21 @@
     "meaning": "The opening represents a commercial expansion within the food, beverage, and hospitality sector through the launch of a new physical branch in the Almaza district.",
     "meaning_ar": "يمثل هذا الافتتاح توسعاً تجارياً ضمن قطاع الأغذية والمشروبات والضيافة عبر إطلاق فرع تشغيلي جديد في منطقة ألماظة."
   },
+  "MENA PE stays near record pace in 1H — but exits are heading for their weakest year since 2017": {
+    "meaning": "Private equity firms continue deploying capital into regional acquisitions while slower initial public offering and secondary sale markets extend the holding periods of existing portfolio assets. This dynamic keeps invested capital locked on fund balance sheets and delays distributions to limited partners.",
+    "meaning_ar": "تواصل شركات الاستثمار المباشر ضخ رؤوس الأموال في صفقات الاستحواذ الإقليمية، بينما يؤدي تباطؤ أسواق الطروحات العامة والمبيعات الثانوية إلى إطالة فترات الاحتفاظ بالأصول القائمة. وتُبقي هذه الآلية رؤوس الأموال المستثمرة مقيدة في ميزانيات الصناديق مع تأخير التوزيعات النقدية للشركاء المحدودين."
+  },
   "MNT-Halan’s local arm is heading to the EGX": {
     "meaning": "An initial public offering on the EGX lists a company's shares for public trading on the regulated exchange, which broadens its institutional and retail shareholder base and subjects its financial reporting to local capital market disclosure regulations.",
     "meaning_ar": "يؤدي الطرح العام في البورصة المصرية إلى إدراج أسهم الشركة للتداول العام في سوق منظمة، مما يوسع قاعدة مساهميها من المؤسسات والأفراد ويخضع قوائمها المالية لقواعد الإفصاح المنظمة لسوق المال المحلي."
+  },
+  "Madinet Masr is launching its first North Coast project in partnership with Reedy Development": {
+    "meaning": "This joint venture enters the developer into the coastal real estate segment, utilizing a shared-development model that pairs its land access and brand with a partner's operational execution.",
+    "meaning_ar": "يدخل هذا المشروع المشترك المطور العقاري إلى قطاع التطوير الساحلي عبر نموذج شراكة يجمع بين تخصيص الأراضي والتنفيذ التشغيلي مع مطور آخر."
+  },
+  "Management for excellence in healthcare delivery": {
+    "meaning": "Healthcare management frameworks standardise clinical workflows, patient intake protocols, and resource allocation across medical facilities. This structure governs operational efficiency, quality compliance standards, and capacity utilisation within healthcare providers.",
+    "meaning_ar": "تحدد أطر الإدارة الصحية المعايير التشغيلية لمسارات الرعاية السريرية، وبروتوكولات استقبال المرضى، وتوزيع الموارد داخل المنشآت الطبية، وتضبط هذه المنظومة معدلات الكفاءة التشغيلية والامتثال لمعايير الجودة ومستويات استغلال الطاقة الاستيعابية."
   },
   "Meet Egyptian 3D concrete printing company Layn’s Zeyad Zein": {
     "meaning": "3D concrete printing introduces additive manufacturing technology to the domestic construction and building materials sector, automating on-site material deposition and altering standard construction supply chains.",
@@ -330,6 +346,10 @@
   "The business you don’t hear when you press play": {
     "meaning": "Digital streaming platforms operate through backend intellectual property licensing, infrastructure hosting, and automated royalty settlement systems distributed among content creators, aggregators, and service operators.",
     "meaning_ar": "تعمل منصات البث الرقمي من خلال البنية التحتية الخلفية لترخيص حقوق الملكية الفكرية، والاستضافة التقنية، وأنظمة تسوية الإتاوات الآلية بين صانعي المحتوى وشركات التوزيع ومقدمي الخدمة."
+  },
+  "The government is bringing overland freight into Nafeza for the first time, the hardest lane it has left to digitize": {
+    "meaning": "Integrating overland freight into the Nafeza digital platform subjects cross-border land cargo to mandatory Advanced Cargo Information (ACI) pre-clearance and unified electronic customs processing.",
+    "meaning_ar": "يخضع إدراج الشحن البري عبر منظومة «نافذة» البضائع العابرة للحدود برياً لنظام التسجيل المسبق للشحنات (ACI) وإجراءات التخليص الجمركي الموحدة إلكترونياً."
   },
   "The gov’t overhauls drugs pricing with FX band, smaller reference basket, and local production advantage": {
     "meaning": "The updated pricing framework links pharmaceutical prices to foreign exchange movements within a defined band, narrows the international price comparison basket, and assigns a specific pricing differential to domestically manufactured products.",
