@@ -2271,6 +2271,10 @@
     "meaning": "The company shifts from a net loss to a net profit during the six-month period, reflecting revenue levels that exceed total operational expenses and financing costs.",
     "meaning_ar": "تتحول الشركة من تسجيل صافي خسائر إلى صافي أرباح خلال فترة الستة أشهر، وهو ما يعكس تجاوز الإيرادات المحققة لإجمالي المصروفات التشغيلية والتكاليف التمويلية."
   },
+  "الصحه تبحث مع MTS وInspur انشاء منصه مصر الذكيه للرعايه الصحيه": {
+    "meaning": "The discussions involve a public-private partnership structure to integrate medical technology services and cloud computing infrastructure into the national healthcare operational framework.",
+    "meaning_ar": "تتناول المباحثات إطار شراكة بين القطاعين العام والخاص لدمج خدمات التكنولوجيا الطبية والبنية التحتية للحوسبة السحابية ضمن المنظومة التشغيلية للرعاية الصحية في مصر."
+  },
   "الصحه توقع بروتوكولا مع جهاز الملكيه الفكريه لتعزيز الامن الدوايي": {
     "meaning": "The protocol establishes a coordination framework between the Ministry of Health and the Intellectual Property Authority to regulate pharmaceutical patent registrations, facilitate the licensing of generic drug formulations, and streamline local manufacturing procedures for active ingredients.",
     "meaning_ar": "يضع البروتوكول إطاراً للتنسيق بين وزارة الصحة وجهاز الملكية الفكرية لتنظيم تسجيل براءات اختراع الأدوية، وتسهيل ترخيص تركيبات الأدوية المثيلة، وتوحيد إجراءات التصنيع المحلي للمواد الفعالة."
@@ -3136,6 +3140,10 @@
     "meaning": "A decline in global copper prices directly shifts raw material input costs and inventory valuations for industrial consumers, particularly cable manufacturers and infrastructure contractors on the Egyptian exchange.",
     "meaning_ar": "يؤثر تراجع أسعار النحاس عالمياً بصورة مباشرة على تكاليف مدخلات الإنتاج وتقييمات المخزون لدى الشركات الصناعية، لا سيما مصنعي الكابلات ومقاولي البنية التحتية في السوق المصري."
   },
+  "تراجع اسعار النحاس في بورصه لندن مع ارتفاع الدولار": {
+    "meaning": "Dollar-denominated copper prices on international exchanges adjust downward as the US dollar strengthens, altering procurement costs for industrial manufacturers and cable producers.",
+    "meaning_ar": "تتراجع أسعار النحاس المقومة بالدولار في البورصات العالمية مع صعود العملة الأمريكية، مما يغير تكاليف الشراء للشركات الصناعية ومصنعي الكابلات."
+  },
   "تراجع الاسهم الامريكيه في المستهل مع ترقب بيانات التضخم": {
     "meaning": "Equity prices adjust downward at the market open as market participants reprice assets to reflect interest rate sensitivities ahead of macroeconomic inflation releases.",
     "meaning_ar": "تتراجع أسعار الأسهم عند افتتاح جلسة التداول مع قيام المتعاملين بإعادة تسعير الأصول وفقاً لمحددات أسعار الفائدة قبيل صدور بيانات التضخم الاقتصادية."
@@ -3999,6 +4007,10 @@
   "سجلت اسوا اداء اسبوعي لها منذ يوليو.. الاسهم الاوروبيه تنتعش الجمعه": {
     "meaning": "The market experiences an intra-day upward price correction at the end of the trading week following consecutive sessions of net capital outflows and negative aggregate returns.",
     "meaning_ar": "تشهد السوق حركة تصحيح سعري صعودية خلال تعاملات نهاية الأسبوع، وذلك في أعقاب جلسات متتالية من صافي تدفقات رأس المال الخارجة والعوائد الإجمالية السلبية."
+  },
+  "سعر البصل والخضروات والطماطم والفاكهه والتفاح اليوم الاثنين 14 سبتمبر 2026": {
+    "meaning": "Daily wholesale and retail market pricing updates for fresh agricultural produce reflect ongoing supply-demand dynamics and logistics costs within the domestic food distribution chain.",
+    "meaning_ar": "تعكس تحديثات الأسعار اليومية لأسواق الجملة والتجزئة للسلع الزراعية الطازجة تفاعلات العرض والطلب وتكاليف الخدمات اللوجستية ضمن سلاسل توزيع الأغذية المحلية."
   },
   "سعر الخشب اليوم الاربعاء 9-9-2026 في مصر": {
     "meaning": "Daily reporting of local wood prices tracks raw material input costs for the construction, finishing, and furniture manufacturing sectors, which operate primarily on imported timber supplies.",
@@ -6052,6 +6064,10 @@
   "​الرقابه الماليه تعلن مواعيد اكتتاب زياده راسمال شركه هيبكو الي 108 ملايين جنيه": {
     "meaning": "The Financial Regulatory Authority establishes the subscription timeline for HEPCO to issue new shares, raising its issued capital to EGP 108 million through equity financing from existing or new shareholders.",
     "meaning_ar": "تحدد الهيئة العامة للرقابة المالية الجدول الزمني لاكتتاب شركة هيبكو في أسهم جديدة، مما يرفع رأسمالها المصدر إلى 108 ملايين جنيه عبر التمويل بحقوق الملكية من المساهمين الحاليين أو الجدد."
+  },
+  "‎كم سجلت اسعار الخشب اليوم في السوق المصريه؟": {
+    "meaning": "Lumber prices in the domestic market reflect the landed import costs of raw materials, foreign exchange rates, and international shipping freight, which directly determine input cost structures for furniture manufacturers and construction contractors.",
+    "meaning_ar": "تعكس أسعار الأخشاب في السوق المحلية تكلفة استيراد المواد الخام وأسعار الصرف وتكاليف الشحن الدولي، وهي عوامل تحدد هيكل تكاليف المدخلات لشركات المقاولات والتشييد ومصنعي الأثاث."
   },
   "“ADIB-Egypt” يفتتح مدرسه “مصرف ابو ظبي الاسلامي بالنزهه الجديده” عقب تطويرها": {
     "meaning": "The bank allocates non-operating capital to corporate social responsibility (CSR) programs, directing funds toward public education infrastructure and community development projects.",
