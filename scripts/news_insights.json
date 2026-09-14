@@ -467,6 +467,10 @@
     "meaning": "Trade data between Egypt and BRICS economies tracks bilateral import and export volumes, clearing mechanisms, and the proportion of transactions settled in local currencies versus foreign exchange.",
     "meaning_ar": "ترصد بيانات التجارة بين مصر ودول تجمع بريكس أحجام الصادرات والواردات البينية، وآليات المقاصة، ونسبة المعاملات التجارية التي تتم تسويتها بالعملات المحلية مقابل العملات الأجنبية."
   },
+  "egypt duty free shops to distribute cash dividend as of october 5": {
+    "meaning": "The company pays out a portion of its accumulated retained earnings directly to eligible shareholders, which reduces its cash balances and total shareholders' equity on the balance sheet.",
+    "meaning_ar": "تقوم الشركة بصرف جزء من أرباحها المرحلة مباشرة إلى المساهمين المستحقين، مما يخفض رصيد النقدية وإجمالي حقوق الملكية في ميزانيتها العمومية."
+  },
   "egypt mobile wallet boom in h1 2026": {
     "meaning": "An expansion in mobile wallet usage processes a higher volume of digital financial transactions through telecom operators and commercial banks, shifting cash-based settlement into formal electronic payment infrastructure.",
     "meaning_ar": "تؤدي زيادة استخدام محافظ الهاتف المحمول إلى معالجة حجم أكبر من المعاملات المالية الرقمية عبر شبكات مشغلي الاتصالات والبنوك التجارية، مما يحول التسويات النقدية إلى بنية المدفوعات الإلكترونية الرسمية."
@@ -1322,6 +1326,10 @@
   "اسعار الغاز الاوروبي ترتفع 2% مع تصاعد مخاطر مضيق هرمز ونقص المخزونات": {
     "meaning": "Geopolitical risks in key maritime transit corridors combined with lower storage levels tighten available energy buffers, which adds a risk premium to natural gas benchmark pricing.",
     "meaning_ar": "تؤدي المخاطر الجيوسياسية في الممرات الملاحية الحيوية بالتزامن مع تراجع مستويات التخزين إلى تقليص هوامش الإمداد المتاحة، مما يضيف علاوة مخاطر إلى الأسعار القياسية للغاز الطبيعي."
+  },
+  "اسعار الفراخ في بورصه الدواجن اليوم الاثنين 14-9-2026": {
+    "meaning": "This reports daily farm-gate and wholesale price benchmarks for poultry, reflecting immediate supply-and-demand clearing rates, feed input costs, and distribution dynamics across the local market.",
+    "meaning_ar": "يوضح هذا التقرير أسعار التداول اليومية المرجعية للدواجن في المزارع والأسواق، مما يعكس معدلات العرض والطلب الحالية وتكاليف مدخلات الأعلاف وحركة التوزيع محلياً."
   },
   "اسعار الفراخ في بورصه الدواجن اليوم الاثنين 7-9-2026": {
     "meaning": "Daily poultry exchange quotations reflect spot farm-gate transaction rates, which operate based on prevailing feed input costs, operational expenses, and immediate supply availability in the domestic market.",
@@ -2630,6 +2638,10 @@
   "اي صاغه تطلق منظومه موحده لتداول سبايك 3 شركات مصريه وسعوديه": {
     "meaning": "The unified system centralizes the quotation, ordering, and settlement of standardized bullion products from three Egyptian and Saudi precious metal producers under a single trading interface.",
     "meaning_ar": "توحد المنظومة عمليات التسعير وعرض وتنفيذ تداولات سبائك الذهب التابعة للشركات الثلاث المصرية والسعودية عبر واجهة تداول رقمية موحدة."
+  },
+  "ايديتا تعلن اخر حق لحامل السهم في التوزيعات المجانيه": {
+    "meaning": "This announcement establishes the eligibility cut-off date (record/cum-date) for shareholders entitled to receive bonus shares distributed via retained earnings capitalization, after which the stock trades ex-bonus with an adjusted market price.",
+    "meaning_ar": "يحدد هذا الإعلان تاريخ نهاية الحق لحاملي السهم في الحصول على أسهم مجانية ممولة من رسملة الأرباح المرحلة أو الاحتياطيات، حيث يُتداول السهم بعد هذا التاريخ مجرداً من الحق مع تعديل سعره السوقي."
   },
   "ايرادات اغسطس القياسيه ب29 مليار دولار تعزز توقعات فوكسكون لربع ثالث قوي": {
     "meaning": "Monthly revenue figures provide the primary accounting data used to compile top-line financial results for the quarterly reporting period in electronics manufacturing.",
@@ -4020,6 +4032,10 @@
     "meaning": "This headline reports the daily consumer retail pricing for table eggs, which reflects farm-gate supply volumes, feed input costs, and distribution markups across the local poultry sector.",
     "meaning_ar": "يعرض هذا العنوان أسعار التجزئة اليومية لبيض المائدة للمستهلك، والتي تعكس حجم المعروض من المزارع وتكاليف مدخلات الأعلاف وهامش التوزيع في قطاع الدواجن المحلي."
   },
+  "سعر كرتونه البيض اليوم 14/9/2026 للمستهلك في السوق المحليه": {
+    "meaning": "Egg carton retail pricing reflects daily supply-and-demand balances influenced by operational feed costs, domestic poultry farm output, and transportation logistics in the local food distribution chain.",
+    "meaning_ar": "يعكس سعر كرتونة البيض للمستهلك توازن العرض والطلب اليومي المتأثر بتكاليف الأعلاف التشغيلية، وحجم إنتاج مزارع الدواجن المحلية، وشبكات النقل والتوزيع في السوق."
+  },
   "سعر كرتونه البيض اليوم 4/9/2026 للمستهلك في السوق المحليه": {
     "meaning": "This reflects the daily domestic retail pricing updates for table eggs, driven by poultry feed supply costs, farm-gate production expenses, and local consumer demand dynamics.",
     "meaning_ar": "يعكس هذا تحديثات أسعار التجزئة اليومية لبيض المائدة في السوق المحلي، والتي تتحدد بناءً على تكاليف الأعلاف ومصروفات الإنتاج في المزارع ومستويات الطلب الاستهلاكي."
@@ -4464,6 +4480,10 @@
   "غدا.. انطلاق المرحله الاولي من المبادره الحكوميه لتخفيض اسعار السلع": {
     "meaning": "Government commodity price reduction initiatives operate through coordinated arrangements between state authorities, producers, and retail networks to apply reduced pricing margins on essential consumer goods alongside logistical and customs clearance facilitation.",
     "meaning_ar": "تعمل المبادرات الحكومية لخفض الأسعار عبر آليات تنسيقية بين الجهات التنظيمية والمنتجين وشبكات التجزئة لتطبيق هوامش تسعير مخفضة على السلع الأساسية بالتزامن مع تيسيرات في سلاسل الإمداد والإفراج الجمركي."
+  },
+  "غدا.. بدء صرف معاش تكافل وكرامه بقيمه تتجاوز 4 مليارات جنيه": {
+    "meaning": "The disbursement of over EGP 4 billion in cash subsidies directly injects government social protection funds into the retail and consumer goods sectors through beneficiary spending on essential commodities.",
+    "meaning_ar": "يضخ صرف المساعدات النقدية المشروطة التي تتجاوز قيمتها 4 مليارات جنيه مخصصات الحماية الاجتماعية مباشرة في قطاعي التجزئة والسلع الاستهلاكية عبر إنفاق المستفيدين على الاحتياجات الأساسية."
   },
   "فاركو للادويه تستثمر اكثر من مليار جنيه خلال 2026 لانشاء خطوط انتاج جديده ورفع كفاءه الحاليه": {
     "meaning": "This transaction represents capital expenditure allocation toward manufacturing infrastructure, expanding operational capacity through new production lines and upgrading existing facilities.",
@@ -5213,6 +5233,10 @@
     "meaning": "The Egyptian capital market operates on digital brokerage and electronic trading systems accessible via mobile applications, shifting trading operations and retail investor access away from physical presence and traditional paper-based investment arrangements.",
     "meaning_ar": "يعمل سوق المال المصري حالياً عبر أنظمة التداول الإلكتروني وتطبيقات الهواتف الذكية للوساطة المالية، مما ينقل تنفيذ المعاملات ووصول المستثمرين الأفراد من القنوات التقليدية والتعاملات غير الرسمية إلى منصات رقمية منظمة."
   },
+  "منصه “صندوق” تغطي نحو 200 صندوق استثمار في مصر": {
+    "meaning": "The platform aggregates and displays operational data, performance metrics, and pricing for approximately 200 Egyptian investment funds in a centralized digital interface.",
+    "meaning_ar": "تجمع المنصة وتعرض البيانات التشغيلية ومؤشرات الأداء وأسعار الوثائق لنحو 200 صندوق استثمار مصري ضمن واجهة رقمية موحدة."
+  },
   "مواعيد القطارات المتجهه من القاهره للمحافظات اليوم 10-9-2026": {
     "meaning": "Domestic train schedules represent the operational transport capacity managed by the Egyptian National Railways, providing public logistical infrastructure for intercity passenger mobility and daily domestic labor movement.",
     "meaning_ar": "تمثل مواعيد قطارات السكك الحديدية جداول التشغيل اليومية لنقل الركاب التي تديرها الهيئة القومية لسكك حديد مصر، وتعمل كبنية لوجستية لحركة العمالة والتنقل بين القاهرة والمحافظات."
@@ -5369,6 +5393,10 @@
     "meaning": "Daily price fluctuations in fresh agricultural commodities reflect immediate supply-and-demand dynamics in wholesale and retail markets, where higher incoming harvest volumes lower spot clearing prices.",
     "meaning_ar": "تعكس التغيرات السعرية اليومية للسلع الزراعية توازن العرض والطلب الفوري في أسواق الجملة والتجزئة، حيث تؤدي زيادة تدفقات المحاصيل الموردة إلى خفض أسعار التداول اللحظية."
   },
+  "هبوط سهم شي ان 10% بعد سحب منتج في استراليا ونيوزيلندا": {
+    "meaning": "Product recalls generate immediate reverse-logistics costs, inventory write-offs, and compliance scrutiny, which equity markets price into company valuation through immediate share revaluations.",
+    "meaning_ar": "تؤدي عمليات سحب المنتجات إلى تكاليف لوجستية عكسية فورية وشطب لقيمة المخزون وخضوع للرقابة التنظيمية، وهو ما تسعره أسواق الأسهم مباشرة في القيمة السوقية للشركة."
+  },
   "هبوط واردات الصين من النفط الخام بنسبه 23.4% في اغسطس": {
     "meaning": "A drop in Chinese crude oil imports reflects lower refinery throughput, adjustments in domestic crude inventories, and reduced physical procurement activity by the world's largest oil importer.",
     "meaning_ar": "يعكس تراجع واردات الصين من النفط الخام انخفاض معدلات تشغيل مصافي التكرير المحلية وتغيرات في مستويات المخزون وعمليات الشراء الفعلي لدى أكبر مستورد للنفط عالمياً."
@@ -5388,6 +5416,10 @@
   "هل استقرت اسعار الخضروات والفاكهه اليوم الاحد 13 سبتمبر 2026؟": {
     "meaning": "The headline tracks daily wholesale and retail pricing dynamics for fresh agricultural commodities, reflecting immediate equilibrium adjustments between daily farm harvests, logistics flows, and consumer demand.",
     "meaning_ar": "يرصد العنوان حركة الأسعار اليومية لسلع الخضر والفاكهة في أسواق الجملة والتجزئة، والتي تعكس التوازن الآني بين حجم المعروض من المحاصيل الزراعية وتكاليف النقل ومستويات الاستهلاك."
+  },
+  "هل انتصرت “الاعتمادات المستنديه” للبنوك علي التوترات الجيوسياسيه؟": {
+    "meaning": "Letters of credit serve as bank-guaranteed payment instruments that facilitate cross-border trade settlements by shifting counterparty default risk to issuing financial institutions amidst regional geopolitical instability.",
+    "meaning_ar": "تُمثل الاعتمادات المستندية أداة دفع مصرفية تضمن تسوية المعاملات التجارية الخارجية عن طريق تحويل مخاطر التخلف عن السداد إلى البنوك المصدرة في ظل الاضطرابات الجيوسياسية."
   },
   "هل تغلق تعديلات قواعد القيد باب استغلال المعلومات الداخليه؟": {
     "meaning": "EGX listing rule amendments introduce regulatory restrictions and reporting obligations designed to control access to material non-public information and govern trading activities by corporate insiders.",
@@ -5536,6 +5568,10 @@
   "وزير التخطيط جوده الاستثمار تتصدر رويه مصر للتعامل مع التحولات الاقتصاديه": {
     "meaning": "Focusing on investment quality directs state capital allocation and regulatory incentives toward high-value-added sectors, technology transfer, and productive infrastructure rather than purely expanding aggregate capital expenditure volume.",
     "meaning_ar": "يوجه التركيز على جودة الاستثمار مخصصات رؤوس الأموال والحوافز التنظيمية نحو القطاعات ذات القيمة المضافة المرتفعة ونقل التكنولوجيا والبنية التحتية الإنتاجية بدلاً من الاعتماد فقط على زيادة إجمالي حجم الإنفاق الرأسمالي."
+  },
+  "وزير التخطيط يبحث مع اي فاينانس خطط التوسع ودعم البنيه التحتيه الرقميه": {
+    "meaning": "The discussions involve aligning the company's digital payment infrastructure and cloud platforms with state digital transformation initiatives under public sector technology frameworks.",
+    "meaning_ar": "تتناول المباحثات مواءمة البنية التحتية للمدفوعات الرقمية والمنصات السحابية للشركة مع مشروعات التحول الرقمي الحكومية ضمن أطر العمل التقنية للقطاع العام."
   },
   "وزير التخطيط يبحث مع بنك المشرق تعزيز الخدمات الماليه والمدفوعات الرقميه": {
     "meaning": "Institutional discussions between government ministries and commercial banks establish operational frameworks for integrating electronic payment infrastructure and expanding digital transaction processing channels across state and institutional services.",
