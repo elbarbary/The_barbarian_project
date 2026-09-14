@@ -3,6 +3,10 @@
     "meaning": "The alignment of the agricultural sector with national decent work frameworks establishes structured labor standards, formal employment guidelines, and social protection mechanisms across agribusiness supply chains.",
     "meaning_ar": "يحدد موائمة القطاع الزراعي مع أطر العمل اللائق الوطنية معايير تشغيل منظمة وإرشادات للتوظيف الرسمي وآليات للحماية الاجتماعية عبر سلاسل إمداد الصناعات الزراعية."
   },
+  "\"الزراعه\" تضبط شركه وهميه تروج لصنف قمح غير مسجل وتصادر الكميات": {
+    "meaning": "Regulatory enforcement against unregistered seed distribution removes illicit inventory from the agricultural supply chain and enforces compliance with state certification standards.",
+    "meaning_ar": "يؤدي التدخل الرقابي ضد توزيع التقاوي غير المسجلة إلى مصادرة المخزون غير المرخص من سلاسل الإمداد الزراعية وفرض الالتزام بمعايير الاعتماد الحكومية."
+  },
   "\"الزراعه\" تعلن السياسه الصنفيه للقمح ب 3 محافظات وتستهدف زياده الانتاجيه": {
     "meaning": "The varietal policy specifies certified, region-appropriate wheat seed cultivars across three governorates, standardizing agricultural inputs to align with local soil and climatic conditions.",
     "meaning_ar": "تحدد السياسة الصنفية تقاوي القمح المعتمدة والملائمة لكل منطقة جغرافية في ثلاث محافظات، مما يوحد المدخلات الزراعية وفقاً لطبيعة التربة والظروف المناخية المحلية."
@@ -3608,6 +3612,10 @@
     "meaning": "Central bank policy rate increases adjust the benchmark cost of borrowing across the financial system, altering debt service obligations on variable-rate credit facilities and repricing sovereign yields.",
     "meaning_ar": "يؤدي رفع أسعار الفائدة الأساسية من قِبل البنوك المركزية إلى تعديل تكلفة الاقتراض في النظام المالي، مما يعيد تسعير عوائد أدوات الدين السيادية ويغير التزامات خدمة الديون للتسهيلات الائتمانية ذات العائد المتغير."
   },
+  "جولدمان ساكس: الذكاء الاصطناعي يهدد 7% من العمال بامريكا العقد المقبل": {
+    "meaning": "Artificial intelligence automation integrates software algorithms into workflows to replace routine administrative and operational labor tasks within the workforce.",
+    "meaning_ar": "تدمج أتمتة الذكاء الاصطناعي الخوارزميات البرمجية في بيئات العمل لتحل محل المهام الإدارية والتشغيلية الروتينية للقوى العاملة."
+  },
   "جولدن ارينا: افتتاح 4 مراكز بيع خلال العام الجاري": {
     "meaning": "The company expands its physical distribution network and direct customer touchpoints by establishing four new commercial outlets.",
     "meaning_ar": "تتوسع الشركة في شبكة التوزيع المباشر ومنافذ البيع الفعلية عبر تشغيل أربعة مراكز بيع جديدة."
@@ -4680,6 +4688,10 @@
   "عموميه شركه راميدا تعدل مواد بالنظام الاساسي تخص زياده راس المال واجتماعات الاداره": {
     "meaning": "Amending the articles of association updates the company's legal framework governing capital increase procedures and internal administrative protocols for board meetings.",
     "meaning_ar": "يُعدل تعديل النظام الأساسي الإطار القانوني والتنظيمي للشركة الحاكم لإجراءات زيادات رأس المال والضوابط الإدارية لاجتماعات مجلس الإدارة."
+  },
+  "عموميه “راميدا” تقر تعديل مواد بالنظام الاساسي": {
+    "meaning": "Amending the articles of association updates the company's internal governance framework, which establishes the legal rules governing corporate operations, administrative authorities, and capital structure.",
+    "meaning_ar": "يُعدّ تعديل النظام الأساسي تحديثاً لإطار الحوكمة الداخلي للشركة، وهو الذي يحدد القواعد القانونية المنظمة للعمليات المؤسسية، والصلاحيات الإدارية، وهيكل رأس المال."
   },
   "عوايد السندات الامريكيه تواصل الارتفاع رغم مضاعفه الخزانه عمليات اعاده الشراء": {
     "meaning": "US Treasury buyback operations inject liquidity and absorb older, less liquid securities, yet bond yields reflect broader macroeconomic factors and secondary market pricing driven by benchmark policy rates and primary issuance volume.",
@@ -5884,6 +5896,10 @@
   "وزير الخارجيه يبحث مع “الاوروبي لاعاده الاعمار” زياده الاستثمارات في مصر": {
     "meaning": "The European Bank for Reconstruction and Development (EBRD) allocates capital through direct project financing, equity participations, and credit lines channeled to private and public sector infrastructure in Egypt.",
     "meaning_ar": "يوفر البنك الأوروبي لإعادة الإعمار والتنمية تمويلات رأسمالية عبر إقراض المشروعات المباشر، والمساهمات الرأسمالية، وخطوط الائتمان الموجهة لمشروعات القطاعين الخاص والعام في مصر."
+  },
+  "وزير الخارجيه يشدد علي اهميه احترام مبدا الملكيه السودانيه للحل السياسي": {
+    "meaning": "Official diplomatic positions on regional political stability relate to cross-border trade framework predictability and bilateral transport corridor operations between Egypt and Sudan.",
+    "meaning_ar": "ترتبط المواقف الدبلوماسية الرسمية بشأن استقرار الأوضاع الإقليمية بمدى انتظام أطر التجارة البينية وحركة ممرات النقل والتبادل التجاري البري والنهري بين مصر والسودان."
   },
   "وزير الخارجيه: مستعدون لتبادل الخبرات مع مالي في رياده الاعمال ودعم المشروعات الصغيره والمتوسطه": {
     "meaning": "Bilateral technical cooperation between Egypt and Mali establishes institutional frameworks for knowledge sharing, regulatory alignment, and capacity-building programs across the SME and entrepreneurship sectors.",
