@@ -707,6 +707,10 @@
     "meaning": "This partnership pools capital and operational resources across telecommunications, infrastructure manufacturing, and technology logistics to co-develop a large-scale data center facility in Egypt.",
     "meaning_ar": "تجمع هذه الشراكة بين رؤوس الأموال والموارد التشغيلية لقطاعات الاتصالات، وتصنيع البنية التحتية، والخدمات التكنولوجية اللوجستية بهدف التطوير المشترك لمشروع مراكز بيانات ضخم في مصر."
   },
+  "«Coral Travel» تستهدف جذب 14 الف سايح روماني الي مصر بنهايه 2026": {
+    "meaning": "This operational target establishes an inbound tourism flow from the Romanian market through dedicated charter flight bookings and local hospitality capacity reservations through 2026.",
+    "meaning_ar": "يحدد هذا المستهدف التشغيلي تدفقات سياحية وافدة من السوق الروماني عبر تنظيم رحلات طيران عارض وحجز طاقات استيعابية فندقية محلية حتى نهاية عام 2026."
+  },
   "«EBRD»: نامل تجاوز استثماراتنا في مصر 2 مليار يورو بنهايه 2026": {
     "meaning": "The European Bank for Reconstruction and Development (EBRD) establishes a multi-year project financing program targeting corporate, infrastructure, and green transition assets in the local economy through debt, equity, and syndicated credit facilities.",
     "meaning_ar": "يضع البنك الأوروبي لإعادة الإعمار والتنمية برنامجاً تمويلياً متعدد السنوات يوجه سيولة عبر أدوات الدين وحصص الملكية والتسهيلات الائتمانية المشتركة إلى مشروعات البنية التحتية والتحول الأخضر والشركات في السوق المحلي."
@@ -2658,6 +2662,10 @@
   "المصانع الجاهزه.. رهان جديد لتوطين السيارات": {
     "meaning": "The plug-and-play factory model provides pre-built industrial facilities with connected utilities, enabling automotive manufacturers and parts suppliers to bypass the physical construction phase and install assembly lines directly.",
     "meaning_ar": "يوفر نموذج المصانع الجاهزة منشآت صناعية مشيدة بالكامل ومزودة بالمرافق، مما يتيح لمصنعي السيارات وموردي المكونات تجاوز مرحلة البناء الإنشائي والبدء مباشرة في تركيب خطوط التجميع."
+  },
+  "المصري للدراسات: الشركات الكبيره اكثر صمودا امام صدمات التصدير": {
+    "meaning": "Large-scale exporters possess broader capital reserves, diversified international client portfolios, and established credit facilities, which absorb trade disruptions and shipping volatility more directly than small enterprises.",
+    "meaning_ar": "تمتلك الشركات التصديرية الكبرى احتياطيات رأسمالية أوسع، وقواعد عملاء دولية متنوعة، وتسهيلات ائتمانية قائمة، مما يتيح لها استيعاب اضطرابات التجارة وتقلبات سلاسل التوريد مقارنة بالمنشآت الصغيرة."
   },
   "المصريه للاتصالات تحلق الي مستويات تاريخيه بفضل استراتيجيتها الجديده": {
     "meaning": "Telecom Egypt's share price trades at record highs on the Egyptian Exchange following the deployment of its updated corporate operational strategy.",
@@ -6205,6 +6213,10 @@
     "meaning": "This framework establishes bilateral technical cooperation in land reclamation and modern irrigation, involving the export of agricultural engineering expertise and operational consulting services between Egypt and Iraq.",
     "meaning_ar": "يحدد هذا الإطار آلية للتعاون الفني الثنائي في مجالات استصلاح الأراضي والري الحديث، تتضمن تبادل الخبرات الهندسية الزراعية وتقديم الخدمات الاستشارية والتشغيلية بين مصر والعراق."
   },
+  "وزير الصحه يبحث زياده الاستثمارات الهنديه في قطاع الادويه بمصر": {
+    "meaning": "Foreign direct investment discussions in pharmaceuticals focus on technology transfer, joint manufacturing ventures, and the local formulation of active pharmaceutical ingredients (APIs) under licensed production agreements.",
+    "meaning_ar": "تركز مباحثات الاستثمار الأجنبي المباشر في قطاع الأدوية على نقل التكنولوجيا، والمشروعات الصناعية المشتركة، والتصنيع المحلي للمواد الفعالة بموجب اتفاقيات إنتاج مرخصة."
+  },
   "وزير الصحه يتابع مستجدات مشروعات المرحله الاولي لمنظومه التامين الصحي الشامل": {
     "meaning": "Execution of the Universal Health Insurance system channels state infrastructure procurement directly into hospital upgrades, diagnostic systems, and accredited medical service partnerships across target governorates.",
     "meaning_ar": "يوجّه تنفيذ منظومة التأمين الصحي الشامل المشتريات والإنفاق الرأسمالي الحكومي مباشرة نحو تحديث المستشفيات وشبكات الفحص الطبي وشراكات الرعاية الصحية المعتمدة داخل المحافظات المحددة."
@@ -6324,6 +6336,10 @@
   "وكاله الطاقه: الطلب العالمي علي الفحم يتجه لتسجيل مستوي قياسي": {
     "meaning": "Global coal demand directly influences international benchmark energy prices, which form the base input cost for heavy industries such as cement manufacturers relying on imported coal for clinker production.",
     "meaning_ar": "يؤثر الطلب العالمي على الفحم بشكل مباشر على الأسعار المرجعية الدولية للطاقة، والتي تمثل تكلفة المدخلات الأساسية للصناعات الثقيلة مثل شركات الأسمنت التي تعتمد على الفحم المستورد في إنتاج الكلنكر."
+  },
+  "وكيل وزاره الصحه بالدقهليه: قياس طول ووزن الطفل مع كل تطعيم.. والمتابعه تبدا من «الالف يوم الذهبيه»": {
+    "meaning": "This public health directive integrates mandatory anthropometric measurements into routine vaccination protocols, increasing operational touchpoints and diagnostic data collection across primary healthcare centers.",
+    "meaning_ar": "يُدرج هذا التوجيه الصادر عن وزارة الصحة قياسات النمو البدني الإلزامية ضمن بروتوكولات التطعيم الروتينية، مما يرفع من معدلات الفحص وجمع البيانات التشخيصية في مراكز الرعاية الصحية الأولية."
   },
   "يتجاوز 169 جنيها للبيع.. سعر الدينار الكويتي اليوم الاحد 13-9-2026 بالبنوك": {
     "meaning": "The exchange rate of the Kuwaiti Dinar crossing 169 Egyptian Pounds reflects the current interbank pricing dynamics and currency valuation, directly determining the domestic currency cost of imports, debt settlements, and foreign remittances denominated in KWD.",
