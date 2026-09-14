@@ -40,10 +40,16 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
+import commit as cm
 import forecast as fc
+import timestamp as ts
 
 REPO = pathlib.Path(__file__).resolve().parent.parent.parent
 OUT = REPO / "data-source" / "lab"
+# The public half of the commitment. A root, counts and a timestamp receipt —
+# no forecast and no company name — so it can be published the same night
+# while the forecasts themselves stay private until their horizons mature.
+COMMITMENTS = REPO / "public" / "data" / "v1" / "research" / "commitments"
 
 # A model needs at least this much of a company's record to be asked at all.
 # Kronos ran on a 90-session lookback; below that the question is different
@@ -196,6 +202,8 @@ def main(argv=None) -> int:
     parser.add_argument("--models", default="baselines",
                         help="baselines, all, or a comma-separated list")
     parser.add_argument("--check", action="store_true", help="write nothing")
+    parser.add_argument("--no-timestamp", action="store_true",
+                        help="skip the timestamping authority")
     args = parser.parse_args(argv)
 
     chosen: dict = {}
@@ -231,13 +239,40 @@ def main(argv=None) -> int:
               f"{block['abstained']:>3} abstained")
     print(f"   fingerprint {document['fingerprint'][:16]}")
 
+    # The commitment, built before anything is written.
+    #
+    # Every forecast is salted and hashed into one Merkle root, and a
+    # timestamping authority is asked to date the root. That token is the
+    # only part of this record that cannot be produced after the outcome is
+    # known, which makes it the whole of the claim "frozen before the fact".
+    public, secret = cm.commitment(document)
+    if not args.no_timestamp:
+        public["timestamp"] = ts.stamp(public["merkleRoot"])
+        state = ("stamped by " + public["timestamp"]["authority"]
+                 if public["timestamp"]["timestamped"]
+                 else "NOT stamped — no authority answered")
+    else:
+        state = "not stamped (asked not to)"
+    print(f"   root {public['merkleRoot'][:16]}  {public['leaves']} leaves  ·  {state}")
+
     if args.check:
         return 0
+
     OUT.mkdir(parents=True, exist_ok=True)
     path = OUT / f"run-{document['basisSession']}.json"
+    # The nonces travel with the private forecasts, never with the root. A
+    # published nonce opens the leaf it belongs to, which would publish the
+    # forecast the commitment exists to keep until its horizon matures.
+    document["nonces"] = secret["nonces"]
     path.write_text(json.dumps(document, ensure_ascii=False, separators=(",", ":")),
                     encoding="utf-8")
     print(f"   wrote {path.relative_to(REPO)} ({path.stat().st_size // 1024} KB)")
+
+    COMMITMENTS.mkdir(parents=True, exist_ok=True)
+    stamp_path = COMMITMENTS / f"{document['basisSession']}.json"
+    stamp_path.write_text(json.dumps(public, ensure_ascii=False, indent=1),
+                          encoding="utf-8")
+    print(f"   wrote {stamp_path.relative_to(REPO)} (public: a root, no forecasts)")
     return 0
 
 

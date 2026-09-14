@@ -67,6 +67,11 @@ KRONOS_SOURCE = os.environ.get("ESTHMR_KRONOS_SOURCE", "")
 # different weights over time, and a record that says "Kronos-small" without
 # saying WHICH Kronos-small cannot be reproduced or verified. These are the
 # exact revisions the August run used.
+# The general forecasters, pinned by repository. Their weights move, and a
+# record that cannot say which weights made a forecast cannot be verified.
+CHRONOS2 = "amazon/chronos-2"
+TIMESFM25 = "google/timesfm-2.5-200m-pytorch"
+
 KRONOS = {
     "model": "NeoQuasar/Kronos-small",
     "model_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
@@ -107,6 +112,29 @@ def _seed(basis: str, ticker: str) -> int:
     return int.from_bytes(digest[:4], "big") % (2 ** 31)
 
 
+def _hugging_face() -> None:
+    """Point the hub at the cache, and make it copy rather than symlink.
+
+    The first CI run abstained on all 260 companies with
+
+        FileNotFoundError: '../../blobs/050b676e...' -> '.../huggingface/...'
+
+    The hub stores a file once as a blob and links every snapshot to it by a
+    RELATIVE symlink. `actions/cache` restores the tree without preserving
+    those links, so every snapshot points at a path that is not there, and a
+    model that downloaded perfectly the first time cannot be loaded the
+    second. `HF_HUB_DISABLE_SYMLINKS` makes it copy instead: a hundred
+    megabytes twice over, against a model that never loads.
+
+    `cache_dir` is deliberately NOT passed to `from_pretrained` alongside
+    this. Setting both puts the hub root in one place and the snapshot in
+    another, which is half of how the layout got confused to begin with.
+    """
+    os.environ.setdefault("HF_HOME", str(CACHE / "huggingface"))
+    os.environ.setdefault("HF_HUB_DISABLE_SYMLINKS", "1")
+    os.environ.setdefault("HF_HUB_DISABLE_TELEMETRY", "1")
+
+
 @functools.lru_cache(maxsize=1)
 def _kronos():
     """Load Kronos once, on CPU, with MPS and CUDA left out of it.
@@ -128,14 +156,13 @@ def _kronos():
     if str(source) not in sys.path:
         sys.path.insert(0, str(source))
 
-    os.environ.setdefault("HF_HOME", str(CACHE / "huggingface"))
+    _hugging_face()
     torch.set_num_threads(int(os.environ.get("ESTHMR_LAB_THREADS", "4")))
 
     from model import Kronos, KronosPredictor, KronosTokenizer  # noqa: PLC0415
 
-    hub = str(CACHE / "huggingface" / "hub")
-    tokenizer = KronosTokenizer.from_pretrained(KRONOS["tokenizer"], cache_dir=hub)
-    weights = Kronos.from_pretrained(KRONOS["model"], cache_dir=hub)
+    tokenizer = KronosTokenizer.from_pretrained(KRONOS["tokenizer"])
+    weights = Kronos.from_pretrained(KRONOS["model"])
     return KronosPredictor(weights, tokenizer, device="cpu",
                            max_context=KRONOS["context"])
 
@@ -210,20 +237,41 @@ def kronos(ticker: str, basis: str, bars: list[dict]) -> fc.Forecast | fc.Absten
 
 @functools.lru_cache(maxsize=1)
 def _pipeline(kind: str):
-    """Chronos-2 or TimesFM 2.5, loaded once, on CPU."""
+    """Chronos-2 or TimesFM 2.5, loaded once, on CPU.
+
+    Both call shapes were wrong in the first CI run and both were wrong in
+    the same way: written from how these libraries used to look rather than
+    from how they look now. `Chronos2Pipeline.predict` takes `inputs`
+    positionally, not a `context=` keyword; TimesFM 2.5 exposes
+    `TimesFM_2p5_200M_torch` and has no `TimesFm` class at all, and it must
+    be compiled with a `ForecastConfig` before it will forecast.
+
+    Both were checked against the installed packages rather than guessed at
+    a second time.
+    """
     import torch
     torch.set_num_threads(int(os.environ.get("ESTHMR_LAB_THREADS", "4")))
-    os.environ.setdefault("HF_HOME", str(CACHE / "huggingface"))
+    _hugging_face()
     if kind == "chronos2":
         from chronos import BaseChronosPipeline  # noqa: PLC0415
-        return BaseChronosPipeline.from_pretrained("amazon/chronos-2",
-                                                   device_map="cpu")
+        return BaseChronosPipeline.from_pretrained(CHRONOS2, device_map="cpu")
     if kind == "timesfm25":
         import timesfm  # noqa: PLC0415
-        return timesfm.TimesFm(
-            hparams=timesfm.TimesFmHparams(backend="cpu", horizon_len=max(fc.HORIZONS)),
-            checkpoint=timesfm.TimesFmCheckpoint(
-                huggingface_repo_id="google/timesfm-2.0-500m-pytorch"))
+        model = timesfm.TimesFM_2p5_200M_torch.from_pretrained(TIMESFM25)
+        model.compile(timesfm.ForecastConfig(
+            max_context=LOOKBACK, max_horizon=max(fc.HORIZONS),
+            # The series are prices on wildly different scales — 40 piastres
+            # and 300 pounds — so each one is normalised before the model
+            # sees it, or the batch is dominated by whichever company is
+            # quoted in the largest numbers.
+            normalize_inputs=True,
+            # The forecast is the median path; the quantile head is what
+            # produces one rather than a mean that a single runaway sample
+            # can carry away.
+            use_continuous_quantile_head=True,
+            force_flip_invariance=True, infer_is_positive=True,
+            fix_quantile_crossing=True))
+        return model
     raise RuntimeError(f"no pipeline called {kind}")
 
 
@@ -253,18 +301,32 @@ def _close_only(kind: str, ticker: str, basis: str,
     ahead = max(fc.HORIZONS)
     try:
         if kind == "chronos2":
-            import torch
-            drawn = pipeline.predict(context=torch.tensor(series, dtype=torch.float32),
+            import numpy as np  # noqa: PLC0415
+            drawn = pipeline.predict([np.asarray(series, dtype="float32")],
                                      prediction_length=ahead)
-            median = drawn[0].median(dim=0).values.tolist()
+            # One tensor per series, shaped (variates, quantiles, horizon) —
+            # (1, 21, 20) here. One variate because this is a close series
+            # alone, and the middle of the 21 quantiles is the median path.
+            first = np.asarray(drawn[0])
+            if first.ndim != 3:
+                raise ValueError(f"unexpected chronos shape {first.shape}")
+            median = first[0, first.shape[1] // 2, :].tolist()
         else:
-            point, _ = pipeline.forecast([series], freq=[0])
-            median = list(point[0])
+            import numpy as np  # noqa: PLC0415
+            point, _ = pipeline.forecast(horizon=ahead,
+                                         inputs=[np.asarray(series, dtype="float32")])
+            # (batch, horizon) — one row because one series was asked about.
+            drawn = np.asarray(point)
+            median = list(drawn[0] if drawn.ndim > 1 else drawn)
     except Exception as error:  # noqa: BLE001
         return fc.Abstention(ticker, basis, kind,
                              f"{type(error).__name__}: {error}")
 
-    returns = {h: (median[h - 1] / last - 1) * 100
+    # `float()` deliberately. TimesFM returns numpy scalars, which json
+    # writes as "np.float32(-0.43)" or refuses outright depending on the
+    # encoder — a forecast that cannot be serialised is a forecast that is
+    # not in the record.
+    returns = {h: float((median[h - 1] / last - 1) * 100)
                for h in fc.HORIZONS if h <= len(median)}
     if not returns:
         return fc.Abstention(ticker, basis, kind, "no horizon returned")

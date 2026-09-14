@@ -16,15 +16,19 @@ Every test here is one of those.
 
 from __future__ import annotations
 
+import json
 import pathlib
 import sys
 import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
+import backload  # noqa: E402
+import commit as cm  # noqa: E402
 import forecast as fc  # noqa: E402
 import run  # noqa: E402
 import score as sc  # noqa: E402
+import timestamp as ts  # noqa: E402
 
 
 def bars(*rows) -> list[dict]:
@@ -320,6 +324,268 @@ class RunTest(unittest.TestCase):
         # unlicensed publisher may not put on a screen. The defence is the
         # path, not the user interface.
         self.assertNotIn("public", run.OUT.parts)
+
+
+class BackloadTest(unittest.TestCase):
+    """Bringing August in without pretending it was something it was not."""
+
+    def artifact(self, basis="2026-08-25", **over) -> dict:
+        doc = {
+            "basisSession": basis,
+            "generatedAt": "2026-08-25T12:13:53+00:00",
+            "artifactPath": "/somewhere/kronos_shadow_2026-08-26.json",
+            "coverage": {"excluded": 41},
+            "forecasts": [
+                {"ticker": "BBB", "horizons": {
+                    "1": {"median": -0.0213, "mean": -0.0214},
+                    "5": {"median": -0.1044}}},
+                {"ticker": "AAA", "horizons": {
+                    "1": {"median": 0.0177}, "5": {"median": 0.0320},
+                    "10": {"median": 0.0500}}},
+            ],
+        }
+        doc.update(over)
+        return doc
+
+    def panel(self, *tickers) -> dict:
+        rows = rising(120)
+        return {t: {b["date"]: b for b in rows} for t in tickers}
+
+    def test_kronos_s_own_numbers_are_read_and_never_recomputed(self):
+        # It has weights, a seed and a sampling temperature. Rerunning it
+        # today would produce a forecast made with knowledge of what
+        # happened, which is the one thing the record cannot contain.
+        out = backload.kronos_forecasts(self.artifact())
+        by = {r["ticker"]: r for r in out}
+        self.assertAlmostEqual(by["BBB"]["returns"]["1"], -2.13, places=4)
+        self.assertAlmostEqual(by["AAA"]["returns"]["5"], 3.20, places=4)
+        self.assertIn("not recomputed", by["AAA"]["note"])
+
+    def test_a_fraction_becomes_a_percentage_and_keeps_its_sign(self):
+        # The August artifacts store -0.0213 meaning -2.13%. Published as
+        # -0.0213 it would read as a fifth of a basis point and rank the
+        # whole market almost identically.
+        out = {r["ticker"]: r for r in backload.kronos_forecasts(self.artifact())}
+        self.assertLess(out["BBB"]["returns"]["1"], -1)
+        self.assertGreater(out["AAA"]["returns"]["1"], 1)
+
+    def test_a_horizon_august_did_not_forecast_is_left_absent(self):
+        # Those runs went to ten sessions; the lab evaluates to twenty.
+        # Extrapolating would put a number in the record that no model ever
+        # produced, and it would be scored as though one had.
+        out = {r["ticker"]: r for r in backload.kronos_forecasts(self.artifact())}
+        self.assertNotIn("20", out["AAA"]["returns"])
+        self.assertNotIn("20", out["BBB"]["returns"])
+
+    def test_kronos_is_marked_frozen_and_the_baselines_are_not(self):
+        # The whole honesty of the exercise. One half was written before the
+        # outcome existed; the other was derived today.
+        doc = backload.rebuild(self.artifact(), self.panel("AAA", "BBB"))
+        self.assertTrue(doc["models"]["kronos"]["frozen"])
+        for name in fc.BASELINES:
+            self.assertFalse(doc["models"][name]["frozen"], name)
+        self.assertTrue(doc["reconstructed"])
+        self.assertIn("after the fact", doc["what"])
+
+    def test_a_reconstructed_baseline_sees_no_bar_after_the_basis(self):
+        # The same cut the nightly run makes. A baseline handed one later bar
+        # would be scored on a session it had already seen, and it is the
+        # reconstruction where that is easiest to get wrong.
+        rows = rising(120)
+        basis = rows[60]["date"]
+        cut = backload.bars_to({"AAA": {b["date"]: b for b in rows}}, "AAA", basis)
+        self.assertEqual(cut[-1]["date"], basis)
+        self.assertTrue(all(b["date"] <= basis for b in cut))
+
+    def test_the_newest_reading_of_a_session_wins(self):
+        # A bar is split-adjusted when it is read. Two scans days apart can
+        # hold the same session at different prices, and the later reading is
+        # the one adjusted for every action since.
+        import tempfile
+        with tempfile.TemporaryDirectory() as folder:
+            root = pathlib.Path(folder)
+            for name, close in (("daily_scan_2026-08-20.json", 100.0),
+                                ("daily_scan_2026-08-27.json", 50.0)):
+                (root / name).write_text(json.dumps({"records": [{
+                    "ticker": "AAA",
+                    "recentSplitAdjustedBars": [
+                        {"date": "2026-08-19", "open": close, "high": close,
+                         "low": close, "close": close, "volume": 1}]}]}))
+            panel = backload.bar_panel(sorted(root.glob("daily_scan_*.json")))
+        self.assertEqual(panel["AAA"]["2026-08-19"]["close"], 50.0)
+
+    def test_a_night_that_was_rerun_is_entered_once(self):
+        # An August night with a revision has more than one artifact. Taking
+        # both would enter the same forecast twice under two timestamps and
+        # double its weight in every average.
+        names = ["kronos_shadow_2026-08-25.json",
+                 "kronos_shadow_revision_2026-08-25_140721.json"]
+        kept = [n for n in names if "revision" not in n]
+        self.assertEqual(kept, ["kronos_shadow_2026-08-25.json"])
+
+    def test_an_artifact_with_no_forecasts_produces_no_run(self):
+        self.assertIsNone(backload.rebuild(self.artifact(forecasts=[]),
+                                           self.panel("AAA")))
+        self.assertIsNone(backload.rebuild(self.artifact(basisSession=None),
+                                           self.panel("AAA")))
+
+
+class CanonicalTest(unittest.TestCase):
+    """RFC 8785, because a hash only proves something if a stranger can redo it."""
+
+    def test_property_order_is_fixed_not_whatever_python_held(self):
+        self.assertEqual(cm.canonical({"b": 1, "a": 2}), b'{"a":2,"b":1}')
+        self.assertEqual(cm.canonical({"b": 1, "a": 2}),
+                         cm.canonical({"a": 2, "b": 1}))
+
+    def test_numbers_print_the_way_ecmascript_prints_them(self):
+        # `json.dumps` is close and not the same, and the difference is
+        # exactly the kind that makes a verifier in another language compute
+        # a different hash over the same forecast.
+        self.assertEqual(cm.canonical([0, -0.0, 1.0, 1.5]), b"[0,0,1,1.5]")
+
+    def test_a_forecast_that_is_not_a_number_is_refused_outright(self):
+        # NaN and infinity arrive from a division nobody meant to do. Written
+        # into a commitment they are read back differently by different
+        # parsers, and the root stops being checkable.
+        for bad in (float("nan"), float("inf"), float("-inf")):
+            with self.assertRaises(ValueError):
+                cm.canonical({"return": bad})
+
+    def test_the_same_forecast_always_hashes_the_same(self):
+        record = {"ticker": "AAA", "returns": {"1": 1.5, "5": -2.0}}
+        self.assertEqual(cm.leaf(record, "abc"), cm.leaf(dict(record), "abc"))
+
+    def test_a_different_nonce_gives_a_different_leaf(self):
+        record = {"ticker": "AAA"}
+        self.assertNotEqual(cm.leaf(record, "one"), cm.leaf(record, "two"))
+
+
+class MerkleTest(unittest.TestCase):
+    def leaves(self, n):
+        return [cm.leaf({"i": i}, f"nonce{i}") for i in range(n)]
+
+    def test_every_leaf_can_prove_it_is_in_the_root(self):
+        for size in (1, 2, 3, 5, 8, 13):
+            leaves = self.leaves(size)
+            root = cm.merkle_root(leaves)
+            for i in range(size):
+                self.assertTrue(cm.verify(leaves[i], cm.proof(leaves, i), root),
+                                f"{size} leaves, index {i}")
+
+    def test_a_leaf_that_was_not_committed_cannot_prove_it_was(self):
+        leaves = self.leaves(8)
+        root = cm.merkle_root(leaves)
+        forged = cm.leaf({"i": 999}, "later")
+        self.assertFalse(cm.verify(forged, cm.proof(leaves, 0), root))
+
+    def test_an_odd_leaf_is_carried_up_not_paired_with_itself(self):
+        # Duplicating it is the classic malleability bug: two different leaf
+        # sets produce the same root, so a reveal can be made to match a
+        # commitment it was never part of.
+        three = self.leaves(3)
+        four = three + [three[-1]]
+        self.assertNotEqual(cm.merkle_root(three), cm.merkle_root(four))
+
+    def test_changing_one_forecast_changes_the_root(self):
+        leaves = self.leaves(6)
+        changed = list(leaves)
+        changed[3] = cm.leaf({"i": 3, "returns": {"1": 9.9}}, "nonce3")
+        self.assertNotEqual(cm.merkle_root(leaves), cm.merkle_root(changed))
+
+
+class CommitmentTest(unittest.TestCase):
+    def document(self):
+        return {
+            "basisSession": "2026-09-13", "ranAt": "2026-09-14T12:00:00Z",
+            "universeSize": 2, "horizons": [1, 5, 20],
+            "models": {
+                "kronos": {"answered": 2, "abstained": 1, "forecasts": [
+                    {"ticker": "AAA", "returns": {"1": 1.5}},
+                    {"ticker": "BBB", "returns": {"1": -2.0}}]},
+                "flat": {"answered": 1, "abstained": 2, "forecasts": [
+                    {"ticker": "AAA", "returns": {"1": 0.0}}]},
+            },
+        }
+
+    def test_the_public_half_carries_no_forecast_and_no_company(self):
+        # The point of committing rather than publishing. A predicted return
+        # for a named security is the thing that may not go on a screen, and
+        # it does not become publishable by being six hours old.
+        public, _ = cm.commitment(self.document())
+        body = json.dumps(public)
+        self.assertNotIn("AAA", body)
+        self.assertNotIn("BBB", body)
+        self.assertNotIn("1.5", body)
+        self.assertIn("merkleRoot", public)
+
+    def test_the_counts_include_abstentions(self):
+        # So a model cannot quietly answer fewer companies than it was asked
+        # about and have the commitment agree it answered them all.
+        public, _ = cm.commitment(self.document())
+        self.assertEqual(public["perModel"]["kronos"],
+                         {"forecasts": 2, "abstentions": 1})
+        self.assertEqual(public["leaves"], 3)
+
+    def test_every_forecast_gets_its_own_nonce(self):
+        _, secret = cm.commitment(self.document())
+        salts = [secret["nonces"][m][t] for m in secret["nonces"]
+                 for t in secret["nonces"][m]]
+        self.assertEqual(len(salts), 3)
+        self.assertEqual(len(set(salts)), 3, "a nonce was reused")
+
+    def test_the_root_does_not_depend_on_dictionary_order(self):
+        one = self.document()
+        two = self.document()
+        two["models"] = {"flat": two["models"]["flat"],
+                         "kronos": two["models"]["kronos"]}
+        # Nonces differ between calls, so compare the trees the same salts
+        # would build: the ordering of records, which is what is at issue.
+        first, _ = cm.commitment(one)
+        second, _ = cm.commitment(two)
+        self.assertEqual(first["leaves"], second["leaves"])
+        self.assertEqual(first["perModel"], second["perModel"])
+
+
+class TimestampTest(unittest.TestCase):
+    def test_the_request_is_a_hash_and_nothing_else(self):
+        # A public authority learns 32 bytes that mean nothing to it. That is
+        # what makes it safe to use one.
+        digest = bytes(range(32))
+        body = ts.request_bytes(digest)
+        self.assertEqual(body[0], 0x30)
+        self.assertIn(digest, body)
+        self.assertIn(ts.SHA256_OID, body)
+
+    def test_only_a_sha256_imprint_is_accepted(self):
+        with self.assertRaises(ValueError):
+            ts.request_bytes(b"too short")
+
+    def test_an_authority_that_will_not_answer_is_recorded_not_raised(self):
+        # A gap in the evidence for one night. Stopping the forecast over it
+        # would be a gap in the record itself, which is worse.
+        def refuse(url, body):
+            raise OSError("the authority is down")
+        out = ts.stamp("ab" * 32, opener=refuse)
+        self.assertFalse(out["timestamped"])
+        self.assertEqual(len(out["attempts"]), len(ts.AUTHORITIES))
+        self.assertIn("git history", out["note"])
+
+    def test_the_second_authority_is_tried_when_the_first_fails(self):
+        seen = []
+        def once(url, body):
+            seen.append(url)
+            if len(seen) == 1:
+                raise OSError("down")
+            return b"a token"
+        out = ts.stamp("cd" * 32, opener=once)
+        self.assertTrue(out["timestamped"])
+        self.assertEqual(out["authority"], ts.AUTHORITIES[1][0])
+        self.assertEqual(len(seen), 2)
+
+    def test_an_empty_answer_is_not_a_token(self):
+        out = ts.stamp("ef" * 32, opener=lambda url, body: b"")
+        self.assertFalse(out["timestamped"])
 
 
 if __name__ == "__main__":
