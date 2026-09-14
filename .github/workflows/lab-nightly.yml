@@ -209,6 +209,16 @@ jobs:
           scan=$(ls -t ../work/daily_scan_*.json | grep -v fused | head -1)
           python3 scripts/lab/reveal.py "$scan"
 
+      # What a reader sees: each model's five highest-ranked and what they
+      # returned, and what every model said about every company last night.
+      # The first names no security and is public; the second does and stays
+      # behind the session gate, behind an acknowledgement on the screen.
+      - name: Publish what the models say
+        if: always() && inputs.dry_run != true
+        run: |
+          scan=$(ls -t ../work/daily_scan_*.json | grep -v fused | head -1)
+          python3 scripts/lab/publish.py "$scan"
+
       # Then check the project's own evidence the way a stranger would, from
       # the published files alone: rehash every revealed record, rebuild the
       # tree, compare it with the root in the commitment, and read the

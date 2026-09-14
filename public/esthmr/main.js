@@ -83,9 +83,16 @@ async function load(email) {
     // The arena is public — it names no security, and a record a stranger
     // cannot fetch is not a record anybody can check — so a signed-out reader
     // sees the models on record too, over the demo's invented market.
-    (data.arena ? data.arena() : Promise.resolve(null)).then((arena) => {
-      if (version === loadVersion && arena) component.setData({ ...component.data(), arena });
-    }).catch(() => { /* the block simply does not draw */ });
+    Promise.all([
+      (data.arena ? data.arena() : Promise.resolve(null)).catch(() => null),
+      (data.top5 ? data.top5() : Promise.resolve(null)).catch(() => null),
+    ]).then(([arena, top5]) => {
+      if (version !== loadVersion) return;
+      const patch = {};
+      if (arena) patch.arena = arena;
+      if (top5) patch.top5 = top5;
+      if (Object.keys(patch).length) component.setData({ ...component.data(), ...patch });
+    });
     return;
   }
   component.setState({ dataLoading: true, dataError: false });
@@ -140,6 +147,13 @@ async function load(email) {
             (measures) => ({ measures: measures || undefined })),
       slice(data.arena ? data.arena() : Promise.resolve(null),
             (arena) => ({ arena: arena || undefined })),
+      // The models' record, and what they said last night. The first is
+      // public and the second is not; both are one document and neither is
+      // worth delaying the exchange for, so they ride with the extras.
+      slice(data.top5 ? data.top5() : Promise.resolve(null),
+            (top5) => ({ top5: top5 || undefined })),
+      slice(data.scenarios ? data.scenarios() : Promise.resolve(null),
+            (scenarios) => ({ scenarios: scenarios || undefined })),
       Promise.all([calendar, exchange, attention]).then(([cal, ex, att]) => patch({
         indices: ex ? data.indexCards(ex.indexLevels, att && att.history) : undefined,
         readNow: data.readNowCards(att && att.signals, cal && cal.expectedTotal, cal && cal.expectedFrom),

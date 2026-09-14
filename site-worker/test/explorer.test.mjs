@@ -77,7 +77,30 @@ test('§8 the explorer offers Home no shortlist, only the way to the whole table
   assert.equal(typeof v.open,'function');
   assert.match(v.compareLabel,/Compare the market/);
 });
+test('§8 the Home ranking panel renders controls and a launcher, never a ranked row',async()=>{
+  const {readFile}=await import('node:fs/promises');
+  const html=await readFile(new URL('../../public/esthmr/template.html',import.meta.url),'utf8');
+  const start=html.indexOf('<section class="ranking-panel">');
+  assert.ok(start>0,'the Home ranking panel is gone entirely — the test needs updating, not deleting');
+  const panel=html.slice(start,html.indexOf('</section>',start));
+  assert.ok(!panel.includes('explorer-table'),'a table of ranked companies is back on Home');
+  assert.ok(!panel.includes('columnheader">#'),'a rank column is back on Home');
+  assert.ok(!panel.includes('explorer.preview')&&!panel.includes('explorer.rows'),'Home is drawing ranked rows');
+  assert.ok(panel.includes('{{ explorer.resultsLabel }}'),'the explicit results action is missing');
+  assert.match(panel, /<button[^>]*class="results-button"[^>]*onClick="{{ explorer.open }}"/, 'results must be a working keyboard-accessible button');
+  assert.ok(panel.includes('{{ explorer.metrics }}'),'the measure controls should stay');
+});
 
+test('four market measures stay visible without expanding Home details',async()=>{
+  const {readFile}=await import('node:fs/promises');
+  const html=await readFile(new URL('../../public/esthmr/template.html',import.meta.url),'utf8');
+  const measures=html.indexOf('class="market-measures"');
+  const details=html.indexOf('<sc-if value="{{ showHomeDetails }}">');
+  assert.ok(measures>0 && measures<details);
+  assert.ok(html.slice(measures,details).includes('list="{{ screen.tests }}"'));
+  const home=html.slice(0,details);
+  for(const field of ['p.buy','p.sell','p.buyW','p.sellW']) assert.ok(home.includes('{{ '+field+' }}'),field);
+});
 
 test('price trends view displays 52W highs, distance, momentum, and filters', () => {
   const c = fixture();

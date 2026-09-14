@@ -5,8 +5,9 @@ import { marketStory } from './market-story.js';
 import { pairsExplorer } from './pairs.js';
 import { valuationExplorer } from './valuation.js';
 import { flowTrackers } from './flow-trackers.js';
-import { homeScreen } from './home.js';
 import { questionsScreen } from './questions.js';
+import { aiCards } from './ai-cards.js';
+import { scenariosScreen } from './scenarios.js';
 
 /* The trading simulator, fetched only when somebody opens it.
  *
@@ -3941,6 +3942,7 @@ export class Component extends Base {
       // being scrolled past — a place to go back to has to be somewhere you
       // can go.
       ['questions', ar?'أسئلتي':'My questions', (this._questions || []).length ? String((this._questions || []).length) : ''],
+      ['scenarios', ar?'مختبر السيناريوهات':'Scenario workbench', ''],
       ['watchlist', ar?'المتابَعة':'Watchlist', followed.length ? String(followed.length) : ''],
       ['company', ar?'شركة':'Company', st.ticker || ''],
       ['sectors', ar?'القطاعات':'Sectors', sectorCards.length ? String(sectorCards.length) : ''],
@@ -3978,7 +3980,7 @@ export class Component extends Base {
 
     // Organize by the reader's task, keeping every existing screen reachable.
     const groups = [
-      { id: 'home', label: ar ? 'نظرة عامة' : 'Overview', screens: ['home', 'questions'] },
+      { id: 'home', label: ar ? 'نظرة عامة' : 'Overview', screens: ['home', 'questions', 'scenarios'] },
       { id: 'market', label: ar ? 'استكشف' : 'Explore', screens: ['market', 'heat', 'sectors', 'valuation', 'pairs', 'fragility', 'company', 'investors', 'exchange', 'liquidity', 'ownership', 'world'] },
       { id: 'today', label: ar ? 'الأخبار' : 'News', screens: ['today', 'calendar', 'crossings', 'research'] },
       { id: 'watchlist', label: ar ? 'متابعتي' : 'Watchlist', screens: ['watchlist'] },
@@ -4590,7 +4592,11 @@ export class Component extends Base {
       // Home, in its own module. This file is the longest on the site and
       // Home was five hundred lines of template inside it; the screen it
       // replaced is a different product, not a rearrangement of the old one.
-      homeView: homeScreen(this, D, ar).screen,
+      // Home is the page it always was. What is new sits at the top of it:
+      // the models' own record, which names no security.
+      aiCards: aiCards(this, D, ar),
+      isScenarios: st.screen === 'scenarios',
+      scenariosView: st.screen === 'scenarios' ? scenariosScreen(this, D, ar).screen : null,
       // The reader's saved questions, their own screen. Reachable from Home's
       // ask block and from the overview's secondary nav; kept inside the
       // Overview group so the bottom bar stays at five.

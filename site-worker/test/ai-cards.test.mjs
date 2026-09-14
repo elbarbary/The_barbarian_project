@@ -1,0 +1,187 @@
+/* The AI layer: what it may say, and what it must never become.
+ *
+ * This is the part of the site that is closest to the line. The cards are a
+ * track record of MODELS and are safe ground; the workbench shows a number a
+ * model produced about a named company and is not. These tests are mostly
+ * about the second, and about the gate in front of it.
+ */
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+
+const ROOT = new URL('../../', import.meta.url);
+const read = (p) => readFile(new URL(p, ROOT), 'utf8');
+
+const cardsSrc = await read('public/esthmr/ai-cards.js');
+const scSrc = await read('public/esthmr/scenarios.js');
+const cards = await import('../../public/esthmr/ai-cards.js');
+const top5 = JSON.parse(await read('public/data/v1/research/top5.json'));
+const scenarios = JSON.parse(await read('public/data/v1/research/scenarios.json'));
+const measures = JSON.parse(await read('public/data/v1/measures.json'));
+const universe = new Set(measures.rows.map((r) => r.ticker));
+
+/* ── the cards are about models ─────────────────────────────────────────── */
+
+test('the published record names no security anywhere', () => {
+  // The moment a card can name the five, it is a list of five securities
+  // chosen by this publisher.
+  for (const word of JSON.stringify(top5).split(/[^A-Z0-9]+/)) {
+    assert.ok(!universe.has(word), `top5.json names ${word}`);
+  }
+});
+
+test('a card carries its sample, not just its average', () => {
+  const built = cards.cardsFrom(top5, '5');
+  assert.ok(built.length >= 3);
+  for (const c of built) {
+    assert.equal(typeof c.sessions, 'number');
+    assert.equal(typeof c.ahead, 'number');
+    assert.ok(c.ahead <= c.sessions, `${c.id} is ahead on more sessions than it ran`);
+  }
+  assert.match(cardsSrc, /ahead on \$\{c\.ahead\} of \$\{c\.sessions\} sessions/);
+});
+
+test('a model with no history says so rather than showing a zero', () => {
+  const built = cards.cardsFrom({ models: { kronos: { label: 'K', labelAr: 'ك', horizons: {} } } }, '5');
+  assert.equal(built[0].sessions, 0);
+  assert.equal(built[0].advantage, undefined);
+  assert.match(cardsSrc, /No record yet/);
+});
+
+test('the average covers only the models that have a record, and says how many', () => {
+  // A mean that folded in a zero for the three that have run once would be a
+  // mean over an assumption.
+  const built = [
+    { id: 'a', sessions: 8, advantage: 1, ownReturn: 2, market: 1 },
+    { id: 'b', sessions: 0, advantage: null },
+    { id: 'c', sessions: 0, advantage: null },
+  ];
+  const avg = cards.averageOf(built);
+  assert.equal(avg.scored, 1);
+  assert.equal(avg.of, 3);
+  assert.equal(avg.advantage, 1);
+});
+
+test('the card copy does not promise, and the beta label is on the surface', () => {
+  for (const word of ['best', 'top pick', 'buy', 'recommend', 'should', 'will return', 'guarantee']) {
+    assert.ok(!cardsSrc.toLowerCase().includes(`'${word}`), `the cards say "${word}"`);
+  }
+  assert.match(cardsSrc, /BETA · AI/);
+  assert.match(cardsSrc, /not advice/i);
+});
+
+test('the front page shows the models, not the baselines', () => {
+  // A card headed "Drift" answers a question nobody asked; the control group
+  // belongs on the detail screen.
+  assert.deepEqual(cards.FEATURED, ['kronos', 'chronos2', 'timesfm25', 'rerank']);
+});
+
+test('the cards sit at the top of Home on a phone', async () => {
+  // chart-viewer.css reorders Home's children under 600px and puts anything
+  // it does not name at order 3, so a new section lands below the fold
+  // however early it is in the markup.
+  const css = await read('public/esthmr/ai.css');
+  assert.match(css, /#app \.journal-home > \.ai-cards \{ order: -1; \}/);
+  const template = await read('public/esthmr/template.html');
+  const home = template.indexOf('{{ isHome }}');
+  assert.ok(template.indexOf('{{ aiCards }}', home) < template.indexOf('journal-intro', home),
+            'the cards are not first in the markup either');
+});
+
+test('restoring Home did not cost it the sections it had', async () => {
+  // The rebuild that replaced this page deleted the mosaic, the movers, the
+  // busiest card and the ranking panel. They are the page the owner wants.
+  const template = await read('public/esthmr/template.html');
+  const home = template.slice(template.indexOf('{{ isHome }}'), template.indexOf('{{ isToday }}'));
+  for (const kept of ['quick-paths', 'om-idx', 'insight-shelf', 'market-mosaic',
+                      'island-board', 'ranking-panel', 'L.busiest', 'journal-pulse']) {
+    assert.ok(home.includes(kept), `Home lost ${kept}`);
+  }
+});
+
+/* ── the workbench is gated ─────────────────────────────────────────────── */
+
+test('nothing is drawn until the warning has been accepted', () => {
+  // The gate returns before any figure is built, rather than rendering the
+  // screen with an overlay on top of it.
+  const gateAt = scSrc.indexOf('if (!hasAccepted(reader) && !st.scAccepted)');
+  const viewAt = scSrc.indexOf('const view = viewFor(');
+  assert.ok(gateAt > 0 && viewAt > gateAt, 'the screen builds its figures before the gate');
+});
+
+test('the warning states the record, the age and the licence', async () => {
+  const lines = (await import('../../public/esthmr/scenarios.js')).warningLines(top5, false);
+  assert.equal(lines.length, 4);
+  const all = lines.join(' ');
+  assert.match(all, /not licensed to advise/i);
+  assert.match(all, /returned LESS than the market/);
+  assert.match(all, /weeks, not years/);
+  assert.match(all, /does not make it right/);
+});
+
+test('the reader can bring the warning back', () => {
+  assert.match(scSrc, /Show the warning again/);
+  assert.match(scSrc, /localStorage\.removeItem\(acceptKey\(reader\)\)/);
+});
+
+/* ── the workbench never ranks companies ────────────────────────────────── */
+
+test('the company list is alphabetical, never in the model’s order', async () => {
+  const sc = { companies: scenarios.companies, models: scenarios.models };
+  const tickers = Object.keys(scenarios.companies).sort();
+  const view = (await import('../../public/esthmr/scenarios.js')).viewFor(tickers, sc, 'kronos', 5);
+  const shown = view.rows.map((r) => r.ticker);
+  assert.deepEqual(shown, [...shown].sort((a, b) => a.localeCompare(b)));
+  assert.ok(shown.length > 50);
+});
+
+test('every company in the selection is shown, none cut to a number', async () => {
+  const mod = await import('../../public/esthmr/scenarios.js');
+  const tickers = Object.keys(scenarios.companies).sort();
+  const view = mod.viewFor(tickers, scenarios, 'kronos', 5);
+  assert.equal(view.rows.length, tickers.length);
+  assert.equal(view.answered + view.silent, tickers.length);
+  const body = scSrc.slice(scSrc.indexOf('export function viewFor'), scSrc.indexOf('function median'));
+  assert.ok(!/slice\(0,\s*\d/.test(body), 'the view is cut to a number');
+});
+
+test('a company no model answered is silent, not zero', async () => {
+  const mod = await import('../../public/esthmr/scenarios.js');
+  const view = mod.viewFor(['NOSUCH'], { companies: {}, models: {} }, 'kronos', 5);
+  assert.equal(view.rows[0].value, null);
+  assert.equal(view.answered, 0);
+  assert.equal(view.silent, 1);
+});
+
+test('disagreement between models is reported, not averaged away', async () => {
+  const mod = await import('../../public/esthmr/scenarios.js');
+  const spread = mod.spreadOf({ models: { a: { returns: { 5: 3 } }, b: { returns: { 5: -2 } } } }, 5);
+  assert.equal(spread.low, -2);
+  assert.equal(spread.high, 3);
+  assert.equal(spread.agree, false);
+});
+
+test('the screen carries the root the numbers were sealed under', () => {
+  assert.ok(scenarios.commitment && scenarios.commitment.merkleRoot,
+            'the published scenarios carry no commitment');
+  assert.match(scSrc, /proves when these numbers were made/);
+  assert.match(scSrc, /does not make them right/);
+});
+
+test('the loading stages name real work and there is no invented wait', () => {
+  const mod = scSrc.slice(scSrc.indexOf('export const STAGES'), scSrc.indexOf('function loading'));
+  assert.ok(/Reading the sealed run/.test(mod));
+  assert.ok(/Selecting your companies/.test(mod));
+  // A stage per real step, not a timer padded to look busy.
+  assert.equal((mod.match(/id: '/g) || []).length, 4);
+});
+
+test('the scenario document is a forecast and is therefore gated data', async () => {
+  // It names securities, so it must NOT be under the public research prefix
+  // exemption the leaderboard uses. It lives with the exchange data.
+  const worker = await read('site-worker/index.js');
+  assert.match(worker, /const research = url\.pathname\.startsWith\('\/data\/v1\/research\/'\)/);
+  // And the loader asks for it through the gated path like any other document.
+  const dataSrc = await read('public/esthmr/data.js');
+  assert.match(dataSrc, /export async function scenarios\(\)\s*\{\s*return doc\('research\/scenarios\.json'\)/);
+});

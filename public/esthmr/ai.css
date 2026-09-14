@@ -1,0 +1,149 @@
+/* The AI layer: the cards on Home, and the scenario workbench.
+ *
+ * Deliberately calmer than the numbers it carries. A screen showing model
+ * predictions about named companies should not also be shouting: no glow, no
+ * gradient, no rising-arrow iconography, and the beta label is grey rather
+ * than a badge that reads as a feature announcement. The one accent marks
+ * what the reader chose; direction is the site's own up/down pair and nothing
+ * else on the page competes with it.
+ */
+
+/* ── the cards on Home ──────────────────────────────────────────────────── */
+
+.ai-cards {
+  border: 1px solid var(--rule); border-radius: 22px; padding: 20px 20px 16px;
+  background: var(--surface); box-shadow: var(--sh);
+  display: flex; flex-direction: column; gap: 14px; min-width: 0;
+}
+.aic-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.aic-head h2 {
+  font-family: 'Bricolage Grotesque', 'IBM Plex Sans Arabic', serif;
+  font-size: 20px; font-weight: 600; letter-spacing: -.02em; margin: 0;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.aic-beta {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 9px; letter-spacing: .14em; color: var(--faint);
+  border: 1px solid var(--rule); border-radius: 999px; padding: 3px 8px;
+  white-space: nowrap;
+}
+.aic-sub { margin: 7px 0 0; font-size: 13px; line-height: 1.6; color: var(--t2); max-width: 64ch; text-wrap: pretty; }
+.aic-horizon { margin: 0; flex-shrink: 0; }
+
+.aic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(186px, 1fr)); gap: 12px; }
+.aic-card {
+  appearance: none; cursor: pointer; font: inherit; color: inherit; text-align: inherit;
+  border: 1px solid var(--rule); border-radius: 16px; background: var(--sunk);
+  padding: 14px 15px 12px; display: flex; flex-direction: column; gap: 9px;
+  min-width: 0; transition: border-color .18s, transform .18s;
+}
+.aic-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.aic-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.aic-name {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--t2);
+}
+.aic-figure {
+  font-family: 'IBM Plex Mono', monospace; font-size: 27px; font-weight: 600;
+  letter-spacing: -.03em; font-variant-numeric: tabular-nums; line-height: 1.1;
+}
+.aic-quiet { font-size: 16px; color: var(--t2); letter-spacing: -.01em; }
+.aic-against { margin-top: 4px; font-size: 12px; color: var(--t2); line-height: 1.5; }
+.aic-spark { display: block; margin-top: 9px; width: 100%; height: 30px; }
+/* The sample, in the same size as the caption rather than hidden in small
+   print: five companies over eight sessions is the whole context. */
+.aic-sample { margin-top: 6px; font-size: 11.5px; color: var(--faint); }
+.aic-open { margin-top: auto; padding-top: 8px; font-size: 11.5px; color: var(--accent); }
+.aic-foot { margin: 0; font-size: 12px; line-height: 1.65; color: var(--faint); text-wrap: pretty; }
+
+/* ── the workbench ──────────────────────────────────────────────────────── */
+
+.sc-screen .home-intro h1 { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.sc-controls { display: flex; flex-direction: column; gap: 8px; }
+.sc-controls h2 {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--faint); margin: 10px 0 0; font-weight: 500;
+}
+.sc-controls .ask-subjects { margin-top: 0; }
+
+.sc-summary {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 22px; flex-wrap: wrap; border-top: 1px solid var(--rule);
+  padding-top: 18px; margin-top: 18px;
+}
+.sc-figure {
+  font-family: 'IBM Plex Mono', monospace; font-size: 34px; font-weight: 600;
+  letter-spacing: -.03em; font-variant-numeric: tabular-nums; line-height: 1;
+}
+.sc-record { margin-top: 10px; }
+
+/* The distribution, which is the honest headline: the shape of what a model
+   expects across the chosen companies, and not a list of things to buy. */
+.sc-dist { position: relative; flex: 1 1 260px; min-width: 200px; max-width: 420px; }
+.sc-dist-bars { display: flex; align-items: flex-end; gap: 2px; height: 56px; }
+.sc-dist-bars span { flex: 1; min-height: 1px; border-radius: 2px 2px 0 0; opacity: .8; }
+.sc-dist-zero { position: absolute; inset-block: 0 14px; width: 1px; background: var(--ink); opacity: .35; }
+.sc-dist-axis {
+  display: flex; justify-content: space-between; margin-top: 5px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--faint);
+}
+
+.sc-rows { margin-top: 16px; display: flex; flex-direction: column; }
+.sc-rows .ask-row { border-top: 1px solid var(--rule); }
+.sc-proof { border-top: 1px solid var(--rule); margin-top: 22px; padding-top: 16px;
+            display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+
+/* ── the gate ───────────────────────────────────────────────────────────── */
+
+.sc-gate { display: flex; justify-content: center; padding: 8px 0 24px; }
+.sc-gate-card {
+  border: 1px solid var(--rule); border-radius: 22px; background: var(--surface);
+  box-shadow: var(--shCard); padding: 26px 24px 22px; max-width: 62ch;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.sc-gate-eyebrow {
+  margin: 0; font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--down);
+}
+.sc-gate-card h2 {
+  font-family: 'Bricolage Grotesque', 'IBM Plex Sans Arabic', serif;
+  font-size: 24px; font-weight: 600; letter-spacing: -.02em; margin: 0;
+}
+.sc-gate-list { margin: 0; padding-inline-start: 18px; display: flex; flex-direction: column; gap: 10px; }
+.sc-gate-list li { font-size: 14px; line-height: 1.65; color: var(--t2); text-wrap: pretty; }
+
+/* ── the loader ─────────────────────────────────────────────────────────── */
+
+.sc-loading { margin-top: 22px; display: flex; flex-direction: column; gap: 12px; }
+.sc-loading-track { height: 3px; border-radius: 999px; background: var(--sunk); overflow: hidden; }
+.sc-loading-track span {
+  display: block; height: 100%; background: var(--accent);
+  transition: width .22s cubic-bezier(.2,.7,.3,1);
+}
+.sc-loading-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.sc-loading-list li { font-size: 13px; color: var(--faint); display: flex; gap: 9px; align-items: baseline; }
+.sc-loading-list li.now { color: var(--ink); }
+.sc-loading-list li.done { color: var(--t2); }
+.sc-tick { font-family: 'IBM Plex Mono', monospace; font-size: 11px; width: 1ch; }
+
+/* chart-viewer.css reorders Home's children under 600px — intro, indices,
+   quick paths, then everything else at order 3 — so a new section lands
+   below the fold however early it sits in the markup. The id raises this
+   above that rule, which loads after this file and would otherwise win on
+   equal specificity. */
+@media (max-width: 600px) {
+  #app .journal-home > .ai-cards { order: -1; }
+}
+
+@media (max-width: 560px) {
+  .ai-cards { padding: 16px 15px 14px; border-radius: 18px; }
+  .aic-grid { grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); }
+  .aic-figure { font-size: 23px; }
+  .sc-figure { font-size: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aic-card, .sc-loading-track span { transition: none; }
+  .aic-card:hover { transform: none; }
+}

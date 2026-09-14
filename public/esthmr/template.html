@@ -92,24 +92,24 @@
   <sc-if value="{{ isFlowTracker }}">{{ flowViews.screen }}</sc-if>
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     <div class="om-scr journal-home" style="display:flex;flex-direction:column;gap:20px">
-      <!-- Home is built in public/esthmr/home.js now.
-           What used to be here was five hundred lines: three index cards, a
-           busiest-four card, a twelve-company market-cap mosaic, a movers
-           board, a ranking panel, a news grid, a pulse strip and a dots grid.
-           It was a table of contents, and several of its sections were the one
-           shape an unlicensed publisher may not make — a list of companies
-           whose length WE chose. "Today's six biggest movers" is a list of six
-           we picked, and no wording around it changes that.
-
-           The module leads with facts about the whole market, which select
-           nothing, and then with the reader's own question, answered in full.
-           What stays below it is context: where the indices closed, and who was
-           buying — so a personal screen does not become a tunnel with no view of
-           the exchange it is about. -->
-      {{ homeView }}
-
-      <section class="home-context">
-        <h2 class="home-context-head">{{ L.marketContext }}</h2>
+      <!-- The models' own record, first on the page.
+           Built in public/esthmr/ai-cards.js. Each card is a statement about a
+           MODEL — how the five companies it ranked highest actually did against
+           the market — and names no security. Clicking one opens the scenario
+           workbench, which does name securities and is gated accordingly. -->
+      {{ aiCards }}
+      <header class="journal-intro">
+        <p class="journal-eyebrow">{{ marketDate }} · {{ sessionState }}</p>
+        <h1>{{ overviewTitle }}</h1>
+      </header>
+      <div class="quick-paths"><sc-for list="{{ quickActions }}" as="q">
+        <button type="button" onClick="{{ q.go }}"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="{{ q.icon }}"></path></svg><span><strong>{{ q.label }}</strong><small>{{ q.note }}</small></span><span class="quick-arrow" aria-hidden="true">↗</span></button>
+      </sc-for></div>
+      <!-- The three index levels first and biggest. They were under a 50px
+           page title and a session note, at 21-32px — the smallest headline
+           figures on a screen whose whole subject is where the market closed,
+           and the first thing anybody opens this for. Title and note now sit
+           beside them rather than above. -->
       <div class="om-idx" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-top:4px">
         <sc-for list="{{ indices }}" as="ix" hint-placeholder-count="3">
           <div onClick="{{ ix.go }}" aria-label="{{ ix.label }} {{ ix.value }} {{ ix.pct }}" style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 22px 18px;min-width:0;overflow:hidden;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:var(--shLift)">
@@ -130,6 +130,9 @@
 
       </div>
 
+      <section class="insight-shelf">
+        <h2>{{ insightHeading }}</h2>
+        <div class="insight-grid">
           <article class="insight-card insight-investors">
             <header class="island-heading"><h3>{{ L.investorsWho }}</h3><button type="button" onClick="{{ goInvestors }}">{{ L.investorsOpen }} →</button></header>
             <sc-if value="{{ investors }}">
@@ -142,8 +145,461 @@
             </sc-if>
             <sc-if value="{{ noInvestors }}"><p class="insight-caption">{{ insightMissing }}</p></sc-if>
           </article>
+          <article class="insight-card insight-volume">
+            <header class="island-heading"><h3>{{ L.busiest }}</h3><button type="button" onClick="{{ explorer.openVolume }}">{{ browseLabel }} →</button></header>
+            <p class="insight-caption volume-session">{{ busyWhen }}</p>
+            <sc-for list="{{ insightBusy }}" as="b"><button type="button" class="volume-preview-row" onClick="{{ b.go }}"><span><b>{{ b.ticker }}</b><small>{{ b.name }}</small></span><span class="volume-multiple"><strong>{{ b.rv }}</strong><small>{{ insightBusyDate }}</small></span><span style="color:{{ b.color }}">{{ b.pct }}</span><span aria-hidden="true">↗</span></button></sc-for>
+            <sc-if value="{{ noBusy }}"><p class="insight-caption">{{ L.nothingUnusual }}</p></sc-if>
+            <p class="insight-caption">{{ insightBusyNote }}</p>
+          </article>
+        </div>
       </section>
       {{ flowViews.home }}
+      <sc-if value="{{ screen }}">
+        <section class="market-measures" style="margin-top:18px;padding:20px 22px 18px;border-radius:20px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shCard)">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap">
+            <h2 style="font-family:'Bricolage Grotesque',serif;font-size:24px;font-weight:600;letter-spacing:-.02em;margin:0">{{ L.screenTitle }}</h2>
+          </div>
+          <div style="margin-top:7px;font-size:13px;color:var(--t2);line-height:1.6;max-width:62ch;text-wrap:pretty">{{ L.screenSub }}</div>
+          <div style="margin-top:5px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ screen.universe }}</div>
+
+          <!-- The market, drawn — and now saying what it is.
+               The four sentences were moved to Crossings to keep this a graph
+               rather than a page of prose. That went too far: the founder
+               looked at the result and could not tell what the card was, which
+               is a worse failure than being wordy. Each panel now carries a
+               one-line plain definition of the measure, and what a column is
+               is said once here rather than four times. -->
+          <div style="margin-top:13px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <div onClick="{{ screen.toggleHow }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;background:var(--sunk);border:1px solid var(--rule);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)" style-hover="border-color:var(--accent)">{{ screen.howLabel }} <span>{{ screen.howCaret }}</span></div>
+          </div>
+          <sc-if value="{{ screen.howOn }}">
+            <div style="margin-top:11px;font-size:11.5px;color:var(--faint);line-height:1.55;max-width:70ch;text-wrap:pretty">{{ L.screenBarsShort }}</div>
+          </sc-if>
+          <div class="market-measure-grid" style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(186px,1fr));gap:20px 22px">
+            <sc-for list="{{ screen.tests }}" as="t" hint-placeholder-count="4">
+              <div>
+                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px">
+                  <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)">{{ t.label }}</span>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--faint);white-space:nowrap">{{ t.of }}</span>
+                </div>
+                <p class="measure-threshold">{{ t.threshold }}</p>
+                <p class="measure-meaning">{{ t.what }}</p>
+                <sc-if value="{{ screen.howOn }}"><p class="measure-detail">{{ t.text }}</p></sc-if>
+
+                <sc-if value="{{ t.hasDist }}">
+                  <!-- One column per slice of the measure, height = how many
+                       companies are in it, and a rule where the market's own
+                       middle falls. `inset-inline-start`, never `left`: the
+                       columns mirror under dir=rtl and a physical offset would
+                       put the median on the wrong side of an Arabic page. -->
+                  <div style="position:relative;height:46px;margin-top:9px;display:flex;align-items:flex-end;gap:1.5px">
+                    <sc-for list="{{ t.dist.bars }}" as="b" hint-placeholder-count="26">
+                      <div style="flex:1 1 0;min-width:0;height:{{ b.h }};background:{{ b.c }};border-radius:2px 2px 0 0"></div>
+                    </sc-for>
+                    <div style="position:absolute;inset-block:-2px;inset-inline-start:{{ t.dist.medianAt }};width:1.5px;background:var(--ink);opacity:.55"></div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ t.noDist }}">
+                  <!-- Nothing to bucket: this line is in or out, so it is drawn
+                       as the one proportion it is rather than a fake spread. -->
+                  <div style="height:46px;margin-top:9px;display:flex;align-items:flex-end">
+                    <div style="width:100%;height:7px;border-radius:999px;background:var(--rule);overflow:hidden">
+                      <div style="height:7px;width:{{ t.width }};background:var(--accent);opacity:.75;border-radius:999px"></div>
+                    </div>
+                  </div>
+                </sc-if>
+
+                <div style="margin-top:7px;min-height:15px;font-size:10.5px;color:var(--faint);line-height:1.45">{{ t.foot }}</div>
+                <sc-if value="{{ t.canOpen }}"><button type="button" class="measure-open" onClick="{{ t.open }}">{{ screen.exploreLabel }} →</button></sc-if>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--rule);display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:6px">
+              <span style="width:9px;height:9px;border-radius:2px;background:var(--accent)"></span>
+              <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)">{{ L.screenNamedSide }}</span>
+            </span>
+            <span style="display:inline-flex;align-items:center;gap:6px">
+              <span style="width:1.5px;height:11px;background:var(--ink);opacity:.55"></span>
+              <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)">{{ L.screenMedianMark }}</span>
+            </span>
+          </div>
+        </section>
+      </sc-if>
+      <section class="ranking-panel">
+        <header class="island-heading"><div><h2>{{ explorer.title }}</h2><p class="insight-caption">{{ explorer.subtitle }}</p></div></header>
+        <div class="ranking-controls"><sc-for list="{{ explorer.metrics }}" as="m"><button type="button" aria-pressed="{{ m.selected }}" onClick="{{ m.go }}">{{ m.label }}</button></sc-for><button type="button" onClick="{{ explorer.toggleDirection }}">{{ explorer.directionLabel }}</button></div>
+        <div class="ranking-controls ranking-pairs"><span>{{ explorer.pairLabel }}</span><sc-for list="{{ explorer.pairs }}" as="m"><button type="button" aria-pressed="{{ m.selected }}" onClick="{{ m.go }}">{{ m.label }}</button></sc-for></div>
+        <div class="ranking-launch"><span>{{ explorer.selectionLabel }}<small>{{ explorer.coverage }}</small></span><button type="button" class="results-button" onClick="{{ explorer.open }}">{{ explorer.resultsLabel }} <span aria-hidden="true">→</span></button></div>
+        <details class="ranking-notes"><summary>{{ comparisonNotesLabel }}</summary><p class="insight-caption">{{ explorer.note }}</p></details>
+      </section>
+      <div class="island-board">
+        <section class="island island-mosaic">
+          <header class="island-heading"><h2>{{ mosaicTitle }}</h2><button type="button" onClick="{{ openHeat }}">{{ browseLabel }} ↗</button></header>
+          <p class="mosaic-note">{{ mosaicNote }}</p>
+          <div class="market-mosaic"><sc-for list="{{ mosaicTiles }}" as="m">
+            <button type="button" onClick="{{ m.go }}" title="{{ m.name }}" aria-label="{{ m.name }} {{ m.pct }}" style="background:{{ m.tileBg }};color:{{ m.tileInk }}">
+              <span>{{ m.ticker }}</span><strong>{{ m.pct }}</strong><small class="mosaic-company" dir="auto">{{ m.name }}</small>
+            </button>
+          </sc-for></div>
+          <sc-if value="{{ noMosaic }}"><p>{{ L.nothingYet }}</p></sc-if>
+        </section>
+        <section class="island island-breadth">
+          <header class="island-heading"><h2>{{ L.breadthWord }}</h2><span>{{ marketDate }}</span></header>
+          <sc-if value="{{ hasBreadth }}">
+            <div class="island-ring" style="background:{{ breadthRing }}" role="img" aria-label="{{ breadthCounted }}">
+              <div><strong>{{ breadthTotal }}</strong><span>{{ breadthTotalLabel }}</span></div>
+            </div>
+            <div class="island-legend"><sc-for list="{{ breadthBars }}" as="b">
+              <div><span class="island-dot" style="background:{{ b.color }}"></span><span>{{ b.label }}</span><strong>{{ b.count }}</strong></div>
+            </sc-for></div>
+          </sc-if>
+          <sc-if value="{{ noBreadth }}"><p>{{ L.nothingYet }}</p></sc-if>
+        </section>
+        <section class="island island-moves">
+          <header class="island-heading"><h2>{{ snapshotMovesLabel }}</h2><button type="button" onClick="{{ goMarket }}">{{ browseLabel }} ↗</button></header>
+          <div class="island-move-grid"><sc-for list="{{ snapshotMoves }}" as="m">
+            <button type="button" class="island-move" onClick="{{ m.go }}" style="--move-color:{{ m.color }}">
+              <span class="island-ticker">{{ m.ticker }}</span><strong>{{ m.pct }}</strong><span class="island-company">{{ m.name }}</span>
+              <span class="island-track"><span style="width:{{ m.mag }}"></span></span>
+            </button>
+          </sc-for></div>
+        </section>
+        <!-- ── The front page: every company that turned up in more than one
+             place inside the four newest published days, in two calendar
+             tiers, alphabetical inside each. The sentences are the builder's;
+             the client fills in date labels and nothing else. No percent, no
+             colour, no ratio badge: the multiple is prose inside a past-tense
+             sentence. Nothing here toggles `hidden`. -->
+        <section class="island island-crossings">
+          <header class="island-heading"><h2>{{ L.fpTitle }}</h2><button type="button" onClick="{{ openConnections }}">{{ L.dotsLabel }} ↗</button></header>
+          <sc-if value="{{ fpHasFresh }}"><p class="fp-fresh">{{ fpFresh }}</p></sc-if>
+          <sc-if value="{{ fpHasSentence }}"><p class="fp-sentence">{{ fpSentence }}</p></sc-if>
+          <sc-for list="{{ fpTiers }}" as="t">
+            <h3 class="fp-tier">{{ t.label }}</h3>
+            <div class="fp-rows"><sc-for list="{{ t.rows }}" as="x" hint-placeholder-count="4">
+              <article class="fp-row {{ t.cls }}">
+                <button type="button" class="fp-id" onClick="{{ x.go }}" disabled="{{ x.noGo }}">
+                  <span class="fp-tile" style="font-size:{{ x.monoSize }}">{{ x.mono }}</span>
+                  <span class="fp-name" dir="auto">{{ x.name }}</span>
+                  <span class="fp-meta">
+                    <span class="fp-day" style="color:{{ x.dayColor }}">{{ x.day }}</span>
+                    <span class="fp-dots"><sc-for list="{{ x.dots }}" as="p" hint-placeholder-count="2"><span class="fp-dot" style="background:{{ p.color }}"></span></sc-for><span class="fp-arrow">{{ x.arrow }}</span></span>
+                  </span>
+                </button>
+                <p class="fp-why">{{ x.why }}</p>
+                <sc-if value="{{ x.hasEvidence }}">
+                  <a class="fp-evidence" href="{{ x.evidenceHref }}" target="_blank" rel="noopener">
+                    <span class="fp-evidence-kind">{{ x.evidenceLabel }} · {{ x.evidenceDay }}</span>
+                    <sc-if value="{{ x.hasEvidenceTitle }}"><span class="fp-evidence-title" dir="auto">{{ x.evidenceTitle }}</span></sc-if>
+                  </a>
+                </sc-if>
+              </article>
+            </sc-for></div>
+          </sc-for>
+          <sc-if value="{{ fpShowNone }}"><p class="fp-none">{{ fpNoneLine }}</p></sc-if>
+          <sc-if value="{{ fpHasCounts }}"><p class="fp-counts">{{ fpCounts }}</p></sc-if>
+          <sc-if value="{{ fpShow }}">
+            <div class="fp-legend"><span>{{ L.dotsLegend }}</span><sc-for list="{{ crossLegend }}" as="g" hint-placeholder-count="3"><span class="fp-legend-item"><span class="fp-dot" style="background:{{ g.color }}"></span>{{ g.label }}</span></sc-for></div>
+            <p class="fp-yard">{{ L.fpYardstick }}</p>
+          </sc-if>
+          <sc-if value="{{ fpEmpty }}"><p>{{ L.nothingYet }}</p></sc-if>
+        </section>
+      </div>
+      <button type="button" class="island-details-toggle" onClick="{{ toggleHomeDetails }}" aria-expanded="{{ showHomeDetails }}">{{ detailLabel }} <span>⌄</span></button>
+      <sc-if value="{{ showHomeDetails }}">
+      <!-- ── The session in one card ──
+           Three text cells sat here, under a comment that called them "Visuals
+           First": a leader, a "session liquidity" reading filled from whether a
+           chart existed, and a scanner verdict announcing that no company had
+           qualified today. Breadth replaces them. It is measured rather than
+           inferred, it is a shape rather than a sentence, and it answers the
+           one thing an index cannot — an average says what the market did, this
+           says how widely — so it came up from the foot of the page to be the
+           card. The indices now sit above it, which is where the note under
+           them always said they belonged. -->
+      <section class="journal-pulse" style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 22px 18px;position:relative;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+          <div style="display:flex;align-items:baseline;gap:10px">
+            <h2 style="font-family:'Bricolage Grotesque',serif;font-size:22px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ pulseTitle }}</h2>
+            <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint)">{{ pulseDate }}</span>
+          </div>
+          <div style="display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:999px;background:{{ pulseTone.bg }};color:{{ pulseTone.fg }};border:1px solid {{ pulseTone.border }};font-family:'IBM Plex Sans Arabic',sans-serif;font-size:12.5px;font-weight:600">
+            <span style="font-size:14px;line-height:1">{{ pulseTone.icon }}</span>
+            <span>{{ pulseTone.badge }}</span>
+          </div>
+        </div>
+
+        <sc-if value="{{ hasBreadth }}">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:18px">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.breadthWord }}</div>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ breadthCounted }}</div>
+          </div>
+          <!-- One whole, divided, with the numbers ON it. A stacked bar with no
+               numbers on it is a decoration. -->
+          <div style="display:flex;gap:3px;margin-top:11px;border-radius:8px;overflow:hidden">
+            <sc-for list="{{ breadthBars }}" as="b" hint-placeholder-count="3">
+              <div style="height:34px;width:{{ b.width }};background:{{ b.color }};display:flex;align-items:center;justify-content:center;min-width:0">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:{{ b.ink }};opacity:.95">{{ b.count }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:11px">
+            <sc-for list="{{ breadthBars }}" as="b" hint-placeholder-count="3">
+              <span style="display:inline-flex;align-items:center;gap:7px">
+                <span style="width:9px;height:9px;border-radius:3px;background:{{ b.color }}"></span>
+                <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)">{{ b.label }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--faint)">{{ b.pct }}</span>
+              </span>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:16px;padding-top:14px;border-top:1px solid var(--edgeIn)">
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.pulseLeaderLabel }}</div>
+          <div style="font-size:13.5px;font-weight:600;color:var(--ink);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ pulseLeader }}</div>
+          <div onClick="{{ togglePulseAudio }}" style="cursor:pointer;margin-inline-start:auto;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:var(--sunk);border:1px solid var(--edgeIn);font-family:'IBM Plex Sans Arabic',sans-serif;font-size:12px;color:var(--accent);font-weight:500;transition:background .15s" style-hover="background:var(--surface)">
+            <span>{{ pulseAudioLabel }}</span>
+          </div>
+          <div onClick="{{ togglePulse }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:var(--sunk);border:1px solid var(--edgeIn);font-family:'IBM Plex Sans Arabic',sans-serif;font-size:12px;color:var(--accent);font-weight:500;transition:background .15s" style-hover="background:var(--surface)">
+            <span>{{ pulseExpandLabel }}</span>
+          </div>
+        </div>
+
+        <sc-if value="{{ pulseExpanded }}">
+          <div style="font-size:14px;line-height:1.65;color:var(--t2);margin-top:12px;padding:13px 16px;border-radius:14px;background:var(--sunk);border:1px solid var(--edgeIn);text-wrap:pretty;max-width:860px">
+            {{ pulseBody }}
+          </div>
+        </sc-if>
+      </section>
+
+      <!-- Who traded it, beside where it closed. An index says what the
+           market did; this says who did it, and the two belong on the same
+           screen. Two stacked bars because each split is one whole divided —
+           three separate progress bars would invite reading each against the
+           full width. The full table is a click away on Investors. -->
+      <sc-if value="{{ investors }}">
+        <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 22px 18px">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.investorsWho }}</div>
+            <div onClick="{{ goInvestors }}" style="cursor:pointer;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--accent)" style-hover="opacity:.75">{{ L.investorsOpen }} →</div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:16px">
+            <div>
+              <div style="display:flex;height:12px;border-radius:999px;overflow:hidden;background:var(--sunk)">
+                <sc-for list="{{ investors.nationalityBar }}" as="s" hint-placeholder-count="3">
+                  <div style="width:{{ s.width }};background:{{ s.color }}"></div>
+                </sc-for>
+              </div>
+              <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:11px">
+                <sc-for list="{{ investors.nationalityBar }}" as="s" hint-placeholder-count="3">
+                  <div style="display:inline-flex;align-items:center;gap:7px;min-width:0">
+                    <span style="width:9px;height:9px;border-radius:3px;background:{{ s.color }};flex:none"></span>
+                    <span style="font-size:12.5px;color:var(--t2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ s.label }}</span>
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600">{{ s.percent }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <sc-if value="{{ investors.hasTypeBar }}">
+              <div>
+                <div style="display:flex;height:12px;border-radius:999px;overflow:hidden;background:var(--sunk)">
+                  <sc-for list="{{ investors.typeBar }}" as="s" hint-placeholder-count="2">
+                    <div style="width:{{ s.width }};background:{{ s.color }}"></div>
+                  </sc-for>
+                </div>
+                <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:11px">
+                  <sc-for list="{{ investors.typeBar }}" as="s" hint-placeholder-count="2">
+                    <div style="display:inline-flex;align-items:center;gap:7px;min-width:0">
+                      <span style="width:9px;height:9px;border-radius:3px;background:{{ s.color }};flex:none"></span>
+                      <span style="font-size:12.5px;color:var(--t2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ s.label }}</span>
+                      <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600">{{ s.percent }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+          <!-- BOUGHT AND SOLD, PER PARTY.
+               The share bars above answer who the market was; these answer how
+               much each side actually moved. Two bars per party, each drawn
+               against ITS OWN total — buying against all buying, selling
+               against all selling — because a pair drawn to one shared
+               maximum would claim one side was bigger than the other, and
+               every pound bought is a pound sold. -->
+          <div style="margin-top:18px;padding-top:15px;border-top:1px solid var(--rule)">
+            <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+              <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.investorsBought }}</span>
+              <span style="display:inline-flex;align-items:center;gap:6px">
+                <span style="width:16px;height:7px;border-radius:999px;background:var(--up);opacity:.85"></span>
+                <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.investorsSold }}</span>
+                <span style="width:16px;height:7px;border-radius:999px;background:var(--down);opacity:.85"></span>
+              </span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px 20px;margin-top:12px">
+              <sc-for list="{{ investors.parties }}" as="p" hint-placeholder-count="3">
+                <div style="min-width:0">
+                  <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px">
+                    <span style="font-size:12.5px;color:var(--t2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ p.party }}</span>
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:{{ p.netColor }};white-space:nowrap">{{ p.net }}</span>
+                  </div>
+                  <div style="margin-top:7px;height:7px;border-radius:999px;background:var(--sunk);overflow:hidden">
+                    <div style="height:7px;width:{{ p.buyW }};background:var(--up);border-radius:999px;opacity:.85"></div>
+                  </div>
+                  <div style="margin-top:4px;height:7px;border-radius:999px;background:var(--sunk);overflow:hidden">
+                    <div style="height:7px;width:{{ p.sellW }};background:var(--down);border-radius:999px;opacity:.85"></div>
+                  </div>
+                  <div style="margin-top:6px;display:flex;gap:10px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint)">
+                    <span>{{ p.buy }}</span><span>{{ p.sell }}</span>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="font-size:11px;color:var(--faint);line-height:1.55;margin-top:11px;text-wrap:pretty">{{ L.investorsSides }}</div>
+          </div>
+          <div style="font-size:11.5px;color:var(--faint);line-height:1.55;margin-top:14px;text-wrap:pretty">{{ L.investorsBasis }}</div>
+          <sc-if value="{{ investors.asOfLine }}"><div style="font-size:11.5px;color:var(--faint);line-height:1.55;margin-top:6px">{{ investors.asOfLine }}</div></sc-if>
+        </section>
+      </sc-if>
+
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:2px 8px">
+        <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+          <h2 style="font-family:var(--font-heading);font-size:28px;font-weight:600;letter-spacing:-.025em;line-height:1.2;margin:0">{{ homeTitle }}</h2>
+          <sc-if value="{{ homeIsClose }}"><div style="font-size:13.5px;color:var(--t2)">{{ L.closeOf }} {{ marketDate }}</div></sc-if>
+          <sc-if value="{{ homeIsLive }}"><div style="font-size:13.5px;color:var(--t2)">{{ sessionState }}</div></sc-if>
+        </div>
+        <div onClick="{{ goMarket }}" title="{{ L.marketTitle }}" aria-label="{{ L.marketTitle }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:999px;border:1px solid var(--edge);background:var(--glass);backdrop-filter:blur(18px);margin-inline-end:2px;font-size:12.5px;color:var(--t2);transition:background .15s,color .15s,border-color .15s" style-hover="background:var(--sunk);color:var(--ink);border-color:var(--accent)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ searchIcon }}"></path></svg>
+          <span>{{ L.marketTitle }}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shPill);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--accent)"></span>{{ homeNote }}
+        </div>
+      </div>
+
+      <!-- FOUR LINES, AS FILED.
+           This card used to end in a row of ticker pills — eight companies,
+           each with its price-to-earnings beside it, under a heading that said
+           how many "pass all four". Every threshold was read from the market
+           rather than chosen, the prose underneath refused to claim a return,
+           and none of that mattered: the SHAPE was a screener's shortlist, and
+           an unlicensed publisher pointing at eight named securities ranked by
+           cheapness is the thing §8 exists to stop. A careful paragraph below
+           does not cure a list-shaped claim above it.
+           So the names are gone. What is left is the honest half of the same
+           computation — where the exchange's own middle falls on four
+           measures, and how much of the market sits either side of it. That is
+           a fact about the market rather than a claim about eight companies,
+           and it is the half a reader could not see before.
+           The count is gone with them. The screenCount string was bound raw and
+           printed a literal "{n}" to every reader in both languages, because
+           the builder computed the number and the template never bound it. The
+           fix is not to finish the sentence — a completed "17 companies pass
+           all four" over the same pills would be worse than the bug. -->
+
+      <div class="home-cols" style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr);gap:16px;align-items:start">
+        <div class="home-col" style="display:flex;flex-direction:column;gap:16px;min-width:0">
+          <sc-if value="{{ showBusy }}">
+          <!-- Which shares changed hands far more than they usually do. Above
+               the movers on purpose: a big move on ordinary volume is a price,
+               a big move on unusual volume is a question. The threshold is
+               OURS and the note underneath says so — the exchange publishes
+               none. -->
+          <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 10px 14px">
+            <div style="display:flex;align-items:center;gap:9px;padding:0 14px 14px;flex-wrap:wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M3.4 16.6 8.2 9.4l4 3.4 3.2-5.4 4.2 6.2M3 20.6h18"></path></svg>
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.busiest }}</div>
+              <!-- The session the column of multiples was measured in. On the
+                   heading rather than on every row, because all eight share
+                   one session and eight copies of one date is noise; at the
+                   top of the card it is read before the numbers are. -->
+              <sc-if value="{{ busyWhen }}">
+                <div style="margin-inline-start:auto;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.06em;color:var(--t2);white-space:nowrap;padding:3px 9px;border-radius:999px;background:var(--sunk);border:1px solid var(--edgeIn)">{{ busyWhen }}</div>
+              </sc-if>
+            </div>
+            <sc-for list="{{ busy }}" as="m" hint-placeholder-count="9">
+              <div onClick="{{ m.go }}" style="cursor:pointer;min-width:0;display:grid;grid-template-columns:52px minmax(30px,1fr) minmax(44px,58px) minmax(50px,88px) minmax(56px,92px);align-items:center;gap:8px;padding:11px 12px;border-radius:14px;transition:background .15s" style-hover="background:var(--sunk)">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;padding:2.5px 4px;border-radius:6px;background:var(--sunk);border:1px solid var(--edgeIn);text-align:center;color:var(--t2)">{{ m.ticker }}</div>
+                <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14.5px;font-weight:500;color:var(--ink)">{{ m.name }}</div>
+                <!-- The multiple gets a column. "Traded 17.5× its usual volume" under a
+                     company name wraps to two lines and pushes the row apart; the same
+                     fact beside the price needs only the space of a number. -->
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:end;color:var(--accent)">{{ m.rv }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end">{{ m.close }}</div>
+                <div style="display:flex;align-items:center;justify-content:flex-end;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:{{ m.color }}">
+                  <span>{{ m.pct }}</span><span style="font-size:12px">{{ m.arrow }}</span>
+                </div>
+              </div>
+            </sc-for>
+            <sc-if value="{{ noBusy }}">
+              <div style="padding:6px 14px 12px;color:var(--faint);font-size:13px">{{ L.nothingUnusual }}</div>
+            </sc-if>
+            <sc-if value="{{ hasBusyCut }}">
+              <div style="padding:12px 14px 0;color:var(--faint);font-size:11.5px;line-height:1.65;text-wrap:pretty">{{ busyCut }}</div>
+            </sc-if>
+            <sc-if value="{{ busyNote }}">
+              <div style="padding:12px 14px 4px;color:var(--faint);font-size:11.5px;line-height:1.65;text-wrap:pretty">{{ busyNote }}</div>
+            </sc-if>
+          </section>
+          </sc-if>
+  
+          <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 10px 14px">
+            <div style="display:flex;align-items:center;gap:9px;padding:0 14px 14px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M4.2 20V11.2M9.4 20V4.6M14.6 20v-6.6M19.8 20V7.8"></path></svg>
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.movers }}</div>
+            </div>
+            <sc-for list="{{ movers }}" as="m" hint-placeholder-count="9">
+              <div onClick="{{ m.go }}" style="cursor:pointer;min-width:0;display:grid;grid-template-columns:52px minmax(36px,1fr) minmax(50px,88px) minmax(56px,92px);align-items:center;gap:8px;padding:11px 12px;border-radius:14px;transition:background .15s" style-hover="background:var(--sunk)">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;padding:2.5px 4px;border-radius:6px;background:var(--sunk);border:1px solid var(--edgeIn);text-align:center;color:var(--t2)">{{ m.ticker }}</div>
+                <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14.5px;font-weight:500;color:var(--ink)">{{ m.name }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end">{{ m.close }}</div>
+                <div style="min-width:0">
+                  <div style="display:flex;align-items:center;justify-content:flex-end;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:{{ m.color }}">
+                    <span>{{ m.pct }}</span><span style="font-size:12px">{{ m.arrow }}</span>
+                  </div>
+                  <div style="height:3px;border-radius:999px;background:var(--rule2);overflow:hidden;margin-top:5px"><div style="height:3px;border-radius:999px;width:{{ m.mag }};background:{{ m.color }};opacity:.75"></div></div>
+                </div>
+              </div>
+            </sc-for>
+          </section>
+        </div>
+
+        <div class="home-col" style="display:flex;flex-direction:column;gap:16px;min-width:0">
+          <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 20px 8px">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.readNow }}</div>
+            <sc-for list="{{ readNow }}" as="r" hint-placeholder-count="3">
+              <div onClick="{{ r.go }}" style="cursor:pointer;padding:16px 0;border-bottom:1px solid var(--rule2)" style-hover="opacity:.72">
+                <div style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;background:{{ r.tint }};color:{{ r.kindColor }};font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase">{{ r.kind }}</div>
+                <div style="font-family:'Bricolage Grotesque',serif;font-size:19px;font-weight:500;letter-spacing:-.02em;line-height:1.28;margin-top:9px;text-wrap:pretty">{{ r.title }}</div>
+                <div style="font-size:11.5px;color:var(--faint);margin-top:6px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace">{{ r.stamp }}</div>
+              </div>
+            </sc-for>
+<sc-if value="{{ noReadNow }}">
+  <div style="padding:18px 14px;color:var(--faint);font-size:13px">{{ L.nothingYet }}</div>
+</sc-if>
+
+          </section>
+
+          <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 12px 14px">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);padding-inline:8px">{{ L.watchlist }}</div>
+            <div style="margin-top:8px">
+              <sc-for list="{{ watchlist }}" as="w" hint-placeholder-count="5">
+                <div onClick="{{ w.go }}" style="cursor:pointer;display:grid;grid-template-columns:56px minmax(0,1fr) auto;align-items:center;gap:10px;padding:10px 8px;border-radius:12px" style-hover="background:var(--sunk)">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600">{{ w.ticker }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--t2)">{{ w.close }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:{{ w.color }}">{{ w.pct }} {{ w.arrow }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </section>
+        </div>
+      </div>
+      </sc-if>
     </div>
   </sc-if>
 
@@ -1230,6 +1686,10 @@
        way down Home. Everything a market row carries, because a list you built
        is worth as much detail as a list you searched — and the star that put a
        company here is the same control that takes it away. -->
+  <sc-if value="{{ isScenarios }}">
+    {{ scenariosView }}
+  </sc-if>
+
   <sc-if value="{{ isQuestions }}">
     {{ questionsView }}
   </sc-if>

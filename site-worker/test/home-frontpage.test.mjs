@@ -119,6 +119,16 @@ const clock = (iso, lang = 'en') => new Intl.DateTimeFormat(lang === 'ar' ? 'ar-
 const rowsOf = (v) => v.fpTiers.flatMap((t) => t.rows);
 
 /* ── J1 ─────────────────────────────────────────────────────────────────── */
+test('J1 the island-board carries the crossings, not two picked stories', () => {
+  assert.ok(BOARD.length > 500, 'the island-board slice is empty — the scan is broken');
+  assert.ok(FP.length > 500, 'the fp block was not found in logic.js');
+  assert.doesNotMatch(BOARD, /snapshotStories/, 'the board still binds the two picked stories');
+  assert.doesNotMatch(BOARD, /L\.readNow\b/, 'the board still carries the "What to read now" heading');
+  for (const key of ['fpTiers', 'fpSentence', 'fpFresh', 'fpCounts', 'L.fpYardstick']) {
+    assert.ok(BOARD.includes(`{{ ${key} }}`), `the board does not bind ${key}`);
+  }
+  assert.doesNotMatch(logic, /snapshotStories/, 'logic.js still computes snapshotStories');
+});
 
 /* ── J2 ─────────────────────────────────────────────────────────────────── */
 test('J2 rows are complete and alphabetical inside calendar tiers', () => {
@@ -377,6 +387,22 @@ test('J12 every front-page string exists in both languages, and the Arabic is Ar
 });
 
 /* ── J13 ────────────────────────────────────────────────────────────────── */
+test('J13 the negation is on the same card as the names', () => {
+  assert.ok(ISLAND.includes('{{ L.fpYardstick }}'), 'the yardstick is not on the island');
+  assert.match(screen(LIVE, 'en').L.fpYardstick, /not an answer/);
+  assert.match(screen(LIVE, 'ar').L.fpYardstick, /وليس حكمًا/);
+  // And it is rendered whenever the rows are — the same flag governs both:
+  // the yardstick sits INSIDE the fpShow gate, with no closing </sc-if>
+  // between the gate's opening tag and it. (A greedy [\s\S]* here matched a
+  // yardstick moved out below the gate, via the fpEmpty block's own close.)
+  assert.match(ISLAND,
+    /<sc-if value="\{\{ fpShow \}\}">(?:(?!<\/sc-if>)[\s\S])*\{\{ L\.fpYardstick \}\}(?:(?!<sc-if)[\s\S])*<\/sc-if>/,
+    'the yardstick is not inside the fpShow gate');
+  const v = screen({ ...LIVE, crossings: doc([item('AAAA', [filing(NEWEST), story(NEWEST)])]) });
+  assert.equal(v.fpShow, true);
+  assert.equal(screen(LIVE).fpShow, false);
+  assert.equal(screen(LIVE).fpEmpty, true);
+});
 
 /* ── J14 ────────────────────────────────────────────────────────────────── */
 test('J14 the volume multiple on Home agrees with the crossing\'s sentence', () => {
@@ -530,3 +556,22 @@ test('J18 a title nobody vetted is not shown either — only the builder\'s true
   }
 });
 
+test('the day comes before the standing boards on Home', async () => {
+  // Home reads top to bottom as a day: what moved, who traded it, what traded
+  // unusually. The sector-liquidity and ownership blocks are standing boards —
+  // they answer a question a reader arrives with, not one the session raised —
+  // and they sat above all three, so the first thing on the page after the
+  // indices was a board that had not changed since yesterday.
+  const page = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+  const shelf = page.indexOf('class="insight-shelf"');
+  const boards = page.indexOf('{{ flowViews.home }}');
+  assert.ok(shelf > 0, 'the insight shelf is gone from Home');
+  assert.ok(boards > 0, 'the flow-tracker blocks are gone from Home');
+  assert.ok(boards > shelf,
+            'the standing boards are back above the session the page is about');
+  // And all three of the day's cards are inside that shelf, above them.
+  const inShelf = page.slice(shelf, boards);
+  for (const key of ['{{ insightHeading }}', '{{ L.investorsWho }}', '{{ L.busiest }}']) {
+    assert.ok(inShelf.includes(key), `${key} is no longer above the standing boards`);
+  }
+});

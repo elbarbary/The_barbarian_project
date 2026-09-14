@@ -130,6 +130,53 @@ function demoMeasures(companies, rand) {
   };
 }
 
+/* The workbench's document, in the demo's own invented companies.
+ *
+ * Signed out, `scenarios.json` is not fetched: it names securities and stays
+ * behind the session gate with the rest of the exchange data. Without this the
+ * headline feature showed a visitor an empty screen, and the whole point of
+ * the demo is that every block has a shape before anybody signs in.
+ *
+ * The numbers are invented and the tickers are DEMO01.., so nothing here can
+ * be mistaken for a model's view of a real issuer. The models disagree with
+ * each other on purpose, because that is what nine models on this exchange
+ * actually do and a demo where they all agreed would teach the wrong thing.
+ */
+function demoScenarios(companies, rand) {
+  const models = {
+    kronos: { label: 'Kronos-small', labelAr: 'Kronos-small', group: 'neural' },
+    chronos2: { label: 'Chronos-2', labelAr: 'Chronos-2', group: 'neural' },
+    timesfm25: { label: 'TimesFM 2.5', labelAr: 'TimesFM 2.5', group: 'neural' },
+    rerank: { label: 'Gemini, reading the other nine', labelAr: 'Gemini يقرأ التسعة الآخرين', group: 'rerank' },
+    momentum20: { label: 'Momentum, 20 sessions', labelAr: 'الزخم، 20 جلسة', group: 'baseline' },
+    reversal5: { label: 'Reversal, 5 sessions', labelAr: 'الانعكاس، 5 جلسات', group: 'baseline' },
+  };
+  const rows = {};
+  for (const c of companies) {
+    const models_out = {};
+    for (const id of Object.keys(models)) {
+      // A different spread per model, so the disagreement the screen reports
+      // is real disagreement and not the same number six times.
+      const scale = id === 'kronos' ? 6 : id === 'rerank' ? 3 : 4;
+      const one = Math.round((rand() * scale - scale / 2) * 100) / 100;
+      models_out[id] = { returns: { 1: Math.round(one * 30) / 100,
+                                    5: one,
+                                    20: Math.round(one * 260) / 100 } };
+    }
+    rows[c.ticker] = { ticker: c.ticker, close: c.close, models: models_out };
+  }
+  return {
+    schemaVersion: 1, demo: true,
+    basisSession: '2026-08-26', ranAt: '2026-08-26T14:40:00Z',
+    horizons: [1, 5, 20],
+    commitment: { merkleRoot: null, timestamped: false, authority: null },
+    models,
+    what: 'An invented market, so the workbench has a shape before anyone signs in.',
+    warning: 'Demo figures for invented companies. Nothing here is a model\'s view of a real issuer.',
+    companies: rows,
+  };
+}
+
 export function demo() {
   const rand = stream(20260828);
   const companies = SECTORS.flatMap((sector, s) =>
@@ -250,6 +297,7 @@ export function demo() {
     // real answer rather than an empty one. The tickers are DEMO01..DEMO32 and
     // no figure belongs to a real issuer.
     measures: demoMeasures(companies, rand),
+    scenarios: demoScenarios(companies, rand),
     marketDate: '2026-08-26', generatedAt: '2026-08-27 11:48 UTC', dataVersion: 'demo',
     isClose: true, capturedAt: '2026-08-27T11:48:00Z',
     // Two crossings, so the block has a shape before anyone signs in: one
@@ -684,6 +732,23 @@ export async function measures() {
  *  cannot fetch is not a record anybody can check. */
 export async function arena() {
   return doc('research/leaderboard.json');
+}
+
+/** Each model's five highest-ranked companies and what they returned.
+ *
+ *  A statement about MODELS — it names no security — so it is public like the
+ *  leaderboard, and Home's cards draw from it signed-out as well as in. */
+export async function top5() {
+  return doc('research/top5.json');
+}
+
+/** What every model said about every named company after the last close.
+ *
+ *  Unlike the two above, this DOES name securities, so it stays behind the
+ *  session gate with the rest of the exchange data and behind an
+ *  acknowledgement in the screen that draws it. */
+export async function scenarios() {
+  return doc('research/scenarios.json');
 }
 
 /** The documents Home needs beyond the directory: the index history, and the
