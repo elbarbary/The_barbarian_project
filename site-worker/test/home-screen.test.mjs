@@ -21,6 +21,7 @@ const read = (p) => readFile(new URL(p, ROOT), 'utf8');
 
 const template = await read('public/esthmr/template.html');
 const source = await read('public/esthmr/home.js');
+const ask = await read('public/esthmr/ask.js');
 const RB = await import('../../public/esthmr/rulebook.js');
 const home = await import('../../public/esthmr/home.js');
 const table = JSON.parse(await read('public/data/v1/measures.json'));
@@ -52,7 +53,7 @@ test('no starter question is phrased as a thing worth owning', () => {
   // six-mover board with the count hidden inside the words.
   for (const word of ['buy', 'sell', 'best', 'top ', 'worth owning',
                       'opportunit', 'recommend', 'pick']) {
-    assert.ok(!source.toLowerCase().includes(`en: '${word}`),
+    assert.ok(!ask.toLowerCase().includes(`en: '${word}`),
               `a question is phrased around "${word}"`);
   }
 });
@@ -140,13 +141,13 @@ test('the questions are in a fixed order, never sorted by their answers', () => 
   // Putting the question with the most matches first is us choosing again,
   // through the back door: the question with the most matches is not the
   // better question, and the position says that it is.
-  const order = [...source.matchAll(/id: '([a-z0-9-]+)',\n\s+en: '/g)].map((m) => m[1]);
+  const order = [...ask.matchAll(/id: '([a-z0-9-]+)', en: '/g)].map((m) => m[1]);
   const expected = SUBJECTS.flatMap(([, q]) => q);
   for (const id of expected) assert.ok(order.includes(id), `${id} not declared`);
   const positions = expected.map((id) => order.indexOf(id));
   assert.deepEqual(positions, [...positions].sort((a, b) => a - b),
                    'the declared order does not match the intended one');
-  assert.ok(!/sort\(.*total/.test(source), 'questions are sorted by match count');
+  assert.ok(!/sort\(.*total/.test(ask) && !/sort\(.*total/.test(source), 'questions are sorted by match count');
 });
 
 test('a question that answers nobody says so rather than disappearing', () => {
@@ -155,7 +156,7 @@ test('a question that answers nobody says so rather than disappearing', () => {
   const result = RB.run(table, impossible);
   assert.equal(result.total, 0);
   assert.equal(result.didNotMatch + result.couldNotJudge, result.universe);
-  assert.ok(source.includes('No company answers this today.'),
+  assert.ok(ask.includes('No company answers this today.'),
             'an empty answer has no words of its own');
 });
 
@@ -202,12 +203,89 @@ test('the engine reads the key the questions are written with', () => {
   }
 });
 
+/* ── unusual volume, re-formed ──────────────────────────────────────────── */
+
+test('every company at the volume threshold is listed, never a top N', () => {
+  // The old busiest card showed four. Four was our choice, and a list of
+  // four we chose is a recommendation however it is called. The threshold
+  // is still ours; the count is the market's, and all of it is shown.
+  const v = home.unusualVolume(table);
+  const expected = table.rows.filter((r) => typeof r.relative_volume_20 === 'number'
+                                            && r.relative_volume_20 >= home.UNUSUAL).length;
+  assert.equal(v.unusual.length, expected);
+  assert.ok(v.unusual.length > 4, 'the fixture has too few to prove the list is uncapped');
+  assert.ok(!/slice\(0,\s*\d/.test(source.slice(source.indexOf('function unusualVolume'), source.indexOf('function volumeBlock'))),
+            'the volume list is cut to a number');
+});
+
+test('the volume list is alphabetical, not by multiple', () => {
+  const v = home.unusualVolume(table);
+  const tickers = v.unusual.map((r) => r.ticker);
+  assert.deepEqual(tickers, [...tickers].sort((a, b) => a.localeCompare(b)));
+});
+
+test('the volume block states its threshold and its denominator', () => {
+  const v = home.unusualVolume(table);
+  assert.equal(v.measured, table.rows.filter((r) => typeof r.relative_volume_20 === 'number').length);
+  assert.ok(source.includes('of ${whole(v.measured)} with a median to compare against'));
+});
+
+/* ── the questions screen ───────────────────────────────────────────────── */
+
+test('the questions screen survives a refresh and the Back button', async () => {
+  const nav = await import('../../public/esthmr/navigation.js');
+  assert.equal(nav.readRoute('?view=questions').screen, 'questions');
+  assert.equal(new URLSearchParams(nav.routeKey({ screen: 'questions' })).get('view'), 'questions');
+});
+
+test('the page column does not wrap, so one wide table cannot widen every section', async () => {
+  // journal.css wraps the column's first child; a wrapping column is a
+  // multi-line flex container, and a stretched item in one takes the width
+  // of its line rather than the container's. 420px on a 375px phone.
+  const css = await read('public/esthmr/home.css');
+  // Specificity is the whole point: journal.css's rule is id + class +
+  // pseudo-class + element, and a plainer selector loses to it silently.
+  assert.match(css, /#app \.om-scr > div\.home-screen:first-child \{ flex-wrap: nowrap; \}/);
+  assert.match(css, /\.arena-scroll \{[^}]*contain: inline-size/);
+});
+
 /* ── the arena ──────────────────────────────────────────────────────────── */
+
+test('the model table is in a fixed order, not sorted by score', async () => {
+  // A ledger, not a podium. A reader can see which row is highest; the page
+  // does not put it on top for them.
+  const leaderboard = JSON.parse(await read('public/data/v1/research/leaderboard.json'));
+  const rows = home.arenaRows(leaderboard, '1');
+  assert.deepEqual(rows.map((r) => r.id).slice(0, 4), ['kronos', 'chronos2', 'timesfm25', 'rerank']);
+  const means = rows.filter((r) => r.present && r.dates).map((r) => r.mean);
+  const sorted = [...means].sort((a, b) => b - a);
+  assert.ok(means.length >= 5);
+  assert.notDeepEqual(means, sorted, 'the rows happen to be in score order — the fixture cannot prove the order is fixed');
+});
+
+test('a model that has not been scored says so rather than showing a number', () => {
+  const rows = home.arenaRows({ models: { rerank: { '1': {} } }, basisSessions: 8 }, '1');
+  const r = rows.find((x) => x.id === 'rerank');
+  assert.equal(r.present, true);
+  assert.equal(r.dates, 0);
+  assert.ok(source.includes("t('not yet scored'"));
+});
+
+test('the arena names ten forecasters and no security', () => {
+  const body = source.slice(source.indexOf('const MODEL_ROWS'), source.indexOf('function arenaBlock'));
+  assert.equal((body.match(/^\s*\['[a-z0-9]+',/gm) || []).length, 10);
+  const universe = new Set(table.rows.map((r) => r.ticker));
+  for (const word of body.split(/[^A-Z0-9]+/)) {
+    assert.ok(!universe.has(word), `${word} is a listed security`);
+  }
+});
+
 
 test('Home claims no model has been shown to forecast anything', () => {
   const body = source.slice(source.indexOf('function arenaBlock'));
-  assert.ok(body.includes('not yet enough evidence'),
+  assert.ok(body.includes('is not enough to say any of these forecasts this exchange'),
             'the arena block dropped its own disclaimer');
+  assert.ok(body.includes('names no security, contains no forecast, and recommends nothing'));
   for (const word of ['best model', 'winner', 'beat', 'champion', 'accuracy of']) {
     assert.ok(!body.toLowerCase().includes(word), `the arena block claims "${word}"`);
   }

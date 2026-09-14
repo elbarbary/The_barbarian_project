@@ -4,6 +4,7 @@ import { Component } from './logic.js';
 import * as data from './data.js';
 import { whoami, openSignIn, signOut } from './auth.js';
 import * as watch from './watchlist.js';
+import * as qstore from './questions-store.js';
 import { readRoute, connectNavigation } from './navigation.js';
 import { readResponse } from './requests.js';
 import { pinBottomBar } from './navbar.js';
@@ -79,6 +80,12 @@ async function load(email) {
   if (!email) {
     component.setState({ dataLoading: false, dataError: false, extrasLoading: false, extrasError: false });
     component.setData(data.demo());
+    // The arena is public — it names no security, and a record a stranger
+    // cannot fetch is not a record anybody can check — so a signed-out reader
+    // sees the models on record too, over the demo's invented market.
+    (data.arena ? data.arena() : Promise.resolve(null)).then((arena) => {
+      if (version === loadVersion && arena) component.setData({ ...component.data(), arena });
+    }).catch(() => { /* the block simply does not draw */ });
     return;
   }
   component.setState({ dataLoading: true, dataError: false });
@@ -195,6 +202,7 @@ function setSigned(email) {
   reader = email || null;
   readerVersion++;
   watch.activate();
+  qstore.activate();
   component._co = null;
   component._series = {};
   component.state.watchStatus = '';
@@ -205,6 +213,17 @@ function setSigned(email) {
   component._reader = reader;
   component._watch = watch.read(reader);
   pullWatchlist(reader);
+  // The saved questions follow the same rule as the list: the browser's copy
+  // now, the account's when it lands, and the account is the truth.
+  component._questions = qstore.read(reader);
+  {
+    const version = readerVersion;
+    qstore.sync(reader).then((list) => {
+      if (version !== readerVersion) return;
+      component._questions = list;
+      if (component.onChange) component.onChange();
+    }).catch(() => { /* the mirror stands */ });
+  }
   document.body.dataset.signed = email ? 'yes' : 'no';
   const bar = document.getElementById('gate');
   const who = document.getElementById('who');

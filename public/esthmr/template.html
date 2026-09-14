@@ -1230,6 +1230,10 @@
        way down Home. Everything a market row carries, because a list you built
        is worth as much detail as a list you searched — and the star that put a
        company here is the same control that takes it away. -->
+  <sc-if value="{{ isQuestions }}">
+    {{ questionsView }}
+  </sc-if>
+
   <sc-if value="{{ isWatchlist }}">
     <div class="om-scr screen-watchlist" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 8px 0">

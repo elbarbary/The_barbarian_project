@@ -1,74 +1,57 @@
-/* Home: one question, asked of the whole market, answered completely.
+/* Home: the market described, the models on record, the reader's question.
  *
- * WHAT THIS REPLACED, AND WHY
- * ---------------------------
- * Home was a five-hundred-line scroll of everything the project holds: three
- * index cards, a busiest-four card, a twelve-company market-cap mosaic, a
- * movers board, a ranking panel, a news grid, a pulse strip, a dots grid. It
- * was a table of contents, and a reader arriving for the first time could not
- * tell from the first screen what the product was FOR.
+ * WHAT THIS REPLACED
+ * A five-hundred-line scroll of everything the project holds — index cards, a
+ * busiest-four card, a twelve-company market-cap mosaic, a movers board, a
+ * ranking panel, a news grid, a pulse strip, a dots grid. A table of contents.
+ * Several of those were also the one shape this publisher may not make: a list
+ * of companies whose LENGTH we chose. "Today's six biggest movers" is a list of
+ * six we picked, and no wording around it changes that.
  *
- * Several of those sections were also the one shape this publisher may not
- * make. ESTHMR is not licensed to advise, and the working line we hold is
- * about WHO FIXES THE CARDINALITY: a condition the reader states may
- * legitimately return none, three, or fifty companies, because the reader
- * chose both the test and how many pass it. "Today's six biggest movers" is a
- * list of six that we chose, and no wording around it changes that. The
- * mosaic was worse: it encoded our choice of twelve AND ranked them by area.
+ * WHAT IT WAS FIRST REPLACED WITH, AND WHY THAT WAS WRONG TOO
+ * The first rebuild cut the busiest card entirely and shrank the model arena to
+ * three lines. Both were over-corrections. The illegal part of "busiest" was
+ * the FOUR, not the volume: every company trading at twice its own normal
+ * volume — all of them, threshold stated — is exactly the shape the reader's
+ * own questions take, and it is the most useful thing on the page. And the
+ * arena is the reason the backend exists; a page that hid it was a page about
+ * something else.
  *
- * (That line is this project's own boundary, drawn deliberately wide. It is
- * not a statutory safe harbour and no regulator has blessed it.)
+ * (The cardinality line is this project's own boundary, drawn wide on purpose.
+ * It is not a statutory safe harbour and no regulator has blessed it.)
  *
- * SO THE PAGE IS BUILT ON TWO THINGS ONLY
- * ---------------------------------------
- *   1. Facts about the WHOLE market, which select nothing. "170 of 283 fell"
- *      picks no company and cannot be read as a suggestion, and it is what a
- *      reader genuinely wants first: it says whether what they are about to
- *      look at is one company's move or the tide.
+ * THE PAGE STANDS ON THREE THINGS
+ *   1. Facts about the whole market, which select nothing. Breadth, and then
+ *      the complete list of companies that traded at an unusual multiple of
+ *      their own volume — the threshold is stated, the denominator is stated,
+ *      and nothing is cut to a number.
+ *   2. The models, as a ledger. Every forecaster's record so far, in a fixed
+ *      order, with the dates and the uncertainty in plain sight, and the one
+ *      sentence that there is not yet enough to judge. It names no security.
+ *   3. The reader's own question, answered in full, and saveable.
  *
- *   2. The reader's own question, answered in full. Every company that meets
- *      their condition, with the figures that put it there — and the two
- *      other counts beside it, because "five matched" means nothing without
- *      "and 248 did not, and 30 could not be judged at all".
- *
- * WHAT THIS DELIBERATELY DOES NOT DO
- * ----------------------------------
- * It does not order the starter questions by how many companies they return,
- * or mark one as interesting today. That would be us choosing again, through
- * the back door: the question with the most matches is not the best question,
- * and putting it first says that it is.
- *
- * It does not say a saved question is being WATCHED. The engine runs in the
- * reader's browser when they open the page. Until snapshots are stored, the
- * honest sentence is "applied to the latest data", and the copy here says
- * exactly that.
+ * WHAT IT DOES NOT DO
+ * It does not order the starter questions by their answers. It does not say a
+ * saved question is watched — the engine runs in this browser when the page is
+ * open. And it does not show the nightly layer's "N worth anything tonight":
+ * that names no security and is still an opportunity gauge, and the evaluation
+ * of that count belongs beside its definition, not on the front page.
  */
 
 import { React as R } from './react-shim.js';
 import * as RB from './rulebook.js';
+import * as store from './questions-store.js';
+import { SUBJECTS, questionFor, asRulebook, answerCounts, resultList, finite, whole } from './ask.js';
 
+export { questionFor, asRulebook };
 const h = R.createElement;
-const finite = (v) => typeof v === 'number' && Number.isFinite(v);
-const whole = (v) => (finite(v) ? new Intl.NumberFormat('en').format(Math.round(v)) : '—');
 const signed = (v) => (finite(v) ? `${v > 0 ? '+' : ''}${v.toFixed(2)}%` : '—');
 
 /* ── the session, described and not summarised ──────────────────────────── */
 
-/* The five states every listing is in, exactly one each.
- *
- * `idle` and `level` are kept apart on purpose and it is the whole reason
- * this block is worth the space. Forty companies found no buyer today and
- * thirteen traded and closed where they opened. Reporting "53 unchanged"
- * would tell a reader that fifty-three companies were steady, when forty of
- * them could not be sold at any price. On this exchange that difference is
- * most of what a newcomer has to understand. */
-/* The same five states the builder computes, in the browser.
- *
- * Used for the signed-out demo, which has rows and no published breadth. It
- * exists in two languages, which is a risk — so `home-screen.test.mjs`
- * asserts that this reproduces the published block exactly on the real table.
- * If the two ever disagree, that test says so on the next run.
- */
+/* The same five states the builder computes, in the browser. Used for the
+ * signed-out demo, which has rows and no published breadth; a test asserts
+ * this reproduces the published block exactly on the real table. */
 export function sessionStates(rows) {
   const out = { listed: 0, rose: 0, fell: 0, level: 0, idle: 0, unmeasured: 0 };
   for (const row of rows || []) {
@@ -86,6 +69,11 @@ export function sessionStates(rows) {
   return out;
 }
 
+/* `idle` and `level` are kept apart on purpose: forty companies found no
+ * buyer today and thirteen traded and closed where they opened. "53
+ * unchanged" would report a share nobody would buy as a share that held
+ * steady, and on this exchange that difference is most of what a newcomer
+ * has to understand. */
 function breadthStates(breadth, t) {
   if (!breadth || !finite(breadth.listed) || breadth.listed <= 0) return null;
   const rows = [
@@ -112,237 +100,202 @@ function breadthBlock(breadth, when, t) {
     h('ul', { class: 'breadth-list' }, state.rows.map((r) => h('li', { key: r.key },
       h('b', { style: `color:${r.color}` }, whole(r.n)),
       h('span', null, r.label)))),
-    // The denominator, always, and in the same breath as the counts.
     h('p', { class: 'home-note' },
-      t(`of ${whole(state.total)} listed companies`,
-        `من ${whole(state.total)} شركة مدرجة`)),
-  );
+      t(`of ${whole(state.total)} listed companies`, `من ${whole(state.total)} شركة مدرجة`)));
+}
+
+/* ── unusual volume: the complete list ──────────────────────────────────── */
+
+export const UNUSUAL = 2;      // times its own 20-session median
+export const HEAVY = 5;
+
+/* Every company at the threshold, and not one fewer.
+ *
+ * This is the busiest card, re-formed. The old one showed four; four was our
+ * choice, and a list of four we chose is a recommendation whatever it is
+ * called. The threshold is still ours — stated, fixed, the same every day —
+ * but the COUNT is the market's: today it is 37, tomorrow it may be 3, and
+ * every one of them is shown. Alphabetical, because any other order is a
+ * ranking with the column hidden. */
+export function unusualVolume(table) {
+  const rows = (table && table.rows) || [];
+  const measured = rows.filter((r) => finite(r.relative_volume_20));
+  const unusual = measured.filter((r) => r.relative_volume_20 >= UNUSUAL)
+    .sort((a, b) => a.ticker.localeCompare(b.ticker));
+  return {
+    measured: measured.length,
+    listed: rows.length,
+    unusual,
+    heavy: unusual.filter((r) => r.relative_volume_20 >= HEAVY).length,
+  };
+}
+
+function volumeBlock(component, table, ar, t) {
+  const v = unusualVolume(table);
+  if (!v.measured) return null;
+  const open = component.state.homeVolumeOpen !== false;   // open by default
+  return h('section', { class: 'home-volume' },
+    h('h2', null, t('Trading at an unusual volume', 'تداول بحجم غير معتاد')),
+    h('p', { class: 'ask-counts' },
+      h('b', null, whole(v.unusual.length)),
+      h('span', null, t(
+        `companies traded at ${UNUSUAL}× or more of their own 20-session median today · ${whole(v.heavy)} of them at ${HEAVY}× or more · of ${whole(v.measured)} with a median to compare against`,
+        `شركة تداولت اليوم بـ${UNUSUAL}× أو أكثر من معتادها في 20 جلسة · ${whole(v.heavy)} منها بـ${HEAVY}× أو أكثر · من ${whole(v.measured)} لها معتاد يُقارَن به`))),
+    v.unusual.length
+      ? h('div', null,
+          h('button', { type: 'button', class: 'q-cancel', 'aria-expanded': open ? 'true' : 'false',
+            onClick: () => component.setState({ homeVolumeOpen: !open }) },
+            open ? t('Hide the list', 'أخفِ القائمة') : t('Show all of them', 'اعرضها كلها')),
+          open ? h('div', { class: 'ask-results' },
+            v.unusual.map((r) => h('button', { key: r.ticker, type: 'button', class: 'ask-row',
+              onClick: () => component.setState({ screen: 'company', ticker: r.ticker }) },
+              h('b', null, r.ticker),
+              h('span', { class: 'ask-why' },
+                h('span', { class: 'ask-reason' }, `${r.relative_volume_20.toFixed(1)}× ${t('its median', 'معتادها')}`),
+                h('span', { class: 'ask-reason', style: `color:${r.change_1 > 0 ? 'var(--up)' : r.change_1 < 0 ? 'var(--down)' : 'var(--t2)'}` }, signed(r.change_1))))),
+            h('p', { class: 'home-note' }, t(
+              'Every company at the threshold is listed, alphabetically. The threshold is the same every day; the count is whatever the market did. A multiple says a share was traded more than usual — not why, and not what it will do.',
+              'كل شركة عند الحد مذكورة، أبجديًا. الحد ثابت كل يوم؛ والعدد هو ما فعله السوق. المضاعف يعني أن السهم تُدوول أكثر من المعتاد — لا لماذا، ولا ماذا سيفعل.'))) : null)
+      : h('p', { class: 'home-note' }, t('No company traded at that multiple today.', 'لا شركة تداولت بذلك المضاعف اليوم.')));
 }
 
 /* ── the reader's question ──────────────────────────────────────────────── */
-
-/* Starter questions, as QUESTIONS.
- *
- * The danger here is obvious and worth naming: a set of ready-made rules
- * chosen by us is our selection wearing the reader's clothes. Three things
- * keep it honest, and all three are load-bearing.
- *
- * They are phrased as questions about the market, not as things worth owning.
- * None of them is "companies worth buying"; every one of them is a condition
- * whose answer might be nothing.
- *
- * Every one shows its complete answer including zero, and including the two
- * counts beside the match count. A question that returns nothing today is
- * shown returning nothing.
- *
- * And the order is fixed. Sorting them by how many companies they return —
- * or marking one as interesting today — would be us choosing again, because
- * the question with the most matches is not the best question.
- */
-const SUBJECTS = [
-  {
-    id: 'move', en: 'Price move', ar: 'حركة السعر',
-    questions: [
-      { id: 'up-today-down-month',
-        en: 'Rose today but is lower than a month ago',
-        ar: 'ارتفعت اليوم لكنها أقل من شهر مضى',
-        conditions: [{ column: 'change_1', op: '>', value: 0 },
-                     { column: 'change_20', op: '<', value: 0 }] },
-      { id: 'moved-5',
-        en: 'Moved more than 5% today',
-        ar: 'تحركت أكثر من 5% اليوم',
-        match: 'any',
-        conditions: [{ column: 'change_1', op: '>=', value: 5 },
-                     { column: 'change_1', op: '<=', value: -5 }] },
-      { id: 'up-month',
-        en: 'Is higher than it was twenty sessions ago',
-        ar: 'أعلى مما كانت عليه قبل عشرين جلسة',
-        conditions: [{ column: 'change_20', op: '>', value: 0 }] },
-    ],
-  },
-  {
-    id: 'volume', en: 'Trading volume', ar: 'حجم التداول',
-    questions: [
-      { id: 'twice-normal',
-        en: 'Traded at twice its own normal volume',
-        ar: 'تداولت بضعف حجمها المعتاد',
-        conditions: [{ column: 'relative_volume_20', op: '>=', value: 2 }] },
-      { id: 'five-times',
-        en: 'Traded at five times its own normal volume',
-        ar: 'تداولت بخمسة أضعاف حجمها المعتاد',
-        conditions: [{ column: 'relative_volume_20', op: '>=', value: 5 }] },
-      { id: 'no-buyer',
-        en: 'Found no buyer at all today',
-        ar: 'لم تتداول اليوم إطلاقًا',
-        conditions: [{ column: 'volume', op: '<=', value: 0 }] },
-    ],
-  },
-  {
-    id: 'results', en: 'Results', ar: 'نتائج الأعمال',
-    questions: [
-      { id: 'profit-grew',
-        en: 'Net profit grew against the same period last year',
-        ar: 'نما صافي ربحها مقارنة بالعام الماضي',
-        conditions: [{ column: 'net_income_growth', op: '>', value: 0 }] },
-      { id: 'profit-fell',
-        en: 'Net profit fell against the same period last year',
-        ar: 'تراجع صافي ربحها مقارنة بالعام الماضي',
-        conditions: [{ column: 'net_income_growth', op: '<', value: 0 }] },
-      { id: 'due-soon',
-        en: 'Results are expected within six weeks',
-        ar: 'نتائجها متوقعة خلال ستة أسابيع',
-        conditions: [{ column: 'results_due_in_days', op: '>=', value: 0 },
-                     { column: 'results_due_in_days', op: '<=', value: 42 }] },
-    ],
-  },
-  {
-    id: 'filings', en: 'Disclosures', ar: 'الإفصاحات',
-    questions: [
-      { id: 'filed-recently',
-        en: 'Filed something in the last five sessions',
-        ar: 'أفصحت عن شيء خلال آخر خمس جلسات',
-        conditions: [{ column: 'sessions_since_filing', op: '<=', value: 5 }] },
-      { id: 'silent',
-        en: 'Has filed nothing for thirty sessions',
-        ar: 'لم تفصح عن شيء منذ ثلاثين جلسة',
-        conditions: [{ column: 'sessions_since_filing', op: '>=', value: 30 }] },
-      { id: 'streak',
-        en: 'Broke a run its own filings had kept',
-        ar: 'كسرت سلسلة حافظت عليها إفصاحاتها',
-        conditions: [{ column: 'streak_break', op: 'has' }] },
-    ],
-  },
-];
-
-export function questionFor(subjectId, questionId) {
-  const subject = SUBJECTS.find((s) => s.id === subjectId);
-  const question = subject && subject.questions.find((q) => q.id === questionId);
-  return question ? { subject, question } : null;
-}
-
-export function asRulebook(question) {
-  return { conditions: question.conditions, match: question.match === 'any' ? 'any' : 'all' };
-}
-
-/* The three counts, always together.
- *
- * A reader looking at five matches is owed the difference between "248 did
- * not meet your condition" and "30 could not be judged because the figures
- * are not there". The second is a statement about this archive, not about
- * those companies, and collapsing them would let a gap in our data read as a
- * finding about the market. */
-function answerCounts(result, t) {
-  return h('p', { class: 'ask-counts' },
-    h('b', null, whole(result.total)),
-    h('span', null, t(
-      `matched · ${whole(result.didNotMatch)} did not · ${whole(result.couldNotJudge)} could not be judged · of ${whole(result.universe)}`,
-      `مطابقة · ${whole(result.didNotMatch)} غير مطابقة · ${whole(result.couldNotJudge)} تعذّر الحكم عليها · من ${whole(result.universe)}`)));
-}
-
-/* Why this company is here: the figures that put it there, and nothing else.
- *
- * Not why its price moved. A filing on the same day is context, not cause,
- * and this publisher is in no position to claim the second. */
-function reasons(entry, table, ar) {
-  return (entry.met || []).map((condition, i) => h('span', { key: i, class: 'ask-reason' },
-    RB.explain(entry.row, condition, ar)));
-}
 
 function askBlock(component, table, ar, t) {
   const st = component.state;
   const open = SUBJECTS.find((s) => s.id === st.homeSubject) || null;
   const chosen = open && (open.questions.find((q) => q.id === st.homeQuestion) || null);
+  const reader = component._reader || null;
 
   const subjects = h('div', { class: 'ask-subjects' }, SUBJECTS.map((s) => h('button', {
     key: s.id, type: 'button',
     'aria-pressed': open && open.id === s.id ? 'true' : 'false',
     class: open && open.id === s.id ? 'ask-subject on' : 'ask-subject',
-    onClick: () => component.setState({
-      homeSubject: open && open.id === s.id ? '' : s.id, homeQuestion: '' }),
+    onClick: () => component.setState({ homeSubject: open && open.id === s.id ? '' : s.id, homeQuestion: '' }),
   }, ar ? s.ar : s.en)));
 
+  const mine = h('button', { type: 'button', class: 'q-cancel', onClick: () => component.setState({ screen: 'questions' }) },
+    t(`My questions${(component._questions || []).length ? ` (${(component._questions || []).length})` : ''} →`,
+      `أسئلتي${(component._questions || []).length ? ` (${(component._questions || []).length})` : ''} ←`));
+
+  const head = [
+    h('h2', null, t('What do you want to follow?', 'تحب تتابع إيه؟')),
+    h('p', { class: 'home-sub' }, t(
+      'Choose a subject, pick a question, and see every company that answers it — and why. Save the ones you want to keep.',
+      'اختر موضوعًا، ثم سؤالًا، وشاهد كل شركة ينطبق عليها — ولماذا. احفظ ما تريد الاحتفاظ به.')),
+  ];
+
   if (!table || !Array.isArray(table.rows) || !table.rows.length) {
-    return h('section', { class: 'home-ask' },
-      h('h2', null, t('What do you want to follow?', 'تحب تتابع إيه؟')),
-      h('p', { class: 'home-sub' }, t(
-        'Choose a subject, pick a question, and see every company that answers it.',
-        'اختر موضوعًا، ثم سؤالًا، وشاهد كل شركة ينطبق عليها.')),
-      subjects,
-      h('p', { class: 'home-note' }, t('The measurements are still loading.',
-                                       'القياسات قيد التحميل.')));
+    return h('section', { class: 'home-ask' }, ...head, subjects,
+      h('p', { class: 'home-note' }, t('The measurements are still loading.', 'القياسات قيد التحميل.')), mine);
   }
 
   const listed = open ? open.questions.map((q) => {
     const result = RB.run(table, asRulebook(q));
     const isOpen = chosen && chosen.id === q.id;
+    const saveIt = () => {
+      const list = store.saveSynced(reader, { ...asRulebook(q), name: ar ? q.ar : q.en, id: store.newId() },
+        (status) => component.setState({ qStatus: status }));
+      component._questions = list;
+      component.setState({ screen: 'questions', qOpen: list[0] && list[0].id });
+    };
     return h('div', { key: q.id, class: 'ask-question' },
-      h('button', { type: 'button', class: 'ask-open',
-        'aria-expanded': isOpen ? 'true' : 'false',
+      h('button', { type: 'button', class: 'ask-open', 'aria-expanded': isOpen ? 'true' : 'false',
         onClick: () => component.setState({ homeQuestion: isOpen ? '' : q.id }) },
         h('span', { class: 'ask-sentence' }, ar ? q.ar : q.en),
-        answerCounts(result, t)),
-      isOpen ? h('div', { class: 'ask-results' },
-        result.results.length
-          ? result.results.map((entry) => h('button', {
-              key: entry.ticker, type: 'button', class: 'ask-row',
-              onClick: () => component.setState({ screen: 'company', ticker: entry.ticker }),
-            },
-            h('b', null, entry.ticker),
-            h('span', { class: 'ask-why' }, reasons(entry, table, ar))))
-          // Zero is an answer and is shown as one.
-          : h('p', { class: 'home-note' }, t('No company answers this today.',
-                                             'لا توجد شركة ينطبق عليها هذا اليوم.')),
-        h('p', { class: 'home-note' }, t(
-          'Every company that answers is listed, in alphabetical order. Nothing is left out and nothing is ranked.',
-          'كل شركة ينطبق عليها مذكورة، بالترتيب الأبجدي. لا شيء محذوف ولا شيء مرتّب بالأفضلية.')),
-      ) : null);
+        answerCounts(result, ar)),
+      isOpen ? h('div', null,
+        resultList(component, result, ar),
+        h('div', { class: 'q-actions' },
+          h('button', { type: 'button', class: 'q-save', onClick: saveIt }, t('Save this question', 'احفظ هذا السؤال')))) : null);
   }) : null;
 
-  return h('section', { class: 'home-ask' },
-    h('h2', null, t('What do you want to follow?', 'تحب تتابع إيه؟')),
-    h('p', { class: 'home-sub' }, t(
-      'Choose a subject, pick a question, and see every company that answers it — and why.',
-      'اختر موضوعًا، ثم سؤالًا، وشاهد كل شركة ينطبق عليها — ولماذا.')),
-    subjects,
+  return h('section', { class: 'home-ask' }, ...head, subjects,
     listed ? h('div', { class: 'ask-questions' }, listed) : null,
     h('p', { class: 'home-note' }, t(
-      'These questions are examples. Each one is a condition you can change, and the answer is whatever the measurements say — including nothing.',
-      'هذه الأسئلة أمثلة. كل واحد منها شرط يمكنك تغييره، والإجابة هي ما تقوله القياسات — بما في ذلك لا شيء.')),
-  );
+      'These are examples. Each is a condition you can change, and the answer is whatever the measurements say — including nothing.',
+      'هذه أمثلة. كل واحد شرط يمكنك تغييره، والإجابة هي ما تقوله القياسات — بما في ذلك لا شيء.')),
+    mine);
 }
 
-/* ── the research ledger ────────────────────────────────────────────────── */
+/* ── the models, as a ledger ────────────────────────────────────────────── */
 
-/* Deliberately not a leaderboard.
- *
- * Eight scorable dates demonstrate a process. They do not establish that any
- * model forecasts this exchange, and a podium on the home page would claim
- * they do. So this says how much evidence exists and links to the rest, and
- * the one sentence it commits to is that there is not yet enough to judge.
- *
- * The nightly layer's own count — "32 of 260 worth anything tonight" — is
- * kept off this page on purpose. It names no security and it is still an
- * opportunity gauge: "only 32 are worth anything" invites exactly the reading
- * this project must not invite, and its precision far exceeds what eight
- * dates can support. It belongs in the methodology, with its definition.
- */
-function arenaBlock(arena, t) {
+/* Fixed order, not by score. The point of the table is that the numbers are
+ * on record beside their uncertainty — not that one row sits on top. A reader
+ * can see which is highest; the page does not say so for them. */
+const MODEL_ROWS = [
+  ['kronos', 'Kronos-small', 'Kronos-small', 'neural'],
+  ['chronos2', 'Chronos-2', 'Chronos-2', 'neural'],
+  ['timesfm25', 'TimesFM 2.5', 'TimesFM 2.5', 'neural'],
+  ['rerank', 'Gemini, reading the other nine', 'Gemini يقرأ التسعة الآخرين', 'rerank'],
+  ['momentum20', 'Momentum, 20 sessions', 'الزخم، 20 جلسة', 'baseline'],
+  ['momentum60', 'Momentum, 60 sessions', 'الزخم، 60 جلسة', 'baseline'],
+  ['reversal1', 'Reversal, 1 session', 'الانعكاس، جلسة', 'baseline'],
+  ['reversal5', 'Reversal, 5 sessions', 'الانعكاس، 5 جلسات', 'baseline'],
+  ['drift', 'Drift', 'الانجراف', 'baseline'],
+  ['flat', 'Flat (says nothing)', 'ثابت (لا يقول شيئًا)', 'baseline'],
+];
+
+const ic = (v) => (finite(v) ? (v > 0 ? '+' : '') + v.toFixed(3) : '—');
+const tstat = (v) => (finite(v) ? (v > 0 ? '+' : '') + v.toFixed(2) : '—');
+
+export function arenaRows(arena, horizon = '1') {
+  const models = (arena && arena.models) || {};
+  return MODEL_ROWS.map(([id, en, ar, group]) => {
+    const row = (models[id] || {})[horizon] || {};
+    return { id, en, ar, group, present: Boolean(models[id]),
+             dates: finite(row.dates) ? row.dates : 0, mean: row.mean, t: row.t,
+             scored: row.scored, withheld: row.withheldDates };
+  });
+}
+
+function arenaBlock(component, arena, ar, t) {
   if (!arena || !finite(arena.basisSessions) || arena.basisSessions <= 0) return null;
+  const horizon = component.state.arenaHorizon === '5' ? '5' : '1';
+  const rows = arenaRows(arena, horizon).filter((r) => r.present);
+  const groupName = { neural: t('Time-series models', 'نماذج السلاسل الزمنية'),
+                      rerank: t('After the rerank layer', 'بعد طبقة إعادة الترتيب'),
+                      baseline: t('Baselines', 'المقارنات الأساسية') };
+  let lastGroup = null;
+  const body = [];
+  for (const r of rows) {
+    if (r.group !== lastGroup) {
+      body.push(h('tr', { key: 'g' + r.group, class: 'arena-group' }, h('th', { colSpan: 5, scope: 'colgroup' }, groupName[r.group])));
+      lastGroup = r.group;
+    }
+    body.push(h('tr', { key: r.id },
+      h('th', { scope: 'row' }, ar ? r.ar : r.en),
+      h('td', { class: 'arena-num' }, r.dates ? ic(r.mean) : t('not yet scored', 'لم يُقيَّم بعد')),
+      h('td', { class: 'arena-num' }, r.dates ? tstat(r.t) : ''),
+      h('td', { class: 'arena-num' }, r.dates ? whole(r.dates) : ''),
+      h('td', { class: 'arena-num' }, r.dates && finite(r.scored) ? whole(r.scored) : '')));
+  }
+  const latest = arena.dates && arena.dates.length ? arena.dates[arena.dates.length - 1] : null;
+
   return h('section', { class: 'home-arena' },
-    h('h2', null, t('We test the models before relying on them',
-                    'نختبر النماذج قبل أن نعتمد عليها')),
-    h('p', { class: 'arena-count' },
-      h('b', null, whole(arena.basisSessions)),
-      h('span', null, t('sessions scored so far', 'جلسة مقيّمة حتى الآن'))),
+    h('h2', null, t('The models, on record', 'النماذج، في السجل')),
+    h('p', { class: 'home-sub' }, t(
+      `Every evening after the close, ${whole(rows.length)} forecasters are run over every company and their forecasts are sealed — hashed, and timestamped by an independent authority — before the next session opens. When the horizons run out, they are scored against what the market did and opened in full.`,
+      `كل مساء بعد الإغلاق، تُشغَّل ${whole(rows.length)} نماذج على كل شركة وتُختم توقعاتها — تُهشَّر وتُوثَّق زمنيًا لدى جهة مستقلة — قبل افتتاح الجلسة التالية. وحين تنتهي الآفاق، تُقيَّم مقابل ما فعله السوق وتُفتح كاملة.`)),
+    h('div', { class: 'ask-subjects', role: 'group', 'aria-label': t('Horizon', 'الأفق') },
+      ['1', '5'].map((hz) => h('button', { key: hz, type: 'button', class: horizon === hz ? 'ask-subject on' : 'ask-subject',
+        'aria-pressed': horizon === hz ? 'true' : 'false', onClick: () => component.setState({ arenaHorizon: hz }) },
+        hz === '1' ? t('Next session', 'الجلسة التالية') : t('Five sessions', 'خمس جلسات')))),
+    h('div', { class: 'arena-scroll' },
+      h('table', { class: 'arena-table' },
+        h('thead', null, h('tr', null,
+          h('th', { scope: 'col' }, t('Model', 'النموذج')),
+          h('th', { scope: 'col', class: 'arena-num' }, t('Rank IC', 'ارتباط الترتيب')),
+          h('th', { scope: 'col', class: 'arena-num' }, 't'),
+          h('th', { scope: 'col', class: 'arena-num' }, t('Sessions', 'جلسات')),
+          h('th', { scope: 'col', class: 'arena-num' }, t('Companies', 'شركات')))),
+        h('tbody', null, body))),
     h('p', { class: 'home-note' }, t(
-      'That is not yet enough evidence to say any model forecasts this exchange. Every forecast is sealed and timestamped by an independent authority on the night it is made, and opened in full once its horizons have run out.',
-      'هذا ليس دليلًا كافيًا بعد للقول إن أي نموذج يتنبأ بهذه البورصة. كل تنبؤ يُختم ويُوثَّق زمنيًا لدى جهة مستقلة ليلة إصداره، ويُفتح كاملًا بعد انتهاء آفاقه.')),
-    arena.dates && arena.dates.length
-      ? h('p', { class: 'home-note' }, t(
-          `Most recent sealed session: ${arena.dates[arena.dates.length - 1]}`,
-          `آخر جلسة مختومة: ${arena.dates[arena.dates.length - 1]}`))
-      : null,
-  );
+      `Rank IC is how well a model's ordering of the market matched what the market then did, one number per session, averaged. Above zero is better than random; ${whole(arena.basisSessions)} sessions is not enough to say any of these forecasts this exchange, and t says how far each mean is from noise. The Gemini row reads all the others' forecasts and forms its own ordering; it has been running since ${latest || '—'} and is scored on the same terms.`,
+      `ارتباط الترتيب هو مدى تطابق ترتيب النموذج للسوق مع ما فعله السوق لاحقًا، رقم لكل جلسة، متوسطًا. فوق الصفر أفضل من العشوائي؛ و${whole(arena.basisSessions)} جلسات لا تكفي للقول إن أيًّا من هذه يتنبأ بهذه البورصة، وt تقول كم يبعد كل متوسط عن الضجيج. صف Gemini يقرأ توقعات الآخرين جميعًا ويكوّن ترتيبه الخاص؛ يعمل منذ ${latest || '—'} ويُقيَّم بالشروط نفسها.`)),
+    h('p', { class: 'home-note' }, t(
+      'A comparison of forecasters. It names no security, contains no forecast, and recommends nothing.',
+      'مقارنة بين نماذج التنبؤ. لا تسمّي أي ورقة مالية، ولا تحوي توقعًا، ولا توصي بشيء.')));
 }
 
 /* ── the screen ─────────────────────────────────────────────────────────── */
@@ -350,25 +303,23 @@ function arenaBlock(arena, t) {
 export function homeScreen(component, data, ar) {
   const t = (en, arabic) => (ar ? arabic : en);
   const table = data.measures || null;
-  // The published block where there is one, and the same arithmetic in the
-  // browser where there is not — which is the signed-out demo.
   const breadth = table && (table.breadth || sessionStates(table.rows));
   const when = table && table.market_date
-    ? t(`Measurements as at the close of ${table.market_date}`,
-        `القياسات حتى إغلاق ${table.market_date}`)
+    ? t(`Measurements as at the close of ${table.market_date}`, `القياسات حتى إغلاق ${table.market_date}`)
     : '';
 
   return {
     screen: h('div', { class: 'home-screen' },
       h('header', { class: 'home-intro' },
-        h('h1', null, t('Understand the Egyptian Exchange on your own terms',
-                        'افهم البورصة المصرية بشروطك')),
+        h('h1', null, t('The Egyptian Exchange, measured — and the models on record',
+                        'البورصة المصرية مقيسة — والنماذج في السجل')),
         h('p', null, t(
-          'Choose what you want to follow. See every company that matches, and why.',
-          'اختر ما تحب متابعته. شاهد كل شركة تنطبق عليها الشروط، واعرف السبب.'))),
+          'What the whole market did, which companies traded unusually, how the forecasters are doing, and any question you want to ask — answered in full.',
+          'ماذا فعل السوق كله، أي الشركات تداولت بشكل غير معتاد، كيف تؤدي النماذج، وأي سؤال تريد طرحه — بإجابة كاملة.'))),
       breadthBlock(breadth, when, t),
+      volumeBlock(component, table, ar, t),
+      arenaBlock(component, data.arena, ar, t),
       askBlock(component, table, ar, t),
-      arenaBlock(data.arena, t),
     ),
   };
 }

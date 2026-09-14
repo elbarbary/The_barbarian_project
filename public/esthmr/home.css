@@ -8,7 +8,32 @@
  * nor good news, and colouring it green would say it was.
  */
 
-.home-screen { display: flex; flex-direction: column; gap: 34px; }
+.home-screen { display: flex; flex-direction: column; gap: 34px; max-width: 100%; min-width: 0; }
+/* The screen is itself a flex item of the page column, and the page column of
+   the main frame. Each has to be allowed to shrink or the widest thing inside
+   — a table with a floor on its width — sets the width of the whole document,
+   and a phone shows the page cut off at its right edge. */
+.journal-home, .journal-home > * { min-width: 0; }
+/* journal.css sets flex-wrap: wrap on the page column's first child, which is
+   this screen. A wrapping column is a MULTI-LINE flex container, and in one
+   of those a stretched item takes the width of its LINE — the widest item in
+   it — rather than the container's. So one table with a floor on its width
+   made every section on the page 420px wide on a 375px phone. Single line,
+   with more specificity than the rule that wrapped it; and the scroll box
+   contributes no intrinsic width of its own, so the table can only ever
+   scroll inside it.
+
+   The selector matches journal.css's shape — id, class, pseudo-class,
+   element — and adds a class, because a plainer one lost the cascade to it
+   and quietly did nothing. */
+#app .om-scr > div.home-screen:first-child { flex-wrap: nowrap; }
+.arena-scroll { contain: inline-size; width: 100%; }
+/* A flex item will not shrink below its content's min-width by default, so a
+   table with a min-width inside a column widened the whole document and cut
+   the page off at the right edge on a phone. The table scrolls inside its own
+   box; the page never does. */
+.home-screen > * { min-width: 0; }
+.arena-scroll { max-width: 100%; }
 
 .home-intro h1 {
   font-family: 'Bricolage Grotesque', 'IBM Plex Sans Arabic', serif;
@@ -135,4 +160,84 @@
 
 @media (prefers-reduced-motion: reduce) {
   .ask-subject { transition: none; }
+}
+
+/* ── unusual volume, the complete list ─────────────────────────────────── */
+
+.home-volume .ask-counts { margin-top: 10px; }
+.home-volume > div > .q-cancel { margin-top: 10px; }
+
+/* ── the models, as a ledger ────────────────────────────────────────────── */
+
+.home-arena .ask-subjects { margin-top: 14px; }
+.arena-scroll { overflow-x: auto; margin-top: 14px; -webkit-overflow-scrolling: touch; }
+.arena-table {
+  width: 100%; border-collapse: collapse; font-size: 13.5px;
+  font-variant-numeric: tabular-nums; min-width: 420px;
+}
+.arena-table th, .arena-table td {
+  padding: 9px 10px; border-bottom: 1px solid var(--rule); text-align: start;
+  vertical-align: baseline;
+}
+.arena-table thead th {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace; font-size: 10px;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--faint); font-weight: 500;
+}
+.arena-table tbody th { font-weight: 500; }
+.arena-table .arena-num { text-align: end; font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
+/* Group rows are headings inside the table, not data: quiet, and never
+   coloured as though one group had won. */
+.arena-group th {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace; font-size: 10px;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--t2);
+  padding-top: 16px; border-bottom: 0;
+}
+
+/* ── the questions screen ───────────────────────────────────────────────── */
+
+.q-new, .q-save {
+  appearance: none; cursor: pointer; font: inherit; font-size: 14.5px; font-weight: 500;
+  padding: 11px 18px; border-radius: 12px; border: 1px solid var(--accent);
+  background: var(--accent); color: var(--onAccent, #fff); align-self: flex-start;
+}
+.q-save:disabled { opacity: .45; cursor: not-allowed; }
+.q-cancel {
+  appearance: none; cursor: pointer; font: inherit; font-size: 13.5px;
+  padding: 8px 14px; border-radius: 12px; border: 1px solid var(--rule);
+  background: var(--surface); color: var(--ink);
+}
+.q-cancel:hover { border-color: var(--accent); }
+.q-danger { color: var(--down); }
+.q-new:focus-visible, .q-save:focus-visible, .q-cancel:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.q-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+
+.q-editor {
+  border: 1px solid var(--rule); border-radius: 18px; padding: 18px 18px 16px;
+  background: var(--surface); display: flex; flex-direction: column; gap: 14px;
+}
+.q-field { display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; color: var(--t2); }
+.q-field input, .q-value, .q-select {
+  font: inherit; font-size: 14px; color: var(--ink); background: var(--sunk);
+  border: 1px solid var(--rule); border-radius: 10px; padding: 9px 11px; min-width: 0;
+}
+.q-field input:focus, .q-value:focus, .q-select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.q-match { display: flex; gap: 8px; flex-wrap: wrap; }
+.q-conds { display: flex; flex-direction: column; gap: 8px; }
+.q-cond { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr) minmax(0, 1fr) auto; gap: 8px; align-items: center; }
+.q-remove {
+  appearance: none; cursor: pointer; font: inherit; font-size: 18px; line-height: 1;
+  width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--rule);
+  background: var(--surface); color: var(--t2);
+}
+.q-add {
+  appearance: none; cursor: pointer; font: inherit; font-size: 13.5px; color: var(--accent);
+  background: none; border: 0; padding: 4px 0; align-self: flex-start;
+}
+.q-preview { border-top: 1px solid var(--rule); padding-top: 12px; }
+.q-conditions { display: block; font-size: 12.5px; color: var(--faint); line-height: 1.5; }
+.q-empty { margin-top: 12px; }
+
+@media (max-width: 560px) {
+  .q-cond { grid-template-columns: 1fr auto; }
+  .q-cond .q-select:first-child { grid-column: 1 / -1; }
 }
