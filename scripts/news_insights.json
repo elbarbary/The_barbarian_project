@@ -123,6 +123,10 @@
     "meaning": "Setting a medium-term operational revenue baseline outlines the company's internal operational capacity and contract execution schedule across transport utility projects.",
     "meaning_ar": "يحدد وضع مستهدف للإيرادات التشغيلية متوسطة الأجل الطاقة التشغيلية الداخلية للشركة والجدول الزمني لتنفيذ العقود ضمن مشروعات مرافق النقل."
   },
+  "30 سبتمبر.. نهايه حق توزيع 2.89 جنيه لسهم “مصر للاسواق الحره”": {
+    "meaning": "This marks the ex-dividend record date, establishing that shareholders holding the stock at the close of trading on September 30 are entitled to the cash distribution of 2.89 EGP per share, after which the stock trades ex-dividend and the corporate cash balance is adjusted accordingly.",
+    "meaning_ar": "يحدد هذا تاريخ نهاية الحق في التوزيع النقدي، حيث يستحق حاملو السهم بنهاية جلسة تداول 30 سبتمبر صرف كوبون بقيمة 2.89 جنيه للسهم، ليتداول السهم بعد ذلك بدون الحق مع تسوية الرصيد النقدي للشركة وفقاً لقيمة التوزيعات الإجمالية."
+  },
   "34 الف طن صادرات البضايع العامه بميناء الاسكندريه خلال 24 ساعه": {
     "meaning": "This daily operational throughput reflects current outbound general cargo handling capacity and logistics flow through the Port of Alexandria.",
     "meaning_ar": "يعكس حجم التداول اليومي هذا الطاقة التشغيلية الحالية لمناولة بضائع الصب العام وحركة التدفقات اللوجستية للصادرات عبر ميناء الإسكندرية."
@@ -2042,6 +2046,10 @@
   "الرقابه الماليه تصدر ضوابط جديده لتنظيم اقتراض الاوراق الماليه بغرض البيع في سوق راس المال": {
     "meaning": "Securities lending for the purpose of sale establishes a standardized regulatory framework that allows market participants to borrow listed shares from lenders to execute transactions under defined collateral, margin, and settlement requirements.",
     "meaning_ar": "يضع تنظيم اقتراض الأوراق المالية بغرض البيع إطاراً تنظيمياً يتيح للمتعاملين اقتراض أسهم مقيدة من المقرضين لتنفيذ المعاملات وفق متطلبات محددة للضمانات ونسب الهامش والتسوية."
+  },
+  "الرقابه الماليه تعتمد زياده راسمال “بنيان” الي 1.91 مليار جنيه": {
+    "meaning": "Regulatory approval allows the company to issue new shares and expand its legal equity base to EGP 1.91 billion, directly altering its balance sheet structure and funding capacity.",
+    "meaning_ar": "تتيح الموافقة الرقابية للشركة إصدار أسهم جديدة وزيادة قاعدة حقوق الملكية الدفترية إلى 1.91 مليار جنيه، مما يعدّل هيكل المركز المالي وقدرتها التمويلية."
   },
   "الرقابه الماليه تقر اجراءات بنيان بشان زياده راس المال لصالح نظام الاثابه": {
     "meaning": "The regulatory approval permits the company to issue new shares dedicated to an employee stock incentive plan, expanding the equity base and allocating equity compensation to staff under established governance frameworks.",
@@ -4652,6 +4660,10 @@
   "عاجل..البورصه المصريه تسجل قمه تاريخيه جديده فوق 56 الف نقطه": {
     "meaning": "A market index reaching a new historical peak reflects an increase in the aggregate market capitalization of its constituent listed companies, driven by trades executing at higher settlement prices across the exchange.",
     "meaning_ar": "يعكس تسجيل مؤشر السوق لقمة تاريخية جديدة ارتفاعاً في القيمة السوقية الإجمالية للشركات المدرجة المكونة له، نتيجة تنفيذ العمليات عند مستويات سعرية أعلى عبر منصة التداول."
+  },
+  "عبد العزيز مجدي رييسا لمجموعه امن المعلومات بالبنك الزراعي المصري": {
+    "meaning": "Executive leadership appointments in bank information security govern institutional cybersecurity frameworks, regulatory data protection compliance, and internal IT risk control operations.",
+    "meaning_ar": "ترتكز التعيينات القيادية في أمن المعلومات المصرفي على إدارة أطر الأمن السيبراني المؤسسي، والامتثال للضوابط الرقابية لحماية البيانات، وتفعيل سياسات إدارة المخاطر التقنية."
   },
   "عجز الموازنه الامريكيه يقترب من تريليوني دولار في 11 شهرا": {
     "meaning": "A widening sovereign budget deficit expands government debt issuance in international debt markets, which directly affects global benchmark yield curves and sovereign debt service costs across emerging markets.",
