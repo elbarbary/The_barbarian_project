@@ -177,15 +177,34 @@ def kronos(ticker: str, basis: str, bars: list[dict]) -> fc.Forecast | fc.Absten
     """
     import pandas as pd
 
-    window = bars[-LOOKBACK:]
+    # Only the sessions with a whole candle.
+    #
+    # This project's own price archive is DEEPER than the vendor's scan and
+    # also wider: it records thin sessions the vendor dropped, which have a
+    # close and a volume and no open, high or low. A candle model cannot read
+    # those, and refusing the company over them cost fifteen listings on the
+    # first night the archive was used — for sessions that were never in the
+    # vendor's series in the first place.
+    #
+    # So the incomplete sessions are skipped rather than the company. That is
+    # not a gap being filled: nothing is invented, and what is left is exactly
+    # the series the model would have been given before the archive existed.
+    # The forecast records how many were passed over, because a company whose
+    # ninety candles span half a year is a different question from one whose
+    # ninety are consecutive.
+    whole = [b for b in bars
+             if all(isinstance(b.get(f), (int, float))
+                    for f in ("open", "high", "low", "close"))]
+    window = whole[-LOOKBACK:]
     if len(window) < LOOKBACK:
         return fc.Abstention(ticker, basis, "kronos",
-                             f"{len(window)} bars, {LOOKBACK} needed")
-    for bar in window:
-        for field in ("open", "high", "low", "close"):
-            if not isinstance(bar.get(field), (int, float)):
-                return fc.Abstention(ticker, basis, "kronos",
-                                     f"a bar with no {field}")
+                             f"{len(window)} whole candles, {LOOKBACK} needed")
+    if window[-1].get("date") != bars[-1].get("date"):
+        # The basis session itself has no candle, so the newest thing the
+        # model could read is older than the session it is forecasting from.
+        return fc.Abstention(ticker, basis, "kronos",
+                             "no candle for the basis session")
+    skipped = len(bars) - len(whole)
     last = window[-1]["close"]
     if not last:
         return fc.Abstention(ticker, basis, "kronos", "a basis close of zero")
@@ -232,7 +251,9 @@ def kronos(ticker: str, basis: str, bars: list[dict]) -> fc.Forecast | fc.Absten
     if not returns:
         return fc.Abstention(ticker, basis, "kronos", "no path reached a horizon")
     return fc.Forecast(ticker, basis, "kronos", returns,
-                       note=f"{SAMPLES} sampled paths, median")
+                       note=f"{SAMPLES} sampled paths, median"
+                            + (f"; {skipped} sessions without a whole candle "
+                               "were passed over" if skipped else ""))
 
 
 @functools.lru_cache(maxsize=1)

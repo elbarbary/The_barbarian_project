@@ -1386,6 +1386,43 @@ class SelectionTest(unittest.TestCase):
         self.assertIsNotNone(forward["chosenReturn"])
 
 
+class WholeCandleTest(unittest.TestCase):
+    """A candle model skips the sessions it cannot read, not the company."""
+
+    def bars(self, n, *, incomplete=()):
+        out = []
+        for i in range(n):
+            bar = {"date": f"2026-{1 + i // 28:02d}-{1 + i % 28:02d}",
+                   "close": 100.0 + i, "volume": 1000.0}
+            if i not in incomplete:
+                bar.update(open=99.0 + i, high=101.0 + i, low=98.0 + i)
+            out.append(bar)
+        return out
+
+    def whole(self, bars):
+        return [b for b in bars
+                if all(isinstance(b.get(f), (int, float))
+                       for f in ("open", "high", "low", "close"))]
+
+    def test_thin_sessions_do_not_cost_the_company(self):
+        # The archive records sessions the vendor dropped: a close, a volume
+        # and no candle. Refusing the company over them cost fifteen listings
+        # on the first night the archive was used.
+        bars = self.bars(120, incomplete=(10, 40, 77))
+        self.assertEqual(len(self.whole(bars)), 117)
+        self.assertGreaterEqual(len(self.whole(bars)), 90)
+
+    def test_a_company_without_ninety_whole_candles_still_abstains(self):
+        bars = self.bars(120, incomplete=tuple(range(50)))
+        self.assertLess(len(self.whole(bars)), 90)
+
+    def test_the_basis_session_itself_must_have_a_candle(self):
+        # Otherwise the newest thing the model reads is older than the
+        # session it is forecasting from, which is a different question.
+        bars = self.bars(120, incomplete=(119,))
+        self.assertNotEqual(self.whole(bars)[-1]["date"], bars[-1]["date"])
+
+
 class CalendarTest(unittest.TestCase):
 
     def test_a_session_needs_a_majority_of_the_market(self):
