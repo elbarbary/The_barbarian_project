@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "data_version": "5e6c22382ae35045",
-  "generated_at": "2026-09-14T10:32:07+00:00",
+  "data_version": "daf0b87ea026de5e",
+  "generated_at": "2026-09-14T10:42:15+00:00",
   "market_date": "2026-09-14",
   "versions": {
     "market": 40493512,
@@ -15,7 +15,7 @@
     "connections": 57732614,
     "calendar": 3663645,
     "signals": 42279656,
-    "measures": 33549380,
+    "measures": 68766389,
     "review": 70402717,
     "sectors": 37419338,
     "investors": 5141957,

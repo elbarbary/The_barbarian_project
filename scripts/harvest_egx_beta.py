@@ -54,6 +54,7 @@ import time
 import urllib.error
 import urllib.request
 
+import fetch_relay
 import scrapling_python
 import transport
 
@@ -245,7 +246,14 @@ def _once(path: str, body: dict | None, *, timeout: int) -> dict:
     if body is not None:
         data = json.dumps(body).encode()
         headers["content-type"] = "application/json"
-    req = urllib.request.Request(BASE + path, data=data, headers=headers)
+    # Through this project's own relay when CI has one configured, direct on a
+    # laptop. The exchange resets the connection on a GitHub runner — "New
+    # filings: the host would not answer" in every scheduled build — so the
+    # archive has been fed by a scheduled Mac and by nothing else. A Cloudflare
+    # Worker is not in the refused ranges, and `beta.egx.com.eg` has been on
+    # the relay's allowlist since it was written; only the POST was missing,
+    # and the filing search is a POST.
+    req = fetch_relay.request(BASE + path, headers=headers, data=data)
     try:
         with urllib.request.urlopen(req, timeout=timeout) as response:
             raw = response.read()

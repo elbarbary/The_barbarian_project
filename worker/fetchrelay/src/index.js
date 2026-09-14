@@ -23,8 +23,16 @@
  *     docs/data-sources.md, and nothing else;
  *   * the caller must present the shared secret, which lives in a Worker
  *     secret and a GitHub Actions secret and nowhere in this repository;
- *   * it is GET only, it forwards no cookies and no credentials, and it caps
- *     what it will carry back.
+ *   * it carries GET and POST only, it forwards no cookies and no
+ *     credentials, and it caps both what it sends and what it carries back.
+ *
+ * POST is here for one source. The exchange's own filing archive is behind a
+ * JSON API whose search endpoint takes its window — `dateFrom`, `dateTo` — in
+ * a request body, so a GET-only relay could reach the market watch and not
+ * the filings. Without it the filing archive can only be harvested from a
+ * machine outside the cloud ranges, which is one laptop, which is not a
+ * pipeline. The method is still an allowlist of two: nothing here can PUT or
+ * DELETE against anything.
  *
  * A relay that could be pointed at anything would be a different program with
  * a different set of consequences.
@@ -37,6 +45,16 @@ const HOSTS = new Set(['api.investing.com', 'www.investing.com', 'beta.egx.com.e
 
 /** 8 MB. The largest thing the pipeline asks for is a few hundred kilobytes. */
 const MAX_BYTES = 8 * 1024 * 1024;
+
+/** 64 KB going out. Every body this pipeline sends is a few dozen bytes of
+ *  JSON naming a date window; a cap this size fits all of them with room and
+ *  keeps the relay from being a way to push anything substantial anywhere. */
+const MAX_SENT = 64 * 1024;
+
+/** The only methods this will use. Both are reads as far as the sources go —
+ *  the exchange's search endpoint is a POST because of its body, not because
+ *  it changes anything — and neither can be pointed at a write. */
+const METHODS = new Set(['GET', 'POST']);
 
 /** Headers a caller may set on the upstream request. Everything else is
  *  dropped: a relay that forwards arbitrary headers forwards credentials. */
@@ -74,7 +92,7 @@ export function target(rawUrl, allowed = HOSTS) {
 
 export default {
   async fetch(request, env) {
-    if (request.method !== 'GET') return json({ error: 'method' }, 405);
+    if (!METHODS.has(request.method)) return json({ error: 'method' }, 405);
     if (!env.RELAY_TOKEN) return json({ error: 'no token configured' }, 503);
 
     const offered = (request.headers.get('authorization') || '').replace(/^Bearer\s+/i, '');
@@ -91,9 +109,27 @@ export default {
       }
     }
 
+    // The caller's body, for the one endpoint that needs one. Read before the
+    // upstream call so an oversized body is refused here rather than streamed
+    // onward and then regretted.
+    let sent = null;
+    if (request.method === 'POST') {
+      sent = await request.arrayBuffer();
+      if (sent.byteLength > MAX_SENT) return json({ error: 'body too large' }, 413);
+    }
+
     let answer;
     try {
-      answer = await fetch(asked.url.toString(), { headers, redirect: 'follow' });
+      answer = await fetch(asked.url.toString(), {
+        method: request.method,
+        headers,
+        body: sent,
+        // `manual`, not `follow`: a 30x on a POST is re-sent by `follow` as a
+        // GET to wherever the upstream says, which is a request the caller
+        // never made to a URL the allowlist never saw. The status comes back
+        // and the caller decides.
+        redirect: request.method === 'POST' ? 'manual' : 'follow',
+      });
     } catch (error) {
       return json({ error: 'upstream', reason: String(error && error.message) }, 502);
     }
@@ -109,6 +145,7 @@ export default {
         'content-type': answer.headers.get('content-type') || 'application/octet-stream',
         'cache-control': 'no-store',
         'x-relay-host': asked.url.hostname,
+        'x-relay-method': request.method,
       },
     });
   },

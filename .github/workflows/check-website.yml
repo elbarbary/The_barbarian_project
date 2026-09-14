@@ -70,3 +70,27 @@ jobs:
       # bidi mark reaches a stylesheet.
       - name: Test the website
         run: node --test site-worker/test/*.test.mjs worker/quotes/test/*.test.mjs worker/fetchrelay/test/*.test.mjs worker/clock/test/*.test.mjs
+
+      # The relay, after its own tests and only on main.
+      #
+      # It was deployed by hand, which was survivable while it carried one
+      # source that merely went stale. It now carries the exchange's filing
+      # archive — the half that answers a laptop and resets this runner's
+      # connection — so a change to the relay that nobody remembers to deploy
+      # is a pipeline that quietly goes back to needing a Mac at nine in the
+      # morning. The whole point of the change is that it does not.
+      #
+      # Same token and account the site deploy already uses. Absent, this
+      # skips rather than fails: a missing secret is a deployment that has not
+      # been set up, not a broken test run.
+      - name: Deploy the relay
+        if: success() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 7262f969df05178d5542f19912e8f9ba
+        run: |
+          if [ -z "${CLOUDFLARE_API_TOKEN:-}" ]; then
+            echo 'no CLOUDFLARE_API_TOKEN secret — the relay is unchanged in production'
+            exit 0
+          fi
+          npx --yes wrangler@4 deploy --config worker/fetchrelay/wrangler.jsonc

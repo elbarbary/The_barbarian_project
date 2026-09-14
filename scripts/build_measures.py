@@ -102,7 +102,7 @@ COLUMNS: dict[str, str] = {
     "change_1": "Percentage change over 1 completed session.",
     "change_5": "Percentage change over 5 completed sessions.",
     "change_20": "Percentage change over 20 completed sessions.",
-    "near_limit_5": "Sessions in the last 5 whose close-to-close move reached the daily band.",
+    "big_move_5": "Sessions in the last 5 that moved at least 19.5% on the close.",
     "sessions_held": "How many completed sessions this company's archive holds.",
     # — what it has filed ——————————————————————————————————————————
     "last_filing_date": "Publication date of its newest filing.",
@@ -334,7 +334,7 @@ def row_for(ticker: str, session: dict, directory: dict,
                         ("change_1", ms.change_over(bars, 1)),
                         ("change_5", ms.change_over(bars, 5)),
                         ("change_20", ms.change_over(bars, 20)),
-                        ("near_limit_5", ms.near_limit_sessions(bars, 5))):
+                        ("big_move_5", ms.big_move_sessions(bars, 5))):
         if value is not None:
             row[name] = value
 

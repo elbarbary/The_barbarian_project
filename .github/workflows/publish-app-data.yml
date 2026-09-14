@@ -264,10 +264,14 @@ jobs:
           GOOGLE_VERTEX_ACCESS_TOKEN: ${{ steps.gcp.outputs.access_token }}
           GOOGLE_CLOUD_PROJECT: project-8bba98ed-6d90-45af-ab8
           # Investing.com refuses this runner's address and answers a laptop's,
-          # so every build has logged seven 403s and carried the world series
-          # forward unchanged. These route those requests through the project's
-          # own relay (worker/fetchrelay), which will fetch two declared hosts
-          # and nothing else. Unset — on a laptop — the code goes direct.
+          # and the exchange resets the connection outright. These route both
+          # through the project's own relay (worker/fetchrelay), which fetches
+          # three declared hosts and nothing else. Unset — on a laptop — the
+          # code goes direct.
+          #
+          # The exchange half is newer and is what takes the last scheduled
+          # laptop off the critical path: "New filings: the host would not
+          # answer" in every build, with the archive fed by one Mac at 09:00.
           ESTHMR_RELAY_URL: ${{ secrets.ESTHMR_RELAY_URL }}
           ESTHMR_RELAY_TOKEN: ${{ secrets.ESTHMR_RELAY_TOKEN }}
         run: python3 scripts/build_all.py --check
@@ -277,10 +281,14 @@ jobs:
           GOOGLE_VERTEX_ACCESS_TOKEN: ${{ steps.gcp.outputs.access_token }}
           GOOGLE_CLOUD_PROJECT: project-8bba98ed-6d90-45af-ab8
           # Investing.com refuses this runner's address and answers a laptop's,
-          # so every build has logged seven 403s and carried the world series
-          # forward unchanged. These route those requests through the project's
-          # own relay (worker/fetchrelay), which will fetch two declared hosts
-          # and nothing else. Unset — on a laptop — the code goes direct.
+          # and the exchange resets the connection outright. These route both
+          # through the project's own relay (worker/fetchrelay), which fetches
+          # three declared hosts and nothing else. Unset — on a laptop — the
+          # code goes direct.
+          #
+          # The exchange half is newer and is what takes the last scheduled
+          # laptop off the critical path: "New filings: the host would not
+          # answer" in every build, with the archive fed by one Mac at 09:00.
           ESTHMR_RELAY_URL: ${{ secrets.ESTHMR_RELAY_URL }}
           ESTHMR_RELAY_TOKEN: ${{ secrets.ESTHMR_RELAY_TOKEN }}
         # build_all distinguishes two failures, and so does this.

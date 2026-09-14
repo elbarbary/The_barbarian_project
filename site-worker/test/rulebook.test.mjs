@@ -27,17 +27,17 @@ const TABLE = {
   columns: {
     ticker: 'code', sector: 'sector', relative_volume_20: 'rv',
     revenue: 'revenue', change_5: 'five-session change',
-    sessions_since_filing: 'sessions since filing', near_limit_5: 'near-limit sessions',
+    sessions_since_filing: 'sessions since filing', big_move_5: 'near-limit sessions',
   },
   rows: [
     { ticker: 'AAA', sector: 'Banks', relative_volume_20: 4.2, revenue: 900,
-      change_5: 3.1, sessions_since_filing: 1, near_limit_5: 0 },
+      change_5: 3.1, sessions_since_filing: 1, big_move_5: 0 },
     { ticker: 'BBB', sector: 'Banks', relative_volume_20: 0.4, revenue: 120,
-      change_5: -1.2, sessions_since_filing: 40, near_limit_5: 0 },
+      change_5: -1.2, sessions_since_filing: 40, big_move_5: 0 },
     { ticker: 'CCC', sector: 'Textiles', relative_volume_20: 6.8,
-      change_5: 2.0, sessions_since_filing: 2, near_limit_5: 0 },
+      change_5: 2.0, sessions_since_filing: 2, big_move_5: 0 },
     { ticker: 'DDD', sector: 'Textiles', relative_volume_20: 9.1, revenue: 40,
-      change_5: 44.0, sessions_since_filing: 3, near_limit_5: 2 },
+      change_5: 44.0, sessions_since_filing: 3, big_move_5: 2 },
   ],
 };
 
@@ -84,6 +84,71 @@ test('a reader is told why a company they expected is not there', () => {
   assert.match(RB.explain(TABLE.rows[2], condition, true), /لا توجد قيمة/);
 });
 
+test('a condition nobody can answer is unknown, and unknown is not false', () => {
+  // The whole reason a condition has three answers. CCC has no revenue.
+  assert.equal(RB.answer(TABLE.rows[2], { column: 'revenue', op: '<', value: 500 }),
+               RB.UNKNOWN);
+  assert.equal(RB.answer(TABLE.rows[1], { column: 'revenue', op: '<', value: 500 }),
+               RB.TRUE);
+  assert.equal(RB.answer(TABLE.rows[0], { column: 'revenue', op: '<', value: 500 }),
+               RB.FALSE);
+  // `has` and `missing` always know, because absence is what they ask about.
+  assert.equal(RB.answer(TABLE.rows[2], { column: 'revenue', op: 'has' }), RB.FALSE);
+});
+
+test('negation cannot invent a match out of an absence', () => {
+  // This is where two-valued logic breaks. "NOT revenue at least 100" against
+  // a company with no revenue figure: if the inner condition were false, the
+  // negation is true, and the reader is handed every company whose statements
+  // have not been read as though they had small revenue.
+  assert.equal(RB.not(RB.UNKNOWN), RB.UNKNOWN);
+  const out = RB.run(TABLE, rule([
+    { column: 'revenue', op: '>=', value: 100, negate: true },
+  ]));
+  assert.deepEqual(out.results.map((r) => r.ticker), ['DDD']);
+  assert.equal(out.couldNotJudge, 1, 'CCC should be unjudgeable, not a match');
+});
+
+test('one failed condition settles an all, whatever is unknown beside it', () => {
+  // false AND unknown is false — the company genuinely failed, and saying
+  // "could not judge" would hide a real answer behind a missing figure.
+  assert.equal(RB.every([RB.FALSE, RB.UNKNOWN]), RB.FALSE);
+  assert.equal(RB.every([RB.TRUE, RB.UNKNOWN]), RB.UNKNOWN);
+  assert.equal(RB.some([RB.TRUE, RB.UNKNOWN]), RB.TRUE);
+  assert.equal(RB.some([RB.FALSE, RB.UNKNOWN]), RB.UNKNOWN);
+});
+
+test('the three counts add up to the market, every time', () => {
+  // A reader looking at seven matches is owed the difference between "265 did
+  // not meet your rule" and "11 could not be judged" — the second is a
+  // statement about this archive, not about those companies.
+  for (const conditions of [
+    [{ column: 'revenue', op: '>', value: 100 }],
+    [{ column: 'relative_volume_20', op: '>=', value: 3 },
+     { column: 'revenue', op: '<', value: 500 }],
+    [{ column: 'sector', op: '==', value: 'Banks' }],
+  ]) {
+    const out = RB.run(TABLE, rule(conditions));
+    assert.equal(out.total + out.didNotMatch + out.couldNotJudge, out.universe,
+                 JSON.stringify(conditions));
+  }
+});
+
+test('a weighted condition nobody can answer leaves the score unknowable', () => {
+  // Scoring it zero would rank a company with half its figures missing below
+  // one that genuinely failed the same conditions — a data gap presented as
+  // a worse company.
+  const weighted = rule([
+    { column: 'relative_volume_20', op: '>=', value: 3, weight: 3 },
+    { column: 'revenue', op: '>', value: 1000, weight: 2 },
+  ], { threshold: 3 });
+  const out = RB.run(TABLE, weighted);
+  assert.ok(!out.results.some((r) => r.ticker === 'CCC'),
+            'CCC has no revenue and cannot be scored');
+  assert.equal(out.couldNotJudge, 1);
+  assert.deepEqual(out.results.map((r) => r.ticker), ['AAA', 'DDD']);
+});
+
 test('the count is the whole set, and the universe is published with it', () => {
   // "7 companies" means nothing without "of 283". A screen showing the first
   // few without saying how many there were is the publisher choosing again.
@@ -103,7 +168,7 @@ test('a render limit reports itself instead of quietly truncating', () => {
 
 test('matches come back alphabetical unless the reader sorts them', () => {
   // Any publisher-chosen order is a ranking with the ranking column hidden.
-  const out = RB.run(TABLE, rule([{ column: 'near_limit_5', op: '>=', value: 0 }]));
+  const out = RB.run(TABLE, rule([{ column: 'big_move_5', op: '>=', value: 0 }]));
   assert.deepEqual(out.results.map((r) => r.ticker), ['AAA', 'BBB', 'CCC', 'DDD']);
 });
 
@@ -188,7 +253,7 @@ test('nothing in the engine knows which companies are interesting', () => {
   // the code may not.
   const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
   for (const column of ['relative_volume_20', 'change_5', 'sessions_since_filing',
-                        'revenue', 'market_cap', 'near_limit_5']) {
+                        'revenue', 'market_cap', 'big_move_5']) {
     assert.ok(!code.includes(column),
               `the engine names ${column} — it should know no columns`);
   }

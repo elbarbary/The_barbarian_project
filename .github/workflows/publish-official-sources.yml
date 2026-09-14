@@ -111,6 +111,19 @@ jobs:
           cd scripts && python3 -m unittest $modules
 
       - name: Collect from the official sources
+        env:
+          # The exchange resets this runner's connection, so every scheduled
+          # build has logged "the host would not answer" and the checkpoint
+          # archive has grown only from a laptop outside the cloud ranges.
+          # These route it through the project's own relay (worker/fetchrelay),
+          # which fetches three declared hosts and nothing else. Unset — on a
+          # laptop — the code goes direct, exactly as before.
+          #
+          # It matters more than one archive: these checkpoints are the only
+          # source of open, high and low this project has, and the reason that
+          # record starts on 28 August 2026 rather than years earlier.
+          ESTHMR_RELAY_URL: ${{ secrets.ESTHMR_RELAY_URL }}
+          ESTHMR_RELAY_TOKEN: ${{ secrets.ESTHMR_RELAY_TOKEN }}
         run: |
           # The regulator. Year-to-date every run, deliberately: the ledger
           # merges rather than replaces, and a full window is what makes it

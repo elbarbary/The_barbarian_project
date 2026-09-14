@@ -35,6 +35,25 @@
  *
  * `has` and `missing` are the two operators that ask about absence itself,
  * and they are the only way to reach it.
+ *
+ * WHICH IS WHY A CONDITION HAS THREE ANSWERS, NOT TWO
+ * ---------------------------------------------------
+ * `true`, `false`, and `unknown`. A comparison against a measurement the
+ * company does not have is `unknown` — and `unknown` is not `false`.
+ *
+ * The difference only shows up under negation, and then it is the whole
+ * thing. `NOT(revenue >= 100)` against a company with no revenue figure: if
+ * the inner condition were `false`, the negation would be `true` and the
+ * reader would be handed every company whose statements have not been read,
+ * as though they had small revenue. `unknown` negates to `unknown`, and the
+ * company is left out of the answer and counted where a reader can see it.
+ *
+ * `false AND unknown` is `false` — one failed condition settles an `all`
+ * whatever the others do. `true OR unknown` is `true`. Everything else with
+ * an `unknown` in it stays `unknown`.
+ *
+ * So a run reports three counts that add up to the market: how many matched,
+ * how many did not, and how many could not be judged at all.
  */
 
 /* Every comparison a condition may make. Kept as data so the editor, the
@@ -53,37 +72,64 @@ export const OPERATORS = {
 
 const finite = (v) => typeof v === 'number' && Number.isFinite(v);
 
-/** Whether one company's row satisfies one condition.
+export const TRUE = 'true';
+export const FALSE = 'false';
+export const UNKNOWN = 'unknown';
+
+/** What one condition says about one company: 'true', 'false' or 'unknown'.
  *
- * Returns a boolean, never null: a condition either held or it did not, and
- * "it could not be asked" is one of the ways it did not hold. The reason is
- * reported separately by `explain`, so a reader can see WHY a company they
- * expected is not in their results.
+ * `unknown` is the answer when the company has no figure for the column. It
+ * is deliberately not `false`, because `false` negates to `true` and would
+ * hand a reader every company whose statements have not been read.
  */
-export function matches(row, condition) {
+export function answer(row, condition) {
   const { column, op, value } = condition || {};
-  if (!column || !OPERATORS[op]) return false;
+  if (!column || !OPERATORS[op]) return UNKNOWN;
   const present = Object.prototype.hasOwnProperty.call(row || {}, column);
 
-  // The only two operators that can see an absence.
-  if (op === 'has') return present;
-  if (op === 'missing') return !present;
+  // The only two operators that can see an absence — and they always know.
+  if (op === 'has') return present ? TRUE : FALSE;
+  if (op === 'missing') return present ? FALSE : TRUE;
 
-  // Everything else: a measurement this company does not have cannot satisfy
-  // a comparison about it. Including `!=` — see the note at the top.
-  if (!present) return false;
+  if (!present) return UNKNOWN;
 
   const held = row[column];
+  const both = (test) => (finite(held) && finite(value) ? (test() ? TRUE : FALSE)
+                                                        : UNKNOWN);
   switch (op) {
-    case '>=': return finite(held) && finite(value) && held >= value;
-    case '<=': return finite(held) && finite(value) && held <= value;
-    case '>': return finite(held) && finite(value) && held > value;
-    case '<': return finite(held) && finite(value) && held < value;
-    case '==': return held === value;
-    case '!=': return held !== value;
-    case 'in': return Array.isArray(value) && value.includes(held);
-    default: return false;
+    case '>=': return both(() => held >= value);
+    case '<=': return both(() => held <= value);
+    case '>': return both(() => held > value);
+    case '<': return both(() => held < value);
+    case '==': return held === value ? TRUE : FALSE;
+    case '!=': return held !== value ? TRUE : FALSE;
+    case 'in': return Array.isArray(value) && value.includes(held) ? TRUE : FALSE;
+    default: return UNKNOWN;
   }
+}
+
+/** The two-valued view, for a caller that only wants the matches. */
+export function matches(row, condition) {
+  return answer(row, condition) === TRUE;
+}
+
+/** `all` over three-valued answers: one false settles it; otherwise unknown wins. */
+export function every(answers) {
+  if (answers.includes(FALSE)) return FALSE;
+  return answers.includes(UNKNOWN) ? UNKNOWN : TRUE;
+}
+
+/** `any` over three-valued answers: one true settles it; otherwise unknown wins. */
+export function some(answers) {
+  if (answers.includes(TRUE)) return TRUE;
+  return answers.includes(UNKNOWN) ? UNKNOWN : FALSE;
+}
+
+/** Negation that cannot invent a match out of an absence. */
+export function not(value) {
+  if (value === TRUE) return FALSE;
+  if (value === FALSE) return TRUE;
+  return UNKNOWN;
 }
 
 /** Why a condition came out the way it did, in the reader's own terms. */
@@ -112,26 +158,45 @@ export function explain(row, condition, ar = false) {
  */
 export function evaluate(row, rulebook) {
   const conditions = (rulebook && rulebook.conditions) || [];
-  if (!conditions.length) return { matched: false, met: [], failed: [], weight: 0 };
+  if (!conditions.length) {
+    return { verdict: FALSE, met: [], failed: [], unknown: [], weight: 0 };
+  }
 
-  const mode = rulebook.match === 'any' ? 'any' : 'all';
+  const answers = [];
   const met = [];
   const failed = [];
+  const unknown = [];
   let weight = 0;
+  let weighable = true;
   for (const condition of conditions) {
-    if (matches(row, condition)) {
+    let value = answer(row, condition);
+    if (condition.negate) value = not(value);
+    answers.push(value);
+    if (value === TRUE) {
       met.push(condition);
       weight += finite(condition.weight) ? condition.weight : 1;
-    } else {
+    } else if (value === FALSE) {
       failed.push(condition);
+    } else {
+      unknown.push(condition);
+      // A weighted condition nobody can answer leaves the total unknowable.
+      // Scoring it as zero would quietly rank a company with half its figures
+      // missing below one that genuinely failed the same conditions.
+      if (finite(condition.weight)) weighable = false;
     }
   }
-  let matched = mode === 'any' ? met.length > 0 : failed.length === 0;
+
+  const mode = rulebook.match === 'any' ? 'any' : 'all';
+  let verdict = mode === 'any' ? some(answers) : every(answers);
+
   // A reader may also ask for "at least N of these", which is neither all nor
-  // any. The threshold counts CONDITIONS met, or sums their weights when the
-  // reader has given weights — their arithmetic, not ours.
-  if (finite(rulebook.threshold)) matched = weight >= rulebook.threshold;
-  return { matched, met, failed, weight };
+  // any. The threshold sums the weights the reader gave — their arithmetic,
+  // not ours — and is unknowable when a weighted condition could not be asked.
+  if (finite(rulebook.threshold)) {
+    verdict = !weighable ? UNKNOWN
+      : (weight >= rulebook.threshold ? TRUE : FALSE);
+  }
+  return { verdict, met, failed, unknown, weight: weighable ? weight : null };
 }
 
 /** Run a rulebook over the whole table.
@@ -148,9 +213,13 @@ export function evaluate(row, rulebook) {
 export function run(table, rulebook, { limit = 0 } = {}) {
   const rows = (table && table.rows) || [];
   const results = [];
+  let didNotMatch = 0;
+  let couldNotJudge = 0;
   for (const row of rows) {
     const outcome = evaluate(row, rulebook);
-    if (outcome.matched) results.push({ ...outcome, row, ticker: row.ticker });
+    if (outcome.verdict === TRUE) results.push({ ...outcome, row, ticker: row.ticker });
+    else if (outcome.verdict === FALSE) didNotMatch += 1;
+    else couldNotJudge += 1;
   }
 
   // Alphabetical unless the reader asked otherwise. Any publisher-chosen
@@ -172,13 +241,20 @@ export function run(table, rulebook, { limit = 0 } = {}) {
       return x === y ? a.ticker.localeCompare(b.ticker) : (x < y ? -direction : direction);
     });
   } else if (rulebook && finite(rulebook.threshold)) {
-    results.sort((a, b) => (b.weight - a.weight) || a.ticker.localeCompare(b.ticker));
+    results.sort((a, b) => ((b.weight || 0) - (a.weight || 0))
+                           || a.ticker.localeCompare(b.ticker));
   } else {
     results.sort((a, b) => a.ticker.localeCompare(b.ticker));
   }
 
+  // The three add up to the market, always. A reader looking at seven matches
+  // is owed the difference between "265 did not meet your rule" and "11 could
+  // not be judged because the figures are not there" — the second is a
+  // statement about this archive, not about those companies.
   return {
     total: results.length,
+    didNotMatch,
+    couldNotJudge,
     universe: rows.length,
     shown: limit > 0 ? Math.min(limit, results.length) : results.length,
     results: limit > 0 ? results.slice(0, limit) : results,

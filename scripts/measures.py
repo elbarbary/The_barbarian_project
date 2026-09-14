@@ -48,12 +48,20 @@ import statistics
 # against "the median of the previous 20 sessions".
 RV_WINDOW = 20
 
-# A close-to-close move this large is at or beyond the exchange's daily band
-# for an ordinary listing. Close-only data cannot prove a session LOCKED at
-# the limit — that needs the high and the low, which this archive has held
-# only since 28 August 2026 — so the column is named for what it measures:
-# a move that reached the band, not a session that sat on it.
-NEAR_LIMIT = 0.195
+# The size of close-to-close move this counts, as a fraction.
+#
+# 19.5% is chosen because the ordinary EGX daily band is 20%, so a move this
+# large has very likely spent most of a session's allowance — which is what
+# the playbook's anti-chasing gate is about.
+#
+# But it is published as "moves of at least 19.5%" and NOT as a limit-up
+# count, because two different things would have to be true for that and
+# neither is: the band is not 20% for every security (newly listed shares and
+# some instruments trade under different mechanics) and it has not been 20%
+# throughout the archive's twenty-five years. A column named for the limit
+# would be asserting a rule this project has not recorded per security and
+# per date. A column named for the move is asserting arithmetic.
+BIG_MOVE = 0.195
 
 
 def _closes(bars: list[dict]) -> list[dict]:
@@ -159,24 +167,24 @@ def change_over(bars: list[dict], sessions: int) -> float | None:
     return round((usable[-1]["close"] / then - 1) * 100, 3)
 
 
-def near_limit_sessions(bars: list[dict], window: int = 5) -> int | None:
-    """Completed sessions in the window whose close-to-close move reached the band.
+def big_move_sessions(bars: list[dict], window: int = 5) -> int | None:
+    """Completed sessions in the window that moved at least `BIG_MOVE` on the close.
 
-    The playbook's hardest anti-chasing gate — "two or more completed
-    limit-ups usually mean the discovery is late" — needs this count.
+    Serves the playbook's hardest anti-chasing gate — "two or more completed
+    limit-ups usually mean the discovery is late" — without claiming to be it.
 
-    It is deliberately NOT called `limit_ups`. A limit-up is a session that
-    traded at the band and stopped, which needs the high, the low and that
-    day's applicable band. This archive holds closes. A 19.6% close-to-close
-    move is strong evidence of one and is not the same claim, and the column
-    name has to carry the difference or somebody will later read it as proof.
+    A limit-up is a session that traded at the band and stopped. Establishing
+    one needs the high, the low, and the band applicable to THAT security on
+    THAT date. This archive holds closes, the band is not 20% for every
+    listing, and it has not been 20% for twenty-five years. So the count is
+    named for the move it measures and a reader's rule tests the move.
     """
     usable = _closes(bars)
     if len(usable) < window + 1:
         return None
     hits = 0
     for before, after in zip(usable[-(window + 1):-1], usable[-window:]):
-        if before["close"] and abs(after["close"] / before["close"] - 1) >= NEAR_LIMIT:
+        if before["close"] and abs(after["close"] / before["close"] - 1) >= BIG_MOVE:
             hits += 1
     return hits
 

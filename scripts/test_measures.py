@@ -109,12 +109,12 @@ class ChangeTest(unittest.TestCase):
         self.assertIsNone(m.change_over(rows, 1))
 
 
-class NearLimitTest(unittest.TestCase):
-    def test_it_counts_moves_that_reached_the_band(self):
+class BigMoveTest(unittest.TestCase):
+    def test_it_counts_moves_at_or_beyond_the_threshold(self):
         rows = bars(("2026-09-01", 100.0, 10), ("2026-09-02", 120.0, 10),
                     ("2026-09-03", 144.0, 10), ("2026-09-06", 145.0, 10),
                     ("2026-09-07", 146.0, 10), ("2026-09-08", 147.0, 10))
-        self.assertEqual(m.near_limit_sessions(rows, window=5), 2)
+        self.assertEqual(m.big_move_sessions(rows, window=5), 2)
 
     def test_a_fall_to_the_band_counts_as_much_as_a_rise(self):
         # The gate is about how much of the move is already spent, in either
@@ -122,17 +122,18 @@ class NearLimitTest(unittest.TestCase):
         rows = bars(("2026-09-01", 100.0, 10), ("2026-09-02", 80.0, 10),
                     ("2026-09-03", 80.5, 10), ("2026-09-06", 81.0, 10),
                     ("2026-09-07", 81.5, 10), ("2026-09-08", 82.0, 10))
-        self.assertEqual(m.near_limit_sessions(rows, window=5), 1)
+        self.assertEqual(m.big_move_sessions(rows, window=5), 1)
 
-    def test_it_is_not_called_a_limit_up(self):
-        # Close-only data cannot prove a session sat at the band — that needs
-        # the high, the low and the day's applicable limit. This archive held
-        # closes for 25 years and highs for twelve sessions. The name has to
-        # carry the difference or it will be read as proof, so there is no
-        # alias that says the stronger thing.
-        self.assertTrue(hasattr(m, "near_limit_sessions"))
-        self.assertFalse(hasattr(m, "limit_ups"))
-        self.assertFalse(hasattr(m, "limit_up_sessions"))
+    def test_nothing_here_claims_to_know_the_daily_band(self):
+        # Establishing a limit-up needs the high, the low, and the band
+        # applicable to THAT security on THAT date. This archive holds closes;
+        # the band is not 20% for every listing and has not been 20% for
+        # twenty-five years. So no function says the stronger thing under any
+        # name — including the one this column was first given, which asserted
+        # a band it could not know.
+        self.assertTrue(hasattr(m, "big_move_sessions"))
+        for claim in ("limit_ups", "limit_up_sessions", "near_limit_sessions"):
+            self.assertFalse(hasattr(m, claim), claim)
 
 
 class SessionsSinceTest(unittest.TestCase):
@@ -192,7 +193,7 @@ class AbsenceTest(unittest.TestCase):
         # then somebody sorts by it.
         empty: list[dict] = []
         for value in (m.rv20(empty), m.traded_value(empty), m.change_over(empty, 1),
-                      m.near_limit_sessions(empty), m.median_volume(empty),
+                      m.big_move_sessions(empty), m.median_volume(empty),
                       m.as_of(empty)):
             self.assertIsNone(value)
 
@@ -201,7 +202,7 @@ class AbsenceTest(unittest.TestCase):
         rows = flat(20, volume=100) + bars(("2026-09-01", 10.0, 0))
         self.assertEqual(m.rv20(rows), 0.0)
         self.assertEqual(m.traded_value(rows), 0.0)
-        self.assertEqual(m.near_limit_sessions(flat(6)), 0)
+        self.assertEqual(m.big_move_sessions(flat(6)), 0)
 
     def test_a_bar_with_no_close_is_a_session_nobody_collected(self):
         # Not a session at zero. Reading a gap in the archive as a price of
@@ -214,7 +215,7 @@ class AbsenceTest(unittest.TestCase):
         # Two usable closes, so a one-session change is 101 against 100 —
         # the collected sessions either side of the hole, not through it.
         self.assertAlmostEqual(m.change_over(gappy, 1), 1.0, places=3)
-        self.assertEqual(m.near_limit_sessions(gappy, window=1), 0)
+        self.assertEqual(m.big_move_sessions(gappy, window=1), 0)
 
     def test_the_row_carries_the_date_of_its_newest_bar(self):
         # The archive is not uniformly fresh — 227 companies to the 13th, 40

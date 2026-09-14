@@ -169,7 +169,7 @@ class AbsenceTest(unittest.TestCase):
             self.skipTest("no measures.json built yet")
         never_negative = ("volume", "traded_value", "median_volume_20",
                           "median_traded_value_20", "relative_volume_20",
-                          "near_limit_5", "sessions_held", "filings_30d",
+                          "big_move_5", "sessions_held", "filings_30d",
                           "sessions_since_filing", "market_cap", "close",
                           "first_in_years_gap_days", "quiet_days")
         for row in doc["rows"]:

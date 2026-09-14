@@ -11,10 +11,11 @@ const { target } = await import('../src/index.js');
 
 const TOKEN = 'a-test-token-of-some-length';
 const env = { RELAY_TOKEN: TOKEN };
-const ask = (u, { token = TOKEN, method = 'GET', headers = {} } = {}) =>
+const ask = (u, { token = TOKEN, method = 'GET', headers = {}, body } = {}) =>
   relay.fetch(new Request(
     `https://barbarian-fetch.workers.dev/?u=${encodeURIComponent(u)}`,
-    { method, headers: { authorization: `Bearer ${token}`, ...headers } },
+    { method, headers: { authorization: `Bearer ${token}`, ...headers },
+      ...(body === undefined ? {} : { body }) },
   ), env);
 
 test('only the two hosts the pipeline actually reads', () => {
@@ -43,13 +44,78 @@ test('without the secret it fetches nothing', async () => {
   assert.equal(answer.status, 503);
 });
 
-test('GET only, and a refused host never reaches the network', async () => {
+test('reads only, and a refused host never reaches the network', async () => {
+  // GET and POST, and nothing else. POST is here for one endpoint — the
+  // exchange's filing search takes its date window in a body — and the method
+  // list is still an allowlist, so nothing can PUT or DELETE anywhere.
   const calls = [];
   globalThis.fetch = async (...args) => { calls.push(args); return new Response('nope'); };
   try {
-    assert.equal((await ask('https://api.investing.com/x', { method: 'POST' })).status, 405);
+    for (const method of ['PUT', 'DELETE', 'PATCH', 'OPTIONS']) {
+      assert.equal((await ask('https://api.investing.com/x', { method })).status, 405, method);
+    }
     assert.equal((await ask('https://example.com/x')).status, 400);
     assert.equal(calls.length, 0, 'a refused request still went out');
+  } finally { delete globalThis.fetch; }
+});
+
+test('a POST carries its body to the upstream, and the method with it', async () => {
+  // The exchange's filing archive is only reachable this way. Without it the
+  // filings can be harvested from a laptop and nowhere else, which is not a
+  // pipeline.
+  let sent = null;
+  globalThis.fetch = async (url, init) => {
+    sent = { url, method: init.method, body: new TextDecoder().decode(init.body) };
+    return new Response('{"items":[]}', { status: 200 });
+  };
+  try {
+    const answer = await ask('https://beta.egx.com.eg/api/bff/egx/news-search', {
+      method: 'POST',
+      headers: { 'x-relay-content-type': 'application/json' },
+      body: JSON.stringify({ dateFrom: '2026-09-01', dateTo: '2026-09-30' }),
+    });
+    assert.equal(answer.status, 200);
+    assert.equal(sent.method, 'POST');
+    assert.equal(sent.url, 'https://beta.egx.com.eg/api/bff/egx/news-search');
+    assert.deepEqual(JSON.parse(sent.body), { dateFrom: '2026-09-01', dateTo: '2026-09-30' });
+  } finally { delete globalThis.fetch; }
+});
+
+test('an oversized body is refused here rather than pushed onward', async () => {
+  const calls = [];
+  globalThis.fetch = async (...args) => { calls.push(args); return new Response('ok'); };
+  try {
+    const answer = await ask('https://beta.egx.com.eg/api/bff/egx/news-search', {
+      method: 'POST', body: 'x'.repeat(64 * 1024 + 1),
+    });
+    assert.equal(answer.status, 413);
+    assert.equal(calls.length, 0, 'an oversized body still reached the upstream');
+  } finally { delete globalThis.fetch; }
+});
+
+test('a POST does not follow a redirect off the allowlist', async () => {
+  // `follow` re-sends a 30x on a POST as a GET to wherever the upstream
+  // points — a request the caller never made, to a URL the allowlist never
+  // saw. The status comes back instead and the caller decides.
+  let init = null;
+  globalThis.fetch = async (url, options) => { init = options; return new Response('', { status: 302 }); };
+  try {
+    const answer = await ask('https://beta.egx.com.eg/api/bff/egx/news-search',
+                             { method: 'POST', body: '{}' });
+    assert.equal(init.redirect, 'manual');
+    assert.equal(answer.status, 302, 'the redirect was hidden from the caller');
+  } finally { delete globalThis.fetch; }
+});
+
+test('a POST still needs the secret and still needs an allowed host', async () => {
+  const calls = [];
+  globalThis.fetch = async (...args) => { calls.push(args); return new Response('nope'); };
+  try {
+    assert.equal((await ask('https://beta.egx.com.eg/x',
+                            { method: 'POST', token: 'wrong', body: '{}' })).status, 401);
+    assert.equal((await ask('https://example.com/x',
+                            { method: 'POST', body: '{}' })).status, 400);
+    assert.equal(calls.length, 0);
   } finally { delete globalThis.fetch; }
 });
 

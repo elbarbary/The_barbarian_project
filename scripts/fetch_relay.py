@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One HTTP GET, through this project's own relay when there is one.
+"""One HTTP request, through this project's own relay when there is one.
 
 Two of the pipeline's sources answer a GitHub Actions runner with 403 and a
 laptop with 200. Investing.com is the one that costs something: `rate_history`
@@ -70,12 +70,20 @@ def relay() -> tuple[str, str] | None:
     return (url, token) if url and token else None
 
 
-def request(url: str, headers: dict | None = None) -> urllib.request.Request:
-    """The Request to send: direct, or wrapped for the relay."""
+def request(url: str, headers: dict | None = None,
+            data: bytes | None = None) -> urllib.request.Request:
+    """The Request to send: direct, or wrapped for the relay.
+
+    `data` makes it a POST, which one source needs. The exchange's filing
+    search takes its window — dateFrom, dateTo — in a body, so a GET-only
+    relay reaches the market watch and not the filings; and the filings are
+    the half that cannot be harvested from a cloud address at all, so without
+    this the archive is only reachable from one laptop.
+    """
     headers = dict(headers or {})
     configured = relay()
     if not configured or not blocked(url):
-        return urllib.request.Request(url, headers=headers)
+        return urllib.request.Request(url, headers=headers, data=data)
     endpoint, token = configured
     wrapped = {RELAY_PREFIX + k.lower(): v for k, v in headers.items()}
     wrapped["authorization"] = f"Bearer {token}"
@@ -84,6 +92,7 @@ def request(url: str, headers: dict | None = None) -> urllib.request.Request:
     return urllib.request.Request(
         f"{endpoint}{joiner}u={urllib.parse.quote(url, safe='')}",
         headers=wrapped,
+        data=data,
     )
 
 
@@ -92,3 +101,10 @@ def get(url: str, headers: dict | None = None, *, timeout: int = 60) -> bytes:
     already has its own idea of what a failure means and how long to wait."""
     with urllib.request.urlopen(request(url, headers), timeout=timeout) as response:
         return response.read()
+
+
+def post(url: str, body: bytes, headers: dict | None = None, *,
+         timeout: int = 60) -> bytes:
+    """The same, with a body. Same relay, same allowlist, same secret."""
+    return urllib.request.urlopen(
+        request(url, headers, data=body), timeout=timeout).read()
