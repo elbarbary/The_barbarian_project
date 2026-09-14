@@ -23,9 +23,26 @@ baselines. `scripts/lab/` writes to `data-source/lab/`, which is not served.
 
 THE BASIS SESSION
 -----------------
-Always a COMPLETED session. This runs after the close, and the bars it reads
-are the ones the exchange has finished with. A forecast made from a partial
-session is a forecast that has already seen some of its own answer.
+Always a COMPLETED session, and always the one that has just finished.
+
+That took three attempts to get right, and the thing that was wrong was never
+the hour. The VENDOR does not publish a completed EGX daily bar for hours: a
+scan taken at 15:14, forty-four minutes after the 14:30 close, still had the
+previous session as the newest bar for every company on the exchange. So a
+run "after the close" forecast from YESTERDAY, which made its one-session
+horizon a price the market had already printed.
+
+The exchange publishes its own. `panel.py` takes today's open, high, low,
+close and volume from the EGX market-watch — settled by 15:35 Cairo on the
+14th, with the exchange's own status endpoint saying "Closed" rather than a
+clock being asked to guess — and the deep history from this project's price
+archive, which is years rather than months. The vendor's scan supplies the
+open, high and low the archive lacks, and only where the two agree that they
+are the same series at all.
+
+`commitment_timing` is the backstop: if today's session cannot be had, the
+basis falls back to yesterday's, and a run in that position after the close
+is refused rather than written with a caveat.
 """
 
 from __future__ import annotations
@@ -44,6 +61,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import commit as cm
 import forecast as fc
+import panel as pricing
 import timestamp as ts
 
 REPO = pathlib.Path(__file__).resolve().parent.parent.parent
@@ -119,21 +137,25 @@ def read_scan(path: pathlib.Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def universe(scan: dict) -> list[dict]:
-    """Every company with enough completed history, alphabetically.
+def universe(scan: dict, *, today=None,
+             root: pathlib.Path = pricing.DEEP) -> tuple[list[dict], dict]:
+    """Every company with enough completed history, and where it came from.
+
+    The history is `panel.py`'s: this project's own archive where it agrees
+    with the vendor's scan, the scan where it does not, and the session that
+    has just closed taken from the exchange itself. That last part is why the
+    lab can run after the close at all — the vendor does not publish a
+    completed EGX daily bar for hours, and a run that cannot see today's
+    session forecasts from yesterday's.
 
     Alphabetical rather than by anything else, so that a run truncated by a
     timeout loses a random slice of the market rather than its quiet end.
     """
-    rows = []
-    for record in scan.get("records") or []:
-        ticker = record.get("ticker")
-        bars = record.get("recentSplitAdjustedBars") or []
-        if ticker and len(bars) >= MIN_BARS:
-            rows.append({"ticker": ticker,
-                         "bars": sorted(bars, key=lambda b: b.get("date", ""))})
+    built = pricing.build(scan, today=today, root=root)
+    rows = [{"ticker": ticker, "bars": bars}
+            for ticker, bars in built["panel"].items() if len(bars) >= MIN_BARS]
     rows.sort(key=lambda r: r["ticker"])
-    return rows
+    return rows, built["sources"]
 
 
 def basis_session(rows: list[dict]) -> str | None:
@@ -211,8 +233,9 @@ def as_record(f: fc.Forecast) -> dict:
     return out
 
 
-def build(scan: dict, models: dict, ran_at: str) -> dict:
-    rows = universe(scan)
+def build(scan: dict, models: dict, ran_at: str, *, today=None,
+          root: pathlib.Path = pricing.DEEP) -> dict:
+    rows, sources = universe(scan, today=today, root=root)
     basis = basis_session(rows)
     if not basis:
         raise SystemExit("lab: no completed session a majority of the market shares")
@@ -227,6 +250,11 @@ def build(scan: dict, models: dict, ran_at: str) -> dict:
         "minimumBars": MIN_BARS,
         "horizons": list(fc.HORIZONS),
         # Said in the file because the file outlives the intention.
+        # Where every price in this run came from, company by company. The
+        # first question anybody auditing a forecast asks is "which series
+        # was this made from", and it is the hardest one to answer after the
+        # fact — so it is answered in the run itself.
+        "prices": sources,
         "what": "Private forecasts, frozen before the outcome existed, for "
                 "measuring the models against each other and against the "
                 "baselines. Not published, not advice, not a selection: every "
@@ -275,6 +303,9 @@ def main(argv=None) -> int:
     parser.add_argument("--check", action="store_true", help="write nothing")
     parser.add_argument("--no-timestamp", action="store_true",
                         help="skip the timestamping authority")
+    parser.add_argument("--no-today", action="store_true",
+                        help="do not ask the exchange for the session that "
+                             "has just closed")
     args = parser.parse_args(argv)
 
     chosen: dict = {}
@@ -298,9 +329,29 @@ def main(argv=None) -> int:
     if not chosen:
         raise SystemExit(f"lab: no models selected from '{args.models}'")
 
+    # The session that has just closed, from the exchange rather than the
+    # vendor. This is the piece that lets the lab run after the close: the
+    # vendor's daily bar for today does not exist for hours, and without this
+    # the newest session anything holds is yesterday's.
+    #
+    # Best-effort on purpose. If the exchange does not answer, or says the
+    # market is still open, the run proceeds on the history alone — and the
+    # timing guard below refuses it if that leaves a basis whose first
+    # horizon has already been priced.
+    todays = {}
+    if not args.no_today:
+        try:
+            watch, status = pricing.fetch_today()
+            when, todays = pricing.todays_bars(watch, status)
+            print(f"   the exchange calls {when or 'no session'} closed"
+                  + (f", {len(todays)} companies priced" if todays else ""))
+        except Exception as error:  # noqa: BLE001 — any refusal, same answer
+            print(f"   the exchange did not answer ({type(error).__name__}) — "
+                  "running on the history alone")
+
     ran_at = (datetime.datetime.now(datetime.timezone.utc)
               .isoformat(timespec="seconds").replace("+00:00", "Z"))
-    document = build(read_scan(args.scan), chosen, ran_at)
+    document = build(read_scan(args.scan), chosen, ran_at, today=todays)
     document["fingerprint"] = fingerprint(document)
 
     basis = document["basisSession"]
@@ -331,9 +382,13 @@ def main(argv=None) -> int:
               "and is not forecast again")
         return 0
 
+    prices = document["prices"]
     print(f"   basis {basis}  ·  {document['universeSize']} companies  ·  "
           f"{len(chosen)} models  ·  "
           f"{'before the open' if timing['beforeOpen'] else 'session running'}")
+    print(f"   prices: {prices['archiveCount']} from this project's archive, "
+          f"{prices['scanOnlyCount']} from the vendor alone, "
+          f"{prices['extendedCount']} carrying today's close from the exchange")
     print(f"   {sum(b['seconds'] for b in document['models'].values()):.0f}s "
           f"across {len(document['models'])} models")
     print(f"   fingerprint {document['fingerprint'][:16]}")

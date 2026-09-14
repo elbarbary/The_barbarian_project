@@ -57,6 +57,7 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import forecast as fc
+import panel as pricing
 import run as lab
 import score as sc
 
@@ -66,30 +67,36 @@ PRIVATE = RUNS / "evaluation.json"
 PUBLIC = REPO / "public" / "data" / "v1" / "research" / "leaderboard.json"
 
 
-def bar_panel(scans: list[pathlib.Path]) -> dict[str, dict[str, dict]]:
-    """Every bar every scan saw, by ticker and date.
+def bar_panel(scans: list[pathlib.Path], *, today=None,
+              root: pathlib.Path = pricing.DEEP) -> dict[str, dict[str, dict]]:
+    """Every bar this project holds, by ticker and date.
 
-    Scans overlap — each carries 120 sessions — so several together
-    reconstruct a panel longer than any one of them. A later scan wins a
-    collision: a bar is split-adjusted when it is read, and the newest
-    reading of a session is the one adjusted for every corporate action
-    since. Scoring an August forecast against an unadjusted August close
-    would invent a 50% loss on the day a company split two for one.
+    Built by `panel.py` from the deep archive where it agrees with the scan
+    and from the scan alone where it does not — the same series the forecast
+    was made from, which is the only series it may honestly be scored
+    against.
+
+    The depth is the point. A scan reaches back six months; the archive
+    reaches back years. Without it a night older than the newest scan's
+    oldest bar stops being scorable, and the leaderboard would have gone on
+    saying "8 dates" while the 8 slid quietly forward.
+
+    Several scans still merge, later winning a collision: a bar is
+    split-adjusted when it is read, and the newest reading of a session is
+    the one adjusted for every corporate action since.
     """
-    panel: dict[str, dict[str, dict]] = collections.defaultdict(dict)
+    merged: dict[str, dict[str, dict]] = collections.defaultdict(dict)
     for path in sorted(scans):
         try:
             scan = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             continue
-        for record in scan.get("records") or []:
-            ticker = record.get("ticker")
-            if not ticker:
-                continue
-            for bar in record.get("recentSplitAdjustedBars") or []:
+        built = pricing.build(scan, today=today, root=root)
+        for ticker, bars in built["panel"].items():
+            for bar in bars:
                 if bar.get("date") and isinstance(bar.get("close"), (int, float)):
-                    panel[ticker][bar["date"]] = bar
-    return panel
+                    merged[ticker][bar["date"]] = bar
+    return merged
 
 
 def bars_of(panel: dict, ticker: str) -> list[dict]:

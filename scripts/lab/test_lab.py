@@ -30,6 +30,7 @@ import evaluate as ev  # noqa: E402
 import forecast as fc  # noqa: E402
 import reveal as rv  # noqa: E402
 import run  # noqa: E402
+import panel as pricing  # noqa: E402
 import score as sc  # noqa: E402
 import timestamp as ts  # noqa: E402
 import verify as vf  # noqa: E402
@@ -236,25 +237,25 @@ class RunTest(unittest.TestCase):
         # run to one company's Thursday.
         behind = rising(95)
         ahead = rising(100)
-        rows = run.universe(self.scan(("AAA", ahead), ("BBB", behind),
+        rows, _ = run.universe(self.scan(("AAA", ahead), ("BBB", behind),
                                       ("CCC", behind)))
         self.assertEqual(run.basis_session(rows), behind[-1]["date"])
 
     def test_no_basis_at_all_rather_than_a_guess(self):
         # Three companies, three different last sessions: nothing is shared
         # by a majority, so there is no completed session to forecast from.
-        rows = run.universe(self.scan(("AAA", rising(100)), ("BBB", rising(99)),
+        rows, _ = run.universe(self.scan(("AAA", rising(100)), ("BBB", rising(99)),
                                       ("CCC", rising(98))))
         self.assertIsNone(run.basis_session(rows))
 
     def test_a_company_without_enough_record_is_left_out_of_the_universe(self):
-        rows = run.universe(self.scan(("AAA", rising(100)), ("BBB", rising(10))))
+        rows, _ = run.universe(self.scan(("AAA", rising(100)), ("BBB", rising(10))))
         self.assertEqual([r["ticker"] for r in rows], ["AAA"])
 
     def test_the_universe_is_alphabetical(self):
         # So a run cut short by a timeout loses a random slice of the market
         # rather than its quiet end.
-        rows = run.universe(self.scan(("ZZZ", rising(100)), ("AAA", rising(100)),
+        rows, _ = run.universe(self.scan(("ZZZ", rising(100)), ("AAA", rising(100)),
                                       ("MMM", rising(100))))
         self.assertEqual([r["ticker"] for r in rows], ["AAA", "MMM", "ZZZ"])
 
@@ -403,10 +404,12 @@ class SettledTest(unittest.TestCase):
             run.now_in_cairo = lambda: datetime.datetime(
                 2026, 5, 25, 8, 0, tzinfo=run.CAIRO)
             try:
-                run.main([str(path), "--models", "drift", "--no-timestamp"])
+                run.main([str(path), "--models", "drift", "--no-timestamp",
+                          "--no-today"])
                 written = out / f"run-{days[-1]}.json"
                 first = written.read_text()
-                run.main([str(path), "--models", "momentum20", "--no-timestamp"])
+                run.main([str(path), "--models", "momentum20", "--no-timestamp",
+                          "--no-today"])
                 self.assertEqual(written.read_text(), first)
                 self.assertEqual(list(json.loads(first)["models"]), ["drift"])
             finally:
@@ -440,7 +443,8 @@ class SettledTest(unittest.TestCase):
             try:
                 with contextlib.redirect_stdout(said):
                     code = run.main([str(path), "--models", "drift",
-                                     "--no-timestamp", "--check"])
+                                     "--no-timestamp", "--no-today",
+                                     "--check"])
                 self.assertEqual(code, 0)
                 self.assertIn("NOT A FORECAST", said.getvalue())
                 self.assertEqual(list(out.iterdir()), [])
@@ -472,7 +476,8 @@ class SettledTest(unittest.TestCase):
                 2026, 5, 25, 15, 2, tzinfo=run.CAIRO)
             try:
                 with self.assertRaises(SystemExit) as refused:
-                    run.main([str(path), "--models", "drift", "--no-timestamp"])
+                    run.main([str(path), "--models", "drift", "--no-timestamp",
+                          "--no-today"])
                 self.assertIn("closed", str(refused.exception))
                 self.assertEqual(list(out.iterdir()), [])
             finally:
@@ -1041,6 +1046,161 @@ class WriteTest(unittest.TestCase):
         self.path.write_text("half a json document {")
         self.assertTrue(ev.write_unless_unchanged(
             self.path, {"builtAt": "t1", "models": {"m": 1}}))
+
+
+class PricePanelTest(unittest.TestCase):
+    """Where every price in a run came from, and what may never be spliced."""
+
+    def setUp(self):
+        import tempfile
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.archive = pathlib.Path(self.tmp.name)
+
+    def store(self, ticker, bars):
+        (self.archive / f"{ticker}.json").write_text(json.dumps(
+            {"ticker": ticker, "bars": bars}))
+
+    def series(self, n, start=100.0, step=1.0, first=1):
+        return [{"date": f"2026-{1 + (i + first) // 28:02d}-{1 + (i + first) % 28:02d}",
+                 "close": start + i * step, "volume": 1000.0} for i in range(n)]
+
+    def scan_of(self, *pairs):
+        return {"records": [{"ticker": t, "recentSplitAdjustedBars": b}
+                            for t, b in pairs]}
+
+    def test_the_archive_is_used_when_it_agrees_with_the_scan(self):
+        deep = self.series(400)
+        self.store("AAA", deep)
+        out = pricing.build(self.scan_of(("AAA", deep[-120:])), root=self.archive)
+        self.assertEqual(out["sources"]["archive"], ["AAA"])
+        self.assertEqual(len(out["panel"]["AAA"]), 400)
+
+    def test_a_constant_ratio_apart_is_never_spliced(self):
+        # LUTS differed from the vendor by 0.3898 on the median session and
+        # 0.3899 at the widest, across all 119 they shared. That is a
+        # corporate action one source applied, not noise — joining them puts
+        # a jump in the history that nothing in the market caused.
+        deep = self.series(400)
+        scanned = [dict(b, close=b["close"] * 0.61) for b in deep[-120:]]
+        out = pricing.build(self.scan_of(("AAA", scanned)), root=self.archive)
+        self.store("AAA", deep)
+        out = pricing.build(self.scan_of(("AAA", scanned)), root=self.archive)
+        self.assertIn("AAA", out["sources"]["scanOnly"])
+        self.assertEqual(len(out["panel"]["AAA"]), 120)
+        self.assertIn("39", out["sources"]["scanOnly"]["AAA"])
+
+    def test_one_agreeing_session_does_not_excuse_a_series(self):
+        # Why the median and not the minimum. A series offset on every
+        # session but one is the corporate-action case wearing a disguise,
+        # and the minimum gap would wave it through.
+        deep = self.series(400)
+        scanned = [dict(b, close=b["close"] * 0.61) for b in deep[-120:]]
+        scanned[0] = dict(deep[-120])
+        self.store("AAA", deep)
+        out = pricing.build(self.scan_of(("AAA", scanned)), root=self.archive)
+        self.assertIn("AAA", out["sources"]["scanOnly"])
+
+    def test_one_disagreeing_session_does_not_condemn_a_series(self):
+        # And why not the maximum. A single bad print is not a corporate
+        # action, and dropping years of history over one is the worse error.
+        deep = self.series(400)
+        scanned = [dict(b) for b in deep[-120:]]
+        scanned[5] = dict(scanned[5], close=scanned[5]["close"] * 0.5)
+        self.store("AAA", deep)
+        out = pricing.build(self.scan_of(("AAA", scanned)), root=self.archive)
+        self.assertEqual(out["sources"]["archive"], ["AAA"])
+
+    def test_too_little_overlap_is_not_judged_as_agreement(self):
+        self.store("AAA", self.series(10))
+        scanned = self.series(120, first=200)
+        out = pricing.build(self.scan_of(("AAA", scanned)), root=self.archive)
+        self.assertIn("too few to check", out["sources"]["scanOnly"]["AAA"])
+
+    def test_the_scan_supplies_the_high_and_low_the_archive_lacks(self):
+        deep = self.series(400)
+        self.store("AAA", deep)
+        scanned = [dict(b, open=b["close"] - 1, high=b["close"] + 2,
+                        low=b["close"] - 2) for b in deep[-120:]]
+        out = pricing.build(self.scan_of(("AAA", scanned)), root=self.archive)
+        last = out["panel"]["AAA"][-1]
+        self.assertEqual(last["high"], last["close"] + 2)
+        # And the sessions the scan never reached keep a close and no high.
+        self.assertNotIn("high", out["panel"]["AAA"][0])
+
+
+class TodaysSessionTest(unittest.TestCase):
+    """The session the exchange has just finished, and when it may be used."""
+
+    ROWS = [{"reuters": "AAA.CA", "closePrice": 9.1, "openPrice": 9.12,
+             "high": 9.7, "low": 9.0, "volume": 1727621, "prevClose": 9.12,
+             "writeTime": "202609141535"},
+            {"reuters": "BBB.CA", "closePrice": 180.04, "openPrice": 181,
+             "high": 181, "low": 178, "volume": 100322, "prevClose": 181,
+             "writeTime": "202609141535"}]
+    CLOSED = {"data": {"status": "Closed", "statusDate": "2026-09-14T16:00:38"}}
+
+    def watch(self, rows=None):
+        return {"data": rows if rows is not None else self.ROWS}
+
+    def test_a_closed_session_gives_open_high_low_close_and_volume(self):
+        when, bars = pricing.todays_bars(self.watch(), self.CLOSED)
+        self.assertEqual(when, "2026-09-14")
+        self.assertEqual(bars["AAA"]["close"], 9.1)
+        self.assertEqual(bars["AAA"]["open"], 9.12)
+        self.assertEqual(bars["AAA"]["high"], 9.7)
+        self.assertEqual(bars["AAA"]["low"], 9.0)
+        self.assertEqual(bars["AAA"]["volume"], 1727621)
+
+    def test_an_open_market_gives_nothing(self):
+        # An intraday closePrice is a last price. A forecast made from one is
+        # a forecast made from a session that has not finished.
+        for status in ({"data": {"status": "Open", "statusDate": "2026-09-14T12:00:00"}},
+                       {"data": {"status": "Pre-Open", "statusDate": "2026-09-14T09:00:00"}},
+                       {}, {"data": {}}):
+            when, bars = pricing.todays_bars(self.watch(), status)
+            self.assertIsNone(when)
+            self.assertEqual(bars, {})
+
+    def test_the_status_and_the_rows_must_agree_on_the_date(self):
+        stale = {"data": {"status": "Closed", "statusDate": "2026-09-15T16:00:38"}}
+        when, bars = pricing.todays_bars(self.watch(), stale)
+        self.assertIsNone(when)
+
+    def test_the_date_comes_from_writeTime_not_lastTradeDate(self):
+        # Every row of the 14th carried lastTradeDate 2026-09-13. A field a
+        # day behind on the one day it is read is not a date to build on.
+        rows = [dict(r, lastTradeDate="2026-09-13T00:00:00") for r in self.ROWS]
+        when, bars = pricing.todays_bars(self.watch(rows), self.CLOSED)
+        self.assertEqual(when, "2026-09-14")
+
+    def test_the_nesting_the_service_varies_is_followed(self):
+        when, bars = pricing.todays_bars({"data": {"data": self.ROWS}}, self.CLOSED)
+        self.assertEqual(len(bars), 2)
+
+    def test_a_session_is_appended_when_the_previous_close_agrees(self):
+        history = [{"date": "2026-09-13", "close": 9.12}]
+        bars, refused = pricing.extend(history, {"date": "2026-09-14", "close": 9.1,
+                                                 "_prevClose": 9.12})
+        self.assertIsNone(refused)
+        self.assertEqual(len(bars), 2)
+        self.assertNotIn("_prevClose", bars[-1])
+
+    def test_a_session_is_refused_when_the_previous_close_does_not(self):
+        # The two series have been adjusted differently, and appending would
+        # put a jump in the history that nothing in the market caused.
+        history = [{"date": "2026-09-13", "close": 20.0}]
+        bars, refused = pricing.extend(history, {"date": "2026-09-14", "close": 9.1,
+                                                 "_prevClose": 9.12})
+        self.assertEqual(len(bars), 1)
+        self.assertIn("previous close", refused)
+
+    def test_a_session_already_held_is_not_added_twice(self):
+        history = [{"date": "2026-09-14", "close": 9.1}]
+        bars, refused = pricing.extend(history, {"date": "2026-09-14", "close": 9.1,
+                                                 "_prevClose": 9.12})
+        self.assertEqual(len(bars), 1)
+        self.assertIsNone(refused)
 
 
 class CalendarTest(unittest.TestCase):
