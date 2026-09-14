@@ -2,7 +2,7 @@
  "generated": "2026-09-14",
  "source": "EGX disclosures — scheduled dates the issuer has filed",
  "past_days": 90,
- "count": 457,
+ "count": 459,
  "estimated": 395,
  "events": [
   {
@@ -688,6 +688,30 @@
    "section": "Corporate Actions",
    "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=294423",
    "id": "egx-294423"
+  },
+  {
+   "date": "2026-09-29",
+   "kind": "dividend_payment",
+   "note": "Cash dividend payment",
+   "ticker": "EFID",
+   "title": "Edita Food Industries S.A.E (EFID.CA) Declares a Stock Dividends",
+   "title_ar": "ايديتا للصناعات الغذائية (EFID.CA) تعلن عن توزيع أسهم مجانية",
+   "filed": "2026-09-14",
+   "section": "Corporate Actions",
+   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=294649",
+   "id": "egx-294649"
+  },
+  {
+   "date": "2026-09-29",
+   "kind": "ex_dividend",
+   "note": "Ex-dividend — last day to own for the coupon",
+   "ticker": "EFID",
+   "title": "Edita Food Industries S.A.E (EFID.CA) Declares a Stock Dividends",
+   "title_ar": "ايديتا للصناعات الغذائية (EFID.CA) تعلن عن توزيع أسهم مجانية",
+   "filed": "2026-09-14",
+   "section": "Corporate Actions",
+   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=294649",
+   "id": "egx-294649"
   },
   {
    "date": "2026-09-29",
