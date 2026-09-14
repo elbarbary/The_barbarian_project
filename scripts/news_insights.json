@@ -139,6 +139,10 @@
     "meaning": "This throughput measures the daily outbound operational volume of general cargo handled through Damietta Port infrastructure, directly reflecting current export freight flows and maritime logistics activity.",
     "meaning_ar": "يقيس هذا المعدل حجم التداول اليومي الفعلي لصادرات البضائع العامة المنقولة عبر البنية التحتية لميناء دمياط، وهو ما يعكس حركة الشحن التصديري والنشاط اللوجستي البحري الراهن."
   },
+  "397 مليون دولار مبيعات الاجانب في ادوات الدين الحكوميه": {
+    "meaning": "Foreign portfolio outflows from sovereign debt instruments involve the liquidation of treasury bills or bonds, which converts local currency proceeds into foreign currency through the banking system.",
+    "meaning_ar": "تتمثل تخارجات المحافظ الأجنبية من أدوات الدين السيادي في تسييل أذون أو سندات الخزانة، مما يترتب عليه تحويل الحصيلة النقدية من العملة المحلية إلى عملات أجنبية عبر القطاع المصرفي."
+  },
   "4 تحديات تواجه مراكز البيانات في الفضاء قبل طفره الذكاء الاصطناعي": {
     "meaning": "Operating orbital data centers for artificial intelligence workloads involves specific structural constraints, including high launch capital expenditures, in-orbit thermal management, radiation shielding requirements, and ground-to-space transmission bandwidth limitations.",
     "meaning_ar": "يتطلب تشغيل مراكز البيانات الفضائية لمعالجة أعباء عمل الذكاء الاصطناعي التعامل مع محددات هيكلية وتقنية، تشمل النفقات الرأسمالية للإطلاق، والإدارة الحرارية في المدار، وتدريع الإشعاع، وسعات نقل البيانات بين الفضاء والأرض."
@@ -1826,6 +1830,10 @@
   "البورصه توافق علي القيد الموقت لاسهم شركه ام ان تي تيك براس مال 160 مليون جنيه": {
     "meaning": "Temporary listing grants the company an operational window to fulfill regulatory disclosure and public offering requirements before trading begins, recording its EGP 160 million issued capital on the exchange's database.",
     "meaning_ar": "يمنح القيد المؤقت الشركة مهلة زمنية لاستيفاء متطلبات الإفصاح ونسب الطرح المحددة رقابياً قبل بدء التداول، مع إدراج رأسمالها المصدر البالغ 160 مليون جنيه في قاعدة بيانات البورصة."
+  },
+  "البورصه توافق علي القيد الموقت لشركه ام ان تي تيك القابضه": {
+    "meaning": "Temporary listing gives the company a defined window to fulfill statutory Egyptian Exchange registration requirements, such as minimum public float, shareholder spread, and regulatory filings, before formal trading of its shares begins.",
+    "meaning_ar": "يمنح القيد المؤقت الشركة مهلة زمنية محددة لاستيفاء متطلبات الإدراج الرسمية في البورصة المصرية، بما في ذلك نسب التداول الحر وتوزيع المساهمين واستكمال الإجراءات الرقابية، وذلك قبل بدء التداول الفعلي على أسهمها."
   },
   "البورصه توقع مذكره تفاهم مع الشركه المصريه للايداع والقيد لتعزيز كفاءه تداول ادوات الدين الحكوميه": {
     "meaning": "This agreement establishes direct operational and technical coordination between the Egyptian Exchange (EGX) and the Egyptian Central Securities Depository (ECSD) for the execution, clearing, and settlement workflows of sovereign debt instruments.",
