@@ -8,18 +8,13 @@
  "sector_ar": "مواد البناء",
  "market": {
   "last_close": 32.6,
-  "date": "2026-09-13",
+  "date": "2026-09-14",
   "open": 32.55,
   "high": 33.28,
   "low": 32.52,
   "volume": 130756
  },
  "price_history": [
-  {
-   "date": "2025-08-06",
-   "close": 31.41,
-   "volume": 279864
-  },
   {
    "date": "2025-08-07",
    "close": 31.81,
@@ -1314,6 +1309,11 @@
    "date": "2026-09-10",
    "close": 32.55,
    "volume": 164597
+  },
+  {
+   "date": "2026-09-13",
+   "close": 32.6,
+   "volume": 130756
   }
  ],
  "profile": {
@@ -1325,10 +1325,10 @@
   "perf_3m": 2.1303258145363397,
   "avg_volume_30d": 435100.30000000005,
   "relative_volume_10d": 0.318269975970807,
-  "median_volume_20d": 324497.5,
-  "rv20": 0.5072365734712903,
+  "median_volume_20d": 272804,
+  "rv20": 0.4793038225245964,
   "normal_value_30d": 8829064.41,
-  "five_session_change": -3.1826293872694866,
+  "five_session_change": -4.789719626168221,
   "history_bars": 120,
   "market_cap": 1753901827.44,
   "market_cap_source": "EGX",
