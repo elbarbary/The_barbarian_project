@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-14T12:57:59.478633+00:00",
+  "builtAt": "2026-09-14T13:01:07.479547+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 192326,
-    "withoutTickerInHeading": 36175,
+    "items": 192328,
+    "withoutTickerInHeading": 36177,
     "tickerNotInThisDirectory": 29402,
     "attributedToAnIssuer": 126749,
     "months": [
@@ -1831,8 +1831,8 @@
       {
         "month": "2026-09",
         "harvested": "2026-09-14",
-        "items": 437,
-        "expected": 437,
+        "items": 439,
+        "expected": 439,
         "status": "complete"
       }
     ],
