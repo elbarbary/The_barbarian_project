@@ -1059,6 +1059,10 @@
     "meaning": "A gain of over 2% in Japanese equity benchmarks reflects an upward adjustment in market capitalization across listed equities on the Tokyo exchange, driven by session trading volume and net capital inflows.",
     "meaning_ar": "يعكس ارتفاع مؤشرات الأسهم اليابانية بأكثر من 2% نمواً في القيمة السوقية الإجمالية للشركات المدرجة في بورصة طوكيو، مدفوعاً بتدفقات نقدية شرائية وأحجام تداول منفذة خلال الجلسة."
   },
+  "ارتفاع التضخم في الهند فوق المستهدف للشهر الثالث علي التوالي": {
+    "meaning": "Persistent inflation above the central bank's target maintains upward pressure on benchmark interest rates, influencing borrowing costs, sovereign bond yields, and foreign trade balances between India and its trade partners, including Egypt.",
+    "meaning_ar": "يؤدي استمرار التضخم فوق مستهدف البنك المركزي إلى استمرار الضغوط على أسعار الفائدة الأساسية، وهو ما يحدد تكاليف الاقتراض وعوائد السندات الحكومية ومعدلات التبادل التجاري بين الهند وشركائها التجاريين، ومنهم مصر."
+  },
   "ارتفاع الدولار وسط ترقب قرارات الفايده في امريكا واليابان وبريطانيا": {
     "meaning": "Divergent monetary policy expectations and interest rate decisions across major central banks drive global foreign exchange repositioning, which alters USD liquidity flows and directly impacts local currency valuation and import pricing dynamics in emerging markets such as Egypt.",
     "meaning_ar": "تؤدي مواءمة السياسات النقدية وقرارات أسعار الفائدة لدى البنوك المركزية الكبرى إلى إعادة توزيع السيولة بالدولار عالمياً، مما يحدد وتيرة تسعير العملات المحلية وتكاليف المعاملات الاستيرادية في الأسواق الناشئة ومنها مصر."
@@ -1787,6 +1791,10 @@
     "meaning": "The main stock index advances by 0.72% as executed buy orders outweigh sell orders, with aggregate transaction turnover across listed securities reaching EGP 15.5 billion during the trading session.",
     "meaning_ar": "يرتفع المؤشر الرئيسي للبورصة بنسبة 0.72% نتيجة تفوق أوامر الشراء المنفذة على أوامر البيع، مع تسجيل إجمالي قيمة تداولات على الأوراق المالية المقيدة بلغت 15.5 مليار جنيه خلال جلسة التداول."
   },
+  "البورصه تعلن ضوابط وتداول حق اكتتاب زياده راسمال شركه باكين": {
+    "meaning": "The Egyptian Exchange defines the operational rules and schedule for trading the rights issue of Pachin, allowing current shareholders to either subscribe to the new capital increase shares or trade their subscription rights separately on the secondary market.",
+    "meaning_ar": "تحدد البورصة المصرية القواعد والجدول الزمني لتداول حق اكتتاب زيادة رأسمال شركة باكين، مما يتيح للمساهمين القدامى ممارسة حق الاكتتاب في أسهم الزيادة أو تداول هذه الحقوق بشكل منفصل في السوق الثانوي."
+  },
   "البورصه تعلن قيد سندات خزانه متغيره العايد بقيمه 14.02 مليار جنيه": {
     "meaning": "Listing variable-rate treasury bonds on the exchange admits state sovereign debt instruments to the secondary trading market, where coupon payments adjust periodically based on benchmark interest rates.",
     "meaning_ar": "يتيح قيد سندات الخزانة متغيرة العائد تداول أدوات الدين السيادية في السوق الثانوية للبورصة، حيث يتم تعديل العائد الدوري عليها دورياً وفقاً لأسعار الفائدة المرجعية."
@@ -2098,6 +2106,10 @@
   "الرقابه الماليه توقف “سيتي ستارز لتداول الاوراق الماليه“ عن مزاوله النشاط لمده 7 ايام": {
     "meaning": "A regulatory suspension temporarily halts a brokerage firm's operational license to execute trade orders on the exchange, freezing its client-facing dealing activities for the duration of the sanction.",
     "meaning_ar": "يؤدي الإيقاف الرقابي إلى تجميد رخصة شركة الوساطة في تنفيذ أوامر التداول بالبورصة بشكل مؤقت، مما يوقف أنشطة التعامل وتنفيذ الصفقات للعملاء طوال مدة الجزاء."
+  },
+  "الرقابه الماليه توهل مجموعه جديده من “الميسرات” لدعم التمكين المالي للنساء الريفيات": {
+    "meaning": "The Financial Regulatory Authority trains field facilitators to act as direct distribution and onboarding agents for non-banking microfinance and microinsurance products in rural areas.",
+    "meaning_ar": "تتولى الهيئة العامة للرقابة المالية تدريب ميسّرات ميدانيات ليعملن كقنوات توزيع وتوعية مباشرة لمنتجات التمويل متناهي الصغر والتأمين متناهي الصغر في المناطق الريفية."
   },
   "الرقابه الماليه تيسر قواعد مراقبي حسابات الشركات المهنيه في التامين": {
     "meaning": "The regulatory decision modifies the eligibility and registration criteria for certified accounting and auditing firms operating in the insurance sector, altering the regulatory compliance framework for external assurance providers.",
@@ -3444,6 +3456,10 @@
     "meaning": "The initiative links corporate labor demand with regulatory compliance under Egyptian labor law, which mandates a 5% employment quota for persons with disabilities in private sector firms with 20 or more employees.",
     "meaning_ar": "تربط هذه المبادرة بين احتياجات الشركات من العمالة والامتثال لقانون العمل المصري، الذي يُلزم منشآت القطاع الخاص التي تضم 20 عاملاً فأكثر باستيفاء نسبة تشغيل تبلغ 5% لذوي الهمم."
   },
+  "تعيين عبد العزيز مجدي رييسا لمجموعه امن المعلومات بالبنك الزراعي المصري": {
+    "meaning": "Appointing a Chief Information Security Officer restructures the bank's operational risk governance to align with Central Bank of Egypt cybersecurity directives and manage IT infrastructure threats.",
+    "meaning_ar": "يُعيد تعيين رئيس لأمن المعلومات هيكلة حوكمة المخاطر التشغيلية بالبنك للامتثال لتعليمات البنك المركزي المصري للأمن السيبراني وإدارة مخاطر البنية التحتية التكنولوجية."
+  },
   "تقرير دولي: حصه الصين من الدين الامريكي تهبط من 10% الي 2%": {
     "meaning": "This shift reflects a structural reallocation of China's foreign exchange reserves away from US Treasury securities toward other currencies, physical assets, or alternative sovereign debt instruments, changing the composition of foreign ownership in the US sovereign debt market.",
     "meaning_ar": "يعكس هذا التحول إعادة توزيع هيكلية لاحتياطيات النقد الأجنبي الصينية بعيداً عن سندات الخزانة الأمريكية نحو عملات وأصول مادية وأدوات دين سيادية أخرى، مما يغير هيكل الملكية الأجنبية في سوق الدين السيادي الأمريكي."
@@ -3503,6 +3519,10 @@
   "تمويل المناخ بقيمه 1.3 تريليون دولار مهدد بالتعثر وسط ضغوط امريكيه": {
     "meaning": "Multilateral climate finance frameworks aggregate public and private capital commitments to fund cross-border energy transition and adaptation infrastructure, where political friction between major sovereign donors halts funding pledges and implementation agreements.",
     "meaning_ar": "تعتمد أطر تمويل المناخ متعددة الأطراف على تجميع تعهدات رؤوس الأموال الحكومية والخاصة لتمويل مشاريع البنية التحتية للتحول الطاقي، حيث تؤدي الخلافات السياسية بين الدول المانحة الرئيسية إلى وقف تدفق هذه المخصصات والاتفاقيات التنفيذية."
+  },
+  "تموين الاسماعيليه تضبط مخبزا استولي علي طن دقيق مدعم وتحرر 125 مخالفه اليوم": {
+    "meaning": "Regulatory inspections enforce compliance within the subsidized bread distribution network by penalizing illicit flour diversion and tracking quotas, directly controlling public grain supply chains and operational leakage.",
+    "meaning_ar": "تفرض الحملات التفتيشية الامتثال التشغيلي داخل شبكة توزيع الخبز المدعم عبر ضبط محاولات تسريب الدقيق وتتبع الحصص التموينية، مما يمثل آلية رقابية مباشرة لضبط سلاسل إمداد الحبوب الحكومية."
   },
   "تنظيم الاتصالات: 57 مليون اجمالي عدد المحافظ الالكترونيه خلال النصف الاول بنمو 23%": {
     "meaning": "The expansion in e-wallet accounts increases digital transaction volumes across telecommunications operators and banking networks, shifting payment settlements from physical cash to electronic clearing systems.",
@@ -3896,6 +3916,10 @@
     "meaning": "An influx of 450,000 new registered market participants expands the exchange's investor base and broadens the distribution of domestic trading accounts across listed instruments.",
     "meaning_ar": "يؤدي انضمام 450 ألف متعامل جديد إلى توسيع قاعدة المستثمرين في البورصة وزيادة انتشار حسابات التداول المحلية عبر الأوراق المالية المقيدة."
   },
+  "رييس السنغال يبحث مع مديره صندوق النقد في واشنطن الاصلاحات الاقتصاديه": {
+    "meaning": "Official discussions between sovereign leadership and the IMF address structural policy benchmarks, fiscal balance targets, and criteria tied to existing or proposed lending programs.",
+    "meaning_ar": "تتناول المباحثات الرسمية بين القيادة السياسية وصندوق النقد الدولي المستهدفات الهيكلية للسياسات المالية ومؤشرات الموازنة المرتبطة ببرامج التمويل القائمة أو المقترحة."
+  },
   "رييس المركزي الالماني: مسار الفايده الاوروبيه يعتمد علي اسعار الطاقه": {
     "meaning": "Energy costs serve as an input in the calculation of headline inflation, and the European Central Bank adjusts benchmark interest rates to align inflation metrics with target monetary thresholds.",
     "meaning_ar": "تُمثل تكاليف الطاقة عنصراً أساسياً في احتساب التضخم العام، حيث يُطوّع البنك المركزي الأوروبي أسعار الفائدة لضبط مؤشرات التضخم وفق المستهدفات النقدية المحددة."
@@ -4003,6 +4027,10 @@
   "رييس الوزراء: حظر قطع الاشجار نهاييا الا بالعوده الي وزيره التنميه المحليه والبييه": {
     "meaning": "This introduces a dual-ministerial approval requirement for tree removal, adding an administrative compliance step to infrastructure, urban development, and construction projects on land containing vegetation.",
     "meaning_ar": "يفرض هذا القرار مسار موافقة وزارية مزدوجة قبل إزالة الأشجار، مما يضيف إجراء امتثال إداري وتنظيمي على مشروعات البنية التحتية والتطوير العمراني والإنشاءات القائمة على أراضٍ تحوي غطاءً نباتياً."
+  },
+  "رييس الوزراء: حظر قطع الاشجار نهاييا وزياده المسطحات الخضراء بالمحافظات": {
+    "meaning": "The regulatory ban on tree felling combined with expanding public green spaces directs municipal and infrastructure spending toward landscaping, agricultural nurseries, and urban maintenance contractors, while establishing environmental compliance constraints for real estate and civil construction works.",
+    "meaning_ar": "يوجّه الحظر التنظيمي لقطع الأشجار والتوسع في المساحات الخضراء الإنفاق الحكومي والمحلي نحو مقاولي التشجير والمشاتل الزراعية وأعمال الصيانة الحضرية، مع فرض اشتراطات امتثال بيئي على مشروعات التطوير العقاري والمقاولات المدنية."
   },
   "رييس الوزراء: مجمعات الخدمات الحكوميه تستهدف تقريب الخدمه من المواطن": {
     "meaning": "Government service complexes consolidate administrative and documentation procedures into unified regional hubs, centralising public sector transaction processing and reducing physical transit between disparate municipal entities.",
@@ -4444,6 +4472,10 @@
   "شركه ACT تستهدف استثمار 10 ملايين دولار للتوسع في افريفيا واسيا": {
     "meaning": "This plan entails a capital expenditure of 10 million dollars allocated to establish operational and commercial presence in regional markets across Africa and Asia.",
     "meaning_ar": "تتضمن هذه الخطة تخصيص إنفاق رأسمالي بقيمة 10 ملايين دولار لإنشاء بنية تشغيلية وتجارية في أسواق إقليمية عبر قارتي إفريقيا وآسيا."
+  },
+  "شركه بايونيرز بروبرتيز تشتري 450 الف سهم خزينه": {
+    "meaning": "Treasury share purchases reallocate liquid cash into the company's own equity, temporarily reducing the active free float circulating on the exchange and categorising these shares as non-voting equity on the balance sheet.",
+    "meaning_ar": "تؤدي عملية شراء أسهم الخزينة إلى تحويل جزء من السيولة النقدية للشركة إلى حقوق ملكيتها، مما يقلل عدد الأسهم حرة التداول المتاحة في البورصة ويصنف هذه الأسهم كأصول خالية من حقوق التصويت في الميزانية العمومية."
   },
   "شركه تسلا تحذر بريطانيا: قوانين السيارات ذاتيه القياده تهدد التنافسيه": {
     "meaning": "Autonomous vehicle regulations establish compliance standards and testing frameworks that define market access and product rollout timelines for manufacturers.",
