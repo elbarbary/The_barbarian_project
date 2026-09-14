@@ -4565,6 +4565,10 @@
     "meaning": "Foreign pharmaceutical manufacturers establish local production facilities and joint ventures in Egypt to utilize existing free trade agreements for regional distribution across African and Middle Eastern markets.",
     "meaning_ar": "تؤسس شركات الأدوية الأجنبية منشآت تصنيع محلي وشراكات في مصر للاستفادة من اتفاقيات التجارة الحرة القائمة في عمليات التوزيع وإعادة التصدير لأسواق إفريقيا والشرق الأوسط."
   },
+  "شركات الدفاع والفضاء تتجه الي صفقات SPAC للاستفاده من طفره شهيه المستثمرين": {
+    "meaning": "Defense and aerospace companies merge with publicly traded special purpose acquisition companies (SPACs) to secure equity financing directly from public markets, bypassing the standard initial public offering registration process.",
+    "meaning_ar": "تندمج شركات الدفاع والفضاء مع شركات الاستحواذ ذات الغرض الخاص (SPAC) المدرجة في البورصة لتأمين التمويل الرأسمالي مباشرة من الأسواق العامة دون المرور بإجراءات الطرح العام الأولي التقليدية."
+  },
   "شركات السيارات الكهرباييه تراهن علي الروبوتات الشبيهه بالبشر": {
     "meaning": "Electric vehicle manufacturers integrate humanoid robotics into assembly lines to automate complex physical tasks and reallocate capital expenditures toward advanced manufacturing infrastructure.",
     "meaning_ar": "تدمج شركات تصنيع السيارات الكهربائية الروبوتات الشبيهة بالبشر في خطوط التجميع لأتمتة المهام الصناعية وتعديل هيكل تخصيص النفقات الرأسمالية في العمليات التشغيلية."
@@ -4828,6 +4832,10 @@
   "عاجل..البورصه المصريه تسجل قمه تاريخيه جديده فوق 56 الف نقطه": {
     "meaning": "A market index reaching a new historical peak reflects an increase in the aggregate market capitalization of its constituent listed companies, driven by trades executing at higher settlement prices across the exchange.",
     "meaning_ar": "يعكس تسجيل مؤشر السوق لقمة تاريخية جديدة ارتفاعاً في القيمة السوقية الإجمالية للشركات المدرجة المكونة له، نتيجة تنفيذ العمليات عند مستويات سعرية أعلى عبر منصة التداول."
+  },
+  "عايد سندات الخزانه الامريكيه لاجل 10 سنوات يتجاوز 5% ليسجل اعلي مستوي منذ اكتوبر 2023": {
+    "meaning": "A rise in 10-year US Treasury yields sets a higher benchmark for global risk-free rates, which directly establishes higher external borrowing costs and debt refinancing rates for emerging market sovereigns and corporations.",
+    "meaning_ar": "يحدد ارتفاع عائد سندات الخزانة الأمريكية لأجل 10 سنوات معياراً أعلى لمعدلات العائد الخالية من المخاطر عالمياً، وهو ما يرفع تكاليف الاقتراض الخارجي وأسعار إعادة تمويل الديون للأسواق الناشئة وشركاتها."
   },
   "عبد العزيز مجدي رييسا لمجموعه امن المعلومات بالبنك الزراعي المصري": {
     "meaning": "Executive leadership appointments in bank information security govern institutional cybersecurity frameworks, regulatory data protection compliance, and internal IT risk control operations.",
@@ -5329,6 +5337,10 @@
     "meaning": "High-level economic engagement with African nations frames regional trade policy, bilateral commercial agreements, and cross-border infrastructure initiatives for Egyptian enterprises operating in continental markets.",
     "meaning_ar": "تحدد الدبلوماسية الاقتصادية والتعاون المؤسسي مع الدول الأفريقية السياسات التجارية الإقليمية والاتفاقيات الثنائية ومشاريع الربط اللوجستي للشركات المصرية العاملة في الأسواق القارية."
   },
+  "مدبولي: الاسراع في تعديلات قانون التصالح وتيسير الاجراءات امام المواطنين": {
+    "meaning": "Accelerating reconciliation procedures integrates unrecorded real estate assets into the formal registry system and processes outstanding administrative settlement fees into state public revenue accounts.",
+    "meaning_ar": "يؤدي تسريع إجراءات التصالح إلى إدراج الأصول العقارية غير المسجلة ضمن منظومة التسجيل العقاري الرسمية وتحصيل رسوم التسويات الإدارية المتأخرة لصالح الخزانة العامة للدولة."
+  },
   "مدبولي: التوسع في اتاحه خدمات علاج الاورام بالمحافظات لتخفيف الاعباء عن المرضي وذويهم": {
     "meaning": "The expansion decentralizes oncology infrastructure across governorates, distributing public healthcare procurement budgets and clinical operational capacity across regional medical centers rather than central facilities.",
     "meaning_ar": "تؤدي هذه التوسعات إلى إلغاء مركزية البنية التحتية لعلاج الأورام بالمحافظات، وتوزيع مخصصات الشراء الطبي الحكومي والطاقة التشغيلية الإكلينيكية على المراكز الإقليمية بدلاً من المرافق المركزية."
@@ -5484,6 +5496,10 @@
   "مصر تبحث مع الاوروبي لاعاده الاعمار تمويل التحول الصناعي الاخضر": {
     "meaning": "The discussions involve multilateral concessional financing and credit lines from the EBRD directed toward capital expenditure for industrial energy efficiency, emissions abatement, and renewable energy adoption across Egyptian manufacturing facilities.",
     "meaning_ar": "تتناول المباحثات آليات تمويل ميسر وخطوط ائتمان من البنك الأوروبي لإعادة الإعمار والتنمية مخصصة للإنفاق الرأسمالي على كفاءة الطاقة الصناعية، وخفض الانبعاثات، وتجهيزات الطاقة المتجددة في المنشآت التصنيعية المصرية."
+  },
+  "مصر تبحث مع العراق التعاون في مجالات التدريب المهني والتاهيل لسوق العمل": {
+    "meaning": "Bilateral vocational training agreements establish standard cross-border labor qualification frameworks and create structured mechanisms for the supply of certified technical manpower between participating states.",
+    "meaning_ar": "تؤسس اتفاقيات التدريب المهني الثنائية أطراً موحدة لمواءمة المؤهلات وتوفر آليات منظمة لنقل العمالة الفنية المعتمدة بين الدول الموقعة."
   },
   "مصر تتعاون مع «OECD» لاعداد الاستراتيجيه الوطنيه للذكاء الاصطناعي": {
     "meaning": "The partnership aligns Egypt's artificial intelligence regulatory framework and digital governance standards with the policy benchmarks established by the OECD.",
@@ -5921,6 +5937,10 @@
     "meaning": "Public scrutiny of technology sector practices alters consumer adoption rates and prompts reassessments of capital allocation toward artificial intelligence research and infrastructure.",
     "meaning_ar": "يؤدي التدقيق العام في ممارسات قطاع التكنولوجيا إلى تعديل معدلات تبني المستهلكين للمنتجات وإعادة تقييم تخصيص رؤوس الأموال الموجهة لأبحاث وبنية الذكاء الاصطناعي التحتية."
   },
+  "هل يدفع فايض الصين القياسي العالم نحو “اتفاق بلازا” جديد؟": {
+    "meaning": "A Plaza-style agreement is a multilateral monetary framework where major global economies coordinate interventions in foreign exchange markets to devalue a dominant currency and rebalance international trade flows.",
+    "meaning_ar": "اتفاق بلازا هو إطار نقدي متعدد الأطراف تُنسق من خلاله الاقتصادات الكبرى التدخل في أسواق الصرف الأجنبي لخفض قيمة عملة مهيمنة وإعادة توازن التدفقات التجارية الدولية."
+  },
   "هل يوثر سعر الطماطم علي اسعار الخضراوات الاخري؟ تجار يجيبون": {
     "meaning": "Tomato prices serve as a high-weight component in the Egyptian food basket, where cross-price elasticity and consumer substitution patterns link its price fluctuations to the demand and pricing dynamics of alternative fresh produce.",
     "meaning_ar": "تمثل أسعار الطماطم وزناً نسبياً مؤثراً في سلة الغذاء المصرية، حيث تربط مرونة الطلب التبادلية وسلوك الإحلال الاستهلاكي بين تحركاتها السعرية وديناميكيات الطلب والتسعير للخضراوات البديلة."
@@ -6248,6 +6268,10 @@
   "وزير العمل: لدينا خطه للتوسع في الربط الالكتروني مع الدول العربيه": {
     "meaning": "Expanding digital labor linkage networks establishes a unified operational channel between domestic employment databases and regional host markets, centralizing the processing of cross-border contract authentication and foreign worker deployment data.",
     "meaning_ar": "يؤدي التوسع في شبكات الربط الإلكتروني للعمالة إلى إنشاء مسار تشغيلي موحد بين قواعد بيانات التوظيف المحلية وأسواق العمل الإقليمية، مما يركز عمليات توثيق العقود وتدقيق بيانات العمالة المغادرة عبر منظومة رقمية مباشرة."
+  },
+  "وزير العمل: مصر داعمه لكل جهد عربي يربط التعاون بالانتاج والاستثمار بالتشغيل": {
+    "meaning": "This policy framework links regional capital inflows directly to domestic manufacturing and labor-intensive projects, structuring inter-Arab investments around cross-border production lines and formal workforce deployment.",
+    "meaning_ar": "يربط إطار العمل هذا التدفقات الرأسمالية الإقليمية مباشرةً بالمشاريع التصنيعية كثيفة العمالة محلياً، حيث يتم توجيه الاستثمارات العربية المشتركة إلى خطوط إنتاج وتشغيل العمالة النظامية."
   },
   "وزير الماليه: تسجيل مليون وحده عقاريه عبر “الموبايل ابلكيشن”": {
     "meaning": "Digital registration integrates assets into the formal property tax registry, creating verifiable digital records for property valuation and assessment across the real estate sector.",
