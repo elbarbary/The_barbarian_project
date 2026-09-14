@@ -2487,6 +2487,10 @@
     "meaning": "The contract adds a 155 million EGP construction project to the company's operational backlog, defining the scope of work and cash flow schedule according to execution milestones.",
     "meaning_ar": "يضيف هذا العقد مشروع أعمال إنشائية بقيمة 155 مليون جنيه إلى محفظة المشروعات قيد التنفيذ للشركة، محدداً نطاق الأعمال وجدول التدفقات النقدية وفق مراحل الإنجاز."
   },
+  "الفيدرالي الامريكي يقترب من رفع الفايده": {
+    "meaning": "An increase in the US Federal Reserve's policy rate widens the yield differential between dollar assets and emerging market instruments, altering cross-border capital flows and the cost of foreign-currency debt service.",
+    "meaning_ar": "يؤدي رفع سعر الفائدة من قِبل الاحتياطي الفيدرالي الأمريكي إلى توسيع فارق العائد بين الأصول المقومة بالدولار وأدوات الأسواق الناشئة، مما يغير حركة تدفقات رؤوس الأموال عبر الحدود وتكلفة خدمة الديون بالعملات الأجنبية."
+  },
   "القاهره الوطنيه للاستثمار: انتاد تخفض حصتها في الشركه الي 11.8%": {
     "meaning": "This transaction alters the company's equity ownership structure and voting power distribution, reflecting a partial divestment that shifts the concentration of ownership among major shareholders.",
     "meaning_ar": "يمثل هذا الإجراء تغييراً في هيكل ملكية الشركة وتوزيع حقوق التصويت، حيث يعكس تخارجاً جزئياً يعيد توزيع نسب الملكية والتركز بين كبار المساهمين."
@@ -2554,6 +2558,10 @@
   "المانيا تقود تحركا جديدا لاستخدام الاصول الروسيه المجمده لتمويل قرض لاوكرانيا": {
     "meaning": "This structure uses the yields and interest generated from immobilized sovereign assets as debt service collateral to fund a syndicated international loan facility.",
     "meaning_ar": "تعتمد هذه الآلية على توجيه العوائد والفوائد الناتجة عن الأصول السيادية المجمدة كضمان لسداد خدمة الدين المترتبة على تسهيل ائتماني دولي مشترك."
+  },
+  "المانيا: وقف تطوير الذكاء الاصطناعي ليس خيارا بالنسبه لاوروبا": {
+    "meaning": "A continuous policy framework in Europe maintains research and development allocations, chip procurement, and infrastructure spending across the enterprise technology and telecommunications sectors.",
+    "meaning_ar": "يُبقي هذا التوجه السياسي في أوروبا على مخصصات البحث والتطوير، ومشتريات الرقائق، والإنفاق على البنية التحتية عبر قطاعي تكنولوجيا المؤسسات والاتصالات."
   },
   "المتحدث العسكري: مصر دوله عظيمه تمتلك قوات مسلحه قويه مستمده من تلاحم الشعب المصري": {
     "meaning": "The statement represents standard sovereign institutional communication with no direct operational, balance-sheet, or regulatory mechanism affecting capital market instruments or listed sectors.",
@@ -3527,6 +3535,10 @@
   "تقرير: اوروبا تضع اموال البنوك المركزيه في قلب الاسواق المرمزه": {
     "meaning": "European central banks integrate wholesale central bank digital currency (wCBDC) directly into distributed ledger technology (DLT) platforms for the settlement of tokenised financial assets. This operational framework provides central bank money as the primary risk-free settlement asset for on-chain institutional transactions.",
     "meaning_ar": "تدمج البنوك المركزية الأوروبية أموال البنك المركزي الرقمية المخصصة للمؤسسات مباشرة في منصات تقنية السجلات الموزعة لتسوية الأصول المالية المرمّزة. وتوفر هذه الآلية التشغيلية أموال البنك المركزي كأصل تسوية أساسي وخالٍ من المخاطر للمعاملات المؤسسية على شبكات البلوكتشين."
+  },
+  "تقرير: تثبيت الفايده قد يكون الخطر الاكبر علي سوق السندات الامريكيه": {
+    "meaning": "Holding benchmark interest rates steady at elevated levels sustains high borrowing costs and pins bond yields at current tiers, directly determining debt pricing and secondary market valuations.",
+    "meaning_ar": "يؤدي تثبيت أسعار الفائدة الأساسية عند مستويات مرتفعة إلى استمرار ارتفاع تكاليف الاقتراض وبقاء عوائد السندات عند مستوياتها الراهنة، مما يحدد تسعير أدوات الدين وقيمتها في السوق الثانوية."
   },
   "تقرير: تصدير 64 الف طن قطن منذ بدايه الموسم": {
     "meaning": "This indicates the cumulative volume of raw cotton cleared for export markets by local trading and ginning companies since the start of the current harvest season.",
@@ -4937,6 +4949,10 @@
     "meaning": "The inclusion of the Minister of Labor coordinates workforce regulations, social insurance policies, and employment compliance frameworks directly within the inter-ministerial body governing startups and small enterprises.",
     "meaning_ar": "يدمج ضم وزير العمل السياسات التنظيمية لبيئة التشغيل وقوانين العمل والتأمينات الاجتماعية بشكل مباشر ضمن أعمال اللجنة الوزارية المعنية بتنظيم قطاع الشركات الناشئة وريادة الأعمال."
   },
+  "قفزه جديده.. اين استقر سعر اليورو في ختام تعاملات اليوم؟": {
+    "meaning": "A rise in the exchange rate of the euro against the Egyptian pound increases the local-currency cost of European imports and adjusts the valuation of euro-denominated liabilities and revenues on corporate balance sheets.",
+    "meaning_ar": "يؤدي ارتفاع سعر صرف اليورو مقابل الجنيه المصري إلى زيادة تكلفة الواردات القادمة من أوروبا بالعملة المحلية، وإعادة تقييم الالتزامات والإيرادات المقومة باليورو في القوائم المالية للشركات."
+  },
   "قناه بنما تخفض عدد السفن العابره بسبب ظاهره ال نينيو المناخيه": {
     "meaning": "Reducing daily vessel transit slots at the Panama Canal constrains throughput capacity on trans-oceanic maritime routes, altering cargo allocation across global shipping networks and alternative maritime corridors.",
     "meaning_ar": "يؤدي تقليص عدد السفن اليومية العابرة لقناة بنما إلى تقييد الطاقة الاستيعابية لحركة النقل البحري وتغيير توزيع حركة الشحن عبر الممرات الملاحية الدولية البديلة."
@@ -6288,6 +6304,10 @@
   "“الرقابه الماليه” تلزم شركات التمويل بالربط اللحظي مع “اي سكور”": {
     "meaning": "The Financial Regulatory Authority mandates that non-banking financial institutions integrate their systems via real-time data feeds with the Egyptian Credit Bureau (I-Score), automating the immediate verification and reporting of borrower credit exposures and liabilities.",
     "meaning_ar": "تُلزم الهيئة العامة للرقابة المالية شركات التمويل غير المصرفي بالربط التقني المباشر والفوري مع الشركة المصرية للاستعلام الائتماني (آي سكور)، مما يتيح التحديث والتحقق اللحظي من التاريخ الائتماني وحجم مديونيات العملاء."
+  },
+  "“الرقابه الماليه” توهل مجموعه جديده من “الميسرات” لدعم التمكين المالي للنساء": {
+    "meaning": "The Financial Regulatory Authority (FRA) certifies field facilitators to act as intermediaries providing microfinance education and distribution access to female micro-entrepreneurs. This process expands non-banking financial institutions' (NBFIs) distribution channels to reach previously unbanked retail segments.",
+    "meaning_ar": "تقوم الهيئة العامة للرقابة المالية بتأهيل وتدريب ميسّرات ميدانيات للعمل كقنوات اتصال لتوفير التثقيف المالي وتوزيع خدمات التمويل متناهي الصغر لرائدات الأعمال، مما يوسّع شبكات التوزيع للمؤسسات المالية غير المصرفية للوصول إلى شرائح غير مشمولة مصرفياً."
   },
   "“الزراعه” تتعاون مع “الفاو” لتطوير قطاع الزيتون في مصر": {
     "meaning": "This institutional cooperation applies Food and Agriculture Organization technical assistance and standardisation frameworks to local olive farming and post-harvest supply chains.",
