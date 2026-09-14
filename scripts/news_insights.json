@@ -107,6 +107,10 @@
     "meaning": "This figure represents the current operational grain inventory held in private sector storage facilities at Damietta Port, reflecting the active commodity buffer for logistics and supply chain distribution.",
     "meaning_ar": "يمثل هذا الرقم المخزون التشغيلي الحالي من الحبوب داخل صوامع القطاع الخاص بميناء دمياط، وهو ما يوضح حجم الاحتياطي السلعي المتاح لعمليات الخدمات اللوجستية وسلاسل التوريد."
   },
+  "28 سبتمبر.. نهايه حق توزيع نصف سهم مجاني لمساهمي “ايديتا”": {
+    "meaning": "September 28 marks the record date determining shareholder eligibility for a stock dividend of 0.5 bonus shares per existing share, an accounting operation that capitalizes retained earnings or reserves into share capital and increases total outstanding shares.",
+    "meaning_ar": "يمثل يوم 28 سبتمبر تاريخ نهاية الحق المحدد للمساهمين المستحقين لتوزيع أسهم مجانية بواقع 0.5 سهم لكل سهم أصلي، وهو إجراء محاسبي يحول جزءاً من الأرباح المرحلة أو الاحتياطيات إلى رأس المال المصدر ويزيد إجمالي عدد الأسهم القائمة."
+  },
   "3 بنوك تضخ 50 مليون جنيه في مصنع «جرانتي» الجديد بقويسنا": {
     "meaning": "This transaction represents syndicated debt financing where three commercial banks provide EGP 50 million in capital expenditure funding to establish a new manufacturing facility in Quesna, expanding the company's fixed asset base and industrial capacity.",
     "meaning_ar": "يمثل هذا الإجراء تمويلاً مصرفياً مشتركاً تقدم من خلاله ثلاثة بنوك 50 مليون جنيه لتمويل النفقات الرأسمالية لإنشاء مصنع جديد في قويسنا، مما يرفع الأصول الثابتة والطاقة الإنتاجية التشغيلية للشركة."
@@ -1771,6 +1775,10 @@
     "meaning": "During market sessions characterized by profit-taking, incoming buy orders absorb the volume of executed sell orders, which directly determines the net movement of benchmark indices.",
     "meaning_ar": "خلال جلسات التداول التي تشهد عمليات جني أرباح، تستوعب طلبات الشراء أحجام أوامر البيع المنفذة، مما يحدد الاتجاه الصافي لحركة مؤشرات السوق."
   },
+  "البورصه تتراجع ادني مستوي 55 الف نقطه بانخفاض 1.56%": {
+    "meaning": "The market index declines below the 55,000-point threshold, reflecting a net reduction in the aggregate market capitalization of constituent equities during the trading session.",
+    "meaning_ar": "يعكس هبوط المؤشر دون مستوى 55 ألف نقطة تراجعاً في القيمة السوقية الإجمالية للأسهم المكونة له خلال جلسة التداول."
+  },
   "البورصه تتراجع اكثر من 1% واحجام التداول تسجل نحو 11 مليار جنيه": {
     "meaning": "The market benchmark index decreases by over 1% alongside total daily trading turnover of approximately EGP 11 billion across listed equities and fixed-income instruments.",
     "meaning_ar": "يتراجع المؤشر الرئيسي للسوق بأكثر من 1% بالتزامن مع تسجيل إجمالي قيم تداولات يومية تقارب 11 مليار جنيه عبر الأسهم وأدوات الدخل الثابت المقيدة."
@@ -1806,6 +1814,10 @@
   "البورصه تواصل تراجعها بمنتصف التعاملات.. والثلاثيني ينخفض 0.90%": {
     "meaning": "Mid-session trading reflects an excess of order volume executed on the bid side across the thirty constituent blue-chip equities, driving a net aggregate index contraction of 0.90%.",
     "meaning_ar": "تعكس تعاملات منتصف الجلسة تفوقاً في حجم أوامر البيع المنفذة على أوامر الشراء لأسهم الشركات الثلاثين الكبرى، وهو ما يؤدي إلى تراجع المؤشر الرئيسي بنسبة 0.90%."
+  },
+  "البورصه توافق علي القيد الموقت لاسهم شركه ام ان تي تيك براس مال 160 مليون جنيه": {
+    "meaning": "Temporary listing grants the company an operational window to fulfill regulatory disclosure and public offering requirements before trading begins, recording its EGP 160 million issued capital on the exchange's database.",
+    "meaning_ar": "يمنح القيد المؤقت الشركة مهلة زمنية لاستيفاء متطلبات الإفصاح ونسب الطرح المحددة رقابياً قبل بدء التداول، مع إدراج رأسمالها المصدر البالغ 160 مليون جنيه في قاعدة بيانات البورصة."
   },
   "البورصه توقع مذكره تفاهم مع الشركه المصريه للايداع والقيد لتعزيز كفاءه تداول ادوات الدين الحكوميه": {
     "meaning": "This agreement establishes direct operational and technical coordination between the Egyptian Exchange (EGX) and the Egyptian Central Securities Depository (ECSD) for the execution, clearing, and settlement workflows of sovereign debt instruments.",
@@ -2426,6 +2438,10 @@
   "العراق يسعي لزياده كبيره في حصه انتاجه خلال مراجعه “اوبك+”": {
     "meaning": "An OPEC+ production quota review directly sets a member nation's baseline extraction limits, defining the operational volume of crude oil supply it contributes to the international market.",
     "meaning_ar": "تحدد مراجعة حصص الإنتاج في تحالف «أوبك+» خط الأساس لسقف الاستخراج المسموح به للدولة العضو، وهو ما يحدد الحجم التشغيلي لإمدادات النفط الخام المطروحة في السوق الدولية."
+  },
+  "العراق: استثمارات “توتال انرجيز” مرشحه للارتفاع الي 16 مليار دولار": {
+    "meaning": "An upward revision in project scope expands long-term capital expenditure allocations for energy infrastructure development, binding contractor commitments to regional extraction, gas-gathering, and processing facilities.",
+    "meaning_ar": "يمثل تعديل نطاق المشروع توسعاً في مخصصات الإنفاق الرأسمالي طويل الأجل للبنية التحتية للطاقة، مما يربط التزامات المقاولين بتطوير منشآت الاستخراج وتجميع الغاز ومعالجته إقليمياً."
   },
   "العريان يتوقع استمرار موجه بيع السندات الحكوميه العالميه وارتفاع العوايد": {
     "meaning": "Global sovereign bond sell-offs decrease bond prices and mechanically increase bond yields due to their inverse mathematical relationship, which raises benchmark borrowing costs across international capital markets.",
@@ -3856,6 +3872,10 @@
     "meaning": "Asset tokenization represents traditional financial assets as digital tokens on distributed ledger networks, using dollar-denominated instruments and stablecoins as the primary medium of exchange and settlement.",
     "meaning_ar": "يتمثل ترميز الأصول في تحويل الأصول المالية التقليدية إلى رموز رقمية على شبكات السجلات الموزعة، مع استخدام الأدوات المالية والعملات المستقرة المقومة بالدولار كوسيط أساسي للتبادل والتسوية."
   },
+  "دويتشه بنك: دوره الذكاء الاصطناعي تعزز فرص الاسهم الامريكيه حتي 2027": {
+    "meaning": "Capital expenditures in artificial intelligence infrastructure direct corporate investment into technology hardware, data centers, and enterprise software providers.",
+    "meaning_ar": "توجه النفقات الرأسمالية في البنية التحتية للذكاء الاصطناعي استثمارات الشركات نحو قطاعات عتاد التكنولوجيا ومراكز البيانات ومزودي البرمجيات المؤسسية."
+  },
   "دي بي ورلد تستثمر 4 مليارات درهم في الشرق الاوسط واوروبا وافريقيا خلال النصف الاول 2026و": {
     "meaning": "This operational capital allocation deploys funding directly into port, terminal, and logistics infrastructure assets across the company's Middle East, Europe, and Africa networks.",
     "meaning_ar": "يمثل هذا الإجراء توجيهاً للنفقات الرأسمالية نحو أصول البنية التحتية للموانئ والمحطات وشبكات الإمداد اللوجستي التابعة للشركة في مناطق الشرق الأوسط وأوروبا وإفريقيا."
@@ -4184,6 +4204,10 @@
     "meaning": "An opening-trade stability in the Saudi Riyal exchange rate fixes the immediate local-currency settlement cost for bilateral commercial trade and pilgrimage services between Egypt and Saudi Arabia.",
     "meaning_ar": "يُثبّت استقرار سعر صرف الريال السعودي في بداية التعاملات تكلفة التسوية الفورية بالعملة المحلية للتبادل التجاري وخدمات السفر بين مصر والمملكة العربية السعودية."
   },
+  "سعر الريال السعودي في مصر اليوم الاثنين 14/9/2026.. اغلاق مرتفع": {
+    "meaning": "A higher closing rate for the Saudi Riyal raises the domestic currency cost of imports from Saudi Arabia and revalues Riyal-denominated trade liabilities and remittance inflows in the local banking system.",
+    "meaning_ar": "يؤدي ارتفاع سعر إغلاق الريال السعودي إلى زيادة تكلفة الواردات المقومة به بالعملة المحلية، وإعادة تقييم الالتزامات التجارية وتدفقات التحويلات بالريال داخل القطاع المصرفي."
+  },
   "سعر الريال السعودي في مصر اليوم الاثنين 7/9/2026.. ارتفاع بالختام": {
     "meaning": "An increase in the Saudi Riyal exchange rate against the Egyptian Pound directly raises the local currency cost of trade imports, religious travel obligations, and cross-border payment settlements denominated in SAR.",
     "meaning_ar": "يؤدي ارتفاع سعر صرف الريال السعودي مقابل الجنيه المصري إلى زيادة التكلفة الفعلية بالعملة المحلية للواردات التجارية ونفقات رحلات العمرة وتسوية المعاملات المالية المحددة بالريال."
@@ -4259,6 +4283,10 @@
   "سعر اليورو في مصر اليوم الاثنين 14/9/2026.. تراجع بالافتتاح": {
     "meaning": "A lower euro exchange rate at market opening reduces the local-currency cost of European imports and adjusts the carrying value of euro-denominated obligations for domestic market participants.",
     "meaning_ar": "يؤدي تراجع سعر صرف اليورو في بداية التعاملات إلى خفض التكلفة بالعملة المحلية للواردات القادمة من أوروبا، فضلًا عن إعادة تسعير الالتزامات المالية القائمة باليورو للكيانات المحلية."
+  },
+  "سعر اليورو في مصر اليوم الاثنين 14/9/2026.. ختام التعاملات": {
+    "meaning": "Official end-of-day foreign exchange quotations reflect the closing clearing prices for the Euro against the Egyptian Pound, establishing the valuation benchmark for foreign currency trade settlements and corporate balance sheet revaluations.",
+    "meaning_ar": "تعكس أسعار صرف العملات الأجنبية في ختام التعاملات أسعار التسوية النهائية لليورو مقابل الجنيه المصري، وهي تحدد المعيار المالي المعتمد لتسوية المعاملات التجارية وإعادة تقييم مراكز العملات في الميزانيات العمومية."
   },
   "سعر اليورو في مصر اليوم الاثنين 7/9/2026.. ختام التعاملات": {
     "meaning": "The Euro exchange rate at the close of trading establishes the official valuation for clearing European trade invoices, calculating foreign-denominated obligations, and updating commercial bank foreign asset positions.",
@@ -6396,6 +6424,10 @@
   "“بايونيرز بروبرتيز” تشتري 230 الف سهم خزينه": {
     "meaning": "This transaction entails acquiring 230,000 treasury shares, which reduces the volume of actively circulating shares in the market and adjusts the equity structure on the balance sheet.",
     "meaning_ar": "تمثل هذه العملية استرداد الشركة لعدد 230 ألف سهم لتصبح أسهم خزينة، مما يقلص كمية الأسهم المتاحة للتداول في السوق ويعدل هيكل حقوق الملكية في الميزانية العمومية."
+  },
+  "“بايونيرز بروبرتيز” تشتري 450 الف سهم خزينه": {
+    "meaning": "The company repurchases its own shares from the open market to hold as treasury stock, which reduces the total number of outstanding shares circulating among public shareholders and alters the equity structure on the balance sheet.",
+    "meaning_ar": "تسترد الشركة جزءاً من أسهمها من التداول الحر للاحتفاظ بها كأسهم خزينة، مما يقلل عدد الأسهم المتبقية للتداول في السوق ويعدل هيكل حقوق الملكية في الميزانية العمومية."
   },
   "“بوست ايتالياني” تستحوذ علي 66.6% من “تيليكوم ايطاليا”": {
     "meaning": "Acquiring a 66.6% majority stake gives Poste Italiane operational and strategic control over Telecom Italia, integrating telecommunications assets into its broader corporate network and consolidating the entity's financial statements.",
