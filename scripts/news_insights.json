@@ -1495,6 +1495,10 @@
     "meaning": "This transaction reallocates 200.43 million Egyptian pounds of cash into physical real estate assets on the company's balance sheet, expanding its fixed asset base in New Cairo.",
     "meaning_ar": "تعيد هذه العملية تخصيص 200.43 مليون جنيه مصري من السيولة النقدية إلى أصول عقارية ملموسة في الميزانية العمومية للشركة، مما يوسع قاعدة أصولها الثابتة في القاهرة الجديدة."
   },
+  "اكسون موبيل: امريكا ستستحوذ علي 30% من انتاج الغاز المسال عالميا": {
+    "meaning": "This operational shift concentrates nearly one-third of the global liquefied natural gas export infrastructure within the United States, altering international baseline supply routing and trade-flow concentration.",
+    "meaning_ar": "يُركز هذا الترتيب التشغيلي ما يقرب من ثلث البنية التحتية العالمية لتصدير الغاز الطبيعي المسال داخل الولايات المتحدة، مما يعيد هيكلة خطوط الإمداد وتدفقات التجارة الدولية."
+  },
   "الاتحاد الاوروبي يخصص 200 مليون يورو لشراكه جديده مع جرينلاند": {
     "meaning": "The European Union establishes a 200 million euro direct funding mechanism for bilateral cooperation with Greenland, focusing on critical raw material supply chains and energy infrastructure. This capital transfer operates through institutional grants to support joint technical and resource development frameworks.",
     "meaning_ar": "يخصص الاتحاد الأوروبي تمويلاً مؤسسياً بقيمة 200 مليون يورو لدعم أطر التعاون المشترك مع جرينلاند في سلاسل إمداد المواد الخام الاستراتيجية ومشاريع الطاقة، حيث يعمل هذا التحويل المالي على تمويل البنية التحتية والتنسيق الفني المشترك بين الجانبين."
@@ -2599,6 +2603,10 @@
     "meaning": "The company records higher full-year bottom-line net income on its income statement, reflecting an expansion in operating revenues, enhanced cost-structure efficiencies, or non-operating gains relative to the previous financial year.",
     "meaning_ar": "تسجل الشركة نمواً في صافي أرباحها بنهاية سنتها المالية بقائمة الدخل، نتيجة توسع الإيرادات التشغيلية، أو انخفاض التكاليف، أو قيد أرباح غير تشغيلية مقارنة بالسنة السابقة."
   },
+  "الين الياباني يبتعد عن قمه 7 اشهر مقابل الدولار الامريكي": {
+    "meaning": "A retreat of the Japanese yen from its multi-month high against the US dollar reflects shifting interest rate differentials between the Federal Reserve and the Bank of Japan, which alters the pricing of global currency carry trades and the valuation of dollar-denominated assets.",
+    "meaning_ar": "يعكس تراجع الين الياباني عن أعلى مستوياته في عدة أشهر مقابل الدولار الأمريكي تغير فروق أسعار الفائدة بين الفيدرالي الأمريكي وبنك اليابان، وهو ما يغير تسعير صفقات الفائدة المعاكسة (الكاري تريد) العالمية وتقييم الأصول المقومة بالدولار."
+  },
   "الين الياباني يصعد لاعلي مستوي في 7 اشهر": {
     "meaning": "The Japanese yen's appreciation raises the cost of importing Japanese goods, components, and machinery for Egyptian businesses and increases the local-currency debt service on yen-denominated financing facilities.",
     "meaning_ar": "يؤدي ارتفاع الين الياباني إلى زيادة تكلفة استيراد السلع والآلات والمكونات اليابانية للشركات المصرية، ورفع قيمة خدمة الديون المقومة بالين بالعملة المحلية."
@@ -3427,6 +3435,10 @@
   "تنميه التجاره: «للولو ماركت» اول سلسله تجاريه تنضم الي مبادره «التموين» لخفض الاسعار": {
     "meaning": "Participation in the Ministry of Supply's initiative integrates private retail networks into the state-coordinated commodity pricing framework, whereby participating commercial chains allocate shelf space to sell designated food and consumer staples at fixed discounted margins under government supervision.",
     "meaning_ar": "يُدرج الانضمام إلى مبادرة وزارة التموين سلاسل التجزئة التجارية الخاصة ضمن منظومة تسعير وتداول السلع الأساسية، حيث تخصص المنافذ المشاركة مساحات بيعية لعرض سلع استهلاكية محددة بهوامش ربح مخفضة تحت إشراف حكومي."
+  },
+  "تنميه الصناعات الكيماويه توافق علي السير في اجراءات": {
+    "meaning": "The company's board formally initiates administrative and regulatory protocols required to execute a designated corporate transaction, restructuring, or project under Egyptian commercial and capital market rules.",
+    "meaning_ar": "يُمثّل هذا الإجراء موافقة مجلس إدارة الشركة رسميًا على تدشين الخطوات الإدارية والتنظيمية اللازمة لتنفيذ معاملة أو مشروع مؤسسي وفقًا للوائح السوق والقانون المصري."
   },
   "تنميه المشروعات يشارك في معرض الصين الدولي لفتح اسواق جديده": {
     "meaning": "Participation in international trade fairs provides affiliated micro, small, and medium enterprises with direct business-to-business (B2B) exhibition space and commercial exposure to foreign buyers and distribution networks.",
@@ -4565,6 +4577,10 @@
     "meaning": "This headline reports a personal social event and contains no operational, financial, or corporate mechanisms impacting capital markets or listed companies.",
     "meaning_ar": "يتناول هذا الخبر مناسبة اجتماعية وشخصية، ولا يتضمن أي آليات تشغيلية أو مالية تؤثر على الشركات المدرجة أو أسواق المال."
   },
+  "عزام: الزام الشركات باستخدام رمز OTP للتحقق من هويه عملاء التمويل الاستهلاكي وتمويل المشروعات خلال شهرين": {
+    "meaning": "The directive requires non-banking financial institutions offering consumer and SME financing to integrate One-Time Password (OTP) verification infrastructure into their digital onboarding and transaction protocols within a two-month regulatory timeline.",
+    "meaning_ar": "يُلزم القرار شركات التمويل الاستهلاكي وتمويل المشروعات بدمج منظومة التحقق عبر رمز المرور لمرة واحدة (OTP) ضمن بروتوكولات تسجيل العملاء وإتمام العمليات إلكترونياً خلال مهلة تنفيذية مدتها شهران."
+  },
   "عقود الديزل الامريكيه تتجاوز 5 دولارات للجالون لاول مره منذ 2022": {
     "meaning": "Global diesel prices serve as a direct benchmark for industrial transport, shipping, and power generation operational inputs across import-reliant energy markets.",
     "meaning_ar": "تشكل أسعار الديزل العالمية معياراً تسعيرياً مباشراً لمدخلات تشغيل قطاعات النقل الصناعي والشحن وتوليد الطاقة في الأسواق المعتمدة على استيراد المشتقات البترولية."
@@ -5372,6 +5388,10 @@
   "معرض الصين الدولي للاستثمار والتجاره يوسع افاق التعاون بين الصين والسعوديه": {
     "meaning": "Trade exhibitions serve as institutional platforms for direct bilateral negotiation, matching capital providers with industrial and infrastructure projects across participating jurisdictions.",
     "meaning_ar": "تعمل المعارض التجارية كمنصات مؤسسية للمفاوضات الثنائية المباشرة، حيث تتيح مطابقة رؤوس الأموال مع المشروعات الصناعية ومشروعات البنية التحتية بين الدول المشاركة."
+  },
+  "معلومات الوزراء 10و7 مليون مستخدم لمنصه الخدمات الحكوميه خلال 2025": {
+    "meaning": "Reaching 10.7 million users on the governmental services platform reflects the operational scale of state digital infrastructure, which processes public transactions electronically and integrates with licensed electronic payment and digital transformation service providers.",
+    "meaning_ar": "يعكس وصول عدد مستخدمي منصة الخدمات الحكومية إلى 10.7 مليون مستخدم النطاق التشغيلي للبنية التحتية الرقمية للدولة، والتي تنفذ المعاملات العامة إلكترونياً وتتكامل مع مزودي خدمات الدفع الإلكتروني والتحول الرقمي المرخصين."
   },
   "معيط: جزء كبير من عدم شعور المواطن بالتحسن الاقتصادي بسبب الصدمات الخارجيه": {
     "meaning": "Global macroeconomic shocks, including imported commodity price inflation and exchange rate fluctuations, directly transmit into the domestic cost structure, offsetting the transmission of aggregate fiscal stabilization to consumer-level purchasing power.",
