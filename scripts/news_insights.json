@@ -1403,6 +1403,10 @@
     "meaning": "The poultry exchange publishes daily spot wholesale prices, establishing the benchmark reference rate for trading live birds between commercial farms, distributors, and retail markets.",
     "meaning_ar": "تحدد بورصة الدواجن الأسعار اليومية الفورية لتداول الدواجن الحية بالجملة، مما يوفر السعر المرجعي المنظم للتعاملات بين المزارع والموزعين ومنافذ البيع بالتجزئة."
   },
+  "اسعار الفضه في مصر تخسر 50% من قيمتها خلال 2026": {
+    "meaning": "A 50% drop in local silver prices reflects a contraction in spot commodity valuations, directly deflating inventory carrying values for metal traders and reducing the input costs for industrial and jewelry manufacturers.",
+    "meaning_ar": "يعكس انخفاض أسعار الفضة محلياً بنسبة 50% تراجعاً في تقييمات السلع الفورية، مما يخفض القيمة الدفترية لمخزونات التجار ويقلل تكلفة المواد الخام لقطاعي التصنيع والحلي."
+  },
   "اسعار الفضه في مصر ترتفع جنيهين.. عيار 999 يسجل 106 جنيهات للجرام": {
     "meaning": "Local retail silver prices in Egypt track changes in global spot commodity prices and the exchange rate of the Egyptian pound against the US dollar.",
     "meaning_ar": "تتبع أسعار تداول الفضة في السوق المحلي المصري التغيرات في الأسعار الفورية للسلع عالمياً وحركة سعر صرف الجنيه المصري مقابل الدولار الأمريكي."
@@ -1770,6 +1774,10 @@
   "البورصه تغرم 6 شركات 240 الف جنيه وتمنحها 15 يوما لاستكمال القوايم الماليه": {
     "meaning": "The exchange enforces listing and disclosure rules by levying regulatory fines on non-compliant firms and setting a mandatory grace period to submit complete financial statements.",
     "meaning_ar": "تطبق البورصة قواعد القيد والإفصاح عبر فرض غرامات تنظيمية على الشركات غير الملتزمة وتحديد مهلة إلزامية لتقديم القوائم المالية المستوفاة."
+  },
+  "البورصه تواصل تراجعها بمنتصف التعاملات.. والثلاثيني ينخفض 0.90%": {
+    "meaning": "Mid-session trading reflects an excess of order volume executed on the bid side across the thirty constituent blue-chip equities, driving a net aggregate index contraction of 0.90%.",
+    "meaning_ar": "تعكس تعاملات منتصف الجلسة تفوقاً في حجم أوامر البيع المنفذة على أوامر الشراء لأسهم الشركات الثلاثين الكبرى، وهو ما يؤدي إلى تراجع المؤشر الرئيسي بنسبة 0.90%."
   },
   "البورصه توقع مذكره تفاهم مع الشركه المصريه للايداع والقيد لتعزيز كفاءه تداول ادوات الدين الحكوميه": {
     "meaning": "This agreement establishes direct operational and technical coordination between the Egyptian Exchange (EGX) and the Egyptian Central Securities Depository (ECSD) for the execution, clearing, and settlement workflows of sovereign debt instruments.",
@@ -6045,6 +6053,10 @@
     "meaning": "Domestic automotive price competition shifts manufacturer sales allocations toward export channels to distribute finished inventory across international markets.",
     "meaning_ar": "تؤدي المنافسة السعرية في السوق المحلية إلى إعادة توجيه الحصص البيعية للشركة المصنعة نحو قنوات التصدير لتوزيع المخزون عبر الأسواق الخارجية."
   },
+  "“FDC Summit” تعزز حضورها الاقليمي عبر كيان مستقل غير هادف للربح": {
+    "meaning": "Establishing an independent non-profit entity separates the conference's cross-border governance and institutional partnerships from commercial corporate liabilities while establishing dedicated regional operational channels.",
+    "meaning_ar": "يؤدي تأسيس كيان مستقل غير هادف للربح إلى فصل الحوكمة والشراكات المؤسسية الإقليمية للمؤتمر عن الالتزامات التجارية للشركة، مع تخصيص قنوات تشغيلية للأنشطة عبر الحدود."
+  },
   "“G42” الاماراتيه تدرس بيع حصه لشركات امريكيه لضمان الوصول للرقايق": {
     "meaning": "Equity divestment to US entities aligns the firm's ownership structure with foreign regulatory and export compliance frameworks to secure advanced semiconductor supply chains.",
     "meaning_ar": "يؤدي التنازل عن حصة ملكية لصالح كيانات أمريكية إلى مواءمة هيكل الملكية مع الأطر التنظيمية وضوابط التصدير الأجنبية لتأمين سلاسل إمداد الرقائق الإلكترونية المتقدمة."
@@ -6320,6 +6332,10 @@
   "“سيتي جروب” يرجي توقعاته لخفض الفايده الامريكيه الي 2027": {
     "meaning": "The shift in monetary policy expectations maintains higher global benchmark interest rates for an extended period, which sets cross-border funding costs and sovereign borrowing yields at elevated levels.",
     "meaning_ar": "يؤدي تعديل توقعات السياسة النقدية إلى استمرار أسعار الفائدة القياسية العالمية المرتفعة لفترة أطول، مما يحدد تكاليف التمويل عبر الحدود وعوائد الاقتراض السيادي عند مستويات مرتفعة."
+  },
+  "“سيتي” يجمع 40 مليار دولار لعملايه السعوديين ويزيد انكشافه علي السوق": {
+    "meaning": "Citigroup arranges debt and equity capital market transactions for Saudi clients while allocating balance sheet capital to expand its credit and financing exposure within the market.",
+    "meaning_ar": "يتولى سيتي بنك ترتيب صفقات التمويل وأسواق المال لعملائه في السعودية مع تخصيص سيولة من ميزانيته لزيادة حجم انكشافه الائتماني والتمويلي في السوق."
   },
   "“شي ان” تفقد 5 مليارات دولار من قيمتها السوقيه منذ الادراج في هونج كونج": {
     "meaning": "A decline in market capitalization reflects a decrease in the secondary market trading price of the company's shares multiplied by its total outstanding shares since its listing.",
