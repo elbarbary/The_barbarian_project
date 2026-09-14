@@ -527,6 +527,10 @@
     "meaning": "A block trading deal involves the execution of a high-volume share transaction at a pre-arranged price via the EGX deals market. This mechanism transfers substantial equity stakes between institutional or major investors outside the standard continuous auction order book.",
     "meaning_ar": "تُمثل صفقات الحجم الكبير تنفيذ معاملات على كميات ضخمة من الأسهم بسعر متفق عليه مسبقاً عبر سوق الصفقات في البورصة المصرية. وتعمل هذه الآلية على نقل ملكية حصص كبيرة بين كبار المستثمرين خارج دفتر أوامر التداول المستمر المعتاد."
   },
+  "emaar misr signs egp 14 billion contracts with rowad and innovo for marassi red sea": {
+    "meaning": "These construction agreements commit Emaar Misr to EGP 14 billion in capital expenditures for project delivery, allocating civil works to the contractors and recording corresponding commitments on the developer's balance sheet.",
+    "meaning_ar": "تُلزم هذه العقود الإنشائية شركة إعمار مصر بنفقات رأسمالية تبلغ 14 مليار جنيه لتنفيذ المشروع، مع إسناد الأعمال المدنية للمقاولين وإثبات هذه الالتزامات في ميزانية الشركة."
+  },
   "emer group approves anc restructuring ahead of egx listing": {
     "meaning": "Internal corporate restructuring reorganizes subsidiary assets, equity stakes, and operational divisions within the group to fulfill Egyptian Exchange regulatory and governance criteria for initial public offerings.",
     "meaning_ar": "تتضمن إعادة الهيكلة المؤسسية الداخلية تعديل توزيع الأصول، وحصص الملكية، والقطاعات التشغيلية التابعة للشركة لتوفيق أوضاعها مع متطلبات الحوكمة والقواعد التنظيمية المنظمة للطرح في البورصة المصرية."
@@ -1818,6 +1822,10 @@
   "التجميع المحلي يقود مبيعات الاتوبيسات للنمو بنسبه 88% خلال 7 اشهر (جراف)": {
     "meaning": "Domestic assembly operations supply the local commercial vehicle market, substituting finished imports with imported completely knocked down (CKD) components assembled in Egyptian manufacturing facilities.",
     "meaning_ar": "تغطي عمليات التجميع المحلي احتياجات سوق مركبات النقل التجاري، عبر استبدال المنتجات تامة الصنع المستوردة بتجميع مكونات الإنتاج المستوردة داخل المنشآت الصناعية المصرية."
+  },
+  "التضامن : صرف معاشات تكافل وكرامه عن سبتمبر غدا بقيمه تتجاوز 4 مليارات جنيه": {
+    "meaning": "The disbursement of over EGP 4 billion in cash transfers injects direct public social spending into household cash flows via post offices and ATM networks, processing routine retail liquidity for consumer goods transactions.",
+    "meaning_ar": "يضخ صرف أكثر من 4 مليارات جنيه من التحويلات النقدية مخصصات إنفاق اجتماعي مباشرة في التدفقات النقدية للأسر عبر مكاتب البريد وشبكات الصراف الآلي، مما يوفر سيولة نقدية فورية لمعاملات السلع الاستهلاكية."
   },
   "التضخم في امريكا يرتفع 3.4% في اغسطس علي اساس سنوي": {
     "meaning": "An annual US inflation rate of 3.4% reflects the pace of consumer price increases across the US economy, which anchors the Federal Reserve's benchmark interest rate decisions and influences global capital flows and dollar-denominated borrowing costs.",
@@ -3956,6 +3964,10 @@
     "meaning": "Government directives to expand green spaces involve municipal procurement of seedlings, nursery stock, landscape maintenance services, and localized irrigation equipment across governorates.",
     "meaning_ar": "تتضمن التوجيهات الحكومية لزيادة المساحات الخضراء مشتريات محلية للشتلات الزراعية، ومستلزمات المشاتل، وخدمات تنسيق الحدائق، ومعدات شبكات الري عبر المحافظات."
   },
+  "رييس الوزراء: حظر قطع الاشجار نهاييا الا بالعوده الي وزيره التنميه المحليه والبييه": {
+    "meaning": "This introduces a dual-ministerial approval requirement for tree removal, adding an administrative compliance step to infrastructure, urban development, and construction projects on land containing vegetation.",
+    "meaning_ar": "يفرض هذا القرار مسار موافقة وزارية مزدوجة قبل إزالة الأشجار، مما يضيف إجراء امتثال إداري وتنظيمي على مشروعات البنية التحتية والتطوير العمراني والإنشاءات القائمة على أراضٍ تحوي غطاءً نباتياً."
+  },
   "رييس الوزراء: مجمعات الخدمات الحكوميه تستهدف تقريب الخدمه من المواطن": {
     "meaning": "Government service complexes consolidate administrative and documentation procedures into unified regional hubs, centralising public sector transaction processing and reducing physical transit between disparate municipal entities.",
     "meaning_ar": "تعمل مجمعات الخدمات الحكومية على تجميع الإجراءات الإدارية والتوثيقية في مراكز إقليمية موحدة، مما يؤدي إلى مركزية معالجة المعاملات العامة وتقليص التنقل الفعلي بين الجهات الحكومية المختلفة."
@@ -5084,6 +5096,10 @@
   "مدبولي يفتتح مصنعين لتجهيز سيارات الاسعاف وتجميع اجهزه الاسنان باستثمارات 16 مليون دولار": {
     "meaning": "The deployment of $16 million in direct capital expenditure establishes domestic assembly lines for ambulance outfitting and dental equipment, shifting the supply chain from fully finished imports to localized component integration.",
     "meaning_ar": "يُمثل ضخ استثمارات رأسمالية بقيمة 16 مليون دولار إضافة خطوط إنتاج وتجميع محلية لتجهيز سيارات الإسعاف ومعدات الأسنان، محولاً سلسلة التوريد من استيراد المنتجات كاملة الصنع إلى التجميع والتجهيز المحلي."
+  },
+  "مدبولي يوجه المحافظين بتحسين الخدمات ومتابعه المدارس والاسعار ونظافه الطرق والاناره والاستماع للشكاو": {
+    "meaning": "Government directives to intensify retail price monitoring and local infrastructure maintenance place municipal oversight directly on consumer supply chains and local public works contracts.",
+    "meaning_ar": "تضع التوجيهات الحكومية بتكثيف الرقابة على الأسعار وصيانة البنية التحتية المحلية سلاسل إمداد السلع الاستهلاكية وعقود الأشغال العامة تحت الإشراف المباشر للمحليات."
   },
   "مدبولي: افريقيا ليست مجرد انتماء جغرافي لمصر.. بل تاريخ مشترك ومصير واحد": {
     "meaning": "High-level economic engagement with African nations frames regional trade policy, bilateral commercial agreements, and cross-border infrastructure initiatives for Egyptian enterprises operating in continental markets.",
