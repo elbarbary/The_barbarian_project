@@ -1,32 +1,12 @@
-/* The scenario workbench: what every model says, for whatever you point it at.
- *
- * THIS SCREEN IS DIFFERENT IN KIND FROM THE REST OF THE SITE AND IS BUILT AS IF
- * Everywhere else, ESTHMR publishes measurements — things that have already
- * happened — and lets the reader judge. This screen shows a number a model
- * produced about a named company's future. That is the one thing an unlicensed
- * publisher is on the least certain ground doing, and the owner's decision is
- * to ship it as a labelled experiment behind a gate rather than not at all.
- *
- * So the gate is real, not decorative:
- *   · the screen does not render its figures until the reader has read the
- *     warning and accepted it, and the acceptance is stored per reader;
- *   · every model's own track record travels beside its number, so nobody
- *     reads a prediction without seeing how often that model has been right;
- *   · nothing here is ordered by attractiveness. A company list is
- *     alphabetical and a model list is in a fixed order;
- *   · there is no "best" anything, and no buy, sell, target or upside.
- *
- * WHAT IS PRECOMPUTED, AND WHAT THE LOADER IS FOR
- * All of it is precomputed: the nightly run sealed these numbers before the
- * market opened, and the screen reads one document. The progress the reader
- * sees while a scenario assembles is the real work of evaluating their
- * selection over up to 260 companies and their added layers — not a fake
- * spinner over a fetch that already finished. It is staged so a slow phone
- * shows something moving, and each stage names what it is doing.
- */
+/* Saved model outputs, with a per-reader experimental warning.
+ * Lists are alphabetical, not recommendations. Context is displayed alongside
+ * outputs and does not change them. Only a pending data fetch shows loading.
+ * Disclosure and gating are safeguards, not a determination of legality. */
 import { React as R } from './react-shim.js';
 import * as RB from './rulebook.js';
-import { COLUMNS, columnLabel, answerCounts, describe, asRulebook } from './ask.js';
+import { asRulebook } from './ask.js';
+import { recordChart, points, shortModel, modelInk } from './ai-visuals.js';
+import { companyPicker, savedRulePicker, scenarioFocus } from './scenario-visuals.js';
 
 const h = R.createElement;
 const finite = (v) => typeof v === 'number' && Number.isFinite(v);
@@ -45,43 +25,45 @@ export function accept(email) {
 
 /* ── the warning ────────────────────────────────────────────────────────── */
 
-/* Four sentences, each of which is a fact the reader would otherwise have to
- * infer. Not a wall of legal text nobody reads: the point is that somebody
- * who accepts this has actually been told the models are weeks old, that
- * their top five has mostly trailed the market, and that nothing here is a
- * recommendation. */
-export function warningLines(top5, ar) {
+/* Derive sample and timestamp caveats from the actual published record. */
+export function warningLines(top5, ar, run) {
   const t = (en, arabic) => (ar ? arabic : en);
   const sessions = (top5 && Array.isArray(top5.dates)) ? top5.dates.length : 0;
+  const scored = Object.values(top5?.models || {}).filter(m => m.group !== 'baseline').map(m => m.horizons?.['5']).filter(r => r?.sessions > 0 && finite(r.meanAdvantage));
+  const behind = scored.filter(r => r.meanAdvantage < 0).length;
   return [
     t('These are outputs from experimental models, not forecasts this publisher endorses and not investment advice. ESTHMR is not licensed to advise on securities.',
       'هذه مخرجات نماذج تجريبية، وليست توقعات يتبنّاها هذا الناشر ولا نصيحة استثمارية. إسثمر غير مرخّص لتقديم المشورة في الأوراق المالية.'),
-    t(`The models have been running for ${sessions || 'a handful of'} sessions. That is weeks, not years, and far too little to know whether any of them can forecast this exchange.`,
-      `تعمل النماذج منذ ${sessions || 'عدد قليل من'} جلسة. أسابيع، لا سنوات، وأقل بكثير من أن نعرف ما إذا كان أي منها يستطيع التنبؤ بهذه البورصة.`),
-    t('Over five sessions, the five companies most of these models ranked highest have returned LESS than the market. Their record is shown beside every number here.',
-      'خلال خمس جلسات، حققت الشركات الخمس الأعلى ترتيبًا لدى معظم هذه النماذج عائدًا أقل من السوق. سجلّها معروض بجوار كل رقم هنا.'),
-    t('Every figure was sealed and timestamped by an independent authority before the market opened, so it cannot have been edited afterwards. That proves when it was said. It does not make it right.',
-      'كل رقم خُتم ووُثِّق زمنيًا لدى جهة مستقلة قبل افتتاح السوق، فلا يمكن تعديله لاحقًا. هذا يثبت متى قيل، ولا يجعله صحيحًا.'),
+    t(`The published record covers ${sessions} evaluation dates, with different sample sizes per model and horizon. Historical testing is not live investment performance.`,
+      `يغطي السجل المنشور ${sessions} تاريخ تقييم، بأحجام عيّنات مختلفة لكل نموذج وفترة. الاختبار التاريخي ليس أداء استثمار فعلي.`),
+    scored.length ? t(`${behind} of ${scored.length} scored models lag their market benchmark over five sessions. Check the sample and the losses, not just the average.`,`${behind} من ${scored.length} نموذجاً مقيّماً أقل من السوق المقارن خلال خمس جلسات. راجع العيّنة والخسائر، لا المتوسط فقط.`)
+      : t('There are no completed five-session scores yet. Missing results are not zero returns.', 'لا توجد نتائج مكتملة لفترة خمس جلسات بعد. النتيجة المفقودة ليست عائداً صفرياً.'),
+    run?.commitment?.timestamped ? t('This run reports an independent timestamp. A timestamp helps check when a record existed; it does not make it right or prove predictive skill.', 'هذا التشغيل يحمل توثيقاً زمنياً مستقلاً بحسب سجله. يساعد التوثيق في التحقق من وقت وجود السجل، ولا يثبت صحة التوقع أو قدرته التنبؤية.')
+      : t('Independent timestamp evidence is unavailable for this run. Do not assume these outputs were verified before trading.', 'لا يتوفر دليل توثيق زمني مستقل لهذا التشغيل. لا تفترض أن هذه المخرجات تحقّق منها قبل التداول.'),
   ];
 }
 
 function gate(component, data, ar) {
   const t = (en, arabic) => (ar ? arabic : en);
   const reader = component._reader || null;
-  return h('div', { class: 'sc-gate', role: 'dialog', 'aria-modal': 'true',
-                    'aria-labelledby': 'sc-gate-title' },
+  const dialog = h('dialog', { class: 'sc-gate', 'aria-modal': 'true',
+                    'aria-labelledby': 'sc-gate-title', onCancel: () => component.setState({screen:'home'}) },
     h('div', { class: 'sc-gate-card' },
       h('p', { class: 'sc-gate-eyebrow' }, t('Experimental', 'تجريبي')),
       h('h2', { id: 'sc-gate-title' }, t('Before you open this', 'قبل أن تفتح هذا')),
       h('ul', { class: 'sc-gate-list' },
-        warningLines(data.top5, ar).map((line, i) => h('li', { key: i }, line))),
+        warningLines(data.top5, ar, data.scenarios).map((line, i) => h('li', { key: i }, line))),
       h('div', { class: 'q-actions' },
         h('button', { type: 'button', class: 'q-save',
-          onClick: () => { accept(reader); component.setState({ scAccepted: Date.now() }); } },
+          autofocus: true,
+          onClick: () => { accept(reader); component.setState({ scAccepted: Date.now(), scAcceptedReader: reader }); } },
           t('I understand — show me', 'فهمت — اعرضه')),
         h('button', { type: 'button', class: 'q-cancel',
           onClick: () => component.setState({ screen: 'home' }) },
           t('Take me back', 'عُد بي')))));
+  // Native modality supplies focus containment and Escape on touch/desktop.
+  queueMicrotask(() => { if (dialog.isConnected && !dialog.open && typeof dialog.showModal === 'function') dialog.showModal(); });
+  return dialog;
 }
 
 /* ── the pickers ────────────────────────────────────────────────────────── */
@@ -101,6 +83,8 @@ export const LAYERS = [
   { id: 'filings', en: 'Its latest filing', ar: 'آخر إفصاح لها' },
   { id: 'measures', en: 'Its measurements', ar: 'قياساتها' },
   { id: 'spread', en: 'Where the models disagree', ar: 'أين تختلف النماذج' },
+  { id: 'news', en: 'News', ar: 'الأخبار' },
+  { id: 'rulebook', en: 'Research rules', ar: 'قواعد البحث' },
 ];
 
 function chips(items, chosen, onPick, ar, multi) {
@@ -127,6 +111,7 @@ export function universeFor(state, scenarios, measures) {
     const matched = new Set(out.results.map((r) => r.ticker));
     return { tickers: all.filter((t) => matched.has(t)), how: 'rule', result: out };
   }
+  if (state.scSubject === 'rule') return { tickers: [], how: 'rule' };
   return { tickers: all, how: 'market' };
 }
 
@@ -206,37 +191,16 @@ function distribution(view, ar) {
 function recordFor(top5, model, horizon, ar) {
   const t = (en, arabic) => (ar ? arabic : en);
   const row = (((top5 && top5.models) || {})[model] || {}).horizons || {};
-  const one = row[String(horizon)] || row['5'] || {};
+  const one = row[String(horizon)] || {};
   if (!one.sessions) {
     return h('p', { class: 'home-note' }, t(
       'This model has no scorable record yet — it has not run on enough sessions.',
       'لا سجل قابل للتقييم لهذا النموذج بعد — لم يعمل على جلسات كافية.'));
   }
-  return h('p', { class: 'home-note sc-record' }, t(
-    `Its five highest-ranked returned ${pp(one.meanReturn)} against the market's ${pp(one.meanMarket)} — ${pp(one.meanAdvantage)} — ahead on ${one.ahead} of ${one.sessions} sessions.`,
-    `حققت أعلى خمس لديه ${pp(one.meanReturn)} مقابل ${pp(one.meanMarket)} للسوق — ${pp(one.meanAdvantage)} — متقدّمًا في ${one.ahead} من ${one.sessions} جلسة.`));
-}
-
-/* Staged, because assembling a view over 260 companies and their layers is
-   real work on a phone and a screen that freezes silently reads as broken.
-   Each stage names what it is doing; none of them is a wait invented to look
-   busy — the document is already here, the evaluation is not. */
-export const STAGES = [
-  { id: 'read', en: 'Reading the sealed run', ar: 'قراءة الجلسة المختومة' },
-  { id: 'select', en: 'Selecting your companies', ar: 'اختيار شركاتك' },
-  { id: 'models', en: 'Collecting what each model said', ar: 'جمع ما قاله كل نموذج' },
-  { id: 'layers', en: 'Adding your layers', ar: 'إضافة طبقاتك' },
-];
-
-function loading(stage, ar) {
-  const t = (en, arabic) => (ar ? arabic : en);
-  return h('div', { class: 'sc-loading', role: 'status', 'aria-live': 'polite' },
-    h('div', { class: 'sc-loading-track' },
-      h('span', { style: `width:${((stage + 1) / STAGES.length) * 100}%` })),
-    h('ul', { class: 'sc-loading-list' }, STAGES.map((s, i) => h('li', {
-      key: s.id, class: i < stage ? 'done' : i === stage ? 'now' : '' },
-      h('span', { class: 'sc-tick', 'aria-hidden': 'true' }, i < stage ? '✓' : '·'),
-      ar ? s.ar : s.en))));
+  return h('section', {class:'sc-record-panel'},h('h3',null,t('How this model actually performed','كيف كان أداء هذا النموذج فعلياً')),
+    recordChart(one,ar,modelInk(model)),h('p', { class: 'home-note sc-record' }, t(
+    `Its five highest-ranked returned ${pp(one.meanReturn)} against its market benchmark's ${pp(one.meanMarket)} — ${points(one.meanAdvantage)} — ahead on ${one.ahead} of ${one.sessions} sessions. Historical test outcomes, not portfolio returns.`,
+    `حققت أعلى خمس لديه ${pp(one.meanReturn)} مقابل ${pp(one.meanMarket)} للسوق المقارن — ${points(one.meanAdvantage)} — متقدّمًا في ${one.ahead} من ${one.sessions} جلسة. نتائج اختبارات تاريخية، لا عوائد محفظة.`)));
 }
 
 /* ── the screen ─────────────────────────────────────────────────────────── */
@@ -249,135 +213,87 @@ export function scenariosScreen(component, data, ar) {
   const top5 = data.top5 || null;
   const measures = data.measures || null;
 
-  if (!hasAccepted(reader) && !st.scAccepted) {
+  if (!hasAccepted(reader) && !(st.scAccepted && st.scAcceptedReader === reader)) {
     return { screen: h('div', { class: 'home-screen sc-screen' }, gate(component, data, ar)) };
   }
 
   if (!scenarios) {
     return { screen: h('div', { class: 'home-screen sc-screen' },
       h('header', { class: 'home-intro' }, h('h1', null, t('Scenario workbench', 'مختبر السيناريوهات'))),
-      h('p', { class: 'home-note' }, t('The sealed run has not loaded yet.', 'لم تُحمَّل الجلسة المختومة بعد.'))) };
+      h('div',{class:'sc-loading',role:'status'},h('div',{class:'sc-skeleton','aria-hidden':'true'}),h('p', { class: 'home-note' }, t('Loading the saved model run—not generating a new forecast.', 'جارٍ تحميل تشغيل النموذج المحفوظ، وليس إنشاء توقع جديد.'))),
+      h('button',{type:'button',class:'q-cancel',onClick:()=>component.onRetryData?.()},t('Retry loading','إعادة التحميل'))) };
   }
 
-  const model = st.scModel && scenarios.models[st.scModel] ? st.scModel : Object.keys(scenarios.models)[0];
+  const models = scenarios.models || {};
+  const model = st.scModel === 'rerank' ? 'rerank' : st.scModel && models[st.scModel] ? st.scModel : Object.keys(models)[0];
   const horizon = [1, 5, 20].includes(Number(st.scHorizon)) ? Number(st.scHorizon) : 5;
   const subject = st.scSubject || 'market';
   const layers = st.scLayers || ['record', 'spread'];
-  const stage = finite(st.scStage) ? st.scStage : STAGES.length;
 
   const picked = universeFor({ ...st, scSubject: subject }, scenarios, measures);
   const view = viewFor(picked.tickers, scenarios, model, horizon);
   const commitment = scenarios.commitment || {};
 
-  // Re-run the staged assembly whenever the selection changes.
+  // Selection is synchronous work over a saved document. Do not invent a
+  // timed AI run or let an earlier timer overwrite a later selection.
   const restage = (patch) => {
-    component.setState({ ...patch, scStage: 0 });
-    STAGES.forEach((_, i) => setTimeout(() => {
-      if (component.state.screen === 'scenarios') component.setState({ scStage: i + 1 });
-    }, 140 * (i + 1)));
+    component.setState(patch);
   };
 
-  const modelChips = h('div', { class: 'ask-subjects' },
-    Object.entries(scenarios.models).map(([id, m]) => h('button', {
-      key: id, type: 'button', class: model === id ? 'ask-subject on' : 'ask-subject',
-      'aria-pressed': model === id ? 'true' : 'false',
-      onClick: () => restage({ scModel: id }) }, ar ? m.labelAr : m.label)));
+  const modelButton = ([id,m]) => h('button', {
+    key:id,type:'button',class:model===id?'sc-model-option on':'sc-model-option',
+    'aria-pressed':String(model===id),onClick:()=>restage({scModel:id}),
+    style:`--model-ink:${modelInk(id)}`
+  }, h('i',{'aria-hidden':'true'}), h('span',null,shortModel(id,ar?m.labelAr:m.label)),
+     h('small',null,m.group==='baseline'?t('Simple comparison','مقارنة بسيطة'):id==='rerank'?t('Context reranking','ترتيب بالسياق'):t('Price model','نموذج أسعار')));
+  const modelEntries = Object.entries(scenarios.models || {});
+  if (top5?.models?.rerank && !models.rerank) modelEntries.push(['rerank',{label:'Gemini',group:'rerank'}]);
+  const narrow = typeof matchMedia === 'function' && matchMedia('(max-width: 760px)').matches;
+  const controlsOpen = st.scControlsOpen ?? !narrow;
+  const controls = h('details',{class:'sc-controls-shell',open:controlsOpen},
+    h('summary',{onClick:e=>{e.preventDefault();component.setState({scControlsOpen:!controlsOpen});}},
+      h('span',null,t('Adjust your comparison','عدّل المقارنة')),
+      h('small',null,`${shortModel(model)} · ${horizon} ${t('sessions','جلسة')} · ${picked.tickers.length} ${t('companies','شركة')}`)),
+    h('div',{class:'sc-controls'},
+    h('section',{class:'sc-step'},h('h2',null,h('b',null,'01'),t('Choose what to explore','اختر ما تستكشفه')),
+      chips(SUBJECT,subject,id=>restage({scSubject:id}),ar,false),
+      subject==='picked'?companyPicker(component,data,scenarios,ar):null,
+      subject==='rule'?savedRulePicker(component,ar):null),
+    h('section',{class:'sc-step'},h('h2',null,h('b',null,'02'),t('Choose a model','اختر نموذجاً')),
+      h('div',{class:'sc-model-options'},modelEntries.filter(([,m])=>m.group!=='baseline').map(modelButton)),
+      h('details',{class:'sc-baselines'},h('summary',null,t('Simple comparison models','نماذج المقارنة البسيطة')),modelEntries.filter(([,m])=>m.group==='baseline').map(modelButton))),
+    h('section',{class:'sc-step'},h('h2',null,h('b',null,'03'),t('Look how far ahead?','ما الفترة التي تريد استكشافها؟')),
+      h('div',{class:'ask-subjects'},[1,5,20].map(hz=>h('button',{key:hz,type:'button',class:horizon===hz?'ask-subject on':'ask-subject','aria-pressed':String(horizon===hz),onClick:()=>restage({scHorizon:hz})},hz===1?t('Next session','الجلسة التالية'):t(`${hz} sessions`,`${hz} جلسة`))))),
+    h('section',{class:'sc-step'},h('h2',null,t('Add context','أضف السياق')),
+      chips(LAYERS,layers,id=>restage({scLayers:layers.includes(id)?layers.filter(x=>x!==id):[...layers,id]}),ar,true),
+      h('p',{class:'home-note'},t('These switches add evidence beside the saved output. They do not rerun or change the model.','تضيف هذه الخيارات أدلة بجانب المخرجات المحفوظة. لا تعيد تشغيل النموذج ولا تغيّر نتيجته.')))));
 
-  const body = stage < STAGES.length ? loading(stage, ar) : h('div', null,
-    h('div', { class: 'sc-summary' },
-      h('div', null,
-        h('div', { class: 'sc-figure', style: `color:${tone(view.median)}` }, pp(view.median)),
-        h('div', { class: 'aic-against' }, t(
-          `median of ${view.answered} estimates · ${view.up} above zero · ${view.down} below`,
-          `وسيط ${view.answered} تقدير · ${view.up} فوق الصفر · ${view.down} تحته`))),
-      distribution(view, ar)),
-    recordFor(top5, model, horizon, ar),
+  const body = h('div',{class:'sc-results'},
+    model==='rerank'&&!models.rerank?h('p',{class:'sc-caution'},t('Gemini’s saved reranking record is shown below. This run contains no Gemini return estimates; none are substituted from another model.','سجل إعادة ترتيب جيميني المحفوظ معروض أدناه. لا يحتوي هذا التشغيل على تقديرات عائد لجيميني، ولا نستبدلها بنتائج نموذج آخر.')):null,
+    scenarioFocus(component,data,scenarios,view,model,horizon,layers,ar),
+    layers.includes('record')?recordFor(top5,model,horizon,ar):null,
+    h('section',{class:'sc-overview'},h('h2',null,t('Across your selection','عبر اختيارك')),
+      h('div',{class:'sc-summary'},h('div',null,h('strong',{class:'sc-figure',dir:'ltr'},pp(view.median)),
+        h('p',{class:'aic-against'},t('Middle estimate—not an expected portfolio return','التقدير الأوسط، وليس عائد محفظة متوقعاً')),
+        h('p',{class:'home-note'},t(`${view.answered} estimates · ${view.up} positive · ${view.down} negative · ${view.silent} unavailable`,`${view.answered} تقديراً · ${view.up} موجب · ${view.down} سالب · ${view.silent} غير متاح`))),distribution(view,ar))),
+    h('section',{class:'sc-company-section'},h('h2',null,t('Explore a company','استكشف شركة')),
+      h('p',{class:'home-note'},t('Alphabetical, not a recommendation ranking. Tap a company to compare its models above.','ترتيب أبجدي، وليس ترتيب توصيات. اضغط على شركة لمقارنة نماذجها بالأعلى.')),
+      h('div',{class:'sc-stock-cards'},view.rows.map(r=>h('button',{key:r.ticker,type:'button',class:'sc-stock-card','aria-pressed':String(r.ticker===(view.rows.find(x=>x.ticker===st.scFocus)||view.rows[0])?.ticker),
+        onClick:()=>{component.setState({scFocus:r.ticker});if(typeof requestAnimationFrame==='function')requestAnimationFrame(()=>document.getElementById('sc-focus')?.scrollIntoView({block:'start',behavior:'instant'}));}},
+        h('b',null,r.ticker),h('strong',{dir:'ltr',style:`color:${tone(r.value)}`},pp(r.value)),
+        h('span',null,finite(r.value)?t('Model estimate','تقدير النموذج'):t('No estimate','لا تقدير')),
+        h('span',{'aria-hidden':'true'},'↗'))))));
 
-    h('div', { class: 'sc-rows' }, view.rows.map((r) => h('button', {
-      key: r.ticker, type: 'button', class: 'ask-row',
-      onClick: () => component.setState({ screen: 'company', ticker: r.ticker }) },
-      h('b', null, r.ticker),
-      h('span', { class: 'ask-why' },
-        h('span', { class: 'ask-reason', style: `color:${tone(r.value)}` },
-          finite(r.value) ? pp(r.value) : t('silent', 'صامت')),
-        layers.includes('spread') && r.spread
-          ? h('span', { class: 'ask-reason' }, t(
-              `${r.spread.models} models span ${pp(r.spread.low)} to ${pp(r.spread.high)}${r.spread.agree ? '' : ' — they disagree on direction'}`,
-              `${r.spread.models} نماذج بين ${pp(r.spread.low)} و${pp(r.spread.high)}${r.spread.agree ? '' : ' — تختلف في الاتجاه'}`))
-          : null,
-        layers.includes('measures') && measures
-          ? (() => {
-              const row = (measures.rows || []).find((x) => x.ticker === r.ticker);
-              return row && finite(row.relative_volume_20)
-                ? h('span', { class: 'ask-reason' }, `${row.relative_volume_20.toFixed(1)}× ${t('its median volume', 'معتاد حجمها')}`)
-                : null;
-            })()
-          : null,
-        layers.includes('filings') && measures
-          ? (() => {
-              const row = (measures.rows || []).find((x) => x.ticker === r.ticker);
-              return row && finite(row.sessions_since_filing)
-                ? h('span', { class: 'ask-reason' }, t(
-                    `filed ${row.sessions_since_filing} sessions ago`,
-                    `أفصحت منذ ${row.sessions_since_filing} جلسة`))
-                : null;
-            })()
-          : null))),
-    ),
-    h('p', { class: 'home-note' }, t(
-      `Every company in your selection is listed, alphabetically — not in the model's order. The model's own number is on each row; the rows are not ranked by it.`,
-      'كل شركة في اختيارك مذكورة أبجديًا — لا بترتيب النموذج. رقم النموذج على كل صف؛ والصفوف ليست مرتّبة به.')));
-
-  return {
-    screen: h('div', { class: 'home-screen sc-screen' },
-      h('header', { class: 'home-intro' },
-        h('h1', null, t('Scenario workbench', 'مختبر السيناريوهات'),
-          h('span', { class: 'aic-beta' }, t('BETA · AI', 'تجريبي · ذكاء اصطناعي'))),
-        h('p', null, t(
-          `What each model said after the close of ${scenarios.basisSession}, as a percentage of that close. Model outputs, not advice.`,
-          `ما قاله كل نموذج بعد إغلاق ${scenarios.basisSession}، كنسبة من ذلك الإغلاق. مخرجات نماذج، وليست توصية.`))),
-
-      h('section', { class: 'sc-controls' },
-        h('h2', null, t('Ask about', 'اسأل عن')),
-        chips(SUBJECT, subject, (id) => restage({ scSubject: id }), ar, false),
-        subject === 'picked'
-          ? h('p', { class: 'home-note' }, t(
-              `${picked.tickers.length} chosen. Open a company and use its star to add it.`,
-              `${picked.tickers.length} مختارة. افتح شركة واستخدم النجمة لإضافتها.`))
-          : null,
-        subject === 'rule'
-          ? h('p', { class: 'home-note' }, picked.result
-              ? t(`${picked.tickers.length} companies answer your question.`,
-                  `${picked.tickers.length} شركة ينطبق عليها سؤالك.`)
-              : t('Save a question first, on the questions screen.',
-                  'احفظ سؤالًا أولًا من شاشة الأسئلة.'))
-          : null,
-
-        h('h2', null, t('Model', 'النموذج')),
-        modelChips,
-
-        h('h2', null, t('Horizon', 'الأفق')),
-        h('div', { class: 'ask-subjects' }, [1, 5, 20].map((hz) => h('button', {
-          key: hz, type: 'button', class: horizon === hz ? 'ask-subject on' : 'ask-subject',
-          'aria-pressed': horizon === hz ? 'true' : 'false',
-          onClick: () => restage({ scHorizon: hz }) },
-          hz === 1 ? t('next session', 'الجلسة التالية')
-                   : t(`${hz} sessions`, `${hz} جلسة`)))),
-
-        h('h2', null, t('Show alongside', 'اعرض بجانبه')),
-        chips(LAYERS, layers, (id) => restage({
-          scLayers: layers.includes(id) ? layers.filter((x) => x !== id) : layers.concat([id]) }), ar, true)),
-
-      body,
-
-      h('footer', { class: 'sc-proof' },
-        h('p', { class: 'home-note' }, t(
-          `Sealed ${commitment.timestamped ? `and timestamped by ${commitment.authority}` : 'but not timestamped'} before the market opened${commitment.merkleRoot ? `, under root ${commitment.merkleRoot.slice(0, 16)}…` : ''}. That proves when these numbers were made and that they have not changed. It does not make them right.`,
-          `خُتمت ${commitment.timestamped ? `ووُثِّقت زمنيًا لدى ${commitment.authority}` : 'دون توثيق زمني'} قبل افتتاح السوق${commitment.merkleRoot ? `، تحت الجذر ${commitment.merkleRoot.slice(0, 16)}…` : ''}. هذا يثبت متى صنعت هذه الأرقام وأنها لم تتغير. ولا يجعلها صحيحة.`)),
-        h('button', { type: 'button', class: 'q-cancel',
-          onClick: () => { try { localStorage.removeItem(acceptKey(reader)); } catch { /* nothing kept */ }
-                           component.setState({ scAccepted: 0 }); } },
-          t('Show the warning again', 'أظهر التحذير مجددًا'))),
-    ),
-  };
+  return {screen:h('div',{class:'home-screen sc-screen'},
+    h('header',{class:'home-intro sc-intro'},h('div',null,h('span',{class:'aic-beta'},t('BETA · AI','تجريبي · ذكاء اصطناعي')),
+      h('h1',null,t('Explore what AI sees.','استكشف ما تراه النماذج.')),
+      h('p',null,t('Choose a company. Compare models. Read the evidence.','اختر شركة. قارن النماذج. اقرأ الأدلة.'))),
+      h('div',{class:'sc-run-stamp'},h('span',null,t('Saved model run','تشغيل نموذج محفوظ')),h('b',{dir:'ltr'},scenarios.basisSession||'—'),h('small',null,t('Model outputs, not advice','مخرجات نماذج، وليست توصية')))),
+    h('div',{class:'sc-layout'},controls,body),
+    h('footer',{class:'sc-proof'},h('details',null,h('summary',null,t('About this saved run & its timestamp','عن هذا التشغيل المحفوظ وتوثيقه الزمني')),
+      h('p',{class:'home-note'},t('A published timestamp can help verify when a record existed. It does not prove the forecast is accurate, that this screen matches the signed record, or that the service has regulatory approval.','يساعد التوثيق الزمني المنشور في التحقق من وقت وجود سجل. لا يثبت صحة التوقع أو مطابقة هذه الشاشة للسجل الموقّع أو حصول الخدمة على موافقة تنظيمية.')),
+      h('p',null,t('Timestamp reported: ','توثيق زمني مسجّل: ')+(commitment.timestamped?(commitment.authority||t('Authority unspecified','الجهة غير محددة')):t('Unavailable','غير متاح'))),
+      h('p',null,t('Recorded before open: ','مسجل قبل الافتتاح: ')+(commitment.committedBeforeOpen===true?t('Yes, according to the run metadata','نعم، بحسب بيانات التشغيل'):t('Not established','غير مثبت'))),
+      h('code',{class:'sc-root'},commitment.merkleRoot||t('No commitment hash supplied','لم يُرفق رمز تحقق'))),
+      h('button',{type:'button',class:'q-cancel',onClick:()=>{try{localStorage.removeItem(acceptKey(reader));}catch{}component.setState({scAccepted:0,scAcceptedReader:null});}},t('Show the warning again','أظهر التحذير مجددًا'))))};
 }

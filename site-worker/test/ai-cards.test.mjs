@@ -12,7 +12,7 @@ import { readFile } from 'node:fs/promises';
 const ROOT = new URL('../../', import.meta.url);
 const read = (p) => readFile(new URL(p, ROOT), 'utf8');
 
-const cardsSrc = await read('public/esthmr/ai-cards.js');
+const cardsSrc = await read('public/esthmr/ai-cards.js') + await read('public/esthmr/ai-visuals.js');
 const scSrc = await read('public/esthmr/scenarios.js');
 const cards = await import('../../public/esthmr/ai-cards.js');
 const top5 = JSON.parse(await read('public/data/v1/research/top5.json'));
@@ -104,18 +104,19 @@ test('restoring Home did not cost it the sections it had', async () => {
 test('nothing is drawn until the warning has been accepted', () => {
   // The gate returns before any figure is built, rather than rendering the
   // screen with an overlay on top of it.
-  const gateAt = scSrc.indexOf('if (!hasAccepted(reader) && !st.scAccepted)');
+  const gateAt = scSrc.indexOf('if (!hasAccepted(reader) && !(st.scAccepted && st.scAcceptedReader === reader))');
   const viewAt = scSrc.indexOf('const view = viewFor(');
   assert.ok(gateAt > 0 && viewAt > gateAt, 'the screen builds its figures before the gate');
 });
 
-test('the warning states the record, the age and the licence', async () => {
-  const lines = (await import('../../public/esthmr/scenarios.js')).warningLines(top5, false);
+test('the warning states the actual sample and timestamp limits', async () => {
+  const lines = (await import('../../public/esthmr/scenarios.js')).warningLines(top5, false, scenarios);
   assert.equal(lines.length, 4);
   const all = lines.join(' ');
   assert.match(all, /not licensed to advise/i);
-  assert.match(all, /returned LESS than the market/);
-  assert.match(all, /weeks, not years/);
+  assert.match(all, /scored models lag their market benchmark/);
+  assert.match(all, new RegExp(`${top5.dates.length} evaluation dates`));
+  assert.match(all, /Historical testing is not live investment performance/);
   assert.match(all, /does not make it right/);
 });
 
@@ -164,16 +165,14 @@ test('disagreement between models is reported, not averaged away', async () => {
 test('the screen carries the root the numbers were sealed under', () => {
   assert.ok(scenarios.commitment && scenarios.commitment.merkleRoot,
             'the published scenarios carry no commitment');
-  assert.match(scSrc, /proves when these numbers were made/);
-  assert.match(scSrc, /does not make them right/);
+  assert.match(scSrc, /commitment.merkleRoot/);
+  assert.match(scSrc, /does not prove the forecast is accurate/);
+  assert.match(scSrc, /according to the run metadata/);
 });
 
-test('the loading stages name real work and there is no invented wait', () => {
-  const mod = scSrc.slice(scSrc.indexOf('export const STAGES'), scSrc.indexOf('function loading'));
-  assert.ok(/Reading the sealed run/.test(mod));
-  assert.ok(/Selecting your companies/.test(mod));
-  // A stage per real step, not a timer padded to look busy.
-  assert.equal((mod.match(/id: '/g) || []).length, 4);
+test('only missing data shows loading and there is no invented wait', () => {
+  assert.match(scSrc, /Loading the saved model run—not generating a new forecast/);
+  assert.doesNotMatch(scSrc, /setTimeout|setInterval|scStage/);
 });
 
 test('the scenario document is a forecast and is therefore gated data', async () => {
