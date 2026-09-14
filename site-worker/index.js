@@ -77,6 +77,9 @@ const LIMITS = {
   // them in one sitting. This is here so a stuck client cannot write in a
   // loop, not to ration anybody's list.
   watchPerSession: { max: 400, window: 3600 },
+  // Editing a rulebook is typing, and typing autosaves. Same reasoning as
+  // the watchlist: a ceiling on a stuck client, not a ration on a reader.
+  rulesPerSession: { max: 400, window: 3600 },
 };
 
 const enc = new TextEncoder();
@@ -528,6 +531,143 @@ export function cleanTickers(raw) {
     if (!TICKER.test(ticker) || out.includes(ticker)) continue;
     out.push(ticker);
     if (out.length >= WATCH_MAX) break;
+  }
+  return out;
+}
+
+/* The reader's own rulebooks, stored and never read.
+ *
+ * WHY THE SERVER MUST NOT UNDERSTAND THESE
+ * ----------------------------------------
+ * A rulebook is a reader's own definition of what they are looking for —
+ * which measurements, which thresholds, and how many results that turns out
+ * to be. That authorship is the whole reason this feature is lawful for a
+ * publisher with no advisory licence: the reader fixes the judgment AND the
+ * cardinality, and this project supplies arithmetic and chooses nothing.
+ *
+ * The moment the server evaluates a rulebook, or ranks its results, or
+ * decides which of a reader's rulebooks is the good one, that stops being
+ * true. So this validates SHAPE and nothing else: sizes, types, and the
+ * operator vocabulary the editor offers. It never looks at a column name to
+ * see whether it exists, never computes a verdict, and never orders anything.
+ * Evaluation happens in the reader's browser, against a table this project
+ * publishes to everyone alike.
+ *
+ * An unknown column is stored without complaint on purpose. Columns are
+ * renamed and retired as the measurement table changes, and refusing a
+ * rulebook over one of them would silently delete a reader's work; the
+ * three-valued engine already answers "unknown" for a column it does not
+ * have, which is the honest result and the one the screen shows.
+ */
+const RULEBOOKS_MAX = 24;
+const CONDITIONS_MAX = 32;
+const CHOICES_MAX = 40;
+const NAME_MAX = 80;
+const COLUMN = /^[A-Za-z0-9_.]{1,64}$/;
+const RULE_ID = /^[A-Za-z0-9_-]{1,48}$/;
+const RULE_OPERATORS = new Set(['>=', '<=', '>', '<', '==', '!=', 'in',
+  'has', 'missing']);
+
+const finiteNumber = (v) => typeof v === 'number' && Number.isFinite(v);
+
+/** One comparison, or null if it is not one. */
+function cleanCondition(raw) {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+  const column = typeof raw.column === 'string' ? raw.column.trim() : '';
+  if (!COLUMN.test(column)) return null;
+  const operator = typeof raw.operator === 'string' ? raw.operator.trim() : '';
+  if (!RULE_OPERATORS.has(operator)) return null;
+
+  const out = { column, operator };
+  // `has` and `missing` ask whether a figure exists at all, so a value would
+  // be meaningless — dropped rather than stored, so two rulebooks that mean
+  // the same thing are the same object.
+  if (operator !== 'has' && operator !== 'missing') {
+    if (operator === 'in') {
+      if (!Array.isArray(raw.value)) return null;
+      const choices = [];
+      for (const item of raw.value) {
+        if (typeof item === 'string' && item.length && item.length <= NAME_MAX) {
+          if (!choices.includes(item)) choices.push(item);
+        } else if (finiteNumber(item) && !choices.includes(item)) {
+          choices.push(item);
+        }
+        if (choices.length >= CHOICES_MAX) break;
+      }
+      if (!choices.length) return null;
+      out.value = choices;
+    } else if (finiteNumber(raw.value)) {
+      out.value = raw.value;
+    } else if (typeof raw.value === 'string' && raw.value.length <= NAME_MAX) {
+      out.value = raw.value;
+    } else if (typeof raw.value === 'boolean') {
+      out.value = raw.value;
+    } else {
+      return null;
+    }
+  }
+  if (raw.negate === true) out.negate = true;
+  if (finiteNumber(raw.weight)) out.weight = raw.weight;
+  return out;
+}
+
+/** One rulebook, or null if it is not one.
+ *
+ * A rulebook with no usable condition is refused rather than stored empty:
+ * the engine treats an empty rulebook as matching nothing, so saving one
+ * would hand the reader a rule that silently answers "none" forever.
+ */
+export function cleanRulebook(raw) {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+  if (!Array.isArray(raw.conditions)) return null;
+
+  const conditions = [];
+  for (const item of raw.conditions) {
+    const condition = cleanCondition(item);
+    if (condition) conditions.push(condition);
+    if (conditions.length >= CONDITIONS_MAX) break;
+  }
+  if (!conditions.length) return null;
+
+  const name = typeof raw.name === 'string' ? raw.name.trim().slice(0, NAME_MAX) : '';
+  const out = {
+    id: typeof raw.id === 'string' && RULE_ID.test(raw.id) ? raw.id : null,
+    name,
+    match: raw.match === 'any' ? 'any' : 'all',
+    conditions,
+  };
+  if (finiteNumber(raw.threshold)) out.threshold = raw.threshold;
+  const sort = raw.sort;
+  if (sort && typeof sort === 'object' && typeof sort.column === 'string'
+      && COLUMN.test(sort.column.trim())) {
+    out.sort = { column: sort.column.trim(),
+                 direction: sort.direction === 'asc' ? 'asc' : 'desc' };
+  }
+  if (finiteNumber(raw.updated)) out.updated = raw.updated;
+  return out;
+}
+
+/** A reader's whole shelf, or null if the payload is not a list of rulebooks.
+ *
+ * Forgiving about the items and strict about the shape, for the same reason
+ * the watchlist is: one malformed rulebook should not lose the other
+ * twenty-three, and something that is not an array is a bug in the caller.
+ */
+export function cleanRulebooks(raw) {
+  if (!Array.isArray(raw)) return null;
+  const out = [];
+  const seen = new Set();
+  for (const item of raw) {
+    const rulebook = cleanRulebook(item);
+    if (!rulebook) continue;
+    // An id the reader's client did not supply, or supplied twice. Derived
+    // from the position rather than from a clock, so the same shelf saved
+    // twice is the same bytes and a lost response costs one redraw.
+    if (!rulebook.id || seen.has(rulebook.id)) rulebook.id = `r${out.length + 1}`;
+    if (seen.has(rulebook.id)) continue;
+    seen.add(rulebook.id);
+    out.push(rulebook);
+    if (out.length >= RULEBOOKS_MAX) break;
   }
   return out;
 }
@@ -1317,6 +1457,33 @@ async function api(request, env, url, ctx) {
     return json({ error: 'method' }, 405);
   }
 
+  /* Read and replace, like the watchlist and for the same reason: a shelf
+     that lives in two places drifts, and sending all of it makes the
+     reader's copy and the stored one the same object. */
+  if (path === '/rulebooks') {
+    const who = await session(request, env);
+    if (!who) return json({ error: 'signed out' }, 401, { 'cache-control': 'no-store' });
+    const key = `rules:${who.e}`;
+    if (request.method === 'GET') {
+      let held;
+      try { held = await env.ESTHMR_AUTH.get(key, 'json'); }
+      catch { return json({ error: 'rulebooks unavailable' }, 503, { 'cache-control': 'no-store' }); }
+      return json({ rulebooks: cleanRulebooks(held) || [] }, 200,
+                  { 'cache-control': 'no-store' });
+    }
+    if (request.method === 'PUT') {
+      if (await overLimit(env, 'rules', who.e, LIMITS.rulesPerSession)) {
+        return json({ error: 'slow down' }, 429, { 'cache-control': 'no-store' });
+      }
+      const sent = await smallJson(request);
+      const rulebooks = cleanRulebooks(sent && sent.rulebooks);
+      if (!rulebooks) return json({ error: 'rulebooks' }, 400);
+      await env.ESTHMR_AUTH.put(key, JSON.stringify(rulebooks));
+      return json({ rulebooks }, 200, { 'cache-control': 'no-store' });
+    }
+    return json({ error: 'method' }, 405);
+  }
+
   /* The two endpoints that answer with reader identities rather than market
    * data, and the only ones on this Worker whose blast radius is people.
    *
@@ -1686,7 +1853,8 @@ async function serve(request, env, url, ctx) {
   if (url.pathname.startsWith('/esthmr/api/')) {
     const answer = await api(request, env, url, ctx).catch((error) =>
       json({ error: error.status === 413 ? 'request too large' : error.status === 400 ? 'invalid JSON object' : 'server' }, error.status || 500));
-    if (url.pathname.includes('/auth/') || url.pathname.endsWith('/watchlist')) {
+    if (url.pathname.includes('/auth/') || url.pathname.endsWith('/watchlist')
+        || url.pathname.endsWith('/rulebooks')) {
       const headers = new Headers(answer.headers);
       headers.set('cache-control', 'no-store');
       return new Response(answer.body, { status: answer.status, headers });

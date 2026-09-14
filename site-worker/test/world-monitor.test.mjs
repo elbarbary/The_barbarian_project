@@ -454,9 +454,32 @@ test('the pound is measured the same way as everything else', () => {
 
 const style = (node) => String(node?.attrs?.style || '');
 
+/* A corridor whose numbers do not move.
+ *
+ * The three tests below are about GEOMETRY — where the marker sits on the
+ * track and how far the fill runs — and they were originally written against
+ * the published document. That made them fail on 14 September when the
+ * central bank restated the overnight interbank rate from 19.433% to 19.234%
+ * and nothing in this code had changed. A test pinned to a live figure is a
+ * test that reports the world, which is what the figure is for; the geometry
+ * needs a fixture, and the live document gets its own test below that asserts
+ * against whatever it happens to say today.
+ */
+const CORRIDOR = {
+  ...published.corridor,
+  floor: { ...published.corridor.floor, percent: 19, token: '19.00%',
+           label: 'Overnight deposit rate', asOf: '2026-02-15' },
+  ceiling: { ...published.corridor.ceiling, percent: 20, token: '20.00%',
+             label: 'Overnight lending rate', asOf: '2026-02-15' },
+  paid: { ...published.corridor.paid, percent: 19.433, token: '19.433%',
+          asOf: '2026-09-10' },
+  at: 0.433,
+  inside: true,
+};
+const fixed = (lang = 'en') => screen({}, lang, { ...published, corridor: CORRIDOR });
+
 test('the corridor is drawn where the Egyptian rows are, above them', () => {
-  const view = screen();
-  const figure = withClass(view, 'wm-corridor')[0];
+  const figure = withClass(fixed(), 'wm-corridor')[0];
   assert.ok(figure, 'the monitor draws no corridor');
   // Both walls named and priced, so the track is readable without the JSON.
   assert.match(text(figure), /19\.00%/);
@@ -472,7 +495,7 @@ test('the marker is placed as a percentage of the track, not in pixels', () => {
   // The track is fluid. A pixel offset computed against a width nobody
   // measured lands wherever the column happens to be wide today — and in a
   // browser pane, where it is measured before mount, at zero.
-  const mark = withClass(screen(), 'wm-corridor-mark')[0];
+  const mark = withClass(fixed(), 'wm-corridor-mark')[0];
   assert.ok(mark, 'no marker on the track');
   assert.match(style(mark), /inset-inline-start:\s*43\.30%/,
     `the marker sits at "${style(mark)}" rather than 43.3% of the way up`);
@@ -482,10 +505,26 @@ test('the fill runs from the floor to the rate, not just a tick at it', () => {
   // A tick alone is a mark a reader has to measure against two ends by eye.
   // The fill is the distance itself — which is the whole claim: the market is
   // paying near the cheap end of what the committee allows.
-  const fill = withClass(screen(), 'wm-corridor-fill')[0];
+  const fill = withClass(fixed(), 'wm-corridor-fill')[0];
   assert.ok(fill, 'the corridor is drawn as an empty track');
   assert.match(style(fill), /inline-size:\s*43\.30%/,
     `the fill reaches "${style(fill)}" rather than 43.3% of the corridor`);
+});
+
+test('todays published corridor draws todays numbers', () => {
+  // The live half, asserted against the document rather than against a figure
+  // written into this file — so it goes on checking that the corridor renders
+  // without breaking every time the committee or the interbank market moves.
+  const live = published.corridor;
+  const figure = withClass(screen(), 'wm-corridor')[0];
+  assert.ok(figure, 'the published monitor draws no corridor');
+  for (const wall of [live.floor, live.ceiling, live.paid]) {
+    assert.ok(text(figure).includes(wall.token),
+              `${wall.label} is published as ${wall.token} and is not on the screen`);
+  }
+  const mark = withClass(screen(), 'wm-corridor-mark')[0];
+  assert.match(style(mark), new RegExp(`${(live.at * 100).toFixed(2)}%`),
+    `the marker is at "${style(mark)}" and the document says ${live.at}`);
 });
 
 test('the figure says these are not the rate a company pays', () => {
