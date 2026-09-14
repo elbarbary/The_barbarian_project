@@ -16,7 +16,7 @@ const cardsSrc = await read('public/esthmr/ai-cards.js') + await read('public/es
 const scSrc = await read('public/esthmr/scenarios.js');
 const cards = await import('../../public/esthmr/ai-cards.js');
 const top5 = JSON.parse(await read('public/data/v1/research/top5.json'));
-const scenarios = JSON.parse(await read('public/data/v1/research/scenarios.json'));
+const scenarios = JSON.parse(await read('public/data/v1/lab/scenarios.json'));
 const measures = JSON.parse(await read('public/data/v1/measures.json'));
 const universe = new Set(measures.rows.map((r) => r.ticker));
 
@@ -178,9 +178,19 @@ test('only missing data shows loading and there is no invented wait', () => {
 test('the scenario document is a forecast and is therefore gated data', async () => {
   // It names securities, so it must NOT be under the public research prefix
   // exemption the leaderboard uses. It lives with the exchange data.
+  //
+  // This test used to assert the loader fetched `research/scenarios.json` —
+  // the one path the exemption opens — so it passed while the document it
+  // guards was served to anybody. It now checks what its comment says.
   const worker = await read('site-worker/index.js');
   assert.match(worker, /const research = url\.pathname\.startsWith\('\/data\/v1\/research\/'\)/);
-  // And the loader asks for it through the gated path like any other document.
   const dataSrc = await read('public/esthmr/data.js');
-  assert.match(dataSrc, /export async function scenarios\(\)\s*\{\s*return doc\('research\/scenarios\.json'\)/);
+  assert.match(dataSrc, /export async function scenarios\(\)\s*\{\s*return doc\('lab\/scenarios\.json'\)/);
+  assert.match(dataSrc, /return doc\(`lab\/rerank\/\$\{key\}\.json`\)/);
+  assert.doesNotMatch(dataSrc, /doc\(['`]research\/(scenarios|rerank)/);
+  // And nothing naming companies sits in the open folder on disk.
+  const { readdir } = await import('node:fs/promises');
+  const open = await readdir(new URL('public/data/v1/research/', ROOT));
+  assert.ok(!open.includes('scenarios.json'), 'research/scenarios.json is public — it names securities');
+  assert.ok(!open.includes('rerank'), 'research/rerank/ is public — readings name securities');
 });

@@ -162,7 +162,19 @@ def todays_bars(watch, status) -> tuple[str | None, dict[str, dict]]:
     when = _session_date(rows)
     if not when or when != closed:
         return None, {}
+    return when, _bars_of_rows(rows, when)
 
+
+def closed_bars(watch, status) -> tuple[str | None, dict[str, dict]]:
+    """The newest finished session's bars, for DRAWING what happened — never
+    for a forecast. `last_closed`'s rule rather than `todays_bars`', so a
+    publish that runs after midnight still has the close every percentage on
+    the screen is measured from."""
+    when = last_closed(watch, status)
+    return (when, _bars_of_rows(rows_of(watch), when)) if when else (None, {})
+
+
+def _bars_of_rows(rows: list[dict], when: str) -> dict[str, dict]:
     out = {}
     for row in rows:
         ticker = str(row.get("reuters") or "").split(".")[0].strip().upper()
@@ -179,7 +191,39 @@ def todays_bars(watch, status) -> tuple[str | None, dict[str, dict]]:
         if isinstance(previous, (int, float)) and previous > 0:
             bar["_prevClose"] = float(previous)
         out[ticker] = bar
-    return when, out
+    return out
+
+
+def last_closed(watch, status) -> str | None:
+    """The newest session the exchange has finished, while it stays closed.
+
+    Not `todays_bars`, and deliberately looser than it. That function stamps
+    a bar with a date and hands it to a model, so the status and the rows must
+    name the SAME day. This answers a different question — "has anything
+    traded since the session these rows are from?" — for the re-rank, which
+    reads forecasts and never a bar.
+
+    The difference is midnight. At 00:02 on the 15th the exchange said
+    `Closed` with a status date of the 15th, and every row was still stamped
+    the 14th: nothing had traded since the 14th's close, and `todays_bars`
+    said "no session" because the two dates no longer matched. A schedule
+    that runs late — and this repository's do, by hours — would have lost
+    every reading after midnight to a rule written for something else.
+
+    So: closed now, and the rows' session no later than the status. A feed
+    that went stale through a whole session is caught by the commitment
+    timing rule, which refuses a basis older than a session that has closed.
+    """
+    body = status.get("data") if isinstance(status, dict) else None
+    if not isinstance(body, dict):
+        return None
+    if str(body.get("status") or "").strip().lower() != "closed":
+        return None
+    now = str(body.get("statusDate") or "")[:10]
+    when = _session_date(rows_of(watch))
+    if not when or len(now) != 10 or when > now:
+        return None
+    return when
 
 
 def extend(bars: list[dict], bar: dict | None) -> tuple[list[dict], str | None]:

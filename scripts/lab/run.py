@@ -62,7 +62,6 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import commit as cm
 import forecast as fc
 import panel as pricing
-import rerank as reranking
 import timestamp as ts
 
 REPO = pathlib.Path(__file__).resolve().parent.parent.parent
@@ -235,7 +234,6 @@ def as_record(f: fc.Forecast) -> dict:
 
 
 def build(scan: dict, models: dict, ran_at: str, *, today=None,
-          session: str | None = None, rerank: bool = False,
           root: pathlib.Path = pricing.DEEP) -> dict:
     rows, sources = universe(scan, today=today, root=root)
     basis = basis_session(rows)
@@ -275,22 +273,9 @@ def build(scan: dict, models: dict, ran_at: str, *, today=None,
             "abstentions": dict(collections.Counter(a.reason for a in declined)),
             "seconds": result["seconds"][name],
         }
-
-    # Last, because it reads the others. It is entered as a model rather than
-    # bolted on as a verdict: committed, salted and scored exactly like the
-    # rest, so the question "is a language model reading nine forecasters
-    # better than the forecasters" has an answer instead of an assumption.
-    if rerank:
-        started = time.monotonic()
-        block = reranking.rank(document, today=session)
-        block["seconds"] = round(time.monotonic() - started, 1)
-        document["models"][reranking.NAME] = block
-        state = (f"{block['answered']} answered" if block.get("asked")
-                 else "not asked")
-        print(f"   {reranking.NAME:<12} {state}"
-              + (f"  · it calls {block['count']} of them worth anything"
-                 if block.get("count") is not None else "")
-              + f"  {block['seconds']:>7.1f}s", flush=True)
+    # The re-rank is not here. It reads this night after it has been sealed,
+    # from `rerank.py`, and seals its own readings beside it — see that file
+    # for why a language model is a second pass rather than a tenth model.
     return document
 
 
@@ -354,13 +339,7 @@ def main(argv=None) -> int:
             print(f"   neural models unavailable ({type(error).__name__}), "
                   "baselines only")
 
-    # The rerank layer is named like a model and selected like one, but it is
-    # not called like one: it reads the other models' answers rather than a
-    # company's bars, so it runs after them rather than beside them.
-    want_rerank = wanted == "all" or reranking.NAME in {
-        w.strip() for w in wanted.split(",")}
-
-    if not chosen and not want_rerank:
+    if not chosen:
         raise SystemExit(f"lab: no models selected from '{args.models}'")
 
     # The session that has just closed, from the exchange rather than the
@@ -383,10 +362,22 @@ def main(argv=None) -> int:
             print(f"   the exchange did not answer ({type(error).__name__}) — "
                   "running on the history alone")
 
+    scan = read_scan(args.scan)
+
+    # Before a single model is asked. The retry schedule fires three hours
+    # after the first run every trading day, and it used to spend half an hour
+    # of Kronos finding out, at the very end, that the night had already been
+    # sealed. The basis costs a few seconds to establish; the models do not.
+    if not args.check:
+        early = basis_session(universe(scan, today=todays)[0])
+        if early and (OUT / f"run-{early}.json").exists():
+            print(f"   run-{early}.json already exists — {early} has been "
+                  "forecast and is not forecast again")
+            return 0
+
     ran_at = (datetime.datetime.now(datetime.timezone.utc)
               .isoformat(timespec="seconds").replace("+00:00", "Z"))
-    document = build(read_scan(args.scan), chosen, ran_at, today=todays,
-                     session=when, rerank=want_rerank)
+    document = build(scan, chosen, ran_at, today=todays)
     document["fingerprint"] = fingerprint(document)
 
     basis = document["basisSession"]

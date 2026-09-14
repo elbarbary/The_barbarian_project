@@ -1231,7 +1231,7 @@ class RerankRefusalTest(unittest.TestCase):
     def test_a_refused_run_records_why_and_asks_nothing(self):
         called = []
         block = rr.rank(dict(self.LIVE, reconstructed=True), today="2026-09-14",
-                        measures={}, ask=lambda p: called.append(p))
+                        context={}, ask=lambda p: called.append(p))
         self.assertFalse(block["asked"])
         self.assertEqual(called, [])
         self.assertEqual(block["answered"], 0)
@@ -1252,7 +1252,7 @@ class RerankAnswerTest(unittest.TestCase):
     def test_a_clean_answer_becomes_a_ranking_not_a_return(self):
         # It is not claiming this company will rise 72%. It is claiming it
         # will do better than the one it scored 40.
-        block = rr.rank(self.document(), today="2026-09-14", measures={},
+        block = rr.rank(self.document(), today="2026-09-14", context={},
                         ask=self.ask('{"scores":{"AAA":72,"BBB":40,"CCC":9},'
                                      '"count":1,"note":"volume"}'))
         self.assertEqual(block["answered"], 3)
@@ -1262,31 +1262,31 @@ class RerankAnswerTest(unittest.TestCase):
         self.assertEqual(block["count"], 1)
 
     def test_a_ticker_that_was_never_in_the_question_is_dropped_and_named(self):
-        block = rr.rank(self.document(), today="2026-09-14", measures={},
+        block = rr.rank(self.document(), today="2026-09-14", context={},
                         ask=self.ask('{"scores":{"AAA":50,"COMI":99},"count":1}'))
         self.assertEqual([f["ticker"] for f in block["forecasts"]], ["AAA"])
         self.assertEqual(block["invented"], ["COMI"])
 
     def test_a_company_it_did_not_score_is_an_abstention(self):
-        block = rr.rank(self.document(), today="2026-09-14", measures={},
+        block = rr.rank(self.document(), today="2026-09-14", context={},
                         ask=self.ask('{"scores":{"AAA":50},"count":1}'))
         self.assertEqual(block["answered"], 1)
         self.assertEqual(block["abstained"], 2)
 
     def test_it_may_not_claim_more_opportunities_than_it_scored(self):
-        block = rr.rank(self.document(), today="2026-09-14", measures={},
+        block = rr.rank(self.document(), today="2026-09-14", context={},
                         ask=self.ask('{"scores":{"AAA":50},"count":40}'))
         self.assertEqual(block["count"], 1)
 
     def test_a_count_of_zero_is_kept_because_it_is_an_answer(self):
-        block = rr.rank(self.document(), today="2026-09-14", measures={},
+        block = rr.rank(self.document(), today="2026-09-14", context={},
                         ask=self.ask('{"scores":{"AAA":50,"BBB":1,"CCC":2},'
                                      '"count":0}'))
         self.assertEqual(block["count"], 0)
 
     def test_rubbish_is_an_abstention_with_a_reason_not_a_crash(self):
         for text in ("", "I cannot help with that", "{not json"):
-            block = rr.rank(self.document(), today="2026-09-14", measures={},
+            block = rr.rank(self.document(), today="2026-09-14", context={},
                             ask=self.ask(text))
             self.assertEqual(block["answered"], 0)
             self.assertTrue(block["abstentions"])
@@ -1294,13 +1294,13 @@ class RerankAnswerTest(unittest.TestCase):
     def test_a_layer_that_throws_abstains_and_says_what_threw(self):
         def boom(prompt):
             raise TimeoutError("the endpoint did not answer")
-        block = rr.rank(self.document(), today="2026-09-14", measures={}, ask=boom)
+        block = rr.rank(self.document(), today="2026-09-14", context={}, ask=boom)
         self.assertEqual(block["answered"], 0)
         self.assertIn("TimeoutError: the endpoint did not answer",
                       block["abstentions"])
 
     def test_scores_are_held_inside_their_range(self):
-        block = rr.rank(self.document(), today="2026-09-14", measures={},
+        block = rr.rank(self.document(), today="2026-09-14", context={},
                         ask=self.ask('{"scores":{"AAA":5000,"BBB":-40,"CCC":"x"},'
                                      '"count":1}'))
         ranked = {f["ticker"]: f["ranked_by"]["1"] for f in block["forecasts"]}
@@ -1309,17 +1309,22 @@ class RerankAnswerTest(unittest.TestCase):
         self.assertNotIn("CCC", ranked)
 
     def test_the_layer_is_never_asked_about_itself(self):
+        # Neither the default reading nor any of the other fifteen: a reading
+        # shown another reading's scores is grading its own homework.
         document = self.document()
-        document["models"][rr.NAME] = {"forecasts": [
-            {"ticker": "AAA", "returns": {}, "ranked_by": {"1": 99}}]}
-        tickers, body = rr.table(document, {})
-        self.assertNotIn(f"{rr.NAME}_h1", body.splitlines()[0])
+        for name in (rr.NAME, rr.name_of(()), rr.name_of(("news",))):
+            document["models"][name] = {"forecasts": [
+                {"ticker": "AAA", "returns": {}, "ranked_by": {"1": 99}}]}
+        tickers, body = rr.table(document)
+        head = body.splitlines()[0]
+        self.assertNotIn("rerank", head)
+        self.assertIn("drift_h1", head)
 
     def test_the_prompt_carries_every_company_in_one_call(self):
         # A reranker shown a third of the field at a time is ranking three
         # different fields.
         document = self.document(tuple(f"T{i:03d}" for i in range(200)))
-        tickers, body = rr.table(document, {})
+        tickers, body = rr.table(document)
         self.assertEqual(len(tickers), 200)
         self.assertEqual(len(body.splitlines()), 201)
 
@@ -1738,6 +1743,579 @@ class VerifyTest(unittest.TestCase):
         # Internally whole and matching, so this is not a failure — but the
         # report must not let a reader think a third party dated it.
         self.assertTrue(vf.verdict(result))
+
+
+class ReadingNamesTest(unittest.TestCase):
+    """Sixteen readings, each with one name, and the default among them once."""
+
+    def test_every_combination_is_a_reading_and_none_twice(self):
+        names = [rr.name_of(layers) for layers in rr.readings()]
+        self.assertEqual(len(names), 2 ** len(rr.LAYERS))
+        self.assertEqual(len(set(names)), len(names))
+        self.assertEqual(names.count(rr.NAME), 1)
+
+    def test_the_default_reads_filings_news_and_the_rule_book(self):
+        self.assertEqual(rr.name_of(("rulebook", "news", "filings")), rr.NAME)
+        self.assertEqual(rr.layers_of(rr.NAME), ("filings", "news", "rulebook"))
+
+    def test_a_name_round_trips_whatever_order_the_layers_came_in(self):
+        for layers in rr.readings():
+            self.assertEqual(rr.layers_of(rr.name_of(tuple(reversed(layers)))),
+                             rr.canonical(layers))
+
+    def test_the_empty_reading_is_the_models_alone(self):
+        self.assertEqual(rr.key_of(()), "models")
+        self.assertEqual(rr.layers_of("rerank:models"), ())
+
+    def test_a_misspelt_or_reordered_name_is_not_a_reading(self):
+        # One set of layers has one name. A second spelling would be a second
+        # model with the same evidence, scored twice.
+        for name in ("rerank:measures-filings", "rerank:gossip", "rerank:",
+                     "kronos", "rerank-filings"):
+            self.assertIsNone(rr.layers_of(name), name)
+
+
+class ContextTest(unittest.TestCase):
+    """What a reading may be shown, and the moment after which it may not."""
+
+    UNTIL = datetime.datetime(2026, 9, 14, 15, 0, tzinfo=datetime.timezone.utc)
+
+    def test_a_filing_from_after_the_question_is_not_shown(self):
+        block = rr.filings_block({"items": [
+            {"date": "2026-09-14", "tickers": ["AAA"], "title": "on time", "event_label": "Board"},
+            {"date": "2026-09-16", "tickers": ["AAA"], "title": "from the future"}]},
+            {"AAA"}, "2026-09-14", self.UNTIL)
+        self.assertIn("on time", block["text"])
+        self.assertNotIn("from the future", block["text"])
+
+    def test_filings_older_than_the_window_are_not_the_latest(self):
+        block = rr.filings_block({"items": [
+            {"date": "2026-08-01", "tickers": ["AAA"], "title": "stale"}]},
+            {"AAA"}, "2026-09-14", self.UNTIL)
+        self.assertEqual(block["items"], 0)
+        self.assertEqual(block["text"], "(none in this window)")
+
+    def test_only_companies_in_the_question_and_only_a_few_each(self):
+        items = [{"date": "2026-09-14", "tickers": ["AAA"], "title": f"no. {i}"}
+                 for i in range(9)]
+        items.append({"date": "2026-09-14", "tickers": ["ZZZ"], "title": "elsewhere"})
+        block = rr.filings_block({"items": items}, {"AAA"}, "2026-09-14", self.UNTIL)
+        self.assertEqual(block["items"], rr.FILINGS_PER_COMPANY)
+        self.assertNotIn("ZZZ", block["text"])
+
+    def test_news_is_the_two_days_before_the_question(self):
+        block = rr.news_block({"items": [
+            {"published": "2026-09-14T12:00:00Z", "tickers": ["AAA"], "headline": "fresh"},
+            {"published": "2026-09-11T12:00:00Z", "tickers": ["AAA"], "headline": "old"},
+            {"published": "2026-09-14T16:00:00Z", "tickers": ["AAA"], "headline": "later"}]},
+            {"AAA"}, self.UNTIL)
+        self.assertIn("fresh", block["text"])
+        self.assertNotIn("old", block["text"])
+        self.assertNotIn("later", block["text"])
+
+    def test_a_headline_on_two_lines_is_one_line(self):
+        block = rr.news_block({"items": [
+            {"published": "2026-09-14T12:00:00Z", "tickers": ["AAA"],
+             "headline": "first half\nsecond half"}]}, {"AAA"}, self.UNTIL)
+        self.assertEqual(len(block["text"].splitlines()), 1)
+
+    def test_measurements_are_the_universe_and_nothing_else(self):
+        block = rr.measures_block({"rows": [{"ticker": "AAA", "pe": 7.5},
+                                            {"ticker": "ZZZ", "pe": 3.0}]}, {"AAA"})
+        self.assertEqual(block["companies"], 1)
+        self.assertIn("AAA,", block["text"])
+        self.assertNotIn("ZZZ", block["text"])
+
+    def test_the_prompt_carries_only_the_evidence_that_was_switched_on(self):
+        context = {layer: {"text": f"<{layer} evidence>"} for layer in rr.LAYERS}
+        for layers in rr.readings():
+            text = rr.prompt("2026-09-14", "ticker\nAAA", 1, context, layers)
+            for layer in rr.LAYERS:
+                (self.assertIn if layer in layers else self.assertNotIn)(
+                    f"<{layer} evidence>", text, (layers, layer))
+        alone = rr.prompt("2026-09-14", "ticker\nAAA", 1, context, ())
+        self.assertIn("nothing but the forecasts", alone)
+
+    def test_every_reading_asks_a_different_question(self):
+        context = {layer: {"text": f"<{layer}>"} for layer in rr.LAYERS}
+        questions = {rr.prompt("2026-09-14", "ticker\nAAA", 1, context, layers)
+                     for layers in rr.readings()}
+        self.assertEqual(len(questions), len(rr.readings()))
+
+
+class RankAllTest(unittest.TestCase):
+    """Each reading is its own question, and a failed one gets a second try."""
+
+    def document(self, n=40):
+        return {"basisSession": "2026-09-14", "universe": [f"T{i:02d}" for i in range(n)],
+                "models": {"drift": {"answered": n, "abstained": 0, "forecasts": [
+                    {"ticker": f"T{i:02d}", "returns": {"1": i, "5": i, "20": i}}
+                    for i in range(n)]}}}
+
+    def context(self):
+        return {layer: {"text": f"<{layer}>"} for layer in rr.LAYERS}
+
+    def test_sixteen_questions_sixteen_blocks_each_with_its_own_layers(self):
+        asked = []
+
+        def ask(prompt):
+            asked.append(prompt)
+            scores = ",".join(f'"T{i:02d}":{i}' for i in range(40))
+            return '{"scores":{' + scores + '},"count":3,"note":"n"}', {}
+
+        blocks = rr.rank_all(self.document(), today="2026-09-14",
+                             context=self.context(), ask=ask, workers=4)
+        self.assertEqual(len(asked), 16)
+        self.assertEqual(len(set(asked)), 16)
+        for name, block in blocks.items():
+            self.assertEqual(tuple(block["layers"]), rr.layers_of(name))
+            self.assertEqual(block["answered"], 40)
+
+    def test_a_reading_that_throws_is_asked_once_more_and_the_second_answer_kept(self):
+        tries: dict[str, int] = {}
+
+        def ask(prompt):
+            tries[prompt] = tries.get(prompt, 0) + 1
+            if "<news>" in prompt and tries[prompt] == 1:
+                raise TimeoutError("slow")
+            scores = ",".join(f'"T{i:02d}":{i}' for i in range(40))
+            return '{"scores":{' + scores + '},"count":1}', {}
+
+        blocks = rr.rank_all(self.document(), today="2026-09-14",
+                             context=self.context(), ask=ask, workers=2)
+        news = [b for b in blocks.values() if "news" in b["layers"]]
+        self.assertEqual(len(news), 8)
+        self.assertTrue(all(b["answered"] == 40 and b.get("attempts") == 2 for b in news))
+        self.assertTrue(all("attempts" not in b for b in blocks.values()
+                            if "news" not in b["layers"]))
+
+    def test_a_refused_night_asks_nothing_at_all(self):
+        called = []
+        blocks = rr.rank_all(dict(self.document(), reconstructed=True),
+                             today="2026-09-14", context=self.context(),
+                             ask=lambda p: called.append(p))
+        self.assertEqual(called, [])
+        self.assertTrue(all(not b["asked"] for b in blocks.values()))
+
+
+class LayerRunTest(unittest.TestCase):
+    """The second pass, sealed beside the night it read and never over it."""
+
+    def night(self, root, basis="2026-09-14", reconstructed=False):
+        runs = root / "lab"
+        runs.mkdir(exist_ok=True)
+        document = {"basisSession": basis, "ranAt": f"{basis}T14:30:00Z",
+                    "universe": [f"T{i:02d}" for i in range(40)], "universeSize": 40,
+                    "horizons": list(fc.HORIZONS),
+                    "models": {"drift": {"answered": 40, "abstained": 0, "forecasts": [
+                        {"ticker": f"T{i:02d}", "returns": {"1": i, "5": i, "20": i}}
+                        for i in range(40)]}}}
+        if reconstructed:
+            document["reconstructed"] = True
+        document["fingerprint"] = run.fingerprint(document)
+        (runs / f"run-{basis}.json").write_text(json.dumps(document))
+        data = root / "data"
+        (data / "news").mkdir(parents=True, exist_ok=True)
+        (data / "disclosures").mkdir(parents=True, exist_ok=True)
+        (data / "news" / "latest.json").write_text(json.dumps({"items": []}))
+        (data / "disclosures" / "latest.json").write_text(json.dumps({"items": []}))
+        (data / "measures.json").write_text(json.dumps({"rows": []}))
+        return runs, document
+
+    def main(self, root, runs, today="2026-09-14", answer=True, write=True):
+        import unittest.mock as mock
+        scores = ",".join(f'"T{i:02d}":{i}' for i in range(40))
+
+        def ask(prompt):
+            if not answer:
+                raise TimeoutError("vertex is down")
+            return '{"scores":{' + scores + '},"count":2}', {"prompt": 1, "candidates": 1}
+
+        original = rr.rank
+
+        def rank(document, **kwargs):
+            kwargs["ask"] = ask
+            return original(document, **kwargs)
+
+        argv = ["--runs", str(runs), "--commitments", str(root / "commitments"),
+                "--data", str(root / "data"), "--today", today, "--no-timestamp"]
+        with mock.patch.object(rr, "rank", rank), \
+                mock.patch.object(run, "now_in_cairo", lambda: datetime.datetime(
+                    2026, 9, 14, 20, 0, tzinfo=run.CAIRO)):
+            return rr.main(argv + (["--write"] if write else []))
+
+    def test_it_seals_its_readings_beside_the_night_and_binds_that_night(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            runs, document = self.night(root)
+            before = (runs / "run-2026-09-14.json").read_text()
+            self.main(root, runs)
+            layer = json.loads((runs / "rerank-2026-09-14.json").read_text())
+            promise = json.loads((root / "commitments" / "2026-09-14.rerank.json").read_text())
+            self.assertEqual((runs / "run-2026-09-14.json").read_text(), before)
+            self.assertEqual(len(layer["models"]), 16)
+            self.assertEqual(layer["reads"]["fingerprint"], document["fingerprint"])
+            self.assertEqual(promise["reads"]["fingerprint"], document["fingerprint"])
+            self.assertEqual(promise["layer"], "rerank")
+            self.assertEqual(promise["leaves"], 16 * 40)
+            self.assertNotIn("nonces", promise)
+            # And it opens against its own root, not the run's.
+            self.assertEqual(rv.root_of(rv.records_of(layer), "2026-09-14"),
+                             promise["merkleRoot"])
+
+    def test_a_night_that_has_been_read_is_not_read_again(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            runs, _ = self.night(root)
+            self.main(root, runs)
+            first = (runs / "rerank-2026-09-14.json").read_text()
+            self.main(root, runs)
+            self.assertEqual((runs / "rerank-2026-09-14.json").read_text(), first)
+
+    def test_a_basis_the_market_has_answered_is_not_read(self):
+        # Refused before any evidence is gathered, not merely sixteen times
+        # over inside each reading: a refusal that still reads the news has
+        # done the part of the work that was never allowed.
+        import tempfile
+        import unittest.mock as mock
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            runs, _ = self.night(root)
+            gathered = []
+            with mock.patch.object(rr, "gather", lambda *a, **k: gathered.append(1) or {}):
+                self.main(root, runs, today="2026-09-15")
+            self.assertFalse((runs / "rerank-2026-09-14.json").exists())
+            self.assertEqual(gathered, [])
+
+    def test_the_newest_frozen_night_is_read_past_a_newer_reconstruction(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            runs, _ = self.night(root, basis="2026-09-14")
+            self.night(root, basis="2026-09-15", reconstructed=True)
+            self.main(root, runs, today="2026-09-14")
+            self.assertTrue((runs / "rerank-2026-09-14.json").exists())
+            self.assertFalse((runs / "rerank-2026-09-15.json").exists())
+
+    def test_nothing_is_sealed_when_no_reading_answered(self):
+        # Sixteen refusals sealed would stop the retry schedule from getting
+        # tonight's answers, and there is nothing in them to protect.
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            runs, _ = self.night(root)
+            self.main(root, runs, answer=False)
+            self.assertFalse((runs / "rerank-2026-09-14.json").exists())
+            self.assertFalse((root / "commitments").exists())
+
+    def test_a_reconstructed_night_is_never_the_one_read(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            runs, _ = self.night(root, reconstructed=True)
+            self.main(root, runs)
+            self.assertFalse((runs / "rerank-2026-09-14.json").exists())
+
+    def test_without_write_nothing_is_written(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            runs, _ = self.night(root)
+            self.main(root, runs, write=False)
+            self.assertFalse((runs / "rerank-2026-09-14.json").exists())
+
+
+class FoldTest(unittest.TestCase):
+    """Putting a reading back beside its night, in memory, by three rules."""
+
+    RUN = {"basisSession": "2026-09-14", "ranAt": "2026-09-14T14:30:00Z",
+           "fingerprint": "aa", "universe": ["AAA"],
+           "models": {"drift": {"forecasts": []}}}
+
+    def layer(self, **extra):
+        return dict({"layer": "rerank", "basisSession": "2026-09-14",
+                     "ranAt": "2026-09-14T21:00:00Z", "reads": {"fingerprint": "aa"},
+                     "universe": ["AAA"], "evidence": {"news": {"items": 2}},
+                     "models": {rr.NAME: {"forecasts": []}}}, **extra)
+
+    def test_a_reading_keeps_the_moment_it_was_written(self):
+        merged = ev.fold(self.RUN, self.layer())
+        self.assertEqual(merged["models"][rr.NAME]["ranAt"], "2026-09-14T21:00:00Z")
+        self.assertNotIn("ranAt", merged["models"]["drift"])
+        self.assertEqual(merged["layers"]["rerank"]["evidence"]["news"]["items"], 2)
+
+    def test_a_reading_never_replaces_a_model_the_run_holds(self):
+        merged = ev.fold(self.RUN, self.layer(models={"drift": {"forecasts": [1]}}))
+        self.assertEqual(merged["models"]["drift"], {"forecasts": []})
+
+    def test_a_reading_of_another_night_is_not_folded_in(self):
+        self.assertNotIn(rr.NAME, ev.fold(self.RUN, self.layer(
+            reads={"fingerprint": "bb"}))["models"])
+        self.assertNotIn(rr.NAME, ev.fold(self.RUN, self.layer(
+            basisSession="2026-09-13"))["models"])
+
+    def test_the_sealed_run_itself_is_untouched(self):
+        before = json.dumps(self.RUN, sort_keys=True)
+        ev.fold(self.RUN, self.layer())
+        self.assertEqual(json.dumps(self.RUN, sort_keys=True), before)
+
+    def test_a_horizon_is_withheld_by_when_the_reading_was_written(self):
+        # Sealed on the night, the run's one-session horizon is evidence. A
+        # reading of the same night written after the NEXT session closed is
+        # not, even though the forecasts it read were.
+        sessions = ["2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16"]
+        panel = {}
+        document = {"basisSession": "2026-09-14", "ranAt": "2026-09-14T14:30:00Z",
+                    "models": {
+                        "drift": {"forecasts": []},
+                        rr.NAME: {"forecasts": [], "ranAt": "2026-09-15T14:00:00Z"}}}
+        scored = ev.score_run(document, panel, sessions)
+        self.assertNotIn("withheld", scored["models"]["drift"]["horizons"]["1"])
+        self.assertIn("withheld", scored["models"][rr.NAME]["horizons"]["1"])
+
+    def test_documents_fold_each_reading_into_its_own_night(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            runs = pathlib.Path(tmp)
+            (runs / "run-2026-09-14.json").write_text(json.dumps(self.RUN))
+            (runs / "rerank-2026-09-14.json").write_text(json.dumps(self.layer()))
+            (runs / "rerank-2026-09-01.json").write_text(json.dumps(
+                self.layer(basisSession="2026-09-01")))
+            held = ev.documents(runs)
+            self.assertEqual([d["basisSession"] for _, d in held], ["2026-09-14"])
+            self.assertIn(rr.NAME, held[0][1]["models"])
+
+
+class LayerRevealTest(unittest.TestCase):
+    """A reading opens against its own root and verifies against it."""
+
+    def test_the_stem_keeps_a_reading_apart_from_its_night(self):
+        self.assertEqual(rv.stem_of({"basisSession": "2026-09-14"}), "2026-09-14")
+        self.assertEqual(rv.stem_of({"basisSession": "2026-09-14", "layer": "rerank"}),
+                         "2026-09-14.rerank")
+
+    def test_a_matured_reading_is_opened_filed_and_verified_under_its_stem(self):
+        import tempfile
+        layer = {"layer": "rerank", "basisSession": "2026-01-01",
+                 "ranAt": "2026-01-01T13:00:00Z", "horizons": list(fc.HORIZONS),
+                 "models": {rr.NAME: {"answered": 2, "abstained": 0, "forecasts": [
+                     {"ticker": "AAA", "returns": {}, "ranked_by": {"1": 9, "5": 9, "20": 9}},
+                     {"ticker": "BBB", "returns": {}, "ranked_by": {"1": 2, "5": 2, "20": 2}}]}}}
+        public, secret = cm.commitment(layer)
+        layer["nonces"] = secret["nonces"]
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            runs, promises, reveals = root / "r", root / "c", root / "o"
+            runs.mkdir(); promises.mkdir()
+            (runs / "rerank-2026-01-01.json").write_text(json.dumps(layer))
+            (promises / "2026-01-01.rerank.json").write_text(json.dumps(public))
+            # A commitment for the night itself with a DIFFERENT root: opening
+            # the reading against it would fail, and must not be attempted.
+            (promises / "2026-01-01.json").write_text(json.dumps(dict(public, merkleRoot="ab" * 32)))
+            scan = root / "daily_scan_2026-02-01.json"
+            dates = [f"2026-01-{d:02d}" for d in range(1, 23)]
+            scan.write_text(json.dumps({"records": [
+                {"ticker": t, "recentSplitAdjustedBars":
+                    [{"date": d, "close": 100.0} for d in dates]}
+                for t in ("AAA", "BBB")]}))
+            rv.main([str(scan), "--runs", str(runs), "--commitments", str(promises),
+                     "--reveals", str(reveals)])
+            opened = json.loads((reveals / "2026-01-01.rerank.json").read_text())
+            self.assertEqual(opened["stem"], "2026-01-01.rerank")
+            self.assertEqual(opened["merkleRoot"], public["merkleRoot"])
+            self.assertEqual(vf.main([str(reveals / "2026-01-01.rerank.json"),
+                                      "--commitments", str(promises)]), 0)
+
+
+class PublishTest(unittest.TestCase):
+    """What reaches a reader, and which door each document is behind."""
+
+    def test_the_per_company_documents_are_behind_the_gate(self):
+        import publish as pb
+        # The worker opens `research/` to anybody and gates the rest of
+        # `/data/v1/`. A document naming companies may not live under the open
+        # folder, and the one that once did is not written there again.
+        self.assertIn("research", pb.TOP5.parts)
+        for path in (pb.SCENARIOS, pb.READINGS):
+            self.assertNotIn("research", path.parts)
+            self.assertIn("v1", path.parts)
+        self.assertEqual(pb.LEGACY_SCENARIOS, pb.RESEARCH / "scenarios.json")
+
+    def test_the_record_publishes_its_own_minimum(self):
+        import publish as pb
+        self.assertGreaterEqual(pb.MINIMUM_SESSIONS, 3)
+
+    def test_a_flip_in_sign_is_counted_not_asserted(self):
+        import publish as pb
+        rows = [{"chosenReturn": 1, "marketReturn": 0, "advantage": a}
+                for a in (1.0, -0.5, -0.2, 0.3)]
+        self.assertEqual(pb.summarise(rows)["signChanges"], 2)
+
+    def test_the_schedule_is_read_from_the_workflow_itself(self):
+        import publish as pb
+        crons = pb.schedule()
+        self.assertTrue(crons)
+        self.assertTrue(all(len(c.split()) == 5 for c in crons))
+
+    def test_a_readings_order_is_compared_in_plain_numbers(self):
+        import publish as pb
+        tickers = [f"T{i:02d}" for i in range(40)]
+        same = {t: i for i, t in enumerate(tickers)}
+        flipped = {t: -i for i, t in enumerate(tickers)}
+        self.assertEqual(pb.agreement(same, same, 5, 5)["rho"], 1.0)
+        turned = pb.agreement(flipped, same, 5, 5)
+        self.assertEqual(turned["rho"], -1.0)
+        self.assertEqual(turned["keptChanged"], 10)
+        self.assertGreater(turned["movedOverTwenty"], 0)
+
+    def test_the_public_record_of_readings_names_no_company(self):
+        import publish as pb
+        nights = [{"basis": "2026-09-14", "document": {
+            "basisSession": "2026-09-14", "ranAt": "2026-09-14T14:30:00Z",
+            "universe": ["AAA"], "models": {}}}]
+        table = pb.backtest(nights, {}, ["2026-09-14"],
+                            [rr.name_of(layers) for layers in rr.readings()])
+        ev._no_companies({"readings": table}, {"AAA"})
+
+    def test_the_reading_files_say_how_each_compares_with_the_models_alone(self):
+        import publish as pb
+        tickers = [f"T{i:02d}" for i in range(40)]
+
+        def block(scores, count):
+            return {"answered": len(scores), "asked": True, "count": count,
+                    "forecasts": [{"ticker": t, "returns": {},
+                                   "ranked_by": {"1": s, "5": s, "20": s}}
+                                  for t, s in scores.items()]}
+
+        document = {"basisSession": "2026-09-14", "models": {
+            "drift": {"forecasts": [{"ticker": t, "returns": {"5": i}}
+                                    for i, t in enumerate(tickers)]},
+            rr.name_of(()): block({t: i for i, t in enumerate(tickers)}, 5),
+            rr.NAME: block({t: -i for i, t in enumerate(tickers)}, 5)}}
+        files = pb.reading_documents(document, "now")
+        self.assertEqual(set(files), {"models", rr.key_of(rr.DEFAULT)})
+        self.assertIsNone(files["models"]["agreement"]["withModelsOnly"])
+        self.assertEqual(files[rr.key_of(rr.DEFAULT)]["agreement"]["withModelsOnly"]["rho"], -1.0)
+        self.assertEqual(files["models"]["agreement"]["withForecasters"], 1.0)
+        self.assertTrue(files[rr.key_of(rr.DEFAULT)]["default"])
+
+
+class EarlyExitTest(unittest.TestCase):
+    """A night already sealed costs the retry schedule seconds, not Kronos."""
+
+    def test_the_models_are_not_asked_when_the_night_is_sealed(self):
+        import tempfile
+        import unittest.mock as mock
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            scan = {"records": [{"ticker": t, "recentSplitAdjustedBars": rising(100)}
+                                for t in ("AAA", "BBB")]}
+            path = root / "daily_scan.json"
+            path.write_text(json.dumps(scan))
+            basis = rising(100)[-1]["date"]
+            (root / f"run-{basis}.json").write_text("{}")
+            asked = []
+            with mock.patch.object(run, "OUT", root), \
+                    mock.patch.object(run, "build", lambda *a, **k: asked.append(1)):
+                self.assertEqual(run.main([str(path), "--write", "--no-today",
+                                           "--no-timestamp"]), 0)
+            self.assertEqual(asked, [])
+
+
+class LastClosedTest(unittest.TestCase):
+    """Closed since the rows' session — including after midnight."""
+
+    def watch(self, stamp="202609141535"):
+        return {"data": [{"reuters": f"T{i}.CA", "closePrice": 9.1, "writeTime": stamp}
+                         for i in range(5)]}
+
+    def status(self, state="Closed", when="2026-09-14T15:40:00"):
+        return {"data": {"status": state, "statusDate": when}}
+
+    def test_the_evening_of_the_session(self):
+        self.assertEqual(pricing.last_closed(self.watch(), self.status()), "2026-09-14")
+
+    def test_after_midnight_the_newest_session_is_still_the_one_that_closed(self):
+        # What the exchange actually said at 00:02 on the 15th.
+        self.assertEqual(pricing.last_closed(
+            self.watch(), self.status(when="2026-09-15T00:02:20")), "2026-09-14")
+        self.assertEqual(pricing.todays_bars(
+            self.watch(), self.status(when="2026-09-15T00:02:20"))[0], None)
+
+    def test_a_market_that_is_trading_has_not_closed_anything_new(self):
+        for state in ("Open", "Pre-Open", ""):
+            self.assertIsNone(pricing.last_closed(self.watch(), self.status(state)))
+
+    def test_rows_newer_than_the_status_are_not_believed(self):
+        self.assertIsNone(pricing.last_closed(self.watch("202609161535"), self.status()))
+
+    def test_no_rows_no_session(self):
+        self.assertIsNone(pricing.last_closed({"data": []}, self.status()))
+
+    def test_the_bars_for_drawing_follow_the_same_rule(self):
+        when, got = pricing.closed_bars(self.watch(), self.status(when="2026-09-15T00:02:20"))
+        self.assertEqual(when, "2026-09-14")
+        self.assertEqual(set(got), {f"T{i}" for i in range(5)})
+        self.assertEqual(got["T0"]["date"], "2026-09-14")
+        self.assertEqual(pricing.closed_bars(self.watch(), self.status("Open")), (None, {}))
+        # And the forecast's own rule is untouched by it.
+        self.assertEqual(pricing.todays_bars(self.watch(), self.status())[1]["T0"]["close"], 9.1)
+
+
+class TokenRefreshTest(unittest.TestCase):
+    """An hour-long token outlived by the job is replaced, not retried."""
+
+    def test_an_expired_token_is_swapped_for_one_minted_from_the_credentials(self):
+        import io
+        import os
+        import tempfile
+        import unittest.mock as mock
+        import urllib.error
+        sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
+        import gemini
+
+        seen = []
+
+        def urlopen(request, timeout=None):
+            url = request.full_url
+            if "aiplatform" in url:
+                auth = request.headers.get("Authorization")
+                seen.append(auth)
+                if auth == "Bearer expired":
+                    raise urllib.error.HTTPError(url, 401, "expired", {}, io.BytesIO(b"{}"))
+                return io.BytesIO(json.dumps({"candidates": [
+                    {"content": {"parts": [{"text": "ok"}]}}]}).encode())
+            if "identity" in url:
+                return io.BytesIO(json.dumps({"value": "jwt"}).encode())
+            if "sts" in url:
+                return io.BytesIO(json.dumps({"access_token": "federated",
+                                              "expires_in": 3600}).encode())
+            if "generateAccessToken" in url:
+                return io.BytesIO(json.dumps({"accessToken": "fresh"}).encode())
+            raise AssertionError(url)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            creds = pathlib.Path(tmp) / "creds.json"
+            creds.write_text(json.dumps({
+                "type": "external_account", "audience": "//iam/pool",
+                "token_url": "https://sts.example/v1/token",
+                "service_account_impersonation_url": "https://iam.example/sa:generateAccessToken",
+                "credential_source": {"url": "https://identity.example/?aud=x",
+                                      "headers": {"Authorization": "Bearer runner"},
+                                      "format": {"type": "json",
+                                                 "subject_token_field_name": "value"}}}))
+            env = {"GOOGLE_VERTEX_ACCESS_TOKEN": "expired",
+                   "GOOGLE_CLOUD_PROJECT": "p", "GOOGLE_APPLICATION_CREDENTIALS": str(creds)}
+            with mock.patch.dict(os.environ, env), \
+                    mock.patch.object(gemini.urllib.request, "urlopen", urlopen), \
+                    mock.patch.object(gemini, "_ENV_TOKEN_REFUSED", False), \
+                    mock.patch.object(gemini, "_MINTED", {}), \
+                    mock.patch.object(gemini.time, "sleep", lambda s: None):
+                text, _ = gemini.generate("hello")
+        self.assertEqual(text, "ok")
+        self.assertEqual(seen, ["Bearer expired", "Bearer fresh"])
 
 
 if __name__ == "__main__":

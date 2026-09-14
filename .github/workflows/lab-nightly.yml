@@ -51,6 +51,7 @@ on:
     branches: [main]
     paths:
       - 'scripts/lab/**'
+      - 'scripts/gemini.py'
       - '.github/workflows/lab-nightly.yml'
 
   workflow_dispatch:
@@ -136,20 +137,6 @@ jobs:
       # WebSocket. Fetched here rather than shared because two fetches
       # minutes apart are two different markets, and the forecast has to be
       # made from the bars the record says it was made from.
-      # Vertex is where the Cloud credits live and the only Gemini endpoint
-      # that can spend them. Without this the rerank layer abstains with the
-      # reason recorded, and the other nine models are unaffected.
-      - name: Authenticate to Google Cloud
-        id: gcp
-        uses: google-github-actions/auth@v2
-        continue-on-error: true
-        with:
-          project_id: project-8bba98ed-6d90-45af-ab8
-          workload_identity_provider: projects/604618997878/locations/global/workloadIdentityPools/github/providers/repo
-          service_account: esthmr-ci@project-8bba98ed-6d90-45af-ab8.iam.gserviceaccount.com
-          token_format: access_token
-          audience: https://github.com/elbarbary
-
       - name: Fetch the market scan
         run: |
           mkdir -p ../work
@@ -179,14 +166,46 @@ jobs:
           # code goes direct.
           ESTHMR_RELAY_URL: ${{ secrets.ESTHMR_RELAY_URL }}
           ESTHMR_RELAY_TOKEN: ${{ secrets.ESTHMR_RELAY_TOKEN }}
-          GOOGLE_VERTEX_ACCESS_TOKEN: ${{ steps.gcp.outputs.access_token }}
-          GOOGLE_CLOUD_PROJECT: project-8bba98ed-6d90-45af-ab8
         run: |
           scan=$(ls -t ../work/daily_scan_*.json | grep -v fused | head -1)
           echo "scan: $scan"
           python3 scripts/lab/run.py "$scan" \
             --models "${{ inputs.models || 'all' }}" \
             ${{ inputs.dry_run == true && ' ' || '--write' }}
+
+      # Vertex is where the Cloud credits live and the only Gemini endpoint
+      # that can spend them. Minted HERE, immediately before the one step that
+      # asks Gemini anything — not before the scan, where it used to be, with
+      # an hour of Kronos between the token and its first use. The credentials
+      # file it also writes lets `gemini.py` mint another if a run outlasts it.
+      - name: Authenticate to Google Cloud
+        id: gcp
+        if: always() && github.event_name != 'push'
+        uses: google-github-actions/auth@v2
+        continue-on-error: true
+        with:
+          project_id: project-8bba98ed-6d90-45af-ab8
+          workload_identity_provider: projects/604618997878/locations/global/workloadIdentityPools/github/providers/repo
+          service_account: esthmr-ci@project-8bba98ed-6d90-45af-ab8.iam.gserviceaccount.com
+          token_format: access_token
+          audience: https://github.com/elbarbary
+
+      # The re-rank reads the night the step above sealed — sixteen readings,
+      # one per combination of filings, news, the rule book and measurements —
+      # and seals them beside it. `always()` because the retry schedule finds
+      # the night already forecast and still has a reading to take if the
+      # first attempt at it failed; `rerank.py` refuses any night that is not
+      # the session the exchange says has just closed, and a night already
+      # read, so there is nothing for it to do twice.
+      - name: Re-rank with context
+        if: always() && github.event_name != 'push'
+        env:
+          ESTHMR_RELAY_URL: ${{ secrets.ESTHMR_RELAY_URL }}
+          ESTHMR_RELAY_TOKEN: ${{ secrets.ESTHMR_RELAY_TOKEN }}
+          GOOGLE_VERTEX_ACCESS_TOKEN: ${{ steps.gcp.outputs.access_token }}
+          GOOGLE_CLOUD_PROJECT: project-8bba98ed-6d90-45af-ab8
+        run: |
+          python3 scripts/lab/rerank.py ${{ inputs.dry_run == true && ' ' || '--write' }}
 
       # Scoring and revealing are independent of today's forecast: they read
       # runs that were frozen weeks ago against bars the market has since
@@ -210,11 +229,17 @@ jobs:
           python3 scripts/lab/reveal.py "$scan"
 
       # What a reader sees: each model's five highest-ranked and what they
-      # returned, and what every model said about every company last night.
-      # The first names no security and is public; the second does and stays
-      # behind the session gate, behind an acknowledgement on the screen.
+      # returned (`research/top5.json`, public, names no security), and what
+      # every model and every re-rank reading said about every company last
+      # night (`lab/`, behind the session gate and the warning on the screen).
       - name: Publish what the models say
         if: always() && inputs.dry_run != true
+        # Through the relay for the same reason as the forecast: the session
+        # that just closed comes from the exchange, which resets a runner's
+        # connection, and without it tonight's close is not on the screen.
+        env:
+          ESTHMR_RELAY_URL: ${{ secrets.ESTHMR_RELAY_URL }}
+          ESTHMR_RELAY_TOKEN: ${{ secrets.ESTHMR_RELAY_TOKEN }}
         run: |
           scan=$(ls -t ../work/daily_scan_*.json | grep -v fused | head -1)
           python3 scripts/lab/publish.py "$scan"
@@ -237,7 +262,14 @@ jobs:
         run: |
           git config user.name  'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add data-source/lab public/data/v1/research
+          # `-A` so a file publish.py removed — a stale reading, or the
+          # per-company document that once sat in the public folder — is
+          # removed from the record too. The gated folder only on a night
+          # that has one, because a pathspec that matches nothing is fatal.
+          git add -A data-source/lab public/data/v1/research
+          if [ -e public/data/v1/lab ] || git ls-files --error-unmatch public/data/v1/lab >/dev/null 2>&1; then
+            git add -A public/data/v1/lab
+          fi
           if git diff --cached --quiet; then
             echo 'nothing new — the basis session has not moved'
             exit 0
@@ -255,7 +287,7 @@ jobs:
             fi
             unmerged=$(git diff --name-only --diff-filter=U)
             if [ -n "$unmerged" ]; then
-              if echo "$unmerged" | grep -qvE '^(data-source/lab|public/data/v1/research)/'; then
+              if echo "$unmerged" | grep -qvE '^(data-source/lab|public/data/v1/research|public/data/v1/lab)/'; then
                 echo "conflict outside this job's own output:"; echo "$unmerged"
                 git rebase --abort || true
                 exit 1

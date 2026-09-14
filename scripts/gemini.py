@@ -59,6 +59,7 @@ import os
 import pathlib
 import re
 import sys
+import threading
 import time
 import urllib.error
 import urllib.parse
@@ -163,16 +164,92 @@ def _adc_document() -> dict | None:
     return None
 
 
+STS_URL = "https://sts.googleapis.com/v1/token"
+CLOUD_SCOPE = "https://www.googleapis.com/auth/cloud-platform"
+# The pre-minted token CI passes in, once Vertex has said it is no longer
+# good. From then on this process mints its own rather than asking again with
+# a token already refused.
+_ENV_TOKEN_REFUSED = False
+_MINTED: dict = {}
+_MINT_LOCK = threading.Lock()
+
+
+def _external_account_token() -> str | None:
+    """A fresh Vertex token from a workload-identity credentials file, or None.
+
+    WHY THIS EXISTS
+    CI's Google step mints one access token at the start of the job and it
+    lives an hour. The lab's job asks Gemini after Kronos has run, and Kronos
+    on a slow runner takes most of that hour. The same step also writes a
+    credentials file (`GOOGLE_APPLICATION_CREDENTIALS`, type
+    `external_account`) that can mint a NEW token at any point in the job: ask
+    GitHub for this job's identity token, exchange it at Google's security
+    token service, and trade that for the service account's access token. No
+    key exists anywhere in this, which is the reason for doing it this way.
+
+    Cached until two minutes before it expires, and serialised, because the
+    re-rank asks several readings at once and one mint is enough for all.
+    """
+    adc = _adc_document()
+    if not adc or adc.get("type") != "external_account":
+        return None
+    with _MINT_LOCK:
+        if _MINTED.get("token") and _MINTED.get("expires", 0) > time.time() + 120:
+            return _MINTED["token"]
+        try:
+            source = adc.get("credential_source") or {}
+            identity = urllib.request.urlopen(urllib.request.Request(
+                source["url"], headers=source.get("headers") or {}), timeout=30).read()
+            shape = source.get("format") or {}
+            subject = (json.loads(identity)[shape.get("subject_token_field_name") or "value"]
+                       if shape.get("type") == "json" else identity.decode().strip())
+            form = urllib.parse.urlencode({
+                "grant_type": "urn:ietf:params:oauth:grant-type:token-exchange",
+                "audience": adc["audience"],
+                "scope": CLOUD_SCOPE,
+                "requested_token_type": "urn:ietf:params:oauth:token-type:access_token",
+                "subject_token": subject,
+                "subject_token_type": adc.get("subject_token_type")
+                or "urn:ietf:params:oauth:token-type:jwt",
+            }).encode()
+            exchanged = json.loads(urllib.request.urlopen(urllib.request.Request(
+                adc.get("token_url") or STS_URL, data=form,
+                headers={"content-type": "application/x-www-form-urlencoded"}),
+                timeout=30).read())
+            token = exchanged["access_token"]
+            lifetime = float(exchanged.get("expires_in") or 3600)
+            if impersonate := adc.get("service_account_impersonation_url"):
+                granted = json.loads(urllib.request.urlopen(urllib.request.Request(
+                    impersonate, data=json.dumps({"scope": [CLOUD_SCOPE]}).encode(),
+                    headers={"authorization": f"Bearer {token}",
+                             "content-type": "application/json"}),
+                    timeout=30).read())
+                token = granted["accessToken"]
+                lifetime = 3600.0
+        except urllib.error.HTTPError as error:
+            _note_vertex(error.code, "could not mint a token from the credentials file")
+            return None
+        except (KeyError, TypeError) + transport.TRANSPORT as error:
+            _note_vertex(None, f"could not mint a token: {type(error).__name__}")
+            return None
+        _MINTED.update(token=token, expires=time.time() + lifetime)
+        return token
+
+
 def _access_token() -> str | None:
     """An OAuth token for Vertex, or None if this machine cannot mint one.
 
-    Three sources, cheapest first. A pre-minted token in the environment is how
-    CI passes one in without a key file; otherwise a stored refresh token is
-    exchanged directly against Google's token endpoint, which needs no SDK and
-    no `gcloud` on the box.
+    Four sources, cheapest first. A pre-minted token in the environment is how
+    CI passes one in without a key file — until Vertex refuses it, when a
+    workload-identity credentials file mints a fresh one; otherwise a stored
+    refresh token is exchanged directly against Google's token endpoint, which
+    needs no SDK and no `gcloud` on the box.
     """
-    if token := os.environ.get("GOOGLE_VERTEX_ACCESS_TOKEN"):
+    if (token := os.environ.get("GOOGLE_VERTEX_ACCESS_TOKEN")) and not _ENV_TOKEN_REFUSED:
         return token.strip()
+
+    if minted := _external_account_token():
+        return minted
 
     adc = _adc_document()
     if not adc or adc.get("type") != "authorized_user":
@@ -222,11 +299,13 @@ def _post(model: str, body: bytes, *, timeout: int) -> dict:
     and it is genuinely a fallback rather than a preference: it bills a
     separate prepay balance that a Cloud grant never touches.
     """
+    global _ENV_TOKEN_REFUSED
     token = _access_token()
     projects = _vertex_projects()
     if token and projects:
         for project in projects:
             for attempt in range(VERTEX_ATTEMPTS):
+                token = _access_token() or token
                 request = urllib.request.Request(
                     VERTEX_ENDPOINT.format(project=project, model=model),
                     data=body,
@@ -249,6 +328,14 @@ def _post(model: str, body: bytes, *, timeout: int) -> dict:
                     if error.code == 429 and attempt < VERTEX_ATTEMPTS - 1:
                         time.sleep(VERTEX_BACKOFF * (attempt + 1))
                         continue
+                    # An expired pre-minted token. Stop offering it, and ask
+                    # again at once if the credentials file can mint another.
+                    if (error.code == 401 and not _ENV_TOKEN_REFUSED
+                            and os.environ.get("GOOGLE_VERTEX_ACCESS_TOKEN")
+                            and attempt < VERTEX_ATTEMPTS - 1):
+                        _ENV_TOKEN_REFUSED = True
+                        if _external_account_token():
+                            continue
                     _note_vertex(error.code, error.read()[:200].decode("utf-8", "ignore"))
                     break
                 except transport.TRANSPORT as error:

@@ -105,6 +105,68 @@ def bars_of(panel: dict, ticker: str) -> list[dict]:
     return [held[d] for d in sorted(held)]
 
 
+def fold(document: dict, layer: dict) -> dict:
+    """A night with a second-pass reading folded in, the sealed run untouched.
+
+    The re-rank reads a night after it was sealed and seals its readings in a
+    file of its own (`rerank.py` says why). To score it, the two are put back
+    together here — in memory only, with three rules:
+
+      * a reading keeps its OWN `ranAt`, because whether a horizon's answer
+        already existed is a question about when that reading was written,
+        not when the forecasts it read were;
+      * a reading never replaces a model the run already holds;
+      * a reading that says it read a different run — its fingerprint does
+        not match this one's — is not folded in at all. Moved onto another
+        night's forecasts it is not a reading of this night.
+    """
+    if layer.get("basisSession") != document.get("basisSession"):
+        return document
+    said = (layer.get("reads") or {}).get("fingerprint")
+    if said and document.get("fingerprint") and said != document["fingerprint"]:
+        return document
+    merged = dict(document)
+    merged["models"] = dict(document.get("models") or {})
+    for name, block in (layer.get("models") or {}).items():
+        if name in merged["models"]:
+            continue
+        merged["models"][name] = dict(block, ranAt=layer.get("ranAt"))
+    merged["universe"] = sorted(set(document.get("universe") or [])
+                                | set(layer.get("universe") or []))
+    # What the layer read, beside its answers — the screen says how many
+    # filings and headlines a reading was shown, and it says it from here.
+    merged["layers"] = dict(document.get("layers") or {})
+    merged["layers"][layer.get("layer") or "layer"] = {
+        "ranAt": layer.get("ranAt"), "evidence": layer.get("evidence")}
+    return merged
+
+
+def documents(runs: pathlib.Path) -> list[tuple[pathlib.Path, dict]]:
+    """Every run under `runs`, each with the readings sealed over it folded in.
+
+    Oldest basis first. A reading with no run under it is not a night: it has
+    nothing to have read.
+    """
+    held: dict[str, tuple[pathlib.Path, dict]] = {}
+    for path in sorted(glob.glob(str(runs / "run-*.json"))):
+        try:
+            document = json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if document.get("basisSession"):
+            held[document["basisSession"]] = (pathlib.Path(path), document)
+    for path in sorted(glob.glob(str(runs / "rerank-*.json"))):
+        try:
+            layer = json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        basis = layer.get("basisSession")
+        if basis in held:
+            origin, document = held[basis]
+            held[basis] = (origin, fold(document, layer))
+    return [held[basis] for basis in sorted(held)]
+
+
 def calendar(panel: dict[str, dict[str, dict]]) -> list[str]:
     """The exchange's completed sessions, as the market itself shows them.
 
@@ -274,10 +336,16 @@ def score_run(document: dict, panel: dict, sessions: list[str]) -> dict:
                 for h in fc.HORIZONS}
     rows = {}
     for name, block in (document.get("models") or {}).items():
+        # A reading folded in from a second pass carries the moment IT was
+        # written, and that is the moment its evidence is judged by.
+        own = block.get("ranAt")
+        held_back = (withheld if not own or own == ran_at else
+                     {h: outcome_already_known(sessions, basis, h, own)
+                      for h in fc.HORIZONS})
         per_horizon = {}
         for horizon in fc.HORIZONS:
             pairs = pairs_for(block, basis, horizon, panel)
-            if withheld[horizon]:
+            if held_back[horizon]:
                 per_horizon[str(horizon)] = {
                     "scored": len(pairs),
                     "rankIC": None,
@@ -550,14 +618,9 @@ def main(argv=None) -> int:
         print(f"   {len(kept)} nights are older than the oldest bar these "
               "scans hold and keep the scores they were given")
 
-    paths = sorted(glob.glob(str(args.runs / "run-*.json")))
     nights = []
     universe: set[str] = set()
-    for path in paths:
-        try:
-            document = json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
-        except (OSError, ValueError):
-            continue
+    for _, document in documents(args.runs):
         universe.update(document.get("universe") or [])
         basis = document.get("basisSession")
         nights.append(kept[basis] if basis in kept

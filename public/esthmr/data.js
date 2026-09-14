@@ -746,9 +746,19 @@ export async function top5() {
  *
  *  Unlike the two above, this DOES name securities, so it stays behind the
  *  session gate with the rest of the exchange data and behind an
- *  acknowledgement in the screen that draws it. */
+ *  acknowledgement in the screen that draws it. The gate is the path: the
+ *  worker opens `research/` to anybody, so this lives in `lab/`. */
 export async function scenarios() {
-  return doc('research/scenarios.json');
+  return doc('lab/scenarios.json');
+}
+
+/** One re-rank reading — the language model's scores for every company when
+ *  it read a given combination of filings, news, the rule book and
+ *  measurements. Gated like the scenarios, and fetched only when a reader
+ *  asks for that combination. */
+export async function rerankReading(key) {
+  if (!/^[a-z]+(-[a-z]+)*$/.test(String(key || ''))) throw new Error('no such reading');
+  return doc(`lab/rerank/${key}.json`);
 }
 
 /** The documents Home needs beyond the directory: the index history, and the

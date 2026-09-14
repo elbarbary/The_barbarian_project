@@ -306,6 +306,23 @@ test('an open document may be cached, a private one may not', async () => {
   assert.match(gated.headers.get('cache-control'), /private, no-cache/);
 });
 
+test('what the models said about named companies needs a session', async () => {
+  // The lab's per-company documents name securities, so they sit beside the
+  // exchange data behind the gate — never in research/, which is open. One
+  // evening in September the scenarios document was published into research/
+  // and served to anybody; these paths are where it lives now.
+  const paths = new Set([
+    '/data/v1/lab/scenarios.json',
+    '/data/v1/lab/rerank/filings-news-rulebook.json',
+    '/data/v1/lab/rerank/models.json',
+  ]);
+  const e = env({ ASSETS: assets(paths) });
+  for (const path of paths) {
+    const result = await call(e, `https://thebarbarianproject.com${path}`, {});
+    assert.equal(result.status, 401, `${path} answered ${result.status} without a session`);
+  }
+});
+
 test('nothing outside research is opened by a path that merely contains it', async () => {
   // /data/v1/companies/research.json is exchange data with an unlucky name.
   const e = env({ ASSETS: assets(new Set(['/data/v1/companies/research.json'])) });

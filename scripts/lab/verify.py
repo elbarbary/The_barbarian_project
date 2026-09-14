@@ -236,7 +236,9 @@ def main(argv=None) -> int:
     bad = 0
     for path in paths:
         reveal = json.loads(path.read_text(encoding="utf-8"))
-        promise = args.commitments / f"{reveal.get('basisSession')}.json"
+        # A reading sealed over a night has a root of its own; the reveal says
+        # which commitment it opens. Older reveals name only the session.
+        promise = args.commitments / f"{reveal.get('stem') or reveal.get('basisSession')}.json"
         commitment = (json.loads(promise.read_text(encoding="utf-8"))
                       if promise.is_file() else None)
         result = check(reveal, commitment)

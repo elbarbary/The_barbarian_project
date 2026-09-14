@@ -117,6 +117,19 @@ def root_of(records: list[dict], basis: str) -> str:
     return cm.merkle_root(leaves)
 
 
+def stem_of(document: dict) -> str:
+    """The name a night's commitment, and its reveal, are filed under.
+
+    The run is the basis alone. A second-pass reading sealed over the same
+    night — the re-rank — is the basis and its layer, because it has a root
+    of its own and opening it against the run's root would fail for the
+    right reason and help nobody.
+    """
+    basis = document["basisSession"]
+    layer = document.get("layer")
+    return f"{basis}.{layer}" if layer else basis
+
+
 def build(document: dict, commitment: dict, sessions_since: int,
           revealed_at: str) -> dict:
     basis = document["basisSession"]
@@ -125,7 +138,7 @@ def build(document: dict, commitment: dict, sessions_since: int,
     promised = commitment.get("merkleRoot")
     if rebuilt != promised:
         raise SystemExit(
-            f"reveal: {basis} does not reproduce its own commitment "
+            f"reveal: {stem_of(document)} does not reproduce its own commitment "
             f"({rebuilt[:16]} vs {promised[:16] if promised else 'none'}). "
             "Refusing to publish: a reveal that cannot rebuild the root it "
             "was committed to is exactly what the commitment exists to catch.")
@@ -134,6 +147,10 @@ def build(document: dict, commitment: dict, sessions_since: int,
     return {
         "schemaVersion": 1,
         "basisSession": basis,
+        # Which commitment this opens, so a stranger's verifier fetches the
+        # right root rather than guessing from the date.
+        "stem": stem_of(document),
+        **({"layer": document["layer"]} if document.get("layer") else {}),
         "ranAt": document.get("ranAt"),
         "revealedAt": revealed_at,
         "merkleRoot": rebuilt,
@@ -191,7 +208,11 @@ def main(argv=None) -> int:
                    .isoformat(timespec="seconds").replace("+00:00", "Z"))
     opened, waiting, uncommitted = 0, 0, 0
 
-    for path in sorted(glob.glob(str(args.runs / "run-*.json"))):
+    # The nights, then the readings sealed over them. Each has its own root,
+    # so each is opened against its own commitment and filed under its stem.
+    paths = (sorted(glob.glob(str(args.runs / "run-*.json")))
+             + sorted(glob.glob(str(args.runs / "rerank-*.json"))))
+    for path in paths:
         try:
             document = json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
         except (OSError, ValueError):
@@ -199,25 +220,26 @@ def main(argv=None) -> int:
         basis = document.get("basisSession")
         if not basis:
             continue
-        promise = args.commitments / f"{basis}.json"
+        stem = stem_of(document)
+        promise = args.commitments / f"{stem}.json"
         if not promise.is_file() or not document.get("nonces"):
             # The back-loaded August nights and anything written before the
             # commitment existed. Genuinely frozen, but frozen only by the
             # git history, and there is no root here to open against one.
             uncommitted += 1
             continue
-        out = args.reveals / f"{basis}.json"
+        out = args.reveals / f"{stem}.json"
         if out.is_file():
             continue
         since = sessions_after(sessions, basis)
         if since < LONGEST:
-            print(f"   {basis}: {since}/{LONGEST} sessions — still forecasting")
+            print(f"   {stem}: {since}/{LONGEST} sessions — still forecasting")
             waiting += 1
             continue
 
         commitment = json.loads(promise.read_text(encoding="utf-8"))
         document_out = build(document, commitment, since, revealed_at)
-        print(f"   {basis}: opened  {document_out['leaves']} records  "
+        print(f"   {stem}: opened  {document_out['leaves']} records  "
               f"root {document_out['merkleRoot'][:16]} matches the commitment")
         opened += 1
         if args.check:

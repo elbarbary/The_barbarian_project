@@ -8,12 +8,12 @@ of a reader, is a recommendation whatever the wording around it — that is the
 whole reason the reader-facing side of this project is built out of the
 reader's own rulebooks instead.
 
-This is not that. It is a MODEL, entered in the same private arena as Kronos
-and the baselines: its ranking is committed, salted and timestamped along with
-theirs, kept in `data-source/lab/` which is not served, and opened only when
-every horizon in it has matured. What reaches a reader is its SCORE — "the
-rerank layer beat the raw models by this much over these sessions" — which is
-a statement about forecasters and names no security at all.
+This is not that. It is a MODEL, entered in the same arena as Kronos and the
+baselines: its scores are committed, salted and timestamped, and scored like
+theirs. What reaches Home is its RECORD — "the re-rank's five did this much
+against the market over these sessions" — which names no security at all.
+What it said about named companies is shown only behind the session gate and
+the experiment warning, company by company and never as a list in its order.
 
 If that ever stops being true, this file has become the thing the project
 exists not to be.
@@ -27,63 +27,172 @@ amount of trimming bars will prevent.
   exchange's price history. Asked to rank a session from last August, it might
   be recalling the answer rather than forecasting it.
 
-  **Its context may be newer than the basis.** The measurements it is given
-  come from `measures.json`, which is rebuilt three times a trading day. Fed
-  to a run reconstructed from August, those are figures from after the
-  session being forecast.
+  **Its context may be newer than the basis.** The filings, headlines and
+  measurements it reads are rebuilt through the day. Fed to a run
+  reconstructed from August, those are facts from after the session being
+  forecast.
 
 One rule closes both: **this runs only on a basis session that has just
 closed.** Never a reconstruction, never a back-loaded night, never a date the
-market has already answered. `refuse()` enforces it and the run records the
-refusal rather than quietly skipping.
+market has already answered. `refuse()` enforces it.
+
+WHY IT IS A SECOND PASS OVER A SEALED NIGHT
+-------------------------------------------
+It used to run inside `run.py`, after the nine. Three things were wrong with
+that. The Google token minted at the start of the job had to outlive Kronos,
+which on a slow runner takes most of an hour. A Vertex outage lost the whole
+night's re-rank for good, because the night was sealed with it missing. And
+the re-rank could never be added to a night that had already been sealed.
+
+So it reads the night after the night is sealed: `run-<basis>.json` is opened,
+never modified, and this writes `rerank-<basis>.json` beside it with its own
+commitment, its own timestamp, and the fingerprint of the run it read — so a
+reading cannot be quietly moved onto a different night. The retry schedule
+gets a second chance at a reading that failed outright; a night that has been
+read is never read again.
+
+WHY SIXTEEN READINGS, AND NOT ONE
+---------------------------------
+A reader can switch four kinds of evidence on and off: the latest filings,
+the news, this project's rule book, and the company's own measurements. A
+switch that only re-drew the same answer would be a claim that the evidence
+was read when it was not. So every combination is its own question to the
+model, asked the same night of the same forecasts, and sealed and scored like
+any other model. The one called plain `rerank` — filings, news and the rule
+book — is the default the Home page reports; the other fifteen are named
+`rerank:<layers>`, and in six weeks the record answers the question the
+switches ask: does reading the filings actually help?
 
 WHAT IT IS ASKED FOR
 --------------------
 A score per company, and a count — how many of the top it thinks are worth
-anything tonight. The count is the user's question made measurable: a layer
-that says "eleven" on a good night and "none" on a bad one is worth something
+anything tonight. The count is the question made measurable: a layer that
+says "eleven" on a good night and "none" on a bad one is worth something
 different from one that always says twenty, and only a record of both can
 tell them apart.
 """
 
 from __future__ import annotations
 
+import argparse
+import concurrent.futures
+import datetime
+import hashlib
+import itertools
 import json
 import pathlib
 import re
 import sys
+import time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
+import commit as cm
 import forecast as fc
+import panel as pricing
+import run as lab
+import timestamp as ts
 
 REPO = pathlib.Path(__file__).resolve().parent.parent.parent
-MEASURES = REPO / "public" / "data" / "v1" / "measures.json"
+RUNS = REPO / "data-source" / "lab"
+COMMITMENTS = REPO / "public" / "data" / "v1" / "research" / "commitments"
+DATA = REPO / "public" / "data" / "v1"
+RULEBOOK = pathlib.Path(__file__).resolve().parent / "rulebook.md"
 
 NAME = "rerank"
+PREFIX = NAME + ":"
 
-# The measurements it is shown beside the forecasts. Deliberately few and
-# deliberately factual: this project's own published arithmetic, the same
-# numbers any reader can see, and nothing that is itself an opinion.
-CONTEXT = ("relative_volume_20", "change_5", "change_20",
-           "sessions_since_filing", "market_cap")
+# The four kinds of evidence a reader can switch on, in the one order every
+# name, key and file is spelled in. Order matters only so that the same set
+# always has the same name.
+LAYERS = ("filings", "news", "rulebook", "measures")
+
+# What the plain `rerank` reads: the filings, the news and the rule book. Not
+# its own measurements by default, because those are this project's arithmetic
+# rather than evidence anybody filed — a reader can add them and see whether
+# the reading changes.
+DEFAULT = ("filings", "news", "rulebook")
 
 SCORE_MIN, SCORE_MAX = 0, 100
 
+# The windows. Deliberately short and stated in the record: "the latest
+# filings" that reach back a year are a different question.
+FILING_DAYS = 14
+FILINGS_PER_COMPANY = 3
+FILINGS_MAX = 240
+NEWS_HOURS = 48
+NEWS_PER_COMPANY = 3
+NEWS_MAX = 160
+TITLE_CHARS = 140
+
+# The measurements a reader means by "its own measurements": the published
+# arithmetic of the filings and the tape, the same numbers any reader can see,
+# and nothing that is itself an opinion.
+MEASURES = ("market_cap", "pe", "eps", "net_income_growth", "revenue",
+            "relative_volume_20", "change_5", "change_20",
+            "sessions_since_filing", "results_due_in_days")
+
+
+# ── names ────────────────────────────────────────────────────────────────────
+
+def canonical(layers) -> tuple[str, ...]:
+    """The layers, known ones only, each once, in the one spelling order."""
+    chosen = set(layers or ())
+    return tuple(layer for layer in LAYERS if layer in chosen)
+
+
+def key_of(layers) -> str:
+    """The file-safe key of a set of layers. `models` is the empty set: the
+    reading that is given nothing but the forecasts."""
+    ordered = canonical(layers)
+    return "-".join(ordered) if ordered else "models"
+
+
+def name_of(layers) -> str:
+    """The model name a reading is sealed and scored under."""
+    ordered = canonical(layers)
+    return NAME if ordered == DEFAULT else PREFIX + key_of(ordered)
+
+
+def layers_of(name: str) -> tuple[str, ...] | None:
+    """The layers behind a model name, or None if it is not a reading."""
+    if name == NAME:
+        return DEFAULT
+    if not name.startswith(PREFIX):
+        return None
+    key = name[len(PREFIX):]
+    if key == "models":
+        return ()
+    parts = tuple(key.split("-"))
+    return parts if canonical(parts) == parts and parts else None
+
+
+def is_reading(name: str) -> bool:
+    return layers_of(name) is not None
+
+
+def readings() -> list[tuple[str, ...]]:
+    """Every combination, fewest layers first, the default among them once."""
+    out = []
+    for size in range(len(LAYERS) + 1):
+        out.extend(itertools.combinations(LAYERS, size))
+    return out
+
+
+# ── the rule ─────────────────────────────────────────────────────────────────
 
 def refuse(document: dict, today: str | None) -> str | None:
     """Why this may not run on this document, or None if it may.
 
     The single rule. A reconstruction is refused because the model may
-    remember the outcome and because the measurements it would be shown are
-    newer than the session; a basis that is not the session which just closed
-    is refused for the same two reasons at once.
+    remember the outcome and because the evidence it would be shown is newer
+    than the session; a basis that is not the session which just closed is
+    refused for the same two reasons at once.
     """
     if document.get("reconstructed"):
         return ("a reconstructed run: this layer may have been trained on the "
-                "outcome, and the measurements it reads are newer than the "
-                "session")
+                "outcome, and the evidence it reads is newer than the session")
     basis = document.get("basisSession")
     if not basis:
         return "the run has no basis session"
@@ -96,20 +205,11 @@ def refuse(document: dict, today: str | None) -> str | None:
     return None
 
 
-def measurements(path: pathlib.Path = MEASURES) -> dict[str, dict]:
-    try:
-        held = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        return {}
-    rows = held.get("rows") or held.get("companies") or held
-    if isinstance(rows, dict):
-        rows = list(rows.values())
-    out = {}
-    for row in rows if isinstance(rows, list) else []:
-        ticker = row.get("ticker")
-        if ticker:
-            out[ticker] = row
-    return out
+# ── what it reads ────────────────────────────────────────────────────────────
+
+def forecasters(document: dict) -> list[str]:
+    """The models whose answers it reads — never a reading of its own."""
+    return sorted(m for m in (document.get("models") or {}) if not is_reading(m))
 
 
 def _number(value) -> str:
@@ -118,14 +218,14 @@ def _number(value) -> str:
     return f"{value:.4g}"
 
 
-def table(document: dict, measures: dict) -> tuple[list[str], str]:
-    """One row per company: what every model said, and a few public facts.
+def table(document: dict) -> tuple[list[str], str]:
+    """One row per company: what every forecaster said.
 
     Compact on purpose. The whole market has to fit in one call, because a
     reranker shown a third of the field at a time is ranking three different
     fields.
     """
-    models = sorted(m for m in (document.get("models") or {}) if m != NAME)
+    models = forecasters(document)
     by_ticker: dict[str, dict] = {}
     for model in models:
         for guess in document["models"][model].get("forecasts") or []:
@@ -137,7 +237,6 @@ def table(document: dict, measures: dict) -> tuple[list[str], str]:
     head = ["ticker"]
     for model in models:
         head += [f"{model}_h{h}" for h in fc.HORIZONS]
-    head += list(CONTEXT)
 
     lines = [",".join(head)]
     for ticker in tickers:
@@ -149,31 +248,203 @@ def table(document: dict, measures: dict) -> tuple[list[str], str]:
             for h in fc.HORIZONS:
                 value = ranked.get(str(h), returns.get(str(h)))
                 cells.append(_number(value))
-        row = measures.get(ticker) or {}
-        cells += [_number(row.get(column)) for column in CONTEXT]
         lines.append(",".join(cells))
     return tickers, "\n".join(lines)
 
 
-def prompt(basis: str, body: str, count: int) -> str:
+def _read(path: pathlib.Path) -> dict:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def _tickers_of(item: dict) -> list[str]:
+    out = []
+    for entry in item.get("tickers") or []:
+        name = entry if isinstance(entry, str) else (entry or {}).get("ticker")
+        if isinstance(name, str) and name.strip():
+            out.append(name.strip().upper())
+    return out
+
+
+def _flat(text) -> str:
+    """One line, trimmed. A newline inside a headline would read, to the model,
+    as a second headline about a company it was never about."""
+    return re.sub(r"\s+", " ", str(text or "")).strip()[:TITLE_CHARS]
+
+
+def _moment(value: str | None) -> datetime.datetime | None:
+    if not value:
+        return None
+    try:
+        when = datetime.datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return when if when.tzinfo else when.replace(tzinfo=datetime.timezone.utc)
+
+
+def filings_block(disclosures: dict, tickers: set[str], basis: str,
+                  until: datetime.datetime) -> dict:
+    """Exchange disclosures by these companies in the fortnight to the basis.
+
+    Newest first, a few per company, and nothing dated after the moment of
+    the question — a filing the model could not have been shown tonight has
+    no business in tonight's reading.
+    """
+    start = (datetime.date.fromisoformat(basis)
+             - datetime.timedelta(days=FILING_DAYS)).isoformat()
+    last = until.astimezone(lab.CAIRO).date().isoformat()
+    per: dict[str, int] = {}
+    rows = []
+    items = sorted((disclosures.get("items") or []),
+                   key=lambda i: (str(i.get("date") or ""), str(i.get("id") or "")),
+                   reverse=True)
+    for item in items:
+        date = str(item.get("date") or "")[:10]
+        if not (start <= date <= last):
+            continue
+        for ticker in _tickers_of(item):
+            if ticker not in tickers or per.get(ticker, 0) >= FILINGS_PER_COMPANY:
+                continue
+            per[ticker] = per.get(ticker, 0) + 1
+            rows.append((ticker, date, _flat(item.get("event_label") or "filing"),
+                         _flat(item.get("title"))))
+        if len(rows) >= FILINGS_MAX:
+            break
+    rows = rows[:FILINGS_MAX]
+    rows.sort(key=lambda r: (r[0], r[1]), reverse=False)
+    text = "\n".join(" | ".join(r) for r in rows) or "(none in this window)"
+    return {"text": text, "items": len(rows), "companies": len(per),
+            "from": start, "to": last}
+
+
+def news_block(news: dict, tickers: set[str], until: datetime.datetime) -> dict:
+    """Headlines that name these companies, from the two days before the question."""
+    since = until - datetime.timedelta(hours=NEWS_HOURS)
+    per: dict[str, int] = {}
+    rows = []
+    items = sorted((news.get("items") or []),
+                   key=lambda i: str(i.get("published") or ""), reverse=True)
+    for item in items:
+        when = _moment(item.get("published"))
+        if when is None or not (since <= when <= until):
+            continue
+        for ticker in _tickers_of(item):
+            if ticker not in tickers or per.get(ticker, 0) >= NEWS_PER_COMPANY:
+                continue
+            per[ticker] = per.get(ticker, 0) + 1
+            rows.append((ticker, when.strftime("%Y-%m-%d %H:%MZ"),
+                         _flat(item.get("event_label") or "news"),
+                         _flat(item.get("headline"))))
+        if len(rows) >= NEWS_MAX:
+            break
+    rows = rows[:NEWS_MAX]
+    rows.sort(key=lambda r: (r[0], r[1]))
+    text = "\n".join(" | ".join(r) for r in rows) or "(none in this window)"
+    return {"text": text, "items": len(rows), "companies": len(per),
+            "since": since.isoformat(timespec="minutes").replace("+00:00", "Z"),
+            "until": until.isoformat(timespec="minutes").replace("+00:00", "Z")}
+
+
+def measures_block(measures: dict, tickers: set[str]) -> dict:
+    rows = measures.get("rows") or []
+    lines = [",".join(("ticker",) + MEASURES)]
+    held = 0
+    for row in sorted(rows, key=lambda r: str(r.get("ticker") or "")):
+        ticker = str(row.get("ticker") or "").upper()
+        if ticker not in tickers:
+            continue
+        held += 1
+        lines.append(",".join([ticker] + [_number(row.get(c)) for c in MEASURES]))
+    return {"text": "\n".join(lines), "companies": held,
+            "asOf": measures.get("market_date") or measures.get("generated")}
+
+
+def rulebook_block(path: pathlib.Path = RULEBOOK) -> dict:
+    try:
+        text = path.read_text(encoding="utf-8").strip()
+    except OSError:
+        text = ""
+    return {"text": text or "(the rule book could not be read)",
+            "chars": len(text),
+            "sha256": hashlib.sha256(text.encode("utf-8")).hexdigest()}
+
+
+def gather(document: dict, *, until: datetime.datetime,
+           data: pathlib.Path = DATA, rulebook: pathlib.Path = RULEBOOK) -> dict:
+    """Everything any reading may be shown, read once so every reading of the
+    same night reads the same evidence."""
+    tickers = set(document.get("universe") or [])
+    basis = document["basisSession"]
+    return {
+        "filings": filings_block(_read(data / "disclosures" / "latest.json"),
+                                 tickers, basis, until),
+        "news": news_block(_read(data / "news" / "latest.json"), tickers, until),
+        "rulebook": rulebook_block(rulebook),
+        "measures": measures_block(_read(data / "measures.json"), tickers),
+    }
+
+
+# ── the question ─────────────────────────────────────────────────────────────
+
+SECTIONS = {
+    "filings": ("LATEST FILINGS",
+                "Disclosures these companies filed with the exchange between "
+                "{from} and {to}, as TICKER | date | kind | title. Titles are "
+                "often Arabic."),
+    "news": ("NEWS",
+             "Headlines from Egyptian financial outlets that name these "
+             "companies, published between {since} and {until}, as "
+             "TICKER | time | kind | headline. Headlines are often Arabic."),
+    "rulebook": ("THE RULE BOOK",
+                 "How this project weighs evidence about a company on this "
+                 "exchange. Weigh what you are shown by these rules."),
+    "measures": ("MEASUREMENTS",
+                 "Published measurements of each company, as CSV: market value "
+                 "in Egyptian pounds, price to earnings, earnings per share, "
+                 "net income growth in percent, revenue, volume against its own "
+                 "20-session median, its 5- and 20-session change in percent, "
+                 "sessions since its last filing, and days until results are "
+                 "due. An empty cell means the figure is not published."),
+}
+
+
+def prompt(basis: str, body: str, count: int, context: dict | None = None,
+           layers=()) -> str:
+    ordered = canonical(layers)
+    context = context or {}
+    given = (" Weigh the forecasts against the evidence below."
+             if ordered else
+             " You are given nothing but the forecasts: rank from them alone.")
+    sections = []
+    for layer in ordered:
+        title, lead = SECTIONS[layer]
+        block = context.get(layer) or {}
+        fields = {k: v for k, v in block.items() if isinstance(v, (str, int))}
+        try:
+            lead = lead.format(**fields)
+        except (KeyError, IndexError):
+            pass
+        sections.append(f"{title}\n{lead}\n\n{block.get('text') or '(not available)'}")
+    extra = ("\n\n" + "\n\n".join(sections)) if sections else ""
     return f"""You are one entrant in a forecasting contest on the Egyptian Exchange.
 
-Below is every model's forecast for the session that closed on {basis}, for
-{count} companies, as CSV. Columns ending _h1, _h5 and _h20 are that model's
-predicted percentage return over the next 1, 5 and 20 trading sessions. An
-empty cell means that model declined to answer. The last columns are published
-measurements of the company itself: relative volume against its own 20-session
-median, its 5- and 20-session change in percent, how many sessions since its
-last filing, and its market value in Egyptian pounds.
+Below is every forecasting model's answer for the session that closed on
+{basis}, for {count} companies, as CSV. Columns ending _h1, _h5 and _h20 are
+that model's value for the next 1, 5 and 20 trading sessions: a predicted
+percentage return for kronos, chronos2, timesfm25, drift and flat, and a
+ranking score — higher ranks higher, not a return — for the momentum and
+reversal rules. An empty cell means that model declined to answer.
 
-Form your OWN view of which companies are most likely to rise over the next
-five sessions. You may disagree with every model shown.
+Form your OWN view of which companies are most likely to do better than the
+rest over the next five sessions. You may disagree with every model shown.{given}
 
 Answer with JSON and nothing else:
 
 {{"scores": {{"TICKER": 0-100, ...}}, "count": N, "note": "one sentence"}}
 
-  scores  a number from 0 to 100 for EVERY ticker listed, where a higher
+  scores  a whole number from 0 to 100 for EVERY ticker listed, where a higher
           score means you expect it to do better than a lower-scored one over
           the next five sessions. Only the ordering is read, so do not worry
           about the absolute level. Score every ticker; omitting one is
@@ -183,8 +454,8 @@ Answer with JSON and nothing else:
           where you think nothing is, and that is a useful answer.
   note    one sentence on what drove your ordering tonight.
 
-CSV:
-{body}
+FORECASTS CSV:
+{body}{extra}
 """
 
 
@@ -205,6 +476,9 @@ def parse(text: str, allowed: list[str]) -> dict:
     except ValueError:
         return {"scores": {}, "count": None, "note": None,
                 "invented": [], "why": "the answer was not valid JSON"}
+    if not isinstance(payload, dict):
+        return {"scores": {}, "count": None, "note": None,
+                "invented": [], "why": "the answer was not a JSON object"}
 
     permitted = set(allowed)
     scores, invented = {}, []
@@ -234,31 +508,42 @@ def parse(text: str, allowed: list[str]) -> dict:
     }
 
 
-def rank(document: dict, *, today: str | None, measures: dict | None = None,
-         ask=None) -> dict:
-    """This layer's block for the run, whether or not it managed to answer."""
+def _score(value: float):
+    """A whole number where the model gave one, so a sealed record is not a
+    column of `72.0`; anything finer is kept as it was said."""
+    return int(value) if float(value).is_integer() else round(value, 4)
+
+
+def rank(document: dict, *, today: str | None, layers=DEFAULT,
+         context: dict | None = None, ask=None) -> dict:
+    """One reading's block for the night, whether or not it managed to answer."""
+    ordered = canonical(layers)
     why = refuse(document, today)
     if why:
         return {"forecasts": [], "answered": 0, "abstained": 0,
-                "abstentions": {why: 1}, "asked": False}
+                "abstentions": {why: 1}, "asked": False, "layers": list(ordered)}
 
     if ask is None:
         import gemini
         ask = gemini.generate
 
-    tickers, body = table(document, measures if measures is not None
-                          else measurements())
+    tickers, body = table(document)
     if not tickers:
         return {"forecasts": [], "answered": 0, "abstained": 0,
                 "abstentions": {"no other model answered, so there was "
-                                "nothing to rerank": 1}, "asked": False}
+                                "nothing to rerank": 1},
+                "asked": False, "layers": list(ordered)}
 
+    question = prompt(document["basisSession"], body, len(tickers), context, ordered)
+    started = time.monotonic()
     try:
-        text, usage = ask(prompt(document["basisSession"], body, len(tickers)))
+        text, usage = ask(question)
     except Exception as error:  # noqa: BLE001 — a layer that throws abstains
         return {"forecasts": [], "answered": 0, "abstained": len(tickers),
-                "abstentions": {f"{type(error).__name__}: {error}": len(tickers)},
-                "asked": True}
+                "abstentions": {f"{type(error).__name__}: {error}"[:300]: len(tickers)},
+                "asked": True, "layers": list(ordered),
+                "promptSha256": hashlib.sha256(question.encode("utf-8")).hexdigest(),
+                "seconds": round(time.monotonic() - started, 1)}
 
     answer = parse(text, tickers)
     scored = answer["scores"]
@@ -267,7 +552,7 @@ def rank(document: dict, *, today: str | None, measures: dict | None = None,
                   # this company will rise 72%; it is claiming it will do
                   # better than the one it scored 40.
                   "returns": {},
-                  "ranked_by": {str(h): scored[t] for h in fc.HORIZONS}}
+                  "ranked_by": {str(h): _score(scored[t]) for h in fc.HORIZONS}}
                  for t in sorted(scored)]
 
     missing = [t for t in tickers if t not in scored]
@@ -283,10 +568,9 @@ def rank(document: dict, *, today: str | None, measures: dict | None = None,
         "abstained": len(missing) or (len(tickers) if answer["why"] else 0),
         "abstentions": reasons,
         "asked": True,
+        "layers": list(ordered),
         # Its own answer to "how many are worth anything tonight", kept beside
-        # the ranking so the two can be scored separately. A layer that says
-        # eleven on a good night and none on a bad one is worth something
-        # different from one that always says twenty.
+        # the ranking so the two can be scored separately.
         "count": answer["count"],
         "note": answer["note"],
         # Tickers it returned that were never in the question. Should always
@@ -294,4 +578,205 @@ def rank(document: dict, *, today: str | None, measures: dict | None = None,
         # record says so rather than dropping them silently.
         "invented": answer["invented"],
         "usage": usage if isinstance(usage, dict) else None,
+        # The exact question, fingerprinted. The evidence it read is kept in
+        # the layer document, so the prompt can be rebuilt and checked.
+        "promptSha256": hashlib.sha256(question.encode("utf-8")).hexdigest(),
+        "seconds": round(time.monotonic() - started, 1),
     }
+
+
+def _failed(block: dict) -> bool:
+    return bool(block.get("asked")) and not block.get("answered")
+
+
+def rank_all(document: dict, *, today: str | None, context: dict | None,
+             ask=None, workers: int = 3) -> dict[str, dict]:
+    """Every reading of the night, each asked separately, each recorded.
+
+    A few at a time rather than all sixteen at once: a new project's
+    per-minute quota trips on a burst, and `gemini._post` already waits and
+    retries a 429. A reading that still fails is asked once more at the end,
+    alone, and what happened the second time is what is recorded.
+    """
+    order = readings()
+    results: dict[str, dict] = {}
+
+    def one(layers):
+        return name_of(layers), rank(document, today=today, layers=layers,
+                                     context=context, ask=ask)
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
+        for name, block in pool.map(one, order):
+            results[name] = block
+
+    for layers in order:
+        name = name_of(layers)
+        if _failed(results[name]):
+            _, again = one(layers)
+            again["attempts"] = 2
+            results[name] = again
+
+    return {name_of(layers): results[name_of(layers)] for layers in order}
+
+
+# ── the second pass, sealed ──────────────────────────────────────────────────
+
+def newest_night(runs: pathlib.Path) -> tuple[pathlib.Path, dict] | None:
+    """The newest run that was frozen on the night, never a reconstruction."""
+    for path in sorted(runs.glob("run-*.json"), reverse=True):
+        document = _read(path)
+        if not document.get("basisSession") or document.get("reconstructed"):
+            continue
+        return path, document
+    return None
+
+
+def layer_document(document: dict, blocks: dict[str, dict], *, ran_at: str,
+                   context: dict, source: str) -> dict:
+    """What was read, over which sealed night, and what every reading said."""
+    evidence = {layer: {k: v for k, v in block.items() if k != "text"}
+                for layer, block in context.items()}
+    return {
+        "schemaVersion": 1,
+        "layer": NAME,
+        "ranAt": ran_at,
+        "basisSession": document["basisSession"],
+        # The night it read, bound by the run's own fingerprint: a reading
+        # moved onto a different night's forecasts no longer matches it.
+        "reads": {"run": source, "fingerprint": document.get("fingerprint")},
+        "universe": document.get("universe") or [],
+        "universeSize": document.get("universeSize"),
+        "horizons": list(fc.HORIZONS),
+        "layers": list(LAYERS),
+        "default": list(DEFAULT),
+        "evidence": evidence,
+        # The evidence itself, as it was shown, so any reading's prompt can be
+        # rebuilt from this file and checked against its fingerprint.
+        "context": {layer: block.get("text") for layer, block in context.items()},
+        "what": "Sixteen readings of one sealed night by a language model: the "
+                "same forecasts each time, with a different combination of "
+                "filings, news, the rule book and measurements beside them. "
+                "Every reading is scored as its own model.",
+        "models": blocks,
+    }
+
+
+def _short(path: pathlib.Path) -> str:
+    try:
+        return str(path.relative_to(REPO))
+    except ValueError:
+        return str(path)
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--runs", type=pathlib.Path, default=RUNS)
+    parser.add_argument("--commitments", type=pathlib.Path, default=COMMITMENTS)
+    parser.add_argument("--data", type=pathlib.Path, default=DATA)
+    # Writing is the flag, not the default, for the reason run.py gives: a
+    # reading made by hand against the real path would pre-empt the scheduled
+    # one, and the record keeps whichever came first forever.
+    parser.add_argument("--write", action="store_true",
+                        help="seal this reading; without it nothing is written")
+    parser.add_argument("--no-timestamp", action="store_true")
+    parser.add_argument("--today", help="the session the exchange calls closed "
+                                        "(asked of the exchange when omitted)")
+    parser.add_argument("--workers", type=int, default=3)
+    args = parser.parse_args(argv)
+
+    found = newest_night(args.runs)
+    if not found:
+        print("   no frozen run to read")
+        return 0
+    source, document = found
+    basis = document["basisSession"]
+
+    settled = args.runs / f"rerank-{basis}.json"
+    if settled.exists() and args.write:
+        print(f"   {settled.name} already exists — {basis} has been read and "
+              "is not read again")
+        return 0
+
+    today = args.today
+    if today is None:
+        try:
+            watch, status = pricing.fetch_today()
+            today = pricing.last_closed(watch, status)
+            print(f"   the exchange is closed and its newest session is "
+                  f"{today}" if today else "   the exchange does not say it is "
+                  "closed after a session")
+        except Exception as error:  # noqa: BLE001 — any refusal, same answer
+            print(f"   the exchange did not answer ({type(error).__name__})")
+
+    why = refuse(document, today)
+    if why:
+        print(f"   not read: {why}")
+        return 0
+
+    timing = lab.commitment_timing(basis, lab.now_in_cairo())
+    if timing["compromised"]:
+        print(f"   not read: {basis}'s first horizon has already been priced")
+        return 0
+
+    now = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0)
+    ran_at = now.isoformat().replace("+00:00", "Z")
+    context = gather(document, until=now, data=args.data)
+    print(f"   evidence: {context['filings']['items']} filings by "
+          f"{context['filings']['companies']} companies, "
+          f"{context['news']['items']} headlines naming "
+          f"{context['news']['companies']}, measurements for "
+          f"{context['measures']['companies']}, rule book "
+          f"{context['rulebook']['chars']} characters")
+
+    blocks = rank_all(document, today=today, context=context, workers=args.workers)
+    for name, block in blocks.items():
+        state = (f"{block['answered']:>4} answered" if block.get("asked")
+                 else "not asked")
+        kept = (f"  · keeps {block['count']}" if block.get("count") is not None
+                else "")
+        reason = ""
+        if not block.get("answered") and block.get("abstentions"):
+            reason = "  · " + next(iter(block["abstentions"]))[:90]
+        print(f"   {name:<38} {state}{kept}  {block.get('seconds', 0):>5.1f}s{reason}")
+
+    if not any(block.get("answered") for block in blocks.values()):
+        # Nothing was said, so there is nothing to seal and nothing to protect
+        # — and sealing sixteen refusals would stop the retry schedule from
+        # getting the answers tonight.
+        print("   no reading answered — nothing sealed, so a later run may try")
+        return 0
+
+    layer = layer_document(document, blocks, ran_at=ran_at, context=context,
+                           source=source.name)
+    layer["fingerprint"] = lab.fingerprint(layer)
+    layer["commitment"] = timing
+
+    public, secret = cm.commitment(layer)
+    public["layer"] = NAME
+    public["reads"] = layer["reads"]
+    public["committedBeforeOpen"] = timing["beforeOpen"]
+    if not args.no_timestamp:
+        public["timestamp"] = ts.stamp(public["merkleRoot"])
+        state = ("stamped by " + public["timestamp"]["authority"]
+                 if public["timestamp"]["timestamped"]
+                 else "NOT stamped — no authority answered")
+    else:
+        state = "not stamped (asked not to)"
+    print(f"   root {public['merkleRoot'][:16]}  {public['leaves']} leaves  ·  {state}")
+
+    if not args.write:
+        return 0
+
+    layer["nonces"] = secret["nonces"]
+    settled.write_text(json.dumps(layer, ensure_ascii=False, separators=(",", ":")),
+                       encoding="utf-8")
+    print(f"   wrote {_short(settled)} ({settled.stat().st_size // 1024} KB)")
+    args.commitments.mkdir(parents=True, exist_ok=True)
+    promise = args.commitments / f"{basis}.{NAME}.json"
+    promise.write_text(json.dumps(public, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"   wrote {_short(promise)} (public: a root, no forecasts)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
