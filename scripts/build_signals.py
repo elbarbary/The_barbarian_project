@@ -174,15 +174,12 @@ def load_filings() -> dict[str, list[dict]]:
     }
 
 
-def directory(key: str = "companies") -> dict[str, dict]:
-    """ticker → row, from the directory's listed companies — or, with
-    `key="delisted"`, from the shares the market build left out because the
-    exchange delisted them."""
+def directory() -> dict[str, dict]:
     try:
         doc = json.loads(DIRECTORY.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return {}
-    return {c["ticker"]: c for c in doc.get(key) or [] if c.get("ticker")}
+    return {c["ticker"]: c for c in doc.get("companies", []) if c.get("ticker")}
 
 
 def last_prices() -> dict[str, str]:
@@ -561,10 +558,6 @@ def profile(ticker: str, filings: list[dict]) -> dict:
 def build(today: datetime.date,
           delisted: dict[str, dict] | None = None) -> tuple[dict[str, dict], dict]:
     known = directory()
-    # The market build leaves a delisted share out of the directory and names
-    # it here instead. Its signals document is still rewritten — as delisted —
-    # because the one the last run left behind forecasts its next results.
-    left_out = directory("delisted")
     archive = load_filings()
     due = expected_results(today)
     live = still_trading(last_prices())
@@ -577,10 +570,10 @@ def build(today: datetime.date,
     delisted_now: list[dict] = []
 
     for ticker, filings in archive.items():
-        removed = gone.get(ticker)
-        company = known.get(ticker) or (left_out.get(ticker) if removed else None)
+        company = known.get(ticker)
         if not company:
             continue
+        removed = gone.get(ticker)
         breaks = streak_breaks(ticker, today)
         kinds = firsts_of_kind(filings, today)
         # Silence is only a signal for a company somebody can still trade. For
@@ -630,10 +623,9 @@ def build(today: datetime.date,
         "source": "EGX filings and filed net profit — counted, not judged",
         "firsts": recent_firsts[:120],
         "quiet": quiet_now,
-        # The delisted companies the price source still quotes — under the
-        # directory's `delisted`, or in its rows until the next market build —
-        # each with the notice that did it, so they are named for what they
-        # are rather than left off without a word.
+        # The directory companies the exchange has delisted — still in the
+        # directory, because they still change hands over the counter — each
+        # with the notice that did it, so they are named for what they are.
         "delisted": delisted_now,
         "companies": len(per_company),
     }

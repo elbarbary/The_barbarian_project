@@ -761,6 +761,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get directoryNoQuote => 'no quote';
 
   @override
+  String get listingOtc => 'OTC';
+
+  @override
+  String get listingNotice => 'EGX notice';
+
+  @override
   String directoryShareOfListings(String percent) {
     return '$percent% of listings';
   }

@@ -1448,6 +1448,18 @@ abstract class AppLocalizations {
   /// **'no quote'**
   String get directoryNoQuote;
 
+  /// Tag on a company the exchange delisted: its shares trade over the counter, not on the exchange.
+  ///
+  /// In en, this message translates to:
+  /// **'OTC'**
+  String get listingOtc;
+
+  /// Link to the exchange's own final delisting notice, under the note on a delisted company.
+  ///
+  /// In en, this message translates to:
+  /// **'EGX notice'**
+  String get listingNotice;
+
   /// No description provided for @directoryShareOfListings.
   ///
   /// In en, this message translates to:

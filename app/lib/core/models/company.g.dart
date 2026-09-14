@@ -42,6 +42,9 @@ _CompanySummary _$CompanySummaryFromJson(Map<String, dynamic> json) =>
       netIncome: (json['net_income'] as num?)?.toDouble(),
       netIncomePeriod: json['net_income_period'] as String?,
       medianVolume20d: (json['median_volume_20d'] as num?)?.toDouble(),
+      listing: json['listing'] == null
+          ? null
+          : CompanyListing.fromJson(json['listing'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$CompanySummaryToJson(_CompanySummary instance) =>
@@ -62,6 +65,31 @@ Map<String, dynamic> _$CompanySummaryToJson(_CompanySummary instance) =>
       'net_income': instance.netIncome,
       'net_income_period': instance.netIncomePeriod,
       'median_volume_20d': instance.medianVolume20d,
+      'listing': instance.listing,
+    };
+
+_CompanyListing _$CompanyListingFromJson(Map<String, dynamic> json) =>
+    _CompanyListing(
+      status: json['status'] as String? ?? 'delisted',
+      market: json['market'] as String? ?? 'OTC',
+      delistedOn: json['delisted_on'] as String?,
+      newsId: (json['news_id'] as num?)?.toInt(),
+      link: json['link'] as String?,
+      kind: json['kind'] as String?,
+      note: json['note'] as String? ?? '',
+      noteAr: json['note_ar'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$CompanyListingToJson(_CompanyListing instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'market': instance.market,
+      'delisted_on': instance.delistedOn,
+      'news_id': instance.newsId,
+      'link': instance.link,
+      'kind': instance.kind,
+      'note': instance.note,
+      'note_ar': instance.noteAr,
     };
 
 _CompanyDebt _$CompanyDebtFromJson(Map<String, dynamic> json) => _CompanyDebt(
@@ -161,6 +189,9 @@ _Company _$CompanyFromJson(Map<String, dynamic> json) => _Company(
   debt: json['debt'] == null
       ? null
       : CompanyDebt.fromJson(json['debt'] as Map<String, dynamic>),
+  listing: json['listing'] == null
+      ? null
+      : CompanyListing.fromJson(json['listing'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$CompanyToJson(_Company instance) => <String, dynamic>{
@@ -173,6 +204,7 @@ Map<String, dynamic> _$CompanyToJson(_Company instance) => <String, dynamic>{
   'financials': instance.financials,
   'research': instance.research,
   'debt': instance.debt,
+  'listing': instance.listing,
 };
 
 _LocalizedName _$LocalizedNameFromJson(Map<String, dynamic> json) =>

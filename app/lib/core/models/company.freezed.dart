@@ -312,7 +312,10 @@ mixin _$CompanySummary {
 /// Carried so the list can answer "busier than usual" for itself: today's
 /// volume comes from the live snapshot, and this is what it is unusual
 /// against.
-@JsonKey(name: 'median_volume_20d') double? get medianVolume20d;
+@JsonKey(name: 'median_volume_20d') double? get medianVolume20d;/// Present when the exchange has delisted the company. It stays in the
+/// directory because its shares still trade over the counter; this says
+/// so, so the row never reads as an exchange listing.
+ CompanyListing? get listing;
 /// Create a copy of CompanySummary
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -325,16 +328,16 @@ $CompanySummaryCopyWith<CompanySummary> get copyWith => _$CompanySummaryCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CompanySummary&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.nameEn, nameEn) || other.nameEn == nameEn)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.exchange, exchange) || other.exchange == exchange)&&(identical(other.hasCashOrTrash, hasCashOrTrash) || other.hasCashOrTrash == hasCashOrTrash)&&(identical(other.hasResearch, hasResearch) || other.hasResearch == hasResearch)&&(identical(other.marketCap, marketCap) || other.marketCap == marketCap)&&(identical(other.avgVolume30d, avgVolume30d) || other.avgVolume30d == avgVolume30d)&&(identical(other.pe, pe) || other.pe == pe)&&(identical(other.pePeriod, pePeriod) || other.pePeriod == pePeriod)&&(identical(other.eps, eps) || other.eps == eps)&&(identical(other.epsPeriod, epsPeriod) || other.epsPeriod == epsPeriod)&&(identical(other.netIncome, netIncome) || other.netIncome == netIncome)&&(identical(other.netIncomePeriod, netIncomePeriod) || other.netIncomePeriod == netIncomePeriod)&&(identical(other.medianVolume20d, medianVolume20d) || other.medianVolume20d == medianVolume20d));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CompanySummary&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.nameEn, nameEn) || other.nameEn == nameEn)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.exchange, exchange) || other.exchange == exchange)&&(identical(other.hasCashOrTrash, hasCashOrTrash) || other.hasCashOrTrash == hasCashOrTrash)&&(identical(other.hasResearch, hasResearch) || other.hasResearch == hasResearch)&&(identical(other.marketCap, marketCap) || other.marketCap == marketCap)&&(identical(other.avgVolume30d, avgVolume30d) || other.avgVolume30d == avgVolume30d)&&(identical(other.pe, pe) || other.pe == pe)&&(identical(other.pePeriod, pePeriod) || other.pePeriod == pePeriod)&&(identical(other.eps, eps) || other.eps == eps)&&(identical(other.epsPeriod, epsPeriod) || other.epsPeriod == epsPeriod)&&(identical(other.netIncome, netIncome) || other.netIncome == netIncome)&&(identical(other.netIncomePeriod, netIncomePeriod) || other.netIncomePeriod == netIncomePeriod)&&(identical(other.medianVolume20d, medianVolume20d) || other.medianVolume20d == medianVolume20d)&&(identical(other.listing, listing) || other.listing == listing));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,nameEn,nameAr,sector,exchange,hasCashOrTrash,hasResearch,marketCap,avgVolume30d,pe,pePeriod,eps,epsPeriod,netIncome,netIncomePeriod,medianVolume20d);
+int get hashCode => Object.hash(runtimeType,ticker,nameEn,nameAr,sector,exchange,hasCashOrTrash,hasResearch,marketCap,avgVolume30d,pe,pePeriod,eps,epsPeriod,netIncome,netIncomePeriod,medianVolume20d,listing);
 
 @override
 String toString() {
-  return 'CompanySummary(ticker: $ticker, nameEn: $nameEn, nameAr: $nameAr, sector: $sector, exchange: $exchange, hasCashOrTrash: $hasCashOrTrash, hasResearch: $hasResearch, marketCap: $marketCap, avgVolume30d: $avgVolume30d, pe: $pe, pePeriod: $pePeriod, eps: $eps, epsPeriod: $epsPeriod, netIncome: $netIncome, netIncomePeriod: $netIncomePeriod, medianVolume20d: $medianVolume20d)';
+  return 'CompanySummary(ticker: $ticker, nameEn: $nameEn, nameAr: $nameAr, sector: $sector, exchange: $exchange, hasCashOrTrash: $hasCashOrTrash, hasResearch: $hasResearch, marketCap: $marketCap, avgVolume30d: $avgVolume30d, pe: $pe, pePeriod: $pePeriod, eps: $eps, epsPeriod: $epsPeriod, netIncome: $netIncome, netIncomePeriod: $netIncomePeriod, medianVolume20d: $medianVolume20d, listing: $listing)';
 }
 
 
@@ -345,11 +348,11 @@ abstract mixin class $CompanySummaryCopyWith<$Res>  {
   factory $CompanySummaryCopyWith(CompanySummary value, $Res Function(CompanySummary) _then) = _$CompanySummaryCopyWithImpl;
 @useResult
 $Res call({
- String ticker,@JsonKey(name: 'name_en') String nameEn,@JsonKey(name: 'name_ar') String? nameAr, String? sector, String exchange,@JsonKey(name: 'has_cash_or_trash') bool hasCashOrTrash,@JsonKey(name: 'has_research') bool hasResearch,@JsonKey(name: 'market_cap') double? marketCap,@JsonKey(name: 'avg_volume_30d') double? avgVolume30d, double? pe,@JsonKey(name: 'pe_period') String? pePeriod, double? eps,@JsonKey(name: 'eps_period') String? epsPeriod,@JsonKey(name: 'net_income') double? netIncome,@JsonKey(name: 'net_income_period') String? netIncomePeriod,@JsonKey(name: 'median_volume_20d') double? medianVolume20d
+ String ticker,@JsonKey(name: 'name_en') String nameEn,@JsonKey(name: 'name_ar') String? nameAr, String? sector, String exchange,@JsonKey(name: 'has_cash_or_trash') bool hasCashOrTrash,@JsonKey(name: 'has_research') bool hasResearch,@JsonKey(name: 'market_cap') double? marketCap,@JsonKey(name: 'avg_volume_30d') double? avgVolume30d, double? pe,@JsonKey(name: 'pe_period') String? pePeriod, double? eps,@JsonKey(name: 'eps_period') String? epsPeriod,@JsonKey(name: 'net_income') double? netIncome,@JsonKey(name: 'net_income_period') String? netIncomePeriod,@JsonKey(name: 'median_volume_20d') double? medianVolume20d, CompanyListing? listing
 });
 
 
-
+$CompanyListingCopyWith<$Res>? get listing;
 
 }
 /// @nodoc
@@ -362,7 +365,7 @@ class _$CompanySummaryCopyWithImpl<$Res>
 
 /// Create a copy of CompanySummary
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? nameEn = null,Object? nameAr = freezed,Object? sector = freezed,Object? exchange = null,Object? hasCashOrTrash = null,Object? hasResearch = null,Object? marketCap = freezed,Object? avgVolume30d = freezed,Object? pe = freezed,Object? pePeriod = freezed,Object? eps = freezed,Object? epsPeriod = freezed,Object? netIncome = freezed,Object? netIncomePeriod = freezed,Object? medianVolume20d = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? nameEn = null,Object? nameAr = freezed,Object? sector = freezed,Object? exchange = null,Object? hasCashOrTrash = null,Object? hasResearch = null,Object? marketCap = freezed,Object? avgVolume30d = freezed,Object? pe = freezed,Object? pePeriod = freezed,Object? eps = freezed,Object? epsPeriod = freezed,Object? netIncome = freezed,Object? netIncomePeriod = freezed,Object? medianVolume20d = freezed,Object? listing = freezed,}) {
   return _then(_self.copyWith(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,nameEn: null == nameEn ? _self.nameEn : nameEn // ignore: cast_nullable_to_non_nullable
@@ -380,10 +383,23 @@ as double?,epsPeriod: freezed == epsPeriod ? _self.epsPeriod : epsPeriod // igno
 as String?,netIncome: freezed == netIncome ? _self.netIncome : netIncome // ignore: cast_nullable_to_non_nullable
 as double?,netIncomePeriod: freezed == netIncomePeriod ? _self.netIncomePeriod : netIncomePeriod // ignore: cast_nullable_to_non_nullable
 as String?,medianVolume20d: freezed == medianVolume20d ? _self.medianVolume20d : medianVolume20d // ignore: cast_nullable_to_non_nullable
-as double?,
+as double?,listing: freezed == listing ? _self.listing : listing // ignore: cast_nullable_to_non_nullable
+as CompanyListing?,
   ));
 }
+/// Create a copy of CompanySummary
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CompanyListingCopyWith<$Res>? get listing {
+    if (_self.listing == null) {
+    return null;
+  }
 
+  return $CompanyListingCopyWith<$Res>(_self.listing!, (value) {
+    return _then(_self.copyWith(listing: value));
+  });
+}
 }
 
 
@@ -465,10 +481,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch, @JsonKey(name: 'market_cap')  double? marketCap, @JsonKey(name: 'avg_volume_30d')  double? avgVolume30d,  double? pe, @JsonKey(name: 'pe_period')  String? pePeriod,  double? eps, @JsonKey(name: 'eps_period')  String? epsPeriod, @JsonKey(name: 'net_income')  double? netIncome, @JsonKey(name: 'net_income_period')  String? netIncomePeriod, @JsonKey(name: 'median_volume_20d')  double? medianVolume20d)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch, @JsonKey(name: 'market_cap')  double? marketCap, @JsonKey(name: 'avg_volume_30d')  double? avgVolume30d,  double? pe, @JsonKey(name: 'pe_period')  String? pePeriod,  double? eps, @JsonKey(name: 'eps_period')  String? epsPeriod, @JsonKey(name: 'net_income')  double? netIncome, @JsonKey(name: 'net_income_period')  String? netIncomePeriod, @JsonKey(name: 'median_volume_20d')  double? medianVolume20d,  CompanyListing? listing)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CompanySummary() when $default != null:
-return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch,_that.marketCap,_that.avgVolume30d,_that.pe,_that.pePeriod,_that.eps,_that.epsPeriod,_that.netIncome,_that.netIncomePeriod,_that.medianVolume20d);case _:
+return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch,_that.marketCap,_that.avgVolume30d,_that.pe,_that.pePeriod,_that.eps,_that.epsPeriod,_that.netIncome,_that.netIncomePeriod,_that.medianVolume20d,_that.listing);case _:
   return orElse();
 
 }
@@ -486,10 +502,10 @@ return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchan
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch, @JsonKey(name: 'market_cap')  double? marketCap, @JsonKey(name: 'avg_volume_30d')  double? avgVolume30d,  double? pe, @JsonKey(name: 'pe_period')  String? pePeriod,  double? eps, @JsonKey(name: 'eps_period')  String? epsPeriod, @JsonKey(name: 'net_income')  double? netIncome, @JsonKey(name: 'net_income_period')  String? netIncomePeriod, @JsonKey(name: 'median_volume_20d')  double? medianVolume20d)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch, @JsonKey(name: 'market_cap')  double? marketCap, @JsonKey(name: 'avg_volume_30d')  double? avgVolume30d,  double? pe, @JsonKey(name: 'pe_period')  String? pePeriod,  double? eps, @JsonKey(name: 'eps_period')  String? epsPeriod, @JsonKey(name: 'net_income')  double? netIncome, @JsonKey(name: 'net_income_period')  String? netIncomePeriod, @JsonKey(name: 'median_volume_20d')  double? medianVolume20d,  CompanyListing? listing)  $default,) {final _that = this;
 switch (_that) {
 case _CompanySummary():
-return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch,_that.marketCap,_that.avgVolume30d,_that.pe,_that.pePeriod,_that.eps,_that.epsPeriod,_that.netIncome,_that.netIncomePeriod,_that.medianVolume20d);case _:
+return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch,_that.marketCap,_that.avgVolume30d,_that.pe,_that.pePeriod,_that.eps,_that.epsPeriod,_that.netIncome,_that.netIncomePeriod,_that.medianVolume20d,_that.listing);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -506,10 +522,10 @@ return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchan
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch, @JsonKey(name: 'market_cap')  double? marketCap, @JsonKey(name: 'avg_volume_30d')  double? avgVolume30d,  double? pe, @JsonKey(name: 'pe_period')  String? pePeriod,  double? eps, @JsonKey(name: 'eps_period')  String? epsPeriod, @JsonKey(name: 'net_income')  double? netIncome, @JsonKey(name: 'net_income_period')  String? netIncomePeriod, @JsonKey(name: 'median_volume_20d')  double? medianVolume20d)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch, @JsonKey(name: 'market_cap')  double? marketCap, @JsonKey(name: 'avg_volume_30d')  double? avgVolume30d,  double? pe, @JsonKey(name: 'pe_period')  String? pePeriod,  double? eps, @JsonKey(name: 'eps_period')  String? epsPeriod, @JsonKey(name: 'net_income')  double? netIncome, @JsonKey(name: 'net_income_period')  String? netIncomePeriod, @JsonKey(name: 'median_volume_20d')  double? medianVolume20d,  CompanyListing? listing)?  $default,) {final _that = this;
 switch (_that) {
 case _CompanySummary() when $default != null:
-return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch,_that.marketCap,_that.avgVolume30d,_that.pe,_that.pePeriod,_that.eps,_that.epsPeriod,_that.netIncome,_that.netIncomePeriod,_that.medianVolume20d);case _:
+return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch,_that.marketCap,_that.avgVolume30d,_that.pe,_that.pePeriod,_that.eps,_that.epsPeriod,_that.netIncome,_that.netIncomePeriod,_that.medianVolume20d,_that.listing);case _:
   return null;
 
 }
@@ -521,7 +537,7 @@ return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchan
 @JsonSerializable()
 
 class _CompanySummary extends CompanySummary {
-  const _CompanySummary({required this.ticker, @JsonKey(name: 'name_en') required this.nameEn, @JsonKey(name: 'name_ar') this.nameAr, this.sector, this.exchange = 'EGX', @JsonKey(name: 'has_cash_or_trash') this.hasCashOrTrash = false, @JsonKey(name: 'has_research') this.hasResearch = false, @JsonKey(name: 'market_cap') this.marketCap, @JsonKey(name: 'avg_volume_30d') this.avgVolume30d, this.pe, @JsonKey(name: 'pe_period') this.pePeriod, this.eps, @JsonKey(name: 'eps_period') this.epsPeriod, @JsonKey(name: 'net_income') this.netIncome, @JsonKey(name: 'net_income_period') this.netIncomePeriod, @JsonKey(name: 'median_volume_20d') this.medianVolume20d}): super._();
+  const _CompanySummary({required this.ticker, @JsonKey(name: 'name_en') required this.nameEn, @JsonKey(name: 'name_ar') this.nameAr, this.sector, this.exchange = 'EGX', @JsonKey(name: 'has_cash_or_trash') this.hasCashOrTrash = false, @JsonKey(name: 'has_research') this.hasResearch = false, @JsonKey(name: 'market_cap') this.marketCap, @JsonKey(name: 'avg_volume_30d') this.avgVolume30d, this.pe, @JsonKey(name: 'pe_period') this.pePeriod, this.eps, @JsonKey(name: 'eps_period') this.epsPeriod, @JsonKey(name: 'net_income') this.netIncome, @JsonKey(name: 'net_income_period') this.netIncomePeriod, @JsonKey(name: 'median_volume_20d') this.medianVolume20d, this.listing}): super._();
   factory _CompanySummary.fromJson(Map<String, dynamic> json) => _$CompanySummaryFromJson(json);
 
 @override final  String ticker;
@@ -565,6 +581,10 @@ class _CompanySummary extends CompanySummary {
 /// volume comes from the live snapshot, and this is what it is unusual
 /// against.
 @override@JsonKey(name: 'median_volume_20d') final  double? medianVolume20d;
+/// Present when the exchange has delisted the company. It stays in the
+/// directory because its shares still trade over the counter; this says
+/// so, so the row never reads as an exchange listing.
+@override final  CompanyListing? listing;
 
 /// Create a copy of CompanySummary
 /// with the given fields replaced by the non-null parameter values.
@@ -579,16 +599,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CompanySummary&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.nameEn, nameEn) || other.nameEn == nameEn)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.exchange, exchange) || other.exchange == exchange)&&(identical(other.hasCashOrTrash, hasCashOrTrash) || other.hasCashOrTrash == hasCashOrTrash)&&(identical(other.hasResearch, hasResearch) || other.hasResearch == hasResearch)&&(identical(other.marketCap, marketCap) || other.marketCap == marketCap)&&(identical(other.avgVolume30d, avgVolume30d) || other.avgVolume30d == avgVolume30d)&&(identical(other.pe, pe) || other.pe == pe)&&(identical(other.pePeriod, pePeriod) || other.pePeriod == pePeriod)&&(identical(other.eps, eps) || other.eps == eps)&&(identical(other.epsPeriod, epsPeriod) || other.epsPeriod == epsPeriod)&&(identical(other.netIncome, netIncome) || other.netIncome == netIncome)&&(identical(other.netIncomePeriod, netIncomePeriod) || other.netIncomePeriod == netIncomePeriod)&&(identical(other.medianVolume20d, medianVolume20d) || other.medianVolume20d == medianVolume20d));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CompanySummary&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.nameEn, nameEn) || other.nameEn == nameEn)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.exchange, exchange) || other.exchange == exchange)&&(identical(other.hasCashOrTrash, hasCashOrTrash) || other.hasCashOrTrash == hasCashOrTrash)&&(identical(other.hasResearch, hasResearch) || other.hasResearch == hasResearch)&&(identical(other.marketCap, marketCap) || other.marketCap == marketCap)&&(identical(other.avgVolume30d, avgVolume30d) || other.avgVolume30d == avgVolume30d)&&(identical(other.pe, pe) || other.pe == pe)&&(identical(other.pePeriod, pePeriod) || other.pePeriod == pePeriod)&&(identical(other.eps, eps) || other.eps == eps)&&(identical(other.epsPeriod, epsPeriod) || other.epsPeriod == epsPeriod)&&(identical(other.netIncome, netIncome) || other.netIncome == netIncome)&&(identical(other.netIncomePeriod, netIncomePeriod) || other.netIncomePeriod == netIncomePeriod)&&(identical(other.medianVolume20d, medianVolume20d) || other.medianVolume20d == medianVolume20d)&&(identical(other.listing, listing) || other.listing == listing));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,nameEn,nameAr,sector,exchange,hasCashOrTrash,hasResearch,marketCap,avgVolume30d,pe,pePeriod,eps,epsPeriod,netIncome,netIncomePeriod,medianVolume20d);
+int get hashCode => Object.hash(runtimeType,ticker,nameEn,nameAr,sector,exchange,hasCashOrTrash,hasResearch,marketCap,avgVolume30d,pe,pePeriod,eps,epsPeriod,netIncome,netIncomePeriod,medianVolume20d,listing);
 
 @override
 String toString() {
-  return 'CompanySummary(ticker: $ticker, nameEn: $nameEn, nameAr: $nameAr, sector: $sector, exchange: $exchange, hasCashOrTrash: $hasCashOrTrash, hasResearch: $hasResearch, marketCap: $marketCap, avgVolume30d: $avgVolume30d, pe: $pe, pePeriod: $pePeriod, eps: $eps, epsPeriod: $epsPeriod, netIncome: $netIncome, netIncomePeriod: $netIncomePeriod, medianVolume20d: $medianVolume20d)';
+  return 'CompanySummary(ticker: $ticker, nameEn: $nameEn, nameAr: $nameAr, sector: $sector, exchange: $exchange, hasCashOrTrash: $hasCashOrTrash, hasResearch: $hasResearch, marketCap: $marketCap, avgVolume30d: $avgVolume30d, pe: $pe, pePeriod: $pePeriod, eps: $eps, epsPeriod: $epsPeriod, netIncome: $netIncome, netIncomePeriod: $netIncomePeriod, medianVolume20d: $medianVolume20d, listing: $listing)';
 }
 
 
@@ -599,11 +619,11 @@ abstract mixin class _$CompanySummaryCopyWith<$Res> implements $CompanySummaryCo
   factory _$CompanySummaryCopyWith(_CompanySummary value, $Res Function(_CompanySummary) _then) = __$CompanySummaryCopyWithImpl;
 @override @useResult
 $Res call({
- String ticker,@JsonKey(name: 'name_en') String nameEn,@JsonKey(name: 'name_ar') String? nameAr, String? sector, String exchange,@JsonKey(name: 'has_cash_or_trash') bool hasCashOrTrash,@JsonKey(name: 'has_research') bool hasResearch,@JsonKey(name: 'market_cap') double? marketCap,@JsonKey(name: 'avg_volume_30d') double? avgVolume30d, double? pe,@JsonKey(name: 'pe_period') String? pePeriod, double? eps,@JsonKey(name: 'eps_period') String? epsPeriod,@JsonKey(name: 'net_income') double? netIncome,@JsonKey(name: 'net_income_period') String? netIncomePeriod,@JsonKey(name: 'median_volume_20d') double? medianVolume20d
+ String ticker,@JsonKey(name: 'name_en') String nameEn,@JsonKey(name: 'name_ar') String? nameAr, String? sector, String exchange,@JsonKey(name: 'has_cash_or_trash') bool hasCashOrTrash,@JsonKey(name: 'has_research') bool hasResearch,@JsonKey(name: 'market_cap') double? marketCap,@JsonKey(name: 'avg_volume_30d') double? avgVolume30d, double? pe,@JsonKey(name: 'pe_period') String? pePeriod, double? eps,@JsonKey(name: 'eps_period') String? epsPeriod,@JsonKey(name: 'net_income') double? netIncome,@JsonKey(name: 'net_income_period') String? netIncomePeriod,@JsonKey(name: 'median_volume_20d') double? medianVolume20d, CompanyListing? listing
 });
 
 
-
+@override $CompanyListingCopyWith<$Res>? get listing;
 
 }
 /// @nodoc
@@ -616,7 +636,7 @@ class __$CompanySummaryCopyWithImpl<$Res>
 
 /// Create a copy of CompanySummary
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? nameEn = null,Object? nameAr = freezed,Object? sector = freezed,Object? exchange = null,Object? hasCashOrTrash = null,Object? hasResearch = null,Object? marketCap = freezed,Object? avgVolume30d = freezed,Object? pe = freezed,Object? pePeriod = freezed,Object? eps = freezed,Object? epsPeriod = freezed,Object? netIncome = freezed,Object? netIncomePeriod = freezed,Object? medianVolume20d = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? nameEn = null,Object? nameAr = freezed,Object? sector = freezed,Object? exchange = null,Object? hasCashOrTrash = null,Object? hasResearch = null,Object? marketCap = freezed,Object? avgVolume30d = freezed,Object? pe = freezed,Object? pePeriod = freezed,Object? eps = freezed,Object? epsPeriod = freezed,Object? netIncome = freezed,Object? netIncomePeriod = freezed,Object? medianVolume20d = freezed,Object? listing = freezed,}) {
   return _then(_CompanySummary(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,nameEn: null == nameEn ? _self.nameEn : nameEn // ignore: cast_nullable_to_non_nullable
@@ -634,7 +654,308 @@ as double?,epsPeriod: freezed == epsPeriod ? _self.epsPeriod : epsPeriod // igno
 as String?,netIncome: freezed == netIncome ? _self.netIncome : netIncome // ignore: cast_nullable_to_non_nullable
 as double?,netIncomePeriod: freezed == netIncomePeriod ? _self.netIncomePeriod : netIncomePeriod // ignore: cast_nullable_to_non_nullable
 as String?,medianVolume20d: freezed == medianVolume20d ? _self.medianVolume20d : medianVolume20d // ignore: cast_nullable_to_non_nullable
-as double?,
+as double?,listing: freezed == listing ? _self.listing : listing // ignore: cast_nullable_to_non_nullable
+as CompanyListing?,
+  ));
+}
+
+/// Create a copy of CompanySummary
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CompanyListingCopyWith<$Res>? get listing {
+    if (_self.listing == null) {
+    return null;
+  }
+
+  return $CompanyListingCopyWith<$Res>(_self.listing!, (value) {
+    return _then(_self.copyWith(listing: value));
+  });
+}
+}
+
+
+/// @nodoc
+mixin _$CompanyListing {
+
+ String get status; String get market;@JsonKey(name: 'delisted_on') String? get delistedOn;@JsonKey(name: 'news_id') int? get newsId;/// The exchange's own notice.
+ String? get link;/// voluntary, mandatory or merger, when the notice says.
+ String? get kind; String get note;@JsonKey(name: 'note_ar') String get noteAr;
+/// Create a copy of CompanyListing
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CompanyListingCopyWith<CompanyListing> get copyWith => _$CompanyListingCopyWithImpl<CompanyListing>(this as CompanyListing, _$identity);
+
+  /// Serializes this CompanyListing to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CompanyListing&&(identical(other.status, status) || other.status == status)&&(identical(other.market, market) || other.market == market)&&(identical(other.delistedOn, delistedOn) || other.delistedOn == delistedOn)&&(identical(other.newsId, newsId) || other.newsId == newsId)&&(identical(other.link, link) || other.link == link)&&(identical(other.kind, kind) || other.kind == kind)&&(identical(other.note, note) || other.note == note)&&(identical(other.noteAr, noteAr) || other.noteAr == noteAr));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,status,market,delistedOn,newsId,link,kind,note,noteAr);
+
+@override
+String toString() {
+  return 'CompanyListing(status: $status, market: $market, delistedOn: $delistedOn, newsId: $newsId, link: $link, kind: $kind, note: $note, noteAr: $noteAr)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $CompanyListingCopyWith<$Res>  {
+  factory $CompanyListingCopyWith(CompanyListing value, $Res Function(CompanyListing) _then) = _$CompanyListingCopyWithImpl;
+@useResult
+$Res call({
+ String status, String market,@JsonKey(name: 'delisted_on') String? delistedOn,@JsonKey(name: 'news_id') int? newsId, String? link, String? kind, String note,@JsonKey(name: 'note_ar') String noteAr
+});
+
+
+
+
+}
+/// @nodoc
+class _$CompanyListingCopyWithImpl<$Res>
+    implements $CompanyListingCopyWith<$Res> {
+  _$CompanyListingCopyWithImpl(this._self, this._then);
+
+  final CompanyListing _self;
+  final $Res Function(CompanyListing) _then;
+
+/// Create a copy of CompanyListing
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? market = null,Object? delistedOn = freezed,Object? newsId = freezed,Object? link = freezed,Object? kind = freezed,Object? note = null,Object? noteAr = null,}) {
+  return _then(_self.copyWith(
+status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,market: null == market ? _self.market : market // ignore: cast_nullable_to_non_nullable
+as String,delistedOn: freezed == delistedOn ? _self.delistedOn : delistedOn // ignore: cast_nullable_to_non_nullable
+as String?,newsId: freezed == newsId ? _self.newsId : newsId // ignore: cast_nullable_to_non_nullable
+as int?,link: freezed == link ? _self.link : link // ignore: cast_nullable_to_non_nullable
+as String?,kind: freezed == kind ? _self.kind : kind // ignore: cast_nullable_to_non_nullable
+as String?,note: null == note ? _self.note : note // ignore: cast_nullable_to_non_nullable
+as String,noteAr: null == noteAr ? _self.noteAr : noteAr // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [CompanyListing].
+extension CompanyListingPatterns on CompanyListing {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _CompanyListing value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _CompanyListing() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _CompanyListing value)  $default,){
+final _that = this;
+switch (_that) {
+case _CompanyListing():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _CompanyListing value)?  $default,){
+final _that = this;
+switch (_that) {
+case _CompanyListing() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String status,  String market, @JsonKey(name: 'delisted_on')  String? delistedOn, @JsonKey(name: 'news_id')  int? newsId,  String? link,  String? kind,  String note, @JsonKey(name: 'note_ar')  String noteAr)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _CompanyListing() when $default != null:
+return $default(_that.status,_that.market,_that.delistedOn,_that.newsId,_that.link,_that.kind,_that.note,_that.noteAr);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String status,  String market, @JsonKey(name: 'delisted_on')  String? delistedOn, @JsonKey(name: 'news_id')  int? newsId,  String? link,  String? kind,  String note, @JsonKey(name: 'note_ar')  String noteAr)  $default,) {final _that = this;
+switch (_that) {
+case _CompanyListing():
+return $default(_that.status,_that.market,_that.delistedOn,_that.newsId,_that.link,_that.kind,_that.note,_that.noteAr);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String status,  String market, @JsonKey(name: 'delisted_on')  String? delistedOn, @JsonKey(name: 'news_id')  int? newsId,  String? link,  String? kind,  String note, @JsonKey(name: 'note_ar')  String noteAr)?  $default,) {final _that = this;
+switch (_that) {
+case _CompanyListing() when $default != null:
+return $default(_that.status,_that.market,_that.delistedOn,_that.newsId,_that.link,_that.kind,_that.note,_that.noteAr);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _CompanyListing extends CompanyListing {
+  const _CompanyListing({this.status = 'delisted', this.market = 'OTC', @JsonKey(name: 'delisted_on') this.delistedOn, @JsonKey(name: 'news_id') this.newsId, this.link, this.kind, this.note = '', @JsonKey(name: 'note_ar') this.noteAr = ''}): super._();
+  factory _CompanyListing.fromJson(Map<String, dynamic> json) => _$CompanyListingFromJson(json);
+
+@override@JsonKey() final  String status;
+@override@JsonKey() final  String market;
+@override@JsonKey(name: 'delisted_on') final  String? delistedOn;
+@override@JsonKey(name: 'news_id') final  int? newsId;
+/// The exchange's own notice.
+@override final  String? link;
+/// voluntary, mandatory or merger, when the notice says.
+@override final  String? kind;
+@override@JsonKey() final  String note;
+@override@JsonKey(name: 'note_ar') final  String noteAr;
+
+/// Create a copy of CompanyListing
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CompanyListingCopyWith<_CompanyListing> get copyWith => __$CompanyListingCopyWithImpl<_CompanyListing>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$CompanyListingToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CompanyListing&&(identical(other.status, status) || other.status == status)&&(identical(other.market, market) || other.market == market)&&(identical(other.delistedOn, delistedOn) || other.delistedOn == delistedOn)&&(identical(other.newsId, newsId) || other.newsId == newsId)&&(identical(other.link, link) || other.link == link)&&(identical(other.kind, kind) || other.kind == kind)&&(identical(other.note, note) || other.note == note)&&(identical(other.noteAr, noteAr) || other.noteAr == noteAr));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,status,market,delistedOn,newsId,link,kind,note,noteAr);
+
+@override
+String toString() {
+  return 'CompanyListing(status: $status, market: $market, delistedOn: $delistedOn, newsId: $newsId, link: $link, kind: $kind, note: $note, noteAr: $noteAr)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$CompanyListingCopyWith<$Res> implements $CompanyListingCopyWith<$Res> {
+  factory _$CompanyListingCopyWith(_CompanyListing value, $Res Function(_CompanyListing) _then) = __$CompanyListingCopyWithImpl;
+@override @useResult
+$Res call({
+ String status, String market,@JsonKey(name: 'delisted_on') String? delistedOn,@JsonKey(name: 'news_id') int? newsId, String? link, String? kind, String note,@JsonKey(name: 'note_ar') String noteAr
+});
+
+
+
+
+}
+/// @nodoc
+class __$CompanyListingCopyWithImpl<$Res>
+    implements _$CompanyListingCopyWith<$Res> {
+  __$CompanyListingCopyWithImpl(this._self, this._then);
+
+  final _CompanyListing _self;
+  final $Res Function(_CompanyListing) _then;
+
+/// Create a copy of CompanyListing
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? market = null,Object? delistedOn = freezed,Object? newsId = freezed,Object? link = freezed,Object? kind = freezed,Object? note = null,Object? noteAr = null,}) {
+  return _then(_CompanyListing(
+status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,market: null == market ? _self.market : market // ignore: cast_nullable_to_non_nullable
+as String,delistedOn: freezed == delistedOn ? _self.delistedOn : delistedOn // ignore: cast_nullable_to_non_nullable
+as String?,newsId: freezed == newsId ? _self.newsId : newsId // ignore: cast_nullable_to_non_nullable
+as int?,link: freezed == link ? _self.link : link // ignore: cast_nullable_to_non_nullable
+as String?,kind: freezed == kind ? _self.kind : kind // ignore: cast_nullable_to_non_nullable
+as String?,note: null == note ? _self.note : note // ignore: cast_nullable_to_non_nullable
+as String,noteAr: null == noteAr ? _self.noteAr : noteAr // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
@@ -1583,7 +1904,9 @@ mixin _$Company {
  Map<String, dynamic>? get profile;@JsonKey(name: 'price_history') List<PricePoint> get priceHistory; CompanyFinancials get financials; List<ResearchLink> get research;/// What the company is doing with its borrowings, when it has any it
 /// filed. Absent for a company that reported none, which is an answer
 /// rather than a gap.
- CompanyDebt? get debt;
+ CompanyDebt? get debt;/// Present when the exchange has delisted the company; see
+/// [CompanyListing].
+ CompanyListing? get listing;
 /// Create a copy of Company
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1596,16 +1919,16 @@ $CompanyCopyWith<Company> get copyWith => _$CompanyCopyWithImpl<Company>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Company&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.name, name) || other.name == name)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.market, market) || other.market == market)&&const DeepCollectionEquality().equals(other.profile, profile)&&const DeepCollectionEquality().equals(other.priceHistory, priceHistory)&&(identical(other.financials, financials) || other.financials == financials)&&const DeepCollectionEquality().equals(other.research, research)&&(identical(other.debt, debt) || other.debt == debt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Company&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.name, name) || other.name == name)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.market, market) || other.market == market)&&const DeepCollectionEquality().equals(other.profile, profile)&&const DeepCollectionEquality().equals(other.priceHistory, priceHistory)&&(identical(other.financials, financials) || other.financials == financials)&&const DeepCollectionEquality().equals(other.research, research)&&(identical(other.debt, debt) || other.debt == debt)&&(identical(other.listing, listing) || other.listing == listing));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,name,sector,market,const DeepCollectionEquality().hash(profile),const DeepCollectionEquality().hash(priceHistory),financials,const DeepCollectionEquality().hash(research),debt);
+int get hashCode => Object.hash(runtimeType,ticker,name,sector,market,const DeepCollectionEquality().hash(profile),const DeepCollectionEquality().hash(priceHistory),financials,const DeepCollectionEquality().hash(research),debt,listing);
 
 @override
 String toString() {
-  return 'Company(ticker: $ticker, name: $name, sector: $sector, market: $market, profile: $profile, priceHistory: $priceHistory, financials: $financials, research: $research, debt: $debt)';
+  return 'Company(ticker: $ticker, name: $name, sector: $sector, market: $market, profile: $profile, priceHistory: $priceHistory, financials: $financials, research: $research, debt: $debt, listing: $listing)';
 }
 
 
@@ -1616,11 +1939,11 @@ abstract mixin class $CompanyCopyWith<$Res>  {
   factory $CompanyCopyWith(Company value, $Res Function(Company) _then) = _$CompanyCopyWithImpl;
 @useResult
 $Res call({
- String ticker, LocalizedName name, String? sector, CompanyMarket? market, Map<String, dynamic>? profile,@JsonKey(name: 'price_history') List<PricePoint> priceHistory, CompanyFinancials financials, List<ResearchLink> research, CompanyDebt? debt
+ String ticker, LocalizedName name, String? sector, CompanyMarket? market, Map<String, dynamic>? profile,@JsonKey(name: 'price_history') List<PricePoint> priceHistory, CompanyFinancials financials, List<ResearchLink> research, CompanyDebt? debt, CompanyListing? listing
 });
 
 
-$LocalizedNameCopyWith<$Res> get name;$CompanyMarketCopyWith<$Res>? get market;$CompanyFinancialsCopyWith<$Res> get financials;$CompanyDebtCopyWith<$Res>? get debt;
+$LocalizedNameCopyWith<$Res> get name;$CompanyMarketCopyWith<$Res>? get market;$CompanyFinancialsCopyWith<$Res> get financials;$CompanyDebtCopyWith<$Res>? get debt;$CompanyListingCopyWith<$Res>? get listing;
 
 }
 /// @nodoc
@@ -1633,7 +1956,7 @@ class _$CompanyCopyWithImpl<$Res>
 
 /// Create a copy of Company
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? name = null,Object? sector = freezed,Object? market = freezed,Object? profile = freezed,Object? priceHistory = null,Object? financials = null,Object? research = null,Object? debt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? name = null,Object? sector = freezed,Object? market = freezed,Object? profile = freezed,Object? priceHistory = null,Object? financials = null,Object? research = null,Object? debt = freezed,Object? listing = freezed,}) {
   return _then(_self.copyWith(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -1644,7 +1967,8 @@ as Map<String, dynamic>?,priceHistory: null == priceHistory ? _self.priceHistory
 as List<PricePoint>,financials: null == financials ? _self.financials : financials // ignore: cast_nullable_to_non_nullable
 as CompanyFinancials,research: null == research ? _self.research : research // ignore: cast_nullable_to_non_nullable
 as List<ResearchLink>,debt: freezed == debt ? _self.debt : debt // ignore: cast_nullable_to_non_nullable
-as CompanyDebt?,
+as CompanyDebt?,listing: freezed == listing ? _self.listing : listing // ignore: cast_nullable_to_non_nullable
+as CompanyListing?,
   ));
 }
 /// Create a copy of Company
@@ -1688,6 +2012,18 @@ $CompanyDebtCopyWith<$Res>? get debt {
 
   return $CompanyDebtCopyWith<$Res>(_self.debt!, (value) {
     return _then(_self.copyWith(debt: value));
+  });
+}/// Create a copy of Company
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CompanyListingCopyWith<$Res>? get listing {
+    if (_self.listing == null) {
+    return null;
+  }
+
+  return $CompanyListingCopyWith<$Res>(_self.listing!, (value) {
+    return _then(_self.copyWith(listing: value));
   });
 }
 }
@@ -1771,10 +2107,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  LocalizedName name,  String? sector,  CompanyMarket? market,  Map<String, dynamic>? profile, @JsonKey(name: 'price_history')  List<PricePoint> priceHistory,  CompanyFinancials financials,  List<ResearchLink> research,  CompanyDebt? debt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  LocalizedName name,  String? sector,  CompanyMarket? market,  Map<String, dynamic>? profile, @JsonKey(name: 'price_history')  List<PricePoint> priceHistory,  CompanyFinancials financials,  List<ResearchLink> research,  CompanyDebt? debt,  CompanyListing? listing)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Company() when $default != null:
-return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,_that.priceHistory,_that.financials,_that.research,_that.debt);case _:
+return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,_that.priceHistory,_that.financials,_that.research,_that.debt,_that.listing);case _:
   return orElse();
 
 }
@@ -1792,10 +2128,10 @@ return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  LocalizedName name,  String? sector,  CompanyMarket? market,  Map<String, dynamic>? profile, @JsonKey(name: 'price_history')  List<PricePoint> priceHistory,  CompanyFinancials financials,  List<ResearchLink> research,  CompanyDebt? debt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  LocalizedName name,  String? sector,  CompanyMarket? market,  Map<String, dynamic>? profile, @JsonKey(name: 'price_history')  List<PricePoint> priceHistory,  CompanyFinancials financials,  List<ResearchLink> research,  CompanyDebt? debt,  CompanyListing? listing)  $default,) {final _that = this;
 switch (_that) {
 case _Company():
-return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,_that.priceHistory,_that.financials,_that.research,_that.debt);case _:
+return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,_that.priceHistory,_that.financials,_that.research,_that.debt,_that.listing);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1812,10 +2148,10 @@ return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  LocalizedName name,  String? sector,  CompanyMarket? market,  Map<String, dynamic>? profile, @JsonKey(name: 'price_history')  List<PricePoint> priceHistory,  CompanyFinancials financials,  List<ResearchLink> research,  CompanyDebt? debt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  LocalizedName name,  String? sector,  CompanyMarket? market,  Map<String, dynamic>? profile, @JsonKey(name: 'price_history')  List<PricePoint> priceHistory,  CompanyFinancials financials,  List<ResearchLink> research,  CompanyDebt? debt,  CompanyListing? listing)?  $default,) {final _that = this;
 switch (_that) {
 case _Company() when $default != null:
-return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,_that.priceHistory,_that.financials,_that.research,_that.debt);case _:
+return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,_that.priceHistory,_that.financials,_that.research,_that.debt,_that.listing);case _:
   return null;
 
 }
@@ -1827,7 +2163,7 @@ return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,
 @JsonSerializable()
 
 class _Company extends Company {
-  const _Company({required this.ticker, required this.name, this.sector, this.market, final  Map<String, dynamic>? profile, @JsonKey(name: 'price_history') final  List<PricePoint> priceHistory = const <PricePoint>[], this.financials = const CompanyFinancials(), final  List<ResearchLink> research = const <ResearchLink>[], this.debt}): _profile = profile,_priceHistory = priceHistory,_research = research,super._();
+  const _Company({required this.ticker, required this.name, this.sector, this.market, final  Map<String, dynamic>? profile, @JsonKey(name: 'price_history') final  List<PricePoint> priceHistory = const <PricePoint>[], this.financials = const CompanyFinancials(), final  List<ResearchLink> research = const <ResearchLink>[], this.debt, this.listing}): _profile = profile,_priceHistory = priceHistory,_research = research,super._();
   factory _Company.fromJson(Map<String, dynamic> json) => _$CompanyFromJson(json);
 
 @override final  String ticker;
@@ -1870,6 +2206,9 @@ class _Company extends Company {
 /// filed. Absent for a company that reported none, which is an answer
 /// rather than a gap.
 @override final  CompanyDebt? debt;
+/// Present when the exchange has delisted the company; see
+/// [CompanyListing].
+@override final  CompanyListing? listing;
 
 /// Create a copy of Company
 /// with the given fields replaced by the non-null parameter values.
@@ -1884,16 +2223,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Company&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.name, name) || other.name == name)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.market, market) || other.market == market)&&const DeepCollectionEquality().equals(other._profile, _profile)&&const DeepCollectionEquality().equals(other._priceHistory, _priceHistory)&&(identical(other.financials, financials) || other.financials == financials)&&const DeepCollectionEquality().equals(other._research, _research)&&(identical(other.debt, debt) || other.debt == debt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Company&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.name, name) || other.name == name)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.market, market) || other.market == market)&&const DeepCollectionEquality().equals(other._profile, _profile)&&const DeepCollectionEquality().equals(other._priceHistory, _priceHistory)&&(identical(other.financials, financials) || other.financials == financials)&&const DeepCollectionEquality().equals(other._research, _research)&&(identical(other.debt, debt) || other.debt == debt)&&(identical(other.listing, listing) || other.listing == listing));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,name,sector,market,const DeepCollectionEquality().hash(_profile),const DeepCollectionEquality().hash(_priceHistory),financials,const DeepCollectionEquality().hash(_research),debt);
+int get hashCode => Object.hash(runtimeType,ticker,name,sector,market,const DeepCollectionEquality().hash(_profile),const DeepCollectionEquality().hash(_priceHistory),financials,const DeepCollectionEquality().hash(_research),debt,listing);
 
 @override
 String toString() {
-  return 'Company(ticker: $ticker, name: $name, sector: $sector, market: $market, profile: $profile, priceHistory: $priceHistory, financials: $financials, research: $research, debt: $debt)';
+  return 'Company(ticker: $ticker, name: $name, sector: $sector, market: $market, profile: $profile, priceHistory: $priceHistory, financials: $financials, research: $research, debt: $debt, listing: $listing)';
 }
 
 
@@ -1904,11 +2243,11 @@ abstract mixin class _$CompanyCopyWith<$Res> implements $CompanyCopyWith<$Res> {
   factory _$CompanyCopyWith(_Company value, $Res Function(_Company) _then) = __$CompanyCopyWithImpl;
 @override @useResult
 $Res call({
- String ticker, LocalizedName name, String? sector, CompanyMarket? market, Map<String, dynamic>? profile,@JsonKey(name: 'price_history') List<PricePoint> priceHistory, CompanyFinancials financials, List<ResearchLink> research, CompanyDebt? debt
+ String ticker, LocalizedName name, String? sector, CompanyMarket? market, Map<String, dynamic>? profile,@JsonKey(name: 'price_history') List<PricePoint> priceHistory, CompanyFinancials financials, List<ResearchLink> research, CompanyDebt? debt, CompanyListing? listing
 });
 
 
-@override $LocalizedNameCopyWith<$Res> get name;@override $CompanyMarketCopyWith<$Res>? get market;@override $CompanyFinancialsCopyWith<$Res> get financials;@override $CompanyDebtCopyWith<$Res>? get debt;
+@override $LocalizedNameCopyWith<$Res> get name;@override $CompanyMarketCopyWith<$Res>? get market;@override $CompanyFinancialsCopyWith<$Res> get financials;@override $CompanyDebtCopyWith<$Res>? get debt;@override $CompanyListingCopyWith<$Res>? get listing;
 
 }
 /// @nodoc
@@ -1921,7 +2260,7 @@ class __$CompanyCopyWithImpl<$Res>
 
 /// Create a copy of Company
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? name = null,Object? sector = freezed,Object? market = freezed,Object? profile = freezed,Object? priceHistory = null,Object? financials = null,Object? research = null,Object? debt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? name = null,Object? sector = freezed,Object? market = freezed,Object? profile = freezed,Object? priceHistory = null,Object? financials = null,Object? research = null,Object? debt = freezed,Object? listing = freezed,}) {
   return _then(_Company(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -1932,7 +2271,8 @@ as Map<String, dynamic>?,priceHistory: null == priceHistory ? _self._priceHistor
 as List<PricePoint>,financials: null == financials ? _self.financials : financials // ignore: cast_nullable_to_non_nullable
 as CompanyFinancials,research: null == research ? _self._research : research // ignore: cast_nullable_to_non_nullable
 as List<ResearchLink>,debt: freezed == debt ? _self.debt : debt // ignore: cast_nullable_to_non_nullable
-as CompanyDebt?,
+as CompanyDebt?,listing: freezed == listing ? _self.listing : listing // ignore: cast_nullable_to_non_nullable
+as CompanyListing?,
   ));
 }
 
@@ -1977,6 +2317,18 @@ $CompanyDebtCopyWith<$Res>? get debt {
 
   return $CompanyDebtCopyWith<$Res>(_self.debt!, (value) {
     return _then(_self.copyWith(debt: value));
+  });
+}/// Create a copy of Company
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CompanyListingCopyWith<$Res>? get listing {
+    if (_self.listing == null) {
+    return null;
+  }
+
+  return $CompanyListingCopyWith<$Res>(_self.listing!, (value) {
+    return _then(_self.copyWith(listing: value));
   });
 }
 }

@@ -225,6 +225,8 @@
   "watchlistRemove": "إزالة {ticker} من المتابعة",
   "directorySearchBody": "جرّب الرمز، أو الاسم القانوني بالعربية. يغطي الدليل {count} شركة.",
   "directoryNoQuote": "لا يوجد سعر",
+  "listingOtc": "خارج المقصورة",
+  "listingNotice": "إخطار البورصة",
   "directoryShareOfListings": "{percent}% من الشركات المقيدة",
   "exitWaitNone": "لا يوجد تداول منشور يكفي للقياس",
   "exitWaitDay": "نحو يوم واحد للبيع",

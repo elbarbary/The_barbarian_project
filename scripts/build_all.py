@@ -127,13 +127,14 @@ STEPS = [
     # archive it was validating was stale.
     ("Staleness guard", "build_staleness_guard.py", True),
     # Which companies the exchange has delisted, read from its own final
-    # notices in the archive just harvested. Report only: Market, Signals,
-    # Unusual volume and Calendar each ask `listing_status` themselves, so no
-    # ordering can let one of them miss a notice. This is where the list, and
-    # any notice the exchange's later behaviour disputes, shows in the log —
-    # on 13 Sep 2026 fourteen directory companies had been delisted for years
-    # and nothing in any build said so.
-    ("Listing status", "listing_status.py", True),
+    # notices in the archive just harvested — and a note on each one's
+    # directory row and company document. They stay in the directory because
+    # their shares still trade over the counter; the note is what stops them
+    # reading as exchange listings. After Market, which recreates `companies/`
+    # from scratch; every step below edits those documents in place, so the
+    # note survives to the commit. Signals, Unusual volume and Calendar ask
+    # `listing_status` themselves, so they do not depend on this running.
+    ("Listing status", "apply_listing_status.py", True),
     # Immediately after Market, because Market rebuilds `companies/` from
     # scratch on every run — `shutil.rmtree` then rewrite — and this is an
     # enrichment applied on top of it. It was run once by hand in August and

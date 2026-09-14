@@ -89,6 +89,7 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
                   company: company,
                   quote: quote,
                   sessionDate: snapshot?.date,
+                  parentTab: widget.parentTab,
                   watched: watched,
                   onToggleWatch: () => ref
                       .read(watchlistProvider.notifier)
@@ -177,6 +178,7 @@ class _Header extends StatelessWidget {
     required this.company,
     required this.quote,
     required this.sessionDate,
+    required this.parentTab,
     required this.watched,
     required this.onToggleWatch,
   });
@@ -193,6 +195,7 @@ class _Header extends StatelessWidget {
   final Company company;
   final StockQuote? quote;
   final String? sessionDate;
+  final BNavTab parentTab;
   final bool watched;
   final VoidCallback onToggleWatch;
 
@@ -299,6 +302,13 @@ class _Header extends StatelessWidget {
               ),
             ],
           ),
+          // Delisted by the exchange, still dealt in over the counter. The page
+          // stays so a holder can read it; this says what the share is, under
+          // its name, with the exchange's own notice one tap away.
+          if (company.listing case final CompanyListing listing) ...[
+            const SizedBox(height: 12),
+            _ListingNote(listing: listing, parentTab: parentTab),
+          ],
           // The 52-week range lives in the header, as the canvas has it: the
           // price and where it sits in its own year belong together.
           if (company.priceHistory.length > 2) ...[
@@ -325,6 +335,8 @@ class _Header extends StatelessWidget {
             spacing: 10,
             runSpacing: 8,
             children: [
+              if (company.listing != null)
+                BKindChip(l.listingOtc, variant: BChipVariant.onDark),
               if (company.sector case final String s)
                 BKindChip(sectorLabel(s, l), variant: BChipVariant.onDark),
               // The headline price on this screen is the live one, so the
@@ -335,6 +347,45 @@ class _Header extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// A company the exchange delisted: what it is, in the pipeline's own words.
+///
+/// The sentence carries the notice's date and number already; the link opens
+/// the notice itself, the way every other exchange page opens here.
+class _ListingNote extends StatelessWidget {
+  const _ListingNote({required this.listing, required this.parentTab});
+
+  final CompanyListing listing;
+  final BNavTab parentTab;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final c = context.colors;
+    final arabic = Directionality.of(context) == TextDirection.rtl;
+    final link = listing.link;
+    final hasLink = link != null && link.isNotEmpty;
+    final text = Text.rich(
+      TextSpan(
+        children: [
+          TextSpan(text: listing.noteFor(arabic: arabic)),
+          if (hasLink)
+            TextSpan(
+              text: ' ${l.listingNotice} ↗',
+              style: TextStyle(color: c.accent),
+            ),
+        ],
+      ),
+      style: BarbarianType.bodyS.copyWith(color: c.onInkMuted),
+    );
+    if (!hasLink) return text;
+    return BPressable(
+      onTap: () =>
+          context.push(Routes.articlePath(parentTab, link, l.listingNotice)),
+      child: text,
     );
   }
 }
@@ -1844,8 +1895,18 @@ class _DebtBlock extends StatelessWidget {
     final when = DateTime.tryParse(iso);
     if (when == null) return iso;
     const months = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December',
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ];
     return '${when.day} ${months[when.month - 1]} ${when.year}';
   }

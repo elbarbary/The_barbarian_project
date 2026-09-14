@@ -549,6 +549,19 @@ class _CompanyRow extends StatelessWidget {
                 letterSpacing: 0,
               ),
             ),
+          // Delisted by the exchange and dealt in over the counter. The row
+          // stays so a holder can still find the share; this says where it
+          // trades.
+          if (company.listing != null) ...[
+            const SizedBox(height: 4),
+            Text(
+              l.listingOtc,
+              style: BarbarianType.labelTiny.copyWith(
+                color: c.textFaint,
+                letterSpacing: 0,
+              ),
+            ),
+          ],
           if (company.hasCashOrTrash) ...[
             const SizedBox(height: 6),
             Icon(Icons.article_outlined, size: 13, color: c.accent),

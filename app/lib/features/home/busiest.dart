@@ -194,6 +194,10 @@ List<BusyRow> busiest({
 }) {
   final rows = <BusyRow>[];
   for (final company in directory.companies) {
+    // Not a share the exchange delisted. It still trades over the counter —
+    // NCGC's 800 shares at the EGP 50 buyout price read as 8.4 times its
+    // usual — but that is not a busy session on the exchange.
+    if (company.listing != null) continue;
     final median = company.medianVolume20d;
     final quote = snapshot.quoteFor(company.ticker);
     final volume = quote?.volume;

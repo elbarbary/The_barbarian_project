@@ -99,12 +99,11 @@ class Signals(Patched):
                    "dateStamp": (datetime.date(2019, 1, 1)
                                  + datetime.timedelta(days=7 * i)).isoformat()}
                   for i in range(40)]
-        # The pre-fix directory: the delisted share still has a row.
-        self.patch(sig, "directory", lambda key="companies": {
-            "companies": {"NCGC": {"ticker": "NCGC", "name_en": "Nile Cotton Ginning"},
-                          "QUIE": {"ticker": "QUIE", "name_en": "Quiet But Listed"}},
-            "delisted": {},
-        }[key])
+        # A delisted share keeps its directory row: it still trades over the
+        # counter, and the row carries a note saying so.
+        self.patch(sig, "directory", lambda: {
+            "NCGC": {"ticker": "NCGC", "name_en": "Nile Cotton Ginning"},
+            "QUIE": {"ticker": "QUIE", "name_en": "Quiet But Listed"}})
         self.patch(sig, "load_filings", lambda: {"NCGC": weekly, "QUIE": weekly})
         self.patch(sig, "expected_results", lambda today: {"NCGC": [DUE], "QUIE": [DUE]})
         self.patch(sig, "last_prices", lambda: {"NCGC": "2026-09-10", "QUIE": "2026-09-10"})
@@ -127,33 +126,6 @@ class Signals(Patched):
         per_company, index = sig.build(TODAY)
         self.assertNotIn("NCGC", [q["ticker"] for q in index["quiet"]])
         self.assertEqual(per_company["NCGC"]["results_due"], [])
-
-    def test_a_share_the_market_build_left_out_is_still_named_as_delisted(self):
-        # Once build_market_api drops the row, the directory lists the share
-        # under `delisted` — and the document the previous run wrote for it,
-        # with a results window in it, must be overwritten rather than orphaned.
-        self.patch(sig, "directory", lambda key="companies": {
-            "companies": {"QUIE": {"ticker": "QUIE", "name_en": "Quiet But Listed"}},
-            "delisted": {"NCGC": {"ticker": "NCGC", "name_en": "Nile Cotton Ginning",
-                                  "name_ar": "النيل لحليج الاقطان"}},
-        }[key])
-        per_company, index = sig.build(TODAY, delisted={"NCGC": NCGC})
-        self.assertEqual(per_company["NCGC"]["results_due"], [])
-        self.assertIsNone(per_company["NCGC"]["quiet"])
-        self.assertEqual(index["delisted"][0]["name"], "Nile Cotton Ginning")
-        self.assertEqual(index["delisted"][0]["news_id"], 211501)
-
-    def test_a_left_out_share_the_notices_no_longer_name_gets_nothing(self):
-        # Relisted since the last market build: not in the directory yet, and
-        # no longer delisted — so no document either way until the build
-        # that lists it again.
-        self.patch(sig, "directory", lambda key="companies": {
-            "companies": {},
-            "delisted": {"NCGC": {"ticker": "NCGC", "name_en": "Nile Cotton Ginning"}},
-        }[key])
-        per_company, index = sig.build(TODAY, delisted={})
-        self.assertNotIn("NCGC", per_company)
-        self.assertEqual(index["delisted"], [])
 
 
 @unittest.skipUnless(any(listing_status.FILINGS.glob("*.json.gz")), "no filings archive")

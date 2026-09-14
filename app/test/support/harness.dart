@@ -198,6 +198,8 @@ Widget harness(
   ThemeMode themeMode = ThemeMode.light,
   QuoteSnapshot? quotes,
   Locale? locale = const Locale('en'),
+  // The bundled fixtures unless a test needs a document they do not carry.
+  DocumentSource source = const DiskFixtureSource(),
 }) {
   return ProviderScope(
     overrides: [
@@ -210,7 +212,7 @@ Widget harness(
       // auth notifier out of the document/freshness graph, which a fake-
       // async test does not set up and which would stall its streams.
       useFixturesProvider.overrideWithValue(false),
-      documentSourceProvider.overrideWithValue(const DiskFixtureSource()),
+      documentSourceProvider.overrideWithValue(source),
       documentCacheProvider.overrideWithValue(MemoryDocumentCache()),
       // Without this the live-quote provider makes a real request and the test
       // dies on a pending timer instead of on an assertion.

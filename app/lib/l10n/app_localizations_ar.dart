@@ -759,6 +759,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get directoryNoQuote => 'لا يوجد سعر';
 
   @override
+  String get listingOtc => 'خارج المقصورة';
+
+  @override
+  String get listingNotice => 'إخطار البورصة';
+
+  @override
   String directoryShareOfListings(String percent) {
     return '$percent% من الشركات المقيدة';
   }

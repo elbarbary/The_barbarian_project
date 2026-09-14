@@ -1029,7 +1029,7 @@
           <div onClick="{{ r.go }}" style="cursor:pointer;display:grid;grid-template-columns:26px minmax(52px,68px) minmax(96px,1.5fr) minmax(64px,104px) minmax(60px,86px) minmax(60px,80px) minmax(56px,86px) minmax(44px,64px);gap:10px;padding:12px 14px;border-radius:14px;align-items:center" style-hover="background:var(--sunk)">
             <div onClick="{{ r.follow }}" title="{{ r.followLabel }}" aria-label="{{ r.followLabel }}" style="cursor:pointer;font-size:15px;line-height:1;color:{{ r.starColor }}" style-hover="color:var(--accent)">{{ r.star }}</div>
             <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">{{ r.ticker }}</div>
-            <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px">{{ r.name }}</div>
+            <div style="min-width:0;display:flex;align-items:center;gap:6px;font-size:14px"><sc-if value="{{ r.otc }}"><span class="otc-tag" style="flex:none;padding:1px 7px;border-radius:999px;border:1px solid var(--rule);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--t2)">{{ r.otcTag }}</span></sc-if><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.name }}</span></div>
             <div style="font-size:12px;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.sector }}</div>
             <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:end">{{ r.close }}</div>
             <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:end;color:{{ r.color }}">{{ r.pct }}</div>
@@ -1790,6 +1790,11 @@
             </div>
             <h1 style="font-family:{{ co.primaryFont }};font-size:clamp(32px,4vw,52px);font-weight:600;letter-spacing:-.03em;line-height:1.15;margin:14px 0 0">{{ co.primaryName }}</h1>
             <div style="font-size:clamp(16px,2vw,22px);color:var(--t2);margin-top:8px">{{ co.secondaryName }}</div>
+            <!-- Delisted by the exchange, still dealt in over the counter: the
+                 page stays, and says what the share is. -->
+            <sc-if value="{{ co.delisted }}">
+            <div class="listing-note" role="note" style="margin-top:14px;padding:10px 14px;border-radius:14px;background:var(--sunk);border:1px solid var(--edgeIn);font-size:13.5px;line-height:1.6;color:var(--t2)"><span>{{ co.listingNote }}</span> <a href="{{ co.listingLink }}" target="_blank" rel="noopener" style="color:var(--accent);white-space:nowrap">{{ L.delistingNotice }} ↗</a></div>
+            </sc-if>
           </div>
           <div style="text-align:end;padding:16px 20px;border-radius:20px;background:var(--sunk);border:1px solid var(--edgeIn)">
             <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)">{{ L.lastClose }}</div>

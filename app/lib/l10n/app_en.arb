@@ -406,6 +406,14 @@
     }
   },
   "directoryNoQuote": "no quote",
+  "listingOtc": "OTC",
+  "@listingOtc": {
+    "description": "Tag on a company the exchange delisted: its shares trade over the counter, not on the exchange."
+  },
+  "listingNotice": "EGX notice",
+  "@listingNotice": {
+    "description": "Link to the exchange's own final delisting notice, under the note on a delisted company."
+  },
   "directoryShareOfListings": "{percent}% of listings",
   "@directoryShareOfListings": {
     "placeholders": {

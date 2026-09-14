@@ -536,6 +536,10 @@ export async function live() {
       // tested" rather than as a pass.
       avgVolume: c.avg_volume_30d ?? null,
       ratios: c.ratios || null,
+      // Delisted by the exchange and still dealt in over the counter
+      // (apply_listing_status.py). The row stays so a holder can find the
+      // share; the note says where it trades.
+      listing: c.listing || null,
       profit: typeof c.net_income === 'number' ? c.net_income : null,
       profitPeriod: c.net_income_period || '',
       trends: (trendsDoc && trendsDoc.items && trendsDoc.items[c.ticker]) || null,
@@ -772,6 +776,9 @@ export async function company(ticker) {
     // price times shares came to a fiftieth of the company.
     currency: d.currency || '',
     foreignCurrency: Boolean(d.currency),
+    // The exchange's final delisting notice, when there is one: the share
+    // trades over the counter now, and the header says so.
+    listing: d.listing || null,
     name: d.name,
     brief: brief ? (brief.story || brief.history || '') : '',
     briefAr: brief ? (brief.story_ar || brief.history_ar || '') : '',

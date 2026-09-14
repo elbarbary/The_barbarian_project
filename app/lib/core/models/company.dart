@@ -140,6 +140,11 @@ abstract class CompanySummary with _$CompanySummary {
     /// volume comes from the live snapshot, and this is what it is unusual
     /// against.
     @JsonKey(name: 'median_volume_20d') double? medianVolume20d,
+
+    /// Present when the exchange has delisted the company. It stays in the
+    /// directory because its shares still trade over the counter; this says
+    /// so, so the row never reads as an exchange listing.
+    CompanyListing? listing,
   }) = _CompanySummary;
 
   const CompanySummary._();
@@ -175,6 +180,40 @@ abstract class CompanySummary with _$CompanySummary {
     if (nameEn.toLowerCase().contains(lowercaseQuery)) return 4;
     return 5;
   }
+}
+
+/// A company the exchange delisted, whose shares still trade over the counter.
+///
+/// Nile Cotton Ginning left the exchange in June 2021 (EGX NewsID 211501) and
+/// still changes hands on the over-the-counter system, so its page, price and
+/// filings stay reachable. Every figure here is the exchange's own final
+/// notice, and the two sentences are written by the pipeline
+/// (`apply_listing_status.py`) — the app prints them, it composes nothing.
+@freezed
+abstract class CompanyListing with _$CompanyListing {
+  const factory CompanyListing({
+    @Default('delisted') String status,
+    @Default('OTC') String market,
+    @JsonKey(name: 'delisted_on') String? delistedOn,
+    @JsonKey(name: 'news_id') int? newsId,
+
+    /// The exchange's own notice.
+    String? link,
+
+    /// voluntary, mandatory or merger, when the notice says.
+    String? kind,
+    @Default('') String note,
+    @JsonKey(name: 'note_ar') @Default('') String noteAr,
+  }) = _CompanyListing;
+
+  const CompanyListing._();
+
+  factory CompanyListing.fromJson(Map<String, dynamic> json) =>
+      _$CompanyListingFromJson(json);
+
+  /// The reader's language where the pipeline wrote it, English otherwise.
+  String noteFor({required bool arabic}) =>
+      arabic && noteAr.isNotEmpty ? noteAr : note;
 }
 
 /// The borrowing picture for the last period a company filed one.
@@ -282,6 +321,10 @@ abstract class Company with _$Company {
     /// filed. Absent for a company that reported none, which is an answer
     /// rather than a gap.
     CompanyDebt? debt,
+
+    /// Present when the exchange has delisted the company; see
+    /// [CompanyListing].
+    CompanyListing? listing,
   }) = _Company;
 
   const Company._();

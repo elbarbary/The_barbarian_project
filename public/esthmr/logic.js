@@ -628,6 +628,7 @@ export class Component extends Base {
       peFoot:'P/E is the last close over the last filed annual earnings per share. It is left blank — never estimated — where the company reported a loss, filed no annual profit, or where its share count, price and market capitalisation do not multiply out. That filing can be twenty months old, so each company\u2019s own page also carries the same ratio over the last twelve months it filed.',
       noMatchTitle:'Nothing matches', noMatchBody:'No company in the filed set matches this search and this sector.', clearFilters:'Clear filters',
       lastClose:'Last close', asOf:'As of', priceHistory:'Price history', sessionsShown:'Sessions', whoTheyAre:'Who they are',
+      otcTag:'OTC', delistingNotice:'EGX notice',
       asFiled:'Financials, as filed', egpMillions:'EGP millions unless stated', period:'Period', revenue:'Revenue',
       grossProfit:'Gross profit', operatingIncome:'Operating income', netIncome:'Net income',
       cumulativeWarning:'Periods are cumulative as the exchange files them. H1 and 9M are year-to-date and are not comparable to a single quarter. Nothing here is subtracted to synthesise a quarter, and a blank is a figure the filing did not state — not a zero.',
@@ -1000,6 +1001,7 @@ export class Component extends Base {
       peFoot:'مضاعف الربحية = آخر إغلاق مقسوماً على ربحية السهم السنوية كما وردت في آخر إفصاح. ويُترك فارغاً — دون تقدير — إذا سجّلت الشركة خسارة، أو لم تُفصح عن ربح سنوي، أو إذا لم يتّسق عدد الأسهم مع السعر والقيمة السوقية. وقد يعود ذلك الإفصاح إلى عشرين شهراً مضت، لذا تحمل صفحة كل شركة النسبة نفسها محسوبة على آخر اثني عشر شهراً أفصحت عنها.',
       noMatchTitle:'لا نتائج', noMatchBody:'لا توجد شركة في المجموعة المُفصح عنها تطابق هذا البحث وهذا القطاع.', clearFilters:'مسح التصفية',
       lastClose:'آخر إغلاق', asOf:'بتاريخ', priceHistory:'تاريخ السعر', sessionsShown:'جلسات', whoTheyAre:'نبذة عن الشركة',
+      otcTag:'خارج المقصورة', delistingNotice:'إخطار البورصة',
       asFiled:'القوائم المالية كما وردت', egpMillions:'بملايين الجنيهات ما لم يُذكر غير ذلك', period:'الفترة', revenue:'الإيرادات',
       grossProfit:'الربح الإجمالي', operatingIncome:'الربح التشغيلي', netIncome:'صافي الربح',
       cumulativeWarning:'الفترات تراكمية كما تُقدّمها البورصة. النصف الأول وتسعة أشهر أرقام من بداية العام ولا تُقارن بربع واحد. لا يُطرح شيء لاستخراج ربع، والخانة الفارغة رقم لم يذكره الإفصاح — وليست صفراً.',
@@ -1726,6 +1728,9 @@ export class Component extends Base {
     // watchlist alike, so it has to exist before the first of them.
     const watchedSet = new Set(this._watch || []);
     const mkRow = c => ({ ticker:c.ticker, name:this.nm(c.name), sector: sectorName(c.sector),
+      // Delisted by the exchange and dealt in over the counter. The row stays,
+      // because a holder can still find the share; the tag says where it trades.
+      otc: Boolean(c.listing), otcTag: L.otcTag,
       // A price in another currency says which. It is one word, and without
       // it the figure is wrong by a factor of fifty.
       close: c.close === '\u2014' ? '\u2014'
@@ -1852,8 +1857,12 @@ export class Component extends Base {
       return { up, down, flat: moved.length - up - down, counted: moved.length, date: D.marketDate };
     })();
 
+    // Not a share the exchange delisted. It still trades over the counter —
+    // NCGC's 800 shares at the EGP 50 buyout price read as 8.4 times its usual
+    // — but that is not a busy session on the exchange, and the pipeline's
+    // own unusual-volume document leaves it out for the same reason.
     const busyAll = D.companies
-      .filter((c) => typeof c.rv === 'number' && c.rv >= BUSY_AT)
+      .filter((c) => typeof c.rv === 'number' && c.rv >= BUSY_AT && !c.listing)
       .sort((a, b) => b.rv - a.rv);
     const busy = busyAll
       .slice(0, BUSY_SHOWN)
@@ -1863,7 +1872,7 @@ export class Component extends Base {
       }));
     // 230 of the 282 listed carry both numbers; the rest cannot be measured
     // this way and are not silently counted as quiet.
-    const busyMeasured = D.companies.filter((c) => typeof c.rv === 'number').length;
+    const busyMeasured = D.companies.filter((c) => typeof c.rv === 'number' && !c.listing).length;
 
     // Both of these were design literals with no live source, so they never
     // failed and never went stale in a way anybody could see: a signed-in
@@ -2041,8 +2050,9 @@ export class Component extends Base {
     // exist, at 12.40, with a description explaining what briefs/KORA.json
     // would have said. Under a real ticker in the header, that is an invented
     // company file.
-    const co = D.demo ? Object.assign({}, coDesign) : {
+    const co = D.demo ? Object.assign({ delisted: false, listingNote: '', listingLink: '' }, coDesign) : {
       ticker: st.ticker || '—', sector:'—', sectorKey:'', exchange:'EGX',
+      delisted: false, listingNote: '', listingLink: '',
       nameEn: st.ticker || '—', nameAr: st.ticker || '—',
       primaryName: st.ticker || '—', secondaryName: '',
       primaryFont: ar ? "'IBM Plex Sans Arabic',sans-serif" : "'Bricolage Grotesque',serif",
@@ -2062,6 +2072,19 @@ export class Component extends Base {
       const perf = (v) => (v === null || v === undefined ? '—' : this.pct(v));
       const whole = (v) => (v === null || v === undefined ? '—' : this.num(v, 0));
       Object.assign(co, {
+        // Delisted by the exchange, still dealt in over the counter. The page
+        // stays — a holder can still read it — and says so under the name,
+        // with the notice one tap away; the chip beside the ticker stops
+        // naming an exchange the share has left. The sentence is the notice's
+        // own figures in a fixed template (apply_listing_status.py), held to
+        // the same §8 guard as the brief below it.
+        delisted: Boolean(loaded.listing),
+        listingNote: (() => {
+          const text = loaded.listing ? ((ar ? loaded.listing.note_ar : loaded.listing.note) || '') : '';
+          return text && !DIRECTIVE.test(text) ? text : '';
+        })(),
+        listingLink: (loaded.listing && loaded.listing.link) || '',
+        exchange: loaded.listing ? L.otcTag : co.exchange,
         brief: (() => { const b = (ar ? loaded.briefAr : loaded.brief) || ''; return (b && !DIRECTIVE.test(b) ? b : '') || L.nothingYet; })(),
         briefFacts: [
           { label: ar?'القطاع':'Sector', value: sectorName(loaded.sector) },
