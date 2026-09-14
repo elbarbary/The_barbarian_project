@@ -463,6 +463,10 @@
     "meaning": "This joint venture establishes a localized manufacturing facility for electric vehicle batteries through foreign direct investment and industrial technology transfer between the two entities.",
     "meaning_ar": "يؤسس هذا المشروع المشترك منشأة تصنيع محلية لبطاريات المركبات الكهربائية عبر تدفقات الاستثمار الأجنبي المباشر ونقل التكنولوجيا الصناعية بين الكيانين."
   },
+  "egypt brics trade in h1 2026": {
+    "meaning": "Trade data between Egypt and BRICS economies tracks bilateral import and export volumes, clearing mechanisms, and the proportion of transactions settled in local currencies versus foreign exchange.",
+    "meaning_ar": "ترصد بيانات التجارة بين مصر ودول تجمع بريكس أحجام الصادرات والواردات البينية، وآليات المقاصة، ونسبة المعاملات التجارية التي تتم تسويتها بالعملات المحلية مقابل العملات الأجنبية."
+  },
   "egypt mobile wallet boom in h1 2026": {
     "meaning": "An expansion in mobile wallet usage processes a higher volume of digital financial transactions through telecom operators and commercial banks, shifting cash-based settlement into formal electronic payment infrastructure.",
     "meaning_ar": "تؤدي زيادة استخدام محافظ الهاتف المحمول إلى معالجة حجم أكبر من المعاملات المالية الرقمية عبر شبكات مشغلي الاتصالات والبنوك التجارية، مما يحول التسويات النقدية إلى بنية المدفوعات الإلكترونية الرسمية."
@@ -2242,6 +2246,10 @@
   "العدد 1202 من نشره حابي": {
     "meaning": "This headline marks the publication of a routine daily edition of an Egyptian business newsletter, which functions as an external channel for aggregating and distributing financial and corporate news across the market.",
     "meaning_ar": "يشير هذا العنوان إلى صدور عدد دوري من نشرة إخبارية اقتصادية مصرية، تعمل كقناة لنشر وتداول الأخبار المالية وأخبار الشركات في السوق."
+  },
+  "العدد 1203 من نشره حابي": {
+    "meaning": "This headline marks the publication of a routine daily edition of an economic newsletter, compiling financial news, market data, and corporate developments for business readers.",
+    "meaning_ar": "يشير العنوان إلى إصدار عدد يومي جديد من نشرة إخبارية اقتصادية، تجمع أحدث الأخبار المالية والبيانات السوقية وتطورات الشركات للقطاع المالي."
   },
   "العدد 400": {
     "meaning": "The publication of issue number 400 represents a recurring media or reporting milestone within standard operational scheduling, carrying no direct impact on underlying corporate capital structures or market trading mechanics.",
@@ -4724,6 +4732,10 @@
   "متوسط الفايده علي اذون الخزانه يسجل تراجعات متتاليه ليصل الي %25.058": {
     "meaning": "Lower treasury bill yields reduce the government's short-term borrowing costs on newly issued debt while lowering the fixed-income return rates available to institutional buyers in the primary market.",
     "meaning_ar": "يؤدي انخفاض متوسط العائد على أذون الخزانة إلى خفض تكلفة الاقتراض الحكومي قصير الأجل للإصدارات الجديدة، ويقلل في الوقت نفسه معدلات العائد الثابت المتاحة للمؤسسات المكتتبة في السوق الأولي."
+  },
+  "متوسط الفايده علي اذون الخزانه يعاود الصعود ويسجل %25.243": {
+    "meaning": "An increase in treasury bill yields raises sovereign debt servicing costs for the government while establishing higher benchmark returns across the banking sector.",
+    "meaning_ar": "يؤدي ارتفاع متوسط العائد على أذون الخزانة إلى زيادة تكلفة خدمة الدين الحكومي مع رفع أسعار الفائدة القياسية في القطاع المصرفي."
   },
   "مجلس اداره ڤاليو يجدد الثقه في وليد حسونه رييسا تنفيذيا واعضاء اللجنه التنفيذيه لمده 3 سنوات": {
     "meaning": "The extension of the executive committee's term for three years maintains management continuity and keeps existing operational strategies and corporate governance structures in place at the consumer finance firm.",
