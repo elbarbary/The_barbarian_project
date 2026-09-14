@@ -318,13 +318,23 @@ def main(argv=None) -> int:
                         help="the daily_scan_<date>.json egx_scan.mjs wrote")
     parser.add_argument("--models", default="baselines",
                         help="baselines, all, or a comma-separated list")
-    parser.add_argument("--check", action="store_true", help="write nothing")
+    # Writing is the flag, not the default.
+    #
+    # Because the dangerous thing should be the one you have to ask for. A
+    # run by hand against the real output path pre-empts the scheduled one:
+    # the overwrite guard below then refuses the nightly nine-model run
+    # because a four-model experiment already claimed the session, and the
+    # record keeps the weaker of the two forever. That happened once, on
+    # 14 September, minutes before the run it would have displaced.
+    parser.add_argument("--write", action="store_true",
+                        help="record this run; without it nothing is written")
     parser.add_argument("--no-timestamp", action="store_true",
                         help="skip the timestamping authority")
     parser.add_argument("--no-today", action="store_true",
                         help="do not ask the exchange for the session that "
                              "has just closed")
     args = parser.parse_args(argv)
+    args.check = not args.write
 
     chosen: dict = {}
     wanted = args.models.strip()

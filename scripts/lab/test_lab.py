@@ -406,11 +406,11 @@ class SettledTest(unittest.TestCase):
                 2026, 5, 25, 8, 0, tzinfo=run.CAIRO)
             try:
                 run.main([str(path), "--models", "drift", "--no-timestamp",
-                          "--no-today"])
+                          "--no-today", "--write"])
                 written = out / f"run-{days[-1]}.json"
                 first = written.read_text()
                 run.main([str(path), "--models", "momentum20", "--no-timestamp",
-                          "--no-today"])
+                          "--no-today", "--write"])
                 self.assertEqual(written.read_text(), first)
                 self.assertEqual(list(json.loads(first)["models"]), ["drift"])
             finally:
@@ -444,8 +444,7 @@ class SettledTest(unittest.TestCase):
             try:
                 with contextlib.redirect_stdout(said):
                     code = run.main([str(path), "--models", "drift",
-                                     "--no-timestamp", "--no-today",
-                                     "--check"])
+                                     "--no-timestamp", "--no-today"])
                 self.assertEqual(code, 0)
                 self.assertIn("NOT A FORECAST", said.getvalue())
                 self.assertEqual(list(out.iterdir()), [])
@@ -478,7 +477,7 @@ class SettledTest(unittest.TestCase):
             try:
                 with self.assertRaises(SystemExit) as refused:
                     run.main([str(path), "--models", "drift", "--no-timestamp",
-                          "--no-today"])
+                          "--no-today", "--write"])
                 self.assertIn("closed", str(refused.exception))
                 self.assertEqual(list(out.iterdir()), [])
             finally:

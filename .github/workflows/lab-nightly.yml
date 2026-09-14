@@ -186,7 +186,7 @@ jobs:
           echo "scan: $scan"
           python3 scripts/lab/run.py "$scan" \
             --models "${{ inputs.models || 'all' }}" \
-            ${{ inputs.dry_run == true && '--check' || '' }}
+            ${{ inputs.dry_run == true && ' ' || '--write' }}
 
       # Scoring and revealing are independent of today's forecast: they read
       # runs that were frozen weeks ago against bars the market has since
