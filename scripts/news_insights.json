@@ -1315,6 +1315,10 @@
     "meaning": "Daily fish price updates reflect spot pricing across wholesale and retail markets, determined by daily supply volumes from aquaculture and commercial landings alongside transportation costs.",
     "meaning_ar": "تعكس تحديثات أسعار الأسماك اليومية مستويات التسعير الفوري في أسواق الجملة والتجزئة، وتحددها أحجام المعروض اليومي من الاستزراع السمكي والصيد إلى جانب تكاليف النقل."
   },
+  "اسعار السمك اليوم في مصر الاثنين 14/9/2026.. تباين بسوق العبور": {
+    "meaning": "Price divergence at wholesale hubs like the El-Obour market reflects daily fluctuations in catch volumes, aquaculture supply, and transport costs across different fish categories.",
+    "meaning_ar": "يعكس تباين الأسعار في أسواق الجملة مثل سوق العبور التغيرات اليومية في حجم الصيد، وتدفقات المعروض من المزارع السمكية، وتكاليف النقل بين مختلف الأصناف."
+  },
   "اسعار السمك اليوم في مصر.. الاربعاء 9/9/2026": {
     "meaning": "Daily fish price tracking reflects prevailing supply conditions across wholesale markets, domestic aquaculture, and marine catch relative to current retail consumer demand in the local food sector.",
     "meaning_ar": "تعكس المتابعة اليومية لأسعار الأسماك مستويات المعروض المتاحة في أسواق الجملة والإنتاج السمكي المحلي مقابل حجم الطلب الاستهلاكي الحالي في قطاع السلع الغذائية."
@@ -1978,6 +1982,10 @@
   "الرقابه الماليه تصدر ضوابط جديده لتنظيم اقتراض الاوراق الماليه بغرض البيع في سوق راس المال": {
     "meaning": "Securities lending for the purpose of sale establishes a standardized regulatory framework that allows market participants to borrow listed shares from lenders to execute transactions under defined collateral, margin, and settlement requirements.",
     "meaning_ar": "يضع تنظيم اقتراض الأوراق المالية بغرض البيع إطاراً تنظيمياً يتيح للمتعاملين اقتراض أسهم مقيدة من المقرضين لتنفيذ المعاملات وفق متطلبات محددة للضمانات ونسب الهامش والتسوية."
+  },
+  "الرقابه الماليه تقر اجراءات بنيان بشان زياده راس المال لصالح نظام الاثابه": {
+    "meaning": "The regulatory approval permits the company to issue new shares dedicated to an employee stock incentive plan, expanding the equity base and allocating equity compensation to staff under established governance frameworks.",
+    "meaning_ar": "تتيح الموافقة الرقابية للشركة إصدار أسهم جديدة مخصصة لنظام إثابة وتحفيز العاملين، مما يرفع قاعدة رأس المال ويخصص حصص ملكية للموظفين وفق الأطر التنظيمية المقررة."
   },
   "الرقابه الماليه تقرر الربط اللحظي بين شركات التمويل الاستهلاكي وتمويل المشروعات و«اي سكور»": {
     "meaning": "The regulatory decision establishes real-time technical integration between consumer finance and micro/SME finance companies and the Egyptian Credit Bureau (I-Score), automating instant data exchange on client credit history and outstanding liabilities at the point of loan origination.",
@@ -2983,6 +2991,10 @@
     "meaning": "Geopolitical tensions between the US and Iran create asset price divergence across European equity sectors, reflecting differing exposures to energy price fluctuations and global trade routes.",
     "meaning_ar": "تؤدي التوترات الجيوسياسية بين الولايات المتحدة وإيران إلى تباين في حركة أسعار الأسهم عبر القطاعات الأوروبية، تبعاً لمدى تأثر كل قطاع بتقلبات أسعار الطاقة وطرق التجارة العالمية."
   },
+  "تباين الموشرات الاوروبيه في مستهل جلسات الاسبوع": {
+    "meaning": "Mixed performance across European indices reflects divergent sector valuations, where capital reallocates between defensive and cyclical equities based on differing regional corporate earnings and macroeconomic data.",
+    "meaning_ar": "يعكس تباين أداء المؤشرات الأوروبية اختلاف تقييمات القطاعات، حيث يُعاد توزيع السيولة بين الأسهم الدفاعية والدورية وفقاً لاختلاف نتائج أعمال الشركات والبيانات الاقتصادية الإقليمية."
+  },
   "تباين الموشرات اليابانيه مع خساير قطاع التكنولوجيا": {
     "meaning": "Divergence in Japanese indices reflects sectoral rebalancing, where price declines in technology shares offset gains across non-tech industry components within index weightings.",
     "meaning_ar": "يعكس تباين المؤشرات اليابانية إعادة توزيع للأوزان النسبية بين القطاعات، حيث توازن التراجعات السعرية لأسهم التكنولوجيا المكاسب المحققة في المكونات الصناعية الأخرى داخل المؤشر."
@@ -3115,6 +3127,10 @@
   "تراجع جماعي لموشرات البورصه بختام التعاملات.. و «EGX30» يهبط 1.09%": {
     "meaning": "Trading volume shifts toward net liquidations across listed equities, resulting in downward index repricing as the benchmark EGX30 closes 1.09% lower.",
     "meaning_ar": "تشهد جلسة التداول غلبة لعمليات التسييل عبر الأسهم المدرجة، مما يؤدي إلى إعادة تسعير المؤشرات نزولاً مع إغلاق مؤشر EGX30 الرئيسي على انخفاض قدره 1.09%."
+  },
+  "تراجع جماعي لموشرات البورصه بمستهل التعاملات.. وEGX30 ينخفض بنسبه 0.65%": {
+    "meaning": "An opening decline across indices reflects an immediate predominance of executed ask orders over bid orders, which revalues index-constituent equities downward at the start of the trading session.",
+    "meaning_ar": "يعكس التراجع الجماعي للمؤشرات في مستهل الجلسة غلبة أوامر العرض المنفذة على أوامر الطلب، مما يعيد تسعير أسهم الشركات المكونة للمؤشرات عند مستويات أدنى."
   },
   "تراجع جماعي لموشرات البورصه في منتصف تعاملات اليوم": {
     "meaning": "A collective decline in market indices reflects a simultaneous decrease in the weighted share prices of listed companies across the exchange, driven by aggregate transaction values where execution prices are lower than previous closing levels during mid-session trading.",
