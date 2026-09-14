@@ -2107,6 +2107,10 @@
     "meaning": "A regulatory suspension temporarily halts a brokerage firm's operational license to execute trade orders on the exchange, freezing its client-facing dealing activities for the duration of the sanction.",
     "meaning_ar": "يؤدي الإيقاف الرقابي إلى تجميد رخصة شركة الوساطة في تنفيذ أوامر التداول بالبورصة بشكل مؤقت، مما يوقف أنشطة التعامل وتنفيذ الصفقات للعملاء طوال مدة الجزاء."
   },
+  "الرقابه الماليه توهل مجموعه جديده من الميسرات لدعم التمكين المالي للنساء الريفيات": {
+    "meaning": "The Financial Regulatory Authority expands the distribution network for non-banking financial products by training community facilitators who directly intermediate microfinance, micro-insurance, and savings services to rural demographics.",
+    "meaning_ar": "توسّع الهيئة العامة للرقابة المالية شبكة توزيع المنتجات المالية غير المصرفية عبر تأهيل ميسّرات مجتمعيات للوساطة المباشرة في تقديم خدمات التمويل متناهي الصغر والتأمين والادخار للمستفيدات في المناطق الريفية."
+  },
   "الرقابه الماليه توهل مجموعه جديده من “الميسرات” لدعم التمكين المالي للنساء الريفيات": {
     "meaning": "The Financial Regulatory Authority trains field facilitators to act as direct distribution and onboarding agents for non-banking microfinance and microinsurance products in rural areas.",
     "meaning_ar": "تتولى الهيئة العامة للرقابة المالية تدريب ميسّرات ميدانيات ليعملن كقنوات توزيع وتوعية مباشرة لمنتجات التمويل متناهي الصغر والتأمين متناهي الصغر في المناطق الريفية."
@@ -2230,6 +2234,10 @@
   "السعوديه تعلن استهداف عدد من منشات ومرافق طاقه جنوب المملكه": {
     "meaning": "Attacks on energy infrastructure trigger operational emergency protocols, require technical assessments of asset integrity, and alter logistical flows across regional supply networks.",
     "meaning_ar": "يؤدي استهداف منشآت الطاقة إلى تفعيل بروتوكولات الطوارئ التشغيلية، وإجراء تقييمات فنية لسلامة الأصول، وتعديل المسارات اللوجستية عبر شبكات الإمداد الإقليمية."
+  },
+  "السعوديه تعلن اكتشاف 110 ملايين طن من المعادن النادره واليورانيوم بالمدينه المنوره": {
+    "meaning": "The geological discovery identifies a 110-million-ton domestic reserve base of rare earth elements and uranium, establishing upstream resource assets that undergo exploration, commercial assessment, and mining infrastructure development within the national industrial supply chain.",
+    "meaning_ar": "يحدد هذا الكشف الجيولوجي قاعدة احتياطيات محلية بحجم 110 ملايين طن من المعادن النادرة واليورانيوم، مما يضيف أصولاً تعدينية أولية تخضع للاستكشاف والتقييم التجاري وتطوير البنية التحتية للاستخراج ضمن سلاسل التوريد الصناعية."
   },
   "السعوديون يعودون لشراء الاسهم مع تحول الاجانب الي البيع": {
     "meaning": "Trading volume reflects a shift in market liquidity sources, where domestic or regional Arab capital inflows counterbalance capital outflows from non-Arab foreign market participants.",
@@ -2530,6 +2538,14 @@
   "المانيا تقود تحركا جديدا لاستخدام الاصول الروسيه المجمده لتمويل قرض لاوكرانيا": {
     "meaning": "This structure uses the yields and interest generated from immobilized sovereign assets as debt service collateral to fund a syndicated international loan facility.",
     "meaning_ar": "تعتمد هذه الآلية على توجيه العوائد والفوائد الناتجة عن الأصول السيادية المجمدة كضمان لسداد خدمة الدين المترتبة على تسهيل ائتماني دولي مشترك."
+  },
+  "المتحدث العسكري: مصر دوله عظيمه تمتلك قوات مسلحه قويه مستمده من تلاحم الشعب المصري": {
+    "meaning": "The statement represents standard sovereign institutional communication with no direct operational, balance-sheet, or regulatory mechanism affecting capital market instruments or listed sectors.",
+    "meaning_ar": "يمثل البيان خطاباً مؤسسياً عاماً دون أن يترتب عليه أي آلية تشغيلية أو مالية أو تنظيمية مباشرة تؤثر على أدوات سوق المال أو القطاعات المدرجة."
+  },
+  "المجتمعات العمرانيه: الحالات التي وصلت الي التعثر الفعلي وتوقف المشروعات قليله جدا": {
+    "meaning": "The New Urban Communities Authority confirms that operational disruption and project insolvencies remain limited across real estate developments, indicating that the majority of developers maintain continuity in construction schedules and contractual land obligations.",
+    "meaning_ar": "توضح هيئة المجتمعات العمرانية أن حالات التوقف التشغيلي والتعثر المالي محصورة في نطاق ضيق بمشروعات التطوير العقاري، مما يعكس استمرار غالبية المطورين في الالتزام بجداول التنفيذ والوفاء بالاشتراطات التعاقدية للأراضي."
   },
   "المجتمعات العمرانيه: ضغوط التكاليف وتقلبات سلاسل الامداد تعيد تشكيل السوق": {
     "meaning": "Cost pressures from raw materials and supply chain disruptions directly alter the operational cost structures, pricing mechanisms, and execution schedules of real estate developers.",
@@ -3026,6 +3042,10 @@
   "بنك اوف امريكا يتوقع صعود خام برنت الي 83 دولارا": {
     "meaning": "Changes in global Brent crude prices directly alter domestic fuel subsidy allocations, industrial feedstock costs, and the foreign currency expenditure required for petroleum imports.",
     "meaning_ar": "تؤثر تغيرات أسعار خام برنت عالمياً بشكل مباشر على مخصصات دعم الوقود المحلية، وتكاليف مدخلات الإنتاج الصناعي، وحجم الإنفاق بالنقد الأجنبي الموجه لاستيراد المواد البترولية."
+  },
+  "بنك ستاندرد تشارترد: ارتفاع التضخم الاساسي في اغسطس يدعم رفع الفايده الامريكيه هذا الاسبوع": {
+    "meaning": "Core inflation measures persistent consumer price changes excluding volatile food and energy components, serving as an operational benchmark for central bank monetary policy adjustments that dictate borrowing costs across global financial markets.",
+    "meaning_ar": "يقيس التضخم الأساسي التغيرات المستمرة في أسعار المستهلكين بعد استبعاد بنود الغذاء والطاقة المتقلبة، ويشكل المعيار التشغيلي الذي تعتمد عليه البنوك المركزية لتحديد أسعار الفائدة وتكاليف الاقتراض في الأسواق المالية."
   },
   "بنك مصر يواصل تالقه في مسابقات العاب القوي باولمبياد الشركات بالاسكندريه": {
     "meaning": "This represents internal corporate sports participation and employee engagement activities, which operate within the bank's human resources and public relations budgets without impacting core banking operations.",
