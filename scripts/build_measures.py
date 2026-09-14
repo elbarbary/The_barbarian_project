@@ -282,18 +282,37 @@ def own_signals(ticker: str) -> dict:
     streaks = doc.get("streaks") or []
     if streaks:
         out["streak_break"] = streaks[0].get("kind")
-        out["streak_break_date"] = streaks[0].get("date")
+        # `filed`, not `date`, which the streak record does not have. This is
+        # the day the market LEARNED — the filing that broke the run was
+        # published then — rather than the period it refers to, because a
+        # reader asking "who broke a streak recently" means recently in their
+        # own reading, not in the issuer's accounting calendar.
+        out["streak_break_date"] = streaks[0].get("filed")
     firsts = doc.get("firsts") or []
     if firsts:
         out["first_in_years"] = firsts[0].get("type")
         out["first_in_years_gap_days"] = firsts[0].get("gap_days")
     quiet = doc.get("quiet")
     if isinstance(quiet, dict):
-        out["quiet_days"] = quiet.get("days")
+        # `silent_days`, which is what the signals document actually calls it.
+        # This asked for `days` and got None for every company on the exchange
+        # from the day it was written: a column declared, published, offered
+        # to readers to build rules on, and empty in all 283 rows. Nothing
+        # crashed, because a missing measurement is a legitimate answer here —
+        # which is exactly why `coverage()` below now refuses a column that is
+        # empty for everyone.
+        out["quiet_days"] = quiet.get("silent_days")
     due = doc.get("results_due") or []
     if due:
-        out["results_due_from"] = due[0].get("from")
-        out["results_due_to"] = due[0].get("to")
+        # `window_start` / `window_end`, which is what the signals document
+        # calls them. These asked for `from` and `to` and got None for every
+        # company, the same way `quiet_days` did — three declared columns,
+        # published, empty in all 283 rows, and offered to readers to write
+        # rules against. "Companies whose results are due in the next two
+        # weeks" is one of the most useful questions this table can answer
+        # and it could not be asked at all.
+        out["results_due_from"] = due[0].get("window_start")
+        out["results_due_to"] = due[0].get("window_end")
     return out
 
 
@@ -456,6 +475,28 @@ def main(argv=None) -> int:
             if c < len(rows) * 0.5 and n not in EVENT_COLUMNS]
     if thin:
         print(f"   thin data (under half the market): {', '.join(thin[:8])}")
+    # A column NOBODY can answer is not a rare event. It is a bug, or a
+    # column that should not be declared, and either way it must not sit in a
+    # published table looking like a measurement a reader can build a rule on.
+    #
+    # Four did, for as long as this table has existed: `quiet_days` asked the
+    # signals document for `days` where it says `silent_days`,
+    # `streak_break_date` asked for `date` where it says `filed`, and both
+    # results-due columns asked for `from`/`to` where it says
+    # `window_start`/`window_end`. All four were empty in all 283 rows and
+    # nothing complained, because a missing measurement is a legitimate
+    # answer here — which is precisely what made them invisible. The
+    # results-due pair covers 200 companies once asked correctly, and
+    # "results due in the next fortnight" is among the most useful questions
+    # this table can answer.
+    empty = sorted(n for n, c in counts.items() if c == 0)
+    if empty:
+        raise SystemExit(
+            "measures: no company on the exchange can answer "
+            + ", ".join(empty)
+            + ". A column nobody can answer is a key that does not exist or a "
+              "measurement that should not be declared — not a rare event.")
+
     rare = {n: counts.get(n, 0) for n in EVENT_COLUMNS if n in counts}
     if rare:
         print("   rare by nature: "

@@ -184,6 +184,99 @@ class AbsenceTest(unittest.TestCase):
                                             f"{row['ticker']}.{name} is negative")
 
 
+class SourceKeyTest(unittest.TestCase):
+    """The keys this table reads must be keys the source documents have.
+
+    `quiet_days` asked the signals document for `days`. The document calls it
+    `silent_days`. So the column was declared, published, offered to readers
+    to write rules against — and empty in all 283 rows, from the day it was
+    written. Nothing crashed, because a missing measurement is a legitimate
+    answer in this table; that is exactly what made it invisible.
+
+    Coverage reporting did not catch it either: `quiet_days` is an event
+    column, and event columns are excused from the thin-data warning because
+    a streak break IS rare. Rare and impossible look the same in a count.
+
+    So the test is on the key names themselves, against the real corpus.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        # Real signals documents, read through the REAL reader. An earlier
+        # version of this test re-implemented the key lookups here, which
+        # meant it checked the documents and not the code — reverting a key
+        # in `own_signals` left it green.
+        cls.tickers = [p.stem for p in sorted(bm.SIGNALS.glob("*.json"))][:400]
+        cls.read = [bm.own_signals(t) for t in cls.tickers]
+
+    def answered(self, column):
+        return sum(1 for row in self.read if row.get(column) is not None)
+
+    def test_the_signals_corpus_is_there_to_test_against(self):
+        self.assertGreater(len(self.tickers), 100,
+                           "no published signals documents to check keys against")
+
+    def test_every_column_read_from_a_signal_can_be_answered_by_somebody(self):
+        # A column no company on the exchange can answer is a key that does
+        # not exist, not a rare event. Four were: `quiet_days` asked for
+        # `days` where the document says `silent_days`, `streak_break_date`
+        # for `date` where it says `filed`, and both results-due columns for
+        # `from`/`to` where it says `window_start`/`window_end`. All four sat
+        # in a published table, empty in all 283 rows, offered to readers to
+        # write rules against.
+        columns = set(bm.EVENT_COLUMNS) | {"results_due_from", "results_due_to"}
+        for column in sorted(columns):
+            with self.subTest(column=column):
+                self.assertGreater(
+                    self.answered(column), 0,
+                    f"{column} reads a key no signals document has")
+
+    def test_the_results_due_window_covers_most_of_the_market(self):
+        # Not merely non-empty. This one is worth a floor because it is the
+        # difference between "results due in the next fortnight" being a
+        # question a reader can ask and one that silently answers nobody.
+        self.assertGreater(self.answered("results_due_from"),
+                           len(self.tickers) * 0.5)
+
+    def test_the_build_refuses_a_column_nobody_can_answer(self):
+        # The guard itself, exercised. Reverting any of the four key names
+        # empties a column, and that must stop the build rather than publish
+        # a measurement no reader can ever use.
+        doc = {"rows": [{"ticker": "AAA"}, {"ticker": "BBB"}],
+               "coverage": {"relative_volume_20": 2, "quiet_days": 0}}
+        keep = bm.build
+        bm.build = lambda: doc
+        try:
+            with self.assertRaises(SystemExit) as refused:
+                bm.main(["--check"])
+        finally:
+            bm.build = keep
+        self.assertIn("quiet_days", str(refused.exception))
+
+    def test_a_column_that_is_merely_rare_still_builds(self):
+        doc = {"rows": [{"ticker": "AAA"}, {"ticker": "BBB"}],
+               "coverage": {"relative_volume_20": 2, "quiet_days": 1}}
+        keep = bm.build
+        bm.build = lambda: doc
+        try:
+            self.assertEqual(bm.main(["--check"]), 0)
+        finally:
+            bm.build = keep
+
+    def test_the_published_table_answers_every_column_for_somebody(self):
+        # The same claim from the other end: whatever the reader in this file
+        # does, the table that shipped must not carry a column that is empty
+        # for the entire market.
+        try:
+            table = json.loads(bm.OUT.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            self.skipTest("no published measures table")
+        empty = [name for name, count in (table.get("coverage") or {}).items()
+                 if count == 0]
+        self.assertEqual(empty, [],
+                         f"published columns no company can answer: {empty}")
+
+
 class ProvenanceTest(unittest.TestCase):
     def test_every_row_dates_itself_to_its_own_newest_session(self):
         # The archive is not uniformly fresh. A market-wide date would
