@@ -511,6 +511,10 @@
     "meaning": "A major institutional shareholder reduces its equity ownership in the company, which alters the firm's shareholder structure and increases the proportion of shares available in the public free float.",
     "meaning_ar": "يُخفّض مساهم مؤسسي رئيسي نسبة ملكيته في رأسمال الشركة، مما يغيّر هيكل المساهمين ويرفع نسبة الأسهم المتاحة للتداول الحر في السوق."
   },
+  "el shams pyramids becomes profitable in h1 2026": {
+    "meaning": "The company's aggregate operating and non-operating revenues exceed its total expenses and debt-service costs over the six-month period, shifting the bottom-line balance from net loss to net profit.",
+    "meaning_ar": "تتجاوز الإيرادات التشغيلية وغير التشغيلية الإجمالية للشركة مجموع مصروفاتها وتكاليف خدمة ديونها خلال فترة الستة أشهر، مما يحول رصيد القوائم المالية من صافي خسارة إلى صافي ربح."
+  },
   "el sisi directs state bodies to adopt greening cairo project": {
     "meaning": "Directing state bodies to implement urban greening initiatives allocates public infrastructure expenditure toward landscaping, irrigation networks, environmental services, and associated civil contracting works in Cairo.",
     "meaning_ar": "يوجه تكليف الجهات الحكومية بتنفيذ مبادرات التشجير الحضري مخصصات الإنفاق على البنية التحتية العامة نحو قطاعات تنسيق الحدائق، وشبكات الري، والخدمات البيئية، والمقاولات المدنية المرتبطة بها في القاهرة."
@@ -959,6 +963,10 @@
     "meaning": "The transaction transfers equity ownership and operational control of Sphinx for Guard Services to an individual investor, consolidating private security operations and client contracts under new management.",
     "meaning_ar": "تتضمن الصفقة نقل ملكية الأسهم والسيطرة التشغيلية لشركة «أبو الهول لخدمات الحراسة» إلى مستثمر فرد، مما يضع العمليات التشغيلية وعقود الحراسة وإدارة الخدمات الأمنية تحت هيكل إدارة جديد."
   },
+  "اختتام معرض الصين الدولي لتجاره الخدمات 2026": {
+    "meaning": "The conclusion of the trade fair marks the end of cross-border procurement sessions and business-to-business networking for service sectors, shifting participating firms from contract negotiation to execution and fulfillment.",
+    "meaning_ar": "يمثل اختتام المعرض التجاري انتهاء جلسات الشراء والتعاقد بين الشركات في قطاعات الخدمات عبر الحدود، مما ينقل الشركات المشاركة من مرحلة التفاوض على الصفقات إلى مراحل التنفيذ والتسليم."
+  },
   "اخر حق لحامل السهم في التوزيع النقدي": {
     "meaning": "This marks the cum-dividend date, which is the final trading session in which a shareholder who holds or purchases the security is registered on the shareholder ledger to receive the approved cash dividend payment.",
     "meaning_ar": "يحدد هذا تاريخ نهاية الحق في الكوبون، وهو آخر جلسة تداول يكون فيها مالك أو مشتري السهم مقيداً بدفاتر الشركة ومستحقاً لصرف التوزيعات النقدية المقررة."
@@ -1346,6 +1354,10 @@
   "اسعار الغاز الاوروبي ترتفع 2% مع تصاعد مخاطر مضيق هرمز ونقص المخزونات": {
     "meaning": "Geopolitical risks in key maritime transit corridors combined with lower storage levels tighten available energy buffers, which adds a risk premium to natural gas benchmark pricing.",
     "meaning_ar": "تؤدي المخاطر الجيوسياسية في الممرات الملاحية الحيوية بالتزامن مع تراجع مستويات التخزين إلى تقليص هوامش الإمداد المتاحة، مما يضيف علاوة مخاطر إلى الأسعار القياسية للغاز الطبيعي."
+  },
+  "اسعار الغاز الاوروبي تقفز لاعلي مستوي منذ ديسمبر 2022": {
+    "meaning": "Higher European natural gas benchmarks raise the cost basis for energy-intensive regional imports and widen the pricing differential for global LNG trade flows.",
+    "meaning_ar": "يؤدي ارتفاع أسعار الغاز الطبيعي القياسية في أوروبا إلى زيادة تكاليف مدخلات الطاقة للواردات ذات الاستهلاك الكثيف وتوسيع الفارق السعري لتدفقات تجارة الغاز المسال العالمية."
   },
   "اسعار الفراخ في بورصه الدواجن اليوم الاثنين 14-9-2026": {
     "meaning": "This reports daily farm-gate and wholesale price benchmarks for poultry, reflecting immediate supply-and-demand clearing rates, feed input costs, and distribution dynamics across the local market.",
@@ -5504,6 +5516,10 @@
   "هاير مصر تضخ استثمارات جديده وتفتتح المرحله الثانيه من مجمع العاشر نوفمبر المقبل": {
     "meaning": "The expansion represents capital expenditure allocated to industrial capacity, adding a second operational phase to the manufacturing complex in 10th of Ramadan City to expand domestic production lines.",
     "meaning_ar": "يمثل هذا التوسع إنفاقاً رأسمالياً موجهاً للطاقة الصناعية، حيث يضيف مرحلة تشغيلية ثانية إلى المجمع التصنيعي في مدينة العاشر من رمضان لزيادة خطوط الإنتاج المحلي."
+  },
+  "هبوط اسهم سوفت بنك 13% مع تصاعد المخاوف بشان الذكاء الاصطناعي": {
+    "meaning": "SoftBank's market valuation reflects high portfolio concentration in technology and artificial intelligence assets, making its share price directly sensitive to sector-wide valuation adjustments.",
+    "meaning_ar": "تعكس القيمة السوقية لمجموعة سوفت بنك تركزاً استثمارياً كبيراً في أصول التكنولوجيا والذكاء الاصطناعي، مما يجعل سعر سهمها يتأثر مباشرة بإعادة تسعير وتقييم هذا القطاع."
   },
   "هبوط الطماطم .. اسعار الخضروات والفاكهه اليوم الثلاثاء 8-9-2026": {
     "meaning": "Daily price fluctuations in fresh agricultural commodities reflect immediate supply-and-demand dynamics in wholesale and retail markets, where higher incoming harvest volumes lower spot clearing prices.",
