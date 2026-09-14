@@ -99,6 +99,10 @@
     "meaning": "Foreign purchases of treasury instruments in the secondary market reflect foreign currency inflows that convert into local currency to trade existing sovereign debt paper between market participants.",
     "meaning_ar": "تُمثّل مشتريات الأجانب لأدوات الدين في السوق الثانوي تدفقات بالعملة الأجنبية يتم تحويلها إلى العملة المحلية للتداول على الأوراق المالية الحكومية القائمة بين المتعاملين."
   },
+  "24 سبتمبر.. نهايه الحق في اكتتاب زياده راسمال “هيبكو”": {
+    "meaning": "September 24 marks the ex-rights record date for existing shareholders of Hepco to participate in the company's capital increase subscription, establishing eligibility for tradable subscription rights or additional equity allocation before trading proceeds without them.",
+    "meaning_ar": "يمثل يوم 24 سبتمبر تاريخ نهاية الحق للمساهمين المقيدين في شركة \"هيبكو\" للاكتتاب في أسهم زيادة رأس المال، وهو التاريخ المحدد لأحقية تداول حقوق الاكتتاب أو تخصيص الأسهم الجديدة قبل بدء تداول السهم مجرداً من هذا الحق."
+  },
   "26.6 الف طن رصيد صومعه الحبوب بمخازن القطاع الخاص بميناء دمياط": {
     "meaning": "This figure represents the current operational grain inventory held in private sector storage facilities at Damietta Port, reflecting the active commodity buffer for logistics and supply chain distribution.",
     "meaning_ar": "يمثل هذا الرقم المخزون التشغيلي الحالي من الحبوب داخل صوامع القطاع الخاص بميناء دمياط، وهو ما يوضح حجم الاحتياطي السلعي المتاح لعمليات الخدمات اللوجستية وسلاسل التوريد."
@@ -1911,6 +1915,10 @@
     "meaning": "A state-led public offering lists an industrial plastics manufacturing company on the Egyptian Exchange, transferring an equity stake into public market trading.",
     "meaning_ar": "طرح عام تقوده الدولة يُدرج شركة لتصنيع البلاستيك في البورصة المصرية، وينقل حصة من ملكيتها إلى التداول العام في سوق الأوراق المالية."
   },
+  "الحكومه تناقش اليات اعاده هيكله الموسسات الصحفيه القوميه وتعزيز استدامتها": {
+    "meaning": "The restructuring involves auditing balance sheets, managing operational debts, and optimizing state-owned physical assets and printing operations to address structural fiscal deficits.",
+    "meaning_ar": "تشمل إعادة الهيكلة مراجعة الميزانيات العمومية ومعالجة الديون التشغيلية وتحسين استغلال الأصول العقارية والمطابع المملوكة للدولة للتعامل مع العجز المالي الهيكلي."
+  },
   "الحكومه توافق علي القيمه العادله المحدثه ل«بنك القاهره» تمهيدا للطرح بالبورصه": {
     "meaning": "Official approval of the updated asset valuation establishes the statutory pricing baseline required by regulatory authorities to execute an initial public offering on the exchange.",
     "meaning_ar": "يمثل اعتماد التقييم المحدث للأصول تحديداً للأساس السعري الإلزامي المطلوب من الجهات الرقابية لتنفيذ إجراءات الطرح العام في البورصة."
@@ -2539,6 +2547,10 @@
     "meaning": "The Russian central bank holds its benchmark interest rate at current levels, maintaining existing borrowing costs and banking liquidity conditions unchanged across the rouble-denominated debt market.",
     "meaning_ar": "يُبقي البنك المركزي الروسي سعر الفائدة القياسي عند مستوياته الحالية، مما يحافظ على تكاليف الاقتراض وأوضاع السيولة المصرفية السائدة في سوق الديون المقومة بالروبل دون تعديل."
   },
+  "المركزي الصيني يتجه لتقييد حيازات البنوك للسندات طويله الاجل": {
+    "meaning": "Central bank regulatory caps on long-term sovereign bond holdings set direct balance-sheet limits on commercial bank portfolio duration and cap aggregate institutional exposure to interest rate risk.",
+    "meaning_ar": "تضع القيود التنظيمية للبنك المركزي على حيازات السندات السيادية طويلة الأجل حدوداً مباشرة على متوسط استحقاق محافظ البنوك التجارية وتحد من انكشاف ميزانياتها العمومية على مخاطر أسعار الفائدة."
+  },
   "المركزي الصيني يرفع احتياطياته من الذهب باكبر وتيره منذ 2023": {
     "meaning": "The People's Bank of China increases the gold allocation within its foreign exchange reserves, altering the sovereign asset composition and central bank bullion holdings.",
     "meaning_ar": "يرفع بنك الشعب الصيني نسبة الذهب ضمن محفظة احتياطياته الأجنبية، مما يغير هيكل الأصول السيادية وحجم حيازات البنك المركزي من المعدن النفيس."
@@ -2890,6 +2902,10 @@
   "بروتوكول تعاون بين مصر للطيران للخدمات الجويه وEAS لتطوير فندق الترانزيت بمطار القاهره": {
     "meaning": "The protocol establishes an operational partnership between EgyptAir In-Flight Services and Egyptian Aviation Services (EAS) to upgrade and manage transit hotel infrastructure at Cairo International Airport.",
     "meaning_ar": "يحدد البروتوكول شراكة تشغيلية بين شركة مصر للطيران للخدمات الجوية والشركة المصرية لخدمات الطيران (EAS) لتطوير وإدارة البنية التحتية لفندق الترانزيت في مطار القاهرة الدولي."
+  },
+  "بروكمان: ابطاء تطوير الذكاء الاصطناعي يجب ان يقتصر علي النماذج المتقدمه": {
+    "meaning": "Regulatory proposals to segment artificial intelligence development concentrate compliance costs and operational oversight on frontier models, while leaving standard and narrow applications under baseline software standards.",
+    "meaning_ar": "تؤدي مقترحات وضع أطر تنظيمية مجزأة لتطوير الذكاء الاصطناعي إلى حصر تكاليف الامتثال والرقابة التشغيلية في النماذج الفائقة التطور، مع إبقاء التطبيقات القياسية والمحدودة خاضعة للمعايير البرمجية التقليدية."
   },
   "بريدفاست تطلق خدمه توصيل طلبات المطاعم": {
     "meaning": "This operational expansion integrates prepared food delivery into the company's existing logistics and dark-store network, placing it in direct competition with specialized food aggregators in the on-demand delivery market.",
@@ -6192,6 +6208,10 @@
   "“الشباب والرياضه” يبحث مع “Blue Ribbon” تطوير اداره وتشغيل الانديه": {
     "meaning": "The Ministry of Youth and Sports discusses public-private partnership frameworks with Blue Ribbon to outsource the management, operations, and facility services of sports clubs to a specialized private entity.",
     "meaning_ar": "تبحث وزارة الشباب والرياضة أطر الشراكة بين القطاعين العام والخاص مع شركة \"بلو ريبون\" لإسناد مهام الإدارة والتشغيل والخدمات اللوجستية للأندية الرياضية إلى كيان متخصص من القطاع الخاص."
+  },
+  "“الشمس بيراميدز” تتحول لربح 229 الف دولار في النصف الاول": {
+    "meaning": "The company's semi-annual operational revenues exceed its direct and financial expenses, shifting the net bottom line from a deficit to a positive dollar-denominated balance on the income statement.",
+    "meaning_ar": "تتجاوز الإيرادات التشغيلية نصف السنوية للشركة تكاليفها ومصروفاتها المالية المباشرة، مما يحول صافي نتائج الأعمال من عجز إلى رصيد إيجابي مقوم بالدولار في قائمة الدخل."
   },
   "“الصناعه” تبحث تطوير قطاع الاثاث وتعزيز تنافسيته محليا ودوليا": {
     "meaning": "Government initiatives to develop the furniture sector involve reviewing industrial standards, assessing raw material supply chains, and coordinating export logistics between local manufacturers and trade authorities.",
