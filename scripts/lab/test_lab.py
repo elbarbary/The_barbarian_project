@@ -32,6 +32,7 @@ import reveal as rv  # noqa: E402
 import run  # noqa: E402
 import score as sc  # noqa: E402
 import timestamp as ts  # noqa: E402
+import verify as vf  # noqa: E402
 
 
 def bars(*rows) -> list[dict]:
@@ -1127,6 +1128,167 @@ class RevealTest(unittest.TestCase):
             rv.main([str(scan), "--runs", str(runs),
                      "--commitments", str(promises), "--reveals", str(reveals)])
             self.assertFalse(reveals.exists() and any(reveals.iterdir()))
+
+
+
+def tlv(tag: int, body: bytes) -> bytes:
+    from timestamp import _length
+    return bytes([tag]) + _length(len(body)) + body
+
+
+def tstinfo(digest: str, gen: str = "20260914132902Z") -> bytes:
+    """A TSTInfo the way an authority builds one.
+
+    TSTInfo ::= SEQUENCE { version, policy, messageImprint,
+                           serialNumber, genTime, ... }
+    """
+    imprint = tlv(0x30, tlv(0x30, ts.SHA256_OID + tlv(0x05, b""))
+                  + tlv(0x04, bytes.fromhex(digest)))
+    return tlv(0x30, tlv(0x02, b"\x01")
+               + tlv(0x06, bytes.fromhex("2a03040506"))
+               + imprint + tlv(0x02, b"\x2a") + tlv(0x18, gen.encode()))
+
+
+def token_for(digest: str, gen: str = "20260914132902Z") -> str:
+    """The TSTInfo wrapped the way a CMS token nests it, base64 as published."""
+    import base64
+    nested = tlv(0x30, tlv(0x30, tlv(0x06, bytes.fromhex("2a03040507"))
+                           + tlv(0xA0, tlv(0x04, tstinfo(digest, gen)))))
+    return base64.b64encode(nested).decode()
+
+
+class TokenTest(unittest.TestCase):
+    """Reading an RFC 3161 token, checked against openssl on a real one."""
+
+    ROOT = "1a926a78f6e401469735df6c1ccdfb7957781346dc139e1cb4c7b58a585f36df"
+
+    def test_the_digest_and_the_time_come_back_out(self):
+        said = vf.token_says(token_for(self.ROOT))
+        self.assertEqual(said["digest"], self.ROOT)
+        self.assertEqual(said["genTime"], "20260914132902Z")
+
+    def test_rubbish_is_not_read_as_a_token(self):
+        for bad in ("", "not base64!!", "AAAA", "MIIB"):
+            self.assertIsNone(vf.token_says(bad))
+
+    def test_a_der_structure_that_is_not_a_tstinfo_is_refused(self):
+        import base64
+        not_one = tlv(0x30, tlv(0x04, tlv(0x30, tlv(0x02, b"\x09"))))
+        self.assertIsNone(vf.token_says(base64.b64encode(not_one).decode()))
+
+    def test_a_tstinfo_shaped_structure_of_the_wrong_version_is_refused(self):
+        # The token is found by SHAPE — the only octet string in it that
+        # parses as a TSTInfo. Without the version check that scan can settle
+        # on some other five-field sequence and report its bytes as a
+        # timestamp, which is a wrong answer given confidently.
+        import base64
+        imprint = tlv(0x30, tlv(0x30, ts.SHA256_OID + tlv(0x05, b""))
+                      + tlv(0x04, bytes.fromhex("ab" * 32)))
+        impostor = tlv(0x30, tlv(0x02, b"\x09")
+                       + tlv(0x06, bytes.fromhex("2a03040506"))
+                       + imprint + tlv(0x02, b"\x2a")
+                       + tlv(0x18, b"20260914132902Z"))
+        wrapped = tlv(0x30, tlv(0x04, impostor))
+        self.assertIsNone(vf.token_says(base64.b64encode(wrapped).decode()))
+
+
+class VerifyTest(unittest.TestCase):
+    """What a stranger can establish from the published files alone."""
+
+    def setUp(self):
+        self.document = {
+            "basisSession": "2026-01-01", "ranAt": "2026-01-01T06:00:00Z",
+            "horizons": list(fc.HORIZONS),
+            "models": {
+                "kronos": {"answered": 2, "abstained": 0, "forecasts": [
+                    {"ticker": "AAA", "returns": {"1": 1.25}},
+                    {"ticker": "BBB", "returns": {"1": -2.0}}]},
+                "drift": {"answered": 1, "abstained": 1, "forecasts": [
+                    {"ticker": "AAA", "returns": {"1": 0.1}}]}},
+        }
+        self.public, secret = cm.commitment(self.document)
+        self.document["nonces"] = secret["nonces"]
+        self.public["timestamp"] = {
+            "timestamped": True, "authority": "freetsa",
+            "token": token_for(self.public["merkleRoot"])}
+        self.reveal = rv.build(self.document, self.public, 20, "2026-02-01T06:00:00Z")
+
+    def test_a_whole_reveal_verifies(self):
+        result = vf.check(self.reveal, self.public)
+        self.assertTrue(result["recordsRebuildTheRoot"])
+        self.assertTrue(result["matchesTheCommitment"])
+        self.assertTrue(result["timestamp"]["coversThisRoot"])
+        self.assertTrue(vf.verdict(result))
+
+    def test_the_signature_is_never_claimed_to_have_been_checked(self):
+        # It is not, and a report that implied otherwise would be worse than
+        # no report: the whole value of the token is that somebody else signed
+        # it, and this reader cannot see who.
+        result = vf.check(self.reveal, self.public)
+        self.assertFalse(result["timestamp"]["signatureChecked"])
+        self.assertIn("openssl", result["timestamp"]["how"])
+
+    def test_one_edited_forecast_breaks_it(self):
+        self.reveal["records"][0]["forecast"]["returns"]["1"] = 99.0
+        result = vf.check(self.reveal, self.public)
+        self.assertFalse(result["recordsRebuildTheRoot"])
+        self.assertFalse(vf.verdict(result))
+
+    def test_a_swapped_nonce_breaks_it(self):
+        self.reveal["records"][0]["nonce"] = cm.nonce()
+        self.assertFalse(vf.verdict(vf.check(self.reveal, self.public)))
+
+    def test_a_record_removed_before_publishing_breaks_it(self):
+        self.reveal["records"].pop()
+        self.assertFalse(vf.verdict(vf.check(self.reveal, self.public)))
+
+    def test_a_reveal_swapped_for_another_session_breaks_it(self):
+        other = dict(self.public, merkleRoot="ab" * 32)
+        result = vf.check(self.reveal, other)
+        self.assertTrue(result["recordsRebuildTheRoot"])
+        self.assertFalse(result["matchesTheCommitment"])
+        self.assertFalse(vf.verdict(result))
+
+    def test_a_token_about_some_other_root_breaks_it(self):
+        # The attack the timestamp exists to stop: a genuine token, correctly
+        # signed, that is simply about a different hash.
+        self.public["timestamp"]["token"] = token_for("cd" * 32)
+        result = vf.check(self.reveal, self.public)
+        self.assertFalse(result["timestamp"]["coversThisRoot"])
+        self.assertFalse(vf.verdict(result))
+
+    def test_a_record_with_no_nonce_is_counted_and_fails(self):
+        self.reveal["records"][0].pop("nonce")
+        result = vf.check(self.reveal, self.public)
+        self.assertEqual(result["malformed"], 1)
+        self.assertFalse(vf.verdict(result))
+
+    def test_a_broken_rebuild_fails_even_with_no_commitment_to_compare(self):
+        # The rebuild is the ONE check that works on a reveal alone. If it
+        # only ever fails alongside a commitment mismatch it is not being
+        # relied on, and a reveal published without its commitment would pass.
+        self.reveal["records"][0]["forecast"]["returns"]["1"] = 99.0
+        result = vf.check(self.reveal, None)
+        self.assertFalse(result["recordsRebuildTheRoot"])
+        self.assertFalse(vf.verdict(result))
+
+    def test_a_malformed_record_fails_even_with_no_commitment(self):
+        self.reveal["records"][0].pop("nonce")
+        self.assertFalse(vf.verdict(vf.check(self.reveal, None)))
+
+    def test_without_a_commitment_it_says_what_it_could_not_check(self):
+        result = vf.check(self.reveal, None)
+        self.assertTrue(result["recordsRebuildTheRoot"])
+        self.assertIsNone(result["matchesTheCommitment"])
+        self.assertIn("only that the reveal is internally whole", result["note"])
+
+    def test_a_commitment_with_no_token_is_reported_unchecked_not_passed(self):
+        self.public["timestamp"] = {"timestamped": False}
+        result = vf.check(self.reveal, self.public)
+        self.assertFalse(result["timestamp"]["checked"])
+        # Internally whole and matching, so this is not a failure — but the
+        # report must not let a reader think a third party dated it.
+        self.assertTrue(vf.verdict(result))
 
 
 if __name__ == "__main__":

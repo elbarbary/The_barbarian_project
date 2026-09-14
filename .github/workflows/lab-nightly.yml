@@ -180,6 +180,16 @@ jobs:
           scan=$(ls -t ../work/daily_scan_*.json | grep -v fused | head -1)
           python3 scripts/lab/reveal.py "$scan"
 
+      # Then check the project's own evidence the way a stranger would, from
+      # the published files alone: rehash every revealed record, rebuild the
+      # tree, compare it with the root in the commitment, and read the
+      # timestamp token to confirm it is about THAT root. Fails the job if any
+      # of it does not hold — the point of shipping a verifier is that this
+      # project finds out first.
+      - name: Verify what has been opened
+        if: always() && inputs.dry_run != true
+        run: python3 scripts/lab/verify.py
+
       # Committed because the whole value is that it cannot be edited
       # afterwards. A forecast kept only in a CI artifact expires in ninety
       # days and proves nothing about what was believed in September.
