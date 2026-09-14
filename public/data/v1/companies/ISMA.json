@@ -16,11 +16,6 @@
  },
  "price_history": [
   {
-   "date": "2025-08-07",
-   "close": 12.67,
-   "volume": 6091476
-  },
-  {
    "date": "2025-08-10",
    "close": 12.7,
    "volume": 3587989
@@ -1314,6 +1309,11 @@
    "date": "2026-09-13",
    "close": 31.35,
    "volume": 1229401
+  },
+  {
+   "date": "2026-09-14",
+   "close": 29.83,
+   "volume": 322429
   }
  ],
  "profile": {
@@ -1325,10 +1325,10 @@
   "perf_3m": -1.8104015799868358,
   "avg_volume_30d": 815365.2333333319,
   "relative_volume_10d": 0.40041085611914007,
-  "median_volume_20d": 548496,
-  "rv20": 2.2414037659344825,
-  "normal_value_30d": 18170312.744999997,
-  "five_session_change": -3.893316983445727,
+  "median_volume_20d": 569966.5,
+  "rv20": 0.565698159453231,
+  "normal_value_30d": 19399096.905,
+  "five_session_change": -10.955223880597021,
   "history_bars": 120,
   "market_cap": 2680419365.17,
   "market_cap_source": "EGX",
