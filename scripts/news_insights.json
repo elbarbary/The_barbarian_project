@@ -527,6 +527,10 @@
     "meaning": "A block trading deal involves the execution of a high-volume share transaction at a pre-arranged price via the EGX deals market. This mechanism transfers substantial equity stakes between institutional or major investors outside the standard continuous auction order book.",
     "meaning_ar": "تُمثل صفقات الحجم الكبير تنفيذ معاملات على كميات ضخمة من الأسهم بسعر متفق عليه مسبقاً عبر سوق الصفقات في البورصة المصرية. وتعمل هذه الآلية على نقل ملكية حصص كبيرة بين كبار المستثمرين خارج دفتر أوامر التداول المستمر المعتاد."
   },
+  "emer group approves anc restructuring ahead of egx listing": {
+    "meaning": "Internal corporate restructuring reorganizes subsidiary assets, equity stakes, and operational divisions within the group to fulfill Egyptian Exchange regulatory and governance criteria for initial public offerings.",
+    "meaning_ar": "تتضمن إعادة الهيكلة المؤسسية الداخلية تعديل توزيع الأصول، وحصص الملكية، والقطاعات التشغيلية التابعة للشركة لتوفيق أوضاعها مع متطلبات الحوكمة والقواعد التنظيمية المنظمة للطرح في البورصة المصرية."
+  },
   "emerald cuts stake in ieec": {
     "meaning": "A reduction in equity holding decreases the parent company's ownership percentage and voting control in the investee entity while converting a portion of the asset value into cash or receivables on its balance sheet.",
     "meaning_ar": "يؤدي خفض الحصة إلى تقليص نسبة ملكية الشركة وحقوق التصويت التابعة لها في الكيان المستثمر فيه، مع تحويل جزء من قيمة هذا الأصل إلى نقدية أو مستحقات في ميزانيتها العمومية."
@@ -3512,6 +3516,10 @@
     "meaning": "This transaction represents capital expenditure allocation toward physical data center facilities and computational hardware in the European market.",
     "meaning_ar": "يمثل هذا التخصيص إنفاقاً رأسمالياً موجهاً لإنشاء مراكز بيانات وتجهيزات حوسبة تقنية في السوق الأوروبية."
   },
+  "جولدمان ساكس يتوقع رفع بنك انجلترا الفايده في نوفمبر": {
+    "meaning": "Central bank policy rate increases adjust the benchmark cost of borrowing across the financial system, altering debt service obligations on variable-rate credit facilities and repricing sovereign yields.",
+    "meaning_ar": "يؤدي رفع أسعار الفائدة الأساسية من قِبل البنوك المركزية إلى تعديل تكلفة الاقتراض في النظام المالي، مما يعيد تسعير عوائد أدوات الدين السيادية ويغير التزامات خدمة الديون للتسهيلات الائتمانية ذات العائد المتغير."
+  },
   "جولدن ارينا: افتتاح 4 مراكز بيع خلال العام الجاري": {
     "meaning": "The company expands its physical distribution network and direct customer touchpoints by establishing four new commercial outlets.",
     "meaning_ar": "تتوسع الشركة في شبكة التوزيع المباشر ومنافذ البيع الفعلية عبر تشغيل أربعة مراكز بيع جديدة."
@@ -4476,6 +4484,10 @@
   "عاجل.. 5.3 جنيه القيمه العادله لسهم بنك القاهره": {
     "meaning": "An equity valuation assesses Banque du Caire's underlying assets, loan book, and capital structure to establish a baseline per-share financial benchmark.",
     "meaning_ar": "يحدد التقييم المالي معياراً محاسبياً لقيمة السهم بناءً على فحص الأصول الرأسمالية والمحفظة الائتمانية وهيكل حقوق الملكية الخاص ببنك القاهرة."
+  },
+  "عاجل.. استخدام رمز (OTP) في منظومه التحقق من هويه عملاء التمويل الاستهلاكي وتمويل المشروعات خلال شهرين": {
+    "meaning": "The regulatory requirement mandates consumer finance and micro/SME lending institutions to integrate one-time password (OTP) verification protocols into their customer identity verification workflows within a two-month implementation window.",
+    "meaning_ar": "يُلزم هذا التوجيه الرقابي شركات التمويل الاستهلاكي وتمويل المشروعات بدمج رمز التحقق لمرة واحدة (OTP) ضمن إجراءات التحقق من هوية العملاء خلال مهلة تنفيذ مدتها شهران."
   },
   "عاجل.. اعتماد منهجيه دراسه القيمه العادله لبنك القاهره": {
     "meaning": "The approval of the independent financial valuation methodology establishes the formal valuation parameters and regulatory baseline required for offering shares or executing corporate capital transactions under the oversight of the Financial Regulatory Authority.",
