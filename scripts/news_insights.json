@@ -451,6 +451,10 @@
     "meaning": "Board approval of interim dividends allocates a portion of accumulated retained earnings for distribution to shareholders, which reduces the company's cash balances and book equity upon execution.",
     "meaning_ar": "يمثل اعتماد مجلس الإدارة لتوزيعات الأرباح المرحلية تخصيصاً لجزء من الأرباح المحتجزة لتوزيعها على المساهمين، مما يترتب عليه خفض الأرصدة النقدية وحقوق الملكية الدفترية للشركة عند التنفيذ."
   },
+  "egx approves edita capital increase via bonus shares": {
+    "meaning": "A capital increase via bonus shares capitalizes a portion of retained earnings or reserves into issued capital, distributing additional free shares to existing shareholders in proportion to their equity holdings while leaving the company's total net assets unchanged.",
+    "meaning_ar": "تتم زيادة رأس المال عبر الأسهم المجانية من خلال تحويل جزء من الأرباح المحتجزة أو الاحتياطيات إلى رأس المال المصدر، وتوزيع أسهم إضافية مجانية على المساهمين الحاليين بنسبة مساهمتهم، مع بقاء إجمالي صافي أصول الشركة دون تغيير."
+  },
   "egx closes sunday september 13 in red zone": {
     "meaning": "Trading on the exchange concludes with benchmark equity indices recording net declines relative to the previous session's base values, reflecting aggregate transaction prices executed below prior settlement levels across listed securities.",
     "meaning_ar": "تُنهي البورصة جلسة التداول بتسجيل مؤشرات الأسهم الرئيسية تراجعاً مقارنة بمستويات إغلاق الجلسة السابقة، وهو ما يمثل تنفيذ المعاملات عند مستويات أسعار تقل عن أسعار التسوية السابقة للأسهم المدرجة."
@@ -1810,6 +1814,10 @@
   "البورصه تغرم 6 شركات 240 الف جنيه وتمنحها 15 يوما لاستكمال القوايم الماليه": {
     "meaning": "The exchange enforces listing and disclosure rules by levying regulatory fines on non-compliant firms and setting a mandatory grace period to submit complete financial statements.",
     "meaning_ar": "تطبق البورصة قواعد القيد والإفصاح عبر فرض غرامات تنظيمية على الشركات غير الملتزمة وتحديد مهلة إلزامية لتقديم القوائم المالية المستوفاة."
+  },
+  "البورصه تقر قيد اسهم زياده راسمال ايديتا للصناعات الغذاييه": {
+    "meaning": "The listing of capital increase shares records additional equity on the stock exchange, expanding the company's total issued share count and legal capital base for trading.",
+    "meaning_ar": "يُدرج قيد أسهم زيادة رأس المال أسهماً جديدة في البورصة، مما يرفع إجمالي عدد الأسهم المصدرة وقاعدة رأس المال القانوني للشركة والمتاحة للتداول."
   },
   "البورصه تواصل تراجعها بمنتصف التعاملات.. والثلاثيني ينخفض 0.90%": {
     "meaning": "Mid-session trading reflects an excess of order volume executed on the bid side across the thirty constituent blue-chip equities, driving a net aggregate index contraction of 0.90%.",
@@ -4012,6 +4020,10 @@
     "meaning": "Government reviews of renewable energy pipelines involve monitoring public-private partnership contracts, land allocation frameworks, and grid integration schedules for solar and wind generation assets.",
     "meaning_ar": "تتضمن المتابعة الحكومية لمشروعات الطاقة المتجددة مراجعة عقود الشراكة بين القطاعين العام والخاص، وأطر تخصيص الأراضي، والجداول الزمنية لربط محطات توليد الرياح والطاقة الشمسية بالشبكة القومية للكهرباء."
   },
+  "رييس الوزراء يتابع جهود تنميه وتطوير الساحل الشمالي الغربي": {
+    "meaning": "Government coordination of North West Coast development involves state-directed infrastructure planning, utility allocation, and land management affecting contracting, real estate, and tourism operators in the region.",
+    "meaning_ar": "تشمل متابعة الحكومة لتطوير الساحل الشمالي الغربي تخطيط مشروعات البنية التحتية، وتخصيص المرافق، وإدارة الأراضي، وهو ما يرتبط بنشاط شركات المقاولات والتطوير العقاري والسياحة العاملة في المنطقة."
+  },
   "رييس الوزراء يتابع مع وزير التخطيط تطورات الاقتصاد ومستجدات برنامج التحول الاقتصادي الوطني": {
     "meaning": "These inter-ministerial meetings review public investment allocation, state budget execution, and structural reform targets under the national economic transformation framework.",
     "meaning_ar": "تستعرض هذه الاجتماعات التنسيقية وتيرة تخصيص الاستثمارات العامة، ومعدلات تنفيذ الموازنة الاستثمارية، ومستهدفات الإصلاح الهيكلي ضمن برنامج التحول الاقتصادي للدولة."
@@ -4099,6 +4111,10 @@
   "رييس الوزراء: مستمرون في تنفيذ برنامج الطروحات لتعزيز الشراكه مع القطاع الخاص": {
     "meaning": "The state privatization and listing program transfers ownership stakes in state-owned enterprises to private and institutional investors through public equity offerings and strategic sales on the EGX.",
     "meaning_ar": "يقوم برنامج الطروحات الحكومية بنقل حصص ملكية في الشركات المملوكة للدولة إلى المستثمرين من القطاع الخاص والمؤسسات عبر طروحات عامة في البورصة المصرية وصفقات لمستثمرين استراتيجيين."
+  },
+  "رييس الوزراء: نستهدف اقامه العديد من المجتمعات التنمويه والعمرانيه علي امتداد الساحل الشمالي الغربي": {
+    "meaning": "Large-scale urban development along the North West Coast activates contracting, infrastructure, and building materials procurement across master-planned land plots.",
+    "meaning_ar": "يؤدي التوسع العمراني الشامل على امتداد الساحل الشمالي الغربي إلى تفعيل أعمال المقاولات والبنية التحتية وتوريدات مواد البناء عبر المخططات العامة للأراضي."
   },
   "رييس تنميه المشروعات: المشاركه في معرض الصين تعزز فرص التعاون التجاري": {
     "meaning": "International trade fair participation connects domestic small and medium enterprises directly with foreign buyers and suppliers, establishing cross-border B2B commercial channels and supply chain networks.",
@@ -4637,6 +4653,10 @@
     "meaning": "The headline reports an opening session where bid volume exceeds ask volume across listed equities, lifting the benchmark EGX30 index by 0.63% alongside the broader market indices.",
     "meaning_ar": "يوضح الخبر تسجيل جلسة التداول الصباحية تفوقاً في أحجام عروض الشراء على عروض البيع عبر الأسهم المقيدة، مما يرفع مؤشر إيجي إكس 30 بنسبة 0.63% بالتوازي مع صعود باقي مؤشرات السوق."
   },
+  "صعود جماعي.. اين وصل سعر الريال السعودي في ختام التعاملات؟": {
+    "meaning": "An appreciation of the Saudi Riyal against the Egyptian Pound increases the domestic currency cost of imports from Saudi Arabia and raises the conversion value of remittances sent by Egyptian expatriates.",
+    "meaning_ar": "يؤدي ارتفاع سعر صرف الريال السعودي أمام الجنيه المصري إلى زيادة التكلفة بالعملة المحلية للواردات القادمة من المملكة العربية السعودية ورفع قيمة التحويلات الواردة من العاملين بالخارج عند تحويلها إلى الجنيه."
+  },
   "صفقات الدمج والاستحواذ تعيد رسم خريطه الاستثمار في مصر": {
     "meaning": "Mergers and acquisitions consolidate corporate assets, shift equity ownership structures, and alter market concentration across operating sectors.",
     "meaning_ar": "تؤدي صفقات الدمج والاستحواذ إلى تجميع الأصول المؤسسية، وتغيير هياكل الملكية، وتعديل مستويات تركز الحصص السوقية عبر مختلف القطاعات التشغيلية."
@@ -4849,6 +4869,10 @@
     "meaning": "BRICS summits serve as institutional forums where member nations, including Egypt, negotiate bilateral trade settlements in local currencies, establish joint project financing frameworks, and coordinate cross-border supply chain agreements.",
     "meaning_ar": "تُمثّل قمم مجموعة \"بريكس\" ملتقيات مؤسسية تتفاوض فيها الدول الأعضاء، ومن بينها مصر، على آليات التسوية التجارية الثنائية بالعملات المحلية، ووضع أطر التمويل المشترك للمشاريع، وتنسيق اتفاقيات سلاسل التوريد عبر الحدود."
   },
+  "غدا.. انطلاق اعمال 7 حلقات لتجميع وتداول القطن ببني سويف استعدادا لمزادات الموسم الجديد": {
+    "meaning": "Opening designated collection centers structures the physical aggregation and quality inspection of raw cotton prior to regulated public auctions, defining the primary supply chain framework for ginning and textile companies.",
+    "meaning_ar": "يمثل افتتاح مراكز التجميع تنظيماً لعمليات الفرز والتوريد الفعلي لمحصول القطن الخام قبل طرحه في المزادات العلنية المنظمة، وهو ما يحدد آلية سلاسل الإمداد الأولية لشركات الحليج والغزل."
+  },
   "غدا.. انطلاق المرحله الاولي من المبادره الحكوميه لتخفيض اسعار السلع": {
     "meaning": "Government commodity price reduction initiatives operate through coordinated arrangements between state authorities, producers, and retail networks to apply reduced pricing margins on essential consumer goods alongside logistical and customs clearance facilitation.",
     "meaning_ar": "تعمل المبادرات الحكومية لخفض الأسعار عبر آليات تنسيقية بين الجهات التنظيمية والمنتجين وشبكات التجزئة لتطبيق هوامش تسعير مخفضة على السلع الأساسية بالتزامن مع تيسيرات في سلاسل الإمداد والإفراج الجمركي."
@@ -4948,6 +4972,10 @@
   "قرار حكومي بضم وزير العمل الي عضويه المجموعه الوزاريه لرياده الاعمال": {
     "meaning": "The inclusion of the Minister of Labor coordinates workforce regulations, social insurance policies, and employment compliance frameworks directly within the inter-ministerial body governing startups and small enterprises.",
     "meaning_ar": "يدمج ضم وزير العمل السياسات التنظيمية لبيئة التشغيل وقوانين العمل والتأمينات الاجتماعية بشكل مباشر ضمن أعمال اللجنة الوزارية المعنية بتنظيم قطاع الشركات الناشئة وريادة الأعمال."
+  },
+  "قطر للطاقه تعرض نفطا للتحميل داخل مضيق هرمز عبر عطاء": {
+    "meaning": "QatarEnergy uses a competitive tender mechanism to allocate spot crude cargoes, setting delivery and loading operations at designated maritime locations inside the Strait of Hormuz.",
+    "meaning_ar": "تعتمد قطر للطاقة آلية العطاءات التنافسية لتخصيص شحنات النفط الفورية، مع تحديد مواقع عمليات التحميل والتسليم في مناطق بحرية داخل مضيق هرمز."
   },
   "قفزه جديده.. اين استقر سعر اليورو في ختام تعاملات اليوم؟": {
     "meaning": "A rise in the exchange rate of the euro against the Egyptian pound increases the local-currency cost of European imports and adjusts the valuation of euro-denominated liabilities and revenues on corporate balance sheets.",
