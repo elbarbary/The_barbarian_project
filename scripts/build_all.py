@@ -126,6 +126,14 @@ STEPS = [
     # the guard entirely, so the validate pass never once checked whether the
     # archive it was validating was stale.
     ("Staleness guard", "build_staleness_guard.py", True),
+    # Which companies the exchange has delisted, read from its own final
+    # notices in the archive just harvested. Report only: Market, Signals,
+    # Unusual volume and Calendar each ask `listing_status` themselves, so no
+    # ordering can let one of them miss a notice. This is where the list, and
+    # any notice the exchange's later behaviour disputes, shows in the log —
+    # on 13 Sep 2026 fourteen directory companies had been delisted for years
+    # and nothing in any build said so.
+    ("Listing status", "listing_status.py", True),
     # Immediately after Market, because Market rebuilds `companies/` from
     # scratch on every run — `shutil.rmtree` then rewrite — and this is an
     # enrichment applied on top of it. It was run once by hand in August and

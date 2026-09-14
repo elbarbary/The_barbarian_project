@@ -24,6 +24,14 @@ entirely, because counting does not need one).
     app knows without any of this. What is worth flagging is a company that
     files every five days and has not filed in six weeks: quiet *for it*.
 
+    The price gate that replaced `tradable` let the delistings back in anyway:
+    the vendor prices over-the-counter transfers, so a share delisted in 2021
+    that changed hands this week looks "still trading". Fourteen of them
+    flickered on and off this list for weeks — NCGC "silent 1,917 days" — and
+    the website's headline card leads with the longest silence. A company the
+    exchange delisted is not quiet; it is `delisted`, with the notice that did
+    it, and nothing below forecasts a filing from it.
+
 **3. First of its kind in years.**
     A company's first capital increase since 2014, its first dividend in six
     years. The type comes from `filing_types.classify_rules` — published
@@ -66,6 +74,7 @@ import re
 import statistics
 
 import filing_types as ft
+import listing_status
 import merge_egx_financials as filed
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
@@ -165,12 +174,15 @@ def load_filings() -> dict[str, list[dict]]:
     }
 
 
-def directory() -> dict[str, dict]:
+def directory(key: str = "companies") -> dict[str, dict]:
+    """ticker → row, from the directory's listed companies — or, with
+    `key="delisted"`, from the shares the market build left out because the
+    exchange delisted them."""
     try:
         doc = json.loads(DIRECTORY.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return {}
-    return {c["ticker"]: c for c in doc.get("companies", []) if c.get("ticker")}
+    return {c["ticker"]: c for c in doc.get(key) or [] if c.get("ticker")}
 
 
 def last_prices() -> dict[str, str]:
@@ -546,18 +558,27 @@ def profile(ticker: str, filings: list[dict]) -> dict:
 # --------------------------------------------------------------------- build
 
 
-def build(today: datetime.date) -> tuple[dict[str, dict], dict]:
+def build(today: datetime.date,
+          delisted: dict[str, dict] | None = None) -> tuple[dict[str, dict], dict]:
     known = directory()
+    # The market build leaves a delisted share out of the directory and names
+    # it here instead. Its signals document is still rewritten — as delisted —
+    # because the one the last run left behind forecasts its next results.
+    left_out = directory("delisted")
     archive = load_filings()
     due = expected_results(today)
     live = still_trading(last_prices())
+    # Defaults to the exchange's own notices, so no caller can forget to ask.
+    gone = listing_status.delisted() if delisted is None else delisted
 
     per_company: dict[str, dict] = {}
     recent_firsts: list[dict] = []
     quiet_now: list[dict] = []
+    delisted_now: list[dict] = []
 
     for ticker, filings in archive.items():
-        company = known.get(ticker)
+        removed = gone.get(ticker)
+        company = known.get(ticker) or (left_out.get(ticker) if removed else None)
         if not company:
             continue
         breaks = streak_breaks(ticker, today)
@@ -565,8 +586,11 @@ def build(today: datetime.date) -> tuple[dict[str, dict], dict]:
         # Silence is only a signal for a company somebody can still trade. For
         # one that has stopped trading it is the delisting, which the price
         # series already says. An explicit `tradable: false` still excludes;
-        # an absent one is no longer read as a no.
-        traded = ticker in live and company.get("tradable") is not False
+        # an absent one is no longer read as a no. And a delisting the
+        # exchange published excludes whatever the price series says, because
+        # the series carries over-the-counter transfers.
+        traded = (ticker in live and company.get("tradable") is not False
+                  and not removed)
         hush = silence(filings, today) if traded else None
         signals = {
             "ticker": ticker,
@@ -574,9 +598,13 @@ def build(today: datetime.date) -> tuple[dict[str, dict], dict]:
             "streaks": breaks,
             "firsts": kinds,
             "quiet": hush,
-            "results_due": due.get(ticker) or [],
+            # A delisted company files nothing with the exchange; a window for
+            # its next results is a date that cannot come.
+            "results_due": [] if removed else (due.get(ticker) or []),
             "profile": profile(ticker, filings),
         }
+        if removed:
+            signals["delisted"] = removed
         per_company[ticker] = signals
 
         name = company.get("name_en") or ticker
@@ -587,17 +615,26 @@ def build(today: datetime.date) -> tuple[dict[str, dict], dict]:
             recent_firsts.append({"ticker": ticker, "name": name, "name_ar": name_ar, **row})
         if hush:
             quiet_now.append({"ticker": ticker, "name": name, "name_ar": name_ar, **hush})
+        if removed:
+            delisted_now.append({"ticker": ticker, "name": name, "name_ar": name_ar,
+                                 **removed})
 
     recent_firsts.sort(
         key=lambda r: r.get("date") or r.get("period_end") or "", reverse=True
     )
     quiet_now.sort(key=lambda r: -r["silent_days"])
+    delisted_now.sort(key=lambda r: (r["delisted_on"], r["ticker"]), reverse=True)
 
     index = {
         "generated": today.isoformat(),
         "source": "EGX filings and filed net profit — counted, not judged",
         "firsts": recent_firsts[:120],
         "quiet": quiet_now,
+        # The delisted companies the price source still quotes — under the
+        # directory's `delisted`, or in its rows until the next market build —
+        # each with the notice that did it, so they are named for what they
+        # are rather than left off without a word.
+        "delisted": delisted_now,
         "companies": len(per_company),
     }
     return per_company, index
@@ -641,6 +678,10 @@ def main() -> int:
     print(f"   {kinds} first-in-{GAP_YEARS}-years filings")
     print(f"   {len(index['quiet'])} tradable companies quiet against their own rhythm")
     print(f"   {due} results filings due, each as a window")
+    if index["delisted"]:
+        print(f"   {len(index['delisted'])} companies delisted by the exchange, "
+              f"so neither quiet nor due: "
+              f"{', '.join(sorted(r['ticker'] for r in index['delisted']))}")
     if args.check:
         return 0
     write(per_company, index)

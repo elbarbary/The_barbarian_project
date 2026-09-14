@@ -28,6 +28,7 @@ import zoneinfo
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
+import listing_status  # noqa: E402
 import mubasher_statements  # noqa: E402
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
@@ -750,8 +751,32 @@ def previous_close(
     return None
 
 
+def delisted_shares() -> dict[str, dict]:
+    """The exchange's final delisting notices, or nothing if they cannot be read.
+
+    Nothing rather than a failure, because this build is the price path: a
+    fault reading the notice archive must cost this run its exclusions, loudly,
+    and not the session its prices.
+    """
+    try:
+        return listing_status.delisted()
+    except Exception as error:                                # noqa: BLE001
+        print(f"::warning title=Listing status unavailable::{error} — delisted "
+              "shares are not excluded from this run")
+        return {}
+
+
+def published_tickers() -> set[str]:
+    """The tickers the published directory lists right now."""
+    try:
+        doc = json.loads((API / "companies.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return set()
+    return {row.get("ticker") for row in doc.get("companies") or [] if row.get("ticker")}
+
+
 def build(scan_path: pathlib.Path, write_fixtures: bool,
-          quotes_only: bool = False) -> int:
+          quotes_only: bool = False, delisted: dict[str, dict] | None = None) -> int:
     scan = json.loads(scan_path.read_text(encoding="utf-8"))
     records = scan["records"]
 
@@ -806,11 +831,50 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
     companies, stocks, details = [], {}, {}
     skipped = 0
 
+    # Shares the exchange has delisted are not listings, whatever the scan says.
+    #
+    # The vendor keeps quoting a share after the exchange removes it, because
+    # it still changes hands on the over-the-counter transfer system — and this
+    # build treats the scan as the list of listed companies. So on 13 September
+    # 2026 the directory carried fourteen companies the exchange had delisted
+    # between 2019 and 2023, with market values, P/Es and ratios as if they
+    # traded: Nile Cotton Ginning at EGP 2.65bn, delisted in June 2021 (NewsID
+    # 211501), priced at the EGP 50 buyout offer. `listing_status` reads the
+    # exchange's own final notices, and a share one names gets no directory
+    # row, no company document and no quote. It is listed under `delisted`
+    # instead, with the notice that did it, so it is named for what it is
+    # rather than dropped without a word.
+    #
+    # The price store keeps its bars: they are what the vendor published, and
+    # the unusual-volume build refuses the ones dated after the notice itself.
+    gone = delisted_shares() if delisted is None else delisted
+    if quotes_only:
+        # The fast path owns `market.json` and not the directory, so a share
+        # leaves the quotes only once the full build has taken it out of the
+        # directory. Otherwise a notice harvested between the two runs would
+        # leave a directory row with no quote behind it until the next build.
+        listed_now = published_tickers()
+        gone = {t: record for t, record in gone.items() if t not in listed_now}
+    removed: list[dict] = []
+
     for r in records:
         ticker = r.get("ticker")
         close = clean(r.get("close"))
         if not ticker or close is None or not TICKER.fullmatch(ticker):
             skipped += 1
+            continue
+        if ticker in gone:
+            record = gone[ticker]
+            removed.append({
+                "ticker": ticker,
+                "name_en": r.get("company") or ticker,
+                "name_ar": ARABIC.get(ticker),
+                "isin": record.get("isin"),
+                "delisted_on": record["delisted_on"],
+                "news_id": record["news_id"],
+                "link": record["link"],
+                "kind": record.get("kind"),
+            })
             continue
 
         # Capped, because these files ship inside the app binary. Mubasher
@@ -1044,6 +1108,7 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
         details[ticker] = detail
 
     companies.sort(key=lambda c: c["ticker"])
+    removed.sort(key=lambda c: c["ticker"])
 
     def write(path: pathlib.Path, payload: dict) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -1055,6 +1120,10 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
     directory = {
         "updated_at": scan["asOf"],
         "source": "EGX daily scan",
+        # Before `companies`, which `apply_company_ratios.relabel` always moves
+        # to the end — so the key order, and the bytes, do not change between
+        # this build and the steps that rewrite the file after it.
+        "delisted": removed,
         "companies": companies,
     }
     # Whether these prices are closing prices or a mid-session reading.
@@ -1148,6 +1217,9 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
             write(root / "market.json", snapshot)
         print(f"scan     {scan_path.name}  ({session})")
         print(f"quotes   {len(stocks)} written, is_close={snapshot['is_close']}")
+        if removed:
+            print(f"delisted {len(removed)} left out: "
+                  f"{', '.join(r['ticker'] for r in removed)}")
         print("kept     companies.json and companies/ exactly as published")
         return 0
 
@@ -1171,6 +1243,9 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
     print(f"profile  {with_profile} with extra fields ({fields} values total)")
     if skipped:
         print(f"skipped  {skipped} records with no usable ticker or close")
+    if removed:
+        print(f"delisted {len(removed)} left out, each on the exchange's final notice: "
+              + ", ".join(f"{r['ticker']} ({r['news_id']})" for r in removed))
     print(f"arabic   {sum(1 for c in companies if c['name_ar'])} names")
     sectors = sorted({c['sector'] for c in companies if c['sector']})
     print(f"sectors  {len(sectors)}: {', '.join(sectors[:8])}…")

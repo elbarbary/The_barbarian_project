@@ -28,6 +28,16 @@ The median EXCLUDES the session being judged, or a share that trades once a
 month scores itself against a window it dominates. Sessions with too few
 observations behind them are not published at all: a ratio against four days
 is arithmetic, not a normal.
+
+**Not a session after the exchange delisted the share.** The price store keeps
+whatever the vendor keeps, and the vendor keeps over-the-counter transfers of
+shares the exchange removed years ago. On 13 September 2026 this published
+Nile Cotton Ginning at 8.4 times its usual volume — 800 shares, at the EGP 50
+buyout price, of a company delisted in June 2021 (NewsID 211501). That is not
+an unusual session on the exchange; it is not a session on the exchange.
+So a share's bars dated on or after its final delisting notice are dropped
+from its series before anything is judged — as sessions and as the window
+behind them.
 """
 
 from __future__ import annotations
@@ -38,6 +48,8 @@ import datetime
 import json
 import pathlib
 import statistics
+
+import listing_status
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 BARS = REPO / "data-source" / "prices"
@@ -100,9 +112,16 @@ def unusual(rows: list[dict], threshold: float = THRESHOLD) -> list[dict]:
     return found
 
 
-def build(bars: dict[str, list[dict]], sessions: int = SESSIONS) -> dict:
+def build(bars: dict[str, list[dict]], sessions: int = SESSIONS,
+          delisted: dict[str, dict] | None = None) -> dict:
+    # Defaults to the exchange's own notices, so no caller can forget to ask.
+    gone = listing_status.delisted() if delisted is None else delisted
     by_day: dict[str, list[dict]] = collections.defaultdict(list)
     for ticker, rows in bars.items():
+        record = gone.get(ticker)
+        if record:
+            rows = [r for r in rows
+                    if not listing_status.after_delisting(record, r.get("date"))]
         for event in unusual(rows):
             by_day[event.pop("date")].append({"ticker": ticker, **event})
 

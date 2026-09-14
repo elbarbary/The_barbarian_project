@@ -51,6 +51,7 @@ import re
 import build_signals
 import egx_dates
 import filing_types as ft
+import listing_status
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 FILINGS = REPO / "data-source" / "egx-beta" / "filings"
@@ -267,7 +268,8 @@ def expected_title_ar(name: str, label: str) -> str:
 
 
 def expected_rows(today: datetime.date, known: dict[str, str],
-                  arabic: dict[str, str] | None = None) -> list[dict]:
+                  arabic: dict[str, str] | None = None,
+                  delisted: dict[str, dict] | None = None) -> list[dict]:
     """When each company's next results are due — a window, plainly labelled.
 
     This is the one thing on the calendar that the exchange has not published.
@@ -280,6 +282,14 @@ def expected_rows(today: datetime.date, known: dict[str, str],
     a date somebody filed.
 
     It is not, and must not become, a statement about the figures themselves.
+
+    And never for a company the exchange has delisted. The rhythm survives
+    the listing — Nile Cotton Ginning filed its nine-month figures in the same
+    week of November for seven years — so on 13 September 2026 this printed
+    "Nile Cotton Ginning — 9M results expected" for a company whose shares left
+    the exchange in June 2021 (NewsID 211501). A delisted company files nothing
+    with the exchange; the window is a date that cannot come. `delisted`
+    defaults to the exchange's own notices, so no caller can forget to ask.
     """
     # Read from what the Signals step published rather than recomputed here:
     # the arithmetic is the same, and doing it twice means parsing the whole
@@ -287,10 +297,15 @@ def expected_rows(today: datetime.date, known: dict[str, str],
     due_by_ticker = build_signals.published_results_due()
     if not due_by_ticker:
         due_by_ticker = build_signals.expected_results(today)
+    # Checked here as well as in Signals, because neither source above is
+    # guaranteed to have been: a Signals step that failed leaves an earlier
+    # run's documents in place, and the fallback computes windows with no
+    # listing check of its own.
+    gone = listing_status.delisted() if delisted is None else delisted
 
     rows = []
     for ticker, due in due_by_ticker.items():
-        if ticker not in known:
+        if ticker not in known or ticker in gone:
             continue
         for entry in due:
             rows.append({
