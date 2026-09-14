@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-14T10:52:25.649380+00:00",
+  "builtAt": "2026-09-14T12:57:59.478633+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 192310,
-    "withoutTickerInHeading": 36170,
+    "items": 192326,
+    "withoutTickerInHeading": 36175,
     "tickerNotInThisDirectory": 29402,
-    "attributedToAnIssuer": 126738,
+    "attributedToAnIssuer": 126749,
     "months": [
       {
         "month": "2005-01",
@@ -1831,8 +1831,8 @@
       {
         "month": "2026-09",
         "harvested": "2026-09-14",
-        "items": 421,
-        "expected": 421,
+        "items": 437,
+        "expected": 437,
         "status": "complete"
       }
     ],
@@ -1840,7 +1840,7 @@
   },
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
-    "items": 614,
+    "items": 615,
     "failures": {}
   },
   "issuers": [
@@ -2162,9 +2162,9 @@
     },
     {
       "ticker": "AMER",
-      "egxFilingCount": 795,
-      "latestEgxFilingId": "294407",
-      "latestEgxFilingAt": "2026-09-07T11:09:34",
+      "egxFilingCount": 796,
+      "latestEgxFilingId": "294641",
+      "latestEgxFilingAt": "2026-09-14T13:16:43",
       "candidateIssuerWebsite": "https://www.amer-group.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AMER/profile",
       "websiteStatus": {
@@ -2386,9 +2386,9 @@
     },
     {
       "ticker": "BONY",
-      "egxFilingCount": 51,
-      "latestEgxFilingId": "293346",
-      "latestEgxFilingAt": "2026-08-16T15:45:31",
+      "egxFilingCount": 52,
+      "latestEgxFilingId": "294648",
+      "latestEgxFilingAt": "2026-09-14T15:30:55",
       "candidateIssuerWebsite": "https://www.bonyanegypt.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/BONY/profile",
       "websiteStatus": null,
@@ -2792,9 +2792,9 @@
     },
     {
       "ticker": "EFID",
-      "egxFilingCount": 608,
-      "latestEgxFilingId": "294207",
-      "latestEgxFilingAt": "2026-09-01T10:23:15",
+      "egxFilingCount": 610,
+      "latestEgxFilingId": "294649",
+      "latestEgxFilingAt": "2026-09-14T15:35:14",
       "candidateIssuerWebsite": "https://www.edita.com.eg/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EFID/profile",
       "websiteStatus": null,
@@ -2802,9 +2802,9 @@
     },
     {
       "ticker": "EFIH",
-      "egxFilingCount": 327,
-      "latestEgxFilingId": "294624",
-      "latestEgxFilingAt": "2026-09-14T11:25:40",
+      "egxFilingCount": 328,
+      "latestEgxFilingId": "294645",
+      "latestEgxFilingAt": "2026-09-14T15:02:31",
       "candidateIssuerWebsite": "https://www.efinanceinvestment.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EFIH/profile",
       "websiteStatus": null,
@@ -2842,9 +2842,9 @@
     },
     {
       "ticker": "EGCH",
-      "egxFilingCount": 1041,
-      "latestEgxFilingId": "294564",
-      "latestEgxFilingAt": "2026-09-10T12:53:40",
+      "egxFilingCount": 1042,
+      "latestEgxFilingId": "294646",
+      "latestEgxFilingAt": "2026-09-14T15:17:23",
       "candidateIssuerWebsite": "https://www.kimaegypt.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EGCH/profile",
       "websiteStatus": null,
@@ -3302,9 +3302,9 @@
     },
     {
       "ticker": "HBCO",
-      "egxFilingCount": 78,
-      "latestEgxFilingId": "294576",
-      "latestEgxFilingAt": "2026-09-13T10:47:14",
+      "egxFilingCount": 79,
+      "latestEgxFilingId": "294642",
+      "latestEgxFilingAt": "2026-09-14T13:22:03",
       "candidateIssuerWebsite": "https://www.heibco.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/HBCO/profile",
       "websiteStatus": null,
@@ -3548,9 +3548,9 @@
     },
     {
       "ticker": "KWIN",
-      "egxFilingCount": 559,
-      "latestEgxFilingId": "294525",
-      "latestEgxFilingAt": "2026-09-09T15:34:16",
+      "egxFilingCount": 560,
+      "latestEgxFilingId": "294640",
+      "latestEgxFilingAt": "2026-09-14T13:13:52",
       "candidateIssuerWebsite": "https://www.caironational.org/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/KWIN/profile",
       "websiteStatus": null,
@@ -3700,9 +3700,9 @@
     },
     {
       "ticker": "MFSC",
-      "egxFilingCount": 530,
-      "latestEgxFilingId": "294390",
-      "latestEgxFilingAt": "2026-09-07T09:32:49",
+      "egxFilingCount": 531,
+      "latestEgxFilingId": "294638",
+      "latestEgxFilingAt": "2026-09-14T13:04:16",
       "candidateIssuerWebsite": "https://www.efsco.net/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MFSC/profile",
       "websiteStatus": null,
@@ -4312,9 +4312,9 @@
     },
     {
       "ticker": "RREI",
-      "egxFilingCount": 416,
-      "latestEgxFilingId": "294581",
-      "latestEgxFilingAt": "2026-09-13T11:17:52",
+      "egxFilingCount": 417,
+      "latestEgxFilingId": "294639",
+      "latestEgxFilingAt": "2026-09-14T13:10:16",
       "candidateIssuerWebsite": "https://www.arabianrealestate-aleco.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/RREI/profile",
       "websiteStatus": null,
@@ -4392,9 +4392,9 @@
     },
     {
       "ticker": "SDTI",
-      "egxFilingCount": 484,
-      "latestEgxFilingId": "294408",
-      "latestEgxFilingAt": "2026-09-07T11:12:16",
+      "egxFilingCount": 485,
+      "latestEgxFilingId": "294644",
+      "latestEgxFilingAt": "2026-09-14T14:55:14",
       "candidateIssuerWebsite": "https://www.sharmdreams.info/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SDTI/profile",
       "websiteStatus": null,
