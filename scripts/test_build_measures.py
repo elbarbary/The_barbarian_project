@@ -243,7 +243,8 @@ class SourceKeyTest(unittest.TestCase):
         # empties a column, and that must stop the build rather than publish
         # a measurement no reader can ever use.
         doc = {"rows": [{"ticker": "AAA"}, {"ticker": "BBB"}],
-               "coverage": {"relative_volume_20": 2, "quiet_days": 0}}
+               "coverage": {"relative_volume_20": 2, "quiet_days": 0},
+               "breadth": bm.breadth([{"ticker": "AAA"}, {"ticker": "BBB"}])}
         keep = bm.build
         bm.build = lambda: doc
         try:
@@ -255,7 +256,8 @@ class SourceKeyTest(unittest.TestCase):
 
     def test_a_column_that_is_merely_rare_still_builds(self):
         doc = {"rows": [{"ticker": "AAA"}, {"ticker": "BBB"}],
-               "coverage": {"relative_volume_20": 2, "quiet_days": 1}}
+               "coverage": {"relative_volume_20": 2, "quiet_days": 1},
+               "breadth": bm.breadth([{"ticker": "AAA"}, {"ticker": "BBB"}])}
         keep = bm.build
         bm.build = lambda: doc
         try:
@@ -275,6 +277,65 @@ class SourceKeyTest(unittest.TestCase):
                  if count == 0]
         self.assertEqual(empty, [],
                          f"published columns no company can answer: {empty}")
+
+
+class BreadthTest(unittest.TestCase):
+    """The one figure Home leads with. It describes; it does not select."""
+
+    def rows(self, *triples):
+        return [{"ticker": t, "volume": v, "change_1": c} for t, v, c in triples]
+
+    def test_a_company_that_found_no_buyer_is_not_a_company_that_held_steady(self):
+        # The distinction the whole block exists for. Folding these together
+        # reports a share nobody would buy as a share that was stable, and on
+        # this exchange that is most of what a newcomer needs to understand.
+        out = bm.breadth(self.rows(("AAA", 0, 0.0), ("BBB", 1000, 0.0)))
+        self.assertEqual(out["idle"], 1)
+        self.assertEqual(out["level"], 1)
+
+    def test_every_listing_lands_in_exactly_one_state(self):
+        out = bm.breadth(self.rows(
+            ("A", 10, 1.5), ("B", 10, -2.0), ("C", 10, 0.0),
+            ("D", 0, 0.0), ("E", None, 1.0), ("F", 10, None)))
+        self.assertEqual(out["listed"], 6)
+        self.assertEqual(out["rose"] + out["fell"] + out["level"]
+                         + out["idle"] + out["unmeasured"], 6)
+        self.assertEqual(out["traded"], 3)
+
+    def test_a_missing_volume_is_a_gap_not_a_quiet_company(self):
+        out = bm.breadth(self.rows(("AAA", None, -1.0)))
+        self.assertEqual(out["unmeasured"], 1)
+        self.assertEqual(out["idle"], 0)
+
+    def test_a_traded_company_with_no_change_figure_is_not_counted_as_level(self):
+        out = bm.breadth(self.rows(("AAA", 500, None)))
+        self.assertEqual(out["level"], 0)
+        self.assertEqual(out["unmeasured"], 1)
+
+    def test_an_empty_market_is_zero_and_not_an_error(self):
+        out = bm.breadth([])
+        self.assertEqual(out["listed"], 0)
+        self.assertEqual(out["traded"], 0)
+
+    def test_the_published_breadth_accounts_for_the_whole_market(self):
+        try:
+            table = json.loads(bm.OUT.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            self.skipTest("no published measures table")
+        b = table.get("breadth")
+        self.assertIsNotNone(b, "the published table carries no breadth block")
+        self.assertEqual(
+            b["rose"] + b["fell"] + b["level"] + b["idle"] + b["unmeasured"],
+            b["listed"])
+        self.assertEqual(b["listed"], len(table["rows"]))
+
+    def test_breadth_names_no_company(self):
+        # It is allowed to lead the page because it selects nothing. The day
+        # it carries a ticker it has become a different kind of statement.
+        out = bm.breadth(self.rows(("COMI", 10, 4.0), ("HRHO", 0, 0.0)))
+        blob = json.dumps(out)
+        self.assertNotIn("COMI", blob)
+        self.assertNotIn("HRHO", blob)
 
 
 class ProvenanceTest(unittest.TestCase):

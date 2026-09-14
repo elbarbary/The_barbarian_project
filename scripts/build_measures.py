@@ -398,6 +398,69 @@ def row_for(ticker: str, session: dict, directory: dict,
     return row
 
 
+def breadth(rows: list[dict]) -> dict:
+    """What the whole market did this session, with nothing left over.
+
+    WHY THIS IS THE ONE FIGURE THE HOME SCREEN CAN LEAD WITH
+    --------------------------------------------------------
+    It describes the market rather than selecting from it. "168 of 269 fell"
+    picks no company, ranks nothing, and cannot be read as a suggestion —
+    and it is genuinely the first thing a reader wants, because it says
+    whether what they are about to look at is an isolated move or the tide.
+
+    EXHAUSTIVE AND MUTUALLY EXCLUSIVE, OR IT IS A LIE
+    ------------------------------------------------
+    Every listing lands in exactly one bucket and the buckets sum to the
+    market. That is checked here rather than trusted, because the failure is
+    silent and specific: 38 companies did not trade at all today and 9 traded
+    and closed level. Folding those together into "47 unchanged" would tell a
+    reader that 47 companies were steady, when 38 of them had no buyer. On
+    this exchange that distinction is most of what a newcomer needs to
+    understand, and it is exactly the one a tidier summary throws away.
+
+    A company with no volume figure at all is its own bucket too. It is not
+    evidence of a quiet day; it is evidence of a gap in what we hold.
+    """
+    rose = fell = level = idle = unmeasured = 0
+    for row in rows:
+        volume = row.get("volume")
+        change = row.get("change_1")
+        if not isinstance(volume, (int, float)):
+            unmeasured += 1
+        elif volume <= 0:
+            idle += 1
+        elif not isinstance(change, (int, float)):
+            unmeasured += 1
+        elif change > 0:
+            rose += 1
+        elif change < 0:
+            fell += 1
+        else:
+            level += 1
+
+    out = {
+        "listed": len(rows),
+        "rose": rose,
+        "fell": fell,
+        "level": level,
+        "idle": idle,
+        "unmeasured": unmeasured,
+        "traded": rose + fell + level,
+        "what": "Every listing in exactly one of five states. `level` traded "
+                "and closed where it opened the day; `idle` found no buyer at "
+                "all; `unmeasured` is a gap in what this project holds, not a "
+                "quiet company. Folding the last two together would report a "
+                "company nobody would buy as a company that held steady.",
+    }
+    counted = rose + fell + level + idle + unmeasured
+    if counted != len(rows):
+        raise SystemExit(
+            f"measures: breadth counted {counted} of {len(rows)} listings. "
+            "These states have to be exhaustive and exclusive or the summary "
+            "is arithmetic that does not describe the market.")
+    return out
+
+
 def coverage(rows: list[dict]) -> dict:
     """How many companies can answer each column.
 
@@ -447,6 +510,7 @@ def build(today: datetime.date | None = None) -> dict:
                     "الشركات تظهر وكم عددها.",
         "columns": COLUMNS,
         "coverage": coverage(rows),
+        "breadth": breadth(rows),
         "companies": len(rows),
         "rows": rows,
     }
@@ -462,6 +526,10 @@ def main(argv=None) -> int:
     rows = doc["rows"]
     counts = doc["coverage"]
     print(f"   {len(rows)} companies, {len(COLUMNS) - 1} measurements")
+    b = doc["breadth"]
+    print(f"   session: {b['rose']} rose, {b['fell']} fell, {b['level']} "
+          f"traded level, {b['idle']} found no buyer"
+          + (f", {b['unmeasured']} not measured" if b["unmeasured"] else ""))
     for name in ("relative_volume_20", "market_cap", "revenue",
                  "sessions_since_filing", "net_income_growth"):
         if name in counts:
