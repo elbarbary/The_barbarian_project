@@ -1,8 +1,8 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-14T14:40:46Z",
+ "generated": "2026-09-14T15:20:33Z",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
- "asOf": "2026-09-14T14:40:46+00:00",
+ "asOf": "2026-09-14T15:20:32+00:00",
  "basis": "A link is one listed company's filed stake in another, at the level the last form printed. Percentages belong to one company each and are never added together; sector totals are the market value of the stakes, which is money and can be.",
  "basisAr": "كل خط حصة مُفصح عنها لشركة مقيدة في شركة مقيدة أخرى، بالنسبة التي أثبتها آخر نموذج. النسب تخص شركة واحدة ولا تُجمع؛ إجماليات القطاعات بالقيمة السوقية للحصص، وهي مبالغ تُجمع.",
  "linkCount": 37,
@@ -1090,8 +1090,8 @@
   {
    "id": "Finance",
    "nameAr": "Finance",
-   "companies": 11,
-   "cap": 57774589365.21,
+   "companies": 9,
+   "cap": 51339207695.21,
    "holds": 2,
    "heldBy": 3
   },
