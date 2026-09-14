@@ -87,6 +87,49 @@ function stream(seed) {
   return () => (((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296));
 }
 
+/* The demo's measurement table, in the shape the real one publishes.
+ *
+ * Same columns, same three kinds of absence: a column a company cannot answer
+ * is left OUT of the row rather than written as null, exactly as the builder
+ * does, so the "could not be judged" count in the demo means what it means on
+ * the real table. A demo where everything is measured would teach a reader
+ * that the third count is always nought.
+ */
+function demoMeasures(companies, rand) {
+  const rows = companies.map((c, i) => {
+    const row = {
+      ticker: c.ticker,
+      sector: c.sector,
+      close: c.close,
+      change_1: c.pct,
+      // A few of the thirty-two find no buyer, which is the state the real
+      // exchange puts forty companies in on an ordinary day.
+      volume: i % 9 === 4 ? 0 : Math.round(1000 + rand() * 900000),
+      relative_volume_20: c.rv,
+      change_5: Math.round((rand() * 14 - 7) * 100) / 100,
+      change_20: Math.round((rand() * 26 - 13) * 100) / 100,
+      market_cap: c.cap,
+      sessions_since_filing: Math.round(rand() * 44),
+    };
+    // Absences on purpose, and of both kinds: some companies have no profit
+    // figure at all, and some have one that is nought.
+    if (i % 4 !== 1) row.net_income_growth = Math.round((rand() * 60 - 25) * 10) / 10;
+    if (i % 5 === 2) row.streak_break = 'first_loss';
+    if (i % 3 === 0) row.results_due_in_days = Math.round(rand() * 90);
+    return row;
+  });
+  return {
+    schemaVersion: 1,
+    market_date: '2026-08-26',
+    is_close: true,
+    demo: true,
+    rows,
+    coverage: Object.fromEntries(
+      [...new Set(rows.flatMap((r) => Object.keys(r)))]
+        .map((name) => [name, rows.filter((r) => r[name] !== undefined).length])),
+  };
+}
+
 export function demo() {
   const rand = stream(20260828);
   const companies = SECTORS.flatMap((sector, s) =>
@@ -198,6 +241,15 @@ export function demo() {
 
   return {
     demo: true, companies, series, fins, indices, readNow,
+    // The measurement table Home's questions are answered from, in the demo's
+    // own invented companies. Without it a signed-out visitor met a page whose
+    // whole subject is asking the market a question, and no market to ask —
+    // which is the one screen a first-time reader is guaranteed to see.
+    //
+    // Every column a starter question names is here, so every question has a
+    // real answer rather than an empty one. The tickers are DEMO01..DEMO32 and
+    // no figure belongs to a real issuer.
+    measures: demoMeasures(companies, rand),
     marketDate: '2026-08-26', generatedAt: '2026-08-27 11:48 UTC', dataVersion: 'demo',
     isClose: true, capturedAt: '2026-08-27T11:48:00Z',
     // Two crossings, so the block has a shape before anyone signs in: one
@@ -614,6 +666,24 @@ export async function indices() {
       tickers: (i.tickers || []).filter((t) => typeof t === 'string'),
     })),
   };
+}
+
+/** The measurement table Home's questions are answered from.
+ *
+ * 283 companies against 36 purely factual columns, plus the session's own
+ * breadth. It is the only document the rule engine reads: a reader's question
+ * is evaluated against this, in their browser, and never on a server — which
+ * is what keeps the judgment theirs.
+ */
+export async function measures() {
+  return doc('measures.json');
+}
+
+/** How much evidence the model arena has, for the one honest sentence Home
+ *  says about it. Public: it names no security, and a record a stranger
+ *  cannot fetch is not a record anybody can check. */
+export async function arena() {
+  return doc('research/leaderboard.json');
 }
 
 /** The documents Home needs beyond the directory: the index history, and the

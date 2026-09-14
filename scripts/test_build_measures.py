@@ -279,6 +279,43 @@ class SourceKeyTest(unittest.TestCase):
                          f"published columns no company can answer: {empty}")
 
 
+class NullTest(unittest.TestCase):
+    """A column it could not answer leaves the row; it does not sit as null."""
+
+    def test_a_column_with_no_value_leaves_the_row(self):
+        row = {"ticker": "AAA", "close": 9.1, "net_income_growth": None,
+               "revenue": 0}
+        bm.drop_absent(row)
+        self.assertNotIn("net_income_growth", row)
+        # And nought stays, because nought is an answer.
+        self.assertEqual(row["revenue"], 0)
+        self.assertEqual(row["close"], 9.1)
+
+    def test_no_published_row_carries_a_null(self):
+        # Thirty-eight rows carried `net_income_growth: null`. The engine read
+        # them correctly, so no reader got a wrong result — they got a wrong
+        # explanation: the column was absent from `missing`, so the row
+        # claimed a figure it did not have, and "why is this company not in my
+        # results" pointed at a measurement that was never there.
+        try:
+            table = json.loads(bm.OUT.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            self.skipTest("no published measures table")
+        offenders = [(r.get("ticker"), name)
+                     for r in table["rows"]
+                     for name, value in r.items() if value is None]
+        self.assertEqual(offenders[:5], [],
+                         f"{len(offenders)} published cells are null")
+
+    def test_a_null_is_reported_as_missing(self):
+        table = json.loads(bm.OUT.read_text(encoding="utf-8"))
+        for row in table["rows"]:
+            gaps = set(row.get("missing") or [])
+            held = set(row) - {"missing"}
+            self.assertEqual(gaps & held, set(),
+                             f"{row.get('ticker')} lists a column it also holds")
+
+
 class BreadthTest(unittest.TestCase):
     """The one figure Home leads with. It describes; it does not select."""
 

@@ -5,6 +5,7 @@ import { marketStory } from './market-story.js';
 import { pairsExplorer } from './pairs.js';
 import { valuationExplorer } from './valuation.js';
 import { flowTrackers } from './flow-trackers.js';
+import { homeScreen } from './home.js';
 
 /* The trading simulator, fetched only when somebody opens it.
  *
@@ -283,6 +284,9 @@ export class Component extends Base {
   copy() {
     const en = {
       nothingYet:'Nothing published for this yet.',
+      // The market around the reader's own question, so a personal screen
+      // does not become a tunnel with no view of the exchange it is about.
+      marketContext:'The market in context',
       peNote:'P/E is the last close divided by the last earnings per share the company filed. A company with no profit to divide by has none.',
       ttmWorking:'The 12-month figure is {window}, which is EGP {eps} a share. Three filed figures and a subtraction \u2014 nothing here is forecast.',
       compareTitle:'The same line, period by period',
@@ -688,6 +692,7 @@ export class Component extends Base {
     };
     const ar = {
       nothingYet:'لم يُنشر شيء لهذا بعد.',
+      marketContext:'السوق في سياقه',
       peNote:'مكرر الربحية هو آخر إغلاق مقسوماً على آخر ربحية سهم أودعتها الشركة. والشركة التي لا ربح لها لا مكرر لها.',
       ttmWorking:'رقم الاثني عشر شهراً هو {window}، أي {eps} جنيه للسهم. ثلاثة أرقام مُفصح عنها وطرح — لا شيء هنا متوقَّع.',
       compareTitle:'السطر نفسه، فترة بفترة',
@@ -4580,6 +4585,10 @@ export class Component extends Base {
       themeIcon: st.theme === 'light' ? 'M12 4.6V2.8M12 21.2v-1.8M4.6 12H2.8M21.2 12h-1.8M6.8 6.8 5.5 5.5M18.5 18.5l-1.3-1.3M6.8 17.2l-1.3 1.3M18.5 5.5l-1.3 1.3M12 7.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8' : 'M20.4 14.6A8.8 8.8 0 0 1 9.4 3.6a8.8 8.8 0 1 0 11 11',
       isHome: st.screen === 'home', isToday: st.screen === 'today', isMarket: st.screen === 'market',
       flowViews: flowTrackers(this, D, ar),
+      // Home, in its own module. This file is the longest on the site and
+      // Home was five hundred lines of template inside it; the screen it
+      // replaced is a different product, not a rearrangement of the old one.
+      homeView: homeScreen(this, D, ar).screen,
       isFlowTracker: ['liquidity', 'ownership', 'world'].includes(st.screen),
       isCompany: st.screen === 'company', isSectors: st.screen === 'sectors', isCalendar: st.screen === 'calendar',
       isExchange: st.screen === 'exchange', isResearch: st.screen === 'research',

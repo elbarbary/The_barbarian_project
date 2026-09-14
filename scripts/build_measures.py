@@ -128,6 +128,8 @@ COLUMNS: dict[str, str] = {
     "quiet_days": "Days silent, for a company that files often. Null when not unusual for it.",
     "results_due_from": "Start of the window its results are expected in, from its own history.",
     "results_due_to": "End of that window.",
+    "results_due_in_days": "Days from this session to the start of that "
+                           "window. Negative once it has opened.",
     # — what is not known ——————————————————————————————————————————
     "missing": "The columns this row could not compute, so a rule can say why.",
 }
@@ -263,7 +265,17 @@ def filed_figures(ticker: str) -> dict:
     return out
 
 
-def own_signals(ticker: str) -> dict:
+def _days_between(from_date, to_date) -> int | None:
+    """Whole days between two ISO dates, or None if either is not one."""
+    try:
+        a = datetime.date.fromisoformat(str(from_date))
+        b = datetime.date.fromisoformat(str(to_date))
+    except (TypeError, ValueError):
+        return None
+    return (b - a).days
+
+
+def own_signals(ticker: str, session_date: str | None = None) -> dict:
     """What this company's own filing record already says is unusual.
 
     `build_signals.py` has counted streak breaks, first-in-years events,
@@ -313,7 +325,37 @@ def own_signals(ticker: str) -> dict:
         # and it could not be asked at all.
         out["results_due_from"] = due[0].get("window_start")
         out["results_due_to"] = due[0].get("window_end")
+        # And the same window as a NUMBER.
+        #
+        # The rule engine compares numbers; a date is a string to it, and a
+        # string answers "unknown" to every ordering test. So "companies whose
+        # results are due within a fortnight" — the single most useful question
+        # this table can answer about a company's calendar — could not be
+        # asked at all while the only form of the window was two dates. It is
+        # not a second answer to the same question: it is the same window,
+        # counted from the session this table describes.
+        out["results_due_in_days"] = _days_between(session_date, due[0].get("window_start"))
     return out
+
+
+def drop_absent(row: dict) -> dict:
+    """Remove every column whose value is None, in place.
+
+    A column whose value is None is a column this company could not answer,
+    and it must leave the row rather than sit in it as a null.
+
+    Thirty-eight rows carried `net_income_growth: null`. The rule engine read
+    them correctly — present but not a number answers "unknown" — so no reader
+    ever got a wrong RESULT. What they got was a wrong EXPLANATION: the column
+    was absent from `missing`, so the row claimed to hold a figure it did not,
+    and a reader asking why their condition passed this company by was pointed
+    at a measurement that was never there. `missing` is the only thing in this
+    table that answers "why is this company not in my results", and a null is
+    precisely the case it exists for.
+    """
+    for name in [k for k, v in row.items() if v is None]:
+        del row[name]
+    return row
 
 
 def row_for(ticker: str, session: dict, directory: dict,
@@ -390,10 +432,10 @@ def row_for(ticker: str, session: dict, directory: dict,
             row[name] = value
 
     row.update(filed_figures(ticker))
-    row.update(own_signals(ticker))
+    row.update(own_signals(ticker, session.get("date") or row.get("as_of")))
 
-    # What this company could not answer, so a reader's rule can say why a
-    # company is not in their results rather than leaving them to guess.
+    drop_absent(row)
+
     row["missing"] = sorted(set(COLUMNS) - set(row) - {"missing"})
     return row
 

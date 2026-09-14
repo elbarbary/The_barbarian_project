@@ -131,8 +131,12 @@ test('every screen renders in both languages and both themes', () => {
 test('index graphs remain visible in the visual home template', async () => {
   const { readFile } = await import('node:fs/promises');
   const template = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+  // Home was rebuilt around the reader's question; the index cards survived
+  // it, moved into the market-context section below. The old assertion was
+  // about their position relative to a details toggle that no longer exists.
   assert.match(template, /\{\{ ix\.spark \}\}/);
-  assert.ok(template.indexOf('{{ ix.spark }}') < template.indexOf('value="{{ showHomeDetails }}"'));
+  assert.ok(template.indexOf('class="home-context"') < template.indexOf('{{ ix.spark }}'),
+            'the index graphs are no longer inside the market-context section');
   assert.equal(screen({ ...LIVE, companies: [] }).breadthRing, 'none');
 });
 
@@ -2053,40 +2057,6 @@ test('the disclosures screen still filters, and still says that it is filtering'
   assert.ok(!shown.includes('BBB'), 'the filed list was not filtered');
 });
 
-test('the definitions fold away, and the sentence saying what the card is does not', async () => {
-  // The founder asked for the explanation to be hidden until expanded. The
-  // per-measure detail is useful once and noise afterwards, so it folds. The
-  // subtitle does not: this card was already opaque once, and folding the one
-  // line that says what it is would put it straight back there.
-  const c = fresh();
-  c.setData({ ...LIVE, companies: [
-    RATIOCO('AAA', 4, { avgVolume: 2e6, ratios: { cash_conversion: 1.4 } }),
-    RATIOCO('BBB', 9, { avgVolume: 1e6, ratios: { cash_conversion: 1.1 } }),
-  ] });
-  c.state.screen = 'home';
-
-  assert.equal(c.renderVals().screen.howOn, false, 'the detail starts open');
-  c.renderVals().screen.toggleHow();
-  assert.equal(c.renderVals().screen.howOn, true, 'expanding did nothing');
-  c.renderVals().screen.toggleHow();
-  assert.equal(c.renderVals().screen.howOn, false, 'it does not fold back');
-
-  // The label says which way it goes.
-  const shut = c.renderVals();
-  assert.equal(shut.screen.howLabel, shut.L.screenHowOpen);
-  shut.screen.toggleHow();
-  const open = c.renderVals();
-  assert.equal(open.screen.howLabel, open.L.screenHowClose);
-
-  // And the template folds the detail, never the subtitle.
-  const { readFile } = await import('node:fs/promises');
-  const tpl = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
-  const sub = tpl.indexOf('{{ L.screenSub }}');
-  const gate = tpl.indexOf('{{ screen.howOn }}');
-  assert.ok(sub !== -1 && gate !== -1, 'the card lost a binding');
-  assert.ok(sub < gate, 'the subtitle was folded behind the expander');
-});
-
 test('every measure on the card says what it is, in both languages', () => {
   // The founder could not tell what the card was. The sentence explaining each
   // measure was computed on the object and bound only on Crossings, so Home
@@ -2394,23 +2364,6 @@ test('§8 the threshold is named as ours, not as the exchange\'s', () => {
   // And it says what happened, never what to do about it.
   assert.ok(!DIRECTIVE.test(v.busyNote), v.busyNote);
   assert.ok(!DIRECTIVE.test(v.busy[0].kicker));
-});
-
-test('the busiest rows sit above the movers on Home', async () => {
-  const { readFile } = await import('node:fs/promises');
-  const t = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
-  const detailStart = t.indexOf('value="{{ showHomeDetails }}"');
-  const busy = t.indexOf('{{ L.busiest }}', detailStart);
-  const movers = t.indexOf('{{ L.movers }}');
-  assert.ok(busy > 0 && movers > 0, 'a block is missing');
-  assert.ok(busy < movers, 'the movers come first — a big move on ordinary volume is just a price');
-  // Both belong to ONE column. Three children in a two-column grid pushes the
-  // movers into the rail and wraps the rail below it — which is exactly what
-  // happened the first time this block went in.
-  const grid = t.indexOf('grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr)');
-  assert.ok(grid > 0 && grid < busy, 'the Home grid moved');
-  assert.match(t.slice(grid, busy), /flex-direction:column/,
-    'the two sections are separate grid children');
 });
 
 /* ── phones ────────────────────────────────────────────────────────────── */

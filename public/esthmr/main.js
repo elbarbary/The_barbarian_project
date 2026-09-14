@@ -125,6 +125,14 @@ async function load(email) {
         insiders: (insiders && Array.isArray(insiders.items) && insiders.items.length > 0) ? insiders : undefined,
       })),
       slice(data.indices(), (idx) => ({ indexMembers: idx.list })),
+      // Home's own two. The measurement table is what every question on the
+      // page is answered from, so it is loaded with the extras rather than
+      // behind a screen: a reader who lands on Home should not watch the
+      // page decide what it is.
+      slice(data.measures ? data.measures() : Promise.resolve(null),
+            (measures) => ({ measures: measures || undefined })),
+      slice(data.arena ? data.arena() : Promise.resolve(null),
+            (arena) => ({ arena: arena || undefined })),
       Promise.all([calendar, exchange, attention]).then(([cal, ex, att]) => patch({
         indices: ex ? data.indexCards(ex.indexLevels, att && att.history) : undefined,
         readNow: data.readNowCards(att && att.signals, cal && cal.expectedTotal, cal && cal.expectedFrom),

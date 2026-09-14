@@ -17,11 +17,3 @@ test('mobile navigation reserves the phone safe area and keeps five named destin
   assert.match(template, /onClick="{{ n.go }}" aria-current="{{ n.current }}"/);
   assert.match(css, /min-height: 64px/);
 });
-
-test('mobile comparisons retain identity, the four measures, and the full-results action', () => {
-  assert.match(template, /class="mosaic-company"[^>]*>{{ m.name }}/);
-  const summary = template.indexOf('class="market-measure-grid"');
-  assert.ok(summary > 0 && summary < template.indexOf('<sc-if value="{{ showHomeDetails }}">'));
-  assert.match(template, /class="results-button" onClick="{{ explorer.open }}"/);
-  assert.match(css, /\.market-measure-grid \{ grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
-});

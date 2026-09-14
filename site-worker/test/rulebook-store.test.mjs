@@ -59,9 +59,9 @@ const RULE = {
   name: 'Confirmation',
   match: 'all',
   conditions: [
-    { column: 'relative_volume_20', operator: '>=', value: 2 },
-    { column: 'change_5', operator: '>', value: 0 },
-    { column: 'sessions_since_filing', operator: '<=', value: 10 },
+    { column: 'relative_volume_20', op: '>=', value: 2 },
+    { column: 'change_5', op: '>', value: 0 },
+    { column: 'sessions_since_filing', op: '<=', value: 10 },
   ],
 };
 
@@ -118,15 +118,15 @@ test('a column the server has never heard of is stored, not refused', () => {
   // Columns are renamed and retired. A validator that knew the column list
   // would delete a reader's rulebook the day one changed.
   const out = cleanRulebook({
-    conditions: [{ column: 'a_measure_invented_next_year', operator: '>=', value: 1 }],
+    conditions: [{ column: 'a_measure_invented_next_year', op: '>=', value: 1 }],
   });
   assert.equal(out.conditions[0].column, 'a_measure_invented_next_year');
 });
 
 test('the order the reader saved is the order stored', () => {
   const shelf = cleanRulebooks([
-    { id: 'b', conditions: [{ column: 'x', operator: 'has' }] },
-    { id: 'a', conditions: [{ column: 'y', operator: 'has' }] },
+    { id: 'b', conditions: [{ column: 'x', op: 'has' }] },
+    { id: 'a', conditions: [{ column: 'y', op: 'has' }] },
   ]);
   assert.deepEqual(shelf.map((r) => r.id), ['b', 'a']);
 });
@@ -142,9 +142,21 @@ test('no verdict, weight or result count is ever computed server side', async ()
 
 /* ---- shape ---- */
 
+test('the stored key is the one the engine reads', () => {
+  // The engine in public/esthmr/rulebook.js destructures `op`. Storing
+  // `operator` would have made every saved question answer "unknown" for
+  // every company — silently, because unknown is a legitimate answer.
+  const out = cleanRulebook({ conditions: [{ column: 'revenue', op: '>=', value: 1 }] });
+  assert.equal(out.conditions[0].op, '>=');
+  assert.equal('operator' in out.conditions[0], false);
+  assert.equal(cleanRulebook({
+    conditions: [{ column: 'revenue', operator: '>=', value: 1 }],
+  }), null);
+});
+
 test('an unknown operator is refused rather than stored', () => {
   assert.equal(cleanRulebook({
-    conditions: [{ column: 'revenue', operator: 'approximately', value: 1 }],
+    conditions: [{ column: 'revenue', op: 'approximately', value: 1 }],
   }), null);
 });
 
@@ -154,7 +166,7 @@ test('a rulebook with no usable condition is refused, not stored empty', () => {
   assert.equal(cleanRulebook({ name: 'Empty', conditions: [] }), null);
   assert.equal(cleanRulebook({
     name: 'All rubbish',
-    conditions: [{ column: 'revenue', operator: 'nope' }, 7, null],
+    conditions: [{ column: 'revenue', op: 'nope' }, 7, null],
   }), null);
 });
 
@@ -175,27 +187,27 @@ test('a payload that is not a list is a caller bug and says so', async () => {
 
 test('has and missing store no value, so two equal rules are equal', () => {
   const out = cleanRulebook({
-    conditions: [{ column: 'revenue', operator: 'missing', value: 99 }],
+    conditions: [{ column: 'revenue', op: 'missing', value: 99 }],
   });
   assert.equal('value' in out.conditions[0], false);
 });
 
 test('in takes a bounded list and refuses an empty one', () => {
   const ok = cleanRulebook({
-    conditions: [{ column: 'sector', operator: 'in', value: ['Banks', 'Banks', 'Real Estate'] }],
+    conditions: [{ column: 'sector', op: 'in', value: ['Banks', 'Banks', 'Real Estate'] }],
   });
   assert.deepEqual(ok.conditions[0].value, ['Banks', 'Real Estate']);
   assert.equal(cleanRulebook({
-    conditions: [{ column: 'sector', operator: 'in', value: [] }],
+    conditions: [{ column: 'sector', op: 'in', value: [] }],
   }), null);
 });
 
 test('a weight is kept only when it is a real number', () => {
   const out = cleanRulebook({
     conditions: [
-      { column: 'a', operator: 'has', weight: 2.5 },
-      { column: 'b', operator: 'has', weight: 'heavy' },
-      { column: 'c', operator: 'has', weight: Infinity },
+      { column: 'a', op: 'has', weight: 2.5 },
+      { column: 'b', op: 'has', weight: 'heavy' },
+      { column: 'c', op: 'has', weight: Infinity },
     ],
   });
   assert.equal(out.conditions[0].weight, 2.5);
@@ -206,24 +218,24 @@ test('a weight is kept only when it is a real number', () => {
 test('the shelf, the conditions and the choices are all bounded', () => {
   const many = (n, make) => Array.from({ length: n }, (_, i) => make(i));
   const shelf = cleanRulebooks(many(200, (i) => ({
-    id: `r${i}`, conditions: [{ column: 'revenue', operator: 'has' }],
+    id: `r${i}`, conditions: [{ column: 'revenue', op: 'has' }],
   })));
   assert.equal(shelf.length, 24);
   const wide = cleanRulebook({
-    conditions: many(200, (i) => ({ column: `c${i}`, operator: 'has' })),
+    conditions: many(200, (i) => ({ column: `c${i}`, op: 'has' })),
   });
   assert.equal(wide.conditions.length, 32);
   const listed = cleanRulebook({
-    conditions: [{ column: 'sector', operator: 'in', value: many(200, (i) => `s${i}`) }],
+    conditions: [{ column: 'sector', op: 'in', value: many(200, (i) => `s${i}`) }],
   });
   assert.equal(listed.conditions[0].value.length, 40);
 });
 
 test('a duplicate or missing id is replaced, never silently merged', () => {
   const shelf = cleanRulebooks([
-    { id: 'same', conditions: [{ column: 'a', operator: 'has' }] },
-    { id: 'same', conditions: [{ column: 'b', operator: 'has' }] },
-    { conditions: [{ column: 'c', operator: 'has' }] },
+    { id: 'same', conditions: [{ column: 'a', op: 'has' }] },
+    { id: 'same', conditions: [{ column: 'b', op: 'has' }] },
+    { conditions: [{ column: 'c', op: 'has' }] },
   ]);
   assert.equal(shelf.length, 3);
   assert.equal(new Set(shelf.map((r) => r.id)).size, 3);
@@ -233,17 +245,17 @@ test('a duplicate or missing id is replaced, never silently merged', () => {
 test('a sort direction is only ever asc or desc', () => {
   const out = cleanRulebook({
     sort: { column: 'market_cap', direction: 'sideways' },
-    conditions: [{ column: 'a', operator: 'has' }],
+    conditions: [{ column: 'a', op: 'has' }],
   });
   assert.equal(out.sort.direction, 'desc');
 });
 
 test('a name is trimmed and bounded, and an absent one is empty not undefined', () => {
   const long = cleanRulebook({
-    name: `  ${'x'.repeat(200)}  `, conditions: [{ column: 'a', operator: 'has' }],
+    name: `  ${'x'.repeat(200)}  `, conditions: [{ column: 'a', op: 'has' }],
   });
   assert.equal(long.name.length, 80);
-  const none = cleanRulebook({ conditions: [{ column: 'a', operator: 'has' }] });
+  const none = cleanRulebook({ conditions: [{ column: 'a', op: 'has' }] });
   assert.equal(none.name, '');
 });
 

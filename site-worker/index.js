@@ -575,15 +575,22 @@ function cleanCondition(raw) {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
   const column = typeof raw.column === 'string' ? raw.column.trim() : '';
   if (!COLUMN.test(column)) return null;
-  const operator = typeof raw.operator === 'string' ? raw.operator.trim() : '';
-  if (!RULE_OPERATORS.has(operator)) return null;
+  // `op`, because that is what the engine in public/esthmr/rulebook.js reads.
+  // This stored `operator`. A rulebook saved through here would have come
+  // back with a key the engine does not look at, every condition would have
+  // answered "unknown", and every saved question would have matched nothing —
+  // silently, because "unknown" is a legitimate answer in a three-valued
+  // engine. The same class of bug as four empty columns in the measurement
+  // table, and the same fix: read the name the reader actually uses.
+  const op = typeof raw.op === 'string' ? raw.op.trim() : '';
+  if (!RULE_OPERATORS.has(op)) return null;
 
-  const out = { column, operator };
+  const out = { column, op };
   // `has` and `missing` ask whether a figure exists at all, so a value would
   // be meaningless — dropped rather than stored, so two rulebooks that mean
   // the same thing are the same object.
-  if (operator !== 'has' && operator !== 'missing') {
-    if (operator === 'in') {
+  if (op !== 'has' && op !== 'missing') {
+    if (op === 'in') {
       if (!Array.isArray(raw.value)) return null;
       const choices = [];
       for (const item of raw.value) {
