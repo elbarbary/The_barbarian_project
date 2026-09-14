@@ -955,6 +955,10 @@
     "meaning": "The transaction transfers equity ownership and operational control of Sphinx for Guard Services to an individual investor, consolidating private security operations and client contracts under new management.",
     "meaning_ar": "تتضمن الصفقة نقل ملكية الأسهم والسيطرة التشغيلية لشركة «أبو الهول لخدمات الحراسة» إلى مستثمر فرد، مما يضع العمليات التشغيلية وعقود الحراسة وإدارة الخدمات الأمنية تحت هيكل إدارة جديد."
   },
+  "اخر حق لحامل السهم في التوزيع النقدي": {
+    "meaning": "This marks the cum-dividend date, which is the final trading session in which a shareholder who holds or purchases the security is registered on the shareholder ledger to receive the approved cash dividend payment.",
+    "meaning_ar": "يحدد هذا تاريخ نهاية الحق في الكوبون، وهو آخر جلسة تداول يكون فيها مالك أو مشتري السهم مقيداً بدفاتر الشركة ومستحقاً لصرف التوزيعات النقدية المقررة."
+  },
   "اداره ترامب تهدد بالغاء الاعفاءات الضريبيه للموسسات التعليميه": {
     "meaning": "Revoking tax-exempt status subjects educational institutions to corporate income tax on operating surpluses and investment income, while eliminating the tax deductibility of incoming philanthropic donations.",
     "meaning_ar": "يؤدي إلغاء الإعفاء الضريبي إلى إخضاع المؤسسات التعليمية لضريبة الدخل على الفوائض التشغيلية وعوائد الاستثمار، مع إسقاط ميزة الخصم الضريبي عن التبرعات الموجهة إليها."
@@ -3844,6 +3848,10 @@
     "meaning": "An unspent rate of 28% in water sector budgets reflects capital expenditure underutilization driven by administrative, procurement, and execution bottlenecks in infrastructure projects despite allocated funding.",
     "meaning_ar": "يعكس عدم إنفاق 28% من مخصصات قطاع المياه ضعف معدلات استغلال الإنفاق الرأسمالي المتاح، وذلك نتيجة معوقات إجرائية وإدارية في ترسية وتنفيذ مشروعات البنية التحتية."
   },
+  "سام التمان يستبعد طرح اوبن ايه اي للاكتتاب العام في 2026": {
+    "meaning": "Deferring an initial public offering maintains reliance on private equity, debt facilities, and venture financing rather than raising capital through public equity markets.",
+    "meaning_ar": "يؤدي تأجيل الطرح العام الأولي إلى الإبقاء على الاعتماد على أسهم الملكية الخاصة والتسهيلات الائتمانية والتمويل الجريء بدلاً من تدبير السيولة عبر أسواق الأسهم العامة."
+  },
   "سام التمان: الطرح العام الاولي ل”اوبن ايه اي” لن يكون في 2026": {
     "meaning": "Deferring an initial public offering keeps the company operating as a privately held entity, funded through private equity rounds rather than public equity markets. This operational status limits financial reporting and governance requirements to private corporate disclosure standards.",
     "meaning_ar": "يُبقي تأجيل الطرح العام الأولي الشركة ككيان خاص يعتمد على جولات التمويل والاستثمار الخاص بدلاً من أسواق الأسهم العامة، مما يحصر متطلبات الإفصاح المالي والحوكمة ضمن المعايير المفروضة على الشركات المغلقة."
@@ -3916,6 +3924,10 @@
     "meaning": "Egyptian commercial banks quote differentiated bid and ask exchange rates for the Saudi Riyal based on institutional foreign currency liquidity and interbank market supply.",
     "meaning_ar": "تحدد البنوك التجارية المصرية أسعاراً متفاوتة لشراء وبيع الريال السعودي بناءً على مستويات سيولة النقد الأجنبي المتاحة لديها وآليات العرض والطلب في سوق الإنتربنك."
   },
+  "سعر الريال السعودي في مصر اليوم الاثنين 14/9/2026.. استقرار بالافتتاح": {
+    "meaning": "An opening-trade stability in the Saudi Riyal exchange rate fixes the immediate local-currency settlement cost for bilateral commercial trade and pilgrimage services between Egypt and Saudi Arabia.",
+    "meaning_ar": "يُثبّت استقرار سعر صرف الريال السعودي في بداية التعاملات تكلفة التسوية الفورية بالعملة المحلية للتبادل التجاري وخدمات السفر بين مصر والمملكة العربية السعودية."
+  },
   "سعر الريال السعودي في مصر اليوم الاثنين 7/9/2026.. ارتفاع بالختام": {
     "meaning": "An increase in the Saudi Riyal exchange rate against the Egyptian Pound directly raises the local currency cost of trade imports, religious travel obligations, and cross-border payment settlements denominated in SAR.",
     "meaning_ar": "يؤدي ارتفاع سعر صرف الريال السعودي مقابل الجنيه المصري إلى زيادة التكلفة الفعلية بالعملة المحلية للواردات التجارية ونفقات رحلات العمرة وتسوية المعاملات المالية المحددة بالريال."
@@ -3983,6 +3995,10 @@
   "سعر اليورو اليوم الثلاثاء 8-9-2026 في ختام التعاملات": {
     "meaning": "The headline tracks the official closing exchange rate of the Euro against the Egyptian Pound, which sets the daily valuation standard for commercial transactions, customs valuations, and foreign currency accounting entries in the banking sector.",
     "meaning_ar": "يتناول الخبر سعر صرف اليورو الرسمي مقابل الجنيه المصري في نهاية التعاملات اليومية، وهو السعر الذي يحدد معايير تقييم المعاملات التجارية والرسوم الجمركية والقيود المحاسبية للعملات الأجنبية في القطاع المصرفي."
+  },
+  "سعر اليورو في مصر اليوم الاثنين 14/9/2026.. تراجع بالافتتاح": {
+    "meaning": "A lower euro exchange rate at market opening reduces the local-currency cost of European imports and adjusts the carrying value of euro-denominated obligations for domestic market participants.",
+    "meaning_ar": "يؤدي تراجع سعر صرف اليورو في بداية التعاملات إلى خفض التكلفة بالعملة المحلية للواردات القادمة من أوروبا، فضلًا عن إعادة تسعير الالتزامات المالية القائمة باليورو للكيانات المحلية."
   },
   "سعر اليورو في مصر اليوم الاثنين 7/9/2026.. ختام التعاملات": {
     "meaning": "The Euro exchange rate at the close of trading establishes the official valuation for clearing European trade invoices, calculating foreign-denominated obligations, and updating commercial bank foreign asset positions.",
@@ -4236,6 +4252,10 @@
   "شركه مدعومه من وادي السيليكون تطلق صاروخا منخفض التكلفه وتستهدف انتاج 12 الف وحده سنويا": {
     "meaning": "Venture capital backing finances the transition from defense prototype development to high-volume manufacturing, utilizing standardized, low-cost components to establish an annual assembly line capacity of 12,000 units.",
     "meaning_ar": "يُموّل رأس المال المخاطر الانتقال من مرحلة تطوير النماذج الأولية إلى التصنيع الكمي المكثف، عبر استخدام مكونات معيارية منخفضة التكلفة لتشغيل خط تجميع بطاقة سنوية تبلغ 12 ألف وحدة."
+  },
+  "شركه نيوبرينت للتداول تنوي زياده راس المال وتعزيز ادوات التكنولوجيا الماليه": {
+    "meaning": "A capital increase raises the firm's equity base on the balance sheet, providing direct funding for deploying digital infrastructure and financial technology systems.",
+    "meaning_ar": "ترفع زيادة رأس المال قاعدة حقوق الملكية في الميزانية العمومية للشركة، مما يوفر تمويلاً مباشراً لنشر البنية التحتية الرقمية وأنظمة التكنولوجيا المالية."
   },
   "شريف الجبلي: مصر تتحول الي مركز اقليمي للتجاره والخدمات الماليه والذكاء الاصطناعي": {
     "meaning": "Developing regional hubs in trade, financial services, and artificial intelligence relies on expanding cross-border logistics infrastructure, integrating digital payment networks, and establishing local data and computing centers.",
@@ -5025,6 +5045,10 @@
     "meaning": "Postponing a major real estate exhibition suspends a centralized direct sales and marketing platform that brings developers and property buyers together for project launches.",
     "meaning_ar": "يؤدي تأجيل المعرض العقاري إلى تعليق منصة تسويق وبيع مباشر مركزية تجمع بين المطورين العقاريين والمشترين لطرح المشروعات."
   },
+  "مصادر: تداولات الانتربنك عند مستوياتها الطبيعيه رغم صعود الاخضر": {
+    "meaning": "Foreign exchange liquidity clearing operates through routine banking volumes in the interbank market, where institutional supply and demand balance foreign currency without systemic transaction bottlenecks during dollar price adjustments.",
+    "meaning_ar": "تعمل آلية تسوية السيولة الأجنبية عبر أحجام تداول مصرفية معتادة في سوق الإنتربنك، حيث يتطابق العرض والطلب المؤسسي على العملات الأجنبية دون اختناقات تشغيلية في المعاملات أثناء تحركات سعر صرف الدولار."
+  },
   "مصادر: مجموعه بريكس تتفق علي بيان مشترك": {
     "meaning": "Agreement on a joint BRICS declaration coordinates multilateral policy frameworks and standardizes cooperation protocols among member states, establishing formalized channels for cross-border trade settlements and economic alignment.",
     "meaning_ar": "يحدد الاتفاق على بيان مشترك لمجموعة بريكس أطر السياسات متعددة الأطراف ويوحد بروتوكولات التعاون بين الدول الأعضاء، مما يؤسس مسارات رسمية لتسوية المعاملات التجارية البينية والتنسيق الاقتصادي."
@@ -5224,6 +5248,10 @@
   "مطاحن الاسكندريه تتراجع بارباحها بنهايه يونيو": {
     "meaning": "The company's full-year or fiscal period financial statements reflect a decrease in net income at the close of June, indicating that total revenues grew at a slower pace than operating expenses and production inputs such as wheat and energy.",
     "meaning_ar": "تُظهر القوائم المالية للشركة تراجعاً في صافي أرباح الفترة المنتهية في يونيو، وهو ما يعكس نمو الإيرادات بمعدل أقل من التكاليف التشغيلية ومدخلات الإنتاج مثل القمح والطاقة."
+  },
+  "مطالب بفرص عادله للشركات الصغيره والمتوسطه في “شمس الصناعه”": {
+    "meaning": "The headline refers to industry calls to allocate defined quotas or participation frameworks for small and medium-sized enterprises within the 'Shams El-Senaa' (Industry Sun) initiative, integrating them into the procurement and supply chains of larger national industrial projects.",
+    "meaning_ar": "تشير المبادرة إلى مطالبات بتخصيص حصص أو أطر مشاركة محددة للمشروعات الصغيرة والمتوسطة ضمن مبادرة 'شمس الصناعة'، مما يدمجها تشغيلياً في سلاسل التوريد والتعاقدات الخاصة بالمشروعات الصناعية الكبرى."
   },
   "مطالبات بفرص عادله لشركات الطاقه الصغيره والمتوسطه في مبادره شمس الصناعه": {
     "meaning": "The initiative allocates industrial solar energy contracts and procurement quotas among market participants, determining the eligibility and access criteria for small and medium-sized enterprises alongside larger developers.",
