@@ -1,0 +1,245 @@
+#!/usr/bin/env python3
+"""One night's forecasts, from every registered model, frozen before the fact.
+
+WHAT THIS RUN IS FOR
+--------------------
+Not to tell anybody what to buy. To produce a record that cannot be edited
+after the outcome is known, so that in six weeks there is an honest answer to
+"does any of this see anything on this exchange?"
+
+That is why the shape is what it is: every model is asked about every company
+in the same universe on the same basis session, every answer and every
+refusal is written down, and the whole thing is hashed. A model that quietly
+skipped the hard half of the market, or a run that was repeated until it
+looked better, is visible in the record rather than absent from it.
+
+WHAT IT PUBLISHES
+-----------------
+Nothing. The forecasts are private — a predicted return for a named security
+is exactly the thing an unlicensed publisher may not put on a screen. What
+eventually reaches a reader is the model leaderboard, months later, after the
+horizons have matured: rank IC, coverage, and how each model did against the
+baselines. `scripts/lab/` writes to `data-source/lab/`, which is not served.
+
+THE BASIS SESSION
+-----------------
+Always a COMPLETED session. This runs after the close, and the bars it reads
+are the ones the exchange has finished with. A forecast made from a partial
+session is a forecast that has already seen some of its own answer.
+"""
+
+from __future__ import annotations
+
+import argparse
+import collections
+import datetime
+import hashlib
+import json
+import pathlib
+import sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+
+import forecast as fc
+
+REPO = pathlib.Path(__file__).resolve().parent.parent.parent
+OUT = REPO / "data-source" / "lab"
+
+# A model needs at least this much of a company's record to be asked at all.
+# Kronos ran on a 90-session lookback; below that the question is different
+# for different models and the comparison stops being like for like.
+MIN_BARS = 90
+
+
+def read_scan(path: pathlib.Path) -> dict:
+    """The daily scan `egx_scan.mjs` writes, with its OHLC history.
+
+    This is the same file the market build already produces in CI — 296
+    scanner rows, ~232 of them with 120 completed split-adjusted bars pulled
+    from TradingView over a WebSocket. The lab reads it rather than fetching
+    again: two fetches minutes apart are two different markets, and the
+    forecast has to be made from the bars the record says it was made from.
+    """
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def universe(scan: dict) -> list[dict]:
+    """Every company with enough completed history, alphabetically.
+
+    Alphabetical rather than by anything else, so that a run truncated by a
+    timeout loses a random slice of the market rather than its quiet end.
+    """
+    rows = []
+    for record in scan.get("records") or []:
+        ticker = record.get("ticker")
+        bars = record.get("recentSplitAdjustedBars") or []
+        if ticker and len(bars) >= MIN_BARS:
+            rows.append({"ticker": ticker,
+                         "bars": sorted(bars, key=lambda b: b.get("date", ""))})
+    rows.sort(key=lambda r: r["ticker"])
+    return rows
+
+
+def basis_session(rows: list[dict]) -> str | None:
+    """The completed session this run forecasts from.
+
+    The newest date a MAJORITY of the market shares. Individual companies lag
+    — a share that did not trade has no bar — and taking the newest date any
+    company holds would date the run to one company's Thursday.
+    """
+    if not rows:
+        return None
+    counts = collections.Counter(r["bars"][-1]["date"] for r in rows if r["bars"])
+    if not counts:
+        return None
+    most, seen = counts.most_common(1)[0]
+    return most if seen >= len(rows) / 2 else None
+
+
+def trim(bars: list[dict], basis: str) -> list[dict]:
+    """This company's bars up to and including the basis, and no further.
+
+    The guard against the one mistake that would make every number here
+    worthless. A model handed a bar from after the basis session has been
+    shown part of its own answer, and would score beautifully.
+    """
+    return [b for b in bars if (b.get("date") or "") <= basis]
+
+
+def run_models(rows: list[dict], basis: str, models: dict) -> dict:
+    """Ask every model about every company, and write down every refusal."""
+    answers: dict[str, list] = {}
+    refusals: dict[str, list] = {}
+    for name, ask in models.items():
+        made, declined = [], []
+        for row in rows:
+            bars = trim(row["bars"], basis)
+            if len(bars) < MIN_BARS:
+                declined.append(fc.Abstention(row["ticker"], basis, name,
+                                              f"{len(bars)} bars to the basis"))
+                continue
+            try:
+                out = ask(row["ticker"], basis, bars)
+            except Exception as error:  # noqa: BLE001 — a model that throws abstains
+                declined.append(fc.Abstention(row["ticker"], basis, name,
+                                              f"{type(error).__name__}: {error}"))
+                continue
+            (made if isinstance(out, fc.Forecast) else declined).append(out)
+        answers[name] = made
+        refusals[name] = declined
+    return {"forecasts": answers, "abstentions": refusals}
+
+
+def as_record(f: fc.Forecast) -> dict:
+    out = {"ticker": f.ticker, "returns": {str(k): round(v, 6)
+                                           for k, v in f.returns.items()}}
+    if f.ranked_by:
+        out["ranked_by"] = {str(k): round(v, 6) for k, v in f.ranked_by.items()}
+    if f.quantiles:
+        out["quantiles"] = f.quantiles
+    if f.note:
+        out["note"] = f.note
+    return out
+
+
+def build(scan: dict, models: dict, ran_at: str) -> dict:
+    rows = universe(scan)
+    basis = basis_session(rows)
+    if not basis:
+        raise SystemExit("lab: no completed session a majority of the market shares")
+
+    result = run_models(rows, basis, models)
+    document = {
+        "schemaVersion": 1,
+        "ranAt": ran_at,
+        "basisSession": basis,
+        "universe": [r["ticker"] for r in rows],
+        "universeSize": len(rows),
+        "minimumBars": MIN_BARS,
+        "horizons": list(fc.HORIZONS),
+        # Said in the file because the file outlives the intention.
+        "what": "Private forecasts, frozen before the outcome existed, for "
+                "measuring the models against each other and against the "
+                "baselines. Not published, not advice, not a selection: every "
+                "company in the universe is asked of every model.",
+        "models": {},
+    }
+    for name in models:
+        made = result["forecasts"][name]
+        declined = result["abstentions"][name]
+        document["models"][name] = {
+            "forecasts": [as_record(f) for f in made],
+            "answered": len(made),
+            "abstained": len(declined),
+            # Grouped rather than listed one by one: 230 companies refused for
+            # "84 bars to the basis" is one fact, not 230.
+            "abstentions": dict(collections.Counter(a.reason for a in declined)),
+        }
+    return document
+
+
+def fingerprint(document: dict) -> str:
+    """A hash over the forecasts, so the record can be shown not to have moved.
+
+    Not yet a commitment — that needs canonical JSON and an independent
+    timestamp, and is the next piece. This is the honest half of it: the same
+    forecasts always hash the same, and a changed forecast always changes it.
+    """
+    body = json.dumps(document["models"], sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(body.encode()).hexdigest()
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("scan", type=pathlib.Path,
+                        help="the daily_scan_<date>.json egx_scan.mjs wrote")
+    parser.add_argument("--models", default="baselines",
+                        help="baselines, all, or a comma-separated list")
+    parser.add_argument("--check", action="store_true", help="write nothing")
+    args = parser.parse_args(argv)
+
+    chosen: dict = {}
+    wanted = args.models.strip()
+    if wanted in ("baselines", "all"):
+        chosen.update({n: (lambda n: lambda t, b, x: fc.run_baseline(n, t, b, x))(n)
+                       for n in fc.BASELINES})
+    else:
+        for name in (w.strip() for w in wanted.split(",") if w.strip()):
+            if name in fc.BASELINES:
+                chosen[name] = (lambda n: lambda t, b, x: fc.run_baseline(n, t, b, x))(name)
+
+    if wanted == "all":
+        try:
+            import neural
+            chosen.update(neural.available())
+        except Exception as error:  # noqa: BLE001
+            print(f"   neural models unavailable ({type(error).__name__}), "
+                  "baselines only")
+
+    if not chosen:
+        raise SystemExit(f"lab: no models selected from '{args.models}'")
+
+    ran_at = (datetime.datetime.now(datetime.timezone.utc)
+              .isoformat(timespec="seconds").replace("+00:00", "Z"))
+    document = build(read_scan(args.scan), chosen, ran_at)
+    document["fingerprint"] = fingerprint(document)
+
+    print(f"   basis {document['basisSession']}  ·  "
+          f"{document['universeSize']} companies  ·  {len(chosen)} models")
+    for name, block in document["models"].items():
+        print(f"   {name:<12} {block['answered']:>4} answered  "
+              f"{block['abstained']:>3} abstained")
+    print(f"   fingerprint {document['fingerprint'][:16]}")
+
+    if args.check:
+        return 0
+    OUT.mkdir(parents=True, exist_ok=True)
+    path = OUT / f"run-{document['basisSession']}.json"
+    path.write_text(json.dumps(document, ensure_ascii=False, separators=(",", ":")),
+                    encoding="utf-8")
+    print(f"   wrote {path.relative_to(REPO)} ({path.stat().st_size // 1024} KB)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

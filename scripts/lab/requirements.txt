@@ -1,0 +1,23 @@
+# The lab's models, pinned.
+#
+# A foundation model is a moving target: the same package name resolves to
+# different weights and different behaviour over time, and a forecast record
+# that cannot say which version made it cannot be verified. Every line here
+# is exact for that reason, not out of caution.
+#
+# torch is the floor under all three models. CPU build only — nothing here
+# runs on a GPU, by measurement rather than by hope: Kronos-small forecasts
+# the whole market in five and a half minutes on four cores.
+torch==2.8.0
+pandas==2.2.3
+numpy==2.1.3
+
+# Chronos-2 — Amazon's general forecaster, the close-only comparator.
+chronos-forecasting==2.0.1
+
+# TimesFM 2.5 — Google's, an independent architecture.
+#
+# PINNED TO 2.0.2 DELIBERATELY. Later releases of this package also ship
+# newer model generations whose weights are not licensed for commercial use;
+# an unpinned install would quietly swap the licence under the project.
+timesfm[torch]==2.0.2

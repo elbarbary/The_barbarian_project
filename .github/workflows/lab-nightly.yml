@@ -1,0 +1,143 @@
+name: Lab — nightly forecasts
+
+# Every registered model, asked about every company, after the close.
+#
+# WHAT THIS IS
+# A private research run. It writes forecasts to `data-source/lab/`, which is
+# not served to anybody: a predicted return for a named security is precisely
+# what an unlicensed publisher may not put on a screen. What eventually
+# reaches a reader is the model leaderboard — rank IC, coverage, how each
+# model did against the baselines — months later, once the horizons have
+# matured and there is something honest to say.
+#
+# The point of running it nightly from now is that a forecast is only worth
+# anything if it was frozen before the outcome existed. Six weeks of that is
+# worth more than any backtest, because a backtest is written by somebody who
+# already knows what happened.
+#
+# WHY IT IS ITS OWN WORKFLOW
+# `publish-app-data` takes 35 minutes and sits on the critical path of the
+# market data a reader is waiting for. This needs none of that, and nothing
+# waits for it. It also fails differently: a model that will not load is a
+# gap in a research record, not a reason to stop publishing the exchange.
+
+on:
+  schedule:
+    # 15:00 Cairo — half an hour after the 14:30 close, so the session's bars
+    # have settled. Two expressions because Egypt keeps summer time and the
+    # cron is in UTC: 12:00 UTC is 15:00 Cairo from April to October, 13:00
+    # UTC is 15:00 Cairo the rest of the year. Whichever is wrong for the
+    # season runs an hour off and is harmless; the run reads the completed
+    # session either way and records which one it used.
+    - cron: '0 12 * * 0-4'   # summer, UTC+3
+    - cron: '0 13 * * 0-4'   # winter, UTC+2
+
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/lab/**'
+      - '.github/workflows/lab-nightly.yml'
+
+  workflow_dispatch:
+    inputs:
+      models:
+        description: 'baselines, all, or a comma-separated list'
+        default: 'all'
+
+concurrency:
+  # One lab run at a time. Two runs of the same night would produce two
+  # forecasts for the same basis session, and "the forecast" would mean
+  # whichever finished last.
+  group: lab-nightly
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  forecast:
+    runs-on: ubuntu-latest
+    # The market scan is ~6 minutes and Kronos ~6 more. Twice that is room
+    # for a slow runner and no room for a hang.
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Torch is half a gigabyte and the weights are another hundred
+      # megabytes. Both are pinned, so both cache: without this the download
+      # is most of the run, every night, for bytes that never change.
+      - name: Cache the model weights
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/esthmr-lab
+          key: lab-weights-kronos-small-901c26c1
+          restore-keys: lab-weights-
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: lab-pip-${{ hashFiles('scripts/lab/requirements.txt') }}
+          restore-keys: lab-pip-
+
+      - name: Install the models
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r scripts/lab/requirements.txt
+
+      # Not a pip package: the model classes live in the repository, so the
+      # source has to be on disk. Pinned to the commit the measured August
+      # run used — a foundation model is a moving target, and a record that
+      # says "Kronos-small" without saying which one cannot be verified.
+      - name: Fetch Kronos
+        run: |
+          git clone --quiet https://github.com/shiyu-coder/Kronos.git ../kronos-src
+          git -C ../kronos-src checkout --quiet 67b630e67f6a18c9e9be918d9b4337c960db1e9a
+          echo "ESTHMR_KRONOS_SOURCE=$(cd ../kronos-src && pwd)" >> "$GITHUB_ENV"
+
+      # The same scan `publish-app-data` uses: 296 scanner rows and ~232
+      # companies with 120 completed split-adjusted bars, pulled over a
+      # WebSocket. Fetched here rather than shared because two fetches
+      # minutes apart are two different markets, and the forecast has to be
+      # made from the bars the record says it was made from.
+      - name: Fetch the market scan
+        run: |
+          mkdir -p ../work
+          npm install ws --no-save --silent
+          node scripts/egx_scan.mjs ../work
+
+      - name: Test the lab
+        run: cd scripts/lab && python3 -m unittest test_lab
+
+      - name: Forecast
+        env:
+          ESTHMR_LAB_CACHE: ~/.cache/esthmr-lab
+          ESTHMR_LAB_THREADS: '4'
+        run: |
+          scan=$(ls -t ../work/daily_scan_*.json | grep -v fused | head -1)
+          echo "scan: $scan"
+          python3 scripts/lab/run.py "$scan" --models "${{ inputs.models || 'all' }}"
+
+      # Committed because the whole value is that it cannot be edited
+      # afterwards. A forecast kept only in a CI artifact expires in ninety
+      # days and proves nothing about what was believed in September.
+      - name: Commit the run
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data-source/lab
+          if git diff --cached --quiet; then
+            echo 'nothing new — the basis session has not moved'
+            exit 0
+          fi
+          git commit -m 'lab: nightly forecasts'
+          git pull --rebase --autostash origin main
+          git push origin HEAD:main
