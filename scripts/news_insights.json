@@ -1043,6 +1043,10 @@
     "meaning": "A gain of over 2% in Japanese equity benchmarks reflects an upward adjustment in market capitalization across listed equities on the Tokyo exchange, driven by session trading volume and net capital inflows.",
     "meaning_ar": "يعكس ارتفاع مؤشرات الأسهم اليابانية بأكثر من 2% نمواً في القيمة السوقية الإجمالية للشركات المدرجة في بورصة طوكيو، مدفوعاً بتدفقات نقدية شرائية وأحجام تداول منفذة خلال الجلسة."
   },
+  "ارتفاع الدولار وسط ترقب قرارات الفايده في امريكا واليابان وبريطانيا": {
+    "meaning": "Divergent monetary policy expectations and interest rate decisions across major central banks drive global foreign exchange repositioning, which alters USD liquidity flows and directly impacts local currency valuation and import pricing dynamics in emerging markets such as Egypt.",
+    "meaning_ar": "تؤدي مواءمة السياسات النقدية وقرارات أسعار الفائدة لدى البنوك المركزية الكبرى إلى إعادة توزيع السيولة بالدولار عالمياً، مما يحدد وتيرة تسعير العملات المحلية وتكاليف المعاملات الاستيرادية في الأسواق الناشئة ومنها مصر."
+  },
   "ارتفاع الين الي اعلي مستوياته في 7 اشهر": {
     "meaning": "A rise in the Japanese yen increases the direct acquisition cost of JPY-denominated imports and raises the local-currency carrying value of yen-denominated liabilities.",
     "meaning_ar": "يؤدي ارتفاع الين الياباني إلى زيادة التكلفة المباشرة للواردات المسعرة بالين، ورفع القيمة المعادلة بالعملة المحلية للالتزامات والديون القائمة بالعملة اليابانية."
@@ -2155,6 +2159,10 @@
     "meaning": "Attacks on energy infrastructure trigger operational emergency protocols, require technical assessments of asset integrity, and alter logistical flows across regional supply networks.",
     "meaning_ar": "يؤدي استهداف منشآت الطاقة إلى تفعيل بروتوكولات الطوارئ التشغيلية، وإجراء تقييمات فنية لسلامة الأصول، وتعديل المسارات اللوجستية عبر شبكات الإمداد الإقليمية."
   },
+  "السعوديون يعودون لشراء الاسهم مع تحول الاجانب الي البيع": {
+    "meaning": "Trading volume reflects a shift in market liquidity sources, where domestic or regional Arab capital inflows counterbalance capital outflows from non-Arab foreign market participants.",
+    "meaning_ar": "تعكس أحجام التداول تحولاً في مصادر السيولة النقدية، حيث تقابل التدفقات الرأسمالية العربية الداخلة خروج السيولة الخاصة بالمتعاملين الأجانب من غير العرب."
+  },
   "السكك الحديد تعلن انتظام حركه القطارات علي خط القاهره اسوان": {
     "meaning": "Regular train operations restore baseline freight and passenger transport capacity along the Upper Egypt logistics corridor, maintaining scheduled supply chain flows for commercial goods and domestic mobility.",
     "meaning_ar": "تؤدي عودة حركة القطارات إلى انتظام السعة التشغيلية لنقل الركاب والبضائع عبر ممر الصعيد اللوجستي، مما يحافظ على التدفقات المجدولة لسلاسل الإمداد للسلع التجارية والتنقل الداخلي."
@@ -2222,6 +2230,14 @@
   "الشركه العامه لتجاره الجمله تشارك في مبادره خفض الاسعار ب79 منفذا استهلاكيا": {
     "meaning": "The company allocates 79 of its retail outlets to distribute price-discounted consumer goods under a state-directed initiative, altering product pricing structures and inventory turnover rates across these specific branches.",
     "meaning_ar": "تخصص الشركة 79 منفذًا من منافذها التابعة لطرح سلع استهلاكية مخفضة ضمن مبادرة حكومية، مما يغير هياكل تسعير المنتجات ومعدلات دوران المخزون داخل هذه الفروع المحددة."
+  },
+  "الشمس بيراميدز تتحول الي الربحيه في سته اشهر": {
+    "meaning": "The company's semi-annual financial statements reflect a transition from a net loss to a net profit, driven by revenue expansion exceeding operational and financial costs over the six-month period.",
+    "meaning_ar": "تُظهر القوائم المالية نصف السنوية للشركة التحول من صافي خسارة إلى صافي ربح، نتيجة تجاوز الإيرادات المحققة لإجمالي التكاليف التشغيلية والتمويلية خلال فترة الستة أشهر."
+  },
+  "الشمس بيراميدز للفنادق تتحول للربحيه خلال النصف الاول": {
+    "meaning": "The company shifts from a net loss to a net profit during the six-month period, reflecting revenue levels that exceed total operational expenses and financing costs.",
+    "meaning_ar": "تتحول الشركة من تسجيل صافي خسائر إلى صافي أرباح خلال فترة الستة أشهر، وهو ما يعكس تجاوز الإيرادات المحققة لإجمالي المصروفات التشغيلية والتكاليف التمويلية."
   },
   "الصحه توقع بروتوكولا مع جهاز الملكيه الفكريه لتعزيز الامن الدوايي": {
     "meaning": "The protocol establishes a coordination framework between the Ministry of Health and the Intellectual Property Authority to regulate pharmaceutical patent registrations, facilitate the licensing of generic drug formulations, and streamline local manufacturing procedures for active ingredients.",
@@ -4573,6 +4589,10 @@
     "meaning": "Extending the liquidation period and renewing the liquidator's mandate continues the formal legal and operational process of inventorying, valuing, and selling company assets to settle outstanding liabilities under statutory oversight.",
     "meaning_ar": "يؤدي مد فترة التصفية وتجديد تفويض المصفي القانوني إلى استمرار الإجراءات النظامية لحصر أصول الشركة وتقييمها وبيعها لسداد الالتزامات المالية والديون تحت إشراف الجمعية العامة."
   },
+  "عموميه شركه راميدا تعدل مواد بالنظام الاساسي تخص زياده راس المال واجتماعات الاداره": {
+    "meaning": "Amending the articles of association updates the company's legal framework governing capital increase procedures and internal administrative protocols for board meetings.",
+    "meaning_ar": "يُعدل تعديل النظام الأساسي الإطار القانوني والتنظيمي للشركة الحاكم لإجراءات زيادات رأس المال والضوابط الإدارية لاجتماعات مجلس الإدارة."
+  },
   "عوايد السندات الامريكيه تواصل الارتفاع رغم مضاعفه الخزانه عمليات اعاده الشراء": {
     "meaning": "US Treasury buyback operations inject liquidity and absorb older, less liquid securities, yet bond yields reflect broader macroeconomic factors and secondary market pricing driven by benchmark policy rates and primary issuance volume.",
     "meaning_ar": "تضخ عمليات إعادة الشراء التي تنفذها الخزانة الأمريكية سيولة نقدية وتستوعب الأوراق المالية القديمة الأقل تداولاً، بينما تعكس عوائد السندات آليات التسعير في السوق الثانوية المتأثرة بمعدلات الفائدة القياسية وأحجام الإصدارات الجديدة."
@@ -5828,6 +5848,10 @@
   "وزير الصحه: المجلس الوطني للتعليم منصه لدعم تكامل البحث العلمي والابتكار": {
     "meaning": "The institutional framework links state academic research directly to industrial applications within the healthcare and pharmaceutical sectors, establishing centralized governance for domestic medical research and development assets.",
     "meaning_ar": "يربط هذا الإطار المؤسسي بين الأبحاث الأكاديمية الحكومية والتطبيقات الصناعية في قطاعي الرعاية الصحية والأدوية، مما ينشئ حوكمة مركزية لأصول البحث والتطوير الطبي محلياً."
+  },
+  "وزير الصحه: مباحثات متقدمه لانشاء منصه مصر الذكيه للرعايه الصحيه": {
+    "meaning": "The project introduces a centralized digital infrastructure connecting state healthcare providers, digital health data records, and administrative services onto a single operational network.",
+    "meaning_ar": "يقوم المشروع بإنشاء بنية تحتية رقمية مركزية تربط مقدمي خدمات الرعاية الصحية الحكومية وسجلات البيانات الطبية والخدمات الإدارية عبر شبكة تشغيلية موحدة."
   },
   "وزير الصناعه ومحافظ الجيزه يبحثان تقنين الاوضاع بمنطقتي جرزا وعرب ابوساعد الصناعيتين": {
     "meaning": "Regularising industrial zones integrates informal manufacturing units into the formal economy, providing facilities with legal operating licences, utility connections, and access to regulated industrial infrastructure.",
