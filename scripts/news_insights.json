@@ -1467,6 +1467,10 @@
     "meaning": "The trilateral framework between Egypt, Cyprus, and Greece establishes operational coordination for cross-border infrastructure and Eastern Mediterranean energy transit corridors, encompassing natural gas transport and electricity grid interconnection projects.",
     "meaning_ar": "يحدد إطار التعاون الثلاثي بين مصر وقبرص واليونان آليات التنسيق لمشاريع البنية التحتية وممرات نقل الطاقة في شرق المتوسط، والتي تشمل مشروعات الربط الكهربائي وخطوط نقل الغاز الطبيعي المشتركة."
   },
+  "اعمار مصر ترسي عقدي مقاولات مع رواد الهندسه": {
+    "meaning": "The award establishes a contractor-developer relationship where the developer commits capital expenditures from its balance sheet to outsource construction works to an engineering contractor.",
+    "meaning_ar": "ترسية العقود تؤسس علاقة تعاقدية بين المطور والمقاول؛ يلتزم بموجبها المطور العقاري بنفقات رأسمالية لتنفيذ الأعمال الإنشائية عبر إسنادها لشركة مقاولات هندسية."
+  },
   "افتتاح 9 مشروعات في “السخنه الصناعيه” باستثمارات 85 مليون دولار": {
     "meaning": "The commissioning of nine industrial projects adds new operating production lines and increases capital asset deployment within the Sokhna Industrial Zone.",
     "meaning_ar": "يضيف تشغيل تسعة مشروعات خطوط إنتاج صناعية جديدة ويرفع من حجم الأصول الرأسمالية العاملة داخل المنطقة الصناعية بالسخنة."
@@ -2062,6 +2066,10 @@
   "الرقابه الماليه وستارت اب ايجيبت تتعاونان لتطوير منصه رقميه لدعم الشركات الناشيه": {
     "meaning": "The Financial Regulatory Authority (FRA) and Startup Egypt establish a shared digital infrastructure that centralizes regulatory compliance, licensing procedures, and operational resources for emerging enterprises.",
     "meaning_ar": "تؤسس الهيئة العامة للرقابة المالية ومؤسسة ستارت أب إيجيبت بنية تحتية رقمية مشتركة لمركزية إجراءات الامتثال التنظيمي والتراخيص والموارد التشغيلية للشركات الناشئة."
+  },
+  "الرقابه الماليه: استخدام “OTP” للتحقق من هويه عملاء التمويل خلال شهرين": {
+    "meaning": "The Financial Regulatory Authority (FRA) mandates a one-time password (OTP) verification protocol for non-banking financial clients within two months, establishing an automated digital identity validation mechanism for credit and financing operations.",
+    "meaning_ar": "تُلزم الهيئة العامة للرقابة المالية جهات التمويل غير المصرفي بتطبيق نظام التحقق من هوية العملاء عبر كلمات المرور لمرة واحدة (OTP) خلال شهرين، وهو ما يضع آلية رقمية للتحقق من هوية الأطراف في المعاملات الائتمانية."
   },
   "الرقابه الماليه: المختبر التنظيمي يدعم الابتكار والتحول الرقمي في الانشطه غير المصرفيه": {
     "meaning": "The regulatory sandbox operates as a controlled testing framework where non-banking financial institutions and FinTech entities deploy and validate digital products and operational models under direct supervisory oversight.",
@@ -3188,6 +3196,10 @@
     "meaning": "A sharp drop in maritime traffic through the Strait of Hormuz disrupts global energy and commodities supply chains, driving up shipping and insurance costs and putting upward pressure on crude oil and raw material prices.",
     "meaning_ar": "يؤدي تراجع حركة الملاحة عبر مضيق هرمز إلى اضطراب سلاسل إمداد الطاقة والسلع العالمية، مما يرفع تكاليف الشحن والتأمين ويزيد الضغوط الصعودية على أسعار النفط الخام والمواد الأولية."
   },
+  "تراجع سهم زد ايه اي باكثر من 9% عقب خطط لجمع 5 مليارات دولار": {
+    "meaning": "Announcing a $5 billion capital raise introduces equity dilution by expanding the total share count, which lowers earnings per share and increases immediate market supply.",
+    "meaning_ar": "يؤدي الإعلان عن خطة لجمع 5 مليارات دولار إلى تخفيض حصص المساهمين نتيجة زيادة إجمالي عدد الأسهم المصدرة، مما يقلل نصيب السهم من الأرباح ويرفع المعروض السوقي الحالي."
+  },
   "تراجع شح امدادات وقود السفن رغم استمرار ازمه مضيق هرمز": {
     "meaning": "The easing of marine bunker fuel shortages reflects an operational normalization in regional replenishment and inventory distribution networks, operating independently of transit tensions through the Strait of Hormuz.",
     "meaning_ar": "يعكس انحسار شح إمدادات وقود السفن انتظاماً تشغيلياً في شبكات التوزيع والتخزين الإقليمية بمعزل عن استمرار التوترات الملاحية في مضيق هرمز."
@@ -4095,6 +4107,10 @@
   "سعر الفضه يخسر 1% في اسبوع.. تعرف علي قيمه عيار 999 في مصر": {
     "meaning": "Local silver pricing directly tracks international precious metal spot rates adjusted for the domestic USD/EGP exchange rate, reflecting global benchmark movements across purity grades such as 999.",
     "meaning_ar": "تتبع أسعار الفضة في السوق المحلية تحركات العقود الفورية العالمية للمعدن مقومة بسعر صرف الجنيه المصري مقابل الدولار، وهو ما ينعكس بصورة مباشرة على تسعير مختلف الأعيرة ومنها عيار 999."
+  },
+  "سعر اللحوم والكبده والكباب حله اليوم الاثنين 14سبتمبر 2026 في المنافذ والجزاره": {
+    "meaning": "Tracking meat prices across state-subsidized retail outlets and private butcher shops reflects daily changes in consumer protein costs, driven by feed import expenses and local livestock supply chain dynamics.",
+    "meaning_ar": "يعكس تتبع أسعار اللحوم بين المنافذ التموينية ومحلات الجزارة الخاصة التغيرات اليومية في تكلفة البروتين للمستهلك، والتي تتحدد بتكاليف استيراد الأعلاف وحركة سلاسل إمداد الثروة الحيوانية المحلية."
   },
   "سعر اليورو اليوم الاربعاء 9-9-2026 في بدايه التعاملات": {
     "meaning": "The headline tracks the opening foreign exchange spot rate of the Euro against the Egyptian Pound, which serves as a pricing benchmark for international trade settlements, corporate FX exposures, and commercial bank treasury operations.",
