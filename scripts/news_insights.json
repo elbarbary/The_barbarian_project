@@ -2711,6 +2711,10 @@
     "meaning": "The US labor market data reflects net non-farm payroll growth alongside an unchanged unemployment rate, serving as a primary macroeconomic indicator for global monetary policy benchmarks and cross-border capital flows.",
     "meaning_ar": "توضح بيانات سوق العمل الأمريكي إضافة صافية في الوظائف غير الزراعية مع ثبات معدل البطالة، وتعمل هذه الأرقام كمؤشر اقتصادي كلي رئيسي يوجه السياسات النقدية العالمية وتدفقات رؤوس الأموال الدولية."
   },
+  "الي اين تتجه العملات؟ دويتشه بنك يتوقع صعود 3 عملات اساسيه": {
+    "meaning": "Investment bank currency research reflects foreign exchange valuation models based on interest rate differentials, trade balances, and central bank monetary policies.",
+    "meaning_ar": "تعكس تقارير بحوث العملات الصادرة عن بنوك الاستثمار نماذج تسعير الصرف الأجنبي القائمة على فروق أسعار الفائدة والموازين التجارية والسياسات النقدية للبنوك المركزية."
+  },
   "الي اين وصلت اسعار الخشب اليوم الخميس 10-9-2026 في السوق المحليه؟": {
     "meaning": "Domestic timber prices reflect import parity costs and foreign exchange dynamics, serving as a primary direct input cost for the furniture manufacturing, construction, and finishing sectors.",
     "meaning_ar": "تعكس أسعار الخشب في السوق المحلية تكاليف الاستيراد وحركة أسعار الصرف، وتمثل عنصر تكلفة تشغيلية مباشر لقطاعات تصنيع الأثاث والتشييد وأعمال التشطيبات."
@@ -3923,6 +3927,10 @@
   "ديب سييك تستعد لطرح اسهمها في بورصه شنغهاي العام الجاري": {
     "meaning": "An initial public offering on the Shanghai Stock Exchange transitions the company from private to public ownership by issuing equity shares to institutional and retail investors, which expands the corporate capital base and subjects the firm to public regulatory disclosure requirements.",
     "meaning_ar": "يمثل الطرح العام الأولي في بورصة شنغهاي تحولاً للشركة من الملكية الخاصة إلى العامة عبر إصدار أسهم للمؤسسات والأفراد، مما يوسع القاعدة الرأسمالية للشركة ويخضعها لمتطلبات الإفصاح والتنظيم المعمول بها في الأسواق المالية."
+  },
+  "ديفيد فيكلينج يكتب: اسعار النحاس تكسر القواعد التاريخيه وتتفوق علي النيكل": {
+    "meaning": "Copper trading at higher prices relative to nickel reflects a divergence from historical pricing ratios between the two base metals, shifting input cost dynamics for industrial consumers and manufacturers.",
+    "meaning_ar": "يعكس تداول النحاس بأسعار تتفوق على النيكل تغيراً في نسب التسعير التاريخية بين المعدنين الأساسيين، مما يغير ديناميكيات تكلفة المدخلات للمصنعين والمستهلكين في القطاع الصناعي."
   },
   "ديفيد فيكلينج يكتب: هل تنجح واشنطن في “الشحن النووي” دون بكين؟": {
     "meaning": "The article examines international nuclear supply chain dependencies, specifically the operational and trade mechanisms required for developing nuclear energy infrastructure independently of Chinese manufacturing and critical mineral inputs.",
