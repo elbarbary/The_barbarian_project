@@ -7,19 +7,14 @@
  "sector": "Real Estate",
  "sector_ar": "عقارات",
  "market": {
-  "last_close": 2.5,
+  "last_close": 2.51,
   "date": "2026-09-14",
-  "open": 2.49,
-  "high": 2.55,
+  "open": 2.5,
+  "high": 2.54,
   "low": 2.47,
-  "volume": 4029407
+  "volume": 342172
  },
  "price_history": [
-  {
-   "date": "2025-08-06",
-   "close": 2.18,
-   "volume": 4358056
-  },
   {
    "date": "2025-08-07",
    "close": 2.17,
@@ -1232,7 +1227,7 @@
   },
   {
    "date": "2026-08-18",
-   "close": 2.31,
+   "close": 2.32,
    "volume": 4839551
   },
   {
@@ -1247,7 +1242,7 @@
   },
   {
    "date": "2026-08-23",
-   "close": 2.29,
+   "close": 2.28,
    "volume": 4216060
   },
   {
@@ -1314,32 +1309,31 @@
    "date": "2026-09-10",
    "close": 2.49,
    "volume": 5190635
+  },
+  {
+   "date": "2026-09-13",
+   "close": 2.5,
+   "volume": 4029407
   }
  ],
  "profile": {
   "shares_outstanding": 1151285400,
-  "perf_1w": -2.723735408560305,
-  "perf_1m": 16.822429906542048,
-  "perf_3m": 26.262626262626263,
-  "avg_volume_30d": 11389998.933333334,
-  "relative_volume_10d": 0.2645882918380544,
-  "history_bars": 0,
-  "market_cap": 2878213500.0,
-  "market_cap_source": "EGX",
-  "trades": 535,
-  "turnover": 10111499,
+  "perf_1w": 0.8032128514056053,
+  "perf_1m": 17.289719626168207,
+  "perf_3m": 28.717948717948712,
+  "avg_volume_30d": 11188315.1,
+  "relative_volume_10d": 0.02413430492557146,
   "median_volume_20d": 7752272.5,
-  "rv20": 0.6695630216817069,
-  "normal_value_30d": 14596531.125,
-  "five_session_change": -3.112840466926059,
+  "rv20": 0.5197710735787474,
+  "normal_value_30d": 14097298.09,
+  "five_session_change": 0.40160642570279403,
+  "history_bars": 120,
+  "market_cap": 2855187792.0,
+  "market_cap_source": "EGX",
+  "trades": 98,
+  "turnover": 956325,
   "shares_outstanding_source": "EGX"
  },
- "profile_carried": [
-  "five_session_change",
-  "median_volume_20d",
-  "normal_value_30d",
-  "rv20"
- ],
  "financials": {
   "annual": [
    {
