@@ -246,3 +246,57 @@ test('a name is trimmed and bounded, and an absent one is empty not undefined', 
   const none = cleanRulebook({ conditions: [{ column: 'a', operator: 'has' }] });
   assert.equal(none.name, '');
 });
+
+/* ---- the research record is the one open thing under /data/v1/ ---- */
+
+const DATA = 'https://thebarbarianproject.com/data/v1';
+
+function assets(paths) {
+  return {
+    async fetch(request) {
+      const path = new URL(request.url).pathname;
+      return paths.has(path)
+        ? new Response(`served ${path}`, { status: 200 })
+        : new Response('not found', { status: 404 });
+    },
+  };
+}
+
+test('the exchange data still needs a session', async () => {
+  const e = env({ ASSETS: assets(new Set(['/data/v1/market.json'])) });
+  const result = await call(e, `${DATA}/market.json`, {});
+  assert.equal(result.status, 401);
+});
+
+test('the research record is readable without an account', async () => {
+  // The whole claim of a commitment is that a stranger can check it. A
+  // reader who must take an account from this project before auditing this
+  // project has been asked to trust the thing they came to verify.
+  const paths = new Set([
+    '/data/v1/research/commitments/2026-09-13.json',
+    '/data/v1/research/reveals/2026-08-13.json',
+    '/data/v1/research/leaderboard.json',
+  ]);
+  const e = env({ ASSETS: assets(paths) });
+  for (const path of paths) {
+    const result = await call(e, `https://thebarbarianproject.com${path}`, {});
+    assert.equal(result.status, 200, `${path} answered ${result.status}`);
+  }
+});
+
+test('an open document may be cached, a private one may not', async () => {
+  const e = env({
+    ASSETS: assets(new Set(['/data/v1/research/leaderboard.json', '/data/v1/market.json'])),
+  });
+  const open = await call(e, `${DATA}/research/leaderboard.json`, {});
+  assert.match(open.headers.get('cache-control'), /public/);
+  const gated = await call(e, `${DATA}/market.json`, { headers: await bearer('r@example.com') });
+  assert.match(gated.headers.get('cache-control'), /private, no-cache/);
+});
+
+test('nothing outside research is opened by a path that merely contains it', async () => {
+  // /data/v1/companies/research.json is exchange data with an unlucky name.
+  const e = env({ ASSETS: assets(new Set(['/data/v1/companies/research.json'])) });
+  const result = await call(e, `${DATA}/companies/research.json`, {});
+  assert.equal(result.status, 401);
+});

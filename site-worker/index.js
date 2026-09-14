@@ -1863,8 +1863,28 @@ async function serve(request, env, url, ctx) {
   }
 
   // The gate. Everything the pipeline publishes lives under this prefix.
+  /* The research record is the one thing under /data/v1/ that is not behind
+   * the session gate, and it is deliberate.
+   *
+   * Everything else here is the exchange's data, which this project pays for
+   * in effort and does not hand to a scraper. `research/` is the opposite
+   * kind of file: a Merkle root, the counts behind it, a third party's
+   * timestamp receipt, the model leaderboard, and — once every horizon in a
+   * run has matured — the forecasts themselves, opened so that anybody can
+   * rehash them and find the root that was signed weeks earlier.
+   *
+   * The whole claim of the commitment is that a STRANGER can check it.
+   * Evidence behind a login is not evidence: a reader who has to take an
+   * account from this project before they can audit this project has been
+   * asked to trust the thing they came to verify. So it is open, and
+   * `scripts/lab/verify.py` runs against exactly what a stranger can fetch.
+   *
+   * It stays rate limited by address below. Open is not unlimited.
+   */
+  const research = url.pathname.startsWith('/data/v1/research/');
+
   if (url.pathname.startsWith('/data/v1/')) {
-    const who = await session(request, env);
+    const who = research ? { e: 'public' } : await session(request, env);
     if (!who) {
       return json({ error: 'sign in to read the exchange data' }, 401, {
         'cache-control': 'no-store',
@@ -1908,7 +1928,10 @@ async function serve(request, env, url, ctx) {
     // costs nothing worth counting.
     const answer = await env.ASSETS.fetch(request);
     if (answer.status !== 304) {
-      if (await overRate(env, `data:${who.e}`)
+      // The per-account ceiling means nothing for a document with no account
+      // behind it, so the research record is held to the address ceiling
+      // alone rather than to a shared bucket every reader would empty.
+      if ((!research && await overRate(env, `data:${who.e}`))
           || await overRate(env, `data-ip:${ip}`, 'DATA_IP_LIMIT')) {
         // The document was produced and is not being sent. Say so to the
         // stream rather than dropping the reference: a discarded body is not
@@ -1927,7 +1950,12 @@ async function serve(request, env, url, ctx) {
     // never asked. On a shared machine that is somebody else reading it.
     // Revalidation still returns 304 for an unchanged document, so this
     // costs a round trip rather than the payload.
-    headers.set('cache-control', 'private, no-cache');
+    // A signed-in reader's documents must not sit in a shared cache or
+    // survive a sign-out; the research record is public and immutable once
+    // written, so it is cached like any other published file.
+    headers.set('cache-control', research
+      ? 'public, max-age=300, stale-while-revalidate=86400'
+      : 'private, no-cache');
     return new Response(answer.body, { status: answer.status, headers });
   }
 
