@@ -1503,6 +1503,10 @@
     "meaning": "Capital reallocates from concentrated positions in global artificial intelligence equities toward Chinese equity markets as part of cross-border portfolio rebalancing driven by relative valuation differentials.",
     "meaning_ar": "تتحول تدفقات رؤوس الأموال من المراكز المركزة في أسهم قطاع الذكاء الاصطناعي العالمية نحو الأسهم الصينية، ضمن آلية إعادة موازنة المحافظ الاستثمارية بناءً على الفروق في التقييمات السعرية بين الأسواق."
   },
+  "اسهم القطاعات الدفاعيه تدعم موشر فوتسي 100 في بدايه اسبوع حاسم للبنوك المركزيه": {
+    "meaning": "Defensive equities represent companies in sectors such as healthcare and consumer staples, which provide relatively stable cash flows regardless of economic cycles and shifts in benchmark interest rates. Capital allocation toward these lower-volatility assets provides benchmark weight stability during periods of monetary policy updates by central banks.",
+    "meaning_ar": "تمثل أسهم القطاعات الدفاعية شركات في مجالات مثل الرعاية الصحية والسلع الاستهلاكية الأساسية، وتتميز بتدفقات نقدية مستقرة نسبياً بمعزل عن الدورات الاقتصادية وتغيرات أسعار الفائدة. وتوفر إعادة توجيه السيولة نحو هذه الأصول منخفضة التقلب استقراراً في الأوزان النسبية للمؤشر العام بالتزامن مع إعلانات السياسات النقدية للبنوك المركزية."
+  },
   "اسهم سوفت بنك اليابانيه تهوي 13% بعد انباء عن تاجيل الطرح العام لشركه “اوبن ايه اي”": {
     "meaning": "SoftBank's market valuation reflects changes in the expected liquidity timeline and fair value realization of its major investment holdings, as the postponement of an portfolio company's initial public offering directly defers capital returns and portfolio revaluations.",
     "meaning_ar": "تعكس القيمة السوقية لمجموعة سوفت بنك تغيرات في الجدول الزمني للسيولة وتحصيل القيمة العادلة لأصولها الاستثمارية، حيث يؤدي تأجيل الطرح العام الأولي لإحدى شركات محفظتها إلى إرجاء عوائد رأس المال وإعادة تقييم الأصول دفترياً."
@@ -5280,6 +5284,10 @@
   "متحدث الصحه: عدد الاطباء العاملين في القطاع الحكومي ارتفع الي 97 الفا": {
     "meaning": "An increase in public sector physician headcount expands operational service capacity in state-run healthcare facilities while allocating a larger share of public health expenditure to personnel compensation.",
     "meaning_ar": "يؤدي ارتفاع عدد الأطباء في القطاع الحكومي إلى زيادة الطاقة التشغيلية للمنشآت الصحية التابعة للدولة، مع توجيه حصة أكبر من الإنفاق الصحي العام لبند الأجور والتعويضات."
+  },
+  "متحدث الوزراء: توجيهات بسرعه اعداد خريطه متكامله للاسواق الدايمه": {
+    "meaning": "Mapping permanent retail markets centralizes commodity distribution channels, connecting producers directly with municipal consumer zones to structure local wholesale and retail supply chains.",
+    "meaning_ar": "إعداد خريطة للأسواق الدائمة يعمل على مركزية قنوات توزيع السلع، حيث يربط المنتجين مباشرة بمناطق الاستهلاك المحلية لتنظيم سلاسل الإمداد وتجارة التجزئة."
   },
   "متوسط الفايده علي اذون الخزانه يسجل تراجعات متتاليه ليصل الي %25.058": {
     "meaning": "Lower treasury bill yields reduce the government's short-term borrowing costs on newly issued debt while lowering the fixed-income return rates available to institutional buyers in the primary market.",
