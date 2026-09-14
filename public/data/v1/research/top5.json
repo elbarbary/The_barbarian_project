@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-09-14T21:07:40Z",
+ "builtAt": "2026-09-14T21:27:47Z",
  "topCount": 5,
  "minimumSessions": 5,
  "horizons": [
@@ -26,8 +26,8 @@
   "ranAt": "2026-09-14T14:32:42Z",
   "universeSize": 260,
   "forecasters": 9,
-  "readings": 0,
-  "rerankedAt": null
+  "readings": 16,
+  "rerankedAt": "2026-09-14T21:23:54Z"
  },
  "what": "For each model, the 5 companies it ranked highest on a session, and what those returned against what everything it scored returned. Every forecast was frozen before the outcome existed. A horizon whose answer already existed when the forecast was written is not counted.",
  "reading": "5 companies over a handful of sessions is a very small sample. `sessions` is how many nights are behind each average and `ahead` how many of them the model's five beat the market on; both are the size of the evidence and the average means nothing without them. Below 5 sessions the screen shows the count and not the average.",
@@ -38,7 +38,7 @@
    "label": "Gemini re-rank",
    "labelAr": "إعادة ترتيب Gemini",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1487,7 +1487,7 @@
    "label": "rerank:models",
    "labelAr": "rerank:models",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1520,7 +1520,7 @@
    "label": "rerank:filings",
    "labelAr": "rerank:filings",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1555,7 +1555,7 @@
    "label": "rerank:news",
    "labelAr": "rerank:news",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1590,7 +1590,7 @@
    "label": "rerank:rulebook",
    "labelAr": "rerank:rulebook",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1625,7 +1625,7 @@
    "label": "rerank:measures",
    "labelAr": "rerank:measures",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1660,7 +1660,7 @@
    "label": "rerank:filings-news",
    "labelAr": "rerank:filings-news",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1696,7 +1696,7 @@
    "label": "rerank:filings-rulebook",
    "labelAr": "rerank:filings-rulebook",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1732,7 +1732,7 @@
    "label": "rerank:filings-measures",
    "labelAr": "rerank:filings-measures",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1768,7 +1768,7 @@
    "label": "rerank:news-rulebook",
    "labelAr": "rerank:news-rulebook",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1804,7 +1804,7 @@
    "label": "rerank:news-measures",
    "labelAr": "rerank:news-measures",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1840,7 +1840,7 @@
    "label": "rerank:rulebook-measures",
    "labelAr": "rerank:rulebook-measures",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1876,7 +1876,7 @@
    "label": "Gemini re-rank",
    "labelAr": "إعادة ترتيب Gemini",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1913,7 +1913,7 @@
    "label": "rerank:filings-news-measures",
    "labelAr": "rerank:filings-news-measures",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1950,7 +1950,7 @@
    "label": "rerank:filings-rulebook-measures",
    "labelAr": "rerank:filings-rulebook-measures",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1987,7 +1987,7 @@
    "label": "rerank:news-rulebook-measures",
    "labelAr": "rerank:news-rulebook-measures",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -2024,7 +2024,7 @@
    "label": "rerank:filings-news-rulebook-measures",
    "labelAr": "rerank:filings-news-rulebook-measures",
    "group": "rerank",
-   "nights": 0,
+   "nights": 1,
    "horizons": {
     "1": {
      "sessions": 0,
