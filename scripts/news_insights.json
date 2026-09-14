@@ -3015,6 +3015,10 @@
     "meaning": "Tokenized assets represent traditional financial instruments and real-world assets converted into digital tokens on distributed ledger networks, with the current global market value standing at $40 billion.",
     "meaning_ar": "تمثل الأصول المرمّزة أدوات مالية وأصولاً تقليدية تم تحويلها إلى رموز رقمية على شبكات السجلات الموزعة، حيث يبلغ إجمالي قيمتها السوقية عالمياً 40 مليار دولار في الوقت الحالي."
   },
+  "بنك التسويات الدوليه: ديون شركات الذكاء الاصطناعي تهدد مكاسب الاسهم": {
+    "meaning": "High leverage in artificial intelligence firms ties balance-sheet health to ongoing debt-service costs, where elevated financing obligations directly offset operational cash flows and equity valuations.",
+    "meaning_ar": "تؤدي المستويات المرتفعة لمديونية شركات الذكاء الاصطناعي إلى ربط مراكزها المالية بتكاليف خدمة الدين، حيث تستقطع أعباء التمويل المرتفعة جزءاً مباشراً من التدفقات النقدية التشغيلية والتقييمات السوقية لأسهمها."
+  },
   "بنك التنميه الصناعيه يتيح تمويل وحدات مشروعات صندوق التنميه الحضريه": {
     "meaning": "The Industrial Development Bank integrates financing products into the Urban Development Fund's housing developments, creating a direct credit channel between the bank's mortgage portfolio and state-backed real estate inventory.",
     "meaning_ar": "يُدرج بنك التنمية الصناعية منتجات تمويلية مخصصة لوحدات صندوق التنمية الحضرية، مما ينشئ قناة ائتمانية مباشرة تربط بين المحفظة العقارية للبنك والأصول السكنية التابعة للصندوق."
@@ -3283,6 +3287,10 @@
   "تراجع جماعي لموشرات البورصه بمستهل التعاملات.. وEGX30 ينخفض بنسبه 0.65%": {
     "meaning": "An opening decline across indices reflects an immediate predominance of executed ask orders over bid orders, which revalues index-constituent equities downward at the start of the trading session.",
     "meaning_ar": "يعكس التراجع الجماعي للمؤشرات في مستهل الجلسة غلبة أوامر العرض المنفذة على أوامر الطلب، مما يعيد تسعير أسهم الشركات المكونة للمؤشرات عند مستويات أدنى."
+  },
+  "تراجع جماعي لموشرات البورصه في ختام تعاملات اليوم": {
+    "meaning": "A collective decline across exchange indices reflects net capital outflows as market-wide selling volume exceeds buying volume across benchmark constituents, leading to a concurrent contraction in total market capitalization.",
+    "meaning_ar": "يعكس التراجع الجماعي لمؤشرات البورصة صافي تدفقات رأسمالية خارجة نتيجة تجاوز حجم أوامر البيع لحجم الشراء عبر الأسهم المكونة للمؤشرات، مما يؤدي إلى انخفاض القيمة السوقية الإجمالية."
   },
   "تراجع جماعي لموشرات البورصه في منتصف تعاملات اليوم": {
     "meaning": "A collective decline in market indices reflects a simultaneous decrease in the weighted share prices of listed companies across the exchange, driven by aggregate transaction values where execution prices are lower than previous closing levels during mid-session trading.",
@@ -6296,6 +6304,10 @@
   "“القومي لتنظيم الاعلانات” يواصل جولاته لرصد تطبيق المنظومه بمحافظه الجيزه": {
     "meaning": "Regulatory inspections enforce standardized outdoor advertising rules and licensing compliance for media agencies and billboard operators across Giza.",
     "meaning_ar": "تفرض الجولات الرقابية تطبيق القواعد الموحدة لتنظيم إعلانات الطرق والتحقق من التزام وكالات الدعاية والإعلان بتراخيص التشغيل في محافظة الجيزة."
+  },
+  "“المجتمعات العمرانيه” تطرح 12 فرصه استثماريه في “العاشر” ب1.5 مليار جنيه": {
+    "meaning": "The New Urban Communities Authority allocates state-owned land plots in 10th of Ramadan City through commercial and industrial investment tenders with a total baseline transaction value of EGP 1.5 billion.",
+    "meaning_ar": "تطرح هيئة المجتمعات العمرانية الجديدة قطع أراضٍ بنظام التخصيص الاستثماري والتجاري والصناعي في مدينة العاشر من رمضان، بقيمة بيعية مستهدفة تبلغ 1.5 مليار جنيه."
   },
   "“المركزي الاوروبي” يتجه لرفع الفايده مجددا وسط تضخم يتجاوز 3%": {
     "meaning": "Raising interest rates by the European Central Bank increases the cost of borrowing in euros and tightens liquidity in international markets, which affects foreign exchange differentials and global trade financing costs.",
