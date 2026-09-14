@@ -2,7 +2,7 @@
  "generated": "2026-09-14",
  "source": "EGX disclosures — scheduled dates the issuer has filed",
  "past_days": 90,
- "count": 453,
+ "count": 457,
  "estimated": 395,
  "events": [
   {
@@ -688,6 +688,54 @@
    "section": "Corporate Actions",
    "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=294423",
    "id": "egx-294423"
+  },
+  {
+   "date": "2026-09-29",
+   "kind": "rights_open",
+   "note": "Rights issue subscription opens",
+   "ticker": "HBCO",
+   "title": "Heibco for commercial investments & real estate development (HBCO.CA) - Rights Issue (SMEs Market)",
+   "title_ar": "هيبكو للاستثمارات التجارية والتنمية العقارية (HBCO.CA) - حق اكتتاب (سوق الشركات الصغيرة والمتوسطة)",
+   "filed": "2026-09-14",
+   "section": "Corporate Actions",
+   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=294642",
+   "id": "egx-294642"
+  },
+  {
+   "date": "2026-10-01",
+   "kind": "ex_dividend",
+   "note": "Ex-dividend — last day to own for the coupon",
+   "ticker": "MFSC",
+   "title": "Misr Duty Free Shops (MFSC.CA) Declares Cash Dividends",
+   "title_ar": "مصر للاسواق الحرة (MFSC.CA) تعلن عن توزيع نقدي",
+   "filed": "2026-09-14",
+   "section": "Corporate Actions",
+   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=294638",
+   "id": "egx-294638"
+  },
+  {
+   "date": "2026-10-05",
+   "kind": "dividend_payment",
+   "note": "Cash dividend payment",
+   "ticker": "MFSC",
+   "title": "Misr Duty Free Shops (MFSC.CA) Declares Cash Dividends",
+   "title_ar": "مصر للاسواق الحرة (MFSC.CA) تعلن عن توزيع نقدي",
+   "filed": "2026-09-14",
+   "section": "Corporate Actions",
+   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=294638",
+   "id": "egx-294638"
+  },
+  {
+   "date": "2026-10-13",
+   "kind": "rights_close",
+   "note": "Rights issue subscription closes",
+   "ticker": "HBCO",
+   "title": "Heibco for commercial investments & real estate development (HBCO.CA) - Rights Issue (SMEs Market)",
+   "title_ar": "هيبكو للاستثمارات التجارية والتنمية العقارية (HBCO.CA) - حق اكتتاب (سوق الشركات الصغيرة والمتوسطة)",
+   "filed": "2026-09-14",
+   "section": "Corporate Actions",
+   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=294642",
+   "id": "egx-294642"
   },
   {
    "date": "2026-10-26",
