@@ -1008,6 +1008,41 @@ class CarryTest(unittest.TestCase):
         self.assertEqual(ev.read_stored(pathlib.Path("/nonexistent/x.json")), {})
 
 
+class WriteTest(unittest.TestCase):
+    """A file that changes daily for nothing is a conflict waiting to happen."""
+
+    def setUp(self):
+        import tempfile
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.path = pathlib.Path(self.tmp.name) / "evaluation.json"
+
+    def test_a_new_file_is_written(self):
+        self.assertTrue(ev.write_unless_unchanged(
+            self.path, {"builtAt": "t1", "models": {"m": 1}}))
+
+    def test_only_the_clock_moving_writes_nothing(self):
+        ev.write_unless_unchanged(self.path, {"builtAt": "t1", "models": {"m": 1}})
+        before = self.path.read_text()
+        self.assertFalse(ev.write_unless_unchanged(
+            self.path, {"builtAt": "t2", "models": {"m": 1}}))
+        self.assertEqual(self.path.read_text(), before)
+
+    def test_a_changed_score_writes_and_carries_the_new_time(self):
+        ev.write_unless_unchanged(self.path, {"builtAt": "t1", "models": {"m": 1}})
+        self.assertTrue(ev.write_unless_unchanged(
+            self.path, {"builtAt": "t2", "models": {"m": 2}}))
+        held = json.loads(self.path.read_text())
+        self.assertEqual(held["models"]["m"], 2)
+        # So `builtAt` says when this CONTENT was produced, not when a job ran.
+        self.assertEqual(held["builtAt"], "t2")
+
+    def test_an_unreadable_existing_file_is_replaced_not_trusted(self):
+        self.path.write_text("half a json document {")
+        self.assertTrue(ev.write_unless_unchanged(
+            self.path, {"builtAt": "t1", "models": {"m": 1}}))
+
+
 class CalendarTest(unittest.TestCase):
 
     def test_a_session_needs_a_majority_of_the_market(self):

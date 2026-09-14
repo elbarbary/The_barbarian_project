@@ -280,6 +280,30 @@ def carried(stored: dict, sessions: list[str]) -> dict[str, dict]:
     return out
 
 
+def write_unless_unchanged(path: pathlib.Path, document: dict, *,
+                           indent=None, ignoring=("builtAt",)) -> bool:
+    """Write only when something other than the clock moved.
+
+    Both of these files carry a `builtAt`, so rewriting them unconditionally
+    made every run a commit — and two runs finishing minutes apart a rebase
+    conflict over a document whose only difference was the second it was
+    produced. That conflict broke the lab's own commit step on the day it was
+    written.
+
+    Comparing on everything BUT the timestamp also keeps `builtAt` honest: it
+    now says when this content was produced rather than when a job last ran.
+    """
+    fresh = {k: v for k, v in document.items() if k not in ignoring}
+    held = read_stored(path)
+    if held and {k: v for k, v in held.items() if k not in ignoring} == fresh:
+        return False
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(document, ensure_ascii=False, indent=indent,
+                               separators=None if indent else (",", ":")),
+                    encoding="utf-8")
+    return True
+
+
 def read_stored(path: pathlib.Path) -> dict:
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -494,17 +518,18 @@ def main(argv=None) -> int:
         return 0
 
     args.runs.mkdir(parents=True, exist_ok=True)
-    PRIVATE.write_text(json.dumps({"builtAt": built, "nights": nights,
-                                   "models": table},
-                                  ensure_ascii=False, separators=(",", ":")),
-                       encoding="utf-8")
-    print(f"   wrote {PRIVATE.relative_to(REPO)}")
+    if write_unless_unchanged(PRIVATE, {"builtAt": built, "nights": nights,
+                                        "models": table}):
+        print(f"   wrote {PRIVATE.relative_to(REPO)}")
+    else:
+        print(f"   {PRIVATE.name} unchanged — no horizon matured since the "
+              "last run")
 
-    PUBLIC.parent.mkdir(parents=True, exist_ok=True)
-    PUBLIC.write_text(json.dumps(public, ensure_ascii=False, indent=1),
-                      encoding="utf-8")
-    print(f"   wrote {PUBLIC.relative_to(REPO)} "
-          f"({PUBLIC.stat().st_size // 1024} KB, no company named)")
+    if write_unless_unchanged(PUBLIC, public, indent=1):
+        print(f"   wrote {PUBLIC.relative_to(REPO)} "
+              f"({PUBLIC.stat().st_size // 1024} KB, no company named)")
+    else:
+        print(f"   {PUBLIC.name} unchanged")
     return 0
 
 

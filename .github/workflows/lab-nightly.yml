@@ -204,5 +204,32 @@ jobs:
             exit 0
           fi
           git commit -m 'lab: forecasts, scores and reveals'
-          git pull --rebase --autostash origin main
-          git push origin HEAD:main
+          # Losing a race to the market build is normal — it commits to main
+          # three times a day. The only files this job writes are its own, so
+          # a conflict here is this run's regeneration against another's, and
+          # during a rebase "theirs" is the commit being replayed: this one,
+          # the newer answer from the same inputs. A conflict on anything
+          # else is not this job's to resolve and stops it.
+          for attempt in 1 2 3; do
+            if git pull --rebase --autostash origin main; then
+              git push origin HEAD:main && exit 0
+            fi
+            unmerged=$(git diff --name-only --diff-filter=U)
+            if [ -n "$unmerged" ]; then
+              if echo "$unmerged" | grep -qvE '^(data-source/lab|public/data/v1/research)/'; then
+                echo "conflict outside this job's own output:"; echo "$unmerged"
+                git rebase --abort || true
+                exit 1
+              fi
+              echo "$unmerged" | while read -r f; do
+                git checkout --theirs -- "$f" 2>/dev/null || true
+                git add -- "$f"
+              done
+              GIT_EDITOR=true git rebase --continue >/dev/null 2>&1 || true
+              git push origin HEAD:main && exit 0
+            fi
+            echo "push attempt $attempt lost the race; retrying"
+            sleep 5
+          done
+          echo 'could not push after three attempts'
+          exit 1
