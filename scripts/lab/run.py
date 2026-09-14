@@ -37,6 +37,7 @@ import hashlib
 import json
 import pathlib
 import sys
+import zoneinfo
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
@@ -55,6 +56,54 @@ COMMITMENTS = REPO / "public" / "data" / "v1" / "research" / "commitments"
 # Kronos ran on a 90-session lookback; below that the question is different
 # for different models and the comparison stops being like for like.
 MIN_BARS = 90
+
+# The exchange's day, in the exchange's own time. Egypt keeps summer time, so
+# this cannot be a fixed offset from UTC.
+CAIRO = zoneinfo.ZoneInfo("Africa/Cairo")
+OPENS = datetime.time(10, 0)
+CLOSES = datetime.time(14, 30)
+# Friday and Saturday. Python counts Monday as 0.
+WEEKEND = (4, 5)
+
+
+def commitment_timing(basis: str, now: datetime.datetime) -> dict:
+    """Whether this run is a forecast at all, and how strong a one.
+
+    THE DEFECT THIS EXISTS TO CATCH
+    -------------------------------
+    TradingView does not publish a completed EGX daily bar for hours after
+    the 14:30 close — a scan taken at 15:14 on the 14th still had the 13th as
+    its newest session for every company on the exchange. So a run scheduled
+    "after the close" does not forecast from today's session at all. It
+    forecasts from YESTERDAY's, which means its one-session horizon is
+    today's close — a price that was fixed forty-four minutes before the
+    commitment was timestamped.
+
+    Nothing in the model sees it: the bars are trimmed to the basis. But the
+    evidence is what this whole record is for, and "we committed this at
+    15:02 to a number the market printed at 14:30" is not evidence anybody
+    should accept. So a run in that position is refused outright rather than
+    written with a caveat.
+
+    Before the open is the strong case and is recorded as such. Between the
+    open and the close the session is running and its close does not yet
+    exist, so the forecast is real but a reader can see it was made with the
+    tape moving, and decide what that is worth.
+    """
+    today = now.date().isoformat()
+    trading_day = now.weekday() not in WEEKEND
+    # A basis equal to today means the data has caught up: the first session
+    # being forecast is a future day, and nothing about it has happened.
+    if basis >= today or not trading_day:
+        return {"beforeOpen": True, "afterClose": False, "compromised": False}
+    clock = now.timetz().replace(tzinfo=None)
+    return {"beforeOpen": clock < OPENS,
+            "afterClose": clock >= CLOSES,
+            "compromised": clock >= CLOSES}
+
+
+def now_in_cairo() -> datetime.datetime:
+    return datetime.datetime.now(CAIRO)
 
 
 def read_scan(path: pathlib.Path) -> dict:
@@ -195,6 +244,13 @@ def fingerprint(document: dict) -> str:
     return hashlib.sha256(body.encode()).hexdigest()
 
 
+def _short(path: pathlib.Path) -> str:
+    try:
+        return str(path.relative_to(REPO))
+    except ValueError:
+        return str(path)
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("scan", type=pathlib.Path,
@@ -232,8 +288,30 @@ def main(argv=None) -> int:
     document = build(read_scan(args.scan), chosen, ran_at)
     document["fingerprint"] = fingerprint(document)
 
-    print(f"   basis {document['basisSession']}  ·  "
-          f"{document['universeSize']} companies  ·  {len(chosen)} models")
+    basis = document["basisSession"]
+    timing = commitment_timing(basis, now_in_cairo())
+    document["commitment"] = timing
+    if timing["compromised"]:
+        raise SystemExit(
+            f"lab: the newest session the market shares is {basis}, and "
+            "today's has already closed. The one-session horizon of this run "
+            "would be a price the exchange printed before the commitment was "
+            "made. Refusing to write it: run before the close, or wait for "
+            "the vendor to publish today's bar.")
+
+    # A second run of the same night must not replace the first. "Re-run
+    # until it looks better" is the failure this whole record is built to
+    # make impossible, and the cheapest way for it to happen is a retried
+    # workflow quietly overwriting a file.
+    settled = OUT / f"run-{basis}.json"
+    if settled.exists() and not args.check:
+        print(f"   {settled.name} already exists — {basis} has been forecast "
+              "and is not forecast again")
+        return 0
+
+    print(f"   basis {basis}  ·  {document['universeSize']} companies  ·  "
+          f"{len(chosen)} models  ·  "
+          f"{'before the open' if timing['beforeOpen'] else 'session running'}")
     for name, block in document["models"].items():
         print(f"   {name:<12} {block['answered']:>4} answered  "
               f"{block['abstained']:>3} abstained")
@@ -246,6 +324,10 @@ def main(argv=None) -> int:
     # only part of this record that cannot be produced after the outcome is
     # known, which makes it the whole of the claim "frozen before the fact".
     public, secret = cm.commitment(document)
+    # Said in the public half too, because it is a claim about the evidence
+    # and not a detail of the run: a reader checking the timestamp should be
+    # able to see whether the market was open when it was taken.
+    public["committedBeforeOpen"] = timing["beforeOpen"]
     if not args.no_timestamp:
         public["timestamp"] = ts.stamp(public["merkleRoot"])
         state = ("stamped by " + public["timestamp"]["authority"]
@@ -259,20 +341,20 @@ def main(argv=None) -> int:
         return 0
 
     OUT.mkdir(parents=True, exist_ok=True)
-    path = OUT / f"run-{document['basisSession']}.json"
+    path = settled
     # The nonces travel with the private forecasts, never with the root. A
     # published nonce opens the leaf it belongs to, which would publish the
     # forecast the commitment exists to keep until its horizon matures.
     document["nonces"] = secret["nonces"]
     path.write_text(json.dumps(document, ensure_ascii=False, separators=(",", ":")),
                     encoding="utf-8")
-    print(f"   wrote {path.relative_to(REPO)} ({path.stat().st_size // 1024} KB)")
+    print(f"   wrote {_short(path)} ({path.stat().st_size // 1024} KB)")
 
     COMMITMENTS.mkdir(parents=True, exist_ok=True)
     stamp_path = COMMITMENTS / f"{document['basisSession']}.json"
     stamp_path.write_text(json.dumps(public, ensure_ascii=False, indent=1),
                           encoding="utf-8")
-    print(f"   wrote {stamp_path.relative_to(REPO)} (public: a root, no forecasts)")
+    print(f"   wrote {_short(stamp_path)} (public: a root, no forecasts)")
     return 0
 
 

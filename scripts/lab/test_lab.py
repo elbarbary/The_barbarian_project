@@ -16,6 +16,7 @@ Every test here is one of those.
 
 from __future__ import annotations
 
+import datetime
 import json
 import pathlib
 import sys
@@ -25,7 +26,9 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import backload  # noqa: E402
 import commit as cm  # noqa: E402
+import evaluate as ev  # noqa: E402
 import forecast as fc  # noqa: E402
+import reveal as rv  # noqa: E402
 import run  # noqa: E402
 import score as sc  # noqa: E402
 import timestamp as ts  # noqa: E402
@@ -326,6 +329,122 @@ class RunTest(unittest.TestCase):
         self.assertNotIn("public", run.OUT.parts)
 
 
+class TimingTest(unittest.TestCase):
+    """A forecast committed after its first horizon closed is not a forecast."""
+
+    def at(self, day, hour, minute=0):
+        return datetime.datetime(2026, 9, day, hour, minute, tzinfo=run.CAIRO)
+
+    def test_a_run_after_the_close_on_a_stale_basis_is_compromised(self):
+        # 14th is a Monday. The vendor has not published the 14th's bar, so
+        # the basis is the 13th and the one-session horizon is a close the
+        # exchange printed at 14:30.
+        out = run.commitment_timing("2026-09-13", self.at(14, 15, 2))
+        self.assertTrue(out["compromised"])
+
+    def test_a_run_before_the_open_is_the_strong_case(self):
+        out = run.commitment_timing("2026-09-13", self.at(14, 8, 0))
+        self.assertTrue(out["beforeOpen"])
+        self.assertFalse(out["compromised"])
+
+    def test_a_run_while_the_session_is_trading_is_honest_but_marked(self):
+        out = run.commitment_timing("2026-09-13", self.at(14, 11, 30))
+        self.assertFalse(out["beforeOpen"])
+        self.assertFalse(out["compromised"])
+
+    def test_a_basis_that_has_caught_up_is_never_compromised(self):
+        # The data reached today, so the first session forecast is tomorrow
+        # and nothing about it has happened whatever the clock says.
+        out = run.commitment_timing("2026-09-14", self.at(14, 16, 0))
+        self.assertTrue(out["beforeOpen"])
+        self.assertFalse(out["compromised"])
+
+    def test_the_weekend_does_not_compromise_a_thursday_basis(self):
+        # 18 September 2026 is a Friday: the exchange is shut, so no session
+        # has closed and a run at any hour is still ahead of the market.
+        self.assertEqual(self.at(18, 16, 0).weekday(), 4)
+        out = run.commitment_timing("2026-09-17", self.at(18, 16, 0))
+        self.assertFalse(out["compromised"])
+        out = run.commitment_timing("2026-09-17", self.at(19, 16, 0))
+        self.assertFalse(out["compromised"])
+
+    def test_the_close_is_the_boundary_and_a_minute_before_it_passes(self):
+        self.assertFalse(run.commitment_timing(
+            "2026-09-13", self.at(14, 14, 29))["compromised"])
+        self.assertTrue(run.commitment_timing(
+            "2026-09-13", self.at(14, 14, 30))["compromised"])
+
+
+class SettledTest(unittest.TestCase):
+    """A night that has been forecast is not forecast again."""
+
+    def test_an_existing_run_is_not_overwritten(self):
+        import tempfile
+        days = [f"2026-{m:02d}-{d:02d}" for m in (1, 2, 3, 4, 5)
+                for d in range(1, 25)][:120]
+        scan = {"records": [
+            {"ticker": t, "recentSplitAdjustedBars":
+                [{"date": d, "open": 100.0, "high": 101.0, "low": 99.0,
+                  "close": 100.0 + i, "volume": 1000.0}
+                 for i, d in enumerate(days)]}
+            for t in ("AAA", "BBB", "CCC")]}
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            path = root / "daily_scan.json"
+            path.write_text(json.dumps(scan))
+            out = root / "lab"
+            out.mkdir()
+            keep_out, keep_clock = run.OUT, run.now_in_cairo
+            keep_commits = run.COMMITMENTS
+            # A fixed clock before the open, so the test is about the
+            # overwrite and not about the hour it happens to be run at.
+            run.OUT, run.COMMITMENTS = out, root / "commitments"
+            run.now_in_cairo = lambda: datetime.datetime(
+                2026, 5, 25, 8, 0, tzinfo=run.CAIRO)
+            try:
+                run.main([str(path), "--models", "drift", "--no-timestamp"])
+                written = out / f"run-{days[-1]}.json"
+                first = written.read_text()
+                run.main([str(path), "--models", "momentum20", "--no-timestamp"])
+                self.assertEqual(written.read_text(), first)
+                self.assertEqual(list(json.loads(first)["models"]), ["drift"])
+            finally:
+                run.OUT, run.now_in_cairo = keep_out, keep_clock
+                run.COMMITMENTS = keep_commits
+
+    def test_a_run_whose_horizon_has_already_closed_is_refused(self):
+        import tempfile
+        days = [f"2026-{m:02d}-{d:02d}" for m in (1, 2, 3, 4, 5)
+                for d in range(1, 25)][:120]
+        scan = {"records": [
+            {"ticker": t, "recentSplitAdjustedBars":
+                [{"date": d, "open": 100.0, "high": 101.0, "low": 99.0,
+                  "close": 100.0 + i, "volume": 1000.0}
+                 for i, d in enumerate(days)]}
+            for t in ("AAA", "BBB", "CCC")]}
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            path = root / "daily_scan.json"
+            path.write_text(json.dumps(scan))
+            out = root / "lab"
+            out.mkdir()
+            keep_out, keep_clock = run.OUT, run.now_in_cairo
+            keep_commits = run.COMMITMENTS
+            run.OUT, run.COMMITMENTS = out, root / "commitments"
+            # The day after the newest bar, after the close: the session the
+            # one-session horizon asks about has already been priced.
+            run.now_in_cairo = lambda: datetime.datetime(
+                2026, 5, 25, 15, 2, tzinfo=run.CAIRO)
+            try:
+                with self.assertRaises(SystemExit) as refused:
+                    run.main([str(path), "--models", "drift", "--no-timestamp"])
+                self.assertIn("closed", str(refused.exception))
+                self.assertEqual(list(out.iterdir()), [])
+            finally:
+                run.OUT, run.now_in_cairo = keep_out, keep_clock
+                run.COMMITMENTS = keep_commits
+
+
 class BackloadTest(unittest.TestCase):
     """Bringing August in without pretending it was something it was not."""
 
@@ -586,6 +705,401 @@ class TimestampTest(unittest.TestCase):
     def test_an_empty_answer_is_not_a_token(self):
         out = ts.stamp("ef" * 32, opener=lambda url, body: b"")
         self.assertFalse(out["timestamped"])
+
+
+def panel_of(prices: dict[str, dict[str, float]]) -> dict:
+    """A bar panel in the shape `evaluate` and `reveal` read."""
+    return {t: {d: {"date": d, "close": c} for d, c in rows.items()}
+            for t, rows in prices.items()}
+
+
+class PredictedTest(unittest.TestCase):
+    """What a record is sorted by, and what it is silent about."""
+
+    def test_a_ranking_model_is_sorted_by_its_score_not_a_return(self):
+        record = {"ticker": "AAA", "returns": {"1": 9.0}, "ranked_by": {"1": -3.0}}
+        self.assertEqual(ev.predicted(record, 1), -3.0)
+
+    def test_a_horizon_the_model_did_not_publish_is_absent(self):
+        # Kronos forecast to ten sessions in August; the lab asks for twenty.
+        # Absent, never extrapolated — an invented number would be scored.
+        record = {"ticker": "AAA", "returns": {"1": 1.0, "5": 2.0}}
+        self.assertIsNone(ev.predicted(record, 20))
+
+    def test_a_null_return_is_absent_rather_than_zero(self):
+        self.assertIsNone(ev.predicted({"ticker": "A", "returns": {"1": None}}, 1))
+
+
+class PanelTest(unittest.TestCase):
+
+    def test_the_later_scan_wins_a_collision(self):
+        # Because a bar is split-adjusted when it is read. Scoring an August
+        # forecast against an unadjusted close invents a 50% loss on the day
+        # a company split two for one.
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            for name, close in (("daily_scan_2026-08-01.json", 100.0),
+                                ("daily_scan_2026-09-01.json", 50.0)):
+                (root / name).write_text(json.dumps({"records": [
+                    {"ticker": "AAA", "recentSplitAdjustedBars": [
+                        {"date": "2026-07-30", "close": close}]}]}))
+            panel = ev.bar_panel(sorted(root.glob("daily_scan_*.json")))
+        self.assertEqual(panel["AAA"]["2026-07-30"]["close"], 50.0)
+
+
+class PairsTest(unittest.TestCase):
+
+    def setUp(self):
+        self.panel = panel_of({
+            "AAA": {"2026-01-01": 100.0, "2026-01-02": 110.0},
+            "BBB": {"2026-01-01": 100.0},          # never traded again
+        })
+
+    def test_a_company_with_no_forward_session_is_not_a_miss(self):
+        block = {"forecasts": [{"ticker": "AAA", "returns": {"1": 5.0}},
+                               {"ticker": "BBB", "returns": {"1": 5.0}}]}
+        pairs = ev.pairs_for(block, "2026-01-01", 1, self.panel)
+        self.assertEqual(len(pairs), 1)
+        self.assertEqual(pairs[0][0], 5.0)
+        self.assertAlmostEqual(pairs[0][1], 10.0)
+
+    def test_an_abstention_is_absent_and_not_a_zero(self):
+        # The model answered one company of two. Scoring the other as a
+        # zero forecast would credit it with a call it refused to make.
+        block = {"forecasts": [{"ticker": "AAA", "returns": {"1": 5.0}}],
+                 "abstained": 1}
+        self.assertEqual(len(ev.pairs_for(block, "2026-01-01", 1, self.panel)), 1)
+
+
+class ScoreRunTest(unittest.TestCase):
+
+    def test_a_block_that_says_it_was_not_frozen_is_carried_as_such(self):
+        document = {"basisSession": "2026-01-01", "ranAt": "2026-01-01T06:00:00Z",
+                    "models": {"kronos": {"forecasts": [], "frozen": True},
+                               "drift": {"forecasts": [], "frozen": False}}}
+        out = ev.score_run(document, {}, ["2026-01-01"])
+        self.assertTrue(out["models"]["kronos"]["frozen"])
+        self.assertFalse(out["models"]["drift"]["frozen"])
+
+    def test_a_block_with_no_flag_is_taken_as_frozen(self):
+        # The nightly run is frozen by construction and does not say so.
+        out = ev.score_run({"basisSession": "d", "ranAt": "2026-01-01T06:00:00Z",
+                            "models": {"m": {}}}, {}, ["d"])
+        self.assertTrue(out["models"]["m"]["frozen"])
+
+
+class SeriesTest(unittest.TestCase):
+
+    def test_a_date_the_model_could_not_be_scored_on_is_carried_as_none(self):
+        # Dropped instead, two models would be compared on two different
+        # sets of days and `against` would stop being paired.
+        nights = [{"basisSession": "d1", "models": {"m": {"horizons": {
+                       "1": {"rankIC": 0.2}}}}},
+                  {"basisSession": "d2", "models": {"m": {"horizons": {
+                       "1": {"rankIC": None}}}}}]
+        self.assertEqual(ev.series(nights, "m", 1), {"d1": 0.2, "d2": None})
+
+
+class LeaderboardTest(unittest.TestCase):
+
+    def nights(self, ics):
+        return [{"basisSession": f"d{i}", "universeSize": 100, "models": {
+                    "m": {"answered": 40, "abstained": 0, "frozen": i < 2,
+                          "horizons": {str(h): {"scored": 40, "rankIC": v,
+                                                "direction": None}
+                                       for h in fc.HORIZONS}}}}
+                for i, v in enumerate(ics)]
+
+    def test_frozen_and_reconstructed_dates_account_for_every_date(self):
+        table = ev.leaderboard(self.nights([0.1, 0.2, 0.3, 0.4]))
+        one = table["m"]["1"]
+        self.assertEqual(one["dates"], 4)
+        self.assertEqual(one["frozenDates"], 2)
+        self.assertEqual(one["reconstructedDates"], 2)
+
+    def test_a_date_that_could_not_be_scored_counts_as_neither(self):
+        table = ev.leaderboard(self.nights([0.1, None, 0.3, 0.4]))
+        one = table["m"]["1"]
+        self.assertEqual(one["dates"], 3)
+        self.assertEqual(one["frozenDates"] + one["reconstructedDates"], 3)
+
+
+class PublicGuardTest(unittest.TestCase):
+    """The leaderboard may rank forecasters. It may not name a security."""
+
+    UNIVERSE = {"COMI", "HRHO", "SWDY"}
+
+    def test_a_clean_leaderboard_passes(self):
+        ev._no_companies({"models": {"kronos": {"1": {"mean": 0.04}}},
+                          "note": "a comparison of forecasting models"},
+                         self.UNIVERSE)
+
+    def test_a_named_security_anywhere_in_the_prose_is_refused(self):
+        with self.assertRaises(SystemExit):
+            ev._no_companies({"note": "the best call was COMI"}, self.UNIVERSE)
+
+    def test_a_named_security_in_punctuation_is_still_found(self):
+        with self.assertRaises(SystemExit):
+            ev._no_companies({"note": "best (HRHO), then others"}, self.UNIVERSE)
+
+    def test_a_field_that_would_hold_companies_is_refused_by_its_name(self):
+        for key in ("topTickers", "bestPick", "buyList", "company"):
+            with self.assertRaises(SystemExit):
+                ev._no_companies({key: []}, self.UNIVERSE)
+
+    def test_the_real_leaderboard_shape_carries_no_security(self):
+        table = {"kronos": {"1": {"mean": 0.04, "t": 1.7, "against": {}}}}
+        public = ev.public_document(table, [{"basisSession": "2026-09-13"}], "now")
+        ev._no_companies(public, self.UNIVERSE)
+
+
+class EvidenceGateTest(unittest.TestCase):
+    """A horizon whose answer existed when the run was written is not scored."""
+
+    # A real fortnight of this exchange: 27 August 2026 was not a session,
+    # and no rule about weekdays would know that.
+    SESSIONS = ["2026-08-20", "2026-08-23", "2026-08-24", "2026-08-25",
+                "2026-08-26", "2026-08-30", "2026-08-31", "2026-09-01"]
+
+    def test_the_horizon_steps_through_sessions_not_days(self):
+        self.assertEqual(ev.nth_session_after(self.SESSIONS, "2026-08-26", 1),
+                         "2026-08-30")
+        self.assertEqual(ev.nth_session_after(self.SESSIONS, "2026-08-20", 3),
+                         "2026-08-25")
+
+    def test_a_horizon_beyond_the_calendar_has_no_session_yet(self):
+        self.assertIsNone(ev.nth_session_after(self.SESSIONS, "2026-09-01", 1))
+
+    def test_a_session_is_complete_only_once_it_has_closed(self):
+        before = ev.last_session_complete_at(self.SESSIONS, "2026-08-31T08:00:00+03:00")
+        self.assertEqual(before, "2026-08-30")
+        after = ev.last_session_complete_at(self.SESSIONS, "2026-08-31T14:30:00+03:00")
+        self.assertEqual(after, "2026-08-31")
+
+    def test_the_close_is_read_in_cairo_not_in_utc(self):
+        # 12:00 UTC is 15:00 Cairo in summer: the session has closed.
+        self.assertEqual(
+            ev.last_session_complete_at(self.SESSIONS, "2026-08-31T12:00:00Z"),
+            "2026-08-31")
+        self.assertEqual(
+            ev.last_session_complete_at(self.SESSIONS, "2026-08-31T10:00:00Z"),
+            "2026-08-30")
+
+    def test_a_run_written_days_late_has_its_first_horizon_withheld(self):
+        # The 24 August run was rebuilt on the 28th. By then the 25th had
+        # closed, so its one-session horizon is not evidence of anything.
+        self.assertTrue(ev.outcome_already_known(
+            self.SESSIONS, "2026-08-24", 1, "2026-08-28T10:53:07+00:00"))
+
+    def test_a_market_holiday_can_make_a_late_run_honest(self):
+        # The 26 August run was also written on the 28th, but the 27th was
+        # not a session: the next one was the 30th, still in the future.
+        self.assertFalse(ev.outcome_already_known(
+            self.SESSIONS, "2026-08-26", 1, "2026-08-28T15:31:07+00:00"))
+
+    def test_a_horizon_that_has_not_happened_is_not_withheld(self):
+        self.assertFalse(ev.outcome_already_known(
+            self.SESSIONS, "2026-08-31", 5, "2026-08-31T06:00:00Z"))
+
+    def test_a_run_that_does_not_say_when_it_was_written_is_withheld(self):
+        # Unprovable is not the same as fine.
+        self.assertTrue(ev.outcome_already_known(
+            self.SESSIONS, "2026-08-20", 1, None))
+
+    def test_the_gate_closes_once_the_data_catches_up(self):
+        # The first CI run fired at 14:49 Cairo, after the 14:30 close, on a
+        # basis of the previous session — but the vendor had not yet
+        # published that day's bar, so nothing could be scored either way.
+        # When the bar arrives the horizon must be withheld, not scored.
+        ran = "2026-09-14T11:49:09Z"
+        behind = self.SESSIONS + ["2026-09-13"]
+        self.assertFalse(ev.outcome_already_known(behind, "2026-09-13", 1, ran))
+        caught_up = behind + ["2026-09-14"]
+        self.assertTrue(ev.outcome_already_known(caught_up, "2026-09-13", 1, ran))
+
+    def test_a_withheld_horizon_is_not_scored_even_when_it_could_be(self):
+        panel = panel_of({t: {"2026-08-24": 100.0, "2026-08-25": 100.0 + i}
+                          for i, t in enumerate(f"T{n:03d}" for n in range(60))})
+        document = {"basisSession": "2026-08-24",
+                    "ranAt": "2026-08-28T10:53:07+00:00",
+                    "models": {"m": {"forecasts": [
+                        {"ticker": f"T{n:03d}", "returns": {"1": float(n)}}
+                        for n in range(60)]}}}
+        scored = ev.score_run(document, panel, self.SESSIONS)
+        one = scored["models"]["m"]["horizons"]["1"]
+        self.assertEqual(one["scored"], 60)      # it could have been scored
+        self.assertIsNone(one["rankIC"])         # and deliberately was not
+        self.assertIn("withheld", one)
+        self.assertEqual(scored["withheldHorizons"], ["1"])
+
+    def test_an_honest_run_on_the_same_data_is_scored(self):
+        panel = panel_of({t: {"2026-08-24": 100.0, "2026-08-25": 100.0 + i}
+                          for i, t in enumerate(f"T{n:03d}" for n in range(60))})
+        document = {"basisSession": "2026-08-24",
+                    "ranAt": "2026-08-25T06:00:00+03:00",
+                    "models": {"m": {"forecasts": [
+                        {"ticker": f"T{n:03d}", "returns": {"1": float(n)}}
+                        for n in range(60)]}}}
+        one = ev.score_run(document, panel, self.SESSIONS)["models"]["m"]["horizons"]["1"]
+        self.assertIsNotNone(one["rankIC"])
+        self.assertNotIn("withheld", one)
+
+
+class CalendarTest(unittest.TestCase):
+
+    def test_a_session_needs_a_majority_of_the_market(self):
+        # One company with a bar on a day the exchange was shut is a data
+        # error, not a session, and counting it matures a forecast early.
+        panel = panel_of({"AAA": {"d1": 1.0, "d2": 1.0, "oops": 1.0},
+                          "BBB": {"d1": 1.0, "d2": 1.0},
+                          "CCC": {"d1": 1.0, "d2": 1.0}})
+        self.assertEqual(rv.calendar(panel), ["d1", "d2"])
+
+    def test_sessions_are_counted_after_the_basis_not_including_it(self):
+        self.assertEqual(rv.sessions_after(["d1", "d2", "d3"], "d1"), 2)
+
+    def test_an_empty_panel_is_no_calendar_rather_than_an_empty_market(self):
+        self.assertEqual(rv.calendar({}), [])
+
+
+class RevealTest(unittest.TestCase):
+    """The round trip: commit a run, open it, rebuild the same root."""
+
+    def run_document(self):
+        return {
+            "basisSession": "2026-01-01",
+            "ranAt": "2026-01-01T13:00:00Z",
+            "universeSize": 2,
+            "horizons": list(fc.HORIZONS),
+            "models": {
+                "drift": {"answered": 2, "abstained": 0, "forecasts": [
+                    {"ticker": "BBB", "returns": {"1": -0.5}},
+                    {"ticker": "AAA", "returns": {"1": 1.25, "5": 2.5}}]},
+                "kronos": {"answered": 1, "abstained": 1, "forecasts": [
+                    {"ticker": "AAA", "returns": {"1": 0.75},
+                     "quantiles": {"1": [0.1, 0.75, 1.4]}}]},
+            },
+        }
+
+    def committed(self):
+        document = self.run_document()
+        public, secret = cm.commitment(document)
+        document["nonces"] = secret["nonces"]
+        return document, public
+
+    def test_the_reveal_rebuilds_the_root_that_was_committed(self):
+        document, public = self.committed()
+        out = rv.build(document, public, 20, "now")
+        self.assertEqual(out["merkleRoot"], public["merkleRoot"])
+        self.assertEqual(out["leaves"], 3)
+
+    def test_every_answered_company_is_opened_none_held_back(self):
+        document, public = self.committed()
+        out = rv.build(document, public, 20, "now")
+        opened = {(r["model"], r["forecast"]["ticker"]) for r in out["records"]}
+        self.assertEqual(opened, {("drift", "AAA"), ("drift", "BBB"),
+                                  ("kronos", "AAA")})
+
+    def test_records_are_ordered_by_model_then_ticker(self):
+        # The root depends on this order. A different one is a different
+        # tree and the reveal would fail its own check over sorting alone.
+        document, _ = self.committed()
+        records = rv.records_of(document)
+        self.assertEqual([(r["model"], r["forecast"]["ticker"]) for r in records],
+                         [("drift", "AAA"), ("drift", "BBB"), ("kronos", "AAA")])
+
+    def test_a_forecast_edited_after_the_commitment_is_refused(self):
+        # The whole point. If this passes, nothing else here means anything.
+        document, public = self.committed()
+        document["models"]["kronos"]["forecasts"][0]["returns"]["1"] = 9.99
+        with self.assertRaises(SystemExit):
+            rv.build(document, public, 20, "now")
+
+    def test_a_forecast_added_after_the_commitment_is_refused(self):
+        document, public = self.committed()
+        document["models"]["kronos"]["forecasts"].append(
+            {"ticker": "CCC", "returns": {"1": 5.0}})
+        document["nonces"]["kronos"]["CCC"] = cm.nonce()
+        with self.assertRaises(SystemExit):
+            rv.build(document, public, 20, "now")
+
+    def test_a_forecast_quietly_dropped_before_the_reveal_is_refused(self):
+        document, public = self.committed()
+        document["models"]["drift"]["forecasts"].pop()
+        with self.assertRaises(SystemExit):
+            rv.build(document, public, 20, "now")
+
+    def test_a_missing_nonce_is_refused_rather_than_skipped(self):
+        # Without its salt a record cannot be verified by anybody, so it may
+        # not be quietly dropped from a reveal that claims to be complete.
+        document, public = self.committed()
+        del document["nonces"]["drift"]["BBB"]
+        with self.assertRaises(SystemExit) as refused:
+            rv.build(document, public, 20, "now")
+        self.assertIn("nonce", str(refused.exception).lower())
+
+    def test_the_reveal_carries_the_timestamp_receipt_it_was_opened_against(self):
+        document, public = self.committed()
+        public["timestamp"] = {"timestamped": True, "authority": "freetsa",
+                               "tokenSha256": "ab" * 32, "token": "secret"}
+        out = rv.build(document, public, 20, "now")
+        self.assertEqual(out["timestamp"]["authority"], "freetsa")
+        self.assertEqual(out["timestamp"]["tokenSha256"], "ab" * 32)
+
+    def test_nothing_is_opened_before_the_longest_horizon_has_matured(self):
+        # A leaf commits every horizon at once, so opening after five
+        # sessions publishes a twenty-session forecast that has not happened.
+        self.assertEqual(rv.LONGEST, max(fc.HORIZONS))
+        import tempfile
+        document, public = self.committed()
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            runs, promises, reveals = root / "r", root / "c", root / "o"
+            for d in (runs, promises):
+                d.mkdir()
+            (runs / "run-2026-01-01.json").write_text(json.dumps(document))
+            (promises / "2026-01-01.json").write_text(json.dumps(public))
+            scan = root / "daily_scan_2026-02-01.json"
+            # Nineteen sessions after the basis: one short.
+            dates = [f"2026-01-{d:02d}" for d in range(1, 21)]
+            scan.write_text(json.dumps({"records": [
+                {"ticker": t, "recentSplitAdjustedBars":
+                    [{"date": d, "close": 100.0} for d in dates]}
+                for t in ("AAA", "BBB")]}))
+            rv.main([str(scan), "--runs", str(runs),
+                     "--commitments", str(promises), "--reveals", str(reveals)])
+            self.assertFalse(reveals.exists() and any(reveals.iterdir()))
+
+            # One more session and it opens.
+            scan.write_text(json.dumps({"records": [
+                {"ticker": t, "recentSplitAdjustedBars":
+                    [{"date": d, "close": 100.0} for d in dates + ["2026-01-21"]]}
+                for t in ("AAA", "BBB")]}))
+            rv.main([str(scan), "--runs", str(runs),
+                     "--commitments", str(promises), "--reveals", str(reveals)])
+            written = json.loads((reveals / "2026-01-01.json").read_text())
+            self.assertEqual(written["merkleRoot"], public["merkleRoot"])
+            self.assertEqual(written["matured"]["sessionsSinceBasis"], 20)
+
+    def test_a_run_with_no_commitment_is_left_closed(self):
+        import tempfile
+        document, _ = self.committed()
+        document.pop("nonces")
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            runs, promises, reveals = root / "r", root / "c", root / "o"
+            runs.mkdir(); promises.mkdir()
+            (runs / "run-2026-01-01.json").write_text(json.dumps(document))
+            scan = root / "daily_scan_2026-02-01.json"
+            dates = [f"2026-01-{d:02d}" for d in range(1, 26)]
+            scan.write_text(json.dumps({"records": [
+                {"ticker": t, "recentSplitAdjustedBars":
+                    [{"date": d, "close": 100.0} for d in dates]}
+                for t in ("AAA", "BBB")]}))
+            rv.main([str(scan), "--runs", str(runs),
+                     "--commitments", str(promises), "--reveals", str(reveals)])
+            self.assertFalse(reveals.exists() and any(reveals.iterdir()))
 
 
 if __name__ == "__main__":

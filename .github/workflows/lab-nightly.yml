@@ -1,4 +1,4 @@
-name: Lab — nightly forecasts
+name: Lab — forecast, score, reveal
 
 # Every registered model, asked about every company, after the close.
 #
@@ -23,14 +23,26 @@ name: Lab — nightly forecasts
 
 on:
   schedule:
-    # 15:00 Cairo — half an hour after the 14:30 close, so the session's bars
-    # have settled. Two expressions because Egypt keeps summer time and the
-    # cron is in UTC: 12:00 UTC is 15:00 Cairo from April to October, 13:00
-    # UTC is 15:00 Cairo the rest of the year. Whichever is wrong for the
-    # season runs an hour off and is harmless; the run reads the completed
-    # session either way and records which one it used.
-    - cron: '0 12 * * 0-4'   # summer, UTC+3
-    - cron: '0 13 * * 0-4'   # winter, UTC+2
+    # BEFORE THE OPEN, not after the close.
+    #
+    # "After the close" was the obvious schedule and it was wrong. The data
+    # vendor does not publish a completed EGX daily bar for hours: a scan
+    # taken at 15:14 — forty-four minutes after the 14:30 close — still had
+    # the PREVIOUS session as the newest bar for every company on the
+    # exchange. So a run at 15:00 does not forecast from today's session. It
+    # forecasts from yesterday's, which makes its one-session horizon today's
+    # close — a price the market fixed before the commitment was timestamped.
+    # `run.commitment_timing` refuses such a run outright.
+    #
+    # In the morning the previous session's bars are reliably published
+    # (observed at 06:02 and 08:06 Cairo), the exchange has not opened, and
+    # every horizon in the run is still ahead of the market.
+    #
+    # Two attempts because this repository's scheduled runs have been hours
+    # late: both land before the 10:00 open in either season, and the second
+    # is a no-op when the first has already forecast the session.
+    - cron: '0 2 * * 0-4'   # 05:00 Cairo in summer, 04:00 in winter
+    - cron: '0 6 * * 0-4'   # 09:00 Cairo in summer, 08:00 in winter
 
   push:
     branches: [main]
@@ -43,6 +55,10 @@ on:
       models:
         description: 'baselines, all, or a comma-separated list'
         default: 'all'
+      dry_run:
+        description: 'load every model and answer, but write nothing'
+        type: boolean
+        default: false
 
 concurrency:
   # One lab run at a time. Two runs of the same night would produce two
@@ -117,27 +133,61 @@ jobs:
       - name: Test the lab
         run: cd scripts/lab && python3 -m unittest test_lab
 
+      # `dry_run` proves the models load and answer without entering
+      # anything into the record. There is no other way to test a change to
+      # them: writing a run to find out whether it works, and writing another
+      # once it does, is the "re-run until it looks better" failure the whole
+      # record exists to make impossible, and `run.py` refuses it anyway.
+      # Not on a push. A forecast belongs to the schedule: a run made when
+      # somebody happened to edit a file is a run made at an arbitrary hour,
+      # and after the close `run.py` refuses it outright. The test step above
+      # is what validates a change; `dry_run` is how the models are exercised.
       - name: Forecast
+        if: github.event_name != 'push'
         env:
           ESTHMR_LAB_CACHE: ~/.cache/esthmr-lab
           ESTHMR_LAB_THREADS: '4'
         run: |
           scan=$(ls -t ../work/daily_scan_*.json | grep -v fused | head -1)
           echo "scan: $scan"
-          python3 scripts/lab/run.py "$scan" --models "${{ inputs.models || 'all' }}"
+          python3 scripts/lab/run.py "$scan" \
+            --models "${{ inputs.models || 'all' }}" \
+            ${{ inputs.dry_run == true && '--check' || '' }}
+
+      # Scoring and revealing are independent of today's forecast: they read
+      # runs that were frozen weeks ago against bars the market has since
+      # printed. So they happen even when the forecast step failed — a model
+      # that would not load, or a run refused because it was too late in the
+      # day, is no reason to stop marking the record that already exists.
+      - name: Score what has matured
+        if: always() && inputs.dry_run != true
+        run: |
+          scan=$(ls -t ../work/daily_scan_*.json | grep -v fused | head -1)
+          python3 scripts/lab/evaluate.py "$scan"
+
+      # Opens the commitments whose every horizon has run out, publishing the
+      # forecasts with the salts that hide them so a stranger can rebuild the
+      # Merkle root a timestamping authority signed weeks earlier. Refuses
+      # outright if the rebuilt root does not match.
+      - name: Open what has matured
+        if: always() && inputs.dry_run != true
+        run: |
+          scan=$(ls -t ../work/daily_scan_*.json | grep -v fused | head -1)
+          python3 scripts/lab/reveal.py "$scan"
 
       # Committed because the whole value is that it cannot be edited
       # afterwards. A forecast kept only in a CI artifact expires in ninety
       # days and proves nothing about what was believed in September.
       - name: Commit the run
+        if: always() && inputs.dry_run != true
         run: |
           git config user.name  'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add data-source/lab
+          git add data-source/lab public/data/v1/research
           if git diff --cached --quiet; then
             echo 'nothing new — the basis session has not moved'
             exit 0
           fi
-          git commit -m 'lab: nightly forecasts'
+          git commit -m 'lab: forecasts, scores and reveals'
           git pull --rebase --autostash origin main
           git push origin HEAD:main
