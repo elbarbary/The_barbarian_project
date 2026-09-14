@@ -418,6 +418,25 @@
    "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=293305",
    "ticker": "AMOC"
   },
+  "293322": {
+   "basis": null,
+   "currency": "جنيه مصري",
+   "filed_on": "2026-08-16",
+   "isin": "EGS651B1C018",
+   "months": 6,
+   "name_ar": "الخليجية الكندية للاستثمار العقاري العربي",
+   "net_profit_egp": 3984542.0,
+   "news_id": "293322",
+   "period": "H1 2026",
+   "period_end": "2026-06-30",
+   "period_start": "2026-01-01",
+   "prior_net_profit_egp": 447101.0,
+   "prior_period": "H1 2025",
+   "prior_period_end": "2025-06-30",
+   "prior_period_start": "2025-01-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=293322",
+   "ticker": "CCRS"
+  },
   "293657": {
    "basis": "consolidated",
    "currency": "جنيه مصري",
@@ -1038,6 +1057,7 @@
   "293300": "2026-08-16",
   "293305": "2026-08-16",
   "293313": "2026-08-16",
+  "293322": "2026-08-16",
   "293354": "2026-08-17",
   "293657": "2026-08-20",
   "293659": "2026-08-20",
