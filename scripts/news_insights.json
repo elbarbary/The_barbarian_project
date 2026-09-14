@@ -1179,6 +1179,10 @@
     "meaning": "Cyber resilience frameworks define technical protocols, data protection standards, and operational risk controls that institutions implement to maintain core operating systems during digital disruptions.",
     "meaning_ar": "تحدد أطر المرونة السيبرانية البروتوكولات التقنية ومعايير حماية البيانات وضوابط المخاطر التشغيلية التي تطبقها المؤسسات للحفاظ على الأنظمة التشغيلية الأساسية أثناء الاضطرابات الرقمية."
   },
+  "استقرار التضخم في كندا عند 3% خلال اغسطس رغم استمرار الضغوط علي اسعار الطاقه": {
+    "meaning": "Headline inflation holds steady at 3% as higher energy prices counterbalance decelerating prices across other consumer basket components, keeping the Bank of Canada's benchmark interest rate inputs stable.",
+    "meaning_ar": "يستقر معدل التضخم العام عند 3% نتيجة موازنة ارتفاع أسعار الطاقة لتباطؤ وتيرة الأسعار في المكونات الأخرى لسلة المستهلك، مما يُبقي على معطيات أسعار الفائدة الأساسية لدى بنك كندا المركزي دون تغيير."
+  },
   "استقرار بختام الاسبوع.. اسعار العملات الاجنبيه والعربيه اليوم الجمعه": {
     "meaning": "Official foreign exchange rates remain unchanged at commercial banks during the weekend closure, maintaining fixed conversion rates for cross-border trade settlements, corporate treasury valuations, and imported inventory pricing until interbank operations resume.",
     "meaning_ar": "تثبت أسعار صرف العملات الأجنبية والعربية في البنوك خلال العطلة الأسبوعية، مما يبقي تكاليف تسوية التجارة الخارجية وتقييمات الخزانة وتسعير البضائع المستوردة دون تغيير حتى استئناف التعاملات بين البنوك."
@@ -1886,6 +1890,10 @@
   "التضامن : صرف معاشات تكافل وكرامه عن سبتمبر غدا بقيمه تتجاوز 4 مليارات جنيه": {
     "meaning": "The disbursement of over EGP 4 billion in cash transfers injects direct public social spending into household cash flows via post offices and ATM networks, processing routine retail liquidity for consumer goods transactions.",
     "meaning_ar": "يضخ صرف أكثر من 4 مليارات جنيه من التحويلات النقدية مخصصات إنفاق اجتماعي مباشرة في التدفقات النقدية للأسر عبر مكاتب البريد وشبكات الصراف الآلي، مما يوفر سيولة نقدية فورية لمعاملات السلع الاستهلاكية."
+  },
+  "التضخم في الهند يرتفع الي 4.82% في اغسطس": {
+    "meaning": "This prints the annual headline consumer price inflation rate in India at 4.82% for August, reflecting the pace of price changes across a standard basket of consumer goods and services.",
+    "meaning_ar": "يسجل هذا وصول المعدل السنوي للتضخم العام لأسعار المستهلكين في الهند إلى 4.82% لشهر أغسطس، وهو ما يعكس وتيرة التغير في أسعار سلة السلع والخدمات الاستهلاكية داخل السوق الهندي."
   },
   "التضخم في امريكا يرتفع 3.4% في اغسطس علي اساس سنوي": {
     "meaning": "An annual US inflation rate of 3.4% reflects the pace of consumer price increases across the US economy, which anchors the Federal Reserve's benchmark interest rate decisions and influences global capital flows and dollar-denominated borrowing costs.",
@@ -3383,6 +3391,10 @@
   "تراجع عوايد سندات الخزانه الامريكيه مع ترقب بيانات الوظايف": {
     "meaning": "Yields on U.S. Treasury securities decrease as debt prices rise, reflecting shifts in sovereign bond market trading prior to the release of official labor market statistics.",
     "meaning_ar": "تنخفض عوائد سندات الخزانة الأمريكية مع ارتفاع أسعارها في الأسواق، وهو ما يعكس حركة التداول على أدوات الدين السيادي قبيل صدور البيانات الرسمية لسوق العمل."
+  },
+  "تراجع فرص العمل امام الشباب في بريطانيا مع استمرار كبار السن في السوق": {
+    "meaning": "Higher labor market retention among older workers directly limits entry-level job turnover and alters the demographic composition of the workforce, leaving hiring capacity absorbed by incumbent staff.",
+    "meaning_ar": "يؤدي استمرار العمال الأكبر سناً في وظائفهم إلى خفض معدلات دوران العمالة في الوظائف المبتدئة وتغيير التركيبة الديموغرافية للقوى العاملة، مما يحصر الطاقة الاستيعابية للتوظيف في الكوادر الحالية."
   },
   "تراجع مبيعات التجزيه بمنطقه اليورو 0.6% خلال يوليو مخالفه التوقعات": {
     "meaning": "Retail sales data measures consumer spending on final goods, and a 0.6% contraction reflects an active decline in household goods consumption and retail turnover across the Eurozone economy for the period.",
