@@ -24,6 +24,7 @@ import argparse
 import os
 import datetime
 import subprocess
+import time
 import sys
 from pathlib import Path
 
@@ -512,6 +513,13 @@ def main() -> int:
 
     skipped: list[str] = []
 
+    # What each step costs, so "the build takes thirty-five minutes" can be
+    # answered rather than repeated. Forty-four steps and one total tells
+    # nobody which of them to look at; the sources this project waits on are
+    # slow in ways that change week to week, and the one that got slower is
+    # invisible until it is measured.
+    spent: list[tuple[float, str]] = []
+
     poisoned: list[str] = []
     stopped = None
     for step in STEPS:
@@ -526,7 +534,11 @@ def main() -> int:
             continue
 
         print(f"\n── {name}")
+        started = time.monotonic()
         result = subprocess.run(cmd, cwd=HERE.parent)
+        took = time.monotonic() - started
+        spent.append((took, name))
+        print(f"   ── {name}: {took:.0f}s")
         if result.returncode != 0:
             if name in BEST_EFFORT:
                 # `::warning::` renders as a run annotation. A bare print does
@@ -553,6 +565,14 @@ def main() -> int:
                 break
 
     print()
+    if spent:
+        total = sum(s for s, _ in spent)
+        print(f"── where the {total / 60:.0f} minutes went")
+        for took, name in sorted(spent, reverse=True)[:12]:
+            share = took / total * 100 if total else 0
+            print(f"   {took:>6.0f}s  {share:>4.1f}%  {name}")
+        print(f"   {total:>6.0f}s          {len(spent)} steps")
+
     # TWO KINDS OF FAILURE, AND THEY DESERVE DIFFERENT ANSWERS.
     #
     # 2 — a critical step said the inputs are unfit. Whatever ran before it
