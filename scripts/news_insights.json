@@ -455,6 +455,10 @@
     "meaning": "The memorandum of understanding establishes a preliminary framework between Egypt and Jiangsu Changhong to develop an automotive engineering base, structuring the operational parameters for automotive industrial infrastructure and manufacturing.",
     "meaning_ar": "تُرسخ مذكرة التفاهم إطاراً أولياً بين مصر وشركة جيانغسو تشانغهونغ لإنشاء قاعدة للهندسة وصناعة السيارات، محددةً الأطر التشغيلية للبنية التحتية الصناعية وعمليات تصنيع السيارات."
   },
+  "egypt and thailand discuss expanding bilateral trade and investments": {
+    "meaning": "Bilateral trade discussions establish government-to-government frameworks that review tariff structures, import-export quotas, and cross-border commercial procedures between the two jurisdictions. These talks focus on sectors such as agriculture, petrochemicals, and manufacturing logistics.",
+    "meaning_ar": "تُرسي المباحثات التجارية الثنائية أطراً حكومية مشتركة لمراجعة الهياكل الجمركية، وحصص الاستيراد والتصدير، والإجراءات التجارية البينية بين الدولتين، مع التركيز على قطاعات مثل الزراعة، والبتروكيماويات، والخدمات اللوجستية الصناعية."
+  },
   "egypt and uae explore joint investment across five priority sectors": {
     "meaning": "Bilateral investment frameworks establish structured capital allocation channels, co-financing mechanisms, and regulatory coordination across designated industries between participating state and private entities.",
     "meaning_ar": "تؤسس أطر الاستثمار الثنائي قنوات لتوجيه تدفقات رؤوس الأموال، وآليات للتمويل المشترك، وتنسيقاً تنظيمياً عبر القطاعات المحددة بين الكيانات الحكومية والخاصة المشاركة."
@@ -1102,6 +1106,10 @@
   "استراتيجيه المصريه للاتصالات الجديده تدفع السهم فوق 125 جنيها لترتفع القيمه السوقيه الي 46 مليار جنيه": {
     "meaning": "Market valuation reflects immediate equity repricing based on company corporate strategy announcements, adjusting Telecom Egypt's total aggregate capitalization on the EGX.",
     "meaning_ar": "يعكس تقييم السوق إعادة تسعير فورية لأسهم الشركة في ضوء إعلانات استراتيجية الأعمال، مما يرفع إجمالي القيمة السوقية للمصرية للاتصالات في البورصة المصرية."
+  },
+  "استعراض مستقبل المرونه السيبرانيه": {
+    "meaning": "Cyber resilience frameworks define technical protocols, data protection standards, and operational risk controls that institutions implement to maintain core operating systems during digital disruptions.",
+    "meaning_ar": "تحدد أطر المرونة السيبرانية البروتوكولات التقنية ومعايير حماية البيانات وضوابط المخاطر التشغيلية التي تطبقها المؤسسات للحفاظ على الأنظمة التشغيلية الأساسية أثناء الاضطرابات الرقمية."
   },
   "استقرار بختام الاسبوع.. اسعار العملات الاجنبيه والعربيه اليوم الجمعه": {
     "meaning": "Official foreign exchange rates remain unchanged at commercial banks during the weekend closure, maintaining fixed conversion rates for cross-border trade settlements, corporate treasury valuations, and imported inventory pricing until interbank operations resume.",
@@ -1974,6 +1982,10 @@
   "الرقابه الماليه تمنح 4 شركات موافقات لمزاوله انشطه ماليه باستخدام التكنولوجيا": {
     "meaning": "Regulatory licensing enables four non-banking financial companies to deploy digital platforms and automated infrastructure to deliver financial services under the FRA's supervisory framework.",
     "meaning_ar": "يتيح هذا الترخيص الرقابي لأربع شركات تفعيل منصات رقمية وبنية تكنولوجية لتقديم الخدمات المالية غير المصرفية ضمن الإطار التنظيمي للهيئة العامة للرقابة المالية."
+  },
+  "الرقابه الماليه توافق علي دعوه عموميه بنيان للنظر في زياده راس المال المصدر": {
+    "meaning": "Regulatory approval allows the company to convene its general assembly to vote on expanding its issued capital base via new equity issuance or reserves capitalisation.",
+    "meaning_ar": "تتيح موافقة الهيئة العامة للرقابة المالية للشركة دعوة الجمعية العامة للتصويت على توسيع قاعدة رأسمالها المصدر، سواء عبر إصدار أسهم جديدة أو رسملة الأرباح والاحتياطيات."
   },
   "الرقابه الماليه توافق علي دعوه عموميه فيركيم مصر للنظر في اضافه نشاط انتاج وبيع الطاقه الكهرباييه": {
     "meaning": "The regulatory approval allows the company to convene its general assembly to amend its corporate purpose, adding power generation and electricity sales to its registered commercial activities.",
@@ -4092,6 +4104,10 @@
     "meaning": "The share price of the cloud data company rises by 21% following reported commercial adoption and operational integration of artificial intelligence workloads on its platform.",
     "meaning_ar": "يرتفع سعر سهم شركة البيانات السحابية بنسبة 21% إثر تسجيل نمو في الاستخدام التجاري والتكامل التشغيلي لأعباء عمل الذكاء الاصطناعي عبر منصتها."
   },
+  "سهم سوفت بنك يهبط باكثر من 13% وسط مخاوف بشان الذكاء الاصطناعي": {
+    "meaning": "SoftBank's market capitalization reflects the combined valuation of its tech-focused investment portfolio, meaning broad repricing and valuation concerns across the artificial intelligence sector directly compress the firm's net asset value.",
+    "meaning_ar": "تعكس القيمة السوقية لمجموعة سوفت بنك تقييم محفظتها الاستثمارية في قطاع التكنولوجيا، مما يعني أن إعادة تسعير أسهم الذكاء الاصطناعي تؤثر مباشرة على صافي قيمة أصول الشركة."
+  },
   "سهم “شي ان” يتراجع 9% في ثالث جلسات تداوله": {
     "meaning": "Early trading sessions for newly listed shares often reflect an initial price discovery mechanism as open-market supply and demand dynamics adjust from initial offering levels.",
     "meaning_ar": "تعكس جلسات التداول الأولى للأسهم حديثة الإدراج آلية اكتشاف السعر الأولي، حيث تتكيف قوى العرض والطلب في السوق المفتوحة مقارنة بمستويات الطرح الأولي."
@@ -4209,6 +4225,10 @@
     "meaning": "Autonomous vehicle regulations establish compliance standards and testing frameworks that define market access and product rollout timelines for manufacturers.",
     "meaning_ar": "تحدد الأطر التنظيمية للسيارات ذاتية القيادة معايير الامتثال واشتراطات الاختبار التي تحكم دخول الشركات إلى الأسواق والجدول الزمني لطرح منتجاتها."
   },
+  "شركه كحيلان لاداره الاصول تخطط لاطلاق صندوق موشرات باستثمارات 20 مليون دولار": {
+    "meaning": "The establishment of an exchange-traded fund (ETF) pools capital to track a specific benchmark index, introducing an indexed investment vehicle with $20 million in targeted assets under management to the market.",
+    "meaning_ar": "يتضمن تأسيس صندوق المؤشرات المتداولة تجميع رؤوس الأموال لتتبع مؤشر مرجعي محدد، مما يضيف أداة استثمارية مقيدة بمؤشر بحجم أصول مستهدف يبلغ 20 مليون دولار إلى السوق."
+  },
   "شركه مدعومه من وادي السيليكون تطلق صاروخا منخفض التكلفه وتستهدف انتاج 12 الف وحده سنويا": {
     "meaning": "Venture capital backing finances the transition from defense prototype development to high-volume manufacturing, utilizing standardized, low-cost components to establish an annual assembly line capacity of 12,000 units.",
     "meaning_ar": "يُموّل رأس المال المخاطر الانتقال من مرحلة تطوير النماذج الأولية إلى التصنيع الكمي المكثف، عبر استخدام مكونات معيارية منخفضة التكلفة لتشغيل خط تجميع بطاقة سنوية تبلغ 12 ألف وحدة."
@@ -4300,6 +4320,10 @@
   "صفقه النفط بين فنزويلا وامريكا قد تخالف القانون": {
     "meaning": "Legal scrutiny surrounding bilateral crude supply agreements introduces regulatory risks that affect the compliance procedures of involved energy companies and the operational flow of cross-border oil shipments.",
     "meaning_ar": "يفرض التدقيق القانوني حول اتفاقيات توريد النفط الخام الثنائية مخاطر تنظيمية تؤثر على إجراءات الامتثال لشركات الطاقة المعنية والتدفق التشغيلي لشحنات النفط عبر الحدود."
+  },
+  "صقر للاستثمار تتفاوض علي حصص في مشروعات عقاريه متعثره": {
+    "meaning": "Negotiating equity stakes in distressed real estate projects involves restructuring project capitalization, where the incoming entity injects liquidity or assumes execution responsibilities in exchange for asset ownership.",
+    "meaning_ar": "يتضمن التفاوض على حصص في مشروعات عقارية متعثرة إعادة هيكلة رأس مال هذه المشروعات، حيث يوفر الطرف المتقدم سيولة نقدية أو يتولى مهام التنفيذ مقابل الحصول على حصص ملكية في الأصول."
   },
   "صناديق الاستثمار تواصل حصد المكاسب": {
     "meaning": "Investment funds reflect sustained positive returns driven by increases in the net asset value (NAV) of their underlying equity and fixed-income portfolios in the market.",
@@ -5232,6 +5256,10 @@
   "من طابور \"الريان\" الي شاشه الموبايل.. القصه الكامله لسوق المال المصري بين الثمانينيات واليوم": {
     "meaning": "The Egyptian capital market operates on digital brokerage and electronic trading systems accessible via mobile applications, shifting trading operations and retail investor access away from physical presence and traditional paper-based investment arrangements.",
     "meaning_ar": "يعمل سوق المال المصري حالياً عبر أنظمة التداول الإلكتروني وتطبيقات الهواتف الذكية للوساطة المالية، مما ينقل تنفيذ المعاملات ووصول المستثمرين الأفراد من القنوات التقليدية والتعاملات غير الرسمية إلى منصات رقمية منظمة."
+  },
+  "منشاه صناعيه صديقه للبييه": {
+    "meaning": "An eco-friendly industrial facility operates with green-certified technologies, resource-efficient processes, and emissions-control systems that align operations with environmental regulatory frameworks and sustainability standards.",
+    "meaning_ar": "تعمل المنشأة الصناعية الصديقة للبيئة بتقنيات معتمدة بيئياً وعمليات ذات كفاءة في استخدام الموارد ونظم للتحكم في الانبعاثات بما يطابق المعايير التنظيمية واشتراطات الاستدامة."
   },
   "منصه “صندوق” تغطي نحو 200 صندوق استثمار في مصر": {
     "meaning": "The platform aggregates and displays operational data, performance metrics, and pricing for approximately 200 Egyptian investment funds in a centralized digital interface.",
