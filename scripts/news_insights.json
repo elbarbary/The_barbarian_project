@@ -2019,6 +2019,10 @@
     "meaning": "This regulatory mandate establishes a direct technical interface between consumer finance companies and the credit bureau (I-Score), automating the exchange of customer indebtedness data and credit histories at the point of origination.",
     "meaning_ar": "يُلزم هذا القرار الرقابي شركات التمويل الاستهلاكي بإنشاء ربط تقني مباشر مع الشركة المصرية للاستعلام الائتماني (آي سكور)، مما يتيح التبادل الآلي والفوري لبيانات الجدارة الائتمانية ومعدلات مديونية العملاء عند منح التمويل."
   },
+  "الرقابه الماليه تلزم شركات التمويل بتطبيق رمز التحقق OTP خلال شهرين": {
+    "meaning": "This regulatory directive requires non-bank financial institutions to integrate one-time password (OTP) authentication infrastructure into their digital platforms within a sixty-day compliance window, shifting identity verification processes to multi-factor protocols.",
+    "meaning_ar": "يُلزم هذا القرار الرقابي شركات التمويل غير المصرفي بدمج بنية تحتية للتحقق عبر رمز المرور لمرة واحدة (OTP) في منصاتها الرقمية خلال مهلة توفيق أوضاع مدتها شهران، مما ينقل إجراءات إثبات الهوية إلى بروتوكولات التحقق متعدد العوامل."
+  },
   "الرقابه الماليه تمنح 4 شركات موافقات لمزاوله انشطه غير مصرفيه باستخدام التكنولوجيا الماليه": {
     "meaning": "The regulatory approvals authorize four companies to deploy digital platforms and automated systems for non-banking financial operations, including credit assessment, onboarding, and transaction processing under the Financial Regulatory Authority's fintech framework.",
     "meaning_ar": "تمنح هذه الموافقات الرقابية الشركات الأربع ترخيصاً رسمياً لتشغيل منصات رقمية وأنظمة مؤتمتة لتقديم الخدمات المالية غير المصرفية، بما يشمل التقييم الائتماني والتعاقد وتنفيذ المعاملات وفقاً للأطر التنظيمية للهيئة العامة للرقابة المالية."
@@ -2034,6 +2038,10 @@
   "الرقابه الماليه توافق علي دعوه عموميه فيركيم مصر للنظر في اضافه نشاط انتاج وبيع الطاقه الكهرباييه": {
     "meaning": "The regulatory approval allows the company to convene its general assembly to amend its corporate purpose, adding power generation and electricity sales to its registered commercial activities.",
     "meaning_ar": "تتيح موافقة الهيئة للشركة دعوة جمعيتها العامة لتعديل غرضها الأساسي بإضافة نشاط توليد وبيع الطاقة الكهربائية إلى سجل أنشطتها التجارية."
+  },
+  "الرقابه الماليه توافق علي نشر افصاح بنيان لزياده راس المال المصدر": {
+    "meaning": "Regulatory approval allows the company to publish the disclosure report required to proceed with increasing its issued capital through the issuance of new shares.",
+    "meaning_ar": "تتيح موافقة الهيئة العامة للرقابة المالية للشركة نشر تقرير الإفصاح المخصص للسير في إجراءات زيادة رأس مالها المصدر عبر إصدار أسهم جديدة."
   },
   "الرقابه الماليه توسع استخدام التكنولوجيا في الخدمات الماليه": {
     "meaning": "The Financial Regulatory Authority expands the regulatory framework for integrating digital onboarding, electronic signatures, and automated processes into non-banking financial institutions. This standardizes technological infrastructure requirements across digital lending, insurance, and asset management platforms.",
@@ -3475,6 +3483,10 @@
   "تيلدا تتيح ربط بطاقتها بتطبيق انستاباي بالتعاون مع بنك القاهره": {
     "meaning": "This integration connects Telda prepaid cards directly to the Central Bank of Egypt's Instant Payment Network (IPN) through Banque du Caire as the sponsoring settlement bank, enabling real-time fund transfers between Telda accounts and the domestic banking network.",
     "meaning_ar": "يربط هذا التكامل بطاقات تيلدا مسبقة الدفع مباشرة بشبكة المدفوعات اللحظية (IPN) التابعة للبنك المركزي المصري عبر بنك القاهرة كبنك راعٍ للتسوية، مما يتيح التحويلات المالية الفورية بين حسابات تيلدا والشبكة المصرفية المحلية."
+  },
+  "ثاندر تحدد القيمه العادله لسهم سيرا للتعليم عند 73 جنيها بزياده 90% عن سعره الحالي": {
+    "meaning": "Brokerage research desks publish independent equity valuation reports derived from discounted cash flows and operational metrics, establishing a comparative theoretical reference against prevailing exchange trading prices.",
+    "meaning_ar": "تُصدر أقسام البحوث في شركات الوساطة تقارير تقييم مالي مستقلة بالاعتماد على نماذج التدفقات النقدية والمؤشرات التشغيلية، لتوفير سعر مرجعي نظري مقارنة بأسعار التداول السائدة في البورصة."
   },
   "ثاندر تعتزم تاسيس صندوق عقاري متعدد الاصدارات قبل نهايه العام": {
     "meaning": "Establishing a multi-issuance real estate investment fund creates a legal structure that pools investor capital across separate tranches to acquire and manage real estate assets under a single operational umbrella.",
@@ -5728,6 +5740,10 @@
   "وزير الاستثمار: نستهدف التعاون بين المختبر التنظيمي و«Trade Tech Sandbox» لدعم المصدرين بالتكنولوجيا": {
     "meaning": "The initiative links financial and trade technology regulatory sandboxes to test digital solutions for trade procedures and export financing under supervised regulatory frameworks.",
     "meaning_ar": "تربط المبادرة بين المختبرات التنظيمية للتكنولوجيا المالية وتكنولوجيا التجارة لاختبار الحلول الرقمية الخاصة بالإجراءات التجارية وتمويل الصادرات داخل أطر تنظيمية خاضعة للإشراف."
+  },
+  "وزير الانتاج الحربي: توسيع قاعده الشراكه الاستراتيجيه مع الكيانات العالميه": {
+    "meaning": "Expanding strategic partnerships with multinational entities involves direct technology transfer, joint manufacturing arrangements, and the integration of international technical specifications into local production lines.",
+    "meaning_ar": "يتضمن توسيع الشراكات الاستراتيجية مع الكيانات العالمية نقل التكنولوجيا وإبرام اتفاقيات تصنيع مشترك ودمج المواصفات الفنية الدولية داخل خطوط الإنتاج المحلية."
   },
   "وزير التخطيط جوده الاستثمار تتصدر رويه مصر للتعامل مع التحولات الاقتصاديه": {
     "meaning": "Focusing on investment quality directs state capital allocation and regulatory incentives toward high-value-added sectors, technology transfer, and productive infrastructure rather than purely expanding aggregate capital expenditure volume.",
