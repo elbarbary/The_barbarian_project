@@ -144,36 +144,86 @@ function demoMeasures(companies, rand) {
  */
 function demoScenarios(companies, rand) {
   const models = {
-    kronos: { label: 'Kronos-small', labelAr: 'Kronos-small', group: 'neural' },
-    chronos2: { label: 'Chronos-2', labelAr: 'Chronos-2', group: 'neural' },
-    timesfm25: { label: 'TimesFM 2.5', labelAr: 'TimesFM 2.5', group: 'neural' },
-    rerank: { label: 'Gemini, reading the other nine', labelAr: 'Gemini يقرأ التسعة الآخرين', group: 'rerank' },
-    momentum20: { label: 'Momentum, 20 sessions', labelAr: 'الزخم، 20 جلسة', group: 'baseline' },
-    reversal5: { label: 'Reversal, 5 sessions', labelAr: 'الانعكاس، 5 جلسات', group: 'baseline' },
+    kronos: { label: 'Kronos-small', labelAr: 'Kronos-small', group: 'neural', returns: true, distinguishes: true },
+    chronos2: { label: 'Chronos-2', labelAr: 'Chronos-2', group: 'neural', returns: true, distinguishes: true },
+    timesfm25: { label: 'TimesFM 2.5', labelAr: 'TimesFM 2.5', group: 'neural', returns: true, distinguishes: true },
+    momentum20: { label: 'Momentum, 20 sessions', labelAr: 'الزخم، 20 جلسة', group: 'baseline', returns: false, distinguishes: true },
+    reversal5: { label: 'Reversal, 5 sessions', labelAr: 'الانعكاس، 5 جلسات', group: 'baseline', returns: false, distinguishes: true },
+    drift: { label: 'Drift', labelAr: 'الانجراف', group: 'baseline', returns: true, distinguishes: true },
+    flat: { label: 'Flat, says nothing', labelAr: 'ثابت، لا يقول شيئًا', group: 'baseline', returns: true, distinguishes: false },
   };
+  // Twenty sessions before an invented basis, Sunday to Thursday like the
+  // exchange, so the "before the close" line has a shape.
+  const dates = [];
+  for (let d = new Date(Date.UTC(2026, 7, 26)); dates.length < 21; d.setUTCDate(d.getUTCDate() - 1)) {
+    if (d.getUTCDay() !== 5 && d.getUTCDay() !== 6) dates.unshift(d.toISOString().slice(0, 10));
+  }
   const rows = {};
   for (const c of companies) {
-    const models_out = {};
-    for (const id of Object.keys(models)) {
+    const out = {};
+    for (const id of ['kronos', 'chronos2', 'timesfm25', 'drift']) {
       // A different spread per model, so the disagreement the screen reports
-      // is real disagreement and not the same number six times.
-      const scale = id === 'kronos' ? 6 : id === 'rerank' ? 3 : 4;
+      // is real disagreement and not the same number four times.
+      const scale = id === 'kronos' ? 6 : id === 'drift' ? 3 : 4;
       const one = Math.round((rand() * scale - scale / 2) * 100) / 100;
-      models_out[id] = { returns: { 1: Math.round(one * 30) / 100,
-                                    5: one,
-                                    20: Math.round(one * 260) / 100 } };
+      out[id] = { returns: { 1: Math.round(one * 30) / 100, 5: one, 20: Math.round(one * 260) / 100 } };
     }
-    rows[c.ticker] = { ticker: c.ticker, close: c.close, models: models_out };
+    out.flat = { returns: { 1: 0, 5: 0, 20: 0 } };
+    const past = Math.round((rand() * 16 - 8) * 100) / 100;
+    out.momentum20 = { returns: {}, rankedBy: { 1: past, 5: past, 20: past } };
+    out.reversal5 = { returns: {}, rankedBy: { 1: -past, 5: -past, 20: -past } };
+    let level = 1 + past / 100;
+    const path = dates.map((_, i) => {
+      if (i === dates.length - 1) return 0;
+      level *= 1 + (rand() - 0.5) * 0.03;
+      return Math.round((level - 1) * 10000) / 100;
+    });
+    rows[c.ticker] = { ticker: c.ticker, close: c.close, path, models: out };
+  }
+  const layers = ['filings', 'news', 'rulebook', 'measures'];
+  const readings = {};
+  const index = {};
+  const tickers = Object.keys(rows).sort();
+  for (let mask = 0; mask < 16; mask += 1) {
+    const chosen = layers.filter((_, i) => mask & (1 << i));
+    const key = chosen.length ? chosen.join('-') : 'models';
+    const scores = {};
+    for (const t of tickers) {
+      const middle = rows[t].models.kronos.returns[5] + rows[t].models.chronos2.returns[5];
+      // Each layer nudges the order differently — invented, and plainly so.
+      const nudge = chosen.reduce((s, layer, i) => s + (((t.charCodeAt(5) + i * 7 + layer.length) % 9) - 4), 0);
+      scores[t] = Math.max(0, Math.min(100, Math.round(50 + middle * 6 + nudge * 3)));
+    }
+    const count = Math.max(0, 6 - chosen.length);
+    readings[key] = { schemaVersion: 1, demo: true, basisSession: '2026-08-26', ranAt: '2026-08-26T18:10:00Z',
+      key, name: key === 'filings-news-rulebook' ? 'rerank' : `rerank:${key}`, layers: chosen,
+      default: key === 'filings-news-rulebook', asked: true, answered: tickers.length, abstained: 0,
+      abstentions: {}, count, invented: [],
+      note: 'Demo reading: invented scores for invented companies, so the switches have something to change.',
+      scores };
+    index[key] = { name: readings[key].name, layers: chosen, default: readings[key].default,
+      asked: true, answered: tickers.length, count, reason: null };
   }
   return {
-    schemaVersion: 1, demo: true,
-    basisSession: '2026-08-26', ranAt: '2026-08-26T14:40:00Z',
-    horizons: [1, 5, 20],
-    commitment: { merkleRoot: null, timestamped: false, authority: null },
-    models,
-    what: 'An invented market, so the workbench has a shape before anyone signs in.',
-    warning: 'Demo figures for invented companies. Nothing here is a model\'s view of a real issuer.',
-    companies: rows,
+    scenarios: {
+      schemaVersion: 2, demo: true,
+      basisSession: '2026-08-26', ranAt: '2026-08-26T14:40:00Z',
+      horizons: [1, 5, 20],
+      schedule: { cron: ['0 14 * * 0-4', '0 17 * * 0-4'], timezone: 'UTC' },
+      commitment: { merkleRoot: null, timestamped: false, authority: null },
+      models,
+      dates,
+      rerank: {
+        ranAt: '2026-08-26T18:10:00Z', layers, default: ['filings', 'news', 'rulebook'],
+        evidence: { filings: { items: 12, companies: 7, from: '2026-08-12', to: '2026-08-26' },
+          news: { items: 5, companies: 4 }, rulebook: { chars: 3289 }, measures: { companies: tickers.length } },
+        commitment: null, readings: index,
+      },
+      what: 'An invented market, so the workbench has a shape before anyone signs in.',
+      warning: 'Demo figures for invented companies. Nothing here is a model\'s view of a real issuer.',
+      companies: rows,
+    },
+    readings,
   };
 }
 
@@ -297,7 +347,7 @@ export function demo() {
     // real answer rather than an empty one. The tickers are DEMO01..DEMO32 and
     // no figure belongs to a real issuer.
     measures: demoMeasures(companies, rand),
-    scenarios: demoScenarios(companies, rand),
+    ...(() => { const made = demoScenarios(companies, rand); return { scenarios: made.scenarios, readings: made.readings }; })(),
     marketDate: '2026-08-26', generatedAt: '2026-08-27 11:48 UTC', dataVersion: 'demo',
     isClose: true, capturedAt: '2026-08-27T11:48:00Z',
     // Two crossings, so the block has a shape before anyone signs in: one

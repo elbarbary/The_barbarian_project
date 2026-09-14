@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-09-14T21:27:47Z",
+ "builtAt": "2026-09-14T21:34:52Z",
  "topCount": 5,
  "minimumSessions": 5,
  "horizons": [
@@ -27,7 +27,12 @@
   "universeSize": 260,
   "forecasters": 9,
   "readings": 16,
-  "rerankedAt": "2026-09-14T21:23:54Z"
+  "rerankedAt": "2026-09-14T21:23:54Z",
+  "rerankReads": [
+   "filings",
+   "news",
+   "rulebook"
+  ]
  },
  "what": "For each model, the 5 companies it ranked highest on a session, and what those returned against what everything it scored returned. Every forecast was frozen before the outcome existed. A horizon whose answer already existed when the forecast was written is not counted.",
  "reading": "5 companies over a handful of sessions is a very small sample. `sessions` is how many nights are behind each average and `ahead` how many of them the model's five beat the market on; both are the size of the evidence and the average means nothing without them. Below 5 sessions the screen shows the count and not the average.",
@@ -39,6 +44,7 @@
    "labelAr": "إعادة ترتيب Gemini",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -71,6 +77,7 @@
    "labelAr": "Kronos-small",
    "group": "neural",
    "nights": 11,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 8,
@@ -264,6 +271,7 @@
    "labelAr": "Chronos-2",
    "group": "neural",
    "nights": 2,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -296,6 +304,7 @@
    "labelAr": "TimesFM 2.5",
    "group": "neural",
    "nights": 2,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -328,6 +337,7 @@
    "labelAr": "الزخم، 20 جلسة",
    "group": "baseline",
    "nights": 11,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 8,
@@ -521,6 +531,7 @@
    "labelAr": "الزخم، 60 جلسة",
    "group": "baseline",
    "nights": 11,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 8,
@@ -714,6 +725,7 @@
    "labelAr": "الانعكاس، جلسة",
    "group": "baseline",
    "nights": 11,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 8,
@@ -907,6 +919,7 @@
    "labelAr": "الانعكاس، 5 جلسات",
    "group": "baseline",
    "nights": 11,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 8,
@@ -1100,6 +1113,7 @@
    "labelAr": "الانجراف",
    "group": "baseline",
    "nights": 11,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 8,
@@ -1293,6 +1307,7 @@
    "labelAr": "ثابت، لا يقول شيئًا",
    "group": "baseline",
    "nights": 11,
+   "distinguishes": false,
    "horizons": {
     "1": {
      "sessions": 8,
@@ -1488,6 +1503,7 @@
    "labelAr": "rerank:models",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1521,6 +1537,7 @@
    "labelAr": "rerank:filings",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1556,6 +1573,7 @@
    "labelAr": "rerank:news",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1591,6 +1609,7 @@
    "labelAr": "rerank:rulebook",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1626,6 +1645,7 @@
    "labelAr": "rerank:measures",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1661,6 +1681,7 @@
    "labelAr": "rerank:filings-news",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1697,6 +1718,7 @@
    "labelAr": "rerank:filings-rulebook",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1733,6 +1755,7 @@
    "labelAr": "rerank:filings-measures",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1769,6 +1792,7 @@
    "labelAr": "rerank:news-rulebook",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1805,6 +1829,7 @@
    "labelAr": "rerank:news-measures",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1841,6 +1866,7 @@
    "labelAr": "rerank:rulebook-measures",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1877,6 +1903,7 @@
    "labelAr": "إعادة ترتيب Gemini",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1914,6 +1941,7 @@
    "labelAr": "rerank:filings-news-measures",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1951,6 +1979,7 @@
    "labelAr": "rerank:filings-rulebook-measures",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -1988,6 +2017,7 @@
    "labelAr": "rerank:news-rulebook-measures",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,
@@ -2025,6 +2055,7 @@
    "labelAr": "rerank:filings-news-rulebook-measures",
    "group": "rerank",
    "nights": 1,
+   "distinguishes": true,
    "horizons": {
     "1": {
      "sessions": 0,

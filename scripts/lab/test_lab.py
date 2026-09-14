@@ -2143,6 +2143,15 @@ class PublishTest(unittest.TestCase):
             self.assertIn("v1", path.parts)
         self.assertEqual(pb.LEGACY_SCENARIOS, pb.RESEARCH / "scenarios.json")
 
+    def test_a_model_that_ranks_every_company_alike_is_marked(self):
+        import publish as pb
+        flat = {"forecasts": [{"ticker": t, "returns": {"1": 0.0, "5": 0.0, "20": 0.0}}
+                              for t in ("AAA", "BBB")]}
+        drift = {"forecasts": [{"ticker": "AAA", "returns": {"5": 1.0}},
+                               {"ticker": "BBB", "returns": {"5": 2.0}}]}
+        self.assertFalse(pb.distinguishes(flat))
+        self.assertTrue(pb.distinguishes(drift))
+
     def test_the_record_publishes_its_own_minimum(self):
         import publish as pb
         self.assertGreaterEqual(pb.MINIMUM_SESSIONS, 3)
@@ -2169,6 +2178,21 @@ class PublishTest(unittest.TestCase):
         self.assertEqual(turned["rho"], -1.0)
         self.assertEqual(turned["keptChanged"], 10)
         self.assertGreater(turned["movedOverTwenty"], 0)
+
+    def test_companies_left_tied_at_the_bottom_are_not_moved_by_the_alphabet(self):
+        # 14 September: the default reading gave 182 of 257 companies the same
+        # bottom score. Ordered by ticker, a tie "moves" companies that the
+        # evidence never separated.
+        import publish as pb
+        tickers = [f"T{i:02d}" for i in range(40)]
+        # Ordered against the alphabet, then read again with every company
+        # tied. Broken by ticker, the tie would "move" the first and last ten
+        # by twenty places or more; standing at the shared average, nobody is
+        # further than 19.5 places from where it was.
+        ordered = {t: i for i, t in enumerate(tickers)}
+        lumped = {t: 0 for t in tickers}
+        self.assertEqual(pb.agreement(lumped, ordered, None, None)["movedOverTwenty"], 0)
+        self.assertEqual(pb.standing({"A": 5, "B": 5, "C": 1}), {"A": 1.5, "B": 1.5, "C": 3.0})
 
     def test_the_public_record_of_readings_names_no_company(self):
         import publish as pb

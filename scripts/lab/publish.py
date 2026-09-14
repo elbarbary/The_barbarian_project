@@ -168,10 +168,12 @@ def backtest(nights: list[dict], panel: dict, sessions: list[str],
     for name in names or ORDER:
         per_horizon = {}
         nights_run = 0
+        told_apart = False
         for night in nights:
             block = (night["document"].get("models") or {}).get(name)
             if block and block.get("answered"):
                 nights_run += 1
+                told_apart = told_apart or distinguishes(block)
         for horizon in fc.HORIZONS:
             rows = []
             for night in nights:
@@ -192,8 +194,27 @@ def backtest(nights: list[dict], panel: dict, sessions: list[str],
             per_horizon[str(horizon)] = summarise(rows)
         english, arabic, group = label(name)
         table[name] = {"label": english, "labelAr": arabic, "group": group,
-                       "nights": nights_run, "horizons": per_horizon}
+                       "nights": nights_run,
+                       # A model that ranks every company alike has no five of
+                       # its own: its "top five" is whichever tickers sort first.
+                       # Said in the file so the screen can leave it out of a
+                       # list of choices rather than show a record of nothing.
+                       "distinguishes": told_apart,
+                       "horizons": per_horizon}
     return table
+
+
+def distinguishes(block: dict) -> bool:
+    """Whether a model's answers tell any two companies apart."""
+    seen = set()
+    for record in block.get("forecasts") or []:
+        for horizon in fc.HORIZONS:
+            value = ev.predicted(record, horizon)
+            if value is not None:
+                seen.add(value)
+                if len(seen) > 1:
+                    return True
+    return False
 
 
 def summarise(rows: list[dict]) -> dict:
@@ -311,13 +332,37 @@ def scores_of(block: dict) -> dict[str, float]:
     return out
 
 
+def standing(scores: dict[str, float]) -> dict[str, float]:
+    """Where each company stands, 1 first, a tie sharing its average place.
+
+    For movement. A reading that gives most of the market the same bottom
+    score has not ordered those companies, and breaking the tie by ticker
+    would count the alphabet as the evidence moving them.
+    """
+    order = sorted(scores, key=lambda t: -scores[t])
+    out: dict[str, float] = {}
+    i = 0
+    while i < len(order):
+        j = i
+        while j + 1 < len(order) and scores[order[j + 1]] == scores[order[i]]:
+            j += 1
+        for k in range(i, j + 1):
+            out[order[k]] = (i + j) / 2 + 1
+        i = j + 1
+    return out
+
+
 def agreement(scores: dict[str, float], other: dict[str, float],
               count: int | None, other_count: int | None) -> dict:
     """How far one reading's order is from another's, in three plain numbers."""
     shared = sorted(set(scores) & set(other))
     rho = sc.rank_ic([(scores[t], other[t]) for t in shared])
+    here = standing({t: scores[t] for t in shared})
+    there = standing({t: other[t] for t in shared})
+    moved = sum(1 for t in shared if abs(here[t] - there[t]) > 20)
+    # The kept set is taken the way the evaluation takes it: highest first,
+    # ties by ticker.
     mine, theirs = positions({t: scores[t] for t in shared}), positions({t: other[t] for t in shared})
-    moved = sum(1 for t in shared if abs(mine[t] - theirs[t]) > 20)
     kept = None
     if isinstance(count, int) and isinstance(other_count, int):
         a = {t for t in shared if mine[t] <= count}
@@ -483,6 +528,9 @@ def main(argv=None) -> int:
             "readings": sum(1 for m, b in latest_models.items()
                             if rr.is_reading(m) and b.get("answered")),
             "rerankedAt": (latest_models.get(rr.NAME) or {}).get("ranAt"),
+            # What the re-rank Home reports reads, so the sentence describing
+            # it is built from the record rather than written beside it.
+            "rerankReads": list(rr.DEFAULT),
         },
         "what": f"For each model, the {TOP} companies it ranked highest on a "
                 "session, and what those returned against what everything it "
@@ -520,6 +568,7 @@ def main(argv=None) -> int:
                            "group": label(n)[2],
                            "returns": any((f.get("returns") or {})
                                           for f in latest_models[n].get("forecasts") or []),
+                           "distinguishes": distinguishes(latest_models[n]),
                            "answered": latest_models[n].get("answered", 0)}
                        for n in ORDER if n in latest_models and not rr.is_reading(n)},
             "dates": drawn["dates"],

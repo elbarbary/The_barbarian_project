@@ -183,6 +183,22 @@ async function load(email) {
 let reader = null;
 component.onRetryData = () => load(reader);
 
+/* One re-rank reading, fetched when the workbench asks for that combination
+ * of evidence and kept for the rest of the visit. The demo carries all of its
+ * own, so a signed-out reader's switches work without a request. A reading
+ * that lands after the reader has signed in or out belongs to a dataset that
+ * is gone, and is dropped rather than mixed into the new one. */
+component.loadReading = async (key) => {
+  const version = loadVersion;
+  const held = component.data().readings;
+  if (held && held[key]) return held[key];
+  const reading = await data.rerankReading(key);
+  if (version !== loadVersion) throw new Error('the reader changed while this was loading');
+  const current = component.data();
+  component.setData({ ...current, readings: { ...(current.readings || {}), [key]: reading } });
+  return reading;
+};
+
 /** Put the reader's own list on the component and redraw.
  *
  * Kept on `_watch` rather than in the dataset because it is not published

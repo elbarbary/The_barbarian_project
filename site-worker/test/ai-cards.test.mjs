@@ -30,50 +30,45 @@ test('the published record names no security anywhere', () => {
   }
 });
 
-test('a card carries its sample, not just its average', () => {
-  const built = cards.cardsFrom(top5, '5');
-  assert.ok(built.length >= 3);
-  for (const c of built) {
-    assert.equal(typeof c.sessions, 'number');
-    assert.equal(typeof c.ahead, 'number');
-    assert.ok(c.ahead <= c.sessions, `${c.id} is ahead on more sessions than it ran`);
+test('every row on Home carries its sample, not just its average', () => {
+  const m = cards.heroModel(top5, '5');
+  assert.ok(m.rows.length >= 5, 'the record lost its models');
+  assert.equal(m.minimum, top5.minimumSessions);
+  for (const r of m.rows) {
+    assert.equal(typeof r.sessions, 'number');
+    assert.ok(r.ahead <= r.sessions, `${r.id} is ahead on more sessions than it ran`);
+    // No average below the record's own minimum: a coincidence with a
+    // percentage on it is still a coincidence.
+    if (r.scored) assert.ok(r.sessions >= m.minimum, `${r.id} shows an average from ${r.sessions} sessions`);
+    else assert.equal(r.advantage, null);
   }
-  assert.match(cardsSrc, /ahead on \$\{c\.ahead\} of \$\{c\.sessions\} sessions/);
 });
 
-test('a model with no history says so rather than showing a zero', () => {
-  const built = cards.cardsFrom({ models: { kronos: { label: 'K', labelAr: 'ك', horizons: {} } } }, '5');
-  assert.equal(built[0].sessions, 0);
-  assert.equal(built[0].advantage, undefined);
-  assert.match(cardsSrc, /No record yet/);
+test('a model with no history says what it needs rather than showing a zero', () => {
+  const m = cards.heroModel({ minimumSessions: 5, models: { kronos: { label: 'K', group: 'neural', nights: 2, horizons: {} } } }, '5');
+  assert.equal(m.rows[0].sessions, 0);
+  assert.equal(m.rows[0].scored, false);
+  assert.equal(m.rows[0].advantage, null);
+  assert.equal(m.rows[0].needed, 5);
+  assert.match(cardsSrc, /needs \$\{r\.needed\} more/);
 });
 
-test('the average covers only the models that have a record, and says how many', () => {
-  // A mean that folded in a zero for the three that have run once would be a
-  // mean over an assumption.
-  const built = [
-    { id: 'a', sessions: 8, advantage: 1, ownReturn: 2, market: 1 },
-    { id: 'b', sessions: 0, advantage: null },
-    { id: 'c', sessions: 0, advantage: null },
-  ];
-  const avg = cards.averageOf(built);
-  assert.equal(avg.scored, 1);
-  assert.equal(avg.of, 3);
-  assert.equal(avg.advantage, 1);
+test('a model that tells no companies apart is not listed as if it chose five', () => {
+  // Flat ranks every company alike; its "five" are whichever tickers sort
+  // first, and its record is a record of the alphabet.
+  const m = cards.heroModel(top5, '5');
+  assert.ok(top5.models.flat, 'the fixture lost its null model');
+  assert.equal(top5.models.flat.distinguishes, false);
+  assert.ok(!m.rows.some((r) => r.id === 'flat'));
 });
 
-test('the card copy does not promise, and the beta label is on the surface', () => {
+test('the copy does not promise, and the beta label is on the surface', () => {
   for (const word of ['best', 'top pick', 'buy', 'recommend', 'should', 'will return', 'guarantee']) {
-    assert.ok(!cardsSrc.toLowerCase().includes(`'${word}`), `the cards say "${word}"`);
+    assert.ok(!cardsSrc.toLowerCase().includes(`'${word}`), `the hero says "${word}"`);
   }
-  assert.match(cardsSrc, /BETA · AI/);
-  assert.match(cardsSrc, /not advice/i);
-});
-
-test('the front page shows the models, not the baselines', () => {
-  // A card headed "Drift" answers a question nobody asked; the control group
-  // belongs on the detail screen.
-  assert.deepEqual(cards.FEATURED, ['kronos', 'chronos2', 'timesfm25', 'rerank']);
+  assert.match(cardsSrc, /ESTHMR AI · BETA · READ THIS/);
+  assert.match(cardsSrc, /advise nothing/);
+  assert.match(cardsSrc, /not an index/);
 });
 
 test('the cards sit at the top of Home on a phone', async () => {
