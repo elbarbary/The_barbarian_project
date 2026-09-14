@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-14T13:01:07.479547+00:00",
+  "builtAt": "2026-09-14T14:20:22.620951+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 192328,
-    "withoutTickerInHeading": 36177,
-    "tickerNotInThisDirectory": 29402,
-    "attributedToAnIssuer": 126749,
+    "items": 192332,
+    "withoutTickerInHeading": 36178,
+    "tickerNotInThisDirectory": 29403,
+    "attributedToAnIssuer": 126751,
     "months": [
       {
         "month": "2005-01",
@@ -1831,8 +1831,8 @@
       {
         "month": "2026-09",
         "harvested": "2026-09-14",
-        "items": 439,
-        "expected": 439,
+        "items": 443,
+        "expected": 443,
         "status": "complete"
       }
     ],
@@ -2436,9 +2436,9 @@
     },
     {
       "ticker": "CCRS",
-      "egxFilingCount": 553,
-      "latestEgxFilingId": "294034",
-      "latestEgxFilingAt": "2026-08-30T11:53:56",
+      "egxFilingCount": 554,
+      "latestEgxFilingId": "294659",
+      "latestEgxFilingAt": "2026-09-14T16:08:17",
       "candidateIssuerWebsite": "https://www.g-canadian-arsi.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CCRS/profile",
       "websiteStatus": null,
@@ -3240,9 +3240,9 @@
     },
     {
       "ticker": "GRCA",
-      "egxFilingCount": 534,
-      "latestEgxFilingId": "294631",
-      "latestEgxFilingAt": "2026-09-14T12:41:43",
+      "egxFilingCount": 535,
+      "latestEgxFilingId": "294656",
+      "latestEgxFilingAt": "2026-09-14T16:02:29",
       "candidateIssuerWebsite": "https://www.grandcapital.com.eg/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GRCA/profile",
       "websiteStatus": null,
