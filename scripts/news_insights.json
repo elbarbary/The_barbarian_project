@@ -3724,6 +3724,10 @@
     "meaning": "This transaction represents capital expenditure allocation toward physical data center facilities and computational hardware in the European market.",
     "meaning_ar": "يمثل هذا التخصيص إنفاقاً رأسمالياً موجهاً لإنشاء مراكز بيانات وتجهيزات حوسبة تقنية في السوق الأوروبية."
   },
+  "جولدمان ساكس يتوقع رفع الفايده الامريكيه 25 نقطه اساس خلال سبتمبر": {
+    "meaning": "An increase in the US federal funds rate adjusts the baseline cost of borrowing in US dollars, which influences cross-border capital flows and broadens the yield differential between US debt instruments and emerging market assets.",
+    "meaning_ar": "يؤدي رفع سعر الفائدة على الأموال الفيدرالية الأمريكية إلى تعديل التكلفة الأساسية للاقتراض بالدولار الأمريكي، مما يؤثر على تدفقات رؤوس الأموال عبر الحدود ويغير الفارق في العائد بين أدوات الدين الأمريكية وأصول الأسواق الناشئة."
+  },
   "جولدمان ساكس يتوقع رفع بنك انجلترا الفايده في نوفمبر": {
     "meaning": "Central bank policy rate increases adjust the benchmark cost of borrowing across the financial system, altering debt service obligations on variable-rate credit facilities and repricing sovereign yields.",
     "meaning_ar": "يؤدي رفع أسعار الفائدة الأساسية من قِبل البنوك المركزية إلى تعديل تكلفة الاقتراض في النظام المالي، مما يعيد تسعير عوائد أدوات الدين السيادية ويغير التزامات خدمة الديون للتسهيلات الائتمانية ذات العائد المتغير."
@@ -4541,6 +4545,10 @@
     "meaning": "Electric vehicle manufacturers integrate humanoid robotics into assembly lines to automate complex physical tasks and reallocate capital expenditures toward advanced manufacturing infrastructure.",
     "meaning_ar": "تدمج شركات تصنيع السيارات الكهربائية الروبوتات الشبيهة بالبشر في خطوط التجميع لأتمتة المهام الصناعية وتعديل هيكل تخصيص النفقات الرأسمالية في العمليات التشغيلية."
   },
+  "شركات الطيران تطالب بفتح سوق قطع غيار محركات الطايرات المستعمله امام المنافسه": {
+    "meaning": "Opening the used aircraft engine parts market to competition expands the supplier base beyond original equipment manufacturers (OEMs), shifting procurement toward independent third-party vendors and surplus material channels.",
+    "meaning_ar": "يؤدي فتح سوق قطع غيار محركات الطائرات المستعملة للمنافسة إلى توسيع قاعدة الموردين خارج نطاق المصنعين الأصليين، وتوجيه عمليات الشراء نحو البائعين المستقلين وقنوات المواد الفائضة."
+  },
   "شركات حكوميه تعرض بيع 73 الف متر مربع بالاسكندريه": {
     "meaning": "State-owned enterprises auction non-core land parcels to convert unutilised real estate assets into upfront corporate liquidity on their balance sheets.",
     "meaning_ar": "تطرح الشركات المملوكة للدولة قطع أراضٍ غير مستغلة في مزادات لتحويل الأصول العقارية الراكدة إلى سيولة نقدية مباشرة في ميزانياتها العمومية."
@@ -4628,6 +4636,10 @@
   "صادرات كوريا الجنوبيه تتجاوز الرقم القياسي السنوي عند 709.4 مليار دولار": {
     "meaning": "Reaching record annual export volumes reflects higher aggregate cross-border shipments of industrial goods, which expands the national trade balance and increases foreign currency receipts from international trade.",
     "meaning_ar": "يعكس تسجيل الصادرات السنوية لمستويات قياسية ارتفاع إجمالي الشحنات الموجهة للأسواق الخارجية من السلع الصناعية، مما يوسع الميزان التجاري ويزيد من المقبوضات بالعملات الأجنبية."
+  },
+  "صادرات كوريا من تكنولوجيا المعلومات والاتصالات تسجل رقما قياسيا في اغسطس": {
+    "meaning": "Record ICT export levels reflect peak global shipping volumes for hardware components, primarily semiconductors and display panels, directly impacting foreign trade balances and electronic supply chains.",
+    "meaning_ar": "تعكس المستويات القياسية لصادرات تكنولوجيا المعلومات والاتصالات وصول أحجام الشحن العالمية للمكونات الصلبة إلى ذروتها، لا سيما أشباه الموصلات وشاشات العرض، مما يؤثر مباشرة على الموازين التجارية وسلاسل إمداد الإلكترونيات."
   },
   "صافي الاصول الاجنبيه للقطاع المصرفي يتجاوز 28.4 مليار دولار خلال يوليو": {
     "meaning": "Net foreign assets represent the total foreign currency assets held by the central bank and commercial banks minus their foreign liabilities. A level above $28.4 billion reflects a net surplus balance sheet position where foreign currency holdings exceed external obligations across the banking system.",
@@ -6320,6 +6332,10 @@
   "“التخطيط”: تسويه تشابكات ماليه حكوميه بقيمه 298 مليار جنيه خلال اشهر": {
     "meaning": "Resolving cross-governmental financial entanglements functions as an off-market clearing mechanism that nets out reciprocal debts and claims across state-owned entities, utility providers, and the treasury. This operational settlement restructures inter-agency balance sheets and updates institutional accounting positions without requiring direct cash outlays from public budgets.",
     "meaning_ar": "تعمل تسوية التشابكات المالية الحكومية كآلية مقاصة داخلية تجري تسوية للديون والمستحقات المتبادلة بين الهيئات الاقتصادية والشركات العامة والخزانة العامة. وتعدل هذه الإجراءات قيود الميزانيات العمومية للجهات المعنية وتحدث مراكزها المحاسبية دون الحاجة إلى تدفقات نقدية فورية من الموازنة العامة."
+  },
+  "“التمويل الدوليه” تعين مديرا اقليميا جديدا لمنطقه المشرق العربي والعراق واليمن": {
+    "meaning": "This managerial appointment places regional investment operations and private-sector project financing oversight for the Levant, Iraq, and Yemen under a new executive directorship within the International Finance Corporation.",
+    "meaning_ar": "يضع هذا التعيين الإداري عمليات الاستثمار وتمويل مشاريع القطاع الخاص في منطقة المشرق العربي والعراق واليمن تحت إشراف قيادة تنفيذية جديدة تابعة لمؤسسة التمويل الدولية."
   },
   "“الخارجيه الصينيه”: بكين مستعده للعمل مع جميع الشركاء في “بريكس”": {
     "meaning": "BRICS multilateral coordination encompasses bilateral currency settlement mechanisms, institutional development financing via the New Development Bank, and supply chain integration among member states.",
