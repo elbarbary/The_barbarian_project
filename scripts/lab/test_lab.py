@@ -946,6 +946,33 @@ class EvidenceGateTest(unittest.TestCase):
         self.assertNotIn("withheld", one)
 
 
+class CarryTest(unittest.TestCase):
+    """A night the bars no longer reach keeps the score it was given."""
+
+    STORED = {"nights": [
+        {"basisSession": "2026-01-05", "models": {"m": {"horizons": {
+            "1": {"scored": 200, "rankIC": 0.11}}}}},
+        {"basisSession": "2026-06-01", "models": {"m": {"horizons": {
+            "1": {"scored": 200, "rankIC": 0.22}}}}}]}
+
+    def test_only_nights_older_than_the_panel_are_carried(self):
+        out = carry = ev.carried(self.STORED, ["2026-03-11", "2026-09-13"])
+        self.assertEqual(sorted(out), ["2026-01-05"])
+        self.assertTrue(carry["2026-01-05"]["carried"])
+
+    def test_a_night_the_panel_still_reaches_is_rescored_not_carried(self):
+        self.assertNotIn("2026-06-01",
+                         ev.carried(self.STORED, ["2026-03-11", "2026-09-13"]))
+
+    def test_an_empty_calendar_carries_nothing(self):
+        # A scan that failed must not turn into yesterday's numbers wearing
+        # today's date.
+        self.assertEqual(ev.carried(self.STORED, []), {})
+
+    def test_a_missing_file_is_no_history_rather_than_a_crash(self):
+        self.assertEqual(ev.read_stored(pathlib.Path("/nonexistent/x.json")), {})
+
+
 class CalendarTest(unittest.TestCase):
 
     def test_a_session_needs_a_majority_of_the_market(self):

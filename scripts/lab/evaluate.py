@@ -251,6 +251,42 @@ def score_run(document: dict, panel: dict, sessions: list[str]) -> dict:
     }
 
 
+def carried(stored: dict, sessions: list[str]) -> dict[str, dict]:
+    """Nights already scored that the current bars can no longer reach.
+
+    WHY THIS IS NOT AN OPTIMISATION
+    -------------------------------
+    A scan carries 120 sessions. The record is meant to run for years. Six
+    months from now the August nights will be older than the oldest bar in
+    any scan, and an evaluation rebuilt from scratch would quietly drop them
+    — the leaderboard would keep saying "8 dates" while the 8 slid forward,
+    and nobody would see the first months leave.
+
+    So a night whose basis predates the panel keeps the score it was given
+    when the bars were still there, marked `carried`. The test is the panel's
+    own reach and not "did this score come out empty": a scan that failed
+    today must not turn into yesterday's numbers wearing today's date.
+    """
+    if not sessions:
+        return {}
+    earliest = sessions[0]
+    out = {}
+    for night in stored.get("nights") or []:
+        basis = night.get("basisSession")
+        if basis and basis < earliest:
+            night = dict(night)
+            night["carried"] = True
+            out[basis] = night
+    return out
+
+
+def read_stored(path: pathlib.Path) -> dict:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
 def series(nights: list[dict], model: str, horizon: int) -> dict[str, float | None]:
     """This model's IC by date at one horizon, including the dates it failed.
 
@@ -408,6 +444,11 @@ def main(argv=None) -> int:
     print(f"   calendar: {len(sessions)} sessions, "
           f"{sessions[0]} → {sessions[-1]}")
 
+    kept = carried(read_stored(PRIVATE), sessions)
+    if kept:
+        print(f"   {len(kept)} nights are older than the oldest bar these "
+              "scans hold and keep the scores they were given")
+
     paths = sorted(glob.glob(str(args.runs / "run-*.json")))
     nights = []
     universe: set[str] = set()
@@ -417,7 +458,9 @@ def main(argv=None) -> int:
         except (OSError, ValueError):
             continue
         universe.update(document.get("universe") or [])
-        nights.append(score_run(document, panel, sessions))
+        basis = document.get("basisSession")
+        nights.append(kept[basis] if basis in kept
+                      else score_run(document, panel, sessions))
     if not nights:
         raise SystemExit(f"evaluate: no runs under {args.runs}")
     nights.sort(key=lambda n: n["basisSession"])
