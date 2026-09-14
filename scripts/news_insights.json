@@ -3700,6 +3700,10 @@
     "meaning": "A reduction in equity stake constitutes a partial divestment that alters the company's capital ownership structure, redistributing voting rights and financial exposure between the parent entity and the investee.",
     "meaning_ar": "يُعد تخفيض نسبة المساهمة تخارجاً جزئياً يُغيّر هيكل ملكية رأس المال، ويعيد توزيع حقوق التصويت وحجم التعرض المالي بين الشركة الأم والشركة التابعة."
   },
+  "جلسه داميه تهبط ب«EGX30» الي 54.8 الف نقطه": {
+    "meaning": "The headline reflects broad-based price declines across the constituent equities of the benchmark EGX30 index, lowering its aggregate market capitalization-weighted value to the 54,800-point mark.",
+    "meaning_ar": "يعكس العنوان تراجعاً واسع النطاق في أسعار أسهم الشركات المكونة للمؤشر الرئيسي «EGX30»، مما يخفض قيمته الإجمالية المرجحة برأس المال السوقي إلى مستوى 54.8 ألف نقطة."
+  },
   "جمعيه رجال الاعمال تفتتح منتدي الاعمال المصري الموريشي وتبحث فرص تعزيز الاستثمار": {
     "meaning": "Bilateral business forums serve as institutional platforms for direct cross-border corporate networking, information exchange on regulatory frameworks, and identification of joint commercial partnerships between the two countries.",
     "meaning_ar": "تُعد منتديات الأعمال الثنائية منصات مؤسسية للتواصل المباشر بين الشركات عبر الحدود، وتبادل المعلومات حول الأطر التنظيمية، وتحديد الشراكات التجارية المشتركة بين البلدين."
@@ -4513,6 +4517,10 @@
     "meaning": "A reduction in crude oil consumption by major refiners directly decreases refinery processing throughput and lowers total import intake across global energy supply chains.",
     "meaning_ar": "يؤدي انخفاض استهلاك النفط الخام لدى شركات التكرير الكبرى إلى خفض معدلات التشغيل وتقليص أحجام الواردات عبر سلاسل إمداد الطاقة العالمية."
   },
+  "سيوله فوريه.. شهادات ادخار تدفع لك العايد اول يوم وتصل ل 40%": {
+    "meaning": "These banking instruments disburse the cumulative interest yield upfront on the issuance date rather than across standard periodic intervals, locking the deposited principal for the certificate's duration.",
+    "meaning_ar": "تُصرف عوائد هذه الأوعية الادخارية مجمعة ومقدمًا في تاريخ الإصدار بدلاً من دوريات الصرف المعتادة، مع تجميد أصل المبلغ المودع طوال فترة سريان الشهادة."
+  },
   "شراكات استراتيجيه بين مصر للطيران للخدمات الجويه وشركات وطنيه لتطوير خدمات القطاع": {
     "meaning": "These strategic partnerships integrate domestic suppliers into EgyptAir In-Flight Services' operational supply chain for airline catering and ground logistics, replacing imported inputs with locally sourced catering inventory and technical service agreements.",
     "meaning_ar": "تدمج هذه الشراكات الاستراتيجية الموردين المحليين ضمن سلسلة التوريد التشغيلية لشركة مصر للطيران للخدمات الجوية، حيث تستبدل المدخلات المستوردة بمخزون تموين وتعاقدات خدمات فنية محلية الصنع."
@@ -4556,6 +4564,10 @@
   "شركات الطيران تطالب بفتح سوق قطع غيار محركات الطايرات المستعمله امام المنافسه": {
     "meaning": "Opening the used aircraft engine parts market to competition expands the supplier base beyond original equipment manufacturers (OEMs), shifting procurement toward independent third-party vendors and surplus material channels.",
     "meaning_ar": "يؤدي فتح سوق قطع غيار محركات الطائرات المستعملة للمنافسة إلى توسيع قاعدة الموردين خارج نطاق المصنعين الأصليين، وتوجيه عمليات الشراء نحو البائعين المستقلين وقنوات المواد الفائضة."
+  },
+  "شركات تعيد التصنيع الي الصين لتفادي الرسوم الامريكيه": {
+    "meaning": "This operational adjustment reflects a realignment of global supply chains where manufacturers relocate assembly and sourcing facilities back to China to bypass trade tariffs applied on alternative production hubs.",
+    "meaning_ar": "يعكس هذا الإجراء التشغيلي إعادة هيكلة لسلاسل التوريد عبر نقل منشآت التصنيع والتجميع إلى الصين لتجاوز التعريفات الجمركية المفروضة على مراكز إنتاج بديلة."
   },
   "شركات حكوميه تعرض بيع 73 الف متر مربع بالاسكندريه": {
     "meaning": "State-owned enterprises auction non-core land parcels to convert unutilised real estate assets into upfront corporate liquidity on their balance sheets.",
@@ -6216,6 +6228,10 @@
   "وزير العمل يبحث مع محافط بورسعيد ملفات التشغيل والتدريب والسلامه والصحه المهنيه": {
     "meaning": "Government coordination between the Ministry of Labor and regional governorates standardizes vocational training curricula, labor compliance, and occupational safety audits across local industrial and logistical enterprises.",
     "meaning_ar": "يضع التنسيق الحكومي بين وزارة العمل والمحافظات أطر عمل موحدة لبرامج التدريب المهني، والتفتيش على السلامة والصحة المهنية، والامتثال لقوانين العمل داخل المنشآت الصناعية واللوجستية."
+  },
+  "وزير العمل يبحث مع نظيره الاردني اوضاع العماله المصريه في المملكه": {
+    "meaning": "Bilateral labor coordination regulates cross-border workforce flows, legal compliance, and the administrative framework governing worker remittances between Egypt and Jordan.",
+    "meaning_ar": "ينظم التنسيق العمالي الثنائي تدفقات العمالة عبر الحدود، والامتثال القانوني، والأطر الإدارية الحاكمة لتحويلات العاملين بين مصر والأردن."
   },
   "وزير العمل يمنح شركات الحاق العماله بالخارج مهله 6 اشهر لتوفيق اوضاعها": {
     "meaning": "The decision grants foreign employment agencies a six-month regulatory grace period to align operational procedures, licensing requirements, and legal documentation with Ministry of Labor standards.",
