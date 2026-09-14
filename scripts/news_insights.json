@@ -2727,6 +2727,10 @@
     "meaning": "Higher crude oil prices directly raise input, energy, and transportation costs for industrial manufacturing and transport sectors, while increasing baseline revenues for upstream oil and gas exploration companies.",
     "meaning_ar": "يؤدي ارتفاع أسعار النفط الخام بشكل مباشر إلى زيادة تكاليف الطاقة والمدخلات والنقل للقطاعات الصناعية، بينما يرفع الإيرادات الأساسية لشركات التنقيب والإنتاج في قطاع البترول والغاز."
   },
+  "النفط يقفز باكثر من 3% وسط مخاوف بشان الامدادات بعد هجمات جديده علي السعوديه": {
+    "meaning": "Attacks on oil infrastructure introduce a geopolitical risk premium to global crude pricing, which alters energy import costs and operational fuel expenses for domestic industries.",
+    "meaning_ar": "تضيف الهجمات على المنشآت النفطية علاوة مخاطر جيوسياسية إلى أسعار الخام العالمية، مما يغير تكاليف استيراد الطاقة ونفقات تشغيل الوقود للقطاعات الصناعية المحلية."
+  },
   "النفط يوسع مكاسبه بعد اعلان السعوديه تعرض منشات طاقه لهجمات": {
     "meaning": "Attacks on major energy infrastructure disrupt crude processing and export capacity, which incorporates an immediate geopolitical supply-risk premium into global benchmark oil prices.",
     "meaning_ar": "تؤدي الهجمات على البنية التحتية للطاقة إلى تعطيل قدرات معالجة وتصدير الخام، مما يضيف علاوة مخاطر جيوسياسية فورية على أسعار عقود النفط في الأسواق العالمية."
@@ -5924,6 +5928,10 @@
   "نقيب الاطباء: قبول طلاب الطب بمجموع 50% امر غير مقبول": {
     "meaning": "The statement addresses admission thresholds for medical education, which govern student enrollment criteria and the regulatory standards applied to private higher education institutions.",
     "meaning_ar": "يتناول التصريح معايير القبول بالتعليم الطبي، والتي تحدد اشتراطات قيد الطلاب والضوابط التنظيمية المطبقة على مؤسسات التعليم العالي الخاص."
+  },
+  "نقيب الزراعيين: زياده صادرات الفحم لا علاقه لها بقطع الاشجار": {
+    "meaning": "Charcoal export volumes rely on agricultural pruning waste and timber residues from designated plantations rather than deforestation, operating under regulatory environmental quotas and raw material licensing.",
+    "meaning_ar": "تعتمد تدفقات تصدير الفحم النباتي على مخلفات تقليم المزارع والأشجار الخشبية المرخصة بيئياً بدلاً من إزالة الغابات، وذلك ضمن أطر رقابية تنظم حصص المواد الخام وسلاسل التوريد."
   },
   "نقيب الفلاحين: مفيش دوله في العالم تاكل 20 مليون طن قمح في السنه": {
     "meaning": "High national wheat consumption requires reliance on both local harvests and international grain imports, directly linking state food subsidy expenditures and foreign exchange allocations to global agricultural commodity procurement.",
