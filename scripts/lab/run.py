@@ -37,6 +37,7 @@ import hashlib
 import json
 import pathlib
 import sys
+import time
 import zoneinfo
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -162,10 +163,20 @@ def trim(bars: list[dict], basis: str) -> list[dict]:
 
 
 def run_models(rows: list[dict], basis: str, models: dict) -> dict:
-    """Ask every model about every company, and write down every refusal."""
+    """Ask every model about every company, and write down every refusal.
+
+    Each model is timed. Not for tuning — for the record: a model that took
+    ten times as long tonight was doing something different tonight, and the
+    only way that is ever visible afterwards is if somebody wrote it down. It
+    is also the number the schedule has to be sized against, and guessing it
+    is how a run gets killed by a job timeout three quarters of the way
+    through, which is exactly what happened on 14 September.
+    """
     answers: dict[str, list] = {}
     refusals: dict[str, list] = {}
+    spent: dict[str, float] = {}
     for name, ask in models.items():
+        started = time.monotonic()
         made, declined = [], []
         for row in rows:
             bars = trim(row["bars"], basis)
@@ -182,7 +193,10 @@ def run_models(rows: list[dict], basis: str, models: dict) -> dict:
             (made if isinstance(out, fc.Forecast) else declined).append(out)
         answers[name] = made
         refusals[name] = declined
-    return {"forecasts": answers, "abstentions": refusals}
+        spent[name] = round(time.monotonic() - started, 1)
+        print(f"   {name:<12} {len(made):>4} answered  {len(declined):>3} "
+              f"abstained  {spent[name]:>7.1f}s", flush=True)
+    return {"forecasts": answers, "abstentions": refusals, "seconds": spent}
 
 
 def as_record(f: fc.Forecast) -> dict:
@@ -229,6 +243,7 @@ def build(scan: dict, models: dict, ran_at: str) -> dict:
             # Grouped rather than listed one by one: 230 companies refused for
             # "84 bars to the basis" is one fact, not 230.
             "abstentions": dict(collections.Counter(a.reason for a in declined)),
+            "seconds": result["seconds"][name],
         }
     return document
 
@@ -312,9 +327,8 @@ def main(argv=None) -> int:
     print(f"   basis {basis}  ·  {document['universeSize']} companies  ·  "
           f"{len(chosen)} models  ·  "
           f"{'before the open' if timing['beforeOpen'] else 'session running'}")
-    for name, block in document["models"].items():
-        print(f"   {name:<12} {block['answered']:>4} answered  "
-              f"{block['abstained']:>3} abstained")
+    print(f"   {sum(b['seconds'] for b in document['models'].values()):.0f}s "
+          f"across {len(document['models'])} models")
     print(f"   fingerprint {document['fingerprint'][:16]}")
 
     # The commitment, built before anything is written.

@@ -73,9 +73,14 @@ permissions:
 jobs:
   forecast:
     runs-on: ubuntu-latest
-    # The market scan is ~6 minutes and Kronos ~6 more. Twice that is room
-    # for a slow runner and no room for a hang.
-    timeout-minutes: 30
+    # Measured, not guessed — and the guess was wrong. Thirty minutes killed
+    # the dry run of 14 September three quarters of the way through the
+    # neural models: a free runner is roughly twice as slow per company as
+    # the laptop the models were timed on. The scan is ~6 minutes, installing
+    # torch ~3 when the cache is warm, and the nine models the rest. Ninety is
+    # room for a slow runner and still no room for a hang; `run.py` now prints
+    # what each model actually cost, so this stops being guesswork.
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
 
