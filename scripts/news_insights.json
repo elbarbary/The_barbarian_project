@@ -423,6 +423,10 @@
     "meaning": "An increase in consolidated revenues reflects operational growth across Cleopatra Hospital Group's combined network of medical facilities, driven by higher patient volumes, expanded bed capacities, or adjusted pricing across its healthcare services.",
     "meaning_ar": "تعكس القفزة في الإيرادات المجمعة نمواً تشغيلياً عبر شبكة المنشآت الطبية التابعة لمجموعة مستشفيات كليوباترا، والناتج عن زيادة أعداد المرضى أو توسيع الطاقة الاستيعابية للأسرّة أو تعديل أسعار الخدمات الصحية المقدمة."
   },
+  "commvault brings shift 2026 to cairo on september 23": {
+    "meaning": "Hosting the enterprise event establishes a direct local platform for Commvault to demonstrate data management and cyber-resilience infrastructure directly to Egyptian enterprise and institutional clients.",
+    "meaning_ar": "يوفر تنظيم هذا المؤتمر المتخصص منصة محلية مباشرة لشركة كومفولت لاستعراض خدمات إدارة البيانات والبنية التحتية للأمن السيبراني أمام المؤسسات والشركات في السوق المصرية."
+  },
   "delta insurance consolidated profits drop in h1 2026": {
     "meaning": "A decline in consolidated profits for an insurer reflects a contraction in net underwriting results, driven by higher claims paid and operational expenses, or lower net investment returns across the parent and subsidiary entities.",
     "meaning_ar": "يعكس تراجع الأرباح المجمعة لشركة التأمين انخفاضاً في نتائج الاكتتاب التأميني جراء ارتفاع التعويضات المسددة والتكاليف التشغيلية، أو تراجع عوائد المحفظة الاستثمارية للشركة الأم وتابعيها."
@@ -2387,6 +2391,10 @@
     "meaning": "The resumption of maritime tanker traffic through the Strait of Hormuz maintains Kuwaiti crude oil export flows at an operational volume of one million barrels per day.",
     "meaning_ar": "يتيح انتظام حركة ناقلات النفط عبر مضيق هرمز استمرار تدفقات صادرات النفط الخام الكويتي بمعدل تشغيلي يبلغ مليون برميل يومياً."
   },
+  "اللجنه العليا لتراخيص الشواطي توافق علي 42 مشروعا": {
+    "meaning": "The approvals grant regulatory clearance for coastal construction and commercial operations across 42 projects, permitting developers to initiate site development and infrastructure works under environmental and maritime compliance standards.",
+    "meaning_ar": "تمنح هذه الموافقات التراخيص التنظيمية لأعمال الإنشاءات والأنشطة التجارية الساحلية لـ 42 مشروعًا، مما يتيح للمطورين بدء تجهيز المواقع وتنفيذ مشروعات البنية التحتية وفقًا لمعايير الالتزام البيئي والبحري."
+  },
   "اللجنه المختصه توافق علي تحديث دراسه القيمه العادله": {
     "meaning": "The regulatory committee authorizes a revised valuation assessment to re-evaluate the company's assets and financial position using updated financial statements and current market parameters.",
     "meaning_ar": "تعتمد اللجنة المختصة تحديث التقييم المالي لإعادة احتساب أصول الشركة ومركزها المالي بالاستناد إلى القوائم المالية المحدثة ومعايير السوق الحالية."
@@ -2611,6 +2619,10 @@
     "meaning": "An expanding Chinese trade surplus reflects an increase in outbound manufacturing volumes relative to imports, affecting global shipping route utilization, raw material consumption rates, and international trade liquidity flows.",
     "meaning_ar": "يعكس اتساع الفائض التجاري الصيني ارتفاع حجم الصادرات الصناعية مقارنة بالواردات، مما يحدد معدلات تشغيل خطوط الشحن البحري العالمية، وحجم استهلاك المواد الخام، وحركة السيولة في التجارة الدولية."
   },
+  "انثروبيك تحقق ربحا تشغيليا معدلا للربع الثاني علي التوالي قبيل الطرح": {
+    "meaning": "Consecutive quarters of positive adjusted operating profit reflect core operating revenues exceeding direct operational expenses, excluding non-cash, one-time, and financing charges. This metric establishes an audited operational track record required under institutional pre-listing disclosure frameworks.",
+    "meaning_ar": "يعكس تحقيق أرباح تشغيلية معدلة لربعين متتاليين تجاوز الإيرادات التشغيلية الأساسية للمصروفات النقدية المباشرة، مع استبعاد البنود غير المتكررة والتمويلية، وهو ما يشكل سجلاً مالياً متطلباً ضمن معايير الإفصاح المؤسسي السابقة للطروحات العامة."
+  },
   "انخفاض الاسهم اليابانيه مسجله خساير اسبوعيه": {
     "meaning": "Weekly declines in Japanese equities reflect widespread net capital outflows across Tokyo-listed shares, driven by market revaluations linked to domestic currency fluctuations and interest rate adjustments.",
     "meaning_ar": "يعكس التراجع الأسبوعي للأسهم اليابانية صافي تدفقات رأسمالية خارجة عبر الشركات المدرجة في بورصة طوكيو، نتيجة لإعادة تسعير السوق المرتبطة بتحركات العملة المحلية وتغيرات أسعار الفائدة."
@@ -2650,6 +2662,10 @@
   "اول اسبوع تصديري يسجل 2121 طنا من القطن": {
     "meaning": "The execution of 2,121 tonnes in cotton export shipments marks the commencement of seasonal outflow volumes in the agricultural trading market.",
     "meaning_ar": "يمثل تنفيذ تصدير 2121 طناً من القطن بدء تدفق أحجام الشحنات التصديرية الموسمية في سوق الحاصلات الزراعية."
+  },
+  "اي البنوك تقدم اعلي سعر لشراء الدينار الكويتي في بدايه تعاملات اليوم؟": {
+    "meaning": "Commercial banks adjust bid exchange rates for foreign currencies based on individual interbank liquidity positions, sovereign reserve requirements, and daytime clearing volumes.",
+    "meaning_ar": "تحدد البنوك التجارية أسعار شراء العملات الأجنبية استناداً إلى مستويات السيولة اللحظية لديها، وحجم المعاملات في سوق المعاملات بين البنوك (الإنتربنك)."
   },
   "اي اند مصر تتصدر سوق المحمول: الاقل شكاوي والاسرع استجابه خلال النصف الاول من 2026": {
     "meaning": "Regulatory customer service indicators measure operational support efficiency and response speed across the mobile telecommunications sector under National Telecommunications Regulatory Authority (NTRA) benchmarks.",
@@ -5445,6 +5461,10 @@
     "meaning": "These three automotive brands capture the largest volume share of passenger vehicle registrations through localized assembly operations and established distribution networks in the domestic market.",
     "meaning_ar": "تستحوذ هذه العلامات التجارية الثلاث على الحصة الكبرى من حجم تسجيلات سيارات الركوب عبر خطوط التجميع المحلي وشبكات التوزيع القائمة في السوق المحلي."
   },
+  "هاير مصر تضخ 80 مليون دولار في المرحله الثانيه لمجمعها الصناعي": {
+    "meaning": "This foreign direct investment allocates $80 million in capital expenditure to add physical production lines and expand manufacturing capacity at the company's local industrial complex.",
+    "meaning_ar": "يمثل هذا الإجراء تدفقاً استثمارياً أجنبياً مباشراً يُوجِّه 80 مليون دولار كنفقات رأسمالية لإضافة خطوط إنتاج جديدة وتوسيع الطاقة التصنيعية للمجمع الصناعي المحلي."
+  },
   "هاير مصر تضخ استثمارات جديده وتفتتح المرحله الثانيه من مجمع العاشر نوفمبر المقبل": {
     "meaning": "The expansion represents capital expenditure allocated to industrial capacity, adding a second operational phase to the manufacturing complex in 10th of Ramadan City to expand domestic production lines.",
     "meaning_ar": "يمثل هذا التوسع إنفاقاً رأسمالياً موجهاً للطاقة الصناعية، حيث يضيف مرحلة تشغيلية ثانية إلى المجمع التصنيعي في مدينة العاشر من رمضان لزيادة خطوط الإنتاج المحلي."
@@ -5908,6 +5928,10 @@
   "“الاستثمار”: صندوق مرتقب لتعزيز الشراكات المصريه الافريقيه": {
     "meaning": "The proposed fund establishes a dedicated financing vehicle that pools capital to co-fund cross-border commercial ventures and joint projects between Egyptian entities and African counterparts.",
     "meaning_ar": "يوفر الصندوق المقترح أداة تمويل مخصصة لتجميع رؤوس الأموال بهدف التمويل المشترك للمشاريع التجارية والاستثمارية المشتركة بين الكيانات المصرية ونظيراتها الأفريقية."
+  },
+  "“التخطيط” تبحث خطط توسع “اي فاينانس” ودعم البنيه التحتيه الرقميه": {
+    "meaning": "Government coordination with e-finance aligns public digital infrastructure projects with the company's technical capacity, defining its operational role in state electronic payment platforms and data management systems.",
+    "meaning_ar": "يحدد التنسيق الحكومي مع شركة إي فاينانس المشروعات الرقمية العامة المتوافقة مع القدرات التشغيلية للشركة، وينظم دورها التقني في إدارة منظومات الدفع الإلكتروني وقواعد البيانات الحكومية."
   },
   "“التخطيط”: تسويه تشابكات ماليه حكوميه بقيمه 298 مليار جنيه خلال اشهر": {
     "meaning": "Resolving cross-governmental financial entanglements functions as an off-market clearing mechanism that nets out reciprocal debts and claims across state-owned entities, utility providers, and the treasury. This operational settlement restructures inter-agency balance sheets and updates institutional accounting positions without requiring direct cash outlays from public budgets.",
