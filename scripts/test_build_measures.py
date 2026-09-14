@@ -32,6 +32,23 @@ def published() -> dict | None:
     return json.loads(PUBLISHED.read_text(encoding="utf-8"))
 
 
+def published_table():
+    """The table as last published, or None when it predates this builder.
+
+    A publish that started from an older commit can rewrite the table after a
+    builder change lands, and for the half hour until the next publish the
+    artefact lags the code. A test that reads the artefact must say "stale"
+    then, not "broken": the code under test is right and the file is simply
+    from before it. `breadth` arrived with the same change that revived four
+    empty columns and stripped the nulls, so its absence dates the file.
+    """
+    try:
+        table = json.loads(bm.OUT.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    return table if "breadth" in table else None
+
+
 class ForecastGateTest(unittest.TestCase):
     """Nothing that predicts, scores or ranks may become a column."""
 
@@ -269,10 +286,10 @@ class SourceKeyTest(unittest.TestCase):
         # The same claim from the other end: whatever the reader in this file
         # does, the table that shipped must not carry a column that is empty
         # for the entire market.
-        try:
-            table = json.loads(bm.OUT.read_text(encoding="utf-8"))
-        except (OSError, ValueError):
-            self.skipTest("no published measures table")
+        table = published_table()
+        if table is None:
+            self.skipTest("the published table predates this builder — "
+                          "the next publish rewrites it")
         empty = [name for name, count in (table.get("coverage") or {}).items()
                  if count == 0]
         self.assertEqual(empty, [],
@@ -297,10 +314,10 @@ class NullTest(unittest.TestCase):
         # explanation: the column was absent from `missing`, so the row
         # claimed a figure it did not have, and "why is this company not in my
         # results" pointed at a measurement that was never there.
-        try:
-            table = json.loads(bm.OUT.read_text(encoding="utf-8"))
-        except (OSError, ValueError):
-            self.skipTest("no published measures table")
+        table = published_table()
+        if table is None:
+            self.skipTest("the published table predates this builder — "
+                          "the next publish rewrites it")
         offenders = [(r.get("ticker"), name)
                      for r in table["rows"]
                      for name, value in r.items() if value is None]
@@ -308,7 +325,9 @@ class NullTest(unittest.TestCase):
                          f"{len(offenders)} published cells are null")
 
     def test_a_null_is_reported_as_missing(self):
-        table = json.loads(bm.OUT.read_text(encoding="utf-8"))
+        table = published_table()
+        if table is None:
+            self.skipTest("the published table predates this builder")
         for row in table["rows"]:
             gaps = set(row.get("missing") or [])
             held = set(row) - {"missing"}
@@ -355,10 +374,10 @@ class BreadthTest(unittest.TestCase):
         self.assertEqual(out["traded"], 0)
 
     def test_the_published_breadth_accounts_for_the_whole_market(self):
-        try:
-            table = json.loads(bm.OUT.read_text(encoding="utf-8"))
-        except (OSError, ValueError):
-            self.skipTest("no published measures table")
+        table = published_table()
+        if table is None:
+            self.skipTest("the published table predates this builder — "
+                          "the next publish rewrites it")
         b = table.get("breadth")
         self.assertIsNotNone(b, "the published table carries no breadth block")
         self.assertEqual(

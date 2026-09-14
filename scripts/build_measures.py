@@ -533,7 +533,7 @@ def build(today: datetime.date | None = None) -> dict:
     no_forecasts(rows)
 
     return {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "generated": datetime.datetime.now(datetime.timezone.utc)
             .isoformat(timespec="seconds").replace("+00:00", "Z"),
         "market_date": market.get("date"),
