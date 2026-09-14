@@ -2211,6 +2211,10 @@
     "meaning": "Upgrading bilateral ties to a strategic partnership establishes high-level intergovernmental coordination mechanisms and formal trade frameworks between the two economies. This institutional structure aligns cross-border customs procedures, standardizes regulatory protocols, and governs bilateral exchange under the African Continental Free Trade Area (AfCFTA) framework.",
     "meaning_ar": "يضع الارتقاء بالعلاقات الثنائية إلى شراكة إستراتيجية آليات تنسيق حكومية رفيعة المستوى وأطر عمل تجارية رسمية بين اقتصادي البلدين؛ حيث يعمل هذا الإطار المؤسسي على توحيد وتنسيق الإجراءات الجمركية والبروتوكولات التنظيمية عبر الحدود وفقاً لأحكام اتفاقية التجارة الحرة القارية الأفريقية."
   },
+  "الرييس السيسي يستقبل ولي العهد السعودي الثلاثاء لبحث تعزيز التعاون": {
+    "meaning": "High-level bilateral state meetings establish operational frameworks for cross-border capital flows, joint infrastructure ventures, and central bank foreign currency arrangements between Saudi Arabia and Egypt.",
+    "meaning_ar": "تضع اللقاءات الثنائية رفيعة المستوى الأطر التشغيلية لتدفقات رؤوس الأموال عبر الحدود، والمشروعات المشتركة في البنية التحتية، وترتيبات العملات الأجنبية بين البنوك المركزية في مصر والسعودية."
+  },
   "الرييس السيسي يصل الي نيودلهي للمشاركه في القمه ال18 لتجمع البريكس": {
     "meaning": "Participation in BRICS summits involves diplomatic and trade coordination aimed at bilateral currency settlement mechanisms and multilateral credit facilities through the New Development Bank.",
     "meaning_ar": "تتضمن المشاركة في قمم تجمع البريكس تنسيقاً دبلوماسياً وتجارياً يتمحور حول آليات التسوية بالعملات المحلية وتسهيلات الائتمان متعددة الأطراف عبر بنك التنمية الجديد."
@@ -4127,6 +4131,10 @@
   "رييس الوزراء يحسم جدل رواتب الخريجين: العمل بالمصانع ومواقع الانتاج هو المستقبل الحقيقي": {
     "meaning": "The statement reflects state economic policy directed toward channeling graduate labor into industrial and manufacturing activities rather than administrative and clerical employment, directly impacting the allocation of the domestic workforce across sectors.",
     "meaning_ar": "يعكس التصريح توجهاً للسياسة الاقتصادية الحكومية نحو توجيه القوى العاملة من الخريجين إلى الأنشطة الصناعية ومواقع الإنتاج بدلاً من الوظائف الإدارية، وهو ما يحدد مسار توزيع العمالة المحلية بين القطاعات المختلفة."
+  },
+  "رييس الوزراء يستعرض تعديلات قانون التصالح في مخالفات البناء وتقنين اوضاعها": {
+    "meaning": "Amendments to the building reconciliation law establish the regulatory framework and administrative procedures for regularising the status of non-compliant real estate assets and integrating them into the formal market register.",
+    "meaning_ar": "تحدد تعديلات قانون التصالح في مخالفات البناء الإطار التنظيمي والإجراءات الإدارية لتقنين الأوضاع القانونية للأصول العقارية غير المرخصة ودمجها في السجل الرسمي للسوق."
   },
   "رييس الوزراء يشهد توقيع انشاء مصنع لانتاج البطاريات الكهرباييه بمختلف انواعها مع اكبر شركه عالميه": {
     "meaning": "Establishing an electric battery manufacturing facility introduces localized production capacity for energy storage components, integrating international industrial technology into the domestic supply chain.",
@@ -6264,6 +6272,14 @@
   "وزير الصحه: مباحثات متقدمه لانشاء منصه مصر الذكيه للرعايه الصحيه": {
     "meaning": "The project introduces a centralized digital infrastructure connecting state healthcare providers, digital health data records, and administrative services onto a single operational network.",
     "meaning_ar": "يقوم المشروع بإنشاء بنية تحتية رقمية مركزية تربط مقدمي خدمات الرعاية الصحية الحكومية وسجلات البيانات الطبية والخدمات الإدارية عبر شبكة تشغيلية موحدة."
+  },
+  "وزير الصحه: هدفنا الوصول للام قبل الحمل والطفل قبل الولاده.. ومصر تستهدف اقل معدلات التقزم عالميا": {
+    "meaning": "Public health initiatives targeting maternal and neonatal nutrition operate through public procurement of pharmaceuticals, dietary supplements, and infant formula, routing state healthcare budget allocations to certified pharmaceutical and healthcare suppliers.",
+    "meaning_ar": "تعمل المبادرات الصحية الموجهة لتغذية الأمهات والأطفال عبر التوريدات والمناقصات الحكومية للأدوية والمكملات الغذائية وألبان الأطفال، مما يوجه مخصصات الإنفاق الصحي العام إلى الموردين والشركات المعتمدة في القطاع الطبي."
+  },
+  "وزير الصناعه والتجاره الاردني: زياره الملك الي الصين فتحت بابا جديدا لشراكات عمليه": {
+    "meaning": "Bilateral state visits establish the framework for cross-border trade agreements, industrial joint ventures, and direct foreign investment allocations between participating nations.",
+    "meaning_ar": "تحدد الزيارات الرسمية الثنائية الإطار المنظم للاتفاقيات التجارية والمشاريع الصناعية المشتركة وتدفقات الاستثمار الأجنبي المباشر بين الدول المعنية."
   },
   "وزير الصناعه ومحافظ الجيزه يبحثان تقنين الاوضاع بمنطقتي جرزا وعرب ابوساعد الصناعيتين": {
     "meaning": "Regularising industrial zones integrates informal manufacturing units into the formal economy, providing facilities with legal operating licences, utility connections, and access to regulated industrial infrastructure.",
