@@ -307,12 +307,19 @@ def main(argv=None) -> int:
     timing = commitment_timing(basis, now_in_cairo())
     document["commitment"] = timing
     if timing["compromised"]:
-        raise SystemExit(
+        complaint = (
             f"lab: the newest session the market shares is {basis}, and "
             "today's has already closed. The one-session horizon of this run "
             "would be a price the exchange printed before the commitment was "
             "made. Refusing to write it: run before the close, or wait for "
             "the vendor to publish today's bar.")
+        # A dry run writes nothing, so there is no record to protect and no
+        # reason to fail. It exists to prove the models load and answer, and
+        # a red job for a rule about a file it never touches teaches whoever
+        # reads it next to ignore the rule.
+        if not args.check:
+            raise SystemExit(complaint)
+        print(f"   NOT A FORECAST — {complaint}")
 
     # A second run of the same night must not replace the first. "Re-run
     # until it looks better" is the failure this whole record is built to

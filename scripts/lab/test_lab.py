@@ -413,6 +413,40 @@ class SettledTest(unittest.TestCase):
                 run.OUT, run.now_in_cairo = keep_out, keep_clock
                 run.COMMITMENTS = keep_commits
 
+    def test_a_dry_run_reports_the_timing_rule_without_failing_on_it(self):
+        # It writes nothing, so there is no record to protect. A red job for
+        # a rule about a file it never touches teaches the next reader to
+        # ignore the rule.
+        import io, contextlib, tempfile
+        days = [f"2026-{m:02d}-{d:02d}" for m in (1, 2, 3, 4, 5)
+                for d in range(1, 25)][:120]
+        scan = {"records": [
+            {"ticker": t, "recentSplitAdjustedBars":
+                [{"date": d, "open": 100.0, "high": 101.0, "low": 99.0,
+                  "close": 100.0 + i, "volume": 1000.0}
+                 for i, d in enumerate(days)]}
+            for t in ("AAA", "BBB", "CCC")]}
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            path = root / "daily_scan.json"
+            path.write_text(json.dumps(scan))
+            out = root / "lab"
+            out.mkdir()
+            keep_out, keep_clock = run.OUT, run.now_in_cairo
+            run.OUT = out
+            run.now_in_cairo = lambda: datetime.datetime(
+                2026, 5, 25, 15, 2, tzinfo=run.CAIRO)
+            said = io.StringIO()
+            try:
+                with contextlib.redirect_stdout(said):
+                    code = run.main([str(path), "--models", "drift",
+                                     "--no-timestamp", "--check"])
+                self.assertEqual(code, 0)
+                self.assertIn("NOT A FORECAST", said.getvalue())
+                self.assertEqual(list(out.iterdir()), [])
+            finally:
+                run.OUT, run.now_in_cairo = keep_out, keep_clock
+
     def test_a_run_whose_horizon_has_already_closed_is_refused(self):
         import tempfile
         days = [f"2026-{m:02d}-{d:02d}" for m in (1, 2, 3, 4, 5)

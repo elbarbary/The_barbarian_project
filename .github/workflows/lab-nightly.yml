@@ -73,13 +73,13 @@ permissions:
 jobs:
   forecast:
     runs-on: ubuntu-latest
-    # Measured, not guessed — and the guess was wrong. Thirty minutes killed
-    # the dry run of 14 September three quarters of the way through the
-    # neural models: a free runner is roughly twice as slow per company as
-    # the laptop the models were timed on. The scan is ~6 minutes, installing
-    # torch ~3 when the cache is warm, and the nine models the rest. Ninety is
-    # room for a slow runner and still no room for a hang; `run.py` now prints
-    # what each model actually cost, so this stops being guesswork.
+    # Measured on this runner, not guessed — and the guess was wrong twice.
+    # The dry run of 14 September: six baselines under a second between them,
+    # kronos 1,595s, chronos2 38s, timesfm25 52s, for 260 companies each.
+    # Kronos is 6.1s a company here against 1.2s on the laptop it was timed
+    # on, and it is 94% of the models' cost on its own. With the ~6 minute
+    # scan and ~3 to install torch from cache that is a 37-minute job.
+    # Ninety leaves room for a slow runner and still none for a hang.
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
