@@ -156,6 +156,33 @@ jobs:
           # exchange stops refusing, the archive starts growing on its own.
           python3 scripts/harvest_egx_beta.py --snapshots || true
 
+      # The exchange's own disclosures, which until today only a laptop could
+      # reach.
+      #
+      # This is the last thing that kept a machine in somebody's flat on the
+      # critical path: beta.egx.com.eg reset every GitHub runner, so the
+      # filing archive — the spine of the whole app — grew only when that Mac
+      # was awake. The relay fetches it now, and the snapshot archive proved
+      # on 14 September that the route works from CI.
+      #
+      # ONLY THIS MONTH. Every earlier month is already complete, and
+      # `harvest_month` costs one request to confirm that and stop. The host
+      # blocked this project once at roughly forty requests in a day, and a
+      # harvester that re-reads a year it already holds is how that happens
+      # again.
+      - name: The exchange's own filings, through the relay
+        env:
+          ESTHMR_RELAY_URL: ${{ secrets.ESTHMR_RELAY_URL }}
+          ESTHMR_RELAY_TOKEN: ${{ secrets.ESTHMR_RELAY_TOKEN }}
+        run: |
+          month=$(date -u +%Y-%m)
+          python3 scripts/harvest_egx_beta.py --filings --from "$month" --to "$month" || true
+          # A month the exchange only half answered is worse than yesterday's
+          # copy, and the harvester writes whatever it managed to read. The
+          # exchange publishes its own total, so shortness is checkable rather
+          # than guessable — and a short file is put back the way it was.
+          python3 scripts/check_filing_months.py --restore
+
       - name: Rebuild the ledgers that read them
         run: |
           # What the committed checkpoint archive can and cannot establish
@@ -177,7 +204,8 @@ jobs:
         run: |
           git config user.name  'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add -A data-source/official data-source/egx-beta/snapshot-history
+          git add -A data-source/official data-source/egx-beta/snapshot-history \
+            data-source/egx-beta/filings
           if git diff --cached --quiet; then
             echo 'nothing moved'
             exit 0
@@ -193,7 +221,7 @@ jobs:
             fi
             unmerged=$(git diff --name-only --diff-filter=U)
             if [ -n "$unmerged" ]; then
-              if echo "$unmerged" | grep -qvE '^data-source/(official|egx-beta/snapshot-history)/'; then
+              if echo "$unmerged" | grep -qvE '^data-source/(official|egx-beta/(snapshot-history|filings))/'; then
                 echo "conflict outside this job's own output:"; echo "$unmerged"
                 git rebase --abort || true
                 exit 1
