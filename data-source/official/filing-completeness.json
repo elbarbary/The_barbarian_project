@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-14T05:34:02.375694+00:00",
+  "builtAt": "2026-09-14T10:45:35.087568+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 192291,
-    "withoutTickerInHeading": 36165,
-    "tickerNotInThisDirectory": 29401,
-    "attributedToAnIssuer": 126725,
+    "items": 192310,
+    "withoutTickerInHeading": 36170,
+    "tickerNotInThisDirectory": 29402,
+    "attributedToAnIssuer": 126738,
     "months": [
       {
         "month": "2005-01",
@@ -1830,9 +1830,9 @@
       },
       {
         "month": "2026-09",
-        "harvested": "2026-09-13",
-        "items": 402,
-        "expected": 402,
+        "harvested": "2026-09-14",
+        "items": 421,
+        "expected": 421,
         "status": "complete"
       }
     ],
@@ -1840,7 +1840,7 @@
   },
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
-    "items": 601,
+    "items": 614,
     "failures": {}
   },
   "issuers": [
@@ -2028,9 +2028,9 @@
     },
     {
       "ticker": "AFMC",
-      "egxFilingCount": 594,
-      "latestEgxFilingId": "292885",
-      "latestEgxFilingAt": "2026-08-12T13:17:42",
+      "egxFilingCount": 595,
+      "latestEgxFilingId": "294618",
+      "latestEgxFilingAt": "2026-09-14T10:32:52",
       "candidateIssuerWebsite": "https://www.alexflourmills.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AFMC/profile",
       "websiteStatus": {
@@ -2802,9 +2802,9 @@
     },
     {
       "ticker": "EFIH",
-      "egxFilingCount": 326,
-      "latestEgxFilingId": "294613",
-      "latestEgxFilingAt": "2026-09-13T15:40:48",
+      "egxFilingCount": 327,
+      "latestEgxFilingId": "294624",
+      "latestEgxFilingAt": "2026-09-14T11:25:40",
       "candidateIssuerWebsite": "https://www.efinanceinvestment.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EFIH/profile",
       "websiteStatus": null,
@@ -2956,9 +2956,9 @@
     },
     {
       "ticker": "ELSH",
-      "egxFilingCount": 771,
-      "latestEgxFilingId": "293495",
-      "latestEgxFilingAt": "2026-08-18T13:05:31",
+      "egxFilingCount": 772,
+      "latestEgxFilingId": "294626",
+      "latestEgxFilingAt": "2026-09-14T12:00:02",
       "candidateIssuerWebsite": "https://www.alshamscompany.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ELSH/profile",
       "websiteStatus": null,
@@ -3138,9 +3138,9 @@
     },
     {
       "ticker": "GBCO",
-      "egxFilingCount": 129,
-      "latestEgxFilingId": "294540",
-      "latestEgxFilingAt": "2026-09-10T10:55:32",
+      "egxFilingCount": 131,
+      "latestEgxFilingId": "294620",
+      "latestEgxFilingAt": "2026-09-14T10:46:25",
       "candidateIssuerWebsite": "https://www.gb-corporation.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GBCO/profile",
       "websiteStatus": null,
@@ -3240,9 +3240,9 @@
     },
     {
       "ticker": "GRCA",
-      "egxFilingCount": 533,
-      "latestEgxFilingId": "294541",
-      "latestEgxFilingAt": "2026-09-10T11:00:17",
+      "egxFilingCount": 534,
+      "latestEgxFilingId": "294631",
+      "latestEgxFilingAt": "2026-09-14T12:41:43",
       "candidateIssuerWebsite": "https://www.grandcapital.com.eg/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GRCA/profile",
       "websiteStatus": null,
@@ -3610,9 +3610,9 @@
     },
     {
       "ticker": "MASR",
-      "egxFilingCount": 276,
-      "latestEgxFilingId": "294584",
-      "latestEgxFilingAt": "2026-09-13T12:12:01",
+      "egxFilingCount": 277,
+      "latestEgxFilingId": "294625",
+      "latestEgxFilingAt": "2026-09-14T11:57:04",
       "candidateIssuerWebsite": "https://www.madinetmasr.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MASR/profile",
       "websiteStatus": null,
@@ -4212,9 +4212,9 @@
     },
     {
       "ticker": "PRDC",
-      "egxFilingCount": 328,
-      "latestEgxFilingId": "294583",
-      "latestEgxFilingAt": "2026-09-13T12:00:50",
+      "egxFilingCount": 329,
+      "latestEgxFilingId": "294623",
+      "latestEgxFilingAt": "2026-09-14T11:13:06",
       "candidateIssuerWebsite": "https://www.predco.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/PRDC/profile",
       "websiteStatus": null,
@@ -4282,9 +4282,9 @@
     },
     {
       "ticker": "RMDA",
-      "egxFilingCount": 398,
-      "latestEgxFilingId": "294007",
-      "latestEgxFilingAt": "2026-08-30T10:25:43",
+      "egxFilingCount": 399,
+      "latestEgxFilingId": "294627",
+      "latestEgxFilingAt": "2026-09-14T12:02:46",
       "candidateIssuerWebsite": "https://www.remco.com.eg/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/RMDA/profile",
       "websiteStatus": null,
@@ -4504,9 +4504,9 @@
     },
     {
       "ticker": "SPHT",
-      "egxFilingCount": 633,
-      "latestEgxFilingId": "294035",
-      "latestEgxFilingAt": "2026-08-30T11:56:17",
+      "egxFilingCount": 635,
+      "latestEgxFilingId": "294630",
+      "latestEgxFilingAt": "2026-09-14T12:07:32",
       "candidateIssuerWebsite": "https://www.elshamspyramids.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SPHT/profile",
       "websiteStatus": null,
@@ -4524,9 +4524,9 @@
     },
     {
       "ticker": "SPMD",
-      "egxFilingCount": 556,
-      "latestEgxFilingId": "294549",
-      "latestEgxFilingAt": "2026-09-10T11:25:59",
+      "egxFilingCount": 557,
+      "latestEgxFilingId": "294632",
+      "latestEgxFilingAt": "2026-09-14T12:44:50",
       "candidateIssuerWebsite": null,
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SPMD/profile",
       "websiteStatus": {
@@ -4546,9 +4546,9 @@
     },
     {
       "ticker": "SUGR",
-      "egxFilingCount": 574,
-      "latestEgxFilingId": "292842",
-      "latestEgxFilingAt": "2026-08-12T10:57:06",
+      "egxFilingCount": 575,
+      "latestEgxFilingId": "294621",
+      "latestEgxFilingAt": "2026-09-14T10:52:41",
       "candidateIssuerWebsite": "https://www.deltasugar.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SUGR/profile",
       "websiteStatus": null,

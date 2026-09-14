@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-09-14T05:32:57.099586+00:00",
+  "fetchedAt": "2026-09-14T10:45:09.194805+00:00",
   "sources": {
     "exchangeRates": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
     "interbank": "https://www.cbe.org.eg/en/economic-research/statistics/daily-interbank-rates-and-volumes",
@@ -141,7 +141,7 @@
           },
           {
             "date": "13/09",
-            "value": null
+            "value": 0.19234
           },
           {
             "date": "14/09",
@@ -186,7 +186,7 @@
           },
           {
             "date": "13/09",
-            "value": null
+            "value": 0.19119
           },
           {
             "date": "14/09",
@@ -231,7 +231,7 @@
           },
           {
             "date": "13/09",
-            "value": null
+            "value": 0.19699999999999998
           },
           {
             "date": "14/09",
@@ -413,7 +413,7 @@
           },
           {
             "date": "13/09",
-            "value": null
+            "value": 70874.0
           },
           {
             "date": "14/09",
@@ -458,7 +458,7 @@
           },
           {
             "date": "13/09",
-            "value": null
+            "value": 23960.0
           },
           {
             "date": "14/09",
@@ -503,7 +503,7 @@
           },
           {
             "date": "13/09",
-            "value": null
+            "value": 5000.0
           },
           {
             "date": "14/09",
@@ -548,7 +548,7 @@
           },
           {
             "date": "13/09",
-            "value": null
+            "value": 0.0
           },
           {
             "date": "14/09",
@@ -593,7 +593,7 @@
           },
           {
             "date": "13/09",
-            "value": null
+            "value": 0.0
           },
           {
             "date": "14/09",
@@ -638,7 +638,7 @@
           },
           {
             "date": "13/09",
-            "value": null
+            "value": 0.0
           },
           {
             "date": "14/09",
@@ -683,7 +683,7 @@
           },
           {
             "date": "13/09",
-            "value": null
+            "value": 99834.0
           },
           {
             "date": "14/09",
