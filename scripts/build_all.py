@@ -187,6 +187,13 @@ STEPS = [
     # harvest, so it is safe in CI, and it reads the financials the step above
     # just merged.
     ("Signals", "build_signals.py", True),
+    # The table a reader's own rulebook runs over, assembled last of the
+    # measurement steps because it reads all of them: the session from Market,
+    # the filings from the harvest, the statements from the merge above, and
+    # the streak breaks Signals has just counted. Nothing here is a forecast
+    # or a score — the builder refuses to write a column that reads like one —
+    # so it is safe in CI and cheap: arithmetic over documents already on disk.
+    ("Measurements", "build_measures.py", True),
     # One request for the whole market: the dividend yield the exchange
     # publishes, and the share count that turns a decade of filed profit into
     # a decade of earnings per share. Best-effort — the app lived without

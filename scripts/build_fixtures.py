@@ -98,6 +98,12 @@ RESOURCES = {
     "connections": ["connections.json"],
     "calendar": ["calendar.json"],
     "signals": ["signals.json"],
+    # The table a reader's rulebook runs over. It needs a counter of its own
+    # rather than riding `companies`: the whole point is that a reader opens
+    # the app in the morning and their own rule has been re-run against last
+    # night's session, and a phone that never learns the table moved would
+    # keep answering with yesterday's market.
+    "measures": ["measures.json"],
     "review": ["review.json"],
     "sectors": ["sectors.json"],
     # It had no counter: the one document rebuilt every run was the one no
