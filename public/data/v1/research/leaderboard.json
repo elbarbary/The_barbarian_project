@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-09-14T13:54:49Z",
+ "builtAt": "2026-09-14T14:28:20Z",
  "dates": [
   "2026-08-20",
   "2026-08-23",
@@ -176,12 +176,12 @@
   "drift": {
    "1": {
     "dates": 8,
-    "mean": -0.109155,
-    "median": -0.152171,
+    "mean": -0.107409,
+    "median": -0.156795,
     "positive": 1,
-    "t": -2.306,
-    "sd": 0.133882,
-    "se": 0.047334,
+    "t": -2.1478,
+    "sd": 0.141445,
+    "se": 0.050008,
     "frozenDates": 0,
     "reconstructedDates": 8,
     "withheldDates": 1,
@@ -195,38 +195,38 @@
      },
      "momentum20": {
       "dates": 8,
-      "mean_difference": -0.043479,
-      "t": -1.5307,
+      "mean_difference": -0.043065,
+      "t": -1.549,
       "ahead": 2
      },
      "momentum60": {
       "dates": 8,
-      "mean_difference": -0.007626,
-      "t": -1.2495,
+      "mean_difference": -0.007973,
+      "t": -1.3134,
       "ahead": 1
      },
      "reversal1": {
       "dates": 8,
-      "mean_difference": -0.113038,
-      "t": -1.8865,
+      "mean_difference": -0.111883,
+      "t": -1.7845,
       "ahead": 2
      },
      "reversal5": {
       "dates": 8,
-      "mean_difference": -0.151029,
-      "t": -3.3963,
+      "mean_difference": -0.146151,
+      "t": -3.0575,
       "ahead": 1
      }
     }
    },
    "5": {
     "dates": 9,
-    "mean": -0.159897,
-    "median": -0.189351,
+    "mean": -0.159188,
+    "median": -0.190947,
     "positive": 1,
-    "t": -4.2669,
-    "sd": 0.11242,
-    "se": 0.037473,
+    "t": -4.2194,
+    "sd": 0.113183,
+    "se": 0.037728,
     "frozenDates": 0,
     "reconstructedDates": 9,
     "withheldDates": 0,
@@ -240,26 +240,26 @@
      },
      "momentum20": {
       "dates": 9,
-      "mean_difference": -0.085088,
-      "t": -3.6209,
+      "mean_difference": -0.084152,
+      "t": -3.5782,
       "ahead": 1
      },
      "momentum60": {
       "dates": 9,
-      "mean_difference": -0.00689,
-      "t": -4.6244,
-      "ahead": 1
+      "mean_difference": -0.009933,
+      "t": -5.225,
+      "ahead": 0
      },
      "reversal1": {
       "dates": 9,
-      "mean_difference": -0.172244,
-      "t": -3.1222,
+      "mean_difference": -0.173266,
+      "t": -3.1345,
       "ahead": 1
      },
      "reversal5": {
       "dates": 9,
-      "mean_difference": -0.17993,
-      "t": -2.7618,
+      "mean_difference": -0.18034,
+      "t": -2.7486,
       "ahead": 2
      }
     }
@@ -442,12 +442,12 @@
   "kronos": {
    "1": {
     "dates": 8,
-    "mean": 0.054383,
-    "median": 0.079325,
+    "mean": 0.057728,
+    "median": 0.07347,
     "positive": 6,
-    "t": 2.1426,
-    "sd": 0.071792,
-    "se": 0.025382,
+    "t": 2.2631,
+    "sd": 0.072148,
+    "se": 0.025508,
     "frozenDates": 8,
     "reconstructedDates": 0,
     "withheldDates": 1,
@@ -455,8 +455,8 @@
     "against": {
      "drift": {
       "dates": 8,
-      "mean_difference": 0.163538,
-      "t": 3.2072,
+      "mean_difference": 0.165136,
+      "t": 2.9431,
       "ahead": 7
      },
      "flat": {
@@ -467,38 +467,38 @@
      },
      "momentum20": {
       "dates": 8,
-      "mean_difference": 0.12006,
-      "t": 3.2982,
-      "ahead": 7
+      "mean_difference": 0.122072,
+      "t": 2.9706,
+      "ahead": 6
      },
      "momentum60": {
       "dates": 8,
-      "mean_difference": 0.155912,
-      "t": 3.0899,
+      "mean_difference": 0.157164,
+      "t": 2.7988,
       "ahead": 7
      },
      "reversal1": {
       "dates": 8,
-      "mean_difference": 0.050501,
-      "t": 1.2939,
-      "ahead": 6
+      "mean_difference": 0.053254,
+      "t": 1.4843,
+      "ahead": 5
      },
      "reversal5": {
       "dates": 8,
-      "mean_difference": 0.012509,
-      "t": 0.4927,
-      "ahead": 5
+      "mean_difference": 0.018986,
+      "t": 0.8075,
+      "ahead": 6
      }
     }
    },
    "5": {
     "dates": 9,
-    "mean": 0.081367,
-    "median": 0.111578,
+    "mean": 0.08096,
+    "median": 0.10738,
     "positive": 7,
-    "t": 2.6562,
-    "sd": 0.091898,
-    "se": 0.030633,
+    "t": 2.5988,
+    "sd": 0.093457,
+    "se": 0.031152,
     "frozenDates": 9,
     "reconstructedDates": 0,
     "withheldDates": 0,
@@ -506,8 +506,8 @@
     "against": {
      "drift": {
       "dates": 9,
-      "mean_difference": 0.241263,
-      "t": 3.6466,
+      "mean_difference": 0.240149,
+      "t": 3.5801,
       "ahead": 8
      },
      "flat": {
@@ -518,26 +518,26 @@
      },
      "momentum20": {
       "dates": 9,
-      "mean_difference": 0.156175,
-      "t": 2.8444,
+      "mean_difference": 0.155997,
+      "t": 2.7741,
       "ahead": 7
      },
      "momentum60": {
       "dates": 9,
-      "mean_difference": 0.234373,
-      "t": 3.5834,
+      "mean_difference": 0.230216,
+      "t": 3.4653,
       "ahead": 7
      },
      "reversal1": {
       "dates": 9,
-      "mean_difference": 0.06902,
-      "t": 1.5928,
+      "mean_difference": 0.066883,
+      "t": 1.5484,
       "ahead": 6
      },
      "reversal5": {
       "dates": 9,
-      "mean_difference": 0.061333,
-      "t": 2.1894,
+      "mean_difference": 0.059808,
+      "t": 2.1237,
       "ahead": 7
      }
     }
@@ -595,12 +595,12 @@
   "momentum20": {
    "1": {
     "dates": 8,
-    "mean": -0.065677,
+    "mean": -0.064344,
     "median": -0.087097,
     "positive": 2,
-    "t": -2.5641,
-    "sd": 0.072447,
-    "se": 0.025614,
+    "t": -2.2242,
+    "sd": 0.081824,
+    "se": 0.028929,
     "frozenDates": 0,
     "reconstructedDates": 8,
     "withheldDates": 1,
@@ -608,8 +608,8 @@
     "against": {
      "drift": {
       "dates": 8,
-      "mean_difference": 0.043479,
-      "t": 1.5307,
+      "mean_difference": 0.043065,
+      "t": 1.549,
       "ahead": 6
      },
      "flat": {
@@ -620,32 +620,32 @@
      },
      "momentum60": {
       "dates": 8,
-      "mean_difference": 0.035853,
-      "t": 1.2736,
+      "mean_difference": 0.035092,
+      "t": 1.2655,
       "ahead": 6
      },
      "reversal1": {
       "dates": 8,
-      "mean_difference": -0.069559,
-      "t": -1.2759,
-      "ahead": 2
+      "mean_difference": -0.068818,
+      "t": -1.2188,
+      "ahead": 3
      },
      "reversal5": {
       "dates": 8,
-      "mean_difference": -0.107551,
-      "t": -2.8728,
+      "mean_difference": -0.103086,
+      "t": -2.6352,
       "ahead": 2
      }
     }
    },
    "5": {
     "dates": 9,
-    "mean": -0.074808,
-    "median": -0.089216,
+    "mean": -0.075036,
+    "median": -0.090721,
     "positive": 2,
-    "t": -2.9532,
-    "sd": 0.075994,
-    "se": 0.025331,
+    "t": -2.8779,
+    "sd": 0.078221,
+    "se": 0.026074,
     "frozenDates": 0,
     "reconstructedDates": 9,
     "withheldDates": 0,
@@ -653,8 +653,8 @@
     "against": {
      "drift": {
       "dates": 9,
-      "mean_difference": 0.085088,
-      "t": 3.6209,
+      "mean_difference": 0.084152,
+      "t": 3.5782,
       "ahead": 8
      },
      "flat": {
@@ -665,20 +665,20 @@
      },
      "momentum60": {
       "dates": 9,
-      "mean_difference": 0.078198,
-      "t": 3.4411,
+      "mean_difference": 0.074219,
+      "t": 3.2158,
       "ahead": 8
      },
      "reversal1": {
       "dates": 9,
-      "mean_difference": -0.087155,
-      "t": -1.6447,
+      "mean_difference": -0.089114,
+      "t": -1.6733,
       "ahead": 3
      },
      "reversal5": {
       "dates": 9,
-      "mean_difference": -0.094842,
-      "t": -1.6836,
+      "mean_difference": -0.096188,
+      "t": -1.7042,
       "ahead": 1
      }
     }
@@ -730,12 +730,12 @@
   "momentum60": {
    "1": {
     "dates": 8,
-    "mean": -0.101529,
+    "mean": -0.099436,
     "median": -0.131505,
     "positive": 1,
-    "t": -2.1681,
-    "sd": 0.132451,
-    "se": 0.046828,
+    "t": -1.9944,
+    "sd": 0.141019,
+    "se": 0.049858,
     "frozenDates": 0,
     "reconstructedDates": 8,
     "withheldDates": 1,
@@ -743,8 +743,8 @@
     "against": {
      "drift": {
       "dates": 8,
-      "mean_difference": 0.007626,
-      "t": 1.2495,
+      "mean_difference": 0.007973,
+      "t": 1.3134,
       "ahead": 7
      },
      "flat": {
@@ -755,32 +755,32 @@
      },
      "momentum20": {
       "dates": 8,
-      "mean_difference": -0.035853,
-      "t": -1.2736,
+      "mean_difference": -0.035092,
+      "t": -1.2655,
       "ahead": 2
      },
      "reversal1": {
       "dates": 8,
-      "mean_difference": -0.105412,
-      "t": -1.6942,
+      "mean_difference": -0.10391,
+      "t": -1.5972,
       "ahead": 2
      },
      "reversal5": {
       "dates": 8,
-      "mean_difference": -0.143403,
-      "t": -3.1991,
+      "mean_difference": -0.138178,
+      "t": -2.8586,
       "ahead": 1
      }
     }
    },
    "5": {
     "dates": 9,
-    "mean": -0.153006,
-    "median": -0.17925,
+    "mean": -0.149255,
+    "median": -0.178598,
     "positive": 1,
-    "t": -4.168,
-    "sd": 0.110129,
-    "se": 0.03671,
+    "t": -4.0333,
+    "sd": 0.111017,
+    "se": 0.037006,
     "frozenDates": 0,
     "reconstructedDates": 9,
     "withheldDates": 0,
@@ -788,9 +788,9 @@
     "against": {
      "drift": {
       "dates": 9,
-      "mean_difference": 0.00689,
-      "t": 4.6244,
-      "ahead": 8
+      "mean_difference": 0.009933,
+      "t": 5.225,
+      "ahead": 9
      },
      "flat": {
       "dates": 0,
@@ -800,20 +800,20 @@
      },
      "momentum20": {
       "dates": 9,
-      "mean_difference": -0.078198,
-      "t": -3.4411,
+      "mean_difference": -0.074219,
+      "t": -3.2158,
       "ahead": 1
      },
      "reversal1": {
       "dates": 9,
-      "mean_difference": -0.165353,
-      "t": -3.025,
+      "mean_difference": -0.163333,
+      "t": -2.989,
       "ahead": 1
      },
      "reversal5": {
       "dates": 9,
-      "mean_difference": -0.17304,
-      "t": -2.6898,
+      "mean_difference": -0.170407,
+      "t": -2.6347,
       "ahead": 2
      }
     }
@@ -865,12 +865,12 @@
   "reversal1": {
    "1": {
     "dates": 8,
-    "mean": 0.003882,
+    "mean": 0.004474,
     "median": 0.010488,
     "positive": 5,
-    "t": 0.0779,
-    "sd": 0.140955,
-    "se": 0.049835,
+    "t": 0.092,
+    "sd": 0.137615,
+    "se": 0.048654,
     "frozenDates": 0,
     "reconstructedDates": 8,
     "withheldDates": 1,
@@ -878,8 +878,8 @@
     "against": {
      "drift": {
       "dates": 8,
-      "mean_difference": 0.113038,
-      "t": 1.8865,
+      "mean_difference": 0.111883,
+      "t": 1.7845,
       "ahead": 6
      },
      "flat": {
@@ -890,32 +890,32 @@
      },
      "momentum20": {
       "dates": 8,
-      "mean_difference": 0.069559,
-      "t": 1.2759,
-      "ahead": 6
+      "mean_difference": 0.068818,
+      "t": 1.2188,
+      "ahead": 5
      },
      "momentum60": {
       "dates": 8,
-      "mean_difference": 0.105412,
-      "t": 1.6942,
+      "mean_difference": 0.10391,
+      "t": 1.5972,
       "ahead": 6
      },
      "reversal5": {
       "dates": 8,
-      "mean_difference": -0.037992,
-      "t": -1.0069,
+      "mean_difference": -0.034268,
+      "t": -0.9493,
       "ahead": 2
      }
     }
    },
    "5": {
     "dates": 9,
-    "mean": 0.012347,
-    "median": 0.011214,
+    "mean": 0.014078,
+    "median": 0.015526,
     "positive": 5,
-    "t": 0.3293,
-    "sd": 0.112501,
-    "se": 0.0375,
+    "t": 0.3799,
+    "sd": 0.111178,
+    "se": 0.037059,
     "frozenDates": 0,
     "reconstructedDates": 9,
     "withheldDates": 0,
@@ -923,8 +923,8 @@
     "against": {
      "drift": {
       "dates": 9,
-      "mean_difference": 0.172244,
-      "t": 3.1222,
+      "mean_difference": 0.173266,
+      "t": 3.1345,
       "ahead": 8
      },
      "flat": {
@@ -935,20 +935,20 @@
      },
      "momentum20": {
       "dates": 9,
-      "mean_difference": 0.087155,
-      "t": 1.6447,
+      "mean_difference": 0.089114,
+      "t": 1.6733,
       "ahead": 6
      },
      "momentum60": {
       "dates": 9,
-      "mean_difference": 0.165353,
-      "t": 3.025,
+      "mean_difference": 0.163333,
+      "t": 2.989,
       "ahead": 8
      },
      "reversal5": {
       "dates": 9,
-      "mean_difference": -0.007686,
-      "t": -0.1495,
+      "mean_difference": -0.007074,
+      "t": -0.1393,
       "ahead": 6
      }
     }
@@ -1000,12 +1000,12 @@
   "reversal5": {
    "1": {
     "dates": 8,
-    "mean": 0.041874,
-    "median": 0.055889,
+    "mean": 0.038742,
+    "median": 0.054096,
     "positive": 6,
-    "t": 1.6129,
-    "sd": 0.073431,
-    "se": 0.025962,
+    "t": 1.5714,
+    "sd": 0.069731,
+    "se": 0.024654,
     "frozenDates": 0,
     "reconstructedDates": 8,
     "withheldDates": 1,
@@ -1013,8 +1013,8 @@
     "against": {
      "drift": {
       "dates": 8,
-      "mean_difference": 0.151029,
-      "t": 3.3963,
+      "mean_difference": 0.146151,
+      "t": 3.0575,
       "ahead": 7
      },
      "flat": {
@@ -1025,32 +1025,32 @@
      },
      "momentum20": {
       "dates": 8,
-      "mean_difference": 0.107551,
-      "t": 2.8728,
+      "mean_difference": 0.103086,
+      "t": 2.6352,
       "ahead": 6
      },
      "momentum60": {
       "dates": 8,
-      "mean_difference": 0.143403,
-      "t": 3.1991,
+      "mean_difference": 0.138178,
+      "t": 2.8586,
       "ahead": 7
      },
      "reversal1": {
       "dates": 8,
-      "mean_difference": 0.037992,
-      "t": 1.0069,
+      "mean_difference": 0.034268,
+      "t": 0.9493,
       "ahead": 6
      }
     }
    },
    "5": {
     "dates": 9,
-    "mean": 0.020034,
+    "mean": 0.021152,
     "median": 0.015995,
     "positive": 5,
-    "t": 0.5659,
-    "sd": 0.106212,
-    "se": 0.035404,
+    "t": 0.5995,
+    "sd": 0.105849,
+    "se": 0.035283,
     "frozenDates": 0,
     "reconstructedDates": 9,
     "withheldDates": 0,
@@ -1058,8 +1058,8 @@
     "against": {
      "drift": {
       "dates": 9,
-      "mean_difference": 0.17993,
-      "t": 2.7618,
+      "mean_difference": 0.18034,
+      "t": 2.7486,
       "ahead": 7
      },
      "flat": {
@@ -1070,20 +1070,20 @@
      },
      "momentum20": {
       "dates": 9,
-      "mean_difference": 0.094842,
-      "t": 1.6836,
+      "mean_difference": 0.096188,
+      "t": 1.7042,
       "ahead": 8
      },
      "momentum60": {
       "dates": 9,
-      "mean_difference": 0.17304,
-      "t": 2.6898,
+      "mean_difference": 0.170407,
+      "t": 2.6347,
       "ahead": 7
      },
      "reversal1": {
       "dates": 9,
-      "mean_difference": 0.007686,
-      "t": 0.1495,
+      "mean_difference": 0.007074,
+      "t": 0.1393,
       "ahead": 3
      }
     }
