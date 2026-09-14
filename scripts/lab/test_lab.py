@@ -28,6 +28,7 @@ import backload  # noqa: E402
 import commit as cm  # noqa: E402
 import evaluate as ev  # noqa: E402
 import forecast as fc  # noqa: E402
+import rerank as rr  # noqa: E402
 import reveal as rv  # noqa: E402
 import run  # noqa: E402
 import panel as pricing  # noqa: E402
@@ -1201,6 +1202,189 @@ class TodaysSessionTest(unittest.TestCase):
                                                  "_prevClose": 9.12})
         self.assertEqual(len(bars), 1)
         self.assertIsNone(refused)
+
+
+class RerankRefusalTest(unittest.TestCase):
+    """The one rule that stops a language model marking its own homework."""
+
+    LIVE = {"basisSession": "2026-09-14", "models": {}}
+
+    def test_the_session_that_just_closed_is_allowed(self):
+        self.assertIsNone(rr.refuse(self.LIVE, "2026-09-14"))
+
+    def test_a_reconstructed_run_is_refused(self):
+        # It may have been trained on the outcome, and the measurements it
+        # would be shown are newer than the session it is asked about.
+        why = rr.refuse(dict(self.LIVE, reconstructed=True), "2026-09-14")
+        self.assertIn("trained on the outcome", why)
+
+    def test_a_basis_the_market_has_already_answered_is_refused(self):
+        why = rr.refuse({"basisSession": "2026-08-20"}, "2026-09-14")
+        self.assertIn("already answered", why)
+
+    def test_an_unknown_session_is_refused_rather_than_assumed(self):
+        # And says so in its own words. "the basis is X and the session that
+        # just closed is None" is a reason nobody reading the record later
+        # can act on.
+        why = rr.refuse(self.LIVE, None)
+        self.assertIn("did not say which session", why)
+
+    def test_a_refused_run_records_why_and_asks_nothing(self):
+        called = []
+        block = rr.rank(dict(self.LIVE, reconstructed=True), today="2026-09-14",
+                        measures={}, ask=lambda p: called.append(p))
+        self.assertFalse(block["asked"])
+        self.assertEqual(called, [])
+        self.assertEqual(block["answered"], 0)
+
+
+class RerankAnswerTest(unittest.TestCase):
+    """Every ticker checked back against the ones that were supplied."""
+
+    def document(self, tickers=("AAA", "BBB", "CCC")):
+        return {"basisSession": "2026-09-14", "models": {"drift": {
+            "answered": len(tickers), "abstained": 0, "forecasts": [
+                {"ticker": t, "returns": {"1": 1.0, "5": 2.0, "20": 3.0}}
+                for t in tickers]}}}
+
+    def ask(self, text):
+        return lambda prompt: (text, {"prompt": 10, "candidates": 5})
+
+    def test_a_clean_answer_becomes_a_ranking_not_a_return(self):
+        # It is not claiming this company will rise 72%. It is claiming it
+        # will do better than the one it scored 40.
+        block = rr.rank(self.document(), today="2026-09-14", measures={},
+                        ask=self.ask('{"scores":{"AAA":72,"BBB":40,"CCC":9},'
+                                     '"count":1,"note":"volume"}'))
+        self.assertEqual(block["answered"], 3)
+        first = block["forecasts"][0]
+        self.assertEqual(first["returns"], {})
+        self.assertEqual(first["ranked_by"]["5"], 72)
+        self.assertEqual(block["count"], 1)
+
+    def test_a_ticker_that_was_never_in_the_question_is_dropped_and_named(self):
+        block = rr.rank(self.document(), today="2026-09-14", measures={},
+                        ask=self.ask('{"scores":{"AAA":50,"COMI":99},"count":1}'))
+        self.assertEqual([f["ticker"] for f in block["forecasts"]], ["AAA"])
+        self.assertEqual(block["invented"], ["COMI"])
+
+    def test_a_company_it_did_not_score_is_an_abstention(self):
+        block = rr.rank(self.document(), today="2026-09-14", measures={},
+                        ask=self.ask('{"scores":{"AAA":50},"count":1}'))
+        self.assertEqual(block["answered"], 1)
+        self.assertEqual(block["abstained"], 2)
+
+    def test_it_may_not_claim_more_opportunities_than_it_scored(self):
+        block = rr.rank(self.document(), today="2026-09-14", measures={},
+                        ask=self.ask('{"scores":{"AAA":50},"count":40}'))
+        self.assertEqual(block["count"], 1)
+
+    def test_a_count_of_zero_is_kept_because_it_is_an_answer(self):
+        block = rr.rank(self.document(), today="2026-09-14", measures={},
+                        ask=self.ask('{"scores":{"AAA":50,"BBB":1,"CCC":2},'
+                                     '"count":0}'))
+        self.assertEqual(block["count"], 0)
+
+    def test_rubbish_is_an_abstention_with_a_reason_not_a_crash(self):
+        for text in ("", "I cannot help with that", "{not json"):
+            block = rr.rank(self.document(), today="2026-09-14", measures={},
+                            ask=self.ask(text))
+            self.assertEqual(block["answered"], 0)
+            self.assertTrue(block["abstentions"])
+
+    def test_a_layer_that_throws_abstains_and_says_what_threw(self):
+        def boom(prompt):
+            raise TimeoutError("the endpoint did not answer")
+        block = rr.rank(self.document(), today="2026-09-14", measures={}, ask=boom)
+        self.assertEqual(block["answered"], 0)
+        self.assertIn("TimeoutError: the endpoint did not answer",
+                      block["abstentions"])
+
+    def test_scores_are_held_inside_their_range(self):
+        block = rr.rank(self.document(), today="2026-09-14", measures={},
+                        ask=self.ask('{"scores":{"AAA":5000,"BBB":-40,"CCC":"x"},'
+                                     '"count":1}'))
+        ranked = {f["ticker"]: f["ranked_by"]["1"] for f in block["forecasts"]}
+        self.assertEqual(ranked["AAA"], 100)
+        self.assertEqual(ranked["BBB"], 0)
+        self.assertNotIn("CCC", ranked)
+
+    def test_the_layer_is_never_asked_about_itself(self):
+        document = self.document()
+        document["models"][rr.NAME] = {"forecasts": [
+            {"ticker": "AAA", "returns": {}, "ranked_by": {"1": 99}}]}
+        tickers, body = rr.table(document, {})
+        self.assertNotIn(f"{rr.NAME}_h1", body.splitlines()[0])
+
+    def test_the_prompt_carries_every_company_in_one_call(self):
+        # A reranker shown a third of the field at a time is ranking three
+        # different fields.
+        document = self.document(tuple(f"T{i:03d}" for i in range(200)))
+        tickers, body = rr.table(document, {})
+        self.assertEqual(len(tickers), 200)
+        self.assertEqual(len(body.splitlines()), 201)
+
+
+class SelectionTest(unittest.TestCase):
+    """A model's own count is a second claim, and rank IC does not test it."""
+
+    def setUp(self):
+        # Forty companies. The ones the model ranks highest are also the ones
+        # that rose, so a sensible count should show an advantage.
+        self.panel = panel_of({
+            f"T{i:02d}": {"2026-09-14": 100.0, "2026-09-15": 100.0 + i}
+            for i in range(40)})
+        self.block = {"count": 5, "forecasts": [
+            {"ticker": f"T{i:02d}", "returns": {}, "ranked_by": {"1": float(i)}}
+            for i in range(40)]}
+
+    def test_the_chosen_handful_is_measured_against_the_field_it_came_from(self):
+        out = ev.selection(self.block, "2026-09-14", 1, self.panel)
+        self.assertEqual(out["chose"], 5)
+        self.assertEqual(out["scored"], 40)
+        # The top five rose most, so they beat the average of all forty.
+        self.assertGreater(out["difference"], 0)
+        self.assertAlmostEqual(out["difference"],
+                               out["chosenReturn"] - out["universeReturn"], 5)
+
+    def test_a_month_when_everything_rose_is_not_a_clever_month(self):
+        # The whole point of the difference. A model that picks at random in
+        # a rising market has a positive return and no advantage.
+        flat = {"count": 5, "forecasts": [
+            {"ticker": f"T{i:02d}", "returns": {}, "ranked_by": {"1": 1.0}}
+            for i in range(40)]}
+        out = ev.selection(flat, "2026-09-14", 1, self.panel)
+        self.assertGreater(out["universeReturn"], 0)
+        self.assertLess(abs(out["difference"]), abs(out["universeReturn"]))
+
+    def test_choosing_none_is_an_answer_and_is_recorded(self):
+        out = ev.selection(dict(self.block, count=0), "2026-09-14", 1, self.panel)
+        self.assertEqual(out["chose"], 0)
+        self.assertIsNone(out["chosenReturn"])
+        self.assertIsNone(out["difference"])
+
+    def test_a_model_that_named_no_count_has_no_selection(self):
+        self.assertIsNone(ev.selection(
+            {"forecasts": self.block["forecasts"]}, "2026-09-14", 1, self.panel))
+
+    def test_too_few_companies_to_judge_is_reported_not_guessed(self):
+        small = {"count": 2, "forecasts": self.block["forecasts"][:10]}
+        out = ev.selection(small, "2026-09-14", 1, self.panel)
+        self.assertEqual(out["scored"], 10)
+        self.assertIsNone(out["difference"])
+
+    def test_ties_are_broken_so_the_same_run_chooses_the_same_companies(self):
+        # The same forty companies in two different orders. Without a
+        # tie-break the choice follows whichever order the file happened to
+        # be written in, and the record stops being reproducible.
+        rows = [{"ticker": f"T{i:02d}", "returns": {}, "ranked_by": {"1": 7.0}}
+                for i in range(40)]
+        forward = ev.selection({"count": 3, "forecasts": rows},
+                               "2026-09-14", 1, self.panel)
+        backward = ev.selection({"count": 3, "forecasts": list(reversed(rows))},
+                                "2026-09-14", 1, self.panel)
+        self.assertEqual(forward, backward)
+        self.assertIsNotNone(forward["chosenReturn"])
 
 
 class CalendarTest(unittest.TestCase):

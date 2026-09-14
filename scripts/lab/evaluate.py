@@ -52,6 +52,7 @@ import datetime
 import glob
 import json
 import pathlib
+import statistics
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -214,6 +215,57 @@ def pairs_for(block: dict, basis: str, horizon: int, panel: dict) -> list[tuple]
     return out
 
 
+def selection(block: dict, basis: str, horizon: int, panel: dict) -> dict | None:
+    """What a model's OWN chosen number of opportunities actually did.
+
+    A layer that is asked "how many of these are worth anything tonight" and
+    answers eleven has made a second, separate claim, and rank IC does not
+    test it: a model can order the market beautifully and still be wrong
+    about how much of it is worth owning.
+
+    So the top `count` by its own ranking are taken, and their mean forward
+    return is set beside the mean of everything it scored. The DIFFERENCE is
+    the number that matters — a month where the whole market rose 4% is not a
+    month in which picking eleven names was clever. Returns are equally
+    weighted, because a value-weighted figure would be a claim about a
+    portfolio nobody holds.
+
+    None when the model named no count, or named none at all — which is an
+    answer, and is recorded as `chose: 0` rather than as silence.
+    """
+    count = block.get("count")
+    if not isinstance(count, int) or isinstance(count, bool) or count < 0:
+        return None
+
+    ranked = []
+    for record in block.get("forecasts") or []:
+        ticker = record.get("ticker")
+        value = predicted(record, horizon)
+        if not ticker or value is None:
+            continue
+        actual = sc.forward_return(bars_of(panel, ticker), basis, horizon)
+        if actual is None:
+            continue
+        ranked.append((value, ticker, actual))
+    if len(ranked) < sc.MIN_COMPANIES:
+        return {"chose": count, "scored": len(ranked), "chosenReturn": None,
+                "universeReturn": None, "difference": None}
+
+    # Highest score first; ties broken by ticker so the same run always
+    # chooses the same companies.
+    ranked.sort(key=lambda r: (-r[0], r[1]))
+    chosen = ranked[:count]
+    everything = sum(r[2] for r in ranked) / len(ranked)
+    theirs = sum(r[2] for r in chosen) / len(chosen) if chosen else None
+    return {
+        "chose": count,
+        "scored": len(ranked),
+        "chosenReturn": round(theirs, 6) if theirs is not None else None,
+        "universeReturn": round(everything, 6),
+        "difference": round(theirs - everything, 6) if theirs is not None else None,
+    }
+
+
 def score_run(document: dict, panel: dict, sessions: list[str]) -> dict:
     """One night, every model, every horizon."""
     basis = document.get("basisSession")
@@ -239,6 +291,9 @@ def score_run(document: dict, panel: dict, sessions: list[str]) -> dict:
                 "rankIC": sc.rank_ic(pairs),
                 "direction": sc.directional_accuracy(pairs),
             }
+            chose = selection(block, basis, horizon, panel)
+            if chose is not None:
+                per_horizon[str(horizon)]["selection"] = chose
         rows[name] = {
             "answered": block.get("answered", 0),
             "abstained": block.get("abstained", 0),
@@ -359,6 +414,21 @@ def leaderboard(nights: list[dict]) -> dict:
                 if "withheld" in ((n["models"].get(model) or {})
                                   .get("horizons", {}).get(str(horizon)) or {}))
             summary["scored"] = _median_scored(nights, model, horizon)
+            chose = [(n["models"][model]["horizons"].get(str(horizon)) or {})
+                     .get("selection")
+                     for n in nights if model in (n.get("models") or {})]
+            chose = [c for c in chose if c and c.get("difference") is not None]
+            if chose:
+                # How a model's own chosen handful did against the field it
+                # chose them from, and how large a handful it wanted.
+                differences = [c["difference"] for c in chose]
+                summary["selection"] = {
+                    "dates": len(chose),
+                    "meanChosen": round(
+                        statistics.mean(c["chose"] for c in chose), 2),
+                    "meanAdvantage": round(statistics.mean(differences), 6),
+                    "ahead": sum(1 for d in differences if d > 0),
+                }
             summary["against"] = {
                 rival: sc.against(by_date, series(nights, rival, horizon))
                 for rival in sorted(fc.BASELINES) if rival != model

@@ -72,6 +72,10 @@ concurrency:
 
 permissions:
   contents: write
+  # Keyless auth to Google, for the rerank layer. The runner mints a
+  # short-lived OIDC token that Google exchanges for a Vertex access token;
+  # no service-account key exists to leak.
+  id-token: write
 
 jobs:
   forecast:
@@ -132,6 +136,20 @@ jobs:
       # WebSocket. Fetched here rather than shared because two fetches
       # minutes apart are two different markets, and the forecast has to be
       # made from the bars the record says it was made from.
+      # Vertex is where the Cloud credits live and the only Gemini endpoint
+      # that can spend them. Without this the rerank layer abstains with the
+      # reason recorded, and the other nine models are unaffected.
+      - name: Authenticate to Google Cloud
+        id: gcp
+        uses: google-github-actions/auth@v2
+        continue-on-error: true
+        with:
+          project_id: project-8bba98ed-6d90-45af-ab8
+          workload_identity_provider: projects/604618997878/locations/global/workloadIdentityPools/github/providers/repo
+          service_account: esthmr-ci@project-8bba98ed-6d90-45af-ab8.iam.gserviceaccount.com
+          token_format: access_token
+          audience: https://github.com/elbarbary
+
       - name: Fetch the market scan
         run: |
           mkdir -p ../work
@@ -161,6 +179,8 @@ jobs:
           # code goes direct.
           ESTHMR_RELAY_URL: ${{ secrets.ESTHMR_RELAY_URL }}
           ESTHMR_RELAY_TOKEN: ${{ secrets.ESTHMR_RELAY_TOKEN }}
+          GOOGLE_VERTEX_ACCESS_TOKEN: ${{ steps.gcp.outputs.access_token }}
+          GOOGLE_CLOUD_PROJECT: project-8bba98ed-6d90-45af-ab8
         run: |
           scan=$(ls -t ../work/daily_scan_*.json | grep -v fused | head -1)
           echo "scan: $scan"
