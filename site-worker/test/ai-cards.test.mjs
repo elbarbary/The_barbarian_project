@@ -12,7 +12,7 @@ import { readFile } from 'node:fs/promises';
 const ROOT = new URL('../../', import.meta.url);
 const read = (p) => readFile(new URL(p, ROOT), 'utf8');
 
-const cardsSrc = await read('public/esthmr/ai-cards.js') + await read('public/esthmr/ai-visuals.js');
+const cardsSrc = await read('public/esthmr/ai-cards.js') + await read('public/esthmr/ai-visuals.js') + await read('public/esthmr/ai-record.js');
 const scSrc = await read('public/esthmr/scenarios.js');
 const cards = await import('../../public/esthmr/ai-cards.js');
 const top5 = JSON.parse(await read('public/data/v1/research/top5.json'));
@@ -51,7 +51,7 @@ test('a model with no history says what it needs rather than showing a zero', ()
   assert.equal(m.rows[0].scored, false);
   assert.equal(m.rows[0].advantage, null);
   assert.equal(m.rows[0].needed, 5);
-  assert.match(cardsSrc, /needs \$\{r\.needed\} more/);
+  assert.match(cardsSrc, /OF \$\{m\.minimum\} SESSIONS/);
 });
 
 test('a model that tells no companies apart is not listed as if it chose five', () => {

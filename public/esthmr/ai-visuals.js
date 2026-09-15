@@ -155,8 +155,7 @@ export function heroChart(byDate, ar = false) {
   h('line', { x1: 0, x2: W, y1: zero, y2: zero, class: 'aix-zero' }),
   h('path', { d: `${path(system)} L${fix(last[0])} ${zero} L${fix(system[0][0])} ${zero} Z`, class: 'aix-hero-area' }),
   h('path', { d: path(market), class: 'aix-hero-market' }),
-  h('path', { d: path(system), class: 'aix-hero-system' }),
-  h('circle', { cx: fix(last[0]), cy: fix(last[1]), r: 4, class: 'aix-hero-dot' }));
+  h('path', { d: path(system), class: 'aix-hero-system' }));
 }
 
 /* ── the workbench's charts ─────────────────────────────────────────────── */

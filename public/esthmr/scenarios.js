@@ -4,11 +4,13 @@
  * Saved model output, and nothing generated on the screen. Every night after
  * the close each model — and each re-rank reading, Gemini reading those
  * forecasts with a chosen combination of filings, news, the rule book and
- * measurements — puts five companies highest. The screen shows two things and
- * never lets them run together:
+ * measurements — puts five companies highest. The screen shows two things,
+ * under two rules, and never lets them run together:
  *
- *   NEXT      the newest five, waiting on sessions that have not happened;
- *   SO FAR    the earlier fives, each beside what it went on to return.
+ *   FUTURE · NOT SCORED YET     the newest five, and the whole market as the
+ *                               newest run sees it;
+ *   PAST RUNS · ALREADY SCORED  the model's record so far, night by night,
+ *                               and every model against the market.
  *
  * Both come from `lab/picks.json`, built by the code that builds the public
  * record, so the five named here are the five the record averages. Switching
@@ -27,8 +29,9 @@
 import { React as R } from './react-shim.js';
 import { finite, day, shortDay, cairoTime, nextRun, summaryOf } from './ai-visuals.js';
 import {
-  nextCard, recordCard, returnsCards, rerankCards, companiesCard,
+  divider, picksCard, returnsTiles, returnsCards, rerankTiles, rerankCards, companiesCard, recordCard, nightsCard,
 } from './scenario-visuals.js';
+import { modelsCard } from './ai-record.js';
 
 const h = R.createElement;
 
@@ -200,10 +203,13 @@ const mean = (values) => values.reduce((s, v) => s + v, 0) / values.length;
 export function recordOf(entry, horizon, source, minimumSessions) {
   const minimum = finite(minimumSessions) ? minimumSessions : 1;
   const held = entry?.horizons?.[String(horizon)];
-  let sessions = 0, ahead = 0, meanReturn = null, meanMarket = null, meanAdvantage = null;
-  if (held && !(held.older > 0)) {
-    const scored = (held.nights || []).filter((n) => n.status === 'scored'
-      && finite(n.chosenReturn) && finite(n.marketReturn) && finite(n.advantage));
+  const scored = ((held && held.nights) || []).filter((n) => n.status === 'scored'
+    && finite(n.chosenReturn) && finite(n.marketReturn) && finite(n.advantage));
+  // Every scored pick on the list, for the share that finished above zero.
+  const picked = scored.flatMap((n) => (n.picks || []).filter((p) => finite(p.returned)));
+  const partial = !!(held && held.older > 0);
+  let sessions = 0, ahead = 0, meanReturn = null, meanMarket = null, meanAdvantage = null, signChanges = 0;
+  if (held && !partial) {
     sessions = scored.length;
     ahead = scored.filter((n) => n.advantage > 0).length;
     if (sessions) {
@@ -211,6 +217,9 @@ export function recordOf(entry, horizon, source, minimumSessions) {
       meanMarket = mean(scored.map((n) => n.marketReturn));
       meanAdvantage = mean(scored.map((n) => n.advantage));
     }
+    // Oldest first, the way the record counts a flip from one night to the next.
+    const signs = scored.map((n) => n.advantage > 0).reverse();
+    signChanges = signs.slice(1).filter((up, i) => up !== signs[i]).length;
   } else {
     const one = source?.horizons?.[String(horizon)] || {};
     sessions = finite(one.sessions) ? one.sessions : 0;
@@ -218,9 +227,11 @@ export function recordOf(entry, horizon, source, minimumSessions) {
     meanReturn = finite(one.meanReturn) ? one.meanReturn : null;
     meanMarket = finite(one.meanMarket) ? one.meanMarket : null;
     meanAdvantage = finite(one.meanAdvantage) ? one.meanAdvantage : null;
+    signChanges = finite(one.signChanges) ? one.signChanges : 0;
   }
   return { sessions, ahead, minimum, enough: sessions >= minimum && finite(meanAdvantage),
-    meanReturn, meanMarket, meanAdvantage };
+    meanReturn, meanMarket, meanAdvantage, signChanges,
+    picksUp: picked.filter((p) => p.returned > 0).length, picksTotal: picked.length, partial };
 }
 
 /* ── every company behind the five ──────────────────────────────────────── */
@@ -367,6 +378,8 @@ export function rerankView(scenarios, draft, tickers, reading, plainReading) {
     .map((m) => scenarios.companies?.[ticker]?.models?.[m.id]?.returns?.[String(draft.horizon)])
     .filter(finite));
   const plainScores = draft.layers.length ? (plainReading?.scores || {}) : null;
+  const plainPos = plainScores ? positions(plainScores) : null;
+  const plainCount = Number.isInteger(plainReading?.count) ? plainReading.count : null;
   const here = standing(scores);
   const plainStanding = plainScores ? standing(plainScores) : null;
   const consensusScores = Object.fromEntries(Object.keys(scores).map((t) => [t, consensus(t)]));
@@ -384,6 +397,7 @@ export function rerankView(scenarios, draft, tickers, reading, plainReading) {
   const inScope = rows.filter((r) => finite(r.score));
   const from = plainStanding || consensusStanding;
   const pairs = inScope.filter((r) => finite(from[r.ticker])).map((r) => ({ from: from[r.ticker], to: r.standing }));
+  const kept = (p) => count !== null && p <= count;
   const threshold = count ? (() => {
     const order = Object.keys(pos).sort((a, b) => pos[a] - pos[b]);
     return order[count - 1] !== undefined ? scores[order[count - 1]] : null;
@@ -406,6 +420,11 @@ export function rerankView(scenarios, draft, tickers, reading, plainReading) {
     // which. On 14 September the default reading gave 180 of 257 companies a
     // score between 2 and 4.
     setAside: inScope.filter((r) => r.score <= 5).length,
+    // Its own count, taken the way the evaluation takes it: highest first,
+    // ties by ticker.
+    keptInScope: inScope.filter((r) => kept(r.position)).length,
+    keptChanged: plainPos && count !== null && plainCount !== null
+      ? inScope.filter((r) => plainPos[r.ticker] && kept(r.position) !== (plainPos[r.ticker] <= plainCount)).length : 0,
     pairs,
     rows,
   };
@@ -450,7 +469,7 @@ export const horizonWords = (n, ar) => (ar
   ? (n === 1 ? 'الجلسة التالية' : sessionsAr(n))
   : (n === 1 ? 'the next session' : `${n} sessions`));
 
-const chipWords = (n, ar) => (ar ? sessionsAr(n) : (n === 1 ? '1 session' : `${n} sessions`));
+const chipWords = (n, ar) => (ar ? (n === 1 ? 'الجلسة التالية' : sessionsAr(n)) : (n === 1 ? 'next session' : `${n} sessions`));
 
 /** What the chosen model's number is, in a sentence under the chips. */
 function aboutModel(meta, ar) {
@@ -547,11 +566,11 @@ export function scenariosScreen(component, data, ar) {
         () => set({ scModel: m.id, scFrom: null }), m.id))),
       choice.meta ? h('p', { class: 'aix-note aix-model-about' }, aboutModel(choice.meta, ar)) : null),
     h('div', { class: 'aix-group' },
-      h('p', { class: 'aix-step' }, h('b', null, '02'), t('MEASURED OVER', 'مدة القياس')),
+      h('p', { class: 'aix-step' }, h('b', null, '02'), t('HORIZON', 'المدى')),
       h('div', { class: 'aix-chips' }, choice.horizons.map((n) => chip(chipWords(n, ar),
         horizon === n, () => set({ scHorizon: n }), n)))),
     order.length ? h('div', { class: `aix-group aix-layers${rerankOn ? '' : ' is-off'}` },
-      h('p', { class: 'aix-step' }, h('b', null, '03'), t('WHAT THE RE-RANK READS', 'ما تقرؤه إعادة الترتيب')),
+      h('p', { class: 'aix-step' }, h('b', null, '03'), t('CONTEXT THE RE-RANK READS', 'السياق الذي تقرؤه إعادة الترتيب')),
       order.map((layer) => {
         const on = layers.includes(layer);
         return h('button', {
@@ -576,23 +595,25 @@ export function scenariosScreen(component, data, ar) {
   };
   const ctx = {
     choice, entry, nights, record, said, words, next, indexed,
+    topCount: picks?.topCount ?? top5?.topCount,
     loading: !picks && !!st.extrasLoading,
     plainNext: plainEntry ? nightsOf(plainEntry, horizon).next : null,
   };
 
-  // ── behind the five: every company in the newest run ──
+  // ── the future: the whole market as the newest run sees it ──
   const tickers = Object.keys((scenarios && scenarios.companies) || reading?.scores || {}).sort();
-  let behind = [];
+  let future = [];
   if (!scenarios) {
-    behind = [];
+    future = [];
   } else if (rerankOn) {
     const loadingReading = st.scLoading && st.scLoading[key];
     const failed = st.scFailed && st.scFailed[key];
     if (reading) {
       const view = rerankView(scenarios, choice, tickers, reading, layers.length ? data.readings?.models : null);
-      behind = [...rerankCards(component, data, view, words, ar), companiesCard(component, data, { ...ctx, view, tickers, reading }, ar)];
+      future = [rerankTiles(view, words, ar), ...rerankCards(component, data, view, words, ar),
+        companiesCard(component, data, { ...ctx, view, tickers, reading }, ar)];
     } else {
-      behind = [h('section', { class: 'aix-card aix-empty-card', role: loadingReading ? 'status' : null },
+      future = [h('section', { class: 'aix-card aix-empty-card', role: loadingReading ? 'status' : null },
         h('h3', null, failed ? t('This reading could not be fetched', 'تعذر جلب هذه القراءة')
           : t('Loading this reading’s score for every company…', 'جارٍ تحميل درجات هذه القراءة لكل الشركات…')),
         failed ? h('p', null, failed) : h('div', { class: 'sc-skeleton is-short', 'aria-hidden': 'true' }),
@@ -604,7 +625,7 @@ export function scenariosScreen(component, data, ar) {
   } else if (model) {
     const returns = returnModels(scenarios).some((m) => m.id === model);
     const view = returns ? returnsView(scenarios, choice, tickers) : null;
-    behind = [...(view ? returnsCards(component, data, view, words, ar) : []),
+    future = [...(view ? [returnsTiles(view, words, ar), ...returnsCards(component, data, view, words, ar)] : []),
       companiesCard(component, data, { ...ctx, view, tickers }, ar)];
   }
 
@@ -615,7 +636,7 @@ export function scenariosScreen(component, data, ar) {
   const rerank = scenarios?.rerank;
   const last = rerank ? cairoTime(rerank.ranAt, ar) : null;
   const commitment = scenarios?.commitment || {};
-  const basis = nights.newest?.basisSession || scenarios?.basisSession;
+  const basis = scenarios?.basisSession || nights.newest?.basisSession;
 
   const screen = h('div', { class: 'home-screen sc-screen aix-bench' },
     h('header', { class: 'aix-bench-head' },
@@ -626,8 +647,8 @@ export function scenariosScreen(component, data, ar) {
           h('h1', null, t('Scenario workbench', 'مختبر السيناريوهات')),
           h('button', { type: 'button', class: 'aix-beta', onClick: () => component.setState({ scWarning: true }) },
             h('i', { 'aria-hidden': 'true' }), t('BETA · READ THIS', 'تجريبي · اقرأ هذا'))),
-        h('p', null, t(`After every close, each model picks the five companies it puts highest. Choose a model: first its newest five${basis ? `, from the close of ${day(basis, false)}` : ''}, which nobody can score yet — then how its earlier fives actually did.`,
-          `بعد كل إغلاق، يختار كل نموذج الشركات الخمس التي يضعها في المقدمة. اختر نموذجاً: أولاً أحدث خمس${basis ? ` من إغلاق ${day(basis, true)}` : ''}، ولا يمكن تقييمها بعد — ثم كيف أدّت اختياراته السابقة فعلاً.`))),
+        h('p', null, t(`Pick a model. Everything under Future was computed after the close${basis ? ` of ${day(basis, false)}` : ''} and has not been scored; everything under Past runs already has.`,
+          `اختر نموذجاً. كل ما تحت «المستقبل» حُسب بعد الإغلاق${basis ? ` في ${day(basis, true)}` : ''} ولم يُقيَّم بعد؛ وكل ما تحت «تشغيلات سابقة» قُيّم بالفعل.`))),
       h('dl', { class: 'aix-bench-clock' },
         h('dt', null, t('LAST RE-RANK', 'آخر إعادة ترتيب')),
         // The date and the time isolated from each other: an Arabic month
@@ -641,11 +662,17 @@ export function scenariosScreen(component, data, ar) {
       controls,
       h('div', { class: 'aix-results' },
         from,
-        nextCard(component, data, ctx, ar),
+        divider('aix-future', t('FUTURE · NOT SCORED YET', 'المستقبل · لم يُقيَّم بعد'),
+          basis ? t(`computed after the close of ${day(basis, false)}`, `حُسب بعد إغلاق ${day(basis, true)}`) : null),
+        picksCard(component, data, ctx, ar),
+        ...future,
+        divider('aix-past', t('PAST RUNS · ALREADY SCORED', 'تشغيلات سابقة · قُيّمت بالفعل'),
+          t('sessions that have closed', 'جلسات أُغلقت')),
         recordCard(component, data, ctx, ar),
-        behind.length ? h('h2', { class: 'aix-section' }, t(`Behind the five: every company in the same run, ${horizonWords(horizon, false)} ahead`,
-          `خلف الخمس: كل الشركات في التشغيل نفسه، بعد ${horizonWords(horizon, true)}`)) : null,
-        ...behind)),
+        nightsCard(component, data, ctx, ar),
+        modelsCard(top5, ar, { horizon, selected: model,
+          onPick: (id) => set({ scModel: id, scFrom: null, scFocus: 'future' }),
+          onWindow: (n) => set({ scHorizon: n }) }))),
     h('footer', { class: 'sc-proof aix-proof' },
       h('details', null,
         h('summary', null, t('About this saved run & its timestamp', 'عن هذا التشغيل المحفوظ وتوثيقه الزمني')),
@@ -661,6 +688,18 @@ export function scenariosScreen(component, data, ar) {
         onClick: () => { try { localStorage.removeItem(acceptKey(reader)); } catch { /* nothing stored */ } component.setState({ scAccepted: 0, scAcceptedReader: null }); } },
       t('Show the warning again', 'أظهر التحذير مجدداً'))),
     st.scWarning ? warningDialog(component, data, ar, { onClose: () => component.setState({ scWarning: false }), closeLabel: t('Close', 'إغلاق') }) : null);
+
+  // Where a way in asked to land: "See what they returned" on Home opens the
+  // past runs; picking a model at the foot of the page loads it at the top.
+  if (st.scFocus) {
+    const target = st.scFocus === 'past' ? 'aix-past' : 'aix-future';
+    queueMicrotask(() => {
+      const el = typeof document !== 'undefined' && typeof document.getElementById === 'function'
+        ? document.getElementById(target) : null;
+      if (el && el.isConnected !== false && typeof el.scrollIntoView === 'function') el.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      component.setState({ scFocus: null });
+    });
+  }
 
   return { screen, choice };
 }
