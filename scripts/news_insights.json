@@ -6705,6 +6705,10 @@
     "meaning": "Control over rare earth mineral processing creates concentration in global supply chains for advanced electronics and clean energy technologies, making access to these raw materials dependent on exporter trade policies.",
     "meaning_ar": "يؤدي التركز في سلاسل توريد ومعالجة المعادن النادرة إلى ربط الصناعات التكنولوجية ومكونات الطاقة النظيفة بسياسات التصدير لدى الدول المهيمنة على الإنتاج."
   },
+  "هل تنجح السياسات التقدميه في بناء اقتصاد اكثر عداله؟": {
+    "meaning": "Progressive economic frameworks operate through mechanisms such as graduated income taxation, expanded public social spending, and labor market regulations to redistribute national income across households.",
+    "meaning_ar": "تعمل الأطر الاقتصادية التقاعدية والتقدمية من خلال آليات مثل الضرائب التصاعدية على الدخل، وتوسيع الإنفاق الاجتماعي الحكومي، والضوابط التنظيمية لسوق العمل لإعادة توزيع الدخل القومي بين فئات المجتمع."
+  },
   "هل فقد وادي السيليكون ثقه الجمهور في الذكاء الاصطناعي؟": {
     "meaning": "Public scrutiny of technology sector practices alters consumer adoption rates and prompts reassessments of capital allocation toward artificial intelligence research and infrastructure.",
     "meaning_ar": "يؤدي التدقيق العام في ممارسات قطاع التكنولوجيا إلى تعديل معدلات تبني المستهلكين للمنتجات وإعادة تقييم تخصيص رؤوس الأموال الموجهة لأبحاث وبنية الذكاء الاصطناعي التحتية."
@@ -7097,6 +7101,10 @@
     "meaning": "The Strait of Hormuz functions as a critical global maritime transit corridor, handling daily crude flows exceeding 9 million barrels that directly anchor international oil supply chains and energy shipping infrastructure.",
     "meaning_ar": "يمثل مضيق هرمز ممرًا ملاحيًا حيويًا لتدفقات النفط العالمية، حيث تعبر من خلاله إمدادات خام تتجاوز 9 ملايين برميل يوميًا ترتبط بها سلاسل إمداد الطاقة وحركة الشحن الدولية."
   },
+  "وزير الطاقه الامريكي: خط الانابيب السعودي شرق–غرب قد يعود للعمل خلال ايام": {
+    "meaning": "The East-West pipeline operates as an alternative transit route for crude oil, bypassing maritime chokepoints in the Arabian Gulf by transporting supplies directly to Red Sea terminals.",
+    "meaning_ar": "يعمل خط أنابيب شرق-غرب كمسار نقل بديل للنفط الخام يتجاوز المضائق البحرية في الخليج العربي عبر نقل الإمدادات مباشرة إلى موانئ البحر الأحمر."
+  },
   "وزير الطيران يبحث مع «LACAC» توظيف الذكاء الاصطناعي في تطوير قطاع النقل الجوي": {
     "meaning": "The discussions focus on technical cooperation between the Ministry of Civil Aviation and the Latin American Civil Aviation Commission (LACAC) regarding the integration of artificial intelligence tools into air traffic management, airport operations, and aviation infrastructure.",
     "meaning_ar": "تركز المباحثات على التعاون الفني بين وزارة الطيران المدني والمنظمة اللاتينية للطيران المدني (LACAC) بشأن دمج أدوات الذكاء الاصطناعي في إدارة الحركة الجوية وعمليات المطارات والبنية التحتية لقطاع الطيران."
@@ -7352,6 +7360,10 @@
   "“الشباب والرياضه” يبحث مع “Blue Ribbon” تطوير اداره وتشغيل الانديه": {
     "meaning": "The Ministry of Youth and Sports discusses public-private partnership frameworks with Blue Ribbon to outsource the management, operations, and facility services of sports clubs to a specialized private entity.",
     "meaning_ar": "تبحث وزارة الشباب والرياضة أطر الشراكة بين القطاعين العام والخاص مع شركة \"بلو ريبون\" لإسناد مهام الإدارة والتشغيل والخدمات اللوجستية للأندية الرياضية إلى كيان متخصص من القطاع الخاص."
+  },
+  "“الشربيني” ل”البورصه”: 20 مليار جنيه اجمالي الاصول المداره لدي «ان اي كابيتال»": {
+    "meaning": "Assets under management (AUM) represent the total market value of investments managed on behalf of institutional and retail clients, which forms the fee-earning base for asset management operations.",
+    "meaning_ar": "تمثل الأصول المدارة القيمة السوقية الإجمالية للأوراق المالية والاستثمارات التي تديرها الشركة لصالح عملائها، وتُعد القاعدة التشغيلية المباشرة لاحتساب أتعاب الإدارة."
   },
   "“الشمس بيراميدز” تتحول لربح 229 الف دولار في النصف الاول": {
     "meaning": "The company's semi-annual operational revenues exceed its direct and financial expenses, shifting the net bottom line from a deficit to a positive dollar-denominated balance on the income statement.",
