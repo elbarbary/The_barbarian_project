@@ -17,6 +17,7 @@ story on the news feed and three of that morning's filings.
 from __future__ import annotations
 
 import json
+import os
 import pathlib
 import re
 import subprocess
@@ -78,6 +79,20 @@ class RaceTest(unittest.TestCase):
     def read(self, path):
         return json.loads((self.root / path).read_text(encoding="utf-8"))
 
+    def resolve(self, workflow):
+        """Run the workflow's own `resolve_ours` over the conflict in progress.
+
+        This suite runs inside publish-app-data, whose job env names its
+        side-stores in STORES. None of those paths exist in this repository,
+        and `git add` refuses a whole pathspec over one missing path, so the
+        resolver's amend silently never happened on the runner while passing
+        on a laptop. The stores are not part of any race here.
+        """
+        script = resolver_shell(workflow) + "\nresolve_ours\n"
+        return subprocess.run(["bash", "-c", script], cwd=self.root,
+                              capture_output=True, text=True,
+                              env={**os.environ, "STORES": ""})
+
     def run_race(self, workflow="publish-app-data.yml"):
         """Base -> fast lane on main -> slow build rebased onto it."""
         self.write(self.NEWS, {"generated_at": "2026-09-06T06:30:00+00:00", "items": []})
@@ -104,9 +119,7 @@ class RaceTest(unittest.TestCase):
         rebase = subprocess.run(["git", "rebase", "main"], cwd=self.root,
                                 capture_output=True, text=True)
         self.assertNotEqual(rebase.returncode, 0, "the setup did not actually collide")
-        script = resolver_shell(workflow) + "\nresolve_ours\n"
-        done = subprocess.run(["bash", "-c", script], cwd=self.root,
-                              capture_output=True, text=True)
+        done = self.resolve(workflow)
         self.assertEqual(done.returncode, 0, done.stdout + done.stderr)
         return done.stdout + done.stderr
 
@@ -177,9 +190,7 @@ class RaceTest(unittest.TestCase):
         rebase = subprocess.run(["git", "rebase", "main"], cwd=self.root,
                                 capture_output=True, text=True)
         self.assertNotEqual(rebase.returncode, 0, "the setup did not actually collide")
-        script = resolver_shell(workflow) + "\nresolve_ours\n"
-        done = subprocess.run(["bash", "-c", script], cwd=self.root,
-                              capture_output=True, text=True)
+        done = self.resolve(workflow)
         self.assertEqual(done.returncode, 0, done.stdout + done.stderr)
 
         def committed(path):
@@ -215,9 +226,7 @@ class RaceTest(unittest.TestCase):
         self.commit("on the branch")
         subprocess.run(["git", "rebase", "main"], cwd=self.root,
                        capture_output=True, text=True)
-        script = resolver_shell("publish-app-data.yml") + "\nresolve_ours\n"
-        done = subprocess.run(["bash", "-c", script], cwd=self.root,
-                              capture_output=True, text=True)
+        done = self.resolve("publish-app-data.yml")
         self.assertEqual(done.returncode, 1,
                          "a conflict in source code must not be auto-resolved")
         self.assertIn("conflict outside generated data", done.stdout + done.stderr)
