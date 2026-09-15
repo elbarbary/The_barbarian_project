@@ -1103,6 +1103,10 @@
     "meaning": "An increase in container shipping volumes alongside declining net profits reflects lower average freight rates or higher operating unit costs, whereby volume growth does not fully offset the compression in transport profit margins.",
     "meaning_ar": "يعكس نمو أحجام شحن الحاويات بالتزامن مع تراجع صافي الأرباح انخفاض متوسط أسعار النولون البحري أو ارتفاع تكاليف التشغيل للوحدة، حيث لا يعوض التوسع في الكميات المنقولة تقلص هوامش ربحية الشحن."
   },
+  "ارتفاع اسعار الاراضي اليابانيه باعلي وتيره منذ عام 1991": {
+    "meaning": "An acceleration in commercial and residential land price appreciation expands asset valuations on corporate balance sheets and increases capital expenditure costs for property development projects.",
+    "meaning_ar": "يؤدي تسارع وتيرة نمو أسعار الأراضي التجارية والسكنية إلى رفع تقييمات الأصول في الميزانيات العمومية للشركات وزيادة تكاليف النفقات الرأسمالية لمشاريع التطوير العقاري."
+  },
   "ارتفاع اسعار الغاز الاوروبيه لاعلي مستوياتها منذ يناير 2023": {
     "meaning": "Higher European natural gas benchmarks raise the pricing base for international LNG contracts, shifting the input cost structure for energy-intensive manufacturing and altering the landed price of imported LNG supplies.",
     "meaning_ar": "يؤدي ارتفاع المؤشرات القياسية للغاز الطبيعي الأوروبي إلى رفع الأساس السعري لعقود الغاز المسال العالمية، مما يغير هيكل تكاليف التشغيل للمصانع كثيفة الاستهلاك للطاقة ويعدل التكلفة الإجمالية لشحنات الغاز المسال المستوردة."
@@ -1318,6 +1322,10 @@
   "اسعار الخشب اليوم الثلاثاء 8-9-2026 في السوق المحليه": {
     "meaning": "Daily tracking of domestic timber prices reflects raw material input costs for construction, furniture manufacturing, and real estate development sectors.",
     "meaning_ar": "يعكس التتبع اليومي لأسعار الأخشاب في السوق المحلية تكاليف مدخلات المواد الخام لقطاعات التشييد والبناء وصناعة الأثاث والتطوير العقاري."
+  },
+  "اسعار الخضار والفاكهه اليوم في مصر.. الثلاثاء 15/9/2026": {
+    "meaning": "This headline refers to daily spot price monitoring for agricultural produce, which directly tracks short-term supply chain dynamics, seasonality, and the food-and-beverage component of the headline consumer price index (CPI).",
+    "meaning_ar": "تشير هذه النشرة إلى المتابعة اليومية للأسعار الفورية للسلع الزراعية، والتي تعكس حركة سلاسل الإمداد قصيرة الأجل، والعوامل الموسمية، ومكون الأغذية والمشروبات ضمن الرقم القياسي العام لأسعار المستهلكين."
   },
   "اسعار الخضار والفاكهه اليوم في مصر.. الثلاثاء 8/9/2026": {
     "meaning": "Daily agricultural commodity pricing tracks spot market valuations governed by wholesale supply flows, transportation costs, and retail market liquidity across domestic Egyptian distribution hubs.",
@@ -2070,6 +2078,10 @@
   "الحكومه تعلن عن تعيين 43 الف معلم دفعه واحده الفتره المقبله": {
     "meaning": "The appointment of 43,000 public sector teachers increases government operational expenditures and the public payroll allocation within the state budget, while addressing staffing capacity in the public education system.",
     "meaning_ar": "يؤدي تعيين 43 ألف معلم في القطاع الحكومي إلى زيادة النفقات التشغيلية ومخصصات الأجور في الموازنة العامة للدولة، بالتوازي مع معالجة الطاقة الاستيعابية للكادر الوظيفي في منظومة التعليم العام."
+  },
+  "الحكومه تفتتح 20 فرعا جديدا من سلسله كاري اون في 4 محافظات": {
+    "meaning": "Opening 20 retail branches across four governorates expands the state-affiliated grocery chain's physical distribution footprint and increases its daily point-of-sale inventory capacity.",
+    "meaning_ar": "يؤدي افتتاح 20 فرعاً جديداً للبيع بالتجزئة في أربع محافظات إلى توسيع النطاق الجغرافي لشبكة التوزيع ورفع الطاقة الاستيعابية اليومية للمخزون ومنافذ البيع المباشر."
   },
   "الحكومه تقترب من طرح «الامل الشريف للبلاستيك» بالبورصه ديسمبر المقبل": {
     "meaning": "A state-led public offering lists an industrial plastics manufacturing company on the Egyptian Exchange, transferring an equity stake into public market trading.",
@@ -3816,6 +3828,10 @@
     "meaning": "This direct capital deployment allocates $16 million in capital expenditure to establish local assembly and manufacturing operations for ambulance vehicles and dental equipment within the domestic medical equipment sector.",
     "meaning_ar": "يُمثل هذا الضخ الرأسمالي توجيهاً لاستثمارات بقيمة 16 مليون دولار في الإنفاق الرأسمالي لتأسيس خطوط تصنيع وتجميع محلي لسيارات الإسعاف وتجهيزات طب الأسنان ضمن قطاع الأجهزة والمستلزمات الطبية."
   },
+  "تمهيدا لارسالها الي البرلمان.. رييس الوزراء يستعرض تعديلات قانون التصالح في بعض مخالفات البناء": {
+    "meaning": "Amending the building violation reconciliation law sets the statutory framework for regularizing unpermitted real estate assets, directly governing the collection of state reconciliation fees and the operational eligibility of properties for utility connections and title registration.",
+    "meaning_ar": "يحدد تعديل قانون التصالح في مخالفات البناء الإطار التشريعي لتقنين الأصول العقارية غير المرخصة، حيث ينظم آليات تحصيل الرسوم الحكومية المقررة ويثبت الأهلية الإجرائية للوحدات لتوصيل المرافق والتسجيل الرسمي."
+  },
   "تمويل المناخ بقيمه 1.3 تريليون دولار مهدد بالتعثر وسط ضغوط امريكيه": {
     "meaning": "Multilateral climate finance frameworks aggregate public and private capital commitments to fund cross-border energy transition and adaptation infrastructure, where political friction between major sovereign donors halts funding pledges and implementation agreements.",
     "meaning_ar": "تعتمد أطر تمويل المناخ متعددة الأطراف على تجميع تعهدات رؤوس الأموال الحكومية والخاصة لتمويل مشاريع البنية التحتية للتحول الطاقي، حيث تؤدي الخلافات السياسية بين الدول المانحة الرئيسية إلى وقف تدفق هذه المخصصات والاتفاقيات التنفيذية."
@@ -5073,6 +5089,10 @@
     "meaning": "The Financial Regulatory Authority establishes a unified regulatory and operational framework defining licensing criteria, credit risk assessment rules, and compliance requirements for consumer finance companies operating in Egypt.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً تنظيمياً وتشغيلياً موحداً يحدد معايير الترخيص، وضوابط التقييم الائتماني، ومتطلبات الامتثال وإدارة المخاطر لشركات التمويل الاستهلاكي في مصر."
   },
+  "عاجل.. الرقابه الماليه تضيف تقييم التحليل السلوكي الي منظومه الاستعلام عن عملاء التمويل الاستهلاكي": {
+    "meaning": "The Financial Regulatory Authority integrates behavioral scoring metrics into consumer finance underwriting checks, expanding credit assessment criteria beyond standard bureau repayment history to include non-traditional transaction patterns.",
+    "meaning_ar": "تُدرج الهيئة العامة للرقابة المالية معايير التحليل السلوكي ضمن إجراءات الاستعلام الائتماني لشركات التمويل الاستهلاكي، مما يوسع أدوات تقييم الجدارة لتشمل أنماط المعاملات غير التقليدية إلى جانب التاريخ الائتماني المسجل."
+  },
   "عاجل.. الرقابه الماليه تلزم شركات التمويل الاستهلاكي وتمويل المشروعات بالربط اللحظي مع «اي سكور»": {
     "meaning": "This regulatory directive requires consumer and microfinance companies to integrate their core systems via an API for real-time credit data exchange with I-Score, enabling instant updates to borrower liability profiles and default histories.",
     "meaning_ar": "يلزم هذا التوجيه الرقابي شركات التمويل الاستهلاكي وتمويل المشروعات بالربط التقني المباشر لأنظمتها مع شركة الاستعلام الائتماني (آي سكور)، مما يتيح التحديث الفوري للبيانات الائتمانية وسجلات مديونيات وتعثر العملاء."
@@ -5881,6 +5901,10 @@
     "meaning": "The British trade restrictions enforce targeted customs screening and regulatory barriers on goods and services originating from specific geographic zones. This establishes distinct compliance, origin-verification, and documentation requirements for bilateral cross-border supply chains entering the UK market.",
     "meaning_ar": "تفرض القيود التجارية البريطانية إجراءات فحص جمركي وضوابط تنظيمية محددة على السلع والخدمات ذات المنشأ الجغرافي المعني. ويترتب على ذلك متطلبات امتثال وتحقق من شهادات المنشأ ضمن سلاسل الإمداد الموجهة إلى السوق البريطانية."
   },
+  "مصر واسبانيا تبحثان جذب استثمارات صناعيه جديده": {
+    "meaning": "Bilateral trade discussions of this type establish frameworks for foreign direct investment inflows and direct industrial joint ventures between Egyptian and Spanish manufacturing firms.",
+    "meaning_ar": "تؤسس المباحثات الثنائية بين البلدين أطراً تنفيذية لتدفقات الاستثمار الأجنبي المباشر والمشاريع الصناعية المشتركة بين الشركات المصرية والإسبانية."
+  },
   "مصر والاردن توكدان حرصهما علي تطوير التعاون ودفع اليه التعاون الثلاثي مع العراق": {
     "meaning": "The trilateral mechanism establishes an intergovernmental operational framework for cross-border infrastructure, energy grid interconnections, and regional trade logistics between Egypt, Jordan, and Iraq.",
     "meaning_ar": "تؤسس آلية التعاون الثلاثي إطاراً تشغيلياً حكومياً مشتركاً لمشاريع البنية التحتية، والربط الكهربائي، والخدمات اللوجستية للتبادل التجاري بين مصر والأردن والعراق."
@@ -6453,6 +6477,10 @@
     "meaning": "Opening new retail branches expands the chain's physical distribution network and increases operational footprint within the domestic consumer goods sector.",
     "meaning_ar": "يؤدي افتتاح فروع تجزئة جديدة إلى توسيع شبكة التوزيع الجغرافي المباشر وزيادة الرقعة التشغيلية للمنافذ ضمن قطاع السلع الاستهلاكية المحلي."
   },
+  "وزير التموين: التوسع في سلسله كاري اون يحظي باهتمام كبير من القياده السياسيه": {
+    "meaning": "Political backing for expanding the Carry On retail chain integrates state-level logistics and municipal coordination into the enterprise's store rollout footprint.",
+    "meaning_ar": "يعكس الدعم الحكومي لتوسيع سلسلة كاري أون دمجاً مباشراً بين التنسيق الإداري واللوجستي للدولة وخطط الانتشار الجغرافي لفروع السلسلة."
+  },
   "وزير التموين: سرعه بحث طلبات النواب بما يحقق صالح المواطنين": {
     "meaning": "The Ministry of Supply coordinates administrative and regulatory oversight over subsidized commodity distribution and consumer supply chains through legislative feedback channels.",
     "meaning_ar": "تتولى وزارة التموين التنسيق والرقابة الإدارية والتنظيمية على سلاسل إمداد السلع والمنظومة التموينية عبر قنوات المتابعة والتواصل البرلماني."
@@ -6568,6 +6596,10 @@
   "وزير الصناعه يدرس انشاء مناطق صناعيه تجمع كافه مدخلات ومكملات صناعه الاثاث": {
     "meaning": "Establishing integrated industrial zones concentrates upstream component suppliers, raw materials, and assembly facilities within a single geographic cluster, linking intermediate input providers directly with end-product furniture manufacturers.",
     "meaning_ar": "يؤدي إنشاء مناطق صناعية متكاملة إلى تجميع موردي الخامات ومستلزمات الإنتاج ومصانع التجميع في نطاق جغرافي واحد، مما يربط سلاسل توريد السلع الوسيطة مباشرة بمصنعي الأثاث النهائي."
+  },
+  "وزير الصناعه يدعو المستثمرين الاسبان للاستفاده من نظام الامتياز الصناعي بمصر": {
+    "meaning": "The industrial franchising framework allows foreign manufacturers to license their operational models, technical know-how, and brand rights to local entities operating within Egypt's industrial zones.",
+    "meaning_ar": "يتيح نظام الامتياز الصناعي للمصنعين الأجانب منح حقوق استغلال النماذج التشغيلية، والمعرفة الفنية، والعلامات التجارية لشركات محلية داخل المناطق الصناعية المصرية."
   },
   "وزير الصناعه: الشركات الصغيره والمتوسطه محرك رييسي للتنميه المستدامه": {
     "meaning": "Small and medium-sized enterprises (SMEs) function as feeder suppliers and subcontracting partners within industrial supply chains, providing operational inputs to larger manufacturing entities.",
