@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-09-15T10:09:48Z",
+ "builtAt": "2026-09-15T18:23:54Z",
  "dates": [
   "2026-08-20",
   "2026-08-23",
@@ -12,9 +12,10 @@
   "2026-09-02",
   "2026-09-03",
   "2026-09-13",
-  "2026-09-14"
+  "2026-09-14",
+  "2026-09-15"
  ],
- "basisSessions": 11,
+ "basisSessions": 12,
  "horizons": [
   1,
   5,
@@ -3517,6 +3518,155 @@
     }
    }
   },
+  "sundial": {
+   "1": {
+    "dates": 0,
+    "mean": null,
+    "median": null,
+    "positive": 0,
+    "t": null,
+    "frozenDates": 0,
+    "reconstructedDates": 0,
+    "withheldDates": 0,
+    "scored": null,
+    "against": {
+     "drift": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "flat": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "momentum20": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "momentum60": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal1": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     }
+    }
+   },
+   "5": {
+    "dates": 0,
+    "mean": null,
+    "median": null,
+    "positive": 0,
+    "t": null,
+    "frozenDates": 0,
+    "reconstructedDates": 0,
+    "withheldDates": 0,
+    "scored": null,
+    "against": {
+     "drift": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "flat": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "momentum20": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "momentum60": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal1": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     }
+    }
+   },
+   "20": {
+    "dates": 0,
+    "mean": null,
+    "median": null,
+    "positive": 0,
+    "t": null,
+    "frozenDates": 0,
+    "reconstructedDates": 0,
+    "withheldDates": 0,
+    "scored": null,
+    "against": {
+     "drift": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "flat": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "momentum20": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "momentum60": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal1": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     }
+    }
+   }
+  },
   "timesfm25": {
    "1": {
     "dates": 0,
@@ -3528,6 +3678,155 @@
     "reconstructedDates": 0,
     "withheldDates": 1,
     "scored": 226,
+    "against": {
+     "drift": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "flat": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "momentum20": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "momentum60": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal1": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     }
+    }
+   },
+   "5": {
+    "dates": 0,
+    "mean": null,
+    "median": null,
+    "positive": 0,
+    "t": null,
+    "frozenDates": 0,
+    "reconstructedDates": 0,
+    "withheldDates": 0,
+    "scored": null,
+    "against": {
+     "drift": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "flat": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "momentum20": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "momentum60": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal1": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     }
+    }
+   },
+   "20": {
+    "dates": 0,
+    "mean": null,
+    "median": null,
+    "positive": 0,
+    "t": null,
+    "frozenDates": 0,
+    "reconstructedDates": 0,
+    "withheldDates": 0,
+    "scored": null,
+    "against": {
+     "drift": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "flat": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "momentum20": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "momentum60": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal1": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     }
+    }
+   }
+  },
+  "toto2": {
+   "1": {
+    "dates": 0,
+    "mean": null,
+    "median": null,
+    "positive": 0,
+    "t": null,
+    "frozenDates": 0,
+    "reconstructedDates": 0,
+    "withheldDates": 0,
+    "scored": null,
     "against": {
      "drift": {
       "dates": 0,
