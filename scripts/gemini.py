@@ -82,6 +82,17 @@ VERTEX_ATTEMPTS = 3
 VERTEX_BACKOFF = 4
 OAUTH_TOKEN_URL = "https://oauth2.googleapis.com/token"
 
+# A Unix time after which no call waits on the model, when it is set.
+#
+# Publish live data sets it at the start of its fetch step. That job's
+# fifteen-minute ceiling cancels the whole run, headlines, rates and filings
+# together, and three attempts at up to 120 s each is six minutes for ONE call.
+# On 15 Sep 2026 Vertex slowed to 25-73 s a call and five runs in a row, 15:46
+# to 16:47 UTC, were cancelled with nothing published. Past the deadline a call
+# raises GeminiUnavailable, which every caller already treats as the model
+# being out of reach this run. Nothing else sets it, so nothing else changes.
+DEADLINE_ENV = "GEMINI_DEADLINE"
+
 # Benchmarked on real Arabic disclosure headlines: 5/5 correct, 1.1s, one
 # output token — against 3.0s and 511 tokens with thinking left on, for the
 # identical answer. Output is the expensive side of the meter, so `THINKING_OFF`
@@ -291,6 +302,33 @@ def _note_vertex(code: int | None, detail: str) -> None:
 _VERTEX_NOTED: set[str] = set()
 
 
+def _time_left() -> float | None:
+    """Seconds until GEMINI_DEADLINE, or None when there is no deadline."""
+    raw = os.environ.get(DEADLINE_ENV, "").strip()
+    if not raw:
+        return None
+    try:
+        return float(raw) - time.time()
+    except ValueError:
+        return None
+
+
+def _wait(timeout: float) -> float:
+    """One attempt's socket timeout: the caller's, cut short at the deadline."""
+    left = _time_left()
+    if left is None:
+        return timeout
+    if left <= 0:
+        raise GeminiUnavailable(f"{DEADLINE_ENV} has passed; no more model calls this run")
+    return min(timeout, left)
+
+
+def _pause(seconds: float) -> None:
+    """A backoff that never sleeps past the deadline; the next attempt then stops."""
+    left = _time_left()
+    time.sleep(seconds if left is None else max(0.0, min(seconds, left)))
+
+
 def _post(model: str, body: bytes, *, timeout: int) -> dict:
     """One generateContent call, over whichever transport is paid for.
 
@@ -316,9 +354,10 @@ def _post(model: str, body: bytes, *, timeout: int) -> dict:
                         "x-goog-user-project": project,
                     },
                 )
+                wait = _wait(timeout)
                 try:
                     return json.loads(
-                        urllib.request.urlopen(request, timeout=timeout).read()
+                        urllib.request.urlopen(request, timeout=wait).read()
                     )
                 except urllib.error.HTTPError as error:
                     # 429 here is a per-minute quota on the project, not an empty
@@ -326,7 +365,7 @@ def _post(model: str, body: bytes, *, timeout: int) -> dict:
                     # is the fix; falling through to the API key would swap a
                     # transient limit for a permanently dead endpoint.
                     if error.code == 429 and attempt < VERTEX_ATTEMPTS - 1:
-                        time.sleep(VERTEX_BACKOFF * (attempt + 1))
+                        _pause(VERTEX_BACKOFF * (attempt + 1))
                         continue
                     # An expired pre-minted token. Stop offering it, and ask
                     # again at once if the credentials file can mint another.
@@ -344,7 +383,7 @@ def _post(model: str, body: bytes, *, timeout: int) -> dict:
                     # — so retrying here is strictly better than dropping through.
                     # One timeout mid-batch ended a 276-company run at 109.
                     if attempt < VERTEX_ATTEMPTS - 1:
-                        time.sleep(VERTEX_BACKOFF * (attempt + 1))
+                        _pause(VERTEX_BACKOFF * (attempt + 1))
                         continue
                     _note_vertex(None, str(error)[:120])
                     break
@@ -354,8 +393,9 @@ def _post(model: str, body: bytes, *, timeout: int) -> dict:
         data=body,
         headers={"x-goog-api-key": _key(), "content-type": "application/json"},
     )
+    wait = _wait(timeout)
     try:
-        return json.loads(urllib.request.urlopen(request, timeout=timeout).read())
+        return json.loads(urllib.request.urlopen(request, timeout=wait).read())
     except transport.TRANSPORT as error:
         raise GeminiUnavailable(str(error)[:120]) from error
 

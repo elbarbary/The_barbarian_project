@@ -111,6 +111,13 @@ jobs:
           # present, and this secret does not currently exist.
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
+          # No model call waits past eight minutes into this step. The job's
+          # fifteen-minute ceiling cancels everything at once, so when Vertex
+          # slows (25-73 s a call on 15 Sep 2026, five runs cancelled with
+          # nothing published) insights, filing labels and translations stop
+          # for this run and the headlines, rates and filings still go out.
+          # What was skipped is asked for again on the next tick.
+          export GEMINI_DEADLINE=$(( $(date +%s) + 480 ))
           python3 scripts/build_news_api.py || true
           python3 scripts/build_rates_api.py || true
           # Disclosures. The note that used to sit at the foot of this file
