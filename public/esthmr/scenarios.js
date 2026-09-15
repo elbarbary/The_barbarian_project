@@ -656,7 +656,10 @@ export function scenariosScreen(component, data, ar) {
         from,
         divider('aix-future', t('FUTURE · NOT SCORED YET', 'المستقبل · لم يُقيَّم بعد'),
           basis ? t(`computed after the close of ${day(basis, false)}`, `حُسب بعد إغلاق ${day(basis, true)}`) : null),
-        viewSwitch(component, ctx, ar),
+        viewSwitch(component, ctx, ar, {
+          onModel: () => set({ scLayers: [] }),
+          onGemini: () => set({ scLayers: layers.length ? layers : choice.standard }),
+        }),
         rankingTiles(ctx, ar),
         rankingCard(component, data, ctx, ar),
         ...charts,

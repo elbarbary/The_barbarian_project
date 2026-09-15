@@ -499,7 +499,9 @@ test('a ranking baseline ranks by the move it saw, never a forecast', () => {
 test('switching Gemini on shows its ranking in the same table, with where the model had each company', () => {
   const c = component({ scModel: 'kronos' });
   let node = screen(c);
-  for (const name of ['Latest filings', 'News flow', 'The rule book']) button(screen(c), name).events.click();
+  // One press on the second step: Gemini's ranking, with the reading Home reports.
+  assert.equal(button(node, 'Re-ranked by Gemini').attrs['aria-pressed'], 'false');
+  button(node, 'Re-ranked by Gemini').events.click();
   assert.deepEqual(c.state.scLayers, GEMINI);
   node = screen(c);
   button(node, 'Its own measurements').events.click();
@@ -518,15 +520,26 @@ test('switching Gemini on shows its ranking in the same table, with where the mo
   assert.match(tiles[0], /TOP 5 · Kronos-small EXPECTS.*-0\.17%/s);
   assert.match(tiles[1], /NEW TO THE TOP 5.*0 \/ 3/s);
   assert.match(tiles[2], /GEMINI KEPT.*2.*companies it said were worth anything, of the 3 it scored/s);
-  // The stages mark which ranking is on screen; they are not a second control.
-  const stages = byClass(node, 'aix-rank-stages')[0];
-  assert.equal(all(stages).filter((x) => x.tag === 'button').length, 0);
+  const gemini = button(node, 'Re-ranked by Gemini');
+  assert.match(gemini.attrs.class, /\bon\b/);
+  assert.equal(gemini.attrs['aria-pressed'], 'true');
+  // Pressed again while on, it keeps the reading the switches chose.
+  gemini.events.click();
+  assert.deepEqual(c.state.scLayers, LAYERS);
   assert.match(text(node), /not a percentage return or a probability/);
   assert.match(text(node), /Gemini ranks for the next five sessions\. Choosing 5 sessions changes Kronos-small’s forecasts/);
-  // The context switches are the only controls for the rerank.
-  for (const name of ['Latest filings', 'News flow', 'The rule book', 'Its own measurements']) button(screen(c), name).events.click();
+  // One press on the first step: back to the model's own ranking.
+  button(screen(c), 'Ranked by Kronos-small').events.click();
   assert.deepEqual(c.state.scLayers, []);
   assert.match(text(byClass(screen(c), 'aix-ranking-card')[0]), /Ranked by Kronos-small/);
+  // The switches still turn it on one reading at a time.
+  for (const name of ['Latest filings', 'News flow', 'The rule book']) button(screen(c), name).events.click();
+  assert.deepEqual(c.state.scLayers, GEMINI);
+  // Nothing to press into on a night no re-rank was published.
+  const unread = screen(component({ scModel: 'kronos' }),
+    { ...data, scenarios: { ...scenarios, rerank: null }, picks: { ...data.picks, readings: {} } });
+  assert.equal(button(unread, 'Re-ranked by Gemini').attrs.disabled, 'true');
+  assert.notEqual(button(unread, 'Ranked by Kronos-small').attrs.disabled, 'true');
 });
 
 test('Gemini’s ranking is fetched when it is switched on, and a failure says so', async () => {
@@ -859,11 +872,12 @@ test('the workbench and hero carry a dark theme, not a light rectangle on a dark
   // Site-wide button rules (#app button { color: inherit }) must not win.
   assert.match(css, /#app \.aix-seg button\.on/);
   assert.match(css, /#app \.aix-rank-row \{/);
-  assert.match(css, /\.aix-rank-stages \.on b \{/);
+  assert.match(css, /#app \.aix-view-switch button\.on \{/);
+  assert.match(css, /#app \.aix-view-switch button:focus-visible \{/);
   // Right-aligned and unwrapped, "Forecast: …" ran left over the Gemini score.
   assert.match(css, /\.aix-rank-was \{[^}]*flex-wrap: wrap/);
   assert.match(css, /#app \.aix-reason \{/);
-  assert.doesNotMatch(css, /aix-view-switch|!important\}/, 'no styles left for the buttons that are gone');
+  assert.doesNotMatch(css, /aix-rank-stages|!important\}/, 'no styles left for the markers that became buttons');
   assert.match(css, /#app \.aix-pick-chip\.is-said/);
   assert.match(css, /#app \.aix-hero h1 \{[^}]*font-size: var\(--aix-h1\) !important/);
   assert.match(css, /#app \.aix-cta-quiet \{/);

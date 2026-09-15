@@ -96,9 +96,10 @@ const listWords = (items, ar) => (items.length < 2 ? items.join('')
 /* ── FUTURE: which ranking is on screen ─────────────────────────────────── */
 
 /** Step one is the chosen model's ranking; step two is the same companies
- *  after Gemini re-ranks them. A marker, not a control: the context switches
- *  are the only way in and out, so there is one set of buttons to learn. */
-export function viewSwitch(component, ctx, ar) {
+ *  after Gemini re-ranks them. Both steps are buttons (the owner, 15 Sep
+ *  2026): one press into Gemini's ranking with the reading Home reports, one
+ *  press back. The context switches below still pick which reading it is. */
+export function viewSwitch(component, ctx, ar, { onModel, onGemini } = {}) {
   const t = (en, arabic) => (ar ? arabic : en);
   const { choice, words } = ctx;
   const says = choice.meta?.says || { kind: 'return' };
@@ -109,11 +110,12 @@ export function viewSwitch(component, ctx, ar) {
         says.sessions === 1 ? 'هبوط كل شركة في الجلسة الأخيرة' : `هبوط كل شركة خلال آخر ${sessionsAr(says.sessions)}`)
       : t(`what it expects each company to return over ${words.horizon}`, `ما يتوقعه لعائد كل شركة خلال ${words.horizon}`);
   return h('div', { class: 'aix-view' },
-    h('div', { class: 'aix-rank-stages', 'aria-label': t('What the ranking shows', 'ما يعرضه الترتيب') },
-      h('div', { class: choice.gemini ? '' : 'on' },
+    h('div', { class: 'aix-view-switch', role: 'group', 'aria-label': t('What the ranking shows', 'ما يعرضه الترتيب') },
+      h('button', { type: 'button', class: choice.gemini ? '' : 'on', 'aria-pressed': String(!choice.gemini), onClick: onModel },
         h('b', null, '1'), h('span', null, t(`Ranked by ${words.model}`, `ترتيب ${words.model}`))),
       h('i', { 'aria-hidden': 'true' }, ar ? '←' : '→'),
-      h('div', { class: choice.gemini ? 'on' : '' },
+      h('button', { type: 'button', class: choice.gemini ? 'on' : '', 'aria-pressed': String(choice.gemini),
+        disabled: !choice.readable, onClick: onGemini },
         h('b', null, '2'), h('span', null, t('Re-ranked by Gemini', 'بعد إعادة ترتيب Gemini')))),
     h('p', { class: 'aix-note' }, choice.gemini
       ? t(`Gemini combined all models with ${words.evidence}. Its score orders companies; it is not a percentage return or a probability. What ${words.model} said stays as it was.`,
