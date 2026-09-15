@@ -1231,6 +1231,10 @@
     "meaning": "A collective rise across EGX benchmark indices reflects aggregate net buying liquidity exceeding selling pressure across broad market segments, resulting in an increase in total listed market capitalization at market close.",
     "meaning_ar": "يعكس الارتفاع الجماعي لمؤشرات البورصة المصرية تفوق أحجام السيولة الشرائية على قوى البيع عبر مختلف قطاعات الشركات المقيدة، مما يؤدي إلى زيادة القيمة السوقية الإجمالية للأسهم عند الإغلاق."
   },
+  "اريكسون: اطلاق خدمات (6G) تجاريا بحلول 2030": {
+    "meaning": "This timeframe establishes long-term capital expenditure cycles for telecom network equipment, requiring sustained research, development, and spectrum standardisation investments by equipment vendors and network operators.",
+    "meaning_ar": "يحدد هذا الإطار الزمني دورات الإنفاق الرأسمالي طويلة الأجل على معدات شبكات الاتصالات، مما يستلزم استثمارات مستمرة في البحث والتطوير وتوحيد المعايير الطيفية من قبل موردي المعدات ومشغلي الشبكات."
+  },
   "ازمه الديزل تهدد باستمرار الام الاسعار وتقليص الاستهلاك": {
     "meaning": "Diesel supply constraints raise logistics, power generation, and manufacturing operating costs across supply chains, which transmits higher input prices to final goods and limits purchasing power.",
     "meaning_ar": "تؤدي قيود إمدادات السولار إلى رفع التكاليف التشغيلية لشبكات النقل واللوجستيات والتصنيع، مما ينقل زيادات التكلفة إلى السلع النهائية ويؤثر على القوة الشرائية للمستهلكين."
@@ -2134,6 +2138,10 @@
   "الحكومه تناقش اليات اعاده هيكله الموسسات الصحفيه القوميه وتعزيز استدامتها": {
     "meaning": "The restructuring involves auditing balance sheets, managing operational debts, and optimizing state-owned physical assets and printing operations to address structural fiscal deficits.",
     "meaning_ar": "تشمل إعادة الهيكلة مراجعة الميزانيات العمومية ومعالجة الديون التشغيلية وتحسين استغلال الأصول العقارية والمطابع المملوكة للدولة للتعامل مع العجز المالي الهيكلي."
+  },
+  "الحكومه تناقش مقترحات لدعم الشركات الناشيه في التوسع والنفاذ الي الاسواق الخارجيه": {
+    "meaning": "Government initiatives targeting startup export access focus on standardizing cross-border regulatory procedures, facilitating foreign currency transactions, and providing institutional channels into foreign trade networks.",
+    "meaning_ar": "تركز المبادرات الحكومية الموجهة لدعم تصدير الشركات الناشئة على توحيد الإجراءات التنظيمية العابرة للحدود، وتيسير المعاملات بالنقد الأجنبي، وتوفير قنوات مؤسسية للنفاذ إلى شبكات التجارة الخارجية."
   },
   "الحكومه توافق علي القيمه العادله المحدثه ل«بنك القاهره» تمهيدا للطرح بالبورصه": {
     "meaning": "Official approval of the updated asset valuation establishes the statutory pricing baseline required by regulatory authorities to execute an initial public offering on the exchange.",
@@ -5557,6 +5565,10 @@
     "meaning": "Under trade defense regulations, non-cooperating foreign exporters in anti-dumping investigations face default duties calculated using the highest available tariff rates or 'facts available' rather than their specific operational cost data, directly raising their import clearance costs.",
     "meaning_ar": "بموجب لوائح المعالجات التجارية، تُطبق على الشركات الأجنبية المصدرة غير المتعاونة في تحقيقات مكافحة الإغراق رسوم حمائية استناداً إلى أعلى الهوامش المتاحة أو قاعدة البيانات المعتمدة بدلاً من بيانات تكاليفها الفعلية، مما يرفع تكلفة التخليص الجمركي لمنتجاتها."
   },
+  "ما موعد استحقاق الوديعه الكويتيه ؟ تعرف علي التفاصيل والفوايد المستحقه": {
+    "meaning": "Central bank foreign currency deposits represent short- to medium-term external liabilities, where maturity dates determine the schedule of foreign exchange outflows and contractual interest payments on the state's external balance sheet.",
+    "meaning_ar": "تُمثّل الودائع الأجنبية لدى البنك المركزي التزامات خارجية قصيرة إلى متوسطة الأجل، وتحدد تواريخ استحقاقها جدول تدفقات النقد الأجنبي وسداد الفوائد التعاقدية ضمن الميزانية الخارجية للدولة."
+  },
   "ما هي ابرز القطاعات الاكثر تاثرا بتبني الذكاء الاصطناعي عالميا؟": {
     "meaning": "Global adoption of artificial intelligence alters core operating models across sectors such as technology, financial services, and healthcare by automating workflows and shifting operational expenditure toward computational infrastructure and software licensing.",
     "meaning_ar": "يُغير تبني الذكاء الاصطناعي عالميًا نماذج التشغيل الأساسية في قطاعات مثل التكنولوجيا والخدمات المالية والرعاية الصحية من خلال أتمتة تدفقات العمل وإعادة توجيه النفقات التشغيلية نحو البنية التحتية الحاسوبية وتراخيص البرمجيات."
@@ -6688,6 +6700,10 @@
   "وزير الصناعه ومحافظ الجيزه: تسهيلات جديده لدعم مستثمري جرزا وعرب ابوساعد": {
     "meaning": "The joint administrative initiative provides streamlined industrial licensing, land tenure regularisation, and utility infrastructure coordination for operating facilities in the Girza and Arab Abu Saed zones.",
     "meaning_ar": "تتضمن المبادرة الإدارية المشتركة تبسيط إجراءات التراخيص الصناعية، وتقنين أوضاع الأراضي، وتنسيق ربط المرافق والخدمات للمنشآت القائمة في منطقتي جرزا وعرب أبوساعد."
+  },
+  "وزير الصناعه يبحث مع السفير الاسباني سبل تعزيز التعاون": {
+    "meaning": "Bilateral ministerial meetings between Egypt and Spain establish formal diplomatic channels to review joint manufacturing frameworks, cross-border industrial investments, and bilateral trade flows.",
+    "meaning_ar": "تؤسس المباحثات الوزارية الثنائية بين مصر وإسبانيا قنوات دبلوماسية رسمية لمراجعة أطر التصنيع المشترك، والاستثمارات الصناعية المتبادلة، وحركة التبادل التجاري بين البلدين."
   },
   "وزير الصناعه يبحث مع شركه اوروبيه اقامه مصنع لانتاج التربه البديله في مصر": {
     "meaning": "Establishing a domestic alternative soil manufacturing plant introduces local agricultural input production and replaces direct import reliance with domestic industrial supply.",
