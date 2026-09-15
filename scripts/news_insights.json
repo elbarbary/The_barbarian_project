@@ -851,6 +851,10 @@
     "meaning": "Unlicensed capital-pooling operations divert domestic household liquidity away from regulated banking channels and capital market instruments into the informal financial sector.",
     "meaning_ar": "تؤدي أنشطة توظيف الأموال غير المرخصة إلى سحب السيولة النقدية من القطاع المصرفي وأدوات سوق المال المنظمة وتوجيهها نحو الاقتصاد المالي غير الرسمي."
   },
+  "«ام اند بي» تطلق مبادره لتطوير ممر القاهره–كيب تاون الاقتصادي": {
+    "meaning": "The initiative establishes an operational framework for cross-border logistics and infrastructure along the Cairo–Cape Town corridor, linking transportation routes and transit points between Egypt and African markets.",
+    "meaning_ar": "تؤسس المبادرة إطاراً تشغيلياً للخدمات اللوجستية والبنية التحتية عبر ممر القاهرة-كيب تاون، مما يربط بين مسارات النقل ونقاط العبور بين مصر والأسواق الإفريقية."
+  },
   "«اميل عبد الله» تعتزم اطلاق صندوق عقاري بقيمه مليار جنيه": {
     "meaning": "The establishment of a real estate investment fund pools capital to acquire income-generating property assets, converting direct real estate holdings into tradable fund units under Egyptian capital market regulations.",
     "meaning_ar": "يُمثّل تأسيس صندوق استثمار عقاري أداة لتجميع رؤوس الأموال بهدف الاستحواذ على أصول عقارية مدرة للدخل، وتحويل الملكيات العقارية المباشرة إلى وثائق استثمار قابلة للتداول وفقاً للوائح سوق المال المصرية."
@@ -1262,6 +1266,10 @@
   "استقرار بختام الاسبوع.. اسعار العملات الاجنبيه والعربيه اليوم الجمعه": {
     "meaning": "Official foreign exchange rates remain unchanged at commercial banks during the weekend closure, maintaining fixed conversion rates for cross-border trade settlements, corporate treasury valuations, and imported inventory pricing until interbank operations resume.",
     "meaning_ar": "تثبت أسعار صرف العملات الأجنبية والعربية في البنوك خلال العطلة الأسبوعية، مما يبقي تكاليف تسوية التجارة الخارجية وتقييمات الخزانة وتسعير البضائع المستوردة دون تغيير حتى استئناف التعاملات بين البنوك."
+  },
+  "استقرار معدل التضخم السنوي في السعوديه عند 1.8% خلال اغسطس": {
+    "meaning": "An unchanged annual inflation rate of 1.8% indicates that consumer price index levels are maintaining a steady pace of year-on-year increases, keeping local purchasing costs stable across consumption baskets without an acceleration in general price pressures.",
+    "meaning_ar": "يشير استقرار معدل التضخم السنوي عند 1.8% إلى ثبات وتيرة الارتفاع السنوي في الرقم القياسي لأسعار المستهلكين، مما يحافظ على استقرار تكاليف الشراء ضمن سلة الاستهلاك دون تسارع في الضغوط السعرية العامة."
   },
   "اسراييل تبلغ القنصليه البريطانيه في القدس الشرقيه بوجوب اغلاقها": {
     "meaning": "Geopolitical and diplomatic developments directly factor into regional risk assessments, cross-border diplomatic-trade coordination channels, and institutional risk premia.",
@@ -2071,6 +2079,10 @@
     "meaning": "Panda bonds are Chinese yuan-denominated sovereign debt instruments issued by foreign entities in the Chinese domestic market. This issuance structure utilizes non-traditional debt markets to fulfill foreign financing requirements.",
     "meaning_ar": "تُمثل سندات الباندا أدوات دين سيادية مقومة باليوان الصيني تُصدرها جهات أجنبية داخل السوق المالية المحلية في الصين. وتعمل هذه الآلية على استخدام أسواق دين غير تقليدية لتلبية المتطلبات التمويلية الخارجية."
   },
+  "الحكومه تستعرض المقترحات والتصميمات المعماريه لمشروع ضخم في العلمين الجديده": {
+    "meaning": "Reviewing proposals and architectural designs marks the pre-construction planning phase of a state-backed urban development, establishing master-plan specifications, capital allocation requirements, and procurement scopes for real estate and infrastructure contractors.",
+    "meaning_ar": "يمثل استعراض المقترحات والتصميمات المعمارية المرحلة التخطيطية السابقة للإنشاءات في المشروعات القومية، حيث يحدد المخطط العام، والاحتياجات الرأسمالية، ونطاق أعمال التوريد والمقاولات الخاصة بالبنية التحتية والتطوير العقاري."
+  },
   "الحكومه تستكمل اجراءات فض التشابكات الماليه بين القابضه للغزل والتامينات": {
     "meaning": "Resolving mutual financial entanglements settles historical cross-debts through cash transfers or asset swaps between the state enterprise and the social insurance authority, restructuring both entities' balance sheets and adjusting their current liabilities.",
     "meaning_ar": "تتضمن تسوية التشابكات المالية سداد المديونيات المتبادلة تاريخياً عبر تسويات نقدية أو مبادلة أصول بين الشركة القابضة وهيئة التأمينات، مما يعيد هيكلة الميزانيات العمومية للطرفين ويعدل التزاماتهما المتداولة."
@@ -2138,6 +2150,10 @@
   "الخزانه الامريكيه تستعد لاعاده شراء السندات طويله الاجل وسط ترقب الاسواق": {
     "meaning": "Sovereign bond buyback operations involve the government repurchasing existing, less-liquid long-term debt securities from primary dealers using cash raised from new debt issuances, which alters the maturity profile of outstanding sovereign debt and manages market liquidity.",
     "meaning_ar": "تتضمن عمليات إعادة شراء السندات السيادية قيام الحكومة باسترداد أدوات دين قديمة وطويلة الأجل من المتعاملين الرئيسيين نقدًا عبر حصيلة إصدارات ديون جديدة، مما يعيد هيكلة آجال استحقاق الدين القائم ويدير مستويات السيولة في السوق."
+  },
+  "الخزانه المصريه تقيد سندات ثابته العايد بقيمه 5 مليارات جنيه بالبورصه": {
+    "meaning": "Listing EGP 5 billion of fixed-rate treasury bonds on the Egyptian Exchange integrates these sovereign debt instruments into the secondary market, enabling direct electronic trading and price discovery among institutional and retail participants.",
+    "meaning_ar": "يؤدي قيد سندات خزانة ذات عائد ثابت بقيمة 5 مليارات جنيه في البورصة المصرية إلى إدراج هذه الأدوات المالية الحكومية ضمن السوق الثانوي، مما يتيح تداولها الإلكتروني وتحديد أسعارها بين المؤسسات والمستثمرين."
   },
   "الخطوط الجويه التركيه توقع عقد رعايه مع ليفربول بقيمه 406 ملايين دولار": {
     "meaning": "A corporate sports sponsorship contract allocates marketing expenditure in exchange for commercial branding rights and exposure across the athletic club's physical and digital media channels.",
@@ -4996,6 +5012,10 @@
   "صرف 8.19 مليار جنيه من مستحقات المصدرين خلال 6 اشهر": {
     "meaning": "Government export rebate initiatives disburse accrued subsidy dues directly to eligible exporting firms, converting state receivables into immediate liquid cash balances on corporate balance sheets.",
     "meaning_ar": "تقوم مبادرات رد أعباء الصادرات الحكومية بسداد المستحقات المتأخرة للشركات المصدرة، مما يحول الحسابات المدينة المستحقة لدى الدولة إلى سيولة نقدية في الميزانيات العمومية للشركات."
+  },
+  "صعود الين يواجه اختبارا حاسما مع مخاطر الاسواق في بنك اليابان": {
+    "meaning": "Movements in the Japanese yen exchange rate interact directly with the Bank of Japan's interest rate framework and global currency carry trade positions, where yield differentials determine capital flows between sovereign debt markets.",
+    "meaning_ar": "ترتبط تحركات سعر صرف الين الياباني مباشرة بسياسات أسعار الفائدة لدى بنك اليابان ومراكز تجارة الفائدة العالمية، حيث تحدد فروق العوائد اتجاهات تدفقات رؤوس الأموال بين أسواق السندات السيادية."
   },
   "صعود جماعي لموشرات البورصه بالتعاملات الصباحيه والثلاثيني يرتفع 0.14%": {
     "meaning": "A collective index rise reflects aggregate buying volume exceeding selling volume across large-cap and broad-market constituent equities during early trading, which adjusts benchmark weighted price levels upward relative to the prior session's close.",
