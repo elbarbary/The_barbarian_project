@@ -2975,6 +2975,10 @@
     "meaning": "Large-scale exporters possess broader capital reserves, diversified international client portfolios, and established credit facilities, which absorb trade disruptions and shipping volatility more directly than small enterprises.",
     "meaning_ar": "تمتلك الشركات التصديرية الكبرى احتياطيات رأسمالية أوسع، وقواعد عملاء دولية متنوعة، وتسهيلات ائتمانية قائمة، مما يتيح لها استيعاب اضطرابات التجارة وتقلبات سلاسل التوريد مقارنة بالمنشآت الصغيرة."
   },
+  "المصريه للاتصالات تتصدر ارتفاعات قطاع الاتصالات بالبورصه المصريه بنسبه 3.94%": {
+    "meaning": "Telecom Egypt leads trading activity within the EGX telecommunications sector, where a 3.94% single-session gain reflects concentrated secondary market liquidity and transactional volume relative to sector peers.",
+    "meaning_ar": "تصدرت الشركة المصرية للاتصالات تداولات قطاع الاتصالات بالبورصة المصرية، حيث يعكس ارتفاع السهم بنسبة 3.94% تركز السيولة النقدية وأحجام التداول في السوق الثانوي مقارنة بنظيراتها في القطاع."
+  },
   "المصريه للاتصالات تحلق الي مستويات تاريخيه بفضل استراتيجيتها الجديده": {
     "meaning": "Telecom Egypt's share price trades at record highs on the Egyptian Exchange following the deployment of its updated corporate operational strategy.",
     "meaning_ar": "يتداول سهم الشركة المصرية للاتصالات عند مستويات قياسية في البورصة المصرية بالتزامن مع تفعيل إستراتيجيتها التشغيلية والمؤسسية الجديدة."
@@ -4219,6 +4223,10 @@
   "جي بي كوربوريشن توافق علي تقديم تمويل الي GB Auto Tanzania لدعم عملياتها وانشطتها التجاريه": {
     "meaning": "This intra-group financing operates as parent-company working capital liquidity for an offshore subsidiary, structured on the consolidated balance sheet as an intercompany loan.",
     "meaning_ar": "يُمثل هذا الإجراء تمويلاً داخلياً بين أطراف ذات علاقة، حيث تُقدّم الشركة الأم سيولة لتغطية رأس المال العامل لتابعتها الخارجية، ويُسجّل محاسبياً كقرض بيني ضمن القوائم المالية المجمعة."
+  },
+  "جي بي كوربوريشن يتصدر ارتفاعات اسهم الخدمات الصناعيه والسيارات ب4.07%": {
+    "meaning": "The share price gain reflects higher daily trading volume and buying activity concentrated in the company relative to its peers within the industrial goods, services, and automobiles sector on the Egyptian Exchange.",
+    "meaning_ar": "يعكس صعود السهم ارتفاع أحجام التداول والتدفقات الشرائية اليومية الموجهة نحو الشركة مقارنة بنظيراتها داخل قطاع الخدمات والمنتجات الصناعية والسيارات في البورصة المصرية."
   },
   "جي بي مورجان: 870 مليار دولار انفاق شركات الذكاء الاصطناعي خلال اخر 12 شهرا": {
     "meaning": "This volume of expenditure reflects large-scale capital deployment by technology firms into computing infrastructure, data centers, specialized hardware procurement, and research operations.",
