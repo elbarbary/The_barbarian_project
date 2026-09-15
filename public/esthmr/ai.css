@@ -252,7 +252,7 @@
 
 /* The two rules the results sit under: what has not been scored, and what has. */
 .aix-divider { display: flex; align-items: center; gap: 12px; margin-top: 2px; scroll-margin-top: 84px; }
-#aix-past { margin-top: 16px; }
+#aix-past { margin-top: 38px; padding-top: 24px; border-top: 2px solid var(--aix-rule); }
 .aix-divider-label { font-family: var(--aix-mono); font-size: 10px; letter-spacing: .12em; color: var(--aix-teal-ink); white-space: nowrap; }
 .aix-divider > i { height: 1px; flex: 1; min-width: 24px; background: var(--aix-rule); }
 .aix-divider-note { font-size: 11.5px; color: var(--aix-muted); white-space: nowrap; }
@@ -280,21 +280,20 @@
 /* ── the ranking: which view is on screen, and the table ─────────────────── */
 
 .aix-view { display: flex; flex-direction: column; gap: 8px; }
-.aix-view-switch { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-#app .aix-view-switch button {
-  cursor: pointer; display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 7px 16px 7px 7px;
-  border-radius: 999px; border: 1px solid var(--aix-line); background: var(--aix-surface); color: var(--aix-ink);
-  font-size: 14px; font-weight: 600;
+/* Two stages marked, not two buttons: the context switches are the control. */
+.aix-rank-stages { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.aix-rank-stages > div { display: flex; align-items: center; gap: 9px; min-height: 44px; font-size: 14px; color: var(--aix-body); }
+.aix-rank-stages b {
+  display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+  border: 1px solid var(--aix-rule); font-size: 12px;
 }
-#app .aix-view-switch button b {
-  flex: 0 0 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
-  font-family: var(--aix-mono); font-size: 11px; font-weight: 600; background: var(--aix-track); color: var(--aix-muted);
+.aix-rank-stages .on { color: var(--aix-teal); font-weight: 650; }
+.aix-rank-stages .on b { background: var(--aix-teal); border-color: transparent; color: #fff; }
+.aix-rank-stages > i { font-style: normal; color: var(--aix-body); }
+.aix-window-note {
+  margin: 12px 0 0; padding-inline-start: 12px; border-inline-start: 3px solid var(--aix-teal);
+  font-size: 12px; line-height: 1.65; color: var(--aix-body);
 }
-#app .aix-view-switch button:hover:not(:disabled) { border-color: var(--aix-teal-ink); }
-#app .aix-view-switch button.on { background: var(--aix-teal); border-color: var(--aix-teal); color: #fff; }
-#app .aix-view-switch button.on b { background: rgba(255, 255, 255, .22); color: #fff; }
-#app .aix-view-switch button:disabled { cursor: not-allowed; opacity: .5; }
-.aix-view-switch > i { font-style: normal; font-family: var(--aix-mono); color: var(--aix-muted); }
 
 .aix-ranking-card { --rank-cols: 40px minmax(0, 1.6fr) minmax(96px, .7fr) minmax(0, 1fr); }
 .aix-ranking-card header { align-items: flex-end; }
@@ -317,10 +316,14 @@
 .aix-rank-row.is-top .aix-rank-n { color: var(--aix-teal-ink); }
 .aix-rank-row > strong { font-family: var(--aix-mono); font-size: 14.5px; font-weight: 600; text-align: end; white-space: nowrap; }
 .aix-rank-agree { font-size: 12px; color: var(--aix-muted); text-align: end; white-space: nowrap; }
+/* Wraps rather than spilling: right-aligned, an overflow runs LEFT, over the
+   score, and no scrollWidth ever reports it. The rank and its shift stay one
+   piece; "Forecast: …" takes the next line when the column is narrow. */
 .aix-rank-was {
-  display: flex; justify-content: flex-end; align-items: baseline; gap: 8px; font-family: var(--aix-mono);
-  font-size: 12.5px; color: var(--aix-muted); white-space: nowrap;
+  display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: baseline; gap: 2px 8px; min-width: 0;
+  font-family: var(--aix-mono); font-size: 12.5px; color: var(--aix-muted);
 }
+.aix-rank-was > * { white-space: nowrap; }
 .aix-rank-was em { font-style: normal; font-size: 11.5px; font-weight: 600; }
 .aix-rank-was small { font-size: 11.5px; }
 .aix-rank-cut {
@@ -329,6 +332,12 @@
 }
 .aix-said { display: flex; flex-direction: column; gap: 6px; }
 .aix-said .aix-eyebrow { font-size: 10px; color: var(--aix-muted); }
+#app .aix-reason {
+  margin: 16px 0 20px; padding: 16px; border: 1px solid var(--aix-rule); border-radius: 16px;
+  background: var(--aix-record-bg);
+}
+#app .aix-reason .aix-quote { margin: 10px 0; font-size: 14px; line-height: 1.65; }
+.aix-reason small { display: block; font-size: 11px; line-height: 1.6; color: var(--aix-body); }
 .aix-layers-lead { margin: 0 0 6px !important; }
 .aix-fine { margin: 0; font-size: 11.5px; color: var(--aix-muted); }
 
@@ -541,23 +550,12 @@ dialog.aix-dialog::backdrop { background: rgba(22, 36, 47, .5); }
   .aix-ranking-card { --rank-cols: 30px minmax(0, 1fr) auto; }
   .aix-rank-head span:nth-child(4) { display: none; }
   .aix-rank-row > .aix-rank-agree, .aix-rank-row > .aix-rank-was { grid-column: 2 / -1; justify-content: flex-start; text-align: start; }
-  #app .aix-view-switch button { flex: 1 1 100%; }
-  .aix-view-switch > i { display: none; }
+  .aix-rank-stages { gap: 8px; }
+  .aix-rank-stages > div { font-size: 12px; }
+  #app .aix-reason { padding: 12px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .aix-beta i, .sc-skeleton { animation: none; }
   .aix-dialog-card { animation: none; }
   .aix-switch, .aix-switch b { transition: none; }
 }
-
-/* One set of controls; these are explanatory stages, not another tab bar. */
-.aix-rank-stages{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.aix-rank-stages>div{display:flex;align-items:center;gap:9px;min-height:44px;font-size:14px;color:var(--aix-body)}
-.aix-rank-stages b{display:grid;place-items:center;width:28px;height:28px;border:1px solid var(--aix-rule);border-radius:50%;font-size:12px}
-.aix-rank-stages .on{color:var(--aix-teal);font-weight:650}.aix-rank-stages .on b{background:var(--aix-teal);color:#fff;border-color:transparent}
-.aix-rank-stages>i{font-style:normal;color:var(--aix-body)}
-.aix-window-note{font-size:12px;line-height:1.65;color:var(--aix-body);border-inline-start:3px solid var(--aix-teal);padding-inline-start:12px;margin:12px 0 0}
-.aix-reason{margin:16px 0 20px!important;padding:16px!important;border:1px solid var(--aix-rule);border-radius:16px;background:var(--aix-record-bg)}
-.aix-reason .aix-quote{font-size:14px;line-height:1.65;margin:10px 0}.aix-reason small{display:block;font-size:11px;line-height:1.6;color:var(--aix-body)}
-#aix-past{margin-top:38px;padding-top:24px;border-top:2px solid var(--aix-rule)}
-@media(max-width:600px){.aix-rank-stages{gap:8px}.aix-rank-stages>div{font-size:12px}.aix-reason{padding:12px!important}}

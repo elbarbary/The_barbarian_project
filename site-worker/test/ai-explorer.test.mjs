@@ -151,44 +151,57 @@ const rowsOf = (node) => byClass(node, 'aix-rank-row');
 const tickersOf = (node) => rowsOf(node).map((p) => text(all(p).find((x) => x.tag === 'b')).trim());
 const GEMINI = ['filings', 'news', 'rulebook'];
 
-test('cached readings from another run never appear beside current forecasts',()=>{
-  const stale={...readings['filings-news-rulebook'],basisSession:'2026-09-13'};
-  assert.equal(readingProblem(stale,scenarios,'filings-news-rulebook'),'run');
-  const node=screen(component({scLayers:GEMINI}),{...data,readings:{'filings-news-rulebook':stale}});
-  assert.equal(rowsOf(node).length,0);
-  assert.match(text(node),/another update or has invalid scores/);
+test('cached readings from another run never appear beside current forecasts', () => {
+  const stale = { ...readings['filings-news-rulebook'], basisSession: '2026-09-13' };
+  assert.equal(readingProblem(stale, scenarios, 'filings-news-rulebook'), 'run');
+  const node = screen(component({ scLayers: GEMINI }), { ...data, readings: { 'filings-news-rulebook': stale } });
+  assert.equal(rowsOf(node).length, 0);
+  assert.match(text(node), /another update or has invalid scores/);
 });
-test('reload revalidates both the public scorecard and the private saved forecasts',async()=>{
-  const original=globalThis.fetch,calls=[];
-  globalThis.fetch=async(url,init)=>{calls.push({url,init});return new Response('{}',{status:200});};
-  try{
-    const loader=await import('../../public/esthmr/data.js');
-    await loader.top5();await loader.scenarios();await loader.picks();await loader.rerankReading('news');
-    assert.equal(calls.length,4);
-    assert.ok(calls.every(c=>c.init.cache==='no-cache'&&c.init.credentials==='same-origin'));
-  }finally{globalThis.fetch=original;}
+
+test('reload revalidates both the public scorecard and the private saved forecasts', async () => {
+  const original = globalThis.fetch;
+  const calls = [];
+  globalThis.fetch = async (url, init) => { calls.push({ url, init }); return new Response('{}', { status: 200 }); };
+  try {
+    const loader = await import('../../public/esthmr/data.js');
+    await loader.top5();
+    await loader.scenarios();
+    await loader.picks();
+    await loader.rerankReading('news');
+    assert.equal(calls.length, 4);
+    assert.ok(calls.every((c) => c.init.cache === 'no-cache' && c.init.credentials === 'same-origin'));
+  } finally {
+    globalThis.fetch = original;
+  }
 });
-test('publication mismatch is refused rather than mixing historical and current data',()=>{
-  assert.equal(mixedSnapshot({publicationId:'a'},{publicationId:'b'}),true);
-  assert.equal(mixedSnapshot({publicationId:'a'},{}),true);
-  assert.equal(mixedSnapshot({publicationId:'a'},{publicationId:'a'}),false);
-  const node=screen(component(),{...data,scenarios:{...scenarios,publicationId:'a'},picks:{...data.picks,publicationId:'b'}});
-  assert.match(text(node),/newer saved run is arriving/);assert.equal(rowsOf(node).length,0);
-  const demo=screen(component(),{...data,demo:true,top5:{...data.top5,publicationId:'public-record'}});
-  assert.ok(rowsOf(demo).length>0,'the labelled demo must not be blocked by the public record');
+
+test('publication mismatch is refused rather than mixing historical and current data', () => {
+  assert.equal(mixedSnapshot({ publicationId: 'a' }, { publicationId: 'b' }), true);
+  assert.equal(mixedSnapshot({ publicationId: 'a' }, {}), true);
+  assert.equal(mixedSnapshot({ publicationId: 'a' }, { publicationId: 'a' }), false);
+  const node = screen(component(), { ...data, scenarios: { ...scenarios, publicationId: 'a' }, picks: { ...data.picks, publicationId: 'b' } });
+  assert.match(text(node), /newer saved run is arriving/);
+  assert.equal(rowsOf(node).length, 0);
+  const demo = screen(component(), { ...data, demo: true, top5: { ...data.top5, publicationId: 'public-record' } });
+  assert.ok(rowsOf(demo).length > 0, 'the labelled demo must not be blocked by the public record');
 });
-test('Gemini explanation matches the current reading, not an older note',()=>{
-  const node=screen(component({scLayers:GEMINI}),{...data,picks:{...data.picks,readings:{...data.picks.readings,
-    'filings-news-rulebook':{...data.picks.readings['filings-news-rulebook'],notes:{'2026-09-13':{note:'old story'}}}}}});
-  assert.match(text(byClass(node,'aix-reason')[0]),/the filings moved it/);
-  assert.doesNotMatch(text(byClass(node,'aix-reason')[0]),/old story/);
-  assert.match(text(node),/not a verified reason for each stock/);
+
+test('Gemini explanation matches the current reading, not an older note', () => {
+  const node = screen(component({ scLayers: GEMINI }), { ...data, picks: { ...data.picks, readings: { ...data.picks.readings,
+    'filings-news-rulebook': { ...data.picks.readings['filings-news-rulebook'], notes: { '2026-09-13': { note: 'old story' } } } } } });
+  const said = text(byClass(node, 'aix-reason')[0]);
+  assert.match(said, /In Gemini’s own words/);
+  assert.match(said, /the filings moved it/);
+  assert.doesNotMatch(said, /old story/);
+  assert.match(said, /not a checked reason for any one company/);
 });
-test('alphabetical tie breaking does not masquerade as Gemini rank movement',()=>{
-  const tied={...readings['filings-news-rulebook'],scores:{AAA:50,BBB:50,CCC:50}};
-  const node=screen(component({scLayers:GEMINI}),{...data,readings:{'filings-news-rulebook':tied}});
-  assert.ok(rowsOf(node).every(row=>!/[▲▼]/.test(text(row))));
-  assert.match(text(node),/Equal scores are ordered by ticker/);
+
+test('alphabetical tie breaking does not masquerade as Gemini rank movement', () => {
+  const tied = { ...readings['filings-news-rulebook'], scores: { AAA: 50, BBB: 50, CCC: 50 } };
+  const node = screen(component({ scLayers: GEMINI }), { ...data, readings: { 'filings-news-rulebook': tied } });
+  assert.ok(rowsOf(node).every((row) => !/[▲▼]/.test(text(row))));
+  assert.match(text(node), /Equal scores are ordered by ticker/);
 });
 
 /* ── Home: the card at the top ──────────────────────────────────────────── */
@@ -320,7 +333,7 @@ test('what a model’s number is follows its name', () => {
 test('the controls are a model, a horizon and the re-rank’s context, and ask no question', () => {
   const node = screen(component({ scModel: 'kronos' }));
   const steps = byClass(node, 'aix-step').map((n) => text(n).replace(/\s+/g, ' ').trim());
-  assert.deepEqual(steps, ['01 CHOOSE A MODEL', '02 FORECAST & RESULT WINDOW', '03 ADD GEMINI’S CONTEXT']);
+  assert.deepEqual(steps, ['01 CHOOSE A MODEL', '02 HORIZON', '03 CONTEXT THE RE-RANK READS']);
   assert.ok(button(node, 'next session'));
   // The switches work over every model: they are how Gemini is turned on.
   const toggles = byClass(node, 'aix-toggle');
@@ -339,9 +352,9 @@ test('the results sit under two rules: the future first, then past runs', () => 
   const future = results.findIndex((n) => n.attrs?.id === 'aix-future');
   const past = results.findIndex((n) => n.attrs?.id === 'aix-past');
   assert.ok(future >= 0 && past > future, 'a rule is missing or out of order');
-  assert.match(text(results[future]), /LATEST SAVED FORECASTS/);
+  assert.match(text(results[future]), /FUTURE · NOT SCORED YET/);
   assert.match(text(results[future]), /computed after the close of 14 Sep 2026/);
-  assert.match(text(results[past]), /TRACK RECORD & EARLIER RUNS/);
+  assert.match(text(results[past]), /PAST RUNS · ALREADY SCORED/);
   for (const c of ['aix-view', 'aix-tiles', 'aix-ranking-card', 'aix-fan-card', 'aix-pair']) {
     const i = at(c);
     assert.ok(i > future && i < past, `${c} is not under the future rule`);
@@ -405,6 +418,9 @@ test('a ranking baseline ranks by the move it saw, never a forecast', () => {
   assert.match(text(card), /MOVE · LAST 20 SESSIONS/i);
   assert.match(text(rowsOf(card)[0]), /\+9\.00%/);
   assert.doesNotMatch(text(card), /Expects/);
+  // The line under its title says the same as the column: a move already made.
+  assert.match(text(card), /Ranked by a move that has already happened — this rule makes no forecast/);
+  assert.doesNotMatch(text(card), /forecasts, highest first|not realised returns/);
   // Reversal ranks by the fall, stored with its sign turned over; the figure
   // printed is the fall itself.
   assert.deepEqual(saidParts({ kind: 'reversal', sessions: 1 }, 7.25, false).figure, '-7.25%');
@@ -413,9 +429,7 @@ test('a ranking baseline ranks by the move it saw, never a forecast', () => {
 test('switching Gemini on shows its ranking in the same table, with where the model had each company', () => {
   const c = component({ scModel: 'kronos' });
   let node = screen(c);
-  for(const name of ['Latest filings','News flow','The rule book']) {
-    button(screen(c),name).events.click();
-  }
+  for (const name of ['Latest filings', 'News flow', 'The rule book']) button(screen(c), name).events.click();
   assert.deepEqual(c.state.scLayers, GEMINI);
   node = screen(c);
   button(node, 'Its own measurements').events.click();
@@ -433,12 +447,14 @@ test('switching Gemini on shows its ranking in the same table, with where the mo
   const tiles = byClass(node, 'aix-tile').map(text);
   assert.match(tiles[0], /TOP 5 · Kronos-small EXPECTS.*-0\.17%/s);
   assert.match(tiles[1], /NEW TO THE TOP 5.*0 \/ 3/s);
-  assert.match(tiles[2], /GEMINI KEPT.*2/s);
-  assert.equal(byClass(node,'aix-view-switch').length,0);
+  assert.match(tiles[2], /GEMINI KEPT.*2.*companies it said were worth anything, of the 3 it scored/s);
+  // The stages mark which ranking is on screen; they are not a second control.
+  const stages = byClass(node, 'aix-rank-stages')[0];
+  assert.equal(all(stages).filter((x) => x.tag === 'button').length, 0);
   assert.match(text(node), /not a percentage return or a probability/);
-  assert.match(text(node), /saved order targets five sessions/);
+  assert.match(text(node), /Gemini ranks for the next five sessions\. Choosing 5 sessions changes Kronos-small’s forecasts/);
   // The context switches are the only controls for the rerank.
-  for(const name of ['Latest filings','News flow','The rule book','Its own measurements']) button(screen(c),name).events.click();
+  for (const name of ['Latest filings', 'News flow', 'The rule book', 'Its own measurements']) button(screen(c), name).events.click();
   assert.deepEqual(c.state.scLayers, []);
   assert.match(text(byClass(screen(c), 'aix-ranking-card')[0]), /Ranked by Kronos-small/);
 });
@@ -742,6 +758,17 @@ test('English and Arabic render with nothing undefined, and empty documents are 
   assert.equal(byClass(node, 'sc-skeleton').length, 1);
 });
 
+test('the note under Gemini’s ranking counts sessions the way Arabic does, and never calls a past move a forecast', () => {
+  const note = (state, ar) => text(byClass(screen(component({ scLayers: GEMINI, ...state }), data, ar), 'aix-window-note')[0]);
+  assert.match(note({ scModel: 'kronos', scHorizon: 5 }, true), /اختيار 5 جلسات يغيّر توقعات/);
+  assert.match(note({ scModel: 'kronos', scHorizon: 20 }, true), /اختيار 20 جلسة/);
+  assert.doesNotMatch(note({ scModel: 'kronos', scHorizon: 5 }, true), /5 جلسة/);
+  assert.match(note({ scModel: 'kronos', scHorizon: 1 }, false), /Choosing the next session changes Kronos-small’s forecasts/);
+  const momentum = note({ scModel: 'momentum20', scHorizon: 5 }, false);
+  assert.match(momentum, /changes the window the record below is scored over/);
+  assert.doesNotMatch(momentum, /forecast/i);
+});
+
 test('the demo carries a picks file in the published shape, so both halves show signed out', async () => {
   const { demo } = await import('../../public/esthmr/data.js');
   const d = demo();
@@ -762,7 +789,11 @@ test('the workbench and hero carry a dark theme, not a light rectangle on a dark
   // Site-wide button rules (#app button { color: inherit }) must not win.
   assert.match(css, /#app \.aix-seg button\.on/);
   assert.match(css, /#app \.aix-rank-row \{/);
-  assert.match(css, /#app \.aix-view-switch button\.on \{/);
+  assert.match(css, /\.aix-rank-stages \.on b \{/);
+  // Right-aligned and unwrapped, "Forecast: …" ran left over the Gemini score.
+  assert.match(css, /\.aix-rank-was \{[^}]*flex-wrap: wrap/);
+  assert.match(css, /#app \.aix-reason \{/);
+  assert.doesNotMatch(css, /aix-view-switch|!important\}/, 'no styles left for the buttons that are gone');
   assert.match(css, /#app \.aix-pick-chip\.is-said/);
   assert.match(css, /#app \.aix-hero h1 \{[^}]*font-size: var\(--aix-h1\) !important/);
   assert.match(css, /#app \.aix-cta-quiet \{/);

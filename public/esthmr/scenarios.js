@@ -504,10 +504,12 @@ export function scenariosScreen(component, data, ar) {
   // The labelled signed-out demo intentionally has invented scenarios beside
   // the public real-world model record; it is not a live publication bundle.
   if (!data.demo && mixedSnapshot(scenarios, picks, top5)) {
-    return {screen:h('section',{class:'aix-card aix-bench'},
-      h('h2',null,t('A newer saved run is arriving','جارٍ وصول تشغيل محفوظ أحدث')),
-      h('p',null,t('The forecasts and their record came from different updates. Reload them together; no AI model will be run.','وصلت التوقعات وسجل الأداء من تحديثين مختلفين. أعد تحميلهما معاً؛ لن نشغّل أي نموذج.')),
-      h('button',{type:'button',class:'aix-quiet',onClick:()=>component.onRetryData?.()},t('Reload saved results','إعادة تحميل النتائج المحفوظة')))};
+    return { screen: h('section', { class: 'aix-card aix-bench' },
+      h('h2', null, t('A newer saved run is arriving', 'جارٍ وصول تشغيل محفوظ أحدث')),
+      h('p', null, t('The forecasts and their record came from different updates. Reload them together; no AI model will be run.',
+        'وصلت التوقعات وسجل الأداء من تحديثين مختلفين. أعد تحميلهما معاً؛ لن نشغّل أي نموذج.')),
+      h('button', { type: 'button', class: 'aix-quiet', onClick: () => component.onRetryData?.() },
+        t('Reload saved results', 'إعادة تحميل النتائج المحفوظة'))) };
   }
 
   const choice = choiceOf(st, picks, scenarios);
@@ -557,11 +559,11 @@ export function scenariosScreen(component, data, ar) {
         () => set({ scModel: m.id, scFrom: null }), m.id))),
       choice.meta ? h('p', { class: 'aix-note aix-model-about' }, aboutModel(choice.meta, ar)) : null),
     h('div', { class: 'aix-group' },
-      h('p', { class: 'aix-step' }, h('b', null, '02'), t('FORECAST & RESULT WINDOW', 'فترة التوقع وقياس النتيجة')),
+      h('p', { class: 'aix-step' }, h('b', null, '02'), t('HORIZON', 'المدى')),
       h('div', { class: 'aix-chips' }, choice.horizons.map((n) => chip(chipWords(n, ar),
         horizon === n, () => set({ scHorizon: n }), n)))),
     order.length ? h('div', { class: `aix-group aix-layers${gemini ? ' is-on' : ''}` },
-      h('p', { class: 'aix-step' }, h('b', null, '03'), t('ADD GEMINI’S CONTEXT', 'أضف سياق Gemini')),
+      h('p', { class: 'aix-step' }, h('b', null, '03'), t('CONTEXT THE RE-RANK READS', 'السياق الذي تقرؤه إعادة الترتيب')),
       h('p', { class: 'aix-note aix-layers-lead' }, choice.readable
         ? (gemini
           ? t(`Showing Gemini’s saved ranking. It combines all models with the selected evidence; ${modelName} remains the comparison. Turn everything off for the model’s original order.`,
@@ -601,9 +603,17 @@ export function scenariosScreen(component, data, ar) {
     leftOut: Object.keys(scenarios?.leftOut || {}).length,
     loading: !picks && !!st.extrasLoading,
     readingLoading: gemini && !reading && !!(st.scLoading && st.scLoading[key]),
-    readingFailed: readingIssue ? t('This reading belongs to another update or has invalid scores. Reload the saved results together.','هذه القراءة من تحديث آخر أو بها درجات غير صالحة. أعد تحميل النتائج المحفوظة معاً.')
+    readingFailed: readingIssue
+      ? t('This reading belongs to another update or has invalid scores. Reload the saved results together.',
+        'هذه القراءة من تحديث آخر أو بها درجات غير صالحة. أعد تحميل النتائج المحفوظة معاً.')
       : gemini && !reading ? (st.scFailed && st.scFailed[key]) || null : null,
-    retry: () => { if(readingIssue){component.onRetryData?.();return;} const { [key]: gone, ...rest } = st.scFailed || {}; component.setState({ scFailed: rest }); },
+    // A reading from another update is not fetched again on its own: the
+    // whole saved run is, so the two cannot stay mismatched.
+    retry: () => {
+      if (readingIssue) { component.onRetryData?.(); return; }
+      const { [key]: gone, ...rest } = st.scFailed || {};
+      component.setState({ scFailed: rest });
+    },
   };
 
   // The whole market as the chosen forecaster sees it, under its ranking.
@@ -644,22 +654,22 @@ export function scenariosScreen(component, data, ar) {
       controls,
       h('div', { class: 'aix-results' },
         from,
-        divider('aix-future', t('LATEST SAVED FORECASTS', 'أحدث التوقعات المحفوظة'),
+        divider('aix-future', t('FUTURE · NOT SCORED YET', 'المستقبل · لم يُقيَّم بعد'),
           basis ? t(`computed after the close of ${day(basis, false)}`, `حُسب بعد إغلاق ${day(basis, true)}`) : null),
-        viewSwitch(component, ctx, ar, {
-          onModel: () => set({ scLayers: [] }),
-          onGemini: () => set({ scLayers: layers.length ? layers : choice.standard }),
-        }),
+        viewSwitch(component, ctx, ar),
         rankingTiles(ctx, ar),
         rankingCard(component, data, ctx, ar),
         ...charts,
-        divider('aix-past', t('TRACK RECORD & EARLIER RUNS', 'سجل الأداء والتشغيلات السابقة'),
-          t('measured results · pending outcomes labelled separately', 'نتائج مقاسة · والنتائج المنتظرة مميّزة بوضوح')),
+        divider('aix-past', t('PAST RUNS · ALREADY SCORED', 'تشغيلات سابقة · قُيّمت بالفعل'),
+          t('sessions that have closed', 'جلسات أُغلقت')),
         recordCard(component, data, ctx, ar),
         nightsCard(component, data, ctx, ar),
-        modelsCard(gemini && top5?.readings?.[key] ? {...top5, models:{...top5.models,
-          rerank:{...top5.readings[key], group:'rerank',label:'Gemini · selected context',labelAr:'Gemini · السياق المختار'}}} : top5,
-          ar, { horizon, selected: gemini ? 'rerank' : model,
+        // With Gemini on, its row is the reading on screen, not the default one.
+        modelsCard(gemini && top5?.readings?.[key]
+          ? { ...top5, models: { ...top5.models,
+            rerank: { ...top5.readings[key], group: 'rerank', label: 'Gemini · selected context', labelAr: 'Gemini · السياق المختار' } } }
+          : top5,
+        ar, { horizon, selected: gemini ? 'rerank' : model,
           onPick: (id) => (id === 'rerank'
             ? set({ scLayers: layers.length ? layers : choice.standard, scFocus: 'future' })
             : set({ scModel: id, scLayers: [], scFrom: null, scFocus: 'future' })),

@@ -153,11 +153,13 @@ jobs:
           npm install ws --no-save --silent
           node scripts/egx_scan.mjs ../work
 
+      # Only the lab's own tests stand between the schedule and tonight's
+      # forecast. A night that is not forecast cannot be forecast later, so a
+      # broken screen must not cost one; the workbench's tests check the
+      # publication instead, after it is built.
       - name: Test the lab
         id: tests
-        run: |
-          python3 -m unittest discover -s scripts/lab -p 'test_*.py'
-          node --test site-worker/test/ai-cards.test.mjs site-worker/test/ai-explorer.test.mjs
+        run: python3 -m unittest discover -s scripts/lab -p 'test_*.py'
 
       # `dry_run` proves the models load and answer without entering
       # anything into the record. There is no other way to test a change to
@@ -272,52 +274,31 @@ jobs:
         if: always() && inputs.dry_run != true
         run: python3 scripts/lab/verify.py
 
+      # The documents a reader will be shown, checked as they are about to be
+      # committed: one publication ID across all of them, readings that match
+      # their index, and the workbench's own tests against the real files.
       - name: Validate the precomputed workbench bundle
         id: snapshot
         if: always() && steps.publish.outcome == 'success'
-        run: python3 scripts/lab/snapshot.py
+        run: |
+          python3 scripts/lab/snapshot.py
+          node --test site-worker/test/ai-cards.test.mjs site-worker/test/ai-explorer.test.mjs
 
       # Committed because the whole value is that it cannot be edited
       # afterwards. A forecast kept only in a CI artifact expires in ninety
       # days and proves nothing about what was believed in September.
+      #
+      # So the sealed record is committed on every run, whatever failed, and
+      # only the publication waits for the checks above. `push.py` says why,
+      # and what happens when somebody else pushed first.
       - name: Commit the run
-        if: always() && inputs.dry_run != true && steps.tests.outcome == 'success' && steps.publish.outcome == 'success' && steps.verify.outcome == 'success' && steps.snapshot.outcome == 'success'
+        if: always() && inputs.dry_run != true
+        env:
+          PUBLICATION: ${{ (steps.tests.outcome == 'success' && steps.publish.outcome == 'success' && steps.verify.outcome == 'success' && steps.snapshot.outcome == 'success') && 'checked' || 'failed' }}
         run: |
           git config user.name  'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          # `-A` so a file publish.py removed — a stale reading, or the
-          # per-company document that once sat in the public folder — is
-          # removed from the record too. The gated folder only on a night
-          # that has one, because a pathspec that matches nothing is fatal.
-          git add -A data-source/lab public/data/v1/research
-          if [ -e public/data/v1/lab ] || git ls-files --error-unmatch public/data/v1/lab >/dev/null 2>&1; then
-            git add -A public/data/v1/lab
-          fi
-          if git diff --cached --quiet; then
-            echo 'nothing new — the basis session has not moved'
-            exit 0
-          fi
-          git commit -m 'lab: forecasts, scores and reveals'
-          # Retry unrelated market-data commits. A research conflict is not
-          # evidence that our copy is newer: stop and preserve it for review.
-          for attempt in 1 2 3; do
-            if git pull --rebase origin main; then
-              python3 scripts/lab/verify.py
-              python3 scripts/lab/snapshot.py
-              git push origin HEAD:main && exit 0
-            fi
-            unmerged=$(git diff --name-only --diff-filter=U)
-            if [ -n "$unmerged" ]; then
-              echo "Conflicting records require reconciliation; nothing will be overwritten:"
-              echo "$unmerged"
-              git rebase --abort
-              exit 1
-            fi
-            echo "push attempt $attempt lost the race; retrying"
-            sleep 5
-          done
-          echo 'could not push after three attempts'
-          exit 1
+          python3 scripts/lab/push.py --publication "$PUBLICATION"
 
       - name: Preserve failed-run research for recovery
         if: failure() && inputs.dry_run != true

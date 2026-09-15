@@ -59,13 +59,25 @@ class SnapshotTest(unittest.TestCase):
                           {p.stem: read(p) for p in (root / "lab/rerank").glob('*.json')},
                           require_id=False)
 
-    def test_ci_never_commits_unverified_or_overwrites_conflicting_records(self):
+    def test_ci_commits_the_sealed_record_always_and_the_publication_only_when_checked(self):
         workflow = (pathlib.Path(__file__).resolve().parents[2] / '.github/workflows/lab-nightly.yml').read_text()
-        commit_step = workflow.split('- name: Commit the run')[1]
-        for step in ('tests', 'publish', 'verify', 'snapshot'):
-            self.assertIn(f"steps.{step}.outcome == 'success'", commit_step)
-        self.assertNotIn('checkout --theirs', commit_step)
-        self.assertIn('scripts/lab/snapshot.py', commit_step)
+
+        def step(name):
+            return workflow.split(f'- name: {name}\n')[1].split('\n      - name: ')[0]
+
+        commit = step('Commit the run')
+        # No failed check may cost the night its sealed record (push.py).
+        self.assertIn("if: always() && inputs.dry_run != true\n", commit)
+        gate = commit.split('PUBLICATION:')[1].split('\n')[0]
+        for name in ('tests', 'publish', 'verify', 'snapshot'):
+            self.assertIn(f"steps.{name}.outcome == 'success'", gate)
+        self.assertIn('scripts/lab/push.py --publication "$PUBLICATION"', commit)
+        self.assertNotIn('checkout --theirs', commit)
+        self.assertIn('scripts/lab/snapshot.py', step('Validate the precomputed workbench bundle'))
+        # A broken screen must not cost a night that can never be forecast again.
+        self.assertNotIn('node --test', step('Test the lab'))
+        for name in ('Forecast', 'Re-rank with context'):
+            self.assertIn("steps.tests.outcome == 'success'", step(name))
         self.assertIn('actions/upload-artifact@v4', workflow)
 
 
