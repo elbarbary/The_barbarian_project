@@ -1399,6 +1399,10 @@
     "meaning": "Global gold prices fluctuate based on macroeconomic indicators such as US inflation data, which determine benchmark interest rate environments, currency valuations, and the holding cost of non-yielding assets.",
     "meaning_ar": "تتذبذب أسعار الذهب العالمية بناءً على مؤشرات الاقتصاد الكلي مثل بيانات التضخم الأمريكية، والتي تحدد أسعار الفائدة المرجعية وقيمة العملة وتكلفة حيازة الأصول غير المدرة للعائد."
   },
+  "اسعار الذهب العالميه تتراجع مع ترقب المستثمرين قرار المركزي الامريكي": {
+    "meaning": "Expectations surrounding the US Federal Reserve's monetary policy decisions influence the US dollar and sovereign bond yields, which directly determine the opportunity cost of holding non-yielding bullion in global commodity markets.",
+    "meaning_ar": "تؤثر قرارات وتوجهات السياسة النقدية لمجلس الاحتياطي الفيدرالي الأمريكي على سعر صرف الدولار وعوائد السندات، وهو ما يحدد بدوره تكلفة الفرصة البديلة لحيازة الذهب كأصل لا يدر عائداً في الأسواق العالمية."
+  },
   "اسعار الذهب العالميه ترتفع مع ضعف الدولار وترقب بيانات امريكيه": {
     "meaning": "Global gold prices trade in an inverse relationship with the US dollar, where a depreciating dollar decreases the acquisition cost of gold for holders of other currencies and influences raw material input costs for domestic jewelers and bullion traders.",
     "meaning_ar": "تتحرك أسعار الذهب العالمية في علاقة عكسية مع الدولار الأمريكي، حيث يؤدي تراجع العملة الأمريكية إلى انخفاض تكلفة حيازة المعدن لحاملي العملات الأخرى، مما ينعكس على تكاليف المواد الخام لشركات تصنيع وتجارة الذهب في السوق المحلي."
@@ -5513,6 +5517,10 @@
     "meaning": "The extension of the executive committee's term for three years maintains management continuity and keeps existing operational strategies and corporate governance structures in place at the consumer finance firm.",
     "meaning_ar": "يؤدي تمديد تفويض اللجنة التنفيذية لمدة ثلاث سنوات إلى الحفاظ على استمرارية الإدارة واستقرار الهياكل التشغيلية وأطر الحوكمة القائمة في شركة التمويل الاستهلاكي."
   },
+  "مجلس الذهب العالمي: الصين تعزز احتياطياتها باكبر وتيره منذ اكتوبر 2023": {
+    "meaning": "Official bullion accumulation by the People's Bank of China reallocates central bank foreign exchange reserves from sovereign debt and fiat currencies into physical gold assets, altering international sovereign reserve compositions.",
+    "meaning_ar": "يُعيد بنك الشعب الصيني توزيع احتياطيات النقد الأجنبي الرسمية من الديون السيادية والعملات الورقية إلى أصول الذهب المادية، مما يُغيّر هيكل الاحتياطيات السيادية الدولية."
+  },
   "مجلس الوزراء: اعضاء اللجان الاستشاريه ليسوا مستشارين لرييس الوزراء": {
     "meaning": "This governance clarification defines advisory committees as independent technical bodies without executive authority or public payroll status, separating technical consultation from direct state policy execution.",
     "meaning_ar": "يوضح هذا التحديد التنظيمي تبعية اللجان الاستشارية كجهات فنية مستقلة دون صلاحيات تنفيذية أو صفة وظيفية حكومية، مما يفصل بين إبداء الرأي الاستشاري والمسؤولية التنفيذية للسياسات العامة."
@@ -6429,6 +6437,14 @@
     "meaning": "This operational directive increases state-managed inventory allocation and distribution frequency for high-turnover staple goods through public consumer complexes within government price-stabilisation channels.",
     "meaning_ar": "يمثل هذا التوجيه التنفيذي زيادة في معدلات ضخ وتوزيع المخزون السلعي للسلع الأساسية سريعة الدوران عبر المجمعات الاستهلاكية ومنافذ مبادرات خفض الأسعار التابعة للدولة."
   },
+  "وزير التموين: استمرار الرقابه علي الاسواق والمنافذ بالتنسيق مع الجهات الرقابيه": {
+    "meaning": "The Ministry of Supply maintains market inspection campaigns in coordination with regulatory bodies to monitor price compliance, supply levels, and distribution channels for essential commodities across retail outlets.",
+    "meaning_ar": "تواصل وزارة التموين تسيير حملات التفتيش على الأسواق بالتنسيق مع الأجهزة الرقابية لمتابعة الالتزام بالأسعار وتوافر السلع وقنوات التوزيع في منافذ البيع."
+  },
+  "وزير التموين: افتتاح اكثر من 20 فرعا جديدا لسلسله كاري اون الشهر المقبل": {
+    "meaning": "Opening new retail branches expands the chain's physical distribution network and increases operational footprint within the domestic consumer goods sector.",
+    "meaning_ar": "يؤدي افتتاح فروع تجزئة جديدة إلى توسيع شبكة التوزيع الجغرافي المباشر وزيادة الرقعة التشغيلية للمنافذ ضمن قطاع السلع الاستهلاكية المحلي."
+  },
   "وزير التموين: سرعه بحث طلبات النواب بما يحقق صالح المواطنين": {
     "meaning": "The Ministry of Supply coordinates administrative and regulatory oversight over subsidized commodity distribution and consumer supply chains through legislative feedback channels.",
     "meaning_ar": "تتولى وزارة التموين التنسيق والرقابة الإدارية والتنظيمية على سلاسل إمداد السلع والمنظومة التموينية عبر قنوات المتابعة والتواصل البرلماني."
@@ -6628,6 +6644,10 @@
   "وزيرا التموين والزراعه ورييس مستقبل مصر يفتتحون 20 فرعا جديدا لكاري اون ب4 محافظات": {
     "meaning": "Opening 20 new retail branches across four governorates expands the physical distribution footprint and direct consumer access for the commercial network.",
     "meaning_ar": "يؤدي افتتاح 20 فرعاً جديداً للتجزئة في أربع محافظات إلى توسيع النطاق الجغرافي لشبكة التوزيع ومنافذ الوصول المباشر إلى المستهلكين."
+  },
+  "وزيرا التموين والزراعه ورييس مستقبل مصر يفتتحون 20 فرعا جديدا لكاري اون في 4 محافظات": {
+    "meaning": "The expansion adds 20 operational retail points of sale across four governorates, broadening the domestic distribution footprint through a direct partnership with state-backed agricultural and supply entities.",
+    "meaning_ar": "يضيف هذا التوسع 20 نقطة بيع تجزئة تشغيلية في أربع محافظات، مما يوسع النطاق الجغرافي لشبكة التوزيع المحلي عبر شراكة مباشرة مع جهات حكومية تابعة لقطاعي التموين والزراعة."
   },
   "وفد من شركات مقاولات وتطوير عقاري محليه يزور سوريا ولبنان اكتوبر المقبل": {
     "meaning": "The visit constitutes an operational trade delegation where Egyptian construction and real estate firms engage with regional counterparties to assess foreign project tenders, infrastructure contracts, and cross-border partnership frameworks.",
