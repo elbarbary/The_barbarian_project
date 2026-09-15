@@ -839,6 +839,10 @@
     "meaning": "Setting a sales target establishes an internal benchmark for annual production volume and distribution capacity within the local grain processing sector.",
     "meaning_ar": "يحدد استهداف حجم مبيعات معين معياراً تشغيلياً لحجم الإنتاج السنوي والقدرة التوزيعية للشركة ضمن قطاع تصنيع الحبوب المحلي."
   },
+  "«المجموعه للزجاج» تضخ 500 مليون جنيه لتشغيل خطي انتاج جديدين": {
+    "meaning": "The company allocates 500 million Egyptian pounds in capital expenditure to add two operational manufacturing lines, expanding its physical plant assets and installed industrial capacity.",
+    "meaning_ar": "تخصص الشركة إنفاقاً رأسمالياً بقيمة 500 مليون جنيه مصري لإضافة خطي تصنيع، مما يرفع من قيمة أصولها الإنتاجية وطاقتها الصناعية المركبة."
+  },
   "«المستريح».. خطر يهدد الاستثمار الرسمي لمدخرات المصريين": {
     "meaning": "Unlicensed capital-pooling operations divert domestic household liquidity away from regulated banking channels and capital market instruments into the informal financial sector.",
     "meaning_ar": "تؤدي أنشطة توظيف الأموال غير المرخصة إلى سحب السيولة النقدية من القطاع المصرفي وأدوات سوق المال المنظمة وتوجيهها نحو الاقتصاد المالي غير الرسمي."
@@ -1131,6 +1135,10 @@
     "meaning": "Persistent inflation above the central bank's target maintains upward pressure on benchmark interest rates, influencing borrowing costs, sovereign bond yields, and foreign trade balances between India and its trade partners, including Egypt.",
     "meaning_ar": "يؤدي استمرار التضخم فوق مستهدف البنك المركزي إلى استمرار الضغوط على أسعار الفائدة الأساسية، وهو ما يحدد تكاليف الاقتراض وعوائد السندات الحكومية ومعدلات التبادل التجاري بين الهند وشركائها التجاريين، ومنهم مصر."
   },
+  "ارتفاع الخام الامريكي بنحو 2% وبرنت يتجاوز 107 دولارات": {
+    "meaning": "Higher global crude oil benchmarks alter input costs for energy-intensive industrial producers and adjust baseline expenditures for petroleum-importing economies.",
+    "meaning_ar": "يؤدي ارتفاع أسعار خام النفط عالمياً إلى تعديل تكاليف المدخلات التشغيلية للقطاعات الصناعية كثيفة الاستهلاك للطاقة وتغيير النفقات الأساسية للدول المستوردة للمنتجات البترولية."
+  },
   "ارتفاع الدولار وسط ترقب قرارات الفايده في امريكا واليابان وبريطانيا": {
     "meaning": "Divergent monetary policy expectations and interest rate decisions across major central banks drive global foreign exchange repositioning, which alters USD liquidity flows and directly impacts local currency valuation and import pricing dynamics in emerging markets such as Egypt.",
     "meaning_ar": "تؤدي مواءمة السياسات النقدية وقرارات أسعار الفائدة لدى البنوك المركزية الكبرى إلى إعادة توزيع السيولة بالدولار عالمياً، مما يحدد وتيرة تسعير العملات المحلية وتكاليف المعاملات الاستيرادية في الأسواق الناشئة ومنها مصر."
@@ -1170,6 +1178,10 @@
   "ارتفاع عايد السندات العشريه الامريكيه لاعلي مستوياته منذ عام 2007": {
     "meaning": "Higher benchmark yields raise international borrowing costs and strengthen the US dollar, which increases sovereign debt servicing burdens and redirects cross-border portfolio capital toward dollar-denominated assets.",
     "meaning_ar": "يؤدي ارتفاع عائد السندات القياسية إلى زيادة تكلفة الاقتراض الدولي وقوة الدولار، مما يرفع تكلفة خدمة الدين السيادي ويعيد توجيه التدفقات الاستثمارية نحو الأصول المقومة بالعملة الأمريكية."
+  },
+  "ارتفاع مبيعات التجزيه في الصين باقل من المتوقع خلال اغسطس": {
+    "meaning": "Slower-than-expected retail sales growth indicates subdued domestic consumer spending in China, which directly correlates with global trade volumes and demand for industrial commodity inputs.",
+    "meaning_ar": "يشير نمو مبيعات التجزئة بأقل من التقديرات إلى تباطؤ وتيرة الإنفاق الاستهلاكي المحلي في الصين، وهو ما يرتبط بحجم حركة التجارة العالمية ومعدلات استهلاك مدخلات السلع الصناعية."
   },
   "ارتفاع مستويات الشراء والبيع.. اسعار اليورو بختام تعاملات الخميس 10 سبتمبر 2026": {
     "meaning": "An upward adjustment in both the bid and ask exchange rates reflects a higher local currency cost for acquiring euro liquidity in the interbank foreign exchange market.",
@@ -1538,6 +1550,10 @@
   "اسعار اللحوم اليوم السبت 5-9-2026 في الاسواق": {
     "meaning": "This is a daily commodity pricing bulletin tracking wholesale and retail meat prices, which directly reflect current livestock feed costs, import pricing mechanisms, and immediate supply levels across domestic distribution channels.",
     "meaning_ar": "يمثل هذا رصداً يومياً لأسعار بيع اللحوم بالجملة والتجزئة، والتي تعكس بشكل مباشر تكاليف الأعلاف الحالية، وآليات تسعير الاستيراد، ومستويات المعروض في قنوات التوزيع المحلية."
+  },
+  "اسعار المنازل في الصين تواصل التراجع رغم اجراءات دعم جديده": {
+    "meaning": "Persistent declines in Chinese residential property prices reflect an ongoing imbalance between high housing inventory and subdued buyer transaction volumes, limiting the direct transmission of state regulatory and liquidity stimulus into broader construction activity and global raw material consumption.",
+    "meaning_ar": "يعكس استمرار انخفاض أسعار العقارات السكنية في الصين خللاً قائماً بين المعروض المرتفع من الوحدات وحجم المعاملات الفعلي، مما يحد من الأثر المباشر لتدابير الدعم التنظيمية والسيولة الحكومية على نشاط التشييد ومعدلات استهلاك المواد الخام عالمياً."
   },
   "اسعار النحاس تسجل مستوي قياسيا للجلسه الثانيه علي التوالي": {
     "meaning": "Copper serves as a primary raw material for industrial and cable manufacturing sectors, where record commodity prices directly elevate procurement costs and expand working capital requirements for producers.",
