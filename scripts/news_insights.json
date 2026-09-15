@@ -3492,6 +3492,10 @@
     "meaning": "Broad declines across indices reflect net capital outflows from equities during the trading session, where downward price adjustments across constituent stocks reduce aggregate market capitalization.",
     "meaning_ar": "يعكس التراجع الجماعي للمؤشرات خروج صافي تدفقات نقدية من الأسهم خلال جلسة التداول، حيث تؤدي انخفاضات أسعار الأسهم المكونة للمؤشرات إلى تقليص القيمة السوقية الإجمالية."
   },
+  "تراجع جماعي لموشرات البورصه بالتعاملات الصباحيه والثلاثيني ينخفض 0.37%": {
+    "meaning": "Broad-based index declines reflect early-session net selling pressure, where the total volume of matched sell orders exceeds bid orders across constituent equities, lowering the market capitalization-weighted price level of the EGX30 by 0.37%.",
+    "meaning_ar": "يعكس التراجع الجماعي للمؤشرات ضغوطًا بيعية في بداية التعاملات، حيث تتجاوز عروض البيع المنفذة مستويات طلبات الشراء عبر الأسهم المقيدة، مما يخفض القيمة السوقية المرجحة لمؤشر إيجي إكس 30 بنسبة 0.37%."
+  },
   "تراجع جماعي لموشرات البورصه بالتعاملات الصباحيه والثلاثيني ينخفض 0.64%": {
     "meaning": "Broad declines across major indices reflect an excess of market-wide ask volume over bid volume during early trading, which reprices benchmark constituent equities downward and lowers composite market capitalization.",
     "meaning_ar": "يعكس التراجع الجماعي للمؤشرات تفوق حجم عروض البيع على طلبات الشراء خلال التعاملات المبكرة، مما يؤدي إلى إعادة تسعير أسهم الشركات المكونة للمؤشر بمستويات سعرية أقل وخفض القيمة السوقية الإجمالية."
@@ -4575,6 +4579,10 @@
   "سعر اليورو في مصر اليوم الاحد 6/9/2026.. تراجع طفيف": {
     "meaning": "A marginal decline in the euro exchange rate against the Egyptian pound reflects daily foreign exchange fluctuations within the official banking sector, adjusting the settlement cost for euro-denominated import transactions and foreign debt service obligations.",
     "meaning_ar": "يعكس التراجع الطفيف في سعر صرف اليورو أمام الجنيه المصري التحركات اليومية لأسعار الصرف في القطاع المصرفي، ويحدد تكلفة التسوية المباشرة للواردات والتزامات خدمة الدين المقومة باليورو."
+  },
+  "سعر اليورو في مصر اليوم الثلاثاء 15/9/2026": {
+    "meaning": "The daily Euro-to-EGP exchange rate establishes the foreign currency clearing benchmark for bilateral trade with European markets, determining import settlement costs and corporate foreign exchange revaluations across the banking sector.",
+    "meaning_ar": "يحدد سعر صرف اليورو اليومي مقابل الجنيه المصري معيار المقاصة لتدفقات التجارة البينية مع الأسواق الأوروبية، وتكاليف تسوية عقود الاستيراد وإعادة تقييم التزامات العملة الأجنبية في القطاع المصرفي."
   },
   "سعر اليورو في مصر اليوم الثلاثاء 8/9/2026.. ارتفاع جديد": {
     "meaning": "An appreciation of the Euro against the Egyptian Pound raises the local currency cost of European imported goods and raw materials, while increasing the nominal debt service obligations for entities holding euro-denominated liabilities.",
@@ -6877,6 +6885,10 @@
     "meaning": "The company repurchases its own shares from the open market to hold as treasury stock, which reduces the total number of outstanding shares circulating among public shareholders and alters the equity structure on the balance sheet.",
     "meaning_ar": "تسترد الشركة جزءاً من أسهمها من التداول الحر للاحتفاظ بها كأسهم خزينة، مما يقلل عدد الأسهم المتبقية للتداول في السوق ويعدل هيكل حقوق الملكية في الميزانية العمومية."
   },
+  "“بايونيرز بروبرتيز” تشتري مليون سهم خزينه": {
+    "meaning": "This transaction reallocates corporate liquidity to purchase the company's own equity from the open market, absorbing one million shares into treasury stock, which reduces the free float and removes those voting and dividend rights.",
+    "meaning_ar": "تعيد هذه العملية توجيه السيولة النقدية للشركة للاستحواذ على أسهمها من السوق المفتوح، مما يدرج مليون سهم كأسهُم خزينة ويقلص عدد الأسهم حرة التداول مع تعليق حقوق التصويت وتوزيعات الأرباح المرتبطة بها."
+  },
   "“بوست ايتالياني” تستحوذ علي 66.6% من “تيليكوم ايطاليا”": {
     "meaning": "Acquiring a 66.6% majority stake gives Poste Italiane operational and strategic control over Telecom Italia, integrating telecommunications assets into its broader corporate network and consolidating the entity's financial statements.",
     "meaning_ar": "يمنح الاستحواذ على حصة أغلبية بنسبة 66.6% شركة «بوست إيتالياني» السيطرة التشغيلية والاستراتيجية الكاملة على «تيليكوم إيطاليا»، مما يدمج أصول الاتصالات ضمن شبكة أعمالها ويوحد القوائم المالية للكيانين."
@@ -6940,6 +6952,10 @@
   "“حمايه المنافسه” يقر استحواذ “جينيل انرجي” البريطانيه علي “اصول كابريكورن”": {
     "meaning": "Regulatory clearance permits the legal transfer of Capricorn Energy's upstream assets to Genel Energy, consolidating ownership and operational control under the acquiring entity within the local oil and gas sector.",
     "meaning_ar": "تتيح الموافقة التنظيمية نقل الملكية القانونية لأصول الاستكشاف والإنتاج من 'كابريكورن إنرجي' إلى 'جينيل إنرجي'، مما يدمج السيطرة التشغيلية وإدارة الأصول تحت مظلة الشركة المستحوذة داخل قطاع النفط والغاز المحلي."
+  },
+  "“رايه القابضه” تشتري 1.45 مليون سهم خزينه": {
+    "meaning": "This transaction reallocates corporate cash reserves to absorb outstanding equity into the company's balance sheet, reducing the total volume of shares actively circulating in the market.",
+    "meaning_ar": "تُحوّل هذه العملية جزءاً من السيولة النقدية للشركة لحيازة أسهمها المصدرة كأصول خزينة، مما يخفّض كمية الأسهم المتاحة للتداول الحر في السوق."
   },
   "“رواد” تتكبد خساير 7.6 مليون جنيه في النصف الاول": {
     "meaning": "The company registers a net loss of EGP 7.6 million for the first half of the year, reflecting total operational and financing expenses that exceed generated revenues during the six-month period.",
