@@ -461,5 +461,23 @@ class ProvenanceTest(unittest.TestCase):
                 self.assertGreater(row["median_volume_20"], 0, row["ticker"])
 
 
+class TheDailyBuild(unittest.TestCase):
+    """Where publish-app-data rebuilds this table, and why before its tests."""
+
+    WORKFLOW = REPO / ".github" / "workflows" / "publish-app-data.yml"
+
+    def test_the_table_is_rebuilt_before_the_tests_read_it(self):
+        """The tests above read the table as the last commit left it, which
+        only this job's rebuild replaces. Read as committed, one undated row
+        failed every run before its rebuild on 15 Sep 2026 (34971269319,
+        34990199243), and so did a listing publish-prices added to the market
+        file before the table had it (34966943749)."""
+        text = self.WORKFLOW.read_text(encoding="utf-8")
+        rebuild = text.index("python3 scripts/build_measures.py")
+        self.assertLess(rebuild, text.index("python3 -m unittest discover"),
+                        "the tests would hold an earlier commit's table again")
+        self.assertLess(rebuild, text.index("name: Rebuild published data"))
+
+
 if __name__ == "__main__":
     unittest.main()

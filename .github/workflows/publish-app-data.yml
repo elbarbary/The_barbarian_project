@@ -271,6 +271,26 @@ jobs:
             echo "::warning title=Directory ratios re-folded::The committed directory disagreed with its review documents. Folded again before the tests; the rebuild publishes the repair."
           fi
 
+      # The measures table re-derived from the committed documents, before
+      # the tests hold it to them, for the same reason as the fold above.
+      #
+      # On 15 Sep 2026 the table on main carried NBCC, a listing with no
+      # sessions yet, with a close and no date, and runs 34971269319 and
+      # 34990199243 failed on it without reaching the rebuild. The table can
+      # also fall behind with nobody's bug: publish-prices added NBCC to
+      # market.json at 12:02 (8f75a66b0), and run 34966943749 failed its
+      # cardinality test four minutes later against a table built before the
+      # listing reached main. It recovered only because a run already in
+      # flight committed a newer table. With none in flight, every run after
+      # it would have failed the same way.
+      #
+      # About a second, no network. It writes this runner's checkout, and the
+      # rebuild writes the table again. A builder that leaves a row undated
+      # or cuts the market still fails the tests; what they stop failing on
+      # is a table an earlier commit left behind.
+      - name: Rebuild the measures table before testing it
+        run: python3 scripts/build_measures.py
+
       # The parsers these tests cover read filed financial figures. A silent
       # regression there publishes a wrong number about a real company rather
       # than crashing, so they run before anything is written.
