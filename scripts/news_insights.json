@@ -87,6 +87,10 @@
     "meaning": "The expansion in export volumes to Greece increases bilateral trade turnover and reflects higher foreign currency inflows from outbound shipments into the balance of trade.",
     "meaning_ar": "تؤدي زيادة حجم الصادرات المصرية إلى اليونان إلى رفع وتيرة التبادل التجاري الثنائي وتدفق النقد الأجنبي من الشحنات المصدرة ضمن الميزان التجاري."
   },
+  "17% نموا في اعداد السايحين الفرنسيين الوافدين لمصر خلال 7 اشهر": {
+    "meaning": "The 17% increase in inbound French tourists raises occupancy levels across Egyptian hospitality assets and expands foreign currency liquidity generated directly through tourism service operations.",
+    "meaning_ar": "تؤدي زيادة أعداد السائحين الفرنسيين الوافدين بنسبة 17% إلى رفع معدلات الإشغال في المنشآت الفندقية المصرية وزيادة تدفقات السيولة من النقد الأجنبي المتولدة عبر الخدمات السياحية."
+  },
   "2.96 تريليون جنيه حجم معاملات المحافظ الالكترونيه في النصف الاول بنمو 56%": {
     "meaning": "The recorded transaction volume reflects the operational processing of digital payments across the national mobile payment network, settling local currency transfers and merchant transactions electronically through licensed banking and fintech infrastructure.",
     "meaning_ar": "يعكس حجم المعاملات المسجل التشغيل الفعلي للمدفوعات الرقمية عبر شبكة محافظ الهاتف المحمول، وتسوية التحويلات النقدية ومدفوعات التجار إلكترونياً عبر البنية التحتية للبنوك وشركات التكنولوجيا المالية المرخصة."
@@ -2755,6 +2759,10 @@
     "meaning": "A widening yield spread reflects divergent monetary policy regimes between the US Federal Reserve and the People's Bank of China, altering relative debt-service costs and global capital allocations across sovereign and corporate fixed-income markets.",
     "meaning_ar": "يعكس اتساع الفارق في عوائد السندات تباين السياسات النقدية بين الفيدرالي الأمريكي وبنك الشعب الصيني، مما يغير تكاليف خدمة الدين النسبية وتوزيعات السيولة في أسواق أدوات الدخل الثابت عالمياً."
   },
+  "الفاو تدعم بلدان الشرق الادني وشمال افريقيا لتعزيز رصد مقاومه الميكروبات للمضادات الحيويه": {
+    "meaning": "This initiative provides technical frameworks and surveillance standards for food and agricultural producers, establishing testing protocols and compliance requirements for veterinary antimicrobial usage across regional supply chains.",
+    "meaning_ar": "توفر هذه المبادرة أطراً فنية ومعايير رقابية لمنتجي الأغذية والقطاع الزراعي، حيث تحدد بروتوكولات الفحص ومتطلبات الامتثال لاستخدام مضادات الميكروبات البيطرية عبر سلاسل الإمداد الإقليمية."
+  },
   "الفايده علي الرهن العقاري الامريكي تصعد لاعلي مستوي منذ يونيو 2025": {
     "meaning": "Higher US mortgage rates raise the direct cost of borrowing and debt servicing for property buyers, tightening financing conditions across the residential real estate lending market.",
     "meaning_ar": "يؤدي ارتفاع أسعار الفائدة على الرهن العقاري الأمريكي إلى زيادة التكلفة المباشرة للاقتراض وخدمة الدين لمشتري العقارات، مما يشدد شروط التمويل في سوق الإقراض العقاري السكني."
@@ -3411,6 +3419,10 @@
     "meaning": "Increased government borrowing requirements to fund defense expenditure expand sovereign debt issuance in the primary market, which generates yield volatility across sovereign bond markets.",
     "meaning_ar": "تؤدي زيادة متطلبات الاقتراض الحكومي لتمويل الإنفاق الدفاعي إلى ارتفاع حجم إصدارات الديون السيادية في السوق الأولية، وهو ما يولد تقلبات في عوائد وأسعار السندات الحكومية."
   },
+  "بنك اوف امريكا يتوقع انخفاض رسوم الخدمات المصرفيه الاستثماريه 10% خلال الربع الثالث": {
+    "meaning": "Investment banking fees stem from advisory on mergers, acquisitions, debt issuance, and equity underwriting. A contraction in these fees reflects lower deal flow and underwriting volumes across corporate finance operations during the period.",
+    "meaning_ar": "تتولد رسوم الخدمات المصرفية الاستثمارية من عمليات الاستشارات الخاصة بالاندماج والاستحواذ وتغطية الاكتتابات وإصدارات الديون؛ ويعكس تراجع هذه الرسوم انخفاض حجم ونشاط الصفقات المنفذة في أسواق المال وأنشطة تمويل الشركات خلال الفترة."
+  },
   "بنك اوف امريكا يتوقع صعود خام برنت الي 83 دولارا": {
     "meaning": "Changes in global Brent crude prices directly alter domestic fuel subsidy allocations, industrial feedstock costs, and the foreign currency expenditure required for petroleum imports.",
     "meaning_ar": "تؤثر تغيرات أسعار خام برنت عالمياً بشكل مباشر على مخصصات دعم الوقود المحلية، وتكاليف مدخلات الإنتاج الصناعي، وحجم الإنفاق بالنقد الأجنبي الموجه لاستيراد المواد البترولية."
@@ -3619,6 +3631,10 @@
   "تراجع الاسهم الاوروبيه مع ارتفاع عوايد السندات السياديه": {
     "meaning": "A rise in sovereign bond yields increases benchmark risk-free interest rates, which raises the discount rate applied to corporate equity valuations and increases borrowing costs across capital markets.",
     "meaning_ar": "يؤدي ارتفاع عوائد السندات السيادية إلى زيادة أسعار الفائدة الخالية من المخاطر القياسية، مما يرفع معدل الخصم المطبق في تقييمات أسهم الشركات ويزيد من تكاليف الاقتراض في أسواق المال."
+  },
+  "تراجع الاسهم الاوروبيه ونظيرتها البريطانيه عند ادني مستوي في شهرين": {
+    "meaning": "Declines in European and British benchmark indices reflect valuation compressions and net capital outflows driven by underlying regional macroeconomic data and corporate earnings results.",
+    "meaning_ar": "يعكس تراجع المؤشرات القياسية الأوروبية والبريطانية انخفاضاً في التقييمات وتدفقات رأسمالية خارجة مدفوعة بالبيانات الاقتصادية الكلية ونتائج أرباح الشركات في تلك الأسواق."
   },
   "تراجع الاسهم اليابانيه مع ارتفاع الين لاعلي مستوياته منذ فبراير": {
     "meaning": "A stronger yen reduces the value of Japanese exporters' foreign earnings when converted back into the local currency and raises the price of Japanese goods in international markets, which puts downward pressure on major equity indices.",
@@ -4696,6 +4712,10 @@
     "meaning": "Divergence in opening exchange rates reflects localized liquidity conditions and varying foreign currency inventory levels across individual commercial banks in the interbank market.",
     "meaning_ar": "يعكس تباين أسعار الصرف في بداية التعاملات مستويات السيولة المحلية واختلاف أرصدة النقد الأجنبي المتاحة لدى البنوك التجارية في سوق الإنتربنك."
   },
+  "سعر الريال السعودي في مصر اليوم الثلاثاء 15/9/2026.. ختام التعاملات": {
+    "meaning": "Official end-of-day foreign exchange quotations establish the clearing rate for cross-border settlements, personal remittances, and religious travel transactions denominated in Saudi Riyals.",
+    "meaning_ar": "تحدد أسعار الصرف الرسمية في ختام التعاملات اليومية سعر التسوية المعتمد للتحويلات النقدية الخارجية، والمعاملات التجارية، ونفقات السفر المقومة بالريال السعودي."
+  },
   "سعر الريال السعودي في مصر اليوم الثلاثاء 8/9/2026.. ختام التعاملات": {
     "meaning": "Official end-of-day foreign exchange rate publications reflect the daily settlement prices for the Saudi Riyal against the Egyptian Pound across the banking sector, determining transaction costs for bilateral trade, remittances, and travel expenses.",
     "meaning_ar": "تعكس أسعار الصرف المنشورة في ختام التعاملات أسعار التسوية اليومية للريال السعودي مقابل الجنيه المصري في القطاع المصرفي، وتحدد تكاليف المعاملات للتجارة البينية والتحويلات ونفقات السفر."
@@ -4775,6 +4795,10 @@
   "سعر اليورو في مصر اليوم الثلاثاء 15/9/2026": {
     "meaning": "The daily Euro-to-EGP exchange rate establishes the foreign currency clearing benchmark for bilateral trade with European markets, determining import settlement costs and corporate foreign exchange revaluations across the banking sector.",
     "meaning_ar": "يحدد سعر صرف اليورو اليومي مقابل الجنيه المصري معيار المقاصة لتدفقات التجارة البينية مع الأسواق الأوروبية، وتكاليف تسوية عقود الاستيراد وإعادة تقييم التزامات العملة الأجنبية في القطاع المصرفي."
+  },
+  "سعر اليورو في مصر اليوم الثلاثاء 15/9/2026.. الختام": {
+    "meaning": "Official end-of-day foreign exchange quotations establish the clearing prices for euro-denominated banking transactions, cross-border commercial settlements, and corporate currency revaluations.",
+    "meaning_ar": "تحدد أسعار الصرف الرسمية لليورو في ختام التعاملات أسعار المقاصة للعمليات المصرفية، والتسويات التجارية الخارجية، وإعادة تقييم المراكز المالية للشركات بالعملات الأجنبية."
   },
   "سعر اليورو في مصر اليوم الثلاثاء 8/9/2026.. ارتفاع جديد": {
     "meaning": "An appreciation of the Euro against the Egyptian Pound raises the local currency cost of European imported goods and raw materials, while increasing the nominal debt service obligations for entities holding euro-denominated liabilities.",
@@ -6553,6 +6577,10 @@
     "meaning": "This operational coordination establishes a centralized framework across government entities for official information disclosure and public communication channels.",
     "meaning_ar": "يضع هذا التنسيق المؤسسي إطار عمل مركزي بين الجهات الحكومية للإفصاح عن المعلومات الرسمية وإدارة قنوات التواصل الإعلامي."
   },
+  "وزاره الزراعه تعتمد السياسه الصنفيه للقمح لموسم 2026/2027 لزياده الانتاجيه": {
+    "meaning": "The Ministry of Agriculture sets the varietal zoning policy for wheat, which allocates specific certified seed varieties to designated agricultural zones based on climate suitability and pest resistance profiles.",
+    "meaning_ar": "تحدد وزارة الزراعة السياسة الصنفية لمحصول القمح، والتي تنظم توزيع أصناف معتمدة محددة من التقاوي على مناطق جغرافية معينة وفقاً للملاءمة المناخية ومقاومة الآفات."
+  },
   "وزاره الزراعه: انطلاق حصاد الذره الشاميه بتوقعات انتاجيه تتجاوز 8 ملايين طن": {
     "meaning": "The commencement of the domestic maize harvest directly increases the physical supply of raw grain available to local feed manufacturers and poultry operations, serving as an operational domestic alternative to imported bulk grain.",
     "meaning_ar": "يؤدي انطلاق موسم حصاد الذرة الشامية محلياً إلى توفير إمدادات مباشرة من الحبوب لمصانع الأعلاف ومنشآت الدواجن، لتمثل بديلاً تشغيلياً محلياً للشحنات المستوردة."
@@ -6761,6 +6789,10 @@
     "meaning": "Government inspection of strategic medical reserves tracks supply chain fulfillment, procurement cycles, and operational inventory levels across public healthcare networks.",
     "meaning_ar": "المتابعة الحكومية للمخزون الاستراتيجي للمستلزمات الطبية ترصد مستويات التوريد وجداول الشراء والجاهزية التشغيلية للمخازن ضمن سلاسل إمداد القطاع الصحي."
   },
+  "وزير الصحه يفتتح موتمر ومعرض ايجي هيلث الدولي بحضور 300 شركه محليه وعالميه": {
+    "meaning": "Trade exhibitions of this scale function as direct commercial platforms where healthcare and pharmaceutical companies negotiate procurement contracts, display medical technologies, and establish bilateral supply agreements.",
+    "meaning_ar": "تعمل المعارض التجارية بهذا الحجم كمنصات تجارية مباشرة تتفاوض من خلالها شركات الرعاية الصحية والأدوية على عقود التوريد، وتعرض التجهيزات والتقنيات الطبية، وتبرم اتفاقيات التوزيع المشترك."
+  },
   "وزير الصحه: المجلس الوطني للتعليم منصه لدعم تكامل البحث العلمي والابتكار": {
     "meaning": "The institutional framework links state academic research directly to industrial applications within the healthcare and pharmaceutical sectors, establishing centralized governance for domestic medical research and development assets.",
     "meaning_ar": "يربط هذا الإطار المؤسسي بين الأبحاث الأكاديمية الحكومية والتطبيقات الصناعية في قطاعي الرعاية الصحية والأدوية، مما ينشئ حوكمة مركزية لأصول البحث والتطوير الطبي محلياً."
@@ -6804,6 +6836,10 @@
   "وزير الصناعه يصدر قرارا بتكليف احمد رزق رييسا لمصلحه الكفايه الانتاجيه والتدريب المهني": {
     "meaning": "This leadership appointment places management of the government entity responsible for vocational training centers and technical workforce development under new executive oversight within the Ministry of Industry.",
     "meaning_ar": "يضع هذا القرار إدارة الجهة الحكومية المسؤولة عن مراكز التدريب المهني وتأهيل العمالة الفنية تحت إشراف تنفيذي جديد تابع لوزارة الصناعة."
+  },
+  "وزير الصناعه يكلف احمد رزق برياسه مصلحه الكفايه الانتاجيه والتدريب المهني": {
+    "meaning": "The Productivity and Vocational Training Department operates government technical training centers that supply skilled technical labor to domestic industrial facilities, making this administrative appointment an operational leadership change over state vocational curricula and workforce development programs.",
+    "meaning_ar": "تتولى مصلحة الكفاية الإنتاجية والتدريب المهني إدارة مراكز التدريب الفني الحكومية التي تمد المنشآت الصناعية المحلية بالعمالة الفنية المؤهلة، ويمثل هذا التكليف تغييراً في القيادة التنفيذية المسؤولة عن برامج التدريب المهني وتأهيل الكوادر للقطاع الصناعي."
   },
   "وزير الصناعه: الشركات الصغيره والمتوسطه محرك رييسي للتنميه المستدامه": {
     "meaning": "Small and medium-sized enterprises (SMEs) function as feeder suppliers and subcontracting partners within industrial supply chains, providing operational inputs to larger manufacturing entities.",
