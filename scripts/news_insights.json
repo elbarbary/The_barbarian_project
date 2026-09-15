@@ -155,6 +155,10 @@
     "meaning": "This marks the ex-dividend record date, establishing that shareholders holding the stock at the close of trading on September 30 are entitled to the cash distribution of 2.89 EGP per share, after which the stock trades ex-dividend and the corporate cash balance is adjusted accordingly.",
     "meaning_ar": "يحدد هذا تاريخ نهاية الحق في التوزيع النقدي، حيث يستحق حاملو السهم بنهاية جلسة تداول 30 سبتمبر صرف كوبون بقيمة 2.89 جنيه للسهم، ليتداول السهم بعد ذلك بدون الحق مع تسوية الرصيد النقدي للشركة وفقاً لقيمة التوزيعات الإجمالية."
   },
+  "32.8 الف طن بضايع عامه صادرات ميناء دمياط خلال 24 ساعه": {
+    "meaning": "The figures reflect the daily cargo throughput at Damietta Port, which operates as an exit node for outbound bulk and general freight within Egypt's maritime trade network.",
+    "meaning_ar": "تعكس هذه الأرقام حركة التداول اليومي للبضائع في ميناء دمياط، والذي يمثل نقطة تفريغ وشحن رئيسية لتدفقات الصادرات العامة عبر شبكة التجارة البحرية المصرية."
+  },
   "34 الف طن صادرات البضايع العامه بميناء الاسكندريه خلال 24 ساعه": {
     "meaning": "This daily operational throughput reflects current outbound general cargo handling capacity and logistics flow through the Port of Alexandria.",
     "meaning_ar": "يعكس حجم التداول اليومي هذا الطاقة التشغيلية الحالية لمناولة بضائع الصب العام وحركة التدفقات اللوجستية للصادرات عبر ميناء الإسكندرية."
@@ -2114,6 +2118,10 @@
   "التجاره بين مصر ودول البريكس تسجل 36.7 مليار دولار اول 6 شهور من 2026": {
     "meaning": "This bilateral trade volume reflects the current scale of Egypt's cross-border supply chain flows with BRICS economies, directly involving foreign exchange settlement channels and port logistics throughput.",
     "meaning_ar": "يعكس حجم التجارة الثنائية النطاق الحالي لحركة سلاسل الإمداد العابرة للحدود بين مصر ودول التكتل، ويرتبط مباشرةً بقنوات التسوية بالنقد الأجنبي وحجم التداول اللوجستي في الموانئ."
+  },
+  "التجاري الدولي يستهدف 10 ملايين عميل للبنك الرقمي في مصر خلال 5 سنوات": {
+    "meaning": "Commercial International Bank (CIB) is establishing a digital banking platform with an operational target of onboarding 10 million users over a five-year period, shifting customer acquisition and service delivery from physical branches to digital infrastructure.",
+    "meaning_ar": "يؤسس البنك التجاري الدولي منصة مصرفية رقمية بمستهدف تشغيلي يبلغ 10 ملايين مستخدم خلال 5 سنوات، مما يحول عمليات استقطاب العملاء وتقديم الخدمات من الفروع التقليدية إلى البنية التحتية الرقمية."
   },
   "التجميع المحلي يقود مبيعات الاتوبيسات للنمو بنسبه 88% خلال 7 اشهر (جراف)": {
     "meaning": "Domestic assembly operations supply the local commercial vehicle market, substituting finished imports with imported completely knocked down (CKD) components assembled in Egyptian manufacturing facilities.",
