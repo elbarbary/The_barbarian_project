@@ -4,14 +4,15 @@
   "en": "Pyramisa Hotels",
   "ar": "بيراميزا للفنادق والقرى السياحية - بيراميزا"
  },
- "sector": "Consumer Services",
+ "sector": "Travel & Leisure",
+ "sector_ar": "سياحة وترفيه",
  "market": {
-  "last_close": 347,
+  "last_close": 345,
   "date": "2026-09-15",
-  "open": 350.05,
-  "high": 359.56,
-  "low": 345.1,
-  "volume": 3895
+  "open": 347,
+  "high": 347,
+  "low": 345,
+  "volume": 57
  },
  "price_history": [
   {
@@ -1319,18 +1320,20 @@
   "shares_outstanding": 25350000,
   "free_float": 0.49403400000000003,
   "float_shares": 12523761.9,
-  "perf_1w": -2.9940454558161584,
-  "perf_1m": -14.019525249021255,
-  "perf_3m": 57.73444247465794,
-  "avg_volume_30d": 6713.133333333342,
-  "relative_volume_10d": 0.8214180269096123,
+  "perf_1w": -1.1744485820681818,
+  "perf_1m": -11.538461538461538,
+  "perf_3m": 55.75620767494357,
+  "avg_volume_30d": 6523.733333333341,
+  "relative_volume_10d": 0.011976047904191617,
   "median_volume_20d": 5347.5,
   "rv20": 0.7283777466105656,
   "normal_value_30d": 1894801.88,
   "five_session_change": -0.6015468347178476,
   "history_bars": 120,
-  "market_cap": 8976688264,
-  "market_cap_source": "scan"
+  "market_cap": 8796450000.0,
+  "market_cap_source": "EGX",
+  "trades": 6,
+  "turnover": 147025
  },
  "financials": {
   "annual": [

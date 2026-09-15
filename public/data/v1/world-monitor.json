@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-15T07:33:10Z",
+ "generated": "2026-09-15T08:21:39Z",
  "basis": "A move is placed against its own two years of same-length moves — a record of what has already happened, never a statement about the next one. Each list of companies is the complete set that filed the figure, in alphabetical order, with the filing beside it. Nothing here says what any of it means for a share price.",
  "basisAr": "تُقاس كل حركة مقابل سنتين من حركات بالطول نفسه — سجل لما حدث بالفعل، وليس قولاً عما سيحدث. وكل قائمة شركات هي المجموعة الكاملة التي أودعت الرقم، بالترتيب الأبجدي، ومعها الإفصاح الذي جاء منه. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
  "windows": [
@@ -103,28 +103,28 @@
    "group": "currencies",
    "source": "investing.com",
    "asOf": "2026-09-15",
-   "close": 59.76,
+   "close": 60.09,
    "moves": {
     "week": {
-     "change": 0.35,
+     "change": 0.91,
      "against": {
-      "percentile": 27.2,
+      "percentile": 58.9,
       "observations": 518,
-      "typical": 0.71
+      "typical": 0.72
      }
     },
     "month": {
-     "change": 2.17,
+     "change": 2.74,
      "against": {
-      "percentile": 57.6,
+      "percentile": 69.7,
       "observations": 502,
       "typical": 1.85
      }
     },
     "quarter": {
-     "change": 4.38,
+     "change": 4.96,
      "against": {
-      "percentile": 62.8,
+      "percentile": 65.7,
       "observations": 460,
       "typical": 3.23
      }
@@ -137,28 +137,28 @@
    "group": "currencies",
    "source": "investing.com",
    "asOf": "2026-09-15",
-   "close": 69.83,
+   "close": 70.11,
    "moves": {
     "week": {
-     "change": 0.71,
+     "change": 1.11,
      "against": {
-      "percentile": 48.6,
+      "percentile": 68.1,
       "observations": 518,
       "typical": 0.72
      }
     },
     "month": {
-     "change": 2.12,
+     "change": 2.53,
      "against": {
-      "percentile": 54.6,
+      "percentile": 63.9,
       "observations": 502,
       "typical": 1.88
      }
     },
     "quarter": {
-     "change": 5.71,
+     "change": 6.13,
      "against": {
-      "percentile": 75.9,
+      "percentile": 77.2,
       "observations": 460,
       "typical": 3.54
      }
@@ -171,28 +171,28 @@
    "group": "currencies",
    "source": "investing.com",
    "asOf": "2026-09-15",
-   "close": 13.8,
+   "close": 13.86,
    "moves": {
     "week": {
-     "change": 1.25,
+     "change": 1.69,
      "against": {
-      "percentile": 83.0,
+      "percentile": 89.4,
       "observations": 518,
       "typical": 0.4
      }
     },
     "month": {
-     "change": 2.53,
+     "change": 2.97,
      "against": {
-      "percentile": 84.1,
+      "percentile": 87.3,
       "observations": 502,
       "typical": 1.1
      }
     },
     "quarter": {
-     "change": 3.76,
+     "change": 4.21,
      "against": {
-      "percentile": 67.4,
+      "percentile": 72.6,
       "observations": 460,
       "typical": 2.59
      }
@@ -205,28 +205,28 @@
    "group": "currencies",
    "source": "investing.com",
    "asOf": "2026-09-15",
-   "close": 14.12,
+   "close": 14.17,
    "moves": {
     "week": {
-     "change": 1.29,
+     "change": 1.65,
      "against": {
-      "percentile": 83.4,
+      "percentile": 88.0,
       "observations": 518,
       "typical": 0.43
      }
     },
     "month": {
-     "change": 2.62,
+     "change": 2.98,
      "against": {
-      "percentile": 85.7,
+      "percentile": 87.3,
       "observations": 502,
       "typical": 1.16
      }
     },
     "quarter": {
-     "change": 3.9,
+     "change": 4.27,
      "against": {
-      "percentile": 69.3,
+      "percentile": 72.6,
       "observations": 460,
       "typical": 2.58
      }
@@ -239,28 +239,28 @@
    "group": "currencies",
    "source": "investing.com",
    "asOf": "2026-09-15",
-   "close": 51.84,
+   "close": 52.05,
    "moves": {
     "week": {
-     "change": 0.93,
+     "change": 1.34,
      "against": {
-      "percentile": 80.6,
+      "percentile": 88.3,
       "observations": 692,
       "typical": 0.33
      }
     },
     "month": {
-     "change": 2.92,
+     "change": 3.34,
      "against": {
-      "percentile": 87.7,
+      "percentile": 89.6,
       "observations": 676,
       "typical": 1.0
      }
     },
     "quarter": {
-     "change": 2.21,
+     "change": 2.62,
      "against": {
-      "percentile": 56.0,
+      "percentile": 64.5,
       "observations": 634,
       "typical": 2.03
      }
@@ -273,28 +273,28 @@
    "group": "world",
    "source": "investing.com",
    "asOf": "2026-09-15",
-   "close": 6.39,
+   "close": 6.36,
    "moves": {
     "week": {
-     "change": -7.26,
+     "change": -7.69,
      "against": {
-      "percentile": 94.4,
+      "percentile": 95.2,
       "observations": 516,
       "typical": 2.13
      }
     },
     "month": {
-     "change": -1.69,
+     "change": -2.15,
      "against": {
-      "percentile": 17.8,
+      "percentile": 23.6,
       "observations": 500,
       "typical": 4.9
      }
     },
     "quarter": {
-     "change": 0.31,
+     "change": -0.16,
      "against": {
-      "percentile": 1.1,
+      "percentile": 0.9,
       "observations": 458,
       "typical": 7.88
      }
@@ -306,30 +306,30 @@
    "label": "FTSE 100",
    "group": "world",
    "source": "investing.com",
-   "asOf": "2026-09-14",
-   "close": 10697.57,
+   "asOf": "2026-09-15",
+   "close": 10602.97,
    "moves": {
     "week": {
-     "change": -1.15,
+     "change": -1.93,
      "against": {
-      "percentile": 61.8,
-      "observations": 500,
+      "percentile": 81.8,
+      "observations": 501,
       "typical": 0.91
      }
     },
     "month": {
-     "change": -0.7,
+     "change": -1.37,
      "against": {
-      "percentile": 21.1,
-      "observations": 484,
+      "percentile": 34.4,
+      "observations": 485,
       "typical": 2.11
      }
     },
     "quarter": {
-     "change": 1.94,
+     "change": 0.9,
      "against": {
-      "percentile": 24.9,
-      "observations": 442,
+      "percentile": 11.5,
+      "observations": 443,
       "typical": 4.55
      }
     }
@@ -375,28 +375,28 @@
    "group": "world",
    "source": "investing.com",
    "asOf": "2026-09-15",
-   "close": 103.11,
+   "close": 103.8,
    "moves": {
     "week": {
-     "change": 7.35,
+     "change": 8.07,
      "against": {
-      "percentile": 80.9,
+      "percentile": 84.4,
       "observations": 513,
       "typical": 3.18
      }
     },
     "month": {
-     "change": 22.18,
+     "change": 23.0,
      "against": {
-      "percentile": 92.2,
+      "percentile": 92.6,
       "observations": 497,
       "typical": 5.48
      }
     },
     "quarter": {
-     "change": 37.81,
+     "change": 38.73,
      "against": {
-      "percentile": 86.8,
+      "percentile": 87.3,
       "observations": 455,
       "typical": 9.36
      }
@@ -443,28 +443,28 @@
    "group": "metals",
    "source": "investing.com",
    "asOf": "2026-09-15",
-   "close": 4290.67,
+   "close": 4266.58,
    "moves": {
     "week": {
-     "change": -2.52,
+     "change": -3.07,
      "against": {
-      "percentile": 61.9,
+      "percentile": 70.1,
       "observations": 515,
       "typical": 1.95
      }
     },
     "month": {
-     "change": -1.01,
+     "change": -1.57,
      "against": {
-      "percentile": 15.0,
+      "percentile": 22.2,
       "observations": 499,
       "typical": 4.2
      }
     },
     "quarter": {
-     "change": 3.13,
+     "change": 2.56,
      "against": {
-      "percentile": 19.3,
+      "percentile": 17.1,
       "observations": 457,
       "typical": 11.51
      }
@@ -477,28 +477,28 @@
    "group": "metals",
    "source": "investing.com",
    "asOf": "2026-09-15",
-   "close": 63.17,
+   "close": 62.73,
    "moves": {
     "week": {
-     "change": -6.11,
+     "change": -6.76,
      "against": {
-      "percentile": 74.0,
+      "percentile": 78.3,
       "observations": 515,
       "typical": 3.45
      }
     },
     "month": {
-     "change": -0.24,
+     "change": -0.93,
      "against": {
-      "percentile": 2.4,
+      "percentile": 8.4,
       "observations": 499,
       "typical": 6.52
      }
     },
     "quarter": {
-     "change": -2.71,
+     "change": -3.39,
      "against": {
-      "percentile": 9.2,
+      "percentile": 11.4,
       "observations": 457,
       "typical": 14.89
      }
@@ -510,32 +510,32 @@
   {
    "id": "EGX30",
    "label": "EGX 30",
-   "asOf": "2026-09-14",
-   "close": 54796.6,
+   "asOf": "2026-09-15",
+   "close": 54623.4,
    "sessions": 203,
    "moves": {
     "week": {
-     "change": -3.23,
+     "change": -2.76,
      "against": {
-      "percentile": 72.2,
+      "percentile": 64.6,
       "observations": 198,
-      "typical": 1.89
+      "typical": 1.92
      }
     },
     "month": {
-     "change": -1.89,
+     "change": -1.43,
      "against": {
-      "percentile": 22.5,
+      "percentile": 20.3,
       "observations": 182,
-      "typical": 4.12
+      "typical": 4.07
      }
     },
     "quarter": {
-     "change": 5.39,
+     "change": 4.43,
      "against": {
-      "percentile": 25.0,
+      "percentile": 17.9,
       "observations": 140,
-      "typical": 9.29
+      "typical": 9.22
      }
     }
    }
@@ -543,32 +543,32 @@
   {
    "id": "EGX70EWI",
    "label": "EGX 70",
-   "asOf": "2026-09-14",
-   "close": 20625.9,
+   "asOf": "2026-09-15",
+   "close": 20579,
    "sessions": 203,
    "moves": {
     "week": {
-     "change": -4.81,
+     "change": -3.84,
      "against": {
-      "percentile": 84.8,
+      "percentile": 71.7,
       "observations": 198,
       "typical": 2.24
      }
     },
     "month": {
-     "change": -4.66,
+     "change": -5.48,
      "against": {
-      "percentile": 37.4,
+      "percentile": 45.6,
       "observations": 182,
-      "typical": 5.93
+      "typical": 5.87
      }
     },
     "quarter": {
-     "change": 33.97,
+     "change": 33.22,
      "against": {
-      "percentile": 75.0,
+      "percentile": 72.9,
       "observations": 140,
-      "typical": 20.34
+      "typical": 20.95
      }
     }
    }
@@ -576,32 +576,32 @@
   {
    "id": "EGX100EWI",
    "label": "EGX 100",
-   "asOf": "2026-09-14",
-   "close": 27066.7,
+   "asOf": "2026-09-15",
+   "close": 27009.3,
    "sessions": 203,
    "moves": {
     "week": {
-     "change": -4.33,
+     "change": -3.59,
      "against": {
-      "percentile": 83.8,
+      "percentile": 72.7,
       "observations": 198,
       "typical": 2.16
      }
     },
     "month": {
-     "change": -3.38,
+     "change": -3.9,
      "against": {
-      "percentile": 36.3,
+      "percentile": 40.1,
       "observations": 182,
-      "typical": 5.34
+      "typical": 5.2
      }
     },
     "quarter": {
-     "change": 27.8,
+     "change": 27.21,
      "against": {
-      "percentile": 76.4,
+      "percentile": 72.9,
       "observations": 140,
-      "typical": 18.61
+      "typical": 18.69
      }
     }
    }
@@ -1009,7 +1009,7 @@
     {
      "ticker": "CPME",
      "name": "Catalyst Partners Middle East",
-     "sector": "Finance",
+     "sector": "Non-bank financial services",
      "borrowings": 783.907,
      "shortTerm": 415.51,
      "repricingWithinAYear": 53.0,
@@ -2014,7 +2014,7 @@
     {
      "ticker": "PRMH",
      "name": "Prime Holding",
-     "sector": "Finance",
+     "sector": "Non-bank financial services",
      "borrowings": 110.328,
      "shortTerm": 106.393,
      "repricingWithinAYear": 96.4,
@@ -4766,7 +4766,7 @@
     {
      "ticker": "CPME",
      "name": "Catalyst Partners Middle East",
-     "sector": "Finance",
+     "sector": "Non-bank financial services",
      "fxResult": 0.256,
      "netIncome": 117.083,
      "shareOfNetIncome": 0.2,
@@ -6348,7 +6348,7 @@
     {
      "ticker": "PHTV",
      "name": "Pyramisa Hotels",
-     "sector": "Consumer Services",
+     "sector": "Travel & Leisure",
      "fxResult": 20.246,
      "netIncome": 407.66,
      "shareOfNetIncome": 5.0,
@@ -6412,7 +6412,7 @@
     {
      "ticker": "PRMH",
      "name": "Prime Holding",
-     "sector": "Finance",
+     "sector": "Non-bank financial services",
      "fxResult": 1.96,
      "netIncome": 43.731,
      "shareOfNetIncome": 4.5,
@@ -6779,7 +6779,7 @@
     {
      "ticker": "TRTO",
      "name": "TransOceans Tours",
-     "sector": "Commercial Services",
+     "sector": "Travel & Leisure",
      "fxResult": 0.919,
      "netIncome": 1.41,
      "shareOfNetIncome": 65.2,
@@ -6900,52 +6900,52 @@
   }
  ],
  "foreignMoney": {
-  "asOf": "2026-09-15T10:15:22",
+  "asOf": "2026-09-15T10:59:47",
   "basis": "period to date, as published by the exchange",
   "source": "beta.egx.com.eg /api/bff/egx/investor-full-statistics",
   "byNationality": [
    {
     "party": "Egyptians",
     "party_ar": "مصريين",
-    "buy_percent": 94.06,
-    "sell_percent": 92.09,
-    "percent": 93.08,
-    "buy": 982449944.4575,
-    "sell": 961846149.0675,
-    "net": 20603795.39,
+    "buy_percent": 94.65,
+    "sell_percent": 91.17,
+    "percent": 92.91,
+    "buy": 19960374697.5902,
+    "sell": 19228270851.769,
+    "net": 732103845.8212,
     "combined": false
    },
    {
     "party": "Arab",
     "party_ar": "عرب",
-    "buy_percent": 2.33,
-    "sell_percent": 1.26,
-    "percent": 1.79,
-    "buy": 24338430.322,
-    "sell": 13139020.36,
-    "net": 11199409.962,
+    "buy_percent": 4.45,
+    "sell_percent": 7.77,
+    "percent": 6.11,
+    "buy": 939457635.028,
+    "sell": 1638133958.603,
+    "net": -698676323.575,
     "combined": false
    },
    {
     "party": "Non-Arab Foreigners",
     "party_ar": "أجانب",
-    "buy_percent": 3.61,
-    "sell_percent": 6.65,
-    "percent": 5.13,
-    "buy": 37681953.548,
-    "sell": 69485158.9,
-    "net": -31803205.352,
+    "buy_percent": 0.9,
+    "sell_percent": 1.06,
+    "percent": 0.98,
+    "buy": 189631729.446,
+    "sell": 223059251.6922,
+    "net": -33427522.2462,
     "combined": false
    },
    {
     "party": "Arabs & Foreigners",
     "party_ar": "عرب وأجانب",
-    "buy_percent": 5.94,
-    "sell_percent": 7.91,
-    "percent": 6.92,
-    "buy": 62020383.87,
-    "sell": 82624179.26,
-    "net": -20603795.39,
+    "buy_percent": 5.35,
+    "sell_percent": 8.83,
+    "percent": 7.09,
+    "buy": 1129089364.474,
+    "sell": 1861193210.2952,
+    "net": -732103845.8212,
     "combined": true
    }
   ],

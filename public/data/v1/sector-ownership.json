@@ -1,8 +1,8 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-15T07:37:55Z",
+ "generated": "2026-09-15T08:25:56Z",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
- "asOf": "2026-09-15T07:37:55+00:00",
+ "asOf": "2026-09-15T08:25:56+00:00",
  "basis": "A link is one listed company's filed stake in another, at the level the last form printed. Percentages belong to one company each and are never added together; sector totals are the market value of the stakes, which is money and can be.",
  "basisAr": "كل خط حصة مُفصح عنها لشركة مقيدة في شركة مقيدة أخرى، بالنسبة التي أثبتها آخر نموذج. النسب تخص شركة واحدة ولا تُجمع؛ إجماليات القطاعات بالقيمة السوقية للحصص، وهي مبالغ تُجمع.",
  "linkCount": 37,
@@ -21,7 +21,7 @@
    "heldSectorAr": "عقارات",
    "holder": "بنك قناة السويس",
    "percent": 9.7,
-   "value": 118712480.0,
+   "value": 117253600.0,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291024",
@@ -40,7 +40,7 @@
    "heldSectorAr": "سياحة وترفيه",
    "holder": "بنك قناة السويس",
    "percent": 9.73,
-   "value": 376350423.83,
+   "value": 381660573.65,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291439",
@@ -78,7 +78,7 @@
    "heldSectorAr": "أغذية و مشروبات و تبغ",
    "holder": "بنك فيصل الاسلامى المصرى",
    "percent": 34.72,
-   "value": 921737281.08,
+   "value": 935243366.29,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291352",
@@ -97,7 +97,7 @@
    "heldSectorAr": "خدمات مالية غير مصرفية",
    "holder": "بنك البركة - مصر",
    "percent": 7.632,
-   "value": 209727360.0,
+   "value": 211559040.0,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291259",
@@ -116,7 +116,7 @@
    "heldSectorAr": "منسوجات و سلع معمرة",
    "holder": "مصر الوطنية للصلب",
    "percent": 1.353,
-   "value": 238830841.46,
+   "value": 241980456.93,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "292045",
@@ -135,7 +135,7 @@
    "heldSectorAr": "أغذية و مشروبات و تبغ",
    "holder": "شركة قرة لمشروعات الطاقة والاستثمار",
    "percent": 34.5377,
-   "value": 390082598.88,
+   "value": 394392903.84,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "290997",
@@ -154,49 +154,11 @@
    "heldSectorAr": "خدمات مالية غير مصرفية",
    "holder": "شركه جولدن بيراميدز بلازا",
    "percent": 5.75,
-   "value": 53695800.0,
+   "value": 54234000.0,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291454",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341159_1.pdf"
-  },
-  {
-   "owner": "GTEX",
-   "ownerName": "G-TEX for Commercial and Industrial Investments S.A.E",
-   "ownerNameAr": "جيتكس للاستثمارات التجارية والصناعية",
-   "ownerSector": "Finance",
-   "ownerSectorAr": "Finance",
-   "held": "GTWL",
-   "heldName": "Golden Textiles & Clothes Wool",
-   "heldNameAr": "جولدن تكس للاصواف",
-   "heldSector": "Textile & Durables",
-   "heldSectorAr": "منسوجات و سلع معمرة",
-   "holder": "شركة جيتكس للاستثمارات التجاريه والصناعيه",
-   "percent": 48.946,
-   "value": 1639910502.7,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291604",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/341335_1.pdf"
-  },
-  {
-   "owner": "NAHO",
-   "ownerName": "Naeem Holding Co.",
-   "ownerNameAr": "النعيم القابضة للاستثمارات",
-   "ownerSector": "Finance",
-   "ownerSectorAr": "Finance",
-   "held": "NARE",
-   "heldName": "Naeem Real Estate Holding Group",
-   "heldNameAr": "مجموعة النعيم العقارية القابضة",
-   "heldSector": "Real Estate",
-   "heldSectorAr": "عقارات",
-   "holder": "شركة النعيم القابضة للاستثمارات",
-   "percent": 48.21,
-   "value": 1062972420.68,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291073",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/340800_1.pdf"
   },
   {
    "owner": "SAIB",
@@ -230,7 +192,7 @@
    "heldSectorAr": "أغذية و مشروبات و تبغ",
    "holder": "جدوى للتنمية الصناعية",
    "percent": 36.218,
-   "value": 680515720.61,
+   "value": 685860084.91,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291519",
@@ -249,7 +211,7 @@
    "heldSectorAr": "خدمات و منتجات صناعية وسيارات",
    "holder": "جدوى للتنمية الصناعية",
    "percent": 25.3,
-   "value": 1676651428.74,
+   "value": 1668268171.59,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291773",
@@ -268,7 +230,7 @@
    "heldSectorAr": "ورق ومواد تعبئة و تغليف",
    "holder": "جدوى للتنمية الصناعية",
    "percent": 17.79,
-   "value": 150014331.38,
+   "value": 154090807.77,
    "asOf": "2026-08-25",
    "basis": "trade",
    "filingId": "293882",
@@ -287,7 +249,7 @@
    "heldSectorAr": "خدمات مالية غير مصرفية",
    "holder": "اكت فاينانشال للاستشارات ش م م ACT FINANCIAL",
    "percent": 6.73,
-   "value": 2077426360.31,
+   "value": 2084639646.29,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "292394",
@@ -306,7 +268,7 @@
    "heldSectorAr": "خدمات مالية غير مصرفية",
    "holder": "شركة الملتقى العربي للاستثمارات",
    "percent": 68.4177,
-   "value": 1880118396.0,
+   "value": 1896538644.0,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291259",
@@ -325,7 +287,7 @@
    "heldSectorAr": "تجارة و موزعون",
    "holder": "بي انفستمنتس القابضه ش م م B INVESTMENTS HOLDING SAE",
    "percent": 40.0,
-   "value": 2696000000.0,
+   "value": 2756800000.0,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291703",
@@ -344,11 +306,30 @@
    "heldSectorAr": "خدمات مالية غير مصرفية",
    "holder": "بي انفستمنتس القابضه ش م م B INVESTMENTS HOLDING SAE",
    "percent": 68.58,
-   "value": 3331639818.29,
+   "value": 3426829527.38,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291425",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341104_1.pdf"
+  },
+  {
+   "owner": "NAHO",
+   "ownerName": "Naeem Holding Co.",
+   "ownerNameAr": "النعيم القابضة للاستثمارات",
+   "ownerSector": "Non-bank financial services",
+   "ownerSectorAr": "خدمات مالية غير مصرفية",
+   "held": "NARE",
+   "heldName": "Naeem Real Estate Holding Group",
+   "heldNameAr": "مجموعة النعيم العقارية القابضة",
+   "heldSector": "Real Estate",
+   "heldSectorAr": "عقارات",
+   "holder": "شركة النعيم القابضة للاستثمارات",
+   "percent": 48.21,
+   "value": 1059893126.3,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291073",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340800_1.pdf"
   },
   {
    "owner": "ODIN",
@@ -363,7 +344,7 @@
    "heldSectorAr": "خدمات مالية غير مصرفية",
    "holder": "شركة أودن للإستثمارات المالية.",
    "percent": 6.94,
-   "value": 31773721.21,
+   "value": 33173114.36,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291442",
@@ -382,7 +363,7 @@
    "heldSectorAr": "اتصالات و  اعلام و تكنولوجيا المعلومات",
    "holder": "شركة راية القابضة للاستثمارات المالية ش.م.م.",
    "percent": 61.71,
-   "value": 1181358715.11,
+   "value": 1189963825.42,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291775",
@@ -401,14 +382,14 @@
    "heldSectorAr": "رعاية صحية و ادوية",
    "holder": "السعودية المصرية للإستثمار والتمويل",
    "percent": 0.086,
-   "value": 17074538.03,
+   "value": 17415593.4,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291422",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341094_1.pdf"
   },
   {
-   "owner": "VLMRA",
+   "owner": "VLMR",
    "ownerName": "Valmore Holding",
    "ownerNameAr": "فالمور القابضة للاستثمار",
    "ownerSector": "Non-bank financial services",
@@ -420,7 +401,7 @@
    "heldSectorAr": "خدمات مالية غير مصرفية",
    "holder": "شركة فالمور القابضة للإستثمار",
    "percent": 24.99,
-   "value": 2382596580.0,
+   "value": 2407286700.0,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291528",
@@ -439,7 +420,7 @@
    "heldSectorAr": "عقارات",
    "holder": "شركة القاهرة للاسكان والتعمير (مجموعة مرتبطة )",
    "percent": 23.31,
-   "value": 1199616558.0,
+   "value": 1206201827.3,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291030",
@@ -458,7 +439,7 @@
    "heldSectorAr": "مقاولات و إنشاءات هندسية",
    "holder": "شركة مدينة مصر للإسكان والتعمير",
    "percent": 52.456,
-   "value": 1027109462.4,
+   "value": 1057512960.0,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291354",
@@ -477,7 +458,7 @@
    "heldSectorAr": "خدمات تعليمية",
    "holder": "بالم هيلز للتعمير ش م م",
    "percent": 32.446,
-   "value": 5768373423.34,
+   "value": 5692160397.11,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291103",
@@ -496,7 +477,7 @@
    "heldSectorAr": "عقارات",
    "holder": "شركة بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب ( PRE GROUP ) ش . م . م",
    "percent": 31.5,
-   "value": 1000146228.09,
+   "value": 1011843844.79,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291521",
@@ -515,7 +496,7 @@
    "heldSectorAr": "مقاولات و إنشاءات هندسية",
    "holder": "شركة بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب ( PRE GROUP ) ش . م . م",
    "percent": 60.01,
-   "value": 1109054279.58,
+   "value": 1136326106.12,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291530",
@@ -534,7 +515,7 @@
    "heldSectorAr": "عقارات",
    "holder": "شركة بايونيرز بروبرتيز للتنمية العمرانية بي ار اى جروب PRE Group",
    "percent": 5.688,
-   "value": 69301979.45,
+   "value": 69714491.23,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291441",
@@ -553,7 +534,7 @@
    "heldSectorAr": "عقارات",
    "holder": "شركة بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب ( PRE GROUP ) ش . م . م",
    "percent": 19.71,
-   "value": 1014347591.51,
+   "value": 1019915830.81,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291030",
@@ -572,11 +553,30 @@
    "heldSectorAr": "منسوجات و سلع معمرة",
    "holder": "الشركة العربية لحليج الاقطان",
    "percent": 1.071,
-   "value": 70814673.14,
+   "value": 68573946.98,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291190",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340899_1.pdf"
+  },
+  {
+   "owner": "GTEX",
+   "ownerName": "G-TEX for Commercial and Industrial Investments S.A.E",
+   "ownerNameAr": "جيتكس للاستثمارات التجارية والصناعية",
+   "ownerSector": "Textile & Durables",
+   "ownerSectorAr": "منسوجات و سلع معمرة",
+   "held": "GTWL",
+   "heldName": "Golden Textiles & Clothes Wool",
+   "heldNameAr": "جولدن تكس للاصواف",
+   "heldSector": "Textile & Durables",
+   "heldSectorAr": "منسوجات و سلع معمرة",
+   "holder": "شركة جيتكس للاستثمارات التجاريه والصناعيه",
+   "percent": 48.946,
+   "value": 1649977736.89,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291604",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341335_1.pdf"
   },
   {
    "owner": "KABO",
@@ -591,7 +591,7 @@
    "heldSectorAr": "منسوجات و سلع معمرة",
    "holder": "شركة النصر للملابس والمنسوجات كابو",
    "percent": 20.0,
-   "value": 1322402859.73,
+   "value": 1280559234.05,
    "asOf": "2026-08-19",
    "basis": "trade",
    "filingId": "293605",
@@ -610,7 +610,7 @@
    "heldSectorAr": "مواد البناء",
    "holder": "Misr Life Insurance Company",
    "percent": 9.37,
-   "value": 1935677088.0,
+   "value": 1983711456.0,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291369",
@@ -648,7 +648,7 @@
    "heldSectorAr": "بنوك",
    "holder": "MISR LIFE Insurance Co.",
    "percent": 7.27,
-   "value": 1203162215.73,
+   "value": 1215849339.27,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291091",
@@ -667,7 +667,7 @@
    "heldSectorAr": "خدمات تعليمية",
    "holder": "شركة مصر لتأمينات الحياة (مجموعة مرتبطة )",
    "percent": 8.67,
-   "value": 4851719688.6,
+   "value": 4809477367.8,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291368",
@@ -686,7 +686,7 @@
    "heldSectorAr": "أغذية و مشروبات و تبغ",
    "holder": "شركة مصر لتأمينات الحياة (مجموعة مرتبطة )",
    "percent": 9.07,
-   "value": 773583976.84,
+   "value": 789834657.25,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291099",
@@ -705,7 +705,7 @@
    "heldSectorAr": "عقارات",
    "holder": "شركة مصر لتأمينات الحياة (مجموعة مرتبطة )",
    "percent": 9.1,
-   "value": 468318776.4,
+   "value": 470889602.25,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291030",
@@ -719,7 +719,7 @@
    "toSector": "Real Estate",
    "toSectorAr": "عقارات",
    "links": 1,
-   "value": 118712480.0,
+   "value": 117253600.0,
    "valued": 1,
    "companies": [
     "NHPS"
@@ -731,7 +731,7 @@
    "toSector": "Travel & Leisure",
    "toSectorAr": "سياحة وترفيه",
    "links": 1,
-   "value": 376350423.83,
+   "value": 381660573.65,
    "valued": 1,
    "companies": [
     "SDTI"
@@ -755,7 +755,7 @@
    "toSector": "Food, Beverages and Tobacco",
    "toSectorAr": "أغذية و مشروبات و تبغ",
    "links": 1,
-   "value": 921737281.08,
+   "value": 935243366.29,
    "valued": 1,
    "companies": [
     "INFI"
@@ -767,7 +767,7 @@
    "toSector": "Non-bank financial services",
    "toSectorAr": "خدمات مالية غير مصرفية",
    "links": 1,
-   "value": 209727360.0,
+   "value": 211559040.0,
    "valued": 1,
    "companies": [
     "ATLC"
@@ -779,7 +779,7 @@
    "toSector": "Textile & Durables",
    "toSectorAr": "منسوجات و سلع معمرة",
    "links": 1,
-   "value": 238830841.46,
+   "value": 241980456.93,
    "valued": 1,
    "companies": [
     "ORWE"
@@ -791,7 +791,7 @@
    "toSector": "Food, Beverages and Tobacco",
    "toSectorAr": "أغذية و مشروبات و تبغ",
    "links": 1,
-   "value": 390082598.88,
+   "value": 394392903.84,
    "valued": 1,
    "companies": [
     "COSG"
@@ -803,34 +803,10 @@
    "toSector": "Non-bank financial services",
    "toSectorAr": "خدمات مالية غير مصرفية",
    "links": 1,
-   "value": 53695800.0,
+   "value": 54234000.0,
    "valued": 1,
    "companies": [
     "AFDI"
-   ]
-  },
-  {
-   "fromSector": "Finance",
-   "fromSectorAr": "Finance",
-   "toSector": "Textile & Durables",
-   "toSectorAr": "منسوجات و سلع معمرة",
-   "links": 1,
-   "value": 1639910502.7,
-   "valued": 1,
-   "companies": [
-    "GTWL"
-   ]
-  },
-  {
-   "fromSector": "Finance",
-   "fromSectorAr": "Finance",
-   "toSector": "Real Estate",
-   "toSectorAr": "عقارات",
-   "links": 1,
-   "value": 1062972420.68,
-   "valued": 1,
-   "companies": [
-    "NARE"
    ]
   },
   {
@@ -851,7 +827,7 @@
    "toSector": "Food, Beverages and Tobacco",
    "toSectorAr": "أغذية و مشروبات و تبغ",
    "links": 1,
-   "value": 680515720.61,
+   "value": 685860084.91,
    "valued": 1,
    "companies": [
     "ADPC"
@@ -863,7 +839,7 @@
    "toSector": "Industrial Goods , Services and Automobiles",
    "toSectorAr": "خدمات و منتجات صناعية وسيارات",
    "links": 1,
-   "value": 1676651428.74,
+   "value": 1668268171.59,
    "valued": 1,
    "companies": [
     "ELEC"
@@ -875,7 +851,7 @@
    "toSector": "Paper & Packaging",
    "toSectorAr": "ورق ومواد تعبئة و تغليف",
    "links": 1,
-   "value": 150014331.38,
+   "value": 154090807.77,
    "valued": 1,
    "companies": [
     "UNIP"
@@ -887,7 +863,7 @@
    "toSector": "Non-bank financial services",
    "toSectorAr": "خدمات مالية غير مصرفية",
    "links": 5,
-   "value": 9703554875.81,
+   "value": 9848467632.03,
    "valued": 5,
    "companies": [
     "BTFH",
@@ -903,7 +879,7 @@
    "toSector": "Trade & Distributors",
    "toSectorAr": "تجارة و موزعون",
    "links": 1,
-   "value": 2696000000.0,
+   "value": 2756800000.0,
    "valued": 1,
    "companies": [
     "GOUR"
@@ -912,10 +888,22 @@
   {
    "fromSector": "Non-bank financial services",
    "fromSectorAr": "خدمات مالية غير مصرفية",
+   "toSector": "Real Estate",
+   "toSectorAr": "عقارات",
+   "links": 1,
+   "value": 1059893126.3,
+   "valued": 1,
+   "companies": [
+    "NARE"
+   ]
+  },
+  {
+   "fromSector": "Non-bank financial services",
+   "fromSectorAr": "خدمات مالية غير مصرفية",
    "toSector": "IT , Media & Communication Services",
    "toSectorAr": "اتصالات و  اعلام و تكنولوجيا المعلومات",
    "links": 1,
-   "value": 1181358715.11,
+   "value": 1189963825.42,
    "valued": 1,
    "companies": [
     "RACC"
@@ -927,7 +915,7 @@
    "toSector": "Health Care & Pharmaceuticals",
    "toSectorAr": "رعاية صحية و ادوية",
    "links": 1,
-   "value": 17074538.03,
+   "value": 17415593.4,
    "valued": 1,
    "companies": [
     "PHAR"
@@ -939,7 +927,7 @@
    "toSector": "Real Estate",
    "toSectorAr": "عقارات",
    "links": 4,
-   "value": 3283412357.05,
+   "value": 3307675994.13,
    "valued": 4,
    "companies": [
     "UNIT",
@@ -953,7 +941,7 @@
    "toSector": "Contracting & Construction Engineering",
    "toSectorAr": "مقاولات و إنشاءات هندسية",
    "links": 2,
-   "value": 2136163741.98,
+   "value": 2193839066.12,
    "valued": 2,
    "companies": [
     "NCCW",
@@ -966,7 +954,7 @@
    "toSector": "Education Services",
    "toSectorAr": "خدمات تعليمية",
    "links": 1,
-   "value": 5768373423.34,
+   "value": 5692160397.11,
    "valued": 1,
    "companies": [
     "TALM"
@@ -977,11 +965,12 @@
    "fromSectorAr": "منسوجات و سلع معمرة",
    "toSector": "Textile & Durables",
    "toSectorAr": "منسوجات و سلع معمرة",
-   "links": 2,
-   "value": 1393217532.87,
-   "valued": 2,
+   "links": 3,
+   "value": 2999110917.92,
+   "valued": 3,
    "companies": [
-    "SPIN"
+    "SPIN",
+    "GTWL"
    ]
   },
   {
@@ -990,7 +979,7 @@
    "toSector": "Building Materials",
    "toSectorAr": "مواد البناء",
    "links": 1,
-   "value": 1935677088.0,
+   "value": 1983711456.0,
    "valued": 1,
    "companies": [
     "MCQE"
@@ -1014,7 +1003,7 @@
    "toSector": "Banks",
    "toSectorAr": "بنوك",
    "links": 1,
-   "value": 1203162215.73,
+   "value": 1215849339.27,
    "valued": 1,
    "companies": [
     "SAUD"
@@ -1026,7 +1015,7 @@
    "toSector": "Education Services",
    "toSectorAr": "خدمات تعليمية",
    "links": 1,
-   "value": 4851719688.6,
+   "value": 4809477367.8,
    "valued": 1,
    "companies": [
     "SCTS"
@@ -1038,7 +1027,7 @@
    "toSector": "Food, Beverages and Tobacco",
    "toSectorAr": "أغذية و مشروبات و تبغ",
    "links": 1,
-   "value": 773583976.84,
+   "value": 789834657.25,
    "valued": 1,
    "companies": [
     "SUGR"
@@ -1050,7 +1039,7 @@
    "toSector": "Real Estate",
    "toSectorAr": "عقارات",
    "links": 1,
-   "value": 468318776.4,
+   "value": 470889602.25,
    "valued": 1,
    "companies": [
     "UNIT"
@@ -1062,7 +1051,7 @@
    "id": "Banks",
    "nameAr": "بنوك",
    "companies": 11,
-   "cap": 923586321470.15,
+   "cap": 925641879011.1,
    "holds": 5,
    "heldBy": 1
   },
@@ -1070,7 +1059,7 @@
    "id": "Basic Resources",
    "nameAr": "موارد أساسية",
    "companies": 13,
-   "cap": 523457334621.22,
+   "cap": 529595081039.65,
    "holds": 1,
    "heldBy": 0
   },
@@ -1078,7 +1067,7 @@
    "id": "Building Materials",
    "nameAr": "مواد البناء",
    "companies": 11,
-   "cap": 114357776107.93,
+   "cap": 115065545702.8,
    "holds": 0,
    "heldBy": 1
   },
@@ -1086,7 +1075,7 @@
    "id": "Contracting & Construction Engineering",
    "nameAr": "مقاولات و إنشاءات هندسية",
    "companies": 12,
-   "cap": 133541235219.38,
+   "cap": 134826211260.04,
    "holds": 1,
    "heldBy": 2
   },
@@ -1094,23 +1083,23 @@
    "id": "Education Services",
    "nameAr": "خدمات تعليمية",
    "companies": 5,
-   "cap": 99446940797.77,
+   "cap": 98571573767.4,
    "holds": 0,
    "heldBy": 2
   },
   {
    "id": "Finance",
    "nameAr": "Finance",
-   "companies": 17,
-   "cap": 134144614514.41,
-   "holds": 4,
+   "companies": 12,
+   "cap": 89778248594.64,
+   "holds": 2,
    "heldBy": 3
   },
   {
    "id": "Food, Beverages and Tobacco",
    "nameAr": "أغذية و مشروبات و تبغ",
    "companies": 30,
-   "cap": 280645019753.69,
+   "cap": 282566691618.59,
    "holds": 0,
    "heldBy": 4
   },
@@ -1118,7 +1107,7 @@
    "id": "Health Care & Pharmaceuticals",
    "nameAr": "رعاية صحية و ادوية",
    "companies": 20,
-   "cap": 182403803883.58,
+   "cap": 183807562237.11,
    "holds": 0,
    "heldBy": 1
   },
@@ -1126,7 +1115,7 @@
    "id": "IT , Media & Communication Services",
    "nameAr": "اتصالات و  اعلام و تكنولوجيا المعلومات",
    "companies": 7,
-   "cap": 381853856371.29,
+   "cap": 387924946490.42,
    "holds": 0,
    "heldBy": 1
   },
@@ -1134,23 +1123,23 @@
    "id": "Industrial Goods , Services and Automobiles",
    "nameAr": "خدمات و منتجات صناعية وسيارات",
    "companies": 7,
-   "cap": 316636218027.25,
+   "cap": 316488584541.87,
    "holds": 3,
    "heldBy": 1
   },
   {
    "id": "Non-bank financial services",
    "nameAr": "خدمات مالية غير مصرفية",
-   "companies": 27,
-   "cap": 221907370844.06,
-   "holds": 8,
+   "companies": 31,
+   "cap": 266385435658.24,
+   "holds": 9,
    "heldBy": 7
   },
   {
    "id": "Paper & Packaging",
    "nameAr": "ورق ومواد تعبئة و تغليف",
-   "companies": 1,
-   "cap": 843250879.01,
+   "companies": 2,
+   "cap": 1530665305.07,
    "holds": 0,
    "heldBy": 1
   },
@@ -1158,31 +1147,31 @@
    "id": "Real Estate",
    "nameAr": "عقارات",
    "companies": 32,
-   "cap": 528799391954.57,
+   "cap": 533266028474.4,
    "holds": 7,
    "heldBy": 7
   },
   {
    "id": "Textile & Durables",
    "nameAr": "منسوجات و سلع معمرة",
-   "companies": 7,
-   "cap": 42795608837.8,
-   "holds": 2,
+   "companies": 8,
+   "cap": 43814768777.54,
+   "holds": 3,
    "heldBy": 4
   },
   {
    "id": "Trade & Distributors",
    "nameAr": "تجارة و موزعون",
    "companies": 7,
-   "cap": 45257645512.26,
+   "cap": 45559810799.04,
    "holds": 0,
    "heldBy": 1
   },
   {
    "id": "Travel & Leisure",
    "nameAr": "سياحة وترفيه",
-   "companies": 6,
-   "cap": 37681317225.61,
+   "companies": 8,
+   "cap": 47075667343.41,
    "holds": 0,
    "heldBy": 1
   },
