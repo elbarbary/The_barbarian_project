@@ -183,6 +183,10 @@
     "meaning": "Stricter food quality standards and regulatory compliance frameworks require widespread recipe reformulations, labeling adjustments, and operational changes across packaged food manufacturing supply chains.",
     "meaning_ar": "تتطلب الاشتراطات التنظيمية ومعايير سلامة الغذاء في السوق تعديل تركيبات المنتجات وتحديث ملصقات التعبئة والتغليف وإجراء مواءمات تشغيلية عبر سلاسل إمداد تصنيع الأغذية المعبأة."
   },
+  "800 جنيه انخفاضا في طن الارز الشعير بالاسواق": {
+    "meaning": "A decline of EGP 800 per ton in raw paddy rice directly lowers raw material input costs for rice milling operators and food processing businesses, while reflecting an expansion in domestic supply or reduced wholesale acquisition pricing across local trade channels.",
+    "meaning_ar": "يؤدي انخفاض سعر طن الأرز الشعير بمقدار 800 جنيه إلى خفض تكاليف شراء المواد الخام لدى مضارب الأرز وشركات الصناعات الغذائية، ويعكس زيادة في المعروض المحلي أو تراجعاً في أسعار التداول بأسواق الجملة."
+  },
   "ABB تنفذ مشروعا للطاقه الشمسيه بقدره 3.3 ميجاوات في مصانعها بمصر": {
     "meaning": "Installing an on-site 3.3 MW solar power system integrates captive renewable generation into the company's manufacturing facilities, supplying electricity directly to industrial operations and substituting a portion of consumption from the national grid.",
     "meaning_ar": "يؤدي إنشاء محطة طاقة شمسية بقدرة 3.3 ميجاوات داخل المنشآت إلى دمج التوليد الذاتي للطاقة المتجددة في العمليات الصناعية للشركة، وتوفير الكهرباء ذاتياً ليحل محل جزء من الاستهلاك المسحوب من الشبكة القومية."
@@ -1158,6 +1162,10 @@
   "ارتفاع طفيف للاسهم الصينيه مع استقرار اليوان": {
     "meaning": "Currency stability reduces exchange rate volatility risks for domestic equity valuations, which correlates with modest price gains in local equity markets.",
     "meaning_ar": "يؤدي استقرار سعر صرف العملة المحلية إلى خفض مخاطر تقلبات أسعار الصرف المرتبطة بتقييمات الأسهم، وهو ما يتزامن مع ارتفاعات طفيفة في أسعار التداول بالأسواق المالية."
+  },
+  "ارتفاع عايد السندات العشريه الامريكيه لاعلي مستوياته منذ عام 2007": {
+    "meaning": "Higher benchmark yields raise international borrowing costs and strengthen the US dollar, which increases sovereign debt servicing burdens and redirects cross-border portfolio capital toward dollar-denominated assets.",
+    "meaning_ar": "يؤدي ارتفاع عائد السندات القياسية إلى زيادة تكلفة الاقتراض الدولي وقوة الدولار، مما يرفع تكلفة خدمة الدين السيادي ويعيد توجيه التدفقات الاستثمارية نحو الأصول المقومة بالعملة الأمريكية."
   },
   "ارتفاع مستويات الشراء والبيع.. اسعار اليورو بختام تعاملات الخميس 10 سبتمبر 2026": {
     "meaning": "An upward adjustment in both the bid and ask exchange rates reflects a higher local currency cost for acquiring euro liquidity in the interbank foreign exchange market.",
@@ -2806,6 +2814,10 @@
   "الوظايف الامريكيه تقفز 162 الفا في اغسطس.. واستقرار معدل البطاله": {
     "meaning": "The US labor market data reflects net non-farm payroll growth alongside an unchanged unemployment rate, serving as a primary macroeconomic indicator for global monetary policy benchmarks and cross-border capital flows.",
     "meaning_ar": "توضح بيانات سوق العمل الأمريكي إضافة صافية في الوظائف غير الزراعية مع ثبات معدل البطالة، وتعمل هذه الأرقام كمؤشر اقتصادي كلي رئيسي يوجه السياسات النقدية العالمية وتدفقات رؤوس الأموال الدولية."
+  },
+  "الولايات المتحده تفرض رسوما اضافيه بنسبه 50% علي منتجات كنديه": {
+    "meaning": "Imposing a 50% tariff increases the landed cost of Canadian imports at U.S. ports of entry, directly raising input expenses for U.S. buyers of these goods and creating a price differential relative to alternative global and domestic suppliers.",
+    "meaning_ar": "يؤدي فرض رسوم جمركية بنسبة 50% إلى رفع التكلفة الإجمالية للواردات الكندية في الموانئ الأمريكية، مما يزيد تكاليف مدخلات الإنتاج على المشترين في الولايات المتحدة ويخلق فارقاً سعرياً مقارنة بالموردين المحليين والبدلاء الدوليين."
   },
   "الي اين تتجه العملات؟ دويتشه بنك يتوقع صعود 3 عملات اساسيه": {
     "meaning": "Investment bank currency research reflects foreign exchange valuation models based on interest rate differentials, trade balances, and central bank monetary policies.",
@@ -5285,6 +5297,10 @@
     "meaning": "A shareholder reducing its equity ownership alters the company's ownership structure and shifts the proportion of shares held as free float on the exchange.",
     "meaning_ar": "يؤدي تقليص أحد المساهمين لنسبة ملكيته إلى تعديل هيكل ملكية الشركة وتغيير نسبة الأسهم المتاحة للتداول الحر في البورصة."
   },
+  "لجنه القيد تحدد موعد ادراج سهم ام ان تي تيك القابضه": {
+    "meaning": "The listing committee sets the official date on which the company's shares are registered on the exchange's trading platform, transitioning the security from unlisted status to an active financial instrument accessible in the secondary market.",
+    "meaning_ar": "تحدد لجنة القيد الموعد الرسمي لتسجيل أسهم الشركة على شاشات التداول بالبورصة، وهو الإجراء الذي ينقل الورقة المالية من وضع غير المقيد إلى أداة مالية متاحة في السوق الثانوية."
+  },
   "لماذا تعمل قله من النساء في الهند؟": {
     "meaning": "Low female labor force participation constrains the aggregate supply of formal labor, concentrates domestic output in male-dominated sectors, and limits household income diversification.",
     "meaning_ar": "يؤدي انخفاض معدل مشاركة الإناث في القوى العاملة إلى تقليص المعروض الكلي من العمالة الرسمية، وتركيز الإنتاج المحلي في القطاعات المعتمدة على الذكور، والحد من تنوع مصادر دخل الأسر."
@@ -6716,6 +6732,10 @@
   "“اميرالد” تخفض حصتها في “المشروعات الصناعيه” الي 5.4%": {
     "meaning": "Emerald reduces its equity ownership in Industrial Engineering Company for Construction and Development to 5.4%, which alters the company's shareholder structure and decreases Emerald's voting weight.",
     "meaning_ar": "تخفض شركة إميرالد نسبة ملكيتها في شركة المشروعات الصناعية والهندسية إلى 5.4%، مما يغير هيكل المساهمين ويقلل من القوة التصويتية لإميرالد في الشركة."
+  },
+  "“ان اي كابيتال” تخطط لاطلاق صندوقين جديدين نهايه 2026": {
+    "meaning": "Establishing new investment funds expands an asset management firm's product lineup and increases its total assets under management, generating recurring management and administrative fee structures from pooled investor capital.",
+    "meaning_ar": "يؤدي إطلاق صناديق استثمارية جديدة إلى توسيع محفظة منتجات شركة إدارة الأصول وزيادة حجم الأصول المدارة، وهو ما يترتب عليه تطبيق هياكل رسوم إدارية وتنظيمية دورية على رؤوس الأموال المجمعة."
   },
   "“انتراكتيف بروكرز”: تجاوز النفط 100 دولار قد يخفض تصعيد حرب ايران": {
     "meaning": "Crude oil prices exceeding the $100 threshold raise global energy input costs, functioning as an economic constraint that creates diplomatic and commercial pressure on market participants to de-escalate regional supply disruption risks.",
