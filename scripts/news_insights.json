@@ -3123,6 +3123,10 @@
     "meaning": "Pioneers Properties for Urban Development reduces its equity ownership stake in Upper Egypt Contracting to 2.81%, which scales down its direct voting power and representation on the company's shareholder register.",
     "meaning_ar": "تخفض شركة بايونيرز بروبرتيز للتنمية العمرانية حصة ملكيتها في رأسمال شركة الصعيد العامة للمقاولات إلى 2.81%، مما يقلص قوتها التصويتية ونسبة مساهمتها المباشرة في هيكل الملكية."
   },
+  "بدء التشغيل التجريبي لمحطه بضايع “مواني مصر” في “السخنه”": {
+    "meaning": "Pilot operations initiate the functional testing phase of cargo handling equipment, yard systems, and berth logistics prior to commercial commissioning, expanding Egypt Ports' active infrastructure footprint at the Sokhna maritime hub.",
+    "meaning_ar": "يمثل التشغيل التجريبي مرحلة الاختبار الفني والتشغيلي لمعدات مناولة البضائع وأنظمة الساحات والأرصفة قبل التدشين التجاري الكامل، مما يضيف سعة تشغيلية لأصول 'موانئ مصر' في محور السخنة."
+  },
   "بدء حجز 25 الف وحده سكنيه بنظامي «الايجار» و«المنتهي بالتملك» 20 سبتمبر": {
     "meaning": "The state introduces 25,000 public residential units under fixed lease and rent-to-own models, providing long-term occupancy contracts without immediate full capital outlays by tenants.",
     "meaning_ar": "طرح 25 ألف وحدة سكنية حكومية بنظامي الإيجار العادي والإيجار المنتهي بالتملك، وهو ما يتيح عقود إشغال طويلة الأجل دون سداد كامل القيمة الرأسمالية للوحدة مقدماً."
@@ -3455,6 +3459,10 @@
   "تراجع الاسهم الاوروبيه في الختام بعد قرار رفع الفايده": {
     "meaning": "Higher benchmark interest rates raise borrowing costs for corporations and discount the present value of future cash flows in equity valuation models.",
     "meaning_ar": "يؤدي رفع أسعار الفائدة القياسية إلى زيادة تكلفة الاقتراض للشركات وخفض القيمة الحالية للتدفقات النقدية المستقبلية في نماذج تقييم الأسهم."
+  },
+  "تراجع الاسهم الاوروبيه لادني مستوي منذ اواخر يونيو": {
+    "meaning": "European equities trade at multi-month price lows as regional asset valuations reflect current broader risk repricing across continental exchanges.",
+    "meaning_ar": "تسجل الأسهم الأوروبية أدنى مستويات سعرية لها في عدة أشهر مع تسعير القيمة السوقية للأصول في البورصات الأوروبية لمخاطر التداول الراهنة."
   },
   "تراجع الاسهم الاوروبيه مع ارتفاع عوايد السندات السياديه": {
     "meaning": "A rise in sovereign bond yields increases benchmark risk-free interest rates, which raises the discount rate applied to corporate equity valuations and increases borrowing costs across capital markets.",
