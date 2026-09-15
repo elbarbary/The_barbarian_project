@@ -655,6 +655,10 @@
     "meaning": "Urban expansion spreads commercial activity across new geographic nodes, prompting flexible office operators to secure commercial real estate inventory outside traditional central business districts.",
     "meaning_ar": "يؤدي التوسع العمراني إلى توزيع النشاط التجاري عبر مراكز جغرافية جديدة، مما يدفع مشغلي المكاتب المرنة إلى توفير مساحات إدارية خارج مناطق الأعمال المركزية التقليدية."
   },
+  "iwg signs 10 new center deals in egypt": {
+    "meaning": "These agreements expand IWG's commercial real estate footprint across Egypt by adding ten managed flexible workspace locations to its operational network.",
+    "meaning_ar": "توسع هذه الاتفاقيات الحضور التشغيلي لشركة آي دبليو جي في قطاع العقارات الإدارية في مصر عبر إضافة عشرة مقرات لمساحات العمل المرنة إلى شبكتها."
+  },
   "kima logs profits in fiscal year 2025 2026 audited results": {
     "meaning": "Audited annual financial results reflect that the company generates revenues exceeding its total operating costs, depreciation, and financing expenses over the fiscal year, thereby adding net positive retained earnings to shareholder equity on the balance sheet.",
     "meaning_ar": "تعكس القوائم المالية السنوية المدققة تحقيق الشركة إيرادات تفوق إجمالي تكاليف التشغيل والإهلاك والمصروفات التمويلية على مدار العام المالي، مما يضيف أرباحاً محتجزة موجبة إلى حقوق المساهمين في الميزانية العمومية."
@@ -6357,6 +6361,10 @@
     "meaning": "Day-old chick prices serve as a direct operational indicator of input costs across the domestic poultry production cycle, reflecting current market equilibrium between commercial breeder supply and farm placement rates.",
     "meaning_ar": "تمثل أسعار الكتاكيت عمر يوم مؤشرًا تشغيليًا مباشرًا لتكاليف المدخلات في دورة إنتاج الدواجن المحلية، حيث تعكس التوازن الفعلي الحالي بين معروض معامل التفريغ ومعدلات التسكين في المزارع."
   },
+  "هل تحركت اسعار اللحوم المشفيه رغم ثبات المواشي بالاسواق الثلاثاء 15 سبتمبر 2026؟": {
+    "meaning": "Divergence between live cattle and boneless meat prices reflects intermediate supply chain costs, where slaughtering, processing, transport, and retail distribution markups adjust independently of farmgate livestock costs.",
+    "meaning_ar": "يعكس التباين بين أسعار الماشية الحية واللحوم المشفية تكاليف سلاسل الإمداد الوسيطة، حيث تتحرك هوامش الذبح والتجهيز والنقل والتجزئة بشكل مستقل عن أسعار الماشية في المزارع."
+  },
   "هل تغلق تعديلات قواعد القيد باب استغلال المعلومات الداخليه؟": {
     "meaning": "EGX listing rule amendments introduce regulatory restrictions and reporting obligations designed to control access to material non-public information and govern trading activities by corporate insiders.",
     "meaning_ar": "تتضمن تعديلات قواعد القيد بالبورصة المصرية قيوداً تنظيمية والتزامات إفصاح تحكم التعامل على المعلومات الجوهرية غير المعلنة وتنظم تداولات المطلعين بالشركات المقيدة."
@@ -6744,6 +6752,10 @@
   "وزير العمل يبحث مع نظيره الاردني اوضاع العماله المصريه في المملكه": {
     "meaning": "Bilateral labor coordination regulates cross-border workforce flows, legal compliance, and the administrative framework governing worker remittances between Egypt and Jordan.",
     "meaning_ar": "ينظم التنسيق العمالي الثنائي تدفقات العمالة عبر الحدود، والامتثال القانوني، والأطر الإدارية الحاكمة لتحويلات العاملين بين مصر والأردن."
+  },
+  "وزير العمل يبحث مع نظيره اليمني تعزيز التعاون في التشغيل والتدريب المهني": {
+    "meaning": "Bilateral coordination between labor ministries establishes standardized vocational qualification frameworks and cross-border labor mobility channels, directly regulating workforce deployment mechanisms across regional labor markets.",
+    "meaning_ar": "يضع التنسيق الثنائي بين وزارتي العمل أطرًا موحدة للمؤهلات المهنية وقنوات منظمة لانتقال العمالة، مما ينظم آليات تشغيل وتوزيع القوى العاملة عبر أسواق العمل الإقليمية."
   },
   "وزير العمل يمنح شركات الحاق العماله بالخارج مهله 6 اشهر لتوفيق اوضاعها": {
     "meaning": "The decision grants foreign employment agencies a six-month regulatory grace period to align operational procedures, licensing requirements, and legal documentation with Ministry of Labor standards.",
