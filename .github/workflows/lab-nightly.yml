@@ -105,11 +105,18 @@ jobs:
       # Torch is half a gigabyte and the weights are another hundred
       # megabytes. Both are pinned, so both cache: without this the download
       # is most of the run, every night, for bytes that never change.
-      - name: Cache the model weights
-        uses: actions/cache@v4
+      # Restored here, saved after the forecast (below) and only by a run that
+      # forecast: a push run never loads a model, and saving under the new
+      # key from one would store the old weights under the name of the new
+      # set — every night after would hit it and download the rest again.
+      - name: Restore the model weights
+        id: weights
+        uses: actions/cache/restore@v4
         with:
           path: ~/.cache/esthmr-lab
-          key: lab-weights-kronos-small-901c26c1
+          # Named by every pinned revision in it, so adding a model saves a
+          # new cache instead of downloading its weights every night.
+          key: lab-weights-kronos-small-901c26c1-toto2-a7bab288-sundial-3212e425
           restore-keys: lab-weights-
 
       - name: Cache pip
@@ -171,6 +178,7 @@ jobs:
       # and after the close `run.py` refuses it outright. The test step above
       # is what validates a change; `dry_run` is how the models are exercised.
       - name: Forecast
+        id: forecast
         if: github.event_name != 'push' && steps.tests.outcome == 'success'
         env:
           ESTHMR_LAB_CACHE: ~/.cache/esthmr-lab
@@ -188,6 +196,13 @@ jobs:
           python3 scripts/lab/run.py "$scan" \
             --models "$LAB_MODELS" \
             ${{ inputs.dry_run == true && ' ' || '--write' }}
+
+      - name: Save the model weights
+        if: always() && steps.forecast.outcome == 'success' && steps.weights.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.cache/esthmr-lab
+          key: ${{ steps.weights.outputs.cache-primary-key }}
 
       # Vertex is where the Cloud credits live and the only Gemini endpoint
       # that can spend them. Minted HERE, immediately before the one step that

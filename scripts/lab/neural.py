@@ -17,6 +17,15 @@ and are here as the honest comparators. They see the close and nothing else,
 which is the point: if a candlestick specialist cannot beat a model that was
 never shown a candlestick, that is worth knowing.
 
+**Toto 2.0** (Datadog, 313M) and **Sundial** (Tsinghua, 128M) were added on
+15 September 2026 as two more close-only comparators, picked for being built
+differently from the three above rather than for any score: Toto was
+pretrained with a large share of observability metrics and predicts
+quantiles in one pass; Sundial generates futures by flow matching. Both are
+Apache-2.0 on their model cards, checked because this is a commercial site —
+Moirai's weights are non-commercial and are not run here. Neither has a
+record on this exchange; running them nightly is how they get one.
+
 WHAT THEY ARE NOT ALLOWED TO DO
 -------------------------------
 Skip a company quietly. Every one of them abstains through the same
@@ -41,6 +50,10 @@ the horizon is most of the bill. Twenty is what the evaluation needs.)
 
 No GPU is bought or needed. For scale, this is less than the market scan that
 feeds it.
+
+Toto 2.0 and Sundial are far cheaper: 25 and 30 seconds for 241 companies
+on the laptop (14 September's scan, four threads). What decides whether they
+join the nightly `all` is the same measurement on the runner — see `TRIAL`.
 """
 
 from __future__ import annotations
@@ -78,6 +91,27 @@ KRONOS = {
     "tokenizer": "NeoQuasar/Kronos-Tokenizer-base",
     "context": 512,
 }
+
+# Pinned to the commit, not just the name. Sundial's model class is Python in
+# its own repository, loaded with `trust_remote_code`, so the commit is also
+# which code runs: that code was read at this commit before it was pinned
+# (torch and transformers only; no network, file or shell calls).
+TOTO2 = {"model": "Datadog/Toto-2.0-313m",
+         "revision": "a7bab288f5e95f8606f8306f86659357e1c001ef"}
+SUNDIAL = {"model": "thuml/sundial-base-128m",
+           "revision": "3212e42564493f520593e5414af4367fc4b49226"}
+
+# Sundial generates futures rather than predicting quantiles, and its
+# forecast is the median of this many — the number its own quickstart draws.
+# Pinned rather than tuned, like Kronos's five below.
+SUNDIAL_SAMPLES = 20
+
+# Models that run only when asked for by name (`run.py --models toto2,sundial`)
+# and not in the nightly `all`: how a new model is timed on the four-core
+# runner in a dry run before it joins. One that is slow there does not lose
+# a single company's forecast — it runs the whole job past its timeout, and
+# the night is lost for every model.
+TRIAL: frozenset[str] = frozenset({"toto2", "sundial"})
 
 # The lookback every neural model is given, in completed sessions.
 #
@@ -258,7 +292,10 @@ def kronos(ticker: str, basis: str, bars: list[dict]) -> fc.Forecast | fc.Absten
 
 @functools.lru_cache(maxsize=1)
 def _pipeline(kind: str):
-    """Chronos-2 or TimesFM 2.5, loaded once, on CPU.
+    """Chronos-2, TimesFM 2.5, Toto 2.0 or Sundial, loaded once, on CPU.
+
+    One at a time (`maxsize=1`): the models run one after another, so the
+    next one loading lets the last one's weights go.
 
     Both call shapes were wrong in the first CI run and both were wrong in
     the same way: written from how these libraries used to look rather than
@@ -293,7 +330,63 @@ def _pipeline(kind: str):
             force_flip_invariance=True, infer_is_positive=True,
             fix_quantile_crossing=True))
         return model
+    if kind == "toto2":
+        from toto2 import Toto2Model  # noqa: PLC0415
+        return Toto2Model.from_pretrained(TOTO2["model"], revision=TOTO2["revision"]).to("cpu").eval()
+    if kind == "sundial":
+        from transformers import AutoModelForCausalLM  # noqa: PLC0415
+        return AutoModelForCausalLM.from_pretrained(
+            SUNDIAL["model"], revision=SUNDIAL["revision"], trust_remote_code=True).eval()
     raise RuntimeError(f"no pipeline called {kind}")
+
+
+def _toto2_median(model, series: list[float], ahead: int) -> list[float]:
+    """Toto 2.0's median path, from one forward pass and no sampling.
+
+    Its patches are 32 sessions long and it reads a context whole patches
+    long, so the ninety closes are padded on the LEFT to 96 with values the
+    mask marks as absent: the model is told six sessions are missing rather
+    than shown six invented prices, and it sees the same ninety closes as
+    every other model. `decode_block_size=None` is the single pass its
+    authors recommend for short horizons and used for their leaderboard runs.
+    """
+    import torch  # noqa: PLC0415
+    patch = model.config.patch_size
+    pad = (-len(series)) % patch
+    target = torch.cat([torch.zeros(pad), torch.tensor(series, dtype=torch.float32)]).view(1, 1, -1)
+    seen = torch.cat([torch.zeros(pad, dtype=torch.bool),
+                      torch.ones(len(series), dtype=torch.bool)]).view(1, 1, -1)
+    with torch.no_grad():
+        quantiles = model.forecast(
+            {"target": target, "target_mask": seen, "series_ids": torch.zeros(1, 1, dtype=torch.long)},
+            horizon=ahead, decode_block_size=None, has_missing_values=bool(pad))
+    # (knots, batch, variates, horizon); the knot at 0.5 is the median.
+    middle = list(model.output_head.knots).index(0.5)
+    return quantiles[middle, 0, 0, :].tolist()
+
+
+def _sundial_median(model, series: list[float], ahead: int, basis: str, ticker: str) -> list[float]:
+    """Sundial's median across `SUNDIAL_SAMPLES` generated paths.
+
+    One forward pass, not `generate`. Sundial's `generate` was written for an
+    older transformers and fails on the one this lab installs ("DynamicCache
+    has no attribute seen_tokens"). For a horizon inside a single output
+    patch (720 sessions), `generate` is exactly these steps: scale the
+    context by its own mean and deviation, run the decoder once, draw the
+    paths from the last position, scale them back. Seeded by the night and
+    the company, like Kronos, so a rerun of the night draws the same paths.
+    """
+    import torch  # noqa: PLC0415
+    x = torch.tensor(series, dtype=torch.float32).view(1, -1)
+    means = x.mean(dim=-1, keepdim=True)
+    stdev = x.std(dim=-1, keepdim=True, unbiased=False) + 1e-5
+    torch.manual_seed(_seed(basis, ticker))
+    with torch.no_grad():
+        out = model(input_ids=(x - means) / stdev, use_cache=False, return_dict=True,
+                    max_output_length=ahead, revin=False, num_samples=SUNDIAL_SAMPLES)
+    # (batch, samples, horizon), back on the price scale.
+    paths = out.logits * stdev.unsqueeze(1) + means.unsqueeze(1)
+    return torch.quantile(paths[0], 0.5, dim=0).tolist()
 
 
 def _close_only(kind: str, ticker: str, basis: str,
@@ -332,6 +425,10 @@ def _close_only(kind: str, ticker: str, basis: str,
             if first.ndim != 3:
                 raise ValueError(f"unexpected chronos shape {first.shape}")
             median = first[0, first.shape[1] // 2, :].tolist()
+        elif kind == "toto2":
+            median = _toto2_median(pipeline, series, ahead)
+        elif kind == "sundial":
+            median = _sundial_median(pipeline, series, ahead, basis, ticker)
         else:
             import numpy as np  # noqa: PLC0415
             point, _ = pipeline.forecast(horizon=ahead,
@@ -362,14 +459,32 @@ def timesfm25(ticker, basis, bars):
     return _close_only("timesfm25", ticker, basis, bars)
 
 
-def available() -> dict:
+def toto2(ticker, basis, bars):
+    return _close_only("toto2", ticker, basis, bars)
+
+
+def sundial(ticker, basis, bars):
+    return _close_only("sundial", ticker, basis, bars)
+
+
+def available(include_trial: bool = False) -> dict:
     """The neural models this environment can actually run.
 
     Checked by import rather than assumed, and a model that cannot be loaded
     is left out of the run entirely rather than abstaining 261 times. The
     difference matters in the record: "this model was not run tonight" and
     "this model was asked and refused every company" are different facts.
+
+    `TRIAL` models only when `include_trial`: they run when named, and join
+    the nightly `all` once the runner has timed them.
     """
+    import importlib.util  # noqa: PLC0415
+
+    def installed(*modules: str) -> bool:
+        # Found, not imported: toto2 pulls in Lightning, seconds before a model
+        # is even asked for.
+        return all(importlib.util.find_spec(m) is not None for m in modules)
+
     ready: dict = {}
     if KRONOS_SOURCE and (pathlib.Path(KRONOS_SOURCE) / "model").is_dir():
         try:
@@ -388,4 +503,10 @@ def available() -> dict:
         ready["timesfm25"] = timesfm25
     except ImportError:
         pass
+    if installed("torch", "toto2", "gluonts", "dd_unit_scaling"):
+        ready["toto2"] = toto2
+    if installed("torch", "transformers"):
+        ready["sundial"] = sundial
+    if not include_trial:
+        ready = {name: ask for name, ask in ready.items() if name not in TRIAL}
     return ready

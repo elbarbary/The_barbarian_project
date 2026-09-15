@@ -355,6 +355,38 @@ def _short(path: pathlib.Path) -> str:
         return str(path)
 
 
+def select(wanted: str, neural_models=None) -> dict:
+    """The models `--models` asks for: `baselines`, `all`, or names.
+
+    `all` is the baselines and every neural model the environment can run,
+    except those still on trial. A name can be a trial model: that is how a
+    new one is timed on the runner (`dry_run` with `models: toto2,sundial`)
+    before it joins `all`. `neural_models` stands in for `neural.available`
+    in the tests, which have no torch to import.
+    """
+    wanted = wanted.strip()
+    names = [w.strip() for w in wanted.split(",") if w.strip()]
+    baseline = lambda n: lambda t, b, x: fc.run_baseline(n, t, b, x)  # noqa: E731
+    chosen: dict = {}
+    if wanted in ("baselines", "all"):
+        chosen.update({n: baseline(n) for n in fc.BASELINES})
+    else:
+        chosen.update({n: baseline(n) for n in names if n in fc.BASELINES})
+
+    named = [n for n in names if n not in fc.BASELINES]
+    if wanted == "all" or (wanted != "baselines" and named):
+        try:
+            if neural_models is None:
+                import neural
+                neural_models = neural.available
+            ready = neural_models(include_trial=wanted != "all")
+            chosen.update(ready if wanted == "all" else {n: ready[n] for n in named if n in ready})
+        except Exception as error:  # noqa: BLE001
+            print(f"   neural models unavailable ({type(error).__name__}), "
+                  "baselines only")
+    return chosen
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("scan", type=pathlib.Path,
@@ -379,24 +411,7 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     args.check = not args.write
 
-    chosen: dict = {}
-    wanted = args.models.strip()
-    if wanted in ("baselines", "all"):
-        chosen.update({n: (lambda n: lambda t, b, x: fc.run_baseline(n, t, b, x))(n)
-                       for n in fc.BASELINES})
-    else:
-        for name in (w.strip() for w in wanted.split(",") if w.strip()):
-            if name in fc.BASELINES:
-                chosen[name] = (lambda n: lambda t, b, x: fc.run_baseline(n, t, b, x))(name)
-
-    if wanted == "all":
-        try:
-            import neural
-            chosen.update(neural.available())
-        except Exception as error:  # noqa: BLE001
-            print(f"   neural models unavailable ({type(error).__name__}), "
-                  "baselines only")
-
+    chosen = select(args.models)
     if not chosen:
         raise SystemExit(f"lab: no models selected from '{args.models}'")
 

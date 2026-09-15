@@ -1642,6 +1642,76 @@ class WholeCandleTest(unittest.TestCase):
         self.assertNotEqual(self.whole(bars)[-1]["date"], bars[-1]["date"])
 
 
+class TrialModelTest(unittest.TestCase):
+    """A new forecaster is timed by name before it joins the nightly run."""
+
+    def neural(self, include_trial=False):
+        ready = {"kronos": "K", "chronos2": "C", "toto2": "T", "sundial": "S"}
+        import neural
+        return {n: a for n, a in ready.items() if include_trial or n not in neural.TRIAL}
+
+    def test_all_leaves_trial_models_out_and_a_name_brings_one_in(self):
+        import neural
+        self.assertEqual(neural.TRIAL, {"toto2", "sundial"})
+        every = run.select("all", self.neural)
+        self.assertTrue(set(fc.BASELINES) <= set(every))
+        self.assertIn("kronos", every)
+        self.assertFalse(neural.TRIAL & set(every), "a trial model ran in the nightly set")
+        self.assertEqual(list(run.select("toto2,sundial", self.neural)), ["toto2", "sundial"])
+        self.assertEqual(set(run.select("drift, sundial", self.neural)), {"drift", "sundial"})
+        self.assertEqual(list(run.select("baselines", self.neural)), list(fc.BASELINES))
+        self.assertEqual(run.select("nothing-called-this", self.neural), {})
+
+    def test_the_new_adapters_read_the_same_ninety_closes(self):
+        try:
+            import torch
+        except ImportError:
+            self.skipTest("torch is not installed here; the nightly job has it")
+        import neural
+        series = [100.0 + i * 0.5 for i in range(neural.LOOKBACK)]
+
+        class Toto:
+            config = type("config", (), {"patch_size": 32})
+            output_head = type("head", (), {"knots": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]})
+
+            def forecast(self, inputs, horizon, **kw):
+                self.inputs, self.horizon, self.kw = inputs, horizon, kw
+                knots = torch.arange(9, dtype=torch.float32).view(9, 1, 1, 1)
+                return (knots + 200.0).expand(9, 1, 1, horizon).clone()
+
+        toto = Toto()
+        median = neural._toto2_median(toto, series, 20)
+        target, seen = toto.inputs["target"], toto.inputs["target_mask"]
+        # Padded on the left to whole 32-session patches, and told the padding is absent.
+        self.assertEqual(tuple(target.shape), (1, 1, 96))
+        self.assertEqual(seen[0, 0, :6].tolist(), [False] * 6)
+        self.assertTrue(bool(seen[0, 0, 6:].all()))
+        self.assertEqual(target[0, 0, 6:].tolist(), series)
+        self.assertEqual((toto.horizon, toto.kw["decode_block_size"], toto.kw["has_missing_values"]), (20, None, True))
+        self.assertEqual(median, [204.0] * 20, "the knot at 0.5 is the median")
+
+        class Sundial:
+            def __call__(self, **kw):
+                self.kw = kw
+                draws = torch.linspace(-1, 1, kw["num_samples"]).view(1, -1, 1).expand(1, -1, kw["max_output_length"])
+                return type("out", (), {"logits": draws.clone()})
+
+        sundial = Sundial()
+        median = neural._sundial_median(sundial, series, 20, "2026-09-14", "AAA")
+        mean = float(torch.tensor(series).mean())
+        self.assertAlmostEqual(float(sundial.kw["input_ids"].mean()), 0.0, places=4)
+        self.assertEqual((sundial.kw["num_samples"], sundial.kw["max_output_length"], sundial.kw["use_cache"]),
+                         (neural.SUNDIAL_SAMPLES, 20, False))
+        # Paths come back on the price scale; their median is the middle draw.
+        self.assertEqual(len(median), 20)
+        self.assertAlmostEqual(median[0], mean, places=3)
+        # The same night and company draw the same paths.
+        torch.manual_seed(neural._seed("2026-09-14", "AAA"))
+        first = torch.randn(3)
+        torch.manual_seed(neural._seed("2026-09-14", "AAA"))
+        self.assertTrue(torch.equal(first, torch.randn(3)))
+
+
 class CalendarTest(unittest.TestCase):
 
     def test_a_session_needs_a_majority_of_the_market(self):
