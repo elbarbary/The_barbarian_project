@@ -434,9 +434,14 @@ def build_from(stories: list[dict], filings: list[dict], market_doc: dict,
 
 
 def two_kind_set(stories: list[dict], filings: list[dict], market_doc: dict,
-                 companies: list[dict], start: str, end: str) -> set[str]:
+                 companies: list[dict], start: str, end: str, *,
+                 sessions: set[str] | None = None) -> set[str]:
     """The crossing set recomputed from the feeds, with none of the builder's
-    bookkeeping: two kinds of thread inside [start, end]."""
+    bookkeeping: two kinds of thread inside [start, end].
+
+    `sessions`, when given, names the tickers whose session thread is taken as
+    published instead of recomputed — for a `market.json` that is no longer
+    the document the crossings read, whose volumes are not the close's."""
     kinds: dict[str, set[str]] = {}
     for f in filings:
         if start <= f.get("date", "") <= end:
@@ -447,12 +452,44 @@ def two_kind_set(stories: list[dict], filings: list[dict], market_doc: dict,
             for t in s.get("tickers") or []:
                 kinds.setdefault(t, set()).add("news")
     median = {c["ticker"]: c.get("median_volume_20d") for c in companies if c.get("ticker")}
-    if market_doc.get("is_close") and start <= market_doc.get("date", "") <= end:
+    if sessions is not None:
+        for t in list(kinds):
+            if t in sessions:
+                kinds[t].add("session")
+    elif market_doc.get("is_close") and start <= market_doc.get("date", "") <= end:
         for t in list(kinds):
             volume = (market_doc.get("stocks") or {}).get(t, {}).get("volume")
             if volume and median.get(t) and volume / median[t] >= dots.UNUSUAL_VOLUME:
                 kinds[t].add("session")
     return {t for t, k in kinds.items() if len(k) >= 2}
+
+
+def market_as_read(doc: dict, market_doc: dict) -> tuple[dict, bool]:
+    """The market document the published crossings were built from, and
+    whether `market.json` is still that document.
+
+    Two jobs publish the pair on different clocks. `publish-prices` rewrites
+    `market.json` through the session and never rebuilds the crossings — it
+    owns four files, and `test_connections` is kept out of its gate on
+    purpose. So the first in-session tick flips `is_close` to false while
+    `connections.json` still carries the previous close's session strands,
+    dated that close and shown as that close, until the next crossings build
+    (normally `publish-live-data`). Replayed over main, the 07:07 UTC tick's
+    own commit fails this file on 8, 9 and 14 Sep 2026; since b2bc9b82d made
+    the pre-open scan a close, that tick is what opens the window, on every
+    trading morning whose previous close carried a strand.
+
+    The crossings record what they read (`frontpage.feeds.market`), so a
+    strand is held to that record. The volumes are only in `market.json`, so
+    they are held to it only while it is the same document: same session,
+    same `is_close`. Mid-session it is not, and a ratio recomputed off a
+    part-day is exactly what the builder refuses to publish.
+    """
+    now = {"date": market_doc.get("date", ""), "is_close": bool(market_doc.get("is_close"))}
+    read = doc.get("frontpage", {}).get("feeds", {}).get("market")
+    if read is None:
+        return now, True
+    return read, (read.get("date", ""), bool(read.get("is_close"))) == (now["date"], now["is_close"])
 
 
 # Around each Arabic counting boundary plus the hundreds: the values the front
@@ -587,6 +624,8 @@ class SessionTest(unittest.TestCase):
                      company("LOW"), company("NOQ")]
         doc = build_from(stories, filings, market(DAY, True, stocks), companies)
         self.assertEqual(doc["window_end"], next_day)
+        # The record the published check below holds strands to.
+        self.assertEqual(doc["frontpage"]["feeds"]["market"], {"date": DAY, "is_close": True})
         by = {i["ticker"]: i for i in doc["items"]}
         self.assertEqual(set(by), set(tickers))
         self.assertEqual(by["AAA"]["kinds"], ["filing", "news", "session"])
@@ -608,6 +647,7 @@ class SessionTest(unittest.TestCase):
 
         # P3b — the same file before the close carries no session anywhere.
         live = build_from(stories, filings, market(DAY, False, stocks), companies)
+        self.assertEqual(live["frontpage"]["feeds"]["market"], {"date": DAY, "is_close": False})
         for item in live["items"]:
             self.assertNotIn("session", item["kinds"], f"{item['ticker']} has a mid-session strand")
 
@@ -617,19 +657,23 @@ class SessionTest(unittest.TestCase):
         doc = json.loads(path.read_text(encoding="utf-8"))
         api = REPO / "public" / "data" / "v1"
         market_doc = json.loads((api / "market.json").read_text(encoding="utf-8"))
+        read, current = market_as_read(doc, market_doc)
         directory = json.loads((api / "companies.json").read_text(encoding="utf-8"))["companies"]
         median = {c["ticker"]: c.get("median_volume_20d") for c in directory if c.get("ticker")}
         stocks = market_doc.get("stocks") or {}
         for item in doc["items"]:
             with self.subTest(item["ticker"]):
-                volume = (stocks.get(item["ticker"]) or {}).get("volume")
                 sessions = [s for s in item["strands"] if s["kind"] == "session"]
+                for s in sessions:
+                    self.assertTrue(read.get("is_close"), f"{item['ticker']} has a mid-session strand")
+                    self.assertEqual(s["date"], read.get("date"))
+                if not current:
+                    continue
+                volume = (stocks.get(item["ticker"]) or {}).get("volume")
                 if not volume or not median.get(item["ticker"]):
                     self.assertEqual(sessions, [], f"{item['ticker']} has a session on no measure")
                     continue
                 for s in sessions:
-                    self.assertTrue(market_doc.get("is_close"))
-                    self.assertEqual(s["date"], market_doc["date"])
                     self.assertEqual(s["ratio"], round(volume / median[item["ticker"]], 2))
 
 
@@ -663,12 +707,21 @@ class CardinalityTest(unittest.TestCase):
         stories = json.loads((api / "news" / "latest.json").read_text(encoding="utf-8"))["items"]
         filings = json.loads((api / "disclosures" / "latest.json").read_text(encoding="utf-8"))["items"]
         market_doc = json.loads((api / "market.json").read_text(encoding="utf-8"))
-        market_feed = doc.get("frontpage", {}).get("feeds", {}).get("market", {})
-        if "is_close" in market_feed:
-            market_doc = dict(market_doc, is_close=market_feed["is_close"])
         directory = json.loads((api / "companies.json").read_text(encoding="utf-8"))["companies"]
+        # Borrowing only `is_close` from the record was not enough: on 8 Sep
+        # 2026 at 07:07 UTC ADIB crossed on news and the previous close at
+        # 2.09×, and the recount divided the 10:00 capture's volume instead,
+        # got 1.90× and called the crossing invented. Off a market.json that
+        # has moved on, the session thread is the published strand, which
+        # SessionTest holds to the recorded close; the documents are still
+        # recounted in full.
+        _, current = market_as_read(doc, market_doc)
+        sessions = None if current else {
+            i["ticker"] for i in doc["items"] if "session" in i["kinds"]
+        }
         expected = two_kind_set(stories, filings, market_doc, directory,
-                                doc["window_start"], doc["window_end"])
+                                doc["window_start"], doc["window_end"],
+                                sessions=sessions)
         self.assertEqual(doc["total"], len(doc["items"]))
         self.assertEqual({i["ticker"] for i in doc["items"]}, expected)
 
