@@ -434,9 +434,10 @@ def prompt(basis: str, body: str, count: int, context: dict | None = None,
 Below is every forecasting model's answer for the session that closed on
 {basis}, for {count} companies, as CSV. Columns ending _h1, _h5 and _h20 are
 that model's value for the next 1, 5 and 20 trading sessions: a predicted
-percentage return for kronos, chronos2, timesfm25, drift and flat, and a
-ranking score — higher ranks higher, not a return — for the momentum and
-reversal rules. An empty cell means that model declined to answer.
+percentage return for kronos, chronos2, timesfm25, toto2, sundial, drift and
+flat, and a ranking score — higher ranks higher, not a return — for the
+momentum and reversal rules. An empty cell means that model declined to
+answer.
 
 Form your OWN view of which companies are most likely to do better than the
 rest over the next five sessions. You may disagree with every model shown.{given}

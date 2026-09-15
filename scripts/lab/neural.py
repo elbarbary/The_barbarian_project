@@ -52,8 +52,9 @@ No GPU is bought or needed. For scale, this is less than the market scan that
 feeds it.
 
 Toto 2.0 and Sundial are far cheaper: 25 and 30 seconds for 241 companies
-on the laptop (14 September's scan, four threads). What decides whether they
-join the nightly `all` is the same measurement on the runner — see `TRIAL`.
+on the laptop, and on the runner itself — the dry run of 15 September, run
+34965625837 — **73.7 and 100.7 seconds**, 241 of 241 answered each. Three
+minutes a night for both, which is why they left `TRIAL` for `all`.
 """
 
 from __future__ import annotations
@@ -106,12 +107,13 @@ SUNDIAL = {"model": "thuml/sundial-base-128m",
 # Pinned rather than tuned, like Kronos's five below.
 SUNDIAL_SAMPLES = 20
 
-# Models that run only when asked for by name (`run.py --models toto2,sundial`)
-# and not in the nightly `all`: how a new model is timed on the four-core
-# runner in a dry run before it joins. One that is slow there does not lose
-# a single company's forecast — it runs the whole job past its timeout, and
-# the night is lost for every model.
-TRIAL: frozenset[str] = frozenset({"toto2", "sundial"})
+# Models that run only when asked for by name (`run.py --models <name>`) and
+# not in the nightly `all`: how a new model is timed on the four-core runner
+# in a dry run before it joins. One that is slow there does not lose a single
+# company's forecast — it runs the whole job past its timeout, and the night
+# is lost for every model. Toto 2.0 and Sundial were on it until the runner
+# timed them on 15 September 2026.
+TRIAL: frozenset[str] = frozenset()
 
 # The lookback every neural model is given, in completed sessions.
 #

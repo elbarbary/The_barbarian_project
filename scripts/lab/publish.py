@@ -89,13 +89,15 @@ PICK_NIGHTS = 20
 
 # The models a reader meets on Home, in the order the record keeps them. The
 # screen may sort by the record; the file does not.
-ORDER = ["rerank", "kronos", "chronos2", "timesfm25",
+ORDER = ["rerank", "kronos", "chronos2", "timesfm25", "toto2", "sundial",
          "momentum20", "momentum60", "reversal1", "reversal5", "drift", "flat"]
 
 LABELS = {
     "kronos": ("Kronos-small", "Kronos-small", "neural"),
     "chronos2": ("Chronos-2", "Chronos-2", "neural"),
     "timesfm25": ("TimesFM 2.5", "TimesFM 2.5", "neural"),
+    "toto2": ("Toto 2.0", "Toto 2.0", "neural"),
+    "sundial": ("Sundial", "Sundial", "neural"),
     "rerank": ("Gemini re-rank", "إعادة ترتيب Gemini", "rerank"),
     "momentum20": ("Momentum, 20 sessions", "الزخم، 20 جلسة", "baseline"),
     "momentum60": ("Momentum, 60 sessions", "الزخم، 60 جلسة", "baseline"),
@@ -109,7 +111,7 @@ LABELS = {
 # a reading is compared with them. Only models that publish a return: a
 # momentum score is an ordering, and a median of orderings and percentages is
 # a number that means nothing.
-CONSENSUS = ("kronos", "chronos2", "timesfm25", "drift")
+CONSENSUS = ("kronos", "chronos2", "timesfm25", "toto2", "sundial", "drift")
 
 
 def label(name: str) -> tuple[str, str, str]:

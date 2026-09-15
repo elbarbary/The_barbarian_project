@@ -1645,22 +1645,31 @@ class WholeCandleTest(unittest.TestCase):
 class TrialModelTest(unittest.TestCase):
     """A new forecaster is timed by name before it joins the nightly run."""
 
+    TRIAL = frozenset({"newcomer"})
+
     def neural(self, include_trial=False):
-        ready = {"kronos": "K", "chronos2": "C", "toto2": "T", "sundial": "S"}
-        import neural
-        return {n: a for n, a in ready.items() if include_trial or n not in neural.TRIAL}
+        ready = {"kronos": "K", "chronos2": "C", "toto2": "T", "sundial": "S", "newcomer": "N"}
+        return {n: a for n, a in ready.items() if include_trial or n not in self.TRIAL}
 
     def test_all_leaves_trial_models_out_and_a_name_brings_one_in(self):
-        import neural
-        self.assertEqual(neural.TRIAL, {"toto2", "sundial"})
         every = run.select("all", self.neural)
         self.assertTrue(set(fc.BASELINES) <= set(every))
-        self.assertIn("kronos", every)
-        self.assertFalse(neural.TRIAL & set(every), "a trial model ran in the nightly set")
-        self.assertEqual(list(run.select("toto2,sundial", self.neural)), ["toto2", "sundial"])
-        self.assertEqual(set(run.select("drift, sundial", self.neural)), {"drift", "sundial"})
+        self.assertTrue({"kronos", "toto2", "sundial"} <= set(every))
+        self.assertNotIn("newcomer", every, "a trial model ran in the nightly set")
+        self.assertEqual(list(run.select("newcomer,sundial", self.neural)), ["newcomer", "sundial"])
+        self.assertEqual(set(run.select("drift, newcomer", self.neural)), {"drift", "newcomer"})
         self.assertEqual(list(run.select("baselines", self.neural)), list(fc.BASELINES))
         self.assertEqual(run.select("nothing-called-this", self.neural), {})
+
+    def test_toto_and_sundial_have_joined_the_nightly_run_under_their_names(self):
+        import neural
+        import publish as pb
+        self.assertFalse({"toto2", "sundial"} & neural.TRIAL, "timed on the runner on 15 Sep 2026")
+        for name, label in (("toto2", "Toto 2.0"), ("sundial", "Sundial")):
+            self.assertIn(name, pb.ORDER)
+            self.assertEqual(pb.label(name), (label, label, "neural"))
+            self.assertIn(name, pb.CONSENSUS, "both publish a return, so both are in the middle estimate")
+            self.assertIn(name, rr.prompt("2026-09-14", "ticker", 1))
 
     def test_the_new_adapters_read_the_same_ninety_closes(self):
         try:
