@@ -1831,6 +1831,10 @@
     "meaning": "Anticipation of benchmark interest rate hikes adjusts corporate borrowing costs across sectors and alters the discount rates applied in equity valuation models.",
     "meaning_ar": "يؤدي ترقب رفع أسعار الفائدة الأساسية إلى تعديل تكاليف الاقتراض للشركات عبر القطاعات المختلفة وتغيير معدلات الخصم المطبقة في نماذج تقييم الأسهم."
   },
+  "الاسهم الاوروبيه تتراجع الثلاثاء الي ادني مستوياتها في عده اشهر": {
+    "meaning": "Broad declines across European equity benchmarks reflect widespread valuation contractions and net capital outflows across regional sectors, tracking shifts in underlying macroeconomic indicators and cost-of-capital conditions.",
+    "meaning_ar": "يعكس تراجع مؤشرات الأسهم الأوروبية انخفاضاً واسعاً في التقييمات السعرية وخروجاً لصافي السيولة النقدية عبر مختلف القطاعات، متأثراً بتغيرات المؤشرات الاقتصادية الكلية وتكلفة التمويل."
+  },
   "الاسهم الاوروبيه تتراجع الجمعه بعد صدور بيانات التوظيف الامريكيه القويه": {
     "meaning": "Strong US employment data keeps Federal Reserve interest rates elevated for longer, increasing global yields and triggering equity capital outflows from European markets.",
     "meaning_ar": "تؤدي بيانات التوظيف الأمريكية القوية إلى إبقاء أسعار الفائدة لدى الاحتياطي الفيدرالي مرتفعة لفترة أطول، مما يرفع العوائد العالمية ويدفع تدفقات رؤوس الأموال خارج أسواق الأسهم الأوروبية."
@@ -7025,6 +7029,10 @@
     "meaning": "The policy targets foreign direct investment inflows by creating bilateral industrial partnerships that introduce foreign capital, equipment, and production technology directly into the domestic manufacturing base.",
     "meaning_ar": "تستهدف هذه السياسة تدفقات الاستثمار الأجنبي المباشر عبر إقامة شراكات صناعية ثنائية تُدخل رأس المال الأجنبي والمعدات وتكنولوجيا الإنتاج مباشرة إلى القاعدة التصنيعية المحلية."
   },
+  "وزير الطاقه الامريكي: اغلاق خط الانابيب السعودي انقطاع موقت سيستمر لايام": {
+    "meaning": "A short-term pipeline shutdown creates an immediate operational pause in crude transit capacity, requiring operators to rely on local storage buffers or alternative routing infrastructure to maintain delivery schedules.",
+    "meaning_ar": "يؤدي الإغلاق قصير الأجل لخط الأنابيب إلى توقف تشغيلي فوري في قدرات نقل النفط الخام، مما يدفع المشغلين إلى الاعتماد على المخزونات المحلية أو مسارات نقل بديلة للحفاظ على تدفقات الإمداد."
+  },
   "وزير الطاقه الامريكي: اكثر من 9 ملايين برميل نفط تمر يوميا عبر مضيق هرمز": {
     "meaning": "The Strait of Hormuz functions as a critical global maritime transit corridor, handling daily crude flows exceeding 9 million barrels that directly anchor international oil supply chains and energy shipping infrastructure.",
     "meaning_ar": "يمثل مضيق هرمز ممرًا ملاحيًا حيويًا لتدفقات النفط العالمية، حيث تعبر من خلاله إمدادات خام تتجاوز 9 ملايين برميل يوميًا ترتبط بها سلاسل إمداد الطاقة وحركة الشحن الدولية."
@@ -7184,6 +7192,10 @@
   "“BYD” تستهدف بيع 2.5 مليون سياره في الخارج مع احتدام حرب الاسعار محليا": {
     "meaning": "Domestic automotive price competition shifts manufacturer sales allocations toward export channels to distribute finished inventory across international markets.",
     "meaning_ar": "تؤدي المنافسة السعرية في السوق المحلية إلى إعادة توجيه الحصص البيعية للشركة المصنعة نحو قنوات التصدير لتوزيع المخزون عبر الأسواق الخارجية."
+  },
+  "“EGX30” يستعيد توازنه قرب 54.9 الف نقطه": {
+    "meaning": "The benchmark EGX30 index trades near the 54,900-point level as matched bid and ask orders across constituent equities reach a parity point following prior volatility.",
+    "meaning_ar": "يتداول المؤشر الرئيسي للبورصة المصرية EGX30 بالقرب من مستوى 54.9 ألف نقطة مع وصول أوامر البيع والشراء على أسهم الشركات المكونة له إلى نقطة توازن سعري بعد تقلبات سابقة."
   },
   "“FDC Summit” تعزز حضورها الاقليمي عبر كيان مستقل غير هادف للربح": {
     "meaning": "Establishing an independent non-profit entity separates the conference's cross-border governance and institutional partnerships from commercial corporate liabilities while establishing dedicated regional operational channels.",
