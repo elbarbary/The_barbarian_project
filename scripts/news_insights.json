@@ -3551,6 +3551,10 @@
     "meaning": "Geopolitical competition in artificial intelligence centers on national capital allocation, semiconductor supply chains, and computational infrastructure development between major economies.",
     "meaning_ar": "يرتكز التنافس الجيوسياسي في مجال الذكاء الاصطناعي على تخصيص رؤوس الأموال الوطنية، وسلاسل إمداد أشباه الموصلات، وتطوير البنية التحتية للحوسبة بين الاقتصادات الكبرى."
   },
+  "بيسنت: ارتفاع عوايد السندات الامريكيه يرجع الي عوامل عالميه": {
+    "meaning": "The statement attributes movements in US sovereign debt yields to international macro dynamics, such as cross-border capital flows and global central bank policies, rather than solely domestic economic data.",
+    "meaning_ar": "يُرجع التصريح تحركات عوائد السندات السيادية الأمريكية إلى ديناميكيات الاقتصاد الكلي الدولي، كتدفقات رؤوس الأموال عبر الحدود وسياسات البنوك المركزية العالمية، بدلاً من الاقتصار على المؤشرات المحلية."
+  },
   "بيسنت: اسعار النفط قد تهبط الي 40 دولارا للبرميل بعد انتهاء الصراع مع ايران": {
     "meaning": "Global crude oil benchmarks incorporate a geopolitical risk premium during regional conflicts, and the cessation of supply disruption risks realigns pricing with baseline global supply-demand balances and marginal extraction costs.",
     "meaning_ar": "تعكس أسعار النفط العالمية علاوة مخاطر جيوسياسية أثناء النزاعات الإقليمية، بينما يعيد انحسار مخاطر انقطاع الإمدادات تسعير الخام وفقاً لتوازنات العرض والطلب الأساسية وتكاليف الإنتاج الحدية."
@@ -5673,6 +5677,10 @@
     "meaning": "The Egyptian sports sector holds tangible and intangible assets, such as real estate facilities and club brand equity, while operating with limited private institutional capital participation and structured commercial monetization frameworks.",
     "meaning_ar": "يمتلك قطاع الرياضة المصري أصولاً مادية وغير مادية، مثل المنشآت العقارية والعلامات التجارية للأندية، بينما يعمل بمستويات منخفضة من تدفقات رأس المال المؤسسي الخاص وهياكل الاستغلال التجاري المالي للأصول."
   },
+  "كندا تسعي لاستقطاب استثمارات خاصه في اكبر 4 مطارات": {
+    "meaning": "Attracting private investment into major airports introduces public-private partnership structures, transferring capital expenditure requirements and asset management responsibilities to private operators while retaining state ownership of strategic aviation infrastructure.",
+    "meaning_ar": "يؤدي جذب الاستثمارات الخاصة إلى أكبر المطارات إلى تفعيل نماذج الشراكة بين القطاعين العام والخاص، حيث تنتقل أعباء الإنفاق الرأسمالي وإدارة الأصول التشغيلية إلى المشغلين من القطاع الخاص مع احتفاظ الدولة بملكية البنية التحتية لقطاع الطيران."
+  },
   "كندا تصعد الحرب التجاريه برسوم 50% علي سلع امريكيه": {
     "meaning": "The imposition of a 50% tariff on imported American goods directly raises the landed import cost of these products in the Canadian market, shifting cross-border pricing and supply chain expenses for bilateral trade operations.",
     "meaning_ar": "يؤدي فرض رسوم جمركية بنسبة 50% على السلع الأمريكية المستوردة إلى زيادة تكلفة الاستيراد المباشرة لتلك المنتجات في السوق الكندية، مما يغير هيكل التكاليف وسلاسل الإمداد للتبادل التجاري بين البلدين."
@@ -6908,6 +6916,10 @@
   "وزير الصحه يتفقد المخزون الاستراتيجي من المستلزمات الطبيه": {
     "meaning": "Government inspection of strategic medical reserves tracks supply chain fulfillment, procurement cycles, and operational inventory levels across public healthcare networks.",
     "meaning_ar": "المتابعة الحكومية للمخزون الاستراتيجي للمستلزمات الطبية ترصد مستويات التوريد وجداول الشراء والجاهزية التشغيلية للمخازن ضمن سلاسل إمداد القطاع الصحي."
+  },
+  "وزير الصحه يشهد توقيع بروتوكول تعاون مع شركه الاهليه هيلث كير لتوفير روبوتات جراحات المفاصل": {
+    "meaning": "This public-private partnership introduces specialized medical robotics into the state healthcare system through a private distributor, expanding the operational footprint of advanced medical technology in public hospitals.",
+    "meaning_ar": "يدمج هذا البروتوكول تقنيات الجراحة الروبوتية المتخصصة داخل منظومة المستشفيات الحكومية عبر مورد محلي، مما يوسع النطاق التشغيلي للتجهيزات الطبية المتقدمة في القطاع الصحي العام."
   },
   "وزير الصحه يفتتح موتمر ومعرض ايجي هيلث الدولي بحضور 300 شركه محليه وعالميه": {
     "meaning": "Trade exhibitions of this scale function as direct commercial platforms where healthcare and pharmaceutical companies negotiate procurement contracts, display medical technologies, and establish bilateral supply agreements.",
