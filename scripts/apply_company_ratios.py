@@ -163,7 +163,8 @@ def stated(doc: dict) -> dict[str, tuple[float, str]]:
     return out
 
 
-def published() -> tuple[dict[str, dict[str, float]], dict[str, str], dict[str, set]]:
+def published(folder: pathlib.Path | None = None
+              ) -> tuple[dict[str, dict[str, float]], dict[str, str], dict[str, set]]:
     """Every review document on disk, as ratios per ticker and units per key.
 
     The value is carried through EXACTLY as the document states it. It is
@@ -173,10 +174,14 @@ def published() -> tuple[dict[str, dict[str, float]], dict[str, str], dict[str, 
     is a contradiction with no upside. Rescaling it would be worse: a `ratio`
     turned into a percentage for display would then be a percentage in the
     file, and the next reader of the file has no way to know.
+
+    `folder` is for `audit_accuracy`, which holds the directory to exactly
+    this answer over whichever tree it is auditing.
     """
+    folder = REVIEW if folder is None else folder
     ratios: dict[str, dict[str, float]] = {}
     units: dict[str, set] = collections.defaultdict(set)
-    for path in sorted(REVIEW.glob("*.json")):
+    for path in sorted(folder.glob("*.json")):
         found = stated(load(path))
         if not found:
             continue

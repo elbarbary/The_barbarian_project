@@ -246,6 +246,31 @@ jobs:
           npm install ws --no-save --silent
           node scripts/egx_scan.mjs ../work
 
+      # The directory's ratios folded again over the committed review sheet,
+      # before the tests hold one to the other.
+      #
+      # The tests read the tree as the LAST build committed it, and only this
+      # job's rebuild writes either document. So when a push race committed
+      # the pair split (142b708, 15 Sep 2026: UNIP's price-to-book 2.8315 on
+      # its directory row, 2.824 on its review sheet), every later run failed
+      # here, before the one step that re-folds them. Runs 34955982717 and
+      # 34957349579 both did, and nothing short of a person could have
+      # repaired it.
+      #
+      # The fold is a copy over committed documents, no network and no
+      # derived figure. It writes this runner's checkout, which reaches main
+      # only through the Commit step, after the rebuild has run the same fold
+      # again. The test is exactly as strict: a fold that disagrees with its
+      # own documents still fails it. What it stops failing on is an earlier
+      # commit's accident. The Commit step re-folds after a race and audits
+      # before it pushes, so this should find nothing to do.
+      - name: Fold the directory's ratios before testing them
+        run: |
+          python3 scripts/apply_company_ratios.py
+          if ! git diff --quiet -- public/data/v1/companies.json; then
+            echo "::warning title=Directory ratios re-folded::The committed directory disagreed with its review documents. Folded again before the tests; the rebuild publishes the repair."
+          fi
+
       # The parsers these tests cover read filed financial figures. A silent
       # regression there publishes a wrong number about a real company rather
       # than crashing, so they run before anything is written.
@@ -429,6 +454,14 @@ jobs:
               rm -rf "$tmp"
             done
             GIT_EDITOR=true git rebase --continue >/dev/null 2>&1 || true
+            rederive_and_audit
+          }
+
+          # What has to happen after ANY pull that replayed this build onto
+          # commits it never saw, whether or not a file conflicted: the tree is
+          # now two builds' output, chosen file by file, and nothing checked
+          # that it agrees with itself.
+          rederive_and_audit () {
             # The pull runs with --autostash, and the stash is re-applied as the
             # rebase finishes. It holds what this build wrote and never stages,
             # `scripts/news_insights.json` among it, which the fifteen-minute
@@ -445,6 +478,21 @@ jobs:
             git diff --name-only --diff-filter=U | while read -r f; do
               git checkout HEAD -- "$f" 2>/dev/null || git rm -q --cached -- "$f" 2>/dev/null || true
             done
+            # The directory's ratios are COPIED off the review documents, and
+            # the race splits the pair without the review document ever
+            # conflicting. One this build rewrote identically to the tree it
+            # checked out is not in its commit, so the rebase keeps main's
+            # copy, while `companies.json` conflicts and the newer build's
+            # comes through. The review sheet prices each company at the
+            # build's own close, so the other build's copy differs: 142b708
+            # went out on 15 Sep 2026 with UNIP at a price-to-book of 2.8315
+            # on the row and 2.824 on its sheet, and ab3c580 forty minutes
+            # earlier with CSAG at 6.8816 against 6.9048. Every later run then
+            # failed its tests on the commit and could not rebuild it.
+            #
+            # So fold them again over whatever the race left, as the crossings
+            # below are rebuilt. A copy over committed documents: no network.
+            python3 scripts/apply_company_ratios.py || true
             # The crossings are DERIVED from four documents — the directory,
             # the market file, the news and the filings feed — and the resolver
             # above picks a side for each file on its own. This build stamps
@@ -468,16 +516,30 @@ jobs:
             python3 scripts/build_fixtures.py >/dev/null 2>&1 || true
             git add -A public/data app/assets/fixtures ${STORES}
             git diff --cached --quiet || git commit --amend --no-edit >/dev/null
+            # And the accuracy audit over the tree about to be pushed, which is
+            # not the tree `build_all` audited. It refused to publish a
+            # contradiction there and had no say over this one. The fold above
+            # should leave it nothing to find; if it finds something anyway,
+            # main keeps what it has, the run goes red, and the next build
+            # rebuilds from scratch.
+            if ! python3 scripts/audit_accuracy.py; then
+              echo "::error title=Documents contradict each other::Replayed onto main, this build's documents disagree about a named company (above). Not pushed."
+              return 1
+            fi
             return 0
           }
 
           for attempt in 1 2 3; do
+            built=$(git rev-parse HEAD)
             if git pull --rebase --autostash origin main; then
-              git push origin main && exit 0
+              # A clean replay is a mix of two builds as well.
+              if [ "$(git rev-parse HEAD)" != "$built" ]; then
+                rederive_and_audit || exit 1
+              fi
             else
               resolve_ours || exit 1
-              git push origin main && exit 0
             fi
+            git push origin main && exit 0
             echo "push attempt $attempt lost the race; retrying"
             sleep 5
           done

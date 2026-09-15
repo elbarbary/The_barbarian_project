@@ -13,6 +13,8 @@ Run: python3 -m unittest discover -s scripts -p 'test_*.py'
 
 from __future__ import annotations
 
+import contextlib
+import io
 import json
 import pathlib
 import sys
@@ -23,6 +25,7 @@ from unittest import mock
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import apply_company_ratios as ratios
+import audit_accuracy
 
 
 def review(**metrics) -> dict:
@@ -247,6 +250,139 @@ class Rerunning(unittest.TestCase):
         with mock.patch.object(ratios, "REVIEW", self.review / "gone"):
             ratios.apply()
         self.assertEqual(self.directory.read_bytes(), published)
+
+
+class TheAuditHoldsTheRowToItsDocument(unittest.TestCase):
+    """`ratio_split`: the directory saying one thing and the review sheet another.
+
+    142b708 published UNIP at a price-to-book of 2.8315 on its row and 2.824 on
+    its review document. Every build folds the two together, so no build can
+    produce that. A push race can: it kept one build's review document beside
+    another build's directory. The audit is what refuses to publish it, in the
+    build and again after the race.
+    """
+
+    def audit(self, rows, docs):
+        with tempfile.TemporaryDirectory() as folder:
+            root = pathlib.Path(folder)
+            for ticker, doc in docs.items():
+                (root / f"{ticker}.json").write_text(json.dumps(doc), encoding="utf-8")
+            return [(f["ticker"], f["ratio"], f["directory"], f["document"])
+                    for f in audit_accuracy.audit_ratios(rows, root)]
+
+    def test_the_figure_142b708_published(self):
+        found = self.audit([{"ticker": "UNIP", "ratios": {"pb": 2.8315, "roe": 0.3071}}],
+                           {"UNIP": review(pb=(2.824, "ratio"), roe=(0.3071, "ratio"))})
+        self.assertEqual(found, [("UNIP", "pb", 2.8315, 2.824)])
+
+    def test_a_split_is_a_contradiction_not_a_finding(self):
+        """Named, because a kind left off this list is printed and published."""
+        self.assertIn("ratio_split", audit_accuracy.CONTRADICTIONS)
+
+    def test_a_row_agreeing_with_its_document_is_clean(self):
+        self.assertEqual(self.audit(
+            [{"ticker": "UNIP", "ratios": {"pb": 2.824}}, {"ticker": "NONE"}],
+            {"UNIP": review(pb=(2.824, "ratio"))}), [])
+
+    def test_a_ratio_the_document_no_longer_states_is_a_split(self):
+        """The row kept a figure nothing on disk stands behind."""
+        self.assertEqual(self.audit(
+            [{"ticker": "UNIP", "ratios": {"pb": 2.824, "roe": 0.3071}}],
+            {"UNIP": review(pb=(2.824, "ratio"))}),
+            [("UNIP", "roe", 0.3071, None)])
+
+    def test_a_ratio_the_row_is_missing_is_a_split(self):
+        self.assertEqual(self.audit(
+            [{"ticker": "UNIP", "ratios": {"pb": 2.824}}, {"ticker": "CSAG"}],
+            {"UNIP": review(pb=(2.824, "ratio"), roa=(0.0871, "ratio")),
+             "CSAG": review(pb=(6.9048, "ratio"))}),
+            [("UNIP", "roa", None, 0.0871), ("CSAG", "pb", None, 6.9048)])
+
+    def test_a_key_the_documents_dispute_is_absent_on_both_sides(self):
+        """The fold refuses the column whole, so a row without it agrees."""
+        self.assertEqual(self.audit(
+            [{"ticker": "AAA", "ratios": {"pb": 2.0}}, {"ticker": "BBB"}],
+            {"AAA": review(pb=(2.0, "ratio"), roe=(0.3612, "ratio")),
+             "BBB": review(roe=(36.12, "percent"))}), [])
+
+    def test_no_review_documents_is_the_fold_s_shrug_not_a_split(self):
+        """The fold leaves the directory alone then; there is nothing to hold it to."""
+        self.assertEqual(self.audit([{"ticker": "UNIP", "ratios": {"pb": 2.824}}], {}), [])
+
+    def test_whatever_the_fold_writes_the_audit_accepts(self):
+        """Otherwise the gate refuses every build, not just a split one."""
+        with tempfile.TemporaryDirectory() as folder:
+            root = pathlib.Path(folder)
+            (root / "review").mkdir()
+            for ticker, doc in {
+                "AAA": review(pb=(2.0204, "ratio"), dividend_yield=(4.32, "percent"),
+                              cash_conversion=(-8.5377, "ratio")),
+                "BBB": review(roe=(-2.6251, "ratio"), profit=(55196.394, "egp_m")),
+                "CCC": review(pe=(4.2637, "ratio")),
+            }.items():
+                (root / "review" / f"{ticker}.json").write_text(json.dumps(doc))
+            directory = root / "companies.json"
+            directory.write_text(json.dumps({"companies": [
+                {"ticker": t, "ratios": {"pb": 9.9}} for t in ("AAA", "BBB", "CCC", "DDD")]}))
+            with mock.patch.multiple(ratios, DIRECTORY=directory, REVIEW=root / "review",
+                                     FIXTURE=root / "fixture.json"), \
+                 contextlib.redirect_stdout(io.StringIO()):
+                ratios.apply()
+            rows = json.loads(directory.read_text())["companies"]
+            self.assertEqual(audit_accuracy.audit_ratios(rows, root / "review"), [])
+
+
+class TheValidatePassDoesNotBlockTheRepair(unittest.TestCase):
+    """`build_all --check` audits the tree as last committed, before the rebuild.
+
+    With `ratio_split` a contradiction, 142b708's tree would have failed that
+    pass exactly as it failed the tests, and the rebuild that re-folds the
+    ratios would never have run. So a contradiction there is named and not
+    fatal; the real pass, over the rebuilt tree, is the one that refuses.
+    """
+
+    def run_audit(self, *flags):
+        with tempfile.TemporaryDirectory() as folder:
+            v1 = pathlib.Path(folder)
+            (v1 / "review").mkdir()
+            (v1 / "review" / "UNIP.json").write_text(json.dumps(review(pb=(2.824, "ratio"))))
+            (v1 / "companies.json").write_text(json.dumps({"companies": [
+                {"ticker": "UNIP", "sector": "Paper & Packaging", "market_cap": 866165305,
+                 "ratios": {"pb": 2.8315}}]}))
+            out = io.StringIO()
+            with mock.patch.object(audit_accuracy, "V1", v1), \
+                 mock.patch.object(sys, "argv", ["audit_accuracy.py", *flags]), \
+                 contextlib.redirect_stdout(out):
+                code = audit_accuracy.main()
+            return code, out.getvalue()
+
+    def test_the_real_pass_refuses_to_publish_a_split(self):
+        code, out = self.run_audit()
+        self.assertEqual(code, 1, out)
+        self.assertIn("ratio_split", out)
+
+    def test_the_validate_pass_names_it_and_lets_the_rebuild_run(self):
+        code, out = self.run_audit("--check")
+        self.assertEqual(code, 0, out)
+        self.assertIn("ratio_split", out)
+        self.assertIn("UNIP", out)
+
+
+class TheDailyBuild(unittest.TestCase):
+    """Where publish-app-data folds the ratios, and why that is not only the build."""
+
+    WORKFLOW = (pathlib.Path(__file__).resolve().parent.parent
+                / ".github" / "workflows" / "publish-app-data.yml")
+
+    def test_the_ratios_are_folded_before_the_tests_hold_them_to_their_documents(self):
+        """The tests read the previous commit's tree, which only this job's
+        rebuild can repair. Held to it unfolded, a split on main failed every
+        run before the rebuild — runs 34955982717 and 34957349579."""
+        text = self.WORKFLOW.read_text(encoding="utf-8")
+        fold = text.index("python3 scripts/apply_company_ratios.py")
+        self.assertLess(fold, text.index("python3 -m unittest discover"),
+                        "the tests would hold a split commit against the rebuild again")
+        self.assertLess(fold, text.index("name: Rebuild published data"))
 
 
 class Published(unittest.TestCase):

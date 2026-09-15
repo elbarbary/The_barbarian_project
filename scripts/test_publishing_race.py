@@ -41,6 +41,16 @@ def resolver_shell(workflow: str) -> str:
                      for line in body.splitlines())
 
 
+def commit_shell(workflow: str) -> str:
+    """The functions AND the pull-and-push loop that calls them, to its last line."""
+    source = (WORKFLOWS / workflow).read_text(encoding="utf-8")
+    body = source[source.index("resolve_ours () {"):]
+    end = "echo 'could not push after three attempts'"
+    body = body[:body.index(end) + len(end)] + "\nexit 1"
+    return "\n".join(line[10:] if line.startswith(" " * 10) else line
+                     for line in body.splitlines())
+
+
 def git(*args, cwd, **kw):
     return subprocess.run(("git",) + args, cwd=cwd, check=True,
                           capture_output=True, text=True, **kw)
@@ -56,9 +66,13 @@ class RaceTest(unittest.TestCase):
         (self.root / "public" / "data" / "v1" / "news").mkdir(parents=True)
         (self.root / "public" / "data" / "v1" / "disclosures").mkdir(parents=True)
         (self.root / "scripts").mkdir(parents=True)
-        # The resolver the workflow calls, at the path it calls it from.
-        (self.root / "scripts" / "resolve_generated.py").write_bytes(
-            (HERE / "resolve_generated.py").read_bytes())
+        # The resolver the workflow calls, at the path it calls it from — and
+        # the fold and the audit it runs after a race, which are real here:
+        # they read whatever the scratch repository publishes, and with no
+        # directory or review sheet they have nothing to do.
+        for script in ("resolve_generated.py", "apply_company_ratios.py",
+                       "audit_accuracy.py"):
+            (self.root / "scripts" / script).write_bytes((HERE / script).read_bytes())
         git("init", "-q", "-b", "main", cwd=self.root)
         git("config", "user.email", "t@example.com", cwd=self.root)
         git("config", "user.name", "test", cwd=self.root)
@@ -241,6 +255,159 @@ class RaceTest(unittest.TestCase):
         median, divided_by, out = self.race_the_directory("publish-live-data.yml",
                                                           stashed=True)
         self.assertEqual(divided_by, [median, median], out)
+
+    # ── the directory's ratios and the review sheet they are copied from ──
+    REVIEW = "public/data/v1/review/UNIP.json"
+    FIXTURE = "app/assets/fixtures/companies.json"
+
+    def sheet(self, pb):
+        self.write(self.REVIEW, {"ticker": "UNIP", "metrics": [
+            {"key": "pb", "value": pb, "unit": "ratio"},
+            {"key": "roe", "value": 0.3071, "unit": "ratio"}]})
+
+    def directory(self, stamp, pb, **row):
+        body = {"updated_at": stamp, "ratio_units": {"pb": "ratio", "roe": "ratio"},
+                "companies": [{"ticker": "UNIP", **row,
+                               "ratios": {"pb": pb, "roe": 0.3071}}]}
+        self.write(self.DIRECTORY, body)
+        self.write(self.FIXTURE, body)
+
+    def committed(self, path):
+        return json.loads(git("show", f"HEAD:{path}", cwd=self.root).stdout)
+
+    def unip(self, doc):
+        (row,) = doc["companies"]
+        return row
+
+    def origin(self) -> pathlib.Path:
+        """A bare repository outside the working one, as `origin`."""
+        folder = tempfile.TemporaryDirectory()
+        self.addCleanup(folder.cleanup)
+        origin = pathlib.Path(folder.name) / "origin.git"
+        git("init", "-q", "--bare", "-b", "main", str(origin), cwd=self.root)
+        git("remote", "add", "origin", str(origin), cwd=self.root)
+        return origin
+
+    def push(self):
+        """The Commit step's own pull-and-push loop, with the job's shell flags
+        and without the job's STORES (see `resolve`)."""
+        return subprocess.run(["bash", "-e", "-c", commit_shell("publish-app-data.yml")],
+                              cwd=self.root, capture_output=True, text=True,
+                              env={**os.environ, "STORES": ""})
+
+    def race_the_ratios(self):
+        """142b708, in a real rebase. The build before it left UNIP at 2.8315;
+        ab3c580 reached main first, repriced at 2.824; this build repriced at
+        2.8315 again, so its review document matched the tree it started on,
+        was not in its commit, and main's copy stood beside its directory."""
+        self.sheet(2.8315)
+        self.directory("2026-09-15T08:02:56.468Z", 2.8315)
+        self.commit("3cc0ded: the build both started from")
+        base = git("rev-parse", "HEAD", cwd=self.root).stdout.strip()
+
+        self.sheet(2.824)
+        self.directory("2026-09-15T08:39:30.638Z", 2.824)
+        self.commit("ab3c580: the build that pushed first")
+
+        git("checkout", "-q", "-b", "slow", base, cwd=self.root)
+        self.sheet(2.8315)
+        self.directory("2026-09-15T09:15:57.506Z", 2.8315, market_cap=866165305.068)
+        self.commit("142b708: the build that pushed second")
+
+        rebase = subprocess.run(["git", "rebase", "main"], cwd=self.root,
+                                capture_output=True, text=True)
+        self.assertNotEqual(rebase.returncode, 0, "the setup did not actually collide")
+        self.assertNotIn(self.REVIEW, git("diff", "--name-only", "--diff-filter=U",
+                                          cwd=self.root).stdout,
+                         "the review document must come through without a conflict")
+        return self.resolve("publish-app-data.yml")
+
+    def test_a_race_cannot_commit_a_ratio_its_review_sheet_contradicts(self):
+        done = self.race_the_ratios()
+        out = done.stdout + done.stderr
+        self.assertEqual(done.returncode, 0, out)
+        row = self.unip(self.committed(self.DIRECTORY))
+        stated = {m["key"]: m["value"] for m in self.committed(self.REVIEW)["metrics"]}
+        self.assertEqual(row["ratios"]["pb"], stated["pb"],
+                         f"the committed row restates another build's sheet\n{out}")
+        self.assertEqual(stated["pb"], 2.824, out)
+        # The build's own directory is still the one committed, re-folded.
+        self.assertEqual(row["market_cap"], 866165305.068, out)
+        self.assertEqual(self.committed(self.FIXTURE), self.committed(self.DIRECTORY))
+
+    def test_the_audit_refuses_the_push_when_the_fold_does_not_repair_it(self):
+        """The fold is the fix and the audit is the guarantee; each alone.
+
+        Here the fold finds no directory to write, as a broken or missing fold
+        would, and the split has to stop at the audit instead of reaching main.
+        """
+        fold = self.root / "scripts" / "apply_company_ratios.py"
+        fold.write_text(fold.read_text(encoding="utf-8").replace(
+            'DIRECTORY = V1 / "companies.json"', 'DIRECTORY = V1 / "nowhere.json"'),
+            encoding="utf-8")
+        done = self.race_the_ratios()
+        out = done.stdout + done.stderr
+        self.assertEqual(done.returncode, 1, f"a split directory was cleared to push\n{out}")
+        self.assertIn("ratio_split", out)
+        self.assertIn("Not pushed", out)
+
+    def test_a_clean_replay_is_folded_and_audited_before_it_is_pushed(self):
+        """No conflict at all, so `resolve_ours` never runs.
+
+        Main's new commit rewrote the review sheet and nothing else; this
+        build rewrote its directory and left the sheet as it found it. Git
+        merges that without a word, and the result is the same split. The
+        whole Commit loop runs here, against a bare origin.
+        """
+        origin = self.origin()
+        self.sheet(2.8315)
+        self.directory("2026-09-15T08:02:56.468Z", 2.8315)
+        self.commit("base")
+        git("push", "-q", "origin", "main", cwd=self.root)
+
+        elsewhere = tempfile.TemporaryDirectory()
+        self.addCleanup(elsewhere.cleanup)
+        other = pathlib.Path(elsewhere.name) / "other"
+        git("clone", "-q", str(origin), str(other), cwd=self.root)
+        git("config", "user.email", "t@example.com", cwd=other)
+        git("config", "user.name", "other", cwd=other)
+        (other / self.REVIEW).write_text(json.dumps({"ticker": "UNIP", "metrics": [
+            {"key": "pb", "value": 2.824, "unit": "ratio"},
+            {"key": "roe", "value": 0.3071, "unit": "ratio"}]}))
+        git("commit", "-q", "-am", "main moves the sheet", cwd=other)
+        git("push", "-q", "origin", "main", cwd=other)
+
+        self.directory("2026-09-15T09:15:57.506Z", 2.8315, market_cap=866165305.068)
+        self.commit("data: rebuild published app data")
+
+        done = self.push()
+        out = done.stdout + done.stderr
+        self.assertEqual(done.returncode, 0, out)
+        self.assertNotIn("CONFLICT", out, "the setup collided; this is the clean path")
+        pushed = json.loads(git("--git-dir", str(origin), "show",
+                                f"main:{self.DIRECTORY}", cwd=self.root).stdout)
+        sheet = json.loads(git("--git-dir", str(origin), "show",
+                               f"main:{self.REVIEW}", cwd=self.root).stdout)
+        self.assertEqual(self.unip(pushed)["ratios"]["pb"],
+                         {m["key"]: m["value"] for m in sheet["metrics"]}["pb"],
+                         f"a clean replay pushed a split directory\n{out}")
+        self.assertEqual(self.unip(pushed)["market_cap"], 866165305.068, out)
+
+    def test_a_pull_that_brings_nothing_pushes_the_build_untouched(self):
+        """Nothing replayed, nothing to re-derive: no amend, the commit as built."""
+        origin = self.origin()
+        self.sheet(2.824)
+        self.directory("2026-09-15T08:39:30.638Z", 2.824)
+        self.commit("base")
+        git("push", "-q", "origin", "main", cwd=self.root)
+        self.directory("2026-09-15T09:15:57.506Z", 2.824, market_cap=866165305.068)
+        self.commit("data: rebuild published app data")
+        built = git("rev-parse", "HEAD", cwd=self.root).stdout.strip()
+
+        done = self.push()
+        self.assertEqual(done.returncode, 0, done.stdout + done.stderr)
+        self.assertEqual(git("--git-dir", str(origin), "rev-parse", "main",
+                             cwd=self.root).stdout.strip(), built)
 
     def test_a_conflict_outside_generated_data_still_stops_everything(self):
         # The guard that keeps this from auto-resolving source code.

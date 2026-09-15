@@ -16,6 +16,8 @@ Every check here is one this repository has already been bitten by:
     whole balance sheets;
   * a P/E that does not divide out against the EPS printed beside it;
   * a sector in the directory that is not the sector in the document;
+  * a ratio on the directory row that is not the one its review document
+    states, which is how UNIP went out on 15 Sep 2026;
   * a newest filing old enough that "latest" means something else.
 
 It reads only what is published. No network, no vendor, nothing it cannot
@@ -31,6 +33,8 @@ import argparse
 import datetime
 import json
 import pathlib
+
+import apply_company_ratios
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 V1 = REPO / "public" / "data" / "v1"
@@ -183,6 +187,41 @@ def audit_one(row: dict, doc: dict | None, quote: dict, today: datetime.date,
     return faults
 
 
+def audit_ratios(rows: list[dict], review: pathlib.Path) -> list[dict]:
+    """Directory ratios that are not the ones the review documents state.
+
+    `apply_company_ratios` copies six figures off each `review/<TICKER>.json`
+    onto the directory row, verbatim, so the market table and the company
+    screen cannot disagree. On 15 Sep 2026 they did: 142b708 published UNIP at
+    a price-to-book of 2.8315 on the row and 2.824 on its own review sheet.
+    The fold was right when it ran. The push race after it replayed the build
+    onto another build's commit, and git kept that build's review document —
+    this one had not changed it — beside this build's directory.
+
+    Held to exactly what the fold would write over the same documents, unit
+    agreement and absences included, so a row still carrying a ratio its
+    document no longer states is caught as surely as a figure that moved. No
+    tolerance: the value is a copy, and any difference at all is two builds.
+    """
+    stated, _, _ = apply_company_ratios.published(review)
+    if not stated:
+        # The fold's own shrug: with no review document stating a ratio it
+        # leaves the directory alone, so there is nothing to hold it to.
+        return []
+    faults = []
+    for row in rows:
+        held = row.get("ratios") if isinstance(row.get("ratios"), dict) else {}
+        document = stated.get(str(row.get("ticker") or "").strip().upper()) or {}
+        for key in dict.fromkeys([*apply_company_ratios.RATIOS, *held]):
+            if held.get(key) != document.get(key):
+                faults.append({"ticker": row["ticker"], "kind": "ratio_split",
+                               "detail": "the directory row and its review document "
+                                         "state different ratios",
+                               "ratio": key, "directory": held.get(key),
+                               "document": document.get(key)})
+    return faults
+
+
 # Kinds where two of our own documents disagree about the same company. Not
 # "the data is thin" — "the data is inconsistent with itself", which is a bug
 # with an address. See the note in main().
@@ -193,7 +232,14 @@ def audit_one(row: dict, doc: dict | None, quote: dict, today: datetime.date,
 # they came from were revised at line 112 — the row said one thing and the
 # document beside it another. `build_ttm_pe` re-derives them after every step
 # that can touch a filed figure, and the count is nought.
-CONTRADICTIONS = ("sector_split", "pe_vs_eps", "profit_split")
+#
+# `ratio_split` joined at nought as well. Replayed over every commit on main
+# since the fold first ran in CI, it finds two, CSAG in ab3c580 and UNIP in
+# 142b708, both on 15 Sep 2026 and both push races rather than a builder:
+# every build folds the ratios after the review sheet and agrees with itself.
+# publish-app-data's Commit step now folds them again over whatever a race
+# leaves, and runs this before it pushes.
+CONTRADICTIONS = ("sector_split", "pe_vs_eps", "profit_split", "ratio_split")
 
 
 def audit_ownership(doc: dict | None) -> list[dict]:
@@ -230,7 +276,7 @@ def fx() -> dict[str, float]:
     `currShort` is "US$", not "USD" — the exchange's own label, kept verbatim
     because converting it to a code is a mapping that can go wrong silently.
     """
-    doc = load(V1 / "rates" / "latest.json")
+    doc = load(V1 / "rates" / "latest.json") or {}
     by_code = {c.get("code"): c.get("egp") for c in (doc.get("currencies") or [])
                if isinstance(c.get("egp"), (int, float))}
     return {short: by_code[code]
@@ -242,11 +288,12 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--json", action="store_true", help="the findings, machine-readable")
     ap.add_argument("--ticker", help="one company")
-    # Accepted and ignored: this reads and never writes, so the validate pass
-    # and the real one are the same run. It was registered in build_all as a
-    # step that takes the flag and did not take it, so `build_all --check` —
-    # the "Validate before writing anything" job — has failed on
-    # "unrecognized arguments: --check" in every CI run since the audit landed.
+    # The validate pass. It was registered in build_all as a step that takes the
+    # flag and did not take it, so `build_all --check` — the "Validate before
+    # writing anything" job — failed on "unrecognized arguments: --check" in
+    # every CI run until it was accepted. It was then IGNORED, on the reasoning
+    # that a step which never writes makes the validate pass and the real one
+    # the same run. They are not the same tree: see the end of main().
     ap.add_argument("--check", action="store_true", help=argparse.SUPPRESS)
     args = ap.parse_args()
 
@@ -263,6 +310,7 @@ def main() -> int:
     for row in rows:
         doc = load(V1 / "companies" / f"{row['ticker']}.json")
         faults += audit_one(row, doc, market.get(row["ticker"]) or {}, today, rates)
+    faults += audit_ratios(rows, V1 / "review")
     if not args.ticker:
         faults += audit_ownership(load(V1 / "insider-people.json"))
 
@@ -306,6 +354,19 @@ def main() -> int:
               "each other, not gaps in the world:")
         for kind in broken:
             print(f"      {kind}: {counts[kind]}")
+        if args.check:
+            # `build_all --check` runs BEFORE the rebuild, so this is the tree
+            # the last build committed — and the rebuild is what re-derives
+            # every kind above. Refusing here refuses the one run that could
+            # repair it, and every later run the same way, until a person
+            # does. The UNIP split of 15 Sep 2026 did exactly that through the
+            # test suite, which reads the same committed tree at the same
+            # point. So the validate pass names them and carries on. The gates
+            # are the real pass, after the rebuild, and publish-app-data's
+            # Commit step, after a push race.
+            print("\n   That is the tree as last committed. The rebuild re-derives "
+                  "these, and the audit after it refuses to publish any that remain.")
+            return 0
         return 1
     return 0
 
