@@ -52,6 +52,8 @@ on:
     paths:
       - 'scripts/lab/**'
       - 'scripts/gemini.py'
+      - 'scripts/egx_scan.mjs'
+      - 'scripts/egx_history.mjs'
       - '.github/workflows/lab-nightly.yml'
 
   workflow_dispatch:
@@ -132,11 +134,19 @@ jobs:
           git -C ../kronos-src checkout --quiet 67b630e67f6a18c9e9be918d9b4337c960db1e9a
           echo "ESTHMR_KRONOS_SOURCE=$(cd ../kronos-src && pwd)" >> "$GITHUB_ENV"
 
-      # The same scan `publish-app-data` uses: 296 scanner rows and ~232
+      # The same scan `publish-app-data` uses: ~294 scanner rows and ~264
       # companies with 120 completed split-adjusted bars, pulled over a
       # WebSocket. Fetched here rather than shared because two fetches
       # minutes apart are two different markets, and the forecast has to be
       # made from the bars the record says it was made from.
+      #
+      # Its log says how many listings have no sessions to fetch (~30 that
+      # have never traded) and how many histories are MISSING. Missing is the
+      # number that matters: a scan taken during the session on 15 Sep came
+      # back 53 companies short, and the steps below rebuilt the public
+      # record from it. Now the forecast, the scoring and the publish each
+      # refuse a scan with any missing history (`panel.missing`) and leave
+      # the record as it was; the retry schedule fetches again.
       - name: Fetch the market scan
         run: |
           mkdir -p ../work

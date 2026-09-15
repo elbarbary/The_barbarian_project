@@ -433,6 +433,15 @@ def main(argv=None) -> int:
                   "forecast and is not forecast again")
             return 0
 
+    # A night is sealed once, so a universe short of companies whose history
+    # the fetch lost would be short in the record for good. Refused instead:
+    # the retry schedule fetches again. A dry run writes nothing and says so.
+    lost = pricing.missing(scan)
+    if lost:
+        if not args.check:
+            raise SystemExit(pricing.refusal("lab", lost))
+        print(f"   NOT A FULL MARKET — {pricing.refusal('lab', lost)}")
+
     ran_at = (datetime.datetime.now(datetime.timezone.utc)
               .isoformat(timespec="seconds").replace("+00:00", "Z"))
     document = build(scan, chosen, ran_at, today=todays)
@@ -472,6 +481,7 @@ def main(argv=None) -> int:
           f"{'before the open' if timing['beforeOpen'] else 'session running'}")
     print(f"   prices: {prices['archiveCount']} from this project's archive, "
           f"{prices['scanOnlyCount']} from the vendor alone, "
+          f"{prices['noHistoryCount']} with no sessions in the scan, "
           f"{prices['extendedCount']} carrying today's close from the exchange")
     if prices.get("unreadable"):
         print(f"   left out {len(prices['unreadable'])} companies whose recent closes are not "

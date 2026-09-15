@@ -643,7 +643,12 @@ def main(argv=None) -> int:
                   + (f", {len(today)} companies" if today else ""))
         except Exception as error:  # noqa: BLE001 — any refusal, same answer
             print(f"   the exchange did not answer ({type(error).__name__})")
-    panel = ev.bar_panel(scans, today=today)
+    panel, lost = ev.scan_panel(scans, today=today)
+    if lost:
+        # A short scan does not get to rewrite the public record. On 15 Sep one
+        # took the five-session scored counts of the first three nights from
+        # 172/232/150 to 150/206/138, and moved every average with them.
+        raise SystemExit(pricing.refusal("publish", lost))
     sessions = ev.calendar(panel)
     if not sessions:
         raise SystemExit("publish: the scans hold no session a majority shares")

@@ -42,6 +42,24 @@ a day nothing happened.
 Where they disagree the archive is not used for that company, and the run
 records which companies those were. Where they agree the archive is the
 series, because it is the longer one.
+
+A COMPANY THE SCAN HAS NO SESSIONS FOR
+--------------------------------------
+Has no series here, even when the archive holds years of it. Nothing checks
+the archive when the vendor's sessions are not there, and the check cannot be
+done with less. Every company whose archive disagreed with the vendor on 14
+September — LUTS by 39%, GRCA by 25%, EEII by 17% — had a LATEST close that
+agreed with the vendor's to the piastre: the corporate action sits in the
+older sessions, and a comparison against the scan's `close` or its
+`currentSessionBar` would have waved all of them through. LUTS and GRCA were
+both among the companies the 15 September scan came back without.
+
+Why a scan has no sessions for a company is the scan's to say. A listing that
+has never traded has none to give (`historyStatus: "none"`); a fetch that did
+not get them is `missing`, and `missing()` makes that refusable: a record
+rebuilt from such a scan describes a smaller market than the one it is about.
+An earlier scan that does hold the company can stand beside it — see
+`evaluate.bar_panel`, which takes each company's series whole from one scan.
 """
 
 from __future__ import annotations
@@ -94,6 +112,61 @@ def agreement(deep: list[dict], scan: list[dict]) -> tuple[float | None, int]:
     if len(shared) < OVERLAP:
         return None, len(shared)
     return statistics.median(abs(a - b) / b for a, b in shared if b), len(shared)
+
+
+def missing(scan: dict) -> list[str]:
+    """The listings whose history exists and this scan does not carry.
+
+    `egx_scan.mjs` names them in `missingHistoryTickers`: no answer from the
+    chart socket after every pass, or a "no sessions" answer for a company
+    the scanner's own volume says trades. Empty on a complete scan.
+
+    A scan written before that field says it another way. `historiesFetched`
+    counted the listings the socket answered, so fewer answers than listings
+    means some never came — and since such a scan cannot tell a listing with
+    no sessions from a lost one, every company it holds no sessions for is
+    counted. The scans of 14 September answered all 296; the one of 15
+    September answered 241 of 294, and 53 are counted.
+    """
+    named = scan.get("missingHistoryTickers")
+    if isinstance(named, list):
+        return sorted(t for t in named if isinstance(t, str) and t)
+    records = scan.get("records") or []
+    answered = scan.get("historiesFetched")
+    listed = scan.get("scannerReturned", len(records))
+    if not isinstance(answered, int) or not isinstance(listed, int) or answered >= listed:
+        return []
+    return sorted(r["ticker"] for r in records
+                  if r.get("ticker") and not r.get("recentSplitAdjustedBars"))
+
+
+def uncovered(scans: list[dict]) -> list[str]:
+    """What no scan given accounts for: missing from one, answered by none.
+
+    A company one scan lost and another answered for is accounted for — with
+    its sessions, which `evaluate.bar_panel` then takes whole from that scan,
+    or with none, because it is a listing that has never traded. The second
+    matters for scans written before `missingHistoryTickers`, which cannot
+    tell the two apart on their own.
+    """
+    lost: set[str] = set()
+    answered: set[str] = set()
+    for scan in scans:
+        gone = set(missing(scan))
+        lost |= gone
+        answered |= {r.get("ticker") for r in scan.get("records") or []} - gone
+    return sorted(lost - answered)
+
+
+def refusal(who: str, lost: list[str]) -> str:
+    """Why a record is not rebuilt from these scans, in the words the log shows."""
+    named = ", ".join(lost[:12]) + (f" and {len(lost) - 12} more" if len(lost) > 12 else "")
+    count = f"{len(lost)} listing" + ("s" if len(lost) != 1 else "")
+    return (f"{who}: the scan is missing the history of {count} ({named}). "
+            "The fetch did not get it, which is not the same as there being none, "
+            "and a record rebuilt from it would describe a smaller market than the one "
+            "it is about. Refusing: fetch the scan again, or give an earlier scan that "
+            "holds them beside it.")
 
 
 def rows_of(payload) -> list[dict]:
@@ -253,14 +326,17 @@ def build(scan: dict, *, today: dict[str, dict] | None = None,
     """Every company's history, from the deepest source that can be trusted.
 
     Returns the panel and an account of how it was assembled: which companies
-    took the archive, which fell back to the scan and why, and which gained
-    today's session. The account is written into the run, because "where did
-    this price come from" is the first question anybody auditing a forecast
-    asks and the hardest one to answer afterwards.
+    took the archive, which fell back to the scan and why, which had no
+    sessions in the scan at all, and which gained today's session. The account
+    is written into the run, because "where did this price come from" is the
+    first question anybody auditing a forecast asks and the hardest one to
+    answer afterwards.
     """
     today = today or {}
     panel: dict[str, list[dict]] = {}
-    note = {"archive": [], "scanOnly": {}, "extended": [], "notExtended": {}}
+    note = {"archive": [], "scanOnly": {}, "noHistory": {}, "extended": [],
+            "notExtended": {}}
+    lost = set(missing(scan))
 
     for record in scan.get("records") or []:
         ticker = record.get("ticker")
@@ -268,6 +344,16 @@ def build(scan: dict, *, today: dict[str, dict] | None = None,
             continue
         scanned = sorted((b for b in (record.get("recentSplitAdjustedBars") or [])
                           if b.get("date")), key=lambda b: b["date"])
+        if not scanned:
+            # No series, not the archive's and not a lone session from the
+            # exchange: there is nothing to check either against (see "A
+            # COMPANY THE SCAN HAS NO SESSIONS FOR" above).
+            note["noHistory"][ticker] = (
+                "the scan is missing its history" if ticker in lost else
+                "a listing with no sessions to fetch"
+                if record.get("historyStatus") == "none" else
+                "the scan carries no sessions for it")
+            continue
         archived = deep_bars(ticker, root=root)
         gap, shared = agreement(archived, scanned)
 
@@ -296,6 +382,7 @@ def build(scan: dict, *, today: dict[str, dict] | None = None,
             panel[ticker] = bars
 
     note["scanOnlyCount"] = len(note["scanOnly"])
+    note["noHistoryCount"] = len(note["noHistory"])
     note["archiveCount"] = len(note["archive"])
     note["extendedCount"] = len(note["extended"])
     return {"panel": panel, "sources": note}

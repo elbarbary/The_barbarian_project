@@ -68,9 +68,10 @@ PRIVATE = RUNS / "evaluation.json"
 PUBLIC = REPO / "public" / "data" / "v1" / "research" / "leaderboard.json"
 
 
-def bar_panel(scans: list[pathlib.Path], *, today=None,
-              root: pathlib.Path = pricing.DEEP) -> dict[str, dict[str, dict]]:
-    """Every bar this project holds, by ticker and date.
+def scan_panel(scans: list[pathlib.Path], *, today=None,
+               root: pathlib.Path = pricing.DEEP) -> tuple[dict[str, dict[str, dict]], list[str]]:
+    """Every bar this project holds, by ticker and date — and the listings
+    whose history none of the scans holds (`panel.uncovered`).
 
     Built by `panel.py` from the deep archive where it agrees with the scan
     and from the scan alone where it does not — the same series the forecast
@@ -82,22 +83,40 @@ def bar_panel(scans: list[pathlib.Path], *, today=None,
     oldest bar stops being scorable, and the leaderboard would have gone on
     saying "8 dates" while the 8 slid quietly forward.
 
-    Several scans still merge, later winning a collision: a bar is
-    split-adjusted when it is read, and the newest reading of a session is
-    the one adjusted for every corporate action since.
+    Several scans may be given, and a company's series comes WHOLE from the
+    newest scan that has one. Newest, because a bar is split-adjusted when it
+    is read and the newest reading is adjusted for every corporate action
+    since. Whole, because these used to merge session by session, and two
+    scans that took a company from different sources — the archive in one, the
+    vendor alone in the other — then made one series out of both, which is
+    exactly the splice `panel.py` refuses. An earlier scan supplies only the
+    companies the newer ones hold no sessions for. "Newest" is the scan's own
+    capture instant, then its file name, never the directory it sits in.
     """
-    merged: dict[str, dict[str, dict]] = collections.defaultdict(dict)
-    for path in sorted(scans):
+    held = []
+    for path in scans:
         try:
             scan = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             continue
+        held.append((str(scan.get("asOf") or ""), path.name, scan))
+    held.sort(key=lambda h: h[:2], reverse=True)
+
+    merged: dict[str, dict[str, dict]] = {}
+    for _, _, scan in held:
         built = pricing.build(scan, today=today, root=root)
         for ticker, bars in built["panel"].items():
-            for bar in bars:
-                if bar.get("date") and isinstance(bar.get("close"), (int, float)):
-                    merged[ticker][bar["date"]] = bar
-    return merged
+            if ticker not in merged:
+                merged[ticker] = {bar["date"]: bar for bar in bars
+                                  if bar.get("date") and isinstance(bar.get("close"), (int, float))}
+    return merged, pricing.uncovered([scan for _, _, scan in held])
+
+
+def bar_panel(scans: list[pathlib.Path], *, today=None,
+              root: pathlib.Path = pricing.DEEP) -> dict[str, dict[str, dict]]:
+    """`scan_panel`'s bars alone, for a reader that does not rebuild a record
+    from them — the reveal only counts sessions."""
+    return scan_panel(scans, today=today, root=root)[0]
 
 
 def bars_of(panel: dict, ticker: str) -> list[dict]:
@@ -630,7 +649,11 @@ def main(argv=None) -> int:
     if not scans:
         raise SystemExit("evaluate: no scan given — there are no realised bars "
                          "to mark the forecasts against")
-    panel = bar_panel(scans)
+    panel, lost = scan_panel(scans)
+    if lost:
+        # Before anything is scored or written: the leaderboard on disk stays
+        # the one built from a whole market.
+        raise SystemExit(pricing.refusal("evaluate", lost))
     sessions = calendar(panel)
     print(f"   {len(scans)} scans → {len(panel)} tickers, "
           f"{sum(len(v) for v in panel.values())} company-sessions")

@@ -1061,7 +1061,8 @@ class PricePanelTest(unittest.TestCase):
         (self.archive / f"{ticker}.json").write_text(json.dumps(
             {"ticker": ticker, "bars": bars}))
 
-    def series(self, n, start=100.0, step=1.0, first=1):
+    @staticmethod
+    def series(n, start=100.0, step=1.0, first=1):
         return [{"date": f"2026-{1 + (i + first) // 28:02d}-{1 + (i + first) % 28:02d}",
                  "close": start + i * step, "volume": 1000.0} for i in range(n)]
 
@@ -1127,6 +1128,219 @@ class PricePanelTest(unittest.TestCase):
         self.assertEqual(last["high"], last["close"] + 2)
         # And the sessions the scan never reached keep a close and no high.
         self.assertNotIn("high", out["panel"]["AAA"][0])
+
+    def test_no_sessions_in_the_scan_is_no_series_however_deep_the_archive(self):
+        # Four hundred archived sessions and nothing to check them against.
+        # Not even the exchange's close for today: appended to nothing, its
+        # previous close is checked against nothing either.
+        deep = self.series(400)
+        self.store("SWDY", deep)
+        today = {"SWDY": {"date": "2026-16-01", "close": deep[-1]["close"] + 1,
+                          "_prevClose": deep[-1]["close"]}}
+        out = pricing.build(self.scan_of(("SWDY", [])), today=today, root=self.archive)
+        self.assertNotIn("SWDY", out["panel"])
+        self.assertNotIn("SWDY", out["sources"]["scanOnly"])
+        self.assertNotIn("SWDY", out["sources"]["extended"])
+        self.assertEqual(out["sources"]["noHistory"], {"SWDY": "the scan carries no sessions for it"})
+        self.assertEqual(out["sources"]["noHistoryCount"], 1)
+
+    def test_the_scans_close_cannot_vouch_for_the_archive(self):
+        # GRCA on 14 September: the archive differed from the vendor by 25%
+        # across the sessions they shared, and its newest close agreed with
+        # the vendor's to the piastre — so did LUTS's, 39% apart. The action
+        # sits in the older sessions. With the vendor's sessions the rule sees
+        # it; with only the scan's close and current bar, which agree, nothing
+        # can, and the archive is not taken on their word.
+        deep = self.series(400)
+        self.store("GRCA", deep)
+        vendor = [dict(b, close=b["close"] * 0.75) if i < 90 else dict(b)
+                  for i, b in enumerate(deep[-120:])]
+        whole = pricing.build(self.scan_of(("GRCA", vendor)), root=self.archive)
+        self.assertRegex(whole["sources"]["scanOnly"]["GRCA"], r"25\.0%")
+        self.assertEqual(vendor[-1]["close"], deep[-1]["close"])
+
+        short = {"records": [{"ticker": "GRCA", "recentSplitAdjustedBars": [],
+                              "close": deep[-1]["close"],
+                              "currentSessionBar": dict(deep[-1])}]}
+        self.assertNotIn("GRCA", pricing.build(short, root=self.archive)["panel"])
+
+    def test_why_a_scan_has_no_sessions_is_the_scan_s_to_say(self):
+        scan = {"missingHistoryTickers": ["SWDY"], "records": [
+            {"ticker": "SWDY", "recentSplitAdjustedBars": [], "historyStatus": "missing"},
+            {"ticker": "ACFR", "recentSplitAdjustedBars": [], "historyStatus": "none"}]}
+        out = pricing.build(scan, root=self.archive)
+        self.assertEqual(out["sources"]["noHistory"], {
+            "SWDY": "the scan is missing its history",
+            "ACFR": "a listing with no sessions to fetch"})
+
+
+class ShortScanTest(unittest.TestCase):
+    """A scan that lost companies does not rewrite the record or seal a night.
+
+    On 15 September a scan taken during the session came back with 53
+    companies' histories empty, 24 of them years deep in the archive, and the
+    CI publish rebuilt the public record from it: the five-session scored
+    counts of the first three nights went from 172/232/150 to 150/206/138.
+    """
+
+    def scan(self, lost=(), empty=(), full=("COMI",), **fields):
+        records = ([{"ticker": t, "recentSplitAdjustedBars": []} for t in (*lost, *empty)]
+                   + [{"ticker": t, "recentSplitAdjustedBars": rising(120)} for t in full])
+        return {"missingHistoryTickers": list(lost), "records": records, **fields}
+
+    def test_a_complete_scan_is_missing_nothing(self):
+        self.assertEqual(pricing.missing(self.scan(empty=("ACFR",))), [])
+        # One written before the field, whose socket answered every listing.
+        old = self.scan(empty=("ACFR",), historiesFetched=2, scannerReturned=2)
+        del old["missingHistoryTickers"]
+        self.assertEqual(pricing.missing(old), [])
+        # And one that carries neither says nothing it cannot know.
+        self.assertEqual(pricing.missing({"records": [{"ticker": "ACFR"}]}), [])
+
+    def test_the_scan_names_what_it_lost(self):
+        self.assertEqual(pricing.missing(self.scan(lost=("SWDY", "ISPH"), empty=("ACFR",))),
+                         ["ISPH", "SWDY"])
+
+    def test_an_older_scan_short_of_answers_counts_every_empty_company(self):
+        # 241 answers for 294 listings: a listing that has never traded and
+        # a company whose history was lost look the same in such a file.
+        old = self.scan(empty=("ACFR", "SWDY"), historiesFetched=2, scannerReturned=3)
+        del old["missingHistoryTickers"]
+        self.assertEqual(pricing.missing(old), ["ACFR", "SWDY"])
+
+    def test_an_earlier_scan_that_answered_for_the_company_covers_it(self):
+        short = self.scan(lost=("SWDY",))
+        earlier = self.scan(full=("COMI", "SWDY"))
+        self.assertEqual(pricing.uncovered([short]), ["SWDY"])
+        self.assertEqual(pricing.uncovered([earlier, short]), [])
+        # A scan that never listed it answers nothing for it.
+        self.assertEqual(pricing.uncovered([self.scan(full=("COMI",)), short]), ["SWDY"])
+
+    def test_a_listing_that_never_traded_is_covered_by_a_scan_that_answered_it(self):
+        # The 14 Sep scan answered all 296 listings and ACFR with no sessions;
+        # the 15 Sep one answered 241 of 294, so on its own ACFR and SWDY are
+        # both counted. Beside the 14th neither is: ACFR has no history to
+        # miss, and SWDY's comes from the 14th.
+        earlier = self.scan(empty=("ACFR",), full=("SWDY",), historiesFetched=2, scannerReturned=2)
+        short = self.scan(empty=("ACFR", "SWDY"), full=("COMI",), historiesFetched=1, scannerReturned=3)
+        for old in (earlier, short):
+            del old["missingHistoryTickers"]
+        self.assertEqual(pricing.uncovered([short]), ["ACFR", "SWDY"])
+        self.assertEqual(pricing.uncovered([earlier, short]), [])
+
+    def test_evaluate_and_publish_refuse_before_writing(self):
+        import tempfile
+        import publish as pb
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            runs = root / "runs"
+            runs.mkdir()
+            (runs / "run-2026-05-20.json").write_text(json.dumps(
+                {"basisSession": "2026-05-20", "models": {}}))
+            path = root / "daily_scan_2026-05-25.json"
+            path.write_text(json.dumps(self.scan(lost=("SWDY",))))
+            # `--check` too: a refusal that did not fire would still write nothing.
+            for main in (ev.main, lambda argv: pb.main([*argv, "--no-today"])):
+                with self.assertRaises(SystemExit) as refused:
+                    main([str(path), "--runs", str(runs), "--check"])
+                self.assertIn("missing the history of 1 listing (SWDY)", str(refused.exception))
+
+    def test_a_night_is_not_sealed_from_a_short_scan_and_a_dry_run_says_so(self):
+        import contextlib
+        import io
+        import tempfile
+        import unittest.mock as mock
+        days = [f"2026-{m:02d}-{d:02d}" for m in (1, 2, 3, 4, 5)
+                for d in range(1, 25)][:120]
+        scan = {"missingHistoryTickers": ["SWDY"], "records": [
+            {"ticker": "SWDY", "recentSplitAdjustedBars": []}] + [
+            {"ticker": t, "recentSplitAdjustedBars":
+                [{"date": d, "open": 100.0, "high": 101.0, "low": 99.0,
+                  "close": 100.0 + i, "volume": 1000.0} for i, d in enumerate(days)]}
+            for t in ("AAA", "BBB", "CCC")]}
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            path = root / "daily_scan.json"
+            path.write_text(json.dumps(scan))
+            out = root / "lab"
+            out.mkdir()
+            before_open = lambda: datetime.datetime(2026, 5, 25, 8, 0, tzinfo=run.CAIRO)
+            with mock.patch.object(run, "OUT", out), \
+                    mock.patch.object(run, "COMMITMENTS", root / "commitments"), \
+                    mock.patch.object(run, "now_in_cairo", before_open):
+                with self.assertRaises(SystemExit) as refused:
+                    run.main([str(path), "--models", "drift", "--no-timestamp",
+                              "--no-today", "--write"])
+                self.assertIn("missing the history of 1 listing", str(refused.exception))
+                self.assertEqual(list(out.iterdir()), [])
+
+                said = io.StringIO()
+                with contextlib.redirect_stdout(said):
+                    code = run.main([str(path), "--models", "drift", "--no-timestamp",
+                                     "--no-today"])
+                self.assertEqual(code, 0)
+                self.assertIn("NOT A FULL MARKET", said.getvalue())
+                self.assertEqual(list(out.iterdir()), [])
+
+
+class WholeSeriesTest(unittest.TestCase):
+    """Several scans, and each company's series from exactly one of them."""
+
+    def setUp(self):
+        import tempfile
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.root = pathlib.Path(self.tmp.name)
+        self.archive = self.root / "prices"
+        self.archive.mkdir()
+
+    def write(self, name, scan):
+        path = self.root / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(scan))
+        return path
+
+    def test_two_scans_that_took_a_company_from_different_sources_are_not_spliced(self):
+        # The older scan agreed with the archive and took its 400 sessions; the
+        # newer one did not, and took the vendor's 120. Merged session by
+        # session that was 280 archived closes and then the vendor's, 39%
+        # apart where they met.
+        deep = PricePanelTest.series(400)
+        (self.archive / "AAA.json").write_text(json.dumps({"bars": deep}))
+        vendor = [dict(b, close=b["close"] * 0.61) for b in deep[-120:]]
+        paths = [self.write("daily_scan_2026-08-01.json", {"asOf": "2026-08-01T12:00:00Z",
+                            "records": [{"ticker": "AAA", "recentSplitAdjustedBars": deep[-120:]}]}),
+                 self.write("daily_scan_2026-09-01.json", {"asOf": "2026-09-01T12:00:00Z",
+                            "records": [{"ticker": "AAA", "recentSplitAdjustedBars": vendor}]})]
+        panel = ev.bar_panel(paths, root=self.archive)
+        self.assertEqual(len(panel["AAA"]), 120)
+        self.assertEqual([panel["AAA"][d]["close"] for d in sorted(panel["AAA"])],
+                         [b["close"] for b in vendor])
+
+    def test_an_earlier_scan_supplies_only_what_the_newer_one_lost(self):
+        older = self.write("daily_scan_2026-09-14.json", {"records": [
+            {"ticker": "AAA", "recentSplitAdjustedBars": rising(30)},
+            {"ticker": "BBB", "recentSplitAdjustedBars": rising(30, start=50.0)}]})
+        newer = self.write("daily_scan_2026-09-15.json", {"missingHistoryTickers": ["BBB"], "records": [
+            {"ticker": "AAA", "recentSplitAdjustedBars": rising(31)},
+            {"ticker": "BBB", "recentSplitAdjustedBars": []}]})
+        panel, lost = ev.scan_panel([older, newer], root=self.archive)
+        self.assertEqual(lost, [])
+        self.assertEqual(len(panel["AAA"]), 31)
+        self.assertEqual(len(panel["BBB"]), 30)
+        self.assertEqual(ev.scan_panel([newer], root=self.archive)[1], ["BBB"])
+
+    def test_newest_is_when_a_scan_was_taken_not_where_it_was_saved(self):
+        # The 14 September scan sat in /tmp/labwork and the 15th's in
+        # /tmp/labwork2. Sorted as paths, a directory name decides which is
+        # newer, and here it would decide wrongly.
+        paths = [self.write("labwork2/daily_scan_2026-08-01.json", {"asOf": "2026-08-01T12:00:00Z",
+                            "records": [{"ticker": "AAA", "recentSplitAdjustedBars": [
+                                {"date": "2026-07-30", "close": 100.0}]}]}),
+                 self.write("labwork/daily_scan_2026-09-01.json", {"asOf": "2026-09-01T12:00:00Z",
+                            "records": [{"ticker": "AAA", "recentSplitAdjustedBars": [
+                                {"date": "2026-07-30", "close": 50.0}]}]})]
+        self.assertEqual(ev.bar_panel(paths, root=self.archive)["AAA"]["2026-07-30"]["close"], 50.0)
 
 
 class TodaysSessionTest(unittest.TestCase):
