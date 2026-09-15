@@ -1658,7 +1658,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/EASB/profile",
   "record": {
-   "filings": 570,
+   "filings": 571,
    "first_filing": "2010-01-03",
    "trading_suspensions": 10,
    "trading_resumptions": 9,
@@ -3526,12 +3526,12 @@
   "history_ar": "بعد قيد مؤقت في السوق الرئيسي في ديسمبر 2024، سجلت شركة قرة 23 إفصاحاً في البورصة حتى أغسطس 2026، حيث تركز النشاط بشكل كبير في عام 2026 بإجمالي 22 إفصاحاً. شكلت إعلانات العقود والمشاريع الفئة الأكبر بواقع 11 إفصاحاً، إلى جانب 6 إفصاحات لمجلس الإدارة. سجلت الشركة أرباحاً في الفترتين الماليتين المعلنتين خلال 2026، حيث بلغ صافي الربح 123 مليون جنيه في الربع الأول من 2026 و139 مليون جنيه في النصف الأول من 2026.",
   "plans": [],
   "record": {
-   "filings": 26,
+   "filings": 27,
    "first_filing": "2024-12-11",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
    "capital_increases": 0,
-   "general_assemblies": 0,
+   "general_assemblies": 1,
    "periods_reported": 3,
    "loss_making_periods": 0
   },
