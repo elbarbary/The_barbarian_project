@@ -1823,6 +1823,10 @@
     "meaning": "The agreement integrates CyShield's cybersecurity protocols and artificial intelligence technologies into the National Bank of Egypt's digital banking infrastructure.",
     "meaning_ar": "يدمج هذا البروتوكول تقنيات الأمن السيبراني والذكاء الاصطناعي الخاصة بشركة «ساي شيلد» ضمن البنية التحتية الرقمية للبنك الأهلي المصري."
   },
+  "البنتاجون يستثمر 450 مليون دولار في شركه لانتاج التنجستن لمواجهه الصين": {
+    "meaning": "This transaction provides direct non-dilutive government capital to fund mining infrastructure, processing facilities, and supply chain capacity for strategic critical minerals.",
+    "meaning_ar": "يوفر هذا التمويل رأس مال حكومي مباشر لتمويل البنية التحتية للتعدين ومنشآت المعالجة والقدرات التشغيلية لسلاسل إمداد المعادن الاستراتيجية الحيوية."
+  },
   "البنك الاهلي يتصدر قايمه اعلي العلامات التجاريه قيمه في مصر ب 717 مليون دولار": {
     "meaning": "Brand valuation quantifies the financial worth of an institution's intangible assets and market positioning, reflecting National Bank of Egypt's balance sheet scale and dominant retail deposit base within the domestic banking sector.",
     "meaning_ar": "يعكس تقييم العلامة التجارية القيمة المالية للأصول غير الملموسة والمكانة السوقية للمؤسسة، وهو ما يرتبط بحجم المركز المالي للبنك الأهلي المصري وحصته السوقية في قاعدة الودائع والتجزئة المصرفية محلياً."
@@ -1846,6 +1850,10 @@
   "البورصه المصريه تبحث مع 17 شركه ناشيه فرص التمويل عبر سوق المال": {
     "meaning": "The Egyptian Exchange engages private startup firms through introductory sessions on listing requirements, direct equity offerings, and small-to-medium enterprise market mechanisms as capital-raising alternatives to venture capital debt and equity financing.",
     "meaning_ar": "تعقد البورصة المصرية جلسات مع شركات ناشئة خاصة لاستعراض متطلبات القيد، وآليات طرح الأسهم، وقنوات سوق المشروعات الصغيرة والمتوسطة كبدائل لتمويل رؤوس الأموال عبر حقوق الملكية والديون غير المصرفية."
+  },
+  "البورصه المصريه تتراجع جماعيا في مستهل تعاملات الثلاثاء": {
+    "meaning": "A collective decline at the market open reflects prevailing sell orders across major indices, where executed trade prices for the constituent equities fall below their previous closing levels.",
+    "meaning_ar": "يعكس التراجع الجماعي في بداية جلسة التداول غلبة أوامر البيع عبر المؤشرات الرئيسية، حيث تُنفذ الصفقات على أسهم الشركات المدرجة بأسعار تقل عن مستويات إغلاقها السابقة."
   },
   "البورصه المصريه تحاول استعاده المسار الصاعد رغم التوترات الجيوسياسيه": {
     "meaning": "Trading sessions reflect an increase in local purchasing volumes countering the downward price pressure typically associated with regional geopolitical risk premiums.",
@@ -1938,6 +1946,10 @@
   "البورصه توقع مذكره تفاهم مع “المصريه للايداع” لوضع خارطه طريق للسوق الحكوميه": {
     "meaning": "This memorandum of understanding establishes a technical and operational coordination framework between the Egyptian Exchange and the central depository to structure the trading, clearing, and settlement workflows for sovereign and government debt instruments.",
     "meaning_ar": "تحدد مذكرة التفاهم إطاراً للتنسيق الفني والتشغيلي بين البورصة المصرية وشركة الإيداع والقيد المركزي لتنظيم آليات التداول والمقاصة والتسوية الخاصة بأدوات الدين الحكومية."
+  },
+  "البورصه رهينه المسار العرضي المايل للهبوط نظرا لغياب المحفزات": {
+    "meaning": "The lack of new market catalysts results in low trading volumes, keeping asset prices within a horizontal-to-downward band as liquidity remains constrained without fresh capital inflows.",
+    "meaning_ar": "يؤدي غياب المحفزات الإيجابية إلى انخفاض أحجام التداول، مما يحصر حركة الأسعار في نطاق أفقي يميل إلى الهبوط نتيجة ثبات السيولة المتاحة وغياب التدفقات النقدية الجديدة."
   },
   "البورصه علي موعد مع تصحيح موقت تمهيدا لاختبار 57000 نقطه": {
     "meaning": "Technical market corrections occur when trading volumes and price levels adjust following sustained upward movements, functioning as an equilibrium mechanism where market participants rebalance positions relative to specific index benchmark levels.",
@@ -3347,6 +3359,10 @@
     "meaning": "Mixed index performance reflects divergence across sectors, where price declines in heavily weighted technology components offset gains in other market segments.",
     "meaning_ar": "يعكس تباين المؤشرات اختلاف الأداء بين القطاعات، حيث تعادل التراجعات السعرية في أسهم التكنولوجيا ذات الأوزان النسبية المرتفعة المكاسب المحققة في قطاعات السوق الأخرى."
   },
+  "تباين الموشرات اليابانيه مع ارتفاع عوايد السندات": {
+    "meaning": "Higher sovereign bond yields alter equity valuation models by raising the risk-free discount rate, which creates divergent performance between yield-sensitive sectors, such as financial institutions, and capital-intensive equities.",
+    "meaning_ar": "يؤدي ارتفاع عوائد السندات الحكومية إلى زيادة معدل الخصم الخالي من المخاطر في نماذج تقييم الأسهم، مما ينتج عنه تباين في أداء القطاعات الحساسة لأسعار الفائدة، كالمؤسسات المالية، مقارنة بالشركات ذات الكثافة الرأسمالية."
+  },
   "تباين الموشرات اليابانيه مع خساير قطاع التكنولوجيا": {
     "meaning": "Divergence in Japanese indices reflects sectoral rebalancing, where price declines in technology shares offset gains across non-tech industry components within index weightings.",
     "meaning_ar": "يعكس تباين المؤشرات اليابانية إعادة توزيع للأوزان النسبية بين القطاعات، حيث توازن التراجعات السعرية لأسهم التكنولوجيا المكاسب المحققة في المكونات الصناعية الأخرى داخل المؤشر."
@@ -3619,6 +3635,10 @@
   "تسارع نمو اقتصاد منطقه اليورو خلال الربع الثاني من 2026": {
     "meaning": "An acceleration in Eurozone GDP growth represents higher aggregate output and industrial activity across member states, which defines baseline external trade and foreign currency demand for trade partners, including Egyptian export and import sectors.",
     "meaning_ar": "يمثل تسارع نمو الناتج المحلي الإجمالي لمنطقة اليورو ارتفاعاً في إجمالي الناتج والنشاط الصناعي عبر الدول الأعضاء، وهو ما يحدد حركة التجارة الخارجية وحجم تدفقات النقد الأجنبي للشركاء التجاريين، بما في ذلك قطاعات التصدير والاستيراد في مصر."
+  },
+  "تسويه مديونيه محافظه الوادي الجديد لدي بنك الاستثمار القومي بقيمه 222.7 مليون جنيه": {
+    "meaning": "This agreement clears EGP 222.7 million in outstanding municipal liabilities from the National Investment Bank's balance sheet, resolving historical sovereign obligations between local governmental entities and public development lending institutions.",
+    "meaning_ar": "تسوي هذه الاتفاقية التزامات مالية مستحقة بقيمة 222.7 مليون جنيه من المركز المالي لبنك الاستثمار القومي، بما يعالج مستحقات سيادية تاريخية متبادلة بين الإدارة المحلية ومؤسسات الإقراض التنموي الحكومية."
   },
   "تشديد الدخول والخروج ينذر بعوده طوابير الانتظار علي حدود الاتحاد الاوروبي": {
     "meaning": "Tighter border controls introduce operational processing delays at European Union entry and exit points, extending transit times for cross-border logistics and freight transport.",
@@ -4475,6 +4495,10 @@
   "سعر الريال السعودي في مصر اليوم الاربعاء 9/9/2026": {
     "meaning": "Exchange rates for the Saudi Riyal against the Egyptian Pound reflect current foreign currency valuations in the banking sector, directly determining the conversion costs for bilateral trade, cross-border remittances, and religious travel expenditures.",
     "meaning_ar": "تعكس أسعار صرف الريال السعودي مقابل الجنيه المصري التقييمات الحالية للعملة الأجنبية في القطاع المصرفي، وتحدد بشكل مباشر تكاليف التحويل للتبادل التجاري، والتحويلات النقدية، ونفقات السفر."
+  },
+  "سعر الريال السعودي في مصر اليوم الثلاثاء 15/9/2026.. تباين بالافتتاح": {
+    "meaning": "Divergence in opening exchange rates reflects localized liquidity conditions and varying foreign currency inventory levels across individual commercial banks in the interbank market.",
+    "meaning_ar": "يعكس تباين أسعار الصرف في بداية التعاملات مستويات السيولة المحلية واختلاف أرصدة النقد الأجنبي المتاحة لدى البنوك التجارية في سوق الإنتربنك."
   },
   "سعر الريال السعودي في مصر اليوم الثلاثاء 8/9/2026.. ختام التعاملات": {
     "meaning": "Official end-of-day foreign exchange rate publications reflect the daily settlement prices for the Saudi Riyal against the Egyptian Pound across the banking sector, determining transaction costs for bilateral trade, remittances, and travel expenses.",
@@ -6568,6 +6592,10 @@
   "وزير قطاع الاعمال البريطاني يستبعد تقديم خطه انقاذ مالي ل”جاكوار لاند روفر”": {
     "meaning": "The exclusion of state-backed financial aid requires the automaker to rely entirely on private liquidity sources, commercial borrowing, or internal operational adjustments to manage its obligations.",
     "meaning_ar": "استبعاد الدعم المالي الحكومي يُلزم شركة تصنيع السيارات بالاعتماد الكامل على مصادر السيولة الخاصة، أو الاقتراض التجاري، أو إعادة الهيكلة التشغيلية الداخلية للوفاء بالتزاماتها."
+  },
+  "وزيرا التموين والزراعه ورييس مستقبل مصر يفتتحون 20 فرعا جديدا لكاري اون ب4 محافظات": {
+    "meaning": "Opening 20 new retail branches across four governorates expands the physical distribution footprint and direct consumer access for the commercial network.",
+    "meaning_ar": "يؤدي افتتاح 20 فرعاً جديداً للتجزئة في أربع محافظات إلى توسيع النطاق الجغرافي لشبكة التوزيع ومنافذ الوصول المباشر إلى المستهلكين."
   },
   "وفد من شركات مقاولات وتطوير عقاري محليه يزور سوريا ولبنان اكتوبر المقبل": {
     "meaning": "The visit constitutes an operational trade delegation where Egyptian construction and real estate firms engage with regional counterparties to assess foreign project tenders, infrastructure contracts, and cross-border partnership frameworks.",
