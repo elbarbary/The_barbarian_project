@@ -50,6 +50,44 @@ def published_table():
     return table if "breadth" in table else None
 
 
+def sessions_to(last: str, count: int) -> list[str]:
+    """`count` days the exchange opens on, oldest first, ending with `last`."""
+    day, days = datetime.date.fromisoformat(last), []
+    while len(days) < count:
+        if day.weekday() not in bm.EGX_WEEKEND:
+            days.append(day.isoformat())
+        day -= datetime.timedelta(days=1)
+    return days[::-1]
+
+
+def archive_to(last: str, close: float, volume: int, count: int = 22) -> list[dict]:
+    """A company's archive whose newest bar is the one given."""
+    days = sessions_to(last, count)
+    bars = [{"date": day, "close": 90.0 + i / 10, "volume": 400_000 + 1_000 * i}
+            for i, day in enumerate(days[:-1])]
+    return bars + [{"date": days[-1], "close": close, "volume": volume}]
+
+
+def foreign_figures(row: dict, bars: list[dict], market: dict) -> list[str]:
+    """The figures in a row that do not belong to the session its `as_of` names.
+
+    The session is looked up where it is held, never through the builder: in
+    the company's archive, or, for a session the archive does not hold yet, in
+    the market file that closed on it.
+    """
+    stamp = row.get("as_of")
+    tape = next((b for b in reversed(bars) if b.get("date") == stamp
+                 and isinstance(b.get("close"), (int, float))), None)
+    if tape is None and stamp is not None and stamp == market.get("date"):
+        tape = (market.get("stocks") or {}).get(row["ticker"])
+    figures = [name for name in ("close", "volume") if name in row]
+    if tape is None:
+        return [f"{name} {row[name]} under {stamp}, a session nothing holds"
+                for name in figures]
+    return [f"{name} {row[name]} is not {stamp}'s {tape.get(name)}"
+            for name in figures if row[name] != tape.get(name)]
+
+
 class ForecastGateTest(unittest.TestCase):
     """Nothing that predicts, scores or ranks may become a column."""
 
@@ -459,6 +497,141 @@ class ProvenanceTest(unittest.TestCase):
             if "relative_volume_20" in row:
                 self.assertIn("median_volume_20", row, row["ticker"])
                 self.assertGreater(row["median_volume_20"], 0, row["ticker"])
+
+
+class OneSessionTest(unittest.TestCase):
+    """A row's close and volume belong to the session its `as_of` names.
+
+    bd280d9fe was built at 16:28 UTC on 15 September 2026, after the close.
+    It dated 283 of its 284 rows 14 September and priced 217 of them from 15
+    September. ABUK closed at 88.63 on the 14th, and its row said 87.9, the
+    15th's close, with the 15th's volume of 598,670 beside a relative volume
+    built on the 14th's 553,603. A rule combining the two compared two days.
+    """
+
+    # ABUK in the market file after 15 September's close, and its archive,
+    # which ended at the 14th's bar.
+    CLOSED = {"close": 87.9, "previous_close": 88.63, "change": -0.73,
+              "change_percent": -0.008236, "volume": 598_670}
+
+    def archive(self):
+        return archive_to("2026-09-14", close=88.63, volume=553_603)
+
+    def market(self, entry, is_close=True):
+        return {"date": "2026-09-15", "is_close": is_close, "stocks": {"AAA": entry}}
+
+    def row(self, entry, bars, closed=None, date="2026-09-15"):
+        return bm.row_for("AAA", entry, {}, [], datetime.date.fromisoformat(date),
+                          date, closed, bars)
+
+    def test_a_row_dated_by_one_session_and_priced_from_another_is_caught(self):
+        # The check itself, on bd280d9fe's ABUK row, so the test over the real
+        # corpus below cannot pass by looking at nothing.
+        row = {"ticker": "AAA", "as_of": "2026-09-14", "close": 87.9,
+               "volume": 598_670}
+        self.assertEqual(len(foreign_figures(row, self.archive(),
+                                             self.market(self.CLOSED))), 2)
+
+    def test_the_table_the_builder_would_write_now_prices_rows_from_their_own_session(self):
+        # A fresh build rather than the published table, for the reason given
+        # in ProvenanceTest: the daily build tests before it rebuilds. About a
+        # second over the real corpus.
+        doc = bm.build()
+        market = json.loads(bm.MARKET.read_text(encoding="utf-8"))
+        offenders = [f"{row['ticker']}: {why}" for row in doc["rows"]
+                     for why in foreign_figures(row, bm.bars_for(row["ticker"]),
+                                                market)]
+        self.assertEqual(offenders[:5], [],
+                         f"{len(offenders)} figures from another session")
+
+    def test_while_the_session_trades_a_row_stays_on_its_last_completed_one(self):
+        # ABUK at 11:38 Cairo on 15 September: a last price and a morning's
+        # volume, which is not a session.
+        trading = {"close": 88.52, "previous_close": 88.63, "volume": 101_295}
+        bars = self.archive()
+        self.assertIsNone(bm.closing_session(self.market(trading, is_close=False),
+                                             {"AAA": bars}))
+        row = self.row(trading, bars)
+        self.assertEqual((row["as_of"], row["close"], row["volume"]),
+                         ("2026-09-14", 88.63, 553_603))
+        self.assertEqual(foreign_figures(row, bars, self.market(trading, False)), [])
+
+    def test_after_the_close_every_figure_is_the_session_that_closed(self):
+        bars = self.archive()
+        market = self.market(self.CLOSED)
+        closed = bm.closing_session(market, {"AAA": bars})
+        self.assertEqual(closed, "2026-09-15")
+        row = self.row(self.CLOSED, bars, closed)
+        held = bars + [{"date": "2026-09-15", "close": 87.9, "volume": 598_670}]
+        self.assertEqual((row["as_of"], row["close"], row["volume"]),
+                         ("2026-09-15", 87.9, 598_670))
+        self.assertEqual(row["change_1"], -0.824)
+        self.assertEqual(row["traded_value"], round(87.9 * 598_670, 2))
+        self.assertEqual(row["relative_volume_20"], bm.ms.rv20(held))
+        self.assertEqual(row["sessions_held"], len(held))
+        self.assertEqual(foreign_figures(row, bars, market), [])
+
+    def test_a_close_that_does_not_continue_the_archive_is_not_added(self):
+        # GRCA on 10 September 2026: the vendor measured its move from 55.905
+        # while the archive's last close was 74.54. Two series; joined, they
+        # read as a fall of 28% where the vendor measured 3.9%.
+        bars = archive_to("2026-09-09", close=74.54, volume=120_000)
+        entry = {"close": 53.71, "previous_close": 55.905, "volume": 467_872}
+        row = self.row(entry, bars, "2026-09-10", date="2026-09-10")
+        self.assertEqual((row["as_of"], row["close"]), ("2026-09-09", 74.54))
+
+    def test_a_quote_still_showing_the_held_session_is_not_a_new_one(self):
+        # WATP's captures on 10 and 13 September 2026 both repeated its 9
+        # September bar, 23 pounds on 250 shares, and the archive holds neither.
+        bars = archive_to("2026-09-09", close=23.0, volume=250)
+        entry = {"close": 23, "previous_close": 23.0, "volume": 250}
+        row = self.row(entry, bars, "2026-09-10", date="2026-09-10")
+        self.assertEqual((row["as_of"], row["volume"]), ("2026-09-09", 250))
+
+    def test_a_company_that_found_no_buyer_closes_the_session_at_nought(self):
+        bars = archive_to("2026-09-14", close=23.0, volume=394)
+        entry = {"close": 23, "previous_close": 23.0, "volume": 0}
+        row = self.row(entry, bars, "2026-09-15")
+        self.assertEqual((row["as_of"], row["close"], row["volume"], row["change_1"]),
+                         ("2026-09-15", 23, 0, 0.0))
+
+    def test_a_holiday_the_vendor_fills_with_the_last_session_is_not_a_session(self):
+        # 27 August 2026. Every company that traded in the closing capture
+        # carried its 26 August close and volume. One that had not traded
+        # passes every test a single row can apply, and would have been given
+        # a session that never took place.
+        archives = {"AAA": archive_to("2026-08-26", close=10.0, volume=5_000),
+                    "BBB": archive_to("2026-08-26", close=20.0, volume=7_000),
+                    "CCC": archive_to("2026-08-26", close=30.0, volume=0)}
+        idle = {"close": 30.0, "previous_close": 30.0, "volume": 0}
+        market = {"date": "2026-08-27", "is_close": True, "stocks": {
+            "AAA": {"close": 10.0, "previous_close": 9.9, "volume": 5_000},
+            "BBB": {"close": 20.0, "previous_close": 20.4, "volume": 7_000},
+            "CCC": idle}}
+        self.assertEqual(len(bm.with_closing_bar(archives["CCC"], idle, "2026-08-27")),
+                         len(archives["CCC"]) + 1)
+        self.assertIsNone(bm.closing_session(market, archives))
+        # The same archives beside a capture that moved: a session.
+        market["stocks"]["AAA"] = {"close": 10.2, "previous_close": 10.0, "volume": 6_100}
+        market["stocks"]["BBB"] = {"close": 19.8, "previous_close": 20.0, "volume": 3_900}
+        self.assertEqual(bm.closing_session(market, archives), "2026-08-27")
+
+    def test_a_session_the_archive_is_more_than_one_behind_is_not_bridged(self):
+        # Archive to Wednesday 9 September, capture from Sunday the 13th:
+        # Thursday the 10th lies between, and joining them counts two
+        # sessions as one.
+        market = {"date": "2026-09-13", "is_close": True, "stocks": {
+            "AAA": {"close": 10.3, "previous_close": 10.0, "volume": 8_000}}}
+        behind = {"AAA": archive_to("2026-09-09", close=10.0, volume=5_000)}
+        self.assertIsNone(bm.closing_session(market, behind))
+        # From Thursday, the weekend is no gap.
+        thursday = {"AAA": archive_to("2026-09-10", close=10.0, volume=5_000)}
+        self.assertEqual(bm.closing_session(market, thursday), "2026-09-13")
+
+    def test_a_session_the_archive_already_holds_is_not_added_again(self):
+        bars = archive_to("2026-09-15", close=87.9, volume=598_670)
+        self.assertIsNone(bm.closing_session(self.market(self.CLOSED), {"AAA": bars}))
+        self.assertEqual(bm.with_closing_bar(bars, self.CLOSED, "2026-09-15"), bars)
 
 
 class TheDailyBuild(unittest.TestCase):

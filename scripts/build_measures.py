@@ -82,6 +82,12 @@ TICKER = re.compile(r"\(([A-Z0-9]{2,8})\.CA\)")
 # sessions of ownership follow-through) with room for a late attachment.
 FILING_MONTHS = 4
 
+# Friday and Saturday, the weekend `build_market_api.trading_session` skips.
+# Used only to ask whether a closing capture is the very next session after
+# the one the price archive holds. It knows no holidays, so a holiday inside
+# that gap answers "no": an evening's freshness lost, nothing published wrong.
+EGX_WEEKEND = (4, 5)
+
 # Every column this document may carry, and what it is.
 #
 # This is not documentation. `no_forecasts()` checks published rows against
@@ -103,7 +109,9 @@ COLUMNS: dict[str, str] = {
     "change_5": "Percentage change over 5 completed sessions.",
     "change_20": "Percentage change over 20 completed sessions.",
     "big_move_5": "Sessions in the last 5 that moved at least 19.5% on the close.",
-    "sessions_held": "How many completed sessions this company's archive holds.",
+    "sessions_held": "How many completed sessions this row stands on: the "
+                     "company's archive, and the session that just closed "
+                     "once it is folded in.",
     # — what it has filed ——————————————————————————————————————————
     "last_filing_date": "Publication date of its newest filing.",
     "sessions_since_filing": "Completed sessions since that filing.",
@@ -190,6 +198,138 @@ def bars_for(ticker: str) -> list[dict]:
         return json.loads(path.read_text(encoding="utf-8")).get("bars") or []
     except (OSError, ValueError):
         return []
+
+
+def newest_bar(bars: list[dict]) -> dict | None:
+    """The newest bar with a close: the session `measures.as_of` dates a row by."""
+    usable = [b for b in bars if isinstance(b.get("close"), (int, float))]
+    return usable[-1] if usable else None
+
+
+def next_session_day(day: str) -> str | None:
+    """The first day after `day` the exchange opens on, holidays aside."""
+    try:
+        after = datetime.date.fromisoformat(str(day)) + datetime.timedelta(days=1)
+    except ValueError:
+        return None
+    while after.weekday() in EGX_WEEKEND:
+        after += datetime.timedelta(days=1)
+    return after.isoformat()
+
+
+def closing_session(market: dict, archives: dict[str, list[dict]]) -> str | None:
+    """The session the market file closed on, when rows may take it, or None.
+
+    ONE SESSION PER ROW
+    -------------------
+    A row used to take `close` and `volume` from the market file, and `as_of`
+    and every other tape column from the price archive. For most of every
+    trading day those were two different sessions. publish-prices rewrites the
+    market file through the session. The archive gains a session only from a
+    scan dated after it, because `egx_scan.mjs` holds back the bar for its
+    own Cairo date even after the close. From 30 August to 15 September 2026
+    every session reached the archive in a publish-app-data build between
+    00:46 and 13:59 Cairo the next day. So every table built between the
+    first trades and that build was dated by one session and priced from the
+    next: 206 to 238 rows in each on 14 and 15 September. In bd280d9fe ABUK
+    was dated 14 September with 15 September's close of 87.9 and volume of
+    598,670, beside a relative volume built on 14 September's 553,603.
+
+    Two ways give a row one session. Taking close and volume from the
+    archive's newest bar leaves every row a session behind all evening. This
+    does the other: once a session has closed, the market file's close is
+    added to the archive in memory, so every figure is that session's. The
+    evening is when the table is read for the session that just closed. The
+    lab's re-rank seals it as that session's evidence under `market_date`,
+    and rerank-2026-09-14.json was shown COMI at 0.59 times its normal
+    volume, 13 September's figure, where 14 September's was 1.66.
+    `lab/panel.py` takes "today from the exchange itself" for the same
+    reason. Nothing is added while the session trades: a few hours of volume
+    is not a session, and `egx_scan.mjs` keeps it out of every median.
+
+    It is the answer the archive gives hours later. This would have folded
+    eleven closing captures from 24 August to 13 September, and all 2,589
+    companies it added that traded matched the bar the archive later recorded,
+    close and volume. Three things refuse it for the whole market: a capture
+    that is not a close; a session other than the next one after the session
+    the archive most often ends on, since a stalled archive would otherwise be
+    bridged over a session it never recorded; and a capture that replays the
+    archive's session. 27 August 2026 was a holiday. All 242 companies that
+    traded in its closing captures repeated their 26 August close and volume
+    exactly; on a real session between none and 14 of about 240 do. Without
+    that check, the 34 that had not traded would each have been given a
+    session that never took place. `with_closing_bar` decides the rest one
+    company at a time.
+    """
+    date = market.get("date")
+    if not market.get("is_close") or not isinstance(date, str):
+        return None
+    newest = {ticker: bar for ticker, bars in archives.items()
+              if (bar := newest_bar(bars)) and bar.get("date")}
+    held = collections.Counter(bar["date"] for bar in newest.values())
+    if not held:
+        return None
+    session = held.most_common(1)[0][0]
+    if next_session_day(session) != date:
+        return None
+    stocks = market.get("stocks") or {}
+    traded = replayed = 0
+    for ticker, bar in newest.items():
+        entry = stocks.get(ticker) or {}
+        volume = entry.get("volume")
+        if bar["date"] != session or not isinstance(volume, (int, float)) or volume <= 0:
+            continue
+        traded += 1
+        if entry.get("close") == bar["close"] and volume == bar.get("volume"):
+            replayed += 1
+    if not traded or replayed * 2 >= traded:
+        return None
+    return date
+
+
+def with_closing_bar(bars: list[dict], entry: dict, session: str) -> list[dict]:
+    """This company's bars, with `session` added when its close continues them.
+
+    `previous_close` is the check, as `prevClose` is in `lab/panel.extend`.
+    Here it must agree to the fourth decimal both documents are written to,
+    not within panel.py's one per cent, which compares two different sources.
+    The market file derives it from the move the vendor reports, so it is a
+    second number and not the archive quoting itself. On sessions the archive
+    later confirmed, from 13 August to 14 September, it matched the archive's
+    newest close exactly 3,706 times in 3,790. Of the 84 misses, 76 fell on
+    23 and 24 August, against bars from the archive's first two writes (the
+    21 August Mubasher backfill and 6d40176b2) that the vendor had closed
+    differently: BIGP held at 0.25, 0.246 by the vendor. The rest
+    were real breaks: GRCA at 55.905 against a held 74.54, EEII at 1.992
+    against 2.9, SAIB's two series, and sessions the archive never got. Had
+    each company's archive missed its last session, one per cent would have
+    let 1,500 of the 3,790 through; exactness lets 196, the ones whose price
+    did not move in it.
+
+    A quote that repeats the newest held bar, shares and all, is the vendor
+    still showing that session. WATP's captures on 10 and 13 September both
+    repeated its 9 September bar, 23 pounds on 250 shares, and the archive
+    holds neither day. A company that found no buyer is added at nought,
+    which is what the capture says and what `breadth` counts as idle. The
+    archive keeps a no-trade session only when a late-night scan writes it,
+    so by morning such a row can step back to its last traded session. Both
+    rows name the session they describe.
+    """
+    last = newest_bar(bars)
+    if last is None or not last.get("date") or str(last["date"]) >= session:
+        return bars
+    close, volume = entry.get("close"), entry.get("volume")
+    previous = entry.get("previous_close")
+    if not isinstance(close, (int, float)) or close <= 0:
+        return bars
+    if not isinstance(volume, (int, float)) or volume < 0:
+        return bars
+    if (not isinstance(previous, (int, float))
+            or round(previous, 4) != round(last["close"], 4)):
+        return bars
+    if volume > 0 and close == last["close"] and volume == last.get("volume"):
+        return bars
+    return [*bars, {"date": session, "close": close, "volume": volume}]
 
 
 def filings_by_ticker(today: datetime.date) -> dict[str, list[dict]]:
@@ -360,7 +500,8 @@ def drop_absent(row: dict) -> dict:
 
 def row_for(ticker: str, session: dict, directory: dict,
             filings: list[dict], today: datetime.date,
-            market_date: str | None = None) -> dict:
+            market_date: str | None = None, closed: str | None = None,
+            bars: list[dict] | None = None) -> dict:
     """One company, every column it can answer for.
 
     A column it cannot answer for is left out of the row entirely rather than
@@ -368,19 +509,30 @@ def row_for(ticker: str, session: dict, directory: dict,
     document is a third of the size, and a rule that asks about a column can
     tell "this company has no revenue figure" from "this company's revenue is
     nought" without a special case at every comparison.
+
+    `closed` is the session `closing_session` found the market file closed
+    on, or None. `bars` is the company's archive, when the caller has read it.
     """
-    bars = bars_for(ticker)
+    bars = bars_for(ticker) if bars is None else bars
+    if closed:
+        bars = with_closing_bar(bars, session, closed)
     row: dict = {"ticker": ticker}
 
     sector = (directory.get("sector") or "").strip()
     if sector:
         row["sector"] = sector
 
+    # `close` and `volume` come from the bar `as_of` names, the bar every
+    # other tape column below is computed from. Taken from the market file
+    # beside the archive's `as_of`, they belonged to the next session for most
+    # of every trading day (see `closing_session`).
+    tape: dict = {}
     stamp = ms.as_of(bars)
     if stamp:
         row["as_of"] = stamp
         row["sessions_held"] = len([b for b in bars
                                     if isinstance(b.get("close"), (int, float))])
+        tape = newest_bar(bars)
     elif market_date and any(isinstance(session.get(name), (int, float))
                              for name in ("close", "volume")):
         # A listing the archive holds no session for is still dated by the
@@ -391,13 +543,11 @@ def row_for(ticker: str, session: dict, directory: dict,
         # Publish app data run after it refused at its tests. `sessions_held`
         # stays absent: no archive is a gap in what we hold, not a nought.
         row["as_of"] = market_date
+        tape = session
 
-    close = session.get("close")
-    if isinstance(close, (int, float)):
-        row["close"] = close
-    volume = session.get("volume")
-    if isinstance(volume, (int, float)):
-        row["volume"] = volume
+    for name in ("close", "volume"):
+        if isinstance(tape.get(name), (int, float)):
+            row[name] = tape[name]
 
     for name, value in (("traded_value", ms.traded_value(bars)),
                         ("median_volume_20", ms.median_volume(bars)),
@@ -538,8 +688,11 @@ def build(today: datetime.date | None = None) -> dict:
 
     filings = filings_by_ticker(today)
 
+    archives = {ticker: bars_for(ticker) for ticker in stocks}
+    closed = closing_session(market, archives)
     rows = [row_for(ticker, stocks[ticker] or {}, directory.get(ticker, {}),
-                    filings.get(ticker) or [], today, market.get("date"))
+                    filings.get(ticker) or [], today, market.get("date"),
+                    closed, archives[ticker])
             for ticker in sorted(stocks)]
     no_forecasts(rows)
 
@@ -579,6 +732,10 @@ def main(argv=None) -> int:
     rows = doc["rows"]
     counts = doc["coverage"]
     print(f"   {len(rows)} companies, {len(COLUMNS) - 1} measurements")
+    dated = collections.Counter(r["as_of"] for r in rows if r.get("as_of"))
+    if dated:
+        print("   dated: " + ", ".join(f"{n} on {day}" for day, n in
+                                       sorted(dated.items(), reverse=True)[:3]))
     b = doc["breadth"]
     print(f"   session: {b['rose']} rose, {b['fell']} fell, {b['level']} "
           f"traded level, {b['idle']} found no buyer"
