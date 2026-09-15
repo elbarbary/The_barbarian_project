@@ -558,6 +558,7 @@ def reading_documents(document: dict, built: str, panel: dict | None = None) -> 
             "basisSession": document["basisSession"],
             "ranAt": block.get("ranAt"),
             "key": rr.key_of(layers),
+            "forecastHorizon": 5,
             "name": name,
             "layers": list(layers),
             "default": name == rr.NAME,
@@ -790,6 +791,12 @@ def main(argv=None) -> int:
         print(f"   scenarios: {len(drawn['companies'])} companies × "
               f"{len(scenes['models'])} models, basis {scenes['basisSession']}, "
               f"{len(reading_files)} re-rank readings")
+
+    # One content identity across every document used by the workbench. A
+    # browser crossing a deployment refuses to mix old scores with new prices.
+    if scenes:
+        from snapshot import stamp
+        stamp(top5, named, scenes, reading_files)
 
     if args.check:
         return 0

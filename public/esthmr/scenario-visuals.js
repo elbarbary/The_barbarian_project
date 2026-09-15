@@ -108,17 +108,18 @@ export function viewSwitch(component, ctx, ar, { onModel, onGemini } = {}) {
         says.sessions === 1 ? 'هبوط كل شركة في الجلسة الأخيرة' : `هبوط كل شركة خلال آخر ${sessionsAr(says.sessions)}`)
       : t(`what it expects each company to return over ${words.horizon}`, `ما يتوقعه لعائد كل شركة خلال ${words.horizon}`);
   return h('div', { class: 'aix-view' },
-    h('div', { class: 'aix-view-switch', role: 'group', 'aria-label': t('What the ranking shows', 'ما يعرضه الترتيب') },
-      h('button', { type: 'button', class: choice.gemini ? '' : 'on', 'aria-pressed': String(!choice.gemini), onClick: onModel },
+    h('div', { class: 'aix-rank-stages', 'aria-label': t('What the ranking shows', 'ما يعرضه الترتيب') },
+      h('div', { class: choice.gemini ? '' : 'on' },
         h('b', null, '1'), h('span', null, t(`Ranked by ${words.model}`, `ترتيب ${words.model}`))),
       h('i', { 'aria-hidden': 'true' }, ar ? '←' : '→'),
-      h('button', { type: 'button', class: choice.gemini ? 'on' : '', 'aria-pressed': String(choice.gemini),
-        disabled: !choice.readable, onClick: onGemini },
+      h('div', { class: choice.gemini ? 'on' : '' },
       h('b', null, '2'), h('span', null, t('Re-ranked by Gemini', 'بعد إعادة ترتيب Gemini')))),
     h('p', { class: 'aix-note' }, choice.gemini
-      ? t(`Gemini read what all the models forecast, with ${words.evidence}, and re-ordered every company. Beside each one: where ${words.model} had it.`,
-        `قرأ Gemini ما توقعته كل النماذج، مع ${words.evidence}، وأعاد ترتيب كل الشركات. بجانب كل واحدة: أين وضعها ${words.model}.`)
-      : t(`${words.model} ranks every company by ${by}.`, `${words.model} يرتّب كل الشركات حسب ${by}.`)));
+      ? t(`Gemini combined all models with ${words.evidence}. Its score orders companies; it is not a percentage return or a probability. The ${words.model} forecast stays unchanged.`,
+        `جمع Gemini كل النماذج مع ${words.evidence}. درجته لترتيب الشركات وليست نسبة عائد أو احتمالاً. توقع ${words.model} لا يتغيّر.`)
+      : t(`${words.model} ranks every company by ${by}.`, `${words.model} يرتّب كل الشركات حسب ${by}.`)),
+    choice.gemini ? h('p',{class:'aix-window-note'},t(`Gemini’s saved order targets five sessions. Your ${choice.horizon}-session selection changes the model forecasts and result window—not Gemini’s order.`,
+      `ترتيب Gemini المحفوظ يستهدف خمس جلسات. اختيار ${choice.horizon} جلسة يغيّر توقعات النموذج وفترة قياس النتيجة، وليس ترتيب Gemini.`)) : null);
 }
 
 const avg = (values) => (values.length ? values.reduce((s, v) => s + v, 0) / values.length : null);
@@ -155,7 +156,7 @@ export function rankingTiles(ctx, ar) {
         t(`companies in Gemini’s five that ${words.model} did not have in its own`, `شركات في خمس Gemini لم تكن في خمس ${words.model}`)),
       tile(t('GEMINI KEPT', 'أبقى Gemini'), Number.isInteger(count) ? String(count) : '—',
         Number.isInteger(count)
-          ? t(`companies it said were worth anything, of the ${reading?.answered ?? ranking.rows.length} it scored`, `شركات قال إنها تستحق شيئاً، من ${reading?.answered ?? ranking.rows.length} قيّمها`)
+          ? t(`its self-reported shortlist size, not a recommended holding count; ${ranking.rows.length} scores displayed`, `حجم قائمته المختصرة كما ذكره، وليس عدداً موصى بامتلاكه؛ نعرض ${ranking.rows.length} درجة`)
           : t('it named no count that night', 'لم يحدد عدداً تلك الليلة')));
   }
   const whole = summaryOf(ranking.rows.map((r) => r.value).map(move)).median;
@@ -210,7 +211,7 @@ export function rankingCard(component, data, ctx, ar) {
   const valueHead = choice.gemini ? t('Gemini score', 'درجة Gemini')
     : says.kind === 'return' ? t(`Expects · ${n === 1 ? 'next session' : `${n} sessions`}`, `يتوقع · ${n === 1 ? 'الجلسة التالية' : sessionsAr(n)}`)
       : t(says.sessions === 1 ? 'Move · last session' : `Move · last ${says.sessions} sessions`, `الحركة · آخر ${sessionsAr(says.sessions)}`);
-  const extraHead = choice.gemini ? t(`${words.model} had it`, `عند ${words.model}`)
+  const extraHead = choice.gemini ? t(`${words.model}: original rank & forecast`, `${words.model}: الترتيب والتوقع الأصليان`)
     : says.kind === 'return' ? t('Other models', 'النماذج الأخرى') : '';
 
   const cell = (r) => {
@@ -218,11 +219,12 @@ export function rankingCard(component, data, ctx, ar) {
     const figure = choice.gemini ? `${plain(r.value, 0)}/100` : percent(move(r.value));
     let extra = null;
     if (choice.gemini) {
-      const shift = finite(r.baseRank) ? r.baseRank - r.rank : null;
+      const shift = finite(r.baseRank) && !r.baseTied && !r.scoreTied ? r.baseRank - r.rank : null;
       extra = h('span', { class: 'aix-rank-was' },
         h('bdi', { dir: 'ltr' }, finite(r.baseRank) ? `#${r.baseRank}` : '—'),
         finite(shift) && shift !== 0 ? h('em', { class: shift > 0 ? 'up' : 'down', dir: 'ltr' }, `${shift > 0 ? '▲' : '▼'}${Math.abs(shift)}`) : null,
-        finite(r.baseValue) ? h('small', { dir: 'ltr', class: tone(move(r.baseValue)) }, percent(move(r.baseValue))) : null);
+        finite(r.baseValue) ? h('small', { dir: 'ltr', class: tone(move(r.baseValue)) },
+          h('span',{class:'aix-rank-origin-label'},says.kind==='return'?t('Forecast: ','التوقع: '):t('Past move: ','الحركة السابقة: ')),percent(move(r.baseValue))) : null);
     } else if (says.kind === 'return') {
       extra = h('small', { class: 'aix-rank-agree' }, r.of ? t(`${r.agree} of ${r.of} agree`, `${r.agree} من ${r.of} تتفق`) : '');
     }
@@ -248,7 +250,7 @@ export function rankingCard(component, data, ctx, ar) {
     }
   });
 
-  const note = choice.gemini ? (said?.note || reading?.note) : null;
+  const note = choice.gemini ? (reading?.note || said?.note) : null;
   return h('section', { class: 'aix-card aix-ranking-card' },
     h('header', null,
       h('div', null,
@@ -256,18 +258,26 @@ export function rankingCard(component, data, ctx, ar) {
           ? t(`Ranked after Gemini re-reads ${words.model} and the other models`, `الترتيب بعد أن يعيد Gemini قراءة ${words.model} والنماذج الأخرى`)
           : t(`Ranked by ${words.model}`, `ترتيب ${words.model}`)),
         h('p', null, choice.gemini
-          ? t(`Every company Gemini scored, highest first, out of 100. Nobody knows yet how they will do. Model output, not a recommendation.`,
-            'كل شركة قيّمها Gemini، الأعلى أولاً، من 100. لا أحد يعرف بعد كيف ستؤدي. مخرجات نموذج، وليست توصية.')
-          : t(`Every company it ranked, highest first. Nobody knows yet how they will do. Model output, not a recommendation.`,
-            'كل شركة رتّبها، الأعلى أولاً. لا أحد يعرف بعد كيف ستؤدي. مخرجات نموذج، وليست توصية.'))),
+          ? t('Saved Gemini scores, highest first, out of 100—not expected returns. Check the dated record below for measured outcomes. Model output, not a recommendation.',
+            'درجات Gemini المحفوظة، الأعلى أولاً، من 100 وليست عوائد متوقعة. راجع سجل النتائج المؤرخ أدناه. مخرجات نموذج وليست توصية.')
+          : t('Saved model forecasts, highest first—not realised returns. Check the dated record below for measured outcomes. Model output, not a recommendation.',
+            'توقعات النموذج المحفوظة، الأعلى أولاً، وليست عوائد محققة. راجع سجل النتائج المؤرخ أدناه. مخرجات نموذج وليست توصية.'))),
       h('label', { class: 'aix-search-label' },
         h('span', { class: 'aix-eyebrow' }, t('Find a company', 'ابحث عن شركة')),
         h('input', { class: 'aix-search', type: 'search', value: st.scSearch || '',
           placeholder: t('Name or ticker', 'الاسم أو الرمز'),
           onInput: (e) => component.setState({ scSearch: e.target.value }) }))),
+    choice.gemini ? h('div',{class:'aix-said aix-reason'},
+      h('span',{class:'aix-eyebrow'},t('WHY GEMINI CHANGED THE ORDER','لماذا غيّر Gemini الترتيب')),
+      note ? h('blockquote',{class:'aix-quote',dir:'auto'},note)
+        : h('p',null,t('No explanation was saved for this reading. We do not invent one.','لم يُحفظ تفسير لهذه القراءة. لا نختلق تفسيراً.')),
+      h('small',null,t('Gemini’s own summary for the whole ranking—not a verified reason for each stock.','ملخص Gemini للترتيب ككل، وليس سبباً موثّقاً لكل سهم.'))) : null,
     rows.length ? h('div', { class: `aix-rank-head${choice.gemini ? ' is-gemini' : ''}`, 'aria-hidden': 'true' },
       h('span', null, '#'), h('span', null, t('Company', 'الشركة')), h('span', null, valueHead), h('span', null, extraHead)) : null,
     h('div', { class: `aix-rank-list${choice.gemini ? ' is-gemini' : ''}` }, list),
+    choice.gemini && ranking.rows.some(r=>r.baseTied||r.scoreTied) ? h('p',{class:'aix-note'},
+      t('Equal scores are ordered by ticker. Movement arrows are hidden for tied scores so the alphabet is not mistaken for Gemini’s judgement.',
+        'الدرجات المتساوية تُرتّب حسب الرمز. نخفي أسهم الحركة عند التعادل كي لا يُفهم الترتيب الأبجدي على أنه حكم Gemini.')) : null,
     !rows.length ? h('p', { class: 'aix-empty' }, q ? t('No company matches that.', 'لا شركة تطابق ذلك.')
       : t('This model ranked no company in this run.', 'لم يرتّب هذا النموذج أي شركة في هذا التشغيل.')) : null,
     rows.length > limit && !q ? h('button', { type: 'button', class: 'aix-more',
@@ -275,9 +285,7 @@ export function rankingCard(component, data, ctx, ar) {
     all ? t('Show the top 10', 'عرض أعلى 10') : t(`Show all ${rows.length} companies`, `عرض كل الشركات (${rows.length})`)) : null,
     nights.next?.tied ? h('p', { class: 'aix-note' }, t(`Fifth place was a tie with ${nights.next.tied} other ${nights.next.tied === 1 ? 'company' : 'companies'}; the record settles a tie alphabetically.`,
       `المركز الخامس تعادل مع ${countAr(nights.next.tied, 'شركة أخرى', 'شركتين أخريين', 'شركات أخرى', 'شركة أخرى')}؛ ويحسم السجل التعادل أبجدياً.`)) : null,
-    note ? h('div', { class: 'aix-said' },
-      h('span', { class: 'aix-eyebrow' }, t('In Gemini’s own words', 'بكلمات Gemini')),
-      h('blockquote', { class: 'aix-quote', dir: 'auto' }, note)) : null);
+    null);
 }
 
 /* ── FUTURE: a forecaster's view of the whole market ────────────────────── */

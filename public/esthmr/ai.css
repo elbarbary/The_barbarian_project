@@ -549,3 +549,15 @@ dialog.aix-dialog::backdrop { background: rgba(22, 36, 47, .5); }
   .aix-dialog-card { animation: none; }
   .aix-switch, .aix-switch b { transition: none; }
 }
+
+/* One set of controls; these are explanatory stages, not another tab bar. */
+.aix-rank-stages{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.aix-rank-stages>div{display:flex;align-items:center;gap:9px;min-height:44px;font-size:14px;color:var(--aix-body)}
+.aix-rank-stages b{display:grid;place-items:center;width:28px;height:28px;border:1px solid var(--aix-rule);border-radius:50%;font-size:12px}
+.aix-rank-stages .on{color:var(--aix-teal);font-weight:650}.aix-rank-stages .on b{background:var(--aix-teal);color:#fff;border-color:transparent}
+.aix-rank-stages>i{font-style:normal;color:var(--aix-body)}
+.aix-window-note{font-size:12px;line-height:1.65;color:var(--aix-body);border-inline-start:3px solid var(--aix-teal);padding-inline-start:12px;margin:12px 0 0}
+.aix-reason{margin:16px 0 20px!important;padding:16px!important;border:1px solid var(--aix-rule);border-radius:16px;background:var(--aix-record-bg)}
+.aix-reason .aix-quote{font-size:14px;line-height:1.65;margin:10px 0}.aix-reason small{display:block;font-size:11px;line-height:1.6;color:var(--aix-body)}
+#aix-past{margin-top:38px;padding-top:24px;border-top:2px solid var(--aix-rule)}
+@media(max-width:600px){.aix-rank-stages{gap:8px}.aix-rank-stages>div{font-size:12px}.aix-reason{padding:12px!important}}

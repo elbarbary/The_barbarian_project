@@ -35,6 +35,7 @@ import {
   divider, viewSwitch, rankingTiles, rankingCard, returnsCards, recordCard, nightsCard,
 } from './scenario-visuals.js';
 import { modelsCard } from './ai-record.js';
+import { readingProblem, mixedSnapshot } from './lab-snapshot.js';
 
 const h = R.createElement;
 
@@ -282,10 +283,17 @@ export function rankingOf(scenarios, choice, reading) {
     .filter(([value]) => finite(value)).sort(byValue);
   const baseRank = new Map(base.map(([, ticker], i) => [ticker, i + 1]));
   const baseValue = new Map(base.map(([value, ticker]) => [ticker, value]));
+  const frequencies = (rows) => {
+    const counts = new Map();
+    for (const [value] of rows) counts.set(value, (counts.get(value) || 0) + 1);
+    return counts;
+  };
+  const baseFrequency = frequencies(base);
   const scores = (reading && reading.scores) || {};
   const order = choice.gemini
     ? Object.keys(scores).filter(listed).map((ticker) => [scores[ticker], ticker]).filter(([value]) => finite(value)).sort(byValue)
     : base;
+  const scoreFrequency = frequencies(order);
   // How many of the other forecasters point the same way as the chosen one.
   const others = returnModels(scenarios).filter((m) => m.distinguishes && m.id !== choice.model);
   const says = saysOf(choice.model);
@@ -299,6 +307,8 @@ export function rankingOf(scenarios, choice, reading) {
       tied: i > 0 && order[i - 1][0] === value,
       baseRank: baseRank.get(ticker) ?? null,
       baseValue: finite(own) ? own : null,
+      baseTied: (baseFrequency.get(own) || 0) > 1,
+      scoreTied: (scoreFrequency.get(value) || 0) > 1,
       agree: votes.filter((v) => Math.sign(v) === Math.sign(own)).length,
       of: votes.length,
     };
@@ -491,6 +501,15 @@ export function scenariosScreen(component, data, ar) {
       h('button', { type: 'button', class: 'aix-quiet', onClick: () => component.onRetryData?.() }, t('Retry loading', 'إعادة التحميل'))) };
   }
 
+  // The labelled signed-out demo intentionally has invented scenarios beside
+  // the public real-world model record; it is not a live publication bundle.
+  if (!data.demo && mixedSnapshot(scenarios, picks, top5)) {
+    return {screen:h('section',{class:'aix-card aix-bench'},
+      h('h2',null,t('A newer saved run is arriving','جارٍ وصول تشغيل محفوظ أحدث')),
+      h('p',null,t('The forecasts and their record came from different updates. Reload them together; no AI model will be run.','وصلت التوقعات وسجل الأداء من تحديثين مختلفين. أعد تحميلهما معاً؛ لن نشغّل أي نموذج.')),
+      h('button',{type:'button',class:'aix-quiet',onClick:()=>component.onRetryData?.()},t('Reload saved results','إعادة تحميل النتائج المحفوظة')))};
+  }
+
   const choice = choiceOf(st, picks, scenarios);
   const { model, horizon, layers, order, gemini, key } = choice;
   const index = scenarios?.rerank?.readings || {};
@@ -503,8 +522,10 @@ export function scenariosScreen(component, data, ar) {
   const nights = nightsOf(entry, horizon);
   const source = gemini ? top5?.readings?.[key] : top5?.models?.[model];
   const record = recordOf(entry, horizon, source, picks?.minimumSessions ?? top5?.minimumSessions);
-  const said = gemini && nights.newest ? picks?.readings?.[key]?.notes?.[nights.newest.basisSession] || null : null;
-  const reading = gemini ? data.readings?.[key] || null : null;
+  const said = gemini && scenarios?.basisSession ? picks?.readings?.[key]?.notes?.[scenarios.basisSession] || null : null;
+  const loadedReading = gemini ? data.readings?.[key] || null : null;
+  const readingIssue = readingProblem(loadedReading, scenarios, key);
+  const reading = readingIssue ? null : loadedReading;
   const next = cairoTime(nextRun(scenarios?.schedule?.cron)?.toISOString(), ar);
 
   const set = (patch) => component.setState({ scShowAll: false, scNightsAll: false, ...patch });
@@ -536,15 +557,15 @@ export function scenariosScreen(component, data, ar) {
         () => set({ scModel: m.id, scFrom: null }), m.id))),
       choice.meta ? h('p', { class: 'aix-note aix-model-about' }, aboutModel(choice.meta, ar)) : null),
     h('div', { class: 'aix-group' },
-      h('p', { class: 'aix-step' }, h('b', null, '02'), t('HORIZON', 'المدى')),
+      h('p', { class: 'aix-step' }, h('b', null, '02'), t('FORECAST & RESULT WINDOW', 'فترة التوقع وقياس النتيجة')),
       h('div', { class: 'aix-chips' }, choice.horizons.map((n) => chip(chipWords(n, ar),
         horizon === n, () => set({ scHorizon: n }), n)))),
     order.length ? h('div', { class: `aix-group aix-layers${gemini ? ' is-on' : ''}` },
-      h('p', { class: 'aix-step' }, h('b', null, '03'), t('CONTEXT THE RE-RANK READS', 'السياق الذي تقرؤه إعادة الترتيب')),
+      h('p', { class: 'aix-step' }, h('b', null, '03'), t('ADD GEMINI’S CONTEXT', 'أضف سياق Gemini')),
       h('p', { class: 'aix-note aix-layers-lead' }, choice.readable
         ? (gemini
-          ? t(`Gemini is re-ranking: it read what all the models forecast, with what is switched on. Switch everything off for ${modelName}’s own ranking.`,
-            `Gemini يعيد الترتيب: قرأ ما توقعته كل النماذج مع ما هو مفعّل. أطفئ كل شيء لترى ترتيب ${modelName} نفسه.`)
+          ? t(`Showing Gemini’s saved ranking. It combines all models with the selected evidence; ${modelName} remains the comparison. Turn everything off for the model’s original order.`,
+            `نعرض ترتيب Gemini المحفوظ. يجمع كل النماذج مع الأدلة المختارة؛ ويظل ${modelName} مرجع المقارنة. أوقف الخيارات لترى ترتيب النموذج الأصلي.`)
           : t(`Switch any of these on to see the ranking after Gemini re-reads the models’ forecasts with it.`,
             'فعّل أياً منها لترى الترتيب بعد أن يعيد Gemini قراءة توقعات النماذج معه.'))
         : t('No Gemini re-rank was published for this run.', 'لم تُنشر إعادة ترتيب Gemini لهذا التشغيل.')),
@@ -580,8 +601,9 @@ export function scenariosScreen(component, data, ar) {
     leftOut: Object.keys(scenarios?.leftOut || {}).length,
     loading: !picks && !!st.extrasLoading,
     readingLoading: gemini && !reading && !!(st.scLoading && st.scLoading[key]),
-    readingFailed: gemini && !reading ? (st.scFailed && st.scFailed[key]) || null : null,
-    retry: () => { const { [key]: gone, ...rest } = st.scFailed || {}; component.setState({ scFailed: rest }); },
+    readingFailed: readingIssue ? t('This reading belongs to another update or has invalid scores. Reload the saved results together.','هذه القراءة من تحديث آخر أو بها درجات غير صالحة. أعد تحميل النتائج المحفوظة معاً.')
+      : gemini && !reading ? (st.scFailed && st.scFailed[key]) || null : null,
+    retry: () => { if(readingIssue){component.onRetryData?.();return;} const { [key]: gone, ...rest } = st.scFailed || {}; component.setState({ scFailed: rest }); },
   };
 
   // The whole market as the chosen forecaster sees it, under its ranking.
@@ -622,7 +644,7 @@ export function scenariosScreen(component, data, ar) {
       controls,
       h('div', { class: 'aix-results' },
         from,
-        divider('aix-future', t('FUTURE · NOT SCORED YET', 'المستقبل · لم يُقيَّم بعد'),
+        divider('aix-future', t('LATEST SAVED FORECASTS', 'أحدث التوقعات المحفوظة'),
           basis ? t(`computed after the close of ${day(basis, false)}`, `حُسب بعد إغلاق ${day(basis, true)}`) : null),
         viewSwitch(component, ctx, ar, {
           onModel: () => set({ scLayers: [] }),
@@ -631,11 +653,13 @@ export function scenariosScreen(component, data, ar) {
         rankingTiles(ctx, ar),
         rankingCard(component, data, ctx, ar),
         ...charts,
-        divider('aix-past', t('PAST RUNS · ALREADY SCORED', 'تشغيلات سابقة · قُيّمت بالفعل'),
-          t('sessions that have closed', 'جلسات أُغلقت')),
+        divider('aix-past', t('TRACK RECORD & EARLIER RUNS', 'سجل الأداء والتشغيلات السابقة'),
+          t('measured results · pending outcomes labelled separately', 'نتائج مقاسة · والنتائج المنتظرة مميّزة بوضوح')),
         recordCard(component, data, ctx, ar),
         nightsCard(component, data, ctx, ar),
-        modelsCard(top5, ar, { horizon, selected: gemini ? 'rerank' : model,
+        modelsCard(gemini && top5?.readings?.[key] ? {...top5, models:{...top5.models,
+          rerank:{...top5.readings[key], group:'rerank',label:'Gemini · selected context',labelAr:'Gemini · السياق المختار'}}} : top5,
+          ar, { horizon, selected: gemini ? 'rerank' : model,
           onPick: (id) => (id === 'rerank'
             ? set({ scLayers: layers.length ? layers : choice.standard, scFocus: 'future' })
             : set({ scModel: id, scLayers: [], scFrom: null, scFocus: 'future' })),

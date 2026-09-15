@@ -80,6 +80,7 @@ import datetime
 import hashlib
 import itertools
 import json
+import math
 import pathlib
 import re
 import sys
@@ -482,12 +483,16 @@ def parse(text: str, allowed: list[str]) -> dict:
 
     permitted = set(allowed)
     scores, invented = {}, []
-    for ticker, value in (payload.get("scores") or {}).items():
+    raw_scores = payload.get("scores")
+    if not isinstance(raw_scores, dict):
+        return {"scores": {}, "count": None, "note": None,
+                "invented": [], "why": "scores were not a JSON object"}
+    for ticker, value in raw_scores.items():
         name = str(ticker).strip().upper()
         if name not in permitted:
             invented.append(name)
             continue
-        if isinstance(value, bool) or not isinstance(value, (int, float)):
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
             continue
         scores[name] = max(SCORE_MIN, min(SCORE_MAX, float(value)))
 

@@ -14,6 +14,7 @@ import { installDom } from './dom-stub.mjs';
 import { aiCards, heroModel } from '../../public/esthmr/ai-cards.js';
 import { heroChart, histogram, fanChart, nextRun, reorderChart, nightsChart } from '../../public/esthmr/ai-visuals.js';
 import { saidParts } from '../../public/esthmr/scenario-visuals.js';
+import { readingProblem, mixedSnapshot } from '../../public/esthmr/lab-snapshot.js';
 import {
   scenariosScreen, warningLines, ACCEPTED_KEY, readingKey, baseModels, choiceOf, recordOf, nightsOf,
   rankingOf, returnsView, standing, spearman, saysOf, listed,
@@ -93,6 +94,7 @@ const readings = {
   'filings-news-rulebook': { scores: { AAA: 80, BBB: 20, CCC: 50 }, count: 1, answered: 3, abstained: 0, note: 'the filings moved it' },
   'filings-news-rulebook-measures': { scores: { AAA: 70, BBB: 60, CCC: 10 }, count: 2, answered: 3, abstained: 0, note: 'the measurements moved it' },
 };
+for (const [key, reading] of Object.entries(readings)) Object.assign(reading, {key, basisSession:scenarios.basisSession});
 
 /* The picks file, in the shape publish.py writes it. Five companies a night
  * means five tickers; the fixture's market has more of them than the three
@@ -148,6 +150,46 @@ const screen = (c, d = data, ar = false) => scenariosScreen(c, d, ar).screen;
 const rowsOf = (node) => byClass(node, 'aix-rank-row');
 const tickersOf = (node) => rowsOf(node).map((p) => text(all(p).find((x) => x.tag === 'b')).trim());
 const GEMINI = ['filings', 'news', 'rulebook'];
+
+test('cached readings from another run never appear beside current forecasts',()=>{
+  const stale={...readings['filings-news-rulebook'],basisSession:'2026-09-13'};
+  assert.equal(readingProblem(stale,scenarios,'filings-news-rulebook'),'run');
+  const node=screen(component({scLayers:GEMINI}),{...data,readings:{'filings-news-rulebook':stale}});
+  assert.equal(rowsOf(node).length,0);
+  assert.match(text(node),/another update or has invalid scores/);
+});
+test('reload revalidates both the public scorecard and the private saved forecasts',async()=>{
+  const original=globalThis.fetch,calls=[];
+  globalThis.fetch=async(url,init)=>{calls.push({url,init});return new Response('{}',{status:200});};
+  try{
+    const loader=await import('../../public/esthmr/data.js');
+    await loader.top5();await loader.scenarios();await loader.picks();await loader.rerankReading('news');
+    assert.equal(calls.length,4);
+    assert.ok(calls.every(c=>c.init.cache==='no-cache'&&c.init.credentials==='same-origin'));
+  }finally{globalThis.fetch=original;}
+});
+test('publication mismatch is refused rather than mixing historical and current data',()=>{
+  assert.equal(mixedSnapshot({publicationId:'a'},{publicationId:'b'}),true);
+  assert.equal(mixedSnapshot({publicationId:'a'},{}),true);
+  assert.equal(mixedSnapshot({publicationId:'a'},{publicationId:'a'}),false);
+  const node=screen(component(),{...data,scenarios:{...scenarios,publicationId:'a'},picks:{...data.picks,publicationId:'b'}});
+  assert.match(text(node),/newer saved run is arriving/);assert.equal(rowsOf(node).length,0);
+  const demo=screen(component(),{...data,demo:true,top5:{...data.top5,publicationId:'public-record'}});
+  assert.ok(rowsOf(demo).length>0,'the labelled demo must not be blocked by the public record');
+});
+test('Gemini explanation matches the current reading, not an older note',()=>{
+  const node=screen(component({scLayers:GEMINI}),{...data,picks:{...data.picks,readings:{...data.picks.readings,
+    'filings-news-rulebook':{...data.picks.readings['filings-news-rulebook'],notes:{'2026-09-13':{note:'old story'}}}}}});
+  assert.match(text(byClass(node,'aix-reason')[0]),/the filings moved it/);
+  assert.doesNotMatch(text(byClass(node,'aix-reason')[0]),/old story/);
+  assert.match(text(node),/not a verified reason for each stock/);
+});
+test('alphabetical tie breaking does not masquerade as Gemini rank movement',()=>{
+  const tied={...readings['filings-news-rulebook'],scores:{AAA:50,BBB:50,CCC:50}};
+  const node=screen(component({scLayers:GEMINI}),{...data,readings:{'filings-news-rulebook':tied}});
+  assert.ok(rowsOf(node).every(row=>!/[▲▼]/.test(text(row))));
+  assert.match(text(node),/Equal scores are ordered by ticker/);
+});
 
 /* ── Home: the card at the top ──────────────────────────────────────────── */
 
@@ -278,7 +320,7 @@ test('what a model’s number is follows its name', () => {
 test('the controls are a model, a horizon and the re-rank’s context, and ask no question', () => {
   const node = screen(component({ scModel: 'kronos' }));
   const steps = byClass(node, 'aix-step').map((n) => text(n).replace(/\s+/g, ' ').trim());
-  assert.deepEqual(steps, ['01 CHOOSE A MODEL', '02 HORIZON', '03 CONTEXT THE RE-RANK READS']);
+  assert.deepEqual(steps, ['01 CHOOSE A MODEL', '02 FORECAST & RESULT WINDOW', '03 ADD GEMINI’S CONTEXT']);
   assert.ok(button(node, 'next session'));
   // The switches work over every model: they are how Gemini is turned on.
   const toggles = byClass(node, 'aix-toggle');
@@ -297,9 +339,9 @@ test('the results sit under two rules: the future first, then past runs', () => 
   const future = results.findIndex((n) => n.attrs?.id === 'aix-future');
   const past = results.findIndex((n) => n.attrs?.id === 'aix-past');
   assert.ok(future >= 0 && past > future, 'a rule is missing or out of order');
-  assert.match(text(results[future]), /FUTURE · NOT SCORED YET/);
+  assert.match(text(results[future]), /LATEST SAVED FORECASTS/);
   assert.match(text(results[future]), /computed after the close of 14 Sep 2026/);
-  assert.match(text(results[past]), /PAST RUNS · ALREADY SCORED/);
+  assert.match(text(results[past]), /TRACK RECORD & EARLIER RUNS/);
   for (const c of ['aix-view', 'aix-tiles', 'aix-ranking-card', 'aix-fan-card', 'aix-pair']) {
     const i = at(c);
     assert.ok(i > future && i < past, `${c} is not under the future rule`);
@@ -371,7 +413,9 @@ test('a ranking baseline ranks by the move it saw, never a forecast', () => {
 test('switching Gemini on shows its ranking in the same table, with where the model had each company', () => {
   const c = component({ scModel: 'kronos' });
   let node = screen(c);
-  button(node, 'Re-ranked by Gemini').events.click();
+  for(const name of ['Latest filings','News flow','The rule book']) {
+    button(screen(c),name).events.click();
+  }
   assert.deepEqual(c.state.scLayers, GEMINI);
   node = screen(c);
   button(node, 'Its own measurements').events.click();
@@ -390,9 +434,11 @@ test('switching Gemini on shows its ranking in the same table, with where the mo
   assert.match(tiles[0], /TOP 5 · Kronos-small EXPECTS.*-0\.17%/s);
   assert.match(tiles[1], /NEW TO THE TOP 5.*0 \/ 3/s);
   assert.match(tiles[2], /GEMINI KEPT.*2/s);
-  assert.match(button(node, 'Re-ranked by Gemini').attrs.class, /\bon\b/);
-  // One press back to the model's own ranking.
-  button(node, 'Ranked by Kronos-small').events.click();
+  assert.equal(byClass(node,'aix-view-switch').length,0);
+  assert.match(text(node), /not a percentage return or a probability/);
+  assert.match(text(node), /saved order targets five sessions/);
+  // The context switches are the only controls for the rerank.
+  for(const name of ['Latest filings','News flow','The rule book','Its own measurements']) button(screen(c),name).events.click();
   assert.deepEqual(c.state.scLayers, []);
   assert.match(text(byClass(screen(c), 'aix-ranking-card')[0]), /Ranked by Kronos-small/);
 });

@@ -1,0 +1,42 @@
+name: Lab — offline workbench checks
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/lab/**'
+      - 'public/esthmr/**'
+      - 'site-worker/test/ai-*.test.mjs'
+      - '.github/workflows/lab-*.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/lab/**'
+      - 'public/esthmr/**'
+      - 'site-worker/test/ai-*.test.mjs'
+      - '.github/workflows/lab-*.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lab-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test saved results and publication guards without model calls
+        run: |
+          python3 -m unittest discover -s scripts/lab -p 'test_*.py'
+          node --test site-worker/test/ai-cards.test.mjs site-worker/test/ai-explorer.test.mjs
+          python3 -m compileall -q scripts/lab
+          git diff --check

@@ -530,6 +530,9 @@ const ROOT = '/data/v1';
 async function doc(path) {
   return readResponse(`${ROOT}/${path}`, {
     credentials: 'same-origin',
+    // The public record and private forecasts are one publication. Revalidate
+    // them on reload instead of reusing an older browser-cached top5 document.
+    cache: path === 'research/top5.json' || path.startsWith('lab/') ? 'no-cache' : 'default',
     headers: { Accept: 'application/json' },
   }, async (response) => {
   if (response.status === 401 || response.status === 403) {

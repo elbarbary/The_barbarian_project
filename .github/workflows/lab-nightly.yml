@@ -154,7 +154,10 @@ jobs:
           node scripts/egx_scan.mjs ../work
 
       - name: Test the lab
-        run: cd scripts/lab && python3 -m unittest test_lab
+        id: tests
+        run: |
+          python3 -m unittest discover -s scripts/lab -p 'test_*.py'
+          node --test site-worker/test/ai-cards.test.mjs site-worker/test/ai-explorer.test.mjs
 
       # `dry_run` proves the models load and answer without entering
       # anything into the record. There is no other way to test a change to
@@ -166,9 +169,10 @@ jobs:
       # and after the close `run.py` refuses it outright. The test step above
       # is what validates a change; `dry_run` is how the models are exercised.
       - name: Forecast
-        if: github.event_name != 'push'
+        if: github.event_name != 'push' && steps.tests.outcome == 'success'
         env:
           ESTHMR_LAB_CACHE: ~/.cache/esthmr-lab
+          LAB_MODELS: ${{ inputs.models || 'all' }}
           ESTHMR_LAB_THREADS: '4'
           # The exchange resets a GitHub runner's connection outright, so
           # today's close — the whole reason this can run after the close —
@@ -180,7 +184,7 @@ jobs:
           scan=$(ls -t ../work/daily_scan_*.json | grep -v fused | head -1)
           echo "scan: $scan"
           python3 scripts/lab/run.py "$scan" \
-            --models "${{ inputs.models || 'all' }}" \
+            --models "$LAB_MODELS" \
             ${{ inputs.dry_run == true && ' ' || '--write' }}
 
       # Vertex is where the Cloud credits live and the only Gemini endpoint
@@ -190,7 +194,7 @@ jobs:
       # file it also writes lets `gemini.py` mint another if a run outlasts it.
       - name: Authenticate to Google Cloud
         id: gcp
-        if: always() && github.event_name != 'push'
+        if: always() && github.event_name != 'push' && steps.tests.outcome == 'success'
         uses: google-github-actions/auth@v2
         continue-on-error: true
         with:
@@ -208,7 +212,7 @@ jobs:
       # the session the exchange says has just closed, and a night already
       # read, so there is nothing for it to do twice.
       - name: Re-rank with context
-        if: always() && github.event_name != 'push'
+        if: always() && github.event_name != 'push' && steps.tests.outcome == 'success'
         env:
           ESTHMR_RELAY_URL: ${{ secrets.ESTHMR_RELAY_URL }}
           ESTHMR_RELAY_TOKEN: ${{ secrets.ESTHMR_RELAY_TOKEN }}
@@ -223,6 +227,7 @@ jobs:
       # that would not load, or a run refused because it was too late in the
       # day, is no reason to stop marking the record that already exists.
       - name: Score what has matured
+        id: score
         if: always() && inputs.dry_run != true
         run: |
           scan=$(ls -t ../work/daily_scan_*.json | grep -v fused | head -1)
@@ -233,6 +238,7 @@ jobs:
       # Merkle root a timestamping authority signed weeks earlier. Refuses
       # outright if the rebuilt root does not match.
       - name: Open what has matured
+        id: reveal
         if: always() && inputs.dry_run != true
         run: |
           scan=$(ls -t ../work/daily_scan_*.json | grep -v fused | head -1)
@@ -243,7 +249,8 @@ jobs:
       # every model and every re-rank reading said about every company last
       # night (`lab/`, behind the session gate and the warning on the screen).
       - name: Publish what the models say
-        if: always() && inputs.dry_run != true
+        id: publish
+        if: always() && inputs.dry_run != true && steps.tests.outcome == 'success' && steps.score.outcome == 'success' && steps.reveal.outcome == 'success'
         # Through the relay for the same reason as the forecast: the session
         # that just closed comes from the exchange, which resets a runner's
         # connection, and without it tonight's close is not on the screen.
@@ -261,14 +268,20 @@ jobs:
       # of it does not hold — the point of shipping a verifier is that this
       # project finds out first.
       - name: Verify what has been opened
+        id: verify
         if: always() && inputs.dry_run != true
         run: python3 scripts/lab/verify.py
+
+      - name: Validate the precomputed workbench bundle
+        id: snapshot
+        if: always() && steps.publish.outcome == 'success'
+        run: python3 scripts/lab/snapshot.py
 
       # Committed because the whole value is that it cannot be edited
       # afterwards. A forecast kept only in a CI artifact expires in ninety
       # days and proves nothing about what was believed in September.
       - name: Commit the run
-        if: always() && inputs.dry_run != true
+        if: always() && inputs.dry_run != true && steps.tests.outcome == 'success' && steps.publish.outcome == 'success' && steps.verify.outcome == 'success' && steps.snapshot.outcome == 'success'
         run: |
           git config user.name  'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
@@ -285,32 +298,34 @@ jobs:
             exit 0
           fi
           git commit -m 'lab: forecasts, scores and reveals'
-          # Losing a race to the market build is normal — it commits to main
-          # three times a day. The only files this job writes are its own, so
-          # a conflict here is this run's regeneration against another's, and
-          # during a rebase "theirs" is the commit being replayed: this one,
-          # the newer answer from the same inputs. A conflict on anything
-          # else is not this job's to resolve and stops it.
+          # Retry unrelated market-data commits. A research conflict is not
+          # evidence that our copy is newer: stop and preserve it for review.
           for attempt in 1 2 3; do
-            if git pull --rebase --autostash origin main; then
+            if git pull --rebase origin main; then
+              python3 scripts/lab/verify.py
+              python3 scripts/lab/snapshot.py
               git push origin HEAD:main && exit 0
             fi
             unmerged=$(git diff --name-only --diff-filter=U)
             if [ -n "$unmerged" ]; then
-              if echo "$unmerged" | grep -qvE '^(data-source/lab|public/data/v1/research|public/data/v1/lab)/'; then
-                echo "conflict outside this job's own output:"; echo "$unmerged"
-                git rebase --abort || true
-                exit 1
-              fi
-              echo "$unmerged" | while read -r f; do
-                git checkout --theirs -- "$f" 2>/dev/null || true
-                git add -- "$f"
-              done
-              GIT_EDITOR=true git rebase --continue >/dev/null 2>&1 || true
-              git push origin HEAD:main && exit 0
+              echo "Conflicting records require reconciliation; nothing will be overwritten:"
+              echo "$unmerged"
+              git rebase --abort
+              exit 1
             fi
             echo "push attempt $attempt lost the race; retrying"
             sleep 5
           done
           echo 'could not push after three attempts'
           exit 1
+
+      - name: Preserve failed-run research for recovery
+        if: failure() && inputs.dry_run != true
+        uses: actions/upload-artifact@v4
+        with:
+          name: lab-recovery-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 30
+          if-no-files-found: ignore
+          path: |
+            data-source/lab/
+            public/data/v1/research/commitments/
