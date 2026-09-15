@@ -3231,6 +3231,10 @@
     "meaning": "Central bank interest rate hikes increase local borrowing costs and narrow yield differentials against foreign currencies, directly altering cross-border carry trade financing and capital flows.",
     "meaning_ar": "يؤدي رفع أسعار الفائدة من قِبل البنك المركزي إلى زيادة تكلفة الاقتراض بالعملة المحلية وتقليص فوارق العوائد مع العملات الأجنبية، مما يغير آليات تمويل تجارة الفائدة والتدفقات الرأسمالية عبر الحدود."
   },
+  "بنك انجلترا يعتزم وقف مبيعات السندات طويله الاجل": {
+    "meaning": "This operational adjustment in the Bank of England's quantitative tightening framework halts the active market supply of long-maturity government gilts, leaving secondary market distribution exclusively to commercial and primary participants.",
+    "meaning_ar": "يُمثّل هذا الإجراء تعديلاً تشغيلياً في آلية التشديد الكمي لبنك إنجلترا عبر وقف المعروض من السندات الحكومية طويلة الأجل في السوق، مما يقصر تداول هذه الآجال على السوق الثانوية عبر المتعاملين التجاريين والرئيسيين."
+  },
   "بنك انجلترا: مخاوف تمويل الانفاق الدفاعي توجج اضطرابات اسواق السندات": {
     "meaning": "Increased government borrowing requirements to fund defense expenditure expand sovereign debt issuance in the primary market, which generates yield volatility across sovereign bond markets.",
     "meaning_ar": "تؤدي زيادة متطلبات الاقتراض الحكومي لتمويل الإنفاق الدفاعي إلى ارتفاع حجم إصدارات الديون السيادية في السوق الأولية، وهو ما يولد تقلبات في عوائد وأسعار السندات الحكومية."
@@ -3302,6 +3306,10 @@
   "بيسنت: اسعار النفط قد تهبط الي 40 دولارا للبرميل بعد انتهاء الصراع مع ايران": {
     "meaning": "Global crude oil benchmarks incorporate a geopolitical risk premium during regional conflicts, and the cessation of supply disruption risks realigns pricing with baseline global supply-demand balances and marginal extraction costs.",
     "meaning_ar": "تعكس أسعار النفط العالمية علاوة مخاطر جيوسياسية أثناء النزاعات الإقليمية، بينما يعيد انحسار مخاطر انقطاع الإمدادات تسعير الخام وفقاً لتوازنات العرض والطلب الأساسية وتكاليف الإنتاج الحدية."
+  },
+  "بين الارتفاع والتراجع.. كيف افتتح الدينار الكويتي تعاملات اليوم بالبنوك؟": {
+    "meaning": "Mixed opening rates for the Kuwaiti Dinar reflect interbank foreign exchange adjustments driven by real-time treasury liquidity and bilateral trade settlement requirements across commercial banks.",
+    "meaning_ar": "يعكس التباين في أسعار افتتاح الدينار الكويتي تسويات سوق الصرف بين البنوك (الإنتربنك) وفق مستويات السيولة اللحظية ومتطلبات تسوية المعاملات التجارية لدى البنوك التجارية."
   },
   "تابعه ل«ام ان تي حالا» تتقدم بطلب قيد اسهمها الي البورصه المصريه": {
     "meaning": "A subsidiary of MNT-Halan submits a listing application to the Egyptian Exchange (EGX), initiating the formal regulatory review process to register its shares under local market listing and disclosure rules.",
@@ -6464,6 +6472,10 @@
   "وزير الصناعه: صناعه الاثاث المصريه تمتلك مقومات توهلها لتحقيق نمو غير مسبوق": {
     "meaning": "Official industrial policy identifies the domestic furniture sector as an operation with competitive production fundamentals, encompassing local manufacturing capacities, supply chain infrastructure, and export readiness.",
     "meaning_ar": "تحدد السياسة الصناعية الرسمية قطاع الأثاث المحلي كنشاط يعتمد على مقومات تصنيع قائمة، تشمل القدرات الإنتاجية المحلية، وبنية سلاسل الإمداد، والتجهيزات التصديرية."
+  },
+  "وزير الصناعه: نستهدف جذب الشركات الاسبانيه المتوسطه والصغيره لضخ استثمارات جديده في مصر": {
+    "meaning": "The policy targets foreign direct investment inflows by creating bilateral frameworks and industrial partnerships with Spanish small and medium-sized enterprises to establish local operational and production units.",
+    "meaning_ar": "تستهدف هذه السياسة تدفقات الاستثمار الأجنبي المباشر عبر وضع أطر ثنائية وشراكات صناعية مع الشركات الإسبانية الصغيرة والمتوسطة لتأسيس وحدات تشغيلية وإنتاجية محلية."
   },
   "وزير الطاقه الامريكي: اكثر من 9 ملايين برميل نفط تمر يوميا عبر مضيق هرمز": {
     "meaning": "The Strait of Hormuz functions as a critical global maritime transit corridor, handling daily crude flows exceeding 9 million barrels that directly anchor international oil supply chains and energy shipping infrastructure.",
