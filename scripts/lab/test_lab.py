@@ -2346,6 +2346,42 @@ class PicksTest(unittest.TestCase):
         self.assertEqual(entry["says"], {"kind": "score", "outOf": 100})
 
 
+class ListedTest(unittest.TestCase):
+    """An instrument the feed names by its ISIN is not asked about or shown."""
+
+    def test_an_isin_is_not_a_ticker(self):
+        for isin in ("EGS659O1C015", "EGS30AJ1C016-EGP", "EGS385S1C012"):
+            self.assertFalse(run.listed(isin), isin)
+        for ticker in ("COMI", "EGSA", "AAA", "T00", "EGAL"):
+            self.assertTrue(run.listed(ticker), ticker)
+        self.assertFalse(run.listed(None))
+        self.assertFalse(run.listed(""))
+
+    def test_the_universe_leaves_it_out_and_says_so(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            scan = {"records": [{"ticker": t, "recentSplitAdjustedBars": rising(100)}
+                                for t in ("AAA", "EGS659O1C015")]}
+            rows, sources = run.universe(scan, root=pathlib.Path(tmp))
+        self.assertEqual([r["ticker"] for r in rows], ["AAA"])
+        self.assertEqual(sources["withoutTicker"], ["EGS659O1C015"])
+
+    def test_a_night_sealed_with_one_neither_scores_nor_picks_it(self):
+        import publish as pb
+        # Forty listed companies and one ISIN the model liked best of all.
+        tickers = [f"T{i:02d}" for i in range(40)]
+        dates = ["2026-09-01", "2026-09-02"]
+        panel = panel_of({t: {dates[0]: 100.0, dates[1]: 101.0} for t in tickers + ["EGS659O1C015"]})
+        block = {"forecasts": [{"ticker": t, "returns": {"1": float(i)}} for i, t in enumerate(tickers)]
+                 + [{"ticker": "EGS659O1C015", "returns": {"1": 173.0}}]}
+        self.assertNotIn("EGS659O1C015", [t for _, t in pb.ranked(block, 1)])
+        self.assertEqual(len(ev.pairs_for(block, dates[0], 1, panel)), 40)
+        document = {"basisSession": dates[1], "models": {"kronos": block}}
+        self.assertNotIn("EGS659O1C015", pb.scenarios(document, panel, dates)["companies"])
+        self.assertNotIn("EGS659O1C015", pb.scores_of({"forecasts": [
+            {"ticker": "EGS659O1C015", "ranked_by": {"5": 99.0}}, {"ticker": "AAA", "ranked_by": {"5": 1.0}}]}))
+
+
 class EarlyExitTest(unittest.TestCase):
     """A night already sealed costs the retry schedule seconds, not Kronos."""
 

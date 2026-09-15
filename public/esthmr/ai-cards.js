@@ -121,7 +121,8 @@ export function aiCards(component, data, ar) {
     onClose: () => component.setState({ aiWarning: false }),
     closeLabel: t('Close', 'إغلاق'),
   }) : null;
-  const into = { scModel: st.scModel || 'rerank', scHorizon: n };
+  // Into the workbench on the model's own ranking; Gemini is one switch away.
+  const into = { scHorizon: n };
 
   // A div, not a section: the journal styles give every section of Home its
   // own padding, radius and shadow, and this wrapper holds two surfaces that
@@ -138,7 +139,7 @@ export function aiCards(component, data, ar) {
           `${models ? `${Word(models)} public models` : 'Public models'} rank every listed company after each close. Pick one of them yourself, or read the picks we publish either way. We hold nothing and advise nothing.`,
           `${models ? countAr(models, 'نموذج عام واحد', 'نموذجان عامان', 'نماذج عامة', 'نموذجاً عاماً') : 'نماذج عامة'} ترتّب كل الشركات المدرجة بعد كل إغلاق. اختر أحدها بنفسك، أو اقرأ الاختيارات التي ننشرها في كل الأحوال. لا نملك أسهماً ولا نقدّم نصيحة.`)),
         h('div', { class: 'aix-hero-actions' },
-          h('button', { type: 'button', class: 'aix-cta', onClick: () => open(component, { ...into, scFocus: null }) },
+          h('button', { type: 'button', class: 'aix-cta', onClick: () => open(component, { ...into, scLayers: [], scFocus: null }) },
             t('Run a model', 'شغّل نموذجاً'), h('span', { 'aria-hidden': 'true', dir: 'ltr' }, ar ? '←' : '→')),
           h('button', { type: 'button', class: 'aix-cta-quiet', onClick: () => open(component, { ...into, scFocus: 'past' }) },
             t('See what they returned', 'اطّلع على ما حققته')))),

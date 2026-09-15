@@ -15,8 +15,8 @@ import { aiCards, heroModel } from '../../public/esthmr/ai-cards.js';
 import { heroChart, histogram, fanChart, nextRun, reorderChart, nightsChart } from '../../public/esthmr/ai-visuals.js';
 import { saidParts } from '../../public/esthmr/scenario-visuals.js';
 import {
-  scenariosScreen, warningLines, ACCEPTED_KEY, readingKey, choosableModels, choiceOf, recordOf, nightsOf,
-  rerankView, returnsView, standing, spearman, saysOf,
+  scenariosScreen, warningLines, ACCEPTED_KEY, readingKey, baseModels, choiceOf, recordOf, nightsOf,
+  rankingOf, returnsView, standing, spearman, saysOf, listed,
 } from '../../public/esthmr/scenarios.js';
 
 installDom();
@@ -145,7 +145,9 @@ const data = {
   companies: [{ ticker: 'AAA', name: { en: 'Alpha', ar: 'ألفا' } }, { ticker: 'BBB', name: { en: 'Beta', ar: 'بيتا' } }, { ticker: 'CCC', name: { en: 'Gamma', ar: 'جاما' } }],
 };
 const screen = (c, d = data, ar = false) => scenariosScreen(c, d, ar).screen;
-const tickersOf = (node) => byClass(node, 'aix-pick').map((p) => text(all(p).find((x) => x.tag === 'b')).trim());
+const rowsOf = (node) => byClass(node, 'aix-rank-row');
+const tickersOf = (node) => rowsOf(node).map((p) => text(all(p).find((x) => x.tag === 'b')).trim());
+const GEMINI = ['filings', 'news', 'rulebook'];
 
 /* ── Home: the card at the top ──────────────────────────────────────────── */
 
@@ -204,7 +206,8 @@ test('both ways in open the workbench, and one lands on what the picks returned'
   const node = aiCards(c, data, false);
   button(node, 'Run a model').events.click();
   assert.equal(c.state.screen, 'scenarios');
-  assert.equal(c.state.scModel, 'rerank');
+  // On a model's own ranking, with Gemini one switch away.
+  assert.deepEqual(c.state.scLayers, []);
   assert.equal(c.state.scHorizon, 5);
   assert.equal(c.state.scSearch, '');
   assert.equal(c.state.scShowAll, false);
@@ -234,13 +237,11 @@ test('the beta pill opens the warning, and accepting it opens the workbench', ()
 
 /* ── the workbench: what is offered ─────────────────────────────────────── */
 
-test('the model chips are the re-rank and every model with a five of its own', () => {
-  // Ranking baselines have a five and a record, so they are offered now; a
-  // model that says the same about every company has no five and is not.
-  assert.deepEqual(choosableModels(data.picks, scenarios, data.top5).map((m) => m.id),
-    ['rerank', 'kronos', 'momentum20', 'reversal1', 'drift']);
-  assert.deepEqual(choosableModels(null, { ...scenarios, rerank: null }).map((m) => m.id), ['kronos', 'drift', 'momentum20']);
-  assert.equal(choosableModels(data.picks, scenarios)[0].label, 'Gemini re-rank');
+test('the model chips are every model that ranks, and Gemini is not one of them', () => {
+  // Gemini is what the context switches turn on over the chosen model. A
+  // model that says the same about every company ranks nothing.
+  assert.deepEqual(baseModels(data.picks, scenarios).map((m) => m.id), ['kronos', 'momentum20', 'reversal1', 'drift']);
+  assert.deepEqual(baseModels(null, scenarios).map((m) => m.id), ['kronos', 'drift', 'momentum20']);
 });
 
 test('a reading key is spelled the way the lab seals it', () => {
@@ -250,11 +251,16 @@ test('a reading key is spelled the way the lab seals it', () => {
   assert.equal(readingKey(['gossip'], LAYERS), 'models');
 });
 
-test('the controls start where the re-rank Home reports starts, and there is nothing to run', async () => {
-  const choice = choiceOf({}, data.picks, scenarios, data.top5);
-  assert.equal(choice.model, 'rerank');
-  assert.deepEqual(choice.layers, ['filings', 'news', 'rulebook']);
+test('the workbench opens on a model’s own ranking, and there is nothing to run', async () => {
+  const choice = choiceOf({}, data.picks, scenarios);
+  assert.equal(choice.model, 'kronos');
+  assert.equal(choice.gemini, false);
+  assert.deepEqual(choice.layers, []);
   assert.equal(choice.horizon, 5);
+  // An older link that asked for the re-rank as a model opens on Gemini.
+  const legacy = choiceOf({ scModel: 'rerank' }, data.picks, scenarios);
+  assert.equal(legacy.gemini, true);
+  assert.deepEqual(legacy.layers, GEMINI);
   const node = screen(component());
   assert.equal(byClass(node, 'aix-run').length, 0);
   assert.ok(!button(node, 'Run'), 'a run button came back');
@@ -269,7 +275,19 @@ test('what a model’s number is follows its name', () => {
   assert.deepEqual(saysOf('rerank:filings'), { kind: 'score', outOf: 100 });
 });
 
-/* ── the workbench: next, then what already happened ────────────────────── */
+test('the controls are a model, a horizon and the re-rank’s context, and ask no question', () => {
+  const node = screen(component({ scModel: 'kronos' }));
+  const steps = byClass(node, 'aix-step').map((n) => text(n).replace(/\s+/g, ' ').trim());
+  assert.deepEqual(steps, ['01 CHOOSE A MODEL', '02 HORIZON', '03 CONTEXT THE RE-RANK READS']);
+  assert.ok(button(node, 'next session'));
+  // The switches work over every model: they are how Gemini is turned on.
+  const toggles = byClass(node, 'aix-toggle');
+  assert.equal(toggles.length, 4);
+  assert.ok(toggles.every((x) => x.attrs.disabled !== 'true'));
+  assert.match(text(node), /Switch any of these on to see the ranking after Gemini re-reads/);
+});
+
+/* ── the workbench: the future ──────────────────────────────────────────── */
 
 test('the results sit under two rules: the future first, then past runs', () => {
   const node = screen(component({ scModel: 'kronos' }));
@@ -282,74 +300,150 @@ test('the results sit under two rules: the future first, then past runs', () => 
   assert.match(text(results[future]), /FUTURE · NOT SCORED YET/);
   assert.match(text(results[future]), /computed after the close of 14 Sep 2026/);
   assert.match(text(results[past]), /PAST RUNS · ALREADY SCORED/);
-  for (const c of ['aix-picks-card', 'aix-tiles', 'aix-fan-card', 'aix-pair', 'aix-company-card']) {
+  for (const c of ['aix-view', 'aix-tiles', 'aix-ranking-card', 'aix-fan-card', 'aix-pair']) {
     const i = at(c);
     assert.ok(i > future && i < past, `${c} is not under the future rule`);
   }
   for (const c of ['aix-record-card', 'aix-nights-card', 'aix-models']) {
     assert.ok(at(c) > past, `${c} is not under past runs`);
   }
-  assert.match(text(results[at('aix-picks-card')]), /nobody knows how they do/);
 });
 
-test('the controls are model, horizon and the re-rank’s context, and ask no question', () => {
+test('a model’s ranking is every company, highest first, with what it expects', () => {
   const node = screen(component({ scModel: 'kronos' }));
-  const steps = byClass(node, 'aix-step').map((n) => text(n).replace(/\s+/g, ' ').trim());
-  assert.deepEqual(steps, ['01 MODEL', '02 HORIZON', '03 CONTEXT THE RE-RANK READS']);
-  assert.ok(button(node, 'next session'));
-});
-
-test('the newest five are named alphabetically, each with what the model expects', () => {
-  const node = screen(component({ scModel: 'kronos' }));
-  const card = byClass(node, 'aix-picks-card')[0];
-  assert.deepEqual(tickersOf(card), ['AAA', 'BBB', 'CCC', 'DDD', 'EEE']);
-  assert.match(text(card), /The five Kronos-small picked after the close of 14 Sep 2026/);
-  assert.match(text(byClass(card, 'aix-pick')[2]), /expects.*\+8\.25%/s);
-  assert.match(text(card), /once 5 more sessions close/);
+  const card = byClass(node, 'aix-ranking-card')[0];
+  assert.match(text(card), /Ranked by Kronos-small/);
   assert.match(text(card), /not a recommendation/);
-  // A number, never a place: no rank column, no "#1".
-  assert.doesNotMatch(text(card), /#\s?1|\b1st\b|best/i);
+  // Kronos at five sessions: AAA +2, CCC +0.5, BBB -3.
+  assert.deepEqual(tickersOf(card), ['AAA', 'CCC', 'BBB']);
+  const rows = rowsOf(card);
+  assert.match(text(rows[0]), /1.*AAA.*\+2\.00%.*1 of 1 agree/s);
+  assert.match(text(rows[2]), /3.*BBB.*-3\.00%/s);
+  assert.match(text(card), /EXPECTS · 5 SESSIONS/i);
+  const tiles = byClass(node, 'aix-tile').map(text);
+  assert.match(tiles[0], /TOP 5 · EXPECTED.*-0\.17%/s);
+  assert.match(tiles[2], /COMPANIES RANKED.*3/s);
+  // Moved in the document, moved on the screen.
+  const moved = JSON.parse(JSON.stringify(scenarios));
+  moved.companies.BBB.models.kronos.returns[5] = 9;
+  assert.deepEqual(tickersOf(byClass(screen(component({ scModel: 'kronos' }), { ...data, scenarios: moved }), 'aix-ranking-card')[0]), ['BBB', 'AAA', 'CCC']);
 });
 
-test('a ranking baseline shows the move it ranks by, never a forecast', () => {
-  const momentum = byClass(screen(component({ scModel: 'momentum20' })), 'aix-picks-card')[0];
-  assert.match(text(momentum), /rose the most over the last 20 sessions/);
-  assert.match(text(momentum), /last 20 sessions.*\+31\.50%/s);
-  assert.doesNotMatch(text(momentum), /expects/);
+test('a tie is settled by ticker, as the record settles it, and marked', () => {
+  const tied = JSON.parse(JSON.stringify(scenarios));
+  tied.companies.CCC.models.kronos.returns[5] = 2;
+  const { rows } = rankingOf(tied, { model: 'kronos', horizon: 5, gemini: false }, null);
+  assert.deepEqual(rows.map((r) => r.ticker), ['AAA', 'CCC', 'BBB']);
+  assert.equal(rows[1].tied, true);
+  assert.equal(rows[0].tied, false);
+});
+
+test('an instrument with no exchange ticker is never ranked', () => {
+  assert.equal(listed('EGS659O1C015'), false);
+  assert.equal(listed('EGS30AJ1C016-EGP'), false);
+  assert.equal(listed('EGSA'), true);
+  const withIsin = JSON.parse(JSON.stringify(scenarios));
+  withIsin.companies.EGS659O1C015 = { ticker: 'EGS659O1C015', models: { kronos: { returns: { 5: 173.26 } } } };
+  const node = screen(component({ scModel: 'kronos' }), { ...data, scenarios: withIsin });
+  assert.doesNotMatch(text(node), /EGS659O1C015/);
+  assert.deepEqual(tickersOf(byClass(node, 'aix-ranking-card')[0]), ['AAA', 'CCC', 'BBB']);
+});
+
+test('a ranking baseline ranks by the move it saw, never a forecast', () => {
+  const card = byClass(screen(component({ scModel: 'momentum20' })), 'aix-ranking-card')[0];
+  assert.deepEqual(tickersOf(card), ['AAA', 'BBB']);
+  assert.match(text(card), /MOVE · LAST 20 SESSIONS/i);
+  assert.match(text(rowsOf(card)[0]), /\+9\.00%/);
+  assert.doesNotMatch(text(card), /Expects/);
   // Reversal ranks by the fall, stored with its sign turned over; the figure
   // printed is the fall itself.
-  const reversal = byClass(screen(component({ scModel: 'reversal1' })), 'aix-picks-card')[0];
-  assert.match(text(reversal), /fell the most in the last session/);
-  assert.match(text(reversal), /-7\.25%/);
   assert.deepEqual(saidParts({ kind: 'reversal', sessions: 1 }, 7.25, false).figure, '-7.25%');
 });
 
-test('switching on the measurements shows a different five and says what the evidence changed', () => {
-  const c = component({ scModel: 'rerank' });
+test('switching Gemini on shows its ranking in the same table, with where the model had each company', () => {
+  const c = component({ scModel: 'kronos' });
   let node = screen(c);
-  let card = byClass(node, 'aix-picks-card')[0];
-  assert.deepEqual(tickersOf(card), ['AAA', 'BBB', 'CCC', 'DDD', 'EEE']);
-  assert.match(text(card), /the filings moved it/);
-  assert.match(text(card), /said 1 company was worth anything/);
-  // Reading the forecasts alone gave the same five, and it says so.
-  assert.match(text(card), /nothing in the five/);
-
-  const on = button(node, 'Its own measurements');
-  assert.equal(on.attrs['aria-checked'], 'false');
-  on.events.click();
+  button(node, 'After Gemini re-ranks it').events.click();
+  assert.deepEqual(c.state.scLayers, GEMINI);
+  node = screen(c);
+  button(node, 'Its own measurements').events.click();
   assert.deepEqual(c.state.scLayers, LAYERS);
   node = screen(c);
-  card = byClass(node, 'aix-picks-card')[0];
-  assert.deepEqual(tickersOf(card), ['AAA', 'KKK', 'LLL', 'MMM', 'NNN']);
+  const card = byClass(node, 'aix-ranking-card')[0];
+  assert.match(text(card), /Ranked after Gemini re-reads Kronos-small and the other models/);
+  // The measurements reading: AAA 70, BBB 60, CCC 10. Kronos had AAA, CCC, BBB.
+  assert.deepEqual(tickersOf(card), ['AAA', 'BBB', 'CCC']);
+  const rows = rowsOf(card);
+  assert.match(text(rows[0]), /70\/100.*#1/s);
+  assert.match(text(rows[1]), /60\/100.*#3.*▲1.*-3\.00%/s);
+  assert.match(text(rows[2]), /10\/100.*#2.*▼1/s);
   assert.match(text(card), /the measurements moved it/);
-  assert.doesNotMatch(text(card), /the filings moved it/);
-  assert.match(text(card), /said 2 companies were worth anything/);
-  assert.match(text(card), /4 of the five above are not among them/);
+  const tiles = byClass(node, 'aix-tile').map(text);
+  assert.match(tiles[0], /TOP 5 · Kronos-small EXPECTS.*-0\.17%/s);
+  assert.match(tiles[1], /NEW TO Kronos-small’S TOP 5.*0 \/ 3/s);
+  assert.match(tiles[2], /GEMINI KEPT.*2/s);
+  assert.match(button(node, 'After Gemini re-ranks it').attrs.class, /\bon\b/);
+  // One press back to the model's own ranking.
+  button(node, 'Kronos-small’s ranking').events.click();
+  assert.deepEqual(c.state.scLayers, []);
+  assert.match(text(byClass(screen(c), 'aix-ranking-card')[0]), /Ranked by Kronos-small/);
 });
+
+test('Gemini’s ranking is fetched when it is switched on, and a failure says so', async () => {
+  const asked = [];
+  const c = component({ scModel: 'kronos', scLayers: GEMINI }, {
+    loadReading: async (key) => { asked.push(key); throw new Error('offline'); },
+  });
+  const bare = { ...data, readings: {} };
+  screen(c, bare);
+  await flush(); await flush();
+  assert.deepEqual(asked, ['filings-news-rulebook']);
+  const node = screen(c, bare);
+  assert.match(text(node), /Gemini’s ranking could not be fetched/);
+  assert.match(text(node), /offline/);
+  button(node, 'Try again').events.click();
+  assert.equal(c.state.scFailed['filings-news-rulebook'], undefined);
+});
+
+test('a combination that did not answer that night says so and why', () => {
+  const c = component({ scModel: 'kronos', scLayers: ['news'] });
+  assert.match(text(screen(c)), /did not answer that night: TimeoutError: vertex did not answer/);
+});
+
+test('search finds a company and keeps its place in the ranking', () => {
+  const c = component({ scModel: 'kronos' });
+  const card = byClass(screen(c), 'aix-ranking-card')[0];
+  all(card).find((x) => x.tag === 'input').events.input({ target: { value: 'beta' } });
+  const found = rowsOf(byClass(screen(c), 'aix-ranking-card')[0]);
+  assert.equal(found.length, 1);
+  assert.match(text(found[0]), /3.*BBB/s);
+});
+
+test('a forecaster’s view of the whole market counts agreement honestly', () => {
+  const view = returnsView(scenarios, { model: 'kronos', horizon: 5 }, ['AAA', 'BBB', 'CCC']);
+  const aaa = view.rows[0];
+  assert.equal(aaa.value, 2);
+  // Flat says zero about everything and is counted neither way.
+  assert.equal(aaa.of, 2);
+  assert.equal(aaa.agree, 2);
+  assert.equal(view.rows[1].agree, 1);
+  assert.equal(view.summary.count, 3);
+  assert.deepEqual(view.past, [-1 / 3, -1 / 6, 0]);
+  assert.equal(view.byModel.find((m) => m.id === 'flat').median, 0);
+  assert.equal(view.pointingUp, 2);
+});
+
+test('companies left tied share a place when movement is measured', () => {
+  assert.deepEqual(standing({ A: 5, B: 5, C: 1 }), { A: 1.5, B: 1.5, C: 3 });
+  assert.equal(spearman([[1, 1], [2, 2], [3, 3]]), 1);
+  assert.equal(spearman([[1, 1], [1, 2]]), null);
+});
+
+/* ── the workbench: past runs ───────────────────────────────────────────── */
 
 test('the record so far counts scored nights, and averages only past the minimum', () => {
   let card = byClass(screen(component({ scModel: 'kronos' })), 'aix-record-card')[0];
-  const figures = (n) => byClass(n, 'aix-record-stat').map((s) => text(all(s).find((x) => x.tag === 'strong')).trim());
+  const figures = (n) => byClass(n, 'aix-record-stat').map((x) => text(all(x).find((y) => y.tag === 'strong')).trim());
   assert.match(text(card), /Kronos-small, so far/);
   // Fives returned 1, -1 and 3 against markets of .5, 1 and 2: -0.17 on
   // average, ahead twice; nine of the fifteen picks finished above zero.
@@ -366,6 +460,15 @@ test('the record so far counts scored nights, and averages only past the minimum
   // Below the minimum the count stands and the average does not.
   assert.deepEqual(figures(card), ['—', '3', '60%']);
   assert.match(text(card), /an average needs 5 scored nights; 3 so far/);
+});
+
+test('with Gemini on, the past runs are the reading’s own record', () => {
+  const node = screen(component({ scModel: 'kronos', scLayers: GEMINI }));
+  assert.match(text(byClass(node, 'aix-record-card')[0]), /Gemini re-rank with filings, the news and the rule book, so far/);
+  const nights = byClass(node, 'aix-nights-card')[0];
+  assert.match(text(nights), /Nothing scored yet at 5 sessions/);
+  assert.match(text(nights), /first result comes once 5 more sessions close, for the five from 14 Sep 2026/);
+  assert.equal(byClass(nights, 'aix-nights-chart').length, 0);
 });
 
 test('night by night draws each scored night and lists every night', () => {
@@ -386,7 +489,7 @@ test('a night still waiting shows what the model said in dashed chips, never as 
   assert.match(text(scoredRow), /AHEAD/);
   assert.ok(byClass(scoredRow, 'aix-pick-chip').every((chip) => !/is-said/.test(chip.attrs.class)));
   assert.deepEqual(byClass(scoredRow, 'aix-pick-chip').map((chip) => text(chip.children[0]).trim()), ['KKK', 'LLL', 'MMM', 'NNN', 'OOO']);
-  // The newest five are on the card above, not repeated in the list.
+  // The newest five are the top of the ranking above, not repeated in the list.
   assert.ok(!rows.some((r) => /14 Sep 2026/.test(text(r))));
 });
 
@@ -416,130 +519,12 @@ test('long histories are behind a show-all, and older nights say they are in the
   assert.equal(recordOf({ horizons: { 5: { older: 0, nights: nights.slice(0, 3) } } }, 5, null, 5).sessions, 1);
 });
 
-test('a model with nothing scored yet says when the first result comes', () => {
-  const c = component({ scModel: 'rerank' });
-  const card = byClass(screen(c), 'aix-nights-card')[0];
-  assert.match(text(card), /Nothing scored yet at 5 sessions/);
-  assert.match(text(card), /first result comes once 5 more sessions close, for the five from 14 Sep 2026/);
-  assert.equal(byClass(card, 'aix-nights-chart').length, 0);
-});
-
-test('with no five waiting the card says why instead of showing an old five as new', () => {
+test('when the newest five have already been scored, the ranking says so', () => {
   const stale = picksFile();
   stale.models.kronos.horizons[5].nights.splice(0, 2);
-  const card = byClass(screen(component({ scModel: 'kronos' }), { ...data, picks: stale }), 'aix-picks-card')[0];
-  assert.match(text(card), /No five waiting from Kronos-small/);
-  assert.match(text(card), /have already been scored/);
-  assert.equal(byClass(card, 'aix-pick').length, 0);
-  assert.deepEqual(nightsOf(stale.models.kronos, 5).next, null);
-});
-
-test('a reading’s own scores are fetched for the list behind the five, and a failure says so', async () => {
-  const asked = [];
-  const c = component({ scModel: 'rerank' }, {
-    loadReading: async (key) => { asked.push(key); throw new Error('offline'); },
-  });
-  const bare = { ...data, readings: {} };
-  let node = screen(c, bare);
-  // The five and the record do not wait for it.
-  assert.equal(tickersOf(byClass(node, 'aix-picks-card')[0]).length, 5);
-  await flush(); await flush();
-  assert.deepEqual(asked, ['filings-news-rulebook', 'models']);
-  node = screen(c, bare);
-  assert.match(text(node), /This reading could not be fetched/);
-  assert.match(text(node), /offline/);
-  button(node, 'Try again').events.click();
-  assert.equal(c.state.scFailed['filings-news-rulebook'], undefined);
-});
-
-test('a combination that did not answer that night says so and why', () => {
-  const c = component({ scModel: 'rerank', scLayers: ['news'] });
-  assert.match(text(screen(c)), /did not answer that night: TimeoutError: vertex did not answer/);
-});
-
-test('a forecaster greys the switches out and says why', () => {
-  const node = screen(component({ scModel: 'kronos' }));
-  const toggles = byClass(node, 'aix-toggle');
-  assert.equal(toggles.length, 4);
-  assert.ok(toggles.every((t) => t.attrs.disabled === 'true'));
-  assert.match(text(node), /Only the re-rank reads these/);
-});
-
-/* ── the workbench: every company behind the five ───────────────────────── */
-
-test('every company is listed alphabetically, the five marked, and search narrows it', () => {
-  const c = component({ scModel: 'kronos' });
-  let list = byClass(screen(c), 'aix-company-card')[0];
-  const rows = byClass(list, 'aix-company-row');
-  assert.deepEqual(rows.map((r) => text(all(r).find((x) => x.tag === 'b')).trim().slice(0, 3)), ['AAA', 'BBB', 'CCC']);
-  assert.equal(byClass(list, 'aix-five-badge').length, 3);
-  all(list).find((x) => x.tag === 'input').events.input({ target: { value: 'beta' } });
-  list = byClass(screen(c), 'aix-company-card')[0];
-  assert.equal(byClass(list, 'aix-company-row').length, 1);
-});
-
-test('a forecaster’s view covers every company, alphabetically, and counts agreement honestly', () => {
-  const view = returnsView(scenarios, { model: 'kronos', horizon: 5 }, ['AAA', 'BBB', 'CCC']);
-  assert.deepEqual(view.rows.map((r) => r.ticker), ['AAA', 'BBB', 'CCC']);
-  const aaa = view.rows[0];
-  assert.equal(aaa.value, 2);
-  // Flat says zero about everything and is counted neither way.
-  assert.equal(aaa.of, 2);
-  assert.equal(aaa.agree, 2);
-  assert.equal(view.rows[1].agree, 1);
-  assert.equal(view.summary.count, 3);
-  assert.deepEqual(view.past, [-1 / 3, -1 / 6, 0]);
-  assert.equal(view.byModel.find((m) => m.id === 'flat').median, 0);
-  assert.equal(view.pointingUp, 2);
-});
-
-test('companies left tied are not moved by the alphabet', () => {
-  assert.deepEqual(standing({ A: 5, B: 5, C: 1 }), { A: 1.5, B: 1.5, C: 3 });
-  const tickers = Array.from({ length: 40 }, (_, i) => `T${String(i).padStart(2, '0')}`);
-  const ordered = Object.fromEntries(tickers.map((t, i) => [t, i]));
-  const lumped = Object.fromEntries(tickers.map((t) => [t, 0]));
-  const many = { ...scenarios, companies: Object.fromEntries(tickers.map((t) => [t, { ticker: t, models: {} }])) };
-  const view = rerankView(many, { model: 'rerank', horizon: 5, layers: ['filings'] }, tickers,
-    { scores: lumped, count: 3, answered: 40 }, { scores: ordered, count: 3, answered: 40 });
-  assert.equal(view.moved, 0);
-  assert.equal(spearman([[1, 1], [2, 2], [3, 3]]), 1);
-  assert.equal(spearman([[1, 1], [1, 2]]), null);
-});
-
-/* ── the gate, the proof, and what was taken away ───────────────────────── */
-
-test('the gate comes before any figure, per reader, and can be brought back', () => {
-  const saved = new Map();
-  globalThis.localStorage = { getItem: (k) => saved.get(k), setItem: (k, v) => saved.set(k, v), removeItem: (k) => saved.delete(k) };
-  try {
-    const c = component({ scAcceptedReader: 'someone-else@example.com', scModel: 'kronos' });
-    let node = screen(c);
-    assert.equal(byClass(node, 'aix-picks-card').length, 0);
-    assert.equal(byClass(node, 'aix-pick').length, 0);
-    assert.equal(all(node).filter((n) => n.tag === 'dialog').length, 1);
-    all(node).find((n) => n.tag === 'dialog').events.cancel();
-    assert.equal(c.state.screen, 'home');
-    button(node, 'I understand').events.click();
-    assert.equal(saved.get(ACCEPTED_KEY + c._reader), '1');
-    node = screen(c);
-    assert.equal(byClass(node, 'aix-pick').length, 5);
-    button(node, 'Show the warning again').events.click();
-    assert.equal(byClass(screen(c), 'aix-pick').length, 0);
-  } finally { delete globalThis.localStorage; }
-});
-
-test('the warning adapts to the record and does not invent poor performance', () => {
-  assert.match(warningLines({}, false, {}).join(' '), /no completed five-session/);
-  assert.match(warningLines({}, false, {}).join(' '), /timestamp evidence is unavailable/);
-  const positive = { dates: ['x'], models: { a: { horizons: { 5: { sessions: 1, meanAdvantage: 2 } } } } };
-  assert.match(warningLines(positive, false, {}).join(' '), /0 of 1 scored models lag/);
-});
-
-test('both commitments are on screen, and neither is claimed to prove the numbers', () => {
-  const node = screen(component({ scModel: 'rerank' }));
-  assert.match(text(node), new RegExp('ab'.repeat(32)));
-  assert.match(text(node), new RegExp('cd'.repeat(32)));
-  assert.match(text(node), /does not prove the forecast is accurate/);
+  assert.equal(nightsOf(stale.models.kronos, 5).next, null);
+  const card = byClass(screen(component({ scModel: 'kronos' }), { ...data, picks: stale }), 'aix-ranking-card')[0];
+  assert.equal(rowsOf(card).length, 3);
 });
 
 test('every model against the market closes the past runs, and a row loads that model above', () => {
@@ -552,18 +537,64 @@ test('every model against the market closes the past runs, and a row loads that 
   assert.doesNotMatch(text(rows[2]), /\+8\.00/);
   assert.match(text(card), /ONE MODEL NOT YET SCORED/);
   assert.match(rows[1].attrs.class, /is-selected/);
+  // The Gemini row turns Gemini on over the chosen model.
   rows[0].events.click();
-  assert.equal(c.state.scModel, 'rerank');
+  assert.deepEqual(c.state.scLayers, GEMINI);
   assert.equal(c.state.scFocus, 'future');
+  rows[1].events.click();
+  assert.equal(c.state.scModel, 'kronos');
+  assert.deepEqual(c.state.scLayers, []);
   const chips = byClass(card, 'aix-seg')[0].children;
   assert.deepEqual(chips.map(text).map((x) => x.trim()), ['1 session', '5 sessions', '20 sessions']);
   button(card, '20 sessions').events.click();
   assert.equal(c.state.scHorizon, 20);
 });
 
-test('a Home row for a model with no five explains why the workbench shows another', () => {
+/* ── the gate, the proof, and what was taken away ───────────────────────── */
+
+test('the gate comes before any figure, per reader, and can be brought back', () => {
+  const saved = new Map();
+  globalThis.localStorage = { getItem: (k) => saved.get(k), setItem: (k, v) => saved.set(k, v), removeItem: (k) => saved.delete(k) };
+  try {
+    const c = component({ scAcceptedReader: 'someone-else@example.com', scModel: 'kronos' });
+    let node = screen(c);
+    assert.equal(rowsOf(node).length, 0);
+    assert.equal(all(node).filter((n) => n.tag === 'dialog').length, 1);
+    all(node).find((n) => n.tag === 'dialog').events.cancel();
+    assert.equal(c.state.screen, 'home');
+    button(node, 'I understand').events.click();
+    assert.equal(saved.get(ACCEPTED_KEY + c._reader), '1');
+    node = screen(c);
+    assert.equal(rowsOf(node).length, 3);
+    button(node, 'Show the warning again').events.click();
+    assert.equal(rowsOf(screen(c)).length, 0);
+  } finally { delete globalThis.localStorage; }
+});
+
+test('the warning adapts to the record and does not invent poor performance', () => {
+  assert.match(warningLines({}, false, {}).join(' '), /no completed five-session/);
+  assert.match(warningLines({}, false, {}).join(' '), /timestamp evidence is unavailable/);
+  const positive = { dates: ['x'], models: { a: { horizons: { 5: { sessions: 1, meanAdvantage: 2 } } } } };
+  assert.match(warningLines(positive, false, {}).join(' '), /0 of 1 scored models lag/);
+});
+
+test('both commitments are on screen, and neither is claimed to prove the numbers', () => {
+  const node = screen(component({ scModel: 'kronos' }));
+  assert.match(text(node), new RegExp('ab'.repeat(32)));
+  assert.match(text(node), new RegExp('cd'.repeat(32)));
+  assert.match(text(node), /does not prove the forecast is accurate/);
+});
+
+test('a Home row for a model with nothing to rank explains why the workbench shows another', () => {
   const c = component({ scModel: 'flat', scFrom: 'flat' });
-  assert.match(text(screen(c)), /Flat, says nothing has no five of its own to show/);
+  assert.match(text(screen(c)), /Flat, says nothing ranks nothing of its own to show/);
+});
+
+test('the workbench has no tab of its own: Home’s buttons open it', async () => {
+  const logic = await read('public/esthmr/logic.js');
+  assert.doesNotMatch(logic, /\['scenarios', ar\?/);
+  assert.match(logic, /screens: \['home', 'scenarios'\]/);
+  assert.match(logic, /secondaryNav: secondaryNav\.length > 1 \? secondaryNav : \[\]/);
 });
 
 test('the questions are gone: no screen, no route, no picker, no saved-question store', async () => {
@@ -638,10 +669,12 @@ test('English and Arabic render with nothing undefined, and empty documents are 
     for (const d of [data, empty, { ...data, picks: undefined }, { ...data, scenarios: undefined }]) {
       const hero = aiCards(component(), d, ar);
       if (hero) assert.doesNotMatch(text(hero), /undefined|NaN|Infinity|\[object/);
-      for (const model of ['rerank', 'kronos', 'momentum20', 'reversal1']) {
+      for (const model of ['kronos', 'momentum20', 'reversal1', 'rerank']) {
         for (const scHorizon of [1, 5, 20]) {
-          const node = screen(component({ scModel: model, scHorizon }), d, ar);
-          assert.doesNotMatch(text(node), /undefined|NaN|Infinity|\[object/);
+          for (const scLayers of [[], GEMINI, LAYERS]) {
+            const node = screen(component({ scModel: model, scHorizon, scLayers }), d, ar);
+            assert.doesNotMatch(text(node), /undefined|NaN|Infinity|\[object/);
+          }
         }
       }
     }
@@ -660,11 +693,13 @@ test('the demo carries a picks file in the published shape, so both halves show 
   const d = demo();
   assert.ok(d.picks && d.picks.demo);
   const node = screen(component({ scModel: 'kronos' }), d);
-  assert.equal(byClass(node, 'aix-pick').length, 5);
-  assert.ok(tickersOf(byClass(node, 'aix-picks-card')[0]).every((t) => /^DEMO\d\d$/.test(t)));
+  const ranked = tickersOf(byClass(node, 'aix-ranking-card')[0]);
+  assert.equal(ranked.length, 10);
+  assert.ok(ranked.every((t) => /^DEMO\d\d$/.test(t)));
   assert.match(text(byClass(node, 'aix-record-card')[0]), /SESSIONS SCORED/);
-  const rerank = screen(component({ scModel: 'rerank' }), d);
-  assert.equal(byClass(rerank, 'aix-pick').length, 5);
+  const gemini = screen(component({ scModel: 'kronos', scLayers: GEMINI }), d);
+  assert.equal(tickersOf(byClass(gemini, 'aix-ranking-card')[0]).length, 10);
+  assert.match(text(gemini), /Ranked after Gemini re-reads/);
 });
 
 test('the workbench and hero carry a dark theme, not a light rectangle on a dark page', async () => {
@@ -672,7 +707,8 @@ test('the workbench and hero carry a dark theme, not a light rectangle on a dark
   assert.match(css, /\[data-theme="dark"\] \.aix-hero, \[data-theme="dark"\] \.aix-bench/);
   // Site-wide button rules (#app button { color: inherit }) must not win.
   assert.match(css, /#app \.aix-seg button\.on/);
-  assert.match(css, /#app \.aix-pick \{/);
+  assert.match(css, /#app \.aix-rank-row \{/);
+  assert.match(css, /#app \.aix-view-switch button\.on \{/);
   assert.match(css, /#app \.aix-pick-chip\.is-said/);
   assert.match(css, /#app \.aix-hero h1 \{[^}]*font-size: var\(--aix-h1\) !important/);
   assert.match(css, /#app \.aix-cta-quiet \{/);

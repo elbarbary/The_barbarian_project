@@ -126,7 +126,8 @@ def ranked(block: dict, horizon: int) -> list[tuple[float, str]]:
     for record in block.get("forecasts") or []:
         ticker = record.get("ticker")
         value = ev.predicted(record, horizon)
-        if ticker and value is not None:
+        # Only companies with an exchange ticker: see `run.ISIN`.
+        if ev.lab.listed(ticker) and value is not None:
             out.append((value, ticker))
     out.sort(key=lambda r: (-r[0], r[1]))
     return out
@@ -424,7 +425,7 @@ def scenarios(document: dict, panel: dict, sessions: list[str]) -> dict:
             continue
         for record in block.get("forecasts") or []:
             ticker = record.get("ticker")
-            if not ticker:
+            if not ev.lab.listed(ticker):
                 continue
             row = companies.setdefault(ticker, {"ticker": ticker, "models": {}})
             returns = {h: record["returns"].get(str(h))
@@ -462,7 +463,7 @@ def consensus(document: dict, horizon: int = 5) -> dict[str, float]:
     for name in CONSENSUS:
         for record in ((document.get("models") or {}).get(name) or {}).get("forecasts") or []:
             got = (record.get("returns") or {}).get(str(horizon))
-            if record.get("ticker") and isinstance(got, (int, float)):
+            if ev.lab.listed(record.get("ticker")) and isinstance(got, (int, float)):
                 values.setdefault(record["ticker"], []).append(float(got))
     return {t: statistics.median(v) for t, v in values.items() if v}
 
@@ -471,7 +472,7 @@ def scores_of(block: dict) -> dict[str, float]:
     out = {}
     for record in block.get("forecasts") or []:
         value = ev.predicted(record, 5)
-        if record.get("ticker") and value is not None:
+        if ev.lab.listed(record.get("ticker")) and value is not None:
             out[record["ticker"]] = value
     return out
 

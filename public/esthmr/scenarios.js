@@ -1,35 +1,38 @@
-/* The scenario workbench: what each model picked, and what its picks did.
+/* The scenario workbench: a model's ranking, and the same companies after
+ * Gemini re-reads them.
+ *
+ * HOW A READER USES IT
+ *   1. Choose a model — Kronos, Chronos, a momentum baseline — and see the
+ *      companies it ranks highest, with what it predicts for each.
+ *   2. Switch on what the Gemini re-rank reads — filings, news, the rule book,
+ *      measurements — and see the ranking after Gemini has re-read every
+ *      model's forecasts with it: the same table, re-ordered, with where the
+ *      chosen model had each company.
+ *
+ * The results sit under two rules and never run together:
+ *
+ *   FUTURE · NOT SCORED YET     the newest run: the ranking, and the model's
+ *                               forecast for the whole market;
+ *   PAST RUNS · ALREADY SCORED  the record so far, night by night, and every
+ *                               model against the market.
  *
  * WHAT IS ON IT
- * Saved model output, and nothing generated on the screen. Every night after
- * the close each model — and each re-rank reading, Gemini reading those
- * forecasts with a chosen combination of filings, news, the rule book and
- * measurements — puts five companies highest. The screen shows two things,
- * under two rules, and never lets them run together:
+ * Saved model output, and nothing generated on the screen. Every model's
+ * number for every company was sealed after the close; every combination of
+ * Gemini's evidence was asked and sealed the same night. Switching evidence
+ * selects a DIFFERENT sealed reading; it does not re-draw one answer. The five
+ * at the top of each ranking are the five the record averages — the same rule,
+ * ties by ticker, in `publish.ranked`.
  *
- *   FUTURE · NOT SCORED YET     the newest five, and the whole market as the
- *                               newest run sees it;
- *   PAST RUNS · ALREADY SCORED  the model's record so far, night by night,
- *                               and every model against the market.
- *
- * Both come from `lab/picks.json`, built by the code that builds the public
- * record, so the five named here are the five the record averages. Switching
- * the evidence on or off selects a DIFFERENT sealed reading; it does not
- * re-draw one answer.
- *
- * WHAT IT MUST NOT BECOME
- * Lists of companies are alphabetical, always — the five included: the record
- * weighs them equally, and a numbered five would be a ranking this publisher
- * made. The warning comes before any figure is built, per reader. Loading is
- * shown only while a document is actually on its way: there is no timer on
- * this screen, because a progress bar over data already in memory is theatre.
+ * The warning comes before any figure is built, per reader. Loading is shown
+ * only while a document is actually on its way: there is no timer here.
  *
  * Disclosure and gating are safeguards, not a determination of legality.
  */
 import { React as R } from './react-shim.js';
 import { finite, day, shortDay, cairoTime, nextRun, summaryOf } from './ai-visuals.js';
 import {
-  divider, picksCard, returnsTiles, returnsCards, rerankTiles, rerankCards, companiesCard, recordCard, nightsCard,
+  divider, viewSwitch, rankingTiles, rankingCard, returnsCards, recordCard, nightsCard,
 } from './scenario-visuals.js';
 import { modelsCard } from './ai-record.js';
 
@@ -115,6 +118,12 @@ export function readingKey(layers, order) {
   return ordered.length ? ordered.join('-') : 'models';
 }
 
+/** An instrument the feed names by its ISIN rather than an exchange ticker —
+ *  `run.ISIN` in the lab, which no longer asks about or publishes them. Held
+ *  here too, so a document written before that rule cannot put one back. */
+const ISIN = /^[A-Z]{2}[A-Z0-9]{9}[0-9](-[A-Z]{3})?$/;
+export const listed = (ticker) => typeof ticker === 'string' && ticker !== '' && !ISIN.test(ticker);
+
 /** What a model's number is, from its name, where no document says — the
  *  rule `publish.says` writes into the picks file. */
 export function saysOf(id) {
@@ -123,21 +132,15 @@ export function saysOf(id) {
   return m ? { kind: m[1], sessions: Number(m[2]) } : { kind: 'return' };
 }
 
-/** The models a reader can choose, in the record's order: the re-rank first
- *  when there are readings, then every model with a five of its own. A model
- *  that says the same about every company has no five, and is not offered. */
-export function choosableModels(picks, scenarios, top5) {
+/** The models a reader can rank by, in the record's order. The Gemini
+ *  re-rank is not one of them: it is what the context switches turn on, over
+ *  whichever model is chosen. A model that says the same about every company
+ *  ranks nothing, and is not offered. */
+export function baseModels(picks, scenarios) {
   const out = [];
-  const readings = Object.values((picks && picks.readings) || {});
-  const answered = Object.values(scenarios?.rerank?.readings || {}).some((r) => r && r.answered);
-  if (readings.length || answered) {
-    const named = readings.find((r) => r && r.default) || top5?.models?.rerank || {};
-    out.push({ id: 'rerank', label: named.label || 'Gemini re-rank',
-      labelAr: named.labelAr || named.label || 'إعادة ترتيب Gemini', group: 'rerank', says: saysOf('rerank') });
-  }
-  const seen = new Set(out.map((m) => m.id));
+  const seen = new Set();
   const add = (id, m, says) => {
-    if (seen.has(id)) return;
+    if (seen.has(id) || id === 'rerank') return;
     seen.add(id);
     out.push({ id, label: m.label || id, labelAr: m.labelAr || m.label || id, group: m.group || 'baseline', says });
   };
@@ -156,9 +159,12 @@ function layerOrder(picks, scenarios) {
 }
 
 /** What the controls currently choose. There is nothing to "run": every
- *  choice is a published document, and the screen follows the controls. */
-export function choiceOf(state, picks, scenarios, top5) {
-  const models = choosableModels(picks, scenarios, top5);
+ *  choice is a published document, and the screen follows the controls.
+ *
+ *  `gemini` is on when any evidence is switched on. An older link that asked
+ *  for the re-rank as a model opens on the reading Home reports. */
+export function choiceOf(state, picks, scenarios) {
+  const models = baseModels(picks, scenarios);
   const ids = models.map((m) => m.id);
   const model = ids.includes(state.scModel) ? state.scModel : (ids[0] || null);
   const horizons = ((picks && picks.horizons) || (scenarios && scenarios.horizons) || [1, 5, 20]).map(Number);
@@ -167,19 +173,27 @@ export function choiceOf(state, picks, scenarios, top5) {
   const order = layerOrder(picks, scenarios);
   const standard = scenarios?.rerank?.default
     || Object.values(picks?.readings || {}).find((r) => r && r.default)?.layers || [];
-  const layers = Array.isArray(state.scLayers)
-    ? order.filter((l) => state.scLayers.includes(l))
-    : order.filter((l) => standard.includes(l));
-  return { model, horizon, horizons, layers, order, models, meta: models.find((m) => m.id === model) || null };
+  const readable = order.length > 0 && (Object.keys(picks?.readings || {}).length > 0
+    || Object.values(scenarios?.rerank?.readings || {}).some((r) => r && r.answered));
+  const layers = !readable ? []
+    : Array.isArray(state.scLayers) ? order.filter((l) => state.scLayers.includes(l))
+      : state.scModel === 'rerank' ? order.filter((l) => standard.includes(l)) : [];
+  return {
+    model, horizon, horizons, layers, order, standard, readable, models,
+    gemini: layers.length > 0,
+    key: readingKey(layers, order),
+    meta: models.find((m) => m.id === model) || null,
+  };
 }
 
 /* ── the fives ──────────────────────────────────────────────────────────── */
 
-/** The chosen model's (or reading's) entry in the picks file. */
+/** The picks-file entry for what is on screen: the reading when Gemini is on,
+ *  the chosen model otherwise. */
 export function entryOf(picks, choice) {
-  if (!picks || !choice.model) return null;
-  if (choice.model === 'rerank') return picks.readings?.[readingKey(choice.layers, choice.order)] || null;
-  return picks.models?.[choice.model] || null;
+  if (!picks) return null;
+  if (choice.gemini) return picks.readings?.[choice.key] || null;
+  return choice.model ? picks.models?.[choice.model] || null : null;
 }
 
 /** The newest five if it is still waiting on sessions that have not
@@ -234,7 +248,7 @@ export function recordOf(entry, horizon, source, minimumSessions) {
     picksUp: picked.filter((p) => p.returned > 0).length, picksTotal: picked.length, partial };
 }
 
-/* ── every company behind the five ──────────────────────────────────────── */
+/* ── the ranking ────────────────────────────────────────────────────────── */
 
 /** Models that published a return for companies. */
 export function returnModels(scenarios) {
@@ -244,17 +258,52 @@ export function returnModels(scenarios) {
       group: m.group, distinguishes: m.distinguishes !== false }));
 }
 
-/** What the chosen model said about one company at this horizon: its ranking
- *  number where it ranks without a return, as the evaluation sorts it. */
-export function saidOf(scenarios, reading, choice, ticker) {
-  if (choice.model === 'rerank') {
-    const score = reading?.scores?.[ticker];
-    return finite(score) ? score : null;
-  }
-  const entry = scenarios?.companies?.[ticker]?.models?.[choice.model];
-  const hz = String(choice.horizon);
+/** What a model said about one company at a horizon: its ranking number where
+ *  it ranks without a return, as the evaluation sorts it. */
+export function saidOf(scenarios, model, horizon, ticker) {
+  const entry = scenarios?.companies?.[ticker]?.models?.[model];
+  const hz = String(horizon);
   if (finite(entry?.rankedBy?.[hz])) return entry.rankedBy[hz];
   return finite(entry?.returns?.[hz]) ? entry.returns[hz] : null;
+}
+
+/** Highest first; a tie settled by ticker, as the record settles it. */
+const byValue = (a, b) => (b[0] - a[0]) || (a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0);
+
+/**
+ * The ranking on screen: the chosen model's, or Gemini's re-reading of every
+ * model's forecasts when evidence is switched on — every company, highest
+ * first, with where the chosen model put it.
+ */
+export function rankingOf(scenarios, choice, reading) {
+  const companies = (scenarios && scenarios.companies) || {};
+  const base = Object.keys(companies).filter(listed)
+    .map((ticker) => [saidOf(scenarios, choice.model, choice.horizon, ticker), ticker])
+    .filter(([value]) => finite(value)).sort(byValue);
+  const baseRank = new Map(base.map(([, ticker], i) => [ticker, i + 1]));
+  const baseValue = new Map(base.map(([value, ticker]) => [ticker, value]));
+  const scores = (reading && reading.scores) || {};
+  const order = choice.gemini
+    ? Object.keys(scores).filter(listed).map((ticker) => [scores[ticker], ticker]).filter(([value]) => finite(value)).sort(byValue)
+    : base;
+  // How many of the other forecasters point the same way as the chosen one.
+  const others = returnModels(scenarios).filter((m) => m.distinguishes && m.id !== choice.model);
+  const says = saysOf(choice.model);
+  const rows = order.map(([value, ticker], i) => {
+    const own = baseValue.get(ticker);
+    const votes = says.kind === 'return' && finite(own)
+      ? others.map((m) => companies[ticker]?.models?.[m.id]?.returns?.[String(choice.horizon)]).filter(finite)
+      : [];
+    return {
+      rank: i + 1, ticker, value,
+      tied: i > 0 && order[i - 1][0] === value,
+      baseRank: baseRank.get(ticker) ?? null,
+      baseValue: finite(own) ? own : null,
+      agree: votes.filter((v) => Math.sign(v) === Math.sign(own)).length,
+      of: votes.length,
+    };
+  });
+  return { rows, baseTotal: base.length, baseTop: base.slice(0, 5).map(([, ticker]) => ticker) };
 }
 
 /** How far apart the models are on one company. */
@@ -283,6 +332,7 @@ export function pathOf(scenarios, tickers) {
   });
 }
 
+/** A forecaster's view of the whole market, for the charts under the ranking. */
 export function returnsView(scenarios, draft, tickers) {
   const horizons = ((scenarios && scenarios.horizons) || []).map(Number);
   const companies = scenarios.companies || {};
@@ -321,20 +371,11 @@ export function returnsView(scenarios, draft, tickers) {
   };
 }
 
-/** Position of each company in a reading, 1 first; ties by ticker — the
- *  order the evaluation takes a reading's kept companies in. */
-export function positions(scores) {
-  const order = Object.keys(scores || {}).filter((t) => finite(scores[t]))
-    .sort((a, b) => (scores[b] - scores[a]) || (a < b ? -1 : a > b ? 1 : 0));
-  return Object.fromEntries(order.map((t, i) => [t, i + 1]));
-}
-
 /** Where each company stands, 1 first, with a tie sharing the average place.
  *
  *  For measuring MOVEMENT. On 14 September the default reading gave 182 of
  *  257 companies the same lowest score; placed alphabetically, those
- *  companies "moved" by nothing but the alphabet, and the count of companies
- *  the evidence moved was mostly an artefact of ticker order. */
+ *  companies "moved" by nothing but the alphabet. */
 export function standing(scores) {
   const tickers = Object.keys(scores || {}).filter((t) => finite(scores[t]));
   const r = ranks(tickers.map((t) => -scores[t]));
@@ -369,74 +410,12 @@ export function spearman(pairs) {
   return bx && by ? top / Math.sqrt(bx * by) : null;
 }
 
-export function rerankView(scenarios, draft, tickers, reading, plainReading) {
-  const scores = reading?.scores || {};
-  const pos = positions(scores);
-  const count = Number.isInteger(reading?.count) ? reading.count : null;
-  const models = returnModels(scenarios).filter((m) => m.distinguishes);
-  const consensus = (ticker) => median(models
-    .map((m) => scenarios.companies?.[ticker]?.models?.[m.id]?.returns?.[String(draft.horizon)])
-    .filter(finite));
-  const plainScores = draft.layers.length ? (plainReading?.scores || {}) : null;
-  const plainPos = plainScores ? positions(plainScores) : null;
-  const plainCount = Number.isInteger(plainReading?.count) ? plainReading.count : null;
-  const here = standing(scores);
-  const plainStanding = plainScores ? standing(plainScores) : null;
-  const consensusScores = Object.fromEntries(Object.keys(scores).map((t) => [t, consensus(t)]));
-  const consensusStanding = standing(consensusScores);
-
-  const rows = tickers.map((ticker) => ({
-    ticker,
-    score: finite(scores[ticker]) ? scores[ticker] : null,
-    position: pos[ticker] ?? null,
-    standing: here[ticker] ?? null,
-    shift: plainStanding && finite(here[ticker]) && finite(plainStanding[ticker])
-      ? Math.round(plainStanding[ticker] - here[ticker]) : null,
-    consensus: consensus(ticker),
-  }));
-  const inScope = rows.filter((r) => finite(r.score));
-  const from = plainStanding || consensusStanding;
-  const pairs = inScope.filter((r) => finite(from[r.ticker])).map((r) => ({ from: from[r.ticker], to: r.standing }));
-  const kept = (p) => count !== null && p <= count;
-  const threshold = count ? (() => {
-    const order = Object.keys(pos).sort((a, b) => pos[a] - pos[b]);
-    return order[count - 1] !== undefined ? scores[order[count - 1]] : null;
-  })() : null;
-  return {
-    layers: draft.layers,
-    answered: reading?.answered ?? 0,
-    abstained: reading?.abstained ?? 0,
-    invented: reading?.invented || [],
-    note: reading?.note || null,
-    count,
-    threshold,
-    rhoForecasters: spearman(inScope.map((r) => [r.score, r.consensus])),
-    rhoModels: plainScores ? spearman(inScope.map((r) => [r.score, plainScores[r.ticker]])) : null,
-    moved: plainStanding ? inScope.filter((r) => finite(plainStanding[r.ticker])
-      && Math.abs(plainStanding[r.ticker] - r.standing) > 20).length : 0,
-    // How many it put at the very bottom of its scale — said beside the
-    // histogram, because a reading that sets most of the market aside reads
-    // very differently from one that orders it, and one tall bar does not say
-    // which. On 14 September the default reading gave 180 of 257 companies a
-    // score between 2 and 4.
-    setAside: inScope.filter((r) => r.score <= 5).length,
-    // Its own count, taken the way the evaluation takes it: highest first,
-    // ties by ticker.
-    keptInScope: inScope.filter((r) => kept(r.position)).length,
-    keptChanged: plainPos && count !== null && plainCount !== null
-      ? inScope.filter((r) => plainPos[r.ticker] && kept(r.position) !== (plainPos[r.ticker] <= plainCount)).length : 0,
-    pairs,
-    rows,
-  };
-}
-
 /* ── fetching a reading ─────────────────────────────────────────────────── */
 
 /**
  * The only waiting on this screen: a re-rank reading's own document — its
  * score for every company — fetched the first time a reader switches to that
- * combination of evidence. The five and the record are already here, so they
- * never wait on it.
+ * combination of evidence.
  */
 export function ensureReadings(component, data, keys) {
   if (typeof component.loadReading !== 'function') return;
@@ -476,24 +455,19 @@ function aboutModel(meta, ar) {
   const t = (en, arabic) => (ar ? arabic : en);
   const says = meta?.says || { kind: 'return' };
   const n = says.sessions;
-  if (says.kind === 'score') {
-    return t('Gemini reads the other models’ forecasts, with the evidence switched on below, and scores every company out of 100. Its five are its highest scores.',
-      'يقرأ Gemini توقعات النماذج الأخرى مع الأدلة المفعّلة أدناه، ويعطي كل شركة درجة من 100. اختياراته الخمسة أعلى درجاته.');
-  }
   if (says.kind === 'momentum') {
-    return t(`Makes no forecast. It ranks companies by how much they rose over the last ${n} sessions; its five rose the most.`,
-      `لا يتوقع شيئاً. يرتّب الشركات حسب ارتفاعها خلال آخر ${sessionsAr(n)}؛ اختياراته الخمسة الأكثر ارتفاعاً.`);
+    return t(`Makes no forecast. It ranks companies by how much they rose over the last ${n} sessions.`,
+      `لا يتوقع شيئاً. يرتّب الشركات حسب ارتفاعها خلال آخر ${sessionsAr(n)}.`);
   }
   if (says.kind === 'reversal') {
     return t(n === 1
-      ? 'Makes no forecast. It ranks companies by how much they fell in the last session, on the idea that what fell comes back; its five fell the most.'
-      : `Makes no forecast. It ranks companies by how much they fell over the last ${n} sessions, on the idea that what fell comes back; its five fell the most.`,
+      ? 'Makes no forecast. It ranks companies by how much they fell in the last session, on the idea that what fell comes back.'
+      : `Makes no forecast. It ranks companies by how much they fell over the last ${n} sessions, on the idea that what fell comes back.`,
     n === 1
-      ? 'لا يتوقع شيئاً. يرتّب الشركات حسب هبوطها في الجلسة الأخيرة، على فكرة أن ما هبط يعود؛ اختياراته الخمسة الأكثر هبوطاً.'
-      : `لا يتوقع شيئاً. يرتّب الشركات حسب هبوطها خلال آخر ${sessionsAr(n)}، على فكرة أن ما هبط يعود؛ اختياراته الخمسة الأكثر هبوطاً.`);
+      ? 'لا يتوقع شيئاً. يرتّب الشركات حسب هبوطها في الجلسة الأخيرة، على فكرة أن ما هبط يعود.'
+      : `لا يتوقع شيئاً. يرتّب الشركات حسب هبوطها خلال آخر ${sessionsAr(n)}، على فكرة أن ما هبط يعود.`);
   }
-  return t('Forecasts a return for every company. Its five are its highest forecasts.',
-    'يتوقع عائداً لكل شركة. اختياراته الخمسة أعلى توقعاته.');
+  return t('Forecasts a return for every company and ranks them by it.', 'يتوقع عائداً لكل شركة ويرتّبها به.');
 }
 
 export function scenariosScreen(component, data, ar) {
@@ -517,25 +491,20 @@ export function scenariosScreen(component, data, ar) {
       h('button', { type: 'button', class: 'aix-quiet', onClick: () => component.onRetryData?.() }, t('Retry loading', 'إعادة التحميل'))) };
   }
 
-  const choice = choiceOf(st, picks, scenarios, top5);
-  const { model, horizon, layers, order } = choice;
-  const rerankOn = model === 'rerank';
-  const key = readingKey(layers, order);
+  const choice = choiceOf(st, picks, scenarios);
+  const { model, horizon, layers, order, gemini, key } = choice;
   const index = scenarios?.rerank?.readings || {};
 
-  // The five and the record are in the picks file. What is fetched is the
-  // reading's own score for every company, for the list behind the five —
-  // and, with evidence switched on, the forecasts-alone reading it is
-  // compared with.
-  if (rerankOn) ensureReadings(component, data, layers.length ? [key, 'models'] : [key]);
+  // The reading's own score for every company is the ranking when Gemini is
+  // on; it is fetched the first time that combination is switched on.
+  if (gemini) ensureReadings(component, data, [key]);
 
   const entry = entryOf(picks, choice);
   const nights = nightsOf(entry, horizon);
-  const source = rerankOn ? top5?.readings?.[key] : top5?.models?.[model];
+  const source = gemini ? top5?.readings?.[key] : top5?.models?.[model];
   const record = recordOf(entry, horizon, source, picks?.minimumSessions ?? top5?.minimumSessions);
-  const plainEntry = rerankOn && layers.length ? picks?.readings?.models : null;
-  const said = rerankOn && nights.newest ? entry?.notes?.[nights.newest.basisSession] || null : null;
-  const reading = rerankOn ? data.readings?.[key] || null : null;
+  const said = gemini && nights.newest ? picks?.readings?.[key]?.notes?.[nights.newest.basisSession] || null : null;
+  const reading = gemini ? data.readings?.[key] || null : null;
   const next = cairoTime(nextRun(scenarios?.schedule?.cron)?.toISOString(), ar);
 
   const set = (patch) => component.setState({ scShowAll: false, scNightsAll: false, ...patch });
@@ -558,10 +527,11 @@ export function scenariosScreen(component, data, ar) {
       : t('ratios from filings', 'نسب من الإفصاحات'),
   };
   const indexed = index[key];
+  const modelName = choice.meta ? (ar ? choice.meta.labelAr : choice.meta.label) : '—';
 
   const controls = h('aside', { class: 'aix-controls' },
     h('div', { class: 'aix-group' },
-      h('p', { class: 'aix-step' }, h('b', null, '01'), t('MODEL', 'النموذج')),
+      h('p', { class: 'aix-step' }, h('b', null, '01'), t('CHOOSE A MODEL', 'اختر نموذجاً')),
       h('div', { class: 'aix-chips' }, choice.models.map((m) => chip(ar ? m.labelAr : m.label, model === m.id,
         () => set({ scModel: m.id, scFrom: null }), m.id))),
       choice.meta ? h('p', { class: 'aix-note aix-model-about' }, aboutModel(choice.meta, ar)) : null),
@@ -569,69 +539,56 @@ export function scenariosScreen(component, data, ar) {
       h('p', { class: 'aix-step' }, h('b', null, '02'), t('HORIZON', 'المدى')),
       h('div', { class: 'aix-chips' }, choice.horizons.map((n) => chip(chipWords(n, ar),
         horizon === n, () => set({ scHorizon: n }), n)))),
-    order.length ? h('div', { class: `aix-group aix-layers${rerankOn ? '' : ' is-off'}` },
+    order.length ? h('div', { class: `aix-group aix-layers${gemini ? ' is-on' : ''}` },
       h('p', { class: 'aix-step' }, h('b', null, '03'), t('CONTEXT THE RE-RANK READS', 'السياق الذي تقرؤه إعادة الترتيب')),
+      h('p', { class: 'aix-note aix-layers-lead' }, choice.readable
+        ? (gemini
+          ? t(`Gemini is re-ranking: it read what all the models forecast, with what is switched on. Switch everything off for ${modelName}’s own ranking.`,
+            `Gemini يعيد الترتيب: قرأ ما توقعته كل النماذج مع ما هو مفعّل. أطفئ كل شيء لترى ترتيب ${modelName} نفسه.`)
+          : t(`Switch any of these on to see the ranking after Gemini re-reads the models’ forecasts with it.`,
+            'فعّل أياً منها لترى الترتيب بعد أن يعيد Gemini قراءة توقعات النماذج معه.'))
+        : t('No Gemini re-rank was published for this run.', 'لم تُنشر إعادة ترتيب Gemini لهذا التشغيل.')),
       order.map((layer) => {
         const on = layers.includes(layer);
         return h('button', {
           key: layer, type: 'button', class: 'aix-toggle', role: 'switch', 'aria-checked': String(on),
-          disabled: !rerankOn,
+          disabled: !choice.readable,
           onClick: () => set({ scLayers: on ? layers.filter((l) => l !== layer) : [...layers, layer] }),
         },
         h('span', null, h('strong', null, LAYER_TEXT[layer]?.[ar ? 'ar' : 'en'] || layer), h('small', null, hints[layer])),
         h('i', { class: 'aix-switch', 'aria-hidden': 'true' }, h('b')));
       }),
-      !rerankOn ? h('p', { class: 'aix-note' }, t('Only the re-rank reads these. The other models read prices alone, so the switches do not change them.',
-        'إعادة الترتيب وحدها تقرأ هذه. النماذج الأخرى تقرأ الأسعار فقط، فلا تغيّرها المفاتيح.')) : null,
-      rerankOn && indexed && !indexed.answered
+      gemini && indexed && !indexed.answered
         ? h('p', { class: 'aix-note aix-warn' }, t(`This combination did not answer that night${indexed.reason ? `: ${indexed.reason}` : ''}.`,
           `هذه التركيبة لم تُجب تلك الليلة${indexed.reason ? `: ${indexed.reason}` : ''}.`)) : null) : null);
 
-  const modelName = choice.meta ? (ar ? choice.meta.labelAr : choice.meta.label) : '—';
   const evidenceWords = layers.map((l) => LAYER_TEXT[l]?.of?.[ar ? 'ar' : 'en'] || l);
   const words = {
-    model: modelName, scope: t('the whole market', 'السوق كله'), horizon: horizonWords(horizon, ar),
+    model: modelName, horizon: horizonWords(horizon, ar),
     evidence: evidenceWords.length > 1 ? `${evidenceWords.slice(0, -1).join(ar ? '، ' : ', ')}${ar ? ' و' : ' and '}${evidenceWords.at(-1)}` : (evidenceWords[0] || ''),
+    view: gemini ? t(`Gemini re-rank with ${evidenceWords.length > 1 ? `${evidenceWords.slice(0, -1).join(', ')} and ${evidenceWords.at(-1)}` : (evidenceWords[0] || '')}`,
+      `إعادة ترتيب Gemini مع ${evidenceWords.join('، ')}`) : modelName,
   };
+  const ranking = scenarios ? rankingOf(scenarios, choice, reading) : null;
   const ctx = {
-    choice, entry, nights, record, said, words, next, indexed,
-    topCount: picks?.topCount ?? top5?.topCount,
+    choice, entry, nights, record, said, words, next, indexed, ranking, reading,
+    // What the numbers in the past runs are: Gemini's scores when it is on.
+    says: gemini ? saysOf('rerank') : (choice.meta?.says || { kind: 'return' }),
+    topCount: picks?.topCount ?? top5?.topCount ?? 5,
     loading: !picks && !!st.extrasLoading,
-    plainNext: plainEntry ? nightsOf(plainEntry, horizon).next : null,
+    readingLoading: gemini && !reading && !!(st.scLoading && st.scLoading[key]),
+    readingFailed: gemini && !reading ? (st.scFailed && st.scFailed[key]) || null : null,
+    retry: () => { const { [key]: gone, ...rest } = st.scFailed || {}; component.setState({ scFailed: rest }); },
   };
 
-  // ── the future: the whole market as the newest run sees it ──
-  const tickers = Object.keys((scenarios && scenarios.companies) || reading?.scores || {}).sort();
-  let future = [];
-  if (!scenarios) {
-    future = [];
-  } else if (rerankOn) {
-    const loadingReading = st.scLoading && st.scLoading[key];
-    const failed = st.scFailed && st.scFailed[key];
-    if (reading) {
-      const view = rerankView(scenarios, choice, tickers, reading, layers.length ? data.readings?.models : null);
-      future = [rerankTiles(view, words, ar), ...rerankCards(component, data, view, words, ar),
-        companiesCard(component, data, { ...ctx, view, tickers, reading }, ar)];
-    } else {
-      future = [h('section', { class: 'aix-card aix-empty-card', role: loadingReading ? 'status' : null },
-        h('h3', null, failed ? t('This reading could not be fetched', 'تعذر جلب هذه القراءة')
-          : t('Loading this reading’s score for every company…', 'جارٍ تحميل درجات هذه القراءة لكل الشركات…')),
-        failed ? h('p', null, failed) : h('div', { class: 'sc-skeleton is-short', 'aria-hidden': 'true' }),
-        failed ? h('button', { type: 'button', class: 'aix-quiet', onClick: () => {
-          const { [key]: gone, ...rest } = st.scFailed || {};
-          component.setState({ scFailed: rest });
-        } }, t('Try again', 'حاول مجدداً')) : null)];
-    }
-  } else if (model) {
-    const returns = returnModels(scenarios).some((m) => m.id === model);
-    const view = returns ? returnsView(scenarios, choice, tickers) : null;
-    future = [...(view ? [returnsTiles(view, words, ar), ...returnsCards(component, data, view, words, ar)] : []),
-      companiesCard(component, data, { ...ctx, view, tickers }, ar)];
-  }
+  // The whole market as the chosen forecaster sees it, under its ranking.
+  const tickers = Object.keys((scenarios && scenarios.companies) || {}).filter(listed).sort();
+  const charts = scenarios && model && returnModels(scenarios).some((m) => m.id === model)
+    ? returnsCards(component, data, returnsView(scenarios, choice, tickers), words, ar) : [];
 
-  const from = st.scFrom && st.scFrom !== model && top5?.models?.[st.scFrom] && !choice.models.some((m) => m.id === st.scFrom)
-    ? h('p', { class: 'aix-note aix-from' }, t(`${top5.models[st.scFrom].label} has no five of its own to show, so the workbench shows ${modelName}.`,
-      `${top5.models[st.scFrom].labelAr || top5.models[st.scFrom].label} ليس لديه خمس خاصة به، فيعرض المختبر ${modelName}.`)) : null;
+  const from = st.scFrom && st.scFrom !== model && st.scFrom !== 'rerank' && top5?.models?.[st.scFrom] && !choice.models.some((m) => m.id === st.scFrom)
+    ? h('p', { class: 'aix-note aix-from' }, t(`${top5.models[st.scFrom].label} ranks nothing of its own to show, so the workbench shows ${modelName}.`,
+      `${top5.models[st.scFrom].labelAr || top5.models[st.scFrom].label} ليس لديه ترتيب خاص به، فيعرض المختبر ${modelName}.`)) : null;
 
   const rerank = scenarios?.rerank;
   const last = rerank ? cairoTime(rerank.ranAt, ar) : null;
@@ -647,8 +604,8 @@ export function scenariosScreen(component, data, ar) {
           h('h1', null, t('Scenario workbench', 'مختبر السيناريوهات')),
           h('button', { type: 'button', class: 'aix-beta', onClick: () => component.setState({ scWarning: true }) },
             h('i', { 'aria-hidden': 'true' }), t('BETA · READ THIS', 'تجريبي · اقرأ هذا'))),
-        h('p', null, t(`Pick a model. Everything under Future was computed after the close${basis ? ` of ${day(basis, false)}` : ''} and has not been scored; everything under Past runs already has.`,
-          `اختر نموذجاً. كل ما تحت «المستقبل» حُسب بعد الإغلاق${basis ? ` في ${day(basis, true)}` : ''} ولم يُقيَّم بعد؛ وكل ما تحت «تشغيلات سابقة» قُيّم بالفعل.`))),
+        h('p', null, t(`Choose a model to see the companies it ranks highest and what it predicts for them. Switch on what Gemini reads to see the same companies after Gemini re-ranks them. Future is from the close${basis ? ` of ${day(basis, false)}` : ''} and not scored yet; past runs already are.`,
+          `اختر نموذجاً لترى الشركات التي يضعها في المقدمة وما يتوقعه لها. فعّل ما يقرؤه Gemini لترى الشركات نفسها بعد أن يعيد ترتيبها. «المستقبل» من إغلاق${basis ? ` ${day(basis, true)}` : ''} ولم يُقيَّم بعد؛ و«التشغيلات السابقة» قُيّمت بالفعل.`))),
       h('dl', { class: 'aix-bench-clock' },
         h('dt', null, t('LAST RE-RANK', 'آخر إعادة ترتيب')),
         // The date and the time isolated from each other: an Arabic month
@@ -664,14 +621,21 @@ export function scenariosScreen(component, data, ar) {
         from,
         divider('aix-future', t('FUTURE · NOT SCORED YET', 'المستقبل · لم يُقيَّم بعد'),
           basis ? t(`computed after the close of ${day(basis, false)}`, `حُسب بعد إغلاق ${day(basis, true)}`) : null),
-        picksCard(component, data, ctx, ar),
-        ...future,
+        viewSwitch(component, ctx, ar, {
+          onModel: () => set({ scLayers: [] }),
+          onGemini: () => set({ scLayers: layers.length ? layers : choice.standard }),
+        }),
+        rankingTiles(ctx, ar),
+        rankingCard(component, data, ctx, ar),
+        ...charts,
         divider('aix-past', t('PAST RUNS · ALREADY SCORED', 'تشغيلات سابقة · قُيّمت بالفعل'),
           t('sessions that have closed', 'جلسات أُغلقت')),
         recordCard(component, data, ctx, ar),
         nightsCard(component, data, ctx, ar),
-        modelsCard(top5, ar, { horizon, selected: model,
-          onPick: (id) => set({ scModel: id, scFrom: null, scFocus: 'future' }),
+        modelsCard(top5, ar, { horizon, selected: gemini ? 'rerank' : model,
+          onPick: (id) => (id === 'rerank'
+            ? set({ scLayers: layers.length ? layers : choice.standard, scFocus: 'future' })
+            : set({ scModel: id, scLayers: [], scFrom: null, scFocus: 'future' })),
           onWindow: (n) => set({ scHorizon: n }) }))),
     h('footer', { class: 'sc-proof aix-proof' },
       h('details', null,

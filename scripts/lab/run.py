@@ -53,6 +53,7 @@ import datetime
 import hashlib
 import json
 import pathlib
+import re
 import sys
 import time
 import zoneinfo
@@ -75,6 +76,21 @@ COMMITMENTS = REPO / "public" / "data" / "v1" / "research" / "commitments"
 # Kronos ran on a 90-session lookback; below that the question is different
 # for different models and the comparison stops being like for like.
 MIN_BARS = 90
+
+# A scan record whose "ticker" is an ISIN — "EGS659O1C015", "EGS30AJ1C016-EGP"
+# — is an instrument the feed carries without an exchange ticker: shares off
+# the main board, subscription rights. The site's directory leaves them out
+# (`build_market_api.TICKER`) and so does the lab. On 14 September Kronos
+# forecast +173% over five sessions for Misr Kuwait Investment & Trading
+# (EGS659O1C015), a share at 0.82 EGP after a 70% fall that traded every
+# other session, and put it in its five: a company no screen of this site can
+# name or open.
+ISIN = re.compile(r"^[A-Z]{2}[A-Z0-9]{9}[0-9](-[A-Z]{3})?$")
+
+
+def listed(ticker) -> bool:
+    """Whether a ticker is an exchange ticker rather than an ISIN stand-in."""
+    return isinstance(ticker, str) and bool(ticker) and not ISIN.match(ticker)
 
 # The exchange's day, in the exchange's own time. Egypt keeps summer time, so
 # this cannot be a fixed offset from UTC.
@@ -153,9 +169,13 @@ def universe(scan: dict, *, today=None,
     """
     built = pricing.build(scan, today=today, root=root)
     rows = [{"ticker": ticker, "bars": bars}
-            for ticker, bars in built["panel"].items() if len(bars) >= MIN_BARS]
+            for ticker, bars in built["panel"].items()
+            if len(bars) >= MIN_BARS and listed(ticker)]
     rows.sort(key=lambda r: r["ticker"])
-    return rows, built["sources"]
+    sources = dict(built["sources"])
+    # Counted, never dropped silently.
+    sources["withoutTicker"] = sorted(t for t in built["panel"] if not listed(t))
+    return rows, sources
 
 
 def basis_session(rows: list[dict]) -> str | None:
@@ -415,6 +435,9 @@ def main(argv=None) -> int:
     print(f"   prices: {prices['archiveCount']} from this project's archive, "
           f"{prices['scanOnlyCount']} from the vendor alone, "
           f"{prices['extendedCount']} carrying today's close from the exchange")
+    if prices.get("withoutTicker"):
+        print(f"   left out {len(prices['withoutTicker'])} instruments with no exchange "
+              f"ticker: {', '.join(prices['withoutTicker'])}")
     print(f"   {sum(b['seconds'] for b in document['models'].values()):.0f}s "
           f"across {len(document['models'])} models")
     print(f"   fingerprint {document['fingerprint'][:16]}")

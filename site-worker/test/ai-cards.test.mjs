@@ -122,15 +122,7 @@ test('the reader can bring the warning back', () => {
   assert.match(scSrc, /localStorage\.removeItem\(acceptKey\(reader\)\)/);
 });
 
-/* ── the workbench never ranks companies ────────────────────────────────── */
-
-test('the company list is alphabetical, never in the model’s order', async () => {
-  const tickers = Object.keys(scenarios.companies).sort();
-  const view = (await import('../../public/esthmr/scenarios.js')).returnsView(scenarios, { model: 'kronos', horizon: 5 }, tickers);
-  const shown = view.rows.map((r) => r.ticker);
-  assert.deepEqual(shown, [...shown].sort());
-  assert.ok(shown.length > 50);
-});
+/* ── the workbench's ranking is the record's own ─────────────────────────── */
 
 test('every company in the run is shown, none cut to a number', async () => {
   const mod = await import('../../public/esthmr/scenarios.js');
@@ -176,6 +168,48 @@ test('the picks name the same fives the public record averages', () => {
   for (const [id, entry] of Object.entries(picks.models)) check(entry, top5.models[id], id);
   for (const [key, entry] of Object.entries(picks.readings)) check(entry, top5.readings[key], key);
   assert.ok(compared > 0, 'nothing scored was compared');
+});
+
+test('the top of every model’s ranking on screen is the five its record follows', async () => {
+  // The owner asked for each model's ranking, highest first. Its top five
+  // must be the five the record averages — one rule, ties by ticker — or the
+  // screen and the record would be about different companies.
+  const mod = await import('../../public/esthmr/scenarios.js');
+  let compared = 0;
+  for (const [id, entry] of Object.entries(picks.models)) {
+    for (const [hz, held] of Object.entries(entry.horizons)) {
+      const newest = held.nights[0];
+      if (!newest || newest.basisSession !== scenarios.basisSession || !newest.picks) continue;
+      const { rows } = mod.rankingOf(scenarios, { model: id, horizon: Number(hz), gemini: false }, null);
+      assert.deepEqual(rows.slice(0, 5).map((r) => r.ticker), newest.picks.map((p) => p.ticker), `${id} at ${hz}`);
+      compared += 1;
+    }
+  }
+  const key = Object.keys(picks.readings).find((k) => picks.readings[k].default);
+  const reading = JSON.parse(await read(`public/data/v1/lab/rerank/${key}.json`));
+  const newest = picks.readings[key].horizons['5'].nights[0];
+  if (newest && newest.picks && reading.basisSession === newest.basisSession) {
+    const { rows } = mod.rankingOf(scenarios, { model: 'kronos', horizon: 5, gemini: true }, reading);
+    assert.deepEqual(rows.slice(0, 5).map((r) => r.ticker), newest.picks.map((p) => p.ticker), 'the default reading');
+    compared += 1;
+  }
+  assert.ok(compared > 0, 'nothing was compared');
+});
+
+test('no instrument without an exchange ticker reaches the workbench', () => {
+  // 14 September: Kronos put Misr Kuwait Investment & Trading, known to the
+  // feed only by its ISIN (EGS659O1C015), first in its five at +173%.
+  const isin = /^[A-Z]{2}[A-Z0-9]{9}[0-9](-[A-Z]{3})?$/;
+  assert.ok(!Object.keys(scenarios.companies).some((t) => isin.test(t)), 'scenarios.json carries an ISIN');
+  for (const group of [picks.models, picks.readings]) {
+    for (const entry of Object.values(group)) {
+      for (const held of Object.values(entry.horizons)) {
+        for (const night of held.nights) {
+          for (const p of night.picks || []) assert.ok(!isin.test(p.ticker), `picks.json names ${p.ticker}`);
+        }
+      }
+    }
+  }
 });
 
 test('a five is always five, and a night not counted names nobody', () => {

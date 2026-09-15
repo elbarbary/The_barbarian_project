@@ -1,22 +1,22 @@
 /* The workbench's parts, in the order the screen reads them.
  *
- *   FUTURE · NOT SCORED YET     the newest five, the whole market's numbers
- *                               and every company, from the newest close;
- *   PAST RUNS · ALREADY SCORED  the model's record so far, night by night,
- *                               and every model against the market.
+ *   FUTURE · NOT SCORED YET     which ranking is on screen, three plain
+ *                               numbers, the ranking itself, and the chosen
+ *                               forecaster's view of the whole market;
+ *   PAST RUNS · ALREADY SCORED  the record so far, night by night, and every
+ *                               model against the market.
  *
- * Lists of companies here are ALPHABETICAL, always — the five included.
- * Sorting named securities by what a model said about them turns a model's
- * output into a ranked list produced by this publisher, the line the whole
- * site is built not to cross. The model's number is on each row; the order of
- * the rows is the alphabet's.
+ * The ranking is the model's own output, highest first, as the owner asked
+ * for on 15 September: every company it ranked, the five its record follows
+ * marked off, and each labelled model output and not a recommendation. After
+ * Gemini, each row also says where the chosen model had that company.
  *
  * Inside the past runs, what a model SAID sits in a dashed chip and what a
  * company RETURNED in a solid one, so a forecast is never read as a result.
  */
 import { React as R } from './react-shim.js';
 import {
-  finite, percent, points, plain, day, shortDay, fanChart, histogram, divergeBar, reorderChart, nightsChart,
+  finite, percent, points, plain, day, fanChart, histogram, divergeBar, nightsChart, summaryOf,
 } from './ai-visuals.js';
 
 const h = R.createElement;
@@ -93,126 +93,191 @@ function companyChips(component, data, picks, says, ar, returned) {
 const listWords = (items, ar) => (items.length < 2 ? items.join('')
   : ar ? `${items.slice(0, -1).join('، ')} و${items.at(-1)}` : `${items.slice(0, -1).join(', ')} and ${items.at(-1)}`);
 
-/* ── FUTURE: the newest five ────────────────────────────────────────────── */
+/* ── FUTURE: which ranking is on screen ─────────────────────────────────── */
 
-export function picksCard(component, data, ctx, ar) {
+/** Step one is the chosen model's ranking; step two is the same companies
+ *  after Gemini re-ranks them. One switch, so the two can never be confused. */
+export function viewSwitch(component, ctx, ar, { onModel, onGemini } = {}) {
   const t = (en, arabic) => (ar ? arabic : en);
-  const { choice, nights, said, words, next, indexed } = ctx;
+  const { choice, words } = ctx;
+  const says = choice.meta?.says || { kind: 'return' };
+  const by = says.kind === 'momentum'
+    ? t(`how much each company rose over the last ${says.sessions} sessions`, `ارتفاع كل شركة خلال آخر ${sessionsAr(says.sessions)}`)
+    : says.kind === 'reversal'
+      ? t(says.sessions === 1 ? 'how much each company fell in the last session' : `how much each company fell over the last ${says.sessions} sessions`,
+        says.sessions === 1 ? 'هبوط كل شركة في الجلسة الأخيرة' : `هبوط كل شركة خلال آخر ${sessionsAr(says.sessions)}`)
+      : t(`what it expects each company to return over ${words.horizon}`, `ما يتوقعه لعائد كل شركة خلال ${words.horizon}`);
+  return h('div', { class: 'aix-view' },
+    h('div', { class: 'aix-view-switch', role: 'group', 'aria-label': t('What the ranking shows', 'ما يعرضه الترتيب') },
+      h('button', { type: 'button', class: choice.gemini ? '' : 'on', 'aria-pressed': String(!choice.gemini), onClick: onModel },
+        h('b', null, '1'), h('span', null, t(`${words.model}’s ranking`, `ترتيب ${words.model}`))),
+      h('i', { 'aria-hidden': 'true' }, ar ? '←' : '→'),
+      h('button', { type: 'button', class: choice.gemini ? 'on' : '', 'aria-pressed': String(choice.gemini),
+        disabled: !choice.readable, onClick: onGemini },
+      h('b', null, '2'), h('span', null, t('After Gemini re-ranks it', 'بعد إعادة ترتيب Gemini')))),
+    h('p', { class: 'aix-note' }, choice.gemini
+      ? t(`Gemini read what all the models forecast, with ${words.evidence}, and re-ordered every company. Beside each one: where ${words.model} had it.`,
+        `قرأ Gemini ما توقعته كل النماذج، مع ${words.evidence}، وأعاد ترتيب كل الشركات. بجانب كل واحدة: أين وضعها ${words.model}.`)
+      : t(`${words.model} ranks every company by ${by}.`, `${words.model} يرتّب كل الشركات حسب ${by}.`)));
+}
+
+const avg = (values) => (values.length ? values.reduce((s, v) => s + v, 0) / values.length : null);
+
+/** Three plain numbers over the ranking — the same three places in both
+ *  views, so Gemini's ranking reads like any model's. */
+export function rankingTiles(ctx, ar) {
+  const t = (en, arabic) => (ar ? arabic : en);
+  const { choice, ranking, words, reading, said } = ctx;
+  if (!ranking || !ranking.rows.length || (choice.gemini && !reading)) return null;
+  const says = choice.meta?.says || { kind: 'return' };
+  const move = (v) => (says.kind === 'reversal' ? -v : v);
+  const top = ranking.rows.slice(0, 5);
+  const topValues = top.map((r) => r.baseValue).filter(finite).map(move);
+  const topFigure = avg(topValues);
+  const first = says.kind === 'return'
+    ? tile(choice.gemini ? t(`TOP 5 · ${words.model} EXPECTS`, `أعلى 5 · يتوقع ${words.model}`) : t('TOP 5 · EXPECTED', 'أعلى 5 · المتوقع'),
+      percent(topFigure),
+      choice.gemini
+        ? t(`what ${words.model} expects for Gemini’s five, on average, over ${words.horizon}`, `ما يتوقعه ${words.model} لخمس Gemini في المتوسط خلال ${words.horizon}`)
+        : t(`the five highest forecasts, on average, over ${words.horizon}`, `متوسط أعلى خمسة توقعات خلال ${words.horizon}`),
+      tone(topFigure))
+    : tile(t('TOP 5 · THEIR MOVE', 'أعلى 5 · حركتها'), percent(topFigure),
+      says.kind === 'reversal'
+        ? t(`their fall over the last ${says.sessions === 1 ? 'session' : `${says.sessions} sessions`}, on average`, `هبوطها خلال آخر ${sessionsAr(says.sessions)} في المتوسط`)
+        : t(`their rise over the last ${says.sessions} sessions, on average`, `ارتفاعها خلال آخر ${sessionsAr(says.sessions)} في المتوسط`),
+      tone(topFigure));
+  if (choice.gemini) {
+    const theirs = new Set(ranking.baseTop);
+    const fresh = top.filter((r) => !theirs.has(r.ticker)).length;
+    const count = Number.isInteger(reading?.count) ? reading.count : said?.count;
+    return h('div', { class: 'aix-tiles' }, first,
+      tile(t(`NEW TO ${words.model}’S TOP 5`, `جديدة على أعلى 5 لدى ${words.model}`), `${fresh} / ${top.length}`,
+        t(`companies in Gemini’s five that ${words.model} did not have in its own`, `شركات في خمس Gemini لم تكن في خمس ${words.model}`)),
+      tile(t('GEMINI KEPT', 'أبقى Gemini'), Number.isInteger(count) ? String(count) : '—',
+        Number.isInteger(count)
+          ? t(`companies it said were worth anything, of the ${reading?.answered ?? ranking.rows.length} it scored`, `شركات قال إنها تستحق شيئاً، من ${reading?.answered ?? ranking.rows.length} قيّمها`)
+          : t('it named no count that night', 'لم يحدد عدداً تلك الليلة')));
+  }
+  const whole = summaryOf(ranking.rows.map((r) => r.value).map(move)).median;
+  return h('div', { class: 'aix-tiles' }, first,
+    tile(says.kind === 'return' ? t('WHOLE MARKET · EXPECTED', 'السوق كله · المتوقع') : t('WHOLE MARKET · MOVE', 'السوق كله · الحركة'),
+      percent(whole), t(`the middle of all ${ranking.rows.length} companies`, `الوسط بين ${ranking.rows.length} شركة`), tone(whole)),
+    tile(t('COMPANIES RANKED', 'شركات مرتّبة'), String(ranking.rows.length),
+      t('every company it had a number for in this run', 'كل شركة لديه رقم لها في هذا التشغيل')));
+}
+
+/** The ranking itself: every company, highest first, the five its record
+ *  follows marked off, and — after Gemini — where the chosen model had each. */
+export function rankingCard(component, data, ctx, ar) {
+  const t = (en, arabic) => (ar ? arabic : en);
+  const { choice, ranking, words, nights, reading, said } = ctx;
+  const st = component.state;
+  const says = choice.meta?.says || { kind: 'return' };
   const n = choice.horizon;
-  const says = choice.meta?.says;
-  const when = next ? t(` The next run is scheduled for ${shortDay(next.date, false)} at ${next.time} Cairo time.`,
-    ` التشغيل التالي مقرر ${shortDay(next.date, true)} الساعة ${next.time} بتوقيت القاهرة.`) : '';
 
   if (ctx.loading) {
-    return h('section', { class: 'aix-card aix-picks-card', role: 'status' },
-      h('h3', null, t('Loading the picks…', 'جارٍ تحميل الاختيارات…')),
+    return h('section', { class: 'aix-card aix-ranking-card', role: 'status' },
+      h('h3', null, t('Loading the ranking…', 'جارٍ تحميل الترتيب…')),
       h('div', { class: 'sc-skeleton is-short', 'aria-hidden': 'true' }));
   }
-  if (!nights.next) {
-    const newest = nights.newest;
-    const why = !ctx.entry
-      ? t('No picks are published for this model yet.', 'لا اختيارات منشورة لهذا النموذج بعد.')
-      : !newest
-        ? t(`It has no five at ${words.horizon} yet.`, `ليس لديه خمس عند ${words.horizon} بعد.`)
-        : newest.status === 'withheld'
-          ? t(`Its newest five, from ${day(newest.basisSession, false)}, were written after the session they are about had already closed, so they are not counted at this horizon.`,
-            `اختياراته الأحدث، من ${day(newest.basisSession, true)}، كُتبت بعد إغلاق الجلسة التي تخصها، فلا تُحتسب عند هذه المدة.`)
-          : t(`Its newest five, from ${day(newest.basisSession, false)}, have already been scored — they are under past runs.`,
-            `اختياراته الأحدث، من ${day(newest.basisSession, true)}، قُيّمت بالفعل — تجدها تحت التشغيلات السابقة.`);
-    return h('section', { class: 'aix-card aix-picks-card' },
-      h('h3', null, t(`No five waiting from ${words.model}`, `لا خمس بانتظار النتيجة من ${words.model}`)),
-      h('p', { class: 'aix-note' }, why + when));
+  if (!ranking) {
+    return h('section', { class: 'aix-card aix-ranking-card' },
+      h('h3', null, t('The newest run has not loaded', 'لم يُحمَّل أحدث تشغيل')));
+  }
+  if (choice.gemini && !reading) {
+    return h('section', { class: 'aix-card aix-ranking-card', role: ctx.readingFailed ? null : 'status' },
+      h('h3', null, ctx.readingFailed ? t('Gemini’s ranking could not be fetched', 'تعذر جلب ترتيب Gemini')
+        : t('Loading Gemini’s ranking…', 'جارٍ تحميل ترتيب Gemini…')),
+      ctx.readingFailed ? h('p', { class: 'aix-note' }, ctx.readingFailed) : h('div', { class: 'sc-skeleton is-short', 'aria-hidden': 'true' }),
+      ctx.readingFailed ? h('button', { type: 'button', class: 'aix-quiet', onClick: ctx.retry }, t('Try again', 'حاول مجدداً')) : null);
   }
 
-  const night = nights.next;
-  const five = [...night.picks].sort(byTicker);
-  const closed = night.sessionsClosed || 0;
-  const scoredWhen = n === 1
-    ? t('once the next session closes', 'بعد إغلاق الجلسة التالية')
-    : closed
-      ? t(`once ${n - closed} more ${n - closed === 1 ? 'session closes' : 'sessions close'} (${closed} of ${n} have so far)`,
-        `بعد إغلاق ${sessionsAr(n - closed)} أخرى (أُغلقت ${closed} من ${n} حتى الآن)`)
-      : t(`once ${n} more sessions close`, `بعد إغلاق ${sessionsAr(n)} أخرى`);
-  const back = says?.sessions;
-  const these = says?.kind === 'score'
-    ? t('These are its five highest scores, in alphabetical order.', 'هذه أعلى خمس درجات لديه، بترتيب أبجدي.')
-    : says?.kind === 'momentum'
-      ? t(`These five rose the most over the last ${back} sessions, in alphabetical order.`, `هذه الخمس الأكثر ارتفاعاً خلال آخر ${sessionsAr(back)}، بترتيب أبجدي.`)
-      : says?.kind === 'reversal'
-        ? (back === 1
-          ? t('These five fell the most in the last session, in alphabetical order.', 'هذه الخمس الأكثر هبوطاً في الجلسة الأخيرة، بترتيب أبجدي.')
-          : t(`These five fell the most over the last ${back} sessions, in alphabetical order.`, `هذه الخمس الأكثر هبوطاً خلال آخر ${sessionsAr(back)}، بترتيب أبجدي.`))
-        : t('These are its five highest forecasts, in alphabetical order.', 'هذه أعلى خمسة توقعات لديه، بترتيب أبجدي.');
+  const q = String(st.scSearch || '').trim().toLowerCase();
+  const rows = ranking.rows.filter((r) => !q || `${r.ticker} ${title(data, r.ticker, ar)}`.toLowerCase().includes(q));
+  const limit = 10;
+  const all = !!st.scShowAll;
+  const shown = all || q ? rows : rows.slice(0, limit);
+  const closed = nights.next?.sessionsClosed || 0;
+  const scoredWhen = !nights.next
+    ? t('once their window has closed', 'بعد إغلاق نافذتها')
+    : n === 1 ? t('once the next session closes', 'بعد إغلاق الجلسة التالية')
+      : t(`once ${n - closed} more ${n - closed === 1 ? 'session closes' : 'sessions close'}`, `بعد إغلاق ${sessionsAr(n - closed)} أخرى`);
+  const move = (v) => (says.kind === 'reversal' ? -v : v);
 
-  const tiles = h('div', { class: 'aix-picks' }, five.map((p) => {
-    const parts = saidParts(says, p.said, ar);
-    const name = title(data, p.ticker, ar);
-    return h('button', { key: p.ticker, type: 'button', class: 'aix-pick', onClick: openCompany(component, p.ticker),
-      'aria-label': `${p.ticker} ${name !== p.ticker ? name : ''} · ${parts.label} ${parts.figure}` },
-    h('b', null, p.ticker),
-    name !== p.ticker ? h('small', null, name) : null,
-    h('span', { class: 'aix-pick-said' }, h('em', null, parts.label), h('strong', { class: parts.tone, dir: 'ltr' }, parts.figure)));
-  }));
+  const valueHead = choice.gemini ? t('Gemini score', 'درجة Gemini')
+    : says.kind === 'return' ? t(`Expects · ${n === 1 ? 'next session' : `${n} sessions`}`, `يتوقع · ${n === 1 ? 'الجلسة التالية' : sessionsAr(n)}`)
+      : t(says.sessions === 1 ? 'Move · last session' : `Move · last ${says.sessions} sessions`, `الحركة · آخر ${sessionsAr(says.sessions)}`);
+  const extraHead = choice.gemini ? t(`${words.model} had it`, `عند ${words.model}`)
+    : says.kind === 'return' ? t('Other models', 'النماذج الأخرى') : '';
 
-  const extras = [];
-  if (night.tied) {
-    extras.push(h('p', { class: 'aix-note' }, t(`Fifth place was a tie with ${night.tied} other ${night.tied === 1 ? 'company' : 'companies'}; the record settles a tie alphabetically.`,
-      `المركز الخامس تعادل مع ${countAr(night.tied, 'شركة أخرى', 'شركتين أخريين', 'شركات أخرى', 'شركة أخرى')}؛ ويحسم السجل التعادل أبجدياً.`)));
-  }
-  if (choice.model === 'rerank') {
-    if (said && Number.isInteger(said.count)) {
-      extras.push(h('p', { class: 'aix-note' }, t(`That night it also said ${said.count} ${said.count === 1 ? 'company was' : 'companies were'} worth anything. The record follows its five highest.`,
-        `وقالت تلك الليلة أيضاً إن ${countAr(said.count, 'شركة واحدة تستحق', 'شركتين تستحقان', 'شركات تستحق', 'شركة تستحق')} شيئاً. السجل يتابع أعلى خمس.`)));
+  const cell = (r) => {
+    const name = title(data, r.ticker, ar);
+    const figure = choice.gemini ? `${plain(r.value, 0)}/100` : percent(move(r.value));
+    let extra = null;
+    if (choice.gemini) {
+      const shift = finite(r.baseRank) ? r.baseRank - r.rank : null;
+      extra = h('span', { class: 'aix-rank-was' },
+        h('bdi', { dir: 'ltr' }, finite(r.baseRank) ? `#${r.baseRank}` : '—'),
+        finite(shift) && shift !== 0 ? h('em', { class: shift > 0 ? 'up' : 'down', dir: 'ltr' }, `${shift > 0 ? '▲' : '▼'}${Math.abs(shift)}`) : null,
+        finite(r.baseValue) ? h('small', { dir: 'ltr', class: tone(move(r.baseValue)) }, percent(move(r.baseValue))) : null);
+    } else if (says.kind === 'return') {
+      extra = h('small', { class: 'aix-rank-agree' }, r.of ? t(`${r.agree} of ${r.of} agree`, `${r.agree} من ${r.of} تتفق`) : '');
     }
-    if (said && said.note) {
-      extras.push(h('blockquote', { class: 'aix-quote', dir: 'auto' }, said.note));
-    }
-    if (choice.layers.length && ctx.plainNext) {
-      const alone = new Set(ctx.plainNext.picks.map((p) => p.ticker));
-      const changed = five.filter((p) => !alone.has(p.ticker)).length;
-      extras.push(h('div', { class: 'aix-compare' },
-        h('p', { class: 'aix-note' }, changed
-          ? t(`What ${words.evidence} changed: reading the forecasts alone, it picked these five — ${changed} of the five above ${changed === 1 ? 'is' : 'are'} not among them.`,
-            `ما غيّرته ${words.evidence}: بقراءة التوقعات وحدها اختار هذه الخمس — ${changed} من الخمس أعلاه ليست بينها.`)
-          : t(`What ${words.evidence} changed: nothing in the five — reading the forecasts alone, it picked the same five.`,
-            `ما غيّرته ${words.evidence}: لا شيء في الخمس — بقراءة التوقعات وحدها اختار الخمس نفسها.`)),
-        changed ? companyChips(component, data, ctx.plainNext.picks, says, ar, false) : null));
-    }
-    if (indexed && !indexed.answered) {
-      extras.push(h('p', { class: 'aix-note aix-warn' }, t('This combination did not answer that night.', 'هذه التركيبة لم تُجب تلك الليلة.')));
-    }
-  }
+    return h('button', {
+      key: r.ticker, type: 'button', class: `aix-rank-row${r.rank <= 5 ? ' is-top' : ''}`,
+      onClick: openCompany(component, r.ticker),
+      'aria-label': `${r.rank}. ${r.ticker} ${name !== r.ticker ? name : ''} · ${figure}`,
+    },
+    h('span', { class: 'aix-rank-n', dir: 'ltr' }, r.tied ? `=${r.rank}` : String(r.rank)),
+    h('span', { class: 'aix-company-name' }, h('b', null, r.ticker), name !== r.ticker ? h('small', null, name) : null),
+    h('strong', { class: choice.gemini ? '' : tone(move(r.value)), dir: 'ltr' }, figure),
+    extra);
+  };
 
-  return h('section', { class: 'aix-card aix-picks-card' },
-    h('header', null, h('div', null,
-      h('h3', null, t(`The five ${words.model} picked after the close of ${day(night.basisSession, false)}`,
-        `الشركات الخمس التي اختارها ${words.model} بعد إغلاق ${day(night.basisSession, true)}`)),
-      h('p', null, `${these} ${t(`They are scored against the market ${scoredWhen} — until then nobody knows how they do.`,
-        `تُقيَّم مقابل السوق ${scoredWhen} — وحتى ذلك الحين لا أحد يعرف كيف ستؤدي.`)}`))),
-    tiles,
-    ...extras,
-    h('p', { class: 'aix-fine' }, t('A model’s output, not a recommendation — published whether it turns out right or wrong.',
-      'مخرجات نموذج، وليست توصية — تُنشر أياً كانت النتيجة.')));
+  const list = [];
+  shown.forEach((r, i) => {
+    list.push(cell(r));
+    // The line under the five the record follows, where the list is whole.
+    if (!q && r.rank === 5 && shown[i + 1]) {
+      list.push(h('p', { key: 'cut', class: 'aix-rank-cut' },
+        t(`Above the line: the five its record follows — scored against the market ${scoredWhen}.`,
+          `فوق الخط: الخمس التي يتابعها السجل — تُقيَّم مقابل السوق ${scoredWhen}.`)));
+    }
+  });
+
+  const note = choice.gemini ? (said?.note || reading?.note) : null;
+  return h('section', { class: 'aix-card aix-ranking-card' },
+    h('header', null,
+      h('div', null,
+        h('h3', null, choice.gemini
+          ? t(`Ranked after Gemini re-reads ${words.model} and the other models`, `الترتيب بعد أن يعيد Gemini قراءة ${words.model} والنماذج الأخرى`)
+          : t(`Ranked by ${words.model}`, `ترتيب ${words.model}`)),
+        h('p', null, choice.gemini
+          ? t(`Every company Gemini scored, highest first, out of 100. Nobody knows yet how they will do. Model output, not a recommendation.`,
+            'كل شركة قيّمها Gemini، الأعلى أولاً، من 100. لا أحد يعرف بعد كيف ستؤدي. مخرجات نموذج، وليست توصية.')
+          : t(`Every company it ranked, highest first. Nobody knows yet how they will do. Model output, not a recommendation.`,
+            'كل شركة رتّبها، الأعلى أولاً. لا أحد يعرف بعد كيف ستؤدي. مخرجات نموذج، وليست توصية.'))),
+      h('label', { class: 'aix-search-label' },
+        h('span', { class: 'aix-eyebrow' }, t('Find a company', 'ابحث عن شركة')),
+        h('input', { class: 'aix-search', type: 'search', value: st.scSearch || '',
+          placeholder: t('Name or ticker', 'الاسم أو الرمز'),
+          onInput: (e) => component.setState({ scSearch: e.target.value }) }))),
+    rows.length ? h('div', { class: `aix-rank-head${choice.gemini ? ' is-gemini' : ''}`, 'aria-hidden': 'true' },
+      h('span', null, '#'), h('span', null, t('Company', 'الشركة')), h('span', null, valueHead), h('span', null, extraHead)) : null,
+    h('div', { class: `aix-rank-list${choice.gemini ? ' is-gemini' : ''}` }, list),
+    !rows.length ? h('p', { class: 'aix-empty' }, q ? t('No company matches that.', 'لا شركة تطابق ذلك.')
+      : t('This model ranked no company in this run.', 'لم يرتّب هذا النموذج أي شركة في هذا التشغيل.')) : null,
+    rows.length > limit && !q ? h('button', { type: 'button', class: 'aix-more',
+      onClick: () => component.setState({ scShowAll: !all }) },
+    all ? t('Show the top 10', 'عرض أعلى 10') : t(`Show all ${rows.length} companies`, `عرض كل الشركات (${rows.length})`)) : null,
+    nights.next?.tied ? h('p', { class: 'aix-note' }, t(`Fifth place was a tie with ${nights.next.tied} other ${nights.next.tied === 1 ? 'company' : 'companies'}; the record settles a tie alphabetically.`,
+      `المركز الخامس تعادل مع ${countAr(nights.next.tied, 'شركة أخرى', 'شركتين أخريين', 'شركات أخرى', 'شركة أخرى')}؛ ويحسم السجل التعادل أبجدياً.`)) : null,
+    note ? h('div', { class: 'aix-said' },
+      h('span', { class: 'aix-eyebrow' }, t('In Gemini’s own words', 'بكلمات Gemini')),
+      h('blockquote', { class: 'aix-quote', dir: 'auto' }, note)) : null);
 }
 
 /* ── FUTURE: a forecaster's view of the whole market ────────────────────── */
-
-export function returnsTiles(view, words, ar) {
-  const t = (en, arabic) => (ar ? arabic : en);
-  const { summary } = view;
-  const telling = view.byModel.filter((m) => m.distinguishes).length;
-  return h('div', { class: 'aix-tiles' },
-    tile(t('MIDDLE ESTIMATE', 'التقدير الأوسط'), percent(summary.median), t(
-      `median of ${summary.count} estimates for ${words.horizon}`,
-      `وسيط ${summary.count} تقديراً لـ${words.horizon}`), tone(summary.median)),
-    tile(t('MODELS POINTING UP', 'نماذج تشير للصعود'), `${view.pointingUp} / ${telling}`,
-      view.pointingUp * 2 > telling
-        ? t('more expect a rise than a fall, at the middle', 'الأكثر يتوقع صعوداً عند الوسط')
-        : t('they do not agree on direction', 'لا تتفق على الاتجاه')),
-    tile(t('SPREAD, 10TH TO 90TH', 'النطاق من 10 إلى 90'), finite(summary.p90) && finite(summary.p10)
-      ? `${(summary.p90 - summary.p10).toFixed(2)} pp` : '—',
-    t('between the lower and upper tenth of the companies', 'بين العُشر الأدنى والعُشر الأعلى من الشركات')));
-}
 
 export function returnsCards(component, data, view, words, ar) {
   const t = (en, arabic) => (ar ? arabic : en);
@@ -249,150 +314,6 @@ export function returnsCards(component, data, view, words, ar) {
   return [fan, h('div', { class: 'aix-pair' }, hist, disagree)];
 }
 
-/* ── FUTURE: a re-rank reading of the whole market ──────────────────────── */
-
-export function rerankTiles(view, words, ar) {
-  const t = (en, arabic) => (ar ? arabic : en);
-  const rho = (v) => (finite(v) ? `${v > 0 ? '+' : ''}${v.toFixed(2)}` : '—');
-  return h('div', { class: 'aix-tiles' },
-    tile(t('KEPT BY THE RE-RANK', 'أبقى عليها'), finite(view.count) ? `${view.keptInScope} / ${view.rows.length}` : '—',
-      finite(view.count)
-        ? t(`its own answer: ${view.count} of the ${view.answered} it scored are worth anything`, `إجابته: ${view.count} من ${view.answered} قيّمها تستحق شيئاً`)
-        : t('it named no count that night', 'لم يحدد عدداً تلك الليلة')),
-    tile(t('ORDER VS THE FORECASTERS', 'الترتيب مقابل النماذج'), rho(view.rhoForecasters),
-      t('rank agreement with the forecasters’ middle estimate · 1 is the same order, 0 unrelated', 'اتفاق الترتيب مع التقدير الأوسط للنماذج · 1 نفس الترتيب و0 لا علاقة')),
-    view.layers.length
-      ? tile(t('WHAT THE EVIDENCE CHANGED', 'ما غيّرته الأدلة'), `${view.moved}`,
-        t(`companies moved more than 20 places from the forecasts-alone reading · ${view.keptChanged} in or out of the kept set`,
-          `شركة تحركت أكثر من 20 مركزاً عن قراءة النماذج وحدها · ${view.keptChanged} دخلت أو خرجت من المُبقاة`))
-      : tile(t('WHAT IT READ', 'ما قرأه'), t('forecasts', 'التوقعات'),
-        t('nothing else — switch on evidence to see what it changes', 'لا شيء غيرها — فعّل الأدلة لترى ما تغيّره')));
-}
-
-export function rerankCards(component, data, view, words, ar) {
-  const t = (en, arabic) => (ar ? arabic : en);
-  const rho = (v) => (finite(v) ? `${v > 0 ? '+' : ''}${v.toFixed(2)}` : '—');
-  const scoredRows = view.rows.filter((r) => finite(r.score)).length;
-  const lumped = view.setAside > 1 && view.setAside * 4 >= scoredRows
-    ? t(` ${view.setAside} of them got 5 or less: it set much of the market aside rather than ordering it.`,
-      ` ${view.setAside} منها حصلت على 5 أو أقل: وضع جزءاً كبيراً من السوق جانباً بدلاً من ترتيبه.`)
-    : '';
-  const scores = card('aix-hist-card', t('Every score it gave', 'كل درجة أعطاها'),
-    (finite(view.threshold)
-      ? t(`${scoredRows} companies scored 0–100. The line is the lowest score among the ${view.count} it said were worth anything.`,
-        `${scoredRows} شركة بدرجات من 0 إلى 100. الخط أدنى درجة بين الـ${view.count} التي قال إنها تستحق شيئاً.`)
-      : t(`${scoredRows} companies scored 0–100.`, `${scoredRows} شركة بدرجات من 0 إلى 100.`)) + lumped,
-    histogram(view.rows.map((r) => r.score), { lo: 0, hi: 100, bins: 20, marker: view.threshold,
-      markerLabel: finite(view.threshold) ? plain(view.threshold, 0) : null, colour: 'kept', ar })
-      || h('p', { class: 'aix-empty' }, t('Too few scores to draw.', 'درجات أقل من أن تُرسم.')),
-    h('ul', { class: 'aix-facts' },
-      h('li', null, t(`Answered for ${view.answered} companies${view.abstained ? `, left out ${view.abstained}` : ''}.`,
-        `أجاب عن ${view.answered} شركة${view.abstained ? ` وترك ${view.abstained}` : ''}.`)),
-      view.invented && view.invented.length
-        ? h('li', { class: 'aix-warn' }, t(`Named ${view.invented.length} tickers it was not asked about; they were dropped.`, `ذكر ${view.invented.length} رموز لم يُسأل عنها، فحُذفت.`))
-        : null));
-
-  if (!view.layers.length) return [scores];
-  const reorder = card('aix-reorder-card',
-    t(`How ${words.evidence} reordered it`, `كيف أعاد ${words.evidence} ترتيبه`),
-    t('Each dot is a company: across, its place when the re-rank read the forecasts alone; up, its place with the evidence switched on. On the diagonal nothing moved.',
-      'كل نقطة شركة: أفقياً مركزها حين قرأ التوقعات وحدها، ورأسياً مركزها مع الأدلة. على القطر لم يتحرك شيء.'),
-    h('div', { class: 'aix-reorder-body' },
-      reorderChart(view.pairs, ar) || h('p', { class: 'aix-empty' }, t('Too few companies to compare.', 'شركات أقل من أن تُقارن.')),
-      h('dl', { class: 'aix-reorder-facts' },
-        h('dt', null, t('order agreement', 'اتفاق الترتيب')), h('dd', { dir: 'ltr' }, rho(view.rhoModels)),
-        h('dt', null, t('moved 20+ places', 'تحرك 20+ مركزاً')), h('dd', { dir: 'ltr' }, String(view.moved)),
-        h('dt', null, t('companies compared', 'شركات مقارنة')), h('dd', { dir: 'ltr' }, String(view.pairs.length)))));
-  return [reorder, scores];
-}
-
-/* ── FUTURE: company by company ─────────────────────────────────────────── */
-
-export function companiesCard(component, data, ctx, ar) {
-  const t = (en, arabic) => (ar ? arabic : en);
-  const { choice, view, tickers, words } = ctx;
-  const says = choice.meta?.says;
-  const st = component.state;
-  const five = new Set((ctx.nights.next?.picks || []).map((p) => p.ticker));
-  const q = String(st.scSearch || '').trim().toLowerCase();
-  const rows = (view?.rows || tickers.map((ticker) => ({ ticker })))
-    .map((row) => ({ ...row, said: row.said ?? (choice.model === 'rerank' ? row.score
-      : (() => {
-        const entry = data.scenarios?.companies?.[row.ticker]?.models?.[choice.model];
-        const hz = String(choice.horizon);
-        return finite(entry?.rankedBy?.[hz]) ? entry.rankedBy[hz] : (finite(entry?.returns?.[hz]) ? entry.returns[hz] : null);
-      })()) }))
-    .filter((row) => !q || `${row.ticker} ${title(data, row.ticker, ar)}`.toLowerCase().includes(q));
-  const limit = 12;
-  const all = !!st.scShowAll;
-  const shown = all || q ? rows : rows.slice(0, limit);
-
-  // The scale is set by the 95th percentile of the numbers on the rows, not
-  // by the single most extreme one; a range beyond it runs to the edge.
-  const magnitudes = rows.flatMap((r) => [r.low, r.high, r.value]).filter(finite).map(Math.abs).sort((a, b) => a - b);
-  const cMax = Math.max(magnitudes.length ? magnitudes[Math.floor((magnitudes.length - 1) * 0.95)] : 1, 1);
-  const pos = (v) => Math.min(98, Math.max(2, 50 + (v / cMax) * 48));
-  const kind = says?.kind || 'return';
-
-  const sub = kind === 'score'
-    ? t('Its score out of 100 for every company, and the forecasters’ middle estimate beside it.',
-      'درجته من 100 لكل شركة، والتقدير الأوسط للنماذج بجانبها.')
-    : kind === 'return'
-      ? t(`The bar is the range every model allows over ${words.horizon}; the dot is ${words.model}’s estimate.`,
-        `الشريط مدى ما تسمح به كل النماذج خلال ${words.horizon}، والنقطة تقدير ${words.model}.`)
-      : t('The move it ranks every company by. It forecasts nothing.', 'الحركة التي يرتّب بها كل شركة. لا يتوقع شيئاً.');
-
-  const row = (r) => {
-    const parts = saidParts(says, r.said, ar);
-    const badge = five.has(r.ticker) ? h('i', { class: 'aix-five-badge' }, t('IN ITS FIVE', 'ضمن الخمس')) : null;
-    const name = h('span', { class: 'aix-company-name' }, h('b', null, r.ticker, badge), h('small', null, title(data, r.ticker, ar)));
-    if (kind === 'score') {
-      return h('button', { key: r.ticker, type: 'button', class: `aix-company-row is-score${five.has(r.ticker) ? ' is-five' : ''}`,
-        onClick: openCompany(component, r.ticker), 'aria-label': `${r.ticker} ${parts.figure}` },
-      name,
-      h('strong', { dir: 'ltr' }, finite(r.score) ? plain(r.score, 0) : '—'),
-      h('span', { class: 'aix-score', dir: 'ltr' },
-        finite(r.score) ? h('b', { style: `width:${Math.max(Math.min(r.score, 100), 1).toFixed(1)}%` }) : null),
-      h('small', { class: 'aix-company-note', dir: 'ltr' }, finite(r.consensus) ? percent(r.consensus) : ''));
-    }
-    if (kind === 'return') {
-      return h('button', { key: r.ticker, type: 'button', class: `aix-company-row${five.has(r.ticker) ? ' is-five' : ''}`,
-        onClick: openCompany(component, r.ticker), 'aria-label': `${r.ticker} ${parts.figure}` },
-      name,
-      h('strong', { class: tone(r.value), dir: 'ltr' }, percent(r.value)),
-      h('span', { class: 'aix-range', dir: 'ltr' },
-        h('i', { class: 'aix-centre' }),
-        finite(r.low) && finite(r.high) ? h('em', { style: `left:${pos(Math.min(r.low, r.high)).toFixed(2)}%;width:${Math.max(pos(Math.max(r.low, r.high)) - pos(Math.min(r.low, r.high)), 1).toFixed(2)}%` }) : null,
-        finite(r.value) ? h('b', { class: tone(r.value), style: `left:${pos(r.value).toFixed(2)}%` }) : null),
-      h('small', { class: 'aix-company-note' }, r.of > 1 && finite(r.value)
-        ? t(`${r.agree} of ${r.of} agree`, `${r.agree} من ${r.of} تتفق`)
-        : t('no estimate', 'بلا تقدير')));
-    }
-    return h('button', { key: r.ticker, type: 'button', class: `aix-company-row is-plain${five.has(r.ticker) ? ' is-five' : ''}`,
-      onClick: openCompany(component, r.ticker), 'aria-label': `${r.ticker} ${parts.figure}` },
-    name,
-    h('strong', { class: parts.tone, dir: 'ltr' }, parts.figure),
-    h('small', { class: 'aix-company-note' }, parts.label));
-  };
-
-  return h('section', { class: 'aix-card aix-company-card' },
-    h('header', null,
-      h('div', null,
-        h('h3', null, t('Company by company', 'شركة بشركة')),
-        h('p', null, `${sub} ${t('Alphabetical, not an order of preference; its five are marked.', 'ترتيب أبجدي، لا ترتيب تفضيل؛ والخمس المختارة معلَّمة.')}`)),
-      kind === 'return' ? h('span', { class: 'aix-legend-axis', dir: 'ltr' }, t('DOWN ◀ ▶ UP', 'هبوط ◀ ▶ صعود')) : null),
-    h('label', { class: 'aix-search-label' },
-      h('span', { class: 'aix-eyebrow' }, t('Find a company', 'ابحث عن شركة')),
-      h('input', { class: 'aix-search', type: 'search', value: st.scSearch || '',
-        placeholder: t('Name or ticker', 'الاسم أو الرمز'),
-        onInput: (e) => component.setState({ scSearch: e.target.value }) })),
-    h('div', { class: 'aix-company-list' }, shown.map(row)),
-    !rows.length ? h('p', { class: 'aix-empty' }, t('No company matches that.', 'لا شركة تطابق ذلك.')) : null,
-    rows.length > limit && !q ? h('button', { type: 'button', class: 'aix-more',
-      onClick: () => component.setState({ scShowAll: !all }) },
-    all ? t('Show fewer', 'عرض أقل') : t(`Show all ${rows.length} companies`, `عرض كل الشركات (${rows.length})`)) : null);
-}
-
 /* ── PAST RUNS: the record so far ───────────────────────────────────────── */
 
 export function recordCard(component, data, ctx, ar) {
@@ -420,7 +341,7 @@ export function recordCard(component, data, ctx, ar) {
 
   return h('section', { class: 'aix-card aix-record-card' },
     h('header', null, h('div', null,
-      h('h3', null, t(`${words.model}, so far`, `${words.model} حتى الآن`)),
+      h('h3', null, t(`${words.view}, so far`, `${words.view} حتى الآن`)),
       h('p', null, t(`Its five against the market — every company it scored, equally weighted — over ${words.horizon}.`,
         `خمسته مقابل السوق — كل شركة قيّمها بأوزان متساوية — خلال ${words.horizon}.`)))),
     h('div', { class: 'aix-record-stats' },
@@ -446,7 +367,7 @@ export function recordCard(component, data, ctx, ar) {
 function nightRow(component, data, night, ctx, ar) {
   const t = (en, arabic) => (ar ? arabic : en);
   const n = ctx.choice.horizon;
-  const says = ctx.choice.meta?.says;
+  const says = ctx.says;
   const rebuilt = night.reconstructed
     ? h('span', { class: 'aix-status is-rebuilt', title: t('Rebuilt later from saved files; it saw only prices up to that night.', 'أُعيد بناؤها لاحقاً من ملفات محفوظة؛ ولم ترَ إلا أسعاراً حتى تلك الليلة.') },
       t('REBUILT', 'أُعيد بناؤها')) : null;

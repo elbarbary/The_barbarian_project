@@ -268,7 +268,10 @@ def pairs_for(block: dict, basis: str, horizon: int, panel: dict) -> list[tuple]
     for record in block.get("forecasts") or []:
         ticker = record.get("ticker")
         guess = predicted(record, horizon)
-        if not ticker or guess is None:
+        # A night sealed before `lab.listed` existed may still carry an
+        # instrument with no exchange ticker; it is scored the way it would
+        # have been asked about now — not at all.
+        if not lab.listed(ticker) or guess is None:
             continue
         actual = sc.forward_return(bars_of(panel, ticker), basis, horizon)
         if actual is None:
@@ -303,7 +306,7 @@ def selection(block: dict, basis: str, horizon: int, panel: dict) -> dict | None
     for record in block.get("forecasts") or []:
         ticker = record.get("ticker")
         value = predicted(record, horizon)
-        if not ticker or value is None:
+        if not lab.listed(ticker) or value is None:
             continue
         actual = sc.forward_return(bars_of(panel, ticker), basis, horizon)
         if actual is None:

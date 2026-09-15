@@ -245,7 +245,6 @@
 .aix-toggle[aria-checked="true"] .aix-switch { background: var(--aix-teal); }
 .aix-toggle[aria-checked="true"] .aix-switch b { inset-inline-start: 18px; }
 #app .aix-toggle:disabled { cursor: not-allowed; opacity: .5; }
-.aix-layers.is-off .aix-note { margin-top: 8px; }
 .aix-model-about { margin-top: 2px; }
 
 .aix-results { display: flex; flex-direction: column; gap: 14px; position: relative; min-width: 0; min-height: 320px; }
@@ -278,31 +277,59 @@
   padding-top: 10px; text-wrap: pretty;
 }
 
-/* ── the newest five ─────────────────────────────────────────────────────── */
+/* ── the ranking: which view is on screen, and the table ─────────────────── */
 
-.aix-card.aix-picks-card { container-type: inline-size; }
-.aix-picks { display: flex; flex-direction: column; }
-#app .aix-pick {
-  all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-areas: "ticker said" "name said"; align-items: center; column-gap: 12px; padding: 10px 2px;
-  border-bottom: 1px solid var(--aix-hair2); color: var(--aix-ink); min-width: 0;
+.aix-view { display: flex; flex-direction: column; gap: 8px; }
+.aix-view-switch { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+#app .aix-view-switch button {
+  cursor: pointer; display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 7px 16px 7px 7px;
+  border-radius: 999px; border: 1px solid var(--aix-line); background: var(--aix-surface); color: var(--aix-ink);
+  font-size: 14px; font-weight: 600;
 }
-#app .aix-pick:hover { background: var(--aix-row-hover); }
-.aix-pick > b { grid-area: ticker; font-family: var(--aix-mono); font-size: 14px; font-weight: 600; overflow-wrap: anywhere; }
-.aix-pick > small { grid-area: name; font-size: 12px; color: var(--aix-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.aix-pick-said { grid-area: said; display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
-.aix-pick-said em { font-style: normal; font-size: 11px; color: var(--aix-muted); }
-.aix-pick-said strong { font-family: var(--aix-mono); font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
-@container (min-width: 700px) {
-  .aix-picks { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
-  #app .aix-pick {
-    grid-template-columns: minmax(0, 1fr); grid-template-areas: "ticker" "name" "said"; align-items: start; row-gap: 2px;
-    padding: 13px 14px; border: 1px solid var(--aix-line); border-radius: 12px; background: var(--aix-surface);
-  }
-  #app .aix-pick:hover { border-color: var(--aix-teal-ink); background: var(--aix-surface); }
-  .aix-pick-said { align-items: flex-start; margin-top: 8px; }
+#app .aix-view-switch button b {
+  flex: 0 0 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--aix-mono); font-size: 11px; font-weight: 600; background: var(--aix-track); color: var(--aix-muted);
 }
-.aix-compare { display: flex; flex-direction: column; gap: 8px; }
+#app .aix-view-switch button:hover:not(:disabled) { border-color: var(--aix-teal-ink); }
+#app .aix-view-switch button.on { background: var(--aix-teal); border-color: var(--aix-teal); color: #fff; }
+#app .aix-view-switch button.on b { background: rgba(255, 255, 255, .22); color: #fff; }
+#app .aix-view-switch button:disabled { cursor: not-allowed; opacity: .5; }
+.aix-view-switch > i { font-style: normal; font-family: var(--aix-mono); color: var(--aix-muted); }
+
+.aix-ranking-card { --rank-cols: 40px minmax(0, 1.6fr) minmax(96px, .7fr) minmax(0, 1fr); }
+.aix-ranking-card header { align-items: flex-end; }
+.aix-rank-head {
+  display: grid; grid-template-columns: var(--rank-cols); column-gap: 12px; padding: 0 6px 6px;
+  border-bottom: 1px solid var(--aix-line); font-family: var(--aix-mono); font-size: 10px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--aix-muted);
+}
+.aix-rank-head span:first-child { text-align: center; }
+.aix-rank-head span:nth-child(n+3) { text-align: end; }
+.aix-rank-list { display: flex; flex-direction: column; }
+#app .aix-rank-row {
+  all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: var(--rank-cols);
+  align-items: center; column-gap: 12px; row-gap: 3px; padding: 10px 6px; border-bottom: 1px solid var(--aix-hair2);
+  color: var(--aix-ink);
+}
+#app .aix-rank-row:hover { background: var(--aix-row-hover); }
+#app .aix-rank-row.is-top { background: var(--aix-track-system); }
+.aix-rank-n { font-family: var(--aix-mono); font-size: 13px; font-weight: 600; color: var(--aix-muted); text-align: center; }
+.aix-rank-row.is-top .aix-rank-n { color: var(--aix-teal-ink); }
+.aix-rank-row > strong { font-family: var(--aix-mono); font-size: 14.5px; font-weight: 600; text-align: end; white-space: nowrap; }
+.aix-rank-agree { font-size: 12px; color: var(--aix-muted); text-align: end; white-space: nowrap; }
+.aix-rank-was {
+  display: flex; justify-content: flex-end; align-items: baseline; gap: 8px; font-family: var(--aix-mono);
+  font-size: 12.5px; color: var(--aix-muted); white-space: nowrap;
+}
+.aix-rank-was em { font-style: normal; font-size: 11.5px; font-weight: 600; }
+.aix-rank-was small { font-size: 11.5px; }
+.aix-rank-cut {
+  margin: 0; padding: 7px 6px; font-size: 11.5px; line-height: 1.4; color: var(--aix-teal-ink);
+  border-bottom: 1px dashed var(--aix-teal-ink);
+}
+.aix-said { display: flex; flex-direction: column; gap: 6px; }
+.aix-said .aix-eyebrow { font-size: 10px; color: var(--aix-muted); }
+.aix-layers-lead { margin: 0 0 6px !important; }
 .aix-fine { margin: 0; font-size: 11.5px; color: var(--aix-muted); }
 
 .aix-key-five { background: var(--aix-teal-ink); border-radius: 50% !important; }
@@ -350,12 +377,6 @@
 #app .aix-pick-chip.is-said { background: transparent; border: 1px dashed var(--aix-beta-line); }
 .aix-pick-chip b { font-weight: 600; }
 
-.aix-five-badge {
-  display: inline-block; margin-inline-start: 7px; padding: 1px 6px; border-radius: 999px; vertical-align: 2px;
-  font-style: normal; font-family: var(--aix-mono); font-size: 9px; letter-spacing: .06em; background: var(--aix-teal); color: #fff;
-}
-#app .aix-company-row.is-five { background: var(--aix-track-system); }
-#app .aix-company-row.is-plain { grid-template-columns: minmax(0, 1.3fr) 90px minmax(0, 140px); }
 .aix-search-label { display: flex; flex-direction: column; gap: 5px; min-width: min(220px, 100%); }
 .aix-search-label .aix-eyebrow { font-size: 10px; color: var(--aix-muted); }
 .aix-search {
@@ -424,28 +445,9 @@
 .aix-agree-row .aix-bar { top: 0; bottom: 0; border-radius: 999px; }
 .aix-agree-row b { text-align: end; font-family: var(--aix-mono); font-size: 12px; font-weight: 500; }
 
-.aix-company-list { display: flex; flex-direction: column; }
-#app .aix-company-row {
-  all: unset; box-sizing: border-box; cursor: pointer; display: grid;
-  grid-template-columns: minmax(0, 1.3fr) 70px minmax(110px, 1fr) minmax(0, 110px);
-  align-items: center; gap: 12px; padding: 10px 2px; border-bottom: 1px solid var(--aix-hair2); color: var(--aix-ink);
-}
-#app .aix-company-row:hover { background: var(--aix-row-hover); }
 .aix-company-name { display: flex; flex-direction: column; min-width: 0; }
 .aix-company-name b { font-family: var(--aix-mono); font-size: 13.5px; font-weight: 600; }
 .aix-company-name small { font-size: 11.5px; color: var(--aix-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.aix-company-row > strong { font-family: var(--aix-mono); font-size: 13.5px; font-weight: 500; text-align: end; }
-.aix-company-note { font-size: 12px; color: var(--aix-muted); text-align: end; white-space: nowrap; }
-.aix-range { position: relative; display: block; height: 20px; }
-.aix-range::before { content: ''; position: absolute; top: 9px; left: 0; right: 0; height: 2px; background: var(--aix-track); }
-.aix-range .aix-centre { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--aix-line); }
-.aix-range em { position: absolute; top: 7px; height: 6px; border-radius: 999px; background: var(--aix-range); }
-.aix-range b {
-  position: absolute; top: 4px; width: 11px; height: 11px; margin-left: -5.5px; border-radius: 50%;
-  background: currentColor; border: 2px solid var(--aix-surface); box-shadow: 0 0 0 1px currentColor; box-sizing: border-box;
-}
-.aix-score { position: relative; display: block; height: 8px; border-radius: 999px; background: var(--aix-track); overflow: hidden; }
-.aix-score b { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 999px; background: var(--aix-up); }
 #app .aix-more {
   cursor: pointer; align-self: flex-start; background: transparent; border: 1px dashed var(--aix-line); color: var(--aix-teal-ink);
   font-size: 13px; padding: 8px 14px; border-radius: 999px; min-height: 40px;
@@ -524,15 +526,23 @@ dialog.aix-dialog::backdrop { background: rgba(22, 36, 47, .5); }
   .aix-bench-title > p { font-size: 13.5px; }
   .aix-pair, .aix-tiles { grid-template-columns: minmax(0, 1fr); }
   .aix-card { padding: 16px; }
-  #app .aix-company-row { grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr); }
-  #app .aix-company-row.is-plain { grid-template-columns: minmax(0, 1fr) 80px; }
-  .aix-company-note { display: none; }
-  .aix-fan-tick { font-size: 9px; }
+        .aix-fan-tick { font-size: 9px; }
   .aix-night { grid-template-columns: minmax(0, 1fr); }
   .aix-night-when { flex-direction: row; flex-wrap: wrap; align-items: center; }
   .aix-divider { flex-wrap: wrap; row-gap: 4px; }
   .aix-divider-note { flex-basis: 100%; white-space: normal; }
   .aix-record-stats { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  /* Three numbers stacked as cards push the ranking a screen down; a label
+     beside its figure keeps all three to a few lines. */
+  .aix-tiles { gap: 6px; }
+  .aix-tile { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; row-gap: 2px; align-items: center; padding: 10px 12px; }
+  .aix-tile .aix-eyebrow, .aix-tile p { grid-column: 1; }
+  .aix-tile-value { grid-column: 2; grid-row: 1 / span 2; font-size: 20px; }
+  .aix-ranking-card { --rank-cols: 30px minmax(0, 1fr) auto; }
+  .aix-rank-head span:nth-child(4) { display: none; }
+  .aix-rank-row > .aix-rank-agree, .aix-rank-row > .aix-rank-was { grid-column: 2 / -1; justify-content: flex-start; text-align: start; }
+  #app .aix-view-switch button { flex: 1 1 100%; }
+  .aix-view-switch > i { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .aix-beta i, .sc-skeleton { animation: none; }

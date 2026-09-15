@@ -3936,7 +3936,8 @@ export class Component extends Base {
       // Beside Market, because it answers the same question — what did the
       // exchange do today — for a reader who would rather see it than read it.
       ['heat', ar?'الخريطة':'Heat map', String(heatTiles.length)],
-      ['scenarios', ar?'مختبر السيناريوهات':'Scenario workbench', ''],
+      // The workbench is reached from Home's own buttons, not a tab of its own:
+      // a row of one tab under the header is a selector with nothing to select.
       ['watchlist', ar?'المتابَعة':'Watchlist', followed.length ? String(followed.length) : ''],
       ['company', ar?'شركة':'Company', st.ticker || ''],
       ['sectors', ar?'القطاعات':'Sectors', sectorCards.length ? String(sectorCards.length) : ''],
