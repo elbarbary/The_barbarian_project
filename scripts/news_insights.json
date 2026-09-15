@@ -1615,6 +1615,10 @@
     "meaning": "Copper serves as a primary raw material for industrial and cable manufacturing sectors, where record commodity prices directly elevate procurement costs and expand working capital requirements for producers.",
     "meaning_ar": "يُعد النحاس مادة خام رئيسية لقطاعات الصناعة وتصنيع الكابلات، حيث تؤدي المستويات القياسية لأسعار السلعة إلى رفع تكاليف الشراء المباشرة وزيادة متطلبات رأس المال العامل لدى الشركات المصنعة."
   },
+  "اسعار النحاس تلامس ادني مستوي لها منذ 3 اسابيع": {
+    "meaning": "Copper serves as a primary raw material for industrial and infrastructure sectors, particularly cable and electronics manufacturing, where price fluctuations directly alter immediate procurement costs and inventory valuations.",
+    "meaning_ar": "يُعد النحاس مادة خام أساسية لقطاعات الصناعة والبنية التحتية، لا سيما تصنيع الكابلات والإلكترونيات، حيث تنعكس تقلبات أسعاره بصورة مباشرة على تكاليف التوريد الفورية وتقييمات المخزون."
+  },
   "اسهم الصين تجذب الباحثين عن بديل لرهانات الذكاء الاصطناعي المزدحمه": {
     "meaning": "Capital reallocates from concentrated positions in global artificial intelligence equities toward Chinese equity markets as part of cross-border portfolio rebalancing driven by relative valuation differentials.",
     "meaning_ar": "تتحول تدفقات رؤوس الأموال من المراكز المركزة في أسهم قطاع الذكاء الاصطناعي العالمية نحو الأسهم الصينية، ضمن آلية إعادة موازنة المحافظ الاستثمارية بناءً على الفروق في التقييمات السعرية بين الأسواق."
@@ -2379,6 +2383,10 @@
     "meaning": "This corporate action allocates EGP 1 billion in capital expenditures across the company's pharmaceutical production infrastructure and operational assets through 2027.",
     "meaning_ar": "يخصص هذا الإجراء المؤسسي مليار جنيه كمصروفات رأسمالية لتطوير البنية التحتية لإنتاج الأدوية والأصول التشغيلية للشركة حتى عام 2027."
   },
+  "الرييس التنفيذي للقابضه الغذاييه: جوده السلع وافضل الاسعار اولويه في فروع مشروع كاري اون": {
+    "meaning": "The Holding Company for Food Industries operates the 'Carry On' project branches through a pricing and inventory management framework that relies on bulk procurement contracts to regulate shelf prices and standardise product quality within state-affiliated retail channels.",
+    "meaning_ar": "تعتمد الشركة القابضة للصناعات الغذائية في تشغيل فروع مشروع «كاري أون» على إطار لإدارة المخزون والتسعير قائم على عقود التوريد المجمعة لضبط أسعار البيع وتوحيد معايير جودة السلع ضمن قنوات التجزئة التابعة للدولة."
+  },
   "الرييس السيسي ونظيره الاندونيسي يوكدان اولويه الحل الدبلوماسي للحرب الايرانيه خلال قمه «البريكس»": {
     "meaning": "Bilateral diplomatic coordination within the BRICS framework addresses regional geopolitical stability, directly impacting operational risks along key maritime trade routes and international commodity import costs for emerging economies.",
     "meaning_ar": "يرتبط التنسيق الدبلوماسي الثنائي داخل تكتل «بريكس» باستقرار الأوضاع الجيوسياسية الإقليمية، مما ينعكس بشكل مباشر على المخاطر التشغيلية عبر الممرات الملاحية التجارية وتكاليف واردات السلع الأساسية للاقتصادات الناشئة."
@@ -2446,6 +2454,10 @@
   "الرييس السيسي: نستهدف رفع حجم التبادل التجاري مع الهند الي 12 مليار دولار": {
     "meaning": "Bilateral trade targets establish institutional frameworks for customs coordination, export-import credit facilities, and cross-border commercial agreements between Egyptian and Indian enterprises across key sectors including chemicals, pharmaceuticals, and engineering goods.",
     "meaning_ar": "تحدد الأهداف التجارية الثنائية أطراً مؤسسية للتنسيق الجمركي، وتسهيلات الائتمان الخاصة بالتصدير والاستيراد، والاتفاقيات التجارية بين الشركات المصرية والهندية في قطاعات رئيسية تشمل الكيماويات والأدوية والسلع الهندسية."
+  },
+  "الزام شركات التمويل الاستهلاكي بتحليل سلوك العملاء": {
+    "meaning": "This regulatory requirement introduces mandatory data analytics and credit assessment processes into consumer finance operations, directly altering loan underwriting workflows and compliance infrastructure.",
+    "meaning_ar": "يُلزم هذا القرار التنظيمي شركات التمويل الاستهلاكي بدمج أنظمة تحليل البيانات وتقييم الجدارة الائتمانية ضمن إجراءات منح التمويل، مما يغير آليات إدارة المخاطر والبنية التحتية للامتثال."
   },
   "الزراعه : انتاج 79 الف طن تقاوي معتمده لدعم المساحات خلال موسم 2025 – 2026": {
     "meaning": "The supply of 79,000 tonnes of certified seeds establishes the domestic volume of agricultural inputs allocated for the 2025–2026 planting season, directly providing the primary raw material base for targeted crop acreage.",
@@ -2726,6 +2738,10 @@
   "الفيدرالي الامريكي يقترب من رفع الفايده": {
     "meaning": "An increase in the US Federal Reserve's policy rate widens the yield differential between dollar assets and emerging market instruments, altering cross-border capital flows and the cost of foreign-currency debt service.",
     "meaning_ar": "يؤدي رفع سعر الفائدة من قِبل الاحتياطي الفيدرالي الأمريكي إلى توسيع فارق العائد بين الأصول المقومة بالدولار وأدوات الأسواق الناشئة، مما يغير حركة تدفقات رؤوس الأموال عبر الحدود وتكلفة خدمة الديون بالعملات الأجنبية."
+  },
+  "القابضه الغذاييه: مشروع كاري اون ليس تغييرا للهويه البصريه وانما تطوير لمنظومه منافذ البيع": {
+    "meaning": "The project represents a capital expenditure allocation toward retail infrastructure and store logistics, focusing on operational point-of-sale upgrades rather than marketing expenditures on branding.",
+    "meaning_ar": "يمثل المشروع توجيهاً للإنفاق الاستثماري نحو البنية التحتية لمنافذ التجزئة ولوجستيات سلاسل الإمداد، عبر التركيز على تطوير كفاءة نقاط البيع تشغيلياً بدلاً من حصر المخصصات في الهوية التسويقية."
   },
   "القاهره الوطنيه للاستثمار: انتاد تخفض حصتها في الشركه الي 11.8%": {
     "meaning": "This transaction alters the company's equity ownership structure and voting power distribution, reflecting a partial divestment that shifts the concentration of ownership among major shareholders.",
@@ -3350,6 +3366,10 @@
   "بنك اليابان يتجه لرفع الفايده الي 1.25% لتفادي صدمه الاسواق": {
     "meaning": "Central bank interest rate hikes increase local borrowing costs and narrow yield differentials against foreign currencies, directly altering cross-border carry trade financing and capital flows.",
     "meaning_ar": "يؤدي رفع أسعار الفائدة من قِبل البنك المركزي إلى زيادة تكلفة الاقتراض بالعملة المحلية وتقليص فوارق العوائد مع العملات الأجنبية، مما يغير آليات تمويل تجارة الفائدة والتدفقات الرأسمالية عبر الحدود."
+  },
+  "بنك انجلترا يعتزم وقف بيع السندات طويله الاجل وسط اضطراب الاسواق": {
+    "meaning": "Suspending the sale of long-term government bonds halts the addition of sovereign debt supply to the secondary market and adjusts the central bank's quantitative tightening operations.",
+    "meaning_ar": "يؤدي تعليق بيع السندات الحكومية طويلة الأجل إلى وقف ضخ معروض إضافي من أدوات الدين السيادية في السوق الثانوية وتعديل وتيرة عمليات التشديد الكمي للبنك المركزي."
   },
   "بنك انجلترا يعتزم وقف مبيعات السندات طويله الاجل": {
     "meaning": "This operational adjustment in the central bank's quantitative tightening framework halts the active market supply of long-maturity government gilts, confining balance sheet reduction to shorter-duration instruments.",
@@ -5249,6 +5269,10 @@
     "meaning": "This cross-border arrangement provides Oman with a direct equity interest in the asset structure and operational portfolio of a Chinese innovation and technology vehicle.",
     "meaning_ar": "يمنح هذا الترتيب الاستثماري المشترك سلطنة عُمان حصة ملكية مباشرة بنسبة 25% في محفظة الأصول والعمليات التشغيلية الخاصة بصندوق تكنولوجيا وابتكار صيني."
   },
+  "عمر الشنيطي: التوترات التجاريه والفايده والتطورات الجيوسياسيه ابرز المتغيرات الموثره في حركه الاموال": {
+    "meaning": "Cross-border capital flows and asset allocation strategies actively adjust in response to central bank interest rate differentials, global trade tariff barriers, and regional geopolitical risk premiums.",
+    "meaning_ar": "تتحدد مسارات تدفقات رؤوس الأموال وإعادة توزيع الأصول المالية بناءً على فروق أسعار الفائدة بين البنوك المركزية، والسياسات الجمركية المقيدة للتجارة، ومستويات المخاطر الجيوسياسية."
+  },
   "عمرو البطريق: منطقه السخنه الصناعيه وجهه جاذبه للاستثمارات المتنوعه": {
     "meaning": "Industrial zones such as Sokhna operate under special economic frameworks that provide integrated logistics, port infrastructure, and regulatory facilities to industrial tenants.",
     "meaning_ar": "تعمل المناطق الصناعية مثل السخنة وفق أطر اقتصادية خاصة توفر بنية تحتية لوجستية وموانئ وتسهيلات تنظيمية للشركات الصناعية المتواجدة بها."
@@ -5712,6 +5736,10 @@
   "محمود محيي الدين: مصر تحتاج خلال اسابيع الي برنامج اقتصادي جديد يتجاوز اداره الموشرات الماليه والنقديه": {
     "meaning": "The statement points to structural policy shifts that prioritize real-economy drivers, such as industrial output, trade flows, and regulatory environments, rather than limiting interventions to central bank rate adjustments and fiscal deficit management.",
     "meaning_ar": "يشير التصريح إلى التحول نحو إجراءات هيكلية تركز على محركات الاقتصاد الحقيقي كالتصنيع والتجارة وتطوير البيئة التنظيمية، بدلاً من حصر السياسات في إدارة أسعار الفائدة النقدية ومعدلات عجز الموازنة."
+  },
+  "محمود معتز يكتب: من «100 مليون شجره» الي «الشجره المناسبه».. كيف نخضر القاهره؟": {
+    "meaning": "Urban greening policies shift municipal procurement criteria toward specific botanical varieties, adjusting resource allocation for irrigation infrastructure and maintenance contracts across public landscaping projects.",
+    "meaning_ar": "يُحوّل توجيه سياسات التشجير الحضري معايير المشتريات البلدية نحو أصناف نباتية محددة، مما يغير تخصيص الموارد لبنية الري التحتية وعقود الصيانة في مشروعات التنسيق العام."
   },
   "محيي الدين: مصر تحتاج خلال اسابيع برنامجا اقتصاديا جديدا يتجاوز اداره الموشرات الماليه والنقديه": {
     "meaning": "The proposal refers to expanding economic policy beyond monetary and fiscal metrics, such as interest rates and budget deficits, to target real-sector structural shifts, including industrial capacity, regulatory conditions, and export infrastructure.",
