@@ -11,10 +11,11 @@ it: a track record of forecasters. It is public, like everything under
 `research/`, because a record a stranger cannot fetch is not a record anybody
 can check. Home's hero card is drawn from it signed-out and signed-in alike.
 
-`lab/scenarios.json` and `lab/rerank/<reading>.json` are statements about
-SECURITIES: every model's predicted return for every named company, and every
-re-rank reading's score for every named company, published the night they are
-made. They are NOT under `research/`. The worker opens `research/` to anybody
+`lab/scenarios.json`, `lab/picks.json` and `lab/rerank/<reading>.json` are
+statements about SECURITIES: every model's predicted return for every named
+company, the five companies each model and each reading put highest night by
+night with what those five then did, and every re-rank reading's score for
+every named company. They are NOT under `research/`. The worker opens `research/` to anybody
 and gates everything else under `/data/v1/` behind a session — and for one
 evening in September this file wrote the per-company document into
 `research/`, where it was served to anybody who asked. The path is the gate,
@@ -63,6 +64,7 @@ TOP5 = RESEARCH / "top5.json"
 # Behind the session gate: see the module docstring for why the path matters.
 LAB = REPO / "public" / "data" / "v1" / "lab"
 SCENARIOS = LAB / "scenarios.json"
+PICKS = LAB / "picks.json"
 READINGS = LAB / "rerank"
 # Where the per-company document must never be written again.
 LEGACY_SCENARIOS = RESEARCH / "scenarios.json"
@@ -79,6 +81,11 @@ MINIMUM_SESSIONS = 5
 
 # How far back the workbench draws what actually happened before the basis.
 PATH_SESSIONS = 20
+
+# How many nights of each model's five the workbench lists, newest first. The
+# averages in `top5.json` still cover every night; this bounds the list of
+# names, and the file says how many older nights it left out.
+PICK_NIGHTS = 20
 
 # The models a reader meets on Home, in the order the record keeps them. The
 # screen may sort by the record; the file does not.
@@ -125,13 +132,14 @@ def ranked(block: dict, horizon: int) -> list[tuple[float, str]]:
     return out
 
 
-def top_slice(block: dict, basis: str, horizon: int, panel: dict,
-              n: int = TOP) -> dict | None:
-    """What this model's `n` highest-ranked companies actually did.
+def followed(block: dict, basis: str, horizon: int, panel: dict,
+             n: int = TOP) -> tuple[list, dict, list] | None:
+    """(its order, what every company did, the `n` it is scored on).
 
-    Beside what everything it scored did, because the difference is the only
-    part that means anything: a month when the whole market rose four per cent
-    is not a month in which picking five names was clever.
+    The `n` are its highest-ranked companies that actually traded to the
+    horizon: a share with no close that many sessions later has no return, so
+    the next one down takes its place. The record and the workbench's list of
+    names both come from here, so they cannot follow different companies.
     """
     order = ranked(block, horizon)
     if len(order) < n:
@@ -148,7 +156,27 @@ def top_slice(block: dict, basis: str, horizon: int, panel: dict,
     chosen = [t for _, t in order if t in realised][:n]
     if len(chosen) < n:
         return None
+    return order, realised, chosen
 
+
+def top_slice(block: dict, basis: str, horizon: int, panel: dict,
+              n: int = TOP) -> dict | None:
+    """What this model's `n` highest-ranked companies actually did.
+
+    Beside what everything it scored did, because the difference is the only
+    part that means anything: a month when the whole market rose four per cent
+    is not a month in which picking five names was clever.
+    """
+    got = followed(block, basis, horizon, panel, n)
+    if got is None:
+        return None
+    _, realised, chosen = got
+    return outcome(realised, chosen, n)
+
+
+def outcome(realised: dict[str, float], chosen: list[str], n: int = TOP) -> dict:
+    """The five's mean beside the mean of everything scored — one arithmetic
+    for the public record and for the gated list of names."""
     theirs = statistics.mean(realised[t] for t in chosen)
     market = statistics.mean(realised.values())
     return {
@@ -242,6 +270,122 @@ def summarise(rows: list[dict]) -> dict:
         out["sd"] = round(spread, 4)
         out["t"] = round(out["meanAdvantage"] / error, 3) if error else None
     return out
+
+
+# ── each night's five, by name (behind the gate) ─────────────────────────────
+
+def says(name: str) -> dict:
+    """What a model's number is, so the screen can put it in words.
+
+    A forecaster's number is a return it expects. A momentum or reversal
+    baseline's is a change that has ALREADY happened, which it ranks by —
+    reversal with the sign turned over. A reading's is a score out of 100.
+    Printing all three as "expects +4%" would put a forecast in the mouth of a
+    subtraction.
+    """
+    if rr.is_reading(name):
+        return {"kind": "score", "outOf": 100}
+    match = re.fullmatch(r"(momentum|reversal)(\d+)", name)
+    if match:
+        return {"kind": match.group(1), "sessions": int(match.group(2))}
+    return {"kind": "return"}
+
+
+def tied(order: list[tuple[float, str]], n: int = TOP) -> int:
+    """How many companies below the fifth share the fifth's number.
+
+    The record breaks that tie by ticker. A reader told "these five" should
+    also be told when fifth place was a draw the alphabet settled.
+    """
+    if len(order) <= n:
+        return 0
+    edge = order[n - 1][0]
+    return sum(1 for value, _ in order[n:] if value == edge)
+
+
+def night_of(block: dict, document: dict, horizon: int, panel: dict,
+             sessions: list[str], n: int = TOP) -> dict | None:
+    """One model's five on one night at one horizon, and where they stand.
+
+      waiting     the horizon has not closed: the five are named, and nobody
+                  knows yet how they do;
+      scored      it has closed: the five the record averaged, each with what
+                  it returned, beside every company the model scored;
+      withheld    its answer existed when the forecast was written, so it is
+                  not evidence, and its names are not listed as if it were;
+      unscorable  it closed, but too few companies traded to score it.
+
+    None when the model ranked fewer than `n` companies at this horizon, or
+    ranked every company alike — its "five" would be the alphabet's.
+    """
+    basis = document["basisSession"]
+    order = ranked(block, horizon)
+    if len(order) < n or not distinguishes(block):
+        return None
+    after = sum(1 for d in sessions if d > basis)
+    night: dict = {"basisSession": basis, "sessionsClosed": min(after, horizon)}
+    if document.get("reconstructed"):
+        night["reconstructed"] = True
+    written = block.get("ranAt") or document.get("ranAt")
+    if ev.outcome_already_known(sessions, basis, horizon, written):
+        night["status"] = "withheld"
+        return night
+
+    said = {ticker: value for value, ticker in order}
+    got = followed(block, basis, horizon, panel, n) if after >= horizon else None
+    if got is None:
+        night["status"] = "waiting" if after < horizon else "unscorable"
+        night["picks"] = [{"ticker": t, "said": round(v, 4)} for v, t in order[:n]]
+        night["tied"] = tied(order, n)
+        return night
+
+    _, realised, chosen = got
+    tickers = [t for _, t in order]
+    last = tickers.index(chosen[-1])
+    night.update(outcome(realised, chosen, n))
+    night["status"] = "scored"
+    night["picks"] = [{"ticker": t, "said": round(said[t], 4),
+                       "returned": round(realised[t], 4)} for t in chosen]
+    # Ranked above the last of the five but never closed again inside the
+    # horizon: named, so the night's five and the five scored reconcile.
+    night["skipped"] = [t for t in tickers[:last] if t not in realised]
+    night["tied"] = tied([(v, t) for v, t in order if t in realised], n)
+    return night
+
+
+def picks(nights: list[dict], panel: dict, sessions: list[str],
+          names: list[str]) -> dict:
+    """Every named model's five, night by night, newest first."""
+    table: dict = {}
+    for name in names:
+        horizons = {}
+        for horizon in fc.HORIZONS:
+            listed = []
+            for night in reversed(nights):
+                block = (night["document"].get("models") or {}).get(name)
+                one = block and night_of(block, night["document"], horizon, panel, sessions)
+                if one:
+                    listed.append(one)
+            horizons[str(horizon)] = {"nights": listed[:PICK_NIGHTS],
+                                      "older": max(0, len(listed) - PICK_NIGHTS)}
+        if not any(h["nights"] for h in horizons.values()):
+            continue
+        english, arabic, group = label(name)
+        entry = {"label": english, "labelAr": arabic, "group": group,
+                 "says": says(name), "horizons": horizons}
+        if rr.is_reading(name):
+            # What the reading said about its own night — how many were worth
+            # anything and why — once per night rather than once per horizon.
+            entry["layers"] = list(rr.layers_of(name))
+            entry["default"] = name == rr.NAME
+            entry["notes"] = {}
+            for night in nights:
+                block = (night["document"].get("models") or {}).get(name)
+                if block and block.get("answered"):
+                    entry["notes"][night["basis"]] = {"count": block.get("count"),
+                                                      "note": block.get("note")}
+        table[name] = entry
+    return table
 
 
 # ── what the models say now (behind the gate) ────────────────────────────────
@@ -553,6 +697,27 @@ def main(argv=None) -> int:
     ev._no_companies(top5, {t for n in nights for t in (n["document"].get("universe") or [])})
     print("   top5 names none of the securities in the universe")
 
+    # The same fives by name, behind the gate: what each model put highest
+    # tonight, and what its earlier fives went on to do.
+    reading_picks = picks(nights, panel, sessions, reading_names)
+    named = {
+        "schemaVersion": 1, "builtAt": built, "topCount": TOP,
+        "minimumSessions": MINIMUM_SESSIONS,
+        "horizons": list(fc.HORIZONS),
+        "latestSession": sessions[-1],
+        "what": f"Night by night, newest first, the {TOP} companies each model "
+                "and each re-rank reading put highest, and — once the horizon "
+                "has closed — what each of them returned beside every company "
+                "the model scored. The same fives research/top5.json averages.",
+        "warning": "Model output about named companies, published as an "
+                   "experiment whether it turns out right or wrong. Not advice.",
+        "models": picks(nights, panel, sessions, [n for n in ORDER if not rr.is_reading(n)]),
+        "readings": {rr.key_of(rr.layers_of(name)): entry
+                     for name, entry in reading_picks.items()},
+    }
+    print(f"   picks: {len(named['models'])} models and {len(named['readings'])} "
+          f"readings, newest session {named['latestSession']}")
+
     scenes, reading_files = None, {}
     if latest:
         drawn = scenarios(latest, panel, sessions)
@@ -618,6 +783,11 @@ def main(argv=None) -> int:
               f"({SCENARIOS.stat().st_size // 1024} KB)")
     elif scenes:
         print(f"   {SCENARIOS.name} unchanged")
+
+    if ev.write_unless_unchanged(PICKS, named):
+        print(f"   wrote {PICKS.relative_to(REPO)} ({PICKS.stat().st_size // 1024} KB)")
+    else:
+        print(f"   {PICKS.name} unchanged")
 
     written = 0
     if reading_files:

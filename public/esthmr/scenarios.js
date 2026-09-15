@@ -1,29 +1,33 @@
-/* The scenario workbench: ask the models a question, see what they said.
+/* The scenario workbench: what each model picked, and what its picks did.
  *
  * WHAT IS ON IT
- * Saved model output, and nothing generated on the screen. Every forecaster's
- * estimate for every company was sealed after the close; every re-rank
- * reading — Gemini reading those forecasts with a chosen combination of
- * filings, news, the rule book and measurements — was asked and sealed the
- * same night. Switching the evidence on or off selects a DIFFERENT sealed
- * reading, fetched when the question is run; it does not re-draw one answer.
+ * Saved model output, and nothing generated on the screen. Every night after
+ * the close each model — and each re-rank reading, Gemini reading those
+ * forecasts with a chosen combination of filings, news, the rule book and
+ * measurements — puts five companies highest. The screen shows two things and
+ * never lets them run together:
+ *
+ *   NEXT      the newest five, waiting on sessions that have not happened;
+ *   SO FAR    the earlier fives, each beside what it went on to return.
+ *
+ * Both come from `lab/picks.json`, built by the code that builds the public
+ * record, so the five named here are the five the record averages. Switching
+ * the evidence on or off selects a DIFFERENT sealed reading; it does not
+ * re-draw one answer.
  *
  * WHAT IT MUST NOT BECOME
- * Lists of companies are alphabetical, always. The warning comes before any
- * figure is built, per reader. Loading is shown only while a document is
- * actually on its way: there is no timer on this screen, because a progress
- * bar over data already in memory is theatre.
+ * Lists of companies are alphabetical, always — the five included: the record
+ * weighs them equally, and a numbered five would be a ranking this publisher
+ * made. The warning comes before any figure is built, per reader. Loading is
+ * shown only while a document is actually on its way: there is no timer on
+ * this screen, because a progress bar over data already in memory is theatre.
  *
  * Disclosure and gating are safeguards, not a determination of legality.
  */
 import { React as R } from './react-shim.js';
-import * as RB from './rulebook.js';
-import { asRulebook } from './ask.js';
+import { finite, day, shortDay, cairoTime, nextRun, summaryOf } from './ai-visuals.js';
 import {
-  finite, percent, points, day, shortDay, cairoTime, nextRun, summaryOf,
-} from './ai-visuals.js';
-import {
-  companyPicker, savedRulePicker, returnsResults, rerankResults,
+  nextCard, recordCard, returnsCards, rerankCards, companiesCard,
 } from './scenario-visuals.js';
 
 const h = R.createElement;
@@ -77,29 +81,23 @@ export function warningDialog(component, data, ar, { onAccept, onClose, closeLab
       'نشغّل نماذج ذكاء اصطناعي على بيانات البورصة المصرية العامة وننشر ما تُخرجه، حتى حين تخطئ. لا شيء هنا توصية بشراء أو بيع أو الاحتفاظ بأي ورقة مالية.')),
     h('ul', { class: 'sc-gate-list' }, warningLines(data.top5, ar, data.scenarios).map((line, i) => h('li', { key: i }, line))),
     h('p', null, t('Anything you do with this is your own decision and your own risk.', 'أي قرار تتخذه بناءً على هذا قرارك وعلى مسؤوليتك.')),
-    h('div', { class: 'aix-dialog-actions q-actions' },
-      h('button', { type: 'button', class: 'aix-cta q-save', autofocus: true,
+    h('div', { class: 'aix-dialog-actions' },
+      h('button', { type: 'button', class: 'aix-cta', autofocus: true,
         onClick: () => {
           accept(reader);
           component.setState({ scAccepted: Date.now(), scAcceptedReader: reader, scWarning: false });
           if (onAccept) onAccept();
         } }, t('I understand — show me the models', 'فهمت — اعرض النماذج')),
-      h('button', { type: 'button', class: 'aix-quiet q-cancel', onClick: close },
+      h('button', { type: 'button', class: 'aix-quiet', onClick: close },
         closeLabel || t('Take me back', 'عُد بي')))));
   // Native modality supplies focus containment and Escape on touch/desktop.
   queueMicrotask(() => { if (dialog.isConnected && !dialog.open && typeof dialog.showModal === 'function') dialog.showModal(); });
   return dialog;
 }
 
-/* ── the question ───────────────────────────────────────────────────────── */
+/* ── what the reader chooses ────────────────────────────────────────────── */
 
-export const SUBJECT = [
-  { id: 'market', en: 'The whole market', ar: 'السوق كله' },
-  { id: 'picked', en: 'Companies I pick', ar: 'شركات أختارها' },
-  { id: 'rule', en: 'Companies that pass a screen', ar: 'شركات تجتاز سؤالاً' },
-];
-
-const LAYER_TEXT = {
+export const LAYER_TEXT = {
   filings: { en: 'Latest filings', ar: 'أحدث الإفصاحات', of: { en: 'filings', ar: 'الإفصاحات' } },
   news: { en: 'News flow', ar: 'تدفق الأخبار', of: { en: 'the news', ar: 'الأخبار' } },
   rulebook: { en: 'The rule book', ar: 'دليل التقييم', of: { en: 'the rule book', ar: 'دليل التقييم' } },
@@ -114,6 +112,119 @@ export function readingKey(layers, order) {
   return ordered.length ? ordered.join('-') : 'models';
 }
 
+/** What a model's number is, from its name, where no document says — the
+ *  rule `publish.says` writes into the picks file. */
+export function saysOf(id) {
+  if (id === 'rerank' || /^rerank:/.test(String(id))) return { kind: 'score', outOf: 100 };
+  const m = /^(momentum|reversal)(\d+)$/.exec(String(id));
+  return m ? { kind: m[1], sessions: Number(m[2]) } : { kind: 'return' };
+}
+
+/** The models a reader can choose, in the record's order: the re-rank first
+ *  when there are readings, then every model with a five of its own. A model
+ *  that says the same about every company has no five, and is not offered. */
+export function choosableModels(picks, scenarios, top5) {
+  const out = [];
+  const readings = Object.values((picks && picks.readings) || {});
+  const answered = Object.values(scenarios?.rerank?.readings || {}).some((r) => r && r.answered);
+  if (readings.length || answered) {
+    const named = readings.find((r) => r && r.default) || top5?.models?.rerank || {};
+    out.push({ id: 'rerank', label: named.label || 'Gemini re-rank',
+      labelAr: named.labelAr || named.label || 'إعادة ترتيب Gemini', group: 'rerank', says: saysOf('rerank') });
+  }
+  const seen = new Set(out.map((m) => m.id));
+  const add = (id, m, says) => {
+    if (seen.has(id)) return;
+    seen.add(id);
+    out.push({ id, label: m.label || id, labelAr: m.labelAr || m.label || id, group: m.group || 'baseline', says });
+  };
+  for (const [id, m] of Object.entries((picks && picks.models) || {})) add(id, m, m.says || saysOf(id));
+  for (const [id, m] of Object.entries((scenarios && scenarios.models) || {})) {
+    if (m && m.distinguishes !== false) add(id, m, saysOf(id));
+  }
+  return out;
+}
+
+/** The layers in the order readings are filed under. */
+function layerOrder(picks, scenarios) {
+  if (scenarios?.rerank?.layers?.length) return scenarios.rerank.layers;
+  return Object.values(picks?.readings || {}).map((r) => r.layers || [])
+    .reduce((longest, layers) => (layers.length > longest.length ? layers : longest), []);
+}
+
+/** What the controls currently choose. There is nothing to "run": every
+ *  choice is a published document, and the screen follows the controls. */
+export function choiceOf(state, picks, scenarios, top5) {
+  const models = choosableModels(picks, scenarios, top5);
+  const ids = models.map((m) => m.id);
+  const model = ids.includes(state.scModel) ? state.scModel : (ids[0] || null);
+  const horizons = ((picks && picks.horizons) || (scenarios && scenarios.horizons) || [1, 5, 20]).map(Number);
+  const horizon = horizons.includes(Number(state.scHorizon)) ? Number(state.scHorizon)
+    : (horizons.includes(5) ? 5 : horizons[0]);
+  const order = layerOrder(picks, scenarios);
+  const standard = scenarios?.rerank?.default
+    || Object.values(picks?.readings || {}).find((r) => r && r.default)?.layers || [];
+  const layers = Array.isArray(state.scLayers)
+    ? order.filter((l) => state.scLayers.includes(l))
+    : order.filter((l) => standard.includes(l));
+  return { model, horizon, horizons, layers, order, models, meta: models.find((m) => m.id === model) || null };
+}
+
+/* ── the fives ──────────────────────────────────────────────────────────── */
+
+/** The chosen model's (or reading's) entry in the picks file. */
+export function entryOf(picks, choice) {
+  if (!picks || !choice.model) return null;
+  if (choice.model === 'rerank') return picks.readings?.[readingKey(choice.layers, choice.order)] || null;
+  return picks.models?.[choice.model] || null;
+}
+
+/** The newest five if it is still waiting on sessions that have not
+ *  happened, and every night before it, newest first. */
+export function nightsOf(entry, horizon) {
+  const held = entry?.horizons?.[String(horizon)] || null;
+  const nights = (held && held.nights) || [];
+  const newest = nights[0] || null;
+  const next = newest && newest.status === 'waiting' ? newest : null;
+  return { newest, next, earlier: next ? nights.slice(1) : nights, older: (held && held.older) || 0, listed: nights.length };
+}
+
+const mean = (values) => values.reduce((s, v) => s + v, 0) / values.length;
+
+/** The record at this horizon: how many nights were scored, how many were
+ *  ahead, and — only past the record's own minimum — the averages.
+ *
+ *  From the list itself when the list is complete, so the nights on screen
+ *  and the averages above them are one set; from the public record when older
+ *  nights have been left off the list. */
+export function recordOf(entry, horizon, source, minimumSessions) {
+  const minimum = finite(minimumSessions) ? minimumSessions : 1;
+  const held = entry?.horizons?.[String(horizon)];
+  let sessions = 0, ahead = 0, meanReturn = null, meanMarket = null, meanAdvantage = null;
+  if (held && !(held.older > 0)) {
+    const scored = (held.nights || []).filter((n) => n.status === 'scored'
+      && finite(n.chosenReturn) && finite(n.marketReturn) && finite(n.advantage));
+    sessions = scored.length;
+    ahead = scored.filter((n) => n.advantage > 0).length;
+    if (sessions) {
+      meanReturn = mean(scored.map((n) => n.chosenReturn));
+      meanMarket = mean(scored.map((n) => n.marketReturn));
+      meanAdvantage = mean(scored.map((n) => n.advantage));
+    }
+  } else {
+    const one = source?.horizons?.[String(horizon)] || {};
+    sessions = finite(one.sessions) ? one.sessions : 0;
+    ahead = finite(one.ahead) ? one.ahead : 0;
+    meanReturn = finite(one.meanReturn) ? one.meanReturn : null;
+    meanMarket = finite(one.meanMarket) ? one.meanMarket : null;
+    meanAdvantage = finite(one.meanAdvantage) ? one.meanAdvantage : null;
+  }
+  return { sessions, ahead, minimum, enough: sessions >= minimum && finite(meanAdvantage),
+    meanReturn, meanMarket, meanAdvantage };
+}
+
+/* ── every company behind the five ──────────────────────────────────────── */
+
 /** Models that published a return for companies. */
 export function returnModels(scenarios) {
   return Object.entries((scenarios && scenarios.models) || {})
@@ -122,57 +233,17 @@ export function returnModels(scenarios) {
       group: m.group, distinguishes: m.distinguishes !== false }));
 }
 
-/** What the MODEL chips offer: the re-rank when there are readings, and every
- *  forecaster that published a return and tells companies apart. A ranking
- *  rule has no return to draw, and a model that says the same thing about
- *  every company has no scenario. */
-export function drawableModels(scenarios) {
-  const out = [];
-  const readings = scenarios && scenarios.rerank && scenarios.rerank.readings;
-  if (readings && Object.values(readings).some((r) => r && r.answered)) {
-    out.push({ id: 'rerank', label: 'Gemini re-rank', labelAr: 'إعادة ترتيب Gemini', group: 'rerank' });
+/** What the chosen model said about one company at this horizon: its ranking
+ *  number where it ranks without a return, as the evaluation sorts it. */
+export function saidOf(scenarios, reading, choice, ticker) {
+  if (choice.model === 'rerank') {
+    const score = reading?.scores?.[ticker];
+    return finite(score) ? score : null;
   }
-  return out.concat(returnModels(scenarios).filter((m) => m.distinguishes));
-}
-
-/** Which companies the reader is asking about, and why that set. */
-export function universeFor(state, scenarios, measures) {
-  const all = Object.keys((scenarios && scenarios.companies) || {}).sort();
-  if (state.scSubject === 'picked') {
-    const chosen = state.scTickers || [];
-    return { tickers: all.filter((t) => chosen.includes(t)), how: 'picked' };
-  }
-  if (state.scSubject === 'rule' && state.scRule && measures) {
-    const out = RB.run(measures, asRulebook(state.scRule));
-    const matched = new Set(out.results.map((r) => r.ticker));
-    return { tickers: all.filter((t) => matched.has(t)), how: 'rule', result: out };
-  }
-  if (state.scSubject === 'rule') return { tickers: [], how: 'rule' };
-  return { tickers: all, how: 'market' };
-}
-
-/** One model's view of a set of companies: every company, no cut, alphabetical. */
-export function viewFor(tickers, scenarios, model, horizon) {
-  const companies = (scenarios && scenarios.companies) || {};
-  const rows = [];
-  for (const ticker of tickers) {
-    const company = companies[ticker];
-    const entry = company && company.models && company.models[model];
-    const value = entry && entry.returns ? entry.returns[String(horizon)] : undefined;
-    rows.push({ ticker, close: company && company.close,
-      value: finite(value) ? value : null,
-      spread: spreadOf(company, horizon) });
-  }
-  const numbers = rows.map((r) => r.value).filter(finite);
-  const middle = summaryOf(numbers);
-  return {
-    rows,
-    answered: numbers.length,
-    silent: rows.length - numbers.length,
-    median: numbers.length ? middle.median : null,
-    up: middle.up,
-    down: middle.down,
-  };
+  const entry = scenarios?.companies?.[ticker]?.models?.[choice.model];
+  const hz = String(choice.horizon);
+  if (finite(entry?.rankedBy?.[hz])) return entry.rankedBy[hz];
+  return finite(entry?.returns?.[hz]) ? entry.returns[hz] : null;
 }
 
 /** How far apart the models are on one company. */
@@ -185,29 +256,6 @@ export function spreadOf(company, horizon) {
   return { low: Math.min(...values), high: Math.max(...values), models: values.length,
     agree: values.every((v) => v > 0) || values.every((v) => v < 0) };
 }
-
-/** The question as the controls currently ask it. */
-export function draftOf(state, scenarios) {
-  const models = drawableModels(scenarios).map((m) => m.id);
-  const model = models.includes(state.scModel) ? state.scModel : (models[0] || null);
-  const horizons = ((scenarios && scenarios.horizons) || [1, 5, 20]).map(Number);
-  const horizon = horizons.includes(Number(state.scHorizon)) ? Number(state.scHorizon)
-    : (horizons.includes(5) ? 5 : horizons[0]);
-  const order = scenarios?.rerank?.layers || [];
-  const layers = Array.isArray(state.scLayers)
-    ? order.filter((l) => state.scLayers.includes(l))
-    : order.filter((l) => (scenarios?.rerank?.default || []).includes(l));
-  const subject = SUBJECT.some((s) => s.id === state.scSubject) ? state.scSubject : 'market';
-  return {
-    model, horizon, layers, subject,
-    tickers: subject === 'picked' ? [...(state.scTickers || [])].sort() : [],
-    rule: subject === 'rule' ? (state.scRule?.id || null) : null,
-  };
-}
-
-const sameQuestion = (a, b) => JSON.stringify(a) === JSON.stringify(b);
-
-/* ── numbers for the answer ─────────────────────────────────────────────── */
 
 function median(values) {
   return summaryOf(values).median;
@@ -266,7 +314,7 @@ export function returnsView(scenarios, draft, tickers) {
  *  order the evaluation takes a reading's kept companies in. */
 export function positions(scores) {
   const order = Object.keys(scores || {}).filter((t) => finite(scores[t]))
-    .sort((a, b) => (scores[b] - scores[a]) || a.localeCompare(b));
+    .sort((a, b) => (scores[b] - scores[a]) || (a < b ? -1 : a > b ? 1 : 0));
   return Object.fromEntries(order.map((t, i) => [t, i + 1]));
 }
 
@@ -319,7 +367,6 @@ export function rerankView(scenarios, draft, tickers, reading, plainReading) {
     .map((m) => scenarios.companies?.[ticker]?.models?.[m.id]?.returns?.[String(draft.horizon)])
     .filter(finite));
   const plainScores = draft.layers.length ? (plainReading?.scores || {}) : null;
-  const plainPos = plainScores ? positions(plainScores) : null;
   const here = standing(scores);
   const plainStanding = plainScores ? standing(plainScores) : null;
   const consensusScores = Object.fromEntries(Object.keys(scores).map((t) => [t, consensus(t)]));
@@ -337,9 +384,6 @@ export function rerankView(scenarios, draft, tickers, reading, plainReading) {
   const inScope = rows.filter((r) => finite(r.score));
   const from = plainStanding || consensusStanding;
   const pairs = inScope.filter((r) => finite(from[r.ticker])).map((r) => ({ from: from[r.ticker], to: r.standing }));
-  const kept = (p) => count !== null && p <= count;
-  const plainCount = Number.isInteger(plainReading?.count) ? plainReading.count : null;
-  const lowest = inScope.length ? Math.min(...inScope.map((r) => r.score)) : null;
   const threshold = count ? (() => {
     const order = Object.keys(pos).sort((a, b) => pos[a] - pos[b]);
     return order[count - 1] !== undefined ? scores[order[count - 1]] : null;
@@ -352,7 +396,6 @@ export function rerankView(scenarios, draft, tickers, reading, plainReading) {
     note: reading?.note || null,
     count,
     threshold,
-    keptInScope: inScope.filter((r) => kept(r.position)).length,
     rhoForecasters: spearman(inScope.map((r) => [r.score, r.consensus])),
     rhoModels: plainScores ? spearman(inScope.map((r) => [r.score, plainScores[r.ticker]])) : null,
     moved: plainStanding ? inScope.filter((r) => finite(plainStanding[r.ticker])
@@ -363,70 +406,90 @@ export function rerankView(scenarios, draft, tickers, reading, plainReading) {
     // which. On 14 September the default reading gave 180 of 257 companies a
     // score between 2 and 4.
     setAside: inScope.filter((r) => r.score <= 5).length,
-    lowest,
-    keptChanged: plainPos && count !== null && plainCount !== null
-      ? inScope.filter((r) => plainPos[r.ticker] && kept(r.position) !== (plainPos[r.ticker] <= plainCount)).length : 0,
     pairs,
     rows,
   };
 }
 
-/* ── running a question ─────────────────────────────────────────────────── */
-
-function loadReading(component, data, key) {
-  const held = data.readings && data.readings[key];
-  if (held) return Promise.resolve(held);
-  if (typeof component.loadReading === 'function') return component.loadReading(key);
-  return Promise.reject(new Error('this reading is not available'));
-}
+/* ── fetching a reading ─────────────────────────────────────────────────── */
 
 /**
- * Apply the question. The only waiting on this screen is here, and it is the
- * wait for a document: a re-rank reading is fetched the first time a reader
- * asks for that combination of evidence. Every other step is arithmetic over
- * what is already loaded and completes before the browser paints.
+ * The only waiting on this screen: a re-rank reading's own document — its
+ * score for every company — fetched the first time a reader switches to that
+ * combination of evidence. The five and the record are already here, so they
+ * never wait on it.
  */
-export async function runScenario(component, data, draft) {
-  if (component.state.scRunning) return;
-  const order = data.scenarios?.rerank?.layers || [];
-  component.setState({ scRunning: true, scRunStep: 1, scRunError: null, scRunDraft: draft });
-  try {
-    component.setState({ scRunStep: 2 });
-    if (draft.model === 'rerank') {
-      component.setState({ scRunStep: 3 });
-      const keys = [readingKey(draft.layers, order)];
-      if (draft.layers.length) keys.push('models');
-      await Promise.all(keys.map((key) => loadReading(component, data, key)));
+export function ensureReadings(component, data, keys) {
+  if (typeof component.loadReading !== 'function') return;
+  const st = component.state;
+  const missing = keys.filter((key) => !(data.readings && data.readings[key])
+    && !(st.scLoading && st.scLoading[key]) && !(st.scFailed && st.scFailed[key]));
+  if (!missing.length) return;
+  const settle = (key, patch = {}) => {
+    const { [key]: done, ...rest } = component.state.scLoading || {};
+    component.setState({ scLoading: rest, ...patch });
+  };
+  queueMicrotask(() => {
+    component.setState({ scLoading: { ...(component.state.scLoading || {}),
+      ...Object.fromEntries(missing.map((key) => [key, true])) } });
+    for (const key of missing) {
+      Promise.resolve().then(() => component.loadReading(key)).then(
+        () => settle(key),
+        (error) => settle(key, { scFailed: { ...(component.state.scFailed || {}),
+          [key]: (error && error.message) || String(error) } }));
     }
-    component.setState({ scRunning: false, scRunStep: 4, scApplied: draft, scShowAll: false,
-      // The screen the question was asked with, kept with it: changing the
-      // saved question afterwards makes the answer stale, not different.
-      scAppliedRule: draft.subject === 'rule' ? (component.state.scRule || null) : null });
-  } catch (error) {
-    component.setState({ scRunning: false, scRunStep: 0,
-      scRunError: (error && error.message) || String(error) });
-  }
+  });
 }
 
 /* ── the screen ─────────────────────────────────────────────────────────── */
 
-const horizonWords = (n, ar) => (ar
-  ? (n === 1 ? 'الجلسة التالية' : `${n} جلسة`)
-  : (n === 1 ? 'next session' : `${n} sessions`));
+/** "5 جلسات", "20 جلسة": Arabic counts agree with the noun. */
+const sessionsAr = (n) => (n === 1 ? 'جلسة واحدة' : n === 2 ? 'جلستين' : n >= 3 && n <= 10 ? `${n} جلسات` : `${n} جلسة`);
+
+export const horizonWords = (n, ar) => (ar
+  ? (n === 1 ? 'الجلسة التالية' : sessionsAr(n))
+  : (n === 1 ? 'the next session' : `${n} sessions`));
+
+const chipWords = (n, ar) => (ar ? sessionsAr(n) : (n === 1 ? '1 session' : `${n} sessions`));
+
+/** What the chosen model's number is, in a sentence under the chips. */
+function aboutModel(meta, ar) {
+  const t = (en, arabic) => (ar ? arabic : en);
+  const says = meta?.says || { kind: 'return' };
+  const n = says.sessions;
+  if (says.kind === 'score') {
+    return t('Gemini reads the other models’ forecasts, with the evidence switched on below, and scores every company out of 100. Its five are its highest scores.',
+      'يقرأ Gemini توقعات النماذج الأخرى مع الأدلة المفعّلة أدناه، ويعطي كل شركة درجة من 100. اختياراته الخمسة أعلى درجاته.');
+  }
+  if (says.kind === 'momentum') {
+    return t(`Makes no forecast. It ranks companies by how much they rose over the last ${n} sessions; its five rose the most.`,
+      `لا يتوقع شيئاً. يرتّب الشركات حسب ارتفاعها خلال آخر ${sessionsAr(n)}؛ اختياراته الخمسة الأكثر ارتفاعاً.`);
+  }
+  if (says.kind === 'reversal') {
+    return t(n === 1
+      ? 'Makes no forecast. It ranks companies by how much they fell in the last session, on the idea that what fell comes back; its five fell the most.'
+      : `Makes no forecast. It ranks companies by how much they fell over the last ${n} sessions, on the idea that what fell comes back; its five fell the most.`,
+    n === 1
+      ? 'لا يتوقع شيئاً. يرتّب الشركات حسب هبوطها في الجلسة الأخيرة، على فكرة أن ما هبط يعود؛ اختياراته الخمسة الأكثر هبوطاً.'
+      : `لا يتوقع شيئاً. يرتّب الشركات حسب هبوطها خلال آخر ${sessionsAr(n)}، على فكرة أن ما هبط يعود؛ اختياراته الخمسة الأكثر هبوطاً.`);
+  }
+  return t('Forecasts a return for every company. Its five are its highest forecasts.',
+    'يتوقع عائداً لكل شركة. اختياراته الخمسة أعلى توقعاته.');
+}
 
 export function scenariosScreen(component, data, ar) {
   const t = (en, arabic) => (ar ? arabic : en);
   const st = component.state;
   const reader = component._reader || null;
   const scenarios = data.scenarios || null;
+  const picks = data.picks || null;
   const top5 = data.top5 || null;
-  const measures = data.measures || null;
 
   if (!hasAccepted(reader) && !(st.scAccepted && st.scAcceptedReader === reader)) {
     return { screen: h('div', { class: 'home-screen sc-screen aix-bench' }, warningDialog(component, data, ar)) };
   }
 
-  if (!scenarios) {
+  if (!scenarios && !picks) {
     return { screen: h('div', { class: 'home-screen sc-screen aix-bench' },
       h('header', { class: 'aix-bench-head' }, h('h1', null, t('Scenario workbench', 'مختبر السيناريوهات'))),
       h('div', { class: 'sc-loading', role: 'status' },
@@ -435,36 +498,33 @@ export function scenariosScreen(component, data, ar) {
       h('button', { type: 'button', class: 'aix-quiet', onClick: () => component.onRetryData?.() }, t('Retry loading', 'إعادة التحميل'))) };
   }
 
-  const models = drawableModels(scenarios);
-  const draft = draftOf(st, scenarios);
-  const applied = st.scApplied || null;
-  const stale = applied ? !sameQuestion(draft, applied) : false;
-  const order = scenarios.rerank?.layers || [];
-  const readings = scenarios.rerank?.readings || {};
-  const shownDraft = applied || draft;
+  const choice = choiceOf(st, picks, scenarios, top5);
+  const { model, horizon, layers, order } = choice;
+  const rerankOn = model === 'rerank';
+  const key = readingKey(layers, order);
+  const index = scenarios?.rerank?.readings || {};
 
-  // The first visit asks the question the controls start on. A forecaster's
-  // answer is already here and is applied at once; a re-rank reading has to
-  // be fetched, and that fetch is the loading state below — not a pause
-  // added to look busy.
-  if (!applied && !st.scRunning && !st.scRunError && draft.model) {
-    queueMicrotask(() => runScenario(component, data, draft));
-  }
+  // The five and the record are in the picks file. What is fetched is the
+  // reading's own score for every company, for the list behind the five —
+  // and, with evidence switched on, the forecasts-alone reading it is
+  // compared with.
+  if (rerankOn) ensureReadings(component, data, layers.length ? [key, 'models'] : [key]);
 
-  const picked = universeFor({ ...st, scSubject: shownDraft.subject,
-    scTickers: shownDraft.subject === 'picked' ? shownDraft.tickers : st.scTickers,
-    scRule: applied ? st.scAppliedRule : st.scRule }, scenarios, measures);
-  const tickers = picked.tickers;
-  // The figures, built only past the gate above and only for the question
-  // that was actually run.
-  const view = viewFor(tickers, scenarios, shownDraft.model, shownDraft.horizon);
+  const entry = entryOf(picks, choice);
+  const nights = nightsOf(entry, horizon);
+  const source = rerankOn ? top5?.readings?.[key] : top5?.models?.[model];
+  const record = recordOf(entry, horizon, source, picks?.minimumSessions ?? top5?.minimumSessions);
+  const plainEntry = rerankOn && layers.length ? picks?.readings?.models : null;
+  const said = rerankOn && nights.newest ? entry?.notes?.[nights.newest.basisSession] || null : null;
+  const reading = rerankOn ? data.readings?.[key] || null : null;
+  const next = cairoTime(nextRun(scenarios?.schedule?.cron)?.toISOString(), ar);
 
-  const set = (patch) => component.setState({ scRunError: null, ...patch });
-  const chip = (label, on, onClick, key) => h('button', {
-    key, type: 'button', class: on ? 'aix-chip on' : 'aix-chip', 'aria-pressed': String(on), onClick,
+  const set = (patch) => component.setState({ scShowAll: false, scNightsAll: false, ...patch });
+  const chip = (label, on, onClick, id) => h('button', {
+    key: id, type: 'button', class: on ? 'aix-chip on' : 'aix-chip', 'aria-pressed': String(on), onClick,
   }, label);
 
-  const evidence = scenarios.rerank?.evidence || {};
+  const evidence = scenarios?.rerank?.evidence || {};
   const hints = {
     filings: evidence.filings
       ? t(`${evidence.filings.items} filings, ${day(evidence.filings.from, false)} to ${day(evidence.filings.to, false)}`,
@@ -478,141 +538,84 @@ export function scenariosScreen(component, data, ar) {
       ? t(`ratios from filings, ${evidence.measures.companies} companies`, `نسب من الإفصاحات، ${evidence.measures.companies} شركة`)
       : t('ratios from filings', 'نسب من الإفصاحات'),
   };
-
-  const rerankOn = draft.model === 'rerank';
-  const draftKey = readingKey(draft.layers, order);
-  const draftReading = readings[draftKey];
+  const indexed = index[key];
 
   const controls = h('aside', { class: 'aix-controls' },
     h('div', { class: 'aix-group' },
-      h('p', { class: 'aix-step' }, h('b', null, '01'), t('ASK ABOUT', 'اسأل عن')),
-      h('div', { class: 'aix-chips' }, SUBJECT.map((s) => chip(ar ? s.ar : s.en, draft.subject === s.id,
-        () => set({ scSubject: s.id }), s.id))),
-      draft.subject === 'picked' ? companyPicker(component, data, scenarios, ar) : null,
-      draft.subject === 'rule' ? savedRulePicker(component, ar) : null),
+      h('p', { class: 'aix-step' }, h('b', null, '01'), t('MODEL', 'النموذج')),
+      h('div', { class: 'aix-chips' }, choice.models.map((m) => chip(ar ? m.labelAr : m.label, model === m.id,
+        () => set({ scModel: m.id, scFrom: null }), m.id))),
+      choice.meta ? h('p', { class: 'aix-note aix-model-about' }, aboutModel(choice.meta, ar)) : null),
     h('div', { class: 'aix-group' },
-      h('p', { class: 'aix-step' }, h('b', null, '02'), t('MODEL', 'النموذج')),
-      h('div', { class: 'aix-chips' }, models.map((m) => chip(ar ? m.labelAr : m.label, draft.model === m.id,
-        () => set({ scModel: m.id }), m.id)))),
-    h('div', { class: 'aix-group' },
-      h('p', { class: 'aix-step' }, h('b', null, '03'), t('HORIZON', 'المدى')),
-      h('div', { class: 'aix-chips' }, ((scenarios.horizons || []).map(Number)).map((n) => chip(horizonWords(n, ar),
-        draft.horizon === n, () => set({ scHorizon: n }), n)))),
+      h('p', { class: 'aix-step' }, h('b', null, '02'), t('MEASURED OVER', 'مدة القياس')),
+      h('div', { class: 'aix-chips' }, choice.horizons.map((n) => chip(chipWords(n, ar),
+        horizon === n, () => set({ scHorizon: n }), n)))),
     order.length ? h('div', { class: `aix-group aix-layers${rerankOn ? '' : ' is-off'}` },
-      h('p', { class: 'aix-step' }, h('b', null, '04'), t('CONTEXT THE RE-RANK READS', 'السياق الذي تقرؤه إعادة الترتيب')),
+      h('p', { class: 'aix-step' }, h('b', null, '03'), t('WHAT THE RE-RANK READS', 'ما تقرؤه إعادة الترتيب')),
       order.map((layer) => {
-        const on = draft.layers.includes(layer);
+        const on = layers.includes(layer);
         return h('button', {
           key: layer, type: 'button', class: 'aix-toggle', role: 'switch', 'aria-checked': String(on),
           disabled: !rerankOn,
-          onClick: () => set({ scLayers: on ? draft.layers.filter((l) => l !== layer) : [...draft.layers, layer] }),
+          onClick: () => set({ scLayers: on ? layers.filter((l) => l !== layer) : [...layers, layer] }),
         },
         h('span', null, h('strong', null, LAYER_TEXT[layer]?.[ar ? 'ar' : 'en'] || layer), h('small', null, hints[layer])),
         h('i', { class: 'aix-switch', 'aria-hidden': 'true' }, h('b')));
       }),
-      !rerankOn ? h('p', { class: 'aix-note' }, t('Only the re-rank reads context. The forecasters read prices alone, so these switches do not change them.',
-        'إعادة الترتيب وحدها تقرأ السياق. النماذج الأخرى تقرأ الأسعار فقط، فلا تغيّرها هذه المفاتيح.')) : null,
-      rerankOn && draftReading && !draftReading.answered
-        ? h('p', { class: 'aix-note aix-warn' }, t(`This combination did not answer tonight${draftReading.reason ? `: ${draftReading.reason}` : ''}.`,
-          `هذه التركيبة لم تُجب الليلة${draftReading.reason ? `: ${draftReading.reason}` : ''}.`)) : null) : null,
-    h('button', {
-      type: 'button', class: `aix-run${stale && !st.scRunning ? ' is-stale' : ''}`,
-      disabled: !!st.scRunning || !draft.model,
-      onClick: () => runScenario(component, data, draft),
-    }, st.scRunning ? t('Running…', 'جارٍ التشغيل…') : stale ? t('Run this scenario', 'شغّل هذا السيناريو') : t('Run again', 'شغّل مجدداً')));
+      !rerankOn ? h('p', { class: 'aix-note' }, t('Only the re-rank reads these. The other models read prices alone, so the switches do not change them.',
+        'إعادة الترتيب وحدها تقرأ هذه. النماذج الأخرى تقرأ الأسعار فقط، فلا تغيّرها المفاتيح.')) : null,
+      rerankOn && indexed && !indexed.answered
+        ? h('p', { class: 'aix-note aix-warn' }, t(`This combination did not answer that night${indexed.reason ? `: ${indexed.reason}` : ''}.`,
+          `هذه التركيبة لم تُجب تلك الليلة${indexed.reason ? `: ${indexed.reason}` : ''}.`)) : null) : null);
 
-  // ── the answer ──
-  const modelMeta = models.find((m) => m.id === shownDraft.model);
-  const modelName = modelMeta ? (ar ? modelMeta.labelAr : modelMeta.label) : '—';
-  const scopeWords = shownDraft.subject === 'market' ? t('the whole market', 'السوق كله')
-    : shownDraft.subject === 'picked' ? t(`the ${tickers.length} companies you picked`, `الشركات الـ${tickers.length} التي اخترتها`)
-      : t(`the ${tickers.length} companies that pass your screen`, `الشركات الـ${tickers.length} التي تجتاز سؤالك`);
-  const evidenceWords = shownDraft.layers.map((l) => LAYER_TEXT[l]?.of?.[ar ? 'ar' : 'en'] || l);
+  const modelName = choice.meta ? (ar ? choice.meta.labelAr : choice.meta.label) : '—';
+  const evidenceWords = layers.map((l) => LAYER_TEXT[l]?.of?.[ar ? 'ar' : 'en'] || l);
   const words = {
-    model: modelName, scope: scopeWords, horizon: horizonWords(shownDraft.horizon, ar),
+    model: modelName, scope: t('the whole market', 'السوق كله'), horizon: horizonWords(horizon, ar),
     evidence: evidenceWords.length > 1 ? `${evidenceWords.slice(0, -1).join(ar ? '، ' : ', ')}${ar ? ' و' : ' and '}${evidenceWords.at(-1)}` : (evidenceWords[0] || ''),
-    read: shownDraft.layers.length
-      ? t(`This reading read the forecasts with ${evidenceWords.join(', ')}.`, `قرأت هذه القراءة التوقعات مع ${evidenceWords.join('، ')}.`)
-      : t('This reading read the forecasts and nothing else.', 'قرأت هذه القراءة التوقعات فقط.'),
+  };
+  const ctx = {
+    choice, entry, nights, record, said, words, next, indexed,
+    loading: !picks && !!st.extrasLoading,
+    plainNext: plainEntry ? nightsOf(plainEntry, horizon).next : null,
   };
 
-  let results;
-  if (!tickers.length) {
-    results = [h('section', { class: 'aix-card aix-empty-card' },
-      h('h3', null, shownDraft.subject === 'picked' ? t('Pick companies to ask about', 'اختر شركات لتسأل عنها')
-        : shownDraft.subject === 'rule' ? t('No company passes this screen — or none is chosen yet', 'لا شركة تجتاز هذا السؤال، أو لم يُختر سؤال')
-          : t('No companies in tonight’s run', 'لا شركات في تشغيل الليلة')),
-      h('p', null, t('Choose companies or a saved question on the left, then run the scenario.', 'اختر شركات أو سؤالاً محفوظاً، ثم شغّل السيناريو.')))];
-  } else if (shownDraft.model === 'rerank') {
-    const key = readingKey(shownDraft.layers, order);
-    const reading = data.readings?.[key];
-    const plainReading = data.readings?.models;
+  // ── behind the five: every company in the newest run ──
+  const tickers = Object.keys((scenarios && scenarios.companies) || reading?.scores || {}).sort();
+  let behind = [];
+  if (!scenarios) {
+    behind = [];
+  } else if (rerankOn) {
+    const loadingReading = st.scLoading && st.scLoading[key];
+    const failed = st.scFailed && st.scFailed[key];
     if (reading) {
-      results = rerankResults(component, data, rerankView(scenarios, shownDraft, tickers, reading, plainReading), words, ar);
+      const view = rerankView(scenarios, choice, tickers, reading, layers.length ? data.readings?.models : null);
+      behind = [...rerankCards(component, data, view, words, ar), companiesCard(component, data, { ...ctx, view, tickers, reading }, ar)];
     } else {
-      results = [h('section', { class: 'aix-card aix-empty-card' },
-        h('h3', null, t('Reading not loaded', 'القراءة غير محمّلة')),
-        h('p', null, st.scRunError ? t(`It could not be fetched: ${st.scRunError}.`, `تعذر جلبها: ${st.scRunError}.`)
-          : t('Run the scenario to fetch this reading.', 'شغّل السيناريو لجلب هذه القراءة.')))];
+      behind = [h('section', { class: 'aix-card aix-empty-card', role: loadingReading ? 'status' : null },
+        h('h3', null, failed ? t('This reading could not be fetched', 'تعذر جلب هذه القراءة')
+          : t('Loading this reading’s score for every company…', 'جارٍ تحميل درجات هذه القراءة لكل الشركات…')),
+        failed ? h('p', null, failed) : h('div', { class: 'sc-skeleton is-short', 'aria-hidden': 'true' }),
+        failed ? h('button', { type: 'button', class: 'aix-quiet', onClick: () => {
+          const { [key]: gone, ...rest } = st.scFailed || {};
+          component.setState({ scFailed: rest });
+        } }, t('Try again', 'حاول مجدداً')) : null)];
     }
-  } else if (shownDraft.model) {
-    results = returnsResults(component, data, returnsView(scenarios, shownDraft, tickers), words, ar);
-  } else {
-    results = [h('section', { class: 'aix-card aix-empty-card' }, h('h3', null, t('No model answered tonight', 'لم يُجب أي نموذج الليلة')))];
+  } else if (model) {
+    const returns = returnModels(scenarios).some((m) => m.id === model);
+    const view = returns ? returnsView(scenarios, choice, tickers) : null;
+    behind = [...(view ? returnsCards(component, data, view, words, ar) : []),
+      companiesCard(component, data, { ...ctx, view, tickers }, ar)];
   }
 
-  // The record of what is on screen, beside it: the reading's own if it is a
-  // re-rank reading, the model's otherwise.
-  const recordId = shownDraft.model === 'rerank' ? null : shownDraft.model;
-  const record = recordId
-    ? top5?.models?.[recordId]?.horizons?.[String(shownDraft.horizon)]
-    : top5?.readings?.[readingKey(shownDraft.layers, order)]?.horizons?.[String(shownDraft.horizon)];
-  const minimum = finite(top5?.minimumSessions) ? top5.minimumSessions : 1;
-  const recordLine = h('p', { class: 'aix-record' },
-    record && record.sessions >= minimum && finite(record.meanAdvantage)
-      ? t(`Its record at this horizon: its five returned ${percent(record.meanReturn)} against ${percent(record.meanMarket)} for the market, ${points(record.meanAdvantage)}, ahead on ${record.ahead} of ${record.sessions} scored sessions.`,
-        `سجله عند هذا المدى: أعلى خمس لديه ${percent(record.meanReturn)} مقابل ${percent(record.meanMarket)} للسوق، ${points(record.meanAdvantage)}، متقدماً في ${record.ahead} من ${record.sessions} جلسات مُقيَّمة.`)
-      : t(`No record at this horizon yet: ${record?.sessions || 0} of ${minimum} sessions scored. What it says tonight has not been tested.`,
-        `لا سجل عند هذا المدى بعد: ${record?.sessions || 0} من ${minimum} جلسات مُقيَّمة. ما يقوله الليلة لم يُختبر.`));
+  const from = st.scFrom && st.scFrom !== model && top5?.models?.[st.scFrom] && !choice.models.some((m) => m.id === st.scFrom)
+    ? h('p', { class: 'aix-note aix-from' }, t(`${top5.models[st.scFrom].label} has no five of its own to show, so the workbench shows ${modelName}.`,
+      `${top5.models[st.scFrom].labelAr || top5.models[st.scFrom].label} ليس لديه خمس خاصة به، فيعرض المختبر ${modelName}.`)) : null;
 
-  const staleBar = stale && st.scApplied && !st.scRunning
-    ? h('p', { class: 'aix-stale', role: 'status' }, t('You changed the question. Run it to redraw.', 'غيّرت السؤال. شغّله لإعادة الرسم.')) : null;
-
-  const from = st.scFrom && st.scFrom !== shownDraft.model && top5?.models?.[st.scFrom] && !models.some((m) => m.id === st.scFrom)
-    ? h('p', { class: 'aix-note aix-from' }, t(`${top5.models[st.scFrom].label} ranks companies without predicting a return, so it has no scenario to draw. Showing ${modelName}.`,
-      `${top5.models[st.scFrom].labelAr || top5.models[st.scFrom].label} يرتّب الشركات دون توقع عائد، فلا سيناريو له. نعرض ${modelName}.`)) : null;
-
-  // ── the wait, while there is one ──
-  const runDraft = st.scRunDraft || draft;
-  const estimateCount = runDraft.model === 'rerank'
-    ? Object.keys(scenarios.companies || {}).length
-    : tickers.length * Math.max(returnModels(scenarios).length, 1);
-  const runEvidence = runDraft.layers.map((l) => LAYER_TEXT[l]?.of?.[ar ? 'ar' : 'en'] || l);
-  const steps = [
-    t(`reading the close of ${day(scenarios.basisSession, false)}`, `قراءة إغلاق ${day(scenarios.basisSession, true)}`),
-    runDraft.model === 'rerank'
-      ? t(`finding the re-rank’s scores for ${estimateCount} companies`, `إيجاد درجات إعادة الترتيب لـ${estimateCount} شركة`)
-      : t(`pulling ${estimateCount} saved estimates`, `سحب ${estimateCount} تقديراً محفوظاً`),
-    runDraft.model === 'rerank'
-      ? (runEvidence.length ? t(`fetching the reading with ${runEvidence.join(', ')}`, `جلب القراءة مع ${runEvidence.join('، ')}`)
-        : t('fetching the reading of the forecasts alone', 'جلب قراءة التوقعات وحدها'))
-      : t('no evidence to fetch — the forecasters read prices only', 'لا أدلة للجلب — النماذج تقرأ الأسعار فقط'),
-    t(`drawing ${tickers.length} companies`, `رسم ${tickers.length} شركة`),
-  ];
-  const loading = st.scRunning ? h('div', { class: 'aix-loading', role: 'status', 'aria-live': 'polite' },
-    h('div', { class: 'aix-loading-card' },
-      h('strong', null, t('Assembling the scenario', 'تجميع السيناريو')),
-      h('p', null, t('Saved after the close — this is a read, not a new forecast.', 'محفوظ بعد الإغلاق — هذه قراءة، لا توقع جديد.')),
-      h('div', { class: 'aix-loading-track' }, h('b', { style: `width:${Math.min(100, (st.scRunStep || 0) * 25)}%` })),
-      h('ol', null, steps.map((label, i) => {
-        const state = i + 1 < (st.scRunStep || 0) ? 'done' : i + 1 === (st.scRunStep || 0) ? 'now' : '';
-        return h('li', { key: i, class: state }, h('i', { 'aria-hidden': 'true' }), label);
-      })))) : null;
-
-  const rerank = scenarios.rerank;
+  const rerank = scenarios?.rerank;
   const last = rerank ? cairoTime(rerank.ranAt, ar) : null;
-  const next = cairoTime(nextRun(scenarios.schedule?.cron)?.toISOString(), ar);
-  const commitment = scenarios.commitment || {};
+  const commitment = scenarios?.commitment || {};
+  const basis = nights.newest?.basisSession || scenarios?.basisSession;
 
   const screen = h('div', { class: 'home-screen sc-screen aix-bench' },
     h('header', { class: 'aix-bench-head' },
@@ -623,8 +626,8 @@ export function scenariosScreen(component, data, ar) {
           h('h1', null, t('Scenario workbench', 'مختبر السيناريوهات')),
           h('button', { type: 'button', class: 'aix-beta', onClick: () => component.setState({ scWarning: true }) },
             h('i', { 'aria-hidden': 'true' }), t('BETA · READ THIS', 'تجريبي · اقرأ هذا'))),
-        h('p', null, t(`Pick a model and a question. Everything here was computed after the close of ${day(scenarios.basisSession, false)}, as a percentage of that close.`,
-          `اختر نموذجاً وسؤالاً. كل ما هنا حُسب بعد إغلاق ${day(scenarios.basisSession, true)}، كنسبة من ذلك الإغلاق.`))),
+        h('p', null, t(`After every close, each model picks the five companies it puts highest. Choose a model: first its newest five${basis ? `, from the close of ${day(basis, false)}` : ''}, which nobody can score yet — then how its earlier fives actually did.`,
+          `بعد كل إغلاق، يختار كل نموذج الشركات الخمس التي يضعها في المقدمة. اختر نموذجاً: أولاً أحدث خمس${basis ? ` من إغلاق ${day(basis, true)}` : ''}، ولا يمكن تقييمها بعد — ثم كيف أدّت اختياراته السابقة فعلاً.`))),
       h('dl', { class: 'aix-bench-clock' },
         h('dt', null, t('LAST RE-RANK', 'آخر إعادة ترتيب')),
         // The date and the time isolated from each other: an Arabic month
@@ -637,11 +640,12 @@ export function scenariosScreen(component, data, ar) {
     h('div', { class: 'aix-bench-grid' },
       controls,
       h('div', { class: 'aix-results' },
-        from, staleBar,
-        st.scRunError && shownDraft.model !== 'rerank' ? h('p', { class: 'aix-note aix-warn' }, st.scRunError) : null,
-        recordLine,
-        ...results,
-        loading)),
+        from,
+        nextCard(component, data, ctx, ar),
+        recordCard(component, data, ctx, ar),
+        behind.length ? h('h2', { class: 'aix-section' }, t(`Behind the five: every company in the same run, ${horizonWords(horizon, false)} ahead`,
+          `خلف الخمس: كل الشركات في التشغيل نفسه، بعد ${horizonWords(horizon, true)}`)) : null,
+        ...behind)),
     h('footer', { class: 'sc-proof aix-proof' },
       h('details', null,
         h('summary', null, t('About this saved run & its timestamp', 'عن هذا التشغيل المحفوظ وتوثيقه الزمني')),
@@ -658,5 +662,5 @@ export function scenariosScreen(component, data, ar) {
       t('Show the warning again', 'أظهر التحذير مجدداً'))),
     st.scWarning ? warningDialog(component, data, ar, { onClose: () => component.setState({ scWarning: false }), closeLabel: t('Close', 'إغلاق') }) : null);
 
-  return { screen, view };
+  return { screen, choice };
 }

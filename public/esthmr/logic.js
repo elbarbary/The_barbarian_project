@@ -5,7 +5,6 @@ import { marketStory } from './market-story.js';
 import { pairsExplorer } from './pairs.js';
 import { valuationExplorer } from './valuation.js';
 import { flowTrackers } from './flow-trackers.js';
-import { questionsScreen } from './questions.js';
 import { aiCards } from './ai-cards.js';
 import { scenariosScreen } from './scenarios.js';
 
@@ -3937,11 +3936,6 @@ export class Component extends Base {
       // Beside Market, because it answers the same question — what did the
       // exchange do today — for a reader who would rather see it than read it.
       ['heat', ar?'الخريطة':'Heat map', String(heatTiles.length)],
-      // Its own screen rather than a block on Home. A list a reader builds is
-      // not a summary of the day, and it was sitting under the day's summary
-      // being scrolled past — a place to go back to has to be somewhere you
-      // can go.
-      ['questions', ar?'أسئلتي':'My questions', (this._questions || []).length ? String((this._questions || []).length) : ''],
       ['scenarios', ar?'مختبر السيناريوهات':'Scenario workbench', ''],
       ['watchlist', ar?'المتابَعة':'Watchlist', followed.length ? String(followed.length) : ''],
       ['company', ar?'شركة':'Company', st.ticker || ''],
@@ -3980,7 +3974,7 @@ export class Component extends Base {
 
     // Organize by the reader's task, keeping every existing screen reachable.
     const groups = [
-      { id: 'home', label: ar ? 'نظرة عامة' : 'Overview', screens: ['home', 'questions', 'scenarios'] },
+      { id: 'home', label: ar ? 'نظرة عامة' : 'Overview', screens: ['home', 'scenarios'] },
       { id: 'market', label: ar ? 'استكشف' : 'Explore', screens: ['market', 'heat', 'sectors', 'valuation', 'pairs', 'fragility', 'company', 'investors', 'exchange', 'liquidity', 'ownership', 'world'] },
       { id: 'today', label: ar ? 'الأخبار' : 'News', screens: ['today', 'calendar', 'crossings', 'research'] },
       { id: 'watchlist', label: ar ? 'متابعتي' : 'Watchlist', screens: ['watchlist'] },
@@ -4597,11 +4591,6 @@ export class Component extends Base {
       aiCards: aiCards(this, D, ar),
       isScenarios: st.screen === 'scenarios',
       scenariosView: st.screen === 'scenarios' ? scenariosScreen(this, D, ar).screen : null,
-      // The reader's saved questions, their own screen. Reachable from Home's
-      // ask block and from the overview's secondary nav; kept inside the
-      // Overview group so the bottom bar stays at five.
-      isQuestions: st.screen === 'questions',
-      questionsView: st.screen === 'questions' ? questionsScreen(this, D, ar).screen : null,
       isFlowTracker: ['liquidity', 'ownership', 'world'].includes(st.screen),
       isCompany: st.screen === 'company', isSectors: st.screen === 'sectors', isCalendar: st.screen === 'calendar',
       isExchange: st.screen === 'exchange', isResearch: st.screen === 'research',

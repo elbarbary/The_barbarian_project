@@ -105,7 +105,7 @@ function kindLabel(row, latest, ar) {
 }
 
 function open(component, patch) {
-  component.setState({ screen: 'scenarios', aiWarning: false, scApplied: null, scShowAll: false, ...patch });
+  component.setState({ screen: 'scenarios', aiWarning: false, scShowAll: false, scNightsAll: false, scSearch: '', ...patch });
   if (typeof scrollTo === 'function') { try { scrollTo(0, 0); } catch { /* not in a browser */ } }
 }
 
@@ -256,6 +256,6 @@ export function aiCards(component, data, ar) {
     h('footer', { class: 'aix-hero-foot' },
       h('p', null, caveat),
       h('button', { type: 'button', class: 'aix-cta', onClick: () => open(component, { scModel: st.scModel || 'rerank', scHorizon: n }) },
-        t('Ask the models a question', 'اسأل النماذج سؤالاً'), h('span', { 'aria-hidden': 'true', dir: 'ltr' }, ar ? '←' : '→'))),
+        t('See each model’s picks and results', 'اطّلع على اختيارات كل نموذج ونتائجها'), h('span', { 'aria-hidden': 'true', dir: 'ltr' }, ar ? '←' : '→'))),
     warning);
 }

@@ -2226,6 +2226,126 @@ class PublishTest(unittest.TestCase):
         self.assertTrue(files[rr.key_of(rr.DEFAULT)]["default"])
 
 
+class PicksTest(unittest.TestCase):
+    """Each night's five, by name: the same five the record averages."""
+
+    SESSIONS = ["2026-09-01", "2026-09-02", "2026-09-03", "2026-09-06", "2026-09-07",
+                "2026-09-08", "2026-09-09"]
+
+    def market(self, silent=()):
+        """Forty companies over seven sessions; T00 rises most, T39 least.
+        A ticker in `silent` has no bar after the first session."""
+        prices = {}
+        for i in range(40):
+            ticker = f"T{i:02d}"
+            rows = {}
+            for k, date in enumerate(self.SESSIONS):
+                if ticker in silent and k > 0:
+                    continue
+                rows[date] = 100.0 + k * (40 - i) / 10
+            prices[ticker] = rows
+        return panel_of(prices)
+
+    def block(self, ran_at="2026-09-01T13:00:00Z", flat=False):
+        return {"answered": 40, "ranAt": ran_at,
+                "forecasts": [{"ticker": f"T{i:02d}",
+                               "returns": {"1": 0.0 if flat else 40.0 - i,
+                                           "5": 0.0 if flat else 40.0 - i}}
+                              for i in range(40)]}
+
+    def night(self, basis="2026-09-01", **kw):
+        return {"basis": basis, "document": {"basisSession": basis, "ranAt": "2026-09-01T13:00:00Z",
+                                             "models": {"kronos": self.block(**kw)}}}
+
+    def test_the_list_of_names_is_behind_the_gate(self):
+        import publish as pb
+        self.assertNotIn("research", pb.PICKS.parts)
+        self.assertEqual(pb.PICKS.parent, pb.LAB)
+
+    def test_a_scored_night_names_the_five_the_record_averaged(self):
+        import publish as pb
+        panel = self.market()
+        nights = [self.night()]
+        # Exactly five sessions after the basis: the horizon has just closed.
+        sessions = self.SESSIONS[:6]
+        record = pb.backtest(nights, panel, sessions, ["kronos"])
+        listed = pb.picks(nights, panel, sessions, ["kronos"])
+        one = listed["kronos"]["horizons"]["5"]["nights"][0]
+        row = record["kronos"]["horizons"]["5"]["byDate"][0]
+        self.assertEqual(one["status"], "scored")
+        self.assertEqual([p["ticker"] for p in one["picks"]], ["T00", "T01", "T02", "T03", "T04"])
+        for key in ("chosenReturn", "marketReturn", "advantage", "scored"):
+            self.assertEqual(one[key], row[key])
+        mean = sum(p["returned"] for p in one["picks"]) / 5
+        self.assertAlmostEqual(mean, one["chosenReturn"], places=3)
+        self.assertEqual(one["sessionsClosed"], 5)
+
+    def test_a_company_that_did_not_trade_is_replaced_and_named(self):
+        import publish as pb
+        panel = self.market(silent=("T01",))
+        one = pb.picks([self.night()], panel, self.SESSIONS, ["kronos"])["kronos"]["horizons"]["5"]["nights"][0]
+        self.assertEqual([p["ticker"] for p in one["picks"]], ["T00", "T02", "T03", "T04", "T05"])
+        self.assertEqual(one["skipped"], ["T01"])
+
+    def test_a_night_still_running_names_its_five_and_no_result(self):
+        import publish as pb
+        sessions = self.SESSIONS[:3]
+        one = pb.picks([self.night()], self.market(), sessions, ["kronos"])["kronos"]["horizons"]["5"]["nights"][0]
+        self.assertEqual(one["status"], "waiting")
+        self.assertEqual(one["sessionsClosed"], 2)
+        self.assertEqual([p["ticker"] for p in one["picks"]], ["T00", "T01", "T02", "T03", "T04"])
+        self.assertTrue(all("returned" not in p for p in one["picks"]))
+        self.assertNotIn("chosenReturn", one)
+
+    def test_a_night_written_after_its_answer_names_nobody(self):
+        import publish as pb
+        # Written the evening after the session its one-step horizon asks about.
+        late = self.night(ran_at="2026-09-02T18:00:00Z")
+        one = pb.picks([late], self.market(), self.SESSIONS, ["kronos"])["kronos"]["horizons"]["1"]["nights"][0]
+        self.assertEqual(one["status"], "withheld")
+        self.assertNotIn("picks", one)
+
+    def test_a_model_that_ranks_every_company_alike_has_no_five(self):
+        import publish as pb
+        self.assertEqual(pb.picks([self.night(flat=True)], self.market(), self.SESSIONS, ["kronos"]), {})
+
+    def test_a_draw_for_fifth_place_is_counted(self):
+        import publish as pb
+        order = [(9.0, "A"), (8.0, "B"), (7.0, "C"), (6.0, "D"), (5.0, "E"), (5.0, "F"), (5.0, "G"), (1.0, "H")]
+        self.assertEqual(pb.tied(order), 2)
+        self.assertEqual(pb.tied(order[:5]), 0)
+
+    def test_nights_are_newest_first_and_capped_out_loud(self):
+        import publish as pb
+        import unittest.mock as mock
+        nights = [self.night(basis=d) for d in self.SESSIONS[:4]]
+        for night in nights:
+            night["document"]["ranAt"] = f"{night['basis']}T13:00:00Z"
+            night["document"]["models"]["kronos"]["ranAt"] = f"{night['basis']}T13:00:00Z"
+        with mock.patch.object(pb, "PICK_NIGHTS", 3):
+            held = pb.picks(nights, self.market(), self.SESSIONS, ["kronos"])["kronos"]["horizons"]["1"]
+        self.assertEqual([n["basisSession"] for n in held["nights"]], ["2026-09-06", "2026-09-03", "2026-09-02"])
+        self.assertEqual(held["older"], 1)
+
+    def test_what_a_number_is_follows_the_model(self):
+        import publish as pb
+        self.assertEqual(pb.says("kronos"), {"kind": "return"})
+        self.assertEqual(pb.says("momentum20"), {"kind": "momentum", "sessions": 20})
+        self.assertEqual(pb.says("reversal1"), {"kind": "reversal", "sessions": 1})
+        self.assertEqual(pb.says(rr.name_of(("filings",))), {"kind": "score", "outOf": 100})
+
+    def test_a_reading_keeps_its_own_count_and_reason_once_per_night(self):
+        import publish as pb
+        night = self.night()
+        block = dict(self.block(), count=7, note="filings moved it", asked=True)
+        night["document"]["models"][rr.NAME] = block
+        entry = pb.picks([night], self.market(), self.SESSIONS, [rr.NAME])[rr.NAME]
+        self.assertEqual(entry["notes"], {"2026-09-01": {"count": 7, "note": "filings moved it"}})
+        self.assertTrue(entry["default"])
+        self.assertEqual(entry["layers"], list(rr.DEFAULT))
+        self.assertEqual(entry["says"], {"kind": "score", "outOf": 100})
+
+
 class EarlyExitTest(unittest.TestCase):
     """A night already sealed costs the retry schedule seconds, not Kronos."""
 

@@ -575,7 +575,9 @@ function cleanCondition(raw) {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
   const column = typeof raw.column === 'string' ? raw.column.trim() : '';
   if (!COLUMN.test(column)) return null;
-  // `op`, because that is what the engine in public/esthmr/rulebook.js reads.
+  // `op`, because that is what the rule engine read (public/esthmr/rulebook.js,
+  // withdrawn with the questions screen on 15 Sep 2026 — the shelves stay
+  // stored in this shape so bringing the screen back loses nobody's work).
   // This stored `operator`. A rulebook saved through here would have come
   // back with a key the engine does not look at, every condition would have
   // answered "unknown", and every saved question would have matched nothing —

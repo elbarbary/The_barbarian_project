@@ -34,9 +34,6 @@ function boot(overrides = {}) {
   vm.runInNewContext(source, { Component, document, data,
     mount:()=> { mounted=true; component.onChange=()=>{}; },
     watch:{read:()=>[],sync:async()=>[],activate:()=>{}},
-    // The saved questions follow the watchlist's lifecycle and are imported
-    // the same way, so the harness has to supply them the same way.
-    qstore:{read:()=>[],sync:async()=>[],activate:()=>{}},
     readRoute:()=>({}),connectNavigation:()=>()=>{},
     readResponse:async()=>'<main></main>', whoami:()=>identity.promise,
     openSignIn:()=>{},signOut:async()=>{}, location:{search:''},

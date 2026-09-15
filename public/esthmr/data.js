@@ -87,49 +87,6 @@ function stream(seed) {
   return () => (((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296));
 }
 
-/* The demo's measurement table, in the shape the real one publishes.
- *
- * Same columns, same three kinds of absence: a column a company cannot answer
- * is left OUT of the row rather than written as null, exactly as the builder
- * does, so the "could not be judged" count in the demo means what it means on
- * the real table. A demo where everything is measured would teach a reader
- * that the third count is always nought.
- */
-function demoMeasures(companies, rand) {
-  const rows = companies.map((c, i) => {
-    const row = {
-      ticker: c.ticker,
-      sector: c.sector,
-      close: c.close,
-      change_1: c.pct,
-      // A few of the thirty-two find no buyer, which is the state the real
-      // exchange puts forty companies in on an ordinary day.
-      volume: i % 9 === 4 ? 0 : Math.round(1000 + rand() * 900000),
-      relative_volume_20: c.rv,
-      change_5: Math.round((rand() * 14 - 7) * 100) / 100,
-      change_20: Math.round((rand() * 26 - 13) * 100) / 100,
-      market_cap: c.cap,
-      sessions_since_filing: Math.round(rand() * 44),
-    };
-    // Absences on purpose, and of both kinds: some companies have no profit
-    // figure at all, and some have one that is nought.
-    if (i % 4 !== 1) row.net_income_growth = Math.round((rand() * 60 - 25) * 10) / 10;
-    if (i % 5 === 2) row.streak_break = 'first_loss';
-    if (i % 3 === 0) row.results_due_in_days = Math.round(rand() * 90);
-    return row;
-  });
-  return {
-    schemaVersion: 1,
-    market_date: '2026-08-26',
-    is_close: true,
-    demo: true,
-    rows,
-    coverage: Object.fromEntries(
-      [...new Set(rows.flatMap((r) => Object.keys(r)))]
-        .map((name) => [name, rows.filter((r) => r[name] !== undefined).length])),
-  };
-}
-
 /* The workbench's document, in the demo's own invented companies.
  *
  * Signed out, `scenarios.json` is not fetched: it names securities and stays
@@ -204,7 +161,65 @@ function demoScenarios(companies, rand) {
     index[key] = { name: readings[key].name, layers: chosen, default: readings[key].default,
       asked: true, answered: tickers.length, count, reason: null };
   }
+
+  // Every model's five, night by night, in the shape `lab/picks.json` has:
+  // the newest five waiting on sessions that have not happened, earlier ones
+  // scored with invented outcomes, one not counted — so both halves of the
+  // workbench have a shape before anybody signs in. Invented, and DEMO names.
+  const horizons = [1, 5, 20];
+  const basis = dates[dates.length - 1];
+  const saysOf = (id) => {
+    const m = /^(momentum|reversal)(\d+)$/.exec(id);
+    return m ? { kind: m[1], sessions: Number(m[2]) } : { kind: 'return' };
+  };
+  const round = (v, places = 4) => Math.round(v * 10 ** places) / 10 ** places;
+  const fives = (valueOf, says, extra) => {
+    const out = {};
+    for (const hz of horizons) {
+      const order = tickers.map((t) => [valueOf(t, hz), t]).filter(([v]) => Number.isFinite(v))
+        .sort((a, b) => (b[0] - a[0]) || (a[1] < b[1] ? -1 : 1));
+      const nights = order.length < 5 ? [] : [{ basisSession: basis, sessionsClosed: 0, status: 'waiting',
+        picks: order.slice(0, 5).map(([v, t]) => ({ ticker: t, said: v })), tied: 0 }];
+      for (let k = 1; nights.length && k <= 7; k += 1) {
+        const at = dates.length - 1 - k * 2;
+        const after = dates.length - 1 - at;
+        const five = order.slice(k, k + 5).map(([v, t]) => ({ ticker: t, said: v }));
+        if (k === 3) {
+          nights.push({ basisSession: dates[at], sessionsClosed: Math.min(after, hz), status: 'withheld' });
+        } else if (after < hz) {
+          nights.push({ basisSession: dates[at], sessionsClosed: after, status: 'waiting', picks: five, tied: 0 });
+        } else {
+          const returned = five.map(() => round(rand() * 14 - 6, 2));
+          const chosenReturn = round(returned.reduce((s, v) => s + v, 0) / returned.length);
+          const marketReturn = round(rand() * 3 - 1);
+          nights.push({ basisSession: dates[at], sessionsClosed: hz, status: 'scored',
+            picks: five.map((p, i) => ({ ...p, returned: returned[i] })),
+            followed: 5, scored: tickers.length, chosenReturn, marketReturn,
+            advantage: round(chosenReturn - marketReturn), beatTheMarket: chosenReturn > marketReturn,
+            skipped: [], tied: 0 });
+        }
+      }
+      out[hz] = { nights, older: 0 };
+    }
+    return { ...extra, says, horizons: out };
+  };
+  const picks = {
+    schemaVersion: 1, demo: true, topCount: 5, minimumSessions: 5, horizons, latestSession: basis,
+    models: Object.fromEntries(Object.entries(models).filter(([, m]) => m.distinguishes).map(([id, m]) => [id,
+      fives((t, hz) => {
+        const entry = rows[t].models[id];
+        return Number.isFinite(entry?.rankedBy?.[hz]) ? entry.rankedBy[hz] : entry?.returns?.[hz];
+      }, saysOf(id), { label: m.label, labelAr: m.labelAr, group: m.group })])),
+    readings: Object.fromEntries(Object.entries(readings).map(([key, r]) => [key,
+      fives((t) => r.scores[t], { kind: 'score', outOf: 100 }, {
+        label: r.default ? 'Gemini re-rank' : r.name, labelAr: r.default ? 'إعادة ترتيب Gemini' : r.name,
+        group: 'rerank', layers: r.layers, default: r.default,
+        notes: { [basis]: { count: r.count, note: r.note } },
+      })])),
+  };
+
   return {
+    picks,
     scenarios: {
       schemaVersion: 2, demo: true,
       basisSession: '2026-08-26', ranAt: '2026-08-26T14:40:00Z',
@@ -338,16 +353,10 @@ export function demo() {
 
   return {
     demo: true, companies, series, fins, indices, readNow,
-    // The measurement table Home's questions are answered from, in the demo's
-    // own invented companies. Without it a signed-out visitor met a page whose
-    // whole subject is asking the market a question, and no market to ask —
-    // which is the one screen a first-time reader is guaranteed to see.
-    //
-    // Every column a starter question names is here, so every question has a
-    // real answer rather than an empty one. The tickers are DEMO01..DEMO32 and
-    // no figure belongs to a real issuer.
-    measures: demoMeasures(companies, rand),
-    ...(() => { const made = demoScenarios(companies, rand); return { scenarios: made.scenarios, readings: made.readings }; })(),
+    ...(() => {
+      const made = demoScenarios(companies, rand);
+      return { scenarios: made.scenarios, readings: made.readings, picks: made.picks };
+    })(),
     marketDate: '2026-08-26', generatedAt: '2026-08-27 11:48 UTC', dataVersion: 'demo',
     isClose: true, capturedAt: '2026-08-27T11:48:00Z',
     // Two crossings, so the block has a shape before anyone signs in: one
@@ -766,17 +775,6 @@ export async function indices() {
   };
 }
 
-/** The measurement table Home's questions are answered from.
- *
- * 283 companies against 36 purely factual columns, plus the session's own
- * breadth. It is the only document the rule engine reads: a reader's question
- * is evaluated against this, in their browser, and never on a server — which
- * is what keeps the judgment theirs.
- */
-export async function measures() {
-  return doc('measures.json');
-}
-
 /** How much evidence the model arena has, for the one honest sentence Home
  *  says about it. Public: it names no security, and a record a stranger
  *  cannot fetch is not a record anybody can check. */
@@ -800,6 +798,13 @@ export async function top5() {
  *  worker opens `research/` to anybody, so this lives in `lab/`. */
 export async function scenarios() {
   return doc('lab/scenarios.json');
+}
+
+/** Night by night, the five companies each model and each re-rank reading put
+ *  highest, and what those five went on to return. The same fives the public
+ *  record averages — named, so gated like the scenarios. */
+export async function picks() {
+  return doc('lab/picks.json');
 }
 
 /** One re-rank reading — the language model's scores for every company when

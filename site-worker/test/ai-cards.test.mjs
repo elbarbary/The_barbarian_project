@@ -19,6 +19,7 @@ const top5 = JSON.parse(await read('public/data/v1/research/top5.json'));
 const scenarios = JSON.parse(await read('public/data/v1/lab/scenarios.json'));
 const measures = JSON.parse(await read('public/data/v1/measures.json'));
 const universe = new Set(measures.rows.map((r) => r.ticker));
+const picks = JSON.parse(await read('public/data/v1/lab/picks.json'));
 
 /* ── the cards are about models ─────────────────────────────────────────── */
 
@@ -100,8 +101,9 @@ test('nothing is drawn until the warning has been accepted', () => {
   // The gate returns before any figure is built, rather than rendering the
   // screen with an overlay on top of it.
   const gateAt = scSrc.indexOf('if (!hasAccepted(reader) && !(st.scAccepted && st.scAcceptedReader === reader))');
-  const viewAt = scSrc.indexOf('const view = viewFor(');
-  assert.ok(gateAt > 0 && viewAt > gateAt, 'the screen builds its figures before the gate');
+  const choiceAt = scSrc.indexOf('const choice = choiceOf(');
+  const picksAt = scSrc.indexOf('const entry = entryOf(');
+  assert.ok(gateAt > 0 && choiceAt > gateAt && picksAt > gateAt, 'the screen builds its figures before the gate');
 });
 
 test('the warning states the actual sample and timestamp limits', async () => {
@@ -123,30 +125,74 @@ test('the reader can bring the warning back', () => {
 /* ── the workbench never ranks companies ────────────────────────────────── */
 
 test('the company list is alphabetical, never in the model’s order', async () => {
-  const sc = { companies: scenarios.companies, models: scenarios.models };
   const tickers = Object.keys(scenarios.companies).sort();
-  const view = (await import('../../public/esthmr/scenarios.js')).viewFor(tickers, sc, 'kronos', 5);
+  const view = (await import('../../public/esthmr/scenarios.js')).returnsView(scenarios, { model: 'kronos', horizon: 5 }, tickers);
   const shown = view.rows.map((r) => r.ticker);
-  assert.deepEqual(shown, [...shown].sort((a, b) => a.localeCompare(b)));
+  assert.deepEqual(shown, [...shown].sort());
   assert.ok(shown.length > 50);
 });
 
-test('every company in the selection is shown, none cut to a number', async () => {
+test('every company in the run is shown, none cut to a number', async () => {
   const mod = await import('../../public/esthmr/scenarios.js');
   const tickers = Object.keys(scenarios.companies).sort();
-  const view = mod.viewFor(tickers, scenarios, 'kronos', 5);
+  const view = mod.returnsView(scenarios, { model: 'kronos', horizon: 5 }, tickers);
   assert.equal(view.rows.length, tickers.length);
-  assert.equal(view.answered + view.silent, tickers.length);
-  const body = scSrc.slice(scSrc.indexOf('export function viewFor'), scSrc.indexOf('function median'));
+  const body = scSrc.slice(scSrc.indexOf('export function returnsView'), scSrc.indexOf('export function positions'));
   assert.ok(!/slice\(0,\s*\d/.test(body), 'the view is cut to a number');
+  // The list on screen shows twelve and says how many more there are.
+  const visuals = await read('public/esthmr/scenario-visuals.js');
+  assert.match(visuals, /Show all \$\{rows\.length\} companies/);
 });
 
 test('a company no model answered is silent, not zero', async () => {
   const mod = await import('../../public/esthmr/scenarios.js');
-  const view = mod.viewFor(['NOSUCH'], { companies: {}, models: {} }, 'kronos', 5);
+  const view = mod.returnsView({ companies: {}, models: {} }, { model: 'kronos', horizon: 5 }, ['NOSUCH']);
   assert.equal(view.rows[0].value, null);
-  assert.equal(view.answered, 0);
-  assert.equal(view.silent, 1);
+  assert.equal(view.summary.count, 0);
+});
+
+/* ── the fives, by name ─────────────────────────────────────────────────── */
+
+test('the picks name the same fives the public record averages', () => {
+  // Built by the code that builds top5.json, so the five a reader is shown
+  // for a night are the five that night's result is the average of.
+  let compared = 0;
+  const check = (entry, source, name) => {
+    for (const [hz, held] of Object.entries(entry.horizons)) {
+      const rows = source?.horizons?.[hz]?.byDate || [];
+      const listed = held.nights.filter((n) => n.status === 'scored');
+      if (!held.older) assert.equal(listed.length, source.horizons[hz].sessions, `${name} at ${hz}`);
+      for (const night of listed) {
+        const row = rows.find((r) => r.basisSession === night.basisSession);
+        assert.ok(row, `${name} lists ${night.basisSession} at ${hz} and the record does not`);
+        for (const key of ['chosenReturn', 'marketReturn', 'advantage']) assert.equal(night[key], row[key], `${name} ${night.basisSession} ${key}`);
+        assert.equal(night.picks.length, 5);
+        const mean = night.picks.reduce((s, p) => s + p.returned, 0) / 5;
+        assert.ok(Math.abs(mean - night.chosenReturn) < 1e-3, `${name} ${night.basisSession}: its five do not average to its result`);
+        compared += 1;
+      }
+    }
+  };
+  for (const [id, entry] of Object.entries(picks.models)) check(entry, top5.models[id], id);
+  for (const [key, entry] of Object.entries(picks.readings)) check(entry, top5.readings[key], key);
+  assert.ok(compared > 0, 'nothing scored was compared');
+});
+
+test('a five is always five, and a night not counted names nobody', () => {
+  for (const group of [picks.models, picks.readings]) {
+    for (const entry of Object.values(group)) {
+      for (const held of Object.values(entry.horizons)) {
+        for (const night of held.nights) {
+          if (night.status === 'withheld') assert.equal(night.picks, undefined);
+          else assert.equal(night.picks.length, picks.topCount);
+          if (night.status === 'waiting') assert.ok(night.picks.every((p) => p.returned === undefined));
+        }
+        const dates = held.nights.map((n) => n.basisSession);
+        assert.deepEqual(dates, [...dates].sort().reverse(), 'nights are not newest first');
+      }
+    }
+  }
+  assert.ok(!picks.models.flat, 'a model that ranks every company alike was given a five');
 });
 
 test('disagreement between models is reported, not averaged away', async () => {
@@ -182,10 +228,12 @@ test('the scenario document is a forecast and is therefore gated data', async ()
   const dataSrc = await read('public/esthmr/data.js');
   assert.match(dataSrc, /export async function scenarios\(\)\s*\{\s*return doc\('lab\/scenarios\.json'\)/);
   assert.match(dataSrc, /return doc\(`lab\/rerank\/\$\{key\}\.json`\)/);
-  assert.doesNotMatch(dataSrc, /doc\(['`]research\/(scenarios|rerank)/);
+  assert.match(dataSrc, /export async function picks\(\)\s*\{\s*return doc\('lab\/picks\.json'\)/);
+  assert.doesNotMatch(dataSrc, /doc\(['`]research\/(scenarios|rerank|picks)/);
   // And nothing naming companies sits in the open folder on disk.
   const { readdir } = await import('node:fs/promises');
   const open = await readdir(new URL('public/data/v1/research/', ROOT));
   assert.ok(!open.includes('scenarios.json'), 'research/scenarios.json is public — it names securities');
   assert.ok(!open.includes('rerank'), 'research/rerank/ is public — readings name securities');
+  assert.ok(!open.includes('picks.json'), 'research/picks.json is public — it names securities');
 });

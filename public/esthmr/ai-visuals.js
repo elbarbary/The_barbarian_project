@@ -161,6 +161,63 @@ export function heroChart(byDate, ar = false) {
 
 /* ── the workbench's charts ─────────────────────────────────────────────── */
 
+/** An axis step of 1, 2 or 5 times a power of ten. */
+function niceStep(span, count) {
+  const raw = span / Math.max(count, 1);
+  if (!(raw > 0)) return 1;
+  const power = 10 ** Math.floor(Math.log10(raw));
+  const unit = raw / power;
+  return (unit <= 1 ? 1 : unit <= 2 ? 2 : unit <= 5 ? 5 : 10) * power;
+}
+
+/**
+ * What each scored night's five did, beside the market over the same window.
+ *
+ * One column per night, oldest on the left: a hollow dot where the market
+ * ended, a filled dot where the five ended, and a stroke between them — teal
+ * where the five came out ahead, red where they fell behind. The nights are
+ * never joined into a line. Each is its own window, and a line from one to the
+ * next would draw a running total that nobody held.
+ */
+export function nightsChart(nights, ar = false) {
+  const rows = (Array.isArray(nights) ? nights : [])
+    .filter((n) => n && finite(n.chosenReturn) && finite(n.marketReturn));
+  if (!rows.length) return null;
+  const W = 640, H = 180, TOP = 10, BOTTOM = 10, LEFT = 58, RIGHT = 14;
+  const values = rows.flatMap((n) => [n.chosenReturn, n.marketReturn]).concat([0]);
+  let lo = Math.min(...values), hi = Math.max(...values);
+  const pad = (hi - lo) * 0.08 || 1;
+  lo -= pad; hi += pad;
+  const y = (v) => TOP + (1 - (v - lo) / (hi - lo)) * (H - TOP - BOTTOM);
+  const inner = W - LEFT - RIGHT;
+  const x = (i) => (rows.length > 1 ? LEFT + 14 + (i / (rows.length - 1)) * (inner - 28) : LEFT + inner / 2);
+  const step = niceStep(hi - lo, 4);
+  const ticks = [];
+  for (let v = Math.ceil(lo / step) * step; v <= hi + step * 1e-6; v += step) ticks.push(Number(v.toFixed(6)));
+  // The newest date always, then older ones wherever they clear the last.
+  const dated = [];
+  for (let i = rows.length - 1, edge = Infinity; i >= 0; i -= 1) {
+    if (edge - x(i) >= 84) { dated.push(i); edge = x(i); }
+  }
+  return h('div', { class: 'aix-nights-chart', dir: 'ltr' },
+    h('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img',
+      'aria-label': ar ? 'نتيجة خمس كل ليلة مقابل السوق' : 'Each night’s five against the market' },
+    ticks.map((v, i) => h('line', { key: `g${i}`, x1: LEFT, x2: W - RIGHT, y1: fix(y(v)), y2: fix(y(v)),
+      class: Math.abs(v) < step * 1e-6 ? 'aix-nights-zero' : 'aix-grid' })),
+    rows.map((n, i) => {
+      const ahead = n.chosenReturn > n.marketReturn;
+      return h('g', { key: n.basisSession || i, class: ahead ? 'is-ahead' : 'is-behind' },
+        h('title', null, `${shortDay(n.basisSession, ar)} · ${ar ? 'الخمس' : 'five'} ${percent(n.chosenReturn)} · ${ar ? 'السوق' : 'market'} ${percent(n.marketReturn)}`),
+        h('line', { x1: fix(x(i)), x2: fix(x(i)), y1: fix(y(n.marketReturn)), y2: fix(y(n.chosenReturn)), class: 'aix-nights-gap' }),
+        h('circle', { cx: fix(x(i)), cy: fix(y(n.marketReturn)), r: 4.5, class: 'aix-nights-market' }),
+        h('circle', { cx: fix(x(i)), cy: fix(y(n.chosenReturn)), r: 6, class: 'aix-nights-five' }));
+    })),
+    ticks.map((v, i) => h('span', { key: `t${i}`, class: 'aix-nights-tick', style: `top:${fix((y(v) / H) * 100)}%` },
+      percent(v, step < 1 ? 1 : 0))),
+    h('div', { class: 'aix-nights-dates' }, dated.reverse().map((i) => h('span', { key: i,
+      style: `left:${fix((x(i) / W) * 100)}%` }, shortDay(rows[i].basisSession, ar)))));
+}
+
 /**
  * Where a model's estimates for a set of companies sit, beside what those
  * companies actually did before the basis.

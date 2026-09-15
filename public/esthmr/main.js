@@ -4,7 +4,6 @@ import { Component } from './logic.js';
 import * as data from './data.js';
 import { whoami, openSignIn, signOut } from './auth.js';
 import * as watch from './watchlist.js';
-import * as qstore from './questions-store.js';
 import { readRoute, connectNavigation } from './navigation.js';
 import { readResponse } from './requests.js';
 import { pinBottomBar } from './navbar.js';
@@ -139,12 +138,6 @@ async function load(email) {
         insiders: (insiders && Array.isArray(insiders.items) && insiders.items.length > 0) ? insiders : undefined,
       })),
       slice(data.indices(), (idx) => ({ indexMembers: idx.list })),
-      // Home's own two. The measurement table is what every question on the
-      // page is answered from, so it is loaded with the extras rather than
-      // behind a screen: a reader who lands on Home should not watch the
-      // page decide what it is.
-      slice(data.measures ? data.measures() : Promise.resolve(null),
-            (measures) => ({ measures: measures || undefined })),
       slice(data.arena ? data.arena() : Promise.resolve(null),
             (arena) => ({ arena: arena || undefined })),
       // The models' record, and what they said last night. The first is
@@ -154,6 +147,10 @@ async function load(email) {
             (top5) => ({ top5: top5 || undefined })),
       slice(data.scenarios ? data.scenarios() : Promise.resolve(null),
             (scenarios) => ({ scenarios: scenarios || undefined })),
+      // Each model's five, night by night, with what they went on to do: the
+      // workbench's two halves. Named companies, so gated with the scenarios.
+      slice(data.picks ? data.picks() : Promise.resolve(null),
+            (picks) => ({ picks: picks || undefined })),
       Promise.all([calendar, exchange, attention]).then(([cal, ex, att]) => patch({
         indices: ex ? data.indexCards(ex.indexLevels, att && att.history) : undefined,
         readNow: data.readNowCards(att && att.signals, cal && cal.expectedTotal, cal && cal.expectedFrom),
@@ -232,7 +229,6 @@ function setSigned(email) {
   reader = email || null;
   readerVersion++;
   watch.activate();
-  qstore.activate();
   component._co = null;
   component._series = {};
   component.state.watchStatus = '';
@@ -243,17 +239,6 @@ function setSigned(email) {
   component._reader = reader;
   component._watch = watch.read(reader);
   pullWatchlist(reader);
-  // The saved questions follow the same rule as the list: the browser's copy
-  // now, the account's when it lands, and the account is the truth.
-  component._questions = qstore.read(reader);
-  {
-    const version = readerVersion;
-    qstore.sync(reader).then((list) => {
-      if (version !== readerVersion) return;
-      component._questions = list;
-      if (component.onChange) component.onChange();
-    }).catch(() => { /* the mirror stands */ });
-  }
   document.body.dataset.signed = email ? 'yes' : 'no';
   const bar = document.getElementById('gate');
   const who = document.getElementById('who');

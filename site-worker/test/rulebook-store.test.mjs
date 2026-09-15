@@ -143,7 +143,8 @@ test('no verdict, weight or result count is ever computed server side', async ()
 /* ---- shape ---- */
 
 test('the stored key is the one the engine reads', () => {
-  // The engine in public/esthmr/rulebook.js destructures `op`. Storing
+  // The rule engine (public/esthmr/rulebook.js until the questions screen was
+  // withdrawn) destructured `op`. Storing
   // `operator` would have made every saved question answer "unknown" for
   // every company — silently, because unknown is a legitimate answer.
   const out = cleanRulebook({ conditions: [{ column: 'revenue', op: '>=', value: 1 }] });
@@ -313,6 +314,7 @@ test('what the models said about named companies needs a session', async () => {
   // and served to anybody; these paths are where it lives now.
   const paths = new Set([
     '/data/v1/lab/scenarios.json',
+    '/data/v1/lab/picks.json',
     '/data/v1/lab/rerank/filings-news-rulebook.json',
     '/data/v1/lab/rerank/models.json',
   ]);

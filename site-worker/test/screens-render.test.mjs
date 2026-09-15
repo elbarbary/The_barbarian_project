@@ -32,7 +32,7 @@ const { Component } = await import('../../public/esthmr/logic.js');
 /** Every screen the router will route to, and the sub-states that change what
  *  each draws. A view mode is a screen for this purpose: the bug that prompted
  *  this was only reachable through one. */
-const SCREENS = ['home', 'questions', 'scenarios', 'market', 'company', 'today', 'investors', 'heat', 'watchlist',
+const SCREENS = ['home', 'scenarios', 'market', 'company', 'today', 'investors', 'heat', 'watchlist',
   'sectors', 'calendar', 'exchange', 'tools', 'research', 'crossings', 'pairs', 'valuation'];
 const SUB = {
   investors: [{ investorTab: 'insiders', insiderViewMode: 'table' },
