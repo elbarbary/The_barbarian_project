@@ -429,6 +429,22 @@ jobs:
               rm -rf "$tmp"
             done
             GIT_EDITOR=true git rebase --continue >/dev/null 2>&1 || true
+            # The pull runs with --autostash, and the stash is re-applied as the
+            # rebase finishes. It holds what this build wrote and never stages,
+            # `scripts/news_insights.json` among it, which the fifteen-minute
+            # lane commits too. So the re-apply can leave that file unmerged,
+            # and then `git commit --amend` below refuses ("Committing is not
+            # possible because you have unmerged files"). Inside
+            # `resolve_ours ||` that is not fatal: the plain rebased commit was
+            # pushed without the rebuilt crossings or the recomputed
+            # fingerprint, as 3cc0ded was at 08:38 on 15 Sep 2026 and four of
+            # the six split commits of 10-12 Sep were, and a retry after a lost
+            # push could not pull over the unmerged file. Everything this job
+            # publishes was staged before the pull, so none of it is in the
+            # stash, and main's copy of each such path stands.
+            git diff --name-only --diff-filter=U | while read -r f; do
+              git checkout HEAD -- "$f" 2>/dev/null || git rm -q --cached -- "$f" 2>/dev/null || true
+            done
             # The crossings are DERIVED from four documents — the directory,
             # the market file, the news and the filings feed — and the resolver
             # above picks a side for each file on its own. This build stamps

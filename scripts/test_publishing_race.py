@@ -159,11 +159,19 @@ class RaceTest(unittest.TestCase):
         "    (root / folder / 'connections.json').write_text(body)\n"
     )
 
-    def race_the_directory(self, workflow):
+    # A file the daily build writes and never stages, and the fifteen-minute
+    # lane commits.
+    INSIGHTS = "scripts/news_insights.json"
+
+    def race_the_directory(self, workflow, *, stashed=False):
         """The daily build's new directory replayed over the fifteen-minute
         lane's newer crossings, as at 22:02 on 10 Sep 2026. Returns the
         committed directory's median and the one each committed copy of the
-        crossings divided by."""
+        crossings divided by.
+
+        `stashed` leaves the build's own write to the insights cache unstaged,
+        so the pull's autostash collides with the lane's commit of it when
+        the rebase finishes, as it did at 08:38 on 15 Sep 2026."""
         (self.root / "scripts" / "build_connections_api.py").write_text(self.BUILDER)
 
         def crossings(stamp, median):
@@ -172,12 +180,14 @@ class RaceTest(unittest.TestCase):
 
         self.write(self.DIRECTORY, {"median": 553811.5})
         crossings("2026-09-10T21:45:00+00:00", 553811.5)
+        self.write(self.INSIGHTS, {"cache": "base"})
         self.commit("base")
         base = git("rev-parse", "HEAD", cwd=self.root).stdout.strip()
 
         # The fifteen-minute lane rebuilds the crossings from the directory
         # already on main.
         crossings("2026-09-10T22:01:09+00:00", 553811.5)
+        self.write(self.INSIGHTS, {"cache": "the fifteen-minute lane's"})
         self.commit("data: live news and rates")
 
         # The daily build stamped its crossings at 21:56, from the directory
@@ -186,8 +196,11 @@ class RaceTest(unittest.TestCase):
         self.write(self.DIRECTORY, {"median": 925908.5})
         crossings("2026-09-10T21:56:45+00:00", 925908.5)
         self.commit("data: rebuild published app data")
+        if stashed:
+            self.write(self.INSIGHTS, {"cache": "the daily build's"})
 
-        rebase = subprocess.run(["git", "rebase", "main"], cwd=self.root,
+        # `git pull --rebase --autostash origin main`, against a local main.
+        rebase = subprocess.run(["git", "rebase", "--autostash", "main"], cwd=self.root,
                                 capture_output=True, text=True)
         self.assertNotEqual(rebase.returncode, 0, "the setup did not actually collide")
         done = self.resolve(workflow)
@@ -211,6 +224,22 @@ class RaceTest(unittest.TestCase):
 
     def test_the_fast_lane_rebuilds_the_crossings_the_same_way(self):
         median, divided_by, out = self.race_the_directory("publish-live-data.yml")
+        self.assertEqual(divided_by, [median, median], out)
+
+    def test_a_colliding_autostash_does_not_cost_the_rebuild(self):
+        # The stash comes back unmerged, `git commit --amend` refuses, and
+        # without clearing it the plain rebased commit goes out: 3cc0ded.
+        median, divided_by, out = self.race_the_directory("publish-app-data.yml",
+                                                          stashed=True)
+        self.assertEqual(divided_by, [median, median],
+                         f"the rebuild never reached the commit\n{out}")
+        self.assertEqual(git("diff", "--name-only", "--diff-filter=U",
+                             cwd=self.root).stdout, "",
+                         "a retry after a lost push cannot pull over an unmerged file")
+
+    def test_the_fast_lane_survives_a_colliding_autostash_too(self):
+        median, divided_by, out = self.race_the_directory("publish-live-data.yml",
+                                                          stashed=True)
         self.assertEqual(divided_by, [median, median], out)
 
     def test_a_conflict_outside_generated_data_still_stops_everything(self):

@@ -270,6 +270,19 @@ jobs:
               rm -rf "$tmp"
             done
             GIT_EDITOR=true git rebase --continue >/dev/null 2>&1 || true
+            # The pull runs with --autostash, and the stash is re-applied as the
+            # rebase finishes. When main has changed a file the stash holds, the
+            # re-apply leaves it unmerged and `git commit --amend` below refuses
+            # ("Committing is not possible because you have unmerged files").
+            # Inside `resolve_ours ||` that is not fatal, so the plain rebased
+            # commit went out without the rebuilt crossings or the recomputed
+            # fingerprint: the runs of 21:45 on 14 Sep and 07:46 on 15 Sep 2026,
+            # two of the four that raced in this job's last 59. What this job
+            # publishes was staged before the pull, so none of it is in the
+            # stash, and main's copy of each such path stands.
+            git diff --name-only --diff-filter=U | while read -r f; do
+              git checkout HEAD -- "$f" 2>/dev/null || git rm -q --cached -- "$f" 2>/dev/null || true
+            done
             # The crossings are DERIVED from the disclosures feed, and the
             # resolver above chooses a side for each file on its own — so a
             # race can keep one side's feed beside the other side's
