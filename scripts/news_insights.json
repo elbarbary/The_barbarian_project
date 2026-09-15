@@ -911,6 +911,10 @@
     "meaning": "Entering the Saudi market establishes cross-border operational presence and sets an initial customer acquisition target of 400,000 users for the platform.",
     "meaning_ar": "يمثل الدخول إلى السوق السعودي توسعاً تشغيلياً جغرافياً خارجياً يحدد قاعدة مستهدفة تضم 400 ألف عميل ضمن المرحلة الأولى للانتشار الإقليمي."
   },
+  "«عبدالغفار»: منصه Tour4Cure تقدم خدمات صحيه وسياحيه متكامله بالمحافظات": {
+    "meaning": "The platform aggregates healthcare and hospitality services across governorates into a single digital operational framework for medical tourism.",
+    "meaning_ar": "تجمع المنصة بين خدمات الرعاية الصحية والضيافة عبر المحافظات ضمن إطار تشغيلي رقمي موحد للسياحة العلاجية."
+  },
   "«فايزر» تطلق لقاح المكورات الريويه في مصر وتستهدف ادراجه ضمن جدول التطعيمات": {
     "meaning": "Launching the vaccine expands Pfizer's operational product portfolio in the Egyptian market, while targeting the national immunization schedule shifts the distribution mechanism toward large-scale public procurement contracts with the Ministry of Health.",
     "meaning_ar": "يؤدي طرح اللقاح إلى توسيع محفظة منتجات شركة فايزر في السوق المصري، في حين يوجه استهداف إدراجه ضمن جدول التطعيمات الوطني آلية التوزيع نحو عقود التوريد والمناقصات الحكومية التابعة لوزارة الصحة."
@@ -1198,6 +1202,10 @@
   "ارتفاع طفيف للاسهم الصينيه مع استقرار اليوان": {
     "meaning": "Currency stability reduces exchange rate volatility risks for domestic equity valuations, which correlates with modest price gains in local equity markets.",
     "meaning_ar": "يؤدي استقرار سعر صرف العملة المحلية إلى خفض مخاطر تقلبات أسعار الصرف المرتبطة بتقييمات الأسهم، وهو ما يتزامن مع ارتفاعات طفيفة في أسعار التداول بالأسواق المالية."
+  },
+  "ارتفاع طفيف لموشرات البورصه وسط تداولات بقيمه 10.5 مليار جنيه": {
+    "meaning": "The market experiences net positive price movements alongside high turnover of EGP 10.5 billion, reflecting active asset transfers and executed order matching across equity and fixed-income transactions.",
+    "meaning_ar": "تشهد السوق حركة سعرية إيجابية متزامنة مع سيولة تنفيذية مرتفعة بلغت 10.5 مليار جنيه، مما يعكس نشاط عمليات تبادل الأصول ومطابقة أوامر التداول عبر أدوات الأسهم والدخل الثابت."
   },
   "ارتفاع عايد السندات العشريه الامريكيه لاعلي مستوياته منذ عام 2007": {
     "meaning": "Higher benchmark yields raise international borrowing costs and strengthen the US dollar, which increases sovereign debt servicing burdens and redirects cross-border portfolio capital toward dollar-denominated assets.",
@@ -2143,6 +2151,10 @@
     "meaning": "The restructuring involves auditing balance sheets, managing operational debts, and optimizing state-owned physical assets and printing operations to address structural fiscal deficits.",
     "meaning_ar": "تشمل إعادة الهيكلة مراجعة الميزانيات العمومية ومعالجة الديون التشغيلية وتحسين استغلال الأصول العقارية والمطابع المملوكة للدولة للتعامل مع العجز المالي الهيكلي."
   },
+  "الحكومه تناقش اليات لتطوير منظومه دعم رواد الاعمال والشركات الناشيه": {
+    "meaning": "The government reviews administrative and funding frameworks governing micro, small, and medium enterprises, focusing on regulatory procedures, licensing requirements, and official financing channels.",
+    "meaning_ar": "تدرس الحكومة الأطر الإدارية والتمويلية المنظمة للمشروعات الصغيرة والناشئة، مع التركيز على الإجراءات التنظيمية، واشتراطات التراخيص، وقنوات التمويل الرسمية."
+  },
   "الحكومه تناقش مقترحات لدعم الشركات الناشيه في التوسع والنفاذ الي الاسواق الخارجيه": {
     "meaning": "Government initiatives targeting startup export access focus on standardizing cross-border regulatory procedures, facilitating foreign currency transactions, and providing institutional channels into foreign trade networks.",
     "meaning_ar": "تركز المبادرات الحكومية الموجهة لدعم تصدير الشركات الناشئة على توحيد الإجراءات التنظيمية العابرة للحدود، وتيسير المعاملات بالنقد الأجنبي، وتوفير قنوات مؤسسية للنفاذ إلى شبكات التجارة الخارجية."
@@ -2387,6 +2399,14 @@
     "meaning": "The Holding Company for Food Industries operates the 'Carry On' project branches through a pricing and inventory management framework that relies on bulk procurement contracts to regulate shelf prices and standardise product quality within state-affiliated retail channels.",
     "meaning_ar": "تعتمد الشركة القابضة للصناعات الغذائية في تشغيل فروع مشروع «كاري أون» على إطار لإدارة المخزون والتسعير قائم على عقود التوريد المجمعة لضبط أسعار البيع وتوحيد معايير جودة السلع ضمن قنوات التجزئة التابعة للدولة."
   },
+  "الرييس التنفيذي للقابضه الغذاييه: كاري اون تستهدف رفع تنافسيه منافذ المجمعات الاستهلاكيه": {
+    "meaning": "The partnership integrates 'Carry On' management and operational models into state-owned consumer complexes, restructuring store layouts, inventory management, and retail point-of-sale systems.",
+    "meaning_ar": "تتضمن الشراكة دمج النماذج التشغيلية والإدارية لشركة 'كاري أون' داخل منافذ المجمعات الاستهلاكية التابعة للدولة، من خلال إعادة هيكلة أساليب العرض، وإدارة المخزون، ونظم نقاط البيع."
+  },
+  "الرييس التنفيذي للقابضه الغذاييه: مراجعه فروع الشركه تمهيدا لتحويلها للعلامه كاري اون": {
+    "meaning": "The operational review and rebranding of branches under a single commercial identity ('Carry On') restructures the state-owned retail distribution network, standardising branch operating models and centralising inventory management across outlets.",
+    "meaning_ar": "تمثل مراجعة الفروع تمهيداً لتوحيدها تحت هوية تجارية واحدة («كاري أون») إعادة هيكلة لشبكة منافذ التجزئة التابعة للشركة، مما يوحد نماذج التشغيل وآليات إدارة المخزون عبر مختلف الفروع."
+  },
   "الرييس السيسي ونظيره الاندونيسي يوكدان اولويه الحل الدبلوماسي للحرب الايرانيه خلال قمه «البريكس»": {
     "meaning": "Bilateral diplomatic coordination within the BRICS framework addresses regional geopolitical stability, directly impacting operational risks along key maritime trade routes and international commodity import costs for emerging economies.",
     "meaning_ar": "يرتبط التنسيق الدبلوماسي الثنائي داخل تكتل «بريكس» باستقرار الأوضاع الجيوسياسية الإقليمية، مما ينعكس بشكل مباشر على المخاطر التشغيلية عبر الممرات الملاحية التجارية وتكاليف واردات السلع الأساسية للاقتصادات الناشئة."
@@ -2566,6 +2586,10 @@
   "الشركه العامه لتجاره الجمله تشارك في مبادره خفض الاسعار ب79 منفذا استهلاكيا": {
     "meaning": "The company allocates 79 of its retail outlets to distribute price-discounted consumer goods under a state-directed initiative, altering product pricing structures and inventory turnover rates across these specific branches.",
     "meaning_ar": "تخصص الشركة 79 منفذًا من منافذها التابعة لطرح سلع استهلاكية مخفضة ضمن مبادرة حكومية، مما يغير هياكل تسعير المنتجات ومعدلات دوران المخزون داخل هذه الفروع المحددة."
+  },
+  "الشركه القابضه الغذاييه: منتجات كاري اون تجمع بين السلع الحكوميه والقطاع الخاص": {
+    "meaning": "The Holding Company for Food Industries establishes a commercial retail model that consolidates state-subsidized commodities and private-sector fast-moving consumer goods under a unified distribution and shelving network.",
+    "meaning_ar": "تعتمد الشركة القابضة للصناعات الغذائية نموذجاً تجارياً يجمع السلع التموينية والحكومية مع منتجات القطاع الخاص الاستهلاكية ضمن شبكة توزيع ومنافذ بيع موحدة."
   },
   "الشمس بيراميدز تتحول الي الربحيه في سته اشهر": {
     "meaning": "The company's semi-annual financial statements reflect a transition from a net loss to a net profit, driven by revenue expansion exceeding operational and financial costs over the six-month period.",
@@ -4068,6 +4092,10 @@
     "meaning": "Participation in international trade fairs provides domestic micro, small, and medium enterprises with direct business-to-business exhibition platforms and links local producers to foreign buyers.",
     "meaning_ar": "توفر المشاركة في المعارض التجارية الدولية منصات عرض للمشروعات الصغيرة والمتوسطة المحلية وتربط المنتجين المحليين بالأسواق والمشترين الخارجيين عبر قنوات تواصل مباشر."
   },
+  "جهاز حمايه المستهلك يضبط مصنعا غير مرخص للمبات الاضاءه والكشافات مجهوله المصدر": {
+    "meaning": "Regulatory enforcement against unlicensed manufacturing facilities removes non-compliant, parallel-market supply from the local electrical goods sector, enforcing adherence to standard quality specifications among formal market participants.",
+    "meaning_ar": "تؤدي الإجراءات الرقابية ضد المنشآت الصناعية غير المرخصة إلى استبعاد معروض السوق الموازية غير المطابق للمواصفات من قطاع الأدوات الكهربائية، مما يُلزم السوق بالاعتماد على معايير الجودة المعتمدة للمصنعين الرسميين."
+  },
   "جوجل تستثمر 15.1 مليار دولار في بنيه الذكاء الاصطناعي في فنلندا": {
     "meaning": "This transaction represents capital expenditure allocation toward physical data center facilities and computational hardware in the European market.",
     "meaning_ar": "يمثل هذا التخصيص إنفاقاً رأسمالياً موجهاً لإنشاء مراكز بيانات وتجهيزات حوسبة تقنية في السوق الأوروبية."
@@ -4511,6 +4539,10 @@
   "رييس جهاز شوون البييه: مفتاح نجاح ملف التشجير يبدا من تخطيط طويل المدي": {
     "meaning": "Long-term environmental planning for national afforestation structures municipal and state infrastructure expenditures, establishing multi-year procurement frameworks for agricultural nurseries, irrigation systems, and landscape contracting services.",
     "meaning_ar": "يحدد التخطيط البيئي طويل المدى لملف التشجير أطر الإنفاق الحكومي والمحلي على البنية التحتية، من خلال وضع جداول توريد وتوريدات تعاقدية متعددة السنوات للمشاتل الزراعية وشبكات الري وشركات الصيانة والتنسيق."
+  },
+  "رييس جهاز شيون البييه: مصر تتخلص من 99.6% من المواد المستنفده لطبقه الاوزون": {
+    "meaning": "This transition shifts operational processes and chemical inputs across industrial manufacturing, air conditioning, and refrigeration sectors toward compliance with Montreal Protocol standards, replacing phased-out ozone-depleting substances with alternative compounds.",
+    "meaning_ar": "يُحوّل هذا الإجراء العمليات التشغيلية ومدخلات الإنتاج الكيميائية في قطاعات التصنيع الصناعي والتبريد والتكييف نحو التوافق مع معايير بروتوكول مونتريال، عبر إحلال مركبات بديلة محل المواد المستنفدة لطبقة الأوزون."
   },
   "رييس جهاز مستقبل مصر يجري جوله موسعه بمشروعات الانتاج": {
     "meaning": "Operational site visits track project execution milestones, infrastructure development, and workflow integration across state-led agricultural and industrial production facilities.",
@@ -5209,6 +5241,10 @@
     "meaning": "Acquiring an additional equity stake in an operational subsidiary expands the parent company's consolidated ownership percentage, voting control, and direct proportional entitlement to the refining facility's underlying financial results.",
     "meaning_ar": "يؤدي الاستحواذ على حصة إضافية في شركة تابعة قائمة إلى زيادة نسبة ملكية الشركة الأم وحقوق التصويت التابعة لها، ويرفع حصتها المباشرة في القوائم المالية المجمعة لنتائج أعمال مصفاة التكرير."
   },
+  "عاجل.. ترسيه اعمال تشغيل 8 محطات تحليه لعدد من شركات القطاع الخاص والتحالفات": {
+    "meaning": "This operational awarding delegates the day-to-day maintenance and processing functions of water treatment infrastructure to private sector entities under long-term utility management agreements.",
+    "meaning_ar": "يمثل هذا الترسية تفويضاً تشغيلياً ينقل مهام الصيانة اليومية ومعالجة المياه في محطات التحلية إلى كيانات القطاع الخاص بموجب عقود إدارة مرافق خدمية."
+  },
   "عاجل.. تضخم اسعار المستهلكين بمدن مصر يتباطا الي 14.5% في اغسطس": {
     "meaning": "A deceleration in urban consumer price inflation to 14.5% reflects a slower pace of price increases across standard consumer baskets, stabilizing wholesale procurement costs and operating expenses across domestic supply chains.",
     "meaning_ar": "يعكس تباطؤ تضخم أسعار المستهلكين في المدن إلى 14.5% تراجع وتيرة الزيادة في أسعار سلة السلع الاستهلاكية، مما يحد من وتيرة تصاعد تكاليف الشراء بالجملة والمصروفات التشغيلية عبر سلاسل الإمداد المحلية."
@@ -5748,6 +5784,10 @@
   "مخاوف الامدادات تدفع اسعار الغاز الاوروبيه لاعلي مستوي في 3 سنوات": {
     "meaning": "Perceived supply chain disruptions lead to elevated global natural gas benchmark prices, directly altering import costs for energy-dependent markets and operating costs for gas-intensive industrial sectors.",
     "meaning_ar": "تؤدي مخاوف تعطل سلاسل الإمداد إلى ارتفاع الأسعار القياسية للغاز الطبيعي عالمياً، مما يغير تكاليف الاستيراد في الأسواق المعتمدة على الطاقة وتكاليف التشغيل في القطاعات الصناعية كثيفة الاستهلاك للغاز."
+  },
+  "مخاوف من تباطو انفاق الذكاء الاصطناعي تهدد مكاسب اسهم التكنولوجيا": {
+    "meaning": "Technology sector valuations correlate directly with enterprise capital expenditures on computing infrastructure and artificial intelligence deployment. A deceleration in corporate procurement cycles limits equipment orders for semiconductor manufacturers, software providers, and cloud data center operators.",
+    "meaning_ar": "ترتبط تقييمات قطاع التكنولوجيا مباشرة بالإنفاق الرأسمالي للشركات على البنية التحتية للحوسبة وتطبيقات الذكاء الاصطناعي، حيث يؤدي تباطؤ دورات المشتريات المؤسسية إلى خفض وتيرة طلبيات المعدات لمصنعي أشباه الموصلات ومطوري البرمجيات ومشغلي مراكز البيانات السحابية."
   },
   "مخاوف من تراجع محصول الكاكاو الغاني مع الطقس المتقلب والامراض": {
     "meaning": "Adverse weather conditions and crop diseases in Ghana contract raw agricultural supply, directly affecting input availability and procurement dynamics across global chocolate and food processing supply chains.",
