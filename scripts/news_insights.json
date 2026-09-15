@@ -4648,6 +4648,10 @@
     "meaning": "Deferring an initial public offering keeps the company operating as a privately held entity, funded through private equity rounds rather than public equity markets. This operational status limits financial reporting and governance requirements to private corporate disclosure standards.",
     "meaning_ar": "يُبقي تأجيل الطرح العام الأولي الشركة ككيان خاص يعتمد على جولات التمويل والاستثمار الخاص بدلاً من أسواق الأسهم العامة، مما يحصر متطلبات الإفصاح المالي والحوكمة ضمن المعايير المفروضة على الشركات المغلقة."
   },
+  "سبيد ميديكال يتصدر ارتفاعات البورصه المصريه ب15.99% وقره للطاقه اكبر الخاسرين": {
+    "meaning": "Daily equity performance data reflects the balance of trading liquidity and order flow on the exchange, where specific equities experience upward price limits while others face net selling pressure during the session.",
+    "meaning_ar": "تعكس بيانات الأداء اليومي للأسهم توازن السيولة وحركة أوامر التداول في البورصة، حيث تصل أسهم معينة إلى الحدود السعرية العليا للارتفاع بينما تتعرض أخرى لضغوط بيعية خلال الجلسة."
+  },
   "ستاندرد تشارترد: اعاده شراء السندات الامريكيه لن تغير مسار العوايد طويل الاجل": {
     "meaning": "Sovereign debt buyback programs manage secondary market liquidity and cash balances without altering the underlying macroeconomic fundamentals and monetary policy trajectories that determine long-term benchmark yield curves.",
     "meaning_ar": "تعمل برامج إعادة شراء الديون السيادية على إدارة السيولة في السوق الثانوية والأرصدة النقدية، بينما تتحدد مسارات منحنى العائد طويل الأجل وفقاً للمؤشرات الاقتصادية الكلية وتوجهات السياسة النقدية الأساسية."
@@ -5212,6 +5216,10 @@
   "صعود جماعي.. اين وصل سعر الريال السعودي في ختام التعاملات؟": {
     "meaning": "An appreciation of the Saudi Riyal against the Egyptian Pound increases the domestic currency cost of imports from Saudi Arabia and raises the conversion value of remittances sent by Egyptian expatriates.",
     "meaning_ar": "يؤدي ارتفاع سعر صرف الريال السعودي أمام الجنيه المصري إلى زيادة التكلفة بالعملة المحلية للواردات القادمة من المملكة العربية السعودية ورفع قيمة التحويلات الواردة من العاملين بالخارج عند تحويلها إلى الجنيه."
+  },
+  "صعود جماعي.. خريطه اسعار الريال السعودي بختام تعاملات اليوم الثلاثاء 15-9-2026": {
+    "meaning": "A collective rise across Egyptian banks reflects an increase in the exchange rate of the Saudi Riyal against the Egyptian Pound at the close of trading, which alters the conversion cost for cross-border settlements, remittances, and bilateral trade transactions.",
+    "meaning_ar": "يعكس الصعود الجماعي في البنوك المصرية ارتفاع سعر صرف الريال السعودي أمام الجنيه المصري بختام التعاملات، مما يغير تكلفة التحويل الخاصة بالتسويات عبر الحدود، والتحويلات المالية، والمعاملات التجارية البينية."
   },
   "صفقات الدمج والاستحواذ تعيد رسم خريطه الاستثمار في مصر": {
     "meaning": "Mergers and acquisitions consolidate corporate assets, shift equity ownership structures, and alter market concentration across operating sectors.",
