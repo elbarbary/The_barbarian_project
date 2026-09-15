@@ -259,6 +259,14 @@
     "meaning": "This equity capital injection increases the company's balance sheet liquidity and paid-in capital, providing funding for operational expansion, hiring, and technology infrastructure without creating debt obligations.",
     "meaning_ar": "تؤدي هذه الزيادة في رأس المال إلى تعزيز السيولة النقدية ورأس المال المدفوع في الميزانية العمومية، مما يوفر تمويلاً للتوسع التشغيلي والتوظيف والبنية التحتية التقنية دون تحميل الشركة التزامات ديون."
   },
+  "Emaar Misr signs EGP 14 bn in construction contracts for Marassi Red Sea": {
+    "meaning": "These contracts represent direct commitments of operational capital expenditure that transfer off-plan project master plans into the physical execution phase, directly deploying liquidity to primary construction contractors and building material suppliers.",
+    "meaning_ar": "تمثل هذه العقود التزامات مباشرة بنفقات رأسمالية تشغيلية لنقل المخطط العام للمشروع من مرحلة البيع على الخارطة إلى التنفيذ الإنشائي، مما يوجه السيولة النقدية نحو مقاولي التنفيذ وموردي مواد البناء."
+  },
+  "Every fintech demo starts after the hard part": {
+    "meaning": "Fintech product demonstrations present the user interface layer while abstracting the underlying back-end integration, regulatory compliance, risk management, and clearing infrastructure that constitute the primary capital and operational expenditures of financial technology firms.",
+    "meaning_ar": "تُبرِز العروض التوضيحية لمنتجات التكنولوجيا المالية واجهة المستخدم المباشرة متجاوزةً عمليات الربط بالبنية التحتية الخلفية، والامتثال التنظيمي، وإدارة المخاطر، والمقاصة، وهي الجوانب التي تُمثل النفقات الرأسمالية والتشغيلية الأساسية لهذه الشركات."
+  },
   "FRA mandates event-by-event credit reporting for non-bank lenders": {
     "meaning": "Non-bank financial institutions transmit real-time customer borrowing and default data directly to credit bureaus upon occurrence rather than through periodic batch updates, altering compliance workflows and integrating operational reporting systems with the regulator's network.",
     "meaning_ar": "تقوم المؤسسات المالية غير المصرفية بإرسال بيانات الاقتراض والتعثر الخاصة بالعملاء لحظياً إلى شركات الاستعلام الائتماني فور حدوثها بدلاً من التحديثات الدورية المجمعة، مما يغير إجراءات الامتثال ويربط الأنظمة التشغيلية للشركات بشبكة الهيئة الرقابية."
@@ -327,6 +335,10 @@
     "meaning": "An initial public offering on the EGX lists a company's shares for public trading on the regulated exchange, which broadens its institutional and retail shareholder base and subjects its financial reporting to local capital market disclosure regulations.",
     "meaning_ar": "يؤدي الطرح العام في البورصة المصرية إلى إدراج أسهم الشركة للتداول العام في سوق منظمة، مما يوسع قاعدة مساهميها من المؤسسات والأفراد ويخضع قوائمها المالية لقواعد الإفصاح المنظمة لسوق المال المحلي."
   },
+  "MNT-Halan’s local arm secured a temporary EGX main-board listing": {
+    "meaning": "A temporary listing grants the company a defined regulatory window to fulfill the EGX main-board listing requirements, such as public float thresholds and disclosure standards, before formal share trading commences.",
+    "meaning_ar": "يمنح القيد المؤقت الشركة مهلة زمنية محددة نظاماً لاستيفاء شروط القيد بالسوق الرئيسي للبورصة المصرية، بما في ذلك متطلبات نسبة التداول الحر والإفصاح، وذلك قبل بدء تداول الأسهم فعلياً."
+  },
   "Madinet Masr is launching its first North Coast project in partnership with Reedy Development": {
     "meaning": "This joint venture enters the developer into the coastal real estate segment, utilizing a shared-development model that pairs its land access and brand with a partner's operational execution.",
     "meaning_ar": "يدخل هذا المشروع المشترك المطور العقاري إلى قطاع التطوير الساحلي عبر نموذج شراكة يجمع بين تخصيص الأراضي والتنفيذ التشغيلي مع مطور آخر."
@@ -346,6 +358,10 @@
   "Nine new factories go live in Sokhna as SCZone manufacturing base hits 212 plants": {
     "meaning": "The commencement of operations at nine new facilities expands the active industrial capacity within the Suez Canal Economic Zone (SCZone) to 212 manufacturing plants, increasing the volume of localized production infrastructure in the Sokhna industrial cluster.",
     "meaning_ar": "يؤدي بدء تشغيل تسعة مصانع جديدة إلى توسيع الطاقة الصناعية العاملة داخل المنطقة الاقتصادية لقناة السويس لتصل إلى 212 منشأة تصنيعية، مما يرفع حجم البنية التحتية للإنتاج المحلي في مجمع السخنة الصناعي."
+  },
+  "Private equity on track to underdeliver for investors": {
+    "meaning": "Private equity funds generate lower realized returns when portfolio companies face higher financing costs and valuation discounts in secondary sales or initial public offerings. This mechanism lengthens holding periods and slows the distribution of capital back to limited partners.",
+    "meaning_ar": "تحقق صناديق الاستثمار المباشر عوائد محققة أقل عندما تواجه الشركات التابعة ارتفاعاً في تكاليف التمويل وتخفيضات في التقييم عند التخارج عبر البيع الثانوي أو الطروحات العامة. وتؤدي هذه الآلية إلى إطالة فترات الاحتفاظ بالأصول وإبطاء عمليات توزيع رؤوس الأموال على الشركاء المحدودين."
   },
   "Revisiting 1998’s whimsy and goth cult classic Practical Magic": {
     "meaning": "Media coverage of legacy entertainment assets reflects the commercial utilization and licensing of existing intellectual property catalogs across secondary distribution channels.",
@@ -367,9 +383,17 @@
     "meaning": "Integrating Six Sigma methodologies into supply chain strategy standardizes operational workflows and applies statistical quality control across procurement, manufacturing, and distribution processes.",
     "meaning_ar": "يؤدي دمج منهجيات \"سيكس سيجما\" في استراتيجية سلاسل الإمداد إلى توحيد تدفقات العمليات التشغيلية وتطبيق معايير الرقابة الإحصائية على الجودة عبر مراحل التوريد والتصنيع والتوزيع."
   },
+  "Synapse Analytics raises USD 13 mn in a Partech-led Series A funding round": {
+    "meaning": "This transaction injects USD 13 million of venture equity into the company's balance sheet, expanding its paid-in capital and foreign currency liquidity to finance technology infrastructure and operational deployment.",
+    "meaning_ar": "تضخ هذه الصفقة 13 مليون دولار في حقوق الملكية ضمن الميزانية العمومية للشركة، مما يزيد رأس مالها المدفوع ويوفر سيولة بالنقد الأجنبي لتمويل البنية التحتية التكنولوجية والعمليات التشغيلية."
+  },
   "Ten sessions for the people side of management": {
     "meaning": "The program consists of structured managerial training focused on human resources and internal team administration, allocating corporate capital toward human capital development through operational workshops.",
     "meaning_ar": "يتضمن البرنامج دورات تدريبية إدارية منظمة متخصصة في إدارة الموارد البشرية وفرق العمل، مما يمثل توجيهاً للنفقات التشغيلية نحو تطوير رأس المال البشري."
+  },
+  "The business behind the game": {
+    "meaning": "Sports industry operations rely on a commercial framework integrating broadcast rights monetization, corporate sponsorships, merchandising, and gate receipts to finance club balance sheets and event logistics.",
+    "meaning_ar": "تعتمد العمليات التشغيلية في قطاع الرياضة على إطار تجاري يدمج بين تسويق حقوق البث الفضائي، والرعايات المؤسسية، ومبيعات التجزئة للمنتجات، وعائدات التذاكر لتمويل الميزانيات العمومية للأندية والخدمات اللوجستية للفعاليات."
   },
   "The business you don’t hear when you press play": {
     "meaning": "Digital streaming platforms operate through backend intellectual property licensing, infrastructure hosting, and automated royalty settlement systems distributed among content creators, aggregators, and service operators.",
