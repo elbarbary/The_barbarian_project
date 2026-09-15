@@ -1099,6 +1099,10 @@
     "meaning": "Refinery capacity shortages restrict the supply of refined petroleum products, raising fuel prices and directly increasing transportation and operational input costs across supply chains.",
     "meaning_ar": "يؤدي نقص قدرات التكرير إلى تقليص المعروض من المشتقات البترولية، مما يرفع أسعار الوقود ويزيد تكاليف النقل والتشغيل المباشرة عبر سلاسل التوريد."
   },
+  "ارتفاع اسعار الوقود في سوريا يثير اوسع احتجاجات منذ سقوط الاسد": {
+    "meaning": "Domestic fuel price increases raise transportation and operating costs for businesses across regional supply chains, while widespread civic disruption limits commercial transport and retail operations.",
+    "meaning_ar": "تؤدي الزيادات في أسعار الوقود المحلية إلى رفع تكاليف النقل والتشغيل عبر سلاسل التوريد الإقليمية، بينما تعيق الاضطرابات المدنية حركة النقل التجاري والأنشطة التشغيلية."
+  },
   "ارتفاع اسعار الوقود يضغط علي المزارعين في بريطانيا والولايات المتحده": {
     "meaning": "Higher fuel prices raise the direct operational costs of agricultural machinery, transport, and energy-intensive inputs for farming businesses.",
     "meaning_ar": "يؤدي ارتفاع أسعار الوقود إلى زيادة تكاليف التشغيل المباشرة للآلات الزراعية وعمليات النقل والمدخلات كثيفة الاستهلاك للطاقة في قطاع الزراعة."
@@ -1534,6 +1538,10 @@
   "اسهم القطاعات الدفاعيه تدعم موشر فوتسي 100 في بدايه اسبوع حاسم للبنوك المركزيه": {
     "meaning": "Defensive equities represent companies in sectors such as healthcare and consumer staples, which provide relatively stable cash flows regardless of economic cycles and shifts in benchmark interest rates. Capital allocation toward these lower-volatility assets provides benchmark weight stability during periods of monetary policy updates by central banks.",
     "meaning_ar": "تمثل أسهم القطاعات الدفاعية شركات في مجالات مثل الرعاية الصحية والسلع الاستهلاكية الأساسية، وتتميز بتدفقات نقدية مستقرة نسبياً بمعزل عن الدورات الاقتصادية وتغيرات أسعار الفائدة. وتوفر إعادة توجيه السيولة نحو هذه الأصول منخفضة التقلب استقراراً في الأوزان النسبية للمؤشر العام بالتزامن مع إعلانات السياسات النقدية للبنوك المركزية."
+  },
+  "اسهم بنك اوف امريكا تفقد 22 مليار دولار من قيمتها السوقيه في يوم واحد": {
+    "meaning": "A single-day contraction in market capitalization reflects a net outflow of equity capital driven by a decline in the traded share price, reducing the aggregate market value of the bank's outstanding common equity.",
+    "meaning_ar": "يعكس انكماش القيمة السوقية في يوم واحد تدفقاً صافياً لرؤوس الأموال إلى خارج السهم نتيجة انخفاض سعر تداوله، مما يقلص القيمة الإجمالية للأسهم العادية المصدرة للبنك في السوق."
   },
   "اسهم سوفت بنك اليابانيه تهوي 13% بعد انباء عن تاجيل الطرح العام لشركه “اوبن ايه اي”": {
     "meaning": "SoftBank's market valuation reflects changes in the expected liquidity timeline and fair value realization of its major investment holdings, as the postponement of an portfolio company's initial public offering directly defers capital returns and portfolio revaluations.",
@@ -5045,6 +5053,10 @@
     "meaning": "Higher US Treasury yields raise the baseline cost of global capital and trigger capital reallocations from emerging markets into dollar-denominated fixed-income assets, while increasing sovereign external borrowing costs.",
     "meaning_ar": "يؤدي ارتفاع عوائد سندات الخزانة الأمريكية إلى زيادة التكلفة الأساسية للتمويل عالمياً وتحفيز إعادة توجيه السيولة من الأسواق الناشئة نحو الأصول المقومة بالدولار، إلى جانب رفع تكاليف الاقتراض الخارجي للدول."
   },
+  "عوايد سندات الخزانه الامريكيه لاجل 10 سنوات تقفز لاعلي مستوي منذ 2007": {
+    "meaning": "Higher benchmark US Treasury yields raise external borrowing costs across emerging markets and widen the yield spread required by foreign portfolio investors in domestic sovereign and corporate debt instruments.",
+    "meaning_ar": "يؤدي ارتفاع عوائد سندات الخزانة الأمريكية القياسية إلى زيادة تكلفة الاقتراض الخارجي في الأسواق الناشئة ورفع فارق العائد المطلوب من مستثمري المحافظ الأجنبية على أدوات الدين السيادية والمؤسسية المحلية."
+  },
   "غاده والي: مواجهه الازمات في افريقيا تتطلب التركيز علي الشباب ودعم القطاع الخاص": {
     "meaning": "Economic crisis management frameworks in developing markets involve directing resources toward human capital development and expanding private enterprise financing channels.",
     "meaning_ar": "تعتمد أطر إدارة الأزمات الاقتصادية في الأسواق النامية على توجيه الموارد نحو تنمية رأس المال البشري وتوسيع قنوات تمويل مؤسسات القطاع الخاص."
@@ -5164,6 +5176,10 @@
   "قفزه جديده.. اين استقر سعر اليورو في ختام تعاملات اليوم؟": {
     "meaning": "A rise in the exchange rate of the euro against the Egyptian pound increases the local-currency cost of European imports and adjusts the valuation of euro-denominated liabilities and revenues on corporate balance sheets.",
     "meaning_ar": "يؤدي ارتفاع سعر صرف اليورو مقابل الجنيه المصري إلى زيادة تكلفة الواردات القادمة من أوروبا بالعملة المحلية، وإعادة تقييم الالتزامات والإيرادات المقومة باليورو في القوائم المالية للشركات."
+  },
+  "قمه رياده الاعمال المصريه 2026: من خلق القيمه الي اختبار عمق الاستخدام وراس المال الجريء": {
+    "meaning": "The summit convenes market participants to assess early-stage venture funding frameworks, operational monetization models, and user retention metrics across the domestic technology and startup ecosystem.",
+    "meaning_ar": "تجمع القمة الأطراف الفاعلة في السوق لتقييم أطر تمويل رأس المال الجريء في المراحل المبكرة، ونماذج تحقيق الدخل التشغيلي، ومقاييس استمرارية الاستخدام عبر منظومة الشركات الناشئة والتكنولوجيا المحلية."
   },
   "قناه بنما تخفض عدد السفن العابره بسبب ظاهره ال نينيو المناخيه": {
     "meaning": "Reducing daily vessel transit slots at the Panama Canal constrains throughput capacity on trans-oceanic maritime routes, altering cargo allocation across global shipping networks and alternative maritime corridors.",
