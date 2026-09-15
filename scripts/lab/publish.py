@@ -116,7 +116,8 @@ def label(name: str) -> tuple[str, str, str]:
     return LABELS.get(name, (name, name, "rerank" if rr.is_reading(name) else "baseline"))
 
 
-def ranked(block: dict, horizon: int) -> list[tuple[float, str]]:
+def ranked(block: dict, horizon: int, panel: dict | None = None,
+           basis: str | None = None) -> list[tuple[float, str]]:
     """(what the model said, ticker) for every company it answered, best first.
 
     Ties broken by ticker so the same run always picks the same five. Without
@@ -126,9 +127,13 @@ def ranked(block: dict, horizon: int) -> list[tuple[float, str]]:
     for record in block.get("forecasts") or []:
         ticker = record.get("ticker")
         value = ev.predicted(record, horizon)
-        # Only companies with an exchange ticker: see `run.ISIN`.
-        if ev.lab.listed(ticker) and value is not None:
-            out.append((value, ticker))
+        # Only a company with an exchange ticker and, where the prices are to
+        # hand, one readable run of closes to the basis: `evaluate.readable`.
+        if value is None or not ev.lab.listed(ticker):
+            continue
+        if panel is not None and basis and not ev.readable(panel, ticker, basis):
+            continue
+        out.append((value, ticker))
     out.sort(key=lambda r: (-r[0], r[1]))
     return out
 
@@ -142,7 +147,7 @@ def followed(block: dict, basis: str, horizon: int, panel: dict,
     the next one down takes its place. The record and the workbench's list of
     names both come from here, so they cannot follow different companies.
     """
-    order = ranked(block, horizon)
+    order = ranked(block, horizon, panel, basis)
     if len(order) < n:
         return None
 
@@ -320,7 +325,7 @@ def night_of(block: dict, document: dict, horizon: int, panel: dict,
     ranked every company alike — its "five" would be the alphabet's.
     """
     basis = document["basisSession"]
-    order = ranked(block, horizon)
+    order = ranked(block, horizon, panel, basis)
     if len(order) < n or not distinguishes(block):
         return None
     after = sum(1 for d in sessions if d > basis)
@@ -417,6 +422,7 @@ def scenarios(document: dict, panel: dict, sessions: list[str]) -> dict:
     basis = document["basisSession"]
     dates = [d for d in sessions if d <= basis][-(PATH_SESSIONS + 1):]
     companies: dict = {}
+    left: dict = {}
     for name in ORDER:
         if rr.is_reading(name):
             continue
@@ -425,7 +431,13 @@ def scenarios(document: dict, panel: dict, sessions: list[str]) -> dict:
             continue
         for record in block.get("forecasts") or []:
             ticker = record.get("ticker")
-            if not ev.lab.listed(ticker):
+            if not ev.readable(panel, ticker, basis):
+                # Named with the reason, so the screen can say how many were
+                # left out and a reader can ask why.
+                if ticker and ticker not in left:
+                    left[ticker] = ("no exchange ticker" if not ev.lab.listed(ticker)
+                                    else ev.lab.unreadable(
+                                        [b for b in ev.bars_of(panel, ticker) if b["date"] <= basis]))
                 continue
             row = companies.setdefault(ticker, {"ticker": ticker, "models": {}})
             returns = {h: record["returns"].get(str(h))
@@ -448,7 +460,8 @@ def scenarios(document: dict, panel: dict, sessions: list[str]) -> dict:
             row["path"] = path_of(panel, ticker, dates)
 
     return {"dates": dates if dates and dates[-1] == basis else [],
-            "companies": {k: companies[k] for k in sorted(companies)}}
+            "companies": {k: companies[k] for k in sorted(companies)},
+            "leftOut": dict(sorted(left.items()))}
 
 
 def positions(scores: dict[str, float]) -> dict[str, int]:
@@ -457,23 +470,27 @@ def positions(scores: dict[str, float]) -> dict[str, int]:
     return {ticker: i + 1 for i, ticker in enumerate(order)}
 
 
-def consensus(document: dict, horizon: int = 5) -> dict[str, float]:
+def consensus(document: dict, horizon: int = 5, panel: dict | None = None) -> dict[str, float]:
     """The middle of the return forecasters' estimates, company by company."""
     values: dict[str, list[float]] = {}
     for name in CONSENSUS:
         for record in ((document.get("models") or {}).get(name) or {}).get("forecasts") or []:
             got = (record.get("returns") or {}).get(str(horizon))
-            if ev.lab.listed(record.get("ticker")) and isinstance(got, (int, float)):
+            if (isinstance(got, (int, float)) and ev.lab.listed(record.get("ticker"))
+                    and (panel is None or ev.readable(panel, record["ticker"], document["basisSession"]))):
                 values.setdefault(record["ticker"], []).append(float(got))
     return {t: statistics.median(v) for t, v in values.items() if v}
 
 
-def scores_of(block: dict) -> dict[str, float]:
+def scores_of(block: dict, panel: dict | None = None, basis: str | None = None) -> dict[str, float]:
     out = {}
     for record in block.get("forecasts") or []:
         value = ev.predicted(record, 5)
-        if ev.lab.listed(record.get("ticker")) and value is not None:
-            out[record["ticker"]] = value
+        if value is None or not ev.lab.listed(record.get("ticker")):
+            continue
+        if panel is not None and basis and not ev.readable(panel, record["ticker"], basis):
+            continue
+        out[record["ticker"]] = value
     return out
 
 
@@ -517,19 +534,20 @@ def agreement(scores: dict[str, float], other: dict[str, float],
             "compared": len(shared)}
 
 
-def reading_documents(document: dict, built: str) -> dict[str, dict]:
+def reading_documents(document: dict, built: str, panel: dict | None = None) -> dict[str, dict]:
     """One gated file per reading: its scores, and how its order compares."""
     models = document.get("models") or {}
+    basis = document.get("basisSession")
     plain = models.get(rr.name_of(())) or {}
-    plain_scores = scores_of(plain)
-    middle = consensus(document)
+    plain_scores = scores_of(plain, panel, basis)
+    middle = consensus(document, panel=panel)
     out = {}
     for layers in rr.readings():
         name = rr.name_of(layers)
         block = models.get(name)
         if not block:
             continue
-        scores = scores_of(block)
+        scores = scores_of(block, panel, basis)
         against_forecasters = sc.rank_ic([(scores[t], middle[t])
                                           for t in sorted(set(scores) & set(middle))])
         compared = (agreement(scores, plain_scores, block.get("count"), plain.get("count"))
@@ -722,7 +740,7 @@ def main(argv=None) -> int:
     scenes, reading_files = None, {}
     if latest:
         drawn = scenarios(latest, panel, sessions)
-        reading_files = reading_documents(latest, built)
+        reading_files = reading_documents(latest, built, panel)
         default = reading_files.get(rr.key_of(rr.DEFAULT))
         scenes = {
             "schemaVersion": 2, "builtAt": built,
@@ -738,6 +756,10 @@ def main(argv=None) -> int:
                            "answered": latest_models[n].get("answered", 0)}
                        for n in ORDER if n in latest_models and not rr.is_reading(n)},
             "dates": drawn["dates"],
+            # Companies the models answered that night but no reader should
+            # rank: no exchange ticker, or recent closes that are not one
+            # series. `run.listed`, `run.unreadable`.
+            "leftOut": drawn["leftOut"],
             "rerank": None if not reading_files else {
                 "ranAt": (default or next(iter(reading_files.values())))["ranAt"],
                 "layers": list(rr.LAYERS),

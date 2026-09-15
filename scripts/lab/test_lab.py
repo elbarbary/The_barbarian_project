@@ -2382,6 +2382,75 @@ class ListedTest(unittest.TestCase):
             {"ticker": "EGS659O1C015", "ranked_by": {"5": 99.0}}, {"ticker": "AAA", "ranked_by": {"5": 1.0}}]}))
 
 
+class ReadableTest(unittest.TestCase):
+    """A company whose recent closes are not one run of sessions is not read."""
+
+    @staticmethod
+    def daily(closes, start="2026-01-04"):
+        day = datetime.date.fromisoformat(start)
+        out = []
+        for close in closes:
+            out.append({"date": day.isoformat(), "close": close})
+            day += datetime.timedelta(days=1)
+        return out
+
+    def test_a_suspension_is_not_a_run_of_sessions(self):
+        # Suez Cement: 19.00 on 3 June, nothing until 9 September.
+        bars = self.daily([19.0] * 60, start="2026-04-04") + [{"date": "2026-09-09", "close": 19.2}]
+        self.assertRegex(run.unreadable(bars), r"no close for \d+ days")
+
+    def test_a_move_no_daily_limit_allows_is_not_a_price(self):
+        self.assertRegex(run.unreadable(self.daily([19.0] * 60 + [134.55])), r"x7\.08")
+        # A bad print that comes straight back, as Delta Construction's did.
+        self.assertRegex(run.unreadable(self.daily([50.0] * 30 + [24.11, 50.0] + [50.0] * 30)), r"x0\.48")
+
+    def test_an_ordinary_series_is_read_limit_ups_included(self):
+        self.assertIsNone(run.unreadable(rising(100)))
+        streak = [10.0 * 1.2 ** i for i in range(6)]
+        self.assertIsNone(run.unreadable(self.daily([10.0] * 60 + streak)))
+
+    def test_only_the_window_a_model_reads_is_judged(self):
+        old = self.daily([5.0] * 10, start="2019-01-01")
+        recent = self.daily([10.0 + i / 100 for i in range(run.MIN_BARS)])
+        self.assertIsNone(run.unreadable(old + recent))
+        self.assertIsNotNone(run.unreadable(old + recent[:-1]))
+
+    def test_the_universe_leaves_it_out_and_says_why(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            jumped = rising(100)
+            jumped[-1] = dict(jumped[-1], close=jumped[-2]["close"] * 7)
+            scan = {"records": [{"ticker": "AAA", "recentSplitAdjustedBars": rising(100)},
+                                {"ticker": "SUCE", "recentSplitAdjustedBars": jumped}]}
+            rows, sources = run.universe(scan, root=pathlib.Path(tmp))
+        self.assertEqual([r["ticker"] for r in rows], ["AAA"])
+        self.assertRegex(sources["unreadable"]["SUCE"], r"x7\.00")
+
+    def test_a_sealed_night_neither_scores_nor_ranks_nor_shows_it(self):
+        import publish as pb
+        tickers = [f"T{i:02d}" for i in range(40)]
+        dates = [f"2026-09-{d:02d}" for d in range(1, 11)]
+        prices = {t: {d: 100.0 + k for k, d in enumerate(dates)} for t in tickers}
+        # The break comes before the basis: SUCE doubles and more overnight.
+        prices["SUCE"] = {d: (19.0 if k < 8 else 134.55) for k, d in enumerate(dates)}
+        panel = panel_of(prices)
+        basis = dates[8]
+        block = {"forecasts": [{"ticker": t, "ranked_by": {"1": float(i)}} for i, t in enumerate(tickers)]
+                 + [{"ticker": "SUCE", "ranked_by": {"1": 896.67}}]}
+        self.assertNotIn("SUCE", [t for _, t in pb.ranked(block, 1, panel, basis)])
+        self.assertEqual(len(ev.pairs_for(block, basis, 1, panel)), 40)
+        drawn = pb.scenarios({"basisSession": basis, "models": {"momentum20": block}}, panel, dates)
+        self.assertNotIn("SUCE", drawn["companies"])
+        self.assertRegex(drawn["leftOut"]["SUCE"], r"x7\.08")
+        self.assertNotIn("SUCE", pb.scores_of({"forecasts": [{"ticker": "SUCE", "ranked_by": {"5": 99.0}}]}, panel, basis))
+
+    def test_a_break_after_the_night_does_not_reach_back_into_it(self):
+        dates = [f"2026-09-{d:02d}" for d in range(1, 11)]
+        panel = panel_of({"LATE": {d: (19.0 if k < 9 else 134.55) for k, d in enumerate(dates)}})
+        self.assertTrue(ev.readable(panel, "LATE", dates[8]))
+        self.assertFalse(ev.readable(panel, "LATE", dates[9]))
+
+
 class EarlyExitTest(unittest.TestCase):
     """A night already sealed costs the retry schedule seconds, not Kronos."""
 

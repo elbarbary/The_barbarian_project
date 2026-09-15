@@ -212,6 +212,23 @@ test('no instrument without an exchange ticker reaches the workbench', () => {
   }
 });
 
+test('a company left out of the run is named with its reason and ranked nowhere', () => {
+  // 14 September: Suez Cement resumed at 134.55 after three months at 19.00,
+  // and momentum called it a 897% rise over twenty sessions.
+  const left = scenarios.leftOut || {};
+  for (const [ticker, why] of Object.entries(left)) {
+    assert.equal(typeof why, 'string');
+    assert.ok(why.length > 5, `${ticker} is left out with no reason`);
+    assert.ok(!(ticker in scenarios.companies), `${ticker} is left out and still ranked`);
+  }
+  // Whatever is ranked moved less than a doubling between any two closes, so
+  // no momentum figure can be the ten-fold jump of a restarted series.
+  for (const c of Object.values(scenarios.companies)) {
+    const move = c.models?.momentum20?.rankedBy?.['20'];
+    if (typeof move === 'number') assert.ok(Math.abs(move) < 500, `${c.ticker} moved ${move}% in twenty closes`);
+  }
+});
+
 test('a five is always five, and a night not counted names nobody', () => {
   for (const group of [picks.models, picks.readings]) {
     for (const entry of Object.values(group)) {

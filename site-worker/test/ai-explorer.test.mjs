@@ -349,6 +349,14 @@ test('an instrument with no exchange ticker is never ranked', () => {
   assert.deepEqual(tickersOf(byClass(node, 'aix-ranking-card')[0]), ['AAA', 'CCC', 'BBB']);
 });
 
+test('companies left out of the run are counted beside the ranking', () => {
+  const withLeft = { ...scenarios, leftOut: { SUCE: 'no close for 98 days, 2026-06-03 to 2026-09-09', EGS659O1C015: 'no exchange ticker' } };
+  const node = screen(component({ scModel: 'kronos' }), { ...data, scenarios: withLeft });
+  const tiles = byClass(node, 'aix-tile').map(text);
+  assert.match(tiles[2], /2 left out — no exchange ticker, or gaps or impossible jumps in their prices/);
+  assert.doesNotMatch(text(byClass(node, 'aix-ranking-card')[0]), /SUCE/);
+});
+
 test('a ranking baseline ranks by the move it saw, never a forecast', () => {
   const card = byClass(screen(component({ scModel: 'momentum20' })), 'aix-ranking-card')[0];
   assert.deepEqual(tickersOf(card), ['AAA', 'BBB']);
@@ -363,7 +371,7 @@ test('a ranking baseline ranks by the move it saw, never a forecast', () => {
 test('switching Gemini on shows its ranking in the same table, with where the model had each company', () => {
   const c = component({ scModel: 'kronos' });
   let node = screen(c);
-  button(node, 'After Gemini re-ranks it').events.click();
+  button(node, 'Re-ranked by Gemini').events.click();
   assert.deepEqual(c.state.scLayers, GEMINI);
   node = screen(c);
   button(node, 'Its own measurements').events.click();
@@ -380,11 +388,11 @@ test('switching Gemini on shows its ranking in the same table, with where the mo
   assert.match(text(card), /the measurements moved it/);
   const tiles = byClass(node, 'aix-tile').map(text);
   assert.match(tiles[0], /TOP 5 · Kronos-small EXPECTS.*-0\.17%/s);
-  assert.match(tiles[1], /NEW TO Kronos-small’S TOP 5.*0 \/ 3/s);
+  assert.match(tiles[1], /NEW TO THE TOP 5.*0 \/ 3/s);
   assert.match(tiles[2], /GEMINI KEPT.*2/s);
-  assert.match(button(node, 'After Gemini re-ranks it').attrs.class, /\bon\b/);
+  assert.match(button(node, 'Re-ranked by Gemini').attrs.class, /\bon\b/);
   // One press back to the model's own ranking.
-  button(node, 'Kronos-small’s ranking').events.click();
+  button(node, 'Ranked by Kronos-small').events.click();
   assert.deepEqual(c.state.scLayers, []);
   assert.match(text(byClass(screen(c), 'aix-ranking-card')[0]), /Ranked by Kronos-small/);
 });

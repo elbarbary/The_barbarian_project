@@ -92,6 +92,41 @@ def listed(ticker) -> bool:
     """Whether a ticker is an exchange ticker rather than an ISIN stand-in."""
     return isinstance(ticker, str) and bool(ticker) and not ISIN.match(ticker)
 
+
+# Every model reads a company's last MIN_BARS closes as one run of sessions.
+# Some companies' closes are not one: Suez Cement's stopped at 19.00 EGP on
+# 3 June and resumed at 134.55 on 9 September, and on 14 September momentum
+# called that a 897% rise "over twenty sessions", reversal a 691% fall to buy
+# back, and Kronos a 75% collapse. El Shams Pyramids' ninety closes reach back
+# to 2021; Delta Construction's print 50.00, 24.11, 50.00 in three sessions.
+#
+# Two tests, both over the window a model reads and nothing after it:
+#   * no two closes more than GAP_DAYS apart — a suspension, or a share that
+#     trades a few times a quarter, is not a series of sessions;
+#   * no step from one close to the next beyond STEP either way — the
+#     exchange's daily limit makes a doubling or a halving between two closes
+#     impossible without a corporate action or a bad print.
+GAP_DAYS = 45
+STEP = 2.0
+
+
+def unreadable(bars: list[dict]) -> str | None:
+    """Why a company's recent closes are not a series a model can read, or None."""
+    window = [b for b in bars
+              if isinstance(b.get("close"), (int, float)) and b["close"] > 0 and b.get("date")][-MIN_BARS:]
+    for before, after in zip(window, window[1:]):
+        try:
+            gap = (datetime.date.fromisoformat(after["date"][:10])
+                   - datetime.date.fromisoformat(before["date"][:10])).days
+        except ValueError:
+            return f"an unreadable date near {after['date']}"
+        if gap > GAP_DAYS:
+            return f"no close for {gap} days, {before['date']} to {after['date']}"
+        ratio = after["close"] / before["close"]
+        if not 1 / STEP < ratio < STEP:
+            return f"the close moved x{ratio:.2f} between {before['date']} and {after['date']}"
+    return None
+
 # The exchange's day, in the exchange's own time. Egypt keeps summer time, so
 # this cannot be a fixed offset from UTC.
 CAIRO = zoneinfo.ZoneInfo("Africa/Cairo")
@@ -168,13 +203,16 @@ def universe(scan: dict, *, today=None,
     timeout loses a random slice of the market rather than its quiet end.
     """
     built = pricing.build(scan, today=today, root=root)
+    broken = {ticker: why for ticker, bars in built["panel"].items()
+              if listed(ticker) and len(bars) >= MIN_BARS and (why := unreadable(bars))}
     rows = [{"ticker": ticker, "bars": bars}
             for ticker, bars in built["panel"].items()
-            if len(bars) >= MIN_BARS and listed(ticker)]
+            if len(bars) >= MIN_BARS and listed(ticker) and ticker not in broken]
     rows.sort(key=lambda r: r["ticker"])
     sources = dict(built["sources"])
     # Counted, never dropped silently.
     sources["withoutTicker"] = sorted(t for t in built["panel"] if not listed(t))
+    sources["unreadable"] = dict(sorted(broken.items()))
     return rows, sources
 
 
@@ -435,6 +473,9 @@ def main(argv=None) -> int:
     print(f"   prices: {prices['archiveCount']} from this project's archive, "
           f"{prices['scanOnlyCount']} from the vendor alone, "
           f"{prices['extendedCount']} carrying today's close from the exchange")
+    if prices.get("unreadable"):
+        print(f"   left out {len(prices['unreadable'])} companies whose recent closes are not "
+              f"one series: {', '.join(prices['unreadable'])}")
     if prices.get("withoutTicker"):
         print(f"   left out {len(prices['withoutTicker'])} instruments with no exchange "
               f"ticker: {', '.join(prices['withoutTicker'])}")

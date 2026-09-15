@@ -575,6 +575,9 @@ export function scenariosScreen(component, data, ar) {
     // What the numbers in the past runs are: Gemini's scores when it is on.
     says: gemini ? saysOf('rerank') : (choice.meta?.says || { kind: 'return' }),
     topCount: picks?.topCount ?? top5?.topCount ?? 5,
+    // Answered that night, but not ranked: no exchange ticker, or recent
+    // closes with a long gap or a move no daily limit allows (`run.unreadable`).
+    leftOut: Object.keys(scenarios?.leftOut || {}).length,
     loading: !picks && !!st.extrasLoading,
     readingLoading: gemini && !reading && !!(st.scLoading && st.scLoading[key]),
     readingFailed: gemini && !reading ? (st.scFailed && st.scFailed[key]) || null : null,

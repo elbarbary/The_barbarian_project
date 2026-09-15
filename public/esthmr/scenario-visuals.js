@@ -110,11 +110,11 @@ export function viewSwitch(component, ctx, ar, { onModel, onGemini } = {}) {
   return h('div', { class: 'aix-view' },
     h('div', { class: 'aix-view-switch', role: 'group', 'aria-label': t('What the ranking shows', 'ما يعرضه الترتيب') },
       h('button', { type: 'button', class: choice.gemini ? '' : 'on', 'aria-pressed': String(!choice.gemini), onClick: onModel },
-        h('b', null, '1'), h('span', null, t(`${words.model}’s ranking`, `ترتيب ${words.model}`))),
+        h('b', null, '1'), h('span', null, t(`Ranked by ${words.model}`, `ترتيب ${words.model}`))),
       h('i', { 'aria-hidden': 'true' }, ar ? '←' : '→'),
       h('button', { type: 'button', class: choice.gemini ? 'on' : '', 'aria-pressed': String(choice.gemini),
         disabled: !choice.readable, onClick: onGemini },
-      h('b', null, '2'), h('span', null, t('After Gemini re-ranks it', 'بعد إعادة ترتيب Gemini')))),
+      h('b', null, '2'), h('span', null, t('Re-ranked by Gemini', 'بعد إعادة ترتيب Gemini')))),
     h('p', { class: 'aix-note' }, choice.gemini
       ? t(`Gemini read what all the models forecast, with ${words.evidence}, and re-ordered every company. Beside each one: where ${words.model} had it.`,
         `قرأ Gemini ما توقعته كل النماذج، مع ${words.evidence}، وأعاد ترتيب كل الشركات. بجانب كل واحدة: أين وضعها ${words.model}.`)
@@ -151,7 +151,7 @@ export function rankingTiles(ctx, ar) {
     const fresh = top.filter((r) => !theirs.has(r.ticker)).length;
     const count = Number.isInteger(reading?.count) ? reading.count : said?.count;
     return h('div', { class: 'aix-tiles' }, first,
-      tile(t(`NEW TO ${words.model}’S TOP 5`, `جديدة على أعلى 5 لدى ${words.model}`), `${fresh} / ${top.length}`,
+      tile(t('NEW TO THE TOP 5', 'جديدة على أعلى 5'), `${fresh} / ${top.length}`,
         t(`companies in Gemini’s five that ${words.model} did not have in its own`, `شركات في خمس Gemini لم تكن في خمس ${words.model}`)),
       tile(t('GEMINI KEPT', 'أبقى Gemini'), Number.isInteger(count) ? String(count) : '—',
         Number.isInteger(count)
@@ -163,7 +163,10 @@ export function rankingTiles(ctx, ar) {
     tile(says.kind === 'return' ? t('WHOLE MARKET · EXPECTED', 'السوق كله · المتوقع') : t('WHOLE MARKET · MOVE', 'السوق كله · الحركة'),
       percent(whole), t(`the middle of all ${ranking.rows.length} companies`, `الوسط بين ${ranking.rows.length} شركة`), tone(whole)),
     tile(t('COMPANIES RANKED', 'شركات مرتّبة'), String(ranking.rows.length),
-      t('every company it had a number for in this run', 'كل شركة لديه رقم لها في هذا التشغيل')));
+      ctx.leftOut
+        ? t(`every company with a clean price history; ${ctx.leftOut} left out — no exchange ticker, or gaps or impossible jumps in their prices`,
+          `كل شركة لها سجل أسعار سليم؛ استُبعدت ${ctx.leftOut} — بلا رمز تداول، أو بفجوات أو قفزات مستحيلة في أسعارها`)
+        : t('every company it had a number for in this run', 'كل شركة لديه رقم لها في هذا التشغيل')));
 }
 
 /** The ranking itself: every company, highest first, the five its record

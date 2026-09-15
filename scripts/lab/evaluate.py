@@ -105,6 +105,30 @@ def bars_of(panel: dict, ticker: str) -> list[dict]:
     return [held[d] for d in sorted(held)]
 
 
+# One panel's answers, kept while that panel is the one being scored: every
+# model, horizon and night asks about the same company on the same night.
+_READABLE: dict = {"panel": None, "seen": {}}
+
+
+def readable(panel: dict, ticker, basis: str) -> bool:
+    """Whether a company had an exchange ticker and one readable run of closes
+    up to a night's basis — `run.listed` and `run.unreadable`, judged on what
+    existed that night, so a night sealed before either rule is scored as if
+    it had been asked under both."""
+    if not lab.listed(ticker):
+        return False
+    held = panel.get(ticker)
+    if not held:
+        return True     # nothing to judge; forward_return will find nothing either
+    if _READABLE["panel"] is not panel:
+        _READABLE["panel"], _READABLE["seen"] = panel, {}
+    seen = _READABLE["seen"]
+    key = (ticker, basis, len(held))
+    if key not in seen:
+        seen[key] = lab.unreadable([held[d] for d in sorted(held) if d <= basis]) is None
+    return seen[key]
+
+
 def fold(document: dict, layer: dict) -> dict:
     """A night with a second-pass reading folded in, the sealed run untouched.
 
@@ -268,10 +292,10 @@ def pairs_for(block: dict, basis: str, horizon: int, panel: dict) -> list[tuple]
     for record in block.get("forecasts") or []:
         ticker = record.get("ticker")
         guess = predicted(record, horizon)
-        # A night sealed before `lab.listed` existed may still carry an
-        # instrument with no exchange ticker; it is scored the way it would
-        # have been asked about now — not at all.
-        if not lab.listed(ticker) or guess is None:
+        # A night sealed before `lab.listed` or `lab.unreadable` existed may
+        # still carry a company neither lets through; it is scored the way it
+        # would be asked about now — not at all.
+        if guess is None or not readable(panel, ticker, basis):
             continue
         actual = sc.forward_return(bars_of(panel, ticker), basis, horizon)
         if actual is None:
@@ -306,7 +330,7 @@ def selection(block: dict, basis: str, horizon: int, panel: dict) -> dict | None
     for record in block.get("forecasts") or []:
         ticker = record.get("ticker")
         value = predicted(record, horizon)
-        if not lab.listed(ticker) or value is None:
+        if value is None or not readable(panel, ticker, basis):
             continue
         actual = sc.forward_return(bars_of(panel, ticker), basis, horizon)
         if actual is None:
