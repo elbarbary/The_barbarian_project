@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-09-15T08:47:57Z",
+ "builtAt": "2026-09-15T09:14:09Z",
  "dates": [
   "2026-08-20",
   "2026-08-23",
@@ -35,7 +35,7 @@
     "frozenDates": 0,
     "reconstructedDates": 0,
     "withheldDates": 1,
-    "scored": 207,
+    "scored": 206,
     "against": {
      "drift": {
       "dates": 0,
@@ -177,16 +177,16 @@
   "drift": {
    "1": {
     "dates": 8,
-    "mean": -0.084709,
-    "median": -0.148086,
-    "positive": 2,
-    "t": -1.5601,
-    "sd": 0.153575,
-    "se": 0.054297,
+    "mean": -0.106794,
+    "median": -0.145473,
+    "positive": 1,
+    "t": -2.1825,
+    "sd": 0.138402,
+    "se": 0.048932,
     "frozenDates": 0,
     "reconstructedDates": 8,
     "withheldDates": 2,
-    "scored": 207,
+    "scored": 204,
     "against": {
      "flat": {
       "dates": 0,
@@ -196,42 +196,42 @@
      },
      "momentum20": {
       "dates": 8,
-      "mean_difference": -0.04194,
-      "t": -1.4446,
+      "mean_difference": -0.049172,
+      "t": -1.7662,
       "ahead": 2
      },
      "momentum60": {
       "dates": 8,
-      "mean_difference": -0.007617,
-      "t": -1.2042,
-      "ahead": 1
+      "mean_difference": -0.005811,
+      "t": -1.4178,
+      "ahead": 2
      },
      "reversal1": {
       "dates": 8,
-      "mean_difference": -0.081251,
-      "t": -1.1703,
+      "mean_difference": -0.104607,
+      "t": -1.602,
       "ahead": 2
      },
      "reversal5": {
       "dates": 8,
-      "mean_difference": -0.132421,
-      "t": -2.2247,
+      "mean_difference": -0.141479,
+      "t": -3.5371,
       "ahead": 1
      }
     }
    },
    "5": {
     "dates": 9,
-    "mean": -0.127471,
-    "median": -0.148974,
+    "mean": -0.158776,
+    "median": -0.163078,
     "positive": 1,
-    "t": -3.1698,
-    "sd": 0.120642,
-    "se": 0.040214,
+    "t": -3.6995,
+    "sd": 0.128756,
+    "se": 0.042919,
     "frozenDates": 0,
     "reconstructedDates": 9,
     "withheldDates": 0,
-    "scored": 206,
+    "scored": 204,
     "against": {
      "flat": {
       "dates": 0,
@@ -241,27 +241,27 @@
      },
      "momentum20": {
       "dates": 9,
-      "mean_difference": -0.096907,
-      "t": -4.7808,
+      "mean_difference": -0.091774,
+      "t": -3.2788,
       "ahead": 1
      },
      "momentum60": {
       "dates": 9,
-      "mean_difference": -0.009916,
-      "t": -4.4349,
-      "ahead": 1
+      "mean_difference": -0.001508,
+      "t": -0.8594,
+      "ahead": 3
      },
      "reversal1": {
       "dates": 9,
-      "mean_difference": -0.147713,
-      "t": -2.3981,
-      "ahead": 2
+      "mean_difference": -0.17791,
+      "t": -2.87,
+      "ahead": 1
      },
      "reversal5": {
       "dates": 9,
-      "mean_difference": -0.148696,
-      "t": -1.7468,
-      "ahead": 3
+      "mean_difference": -0.164785,
+      "t": -2.2796,
+      "ahead": 2
      }
     }
    },
@@ -319,7 +319,7 @@
     "frozenDates": 0,
     "reconstructedDates": 0,
     "withheldDates": 2,
-    "scored": 207,
+    "scored": 204,
     "against": {
      "drift": {
       "dates": 0,
@@ -362,7 +362,7 @@
     "frozenDates": 0,
     "reconstructedDates": 0,
     "withheldDates": 0,
-    "scored": 206,
+    "scored": 204,
     "against": {
      "drift": {
       "dates": 0,
@@ -443,21 +443,21 @@
   "kronos": {
    "1": {
     "dates": 8,
-    "mean": 0.043536,
-    "median": 0.052486,
-    "positive": 5,
-    "t": 1.7699,
-    "sd": 0.069571,
-    "se": 0.024597,
+    "mean": 0.062496,
+    "median": 0.071448,
+    "positive": 6,
+    "t": 2.2625,
+    "sd": 0.078128,
+    "se": 0.027622,
     "frozenDates": 8,
     "reconstructedDates": 0,
     "withheldDates": 2,
-    "scored": 207,
+    "scored": 204,
     "against": {
      "drift": {
       "dates": 8,
-      "mean_difference": 0.128245,
-      "t": 2.2172,
+      "mean_difference": 0.16929,
+      "t": 3.0527,
       "ahead": 7
      },
      "flat": {
@@ -468,48 +468,48 @@
      },
      "momentum20": {
       "dates": 8,
-      "mean_difference": 0.086305,
-      "t": 2.323,
-      "ahead": 5
+      "mean_difference": 0.120118,
+      "t": 2.9387,
+      "ahead": 7
      },
      "momentum60": {
       "dates": 8,
-      "mean_difference": 0.120628,
-      "t": 2.1121,
+      "mean_difference": 0.163478,
+      "t": 2.9745,
       "ahead": 7
      },
      "reversal1": {
       "dates": 8,
-      "mean_difference": 0.046994,
-      "t": 1.1261,
-      "ahead": 6
+      "mean_difference": 0.064683,
+      "t": 1.7032,
+      "ahead": 7
      },
      "reversal5": {
       "dates": 8,
-      "mean_difference": -0.004176,
-      "t": -0.1611,
-      "ahead": 5
+      "mean_difference": 0.027811,
+      "t": 0.9782,
+      "ahead": 6
      }
     }
    },
    "5": {
     "dates": 9,
-    "mean": 0.042989,
-    "median": 0.074931,
-    "positive": 5,
-    "t": 1.2425,
-    "sd": 0.103796,
-    "se": 0.034599,
+    "mean": 0.069012,
+    "median": 0.092747,
+    "positive": 6,
+    "t": 2.1463,
+    "sd": 0.096461,
+    "se": 0.032154,
     "frozenDates": 9,
     "reconstructedDates": 0,
     "withheldDates": 0,
-    "scored": 206,
+    "scored": 204,
     "against": {
      "drift": {
       "dates": 9,
-      "mean_difference": 0.17046,
-      "t": 2.3142,
-      "ahead": 7
+      "mean_difference": 0.227788,
+      "t": 3.0992,
+      "ahead": 8
      },
      "flat": {
       "dates": 0,
@@ -519,27 +519,27 @@
      },
      "momentum20": {
       "dates": 9,
-      "mean_difference": 0.073552,
-      "t": 1.1742,
+      "mean_difference": 0.136014,
+      "t": 2.5075,
       "ahead": 6
      },
      "momentum60": {
       "dates": 9,
-      "mean_difference": 0.160544,
-      "t": 2.2129,
-      "ahead": 6
+      "mean_difference": 0.22628,
+      "t": 3.1382,
+      "ahead": 8
      },
      "reversal1": {
       "dates": 9,
-      "mean_difference": 0.022746,
-      "t": 0.5461,
-      "ahead": 5
+      "mean_difference": 0.049878,
+      "t": 0.9999,
+      "ahead": 6
      },
      "reversal5": {
       "dates": 9,
-      "mean_difference": 0.021763,
-      "t": 0.6529,
-      "ahead": 6
+      "mean_difference": 0.063003,
+      "t": 2.3655,
+      "ahead": 8
      }
     }
    },
@@ -596,21 +596,21 @@
   "momentum20": {
    "1": {
     "dates": 8,
-    "mean": -0.042769,
-    "median": -0.049794,
-    "positive": 1,
-    "t": -1.3952,
-    "sd": 0.086704,
-    "se": 0.030654,
+    "mean": -0.057622,
+    "median": -0.071088,
+    "positive": 2,
+    "t": -2.075,
+    "sd": 0.078543,
+    "se": 0.027769,
     "frozenDates": 0,
     "reconstructedDates": 8,
     "withheldDates": 2,
-    "scored": 207,
+    "scored": 204,
     "against": {
      "drift": {
       "dates": 8,
-      "mean_difference": 0.04194,
-      "t": 1.4446,
+      "mean_difference": 0.049172,
+      "t": 1.7662,
       "ahead": 6
      },
      "flat": {
@@ -621,41 +621,41 @@
      },
      "momentum60": {
       "dates": 8,
-      "mean_difference": 0.034323,
-      "t": 1.192,
+      "mean_difference": 0.043361,
+      "t": 1.564,
       "ahead": 6
      },
      "reversal1": {
       "dates": 8,
-      "mean_difference": -0.039311,
-      "t": -0.6884,
-      "ahead": 2
+      "mean_difference": -0.055435,
+      "t": -0.9023,
+      "ahead": 3
      },
      "reversal5": {
       "dates": 8,
-      "mean_difference": -0.090481,
-      "t": -2.0706,
-      "ahead": 3
+      "mean_difference": -0.092307,
+      "t": -2.6826,
+      "ahead": 2
      }
     }
    },
    "5": {
     "dates": 9,
-    "mean": -0.030564,
-    "median": -0.031703,
-    "positive": 3,
-    "t": -1.0672,
-    "sd": 0.085915,
-    "se": 0.028638,
+    "mean": -0.067002,
+    "median": -0.08601,
+    "positive": 2,
+    "t": -2.8823,
+    "sd": 0.069738,
+    "se": 0.023246,
     "frozenDates": 0,
     "reconstructedDates": 9,
     "withheldDates": 0,
-    "scored": 206,
+    "scored": 204,
     "against": {
      "drift": {
       "dates": 9,
-      "mean_difference": 0.096907,
-      "t": 4.7808,
+      "mean_difference": 0.091774,
+      "t": 3.2788,
       "ahead": 8
      },
      "flat": {
@@ -666,20 +666,20 @@
      },
      "momentum60": {
       "dates": 9,
-      "mean_difference": 0.086992,
-      "t": 4.3787,
+      "mean_difference": 0.090266,
+      "t": 3.3447,
       "ahead": 8
      },
      "reversal1": {
       "dates": 9,
-      "mean_difference": -0.050806,
-      "t": -0.9181,
-      "ahead": 2
+      "mean_difference": -0.086136,
+      "t": -1.5753,
+      "ahead": 3
      },
      "reversal5": {
       "dates": 9,
-      "mean_difference": -0.051789,
-      "t": -0.6872,
+      "mean_difference": -0.07301,
+      "t": -1.3416,
       "ahead": 4
      }
     }
@@ -731,22 +731,22 @@
   "momentum60": {
    "1": {
     "dates": 8,
-    "mean": -0.077092,
-    "median": -0.122115,
-    "positive": 2,
-    "t": -1.4274,
-    "sd": 0.152764,
-    "se": 0.05401,
+    "mean": -0.100982,
+    "median": -0.133198,
+    "positive": 1,
+    "t": -2.0641,
+    "sd": 0.138378,
+    "se": 0.048924,
     "frozenDates": 0,
     "reconstructedDates": 8,
     "withheldDates": 2,
-    "scored": 207,
+    "scored": 204,
     "against": {
      "drift": {
       "dates": 8,
-      "mean_difference": 0.007617,
-      "t": 1.2042,
-      "ahead": 7
+      "mean_difference": 0.005811,
+      "t": 1.4178,
+      "ahead": 6
      },
      "flat": {
       "dates": 0,
@@ -756,42 +756,42 @@
      },
      "momentum20": {
       "dates": 8,
-      "mean_difference": -0.034323,
-      "t": -1.192,
+      "mean_difference": -0.043361,
+      "t": -1.564,
       "ahead": 2
      },
      "reversal1": {
       "dates": 8,
-      "mean_difference": -0.073634,
-      "t": -1.0244,
+      "mean_difference": -0.098795,
+      "t": -1.503,
       "ahead": 2
      },
      "reversal5": {
       "dates": 8,
-      "mean_difference": -0.124804,
-      "t": -2.0953,
+      "mean_difference": -0.135667,
+      "t": -3.3446,
       "ahead": 1
      }
     }
    },
    "5": {
     "dates": 9,
-    "mean": -0.117555,
-    "median": -0.137676,
+    "mean": -0.157268,
+    "median": -0.158956,
     "positive": 1,
-    "t": -3.0061,
-    "sd": 0.117319,
-    "se": 0.039106,
+    "t": -3.7818,
+    "sd": 0.124756,
+    "se": 0.041585,
     "frozenDates": 0,
     "reconstructedDates": 9,
     "withheldDates": 0,
-    "scored": 206,
+    "scored": 204,
     "against": {
      "drift": {
       "dates": 9,
-      "mean_difference": 0.009916,
-      "t": 4.4349,
-      "ahead": 8
+      "mean_difference": 0.001508,
+      "t": 0.8594,
+      "ahead": 6
      },
      "flat": {
       "dates": 0,
@@ -801,21 +801,21 @@
      },
      "momentum20": {
       "dates": 9,
-      "mean_difference": -0.086992,
-      "t": -4.3787,
+      "mean_difference": -0.090266,
+      "t": -3.3447,
       "ahead": 1
      },
      "reversal1": {
       "dates": 9,
-      "mean_difference": -0.137798,
-      "t": -2.2773,
-      "ahead": 2
+      "mean_difference": -0.176402,
+      "t": -2.8998,
+      "ahead": 1
      },
      "reversal5": {
       "dates": 9,
-      "mean_difference": -0.138781,
-      "t": -1.6564,
-      "ahead": 3
+      "mean_difference": -0.163276,
+      "t": -2.3008,
+      "ahead": 2
      }
     }
    },
@@ -3250,21 +3250,21 @@
   "reversal1": {
    "1": {
     "dates": 8,
-    "mean": -0.003458,
-    "median": 0.003988,
-    "positive": 4,
-    "t": -0.0719,
-    "sd": 0.136127,
-    "se": 0.048128,
+    "mean": -0.002187,
+    "median": 0.016116,
+    "positive": 6,
+    "t": -0.0416,
+    "sd": 0.148782,
+    "se": 0.052602,
     "frozenDates": 0,
     "reconstructedDates": 8,
     "withheldDates": 2,
-    "scored": 207,
+    "scored": 204,
     "against": {
      "drift": {
       "dates": 8,
-      "mean_difference": 0.081251,
-      "t": 1.1703,
+      "mean_difference": 0.104607,
+      "t": 1.602,
       "ahead": 6
      },
      "flat": {
@@ -3275,42 +3275,42 @@
      },
      "momentum20": {
       "dates": 8,
-      "mean_difference": 0.039311,
-      "t": 0.6884,
-      "ahead": 6
+      "mean_difference": 0.055435,
+      "t": 0.9023,
+      "ahead": 5
      },
      "momentum60": {
       "dates": 8,
-      "mean_difference": 0.073634,
-      "t": 1.0244,
+      "mean_difference": 0.098795,
+      "t": 1.503,
       "ahead": 6
      },
      "reversal5": {
       "dates": 8,
-      "mean_difference": -0.05117,
-      "t": -1.2387,
-      "ahead": 2
+      "mean_difference": -0.036872,
+      "t": -0.8422,
+      "ahead": 4
      }
     }
    },
    "5": {
     "dates": 9,
-    "mean": 0.020242,
-    "median": 0.01462,
+    "mean": 0.019134,
+    "median": 0.032415,
     "positive": 5,
-    "t": 0.5464,
-    "sd": 0.111143,
-    "se": 0.037048,
+    "t": 0.4468,
+    "sd": 0.128475,
+    "se": 0.042825,
     "frozenDates": 0,
     "reconstructedDates": 9,
     "withheldDates": 0,
-    "scored": 206,
+    "scored": 204,
     "against": {
      "drift": {
       "dates": 9,
-      "mean_difference": 0.147713,
-      "t": 2.3981,
-      "ahead": 7
+      "mean_difference": 0.17791,
+      "t": 2.87,
+      "ahead": 8
      },
      "flat": {
       "dates": 0,
@@ -3320,21 +3320,21 @@
      },
      "momentum20": {
       "dates": 9,
-      "mean_difference": 0.050806,
-      "t": 0.9181,
-      "ahead": 7
+      "mean_difference": 0.086136,
+      "t": 1.5753,
+      "ahead": 6
      },
      "momentum60": {
       "dates": 9,
-      "mean_difference": 0.137798,
-      "t": 2.2773,
-      "ahead": 7
+      "mean_difference": 0.176402,
+      "t": 2.8998,
+      "ahead": 8
      },
      "reversal5": {
       "dates": 9,
-      "mean_difference": -0.000983,
-      "t": -0.0161,
-      "ahead": 5
+      "mean_difference": 0.013126,
+      "t": 0.2257,
+      "ahead": 6
      }
     }
    },
@@ -3385,21 +3385,21 @@
   "reversal5": {
    "1": {
     "dates": 8,
-    "mean": 0.047712,
-    "median": 0.056928,
-    "positive": 6,
-    "t": 2.1635,
-    "sd": 0.062375,
-    "se": 0.022053,
+    "mean": 0.034685,
+    "median": 0.04903,
+    "positive": 5,
+    "t": 1.3041,
+    "sd": 0.075225,
+    "se": 0.026596,
     "frozenDates": 0,
     "reconstructedDates": 8,
     "withheldDates": 2,
-    "scored": 207,
+    "scored": 204,
     "against": {
      "drift": {
       "dates": 8,
-      "mean_difference": 0.132421,
-      "t": 2.2247,
+      "mean_difference": 0.141479,
+      "t": 3.5371,
       "ahead": 7
      },
      "flat": {
@@ -3410,42 +3410,42 @@
      },
      "momentum20": {
       "dates": 8,
-      "mean_difference": 0.090481,
-      "t": 2.0706,
-      "ahead": 5
+      "mean_difference": 0.092307,
+      "t": 2.6826,
+      "ahead": 6
      },
      "momentum60": {
       "dates": 8,
-      "mean_difference": 0.124804,
-      "t": 2.0953,
+      "mean_difference": 0.135667,
+      "t": 3.3446,
       "ahead": 7
      },
      "reversal1": {
       "dates": 8,
-      "mean_difference": 0.05117,
-      "t": 1.2387,
-      "ahead": 6
+      "mean_difference": 0.036872,
+      "t": 0.8422,
+      "ahead": 4
      }
     }
    },
    "5": {
     "dates": 9,
-    "mean": 0.021225,
-    "median": 0.030072,
+    "mean": 0.006008,
+    "median": 0.01239,
     "positive": 5,
-    "t": 0.4155,
-    "sd": 0.15324,
-    "se": 0.05108,
+    "t": 0.1652,
+    "sd": 0.109134,
+    "se": 0.036378,
     "frozenDates": 0,
     "reconstructedDates": 9,
     "withheldDates": 0,
-    "scored": 206,
+    "scored": 204,
     "against": {
      "drift": {
       "dates": 9,
-      "mean_difference": 0.148696,
-      "t": 1.7468,
-      "ahead": 6
+      "mean_difference": 0.164785,
+      "t": 2.2796,
+      "ahead": 7
      },
      "flat": {
       "dates": 0,
@@ -3455,21 +3455,21 @@
      },
      "momentum20": {
       "dates": 9,
-      "mean_difference": 0.051789,
-      "t": 0.6872,
+      "mean_difference": 0.07301,
+      "t": 1.3416,
       "ahead": 5
      },
      "momentum60": {
       "dates": 9,
-      "mean_difference": 0.138781,
-      "t": 1.6564,
-      "ahead": 6
+      "mean_difference": 0.163276,
+      "t": 2.3008,
+      "ahead": 7
      },
      "reversal1": {
       "dates": 9,
-      "mean_difference": 0.000983,
-      "t": 0.0161,
-      "ahead": 4
+      "mean_difference": -0.013126,
+      "t": -0.2257,
+      "ahead": 3
      }
     }
    },
@@ -3527,7 +3527,7 @@
     "frozenDates": 0,
     "reconstructedDates": 0,
     "withheldDates": 1,
-    "scored": 207,
+    "scored": 206,
     "against": {
      "drift": {
       "dates": 0,
