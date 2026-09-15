@@ -656,8 +656,8 @@
     "meaning_ar": "تعكس القوائم المالية السنوية المدققة تحقيق الشركة إيرادات تفوق إجمالي تكاليف التشغيل والإهلاك والمصروفات التمويلية على مدار العام المالي، مما يضيف أرباحاً محتجزة موجبة إلى حقوق المساهمين في الميزانية العمومية."
   },
   "korra energi shareholders approve capital increase": {
-    "meaning": "A capital increase expands the company's equity base by issuing new shares, providing liquidity directly onto the balance sheet for working capital, project execution, or debt reduction.",
-    "meaning_ar": "تؤدي زيادة رأس المال إلى توسيع قاعدة حقوق الملكية بالشركة من خلال إصدار أسهم جديدة، مما يوفر سيولة نقدية مباشرة في الميزانية العمومية لتمويل رأس المال العامل أو تنفيذ المشروعات أو سداد الالتزامات."
+    "meaning": "A capital increase raises the company's nominal paid-in capital and equity base, providing funding for operations, asset acquisitions, or debt settlement through the issuance of new shares or capitalization of reserves.",
+    "meaning_ar": "تؤدي زيادة رأس المال إلى رفع رأس المال الاسمي المدفوع وقاعدة حقوق الملكية للشركة، مما يوفر تمويلاً للعمليات التشغيلية أو الاستحواذ على أصول أو تسوية التزامات عبر إصدار أسهم جديدة أو رسملة الاحتياطيات."
   },
   "madbouly inaugurates beixin taishan egypt building materials factory in sokhna": {
     "meaning": "The inauguration of the manufacturing facility adds industrial production capacity for building materials within the Suez Canal Economic Zone and expands foreign direct asset deployment in the domestic construction inputs sector.",
@@ -844,8 +844,8 @@
     "meaning_ar": "يحدد استهداف حجم مبيعات معين معياراً تشغيلياً لحجم الإنتاج السنوي والقدرة التوزيعية للشركة ضمن قطاع تصنيع الحبوب المحلي."
   },
   "«المجموعه للزجاج» تضخ 500 مليون جنيه لتشغيل خطي انتاج جديدين": {
-    "meaning": "The company allocates 500 million Egyptian pounds in capital expenditure to add two operational manufacturing lines, expanding its physical plant assets and installed industrial capacity.",
-    "meaning_ar": "تخصص الشركة إنفاقاً رأسمالياً بقيمة 500 مليون جنيه مصري لإضافة خطي تصنيع، مما يرفع من قيمة أصولها الإنتاجية وطاقتها الصناعية المركبة."
+    "meaning": "The company allocates 500 million EGP in capital expenditure to operationalize two new manufacturing lines, expanding total nominal industrial capacity and increasing the physical asset base on the balance sheet.",
+    "meaning_ar": "تخصص الشركة 500 مليون جنيه كإنفاق رأسمالي لتشغيل خطي إنتاج جديدين، وهو ما يرفع الطاقة الإنتاجية الاسمية ويزيد من قاعدة الأصول الثابتة في المركز المالي."
   },
   "«المستريح».. خطر يهدد الاستثمار الرسمي لمدخرات المصريين": {
     "meaning": "Unlicensed capital-pooling operations divert domestic household liquidity away from regulated banking channels and capital market instruments into the informal financial sector.",
@@ -1140,8 +1140,8 @@
     "meaning_ar": "يؤدي استمرار التضخم فوق مستهدف البنك المركزي إلى استمرار الضغوط على أسعار الفائدة الأساسية، وهو ما يحدد تكاليف الاقتراض وعوائد السندات الحكومية ومعدلات التبادل التجاري بين الهند وشركائها التجاريين، ومنهم مصر."
   },
   "ارتفاع الخام الامريكي بنحو 2% وبرنت يتجاوز 107 دولارات": {
-    "meaning": "Higher global crude oil benchmarks alter input costs for energy-intensive industrial producers and adjust baseline expenditures for petroleum-importing economies.",
-    "meaning_ar": "يؤدي ارتفاع أسعار خام النفط عالمياً إلى تعديل تكاليف المدخلات التشغيلية للقطاعات الصناعية كثيفة الاستهلاك للطاقة وتغيير النفقات الأساسية للدول المستوردة للمنتجات البترولية."
+    "meaning": "Higher global crude oil benchmarks elevate input energy and transportation costs across industrial sectors, while simultaneously impacting state subsidy obligations and operational cash flows for oil and gas producers.",
+    "meaning_ar": "يؤدي ارتفاع أسعار النفط الخام العالمية إلى زيادة تكاليف الطاقة ومدخلات النقل عبر القطاعات الصناعية، بالتوازي مع تأثير ذلك على بنود دعم الوقود والتدفقات النقدية التشغيلية لشركات إنتاج البترول والغاز."
   },
   "ارتفاع الدولار وسط ترقب قرارات الفايده في امريكا واليابان وبريطانيا": {
     "meaning": "Divergent monetary policy expectations and interest rate decisions across major central banks drive global foreign exchange repositioning, which alters USD liquidity flows and directly impacts local currency valuation and import pricing dynamics in emerging markets such as Egypt.",
@@ -1184,8 +1184,8 @@
     "meaning_ar": "يؤدي ارتفاع عائد السندات القياسية إلى زيادة تكلفة الاقتراض الدولي وقوة الدولار، مما يرفع تكلفة خدمة الدين السيادي ويعيد توجيه التدفقات الاستثمارية نحو الأصول المقومة بالعملة الأمريكية."
   },
   "ارتفاع مبيعات التجزيه في الصين باقل من المتوقع خلال اغسطس": {
-    "meaning": "Slower-than-expected retail sales growth indicates subdued domestic consumer spending in China, which directly correlates with global trade volumes and demand for industrial commodity inputs.",
-    "meaning_ar": "يشير نمو مبيعات التجزئة بأقل من التقديرات إلى تباطؤ وتيرة الإنفاق الاستهلاكي المحلي في الصين، وهو ما يرتبط بحجم حركة التجارة العالمية ومعدلات استهلاك مدخلات السلع الصناعية."
+    "meaning": "Retail sales data measures consumer spending across the economy, where an expansion rate falling below consensus forecasts reflects current domestic consumption operating at a slower pace than baseline market benchmarks.",
+    "meaning_ar": "تقيس بيانات مبيعات التجزئة حجم الإنفاق الاستهلاكي عبر قطاعات الاقتصاد، حيث يعكس نموها بوتيرة دون التوقعات أن وتيرة الاستهلاك المحلي الحالية تسجل أداءً أبطأ مقارنة بتقديرات السوق المرجعية."
   },
   "ارتفاع مستويات الشراء والبيع.. اسعار اليورو بختام تعاملات الخميس 10 سبتمبر 2026": {
     "meaning": "An upward adjustment in both the bid and ask exchange rates reflects a higher local currency cost for acquiring euro liquidity in the interbank foreign exchange market.",
@@ -1556,8 +1556,8 @@
     "meaning_ar": "يمثل هذا رصداً يومياً لأسعار بيع اللحوم بالجملة والتجزئة، والتي تعكس بشكل مباشر تكاليف الأعلاف الحالية، وآليات تسعير الاستيراد، ومستويات المعروض في قنوات التوزيع المحلية."
   },
   "اسعار المنازل في الصين تواصل التراجع رغم اجراءات دعم جديده": {
-    "meaning": "Persistent declines in Chinese residential property prices reflect an ongoing imbalance between high housing inventory and subdued buyer transaction volumes, limiting the direct transmission of state regulatory and liquidity stimulus into broader construction activity and global raw material consumption.",
-    "meaning_ar": "يعكس استمرار انخفاض أسعار العقارات السكنية في الصين خللاً قائماً بين المعروض المرتفع من الوحدات وحجم المعاملات الفعلي، مما يحد من الأثر المباشر لتدابير الدعم التنظيمية والسيولة الحكومية على نشاط التشييد ومعدلات استهلاك المواد الخام عالمياً."
+    "meaning": "Persistent declines in Chinese residential property prices reflect high inventory levels and developer liquidity constraints, which limit the transmission of regulatory easing into transaction volumes. On a macro level, sustained contraction in China's construction sector dampens global demand for raw industrial commodities such as steel, iron ore, and petrochemicals.",
+    "meaning_ar": "يعكس استمرار انخفاض أسعار العقارات السكنية في الصين ارتفاع المعروض وضعف السيولة لدى المطورين، مما يحد من انتقال أثر التيسيرات التنظيمية إلى وتيرة المبيعات. ويؤدي استمرار انكماش نشاط البناء الصيني إلى خفض الطلب العالمي الفعلي على السلع الصناعية الأولية كالمعادن والبتروكيماويات."
   },
   "اسعار النحاس تسجل مستوي قياسيا للجلسه الثانيه علي التوالي": {
     "meaning": "Copper serves as a primary raw material for industrial and cable manufacturing sectors, where record commodity prices directly elevate procurement costs and expand working capital requirements for producers.",
@@ -2755,10 +2755,6 @@
     "meaning": "Structured derivative contracts tied to semiconductor equities tie investor payouts directly to single-sector price volatility and concentration risk within the capital market.",
     "meaning_ar": "تربط عقود المشتقات المالية المهيكلة ذات الصلة بأسهم شركات أشباه الموصلات عوائد المستثمرين مباشرة بتقلبات أسعار قطاع واحد ومخاطر تركز السيولة في السوق المالية."
   },
-  "المركزي يبيع اذون خزانه": {
-    "meaning": "The Central Bank of Egypt issues short-term sovereign debt instruments on behalf of the Ministry of Finance to finance public spending needs and absorb liquidity from the banking sector.",
-    "meaning_ar": "يطرح البنك المركزي المصري أدوات دَين سيادية قصيرة الأجل نيابة عن وزارة المالية لتغطية نفقات الموازنة العامة وسحب السيولة النقدية من القطاع المصرفي."
-  },
   "المركزي يحذر من التعامل مع اي روابط الكترونيه مجهوله المصدر": {
     "meaning": "The Central Bank of Egypt issues a regulatory cybersecurity advisory to mitigate electronic fraud and unauthorized access to customer bank accounts across the banking system.",
     "meaning_ar": "يُصدر البنك المركزي المصري توجيهات رقابية للأمن السيبراني بهدف مواجهة عمليات الاحتيال الإلكتروني ومنع الاختراقات غير المصرح بها لحسابات العملاء بالقطاع المصرفي."
@@ -2788,8 +2784,8 @@
     "meaning_ar": "تندرج المشاركة والرعاية في البطولات الرياضية المجتمعية ضمن أنشطة المسؤولية المجتمعية للشركات والتواصل المؤسسي، وتُموَّل من خلال مخصصات المصروفات التشغيلية الدورية."
   },
   "المطورون العرب القابضه تنقل مقرها الرييسي الي بارك مول بالقاهره الجديده": {
-    "meaning": "Relocating the corporate headquarters to Park Mall in New Cairo shifts the company's administrative operations, central management, and executive footprint to an owned or leased commercial asset within an active real estate development zone.",
-    "meaning_ar": "يؤدي نقل المقر الرئيسي إلى بارك مول بالقاهرة الجديدة إلى نقل العمليات الإدارية والإدارة التنفيذية للشركة إلى أصل تجاري مملوك أو مستأجر يقع ضمن نطاق التطوير العقاري النشط."
+    "meaning": "Relocating the corporate headquarters to Park Mall in New Cairo consolidates the company's administrative operations within its commercial asset base in East Cairo. This operational adjustment shifts corporate occupancy directly into a retail and business development center.",
+    "meaning_ar": "يمثل نقل المقر الرئيسي إلى بارك مول بالقاهرة الجديدة تركيزاً للعمليات الإدارية للشركة ضمن محفظة أصولها التجارية في شرق القاهرة، حيث ينقل هذا الإجراء الإشغال المكتبي مباشرة إلى مركز تجاري وإداري."
   },
   "المطورون العرب تتحول للربحيه وتحقق 39و1 مليون جنيه بنهايه مارس 2026": {
     "meaning": "The company shifts from a net loss to a net profit, recording 39.1 million EGP as realized operating revenues exceed total costs and financing expenses during the financial period.",
@@ -2972,8 +2968,8 @@
     "meaning_ar": "يتناول المقال آليات التنافس المؤسسي وتركّز الحصص السوقية بين التكتلات الاقتصادية الكبرى في الهند عبر قطاعات حيوية، مع التركيز على استراتيجيات توظيف رؤوس الأموال والتكامل الرأسي."
   },
   "انطلاق التشغيل التجريبي لمحطه البضايع العامه والصب بميناء السخنه": {
-    "meaning": "Pilot operations at Sokhna Port's general and dry-bulk terminal activate testing of cargo handling equipment, storage yards, and deep-water berthing systems under live operational conditions.",
-    "meaning_ar": "يُفعّل التشغيل التجريبي لمحطة البضائع العامة والصب بميناء السخنة اختبار معدات التداول، وساحات التخزين، وأرصفة الرسو العميقة في ظل ظروف تشغيلية فعلية."
+    "meaning": "Pilot operations at Sokhna Port activate handling infrastructure for general and dry bulk cargo, testing operational workflows, vessel turnaround cycles, and multimodal logistics connections.",
+    "meaning_ar": "يُفعّل التشغيل التجريبي بميناء السخنة البنية التحتية لتداول البضائع العامة والصب الجاف، مع اختبار آليات التشغيل، ودورات شحن وتفريغ السفن، والربط اللوجستي متعدد الوسائط."
   },
   "انطلاق فعاليات الدوره الثامنه من FDC Summit الاسبوع المقبل بمشاركه شركات التكنولوجيا العالميه والمحليه": {
     "meaning": "Industry summits function as operational platforms for B2B engagement, commercial agreement negotiations, and technology transfer between multinational providers and local ICT firms.",
@@ -3236,8 +3232,8 @@
     "meaning_ar": "يؤدي رفع أسعار الفائدة من قِبل البنك المركزي إلى زيادة تكلفة الاقتراض بالعملة المحلية وتقليص فوارق العوائد مع العملات الأجنبية، مما يغير آليات تمويل تجارة الفائدة والتدفقات الرأسمالية عبر الحدود."
   },
   "بنك انجلترا يعتزم وقف مبيعات السندات طويله الاجل": {
-    "meaning": "This operational adjustment in the Bank of England's quantitative tightening framework halts the active market supply of long-maturity government gilts, leaving secondary market distribution exclusively to commercial and primary participants.",
-    "meaning_ar": "يُمثّل هذا الإجراء تعديلاً تشغيلياً في آلية التشديد الكمي لبنك إنجلترا عبر وقف المعروض من السندات الحكومية طويلة الأجل في السوق، مما يقصر تداول هذه الآجال على السوق الثانوية عبر المتعاملين التجاريين والرئيسيين."
+    "meaning": "This operational adjustment in the central bank's quantitative tightening framework halts the active market supply of long-maturity government gilts, confining balance sheet reduction to shorter-duration instruments.",
+    "meaning_ar": "يمثل هذا التعديل الإجرائي في برنامج التشديد الكمي للمصرف المركزي وقفاً لعمليات طرح السندات الحكومية طويلة الأجل في التداولات، مع قصر خفض الميزانية العمومية على الأدوات ذات الآجال الأقصر."
   },
   "بنك انجلترا: مخاوف تمويل الانفاق الدفاعي توجج اضطرابات اسواق السندات": {
     "meaning": "Increased government borrowing requirements to fund defense expenditure expand sovereign debt issuance in the primary market, which generates yield volatility across sovereign bond markets.",
@@ -3312,8 +3308,8 @@
     "meaning_ar": "تعكس أسعار النفط العالمية علاوة مخاطر جيوسياسية أثناء النزاعات الإقليمية، بينما يعيد انحسار مخاطر انقطاع الإمدادات تسعير الخام وفقاً لتوازنات العرض والطلب الأساسية وتكاليف الإنتاج الحدية."
   },
   "بين الارتفاع والتراجع.. كيف افتتح الدينار الكويتي تعاملات اليوم بالبنوك؟": {
-    "meaning": "Mixed opening rates for the Kuwaiti Dinar reflect interbank foreign exchange adjustments driven by real-time treasury liquidity and bilateral trade settlement requirements across commercial banks.",
-    "meaning_ar": "يعكس التباين في أسعار افتتاح الدينار الكويتي تسويات سوق الصرف بين البنوك (الإنتربنك) وفق مستويات السيولة اللحظية ومتطلبات تسوية المعاملات التجارية لدى البنوك التجارية."
+    "meaning": "Divergent opening quotes for the Kuwaiti Dinar reflect varying interbank FX liquidity levels, foreign currency demand-supply balances, and individual commercial banks' pricing spreads against the Egyptian Pound.",
+    "meaning_ar": "يعكس التباين في أسعار افتتاح الدينار الكويتي اختلاف مستويات السيولة الدولارية ومعدلات العرض والطلب بين البنوك، إلى جانب تفاوت هوامش التسعير الفردية المحددة للعملة مقابل الجنيه المصري."
   },
   "تابعه ل«ام ان تي حالا» تتقدم بطلب قيد اسهمها الي البورصه المصريه": {
     "meaning": "A subsidiary of MNT-Halan submits a listing application to the Egyptian Exchange (EGX), initiating the formal regulatory review process to register its shares under local market listing and disclosure rules.",
@@ -3977,8 +3973,8 @@
     "meaning_ar": "يمثل قرار جهاز حماية المنافسة استيفاءً للمتطلبات التنظيمية اللازمة لنقل حقوق الملكية والتشغيل لأصول امتيازات استكشاف وإنتاج النفط والغاز التابعة لشركة كابريكورن في مصر إلى شركة جينيل إنرجي."
   },
   "خالد سعد: 4 مصانع صينيه جديده للصناعات المغذيه للسيارات تدخل الانتاج في 2027": {
-    "meaning": "Establishing new automotive feeder factories adds local component manufacturing capacity to the domestic supply chain and increases the volume of localized industrial inputs available for vehicle assembly.",
-    "meaning_ar": "يضيف إنشاء مصانع جديدة للصناعات المغذية طاقات تصنيعية محلية للمكونات إلى سلاسل الإمداد، ويزيد حجم المدخلات الصناعية المحلية المتاحة لعمليات تجميع السيارات."
+    "meaning": "Establishing four Chinese auto-feeder plants introduces direct manufacturing facilities for vehicle components within the local supply chain, setting operations on a project timeline aimed at 2027.",
+    "meaning_ar": "يُمثّل إنشاء أربعة مصانع صينية للصناعات المغذية إدخال منشآت تصنيع مباشر لمكونات المركبات ضمن سلاسل الإمداد المحلية، بجدول زمني تشغيلي يستهدف عام 2027."
   },
   "خالد عباس: الانتهاء من تصميمات المرحله الثانيه للعاصمه الاداريه بنهايه 2026": {
     "meaning": "Completing the master planning and engineering designs for Phase 2 establishes the operational specifications and project scope required prior to launching infrastructure tenders, contractor procurement, and land allocation in the real estate and construction sectors.",
@@ -4798,8 +4794,8 @@
     "meaning_ar": "تمثل دراسة إنشاء مصنع جديد مرحلة تقييم جدوى لزيادة الطاقة التصنيعية والتوسع في قطاع الصناعات الغذائية والتصنيع الزراعي. ويتضمن التنفيذ تخصيص نفقات رأسمالية طويلة الأجل للأراضي، وخطوط الإنتاج، وسلاسل التوريد المبردة في المنطقة الصناعية بالعاشر من رمضان."
   },
   "شركه القوميه لاداره الاصول توافق علي شراء معده مساحيه بقيمه 2.5 مليون جنيه": {
-    "meaning": "This transaction constitutes a capital expenditure allocating EGP 2.5 million of liquidity into tangible operational fixed assets, bringing in-house surveying technical capabilities for asset planning and valuation.",
-    "meaning_ar": "يمثل هذا الإجراء إنفاقاً رأسمالياً يوجه 2.5 مليون جنيه من السيولة النقدية نحو أصول تشغيلية ثابتة، مما يدمج معدات المسح الفني ضمن الإمكانات الذاتية للشركة لتخطيط وتقييم الأصول."
+    "meaning": "This transaction constitutes a capital expenditure of EGP 2.5 million, converting liquid cash into tangible fixed assets on the balance sheet to provide in-house surveying and land-assessment tools for asset management operations.",
+    "meaning_ar": "تُمثل هذه العملية إنفاقاً رأسمالياً بقيمة 2.5 مليون جنيه لتحويل نقدية سائلة إلى أصول ثابتة ملموسة في الميزانية العمومية، مما يوفر معدات مساحية داخلية لعمليات تخطيط وإدارة الأصول."
   },
   "شركه بايونيرز بروبرتيز تشتري 450 الف سهم خزينه": {
     "meaning": "Treasury share purchases reallocate liquid cash into the company's own equity, temporarily reducing the active free float circulating on the exchange and categorising these shares as non-voting equity on the balance sheet.",
@@ -4874,8 +4870,8 @@
     "meaning_ar": "تعكس المستويات القياسية لصادرات تكنولوجيا المعلومات والاتصالات وصول أحجام الشحن العالمية للمكونات الصلبة إلى ذروتها، لا سيما أشباه الموصلات وشاشات العرض، مما يؤثر مباشرة على الموازين التجارية وسلاسل إمداد الإلكترونيات."
   },
   "صادرات مصر الغذاييه للسعوديه تنمو 15% الي 564 مليون دولار خلال 2025": {
-    "meaning": "The expansion in food export value reflects higher shipment volumes and price realizations to the Saudi market, increasing foreign currency inflows for Egyptian food manufacturing and agribusiness companies.",
-    "meaning_ar": "يعكس ارتفاع قيمة الصادرات الغذائية زيادة كميات الشحن ومستويات الأسعار المحققة في السوق السعودية، وهو ما يرفع تدفقات النقد الأجنبي لشركات الصناعات الغذائية والزراعية المصرية."
+    "meaning": "The expansion in food export value reflects higher shipment volumes and pricing adjustments between domestic agri-food processors and Saudi distribution channels, which alters foreign currency inflows and sector trade balances.",
+    "meaning_ar": "يعكس نمو قيمة الصادرات الغذائية زيادة في كميات الشحن وتعديلات الأسعار بين شركات الصناعات الغذائية المحلية وشبكات التوزيع السعودية، مما يغير تدفقات النقد الأجنبي والميزان التجاري للقطاع."
   },
   "صافي الاصول الاجنبيه للقطاع المصرفي يتجاوز 28.4 مليار دولار خلال يوليو": {
     "meaning": "Net foreign assets represent the total foreign currency assets held by the central bank and commercial banks minus their foreign liabilities. A level above $28.4 billion reflects a net surplus balance sheet position where foreign currency holdings exceed external obligations across the banking system.",
@@ -5098,8 +5094,8 @@
     "meaning_ar": "يُعدل تعديل النظام الأساسي الإطار القانوني والتنظيمي للشركة الحاكم لإجراءات زيادات رأس المال والضوابط الإدارية لاجتماعات مجلس الإدارة."
   },
   "عموميه قره توافق علي زياده راس المال المصدر والمدفوع والمرخص به": {
-    "meaning": "The company's general assembly approves raising its authorized, issued, and paid-in capital, which expands the corporate equity base through the injection of new shareholder funds or the capitalization of existing reserves.",
-    "meaning_ar": "تعتمد الجمعية العامة للشركة زيادة رأس المال المرخص به والمُصدر والمدفوع، وهو ما يوسع القاعدة الرأسمالية لحقوق الملكية عبر ضخ مساهمات نقدية جديدة أو رسملة احتياطيات قائمة."
+    "meaning": "An increase in authorized, issued, and paid-in capital expands the company's equity base on the balance sheet by injecting new funds or capitalizing reserves, thereby raising its formal borrowing capacity and the legal ceiling for future share issuances.",
+    "meaning_ar": "تؤدي زيادة رأس المال المرخص به والمُصدر والمدفوع إلى توسيع قاعدة حقوق الملكية في الميزانية العمومية عبر ضخ أموال جديدة أو رسملة الاحتياطيات، مما يرفع السقف القانوني لإصدارات الأسهم المستقبلية والحد الائتماني المتاح للشركة."
   },
   "عموميه “راميدا” تقر تعديل مواد بالنظام الاساسي": {
     "meaning": "Amending the articles of association updates the company's internal governance framework, which establishes the legal rules governing corporate operations, administrative authorities, and capital structure.",
@@ -5242,8 +5238,8 @@
     "meaning_ar": "يدمج ضم وزير العمل السياسات التنظيمية لبيئة التشغيل وقوانين العمل والتأمينات الاجتماعية بشكل مباشر ضمن أعمال اللجنة الوزارية المعنية بتنظيم قطاع الشركات الناشئة وريادة الأعمال."
   },
   "قره توافق علي زياده راس المال المدفوع": {
-    "meaning": "Increasing paid-in capital injects additional equity into the balance sheet, expanding the company's permanent financing base and legal capital reserves.",
-    "meaning_ar": "تؤدي زيادة رأس المال المدفوع إلى ضخ حقوق ملكية إضافية في الميزانية العمومية، مما يوسع قاعدة التمويل الدائم والاحتياطيات الرأسمالية القانونية للشركة."
+    "meaning": "A paid-up capital increase expands the company's equity base on the balance sheet by issuing additional shares to existing or new shareholders in exchange for cash or via reserves capitalization.",
+    "meaning_ar": "تؤدي زيادة رأس المال المدفوع إلى توسيع قاعدة حقوق الملكية في الميزانية العمومية للشركة، وذلك عبر إصدار أسهم جديدة للمساهمين مقابل سيولة نقدية أو من خلال رسملة الاحتياطيات."
   },
   "قطر للطاقه تعرض نفطا للتحميل داخل مضيق هرمز عبر عطاء": {
     "meaning": "QatarEnergy uses a competitive tender mechanism to allocate spot crude cargoes, setting delivery and loading operations at designated maritime locations inside the Strait of Hormuz.",
@@ -5314,8 +5310,8 @@
     "meaning_ar": "تتضمن الاتفاقيات الاستثمارية الثنائية بهذا الحجم تخصيصات رأسمالية مباشرة وموجهة عبر سلاسل إمداد صناعية وإنتاجية محددة بين الدولتين المشاركتين."
   },
   "كيف افتتحت المصارف تعاملات الريال السعودي بالتزامن مع زياره ولي العهد؟": {
-    "meaning": "Commercial banks update their daily foreign exchange rate sheets for the Saudi riyal against the Egyptian pound based on interbank market liquidity, official bilateral trade settlements, and currency demand from cross-border travel.",
-    "meaning_ar": "تحدد البنوك التجارية أسعار التداول اليومية للريال السعودي مقابل الجنيه المصري وفقاً لسيولة سوق الإنتربنك، ومتطلبات تسوية المعاملات التجارية البينية، وحجم الطلب على العملة لتغطية نفقات السفر والانتقال."
+    "meaning": "Commercial banks update their opening exchange rates for the Saudi Riyal against the Egyptian Pound based on interbank foreign currency liquidity, trade settlement flows, and daily foreign exchange reserve management.",
+    "meaning_ar": "تحدد البنوك التجارية أسعار افتتاح تداول الريال السعودي مقابل الجنيه المصري وفقاً لمستويات السيولة النقدية الأجنبية في سوق الإنتربنك وتدفقات التسوية التجارية وإدارة الاحتياطيات اليومية."
   },
   "كيف تتاكد من ان شركه الحاق العماله بالخارج مرخصه؟": {
     "meaning": "Official verification of overseas employment agencies operates through the Ministry of Manpower's regulatory registry, where licensed intermediaries process labor contracts in compliance with statutory legal frameworks and official fee schedules.",
@@ -6498,8 +6494,8 @@
     "meaning_ar": "تحدد السياسة الصناعية الرسمية قطاع الأثاث المحلي كنشاط يعتمد على مقومات تصنيع قائمة، تشمل القدرات الإنتاجية المحلية، وبنية سلاسل الإمداد، والتجهيزات التصديرية."
   },
   "وزير الصناعه: نستهدف جذب الشركات الاسبانيه المتوسطه والصغيره لضخ استثمارات جديده في مصر": {
-    "meaning": "The policy targets foreign direct investment inflows by creating bilateral frameworks and industrial partnerships with Spanish small and medium-sized enterprises to establish local operational and production units.",
-    "meaning_ar": "تستهدف هذه السياسة تدفقات الاستثمار الأجنبي المباشر عبر وضع أطر ثنائية وشراكات صناعية مع الشركات الإسبانية الصغيرة والمتوسطة لتأسيس وحدات تشغيلية وإنتاجية محلية."
+    "meaning": "The policy targets foreign direct investment inflows by creating bilateral industrial partnerships that introduce foreign capital, equipment, and production technology directly into the domestic manufacturing base.",
+    "meaning_ar": "تستهدف هذه السياسة تدفقات الاستثمار الأجنبي المباشر عبر إقامة شراكات صناعية ثنائية تُدخل رأس المال الأجنبي والمعدات وتكنولوجيا الإنتاج مباشرة إلى القاعدة التصنيعية المحلية."
   },
   "وزير الطاقه الامريكي: اكثر من 9 ملايين برميل نفط تمر يوميا عبر مضيق هرمز": {
     "meaning": "The Strait of Hormuz functions as a critical global maritime transit corridor, handling daily crude flows exceeding 9 million barrels that directly anchor international oil supply chains and energy shipping infrastructure.",
