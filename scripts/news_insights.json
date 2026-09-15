@@ -2735,6 +2735,10 @@
     "meaning": "Structured derivative contracts tied to semiconductor equities tie investor payouts directly to single-sector price volatility and concentration risk within the capital market.",
     "meaning_ar": "تربط عقود المشتقات المالية المهيكلة ذات الصلة بأسهم شركات أشباه الموصلات عوائد المستثمرين مباشرة بتقلبات أسعار قطاع واحد ومخاطر تركز السيولة في السوق المالية."
   },
+  "المركزي يبيع اذون خزانه": {
+    "meaning": "The Central Bank of Egypt issues short-term sovereign debt instruments on behalf of the Ministry of Finance to finance public spending needs and absorb liquidity from the banking sector.",
+    "meaning_ar": "يطرح البنك المركزي المصري أدوات دَين سيادية قصيرة الأجل نيابة عن وزارة المالية لتغطية نفقات الموازنة العامة وسحب السيولة النقدية من القطاع المصرفي."
+  },
   "المركزي يحذر من التعامل مع اي روابط الكترونيه مجهوله المصدر": {
     "meaning": "The Central Bank of Egypt issues a regulatory cybersecurity advisory to mitigate electronic fraud and unauthorized access to customer bank accounts across the banking system.",
     "meaning_ar": "يُصدر البنك المركزي المصري توجيهات رقابية للأمن السيبراني بهدف مواجهة عمليات الاحتيال الإلكتروني ومنع الاختراقات غير المصرح بها لحسابات العملاء بالقطاع المصرفي."
@@ -2942,6 +2946,10 @@
   "اندي موخيرجي يكتب: لماذا يتصارع مليارديرات الهند؟": {
     "meaning": "The article analyzes corporate rivalry and market share concentration among major Indian conglomerates across key sectors, focusing on capital deployment and vertical integration strategies.",
     "meaning_ar": "يتناول المقال آليات التنافس المؤسسي وتركّز الحصص السوقية بين التكتلات الاقتصادية الكبرى في الهند عبر قطاعات حيوية، مع التركيز على استراتيجيات توظيف رؤوس الأموال والتكامل الرأسي."
+  },
+  "انطلاق التشغيل التجريبي لمحطه البضايع العامه والصب بميناء السخنه": {
+    "meaning": "Pilot operations at Sokhna Port's general and dry-bulk terminal activate testing of cargo handling equipment, storage yards, and deep-water berthing systems under live operational conditions.",
+    "meaning_ar": "يُفعّل التشغيل التجريبي لمحطة البضائع العامة والصب بميناء السخنة اختبار معدات التداول، وساحات التخزين، وأرصفة الرسو العميقة في ظل ظروف تشغيلية فعلية."
   },
   "انطلاق فعاليات الدوره الثامنه من FDC Summit الاسبوع المقبل بمشاركه شركات التكنولوجيا العالميه والمحليه": {
     "meaning": "Industry summits function as operational platforms for B2B engagement, commercial agreement negotiations, and technology transfer between multinational providers and local ICT firms.",
@@ -5044,6 +5052,10 @@
   "عموميه شركه راميدا تعدل مواد بالنظام الاساسي تخص زياده راس المال واجتماعات الاداره": {
     "meaning": "Amending the articles of association updates the company's legal framework governing capital increase procedures and internal administrative protocols for board meetings.",
     "meaning_ar": "يُعدل تعديل النظام الأساسي الإطار القانوني والتنظيمي للشركة الحاكم لإجراءات زيادات رأس المال والضوابط الإدارية لاجتماعات مجلس الإدارة."
+  },
+  "عموميه قره توافق علي زياده راس المال المصدر والمدفوع والمرخص به": {
+    "meaning": "The company's general assembly approves raising its authorized, issued, and paid-in capital, which expands the corporate equity base through the injection of new shareholder funds or the capitalization of existing reserves.",
+    "meaning_ar": "تعتمد الجمعية العامة للشركة زيادة رأس المال المرخص به والمُصدر والمدفوع، وهو ما يوسع القاعدة الرأسمالية لحقوق الملكية عبر ضخ مساهمات نقدية جديدة أو رسملة احتياطيات قائمة."
   },
   "عموميه “راميدا” تقر تعديل مواد بالنظام الاساسي": {
     "meaning": "Amending the articles of association updates the company's internal governance framework, which establishes the legal rules governing corporate operations, administrative authorities, and capital structure.",
