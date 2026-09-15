@@ -111,6 +111,13 @@ BETA_UA = (
 # the payload stays small.
 KEEP_DAYS = 30
 
+# How long one run may spend asking the model to label filings. What is left
+# when it runs out falls back to `statement` and is asked again next run, as a
+# filing that landed while the model was unreachable already is. The
+# fifteen-minute news job runs this, and a slow model used to cost the whole
+# publish: see `classify_all`.
+LABEL_BUDGET_SECONDS = 120
+
 MONTH_FILE = re.compile(r"^\d{4}-\d{2}\.json$")
 
 TICKER = re.compile(r"\(([A-Z]{3,6})\.CA\)")
@@ -367,7 +374,8 @@ def learn_names(items: list[dict]) -> None:
 # ------------------------------------------------------------ classification
 
 
-def classify_all(items: list[dict]) -> None:
+def classify_all(items: list[dict], held: dict[str, dict] | None = None,
+                 deadline: float | None = None) -> None:
     """Give every filing a type, its plain-language meaning, and its labels.
 
     Published patterns first, because EGX titles are formulaic and a regex that
@@ -378,19 +386,36 @@ def classify_all(items: list[dict]) -> None:
     When the model is unreachable the filing falls to `statement`, which says
     what it is honestly. A missing key degrades the labelling; it never stops
     the build or invents a category.
+
+    `held` is what the feed already published, by id. A filing the model has
+    labelled before, under the same title and a type the taxonomy still
+    knows, keeps that label rather than being asked again. The exchange API
+    returns the whole window, so every run re-fetched the same 165 filings
+    and re-asked the model about the 17 no rule places, four times an hour.
+    On 15 Sep 2026 the model slowed to 25-73 s a call and runs 34990634463
+    and 34992293709 outlived the news job's fifteen-minute ceiling, which
+    cancelled them with their headlines and rates unpublished. `deadline` (a
+    `time.monotonic()` value) stops the asking there; what is left falls back.
     """
     import filing_types as ft
 
     unplaced = []
+    kept = 0
     for item in items:
         key = ft.classify_rules(item["title"])
         if key:
             item["event"] = key
             item["by"] = "rule"
+            continue
+        before = (held or {}).get(item.get("id")) or {}
+        if (before.get("by") == "model" and before.get("title") == item["title"]
+                and before.get("event") in ft.FILING_TYPES):
+            item["event"], item["by"] = before["event"], "model"
+            kept += 1
         else:
             unplaced.append(item)
 
-    asked = failed = 0
+    asked = failed = deferred = 0
     if unplaced:
         import gemini
 
@@ -404,6 +429,10 @@ def classify_all(items: list[dict]) -> None:
             item["by"] = "fallback"
             if failed >= 3:
                 # Three refusals in a row is an outage, not a hard filing.
+                continue
+            if deadline is not None and time.monotonic() >= deadline:
+                # A slow model is an outage too, measured in the job's minutes.
+                deferred += 1
                 continue
             try:
                 asked += 1
@@ -423,8 +452,10 @@ def classify_all(items: list[dict]) -> None:
 
     by_rule = sum(1 for i in items if i.get("by") == "rule")
     by_model = sum(1 for i in items if i.get("by") == "model")
-    print(f"   typed: {by_rule} by rule, {by_model} by model, "
-          f"{len(items) - by_rule - by_model} fell back")
+    print(f"   typed: {by_rule} by rule, {by_model} by model "
+          f"({kept} already held, {asked} asked), "
+          f"{len(items) - by_rule - by_model} fell back"
+          + (f" ({deferred} for want of time)" if deferred else ""))
 
 
 # ------------------------------------------------------------------- triage
@@ -708,13 +739,11 @@ def main() -> int:
                   f"(page one only — see walk() for why)")
 
     learn_names(items)
-    classify_all(items)
-    for item in items:
-        item.update(triage(item))
 
     # Merge with everything already held so a filing does not vanish the day
     # after it lands. Three sources, oldest first so a fresh copy wins:
     # the permanent archive, the rolling window, then what this run fetched.
+    # Read before labelling, so a filing labelled once is not asked about again.
     existing = archive_read()
     if existing:
         print(f"   archive holds {len(existing)} filings")
@@ -726,6 +755,11 @@ def main() -> int:
             )
         except (json.JSONDecodeError, KeyError):
             pass
+
+    deadline = time.monotonic() + LABEL_BUDGET_SECONDS
+    classify_all(items, held=existing, deadline=deadline)
+    for item in items:
+        item.update(triage(item))
     existing.update({i["id"]: i for i in items})
 
     # Re-label anything carrying a type the current taxonomy no longer knows.
@@ -758,7 +792,7 @@ def main() -> int:
     ]
     if stale:
         print(f"   re-typing {len(stale)} filings (new taxonomy or unplaced)")
-        classify_all(stale)
+        classify_all(stale, deadline=deadline)
 
     # Labels and meanings come from the glossary every run, never from what
     # was stored. Editing a sentence in filing_types.py then reaches every
