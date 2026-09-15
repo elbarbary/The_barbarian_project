@@ -67,6 +67,10 @@
     "meaning": "The headline represents a media aggregation of multiple market, corporate, and regulatory developments occurring across sectors during a specific weekly trading period.",
     "meaning_ar": "يمثل العنوان تجميعاً إعلامياً لعدد من التطورات السوقية والشركاتية والتنظيمية التي تشهدها مختلف القطاعات خلال أسبوع تداول محدد."
   },
+  "10 اسهم تتجاوز نسب الصعود والهبوط وتوقفها البورصه 10 دقايق": {
+    "meaning": "The Egyptian Exchange applies automated circuit breakers that temporarily suspend trading on individual equities for ten minutes when price movements cross predefined intraday volatility thresholds.",
+    "meaning_ar": "تطبق البورصة المصرية آلية الإيقاف المؤقت للتداول آلياً لمدة عشر دقائق على الأسهم التي تتجاوز الحدود السعرية المحددة للتقلبات اليومية صعوداً أو هبوطاً."
+  },
   "10 سبتمبر.. اخر موعد للتقديم علي 2898 قطعه ارض ضمن برنامج مسكن": {
     "meaning": "The deadline marks the operational closing of the government land allocation window for 2,898 residential plots under the 'Maskan' program, absorbing applicant liquidity and directing land supply directly to individual buyers in the real estate sector.",
     "meaning_ar": "يمثل هذا الموعد الإغلاق الإجرائي لتلقي طلبات تخصيص 2898 قطعة أرض سكنية ضمن برنامج 'مسكن'، حيث تقوم آلية الطرح الحكومي بامتصاص السيولة النقدية وتوجيه المعروض من الأراضي مباشرة إلى المستفيدين الأفراد في القطاع العقاري."
@@ -1795,6 +1799,10 @@
     "meaning": "A multi-month decline in major European equity indices reflects broad asset repricing across European markets, directly influencing global liquidity conditions and cross-border institutional capital allocations.",
     "meaning_ar": "يعكس تراجع مؤشرات الأسهم الأوروبية إلى أدنى مستوياتها منذ عدة أشهر حركة إعادة تسعير عامة للأصول في الأسواق الأوروبية، مما يؤثر مباشرة على سيولة التداول وتوزيع تدفقات رؤوس الأموال المؤسسية الدولية."
   },
+  "الاسهم العالميه تتراجع مع تصاعد مخاوف صدمه الطاقه وارتفاع عوايد السندات": {
+    "meaning": "Higher energy prices elevate operating costs across corporate supply chains, while rising sovereign bond yields raise the risk-free rate used to discount future equity cash flows.",
+    "meaning_ar": "تؤدي زيادة أسعار الطاقة إلى رفع التكاليف التشغيلية عبر سلاسل الإمداد للشركات، بينما يؤدي ارتفاع عوائد السندات السيادية إلى زيادة معدل العائد الخالي من المخاطر المستخدم في خصم التدفقات النقدية للأسهم."
+  },
   "الاسهم العالميه ترتفع قبل قرار المركزي الاوروبي ونتايج “اوراكل”": {
     "meaning": "Global equity prices reflect baseline adjustments as trading desks rebalance positions ahead of benchmark interest rate decisions by the European Central Bank and corporate earnings disclosures from major technology firms.",
     "meaning_ar": "تعكس أسعار الأسهم العالمية تعديلات في المراكز المالية للمتعاملين لإعادة موازنة المحافظ تزامناً مع قرارات أسعار الفائدة الأساسية للبنك المركزي الأوروبي وإفصاحات النتائج المالية لشركات التكنولوجيا الكبرى."
@@ -1942,6 +1950,10 @@
   "البورصه تستهدف اختراق قمم جديده بشرط التماسك اعلي 55000 نقطه": {
     "meaning": "Technical market indicators use the 55,000-point threshold as a support benchmark, where trading volumes and price stability at or above this level determine whether current buying momentum offsets selling pressure.",
     "meaning_ar": "تعتمد المؤشرات الفنية للسوق على مستوى 55,000 نقطة كنقطة دعم محورية، حيث يحدد حجم التداول واستقرار الأسعار عند هذا المستوى أو أعلاه مدى توازن قوى الشراء الحالية في مواجهة ضغوط البيع."
+  },
+  "البورصه تشطب اذون خزانه مصريه بقيمه 296.85 مليار جنيه": {
+    "meaning": "The delisting of treasury bills from the exchange represents a standard operational procedure executed upon reaching their maturity date, where the government redeems the principal value to holders and removes the matured debt instruments from the trading system.",
+    "meaning_ar": "يمثل شطب أذون الخزانة من البورصة إجراءً تشغيلياً روتينياً يُنفذ عند حلول تاريخ استحقاقها، حيث تسدد الدولة القيمة الاسمية لحامليها وتُلغى قيد هذه الأدوات المالية من قاعدة بيانات التداول."
   },
   "البورصه تصعد 0.72% وسط تداولات بقيمه 15.5 مليار جنيه": {
     "meaning": "The main stock index advances by 0.72% as executed buy orders outweigh sell orders, with aggregate transaction turnover across listed securities reaching EGP 15.5 billion during the trading session.",
@@ -2154,6 +2166,10 @@
   "الخزانه المصريه تقيد سندات ثابته العايد بقيمه 5 مليارات جنيه بالبورصه": {
     "meaning": "Listing EGP 5 billion of fixed-rate treasury bonds on the Egyptian Exchange integrates these sovereign debt instruments into the secondary market, enabling direct electronic trading and price discovery among institutional and retail participants.",
     "meaning_ar": "يؤدي قيد سندات خزانة ذات عائد ثابت بقيمة 5 مليارات جنيه في البورصة المصرية إلى إدراج هذه الأدوات المالية الحكومية ضمن السوق الثانوي، مما يتيح تداولها الإلكتروني وتحديد أسعارها بين المؤسسات والمستثمرين."
+  },
+  "الخزانه المصريه تقيد سندات متغيره العايد ب3 مليارات جنيه في البورصه": {
+    "meaning": "Listing 3 billion Egyptian pounds of variable-rate treasury bonds on the exchange admits these government debt instruments to the secondary market, where interest coupons adjust periodically against benchmark rates and trades clear directly through EGX settlement systems.",
+    "meaning_ar": "يُدرج هذا القيد سندات خزانة حكومية بقيمة 3 مليارات جنيه في سوق التداول الثانوي، حيث ترتبط عوائدها الدورية بأسعار الفائدة القياسية وتُسوّى معاملاتها عبر أنظمة البورصة المصرية."
   },
   "الخطوط الجويه التركيه توقع عقد رعايه مع ليفربول بقيمه 406 ملايين دولار": {
     "meaning": "A corporate sports sponsorship contract allocates marketing expenditure in exchange for commercial branding rights and exposure across the athletic club's physical and digital media channels.",
@@ -5085,6 +5101,10 @@
     "meaning": "Military conflicts targeting maritime vessels disrupt commercial shipping lanes, raising maritime insurance premiums and altering fuel and cargo transport routes for global trade.",
     "meaning_ar": "تؤدي النزاعات العسكرية التي تستهدف السفن البحرية إلى اضطراب الممرات الملاحية التجارية، مما يرفع أقساط التأمين البحري ويغير مسارات نقل الوقود والبضائع للتجارة العالمية."
   },
+  "ضعف الاستهلاك والاستثمار في الصين يزيد الضغوط لاقرار تحفيز اضافي": {
+    "meaning": "Slowing domestic consumption and fixed-asset investment in China reduce overall manufacturing and trade velocity, creating structural capacity surpluses that shift fiscal and monetary authorities toward public expenditure and credit-easing tools.",
+    "meaning_ar": "يؤدي تباطؤ الاستهلاك المحلي والاستثمار في الأصول الثابتة داخل الصين إلى خفض وتيرة النشاط الصناعي والتجاري، مما يُنتج فائضاً في الطاقة التشغيلية يدفع السلطات المالية والنقدية نحو أدوات الإنفاق العام وتيسير الائتمان."
+  },
   "طارق الهوبي : التحول الرقمي ينتقل الي منظومه ضريبيه اكثر شفافيه وعداله": {
     "meaning": "Digital transformation in the tax administration operates through electronic invoicing, automated filing systems, and integrated transaction data to track commercial activities across the market.",
     "meaning_ar": "يعتمد التحول الرقمي في الإدارة الضريبية على الفاتورة الإلكترونية، وأنظمة الإقرار المميكنة، والربط المباشر لبيانات المعاملات لتتبع الأنشطة التجارية في السوق."
@@ -6648,6 +6668,10 @@
   "وزير الصناعه يدعو المستثمرين الاسبان للاستفاده من نظام الامتياز الصناعي بمصر": {
     "meaning": "The industrial franchising framework allows foreign manufacturers to license their operational models, technical know-how, and brand rights to local entities operating within Egypt's industrial zones.",
     "meaning_ar": "يتيح نظام الامتياز الصناعي للمصنعين الأجانب منح حقوق استغلال النماذج التشغيلية، والمعرفة الفنية، والعلامات التجارية لشركات محلية داخل المناطق الصناعية المصرية."
+  },
+  "وزير الصناعه يصدر قرارا بتكليف احمد رزق رييسا لمصلحه الكفايه الانتاجيه والتدريب المهني": {
+    "meaning": "This leadership appointment places management of the government entity responsible for vocational training centers and technical workforce development under new executive oversight within the Ministry of Industry.",
+    "meaning_ar": "يضع هذا القرار إدارة الجهة الحكومية المسؤولة عن مراكز التدريب المهني وتأهيل العمالة الفنية تحت إشراف تنفيذي جديد تابع لوزارة الصناعة."
   },
   "وزير الصناعه: الشركات الصغيره والمتوسطه محرك رييسي للتنميه المستدامه": {
     "meaning": "Small and medium-sized enterprises (SMEs) function as feeder suppliers and subcontracting partners within industrial supply chains, providing operational inputs to larger manufacturing entities.",
