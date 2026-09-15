@@ -791,6 +791,10 @@
     "meaning": "The headline reports an intra-day index reversal, where the benchmark EGX30 index touches a historical peak in early weekly trading before declining below the 56,200-point mark due to trading activity across its constituent stocks.",
     "meaning_ar": "يصف الخبر حركة التداول اللحظية للمؤشر الرئيسي EGX30، حيث بلغ مستوى تاريخياً غير مسبوق في بداية تعاملات الأسبوع ثم تراجع إلى ما دون مستوى 56.2 ألف نقطة نتيجة لتغيرات أسعار الأسهم المكونة له."
   },
+  "«Sparkd-EV» تفتتح صاله لسيارات «زيكر» باستثمارات 50 مليون جنيه": {
+    "meaning": "The deployment of 50 million EGP represents a capital expenditure allocation into downstream automotive retail infrastructure, expanding the domestic physical dealership network for the Zeekr electric vehicle brand.",
+    "meaning_ar": "يمثل ضخ 50 مليون جنيه توجيهاً لنفقات رأسمالية نحو البنية التحتية لتجارة التجزئة في قطاع السيارات، مما يوسع شبكة صالات العرض الفعلية لعلامة «زيكر» للسيارات الكهربائية داخل السوق المحلي."
+  },
   "«اب تاون 6 اكتوبر» تضخ 15 مليار جنيه لتطوير 10 مدارس جديده غرب القاهره": {
     "meaning": "This capital allocation represents a direct infrastructure deployment by Uptown 6th of October, expanding private educational capacity in West Cairo through the construction and outfitting of 10 school facilities.",
     "meaning_ar": "يمثل هذا التخصيص الرأسمالي ضخاً مباشراً في البنية التحتية من قبل شركة «أب تاون 6 أكتوبر»، حيث يوسع الطاقة الاستيعابية للتعليم الخاص في منطقة غرب القاهرة من خلال تشييد وتجهيز 10 منشآت مدرسية."
@@ -970,6 +974,10 @@
   "«كريتيف هولدينج» تجمع 20 مليون دولار وتستهدف الوصول الي 50 مليونا": {
     "meaning": "The company secures capital financing to expand its liquid reserves and equity base, fulfilling an initial phase of a larger fundraising round.",
     "meaning_ar": "تجمع الشركة تمويلاً رأسمالياً لزيادة قاعدتها الرأسمالية واحتياطيات السيولة، مستكملةً شريحة أولية ضمن جولة تمويلية مستهدفة."
+  },
+  "«كين ليد» الصينيه تضخ 80 مليون دولار لانشاء اول مصانعها في مصر": {
+    "meaning": "This transaction represents a foreign direct investment of $80 million deployed into industrial capital expenditures, establishing a domestic manufacturing asset for the foreign firm in Egypt.",
+    "meaning_ar": "يمثل هذا الإجراء تدفقاً لاستثمارات أجنبية مباشرة بقيمة 80 مليون دولار موجهة نحو النفقات الرأسمالية الصناعية، مما يضيف أصلاً تصنيعياً محلياً للشركة الأجنبية داخل مصر."
   },
   "«لي فارما» الهنديه تدرس انشاء مصنع للخامات الدواييه في مصر": {
     "meaning": "Establishing an active pharmaceutical ingredient (API) facility represents an upstream integration in the domestic drug manufacturing supply chain, transitioning component sourcing from direct importation to local chemical synthesis.",
@@ -3447,6 +3455,10 @@
     "meaning": "The entry of the new seasonal harvest expands immediate supply in the local market, lowering raw paddy rice spot prices by 1,000 EGP per ton and adjusting procurement input costs for agricultural processing and milling operations.",
     "meaning_ar": "يؤدي تدفق التوريدات الأولية للمحصول الجديد إلى زيادة حجم المعروض في السوق المحلي، مما يخفض أسعار التداول الفوري للأرز الشعير بمقدار ألف جنيه للطن ويحدد تكاليف شراء المواد الخام لمضارب ومصنعي الأغذية."
   },
+  "بعد مغادرته القاهره.. ولي العهد السعودي يبعث برقيه شكر الي الرييس السيسي": {
+    "meaning": "Diplomatic visits and state-level communications between Egypt and Saudi Arabia serve as the formal framework for bilateral economic agreements, cross-border investment treaties, and sovereign financial cooperation.",
+    "meaning_ar": "تُمثل الزيارات الدبلوماسية والمراسلات الرسمية بين مصر والمملكة العربية السعودية الإطار التنظيمي الحاكم لتفعيل الاتفاقيات الاقتصادية الثنائية، وتنسيق تدفقات الاستثمارات المشتركة والتعاون المالي الحكومي."
+  },
   "بكره تخطط لاصدارات صكوك": {
     "meaning": "The company prepares to issue Sharia-compliant debt instruments backed by specific tangible assets or revenue-generating contracts to raise capital.",
     "meaning_ar": "تستعد الشركة لطرح أدوات دين متوافقة مع الشريعة الإسلامية مدعومة بأصول ملموسة أو عقود مدرة للعوائد لجمع السيولة الرأسمالية."
@@ -3602,6 +3614,10 @@
   "بيسنت: ارتفاع عوايد السندات الامريكيه يرجع الي عوامل عالميه": {
     "meaning": "The statement attributes movements in US sovereign debt yields to international macro dynamics, such as cross-border capital flows and global central bank policies, rather than solely domestic economic data.",
     "meaning_ar": "يُرجع التصريح تحركات عوائد السندات السيادية الأمريكية إلى ديناميكيات الاقتصاد الكلي الدولي، كتدفقات رؤوس الأموال عبر الحدود وسياسات البنوك المركزية العالمية، بدلاً من الاقتصار على المؤشرات المحلية."
+  },
+  "بيسنت: ارتفاع عوايد السندات الامريكيه يعود الي «قضايا عالميه»": {
+    "meaning": "Rising U.S. Treasury yields raise borrowing costs globally and widen sovereign yield spreads across emerging markets, tightening external liquidity and pressuring local debt-servicing allocations in countries like Egypt.",
+    "meaning_ar": "يؤدي ارتفاع عوائد سندات الخزانة الأمريكية إلى رفع تكلفة الاقتراض عالميًا وتوسيع فوارق العوائد السيادية في الأسواق الناشئة، مما يشدد شروط السيولة الخارجية ويزيد الضغط على مخصصات خدمة الدين المحلي في دول مثل مصر."
   },
   "بيسنت: اسعار النفط قد تهبط الي 40 دولارا للبرميل بعد انتهاء الصراع مع ايران": {
     "meaning": "Global crude oil benchmarks incorporate a geopolitical risk premium during regional conflicts, and the cessation of supply disruption risks realigns pricing with baseline global supply-demand balances and marginal extraction costs.",
@@ -6554,9 +6570,8 @@
     "meaning_ar": "تؤدي خطط السداد طويلة الأجل إلى تمديد دورة التحصيل النقدي للمشاريع وزيادة انكشاف المطورين على تضخم تكاليف التنفيذ، بينما تُلزم المشترين بأعباء تمويلية تمتد عبر تغيرات الأوضاع الاقتصادية."
   },
   "ندوه ل”المصري للدراسات الاقتصاديه”: تحسن الاحتياطي الاجنبي يوفر قدرا اكبر من الحمايه للاقتصاد": {
-    "meaning": "",
-    "meaning_ar": "",
-    "refused": 1
+    "meaning": "Higher foreign exchange reserves provide the central bank with liquidity to cover import bills, manage external debt service requirements, and settle foreign currency obligations across the banking system.",
+    "meaning_ar": "يوفر ارتفاع احتياطي النقد الأجنبي السيولة اللازمة لدى البنك المركزي لتغطية الفاتورة الاستيرادية، والوفاء بمتطلبات خدمة الدين الخارجي، وتسوية الالتزامات بالعملة الأجنبية عبر القطاع المصرفي."
   },
   "نزاع قضايي جديد يهدد صفقه اندماج": {
     "meaning": "Legal disputes surrounding corporate mergers trigger formal procedural reviews, which suspends transaction timelines and records contingent liabilities on corporate balance sheets.",
