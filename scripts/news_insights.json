@@ -1419,6 +1419,10 @@
     "meaning": "Diesel serves as the primary operational fuel for commercial freight, logistics, and heavy machinery. Record pricing directly raises baseline input costs for global transportation and supply chain operations.",
     "meaning_ar": "يمثل الديزل الوقود الأساسي لقطاعات الشحن التجاري، والخدمات اللوجستية، والمعدات الثقيلة. ويترتب على تسجيل أسعاره لمستويات قياسية ارتفاع مباشر في تكاليف التشغيل الأساسية لعمليات النقل وسلاسل الإمداد العالمية."
   },
+  "اسعار الديزل في الولايات المتحده تسجل مستوي قياسي جديد": {
+    "meaning": "Diesel serves as a primary fuel for commercial transport, freight networks, and industrial equipment, making its price a direct component of operating expenses across supply chains and shipping operations.",
+    "meaning_ar": "يُعد الديزل الوقود الأساسي لقطاعات النقل التجاري، وشبكات الشحن، والمعدات الصناعية، مما يجعل تكلفته عنصراً مباشراً ضمن نفقات التشغيل وسلاسل الإمداد وعمليات النقل."
+  },
   "اسعار الديزل في امريكا تتجاوز 6 دولارات للجالون للمره الاولي علي الاطلاق": {
     "meaning": "Diesel serves as the primary fuel for commercial freight and industrial transport, making this price level a direct driver of distribution and logistics expenses across global supply chains.",
     "meaning_ar": "يُعد الديزل الوقود الأساسي للشحن التجاري والنقل الصناعي، مما يجعل هذا المستوى من الأسعار محركاً مباشراً لنفقات التوزيع والخدمات اللوجستية عبر سلاسل التوريد العالمية."
@@ -2170,6 +2174,10 @@
   "الخزانه المصريه تقيد سندات متغيره العايد ب3 مليارات جنيه في البورصه": {
     "meaning": "Listing 3 billion Egyptian pounds of variable-rate treasury bonds on the exchange admits these government debt instruments to the secondary market, where interest coupons adjust periodically against benchmark rates and trades clear directly through EGX settlement systems.",
     "meaning_ar": "يُدرج هذا القيد سندات خزانة حكومية بقيمة 3 مليارات جنيه في سوق التداول الثانوي، حيث ترتبط عوائدها الدورية بأسعار الفائدة القياسية وتُسوّى معاملاتها عبر أنظمة البورصة المصرية."
+  },
+  "الخزانه المصريه تقيد سندات متغيره العايد بقيمه 6 مليارات جنيه بالبورصه": {
+    "meaning": "The listing admits EGP 6 billion in variable-rate sovereign debt to secondary market trading on the EGX, where coupon payments adjust periodically based on benchmark interest rates.",
+    "meaning_ar": "يتيح هذا القيد سندات خزانة سيادية بقيمة 6 مليارات جنيه للتداول في السوق الثانوية بالبورصة المصرية، وتعتمد هذه السندات آلية تعديل دوري لكوبونات الفائدة وفقاً لأسعار الفائدة المرجعية."
   },
   "الخطوط الجويه التركيه توقع عقد رعايه مع ليفربول بقيمه 406 ملايين دولار": {
     "meaning": "A corporate sports sponsorship contract allocates marketing expenditure in exchange for commercial branding rights and exposure across the athletic club's physical and digital media channels.",
@@ -6317,6 +6325,10 @@
     "meaning": "Contracted sales exceeding EGP 800 billion across the top ten developers reflect current operational cash inflows and off-plan sales volume, indicating demand driven by actual capital deployment rather than speculative credit expansion.",
     "meaning_ar": "تعكس المبيعات التعاقدية التي تتجاوز 800 مليار جنيه لأكبر عشر شركات حجم التدفقات النقدية التشغيلية ومبيعات المشروعات على الخارطة، حيث ترتكز حركة السوق الحالية على تعبئة رؤوس الأموال بدلاً من التوسع في الائتمان المضاربي."
   },
+  "هل ارتفعت اسعار الخضروات والفاكهه والطماطم والبطاطس اليوم الثلاثاء 15 سبتمبر 2026؟": {
+    "meaning": "Daily agricultural produce prices reflect wholesale market arrivals and seasonal supply fluctuations across primary distribution hubs, serving as key input variables for the food and beverage component of consumer price index metrics.",
+    "meaning_ar": "تعكس الأسعار اليومية للحاصلات الزراعية حجم المعروض والتدفقات الواردة إلى أسواق الجملة المركزية، وتُعد مدخلاً رئيسياً في حساب مكون الأغذية والمشروبات ضمن الرقم القياسي لأسعار المستهلكين."
+  },
   "هل ارتفعت اسعار الكتاكيت اليوم 10-9-2026 في مصر؟": {
     "meaning": "Day-old chick prices represent an initial input cost in the poultry production cycle, determined by hatchery supply levels and breeding stock feed costs.",
     "meaning_ar": "تمثل أسعار الكتاكيت عمر يوم تكلفة مدخلات أولية في دورة إنتاج الدواجن، وتتحدد بناءً على حجم معروض المفرخات وتكاليف أعلاف أمهات الدواجن."
@@ -6552,6 +6564,10 @@
   "وزير التموين: سرعه بحث طلبات النواب بما يحقق صالح المواطنين": {
     "meaning": "The Ministry of Supply coordinates administrative and regulatory oversight over subsidized commodity distribution and consumer supply chains through legislative feedback channels.",
     "meaning_ar": "تتولى وزارة التموين التنسيق والرقابة الإدارية والتنظيمية على سلاسل إمداد السلع والمنظومة التموينية عبر قنوات المتابعة والتواصل البرلماني."
+  },
+  "وزير التموين: نستهدف الوصول الي 168 فرعا من «كاري اون» بنهايه العام الحالي": {
+    "meaning": "Expanding the 'Carry On' retail network to 168 branches increases the physical distribution footprint and direct retail capacity for state-affiliated consumer goods.",
+    "meaning_ar": "يؤدي توسيع شبكة فروع «كاري أون» لتصل إلى 168 فرعاً إلى زيادة النطاق الجغرافي للتوزيع الميداني والقدرة الاستيعابية لمنافذ البيع بالتجزئة للسلع الاستهلاكية التابعة للدولة."
   },
   "وزير الخارجيه يبحث مع نظيريه الروسي والايراني خفض التصعيد في المنطقه": {
     "meaning": "Diplomatic coordination on regional security directly influences risk premia, shipping insurance rates, and energy price volatility across Middle Eastern trade corridors and maritime routes, including the Suez Canal.",
