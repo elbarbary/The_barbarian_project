@@ -595,6 +595,8 @@ export function scenariosScreen(component, data, ar) {
   const ranking = scenarios ? rankingOf(scenarios, choice, reading) : null;
   const ctx = {
     choice, entry, nights, record, said, words, next, indexed, ranking, reading,
+    // The night the ranking is from, to tell its own record apart from an older one.
+    basis: scenarios?.basisSession || null,
     // What the numbers in the past runs are: Gemini's scores when it is on.
     says: gemini ? saysOf('rerank') : (choice.meta?.says || { kind: 'return' }),
     topCount: picks?.topCount ?? top5?.topCount ?? 5,

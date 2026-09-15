@@ -482,6 +482,33 @@ test('companies left out of the run are counted beside the ranking', () => {
   assert.doesNotMatch(text(byClass(node, 'aix-ranking-card')[0]), /SUCE/);
 });
 
+test('once the night is scored, a company that did not trade is marked and the line falls under the five scored', () => {
+  // 15 Sep 2026, after the close: the 14 Sep night scored at one session, and
+  // Kronos's WATP and GRCA had no close, so its record scored ranks 2, 4, 5, 6, 7.
+  const tickers = ['ANA', 'BET', 'CAM', 'DEL', 'ECH', 'FOX', 'GOL', 'HOT'];
+  const wide = { ...scenarios, companies: Object.fromEntries(tickers.map((t, i) => [t,
+    { ticker: t, close: 10, path: [0, 0, 0], models: { kronos: { returns: { 1: 8 - i, 5: 8 - i, 20: 8 - i } } } }])) };
+  const night = { ...scored(wide.basisSession, ['ANA', 'CAM', 'ECH', 'FOX', 'GOL'], [8, 6, 4, 3, 2], [1, 1, 1, 1, 1], 0.5),
+    skipped: ['BET', 'DEL'] };
+  const picks = picksFile();
+  picks.models.kronos.horizons[5].nights = [night];
+  const card = byClass(screen(component({ scModel: 'kronos', scHorizon: 5 }), { ...data, scenarios: wide, picks }), 'aix-ranking-card')[0];
+  const rows = rowsOf(card);
+  assert.deepEqual(tickersOf(card).slice(0, 8), tickers);
+  assert.deepEqual(rows.filter((r) => /\bis-top\b/.test(r.attrs.class)).map((r) => text(all(r).find((x) => x.tag === 'b')).trim()),
+    ['ANA', 'CAM', 'ECH', 'FOX', 'GOL']);
+  assert.deepEqual(rows.filter((r) => /did not trade/.test(text(r))).map((r) => text(all(r).find((x) => x.tag === 'b')).trim()), ['BET', 'DEL']);
+  // The line sits under GOL, the last of the five scored, not under rank 5.
+  const list = byClass(card, 'aix-rank-list')[0].children;
+  const cut = list.findIndex((n) => /\baix-rank-cut\b/.test(n.attrs?.class || ''));
+  assert.match(text(list[cut - 1]), /GOL/);
+  assert.match(text(list[cut]), /the five its record scored\. BET and DEL did not trade through the 5 sessions, so the next one down took each place/);
+  // Before the window closes nobody has been passed over: the first five, as before.
+  const open = screen(component({ scModel: 'kronos', scHorizon: 5 }), { ...data, scenarios: wide, picks: picksFile() });
+  assert.deepEqual(rowsOf(byClass(open, 'aix-ranking-card')[0]).filter((r) => /\bis-top\b/.test(r.attrs.class)).length, 5);
+  assert.doesNotMatch(text(open), /did not trade/);
+});
+
 test('a ranking baseline ranks by the move it saw, never a forecast', () => {
   const card = byClass(screen(component({ scModel: 'momentum20' })), 'aix-ranking-card')[0];
   assert.deepEqual(tickersOf(card), ['AAA', 'BBB']);

@@ -174,14 +174,26 @@ test('the top of every model’s ranking on screen is the five its record follow
   // The owner asked for each model's ranking, highest first. Its top five
   // must be the five the record averages — one rule, ties by ticker — or the
   // screen and the record would be about different companies.
+  //
+  // Once the night's window has closed, a company with no close at its end is
+  // passed over and the next one down is scored (15 Sep 2026, after the close:
+  // Kronos's WATP and GRCA). So the five are the ranking with those taken out,
+  // and every one taken out ranked above the last of the five.
   const mod = await import('../../public/esthmr/scenarios.js');
+  const same = (rows, night, label) => {
+    const passed = new Set(night.skipped || []);
+    const five = night.picks.map((p) => p.ticker);
+    assert.deepEqual(rows.filter((r) => !passed.has(r.ticker)).slice(0, 5).map((r) => r.ticker), five, label);
+    const last = Math.max(...rows.filter((r) => five.includes(r.ticker)).map((r) => r.rank));
+    for (const t of passed) assert.ok(rows.find((r) => r.ticker === t)?.rank < last, `${label}: ${t} was passed over but ranks below the five`);
+  };
   let compared = 0;
   for (const [id, entry] of Object.entries(picks.models)) {
     for (const [hz, held] of Object.entries(entry.horizons)) {
       const newest = held.nights[0];
       if (!newest || newest.basisSession !== scenarios.basisSession || !newest.picks) continue;
       const { rows } = mod.rankingOf(scenarios, { model: id, horizon: Number(hz), gemini: false }, null);
-      assert.deepEqual(rows.slice(0, 5).map((r) => r.ticker), newest.picks.map((p) => p.ticker), `${id} at ${hz}`);
+      same(rows, newest, `${id} at ${hz}`);
       compared += 1;
     }
   }
@@ -190,7 +202,7 @@ test('the top of every model’s ranking on screen is the five its record follow
   const newest = picks.readings[key].horizons['5'].nights[0];
   if (newest && newest.picks && reading.basisSession === newest.basisSession) {
     const { rows } = mod.rankingOf(scenarios, { model: 'kronos', horizon: 5, gemini: true }, reading);
-    assert.deepEqual(rows.slice(0, 5).map((r) => r.ticker), newest.picks.map((p) => p.ticker), 'the default reading');
+    same(rows, newest, 'the default reading');
     compared += 1;
   }
   assert.ok(compared > 0, 'nothing was compared');

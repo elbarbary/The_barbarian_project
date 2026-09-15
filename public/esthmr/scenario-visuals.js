@@ -222,6 +222,19 @@ export function rankingCard(component, data, ctx, ar) {
   const extraHead = choice.gemini ? t(`${words.model}: original rank & forecast`, `${words.model}: الترتيب والتوقع الأصليان`)
     : says.kind === 'return' ? t('Other models', 'النماذج الأخرى') : '';
 
+  // The ranking's own night, once its window has closed. A company with no
+  // close at the end of the window was passed over and the next one down
+  // scored in its place, so the five the record scored are not always the
+  // first five here: they are the ones marked, and the line falls under the
+  // last of them. Before the window closes, nobody has been passed over yet.
+  const own = nights.newest && nights.newest.basisSession === ctx.basis
+    && nights.newest.status === 'scored' && Array.isArray(nights.newest.picks) ? nights.newest : null;
+  const scoredFive = own ? new Set(own.picks.map((p) => p.ticker)) : null;
+  const passed = new Set((own && own.skipped) || []);
+  const scoredRanks = scoredFive ? ranking.rows.filter((r) => scoredFive.has(r.ticker)).map((r) => r.rank) : [];
+  const lineAfter = scoredFive && scoredRanks.length === scoredFive.size ? Math.max(...scoredRanks) : 5;
+  const top = (r) => (scoredFive && scoredRanks.length === scoredFive.size ? scoredFive.has(r.ticker) : r.rank <= 5);
+
   const cell = (r) => {
     const name = title(data, r.ticker, ar);
     const figure = choice.gemini ? `${plain(r.value, 0)}/100` : percent(move(r.value));
@@ -238,13 +251,15 @@ export function rankingCard(component, data, ctx, ar) {
     } else if (says.kind === 'return') {
       extra = h('small', { class: 'aix-rank-agree' }, r.of ? t(`${r.agree} of ${r.of} agree`, `${r.agree} من ${r.of} تتفق`) : '');
     }
+    const skipped = passed.has(r.ticker);
     return h('button', {
-      key: r.ticker, type: 'button', class: `aix-rank-row${r.rank <= 5 ? ' is-top' : ''}`,
+      key: r.ticker, type: 'button', class: `aix-rank-row${top(r) ? ' is-top' : ''}${skipped ? ' is-passed' : ''}`,
       onClick: openCompany(component, r.ticker),
-      'aria-label': `${r.rank}. ${r.ticker} ${name !== r.ticker ? name : ''} · ${figure}`,
+      'aria-label': `${r.rank}. ${r.ticker} ${name !== r.ticker ? name : ''} · ${figure}${skipped ? t(' · did not trade', ' · لم تُتداول') : ''}`,
     },
     h('span', { class: 'aix-rank-n', dir: 'ltr' }, r.tied ? `=${r.rank}` : String(r.rank)),
-    h('span', { class: 'aix-company-name' }, h('b', null, r.ticker), name !== r.ticker ? h('small', null, name) : null),
+    h('span', { class: 'aix-company-name' }, h('b', null, r.ticker), name !== r.ticker ? h('small', null, name) : null,
+      skipped ? h('em', { class: 'aix-rank-passed' }, t('did not trade — passed over', 'لم تُتداول — تخطّاها السجل')) : null),
     h('strong', { class: choice.gemini ? '' : tone(move(r.value)), dir: 'ltr' }, figure),
     extra);
   };
@@ -253,9 +268,11 @@ export function rankingCard(component, data, ctx, ar) {
   shown.forEach((r, i) => {
     list.push(cell(r));
     // The line under the five the record follows, where the list is whole.
-    if (!q && r.rank === 5 && shown[i + 1]) {
-      list.push(h('p', { key: 'cut', class: 'aix-rank-cut' },
-        t(`Above the line: the five its record follows — scored against the market ${scoredWhen}.`,
+    if (!q && r.rank === lineAfter && shown[i + 1]) {
+      list.push(h('p', { key: 'cut', class: 'aix-rank-cut' }, passed.size
+        ? t(`Above the line: the five its record scored. ${listWords([...passed], false)} did not trade through ${n === 1 ? 'the session' : `the ${n} sessions`}, so the next one down took ${passed.size === 1 ? 'its place' : 'each place'}.`,
+          `فوق الخط: الخمس التي قيّمها السجل. ${listWords([...passed], true)} لم تُتداول طوال المدة، فحلّت التالية محلّ كل منها.`)
+        : t(`Above the line: the five its record follows — scored against the market ${scoredWhen}.`,
           `فوق الخط: الخمس التي يتابعها السجل — تُقيَّم مقابل السوق ${scoredWhen}.`)));
     }
   });

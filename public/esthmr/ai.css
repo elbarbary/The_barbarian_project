@@ -342,6 +342,9 @@
 .aix-rank-row.is-top .aix-rank-n { color: var(--aix-teal-ink); }
 .aix-rank-row > strong { font-family: var(--aix-mono); font-size: 14.5px; font-weight: 600; text-align: end; white-space: nowrap; }
 .aix-rank-agree { font-size: 12px; color: var(--aix-muted); text-align: end; white-space: nowrap; }
+/* Above the line by its forecast, but not in the five scored: it did not trade. */
+.aix-rank-passed { display: block; font-style: normal; font-size: 11px; line-height: 1.3; color: var(--aix-muted); }
+#app .aix-rank-row.is-passed { background: transparent; }
 /* Wraps rather than spilling: right-aligned, an overflow runs LEFT, over the
    score, and no scrollWidth ever reports it. The rank and its shift stay one
    piece; "Forecast: …" takes the next line when the column is narrow. */
