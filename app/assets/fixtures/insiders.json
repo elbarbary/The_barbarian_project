@@ -1,14 +1,14 @@
 {
-  "updatedAt": "2026-09-15T08:02:33.714484+00:00",
-  "asOf": "2026-09-14",
+  "updatedAt": "2026-09-15T08:17:21.461083+00:00",
+  "asOf": "2026-09-15",
   "source": "Official EGX Daily Bulletins & Post-Execution Disclosures",
   "basis": "Official exchange disclosures filed under Capital Market Law Articles 29 & 38",
   "basisAr": "إفصاحات رسمية مودعة لدى البورصة وفق المادتين ٢٩ و٣٨ من قواعد القيد",
   "summary": {
-    "totalRecords": 1704,
-    "buyCount": 557,
+    "totalRecords": 1705,
+    "buyCount": 558,
     "sellCount": 1077,
-    "treasuryBuyCount": 19,
+    "treasuryBuyCount": 20,
     "treasurySellCount": 10,
     "totalBuyShares": 2169598945,
     "totalSellShares": 4162734493,
@@ -18,10 +18,11 @@
       "MBSC",
       "PRDC"
     ],
-    "latestSession": "2026-09-14",
+    "latestSession": "2026-09-15",
     "earliestSession": "2025-06-03"
   },
   "sessions": [
+    "2026-09-15",
     "2026-09-14",
     "2026-09-13",
     "2026-09-10",
@@ -35398,6 +35399,30 @@
       "title": "تعامل على أسهم Arab Valves Company (شراء): 200,000 سهم",
       "titleEn": "Transaction on Arab Valves Company (bought): 200,000 shares",
       "link": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=289403"
+    },
+    {
+      "id": "filing-294672",
+      "filingId": "294672",
+      "sourceType": "treasury_filing",
+      "date": "2026-09-15",
+      "ticker": "PRDC",
+      "company": "Pioneers Properties for Urban Development",
+      "companyAr": "بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب",
+      "sector": "Real Estate",
+      "sectorAr": "عقارات",
+      "action": "treasury_purchase",
+      "actionLabel": "Treasury Purchase",
+      "actionLabelAr": "شراء أسهم خزينة",
+      "relationship": "treasury",
+      "relationshipLabel": "Company Treasury",
+      "relationshipLabelAr": "الشركة (أسهم خزينة)",
+      "positionRaw": "Treasury Shares",
+      "investorName": "Pioneers Properties for Urban Development Treasury",
+      "investorNameAr": "خزينة بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب",
+      "shares": null,
+      "title": "بيان من بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب (PRDC.CA) بشأن شراء أسهم الخزينة",
+      "titleEn": "Statement from Pioneers Properties for Urban Development - PRE (PRDC.CA) regarding the purchase of treasury shares",
+      "link": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294672"
     },
     {
       "id": "filing-294623",

@@ -1271,6 +1271,10 @@
     "meaning": "Daily spot pricing for imported Brazilian and domestic feed inputs directly reflects prevailing raw material costs for agricultural and poultry sector operators.",
     "meaning_ar": "تعكس الأسعار الفورية اليومية لخامات الأعلاف المستوردة من البرازيل والمحلية تكاليف المدخلات المباشرة لشركات القطاعين الزراعي والداجني."
   },
+  "اسعار البنزين في امريكا ترتفع الي 4.32 دولار مع استمرار توترات الشرق الاوسط": {
+    "meaning": "Geopolitical tensions in key oil-producing regions disrupt crude supply dynamics, which directly feeds into higher global benchmark prices and elevates retail transportation fuel costs.",
+    "meaning_ar": "تؤدي التوترات الجيوسياسية في مناطق إنتاج النفط إلى اضطراب ديناميكيات إمدادات الخام، مما ينعكس مباشرة على ارتفاع الأسعار القياسية العالمية وزيادة تكلفة وقود النقل بالتجزئة."
+  },
   "اسعار البيض اليوم الاثنين 7-9-2026 في مصر": {
     "meaning": "Daily poultry exchange quotes reflect prevailing market prices for table eggs, determined by daily supply volumes from farms against retail consumer demand and input feed costs.",
     "meaning_ar": "تعكس أسعار بورصة الدواجن اليومية القيمة السوقية الحالية لبيض المائدة، والتي تتحدد بناءً على حجم المعروض اليومي من المزارع مقابل طلب تجزئة المستهلكين وتكاليف الأعلاف."
@@ -2683,6 +2687,10 @@
     "meaning": "Retail meat pricing establishes the current spot transaction rate for domestic beef in consumer markets, reflecting prevailing livestock supply costs, feed inputs, and local distribution expenses.",
     "meaning_ar": "يحدد تسعير اللحوم البلدية مستويات المعاملات الفورية للمستهلك في السوق المحلي، بما يعكس التكاليف القائمة لمدخلات الأعلاف، وتربية الماشية، ونفقات سلاسل التوزيع والتجزئة."
   },
+  "الكويت ترفع سعر بيع النفط الخام لاسيا في اكتوبر": {
+    "meaning": "The official selling price (OSP) adjustment sets the baseline contractual premium or discount for Kuwaiti crude shipments relative to regional benchmark prices for the October delivery cycle.",
+    "meaning_ar": "يحدد تعديل سعر البيع الرسمي العلاوة أو الخصم التعاقدي الأساسي لشحنات النفط الخام الكويتي مقارنة بالأسعار القياسية الإقليمية لدورة تسليم شهر أكتوبر."
+  },
   "الكويت تصدر مليون برميل نفط يوميا مع تعافي حركه الناقلات عبر هرمز": {
     "meaning": "The resumption of maritime tanker traffic through the Strait of Hormuz maintains Kuwaiti crude oil export flows at an operational volume of one million barrels per day.",
     "meaning_ar": "يتيح انتظام حركة ناقلات النفط عبر مضيق هرمز استمرار تدفقات صادرات النفط الخام الكويتي بمعدل تشغيلي يبلغ مليون برميل يومياً."
@@ -3395,6 +3403,10 @@
     "meaning": "The reappointment maintains administrative and regulatory continuity within the executive leadership of the Financial Regulatory Authority, which oversees non-banking financial markets and institutions in Egypt.",
     "meaning_ar": "يحافظ تجديد التعيين على الاستمرارية الإدارية والتنظيمية داخل القيادة التنفيذية للهيئة العامة للرقابة المالية، المسؤولة عن الإشراف على الأسواق والمؤسسات المالية غير المصرفية في مصر."
   },
+  "تحديث لحظي.. سعر الدرهم الاماراتي في البنوك اليوم الثلاثاء 15-9-2026": {
+    "meaning": "Real-time exchange rate tracking reflects the ongoing pricing of the UAE Dirham against the Egyptian Pound across commercial banks, which determines conversion costs for bilateral trade settlements, corporate remittances, and regional transactions.",
+    "meaning_ar": "تعكس التحديثات اللحظية لأسعار الصرف التسعير الجاري للدرهم الإماراتي أمام الجنيه المصري في البنوك التجارية، وهو ما يحدد تكاليف التحويل لتسوية المعاملات التجارية والتحويلات المالية بين البلدين."
+  },
   "تحديثات الصرف الان.. سعر الريال السعودي اليوم الخميس 10-9-2026": {
     "meaning": "Official and banking exchange rate quotations track the spot conversion value of the Saudi Riyal against the Egyptian Pound, which directly determines foreign currency settlement costs for bilateral trade, religious tourism services, and the Egyptian Pound valuation of inbound expatriate remittances.",
     "meaning_ar": "ترصد أسعار الصرف المصرفية والرسمية القيمة الفورية لتحويل الريال السعودي مقابل الجنيه المصري، وهي التي تحدد تكلفة التسويات بالعملة الأجنبية للتبادل التجاري والخدمات السياحية الدينية، فضلاً عن تقييم تحويلات العاملين بالخارج بالعملة المحلية."
@@ -3639,6 +3651,10 @@
   "تسارع نمو اقتصاد منطقه اليورو خلال الربع الثاني من 2026": {
     "meaning": "An acceleration in Eurozone GDP growth represents higher aggregate output and industrial activity across member states, which defines baseline external trade and foreign currency demand for trade partners, including Egyptian export and import sectors.",
     "meaning_ar": "يمثل تسارع نمو الناتج المحلي الإجمالي لمنطقة اليورو ارتفاعاً في إجمالي الناتج والنشاط الصناعي عبر الدول الأعضاء، وهو ما يحدد حركة التجارة الخارجية وحجم تدفقات النقد الأجنبي للشركاء التجاريين، بما في ذلك قطاعات التصدير والاستيراد في مصر."
+  },
+  "تسويه مديونيه «الوادي الجديد» لدي بنك الاستثمار القومي ب 222.7 مليون جنيه": {
+    "meaning": "Debt settlement removes outstanding financial liabilities from the entity's balance sheet through an agreed payment or asset transfer to the lending institution, altering its capital structure and leverage ratios.",
+    "meaning_ar": "تؤدي تسوية المديونية إلى إغلاق التزامات مالية قائمة في الميزانية العمومية للجهة المدنية عبر سداد متفق عليه أو تحويل أصول إلى بنك الاستثمار القومي، مما يعيد هيكلة رأس المال ونسب الرافعة المالية."
   },
   "تسويه مديونيه محافظه الوادي الجديد لدي بنك الاستثمار القومي بقيمه 222.7 مليون جنيه": {
     "meaning": "This agreement clears EGP 222.7 million in outstanding municipal liabilities from the National Investment Bank's balance sheet, resolving historical sovereign obligations between local governmental entities and public development lending institutions.",
