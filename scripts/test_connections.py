@@ -318,6 +318,23 @@ class BuildOrderTest(unittest.TestCase):
     """
 
     WORKFLOWS = REPO / ".github" / "workflows"
+    # The jobs known to resolve a push race file by file. Named as well as
+    # found, so a selector that stops matching fails here instead of passing
+    # over nothing.
+    RESOLVING = {"publish-live-data.yml", "publish-app-data.yml"}
+
+    def resolvers(self) -> dict[str, str]:
+        """The `resolve_ours` function of every workflow that asks
+        `resolve_generated.py` which side of a conflict to keep."""
+        found = {}
+        for path in sorted(self.WORKFLOWS.glob("*.yml")):
+            source = path.read_text(encoding="utf-8")
+            if "resolve_generated.py" not in source:
+                continue
+            start = source.index("resolve_ours () {")
+            end = source.index("\n          for attempt in", start)
+            found[path.name] = source[start:end]
+        return found
 
     def test_a_resolved_push_race_rebuilds_the_crossings(self):
         """Order is not enough when a conflict resolver can split the pair.
@@ -331,24 +348,45 @@ class BuildOrderTest(unittest.TestCase):
         the same day sitting in the feed beside them.
 
         `PublishedTest` above then fails on that commit, and every job that
-        runs the suite fails with it. `publish-prices` runs it before writing
+        runs the suite fails with it. `publish-prices` ran it before writing
         a quote, which is how three of the six price publishes of 10 Sep 2026
         failed and the prices did not move for a trading session.
+
+        `publish-app-data` resolves the same way and splits the crossings
+        from a different input. It stamps its crossings early in an hour-long
+        run, so on a collision the fifteen-minute lane's `connections.json` is
+        usually the newer file and is kept, while `companies.json`, which only
+        the daily build writes, comes through from the build. The ratios
+        committed are then divided by the previous directory's medians: AMES
+        at 11.04× a median of 553811.5 at 22:02 on 10 Sep 2026, beside a
+        directory that said 925908.5. Six daily builds committed a pair like
+        that between 10 and 12 Sep: `SessionTest` fails on all six of them and
+        `CardinalityTest` on five.
         """
-        source = (self.WORKFLOWS / "publish-live-data.yml").read_text(encoding="utf-8")
-        resolve = source.index("git rebase --continue")
-        after = source[resolve:]
-        self.assertIn("build_connections_api.py", after,
-                      "a resolved race can leave the feed and the crossings "
-                      "describing different days")
-        self.assertLess(after.index("build_connections_api.py"),
-                        after.index("build_fixtures.py"),
-                        "the fingerprint is computed before the crossings it "
-                        "is supposed to describe")
+        resolvers = self.resolvers()
+        self.assertLessEqual(self.RESOLVING, set(resolvers),
+                             "the jobs this guards no longer ask the resolver")
+        rebuild = "python3 scripts/build_connections_api.py"
+        for name, shell in resolvers.items():
+            with self.subTest(workflow=name):
+                after = shell[shell.index("git rebase --continue"):]
+                self.assertIn(rebuild, after,
+                              "a resolved race can commit crossings built from "
+                              "documents that were not committed beside them")
+                self.assertLess(after.index(rebuild),
+                                after.index("python3 scripts/build_fixtures.py"),
+                                "the fingerprint is computed before the crossings it "
+                                "is supposed to describe")
 
     def test_connections_is_never_built_before_the_feed_it_reads(self):
+        resolvers = self.resolvers()
         for path in sorted(self.WORKFLOWS.glob("*.yml")):
             source = path.read_text(encoding="utf-8")
+            # The build, not the rebuild after a push race. That one reads the
+            # feed the race left on disk and is held by the test above; the
+            # daily build writes the feed inside build_all.py, held below.
+            if path.name in resolvers:
+                source = source.replace(resolvers[path.name], "")
             if "build_connections_api.py" not in source:
                 continue
             with self.subTest(workflow=path.name):

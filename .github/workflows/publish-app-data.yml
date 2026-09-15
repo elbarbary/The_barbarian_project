@@ -429,6 +429,24 @@ jobs:
               rm -rf "$tmp"
             done
             GIT_EDITOR=true git rebase --continue >/dev/null 2>&1 || true
+            # The crossings are DERIVED from four documents — the directory,
+            # the market file, the news and the filings feed — and the resolver
+            # above picks a side for each file on its own. This build stamps
+            # its `connections.json` early in an hour-long run, so on a
+            # collision the fifteen-minute lane's copy is usually the newer one
+            # and is kept, while `companies.json`, which only this job writes,
+            # comes through from this build. The session ratios committed are
+            # then divided by the PREVIOUS directory's medians: at 22:02 on
+            # 10 Sep 2026 AMES went out at 11.04× a median of 553811.5 beside a
+            # directory that said 925908.5, which is 6.60×. Six daily builds
+            # committed a pair like that between 10 and 12 Sep, and each stood
+            # until the next fifteen-minute rebuild.
+            #
+            # So rebuild the crossings from whatever the resolver left on disk,
+            # as publish-live-data does. It is arithmetic over those documents,
+            # no network, and it runs before the fingerprint below so the
+            # manifest describes the rebuilt file.
+            python3 scripts/build_connections_api.py >/dev/null 2>&1 || true
             # The fingerprint has to describe the bytes that actually ended up
             # here, so it is recomputed after any merge and folded in.
             python3 scripts/build_fixtures.py >/dev/null 2>&1 || true

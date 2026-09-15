@@ -130,6 +130,78 @@ class RaceTest(unittest.TestCase):
         self.assertEqual(self.read(self.NEWS)["generated_at"],
                          "2026-09-06T07:01:44+00:00", out)
 
+    # ── a derived document and the one it divides by ─────────────────────
+    DIRECTORY = "public/data/v1/companies.json"
+    CROSSINGS = ("public/data/v1/connections.json",
+                 "app/assets/fixtures/connections.json")
+    # Stands in for build_connections_api.py at the path the resolver calls:
+    # reads the directory on disk, writes both roots, and records the median
+    # it divided by.
+    BUILDER = (
+        "import json, pathlib\n"
+        "root = pathlib.Path(__file__).resolve().parent.parent\n"
+        "directory = json.loads((root / 'public/data/v1/companies.json').read_text())\n"
+        "body = json.dumps({'divided_by': directory['median']})\n"
+        "for folder in ('public/data/v1', 'app/assets/fixtures'):\n"
+        "    (root / folder / 'connections.json').write_text(body)\n"
+    )
+
+    def race_the_directory(self, workflow):
+        """The daily build's new directory replayed over the fifteen-minute
+        lane's newer crossings, as at 22:02 on 10 Sep 2026. Returns the
+        committed directory's median and the one each committed copy of the
+        crossings divided by."""
+        (self.root / "scripts" / "build_connections_api.py").write_text(self.BUILDER)
+
+        def crossings(stamp, median):
+            for path in self.CROSSINGS:
+                self.write(path, {"updated_at": stamp, "divided_by": median})
+
+        self.write(self.DIRECTORY, {"median": 553811.5})
+        crossings("2026-09-10T21:45:00+00:00", 553811.5)
+        self.commit("base")
+        base = git("rev-parse", "HEAD", cwd=self.root).stdout.strip()
+
+        # The fifteen-minute lane rebuilds the crossings from the directory
+        # already on main.
+        crossings("2026-09-10T22:01:09+00:00", 553811.5)
+        self.commit("data: live news and rates")
+
+        # The daily build stamped its crossings at 21:56, from the directory
+        # it had just rebuilt.
+        git("checkout", "-q", "-b", "slow", base, cwd=self.root)
+        self.write(self.DIRECTORY, {"median": 925908.5})
+        crossings("2026-09-10T21:56:45+00:00", 925908.5)
+        self.commit("data: rebuild published app data")
+
+        rebase = subprocess.run(["git", "rebase", "main"], cwd=self.root,
+                                capture_output=True, text=True)
+        self.assertNotEqual(rebase.returncode, 0, "the setup did not actually collide")
+        script = resolver_shell(workflow) + "\nresolve_ours\n"
+        done = subprocess.run(["bash", "-c", script], cwd=self.root,
+                              capture_output=True, text=True)
+        self.assertEqual(done.returncode, 0, done.stdout + done.stderr)
+
+        def committed(path):
+            return json.loads(git("show", f"HEAD:{path}", cwd=self.root).stdout)
+
+        return (committed(self.DIRECTORY)["median"],
+                [committed(path)["divided_by"] for path in self.CROSSINGS],
+                done.stdout + done.stderr)
+
+    def test_the_committed_crossings_divide_by_the_committed_directory(self):
+        # The resolver keeps main's crossings, which are newer, and the build's
+        # directory, which nothing on main touched. Without a rebuild the
+        # commit carries 11.04× where its own directory says 6.60×.
+        median, divided_by, out = self.race_the_directory("publish-app-data.yml")
+        self.assertEqual(median, 925908.5, f"the build's directory was lost\n{out}")
+        self.assertEqual(divided_by, [median, median],
+                         f"the crossings divide by a directory that was not committed\n{out}")
+
+    def test_the_fast_lane_rebuilds_the_crossings_the_same_way(self):
+        median, divided_by, out = self.race_the_directory("publish-live-data.yml")
+        self.assertEqual(divided_by, [median, median], out)
+
     def test_a_conflict_outside_generated_data_still_stops_everything(self):
         # The guard that keeps this from auto-resolving source code.
         self.write(self.NEWS, {"generated_at": "2026-09-06T06:30:00+00:00"})
