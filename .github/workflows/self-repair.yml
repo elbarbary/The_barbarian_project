@@ -23,6 +23,11 @@ name: Self-repair
 #     `public/esthmr/` is writable and a Python fix could break a template.
 #   - It has no shell, no network beyond the model call, and no ability to add
 #     a dependency.
+#   - It re-runs the suite over a checkout of main. Publish app data tests its
+#     own rebuilt tree before committing ("Test what is about to be
+#     published"), and a failure only that tree has is not in this checkout:
+#     it comes back as "nothing to repair". So does anything that fails only
+#     under that job's environment, such as its STORES.
 #   - Most days the improve pass will propose nothing worth merging. That is
 #     the expected outcome, not a fault.
 

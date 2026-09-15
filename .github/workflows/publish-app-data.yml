@@ -293,16 +293,30 @@ jobs:
 
       # The parsers these tests cover read filed financial figures. A silent
       # regression there publishes a wrong number about a real company rather
-      # than crashing, so they run before anything is written.
+      # than crashing, so they run before anything is written, and a failure
+      # in the code still stops the job here rather than after a forty-minute
+      # rebuild that would end at the same failure.
+      #
+      # What no longer stops it is a document. Many of these tests read what
+      # the LAST commit left under public/data, and only the rebuild below
+      # replaces it, so a document that failed them failed every run before
+      # the one step that could repair it: UNIP's split ratios (34955982717,
+      # 34957349579, 34961265035), NBCC missing from the measures table after
+      # the price job listed it (34966943749), then its undated row
+      # (34971269319, 34990199243). Sixteen of the 21 runs that failed here
+      # from 6 to 15 Sep 2026 failed on a document, and not one of them could
+      # reach the step that rewrites it. The folds above are two of those
+      # repairs made early; this is the general one.
+      #
+      # `tests_before_rebuild.py` runs the whole suite and watches what each
+      # test reads. A failure whose test touched nothing the rebuild writes is
+      # the code's, and stops the job. One that read a document the rebuild
+      # rewrites, or started a process whose reads it cannot see, is named
+      # and left to "Test what is about to be published", which runs every
+      # test again over the rebuilt tree and fails on anything. Nothing is
+      # committed on this step's word.
       - name: Test the parsers
-        run: python3 -m unittest discover -s scripts -p 'test_*.py' -v
-
-      # The website draws the same figures the parsers produce, and had no
-      # tests at all until it was found publishing the design canvas's invented
-      # EGX 30 level to signed-in readers. Same reasoning as above: a wrong
-      # number renders fine.
-      - name: Test the website
-        run: node --test site-worker/test/*.test.mjs
+        run: python3 scripts/tests_before_rebuild.py -v
 
       - name: Validate before writing anything
         env:
@@ -364,6 +378,42 @@ jobs:
             exit 0
           fi
           exit "$code"
+
+      # The gate: every test, over the documents about to be committed.
+      #
+      # "Test the parsers" ran before the rebuild, so every test that holds
+      # one document to another read the previous run's pair. That is how a
+      # bad document went out through a green gate: NBCC's undated measures
+      # row was committed at 12:15 UTC on 15 Sep 2026 (2b0685d38) by run
+      # 34965020875, whose tests had passed at 11:47, before the rebuild
+      # wrote the table.
+      #
+      # So the suite runs again here, whole and strict, and before "Show what
+      # changed", so a failure commits nothing and main keeps what it has. It
+      # also decides everything the step before the rebuild left to it.
+      #
+      # What it cannot see is the Commit step's pull, which can still mix
+      # this build with another job's commit. `rederive_and_audit` guards
+      # that tree, and whatever the mix leaves no longer blocks the next run,
+      # which rebuilds it. Self-repair re-runs the suite over main, not over
+      # this runner's rebuilt tree, so a failure only this step can see comes
+      # back from it as "nothing to repair": read this log instead.
+      - name: Test what is about to be published
+        run: python3 -m unittest discover -s scripts -p 'test_*.py' -v
+
+      # The website draws the same figures the parsers produce, and had no
+      # tests at all until it was found publishing the design canvas's invented
+      # EGX 30 level to signed-in readers. Same reasoning as above: a wrong
+      # number renders fine.
+      #
+      # After the rebuild, for the gate's reason: these tests read
+      # measures.json, connections.json, flow-trackers.json and the ownership
+      # documents off disk, and before the rebuild those are the previous
+      # run's. A change to the site's own code is tested within a minute of
+      # its push by check-website.yml, and this job does not run on those
+      # paths at all.
+      - name: Test the website against it
+        run: node --test site-worker/test/*.test.mjs
 
       - name: Show what changed
         id: diff

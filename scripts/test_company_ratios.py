@@ -380,7 +380,9 @@ class TheDailyBuild(unittest.TestCase):
         run before the rebuild — runs 34955982717 and 34957349579."""
         text = self.WORKFLOW.read_text(encoding="utf-8")
         fold = text.index("python3 scripts/apply_company_ratios.py")
-        self.assertLess(fold, text.index("python3 -m unittest discover"),
+        # The run before the rebuild. `python3 -m unittest discover` is now
+        # the gate AFTER it, which any fold before the rebuild would pass.
+        self.assertLess(fold, text.index("python3 scripts/tests_before_rebuild.py"),
                         "the tests would hold a split commit against the rebuild again")
         self.assertLess(fold, text.index("name: Rebuild published data"))
 

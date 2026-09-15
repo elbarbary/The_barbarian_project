@@ -474,7 +474,9 @@ class TheDailyBuild(unittest.TestCase):
         file before the table had it (34966943749)."""
         text = self.WORKFLOW.read_text(encoding="utf-8")
         rebuild = text.index("python3 scripts/build_measures.py")
-        self.assertLess(rebuild, text.index("python3 -m unittest discover"),
+        # The run before the rebuild. `python3 -m unittest discover` is now
+        # the gate AFTER it, which any step before the rebuild would pass.
+        self.assertLess(rebuild, text.index("python3 scripts/tests_before_rebuild.py"),
                         "the tests would hold an earlier commit's table again")
         self.assertLess(rebuild, text.index("name: Rebuild published data"))
 
