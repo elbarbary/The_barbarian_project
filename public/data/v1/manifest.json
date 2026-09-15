@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "data_version": "5b1f2b5597d16210",
-  "generated_at": "2026-09-15T13:18:28+00:00",
+  "data_version": "a6467118cb08d695",
+  "generated_at": "2026-09-15T13:19:57+00:00",
   "market_date": "2026-09-15",
   "versions": {
-    "market": 90475584,
+    "market": 8055932,
     "market_history": 21850849,
     "companies": 53644891,
     "cash_or_trash": 42225606,
