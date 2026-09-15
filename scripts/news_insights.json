@@ -1191,6 +1191,10 @@
     "meaning": "Higher benchmark yields raise international borrowing costs and strengthen the US dollar, which increases sovereign debt servicing burdens and redirects cross-border portfolio capital toward dollar-denominated assets.",
     "meaning_ar": "يؤدي ارتفاع عائد السندات القياسية إلى زيادة تكلفة الاقتراض الدولي وقوة الدولار، مما يرفع تكلفة خدمة الدين السيادي ويعيد توجيه التدفقات الاستثمارية نحو الأصول المقومة بالعملة الأمريكية."
   },
+  "ارتفاع فايض ميزان تجاره السلع في منطقه اليورو خلال يوليو": {
+    "meaning": "A widening goods trade surplus indicates that the Eurozone's total value of exported merchandise exceeds its merchandise imports for the period. For Egyptian companies trading with Europe, this reflects prevailing macroeconomic supply-demand dynamics and net currency liquidity flows across the Euro area.",
+    "meaning_ar": "يشير اتساع فائض ميزان تجارة السلع إلى تجاوز القيمة الإجمالية لصادرات منطقة اليورو من السلع لقيمة وارداتها السلعية خلال تلك الفترة. ويعكس ذلك للشركات المصرية المتعاملة مع أوروبا ديناميكيات العرض والطلب الكلية وحركة السيولة الصافية للنقد الأجنبي داخل المنطقة."
+  },
   "ارتفاع مبيعات التجزيه في الصين باقل من المتوقع خلال اغسطس": {
     "meaning": "Retail sales data measures consumer spending across the economy, where an expansion rate falling below consensus forecasts reflects current domestic consumption operating at a slower pace than baseline market benchmarks.",
     "meaning_ar": "تقيس بيانات مبيعات التجزئة حجم الإنفاق الاستهلاكي عبر قطاعات الاقتصاد، حيث يعكس نموها بوتيرة دون التوقعات أن وتيرة الاستهلاك المحلي الحالية تسجل أداءً أبطأ مقارنة بتقديرات السوق المرجعية."
@@ -6852,6 +6856,10 @@
   "“الرقابه الماليه” توهل مجموعه جديده من “الميسرات” لدعم التمكين المالي للنساء": {
     "meaning": "The Financial Regulatory Authority (FRA) certifies field facilitators to act as intermediaries providing microfinance education and distribution access to female micro-entrepreneurs. This process expands non-banking financial institutions' (NBFIs) distribution channels to reach previously unbanked retail segments.",
     "meaning_ar": "تقوم الهيئة العامة للرقابة المالية بتأهيل وتدريب ميسّرات ميدانيات للعمل كقنوات اتصال لتوفير التثقيف المالي وتوزيع خدمات التمويل متناهي الصغر لرائدات الأعمال، مما يوسّع شبكات التوزيع للمؤسسات المالية غير المصرفية للوصول إلى شرائح غير مشمولة مصرفياً."
+  },
+  "“الرقابه الماليه”: اضافه التحليل السلوكي للاستعلام عن عملاء التمويل الاستهلاكي": {
+    "meaning": "The Financial Regulatory Authority integrates behavioral data analysis into the credit assessment framework for consumer finance companies, adding non-traditional transaction patterns to conventional credit bureau inquiries for evaluating borrower creditworthiness.",
+    "meaning_ar": "تُدرج الهيئة العامة للرقابة المالية تقنيات تحليل البيانات السلوكية ضمن منظومة الاستعلام الائتماني لشركات التمويل الاستهلاكي، مما يضيف أنماط المعاملات غير التقليدية إلى تقارير الجدارة الائتمانية المعتادة لتقييم الملاءة المالية للعملاء."
   },
   "“الزراعه” تتعاون مع “الفاو” لتطوير قطاع الزيتون في مصر": {
     "meaning": "This institutional cooperation applies Food and Agriculture Organization technical assistance and standardisation frameworks to local olive farming and post-harvest supply chains.",
