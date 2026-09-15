@@ -2139,6 +2139,10 @@
     "meaning": "Zero-customs tariff arrangements on agricultural exports to China offset logistics and freight expenses incurred along the export supply chain.",
     "meaning_ar": "تعمل الإعفاءات الجمركية الكاملة على صادرات الحاصلات الزراعية إلى الصين على موازنة تكاليف الشحن والخدمات اللوجستية لسلسلة التوريد."
   },
+  "الحكومه الالمانيه تعتزم التدخل لكبح اسعار الوقود": {
+    "meaning": "Government market intervention in fuel pricing operates through mechanisms such as fuel tax reductions, direct retail subsidies, or regulatory retail price ceilings that alter the pass-through of global crude input costs to end consumers.",
+    "meaning_ar": "يعمل التدخل الحكومي لتنظيم أسعار الوقود عبر آليات تشمل خفض الضرائب النوعية، أو تقديم دعم مالي مباشر، أو فرض سقف سعري يغير من وتيرة انتقال تكاليف النفط الخام العالمية إلى أسعار التجزئة."
+  },
   "الحكومه تبحث تقنين اوضاع المستثمرين في منطقتي جرزا وعرب ابوساعد الصناعيتين": {
     "meaning": "Regularizing investor status transitions industrial operations into the formal economy, providing operating facilities with official licensing, legal land tenure, and integration into standard regulatory and utility frameworks.",
     "meaning_ar": "يتمثل تقنين أوضاع المستثمرين في نقل المنشآت الصناعية إلى الاقتصاد الرسمي، مما يمنح المصانع القائمة تراخيص تشغيل معتمدة وسندات حيازة قانونية للأراضي مع إدراجها ضمن الأطر التنظيمية والمرافق العامة."
@@ -3170,6 +3174,10 @@
   "انطلاق فعاليات الدوره الثامنه من FDC Summit الاسبوع المقبل بمشاركه شركات التكنولوجيا العالميه والمحليه": {
     "meaning": "Industry summits function as operational platforms for B2B engagement, commercial agreement negotiations, and technology transfer between multinational providers and local ICT firms.",
     "meaning_ar": "تمثل القمم والملتقيات المتخصصة منصات تشغيلية لعقد الشراكات التجارية بين الشركات ونقل التكنولوجيا وتوقيع الاتفاقيات بين الموردين الدوليين ومقدمي خدمات الاتصالات وتكنولوجيا المعلومات المحليين."
+  },
+  "انطلاق موتمر ومعرض «ايجي هيلث» بمشاركه 300 شركه": {
+    "meaning": "Sector-specific trade exhibitions serve as centralized commercial platforms that facilitate business-to-business (B2B) contracting, medical equipment distribution, and product showcases among 300 healthcare and pharmaceutical suppliers.",
+    "meaning_ar": "تُعد المعارض والملتقيات التجارية المتخصصة منصات تجمع تجاري تسهم في إبرام تعاقدات التوريد المباشرة بين الشركات وعرض المنتجات الطبية والدوائية بمشاركة 300 جهة عارضة."
   },
   "انطلاق موسم حصاد القطن من شمال الصعيد و«الزراعه» تترقب انتاجيه افضل": {
     "meaning": "The start of the cotton harvest in Upper Egypt marks the operational beginning of domestic raw material supply for local ginning, spinning, and textile manufacturing facilities, as well as the opening of the state-regulated auction system for crop trading.",
