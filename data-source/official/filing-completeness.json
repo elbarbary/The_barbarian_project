@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-15T05:34:08.456244+00:00",
+  "builtAt": "2026-09-15T10:15:59.427386+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 192332,
-    "withoutTickerInHeading": 36178,
-    "tickerNotInThisDirectory": 29403,
-    "attributedToAnIssuer": 126751,
+    "items": 192369,
+    "withoutTickerInHeading": 36205,
+    "tickerNotInThisDirectory": 29404,
+    "attributedToAnIssuer": 126760,
     "months": [
       {
         "month": "2005-01",
@@ -1830,9 +1830,9 @@
       },
       {
         "month": "2026-09",
-        "harvested": "2026-09-14",
-        "items": 443,
-        "expected": 443,
+        "harvested": "2026-09-15",
+        "items": 480,
+        "expected": 480,
         "status": "complete"
       }
     ],
@@ -1840,7 +1840,7 @@
   },
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
-    "items": 615,
+    "items": 616,
     "failures": {}
   },
   "issuers": [
@@ -2700,9 +2700,9 @@
     },
     {
       "ticker": "EASB",
-      "egxFilingCount": 570,
-      "latestEgxFilingId": "294511",
-      "latestEgxFilingAt": "2026-09-09T12:24:10",
+      "egxFilingCount": 571,
+      "latestEgxFilingId": "294677",
+      "latestEgxFilingAt": "2026-09-15T11:21:54",
       "candidateIssuerWebsite": "https://www.eacfn.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EASB/profile",
       "websiteStatus": null,
@@ -2740,9 +2740,9 @@
     },
     {
       "ticker": "EDFM",
-      "egxFilingCount": 687,
-      "latestEgxFilingId": "294599",
-      "latestEgxFilingAt": "2026-09-13T13:13:48",
+      "egxFilingCount": 688,
+      "latestEgxFilingId": "294664",
+      "latestEgxFilingAt": "2026-09-15T10:52:23",
       "candidateIssuerWebsite": "https://www.eastdelta-mills.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EDFM/profile",
       "websiteStatus": null,
@@ -2874,9 +2874,9 @@
     },
     {
       "ticker": "EGSA",
-      "egxFilingCount": 542,
-      "latestEgxFilingId": "294328",
-      "latestEgxFilingAt": "2026-09-03T16:46:31",
+      "egxFilingCount": 543,
+      "latestEgxFilingId": "294670",
+      "latestEgxFilingAt": "2026-09-15T11:07:36",
       "candidateIssuerWebsite": "https://www.nilesat.com.eg/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EGSA/profile",
       "websiteStatus": null,
@@ -3526,9 +3526,9 @@
     },
     {
       "ticker": "KORA",
-      "egxFilingCount": 26,
-      "latestEgxFilingId": "294527",
-      "latestEgxFilingAt": "2026-09-09T15:58:41",
+      "egxFilingCount": 27,
+      "latestEgxFilingId": "294678",
+      "latestEgxFilingAt": "2026-09-15T11:32:56",
       "candidateIssuerWebsite": null,
       "websiteDirectorySource": null,
       "websiteStatus": {
@@ -4212,9 +4212,9 @@
     },
     {
       "ticker": "PRDC",
-      "egxFilingCount": 329,
-      "latestEgxFilingId": "294623",
-      "latestEgxFilingAt": "2026-09-14T11:13:06",
+      "egxFilingCount": 330,
+      "latestEgxFilingId": "294672",
+      "latestEgxFilingAt": "2026-09-15T11:12:20",
       "candidateIssuerWebsite": "https://www.predco.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/PRDC/profile",
       "websiteStatus": null,
@@ -4262,9 +4262,9 @@
     },
     {
       "ticker": "RAYA",
-      "egxFilingCount": 947,
-      "latestEgxFilingId": "294282",
-      "latestEgxFilingAt": "2026-09-02T15:39:06",
+      "egxFilingCount": 948,
+      "latestEgxFilingId": "294675",
+      "latestEgxFilingAt": "2026-09-15T11:16:49",
       "candidateIssuerWebsite": "https://www.rayacorp.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/RAYA/profile",
       "websiteStatus": null,
@@ -4362,9 +4362,9 @@
     },
     {
       "ticker": "SCEM",
-      "egxFilingCount": 526,
-      "latestEgxFilingId": "294573",
-      "latestEgxFilingAt": "2026-09-10T15:29:30",
+      "egxFilingCount": 527,
+      "latestEgxFilingId": "294683",
+      "latestEgxFilingAt": "2026-09-15T12:05:01",
       "candidateIssuerWebsite": "https://www.sinaicement.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SCEM/profile",
       "websiteStatus": null,
@@ -4402,9 +4402,9 @@
     },
     {
       "ticker": "SEIG",
-      "egxFilingCount": 62,
-      "latestEgxFilingId": "290264",
-      "latestEgxFilingAt": "2026-06-24T09:12:41",
+      "egxFilingCount": 63,
+      "latestEgxFilingId": "294667",
+      "latestEgxFilingAt": "2026-09-15T11:01:08",
       "candidateIssuerWebsite": "https://www.saudi-egy.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SEIG/profile",
       "websiteStatus": null,
@@ -4718,9 +4718,9 @@
     },
     {
       "ticker": "UPMS",
-      "egxFilingCount": 337,
-      "latestEgxFilingId": "294486",
-      "latestEgxFilingAt": "2026-09-08T16:26:06",
+      "egxFilingCount": 338,
+      "latestEgxFilingId": "294686",
+      "latestEgxFilingAt": "2026-09-15T12:08:58",
       "candidateIssuerWebsite": "https://www.unionpharmacist.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/UPMS/profile",
       "websiteStatus": null,

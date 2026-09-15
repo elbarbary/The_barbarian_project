@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-09-15T05:33:40.351669+00:00",
+  "fetchedAt": "2026-09-15T10:15:30.779618+00:00",
   "sources": {
     "exchangeRates": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
     "interbank": "https://www.cbe.org.eg/en/economic-research/statistics/daily-interbank-rates-and-volumes",
@@ -145,7 +145,7 @@
           },
           {
             "date": "14/09",
-            "value": null
+            "value": 0.19145
           }
         ]
       },
@@ -417,7 +417,7 @@
           },
           {
             "date": "14/09",
-            "value": null
+            "value": 67862.0
           }
         ]
       },
@@ -462,7 +462,7 @@
           },
           {
             "date": "14/09",
-            "value": null
+            "value": 0.0
           }
         ]
       },
@@ -507,7 +507,7 @@
           },
           {
             "date": "14/09",
-            "value": null
+            "value": 0.0
           }
         ]
       },
@@ -552,7 +552,7 @@
           },
           {
             "date": "14/09",
-            "value": null
+            "value": 0.0
           }
         ]
       },
@@ -597,7 +597,7 @@
           },
           {
             "date": "14/09",
-            "value": null
+            "value": 0.0
           }
         ]
       },
@@ -642,7 +642,7 @@
           },
           {
             "date": "14/09",
-            "value": null
+            "value": 0.0
           }
         ]
       },
@@ -687,7 +687,7 @@
           },
           {
             "date": "14/09",
-            "value": null
+            "value": 67862.0
           }
         ]
       }
