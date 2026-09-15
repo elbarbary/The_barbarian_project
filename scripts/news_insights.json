@@ -3540,6 +3540,10 @@
     "meaning": "Broad declines across European benchmark indices reflect market-wide selling pressure, while a 10% drop in a heavily weighted constituent like Novartis directly pulls down both the healthcare sector and composite index levels.",
     "meaning_ar": "يعكس هبوط المؤشرات الأوروبية حركة بيع واسعة النطاق في الأسواق الإقليمية، حيث يؤدي انخفاض سهم ذي وزن نسبي كبير مثل نوفارتس بنسبة 10% إلى الضغط المباشر على مؤشرات قطاع الرعاية الصحية والمؤشرات المركبة العامة."
   },
+  "تراجع الموشرات الصينيه عقب صدور بيانات ضعيفه": {
+    "meaning": "Slowing macroeconomic readings lead to immediate downward asset repricing across equity markets as participants adjust underlying corporate cash flow and earnings projections.",
+    "meaning_ar": "يؤدي صدور بيانات اقتصادية كلية متراجعة إلى إعادة تسعير فورية للأسهم في الأسواق المالية بالتزامن مع تعديل تقييمات التدفقات النقدية والأرباح التشغيلية للشركات."
+  },
   "تراجع جماعي للموشرات بمنتصف التعاملات.. والثلاثيني يهبط بنسبه 0.19%": {
     "meaning": "Mid-session trading reflects aggregate net selling pressure across listed equities, leading to an intraday decline in benchmark indices with the EGX30 recording a 0.19% decrease.",
     "meaning_ar": "تعكس تداولات منتصف الجلسة ضغوطاً بيعية على الأسهم المقيدة، مما يؤدي إلى تراجع لحظي في المؤشرات الرئيسية مع تسجيل المؤشر الرئيسي EGX30 انخفاضاً بنسبة 0.19%."
@@ -6256,6 +6260,10 @@
   "هبوط سهم شي ان 10% بعد سحب منتج في استراليا ونيوزيلندا": {
     "meaning": "Product recalls generate immediate reverse-logistics costs, inventory write-offs, and compliance scrutiny, which equity markets price into company valuation through immediate share revaluations.",
     "meaning_ar": "تؤدي عمليات سحب المنتجات إلى تكاليف لوجستية عكسية فورية وشطب لقيمة المخزون وخضوع للرقابة التنظيمية، وهو ما تسعره أسواق الأسهم مباشرة في القيمة السوقية للشركة."
+  },
+  "هبوط سهم “ال في ام اتش” يطيح بها من قايمه اكبر 10 شركات اوروبيه": {
+    "meaning": "A drop in share price reduces a company's total market capitalization, altering its relative ranking against other publicly traded firms in benchmark regional indices.",
+    "meaning_ar": "يؤدي انخفاض سعر السهم إلى تقليص القيمة السوقية الإجمالية للشركة، مما يغير ترتيبها النسبي مقارنة بالشركات المدرجة الأخرى في المؤشرات الإقليمية الرئيسية."
   },
   "هبوط واردات الصين من النفط الخام بنسبه 23.4% في اغسطس": {
     "meaning": "A drop in Chinese crude oil imports reflects lower refinery throughput, adjustments in domestic crude inventories, and reduced physical procurement activity by the world's largest oil importer.",
