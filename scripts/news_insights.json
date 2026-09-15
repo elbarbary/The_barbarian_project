@@ -2263,6 +2263,10 @@
     "meaning": "The Financial Regulatory Authority trains field facilitators to act as direct distribution and onboarding agents for non-banking microfinance and microinsurance products in rural areas.",
     "meaning_ar": "تتولى الهيئة العامة للرقابة المالية تدريب ميسّرات ميدانيات ليعملن كقنوات توزيع وتوعية مباشرة لمنتجات التمويل متناهي الصغر والتأمين متناهي الصغر في المناطق الريفية."
   },
+  "الرقابه الماليه توهل ميسرات لتوعيه النساء الريفيات بالخدمات الماليه": {
+    "meaning": "The Financial Regulatory Authority establishes a grassroots training channel via female facilitators to introduce non-banking financial products, including microfinance and microinsurance, to rural segments.",
+    "meaning_ar": "تؤسس الهيئة العامة للرقابة المالية قناة تدريبية ميدانية عبر ميسّرات لنشر التوعية بالمنتجات المالية غير المصرفية، كالتمويل متناهي الصغر والتأمين متناهي الصغر، في المناطق الريفية."
+  },
   "الرقابه الماليه تيسر قواعد مراقبي حسابات الشركات المهنيه في التامين": {
     "meaning": "The regulatory decision modifies the eligibility and registration criteria for certified accounting and auditing firms operating in the insurance sector, altering the regulatory compliance framework for external assurance providers.",
     "meaning_ar": "يعدل القرار الرقابي معايير القيد والتأهيل المطبقة على مكاتب وشركات المحاسبة والمراجعة العاملة في قطاع التأمين، مما يعيد ضبط متطلبات الامتثال التنظيمي لجهات التدقيق الخارجي."
@@ -6508,6 +6512,10 @@
   "وزير الزراعه: تقديم كافه التسهيلات للشركات الفرنسيه الراغبه في الاستثمار بالسوق المصري": {
     "meaning": "Government administrative facilities for foreign agribusinesses lower regulatory entry barriers and streamline licensing procedures, directly connecting international capital and agricultural technology with domestic supply chains.",
     "meaning_ar": "يؤدي تقديم التسهيلات الإدارية الحكومية للشركات الزراعية الأجنبية إلى خفض حواجز الدخول التنظيمية وتبسيط إجراءات التراخيص، مما يربط رؤوس الأموال والتقنيات الزراعية الدولية بسلاسل التوريد المحلية."
+  },
+  "وزير الزراعه: جميع امكانيات الوزاره تحت تصرف الشركه القابضه للصناعات الغذاييه": {
+    "meaning": "This bilateral coordination integrates the Ministry of Agriculture's operational assets and logistics directly into the supply chain of the Food Industries Holding Company, centralizing state raw agricultural inputs for public food processing operations.",
+    "meaning_ar": "يضع هذا التنسيق المشترك الإمكانيات التشغيلية واللوجستية لوزارة الزراعة ضمن سلاسل إمداد الشركة القابضة للصناعات الغذائية، مما يربط توريد المدخلات الزراعية الأولية المملوكة للدولة بعمليات التصنيع الغذائي الحكومية بصورة مباشرة."
   },
   "وزير الزراعه: لا توجد سوق سوداء للاسمده": {
     "meaning": "Fertilizer distribution operates through state-monitored channels and subsidized quota allocations, enforcing official pricing mechanisms across domestic agricultural networks.",
