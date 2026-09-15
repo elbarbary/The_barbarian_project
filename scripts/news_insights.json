@@ -1803,6 +1803,10 @@
     "meaning": "Asian technology equities fall as proposed limits on artificial intelligence development introduce regulatory friction into semiconductor, hardware, and software deployment cycles.",
     "meaning_ar": "تتراجع أسهم شركات التكنولوجيا الآسيوية بالتزامن مع طرح قيود تنظيمية تبطئ دورات تطوير وتشغيل أشباه الموصلات والبرمجيات الخاصة بالذكاء الاصطناعي."
   },
+  "الاسهم الامريكيه تتراجع الثلاثاء مع وصول عايد سندات الخزانه لاجل 10 سنوات الي اعلي مستوي له منذ 19 عاما": {
+    "meaning": "Higher sovereign bond yields increase the risk-free rate used in discounted cash flow valuation models, while raising corporate debt refinancing costs across capital markets.",
+    "meaning_ar": "يؤدي ارتفاع عوائد السندات السيادية إلى زيادة معدل العائد الخالي من المخاطر المستخدم في نماذج تقييم التدفقات النقدية، بالتزامن مع رفع تكاليف إعادة تمويل ديون الشركات في أسواق رأس المال."
+  },
   "الاسهم الامريكيه تتراجع الخميس مع تجاوز اسعار النفط حاجز 100 دولار": {
     "meaning": "Crude oil prices exceeding 100 dollars per barrel elevate operating and energy input costs across broader corporate sectors, compressing current earnings margins and driving market revaluations across major equity indices.",
     "meaning_ar": "يؤدي تجاوز أسعار النفط الخام حاجز 100 دولار للبرميل إلى زيادة تكاليف التشغيل ومدخلات الطاقة عبر مختلف القطاعات المؤسسية، وهو ما يضغط على هوامش الأرباح التشغيلية وينعكس في تقييمات المؤشرات الرئيسية لأسواق الأسهم."
@@ -6672,6 +6676,10 @@
   "هييه الدواء تبحث مع «مينا فارم» تصنيع لقاح مصري مضاد لفيروس ايبولا": {
     "meaning": "The Egyptian Drug Authority's discussions with Minapharm involve evaluating the regulatory licensing and technical requirements to localize biotech vaccine manufacturing. This mechanism utilizes existing specialized biopharmaceutical production lines for viral vaccine development under state regulatory oversight.",
     "meaning_ar": "تتضمن مباحثات هيئة الدواء المصرية مع شركة مينا فارم دراسة المتطلبات الفنية والتنظيمية لتوطين صناعة اللقاحات الحيوية، وتعتمد هذه الآلية على تشغيل خطوط الإنتاج البيوتكنولوجية القائمة لتصنيع اللقاحات تحت إشراف رقابي مباشر."
+  },
+  "هييه الدواء تبحث مع «نوفارتس» توطين الصناعات الحيويه واتاحه علاجات مبتكره لسرطان الثدي": {
+    "meaning": "The discussions focus on establishing domestic manufacturing lines for advanced biologics through technology transfer agreements with multinational pharmaceutical firms, shifting supply from imported finished goods to locally packaged or synthesized oncology treatments.",
+    "meaning_ar": "تركز المباحثات على نقل تكنولوجيا تصنيع المستحضرات الحيوية المتطورة عبر اتفاقيات مع شركات الدواء متعددة الجنسيات، مما يحول هيكل الإمداد من استيراد المنتجات تامة الصنع إلى التصنيع والتعبئة المحلية لعلاجات الأورام."
   },
   "هييه الدواء تحصل علي التاهيل المسبق من “الصحه العالميه” لمعامل الرقابه الدواييه": {
     "meaning": "WHO prequalification establishes that the Egyptian Drug Authority's quality control laboratories operate in compliance with international pharmaceutical testing and regulatory standards.",
