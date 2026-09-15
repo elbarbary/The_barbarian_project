@@ -7,6 +7,10 @@
     "meaning": "Regulatory enforcement against unregistered seed distribution removes illicit inventory from the agricultural supply chain and enforces compliance with state certification standards.",
     "meaning_ar": "يؤدي التدخل الرقابي ضد توزيع التقاوي غير المسجلة إلى مصادرة المخزون غير المرخص من سلاسل الإمداد الزراعية وفرض الالتزام بمعايير الاعتماد الحكومية."
   },
+  "\"الزراعه\" تعلن اعتماد جديد لمعمل الصحه الحيوانيه بالاقصر وفق المواصفه الدوليه (ISO/IEC 17025)": {
+    "meaning": "The ISO/IEC 17025 accreditation establishes international technical validation for the laboratory's diagnostic testing, standardizing veterinary quality control procedures across the regional livestock supply chain.",
+    "meaning_ar": "يمنح الاعتماد الدولي (ISO/IEC 17025) اعترافاً فنياً عالمياً بدقة الاختبارات التشخيصية للمعمل، مما يوحد معايير الرقابة البيطرية وضبط الجودة عبر سلاسل توريد الثروة الحيوانية محلياً."
+  },
   "\"الزراعه\" تعلن السياسه الصنفيه للقمح ب 3 محافظات وتستهدف زياده الانتاجيه": {
     "meaning": "The varietal policy specifies certified, region-appropriate wheat seed cultivars across three governorates, standardizing agricultural inputs to align with local soil and climatic conditions.",
     "meaning_ar": "تحدد السياسة الصنفية تقاوي القمح المعتمدة والملائمة لكل منطقة جغرافية في ثلاث محافظات، مما يوحد المدخلات الزراعية وفقاً لطبيعة التربة والظروف المناخية المحلية."
@@ -4476,6 +4480,10 @@
     "meaning": "Government coordination of North West Coast development involves state-directed infrastructure planning, utility allocation, and land management affecting contracting, real estate, and tourism operators in the region.",
     "meaning_ar": "تشمل متابعة الحكومة لتطوير الساحل الشمالي الغربي تخطيط مشروعات البنية التحتية، وتخصيص المرافق، وإدارة الأراضي، وهو ما يرتبط بنشاط شركات المقاولات والتطوير العقاري والسياحة العاملة في المنطقة."
   },
+  "رييس الوزراء يتابع جهود توفير السلع واضافه 18 سلعه لمبادره خفض الاسعار بنهايه سبتمبر": {
+    "meaning": "The expansion of the price reduction initiative sets capped retail pricing agreements between the government, producers, and distributors across 18 additional consumer staples, directly affecting operational pricing structures and inventory turnover cycles in the food retail and manufacturing sectors.",
+    "meaning_ar": "يتضمن توسيع مبادرة خفض الأسعار تطبيق اتفاقيات تسعير محددة بين الحكومة والمنتجين والموزعين على 18 سلعة إضافية، وهو ما ينظم مباشرة آليات التسعير ودورات حركة المخزون في قطاعي تجارة التجزئة والتصنيع الغذائي."
+  },
   "رييس الوزراء يتابع مع وزير التخطيط تطورات الاقتصاد ومستجدات برنامج التحول الاقتصادي الوطني": {
     "meaning": "These inter-ministerial meetings review public investment allocation, state budget execution, and structural reform targets under the national economic transformation framework.",
     "meaning_ar": "تستعرض هذه الاجتماعات التنسيقية وتيرة تخصيص الاستثمارات العامة، ومعدلات تنفيذ الموازنة الاستثمارية، ومستهدفات الإصلاح الهيكلي ضمن برنامج التحول الاقتصادي للدولة."
@@ -5288,6 +5296,10 @@
   "عاجل.. الرقابه الماليه تلزم شركات التمويل الاستهلاكي وتمويل المشروعات بالربط اللحظي مع “اي سكور”": {
     "meaning": "The directive requires consumer and microfinance companies to integrate their credit databases with the Egyptian Credit Bureau (I-Score) via real-time data feeds, establishing instantaneous information exchange for credit risk assessment.",
     "meaning_ar": "يُلزم القرار شركات التمويل الاستهلاكي وتمويل المشروعات بربط قواعد بياناتها الائتمانية لحظيًا مع الشركة المصرية للاستعلام الائتماني (آي سكور)، مما يتيح التبادل الفوري للمعلومات لتقييم الجدارة الائتمانية."
+  },
+  "عاجل.. الرييس السيسي يستقبل ولي العهد السعودي بمطار القاهره": {
+    "meaning": "Bilateral state visits facilitate intergovernmental coordination on shared development funds, sovereign investment frameworks, and bilateral trade protocols across regional markets.",
+    "meaning_ar": "تتيح الزيارات الثنائية الرسمية التنسيق الحكومي المشترك بشأن أطر الاستثمار السيادي، وصناديق التنمية، والبروتوكولات التجارية المتبادلة بين الأسواق الإقليمية."
   },
   "عاجل.. القلعه تقرر شراء حصه اضافيه في المصريه للتكرير": {
     "meaning": "Acquiring an additional equity stake in an operational subsidiary expands the parent company's consolidated ownership percentage, voting control, and direct proportional entitlement to the refining facility's underlying financial results.",
