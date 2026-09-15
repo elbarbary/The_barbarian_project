@@ -660,28 +660,69 @@ def clean(value):
     return value
 
 
-def is_after_close(as_of: str | None) -> bool:
-    """Whether a scan timestamp falls after the EGX close for that day.
+# EGX trades Sunday to Thursday, 10:00-14:30 on the Cairo clock.
+CAIRO = zoneinfo.ZoneInfo("Africa/Cairo")
+# Monday=0 … Sunday=6, so Friday(4) and Saturday(5) are the weekend.
+EGX_WEEKEND = (4, 5)
+EGX_OPEN = 10 * 60
+EGX_CLOSE = 14 * 60 + 30
 
-    EGX trades Sunday to Thursday, 10:00-14:30 Cairo. A scan taken on a weekend
-    or outside those hours is reading closing prices; one taken between them is
-    reading a session in progress.
+
+def cairo_clock(as_of: str | None) -> datetime.datetime | None:
+    """A scan timestamp on the exchange's clock, or None when it cannot be read.
+
+    The scanner writes `toISOString()`, so a stamp with no offset is read as the
+    UTC it would have been written in.
+    """
+    if not as_of:
+        return None
+    try:
+        stamp = datetime.datetime.fromisoformat(as_of.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if stamp.tzinfo is None:
+        stamp = stamp.replace(tzinfo=datetime.timezone.utc)
+    return stamp.astimezone(CAIRO)
+
+
+def trading_session(cairo: datetime.datetime) -> datetime.date:
+    """The newest session that had opened by this moment on the Cairo clock.
+
+    Before 10:00 that is the day before, and a weekend reads back to Thursday.
+    """
+    day = cairo.date()
+    if cairo.hour * 60 + cairo.minute < EGX_OPEN:
+        day -= datetime.timedelta(days=1)
+    while day.weekday() in EGX_WEEKEND:
+        day -= datetime.timedelta(days=1)
+    return day
+
+
+def is_after_close(as_of: str | None) -> bool:
+    """Whether a scan timestamp is reading closing prices.
+
+    Only a scan taken between the 10:00 open and the 14:30 close of a trading
+    day is reading a session in progress. After 14:30 it is reading that day's
+    close; at the weekend or before 10:00 it is reading the close of the
+    session `session_date` dates it to, which is an earlier day than the one it
+    ran on.
+
+    Before the open used to count as a session in progress. The capture taken
+    at 00:15 Cairo on Tuesday 15 September published `market.json {"date":
+    "2026-09-14", "is_close": false}` — its 283 closes, moves and volumes each
+    identical to Monday's 21:45 close capture — beside a `connections.json`
+    already carrying Monday's session strands, and the parser test that holds
+    those two documents to one close failed the build.
 
     Unknown timestamps are treated as **not** a close, because the honest answer
     when we cannot tell is the weaker claim.
     """
-    if not as_of:
+    cairo = cairo_clock(as_of)
+    if cairo is None:
         return False
-    try:
-        stamp = datetime.datetime.fromisoformat(as_of.replace("Z", "+00:00"))
-    except ValueError:
-        return False
-
-    cairo = stamp.astimezone(zoneinfo.ZoneInfo("Africa/Cairo"))
-    # Monday=0 … Sunday=6, so Friday(4) and Saturday(5) are the weekend.
-    if cairo.weekday() in (4, 5):
+    if trading_session(cairo) < cairo.date():
         return True
-    return cairo.hour * 60 + cairo.minute > 14 * 60 + 30
+    return cairo.hour * 60 + cairo.minute > EGX_CLOSE
 
 
 def session_date(as_of: str | None) -> str | None:
@@ -697,19 +738,23 @@ def session_date(as_of: str | None) -> str | None:
     on (§49)".
 
     EGX trades Sunday to Thursday. A Friday or Saturday scan is reading
-    Thursday's closes, so it is dated Thursday. `is_after_close` already knows
-    the exchange's week for its own purpose; this applies the same fact to the
-    date itself.
+    Thursday's closes, so it is dated Thursday.
+
+    A scan before the 10:00 open is reading the previous session just as surely,
+    and the weekend fix still took the day from the UTC prefix. That dated it
+    right until 03:00 Cairo (02:00 in winter) only because UTC was still on the
+    previous day; after that the prefix caught up. The 09:31 capture on Monday
+    14 September was Sunday's closes, all 283 identical to Sunday's 19:39
+    capture, and it was published as `"date": "2026-09-14"`. So the session is
+    read off the Cairo clock, by the same `trading_session` that
+    `is_after_close` asks, and the two cannot disagree about it.
     """
     if not as_of:
         return None
-    try:
-        stamp = datetime.date.fromisoformat(as_of[:10])
-    except ValueError:
+    cairo = cairo_clock(as_of)
+    if cairo is None:
         return as_of[:10]
-    # Monday=0 … Sunday=6. Friday(4) rolls back one day, Saturday(5) two.
-    back = {4: 1, 5: 2}.get(stamp.weekday(), 0)
-    return (stamp - datetime.timedelta(days=back)).isoformat()
+    return trading_session(cairo).isoformat()
 
 
 def previous_close(

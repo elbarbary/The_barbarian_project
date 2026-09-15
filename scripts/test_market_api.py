@@ -7,13 +7,20 @@ stamped a day the exchange does not trade. On 22 August the pipeline published
 date travelled: `build_disclosures_api` copies `market["date"]` into each
 filing's `evidence.date`, and Home's unusual rail renders it under a field
 whose docstring names it "the session the multiple was measured on (§49)".
+
+Before the open is the same trap at the other end of the night. The capture at
+00:15 Cairo on 15 September held Monday's closes, every volume identical, and
+shipped as `{"date": "2026-09-14", "is_close": false}`; the 09:31 capture on
+14 September held Sunday's closes and shipped dated Monday.
 """
 
 from __future__ import annotations
 
+import datetime
 import pathlib
 import sys
 import unittest
+import zoneinfo
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
@@ -50,6 +57,92 @@ class SessionDateTest(unittest.TestCase):
         for stamp in ["2026-08-21T11:00:00Z", "2026-08-22T11:00:00Z"]:
             self.assertTrue(is_after_close(stamp), stamp)
             self.assertNotEqual(session_date(stamp), stamp[:10], stamp)
+
+
+class BeforeTheOpenTest(unittest.TestCase):
+    """A scan before 10:00 Cairo is reading the previous session's close.
+
+    Stamps are UTC, as the scanner writes them. Tuesday 15 September 2026 is
+    UTC+3 in Cairo, so each is its Cairo time less three hours.
+    """
+
+    def test_after_midnight_is_the_previous_close(self):
+        # 00:45 Cairo, Tuesday: the hour the failing build ran.
+        self.assertTrue(is_after_close("2026-09-14T21:45:00Z"))
+        self.assertEqual(session_date("2026-09-14T21:45:00Z"), "2026-09-14")
+
+    def test_a_minute_before_the_open_is_still_the_previous_close(self):
+        # 09:59 Cairo. The UTC prefix says Tuesday by now, and that prefix is
+        # what the date used to be read from.
+        self.assertTrue(is_after_close("2026-09-15T06:59:00Z"))
+        self.assertEqual(session_date("2026-09-15T06:59:00Z"), "2026-09-14")
+
+    def test_a_minute_after_the_open_is_a_session_in_progress(self):
+        # 10:01 Cairo.
+        self.assertFalse(is_after_close("2026-09-15T07:01:00Z"))
+        self.assertEqual(session_date("2026-09-15T07:01:00Z"), "2026-09-15")
+
+    def test_a_minute_after_the_close_is_that_days_close(self):
+        # 14:31 Cairo.
+        self.assertTrue(is_after_close("2026-09-15T11:31:00Z"))
+        self.assertEqual(session_date("2026-09-15T11:31:00Z"), "2026-09-15")
+
+    def test_the_captures_that_shipped_mislabelled(self):
+        for stamp, session in [
+            ("2026-09-14T21:15:57.094Z", "2026-09-14"),  # Tue 00:15, is_close false
+            ("2026-09-14T06:31:33.720Z", "2026-09-13"),  # Mon 09:31, dated Monday
+            ("2026-09-13T06:14:04.265Z", "2026-09-10"),  # Sun 09:14, dated Sunday
+            ("2026-09-07T03:47:51.895Z", "2026-09-06"),  # Mon 06:47, dated Monday
+        ]:
+            with self.subTest(stamp):
+                self.assertTrue(is_after_close(stamp))
+                self.assertEqual(session_date(stamp), session)
+
+    def test_winter_moves_the_utc_hours_not_the_cairo_ones(self):
+        # Tuesday 15 December 2026 is UTC+2.
+        for stamp, closed, session in [
+            ("2026-12-14T22:45:00Z", True, "2026-12-14"),   # 00:45
+            ("2026-12-15T00:30:00Z", True, "2026-12-14"),   # 02:30, UTC says the 15th
+            ("2026-12-15T07:59:00Z", True, "2026-12-14"),   # 09:59
+            ("2026-12-15T08:01:00Z", False, "2026-12-15"),  # 10:01
+            ("2026-12-15T12:31:00Z", True, "2026-12-15"),   # 14:31
+        ]:
+            with self.subTest(stamp):
+                self.assertEqual(is_after_close(stamp), closed)
+                self.assertEqual(session_date(stamp), session)
+
+    def test_an_unknown_stamp_is_still_not_a_close(self):
+        for stamp in (None, "", "not a date"):
+            self.assertFalse(is_after_close(stamp), stamp)
+
+    def test_every_five_minutes_of_a_summer_and_a_winter_week(self):
+        """In session means a trading day between 10:00 and 14:30 Cairo, and
+        only then. The date is the newest trading day whose 10:00 had come,
+        so a capture in session is dated the day it ran and a close is never
+        dated a session that had not opened."""
+        cairo = zoneinfo.ZoneInfo("Africa/Cairo")
+        # Each start is Sunday 00:00 in Cairo.
+        for start in ("2026-09-12T21:00:00+00:00", "2026-12-12T22:00:00+00:00"):
+            first = datetime.datetime.fromisoformat(start)
+            for step in range(7 * 24 * 12):
+                moment = first + datetime.timedelta(minutes=5 * step)
+                stamp = moment.strftime("%Y-%m-%dT%H:%M:%S.000Z")
+                local = moment.astimezone(cairo)
+                minute = local.hour * 60 + local.minute
+                trading = local.weekday() not in (4, 5)
+                in_session = trading and 10 * 60 <= minute <= 14 * 60 + 30
+                with self.subTest(stamp):
+                    self.assertEqual(is_after_close(stamp), not in_session)
+                    session = datetime.date.fromisoformat(session_date(stamp))
+                    self.assertNotIn(session.weekday(), (4, 5))
+                    opened = datetime.datetime.combine(
+                        session, datetime.time(10), tzinfo=cairo)
+                    self.assertLessEqual(opened, local)
+                    following = session + datetime.timedelta(days=1)
+                    while following.weekday() in (4, 5):
+                        following += datetime.timedelta(days=1)
+                    self.assertLess(local, datetime.datetime.combine(
+                        following, datetime.time(10), tzinfo=cairo))
 
 
 if __name__ == "__main__":
