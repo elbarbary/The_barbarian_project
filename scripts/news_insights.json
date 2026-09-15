@@ -1739,6 +1739,10 @@
     "meaning": "Egypt's net international reserves consist of foreign currencies, gold, and Special Drawing Rights held by the Central Bank to meet external debt obligations and finance sovereign import requirements.",
     "meaning_ar": "يمثل صافي الاحتياطي الدولي لمصر الأصول من النقد الأجنبي والذهب وحقوق السحب الخاصة المودعة لدى البنك المركزي، وتُستخدم لسداد الالتزامات الخارجية وتمويل واردات السلع الاستراتيجية."
   },
+  "الاحصاء: 418.1 مليون دولار صادرات مصر من العنب الطازج خلال 6 اشهر": {
+    "meaning": "These export figures reflect foreign currency inflows generated from agricultural trade, directly influencing the trade balance and liquidity within agribusiness supply chains.",
+    "meaning_ar": "تعكس بيانات التصدير هذه تدفقات نقدية بالعملة الأجنبية ناتجة عن التجارة الزراعية، مما يؤثر بشكل مباشر على الميزان التجاري ومستويات السيولة في سلاسل إمداد القطاع الزراعي."
+  },
   "الاحصاء: 91 مليون دولار صادرات مصر الي قبرص في النصف الاول (جراف)": {
     "meaning": "Official bilateral trade data records Egyptian export flows to the Cypriot market at 91 million dollars during the first half of the year, reflecting direct foreign exchange receipts from cross-border commodity deliveries between the two economies.",
     "meaning_ar": "تسجل بيانات التجارة البينية الرسمية تدفقات الصادرات المصرية إلى السوق القبرصي بقيمة 91 مليون دولار خلال النصف الأول من العام، مما يعكس التدفقات النقدية الأجنبية المحصلة من تسليم البضائع عبر الحدود بين البلدين."
@@ -4484,6 +4488,10 @@
     "meaning": "The expansion of the price reduction initiative sets capped retail pricing agreements between the government, producers, and distributors across 18 additional consumer staples, directly affecting operational pricing structures and inventory turnover cycles in the food retail and manufacturing sectors.",
     "meaning_ar": "يتضمن توسيع مبادرة خفض الأسعار تطبيق اتفاقيات تسعير محددة بين الحكومة والمنتجين والموزعين على 18 سلعة إضافية، وهو ما ينظم مباشرة آليات التسعير ودورات حركة المخزون في قطاعي تجارة التجزئة والتصنيع الغذائي."
   },
+  "رييس الوزراء يتابع جهود توفير السلع وضبط حركه الاسواق والاسعار": {
+    "meaning": "Government market monitoring involves coordinating strategic commodity reserves, tracking retail supply chains, and enforcing price compliance across domestic distribution channels.",
+    "meaning_ar": "تتضمن المتابعة الحكومية للأسواق التنسيق بشأن الأرصدة الاستراتيجية للسلع، وتتبع سلاسل الإمداد والتوزيع، وتطبيق آليات الرقابة على الأسعار في منافذ البيع."
+  },
   "رييس الوزراء يتابع مع وزير التخطيط تطورات الاقتصاد ومستجدات برنامج التحول الاقتصادي الوطني": {
     "meaning": "These inter-ministerial meetings review public investment allocation, state budget execution, and structural reform targets under the national economic transformation framework.",
     "meaning_ar": "تستعرض هذه الاجتماعات التنسيقية وتيرة تخصيص الاستثمارات العامة، ومعدلات تنفيذ الموازنة الاستثمارية، ومستهدفات الإصلاح الهيكلي ضمن برنامج التحول الاقتصادي للدولة."
@@ -6628,6 +6636,10 @@
   "وزاره النقل ترفع درجه الاستعداد بالسكك الحديديه والمترو استعدادا للعام الدراسي الجديد": {
     "meaning": "This operational measure increases capacity and operating frequency across the public transport network, accommodating higher seasonal passenger volumes and driving ticket revenues for the state-run rail and metro authorities.",
     "meaning_ar": "يؤدي هذا الإجراء التشغيلي إلى زيادة الطاقة الاستيعابية وكثافة الرحلات عبر شبكة النقل العام، لاستيعاب الزيادة الموسمية في أعداد الركاب وتعزيز الإيرادات التشغيلية لهيئات السكك الحديدية والمترو."
+  },
+  "وزراء ومسوولون وخبراء يزورون جناح شركه تحالف مستقبل مصر الطبي في ايجي هيلث 2026": {
+    "meaning": "Trade exhibition participation displays operational healthcare infrastructure and medical capabilities directly to institutional stakeholders and public sector procurement decision-makers.",
+    "meaning_ar": "تُتيح المشاركة في المعارض المتخصصة استعراض البنية التحتية والقدرات التشغيلية للكيانات الطبية بصورة مباشرة أمام الجهات المؤسسية ومسؤولي التوريدات والمشتريات الحكومية."
   },
   "وزير الاتصالات: استراتيجيه وطنيه متكامله لمراكز البيانات وتعزيز السياده الرقميه": {
     "meaning": "A national data center strategy establishes unified regulatory standards, telecommunications infrastructure requirements, and local data hosting protocols for the information technology sector.",
