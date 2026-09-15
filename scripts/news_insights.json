@@ -967,6 +967,10 @@
     "meaning": "Setting a sales volume expansion target involves scaling up pharmaceutical production throughput, widening distribution networks across domestic pharmacies, and increasing inventory turnover.",
     "meaning_ar": "يتضمن استهداف زيادة حجم المبيعات رفع معدلات الإنتاج الدوائي، وتوسيع شبكات التوزيع في الصيدليات المحلية، وزيادة معدل دوران المخزون."
   },
+  "«ماني فيللوز» تسعي لاتمام جوله تمويليه جديده ب80 مليون دولار": {
+    "meaning": "An equity funding round injects foreign venture capital directly into the fintech firm's balance sheet to fund operational expansion and technology infrastructure.",
+    "meaning_ar": "تضخ جولة التمويل الاستثماري رأس مال مخاطر بالعملة الأجنبية مباشرة في ميزانية شركة التكنولوجيا المالية لتمويل التوسع التشغيلي والبنية التحتية التكنولوجية."
+  },
   "«مستثمرو العاشر» و«الماليه» تطلقان مبادره لتسويه المستحقات التصديريه ل 5 الاف مصنع": {
     "meaning": "This initiative establishes a framework between the Ministry of Finance and the 10th of Ramadan Investors Association to disburse overdue export subsidy rebates to 5,000 industrial facilities, directly settling government payables and injecting working capital into manufacturing balance sheets.",
     "meaning_ar": "تؤسس هذه المبادرة آلية بين وزارة المالية وجمعية مستثمري العاشر من رمضان لصرف متأخرات أعباء الصادرات لـ 5 آلاف منشأة صناعية، مما يسوي المستحقات الحكومية ويضخ سيولة نقدية مباشرة ضمن رأس المال العامل للشركات المصنعة."
@@ -990,6 +994,10 @@
   "«ميناء سفاجا» يستقبل 30 الف طن الومنيوم قادمه من اندونيسيا": {
     "meaning": "The arrival of 30,000 tons of imported aluminum at Safaga Port supplies the domestic industrial and metallurgical manufacturing sector with raw material inventory through maritime freight channels.",
     "meaning_ar": "يمثل استقبال ميناء سفاجا لشحنة تبلغ 30 ألف طن من الألومنيوم المستورد إمداداً تشغيلياً لقطاع الصناعات التحويلية والمعدنية المحلي بالمواد الخام عبر خطوط الشحن البحري."
+  },
+  "«ناوي» تخطط للاستحواذ علي حصص في مشروعات فندقيه": {
+    "meaning": "Acquiring stakes in hotel projects represents an operational expansion into hospitality assets, which adds physical property holdings and direct operational exposure alongside real estate brokerage services.",
+    "meaning_ar": "يمثل الاستحواذ على حصص في مشروعات فندقية توسعاً تشغيلياً نحو قطاع الضيافة، مما يضيف أصولاً عقارية وتشغيلاً مباشراً بجانب خدمات الوساطة العقارية."
   },
   "«نسما للطيران» تستهدف الوصول باسطولها الي 20 طايره خلال 2027": {
     "meaning": "Expanding the commercial fleet involves capital expenditures or lease commitments that increase seat capacity and broaden network route allocations.",
@@ -1302,6 +1310,10 @@
   "استقرار بختام الاسبوع.. اسعار العملات الاجنبيه والعربيه اليوم الجمعه": {
     "meaning": "Official foreign exchange rates remain unchanged at commercial banks during the weekend closure, maintaining fixed conversion rates for cross-border trade settlements, corporate treasury valuations, and imported inventory pricing until interbank operations resume.",
     "meaning_ar": "تثبت أسعار صرف العملات الأجنبية والعربية في البنوك خلال العطلة الأسبوعية، مما يبقي تكاليف تسوية التجارة الخارجية وتقييمات الخزانة وتسعير البضائع المستوردة دون تغيير حتى استئناف التعاملات بين البنوك."
+  },
+  "استقرار سوق التوظيف في الصين بشكل عام خلال 8 شهور": {
+    "meaning": "Labor market stability in China maintains aggregate domestic production capacity and keeps household purchasing power constant across key industrial sectors.",
+    "meaning_ar": "يحافظ استقرار سوق العمل في الصين على الطاقة الإنتاجية المحلية الكلية ومستويات القوة الشرائية للأسر عبر القطاعات الصناعية الرئيسية."
   },
   "استقرار معدل التضخم السنوي في السعوديه عند 1.8% خلال اغسطس": {
     "meaning": "An unchanged annual inflation rate of 1.8% indicates that consumer price index levels are maintaining a steady pace of year-on-year increases, keeping local purchasing costs stable across consumption baskets without an acceleration in general price pressures.",
@@ -3935,6 +3947,10 @@
   "تعيين عبد العزيز مجدي رييسا لمجموعه امن المعلومات بالبنك الزراعي المصري": {
     "meaning": "Appointing a Chief Information Security Officer restructures the bank's operational risk governance to align with Central Bank of Egypt cybersecurity directives and manage IT infrastructure threats.",
     "meaning_ar": "يُعيد تعيين رئيس لأمن المعلومات هيكلة حوكمة المخاطر التشغيلية بالبنك للامتثال لتعليمات البنك المركزي المصري للأمن السيبراني وإدارة مخاطر البنية التحتية التكنولوجية."
+  },
+  "تفاهم مطلق.. السيسي يستقبل بن سلمان ويوكد رفض اي اعتداءات تمس سياده السعوديه": {
+    "meaning": "High-level bilateral diplomatic alignment between Egypt and Saudi Arabia anchors ongoing intergovernmental investment treaties and central bank deposit arrangements, maintaining cross-border capital channels between Egyptian and Saudi public and private entities.",
+    "meaning_ar": "يرسخ التنسيق الدبلوماسي رفيع المستوى بين مصر والمملكة العربية السعودية الاتفاقيات الاستثمارية الثنائية وترتيبات الودائع النقدية بين البنكين المركزيين، مما يدير قنوات تدفق رؤوس الأموال عبر الحدود بين الكيانات المصرية والسعودية."
   },
   "تقرير دولي: حصه الصين من الدين الامريكي تهبط من 10% الي 2%": {
     "meaning": "This shift reflects a structural reallocation of China's foreign exchange reserves away from US Treasury securities toward other currencies, physical assets, or alternative sovereign debt instruments, changing the composition of foreign ownership in the US sovereign debt market.",
