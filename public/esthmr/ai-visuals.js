@@ -158,6 +158,60 @@ export function heroChart(byDate, ar = false) {
   h('path', { d: path(system), class: 'aix-hero-system' }));
 }
 
+/* ── Home: a record still filling in ────────────────────────────────────── */
+
+/**
+ * The nights the system still needs before its average means anything.
+ *
+ * Positions count sessions from the last one in the record, which is 0. A
+ * night read on that session holds its five over 1…n; one read two sessions
+ * earlier holds them over -1…n-2, and two of its squares have closed. The
+ * nights it has not read yet follow the newest one it has, never earlier than
+ * the last session: a night that closed unread cannot be read any more.
+ */
+export function recordRows(waiting, needed, horizon) {
+  const n = Math.max(1, Math.round(horizon));
+  const read = (Array.isArray(waiting) ? waiting : [])
+    .filter((w) => w && typeof w.basisSession === 'string' && finite(w.sessionsClosed))
+    .map((w) => ({ date: w.basisSession, start: -Math.min(Math.max(w.sessionsClosed, 0), n), read: true }))
+    .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+  const rows = read.slice(0, Math.max(needed, 0));
+  let next = Math.max((read.length ? Math.max(...read.map((r) => r.start)) : -1) + 1, 0);
+  while (rows.length < needed) rows.push({ date: null, start: next++, read: false });
+  return rows;
+}
+
+/** How many sessions from the last one until the last of `rows` is scored. */
+export const rowsEnd = (rows, horizon) =>
+  (rows.length ? Math.max(...rows.map((r) => r.start)) + Math.max(1, Math.round(horizon)) : null);
+
+/**
+ * Those nights drawn as rows of sessions: one row per night's five, one
+ * square per session it is held, filled where that session has closed, dashed
+ * for a night still to be read. HTML rather than SVG so the dates keep their
+ * size on a phone; left to right in both languages, like every chart here.
+ * The words are the caller's: `label` for a screen reader, `end` under it.
+ */
+export function recordChart(rows, horizon, ar = false, { label = '', end = '' } = {}) {
+  if (!Array.isArray(rows) || !rows.length) return null;
+  const n = Math.max(1, Math.round(horizon));
+  const lo = Math.min(...rows.map((r) => r.start)) + 1;
+  const cols = rowsEnd(rows, n) - lo + 1;
+  // Columns at or before the last session: the ones that have closed.
+  const closed = Math.max(0, Math.min(cols, 1 - lo));
+  return h('div', { class: 'aix-fill', dir: 'ltr', role: 'img', 'aria-label': label, style: `--cols:${cols};--now:${closed}` },
+    h('div', { class: 'aix-fill-rows' },
+      h('span', { class: 'aix-fill-now', 'aria-hidden': 'true' }, ar ? 'الآن' : 'now'),
+      rows.map((r, i) => h('div', { key: i, class: `aix-fill-row${r.read ? ' is-read' : ''}` },
+        h('span', { class: 'aix-fill-label' }, r.date ? h('bdi', null, shortDay(r.date, ar)) : ''),
+        h('span', { class: 'aix-fill-track' },
+          Array.from({ length: n }, (_, k) => {
+            const at = r.start + 1 + k;
+            return h('i', { key: k, class: at <= 0 ? 'is-closed' : '', style: `grid-column:${at - lo + 1}` });
+          }))))),
+    end ? h('div', { class: 'aix-fill-axis' }, h('span', { dir: ar ? 'rtl' : 'ltr' }, end)) : null);
+}
+
 /* ── the workbench's charts ─────────────────────────────────────────────── */
 
 /** An axis step of 1, 2 or 5 times a power of ten. */

@@ -131,9 +131,29 @@
 .aix-system-legend i { display: block; width: 14px; height: 2px; }
 .aix-key-system { background: #5CC4B4; }
 .aix-key-market { background: repeating-linear-gradient(90deg, #7FA9A5 0 4px, transparent 4px 7px); }
-.aix-progress { display: flex; gap: 8px; padding: 4px 0; }
-.aix-progress i { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #3F7C7A; }
-.aix-progress i.done { background: #5CC4B4; border-color: #5CC4B4; }
+/* The record filling in: a row per night's five, a square per session held.
+   The line stands after the last session in the record; left of it, closed. */
+/* Wide enough for "14 سبتمبر", the longer of the two languages' dates. */
+.aix-fill { --label-w: 66px; display: flex; flex-direction: column; gap: 6px; }
+.aix-fill-rows { position: relative; display: flex; flex-direction: column; gap: 5px; padding-top: 15px; }
+/* Over the line, and never past either end: shifted by as much of its own
+   width as the line is across the plot. */
+.aix-fill-now {
+  position: absolute; top: 0; left: calc(var(--label-w) + (100% - var(--label-w)) * var(--now) / var(--cols));
+  transform: translateX(calc(var(--now) / var(--cols) * -100%));
+  font-family: var(--aix-mono); font-size: 10px; line-height: 1; letter-spacing: .06em; color: #D5E7E4; white-space: nowrap;
+}
+.aix-fill-row { display: grid; grid-template-columns: var(--label-w) minmax(0, 1fr); align-items: center; }
+.aix-fill-label { font-family: var(--aix-mono); font-size: 10.5px; line-height: 1; color: #A8CFCA; white-space: nowrap; }
+.aix-fill-track { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 3px; }
+.aix-fill-track i { display: block; height: 11px; border-radius: 3px; border: 1.5px solid #5CC4B4; box-sizing: border-box; }
+.aix-fill-track i.is-closed { background: #5CC4B4; }
+.aix-fill-row:not(.is-read) .aix-fill-track i { border-style: dashed; border-color: #5E9995; }
+.aix-fill-rows::after {
+  content: ''; position: absolute; top: 12px; bottom: -4px; width: 0; border-left: 1.5px solid #D5E7E4;
+  left: calc(var(--label-w) + (100% - var(--label-w)) * var(--now) / var(--cols));
+}
+.aix-fill-axis { display: flex; justify-content: flex-end; font-size: 11px; line-height: 1.3; color: #D5E7E4; text-align: end; }
 
 .aix-pipeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .aix-pipeline li {

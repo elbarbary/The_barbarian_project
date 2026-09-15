@@ -12,7 +12,7 @@ import assert from 'node:assert/strict';
 import { readFile, access } from 'node:fs/promises';
 import { installDom } from './dom-stub.mjs';
 import { aiCards, heroModel } from '../../public/esthmr/ai-cards.js';
-import { heroChart, histogram, fanChart, nextRun, reorderChart, nightsChart } from '../../public/esthmr/ai-visuals.js';
+import { heroChart, histogram, fanChart, nextRun, reorderChart, nightsChart, recordRows } from '../../public/esthmr/ai-visuals.js';
 import { saidParts } from '../../public/esthmr/scenario-visuals.js';
 import { readingProblem, mixedSnapshot } from '../../public/esthmr/lab-snapshot.js';
 import {
@@ -240,14 +240,84 @@ test('the card is compact: no model list and no window chips on it, the steps un
   assert.doesNotMatch(text(node), /question/i);
 });
 
-test('below the record’s minimum the system shows what it has and what it needs', () => {
-  const pending = record();
-  pending.models.rerank.horizons[5].sessions = 2;
-  const card = byClass(aiCards(component(), { ...data, top5: pending }, false), 'aix-system')[0];
-  assert.match(text(card), /2\/3/);
-  assert.match(text(card), /once 1 more is scored/);
+/* The system's card below the record's minimum, the way 15 Sep 2026 had it:
+ * one night read, none scored, a minimum of five. */
+function waitingRecord(waiting, { sessions = 0, minimum = 5 } = {}) {
+  const pending = record({ minimumSessions: minimum });
+  Object.assign(pending.models.rerank.horizons[5], { sessions, waiting });
+  return pending;
+}
+const systemOf = (top5, ar = false) => byClass(aiCards(component(), { ...data, top5 }, ar), 'aix-system')[0];
+const fillRows = (card) => byClass(card, 'aix-fill-row');
+const squares = (row, cls) => all(row).filter((n) => n.tag === 'i' && (cls === undefined || (n.attrs.class || '') === cls));
+
+test('below the record’s minimum the system counts nights, and draws the sessions each is held', () => {
+  const card = systemOf(waitingRecord([{ basisSession: '2026-09-14', sessionsClosed: 0 }]));
+  assert.match(text(card), /0 of 5/);
+  assert.match(text(card), /nights scored · the first in 5 sessions/);
+  // Never the word that also names the window: that was the confusion.
+  assert.doesNotMatch(text(card), /sessions scored|\d\/\d/);
   assert.doesNotMatch(text(card), /\+3\.50%/);
-  assert.equal(all(card).filter((n) => n.tag === 'svg').length, 0);
+  assert.equal(all(card).filter((n) => n.tag === 'svg').length, 0, 'no line before there is a record');
+  // Five nights still needed: the one it read, and four it has yet to read.
+  const rows = fillRows(card);
+  assert.equal(rows.length, 5);
+  assert.deepEqual(rows.map((r) => /is-read/.test(r.attrs.class)), [true, false, false, false, false]);
+  assert.match(text(rows[0]), /14 Sep/);
+  assert.equal(text(rows[1]).trim(), '');
+  for (const row of rows) assert.equal(squares(row).length, 5, 'five squares: the five sessions it is held');
+  assert.equal(rows.flatMap((r) => squares(r, 'is-closed')).length, 0);
+  // Night k of the staircase starts k sessions later: 1–5, 2–6, … 5–9.
+  assert.deepEqual(rows.map((r) => squares(r)[0].attrs.style), ['grid-column:1', 'grid-column:2', 'grid-column:3', 'grid-column:4', 'grid-column:5']);
+  assert.match(byClass(card, 'aix-fill')[0].attrs.style, /--cols:9;--now:0/);
+  assert.match(text(card), /average in 9 sessions at the earliest/);
+  assert.match(text(card), /dashed rows are nights still to read/);
+});
+
+test('the next night moves the first result closer and fills a square', () => {
+  const card = systemOf(waitingRecord([
+    { basisSession: '2026-09-15', sessionsClosed: 0 }, { basisSession: '2026-09-14', sessionsClosed: 1 },
+  ]));
+  assert.match(text(card), /the first in 4 sessions/);
+  const rows = fillRows(card);
+  assert.deepEqual(rows.map((r) => text(byClass(r, 'aix-fill-label')[0]).trim()), ['14 Sep', '15 Sep', '', '', '']);
+  assert.deepEqual(rows.map((r) => squares(r, 'is-closed').length), [1, 0, 0, 0, 0]);
+  assert.match(byClass(card, 'aix-fill')[0].attrs.style, /--cols:9;--now:1/);
+  assert.match(text(card), /average in 8 sessions at the earliest/);
+});
+
+test('with some nights scored it counts them, and only the nights still needed are drawn', () => {
+  const card = systemOf(waitingRecord([
+    { basisSession: '2026-09-10', sessionsClosed: 3 }, { basisSession: '2026-09-13', sessionsClosed: 1 },
+  ], { sessions: 2, minimum: 3 }));
+  assert.match(text(card), /2 of 3/);
+  assert.match(text(card), /the next in 2 sessions/);
+  const rows = fillRows(card);
+  assert.equal(rows.length, 1, 'the one night still needed is the oldest it read');
+  assert.equal(squares(rows[0], 'is-closed').length, 3);
+  assert.match(text(card), /average in 2 sessions at the earliest/);
+  assert.doesNotMatch(text(card), /dashed rows/);
+  // Nights missed cannot be read afterwards: the next one starts no earlier than now.
+  assert.deepEqual(recordRows([{ basisSession: '2026-09-10', sessionsClosed: 2 }], 3, 5).map((r) => r.start), [-2, 0, 1]);
+  assert.deepEqual(recordRows([], 2, 5).map((r) => [r.start, r.read]), [[0, false], [1, false]]);
+});
+
+test('in Arabic the counts agree with their nouns and read the right way round', () => {
+  const card = systemOf(waitingRecord([{ basisSession: '2026-09-14', sessionsClosed: 0 }]), true);
+  const value = byClass(card, 'aix-system-value')[0];
+  assert.equal(text(value).trim(), '0 من 5');
+  assert.equal(value.attrs.dir, 'rtl', 'left to right, "0 من 5" reads as five of none');
+  assert.match(text(card), /ليالٍ مُقيَّمة · الأولى بعد 5 جلسات/);
+  assert.match(text(card), /المتوسط بعد 9 جلسات على الأقل/);
+  assert.match(text(card), /14 سبتمبر/);
+  assert.doesNotMatch(text(card), /undefined|NaN/);
+});
+
+test('a record published before the waiting nights were keeps the count and draws nothing it cannot place', () => {
+  const card = systemOf(waitingRecord(undefined));
+  assert.match(text(card), /0 of 5/);
+  assert.equal(fillRows(card).length, 0);
+  assert.match(text(card), /No average until five nights are scored — a missing result is not a zero/);
 });
 
 test('a model that tells no companies apart is left off the list', () => {

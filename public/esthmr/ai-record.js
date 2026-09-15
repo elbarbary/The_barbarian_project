@@ -55,6 +55,11 @@ export function heroModel(top5, horizon) {
         ahead: finite(one.ahead) ? one.ahead : 0,
         signChanges: finite(one.signChanges) ? one.signChanges : 0,
         byDate: scored && Array.isArray(one.byDate) ? one.byDate : [],
+        // Nights read whose window is still open: a date and how many of its
+        // sessions have closed. Null from a record published before it was.
+        waiting: Array.isArray(one.waiting)
+          ? one.waiting.filter((w) => w && typeof w.basisSession === 'string' && finite(w.sessionsClosed))
+          : null,
       };
     });
   const system = rows.find((r) => r.group === 'rerank') || null;

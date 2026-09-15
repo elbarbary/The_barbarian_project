@@ -209,7 +209,7 @@ def backtest(nights: list[dict], panel: dict, sessions: list[str],
                 nights_run += 1
                 told_apart = told_apart or distinguishes(block)
         for horizon in fc.HORIZONS:
-            rows = []
+            rows, waiting = [], []
             for night in nights:
                 block = (night["document"].get("models") or {}).get(name)
                 if not block:
@@ -225,7 +225,15 @@ def backtest(nights: list[dict], panel: dict, sessions: list[str],
                 got = top_slice(block, basis, horizon, panel)
                 if got:
                     rows.append({"basisSession": basis, **got})
-            per_horizon[str(horizon)] = summarise(rows)
+                    continue
+                # Still inside its window, so no result exists yet. Said with
+                # how many of its sessions have closed, so a screen can draw
+                # the record filling in rather than print a count of nothing.
+                # A date and a count: the names stay behind the gate.
+                closed = sum(1 for d in sessions if d > basis)
+                if closed < horizon and len(ranked(block, horizon, panel, basis)) >= TOP:
+                    waiting.append({"basisSession": basis, "sessionsClosed": closed})
+            per_horizon[str(horizon)] = {**summarise(rows), "waiting": waiting}
         english, arabic, group = label(name)
         table[name] = {"label": english, "labelAr": arabic, "group": group,
                        "nights": nights_run,

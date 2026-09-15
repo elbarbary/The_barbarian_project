@@ -2494,6 +2494,25 @@ class PicksTest(unittest.TestCase):
         self.assertAlmostEqual(mean, one["chosenReturn"], places=3)
         self.assertEqual(one["sessionsClosed"], 5)
 
+    def test_the_public_record_says_which_nights_are_still_running_by_date_alone(self):
+        import publish as pb
+        panel = self.market()
+        # Five sessions after 1 Sep, two after 6 Sep.
+        sessions = self.SESSIONS[:6]
+        nights = [self.night(), self.night("2026-09-06", ran_at="2026-09-06T13:00:00Z")]
+        record = pb.backtest(nights, panel, sessions, ["kronos"])["kronos"]["horizons"]
+        self.assertEqual([r["basisSession"] for r in record["5"]["byDate"]], ["2026-09-01"])
+        self.assertEqual(record["5"]["waiting"], [{"basisSession": "2026-09-06", "sessionsClosed": 2}])
+        # One session is inside both windows, so nothing waits at a horizon of one.
+        self.assertEqual(record["1"]["waiting"], [])
+        self.assertEqual(record["1"]["sessions"], 2)
+        ev._no_companies({"models": record}, {f"T{i:02d}" for i in range(40)})
+        # A model that answered nothing ranks nothing, and waits for nothing.
+        empty = pb.backtest([{"basis": "2026-09-06", "document": {
+            "basisSession": "2026-09-06", "ranAt": "2026-09-06T13:00:00Z",
+            "models": {"kronos": {"answered": 0, "forecasts": []}}}}], panel, sessions, ["kronos"])
+        self.assertEqual(empty["kronos"]["horizons"]["5"]["waiting"], [])
+
     def test_a_company_that_did_not_trade_is_replaced_and_named(self):
         import publish as pb
         panel = self.market(silent=("T01",))

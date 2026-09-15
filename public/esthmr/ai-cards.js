@@ -14,11 +14,12 @@
  *
  * NOTHING ON IT IS WRITTEN HERE
  * Every figure, count and date comes from `research/top5.json`. Below the
- * record's own minimum the system shows how many sessions it has and how many
- * it needs — never an average of two nights, and never a zero for "not yet".
+ * record's own minimum the system shows how many nights are scored, and draws
+ * the nights still needed as the sessions each is held (`recordChart`) —
+ * never an average of two nights, and never a zero for "not yet".
  */
 import { React as R } from './react-shim.js';
-import { finite, percent, heroChart } from './ai-visuals.js';
+import { finite, percent, heroChart, recordRows, recordChart, rowsEnd } from './ai-visuals.js';
 import { warningDialog } from './scenarios.js';
 import { heroModel, countAr, sessionsLabel, word, Word } from './ai-record.js';
 
@@ -83,19 +84,39 @@ export function aiCards(component, data, ar) {
         h('span', null, h('i', { class: 'aix-key-system' }), t('the system', 'النظام')),
         h('span', null, h('i', { class: 'aix-key-market' }), t('the market, equal weight', 'السوق بأوزان متساوية'))));
   } else if (system) {
+    // Below the minimum: how many NIGHTS are scored, and the nights still to
+    // come drawn as the sessions each is held. "0/5 sessions scored" beside
+    // "five sessions" used one word for two different fives.
+    const minimum = m.minimum;
+    const rows = system.waiting ? recordRows(system.waiting, Math.max(minimum - system.sessions, 0), n) : [];
+    const next = rows[0] && rows[0].read ? n + rows[0].start : null;
+    const last = rowsEnd(rows, n);
+    const toRead = rows.some((r) => !r.read);
+    const sessionsAfterAr = (k) => countAr(k, 'جلسة واحدة', 'جلستين', 'جلسات', 'جلسة');
+    const versus = next !== null
+      ? (system.sessions
+        ? t(`nights scored · the next in ${sessionsLabel(next, false)}`, `ليالٍ مُقيَّمة · التالية بعد ${sessionsAfterAr(next)}`)
+        : t(`nights scored · the first in ${sessionsLabel(next, false)}`, `ليالٍ مُقيَّمة · الأولى بعد ${sessionsAfterAr(next)}`))
+      : system.nights ? t('nights scored', 'ليالٍ مُقيَّمة')
+        : t('nights scored · it has not read a night yet', 'ليالٍ مُقيَّمة · لم يقرأ أي ليلة بعد');
+    const legend = rows.length
+      ? t(`Each row is one night’s five, held ${word(n)} ${n === 1 ? 'session' : 'sessions'}: filled squares have closed${toRead ? ', dashed rows are nights still to read' : ''}.`,
+        `كل صف أعلى خمس شركات في ليلة، تُتابَع ${sessionsLabel(n, true)}: المربعات الممتلئة أُغلقت${toRead ? '، والصفوف المتقطعة ليالٍ لم تُقرأ بعد' : ''}.`)
+      : t(`No average until ${word(minimum)} nights are scored — a missing result is not a zero.`,
+        `لا متوسط قبل تقييم ${countAr(minimum, 'ليلة واحدة', 'ليلتين', 'ليالٍ', 'ليلة')} — والنتيجة الغائبة ليست صفراً.`);
+    // At the earliest: a night it skips, or one too few companies trade on,
+    // only ever pushes the average later.
+    const end = last !== null
+      ? t(`average in ${sessionsLabel(last, false)} at the earliest`, `المتوسط بعد ${sessionsAfterAr(last)} على الأقل`)
+      : '';
     systemCard = h('div', { class: 'aix-system aix-system-pending' },
       h('span', { class: 'aix-eyebrow' }, eyebrow),
       h('div', { class: 'aix-system-figure' },
-        h('strong', { class: 'aix-system-value', dir: 'ltr' }, `${system.sessions}/${m.minimum}`),
-        h('p', { class: 'aix-system-versus' }, system.nights
-          ? t(`sessions scored. It has read ${system.nights} ${system.nights === 1 ? 'night' : 'nights'}; its figure appears once ${system.needed} more ${system.needed === 1 ? 'is' : 'are'} scored.`,
-            `جلسات مُقيَّمة. قرأ ${countAr(system.nights, 'ليلة واحدة', 'ليلتين', 'ليالٍ', 'ليلة')}، ويظهر رقمه بعد تقييم ${countAr(system.needed, 'جلسة واحدة', 'جلستين', 'جلسات', 'جلسة')} أخرى.`)
-          : t('sessions scored. It has not read a night yet.', 'جلسات مُقيَّمة. لم يقرأ أي ليلة بعد.'))),
-      h('div', { class: 'aix-progress', role: 'img', 'aria-label': t(`${system.sessions} of ${m.minimum} sessions scored`, `${system.sessions} من ${m.minimum} جلسات مُقيَّمة`) },
-        Array.from({ length: m.minimum }, (_, i) => h('i', { key: i, class: i < system.sessions ? 'done' : '' }))),
-      h('div', { class: 'aix-system-legend' },
-        h('span', null, t('No number until there is a record — a missing result is not a zero.',
-          'لا رقم قبل وجود سجل — النتيجة الغائبة ليست صفراً.'))));
+        h('strong', { class: 'aix-system-value', dir: ar ? 'rtl' : 'ltr' },
+          t(`${system.sessions} of ${minimum}`, `${system.sessions} من ${minimum}`)),
+        h('p', { class: 'aix-system-versus' }, versus)),
+      rows.length ? recordChart(rows, n, ar, { label: `${legend} ${end}`, end }) : null,
+      h('div', { class: 'aix-system-legend' }, h('span', null, legend)));
   }
 
   // ── how it works, in the record's own counts ──
