@@ -1107,6 +1107,10 @@
     "meaning": "An acceleration in commercial and residential land price appreciation expands asset valuations on corporate balance sheets and increases capital expenditure costs for property development projects.",
     "meaning_ar": "يؤدي تسارع وتيرة نمو أسعار الأراضي التجارية والسكنية إلى رفع تقييمات الأصول في الميزانيات العمومية للشركات وزيادة تكاليف النفقات الرأسمالية لمشاريع التطوير العقاري."
   },
+  "ارتفاع اسعار الجمله في المانيا باسرع وتيره منذ اكثر من 3 سنوات": {
+    "meaning": "An acceleration in wholesale prices reflects rising input and procurement costs across supply chains, which directly affects the baseline cost structure for intermediate and retail goods.",
+    "meaning_ar": "يعكس تسارع أسعار الجملة ارتفاع تكاليف المدخلات والتوريد عبر سلاسل الإمداد، وهو ما ينعكس بشكل مباشر على هيكل التكلفة الأساسي للسلع الوسيطة ومنتجات التجزئة."
+  },
   "ارتفاع اسعار الغاز الاوروبيه لاعلي مستوياتها منذ يناير 2023": {
     "meaning": "Higher European natural gas benchmarks raise the pricing base for international LNG contracts, shifting the input cost structure for energy-intensive manufacturing and altering the landed price of imported LNG supplies.",
     "meaning_ar": "يؤدي ارتفاع المؤشرات القياسية للغاز الطبيعي الأوروبي إلى رفع الأساس السعري لعقود الغاز المسال العالمية، مما يغير هيكل تكاليف التشغيل للمصانع كثيفة الاستهلاك للطاقة ويعدل التكلفة الإجمالية لشحنات الغاز المسال المستوردة."
@@ -1466,6 +1470,10 @@
   "اسعار السمك اليوم في مصر.. الاربعاء 9/9/2026": {
     "meaning": "Daily fish price tracking reflects prevailing supply conditions across wholesale markets, domestic aquaculture, and marine catch relative to current retail consumer demand in the local food sector.",
     "meaning_ar": "تعكس المتابعة اليومية لأسعار الأسماك مستويات المعروض المتاحة في أسواق الجملة والإنتاج السمكي المحلي مقابل حجم الطلب الاستهلاكي الحالي في قطاع السلع الغذائية."
+  },
+  "اسعار السمك اليوم في مصر.. الثلاثاء 15/9/2026": {
+    "meaning": "Daily fish price updates reflect wholesale and retail market quotes across local transit and wholesale hubs, determined by prevailing daily catch volumes, transport costs, and immediate consumer demand.",
+    "meaning_ar": "تعكس التحديثات اليومية لأسعار الأسماك أسعار التداول بالجملة والتجزئة في الأسواق المركزية ومنافذ التوزيع، وتتحدد بناءً على حجم المعروض اليومي من الصيد، وتكاليف النقل، ومستويات الطلب الاستهلاكي الحالية."
   },
   "اسعار السمك اليوم في مصر.. الثلاثاء 8/9/2026": {
     "meaning": "Daily fish price updates track spot market valuations across wholesale and retail distribution channels, reflecting current supply volumes from local aquaculture and maritime catch against immediate consumer demand.",
@@ -2162,6 +2170,10 @@
   "الدينار الكويتي يتربع علي القمه.. اسعار العملات اليوم الاحد 13-9-2026": {
     "meaning": "Official foreign exchange pricing mechanisms position the Kuwaiti Dinar at the highest nominal exchange rate per single currency unit against the Egyptian Pound across banking system boards.",
     "meaning_ar": "تُظهر آليات تسعير الصرف الرسمية تصدّر الدينار الكويتي لأعلى سعر صرف اسمي للوحدة الواحدة مقابل الجنيه المصري في شاشات تسعير القطاع المصرفي."
+  },
+  "الديوان الملكي السعودي: ولي العهد يغادر الي مصر في زياره عمل بناء علي توجيهات الملك سلمان": {
+    "meaning": "Official bilateral state visits establish the framework for intergovernmental financial cooperation, bilateral investment treaties, and joint venture protocols between sovereign funds and private sectors.",
+    "meaning_ar": "تحدد الزيارات الرسمية الثنائية الإطار المؤسسي للتعاون المالي الحكومي، والاتفاقيات الاستثمارية المشتركة، وبروتوكولات الشراكة بين الصناديق السيادية والقطاع الخاص."
   },
   "الذهب قرب ادني مستوي في اسبوع قبيل صدور بيانات تضخم امريكيه": {
     "meaning": "Global gold prices track shifts in US dollar strength and interest rate expectations, where forthcoming inflation data determines the holding cost of non-yielding bullion. The domestic gold market directly incorporates these international price movements alongside the official and parallel USD/EGP exchange rates.",
@@ -3214,6 +3226,10 @@
   "بشاير المحصول الجديد تهبط باسعار الارز الشعير الف جنيه للطن": {
     "meaning": "The entry of the new seasonal harvest expands immediate supply in the local market, lowering raw paddy rice spot prices by 1,000 EGP per ton and adjusting procurement input costs for agricultural processing and milling operations.",
     "meaning_ar": "يؤدي تدفق التوريدات الأولية للمحصول الجديد إلى زيادة حجم المعروض في السوق المحلي، مما يخفض أسعار التداول الفوري للأرز الشعير بمقدار ألف جنيه للطن ويحدد تكاليف شراء المواد الخام لمضارب ومصنعي الأغذية."
+  },
+  "بكره تخطط لاصدارات صكوك": {
+    "meaning": "The company prepares to issue Sharia-compliant debt instruments backed by specific tangible assets or revenue-generating contracts to raise capital.",
+    "meaning_ar": "تستعد الشركة لطرح أدوات دين متوافقة مع الشريعة الإسلامية مدعومة بأصول ملموسة أو عقود مدرة للعوائد لجمع السيولة الرأسمالية."
   },
   "بكين تحذر واشنطن من التجسس علي الشركات الصينيه": {
     "meaning": "Geopolitical friction between major global economies introduces regulatory compliance risks and cross-border data transfer restrictions for multinational corporations operating across these jurisdictions.",
