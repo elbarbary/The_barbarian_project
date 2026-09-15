@@ -13,6 +13,7 @@ So the checks below are about columns and cardinality, not about copy.
 
 from __future__ import annotations
 
+import datetime
 import json
 import pathlib
 import sys
@@ -406,6 +407,38 @@ class ProvenanceTest(unittest.TestCase):
         self.assertTrue(stamps)
         for row in doc["rows"]:
             self.assertIn("as_of", row, f"{row['ticker']} is dated by nothing")
+
+    def test_the_table_the_builder_would_write_now_dates_every_row(self):
+        # The same claim against a fresh build rather than the last publish.
+        # Publish app data tests before it rebuilds, so the check above only
+        # ever reads the PREVIOUS run's table: NBCC's undated row went out
+        # through a green gate at 11:58 UTC on 15 September 2026 and then
+        # failed every run after it, none of which could get as far as
+        # rebuilding it. About a second over the real corpus.
+        doc = bm.build()
+        undated = [r["ticker"] for r in doc["rows"] if "as_of" not in r]
+        self.assertEqual(undated, [], "rows dated by nothing")
+
+    def test_a_listing_the_archive_holds_nothing_for_is_dated_by_its_session(self):
+        # NBCC on 15 September 2026: listed, not yet traded, a close and a
+        # volume in the market file and no archive at all.
+        self.assertEqual(bm.bars_for("NOSUCH"), [])
+        row = bm.row_for("NOSUCH", {"close": 5, "volume": 0}, {}, [],
+                         datetime.date(2026, 9, 15), "2026-09-15")
+        self.assertEqual(row["as_of"], "2026-09-15")
+        self.assertEqual((row["close"], row["volume"]), (5, 0))
+        self.assertNotIn("sessions_held", row)
+        self.assertIn("sessions_held", row["missing"])
+        self.assertNotIn("as_of", row["missing"])
+
+    def test_the_archive_s_own_date_is_not_overwritten_by_the_market_s(self):
+        # Only a row with no session of its own takes the market file's date;
+        # a company the archive holds keeps the date of its newest bar.
+        ticker = next(p.stem for p in sorted(bm.PRICES.glob("*.json"))
+                      if bm.bars_for(p.stem))
+        row = bm.row_for(ticker, {"close": 1, "volume": 1}, {}, [],
+                         datetime.date(2099, 1, 1), "2099-01-01")
+        self.assertEqual(row["as_of"], bm.ms.as_of(bm.bars_for(ticker)))
 
     def test_a_filing_column_carries_the_filing_it_came_from(self):
         # "Filed two sessions ago" is a claim until the reader can open the

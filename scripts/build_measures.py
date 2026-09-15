@@ -359,7 +359,8 @@ def drop_absent(row: dict) -> dict:
 
 
 def row_for(ticker: str, session: dict, directory: dict,
-            filings: list[dict], today: datetime.date) -> dict:
+            filings: list[dict], today: datetime.date,
+            market_date: str | None = None) -> dict:
     """One company, every column it can answer for.
 
     A column it cannot answer for is left out of the row entirely rather than
@@ -380,6 +381,16 @@ def row_for(ticker: str, session: dict, directory: dict,
         row["as_of"] = stamp
         row["sessions_held"] = len([b for b in bars
                                     if isinstance(b.get("close"), (int, float))])
+    elif market_date and any(isinstance(session.get(name), (int, float))
+                             for name in ("close", "volume")):
+        # A listing the archive holds no session for is still dated by the
+        # session its close came from. NBCC was listed on 26 August 2026 and
+        # had not traded by 15 September: the market file carried its close
+        # and volume (5 pounds, nought shares), the archive held nothing, and
+        # the row published a close no session stood behind — which every
+        # Publish app data run after it refused at its tests. `sessions_held`
+        # stays absent: no archive is a gap in what we hold, not a nought.
+        row["as_of"] = market_date
 
     close = session.get("close")
     if isinstance(close, (int, float)):
@@ -528,7 +539,7 @@ def build(today: datetime.date | None = None) -> dict:
     filings = filings_by_ticker(today)
 
     rows = [row_for(ticker, stocks[ticker] or {}, directory.get(ticker, {}),
-                    filings.get(ticker) or [], today)
+                    filings.get(ticker) or [], today, market.get("date"))
             for ticker in sorted(stocks)]
     no_forecasts(rows)
 
