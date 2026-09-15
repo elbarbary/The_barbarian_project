@@ -47,16 +47,30 @@ class ScanScriptTest(unittest.TestCase):
         self.assertNotIn("/Users/", code)
 
     def test_it_only_needs_ws(self):
-        port = pathlib.Path(__file__).resolve().parent / "egx_scan.mjs"
-        body = port.read_text(encoding="utf-8")
-        imports = [
-            line for line in body.splitlines() if line.startswith("import ")
-        ]
-        for line in imports:
-            self.assertTrue(
-                'from "node:' in line or 'from "ws"' in line,
-                f"unexpected dependency: {line}",
-            )
+        # A sibling module is not a dependency — `egx_history.mjs` sits beside
+        # the scan so its socket handling can be tested — but what it imports
+        # is held to the same rule.
+        here = pathlib.Path(__file__).resolve().parent
+        pending, seen = [here / "egx_scan.mjs"], set()
+        while pending:
+            port = pending.pop()
+            if port in seen:
+                continue
+            seen.add(port)
+            self.assertTrue(port.exists(), f"{port.name} is missing")
+            imports = [
+                line for line in port.read_text(encoding="utf-8").splitlines()
+                if line.startswith("import ")
+            ]
+            for line in imports:
+                if 'from "./' in line:
+                    pending.append(here / line.split('from "./')[1].split('"')[0])
+                    continue
+                self.assertTrue(
+                    'from "node:' in line or 'from "ws"' in line,
+                    f"unexpected dependency in {port.name}: {line}",
+                )
+        self.assertIn(here / "egx_history.mjs", seen)
 
 
 if __name__ == "__main__":

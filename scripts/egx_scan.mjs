@@ -31,13 +31,15 @@
 //   3. The prior-scan archive. When the history socket refused a symbol, the
 //      research script replayed that ticker's bars out of yesterday's scan file
 //      and labelled them `historySource: "cached fallback: …"`. A runner has no
-//      archive to replay, so this port will finish with more historyless
-//      tickers than the laptop does — roughly 60 of 291 rather than 29. That
-//      hole is filled from the other end, and better: `carry_forward()` in
-//      `build_market_api.py` refills the six history-derived profile fields
-//      from the last *published* company document and names what it carried in
-//      a separate `profile_carried` key, instead of blending yesterday's
-//      numbers into today's series where no reader could see them.
+//      archive to replay. It turned out not to need one: the "refused" symbols
+//      were almost all lost behind listings that have never traded, which
+//      stalled their batch (see `egx_history.mjs`). What is left without
+//      history now is those listings — about thirty — and anything the socket
+//      really did not answer is named in `missingHistoryTickers` rather than
+//      passed off as a company with no past. `carry_forward()` in
+//      `build_market_api.py` still refills the six history-derived profile
+//      fields from the last *published* company document and names what it
+//      carried in a separate `profile_carried` key.
 //
 //   4. Everything the research script computes for the research script:
 //      per-session abnormality scans, `preDisclosureVolumeTrail`, the pre-open
@@ -48,6 +50,8 @@
 //
 // Only dependency is `ws`. That is not habit: Node's built-in WebSocket cannot
 // set the `Origin` request header, and TradingView's data socket wants one.
+// The socket handling itself lives beside this file in `egx_history.mjs`,
+// which imports nothing, so it can be tested against a fake server.
 //
 // Usage:
 //     node scripts/egx_scan.mjs                    # writes ../work
@@ -59,6 +63,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import WebSocket from "ws";
+import { fetchHistories, statusOf } from "./egx_history.mjs";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -188,235 +193,23 @@ const records = [...scannerRows.values()].map((row) => {
   };
 });
 
-// TradingView's chart socket speaks a length-prefixed framing of its own:
-// `~m~<byte length>~m~<json payload>`. `payload.length` is the JavaScript
-// UTF-16 length, which is not in general a byte count — it is only correct here
-// because every method name and every EGX symbol is ASCII. Left as-is on
-// purpose; "fixing" it to a real byte count would change nothing today and is
-// not a change worth making blind against a protocol nobody documents.
-function frame(method, params) {
-  const payload = JSON.stringify({ m: method, p: params });
-  return `~m~${payload.length}~m~${payload}`;
-}
-
-// One TCP chunk routinely carries several frames, so the reader walks the
-// length prefixes rather than assuming one message per event.
-function parseMessages(chunk) {
-  const messages = [];
-  const text = String(chunk);
-  const regex = /~m~(\d+)~m~/g;
-  let match;
-  while ((match = regex.exec(text))) {
-    const start = regex.lastIndex;
-    const length = Number(match[1]);
-    messages.push(text.slice(start, start + length));
-    regex.lastIndex = start + length;
-  }
-  return messages;
-}
-
-const historyFetchWarnings = [];
-
-// One socket per batch of five symbols, requesting them one at a time. The
-// sequential-within-a-socket shape is the research script's and is kept: asking
-// for five series at once got fewer answers back, not more.
-async function fetchHistoryBatch(batch, batchNumber) {
-  const chartSession = `cs_daily_${batchNumber}_${Math.random().toString(36).slice(2, 10)}`;
-  const websocket = new WebSocket(
-    `wss://data.tradingview.com/socket.io/websocket?from=screener%2F&date=${tradingViewDate}-00_00`,
-    {
-      headers: { Origin: "https://www.tradingview.com" },
-    },
-  );
-  const histories = new Map();
-  const expectedSeries = new Map();
-  let currentIndex = 0;
-  let settled = false;
-
-  return await new Promise((resolve) => {
-    // Ten seconds for the whole batch, not per symbol. Five symbols do not
-    // always finish inside it, which is exactly why some tickers come back
-    // empty and why the retry pass below exists. Kept at the proven value: a
-    // longer timeout would raise coverage and lengthen every run, and that is a
-    // judgement call for whoever owns the research pipeline, not a porting one.
-    const timeout = setTimeout(() => {
-      if (!settled) {
-        settled = true;
-        websocket.close();
-        resolve(histories);
-      }
-    }, 10_000);
-
-    const finish = () => {
-      if (settled) return;
-      settled = true;
-      clearTimeout(timeout);
-      websocket.close();
-      resolve(histories);
-    };
-
-    const requestNext = () => {
-      if (currentIndex >= batch.length) {
-        finish();
-        return;
-      }
-      const record = batch[currentIndex];
-      const symbolId = `symbol_${currentIndex}`;
-      const seriesId = `series_${currentIndex}`;
-      expectedSeries.set(seriesId, record.symbol);
-      // `adjustment: "splits"` is the whole reason this series is trustworthy:
-      // an unadjusted history turns a 10-for-1 split into a 90% crash and every
-      // volume median downstream into fiction.
-      const descriptor = `=${JSON.stringify({
-        symbol: record.symbol,
-        adjustment: "splits",
-        session: "regular",
-      })}`;
-      websocket.send(frame("resolve_symbol", [chartSession, symbolId, descriptor]));
-      websocket.send(
-        frame("create_series", [
-          chartSession,
-          seriesId,
-          seriesId,
-          symbolId,
-          "1D",
-          120,
-        ]),
-      );
-    };
-
-    websocket.addEventListener("open", () => {
-      websocket.send(frame("set_auth_token", ["unauthorized_user_token"]));
-      websocket.send(frame("chart_create_session", [chartSession, ""]));
-      websocket.send(frame("switch_timezone", [chartSession, "Etc/UTC"]));
-      requestNext();
-    });
-
-    websocket.addEventListener("message", (event) => {
-      const chunk = String(event.data);
-      // Heartbeat frames are echoed back verbatim, before parsing. They are not
-      // JSON and re-framing them gets the socket dropped.
-      if (chunk.startsWith("~m~") && chunk.includes("~h~")) {
-        websocket.send(chunk);
-      }
-      for (const raw of parseMessages(chunk)) {
-        let message;
-        try {
-          message = JSON.parse(raw);
-        } catch {
-          continue;
-        }
-        if (message.m !== "timescale_update") continue;
-        const updates = message.p?.[1] || {};
-        for (const [seriesId, update] of Object.entries(updates)) {
-          if (!expectedSeries.has(seriesId) || !Array.isArray(update?.s)) continue;
-          const bars = update.s
-            .map((point) => {
-              const values = point?.v;
-              if (!Array.isArray(values) || values.length < 6) return null;
-              return {
-                timestamp: values[0],
-                open: values[1],
-                high: values[2],
-                low: values[3],
-                close: values[4],
-                volume: values[5],
-              };
-            })
-            .filter(Boolean)
-            .sort((a, b) => a.timestamp - b.timestamp);
-          histories.set(expectedSeries.get(seriesId), bars);
-          expectedSeries.delete(seriesId);
-          websocket.send(frame("remove_series", [chartSession, seriesId]));
-          currentIndex += 1;
-          // A short gap before the next symbol. Firing them back to back got
-          // series dropped silently.
-          setTimeout(requestNext, 20);
-        }
-      }
-    });
-
-    websocket.addEventListener("error", (event) => {
-      if (!settled) {
-        historyFetchWarnings.push({
-          batchNumber,
-          symbols: batch.map((record) => record.ticker),
-          message: event.message || "unknown",
-        });
-      }
-      finish();
-    });
-
-    // The one addition to the research script's socket handling. Once the
-    // server has closed the connection no further data can arrive, so settling
-    // here can only shorten a wait — it can never change a number. It matters
-    // on a runner in a way it does not on a laptop: if TradingView refuses this
-    // egress IP outright, every one of the ~60 batches would otherwise sit out
-    // its full ten-second timeout and the job would spend ten minutes
-    // discovering it was blocked. This way it finds out immediately.
-    websocket.addEventListener("close", () => {
-      finish();
-    });
-  });
-}
-
-const histories = new Map();
-const batchSize = 5;
-const batches = [];
-for (let index = 0; index < records.length; index += batchSize) {
-  batches.push(records.slice(index, index + batchSize));
-}
-// Two sockets at a time. More was not faster — TradingView starts dropping
-// series instead of serving them.
-for (let index = 0; index < batches.length; index += 2) {
-  const wave = await Promise.all(
-    batches
-      .slice(index, index + 2)
-      .map((batch, offset) => fetchHistoryBatch(batch, index + offset)),
-  );
-  for (const batchHistories of wave) {
-    for (const [symbol, bars] of batchHistories) histories.set(symbol, bars);
-  }
-}
-
-// A series occasionally comes back empty even though the symbol is perfectly
-// valid. Retry only those. A retry result is accepted only when it has at least
-// two bars, so a second empty answer cannot overwrite a good first one.
-for (let attempt = 1; attempt <= 2; attempt += 1) {
-  const missing = records.filter(
-    (record) => (histories.get(record.symbol) || []).length < 2,
-  );
-  if (!missing.length) break;
-  const retryBatches = [];
-  for (let index = 0; index < missing.length; index += batchSize) {
-    retryBatches.push(missing.slice(index, index + batchSize));
-  }
-  for (let index = 0; index < retryBatches.length; index += 2) {
-    const retryWave = await Promise.all(
-      retryBatches
-        .slice(index, index + 2)
-        .map((batch, offset) =>
-          fetchHistoryBatch(
-            batch,
-            batches.length + attempt * 100 + index + offset,
-          ),
-        ),
-    );
-    for (const batchHistories of retryWave) {
-      for (const [symbol, bars] of batchHistories) {
-        if (bars.length >= 2) histories.set(symbol, bars);
-      }
-    }
-  }
-}
+// Every listing's split-adjusted daily history, in passes, over the chart
+// socket. `egx_history.mjs` says how a series is read and why ~50 companies
+// used to come back without one.
+const { answers: histories, warnings: historyFetchWarnings } = await fetchHistories(records, {
+  WebSocket,
+  url: `wss://data.tradingview.com/socket.io/websocket?from=screener%2F&date=${tradingViewDate}-00_00`,
+  origin: "https://www.tradingview.com",
+});
 
 // This is where the research script consulted its archive of previous scans for
 // anything still missing. There is no archive here. Whatever the socket did not
-// return stays missing, the ticker keeps all nineteen of its scanner fields and
-// loses only the six derived from history, and `carry_forward()` downstream
-// refills those from the last published profile under a name that says it did.
-// Degrading a single ticker is fine; dropping its record would not be, because
-// the scanner's close and volume for it are real and fresh.
+// return stays missing and says so in `historyStatus`; the ticker keeps all
+// nineteen of its scanner fields and loses only the six derived from history,
+// and `carry_forward()` downstream refills those from the last published profile
+// under a name that says it did. Degrading a single ticker is fine; dropping its
+// record would not be, because the scanner's close and volume for it are real
+// and fresh.
 
 function median(values) {
   const sorted = values.filter(Number.isFinite).sort((a, b) => a - b);
@@ -454,6 +247,11 @@ for (const record of records) {
   const currentSessionBar = allBars.find((bar) => barDate(bar) === runDate) || null;
   record.historyBars = allBars.length;
   record.completedHistoryBars = completedBars.length;
+  // `fetched`, `none` (a listing with no sessions, and the scanner agrees) or
+  // `missing` (history that exists and this scan does not carry). An empty
+  // `recentSplitAdjustedBars` alone cannot tell the last two apart, and the
+  // lab publishes a smaller market when it takes one for the other.
+  record.historyStatus = statusOf(record, histories);
   // Constant, unlike the research script, which used this field to distinguish
   // live bars from ones replayed out of an older scan. Here there is only one
   // source, so the label states it plainly rather than being dropped.
@@ -514,6 +312,9 @@ for (const record of records) {
 const unresolvedHistoryTickers = records
   .filter((record) => (histories.get(record.symbol) || []).length < 2)
   .map((record) => record.ticker);
+const missingHistoryTickers = records
+  .filter((record) => record.historyStatus === "missing")
+  .map((record) => record.ticker);
 
 const output = {
   // The real capture instant, which stays wall-clock even when EGX_RUN_DATE
@@ -527,9 +328,15 @@ const output = {
   // it ever is not, the exchange came back short and the number says so instead
   // of the shortfall hiding inside a plausible-looking file.
   scannerReturned: records.length,
-  historiesFetched: histories.size,
+  // Listings the socket answered for: with sessions, or honestly without.
+  historiesFetched: records.length - missingHistoryTickers.length,
   historyFetchWarnings,
+  // Fewer than two bars, for whatever reason — `build_market_api.py`'s view.
   unresolvedHistoryTickers,
+  // History this scan should carry and does not. Empty on a complete scan; the
+  // lab refuses to rebuild its record from a scan where it is not
+  // (`scripts/lab/panel.py`, `missing`).
+  missingHistoryTickers,
   completedSessionRule:
     "All RV20, close-strength and return fields use bars strictly before runDate; any runDate bar is preserved separately as provisional currentSessionBar.",
   // Absent by design, both of them: `thndrDirectoryCount` and `matchedThndrCount`
@@ -548,8 +355,22 @@ console.log(`wrote    ${outputPath}`);
 console.log(`asOf     ${output.asOf}  (runDate ${runDate})`);
 console.log(`listed   ${output.scannerReturned} of ${scannerTotal} scanner rows`);
 console.log(`history  ${withHistory} companies with usable history, ${unresolvedHistoryTickers.length} without`);
+const withoutSessions = records.filter((record) => record.historyStatus === "none").length;
+console.log(
+  `         ${withoutSessions} listings with no sessions to fetch, ` +
+  `${unresolvedHistoryTickers.length - withoutSessions - missingHistoryTickers.length} with too few, ` +
+  `${missingHistoryTickers.length} missing`,
+);
 if (historyFetchWarnings.length) {
-  console.log(`warnings ${historyFetchWarnings.length} socket errors during history fetch`);
+  console.log(`warnings ${historyFetchWarnings.length} socket warnings during history fetch`);
+}
+if (missingHistoryTickers.length) {
+  // The number the lab refuses on. Said here too, so the step that fetched the
+  // scan is where somebody reading the log first sees it.
+  console.log(
+    `warning  ${missingHistoryTickers.length} listings whose history exists are missing from this scan: ` +
+    missingHistoryTickers.join(", "),
+  );
 }
 if (output.scannerReturned < scannerTotal) {
   console.log(`warning  scanner reported ${scannerTotal} listings but only ${output.scannerReturned} were returned`);
