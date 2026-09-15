@@ -1,22 +1,10 @@
 {
- "generated": "2026-09-14",
+ "generated": "2026-09-15",
  "source": "EGX disclosures — scheduled dates the issuer has filed",
  "past_days": 90,
- "count": 437,
+ "count": 436,
  "estimated": 373,
  "events": [
-  {
-   "date": "2026-06-16",
-   "kind": "ex_dividend",
-   "note": "Ex-dividend — last day to own for the coupon",
-   "ticker": "MBSC",
-   "title": "Misr Beni Suef Cement (MBSC.CA) Declares Cash Distribution",
-   "title_ar": "مصر بنى سويف للاسمنت (MBSC.CA) تعلن عن توزيع نقدى",
-   "filed": "2026-06-08",
-   "section": "Corporate Actions",
-   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=289555",
-   "id": "egx-289555"
-  },
   {
    "date": "2026-06-17",
    "kind": "rights_open",

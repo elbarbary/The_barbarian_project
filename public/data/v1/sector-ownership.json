@@ -1,8 +1,8 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-14T21:36:00Z",
+ "generated": "2026-09-15T06:55:30Z",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
- "asOf": "2026-09-14T21:36:00+00:00",
+ "asOf": "2026-09-15T06:55:29+00:00",
  "basis": "A link is one listed company's filed stake in another, at the level the last form printed. Percentages belong to one company each and are never added together; sector totals are the market value of the stakes, which is money and can be.",
  "basisAr": "كل خط حصة مُفصح عنها لشركة مقيدة في شركة مقيدة أخرى، بالنسبة التي أثبتها آخر نموذج. النسب تخص شركة واحدة ولا تُجمع؛ إجماليات القطاعات بالقيمة السوقية للحصص، وهي مبالغ تُجمع.",
  "linkCount": 37,
@@ -629,7 +629,7 @@
    "heldSectorAr": "Finance",
    "holder": "شركة مصر لتأمينات الحياة (مجموعة مرتبطة )",
    "percent": 10.27,
-   "value": 451025474.41,
+   "value": 453164161.33,
    "asOf": "2026-06-30",
    "basis": "register",
    "filingId": "291094",
@@ -991,7 +991,7 @@
    "toSector": "Finance",
    "toSectorAr": "Finance",
    "links": 1,
-   "value": 451025474.41,
+   "value": 453164161.33,
    "valued": 1,
    "companies": [
     "SAIB"
@@ -1091,7 +1091,7 @@
    "id": "Finance",
    "nameAr": "Finance",
    "companies": 11,
-   "cap": 57774589365.21,
+   "cap": 57999478659.43,
    "holds": 2,
    "heldBy": 3
   },
