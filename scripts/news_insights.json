@@ -1211,6 +1211,10 @@
     "meaning": "Higher benchmark yields raise international borrowing costs and strengthen the US dollar, which increases sovereign debt servicing burdens and redirects cross-border portfolio capital toward dollar-denominated assets.",
     "meaning_ar": "يؤدي ارتفاع عائد السندات القياسية إلى زيادة تكلفة الاقتراض الدولي وقوة الدولار، مما يرفع تكلفة خدمة الدين السيادي ويعيد توجيه التدفقات الاستثمارية نحو الأصول المقومة بالعملة الأمريكية."
   },
+  "ارتفاع عوايد السندات الاوروبيه وسط مخاوف التضخم": {
+    "meaning": "Persistent inflation risks lead bond markets to discount higher central bank interest rates, which lowers fixed-income security prices and pushes benchmark European sovereign yields upward. For international emerging markets like Egypt, this mechanism widens external borrowing spreads and raises sovereign debt refinancing costs.",
+    "meaning_ar": "تؤدي مخاطر التضخم المستمرة إلى قيام أسواق السندات باحتساب أسعار فائدة أعلى من قبل البنوك المركزية، مما يخفض أسعار أدوات الدخل الثابت ويرفع عوائد السندات السيادية الأوروبية. وبالنسبة للأسواق الناشئة مثل مصر، تؤدي هذه الآلية إلى اتساع هوامش الاقتراض الخارجي وارتفاع تكلفة إعادة تمويل الديون بالعملات الأجنبية."
+  },
   "ارتفاع فايض ميزان تجاره السلع في منطقه اليورو خلال يوليو": {
     "meaning": "A widening goods trade surplus indicates that the Eurozone's total value of exported merchandise exceeds its merchandise imports for the period. For Egyptian companies trading with Europe, this reflects prevailing macroeconomic supply-demand dynamics and net currency liquidity flows across the Euro area.",
     "meaning_ar": "يشير اتساع فائض ميزان تجارة السلع إلى تجاوز القيمة الإجمالية لصادرات منطقة اليورو من السلع لقيمة وارداتها السلعية خلال تلك الفترة. ويعكس ذلك للشركات المصرية المتعاملة مع أوروبا ديناميكيات العرض والطلب الكلية وحركة السيولة الصافية للنقد الأجنبي داخل المنطقة."
@@ -1978,6 +1982,10 @@
   "البورصه تشطب اذون خزانه مصريه بقيمه 296.85 مليار جنيه": {
     "meaning": "The delisting of treasury bills from the exchange represents a standard operational procedure executed upon reaching their maturity date, where the government redeems the principal value to holders and removes the matured debt instruments from the trading system.",
     "meaning_ar": "يمثل شطب أذون الخزانة من البورصة إجراءً تشغيلياً روتينياً يُنفذ عند حلول تاريخ استحقاقها، حيث تسدد الدولة القيمة الاسمية لحامليها وتُلغى قيد هذه الأدوات المالية من قاعدة بيانات التداول."
+  },
+  "البورصه تصعد 0.21% وسط تداولات بقيمه 10.5 مليار جنيه": {
+    "meaning": "The benchmark index records a net gain of 0.21% as matched buy orders exceed sell orders across listed equities, while total cleared turnover reaches EGP 10.5 billion across regular trading and wholesale mechanisms.",
+    "meaning_ar": "يسجل المؤشر الرئيسي ارتفاعاً بنسبة 0.21% نتيجة تفوق أوامر الشراء المنفذة على أوامر البيع للأسهم المدرجة، مع بلوغ إجمالي قيمة التداولات 10.5 مليار جنيه تشمل التعاملات النقدية وعمليات نقل الملكية."
   },
   "البورصه تصعد 0.72% وسط تداولات بقيمه 15.5 مليار جنيه": {
     "meaning": "The main stock index advances by 0.72% as executed buy orders outweigh sell orders, with aggregate transaction turnover across listed securities reaching EGP 15.5 billion during the trading session.",
@@ -3418,6 +3426,10 @@
   "بنك مصر يوفر افضل الحلول من خلال تمويل «اكسبريس» للمشروعات الصغيره والمتوسطه": {
     "meaning": "Banque Misr provides small and medium-sized enterprises with streamlined debt financing products through its Express loan program, supplying working capital and operational liquidity directly to eligible businesses under standardized lending procedures.",
     "meaning_ar": "يقدم بنك مصر تسهيلات ائتمانية مبسطة للمشروعات الصغيرة والمتوسطة عبر برنامج تمويل «إكسبريس»، مما يتيح السيولة التشغيلية ورأس المال العامل للشركات المستوفية للشروط وفق إجراءات إقراض قياسية."
+  },
+  "بنك مورجان ستانلي يتوقع رفع الفايده الامريكيه مرتين وزياده اوروبيه خلال 2026": {
+    "meaning": "Higher benchmark interest rates in the US and the Eurozone widen sovereign yield differentials against emerging market debt and increase international foreign-currency debt service costs.",
+    "meaning_ar": "يؤدي رفع أسعار الفائدة القياسية في الولايات المتحدة ومنطقة اليورو إلى اتساع الفوارق بين عوائد السندات السيادية وأدوات ديون الأسواق الناشئة، مع زيادة تكاليف خدمة الديون الخارجية المقومة بالعملات الأجنبية."
   },
   "بوتين يلتقي الرييس السيسي ويوكد التزام روسيا بالاسهام في جهود مصر لتحقيق التنميه الشامله": {
     "meaning": "Bilateral state commitments frame intergovernmental execution for joint infrastructure projects, including the Dabaa nuclear power plant and the Russian Industrial Zone in the Suez Canal Economic Zone, through bilateral technical agreements and state-backed financing facilities.",
@@ -5301,6 +5313,10 @@
     "meaning": "The Ministry of Agriculture provides state logistical infrastructure, land, and commodity supply channels to partner retail chains like Carry On under a public-private operational cooperation framework.",
     "meaning_ar": "تتيح وزارة الزراعة بنيتها التحتية اللوجستية ومنافذها ومصادر إمداد السلع لسلاسل التجزئة مثل «كاري أون» ضمن إطار تعاون تشغيلي بين القطاعين العام والخاص."
   },
+  "عمال شركه ميكرون في تايوان يهددون بالاضراب للمطالبه بنظام دايم لتقاسم الارباح": {
+    "meaning": "Demands for a permanent profit-sharing scheme introduce recurring labor obligations into fixed operational cost structures, while strike actions halt semiconductor fabrication output and disrupt delivery schedules across tech supply chains.",
+    "meaning_ar": "تُدرج المطالبة بنظام دائم لتقاسم الأرباح التزامات عمالية دورية ضمن هيكل التكاليف التشغيلية، في حين يترتب على الإضرابات توقف خطوط تصنيع أشباه الموصلات وتعطل جداول التسليم في سلاسل إمداد التكنولوجيا."
+  },
   "عمان تمول 25% من صندوق صيني للابتكار والتقنيه": {
     "meaning": "This cross-border arrangement provides Oman with a direct equity interest in the asset structure and operational portfolio of a Chinese innovation and technology vehicle.",
     "meaning_ar": "يمنح هذا الترتيب الاستثماري المشترك سلطنة عُمان حصة ملكية مباشرة بنسبة 25% في محفظة الأصول والعمليات التشغيلية الخاصة بصندوق تكنولوجيا وابتكار صيني."
@@ -6837,6 +6853,10 @@
     "meaning": "Bilateral labor coordination regulates cross-border workforce flows, legal compliance, and the administrative framework governing worker remittances between Egypt and Jordan.",
     "meaning_ar": "ينظم التنسيق العمالي الثنائي تدفقات العمالة عبر الحدود، والامتثال القانوني، والأطر الإدارية الحاكمة لتحويلات العاملين بين مصر والأردن."
   },
+  "وزير العمل يبحث مع نظيره الليبي تعزيز التعاون في الملفات المشتركه": {
+    "meaning": "Bilateral labor talks coordinate regulatory frameworks for Egyptian cross-border employment, official worker registration, and contracted labor flows to Libya.",
+    "meaning_ar": "تنسق المباحثات العمالية الثنائية الأطر التنظيمية المنظمة لتوظيف العمالة المصرية بالخارج، وتسجيلها الرسمي، وحركة انتقال الأيدي العاملة المتعاقد عليها إلى ليبيا."
+  },
   "وزير العمل يبحث مع نظيره اليمني تعزيز التعاون في التشغيل والتدريب المهني": {
     "meaning": "Bilateral coordination between labor ministries establishes standardized vocational qualification frameworks and cross-border labor mobility channels, directly regulating workforce deployment mechanisms across regional labor markets.",
     "meaning_ar": "يضع التنسيق الثنائي بين وزارتي العمل أطرًا موحدة للمؤهلات المهنية وقنوات منظمة لانتقال العمالة، مما ينظم آليات تشغيل وتوزيع القوى العاملة عبر أسواق العمل الإقليمية."
@@ -6888,6 +6908,10 @@
   "وزيرا التموين والزراعه ورييس مستقبل مصر يفتتحون 20 فرعا جديدا لكاري اون في 4 محافظات": {
     "meaning": "The expansion adds 20 operational retail points of sale across four governorates, broadening the domestic distribution footprint through a direct partnership with state-backed agricultural and supply entities.",
     "meaning_ar": "يضيف هذا التوسع 20 نقطة بيع تجزئة تشغيلية في أربع محافظات، مما يوسع النطاق الجغرافي لشبكة التوزيع المحلي عبر شراكة مباشرة مع جهات حكومية تابعة لقطاعي التموين والزراعة."
+  },
+  "وزيره التنميه المحليه تعفي رييس مركز ومدينه مطوبس من منصبه بعد قطع اشجار دون تصريح": {
+    "meaning": "Administrative dismissals by local government authorities enforce regulatory compliance standards and land management protocols on municipal entities.",
+    "meaning_ar": "تُطبّق الإقالات الإدارية الصادرة عن وزارة التنمية المحلية معايير الامتثال التنظيمي وضوابط إدارة الأراضي على الوحدات المحلية."
   },
   "وفد من شركات مقاولات وتطوير عقاري محليه يزور سوريا ولبنان اكتوبر المقبل": {
     "meaning": "The visit constitutes an operational trade delegation where Egyptian construction and real estate firms engage with regional counterparties to assess foreign project tenders, infrastructure contracts, and cross-border partnership frameworks.",
@@ -7224,6 +7248,10 @@
   "“جدوي” تتكبد خساير 378.5 مليون جنيه في النصف الاول": {
     "meaning": "Operating costs and financing expenses exceed total generated revenues for the six-month period, reducing retained earnings on the balance sheet.",
     "meaning_ar": "تتجاوز تكاليف التشغيل والأعباء التمويلية إجمالي الإيرادات المحققة خلال فترة الستة أشهر، مما يؤدي إلى خفض الأرباح المرحلة في الميزانية العمومية."
+  },
+  "“جولدمان ساكس” يجمع 11.7 مليار دولار لصناديق الاستثمار المباشر الجديده": {
+    "meaning": "Capital commitments of $11.7 billion expand the firm's uncalled private equity reserves, providing operational liquidity specifically allocated for direct corporate acquisitions, co-investments, and structural equity financing.",
+    "meaning_ar": "تُمثل الالتزامات الرأسمالية البالغة 11.7 مليار دولار زيادة في السيولة غير المستدعاة المخصصة للاستثمار المباشر لدى الشركة، حيث تتوفر هذه الموارد لعمليات الاستحواذ المؤسسي والتمويل الرأسمالي للشركات."
   },
   "“جولدمان”: اجراءات الصين العقاريه تهدد بخفض ايرادات مبيعات الاراضي 30%": {
     "meaning": "Regulatory tightening in China's property sector constrains developer liquidity and reduces purchasing activity at government land auctions, directly contracting municipal fiscal revenues derived from land transfers.",
