@@ -1203,6 +1203,10 @@
     "meaning": "Initial trading shows a net inflow of liquidity across listed equities, leading to price gains in constituents across the main benchmark EGX 30 and broader market indices.",
     "meaning_ar": "تعكس بداية الجلسة تدفقات نقدية شرائية على الأسهم المقيدة، مما يؤدي إلى تحركات سعرية صاعدة في مكونات مؤشر إيجي إكس 30 والمؤشرات العامة للسوق."
   },
+  "ارتفاع جماعي.. كم سجل سعر الدينار الكويتي بختام تعاملات اليوم الثلاثاء 15-9-2026؟": {
+    "meaning": "A collective increase in the Kuwaiti Dinar exchange rate against the Egyptian Pound across banks reflects higher interbank pricing, directly raising the local-currency cost of bilateral trade settlements and imports invoiced in KWD.",
+    "meaning_ar": "يعكس الارتفاع الجماعي لسعر صرف الدينار الكويتي أمام الجنيه المصري في البنوك صعود أسعار التداول بين البنوك (الإنتربنك)، مما يرفع تكلفة تسوية المعاملات التجارية والواردات المقومة بالدينار بالعملة المحلية مباشرة."
+  },
   "ارتفاع حاد في تكاليف الاقتراض طويل الاجل بالولايات المتحده": {
     "meaning": "Higher long-term U.S. borrowing costs raise global discount rates and expand sovereign debt yields across emerging markets, increasing capital costs for dollar-denominated refinancing and corporate debt issuances.",
     "meaning_ar": "يؤدي ارتفاع تكاليف الاقتراض طويل الأجل في الولايات المتحدة إلى رفع معدلات الخصم العالمية وعائدات الديون السيادية في الأسواق الناشئة، مما يرفع تكلفة رأس المال لإعادة التمويل وإصدارات سندات الشركات المقومة بالدولار."
@@ -1926,6 +1930,10 @@
   "البنتاجون يستثمر 450 مليون دولار في شركه لانتاج التنجستن لمواجهه الصين": {
     "meaning": "This transaction provides direct non-dilutive government capital to fund mining infrastructure, processing facilities, and supply chain capacity for strategic critical minerals.",
     "meaning_ar": "يوفر هذا التمويل رأس مال حكومي مباشر لتمويل البنية التحتية للتعدين ومنشآت المعالجة والقدرات التشغيلية لسلاسل إمداد المعادن الاستراتيجية الحيوية."
+  },
+  "البنك الاهلي و مدينه زويل يحتفلان بتخريج دفعه جديده من طلاب المنح الدراسيه": {
+    "meaning": "This initiative represents corporate social responsibility (CSR) expenditure allocated from the bank's operational budget toward human capital development and educational non-profit partnerships.",
+    "meaning_ar": "تمثل هذه المبادرة نفقات للمسؤولية المجتمعية للشركات مخصصة من الميزانية التشغيلية للبنك لتنمية رأس المال البشري والشراكات التعليمية غير الهادفة للربح."
   },
   "البنك الاهلي يتصدر قايمه اعلي العلامات التجاريه قيمه في مصر ب 717 مليون دولار": {
     "meaning": "Brand valuation quantifies the financial worth of an institution's intangible assets and market positioning, reflecting National Bank of Egypt's balance sheet scale and dominant retail deposit base within the domestic banking sector.",
@@ -3294,6 +3302,10 @@
   "باستثمارات 7.5 مليون دولار.. رييس الوزراء يفتتح توسعات شركه سيراج بمصنع \"فلير\" لانظمه الاضاءه الحديثه": {
     "meaning": "The deployment of $7.5 million in capital expenditure allocates funding directly into physical production assets and modern lighting manufacturing lines at the facility.",
     "meaning_ar": "يُمثل هذا الإجراء ضخاً لنفقات رأسمالية بقيمة 7.5 مليون دولار في الأصول الإنتاجية وخطوط تصنيع أنظمة الإضاءة الحديثة بالمنشأة الصناعية."
+  },
+  "بالمير للتطوير تتعاقد مع كيان للمقاولات لتنفيذ انشاءات مشروعي Avenue وResidence بالشيخ زايد الجديده": {
+    "meaning": "The agreement transitions the two real estate projects into the active construction phase by outsourcing site execution to an external general contractor under a service agreement.",
+    "meaning_ar": "ينقل هذا التعاقد المشروعين العقاريين إلى مرحلة التنفيذ الإنشائي الفعلي عبر إسناد أعمال الموقع إلى مقاول عام خارجي بموجب عقد مقاولة."
   },
   "بايونيرز بروبرتيز تقلص نسبتها في الصعيد للمقاولات الي 2و81": {
     "meaning": "Pioneers Properties for Urban Development reduces its equity ownership stake in Upper Egypt Contracting to 2.81%, which scales down its direct voting power and representation on the company's shareholder register.",
@@ -4964,6 +4976,10 @@
     "meaning": "Early trading sessions for newly listed shares often reflect an initial price discovery mechanism as open-market supply and demand dynamics adjust from initial offering levels.",
     "meaning_ar": "تعكس جلسات التداول الأولى للأسهم حديثة الإدراج آلية اكتشاف السعر الأولي، حيث تتكيف قوى العرض والطلب في السوق المفتوحة مقارنة بمستويات الطرح الأولي."
   },
+  "سهما كفر الزيات وسيدبك يتصدران الصعود بقطاع الموارد الاساسيه في البورصه المصريه": {
+    "meaning": "Capital inflows into basic resources equities reflect localized trading liquidity concentrating in agrochemical and petrochemical producers, where operational performance ties directly to industrial input pricing and export parity valuation.",
+    "meaning_ar": "يعكس تركز السيولة الشرائية في أسهم الموارد الأساسية حركة تداول موجهة نحو منتجي الكيماويات والبتروكيماويات، حيث ترتبط العمليات التشغيلية لهذه الشركات بأسعار المدخلات الصناعية ومعادلات التسعير التصديرية."
+  },
   "سوديك تطلق مرحله جديده من مشروع اوجامي راس الحكمه": {
     "meaning": "Launching a new phase in an existing real estate development releases additional inventory for contracting, expanding the developer's operational footprint and active construction pipeline on the North Coast.",
     "meaning_ar": "يؤدي إطلاق مرحلة جديدة في مشروع عقاري قائم إلى طرح مخزون إضافي للتعاقد، مما يوسع النطاق التشغيلي وجدول أعمال الإنشاءات للشركة المطورة في منطقة الساحل الشمالي."
@@ -6328,6 +6344,10 @@
   "منصه “صندوق” تغطي نحو 200 صندوق استثمار في مصر": {
     "meaning": "The platform aggregates and displays operational data, performance metrics, and pricing for approximately 200 Egyptian investment funds in a centralized digital interface.",
     "meaning_ar": "تجمع المنصة وتعرض البيانات التشغيلية ومؤشرات الأداء وأسعار الوثائق لنحو 200 صندوق استثمار مصري ضمن واجهة رقمية موحدة."
+  },
+  "منظمه التجاره العالميه تحذر من انكماش الاقتصاد العالمي بنحو 10% بحلول 2050": {
+    "meaning": "Global economic contraction scenarios from multilateral trade bodies reflect macro projections driven by potential geopolitical fragmentation, tariff barriers, and disrupted cross-border supply chains.",
+    "meaning_ar": "تعكس سيناريوهات انكماش الاقتصاد العالمي الصادرة عن المنظمات التجارية الدولية نماذج اقتصادية كلية تستند إلى تراجع حركة التجارة البينية، وفرض حواجز جمركية، واضطراب سلاسل التوريد العالمية."
   },
   "مواعيد القطارات المتجهه من القاهره للمحافظات اليوم 10-9-2026": {
     "meaning": "Domestic train schedules represent the operational transport capacity managed by the Egyptian National Railways, providing public logistical infrastructure for intercity passenger mobility and daily domestic labor movement.",
