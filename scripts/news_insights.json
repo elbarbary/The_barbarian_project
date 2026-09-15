@@ -1507,6 +1507,10 @@
     "meaning": "Daily fish price listings reflect current wholesale settlement rates, operational transport expenses, and localized catch volumes distributed across domestic wholesale and retail markets.",
     "meaning_ar": "تعكس مؤشرات أسعار الأسماك اليومية أسعار التسوية في أسواق الجملة، وتكاليف النقل والتشغيل، وحجم الإمدادات المعروضة من المزارع السمكية والمصايد في السوق المحلي."
   },
+  "اسعار السمك اليوم الثلاثاء 15-9-2026 في مصر": {
+    "meaning": "This headline reports daily wholesale and retail pricing benchmarks for seafood commodities, reflecting prevailing spot market rates determined by local aquaculture output, coastal supply volumes, and transport logistics.",
+    "meaning_ar": "يعرض هذا العنوان الأسعار المرجعية اليومية لتداول الأسماك بالجملة والتجزئة، والتي تتحدد بناءً على مستويات المعروض الفوري من الاستزراع السمكي والصيد وتكاليف النقل اللوجستية."
+  },
   "اسعار السمك اليوم الثلاثاء 8-9-2026 في مصر": {
     "meaning": "Daily fish price publications reflect the spot pricing mechanisms in the local wholesale and retail markets, where values are determined by daily catch volumes, aquaculture supply, and transportation costs relative to consumer demand.",
     "meaning_ar": "تعكس النشرات اليومية لأسعار الأسماك آليات التسعير الفوري في أسواق الجملة والتجزئة، حيث تتحدد الأسعار بناءً على حجم المعروض اليومي من المصايد والمزارع السمكية وتكاليف النقل مقابل حجم الطلب الاستهلاكي."
@@ -1938,6 +1942,10 @@
   "البنك الاهلي يتصدر قايمه اعلي العلامات التجاريه قيمه في مصر ب 717 مليون دولار": {
     "meaning": "Brand valuation quantifies the financial worth of an institution's intangible assets and market positioning, reflecting National Bank of Egypt's balance sheet scale and dominant retail deposit base within the domestic banking sector.",
     "meaning_ar": "يعكس تقييم العلامة التجارية القيمة المالية للأصول غير الملموسة والمكانة السوقية للمؤسسة، وهو ما يرتبط بحجم المركز المالي للبنك الأهلي المصري وحصته السوقية في قاعدة الودائع والتجزئة المصرفية محلياً."
+  },
+  "البنك الاهلي يحتفل بتخريج 20 طالبا من الحاصلين علي منح مدينه زويل": {
+    "meaning": "The graduation marks the completion of an educational sponsorship funded under the bank's corporate social responsibility (CSR) budget, which operates as an allocated operating expense separate from commercial lending portfolios.",
+    "meaning_ar": "يمثل التخرج إتمام برنامج رعاية تعليمية ممول من مخصصات المسؤولية المجتمعية للبنك، والتي تُقيد كمصروفات تشغيلية محددة ومستقلة عن محافظ الائتمان التجاري."
   },
   "البنك الاهلي يسلم الجوايز للفايزين ضمن حمله \"فرصه من ذهب\"": {
     "meaning": "The distribution of prizes marks the execution phase of a retail banking promotional campaign, recording marketing expenses against operating costs while fulfilling contractual incentive programs tied to customer accounts and retail transactions.",
@@ -2834,6 +2842,10 @@
   "القاهره للبترول تنجح في تكرير اكثر من 7.5 مليون طن خام خلال 2025/2026": {
     "meaning": "Achieving this throughput volume reflects the operational processing capacity of the refinery and contributes refined petroleum products directly to the domestic supply chain.",
     "meaning_ar": "يعكس تحقيق هذا الحجم من التكرير الطاقة التشغيلية لمعامل الشركة ويوفر المنتجات البترولية المكررة لمنظومة الإمداد والتوزيع المحلية."
+  },
+  "القاهره للخدمات التعليميه تهبط 4.5% وتعليم تتصدر التداولات في قطاع التعليم": {
+    "meaning": "Within the EGX education sector, Cairo Educational Services experiences a 4.5% price decline during the session, while Taaleem Management Services absorbs the highest volume of executed transactions among sector peers.",
+    "meaning_ar": "داخل قطاع التعليم بالبورصة المصرية، يسجل سهم القاهرة للخدمات التعليمية انخفاضاً سعرياً بنسبة 4.5% خلال الجلسة، بينما تستحوذ شركة تعليم لخدمات الإدارة على أعلى حجم تداولات منفذة بين أسهم القطاع."
   },
   "القطار السريع يراهن علي «ايركايرو» لزياده الاشغال وتسريع استرداد التكلفه": {
     "meaning": "The commercial integration between the high-speed rail network and Air Cairo connects rail schedules with domestic and international flight arrivals, channeling transit passengers directly into the rail transport system.",
@@ -4256,6 +4268,10 @@
     "meaning": "The seasonal enforcement of agricultural burning regulations imposes direct compliance costs, machinery rental fees for biomass shredding, and regulatory fines on smallholder farming operations.",
     "meaning_ar": "يفرض التطبيق الموسمي للضوابط البيئية المنظمة للتخلص من المخلفات الزراعية تكاليف تشغيلية مباشرة تشمل استئجار معدات فرم وتدوير القش بالإضافة إلى الغرامات التنظيمية على المزارعين."
   },
+  "حمايه المستهلك يحذر من تداول 8 سيارات «جيتور» متضرره من حادث تصادم مقطوره باعتبارها جديده": {
+    "meaning": "Regulatory consumer protection notices identify damaged inventory to prevent secondary commercial distribution as new stock, requiring distributors to absorb transit-related asset write-downs or process claims through cargo insurance mechanisms.",
+    "meaning_ar": "تحدد الإخطارات الرقابية لحماية المستهلك المخزون المتضرر لمنع تداوله تجارياً كمنتجات جديدة، مما يُلزم الموزعين بتسجيل شطب أصول مرتبطة بحوادث النقل أو معالجتها عبر التغطيات التأمينية للبضائع."
+  },
   "حمايه المستهلك يضبط مصنعا غير مرخص لتجهيز وتقطيع وحفظ هياكل واجزاء دواجن فاسده": {
     "meaning": "Regulatory enforcement against informal poultry processing facilities halts unauthorized supply in the food value chain and channels meat processing activity through licensed operators subject to state inspection and hygiene standards.",
     "meaning_ar": "يؤدي التدخل الرقابي لضبط مصانع الدواجن غير المرخصة إلى وقف الإمدادات غير الرسمية في سلاسل القيمة الغذائية، وقصر عمليات تجهيز اللحوم على المنشآت المعتمدة والخاضعة للمعايير الصحية والتفتيش الدوري."
@@ -4467,6 +4483,10 @@
   "روسيا تعزز صادراتها النفطيه الي الصين عبر القطب الشمالي": {
     "meaning": "Russia routes crude oil shipments to China through the Northern Sea Route, serving as a direct maritime transit corridor between Russian Arctic export terminals and Asian discharge ports.",
     "meaning_ar": "توجه روسيا شحنات النفط الخام إلى الصين عبر طريق بحر الشمال، والذي يعمل كممر ملاحي مباشر يربط بين موانئ التصدير في القطب الشمالي الروسي وموانئ التفريغ في آسيا."
+  },
+  "روسيا واوكرانيا تواصلان ضرب منشات الطاقه": {
+    "meaning": "Attacks on energy infrastructure disrupt refining capacity and export logistics, altering global hydrocarbon supply volumes and maritime shipping risk premiums.",
+    "meaning_ar": "تؤدي الهجمات على منشآت الطاقة إلى تعطيل طاقات التكرير والخدمات اللوجستية للتصدير، مما يغير أحجام إمدادات الوقود العالمية وعلاوات مخاطر الشحن البحري."
   },
   "روسيا: اوروبا تدفع اسعارا باهظه للغاز": {
     "meaning": "Disruptions in primary pipeline supply routes shift regional procurement toward spot liquefied natural gas (LNG) markets, where pricing reflects higher liquefaction, freight, and regasification costs compared to long-term contracted pipeline deliveries.",
@@ -4935,6 +4955,10 @@
   "سعر كرتونه البيض اليوم 14/9/2026 للمستهلك في السوق المحليه": {
     "meaning": "Egg carton retail pricing reflects daily supply-and-demand balances influenced by operational feed costs, domestic poultry farm output, and transportation logistics in the local food distribution chain.",
     "meaning_ar": "يعكس سعر كرتونة البيض للمستهلك توازن العرض والطلب اليومي المتأثر بتكاليف الأعلاف التشغيلية، وحجم إنتاج مزارع الدواجن المحلية، وشبكات النقل والتوزيع في السوق."
+  },
+  "سعر كرتونه البيض اليوم 15-9-2026 للمستهلك في السوق المحليه": {
+    "meaning": "This headline tracks the daily end-consumer price of table eggs, reflecting the pass-through of poultry farm-gate pricing, feed grain input costs, and retail distribution markups across the local market.",
+    "meaning_ar": "ترصد هذه البيانات السعر اليومي لبيض المائدة للمستهلك النهائي، وهو ما يعكس انتقال تكاليف الإنتاج من المزارع وأسعار الأعلاف وهوامش التوزيع في السوق المحلية."
   },
   "سعر كرتونه البيض اليوم 4/9/2026 للمستهلك في السوق المحليه": {
     "meaning": "This reflects the daily domestic retail pricing updates for table eggs, driven by poultry feed supply costs, farm-gate production expenses, and local consumer demand dynamics.",
@@ -6849,6 +6873,10 @@
     "meaning": "Official diplomatic positions on regional political stability relate to cross-border trade framework predictability and bilateral transport corridor operations between Egypt and Sudan.",
     "meaning_ar": "ترتبط المواقف الدبلوماسية الرسمية بشأن استقرار الأوضاع الإقليمية بمدى انتظام أطر التجارة البينية وحركة ممرات النقل والتبادل التجاري البري والنهري بين مصر والسودان."
   },
+  "وزير الخارجيه: ضروره تعزيز التعاون الدولي لمواجهه تداعيات التصعيد علي الامن الغذايي": {
+    "meaning": "Geopolitical escalation directly affects maritime shipping routes, freight insurance premiums, and import costs for strategic grain commodities, prompting state-level coordination to secure bilateral supply agreements and cross-border financing facilities.",
+    "meaning_ar": "يؤثر التصعيد الجيوسياسي مباشرة على مسارات الشحن البحري وعلاوات التأمين وتكاليف استيراد السلع الاستراتيجية، مما يستلزم التنسيق الدبلوماسي لترتيب عقود التوريد الثنائية وتسهيلات التمويل الدولية."
+  },
   "وزير الخارجيه: مستعدون لتبادل الخبرات مع مالي في رياده الاعمال ودعم المشروعات الصغيره والمتوسطه": {
     "meaning": "Bilateral technical cooperation between Egypt and Mali establishes institutional frameworks for knowledge sharing, regulatory alignment, and capacity-building programs across the SME and entrepreneurship sectors.",
     "meaning_ar": "يؤسس التعاون الفني الثنائي بين مصر ومالي أطرًا مؤسسية لتبادل المعرفة الفنية وتنسيق الإجراءات التنظيمية وبرامج بناء القدرات في قطاع المشروعات الصغيرة والمتوسطة وريادة الأعمال."
@@ -6868,6 +6896,10 @@
   "وزير الخزانه البريطاني يحذر من ميزانيه صعبه وسط تداعيات حرب الشرق الاوسط": {
     "meaning": "Geopolitical tensions in the Middle East elevate global energy prices and shipping freight rates, which raises imported inflation and constrains fiscal spending allocations in import-reliant economies.",
     "meaning_ar": "تؤدي التوترات الجيوسياسية في الشرق الأوسط إلى ارتفاع أسعار الطاقة العالمية وتكاليف الشحن البحري، مما يرفع معدلات التضخم المستورد ويفرض ضغوطاً على مخصصات الإنفاق في الموازنات العامة للاقتصادات المعتمدة على الاستيراد."
+  },
+  "وزير الري : لا تهاون مع من يقوم بالتعامل الجاير مع الاشجار": {
+    "meaning": "Stricter regulatory enforcement against tree removal subjects agricultural and infrastructure contractors along state waterways to environmental compliance audits and operational penalties. This framework raises administrative oversight and legal liabilities for companies executing clearing or landscaping works on public land.",
+    "meaning_ar": "يُخضع تشديد الرقابة على إزالة الأشجار مقاولي الزراعة والبنية التحتية على المجاري المائية الحكومية لعمليات تفتيش بيئي وغرامات تشغيلية، مما يفرض التزامات قانونية وإدارية رقابية على الشركات المنفذة لأعمال التطهير والتنسيق في الأراضي العامة."
   },
   "وزير الري: توسيع الشراكه الماييه مع اوزبكستان وتحويل مذكره التفاهم لمشروعات عمليه": {
     "meaning": "The activation of this bilateral memorandum of understanding establishes an operational framework for government-to-government technical exchange and contract execution in irrigation infrastructure and water management systems.",
