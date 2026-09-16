@@ -1,11 +1,11 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-16T15:17:53Z",
+ "generated": "2026-09-16T16:01:13Z",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
- "asOf": "2026-09-16T15:17:52+00:00",
+ "asOf": "2026-09-16T16:01:13+00:00",
  "basis": "A link is one listed company's filed stake in another, at the level the last form printed. Percentages belong to one company each and are never added together; sector totals are the market value of the stakes, which is money and can be.",
  "basisAr": "كل خط حصة مُفصح عنها لشركة مقيدة في شركة مقيدة أخرى، بالنسبة التي أثبتها آخر نموذج. النسب تخص شركة واحدة ولا تُجمع؛ إجماليات القطاعات بالقيمة السوقية للحصص، وهي مبالغ تُجمع.",
- "linkCount": 37,
+ "linkCount": 40,
  "outsideHolderCount": 531,
  "links": [
   {
@@ -313,6 +313,25 @@
    "source": "https://www.egx.com.eg/downloads/Bulletins/341104_1.pdf"
   },
   {
+   "owner": "EGREF",
+   "ownerName": "Egyptians Real Estate Fund",
+   "ownerNameAr": "صندوق المصريين للاستثمار العقاري",
+   "ownerSector": "Non-bank financial services",
+   "ownerSectorAr": "خدمات مالية غير مصرفية",
+   "held": "EHDR",
+   "heldName": "Egyptians Housing Development & Reconstruction",
+   "heldNameAr": "المصريين للاسكان والتنمية والتعمير ش م م",
+   "heldSector": "Real Estate",
+   "heldSectorAr": "عقارات",
+   "holder": "شركة صندوق المصريين للإستثمار العقاري",
+   "percent": 0.893,
+   "value": 16382620.8,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291449",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341147_1.pdf"
+  },
+  {
    "owner": "NAHO",
    "ownerName": "Naeem Holding Co.",
    "ownerNameAr": "النعيم القابضة للاستثمارات",
@@ -349,6 +368,25 @@
    "basis": "register",
    "filingId": "291442",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341139_1.pdf"
+  },
+  {
+   "owner": "ODIN",
+   "ownerName": "ODIN Investments",
+   "ownerNameAr": "أودن للاستثمارات المالية",
+   "ownerSector": "Non-bank financial services",
+   "ownerSectorAr": "خدمات مالية غير مصرفية",
+   "held": "EHDR",
+   "heldName": "Egyptians Housing Development & Reconstruction",
+   "heldNameAr": "المصريين للاسكان والتنمية والتعمير ش م م",
+   "heldSector": "Real Estate",
+   "heldSectorAr": "عقارات",
+   "holder": "شركة أودن للإستثمارات المالية.",
+   "percent": 23.98,
+   "value": 439927488.0,
+   "asOf": "2026-09-03",
+   "basis": "trade",
+   "filingId": "294290",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/343798_1.pdf"
   },
   {
    "owner": "RAYA",
@@ -406,6 +444,25 @@
    "basis": "register",
    "filingId": "291528",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341230_1.pdf"
+  },
+  {
+   "owner": "EHDR",
+   "ownerName": "Egyptians Housing Development & Reconstruction",
+   "ownerNameAr": "المصريين للاسكان والتنمية والتعمير ش م م",
+   "ownerSector": "Real Estate",
+   "ownerSectorAr": "عقارات",
+   "held": "EGREF",
+   "heldName": "Egyptians Real Estate Fund",
+   "heldNameAr": "صندوق المصريين للاستثمار العقاري",
+   "heldSector": "Non-bank financial services",
+   "heldSectorAr": "خدمات مالية غير مصرفية",
+   "holder": "شركة المصريين للاسكان والتنمية والتعمير",
+   "percent": 14.0,
+   "value": 73347155.28,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291442",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341139_1.pdf"
   },
   {
    "owner": "ELKA",
@@ -890,10 +947,11 @@
    "fromSectorAr": "خدمات مالية غير مصرفية",
    "toSector": "Real Estate",
    "toSectorAr": "عقارات",
-   "links": 1,
-   "value": 1096228800.01,
-   "valued": 1,
+   "links": 3,
+   "value": 1552538908.81,
+   "valued": 3,
    "companies": [
+    "EHDR",
     "NARE"
    ]
   },
@@ -919,6 +977,18 @@
    "valued": 1,
    "companies": [
     "PHAR"
+   ]
+  },
+  {
+   "fromSector": "Real Estate",
+   "fromSectorAr": "عقارات",
+   "toSector": "Non-bank financial services",
+   "toSectorAr": "خدمات مالية غير مصرفية",
+   "links": 1,
+   "value": 73347155.28,
+   "valued": 1,
+   "companies": [
+    "EGREF"
    ]
   },
   {
@@ -1132,8 +1202,8 @@
    "nameAr": "خدمات مالية غير مصرفية",
    "companies": 31,
    "cap": 269476859716.71,
-   "holds": 9,
-   "heldBy": 7
+   "holds": 11,
+   "heldBy": 8
   },
   {
    "id": "Paper & Packaging",
@@ -1146,10 +1216,10 @@
   {
    "id": "Real Estate",
    "nameAr": "عقارات",
-   "companies": 32,
-   "cap": 528128969740.03,
-   "holds": 7,
-   "heldBy": 7
+   "companies": 33,
+   "cap": 529963529740.03,
+   "holds": 8,
+   "heldBy": 9
   },
   {
    "id": "Textile & Durables",

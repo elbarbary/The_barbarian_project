@@ -240,9 +240,8 @@
   "seen": 10
  },
  "CFGH": {
-  "asked": "2026-09-16",
-  "oldest": "2025-12-01",
-  "seen": 10
+  "lastUnanswered": "2026-09-16",
+  "unanswered": 1
  },
  "CID": {
   "asked": "2026-09-15",

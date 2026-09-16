@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-16T15:12:37Z",
+ "generated": "2026-09-16T15:53:53Z",
  "basis": "A move is placed against its own two years of same-length moves — a record of what has already happened, never a statement about the next one. Each list of companies is the complete set that filed the figure, in alphabetical order, with the filing beside it. Nothing here says what any of it means for a share price.",
  "basisAr": "تُقاس كل حركة مقابل سنتين من حركات بالطول نفسه — سجل لما حدث بالفعل، وليس قولاً عما سيحدث. وكل قائمة شركات هي المجموعة الكاملة التي أودعت الرقم، بالترتيب الأبجدي، ومعها الإفصاح الذي جاء منه. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
  "windows": [
@@ -614,7 +614,7 @@
    "questionAr": "أين تصل تغيرات تكلفة الاقتراض؟",
    "filter": "every company whose filed balance sheet shows borrowings",
    "filterAr": "كل شركة تُظهر ميزانيتها المودعة قروضاً",
-   "count": 119,
+   "count": 120,
    "companies": [
     {
      "ticker": "ACGC",
@@ -1169,6 +1169,21 @@
      "period": "9M 2026 (to 31 Mar)",
      "asOf": "2026-03-31",
      "filingId": "egx-288832",
+     "source": "https://www.egx.com.eg"
+    },
+    {
+     "ticker": "EHDR",
+     "name": "Egyptians Housing Development & Reconstruction",
+     "sector": "Real Estate",
+     "borrowings": 13.397,
+     "shortTerm": 3.621,
+     "repricingWithinAYear": 27.0,
+     "financeCost": null,
+     "costExceedsBorrowings": null,
+     "cover": null,
+     "period": "Q1 2026",
+     "asOf": "2026-03-31",
+     "filingId": "egx-288810",
      "source": "https://www.egx.com.eg"
     },
     {
@@ -2930,7 +2945,7 @@
     },
     {
      "ticker": "EHDR",
-     "name": null,
+     "name": "Egyptians Housing Development & Reconstruction",
      "revenue": 132.784,
      "grossProfit": 78.413,
      "grossMargin": 59.1,
@@ -5119,8 +5134,8 @@
     },
     {
      "ticker": "EHDR",
-     "name": null,
-     "sector": null,
+     "name": "Egyptians Housing Development & Reconstruction",
+     "sector": "Real Estate",
      "fxResult": -0.0,
      "netIncome": 40.875,
      "shareOfNetIncome": -0.0,

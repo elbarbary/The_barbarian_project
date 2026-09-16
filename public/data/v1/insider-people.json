@@ -1,16 +1,16 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-16T15:17:52+00:00",
+ "generated": "2026-09-16T16:01:13+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1304,
- "tradeCount": 105,
+ "peopleCount": 1306,
+ "tradeCount": 111,
  "tickerCount": 241,
- "tradedTickerCount": 51,
+ "tradedTickerCount": 54,
  "firmCount": 432,
- "personCount": 872,
- "aliasCount": 130,
+ "personCount": 874,
+ "aliasCount": 132,
  "registerCount": 240,
  "overDisclosed": [],
  "supersededByRegister": [
@@ -521,6 +521,43 @@
    ]
   },
   {
+   "id": "سماح سليمان السيد سليمان ابو العلا",
+   "name": "سماح سليمان السيد سليمان ابو العلا",
+   "nameEn": "Samah Soliman El Sayed Soliman Abou El Ela",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "CRST"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 3337056.82,
+   "singleCompanyMove": {
+    "ticker": "CRST",
+    "from": 6.49,
+    "to": 10.83,
+    "change": 4.34
+   },
+   "trades": [
+    {
+     "filingId": "277146",
+     "date": "2025-10-02",
+     "ticker": "CRST",
+     "company": null,
+     "companyAr": "كرستمارك للمقاولات والتطوير العقاري",
+     "action": "buy",
+     "shares": 24358079,
+     "price": 0.137,
+     "value": 3337056.8230000003,
+     "stakeBefore": 6.49,
+     "stakeAfter": 10.83,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/328439_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "تولين السيد صابر السيد حميد",
    "name": "تولين السيد صابر السيد حميد",
    "nameEn": "Toleen El Sayed Saber El Sayed Hameed",
@@ -779,6 +816,43 @@
    ]
   },
   {
+   "id": "محمود شعبان سليم على",
+   "name": "محمود شعبان سليم على",
+   "nameEn": "Mahmoud Shaaban Selim Ali",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "ICMI"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 7802300.0,
+   "singleCompanyMove": {
+    "ticker": "ICMI",
+    "from": 14.999,
+    "to": 11.99,
+    "change": -3.009
+   },
+   "trades": [
+    {
+     "filingId": "277091",
+     "date": "2025-10-02",
+     "ticker": "ICMI",
+     "company": null,
+     "companyAr": null,
+     "action": "sell",
+     "shares": 1730000,
+     "price": 4.51,
+     "value": 7802300.0,
+     "stakeBefore": 14.999,
+     "stakeAfter": 11.99,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/328380_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "طارق عبد الرازق محمد عبد الغني",
    "name": "طارق عبد الرازق محمد عبد الغني",
    "nameEn": "Tarek Abdel Razek Mohamed Abdel Ghani",
@@ -865,6 +939,43 @@
      "stakeBefore": 46.12,
      "stakeAfter": 45.39,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343241_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "علاء محمد الشافعى محمد فوزى",
+   "name": "علاء محمد الشافعى محمد فوزى",
+   "nameEn": "Alaa Mohamed El Shafei Mohamed Fawzy",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "ICMI"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 6075000.0,
+   "singleCompanyMove": {
+    "ticker": "ICMI",
+    "from": 8.34,
+    "to": 5.99,
+    "change": -2.35
+   },
+   "trades": [
+    {
+     "filingId": "277090",
+     "date": "2025-10-02",
+     "ticker": "ICMI",
+     "company": null,
+     "companyAr": null,
+     "action": "sell",
+     "shares": 1350000,
+     "price": 4.5,
+     "value": 6075000.0,
+     "stakeBefore": 8.34,
+     "stakeAfter": 5.99,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/328378_1.pdf"
     }
    ]
   },
@@ -1015,6 +1126,45 @@
      "stakeBefore": 46.35,
      "stakeAfter": 44.7,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343612_1.PDF"
+    }
+   ]
+  },
+  {
+   "id": "خالد عبد الرازق محمد عبد الغنى",
+   "name": "خالد عبد الرازق محمد عبد الغنى",
+   "nameEn": "Khaled Abdel Razek Mohamed Abdel Ghani",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "خالد عبد الرازق محمد عبد الغني"
+   ],
+   "tickers": [
+    "MPCO"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 2144000.0,
+   "singleCompanyMove": {
+    "ticker": "MPCO",
+    "from": 1.7592,
+    "to": 0.2291,
+    "change": -1.5301
+   },
+   "trades": [
+    {
+     "filingId": "277246",
+     "date": "2025-10-07",
+     "ticker": "MPCO",
+     "company": null,
+     "companyAr": "المنصورة للدواجن",
+     "action": "sell",
+     "shares": 800000,
+     "price": 2.68,
+     "value": 2144000.0,
+     "stakeBefore": 1.7592,
+     "stakeAfter": 0.2291,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/328513_1.pdf"
     }
    ]
   },
@@ -1599,6 +1749,45 @@
    ]
   },
   {
+   "id": "عبدالرحمن محمد عبدالحميد غالب عبدالله الشرقاوى",
+   "name": "عبدالرحمن محمد عبدالحميد غالب عبدالله الشرقاوى",
+   "nameEn": "Abdelrahman Mohamed Abdelhamid Ghaleb Abdullah El Sharkawy",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "عبد الرحمن محمد عبد الحميد غالب عبد الله الشرقاوي"
+   ],
+   "tickers": [
+    "BIDI"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 159960.0,
+   "singleCompanyMove": {
+    "ticker": "BIDI",
+    "from": 2.7,
+    "to": 3.27,
+    "change": 0.57
+   },
+   "trades": [
+    {
+     "filingId": "277014",
+     "date": "2025-10-01",
+     "ticker": "BIDI",
+     "company": null,
+     "companyAr": "بي اي دي - البدر للاستثمار والتنمية",
+     "action": "buy",
+     "shares": 129000,
+     "price": 1.24,
+     "value": 159960.0,
+     "stakeBefore": 2.7,
+     "stakeAfter": 3.27,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/328316_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "هبه الله اسماعيل صلاح عبد المجيد العبد",
    "name": "هبه الله اسماعيل صلاح عبد المجيد العبد",
    "nameEn": "Heba Allah Ismail Salah Abdel Meguid El Abd",
@@ -1703,7 +1892,7 @@
      "date": "2026-09-01",
      "ticker": "EHDR",
      "company": null,
-     "companyAr": null,
+     "companyAr": "المصريين للاسكان والتنمية والتعمير ش م م",
      "action": "buy",
      "shares": 2000000,
      "price": 2.957,
@@ -1717,7 +1906,7 @@
      "date": "2026-09-03",
      "ticker": "EHDR",
      "company": null,
-     "companyAr": null,
+     "companyAr": "المصريين للاسكان والتنمية والتعمير ش م م",
      "action": "buy",
      "shares": 2800000,
      "price": 3.098,
@@ -2219,6 +2408,43 @@
      "stakeBefore": 10.677,
      "stakeAfter": 10.804,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343387_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "مؤسسة فهد حمد إبراهيم الحرقان للمقاولات",
+   "name": "مؤسسة فهد حمد إبراهيم الحرقان للمقاولات",
+   "nameEn": "Mu'assasat Fahd Hamad Ibrahim Al Harqan Lil Muqawalat",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "UEFM"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 2952167.4,
+   "singleCompanyMove": {
+    "ticker": "UEFM",
+    "from": 1.826,
+    "to": 1.906,
+    "change": 0.08
+   },
+   "trades": [
+    {
+     "filingId": "277276",
+     "date": "2025-10-07",
+     "ticker": "UEFM",
+     "company": null,
+     "companyAr": "مطاحن مصر العليا",
+     "action": "buy",
+     "shares": 5649,
+     "price": 522.6,
+     "value": 2952167.4,
+     "stakeBefore": 1.826,
+     "stakeAfter": 1.906,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/328555_1.pdf"
     }
    ]
   },
@@ -3562,21 +3788,6 @@
    "trades": []
   },
   {
-   "id": "علاء محمد الشافعى محمد فوزى",
-   "name": "علاء محمد الشافعى محمد فوزى",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
    "id": "جمال عبد القادر عبد البصير",
    "name": "جمال عبد القادر عبد البصير",
    "nameEn": null,
@@ -4460,21 +4671,6 @@
   {
    "id": "شهد محمد عبد الحميد غالب عبد الله الشرقاوي",
    "name": "شهد محمد عبد الحميد غالب عبد الله الشرقاوي",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "عبد الرحمن محمد عبد الحميد غالب عبد الله الشرقاوي",
-   "name": "عبد الرحمن محمد عبد الحميد غالب عبد الله الشرقاوي",
    "nameEn": null,
    "script": null,
    "kind": "person",
@@ -7405,21 +7601,6 @@
    "trades": []
   },
   {
-   "id": "مؤسسة فهد حمد إبراهيم الحرقان للمقاولات",
-   "name": "مؤسسة فهد حمد إبراهيم الحرقان للمقاولات",
-   "nameEn": null,
-   "script": null,
-   "kind": "firm",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
    "id": "محمد بن ضحيان بن عبد العزيز الضحيان",
    "name": "محمد بن ضحيان بن عبد العزيز الضحيان",
    "nameEn": null,
@@ -9207,21 +9388,6 @@
   {
    "id": "علي نصحي علي حسن",
    "name": "علي نصحي علي حسن",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "خالد عبد الرازق محمد عبد الغني",
-   "name": "خالد عبد الرازق محمد عبد الغني",
    "nameEn": null,
    "script": null,
    "kind": "person",
@@ -27122,6 +27288,24 @@
    "history": []
   },
   {
+   "holder": "محمود شعبان سليم على",
+   "kind": "person",
+   "ticker": "ICMI",
+   "percent": 11.99,
+   "asOf": "2025-10-02",
+   "basis": "trade",
+   "filingId": "277091",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/328380_1.pdf",
+   "openedAt": "2025-10-02",
+   "openingPercent": 14.999,
+   "history": [
+    {
+     "date": "2025-10-02",
+     "percent": 11.99
+    }
+   ]
+  },
+  {
    "holder": "أيمن بن مختار بن إبراهيم خليفه",
    "kind": "person",
    "ticker": "ICMI",
@@ -27640,6 +27824,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "سماح سليمان السيد سليمان ابو العلا",
+   "kind": "person",
+   "ticker": "CRST",
+   "percent": 10.83,
+   "asOf": "2025-10-02",
+   "basis": "trade",
+   "filingId": "277146",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/328439_1.pdf",
+   "openedAt": "2025-10-02",
+   "openingPercent": 6.49,
+   "history": [
+    {
+     "date": "2025-10-02",
+     "percent": 10.83
+    }
+   ]
   },
   {
    "holder": "MLM FOUNDATION",
@@ -29686,7 +29888,7 @@
    "history": []
   },
   {
-   "holder": "عبد الرحمن محمد عبد الحميد غالب عبد الله الشرقاوي",
+   "holder": "عبدالرحمن محمد عبدالحميد غالب عبدالله الشرقاوى",
    "kind": "person",
    "ticker": "BIDI",
    "percent": 7.98,
@@ -29695,9 +29897,14 @@
    "filingId": "291034",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340718_1.pdf",
    "shares": 1833300,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
+   "openedAt": "2025-10-01",
+   "openingPercent": 2.7,
+   "history": [
+    {
+     "date": "2025-10-01",
+     "percent": 3.27
+    }
+   ]
   },
   {
    "holder": "الشركه الدوليه للمحاصيل الزراعيه ش م م",
@@ -32847,9 +33054,14 @@
    "filingId": "286156",
    "source": "https://www.egx.com.eg/downloads/Bulletins/336438_1.pdf",
    "shares": 2860000,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
+   "openedAt": "2025-10-02",
+   "openingPercent": 8.34,
+   "history": [
+    {
+     "date": "2025-10-02",
+     "percent": 5.99
+    }
+   ]
   },
   {
    "holder": "نيفين عبد المنعم سيف",
@@ -35589,9 +35801,14 @@
    "filingId": "291155",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340852_1.pdf",
    "shares": 135591,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
+   "openedAt": "2025-10-07",
+   "openingPercent": 1.826,
+   "history": [
+    {
+     "date": "2025-10-07",
+     "percent": 1.906
+    }
+   ]
   },
   {
    "holder": "الدكتور / شريف مصطفي الجبلي",
@@ -37222,7 +37439,7 @@
    "history": []
   },
   {
-   "holder": "خالد عبد الرازق محمد عبد الغني",
+   "holder": "خالد عبد الرازق محمد عبد الغنى",
    "kind": "person",
    "ticker": "MPCO",
    "percent": 0.979,
@@ -37231,9 +37448,14 @@
    "filingId": "291255",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340945_1.pdf",
    "shares": 9790676,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
+   "openedAt": "2025-10-07",
+   "openingPercent": 1.7592,
+   "history": [
+    {
+     "date": "2025-10-07",
+     "percent": 0.2291
+    }
+   ]
   },
   {
    "holder": "مريم ناجي سمير توما توماس",
@@ -43965,6 +44187,90 @@
   }
  ],
  "periods": [
+  {
+   "start": "2025-09-28",
+   "end": "2025-10-02",
+   "label": "28 Sep – 2 Oct",
+   "labelAr": "28 سبتمبر – 2 أكتوبر",
+   "sessions": 2,
+   "buys": 2,
+   "sells": 2,
+   "value": 17374316.82,
+   "moves": [
+    {
+     "holder": "سماح سليمان السيد سليمان ابو العلا",
+     "kind": "person",
+     "ticker": "CRST",
+     "from": 6.49,
+     "to": 10.83,
+     "trades": 1,
+     "value": 3337056.82,
+     "change": 4.34
+    },
+    {
+     "holder": "محمود شعبان سليم على",
+     "kind": "person",
+     "ticker": "ICMI",
+     "from": 14.999,
+     "to": 11.99,
+     "trades": 1,
+     "value": 7802300.0,
+     "change": -3.009
+    },
+    {
+     "holder": "علاء محمد الشافعى محمد فوزى",
+     "kind": "person",
+     "ticker": "ICMI",
+     "from": 8.34,
+     "to": 5.99,
+     "trades": 1,
+     "value": 6075000.0,
+     "change": -2.35
+    },
+    {
+     "holder": "عبدالرحمن محمد عبدالحميد غالب عبدالله الشرقاوى",
+     "kind": "person",
+     "ticker": "BIDI",
+     "from": 2.7,
+     "to": 3.27,
+     "trades": 1,
+     "value": 159960.0,
+     "change": 0.57
+    }
+   ]
+  },
+  {
+   "start": "2025-10-05",
+   "end": "2025-10-07",
+   "label": "5–7 Oct",
+   "labelAr": "5–7 أكتوبر",
+   "sessions": 1,
+   "buys": 1,
+   "sells": 1,
+   "value": 5096167.4,
+   "moves": [
+    {
+     "holder": "خالد عبد الرازق محمد عبد الغنى",
+     "kind": "person",
+     "ticker": "MPCO",
+     "from": 1.7592,
+     "to": 0.2291,
+     "trades": 1,
+     "value": 2144000.0,
+     "change": -1.5301
+    },
+    {
+     "holder": "مؤسسة فهد حمد إبراهيم الحرقان للمقاولات",
+     "kind": "firm",
+     "ticker": "UEFM",
+     "from": 1.826,
+     "to": 1.906,
+     "trades": 1,
+     "value": 2952167.4,
+     "change": 0.08
+    }
+   ]
+  },
   {
    "start": "2026-07-26",
    "end": "2026-07-29",

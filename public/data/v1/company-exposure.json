@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-16T15:12:37Z",
+ "generated": "2026-09-16T15:53:53Z",
  "basis": "Each card joins what one company filed across three channels — what it owes and how soon that reprices, the cushion between what it sells for and what that cost, and what it holds in another currency. The sentences are written from those figures and may use no others: every number in them is one of the figures printed beside it, character for character, and a sentence using any other number is dropped before publishing. Nothing here says what any of it means for a share price.",
  "basisAr": "تجمع كل بطاقة ما أودعته الشركة في ثلاثة محاور — ما عليها من قروض ومتى يُعاد تسعيرها، والفارق بين ما تبيع به وما كلّفها، وما تحتفظ به بعملة أخرى. والجمل مكتوبة من هذه الأرقام ولا يجوز أن تستعمل غيرها: كل رقم فيها هو أحد الأرقام المطبوعة بجوارها حرفاً بحرف، وتُحذف أي جملة تستعمل رقماً آخر قبل النشر. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
  "companyCount": 183,
@@ -1430,13 +1430,16 @@
   },
   {
    "ticker": "EHDR",
-   "name": null,
+   "name": "Egyptians Housing Development & Reconstruction",
    "says": [
     "For inputs, the company reported revenue filed of 132.78M EGP, gross profit filed of 78.41M EGP, and a gross margin of 59.1% for H1 2026.",
     "For currency, it reported currency gain or loss filed of -0 EGP against profit filed for the period of 40.88M EGP, making that currency line as a share of the profit -0.0% for H1 2026.",
     "The company filed nothing for rates."
    ],
    "figures": {
+    "borrowings it owes": "13.4M EGP",
+    "of that repricing within a year": "27.0%",
+    "period the rates figures cover": "Q1 2026",
     "revenue filed": "132.78M EGP",
     "gross profit filed": "78.41M EGP",
     "gross margin": "59.1%",
