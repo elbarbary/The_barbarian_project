@@ -1591,6 +1591,10 @@
     "meaning": "Price divergence at wholesale hubs like the El-Obour market reflects daily fluctuations in catch volumes, aquaculture supply, and transport costs across different fish categories.",
     "meaning_ar": "يعكس تباين الأسعار في أسواق الجملة مثل سوق العبور التغيرات اليومية في حجم الصيد، وتدفقات المعروض من المزارع السمكية، وتكاليف النقل بين مختلف الأصناف."
   },
+  "اسعار السمك اليوم في مصر.. الاربعاء 16/9/2026": {
+    "meaning": "Daily wholesale fish price bulletins track spot commodity rates set by daily auction clearings across major transit markets, reflecting current supply volumes from domestic aquaculture, maritime landings, and cold-chain import logistics.",
+    "meaning_ar": "ترصد نشرات أسعار الأسماك اليومية تعاملات الأسعار الفورية الناتجة عن مزادات أسواق الجملة الرئيسية، والتي تتحدد بناءً على حجم المعروض اليومي من الاستزراع السمكي، ومصيد الصيد البحري، وتدفقات الاستيراد المبرد."
+  },
   "اسعار السمك اليوم في مصر.. الاربعاء 9/9/2026": {
     "meaning": "Daily fish price tracking reflects prevailing supply conditions across wholesale markets, domestic aquaculture, and marine catch relative to current retail consumer demand in the local food sector.",
     "meaning_ar": "تعكس المتابعة اليومية لأسعار الأسماك مستويات المعروض المتاحة في أسواق الجملة والإنتاج السمكي المحلي مقابل حجم الطلب الاستهلاكي الحالي في قطاع السلع الغذائية."
@@ -2278,6 +2282,10 @@
   "الحكومه تقترب من طرح «الامل الشريف للبلاستيك» بالبورصه ديسمبر المقبل": {
     "meaning": "A state-led public offering lists an industrial plastics manufacturing company on the Egyptian Exchange, transferring an equity stake into public market trading.",
     "meaning_ar": "طرح عام تقوده الدولة يُدرج شركة لتصنيع البلاستيك في البورصة المصرية، وينقل حصة من ملكيتها إلى التداول العام في سوق الأوراق المالية."
+  },
+  "الحكومه تناقش اليات اعاده تنظيم تبعيه 6 شركات قابضه": {
+    "meaning": "Reorganizing the reporting structure of six state-owned holding companies shifts their administrative jurisdiction and operational oversight among ministries under the Public Business Sector framework. This structural realignment reallocates portfolio governance and consolidates sector-specific asset management under dedicated supervisory authorities.",
+    "meaning_ar": "تتضمن إعادة تنظيم تبعية 6 شركات قابضة نقل اختصاصاتها الإدارية وإشرافها التشغيلي بين الوزارات المعنية وفق إطار قانون قطاع الأعمال العام. ويعيد هذا الإجراء توزيع حوكمة المحافظ الاستثمارية وتوحيد إدارة الأصول القطاعية تحت مظلة الجهات الإشرافية المحددة."
   },
   "الحكومه تناقش اليات اعاده هيكله الموسسات الصحفيه القوميه وتعزيز استدامتها": {
     "meaning": "The restructuring involves auditing balance sheets, managing operational debts, and optimizing state-owned physical assets and printing operations to address structural fiscal deficits.",
@@ -4336,6 +4344,10 @@
     "meaning": "The addition of four retail outlets expands the company's direct distribution network and physical point-of-sale footprint across the market.",
     "meaning_ar": "يؤدي افتتاح أربعة مراكز بيع إلى توسيع شبكة التوزيع المباشر للشركة وزيادة عدد نقاط البيع الفعلية في السوق."
   },
+  "جوله تمويليه ترفع تقييم اوبن ايه اي الي 1.2 تريليون دولار": {
+    "meaning": "A funding round at a higher valuation issues new equity to investors at an increased price per share, expanding the company's liquid cash reserves and balance sheet capital.",
+    "meaning_ar": "تتضمن الجولة التمويلية بتقييم أعلى إصدار أسهم جديدة لمستثمرين بسعر أعلى للسهم، مما يرفع حجم السيولة النقدية ورأس المال في الميزانية العمومية للشركة."
+  },
   "جون سعد: دليل ضوابط التمويل الاستهلاكي يغلق الثغرات ويرفع انضباط السوق": {
     "meaning": "The consumer finance regulatory guide establishes standardized compliance and operational requirements for non-bank financial institutions, defining uniform credit assessment rules and contract terms across the sector.",
     "meaning_ar": "يضع دليل ضوابط التمويل الاستهلاكي معايير تشغيلية وإلزامية موحدة للمؤسسات المالية غير المصرفية، محددًا قواعد التقييم الائتماني وشروط التعاقد عبر القطاع."
@@ -5016,6 +5028,10 @@
     "meaning": "A marginal decline in the euro exchange rate against the Egyptian pound reflects daily foreign exchange fluctuations within the official banking sector, adjusting the settlement cost for euro-denominated import transactions and foreign debt service obligations.",
     "meaning_ar": "يعكس التراجع الطفيف في سعر صرف اليورو أمام الجنيه المصري التحركات اليومية لأسعار الصرف في القطاع المصرفي، ويحدد تكلفة التسوية المباشرة للواردات والتزامات خدمة الدين المقومة باليورو."
   },
+  "سعر اليورو في مصر اليوم الاربعاء 16/9/2026": {
+    "meaning": "Official and commercial exchange rates determine the local currency cost of euro-denominated import settlements and debt service payments across the banking sector.",
+    "meaning_ar": "تحدد أسعار الصرف الرسمية والتجارية تكلفة التسويات الاستيرادية وخدمة الالتزامات باليورو بالعملة المحلية داخل القطاع المصرفي."
+  },
   "سعر اليورو في مصر اليوم الثلاثاء 15/9/2026": {
     "meaning": "The daily Euro-to-EGP exchange rate establishes the foreign currency clearing benchmark for bilateral trade with European markets, determining import settlement costs and corporate foreign exchange revaluations across the banking sector.",
     "meaning_ar": "يحدد سعر صرف اليورو اليومي مقابل الجنيه المصري معيار المقاصة لتدفقات التجارة البينية مع الأسواق الأوروبية، وتكاليف تسوية عقود الاستيراد وإعادة تقييم التزامات العملة الأجنبية في القطاع المصرفي."
@@ -5625,9 +5641,21 @@
     "meaning": "An increase in authorized, issued, and paid-in capital expands the company's equity base on the balance sheet by injecting new funds or capitalizing reserves, thereby raising its formal borrowing capacity and the legal ceiling for future share issuances.",
     "meaning_ar": "تؤدي زيادة رأس المال المرخص به والمُصدر والمدفوع إلى توسيع قاعدة حقوق الملكية في الميزانية العمومية عبر ضخ أموال جديدة أو رسملة الاحتياطيات، مما يرفع السقف القانوني لإصدارات الأسهم المستقبلية والحد الائتماني المتاح للشركة."
   },
+  "عموميه “ابن سينا” تقر توزيع 13 قرشا للسهم": {
+    "meaning": "Approval of the cash dividend allocates corporate retained earnings to direct cash payouts of 0.13 EGP per share, which reduces liquid treasury balances and shareholders' equity on the balance sheet.",
+    "meaning_ar": "يُمثل إقرار توزيع الأرباح النقدية تخصيصاً للأرباح المحتجزة لصرف مبالغ مباشرة بواقع 13 قرشاً لكل سهم، وهو ما يخفض أرصدة السيولة النقدية وحقوق الملكية في الميزانية العمومية للشركة."
+  },
   "عموميه “راميدا” تقر تعديل مواد بالنظام الاساسي": {
     "meaning": "Amending the articles of association updates the company's internal governance framework, which establishes the legal rules governing corporate operations, administrative authorities, and capital structure.",
     "meaning_ar": "يُعدّ تعديل النظام الأساسي تحديثاً لإطار الحوكمة الداخلي للشركة، وهو الذي يحدد القواعد القانونية المنظمة للعمليات المؤسسية، والصلاحيات الإدارية، وهيكل رأس المال."
+  },
+  "عموميه “قره” تقر زياده راس المال الي 855 مليون جنيه عبر الاكتتاب": {
+    "meaning": "The company raises its paid-in equity base to EGP 855 million by issuing new shares to shareholders through a cash subscription, expanding its equity capital on the balance sheet.",
+    "meaning_ar": "ترفع الشركة قاعدة رأس مالها المدفوع إلى 855 مليون جنيه عبر إصدار أسهم جديدة للمساهمين من خلال الاكتتاب النقدي، مما يوسع بند حقوق الملكية في المركز المالي."
+  },
+  "عموميه “كليوباترا” تقر زياده راس المال لتمويل الاثابه": {
+    "meaning": "Cleopatra Hospital's extraordinary general assembly approves a capital increase dedicated to funding its employee incentive and reward scheme through the issuance of new shares.",
+    "meaning_ar": "اعتمدت الجمعية العامة غير العادية لشركة مستشفى كليوباترا زيادة رأس المال المخصصة لتمويل نظام الإثابة والتحفيز للعاملين عبر إصدار أسهم جديدة."
   },
   "عوايد السندات الامريكيه تواصل الارتفاع رغم مضاعفه الخزانه عمليات اعاده الشراء": {
     "meaning": "US Treasury buyback operations inject liquidity and absorb older, less liquid securities, yet bond yields reflect broader macroeconomic factors and secondary market pricing driven by benchmark policy rates and primary issuance volume.",
@@ -5808,6 +5836,10 @@
   "كريتيف انفستمنتس تختتم جولتها التاسيسيه بالتزامات اجماليه اوليه 20 مليون دولار": {
     "meaning": "Closing a founding round secures formal capital commitments from initial partners, expanding the company's equity base and establishing the liquid funds available for operational deployment.",
     "meaning_ar": "يُمثل إغلاق الجولة التأسيسية تأمين التزامات رأسمالية من الشركاء الأوائل، مما يرفع قاعدة حقوق الملكية لدى الشركة ويُوفر سيولة نقدية لتنفيذ خطط العمل وتوظيف الأموال."
+  },
+  "كلفه شحن الخام الامريكي الي اسيا تقفز لمستوي قياسي": {
+    "meaning": "Elevated tanker freight rates widen the price spread required for US crude to remain competitive against Middle Eastern grades in Asian refining hubs, altering global maritime arbitrage flows.",
+    "meaning_ar": "يؤدي ارتفاع تكاليف الشحن عبر الناقلات إلى توسيع الفارق السعري المطلوب للحفاظ على تنافسية الخام الأمريكي مقابل الخامات الشرق أوسطية في مصافي آسيا، مما يغير مسارات المراجحة البحرية العالمية."
   },
   "كمال الدسوقي: القطاع الخاص حجر الزاويه في تنفيذ برنامج التحول الاقتصادي": {
     "meaning": "Economic transformation programs rely on private sector enterprises for capital expenditure, industrial production capacity, and employment allocation alongside state-led structural reforms.",
