@@ -2439,6 +2439,10 @@
     "meaning": "The regulatory approval permits the company to issue new shares dedicated to an employee stock incentive plan, expanding the equity base and allocating equity compensation to staff under established governance frameworks.",
     "meaning_ar": "تتيح الموافقة الرقابية للشركة إصدار أسهم جديدة مخصصة لنظام إثابة وتحفيز العاملين، مما يرفع قاعدة رأس المال ويخصص حصص ملكية للموظفين وفق الأطر التنظيمية المقررة."
   },
+  "الرقابه الماليه تقر زياده راسمال “بنيان” الي 1.91 مليار جنيه": {
+    "meaning": "Regulatory approval enables the company to issue new shares and expand its legal paid-in equity base to 1.91 billion Egyptian pounds on its balance sheet.",
+    "meaning_ar": "تتيح الموافقة الرقابية للشركة إصدار أسهم جديدة وزيادة قاعدة رأس المال المصدر والمدفوع في ميزانيتها العمومية إلى 1.91 مليار جنيه مصري."
+  },
   "الرقابه الماليه تقرر الربط اللحظي بين شركات التمويل الاستهلاكي وتمويل المشروعات و«اي سكور»": {
     "meaning": "The regulatory decision establishes real-time technical integration between consumer finance and micro/SME finance companies and the Egyptian Credit Bureau (I-Score), automating instant data exchange on client credit history and outstanding liabilities at the point of loan origination.",
     "meaning_ar": "يقضي القرار بالربط الفني واللحظي بين شركات التمويل الاستهلاكي وتمويل المشروعات والشركة المصرية للاستعلام الائتماني (آي سكور)، مما يتيح التبادل الفوري لبيانات السجل الائتماني والالتزامات القائمة للعملاء عند منح التمويل."
@@ -3255,6 +3259,10 @@
     "meaning": "Consecutive quarters of positive adjusted operating profit reflect core operating revenues exceeding direct operational expenses, excluding non-cash, one-time, and financing charges. This metric establishes an audited operational track record required under institutional pre-listing disclosure frameworks.",
     "meaning_ar": "يعكس تحقيق أرباح تشغيلية معدلة لربعين متتاليين تجاوز الإيرادات التشغيلية الأساسية للمصروفات النقدية المباشرة، مع استبعاد البنود غير المتكررة والتمويلية، وهو ما يشكل سجلاً مالياً متطلباً ضمن معايير الإفصاح المؤسسي السابقة للطروحات العامة."
   },
+  "انخفاض اسعار النفط مع ترقب بيانات المخزونات في امريكا": {
+    "meaning": "Oil price movements directly affect domestic fuel subsidy expenditures, industrial production input costs, and foreign currency outflows required for energy imports.",
+    "meaning_ar": "تؤثر تحركات أسعار النفط العالمية بشكل مباشر على تكاليف استيراد الطاقة، وحجم مخصصات دعم الوقود في الموازنة العامة، وتكاليف مدخلات الإنتاج للشركات الصناعية."
+  },
   "انخفاض الاسهم اليابانيه مسجله خساير اسبوعيه": {
     "meaning": "Weekly declines in Japanese equities reflect widespread net capital outflows across Tokyo-listed shares, driven by market revaluations linked to domestic currency fluctuations and interest rate adjustments.",
     "meaning_ar": "يعكس التراجع الأسبوعي للأسهم اليابانية صافي تدفقات رأسمالية خارجة عبر الشركات المدرجة في بورصة طوكيو، نتيجة لإعادة تسعير السوق المرتبطة بتحركات العملة المحلية وتغيرات أسعار الفائدة."
@@ -4035,6 +4043,10 @@
   "تصحيح البورصه يختبر شهيه المستثمرين": {
     "meaning": "A market correction is a downward price adjustment across listed assets following prior gains, reflecting the capacity of current liquidity and trading activity to absorb existing market valuations.",
     "meaning_ar": "يُعد التصحيح السعري في البورصة حركة تعديل هبوطية للأسهم المدرجة بعد فترات ارتفاع سابقة، ويعكس قدرة السيولة النقدية وأحجام التداول الحالية على استيعاب التقييمات السائدة في السوق."
+  },
+  "تصنيع سيارات جينباي محليا باستثمارات 1.2 مليون دولار": {
+    "meaning": "This transaction allocates USD 1.2 million in capital expenditure to establish domestic assembly lines for Jinbei vehicles, shifting the operational model from importing completely built-up units to local manufacturing using assembly kits.",
+    "meaning_ar": "تخصص هذه الخطوة نفقات رأسمالية بقيمة 1.2 مليون دولار لإنشاء خطوط تجميع محلية لسيارات جينباي، مما يحول نموذج التشغيل من استيراد المركبات كاملة الصنع إلى التصنيع والتجميع محلياً."
   },
   "تضاعف مبيعات السيارات الكهرباييه في روسيا هذا الصيف": {
     "meaning": "A doubling of electric vehicle sales reflects an increased penetration rate within the automotive retail sector, shifting sales volume and dealer inventory turnover toward alternative-fuel models and charging infrastructure.",
@@ -4911,6 +4923,10 @@
   "سعر الريال السعودي في مصر اليوم الاحد 6/9/2026.. تراجع 6 قروش": {
     "meaning": "A decline in the exchange rate of the Saudi Riyal against the Egyptian Pound lowers the local currency cost of transactions denominated in SAR, including religious tourism expenses, bilateral trade imports from Saudi Arabia, and corporate payments to Saudi counterparties.",
     "meaning_ar": "يؤدي تراجع سعر صرف الريال السعودي مقابل الجنيه المصري إلى خفض التكلفة بالعملة المحلية للمعاملات المقومة بالريال، بما في ذلك نفقات السياحة الدينية، والواردات التجارية من المملكة العربية السعودية، والمدفوعات المؤسسية للجهات السعودية."
+  },
+  "سعر الريال السعودي في مصر اليوم الاربعاء 16/9/2026": {
+    "meaning": "Official and parallel market exchange rates for the Saudi Riyal determine the Egyptian Pound cost of pilgrimage travel, bilateral trade settlement, and the conversion value of remittances from workers in Saudi Arabia.",
+    "meaning_ar": "تحدد أسعار صرف الريال السعودي الرسمية والموازية تكلفة الجنيه المصري لرحلات الحج والعمرة، وتسوية المعاملات التجارية البينية، وقيمة تحويلات العاملين المصريين في المملكة العربية السعودية."
   },
   "سعر الريال السعودي في مصر اليوم الاربعاء 9/9/2026": {
     "meaning": "Exchange rates for the Saudi Riyal against the Egyptian Pound reflect current foreign currency valuations in the banking sector, directly determining the conversion costs for bilateral trade, cross-border remittances, and religious travel expenditures.",
@@ -7672,6 +7688,10 @@
   "“عز العرب ستار” تقدم عرض تمويلي علي سيارات سمارت الكهرباييه": {
     "meaning": "Automotive distributor Ezz Elarab Star introduces a financing scheme for its Smart electric vehicle lineup, structuring credit facilities and installment terms directly through automotive lending channels.",
     "meaning_ar": "يقدم وكيل السيارات 'عز العرب ستار' برنامج تمويل لطرازات 'سمارت' الكهربائية، مما يتيح تسهيلات ائتمانية وشروط تقسيط للشراء عبر قنوات التمويل الاستهلاكي."
+  },
+  "“عقار اكزت” تخطط لجمع تمويلات بقيمه 5 ملايين دولار": {
+    "meaning": "The company targets five million dollars in equity or debt financing to inject capital into its working capital balance and operational development.",
+    "meaning_ar": "تستهدف الشركة جمع تمويلات بقيمة 5 ملايين دولار عبر حقوق الملكية أو أدوات الدين لضخ سيولة نقدية في رأس المال العامل وتطوير العمليات التشغيلية."
   },
   "“علاء” ل”البورصه”: 10 مليارات دولار استثمارات صينيه في مصر": {
     "meaning": "This announcement represents foreign direct investment (FDI) capital allocations from Chinese entities into Egyptian industrial and infrastructure projects, involving cross-border capital transfers to establish local operational and production assets.",
