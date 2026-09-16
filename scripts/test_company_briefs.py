@@ -348,6 +348,9 @@ class RefusalsAreRemembered(unittest.TestCase):
             import sys
             from contextlib import redirect_stdout
             from io import StringIO
+            companies.append({"ticker": "Z99", "name_en": "Held Last"})
+            filings["Z99"] = [{"code": 99, "dateStamp": "2026-09-01T10:00:00", "heading": "(Z99.CA) x", "headingArabic": ""}]
+            (root / "briefs.json").write_text(json.dumps({"Z99": {"history": "held", "record": {"stale": True}}}))
             (root / "public" / "data" / "v1" / "companies.json").write_text(json.dumps({"companies": companies}))
             with mock.patch.multiple(b, REPO=root, STORE=root / "briefs.json", REFUSED=root / "refused.json",
                                      OUT=root / "out", FIXTURES=root / "fixtures", SIGNALS=root / "signals"), \
@@ -359,6 +362,9 @@ class RefusalsAreRemembered(unittest.TestCase):
                     redirect_stdout(StringIO()):
                 b.main()
             self.assertEqual(len(calls), 6)
+            held = json.loads((root / "briefs.json").read_text())
+            self.assertNotIn("stale", held["Z99"]["record"],
+                             "a company held after the limit was reached kept yesterday's facts")
 
     def test_the_store_is_kept_by_the_daily_build(self):
         import pathlib

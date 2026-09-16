@@ -661,6 +661,7 @@ def main() -> int:
     )
     spent = 0.0
     done = refused = skipped = unchanged = 0
+    stopped = False
     memo = load_refused()
     today = datetime.date.today().isoformat()
     # Every history accepted this run, as word-run sets, so the next one can be
@@ -686,13 +687,18 @@ def main() -> int:
                 and (memo.get(ticker) or {}).get("inputs") == fingerprint):
             unchanged += 1
             continue
-        if spent >= args.budget:
-            print(f"   budget reached (${spent:.2f}) — stopping")
-            break
-        # Attempts, not successes: counting only briefs written let a run of
-        # refusals ask about every remaining company, every run.
-        if args.limit and done + refused >= args.limit:
-            break
+        # Out of budget or attempts: stop ASKING, but keep walking the list,
+        # because every company already held has its record refreshed above.
+        # Breaking here left the alphabetical tail on stale facts: the first
+        # run with an attempt limit (16 Sep 2026) reported 109 held of 257.
+        # Attempts, not successes, count: counting only briefs written let a
+        # run of refusals ask about every remaining company, every run.
+        if spent >= args.budget or (args.limit and done + refused >= args.limit):
+            if not stopped:
+                why = f"budget reached (${spent:.2f})" if spent >= args.budget else f"{args.limit} asked"
+                print(f"   {why} — asking no more this run")
+                stopped = True
+            continue
 
         # Ids the model may cite at all, and the narrower set a *plan* may
         # cite: an intention announced four years ago is not a plan, and the
