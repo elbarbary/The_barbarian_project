@@ -1,26 +1,26 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-16T17:40:53+00:00",
+ "generated": "2026-09-16T18:10:11+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1309,
- "tradeCount": 123,
+ "peopleCount": 1310,
+ "tradeCount": 129,
  "tickerCount": 241,
- "tradedTickerCount": 63,
- "firmCount": 434,
+ "tradedTickerCount": 65,
+ "firmCount": 435,
  "personCount": 875,
- "aliasCount": 137,
+ "aliasCount": 138,
  "registerCount": 240,
  "overDisclosed": [],
  "supersededByRegister": [
   {
    "holder": "ابراهيم محمد ابراهيم احمد هيبه",
    "ticker": "HBCO",
-   "percent": 45.39,
-   "asOf": "2026-08-20",
-   "filingId": "293689",
-   "why": "the filed register for HBCO does not list this name, and counting both made the company 133.93% owned"
+   "percent": 44.88,
+   "asOf": "2026-09-13",
+   "filingId": "294576",
+   "why": "the filed register for HBCO does not list this name, and counting both made the company 133.42% owned"
   },
   {
    "holder": "محمد اشرف عمر عمر",
@@ -28,7 +28,7 @@
    "percent": 10.728,
    "asOf": "2026-08-03",
    "filingId": "292382",
-   "why": "the filed register for HBCO does not list this name, and counting both made the company 133.93% owned"
+   "why": "the filed register for HBCO does not list this name, and counting both made the company 133.42% owned"
   },
   {
    "holder": "بايونيرز بروبرتيز للتنمية العمرانية",
@@ -128,15 +128,15 @@
    "tickers": [
     "UNIP"
    ],
-   "tradeCount": 5,
+   "tradeCount": 6,
    "boughtCount": 0,
-   "soldCount": 5,
-   "value": 136663235.33,
+   "soldCount": 6,
+   "value": 146727573.84,
    "singleCompanyMove": {
     "ticker": "UNIP",
     "from": 33.38,
-    "to": 17.79,
-    "change": -15.59
+    "to": 13.87,
+    "change": -19.51
    },
    "trades": [
     {
@@ -208,6 +208,71 @@
      "stakeBefore": 18.45,
      "stakeAfter": 17.79,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343441_1.pdf"
+    },
+    {
+     "filingId": "294588",
+     "date": "2026-09-13",
+     "ticker": "UNIP",
+     "company": null,
+     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
+     "action": "sell",
+     "shares": 26141139,
+     "price": 0.385,
+     "value": 10064338.515,
+     "stakeBefore": 15.01,
+     "stakeAfter": 13.87,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344094_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "المجموعه الاستثماريه العقاريه الكويتيه ش م ك مقفله",
+   "name": "المجموعه الاستثماريه العقاريه الكويتيه ش م ك مقفله",
+   "nameEn": "Al-Majmu'ah Al-Istithmariyah Al-Aqariyah Al-Kuwaytiyah Sh.M.K. Muqfalah",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "CERA"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 0,
+   "soldCount": 2,
+   "value": 105190800.0,
+   "singleCompanyMove": {
+    "ticker": "CERA",
+    "from": 24.25,
+    "to": 14.96,
+    "change": -9.29
+   },
+   "trades": [
+    {
+     "filingId": "294616",
+     "date": "2026-09-13",
+     "ticker": "CERA",
+     "company": null,
+     "companyAr": "العربية للخزف سيراميكا -ريماس",
+     "action": "sell",
+     "shares": 4500000,
+     "price": 1.7127,
+     "value": 7707149.999999999,
+     "stakeBefore": 24.25,
+     "stakeAfter": 23.83,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344097_1.pdf"
+    },
+    {
+     "filingId": "294764",
+     "date": "2026-09-15",
+     "ticker": "CERA",
+     "company": null,
+     "companyAr": "العربية للخزف سيراميكا -ريماس",
+     "action": "sell",
+     "shares": 65500000,
+     "price": 1.4883,
+     "value": 97483650.0,
+     "stakeBefore": 21.04,
+     "stakeAfter": 14.96,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344231_1.pdf"
     }
    ]
   },
@@ -389,43 +454,6 @@
      "stakeBefore": 26.14,
      "stakeAfter": 20.0,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343157_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "المجموعه الاستثماريه العقاريه الكويتيه ش م ك مقفله",
-   "name": "المجموعه الاستثماريه العقاريه الكويتيه ش م ك مقفله",
-   "nameEn": "Al-Majmu'ah Al-Istithmariyah Al-Aqariyah Al-Kuwaytiyah Sh.M.K. Muqfalah",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": null,
-   "tickers": [
-    "CERA"
-   ],
-   "tradeCount": 1,
-   "boughtCount": 0,
-   "soldCount": 1,
-   "value": 97483650.0,
-   "singleCompanyMove": {
-    "ticker": "CERA",
-    "from": 21.04,
-    "to": 14.96,
-    "change": -6.08
-   },
-   "trades": [
-    {
-     "filingId": "294764",
-     "date": "2026-09-15",
-     "ticker": "CERA",
-     "company": null,
-     "companyAr": "العربية للخزف سيراميكا -ريماس",
-     "action": "sell",
-     "shares": 65500000,
-     "price": 1.4883,
-     "value": 97483650.0,
-     "stakeBefore": 21.04,
-     "stakeAfter": 14.96,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/344231_1.pdf"
     }
    ]
   },
@@ -940,6 +968,73 @@
    ]
   },
   {
+   "id": "ابراهيم محمد ابراهيم احمد هيبه",
+   "name": "ابراهيم محمد ابراهيم احمد هيبه",
+   "nameEn": "Ibrahim Mohamed Ibrahim Ahmed Heiba",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "ابراهيم محمد ابراهيم هيبه"
+   ],
+   "tickers": [
+    "HBCO"
+   ],
+   "tradeCount": 3,
+   "boughtCount": 0,
+   "soldCount": 3,
+   "value": 17841201.43,
+   "singleCompanyMove": {
+    "ticker": "HBCO",
+    "from": 48.025,
+    "to": 44.88,
+    "change": -3.145
+   },
+   "trades": [
+    {
+     "filingId": "292712",
+     "date": "2026-08-10",
+     "ticker": "HBCO",
+     "company": null,
+     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
+     "action": "sell",
+     "shares": 550000,
+     "price": 11.91,
+     "value": 6550500.0,
+     "stakeBefore": 48.025,
+     "stakeAfter": 47.261,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342356_1.pdf"
+    },
+    {
+     "filingId": "293689",
+     "date": "2026-08-20",
+     "ticker": "HBCO",
+     "company": null,
+     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
+     "action": "sell",
+     "shares": 527667,
+     "price": 13.67,
+     "value": 7213207.89,
+     "stakeBefore": 46.12,
+     "stakeAfter": 45.39,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343241_1.pdf"
+    },
+    {
+     "filingId": "294576",
+     "date": "2026-09-13",
+     "ticker": "HBCO",
+     "company": null,
+     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
+     "action": "sell",
+     "shares": 289266,
+     "price": 14.096,
+     "value": 4077493.536,
+     "stakeBefore": 45.28,
+     "stakeAfter": 44.88,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344068_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "احمد علي محمد السمان",
    "name": "احمد علي محمد السمان",
    "nameEn": "Ahmed Ali Mohamed El Samman",
@@ -1047,59 +1142,6 @@
      "stakeBefore": 3.563,
      "stakeAfter": 0.763,
      "source": "https://www.egx.com.eg/downloads/Bulletins/341940_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "ابراهيم محمد ابراهيم احمد هيبه",
-   "name": "ابراهيم محمد ابراهيم احمد هيبه",
-   "nameEn": "Ibrahim Mohamed Ibrahim Ahmed Heiba",
-   "script": "ar",
-   "kind": "person",
-   "aliases": [
-    "ابراهيم محمد ابراهيم هيبه"
-   ],
-   "tickers": [
-    "HBCO"
-   ],
-   "tradeCount": 2,
-   "boughtCount": 0,
-   "soldCount": 2,
-   "value": 13763707.89,
-   "singleCompanyMove": {
-    "ticker": "HBCO",
-    "from": 48.025,
-    "to": 45.39,
-    "change": -2.635
-   },
-   "trades": [
-    {
-     "filingId": "292712",
-     "date": "2026-08-10",
-     "ticker": "HBCO",
-     "company": null,
-     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
-     "action": "sell",
-     "shares": 550000,
-     "price": 11.91,
-     "value": 6550500.0,
-     "stakeBefore": 48.025,
-     "stakeAfter": 47.261,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342356_1.pdf"
-    },
-    {
-     "filingId": "293689",
-     "date": "2026-08-20",
-     "ticker": "HBCO",
-     "company": null,
-     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
-     "action": "sell",
-     "shares": 527667,
-     "price": 13.67,
-     "value": 7213207.89,
-     "stakeBefore": 46.12,
-     "stakeAfter": 45.39,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343241_1.pdf"
     }
    ]
   },
@@ -1248,6 +1290,43 @@
      "stakeBefore": 3.75,
      "stakeAfter": 5.93,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343797_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "عمرو عادل احمد صقر",
+   "name": "عمرو عادل احمد صقر",
+   "nameEn": "Amr Adel Ahmed Sakr",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "GRCA"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 11031969.92,
+   "singleCompanyMove": {
+    "ticker": "GRCA",
+    "from": 5.01,
+    "to": 2.88,
+    "change": -2.13
+   },
+   "trades": [
+    {
+     "filingId": "294656",
+     "date": "2026-09-14",
+     "ticker": "GRCA",
+     "company": null,
+     "companyAr": "جراند انفستمنت القابضة للاستثمارات المالية ش م م",
+     "action": "sell",
+     "shares": 222244,
+     "price": 49.639,
+     "value": 11031969.916000001,
+     "stakeBefore": 5.01,
+     "stakeAfter": 2.88,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344158_1.pdf"
     }
    ]
   },
@@ -1570,6 +1649,43 @@
      "stakeBefore": 60.01,
      "stakeAfter": 58.9,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343773_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "مؤسسه غنيمه يوسف عبد النصار للاستيراد والتصدير ووكيل بالعموله",
+   "name": "مؤسسه غنيمه يوسف عبد النصار للاستيراد والتصدير ووكيل بالعموله",
+   "nameEn": "Moassasa Ghonema Youssef Abd El Nassar Lel Esteerad Wal Tasdeer Wa Wakeel Bel Omola",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "GIHD"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 4647241.28,
+   "singleCompanyMove": {
+    "ticker": "GIHD",
+    "from": 5.3,
+    "to": 4.2,
+    "change": -1.1
+   },
+   "trades": [
+    {
+     "filingId": "294558",
+     "date": "2026-09-10",
+     "ticker": "GIHD",
+     "company": null,
+     "companyAr": "الغربية الاسلامية للتنمية العمرانية",
+     "action": "sell",
+     "shares": 61856,
+     "price": 75.13,
+     "value": 4647241.279999999,
+     "stakeBefore": 5.3,
+     "stakeAfter": 4.2,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344047_1.pdf"
     }
    ]
   },
@@ -2876,6 +2992,46 @@
      "stakeBefore": 9.97,
      "stakeAfter": 10.005,
      "source": "https://www.egx.com.eg/downloads/Bulletins/344224_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "احمد بن حسن بن احمد فتيحي",
+   "name": "احمد بن حسن بن احمد فتيحي",
+   "nameEn": "Ahmed bin Hassan bin Ahmed Fitaihi",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "أحمد بن حسن بن أحمد فتيحي",
+    "احمد بن حسن بن احمد فتيحى"
+   ],
+   "tickers": [
+    "NINH"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 1745031.5,
+   "singleCompanyMove": {
+    "ticker": "NINH",
+    "from": 25.0,
+    "to": 24.975,
+    "change": -0.025
+   },
+   "trades": [
+    {
+     "filingId": "294577",
+     "date": "2026-09-13",
+     "ticker": "NINH",
+     "company": null,
+     "companyAr": "مستشفى النزهه الدولي ش م م",
+     "action": "sell",
+     "shares": 75500,
+     "price": 23.113,
+     "value": 1745031.5,
+     "stakeBefore": 25.0,
+     "stakeAfter": 24.975,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344069_1.pdf"
     }
    ]
   },
@@ -11252,21 +11408,6 @@
    "trades": []
   },
   {
-   "id": "عمرو عادل احمد صقر",
-   "name": "عمرو عادل احمد صقر",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
    "id": "عصام احمد حسنين عطيه",
    "name": "عصام احمد حسنين عطيه",
    "nameEn": null,
@@ -15181,23 +15322,6 @@
    "kind": "person",
    "aliases": [
     "أحمد علي علي الجمل"
-   ],
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "احمد بن حسن بن احمد فتيحى",
-   "name": "احمد بن حسن بن احمد فتيحى",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": [
-    "أحمد بن حسن بن أحمد فتيحي"
    ],
    "tickers": [],
    "tradeCount": 0,
@@ -24810,20 +24934,6 @@
    "history": []
   },
   {
-   "holder": "احمد بن حسن بن احمد فتيحى",
-   "kind": "person",
-   "ticker": "NINH",
-   "percent": 25.186,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291313",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/341024_1.pdf",
-   "shares": 75557365,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
-  },
-  {
    "holder": "THEBES B V",
    "kind": "person",
    "ticker": "TALM",
@@ -24883,6 +24993,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "احمد بن حسن بن احمد فتيحي",
+   "kind": "person",
+   "ticker": "NINH",
+   "percent": 24.975,
+   "asOf": "2026-09-13",
+   "basis": "trade",
+   "filingId": "294577",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/344069_1.pdf",
+   "openedAt": "2026-09-13",
+   "openingPercent": 25.0,
+   "history": [
+    {
+     "date": "2026-09-13",
+     "percent": 24.975
+    }
+   ]
   },
   {
    "holder": "بالما للاستثمار",
@@ -26035,40 +26163,6 @@
    "history": []
   },
   {
-   "holder": "جدوى للتنمية الصناعية",
-   "kind": "firm",
-   "ticker": "UNIP",
-   "percent": 17.79,
-   "asOf": "2026-08-25",
-   "basis": "trade",
-   "filingId": "293882",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/343441_1.pdf",
-   "openedAt": "2026-08-19",
-   "openingPercent": 33.38,
-   "history": [
-    {
-     "date": "2026-08-19",
-     "percent": 29.91
-    },
-    {
-     "date": "2026-08-20",
-     "percent": 24.11
-    },
-    {
-     "date": "2026-08-23",
-     "percent": 21.12
-    },
-    {
-     "date": "2026-08-24",
-     "percent": 18.45
-    },
-    {
-     "date": "2026-08-25",
-     "percent": 17.79
-    }
-   ]
-  },
-  {
    "holder": "فايننشال هولدنجز إنترناشيونال ال تي دي",
    "kind": "person",
    "ticker": "TAQA",
@@ -26757,9 +26851,13 @@
    "basis": "trade",
    "filingId": "294764",
    "source": "https://www.egx.com.eg/downloads/Bulletins/344231_1.pdf",
-   "openedAt": "2026-09-15",
-   "openingPercent": 21.04,
+   "openedAt": "2026-09-13",
+   "openingPercent": 24.25,
    "history": [
+    {
+     "date": "2026-09-13",
+     "percent": 23.83
+    },
     {
      "date": "2026-09-15",
      "percent": 14.96
@@ -27049,6 +27147,44 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "جدوى للتنمية الصناعية",
+   "kind": "firm",
+   "ticker": "UNIP",
+   "percent": 13.87,
+   "asOf": "2026-09-13",
+   "basis": "trade",
+   "filingId": "294588",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/344094_1.pdf",
+   "openedAt": "2026-08-19",
+   "openingPercent": 33.38,
+   "history": [
+    {
+     "date": "2026-08-19",
+     "percent": 29.91
+    },
+    {
+     "date": "2026-08-20",
+     "percent": 24.11
+    },
+    {
+     "date": "2026-08-23",
+     "percent": 21.12
+    },
+    {
+     "date": "2026-08-24",
+     "percent": 18.45
+    },
+    {
+     "date": "2026-08-25",
+     "percent": 17.79
+    },
+    {
+     "date": "2026-09-13",
+     "percent": 13.87
+    }
+   ]
   },
   {
    "holder": "سهل مرسي محمد الدمراوي",
@@ -33239,20 +33375,6 @@
    "history": []
   },
   {
-   "holder": "عمرو عادل احمد صقر",
-   "kind": "person",
-   "ticker": "GRCA",
-   "percent": 5.013,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291310",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/341020_1.pdf",
-   "shares": 391000,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
-  },
-  {
    "holder": "اتحاد العاملين المساهمين (ZEOT)",
    "kind": "firm",
    "ticker": "ZEOT",
@@ -34104,6 +34226,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "مؤسسه غنيمه يوسف عبد النصار للاستيراد والتصدير ووكيل بالعموله",
+   "kind": "firm",
+   "ticker": "GIHD",
+   "percent": 4.2,
+   "asOf": "2026-09-10",
+   "basis": "trade",
+   "filingId": "294558",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/344047_1.pdf",
+   "openedAt": "2026-09-10",
+   "openingPercent": 5.3,
+   "history": [
+    {
+     "date": "2026-09-10",
+     "percent": 4.2
+    }
+   ]
   },
   {
    "holder": "نواف بن عبد الله بن ابراهيم بن دابل",
@@ -35250,6 +35390,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "عمرو عادل احمد صقر",
+   "kind": "person",
+   "ticker": "GRCA",
+   "percent": 2.88,
+   "asOf": "2026-09-14",
+   "basis": "trade",
+   "filingId": "294656",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/344158_1.pdf",
+   "openedAt": "2026-09-14",
+   "openingPercent": 5.01,
+   "history": [
+    {
+     "date": "2026-09-14",
+     "percent": 2.88
+    }
+   ]
   },
   {
    "holder": "المجموعة المرتبطة (شامل فهيم لطفي أبو الفضل)",
@@ -39688,7 +39846,7 @@
    "history": []
   },
   {
-   "holder": "احمد بن حسن بن احمد فتيحى",
+   "holder": "احمد بن حسن بن احمد فتيحي",
    "kind": "person",
    "ticker": "ORWE",
    "percent": 0.323,
@@ -45679,14 +45837,24 @@
   },
   {
    "start": "2026-09-06",
-   "end": "2026-09-07",
-   "label": "6–7 Sep",
-   "labelAr": "6–7 سبتمبر",
-   "sessions": 2,
+   "end": "2026-09-10",
+   "label": "6–10 Sep",
+   "labelAr": "6–10 سبتمبر",
+   "sessions": 3,
    "buys": 0,
-   "sells": 2,
-   "value": 9615850.0,
+   "sells": 3,
+   "value": 14263091.28,
    "moves": [
+    {
+     "holder": "مؤسسه غنيمه يوسف عبد النصار للاستيراد والتصدير ووكيل بالعموله",
+     "kind": "firm",
+     "ticker": "GIHD",
+     "from": 5.3,
+     "to": 4.2,
+     "trades": 1,
+     "value": 4647241.28,
+     "change": -1.1
+    },
     {
      "holder": "الشركة الوطنية للتجارة والتنمية (انتاد)",
      "kind": "firm",
@@ -45714,20 +45882,20 @@
    "end": "2026-09-16",
    "label": "13–16 Sep",
    "labelAr": "13–16 سبتمبر",
-   "sessions": 2,
+   "sessions": 4,
    "buys": 4,
-   "sells": 2,
-   "value": 195724358.8,
+   "sells": 7,
+   "value": 230350342.27,
    "moves": [
     {
      "holder": "المجموعه الاستثماريه العقاريه الكويتيه ش م ك مقفله",
      "kind": "firm",
      "ticker": "CERA",
-     "from": 21.04,
+     "from": 24.25,
      "to": 14.96,
-     "trades": 1,
-     "value": 97483650.0,
-     "change": -6.08
+     "trades": 2,
+     "value": 105190800.0,
+     "change": -9.29
     },
     {
      "holder": "يوسف محمد مدحت يوسف الفار",
@@ -45740,6 +45908,26 @@
      "change": -3.91
     },
     {
+     "holder": "عمرو عادل احمد صقر",
+     "kind": "person",
+     "ticker": "GRCA",
+     "from": 5.01,
+     "to": 2.88,
+     "trades": 1,
+     "value": 11031969.92,
+     "change": -2.13
+    },
+    {
+     "holder": "جدوى للتنمية الصناعية",
+     "kind": "firm",
+     "ticker": "UNIP",
+     "from": 15.01,
+     "to": 13.87,
+     "trades": 1,
+     "value": 10064338.52,
+     "change": -1.14
+    },
+    {
      "holder": "شركه اموال العربيه للاقطان ش م م",
      "kind": "firm",
      "ticker": "TWSA",
@@ -45748,6 +45936,16 @@
      "trades": 1,
      "value": 9443500.0,
      "change": 1.08
+    },
+    {
+     "holder": "ابراهيم محمد ابراهيم احمد هيبه",
+     "kind": "person",
+     "ticker": "HBCO",
+     "from": 45.28,
+     "to": 44.88,
+     "trades": 1,
+     "value": 4077493.54,
+     "change": -0.4
     },
     {
      "holder": "شركة الأهلي للاستثمارات",
@@ -45778,6 +45976,16 @@
      "trades": 1,
      "value": 720.0,
      "change": 0.035
+    },
+    {
+     "holder": "احمد بن حسن بن احمد فتيحي",
+     "kind": "person",
+     "ticker": "NINH",
+     "from": 25.0,
+     "to": 24.975,
+     "trades": 1,
+     "value": 1745031.5,
+     "change": -0.025
     }
    ]
   }

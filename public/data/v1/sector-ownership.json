@@ -1,12 +1,12 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-16T17:40:53Z",
+ "generated": "2026-09-16T18:10:11Z",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
- "asOf": "2026-09-16T17:40:53+00:00",
+ "asOf": "2026-09-16T18:10:11+00:00",
  "basis": "A link is one listed company's filed stake in another, at the level the last form printed. Percentages belong to one company each and are never added together; sector totals are the market value of the stakes, which is money and can be.",
  "basisAr": "كل خط حصة مُفصح عنها لشركة مقيدة في شركة مقيدة أخرى، بالنسبة التي أثبتها آخر نموذج. النسب تخص شركة واحدة ولا تُجمع؛ إجماليات القطاعات بالقيمة السوقية للحصص، وهي مبالغ تُجمع.",
  "linkCount": 41,
- "outsideHolderCount": 534,
+ "outsideHolderCount": 535,
  "links": [
   {
    "owner": "CANA",
@@ -229,12 +229,12 @@
    "heldSector": "Paper & Packaging",
    "heldSectorAr": "ورق ومواد تعبئة و تغليف",
    "holder": "جدوى للتنمية الصناعية",
-   "percent": 17.79,
-   "value": 153275512.49,
-   "asOf": "2026-08-25",
+   "percent": 13.87,
+   "value": 119501481.63,
+   "asOf": "2026-09-13",
    "basis": "trade",
-   "filingId": "293882",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/343441_1.pdf"
+   "filingId": "294588",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/344094_1.pdf"
   },
   {
    "owner": "ACTF",
@@ -927,7 +927,7 @@
    "toSector": "Paper & Packaging",
    "toSectorAr": "ورق ومواد تعبئة و تغليف",
    "links": 1,
-   "value": 153275512.49,
+   "value": 119501481.63,
    "valued": 1,
    "companies": [
     "UNIP"
