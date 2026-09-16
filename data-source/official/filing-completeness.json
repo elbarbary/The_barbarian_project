@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-15T10:15:59.427386+00:00",
+  "builtAt": "2026-09-16T05:33:27.666622+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 192369,
-    "withoutTickerInHeading": 36205,
+    "items": 192437,
+    "withoutTickerInHeading": 36265,
     "tickerNotInThisDirectory": 29404,
-    "attributedToAnIssuer": 126760,
+    "attributedToAnIssuer": 126768,
     "months": [
       {
         "month": "2005-01",
@@ -1831,8 +1831,8 @@
       {
         "month": "2026-09",
         "harvested": "2026-09-15",
-        "items": 480,
-        "expected": 480,
+        "items": 548,
+        "expected": 548,
         "status": "complete"
       }
     ],
@@ -1840,7 +1840,7 @@
   },
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
-    "items": 616,
+    "items": 617,
     "failures": {}
   },
   "issuers": [
@@ -2458,9 +2458,9 @@
     },
     {
       "ticker": "CERA",
-      "egxFilingCount": 416,
-      "latestEgxFilingId": "294616",
-      "latestEgxFilingAt": "2026-09-13T15:53:42",
+      "egxFilingCount": 417,
+      "latestEgxFilingId": "294764",
+      "latestEgxFilingAt": "2026-09-15T17:02:42",
       "candidateIssuerWebsite": "https://www.ceramicaremas.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CERA/profile",
       "websiteStatus": null,
@@ -3262,9 +3262,9 @@
     },
     {
       "ticker": "GSSC",
-      "egxFilingCount": 782,
-      "latestEgxFilingId": "294133",
-      "latestEgxFilingAt": "2026-08-31T12:23:45",
+      "egxFilingCount": 783,
+      "latestEgxFilingId": "294749",
+      "latestEgxFilingAt": "2026-09-15T16:21:14",
       "candidateIssuerWebsite": "https://www.gcss-egypt.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GSSC/profile",
       "websiteStatus": null,
@@ -3312,9 +3312,9 @@
     },
     {
       "ticker": "HDBK",
-      "egxFilingCount": 609,
-      "latestEgxFilingId": "292795",
-      "latestEgxFilingAt": "2026-08-12T09:01:17",
+      "egxFilingCount": 610,
+      "latestEgxFilingId": "294709",
+      "latestEgxFilingAt": "2026-09-15T14:42:15",
       "candidateIssuerWebsite": "https://www.hdb-egy.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/HDBK/profile",
       "websiteStatus": null,
@@ -3894,13 +3894,25 @@
     },
     {
       "ticker": "NARE",
-      "egxFilingCount": 50,
-      "latestEgxFilingId": "293094",
-      "latestEgxFilingAt": "2026-08-13T15:09:09",
+      "egxFilingCount": 51,
+      "latestEgxFilingId": "294701",
+      "latestEgxFilingAt": "2026-09-15T13:23:02",
       "candidateIssuerWebsite": "https://naeemrealestate.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/NARE/profile",
       "websiteStatus": null,
       "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "NBCC",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "293976",
+      "latestEgxFilingAt": "2026-08-26T16:32:15",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
     },
     {
       "ticker": "NBKE",
@@ -4150,9 +4162,9 @@
     },
     {
       "ticker": "PHGC",
-      "egxFilingCount": 153,
-      "latestEgxFilingId": "294593",
-      "latestEgxFilingAt": "2026-09-13T12:46:19",
+      "egxFilingCount": 154,
+      "latestEgxFilingId": "294747",
+      "latestEgxFilingAt": "2026-09-15T16:12:23",
       "candidateIssuerWebsite": "https://www.phg.global/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/PHGC/profile",
       "websiteStatus": null,
@@ -4362,9 +4374,9 @@
     },
     {
       "ticker": "SCEM",
-      "egxFilingCount": 527,
-      "latestEgxFilingId": "294683",
-      "latestEgxFilingAt": "2026-09-15T12:05:01",
+      "egxFilingCount": 528,
+      "latestEgxFilingId": "294746",
+      "latestEgxFilingAt": "2026-09-15T16:08:34",
       "candidateIssuerWebsite": "https://www.sinaicement.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SCEM/profile",
       "websiteStatus": null,
@@ -4676,9 +4688,9 @@
     },
     {
       "ticker": "UEFM",
-      "egxFilingCount": 764,
-      "latestEgxFilingId": "294524",
-      "latestEgxFilingAt": "2026-09-09T15:31:52",
+      "egxFilingCount": 765,
+      "latestEgxFilingId": "294751",
+      "latestEgxFilingAt": "2026-09-15T16:29:39",
       "candidateIssuerWebsite": null,
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/UEFM/profile",
       "websiteStatus": {
@@ -4840,8 +4852,8 @@
     }
   ],
   "coverage": {
-    "issuers": 283,
-    "withEgxFilings": 277,
+    "issuers": 284,
+    "withEgxFilings": 278,
     "withCandidateWebsite": 256,
     "websitesProbed": 20,
     "verifiedIrArchives": 0
