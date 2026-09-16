@@ -342,21 +342,30 @@ STEPS = [
     # harvest off disk — no network — and is best-effort so a checkout without
     # `data-source/egx-beta/` simply leaves the published documents alone.
     ("Company filings", "build_company_filings.py", False),
+    # The queue the steps below draw from, rebuilt out of the committed
+    # filing archive. Only the document half runs here: growing the ledger's
+    # TRANSACTION table needs --download-pdfs, which drives a headed Chrome
+    # through the exchange's F5 challenge and can only happen on the machine
+    # that has one. Sorting filings into session bulletins, post-execution
+    # forms, structure forms and treasury notices needs nothing but the
+    # archive, and without it the steps below find no new work however many
+    # documents the exchange files.
+    ("Ownership ledger", "ownership_ledger.py", False, _recent_months(12)),
+    # The session bulletins in that ledger which nothing here has opened yet,
+    # newest first. After the ledger, which lists them and is not committed, so
+    # on a runner it does not exist until the step above writes it. Before the
+    # tracker, which reads what this fetched. Until 16 Sep 2026 only a laptop
+    # fetched these, and the tracker's trades stopped at the 9th, the last
+    # session it had been handed.
+    ("Session bulletins", "fetch_insider_bulletins.py", False, ["--limit", "6"]),
     # Official EGX insider, board, major shareholder, and treasury share tracker.
     # Combines daily session bulletins with post-execution disclosures and
     # treasury programs. Runs before the manifest so its version is hashed.
     ("Insider tracker", "build_insider_tracker.py", True),
-    # The queue the two readers below draw from, rebuilt out of the committed
-    # filing archive. Only the document half runs here: growing the ledger's
-    # TRANSACTION table needs --download-pdfs, which drives a headed Chrome
-    # through the exchange's F5 challenge and can only happen on the machine
-    # that has one. Sorting filings into post-execution forms, structure forms
-    # and treasury notices needs nothing but the archive, and without it the
-    # readers below find no new work however many forms the exchange files.
-    ("Ownership ledger", "ownership_ledger.py", False, _recent_months(12)),
-    # A few scanned post-execution forms per run, not the whole backlog. Each
-    # one is a model call and the store remembers what it has already read, so
-    # a daily trickle clears new filings without ever re-reading an old one.
+    # A few scanned post-execution forms per run, not the whole backlog, and
+    # the newest first. Each one is a model call and the store remembers what
+    # it has already read, so a daily trickle clears new filings without ever
+    # re-reading an old one, and works back through the backlog after them.
     #
     # Through Vertex, because this runs on a runner. Both readers used to name
     # `agy`, a binary on one laptop, and to fetch with that laptop's Scrapling
@@ -484,6 +493,9 @@ BEST_EFFORT = {
     # transform over that store, and if it fails something is wrong here.
     "Named insiders",
     "Shareholder structure",
+    # The same host serving the session bulletins. `Insider tracker`, which
+    # reads what this fetched, is not best-effort, for the reason above.
+    "Session bulletins",
     "Calendar",
     "Company filings",
     "Disclosures",

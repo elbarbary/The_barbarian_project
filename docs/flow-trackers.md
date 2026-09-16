@@ -16,6 +16,22 @@ read model before the manifest. Published files and bundled copies match.
   fetched only when a reader opens a tracker. It uses the existing authenticated
   data route. Failed loads expose Retry; late responses cannot cross sign-out.
 
+What feeds the ownership side, and what moves it on CI:
+
+- **Insider trades with a direction and a share count** come from the
+  exchange's session bulletins, one PDF a session. The daily build
+  (`publish-app-data.yml`) fetches up to six unread bulletins a run, newest
+  first (`fetch_insider_bulletins.py`, the "Session bulletins" step).
+  `build_insider_tracker.py` then reads them into
+  `scripts/insider_bulletin_rows.json`, which is committed and remembers which
+  bulletins it has read. The live-data build only rebuilds from that store.
+- **Named holders and their stakes** (the ownership board,
+  `insider-people.json`) come from post-execution forms, read six a daily build
+  and newest first by `build_named_insiders.py`, and from board and
+  shareholder-structure forms, read by `build_ownership_structure.py`.
+- A fetch that gets nothing back is a best-effort skip; six in a row turn the
+  build red (`scripts/best_effort_skips.json`).
+
 ## Sector interpretation
 
 - Size is the sum of available published market capitalizations; coverage is

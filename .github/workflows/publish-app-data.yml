@@ -216,6 +216,20 @@ jobs:
             echo "::warning title=No browser::Chromium did not open (scripts/browser_opens.py), so every step that needs it skips this run. The reason is in the Install Scrapling log."
           fi
 
+      # `pdftotext`, which reads the exchange's session bulletins: every
+      # insider trade on the Ownership lens with a direction and a share count
+      # comes out of one. No workflow installed it, because until 16 Sep 2026
+      # no workflow fetched a bulletin — a laptop did. Not best-effort: with
+      # bulletins on disk and nothing to read them, `build_insider_tracker.py`
+      # stops the build rather than publish as if none had arrived.
+      - name: Install pdftotext
+        run: |
+          command -v pdftotext >/dev/null || {
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq --no-install-recommends poppler-utils
+          }
+          pdftotext -v
+
       # The market scan, which is the spine of everything below it.
       #
       # `market.json` and all 282 company documents are built from a

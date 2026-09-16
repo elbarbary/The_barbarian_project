@@ -322,6 +322,21 @@ class TheRun(unittest.TestCase):
         self.assertEqual(code, 0)
         self.assertEqual(len(self.store()["refused"]), 6)
 
+    def test_this_weeks_form_is_read_before_the_backlog(self):
+        # The ledger lists forms oldest first. Read in that order, the first CI
+        # run that could read any spent its six on October 2025, and the board
+        # stayed on the week of 6 Sep however many forms arrived after it.
+        forms = [{"filingId": fid, "ticker": "MBSC", "publishedAt": published,
+                  "attachments": [f"https://example.invalid/{fid}.pdf"]}
+                 for fid, published in (("277014", "2025-10-01T09:54:34"),
+                                        ("294786", "2026-09-16T11:02:00"),
+                                        ("289000", "2026-05-03T10:00:00"))]
+        named.LEDGER.write_text(json.dumps({"postExecutionDisclosures": forms}),
+                                encoding="utf-8")
+        self.run_main(self.fetch(True), self.reader(reading()), "--limit", "2")
+        self.assertEqual(self.fetched, ["https://example.invalid/294786.pdf",
+                                        "https://example.invalid/289000.pdf"])
+
     def test_nothing_left_to_read_is_a_quiet_day_not_a_failure(self):
         named.STORE.write_text(json.dumps({
             "schemaVersion": 1, "refused": {},

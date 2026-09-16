@@ -16,9 +16,12 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import glob
+import hashlib
+import inspect
 import json
 import pathlib
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -212,7 +215,118 @@ PAUSE_SECONDS = 2.0
 STOP_AFTER = 8
 
 
-def fetch_bulletins(limit: int = 0) -> int:
+def load_store() -> dict:
+    """The transactions read out of the session bulletins, and which were read.
+
+    `rows` are the transactions. `read` names every bulletin that produced
+    them — and every one that produced none — because a runner keeps no PDFs:
+    between builds this file is its only memory of what it has opened. Until
+    16 Sep 2026 it was a bare list of rows, so a machine without the PDFs could
+    only publish it whole or, the moment it read one bulletin of its own,
+    overwrite it with that bulletin alone.
+    """
+    try:
+        doc = json.loads(BULLETIN_STORE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        doc = None
+    if isinstance(doc, list):
+        rows = [r for r in doc if isinstance(r, dict)]
+        read: dict[str, dict] = {}
+        for row in rows:
+            entry = read.setdefault(str(row.get("filingId")), {"session": row.get("date"), "rows": 0})
+            entry["rows"] += 1
+        return {"schemaVersion": 2, "read": read, "rows": rows}
+    if isinstance(doc, dict):
+        return {"schemaVersion": 2, "read": dict(doc.get("read") or {}),
+                "rows": [r for r in doc.get("rows") or [] if isinstance(r, dict)]}
+    return {"schemaVersion": 2, "read": {}, "rows": []}
+
+
+def is_read(entry: dict | None) -> bool:
+    """Whether a bulletin the store remembers needs asking for again.
+
+    One that gave rows is done. One that gave none is done only for the parser
+    that read it: seven of the 68 on the laptop on 16 Sep 2026 came back empty
+    because the parser missed their layout — a volume printed a line below its
+    trade, `Session30/07//2026` — not because nobody traded, and a parser that
+    learns the layout should be handed them again.
+    """
+    if not isinstance(entry, dict):
+        return False
+    return bool(entry.get("rows")) or entry.get("parser") == PARSER
+
+
+def ledger_bulletins() -> list[dict] | None:
+    """The session bulletins the ownership ledger lists, or None without one."""
+    if not LEDGER.exists():
+        return None
+    ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
+    documents = ledger.get("documents") or []
+    if isinstance(documents, dict):
+        documents = list(documents.values())
+    return [d for d in documents if d.get("kind") == "daily_insider_summary"]
+
+
+# How long before its bulletin was filed a session can have been. One to three
+# days is usual; around Eid al-Adha in 2026 one came fourteen days late.
+SESSION_WITHIN_DAYS = 21
+
+
+def session_of(printed: str | None, filed: dict | None) -> str | None:
+    """The session a bulletin is for, checked against the day it was filed.
+
+    The date inside the PDF and the date in the filing's title have each been
+    wrong while the other was right. 289403, filed on 4 Jun 2026, prints
+    `03/06/2025` inside and `03/06/2026` in its title, so 26 trades were
+    published a year early. 292658, filed on 9 Aug 2026, prints `06/07/2026`
+    inside and `06/08/2026` in its title. Six titles filed between 23 and 30
+    Nov 2025 name sessions in October, three of them on a Friday or a Saturday.
+    A session can only fall in the weeks before its bulletin was filed, so the
+    first date that does is the session. When neither does, the session is
+    unknown: no date is better than a wrong one.
+    """
+    if not filed or not filed.get("publishedAt"):
+        return printed
+    day = dt.date.fromisoformat(filed["publishedAt"][:10])
+    for candidate in (printed, filed.get("sessionDate")):
+        try:
+            if 0 <= (day - dt.date.fromisoformat(candidate)).days <= SESSION_WITHIN_DAYS:
+                return candidate
+        except (TypeError, ValueError):
+            continue
+    return None
+
+
+def unread_bulletins() -> list[dict]:
+    """Session bulletins neither on this disk nor in the store, newest first.
+
+    Newest first, so a run that is cut short leaves the most recent sessions
+    read rather than the oldest.
+    """
+    bulletins = ledger_bulletins()
+    if bulletins is None:
+        print("no ownership ledger yet — run ownership_ledger.py", file=sys.stderr)
+        return []
+    bulletins.sort(key=lambda d: d.get("publishedAt") or "", reverse=True)
+
+    held = {n.name for n in PDF_DIR.glob("egx-*.pdf")}
+    read = load_store()["read"]
+    unread = []
+    for doc in bulletins:
+        filing = str(doc.get("filingId") or "")
+        if not filing or any(n.startswith(f"egx-{filing}-") for n in held):
+            continue
+        if is_read(read.get(filing)):
+            continue
+        # The `_101` attachment is the Latin-headed table `pdftotext -layout`
+        # can be read from; `_1` is the Arabic rendering of the same session.
+        if not any(u.endswith("_101.pdf") for u in doc.get("attachments") or []):
+            continue
+        unread.append(doc)
+    return unread
+
+
+def fetch_bulletins(limit: int = 0, patience: int = STOP_AFTER) -> int:
     """Download the session bulletins this machine has never opened.
 
     Every row on the tracker that says which way a trade went — the direction,
@@ -223,34 +337,18 @@ def fetch_bulletins(limit: int = 0) -> int:
     as documents we knew existed and had never opened, so every filing after 19
     August reached the screen present and silent about what it said.
 
-    Newest first, so a run that is cut short leaves the most recent sessions
-    read rather than the oldest.
+    `limit` is how many to ask for, not how many to get, so a host that refuses
+    costs a run no more than that; `patience` is how many refusals in a row end
+    the run early.
     """
-    if not LEDGER.exists():
-        print("no ownership ledger yet — run ownership_ledger.py", file=sys.stderr)
-        return 0
-    ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
-    documents = ledger.get("documents") or []
-    if isinstance(documents, dict):
-        documents = list(documents.values())
-    bulletins = [d for d in documents if d.get("kind") == "daily_insider_summary"]
-    bulletins.sort(key=lambda d: d.get("publishedAt") or "", reverse=True)
-
     PDF_DIR.mkdir(parents=True, exist_ok=True)
-    held = {n.name for n in PDF_DIR.glob("egx-*.pdf")}
-    got = misses = 0
-    for doc in bulletins:
-        filing = str(doc.get("filingId") or "")
-        if not filing or any(n.startswith(f"egx-{filing}-") for n in held):
-            continue
-        # The `_101` attachment is the Latin-headed table `pdftotext -layout`
-        # can be read from; `_1` is the Arabic rendering of the same session.
-        urls = [u for u in (doc.get("attachments") or []) if u.endswith("_101.pdf")]
-        if not urls:
-            continue
-        target = PDF_DIR / f"egx-{filing}-{urls[0].rsplit('/', 1)[-1]}"
-        if named_insiders.fetch_pdf(urls[0], target):
-            held.add(target.name)
+    got = misses = asked = 0
+    for doc in unread_bulletins():
+        filing = str(doc.get("filingId"))
+        url = next(u for u in doc["attachments"] if u.endswith("_101.pdf"))
+        target = PDF_DIR / f"egx-{filing}-{url.rsplit('/', 1)[-1]}"
+        asked += 1
+        if named_insiders.fetch_pdf(url, target):
             got, misses = got + 1, 0
             print(f"   {filing} {(doc.get('publishedAt') or '')[:10]}: bulletin fetched",
                   file=sys.stderr)
@@ -261,11 +359,11 @@ def fetch_bulletins(limit: int = 0) -> int:
             if target.exists() and target.read_bytes()[:4] != b"%PDF":
                 target.unlink()
             misses += 1
-            if misses >= STOP_AFTER:
+            if misses >= patience:
                 print(f"   the exchange stopped answering after {got} — "
                       f"leaving the rest for the next run", file=sys.stderr)
                 break
-        if limit and got >= limit:
+        if limit and asked >= limit:
             break
         # A burst of fifty-odd is what turns a served document into a
         # connection reset. One at a time, with a breath between.
@@ -274,120 +372,191 @@ def fetch_bulletins(limit: int = 0) -> int:
     return got
 
 
-def parse_bulletin_pdfs(alias_map: dict[str, str], by_ticker: dict[str, dict]) -> list[dict]:
+def bulletin_rows(text: str, filing_id: str, alias_map: dict[str, str],
+                  by_ticker: dict[str, dict]) -> tuple[str | None, list[dict]]:
+    """One bulletin's session date and its transactions, in the order printed."""
     records: list[dict] = []
     seen_keys: set[str] = set()
 
-    # Parse local PDFs freshly with robust carry-forward
-    for pdf_path in sorted(PDF_DIR.glob("*.pdf")):
-        fname = pdf_path.name
-        m_filing = re.search(r"egx-(\d+)", fname)
-        filing_id = m_filing.group(1) if m_filing else "0"
+    date_m = re.search(r"Session\s*(\d{1,2})[/]+(\d{1,2})[/]+(20\d{2})", text, re.I) or re.search(r"(\d{1,2})[/]+(\d{1,2})[/]+(20\d{2})", text)
+    session_date = None
+    if date_m:
+        day, month, year = int(date_m.group(1)), int(date_m.group(2)), int(date_m.group(3))
+        session_date = f"{year:04d}-{month:02d}-{day:02d}"
 
-        try:
-            res = subprocess.run(["pdftotext", "-layout", str(pdf_path), "-"], capture_output=True, text=True, timeout=30)
-            if res.returncode != 0:
-                continue
-            text = res.stdout
-        except Exception:
+    current_company = None
+    for line in text.splitlines():
+        l_s = line.strip()
+        if not l_s or "Trading of Insiders" in l_s or "Company Name" in l_s or "\x0c" in line:
+            if "\x0c" in line:
+                current_company = None
             continue
 
-        date_m = re.search(r"Session\s*(\d{1,2})[/]+(\d{1,2})[/]+(20\d{2})", text, re.I) or re.search(r"(\d{1,2})[/]+(\d{1,2})[/]+(20\d{2})", text)
-        session_date = None
-        if date_m:
-            day, month, year = int(date_m.group(1)), int(date_m.group(2)), int(date_m.group(3))
-            session_date = f"{year:04d}-{month:02d}-{day:02d}"
+        m_act = re.search(r"\b(buy|sell|sold)\b", line, re.I)
+        m_vol = re.search(r"\b([\d,]{3,})\b", line)
+        m_pos = re.search(r"\b(related parties|insider|main shareholder|major)\b", line, re.I)
 
-        current_company = None
-        for line in text.splitlines():
-            l_s = line.strip()
-            if not l_s or "Trading of Insiders" in l_s or "Company Name" in l_s or "\x0c" in line:
-                if "\x0c" in line:
-                    current_company = None
+        cutoff = m_pos.start() if m_pos else (m_act.start() if m_act else len(line))
+        co_chunk = line[:cutoff].strip()
+        if co_chunk and len(co_chunk) > 2 and not re.match(r"^\d+$", co_chunk):
+            current_company = " ".join(co_chunk.split())
+
+        if m_act and m_vol and current_company:
+            act_str = m_act.group(1).lower()
+            act = "bought" if act_str == "buy" else "sold"
+            try:
+                shares = int(m_vol.group(1).replace(",", ""))
+            except ValueError:
                 continue
 
-            m_act = re.search(r"\b(buy|sell|sold)\b", line, re.I)
-            m_vol = re.search(r"\b([\d,]{3,})\b", line)
-            m_pos = re.search(r"\b(related parties|insider|main shareholder|major)\b", line, re.I)
+            pos_raw = m_pos.group(1).lower() if m_pos else "insider"
+            rel = (
+                "related_party" if "related" in pos_raw else
+                "major_holder" if ("main" in pos_raw or "major" in pos_raw) else
+                "insider"
+            )
 
-            cutoff = m_pos.start() if m_pos else (m_act.start() if m_act else len(line))
-            co_chunk = line[:cutoff].strip()
-            if co_chunk and len(co_chunk) > 2 and not re.match(r"^\d+$", co_chunk):
-                current_company = " ".join(co_chunk.split())
+            ticker = resolve_ticker(current_company, alias_map)
+            co_meta = by_ticker.get(ticker or "", {})
+            comp_display = co_meta.get("name") or current_company
+            comp_ar = co_meta.get("nameAr") or current_company
 
-            if m_act and m_vol and current_company:
-                act_str = m_act.group(1).lower()
-                act = "bought" if act_str == "buy" else "sold"
-                try:
-                    shares = int(m_vol.group(1).replace(",", ""))
-                except ValueError:
-                    continue
+            k = f"{session_date}:{ticker or current_company}:{act}:{shares}:{rel}"
+            if k in seen_keys:
+                continue
+            seen_keys.add(k)
 
-                pos_raw = m_pos.group(1).lower() if m_pos else "insider"
-                rel = (
-                    "related_party" if "related" in pos_raw else
-                    "major_holder" if ("main" in pos_raw or "major" in pos_raw) else
-                    "insider"
-                )
+            records.append({
+                # Numbered within its own bulletin, so a row keeps its id
+                # whichever other bulletins a machine happens to hold.
+                "id": f"bulletin-{filing_id}-{len(records) + 1}",
+                "filingId": filing_id,
+                "sourceType": "bulletin",
+                "date": session_date,
+                "ticker": ticker,
+                "company": comp_display,
+                "companyAr": comp_ar,
+                "sector": co_meta.get("sector") or "",
+                "sectorAr": co_meta.get("sectorAr") or "",
+                "action": act,
+                "actionLabel": "Bought" if act == "bought" else "Sold",
+                "actionLabelAr": "شراء" if act == "bought" else "مبيعات",
+                "relationship": rel,
+                "relationshipLabel": (
+                    "Connected Group" if rel == "related_party" else
+                    "Major Shareholder" if rel == "major_holder" else
+                    "Insider / Board"
+                ),
+                "relationshipLabelAr": (
+                    "مجموعة مرتبطة" if rel == "related_party" else
+                    "مساهم رئيسي" if rel == "major_holder" else
+                    "مجلس إدارة / داخلي"
+                ),
+                "positionRaw": pos_raw,
+                "shares": shares,
+                "title": f"تعامل على أسهم {comp_ar} ({'شراء' if act == 'bought' else 'مبيعات'}): {shares:,} سهم",
+                "titleEn": f"Transaction on {comp_display} ({act}): {shares:,} shares",
+                "link": f"https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID={filing_id}" if filing_id != "0" else "",
+            })
 
-                ticker = resolve_ticker(current_company, alias_map)
-                co_meta = by_ticker.get(ticker or "", {})
-                comp_display = co_meta.get("name") or current_company
-                comp_ar = co_meta.get("nameAr") or current_company
+    return session_date, records
 
-                k = f"{session_date}:{ticker or current_company}:{act}:{shares}:{rel}"
-                if k in seen_keys:
-                    continue
-                seen_keys.add(k)
 
-                records.append({
-                    "id": f"bulletin-{filing_id}-{len(records) + 1}",
-                    "filingId": filing_id,
-                    "sourceType": "bulletin",
-                    "date": session_date,
-                    "ticker": ticker,
-                    "company": comp_display,
-                    "companyAr": comp_ar,
-                    "sector": co_meta.get("sector") or "",
-                    "sectorAr": co_meta.get("sectorAr") or "",
-                    "action": act,
-                    "actionLabel": "Bought" if act == "bought" else "Sold",
-                    "actionLabelAr": "شراء" if act == "bought" else "مبيعات",
-                    "relationship": rel,
-                    "relationshipLabel": (
-                        "Connected Group" if rel == "related_party" else
-                        "Major Shareholder" if rel == "major_holder" else
-                        "Insider / Board"
-                    ),
-                    "relationshipLabelAr": (
-                        "مجموعة مرتبطة" if rel == "related_party" else
-                        "مساهم رئيسي" if rel == "major_holder" else
-                        "مجلس إدارة / داخلي"
-                    ),
-                    "positionRaw": pos_raw,
-                    "shares": shares,
-                    "title": f"تعامل على أسهم {comp_ar} ({'شراء' if act == 'bought' else 'مبيعات'}): {shares:,} سهم",
-                    "titleEn": f"Transaction on {comp_display} ({act}): {shares:,} shares",
-                    "link": f"https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID={filing_id}" if filing_id != "0" else "",
-                })
+# Which parser read a bulletin that gave nothing. Its own source, so changing
+# how a bulletin is read is all it takes to have the empty ones read again.
+PARSER = hashlib.sha256(inspect.getsource(bulletin_rows).encode("utf-8")).hexdigest()[:12]
 
-    # Fallback to cached store if no PDFs were parsed (e.g. CI runner)
-    if not records and BULLETIN_STORE.exists():
+
+def parse_bulletin_pdfs(alias_map: dict[str, str], by_ticker: dict[str, dict],
+                        write: bool = True) -> list[dict]:
+    """Every transaction held, with whatever this machine has on disk read afresh.
+
+    The store is the base and a bulletin on disk replaces its own rows in it,
+    so a runner that fetched three bulletins adds three sessions. It used to
+    replace the store with whatever was on disk, which is harmless on the
+    laptop that holds every PDF and would have cut 1,605 rows to one session's
+    thirty the first time a runner fetched anything.
+    """
+    store = load_store()
+    by_filing: dict[str, list[dict]] = {}
+    for row in store["rows"]:
+        by_filing.setdefault(str(row.get("filingId")), []).append(row)
+    # Without the ledger — the live job — dates stay as they were read.
+    filed = {str(d.get("filingId")): d for d in ledger_bulletins() or []}
+
+    pdfs = sorted(PDF_DIR.glob("egx-*.pdf"))
+    # Loud, because the quiet version already happened: a missing binary is an
+    # exception inside the read, and the read used to swallow every exception
+    # and publish the store as though nothing had arrived.
+    if pdfs and shutil.which("pdftotext") is None:
+        raise SystemExit(f"pdftotext is not installed, and {len(pdfs)} session "
+                         f"bulletin(s) in {PDF_DIR} are waiting to be read")
+    for pdf_path in pdfs:
+        filing_id = re.search(r"egx-(\d+)", pdf_path.name).group(1)
         try:
-            cached = json.loads(BULLETIN_STORE.read_text(encoding="utf-8"))
-            if isinstance(cached, list):
-                for r in cached:
-                    records.append(r)
-        except Exception as e:
-            print(f"Warning loading cached {BULLETIN_STORE}: {e}", file=sys.stderr)
+            res = subprocess.run(["pdftotext", "-layout", str(pdf_path), "-"],
+                                 capture_output=True, text=True, timeout=30)
+        except subprocess.TimeoutExpired:
+            continue
+        if res.returncode != 0:
+            continue
+        session_date, rows = bulletin_rows(res.stdout, filing_id, alias_map, by_ticker)
+        by_filing[filing_id] = rows
+        store["read"][filing_id] = {"session": session_date, "rows": len(rows), "parser": PARSER}
+        if not rows:
+            print(f"::warning title=Session bulletin read as empty::{pdf_path.name} "
+                  f"(session {session_date or 'undated'}) gave no transactions. "
+                  "It is not asked for again until the parser changes.")
 
-    # Save fresh records to store so CI keeps them
-    if records:
+    # Every row's session checked against the day its bulletin was filed, the
+    # rows already in the store included: 41 of them were published under a
+    # date their bulletin could not have been for.
+    for filing_id, rows in by_filing.items():
+        doc = filed.get(filing_id)
+        if not doc or not rows:
+            continue
+        printed = rows[0].get("date")
+        session = session_of(printed, doc)
+        if session == printed:
+            continue
+        for row in rows:
+            row["date"] = session
+        if isinstance(store["read"].get(filing_id), dict):
+            store["read"][filing_id]["session"] = session
+        if session is None:
+            print(f"::warning title=Session bulletin date unclear::Bulletin {filing_id}, "
+                  f"filed {doc['publishedAt'][:10]}, is dated {printed} inside and "
+                  f"{doc.get('sessionDate')} in its title, and neither can be its "
+                  f"session. Its {len(rows)} trades are published without a date.")
+
+    # One trade printed in two bulletins — a session re-issued — is one trade.
+    # First in filing order wins, which is the order the PDFs were always read.
+    records: list[dict] = []
+    seen_keys: set[str] = set()
+    kept: list[dict] = []
+    for filing_id in sorted(by_filing, key=lambda f: (len(f), f)):
+        for row in by_filing[filing_id]:
+            kept.append(row)
+            # An undated trade is only ever the same trade within its bulletin.
+            k = (f"{row.get('date') or 'undated-' + filing_id}:"
+                 f"{row.get('ticker') or row.get('company')}:"
+                 f"{row.get('action')}:{row.get('shares')}:{row.get('relationship')}")
+            if k in seen_keys:
+                continue
+            seen_keys.add(k)
+            records.append(row)
+
+    updated = {"schemaVersion": 2,
+               "read": dict(sorted(store["read"].items(), key=lambda kv: (len(kv[0]), kv[0]))),
+               "rows": kept}
+    text = json.dumps(updated, ensure_ascii=False, indent=2)
+    if write:
         try:
-            BULLETIN_STORE.write_text(json.dumps(records, ensure_ascii=False, indent=2), encoding="utf-8")
-        except Exception as e:
-            print(f"Warning saving {BULLETIN_STORE}: {e}", file=sys.stderr)
-
+            held = BULLETIN_STORE.read_text(encoding="utf-8")
+        except OSError:
+            held = None
+        if held != text:
+            BULLETIN_STORE.write_text(text, encoding="utf-8")
     return records
 
 
@@ -515,11 +684,13 @@ def main() -> int:
                              "read yet (all of them, or the newest N)")
     args = parser.parse_args()
 
-    if args.fetch is not None:
+    # A check writes nothing, and in the daily build it runs before the rebuild
+    # does the same work again; the network half is left to that pass.
+    if args.fetch is not None and not args.check:
         fetch_bulletins(args.fetch)
 
     by_ticker, alias_map = load_company_directory()
-    bulletin_records = parse_bulletin_pdfs(alias_map, by_ticker)
+    bulletin_records = parse_bulletin_pdfs(alias_map, by_ticker, write=not args.check)
     print(f"Parsed {len(bulletin_records)} bulletin transactions", file=sys.stderr)
 
     all_records = list(bulletin_records)

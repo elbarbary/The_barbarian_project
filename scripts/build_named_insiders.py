@@ -420,6 +420,12 @@ def main() -> int:
             if str(f.get("filingId")) not in readings
             and str(f.get("filingId")) not in refused
             and f.get("attachments")]
+    # Newest first. The ownership board draws the stake that stands today, and
+    # this week's form is what moves it; the backlog behind it is history. The
+    # ledger lists forms oldest first, so the first CI run able to read any
+    # (16 Sep 2026) read six from October 2025, and the 25 filed in September
+    # sat at the back of a 493-form queue, some eighty builds away.
+    todo.sort(key=lambda f: f.get("publishedAt") or "", reverse=True)
     print(f"── {len(forms)} post-execution forms, "
           f"{len(readings)} already read, {len(refused)} previously refused, "
           f"{len(todo)} to attempt")
