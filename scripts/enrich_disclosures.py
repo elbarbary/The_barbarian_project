@@ -32,8 +32,10 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import build_disclosures_api as disclosures  # noqa: E402
+import scrapling_python  # noqa: E402
 from build_financials_api import _fetch_details  # noqa: E402
 from egx_filing_detail import parse_detail  # noqa: E402
+from step_outcome import NO_PROGRESS  # noqa: E402
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 
@@ -96,10 +98,13 @@ def main() -> int:
             print(f"     {item['id']}  {item['title'][:64]}")
         return 0
 
+    if scrapling_python.find() is None:
+        print(f"   {scrapling_python.missing_note()}")
+        return NO_PROGRESS
     pages = _fetch_details([news_id(i) for i in queue], args.spacing)
     if not pages:
         print("   the host answered nothing this run — nothing recorded")
-        return 1
+        return NO_PROGRESS
 
     found = 0
     for item in queue:
@@ -120,8 +125,13 @@ def main() -> int:
             item["attachments"] = detail["attachments"]
             found += 1
 
-    print(f"   read {sum(1 for i in queue if i.get('detail_read'))}, "
-          f"{found} carry a filed document")
+    read_now = sum(1 for i in queue if i.get("detail_read"))
+    print(f"   read {read_now}, {found} carry a filed document")
+    if not read_now:
+        # Pages came back and not one of them was a filing: the WAF, every
+        # time. Nothing is written, because nothing was learned.
+        print("   no page came back as a filing — nothing recorded")
+        return NO_PROGRESS
 
     everything = sorted(
         items.values(), key=lambda i: (i["date"], i["id"]), reverse=True

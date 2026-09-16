@@ -107,6 +107,14 @@ concurrency:
 # loads its append-only store from here, not from the published document, and
 # never invents a breadth count for a past session. Every breadth row CI added
 # was destroyed by the next run.
+#
+# The two ownership stores were committed to git for exactly this reason on
+# 11 Sep 2026 and never listed here, so a reading CI made would have left with
+# the runner. `best_effort_skips.json` is build_all's count of consecutive
+# skips, which has to outlive the runner to count anything at all.
+#
+# Every path must exist: `git add` refuses the whole list over one that does
+# not, and commits nothing.
 env:
   STORES: >-
     data-source/egx-beta
@@ -130,6 +138,10 @@ env:
     scripts/sector_reads.json
     scripts/extract_unit_cache.json
     scripts/company_exposure_read.json
+    scripts/company_names_ar_absent.json
+    scripts/best_effort_skips.json
+    data-source/official/ownership/named-insiders.json
+    data-source/official/ownership/shareholder-structure.json
 
 permissions:
   contents: write
@@ -368,10 +380,15 @@ jobs:
         # This is the fix for 3 Sep 2026, when a truncated read from
         # investing.com discarded 107 minutes of finished work — 25 steps'
         # output thrown away because the 26th could not reach its host.
+        #
+        # A best-effort step skipped STUCK_AFTER runs in a row is also 1. The
+        # count is kept in scripts/best_effort_skips.json, which is in STORES
+        # so that it survives the runner; only this pass keeps it, never the
+        # --check pass above.
         id: rebuild
         run: |
           set +e
-          python3 scripts/build_all.py
+          python3 scripts/build_all.py --skip-counter scripts/best_effort_skips.json
           code=$?
           set -e
           echo "code=$code" >> "$GITHUB_OUTPUT"
@@ -441,6 +458,16 @@ jobs:
           # (build_fixtures.py keeps the previous generated_at), so its presence
           # in the diff is real evidence that data_version changed rather than
           # just evidence that the clock did.
+          #
+          # Only a published document needs a new fingerprint. A run that moved
+          # nothing but side-stores — the skip counter counting, a harvest
+          # noting which companies it asked — gives a phone nothing to fetch,
+          # and failing it here left those stores on the runner: a streak of
+          # skips on a quiet day would never have been counted.
+          if git diff --cached --quiet -- public/data app/assets/fixtures; then
+            echo "only side-stores changed; no published document needs a new fingerprint"
+            exit 0
+          fi
           before=$(git show HEAD:public/data/v1/manifest.json 2>/dev/null \
                    | python3 -c 'import json,sys; print(json.load(sys.stdin)["data_version"])' 2>/dev/null || echo none)
           after=$(python3 -c 'import json; print(json.load(open("public/data/v1/manifest.json"))["data_version"])')
@@ -490,6 +517,11 @@ jobs:
             local unmerged
             unmerged=$(git diff --name-only --diff-filter=U)
             [ -z "$unmerged" ] && return 0
+            # data-source/official/ownership/ is in STORES and deliberately not
+            # here. Those stores are also written by hand on a laptop, and the
+            # resolver has no opinion about a map of readings, so the fallback
+            # below would take this build's copy and drop the laptop's. A
+            # conflict there stops the push instead; the next run reads again.
             if echo "$unmerged" | grep -qv -e '^public/data/' -e '^app/assets/fixtures/' -e '^scripts/.*\.json$' -e '^data-source/prices/' -e '^data-source/egx-beta/'; then
               echo "conflict outside generated data:"; echo "$unmerged"
               git rebase --abort || true
@@ -650,7 +682,8 @@ jobs:
       - name: Fail the run if a source did not refresh
         if: always() && steps.rebuild.outputs.code == '1'
         run: |
-          echo "::error::A build step could not reach its source. What the other"
+          echo "::error::A build step could not reach its source, or a best-effort"
+          echo "::error::step has been skipped too many runs in a row. What the other"
           echo "::error::steps produced has been committed and deployed — see the"
-          echo "::error::warning on the rebuild step for which one failed."
+          echo "::error::annotations on the rebuild step for which one."
           exit 1

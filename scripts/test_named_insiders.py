@@ -11,9 +11,17 @@ Run: python3 -m unittest discover -s scripts -p 'test_*.py'
 
 from __future__ import annotations
 
+import contextlib
+import io
+import json
+import pathlib
+import sys
+import tempfile
 import unittest
+from unittest import mock
 
 import build_named_insiders as named
+from step_outcome import NO_PROGRESS
 
 
 def reading(**over):
@@ -227,3 +235,131 @@ class IssuerTest(unittest.TestCase):
         form = {"titleArabic": "مصر بنى سويف للاسمنت (MBSC.CA) - بيان بخصوص نموذج إفصاح",
                 "title": "Misr Beni Suef Cement (MBSC.CA) - Release Regarding a Disclosure Form"}
         self.assertEqual(named.issuer_name(form, "MBSC"), "مصر بنى سويف للاسمنت")
+
+
+class TheRun(unittest.TestCase):
+    """What a build learns from this step, and what nothing answering costs it.
+
+    From 10 to 16 Sep 2026 every build printed "0 read, 6 unreachable" and
+    exited 0: the fetch looked for Scrapling at a path on one laptop, found
+    nothing, and the build could not tell that from a quiet day.
+    """
+
+    def setUp(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        root = pathlib.Path(tmp.name)
+        for name, path in (("LEDGER", root / "ledger.json"), ("STORE", root / "store.json"),
+                           ("PDF_DIR", root / "pdfs"), ("REPO", root)):
+            patcher = mock.patch.object(named, name, path)
+            patcher.start()
+            self.addCleanup(patcher.stop)
+        forms = [{"filingId": str(292240 + i), "ticker": "MBSC",
+                  "titleArabic": "مصر بنى سويف للاسمنت (MBSC.CA) - بيان بخصوص نموذج إفصاح",
+                  "publishedAt": "2026-09-01T10:00:00", "sessionDate": "2026-08-31",
+                  "attachments": [f"https://example.invalid/{i}.pdf"]} for i in range(6)]
+        named.LEDGER.write_text(json.dumps({"postExecutionDisclosures": forms}),
+                                encoding="utf-8")
+        self.fetched, self.read = [], []
+
+    def fetch(self, ok):
+        def fetch_pdf(url, into):
+            self.fetched.append(url)
+            ok_now = ok(len(self.fetched)) if callable(ok) else ok
+            if ok_now:
+                into.write_bytes(b"%PDF-1.6 test")
+            return ok_now
+        return fetch_pdf
+
+    def reader(self, answer):
+        def read_form(pdf, *args, **kwargs):
+            self.read.append(pdf.name)
+            return answer
+        return read_form
+
+    def run_main(self, fetch, read, *argv):
+        with mock.patch.object(named, "fetch_pdf", fetch), \
+             mock.patch.object(named, "read_form", read), \
+             mock.patch.object(named, "read_form_agy", lambda pdf: self.fail("agy in CI")), \
+             mock.patch.object(sys, "argv", ["build_named_insiders.py", "--limit", "6",
+                                             "--engine", "vertex", *argv]), \
+             contextlib.redirect_stdout(io.StringIO()) as out:
+            code = named.main()
+        return code, out.getvalue()
+
+    def store(self):
+        return json.loads(named.STORE.read_text(encoding="utf-8"))
+
+    def test_a_run_that_fetches_nothing_says_so(self):
+        code, out = self.run_main(self.fetch(False), self.reader(reading()))
+        self.assertEqual(code, NO_PROGRESS, out)
+
+    def test_it_stops_asking_once_nothing_comes_back_twice(self):
+        # Six downloads the exchange refuses, each up to three minutes, is a
+        # quarter of an hour of a runner that learns nothing.
+        self.run_main(self.fetch(False), self.reader(reading()))
+        self.assertEqual(len(self.fetched), named.GIVE_UP_AFTER)
+
+    def test_a_model_that_answers_nothing_stops_the_run_too(self):
+        code, _ = self.run_main(self.fetch(True), self.reader(None))
+        self.assertEqual(code, NO_PROGRESS)
+        self.assertEqual(len(self.read), named.GIVE_UP_AFTER)
+
+    def test_one_refused_download_does_not_stop_the_run(self):
+        code, _ = self.run_main(self.fetch(lambda n: n != 1), self.reader(reading()))
+        self.assertEqual(code, 0)
+        self.assertEqual(len(self.fetched), 6)
+        self.assertEqual(len(self.store()["readings"]), 5)
+
+    def test_a_reading_is_progress(self):
+        code, _ = self.run_main(self.fetch(True), self.reader(reading()))
+        self.assertEqual(code, 0)
+        self.assertEqual(len(self.store()["readings"]), 6)
+
+    def test_a_refusal_is_progress_too(self):
+        """A verdict takes the form out of the queue for good."""
+        code, _ = self.run_main(self.fetch(True), self.reader(reading(legible=False)))
+        self.assertEqual(code, 0)
+        self.assertEqual(len(self.store()["refused"]), 6)
+
+    def test_nothing_left_to_read_is_a_quiet_day_not_a_failure(self):
+        named.STORE.write_text(json.dumps({
+            "schemaVersion": 1, "refused": {},
+            "readings": {str(292240 + i): {} for i in range(6)}}), encoding="utf-8")
+        code, _ = self.run_main(self.fetch(False), self.reader(None))
+        self.assertEqual(code, 0)
+        self.assertEqual(self.fetched, [])
+
+
+class TheFetch(unittest.TestCase):
+    def test_the_interpreter_is_looked_up_not_hardcoded(self):
+        with mock.patch.object(named.scrapling_python, "find", lambda: None), \
+             mock.patch.object(named.subprocess, "run",
+                               side_effect=AssertionError("ran with no interpreter")):
+            self.assertFalse(named.fetch_pdf("https://example.invalid/a.pdf",
+                                             pathlib.Path("/nonexistent/a.pdf")))
+        seen = []
+        with tempfile.TemporaryDirectory() as tmp, \
+             mock.patch.object(named.scrapling_python, "find",
+                               lambda: pathlib.Path("/opt/runner/python3")), \
+             mock.patch.object(named.subprocess, "run",
+                               side_effect=lambda cmd, **kw: seen.append(cmd[0])):
+            named.fetch_pdf("https://example.invalid/a.pdf", pathlib.Path(tmp) / "a.pdf")
+        self.assertEqual(seen, ["/opt/runner/python3"])
+
+    def test_the_reader_sends_the_prompt_it_is_given(self):
+        sent = []
+
+        def post(model, body, timeout):
+            sent.append(json.loads(body))
+            return {"candidates": [{"content": {"parts": [{"text": '{"legible": false}'}]}}]}
+
+        with tempfile.TemporaryDirectory() as tmp, \
+             mock.patch.object(named.gemini, "_post", post):
+            pdf = pathlib.Path(tmp) / "a.pdf"
+            pdf.write_bytes(b"%PDF-1.6 test")
+            self.assertEqual(named.read_form(pdf), {"legible": False})
+            named.read_form(pdf, prompt="another form", max_output_tokens=8000)
+        texts = [body["contents"][0]["parts"][1]["text"] for body in sent]
+        self.assertEqual(texts, [named.PROMPT, "another form"])
+        self.assertEqual(sent[1]["generationConfig"]["maxOutputTokens"], 8000)

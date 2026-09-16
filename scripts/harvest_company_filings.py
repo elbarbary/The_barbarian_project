@@ -42,6 +42,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import build_disclosures_api as disclosures  # noqa: E402
 
 import scrapling_python
+from step_outcome import NO_PROGRESS  # noqa: E402
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 COMPANIES = REPO / "public" / "data" / "v1" / "companies.json"
@@ -165,6 +166,21 @@ def tickers() -> list[str]:
     return [c["ticker"] for c in directory["companies"] if c.get("ticker")]
 
 
+def queue_for(names: list[str], state: dict) -> list[str]:
+    """Companies not asked yet, the ones that sank a whole run at the back.
+
+    The browser opens the first company's page before it walks the rest, and
+    when that page never renders, nobody is asked. The queue was in directory
+    order, so one slow issuer at its head stopped the harvest for days: from
+    3 to 16 Sep 2026 the timeouts named CAED seventeen times and AREH twelve,
+    and the harvest answered nothing in 82 of 116 builds. `unanswered` counts
+    how often a company was first when that happened; the sort is stable, so
+    everyone else keeps directory order.
+    """
+    waiting = [t for t in names if "asked" not in state.get(t, {})]
+    return sorted(waiting, key=lambda t: state.get(t, {}).get("unanswered", 0))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=40)
@@ -177,20 +193,21 @@ def main() -> int:
     args = parser.parse_args()
 
     print("── Company filings")
-    if SCRAPLING_PY is None or not SCRAPLING_PY.exists():
-        print(f"   {scrapling_python.missing_note()}")
-        return 0
     state = load_state()
-    held = disclosures.archive_read()
-    print(f"   archive holds {len(held)} filings")
-
-    queue = [args.only] if args.only else [
-        t for t in tickers() if t not in state
-    ]
+    queue = [args.only] if args.only else queue_for(tickers(), state)
     if not queue:
         print("   every company has been asked once — delete "
               f"{STATE.name} to go round again")
         return 0
+    if SCRAPLING_PY is None or not SCRAPLING_PY.exists():
+        # A queue and no browser to work it with is no progress, not a quiet
+        # day. When Chromium stopped opening on 15 Sep 2026, this is what a
+        # runner without a browser would have said forever.
+        print(f"   {scrapling_python.missing_note()}")
+        return NO_PROGRESS
+    held = disclosures.archive_read()
+    print(f"   archive holds {len(held)} filings")
+
     queue = queue[: args.limit]
     print(f"   asking {len(queue)} companies, {args.passes} pass(es), "
           f"{args.spacing}s apart")
@@ -198,6 +215,7 @@ def main() -> int:
     today = datetime.date.today().strftime("%d/%m/%Y")
     ends = {t: today for t in queue}
     added = 0
+    answered = False
 
     for step in range(args.passes):
         urls = {
@@ -209,8 +227,21 @@ def main() -> int:
             break
         pages = fetch_many(list(urls), args.spacing)
         if not pages:
-            print("   the host answered nothing — stopping")
+            first = urls[next(iter(urls))]
+            if not answered and not args.only:
+                entry = state.setdefault(first, {})
+                entry["unanswered"] = entry.get("unanswered", 0) + 1
+                entry["lastUnanswered"] = datetime.date.today().isoformat()
+                STATE.write_text(
+                    json.dumps(state, ensure_ascii=False, indent=1, sort_keys=True),
+                    encoding="utf-8",
+                )
+                print(f"   the host answered nothing — stopping; {first}, whose page "
+                      "the browser opens first, goes to the back of the queue")
+            else:
+                print("   the host answered nothing — stopping")
             break
+        answered = True
         for url, html in pages.items():
             ticker = urls[url]
             rows = disclosures.parse(html)
@@ -236,6 +267,10 @@ def main() -> int:
             encoding="utf-8",
         )
 
+    if not answered:
+        # Asked, and not one page came back. The companies are exactly as
+        # unasked as they were, so this is no progress rather than a quiet day.
+        return NO_PROGRESS
     if not added:
         print("   nothing new")
         return 0

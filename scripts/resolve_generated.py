@@ -28,7 +28,8 @@ which job is asking:
   * a document that carries CUMULATIVE records with stable ids — the
     disclosures feed — is UNIONED, because a filing is not withdrawn by the
     exchange and neither side's absence is evidence. Losing one is the
-    failure this exists to stop.
+    failure this exists to stop. The same goes for a record's fields: where
+    one copy of a filing carries a field the other lacks, it is kept.
   * anything else is left to the caller, which keeps the behaviour it has
     always had. This never has an opinion it cannot justify.
 
@@ -100,6 +101,20 @@ def _records(doc):
     return None
 
 
+def _fill(winner: dict, other: dict | None) -> dict:
+    """`winner`, plus any field only `other` carries.
+
+    Where both copies of a record hold a field, the side that won before still
+    wins. A field only one of them holds is not a disagreement; it is something
+    the other job never learned. `detail_read` and `attachments` on a filing
+    are written by the slow build alone, so taking the fast lane's copy whole
+    un-read the filing — on 16 Sep 2026 run 35090659439 read eight filings'
+    documents, unioned 469 and 467 records here, and committed none of them.
+    """
+    extra = {k: v for k, v in (other or {}).items() if k not in winner}
+    return {**winner, **extra} if extra else winner
+
+
 def decide(ours: bytes, theirs: bytes) -> tuple[str | None, bytes | None, str]:
     """Which side to keep, and the bytes when neither side alone is right.
 
@@ -124,11 +139,24 @@ def decide(ours: bytes, theirs: bytes) -> tuple[str | None, bytes | None, str]:
             merged = {}
             # Theirs first so ours overwrites on a tie: where the same record
             # exists on both sides, the copy from the side we are replaying is
-            # no worse, and this keeps the choice deterministic.
+            # no worse, and this keeps the choice deterministic. Overwrites the
+            # fields both carry, that is, and keeps the ones only theirs does.
             for row in list(brows) + list(arows):
-                merged[row[field]] = row
+                merged[row[field]] = _fill(row, merged.get(row[field]))
             if len(merged) == len(arows) == len(brows):
-                return None, None, "same records on both sides"
+                # The same records on both sides, where the caller keeps
+                # theirs. That is right for every field both copies carry and
+                # loses a field only ours carries, so those are filled in.
+                held = {r[field]: r for r in arows}
+                filled = [_fill(r, held.get(r[field])) for r in brows]
+                if all(x is y for x, y in zip(filled, brows)):
+                    return None, None, "same records on both sides"
+                out = dict(b)
+                out[key] = filled
+                payload = json.dumps(out, ensure_ascii=False, separators=(",", ":")).encode()
+                kept = sum(1 for x, y in zip(filled, brows) if x is not y)
+                return ("merged", payload,
+                        f"theirs, with {kept} record(s) keeping fields only ours carried")
             # Keep the frame of whichever side stamped itself later, or of the
             # one with more records when neither did, then union the records
             # into it. A count is not a date, but a feed that only grows makes

@@ -5,10 +5,13 @@ from __future__ import annotations
 
 import ast
 import io
+import json
+import os
 import pathlib
 import re
 import subprocess
 import sys
+import tempfile
 import unittest
 from contextlib import redirect_stderr, redirect_stdout
 from unittest import mock
@@ -16,8 +19,33 @@ from unittest import mock
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import build_all
+from step_outcome import NO_PROGRESS
 
 HERE = pathlib.Path(__file__).resolve().parent
+
+
+def build(codes: dict[str, int], *argv: str) -> tuple[int, str]:
+    """build_all.main() with each named step exiting its code and the rest 0.
+
+    Quietly, and away from the job summary and the run id, for the reason
+    `ExitCodes._run` gives: under CI the workflow commands printed here would
+    become real annotations on a green run.
+    """
+    def fake(cmd, cwd=None):
+        script = pathlib.Path(cmd[1]).name
+        names = [n for n, s, *_ in build_all.STEPS if s == script]
+        return subprocess.CompletedProcess(
+            cmd, next((codes[n] for n in names if n in codes), 0))
+
+    out = io.StringIO()
+    with mock.patch.object(build_all.subprocess, "run", side_effect=fake), \
+         mock.patch.object(build_all.sys, "argv", ["build_all.py", *argv]), \
+         mock.patch.dict(build_all.os.environ) as env, \
+         redirect_stdout(out), redirect_stderr(io.StringIO()):
+        env.pop("GITHUB_STEP_SUMMARY", None)
+        env.pop("GITHUB_RUN_ID", None)
+        code = build_all.main()
+    return code, out.getvalue()
 
 
 class Steps(unittest.TestCase):
@@ -282,6 +310,11 @@ class StoresSurviveTheRunner(unittest.TestCase):
     WORKFLOW = REPO / ".github" / "workflows" / "publish-app-data.yml"
     # `.write_text(`, `.open("w"`, or a bare `open(` on the same line as the path.
     WRITE = r'(\.write_text\s*\(|\.open\s*\(\s*["\']w|open\s*\()'
+    # Staged by the workflow's own `git add -A public/data app/assets/fixtures`.
+    PUBLISHED = ("public/data/", "app/assets/fixtures/")
+    # Written only when the file is missing or on --refresh-tags, so a runner,
+    # which checks the committed one out, never rewrites it.
+    WRITTEN_ONLY_WHEN_ABSENT = {"scripts/news_tag_map.json"}
 
     def stores(self) -> set[str]:
         block = re.search(r"STORES: >-\n((?:\s{4}\S+\n)+)",
@@ -305,12 +338,21 @@ class StoresSurviveTheRunner(unittest.TestCase):
                         and isinstance(node.targets[0], ast.Name)):
                     continue
                 expr = ast.unparse(node.value)
-                named = re.search(r"""['"]([a-z_0-9]+\.json)['"]""", expr)
-                if not named or "parent" not in expr:
-                    continue
+                # `REPO / "data-source" / ... / "x.json"`. The ownership stores
+                # are spelled this way, and this test only knew the
+                # `Path(__file__).parent / "x.json"` spelling, so it never saw
+                # that the workflow did not commit either of them.
+                rooted = re.fullmatch(r"REPO((?:\s*/\s*'[^']+')+)", expr)
+                if rooted and expr.endswith(".json'"):
+                    path = "/".join(re.findall(r"'([^']+)'", rooted.group(1)))
+                else:
+                    named = re.search(r"""['"]([a-z_0-9]+\.json)['"]""", expr)
+                    if not named or "parent" not in expr:
+                        continue
+                    path = f"scripts/{named.group(1)}"
                 var = node.targets[0].id
                 if re.search(rf"\b{var}\b[^\n]*{self.WRITE}", text):
-                    found.setdefault(f"scripts/{named.group(1)}", set()).add(script)
+                    found.setdefault(path, set()).add(script)
         return found
 
     def test_the_detector_finds_the_stores_that_are_already_named(self):
@@ -319,6 +361,14 @@ class StoresSurviveTheRunner(unittest.TestCase):
         written = self.written_by_a_step()
         self.assertGreaterEqual(len(written), 10, written)
         self.assertIn("scripts/sector_reads.json", written)
+        self.assertIn("data-source/official/ownership/named-insiders.json", written)
+        self.assertIn("data-source/official/ownership/shareholder-structure.json", written)
+
+    def covered(self, path: str, stores: set[str]) -> bool:
+        if path.startswith(self.PUBLISHED) or path in self.WRITTEN_ONLY_WHEN_ABSENT:
+            return True
+        return any(path == store or path.startswith(store.rstrip("/") + "/")
+                   for store in stores)
 
     def test_every_store_a_step_writes_and_git_tracks_is_committed(self):
         stores = self.stores()
@@ -327,7 +377,312 @@ class StoresSurviveTheRunner(unittest.TestCase):
             tracked = subprocess.run(
                 ["git", "ls-files", "--error-unmatch", store],
                 capture_output=True, cwd=self.REPO).returncode == 0
-            if tracked and store not in stores:
+            if tracked and not self.covered(store, stores):
                 missing.append(f"{store} (written by {', '.join(sorted(writers))})")
         self.assertEqual(missing, [], "the daily build rewrites these and the "
                          "job never commits them, so every run redoes the work")
+
+    def test_every_store_exists_so_the_add_stages_anything(self):
+        """`git add` refuses the whole pathspec list over one missing path.
+
+        The workflow stages `public/data app/assets/fixtures ${STORES}` in one
+        command, so a store listed before any step has written it would stage
+        nothing at all, published documents included.
+        """
+        missing = [store for store in sorted(self.stores())
+                   if subprocess.run(["git", "ls-files", "--error-unmatch", store],
+                                     capture_output=True, cwd=self.REPO).returncode]
+        self.assertEqual(missing, [], "listed in STORES and not in git")
+
+
+class SkipStreaks(unittest.TestCase):
+    """A best-effort skip is a shrug; the same shrug STUCK_AFTER runs running is red.
+
+    Named insiders printed "0 read, 6 unreachable" and exited 0 in every build
+    from 10 to 16 Sep 2026, and the Arabic names asked twelve dead tickers in
+    115 of 116, so every one of those runs was green.
+    """
+
+    STEP = "Named insiders"
+
+    def setUp(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.path = pathlib.Path(tmp.name) / "best_effort_skips.json"
+
+    def run_build(self, codes):
+        return build(codes, "--skip-counter", str(self.path))
+
+    def streak(self, name=STEP):
+        doc = json.loads(self.path.read_text(encoding="utf-8"))
+        return (doc["steps"].get(name) or {}).get("runs", 0)
+
+    def test_the_steps_used_here_are_best_effort(self):
+        for name in (self.STEP, "Filed documents", "Arabic names"):
+            self.assertIn(name, build_all.BEST_EFFORT)
+
+    def test_no_progress_is_a_skip_not_a_failure(self):
+        code, out = self.run_build({self.STEP: NO_PROGRESS})
+        self.assertEqual(code, 0)
+        self.assertIn(f"::warning title=Best-effort step made no progress::{self.STEP}", out)
+        self.assertEqual(self.streak(), 1)
+
+    def test_a_skip_is_not_reported_as_every_step_succeeding(self):
+        _, out = self.run_build({self.STEP: NO_PROGRESS})
+        self.assertNotIn("all steps succeeded", out)
+        _, out = self.run_build({})
+        self.assertIn("all steps succeeded", out)
+
+    def test_six_in_a_row_turn_the_run_red(self):
+        for run in range(1, build_all.STUCK_AFTER):
+            code, out = self.run_build({self.STEP: NO_PROGRESS})
+            self.assertEqual(code, 0, f"red after {run} skip(s)")
+            self.assertNotIn("::error", out)
+        code, out = self.run_build({self.STEP: NO_PROGRESS})
+        # 1, not 2: what the other steps built is still committed, and the run
+        # still ends red.
+        self.assertEqual(code, 1)
+        self.assertIn(f"::error title=Best-effort step stuck::{self.STEP} has been "
+                      f"skipped {build_all.STUCK_AFTER} runs in a row", out)
+
+    def test_it_stays_red_until_the_step_does_something(self):
+        for _ in range(build_all.STUCK_AFTER + 2):
+            code, _ = self.run_build({self.STEP: NO_PROGRESS})
+        self.assertEqual(code, 1)
+        self.assertEqual(self.streak(), build_all.STUCK_AFTER + 2)
+        code, out = self.run_build({})
+        self.assertEqual(code, 0, out)
+        self.assertEqual(self.streak(), 0)
+
+    def test_one_run_that_refreshes_starts_the_count_again(self):
+        for _ in range(build_all.STUCK_AFTER - 1):
+            self.run_build({self.STEP: NO_PROGRESS})
+        self.run_build({})
+        for _ in range(build_all.STUCK_AFTER - 1):
+            code, _ = self.run_build({self.STEP: NO_PROGRESS})
+        self.assertEqual(code, 0)
+        self.assertEqual(self.streak(), build_all.STUCK_AFTER - 1)
+
+    def test_a_host_that_refused_counts_like_no_progress(self):
+        for _ in range(build_all.STUCK_AFTER):
+            code, _ = self.run_build({"Filed documents": 1})
+        self.assertEqual(code, 1)
+        self.assertEqual(self.streak("Filed documents"), build_all.STUCK_AFTER)
+
+    def test_each_step_keeps_its_own_count(self):
+        # Two flaky steps taking turns each refresh every other run, and
+        # neither has been stuck at any point.
+        for run in range(build_all.STUCK_AFTER * 2):
+            skipping = self.STEP if run % 2 else "Arabic names"
+            code, _ = self.run_build({skipping: NO_PROGRESS})
+            self.assertEqual(code, 0, f"run {run}")
+        self.assertEqual(self.streak(), 1)
+
+    def test_a_step_the_build_never_reached_keeps_its_count(self):
+        # A critical stop ends the build long before the ownership readers, and
+        # not running is not the same as refreshing.
+        for _ in range(3):
+            self.run_build({self.STEP: NO_PROGRESS})
+        code, _ = self.run_build({"Staleness guard": 1})
+        self.assertEqual(code, 2)
+        self.assertEqual(self.streak(), 3)
+
+    def test_the_check_pass_counts_nothing(self):
+        code, _ = build({"Shareholder structure": NO_PROGRESS},
+                        "--check", "--skip-counter", str(self.path))
+        self.assertEqual(code, 0)
+        self.assertFalse(self.path.exists(), "the --check pass wrote the counter")
+
+    def test_without_a_counter_nothing_is_counted(self):
+        code, _ = build({self.STEP: NO_PROGRESS})
+        self.assertEqual(code, 0)
+        self.assertFalse(self.path.exists())
+
+    def test_no_progress_from_a_step_that_must_succeed_is_a_failure(self):
+        fatal = [n for n, *_ in build_all.STEPS if n not in
+                 build_all.BEST_EFFORT | build_all.CRITICAL | build_all.NO_PUBLISH]
+        code, _ = self.run_build({fatal[0]: NO_PROGRESS})
+        self.assertEqual(code, 1)
+
+    def test_a_name_no_longer_in_the_build_cannot_hold_it_red(self):
+        self.path.write_text(json.dumps({"steps": {
+            "A step since removed": {"runs": 40, "since": "2026-09-01T00:00:00+00:00"}}}),
+            encoding="utf-8")
+        code, _ = self.run_build({})
+        self.assertEqual(code, 0)
+        self.assertNotIn("A step since removed", self.path.read_text(encoding="utf-8"))
+
+    def test_an_unreadable_counter_starts_again(self):
+        self.path.write_text("{ not json", encoding="utf-8")
+        code, _ = self.run_build({self.STEP: NO_PROGRESS})
+        self.assertEqual(code, 0)
+        self.assertEqual(self.streak(), 1)
+
+    def test_a_clean_run_rewrites_the_same_bytes(self):
+        """No streak, no diff: a quiet run leaves nothing of its own to commit."""
+        self.run_build({})
+        first = self.path.read_bytes()
+        self.run_build({})
+        self.assertEqual(self.path.read_bytes(), first)
+
+
+class EveryStepRunsOnARunner(unittest.TestCase):
+    """What the build names has to exist on the machine that runs it."""
+
+    def test_no_step_is_handed_a_program_from_one_laptop(self):
+        # `agy` is a local agent in ~/.local/bin. Named insiders and Shareholder
+        # structure were given `--engine agy` in CI, which has no such thing.
+        for name, script, _, *extra in build_all.STEPS:
+            self.assertNotIn("agy", extra[0] if extra else [], f"{name} ({script})")
+
+    def test_no_step_script_hardcodes_a_path_in_a_home_directory(self):
+        for script in sorted({s for _, s, *_ in build_all.STEPS}):
+            source = (HERE / script).read_text(encoding="utf-8")
+            self.assertIsNone(re.search(r"""['"]/Users/""", source),
+                              f"{script} names a path in one person's home directory")
+
+    def test_every_best_effort_step_has_a_name_of_its_own(self):
+        names = [n for n, *_ in build_all.STEPS if n in build_all.BEST_EFFORT]
+        self.assertEqual(sorted({n for n in names if names.count(n) > 1}), [],
+                         "the skip counter keys on the name, so these share one streak")
+
+    def test_every_best_effort_name_is_a_step(self):
+        self.assertEqual(sorted(build_all.BEST_EFFORT - {n for n, *_ in build_all.STEPS}), [],
+                         "renamed out from under BEST_EFFORT, so a skip there fails the build")
+
+    def test_a_step_that_can_report_no_progress_is_best_effort(self):
+        """NO_PROGRESS from a step that must succeed fails the whole build."""
+        reporting = []
+        for name, script, *_ in build_all.STEPS:
+            if "NO_PROGRESS" in (HERE / script).read_text(encoding="utf-8"):
+                reporting.append(name)
+                self.assertIn(name, build_all.BEST_EFFORT, f"{name} ({script})")
+        # Guards the loop: these are the steps this exit code was made for.
+        for name in ("Named insiders", "Shareholder structure", "Arabic names",
+                     "Company filings harvest", "Filed documents"):
+            self.assertIn(name, reporting)
+
+
+def workflow_step(name: str) -> str:
+    """The `run: |` block of the publish-app-data step called `name`, dedented."""
+    lines = (HERE.parent / ".github" / "workflows" / "publish-app-data.yml") \
+        .read_text(encoding="utf-8").splitlines()
+    start = lines.index(f"      - name: {name}")
+    run = next(i for i in range(start, len(lines)) if lines[i].strip() == "run: |")
+    body = []
+    for line in lines[run + 1:]:
+        if line.strip() and not line.startswith(" " * 10):
+            break
+        body.append(line[10:])
+    return "\n".join(body)
+
+
+class TheCountSurvivesTheRunner(unittest.TestCase):
+    """The counter, through the workflow's own staging, in a real repository.
+
+    Each run is a fresh clone, the way a runner checks main out, so a count
+    moves only if the workflow stages and commits it: the file has to be in
+    STORES, and it has to get past "Confirm the manifest fingerprint moved",
+    which failed any run whose only change was a side-store.
+    """
+
+    WORKFLOW = HERE.parent / ".github" / "workflows" / "publish-app-data.yml"
+    COUNTER = "scripts/best_effort_skips.json"
+    STEP = "Named insiders"
+
+    def setUp(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.root = pathlib.Path(tmp.name)
+        text = self.WORKFLOW.read_text(encoding="utf-8")
+        self.stores = re.search(r"STORES: >-\n((?:\s{4}\S+\n)+)", text).group(1).split()
+        quiet = self.root / "gitconfig"
+        quiet.write_text("", encoding="utf-8")
+        self.env = {**os.environ, "GIT_CONFIG_GLOBAL": str(quiet), "GIT_CONFIG_NOSYSTEM": "1",
+                    "GIT_AUTHOR_NAME": "barbarian-bot", "GIT_AUTHOR_EMAIL": "bot@example.com",
+                    "GIT_COMMITTER_NAME": "barbarian-bot", "GIT_COMMITTER_EMAIL": "bot@example.com",
+                    "STORES": " ".join(self.stores)}
+        self.origin = self.root / "origin.git"
+        self.git("init", "-q", "--bare", "-b", "main", str(self.origin))
+        seed = self.root / "seed"
+        self.git("clone", "-q", str(self.origin), str(seed))
+        # Every store exists, as it does on main, or the add stages nothing.
+        for store in self.stores:
+            path = seed / store
+            if path.suffix == ".json":
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text("{}\n", encoding="utf-8")
+            else:
+                path.mkdir(parents=True, exist_ok=True)
+                (path / "held.json").write_text("{}\n", encoding="utf-8")
+        for doc in ("public/data/v1/manifest.json", "app/assets/fixtures/manifest.json"):
+            (seed / doc).parent.mkdir(parents=True, exist_ok=True)
+            (seed / doc).write_text('{"data_version": "a"}\n', encoding="utf-8")
+        (seed / "public/data/v1/news.json").write_text('{"items": []}\n', encoding="utf-8")
+        self.git("add", "-A", cwd=seed)
+        self.git("commit", "-q", "-m", "seed", cwd=seed)
+        self.git("push", "-q", "origin", "HEAD:main", cwd=seed)
+        self.runs = 0
+
+    def git(self, *args, cwd=None):
+        return subprocess.run(("git", *args), cwd=cwd or self.root, env=self.env,
+                              check=True, capture_output=True, text=True)
+
+    def stage_and_confirm(self, runner):
+        outputs = runner.parent / f"{runner.name}.outputs"
+        outputs.write_text("", encoding="utf-8")
+        env = {**self.env, "GITHUB_OUTPUT": str(outputs)}
+        subprocess.run(["bash", "-c", workflow_step("Show what changed")],
+                       cwd=runner, env=env, check=True, capture_output=True, text=True)
+        if "changed=true" not in outputs.read_text(encoding="utf-8"):
+            return None
+        return subprocess.run(["bash", "-c", workflow_step("Confirm the manifest fingerprint moved")],
+                              cwd=runner, env=env, capture_output=True, text=True)
+
+    def ci_run(self, codes):
+        """Check out, rebuild, stage, confirm, commit and push, as one run does."""
+        self.runs += 1
+        runner = self.root / f"runner-{self.runs}"
+        self.git("clone", "-q", str(self.origin), str(runner))
+        code, _ = build(codes, "--skip-counter", str(runner / self.COUNTER))
+        confirm = self.stage_and_confirm(runner)
+        if confirm is not None and confirm.returncode == 0:
+            self.git("commit", "-q", "-m", "data: rebuild published app data", cwd=runner)
+            self.git("push", "-q", "origin", "HEAD:main", cwd=runner)
+        return code, confirm
+
+    def committed_streak(self):
+        shown = self.git("--git-dir", str(self.origin), "show", f"main:{self.COUNTER}").stdout
+        return (json.loads(shown).get("steps", {}).get(self.STEP) or {}).get("runs", 0)
+
+    def test_six_runs_in_a_row_are_counted_across_checkouts_and_turn_red(self):
+        for run in range(1, build_all.STUCK_AFTER + 1):
+            code, confirm = self.ci_run({self.STEP: NO_PROGRESS})
+            self.assertIsNotNone(confirm, f"run {run}: the workflow staged no change")
+            self.assertEqual(confirm.returncode, 0, confirm.stdout + confirm.stderr)
+            self.assertEqual(self.committed_streak(), run)
+            self.assertEqual(code, 1 if run == build_all.STUCK_AFTER else 0, f"run {run}")
+
+    def test_a_run_that_refreshes_commits_the_end_of_the_streak(self):
+        for _ in range(3):
+            self.ci_run({self.STEP: NO_PROGRESS})
+        self.assertEqual(self.committed_streak(), 3)
+        code, confirm = self.ci_run({})
+        self.assertEqual(code, 0)
+        self.assertEqual(confirm.returncode, 0, confirm.stdout + confirm.stderr)
+        self.assertEqual(self.committed_streak(), 0)
+
+    def test_a_published_change_still_needs_a_new_fingerprint(self):
+        # The side-store exemption must not have switched the guard off.
+        runner = self.root / "by-hand"
+        self.git("clone", "-q", str(self.origin), str(runner))
+        (runner / "public/data/v1/news.json").write_text('{"items": [1]}\n', encoding="utf-8")
+        confirm = self.stage_and_confirm(runner)
+        self.assertEqual(confirm.returncode, 1, confirm.stdout + confirm.stderr)
+        self.assertIn("data_version did not move", confirm.stdout)
+
+    def test_the_rebuild_keeps_the_count_and_the_validate_pass_does_not(self):
+        text = self.WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn(f"python3 scripts/build_all.py --skip-counter {self.COUNTER}", text)
+        self.assertIn(self.COUNTER, self.stores)
+        self.assertIsNone(re.search(r"build_all\.py --check[^\n]*--skip-counter", text))

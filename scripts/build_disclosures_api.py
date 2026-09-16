@@ -572,6 +572,26 @@ def triage(item: dict) -> dict:
     }
 
 
+# What `enrich_disclosures.py` reads off a filing's detail page. The feed never
+# carries these, so a fetched copy of a filing is missing them by construction.
+#
+# The merge below used to replace the held copy with the fetched one, which
+# un-read every filing in the fetch window: the fifteen-minute job does it four
+# times an hour. Filed documents reads the newest unread filings first, so it
+# read the same eight every build and the count never moved — between 289 and
+# 297 read across 116 builds from 3 to 16 Sep 2026, while the step logged
+# "read 8" in 61 of them.
+DETAIL_FIELDS = ("detail_read", "attachments")
+
+
+def carry_detail(item: dict, held: dict | None) -> dict:
+    """The fetched filing, keeping what its detail page already said."""
+    for key in DETAIL_FIELDS:
+        if held and key in held and key not in item:
+            item[key] = held[key]
+    return item
+
+
 def archive_read() -> dict[str, dict]:
     """Every filing ever collected, by id.
 
@@ -760,6 +780,7 @@ def main() -> int:
     classify_all(items, held=existing, deadline=deadline)
     for item in items:
         item.update(triage(item))
+        carry_detail(item, existing.get(item["id"]))
     existing.update({i["id"]: i for i in items})
 
     # Re-label anything carrying a type the current taxonomy no longer knows.

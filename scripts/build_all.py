@@ -21,6 +21,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import datetime
 import subprocess
@@ -29,6 +30,9 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+
+from step_outcome import NO_PROGRESS  # noqa: E402
 
 # The month before this one, as YYYY-MM. Corrections and late filings land in
 # the previous month often enough that harvesting only the current one leaves
@@ -353,14 +357,25 @@ STEPS = [
     # A few scanned post-execution forms per run, not the whole backlog. Each
     # one is a model call and the store remembers what it has already read, so
     # a daily trickle clears new filings without ever re-reading an old one.
-    # The engine is the local agent, which bills nobody.
-    ("Named insiders", "build_named_insiders.py", False, ["--limit", "6", "--engine", "agy"]),
+    #
+    # Through Vertex, because this runs on a runner. Both readers used to name
+    # `agy`, a binary on one laptop, and to fetch with that laptop's Scrapling
+    # at a hard-coded path, so from 10 to 16 Sep 2026 every build logged
+    # "0 read, 6 unreachable" for one and "could not fetch the document" for
+    # the other, in no seconds at all, and exited 0. Their stores were not in
+    # the workflow's STORES either, so anything CI did read would have left
+    # with the runner. Measured from a laptop before wiring it here: Scrapling's
+    # Fetcher brings the exchange's PDF back byte for byte in about 20 s, and
+    # Vertex read ELNA's structure form in 21 s for about $0.004. What a
+    # runner's address gets from the exchange is what the next CI run shows.
+    ("Named insiders", "build_named_insiders.py", False,
+     ["--limit", "6", "--engine", "vertex"]),
     # The other form, and the one that covers the market rather than a trade:
     # every listed company files its board and its shareholder structure, so
     # roughly 245 documents name most of the exchange. Same trickle, same
     # store-remembers-what-it-read rule.
     ("Shareholder structure", "build_ownership_structure.py", True,
-     ["--limit", "6", "--engine", "agy"]),
+     ["--limit", "6", "--engine", "vertex"]),
     ("Insider people", "build_insider_people.py", True),
     # Which of those named holders are themselves listed companies, read sector
     # to sector. A local transform over the two documents above — no network,
@@ -377,6 +392,12 @@ STEPS = [
     # for more. Only companies whose name is still unknown are asked, so this
     # is a no-op the moment the map is full and a small catch-up whenever the
     # exchange lists something new.
+    #
+    # And not a ticker Mubasher answered 404 for in the last week. Fourteen
+    # listed companies have no page there under their symbol (checked on
+    # 16 Sep 2026 from a laptop, with COMI answering 200 beside them), so the
+    # first twelve of them were asked in 115 of the 116 builds from 3 to
+    # 16 Sep: about a minute a run for "+0 names · 12 unreadable", exit 0.
     ("Arabic names", "harvest_names_mubasher.py", False, ["--limit", "12"]),
     # Who each company is — industry, incorporation, owners, subsidiaries.
     # The only whole-market source of it anyone found, and the app held
@@ -400,8 +421,21 @@ STEPS = [
     # transport it prints so and leaves the published briefs alone.
     ("Company briefs", "build_company_briefs.py", False,
      ["--limit", "6", "--budget", "0.50"]),
-    ("Company filings", "harvest_company_filings.py", False,
+    # Named apart from "Company filings" above, the page-per-company transform.
+    # Both are best-effort and the skip counter keys on the name, so two steps
+    # under one name would share one streak.
+    #
+    # From 3 to 16 Sep 2026 this answered nothing in 82 of 116 builds, in
+    # streaks of up to nineteen, and the timeouts named the same company run
+    # after run — CAED seventeen times, AREH twelve. The first company in the
+    # queue is the page the browser opens, and one slow issuer there sank the
+    # whole batch until a lucky run. It now goes to the back of the queue.
+    ("Company filings harvest", "harvest_company_filings.py", False,
      ["--limit", "5", "--spacing", "6"]),
+    # It said "read 8" in 61 of those 116 builds, and every build started from
+    # between 289 and 297 read: the eight were the newest unread filings, and
+    # the next disclosures fetch replaced each with a copy never read at all.
+    # See DETAIL_FIELDS in build_disclosures_api.py.
     ("Filed documents", "enrich_disclosures.py", False,
      ["--limit", "8", "--spacing", "6"]),
     # The manifest again, and this time it is last.
@@ -478,7 +512,7 @@ BEST_EFFORT = {
     "Sector reads",
     "Company profiles",
     "Company briefs",
-    "Company filings",
+    "Company filings harvest",
     "Filed documents",
     # The exchange's own BFF, paced and serialized. It blocked this project
     # once; a refusal here means the archive is one build older, which is the
@@ -490,6 +524,34 @@ BEST_EFFORT = {
     "Unit-scaled net profit",
     "Investors",
 }
+
+# How many runs in a row a best-effort step may be skipped before the build says
+# so in red.
+#
+# Best-effort is the right answer to a host that blips and the wrong one to a
+# step that never works. A skip leaves the last good document in place, so a
+# permanent skip is a document that quietly stops moving while every run stays
+# green: the named insiders for six days, the Arabic names for as far back as
+# the logs go. A skip is a non-zero exit, and NO_PROGRESS (step_outcome.py) is
+# how a step that ran and got nothing says so.
+#
+# Six, from the 116 app-data builds between 3 and 16 Sep 2026:
+#
+#   * No step that recovered on its own was skipped more than three runs in a
+#     row. Filed documents is the flakiest: its host answered nothing in 40 of
+#     the 107 builds before the browser broke, and it reached three twice.
+#     Disclosures reached three once, inside that outage.
+#   * The outage itself, when playwright 1.63.0 stopped Chromium opening at
+#     16:49 UTC on 15 Sep, skipped Filed documents seven runs in a row, every
+#     one of them green, until the fix nineteen hours later. At six, the run
+#     at 07:34 the next morning would have been red.
+#   * Missing 37% of the time, six misses in a row by chance is about one run
+#     in six hundred: a false alarm every two months at the nine or so builds a
+#     day this repository runs. Five would be every three weeks, four every
+#     nine days.
+#
+# Six runs is one to two trading days: four scheduled builds a day, and pushes.
+STUCK_AFTER = 6
 
 # Steps whose failure should stop the build immediately rather than press on and
 # publish. The staleness guard is the one: once it says the archive is a day old,
@@ -513,10 +575,74 @@ NO_PUBLISH = {
 }
 
 
+class SkipCounter:
+    """How many runs in a row each best-effort step has been skipped.
+
+    It lives in a file the workflow commits, because a count kept on a runner
+    is zero again on the next one. A step that refreshes ends its streak; a
+    step the build never reached keeps the count it had.
+    """
+
+    def __init__(self, path: Path):
+        self.path = path
+        try:
+            doc = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            doc = {}
+        steps = doc.get("steps") if isinstance(doc, dict) else None
+        # A name that is no longer a best-effort step in this build has no
+        # streak left to end, and would otherwise hold every run red for good.
+        live = BEST_EFFORT & {step[0] for step in STEPS}
+        self.steps: dict[str, dict] = {
+            name: entry for name, entry in (steps if isinstance(steps, dict) else {}).items()
+            if name in live and isinstance(entry, dict) and isinstance(entry.get("runs"), int)
+        }
+
+    def skipped(self, name: str, why: str) -> int:
+        entry = self.steps.get(name)
+        if entry is None:
+            entry = {"runs": 0, "since": datetime.datetime.now(datetime.timezone.utc)
+                     .isoformat(timespec="seconds")}
+            # The run whose log shows the first skip, which is where to start
+            # reading once the streak is long enough to matter.
+            if run := os.environ.get("GITHUB_RUN_ID"):
+                entry["sinceRun"] = run
+        entry["runs"] += 1
+        entry["last"] = why
+        self.steps[name] = entry
+        return entry["runs"]
+
+    def refreshed(self, name: str) -> None:
+        self.steps.pop(name, None)
+
+    def stuck(self) -> list[tuple[str, dict]]:
+        return [(name, entry) for name, entry in sorted(self.steps.items())
+                if entry["runs"] >= STUCK_AFTER]
+
+    def save(self) -> None:
+        doc = {
+            "stuckAfter": STUCK_AFTER,
+            "steps": {name: self.steps[name] for name in sorted(self.steps)},
+        }
+        body = json.dumps(doc, ensure_ascii=False, indent=1, sort_keys=True) + "\n"
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        partial = self.path.with_name(self.path.name + ".partial")
+        partial.write_text(body, encoding="utf-8")
+        partial.replace(self.path)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true")
+    # Only the real pass counts. The --check pass runs a different set of steps
+    # in the same workflow run, and counting both would count one run twice.
+    ap.add_argument("--skip-counter", default="",
+                    help="where each best-effort step's run of consecutive "
+                         "skips is kept; publish-app-data commits it")
     args = ap.parse_args()
+
+    counter = SkipCounter(Path(args.skip_counter)) \
+        if args.skip_counter and not args.check else None
 
     failed = []
 
@@ -555,10 +681,21 @@ def main() -> int:
                 # permanently refused looked exactly like one that blipped —
                 # a grey line in a forty-minute log and a green run. That is
                 # how the disclosures feed sat eight days stale.
-                print(f"::warning title=Best-effort step skipped::{name}: the host "
-                      "would not answer. Published data for this step is unchanged.")
-                print("   the host would not answer — trying again next run")
+                if result.returncode == NO_PROGRESS:
+                    why = "it had work to do and finished none of it"
+                    print(f"::warning title=Best-effort step made no progress::{name}: "
+                          f"{why}. Published data for this step is unchanged.")
+                    print("   nothing came of it — trying again next run")
+                else:
+                    why = f"exit {result.returncode}"
+                    print(f"::warning title=Best-effort step skipped::{name}: the host "
+                          "would not answer. Published data for this step is unchanged.")
+                    print("   the host would not answer — trying again next run")
                 skipped.append(name)
+                if counter:
+                    runs = counter.skipped(name, why)
+                    print(f"   skipped {runs} run(s) in a row; the build goes red at "
+                          f"{STUCK_AFTER}")
                 continue
             failed.append(name)
             if name in NO_PUBLISH:
@@ -572,6 +709,12 @@ def main() -> int:
                 print("   critical — stopping before anything is rebuilt")
                 stopped = name
                 break
+        elif counter and name in BEST_EFFORT:
+            counter.refreshed(name)
+
+    stuck = counter.stuck() if counter else []
+    if counter:
+        counter.save()
 
     print()
     if spent:
@@ -604,6 +747,10 @@ def main() -> int:
     #
     #     So the workflow publishes what succeeded and still ends red. Loud and
     #     lossless, rather than the choice between them.
+    #
+    #     A best-effort step skipped STUCK_AFTER runs in a row takes the same
+    #     road: its skip was a shrug each time, and together they are a
+    #     document that has stopped moving.
     if skipped:
         print(f"build_all: {len(skipped)} best-effort step(s) skipped: "
               f"{', '.join(skipped)}")
@@ -613,9 +760,16 @@ def main() -> int:
                 with open(summary, "a", encoding="utf-8") as fh:
                     fh.write(f"### {len(skipped)} best-effort step(s) skipped\n\n")
                     for name in skipped:
-                        fh.write(f"- {name}\n")
+                        streak = counter.steps.get(name, {}).get("runs") if counter else None
+                        fh.write(f"- {name}"
+                                 + (f" ({streak} runs in a row)" if streak else "") + "\n")
             except OSError:
                 pass
+    for name, entry in stuck:
+        print(f"::error title=Best-effort step stuck::{name} has been skipped "
+              f"{entry['runs']} runs in a row, since {entry.get('since')}, so its "
+              "published data has not moved in that time. Make it work here or "
+              "take it out of scripts/build_all.py.")
     if stopped:
         print(f"build_all: stopped at a critical step: {stopped}")
         return 2
@@ -625,10 +779,19 @@ def main() -> int:
               "it is our own published documents disagreeing about a named "
               "company. Refusing to publish.")
         return 2
-    if failed:
-        print(f"build_all: {len(failed)} step(s) did not refresh: {', '.join(failed)}")
+    if failed or stuck:
+        if failed:
+            print(f"build_all: {len(failed)} step(s) did not refresh: {', '.join(failed)}")
+        if stuck:
+            print(f"build_all: {len(stuck)} best-effort step(s) skipped {STUCK_AFTER} "
+                  f"or more runs in a row: {', '.join(name for name, _ in stuck)}")
         print("build_all: every other step's output is fit to publish")
         return 1
+    if skipped:
+        # Not "all steps succeeded", which is what this printed straight after
+        # naming the steps that had not.
+        print("build_all: every step that has to succeed did")
+        return 0
     print("build_all: all steps succeeded")
     return 0
 

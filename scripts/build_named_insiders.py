@@ -40,18 +40,20 @@ import unicodedata
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import gemini  # noqa: E402
+import scrapling_python  # noqa: E402
+from step_outcome import NO_PROGRESS  # noqa: E402
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 LEDGER = REPO / "data-source" / "official" / "ownership" / "ownership-ledger.json"
 STORE = REPO / "data-source" / "official" / "ownership" / "named-insiders.json"
 PDF_DIR = REPO / "data-source" / "official" / "ownership" / "pdfs"
 
-# Scrapling, because this host refuses an ordinary client. `curl` and the
-# browser fetcher both come back with a 5 KB viewer wrapper; the plain
-# `Fetcher` with stealthy headers returns the 700 KB document.
-SCRAPLING_PY = pathlib.Path(
-    "/Users/barbary/Library/Application Support/pipx/venvs/scrapling/bin/python"
-)
+# Two documents in a row that nothing came back for, and the run stops asking.
+#
+# A refusal from the exchange, or a model that has stopped answering, is not
+# about one form, and each attempt is a download plus up to three model calls
+# at three minutes apiece. The forms left over are first in the queue next run.
+GIVE_UP_AFTER = 2
 
 PROMPT = """This is an Egyptian Exchange post-execution disclosure form
 (نموذج إفصاح بعد التنفيذ), scanned. Read it and return JSON only:
@@ -75,8 +77,17 @@ If the scan is too poor to read with confidence, set "legible": false."""
 
 
 def fetch_pdf(url: str, into: pathlib.Path) -> bool:
-    """The document itself, not the viewer around it."""
-    if not SCRAPLING_PY.exists():
+    """The document itself, not the viewer around it.
+
+    Scrapling, because this host refuses an ordinary client. `curl` and the
+    browser fetcher both come back with a 5 KB viewer wrapper; the plain
+    `Fetcher` with stealthy headers returns the 700 KB document.
+
+    The interpreter used to be a path in one laptop's home directory, so on a
+    runner this returned False before asking anything, six times a build.
+    """
+    python = scrapling_python.find()
+    if python is None:
         return False
     code = (
         "from scrapling.fetchers import Fetcher\n"
@@ -86,7 +97,7 @@ def fetch_pdf(url: str, into: pathlib.Path) -> bool:
         "open(sys.argv[2], 'wb').write(b)\n"
     )
     try:
-        subprocess.run([str(SCRAPLING_PY), "-c", code, url, str(into)],
+        subprocess.run([str(python), "-c", code, url, str(into)],
                        check=True, capture_output=True, timeout=180)
     except (subprocess.SubprocessError, OSError):
         return False
@@ -134,14 +145,25 @@ def read_form_agy(pdf: pathlib.Path) -> dict | None:
     return _json_from(proc.stdout)
 
 
-def read_form(pdf: pathlib.Path) -> dict | None:
+def read_form(pdf: pathlib.Path, prompt: str = PROMPT,
+              max_output_tokens: int = 2000) -> dict | None:
+    """One scan through Vertex, answered as JSON, or None.
+
+    The prompt is the caller's. `build_ownership_structure.py` reads a
+    different form with this, and when it could only borrow the function it
+    borrowed this form's prompt too: with `--engine vertex`, or whenever the
+    local agent returned nothing, a register was asked for one trade's
+    investor. At best that is no usable answer; at worst the model calls the
+    page illegible for the question it was given, which that builder records
+    as a permanent refusal.
+    """
     body = json.dumps({
         "contents": [{"role": "user", "parts": [
             {"inlineData": {"mimeType": "application/pdf",
                             "data": base64.b64encode(pdf.read_bytes()).decode()}},
-            {"text": PROMPT},
+            {"text": prompt},
         ]}],
-        "generationConfig": {"temperature": 0, "maxOutputTokens": 2000,
+        "generationConfig": {"temperature": 0, "maxOutputTokens": max_output_tokens,
                              **gemini.THINKING_OFF},
     }).encode()
     try:
@@ -401,10 +423,18 @@ def main() -> int:
     print(f"── {len(forms)} post-execution forms, "
           f"{len(readings)} already read, {len(refused)} previously refused, "
           f"{len(todo)} to attempt")
+    if todo and scrapling_python.find() is None:
+        print(f"   {scrapling_python.missing_note()}")
 
     PDF_DIR.mkdir(parents=True, exist_ok=True)
-    done = failed = 0
+    done = failed = attempted = verdicts = 0
+    in_a_row = 0
     for form in todo[: max(0, args.limit)]:
+        if in_a_row >= GIVE_UP_AFTER:
+            print(f"   nothing came back for {in_a_row} forms in a row — "
+                  "stopping; the rest are first in the queue next run")
+            break
+        attempted += 1
         fid = str(form.get("filingId"))
         ticker = form.get("ticker") or ""
         url = form["attachments"][0]
@@ -413,6 +443,7 @@ def main() -> int:
             if not fetch_pdf(url, pdf):
                 print(f"   {fid} {ticker}: the exchange would not hand over the file")
                 failed += 1
+                in_a_row += 1
                 continue
             reading = (read_form_agy(pdf) if args.engine == "agy"
                        else read_form(pdf))
@@ -423,7 +454,10 @@ def main() -> int:
         if reading is None:
             print(f"   {fid} {ticker}: no answer from the model")
             failed += 1
+            in_a_row += 1
             continue
+        in_a_row = 0
+        verdicts += 1
         record, why = vet(reading, ticker, form, issuer_name(form, ticker))
         if not record:
             refused[fid] = why
@@ -445,6 +479,13 @@ def main() -> int:
     STORE.write_text(json.dumps(store, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"   {done} read, {failed} unreachable, {len(refused)} refused in total")
     print(f"   {len(readings)} named readings held in {STORE.relative_to(REPO)}")
+    # A refusal is a verdict about a form and takes it out of the queue, so it
+    # counts as progress. Nothing fetched and nothing read does not: this is
+    # the line that printed "0 read, 6 unreachable" in every build for six
+    # days and then exited 0.
+    if attempted and not verdicts:
+        print(f"   none of the {attempted} attempted came back — no progress this run")
+        return NO_PROGRESS
     return 0
 
 

@@ -36,6 +36,8 @@ import subprocess
 import sys
 
 import build_named_insiders as named
+import scrapling_python
+from step_outcome import NO_PROGRESS
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 LEDGER = REPO / "data-source" / "official" / "ownership" / "ownership-ledger.json"
@@ -101,6 +103,19 @@ def read_structure_agy(pdf: pathlib.Path) -> dict | None:
     except (subprocess.SubprocessError, OSError):
         return None
     return named._json_from(proc.stdout)
+
+
+def read_structure_vertex(pdf: pathlib.Path) -> dict | None:
+    """The same reading through Vertex, which is what a runner has.
+
+    With THIS form's prompt. The fallback used to be `named.read_form(pdf)`,
+    whose prompt asks for one trade's investor.
+
+    Eight thousand tokens out, not two: a register is a list. ELNA's five
+    directors and eight holders took 548, and EGTS files forty-three rows, so
+    two thousand would cut the largest registers off mid-name.
+    """
+    return named.read_form(pdf, prompt=PROMPT, max_output_tokens=8000)
 
 
 # A percentage and a share count that disagree by more than this are not two
@@ -332,8 +347,11 @@ def main(argv=None) -> int:
         return 0
 
     PDF_DIR.mkdir(parents=True, exist_ok=True)
-    reader = read_structure_agy if args.engine == "agy" else None
-    kept = refused = unreachable = 0
+    if scrapling_python.find() is None:
+        print(f"   {scrapling_python.missing_note()}")
+    reader = read_structure_agy if args.engine == "agy" else read_structure_vertex
+    kept = refused = unreachable = attempted = 0
+    in_a_row = 0
 
     out = pathlib.Path(args.store) if args.store else STORE
 
@@ -352,6 +370,11 @@ def main(argv=None) -> int:
         tmp.replace(out)
 
     for doc in queue[: max(0, args.limit)]:
+        if in_a_row >= named.GIVE_UP_AFTER:
+            print(f"   nothing came back for {in_a_row} documents in a row — "
+                  "stopping; the rest are first in the queue next run")
+            break
+        attempted += 1
         filing = str(doc.get("filingId"))
         ticker = doc.get("ticker")
         url = doc["attachments"][0]
@@ -359,19 +382,21 @@ def main(argv=None) -> int:
         if not pdf.exists() and not named.fetch_pdf(url, pdf):
             print(f"   {filing} {ticker}: could not fetch the document")
             unreachable += 1
+            in_a_row += 1
             continue
-        reading = reader(pdf) if reader else None
-        if reading is None:
-            reading = named.read_form(pdf)
+        reading = reader(pdf)
+        if reading is None and args.engine == "agy":
+            reading = read_structure_vertex(pdf)
         # A reader that timed out or came back truncated has told us nothing
         # about the document. Recording that as a refusal would blacklist the
         # company for good — four of the first twenty-three were lost that way,
         # to a busy machine rather than to anything on the page.
         if not incomplete(reading):
-            pass
+            in_a_row = 0
         else:
             print(f"   {filing} {ticker}: the reader gave no usable answer — will retry")
             unreachable += 1
+            in_a_row += 1
             continue
         issuer = named.issuer_name({}, ticker) or (doc.get("title") or "")
         why = vet(reading, ticker, issuer)
@@ -414,6 +439,13 @@ def main(argv=None) -> int:
     save()
     print(f"   kept {kept}, refused {refused}, unreachable {unreachable}; "
           f"{len(store['readings'])} companies read in all")
+    # A refusal takes a document out of the queue, so it is progress. Nothing
+    # fetched and nothing read is not: six documents unreachable and then
+    # "ELNA: could not fetch the document", each followed by exit 0, was every
+    # build from 10 to 16 Sep 2026.
+    if attempted and not (kept or refused):
+        print(f"   none of the {attempted} attempted came back — no progress this run")
+        return NO_PROGRESS
     return 0
 
 

@@ -17,8 +17,10 @@ import json
 import pathlib
 import tempfile
 import unittest
+from unittest import mock
 
 import build_ownership_structure as structure
+from step_outcome import NO_PROGRESS
 
 
 def form(**over):
@@ -325,3 +327,124 @@ class NamesOnTheForm(unittest.TestCase):
         reading = form()
         reading["board"] = [{"nameArabic": None, "role": None, "representing": None}]
         self.assertIn("no usable name", structure.vet(reading, "AAA", ISSUER) or "")
+
+
+class TheReader(unittest.TestCase):
+    """A register is read with the register's prompt, on whatever reads it.
+
+    The Vertex path was `named.read_form(pdf)`, whose prompt asks for one
+    trade's investor. Asked that about a board and a shareholder table, the
+    model can only say nothing useful — or call the page illegible for the
+    question, which this builder records as a permanent refusal.
+    """
+
+    def test_vertex_is_asked_about_the_board_and_the_holders(self):
+        sent = []
+
+        def post(model, body, timeout):
+            sent.append(json.loads(body))
+            return {"candidates": [{"content": {"parts": [{"text": json.dumps(form())}]}}]}
+
+        with tempfile.TemporaryDirectory() as tmp, \
+             mock.patch.object(structure.named.gemini, "_post", post):
+            pdf = pathlib.Path(tmp) / "structure-1.pdf"
+            pdf.write_bytes(b"%PDF-1.6 test")
+            self.assertEqual(structure.read_structure_vertex(pdf), form())
+        text = sent[0]["contents"][0]["parts"][1]["text"]
+        self.assertEqual(text, structure.PROMPT)
+        self.assertNotEqual(text, structure.named.PROMPT)
+        # Forty-three rows on EGTS's form; two thousand tokens cuts it off.
+        self.assertGreaterEqual(sent[0]["generationConfig"]["maxOutputTokens"], 8000)
+
+    def test_when_the_local_agent_answers_nothing_the_fallback_asks_the_same_question(self):
+        prompts = []
+
+        def read_form(pdf, prompt=structure.named.PROMPT, max_output_tokens=2000):
+            prompts.append(prompt)
+            return form()
+
+        with tempfile.TemporaryDirectory() as tmp, \
+             mock.patch.object(structure, "STORE", pathlib.Path(tmp) / "store.json"), \
+             mock.patch.object(structure, "LEDGER", pathlib.Path(tmp) / "ledger.json"), \
+             mock.patch.object(structure, "PDF_DIR", pathlib.Path(tmp) / "pdfs"), \
+             mock.patch.object(structure, "read_structure_agy", lambda pdf: None), \
+             mock.patch.object(structure.named, "read_form", read_form), \
+             mock.patch.object(structure.named, "fetch_pdf",
+                               lambda url, path: path.write_bytes(b"%PDF-") or True):
+            structure.LEDGER.write_text(json.dumps({"documents": [
+                {"filingId": "900", "kind": "ownership_structure", "ticker": "MAAL",
+                 "publishedAt": "2026-06-01T10:00:00", "attachments": ["https://example.invalid/900.pdf"]}]}),
+                encoding="utf-8")
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(structure.main(["--limit", "1", "--engine", "agy"]), 0)
+        self.assertEqual(prompts, [structure.PROMPT])
+
+
+class TheRun(unittest.TestCase):
+    """What a build learns from this step.
+
+    "ELNA: could not fetch the document" and exit 0 was every build from
+    11 to 16 Sep 2026, and six unreachable documents the night before.
+    """
+
+    def setUp(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        root = pathlib.Path(tmp.name)
+        for name, path in (("STORE", root / "store.json"), ("LEDGER", root / "ledger.json"),
+                           ("PDF_DIR", root / "pdfs")):
+            patcher = mock.patch.object(structure, name, path)
+            patcher.start()
+            self.addCleanup(patcher.stop)
+        structure.LEDGER.write_text(json.dumps({"documents": [
+            {"filingId": str(900 + i), "kind": "ownership_structure", "ticker": f"T{i:02d}",
+             "publishedAt": f"2026-06-{i + 1:02d}T10:00:00",
+             "attachments": [f"https://example.invalid/{900 + i}.pdf"]} for i in range(5)]}),
+            encoding="utf-8")
+        self.fetched = []
+
+    def run_main(self, fetched, reading):
+        def fetch_pdf(url, path):
+            self.fetched.append(url)
+            if fetched:
+                path.write_bytes(b"%PDF-")
+            return fetched
+
+        with mock.patch.object(structure.named, "fetch_pdf", fetch_pdf), \
+             mock.patch.object(structure, "read_structure_vertex", lambda pdf: reading), \
+             contextlib.redirect_stdout(io.StringIO()) as out:
+            code = structure.main(["--limit", "5", "--engine", "vertex"])
+        return code, out.getvalue()
+
+    def held(self):
+        return json.loads(structure.STORE.read_text(encoding="utf-8")) \
+            if structure.STORE.exists() else {}
+
+    def test_a_run_that_fetches_nothing_says_so(self):
+        code, out = self.run_main(False, form())
+        self.assertEqual(code, NO_PROGRESS, out)
+
+    def test_it_stops_asking_once_nothing_comes_back_twice(self):
+        self.run_main(False, form())
+        self.assertEqual(len(self.fetched), structure.named.GIVE_UP_AFTER)
+
+    def test_a_reader_that_answers_nothing_is_no_progress_and_no_refusal(self):
+        code, _ = self.run_main(True, None)
+        self.assertEqual(code, NO_PROGRESS)
+        self.assertEqual(self.held().get("refused") or {}, {})
+
+    def test_a_reading_is_progress(self):
+        code, _ = self.run_main(True, form())
+        self.assertEqual(code, 0)
+        self.assertEqual(len(self.held()["readings"]), 5)
+
+    def test_a_refusal_is_progress(self):
+        # ELNA read this way from a laptop on 16 Sep 2026: a holder printed at
+        # 9.78% whose share count is 9.87% of the company. Refused, and out of
+        # the queue, which is the end of "could not fetch" in every build.
+        contradicting = form(shareholders=[{"nameArabic": "سامي عبد الرحيم فؤاد",
+                                            "percent": 9.78, "shares": 20_491_000,
+                                            "kind": "person"}])
+        code, _ = self.run_main(True, contradicting)
+        self.assertEqual(code, 0)
+        self.assertEqual(len(self.held()["refused"]), 5)

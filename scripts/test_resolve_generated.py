@@ -110,6 +110,49 @@ class RecordTest(unittest.TestCase):
         self.assertIsNone(payload, "it must not merge a windowed feed")
 
 
+class ReadFilingTest(unittest.TestCase):
+    """What a filing's detail page said survives the collision.
+
+    `detail_read` and `attachments` are written by the slow build alone. On
+    16 Sep 2026 run 35090659439 read eight filings' documents, the union here
+    took the fast lane's copy of each whole, and none of the eight reached
+    main — which is how Filed documents read the same eight every build.
+    """
+
+    READ = {"detail_read": True, "attachments": [{"url": "https://example.invalid/1.pdf"}]}
+
+    def test_a_filing_read_by_the_slow_build_keeps_its_reading_through_a_union(self):
+        live = doc(items=[{"id": 1, "title": "live"}, {"id": 2, "title": "live"},
+                          {"id": 3, "title": "live"}])
+        build = doc(items=[{"id": 1, "title": "build", **self.READ}, {"id": 2, "title": "build"}])
+        choice, payload, why = resolver.decide(live, build)
+        self.assertEqual(choice, "merged", why)
+        rows = {r["id"]: r for r in json.loads(payload)["items"]}
+        self.assertEqual(set(rows), {1, 2, 3})
+        self.assertTrue(rows[1].get("detail_read"), "the reading was dropped")
+        self.assertEqual(rows[1]["attachments"], self.READ["attachments"])
+        # Where both copies carry a field, the side that won before still wins.
+        self.assertEqual(rows[1]["title"], "live")
+
+    def test_the_same_filings_on_both_sides_keep_what_only_ours_read(self):
+        # The caller keeps theirs when the record sets match, so a replay by
+        # the fast lane over the slow build's commit un-read the filings.
+        main = doc(items=[{"id": 1, "title": "main", **self.READ}, {"id": 2, "title": "main"}])
+        replayed = doc(items=[{"id": 1, "title": "replayed"}, {"id": 2, "title": "replayed"}])
+        choice, payload, why = resolver.decide(main, replayed)
+        self.assertEqual(choice, "merged", why)
+        rows = {r["id"]: r for r in json.loads(payload)["items"]}
+        self.assertTrue(rows[1].get("detail_read"), "the reading was dropped")
+        self.assertEqual(rows[1]["title"], "replayed", "theirs stopped winning its own fields")
+        self.assertEqual(rows[2], {"id": 2, "title": "replayed"})
+
+    def test_matching_filings_with_nothing_to_add_are_still_left_alone(self):
+        main = doc(items=[{"id": 1, "title": "main"}])
+        replayed = doc(items=[{"id": 1, "title": "replayed", **self.READ}])
+        self.assertIsNone(resolver.decide(main, replayed)[0],
+                          "theirs already holds everything, so the caller's rule is right")
+
+
 class SafetyTest(unittest.TestCase):
     """It would rather have no opinion than stop the pipeline publishing."""
 
