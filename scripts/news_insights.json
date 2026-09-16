@@ -2455,6 +2455,10 @@
     "meaning": "Government initiatives targeting startup export access focus on standardizing cross-border regulatory procedures, facilitating foreign currency transactions, and providing institutional channels into foreign trade networks.",
     "meaning_ar": "تركز المبادرات الحكومية الموجهة لدعم تصدير الشركات الناشئة على توحيد الإجراءات التنظيمية العابرة للحدود، وتيسير المعاملات بالنقد الأجنبي، وتوفير قنوات مؤسسية للنفاذ إلى شبكات التجارة الخارجية."
   },
+  "الحكومه تنفي مزاعم فرض ضريبه علي تصاريح دفن الموتي": {
+    "meaning": "Official denials of new administrative fees maintain the current public service tariff schedule and leave household administrative expenditure structures unchanged.",
+    "meaning_ar": "يُبقي النفي الرسمي لفرض رسوم إدارية جديدة على جدول تعريفة الخدمات العامة الحالية دون تعديل في هيكل المصروفات الإدارية للقطاع العائلي."
+  },
   "الحكومه توافق علي القيمه العادله المحدثه ل«بنك القاهره» تمهيدا للطرح بالبورصه": {
     "meaning": "Official approval of the updated asset valuation establishes the statutory pricing baseline required by regulatory authorities to execute an initial public offering on the exchange.",
     "meaning_ar": "يمثل اعتماد التقييم المحدث للأصول تحديداً للأساس السعري الإلزامي المطلوب من الجهات الرقابية لتنفيذ إجراءات الطرح العام في البورصة."
@@ -6325,6 +6329,10 @@
     "meaning": "Semi-annual financial statements reflect divergent operational performance and earnings across listed companies represented on the EGX board, showing mixed outcomes between net profit expansion and net losses based on sector-specific dynamics and cost structures.",
     "meaning_ar": "تعكس القوائم المالية نصف السنوية تباينًا في الأداء التشغيلي ومستويات الربحية للشركات المقيدة الممثلة في مجلس إدارة البورصة، حيث تسجل بعضها أرباحًا بينما تُظهر أخرى خسائر صافية تبعًا لطبيعة تكاليف وتشغيل كل قطاع."
   },
+  "ما حقوق العاملين عند انقسام الشركات؟ الاجر والتامينات والاقدميه والاجازات ابرزها": {
+    "meaning": "Corporate demergers legally transfer existing labor obligations, wage structures, and accrued benefits directly to the resulting entities as ongoing operational liabilities under Egyptian corporate law.",
+    "meaning_ar": "يُلزم الإطار القانوني لانقسام الشركات بنقل التزامات العمل القائمة وهياكل الأجور والمستحقات التأمينية التراكمية مباشرة إلى الكيانات الناتجة كالتزامات تشغيلية مستمرة."
+  },
   "ما مصير الشركات غير المتعاونه في تحقيق مكافحه اغراق الجبن الهولندي؟": {
     "meaning": "Under trade defense regulations, non-cooperating foreign exporters in anti-dumping investigations face default duties calculated using the highest available tariff rates or 'facts available' rather than their specific operational cost data, directly raising their import clearance costs.",
     "meaning_ar": "بموجب لوائح المعالجات التجارية، تُطبق على الشركات الأجنبية المصدرة غير المتعاونة في تحقيقات مكافحة الإغراق رسوم حمائية استناداً إلى أعلى الهوامش المتاحة أو قاعدة البيانات المعتمدة بدلاً من بيانات تكاليفها الفعلية، مما يرفع تكلفة التخليص الجمركي لمنتجاتها."
@@ -7256,6 +7264,10 @@
   "هل فقد وادي السيليكون ثقه الجمهور في الذكاء الاصطناعي؟": {
     "meaning": "Public scrutiny of technology sector practices alters consumer adoption rates and prompts reassessments of capital allocation toward artificial intelligence research and infrastructure.",
     "meaning_ar": "يؤدي التدقيق العام في ممارسات قطاع التكنولوجيا إلى تعديل معدلات تبني المستهلكين للمنتجات وإعادة تقييم تخصيص رؤوس الأموال الموجهة لأبحاث وبنية الذكاء الاصطناعي التحتية."
+  },
+  "هل يجوز خفض راتب العامل عند انقسام الشركه؟ تعرف علي موقف الاجر والبدلات والحوافز": {
+    "meaning": "Corporate demergers involve the legal transfer of employment contracts to newly formed entities while labor regulations govern whether existing base salaries, allowances, and compensation structures remain fixed as non-negotiable operational liabilities.",
+    "meaning_ar": "يتضمن التقسيم المؤسسي للشركات نقل العقود الوظيفية قانونياً إلى الكيانات المنبثقة حديثاً، بينما تحكم التشريعات العمالية مدى ثبات الرواتب الأساسية والبدلات والمزايا القائمة كالتزامات تشغيلية غير قابلة للتعديل."
   },
   "هل يدفع فايض الصين القياسي العالم نحو “اتفاق بلازا” جديد؟": {
     "meaning": "A Plaza-style agreement is a multilateral monetary framework where major global economies coordinate interventions in foreign exchange markets to devalue a dominant currency and rebalance international trade flows.",
