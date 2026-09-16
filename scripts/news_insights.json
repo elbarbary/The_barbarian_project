@@ -1223,6 +1223,10 @@
     "meaning": "Equity prices reflect market positioning and the repricing of capital costs ahead of central bank monetary policy announcements, where interest rate decisions directly establish baseline borrowing costs and corporate valuation discount rates across the economy.",
     "meaning_ar": "تعكس أسعار الأسهم مراكز التداول وإعادة تسعير تكلفة رأس المال قبيل إعلانات السياسة النقدية للبنوك المركزية، حيث تحدد قرارات أسعار الفائدة تكاليف الاقتراض الأساسية ومعدلات خصم التقييم للشركات في السوق."
   },
+  "ارتفاع الاسهم الاوروبيه وسط مكاسب قطاعي التعدين والبنوك": {
+    "meaning": "European equities advance as increased commodity valuations raise revenue metrics for mining companies, while interest rate environments sustain net interest income across the banking sector.",
+    "meaning_ar": "ترتفع الأسهم الأوروبية بالتزامن مع زيادة تقييمات السلع الأساسية التي ترفع إيرادات شركات التعدين، إلى جانب استقرار مستويات أسعار الفائدة التي تدعم صافي دخل الفوائد في القطاع المصرفي."
+  },
   "ارتفاع الاسهم اليابانيه باكثر من 2% في اولي جلسات الاسبوع": {
     "meaning": "A gain of over 2% in Japanese equity benchmarks reflects an upward adjustment in market capitalization across listed equities on the Tokyo exchange, driven by session trading volume and net capital inflows.",
     "meaning_ar": "يعكس ارتفاع مؤشرات الأسهم اليابانية بأكثر من 2% نمواً في القيمة السوقية الإجمالية للشركات المدرجة في بورصة طوكيو، مدفوعاً بتدفقات نقدية شرائية وأحجام تداول منفذة خلال الجلسة."
@@ -3123,6 +3127,10 @@
     "meaning": "The company shifts from a net loss to a net profit, recording 39.1 million EGP as realized operating revenues exceed total costs and financing expenses during the financial period.",
     "meaning_ar": "تتحول الشركة من تسجيل صافي خسائر إلى صافي أرباح محققة بقيمة 39.1 مليون جنيه، نتيجة تجاوز الإيرادات التشغيلية لمجمل التكاليف والمصروفات التمويلية عن الفترة المالية المعنية."
   },
+  "المعاملات الخارجيه للكيانات غير المصرفيه في الصين تسجل 1.5 تريليون دولار في اغسطس": {
+    "meaning": "This metric tracks cross-border receipts and payments conducted by domestic non-bank enterprises and individuals, reflecting the total volume of international trade settlements, corporate cross-border financing, and direct foreign investment activity.",
+    "meaning_ar": "يقيس هذا المؤشر حجم التدفقات المالية والمقبوضات والمدفوعات الدولية عبر الحدود للشركات والأفراد خارج القطاع المصرفي، مما يعكس إجمالي معاملات تسوية التجارة الخارجية والتمويل والاستثمار المباشر."
+  },
   "المملكه المتحده تتجه لدفع اعلي تكلفه اقتراض في بيع سندات منذ عام 1998": {
     "meaning": "Higher sovereign bond yields directly elevate the government's debt-servicing expenses and establish a higher risk-free benchmark rate across credit markets.",
     "meaning_ar": "يؤدي ارتفاع عائد السندات السيادية مباشرة إلى زيادة أعباء خدمة الدين الحكومي ويرفع سعر الفائدة القياسي الخالي من المخاطر في أسواق الائتمان."
@@ -3952,6 +3960,10 @@
     "meaning": "Intensifying price competition in the automotive sector prompts consumers to delay purchases in anticipation of further discounts, leading to reduced transaction volumes and inventory accumulation at dealerships.",
     "meaning_ar": "يؤدي اشتداد المنافسة السعرية في قطاع السيارات إلى تأجيل المستهلكين لقرارات الشراء انتظاراً لخصومات إضافية، مما يسفر عن انخفاض أحجام المبيعات وتراكم المخزون لدى الوكلاء."
   },
+  "تراجع مخزونات الوقود الصينيه يهدد بفرض قيود علي الصادرات": {
+    "meaning": "Declining domestic refined product inventories prompt regulatory measures prioritizing local market supply, which links export quota allocations directly to national reserve thresholds.",
+    "meaning_ar": "يؤدي انخفاض المخزونات المحلية من الوقود المكرر إلى تفعيل قيود تنظيمية تعطي الأولوية للسوق الداخلي، مما يربط حصص التصدير المسموح بها بمستويات الاحتياطي القومي."
+  },
   "تراجع موشرات البورصه المصريه بختام التعاملات.. والثلاثيني يهبط 0.80%": {
     "meaning": "The decline in broad market indices, including the EGX30 benchmark falling by 0.80%, reflects net selling pressure across constituent equities, which reduces aggregate listed market capitalization at the daily market close.",
     "meaning_ar": "يعكس تراجع المؤشرات الرئيسية، بما في ذلك هبوط مؤشر إيجي إكس 30 بنسبة 0.80%، زيادة في ضغوط البيع على الأسهم المكونة للمؤشر، مما يؤدي إلى انخفاض القيمة السوقية الإجمالية للشركات المدرجة بختام التعاملات اليومية."
@@ -4399,6 +4411,10 @@
   "جيتكس للاستثمارات تتحول للخساره بقيمه 0.3 مليون دولار بالنصف الاول": {
     "meaning": "The company shifts from a net profit to a net deficit of $0.3 million for the six-month period, reflecting total operational costs, financing charges, and non-operating expenses exceeding total revenues generated during the half.",
     "meaning_ar": "يعكس تحول الشركة إلى تسجيل صافي خسائر بقيمة 0.3 مليون دولار خلال فترة الستة أشهر تجاوز إجمالي التكاليف التشغيلية والأعباء التمويلية والمصروفات غير التشغيلية لحجم الإيرادات المحققة خلال النصف الأول."
+  },
+  "جيتكس للاستثمارات تفاقم خسايرها في يوليو 2026": {
+    "meaning": "Wider periodic net losses reflect an operational imbalance where total expenses, financing costs, or asset devaluations exceed current revenues, which directly erodes the company's equity base on the balance sheet.",
+    "meaning_ar": "يعكس تفاقم صافي الخسائر الدورية اختلالاً تشغيلياً تتجاوز فيه المصروفات الإجمالية أو تكاليف التمويل أو انخفاضات قيمة الأصول حجم الإيرادات المحققة، مما يؤدي مباشرة إلى تآكل قاعدة حقوق الملكية في الميزانية العمومية."
   },
   "جيه بي مورجان يوسع اعمال الخدمات المصرفيه للشركات في اليونان": {
     "meaning": "JPMorgan establishes and broadens its local corporate banking infrastructure and product coverage in Greece, providing lending, cash management, and advisory services directly to domestic corporate entities and institutional clients.",
@@ -7364,6 +7380,10 @@
   "يتجاوز 169 جنيها للبيع.. سعر الدينار الكويتي اليوم الاحد 13-9-2026 بالبنوك": {
     "meaning": "The exchange rate of the Kuwaiti Dinar crossing 169 Egyptian Pounds reflects the current interbank pricing dynamics and currency valuation, directly determining the domestic currency cost of imports, debt settlements, and foreign remittances denominated in KWD.",
     "meaning_ar": "يعكس تجاوز سعر صرف الدينار الكويتي 169 جنيهًا مصريًا آليات التسعير الحالية بين البنوك وتقييم العملة، وهو ما يحدد بصورة مباشرة تكلفة الواردات وتسوية الالتزامات وتحويلات العاملين بالخارج المقومة بالدينار بالعملة المحلية."
+  },
+  "يتجاوز 170 جنيها للبيع.. سعر الدينار الكويتي اليوم الاربعاء 16-9-2026 ببدء التعاملات": {
+    "meaning": "The exchange rate exceeding 170 EGP per Kuwaiti Dinar reflects the official pricing mechanism in the banking sector, raising the local currency cost of bilateral imports, overseas remittances, and debt-servicing denominated in KWD.",
+    "meaning_ar": "يعكس تجاوز سعر صرف الدينار الكويتي 170 جنيهاً آليات التسعير الرسمية في القطاع المصرفي، مما يرفع تكلفة الواردات والتحويلات الخارجية وخدمة الالتزامات المقومة بالدينار بالعملة المحلية."
   },
   "يو بي اس يعيد شراء ديون علي كريدي سويس بقيمه 7.9 مليار دولار": {
     "meaning": "The bank repurchases outstanding debt securities issued by Credit Suisse prior to maturity, extinguishing these obligations from its consolidated balance sheet and modifying its total liabilities and financing costs.",
