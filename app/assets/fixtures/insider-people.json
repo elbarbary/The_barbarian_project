@@ -1,19 +1,27 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-16T21:35:33+00:00",
+ "generated": "2026-09-16T22:01:46+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1312,
- "tradeCount": 135,
+ "peopleCount": 1313,
+ "tradeCount": 141,
  "tickerCount": 241,
- "tradedTickerCount": 67,
- "firmCount": 436,
+ "tradedTickerCount": 68,
+ "firmCount": 437,
  "personCount": 876,
  "aliasCount": 139,
  "registerCount": 240,
  "overDisclosed": [],
  "supersededByRegister": [
+  {
+   "holder": "ناس للاستثمارات القابضة المحدودة",
+   "ticker": "EFIC",
+   "percent": 25,
+   "asOf": "2026-09-08",
+   "filingId": "294442",
+   "why": "the filed register for EFIC does not list this name, and counting both made the company 101.80% owned"
+  },
   {
    "holder": "ابراهيم محمد ابراهيم احمد هيبه",
    "ticker": "HBCO",
@@ -120,6 +128,43 @@
      "stakeBefore": 89.041147,
      "stakeAfter": 62.791147,
      "source": "https://www.egx.com.eg/downloads/Bulletins/328700_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "ناس للاستثمارات القابضة المحدودة",
+   "name": "ناس للاستثمارات القابضة المحدودة",
+   "nameEn": "Nas lil-Istithmarat al-Qabidah al-Mahdudah",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "EFIC"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 5012500000.0,
+   "singleCompanyMove": {
+    "ticker": "EFIC",
+    "from": 0,
+    "to": 25,
+    "change": 25
+   },
+   "trades": [
+    {
+     "filingId": "294442",
+     "date": "2026-09-08",
+     "ticker": "EFIC",
+     "company": null,
+     "companyAr": "المالية والصناعية المصرية",
+     "action": "buy",
+     "shares": 25000000,
+     "price": 200.5,
+     "value": 5012500000.0,
+     "stakeBefore": 0,
+     "stakeAfter": 25,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343969_1.pdf"
     }
    ]
   },
@@ -462,6 +507,73 @@
      "stakeBefore": 26.14,
      "stakeAfter": 20.0,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343157_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "اميرالد للاتصالات وتكنولوجيا المعلومات",
+   "name": "اميرالد للاتصالات وتكنولوجيا المعلومات",
+   "nameEn": "Emerald for Communication and Information Technology",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": [
+    "شركة اميرالد للاتصالات وتكنولوجيا المعلومات"
+   ],
+   "tickers": [
+    "IEEC"
+   ],
+   "tradeCount": 3,
+   "boughtCount": 0,
+   "soldCount": 3,
+   "value": 52520000.0,
+   "singleCompanyMove": {
+    "ticker": "IEEC",
+    "from": 11.09,
+    "to": 5.404,
+    "change": -5.686
+   },
+   "trades": [
+    {
+     "filingId": "294186",
+     "date": "2026-08-31",
+     "ticker": "IEEC",
+     "company": null,
+     "companyAr": "المشروعات الصناعية والهندسية",
+     "action": "sell",
+     "shares": 30000000,
+     "price": 1.093,
+     "value": 32790000.0,
+     "stakeBefore": 11.09,
+     "stakeAfter": 9.04,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343682_1.pdf"
+    },
+    {
+     "filingId": "294463",
+     "date": "2026-09-08",
+     "ticker": "IEEC",
+     "company": null,
+     "companyAr": "المشروعات الصناعية والهندسية",
+     "action": "sell",
+     "shares": 10000000,
+     "price": 0.99,
+     "value": 9900000.0,
+     "stakeBefore": 5.404,
+     "stakeAfter": 4.71,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343984_1.pdf"
+    },
+    {
+     "filingId": "294465",
+     "date": "2026-09-08",
+     "ticker": "IEEC",
+     "company": null,
+     "companyAr": "المشروعات الصناعية والهندسية",
+     "action": "sell",
+     "shares": 10000000,
+     "price": 0.983,
+     "value": 9830000.0,
+     "stakeBefore": 6.09,
+     "stakeAfter": 5.404,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343948_1.pdf"
     }
    ]
   },
@@ -820,6 +932,57 @@
    ]
   },
   {
+   "id": "لايم فست بارتنرز للرعاية الصحية",
+   "name": "لايم فست بارتنرز للرعاية الصحية",
+   "nameEn": "LimeVest Partners for Healthcare",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "AMES"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 0,
+   "soldCount": 2,
+   "value": 713851827.79,
+   "singleCompanyMove": {
+    "ticker": "AMES",
+    "from": 60.11,
+    "to": 56.08,
+    "change": -4.03
+   },
+   "trades": [
+    {
+     "filingId": "294436",
+     "date": "2026-09-08",
+     "ticker": "AMES",
+     "company": null,
+     "companyAr": "الإسكندرية للخدمات الطبية",
+     "action": "sell",
+     "shares": 1741964,
+     "price": 72.157,
+     "value": 125694896.34799999,
+     "stakeBefore": 60.11,
+     "stakeAfter": 59.4,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343953_1.pdf"
+    },
+    {
+     "filingId": "294522",
+     "date": "2026-09-09",
+     "ticker": "AMES",
+     "company": null,
+     "companyAr": "الإسكندرية للخدمات الطبية",
+     "action": "sell",
+     "shares": 8108036,
+     "price": 72.54,
+     "value": 588156931.44,
+     "stakeBefore": 59.4,
+     "stakeAfter": 56.08,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344016_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "يوسف محمد مدحت يوسف الفار",
    "name": "يوسف محمد مدحت يوسف الفار",
    "nameEn": "Youssef Mohamed Medhat Youssef El Far",
@@ -908,60 +1071,6 @@
    ]
   },
   {
-   "id": "اميرالد لالتصالات وتكنولوجيا المعلومات",
-   "name": "اميرالد لالتصالات وتكنولوجيا المعلومات",
-   "nameEn": "Emerald for Communication and Information Technology",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": [
-    "اميرالد للاتصالات وتكنولوجيا المعلومات",
-    "شركة اميرالد للاتصالات وتكنولوجيا المعلومات"
-   ],
-   "tickers": [
-    "IEEC"
-   ],
-   "tradeCount": 2,
-   "boughtCount": 0,
-   "soldCount": 2,
-   "value": 56190000.0,
-   "singleCompanyMove": {
-    "ticker": "IEEC",
-    "from": 11.09,
-    "to": 7.67,
-    "change": -3.42
-   },
-   "trades": [
-    {
-     "filingId": "294186",
-     "date": "2026-08-31",
-     "ticker": "IEEC",
-     "company": null,
-     "companyAr": "المشروعات الصناعية والهندسية",
-     "action": "sell",
-     "shares": 30000000,
-     "price": 1.093,
-     "value": 32790000.0,
-     "stakeBefore": 11.09,
-     "stakeAfter": 9.04,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343682_1.pdf"
-    },
-    {
-     "filingId": "294273",
-     "date": "2026-09-02",
-     "ticker": "IEEC",
-     "company": null,
-     "companyAr": "المشروعات الصناعية والهندسية",
-     "action": "sell",
-     "shares": 20000000,
-     "price": 1.17,
-     "value": 23400000.0,
-     "stakeBefore": 9.04,
-     "stakeAfter": 7.67,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343792_1.pdf"
-    }
-   ]
-  },
-  {
    "id": "السيد صابر السيد حميد",
    "name": "السيد صابر السيد حميد",
    "nameEn": "El Sayed Saber El Sayed Hameed",
@@ -1023,43 +1132,6 @@
      "stakeBefore": 5.12,
      "stakeAfter": 3.4,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342366_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "لايم فست بارتنرز للرعاية الصحية",
-   "name": "لايم فست بارتنرز للرعاية الصحية",
-   "nameEn": "LimeVest Partners for Healthcare",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": null,
-   "tickers": [
-    "AMES"
-   ],
-   "tradeCount": 1,
-   "boughtCount": 0,
-   "soldCount": 1,
-   "value": 588156931.44,
-   "singleCompanyMove": {
-    "ticker": "AMES",
-    "from": 59.4,
-    "to": 56.08,
-    "change": -3.32
-   },
-   "trades": [
-    {
-     "filingId": "294522",
-     "date": "2026-09-09",
-     "ticker": "AMES",
-     "company": null,
-     "companyAr": "الإسكندرية للخدمات الطبية",
-     "action": "sell",
-     "shares": 8108036,
-     "price": 72.54,
-     "value": 588156931.44,
-     "stakeBefore": 59.4,
-     "stakeAfter": 56.08,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/344016_1.pdf"
     }
    ]
   },
@@ -1763,6 +1835,43 @@
    ]
   },
   {
+   "id": "اميرالد لالتصالات وتكنولوجيا المعلومات",
+   "name": "اميرالد لالتصالات وتكنولوجيا المعلومات",
+   "nameEn": "Emerald for Communication and Information Technology",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "IEEC"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 23400000.0,
+   "singleCompanyMove": {
+    "ticker": "IEEC",
+    "from": 9.04,
+    "to": 7.67,
+    "change": -1.37
+   },
+   "trades": [
+    {
+     "filingId": "294273",
+     "date": "2026-09-02",
+     "ticker": "IEEC",
+     "company": null,
+     "companyAr": "المشروعات الصناعية والهندسية",
+     "action": "sell",
+     "shares": 20000000,
+     "price": 1.17,
+     "value": 23400000.0,
+     "stakeBefore": 9.04,
+     "stakeAfter": 7.67,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343792_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "بايونيرز بروبرتيز للتنمية العمرانية",
    "name": "بايونيرز بروبرتيز للتنمية العمرانية",
    "nameEn": "Pioneers Properties for Urban Development",
@@ -1944,6 +2053,45 @@
      "stakeBefore": 5.1,
      "stakeAfter": 4.175,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342402_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "شركة التلال للاسكان والتعمير ش م م",
+   "name": "شركة التلال للاسكان والتعمير ش م م",
+   "nameEn": "Sharikat Al-Telal Lil-Iskan Wal-Ta'meer S.A.E.",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": [
+    "التلال للإسكان والتعمير ش . م . م"
+   ],
+   "tickers": [
+    "GIHD"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 3651796.86,
+   "singleCompanyMove": {
+    "ticker": "GIHD",
+    "from": 14.96,
+    "to": 15.87,
+    "change": 0.91
+   },
+   "trades": [
+    {
+     "filingId": "294440",
+     "date": "2026-09-08",
+     "ticker": "GIHD",
+     "company": null,
+     "companyAr": "الغربية الاسلامية للتنمية العمرانية",
+     "action": "buy",
+     "shares": 51017,
+     "price": 71.58,
+     "value": 3651796.86,
+     "stakeBefore": 14.96,
+     "stakeAfter": 15.87,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343974_1.pdf"
     }
    ]
   },
@@ -2763,45 +2911,6 @@
      "stakeBefore": 9.894,
      "stakeAfter": 10.037,
      "source": "https://www.egx.com.eg/downloads/Bulletins/344259_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "نواف بن عبد الله بن ابراهيم بن دايل",
-   "name": "نواف بن عبد الله بن ابراهيم بن دايل",
-   "nameEn": "Nawaf bin Abdullah bin Ibrahim bin Dayel",
-   "script": "ar",
-   "kind": "person",
-   "aliases": [
-    "نواف بن عبدالله بن إبراهيم بن دايل"
-   ],
-   "tickers": [
-    "GDWA"
-   ],
-   "tradeCount": 1,
-   "boughtCount": 0,
-   "soldCount": 1,
-   "value": 5839200.0,
-   "singleCompanyMove": {
-    "ticker": "GDWA",
-    "from": 5.002,
-    "to": 4.868,
-    "change": -0.134
-   },
-   "trades": [
-    {
-     "filingId": "293573",
-     "date": "2026-08-19",
-     "ticker": "GDWA",
-     "company": null,
-     "companyAr": "جدوى للتنمية الصناعية",
-     "action": "sell",
-     "shares": 7200000,
-     "price": 0.811,
-     "value": 5839200.0,
-     "stakeBefore": 5.002,
-     "stakeAfter": 4.868,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343134_1.pdf"
     }
    ]
   },
@@ -3918,6 +4027,55 @@
      "stakeBefore": 6.426,
      "stakeAfter": 3.807,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343284_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "نواف بن عبد الله بن ابراهيم بن دايل",
+   "name": "نواف بن عبد الله بن ابراهيم بن دايل",
+   "nameEn": "Nawaf bin Abdullah bin Ibrahim bin Dayel",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "نواف بن عبدالله بن إبراهيم بن دايل"
+   ],
+   "tickers": [
+    "ELEC",
+    "GDWA"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 1,
+   "soldCount": 1,
+   "value": 127423200.0,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "293573",
+     "date": "2026-08-19",
+     "ticker": "GDWA",
+     "company": null,
+     "companyAr": "جدوى للتنمية الصناعية",
+     "action": "sell",
+     "shares": 7200000,
+     "price": 0.811,
+     "value": 5839200.0,
+     "stakeBefore": 5.002,
+     "stakeAfter": 4.868,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343134_1.pdf"
+    },
+    {
+     "filingId": "294437",
+     "date": "2026-09-08",
+     "ticker": "ELEC",
+     "company": null,
+     "companyAr": "الكابلات الكهربائية المصرية",
+     "action": "buy",
+     "shares": 59600000,
+     "price": 2.04,
+     "value": 121584000.0,
+     "stakeBefore": 3.44,
+     "stakeAfter": 5.239,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343920_1.pdf"
     }
    ]
   },
@@ -6184,21 +6342,6 @@
    "trades": []
   },
   {
-   "id": "التلال للإسكان والتعمير ش . م . م",
-   "name": "التلال للإسكان والتعمير ش . م . م",
-   "nameEn": null,
-   "script": null,
-   "kind": "firm",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
    "id": "حسين مصطفي محمد جاد",
    "name": "حسين مصطفي محمد جاد",
    "nameEn": null,
@@ -7970,21 +8113,6 @@
   {
    "id": "اتحاد العاملين المساهمين (AFMC)",
    "name": "اتحاد العاملين المساهمين (AFMC)",
-   "nameEn": null,
-   "script": null,
-   "kind": "firm",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "ناس للاستثمارات القابضة المحدودة",
-   "name": "ناس للاستثمارات القابضة المحدودة",
    "nameEn": null,
    "script": null,
    "kind": "firm",
@@ -23420,9 +23548,13 @@
    "basis": "trade",
    "filingId": "294522",
    "source": "https://www.egx.com.eg/downloads/Bulletins/344016_1.pdf",
-   "openedAt": "2026-09-09",
-   "openingPercent": 59.4,
+   "openedAt": "2026-09-08",
+   "openingPercent": 60.11,
    "history": [
+    {
+     "date": "2026-09-08",
+     "percent": 59.4
+    },
     {
      "date": "2026-09-09",
      "percent": 56.08
@@ -26679,6 +26811,24 @@
    "history": []
   },
   {
+   "holder": "شركة التلال للاسكان والتعمير ش م م",
+   "kind": "firm",
+   "ticker": "GIHD",
+   "percent": 15.87,
+   "asOf": "2026-09-08",
+   "basis": "trade",
+   "filingId": "294440",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/343974_1.pdf",
+   "openedAt": "2026-09-08",
+   "openingPercent": 14.96,
+   "history": [
+    {
+     "date": "2026-09-08",
+     "percent": 15.87
+    }
+   ]
+  },
+  {
    "holder": "شركة مصر للتامين",
    "kind": "firm",
    "ticker": "ELSH",
@@ -27754,20 +27904,6 @@
    "filingId": "291297",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340999_1.pdf",
    "shares": 138841132,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
-  },
-  {
-   "holder": "التلال للإسكان والتعمير ش . م . م",
-   "kind": "firm",
-   "ticker": "GIHD",
-   "percent": 12.238,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291059",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/340767_1.pdf",
-   "shares": 688386,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -29390,7 +29526,7 @@
    "history": []
   },
   {
-   "holder": "اميرالد لالتصالات وتكنولوجيا المعلومات",
+   "holder": "اميرالد للاتصالات وتكنولوجيا المعلومات",
    "kind": "firm",
    "ticker": "AIFI",
    "percent": 9.83,
@@ -30747,13 +30883,9 @@
    "basis": "trade",
    "filingId": "294273",
    "source": "https://www.egx.com.eg/downloads/Bulletins/343792_1.pdf",
-   "openedAt": "2026-08-31",
-   "openingPercent": 11.09,
+   "openedAt": "2026-09-02",
+   "openingPercent": 9.04,
    "history": [
-    {
-     "date": "2026-08-31",
-     "percent": 9.04
-    },
     {
      "date": "2026-09-02",
      "percent": 7.67
@@ -32883,6 +33015,32 @@
    "history": []
   },
   {
+   "holder": "اميرالد للاتصالات وتكنولوجيا المعلومات",
+   "kind": "firm",
+   "ticker": "IEEC",
+   "percent": 5.404,
+   "asOf": "2026-09-08",
+   "basis": "trade",
+   "filingId": "294465",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/343948_1.pdf",
+   "openedAt": "2026-08-31",
+   "openingPercent": 11.09,
+   "history": [
+    {
+     "date": "2026-08-31",
+     "percent": 9.04
+    },
+    {
+     "date": "2026-09-08",
+     "percent": 4.71
+    },
+    {
+     "date": "2026-09-08",
+     "percent": 5.404
+    }
+   ]
+  },
+  {
    "holder": "حسام الدين نجيب عبد الغنى خالد",
    "kind": "person",
    "ticker": "APSW",
@@ -33033,6 +33191,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "نواف بن عبد الله بن ابراهيم بن دايل",
+   "kind": "person",
+   "ticker": "ELEC",
+   "percent": 5.239,
+   "asOf": "2026-09-08",
+   "basis": "trade",
+   "filingId": "294437",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/343920_1.pdf",
+   "openedAt": "2026-09-08",
+   "openingPercent": 3.44,
+   "history": [
+    {
+     "date": "2026-09-08",
+     "percent": 5.239
+    }
+   ]
   },
   {
    "holder": "FIDELITY INVESTMENTS FZC",
@@ -45816,16 +45992,6 @@
      "change": -4.414
     },
     {
-     "holder": "اميرالد لالتصالات وتكنولوجيا المعلومات",
-     "kind": "firm",
-     "ticker": "IEEC",
-     "from": 11.09,
-     "to": 7.67,
-     "trades": 2,
-     "value": 56190000.0,
-     "change": -3.42
-    },
-    {
      "holder": "شركه اموال العربيه للاقطان ش م م",
      "kind": "firm",
      "ticker": "KABO",
@@ -45886,6 +46052,16 @@
      "change": -2.17
     },
     {
+     "holder": "اميرالد للاتصالات وتكنولوجيا المعلومات",
+     "kind": "firm",
+     "ticker": "IEEC",
+     "from": 11.09,
+     "to": 9.04,
+     "trades": 1,
+     "value": 32790000.0,
+     "change": -2.05
+    },
+    {
      "holder": "أبشر للاستشارات العامة",
      "kind": "firm",
      "ticker": "AIH",
@@ -45914,6 +46090,16 @@
      "trades": 1,
      "value": 0.0,
      "change": -1.479
+    },
+    {
+     "holder": "اميرالد لالتصالات وتكنولوجيا المعلومات",
+     "kind": "firm",
+     "ticker": "IEEC",
+     "from": 9.04,
+     "to": 7.67,
+     "trades": 1,
+     "value": 23400000.0,
+     "change": -1.37
     },
     {
      "holder": "بايونيرز بروبرتيز للتنمية العمرانية",
@@ -46023,19 +46209,39 @@
    "label": "6–10 Sep",
    "labelAr": "6–10 سبتمبر",
    "sessions": 5,
-   "buys": 2,
-   "sells": 7,
-   "value": 621428215.98,
+   "buys": 5,
+   "sells": 10,
+   "value": 5904588909.19,
    "moves": [
+    {
+     "holder": "ناس للاستثمارات القابضة المحدودة",
+     "kind": "firm",
+     "ticker": "EFIC",
+     "from": 0,
+     "to": 25,
+     "trades": 1,
+     "value": 5012500000.0,
+     "change": 25
+    },
     {
      "holder": "لايم فست بارتنرز للرعاية الصحية",
      "kind": "firm",
      "ticker": "AMES",
-     "from": 59.4,
+     "from": 60.11,
      "to": 56.08,
+     "trades": 2,
+     "value": 713851827.79,
+     "change": -4.03
+    },
+    {
+     "holder": "نواف بن عبد الله بن ابراهيم بن دايل",
+     "kind": "person",
+     "ticker": "ELEC",
+     "from": 3.44,
+     "to": 5.239,
      "trades": 1,
-     "value": 588156931.44,
-     "change": -3.32
+     "value": 121584000.0,
+     "change": 1.799
     },
     {
      "holder": "الشركة الوطنية للتجارة والتنمية (انتاد)",
@@ -46056,6 +46262,16 @@
      "trades": 1,
      "value": 4647241.28,
      "change": -1.1
+    },
+    {
+     "holder": "شركة التلال للاسكان والتعمير ش م م",
+     "kind": "firm",
+     "ticker": "GIHD",
+     "from": 14.96,
+     "to": 15.87,
+     "trades": 1,
+     "value": 3651796.86,
+     "change": 0.91
     },
     {
      "holder": "اسماعيل صلاح الدين أحمد بسيونى",
@@ -46106,6 +46322,16 @@
      "trades": 1,
      "value": 4315222.91,
      "change": -0.0066
+    },
+    {
+     "holder": "اميرالد للاتصالات وتكنولوجيا المعلومات",
+     "kind": "firm",
+     "ticker": "IEEC",
+     "from": 5.404,
+     "to": 5.404,
+     "trades": 2,
+     "value": 19730000.0,
+     "change": 0.0
     }
    ]
   },
