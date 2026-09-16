@@ -1811,6 +1811,10 @@
     "meaning": "This projection reflects an expansion in US liquefaction capacity and export infrastructure, positioning the US as a primary source of global liquefied natural gas (LNG) supply.",
     "meaning_ar": "يعكس هذا التوقع توسعاً في طاقة تسييل الغاز والبنية التحتية للتصدير في الولايات المتحدة، مما يجعلها مصدراً رئيسياً لإمدادات الغاز الطبيعي المسال العالمية."
   },
+  "الاتحاد الاوروبي يتعهد باستخدام جميع الادوات لخفض عجزه التجاري مع الصين": {
+    "meaning": "This policy involves deploying trade defense instruments such as anti-dumping duties, countervailing tariffs, and foreign subsidy investigations to alter cross-border import volumes and pricing dynamics.",
+    "meaning_ar": "تشمل هذه السياسة تطبيق أدوات الحماية التجارية مثل رسوم مكافحة الإغراق، والتعريفات الجمركية التعويضية، وفحص الدعم الأجنبي لتغيير أحجام الواردات وآليات تسعيرها عبر الحدود."
+  },
   "الاتحاد الاوروبي يخصص 200 مليون يورو لشراكه جديده مع جرينلاند": {
     "meaning": "The European Union establishes a 200 million euro direct funding mechanism for bilateral cooperation with Greenland, focusing on critical raw material supply chains and energy infrastructure. This capital transfer operates through institutional grants to support joint technical and resource development frameworks.",
     "meaning_ar": "يخصص الاتحاد الأوروبي تمويلاً مؤسسياً بقيمة 200 مليون يورو لدعم أطر التعاون المشترك مع جرينلاند في سلاسل إمداد المواد الخام الاستراتيجية ومشاريع الطاقة، حيث يعمل هذا التحويل المالي على تمويل البنية التحتية والتنسيق الفني المشترك بين الجانبين."
@@ -2679,6 +2683,10 @@
     "meaning": "The geological discovery identifies a 110-million-ton domestic reserve base of rare earth elements and uranium, establishing upstream resource assets that undergo exploration, commercial assessment, and mining infrastructure development within the national industrial supply chain.",
     "meaning_ar": "يحدد هذا الكشف الجيولوجي قاعدة احتياطيات محلية بحجم 110 ملايين طن من المعادن النادرة واليورانيوم، مما يضيف أصولاً تعدينية أولية تخضع للاستكشاف والتقييم التجاري وتطوير البنية التحتية للاستخراج ضمن سلاسل التوريد الصناعية."
   },
+  "السعوديه تعيد توجيه شحنات النفط قباله عمان عقب استهداف خط انابيب": {
+    "meaning": "The operational rerouting of crude oil shipments alters regional maritime logistics routes and shipping lead times in response to pipeline infrastructure disruptions.",
+    "meaning_ar": "يُعد التعديل التشغيلي لمسارات شحنات النفط الخام تغييراً في خطوط النقل البحري الإقليمية وجداول التسليم الزمنية لمواجهة تعطل البنية التحتية لخطوط الأنابيب."
+  },
   "السعوديون يعودون لشراء الاسهم مع تحول الاجانب الي البيع": {
     "meaning": "Trading volume reflects a shift in market liquidity sources, where domestic or regional Arab capital inflows counterbalance capital outflows from non-Arab foreign market participants.",
     "meaning_ar": "تعكس أحجام التداول تحولاً في مصادر السيولة النقدية، حيث تقابل التدفقات الرأسمالية العربية الداخلة خروج السيولة الخاصة بالمتعاملين الأجانب من غير العرب."
@@ -3086,6 +3094,10 @@
   "المركزي الكوري يحذر من مخاطر المشتقات المرتبطه بشركات الرقايق": {
     "meaning": "Structured derivative contracts tied to semiconductor equities tie investor payouts directly to single-sector price volatility and concentration risk within the capital market.",
     "meaning_ar": "تربط عقود المشتقات المالية المهيكلة ذات الصلة بأسهم شركات أشباه الموصلات عوائد المستثمرين مباشرة بتقلبات أسعار قطاع واحد ومخاطر تركز السيولة في السوق المالية."
+  },
+  "المركزي الياباني يقترب من رفع الفايده لاعلي مستوي منذ 31 عاما": {
+    "meaning": "Raising benchmark interest rates increases the cost of borrowing in Japanese yen and impacts global currency carry-trade structures where investors fund positions via low-yielding currencies.",
+    "meaning_ar": "يؤدي رفع أسعار الفائدة القياسية إلى زيادة تكلفة الاقتراض بالين الياباني ويؤثر على هيكل صفقات الفائدة المعاكسة العالمية (carry trade) التي يعتمد فيها المستثمرون على عملات منخفضة العائد لتمويل المراكز المالية."
   },
   "المركزي يحذر من التعامل مع اي روابط الكترونيه مجهوله المصدر": {
     "meaning": "The Central Bank of Egypt issues a regulatory cybersecurity advisory to mitigate electronic fraud and unauthorized access to customer bank accounts across the banking system.",
@@ -3563,6 +3575,10 @@
     "meaning": "Regulatory measures of this nature introduce non-tariff barriers, additional compliance costs, or import restrictions on cross-border e-commerce platforms, altering operational frameworks and competitive dynamics between domestic and foreign vendors within the target market.",
     "meaning_ar": "تفرض هذه الإجراءات التنظيمية حواجز غير جمركية وتكاليف امتثال إضافية أو قيوداً على منصات التجارة الإلكترونية العابرة للحدود، مما يغير أطر العمل التشغيلية والمنافسة السعرية بين الموردين المحليين والأجانب داخل السوق المستهدف."
   },
+  "بلومبرج : توقعات قويه باتجاه المركزي الامريكي لرفع الفايده": {
+    "meaning": "An increase in the US Federal Reserve's policy interest rate alters global capital flows toward dollar-denominated assets and raises external borrowing costs for emerging markets, including Egypt.",
+    "meaning_ar": "يؤدي رفع سعر الفائدة لدى البنك الفيدرالي الأمريكي إلى إعادة توجيه تدفقات رؤوس الأموال العالمية نحو الأصول المقومة بالدولار، ويزيد من تكاليف الاقتراض الخارجي في الأسواق الناشئة ومنها مصر."
+  },
   "بمشاركه 9 دول.. CFA Egypt تنظم لاول مره “مسابقه البحوث الاقليميه” بالمقر التاريخي للبورصه المصريه": {
     "meaning": "The Egyptian Exchange hosts the CFA regional research competition with participants from nine countries, which provides an educational platform for regional equity research practices and standardizes analytical methodologies among university teams.",
     "meaning_ar": "تستضيف البورصة المصرية مسابقة أبحاث معهد المحللين الماليين المعتمدين الإقليمية بمشاركة تسع دول، مما يتيح منصة تعليمية لممارسات بحوث أسهم الشركات وتوحيد منهجيات التحليل المالي بين الفرق الجامعية المشاركة."
@@ -3722,6 +3738,10 @@
   "تابعه ل«ام ان تي حالا» تتقدم بطلب قيد اسهمها الي البورصه المصريه": {
     "meaning": "A subsidiary of MNT-Halan submits a listing application to the Egyptian Exchange (EGX), initiating the formal regulatory review process to register its shares under local market listing and disclosure rules.",
     "meaning_ar": "تتقدم إحدى الشركات التابعة لـ«إم إن تى حالا» بطلب رسمي لقيد أسهمها في البورصة المصرية، لتبدأ بذلك إجراءات المراجعة التنظيمية استيفاءً لقواعد القيد والإفصاح المعمول بها في السوق."
+  },
+  "تاسيس 5 الاف شركه اجنبيه في مصر خلال 6 اشهر من 2026": {
+    "meaning": "Establishing foreign companies entails direct corporate registrations, capital deployment under local regulatory frameworks, and operational integration into the domestic business infrastructure.",
+    "meaning_ar": "يتمثل تأسيس الشركات الأجنبية في قيد الكيانات المؤسسية وضخ رؤوس الأموال وفق الأطر التنظيمية المحلية، مع ربط أنشطتها التشغيلية بالسوق المحلية."
   },
   "تاسيس غرفه تجاره مشتركه مصريه هنديه لتعزيز التجاره والاستثمار": {
     "meaning": "A joint chamber of commerce serves as a bilateral institutional platform connecting private enterprises, coordinating direct B2B matchmaking, and sharing regulatory, trade, and customs information between Egyptian and Indian markets.",
@@ -7049,6 +7069,10 @@
     "meaning": "Institutional discussions between government ministries and commercial banks establish operational frameworks for integrating electronic payment infrastructure and expanding digital transaction processing channels across state and institutional services.",
     "meaning_ar": "تتضمن المباحثات المؤسسية بين الوزارات الحكومية والبنوك التجارية وضع أطر تشغيلية لتكامل البنية التحتية للمدفوعات الإلكترونية وتوسيع قنوات معالجة المعاملات الرقمية عبر الخدمات الحكومية والمؤسسية."
   },
+  "وزير التخطيط: التحول نحو القطاعات الانتاجيه علي راس اولويات الحكومه": {
+    "meaning": "Government policy allocates public investments and administrative support toward agriculture, manufacturing, and information technology, shifting capital allocation away from non-tradable service sectors.",
+    "meaning_ar": "توجّه السياسة الحكومية الاستثمارات العامة والدعم الإداري نحو قطاعات الزراعة والتصنيع وتكنولوجيا المعلومات، مما يعيد توجيه تخصيص رؤوس الأموال بعيداً عن القطاعات الخدمية غير القابلة للتداول."
+  },
   "وزير التخطيط: توطين الصناعات والتحول نحو القطاعات الانتاجيه والصناعيه اولوياتنا": {
     "meaning": "Prioritising industrial localization directs state capital allocations and licensing frameworks toward domestic manufacturing, shifting procurement models from imported finished goods to local supply chain integration.",
     "meaning_ar": "يوجّه توطين الصناعة المخصصات الاستثمارية الحكومية وأطر التراخيص نحو التصنيع المحلي، مما يحول نماذج التوريد من استيراد السلع التامة إلى الاعتماد على سلاسل الإمداد المحلية."
@@ -7336,6 +7360,10 @@
   "وزير الماليه: تعزيز الشراكه مع بنك AIIB لدعم اولويات التنميه والاستثمار": {
     "meaning": "Partnership frameworks with multilateral development lenders like the Asian Infrastructure Investment Bank (AIIB) provide long-term concessional financing facilities for state infrastructure and green transition projects, diversifying external funding mechanisms for sovereign capital expenditures.",
     "meaning_ar": "توفر أطر الشراكة مع بنوك التنمية متعددة الأطراف مثل البنك الآسيوي للاستثمار في البنية التحتية تسهيلات تمويلية ميسرة طويلة الأجل لمشروعات البنية التحتية والتحول الأخضر الحكومية، مما ينوع آليات التمويل الخارجي للإنفاق الرأسمالي السيادي."
+  },
+  "وزير الماليه: معدلات الامتثال الطوعي للضرايب تتزايد.. والايرادات تنمو": {
+    "meaning": "Rising voluntary tax compliance broadens the formal fiscal base, directly expanding sovereign revenue collections without altering headline tax rates.",
+    "meaning_ar": "يؤدي ارتفاع معدلات الامتثال الضريبي الطوعي إلى توسيع القاعدة الضريبية الرسمية وزيادة الحصيلة السيادية المحصلة دون تغيير أسعار الضرائب المقررة."
   },
   "وزير الماليه: نتطلع مع تجمع البريكس الي منح اولويه ومساحه اكبر لدعم الاقتصادات الناميه": {
     "meaning": "Multilateral coordination within the BRICS framework operates through alternative financing channels, including the New Development Bank, and establishes trade settlement mechanisms in local currencies.",
@@ -7648,6 +7676,10 @@
   "“اي فاينانس” تقترح توزيع 410.6 مليون جنيه علي المساهمين": {
     "meaning": "The board's cash dividend proposal represents a direct distribution of accumulated retained earnings to equity holders, reducing corporate cash reserves and total balance sheet equity by EGP 410.6 million upon general assembly approval.",
     "meaning_ar": "يمثل اقتراح توزيع الأرباح النقدية تحويلاً مباشراً لجزء من الأرباح المرحلة إلى المساهمين، مما يترتب عليه خفض السيولة النقدية وحقوق الملكية في الميزانية العمومية بمقدار 410.6 مليون جنيه فور اعتماد الجمعية العامة."
+  },
+  "“ايجاس” تستهدف اضافه 250 مليون قدم مكعب غاز يوميا من حقول البحر المتوسط": {
+    "meaning": "Connecting these offshore Mediterranean fields integrates additional upstream volumes into the national natural gas transmission grid, directly increasing domestic raw supply.",
+    "meaning_ar": "ربط هذه الحقول البحرية بالبحر المتوسط يدمج كميات إضافية من الإنتاج الأولي في الشبكة القومية للغاز الطبيعي، مما يرفع حجم الإمدادات المحلية المتاحة مباشرة."
   },
   "“بايونيرز بروبرتيز” تشتري 2.5 مليون سهم خزينه": {
     "meaning": "This transaction reallocates corporate cash reserves to absorb existing shares from the open market, which are then held on the balance sheet as non-voting treasury shares and deducted from total equity.",
