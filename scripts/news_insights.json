@@ -1239,6 +1239,10 @@
     "meaning": "A gain of over 2% in Japanese equity benchmarks reflects an upward adjustment in market capitalization across listed equities on the Tokyo exchange, driven by session trading volume and net capital inflows.",
     "meaning_ar": "يعكس ارتفاع مؤشرات الأسهم اليابانية بأكثر من 2% نمواً في القيمة السوقية الإجمالية للشركات المدرجة في بورصة طوكيو، مدفوعاً بتدفقات نقدية شرائية وأحجام تداول منفذة خلال الجلسة."
   },
+  "ارتفاع الايجارات في المملكه المتحده باسرع وتيره هذا العام": {
+    "meaning": "Accelerating rental growth in the UK reflects an imbalance where tenant demand exceeds the available stock of residential properties, increasing household housing expenditure.",
+    "meaning_ar": "يعكس تسارع وتيرة نمو الإيجارات في المملكة المتحدة اختلالاً بين زيادة الطلب من المستأجرين ونقص المعروض المتاح من الوحدات السكنية، مما يرفع تكاليف الإسكان في ميزانيات الأسر."
+  },
   "ارتفاع التضخم في الهند فوق المستهدف للشهر الثالث علي التوالي": {
     "meaning": "Persistent inflation above the central bank's target maintains upward pressure on benchmark interest rates, influencing borrowing costs, sovereign bond yields, and foreign trade balances between India and its trade partners, including Egypt.",
     "meaning_ar": "يؤدي استمرار التضخم فوق مستهدف البنك المركزي إلى استمرار الضغوط على أسعار الفائدة الأساسية، وهو ما يحدد تكاليف الاقتراض وعوائد السندات الحكومية ومعدلات التبادل التجاري بين الهند وشركائها التجاريين، ومنهم مصر."
@@ -1254,6 +1258,10 @@
   "ارتفاع المخزونات الامريكيه يدفع برنت دون 108 دولارات رغم مخاوف الامدادات السعوديه": {
     "meaning": "An expansion in U.S. crude inventories reflects higher immediate supply and dampens global oil prices, offsetting concurrent risk premiums linked to Saudi supply disruptions.",
     "meaning_ar": "يعكس ارتفاع مخزونات الخام الأمريكية زيادة المعروض الفوري ويضغط سلباً على أسعار النفط العالمية، مما يوازن علاوات المخاطر الناتجة عن تعطل الإمدادات السعودية."
+  },
+  "ارتفاع الموشرات الصينيه بقياده اسهم التكنولوجيا": {
+    "meaning": "Chinese equity benchmarks rise due to heavy market capitalization weighting of technology companies, where price appreciation in this specific sector exerts a disproportionately large upward mathematical effect on the aggregate index values.",
+    "meaning_ar": "ترتفع المؤشرات الصينية نتيجة للوزن النسبي المرتفع لشركات التكنولوجيا من حيث القيمة السوقية، حيث تنعكس الزيادة السعرية في هذا القطاع المحدد حسابياً بأثر صعودي مباشر على القيمة الإجمالية للمؤشرات."
   },
   "ارتفاع الموشرات اليابانيه مع هبوط عوايد السندات": {
     "meaning": "A decline in sovereign bond yields lowers the risk-free discount rate applied to equity valuation models and decreases corporate borrowing costs, which correlates with an upward repricing of equity index shares.",
@@ -1462,6 +1470,10 @@
   "اسعار الخشب اليوم الثلاثاء 8-9-2026 في السوق المحليه": {
     "meaning": "Daily tracking of domestic timber prices reflects raw material input costs for construction, furniture manufacturing, and real estate development sectors.",
     "meaning_ar": "يعكس التتبع اليومي لأسعار الأخشاب في السوق المحلية تكاليف مدخلات المواد الخام لقطاعات التشييد والبناء وصناعة الأثاث والتطوير العقاري."
+  },
+  "اسعار الخشب في مصر اليوم.. كم سجل المتر؟": {
+    "meaning": "Timber prices reflect import parity costs, foreign exchange availability, and global shipping rates, directly determining raw material input expenses for the domestic furniture manufacturing and construction contracting sectors.",
+    "meaning_ar": "تعكس أسعار الأخشاب تكاليف الاستيراد وسعر الصرف وتكاليف الشحن الدولي، وهي تشكل المحدد الأساسي لتكلفة مدخلات الإنتاج الخام لقطاعي تصنيع الأثاث ومقاولات التشييد والبناء محلياً."
   },
   "اسعار الخضار والفاكهه اليوم في مصر.. الاربعاء 16/9/2026": {
     "meaning": "Daily wholesale and retail produce price bulletins reflect prevailing physical spot supply and demand conditions, transport costs, and seasonal crop yields, which serve as direct baseline input components in the national food and non-alcoholic beverages Consumer Price Index (CPI) basket.",
@@ -3407,6 +3419,10 @@
     "meaning": "Expedited tax rulings provide binding administrative determinations on tax liabilities for capital projects exceeding one billion Canadian dollars prior to asset deployment. This process shortens the regulatory review phase and incorporates verified fiscal parameters directly into corporate balance sheet planning.",
     "meaning_ar": "يوفر التسريع الإجرائي للأحكام الضريبية قرارات إدارية ملزمة تحدد المعاملة الضريبية للمشاريع الرأسمالية الكبرى قبل البدء في تخصيص السيولة. وتعمل هذه الآلية على تقليص دورة المراجعة التنظيمية وإدراج بنود الالتزامات الضريبية المؤكدة ضمن التخطيط المالي للشركات."
   },
+  "اورا كوميونيكيشن تطلق مبادره «Next Step» ضمن ملتقي Future Forward لدعم رواد الاعمال": {
+    "meaning": "The initiative establishes a corporate sponsorship and incubation channel through which the company directs operational expertise and business development resources to early-stage enterprises.",
+    "meaning_ar": "تؤسس المبادرة مساراً لرعاية واحتضان الأعمال تقوم الشركة من خلاله بتوجيه موارد تطوير الأعمال والخبرات التشغيلية نحو المشاريع في مراحلها الأولى."
+  },
   "اوراسكوم للاستثمار تسجل 681.4 مليون جنيه خساير مجمعه بالربع الاول": {
     "meaning": "Consolidated quarterly losses reflect that group-level operational and non-operational expenses exceed total revenues across all subsidiaries during the period, directly reducing consolidated retained earnings on the balance sheet.",
     "meaning_ar": "تعكس الخسائر المجمعة للربع الأول تجاوز إجمالي المصروفات التشغيلية وغير التشغيلية للإيرادات عبر جميع الشركات التابعة، مما يؤدي مباشرة إلى خفض الأرباح المرحلة المجمعة في قائمة المركز المالي."
@@ -4708,6 +4724,10 @@
     "meaning": "Large-scale strategic petroleum reserves and diversified import logistics in major consumer nations absorb maritime transit disruptions and maintain equilibrium in physical crude supply chains.",
     "meaning_ar": "تمتص الاحتياطيات البترولية الاستراتيجية وتنوع مسارات الاستيراد في الدول المستهلكة الكبرى اضطرابات الملاحة البحرية، مما يحافظ على توازن سلاسل إمداد النفط الخام الفعلية."
   },
+  "روسيا تتجه لتمديد حظر تصدير الديزل حتي نهايه اكتوبر": {
+    "meaning": "Extending the export restriction confines Russian diesel volumes to its domestic market, reducing seaborne supply in international fuel markets and requiring net fuel-importing nations to source cargo requirements from alternative refining hubs.",
+    "meaning_ar": "يؤدي تمديد حظر التصدير إلى حصر كميات الديزل الروسي داخل السوق المحلية، مما يقلص المعروض المتاح في أسواق الوقود المنقول بحراً ويُلزم الدول المستوردة للمشتقات البترولية بتوفير شحناتها من مراكز تكرير بديلة."
+  },
   "روسيا تعزز صادراتها النفطيه الي الصين عبر القطب الشمالي": {
     "meaning": "Russia routes crude oil shipments to China through the Northern Sea Route, serving as a direct maritime transit corridor between Russian Arctic export terminals and Asian discharge ports.",
     "meaning_ar": "توجه روسيا شحنات النفط الخام إلى الصين عبر طريق بحر الشمال، والذي يعمل كممر ملاحي مباشر يربط بين موانئ التصدير في القطب الشمالي الروسي وموانئ التفريغ في آسيا."
@@ -5960,6 +5980,10 @@
   "كريتيف انفستمنتس تختتم جولتها التاسيسيه بالتزامات اجماليه اوليه 20 مليون دولار": {
     "meaning": "Closing a founding round secures formal capital commitments from initial partners, expanding the company's equity base and establishing the liquid funds available for operational deployment.",
     "meaning_ar": "يُمثل إغلاق الجولة التأسيسية تأمين التزامات رأسمالية من الشركاء الأوائل، مما يرفع قاعدة حقوق الملكية لدى الشركة ويُوفر سيولة نقدية لتنفيذ خطط العمل وتوظيف الأموال."
+  },
+  "كشف اثري جديد بتل الابقعين.. مجمع سكني ومخازن غلال ولوحه للملك مرنبتاح": {
+    "meaning": "Archaeological discoveries expand the state inventory of cultural heritage assets managed by the Supreme Council of Antiquities, engaging public budget allocations for excavation, conservation, and site logistics.",
+    "meaning_ar": "تضيف الاكتشافات الأثرية أصولاً جديدة إلى محفظة التراث الثقافي الخاضعة لإشراف المجلس الأعلى للآثار، مما يترتب عليه تخصيص نفقات تشغيلية لأعمال الحفر والترميم والتوثيق ضمن الموازنة العامة للدولة."
   },
   "كلفه شحن الخام الامريكي الي اسيا تقفز لمستوي قياسي": {
     "meaning": "Elevated tanker freight rates widen the price spread required for US crude to remain competitive against Middle Eastern grades in Asian refining hubs, altering global maritime arbitrage flows.",
