@@ -1443,6 +1443,10 @@
     "meaning": "Daily tracking of domestic timber prices reflects raw material input costs for construction, furniture manufacturing, and real estate development sectors.",
     "meaning_ar": "يعكس التتبع اليومي لأسعار الأخشاب في السوق المحلية تكاليف مدخلات المواد الخام لقطاعات التشييد والبناء وصناعة الأثاث والتطوير العقاري."
   },
+  "اسعار الخضار والفاكهه اليوم في مصر.. الاربعاء 16/9/2026": {
+    "meaning": "Daily wholesale and retail produce price bulletins reflect prevailing physical spot supply and demand conditions, transport costs, and seasonal crop yields, which serve as direct baseline input components in the national food and non-alcoholic beverages Consumer Price Index (CPI) basket.",
+    "meaning_ar": "تعكس النشرات اليومية لأسعار الخضار والفاكهة بالجملة والتجزئة مستويات العرض والطلب الفوري وتكاليف النقل والإنتاجية الموسمية للمحاصيل، وهي تمثل المكونات الأساسية المباشرة لسلة الأغذية والمشروبات في مؤشر أسعار المستهلكين لقياس التضخم."
+  },
   "اسعار الخضار والفاكهه اليوم في مصر.. الثلاثاء 15/9/2026": {
     "meaning": "This headline refers to daily spot price monitoring for agricultural produce, which directly tracks short-term supply chain dynamics, seasonality, and the food-and-beverage component of the headline consumer price index (CPI).",
     "meaning_ar": "تشير هذه النشرة إلى المتابعة اليومية للأسعار الفورية للسلع الزراعية، والتي تعكس حركة سلاسل الإمداد قصيرة الأجل، والعوامل الموسمية، ومكون الأغذية والمشروبات ضمن الرقم القياسي العام لأسعار المستهلكين."
@@ -1530,6 +1534,10 @@
   "اسعار الذهب العالميه تتباين وسط ترقب لبيانات التضخم الامريكي": {
     "meaning": "Global gold prices fluctuate based on macroeconomic indicators such as US inflation data, which determine benchmark interest rate environments, currency valuations, and the holding cost of non-yielding assets.",
     "meaning_ar": "تتذبذب أسعار الذهب العالمية بناءً على مؤشرات الاقتصاد الكلي مثل بيانات التضخم الأمريكية، والتي تحدد أسعار الفائدة المرجعية وقيمة العملة وتكلفة حيازة الأصول غير المدرة للعائد."
+  },
+  "اسعار الذهب العالميه تتباين وسط توقعات قويه برفع الفايده الامريكيه": {
+    "meaning": "Expectations of changes in US Federal Reserve interest rates alter the opportunity cost of holding non-yielding bullion, creating price divergence as traders adjust dollar-denominated gold contracts against sovereign yield movements.",
+    "meaning_ar": "تغير توقعات أسعار الفائدة لدى الفيدرالي الأمريكي تكلفة الفرصة البديلة لحيازة الذهب كأصل غير مدر لعائد، مما يؤدي إلى تباين الأسعار مع إعادة تسعير العقود المقومة بالدولار وفقاً لحركة عوائد السندات السيادية."
   },
   "اسعار الذهب العالميه تتراجع مع ترقب المستثمرين قرار المركزي الامريكي": {
     "meaning": "Expectations surrounding the US Federal Reserve's monetary policy decisions influence the US dollar and sovereign bond yields, which directly determine the opportunity cost of holding non-yielding bullion in global commodity markets.",
@@ -6768,6 +6776,10 @@
   "هبوط سهم شي ان 10% بعد سحب منتج في استراليا ونيوزيلندا": {
     "meaning": "Product recalls generate immediate reverse-logistics costs, inventory write-offs, and compliance scrutiny, which equity markets price into company valuation through immediate share revaluations.",
     "meaning_ar": "تؤدي عمليات سحب المنتجات إلى تكاليف لوجستية عكسية فورية وشطب لقيمة المخزون وخضوع للرقابة التنظيمية، وهو ما تسعره أسواق الأسهم مباشرة في القيمة السوقية للشركة."
+  },
+  "هبوط سهم كاتل بنسبه 10% خلال جلستين": {
+    "meaning": "A ten percent decline across two trading sessions reflects concentrated secondary market order imbalances where executed supply exceeds demand, directly contracting the company's total market capitalization.",
+    "meaning_ar": "يعكس انخفاض السهم بنسبة 10% خلال جلستي تداول اختلالاً في توازن أوامر السوق الثانوية مع تجاوز حجم العروض المنفذة للطلبات، مما يؤدي مباشرة إلى انكماش القيمة السوقية الإجمالية للشركة."
   },
   "هبوط سهم “ال في ام اتش” يطيح بها من قايمه اكبر 10 شركات اوروبيه": {
     "meaning": "A drop in share price reduces a company's total market capitalization, altering its relative ranking against other publicly traded firms in benchmark regional indices.",
