@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-09-16T16:51:00Z",
+ "builtAt": "2026-09-16T18:30:10Z",
  "topCount": 5,
  "minimumSessions": 5,
  "horizons": [
@@ -20,15 +20,16 @@
   "2026-09-03",
   "2026-09-13",
   "2026-09-14",
-  "2026-09-15"
+  "2026-09-15",
+  "2026-09-16"
  ],
  "latest": {
-  "basisSession": "2026-09-15",
-  "ranAt": "2026-09-15T17:51:22Z",
-  "universeSize": 241,
+  "basisSession": "2026-09-16",
+  "ranAt": "2026-09-16T17:55:50Z",
+  "universeSize": 244,
   "forecasters": 11,
   "readings": 16,
-  "rerankedAt": "2026-09-15T18:20:16Z",
+  "rerankedAt": "2026-09-16T18:25:43Z",
   "rerankReads": [
    "filings",
    "news",
@@ -44,7 +45,7 @@
    "label": "Gemini re-rank",
    "labelAr": "إعادة ترتيب Gemini",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -74,7 +75,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -91,6 +97,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -109,6 +119,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -118,7 +132,7 @@
    "label": "Kronos-small",
    "labelAr": "Kronos-small",
    "group": "neural",
-   "nights": 12,
+   "nights": 13,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -222,7 +236,12 @@
      ],
      "sd": 2.3204,
      "t": 0.127,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 9,
@@ -328,6 +347,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -350,6 +373,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -359,7 +386,7 @@
    "label": "Chronos-2",
    "labelAr": "Chronos-2",
    "group": "neural",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -389,7 +416,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -410,6 +442,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -432,6 +468,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -441,7 +481,7 @@
    "label": "TimesFM 2.5",
    "labelAr": "TimesFM 2.5",
    "group": "neural",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -471,7 +511,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -492,6 +537,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -514,6 +563,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -523,7 +576,7 @@
    "label": "Toto 2.0",
    "labelAr": "Toto 2.0",
    "group": "neural",
-   "nights": 1,
+   "nights": 2,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -544,7 +597,12 @@
        "beatTheMarket": true
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -557,6 +615,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -571,6 +633,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -580,7 +646,7 @@
    "label": "Sundial",
    "labelAr": "Sundial",
    "group": "neural",
-   "nights": 1,
+   "nights": 2,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -601,7 +667,12 @@
        "beatTheMarket": true
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -614,6 +685,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -628,6 +703,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -637,7 +716,7 @@
    "label": "Momentum, 20 sessions",
    "labelAr": "الزخم، 20 جلسة",
    "group": "baseline",
-   "nights": 12,
+   "nights": 13,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -741,7 +820,12 @@
      ],
      "sd": 3.9193,
      "t": 0.213,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 9,
@@ -847,6 +931,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -905,6 +993,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -914,7 +1006,7 @@
    "label": "Momentum, 60 sessions",
    "labelAr": "الزخم، 60 جلسة",
    "group": "baseline",
-   "nights": 12,
+   "nights": 13,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -1018,7 +1110,12 @@
      ],
      "sd": 2.4519,
      "t": -0.462,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 9,
@@ -1124,6 +1221,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -1182,6 +1283,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -1191,7 +1296,7 @@
    "label": "Reversal, 1 session",
    "labelAr": "الانعكاس، جلسة",
    "group": "baseline",
-   "nights": 12,
+   "nights": 13,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -1295,7 +1400,12 @@
      ],
      "sd": 3.0796,
      "t": -0.288,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 9,
@@ -1401,6 +1511,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -1459,6 +1573,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -1468,7 +1586,7 @@
    "label": "Reversal, 5 sessions",
    "labelAr": "الانعكاس، 5 جلسات",
    "group": "baseline",
-   "nights": 12,
+   "nights": 13,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -1572,7 +1690,12 @@
      ],
      "sd": 3.4389,
      "t": 1.032,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 9,
@@ -1678,6 +1801,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -1736,6 +1863,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -1745,7 +1876,7 @@
    "label": "Drift",
    "labelAr": "الانجراف",
    "group": "baseline",
-   "nights": 12,
+   "nights": 13,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -1849,7 +1980,12 @@
      ],
      "sd": 3.0281,
      "t": -1.145,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 9,
@@ -1955,6 +2091,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2013,6 +2153,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2022,7 +2166,7 @@
    "label": "Flat, says nothing",
    "labelAr": "ثابت، لا يقول شيئًا",
    "group": "baseline",
-   "nights": 12,
+   "nights": 13,
    "distinguishes": false,
    "horizons": {
     "1": {
@@ -2126,7 +2270,12 @@
      ],
      "sd": 0.9097,
      "t": -0.19,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 9,
@@ -2232,6 +2381,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2290,6 +2443,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2301,7 +2458,7 @@
    "label": "rerank:models",
    "labelAr": "rerank:models",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -2331,7 +2488,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -2348,6 +2510,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2366,6 +2532,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2376,7 +2546,7 @@
    "label": "rerank:filings",
    "labelAr": "rerank:filings",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -2406,7 +2576,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -2423,6 +2598,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2441,6 +2620,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2453,7 +2636,7 @@
    "label": "rerank:news",
    "labelAr": "rerank:news",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -2483,7 +2666,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -2500,6 +2688,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2518,6 +2710,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2530,7 +2726,7 @@
    "label": "rerank:rulebook",
    "labelAr": "rerank:rulebook",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -2560,7 +2756,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -2577,6 +2778,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2595,6 +2800,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2607,7 +2816,7 @@
    "label": "rerank:measures",
    "labelAr": "rerank:measures",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -2637,7 +2846,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -2654,6 +2868,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2672,6 +2890,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2684,7 +2906,7 @@
    "label": "rerank:filings-news",
    "labelAr": "rerank:filings-news",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -2714,7 +2936,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -2731,6 +2958,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2749,6 +2980,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2762,7 +2997,7 @@
    "label": "rerank:filings-rulebook",
    "labelAr": "rerank:filings-rulebook",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -2792,7 +3027,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -2809,6 +3049,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2827,6 +3071,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2840,7 +3088,7 @@
    "label": "rerank:filings-measures",
    "labelAr": "rerank:filings-measures",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -2870,7 +3118,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -2887,6 +3140,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2905,6 +3162,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2918,7 +3179,7 @@
    "label": "rerank:news-rulebook",
    "labelAr": "rerank:news-rulebook",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -2948,7 +3209,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -2965,6 +3231,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2983,6 +3253,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2996,7 +3270,7 @@
    "label": "rerank:news-measures",
    "labelAr": "rerank:news-measures",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3026,7 +3300,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3043,6 +3322,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3061,6 +3344,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3074,7 +3361,7 @@
    "label": "rerank:rulebook-measures",
    "labelAr": "rerank:rulebook-measures",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3104,7 +3391,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3121,6 +3413,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3139,6 +3435,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3152,7 +3452,7 @@
    "label": "Gemini re-rank",
    "labelAr": "إعادة ترتيب Gemini",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3182,7 +3482,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3199,6 +3504,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3217,6 +3526,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3231,7 +3544,7 @@
    "label": "rerank:filings-news-measures",
    "labelAr": "rerank:filings-news-measures",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3261,7 +3574,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3278,6 +3596,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3296,6 +3618,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3310,7 +3636,7 @@
    "label": "rerank:filings-rulebook-measures",
    "labelAr": "rerank:filings-rulebook-measures",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3340,7 +3666,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3357,6 +3688,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3375,6 +3710,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3389,7 +3728,7 @@
    "label": "rerank:news-rulebook-measures",
    "labelAr": "rerank:news-rulebook-measures",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3419,7 +3758,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3436,6 +3780,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3454,6 +3802,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3468,7 +3820,7 @@
    "label": "rerank:filings-news-rulebook-measures",
    "labelAr": "rerank:filings-news-rulebook-measures",
    "group": "rerank",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3498,7 +3850,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3515,6 +3872,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3533,6 +3894,10 @@
       {
        "basisSession": "2026-09-15",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-16",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3545,5 +3910,5 @@
    ]
   }
  },
- "publicationId": "1fb9c8edcbe651e37bd43ebbfaa32481313433d61265013b26d0bc68b6383ced"
+ "publicationId": "6c5db84a94f0b9607572c8e654d8ce8cecae6dd8ab97e566881185b5ead6d031"
 }
