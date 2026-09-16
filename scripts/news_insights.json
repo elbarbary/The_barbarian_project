@@ -3807,6 +3807,10 @@
     "meaning": "Central bank interest rate hikes increase local borrowing costs and narrow yield differentials against foreign currencies, directly altering cross-border carry trade financing and capital flows.",
     "meaning_ar": "يؤدي رفع أسعار الفائدة من قِبل البنك المركزي إلى زيادة تكلفة الاقتراض بالعملة المحلية وتقليص فوارق العوائد مع العملات الأجنبية، مما يغير آليات تمويل تجارة الفائدة والتدفقات الرأسمالية عبر الحدود."
   },
+  "بنك اليابان يتجه لرفع الفايده لاعلي مستوي منذ 31 عاما": {
+    "meaning": "A central bank interest rate hike raises borrowing costs in the domestic currency and alters yields on sovereign debt instruments, affecting global capital flows and foreign exchange cross-currency funding mechanisms.",
+    "meaning_ar": "يؤدي رفع أسعار الفائدة من قِبل البنك المركزي إلى زيادة تكلفة الاقتراض بالعملة المحلية وتغيير عوائد أدوات الدين الحكومي، مما يؤثر على تدفقات رؤوس الأموال العالمية وآليات التمويل المتقاطع بين العملات الأجنبية."
+  },
   "بنك اليابان يرفع الفايده لاعلي مستوي منذ 31 عاما": {
     "meaning": "The Bank of Japan's rate hike increases the cost of borrowing the Japanese yen, directly raising funding expenses for global carry trade positions and altering international interest rate differentials.",
     "meaning_ar": "يؤدي رفع بنك اليابان لسعر الفائدة إلى زيادة تكلفة الاقتراض بالين الياباني، مما يرفع تكاليف تمويل مراكز تجارة الفائدة العالمية (Carry Trade) ويعدل فروق أسعار الفائدة بين العملات الدولية."
@@ -6680,6 +6684,10 @@
   "مصر السيادي يطلق صندوقا للاستثمار الصناعي براس مال مرخص 10 مليارات جنيه": {
     "meaning": "The Sovereign Fund of Egypt establishes a dedicated industrial investment vehicle with an authorized capital framework of EGP 10 billion, providing direct equity participation and structuring co-investments in manufacturing assets.",
     "meaning_ar": "يؤسس صندوق مصر السيادي وعاءً استثماريًا متخصصًا برأس مال مرخص يبلغ 10 مليارات جنيه لضخ مساهمات رأسمالية مباشرة وإبرام شراكات في الأصول والمنشآت الصناعية."
+  },
+  "مصر تبحث اقامه مشروعات زراعيه مشتركه في السودان لدعم الامن الغذايي وتعزيز التكامل": {
+    "meaning": "Cross-border joint agricultural ventures combine Egyptian capital and technical inputs with Sudanese arable land to cultivate strategic food crops. This operational framework relies on cross-border logistics and trade agreements to transport raw commodity yields back to the domestic market.",
+    "meaning_ar": "تعتمد المشروعات الزراعية المشتركة بين الدول على دمج رؤوس الأموال والخبرات الفنية المصرية مع الأراضي الزراعية السودانية لزراعة المحاصيل الاستراتيجية، حيث تُدار هذه الشراكة عبر خطوط نقل لوجستية واتفاقيات تبادل تجاري تتيح توريد المحاصيل مباشرة إلى السوق المحلي."
   },
   "مصر تبحث التعاون مع “الاوروبي لاعاده الاعمار” في ترفيق المناطق الصناعيه": {
     "meaning": "Partnership discussions with the EBRD involve securing multilateral development financing and technical frameworks to install core utilities—such as power, water, and road networks—across designated industrial zones.",
