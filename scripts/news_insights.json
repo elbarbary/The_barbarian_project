@@ -2259,6 +2259,10 @@
     "meaning": "An annual US inflation rate of 3.4% reflects the pace of consumer price increases across the US economy, which anchors the Federal Reserve's benchmark interest rate decisions and influences global capital flows and dollar-denominated borrowing costs.",
     "meaning_ar": "يعكس تسجيل التضخم السنوي في الولايات المتحدة 3.4% وتيرة ارتفاع أسعار المستهلكين في السوق الأمريكي، وهو المؤشر الذي يحدد قرارات الفائدة لدى مجلس الاحتياطي الفيدرالي ويؤثر على حركة تدفقات رؤوس الأموال العالمية وتكلفة التمويل بالدولار."
   },
+  "التضخم في بريطانيا يتسارع الي 3.1% خلال اغسطس": {
+    "meaning": "An acceleration in UK inflation raises aggregate price levels and strengthens the operational case for central bank interest rate adjustments, directly affecting cross-border debt yields and sterling currency valuation.",
+    "meaning_ar": "يؤدي تسارع التضخم في بريطانيا إلى ارتفاع المستوى العام للأسعار وتعزيز مبررات تعديل أسعار الفائدة من قبل البنك المركزي، مما يؤثر مباشرة على عوائد الديون العابرة للحدود وتقييم الجنيه الإسترليني."
+  },
   "التموين تطرح 12 صنفا باسعار مخفضه.. تصل الي 30 سلعه بنهايه الشهر الجاري": {
     "meaning": "The Ministry of Supply expands its discounted inventory across state-affiliated consumer complexes, distributing 12 basic commodities with scheduled additions reaching 30 items through public retail channels.",
     "meaning_ar": "تتوسع وزارة التموين في طرح السلع المخفضة عبر المجمعات الاستهلاكية التابعة لها، حيث تضخ 12 سلعة أساسية مع جدولة زيادتها إلى 30 سلعة عبر منافذ التوزيع الحكومية."
@@ -2754,6 +2758,10 @@
   "السويد تبرم صفقه ب729 مليون دولار لشراء منظومه هيمارس الصاروخيه الامريكيه": {
     "meaning": "This transaction represents a cross-border government procurement contract in the global defense sector, involving sovereign capital expenditure in exchange for advanced military equipment and manufacturer delivery commitments.",
     "meaning_ar": "تمثل هذه الصفقة عقد مشتريات حكومية عابرة للحدود في قطاع الدفاع العالمي، يتضمن إنفاقاً رأسمالياً سيادياً مقابل توريد معدات عسكرية متطورة والتزامات تسليم من الشركة المصنعة."
+  },
+  "السويدي اليكتريك تفتتح مقر جديد لشركتها": {
+    "meaning": "Opening a new headquarters expands the company's administrative and operational footprint, consolidating corporate functions and centralizing operational management.",
+    "meaning_ar": "يؤدي افتتاح مقر جديد إلى توسيع النطاق الإداري والتشغيلي للشركة، ودمج الوظائف المؤسسية ومركزية إدارة العمليات."
   },
   "السيادي السعودي يوسع حضوره في العقارات والسياحه بمشروع جديد في الخفجي": {
     "meaning": "The Saudi Public Investment Fund allocates capital to a new real estate and hospitality project in Al-Khafji, adding physical tourism infrastructure and developing regional land assets.",
@@ -3371,6 +3379,10 @@
     "meaning": "Weekly declines in Japanese equities reflect widespread net capital outflows across Tokyo-listed shares, driven by market revaluations linked to domestic currency fluctuations and interest rate adjustments.",
     "meaning_ar": "يعكس التراجع الأسبوعي للأسهم اليابانية صافي تدفقات رأسمالية خارجة عبر الشركات المدرجة في بورصة طوكيو، نتيجة لإعادة تسعير السوق المرتبطة بتحركات العملة المحلية وتغيرات أسعار الفائدة."
   },
+  "انخفاض الطماطم .. اسعار الخضروات والفاكهه والتفاح بسوق العبور اليوم الاربعاء 16 سبتمبر 2026": {
+    "meaning": "Price movements in wholesale agricultural hubs like Obour Market reflect daily changes in fresh produce supply volumes entering the market relative to immediate consumption needs, serving as an indicator for food components within headline inflation metrics.",
+    "meaning_ar": "تعكس تحركات الأسعار في أسواق الجملة المركزية مثل سوق العبور التغيرات اليومية في حجم المعروض من المحاصيل الزراعية مقابل الاستهلاك الفوري، مما يشكل مؤشراً لمكونات السلع الغذائية ضمن معدلات التضخم العامة."
+  },
   "انخفاض موشر بورصه قطر في ختام التعاملات": {
     "meaning": "A drop in the benchmark index reflects a net decrease in the market capitalisation of its constituent equities by the end of the trading session, where selling volume across key listed firms outweighs executed buying volume.",
     "meaning_ar": "يعكس تراجع المؤشر الرئيسي انخفاض القيمة السوقية الإجمالية للأسهم المكونة له بنهاية الجلسة، نتيجة لتفوق أحجام عروض البيع المنفذة على طلبات الشراء على أسهم الشركات المدرجة."
@@ -3842,6 +3854,10 @@
   "تباين الموشرات اليابانيه مع خساير قطاع التكنولوجيا": {
     "meaning": "Divergence in Japanese indices reflects sectoral rebalancing, where price declines in technology shares offset gains across non-tech industry components within index weightings.",
     "meaning_ar": "يعكس تباين المؤشرات اليابانية إعادة توزيع للأوزان النسبية بين القطاعات، حيث توازن التراجعات السعرية لأسهم التكنولوجيا المكاسب المحققة في المكونات الصناعية الأخرى داخل المؤشر."
+  },
+  "تباين عوايد السندات الامريكيه مع تزايد رهانات رفع الفايده": {
+    "meaning": "Divergence in US Treasury yields reflects differing adjustments across maturities as market pricing shifts short-term yields in response to monetary policy expectations, while longer-term yields reflect broader economic conditions.",
+    "meaning_ar": "يعكس تباين عوائد سندات الخزانة الأمريكية إعادة تسعير فترات الاستحقاق المختلفة في السوق، حيث تتفاعل الآجال القصيرة مباشرة مع توقعات أسعار الفائدة النقدية بينما تتأثر الآجال الأطول بظروف الاقتصاد الكلي."
   },
   "تباين في اداء شركات المطاحن خلال العام المالي 2025/2026": {
     "meaning": "Performance divergence across milling companies reflects operational differences in procurement costs, production capacities, and the breakdown between subsidized and free-market flour output across individual firms.",
@@ -4787,6 +4803,10 @@
   "رييس الوزراء البريطاني يواجه اختبارا اقتصاديا قبل موازنه اكتوبر": {
     "meaning": "Government budget preparations involve setting fiscal targets, tax policies, and sovereign debt issuance plans, which directly determine sovereign bond yields, currency valuations, and public spending allocations.",
     "meaning_ar": "تتضمن الاستعدادات للموازنة العامة تحديد المستهدفات المالية، والسياسات الضريبية، وخطط إصدار أدوات الدين السيادية، وهي عوامل تحدد عوائد السندات الحكومية، وتقييمات العملة، وتوزيعات الإنفاق العام."
+  },
+  "رييس الوزراء يبحث اعاده هيكله الشركات القابضه وتعظيم العايد الاقتصادي من اصول الدوله": {
+    "meaning": "Restructuring public holding companies involves reorganizing operational frameworks, capital allocations, and asset management models across state-owned enterprises.",
+    "meaning_ar": "تتضمن إعادة هيكلة الشركات القابضة العامة إعادة تنظيم الأطر التشغيلية وتوزيعات رؤوس الأموال ونماذج إدارة الأصول عبر المؤسسات المملوكة للدولة."
   },
   "رييس الوزراء يبحث مع رييس الرقابه الماليه تطورات القطاع المالي غير المصرفي وجهود حمايه المتعاملين": {
     "meaning": "The meeting involves government oversight of the non-banking financial sector's regulatory framework, covering operational activities such as capital markets, insurance, and non-bank financing alongside institutional market conduct supervision.",
