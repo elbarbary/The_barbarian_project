@@ -181,23 +181,26 @@ jobs:
         id: scrapling
         continue-on-error: true
         run: |
-          # The bare package has no fetchers — `scrapling.fetchers` fails to
-          # import and every EGX step falls back to skipping. The working local
-          # install is scrapling 0.4.11 with patchright and playwright beside
-          # it, which is what the `fetchers` extra pulls in.
-          python3 -m pip install --quiet "scrapling[fetchers]" \
-            || python3 -m pip install --quiet "scrapling[all]" \
-            || python3 -m pip install --quiet scrapling patchright playwright
-          # Then the browser binaries themselves.
-          python3 -m scrapling install || scrapling install \
-            || python3 -m patchright install --with-deps chromium || true
-          # Only claim a browser once one has actually opened. Exporting the
-          # path on faith puts a traceback in the middle of the build log where
-          # an honest "skipping" line belongs.
-          if python3 -c 'from scrapling.fetchers import StealthyFetcher'; then
+          # Pinned together, and moved together on purpose. StealthyFetcher
+          # drives patchright's Chromium; an unpinned install picked up
+          # playwright 1.63.0 the minute it reached PyPI (16:49 UTC, 15 Sep
+          # 2026), patchright went on asking for chromium-1234, nothing
+          # downloaded it any more, and every exchange step failed while the
+          # run stayed green. scrapling 0.4.15 asks for playwright>=1.62.0 and
+          # patchright>=1.62.1.
+          python3 -m pip install --quiet "scrapling[fetchers]==0.4.15" "patchright==1.62.3" "playwright==1.62.0"
+          # Its data files, then patchright's own Chromium — the binary the
+          # fetcher launches. `python3 -m scrapling` has no __main__, so the
+          # console script is the one that works.
+          scrapling install || true
+          python3 -m patchright install --with-deps chromium || true
+          # Only claim a browser once one has opened. This used to import
+          # `scrapling.fetchers`, and an import cannot tell a browser from a
+          # missing one: SCRAPLING_PYTHON was exported on every broken run.
+          if python3 scripts/browser_opens.py; then
             echo "SCRAPLING_PYTHON=$(which python3)" >> "$GITHUB_ENV"
           else
-            echo 'scrapling fetchers unavailable — the exchange steps will skip'
+            echo "::warning title=No browser::Chromium did not open (scripts/browser_opens.py), so every step that needs it skips this run. The reason is in the Install Scrapling log."
           fi
 
       # The market scan, which is the spine of everything below it.
