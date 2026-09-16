@@ -76,7 +76,8 @@ class VolumeEvents(Patched):
         # transfer long after it, and a genuine spike while it was listed.
         before = bars("2021-05-01", 40, spikes={35: 900})
         after = bars("2026-08-01", 40, spikes={39: 800})
-        doc = vol.build({"NCGC": before + after}, sessions=50, delisted={"NCGC": NCGC})
+        doc = vol.build({"NCGC": before + after}, sessions=50, delisted={"NCGC": NCGC},
+                        companies={"NCGC"})
         dates = [s["date"] for s in doc["sessions"]]
         self.assertTrue(dates, "the listed-era spike should still be published")
         self.assertTrue(all(d < NCGC["delisted_on"] for d in dates), dates)
@@ -84,12 +85,13 @@ class VolumeEvents(Patched):
     def test_the_same_bars_without_the_notice_would_have_published_it(self):
         # Proves the test above is about the notice and not about the data.
         after = bars("2026-08-01", 40, spikes={39: 800})
-        doc = vol.build({"NCGC": after}, delisted={})
+        doc = vol.build({"NCGC": after}, delisted={}, companies={"NCGC"})
         self.assertEqual(doc["sessions"][0]["companies"][0]["times"], 8.4)
 
     def test_the_default_asks_the_exchange_notices(self):
         self.patch(vol.listing_status, "delisted", lambda: {"NCGC": NCGC})
-        doc = vol.build({"NCGC": bars("2026-08-01", 40, spikes={39: 800})})
+        doc = vol.build({"NCGC": bars("2026-08-01", 40, spikes={39: 800})},
+                        companies={"NCGC"})
         self.assertEqual(doc["sessions"], [])
 
 
@@ -150,7 +152,8 @@ class OverTheCommittedRecord(unittest.TestCase):
                        for r in rows)}
         if not late:
             self.skipTest("no delisted ticker has a bar after its notice to test against")
-        doc = vol.build(found, sessions=10_000)
+        # Every one of them, in the directory or not: this is about the notice.
+        doc = vol.build(found, sessions=10_000, companies=set(found))
         leaked = sorted(
             f"{c['ticker']} {s['date']}" for s in doc["sessions"] for c in s["companies"]
             if listing_status.after_delisting(self.gone.get(c["ticker"]), s["date"]))

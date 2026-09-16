@@ -4,6 +4,15 @@
 Reads committed daily bars from `data-source/prices/<TICKER>.json` and outputs
 `public/data/v1/trends.json` and `app/assets/fixtures/trends.json`.
 
+Only for the companies in `companies.json`. The store also holds series the
+market scan filed under an ISIN because it has no ticker for them, and on
+16 September 2026 this document keyed five of them by that ISIN: Misr Kuwait
+Investment & Trading (`EGS659O1C015`) and Acrow Misr (`EGS3E071C013-EGP`),
+both delisted by the exchange, International Dry Ice, Egypt - South Africa for
+Communication, and a Lotus subscription right. It also carried MKIT, a real
+ticker the directory has never listed. None of them is a company this site
+publishes, so none of them gets a trend.
+
 Usage:
     python3 scripts/build_price_trends.py
     python3 scripts/build_price_trends.py --check
@@ -19,18 +28,32 @@ import sys
 REPO = pathlib.Path(__file__).resolve().parent.parent
 BARS = REPO / "data-source" / "prices"
 FALLBACK_BARS = REPO / "public" / "data" / "v1" / "prices"
+DIRECTORY = REPO / "public" / "data" / "v1" / "companies.json"
 API = REPO / "public" / "data" / "v1"
 FIXTURES = REPO / "app" / "assets" / "fixtures"
 NAME = "trends.json"
 
 
-def compute_trends(source_dir: pathlib.Path) -> dict:
+def listed() -> set[str]:
+    """The directory's tickers, or an empty set when it cannot be read."""
+    try:
+        body = json.loads(DIRECTORY.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return set()
+    return {c["ticker"] for c in body.get("companies") or []
+            if isinstance(c, dict) and c.get("ticker")}
+
+
+def compute_trends(source_dir: pathlib.Path, companies: set[str] | None = None) -> dict:
+    known = listed() if companies is None else companies
     trends = {}
     json_files = sorted(source_dir.glob("*.json"))
     last_date = ""
     
     for path in json_files:
         ticker = path.stem
+        if ticker not in known:
+            continue
         try:
             content = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
@@ -109,8 +132,15 @@ def main():
     if not src.exists():
         print(f"No price directory found at {BARS} or {FALLBACK_BARS}", file=sys.stderr)
         sys.exit(0)
+    companies = listed()
+    if not companies:
+        print(f"No directory at {DIRECTORY}; {NAME} left as it is", file=sys.stderr)
+        sys.exit(0)
 
-    data = compute_trends(src)
+    data = compute_trends(src, companies)
+    unlisted = sorted({p.stem for p in src.glob("*.json")} - companies)
+    if unlisted:
+        print(f"Left out {len(unlisted)} series with no directory ticker: {', '.join(unlisted)}")
     encoded = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
 
     if args.check:

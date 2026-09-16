@@ -22,6 +22,16 @@ Source is `data-source/prices`, which `fetch_price_history.py` fills and
 verifies against closes we already publish. Nothing is re-verified here: this
 step is a projection of already-checked data, not a second opinion on it.
 
+**Only the directory's companies.** The store also keeps what the market scan
+files under an ISIN, because the scan has no ticker for it. On 16 September
+2026 that was twelve series, three of them companies the exchange delisted
+(Misr Kuwait Investment & Trading, Acrow Misr, International Dry Ice). There
+was also a ticker-named series for MKIT, which the directory has never listed.
+The longest ran to 127 sessions, so they stayed out of here only because they
+were short. `volume-events.json` and `trends.json` have no length rule and did
+publish them. A document keyed by a name the directory does not carry is a
+company this site does not list.
+
 Usage:
     python3 scripts/build_prices_api.py [--check]
 """
@@ -36,6 +46,7 @@ import shutil
 REPO = pathlib.Path(__file__).resolve().parent.parent
 STAGE = REPO / "data-source" / "prices"
 OUT = REPO / "public" / "data" / "v1" / "prices"
+DIRECTORY = REPO / "public" / "data" / "v1" / "companies.json"
 
 # Below this a split document earns nothing: the company file already carries a
 # year, and a shorter series here would be a second copy of the same line.
@@ -50,6 +61,16 @@ MIN_SESSIONS = 300
 # Six years, so `5Y` fills completely and `MAX` still means something more than
 # `5Y` rather than being the same line under another label.
 MAX_SESSIONS = 1500
+
+
+def listed() -> set[str]:
+    """The directory's tickers, or an empty set when it cannot be read."""
+    try:
+        body = json.loads(DIRECTORY.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return set()
+    return {c["ticker"] for c in body.get("companies") or []
+            if isinstance(c, dict) and c.get("ticker")}
 
 
 def series_for(path: pathlib.Path) -> list[dict] | None:
@@ -76,11 +97,21 @@ def main() -> int:
     if not staged:
         print("   nothing staged; run fetch_price_history.py first")
         return 0
+    # Read before anything is removed below. Without a directory every series
+    # would be left out, and the rebuild would delete every published document.
+    companies = listed()
+    if not companies:
+        print(f"   no directory at {DIRECTORY}; the published documents are left as they are")
+        return 0
 
     written = skipped = rows = 0
+    unlisted: list[str] = []
     payloads: dict[str, list[dict]] = {}
     for path in staged:
         ticker = path.stem
+        if ticker not in companies:
+            unlisted.append(ticker)
+            continue
         bars = series_for(path)
         if bars is None or len(bars) < MIN_SESSIONS:
             skipped += 1
@@ -91,6 +122,9 @@ def main() -> int:
 
     print(f"   {written} companies, {rows:,} sessions "
           f"({skipped} too short to be worth splitting)")
+    if unlisted:
+        print(f"   left out {len(unlisted)} series with no directory ticker: "
+              f"{', '.join(unlisted)}")
     if args.check:
         return 0
 

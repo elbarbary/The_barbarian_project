@@ -38,6 +38,17 @@ an unusual session on the exchange; it is not a session on the exchange.
 So a share's bars dated on or after its final delisting notice are dropped
 from its series before anything is judged — as sessions and as the window
 behind them.
+
+**Only a company the directory publishes.** The store names a series after the
+file the market scan wrote, and the scan files a listing it has no ticker for
+under its ISIN. On 16 September 2026 this published `EGS659O1C015` at 3.7
+times its usual volume on 2 September: Misr Kuwait Investment & Trading,
+delisted by the exchange on 12 August (NewsID 292918). The notice names the
+company by its ticker, MKIT, so nothing matched a series named by ISIN, and a
+company this site has never listed appeared on its screen by a number no
+reader can look up. So a series is judged only under a ticker in
+`companies.json`. MKIT's own ticker-named series is not in the directory
+either, so it is left out too.
 """
 
 from __future__ import annotations
@@ -53,6 +64,7 @@ import listing_status
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 BARS = REPO / "data-source" / "prices"
+DIRECTORY = REPO / "public" / "data" / "v1" / "companies.json"
 API = REPO / "public" / "data" / "v1"
 FIXTURES = REPO / "app" / "assets" / "fixtures"
 NAME = "volume-events.json"
@@ -71,8 +83,18 @@ SESSIONS = 10
 PER_SESSION = 40
 
 
+def listed() -> set[str]:
+    """The directory's tickers, or an empty set when it cannot be read."""
+    try:
+        body = json.loads(DIRECTORY.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return set()
+    return {c["ticker"] for c in body.get("companies") or []
+            if isinstance(c, dict) and c.get("ticker")}
+
+
 def daily_bars(directory: pathlib.Path) -> dict[str, list[dict]]:
-    """Every company's daily bars, keyed by ticker."""
+    """Every series in the store, keyed by the name it is filed under."""
     out: dict[str, list[dict]] = {}
     for path in sorted(directory.glob("*.json")):
         try:
@@ -113,11 +135,16 @@ def unusual(rows: list[dict], threshold: float = THRESHOLD) -> list[dict]:
 
 
 def build(bars: dict[str, list[dict]], sessions: int = SESSIONS,
-          delisted: dict[str, dict] | None = None) -> dict:
-    # Defaults to the exchange's own notices, so no caller can forget to ask.
+          delisted: dict[str, dict] | None = None,
+          companies: set[str] | None = None) -> dict:
+    # Defaults to the exchange's own notices and to the directory, so no
+    # caller can forget to ask either.
     gone = listing_status.delisted() if delisted is None else delisted
+    known = listed() if companies is None else companies
     by_day: dict[str, list[dict]] = collections.defaultdict(list)
     for ticker, rows in bars.items():
+        if ticker not in known:
+            continue
         record = gone.get(ticker)
         if record:
             rows = [r for r in rows
@@ -162,13 +189,21 @@ def main() -> int:
     if not bars:
         print(f"── Unusual volume: no daily bars under {BARS} — nothing written")
         return 0
+    companies = listed()
+    if not companies:
+        print(f"── Unusual volume: no directory at {DIRECTORY} — nothing written")
+        return 0
 
-    doc = build(bars, args.sessions)
+    doc = build(bars, args.sessions, companies=companies)
     if not doc["sessions"]:
         print("── Unusual volume: no session cleared the threshold — nothing written")
         return 0
 
     print("── Unusual volume")
+    unlisted = sorted({path.stem for path in BARS.glob("*.json")} - companies)
+    if unlisted:
+        print(f"   left out {len(unlisted)} series with no directory ticker: "
+              f"{', '.join(unlisted)}")
     for session in doc["sessions"][:5]:
         top = session["companies"][0] if session["companies"] else None
         lead = f"{top['ticker']} {top['times']}×" if top else "—"
