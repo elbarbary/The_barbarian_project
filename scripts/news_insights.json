@@ -1243,6 +1243,10 @@
     "meaning": "An expansion in U.S. crude inventories reflects higher immediate supply and dampens global oil prices, offsetting concurrent risk premiums linked to Saudi supply disruptions.",
     "meaning_ar": "يعكس ارتفاع مخزونات الخام الأمريكية زيادة المعروض الفوري ويضغط سلباً على أسعار النفط العالمية، مما يوازن علاوات المخاطر الناتجة عن تعطل الإمدادات السعودية."
   },
+  "ارتفاع الموشرات اليابانيه مع هبوط عوايد السندات": {
+    "meaning": "A decline in sovereign bond yields lowers the risk-free discount rate applied to equity valuation models and decreases corporate borrowing costs, which correlates with an upward repricing of equity index shares.",
+    "meaning_ar": "يؤدي انخفاض عوائد السندات الحكومية إلى خفض معدل الخصم الخالي من المخاطر المستخدم في تقييم الأسهم وتقليص تكاليف الاقتراض للشركات، وهو ما يرتبط بإعادة تقييم تصاعدية لأسهم المؤشرات."
+  },
   "ارتفاع الين الي اعلي مستوياته في 7 اشهر": {
     "meaning": "A rise in the Japanese yen increases the direct acquisition cost of JPY-denominated imports and raises the local-currency carrying value of yen-denominated liabilities.",
     "meaning_ar": "يؤدي ارتفاع الين الياباني إلى زيادة التكلفة المباشرة للواردات المسعرة بالين، ورفع القيمة المعادلة بالعملة المحلية للالتزامات والديون القائمة بالعملة اليابانية."
@@ -2770,6 +2774,10 @@
   "الصعيد العامه للمقاولات: PRE Group تخفض حصتها في الشركه الي 2.81%": {
     "meaning": "A reduction in equity stake by a major shareholder alters the company's ownership structure and redistributes voting power among the remaining equity holders.",
     "meaning_ar": "يؤدي تخفيض حصة مساهم رئيسي إلى تعديل هيكل ملكية الشركة وإعادة توزيع القوة التصويتية بين المساهمين المتبقين."
+  },
+  "الصناعه تشكل لجنه لدراسه تحديات قطاع الاسمنت": {
+    "meaning": "The formation of the committee establishes a formal regulatory review channel between the government and cement producers to assess operational parameters, including energy costs, production quotas, and local supply chain constraints.",
+    "meaning_ar": "يمثل تشكيل اللجنة قناة مراجعة تنظيمية رسمية بين الجهات الحكومية ومصنعي الأسمنت لفحص المعايير التشغيلية للقطاع، بما في ذلك تكاليف مدخلات الطاقة، وحصص الإنتاج، ومحددات سلاسل الإمداد المحلية."
   },
   "الصومال تصادق علي اتفاقيه التجاره الحره القاريه الافريقيه": {
     "meaning": "Ratification integrates Somalia into the continental trade framework, applying preferential tariff schedules and standardized customs protocols for cross-border goods trade among member states, including Egypt.",
@@ -5424,6 +5432,10 @@
   "صعود جماعي لموشرات البورصه بالتعاملات الصباحيه والثلاثيني يرتفع 0.14%": {
     "meaning": "A collective index rise reflects aggregate buying volume exceeding selling volume across large-cap and broad-market constituent equities during early trading, which adjusts benchmark weighted price levels upward relative to the prior session's close.",
     "meaning_ar": "يعكس الصعود الجماعي للمؤشرات تفوق أحجام الشراء الإجمالية على أحجام البيع عبر الأسهم القيادية وأسهم السوق ككل خلال التداولات المبكرة، مما يؤدي إلى تعديل المستويات السعرية المرجحة للمؤشرات صعوداً مقارنة بإغلاق الجلسة السابقة."
+  },
+  "صعود جماعي لموشرات البورصه بالتعاملات الصباحيه والثلاثيني يرتفع 0.26%": {
+    "meaning": "Broad-based index gains reflect net capital inflows across multiple market sectors, where early trading volumes shift the market capitalization of benchmark constituents upward.",
+    "meaning_ar": "يعكس الصعود الجماعي للمؤشرات تدفقات نقدية تشمل قطاعات سوقية متعددة، حيث تؤدي أحجام التداول الصباحية إلى رفع القيمة السوقية للأسهم المكونة للمؤشر الرئيسي."
   },
   "صعود جماعي لموشرات البورصه بالتعاملات الصباحيه والثلاثيني يرتفع 0.31%": {
     "meaning": "Early trading shows aggregate buy-side execution across benchmark constituents, lifting the EGX30 index by 0.31% alongside broad-market indicators.",
