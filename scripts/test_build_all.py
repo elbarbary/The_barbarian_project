@@ -4,11 +4,13 @@
 from __future__ import annotations
 
 import ast
+import io
 import pathlib
 import re
 import subprocess
 import sys
 import unittest
+from contextlib import redirect_stderr, redirect_stdout
 from unittest import mock
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -73,8 +75,17 @@ class ExitCodes(unittest.TestCase):
             bad = any(n in failing for n in names)
             return subprocess.CompletedProcess(cmd, 1 if bad else 0)
 
+        # Quietly, and away from the job summary. main() prints `::error` and
+        # `::warning` workflow commands and appends to GITHUB_STEP_SUMMARY, and
+        # run under CI those became real annotations: a "Documents contradict
+        # each other ... Refusing to publish" error on every green run of the
+        # app-data and price jobs, and about 150 fake "the host would not
+        # answer" warnings, all from these simulated failures.
         with mock.patch.object(build_all.subprocess, "run", side_effect=fake), \
-             mock.patch.object(build_all.sys, "argv", ["build_all.py"]):
+             mock.patch.object(build_all.sys, "argv", ["build_all.py"]), \
+             mock.patch.dict(build_all.os.environ) as env, \
+             redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+            env.pop("GITHUB_STEP_SUMMARY", None)
             return build_all.main()
 
     def test_a_clean_build_is_zero(self):
