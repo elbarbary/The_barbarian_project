@@ -1427,6 +1427,10 @@
     "meaning": "Daily poultry exchange quotes reflect prevailing market prices for table eggs, determined by daily supply volumes from farms against retail consumer demand and input feed costs.",
     "meaning_ar": "تعكس أسعار بورصة الدواجن اليومية القيمة السوقية الحالية لبيض المائدة، والتي تتحدد بناءً على حجم المعروض اليومي من المزارع مقابل طلب تجزئة المستهلكين وتكاليف الأعلاف."
   },
+  "اسعار البيض اليوم الاربعاء 16-9-2026 في مصر": {
+    "meaning": "Daily poultry exchange quotations reflect prevailing spot prices determined by current feed input costs, farm-gate supply volumes, and distribution margins across retail channels.",
+    "meaning_ar": "تعكس أسعار بورصة الدواجن اليومية أسعار التنفيذ الفورية في السوق وفق تكاليف الأعلاف الحالية، وحجم المعروض من المزارع، وهوامش التوزيع عبر منافذ التجزئة."
+  },
   "اسعار البيض اليوم الاربعاء 9-9-2026 في مصر": {
     "meaning": "Daily price listings for poultry products reflect immediate supply-and-demand balances, feed input costs, and distribution farm-gate rates within the domestic agricultural market.",
     "meaning_ar": "تعكس بيانات الأسعار اليومية لمنتجات الدواجن التوازن المباشر بين العرض والطلب وتكاليف الأعلاف وأسعار التداول في المزارع داخل السوق الزراعية المحلية."
@@ -1682,6 +1686,10 @@
   "اسعار الفراخ في بورصه الدواجن اليوم الاثنين 7-9-2026": {
     "meaning": "Daily poultry exchange quotations reflect spot farm-gate transaction rates, which operate based on prevailing feed input costs, operational expenses, and immediate supply availability in the domestic market.",
     "meaning_ar": "يعكس تسعير بورصة الدواجن اليومي أسعار التداول الفورية من أرض المزرعة، والتي تتحدد بناءً على تكاليف الأعلاف الحالية، ومصروفات التشغيل، ومستويات المعروض المتاح في السوق المحلي."
+  },
+  "اسعار الفراخ في بورصه الدواجن اليوم الاربعاء 16-9-2026": {
+    "meaning": "Poultry exchange spot pricing reflects daily wholesale settlement rates determined by direct supply volumes from farms against consumer market off-take.",
+    "meaning_ar": "تعكس الأسعار اليومية في بورصة الدواجن معدلات التسوية الفورية لتعاملات الجملة المحددة بناءً على حجم المعروض المباشر من المزارع مقابل معدلات السحب في الأسواق الاستهلاكية."
   },
   "اسعار الفراخ في بورصه الدواجن اليوم الاربعاء 9-9-2026": {
     "meaning": "Poultry exchange price updates reflect the daily wholesale clearing rates determined by immediate farm-gate supply volumes and operational feed input costs across the local market.",
@@ -2203,6 +2211,10 @@
     "meaning": "Temporary listing gives the company a defined window to fulfill statutory Egyptian Exchange registration requirements, such as minimum public float, shareholder spread, and regulatory filings, before formal trading of its shares begins.",
     "meaning_ar": "يمنح القيد المؤقت الشركة مهلة زمنية محددة لاستيفاء متطلبات الإدراج الرسمية في البورصة المصرية، بما في ذلك نسب التداول الحر وتوزيع المساهمين واستكمال الإجراءات الرقابية، وذلك قبل بدء التداول الفعلي على أسهمها."
   },
+  "البورصه توافق علي قيد 3 شركات لاداره المحافظ بسجل العضويه": {
+    "meaning": "Registration in the EGX membership register grants these three portfolio management firms operational authorization to directly manage and execute client transactions on the exchange under regulated market rules.",
+    "meaning_ar": "يمنح القيد في سجل عضوية البورصة المصرية هذه الشركات الثلاث لإدارة المحافظ الترخيص التشغيلي لإدارة وتنفيذ معاملات العملاء مباشرة في السوق وفقاً للقواعد المنظمة."
+  },
   "البورصه توقع مذكره تفاهم مع الشركه المصريه للايداع والقيد لتعزيز كفاءه تداول ادوات الدين الحكوميه": {
     "meaning": "This agreement establishes direct operational and technical coordination between the Egyptian Exchange (EGX) and the Egyptian Central Securities Depository (ECSD) for the execution, clearing, and settlement workflows of sovereign debt instruments.",
     "meaning_ar": "تؤسس هذه الاتفاقية إطاراً للتنسيق التشغيلي والتقني بين البورصة المصرية والشركة المصرية للإيداع والقيد لتنظيم عمليات التداول والمقاصة والتسوية لأدوات الدين الحكومية."
@@ -2635,6 +2647,10 @@
     "meaning": "Upgrading bilateral ties to a strategic partnership establishes high-level intergovernmental coordination mechanisms and formal trade frameworks between the two economies. This institutional structure aligns cross-border customs procedures, standardizes regulatory protocols, and governs bilateral exchange under the African Continental Free Trade Area (AfCFTA) framework.",
     "meaning_ar": "يضع الارتقاء بالعلاقات الثنائية إلى شراكة إستراتيجية آليات تنسيق حكومية رفيعة المستوى وأطر عمل تجارية رسمية بين اقتصادي البلدين؛ حيث يعمل هذا الإطار المؤسسي على توحيد وتنسيق الإجراءات الجمركية والبروتوكولات التنظيمية عبر الحدود وفقاً لأحكام اتفاقية التجارة الحرة القارية الأفريقية."
   },
+  "الرييس السيسي يستقبل الرييس الفلسطيني غدا": {
+    "meaning": "Official bilateral summits establish the intergovernmental framework governing cross-border logistical coordination, humanitarian transit protocols, and border trade facilitation through Egyptian entry ports.",
+    "meaning_ar": "تحدد القمم الثنائية الرسمية الأطر الحكومية المنظمة لآليات التنسيق اللوجستي، وبروتوكولات النقل الإنساني، وتسيير حركة التبادل التجاري عبر المنافذ الحدودية المصرية."
+  },
   "الرييس السيسي يستقبل محمد بن سلمان غدا لبحث العلاقات الثناييه والتطورات الاقليميه": {
     "meaning": "Bilateral state-level discussions between Egypt and Saudi Arabia govern intergovernmental investment frameworks, central bank deposit arrangements, and joint funding vehicles operating across the domestic market.",
     "meaning_ar": "تحدد المباحثات الثنائية بين مصر والسعودية أطر الاستثمارات الحكومية المشتركة، وترتيبات الودائع لدى البنك المركزي، وآليات التمويل الموجهة للمشروعات في السوق المحلي."
@@ -2710,6 +2726,10 @@
   "الزراعه: المساحه المنزرعه تتجاوز 10.5 مليون فدان خلال 2025 – 2026": {
     "meaning": "Expanding total cultivated land to over 10.5 million feddans scales up the domestic agricultural production base and increases operational demand for farming inputs, including fertilizers, seeds, and irrigation infrastructure across the agribusiness sector.",
     "meaning_ar": "يؤدي اتساع إجمالي المساحة المنزرعة لتتجاوز 10.5 مليون فدان إلى توسيع قاعدة الإنتاج الزراعي المحلي وزيادة متطلبات التشغيل للمدخلات الزراعية من أسمدة وبذور وبنية تحتية للري في قطاع الصناعات الزراعية."
+  },
+  "الزراعه: بحوث الصحراء ومصر الخير يوقعان مشروعين لمعالجه المياه والتنميه في سيناء": {
+    "meaning": "This agreement pairs state research infrastructure with non-governmental financing to deploy water treatment units and agricultural assets in targeted zones.",
+    "meaning_ar": "تربط هذه الاتفاقية بين البنية التحتية للأبحاث الحكومية والتمويل التنموي غير الحكومي لتشغيل وحدات معالجة المياه والأصول الزراعية في مناطق محددة."
   },
   "الزراعه: تعاون بحثي مع جامعه الصين الزراعيه لتوطين التكنولوجيا وتطوير القطاع": {
     "meaning": "This bilateral research partnership establishes a framework for technical knowledge transfer and agricultural technology localisation between state institutions and international academic bodies.",
@@ -4224,6 +4244,10 @@
     "meaning": "Consumer identification of counterfeit lubricants affects informal distribution channels, inventory verification protocols, and sales volume retention for licensed downstream petroleum and lubricant producers.",
     "meaning_ar": "يؤثر رصد المستهلكين لزيوت المحركات المقلدة على قنوات التوزيع الموازية غير الرسمية، وإجراءات التحقق من المخزون، وحصص التوزيع الميداني للشركات المرخصة لإنتاج وتداول المشتقات البترولية."
   },
+  "تعرف علي فروع كاري اون الجديده في القاهره والجيزه والقليوبيه والاسكندريه": {
+    "meaning": "Opening new retail branches expands a company's physical distribution network and geographic footprint across target metropolitan markets, operating as a direct sales-point expansion.",
+    "meaning_ar": "يُعد افتتاح فروع جديدة لشركات التجزئة توسيعاً لشبكة التوزيع الجغرافي ونقاط البيع المباشرة في الأسواق الحضرية المستهدفة."
+  },
   "تعرف علي كيفيه تقديم شكوي عماليه الي وزاره العمل": {
     "meaning": "Official labor complaint channels provide a formal administrative mechanism for resolving industrial disputes, establishing institutional oversight on corporate compliance with employment contracts and labor regulations.",
     "meaning_ar": "توفر القنوات الرسمية للشكاوى العمالية آلية إدارية لتسوية النزاعات في بيئة العمل، وتفرض رقابة مؤسسية على امتثال الشركات لعقود التوظيف والتشريعات المنظمة للعمل."
@@ -4735,6 +4759,10 @@
   "رشا عبدالعال: حزم التيسيرات ترسخ مفهوم الشراكه بين المصلحه والمجتمع الضريبي": {
     "meaning": "Tax facilitation packages establish administrative frameworks for settling tax disputes, simplifying filing procedures, and standardizing compliance protocols for registered businesses.",
     "meaning_ar": "تتضمن حزم التيسيرات الضريبية أطراً إدارية لإنهاء النزاعات الضريبية وتبسيط إجراءات تقديم الإقرارات وتوحيد آليات الامتثال للمؤسسات المسجلة."
+  },
+  "رضوان: نتوقع اضافه مليون مستثمر للبورصه خلال 2026 بدعم التكنولوجيا الماليه": {
+    "meaning": "Financial technology integration digitizes the investor onboarding process, connecting electronic payment and verification channels directly with brokerage systems and central clearing accounts.",
+    "meaning_ar": "يربط دمج التكنولوجيا المالية قنوات التحقق والدفع الرقمي مباشرة بشركات الوساطة وحسابات التسوية المركزية، مما يتيح تسجيل المستثمرين وفتح الأكواد آلياً."
   },
   "رغم تراجع يونيو.. الاسمده المصريه تحقق 1.69 مليار دولار صادرات في 6 اشهر": {
     "meaning": "Egyptian fertilizer producers generate foreign currency revenue by exporting output to global markets, while monthly export totals fluctuate based on operational gas feedstock allocations and global commodity price cycles.",
@@ -6112,6 +6140,10 @@
   "لجنه القيد تحدد موعد ادراج سهم ام ان تي تيك القابضه": {
     "meaning": "The listing committee sets the official date on which the company's shares are registered on the exchange's trading platform, transitioning the security from unlisted status to an active financial instrument accessible in the secondary market.",
     "meaning_ar": "تحدد لجنة القيد الموعد الرسمي لتسجيل أسهم الشركة على شاشات التداول بالبورصة، وهو الإجراء الذي ينقل الورقة المالية من وضع غير المقيد إلى أداة مالية متاحة في السوق الثانوية."
+  },
+  "لماذا ترتفع عوايد السندات العالميه؟ «جولدمان ساكس» يحدد اسباب موجه البيع": {
+    "meaning": "A widespread sell-off of sovereign debt securities lowers bond prices and mechanically pushes yields upward, reflecting an adjustment to prevailing macroeconomic factors and global interest rate structures.",
+    "meaning_ar": "تؤدي موجات بيع السندات السيادية إلى انخفاض أسعارها السوقية، وهو ما يرفع عوائدها تلقائياً بحكم العلاقة العكسية القائمة بين سعر السند وعائده، بما يعكس تعديل مستويات التسعير وفقاً لمعدلات الفائدة العالمية السائدة."
   },
   "لماذا تعمل قله من النساء في الهند؟": {
     "meaning": "Low female labor force participation constrains the aggregate supply of formal labor, concentrates domestic output in male-dominated sectors, and limits household income diversification.",
