@@ -260,3 +260,110 @@ class Story(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RefusalsAreRemembered(unittest.TestCase):
+    """A refusal stands until what it answered changes.
+
+    Every daily build used to ask again about the same 22 refused companies:
+    467 refused calls in 22 rebuilds, and up to 22 minutes a run.
+    """
+
+    def run_main(self, root, filings, answer="not a brief at all", argv=("--limit", "6")):
+        import json
+        import pathlib
+        import sys
+        from contextlib import redirect_stdout
+        from io import StringIO
+        from unittest import mock
+
+        (root / "public" / "data" / "v1").mkdir(parents=True, exist_ok=True)
+        (root / "public" / "data" / "v1" / "companies.json").write_text(
+            json.dumps({"companies": [{"ticker": "AAA", "name_en": "Aaa Industries"}]}))
+        calls = []
+
+        def generate(prompt, **_):
+            calls.append(prompt)
+            return answer, {"prompt": 1000, "candidates": 100}
+
+        with mock.patch.multiple(b, REPO=root, STORE=root / "briefs.json", REFUSED=root / "refused.json",
+                                 OUT=root / "out", FIXTURES=root / "fixtures", SIGNALS=root / "signals"), \
+                mock.patch.object(b, "load_filings", lambda: {"AAA": filings}), \
+                mock.patch.object(b, "load_profiles", lambda: {}), \
+                mock.patch.object(b.gemini, "available", lambda: True), \
+                mock.patch.object(b.gemini, "generate", generate), \
+                mock.patch.object(sys, "argv", ["build_company_briefs.py", *argv]), \
+                redirect_stdout(StringIO()):
+            self.assertEqual(b.main(), 0)
+        return calls, json.loads((root / "refused.json").read_text())
+
+    @staticmethod
+    def filing(code, day):
+        return {"code": code, "dateStamp": f"{day}T10:00:00",
+                "heading": f"Aaa Industries (AAA.CA) disclosure {code}",
+                "headingArabic": f"شركة ايه ايه ايه (AAA.CA) إفصاح {code}"}
+
+    def test_an_unchanged_refusal_is_not_asked_again_and_a_new_filing_is(self):
+        import pathlib
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            filings = [self.filing(2, "2026-09-10"), self.filing(1, "2026-08-01")]
+            calls, memo = self.run_main(root, filings)
+            self.assertEqual(len(calls), 1)
+            self.assertIn("AAA", memo)
+            calls, _ = self.run_main(root, filings)
+            self.assertEqual(calls, [], "asked again about a company nothing changed for")
+            calls, _ = self.run_main(root, [self.filing(3, "2026-09-15"), *filings])
+            self.assertEqual(len(calls), 1, "a new filing is a new question")
+
+    def test_refresh_asks_regardless(self):
+        import pathlib
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            filings = [self.filing(1, "2026-08-01")]
+            self.run_main(root, filings)
+            calls, _ = self.run_main(root, filings, argv=("--limit", "6", "--refresh"))
+            self.assertEqual(len(calls), 1)
+
+    def test_the_limit_counts_refusals_too(self):
+        import pathlib
+        import tempfile
+        from unittest import mock
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            (root / "public" / "data" / "v1").mkdir(parents=True)
+            companies = [{"ticker": f"A{i:02d}", "name_en": f"Company {i}"} for i in range(10)]
+            filings = {c["ticker"]: [{"code": i, "dateStamp": "2026-09-01T10:00:00",
+                                      "heading": f"({c['ticker']}.CA) x", "headingArabic": ""}]
+                       for i, c in enumerate(companies)}
+            calls = []
+
+            def generate(prompt, **_):
+                calls.append(prompt)
+                return "no", {"prompt": 1, "candidates": 1}
+
+            import json
+            import sys
+            from contextlib import redirect_stdout
+            from io import StringIO
+            (root / "public" / "data" / "v1" / "companies.json").write_text(json.dumps({"companies": companies}))
+            with mock.patch.multiple(b, REPO=root, STORE=root / "briefs.json", REFUSED=root / "refused.json",
+                                     OUT=root / "out", FIXTURES=root / "fixtures", SIGNALS=root / "signals"), \
+                    mock.patch.object(b, "load_filings", lambda: filings), \
+                    mock.patch.object(b, "load_profiles", lambda: {}), \
+                    mock.patch.object(b.gemini, "available", lambda: True), \
+                    mock.patch.object(b.gemini, "generate", generate), \
+                    mock.patch.object(sys, "argv", ["build_company_briefs.py", "--limit", "6"]), \
+                    redirect_stdout(StringIO()):
+                b.main()
+            self.assertEqual(len(calls), 6)
+
+    def test_the_store_is_kept_by_the_daily_build(self):
+        import pathlib
+        workflow = (pathlib.Path(b.__file__).resolve().parent.parent / ".github" / "workflows"
+                    / "publish-app-data.yml").read_text()
+        stores = workflow.split("STORES: >-", 1)[1].split("\n\n", 1)[0]
+        self.assertIn("scripts/company_briefs_refused.json", stores,
+                      "a memo the runner throws away asks again on every run")

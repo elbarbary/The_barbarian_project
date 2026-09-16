@@ -49,6 +49,7 @@ import collections
 import datetime
 import glob
 import gzip
+import hashlib
 import json
 import pathlib
 import re
@@ -62,6 +63,17 @@ COMPANIES = REPO / "public" / "data" / "v1" / "companies"
 OUT = REPO / "public" / "data" / "v1" / "briefs"
 FIXTURES = REPO / "app" / "assets" / "fixtures" / "briefs"
 STORE = pathlib.Path(__file__).resolve().parent / "company_briefs.json"
+# The companies the model has refused, and what it was shown when it did.
+#
+# A refusal used to be forgotten the moment it happened, and `--limit` counted
+# only briefs written. So every daily build asked again about the same 22
+# companies whose records were too thin to write a distinctive history from,
+# refused all 22 for the same reason ("generic — 1 of its own figures
+# quoted"), wrote nothing, never reached the limit, and did it again the next
+# run: 467 refused calls across 22 rebuilds between 14 and 16 Sep 2026, and a
+# step that took 38 seconds grew to as much as 22 minutes on a slow Vertex.
+# A refusal now stands until what it answered changes.
+REFUSED = pathlib.Path(__file__).resolve().parent / "company_briefs_refused.json"
 SIGNALS = REPO / "public" / "data" / "v1" / "signals"
 PROFILES = pathlib.Path(__file__).resolve().parent / "company_profiles.json"
 
@@ -488,6 +500,32 @@ def attach_story(clean: dict, brief: dict, stakes: set[str], profile: dict) -> N
     clean["story_url"] = profile.get("source_url") or ""
 
 
+def asked_with(filings: list[dict], profile_text: str | None) -> str:
+    """What a refusal was an answer to, as one fingerprint.
+
+    This file's own code (the prompt and every guard live in it), the ids of
+    the company's filings, and the profile text the prompt quotes. A new filing
+    or a changed guard asks again; an unchanged company does not.
+    """
+    digest = hashlib.sha256(pathlib.Path(__file__).read_bytes())
+    digest.update(json.dumps([f.get("code") for f in filings], separators=(",", ":")).encode())
+    digest.update((profile_text or "").encode("utf-8"))
+    return digest.hexdigest()[:24]
+
+
+def load_refused() -> dict:
+    try:
+        held = json.loads(REFUSED.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return held if isinstance(held, dict) else {}
+
+
+def save_refused(refused: dict) -> None:
+    REFUSED.write_text(json.dumps(refused, ensure_ascii=False, indent=1, sort_keys=True) + "\n",
+                       encoding="utf-8")
+
+
 def load_profiles() -> dict:
     """Everything `harvest_company_profiles.py` has collected, or nothing."""
     try:
@@ -622,7 +660,9 @@ def main() -> int:
         t for t in by_ticker if t in directory
     )
     spent = 0.0
-    done = refused = skipped = 0
+    done = refused = skipped = unchanged = 0
+    memo = load_refused()
+    today = datetime.date.today().isoformat()
     # Every history accepted this run, as word-run sets, so the next one can be
     # compared against all of them.
     accepted: list[set[str]] = [
@@ -636,12 +676,22 @@ def main() -> int:
         record = factual_record(ticker, filings)
         if ticker in held and not args.refresh and not args.only:
             held[ticker]["record"] = record  # facts are cheap; refresh them
+            memo.pop(ticker, None)
             skipped += 1
+            continue
+        profile = profiles.get(ticker) or {}
+        block = profile_block(profile)
+        fingerprint = asked_with(filings, block[0] if block else None)
+        if (not args.refresh and not args.only
+                and (memo.get(ticker) or {}).get("inputs") == fingerprint):
+            unchanged += 1
             continue
         if spent >= args.budget:
             print(f"   budget reached (${spent:.2f}) — stopping")
             break
-        if args.limit and done >= args.limit:
+        # Attempts, not successes: counting only briefs written let a run of
+        # refusals ask about every remaining company, every run.
+        if args.limit and done + refused >= args.limit:
             break
 
         # Ids the model may cite at all, and the narrower set a *plan* may
@@ -655,8 +705,6 @@ def main() -> int:
             f"egx-{i['code']}" for i in window
             if (i.get("dateStamp") or "")[:10] >= floor
         }
-        profile = profiles.get(ticker) or {}
-        block = profile_block(profile)
         text, specifics = prompt_for(
             ticker, directory.get(ticker, ticker), filings, record,
             load_signals(ticker), block[0] if block else None,
@@ -672,12 +720,15 @@ def main() -> int:
         brief = parse(raw)
         if not brief:
             refused += 1
+            memo[ticker] = {"inputs": fingerprint, "why": "no readable answer", "asked": today}
             continue
         clean, why = vet(brief, recent or allowed, specifics, accepted)
         if not clean:
             print(f"   {ticker}: refused — {why}", flush=True)
             refused += 1
+            memo[ticker] = {"inputs": fingerprint, "why": why, "asked": today}
             continue
+        memo.pop(ticker, None)
         if block:
             attach_story(clean, brief, block[1], profile)
         clean["record"] = record
@@ -688,11 +739,14 @@ def main() -> int:
             print(f"   {done} written, {refused} refused, ${spent:.2f} spent",
                   flush=True)
             publish(held)
+            save_refused(memo)
 
     # Newly generated plans this run need their filing links too.
     enrich_plans(held, by_ticker)
     publish(held)
-    print(f"   {done} briefs written, {refused} refused, {skipped} already held")
+    save_refused(memo)
+    print(f"   {done} briefs written, {refused} refused, {skipped} already held, "
+          f"{unchanged} refused before and unchanged since")
     print(f"   spent ${spent:.2f} of ${args.budget:.2f}")
     return 0
 

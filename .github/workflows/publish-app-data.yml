@@ -113,6 +113,7 @@ env:
     data-source/prices
     scripts/company_filings_seen.json
     scripts/company_briefs.json
+    scripts/company_briefs_refused.json
     scripts/company_names_ar.json
     scripts/company_profiles.json
     scripts/financials_filed.json
