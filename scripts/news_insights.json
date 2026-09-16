@@ -2403,6 +2403,10 @@
     "meaning": "Panda bonds are Chinese yuan-denominated sovereign debt instruments issued by foreign entities in the Chinese domestic market. This issuance structure utilizes non-traditional debt markets to fulfill foreign financing requirements.",
     "meaning_ar": "تُمثل سندات الباندا أدوات دين سيادية مقومة باليوان الصيني تُصدرها جهات أجنبية داخل السوق المالية المحلية في الصين. وتعمل هذه الآلية على استخدام أسواق دين غير تقليدية لتلبية المتطلبات التمويلية الخارجية."
   },
+  "الحكومه ترفع مستهدف عوايد الطروحات الي 12 مليار دولار": {
+    "meaning": "The state asset sale target involves transferring public equity in state-owned enterprises to private or institutional buyers through EGX listings or strategic sales, which supplies foreign currency directly to the sovereign balance sheet and increases the private share of market capitalization.",
+    "meaning_ar": "يتضمن رفع مستهدف برنامج الطروحات نقل ملكية حصص حكومية في شركات تابعة للدولة إلى مستثمرين من القطاع الخاص عبر البورصة أو لمستثمرين استراتيجيين، وهو ما يورد نقدًا أجنبيًا إلى الميزانية العمومية للدولة ويرفع نسبة رأس المال السوقي غير الحكومي."
+  },
   "الحكومه تستعد لاستضافه اجتماع للاعمال بالتعاون مع المنتدي الاقتصادي العالمي في القاهره": {
     "meaning": "Hosting an international business meeting serves as an operational platform connecting domestic market entities and policymakers with international institutions for policy dialogue and bilateral project discussions.",
     "meaning_ar": "يُمثّل تنظيم ملتقى أعمال دولي منصة تشغيلية تجمع بين الشركات المحلية وصنّاع السياسات والمؤسسات الدولية لمناقشة التنسيق المؤسسي وفرص التعاون المشترك."
@@ -4860,6 +4864,10 @@
     "meaning": "An equity exit from a joint venture involves restructuring asset ownership and capital commitments between operating partners in petrochemical manufacturing facilities. This process reconfigures the corporate governance, shareholding base, and ongoing operational financing of the shared chemical complex.",
     "meaning_ar": "تتضمن دراسة التخارج من الشراكة إعادة هيكلة لحصص الملكية والالتزامات الرأسمالية بين الشركاء في مجمعات التصنيع البتروكيماوي المشتركة. يترتب على هذا الإجراء تعديل في هيكل المساهمين، والحوكمة المؤسسية، وترتيبات التمويل التشغيلي للأصول القائمة."
   },
+  "داو جونز يخسر 630 نقطه بعد رفع الفيدرالي الامريكي الفايده": {
+    "meaning": "Higher benchmark interest rates set by the U.S. Federal Reserve increase borrowing costs across dollar-denominated credit markets and raise the discount rates applied to equity valuation models.",
+    "meaning_ar": "يؤدي رفع أسعار الفائدة من قبل الاحتياطي الفيدرالي الأمريكي إلى زيادة تكاليف الاقتراض في أسواق الائتمان المقومة بالدولار ورفع معدلات الخصم المستخدمة في تقييم الأسهم."
+  },
   "دراسه: انخفاض اسعار الادويه في امريكا قد يطيل فترات انتظار المرضي الاوروبيين": {
     "meaning": "Pharmaceutical manufacturers allocate commercial launch timelines and supply volumes based on jurisdictional pricing tiers, where reductions in reference prices alter product distribution prioritization across regional markets.",
     "meaning_ar": "تحدد شركات صناعة الأدوية أولويات التوزيع وجداول الإطلاق التجاري بناءً على مستويات التسعير في الأسواق، حيث يؤدي خفض الأسعار المرجعية إلى إعادة ترتيب حصص التوريد بين المناطق الجغرافية."
@@ -6252,6 +6260,10 @@
   "قيمه الاصدار الثاني من صندوق الدخل الثابت": {
     "meaning": "The second issuance of a fixed-income fund defines the total capital value of newly offered units deployed into debt securities, such as treasury bills, sovereign bonds, and corporate debt instruments.",
     "meaning_ar": "يحدد الإصدار الثاني لصندوق الدخل الثابت القيمة الإجمالية للوثائق الجديدة المطروحة لتوجيه السيولة المجمعة نحو أدوات الدين مثل أذون الخزانة والسندات الحكومية وسندات الشركات."
+  },
+  "كاثرين ثروبيك تكتب: هل تنجح محادثات امريكا والصين في ابطاء سباق الذكاء الاصطناعي؟": {
+    "meaning": "Bilateral technological negotiations between major economies establish regulatory standards and trade parameters governing the export and deployment of semiconductor hardware and advanced computing algorithms.",
+    "meaning_ar": "تحدد المحادثات التكنولوجية الثنائية بين الاقتصادات الكبرى الأطر التنظيمية والمعايير التجارية الحاكمة لتصدير أشباه الموصلات واستخدام خوارزميات الحوسبة المتقدمة."
   },
   "كاثرين ثوربيك تكتب: هل تتجاوز النماذج المفتوحه مخاوف الثقه في «الذكاء الاصطناعي الصيني»؟": {
     "meaning": "Open-source software distribution exposes artificial intelligence model architecture and source code for public auditing, which directly alters technology adoption dynamics and counterparty risk evaluation in cross-border software markets.",
