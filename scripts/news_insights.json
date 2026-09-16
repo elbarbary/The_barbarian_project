@@ -915,6 +915,10 @@
     "meaning": "Unlicensed capital-pooling operations divert domestic household liquidity away from regulated banking channels and capital market instruments into the informal financial sector.",
     "meaning_ar": "تؤدي أنشطة توظيف الأموال غير المرخصة إلى سحب السيولة النقدية من القطاع المصرفي وأدوات سوق المال المنظمة وتوجيهها نحو الاقتصاد المالي غير الرسمي."
   },
+  "«المصري للدراسات الاقتصاديه»: الالات والمعدات الكهرباييه ابرز المنتجات الداعمه للتحول الصناعي": {
+    "meaning": "The production and deployment of electrical machinery and equipment constitute capital goods that serve as direct inputs for modernising manufacturing processes and increasing industrial automation.",
+    "meaning_ar": "يمثل تصنيع وتوريد الآلات والمعدات الكهربائية سلعاً رأسمالية تُستخدم كمدخلات مباشرة لتحديث العمليات التشغيلية وتطبيق أنظمة التشغيل الآلي في المصانع."
+  },
   "«ام اند بي» تطلق مبادره لتطوير ممر القاهره–كيب تاون الاقتصادي": {
     "meaning": "The initiative establishes an operational framework for cross-border logistics and infrastructure along the Cairo–Cape Town corridor, linking transportation routes and transit points between Egypt and African markets.",
     "meaning_ar": "تؤسس المبادرة إطاراً تشغيلياً للخدمات اللوجستية والبنية التحتية عبر ممر القاهرة-كيب تاون، مما يربط بين مسارات النقل ونقاط العبور بين مصر والأسواق الإفريقية."
@@ -1311,6 +1315,10 @@
     "meaning": "Higher benchmark yields raise international borrowing costs and strengthen the US dollar, which increases sovereign debt servicing burdens and redirects cross-border portfolio capital toward dollar-denominated assets.",
     "meaning_ar": "يؤدي ارتفاع عائد السندات القياسية إلى زيادة تكلفة الاقتراض الدولي وقوة الدولار، مما يرفع تكلفة خدمة الدين السيادي ويعيد توجيه التدفقات الاستثمارية نحو الأصول المقومة بالعملة الأمريكية."
   },
+  "ارتفاع عوايد السندات الامريكيه يضع الاحتياطي الفيدرالي امام صعوبات جديده": {
+    "meaning": "Higher US Treasury yields tighten broader financial conditions and increase borrowing costs across global debt markets, which complicates the Federal Reserve's balance between benchmark rate decisions and economic liquidity.",
+    "meaning_ar": "يؤدي ارتفاع عوائد سندات الخزانة الأمريكية إلى تشديد الأوضاع المالية ورفع تكاليف الاقتراض في أسواق الدين العالمية، مما يفرض ضغوطاً تشغيلية على سياسات الاحتياطي الفيدرالي المتعلقة بتحديد أسعار الفائدة وإدارة السيولة النقدية."
+  },
   "ارتفاع عوايد السندات الاوروبيه وسط مخاوف التضخم": {
     "meaning": "Persistent inflation risks lead bond markets to discount higher central bank interest rates, which lowers fixed-income security prices and pushes benchmark European sovereign yields upward. For international emerging markets like Egypt, this mechanism widens external borrowing spreads and raises sovereign debt refinancing costs.",
     "meaning_ar": "تؤدي مخاطر التضخم المستمرة إلى قيام أسواق السندات باحتساب أسعار فائدة أعلى من قبل البنوك المركزية، مما يخفض أسعار أدوات الدخل الثابت ويرفع عوائد السندات السيادية الأوروبية. وبالنسبة للأسواق الناشئة مثل مصر، تؤدي هذه الآلية إلى اتساع هوامش الاقتراض الخارجي وارتفاع تكلفة إعادة تمويل الديون بالعملات الأجنبية."
@@ -1598,6 +1606,10 @@
   "اسعار السمك اليوم الاثنين 7-9-2026 في مصر": {
     "meaning": "Daily fish price reporting reflects current spot rates across Egyptian wholesale and retail markets, determined by real-time aquaculture supply, daily fishing yields, transportation logistics, and operational input costs such as feed and fuel.",
     "meaning_ar": "يعكس النشر اليومي لأسعار الأسماك المعدلات الفورية السائدة في أسواق الجملة والتجزئة المصرية، والتي تتحدد بناءً على حجم الصيد اليومي، والمعروض من الاستزراع السمكي، والخدمات اللوجستية للنقل، وتكاليف المدخلات التشغيلية مثل الأعلاف والوقود."
+  },
+  "اسعار السمك اليوم الاربعاء 16-9-2026 في مصر": {
+    "meaning": "Daily fish price updates reflect wholesale and retail market quotes across local transit and auction hubs, determined by daily catch volumes, aquaculture supply, and transportation costs.",
+    "meaning_ar": "تعكس تحديثات أسعار الأسماك اليومية تداولات أسواق الجملة والتجزئة في مراكز الإنزال والمزادات المحلية، حيث تتحدد وفقاً لحجم الصيد اليومي، والمعروض من المزارع السمكية، وتكاليف النقل."
   },
   "اسعار السمك اليوم الاربعاء 9-9-2026 في مصر": {
     "meaning": "Daily fish price listings reflect current wholesale settlement rates, operational transport expenses, and localized catch volumes distributed across domestic wholesale and retail markets.",
@@ -2346,6 +2358,10 @@
   "الحكومه تسعي لجذب الشركات الناشيه المصريه العامله بالخارج للسوق المحليه": {
     "meaning": "The government offers administrative, regulatory, or tax frameworks designed to register and integrate offshore-operating Egyptian startups into the domestic jurisdiction, establishing their operational bases and fiscal reporting within the local corporate registry.",
     "meaning_ar": "توفر الحكومة أطراً إدارية وتنظيمية وضريبية لإعادة تسجيل ودمج الشركات الناشئة المصرية المؤسسة بالخارج داخل النطاق المحلي، مما يتيح نقل مقراتها التشغيلية وإدراج قوائمها المالية بالسجل التجاري المصري."
+  },
+  "الحكومه تعتمد مقترح الخطه التنفيذيه التفصيليه لوثيقه ملكيه الدوله في اصدارها الثاني": {
+    "meaning": "This plan establishes the specific operational timelines, asset evaluation methodologies, and exit routes—such as public offerings or strategic sales—for state-owned enterprises across designated economic sectors.",
+    "meaning_ar": "تحدد هذه الخطة الجداول الزمنية التنفيذية، وآليات تقييم الأصول، وقنوات التخارج المحددة كالطروحات العامة أو لمستثمرين استراتيجيين، للشركات المملوكة للدولة عبر القطاعات الاقتصادية المعنية."
   },
   "الحكومه تعتمد نظام تداول القطن الزهر لموسم 2026-2027 وتشكيل لجنه لاداره المنظومه": {
     "meaning": "The decision establishes the regulatory framework and centralized auction system for trading seed cotton for the 2026-2027 season under the supervision of a dedicated management committee.",
@@ -7696,6 +7712,10 @@
   "“الدلتا للتامين” تربح 302.1 مليون جنيه في النصف الاول": {
     "meaning": "Delta Insurance records a net profit of EGP 302.1 million for the first half of the fiscal period, reflecting the net operational surplus from underwriting activities combined with returns generated on its invested portfolio.",
     "meaning_ar": "سجلت شركة الدلتا للتأمين صافي أرباح قدره 302.1 مليون جنيه خلال النصف الأول، وهو ما يعكس الفائض التشغيلي المحقق من أنشطة الاكتتاب التأميني مضافاً إليه عوائد استثمار المحفظة المالية للشركة."
+  },
+  "“الديار القطريه” تحصل علي الضوء الاخضر لتنفيذ منطقه استثماريه في مطروح": {
+    "meaning": "Regulatory approval allows the developer to allocate capital directly toward infrastructure and construction works within the designated zone, shifting the project from planning into the operational phase under the investment zones framework.",
+    "meaning_ar": "تُمكّن الموافقة التنظيمية المطور العقاري من توجيه رأس المال مباشرة نحو أعمال البنية التحتية والإنشاءات داخل المنطقة المحددة، مما ينقل المشروع من مرحلة التخطيط إلى التنفيذ التشغيلي وفق الأطر المنظمة للمناطق الاستثمارية."
   },
   "“الرقابه الماليه” تبحث مع البنك الاوروبي تعزيز جاذبيه القطاع المالي غير المصرفي": {
     "meaning": "Institutional coordination between the Financial Regulatory Authority and international development lenders involves reviewing regulatory frameworks, aligning local governance standards with international criteria, and designing technical assistance programs for non-banking financial institutions.",
