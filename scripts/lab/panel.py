@@ -239,10 +239,13 @@ def todays_bars(watch, status) -> tuple[str | None, dict[str, dict]]:
 
 
 def closed_bars(watch, status) -> tuple[str | None, dict[str, dict]]:
-    """The newest finished session's bars, for DRAWING what happened — never
-    for a forecast. `last_closed`'s rule rather than `todays_bars`', so a
-    publish that runs after midnight still has the close every percentage on
-    the screen is measured from."""
+    """The newest finished session's bars, including after midnight.
+
+    Publication uses these to draw what happened. The re-rank also uses them
+    for measurements, but only behind its basis and commitment-timing guards:
+    no first-horizon outcome may already exist. New price forecasts still use
+    the stricter `todays_bars` contract.
+    """
     when = last_closed(watch, status)
     return (when, _bars_of_rows(rows_of(watch), when)) if when else (None, {})
 
