@@ -1,16 +1,16 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-16T18:10:11+00:00",
+ "generated": "2026-09-16T21:35:33+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1310,
- "tradeCount": 129,
+ "peopleCount": 1312,
+ "tradeCount": 135,
  "tickerCount": 241,
- "tradedTickerCount": 65,
- "firmCount": 435,
- "personCount": 875,
- "aliasCount": 138,
+ "tradedTickerCount": 67,
+ "firmCount": 436,
+ "personCount": 876,
+ "aliasCount": 139,
  "registerCount": 240,
  "overDisclosed": [],
  "supersededByRegister": [
@@ -52,7 +52,15 @@
    "percent": 17.83,
    "asOf": "2026-08-18",
    "filingId": "293556",
-   "why": "the filed register for UEFM does not list this name, and counting both made the company 108.75% owned"
+   "why": "the filed register for UEFM does not list this name, and counting both made the company 126.84% owned"
+  },
+  {
+   "holder": "محمد شعبان عبد العزيز المحلاوي",
+   "ticker": "UEFM",
+   "percent": 18.09,
+   "asOf": "2026-09-09",
+   "filingId": "294524",
+   "why": "the filed register for UEFM does not list this name, and counting both made the company 126.84% owned"
   },
   {
    "holder": "شركة الأهلي للاستثمارات",
@@ -60,7 +68,7 @@
    "percent": 10.037,
    "asOf": "2026-09-15",
    "filingId": "294751",
-   "why": "the filed register for UEFM does not list this name, and counting both made the company 108.75% owned"
+   "why": "the filed register for UEFM does not list this name, and counting both made the company 126.84% owned"
   },
   {
    "holder": "القلعة للاستشارات المالية",
@@ -491,6 +499,57 @@
      "stakeBefore": 6.025,
      "stakeAfter": 0.628,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342078_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "سامح محمود حسن جاب الله",
+   "name": "سامح محمود حسن جاب الله",
+   "nameEn": "Sameh Mahmoud Hassan Gaballah",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "ELWA"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 2,
+   "soldCount": 0,
+   "value": 4798472.11,
+   "singleCompanyMove": {
+    "ticker": "ELWA",
+    "from": 0.0,
+    "to": 5.302,
+    "change": 5.302
+   },
+   "trades": [
+    {
+     "filingId": "293759",
+     "date": "2026-08-23",
+     "ticker": "ELWA",
+     "company": null,
+     "companyAr": "الوادي العالمية للاستثمار والتنمية",
+     "action": "buy",
+     "shares": 1875811,
+     "price": 1.725,
+     "value": 3235773.975,
+     "stakeBefore": 0.0,
+     "stakeAfter": 1.031,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343311_1.pdf"
+    },
+    {
+     "filingId": "294467",
+     "date": "2026-09-08",
+     "ticker": "ELWA",
+     "company": null,
+     "companyAr": "الوادي العالمية للاستثمار والتنمية",
+     "action": "buy",
+     "shares": 860043,
+     "price": 1.817,
+     "value": 1562698.131,
+     "stakeBefore": 4.83,
+     "stakeAfter": 5.302,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343983_1.pdf"
     }
    ]
   },
@@ -964,6 +1023,43 @@
      "stakeBefore": 5.12,
      "stakeAfter": 3.4,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342366_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "لايم فست بارتنرز للرعاية الصحية",
+   "name": "لايم فست بارتنرز للرعاية الصحية",
+   "nameEn": "LimeVest Partners for Healthcare",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "AMES"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 588156931.44,
+   "singleCompanyMove": {
+    "ticker": "AMES",
+    "from": 59.4,
+    "to": 56.08,
+    "change": -3.32
+   },
+   "trades": [
+    {
+     "filingId": "294522",
+     "date": "2026-09-09",
+     "ticker": "AMES",
+     "company": null,
+     "companyAr": "الإسكندرية للخدمات الطبية",
+     "action": "sell",
+     "shares": 8108036,
+     "price": 72.54,
+     "value": 588156931.44,
+     "stakeBefore": 59.4,
+     "stakeAfter": 56.08,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344016_1.pdf"
     }
    ]
   },
@@ -1446,6 +1542,57 @@
    ]
   },
   {
+   "id": "الشركة الوطنية للتجارة والتنمية (انتاد)",
+   "name": "الشركة الوطنية للتجارة والتنمية (انتاد)",
+   "nameEn": "National Company for Trading and Development (ENTAD)",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "KWIN"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 0,
+   "soldCount": 2,
+   "value": 9649442.22,
+   "singleCompanyMove": {
+    "ticker": "KWIN",
+    "from": 13.38,
+    "to": 11.8,
+    "change": -1.58
+   },
+   "trades": [
+    {
+     "filingId": "294356",
+     "date": "2026-09-06",
+     "ticker": "KWIN",
+     "company": null,
+     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
+     "action": "sell",
+     "shares": 60000,
+     "price": 105.72,
+     "value": 6343200.0,
+     "stakeBefore": 13.38,
+     "stakeAfter": 12.81,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343876_1.pdf"
+    },
+    {
+     "filingId": "294525",
+     "date": "2026-09-09",
+     "ticker": "KWIN",
+     "company": null,
+     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
+     "action": "sell",
+     "shares": 34347,
+     "price": 96.26,
+     "value": 3306242.22,
+     "stakeBefore": 12.13,
+     "stakeAfter": 11.8,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344019_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "خالد عبد الرازق محمد عبد الغنى",
    "name": "خالد عبد الرازق محمد عبد الغنى",
    "nameEn": "Khaled Abdel Razek Mohamed Abdel Ghani",
@@ -1690,43 +1837,6 @@
    ]
   },
   {
-   "id": "سامح محمود حسن جاب الله",
-   "name": "سامح محمود حسن جاب الله",
-   "nameEn": "Sameh Mahmoud Hassan Gaballah",
-   "script": "ar",
-   "kind": "person",
-   "aliases": null,
-   "tickers": [
-    "ELWA"
-   ],
-   "tradeCount": 1,
-   "boughtCount": 1,
-   "soldCount": 0,
-   "value": 3235773.98,
-   "singleCompanyMove": {
-    "ticker": "ELWA",
-    "from": 0.0,
-    "to": 1.031,
-    "change": 1.031
-   },
-   "trades": [
-    {
-     "filingId": "293759",
-     "date": "2026-08-23",
-     "ticker": "ELWA",
-     "company": null,
-     "companyAr": "الوادي العالمية للاستثمار والتنمية",
-     "action": "buy",
-     "shares": 1875811,
-     "price": 1.725,
-     "value": 3235773.975,
-     "stakeBefore": 0.0,
-     "stakeAfter": 1.031,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343311_1.pdf"
-    }
-   ]
-  },
-  {
    "id": "شريف محمد يسري سعد زغلول محمد عويضة",
    "name": "شريف محمد يسري سعد زغلول محمد عويضة",
    "nameEn": "Sherif Mohamed Yosry Saad Zaghloul Mohamed Oweida",
@@ -1871,43 +1981,6 @@
      "stakeBefore": 8.838,
      "stakeAfter": 9.714,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343793_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "إسماعيل صلاح الدين أحمد بسيوني",
-   "name": "إسماعيل صلاح الدين أحمد بسيوني",
-   "nameEn": "Ismail Salah El Din Ahmed Bassiouny",
-   "script": "ar",
-   "kind": "person",
-   "aliases": null,
-   "tickers": [
-    "FIRE"
-   ],
-   "tradeCount": 1,
-   "boughtCount": 1,
-   "soldCount": 0,
-   "value": 594204.2,
-   "singleCompanyMove": {
-    "ticker": "FIRE",
-    "from": 9.18,
-    "to": 10.0,
-    "change": 0.82
-   },
-   "trades": [
-    {
-     "filingId": "293983",
-     "date": "2026-08-30",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "buy",
-     "shares": 1121140,
-     "price": 0.53,
-     "value": 594204.2000000001,
-     "stakeBefore": 9.18,
-     "stakeAfter": 10.0,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343518_1.pdf"
     }
    ]
   },
@@ -2061,43 +2134,6 @@
      "stakeBefore": 4.979,
      "stakeAfter": 5.66,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343107_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "الشركة الوطنية للتجارة والتنمية (انتاد)",
-   "name": "الشركة الوطنية للتجارة والتنمية (انتاد)",
-   "nameEn": "National Company for Trading and Development (ENTAD)",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": null,
-   "tickers": [
-    "KWIN"
-   ],
-   "tradeCount": 1,
-   "boughtCount": 0,
-   "soldCount": 1,
-   "value": 6343200.0,
-   "singleCompanyMove": {
-    "ticker": "KWIN",
-    "from": 13.38,
-    "to": 12.81,
-    "change": -0.57
-   },
-   "trades": [
-    {
-     "filingId": "294356",
-     "date": "2026-09-06",
-     "ticker": "KWIN",
-     "company": null,
-     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
-     "action": "sell",
-     "shares": 60000,
-     "price": 105.72,
-     "value": 6343200.0,
-     "stakeBefore": 13.38,
-     "stakeAfter": 12.81,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343876_1.pdf"
     }
    ]
   },
@@ -2472,6 +2508,43 @@
    ]
   },
   {
+   "id": "محمد شعبان عبد العزيز المحلاوي",
+   "name": "محمد شعبان عبد العزيز المحلاوي",
+   "nameEn": "Mohamed Shaaban Abdel Aziz El Mahalawy",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "UEFM"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 9647280.0,
+   "singleCompanyMove": {
+    "ticker": "UEFM",
+    "from": 17.83,
+    "to": 18.09,
+    "change": 0.26
+   },
+   "trades": [
+    {
+     "filingId": "294524",
+     "date": "2026-09-09",
+     "ticker": "UEFM",
+     "company": null,
+     "companyAr": "مطاحن مصر العليا",
+     "action": "buy",
+     "shares": 18000,
+     "price": 535.96,
+     "value": 9647280.0,
+     "stakeBefore": 17.83,
+     "stakeAfter": 18.09,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344020_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "اندرو رمزي فؤاد بخيت",
    "name": "اندرو رمزي فؤاد بخيت",
    "nameEn": "Andrew Ramzy Fouad Bakhit",
@@ -2766,6 +2839,59 @@
      "stakeBefore": 10.677,
      "stakeAfter": 10.804,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343387_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "اسماعيل صلاح الدين أحمد بسيونى",
+   "name": "اسماعيل صلاح الدين أحمد بسيونى",
+   "nameEn": "Ismail Salah El Din Ahmed Basyouni",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "إسماعيل صلاح الدين أحمد بسيوني"
+   ],
+   "tickers": [
+    "FIRE"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 1,
+   "soldCount": 1,
+   "value": 770954.2,
+   "singleCompanyMove": {
+    "ticker": "FIRE",
+    "from": 9.18,
+    "to": 9.27,
+    "change": 0.09
+   },
+   "trades": [
+    {
+     "filingId": "293983",
+     "date": "2026-08-30",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 1121140,
+     "price": 0.53,
+     "value": 594204.2000000001,
+     "stakeBefore": 9.18,
+     "stakeAfter": 10.0,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343518_1.pdf"
+    },
+    {
+     "filingId": "294475",
+     "date": "2026-09-08",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 35000,
+     "price": 5.05,
+     "value": 176750.0,
+     "stakeBefore": 10.0,
+     "stakeAfter": 9.27,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343987_1.pdf"
     }
    ]
   },
@@ -3108,6 +3234,43 @@
      "stakeBefore": 0.25017,
      "stakeAfter": 0.24199,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "EGYPTIAN AMERICAN ENTERPRISE FUND",
+   "name": "EGYPTIAN AMERICAN ENTERPRISE FUND",
+   "nameEn": null,
+   "script": "latin",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "FWRY"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 4315222.91,
+   "singleCompanyMove": {
+    "ticker": "FWRY",
+    "from": 3.00085,
+    "to": 2.99426,
+    "change": -0.0066
+   },
+   "trades": [
+    {
+     "filingId": "294554",
+     "date": "2026-09-10",
+     "ticker": "FWRY",
+     "company": null,
+     "companyAr": "فوري لتكنولوجيا البنوك والمدفوعات الالكترونية",
+     "action": "sell",
+     "shares": 224791,
+     "price": 19.1966,
+     "value": 4315222.9106,
+     "stakeBefore": 3.00085,
+     "stakeAfter": 2.99426,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344039_1.pdf"
     }
    ]
   },
@@ -5996,21 +6159,6 @@
    "nameEn": null,
    "script": null,
    "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "لايم فست بارتنرز للرعاية الصحية",
-   "name": "لايم فست بارتنرز للرعاية الصحية",
-   "nameEn": null,
-   "script": null,
-   "kind": "firm",
    "aliases": null,
    "tickers": [],
    "tradeCount": 0,
@@ -23068,20 +23216,6 @@
    "history": []
   },
   {
-   "holder": "لايم فست بارتنرز للرعاية الصحية",
-   "kind": "firm",
-   "ticker": "AMES",
-   "percent": 61.355,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291058",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/340766_1.pdf",
-   "shares": 76437200,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
-  },
-  {
    "holder": "سوق أبو ظبي للأوراق المالية",
    "kind": "firm",
    "ticker": "ORAS",
@@ -23276,6 +23410,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "لايم فست بارتنرز للرعاية الصحية",
+   "kind": "firm",
+   "ticker": "AMES",
+   "percent": 56.08,
+   "asOf": "2026-09-09",
+   "basis": "trade",
+   "filingId": "294522",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/344016_1.pdf",
+   "openedAt": "2026-09-09",
+   "openingPercent": 59.4,
+   "history": [
+    {
+     "date": "2026-09-09",
+     "percent": 56.08
+    }
+   ]
   },
   {
    "holder": "شركة السكر والصناعات التكاملية المصرية",
@@ -27523,24 +27675,6 @@
    "history": []
   },
   {
-   "holder": "الشركة الوطنية للتجارة والتنمية (انتاد)",
-   "kind": "firm",
-   "ticker": "KWIN",
-   "percent": 12.81,
-   "asOf": "2026-09-06",
-   "basis": "trade",
-   "filingId": "294356",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/343876_1.pdf",
-   "openedAt": "2026-09-06",
-   "openingPercent": 13.38,
-   "history": [
-    {
-     "date": "2026-09-06",
-     "percent": 12.81
-    }
-   ]
-  },
-  {
    "holder": "محمد عزات زكى الاغا",
    "kind": "person",
    "ticker": "GRCA",
@@ -27865,6 +27999,28 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "الشركة الوطنية للتجارة والتنمية (انتاد)",
+   "kind": "firm",
+   "ticker": "KWIN",
+   "percent": 11.8,
+   "asOf": "2026-09-09",
+   "basis": "trade",
+   "filingId": "294525",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/344019_1.pdf",
+   "openedAt": "2026-09-06",
+   "openingPercent": 13.38,
+   "history": [
+    {
+     "date": "2026-09-06",
+     "percent": 12.81
+    },
+    {
+     "date": "2026-09-09",
+     "percent": 11.8
+    }
+   ]
   },
   {
    "holder": "محمود محمد شعبان سليم",
@@ -28908,24 +29064,6 @@
    "history": []
   },
   {
-   "holder": "إسماعيل صلاح الدين أحمد بسيوني",
-   "kind": "person",
-   "ticker": "FIRE",
-   "percent": 10.0,
-   "asOf": "2026-08-30",
-   "basis": "trade",
-   "filingId": "293983",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/343518_1.pdf",
-   "openedAt": "2026-08-30",
-   "openingPercent": 9.18,
-   "history": [
-    {
-     "date": "2026-08-30",
-     "percent": 10.0
-    }
-   ]
-  },
-  {
    "holder": "اتحاد العاملين المساهمين (GSSC)",
    "kind": "firm",
    "ticker": "GSSC",
@@ -29748,6 +29886,28 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "اسماعيل صلاح الدين أحمد بسيونى",
+   "kind": "person",
+   "ticker": "FIRE",
+   "percent": 9.27,
+   "asOf": "2026-09-08",
+   "basis": "trade",
+   "filingId": "294475",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/343987_1.pdf",
+   "openedAt": "2026-08-30",
+   "openingPercent": 9.18,
+   "history": [
+    {
+     "date": "2026-08-30",
+     "percent": 10.0
+    },
+    {
+     "date": "2026-09-08",
+     "percent": 9.27
+    }
+   ]
   },
   {
    "holder": "عاطف محمود عيسى محمد",
@@ -32825,6 +32985,28 @@
    "history": []
   },
   {
+   "holder": "سامح محمود حسن جاب الله",
+   "kind": "person",
+   "ticker": "ELWA",
+   "percent": 5.302,
+   "asOf": "2026-09-08",
+   "basis": "trade",
+   "filingId": "294467",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/343983_1.pdf",
+   "openedAt": "2026-08-23",
+   "openingPercent": 0.0,
+   "history": [
+    {
+     "date": "2026-08-23",
+     "percent": 1.031
+    },
+    {
+     "date": "2026-09-08",
+     "percent": 5.302
+    }
+   ]
+  },
+  {
    "holder": "مصطفي السيد محمد احمد عقده",
    "kind": "person",
    "ticker": "ADRI",
@@ -35264,6 +35446,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "EGYPTIAN AMERICAN ENTERPRISE FUND",
+   "kind": "firm",
+   "ticker": "FWRY",
+   "percent": 2.99426,
+   "asOf": "2026-09-10",
+   "basis": "trade",
+   "filingId": "294554",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/344039_1.pdf",
+   "openedAt": "2026-09-10",
+   "openingPercent": 3.00085,
+   "history": [
+    {
+     "date": "2026-09-10",
+     "percent": 2.99426
+    }
+   ]
   },
   {
    "holder": "فؤاد فوزي فؤاد بخيت",
@@ -37845,24 +38045,6 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
-  },
-  {
-   "holder": "سامح محمود حسن جاب الله",
-   "kind": "person",
-   "ticker": "ELWA",
-   "percent": 1.031,
-   "asOf": "2026-08-23",
-   "basis": "trade",
-   "filingId": "293759",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/343311_1.pdf",
-   "openedAt": "2026-08-23",
-   "openingPercent": 0.0,
-   "history": [
-    {
-     "date": "2026-08-23",
-     "percent": 1.031
-    }
-   ]
   },
   {
    "holder": "المصرية لمنتجات الحديد والصلب",
@@ -45764,7 +45946,7 @@
      "change": 0.876
     },
     {
-     "holder": "إسماعيل صلاح الدين أحمد بسيوني",
+     "holder": "اسماعيل صلاح الدين أحمد بسيونى",
      "kind": "person",
      "ticker": "FIRE",
      "from": 9.18,
@@ -45840,11 +46022,31 @@
    "end": "2026-09-10",
    "label": "6–10 Sep",
    "labelAr": "6–10 سبتمبر",
-   "sessions": 3,
-   "buys": 0,
-   "sells": 3,
-   "value": 14263091.28,
+   "sessions": 5,
+   "buys": 2,
+   "sells": 7,
+   "value": 621428215.98,
    "moves": [
+    {
+     "holder": "لايم فست بارتنرز للرعاية الصحية",
+     "kind": "firm",
+     "ticker": "AMES",
+     "from": 59.4,
+     "to": 56.08,
+     "trades": 1,
+     "value": 588156931.44,
+     "change": -3.32
+    },
+    {
+     "holder": "الشركة الوطنية للتجارة والتنمية (انتاد)",
+     "kind": "firm",
+     "ticker": "KWIN",
+     "from": 13.38,
+     "to": 11.8,
+     "trades": 2,
+     "value": 9649442.22,
+     "change": -1.58
+    },
     {
      "holder": "مؤسسه غنيمه يوسف عبد النصار للاستيراد والتصدير ووكيل بالعموله",
      "kind": "firm",
@@ -45856,14 +46058,34 @@
      "change": -1.1
     },
     {
-     "holder": "الشركة الوطنية للتجارة والتنمية (انتاد)",
-     "kind": "firm",
-     "ticker": "KWIN",
-     "from": 13.38,
-     "to": 12.81,
+     "holder": "اسماعيل صلاح الدين أحمد بسيونى",
+     "kind": "person",
+     "ticker": "FIRE",
+     "from": 10.0,
+     "to": 9.27,
      "trades": 1,
-     "value": 6343200.0,
-     "change": -0.57
+     "value": 176750.0,
+     "change": -0.73
+    },
+    {
+     "holder": "سامح محمود حسن جاب الله",
+     "kind": "person",
+     "ticker": "ELWA",
+     "from": 4.83,
+     "to": 5.302,
+     "trades": 1,
+     "value": 1562698.13,
+     "change": 0.472
+    },
+    {
+     "holder": "محمد شعبان عبد العزيز المحلاوي",
+     "kind": "person",
+     "ticker": "UEFM",
+     "from": 17.83,
+     "to": 18.09,
+     "trades": 1,
+     "value": 9647280.0,
+     "change": 0.26
     },
     {
      "holder": "اندرو رمزي فؤاد بخيت",
@@ -45874,6 +46096,16 @@
      "trades": 1,
      "value": 3272650.0,
      "change": -0.233
+    },
+    {
+     "holder": "EGYPTIAN AMERICAN ENTERPRISE FUND",
+     "kind": "firm",
+     "ticker": "FWRY",
+     "from": 3.00085,
+     "to": 2.99426,
+     "trades": 1,
+     "value": 4315222.91,
+     "change": -0.0066
     }
    ]
   },
