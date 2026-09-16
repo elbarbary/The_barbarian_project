@@ -3231,6 +3231,10 @@
     "meaning": "An 11.46% share price increase reflects concentrated trading activity within the food and poultry sector, adjusting the company's equity market valuation on the Egyptian Exchange.",
     "meaning_ar": "يعكس صعود سعر السهم بنسبة 11.46% نشاط تداول مركز داخل قطاع الأغذية والدواجن، مما يعيد تسعير القيمة السوقية لأسهم الشركة في البورصة المصرية."
   },
+  "الموافقه علي مقترح الخطه التنفيذيه للاصدار الثاني لوثيقه سياسه ملكيه الدوله": {
+    "meaning": "The approval of the second edition's executive plan sets the operational schedule and regulatory framework governing state asset divestments, restructuring public enterprises, and expanding private sector participation across targeted economic activities.",
+    "meaning_ar": "يحدد اعتماد الخطة التنفيذية للإصدار الثاني الإطار التنظيمي والجدول الزمني المنظمين لعمليات التخارج وإعادة هيكلة الأصول والشركات المملوكة للدولة، مع تحديد ضوابط مشاركة القطاع الخاص في الأنشطة الاقتصادية المستهدفة."
+  },
   "الموسسات الدوليه ترصد تحسن اداء السندات المصريه": {
     "meaning": "An improvement in sovereign bond performance reflects rising secondary market prices and declining yields, which narrows the state's sovereign credit spread against international benchmarks.",
     "meaning_ar": "يعكس تحسن أداء السندات السيادية ارتفاع أسعار تداولها في السوق الثانوية وتراجع عوائدها، مما يقلص الفارق بين عائد الدين السيادي والمؤشرات القياسية الدولية."
@@ -3594,6 +3598,10 @@
   "بروتوكول تعاون بين Cairo ICT 2026 و«فوربس الشرق الاوسط» لرعايه الدوره 30 من المعرض": {
     "meaning": "This media partnership agreement establishes Forbes Middle East as the official sponsor and promotional partner for the 30th edition of the Cairo ICT exhibition, integrating international publishing and media coverage into the event's marketing operations.",
     "meaning_ar": "يمثل هذا الاتفاق شراكة إعلامية تصبح بموجبها «فوربس الشرق الأوسط» راعياً رسمياً وشريكاً ترويجياً للدورة الثلاثين لمعرض Cairo ICT، مما يدمج خدمات النشر والتغطية الإعلامية الدولية ضمن العمليات التسويقية للحدث."
+  },
+  "بروتوكول تعاون بين الرقابه الماليه والاعلي للاعلام لتعزيز الرقابه علي التطبيقات الالكترونيه والمنصات الرقميه": {
+    "meaning": "The protocol establishes a joint regulatory framework between financial and media authorities to monitor digital platforms, subjecting online financial content, trading apps, and fintech promotion to coordinated regulatory and media compliance standards.",
+    "meaning_ar": "يؤسس البروتوكول إطاراً تنظيمياً مشتركاً بين الرقابة المالية والإعلام لمتابعة المنصات الرقمية، مما يُخضع المحتوى المالي وتطبيقات التداول والترويج لأنشطة التكنولوجيا المالية لآليات رقابة وتدقيق موحدة."
   },
   "بروتوكول تعاون بين الرقابه الماليه والبريد المصري لاتاحه خدمه بريدي للمراسلات الرسميه الالكترونيه": {
     "meaning": "The protocol establishes a standardized digital infrastructure between the Financial Regulatory Authority and Egypt Post to automate official regulatory correspondence, thereby lowering operational transaction costs and accelerating communication workflows across the non-banking financial sector.",
@@ -4219,6 +4227,10 @@
   "تضم سندات باندا.. مجلس الوزراء: طرح سندات دوليه باجمالي 3 مليارات دولار خلال العام المالي الحالي": {
     "meaning": "The government issues foreign-currency debt instruments, including Chinese renminbi-denominated Panda bonds, to secure $3 billion in external budget financing during the current fiscal year.",
     "meaning_ar": "تُصدر الحكومة أدوات دين بالعملة الأجنبية، بما في ذلك سندات الباندا المقومة باليوان الصيني، لتوفير تمويل خارجي للموازنة العامة بقيمة 3 مليارات دولار خلال العام المالي الحالي."
+  },
+  "تعاون بين “الرقابه الماليه” و”الاعلي للاعلام” لتعزيز الرقابه علي المنصات الرقميه": {
+    "meaning": "This inter-agency framework connects the Financial Regulatory Authority with the Supreme Council for Media Regulation to monitor and enforce licensing requirements on digital platforms publishing capital market information and non-banking financial content.",
+    "meaning_ar": "يربط هذا الإطار المؤسسي بين الهيئة العامة للرقابة المالية والمجلس الأعلى لتنظيم الإعلام لمتابعة وتطبيق اشتراطات التراخيص على المنصات الرقمية التي تنشر محتوى متعلقاً بسوق المال والأنشطة المالية غير المصرفية."
   },
   "تعرف علي ارخص 5 اماكن لشراء مستلزمات المدارس قبل بدء الدراسه": {
     "meaning": "Discount school supply markets and wholesale hubs operate on direct manufacturer distribution and high sales volumes, which eliminates intermediary markups relative to traditional retail outlets during seasonal peak cycles.",
@@ -5271,6 +5283,10 @@
   "سعر كرتونه البيض اليوم 14/9/2026 للمستهلك في السوق المحليه": {
     "meaning": "Egg carton retail pricing reflects daily supply-and-demand balances influenced by operational feed costs, domestic poultry farm output, and transportation logistics in the local food distribution chain.",
     "meaning_ar": "يعكس سعر كرتونة البيض للمستهلك توازن العرض والطلب اليومي المتأثر بتكاليف الأعلاف التشغيلية، وحجم إنتاج مزارع الدواجن المحلية، وشبكات النقل والتوزيع في السوق."
+  },
+  "سعر كرتونه البيض اليوم 16/9/2026 للمستهلك في السوق المحليه": {
+    "meaning": "Egg carton retail pricing reflects daily farm-gate supply adjustments combined with distribution margins across wholesale and retail transport channels.",
+    "meaning_ar": "تعكس أسعار كرتونة البيض للمستهلك التغيرات اليومية في تكاليف المعروض من المزارع مضافاً إليها هوامش التوزيع عبر حلقات النقل بالجملة والتجزئة."
   },
   "سعر كرتونه البيض اليوم 4/9/2026 للمستهلك في السوق المحليه": {
     "meaning": "This reflects the daily domestic retail pricing updates for table eggs, driven by poultry feed supply costs, farm-gate production expenses, and local consumer demand dynamics.",
@@ -7492,6 +7508,10 @@
   "وزير العمل يمنح شركات الحاق العماله بالخارج مهله 6 اشهر لتوفيق اوضاعها": {
     "meaning": "The decision grants foreign employment agencies a six-month regulatory grace period to align operational procedures, licensing requirements, and legal documentation with Ministry of Labor standards.",
     "meaning_ar": "يمنح القرار شركات إلحاق العمالة المصرية بالخارج مهلة توفيق أوضاع مدتها ستة أشهر لمطابقة إجراءاتها التشغيلية وتراخيصها ومتطلباتها القانونية مع معايير وزارة العمل."
+  },
+  "وزير العمل يوجه بسرعه تفعيل صندوق اعانات الطواري والخدمات الاجتماعيه والصحيه للعماله غير المنتظمه": {
+    "meaning": "Activating the emergency subsidy and social care fund centralizes social protection spending for irregular labor through mandated contributions from corporate contracting and construction permits. The mechanism routes formal public levies into targeted cash and healthcare disbursements outside standard corporate payrolls.",
+    "meaning_ar": "يُفعّل هذا الإجراء صندوق إعانات الطوارئ والرعاية الاجتماعية للعمالة غير المنتظمة من خلال تجميع الرسوم المفروضة قانوناً على عقود المقاولات والتراخيص وتوجيهها إلى قنوات صرف نقدي وصحي خارج إطار الرواتب المؤسسية الدائمة."
   },
   "وزير العمل: لدينا خطه للتوسع في الربط الالكتروني مع الدول العربيه": {
     "meaning": "Expanding digital labor linkage networks establishes a unified operational channel between domestic employment databases and regional host markets, centralizing the processing of cross-border contract authentication and foreign worker deployment data.",
