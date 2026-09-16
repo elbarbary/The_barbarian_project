@@ -449,3 +449,17 @@ class TranslationFallbackTest(unittest.TestCase):
              redirect_stdout(io.StringIO()):
             rendered = translations.english_for(["عنوان عربي جديد"], label="headlines")
         self.assertEqual(rendered, {}, "it should return nothing, not raise")
+
+
+class TranslationComesFirst(unittest.TestCase):
+    """Under the live job's one model deadline, the page's English goes first.
+
+    On 16 Sep 2026 two slow insights spent the whole GEMINI_DEADLINE and three
+    runs served new headlines to English readers untranslated.
+    """
+
+    def test_headlines_are_translated_before_insights_are_asked_for(self):
+        import pathlib
+        source = (pathlib.Path(__file__).resolve().parent / "build_news_api.py").read_text(encoding="utf-8")
+        body = source[source.index("def main("):]
+        self.assertLess(body.index("translations.english_for("), body.index("news_insights.enrich("))

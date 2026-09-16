@@ -160,7 +160,10 @@ jobs:
           # Official EGX Insider & Treasury Share Tracker.
           # Ingests any newly disclosed post-execution forms and treasury transactions.
           python3 scripts/build_insider_tracker.py || true
-          python3 scripts/build_flow_trackers.py
+          # Best-effort like every line above it. It was the one without
+          # `|| true`, so a crash here failed the step and threw away the
+          # headlines, rates and filings already built in this run.
+          python3 scripts/build_flow_trackers.py || true
 
       - name: Refresh the manifest
         # The manifest's per-resource version is what tells an installed app
@@ -325,7 +328,6 @@ jobs:
             sleep 5
           done
           echo 'could not push after three attempts'
-          exit 1
           exit 1
 
 # NOTE — disclosures now run in this workflow, above.

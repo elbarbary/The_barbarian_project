@@ -1495,6 +1495,21 @@ def main() -> int:
     news_images.fill(doc["items"], limit=args.images)
     through_our_own_host(doc["items"])
 
+    # English for an English reader. The Arabic stays on every item — the
+    # translation sits beside it, never over it.
+    #
+    # Before the insights, not after. The live job gives every model call one
+    # deadline (GEMINI_DEADLINE), and on 16 Sep 2026 two slow insights spent
+    # all of it: three runs logged "translation stopped after 0" and served
+    # new headlines to English readers in Arabic. Translation is one or two
+    # batched calls for the whole page; an insight is one call per story.
+    english = translations.english_for(
+        [i["headline"] for i in doc["items"]], label="headlines"
+    )
+    for item in doc["items"]:
+        if (rendered := english.get(item["headline"])) is not None:
+            item["headline_en"] = rendered
+
     # The economic insight for stories missing one. Cached per headline and read
     # top-first so the most visible stories gain insights first without delaying
     # publication.
@@ -1513,14 +1528,6 @@ def main() -> int:
         if s["id"] in named
     ]
 
-    # English for an English reader. The Arabic stays on every item — the
-    # translation sits beside it, never over it.
-    english = translations.english_for(
-        [i["headline"] for i in doc["items"]], label="headlines"
-    )
-    for item in doc["items"]:
-        if (rendered := english.get(item["headline"])) is not None:
-            item["headline_en"] = rendered
 
     checks = sum(1 for i in doc["items"] if i["weight"] == "check")
     named = sum(1 for i in doc["items"] if i["weight"] == "named")
