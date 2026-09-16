@@ -23,8 +23,10 @@ publish the figure already — gold, the indices — the check is against our ow
 Where we do not, it is against the source's own labelling plus a band wide
 enough to admit any real market and narrow enough to catch a mis-pointed feed.
 Oil is the weakest link in that chain and is marked as such: there is no second
-free source to cross it against, so it rests on the instrument naming itself
-"Brent Oil Futures" and on the Brent-WTI spread staying sane.
+free source to cross it against, so it rests on the page's own account of its
+instrument (the name it gives itself, the id in that same object, and a history
+for that id that closes where the page says it closed) and on the Brent-WTI
+spread staying sane.
 """
 
 from __future__ import annotations
@@ -39,6 +41,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import transport
+from typing import NamedTuple
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
@@ -190,51 +193,145 @@ OIL_BAND = (10.0, 300.0)
 # of the two is not what it says it is.
 MAX_SPREAD = 25.0
 
+# Where the page says what it is. It is a Next.js page, and everything it knows
+# about its own instrument sits in one JSON document in this script tag.
+#
+# The id used to be found by position: the last "instrumentId" in the 600
+# characters before `"long_name"`. On 10 Sep 2026 the page moved that key about
+# 19,000 characters past the name, and Brent and WTI dropped out of macro.json
+# for six days with one log line to say so. Position was also the risky reading
+# all along. The Brent page carries the ids of ten other "Brent Oil" contracts,
+# and the WTI page carries Brent's own, so the nearest id can easily be a
+# plausible wrong one. The id is read out of `commodityStore.instrument`, the
+# one object that also names the instrument, gives its path and quotes its price.
+PAGE_STATE = re.compile(r'<script[^>]*\bid="__NEXT_DATA__"[^>]*>(.*?)</script>', re.S)
 
-def _instrument(slug: str, expect: str) -> int:
-    page = _get(INVESTING_PAGE.format(slug), timeout=45).decode("utf-8", "ignore")
-    where = page.find(f'"long_name":"{expect}"')
-    if where < 0:
-        raise MacroUnavailable(f"oil: {slug} does not call itself {expect!r}")
-    window = page[max(0, where - 600) : where]
-    found = re.findall(r'"instrumentId"\s*:\s*"?(\d{2,8})"?', window)
+# The page quotes its instrument's previous close, and the history fetched for
+# the id has to contain it. That is what ties the id to this page rather than to
+# anything else priced per barrel. Page and history are one price series, so the
+# real gap is a rounding place: one percent allows for that and is still tighter
+# than the few dollars between Brent and WTI on an ordinary day.
+CLOSE_TOLERANCE = 0.01
+
+# How many of the newest sessions the previous close is looked for in: the last
+# one, the one before once the history carries today's session, and one more
+# for a page served from a cache. rate_history looks in five because its two
+# figures come from different sources with no date between them; these two are
+# the same series.
+CLOSE_WINDOW = 3
+
+
+class Instrument(NamedTuple):
+    """What a commodity page says about its own instrument."""
+
+    id: int
+    previous_close: float
+
+
+def _at(value, *path):
+    """`value[path[0]][path[1]]...`, or None where the page has no such object."""
+    for key in path:
+        value = value.get(key) if isinstance(value, dict) else None
+    return value
+
+
+def page_instrument(page: str, slug: str, expect: str) -> Instrument:
+    """The id and previous close of the instrument this page is about.
+
+    Everything comes from the one object that names the instrument, so the id
+    cannot be a neighbour's. That object must call itself `expect` everywhere
+    it gives a name, sit at this page's own path, and carry the same id the
+    page files itself under. Anything less is refused.
+    """
+    found = PAGE_STATE.search(page)
     if not found:
-        raise MacroUnavailable(f"oil: no instrument id beside {expect!r}")
-    return int(found[-1])
+        raise MacroUnavailable(f"oil: {slug} carries no page state")
+    try:
+        state = json.loads(found.group(1))
+    except ValueError as error:
+        raise MacroUnavailable(f"oil: {slug} page state is not JSON") from error
+    store = _at(state, "props", "pageProps", "state", "commodityStore")
+    instrument = _at(store, "instrument")
+
+    names = {
+        name
+        for name in (_at(instrument, "name", "fullName"),
+                     _at(instrument, "price", "long_name"))
+        if isinstance(name, str) and name
+    }
+    if names != {expect}:
+        raise MacroUnavailable(f"oil: {slug} does not call itself {expect!r}")
+    path = _at(instrument, "base", "path")
+    if path != f"/commodities/{slug}":
+        raise MacroUnavailable(
+            f"oil: the {expect!r} on {slug} is the instrument at {path!r}")
+    ident = str(_at(instrument, "base", "id") or "")
+    if (not re.fullmatch(r"[0-9]{2,8}", ident)
+            or ident != str(_at(store, "instrumentId") or "")):
+        raise MacroUnavailable(f"oil: {slug} gives no single id for {expect!r}")
+    try:
+        close = float(_at(instrument, "price", "lastClose"))
+    except (TypeError, ValueError):
+        close = 0.0
+    if not close > 0:
+        raise MacroUnavailable(
+            f"oil: {slug} quotes no previous close to check id {ident} against")
+    return Instrument(int(ident), close)
+
+
+def _closes(instrument: int, since: str, until: str) -> dict[str, float]:
+    """`{date: close}` for one instrument id."""
+    payload = _json(
+        f"{INVESTING_HISTORY.format(instrument)}"
+        f"?start-date={since}&end-date={until}&time-frame=Daily"
+        f"&add-missing-rows=false",
+        headers={"domain-id": "www", "Accept": "application/json"},
+    )
+    points: dict[str, float] = {}
+    for row in payload.get("data") or []:
+        stamp = (row.get("rowDateTimestamp") or "")[:10]
+        raw = row.get("last_closeRaw")
+        if not stamp or raw is None:
+            continue
+        try:
+            close = float(str(raw))
+        except (TypeError, ValueError):
+            continue
+        if close > 0:
+            points[stamp] = round(close, 2)
+    return points
+
+
+def checked(key: str, instrument: Instrument,
+            points: dict[str, float]) -> dict[str, float]:
+    """`points`, once they are the page's instrument and the price of a barrel."""
+    if not points:
+        raise MacroUnavailable(f"oil: {key} empty")
+    recent = [points[day] for day in sorted(points)[-CLOSE_WINDOW:]]
+    quoted = instrument.previous_close
+    if not any(abs(close - quoted) <= CLOSE_TOLERANCE * quoted for close in recent):
+        raise MacroUnavailable(
+            f"oil: {key} id {instrument.id} last closed "
+            f"{', '.join(f'{close:,.2f}' for close in recent)} and its page quotes "
+            f"a previous close of {quoted:,.2f}, so that history is not the "
+            "page's instrument"
+        )
+    newest = points[max(points)]
+    if not OIL_BAND[0] <= newest <= OIL_BAND[1]:
+        raise MacroUnavailable(
+            f"oil: {key} newest close {newest} outside {OIL_BAND} — "
+            "this is not a barrel of oil"
+        )
+    return points
 
 
 def oil(since: str, until: str) -> dict[str, dict[str, float]]:
     """`{'BRENT': {date: close}, 'WTI': {...}}`, checked for sanity."""
     out: dict[str, dict[str, float]] = {}
     for key, (slug, expect) in OILS.items():
-        instrument = _instrument(slug, expect)
-        payload = _json(
-            f"{INVESTING_HISTORY.format(instrument)}"
-            f"?start-date={since}&end-date={until}&time-frame=Daily"
-            f"&add-missing-rows=false",
-            headers={"domain-id": "www", "Accept": "application/json"},
-        )
-        points: dict[str, float] = {}
-        for row in payload.get("data") or []:
-            stamp = (row.get("rowDateTimestamp") or "")[:10]
-            raw = row.get("last_closeRaw")
-            if not stamp or raw is None:
-                continue
-            try:
-                close = float(str(raw))
-            except (TypeError, ValueError):
-                continue
-            if close > 0:
-                points[stamp] = round(close, 2)
-        if not points:
-            raise MacroUnavailable(f"oil: {key} empty")
-        newest = points[max(points)]
-        if not OIL_BAND[0] <= newest <= OIL_BAND[1]:
-            raise MacroUnavailable(
-                f"oil: {key} newest close {newest} outside {OIL_BAND} — "
-                "this is not a barrel of oil"
-            )
-        out[key] = points
+        page = _get(INVESTING_PAGE.format(slug), timeout=45).decode("utf-8", "ignore")
+        instrument = page_instrument(page, slug, expect)
+        out[key] = checked(key, instrument, _closes(instrument.id, since, until))
 
     shared = set(out["BRENT"]) & set(out["WTI"])
     if shared:

@@ -120,10 +120,66 @@ def series_entry(
     }
 
 
-def main() -> int:
+def lost(previous: dict, entries: list[dict], now: str) -> list[dict]:
+    """The series this document has carried and this build did not produce.
+
+    `previous` is the published document this build replaces. A series it
+    carried, or one it already records as missing, is missing now unless it
+    is in `entries`.
+
+    Compared only with the document before, a series is missed exactly once:
+    the first build without oil writes a document without oil, and the build
+    after it has nothing left to miss. That is how Brent and WTI were gone from
+    10 to 16 Sep 2026 behind a green run. So the record travels in the document
+    itself, and a series that stays gone is named by every build until it comes
+    back. Each keeps the time it was first missed. A series retired on purpose
+    is taken out of `missing` by hand, in the commit that retires it.
+    """
+    produced = {entry["id"] for entry in entries}
+    since: dict[str, str] = {}
+    for row in previous.get("missing") or []:
+        if isinstance(row, dict) and isinstance(row.get("id"), str):
+            since[row["id"]] = str(row.get("since") or now)
+    for series in previous.get("series") or []:
+        if isinstance(series, dict) and isinstance(series.get("id"), str):
+            since.setdefault(series["id"], now)
+    return [
+        {"id": key, "since": since[key]}
+        for key in sorted(since)
+        if key not in produced
+    ]
+
+
+def warn(missing: list[dict], notes: list[str]) -> None:
+    """One annotation on the run that names every missing series and why.
+
+    A `::warning` shows on the run page. Before this, a lost series was one
+    "unavailable" line in a forty-minute log.
+    """
+    if not missing:
+        return
+    names = ", ".join(f"{row['id']} (since {row['since'][:10]})" for row in missing)
+    why = "; ".join(notes) if notes else "no source reported a failure"
+    message = f"macro.json no longer carries {names}. {why}"
+    # A workflow command ends at a newline, and % starts an escape.
+    message = message.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+    print(f"::warning title=Macro series missing::{message}")
+
+
+def note(source: str, error: Exception) -> str:
+    """`source: reason`, prefixed once.
+
+    Most sources already put their name on the message, so prefixing again
+    published "oil: oil: no instrument id beside 'Brent Oil Futures'".
+    """
+    text = str(error)
+    return text if text.startswith(f"{source}:") else f"{source}: {text}"
+
+
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     print("── Macro context")
     today = datetime.date.today().isoformat()
@@ -144,7 +200,7 @@ def main() -> int:
         )
         print(f"   suez        {len(points)} days, newest {max(points)}")
     except sources.MacroUnavailable as error:
-        notes.append(f"suez: {error}")
+        notes.append(note("suez", error))
         print(f"   suez        unavailable — {error}")
 
     try:
@@ -158,7 +214,7 @@ def main() -> int:
             )
             print(f"   {key:11} {len(points)} sessions, ${points[max(points)]:,.2f}")
     except sources.MacroUnavailable as error:
-        notes.append(f"oil: {error}")
+        notes.append(note("oil", error))
         print(f"   oil         unavailable — {error}")
 
     # Gold and silver are already collected beside the indices; re-used rather
@@ -203,7 +259,7 @@ def main() -> int:
             )
         print(f"   indicators  {len(indicators)} from the World Bank")
     except sources.MacroUnavailable as error:
-        notes.append(f"world bank: {error}")
+        notes.append(note("world bank", error))
         print(f"   indicators  unavailable — {error}")
 
     # How closely each has actually moved with the exchange.
@@ -225,20 +281,27 @@ def main() -> int:
         print(f"   {entry['id']:11} moved with the EGX 30 at r={r:+.3f} "
               f"over {pairs} sessions")
 
+    # Before the empty-build exit below, so a build that collected nothing
+    # still says which series it lost.
+    now = datetime.datetime.now(datetime.UTC).isoformat(timespec="seconds")
+    missing = lost(load(OUT), entries, now)
+    warn(missing, notes)
+
     if not entries:
         print("   nothing collected — leaving the published document alone")
         return 1
 
     doc = {
-        "updated_at": datetime.datetime.now(datetime.UTC).isoformat(
-            timespec="seconds"
-        ),
+        "updated_at": now,
         "series": entries,
         "indicators": indicators,
         "correlations": correlations,
         # Named, not hidden. A source that could not be reached is a fact about
         # the document and the screen says so rather than quietly shrinking.
         "unavailable": notes,
+        # And what that cost: every series this document has carried and this
+        # build did not produce, with when it was first missed. See lost().
+        "missing": missing,
     }
     if args.check:
         return 0
