@@ -115,6 +115,10 @@
     "meaning": "September 21 represents the ex-dividend eligibility cutoff date, entitling shareholders holding CI Capital stock at the close of that trading session to a cash dividend distribution of EGP 0.57 per share.",
     "meaning_ar": "يمثل يوم 21 سبتمبر تاريخ نهاية الحق في التوزيع النقدي، حيث يحصل مساهمو شركة سي آي كابيتال المقيدون بنهاية جلسة ذلك اليوم على توزيعات نقدية بواقع 57 قرشًا لكل سهم."
   },
+  "22 مشروعا جديدا في المنطقه الحره بمدينه نصر باستثمارات 192.7 مليون دولار": {
+    "meaning": "Establishing new projects in the free zone directs foreign and domestic capital into export-oriented industrial and service operations under a tax- and customs-exempt framework.",
+    "meaning_ar": "يُوجه تأسيس مشروعات جديدة داخل المنطقة الحرة رؤوس أموال محلية وأجنبية نحو أنشطة صناعية وخدمية مخصصة للتصدير ضمن منظومة إعفاءات ضريبية وجمركية."
+  },
   "23 شركه تعتمد تقارير البصمه الكربونيه منذ نهايه 2024": {
     "meaning": "Adopting carbon footprint reports establishes standard metrics for measuring corporate greenhouse gas emissions, aligning corporate reporting with non-financial environmental disclosure frameworks.",
     "meaning_ar": "يحدد اعتماد تقارير البصمة الكربونية معايير قياسية لاحتساب انبعاثات غازات الاحتباس الحراري للشركات، مما يدرج بيانات الانبعاثات ضمن أطر الإفصاح البيئي غير المالي."
@@ -210,6 +214,10 @@
   "800 جنيه انخفاضا في طن الارز الشعير بالاسواق": {
     "meaning": "A decline of EGP 800 per ton in raw paddy rice directly lowers raw material input costs for rice milling operators and food processing businesses, while reflecting an expansion in domestic supply or reduced wholesale acquisition pricing across local trade channels.",
     "meaning_ar": "يؤدي انخفاض سعر طن الأرز الشعير بمقدار 800 جنيه إلى خفض تكاليف شراء المواد الخام لدى مضارب الأرز وشركات الصناعات الغذائية، ويعكس زيادة في المعروض المحلي أو تراجعاً في أسعار التداول بأسواق الجملة."
+  },
+  "83% من الاسهم المستهدفه تستجيب لعرض «بنك البركه» للاستحواذ علي «التوفيق للتاجير»": {
+    "meaning": "An 83% acceptance rate of the targeted shares satisfies the execution condition of the mandatory tender offer, transferring effective controlling equity of the leasing company to the bank's balance sheet.",
+    "meaning_ar": "يمثل استجابة 83% من الأسهم المستهدفة استيفاءً لشروط تنفيذ عرض الشراء الإجباري، مما ينقل حصة الأغلبية والسيطرة الفعلية على شركة التأجير التمويلي إلى القوائم المالية للبنك."
   },
   "ABB تنفذ مشروعا للطاقه الشمسيه بقدره 3.3 ميجاوات في مصانعها بمصر": {
     "meaning": "Installing an on-site 3.3 MW solar power system integrates captive renewable generation into the company's manufacturing facilities, supplying electricity directly to industrial operations and substituting a portion of consumption from the national grid.",
@@ -2187,6 +2195,10 @@
     "meaning": "The market benchmark index decreases by over 1% alongside total daily trading turnover of approximately EGP 11 billion across listed equities and fixed-income instruments.",
     "meaning_ar": "يتراجع المؤشر الرئيسي للسوق بأكثر من 1% بالتزامن مع تسجيل إجمالي قيم تداولات يومية تقارب 11 مليار جنيه عبر الأسهم وأدوات الدخل الثابت المقيدة."
   },
+  "البورصه تحدد اسعار فتح العقود المستقبليه والهامش المبديي علي EGX30 وCIB وطلعت مصطفي استحقاق مارس 2027": {
+    "meaning": "The exchange sets the baseline operational parameters for trading March 2027 futures on the EGX30 index, CIB, and Talaat Moustafa Group, establishing reference opening prices and defining the collateral required by the clearing house to initiate and maintain derivative contracts.",
+    "meaning_ar": "تحدد البورصة المحددات التشغيلية لتداول العقود المستقبلية استحقاق مارس 2027 لمؤشر EGX30 وسهمي البنك التجاري الدولي وطلعت مصطفى، من خلال تثبيت أسعار الفتح المرجعية وتحديد الضمان المالي المطلوب لدى شركة المقاصة لفتح العقود والاحتفاظ بها."
+  },
   "البورصه تختبر حاجز 57 الف نقطه تحت ضغط مبيعات الموسسات": {
     "meaning": "Institutional portfolio reallocations and high-volume liquidation orders create downward pricing pressure across constituent equities, bringing the benchmark index to the 57,000-point technical threshold.",
     "meaning_ar": "تؤدي عمليات إعادة هيكلة المحافظ والتخارج المؤسسي بأحجام تداول مرتفعة إلى ضغوط سعرية على الأسهم المكونة للمؤشر، مما يدفع المؤشر الرئيسي للتداول عند مستوى 57 ألف نقطة."
@@ -2266,6 +2278,10 @@
   "البورصه واكاديميه السادات توسعان نطاق بروتوكول التعاون ليضم شركات الوساطه والجهات المقيده": {
     "meaning": "The expanded protocol incorporates brokerage firms and listed companies into joint professional training and capacity-building programs between the Egyptian Exchange and Sadat Academy for Administrative Sciences.",
     "meaning_ar": "يتضمن البروتوكول الموسع إدراج شركات الوساطة والشركات المقيدة ضمن برامج التدريب المهني وبناء القدرات المشتركة بين البورصة المصرية وأكاديمية السادات للعلوم الإدارية."
+  },
+  "البورصه: 273.72 مليون سهم تستجيب لعرض استحواذ البركه مصر علي التوفيق للتاجير التمويلي": {
+    "meaning": "Tendering 273.72 million shares completes the acceptance phase of the mandatory tender offer, transferring the ownership stake of Al Tawfeek Leasing to Al Baraka Bank Egypt via the EGX execution mechanism.",
+    "meaning_ar": "يمثل استجابة 273.72 مليون سهم إتمام مرحلة قبول عرض الشراء الإجباري، حيث تنتقل حصة الملكية في التوفيق للتأجير التمويلي إلى بنك البركة مصر من خلال آلية التنفيذ بالبورصة المصرية."
   },
   "البورصه: اصدار 60 الف وثيقه جديده لصندوق «EGX 30 INDEX ETF»": {
     "meaning": "The creation of 60,000 new units in the EGX 30 Index ETF expands the fund's outstanding share count via the standard primary market creation mechanism, where authorized participants deposit the underlying basket of EGX 30 constituent stocks in exchange for newly issued fund certificates.",
