@@ -75,6 +75,7 @@ tell them apart.
 from __future__ import annotations
 
 import argparse
+import collections
 import concurrent.futures
 import datetime
 import hashlib
@@ -91,6 +92,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import commit as cm
 import forecast as fc
+import measures as ms
 import panel as pricing
 import run as lab
 import timestamp as ts
@@ -349,17 +351,60 @@ def news_block(news: dict, tickers: set[str], until: datetime.datetime) -> dict:
 
 
 def measures_block(measures: dict, tickers: set[str]) -> dict:
-    rows = measures.get("rows") or []
-    lines = [",".join(("ticker",) + MEASURES)]
-    held = 0
+    rows = [r for r in measures.get("rows") or []
+            if str(r.get("ticker") or "").upper() in tickers]
+    dated = collections.Counter(r["as_of"] for r in rows if r.get("as_of"))
+    # Ties choose the newest session, independent of source row order.
+    session = max(dated, key=lambda d: (dated[d], d)) if dated else None
+    lines = [",".join(("ticker", "as_of") + MEASURES)]
     for row in sorted(rows, key=lambda r: str(r.get("ticker") or "")):
         ticker = str(row.get("ticker") or "").upper()
-        if ticker not in tickers:
+        lines.append(",".join([ticker, str(row.get("as_of") or "")] +
+                              [_number(row.get(c)) for c in MEASURES]))
+    return {"text": "\n".join(lines), "companies": len(rows), "asOf": session,
+            "otherSessionCompanies": sum(n for d, n in dated.items() if d != session),
+            "undatedCompanies": len(rows) - sum(dated.values()),
+            "sessions": dict(sorted(dated.items()))}
+
+
+def refresh_measures(measures: dict, tickers: set[str], basis: str,
+                     panel: dict[str, list[dict]] | None) -> tuple[dict, dict]:
+    """Recompute the session-dependent columns before asking, never rewrite a
+    published table or a sealed night. Unverifiable rows are omitted from the
+    evidence, not from the forecast universe or from any reading.
+
+    The fresh lab panel uses the exchange's dated close, so a holiday needs
+    no guessed weekday calendar and a late app-data rebuild cannot stale it.
+    Published financial figures retain their source; tape and elapsed-time
+    figures are recomputed together from the same completed bars.
+    """
+    held = {str(r.get("ticker") or "").upper(): r
+            for r in measures.get("rows") or []}
+    rows, excluded = [], {}
+    for ticker in sorted(tickers):
+        row = dict(held.get(ticker) or {"ticker": ticker})
+        if panel is not None:
+            bars = [b for b in panel.get(ticker, []) if b.get("date", "") <= basis]
+            stamp = ms.as_of(bars)
+            if stamp != basis:
+                excluded[ticker] = f"no verified measurements for {basis}; newest session: {stamp or 'missing'}"
+                continue
+            row["as_of"] = stamp
+            row.update(relative_volume_20=ms.rv20(bars),
+                       change_5=ms.change_over(bars, 5),
+                       change_20=ms.change_over(bars, 20),
+                       sessions_since_filing=ms.sessions_since(bars, row.get("last_filing_date")))
+            due = row.get("results_due_from")
+            try:
+                row["results_due_in_days"] = (datetime.date.fromisoformat(due) -
+                                              datetime.date.fromisoformat(basis)).days
+            except (TypeError, ValueError):
+                row["results_due_in_days"] = None
+        elif row.get("as_of") != basis:
+            excluded[ticker] = f"published measurements are from {row.get('as_of') or 'an unknown session'}"
             continue
-        held += 1
-        lines.append(",".join([ticker] + [_number(row.get(c)) for c in MEASURES]))
-    return {"text": "\n".join(lines), "companies": held,
-            "asOf": measures.get("market_date") or measures.get("generated")}
+        rows.append(row)
+    return {"rows": rows}, excluded
 
 
 def rulebook_block(path: pathlib.Path = RULEBOOK) -> dict:
@@ -373,17 +418,24 @@ def rulebook_block(path: pathlib.Path = RULEBOOK) -> dict:
 
 
 def gather(document: dict, *, until: datetime.datetime,
-           data: pathlib.Path = DATA, rulebook: pathlib.Path = RULEBOOK) -> dict:
+           data: pathlib.Path = DATA, rulebook: pathlib.Path = RULEBOOK,
+           panel: dict[str, list[dict]] | None = None) -> dict:
     """Everything any reading may be shown, read once so every reading of the
     same night reads the same evidence."""
     tickers = set(document.get("universe") or [])
     basis = document["basisSession"]
+    published = _read(data / "measures.json")
+    input_sessions = measures_block(published, tickers)["sessions"]
+    measures, excluded = refresh_measures(published, tickers, basis, panel)
+    block = measures_block(measures, tickers)
+    block.update(excluded=excluded, excludedCompanies=len(excluded),
+                 refreshed=panel is not None, inputSessions=input_sessions)
     return {
         "filings": filings_block(_read(data / "disclosures" / "latest.json"),
                                  tickers, basis, until),
         "news": news_block(_read(data / "news" / "latest.json"), tickers, until),
         "rulebook": rulebook_block(rulebook),
-        "measures": measures_block(_read(data / "measures.json"), tickers),
+        "measures": block,
     }
 
 
@@ -402,7 +454,10 @@ SECTIONS = {
                  "How this project weighs evidence about a company on this "
                  "exchange. Weigh what you are shown by these rules."),
     "measures": ("MEASUREMENTS",
-                 "Published measurements of each company, as CSV: market value "
+                 "Measurements as CSV, with the completed price/volume session in as_of. "
+                 "Financial figures are the latest published figures. "
+                 "Missing companies have no verified measurements for the basis "
+                 "session; still score them from the other evidence. Market value "
                  "in Egyptian pounds, price to earnings, earnings per share, "
                  "net income growth in percent, revenue, volume against its own "
                  "20-session median, its 5- and 20-session change in percent, "
@@ -687,6 +742,8 @@ def main(argv=None) -> int:
     parser.add_argument("--no-timestamp", action="store_true")
     parser.add_argument("--today", help="the session the exchange calls closed "
                                         "(asked of the exchange when omitted)")
+    parser.add_argument("--scan", type=pathlib.Path,
+                        help="fresh lab scan used to rebuild measurements before asking")
     parser.add_argument("--workers", type=int, default=3)
     args = parser.parse_args(argv)
 
@@ -704,10 +761,14 @@ def main(argv=None) -> int:
         return 0
 
     today = args.today
+    closed = {}
     if today is None:
         try:
             watch, status = pricing.fetch_today()
             today = pricing.last_closed(watch, status)
+            # A dated close is usable after midnight too, while the timing
+            # guard below still prevents any first-horizon leakage.
+            _, closed = pricing.closed_bars(watch, status)
             print(f"   the exchange is closed and its newest session is "
                   f"{today}" if today else "   the exchange does not say it is "
                   "closed after a session")
@@ -726,12 +787,21 @@ def main(argv=None) -> int:
 
     now = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0)
     ran_at = now.isoformat().replace("+00:00", "Z")
-    context = gather(document, until=now, data=args.data)
+    panel = None
+    sources = None
+    if args.scan:
+        scan = lab.read_scan(args.scan)
+        built = pricing.build(scan, today=closed)
+        panel, sources = built["panel"], built["sources"]
+    context = gather(document, until=now, data=args.data, panel=panel)
+    if sources is not None:
+        context["measures"]["priceSources"] = sources
     print(f"   evidence: {context['filings']['items']} filings by "
           f"{context['filings']['companies']} companies, "
           f"{context['news']['items']} headlines naming "
           f"{context['news']['companies']}, measurements for "
-          f"{context['measures']['companies']}, rule book "
+          f"{context['measures']['companies']} on {context['measures']['asOf']} "
+          f"({context['measures']['excludedCompanies']} unavailable), rule book "
           f"{context['rulebook']['chars']} characters")
 
     blocks = rank_all(document, today=today, context=context, workers=args.workers)

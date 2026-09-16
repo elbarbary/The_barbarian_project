@@ -52,6 +52,7 @@ on:
     paths:
       - 'scripts/lab/**'
       - 'scripts/gemini.py'
+      - 'scripts/measures.py'
       - 'scripts/egx_scan.mjs'
       - 'scripts/egx_history.mjs'
       - '.github/workflows/lab-nightly.yml'
@@ -236,7 +237,8 @@ jobs:
           GOOGLE_VERTEX_ACCESS_TOKEN: ${{ steps.gcp.outputs.access_token }}
           GOOGLE_CLOUD_PROJECT: project-8bba98ed-6d90-45af-ab8
         run: |
-          python3 scripts/lab/rerank.py ${{ inputs.dry_run == true && ' ' || '--write' }}
+          scan=$(ls -t ../work/daily_scan_*.json | grep -v fused | head -1)
+          python3 scripts/lab/rerank.py --scan "$scan" ${{ inputs.dry_run == true && ' ' || '--write' }}
 
       # Scoring and revealing are independent of today's forecast: they read
       # runs that were frozen weeks ago against bars the market has since

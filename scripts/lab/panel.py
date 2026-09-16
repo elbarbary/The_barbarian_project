@@ -359,11 +359,15 @@ def build(scan: dict, *, today: dict[str, dict] | None = None,
 
         if gap is not None and gap <= AGREEMENT:
             # The archive is the longer series and the two agree, so the scan
-            # contributes only what the archive lacks: open, high and low.
+            # contributes what the archive lacks: open, high and low, and
+            # its newer completed sessions.
             shape = {b["date"]: b for b in scanned}
             bars = [dict(b, **{k: v for k, v in (shape.get(b["date"]) or {}).items()
                                if k in ("open", "high", "low")})
                     for b in archived]
+            # The fresh scan may include completed sessions missing from
+            # the checkout. Keep that tail before adding the official close.
+            bars.extend(b for b in scanned if b["date"] > archived[-1]["date"])
             note["archive"].append(ticker)
         else:
             bars = scanned

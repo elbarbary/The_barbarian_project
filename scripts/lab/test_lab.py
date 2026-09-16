@@ -1077,6 +1077,29 @@ class PricePanelTest(unittest.TestCase):
         self.assertEqual(out["sources"]["archive"], ["AAA"])
         self.assertEqual(len(out["panel"]["AAA"]), 400)
 
+    def test_fresh_scan_sessions_survive_an_older_matching_archive(self):
+        deep = self.series(100)
+        self.store("AAA", deep[:-2])
+        out = pricing.build(self.scan_of(("AAA", deep[-70:])), root=self.archive)
+        self.assertEqual(out["panel"]["AAA"], deep)
+        self.assertEqual(out["sources"]["archive"], ["AAA"])
+
+    def test_measurements_can_use_the_official_close_after_a_holiday(self):
+        # No artificial 27 August bar: 30 August follows the 26th.
+        deep = self.series(60)
+        deep[-1] = {"date": "2026-08-26", "close": 160.0, "volume": 1000}
+        self.store("AAA", deep)
+        official = {"date": "2026-08-30", "close": 176.0,
+                    "volume": 3000, "_prevClose": 160.0}
+        out = pricing.build(self.scan_of(("AAA", deep)),
+                            today={"AAA": official}, root=self.archive)
+        fresh, excluded = rr.refresh_measures({"rows": []}, {"AAA"},
+                                              "2026-08-30", out["panel"])
+        self.assertEqual(excluded, {})
+        self.assertEqual(fresh["rows"][0]["as_of"], "2026-08-30")
+        self.assertEqual(fresh["rows"][0]["relative_volume_20"], 3)
+        self.assertNotIn("2026-08-27", [b["date"] for b in out["panel"]["AAA"]])
+
     def test_a_constant_ratio_apart_is_never_spliced(self):
         # LUTS differed from the vendor by 0.3898 on the median session and
         # 0.3899 at the widest, across all 119 they shared. That is a
@@ -2118,6 +2141,92 @@ class ContextTest(unittest.TestCase):
         self.assertEqual(block["companies"], 1)
         self.assertIn("AAA,", block["text"])
         self.assertNotIn("ZZZ", block["text"])
+
+    def test_measurements_date_the_shown_rows_not_the_market_file(self):
+        doc = {"market_date": "2026-09-14", "generated": "2026-09-15", "rows": [
+            {"ticker": "AAA", "as_of": "2026-09-13"},
+            {"ticker": "BBB", "as_of": "2026-09-13"},
+            {"ticker": "CCC", "as_of": "2026-09-10"},
+            {"ticker": "DDD"},
+            {"ticker": "ZZZ", "as_of": "2026-09-14"}]}
+        block = rr.measures_block(doc, {"AAA", "BBB", "CCC", "DDD"})
+        self.assertEqual(block["asOf"], "2026-09-13")
+        self.assertEqual(block["otherSessionCompanies"], 1)
+        self.assertEqual(block["undatedCompanies"], 1)
+        self.assertEqual(block["sessions"], {"2026-09-10": 1, "2026-09-13": 2})
+        self.assertIn("CCC,2026-09-10,", block["text"])
+        self.assertNotIn("ZZZ", block["text"])
+        self.assertIsNone(rr.measures_block(doc, set())["asOf"])
+        undated = rr.measures_block(doc, {"DDD"})
+        self.assertIsNone(undated["asOf"])
+        self.assertEqual(undated["undatedCompanies"], 1)
+        for rows in (doc["rows"], list(reversed(doc["rows"]))):
+            tied = rr.measures_block({"rows": rows}, {"AAA", "CCC"})
+            self.assertEqual(tied["asOf"], "2026-09-13")
+
+    def test_stale_numbers_are_recomputed_and_future_bars_are_not_read(self):
+        import copy
+        held = bars(*[(f"2026-08-{i:02d}", 100.0) for i in range(1, 22)])
+        held += [{"date": "2026-08-26", "close": 100, "volume": 1000},
+                 {"date": "2026-08-30", "close": 110, "volume": 3000},
+                 {"date": "2026-08-31", "close": 999, "volume": 99999}]
+        original = {"rows": [{"ticker": "AAA", "as_of": "2026-08-26",
+                    "pe": 7.5, "relative_volume_20": 1, "change_5": 0,
+                    "last_filing_date": "2026-08-26", "results_due_from": "2026-09-01"}]}
+        before = copy.deepcopy(original)
+        fresh, excluded = rr.refresh_measures(original, {"AAA"}, "2026-08-30", {"AAA": held})
+        row = fresh["rows"][0]
+        self.assertEqual(row["as_of"], "2026-08-30")
+        self.assertEqual(row["relative_volume_20"], 3)
+        self.assertEqual(row["change_5"], 10)
+        self.assertEqual(row["change_20"], 10)
+        self.assertEqual(row["sessions_since_filing"], 1)
+        self.assertEqual(row["results_due_in_days"], 2)
+        self.assertEqual(row["pe"], 7.5)
+        self.assertEqual(excluded, {})
+        self.assertEqual(original, before)
+
+    def test_missing_stale_and_undated_rows_are_omitted_not_zero_filled(self):
+        original = {"rows": [{"ticker": "AAA", "as_of": "2026-09-13", "change_5": 88}]}
+        panel = {"AAA": bars(("2026-09-13", 10)),
+                 "BBB": bars(("2026-09-14", 20))}
+        fresh, excluded = rr.refresh_measures(original, {"AAA", "BBB", "CCC"},
+                                              "2026-09-14", panel)
+        self.assertEqual(set(excluded), {"AAA", "CCC"})
+        self.assertEqual([r["ticker"] for r in fresh["rows"]], ["BBB"])
+        self.assertIsNone(fresh["rows"][0]["change_5"])
+        block = rr.measures_block(fresh, {"AAA", "BBB", "CCC"})
+        self.assertEqual(block["asOf"], "2026-09-14")
+        self.assertNotIn("AAA,", block["text"])
+        self.assertNotIn("88", block["text"])
+        fresh, excluded = rr.refresh_measures(original, {"AAA", "CCC"}, "2026-09-14", None)
+        self.assertEqual(fresh["rows"], [])
+        self.assertEqual(set(excluded), {"AAA", "CCC"})
+
+    def test_gather_rebuilds_only_measurements_and_preserves_the_published_table(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            table = root / "measures.json"
+            table.write_text(json.dumps({"market_date": "2026-09-14", "rows": [
+                {"ticker": "AAA", "as_of": "2026-09-13", "change_5": 42}]}))
+            before = table.read_bytes()
+            context = rr.gather({"basisSession": "2026-09-14", "universe": ["AAA", "BBB"]},
+                until=self.UNTIL, data=root, panel={"AAA": bars(("2026-09-14", 10))})
+            block = context["measures"]
+            self.assertEqual(block["asOf"], "2026-09-14")
+            self.assertEqual(block["companies"], 1)
+            self.assertEqual(block["excludedCompanies"], 1)
+            self.assertTrue(block["refreshed"])
+            self.assertEqual(table.read_bytes(), before)
+            question = rr.prompt("2026-09-14", "ticker\nAAA\nBBB", 2, context, ("measures",))
+            self.assertIn("AAA,2026-09-14,", question)
+            self.assertIn("still score them", question)
+
+    def test_ci_passes_the_fresh_scan_to_the_rerank(self):
+        workflow = (rr.REPO / ".github/workflows/lab-nightly.yml").read_text()
+        self.assertIn('scripts/lab/rerank.py --scan "$scan"', workflow)
+        self.assertIn("'scripts/measures.py'", workflow)
 
     def test_the_prompt_carries_only_the_evidence_that_was_switched_on(self):
         context = {layer: {"text": f"<{layer} evidence>"} for layer in rr.LAYERS}
