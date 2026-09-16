@@ -3019,6 +3019,10 @@
     "meaning": "Changes in daily retail prices for fresh produce reflect seasonal agricultural supply dynamics, logistics costs, and wholesale market liquidity, which directly influence household food consumption and headline CPI inflation trends.",
     "meaning_ar": "تعكس تغيرات أسعار تجزئة الخضراوات والفاكهة اليومية ديناميكيات المعروض الزراعي الموسمي وتكاليف النقل واللوجستيات، وهو ما يؤثر بشكل مباشر على الإنفاق الاستهلاكي للأسر ومؤشرات التضخم العام."
   },
+  "العامه لمخابز القاهره الكبري تطرح 113 صنفا في كاري اون - كايرو بيك": {
+    "meaning": "The General Company for Greater Cairo Bakeries expands its commercial retail footprint by distributing 113 product SKUs through the 'Carry On - Cairo Bake' retail network.",
+    "meaning_ar": "توسع الشركة العامة لمخابز القاهرة الكبرى شبكة توزيع منتجاتها بالتجزئة من خلال طرح 113 صنفاً عبر منافذ 'كاري أون - كايرو بيك'."
+  },
   "العدد 1199 من نشره حابي": {
     "meaning": "This headline references the release of a regular periodic edition of the local financial publication Hapi Journal, providing daily market news and macroeconomic updates to market participants.",
     "meaning_ar": "يشير العنوان إلى صدور عدد دوري منتظم من نشرة جريدة حابي الاقتصادية المحلية، والتي تقدم تغطية إخبارية للأسواق المالية والمستجدات الاقتصادية الكلية للمتعاملين."
@@ -4715,6 +4719,10 @@
   "حسين ابوصدام : السحابه السوداء تلقي بظلالها علي الفلاحين في عيدهم ال74": {
     "meaning": "The seasonal enforcement of agricultural burning regulations imposes direct compliance costs, machinery rental fees for biomass shredding, and regulatory fines on smallholder farming operations.",
     "meaning_ar": "يفرض التطبيق الموسمي للضوابط البيئية المنظمة للتخلص من المخلفات الزراعية تكاليف تشغيلية مباشرة تشمل استئجار معدات فرم وتدوير القش بالإضافة إلى الغرامات التنظيمية على المزارعين."
+  },
+  "حمايه المستهلك يضبط مخزنا غير مرخص بشبرا الخيمه لتجهيز وتعبيه «البن» مجهول المصدر": {
+    "meaning": "Regulatory enforcement against unlicensed manufacturing facilities removes counterfeit inventory from the informal sector and reinforces compliance standards within the domestic food processing supply chain.",
+    "meaning_ar": "يؤدي إنفاذ الرقابة على المنشآت الصناعية غير المرخصة إلى سحب البضائع غير المطابقة من القطاع غير الرسمي، وتطبيق المعايير التنظيمية الإلزامية عبر سلاسل إمداد الصناعات الغذائية المحلية."
   },
   "حمايه المستهلك يضبط مصنعا غير مرخص لتجهيز وتقطيع وحفظ هياكل واجزاء دواجن فاسده": {
     "meaning": "Regulatory enforcement against informal poultry processing facilities halts unauthorized supply in the food value chain and channels meat processing activity through licensed operators subject to state inspection and hygiene standards.",
@@ -6548,6 +6556,10 @@
   "محيي الدين: مصر تحتاج خلال اسابيع برنامجا اقتصاديا جديدا يتجاوز اداره الموشرات الماليه والنقديه": {
     "meaning": "The proposal refers to expanding economic policy beyond monetary and fiscal metrics, such as interest rates and budget deficits, to target real-sector structural shifts, including industrial capacity, regulatory conditions, and export infrastructure.",
     "meaning_ar": "يشير المقترح إلى توسيع نطاق السياسات الاقتصادية ليتجاوز المؤشرات النقدية والمالية، مثل أسعار الفائدة وعجز الموازنة، ليركز على تعديلات هيكلية في القطاع الحقيقي تشمل الطاقة الصناعية، وتعديل البيئة التنظيمية، والبنية التحتية التصديرية."
+  },
+  "مخاطر الذكاء الاصطناعي تشعل خلافا بين ترامب وقاده التكنولوجيا": {
+    "meaning": "Disagreements between political leadership and technology executives introduce regulatory divergence and policy friction around artificial intelligence deployment, data governance, and capital allocation across tech hardware and software sectors.",
+    "meaning_ar": "تؤدي الخلافات بين القيادة السياسية والمسؤولين التنفيذيين في قطاع التكنولوجيا إلى تباين تنظيمي واحتكاك في السياسات المتعلقة بتطبيقات الذكاء الاصطناعي، وحوكمة البيانات، وتوزيع رؤوس الأموال عبر قطاعات البرمجيات والمعدات التقنية."
   },
   "مخاوف الامدادات تدفع اسعار الغاز الاوروبيه لاعلي مستوي في 3 سنوات": {
     "meaning": "Perceived supply chain disruptions lead to elevated global natural gas benchmark prices, directly altering import costs for energy-dependent markets and operating costs for gas-intensive industrial sectors.",
