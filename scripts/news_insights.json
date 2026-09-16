@@ -1335,6 +1335,10 @@
     "meaning": "Retail sales data measures consumer spending across the economy, where an expansion rate falling below consensus forecasts reflects current domestic consumption operating at a slower pace than baseline market benchmarks.",
     "meaning_ar": "تقيس بيانات مبيعات التجزئة حجم الإنفاق الاستهلاكي عبر قطاعات الاقتصاد، حيث يعكس نموها بوتيرة دون التوقعات أن وتيرة الاستهلاك المحلي الحالية تسجل أداءً أبطأ مقارنة بتقديرات السوق المرجعية."
   },
+  "ارتفاع مبيعات التجزيه في امريكا بما يفوق التوقعات خلال اغسطس": {
+    "meaning": "Higher-than-expected retail sales reflect current resilient consumer spending within the US economy, an indicator that enters Federal Reserve monetary policy considerations and global benchmark interest rate pricing.",
+    "meaning_ar": "يعكس ارتفاع مبيعات التجزئة بأعلى من التقديرات مرونة الإنفاق الاستهلاكي داخل الاقتصاد الأمريكي، وهو مؤشر يرتبط بقرارات السياسة النقدية لمجلس الاحتياطي الفيدرالي وتسعير أسعار الفائدة القياسية عالمياً."
+  },
   "ارتفاع مستويات الشراء والبيع.. اسعار اليورو بختام تعاملات الخميس 10 سبتمبر 2026": {
     "meaning": "An upward adjustment in both the bid and ask exchange rates reflects a higher local currency cost for acquiring euro liquidity in the interbank foreign exchange market.",
     "meaning_ar": "يعكس ارتفاع أسعار العرض والطلب زيادة التكلفة الفعلية بالعملة المحلية للحصول على سيولة اليورو في سوق الصرف بين البنوك."
@@ -3279,6 +3283,10 @@
     "meaning": "An 11.46% share price increase reflects concentrated trading activity within the food and poultry sector, adjusting the company's equity market valuation on the Egyptian Exchange.",
     "meaning_ar": "يعكس صعود سعر السهم بنسبة 11.46% نشاط تداول مركز داخل قطاع الأغذية والدواجن، مما يعيد تسعير القيمة السوقية لأسهم الشركة في البورصة المصرية."
   },
+  "المنطقه الحره بمدينه نصر تشهد 22 مشروعا جديدا باستثمارات 192.7 مليون دولار": {
+    "meaning": "Establishing new projects in the public free zone deploys capital into export-oriented manufacturing and services under dedicated customs and tax incentives governed by the Investment Law. This structure expands operating physical capacity within the zone and increases capital formation denominated in foreign currency.",
+    "meaning_ar": "يؤدي تأسيس مشروعات جديدة بالمنطقة الحرة العامة إلى توجيه رؤوس أموال نحو أنشطة صناعية وخدمية موجهة للتصدير، مستفيدة من حوافز جمركية وضريبية ينظمها قانون الاستثمار. وتوسع هذه الآلية الطاقات التشغيلية القائمة داخل المنطقة وتزيد التكوين الرأسمالي المقوم بالنقد الأجنبي."
+  },
   "الموافقه علي مقترح الخطه التنفيذيه للاصدار الثاني لوثيقه سياسه ملكيه الدوله": {
     "meaning": "The approval of the second edition's executive plan sets the operational schedule and regulatory framework governing state asset divestments, restructuring public enterprises, and expanding private sector participation across targeted economic activities.",
     "meaning_ar": "يحدد اعتماد الخطة التنفيذية للإصدار الثاني الإطار التنظيمي والجدول الزمني المنظمين لعمليات التخارج وإعادة هيكلة الأصول والشركات المملوكة للدولة، مع تحديد ضوابط مشاركة القطاع الخاص في الأنشطة الاقتصادية المستهدفة."
@@ -4283,6 +4291,10 @@
   "تضم سندات باندا.. مجلس الوزراء: طرح سندات دوليه باجمالي 3 مليارات دولار خلال العام المالي الحالي": {
     "meaning": "The government issues foreign-currency debt instruments, including Chinese renminbi-denominated Panda bonds, to secure $3 billion in external budget financing during the current fiscal year.",
     "meaning_ar": "تُصدر الحكومة أدوات دين بالعملة الأجنبية، بما في ذلك سندات الباندا المقومة باليوان الصيني، لتوفير تمويل خارجي للموازنة العامة بقيمة 3 مليارات دولار خلال العام المالي الحالي."
+  },
+  "تعاون بين ماستر كاردوتريب دوت كوم لحجز خدمات السفر بالاعتماد علي الذكاء الاصطناعي": {
+    "meaning": "The partnership integrates artificial intelligence tools and digital payment infrastructure between a global payments network and an online travel platform to automate travel booking and transaction processing.",
+    "meaning_ar": "تدمج هذه الشراكة أدوات الذكاء الاصطناعي وبنية المدفوعات الرقمية بين شبكة مدفوعات عالمية ومنصة حجز سفر إلكترونية لأتمتة عمليات حجز الرحلات ومعالجة المعاملات المالية."
   },
   "تعاون بين “الرقابه الماليه” و”الاعلي للاعلام” لتعزيز الرقابه علي المنصات الرقميه": {
     "meaning": "This inter-agency framework connects the Financial Regulatory Authority with the Supreme Council for Media Regulation to monitor and enforce licensing requirements on digital platforms publishing capital market information and non-banking financial content.",
@@ -6333,6 +6345,10 @@
     "meaning": "This decree establishes the regulatory framework and operational mandate for the National Council for Wages, which determines the statutory minimum wage rates and mandatory periodic allowances across the private sector, directly setting baseline labor costs on company income statements.",
     "meaning_ar": "يحدد هذا القرار الإطار التنظيمي واختصاصات المجلس القومي للأجور المعني بإقرار الحد الأدنى للأجور والعلاوات الدورية الإلزامية للقطاع الخاص، وهو ما يحدد البنود المباشرة لتكاليف العمالة في القوائم المالية للشركات."
   },
+  "مجلس الوزراء يعيد تنظيم وزاره الاستثمار والتجاره الخارجيه": {
+    "meaning": "The restructuring integrates foreign trade administration with investment policy under a single ministerial framework, consolidating licensing, export oversight, and capital inflow procedures into unified executive channels.",
+    "meaning_ar": "تدمج إعادة الهيكلة إدارة التجارة الخارجية مع السياسات الاستثمارية تحت مظلة وزارية واحدة، مما يوحد قنوات إصدار التراخيص، والرقابة على الصادرات، وإجراءات تدفقات رؤوس الأموال عبر مسارات تنفيذية مشتركة."
+  },
   "مجلس الوزراء يوافق علي اعاده تنظيم وزارتي الاستثمار والتموين": {
     "meaning": "The restructuring redefines the administrative mandates, licensing workflows, and regulatory oversight governing foreign direct investment channels and domestic commodity supply chains.",
     "meaning_ar": "تحدد إعادة الهيكلة الاختصاصات الإدارية، وإجراءات التراخيص، والرقابة التنظيمية المنظمة لتدفقات الاستثمار المباشر وسلاسل إمداد السلع التموينية المحلية."
@@ -6348,6 +6364,10 @@
   "مجلس الوزراء يوافق علي منحه اوروبيه ب750 الف يورو لدعم توسعات «فاكسيرا»": {
     "meaning": "The non-repayable European grant of €750,000 injects non-debt financing into VACSERA's capital expenditure program, funding equipment procurement and infrastructure for vaccine manufacturing lines.",
     "meaning_ar": "توفر المنحة الأوروبية غير القابلة للرد، والبالغة 750 ألف يورو، تمويلاً غير مقترن بديون للإنفاق الرأسمالي بشركة «فاكسيرا»، حيث تُخصص لتمويل شراء المعدات وتطوير البنية التحتية لخطوط إنتاج اللقاحات."
+  },
+  "مجلس الوزراء: 20 شركه بالطروحات تستكمل القيد بالبورصه وتاسيس 7 شركات جديده": {
+    "meaning": "The governmental IPO programme involves completing formal listing requirements on the EGX for 20 state-affiliated entities while setting up 7 new corporate structures to hold or manage targeted assets.",
+    "meaning_ar": "يتضمن برنامج الطروحات الحكومية استيفاء إجراءات القيد الرسمي بالبورصة المصرية لعشرين شركة تابعة للدولة، بالتوازي مع إنشاء سبعة كيانات مؤسسية جديدة لنقل الأصول المستهدفة وإدارتها."
   },
   "مجلس الوزراء: اعضاء اللجان الاستشاريه ليسوا مستشارين لرييس الوزراء": {
     "meaning": "This governance clarification defines advisory committees as independent technical bodies without executive authority or public payroll status, separating technical consultation from direct state policy execution.",
@@ -6944,6 +6964,10 @@
   "موشر البورصه الرييسي يتراجع 0.09% والتداولات تتخطي 19 مليار جنيه": {
     "meaning": "A marginal dip in the benchmark EGX30 index alongside trading turnover exceeding EGP 19 billion reflects high daily market liquidity and substantial execution volume across listed securities without significant net directional movement in the headline index.",
     "meaning_ar": "يعكس التراجع الطفيف للمؤشر الرئيسي للبورصة مع تجاوز قيم التداول 19 مليار جنيه سيولة نقدية مرتفعة وحجم تنفيذات واسع على الأوراق المالية المقيدة خلال جلسة التداول دون تسجيل تحرك سعري حاد في الاتجاه العام للمؤشر."
+  },
+  "موشر البورصه الرييسي يتراجع 0.16% والسبعيني يرتفع 0.15%": {
+    "meaning": "This divergence reflects net selling activity concentrated in large-cap constituents of the benchmark EGX30 index, alongside net buying liquidity allocated to small- and medium-cap equities tracked by the EGX70 EWI.",
+    "meaning_ar": "يعكس هذا التباين تركز تعاملات بيعية في الأسهم القيادية المكونة لمؤشر إيجي إكس 30، بالتزامن مع توجيه سيولة شرائية نحو أسهم الشركات الصغيرة والمتوسطة المدرجة بمؤشر إيجي إكس 70 متساوي الأوزان."
   },
   "موشر البورصه الرييسي يتراجع 0.42% والسبعيني يرتفع 0.38%": {
     "meaning": "This divergence reflects institutional trading pressure on large-cap constituents within the EGX30 alongside concurrent retail and domestic liquidity allocation into small- and mid-cap equities tracked by the EGX70.",
