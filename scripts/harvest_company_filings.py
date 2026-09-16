@@ -22,6 +22,11 @@ walks a company back through its own history ten filings at a time.
 **One browser, serialised, spaced.** This exchange blocked us once for fanning
 three agents at it.
 
+**Not in the CI build.** From a GitHub runner NewsSearch renders in about one
+build in four, which is not a source a daily build can lean on — see the note
+where this used to sit in `build_all.py`. It resumes from its state file, so
+run it from a machine the page answers.
+
 Usage:
     python3 scripts/harvest_company_filings.py [--limit 40] [--passes 2]
 """

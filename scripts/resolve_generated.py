@@ -30,6 +30,11 @@ which job is asking:
     exchange and neither side's absence is evidence. Losing one is the
     failure this exists to stop. The same goes for a record's fields: where
     one copy of a filing carries a field the other lacks, it is kept.
+  * a store of model READINGS — `readings` and `refused`, keyed by filing —
+    is unioned by filing, and what ours already holds for a filing wins. That
+    is `build_ownership_structure.merge`'s rule. Two builds that each read a
+    few forms, or a laptop harvest landing mid-build, add to one store rather
+    than one of them being thrown away.
   * anything else is left to the caller, which keeps the behaviour it has
     always had. This never has an opinion it cannot justify.
 
@@ -115,6 +120,15 @@ def _fill(winner: dict, other: dict | None) -> dict:
     return {**winner, **extra} if extra else winner
 
 
+# The two maps a readings store keeps, by filing id. Both are cumulative: a
+# form read or refused stays that way until somebody asks for it by name.
+READING_BUCKETS = ("readings", "refused")
+
+
+def _readings(doc) -> bool:
+    return isinstance(doc, dict) and all(isinstance(doc.get(b), dict) for b in READING_BUCKETS)
+
+
 def decide(ours: bytes, theirs: bytes) -> tuple[str | None, bytes | None, str]:
     """Which side to keep, and the bytes when neither side alone is right.
 
@@ -169,6 +183,30 @@ def decide(ours: bytes, theirs: bytes) -> tuple[str | None, bytes | None, str]:
             return ("merged", payload,
                     f"unioned {len(arows)} and {len(brows)} records into "
                     f"{len(merged)} (+{gained} that one side would have dropped)")
+
+        if _readings(a) and _readings(b):
+            # Every CI build now reads six post-execution forms, and a build
+            # queued behind another checks out the commit it was queued at, so
+            # both read the same forms and both append to one JSON object.
+            # That conflicts, and before this rule a conflict here stopped the
+            # push: the whole build unpublished over a store that only grows.
+            out = dict(a)
+            held = set()
+            for bucket in READING_BUCKETS:
+                out[bucket] = dict(a[bucket])
+                held |= set(a[bucket])
+            added = 0
+            for bucket in READING_BUCKETS:
+                for filing, value in b[bucket].items():
+                    if filing not in held:
+                        out[bucket][filing] = value
+                        held.add(filing)
+                        added += 1
+            if not added:
+                return "ours", None, "theirs read nothing ours does not already hold"
+            payload = json.dumps(out, ensure_ascii=False, indent=1).encode()
+            return ("merged", payload,
+                    f"kept every reading: {added} from theirs, {len(held)} filings in all")
 
         if at and bt:
             return None, None, "same stamp on both sides"

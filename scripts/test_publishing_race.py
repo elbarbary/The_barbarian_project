@@ -409,6 +409,40 @@ class RaceTest(unittest.TestCase):
         self.assertEqual(git("--git-dir", str(origin), "rev-parse", "main",
                              cwd=self.root).stdout.strip(), built)
 
+    NAMED = "data-source/official/ownership/named-insiders.json"
+
+    def test_two_builds_reading_forms_into_one_store_both_publish(self):
+        """A build queued behind another reads into the store it checked out.
+
+        Both append to one JSON object, the rebase conflicts, and this path
+        used to be outside the allowlist, so the second build's whole publish
+        stopped over a store that only grows.
+        """
+        def store(readings):
+            p = self.root / self.NAMED
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(json.dumps({"schemaVersion": 1, "readings": readings,
+                                     "refused": {}}, ensure_ascii=False, indent=1),
+                         encoding="utf-8")
+
+        store({"277014": {"investorName": "base"}})
+        self.commit("base")
+        base = git("rev-parse", "HEAD", cwd=self.root).stdout.strip()
+        store({"277014": {"investorName": "base"}, "277090": {"investorName": "the first build"}})
+        self.commit("data: rebuild published app data")
+        git("checkout", "-q", "-b", "slow", base, cwd=self.root)
+        store({"277014": {"investorName": "base"}, "277285": {"investorName": "the queued build"}})
+        self.commit("data: rebuild published app data")
+        rebase = subprocess.run(["git", "rebase", "main"], cwd=self.root,
+                                capture_output=True, text=True)
+        self.assertNotEqual(rebase.returncode, 0, "the setup did not actually collide")
+
+        done = self.resolve("publish-app-data.yml")
+        self.assertEqual(done.returncode, 0, done.stdout + done.stderr)
+        committed = json.loads(git("show", f"HEAD:{self.NAMED}", cwd=self.root).stdout)
+        self.assertEqual(set(committed["readings"]), {"277014", "277090", "277285"},
+                         done.stdout + done.stderr)
+
     def test_a_conflict_outside_generated_data_still_stops_everything(self):
         # The guard that keeps this from auto-resolving source code.
         self.write(self.NEWS, {"generated_at": "2026-09-06T06:30:00+00:00"})

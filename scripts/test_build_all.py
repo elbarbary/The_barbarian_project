@@ -559,7 +559,7 @@ class EveryStepRunsOnARunner(unittest.TestCase):
                 self.assertIn(name, build_all.BEST_EFFORT, f"{name} ({script})")
         # Guards the loop: these are the steps this exit code was made for.
         for name in ("Named insiders", "Shareholder structure", "Arabic names",
-                     "Company filings harvest", "Filed documents"):
+                     "Filed documents"):
             self.assertIn(name, reporting)
 
 

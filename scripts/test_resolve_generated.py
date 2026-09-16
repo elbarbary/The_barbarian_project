@@ -153,6 +153,60 @@ class ReadFilingTest(unittest.TestCase):
                           "theirs already holds everything, so the caller's rule is right")
 
 
+class ReadingsStoreTest(unittest.TestCase):
+    """Two builds that each read a few forms keep every reading.
+
+    Every app-data build reads six post-execution forms, and a build queued
+    behind another checks out the commit it was queued at, so both append to
+    the same JSON object. The rebase conflicts, and a conflict here used to
+    stop the push. The rule is `build_ownership_structure.merge`'s: what ours
+    holds for a filing wins, and theirs adds what ours has never seen.
+    """
+
+    @staticmethod
+    def store(readings, refused=None):
+        return json.dumps({"schemaVersion": 1, "readings": readings,
+                           "refused": refused or {}}, ensure_ascii=False, indent=1).encode()
+
+    def test_readings_from_both_builds_are_kept(self):
+        main = self.store({"277014": {"investorName": "a"}, "277090": {"investorName": "b"}},
+                          {"277001": "illegible"})
+        build = self.store({"277014": {"investorName": "a"}, "277285": {"investorName": "c"}},
+                           {"277002": "a sale that raises the stake"})
+        choice, payload, why = resolver.decide(main, build)
+        self.assertEqual(choice, "merged", why)
+        merged = json.loads(payload)
+        self.assertEqual(set(merged["readings"]), {"277014", "277090", "277285"})
+        self.assertEqual(set(merged["refused"]), {"277001", "277002"})
+        self.assertEqual(merged["schemaVersion"], 1)
+
+    def test_what_main_already_holds_for_a_filing_wins(self):
+        # The same scan read twice is not always the same text, and a
+        # verdict already published is not replaced by a second opinion,
+        # in either bucket.
+        main = self.store({"277014": {"investorName": "first"}}, {"277001": "illegible"})
+        build = self.store({"277014": {"investorName": "second"}, "277001": {"investorName": "x"}},
+                           {"277014": "refused on the second read"})
+        choice, payload, why = resolver.decide(main, build)
+        self.assertEqual(choice, "ours", why)
+        self.assertIsNone(payload)
+
+    def test_a_merged_store_is_written_the_way_the_builders_write_it(self):
+        main = self.store({"1": {"n": "ياسر"}})
+        build = self.store({"2": {"n": "هشام"}})
+        _, payload, _ = resolver.decide(main, build)
+        text = payload.decode("utf-8")
+        self.assertIn("ياسر", text, "Arabic escaped, so every line of the store would churn")
+        self.assertIn('\n "readings": {', text)
+
+    def test_a_store_without_both_buckets_is_not_this_rule(self):
+        # currency_notes_read.json has readings and `unreachable`; the
+        # caller keeps its old behaviour for it.
+        a = json.dumps({"schemaVersion": 1, "readings": {"1": {}}, "unreachable": {}}).encode()
+        b = json.dumps({"schemaVersion": 1, "readings": {"2": {}}, "unreachable": {}}).encode()
+        self.assertIsNone(resolver.decide(a, b)[0])
+
+
 class SafetyTest(unittest.TestCase):
     """It would rather have no opinion than stop the pipeline publishing."""
 

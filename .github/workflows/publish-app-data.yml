@@ -531,12 +531,13 @@ jobs:
             local unmerged
             unmerged=$(git diff --name-only --diff-filter=U)
             [ -z "$unmerged" ] && return 0
-            # data-source/official/ownership/ is in STORES and deliberately not
-            # here. Those stores are also written by hand on a laptop, and the
-            # resolver has no opinion about a map of readings, so the fallback
-            # below would take this build's copy and drop the laptop's. A
-            # conflict there stops the push instead; the next run reads again.
-            if echo "$unmerged" | grep -qv -e '^public/data/' -e '^app/assets/fixtures/' -e '^scripts/.*\.json$' -e '^data-source/prices/' -e '^data-source/egx-beta/'; then
+            # data-source/official/ownership/ is here because every build reads
+            # six forms into it now, and a build queued behind another checks
+            # out the commit it was queued at: both read the same forms, both
+            # append to one JSON object, and the rebase conflicts. The resolver
+            # unions the two stores by filing, what main holds winning, so a
+            # laptop's harvest landing mid-build is kept as well.
+            if echo "$unmerged" | grep -qv -e '^public/data/' -e '^app/assets/fixtures/' -e '^scripts/.*\.json$' -e '^data-source/prices/' -e '^data-source/egx-beta/' -e '^data-source/official/ownership/'; then
               echo "conflict outside generated data:"; echo "$unmerged"
               git rebase --abort || true
               return 1

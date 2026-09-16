@@ -430,17 +430,24 @@ STEPS = [
     # transport it prints so and leaves the published briefs alone.
     ("Company briefs", "build_company_briefs.py", False,
      ["--limit", "6", "--budget", "0.50"]),
-    # Named apart from "Company filings" above, the page-per-company transform.
-    # Both are best-effort and the skip counter keys on the name, so two steps
-    # under one name would share one streak.
+    # `harvest_company_filings.py` used to run here, and is out of the CI build
+    # on purpose. It walks each company's results filings back to 2020 through
+    # the exchange's NewsSearch page, and from a runner that page mostly does
+    # not render: nothing came back in 82 of the 116 builds from 3 to 16 Sep
+    # 2026, in streaks of up to nineteen, at about six minutes each.
     #
-    # From 3 to 16 Sep 2026 this answered nothing in 82 of 116 builds, in
-    # streaks of up to nineteen, and the timeouts named the same company run
-    # after run — CAED seventeen times, AREH twelve. The first company in the
-    # queue is the page the browser opens, and one slow issuer there sank the
-    # whole batch until a lucky run. It now goes to the back of the queue.
-    ("Company filings harvest", "harvest_company_filings.py", False,
-     ["--limit", "5", "--spacing", "6"]),
+    # The streaks looked like one slow company at the head of the queue (the
+    # timeouts named CAED in seventeen builds and AREH in twelve), so a company
+    # that times out now goes to the back. The next two builds opened CFGH and
+    # CICH first and both timed out anyway: of the seven builds on 16 Sep after
+    # the browser was fixed, one got a page back. So it is the page from this
+    # address, not one issuer, and a step that answers one build in four or
+    # fewer trips STUCK_AFTER every day or two with nothing here to fix.
+    #
+    # It is resumable and keeps its place in scripts/company_filings_seen.json,
+    # so run it where the page answers:
+    #
+    #     python3 scripts/harvest_company_filings.py --limit 40
     # It said "read 8" in 61 of those 116 builds, and every build started from
     # between 289 and 297 read: the eight were the newest unread filings, and
     # the next disclosures fetch replaced each with a copy never read at all.
@@ -524,7 +531,6 @@ BEST_EFFORT = {
     "Sector reads",
     "Company profiles",
     "Company briefs",
-    "Company filings harvest",
     "Filed documents",
     # The exchange's own BFF, paced and serialized. It blocked this project
     # once; a refusal here means the archive is one build older, which is the
