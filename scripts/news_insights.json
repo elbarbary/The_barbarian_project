@@ -5881,6 +5881,10 @@
     "meaning": "A market index reaching a new historical peak reflects an increase in the aggregate market capitalization of its constituent listed companies, driven by trades executing at higher settlement prices across the exchange.",
     "meaning_ar": "يعكس تسجيل مؤشر السوق لقمة تاريخية جديدة ارتفاعاً في القيمة السوقية الإجمالية للشركات المدرجة المكونة له، نتيجة تنفيذ العمليات عند مستويات سعرية أعلى عبر منصة التداول."
   },
+  "عادل رشدي: اللحوم الجيبوتي والسوداني والبلدي متاحه ب350 جنيها للكيلو في فروع «كاري اون»": {
+    "meaning": "The state-affiliated retail network applies a unified retail price point of EGP 350 per kilogram across imported and local beef varieties, relying on diversified cross-border supply chains from Djibouti and Sudan alongside domestic sources.",
+    "meaning_ar": "تعتمد شبكة التجزئة التابعة للدولة سعر بيع موحدًا يبلغ 350 جنيهًا للكيلوغرام عبر فئات اللحوم المستوردة والمحلية، استنادًا إلى تنويع سلاسل الإمداد عبر الحدود من جيبوتي والسودان بجانب الإنتاج المحلي."
+  },
   "عايد سندات الخزانه الامريكيه لاجل 10 سنوات يتجاوز 5% ليسجل اعلي مستوي منذ اكتوبر 2023": {
     "meaning": "A rise in 10-year US Treasury yields sets a higher benchmark for global risk-free rates, which directly establishes higher external borrowing costs and debt refinancing rates for emerging market sovereigns and corporations.",
     "meaning_ar": "يحدد ارتفاع عائد سندات الخزانة الأمريكية لأجل 10 سنوات معياراً أعلى لمعدلات العائد الخالية من المخاطر عالمياً، وهو ما يرفع تكاليف الاقتراض الخارجي وأسعار إعادة تمويل الديون للأسواق الناشئة وشركاتها."
@@ -6973,6 +6977,10 @@
     "meaning": "Capital deployment into digital payment infrastructure involves expanding technical architecture, point-of-sale hardware networks, and processing capacity within the financial technology ecosystem.",
     "meaning_ar": "يتمثل ضخ رؤوس الأموال في البنية التحتية للمدفوعات الرقمية في توسيع الأنظمة التقنية وشبكات نقاط البيع وزيادة القدرة الاستيعابية لمعالجة المعاملات المالية في قطاع التكنولوجيا المالية."
   },
+  "موسس تيك توك يتجاوز اداني ويعتلي صداره اثرياء اسيا": {
+    "meaning": "Shifts in wealth rankings reflect relative changes in private equity valuations and publicly traded equity prices between technology platforms and industrial conglomerates.",
+    "meaning_ar": "تعكس التغيرات في تصنيفات الثروة التفاوت في تقييمات أسهم الملكية الخاصة وأسعار تداول الشركات المدرجة بين منصات التكنولوجيا والتكتلات الصناعية."
+  },
   "موسسه البترول الكويتيه تعرض نقل شحنات من سفينه لاخري خارج مضيق هرمز": {
     "meaning": "Ship-to-ship (STS) cargo transfer outside the Strait of Hormuz establishes an alternative maritime logistics mechanism that shifts crude oil loading operations beyond a regional chokepoint.",
     "meaning_ar": "يمثل تفريغ ونقل الشحنات من سفينة إلى أخرى خارج مضيق هرمز آلية لوجستية بحرية بديلة تنقل عمليات تحميل وتداول النفط الخام إلى نقاط جغرافية تقع خارج هذا الممر المائي."
@@ -7804,6 +7812,10 @@
   "“اكت فاينانشال” تشتري وحدات عقاريه في القاهره الجديده ب200.4 مليون جنيه": {
     "meaning": "This transaction reallocates 200.4 million Egyptian pounds of corporate liquid capital into tangible real estate holdings on the balance sheet, altering the company's asset composition between cash reserves and non-current property assets.",
     "meaning_ar": "تعمل هذه الصفقة على إعادة توزيع 200.4 مليون جنيه من السيولة النقدية للشركة إلى أصول عقارية ملموسة ضمن الميزانية العمومية، مما يغير هيكل الأصول بين الاحتياطيات النقدية والأصول العقارية غير المتداولة."
+  },
+  "“الاتصالات” وانتل تدربان مليون مواطن سنويا علي الذكاء الاصطناعي لمده 3 سنوات": {
+    "meaning": "This initiative represents a public-private partnership between the Ministry of Communications and Information Technology and a multinational technology firm to provide nationwide technical training, expanding the specialized human capital base in artificial intelligence without altering public sector wage structures.",
+    "meaning_ar": "تمثل هذه المبادرة شراكة بين وزارة الاتصالات وتكنولوجيا المعلومات وشركة تقنية متعددة الجنسيات لتقديم تدريب فني على مستوى الجمهورية، مما يوسع قاعدة رأس المال البشري المتخصص في الذكاء الاصطناعي دون تعديل في هياكل أجور القطاع العام."
   },
   "“الاستثمار والتجاره” تطلق منحه لدعم تاهيل الشركات المصدره": {
     "meaning": "The Ministry of Investment and Foreign Trade provides non-reimbursable financing to cover the costs of quality certifications, international standards compliance, and technical readiness for export-oriented enterprises.",
