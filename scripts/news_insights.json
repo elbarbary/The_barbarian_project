@@ -1715,6 +1715,10 @@
     "meaning": "Defensive equities represent companies in sectors such as healthcare and consumer staples, which provide relatively stable cash flows regardless of economic cycles and shifts in benchmark interest rates. Capital allocation toward these lower-volatility assets provides benchmark weight stability during periods of monetary policy updates by central banks.",
     "meaning_ar": "تمثل أسهم القطاعات الدفاعية شركات في مجالات مثل الرعاية الصحية والسلع الاستهلاكية الأساسية، وتتميز بتدفقات نقدية مستقرة نسبياً بمعزل عن الدورات الاقتصادية وتغيرات أسعار الفائدة. وتوفر إعادة توجيه السيولة نحو هذه الأصول منخفضة التقلب استقراراً في الأوزان النسبية للمؤشر العام بالتزامن مع إعلانات السياسات النقدية للبنوك المركزية."
   },
+  "اسهم امازون تفقد 55 مليار دولار من قيمتها السوقيه في يوم واحد": {
+    "meaning": "Market capitalization represents the total market value of a company's outstanding shares, so a single-day decline of this scale reflects an immediate drop in the secondary market trading price across the existing share volume.",
+    "meaning_ar": "تمثل القيمة السوقية إجمالي القيمة النقدية لأسهم الشركة القائمة، ويعكس هذا الانخفاض تراجعاً فورياً في سعر تداول السهم في السوق الثانوية عبر قاعدة الأسهم المصدرة."
+  },
   "اسهم بنك اوف امريكا تفقد 22 مليار دولار من قيمتها السوقيه في يوم واحد": {
     "meaning": "A single-day contraction in market capitalization reflects a net outflow of equity capital driven by a decline in the traded share price, reducing the aggregate market value of the bank's outstanding common equity.",
     "meaning_ar": "يعكس انكماش القيمة السوقية في يوم واحد تدفقاً صافياً لرؤوس الأموال إلى خارج السهم نتيجة انخفاض سعر تداوله، مما يقلص القيمة الإجمالية للأسهم العادية المصدرة للبنك في السوق."
