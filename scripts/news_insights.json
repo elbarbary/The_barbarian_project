@@ -243,6 +243,10 @@
     "meaning": "The firm expands its private equity operational portfolio through direct equity transactions while structuring an Egyptian pound vehicle to deploy domestic currency into early-stage enterprises.",
     "meaning_ar": "توسع الشركة محفظتها التشغيلية للاستثمار المباشر عبر صفقات مساهمة مباشرة، بالتزامن مع هيكلة صندوق بالجنيه المصري لتوجيه السيولة بالعملة المحلية إلى الشركات الناشئة."
   },
+  "Billboard regulator tightens renewal rules as market nears saturation": {
+    "meaning": "Stricter renewal rules cap available outdoor advertising inventory and raise compliance overhead for media operators in an already dense market. This shifts operator competition from footprint expansion to the retention of existing prime locations.",
+    "meaning_ar": "يضع تشديد قواعد التجديد حداً أقصى للمساحات الإعلانية الخارجية المتاحة ويزيد من تكاليف الامتثال التنظيمي للشركات المشغلة في سوق مشبع. ويحوّل هذا الإجراء التنافس التشغيلي من التوسع الجغرافي إلى الحفاظ على المواقع الحالية ذات الكثافة المرتفعة."
+  },
   "Brics leaders facing their widest divisions yet in New Delhi this week, as UAE and Iran back peace call": {
     "meaning": "Geopolitical divergence within multilateral trade blocs complicates unified policy coordination on alternative payment frameworks and cross-border settlement mechanisms.",
     "meaning_ar": "يؤدي التباين الجيوسياسي داخل التكتلات التجارية متعددة الأطراف إلى تعقيد التنسيق المشترك للسياسات المتعلقة بأطر الدفع البديلة وآليات التسوية عبر الحدود."
@@ -323,6 +327,10 @@
     "meaning": "The directive centralises the approval of foreign currency financing for transport infrastructure under a specialised debt committee, conditioning project execution on sovereign debt clearance.",
     "meaning_ar": "يحصر هذا التوجيه الموافقة على التمويلات الخارجية لمشروعات البنية التحتية للنقل في لجنة إدارة الدين العام، مما يربط تنفيذ المشروعات بالحصول على اعتماد سيادي مسبق للاقتراض."
   },
+  "Gulf banks that built out IPO teams for the boom are now chasing fees in Egypt, Turkey, and India as listings at home dry up": {
+    "meaning": "Gulf investment banks reallocate existing underwriting capacity and advisory teams to cross-border mandates in active emerging markets to replace slowing domestic initial public offering activity.",
+    "meaning_ar": "تعيد بنوك الاستثمار الخليجية توجيه فرق الاستشارات وتغطية الاكتتابات الحالية نحو صفقات عابرة للحدود في أسواق ناشئة بديلة لتعويض تباطؤ طروحات الأسهم في أسواقها المحلية."
+  },
   "HSBC boosts Swvl’s working capital facility by 110% to USD 1.4 mn": {
     "meaning": "The expansion of the revolving credit line increases the company's available short-term debt capacity to finance day-to-day operational expenses and manage supplier payables. This adjustment modifies the liability structure on the balance sheet by providing access to higher foreign-currency liquidity.",
     "meaning_ar": "ترفع زيادة التسهيل الائتماني المتجدد من قدرة الشركة على الاقتراض قصير الأجل لتمويل المصروفات التشغيلية اليومية وإدارة مستحقات الموردين. ويعمل هذا التعديل على تغيير هيكل الالتزامات في الميزانية العمومية من خلال إتاحة سيولة نقدية أكبر بالعملة الأجنبية."
@@ -342,6 +350,10 @@
   "Insider trading blackout now runs on the earnings calendar only": {
     "meaning": "Under this rule, trading restrictions for corporate insiders are tied exclusively to the official earnings release schedule rather than event-driven or discretionary blackout windows. This sets fixed, predetermined dates during which insiders cannot execute transactions in company shares around financial reporting disclosures.",
     "meaning_ar": "بموجب هذه القاعدة، ترتبط فترات حظر تداول المطلعين حصرياً بالجدول الزمني الرسمي للإفصاح عن القوائم المالية بدلاً من الفترات المرتبطة بالأحداث الجوهرية غير المحددة، مما يحدد تواريخ مسبقة وثابتة يُمنع خلالها المطلعون من تنفيذ أي تعاملات على أسهم الشركة."
+  },
+  "JPMorgan’s new frontier index gives Egypt its biggest possible weighting": {
+    "meaning": "Index weighting determines the mandatory asset allocation ratios for passive funds tracking the benchmark, with Egypt assigned the maximum constituent cap permitted by the index rules.",
+    "meaning_ar": "يحدد وزن المؤشر نسب التخصيص الإلزامية للأصول للمحافظ غير النشطة التي تتبع هذا المؤشر، حيث خُصص لمصر الحد الأقصى المسموح به للمكونات وفقاً لقواعد المؤشر."
   },
   "July auto sales jump 15.6% y-o-y, as buses, trucks outpace passenger cars": {
     "meaning": "The overall volume growth reflects an operational divergence within the automotive sector, where fleet expansion and corporate logistics drive demand for commercial vehicles while foreign exchange constraints and import quotas limit passenger car inventory.",
@@ -442,6 +454,10 @@
   "The little details make the meal at Château Ayadina in New Cairo": {
     "meaning": "This highlights product differentiation and operational service standards within the food and beverage (F&B) consumer sector operating in the New Cairo commercial market.",
     "meaning_ar": "يوضح هذا تميز المنتجات ومستويات التشغيل وجودة الخدمة في قطاع الأغذية والمشروبات الاستهلاكي العامل بالسوق التجاري في القاهرة الجديدة."
+  },
+  "The operating side of polyclinic growth": {
+    "meaning": "Polyclinic expansion involves deploying multi-specialty medical infrastructure, integrating diagnostic and outpatient services, and centralizing administrative functions across healthcare facilities.",
+    "meaning_ar": "يتضمن التوسع في العيادات التخصصية المجمعة تشغيل بنية تحتية طبية متعددة التخصصات، ودمج خدمات التشخيص والعيادات الخارجية، وتوحيد الوظائف الإدارية عبر المنشآت الصحية."
   },
   "USD 2.1 tn in capex from GCC is going to self-reliance + resilience -BlackRock": {
     "meaning": "Gulf Cooperation Council entities allocate capital expenditures toward domestic infrastructure, localized supply chains, and industrial capacity rather than cross-border asset accumulation.",
