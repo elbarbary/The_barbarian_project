@@ -3587,6 +3587,10 @@
     "meaning": "The unified system centralizes the quotation, ordering, and settlement of standardized bullion products from three Egyptian and Saudi precious metal producers under a single trading interface.",
     "meaning_ar": "توحد المنظومة عمليات التسعير وعرض وتنفيذ تداولات سبائك الذهب التابعة للشركات الثلاث المصرية والسعودية عبر واجهة تداول رقمية موحدة."
   },
+  "اي صاغه: نرفض نظم الدفع بالتقسيط منذ انطلاق المنصه": {
+    "meaning": "Operating on a spot settlement basis eliminates customer credit risk and inventory financing costs for gold retail transactions.",
+    "meaning_ar": "الاعتماد على التسوية الفورية يلغي مخاطر الائتمان الاستهلاكي وتكاليف تمويل المخزون في معاملات تجارة الذهب."
+  },
   "ايديتا تحدد نهايه الحق وموعد توزيع الاسهم المجانيه": {
     "meaning": "The company executes a capital increase funded through retained earnings or reserves, setting the eligibility cutoff date and distribution date to credit newly issued bonus shares directly to shareholders' portfolios according to their existing ownership ratios.",
     "meaning_ar": "تنفذ الشركة زيادة في رأس المال ممولة من الأرباح المرحلة أو الاحتياطيات، مع تحديد تاريخ نهاية الحق وموعد التوزيع لإيداع أسهم مجانية مباشرة في محافظ المساهمين كلٌ بنسبة مساهمته الحالية."
@@ -7336,6 +7340,10 @@
   "هييه الدواء: التوسع في الانتاج المحلي والتصدير يدعم تنافسيه الصناعه الوطنيه": {
     "meaning": "Expanding domestic pharmaceutical manufacturing increases capacity utilization across production lines while export operations generate foreign currency inflows to fund imported active pharmaceutical ingredients (APIs).",
     "meaning_ar": "يؤدي التوسع في التصنيع الدوائي المحلي إلى رفع معدلات تشغيل خطوط الإنتاج، بينما توفر عمليات التصدير تدفقات من النقد الأجنبي لتمويل استيراد المواد الخام الفعالة."
+  },
+  "وادي النيل تتابع مستجدات تنفيذ المستشفي الجامعي بدمياط وتبحث تسريع معدلات الانجاز": {
+    "meaning": "Wadi El Nile monitors construction timelines and resource deployment for the Damietta University Hospital project to align contractor execution with contractual delivery schedules.",
+    "meaning_ar": "تتابع شركة وادي النيل الجداول الزمنية ومعدلات توجيه الموارد الإنشائية في مشروع مستشفى دمياط الجامعي لمطابقة وتيرة التنفيذ بالمواصفات والمدد التعاقدية المحددة."
   },
   "واردات السيارات الملاكي واجزاوها تتراجع 4.2% الي 1.9 مليار دولار خلال 6 اشهر": {
     "meaning": "A 4.2% decline in passenger car and auto component imports reflects a contraction in foreign currency outflows dedicated to the automotive sector alongside adjusted inventory procurement by domestic vehicle distributors and assemblers.",
