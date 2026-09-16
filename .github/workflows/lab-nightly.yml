@@ -116,8 +116,10 @@ jobs:
         with:
           path: ~/.cache/esthmr-lab
           # Named by every pinned revision in it, so adding a model saves a
-          # new cache instead of downloading its weights every night.
-          key: lab-weights-kronos-small-901c26c1-toto2-a7bab288-sundial-3212e425
+          # new cache instead of downloading its weights every night. `cache2`:
+          # the first key was saved empty (neural.py did not expand the `~`
+          # below) and an exact hit is never saved over.
+          key: lab-weights-cache2-kronos-small-901c26c1-toto2-a7bab288-sundial-3212e425
           restore-keys: lab-weights-
 
       - name: Cache pip

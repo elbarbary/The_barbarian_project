@@ -67,8 +67,15 @@ import forecast as fc
 
 # Where the weights live. A single directory so a CI cache has one thing to
 # restore, and so nothing writes into a home directory that will not exist.
+#
+# Expanded, because the workflow says `~/.cache/esthmr-lab` and nothing
+# between YAML and Python expands a tilde. Unexpanded it was a folder named
+# `~` inside the checkout: every night downloaded all the weights into it,
+# while actions/cache restored and saved /home/runner/.cache/esthmr-lab, which
+# stayed empty (9,397 bytes) under a key that matched exactly and so was never
+# saved again.
 CACHE = pathlib.Path(os.environ.get("ESTHMR_LAB_CACHE")
-                     or (pathlib.Path.home() / ".cache" / "esthmr-lab"))
+                     or (pathlib.Path.home() / ".cache" / "esthmr-lab")).expanduser()
 
 # The Kronos checkout. It is not a pip package: the model class lives in the
 # repository, so the source has to be on the path. `ESTHMR_KRONOS_SOURCE`

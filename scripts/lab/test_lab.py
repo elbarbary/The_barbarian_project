@@ -1665,6 +1665,34 @@ class WholeCandleTest(unittest.TestCase):
         self.assertNotEqual(self.whole(bars)[-1]["date"], bars[-1]["date"])
 
 
+class WeightsCacheTest(unittest.TestCase):
+    """The weights land where the workflow caches them."""
+
+    def test_a_tilde_in_the_cache_path_is_the_home_directory(self):
+        # lab-nightly.yml sets ESTHMR_LAB_CACHE: ~/.cache/esthmr-lab and
+        # actions/cache saves $HOME/.cache/esthmr-lab. Unexpanded, the models
+        # went to a folder named `~` in the checkout and the cache stayed empty.
+        import importlib
+        import os
+        from unittest import mock
+        import neural
+        with mock.patch.dict(os.environ, {"ESTHMR_LAB_CACHE": "~/.cache/esthmr-lab"}):
+            reloaded = importlib.reload(neural)
+            self.assertTrue(reloaded.CACHE.is_absolute(), reloaded.CACHE)
+            self.assertEqual(reloaded.CACHE, pathlib.Path.home() / ".cache" / "esthmr-lab")
+        importlib.reload(neural)
+
+    def test_the_workflow_caches_the_directory_the_forecast_writes(self):
+        workflow = (pathlib.Path(__file__).resolve().parents[2] / ".github" / "workflows" / "lab-nightly.yml").read_text()
+        cached = {line.split("path:", 1)[1].strip() for line in workflow.splitlines()
+                  if "path:" in line and "esthmr-lab" in line}
+        told = {line.split("ESTHMR_LAB_CACHE:", 1)[1].strip() for line in workflow.splitlines()
+                if "ESTHMR_LAB_CACHE:" in line}
+        self.assertEqual(len(told), 1, told)
+        self.assertEqual({pathlib.Path(p).expanduser() for p in cached},
+                         {pathlib.Path(p).expanduser() for p in told})
+
+
 class TrialModelTest(unittest.TestCase):
     """A new forecaster is timed by name before it joins the nightly run."""
 
