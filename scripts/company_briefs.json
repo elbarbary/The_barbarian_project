@@ -684,12 +684,12 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/ARAB/profile",
   "record": {
-   "filings": 65,
+   "filings": 66,
    "first_filing": "2022-03-08",
    "trading_suspensions": 0,
    "trading_resumptions": 1,
    "capital_increases": 3,
-   "general_assemblies": 6,
+   "general_assemblies": 7,
    "periods_reported": 23,
    "loss_making_periods": 5
   },
