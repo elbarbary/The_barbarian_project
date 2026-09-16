@@ -4324,6 +4324,10 @@
     "meaning": "Regulatory inspections enforce compliance within the subsidized bread distribution network by penalizing illicit flour diversion and tracking quotas, directly controlling public grain supply chains and operational leakage.",
     "meaning_ar": "تفرض الحملات التفتيشية الامتثال التشغيلي داخل شبكة توزيع الخبز المدعم عبر ضبط محاولات تسريب الدقيق وتتبع الحصص التموينية، مما يمثل آلية رقابية مباشرة لضبط سلاسل إمداد الحبوب الحكومية."
   },
+  "تنسيق مصري سوداني لتعزيز التعاون في مشروعات التنميه الزراعيه والامن الغذايي": {
+    "meaning": "Bilateral agricultural coordination establishes cross-border frameworks for shared cultivation, supply chain integration, and technical exchange between Egyptian agribusinesses and Sudanese landholders.",
+    "meaning_ar": "يؤسس التنسيق الزراعي الثنائي أطر عمل مشتركة للزراعة وتكامل سلاسل التوريد والتبادل الفني بين الشركات الزراعية المصرية وأصحاب الأراضي في السودان."
+  },
   "تنظيم الاتصالات: 57 مليون اجمالي عدد المحافظ الالكترونيه خلال النصف الاول بنمو 23%": {
     "meaning": "The expansion in e-wallet accounts increases digital transaction volumes across telecommunications operators and banking networks, shifting payment settlements from physical cash to electronic clearing systems.",
     "meaning_ar": "يؤدي ارتفاع عدد المحافظ الإلكترونية إلى زيادة حجم المعاملات الرقمية عبر شبكات شركات الاتصالات والقطاع المصرفي، مما يحول تسوية المدفوعات من النقد السائل إلى أنظمة المقاصة الإلكترونية."
@@ -5461,6 +5465,10 @@
     "meaning": "Treasury share purchases reallocate liquid cash into the company's own equity, temporarily reducing the active free float circulating on the exchange and categorising these shares as non-voting equity on the balance sheet.",
     "meaning_ar": "تؤدي عملية شراء أسهم الخزينة إلى تحويل جزء من السيولة النقدية للشركة إلى حقوق ملكيتها، مما يقلل عدد الأسهم حرة التداول المتاحة في البورصة ويصنف هذه الأسهم كأصول خالية من حقوق التصويت في الميزانية العمومية."
   },
+  "شركه تحالف مستقبل مصر الطبي: منظومه متكامله للسياحه العلاجيه تبدا قبل وصول المريض وتمتد لما بعد العلاج": {
+    "meaning": "This model establishes an integrated medical tourism service chain that links pre-arrival diagnostics and logistics directly to clinical treatment and post-discharge follow-up care.",
+    "meaning_ar": "يؤسس هذا النموذج سلسلة خدمات متكاملة للسياحة العلاجية تربط إجراءات التشخيص والترتيبات اللوجستية السابقة للوصول بالعلاج السريري والرعاية اللاحقة بعد المغادرة."
+  },
   "شركه تراي كيم لكيماويات البناء تستهدف 800 مليون جنيه مبيعات بنهايه 2026": {
     "meaning": "Setting a sales target of EGP 800 million establishes an operational benchmark that aligns production capacity, working capital allocation, and supply contracts in the construction chemicals sector.",
     "meaning_ar": "يحدد استهداف مبيعات بقيمة 800 مليون جنيه معياراً تشغيلياً لتنظيم الطاقة الإنتاجية، وتخصيص رأس المال العامل، وإدارة عقود التوريد في قطاع كيماويات البناء."
@@ -6597,6 +6605,10 @@
     "meaning": "Bilateral defense cooperation establishes institutional frameworks for technology transfer, joint manufacturing, and supply chain coordination between state-affiliated defense industrial entities.",
     "meaning_ar": "يضع التعاون في الصناعات الدفاعية أطراً مؤسسية لنقل التكنولوجيا والتصنيع المشترك وتنسيق سلاسل التوريد بين الكيانات الصناعية الدفاعية التابعة للدولة."
   },
+  "مصر والسودان تناقشان تعزيز التعاون في المشروعات الزراعيه والامن الغذايي": {
+    "meaning": "Bilateral agricultural initiatives involve joint investments in crop cultivation, cross-border supply chain integration, and shared logistics for food commodities between the two countries.",
+    "meaning_ar": "تتضمن المبادرات الزراعية الثنائية استثمارات مشتركة في زراعة المحاصيل، وتكامل سلاسل الإمداد عبر الحدود، ومشاركة البنية اللوجستية للسلع الغذائية بين البلدين."
+  },
   "مصر والهند تبحثان تعزيز التعاون الصناعي والاستثماري": {
     "meaning": "Bilateral industrial cooperation frameworks between Egypt and India involve cross-border joint ventures, technical knowledge transfers, and the establishment of manufacturing facilities in sectors such as chemicals, engineering, and pharmaceuticals.",
     "meaning_ar": "تتضمن أطر التعاون الصناعي الثنائي بين مصر والهند إنشاء مشروعات مشتركة عابرة للحدود، ونقل المعرفة الفنية، وإقامة منشآت تصنيعية في قطاعات تشمل الصناعات الكيماوية والهندسية والدوائية."
@@ -6916,6 +6928,10 @@
   "نيسان وشيري وام جي ثلاثي قياده مبيعات سيارات الركوب خلال 7 اشهر": {
     "meaning": "These three automotive brands capture the largest volume share of passenger vehicle registrations through localized assembly operations and established distribution networks in the domestic market.",
     "meaning_ar": "تستحوذ هذه العلامات التجارية الثلاث على الحصة الكبرى من حجم تسجيلات سيارات الركوب عبر خطوط التجميع المحلي وشبكات التوزيع القائمة في السوق المحلي."
+  },
+  "نيسان: بريطانيا قد تضطر الي فرض رسوم جمركيه علي السيارات الصينيه": {
+    "meaning": "Tariffs on vehicle imports alter the cost structure for foreign manufacturers by levying border duties, shifting the relative pricing dynamics between domestic producers and foreign exporters within the host market.",
+    "meaning_ar": "يؤدي فرض الرسوم الجمركية على واردات السيارات إلى تعديل هيكل التكاليف للمصنعين الأجانب عبر تطبيق رسوم حدودية، مما يغير ديناميكيات الأسعار النسبية بين المنتجين المحليين والمصدرين الأجانب داخل السوق المضيف."
   },
   "هاير مصر تضخ 80 مليون دولار في المرحله الثانيه لمجمعها الصناعي": {
     "meaning": "This foreign direct investment allocates $80 million in capital expenditure to add physical production lines and expand manufacturing capacity at the company's local industrial complex.",
