@@ -424,6 +424,15 @@ class BreadthTest(unittest.TestCase):
             b["listed"])
         self.assertEqual(b["listed"], len(table["rows"]))
 
+    def test_breadth_counts_the_capture_not_each_companys_last_trade(self):
+        doc = bm.build()
+        market = json.loads(bm.MARKET.read_text(encoding="utf-8"))
+        quotes = list(market["stocks"].values())
+        idle = sum(isinstance(r.get("volume"), (int, float)) and r["volume"] <= 0
+                   for r in quotes)
+        self.assertEqual(doc["breadth"]["idle"], idle)
+        self.assertEqual(doc["breadth"]["listed"], len(quotes))
+
     def test_breadth_names_no_company(self):
         # It is allowed to lead the page because it selects nothing. The day
         # it carries a ticker it has become a different kind of statement.
@@ -588,12 +597,14 @@ class OneSessionTest(unittest.TestCase):
         row = self.row(entry, bars, "2026-09-10", date="2026-09-10")
         self.assertEqual((row["as_of"], row["volume"]), ("2026-09-09", 250))
 
-    def test_a_company_that_found_no_buyer_closes_the_session_at_nought(self):
+    def test_a_no_trade_capture_does_not_advance_the_measurement_session(self):
         bars = archive_to("2026-09-14", close=23.0, volume=394)
         entry = {"close": 23, "previous_close": 23.0, "volume": 0}
         row = self.row(entry, bars, "2026-09-15")
-        self.assertEqual((row["as_of"], row["close"], row["volume"], row["change_1"]),
-                         ("2026-09-15", 23, 0, 0.0))
+        self.assertEqual((row["as_of"], row["close"], row["volume"]),
+                         ("2026-09-14", 23, 394))
+        self.assertEqual(row["sessions_held"], len(bars))
+        self.assertEqual(row, self.row(entry, bars))
 
     def test_a_holiday_the_vendor_fills_with_the_last_session_is_not_a_session(self):
         # 27 August 2026. Every company that traded in the closing capture
@@ -609,7 +620,7 @@ class OneSessionTest(unittest.TestCase):
             "BBB": {"close": 20.0, "previous_close": 20.4, "volume": 7_000},
             "CCC": idle}}
         self.assertEqual(len(bm.with_closing_bar(archives["CCC"], idle, "2026-08-27")),
-                         len(archives["CCC"]) + 1)
+                         len(archives["CCC"]))
         self.assertIsNone(bm.closing_session(market, archives))
         # The same archives beside a capture that moved: a session.
         market["stocks"]["AAA"] = {"close": 10.2, "previous_close": 10.0, "volume": 6_100}

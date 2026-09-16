@@ -234,3 +234,22 @@ class TheSameMoveInTwoDirections(Harness):
         with self.force_disagreement():      # up one pound, up five per cent
             self.assertEqual(self.run_build(body, quotes_only=True), 0)
         self.assertTrue(self.published(), "nothing was published at all")
+
+
+class HolidayBuildPaths(Harness):
+    def test_both_build_paths_publish_the_prior_session_on_a_replay(self):
+        from test_market_api import HolidayCaptureTest
+        body, history = HolidayCaptureTest().fixture()
+        with mock.patch.object(bma, "history_union", return_value=history):
+            for fast in (False, True):
+                self.assertEqual(self.run_build(body, quotes_only=fast), 0)
+                doc = json.loads((self.api / "market.json").read_text())
+                self.assertEqual((doc["date"], doc["is_close"]), ("2026-08-26", True))
+                self.assertEqual(doc["session_source"], "previous-session-replay")
+                self.assertEqual(doc["captured_at"], body["asOf"])
+                self.assertEqual((self.api / "market.json").read_bytes(),
+                                 (self.fixtures / "market.json").read_bytes())
+
+
+if __name__ == "__main__":
+    unittest.main()

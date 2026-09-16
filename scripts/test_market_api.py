@@ -147,3 +147,116 @@ class BeforeTheOpenTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class TradeSessionHistoryTest(unittest.TestCase):
+    def test_writer_normalizes_held_and_new_zero_bars_idempotently(self):
+        import json
+        import tempfile
+        from unittest.mock import patch
+        import build_market_api as bma
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            trade = {"date": "2026-09-09", "close": 23, "volume": 250}
+            zero = {"date": "2026-09-10", "close": 23, "volume": 0}
+            unknown = {"date": "2026-09-13", "close": 23}
+            path = root / "AAA.json"
+            path.write_text(json.dumps({"ticker": "AAA", "bars": [trade, zero]}))
+            with patch.object(bma, "PRICES", root):
+                self.assertEqual(bma.persist_history({"AAA": [trade, zero, unknown]}), 1)
+                self.assertEqual(json.loads(path.read_text())["bars"], [trade, unknown])
+                before = path.read_bytes()
+                self.assertEqual(bma.persist_history({"AAA": [trade, zero, unknown]}), 0)
+                self.assertEqual(path.read_bytes(), before)
+                # An all-zero existing store becomes an empty series, not a
+                # deleted listing, and a held trade is never replaced by zero.
+                path.write_text(json.dumps({"ticker": "AAA", "bars": [zero]}))
+                self.assertEqual(bma.persist_history({"AAA": []}), 1)
+                self.assertEqual(json.loads(path.read_text())["bars"], [])
+
+    def test_migration_reads_only_the_durable_archive(self):
+        import json
+        import tempfile
+        from unittest.mock import patch
+        import build_market_api as bma
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            prices = root / "prices"
+            prices.mkdir()
+            path = prices / "AAA.json"
+            path.write_text(json.dumps({"ticker": "AAA", "bars": [
+                {"date": "2026-09-09", "close": 23, "volume": 0}]}))
+            (root / "daily_scan_stale.json").write_text(json.dumps({"records": [
+                {"ticker": "AAA", "recentSplitAdjustedBars": [
+                    {"date": "2026-09-10", "close": 23, "volume": 250}]}]}))
+            with patch.object(bma, "PRICES", prices), patch.object(bma, "WORK", root):
+                self.assertEqual(bma.normalize_history(), 1)
+                self.assertEqual(json.loads(path.read_text())["bars"], [])
+                self.assertEqual(bma.normalize_history(), 0)
+
+    def test_night_and_morning_scans_produce_identical_history(self):
+        import json
+        import tempfile
+        from unittest.mock import patch
+        import build_market_api as bma
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            path = root / "daily_scan_test.json"
+            trade = {"date": "2026-09-09", "close": 23, "volume": 250}
+            zero = {"date": "2026-09-10", "close": 23, "volume": 0}
+            with patch.object(bma, "WORK", root), patch.object(bma, "PRICES", root / "prices"):
+                def history(bars):
+                    path.write_text(json.dumps({"records": [{"ticker": "AAA", "recentSplitAdjustedBars": bars}]}))
+                    return bma.history_union()
+                self.assertEqual(history([trade, zero]), history([trade]))
+                self.assertEqual(history([trade]), {"AAA": [trade]})
+                bma.PRICES.mkdir()
+                (bma.PRICES / "AAA.json").write_text(json.dumps({"ticker": "AAA", "bars": [trade]}))
+                self.assertEqual(history([dict(trade, volume=0)]), {"AAA": [trade]})
+
+
+class HolidayCaptureTest(unittest.TestCase):
+    def fixture(self):
+        # Same shape as 27 August: all active companies repeat 26 August,
+        # plus an idle listing. Sized above the broad-market quorum.
+        records = [{"ticker": f"T{i}", "close": 10+i, "volume": 100+i}
+                   for i in range(25)]
+        history = {r["ticker"]: [dict(r, date="2026-08-26")] for r in records}
+        records.append({"ticker": "IDLE", "close": 5, "volume": 0})
+        return {"asOf": "2026-08-27T16:00:00Z", "records": records}, history
+
+    def test_holiday_and_following_weekend_keep_the_real_close(self):
+        from build_market_api import capture_session
+        scan, history = self.fixture()
+        for stamp in ("2026-08-27T08:00:00Z", "2026-08-27T16:00:00Z", "2026-08-29T16:35:00Z"):
+            scan["asOf"] = stamp
+            self.assertEqual(capture_session(scan, history),
+                             ("2026-08-26", True, "previous-session-replay"))
+
+    def test_one_changed_quote_is_evidence_the_market_is_trading(self):
+        from build_market_api import capture_session
+        scan, history = self.fixture()
+        scan["records"][0]["volume"] += 1
+        self.assertEqual(capture_session(scan, history)[:2], ("2026-08-27", True))
+        scan["asOf"] = "2026-08-27T08:00:00Z"
+        self.assertEqual(capture_session(scan, history)[:2], ("2026-08-27", False))
+
+    def test_thin_or_incomplete_evidence_never_relabels_the_market(self):
+        from build_market_api import capture_session
+        scan, history = self.fixture()
+        self.assertEqual(capture_session(scan, {})[2], "clock")
+        del history["T0"]
+        self.assertEqual(capture_session(scan, history)[2], "clock")
+        scan["records"] = scan["records"][:3]
+        self.assertEqual(capture_session(scan, history)[2], "clock")
+
+    def test_an_archive_already_holding_today_is_not_a_holiday(self):
+        from build_market_api import capture_session
+        scan, history = self.fixture()
+        for bars in history.values():
+            bars[0]["date"] = "2026-08-27"
+        self.assertEqual(capture_session(scan, history)[2], "clock")
+
+
+if __name__ == "__main__":
+    unittest.main()

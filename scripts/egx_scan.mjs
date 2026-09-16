@@ -63,7 +63,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import WebSocket from "ws";
-import { fetchHistories, statusOf } from "./egx_history.mjs";
+import { fetchHistories, statusOf, completedTradeBars } from "./egx_history.mjs";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -243,7 +243,10 @@ for (const record of records) {
   // figure the app shows becomes a comparison between a partial day and twenty
   // whole ones. So every derived field below reads `completedBars`, and today's
   // bar is kept to one side, labelled, in `currentSessionBar`.
-  const completedBars = allBars.filter((bar) => barDate(bar) < runDate);
+  // A zero-volume chart placeholder is not a traded session. Some chart
+  // responses include these only overnight; do not let fetch time choose
+  // the return/volume window. Preserve unknown volume as unknown.
+  const completedBars = completedTradeBars(allBars, runDate);
   const currentSessionBar = allBars.find((bar) => barDate(bar) === runDate) || null;
   record.historyBars = allBars.length;
   record.completedHistoryBars = completedBars.length;

@@ -97,24 +97,24 @@ COLUMNS: dict[str, str] = {
     # — identity ——————————————————————————————————————————————————
     "ticker": "The exchange's code for the company.",
     "sector": "The sector the exchange files it under.",
-    "as_of": "The date of the newest session behind this row.",
+    "as_of": "The newest held trade session; quote date when no trade history exists.",
     # — the tape, from this company's own record ————————————————————
     "close": "Last completed close, in pounds.",
     "volume": "Shares traded in that session.",
     "traded_value": "Close times volume, in pounds.",
-    "median_volume_20": "Median volume of the previous 20 sessions — the denominator.",
-    "median_traded_value_20": "Median traded value of the previous 20 sessions, in pounds.",
+    "median_volume_20": "Median volume of the previous 20 trade sessions — the denominator.",
+    "median_traded_value_20": "Median traded value of the previous 20 trade sessions, in pounds.",
     "relative_volume_20": "Volume against that median. Undefined when the median is zero.",
-    "change_1": "Percentage change over 1 completed session.",
-    "change_5": "Percentage change over 5 completed sessions.",
-    "change_20": "Percentage change over 20 completed sessions.",
-    "big_move_5": "Sessions in the last 5 that moved at least 19.5% on the close.",
-    "sessions_held": "How many completed sessions this row stands on: the "
+    "change_1": "Percentage change over 1 completed trade session.",
+    "change_5": "Percentage change over 5 completed trade sessions.",
+    "change_20": "Percentage change over 20 completed trade sessions.",
+    "big_move_5": "Trade sessions in the last 5 that moved at least 19.5% on the close.",
+    "sessions_held": "How many held trade sessions this row stands on: the "
                      "company's archive, and the session that just closed "
                      "once it is folded in.",
     # — what it has filed ——————————————————————————————————————————
     "last_filing_date": "Publication date of its newest filing.",
-    "sessions_since_filing": "Completed sessions since that filing.",
+    "sessions_since_filing": "Held trade sessions since that filing.",
     "filings_30d": "Filings published in the last 30 days.",
     "last_filing_type": "The classified type of that newest filing.",
     "last_filing_title": "Its heading, as filed.",
@@ -202,7 +202,8 @@ def bars_for(ticker: str) -> list[dict]:
 
 def newest_bar(bars: list[dict]) -> dict | None:
     """The newest bar with a close: the session `measures.as_of` dates a row by."""
-    usable = [b for b in bars if isinstance(b.get("close"), (int, float))]
+    usable = [b for b in bars if isinstance(b.get("close"), (int, float))
+              and b.get("volume") != 0]
     return usable[-1] if usable else None
 
 
@@ -309,11 +310,10 @@ def with_closing_bar(bars: list[dict], entry: dict, session: str) -> list[dict]:
     A quote that repeats the newest held bar, shares and all, is the vendor
     still showing that session. WATP's captures on 10 and 13 September both
     repeated its 9 September bar, 23 pounds on 250 shares, and the archive
-    holds neither day. A company that found no buyer is added at nought,
-    which is what the capture says and what `breadth` counts as idle. The
-    archive keeps a no-trade session only when a late-night scan writes it,
-    so by morning such a row can step back to its last traded session. Both
-    rows name the session they describe.
+    holds neither day. A company that found no buyer adds no history bar.
+    Both evening and morning measurements therefore stay on its newest trade.
+    Breadth reads the market capture separately, so an idle company is still
+    counted as idle today rather than reusing its last traded volume.
     """
     last = newest_bar(bars)
     if last is None or not last.get("date") or str(last["date"]) >= session:
@@ -322,7 +322,7 @@ def with_closing_bar(bars: list[dict], entry: dict, session: str) -> list[dict]:
     previous = entry.get("previous_close")
     if not isinstance(close, (int, float)) or close <= 0:
         return bars
-    if not isinstance(volume, (int, float)) or volume < 0:
+    if not isinstance(volume, (int, float)) or volume <= 0:
         return bars
     if (not isinstance(previous, (int, float))
             or round(previous, 4) != round(last["close"], 4)):
@@ -514,6 +514,7 @@ def row_for(ticker: str, session: dict, directory: dict,
     on, or None. `bars` is the company's archive, when the caller has read it.
     """
     bars = bars_for(ticker) if bars is None else bars
+    bars = [b for b in bars if b.get("volume") != 0]
     if closed:
         bars = with_closing_bar(bars, session, closed)
     row: dict = {"ticker": ticker}
@@ -716,7 +717,9 @@ def build(today: datetime.date | None = None) -> dict:
                     "الشركات تظهر وكم عددها.",
         "columns": COLUMNS,
         "coverage": coverage(rows),
-        "breadth": breadth(rows),
+        "breadth": breadth([{"volume": r.get("volume"),
+                             "change_1": r.get("change_percent")}
+                            for r in stocks.values()]),
         "companies": len(rows),
         "rows": rows,
     }

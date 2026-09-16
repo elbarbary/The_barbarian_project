@@ -313,3 +313,11 @@ export async function fetchHistories(records, options) {
   }
   return { answers, warnings };
 }
+
+// Chart snapshots can include a zero-volume placeholder for the capture day
+// which disappears from the historical response the next morning. Keep the
+// socket payload raw for diagnostics; normalize only completed trade history.
+export function completedTradeBars(bars, runDate) {
+  return bars.filter((bar) =>
+    new Date(bar.timestamp * 1000).toISOString().slice(0, 10) < runDate && bar.volume !== 0);
+}

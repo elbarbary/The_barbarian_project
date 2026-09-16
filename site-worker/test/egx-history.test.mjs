@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { fetchHistories, frame, parseMessages, statusOf } from '../../scripts/egx_history.mjs';
+import { fetchHistories, frame, parseMessages, statusOf, completedTradeBars } from '../../scripts/egx_history.mjs';
 
 // A chart socket that answers the way TradingView's did on 15 Sep 2026, by
 // listing: `live` sends bars then series_completed; `dead` — a listing that has
@@ -142,4 +142,16 @@ test('a socket that is refused outright is given up after one pass', async () =>
   assert.equal(opened.length, 3, 'twelve symbols, five a socket, one pass');
   assert.ok(records.every(r => statusOf(r, answers) === 'missing'));
   assert.ok(warnings.every(w => w.pass === 1 && /403/.test(w.message)));
+});
+
+
+test('night placeholders and morning omissions give the same completed trade history', () => {
+  const trade = { timestamp: Date.parse('2026-09-09T07:00:00Z') / 1000, close: 23, volume: 250 };
+  const zero = { timestamp: Date.parse('2026-09-10T07:00:00Z') / 1000, close: 23, volume: 0 };
+  const unknown = { timestamp: Date.parse('2026-09-08T07:00:00Z') / 1000, close: 23 };
+  assert.deepEqual(completedTradeBars([unknown, trade, zero], '2026-09-11'), [unknown, trade]);
+  assert.deepEqual(completedTradeBars([unknown, trade], '2026-09-11'), [unknown, trade]);
+  assert.deepEqual(completedTradeBars([trade], '2026-09-09'), []);
+  // Equal positive bars alone are not proof of a replay: both trades survive.
+  assert.equal(completedTradeBars([trade, { ...zero, volume: 250 }], '2026-09-11').length, 2);
 });

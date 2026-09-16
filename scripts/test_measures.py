@@ -66,6 +66,14 @@ class RelativeVolumeTest(unittest.TestCase):
         self.assertIsNone(m.rv20(flat(12)))
         self.assertIsNotNone(m.rv20(flat(21)))
 
+    def test_unknown_volume_is_not_a_zero_in_the_normal(self):
+        rows = flat(21)
+        rows[5].pop("volume")
+        self.assertIsNone(m.rv20(rows))
+        self.assertIsNone(m.median_volume(rows))
+        self.assertIsNone(m.median_traded_value(rows))
+        self.assertEqual(m.change_over(rows, 5), 0.0)
+
     def test_no_volume_on_the_newest_bar_is_undefined(self):
         rows = flat(20) + [{"date": "2026-09-01", "close": 10.0}]
         self.assertIsNone(m.rv20(rows))
@@ -197,12 +205,19 @@ class AbsenceTest(unittest.TestCase):
                       m.as_of(empty)):
             self.assertIsNone(value)
 
-    def test_a_real_zero_survives(self):
-        # No shares changed hands is a fact about the session and is kept.
-        rows = flat(20, volume=100) + bars(("2026-09-01", 10.0, 0))
-        self.assertEqual(m.rv20(rows), 0.0)
-        self.assertEqual(m.traded_value(rows), 0.0)
-        self.assertEqual(m.big_move_sessions(flat(6)), 0)
+    def test_no_trade_placeholders_never_change_a_measurement_window(self):
+        held = flat(21, volume=100)
+        padded = held + bars(("2026-09-01", 10.0, 0))
+        self.assertEqual(m.rv20(padded), m.rv20(held))
+        self.assertEqual(m.traded_value(padded), m.traded_value(held))
+        self.assertEqual(m.as_of(padded), m.as_of(held))
+        self.assertEqual(m.change_over(padded, 5), m.change_over(held, 5))
+        self.assertEqual(m.big_move_sessions(padded), m.big_move_sessions(held))
+        self.assertEqual(m.sessions_since(padded, "2026-08-01"),
+                         m.sessions_since(held, "2026-08-01"))
+        self.assertEqual(m.change_over(held, 5), 0.0)  # real measured zero survives
+        self.assertIsNone(m.as_of(flat(30, volume=0)))
+        self.assertIsNone(m.rv20(flat(30, volume=0)))
 
     def test_a_bar_with_no_close_is_a_session_nobody_collected(self):
         # Not a session at zero. Reading a gap in the archive as a price of

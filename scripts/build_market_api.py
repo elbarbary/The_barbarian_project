@@ -18,6 +18,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import collections
 import datetime
 import json
 import pathlib
@@ -405,6 +406,11 @@ def history_union() -> dict[str, list[dict]]:
                     # on 14 of the last 60 days" is the single most useful
                     # thing we can tell somebody about getting their money out.
                     volume = clean(bar.get("volume"))
+                    # Discard the placeholder before merging: it must not
+                    # shadow an archived positive-volume bar on the same date.
+                    if volume == 0:
+                        merged.setdefault(ticker, {})
+                        continue
                     point = {"date": date, "close": round(float(close), 4)}
                     if volume is not None:
                         point["volume"] = int(volume)
@@ -431,7 +437,7 @@ def history_union() -> dict[str, list[dict]]:
                 merged.setdefault(ticker, {}).setdefault(date, point)
 
     return {
-        ticker: [bars[d] for d in sorted(bars)]
+        ticker: [bars[d] for d in sorted(bars) if bars[d].get("volume") != 0]
         for ticker, bars in merged.items()
     }
 
@@ -442,7 +448,9 @@ KEEP_SESSIONS = 260
 
 
 def persist_history(union: dict[str, list[dict]]) -> int:
-    """Write the merged series back, so a scan that skips a company cannot
+    """Write trade-session history; explicit zero-volume placeholders are
+    removed from both new and held bars. No missing days are backfilled.
+    A scan that skips a company cannot
     erase it.
 
     `history_union` already takes the union of every scan on disk and the
@@ -465,8 +473,6 @@ def persist_history(union: dict[str, list[dict]]) -> int:
     PRICES.mkdir(parents=True, exist_ok=True)
     written = 0
     for ticker, bars in union.items():
-        if not bars:
-            continue
         path = PRICES / f"{ticker}.json"
         held = {}
         source = "scan"
@@ -477,13 +483,17 @@ def persist_history(union: dict[str, list[dict]]) -> int:
                 held = {b["date"]: b for b in doc.get("bars", []) if b.get("date")}
             except (json.JSONDecodeError, OSError):
                 held = {}
-        merged = dict(held)
+        # Normalize held history too: first-writer wins must not make
+        # a vendor zero-volume placeholder permanent. Unknown volume stays.
+        merged = {d: b for d, b in held.items() if b.get("volume") != 0}
         for bar in bars:
+            if bar.get("volume") == 0:
+                continue
             # A bar already held wins: the durable copy came from a source that
             # carried the whole series, and a scan bar is a partial view of the
             # same session. Only genuinely new dates are added.
             merged.setdefault(bar["date"], bar)
-        if len(merged) == len(held) and held:
+        if merged == held and path.exists():
             continue
         body = {
             "ticker": ticker,
@@ -496,6 +506,20 @@ def persist_history(union: dict[str, list[dict]]) -> int:
         )
         written += 1
     return written
+
+
+def normalize_history() -> int:
+    """Migrate explicit zero-volume placeholders using the canonical writer.
+
+    Read only the durable archive: an unrelated old local scan must not add
+    bars during this migration. Positive and unknown-volume history survives;
+    no missing dates, replayed positive quotes, or sealed records are guessed.
+    """
+    union = {}
+    for path in sorted(PRICES.glob("*.json")):
+        doc = json.loads(path.read_text(encoding="utf-8"))
+        union[doc.get("ticker") or path.stem] = doc.get("bars") or []
+    return persist_history(union)
 
 
 def published_profile(ticker: str) -> dict:
@@ -757,6 +781,44 @@ def session_date(as_of: str | None) -> str | None:
     return trading_session(cairo).isoformat()
 
 
+def capture_session(scan: dict, union: dict[str, list[dict]]) -> tuple[str | None, bool, str]:
+    """Date a capture by observed trading when a whole-market replay proves
+    the clock's candidate session has not happened. This is not a holiday
+    calendar: before the first changed quote it also truthfully reports the
+    previous close. No network dependency, shared by both build paths.
+
+    At least twenty priced, traded names, all quotes unchanged, and ninety
+    percent on one archived session are required. Thin names, a partial
+    archive, or a quiet single stock cannot
+    move the market's date. Unknown cases retain the ordinary clock rule.
+    """
+    candidate = session_date(scan.get("asOf"))
+    closed = is_after_close(scan.get("asOf"))
+    quotes = [r for r in scan.get("records", [])
+              if isinstance(r.get("volume"), (int, float)) and r["volume"] > 0
+              and isinstance(r.get("close"), (int, float))]
+    newest = {}
+    for r in quotes:
+        bars = [b for b in union.get(r.get("ticker"), [])
+                if b.get("date") and b["date"] <= (candidate or "")
+                and isinstance(b.get("volume"), (int, float))
+                and b["volume"] > 0]
+        if bars:
+            newest[r.get("ticker")] = max(bars, key=lambda b: b["date"])
+    dates = collections.Counter(b["date"] for b in newest.values())
+    if len(quotes) < 20 or not dates:
+        return candidate, closed, "clock"
+    previous = max(dates, key=lambda d: (dates[d], d))
+    if previous >= candidate:
+        return candidate, closed, "clock"
+    replayed = all((b := newest.get(r.get("ticker")))
+                   and b["date"] <= previous and r["close"] == b["close"]
+                   and r["volume"] == b.get("volume") for r in quotes)
+    if replayed and dates[previous] / len(quotes) >= 0.9:
+        return previous, True, "previous-session-replay"
+    return candidate, closed, "clock"
+
+
 def previous_close(
     history: list[dict], session: str, close: float, change_pct: float | None
 ) -> float | None:
@@ -828,7 +890,6 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
 
     # Whether this scan knows about broker scope at all — see `tradable_flag`.
     scan_has_scope = any("thndrScope" in r for r in records)
-    session = session_date(scan.get("asOf")) or scan["asOf"][:10]
 
     studied_path = API / "cash-or-trash" / "index.json"
     researched = set()
@@ -837,6 +898,8 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
         researched = {c["ticker"] for c in studied["companies"]}
 
     union = history_union()
+    session, closed, session_source = capture_session(scan, union)
+    session = session or scan["asOf"][:10]
     # Make the union durable before anything is built from it. A scan is
     # ephemeral and this is the only moment its bars exist anywhere.
     #
@@ -1112,7 +1175,8 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
     snapshot = {
         "date": session,
         "captured_at": scan.get("asOf"),
-        "is_close": is_after_close(scan.get("asOf")),
+        "is_close": closed,
+        "session_source": session_source,
         "stocks": stocks,
     }
 
@@ -1230,7 +1294,14 @@ def main() -> int:
     # The fast session job: refresh the prices and leave every enriched
     # document as published. See the block above the write for what that costs.
     ap.add_argument("--quotes-only", action="store_true")
+    ap.add_argument("--normalize-history", action="store_true",
+                    help="remove held zero-volume placeholders; no scan or public rebuild")
     args = ap.parse_args()
+    if args.normalize_history:
+        if args.scan or args.quotes_only or args.no_fixtures:
+            ap.error("--normalize-history must be used alone")
+        print(f"normalized {normalize_history()} price histories")
+        return 0
     if args.quotes_only and args.no_fixtures:
         sys.exit(
             "error: --quotes-only needs the fixture copy too. build_fixtures.py\n"

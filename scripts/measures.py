@@ -22,8 +22,8 @@ telling somebody a share trades at infinite relative volume.
                     A rule that tests this column does NOT match — see
                     `compare()`. It is never rendered as 0.
 
-``0``               The measurement was computed and it is nought. No shares
-                    changed hands; the price did not move; the company has
+``0``               The measurement was computed and it is nought. The
+                    price did not move; the company has
                     filed nothing this month. This is a fact and it is kept.
 
 Never a sentinel    No -1, no 999, no "N/A" string. A magic number survives
@@ -34,7 +34,12 @@ POINT-IN-TIME
 Every function takes the bars it is allowed to see and looks no further. The
 archive is not uniformly fresh — on 14 September 2026 it held 227 companies
 to the 13th, 40 to the 10th and 16 to the 9th — so "the last twenty sessions"
-means the last twenty sessions THIS COMPANY has, and the row carries the date
+means the last twenty trade sessions THIS COMPANY has. Explicit zero-volume
+placeholders are excluded, including in old archives: a scan must not change
+a window merely by running at night. Missing volume is unknown, not zero.
+A company like DCCC or MEGM with only zero-volume placeholders has no usable
+history and no relative volume; it is not assigned an infinite or zero ratio.
+The row carries the date
 of the newest bar that went into it. A market-wide calendar would silently
 compare a company's Thursday with another's Wednesday.
 """
@@ -70,7 +75,8 @@ def _closes(bars: list[dict]) -> list[dict]:
     A bar with no close is not a session at zero. It is a session this
     collector did not get, and averaging over it would invent a crash.
     """
-    return [b for b in bars if isinstance(b.get("close"), (int, float))]
+    return [b for b in bars if isinstance(b.get("close"), (int, float))
+            and b.get("volume") != 0]
 
 
 def as_of(bars: list[dict]) -> str | None:
@@ -89,11 +95,11 @@ def rv20(bars: list[dict]) -> float | None:
     also the day its "normal" rises — and the number that is supposed to say
     "unusual" quietly understates it.
 
-    A median of zero returns None, not infinity and not a large number. Four
-    companies on 14 September 2026 had not traded a share in twenty sessions
-    (DCCC, MEGM, SEIGA, TOUR). Dividing by that median is undefined, and a
-    screen that renders it as a big number puts the four deadest shares on
-    the exchange at the top of anything sorted by unusual volume.
+    Explicit zero-volume placeholders do not enter the window. The old
+    archive gave DCCC, MEGM, SEIGA and TOUR zero medians. Normalization can
+    expose an older trade (dated honestly), insufficient trade history, or
+    unknown volume. Insufficient history and unknown volume give no ratio;
+    an older trade's ratio describes that older trade, never today's activity.
     """
     usable = _closes(bars)
     if len(usable) < RV_WINDOW + 1:
@@ -101,7 +107,9 @@ def rv20(bars: list[dict]) -> float | None:
     today = usable[-1].get("volume")
     if not isinstance(today, (int, float)):
         return None
-    window = [b.get("volume") or 0 for b in usable[-(RV_WINDOW + 1):-1]]
+    window = [b.get("volume") for b in usable[-(RV_WINDOW + 1):-1]]
+    if any(not isinstance(v, (int, float)) for v in window):
+        return None
     normal = statistics.median(window)
     if normal <= 0:
         return None
@@ -117,7 +125,10 @@ def median_volume(bars: list[dict], window: int = RV_WINDOW) -> float | None:
     usable = _closes(bars)
     if len(usable) < window + 1:
         return None
-    return statistics.median([b.get("volume") or 0 for b in usable[-(window + 1):-1]])
+    volumes = [b.get("volume") for b in usable[-(window + 1):-1]]
+    if any(not isinstance(v, (int, float)) for v in volumes):
+        return None
+    return statistics.median(volumes)
 
 
 def traded_value(bars: list[dict]) -> float | None:
@@ -143,7 +154,10 @@ def median_traded_value(bars: list[dict], window: int = RV_WINDOW) -> float | No
     usable = _closes(bars)
     if len(usable) < window + 1:
         return None
-    values = [b["close"] * (b.get("volume") or 0) for b in usable[-(window + 1):-1]]
+    prior = usable[-(window + 1):-1]
+    if any(not isinstance(b.get("volume"), (int, float)) for b in prior):
+        return None
+    values = [b["close"] * b["volume"] for b in prior]
     return round(statistics.median(values), 2)
 
 
