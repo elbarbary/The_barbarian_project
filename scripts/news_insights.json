@@ -2439,6 +2439,10 @@
     "meaning": "Extending the regularization period maintains the operational window for foreign residents to settle statutory administrative and residency fees in foreign currency via the official banking system, integrating informal resident activity into the formal legal framework.",
     "meaning_ar": "يُبقي تمديد مهلة توفيق الأوضاع على المسار الإجرائي لسداد رسوم الإقامة والغرامات الإدارية بالعملة الأجنبية عبر القطاع المصرفي الرسمي، مما يدرج المعاملات والعمالة غير المسجلة ضمن الأطر التنظيمية والقانونية."
   },
+  "الحكومه توافق علي منحه بقيمه 750 الف يورو لدعم فاكسيرا في انتاج اللقاحات": {
+    "meaning": "The non-repayable grant provides non-dilutive external funding directly allocated to VACSERA's vaccine manufacturing infrastructure and technical operations without creating debt liabilities on its balance sheet.",
+    "meaning_ar": "توفر هذه المنحة غير المستردة تمويلاً خارجياً لا يترتب عليه تخفيض لملكيات المساهمين، ويُخصص مباشرة لدعم البنية التحتية والعمليات الفنية لتصنيع اللقاحات في فاكسيرا دون إضافة التزامات ديون على ميزانيتها العمومية."
+  },
   "الحكومه: اعضاء اللجان الاستشاريه ليسوا مستشارين لرييس الوزراء": {
     "meaning": "This clarification defines the governance framework by separating non-binding technical advisory roles from executive policymaking positions within the state administration.",
     "meaning_ar": "يحدد هذا التوضيح إطار الحوكمة الإدارية عبر الفصل بين المهام الفنية الاستشارية غير الملزمة والمناصب التنفيذية لصنع القرار داخل الجهاز الحكومي."
@@ -3771,6 +3775,10 @@
     "meaning": "Central bank interest rate hikes increase local borrowing costs and narrow yield differentials against foreign currencies, directly altering cross-border carry trade financing and capital flows.",
     "meaning_ar": "يؤدي رفع أسعار الفائدة من قِبل البنك المركزي إلى زيادة تكلفة الاقتراض بالعملة المحلية وتقليص فوارق العوائد مع العملات الأجنبية، مما يغير آليات تمويل تجارة الفائدة والتدفقات الرأسمالية عبر الحدود."
   },
+  "بنك اليابان يرفع الفايده لاعلي مستوي منذ 31 عاما": {
+    "meaning": "The Bank of Japan's rate hike increases the cost of borrowing the Japanese yen, directly raising funding expenses for global carry trade positions and altering international interest rate differentials.",
+    "meaning_ar": "يؤدي رفع بنك اليابان لسعر الفائدة إلى زيادة تكلفة الاقتراض بالين الياباني، مما يرفع تكاليف تمويل مراكز تجارة الفائدة العالمية (Carry Trade) ويعدل فروق أسعار الفائدة بين العملات الدولية."
+  },
   "بنك انجلترا يعتزم وقف بيع السندات طويله الاجل وسط اضطراب الاسواق": {
     "meaning": "Suspending the sale of long-term government bonds halts the addition of sovereign debt supply to the secondary market and adjusts the central bank's quantitative tightening operations.",
     "meaning_ar": "يؤدي تعليق بيع السندات الحكومية طويلة الأجل إلى وقف ضخ معروض إضافي من أدوات الدين السيادية في السوق الثانوية وتعديل وتيرة عمليات التشديد الكمي للبنك المركزي."
@@ -4127,6 +4135,10 @@
   "تراجع مبيعات السيارات في الصين 24% مع اشتداد حرب الاسعار": {
     "meaning": "Intensifying price competition in the automotive sector prompts consumers to delay purchases in anticipation of further discounts, leading to reduced transaction volumes and inventory accumulation at dealerships.",
     "meaning_ar": "يؤدي اشتداد المنافسة السعرية في قطاع السيارات إلى تأجيل المستهلكين لقرارات الشراء انتظاراً لخصومات إضافية، مما يسفر عن انخفاض أحجام المبيعات وتراكم المخزون لدى الوكلاء."
+  },
+  "تراجع مبيعات وقود السفن في الفجيره باغسطس بعد تعافيها خلال يوليو": {
+    "meaning": "A decline in bunker fuel sales reflects lower vessel traffic and bunkering demand at the Fujairah maritime hub, indicating reduced bunkering operations and petroleum product deliveries to commercial shipping during the period.",
+    "meaning_ar": "يعكس تراجع مبيعات وقود السفن انخفاض حركة الملاحة والطلب على التزود بالوقود في مركز الفجيرة البحري، مما يشير إلى تباطؤ العمليات التشغيلية لتسليم المشتقات النفطية للسفن التجارية خلال تلك الفترة."
   },
   "تراجع مخزونات الوقود الصينيه يهدد بفرض قيود علي الصادرات": {
     "meaning": "Declining domestic refined product inventories prompt regulatory measures prioritizing local market supply, which links export quota allocations directly to national reserve thresholds.",
@@ -6300,6 +6312,26 @@
   "مجلس الذهب العالمي: الصين تعزز احتياطياتها باكبر وتيره منذ اكتوبر 2023": {
     "meaning": "Official bullion accumulation by the People's Bank of China reallocates central bank foreign exchange reserves from sovereign debt and fiat currencies into physical gold assets, altering international sovereign reserve compositions.",
     "meaning_ar": "يُعيد بنك الشعب الصيني توزيع احتياطيات النقد الأجنبي الرسمية من الديون السيادية والعملات الورقية إلى أصول الذهب المادية، مما يُغيّر هيكل الاحتياطيات السيادية الدولية."
+  },
+  "مجلس الوزراء يصدر قرارا بنظام عمل المجلس القومي للاجور واختصاصاته": {
+    "meaning": "This decree establishes the regulatory framework and operational mandate for the National Council for Wages, which determines the statutory minimum wage rates and mandatory periodic allowances across the private sector, directly setting baseline labor costs on company income statements.",
+    "meaning_ar": "يحدد هذا القرار الإطار التنظيمي واختصاصات المجلس القومي للأجور المعني بإقرار الحد الأدنى للأجور والعلاوات الدورية الإلزامية للقطاع الخاص، وهو ما يحدد البنود المباشرة لتكاليف العمالة في القوائم المالية للشركات."
+  },
+  "مجلس الوزراء يوافق علي اعاده تنظيم وزارتي الاستثمار والتموين": {
+    "meaning": "The restructuring redefines the administrative mandates, licensing workflows, and regulatory oversight governing foreign direct investment channels and domestic commodity supply chains.",
+    "meaning_ar": "تحدد إعادة الهيكلة الاختصاصات الإدارية، وإجراءات التراخيص، والرقابة التنظيمية المنظمة لتدفقات الاستثمار المباشر وسلاسل إمداد السلع التموينية المحلية."
+  },
+  "مجلس الوزراء يوافق علي مشروع قرار باعاده تنظيم وزاره التموين والتجاره الداخليه": {
+    "meaning": "The restructuring redefines the administrative structure, oversight departments, and regulatory responsibilities governing domestic commodity distribution, subsidy management, and internal market supervision.",
+    "meaning_ar": "تحدد إعادة الهيكلة الهيكل الإداري والإدارات الرقابية والمسؤوليات التنظيمية التي تدير منظومة توزيع السلع التموينية والدعم والرقابة على الأسواق الداخلية."
+  },
+  "مجلس الوزراء يوافق علي مقترح الخطه التنفيذيه التفصيليه لوثيقه سياسه ملكيه الدوله": {
+    "meaning": "The detailed operational plan sets out the timeline and procedural mechanisms for the state to retain, scale back, or exit shareholdings across designated economic sectors, establishing the timetable for strategic stake sales and public equity offerings.",
+    "meaning_ar": "تحدد الخطة التنفيذية التفصيلية الجداول الزمنية والآليات الإجرائية لإبقاء أو تقليص أو تخارج الدولة من حصص المساهمة في قطاعات اقتصادية محددة، مما يرتب توقيتات بيع الحصص لمستثمرين استراتيجيين أو طرحها في سوق الأسهم."
+  },
+  "مجلس الوزراء يوافق علي منحه اوروبيه ب750 الف يورو لدعم توسعات «فاكسيرا»": {
+    "meaning": "The non-repayable European grant of €750,000 injects non-debt financing into VACSERA's capital expenditure program, funding equipment procurement and infrastructure for vaccine manufacturing lines.",
+    "meaning_ar": "توفر المنحة الأوروبية غير القابلة للرد، والبالغة 750 ألف يورو، تمويلاً غير مقترن بديون للإنفاق الرأسمالي بشركة «فاكسيرا»، حيث تُخصص لتمويل شراء المعدات وتطوير البنية التحتية لخطوط إنتاج اللقاحات."
   },
   "مجلس الوزراء: اعضاء اللجان الاستشاريه ليسوا مستشارين لرييس الوزراء": {
     "meaning": "This governance clarification defines advisory committees as independent technical bodies without executive authority or public payroll status, separating technical consultation from direct state policy execution.",
