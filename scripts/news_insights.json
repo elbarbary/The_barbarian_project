@@ -503,6 +503,10 @@
     "meaning": "Approving the independent valuation sets the exchange ratio for the transaction, enabling the company to swap equity in one entity for shares in another without cash settlement.",
     "meaning_ar": "اعتماد التقييم المستقل يحدد معامل مبادلة الأسهم للعملية، مما يتيح للشركة مبادلة حصص ملكية في كيان مقابل أسهم في كيان آخر دون تسوية نقدية."
   },
+  "b investments holding has approved the acquisition of stake in big investment group": {
+    "meaning": "This transaction expands the company's investment portfolio through an equity acquisition in another entity, deploying capital to secure an ownership position and corresponding governance rights.",
+    "meaning_ar": "توسع هذه الصفقة المحفظة الاستثمارية للشركة عبر الاستحواذ على حصة ملكية في كيان آخر، موظفةً رأس المال للحصول على حقوق الملكية والإدارة المقابلة لها."
+  },
   "back to school pre university education in focus": {
     "meaning": "The start of the academic year activates annual operational cycles for listed private education operators, educational publishers, and consumer stationery suppliers, involving tuition fee billing and inventory distribution.",
     "meaning_ar": "يتزامن بدء العام الدراسي مع تفعيل الدورات التشغيلية السنوية لمشغلي التعليم الخاص المدرجين ودور النشر التعليمية وموردي الأدوات المكتبية، والتي تشمل تحصيل الرسوم الدراسية وتوزيع المخزون السلعي."
@@ -922,6 +926,10 @@
   "«انروبيتش» الهنديه تختار مصر بوابه للتصنيع والتوسع في افريقيا": {
     "meaning": "Establishing manufacturing operations in Egypt sets up local production capacity and utilizes Egyptian regional trade agreements for distribution into African markets.",
     "meaning_ar": "يؤسس إنشاء منشآت تصنيع في مصر طاقة إنتاج محلية ويوظف الاتفاقيات التجارية الإقليمية لمصر في توزيع المنتجات داخل الأسواق الأفريقية."
+  },
+  "«ايتيدا»: ملتقي «Future Forward» يساعد علي سد فجوه المهارات والوظايف لدي الشباب": {
+    "meaning": "Employment and training forums organized by the Information Technology Industry Development Agency (ITIDA) function as intermediary platforms linking ICT employers with domestic technical labor.",
+    "meaning_ar": "تعمل ملتقيات التوظيف والتدريب التابعة لهيئة تنمية صناعة تكنولوجيا المعلومات (إيتيدا) كمنصات وسيطة تربط بين الشركات الموظفة في قطاع الاتصالات وتكنولوجيا المعلومات والكوادر الفنية المحلية."
   },
   "«اير كايرو» توقع عقدا لضم 30 طايره جديده من طراز «ايرباص A320neo»": {
     "meaning": "This transaction expands the carrier's operating fleet and seat inventory through a long-term capital asset acquisition from the manufacturer. It alters the airline's asset base and fleet composition by integrating modern narrow-body aircraft.",
@@ -1815,6 +1823,10 @@
     "meaning": "This policy involves deploying trade defense instruments such as anti-dumping duties, countervailing tariffs, and foreign subsidy investigations to alter cross-border import volumes and pricing dynamics.",
     "meaning_ar": "تشمل هذه السياسة تطبيق أدوات الحماية التجارية مثل رسوم مكافحة الإغراق، والتعريفات الجمركية التعويضية، وفحص الدعم الأجنبي لتغيير أحجام الواردات وآليات تسعيرها عبر الحدود."
   },
+  "الاتحاد الاوروبي يخسر 90 مليار يورو بسبب ازمه مضيق هرمز": {
+    "meaning": "Disruptions along maritime transit corridors like the Strait of Hormuz elevate maritime insurance premiums, lengthen shipping routes, and raise landed energy import costs for European industrial and consumer markets.",
+    "meaning_ar": "تؤدي الاضطرابات في الممرات الملاحية الحيوية مثل مضيق هرمز إلى ارتفاع أقساط التأمين البحري وتغيير مسارات الشحن، مما يرفع التكلفة الفعلية لواردات الطاقة والسلع للأسواق الأوروبية."
+  },
   "الاتحاد الاوروبي يخصص 200 مليون يورو لشراكه جديده مع جرينلاند": {
     "meaning": "The European Union establishes a 200 million euro direct funding mechanism for bilateral cooperation with Greenland, focusing on critical raw material supply chains and energy infrastructure. This capital transfer operates through institutional grants to support joint technical and resource development frameworks.",
     "meaning_ar": "يخصص الاتحاد الأوروبي تمويلاً مؤسسياً بقيمة 200 مليون يورو لدعم أطر التعاون المشترك مع جرينلاند في سلاسل إمداد المواد الخام الاستراتيجية ومشاريع الطاقة، حيث يعمل هذا التحويل المالي على تمويل البنية التحتية والتنسيق الفني المشترك بين الجانبين."
@@ -1822,6 +1834,10 @@
   "الاتحاد الاوروبي يدرس حظر تصدير النفايات وخرده الالومنيوم": {
     "meaning": "An export restriction on European aluminum scrap retains secondary raw material within the EU market, which alters global scrap trade flows and affects input procurement dynamics for international recyclers and smelters.",
     "meaning_ar": "يُبقي فرض قيود على تصدير خردة الألومنيوم الأوروبية المواد الخام الثانوية داخل السوق الأوروبية، مما يغير مسارات التجارة العالمية للخردة ويؤثر على آليات توريد المدخلات لشركات الصهر وإعادة التدوير دولياً."
+  },
+  "الاتحاد الاوروبي يفتح الباب امام عضويه كندا المنتسبه لتعزيز التجاره والاستثمار": {
+    "meaning": "Associate membership structures establish harmonized regulatory frameworks and lower non-tariff barriers between jurisdictions, integrating cross-border supply chains and capital flows under standard trade treaties.",
+    "meaning_ar": "تؤسس أطر العضوية المنتسبة معايير تنظيمية موحدة وتزيل الحواجز غير الجمركية بين الأطراف، مما يربط سلاسل التوريد وتدفقات رؤوس الأموال العابرة للحدود بموجب اتفاقيات تجارية مشتركة."
   },
   "الاتحاد الاوروبي يلغي فرض رسوم تصدير علي خرده الالومنيوم بضغط هندي": {
     "meaning": "The cancellation of export duties maintains the cross-border flow of European aluminum scrap without additional tariff costs, securing existing raw material supply chains for external smelting and recycling markets.",
@@ -2515,6 +2531,10 @@
     "meaning": "Regulatory approval allows the company to publish the disclosure report required to proceed with increasing its issued capital through the issuance of new shares.",
     "meaning_ar": "تتيح موافقة الهيئة العامة للرقابة المالية للشركة نشر تقرير الإفصاح المخصص للسير في إجراءات زيادة رأس مالها المصدر عبر إصدار أسهم جديدة."
   },
+  "الرقابه الماليه توافق علي نشر افصاح سبيد": {
+    "meaning": "Approval from the Financial Regulatory Authority allows Speed Medical to publish its disclosure report, fulfilling the statutory transparency requirements for an upcoming corporate action or capital adjustment under EGX listing rules.",
+    "meaning_ar": "تعكس موافقة الهيئة العامة للرقابة المالية على نشر تقرير الإفصاح لشركة سبيد ميديكال استيفاء المتطلبات القانونية للإفصاح والشفافية المرتبطة بإجراء هيكلي أو مالي وفقاً لقواعد القيد في البورصة المصرية."
+  },
   "الرقابه الماليه توسع استخدام التكنولوجيا في الخدمات الماليه": {
     "meaning": "The Financial Regulatory Authority expands the regulatory framework for integrating digital onboarding, electronic signatures, and automated processes into non-banking financial institutions. This standardizes technological infrastructure requirements across digital lending, insurance, and asset management platforms.",
     "meaning_ar": "توسع الهيئة العامة للرقابة المالية الإطار التنظيمي لتطبيق آليات التعرف الرقمي على العملاء، والتوقيع الإلكتروني، والعمليات المؤتمتة داخل المؤسسات المالية غير المصرفية، مما يحدد المعايير الفنية للبنية التحتية التكنولوجية عبر منصات التمويل والتأمين وإدارة الأصول."
@@ -2631,6 +2651,10 @@
     "meaning": "Building resilient economies involves prioritizing domestic manufacturing, reducing import dependency on critical goods, and maintaining foreign exchange liquidity buffers against external supply disruptions.",
     "meaning_ar": "يرتكز بناء اقتصادات مرنة على تعزيز التصنيع المحلي، وخفض الاعتماد على استيراد السلع الحيوية، وتوفير هوامش أمان من السيولة بالنقد الأجنبي لمواجهة اضطرابات سلاسل الإمداد الخارجية."
   },
+  "الرييس السيسي: القضيه الفلسطينيه ستظل المركزيه في المنطقه الي حين تسويتها": {
+    "meaning": "Sovereign geopolitical statements reflect ongoing regional foreign policy commitments, which correlate with baseline geopolitical risk assessments tracked by international credit rating agencies and cross-border capital flow metrics.",
+    "meaning_ar": "تعكس التصريحات السيادية استمرار محددات السياسة الخارجية، والتي ترتبط مباشرة بمؤشرات تقييم المخاطر الجيوسياسية المعتمدة لدى وكالات التصنيف الائتماني ومسارات تدفقات رؤوس الأموال العابرة للحدود."
+  },
   "الرييس السيسي: اهميه الارتقاء بالتعاون البناء مع قبرص في المجالات التجاريه والاستثماريه": {
     "meaning": "Bilateral commercial cooperation agreements between Egypt and Cyprus establish institutional frameworks for cross-border trade flows, joint infrastructure coordination, and direct investments between Mediterranean markets.",
     "meaning_ar": "تؤسس اتفاقيات التعاون التجاري الثنائي بين مصر وقبرص أطراً مؤسسية لحركة التبادل التجاري عبر الحدود، وتنسيق مشروعات البنية التحتية المشتركة، والاستثمارات المباشرة بين أسواق منطقة شرق المتوسط."
@@ -2674,6 +2698,10 @@
   "السجق الجملي ب200 جنيه.. اسعار اللحوم اليوم الاربعاء 9-9-2026": {
     "meaning": "Retail price reporting for livestock products tracks prevailing spot market prices and food cost benchmarks across local domestic supply channels.",
     "meaning_ar": "يعكس الإعلان عن أسعار التجزئة لمنتجات اللحوم المستويات السعرية الفورية وتكاليف السلع الغذائية الأساسية عبر سلاسل الإمداد والتوزيع المحلية."
+  },
+  "السعوديه تتجه لشحن مزيد من النفط عبر هرمز بعد وقف خط “شرق غرب”": {
+    "meaning": "Rerouting crude volumes from the East-West pipeline to the Strait of Hormuz shifts export logistics back to the maritime corridor, altering tanker chartering patterns and regional transit exposure.",
+    "meaning_ar": "تحويل مسار شحنات النفط الخام من خط أنابيب «شرق-غرب» إلى مضيق هرمز يعيد توجيه العمليات اللوجستية إلى الممر المائي، ويغير حركة تأجير الناقلات ومسارات العبور الإقليمية."
   },
   "السعوديه تعلن استهداف عدد من منشات ومرافق طاقه جنوب المملكه": {
     "meaning": "Attacks on energy infrastructure trigger operational emergency protocols, require technical assessments of asset integrity, and alter logistical flows across regional supply networks.",
@@ -7365,6 +7393,10 @@
     "meaning": "Rising voluntary tax compliance broadens the formal fiscal base, directly expanding sovereign revenue collections without altering headline tax rates.",
     "meaning_ar": "يؤدي ارتفاع معدلات الامتثال الضريبي الطوعي إلى توسيع القاعدة الضريبية الرسمية وزيادة الحصيلة السيادية المحصلة دون تغيير أسعار الضرائب المقررة."
   },
+  "وزير الماليه: نتايج مبشره للتسهيلات الضريبيه والايرادات تنمو دون فرض اي اعباء اضافيه": {
+    "meaning": "Tax facilitation packages function by expanding the tax base through higher compliance and the formalization of unrecorded economic activities, generating public revenue from a broader taxpayer pool rather than raised statutory tax rates.",
+    "meaning_ar": "تعمل حزم التسهيلات الضريبية على توسيع القاعدة الضريبية عبر رفع معدلات الامتثال ودمج الأنشطة غير الرسمية، مما يولد إيرادات عامة من قاعدة ممولين أوسع دون تعديل أسعار الضرائب الحالية."
+  },
   "وزير الماليه: نتطلع مع تجمع البريكس الي منح اولويه ومساحه اكبر لدعم الاقتصادات الناميه": {
     "meaning": "Multilateral coordination within the BRICS framework operates through alternative financing channels, including the New Development Bank, and establishes trade settlement mechanisms in local currencies.",
     "meaning_ar": "يعمل التنسيق متعدد الأطراف ضمن إطار مجموعة البريكس عبر قنوات تمويل بديلة، تشمل بنك التنمية الجديد، ويعتمد آليات لتسوية المعاملات التجارية بالعملات المحلية."
@@ -7572,6 +7604,10 @@
   "“الصناعه” تبحث تطوير قطاع الاثاث وتعزيز تنافسيته محليا ودوليا": {
     "meaning": "Government initiatives to develop the furniture sector involve reviewing industrial standards, assessing raw material supply chains, and coordinating export logistics between local manufacturers and trade authorities.",
     "meaning_ar": "تتضمن المبادرات الحكومية لتطوير قطاع الأثاث مراجعة المواصفات القياسية الصناعية، وتقييم سلاسل إمداد المواد الخام، والتنسيق اللوجستي لعمليات التصدير بين المصنعين المحليين والجهات التجارية."
+  },
+  "“الصناعه” تضع خارطه طريق لتطوير قطاع الاسمنت": {
+    "meaning": "The Ministry of Industry establishes a regulatory and operational framework that defines production standards, energy input allocations, and operational guidelines for cement manufacturing companies.",
+    "meaning_ar": "تضع وزارة الصناعة إطاراً تنظيمياً وتشغيلياً يحدد معايير الإنتاج، وحصص مدخلات الطاقة، والضوابط التشغيلية لشركات تصنيع الأسمنت."
   },
   "“العامه للاستثمار”: ايطاليا رابع اكبر مستثمر اجنبي في مصر ب23.4 مليار دولار": {
     "meaning": "Official data ranks Italy as Egypt's fourth-largest foreign direct investment source with an accumulated capital base of $23.4 billion, concentrated primarily in energy, manufacturing, and infrastructure operations.",
