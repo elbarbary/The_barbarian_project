@@ -2035,6 +2035,10 @@
     "meaning": "European equities reflect a daily technical rebound at the market close, while the cumulative weekly performance captures net capital outflows across trading sessions.",
     "meaning_ar": "تعكس الأسهم الأوروبية ارتداداً فنياً يومياً عند الإغلاق، بينما يسجل الأداء الأسبوعي التراكمي صافي تدفقات نقدية خارجة عبر جلسات التداول."
   },
+  "الاسهم الاوروبيه تصعد الاربعاء للمره الاولي منذ ثلاثه جلسات": {
+    "meaning": "European equities trade higher after two consecutive sessions of net declines, as purchasing volume across regional indices outpaces prevailing selling orders. This intraday movement reflects day-to-day liquidity flows and price adjustments across constituent sectors.",
+    "meaning_ar": "تسجل الأسهم الأوروبية ارتفاعاً بعد جلستين متتاليتين من التراجع، مع تجاوز حجم طلبات الشراء لأوامر البيع عبر المؤشرات الإقليمية. وتوضح هذه الحركة التغيرات اليومية في تدفقات السيولة وإعادة تسعير المراكز المالية في القطاعات المكونة للسوق."
+  },
   "الاسهم الاوروبيه تصعد الخميس مع استقرار اسعار النفط وتراجع سندات الخزانه": {
     "meaning": "Declining treasury yields lower discount rates for equity valuation models, while stable oil prices maintain predictable input and energy costs for European corporations.",
     "meaning_ar": "يؤدي تراجع عوائد السندات إلى خفض معدلات الخصم المستخدمة في تقييم الأسهم، بينما يحدد استقرار أسعار النفط تكاليف الطاقة ومدخلات الإنتاج للشركات الأوروبية."
