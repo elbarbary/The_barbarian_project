@@ -1227,6 +1227,10 @@
     "meaning": "Higher fuel prices raise the direct operational costs of agricultural machinery, transport, and energy-intensive inputs for farming businesses.",
     "meaning_ar": "يؤدي ارتفاع أسعار الوقود إلى زيادة تكاليف التشغيل المباشرة للآلات الزراعية وعمليات النقل والمدخلات كثيفة الاستهلاك للطاقة في قطاع الزراعة."
   },
+  "ارتفاع اسعار خام الحديد من ادني مستوي في قرابه شهر": {
+    "meaning": "Iron ore serves as the primary raw material for integrated steel producers, meaning price changes directly affect direct reduced iron and billet production costs.",
+    "meaning_ar": "يمثل خام الحديد المدخل الرئيسي لمصانع الصلب المتكاملة، وتنعكس تحركاته السعرية بصورة مباشرة على تكاليف إنتاج الحديد الإسفنجي ومربعات الصلب (البيلت)."
+  },
   "ارتفاع الاسهم الاوروبيه في مستهل اخر جلسات الاسبوع": {
     "meaning": "An early-session rise in European equities reflects net capital inflows and higher opening bid prices across European bourses, signaling the current international risk-sentiment context for global trading desks.",
     "meaning_ar": "يعكس ارتفاع الأسهم الأوروبية في مستهل التعاملات تدفقات رأسمالية موجبة وأسعار طلب افتتاحية أعلى عبر البورصات الأوروبية، وهو ما يحدد اتجاهات سيولة المخاطرة في التداولات الدولية الحالية."
@@ -1775,6 +1779,10 @@
     "meaning": "Persistent declines in Chinese residential property prices reflect high inventory levels and developer liquidity constraints, which limit the transmission of regulatory easing into transaction volumes. On a macro level, sustained contraction in China's construction sector dampens global demand for raw industrial commodities such as steel, iron ore, and petrochemicals.",
     "meaning_ar": "يعكس استمرار انخفاض أسعار العقارات السكنية في الصين ارتفاع المعروض وضعف السيولة لدى المطورين، مما يحد من انتقال أثر التيسيرات التنظيمية إلى وتيرة المبيعات. ويؤدي استمرار انكماش نشاط البناء الصيني إلى خفض الطلب العالمي الفعلي على السلع الصناعية الأولية كالمعادن والبتروكيماويات."
   },
+  "اسعار النحاس تتعافي من ادني مستوي في 3 اسابيع": {
+    "meaning": "Copper serves as a primary raw material for industrial manufacturing and electrical cabling, where a rebound in its global benchmark prices directly alters production input costs and inventory valuation for industrial producers.",
+    "meaning_ar": "يُعد النحاس مدخل إنتاج أساسي في الصناعات الهندسية وكابلات الكهرباء، ويؤدي ارتداد أسعاره العالمية إلى تعديل تكلفة شراء المواد الخام وإعادة تقييم المخزون السلعي لدى الشركات المصنعة."
+  },
   "اسعار النحاس تسجل مستوي قياسيا للجلسه الثانيه علي التوالي": {
     "meaning": "Copper serves as a primary raw material for industrial and cable manufacturing sectors, where record commodity prices directly elevate procurement costs and expand working capital requirements for producers.",
     "meaning_ar": "يُعد النحاس مادة خام رئيسية لقطاعات الصناعة وتصنيع الكابلات، حيث تؤدي المستويات القياسية لأسعار السلعة إلى رفع تكاليف الشراء المباشرة وزيادة متطلبات رأس المال العامل لدى الشركات المصنعة."
@@ -1814,6 +1822,10 @@
   "اطلاق اول برنامج استرالي لتاهيل كوادر هييه الثروه المعدنيه في علوم التعدين": {
     "meaning": "The initiative establishes a technical training framework between Australia and the Egyptian Mineral Resources Authority to transfer operational expertise in mining sciences and regulatory oversight.",
     "meaning_ar": "تؤسس المبادرة إطاراً للتدريب الفني بين أستراليا وهيئة الثروة المعدنية لنقل الخبرات التشغيلية في علوم التعدين وآليات الرقابة التنظيمية."
+  },
+  "اعاده تنظيم وزاره الاستثمار والتجاره الخارجيه لتحقيق اهداف التنميه الاقتصاديه": {
+    "meaning": "The restructuring merges trade regulation and investment licensing processes under a single administrative framework, centralizing company formation, export clearance procedures, and foreign direct investment oversight within one institutional channel.",
+    "meaning_ar": "يؤدي الدمج الهيكلي إلى توحيد إجراءات تراخيص الاستثمار والرقابة على التجارة الخارجية تحت إدارة تنفيذية واحدة، مما يجمع قنوات تأسيس الشركات والإفراج التصديري وإدارة الاستثمارات المباشرة في مسار مؤسسي مشترك."
   },
   "اعلان قمه العلمين: التاكيد علي التزام مصر وقبرص واليونان بدعم الامن والاستقرار بالمنطقه": {
     "meaning": "The trilateral framework between Egypt, Cyprus, and Greece establishes operational coordination for cross-border infrastructure and Eastern Mediterranean energy transit corridors, encompassing natural gas transport and electricity grid interconnection projects.",
@@ -2347,6 +2359,10 @@
     "meaning": "Reviewing proposals and architectural designs marks the pre-construction planning phase of a state-backed urban development, establishing master-plan specifications, capital allocation requirements, and procurement scopes for real estate and infrastructure contractors.",
     "meaning_ar": "يمثل استعراض المقترحات والتصميمات المعمارية المرحلة التخطيطية السابقة للإنشاءات في المشروعات القومية، حيث يحدد المخطط العام، والاحتياجات الرأسمالية، ونطاق أعمال التوريد والمقاولات الخاصة بالبنية التحتية والتطوير العقاري."
   },
+  "الحكومه تستعرض نتايج اعمال وحده الشركات المملوكه للدوله بالربع الثاني 2026": {
+    "meaning": "This review monitors the operational performance, asset management, and governance metrics of state-held enterprises under the State Ownership Policy.",
+    "meaning_ar": "تتضمن هذه المراجعة متابعة مؤشرات الأداء التشغيلي وإدارة الأصول والحوكمة للشركات التابعة للدولة في إطار وثيقة سياسة ملكية الدولة."
+  },
   "الحكومه تستكمل اجراءات فض التشابكات الماليه بين القابضه للغزل والتامينات": {
     "meaning": "Resolving mutual financial entanglements settles historical cross-debts through cash transfers or asset swaps between the state enterprise and the social insurance authority, restructuring both entities' balance sheets and adjusting their current liabilities.",
     "meaning_ar": "تتضمن تسوية التشابكات المالية سداد المديونيات المتبادلة تاريخياً عبر تسويات نقدية أو مبادلة أصول بين الشركة القابضة وهيئة التأمينات، مما يعيد هيكلة الميزانيات العمومية للطرفين ويعدل التزاماتهما المتداولة."
@@ -2367,9 +2383,17 @@
     "meaning": "The decision establishes the regulatory framework and centralized auction system for trading seed cotton for the 2026-2027 season under the supervision of a dedicated management committee.",
     "meaning_ar": "يحدد القرار الإطار التنظيمي ومنظومة المزادات المركزية لتداول أقطان الزهر لموسم 2026-2027 تحت إشراف لجنة تنفيذية مخصصة لإدارة المنظومة."
   },
+  "الحكومه تعتمد نظام عمل المجلس القومي للاجور": {
+    "meaning": "The formal operational framework governs the procedural mechanism through which the National Council for Wages establishes the statutory minimum wage and reviews compensation policies across the private sector. This formalizes the administrative process for wage adjustments, directly defining labor cost standards for operating companies.",
+    "meaning_ar": "يحدد نظام العمل الإطار الإجرائي والتنظيمي لآلية وضع الحد الأدنى القانوني للأجور ومراجعة سياسات التعويضات في القطاع الخاص، مما يقنن المسار الإداري لتعديل الأجور ويضع المعايير الحاكمة لتكاليف العمالة في الشركات العاملة."
+  },
   "الحكومه تعلن عن تعيين 43 الف معلم دفعه واحده الفتره المقبله": {
     "meaning": "The appointment of 43,000 public sector teachers increases government operational expenditures and the public payroll allocation within the state budget, while addressing staffing capacity in the public education system.",
     "meaning_ar": "يؤدي تعيين 43 ألف معلم في القطاع الحكومي إلى زيادة النفقات التشغيلية ومخصصات الأجور في الموازنة العامة للدولة، بالتوازي مع معالجة الطاقة الاستيعابية للكادر الوظيفي في منظومة التعليم العام."
+  },
+  "الحكومه تعيد تنظيم وزاره التموين لضبط الاسواق": {
+    "meaning": "The restructuring reallocates supervisory responsibilities, audit workflows, and market inspection divisions within the Ministry of Supply to enforce strategic commodity pricing and distribution rules across domestic supply chains.",
+    "meaning_ar": "تتضمن إعادة الهيكلة إعادة توزيع للمهام الرقابية وتدفقات التفتيش الميداني داخل وزارة التموين لتطبيق اللوائح المنظمة لتداول السلع الاستراتيجية وضوابط التسعير في سلاسل الإمداد المحلية."
   },
   "الحكومه تفتتح 20 فرعا جديدا من سلسله كاري اون في 4 محافظات": {
     "meaning": "Opening 20 retail branches across four governorates expands the state-affiliated grocery chain's physical distribution footprint and increases its daily point-of-sale inventory capacity.",
@@ -6824,6 +6848,10 @@
   "منصه “صندوق” تغطي نحو 200 صندوق استثمار في مصر": {
     "meaning": "The platform aggregates and displays operational data, performance metrics, and pricing for approximately 200 Egyptian investment funds in a centralized digital interface.",
     "meaning_ar": "تجمع المنصة وتعرض البيانات التشغيلية ومؤشرات الأداء وأسعار الوثائق لنحو 200 صندوق استثمار مصري ضمن واجهة رقمية موحدة."
+  },
+  "منطقه استثماريه لشركه الديار القطريه علي مساحه 4900 فدان بمطروح": {
+    "meaning": "The allocation expands Qatari Diar's real estate land bank under the investment zone framework, which centralizes regulatory licensing, master planning, and infrastructure development across a 4,900-feddan land parcel in Matrouh.",
+    "meaning_ar": "يضيف تخصيص هذه المساحة 4900 فدان إلى المحفظة العقارية لشركة الديار القطرية ضمن نظام المناطق الاستثمارية، مما يتيح للشركة إدارة التخطيط العام وتطوير البنية التحتية واستصدار التراخيص وفق آلية إدارية موحدة في محافظة مطروح."
   },
   "منظمه التجاره العالميه تحذر من انكماش الاقتصاد العالمي بنحو 10% بحلول 2050": {
     "meaning": "Global economic contraction scenarios from multilateral trade bodies reflect macro projections driven by potential geopolitical fragmentation, tariff barriers, and disrupted cross-border supply chains.",
