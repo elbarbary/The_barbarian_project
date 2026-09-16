@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-16T11:33:15.115723+00:00",
+  "builtAt": "2026-09-16T17:47:29.962565+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 192449,
-    "withoutTickerInHeading": 36265,
-    "tickerNotInThisDirectory": 29404,
-    "attributedToAnIssuer": 126780,
+    "items": 192481,
+    "withoutTickerInHeading": 36281,
+    "tickerNotInThisDirectory": 28867,
+    "attributedToAnIssuer": 127333,
     "months": [
       {
         "month": "2005-01",
@@ -1831,8 +1831,8 @@
       {
         "month": "2026-09",
         "harvested": "2026-09-16",
-        "items": 560,
-        "expected": 560,
+        "items": 592,
+        "expected": 592,
         "status": "complete"
       }
     ],
@@ -1840,7 +1840,7 @@
   },
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
-    "items": 618,
+    "items": 619,
     "failures": {}
   },
   "issuers": [
@@ -2266,9 +2266,9 @@
     },
     {
       "ticker": "ARAB",
-      "egxFilingCount": 34,
-      "latestEgxFilingId": "294566",
-      "latestEgxFilingAt": "2026-09-10T12:59:29",
+      "egxFilingCount": 35,
+      "latestEgxFilingId": "294789",
+      "latestEgxFilingAt": "2026-09-16T15:02:58",
       "candidateIssuerWebsite": "https://www.ad-holding.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ARAB/profile",
       "websiteStatus": null,
@@ -2590,9 +2590,9 @@
     },
     {
       "ticker": "CRST",
-      "egxFilingCount": 100,
-      "latestEgxFilingId": "294598",
-      "latestEgxFilingAt": "2026-09-13T13:09:31",
+      "egxFilingCount": 101,
+      "latestEgxFilingId": "294777",
+      "latestEgxFilingAt": "2026-09-16T13:50:22",
       "candidateIssuerWebsite": "https://www.creastmark.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CRST/profile",
       "websiteStatus": null,
@@ -2802,9 +2802,9 @@
     },
     {
       "ticker": "EFIH",
-      "egxFilingCount": 328,
-      "latestEgxFilingId": "294645",
-      "latestEgxFilingAt": "2026-09-14T15:02:31",
+      "egxFilingCount": 329,
+      "latestEgxFilingId": "294779",
+      "latestEgxFilingAt": "2026-09-16T14:02:30",
       "candidateIssuerWebsite": "https://www.efinanceinvestment.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EFIH/profile",
       "websiteStatus": null,
@@ -2899,6 +2899,16 @@
       "latestEgxFilingAt": "2025-02-05T15:02:46",
       "candidateIssuerWebsite": "https://www.egywarehouses.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EGWA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EHDR",
+      "egxFilingCount": 536,
+      "latestEgxFilingId": "294290",
+      "latestEgxFilingAt": "2026-09-03T10:34:13",
+      "candidateIssuerWebsite": "https://www.egy-housing.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EHDR/profile",
       "websiteStatus": null,
       "irArchiveStatus": "unverified"
     },
@@ -3118,9 +3128,9 @@
     },
     {
       "ticker": "FTNS",
-      "egxFilingCount": 234,
-      "latestEgxFilingId": "294775",
-      "latestEgxFilingAt": "2026-09-16T12:35:11",
+      "egxFilingCount": 235,
+      "latestEgxFilingId": "294778",
+      "latestEgxFilingAt": "2026-09-16T13:54:45",
       "candidateIssuerWebsite": "https://www.fitness-prime-elite.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/FTNS/profile",
       "websiteStatus": null,
@@ -3272,9 +3282,9 @@
     },
     {
       "ticker": "GTEX",
-      "egxFilingCount": 82,
-      "latestEgxFilingId": "294776",
-      "latestEgxFilingAt": "2026-09-16T12:39:32",
+      "egxFilingCount": 85,
+      "latestEgxFilingId": "294806",
+      "latestEgxFilingAt": "2026-09-16T15:27:06",
       "candidateIssuerWebsite": "https://www.gtexholding.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GTEX/profile",
       "websiteStatus": null,
@@ -3299,6 +3309,18 @@
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GTWL/profile",
       "websiteStatus": null,
       "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "HALN",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "294657",
+      "latestEgxFilingAt": "2026-09-14T16:02:39",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
     },
     {
       "ticker": "HBCO",
@@ -3730,9 +3752,9 @@
     },
     {
       "ticker": "MILS",
-      "egxFilingCount": 809,
-      "latestEgxFilingId": "294594",
-      "latestEgxFilingAt": "2026-09-13T12:48:42",
+      "egxFilingCount": 810,
+      "latestEgxFilingId": "294801",
+      "latestEgxFilingAt": "2026-09-16T15:21:21",
       "candidateIssuerWebsite": "https://www.northcairomills.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MILS/profile",
       "websiteStatus": null,
@@ -4072,9 +4094,9 @@
     },
     {
       "ticker": "OFH",
-      "egxFilingCount": 263,
-      "latestEgxFilingId": "293249",
-      "latestEgxFilingAt": "2026-08-16T11:46:05",
+      "egxFilingCount": 264,
+      "latestEgxFilingId": "294781",
+      "latestEgxFilingAt": "2026-09-16T14:17:08",
       "candidateIssuerWebsite": "http://orascomfh.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/OFH/profile",
       "websiteStatus": null,
@@ -4082,9 +4104,9 @@
     },
     {
       "ticker": "OIH",
-      "egxFilingCount": 380,
-      "latestEgxFilingId": "294167",
-      "latestEgxFilingAt": "2026-08-31T14:00:17",
+      "egxFilingCount": 383,
+      "latestEgxFilingId": "294804",
+      "latestEgxFilingAt": "2026-09-16T15:25:20",
       "candidateIssuerWebsite": "https://www.orascomih.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/OIH/profile",
       "websiteStatus": null,
@@ -4536,9 +4558,9 @@
     },
     {
       "ticker": "SPMD",
-      "egxFilingCount": 557,
-      "latestEgxFilingId": "294632",
-      "latestEgxFilingAt": "2026-09-14T12:44:50",
+      "egxFilingCount": 560,
+      "latestEgxFilingId": "294783",
+      "latestEgxFilingAt": "2026-09-16T14:50:41",
       "candidateIssuerWebsite": null,
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SPMD/profile",
       "websiteStatus": {
@@ -4658,9 +4680,9 @@
     },
     {
       "ticker": "TWSA",
-      "egxFilingCount": 55,
-      "latestEgxFilingId": "294188",
-      "latestEgxFilingAt": "2026-08-31T15:23:28",
+      "egxFilingCount": 56,
+      "latestEgxFilingId": "294786",
+      "latestEgxFilingAt": "2026-09-16T14:57:34",
       "candidateIssuerWebsite": "https://www.tawasoa.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/TWSA/profile",
       "websiteStatus": null,
@@ -4852,9 +4874,9 @@
     }
   ],
   "coverage": {
-    "issuers": 284,
-    "withEgxFilings": 278,
-    "withCandidateWebsite": 256,
+    "issuers": 286,
+    "withEgxFilings": 280,
+    "withCandidateWebsite": 257,
     "websitesProbed": 20,
     "verifiedIrArchives": 0
   },
