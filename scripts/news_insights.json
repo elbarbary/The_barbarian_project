@@ -2047,6 +2047,10 @@
     "meaning": "Rising crude oil prices elevate operational and transport input costs for general industrial sectors while simultaneously raising energy sector revenues, neutralizing broad equity index movements.",
     "meaning_ar": "يؤدي ارتفاع أسعار النفط الخام إلى زيادة تكاليف المدخلات التشغيلية والنقل للقطاعات الصناعية، بالتوازي مع رفع إيرادات شركات الطاقة، مما يحقق توازناً في حركة مؤشرات الأسهم العامة."
   },
+  "الاسهم الاوروبيه تنهي تعاملات الاربعاء علي ارتفاع جماعي": {
+    "meaning": "A collective rise in European equities reflects net buying activity across key benchmark indices during the trading session, reflecting cross-border risk appetite and asset valuations across major regional sectors.",
+    "meaning_ar": "يعكس الارتفاع الجماعي للأسهم الأوروبية زيادة صافي عمليات الشراء عبر المؤشرات القياسية الرئيسية خلال جلسة التداول، بما يجسد مستويات تسعير الأصول وشهية المخاطرة عبر القطاعات الإقليمية الأساسية."
+  },
   "الاسهم الاوروبيه تهبط الاربعاء لادني مستوياتها منذ عده اشهر": {
     "meaning": "A multi-month decline in major European equity indices reflects broad asset repricing across European markets, directly influencing global liquidity conditions and cross-border institutional capital allocations.",
     "meaning_ar": "يعكس تراجع مؤشرات الأسهم الأوروبية إلى أدنى مستوياتها منذ عدة أشهر حركة إعادة تسعير عامة للأصول في الأسواق الأوروبية، مما يؤثر مباشرة على سيولة التداول وتوزيع تدفقات رؤوس الأموال المؤسسية الدولية."
@@ -4699,6 +4703,10 @@
   "حرب الرسوم بين واشنطن واوتاوا تنعش قطاعات غير متوقعه في كندا": {
     "meaning": "Tariff disputes redirect cross-border supply chains and substitute imported goods with domestic alternatives, shifting procurement flows toward secondary local producers.",
     "meaning_ar": "تؤدي النزاعات الجمركية إلى إعادة توجيه سلاسل التوريد البينية واستبدال السلع المستوردة ببدائل محلية، مما يحول مسار المشتريات نحو المنتجين المحليين في قطاعات غير أساسية."
+  },
+  "حرب ايران تضغط علي السيوله لدي المستهلكين الامريكيين": {
+    "meaning": "Geopolitical conflict involving Iran raises global oil prices and shipping costs, which directly increases energy and transportation expenses for US consumers and reduces their available discretionary cash flow.",
+    "meaning_ar": "تؤدي النزاعات الجيوسياسية المرتبطة بإيران إلى رفع أسعار النفط العالمية وتكاليف الشحن، مما يزيد من أعباء الطاقة والنقل المباشرة على المستهلك الأمريكي ويقلص السيولة النقدية المتاحة للإنفاق."
   },
   "حسن رداد يتراس فريق الحكومات بموتمر العمل العربي في القاهره": {
     "meaning": "Egypt's leadership of the government group at the Arab Labour Conference positions the Ministry of Labour to coordinate regional cross-border workforce policies, regulatory frameworks, and bilateral labor mobility mechanisms among member states.",
