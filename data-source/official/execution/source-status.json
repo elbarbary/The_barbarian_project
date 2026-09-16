@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-16T10:09:50.956328+00:00",
+  "updatedAt": "2026-09-16T11:33:12.009962+00:00",
   "publicEgx": {
     "source": "beta.egx market-watch timestamped archive",
-    "checkpointObservations": 28,
+    "checkpointObservations": 29,
     "emptyCaptures": 11,
     "firstCheckpoint": "2026-08-28T15:52:16Z",
-    "latestCheckpoint": "2026-09-16T10:09:28Z",
+    "latestCheckpoint": "2026-09-16T11:32:51Z",
     "fields": {
       "cumulativeSessionOhlcv": true,
       "actualCumulativeTradedValue": true,
