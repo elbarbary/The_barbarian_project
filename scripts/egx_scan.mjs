@@ -7,8 +7,10 @@
 // absolute paths on one particular laptop; a GitHub Actions runner is an empty
 // checkout, so those paths are not "probably missing", they are certainly
 // missing. Everything here comes from the network or from arithmetic on what
-// the network returned. The one file read is the published directory in this
-// checkout, and only to know which companies to ask for by name.
+// the network returned. The two files read are in this checkout: the published
+// directory and the exchange's harvested market watch, to know which companies
+// to ask for by name and which code the exchange gives a row the scanner names
+// by an ISIN.
 //
 // The two network calls, the batching, the frame format and every formula below
 // are copied from the research script rather than rewritten. That script is the
@@ -66,7 +68,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import WebSocket from "ws";
 import { fetchHistories, statusOf, completedTradeBars } from "./egx_history.mjs";
-import { completeListing } from "./egx_listing.mjs";
+import { completeListing, exchangeNames, nameByExchange } from "./egx_listing.mjs";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -170,21 +172,29 @@ if (!scannerRows.size) {
 //   * the securities the exchange's own market watch reported trading
 //     (`data-source/egx-beta/session.json`, harvested by the daily build), so a
 //     company already lost that way comes back. EHDR is one: deleted on 10
-//     September, and asked for by name it answers. Codes the vendor spells
-//     differently (AIHC is its AIH) or files under an ISIN get no answer, which
-//     costs nothing: only the directory's companies are acted on by absence.
+//     September, and asked for by name it answers. A code the vendor spells
+//     differently (AIHC is its AIH) gets no answer, which costs nothing: only
+//     the directory's companies are acted on by absence.
+//
+// A code the vendor files under an ISIN (NAPR is its EGS370O1C013) is asked
+// for under every spelling, and the rows the listing names by an ISIN are
+// named by the code the exchange pairs with it (`session.json` `isins`, see
+// `egx_listing.mjs`).
 //
 // Both are read from this checkout, which is not one of the laptop paths this
 // port dropped: they are part of the repository every machine that runs the
 // scan has checked out. Without them nothing is asked, and the scan says so.
-async function tickersIn(file, pick) {
+async function readJson(file) {
   try {
-    const tickers = pick(JSON.parse(await fs.readFile(path.join(repoRoot, file), "utf8")))
-      .filter((ticker) => typeof ticker === "string" && /^[A-Z]{3,6}$/.test(ticker));
-    return tickers.length ? tickers : null;
+    return JSON.parse(await fs.readFile(path.join(repoRoot, file), "utf8"));
   } catch {
     return null;
   }
+}
+
+function tickersOf(list) {
+  const tickers = list.filter((ticker) => typeof ticker === "string" && /^[A-Z]{3,6}$/.test(ticker));
+  return tickers.length ? tickers : null;
 }
 
 async function requestByName(symbols) {
@@ -203,27 +213,32 @@ async function requestByName(symbols) {
 // short-scan guard compares this with `scannerTotal`, which is a question about
 // the listing's own pages.
 const listingRows = scannerRows.size;
-const directoryTickers = await tickersIn(path.join("public", "data", "v1", "companies.json"),
-  (body) => (body.companies ?? []).map((company) => company?.ticker));
-const exchangeTickers = await tickersIn(path.join("data-source", "egx-beta", "session.json"),
-  (body) => Object.keys(body.securities ?? {}));
+const directory = await readJson(path.join("public", "data", "v1", "companies.json"));
+const session = await readJson(path.join("data-source", "egx-beta", "session.json"));
+const directoryTickers = tickersOf((directory?.companies ?? []).map((company) => company?.ticker));
+const exchangeTickers = tickersOf(Object.keys(session?.securities ?? {}));
+const names = exchangeNames(session?.isins);
 const listing = await completeListing(
   scannerRows,
   directoryTickers || exchangeTickers
     ? [...new Set([...(directoryTickers ?? []), ...(exchangeTickers ?? [])])]
     : null,
   requestByName,
-  { closeAt: columns.indexOf("close") },
+  { closeAt: columns.indexOf("close"), isinOf: names?.isinOf },
 );
+const named = nameByExchange(listing.rows, names?.codeOf,
+  { closeAt: columns.indexOf("close"), nameAt: columns.indexOf("name") });
 
-const records = [...listing.rows.values()].map((row) => {
+const records = named.rows.map(({ row, ticker }) => {
   const values = Object.fromEntries(columns.map((column, index) => [column, row.d[index]]));
   // Nulls pass straight through. `clean()` downstream reads null and NaN alike
   // as "not reported" and simply omits the field, which is the honest rendering
   // — the app shows an em dash instead of a zero.
   return {
+    // The scanner's symbol, always: it is what the chart socket answers to,
+    // including for a row published under the exchange's code.
     symbol: row.s,
-    ticker: values.name,
+    ticker,
     company: values.description,
     // `thndrScope` is deliberately absent, not false. `build_market_api.py`
     // reads it as `bool(r.get("thndrScope"))`, so its absence is safe from a
@@ -405,6 +420,16 @@ const output = {
   unpricedByName: listing.unpriced,
   unknownToScanner: listing.unknown,
   unaskedByName: listing.unasked,
+  // Rows the scanner names by an ISIN. `namedByExchange` maps each one the
+  // exchange's market watch pairs with a code to that code, which is its
+  // record's `ticker`; `unnamedIsins` are the rest, left as they came, which
+  // the market build skips. `duplicateRows` were set aside because another
+  // row stands for the same code. `isinCodes` is how many pairings were read,
+  // null when `session.json` carried none.
+  isinCodes: names ? names.codeOf.size : null,
+  namedByExchange: named.named,
+  unnamedIsins: named.unnamed,
+  duplicateRows: named.duplicates,
   // Listings the socket answered for: with sessions, or honestly without.
   historiesFetched: records.length - missingHistoryTickers.length,
   historyFetchWarnings,
@@ -455,6 +480,25 @@ console.log(`listed   ${output.scannerReturned} of ${scannerTotal} scanner rows`
   } else {
     const others = new Set(exchangeTickers.filter((ticker) => !published.has(ticker)));
     report(`${others.size} exchange-traded codes the directory does not have`, others);
+  }
+}
+{
+  const pairs = Object.entries(named.named).map(([symbol, code]) => `${code} ${symbol}`);
+  const described = named.unnamed.map((symbol) => {
+    const row = listing.rows.get(symbol);
+    return `${symbol} ${row?.d?.[columns.indexOf("description")] ?? ""}`.trim();
+  });
+  console.log(
+    names === null
+      ? "isin     no pairing of ISIN and code in session.json, so no ISIN-named row was named"
+      : `isin     ${pairs.length} ISIN-named rows published under the exchange's code` +
+        (pairs.length ? ` (${pairs.join(", ")})` : "") +
+        `, ${described.length} the exchange's market watch does not name` +
+        (described.length ? ` (${described.join("; ")})` : ""),
+  );
+  if (named.duplicates.length) {
+    console.log(`         ${named.duplicates.length} set aside, another row stands for the same code: ` +
+      named.duplicates.join(", "));
   }
 }
 console.log(`history  ${withHistory} companies with usable history, ${unresolvedHistoryTickers.length} without`);

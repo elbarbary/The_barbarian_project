@@ -38,6 +38,17 @@ is a listing fact and not a session figure. SAIB and GPPL both published as
 pound listings that way. `carry_currency` holds that one field for a ticker
 today's capture does not carry, and only that one.
 
+And which code the exchange gives each ISIN (`isins`), for the market scan.
+The vendor files National Printing and Ferchem Misr under their ISINs, not
+NAPR and FERC, so neither had ever been published; every market-watch row
+carries the ISIN beside the Reuters code. That pairing is a listing fact too,
+and a capture that leaves a row out is no reason to forget it. Of the 30
+captures with rows archived from 28 August to 16 September 2026, SPHT is in
+11, MMAT in 14 and EPPK in 15; a scan that could not name a published company
+would have the daily build delete it. So `isins` holds every pairing a capture
+has stated, the archived ones under `snapshot-history/` included, the newest
+statement winning.
+
 Usage:
     python3 scripts/harvest_egx_session.py [--check]
 """
@@ -46,6 +57,7 @@ from __future__ import annotations
 
 import argparse
 import datetime
+import gzip
 import json
 import pathlib
 import re
@@ -57,8 +69,14 @@ import harvest_egx_beta as beta  # noqa: E402
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 OUT = REPO / "data-source" / "egx-beta" / "session.json"
+ARCHIVE = REPO / "data-source" / "egx-beta" / "snapshot-history"
+PATH = "/api/bff/egx/market-watch?Page=1&PageSize=500"
 SOURCE = "beta.egx.com.eg /api/bff/egx/market-watch"
 TICKER = re.compile(r"^[A-Z]{3,6}$")
+ISIN = re.compile(r"^EG[A-Z0-9]{10}$")
+# `123251-market-watch.json.gz`, and not the gold or silver market watch that
+# share the suffix and carry no listings.
+CAPTURE = re.compile(r"^\d{6}-market-watch\.json\.gz$")
 
 
 def number(value, *, whole: bool = False):
@@ -72,7 +90,7 @@ def number(value, *, whole: bool = False):
 
 def fetch() -> tuple[dict[str, dict], str | None]:
     """One call to the exchange, then the pure part."""
-    return extract(beta.request("/api/bff/egx/market-watch?Page=1&PageSize=500"))
+    return extract(beta.request(PATH))
 
 
 def extract(payload: dict) -> tuple[dict[str, dict], str | None]:
@@ -216,6 +234,83 @@ def carry_currency(rows: dict[str, dict], held: dict) -> dict[str, str]:
     return carried
 
 
+def pairs(payload: dict) -> list[tuple[str, str]]:
+    """(ISIN, code) for every row of one market-watch capture that states both.
+
+    Market value is not asked for: a row names its listing whether or not it
+    carries a capitalisation. A bond (`EGBKRSK01CV`), the EGX 30 ETF
+    (`EGX30ETF.CA`) and a subscription right (`LUTS_r1.CA`) have no code of
+    the shape a share has, and state nothing here.
+    """
+    data = payload.get("data") if isinstance(payload, dict) else None
+    rows = data.get("data") if isinstance(data, dict) else data
+    found = []
+    for row in rows if isinstance(rows, list) else []:
+        if not isinstance(row, dict):
+            continue
+        code = str(row.get("reuters") or "").split(".")[0].strip().upper()
+        isin = str(row.get("isin") or "").strip().upper()
+        if TICKER.match(code) and ISIN.match(isin):
+            found.append((isin, code))
+    return found
+
+
+def archived(archive: pathlib.Path | None = None) -> list[tuple[str, str, str]]:
+    """(stated, ISIN, code) from every capture `harvest_egx_beta` archived.
+
+    `stated` is the archive's own `fetchedAt`. A capture that will not read is
+    passed over: every other one still states what it states.
+    """
+    statements = []
+    for path in sorted((archive or ARCHIVE).glob("*/*-market-watch.json.gz")):
+        if not CAPTURE.match(path.name):
+            continue
+        try:
+            wrapped = json.loads(gzip.decompress(path.read_bytes()))
+        except (OSError, ValueError, EOFError):
+            continue
+        stated = wrapped.get("fetchedAt") if isinstance(wrapped, dict) else None
+        if not isinstance(stated, str) or not stated:
+            continue
+        statements.extend((stated, isin, code) for isin, code in pairs(wrapped.get("payload")))
+    return statements
+
+
+def isin_codes(held, statements) -> dict[str, dict]:
+    """ISIN → {code, stated}, from what is held and what has been stated since.
+
+    The newest statement about an ISIN decides its code, and the newest about a
+    code decides its ISIN; a pairing is kept only where the two agree. So a
+    code the exchange moves to another ISIN, or an ISIN it gives another code,
+    leaves one pairing behind and not two, and no code is ever claimed twice.
+    Nothing is dropped for being old: a listing a capture leaves out keeps the
+    code the exchange last gave it, exactly as `carry_currency` keeps its
+    currency. Across the 30 captures with rows archived by 16 September 2026,
+    226 ISINs and 226 codes paired one to one, and no statement contradicted
+    another.
+    """
+    by_isin: dict[str, tuple[str, str]] = {}
+    by_code: dict[str, tuple[str, str]] = {}
+
+    def state(stated, isin, code) -> None:
+        if not (isinstance(stated, str) and stated and isinstance(isin, str)
+                and ISIN.match(isin) and isinstance(code, str) and TICKER.match(code)):
+            return
+        if (stated, code) > by_isin.get(isin, ("", "")):
+            by_isin[isin] = (stated, code)
+        if (stated, isin) > by_code.get(code, ("", "")):
+            by_code[code] = (stated, isin)
+
+    for isin, entry in (held.items() if isinstance(held, dict) else ()):
+        if isinstance(entry, dict):
+            state(entry.get("stated"), isin, entry.get("code"))
+    for stated, isin, code in statements:
+        state(stated, isin, code)
+    return {isin: {"code": code, "stated": stated}
+            for isin, (stated, code) in sorted(by_isin.items())
+            if by_code[code][1] == isin}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="fetch and report, write nothing")
@@ -223,7 +318,8 @@ def main() -> int:
 
     held = load()
     try:
-        rows, written = fetch()
+        payload = beta.request(PATH)
+        rows, written = extract(payload)
     except Exception as error:                                # noqa: BLE001
         kept = held.get("securities") or {}
         if not kept:
@@ -231,6 +327,9 @@ def main() -> int:
             return 0
         print(f"! {error} — holding {len(kept)} from {held.get('harvested')}")
         return 0
+    stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    stated = [(stamp, isin, code) for isin, code in pairs(payload)]
+    isins = isin_codes(held.get("isins"), archived() + stated)
 
     # Counted before the carry, so `count` keeps meaning what the capture
     # returned and a held currency cannot inflate it.
@@ -246,6 +345,9 @@ def main() -> int:
         "write_time": written,
         "count": captured,
         "securities": {k: rows[k] for k in sorted(rows)},
+        # Which code the exchange gives each ISIN — see the module docstring.
+        # The market scan names a row the vendor files under an ISIN by it.
+        "isins": isins,
     }
     traded = sum(1 for v in rows.values() if v.get("trades"))
     classified = sum(1 for v in rows.values() if v.get("sector"))
@@ -256,6 +358,9 @@ def main() -> int:
     if carried:
         print(f"   {len(carried)} not in this capture, currency held from an "
               f"earlier one: {', '.join(sorted(carried))}")
+    today = {isin for _, isin, _ in stated}
+    print(f"   {len(isins)} ISINs paired with the exchange's code, {len(today & set(isins))} "
+          f"stated by this capture and {len(set(isins) - today)} by an earlier one")
     if args.check:
         return 0
     OUT.parent.mkdir(parents=True, exist_ok=True)

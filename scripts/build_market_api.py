@@ -67,10 +67,12 @@ ARABIC = _arabic_names()
 
 
 # A handful of scan records fall back to the ISIN when the feed has no ticker
-# (e.g. "EGS30AJ1C016-EGP"). Those are real listings but there is nothing
-# sensible to show for them, so they are excluded — and counted, never dropped
-# silently.
+# (e.g. "EGS30AJ1C016-EGP"). The scan names each one the exchange's own market
+# watch pairs with a code by that code (NAPR is the vendor's EGS370O1C013, see
+# `egx_listing.mjs`). The rest have no code to publish them under, so they are
+# excluded — and counted and named, never dropped silently.
 TICKER = re.compile(r"^[A-Z]{3,6}$")
+ISIN_NAME = re.compile(r"^(EG[A-Z0-9]{10})(?:-[A-Z]{3})?$")
 
 
 
@@ -347,6 +349,35 @@ EGX_MARKET_CAP = {k: v["market_cap"] for k, v in EGX_SESSION.items()
                   if isinstance(v.get("market_cap"), (int, float)) and v["market_cap"] > 0}
 
 
+def _egx_isins() -> dict[str, str]:
+    """ISIN → the code the exchange's market watch gives it (`isins`).
+
+    The pairing the market scan names a vendor row by, read the way
+    `exchangeNames` in `egx_listing.mjs` reads it: a code two ISINs claim
+    names neither.
+    """
+    path = REPO / "data-source" / "egx-beta" / "session.json"
+    try:
+        held = json.loads(path.read_text(encoding="utf-8")).get("isins")
+    except (OSError, ValueError, AttributeError):
+        return {}
+    claims: dict[str, list[str]] = collections.defaultdict(list)
+    for isin, entry in (held.items() if isinstance(held, dict) else ()):
+        code = entry.get("code") if isinstance(entry, dict) else None
+        if re.fullmatch(r"EG[A-Z0-9]{10}", isin) and isinstance(code, str) and TICKER.fullmatch(code):
+            claims[code].append(isin)
+    return {isins[0]: code for code, isins in claims.items() if len(isins) == 1}
+
+
+EGX_ISINS = _egx_isins()
+
+
+def exchange_code(name: str | None) -> str | None:
+    """The exchange's code for a vendor name that is an ISIN it pairs, else None."""
+    found = ISIN_NAME.fullmatch(name) if isinstance(name, str) else None
+    return EGX_ISINS.get(found.group(1)) if found else None
+
+
 def egx_sector(ticker: str, fallback: str | None) -> tuple[str | None, str | None]:
     """The exchange's classification, or the vendor's where it has none.
 
@@ -385,6 +416,12 @@ def history_union() -> dict[str, list[dict]]:
     does not lose it today because this morning's run skipped it.
 
     Series are keyed by date, so overlapping runs merge rather than duplicate.
+
+    And by the exchange's code, where a series was filed under an ISIN the
+    exchange pairs with one. Until 16 September 2026 every scan named National
+    Printing `EGS370O1C013`, so its sessions since February sit in a file of
+    that name; read under NAPR they are NAPR's history, and `persist_history`
+    moves them there.
     """
     merged: dict[str, dict[str, dict]] = {}
     for path in sorted(WORK.glob("daily_scan_*.json")):
@@ -396,6 +433,7 @@ def history_union() -> dict[str, list[dict]]:
             ticker = r.get("ticker")
             if not ticker:
                 continue
+            ticker = exchange_code(ticker) or ticker
             for bar in r.get("recentSplitAdjustedBars") or []:
                 date, close = bar.get("date"), clean(bar.get("close"))
                 if date and close is not None:
@@ -427,6 +465,7 @@ def history_union() -> dict[str, list[dict]]:
         except (json.JSONDecodeError, OSError):
             continue
         ticker = doc.get("ticker") or path.stem
+        ticker = exchange_code(ticker) or ticker
         for bar in doc.get("bars", []):
             date, close = bar.get("date"), clean(bar.get("close"))
             if date and close is not None:
@@ -506,6 +545,41 @@ def persist_history(union: dict[str, list[dict]]) -> int:
         )
         written += 1
     return written
+
+
+def retire_isin_archives() -> list[str]:
+    """Take a series filed under an ISIN out of the store once its code holds it.
+
+    `history_union` reads `EGS370O1C013.json` as NAPR's history and
+    `persist_history` writes it into `NAPR.json`. Left beside that, the ISIN's
+    file is a second company to every step that walks the store:
+    `volume-events.json` published "EGS370O1C013" trading 18.2 times its usual
+    volume on 15 September 2026, and `trends.json` a 52-week range for it.
+
+    A file goes only when its code's file holds a session for every date it
+    traded on, so nothing it held is lost. Full build only, like the write.
+    """
+    retired = []
+    for path in sorted(PRICES.glob("*.json")):
+        try:
+            doc = json.loads(path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            continue
+        code = exchange_code(doc.get("ticker") or path.stem)
+        if not code or path.stem == code:
+            continue
+        traded = {b["date"] for b in doc.get("bars") or []
+                  if b.get("date") and clean(b.get("close")) is not None and b.get("volume") != 0}
+        target = PRICES / f"{code}.json"
+        try:
+            held = {b.get("date") for b in
+                    json.loads(target.read_text(encoding="utf-8")).get("bars") or []}
+        except (json.JSONDecodeError, OSError):
+            held = set()
+        if traded <= held:
+            path.unlink()
+            retired.append(f"{path.stem} → {code}")
+    return retired
 
 
 def normalize_history() -> int:
@@ -991,8 +1065,15 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
     kept = 0 if quotes_only else persist_history(union)
     if kept:
         print(f"   price history: {kept} series written to data-source/prices")
+    retired = [] if quotes_only else retire_isin_archives()
+    if retired:
+        print(f"   price history: {len(retired)} series filed under an ISIN moved to the "
+              f"exchange's code: {', '.join(retired)}")
     companies, stocks, details = [], {}, {}
     skipped = 0
+    # Records the scanner named by an ISIN that no market-watch row pairs with
+    # a code: MKIT's EGS659O1C015 among them, delisted on 12 August 2026.
+    unnamed = []
     # Priced, and not in the published directory yet: a new listing. The daily
     # build adds it to the directory and the market file together; the price
     # job leaves it out of both, so `market.json` never names a company no
@@ -1005,6 +1086,8 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
         close = clean(r.get("close"))
         if not ticker or close is None or not TICKER.fullmatch(ticker):
             skipped += 1
+            if isinstance(ticker, str) and ISIN_NAME.fullmatch(ticker):
+                unnamed.append(f"{ticker} {r.get('company') or ''}".strip())
             continue
         if quotes_only and directory and ticker not in directory:
             unlisted.append(ticker)
@@ -1395,6 +1478,15 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
     print(f"profile  {with_profile} with extra fields ({fields} values total)")
     if skipped:
         print(f"skipped  {skipped} records with no usable ticker or close")
+    if unnamed:
+        print(f"         {len(unnamed)} of them named by an ISIN no market-watch row pairs with a "
+              f"code: {'; '.join(unnamed)}")
+    named = scan.get("namedByExchange")
+    if isinstance(named, dict) and named:
+        print(f"named    {len(named)} listings the scanner files under an ISIN, published under "
+              "the exchange's code: " + ", ".join(
+                  f"{code} ({str(symbol).removeprefix('EGX:')})"
+                  for symbol, code in sorted(named.items(), key=lambda kv: str(kv[1]))))
     if gone:
         print(f"dropped  {len(gone)} published companies the scanner no longer carries by "
               f"name: {', '.join(gone)}")
