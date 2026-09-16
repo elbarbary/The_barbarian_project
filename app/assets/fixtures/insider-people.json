@@ -1,16 +1,16 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-16T16:01:13+00:00",
+ "generated": "2026-09-16T16:36:22+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1306,
- "tradeCount": 111,
+ "peopleCount": 1308,
+ "tradeCount": 117,
  "tickerCount": 241,
- "tradedTickerCount": 54,
- "firmCount": 432,
- "personCount": 874,
- "aliasCount": 132,
+ "tradedTickerCount": 59,
+ "firmCount": 433,
+ "personCount": 875,
+ "aliasCount": 135,
  "registerCount": 240,
  "overDisclosed": [],
  "supersededByRegister": [
@@ -65,6 +65,48 @@
  ],
  "seatCount": 2007,
  "people": [
+  {
+   "id": "مجموعة الجارحي للاستثمار والتطوير",
+   "name": "مجموعة الجارحي للاستثمار والتطوير",
+   "nameEn": "Magmou'at Al Garhy Lil Istithmar Wal Tatweer",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": [
+    "شركة مجموعة الجارحي للاستثمار والتطوير",
+    "شركة مجموعه الجارحي للاستثمار والتطوير (الوحدة للتنمية الصناعية سابقاً)",
+    "مجموعة الجارحي للإستثمار والتطوير",
+    "مجموعه الجارحي للاستثمار والتطوير"
+   ],
+   "tickers": [
+    "ATQA"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 1902600000.0,
+   "singleCompanyMove": {
+    "ticker": "ATQA",
+    "from": 89.041147,
+    "to": 62.791147,
+    "change": -26.25
+   },
+   "trades": [
+    {
+     "filingId": "277391",
+     "date": "2025-10-12",
+     "ticker": "ATQA",
+     "company": null,
+     "companyAr": "مصر الوطنية للصلب ش م م (عتاقة)",
+     "action": "sell",
+     "shares": 315000000,
+     "price": 6.04,
+     "value": 1902600000.0,
+     "stakeBefore": 89.041147,
+     "stakeAfter": 62.791147,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/328700_1.pdf"
+    }
+   ]
+  },
   {
    "id": "جدوى للتنمية الصناعية",
    "name": "جدوى للتنمية الصناعية",
@@ -263,6 +305,43 @@
      "stakeBefore": 30.176,
      "stakeAfter": 29.424,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343391_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "ايمان احمد كمال عبد القادر محمد عامر",
+   "name": "ايمان احمد كمال عبد القادر محمد عامر",
+   "nameEn": "Iman Ahmed Kamal Abdel Kader Mohamed Amer",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "CRST"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 7002211.47,
+   "singleCompanyMove": {
+    "ticker": "CRST",
+    "from": 0,
+    "to": 7.812,
+    "change": 7.812
+   },
+   "trades": [
+    {
+     "filingId": "277315",
+     "date": "2025-10-08",
+     "ticker": "CRST",
+     "company": null,
+     "companyAr": "كرستمارك للمقاولات والتطوير العقاري",
+     "action": "buy",
+     "shares": 43846033,
+     "price": 0.1597,
+     "value": 7002211.4701000005,
+     "stakeBefore": 0,
+     "stakeAfter": 7.812,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/328552_1.pdf"
     }
    ]
   },
@@ -943,6 +1022,43 @@
    ]
   },
   {
+   "id": "ALPHA ORYX LIMITED ألفا أوريكس المحدودة",
+   "name": "ALPHA ORYX LIMITED ألفا أوريكس المحدودة",
+   "nameEn": null,
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "COMI"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 7092750000.0,
+   "singleCompanyMove": {
+    "ticker": "COMI",
+    "from": 18.06,
+    "to": 15.67,
+    "change": -2.39
+   },
+   "trades": [
+    {
+     "filingId": "277425",
+     "date": "2025-10-12",
+     "ticker": "COMI",
+     "company": null,
+     "companyAr": "البنك التجارى الدولى",
+     "action": "sell",
+     "shares": 73500000,
+     "price": 96.5,
+     "value": 7092750000.0,
+     "stakeBefore": 18.06,
+     "stakeAfter": 15.67,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/328702_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "علاء محمد الشافعى محمد فوزى",
    "name": "علاء محمد الشافعى محمد فوزى",
    "nameEn": "Alaa Mohamed El Shafei Mohamed Fawzy",
@@ -1126,6 +1242,45 @@
      "stakeBefore": 46.35,
      "stakeAfter": 44.7,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343612_1.PDF"
+    }
+   ]
+  },
+  {
+   "id": "هشام سليمان فهمي عبد اللطيف ابو حسين",
+   "name": "هشام سليمان فهمي عبد اللطيف ابو حسين",
+   "nameEn": "Hesham Soliman Fahmy Abdel Latif Abo Hussein",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "هشام سليمان فهمي عبداللطيف ابو حسين"
+   ],
+   "tickers": [
+    "SIPC"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 11537187.6,
+   "singleCompanyMove": {
+    "ticker": "SIPC",
+    "from": 5.572,
+    "to": 3.952,
+    "change": -1.62
+   },
+   "trades": [
+    {
+     "filingId": "277285",
+     "date": "2025-10-07",
+     "ticker": "SIPC",
+     "company": null,
+     "companyAr": "سبأ الدولية للأدوية والصناعات الكيماوية",
+     "action": "sell",
+     "shares": 4048136,
+     "price": 2.85,
+     "value": 11537187.6,
+     "stakeBefore": 5.572,
+     "stakeAfter": 3.952,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/328553_1.pdf"
     }
    ]
   },
@@ -2336,45 +2491,6 @@
    ]
   },
   {
-   "id": "شركة دراية المالية مساهمة مقفلة",
-   "name": "شركة دراية المالية مساهمة مقفلة",
-   "nameEn": "Derayah Financial Company Closed Joint Stock",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": [
-    "شركة دراية المالية — مساهمة مقفلة"
-   ],
-   "tickers": [
-    "AMII"
-   ],
-   "tradeCount": 1,
-   "boughtCount": 0,
-   "soldCount": 1,
-   "value": 1449000.0,
-   "singleCompanyMove": {
-    "ticker": "AMII",
-    "from": 10.013,
-    "to": 9.88,
-    "change": -0.133
-   },
-   "trades": [
-    {
-     "filingId": "292428",
-     "date": "2026-08-03",
-     "ticker": "AMII",
-     "company": null,
-     "companyAr": "العربية للصناعات المعدنية والاستثمارات الصناعية",
-     "action": "sell",
-     "shares": 100000,
-     "price": 14.49,
-     "value": 1449000.0,
-     "stakeBefore": 10.013,
-     "stakeAfter": 9.88,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342081_1.pdf"
-    }
-   ]
-  },
-  {
    "id": "خالد عبدالله محمد عبدالله سلوم",
    "name": "خالد عبدالله محمد عبدالله سلوم",
    "nameEn": "Khaled Abdullah Mohamed Abdullah Sallam",
@@ -2521,6 +2637,43 @@
      "stakeBefore": 4.97,
      "stakeAfter": 5.02,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343068_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "THEBES B V",
+   "name": "THEBES B V",
+   "nameEn": null,
+   "script": "latin",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "TALM"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 4074193.86,
+   "singleCompanyMove": {
+    "ticker": "TALM",
+    "from": 23.98,
+    "to": 24.03,
+    "change": 0.05
+   },
+   "trades": [
+    {
+     "filingId": "277469",
+     "date": "2025-10-12",
+     "ticker": "TALM",
+     "company": null,
+     "companyAr": "تعليم لخدمات الإدارة",
+     "action": "buy",
+     "shares": 316074,
+     "price": 12.89,
+     "value": 4074193.8600000003,
+     "stakeBefore": 23.98,
+     "stakeAfter": 24.03,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/328728_1.pdf"
     }
    ]
   },
@@ -3232,6 +3385,56 @@
    ]
   },
   {
+   "id": "شركة دراية المالية مساهمة مقفلة",
+   "name": "شركة دراية المالية مساهمة مقفلة",
+   "nameEn": "Derayah Financial Company Closed Joint Stock",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": [
+    "شركة دراية المالية — مساهمة مقفلة",
+    "شركه دراية المالية مساهمة مقفلة"
+   ],
+   "tickers": [
+    "AMII",
+    "ARVA"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 1,
+   "soldCount": 1,
+   "value": 15332472.0,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "277456",
+     "date": "2025-10-12",
+     "ticker": "ARVA",
+     "company": null,
+     "companyAr": null,
+     "action": "buy",
+     "shares": 1657728,
+     "price": 8.375,
+     "value": 13883472.0,
+     "stakeBefore": 3.5,
+     "stakeAfter": 5.72,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/328726_1.pdf"
+    },
+    {
+     "filingId": "292428",
+     "date": "2026-08-03",
+     "ticker": "AMII",
+     "company": null,
+     "companyAr": "العربية للصناعات المعدنية والاستثمارات الصناعية",
+     "action": "sell",
+     "shares": 100000,
+     "price": 14.49,
+     "value": 1449000.0,
+     "stakeBefore": 10.013,
+     "stakeAfter": 9.88,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342081_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "احمد جلال خيري محمود",
    "name": "احمد جلال خيري محمود",
    "nameEn": "Ahmed Galal Kheiry Mahmoud",
@@ -3795,25 +3998,6 @@
    "kind": "person",
    "aliases": [
     "جمال عبدالقادر عبد البصير"
-   ],
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "شركة مجموعه الجارحي للاستثمار والتطوير (الوحدة للتنمية الصناعية سابقاً)",
-   "name": "شركة مجموعه الجارحي للاستثمار والتطوير (الوحدة للتنمية الصناعية سابقاً)",
-   "nameEn": null,
-   "script": null,
-   "kind": "firm",
-   "aliases": [
-    "شركة مجموعة الجارحي للاستثمار والتطوير",
-    "مجموعة الجارحي للإستثمار والتطوير",
-    "مجموعه الجارحي للاستثمار والتطوير"
    ],
    "tickers": [],
    "tradeCount": 0,
@@ -7090,21 +7274,6 @@
    "nameEn": null,
    "script": null,
    "kind": "firm",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "THEBES B V",
-   "name": "THEBES B V",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
    "aliases": null,
    "tickers": [],
    "tradeCount": 0,
@@ -11219,21 +11388,6 @@
   {
    "id": "احمد العزب سعد احمد خطاب",
    "name": "احمد العزب سعد احمد خطاب",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "هشام سليمان فهمي عبداللطيف ابو حسين",
-   "name": "هشام سليمان فهمي عبداللطيف ابو حسين",
    "nameEn": null,
    "script": null,
    "kind": "person",
@@ -22578,7 +22732,7 @@
    "history": []
   },
   {
-   "holder": "شركة مجموعه الجارحي للاستثمار والتطوير (الوحدة للتنمية الصناعية سابقاً)",
+   "holder": "مجموعة الجارحي للاستثمار والتطوير",
    "kind": "firm",
    "ticker": "ATQA",
    "percent": 62.791147,
@@ -22587,9 +22741,14 @@
    "filingId": "291072",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340799_1.pdf",
    "shares": 753493764,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
+   "openedAt": "2025-10-12",
+   "openingPercent": 89.041147,
+   "history": [
+    {
+     "date": "2025-10-12",
+     "percent": 62.791147
+    }
+   ]
   },
   {
    "holder": "AIF HOLDING LIMITED",
@@ -24216,7 +24375,7 @@
    "history": []
   },
   {
-   "holder": "هشام سليمان فهمي عبداللطيف ابو حسين",
+   "holder": "هشام سليمان فهمي عبد اللطيف ابو حسين",
    "kind": "person",
    "ticker": "ADRI",
    "percent": 27.615,
@@ -24523,9 +24682,14 @@
    "filingId": "291103",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340724_1.pdf",
    "shares": 183551108,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
+   "openedAt": "2025-10-12",
+   "openingPercent": 23.98,
+   "history": [
+    {
+     "date": "2025-10-12",
+     "percent": 24.03
+    }
+   ]
   },
   {
    "holder": "شركة فالمور القابضة للإستثمار",
@@ -26214,6 +26378,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "ALPHA ORYX LIMITED ألفا أوريكس المحدودة",
+   "kind": "firm",
+   "ticker": "COMI",
+   "percent": 15.67,
+   "asOf": "2025-10-12",
+   "basis": "trade",
+   "filingId": "277425",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/328702_1.pdf",
+   "openedAt": "2025-10-12",
+   "openingPercent": 18.06,
+   "history": [
+    {
+     "date": "2025-10-12",
+     "percent": 15.67
+    }
+   ]
   },
   {
    "holder": "يحي بن محمد بن عوض بن لادن",
@@ -28305,9 +28487,14 @@
    "filingId": "291777",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341508_1.pdf",
    "shares": 7504124,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
+   "openedAt": "2025-10-12",
+   "openingPercent": 3.5,
+   "history": [
+    {
+     "date": "2025-10-12",
+     "percent": 5.72
+    }
+   ]
   },
   {
    "holder": "ترافكو جروب انترناشيونال القابضه ش م م",
@@ -29963,6 +30150,24 @@
    "history": []
   },
   {
+   "holder": "ايمان احمد كمال عبد القادر محمد عامر",
+   "kind": "person",
+   "ticker": "CRST",
+   "percent": 7.812,
+   "asOf": "2025-10-08",
+   "basis": "trade",
+   "filingId": "277315",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/328552_1.pdf",
+   "openedAt": "2025-10-08",
+   "openingPercent": 0,
+   "history": [
+    {
+     "date": "2025-10-08",
+     "percent": 7.812
+    }
+   ]
+  },
+  {
    "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
    "kind": "firm",
    "ticker": "COMI",
@@ -30277,7 +30482,7 @@
    "history": []
   },
   {
-   "holder": "شركة مجموعه الجارحي للاستثمار والتطوير (الوحدة للتنمية الصناعية سابقاً)",
+   "holder": "مجموعة الجارحي للاستثمار والتطوير",
    "kind": "firm",
    "ticker": "ARAB",
    "percent": 7.53,
@@ -30767,7 +30972,7 @@
    "history": []
   },
   {
-   "holder": "شركة مجموعه الجارحي للاستثمار والتطوير (الوحدة للتنمية الصناعية سابقاً)",
+   "holder": "مجموعة الجارحي للاستثمار والتطوير",
    "kind": "firm",
    "ticker": "PORT",
    "percent": 6.81,
@@ -31893,7 +32098,7 @@
    "history": []
   },
   {
-   "holder": "شركة مجموعه الجارحي للاستثمار والتطوير (الوحدة للتنمية الصناعية سابقاً)",
+   "holder": "مجموعة الجارحي للاستثمار والتطوير",
    "kind": "firm",
    "ticker": "HRHO",
    "percent": 5.681,
@@ -33886,6 +34091,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "هشام سليمان فهمي عبد اللطيف ابو حسين",
+   "kind": "person",
+   "ticker": "SIPC",
+   "percent": 3.952,
+   "asOf": "2025-10-07",
+   "basis": "trade",
+   "filingId": "277285",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/328553_1.pdf",
+   "openedAt": "2025-10-07",
+   "openingPercent": 5.572,
+   "history": [
+    {
+     "date": "2025-10-07",
+     "percent": 3.952
+    }
+   ]
   },
   {
    "holder": "نازك فائق سامي حسن",
@@ -38860,7 +39083,7 @@
    "history": []
   },
   {
-   "holder": "شركة مجموعه الجارحي للاستثمار والتطوير (الوحدة للتنمية الصناعية سابقاً)",
+   "holder": "مجموعة الجارحي للاستثمار والتطوير",
    "kind": "firm",
    "ticker": "ORWE",
    "percent": 0.439,
@@ -44241,14 +44464,34 @@
   },
   {
    "start": "2025-10-05",
-   "end": "2025-10-07",
-   "label": "5–7 Oct",
-   "labelAr": "5–7 أكتوبر",
-   "sessions": 1,
-   "buys": 1,
-   "sells": 1,
-   "value": 5096167.4,
+   "end": "2025-10-08",
+   "label": "5–8 Oct",
+   "labelAr": "5–8 أكتوبر",
+   "sessions": 2,
+   "buys": 2,
+   "sells": 2,
+   "value": 23635566.47,
    "moves": [
+    {
+     "holder": "ايمان احمد كمال عبد القادر محمد عامر",
+     "kind": "person",
+     "ticker": "CRST",
+     "from": 0,
+     "to": 7.812,
+     "trades": 1,
+     "value": 7002211.47,
+     "change": 7.812
+    },
+    {
+     "holder": "هشام سليمان فهمي عبد اللطيف ابو حسين",
+     "kind": "person",
+     "ticker": "SIPC",
+     "from": 5.572,
+     "to": 3.952,
+     "trades": 1,
+     "value": 11537187.6,
+     "change": -1.62
+    },
     {
      "holder": "خالد عبد الرازق محمد عبد الغنى",
      "kind": "person",
@@ -44268,6 +44511,58 @@
      "trades": 1,
      "value": 2952167.4,
      "change": 0.08
+    }
+   ]
+  },
+  {
+   "start": "2025-10-12",
+   "end": "2025-10-12",
+   "label": "12–12 Oct",
+   "labelAr": "12–12 أكتوبر",
+   "sessions": 1,
+   "buys": 2,
+   "sells": 2,
+   "value": 9013307665.86,
+   "moves": [
+    {
+     "holder": "مجموعة الجارحي للاستثمار والتطوير",
+     "kind": "firm",
+     "ticker": "ATQA",
+     "from": 89.041147,
+     "to": 62.791147,
+     "trades": 1,
+     "value": 1902600000.0,
+     "change": -26.25
+    },
+    {
+     "holder": "ALPHA ORYX LIMITED ألفا أوريكس المحدودة",
+     "kind": "firm",
+     "ticker": "COMI",
+     "from": 18.06,
+     "to": 15.67,
+     "trades": 1,
+     "value": 7092750000.0,
+     "change": -2.39
+    },
+    {
+     "holder": "شركة دراية المالية مساهمة مقفلة",
+     "kind": "firm",
+     "ticker": "ARVA",
+     "from": 3.5,
+     "to": 5.72,
+     "trades": 1,
+     "value": 13883472.0,
+     "change": 2.22
+    },
+    {
+     "holder": "THEBES B V",
+     "kind": "person",
+     "ticker": "TALM",
+     "from": 23.98,
+     "to": 24.03,
+     "trades": 1,
+     "value": 4074193.86,
+     "change": 0.05
     }
    ]
   },
