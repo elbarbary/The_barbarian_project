@@ -3943,7 +3943,7 @@ export class Component extends Base {
       ['sectors', ar?'القطاعات':'Sectors', sectorCards.length ? String(sectorCards.length) : ''],
       ['valuation', ar ? 'التقييم والديون' : 'Valuation & Debt', ''],
       ['pairs', ar ? 'فروق الأسعار والتسوية' : 'Pairs & Arbitrage', ''],
-      ['fragility', ar ? 'محرّك الأزمات V5' : 'Crash Fragility V5', ''],
+      ['fragility', ar ? 'بحث إنذار الانهيارات' : 'Crash warning research', ''],
       ['today', ar ? 'الموجز' : 'Today', ''],
       ['calendar', ar ? 'الإفصاحات' : 'Disclosures', ''],
       // The crossings were a block on Today under the news. They are a
@@ -4604,7 +4604,7 @@ export class Component extends Base {
         { id: 'sim', label: ar ? 'محاكي الرسوم والأداء' : 'Trading & Fee Simulator', active: (st.toolsTab || 'sim') === 'sim', go: () => this.setState({ toolsTab: 'sim' }) },
         { id: 'calc', label: ar ? 'حاسبة التوزيعات' : 'Dividend Calculator', active: st.toolsTab === 'calc', go: () => this.setState({ toolsTab: 'calc' }) },
         { id: 'guide', label: ar ? 'دليل النسب والمكررات' : 'Valuation Guide', active: st.toolsTab === 'guide', go: () => this.setState({ toolsTab: 'guide' }) },
-        { id: 'fragility', label: ar ? 'محرّك الهشاشة والأزمات' : 'Crash Fragility Engine', active: st.toolsTab === 'fragility', go: () => this.setState({ toolsTab: 'fragility' }) }
+        { id: 'fragility', label: ar ? 'بحث إنذار الانهيارات' : 'Crash warning research', active: st.toolsTab === 'fragility', go: () => this.setState({ toolsTab: 'fragility' }) }
       ],
       // The panel is drawn only once its module is here; until then the two
       // flags below carry the wait, so the tab is never a blank frame.
@@ -4619,23 +4619,18 @@ export class Component extends Base {
       showToolsGuide: st.toolsTab === 'guide',
       showToolsFragility: st.toolsTab === 'fragility',
       fragilityData: {
-        title: ar ? 'محرّك الإنذار المبكر للأزمات والهشاشة V5' : 'EGX Fragility Engine V5',
-        subtitle: ar ? 'نموذج ثنائي المحرّكات لاكتشاف الهشاشة الهيكلية والصدمات قبل وقوعها — مجرّب على 18 سنة' : 'Point-in-time dual-engine early warning system tested across 18 years and 4,518 market sessions.',
-        liveScore: '0.45',
-        liveScoreRaw: '0.4528',
-        liveStatusLabel: ar ? 'نطاق طبيعي / أخضر (Benign)' : 'Normal / Green Regime (Benign)',
-        livePrice: '56,280.40',
-        engineA: '0.4528',
-        engineB: '0.2505',
-        stressGroups: '1 / 7',
-        transmission: ar ? 'مفعل ومراقب (Guarded)' : 'Active (Guarded)',
-        recallMetric: '15 / 17 (88.2%)',
-        hardFaMetric: '1.00 / yr',
-        occupancyMetric: '11.49%',
-        precisionMetric: '52.9%',
-        leadMetric: ar ? '16.0 يوم' : '16.0 days',
-        utilityMetric: '+76.55',
-        openFullLabel: ar ? 'فتح محرّك الأزمات ومحاكي الـ 18 سنة التفاعلي ↗' : 'Launch Full Fragility Engine & 18Y Simulator ↗',
+        eyebrow: ar ? 'بحث · مؤشر EGX 30 من 2008 إلى 2026' : 'Research · EGX 30, 2008 to 2026',
+        title: ar ? 'هل كان إنذار مبكر سيخفّف أسوأ انهيارات البورصة؟' : 'Could an early warning have softened the EGX’s worst crashes?',
+        subtitle: ar
+          ? 'قاعدة واحدة اختُبرت على كل يوم تداول: عند الإنذار تنتقل الأموال إلى أذون الخزانة، ولا تعود إلى المؤشر إلا بعد أن يتحسّن الاتجاه.'
+          : 'One rule tested on every trading day: when the warning switches on the money moves into Treasury bills, and returns to the index only once the trend turns.',
+        points: [
+          { title: ar ? 'ماذا أصبحت 100,000 جنيه' : 'What 100,000 EGP became', body: ar ? 'بالقاعدة وبالاحتفاظ بالمؤشر، بعد خصم العمولات.' : 'With the rule and holding the index, after fees.' },
+          { title: ar ? 'أين ساعدت وأين أضرّت' : 'Where it helped, and where it hurt', body: ar ? 'سنوات الانهيار، والصعود الهادئ، والصدمات.' : 'The crash years, the calm rise and the shocks.' },
+          { title: ar ? 'كل إنذار وكل انهيار' : 'Every warning and every crash', body: ar ? 'بما فيها الإنذارات الكاذبة والانهيارات التي تراجعت فيها القاعدة أكثر.' : 'False alarms included, and the crashes where the rule fell further.' },
+        ],
+        note: ar ? 'اختبار على أسعار سابقة، وليس نصيحة استثمارية.' : 'A test on past prices, not advice.',
+        openFullLabel: ar ? 'افتح البحث' : 'Open the research',
         openFullHref: 'fragility'
       },
       isToolsTabSim: (st.toolsTab || 'sim') === 'sim',
