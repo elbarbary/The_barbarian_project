@@ -2091,6 +2091,10 @@
     "meaning": "Institutional portfolio reallocations and high-volume liquidation orders create downward pricing pressure across constituent equities, bringing the benchmark index to the 57,000-point technical threshold.",
     "meaning_ar": "تؤدي عمليات إعادة هيكلة المحافظ والتخارج المؤسسي بأحجام تداول مرتفعة إلى ضغوط سعرية على الأسهم المكونة للمؤشر، مما يدفع المؤشر الرئيسي للتداول عند مستوى 57 ألف نقطة."
   },
+  "البورصه ترتفع 0.3% في المستهل بتداولات 363 مليون جنيه": {
+    "meaning": "The market benchmark reflects an opening net appreciation driven by executed buy orders outpacing sell liquidity, with matched transactions recording EGP 363 million in aggregate turnover across listed equities during the initial session.",
+    "meaning_ar": "يعكس المؤشر العام صعوداً افتتاحياً ناتجاً عن تجاوز حجم أوامر الشراء المنفذة لسيولة البيع، مع تسجيل صفقات متطابقة بقيمة تداول إجمالية بلغت 363 مليون جنيه عبر الأسهم المقيدة في مستهل الجلسة."
+  },
   "البورصه تستضيف وفدا اكاديميا كينيا لتعزيز التعاون": {
     "meaning": "The exchange conducts institutional knowledge-sharing and capacity-building sessions with an academic delegation, establishing institutional links between Egyptian capital market infrastructure and regional educational entities.",
     "meaning_ar": "تُجري البورصة برامج لتبادل المعرفة وبناء القدرات المؤسسية مع الوفد الأكاديمي، مما ينشئ قنوات تواصل مؤسسية بين منظومة سوق رأس المال المصري والمؤسسات التعليمية الإقليمية."
@@ -4372,6 +4376,10 @@
     "meaning": "This volume of expenditure reflects large-scale capital deployment by technology firms into computing infrastructure, data centers, specialized hardware procurement, and research operations.",
     "meaning_ar": "يعكس هذا الحجم من الإنفاق توجيه تدفقات رأسمالية ضخمة من قِبل شركات التكنولوجيا نحو البنية التحتية للحوسبة، ومراكز البيانات، وتوريد الأجهزة المتخصصة، والبحث والتطوير."
   },
+  "جيتكس للاستثمارات تتحول للخساره بقيمه 0.3 مليون دولار بالنصف الاول": {
+    "meaning": "The company shifts from a net profit to a net deficit of $0.3 million for the six-month period, reflecting total operational costs, financing charges, and non-operating expenses exceeding total revenues generated during the half.",
+    "meaning_ar": "يعكس تحول الشركة إلى تسجيل صافي خسائر بقيمة 0.3 مليون دولار خلال فترة الستة أشهر تجاوز إجمالي التكاليف التشغيلية والأعباء التمويلية والمصروفات غير التشغيلية لحجم الإيرادات المحققة خلال النصف الأول."
+  },
   "جيه بي مورجان يوسع اعمال الخدمات المصرفيه للشركات في اليونان": {
     "meaning": "JPMorgan establishes and broadens its local corporate banking infrastructure and product coverage in Greece, providing lending, cash management, and advisory services directly to domestic corporate entities and institutional clients.",
     "meaning_ar": "يقوم جيه بي مورجان بتأسيس وتوسيع بنيته التحتية المصرفية للشركات ونطاق خدماته في اليونان، لتقديم التمويل وإدارة النقد والخدمات الاستشارية مباشرة للشركات المحلية والمؤسسات."
@@ -4687,6 +4695,10 @@
   "رييس الوزراء يتابع جهود توفير السلع وضبط حركه الاسواق والاسعار": {
     "meaning": "Government market monitoring involves coordinating strategic commodity reserves, tracking retail supply chains, and enforcing price compliance across domestic distribution channels.",
     "meaning_ar": "تتضمن المتابعة الحكومية للأسواق التنسيق بشأن الأرصدة الاستراتيجية للسلع، وتتبع سلاسل الإمداد والتوزيع، وتطبيق آليات الرقابة على الأسعار في منافذ البيع."
+  },
+  "رييس الوزراء يتابع مستهدفات برنامج اعاده هيكله الشركات القابضه": {
+    "meaning": "The restructuring program reorganizes the financial structures, operating models, and asset portfolios of state-owned holding companies to align with the State Ownership Policy.",
+    "meaning_ar": "يتضمن برنامج إعادة الهيكلة تنظيم الهياكل التمويلية ونماذج التشغيل ومحافظ الأصول للشركات القابضة التابعة للدولة وفقاً لأطر وثيقة سياسة ملكية الدولة."
   },
   "رييس الوزراء يتابع مع وزير التخطيط تطورات الاقتصاد ومستجدات برنامج التحول الاقتصادي الوطني": {
     "meaning": "These inter-ministerial meetings review public investment allocation, state budget execution, and structural reform targets under the national economic transformation framework.",
@@ -5304,6 +5316,10 @@
   "شركه بايونيرز بروبرتيز تشتري 450 الف سهم خزينه": {
     "meaning": "Treasury share purchases reallocate liquid cash into the company's own equity, temporarily reducing the active free float circulating on the exchange and categorising these shares as non-voting equity on the balance sheet.",
     "meaning_ar": "تؤدي عملية شراء أسهم الخزينة إلى تحويل جزء من السيولة النقدية للشركة إلى حقوق ملكيتها، مما يقلل عدد الأسهم حرة التداول المتاحة في البورصة ويصنف هذه الأسهم كأصول خالية من حقوق التصويت في الميزانية العمومية."
+  },
+  "شركه تراي كيم لكيماويات البناء تستهدف 800 مليون جنيه مبيعات بنهايه 2026": {
+    "meaning": "Setting a sales target of EGP 800 million establishes an operational benchmark that aligns production capacity, working capital allocation, and supply contracts in the construction chemicals sector.",
+    "meaning_ar": "يحدد استهداف مبيعات بقيمة 800 مليون جنيه معياراً تشغيلياً لتنظيم الطاقة الإنتاجية، وتخصيص رأس المال العامل، وإدارة عقود التوريد في قطاع كيماويات البناء."
   },
   "شركه تسلا تحذر بريطانيا: قوانين السيارات ذاتيه القياده تهدد التنافسيه": {
     "meaning": "Autonomous vehicle regulations establish compliance standards and testing frameworks that define market access and product rollout timelines for manufacturers.",
