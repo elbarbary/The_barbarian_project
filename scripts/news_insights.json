@@ -967,6 +967,10 @@
     "meaning": "Setting a sales threshold at one billion Egyptian pounds defines the company's planned operational scale and inventory turnover requirements within the domestic cosmetics market.",
     "meaning_ar": "يمثل تحديد مستهدف مبيعات بقيمة مليار جنيه خطة الشركة لحجم التشغيل ومعدلات دوران المخزون المطلوبة داخل السوق المحلي لمنتجات التجميل."
   },
+  "«حمايه المستهلك» يضبط مخزنا غير مرخص لخلط البن بالبسله في شبرا الخيمه": {
+    "meaning": "Regulatory enforcement targeting commercial fraud addresses informal supply chain practices where unauthorized substitutes are mixed into consumer goods to lower raw material costs.",
+    "meaning_ar": "تستهدف الحملات الرقابية لمكافحة الغش التجاري ممارسات سلاسل التوريد غير الرسمية القائمة على خلط سلع بديلة غير مصرح بها لخفض تكلفة المواد الخام."
+  },
   "«حمايه المستهلك» يضبط مصنعا غير مرخص لتجهيز دواجن فاسده بالقليوبيه": {
     "meaning": "Regulatory enforcement actions against unlicensed food processors remove informal supply from the market and reinforce compliance standards across the formal poultry value chain.",
     "meaning_ar": "تؤدي الإجراءات الرقابية ضد المنشآت الغذائية غير المرخصة إلى استبعاد المعروض غير الرسمي من السوق وتطبيق معايير الامتثال عبر سلاسل توريد قطاع الدواجن المنظم."
@@ -3354,6 +3358,10 @@
   "النفط يتجه لمكاسب اسبوعيه بفعل توترات ايران": {
     "meaning": "Geopolitical tensions involving a major crude-producing nation introduce supply risk premiums into global benchmark pricing, which directly impacts energy import costs and related sector input pricing.",
     "meaning_ar": "تؤدي التوترات الجيوسياسية المرتبطة بدولة رئيسية منتجة للنفط إلى إضافة علاوة مخاطر العرض إلى الأسعار القياسية العالمية، مما ينعكس على تكاليف استيراد الطاقة وأسعار مدخلات الإنتاج للقطاعات المرتبطة."
+  },
+  "النفط يتراجع مع طرح السعوديه شحنات اضافيه من الخام عبر عمان": {
+    "meaning": "The release of additional crude volumes to the market increases spot physical supply, shifting the immediate supply-demand equilibrium and exerting downward pressure on benchmark oil prices.",
+    "meaning_ar": "يؤدي طرح كميات إضافية من النفط الخام في الأسواق إلى زيادة المعروض الفوري، مما يغير توازن العرض والطلب القائم ويضغط على أسعار النفط العالمية نحو الانخفاض."
   },
   "النفط يقفز 3% مع تعطل خط انابيب سعودي": {
     "meaning": "An operational disruption in crude pipeline infrastructure temporarily restricts supply delivery to international markets, causing an immediate upward repricing in global benchmark contracts.",
