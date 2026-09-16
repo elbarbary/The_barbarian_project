@@ -1515,6 +1515,17 @@
     "source": "https://www.egx.com.eg"
    },
    {
+    "period": "Q1 2026",
+    "net_income": -681.45,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "filed": "2026-09-16",
+    "filing_id": "egx-294800",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
     "period": "Q2 2021",
     "assets": 3608.061,
     "equity": 1528.19,

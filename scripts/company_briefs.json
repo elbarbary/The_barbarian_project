@@ -2907,7 +2907,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/GTEX/profile",
   "record": {
-   "filings": 82,
+   "filings": 85,
    "first_filing": "2024-03-25",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
@@ -4085,7 +4085,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/MILS/profile",
   "record": {
-   "filings": 809,
+   "filings": 810,
    "first_filing": "2010-02-16",
    "trading_suspensions": 20,
    "trading_resumptions": 18,
@@ -4743,7 +4743,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/OFH/profile",
   "record": {
-   "filings": 263,
+   "filings": 264,
    "first_filing": "2021-02-17",
    "trading_suspensions": 3,
    "trading_resumptions": 3,
@@ -4763,14 +4763,14 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/OIH/profile",
   "record": {
-   "filings": 380,
+   "filings": 383,
    "first_filing": "2018-08-09",
    "trading_suspensions": 8,
    "trading_resumptions": 8,
    "capital_increases": 0,
    "general_assemblies": 31,
-   "periods_reported": 27,
-   "loss_making_periods": 14
+   "periods_reported": 28,
+   "loss_making_periods": 15
   },
   "generated": "2026-08-25"
  },
@@ -5881,10 +5881,10 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/SPMD/profile",
   "record": {
-   "filings": 557,
+   "filings": 560,
    "first_filing": "2019-03-31",
-   "trading_suspensions": 14,
-   "trading_resumptions": 13,
+   "trading_suspensions": 15,
+   "trading_resumptions": 14,
    "capital_increases": 3,
    "general_assemblies": 29,
    "periods_reported": 29,
@@ -6240,7 +6240,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/TWSA/profile",
   "record": {
-   "filings": 55,
+   "filings": 56,
    "first_filing": "2024-12-26",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
