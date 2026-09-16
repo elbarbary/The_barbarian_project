@@ -7553,6 +7553,10 @@
     "meaning": "This transaction entails acquiring 230,000 treasury shares, which reduces the volume of actively circulating shares in the market and adjusts the equity structure on the balance sheet.",
     "meaning_ar": "تمثل هذه العملية استرداد الشركة لعدد 230 ألف سهم لتصبح أسهم خزينة، مما يقلص كمية الأسهم المتاحة للتداول في السوق ويعدل هيكل حقوق الملكية في الميزانية العمومية."
   },
+  "“بايونيرز بروبرتيز” تشتري 395 الف سهم خزينه": {
+    "meaning": "This transaction reallocates company cash to repurchase its own shares from the open market, reducing the total count of outstanding shares and classifying the acquired stock as treasury shares on the balance sheet.",
+    "meaning_ar": "تتضمن هذه العملية استخدام السيولة النقدية للشركة لإعادة شراء أسهمها من السوق المفتوح، مما يخفض عدد الأسهم المتداولة ويدرج الأسهم المشتراة كـ \"أسهم خزينة\" في قائمة المركز المالي."
+  },
   "“بايونيرز بروبرتيز” تشتري 450 الف سهم خزينه": {
     "meaning": "The company repurchases its own shares from the open market to hold as treasury stock, which reduces the total number of outstanding shares circulating among public shareholders and alters the equity structure on the balance sheet.",
     "meaning_ar": "تسترد الشركة جزءاً من أسهمها من التداول الحر للاحتفاظ بها كأسهم خزينة، مما يقلل عدد الأسهم المتبقية للتداول في السوق ويعدل هيكل حقوق الملكية في الميزانية العمومية."
