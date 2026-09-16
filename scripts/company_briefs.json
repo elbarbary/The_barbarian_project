@@ -1428,12 +1428,12 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/CRST/profile",
   "record": {
-   "filings": 100,
+   "filings": 101,
    "first_filing": "2025-03-26",
    "trading_suspensions": 1,
    "trading_resumptions": 1,
    "capital_increases": 0,
-   "general_assemblies": 14,
+   "general_assemblies": 15,
    "periods_reported": 18,
    "loss_making_periods": 9
   },
@@ -1892,7 +1892,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/EFIH/profile",
   "record": {
-   "filings": 328,
+   "filings": 329,
    "first_filing": "2021-10-05",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
@@ -2651,7 +2651,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/FTNS/profile",
   "record": {
-   "filings": 234,
+   "filings": 235,
    "first_filing": "2023-03-30",
    "trading_suspensions": 11,
    "trading_resumptions": 11,

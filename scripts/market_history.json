@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-09-16T09:32:03.877Z",
+ "updated_at": "2026-09-16T11:31:50.728Z",
  "sessions": [
   {
    "date": "2025-11-16",
@@ -2953,20 +2953,20 @@
   {
    "date": "2026-09-16",
    "indices": {
-    "EGX30": 54720.7,
-    "EGX70EWI": 20750.3,
-    "EGX100EWI": 27221.2
+    "EGX30": 54822.7,
+    "EGX70EWI": 20744.9,
+    "EGX100EWI": 27252.9
    },
    "breadth": {
     "up": 123,
-    "down": 100,
-    "flat": 60,
-    "counted": 283,
+    "down": 106,
+    "flat": 29,
+    "counted": 258,
     "basis": "session"
    },
    "metals": {
-    "XAU": 4340.1,
-    "XAG": 64.66
+    "XAU": 4349.9,
+    "XAG": 64.96
    }
   }
  ]
