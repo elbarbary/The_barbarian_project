@@ -3,10 +3,12 @@
 // This is a port of the research monitor's `daily_scan.mjs` — the script that
 // has produced `../work/daily_scan_<date>.json` every morning — cut down to the
 // part `scripts/build_market_api.py` actually reads, and stripped of every
-// dependency on a local file. The research script opens five absolute paths on
-// one particular laptop; a GitHub Actions runner is an empty checkout, so those
-// paths are not "probably missing", they are certainly missing. Everything here
-// comes from the network or from arithmetic on what the network returned.
+// dependency on a file outside this repository. The research script opens five
+// absolute paths on one particular laptop; a GitHub Actions runner is an empty
+// checkout, so those paths are not "probably missing", they are certainly
+// missing. Everything here comes from the network or from arithmetic on what
+// the network returned. The one file read is the published directory in this
+// checkout, and only to know which companies to ask for by name.
 //
 // The two network calls, the batching, the frame format and every formula below
 // are copied from the research script rather than rewritten. That script is the
@@ -64,6 +66,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import WebSocket from "ws";
 import { fetchHistories, statusOf, completedTradeBars } from "./egx_history.mjs";
+import { completeListing } from "./egx_listing.mjs";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -156,7 +159,64 @@ if (!scannerRows.size) {
   throw new Error("TradingView scanner returned no rows — refusing to write a scan file");
 }
 
-const records = [...scannerRows.values()].map((row) => {
+// The listing is not the market. It drops listed companies and brings them back
+// hours later, and one it dropped on 10 September was still missing on the 16th
+// while trading millions of shares a day (see `egx_listing.mjs`). So two lists
+// of companies are asked for by name wherever the listing left one out, or
+// listed it with no close:
+//
+//   * the published directory, so a company the app lists is not deleted
+//     because the listing had a bad hour;
+//   * the securities the exchange's own market watch reported trading
+//     (`data-source/egx-beta/session.json`, harvested by the daily build), so a
+//     company already lost that way comes back. EHDR is one: deleted on 10
+//     September, and asked for by name it answers. Codes the vendor spells
+//     differently (AIHC is its AIH) or files under an ISIN get no answer, which
+//     costs nothing: only the directory's companies are acted on by absence.
+//
+// Both are read from this checkout, which is not one of the laptop paths this
+// port dropped: they are part of the repository every machine that runs the
+// scan has checked out. Without them nothing is asked, and the scan says so.
+async function tickersIn(file, pick) {
+  try {
+    const tickers = pick(JSON.parse(await fs.readFile(path.join(repoRoot, file), "utf8")))
+      .filter((ticker) => typeof ticker === "string" && /^[A-Z]{3,6}$/.test(ticker));
+    return tickers.length ? tickers : null;
+  } catch {
+    return null;
+  }
+}
+
+async function requestByName(symbols) {
+  const response = await fetch("https://scanner.tradingview.com/egypt/scan", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ options: { lang: "en" }, symbols: { tickers: symbols }, columns }),
+  });
+  if (!response.ok) {
+    throw new Error(`TradingView scanner failed: ${response.status}`);
+  }
+  return await response.json();
+}
+
+// What the listing itself sent, before anything was asked for by name. The
+// short-scan guard compares this with `scannerTotal`, which is a question about
+// the listing's own pages.
+const listingRows = scannerRows.size;
+const directoryTickers = await tickersIn(path.join("public", "data", "v1", "companies.json"),
+  (body) => (body.companies ?? []).map((company) => company?.ticker));
+const exchangeTickers = await tickersIn(path.join("data-source", "egx-beta", "session.json"),
+  (body) => Object.keys(body.securities ?? {}));
+const listing = await completeListing(
+  scannerRows,
+  directoryTickers || exchangeTickers
+    ? [...new Set([...(directoryTickers ?? []), ...(exchangeTickers ?? [])])]
+    : null,
+  requestByName,
+  { closeAt: columns.indexOf("close") },
+);
+
+const records = [...listing.rows.values()].map((row) => {
   const values = Object.fromEntries(columns.map((column, index) => [column, row.d[index]]));
   // Nulls pass straight through. `clean()` downstream reads null and NaN alike
   // as "not reported" and simply omits the field, which is the honest rendering
@@ -327,10 +387,24 @@ const output = {
   asOf: asOf.toISOString(),
   runDate,
   scannerTotal,
-  // What was actually merged. Equal to `scannerTotal` on every run so far; if
-  // it ever is not, the exchange came back short and the number says so instead
-  // of the shortfall hiding inside a plausible-looking file.
-  scannerReturned: records.length,
+  // What was actually merged from the listing's pages. Equal to `scannerTotal`
+  // on every run so far; if it ever is not, the exchange came back short and
+  // the number says so instead of the shortfall hiding inside a
+  // plausible-looking file. Companies asked for by name are not in it.
+  scannerReturned: listingRows,
+  // The companies the listing left out or listed with no close, out of the
+  // published directory and the exchange's market watch, and what asking for
+  // each by name got (see `egx_listing.mjs`). `unknownToScanner` is the scanner
+  // saying it has no such symbol; `unaskedByName` is a request that failed,
+  // which says nothing. Each count is null when that list was not in the
+  // checkout, and with neither nothing was asked.
+  directoryTickers: directoryTickers ? directoryTickers.length : null,
+  exchangeTickers: exchangeTickers ? exchangeTickers.length : null,
+  askedByName: listing.asked,
+  recoveredByName: listing.recovered,
+  unpricedByName: listing.unpriced,
+  unknownToScanner: listing.unknown,
+  unaskedByName: listing.unasked,
   // Listings the socket answered for: with sessions, or honestly without.
   historiesFetched: records.length - missingHistoryTickers.length,
   historyFetchWarnings,
@@ -357,6 +431,32 @@ const withHistory = records.filter((record) => record.completedHistoryBars >= 2)
 console.log(`wrote    ${outputPath}`);
 console.log(`asOf     ${output.asOf}  (runDate ${runDate})`);
 console.log(`listed   ${output.scannerReturned} of ${scannerTotal} scanner rows`);
+{
+  const published = new Set(directoryTickers ?? []);
+  const named = (label, tickers) => (tickers.length ? `, ${tickers.length} ${label} (${tickers.join(", ")})` : "");
+  const report = (who, tickers) => {
+    const asked = listing.asked.filter((ticker) => tickers.has(ticker));
+    const within = (list) => list.filter((ticker) => tickers.has(ticker));
+    console.log(
+      `by name  ${who}: ${asked.length} not priced by the listing` +
+      named("recovered", within(listing.recovered)) +
+      named("answered with no close", within(listing.unpriced)) +
+      named("unknown to the scanner", within(listing.unknown)) +
+      named("NOT ASKED, the request failed", within(listing.unasked)),
+    );
+  };
+  if (directoryTickers === null) {
+    console.log("by name  no published directory in this checkout, so no published company was asked for");
+  } else {
+    report(`${directoryTickers.length} published companies`, published);
+  }
+  if (exchangeTickers === null) {
+    console.log("by name  no exchange market watch in this checkout");
+  } else {
+    const others = new Set(exchangeTickers.filter((ticker) => !published.has(ticker)));
+    report(`${others.size} exchange-traded codes the directory does not have`, others);
+  }
+}
 console.log(`history  ${withHistory} companies with usable history, ${unresolvedHistoryTickers.length} without`);
 const withoutSessions = records.filter((record) => record.historyStatus === "none").length;
 console.log(

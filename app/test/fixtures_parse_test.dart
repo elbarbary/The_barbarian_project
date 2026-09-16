@@ -162,13 +162,23 @@ void main() {
 
     test('covers every company in the directory', () {
       final directory = CompanyDirectory.fromJson(_read('companies.json'));
-      final snapshot = MarketSnapshot.fromJson(_read('market.json'));
+      final raw = _read('market.json');
+      final snapshot = MarketSnapshot.fromJson(raw);
+      // A listed company the capture has no price for is named in `unquoted`
+      // rather than given a quote (build_market_api.py). The app shows a dash
+      // for it, as for any ticker missing from `stocks`.
+      final unquoted = {...(raw['unquoted'] as List? ?? const []).cast<String>()};
 
       for (final c in directory.companies) {
         expect(
-          snapshot.quoteFor(c.ticker),
-          isNotNull,
-          reason: 'no quote for ${c.ticker}',
+          snapshot.quoteFor(c.ticker) != null || unquoted.contains(c.ticker),
+          isTrue,
+          reason: 'no quote for ${c.ticker}, and not named as unquoted',
+        );
+        expect(
+          snapshot.quoteFor(c.ticker) != null && unquoted.contains(c.ticker),
+          isFalse,
+          reason: '${c.ticker} is both quoted and unquoted',
         );
       }
     });
@@ -429,7 +439,9 @@ void main() {
         final company = Company.fromJson(
           _read('companies/${summary.ticker}.json'),
         );
-        final quote = snapshot.quoteFor(summary.ticker)!;
+        final quote = snapshot.quoteFor(summary.ticker);
+        // Named as unquoted in this capture, which the test above holds.
+        if (quote == null) continue;
 
         expect(
           company.market!.lastClose,

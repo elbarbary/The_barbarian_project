@@ -56,6 +56,7 @@ on:
       - 'scripts/build_market_api.py'
       - 'scripts/egx_scan.mjs'
       - 'scripts/egx_history.mjs'
+      - 'scripts/egx_listing.mjs'
       - 'scripts/build_fixtures.py'
       - '.github/workflows/publish-prices.yml'
 

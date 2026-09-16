@@ -522,6 +522,46 @@ def normalize_history() -> int:
     return persist_history(union)
 
 
+def published_directory() -> set[str] | None:
+    """The tickers `companies.json` lists as published, or None without one.
+
+    The daily build owns which companies exist. The price job reads this to
+    key `market.json` by it, and the daily build reads it to tell a company the
+    scan left out from a market that shrank. Both read it before either writes.
+    """
+    try:
+        body = json.loads((API / "companies.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    rows = body.get("companies") if isinstance(body, dict) else None
+    if not isinstance(rows, list):
+        return None
+    tickers = {row["ticker"] for row in rows
+               if isinstance(row, dict) and isinstance(row.get("ticker"), str)}
+    return tickers or None
+
+
+def unpriced_companies(scan: dict, directory: set[str] | None) -> tuple[list[str], list[str]]:
+    """Published companies this scan has no close for, split by what is known.
+
+    Returns `(gone, unexplained)`. `gone` are the ones the scanner, asked for
+    them by name, says it does not carry (`unknownToScanner`, see
+    `egx_listing.mjs`). `unexplained` is every other published company with no
+    usable close in the scan: left out and not asked for, asked for when the
+    request failed, or answered with no close.
+    """
+    if not directory:
+        return [], []
+    priced = {r["ticker"] for r in scan.get("records") or []
+              if isinstance(r.get("ticker"), str) and TICKER.fullmatch(r["ticker"])
+              and clean(r.get("close")) is not None}
+    named = scan.get("unknownToScanner")
+    unknown = {t for t in named if isinstance(t, str)} if isinstance(named, list) else set()
+    unpriced = sorted(directory - priced)
+    return ([t for t in unpriced if t in unknown],
+            [t for t in unpriced if t not in unknown])
+
+
 def published_profile(ticker: str) -> dict:
     """The profile last published for this company, or an empty one."""
     path = API / "companies" / f"{ticker}.json"
@@ -888,6 +928,46 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
         print(f"       is. Re-run the scan. ({scan_path.name})")
         return 1
 
+    # A company the scan did not price is not a company that left.
+    #
+    # The guard above cannot see this one. On 16 September 2026 the vendor's
+    # listing left NBCC and POCO out of its 13:01, 14:01 and 14:31 Cairo
+    # captures, and its own `totalCount` fell with them, so the scan was
+    # complete by the scanner's own count: 293 of 293. The loop below keeps only records with a close,
+    # so `market.json` published 282 quotes beside a 284-company directory,
+    # and the daily build that committed at 14:57 deleted both company
+    # documents. EHDR, which trades millions of shares a day, went the same
+    # way on the night of 10 September and did not come back.
+    #
+    # `egx_scan.mjs` now asks the scanner by name for every published company
+    # its listing left out. What is still unpriced after that is either gone
+    # (the scanner answered for a company it carries and sent nothing for this
+    # one) or unexplained. The full build rewrites the directory, so it drops
+    # the first kind and refuses on the second, before anything is written.
+    # NBCC and POCO were back in the listing by 14:59 the same afternoon, and
+    # asked for by name EHDR had never gone at all. The price job does neither. It
+    # does not own the directory, so it names every published company it
+    # cannot price in `unquoted` and leaves the directory to the daily build.
+    directory = published_directory()
+    gone, unexplained = unpriced_companies(scan, directory)
+    if unexplained and not quotes_only:
+        asked = set(scan.get("askedByName") or [])
+        failed = set(scan.get("unaskedByName") or [])
+        blank = set(scan.get("unpricedByName") or [])
+        why = collections.defaultdict(list)
+        for ticker in unexplained:
+            why["asked for by name, and the request failed" if ticker in failed
+                else "answered by name with no close" if ticker in blank
+                else "asked for by name, and not answered" if ticker in asked
+                else "never asked for by name (the scan predates that, or had no directory)"].append(ticker)
+        print(f"error: {len(unexplained)} published companies have no price in this scan, and the")
+        print("       scanner has not said they are gone. Rebuilding the directory from")
+        print("       it would delete them — published market data is left as it is.")
+        for reason, tickers in sorted(why.items()):
+            print(f"         {reason}: {', '.join(tickers)}")
+        print(f"       ({scan_path.name})")
+        return 1
+
     # Whether this scan knows about broker scope at all — see `tradable_flag`.
     scan_has_scope = any("thndrScope" in r for r in records)
 
@@ -913,12 +993,21 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
         print(f"   price history: {kept} series written to data-source/prices")
     companies, stocks, details = [], {}, {}
     skipped = 0
+    # Priced, and not in the published directory yet: a new listing. The daily
+    # build adds it to the directory and the market file together; the price
+    # job leaves it out of both, so `market.json` never names a company no
+    # other document knows (HALN, listed 14 September, went out that way at
+    # 15:02 on the 16th beside a directory without it).
+    unlisted = []
 
     for r in records:
         ticker = r.get("ticker")
         close = clean(r.get("close"))
         if not ticker or close is None or not TICKER.fullmatch(ticker):
             skipped += 1
+            continue
+        if quotes_only and directory and ticker not in directory:
+            unlisted.append(ticker)
             continue
 
         # Capped, because these files ship inside the app binary. Mubasher
@@ -1178,6 +1267,17 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
         "is_close": closed,
         "session_source": session_source,
         "stocks": stocks,
+        # Listed companies this capture has no price for. They are named here
+        # rather than given an entry in `stocks`, and nothing from an earlier
+        # capture stands in for the price. An entry without `close` would stop
+        # the app reading this file at all (`StockQuote.close` is a required
+        # double, and a failed parse is cached), and last hour's close would
+        # sit under this capture's `date` and `is_close` as if this capture had
+        # seen it. Every reader already treats a ticker missing from `stocks`
+        # as "no price": the site and the app show a dash. So `stocks` and
+        # `unquoted` together are the directory, and the measures table keeps
+        # a row for each. The full build never writes one: it refuses first.
+        "unquoted": sorted(set(gone + unexplained)) if quotes_only else [],
     }
 
     # A quote carries the move twice — as pounds and as a percentage — and the
@@ -1243,6 +1343,12 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
     # `companies.json` carries post-Market enrichment too (the trailing P/E, the
     # ratios, the corrected sector), so it is left alone for the same reason.
     #
+    # And because it leaves the directory alone, it writes the market file for
+    # that directory: a quote for each company in it the scan priced, the rest
+    # named in `unquoted`, and nothing for a company the directory does not
+    # have yet. Keyed by the scan instead, the two documents disagreed whenever
+    # the vendor's listing did, and `CardinalityTest` failed on main.
+    #
     # The cost, stated rather than hidden: `market.json` has its own manifest
     # counter, but its digest also folds into `data_version`, and `data_version`
     # is what guards every document with no counter of its own. So each fast
@@ -1257,6 +1363,15 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
             write(root / "market.json", snapshot)
         print(f"scan     {scan_path.name}  ({session})")
         print(f"quotes   {len(stocks)} written, is_close={snapshot['is_close']}")
+        if snapshot["unquoted"]:
+            print(f"unquoted {len(snapshot['unquoted'])} published companies with no price in this "
+                  f"capture: {', '.join(snapshot['unquoted'])}")
+        if gone:
+            print(f"         the scanner no longer carries {', '.join(gone)}; the daily build "
+                  "takes them out of the directory")
+        if unlisted:
+            print(f"unlisted {len(unlisted)} priced but not in the directory yet, left for the "
+                  f"daily build to add: {', '.join(sorted(unlisted))}")
         print("kept     companies.json and companies/ exactly as published")
         return 0
 
@@ -1280,6 +1395,9 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
     print(f"profile  {with_profile} with extra fields ({fields} values total)")
     if skipped:
         print(f"skipped  {skipped} records with no usable ticker or close")
+    if gone:
+        print(f"dropped  {len(gone)} published companies the scanner no longer carries by "
+              f"name: {', '.join(gone)}")
     print(f"arabic   {sum(1 for c in companies if c['name_ar'])} names")
     sectors = sorted({c['sector'] for c in companies if c['sector']})
     print(f"sectors  {len(sectors)}: {', '.join(sectors[:8])}…")

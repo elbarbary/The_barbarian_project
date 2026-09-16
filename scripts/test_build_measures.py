@@ -148,6 +148,11 @@ class NoCompositeTest(unittest.TestCase):
         self.assertIn("publisher", doc["basis"])
 
 
+def accounted_for(market: dict) -> set[str]:
+    """Every company a market file answers for: quoted, or named as unquoted."""
+    return set(market.get("stocks") or {}) | set(market.get("unquoted") or [])
+
+
 class CardinalityTest(unittest.TestCase):
     """The publisher publishes everything, and chooses nothing."""
 
@@ -157,11 +162,27 @@ class CardinalityTest(unittest.TestCase):
             self.skipTest("no measures.json built yet")
         market = json.loads((REPO / "public" / "data" / "v1" / "market.json")
                             .read_text(encoding="utf-8"))
-        listed = set(market.get("stocks") or {})
+        listed = accounted_for(market)
         rows = {r["ticker"] for r in doc["rows"]}
         self.assertEqual(rows, listed,
                          "the table is not the whole market — something cut it")
         self.assertEqual(doc["companies"], len(doc["rows"]))
+
+    def test_the_market_file_answers_for_the_directory_and_nothing_else(self):
+        # A company the vendor's listing leaves out is named in `unquoted`
+        # instead of vanishing, and one the directory does not have yet waits
+        # for the daily build. On 16 Sep 2026 neither held: 282 quotes beside
+        # 284 companies at 13:01, 285 beside 282 at 15:02.
+        market = json.loads((REPO / "public" / "data" / "v1" / "market.json")
+                            .read_text(encoding="utf-8"))
+        if "unquoted" not in market:
+            self.skipTest("the published market file predates `unquoted` — "
+                          "the next price publish rewrites it")
+        directory = json.loads(bm.DIRECTORY.read_text(encoding="utf-8"))
+        listed = {r["ticker"] for r in directory.get("companies") or []}
+        self.assertEqual(accounted_for(market), listed)
+        self.assertFalse(set(market["stocks"]) & set(market["unquoted"]),
+                         "a company is both quoted and unquoted")
 
     def test_the_rows_are_in_no_order_that_means_anything(self):
         # Alphabetical. Any other order is the publisher saying which company
@@ -431,7 +452,8 @@ class BreadthTest(unittest.TestCase):
         idle = sum(isinstance(r.get("volume"), (int, float)) and r["volume"] <= 0
                    for r in quotes)
         self.assertEqual(doc["breadth"]["idle"], idle)
-        self.assertEqual(doc["breadth"]["listed"], len(quotes))
+        # An unquoted company is a listing too, and a gap rather than a quiet day.
+        self.assertEqual(doc["breadth"]["listed"], len(accounted_for(market)))
 
     def test_breadth_names_no_company(self):
         # It is allowed to lead the page because it selects nothing. The day

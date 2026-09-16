@@ -55,6 +55,7 @@ on:
       - 'scripts/measures.py'
       - 'scripts/egx_scan.mjs'
       - 'scripts/egx_history.mjs'
+      - 'scripts/egx_listing.mjs'
       - '.github/workflows/lab-nightly.yml'
 
   workflow_dispatch:

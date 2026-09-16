@@ -681,6 +681,15 @@ def build(today: datetime.date | None = None) -> dict:
     today = today or datetime.date.today()
     market = json.loads(MARKET.read_text(encoding="utf-8"))
     stocks = market.get("stocks") or {}
+    # Listed companies the capture has no price for. `build_market_api` names
+    # them beside `stocks` instead of inventing a quote, and they are still
+    # listed companies: each keeps a row, dated by its own archive if it has
+    # one, and counts as `unmeasured` in the breadth. When rows came from the
+    # quotes alone, NBCC and POCO lost theirs on 16 September 2026 for as long
+    # as the vendor's listing left them out.
+    unquoted = {t for t in market.get("unquoted") or []
+                if isinstance(t, str) and t and t not in stocks}
+    tickers = sorted(set(stocks) | unquoted)
 
     listed = json.loads(DIRECTORY.read_text(encoding="utf-8"))
     listed = listed if isinstance(listed, list) else (listed.get("companies") or [])
@@ -689,12 +698,15 @@ def build(today: datetime.date | None = None) -> dict:
 
     filings = filings_by_ticker(today)
 
-    archives = {ticker: bars_for(ticker) for ticker in stocks}
-    closed = closing_session(market, archives)
-    rows = [row_for(ticker, stocks[ticker] or {}, directory.get(ticker, {}),
+    archives = {ticker: bars_for(ticker) for ticker in tickers}
+    # Only the priced companies say which session closed: the rule counts
+    # quotes that repeat or continue their archive, and an unquoted company
+    # has no quote to count.
+    closed = closing_session(market, {t: archives[t] for t in stocks})
+    rows = [row_for(ticker, stocks.get(ticker) or {}, directory.get(ticker, {}),
                     filings.get(ticker) or [], today, market.get("date"),
                     closed, archives[ticker])
-            for ticker in sorted(stocks)]
+            for ticker in tickers]
     no_forecasts(rows)
 
     return {
@@ -717,9 +729,9 @@ def build(today: datetime.date | None = None) -> dict:
                     "الشركات تظهر وكم عددها.",
         "columns": COLUMNS,
         "coverage": coverage(rows),
-        "breadth": breadth([{"volume": r.get("volume"),
-                             "change_1": r.get("change_percent")}
-                            for r in stocks.values()]),
+        "breadth": breadth([{"volume": (stocks.get(t) or {}).get("volume"),
+                             "change_1": (stocks.get(t) or {}).get("change_percent")}
+                            for t in tickers]),
         "companies": len(rows),
         "rows": rows,
     }
