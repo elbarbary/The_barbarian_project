@@ -3039,6 +3039,10 @@
     "meaning": "Daily retail price quotes for meat and livestock products reflect prevailing end-consumer price levels and ongoing input costs across the domestic agricultural supply chain.",
     "meaning_ar": "تعكس قوائم أسعار التجزئة اليومية للحوم ومنتجات الماشية مستويات الأسعار السائدة للمستهلك النهائي وتكاليف المدخلات الحالية ضمن سلاسل إمداد قطاع الأغذية المحلي."
   },
+  "الكفته ب350 جنيها .. اسعار اللحوم الحيه والمذبوحه والمكعبات اليوم الاربعاء 16 سبتمبر 2026": {
+    "meaning": "The prevailing retail price level for processed, live, and dressed meat reflects the pass-through of livestock feed, transport, and inventory replacement costs within the domestic livestock and food processing sectors.",
+    "meaning_ar": "تعكس مستويات أسعار التجزئة السائدة للحوم المصنعة والحية والمذبوحة آلية تمرير تكاليف الأعلاف والنقل وتجديد المخزون في قطاعي الثروة الحيوانية والتصنيع الغذائي المحلي."
+  },
   "الكندوز ب450 جنيها .. اسعار اللحوم البلديه اليوم الاثنين 7-9-2026": {
     "meaning": "Retail meat pricing establishes the current spot transaction rate for domestic beef in consumer markets, reflecting prevailing livestock supply costs, feed inputs, and local distribution expenses.",
     "meaning_ar": "يحدد تسعير اللحوم البلدية مستويات المعاملات الفورية للمستهلك في السوق المحلي، بما يعكس التكاليف القائمة لمدخلات الأعلاف، وتربية الماشية، ونفقات سلاسل التوزيع والتجزئة."
@@ -5456,6 +5460,10 @@
   "شيرين عبد الغفار: نحتاج لملفات رقميه لمتابعه نمو الاطفال.. والبيانات ستكشف ما نجحنا فيه وما يستلزم التطوير": {
     "meaning": "Digitizing pediatric healthcare records establishes centralized health data infrastructure, shifting clinical tracking from paper-based inputs to standardized digital analytics for public and private healthcare operators.",
     "meaning_ar": "يؤدي رقمنة السجلات الصحية للأطفال إلى تأسيس بنية تحتية مركزية للبيانات الطبية، مما ينقل متابعة مؤشرات النمو من السجلات الورقية إلى منظومات التحليل الرقمي الموحدة لدى مقدمي خدمات الرعاية الصحية."
+  },
+  "شيني ترتفع بخسايرها النصفيه": {
+    "meaning": "The company's semi-annual financial statements show that total operating and non-operating expenses exceed revenues by a wider margin compared to the prior-year period, resulting in a larger net loss on the balance sheet.",
+    "meaning_ar": "تُظهر القوائم المالية نصف السنوية للشركة تجاوز إجمالي المصروفات التشغيلية وغير التشغيلية للإيرادات المحققة بفارق أكبر مقارنة بالفترة المماثلة من العام السابق، مما يؤدي إلى اتساع صافي الخسارة المرحلة في المركز المالي."
   },
   "صادرات الذره الارجنتينيه تقفز لمستوي قياسي مع صعود الطلب من مصر وشمال افريقيا": {
     "meaning": "Egypt's animal feed and poultry processing sectors rely on imported yellow corn to meet domestic production needs, sourcing bulk grain volumes from international agricultural suppliers such as Argentina.",
