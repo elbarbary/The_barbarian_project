@@ -6205,6 +6205,10 @@
     "meaning": "This governance clarification defines advisory committees as independent technical bodies without executive authority or public payroll status, separating technical consultation from direct state policy execution.",
     "meaning_ar": "يوضح هذا التحديد التنظيمي تبعية اللجان الاستشارية كجهات فنية مستقلة دون صلاحيات تنفيذية أو صفة وظيفية حكومية، مما يفصل بين إبداء الرأي الاستشاري والمسؤولية التنفيذية للسياسات العامة."
   },
+  "مجلس الوزراء: مخزون السلع يكفي لفترات مطمينه وبدء استعدادات الموتمر الذي دعا اليه الرييس": {
+    "meaning": "Maintaining strategic commodity reserves operates as a buffer against supply chain disruptions, directly determining government procurement schedules, state import financing via the banking sector, and commercial inventory levels across the food manufacturing and retail industries.",
+    "meaning_ar": "يمثل الحفاظ على أرصدة السلع الاستراتيجية آلية لتأمين سلاسل الإمداد، ويحدد بشكل مباشر جداول المشتريات الحكومية، وحجم التمويل المصرفي للاستيراد، ومستويات المخزون لدى شركات الصناعات الغذائية وتجارة التجزئة."
+  },
   "محافظ البحيره :الفلاح المصري هو ركيزه تحقيق الامن الغذايي": {
     "meaning": "Domestic agricultural output provides the primary raw material base for local food processing companies and state commodity supply chains.",
     "meaning_ar": "يمثل الإنتاج الزراعي المحلي قاعدة المواد الخام الأساسية لشركات الصناعات الغذائية ومنظومة الإمداد التمويني الحكومية."
@@ -6369,6 +6373,10 @@
     "meaning": "The expansion of the Decent Life initiative involves ongoing public procurement contracts and utility infrastructure development across contracting, building materials, and engineering sectors.",
     "meaning_ar": "يتضمن توسيع مبادرة حياة كريمة عقود مشتريات حكومية جارية وتنفيذ أعمال بنية تحتية ومرافق عبر قطاعات المقاولات، ومواد البناء، والخدمات الهندسية."
   },
+  "مدبولي: نعمل علي تامين احتياجات البلاد بصفه دايمه من السلع الاساسيه لفترات مطمينه": {
+    "meaning": "Maintaining strategic reserves of essential commodities requires public procurement allocations and dedicated warehouse capacity to manage inventory levels across state supply chains.",
+    "meaning_ar": "يتطلب الحفاظ على أرصدة استراتيجية من السلع الأساسية توجيه مخصصات مالية للمشتريات الحكومية وتوفير سعات تخزينية لإدارة المخزون عبر سلاسل الإمداد التابعة للدولة."
+  },
   "مدبولي: نواصل اعاده هيكله الشركات المملوكه للدوله لتحسين ادايها وتعظيم الاستفاده من اصولها": {
     "meaning": "State-owned enterprise restructuring involves auditing corporate balance sheets, reorganizing administrative and operating models, and reallocating capital or real estate assets across public sector portfolios.",
     "meaning_ar": "تتضمن إعادة هيكلة الشركات المملوكة للدولة مراجعة الميزانيات العمومية، وإعادة تنظيم النماذج الإدارية والتشغيلية، وإعادة توزيع الأصول الرأسمالية والعقارية ضمن محفظة القطاع العام."
@@ -6508,6 +6516,10 @@
   "مصر تستضيف منتدي GS1 الاقليمي لبحث مستقبل التجاره الرقميه": {
     "meaning": "GS1 forums align domestic retail, logistics, and e-commerce operations with standardized international product identification codes, supply chain traceability protocols, and digital data synchronization systems.",
     "meaning_ar": "تعمل منتديات GS1 على مواءمة عمليات تجارة التجزئة واللوجستيات والتجارة الإلكترونية المحلية مع المعايير الدولية الموحدة لتكويد المنتجات، وبروتوكولات تتبع سلاسل الإمداد، وأنظمة مزامنة البيانات الرقمية."
+  },
+  "مصر تستعد لتنظيم موتمر انجازات الحكومه اكتوبر المقبل": {
+    "meaning": "Government performance conferences serve as operational disclosure platforms where state entities review ongoing public infrastructure projects, expenditure allocations, and sectoral execution metrics.",
+    "meaning_ar": "تُعد مؤتمرات إنجازات الحكومة منصات إفصاح رسمية تستعرض من خلالها الجهات التنفيذية تطورات مشاريع البنية التحتية، ومعدلات الإنفاق العام، ومؤشرات الأداء الميداني لمختلف القطاعات."
   },
   "مصر تستهدف اصدارات دوليه بقيمه 3 مليارات دولار خلال العام المالي 2026/2027": {
     "meaning": "The Ministry of Finance schedules foreign-currency debt issuances in international capital markets to cover external financing requirements for the specified fiscal year.",
