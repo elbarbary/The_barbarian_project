@@ -60,7 +60,13 @@ jobs:
     timeout-minutes: 20
 
     steps:
+      # Main as it is when the job starts, not the commit it was queued at: a
+      # run that waited behind another would otherwise build without that
+      # run's commit and race it at the push. publish-app-data.yml has the
+      # run that showed it.
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:

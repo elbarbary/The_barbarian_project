@@ -173,7 +173,19 @@ jobs:
     timeout-minutes: 100
 
     steps:
+      # Main as it stands when the job starts, not the commit the run was
+      # queued at. Without a ref, checkout fetches the triggering commit, and a
+      # run that waited behind another in this group builds without that run's
+      # work. On 16 Sep 2026 run 35120991929 pushed e68bfb0dd at 16:48:17 UTC.
+      # Run 35123828318, queued at 16:44, started 22 seconds later, fetched
+      # d2532a0d1 all the same, read post-execution forms into the store the
+      # first run had just committed, and rebuilt every document from the
+      # older tree. At 17:23 its push conflicted in 39 files and stopped, and
+      # the bulletins and forms it had read went with the runner. Every job
+      # here pushes to main, so main is what each one should build on.
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:

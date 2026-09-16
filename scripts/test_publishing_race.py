@@ -479,5 +479,58 @@ class ShippedShellTest(unittest.TestCase):
                                    "it takes its own copy before asking")
 
 
+def pushes_to_main(text: str) -> bool:
+    return "git push origin main" in text or "scripts/lab/push.py" in text
+
+
+def checkout_steps(text: str) -> list[str]:
+    """Each `actions/checkout` step, with the lines indented under it."""
+    lines = text.splitlines()
+    steps = []
+    for i, line in enumerate(lines):
+        found = re.match(r"^(\s*)- uses: actions/checkout@", line)
+        if not found:
+            continue
+        indent = len(found.group(1))
+        block = [line]
+        for following in lines[i + 1:]:
+            if following.strip() and len(following) - len(following.lstrip()) <= indent:
+                break
+            block.append(following)
+        steps.append("\n".join(block))
+    return steps
+
+
+class QueuedRunTest(unittest.TestCase):
+    """A run that waited in its queue builds on main as it is, not as it was.
+
+    Without a ref, `actions/checkout` fetches the commit that triggered the
+    run. On 16 Sep 2026 publish-app-data run 35123828318 was queued at 16:44
+    behind 35120991929, which pushed e68bfb0dd at 16:48:17. The queued run
+    started 22 seconds later, still fetched d2532a0d1, rebuilt every document
+    and store from the tree before that push, and at 17:23 met it in 39
+    conflicting files at the push, which stopped. Nothing it had read was
+    published.
+    """
+
+    def test_every_job_that_pushes_to_main_checks_out_main(self):
+        publishers = []
+        for path in sorted(WORKFLOWS.glob("*.yml")):
+            text = path.read_text(encoding="utf-8")
+            if not pushes_to_main(text):
+                continue
+            publishers.append(path.name)
+            steps = checkout_steps(text)
+            self.assertTrue(steps, f"{path.name} pushes to main and checks nothing out")
+            for step in steps:
+                with self.subTest(workflow=path.name):
+                    self.assertRegex(step, r"\n\s+ref: main\s*(\n|$)",
+                                     f"{path.name} builds on the commit it was queued at")
+        # Guards the loop: a detector that finds no publisher passes vacuously.
+        for name in ("publish-app-data.yml", "publish-live-data.yml", "publish-prices.yml",
+                     "publish-official-sources.yml", "lab-nightly.yml"):
+            self.assertIn(name, publishers)
+
+
 if __name__ == "__main__":
     unittest.main()

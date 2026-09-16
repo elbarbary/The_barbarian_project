@@ -87,7 +87,14 @@ jobs:
       # no manifest counter of their own — into `data_version`. Hashing a
       # partial tree would publish a fingerprint describing a tree that never
       # existed and invalidate every company document on every device.
+      #
+      # And main as it is when the job starts, not the commit it was queued
+      # at: a run that waited behind another would otherwise build without
+      # that run's commit and race it at the push. publish-app-data.yml has
+      # the run that showed it.
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
