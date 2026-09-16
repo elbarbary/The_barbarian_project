@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-09-16T15:14:33Z",
+ "builtAt": "2026-09-16T16:51:00Z",
  "topCount": 5,
  "minimumSessions": 5,
  "horizons": [
@@ -124,8 +124,8 @@
     "1": {
      "sessions": 10,
      "meanReturn": 0.5731,
-     "meanMarket": 0.4811,
-     "meanAdvantage": 0.0919,
+     "meanMarket": 0.4798,
+     "meanAdvantage": 0.0932,
      "ahead": 5,
      "signChanges": 6,
      "byDate": [
@@ -141,64 +141,64 @@
       {
        "basisSession": "2026-08-23",
        "followed": 5,
-       "scored": 226,
+       "scored": 228,
        "chosenReturn": -2.9446,
-       "marketReturn": -0.2588,
-       "advantage": -2.6858,
+       "marketReturn": -0.2558,
+       "advantage": -2.6888,
        "beatTheMarket": false
       },
       {
        "basisSession": "2026-08-25",
        "followed": 5,
-       "scored": 225,
+       "scored": 227,
        "chosenReturn": 3.0152,
-       "marketReturn": 0.6776,
-       "advantage": 2.3376,
+       "marketReturn": 0.6693,
+       "advantage": 2.3459,
        "beatTheMarket": true
       },
       {
        "basisSession": "2026-08-26",
        "followed": 5,
-       "scored": 234,
+       "scored": 236,
        "chosenReturn": 4.0091,
-       "marketReturn": 0.6878,
-       "advantage": 3.3214,
+       "marketReturn": 0.7027,
+       "advantage": 3.3064,
        "beatTheMarket": true
       },
       {
        "basisSession": "2026-08-30",
        "followed": 5,
-       "scored": 225,
+       "scored": 227,
        "chosenReturn": -1.3181,
-       "marketReturn": -0.7163,
-       "advantage": -0.6019,
+       "marketReturn": -0.7268,
+       "advantage": -0.5913,
        "beatTheMarket": false
       },
       {
        "basisSession": "2026-08-31",
        "followed": 5,
-       "scored": 236,
+       "scored": 238,
        "chosenReturn": -1.3547,
-       "marketReturn": 0.8486,
-       "advantage": -2.2034,
+       "marketReturn": 0.8451,
+       "advantage": -2.1999,
        "beatTheMarket": false
       },
       {
        "basisSession": "2026-09-02",
        "followed": 5,
-       "scored": 210,
+       "scored": 212,
        "chosenReturn": 1.3461,
-       "marketReturn": 0.3571,
-       "advantage": 0.989,
+       "marketReturn": 0.3576,
+       "advantage": 0.9885,
        "beatTheMarket": true
       },
       {
        "basisSession": "2026-09-03",
        "followed": 5,
-       "scored": 203,
+       "scored": 205,
        "chosenReturn": -2.4526,
-       "marketReturn": 0.9042,
-       "advantage": -3.3568,
+       "marketReturn": 0.8948,
+       "advantage": -3.3474,
        "beatTheMarket": false
       },
       {
@@ -220,15 +220,15 @@
        "beatTheMarket": true
       }
      ],
-     "sd": 2.3237,
-     "t": 0.125,
+     "sd": 2.3204,
+     "t": 0.127,
      "waiting": []
     },
     "5": {
      "sessions": 9,
      "meanReturn": 0.8261,
-     "meanMarket": 1.3777,
-     "meanAdvantage": -0.5516,
+     "meanMarket": 1.3715,
+     "meanAdvantage": -0.5453,
      "ahead": 4,
      "signChanges": 3,
      "byDate": [
@@ -244,78 +244,78 @@
       {
        "basisSession": "2026-08-23",
        "followed": 5,
-       "scored": 226,
+       "scored": 228,
        "chosenReturn": 3.6897,
-       "marketReturn": 0.0707,
-       "advantage": 3.6189,
+       "marketReturn": 0.0733,
+       "advantage": 3.6164,
        "beatTheMarket": true
       },
       {
        "basisSession": "2026-08-24",
        "followed": 5,
-       "scored": 148,
+       "scored": 149,
        "chosenReturn": -3.9044,
-       "marketReturn": 2.1623,
-       "advantage": -6.0667,
+       "marketReturn": 2.1489,
+       "advantage": -6.0533,
        "beatTheMarket": false
       },
       {
        "basisSession": "2026-08-25",
        "followed": 5,
-       "scored": 225,
+       "scored": 227,
        "chosenReturn": -1.5817,
-       "marketReturn": 1.5336,
-       "advantage": -3.1152,
+       "marketReturn": 1.5349,
+       "advantage": -3.1165,
        "beatTheMarket": false
       },
       {
        "basisSession": "2026-08-26",
        "followed": 5,
-       "scored": 232,
+       "scored": 234,
        "chosenReturn": -1.2669,
-       "marketReturn": 1.4239,
-       "advantage": -2.6908,
+       "marketReturn": 1.4321,
+       "advantage": -2.699,
        "beatTheMarket": false
       },
       {
        "basisSession": "2026-08-30",
        "followed": 5,
-       "scored": 225,
+       "scored": 227,
        "chosenReturn": 3.7157,
-       "marketReturn": 1.7348,
-       "advantage": 1.9808,
+       "marketReturn": 1.7186,
+       "advantage": 1.997,
        "beatTheMarket": true
       },
       {
        "basisSession": "2026-08-31",
        "followed": 5,
-       "scored": 227,
+       "scored": 229,
        "chosenReturn": 10.5824,
-       "marketReturn": 2.6263,
-       "advantage": 7.9561,
+       "marketReturn": 2.6228,
+       "advantage": 7.9596,
        "beatTheMarket": true
       },
       {
        "basisSession": "2026-09-02",
        "followed": 5,
-       "scored": 202,
+       "scored": 204,
        "chosenReturn": -0.0369,
-       "marketReturn": 0.5824,
-       "advantage": -0.6194,
+       "marketReturn": 0.5664,
+       "advantage": -0.6034,
        "beatTheMarket": false
       },
       {
        "basisSession": "2026-09-03",
        "followed": 5,
-       "scored": 202,
+       "scored": 204,
        "chosenReturn": -6.1694,
-       "marketReturn": 0.2292,
-       "advantage": -6.3985,
+       "marketReturn": 0.2101,
+       "advantage": -6.3795,
        "beatTheMarket": false
       }
      ],
-     "sd": 4.6475,
-     "t": -0.356,
+     "sd": 4.6447,
+     "t": -0.352,
      "waiting": [
       {
        "basisSession": "2026-09-13",
@@ -3545,5 +3545,5 @@
    ]
   }
  },
- "publicationId": "33fca4a7f0581fb39b86b8d7991d087af73ca0326f405b5455521da7708c57cb"
+ "publicationId": "1fb9c8edcbe651e37bd43ebbfaa32481313433d61265013b26d0bc68b6383ced"
 }
