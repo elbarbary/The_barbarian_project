@@ -5929,6 +5929,10 @@
     "meaning": "The Financial Regulatory Authority integrates behavioral scoring metrics into consumer finance underwriting checks, expanding credit assessment criteria beyond standard bureau repayment history to include non-traditional transaction patterns.",
     "meaning_ar": "تُدرج الهيئة العامة للرقابة المالية معايير التحليل السلوكي ضمن إجراءات الاستعلام الائتماني لشركات التمويل الاستهلاكي، مما يوسع أدوات تقييم الجدارة لتشمل أنماط المعاملات غير التقليدية إلى جانب التاريخ الائتماني المسجل."
   },
+  "عاجل.. الرقابه الماليه تلزم شركات التمويل الاستهلاكي بموافاتها ببيانات الفايده": {
+    "meaning": "The directive requires consumer finance companies to submit regular reports detailing their applied interest rates and financing costs directly to the Financial Regulatory Authority (FRA) for supervisory oversight. This mechanism establishes standardized regulatory tracking of pricing practices and lending conditions across the non-banking financial sector.",
+    "meaning_ar": "يُلزم هذا القرار شركات التمويل الاستهلاكي بتقديم تقارير دورية للهيئة العامة للرقابة المالية تتضمن أسعار الفائدة وتكاليف التمويل المطبقة لأغراض المتابعة الرقابية. وتوفر هذه الآلية إطاراً للمتابعة التنظيمية المباشرة لسياسات التسعير وشروط الإقراض المعتمدة داخل قطاع الأنشطة المالية غير المصرفية."
+  },
   "عاجل.. الرقابه الماليه تلزم شركات التمويل الاستهلاكي وتمويل المشروعات بالربط اللحظي مع «اي سكور»": {
     "meaning": "This regulatory directive requires consumer and microfinance companies to integrate their core systems via an API for real-time credit data exchange with I-Score, enabling instant updates to borrower liability profiles and default histories.",
     "meaning_ar": "يلزم هذا التوجيه الرقابي شركات التمويل الاستهلاكي وتمويل المشروعات بالربط التقني المباشر لأنظمتها مع شركة الاستعلام الائتماني (آي سكور)، مما يتيح التحديث الفوري للبيانات الائتمانية وسجلات مديونيات وتعثر العملاء."
@@ -5940,6 +5944,10 @@
   "عاجل.. الرييس السيسي يستقبل ولي العهد السعودي بمطار القاهره": {
     "meaning": "Bilateral state visits facilitate intergovernmental coordination on shared development funds, sovereign investment frameworks, and bilateral trade protocols across regional markets.",
     "meaning_ar": "تتيح الزيارات الثنائية الرسمية التنسيق الحكومي المشترك بشأن أطر الاستثمار السيادي، وصناديق التنمية، والبروتوكولات التجارية المتبادلة بين الأسواق الإقليمية."
+  },
+  "عاجل.. الفيدرالي الامريكي يرفع الفايده للمره الاولي منذ 3 سنوات": {
+    "meaning": "A benchmark rate hike by the U.S. Federal Reserve increases USD sovereign debt yields, which widens the spread with emerging market assets and raises the cost of dollar-denominated external borrowing for companies and states.",
+    "meaning_ar": "يؤدي رفع الفيدرالي الأمريكي لسعر الفائدة القياسي إلى زيادة عائد سندات الخزانة الأمريكية، مما يوسع الفارق بينها وبين عوائد الأسواق الناشئة ويرفع تكلفة الاقتراض الخارجي المقوم بالدولار على الشركات والحكومات."
   },
   "عاجل.. القلعه تقرر شراء حصه اضافيه في المصريه للتكرير": {
     "meaning": "Acquiring an additional equity stake in an operational subsidiary expands the parent company's consolidated ownership percentage, voting control, and direct proportional entitlement to the refining facility's underlying financial results.",
