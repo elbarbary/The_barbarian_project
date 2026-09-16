@@ -4400,9 +4400,17 @@
     "meaning": "Digitizing Ministry of Labor clearance inquiries standardizes regulatory compliance verification for corporate administrative workflows and labor audit processes.",
     "meaning_ar": "تُمكّن خدمة الاستعلام الإلكتروني عن المخالصة من ميكنة إجراءات التحقق من الامتثال التنظيمي للشركات ومطابقتها للمعايير العمالية المقررة."
   },
+  "تعرف علي خطوات قيد الشركات الغذاييه في سجل المصدرين": {
+    "meaning": "Registration in the exporters' registry establishes the legal and regulatory compliance required for food companies to clear customs and execute cross-border sales under the General Organization for Export and Import Control (GOEIC) rules.",
+    "meaning_ar": "يُعد القيد في سجل المصدرين إجراءً تنظيمياً إلزامياً يمنح شركات الصناعات الغذائية الصلاحية القانونية للتخليص الجمركي وإتمام عمليات التصدير وفق ضوابط الهيئة العامة للرقابة على الصادرات والواردات."
+  },
   "تعرف علي رسوم مكافحه الاغراق الحاليه علي الجبن الهولندي": {
     "meaning": "Anti-dumping duties apply additional import tariffs on Dutch cheese shipments at Egyptian customs, raising the landed cost of imported dairy products relative to domestically produced alternatives.",
     "meaning_ar": "تفرض رسوم مكافحة الإغراق تعريفات جمركية إضافية على شحنات الجبن الهولندي في المنافذ الجمركية المصرية، مما يرفع التكلفة النهائية للمنتجات المستوردة مقارنة بالبدائل المصنعة محلياً."
+  },
+  "تعرف علي ضوابط مشاركه الشركات المصريه في البعثات التجاريه": {
+    "meaning": "These guidelines define the regulatory eligibility, sector criteria, and documentation required for domestic firms to access state-sponsored business delegations and foreign trade showcases.",
+    "meaning_ar": "تحدد هذه الضوابط المعايير التنظيمية، والاشتراطات القطاعية، والمستندات المطلوبة لأهلية الشركات المحلية في الانضمام للبعثات التجارية الرسمية والملتقيات التصديرية الخارجية."
   },
   "تعرف علي علامات تكشف زيوت السيارات المغشوشه قبل الشراء": {
     "meaning": "Consumer identification of counterfeit lubricants affects informal distribution channels, inventory verification protocols, and sales volume retention for licensed downstream petroleum and lubricant producers.",
