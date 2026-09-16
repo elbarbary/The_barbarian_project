@@ -1159,6 +1159,10 @@
     "meaning": "Infrastructure targets of this scale direct public capital expenditure into civil engineering, pipe manufacturing, and water treatment equipment contracts across the utility supply chain.",
     "meaning_ar": "يوجه هذا المستوى من مستهدفات البنية التحتية الإنفاق الاستثماري الحكومي نحو عقود الهندسة المدنية وتصنيع الأنابيب ومعدات معالجة المياه عبر سلاسل إمداد قطاع المرافق."
   },
+  "احمد مرسي يكتب: من المهن الطبيه الي بنج الاسنان والتتبع الدوايي.. هل نحتاج الي مراجعه تجربه «داف» قبل توسيع دورها؟": {
+    "meaning": "The article evaluates the operational scope and state-backed procurement and distribution mechanisms of the Egyptian Company for Investment and Pharmaceutical Trade (DAF) across pharmaceutical supply chains, including dental anesthetics and serialisation tracking systems.",
+    "meaning_ar": "يتناول المقال تقييم النطاق التشغيلي وآليات التوزيع والشراء المدعومة حكومياً لشركة الاستثمار والتجارة الصيدلية (داف) عبر سلاسل إمداد الدواء، بما في ذلك بنج الأسنان ونظم التتبع الدوائي."
+  },
   "اختتام معرض الصين الدولي لتجاره الخدمات 2026": {
     "meaning": "The conclusion of the trade fair marks the end of cross-border procurement sessions and business-to-business networking for service sectors, shifting participating firms from contract negotiation to execution and fulfillment.",
     "meaning_ar": "يمثل اختتام المعرض التجاري انتهاء جلسات الشراء والتعاقد بين الشركات في قطاعات الخدمات عبر الحدود، مما ينقل الشركات المشاركة من مرحلة التفاوض على الصفقات إلى مراحل التنفيذ والتسليم."
@@ -3967,6 +3971,10 @@
     "meaning": "Geopolitical tensions between the US and Iran create asset price divergence across European equity sectors, reflecting differing exposures to energy price fluctuations and global trade routes.",
     "meaning_ar": "تؤدي التوترات الجيوسياسية بين الولايات المتحدة وإيران إلى تباين في حركة أسعار الأسهم عبر القطاعات الأوروبية، تبعاً لمدى تأثر كل قطاع بتقلبات أسعار الطاقة وطرق التجارة العالمية."
   },
+  "تباين الموشرات الامريكيه وسط ترقب قرار الفيدرالي": {
+    "meaning": "Mixed performance across major US equity indices reflects divergent sector valuations as capital allocations adjust to incoming interest rate benchmarks set by the Federal Reserve.",
+    "meaning_ar": "يعكس تباين أداء مؤشرات الأسهم الأمريكية اختلاف تقييمات القطاعات مع إعادة توزيع السيولة النقدية بالتزامن مع تحديد مجلس الاحتياطي الفيدرالي لمعدلات الفائدة القياسية."
+  },
   "تباين الموشرات الاوروبيه في مستهل جلسات الاسبوع": {
     "meaning": "Mixed performance across European indices reflects divergent sector valuations, where capital reallocates between defensive and cyclical equities based on differing regional corporate earnings and macroeconomic data.",
     "meaning_ar": "يعكس تباين أداء المؤشرات الأوروبية اختلاف تقييمات القطاعات، حيث يُعاد توزيع السيولة بين الأسهم الدفاعية والدورية وفقاً لاختلاف نتائج أعمال الشركات والبيانات الاقتصادية الإقليمية."
@@ -4371,6 +4379,10 @@
   "تعرف علي مخاطر استخدام زيوت السيارات المعاد تدويرها علي محرك سيارتك": {
     "meaning": "Awareness of the mechanical risks associated with recycled engine oils directly influences consumer product choices between informal re-refined lubricants and certified virgin base oils supplied by registered EGX-listed downstream energy distributors.",
     "meaning_ar": "يؤثر الوعي بالمخاطر الميكانيكية لزيوت المحركات المعاد تدويرها بشكل مباشر على اختيارات المستهلكين بين زيوت التشحيم المعاد تكريرها غير الرسمية والزيوت البكر المعتمدة من شركات توزيع المنتجات البترولية المقيدة في البورصة المصرية."
+  },
+  "تعرف علي مصير رصيد الاجازات عند انتقال العامل لشركه جديده": {
+    "meaning": "Under labor regulations, accumulated leave balances represent accrued employee benefit liabilities that are either liquidated through cash settlement upon contract termination or recorded as transferred obligations on corporate balance sheets.",
+    "meaning_ar": "وفقاً للوائح العمل، يمثل رصيد الإجازات التزامات مستحقة للموظفين تسجل في الميزانيات العمومية للشركات، وتُسوّى عبر صرف مقابل نقدي عند انتهاء التعاقد أو تُرحل كالتزامات عند الانتقال."
   },
   "تعرف علي مهله المستوردين للمشاركه في تحقيق مكافحه اغراق الجبن الهولندي": {
     "meaning": "Trade authorities establish a formal regulatory timeframe for importers to submit pricing data, import volumes, and operational records as part of an active anti-dumping investigation into Dutch cheese. This procedural step determines market participation in the trade defense process and establishes the factual basis for potential tariff measures on imported dairy products.",
