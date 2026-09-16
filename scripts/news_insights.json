@@ -1423,6 +1423,10 @@
     "meaning": "Daily price listings for poultry products reflect immediate supply-and-demand balances, feed input costs, and distribution farm-gate rates within the domestic agricultural market.",
     "meaning_ar": "تعكس بيانات الأسعار اليومية لمنتجات الدواجن التوازن المباشر بين العرض والطلب وتكاليف الأعلاف وأسعار التداول في المزارع داخل السوق الزراعية المحلية."
   },
+  "اسعار البيض اليوم الثلاثاء 15-9-2026 في مصر": {
+    "meaning": "Egg prices in Egypt reflect daily supply-demand balances in the poultry sector, directly influenced by operational input costs including imported feed grains and farmgate distribution expenses.",
+    "meaning_ar": "تعكس أسعار البيض في مصر التوازن اليومي بين العرض والطلب في قطاع الدواجن، وتتأثر مباشرة بتكاليف المدخلات التشغيلية التي تشمل الأعلاف المستوردة ومصروفات التوزيع من المزارع."
+  },
   "اسعار البيض اليوم الثلاثاء 8-9-2026 في مصر": {
     "meaning": "Egg prices reflect daily supply-and-demand balances in the poultry sector, shaped by feed production costs, farm-gate pricing, and distribution logistics across local wholesale and retail markets.",
     "meaning_ar": "تعكس أسعار البيض التوازن اليومي بين العرض والطلب في قطاع الدواجن، وتتحدد بناءً على تكاليف الأعلاف، وأسعار تسليم المزارع، وتكاليف النقل والتوزيع في أسواق الجملة والتجزئة."
@@ -1654,6 +1658,10 @@
   "اسعار الغاز الاوروبي تقفز لاعلي مستوي منذ ديسمبر 2022": {
     "meaning": "Higher European natural gas benchmarks raise the cost basis for energy-intensive regional imports and widen the pricing differential for global LNG trade flows.",
     "meaning_ar": "يؤدي ارتفاع أسعار الغاز الطبيعي القياسية في أوروبا إلى زيادة تكاليف مدخلات الطاقة للواردات ذات الاستهلاك الكثيف وتوسيع الفارق السعري لتدفقات تجارة الغاز المسال العالمية."
+  },
+  "اسعار الغاز الاوروبيه تلامس اعلي مستوياتها منذ عام 2022": {
+    "meaning": "European natural gas benchmarks serve as the primary pricing reference for global LNG cargoes and energy-intensive manufacturing inputs, directly altering the import costs for net-energy-consuming economies and the benchmark revenues for liquefied natural gas exporters.",
+    "meaning_ar": "تُمثل أسعار الغاز الأوروبية المؤشر المرجعي الأساسي لتسعير شحنات الغاز الطبيعي المسال ومُدخلات الصناعات كثيفة الاستهلاك للطاقة عالمياً، مما يحدد تكاليف الاستيراد للأسواق المستهلكة للطاقة وعائدات التصدير للشركات الموردة للغاز المسال."
   },
   "اسعار الفراخ في بورصه الدواجن اليوم الاثنين 14-9-2026": {
     "meaning": "This reports daily farm-gate and wholesale price benchmarks for poultry, reflecting immediate supply-and-demand clearing rates, feed input costs, and distribution dynamics across the local market.",
