@@ -15248,5 +15248,118 @@
   "source": "Mubasher",
   "missing": true,
   "checked": "2026-09-16"
+ },
+ "FERC": {
+  "name": "Ferchem Misr for Fertilizers and Chemicals (FERC)",
+  "purpose": "Ferchem Misr for Fertilizers and Chemicals (known as: Ferchem) is a public company, listed on Egyptian Exchange (EGX) since September 2010. Ferchem operates within the Materials sector focusing on Fertilizers and Agricultural Chemicals. Ferchem is based in Menufia, Egypt and was established in January 2001.",
+  "established": "28 January 2001",
+  "financial_year_start": "First Quarter",
+  "auditor": "Baker Tilly - Wahid Abdel Ghaffar and Co --> Ownership Polyserve for Fertilizers and Chemicals",
+  "owners": [
+   {
+    "name": "Polyserve for Fertilizers and Chemicals",
+    "stake": 60.9042
+   },
+   {
+    "name": "International Agricultural Products",
+    "stake": 7.9698
+   },
+   {
+    "name": "Abdul Salam Abdul Salam Mustafa El Gabaly",
+    "stake": 2.8006
+   },
+   {
+    "name": "Sherif Mustafa El Gabaly",
+    "stake": 1.9231
+   },
+   {
+    "name": "Hatem Mostafa Mostafa Al-Gabali",
+    "stake": 1.8792
+   },
+   {
+    "name": "Mustafa Sherif Mustafa Al Gabaly",
+    "stake": 1.8522
+   },
+   {
+    "name": "Mansour Sharif Mustafa El Gabaly",
+    "stake": 0.802
+   },
+   {
+    "name": "Saleh Abdel Salam Abdel Salam Mustafa Al Gably",
+    "stake": 0.4917
+   },
+   {
+    "name": "Naela Sherif Moustafa Al Gabaly",
+    "stake": 0.401
+   },
+   {
+    "name": "Norhan Abdul Salam Abdul Salam Mustafa El Gabaly",
+    "stake": 0.3026
+   },
+   {
+    "name": "Nahla Abdel Salam Abdel Salam Mustafa Al Gably",
+    "stake": 0.3026
+   },
+   {
+    "name": "Mohammed Hatem Moustafa Al Gabaly",
+    "stake": 0.2269
+   }
+  ],
+  "subsidiaries": [],
+  "website": "www.ferchem.com.eg",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/FERC/profile",
+  "fetched": "2026-09-16"
+ },
+ "NAPR": {
+  "name": "National Printing (NAPR)",
+  "purpose": "National Company for Printing (known as: National Co for Printing) is a listed company, listed on Egyptian Exchange (EGX) since February 2024. operating within the commercial & professional services sector focusing on commercial printing. It has one subsidiary operating across Egypt. National Co for Printing is based in Cairo, Egypt and was established in May 2005.",
+  "established": "23 May 2005",
+  "financial_year_start": "",
+  "auditor": "Kamel Magdy Saleh --> Ownership Printing Press Limited",
+  "owners": [
+   {
+    "name": "Printing Press Limited",
+    "stake": 27.21
+   },
+   {
+    "name": "Financial Holdings International",
+    "stake": 23.56
+   },
+   {
+    "name": "Ibrahim Mohamed Ibrahim Al Moaalem",
+    "stake": 22.22
+   },
+   {
+    "name": "Sherif Ibrahim Mohamad Ibrahim Al Moaalem",
+    "stake": 11.12
+   },
+   {
+    "name": "Omran Mohammed Al Omran",
+    "stake": 8.93
+   },
+   {
+    "name": "National Printing International S.A.L",
+    "stake": 8.5
+   },
+   {
+    "name": "Grandview Investment Holding Corp",
+    "stake": 1.75
+   },
+   {
+    "name": "Hisham Hussein El Khazindar",
+    "stake": 0.003
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Modern Shorouk Printing and Packaging",
+    "stake": 97.72
+   }
+  ],
+  "website": "www.nationalprinting.net",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/NAPR/profile",
+  "fetched": "2026-09-16"
  }
 }

@@ -1,12 +1,12 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-16T16:36:22Z",
+ "generated": "2026-09-16T17:40:53Z",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
- "asOf": "2026-09-16T16:36:22+00:00",
+ "asOf": "2026-09-16T17:40:53+00:00",
  "basis": "A link is one listed company's filed stake in another, at the level the last form printed. Percentages belong to one company each and are never added together; sector totals are the market value of the stakes, which is money and can be.",
  "basisAr": "كل خط حصة مُفصح عنها لشركة مقيدة في شركة مقيدة أخرى، بالنسبة التي أثبتها آخر نموذج. النسب تخص شركة واحدة ولا تُجمع؛ إجماليات القطاعات بالقيمة السوقية للحصص، وهي مبالغ تُجمع.",
- "linkCount": 40,
- "outsideHolderCount": 532,
+ "linkCount": 41,
+ "outsideHolderCount": 534,
  "links": [
   {
    "owner": "CANA",
@@ -655,6 +655,25 @@
    "source": "https://www.egx.com.eg/downloads/Bulletins/343157_1.pdf"
   },
   {
+   "owner": "IFAP",
+   "ownerName": "International Agricultural Products",
+   "ownerNameAr": "الدولية للمحاصيل الزراعية",
+   "ownerSector": "Trade & Distributors",
+   "ownerSectorAr": "تجارة و موزعون",
+   "held": "FERC",
+   "heldName": "Ferchem Misr Co. for Fertilizers & Chemicals",
+   "heldNameAr": "فيركيم مصر للاسمدة والكيماويات",
+   "heldSector": "Basic Resources",
+   "heldSectorAr": "موارد أساسية",
+   "holder": "الشركه الدوليه للمحاصيل الزراعيه ش م م",
+   "percent": 7.9698,
+   "value": 2471579800.36,
+   "asOf": "2026-06-30",
+   "basis": "register",
+   "filingId": "291063",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340790_1.pdf"
+  },
+  {
    "owner": "MLIC",
    "ownerName": "Misr Life Insurance",
    "ownerNameAr": "مصر لتأمينات الحياة",
@@ -1044,6 +1063,18 @@
    ]
   },
   {
+   "fromSector": "Trade & Distributors",
+   "fromSectorAr": "تجارة و موزعون",
+   "toSector": "Basic Resources",
+   "toSectorAr": "موارد أساسية",
+   "links": 1,
+   "value": 2471579800.36,
+   "valued": 1,
+   "companies": [
+    "FERC"
+   ]
+  },
+  {
    "fromSector": "Unclassified",
    "fromSectorAr": "Unclassified",
    "toSector": "Building Materials",
@@ -1128,10 +1159,10 @@
   {
    "id": "Basic Resources",
    "nameAr": "موارد أساسية",
-   "companies": 13,
-   "cap": 534093746375.61,
+   "companies": 14,
+   "cap": 565105746375.61,
    "holds": 1,
-   "heldBy": 0
+   "heldBy": 1
   },
   {
    "id": "Building Materials",
@@ -1208,8 +1239,8 @@
   {
    "id": "Paper & Packaging",
    "nameAr": "ورق ومواد تعبئة و تغليف",
-   "companies": 2,
-   "cap": 1541082419.86,
+   "companies": 3,
+   "cap": 10606840384.76,
    "holds": 0,
    "heldBy": 1
   },
@@ -1234,7 +1265,7 @@
    "nameAr": "تجارة و موزعون",
    "companies": 7,
    "cap": 45651308291.41,
-   "holds": 0,
+   "holds": 1,
    "heldBy": 1
   },
   {

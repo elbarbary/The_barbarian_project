@@ -6519,5 +6519,20 @@
    }
   },
   "generated": "2026-08-29"
+ },
+ "FERC": {
+  "read": "Net profit and earnings per share are both rising and track each other upward, showing consistent alignment between total earnings and per-share results. With price-to-earnings direction unknown, valuation trends cannot be confirmed against this earnings expansion. There is no contradiction among the reported directions, as operational earnings growth is mirrored across company-wide and per-share metrics.",
+  "read_ar": "يرتفع كل من صافي الربح وربحية السهم ويتجهان معاً في نفس المسار الصاعد، مما يظهر توافقاً مستمراً بين إجمالي الأرباح ونتائج السهم الواحد. ونظراً لأن اتجاه مضاعف الربحية غير محدد، لا يمكن تأكيد مسار التقييم مقارنة بهذا التوسع في الأرباح. ولا يوجد أي تعارض بين الاتجاهات المسجلة، حيث ينعكس نمو الأرباح التشغيلية على مستوى الشركة ونصيب السهم على حد سواء.",
+  "answers": {
+   "profit": {
+    "en": "The parallel rise in earnings per share alongside net profit suggests that profit growth is likely linked to core operational performance rather than one-off balance sheet adjustments. However, the available directions do not fully disclose whether the bottom-line expansion stems from operational business activities or non-recurring items.",
+    "ar": "يشير الارتفاع المتوازي في ربحية السهم إلى جانب صافي الربح إلى أن نمو الأرباح يرتبط على الأرجح بالأداء التشغيلي الأساسي بدلاً من تعديلات غير مكررة في الميزانية. ومع ذلك، فإن الاتجاهات المتاحة لا تكشف بشكل كامل ما إذا كان توسع الأرباح نابعاً من أنشطة الأعمال التشغيلية أم من بنود غير متكررة."
+   },
+   "eps": {
+    "en": "Earnings per share moved in tandem with rising net profit, which is consistent with earnings expanding alongside bottom-line growth rather than being distorted by major changes in share count.",
+    "ar": "تحركت ربحية السهم بالتزامن مع ارتفاع صافي الربح، وهو ما يتفق مع نمو العائد المنسوب لكل سهم جنباً إلى جنب مع إجمالي الأرباح دون تأثير جوهري ناتج عن تغير عدد الأسهم."
+   }
+  },
+  "generated": "2026-09-16"
  }
 }

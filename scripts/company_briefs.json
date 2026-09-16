@@ -6590,5 +6590,55 @@
    "loss_making_periods": 14
   },
   "generated": "2026-08-30"
+ },
+ "FERC": {
+  "history": "Across 553 exchange filings from 2010 to 2026, Ferchem saw trading suspended 7 times and resumed 6 times. It generated 50 reported periods of profit or loss between 2013 and 2026, recording losses in only 3 periods. Its lowest reported net result was -5 million EGP in H1 2016, whereas its highest reported net profit reached 2,184 million EGP in FY 2025. Activity peaked in 2025 with 43 filings.",
+  "history_ar": "عبر 553 إفصاحاً في البورصة بين عامي 2010 و2026، عُلّق التداول على أسهم الشركة 7 مرات واستؤنف 6 مرات. وسجلت 50 فترة مالية معلنة للأرباح أو الخسائر من 2013 إلى 2026، تضمنت 3 فترات خسارة فقط. وكان أدنى صافي نتائج معلن عند -5 ملايين جنيه مصري في النصف الأول من 2016، بينما بلغ أعلى صافي ربح 2,184 مليون جنيه في السنة المالية 2025، وشهد عام 2025 أعلى وتيرة نشاط بإجمالي 43 إفصاحاً.",
+  "plans": [
+   {
+    "text": "Ferchem Misr Co. announced plans regarding the establishment of a new factory.",
+    "text_ar": "أعلنت شركة فيركيم مصر عن خطط تتعلق بإنشاء مصنع جديد.",
+    "id": "egx-266819",
+    "date": "2025-03-06",
+    "link": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=266819",
+    "title": "Release from FERCHEM MISR CO. FOR FERTILLIZERS & CHEMICALS (FERC.CA) Concerning the Establishment of a New Factory  (SMEs Market)",
+    "title_ar": "بيان من فيركيم مصر للاسمدة والكيماويات (FERC.CA) بخصوص انشاء مصنع جديد (سوق الشركات الصغيرة والمتوسطة)"
+   }
+  ],
+  "story": "Ferchem Misr for Fertilizers and Chemicals is a Menufia-based Materials company focusing on fertilizers and agricultural chemicals. Established in January 2001 and incorporated on 28 January 2001, it has been listed on the Egyptian Exchange since September 2010. The company is controlled by Polyserve for Fertilizers and Chemicals, which holds a 60.9042% stake, alongside International Agricultural Products with 7.9698%. Its auditor is Baker Tilly - Wahid Abdel Ghaffar and Co.",
+  "story_ar": "تعد شركة فيركيم مصر للأسمدة والكيماويات شركة تعمل في قطاع المواد الأساسية ومقرها المنوفية، حيث تركز على الأسمدة والكيماويات الزراعية. تأسست في يناير 2001 وأُسست رسمياً في 28 يناير 2001، وهي مدرجة في البورصة المصرية منذ سبتمبر 2010. وتخضع الشركة لسيطرة شركة بولي سيرف للأسمدة والكيماويات بحصة تبلغ 60.9042%، إلى جانب شركة المنتجات الزراعية العالمية بنسبة 7.9698%. ومراقب حساباتها هو بيكر تيلي - وحيد عبد الغفار وشركاه.",
+  "story_source": "Mubasher",
+  "story_url": "https://english.mubasher.info/markets/EGX/stocks/FERC/profile",
+  "record": {
+   "filings": 553,
+   "first_filing": "2010-09-15",
+   "trading_suspensions": 7,
+   "trading_resumptions": 6,
+   "capital_increases": 0,
+   "general_assemblies": 98,
+   "periods_reported": 50,
+   "loss_making_periods": 3
+  },
+  "generated": "2026-09-16"
+ },
+ "NAPR": {
+  "history": "Since listing in 2024, the company has accumulated 38 filings on the Egyptian Exchange through 2026, with activity peaking in 2025 at 17 filings. Between 2025 and 2026, it reported 5 cumulative financial periods, recording zero loss-making periods. Its highest reported net profit occurred in FY 2025 at 403 million EGP, while its lowest reported net result was Q1 2026 at 71 million EGP. Filings include 10 board decisions and 6 financial results.",
+  "history_ar": "منذ قيدها في عام 2024، سجلت الشركة 38 إفصاحاً في البورصة المصرية حتى عام 2026، وبلغ نشاط الإفصاح ذروته في عام 2025 بواقع 17 إفصاحاً. وبين عامي 2025 و2026، سجلت الشركة 5 فترات مالية تراكمية دون أي فترات خسارة. وبلغت أعلى أرباح صافية معلنة 403 ملايين جنيه مصري في السنة المالية 2025، بينما جاءت أدنى نتيجة صافية في الربع الأول من عام 2026 بواقع 71 مليون جنيه مصري. وتضمنت الإفصاحات 10 قرارات مجلس إدارة و6 نتائج مالية.",
+  "plans": [],
+  "story": "Established in May 2005 and based in Cairo, Egypt, National Company for Printing operates within the commercial and professional services sector, focusing on commercial printing. Listed on the Egyptian Exchange since February 2024, its major shareholders include Printing Press Limited with 27.21%, Financial Holdings International with 23.56%, and Ibrahim Mohamed Ibrahim Al Moaalem with 22.22%. It holds a 97.72% stake in Modern Shorouk Printing and Packaging.",
+  "story_ar": "تأسست الشركة الوطنية للطباعة في مايو 2005 ويقع مقرها في القاهرة بمصر، وتعمل ضمن قطاع الخدمات التجارية والمهنية مع التركيز على الطباعة التجارية. أُدرجت الشركة في البورصة المصرية منذ فبراير 2024، ويشمل كبار مساهميها شركة برنتنج برس ليمتد بنسبة 27.21%، وفاينانشال هولدنجز إنترناشيونال بنسبة 23.56%، وإبراهيم محمد إبراهيم المعلم بنسبة 22.22%. وتمتلك الشركة حصة قدرها 97.72% في شركة الشروق الحديثة للطباعة والتغليف.",
+  "story_source": "Mubasher",
+  "story_url": "https://english.mubasher.info/markets/EGX/stocks/NAPR/profile",
+  "record": {
+   "filings": 38,
+   "first_filing": "2024-02-15",
+   "trading_suspensions": 0,
+   "trading_resumptions": 0,
+   "capital_increases": 0,
+   "general_assemblies": 4,
+   "periods_reported": 5,
+   "loss_making_periods": 0
+  },
+  "generated": "2026-09-16"
  }
 }

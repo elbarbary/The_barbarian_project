@@ -1,11 +1,4 @@
 {
- "steps": {
-  "Company filings harvest": {
-   "last": "it had work to do and finished none of it",
-   "runs": 2,
-   "since": "2026-09-16T16:09:47+00:00",
-   "sinceRun": "35116106580"
-  }
- },
+ "steps": {},
  "stuckAfter": 6
 }

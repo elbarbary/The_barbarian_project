@@ -2,8 +2,8 @@
  "generated": "2026-09-16",
  "source": "EGX disclosures — scheduled dates the issuer has filed",
  "past_days": 90,
- "count": 437,
- "estimated": 375,
+ "count": 439,
+ "estimated": 377,
  "events": [
   {
    "date": "2026-06-18",
@@ -2214,6 +2214,23 @@
    "period_end": "2026-09-30",
    "window_start": "2026-11-12",
    "window_end": "2026-12-24",
+   "observations": 12
+  },
+  {
+   "date": "2026-11-14",
+   "kind": "results_expected",
+   "note": "9M results usually filed around now",
+   "ticker": "FERC",
+   "title": "Ferchem Misr Co. for Fertilizers & Chemicals — 9M results expected",
+   "title_ar": "فيركيم مصر للاسمدة والكيماويات — نتائج تسعة أشهر مرتقبة",
+   "filed": "",
+   "section": "Estimated",
+   "link": "",
+   "id": "due-FERC-9M-2026-09-30",
+   "estimated": true,
+   "period_end": "2026-09-30",
+   "window_start": "2026-11-12",
+   "window_end": "2026-11-15",
    "observations": 12
   },
   {
@@ -4884,6 +4901,23 @@
    "window_start": "2027-02-19",
    "window_end": "2027-03-11",
    "observations": 13
+  },
+  {
+   "date": "2027-03-02",
+   "kind": "results_expected",
+   "note": "FY results usually filed around now",
+   "ticker": "FERC",
+   "title": "Ferchem Misr Co. for Fertilizers & Chemicals — FY results expected",
+   "title_ar": "فيركيم مصر للاسمدة والكيماويات — نتائج السنة المالية مرتقبة",
+   "filed": "",
+   "section": "Estimated",
+   "link": "",
+   "id": "due-FERC-FY-2026-12-31",
+   "estimated": true,
+   "period_end": "2026-12-31",
+   "window_start": "2027-02-15",
+   "window_end": "2027-03-26",
+   "observations": 12
   },
   {
    "date": "2027-03-02",
