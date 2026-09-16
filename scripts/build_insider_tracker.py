@@ -17,7 +17,6 @@ import argparse
 import datetime as dt
 import glob
 import hashlib
-import inspect
 import json
 import pathlib
 import re
@@ -114,8 +113,12 @@ def load_company_directory() -> tuple[dict[str, dict], dict[str, str]]:
         canonical("MM Group Industrial & International Trade (In Kind)"): "MTIE",
         canonical("MM Group Industrial & International Trade"): "MTIE",
         canonical("MM Group"): "MTIE",
-        canonical("Future care for medical industries (FCMI)"): "FCMI",
-        canonical("Future care for medical industries"): "FCMI",
+        # The directory lists it as FCMD. Until April 2026 the bulletins
+        # printed its earlier name, and the calendar still files it under
+        # ICMI.CA.
+        canonical("Future care for medical industries (FCMI)"): "FCMD",
+        canonical("Future care for medical industries"): "FCMD",
+        canonical("International company For Medical Industries -ICMI"): "FCMD",
         canonical("Union Pharmacist Company For Medical Services and Investment"): "UPMS",
         canonical("Egyptians For Housing Development & Reconstruction"): "EHDR",
         canonical("Egyptians Housing Development & Reconstruction"): "EHDR",
@@ -127,8 +130,9 @@ def load_company_directory() -> tuple[dict[str, dict], dict[str, str]]:
         canonical("International Company For Fertilizers & Chemicals"): "ICFC",
         canonical("Abu Dhabi Islamic Bank- Egypt"): "ADIB",
         canonical("Mohandes Insurance"): "MOIN",
-        canonical("Arab Real Estate Investment CO.- ALICO"): "ALIC",
-        canonical("Arab Real Estate Investment CO.-ALICO"): "ALIC",
+        # ALICO is Arab Real Estate Investment, RREI; there is no ALIC.
+        canonical("Arab Real Estate Investment CO.- ALICO"): "RREI",
+        canonical("Arab Real Estate Investment CO.-ALICO"): "RREI",
         canonical("Catalyst Partners Middle East – CPME"): "CPME",
         canonical("Arab Cotton Ginning"): "ACGC",
         canonical("Arab Pharmaceuticals"): "ADCI",
@@ -192,6 +196,24 @@ def load_company_directory() -> tuple[dict[str, dict], dict[str, str]]:
         canonical("Contact Financial Holding ESOP"): "CNFN",
         canonical("El Nasr Clothes & Textiles (Kabo)"): "KABO",
         canonical("ODIN Financial Investments"): "ODIN",
+        # Names the session bulletins print, read whole since 16 Sep 2026,
+        # that the directory spells otherwise. Each checked against the
+        # directory's Arabic name where the English left room for doubt.
+        canonical("E-Finance For Digital and Financial Investements SAE"): "EFIH",
+        canonical("Medinet MASR Housing"): "MASR",
+        canonical("Egyptian Arabian (cmar) Securities Brokerage and Bonds EAC"): "EASB",
+        canonical("Alexandria Medical Services"): "AMES",
+        canonical("C I Capital Holding For financial Investments"): "CICH",
+        canonical("Al Khair River For Development Agricultural Investment&Envir"): "KRDI",
+        canonical("Engineering Industries (ICON)"): "ENGC",
+        canonical("Egyptian International Pharmaceuticals (EIPICO)"): "PHAR",
+        canonical("Elsaeed Contracting & Real Estate Investment Company SCCD"): "UEGC",
+        canonical("Abu Qir Fertilizers"): "ABUK",
+        canonical("El Ezz Porcelain (Gemma)"): "ECAP",
+        canonical("Raya Customer Experience"): "RACC",
+        canonical("El Ahli Investment and Development"): "AFDI",
+        canonical("Dice Sport & Casual Wear"): "DSCW",
+        canonical("cairo for investment and real estate development CIRA Educat"): "CIRA",
     }
     alias_map.update(manual)
     return by_ticker, alias_map
@@ -203,6 +225,12 @@ def resolve_ticker(co_raw: str, alias_map: dict[str, str]) -> str | None:
     key = canonical(co_raw)
     if key in alias_map:
         return alias_map[key]
+    # Nothing to match on is no match. A name with no Latin letters left in it
+    # (an Arabic one) is an empty key, and an empty key is inside every alias:
+    # it took whichever came first, General Co. for Land Reclamation. "#N/A"
+    # left "n a", inside Delta Construction & Rebuilding.
+    if len(key) <= 4:
+        return None
     for a_k, a_tick in alias_map.items():
         if len(a_k) > 4 and (a_k in key or key in a_k):
             return a_tick
@@ -243,17 +271,19 @@ def load_store() -> dict:
 
 
 def is_read(entry: dict | None) -> bool:
-    """Whether a bulletin the store remembers needs asking for again.
+    """Whether a bulletin the store remembers is read, or needs asking for again.
 
-    One that gave rows is done. One that gave none is done only for the parser
-    that read it: seven of the 68 on the laptop on 16 Sep 2026 came back empty
-    because the parser missed their layout — a volume printed a line below its
-    trade, `Session30/07//2026` — not because nobody traded, and a parser that
-    learns the layout should be handed them again.
+    It is read if the parser that read it is this one. Until 16 Sep 2026 one
+    that gave any rows was done for good and only an empty one was asked for
+    again. But rows are not a reading: 294700 gave 26 of the 29 trades it
+    prints, and not one row held carried a related party, because the parser
+    read none. A runner keeps no PDFs, so rows remembered
+    were rows kept for as long as the store is. Asked for again, newest first and
+    a few a build, they are read by whatever reads bulletins now; the laptop,
+    which holds the PDFs, saves the exchange that by committing the store it
+    read them into.
     """
-    if not isinstance(entry, dict):
-        return False
-    return bool(entry.get("rows")) or entry.get("parser") == PARSER
+    return isinstance(entry, dict) and entry.get("parser") == PARSER
 
 
 def ledger_bulletins() -> list[dict] | None:
@@ -297,8 +327,21 @@ def session_of(printed: str | None, filed: dict | None) -> str | None:
     return None
 
 
+def english_table(doc: dict) -> str | None:
+    """The attachment `pdftotext -layout` can read a bulletin's trades from.
+
+    That is the Latin-headed table, `_101.pdf` beside `_1.pdf`, the Arabic
+    rendering of the same session. Three sessions file it under a name of its
+    own — `20-08-2026_english.pdf`, `25-05-2026_in_english.pdf`,
+    `insiders_en_12-03-2026_english.pdf` — and were never asked for.
+    """
+    attachments = doc.get("attachments") or []
+    return (next((u for u in attachments if u.endswith("_101.pdf")), None)
+            or next((u for u in attachments if "english" in u.rsplit("/", 1)[-1].lower()), None))
+
+
 def unread_bulletins() -> list[dict]:
-    """Session bulletins neither on this disk nor in the store, newest first.
+    """Session bulletins neither on this disk nor read by this parser, newest first.
 
     Newest first, so a run that is cut short leaves the most recent sessions
     read rather than the oldest.
@@ -318,9 +361,7 @@ def unread_bulletins() -> list[dict]:
             continue
         if is_read(read.get(filing)):
             continue
-        # The `_101` attachment is the Latin-headed table `pdftotext -layout`
-        # can be read from; `_1` is the Arabic rendering of the same session.
-        if not any(u.endswith("_101.pdf") for u in doc.get("attachments") or []):
+        if english_table(doc) is None:
             continue
         unread.append(doc)
     return unread
@@ -345,7 +386,7 @@ def fetch_bulletins(limit: int = 0, patience: int = STOP_AFTER) -> int:
     got = misses = asked = 0
     for doc in unread_bulletins():
         filing = str(doc.get("filingId"))
-        url = next(u for u in doc["attachments"] if u.endswith("_101.pdf"))
+        url = english_table(doc)
         target = PDF_DIR / f"egx-{filing}-{url.rsplit('/', 1)[-1]}"
         asked += 1
         if named_insiders.fetch_pdf(url, target):
@@ -372,67 +413,315 @@ def fetch_bulletins(limit: int = 0, patience: int = STOP_AFTER) -> int:
     return got
 
 
-def bulletin_rows(text: str, filing_id: str, alias_map: dict[str, str],
-                  by_ticker: dict[str, dict]) -> tuple[str | None, list[dict]]:
-    """One bulletin's session date and its transactions, in the order printed."""
-    records: list[dict] = []
-    seen_keys: set[str] = set()
+# ── How a session bulletin is read ───────────────────────────────────────────
+#
+# The bulletin is an Excel table printed to PDF, a row a trade: Company Name,
+# Position, Transaction, Volume. `pdftotext -layout` keeps its columns and drops
+# the rules between its rows, and a row is not a line. Every cell is centred in
+# its row on its own: a name that wraps prints half of itself above the trade
+# and half below, "related parties for" sits a line above the trade and
+# "insider" a line below, and in 33 of the 233 bulletins filed since October
+# 2025 most volumes are printed at the foot of their row, a line or two under
+# the transaction. Read a line at a time, 7 of the 68 bulletins on the laptop
+# on 16 Sep 2026 gave no trades, trades under 100 shares were dropped, and no
+# related party was ever published as one.
+#
+# So a row is anchored on its volume, which every row prints exactly once, and
+# on its position, which every row prints once however it wraps; the k-th of
+# each on a page are one row. Its transaction is the one printed between them,
+# and its company name is the text centred on its position.
 
+# The Position column, as printed in the 233 bulletins filed from 1 Oct 2025 to
+# 15 Sep 2026: "insider"; "Major Shareholder", also printed "main shareholder",
+# "Majorshareholder", "Major Sharholder", "main share holder" and "main
+# sharehloder"; "ESOP", once "EPOS"; an Excel "#N/A"; any of them after
+# "related parties of" or "related parties for". A cell wraps at any word, so a
+# line can hold "for insider", or "Major" alone.
+_POSITION_WORDS = {
+    "related": re.compile(r"related", re.I),
+    "parties": re.compile(r"part(?:y|ies)", re.I),
+    "of": re.compile(r"of|for", re.I),
+    "sole": re.compile(r"insider|esop|epos|#n/a", re.I),
+    "major": re.compile(r"main|major", re.I),
+    "shareholder": re.compile(r"(?:main|major)?share?h(?:ol|lo)der", re.I),
+    "share": re.compile(r"(?:main|major)?share?", re.I),
+    "holder": re.compile(r"h(?:ol|lo)der", re.I),
+}
+_POSITIONS = [lead + holder
+              for lead in ((), ("related", "parties", "of"))
+              for holder in (("sole",), ("shareholder",), ("major", "shareholder"),
+                             ("share", "holder"), ("major", "share", "holder"))]
+# Words no listed company's name uses. "for", "of", "major" and "main" are in
+# plenty of them — "FERCHEM MISR CO. FOR" wraps onto a line of its own.
+_ONLY_POSITIONS = {"related", "parties", "sole", "shareholder"}
+
+_TRADE = re.compile(r"(?<![A-Za-z])(buy|sell|sold)(?![A-Za-z])", re.I)
+_DIRECTIONS = {"buy": "bought", "sell": "sold", "sold": "sold"}
+_DATE_AT_END = re.compile(r"(?:^|(?<=\s))(\d{1,2})/+(\d{1,2})/+(20\d{2})\s*$")
+_VOLUME_AT_END = re.compile(r"(?:^|(?<=\s))(\d[\d,]*)\s*$")
+_TRADE_AT_END = re.compile(r"(?:^|(?<=\s))(buy|sell|sold)\s*$", re.I)
+_WORD_AT_END = re.compile(r"(?:^|(?<=\s))(\S+)\s*$")
+_TITLE = re.compile(r"Trading of Insiders|Listed Companies|Sessions?\s*\d{1,2}\s*/", re.I)
+_HEADER_TAIL = re.compile(r"^\s*(?:Transa\w*|Trans|Volume|Position|session)"
+                          r"(?:\s+(?:Transa\w*|Trans|Volume|Position|session))*\s*$", re.I)
+_EXCEL_ERROR = re.compile(r"#(?:N/A|REF!|VALUE!|NAME\?|DIV/0!|NULL!|NUM!)", re.I)
+_RIGHTS = re.compile(r"subscription\s+rights\b", re.I)
+# An Arabic company name comes out wrapped in embedding marks.
+_BIDI = re.compile("[\u202a-\u202e\u2066-\u2069]")
+
+_RELATIONSHIPS = {
+    "insider": ("Insider / Board", "مجلس إدارة / داخلي"),
+    "major_holder": ("Major Shareholder", "مساهم رئيسي"),
+    "related_party": ("Connected Group", "مجموعة مرتبطة"),
+    # The exchange's own Arabic for the ESOP rows, «نظام الإثابة والتحفيز».
+    "esop": ("Employee Incentive Scheme (ESOP)", "نظام الإثابة والتحفيز"),
+    # "#N/A" in the English table. The Arabic bulletin had the position all
+    # along (294409: related parties of the main shareholder), and the English
+    # one does not say, so neither does this.
+    "unstated": ("Position Not Stated", "الصفة غير مذكورة"),
+}
+
+
+def _position_kinds(word: str) -> set[str]:
+    return {kind for kind, pattern in _POSITION_WORDS.items() if pattern.fullmatch(word)}
+
+
+def _is_position(words: list[str], whole: bool = False) -> bool:
+    """Whether these words are a whole Position cell, or part of one in order."""
+    kinds = [_position_kinds(word) for word in words]
+    if not kinds or not all(kinds):
+        return False
+    for shape in _POSITIONS:
+        if whole and len(shape) != len(kinds):
+            continue
+        for start in ([0] if whole else range(len(shape) - len(kinds) + 1)):
+            if all(shape[start + i] in kind for i, kind in enumerate(kinds)):
+                return True
+    return False
+
+
+def _split_line(line: str, columns: dict) -> dict:
+    """One line of the table taken apart from the right: session, volume,
+    transaction, position, and what is left, which is company name."""
+    rest, cells = line.rstrip(), {}
+    first_trade, last_trade = columns["trades"]
+    date = _DATE_AT_END.search(rest)
+    if date and date.start() > first_trade:
+        # A supplement covering two sessions (286467) dates every row.
+        day, month, year = (int(g) for g in date.groups())
+        cells["date"] = f"{year:04d}-{month:02d}-{day:02d}"
+        rest = rest[:date.start()].rstrip()
+    # A number is a volume only right of the Transaction column: a company's
+    # name can end in one.
+    volume = _VOLUME_AT_END.search(rest)
+    if volume and volume.start(1) > first_trade:
+        cells["volume"] = int(volume.group(1).replace(",", ""))
+        rest = rest[:volume.start(1)].rstrip()
+    trade = _TRADE_AT_END.search(rest)
+    if not trade:
+        # A Transaction cell holding something else — 289734 prints "bs". It
+        # is still that row's transaction, not the end of a company's name.
+        trade = _WORD_AT_END.search(rest)
+        if trade and not (first_trade - 2 <= trade.start(1) <= last_trade + 2
+                          and not _position_kinds(trade.group(1))):
+            trade = None
+    if trade:
+        cells["trade"] = trade.group(1)
+        rest = rest[:trade.start(1)].rstrip()
+    words = [(m.start(), m.group()) for m in re.finditer(r"\S+", rest)]
+    position: list[tuple[int, str]] = []
+    while words:
+        column, word = words[-1]
+        if not _is_position([word] + [w for _, w in position]):
+            break
+        # A word that could end a company's name belongs to the position only
+        # when it is joined to the rest of it by one space, or stands alone in
+        # the Position column.
+        joined = bool(position) and position[0][0] == column + len(word) + 1
+        alone = (not position and columns["positions"] is not None
+                 and column >= columns["positions"])
+        if not (_position_kinds(word) & _ONLY_POSITIONS or joined or alone):
+            break
+        position.insert(0, words.pop())
+    if position:
+        cells["position"] = [word for _, word in position]
+    company = _BIDI.sub("", " ".join(word for _, word in words)).strip()
+    if company:
+        cells["company"] = company
+    return cells
+
+
+def _page_trades(page: str) -> tuple[list[dict], int, str | None]:
+    """The rows one page prints, how many it prints, and why none were read.
+
+    A page that cannot be put together — more volumes than positions, a
+    transaction outside every row — gives no rows rather than rows that might
+    carry another row's company or direction.
+    """
+    body = list(enumerate(page.split("\n")))
+    for n, (_, line) in enumerate(body):
+        if "Company Name" in line:
+            body = body[n + 1:]
+            while body and _HEADER_TAIL.match(body[0][1]):
+                body = body[1:]
+            break
+    body = [(i, line) for i, line in body if not _TITLE.search(line)]
+    trade_columns = [m.start(1) for _, line in body for m in _TRADE.finditer(line)]
+    if not trade_columns:
+        return [], 0, None
+    first_trade = min(trade_columns)
+    only = [m.start() for _, line in body for m in re.finditer(r"\S+", line[:first_trade])
+            if _position_kinds(m.group()) & _ONLY_POSITIONS]
+    columns = {"trades": (first_trade, max(trade_columns)),
+               "positions": min(only) if only else None}
+    split = [(i, _split_line(line, columns)) for i, line in body]
+
+    volumes = [(i, cells["volume"]) for i, cells in split if "volume" in cells]
+    dates = [(i, cells["date"]) for i, cells in split if "date" in cells]
+    # A position is its pieces, in order, until they make a whole one.
+    positions, pending = [], []
+    for i, cells in split:
+        if "position" not in cells:
+            continue
+        pending.append((i, cells["position"]))
+        words = [word for _, piece in pending for word in piece]
+        if _is_position(words, whole=True):
+            positions.append(([j for j, _ in pending], " ".join(words)))
+            pending = []
+    printed = len(volumes)
+    if pending:
+        return [], printed, "a position that never finishes: " + " / ".join(
+            " ".join(piece) for _, piece in pending)
+    if len(positions) != printed or (dates and len(dates) != printed):
+        return [], printed, (f"{printed} volumes against {len(positions)} positions"
+                             + (f" and {len(dates)} session dates" if dates else ""))
+
+    rows = []
+    for k, ((line, shares), (lines, position)) in enumerate(zip(volumes, positions)):
+        rows.append({"span": [line, *lines, *([dates[k][0]] if dates else [])],
+                     "centre": sum(lines) / len(lines), "shares": shares,
+                     "position": position, "date": dates[k][1] if dates else None,
+                     "trade": None, "company": ""})
+    if not rows:
+        return [], 0, "a transaction printed with no volume or position"
+    bands = [(min(row["span"]), max(row["span"])) for row in rows]
+    if any(bands[k - 1][1] >= bands[k][0] for k in range(1, len(bands))):
+        return [], printed, "two rows' volumes and positions interleave"
+    for line, cells in split:
+        if "trade" not in cells:
+            continue
+        k = next((k for k, (top, bottom) in enumerate(bands) if top <= line <= bottom), None)
+        if k is None or rows[k]["trade"] is not None:
+            return [], printed, f"the transaction \"{cells['trade']}\" belongs to no one row"
+        rows[k]["trade"] = cells["trade"]
+
+    # Company text inside a row's span is that row's. Text between two rows
+    # goes to whichever split centres both names on their positions: 290139
+    # prints "Creast Mark For Contracting And Real Estate" over one row's trade
+    # and "Development" beside it, and the nearest row for each line would have
+    # given half a name to each.
+    n = len(rows)
+    inside: list[list[tuple[int, str]]] = [[] for _ in rows]
+    between: list[list[tuple[int, str]]] = [[] for _ in range(n + 1)]
+    for line, cells in split:
+        if "company" not in cells:
+            continue
+        k = next((k for k, (top, bottom) in enumerate(bands) if top <= line <= bottom), None)
+        if k is not None:
+            inside[k].append((line, cells["company"]))
+        else:
+            below = next((k for k, (top, _) in enumerate(bands) if line < top), n)
+            between[below].append((line, cells["company"]))
+
+    def off_centre(k: int, lines: list[int]) -> float:
+        if not lines:
+            return float(len(body) * (n + 1))  # a row with no name loses to any split
+        return abs(sum(lines) / len(lines) - rows[k]["centre"])
+
+    # best[s]: the least total for the rows so far, s lines of the gap above
+    # row k having gone to the row before it.
+    best: dict[int | None, tuple[float, list[int | None]]] = {0: (0.0, [])}
+    for k in range(n):
+        reached: dict[int | None, tuple[float, list[int | None]]] = {}
+        for taken, (total, splits) in best.items():
+            above = between[k][taken:]
+            for kept in ([None] if k == n - 1 else range(len(between[k + 1]) + 1)):
+                below = between[n] if kept is None else between[k + 1][:kept]
+                cost = total + off_centre(k, [line for line, _ in above + inside[k] + below])
+                if kept not in reached or cost < reached[kept][0]:
+                    reached[kept] = (cost, splits + [kept])
+        best = reached
+    splits = best[None][1]
+    for k, row in enumerate(rows):
+        above = between[k][splits[k - 1]:] if k else between[0]
+        below = between[n] if k == n - 1 else between[k + 1][:splits[k]]
+        row["company"] = " ".join(text for _, text in sorted(above + inside[k] + below))
+    return rows, printed, None
+
+
+def _relationship(position: str) -> str:
+    words = position.lower()
+    if words.startswith("related"):
+        return "related_party"
+    if words == "insider":
+        return "insider"
+    if words in ("esop", "epos"):
+        return "esop"
+    if words == "#n/a":
+        return "unstated"
+    return "major_holder"
+
+
+def bulletin_rows(text: str, filing_id: str, alias_map: dict[str, str],
+                  by_ticker: dict[str, dict]) -> tuple[str | None, list[dict], list[str]]:
+    """One bulletin's session date, its transactions in the order printed, and
+    each thing it printed that gave no transaction.
+
+    A row printed with no direction is not a transaction anyone can publish:
+    290042 leaves three of FCMI's Transaction cells empty. Nor is one with no
+    company: 294355 prints "#N/A" where the name goes, and that buy of 60,000
+    shares was published as Delta Construction & Rebuilding's. Each is kept
+    out, and said, rather than guessed.
+    """
     date_m = re.search(r"Session\s*(\d{1,2})[/]+(\d{1,2})[/]+(20\d{2})", text, re.I) or re.search(r"(\d{1,2})[/]+(\d{1,2})[/]+(20\d{2})", text)
     session_date = None
     if date_m:
         day, month, year = int(date_m.group(1)), int(date_m.group(2)), int(date_m.group(3))
         session_date = f"{year:04d}-{month:02d}-{day:02d}"
 
-    current_company = None
-    for line in text.splitlines():
-        l_s = line.strip()
-        if not l_s or "Trading of Insiders" in l_s or "Company Name" in l_s or "\x0c" in line:
-            if "\x0c" in line:
-                current_company = None
-            continue
-
-        m_act = re.search(r"\b(buy|sell|sold)\b", line, re.I)
-        m_vol = re.search(r"\b([\d,]{3,})\b", line)
-        m_pos = re.search(r"\b(related parties|insider|main shareholder|major)\b", line, re.I)
-
-        cutoff = m_pos.start() if m_pos else (m_act.start() if m_act else len(line))
-        co_chunk = line[:cutoff].strip()
-        if co_chunk and len(co_chunk) > 2 and not re.match(r"^\d+$", co_chunk):
-            current_company = " ".join(co_chunk.split())
-
-        if m_act and m_vol and current_company:
-            act_str = m_act.group(1).lower()
-            act = "bought" if act_str == "buy" else "sold"
-            try:
-                shares = int(m_vol.group(1).replace(",", ""))
-            except ValueError:
+    records: list[dict] = []
+    unread: list[str] = []
+    printed = 0
+    for page_number, page in enumerate(text.split("\x0c"), 1):
+        rows, count, problem = _page_trades(page)
+        if problem:
+            unread.append(f"page {page_number}, {count} row(s): {problem}")
+        # Numbered by its place in the bulletin, not among the rows read, so a
+        # row keeps its id whichever other bulletins a machine happens to hold
+        # and whichever rows beside it could be read.
+        for number, row in enumerate(rows, printed + 1):
+            act = _DIRECTIONS.get((row["trade"] or "").lower())
+            company = row["company"]
+            if act is None or not company or _EXCEL_ERROR.fullmatch(company):
+                unread.append(f"{company}, {row['position']}, {row['shares']:,} shares: "
+                              + ("no company name printed" if act
+                                 else f"the transaction reads \"{row['trade']}\"" if row["trade"]
+                                 else "no transaction printed"))
                 continue
-
-            pos_raw = m_pos.group(1).lower() if m_pos else "insider"
-            rel = (
-                "related_party" if "related" in pos_raw else
-                "major_holder" if ("main" in pos_raw or "major" in pos_raw) else
-                "insider"
-            )
-
-            ticker = resolve_ticker(current_company, alias_map)
+            rel = _relationship(row["position"])
+            # Subscription rights are not the company's shares. Given its
+            # ticker, 33,000,000 rights in Creast Mark would be published as
+            # Creast Mark shares, under its name, with the word "rights" gone.
+            ticker = None if _RIGHTS.match(company) else resolve_ticker(company, alias_map)
             co_meta = by_ticker.get(ticker or "", {})
-            comp_display = co_meta.get("name") or current_company
-            comp_ar = co_meta.get("nameAr") or current_company
-
-            k = f"{session_date}:{ticker or current_company}:{act}:{shares}:{rel}"
-            if k in seen_keys:
-                continue
-            seen_keys.add(k)
-
+            comp_display = co_meta.get("name") or company
+            comp_ar = co_meta.get("nameAr") or company
+            shares = row["shares"]
             records.append({
-                # Numbered within its own bulletin, so a row keeps its id
-                # whichever other bulletins a machine happens to hold.
-                "id": f"bulletin-{filing_id}-{len(records) + 1}",
+                "id": f"bulletin-{filing_id}-{number}",
                 "filingId": filing_id,
                 "sourceType": "bulletin",
-                "date": session_date,
+                "date": row["date"] or session_date,
                 "ticker": ticker,
                 "company": comp_display,
                 "companyAr": comp_ar,
@@ -442,29 +731,30 @@ def bulletin_rows(text: str, filing_id: str, alias_map: dict[str, str],
                 "actionLabel": "Bought" if act == "bought" else "Sold",
                 "actionLabelAr": "شراء" if act == "bought" else "مبيعات",
                 "relationship": rel,
-                "relationshipLabel": (
-                    "Connected Group" if rel == "related_party" else
-                    "Major Shareholder" if rel == "major_holder" else
-                    "Insider / Board"
-                ),
-                "relationshipLabelAr": (
-                    "مجموعة مرتبطة" if rel == "related_party" else
-                    "مساهم رئيسي" if rel == "major_holder" else
-                    "مجلس إدارة / داخلي"
-                ),
-                "positionRaw": pos_raw,
+                "relationshipLabel": _RELATIONSHIPS[rel][0],
+                "relationshipLabelAr": _RELATIONSHIPS[rel][1],
+                "positionRaw": row["position"].lower(),
                 "shares": shares,
                 "title": f"تعامل على أسهم {comp_ar} ({'شراء' if act == 'bought' else 'مبيعات'}): {shares:,} سهم",
                 "titleEn": f"Transaction on {comp_display} ({act}): {shares:,} shares",
                 "link": f"https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID={filing_id}" if filing_id != "0" else "",
             })
+        printed += count
+    return session_date, records, unread
 
-    return session_date, records
+# ── end of how a session bulletin is read ────────────────────────────────────
 
 
-# Which parser read a bulletin that gave nothing. Its own source, so changing
-# how a bulletin is read is all it takes to have the empty ones read again.
-PARSER = hashlib.sha256(inspect.getsource(bulletin_rows).encode("utf-8")).hexdigest()[:12]
+def _reading_source() -> str:
+    """The section above, as written."""
+    text = pathlib.Path(__file__).read_text(encoding="utf-8")
+    start = text.index("# ── How a session bulletin is read ")
+    return text[start:text.index("# ── end of how a session bulletin is read ", start)]
+
+
+# Which parser read a bulletin: the source of everything above that reads one,
+# so any change to how a bulletin is read has every bulletin read again.
+PARSER = hashlib.sha256(_reading_source().encode("utf-8")).hexdigest()[:12]
 
 
 def parse_bulletin_pdfs(alias_map: dict[str, str], by_ticker: dict[str, dict],
@@ -500,51 +790,90 @@ def parse_bulletin_pdfs(alias_map: dict[str, str], by_ticker: dict[str, dict],
             continue
         if res.returncode != 0:
             continue
-        session_date, rows = bulletin_rows(res.stdout, filing_id, alias_map, by_ticker)
+        session_date, rows, unread = bulletin_rows(res.stdout, filing_id, alias_map, by_ticker)
+        for row in rows:
+            row["parser"] = PARSER
         by_filing[filing_id] = rows
         store["read"][filing_id] = {"session": session_date, "rows": len(rows), "parser": PARSER}
+        # Kept with the rows, so a machine without the PDF can still say what
+        # the bulletin printed that is not on the lens.
+        if unread:
+            store["read"][filing_id]["unread"] = unread
         if not rows:
             print(f"::warning title=Session bulletin read as empty::{pdf_path.name} "
-                  f"(session {session_date or 'undated'}) gave no transactions. "
-                  "It is not asked for again until the parser changes.")
+                  f"(session {session_date or 'undated'}) gave no transactions"
+                  + (f": {'; '.join(unread)}" if unread else "")
+                  + ". It is not asked for again until the parser changes.")
+        elif unread:
+            print(f"::warning title=Session bulletin partly read::{pdf_path.name} "
+                  f"(session {session_date or 'undated'}) gave {len(rows)} transactions "
+                  f"and left out: {'; '.join(unread)}.")
+
+    # A bulletin's rows are one reading's. Two builds that race have the
+    # resolver union this store's rows by id, so a build that read a bulletin
+    # with an older parser — under that parser's numbering — leaves its rows
+    # beside this reading's, while the read record names this parser alone and
+    # nothing would ever read the bulletin again to clear them. Every row says
+    # which parser gave it, and rows the recorded reading did not give go.
+    for filing_id, rows in by_filing.items():
+        reader = (store["read"].get(filing_id) or {}).get("parser")
+        if reader and any(row.get("parser") == reader for row in rows):
+            by_filing[filing_id] = [row for row in rows if row.get("parser") == reader]
 
     # Every row's session checked against the day its bulletin was filed, the
     # rows already in the store included: 41 of them were published under a
-    # date their bulletin could not have been for.
+    # date their bulletin could not have been for. Each date a bulletin prints
+    # is checked, not its first for all of them: a supplement (286467) prints
+    # two sessions.
     for filing_id, rows in by_filing.items():
         doc = filed.get(filing_id)
         if not doc or not rows:
             continue
-        printed = rows[0].get("date")
-        session = session_of(printed, doc)
-        if session == printed:
+        moved = {}
+        for printed in dict.fromkeys(row.get("date") for row in rows):
+            session = session_of(printed, doc)
+            if session != printed:
+                moved[printed] = session
+        if not moved:
             continue
+        for printed, session in moved.items():
+            if session is None:
+                count = sum(1 for row in rows if row.get("date") == printed)
+                print(f"::warning title=Session bulletin date unclear::Bulletin {filing_id}, "
+                      f"filed {doc['publishedAt'][:10]}, is dated {printed} inside and "
+                      f"{doc.get('sessionDate')} in its title, and neither can be its "
+                      f"session. Its {count} trades are published without a date.")
         for row in rows:
-            row["date"] = session
-        if isinstance(store["read"].get(filing_id), dict):
-            store["read"][filing_id]["session"] = session
-        if session is None:
-            print(f"::warning title=Session bulletin date unclear::Bulletin {filing_id}, "
-                  f"filed {doc['publishedAt'][:10]}, is dated {printed} inside and "
-                  f"{doc.get('sessionDate')} in its title, and neither can be its "
-                  f"session. Its {len(rows)} trades are published without a date.")
+            if row.get("date") in moved:
+                row["date"] = moved[row["date"]]
+        entry = store["read"].get(filing_id)
+        if isinstance(entry, dict) and entry.get("session") in moved:
+            entry["session"] = moved[entry["session"]]
 
     # One trade printed in two bulletins — a session re-issued — is one trade.
-    # First in filing order wins, which is the order the PDFs were always read.
+    # A trade printed twice in one bulletin is two: 294700 prints an insider of
+    # Palm Hills buying 100,000 shares twice, on two rows, and they used to be
+    # published as one. So a later bulletin adds only the copies of a trade
+    # beyond those an earlier one already printed. First in filing order wins,
+    # which is the order the PDFs were always read.
     records: list[dict] = []
-    seen_keys: set[str] = set()
+    published: dict[str, int] = {}
     kept: list[dict] = []
     for filing_id in sorted(by_filing, key=lambda f: (len(f), f)):
+        here: dict[str, int] = {}
         for row in by_filing[filing_id]:
             kept.append(row)
             # An undated trade is only ever the same trade within its bulletin.
             k = (f"{row.get('date') or 'undated-' + filing_id}:"
                  f"{row.get('ticker') or row.get('company')}:"
                  f"{row.get('action')}:{row.get('shares')}:{row.get('relationship')}")
-            if k in seen_keys:
+            here[k] = here.get(k, 0) + 1
+            if here[k] <= published.get(k, 0):
                 continue
-            seen_keys.add(k)
-            records.append(row)
+            # Which parser read it is the store's business, not the lens's.
+            records.append({field: value for field, value in row.items() if field != "parser"})
+        for k, copies in here.items():
+            published[k] = max(published.get(k, 0), copies)
 
     updated = {"schemaVersion": 2,
                "read": dict(sorted(store["read"].items(), key=lambda kv: (len(kv[0]), kv[0]))),

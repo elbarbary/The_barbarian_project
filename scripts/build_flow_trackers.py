@@ -293,6 +293,17 @@ def build(directory, market, documents, insiders):
             ent_id = f"treasury-{t}"
             label = f"{co_name} Treasury"
             label_ar = f"خزينة {co_ar}"
+        # Neither is the board. The bulletin prints "ESOP" for an employee
+        # incentive scheme's own trades and "#N/A" where it lost the position,
+        # and until 16 Sep 2026 both fell through to "Board & Insiders" below.
+        elif rel == 'esop':
+            ent_id = f"esop-{t}"
+            label = f"{co_name} Employee Incentive Scheme"
+            label_ar = f"نظام الإثابة والتحفيز لشركة {co_ar}"
+        elif rel == 'unstated':
+            ent_id = f"unstated-{t}"
+            label = f"{co_name} — position not stated"
+            label_ar = f"{co_ar} — الصفة غير مذكورة"
         elif rel == 'major_holder' or 'major' in str(it.get('relationshipLabel', '')).lower():
             ent_id = f"major-{t}"
             label = f"{co_name} Major Shareholders"

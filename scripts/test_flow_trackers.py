@@ -68,6 +68,19 @@ class FlowTrackersTest(unittest.TestCase):
         args[3]['items'].append(args[3]['items'][0].copy())
         self.assertEqual(len(build(*args)['events']), 2)
 
+    def test_an_incentive_scheme_and_an_unstated_position_are_not_the_board(self):
+        # 51 bulletin rows print "ESOP" as the position and two print "#N/A".
+        # Both relationships fell through to "Board & Insiders".
+        args = self.fixture()
+        args[3]['items'] = [
+            {'id': 'e1', 'ticker': 'A', 'shares': 5, 'date': '2026-09-09', 'action': 'sold',
+             'relationship': 'esop', 'relationshipLabel': 'Employee Incentive Scheme (ESOP)'},
+            {'id': 'u1', 'ticker': 'B', 'shares': 5, 'date': '2026-09-09', 'action': 'sold',
+             'relationship': 'unstated', 'relationshipLabel': 'Position Not Stated'}]
+        links = {l['source']: l['sourceLabel'] for l in build(*args)['ownershipGraph']['links']}
+        self.assertEqual(links, {'esop-A': 'A Employee Incentive Scheme',
+                                 'unstated-B': 'B — position not stated'})
+
     def test_invalid_denominator_stays_unknown(self):
         args = self.fixture()
         args[2]['A']['profile']['shares_outstanding'] = 0
