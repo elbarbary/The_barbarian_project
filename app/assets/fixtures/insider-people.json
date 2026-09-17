@@ -1,16 +1,16 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-17T16:50:54+00:00",
+ "generated": "2026-09-17T17:38:57+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1322,
- "tradeCount": 209,
+ "peopleCount": 1323,
+ "tradeCount": 215,
  "tickerCount": 237,
- "tradedTickerCount": 80,
+ "tradedTickerCount": 82,
  "firmCount": 438,
- "personCount": 884,
- "aliasCount": 148,
+ "personCount": 885,
+ "aliasCount": 149,
  "registerCount": 236,
  "overDisclosed": [],
  "supersededByRegister": [
@@ -21,6 +21,14 @@
    "asOf": "2026-09-08",
    "filingId": "294442",
    "why": "the filed register for EFIC does not list this name, and counting both made the company 101.80% owned"
+  },
+  {
+   "holder": "القلعة للاستشارات المالية",
+   "ticker": "ASCM",
+   "percent": 50.76,
+   "asOf": "2026-08-17",
+   "filingId": "293433",
+   "why": "the filed register for ASCM does not list this name, and counting both made the company 119.94% owned"
   },
   {
    "holder": "ابراهيم محمد ابراهيم احمد هيبه",
@@ -85,14 +93,6 @@
    "asOf": "2026-09-15",
    "filingId": "294751",
    "why": "the filed register for UEFM does not list this name, and counting both made the company 126.84% owned"
-  },
-  {
-   "holder": "القلعة للاستشارات المالية",
-   "ticker": "ASCM",
-   "percent": 50.76,
-   "asOf": "2026-08-17",
-   "filingId": "293433",
-   "why": "the filed register for ASCM does not list this name, and counting both made the company 119.94% owned"
   }
  ],
  "seatCount": 1980,
@@ -1433,6 +1433,138 @@
    ]
   },
   {
+   "id": "القلعة للاستشارات المالية",
+   "name": "القلعة للاستشارات المالية",
+   "nameEn": "Al Qalaa Lil Istithmarat Al Maliya",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "ASCM"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 0,
+   "soldCount": 2,
+   "value": 37599000.0,
+   "singleCompanyMove": {
+    "ticker": "ASCM",
+    "from": 54.56,
+    "to": 50.76,
+    "change": -3.8
+   },
+   "trades": [
+    {
+     "filingId": "290335",
+     "date": "2026-06-24",
+     "ticker": "ASCM",
+     "company": null,
+     "companyAr": "اسيك للتعدين \"أسكوم \"",
+     "action": "sell",
+     "shares": 400000,
+     "price": 69.48,
+     "value": 27792000.0,
+     "stakeBefore": 54.56,
+     "stakeAfter": 53.76,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340118_1.pdf"
+    },
+    {
+     "filingId": "293433",
+     "date": "2026-08-17",
+     "ticker": "ASCM",
+     "company": null,
+     "companyAr": "اسيك للتعدين \"أسكوم \"",
+     "action": "sell",
+     "shares": 150000,
+     "price": 65.38,
+     "value": 9807000.0,
+     "stakeBefore": 51.06,
+     "stakeAfter": 50.76,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342976_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "ابراهيم محمد ابراهيم احمد هيبه",
+   "name": "ابراهيم محمد ابراهيم احمد هيبه",
+   "nameEn": "Ibrahim Mohamed Ibrahim Ahmed Heiba",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "ابراهيم محمد ابراهيم هيبه"
+   ],
+   "tickers": [
+    "HBCO"
+   ],
+   "tradeCount": 4,
+   "boughtCount": 0,
+   "soldCount": 4,
+   "value": 18130137.43,
+   "singleCompanyMove": {
+    "ticker": "HBCO",
+    "from": 48.625,
+    "to": 44.88,
+    "change": -3.745
+   },
+   "trades": [
+    {
+     "filingId": "290455",
+     "date": "2026-06-25",
+     "ticker": "HBCO",
+     "company": null,
+     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
+     "action": "sell",
+     "shares": 240000,
+     "price": 1.2039,
+     "value": 288936.0,
+     "stakeBefore": 48.625,
+     "stakeAfter": 48.025,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340274_1.pdf"
+    },
+    {
+     "filingId": "292712",
+     "date": "2026-08-10",
+     "ticker": "HBCO",
+     "company": null,
+     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
+     "action": "sell",
+     "shares": 550000,
+     "price": 11.91,
+     "value": 6550500.0,
+     "stakeBefore": 48.025,
+     "stakeAfter": 47.261,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342356_1.pdf"
+    },
+    {
+     "filingId": "293689",
+     "date": "2026-08-20",
+     "ticker": "HBCO",
+     "company": null,
+     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
+     "action": "sell",
+     "shares": 527667,
+     "price": 13.67,
+     "value": 7213207.89,
+     "stakeBefore": 46.12,
+     "stakeAfter": 45.39,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343241_1.pdf"
+    },
+    {
+     "filingId": "294576",
+     "date": "2026-09-13",
+     "ticker": "HBCO",
+     "company": null,
+     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
+     "action": "sell",
+     "shares": 289266,
+     "price": 14.096,
+     "value": 4077493.536,
+     "stakeBefore": 45.28,
+     "stakeAfter": 44.88,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344068_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "شركه عبد القادر المهيدب واولاده",
    "name": "شركه عبد القادر المهيدب واولاده",
    "nameEn": "Sharikat Abd Al-Qadir Al-Muhaidib wa Awladuh",
@@ -1542,73 +1674,6 @@
      "stakeBefore": 5.05,
      "stakeAfter": 1.79,
      "source": "https://www.egx.com.eg/downloads/Bulletins/341670_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "ابراهيم محمد ابراهيم احمد هيبه",
-   "name": "ابراهيم محمد ابراهيم احمد هيبه",
-   "nameEn": "Ibrahim Mohamed Ibrahim Ahmed Heiba",
-   "script": "ar",
-   "kind": "person",
-   "aliases": [
-    "ابراهيم محمد ابراهيم هيبه"
-   ],
-   "tickers": [
-    "HBCO"
-   ],
-   "tradeCount": 3,
-   "boughtCount": 0,
-   "soldCount": 3,
-   "value": 17841201.43,
-   "singleCompanyMove": {
-    "ticker": "HBCO",
-    "from": 48.025,
-    "to": 44.88,
-    "change": -3.145
-   },
-   "trades": [
-    {
-     "filingId": "292712",
-     "date": "2026-08-10",
-     "ticker": "HBCO",
-     "company": null,
-     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
-     "action": "sell",
-     "shares": 550000,
-     "price": 11.91,
-     "value": 6550500.0,
-     "stakeBefore": 48.025,
-     "stakeAfter": 47.261,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342356_1.pdf"
-    },
-    {
-     "filingId": "293689",
-     "date": "2026-08-20",
-     "ticker": "HBCO",
-     "company": null,
-     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
-     "action": "sell",
-     "shares": 527667,
-     "price": 13.67,
-     "value": 7213207.89,
-     "stakeBefore": 46.12,
-     "stakeAfter": 45.39,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343241_1.pdf"
-    },
-    {
-     "filingId": "294576",
-     "date": "2026-09-13",
-     "ticker": "HBCO",
-     "company": null,
-     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
-     "action": "sell",
-     "shares": 289266,
-     "price": 14.096,
-     "value": 4077493.536,
-     "stakeBefore": 45.28,
-     "stakeAfter": 44.88,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/344068_1.pdf"
     }
    ]
   },
@@ -2113,6 +2178,43 @@
      "stakeBefore": 0,
      "stakeAfter": 1.91,
      "source": "https://www.egx.com.eg/downloads/Bulletins/341308_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "صفاء فرج السيد جاد الحق",
+   "name": "صفاء فرج السيد جاد الحق",
+   "nameEn": "Safaa Farag El Sayed Gad El Haq",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "VERT"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 4153610.02,
+   "singleCompanyMove": {
+    "ticker": "VERT",
+    "from": 16,
+    "to": 14.23,
+    "change": -1.77
+   },
+   "trades": [
+    {
+     "filingId": "290457",
+     "date": "2026-06-25",
+     "ticker": "VERT",
+     "company": null,
+     "companyAr": "فرتيكا للصناعة والتجارة",
+     "action": "sell",
+     "shares": 456541,
+     "price": 9.098,
+     "value": 4153610.018,
+     "stakeBefore": 16,
+     "stakeAfter": 14.23,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340277_1.pdf"
     }
    ]
   },
@@ -3518,43 +3620,6 @@
    ]
   },
   {
-   "id": "القلعة للاستشارات المالية",
-   "name": "القلعة للاستشارات المالية",
-   "nameEn": "Al Qalaa Lil Istithmarat Al Maliya",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": null,
-   "tickers": [
-    "ASCM"
-   ],
-   "tradeCount": 1,
-   "boughtCount": 0,
-   "soldCount": 1,
-   "value": 9807000.0,
-   "singleCompanyMove": {
-    "ticker": "ASCM",
-    "from": 51.06,
-    "to": 50.76,
-    "change": -0.3
-   },
-   "trades": [
-    {
-     "filingId": "293433",
-     "date": "2026-08-17",
-     "ticker": "ASCM",
-     "company": null,
-     "companyAr": "اسيك للتعدين \"أسكوم \"",
-     "action": "sell",
-     "shares": 150000,
-     "price": 65.38,
-     "value": 9807000.0,
-     "stakeBefore": 51.06,
-     "stakeAfter": 50.76,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342976_1.pdf"
-    }
-   ]
-  },
-  {
    "id": "جمال عبد القادر عبد البصير عبد القادر",
    "name": "جمال عبد القادر عبد البصير عبد القادر",
    "nameEn": "Gamal Abdel Kader Abdel Basser Abdel Kader",
@@ -4114,6 +4179,43 @@
    ]
   },
   {
+   "id": "محمد احمد خليل يسرى",
+   "name": "محمد احمد خليل يسرى",
+   "nameEn": "Mohamed Ahmed Khalil Yousry",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "OIH"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 7050000.0,
+   "singleCompanyMove": {
+    "ticker": "OIH",
+    "from": 5.05,
+    "to": 4.95,
+    "change": -0.1
+   },
+   "trades": [
+    {
+     "filingId": "290403",
+     "date": "2026-06-25",
+     "ticker": "OIH",
+     "company": null,
+     "companyAr": "اوراسكوم للاستثمار القابضة",
+     "action": "sell",
+     "shares": 5000000,
+     "price": 1.41,
+     "value": 7050000.0,
+     "stakeBefore": 5.05,
+     "stakeAfter": 4.95,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340250_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "اسماعيل صلاح الدين أحمد بسيونى",
    "name": "اسماعيل صلاح الدين أحمد بسيونى",
    "nameEn": "Ismail Salah El Din Ahmed Basyouni",
@@ -4239,43 +4341,6 @@
      "stakeBefore": 21.03,
      "stakeAfter": 20.962,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342176_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "فهد بن حمد بن ابراهيم الحرقان",
-   "name": "فهد بن حمد بن ابراهيم الحرقان",
-   "nameEn": "Fahad bin Hamad bin Ibrahim Al-Harqan",
-   "script": "ar",
-   "kind": "person",
-   "aliases": null,
-   "tickers": [
-    "GSSC"
-   ],
-   "tradeCount": 1,
-   "boughtCount": 1,
-   "soldCount": 0,
-   "value": 3256888.8,
-   "singleCompanyMove": {
-    "ticker": "GSSC",
-    "from": 4.9847,
-    "to": 5.0496,
-    "change": 0.0649
-   },
-   "trades": [
-    {
-     "filingId": "294749",
-     "date": "2026-09-15",
-     "ticker": "GSSC",
-     "company": null,
-     "companyAr": "العامة للصوامع والتخزين",
-     "action": "buy",
-     "shares": 11352,
-     "price": 286.9,
-     "value": 3256888.8,
-     "stakeBefore": 4.9847,
-     "stakeAfter": 5.0496,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/344250_1.pdf"
     }
    ]
   },
@@ -4768,6 +4833,140 @@
    ]
   },
   {
+   "id": "محمد اشرف عمر عمر",
+   "name": "محمد اشرف عمر عمر",
+   "nameEn": "Mohamed Ashraf Omar Omar",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "AMER",
+    "GGCC",
+    "HBCO",
+    "OBRI",
+    "UEGC"
+   ],
+   "tradeCount": 8,
+   "boughtCount": 5,
+   "soldCount": 3,
+   "value": 107957359.94,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "290384",
+     "date": "2026-06-24",
+     "ticker": "HBCO",
+     "company": null,
+     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
+     "action": "buy",
+     "shares": 584000,
+     "price": 11.9156,
+     "value": 6958710.399999999,
+     "stakeBefore": 4.995,
+     "stakeAfter": 6.455,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340181_1.pdf"
+    },
+    {
+     "filingId": "291281",
+     "date": "2026-07-13",
+     "ticker": "UEGC",
+     "company": null,
+     "companyAr": "الصعيد العامة للمقاولات والاستثمار العقاري SCCD",
+     "action": "buy",
+     "shares": 1840000,
+     "price": 1.7528,
+     "value": 3225152.0,
+     "stakeBefore": 4.998,
+     "stakeAfter": 5.252,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340966_1.pdf"
+    },
+    {
+     "filingId": "291405",
+     "date": "2026-07-15",
+     "ticker": "GGCC",
+     "company": null,
+     "companyAr": "الجيزة العامة للمقاولات والاستثمار العقارى ش م م",
+     "action": "buy",
+     "shares": 15000000,
+     "price": 0.6148,
+     "value": 9222000.0,
+     "stakeBefore": 4.995,
+     "stakeAfter": 5.688,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341106_1.pdf"
+    },
+    {
+     "filingId": "291660",
+     "date": "2026-07-20",
+     "ticker": "AMER",
+     "company": null,
+     "companyAr": "مجموعة عامر القابضة (عامر جروب)",
+     "action": "buy",
+     "shares": 11375443,
+     "price": 3.4019,
+     "value": 38698119.5417,
+     "stakeBefore": 4.99,
+     "stakeAfter": 6.25,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341196_1.pdf"
+    },
+    {
+     "filingId": "291755",
+     "date": "2026-07-21",
+     "ticker": "OBRI",
+     "company": null,
+     "companyAr": "العبور للاستثمار العقارى",
+     "action": "sell",
+     "shares": 220000,
+     "price": 36.0335,
+     "value": 7927369.999999999,
+     "stakeBefore": 15.015,
+     "stakeAfter": 14.465,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341388_1.pdf"
+    },
+    {
+     "filingId": "292222",
+     "date": "2026-07-30",
+     "ticker": "OBRI",
+     "company": null,
+     "companyAr": "العبور للاستثمار العقارى",
+     "action": "sell",
+     "shares": 520000,
+     "price": 34.0332,
+     "value": 17697264.0,
+     "stakeBefore": 10.025,
+     "stakeAfter": 8.725,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341916_1.pdf"
+    },
+    {
+     "filingId": "292382",
+     "date": "2026-08-03",
+     "ticker": "HBCO",
+     "company": null,
+     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
+     "action": "buy",
+     "shares": 534000,
+     "price": 8.866,
+     "value": 4734444.0,
+     "stakeBefore": 9.986,
+     "stakeAfter": 10.728,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342042_1.pdf"
+    },
+    {
+     "filingId": "292479",
+     "date": "2026-08-04",
+     "ticker": "OBRI",
+     "company": null,
+     "companyAr": "العبور للاستثمار العقارى",
+     "action": "sell",
+     "shares": 600000,
+     "price": 32.4905,
+     "value": 19494300.0,
+     "stakeBefore": 5.75,
+     "stakeAfter": 4.25,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342099_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "الحصن للاستشارات",
    "name": "الحصن للاستشارات",
    "nameEn": "El Hosn Lilistisharat",
@@ -4899,126 +5098,6 @@
      "stakeBefore": 2.02,
      "stakeAfter": 1.98,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343136_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "محمد اشرف عمر عمر",
-   "name": "محمد اشرف عمر عمر",
-   "nameEn": "Mohamed Ashraf Omar Omar",
-   "script": "ar",
-   "kind": "person",
-   "aliases": null,
-   "tickers": [
-    "AMER",
-    "GGCC",
-    "HBCO",
-    "OBRI",
-    "UEGC"
-   ],
-   "tradeCount": 7,
-   "boughtCount": 4,
-   "soldCount": 3,
-   "value": 100998649.54,
-   "singleCompanyMove": null,
-   "trades": [
-    {
-     "filingId": "291281",
-     "date": "2026-07-13",
-     "ticker": "UEGC",
-     "company": null,
-     "companyAr": "الصعيد العامة للمقاولات والاستثمار العقاري SCCD",
-     "action": "buy",
-     "shares": 1840000,
-     "price": 1.7528,
-     "value": 3225152.0,
-     "stakeBefore": 4.998,
-     "stakeAfter": 5.252,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/340966_1.pdf"
-    },
-    {
-     "filingId": "291405",
-     "date": "2026-07-15",
-     "ticker": "GGCC",
-     "company": null,
-     "companyAr": "الجيزة العامة للمقاولات والاستثمار العقارى ش م م",
-     "action": "buy",
-     "shares": 15000000,
-     "price": 0.6148,
-     "value": 9222000.0,
-     "stakeBefore": 4.995,
-     "stakeAfter": 5.688,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341106_1.pdf"
-    },
-    {
-     "filingId": "291660",
-     "date": "2026-07-20",
-     "ticker": "AMER",
-     "company": null,
-     "companyAr": "مجموعة عامر القابضة (عامر جروب)",
-     "action": "buy",
-     "shares": 11375443,
-     "price": 3.4019,
-     "value": 38698119.5417,
-     "stakeBefore": 4.99,
-     "stakeAfter": 6.25,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341196_1.pdf"
-    },
-    {
-     "filingId": "291755",
-     "date": "2026-07-21",
-     "ticker": "OBRI",
-     "company": null,
-     "companyAr": "العبور للاستثمار العقارى",
-     "action": "sell",
-     "shares": 220000,
-     "price": 36.0335,
-     "value": 7927369.999999999,
-     "stakeBefore": 15.015,
-     "stakeAfter": 14.465,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341388_1.pdf"
-    },
-    {
-     "filingId": "292222",
-     "date": "2026-07-30",
-     "ticker": "OBRI",
-     "company": null,
-     "companyAr": "العبور للاستثمار العقارى",
-     "action": "sell",
-     "shares": 520000,
-     "price": 34.0332,
-     "value": 17697264.0,
-     "stakeBefore": 10.025,
-     "stakeAfter": 8.725,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341916_1.pdf"
-    },
-    {
-     "filingId": "292382",
-     "date": "2026-08-03",
-     "ticker": "HBCO",
-     "company": null,
-     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
-     "action": "buy",
-     "shares": 534000,
-     "price": 8.866,
-     "value": 4734444.0,
-     "stakeBefore": 9.986,
-     "stakeAfter": 10.728,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342042_1.pdf"
-    },
-    {
-     "filingId": "292479",
-     "date": "2026-08-04",
-     "ticker": "OBRI",
-     "company": null,
-     "companyAr": "العبور للاستثمار العقارى",
-     "action": "sell",
-     "shares": 600000,
-     "price": 32.4905,
-     "value": 19494300.0,
-     "stakeBefore": 5.75,
-     "stakeAfter": 4.25,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342099_1.pdf"
     }
    ]
   },
@@ -5895,6 +5974,55 @@
      "stakeBefore": 9.61,
      "stakeAfter": 0.0,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343545_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "فهد بن حمد بن ابراهيم الحرقان",
+   "name": "فهد بن حمد بن ابراهيم الحرقان",
+   "nameEn": "Fahad bin Hamad bin Ibrahim Al-Harqan",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "فهد بن حمد بن إبراهيم الحرقان"
+   ],
+   "tickers": [
+    "GSSC",
+    "PRMH"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 1,
+   "soldCount": 1,
+   "value": 26196411.8,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "290443",
+     "date": "2026-06-25",
+     "ticker": "PRMH",
+     "company": null,
+     "companyAr": "برايم القابضة للاستثمارات المالية",
+     "action": "sell",
+     "shares": 8766250,
+     "price": 2.6168,
+     "value": 22939523.0,
+     "stakeBefore": 20.0046,
+     "stakeAfter": 17.5,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340254_1.pdf"
+    },
+    {
+     "filingId": "294749",
+     "date": "2026-09-15",
+     "ticker": "GSSC",
+     "company": null,
+     "companyAr": "العامة للصوامع والتخزين",
+     "action": "buy",
+     "shares": 11352,
+     "price": 286.9,
+     "value": 3256888.8,
+     "stakeBefore": 4.9847,
+     "stakeAfter": 5.0496,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344250_1.pdf"
     }
    ]
   },
@@ -9563,21 +9691,6 @@
    "aliases": [
     "محمد طارق محمد محمد اسماعيل"
    ],
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "صفاء فرج السيد جاد الحق",
-   "name": "صفاء فرج السيد جاد الحق",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
    "tickers": [],
    "tradeCount": 0,
    "boughtCount": 0,
@@ -27850,9 +27963,14 @@
    "filingId": "291243",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340820_1.pdf",
    "shares": 61250000,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
+   "openedAt": "2026-06-25",
+   "openingPercent": 20.0046,
+   "history": [
+    {
+     "date": "2026-06-25",
+     "percent": 17.5
+    }
+   ]
   },
   {
    "holder": "شريف عدلي كيرلس بولس",
@@ -28967,9 +29085,14 @@
    "filingId": "291107",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340801_1.pdf",
    "shares": 3532425,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
+   "openedAt": "2026-06-25",
+   "openingPercent": 16,
+   "history": [
+    {
+     "date": "2026-06-25",
+     "percent": 14.23
+    }
+   ]
   },
   {
    "holder": "محمد سمير حسن جاب الله",
@@ -35300,6 +35423,24 @@
     {
      "date": "2025-10-02",
      "percent": 5.99
+    }
+   ]
+  },
+  {
+   "holder": "محمد احمد خليل يسرى",
+   "kind": "person",
+   "ticker": "OIH",
+   "percent": 4.95,
+   "asOf": "2026-06-25",
+   "basis": "trade",
+   "filingId": "290403",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340250_1.pdf",
+   "openedAt": "2026-06-25",
+   "openingPercent": 5.05,
+   "history": [
+    {
+     "date": "2026-06-25",
+     "percent": 4.95
     }
    ]
   },
@@ -46867,6 +47008,78 @@
    ]
   },
   {
+   "start": "2026-06-21",
+   "end": "2026-06-25",
+   "label": "21–25 Jun",
+   "labelAr": "21–25 يونيو",
+   "sessions": 2,
+   "buys": 1,
+   "sells": 5,
+   "value": 69182779.42,
+   "moves": [
+    {
+     "holder": "فهد بن حمد بن ابراهيم الحرقان",
+     "kind": "person",
+     "ticker": "PRMH",
+     "from": 20.0046,
+     "to": 17.5,
+     "trades": 1,
+     "value": 22939523.0,
+     "change": -2.5046
+    },
+    {
+     "holder": "صفاء فرج السيد جاد الحق",
+     "kind": "person",
+     "ticker": "VERT",
+     "from": 16,
+     "to": 14.23,
+     "trades": 1,
+     "value": 4153610.02,
+     "change": -1.77
+    },
+    {
+     "holder": "محمد اشرف عمر عمر",
+     "kind": "person",
+     "ticker": "HBCO",
+     "from": 4.995,
+     "to": 6.455,
+     "trades": 1,
+     "value": 6958710.4,
+     "change": 1.46
+    },
+    {
+     "holder": "القلعة للاستشارات المالية",
+     "kind": "firm",
+     "ticker": "ASCM",
+     "from": 54.56,
+     "to": 53.76,
+     "trades": 1,
+     "value": 27792000.0,
+     "change": -0.8
+    },
+    {
+     "holder": "ابراهيم محمد ابراهيم احمد هيبه",
+     "kind": "person",
+     "ticker": "HBCO",
+     "from": 48.625,
+     "to": 48.025,
+     "trades": 1,
+     "value": 288936.0,
+     "change": -0.6
+    },
+    {
+     "holder": "محمد احمد خليل يسرى",
+     "kind": "person",
+     "ticker": "OIH",
+     "from": 5.05,
+     "to": 4.95,
+     "trades": 1,
+     "value": 7050000.0,
+     "change": -0.1
+    }
+   ]
+  },
+  {
    "start": "2026-06-28",
    "end": "2026-07-01",
    "label": "28 Jun – 1 Jul",
@@ -47971,16 +48184,6 @@
      "change": -0.36
     },
     {
-     "holder": "ايهاب خليل خليفه خليفه",
-     "kind": "person",
-     "ticker": "ETRS",
-     "from": 4.6,
-     "to": 4.9,
-     "trades": 2,
-     "value": 17325765.6,
-     "change": 0.3
-    },
-    {
      "holder": "القلعة للاستشارات المالية",
      "kind": "firm",
      "ticker": "ASCM",
@@ -47989,6 +48192,16 @@
      "trades": 1,
      "value": 9807000.0,
      "change": -0.3
+    },
+    {
+     "holder": "ايهاب خليل خليفه خليفه",
+     "kind": "person",
+     "ticker": "ETRS",
+     "from": 4.6,
+     "to": 4.9,
+     "trades": 2,
+     "value": 17325765.6,
+     "change": 0.3
     },
     {
      "holder": "نواف بن عبد الله بن ابراهيم بن دايل",
