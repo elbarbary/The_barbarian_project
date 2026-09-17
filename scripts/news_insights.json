@@ -2143,6 +2143,10 @@
     "meaning": "A multi-month decline in major European equity indices reflects broad asset repricing across European markets, directly influencing global liquidity conditions and cross-border institutional capital allocations.",
     "meaning_ar": "يعكس تراجع مؤشرات الأسهم الأوروبية إلى أدنى مستوياتها منذ عدة أشهر حركة إعادة تسعير عامة للأصول في الأسواق الأوروبية، مما يؤثر مباشرة على سيولة التداول وتوزيع تدفقات رؤوس الأموال المؤسسية الدولية."
   },
+  "الاسهم السعوديه تتجه لخساره اسبوعيه جديده وسط تراجع شبه جماعي": {
+    "meaning": "Broad-based declines across multiple sectors reflect generalized net outflows and downward valuation adjustments across the exchange, resulting in a lower aggregate market capitalization for the weekly period.",
+    "meaning_ar": "يعكس التراجع شبه الجماعي لمختلف القطاعات تدفقات نقدية خارجة وتعديلات هبوطية في التقييمات عبر البورصة، مما يؤدي إلى انخفاض القيمة السوقية الإجمالية للسوق خلال الأسبوع."
+  },
   "الاسهم العالميه تتراجع مع تصاعد مخاوف صدمه الطاقه وارتفاع عوايد السندات": {
     "meaning": "Higher energy prices elevate operating costs across corporate supply chains, while rising sovereign bond yields raise the risk-free rate used to discount future equity cash flows.",
     "meaning_ar": "تؤدي زيادة أسعار الطاقة إلى رفع التكاليف التشغيلية عبر سلاسل الإمداد للشركات، بينما يؤدي ارتفاع عوائد السندات السيادية إلى زيادة معدل العائد الخالي من المخاطر المستخدم في خصم التدفقات النقدية للأسهم."
@@ -5100,6 +5104,10 @@
     "meaning": "The national strategy establishes a dedicated regulatory framework for data infrastructure, while the associated incentives reduce setup and operational overheads for telecommunications and IT infrastructure operators.",
     "meaning_ar": "تحدد الاستراتيجية الوطنية إطاراً تنظيمياً للبنية التحتية الرقمية، بينما تقلص الحوافز المقررة تكاليف التأسيس والتشغيل للشركات المشغلة لمراكز البيانات في قطاع تكنولوجيا المعلومات."
   },
+  "راكتا تقلص خسايرها 44% خلال النصف الاول": {
+    "meaning": "The company narrows its net loss by 44% year-over-year during the first half, reflecting a change in operational revenue, cost containment, or non-operating financial line items on the income statement.",
+    "meaning_ar": "تقلص الشركة صافي خسائرها بنسبة 44% على أساس سنوي خلال النصف الأول، وهو ما يعكس تغيراً في الإيرادات التشغيلية أو ضبط التكاليف أو بنود الدخل غير التشغيلي في قائمة الدخل."
+  },
   "رجال الاعمال المصريين تبحث فرص الاستثمار واداره الثروات وهيكله الصناديق بين مصر وموريشيوس": {
     "meaning": "Cross-border cooperation in fund structuring and wealth management utilizes established financial center frameworks and bilateral treaties to facilitate the formation of investment vehicles and capital deployment between jurisdictions.",
     "meaning_ar": "تُوظف الشراكات في هيكلة الصناديق وإدارة الثروات الأطر التنظيمية والاتفاقيات الثنائية لتأسيس الأوعية الاستثمارية وتسهيل حركة رؤوس الأموال بين الدولتين."
@@ -7744,6 +7752,10 @@
   "وزاره النقل ترفع درجه الاستعداد بالسكك الحديديه والمترو استعدادا للعام الدراسي الجديد": {
     "meaning": "This operational measure increases capacity and operating frequency across the public transport network, accommodating higher seasonal passenger volumes and driving ticket revenues for the state-run rail and metro authorities.",
     "meaning_ar": "يؤدي هذا الإجراء التشغيلي إلى زيادة الطاقة الاستيعابية وكثافة الرحلات عبر شبكة النقل العام، لاستيعاب الزيادة الموسمية في أعداد الركاب وتعزيز الإيرادات التشغيلية لهيئات السكك الحديدية والمترو."
+  },
+  "وزراء الصناعه والزراعه والتعليم العالي يبحثون تطوير سلسله القيمه للكتان المصري": {
+    "meaning": "This inter-ministerial coordination aligns agricultural cultivation, academic research, and industrial processing to integrate the domestic flax supply chain from raw fiber extraction to textile manufacturing.",
+    "meaning_ar": "يربط هذا التنسيق المشترك بين القطاع الزراعي والبحث الأكاديمي والعمليات التصنيعية لدمج سلسلة إمداد الكتان محلياً بدءاً من استخراج الألياف الخام وصولاً إلى مراحل الغزل والنسيج."
   },
   "وزراء ومسوولون وخبراء يزورون جناح شركه تحالف مستقبل مصر الطبي في ايجي هيلث 2026": {
     "meaning": "Trade exhibition participation displays operational healthcare infrastructure and medical capabilities directly to institutional stakeholders and public sector procurement decision-makers.",
