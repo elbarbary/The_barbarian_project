@@ -1025,6 +1025,25 @@
    "prior_period_start": "2025-01-01",
    "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294630",
    "ticker": "SPHT"
+  },
+  "294819": {
+   "basis": null,
+   "currency": "جنيه مصرى",
+   "filed_on": "2026-09-17",
+   "isin": "EGS729F1C012",
+   "months": 12,
+   "name_ar": "المصرية لنظم التعليم الحديثة",
+   "net_profit_egp": 3491714.0,
+   "news_id": "294819",
+   "period": "FY 2026",
+   "period_end": "2026-06-30",
+   "period_start": "2025-07-01",
+   "prior_net_profit_egp": 4948625.0,
+   "prior_period": "FY 2025",
+   "prior_period_end": "2025-06-30",
+   "prior_period_start": "2024-07-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294819",
+   "ticker": "MOED"
   }
  },
  "read": {
@@ -1125,6 +1144,8 @@
   "294798": "2026-09-16",
   "294800": "2026-09-16",
   "294803": "2026-09-16",
-  "294806": "2026-09-16"
+  "294806": "2026-09-16",
+  "294815": "2026-09-17",
+  "294819": "2026-09-17"
  }
 }

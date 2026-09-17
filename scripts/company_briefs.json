@@ -982,7 +982,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/BONY/profile",
   "record": {
-   "filings": 52,
+   "filings": 53,
    "first_filing": "2025-01-22",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
@@ -4187,7 +4187,7 @@
    "trading_resumptions": 22,
    "capital_increases": 4,
    "general_assemblies": 40,
-   "periods_reported": 65,
+   "periods_reported": 67,
    "loss_making_periods": 7
   },
   "generated": "2026-08-25"

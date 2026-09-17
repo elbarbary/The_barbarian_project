@@ -1,15 +1,15 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-17T08:33:07+00:00",
+ "generated": "2026-09-17T09:02:16+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1313,
- "tradeCount": 159,
+ "peopleCount": 1314,
+ "tradeCount": 165,
  "tickerCount": 236,
- "tradedTickerCount": 67,
+ "tradedTickerCount": 68,
  "firmCount": 437,
- "personCount": 876,
+ "personCount": 877,
  "aliasCount": 138,
  "registerCount": 236,
  "overDisclosed": [],
@@ -169,6 +169,73 @@
    ]
   },
   {
+   "id": "أسامة فوزي محمد سعيد",
+   "name": "أسامة فوزي محمد سعيد",
+   "nameEn": "Osama Fawzy Mohamed Saeed",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "أسامة فوزى محمد سعيد"
+   ],
+   "tickers": [
+    "FIRE"
+   ],
+   "tradeCount": 3,
+   "boughtCount": 2,
+   "soldCount": 1,
+   "value": 1961451.11,
+   "singleCompanyMove": {
+    "ticker": "FIRE",
+    "from": 24.26,
+    "to": 0.24199,
+    "change": -24.018
+   },
+   "trades": [
+    {
+     "filingId": "291836",
+     "date": "2026-07-22",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 307316,
+     "price": 5.61,
+     "value": 1724042.76,
+     "stakeBefore": 24.26,
+     "stakeAfter": 25.6149,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341580_1.pdf"
+    },
+    {
+     "filingId": "292120",
+     "date": "2026-07-29",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 24535,
+     "price": 4.98,
+     "value": 122184.30000000002,
+     "stakeBefore": 0.24186,
+     "stakeAfter": 0.56064,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341849_1.pdf"
+    },
+    {
+     "filingId": "292378",
+     "date": "2026-08-03",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 24589,
+     "price": 4.686,
+     "value": 115224.054,
+     "stakeBefore": 0.25017,
+     "stakeAfter": 0.24199,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "جدوى للتنمية الصناعية",
    "name": "جدوى للتنمية الصناعية",
    "nameEn": "Gadwa for Industrial Development",
@@ -279,6 +346,85 @@
    ]
   },
   {
+   "id": "ايمن اسماعيل صلاح عبد المجيد العبد",
+   "name": "ايمن اسماعيل صلاح عبد المجيد العبد",
+   "nameEn": "Ayman Ismail Salah Abdel Meguid El Abd",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "LUTS"
+   ],
+   "tradeCount": 4,
+   "boughtCount": 0,
+   "soldCount": 4,
+   "value": 163733832.17,
+   "singleCompanyMove": {
+    "ticker": "LUTS",
+    "from": 41.064,
+    "to": 29.424,
+    "change": -11.64
+   },
+   "trades": [
+    {
+     "filingId": "291635",
+     "date": "2026-07-20",
+     "ticker": "LUTS",
+     "company": null,
+     "companyAr": "لوتس للتنمية والاستثمار الزراعى",
+     "action": "sell",
+     "shares": 20500000,
+     "price": 0.7688,
+     "value": 15760400.0,
+     "stakeBefore": 41.064,
+     "stakeAfter": 37.254,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341303_1.pdf"
+    },
+    {
+     "filingId": "292784",
+     "date": "2026-08-11",
+     "ticker": "LUTS",
+     "company": null,
+     "companyAr": "لوتس للتنمية والاستثمار الزراعى",
+     "action": "sell",
+     "shares": 32000000,
+     "price": 0.808,
+     "value": 25856000.0,
+     "stakeBefore": 37.254,
+     "stakeAfter": 34.847,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342442_1.pdf"
+    },
+    {
+     "filingId": "293760",
+     "date": "2026-08-23",
+     "ticker": "LUTS",
+     "company": null,
+     "companyAr": "لوتس للتنمية والاستثمار الزراعى",
+     "action": "sell",
+     "shares": 62123065,
+     "price": 1.6888,
+     "value": 104913432.172,
+     "stakeBefore": 34.847,
+     "stakeAfter": 30.176,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343314_1.pdf"
+    },
+    {
+     "filingId": "293848",
+     "date": "2026-08-25",
+     "ticker": "LUTS",
+     "company": null,
+     "companyAr": "لوتس للتنمية والاستثمار الزراعى",
+     "action": "sell",
+     "shares": 10000000,
+     "price": 1.7204,
+     "value": 17204000.0,
+     "stakeBefore": 30.176,
+     "stakeAfter": 29.424,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343391_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "المجموعه الاستثماريه العقاريه الكويتيه ش م ك مقفله",
    "name": "المجموعه الاستثماريه العقاريه الكويتيه ش م ك مقفله",
    "nameEn": "Al-Majmu'ah Al-Istithmariyah Al-Aqariyah Al-Kuwaytiyah Sh.M.K. Muqfalah",
@@ -366,71 +512,6 @@
      "stakeBefore": 8.34,
      "stakeAfter": 0.0,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343688_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "ايمن اسماعيل صلاح عبد المجيد العبد",
-   "name": "ايمن اسماعيل صلاح عبد المجيد العبد",
-   "nameEn": "Ayman Ismail Salah Abdel Meguid El Abd",
-   "script": "ar",
-   "kind": "person",
-   "aliases": null,
-   "tickers": [
-    "LUTS"
-   ],
-   "tradeCount": 3,
-   "boughtCount": 0,
-   "soldCount": 3,
-   "value": 147973432.17,
-   "singleCompanyMove": {
-    "ticker": "LUTS",
-    "from": 37.254,
-    "to": 29.424,
-    "change": -7.83
-   },
-   "trades": [
-    {
-     "filingId": "292784",
-     "date": "2026-08-11",
-     "ticker": "LUTS",
-     "company": null,
-     "companyAr": "لوتس للتنمية والاستثمار الزراعى",
-     "action": "sell",
-     "shares": 32000000,
-     "price": 0.808,
-     "value": 25856000.0,
-     "stakeBefore": 37.254,
-     "stakeAfter": 34.847,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342442_1.pdf"
-    },
-    {
-     "filingId": "293760",
-     "date": "2026-08-23",
-     "ticker": "LUTS",
-     "company": null,
-     "companyAr": "لوتس للتنمية والاستثمار الزراعى",
-     "action": "sell",
-     "shares": 62123065,
-     "price": 1.6888,
-     "value": 104913432.172,
-     "stakeBefore": 34.847,
-     "stakeAfter": 30.176,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343314_1.pdf"
-    },
-    {
-     "filingId": "293848",
-     "date": "2026-08-25",
-     "ticker": "LUTS",
-     "company": null,
-     "companyAr": "لوتس للتنمية والاستثمار الزراعى",
-     "action": "sell",
-     "shares": 10000000,
-     "price": 1.7204,
-     "value": 17204000.0,
-     "stakeBefore": 30.176,
-     "stakeAfter": 29.424,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343391_1.pdf"
     }
    ]
   },
@@ -1409,6 +1490,43 @@
      "stakeBefore": 5.12,
      "stakeAfter": 3.4,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342366_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "احمد محمد سعد سعيد",
+   "name": "احمد محمد سعد سعيد",
+   "nameEn": "Ahmed Mohamed Saad Saeed",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "VERT"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 6676046.59,
+   "singleCompanyMove": {
+    "ticker": "VERT",
+    "from": 5.05,
+    "to": 1.79,
+    "change": -3.26
+   },
+   "trades": [
+    {
+     "filingId": "291923",
+     "date": "2026-07-26",
+     "ticker": "VERT",
+     "company": null,
+     "companyAr": "فرتيكا للصناعة والتجارة",
+     "action": "sell",
+     "shares": 837647,
+     "price": 7.97,
+     "value": 6676046.59,
+     "stakeBefore": 5.05,
+     "stakeAfter": 1.79,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341670_1.pdf"
     }
    ]
   },
@@ -2916,6 +3034,43 @@
    ]
   },
   {
+   "id": "أسامة فوزي محمد حامد",
+   "name": "أسامة فوزي محمد حامد",
+   "nameEn": "Osama Fawzy Mohamed Hamed",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "FIRE"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 1331936.4,
+   "singleCompanyMove": {
+    "ticker": "FIRE",
+    "from": 0.2625,
+    "to": 0.02435,
+    "change": -0.2382
+   },
+   "trades": [
+    {
+     "filingId": "291765",
+     "date": "2026-07-21",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 261164,
+     "price": 5.1,
+     "value": 1331936.4,
+     "stakeBefore": 0.2625,
+     "stakeAfter": 0.02435,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341485_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "اندرو رمزي فؤاد بخيت",
    "name": "اندرو رمزي فؤاد بخيت",
    "nameEn": "Andrew Ramzy Fouad Bakhit",
@@ -3696,59 +3851,6 @@
    ]
   },
   {
-   "id": "أسامة فوزي محمد سعيد",
-   "name": "أسامة فوزي محمد سعيد",
-   "nameEn": "Osama Fawzy Mohamed Saeed",
-   "script": "ar",
-   "kind": "person",
-   "aliases": [
-    "أسامة فوزى محمد سعيد"
-   ],
-   "tickers": [
-    "FIRE"
-   ],
-   "tradeCount": 2,
-   "boughtCount": 1,
-   "soldCount": 1,
-   "value": 237408.35,
-   "singleCompanyMove": {
-    "ticker": "FIRE",
-    "from": 0.24186,
-    "to": 0.24199,
-    "change": 0.0001
-   },
-   "trades": [
-    {
-     "filingId": "292120",
-     "date": "2026-07-29",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "buy",
-     "shares": 24535,
-     "price": 4.98,
-     "value": 122184.30000000002,
-     "stakeBefore": 0.24186,
-     "stakeAfter": 0.56064,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341849_1.pdf"
-    },
-    {
-     "filingId": "292378",
-     "date": "2026-08-03",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "sell",
-     "shares": 24589,
-     "price": 4.686,
-     "value": 115224.054,
-     "stakeBefore": 0.25017,
-     "stakeAfter": 0.24199,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf"
-    }
-   ]
-  },
-  {
    "id": "جمال عبد الفتاح عثمان حسن",
    "name": "جمال عبد الفتاح عثمان حسن",
    "nameEn": "Gamal Abd El Fattah Othman Hassan",
@@ -3864,6 +3966,96 @@
      "stakeBefore": 15.08,
      "stakeAfter": 7.59,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343680_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "محمد اشرف عمر عمر",
+   "name": "محمد اشرف عمر عمر",
+   "nameEn": "Mohamed Ashraf Omar Omar",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "AMER",
+    "HBCO",
+    "OBRI"
+   ],
+   "tradeCount": 5,
+   "boughtCount": 2,
+   "soldCount": 3,
+   "value": 88551497.54,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "291660",
+     "date": "2026-07-20",
+     "ticker": "AMER",
+     "company": null,
+     "companyAr": "مجموعة عامر القابضة (عامر جروب)",
+     "action": "buy",
+     "shares": 11375443,
+     "price": 3.4019,
+     "value": 38698119.5417,
+     "stakeBefore": 4.99,
+     "stakeAfter": 6.25,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341196_1.pdf"
+    },
+    {
+     "filingId": "291755",
+     "date": "2026-07-21",
+     "ticker": "OBRI",
+     "company": null,
+     "companyAr": "العبور للاستثمار العقارى",
+     "action": "sell",
+     "shares": 220000,
+     "price": 36.0335,
+     "value": 7927369.999999999,
+     "stakeBefore": 15.015,
+     "stakeAfter": 14.465,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341388_1.pdf"
+    },
+    {
+     "filingId": "292222",
+     "date": "2026-07-30",
+     "ticker": "OBRI",
+     "company": null,
+     "companyAr": "العبور للاستثمار العقارى",
+     "action": "sell",
+     "shares": 520000,
+     "price": 34.0332,
+     "value": 17697264.0,
+     "stakeBefore": 10.025,
+     "stakeAfter": 8.725,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341916_1.pdf"
+    },
+    {
+     "filingId": "292382",
+     "date": "2026-08-03",
+     "ticker": "HBCO",
+     "company": null,
+     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
+     "action": "buy",
+     "shares": 534000,
+     "price": 8.866,
+     "value": 4734444.0,
+     "stakeBefore": 9.986,
+     "stakeAfter": 10.728,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342042_1.pdf"
+    },
+    {
+     "filingId": "292479",
+     "date": "2026-08-04",
+     "ticker": "OBRI",
+     "company": null,
+     "companyAr": "العبور للاستثمار العقارى",
+     "action": "sell",
+     "shares": 600000,
+     "price": 32.4905,
+     "value": 19494300.0,
+     "stakeBefore": 5.75,
+     "stakeAfter": 4.25,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342099_1.pdf"
     }
    ]
   },
@@ -4223,67 +4415,6 @@
      "stakeBefore": 1.691,
      "stakeAfter": 0,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343711_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "محمد اشرف عمر عمر",
-   "name": "محمد اشرف عمر عمر",
-   "nameEn": "Mohamed Ashraf Omar Omar",
-   "script": "ar",
-   "kind": "person",
-   "aliases": null,
-   "tickers": [
-    "HBCO",
-    "OBRI"
-   ],
-   "tradeCount": 3,
-   "boughtCount": 1,
-   "soldCount": 2,
-   "value": 41926008.0,
-   "singleCompanyMove": null,
-   "trades": [
-    {
-     "filingId": "292222",
-     "date": "2026-07-30",
-     "ticker": "OBRI",
-     "company": null,
-     "companyAr": "العبور للاستثمار العقارى",
-     "action": "sell",
-     "shares": 520000,
-     "price": 34.0332,
-     "value": 17697264.0,
-     "stakeBefore": 10.025,
-     "stakeAfter": 8.725,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341916_1.pdf"
-    },
-    {
-     "filingId": "292382",
-     "date": "2026-08-03",
-     "ticker": "HBCO",
-     "company": null,
-     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
-     "action": "buy",
-     "shares": 534000,
-     "price": 8.866,
-     "value": 4734444.0,
-     "stakeBefore": 9.986,
-     "stakeAfter": 10.728,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342042_1.pdf"
-    },
-    {
-     "filingId": "292479",
-     "date": "2026-08-04",
-     "ticker": "OBRI",
-     "company": null,
-     "companyAr": "العبور للاستثمار العقارى",
-     "action": "sell",
-     "shares": 600000,
-     "price": 32.4905,
-     "value": 19494300.0,
-     "stakeBefore": 5.75,
-     "stakeAfter": 4.25,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342099_1.pdf"
     }
    ]
   },
@@ -8319,21 +8450,6 @@
   {
    "id": "خالد ابراهيم محمد ابراهيم",
    "name": "خالد ابراهيم محمد ابراهيم",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "احمد محمد سعد سعيد",
-   "name": "احمد محمد سعد سعيد",
    "nameEn": null,
    "script": null,
    "kind": "person",
@@ -25076,9 +25192,13 @@
    "basis": "trade",
    "filingId": "293848",
    "source": "https://www.egx.com.eg/downloads/Bulletins/343391_1.pdf",
-   "openedAt": "2026-08-11",
-   "openingPercent": 37.254,
+   "openedAt": "2026-07-20",
+   "openingPercent": 41.064,
    "history": [
+    {
+     "date": "2026-07-20",
+     "percent": 37.254
+    },
     {
      "date": "2026-08-11",
      "percent": 34.847
@@ -32188,6 +32308,24 @@
    "history": []
   },
   {
+   "holder": "محمد اشرف عمر عمر",
+   "kind": "person",
+   "ticker": "AMER",
+   "percent": 6.25,
+   "asOf": "2026-07-20",
+   "basis": "trade",
+   "filingId": "291660",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341196_1.pdf",
+   "openedAt": "2026-07-20",
+   "openingPercent": 4.99,
+   "history": [
+    {
+     "date": "2026-07-20",
+     "percent": 6.25
+    }
+   ]
+  },
+  {
    "holder": "كريم طارق عبد الحميد عيسى",
    "kind": "person",
    "ticker": "OBRI",
@@ -33660,20 +33798,6 @@
    ]
   },
   {
-   "holder": "احمد محمد سعد سعيد",
-   "kind": "person",
-   "ticker": "VERT",
-   "percent": 5.05,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291107",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/340801_1.pdf",
-   "shares": 1297863,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
-  },
-  {
    "holder": "فهد بن حمد بن ابراهيم الحرقان",
    "kind": "person",
    "ticker": "GSSC",
@@ -34687,9 +34811,13 @@
    "basis": "trade",
    "filingId": "292479",
    "source": "https://www.egx.com.eg/downloads/Bulletins/342099_1.pdf",
-   "openedAt": "2026-07-30",
-   "openingPercent": 10.025,
+   "openedAt": "2026-07-21",
+   "openingPercent": 15.015,
    "history": [
+    {
+     "date": "2026-07-21",
+     "percent": 14.465
+    },
     {
      "date": "2026-07-30",
      "percent": 8.725
@@ -37114,6 +37242,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "احمد محمد سعد سعيد",
+   "kind": "person",
+   "ticker": "VERT",
+   "percent": 1.79,
+   "asOf": "2026-07-26",
+   "basis": "trade",
+   "filingId": "291923",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341670_1.pdf",
+   "openedAt": "2026-07-26",
+   "openingPercent": 5.05,
+   "history": [
+    {
+     "date": "2026-07-26",
+     "percent": 1.79
+    }
+   ]
   },
   {
    "holder": "+احمد محمود محمد وهيب",
@@ -40603,9 +40749,13 @@
    "basis": "trade",
    "filingId": "292378",
    "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf",
-   "openedAt": "2026-07-29",
-   "openingPercent": 0.24186,
+   "openedAt": "2026-07-22",
+   "openingPercent": 24.26,
    "history": [
+    {
+     "date": "2026-07-22",
+     "percent": 25.6149
+    },
     {
      "date": "2026-07-29",
      "percent": 0.56064
@@ -42887,6 +43037,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "أسامة فوزي محمد حامد",
+   "kind": "person",
+   "ticker": "FIRE",
+   "percent": 0.02435,
+   "asOf": "2026-07-21",
+   "basis": "trade",
+   "filingId": "291765",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341485_1.pdf",
+   "openedAt": "2026-07-21",
+   "openingPercent": 0.2625,
+   "history": [
+    {
+     "date": "2026-07-21",
+     "percent": 0.02435
+    }
+   ]
   },
   {
    "holder": "أسامة فوزي محمد بحير",
@@ -45383,14 +45551,76 @@
    ]
   },
   {
+   "start": "2026-07-19",
+   "end": "2026-07-22",
+   "label": "19–22 Jul",
+   "labelAr": "19–22 يوليو",
+   "sessions": 3,
+   "buys": 2,
+   "sells": 3,
+   "value": 65441868.7,
+   "moves": [
+    {
+     "holder": "ايمن اسماعيل صلاح عبد المجيد العبد",
+     "kind": "person",
+     "ticker": "LUTS",
+     "from": 41.064,
+     "to": 37.254,
+     "trades": 1,
+     "value": 15760400.0,
+     "change": -3.81
+    },
+    {
+     "holder": "أسامة فوزي محمد سعيد",
+     "kind": "person",
+     "ticker": "FIRE",
+     "from": 24.26,
+     "to": 25.6149,
+     "trades": 1,
+     "value": 1724042.76,
+     "change": 1.3549
+    },
+    {
+     "holder": "محمد اشرف عمر عمر",
+     "kind": "person",
+     "ticker": "AMER",
+     "from": 4.99,
+     "to": 6.25,
+     "trades": 1,
+     "value": 38698119.54,
+     "change": 1.26
+    },
+    {
+     "holder": "محمد اشرف عمر عمر",
+     "kind": "person",
+     "ticker": "OBRI",
+     "from": 15.015,
+     "to": 14.465,
+     "trades": 1,
+     "value": 7927370.0,
+     "change": -0.55
+    },
+    {
+     "holder": "أسامة فوزي محمد حامد",
+     "kind": "person",
+     "ticker": "FIRE",
+     "from": 0.2625,
+     "to": 0.02435,
+     "trades": 1,
+     "value": 1331936.4,
+     "change": -0.2382
+    }
+   ]
+  },
+  {
    "start": "2026-07-26",
    "end": "2026-07-30",
    "label": "26–30 Jul",
    "labelAr": "26–30 يوليو",
-   "sessions": 4,
+   "sessions": 5,
    "buys": 5,
-   "sells": 13,
-   "value": 563287410.37,
+   "sells": 14,
+   "value": 569963456.96,
    "moves": [
     {
      "holder": "جمال عبد الفتاح عثمان حسن",
@@ -45411,6 +45641,16 @@
      "trades": 1,
      "value": 156000000.0,
      "change": -3.736
+    },
+    {
+     "holder": "احمد محمد سعد سعيد",
+     "kind": "person",
+     "ticker": "VERT",
+     "from": 5.05,
+     "to": 1.79,
+     "trades": 1,
+     "value": 6676046.59,
+     "change": -3.26
     },
     {
      "holder": "مي محمود حسن جاب الله",
