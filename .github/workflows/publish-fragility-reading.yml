@@ -1,0 +1,118 @@
+# The crash-warning model's reading, every day, from the research's own model.
+#
+# scripts/fragility/fetch.py adds the newest closes to the model's inputs;
+# scripts/fragility/reading.py runs the research's engine, warning and world
+# monitor on them and writes public/esthmr/backtest/model_reading.json, which
+# the crash-warning page and the Tools tab read. Until 17 September 2026 that
+# reading was the research run's last session, 9 September, with nothing to
+# recompute it.
+#
+# Nothing is written until test_reading.py has replayed the research: the
+# published reading of 9 September and every session of both of its series,
+# to the digit they were published to. The engine's classifiers are rebuilt
+# from the fits the research machine made (data-source/fragility/
+# engine_fits.json) because fitting them again on a runner's maths library
+# moved that 9 September score from 0.4528 to 0.4540.
+name: Publish crash-warning reading
+
+on:
+  schedule:
+    # Two a day, because a scheduled run here is often hours late (see
+    # publish-prices.yml). A session is only read once its UTC date has passed,
+    # so the early run reads yesterday's exchange session with every market's
+    # close for it, and the afternoon run takes FRED's OVX, which is published
+    # a day behind.
+    - cron: '20 3 * * *'
+    - cron: '40 15 * * *'
+
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/fragility/**'
+      - 'scripts/run_v5_precision_engine.py'
+      - 'scripts/build_v2_dataset.py'
+      - '.github/workflows/publish-fragility-reading.yml'
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# One reading at a time; a second run waits rather than racing the first to main.
+concurrency:
+  group: publish-fragility-reading
+  cancel-in-progress: false
+
+jobs:
+  reading:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: scripts/fragility/requirements.txt
+
+      - name: Install the versions the research ran on
+        run: python3 -m pip install --quiet -r scripts/fragility/requirements.txt
+
+      - name: Replay the research before reading anything new
+        run: python3 -W ignore::ResourceWarning -m unittest discover -s scripts/fragility -p 'test_*.py'
+
+      - name: Add the newest closes
+        env:
+          ESTHMR_RELAY_URL: ${{ secrets.ESTHMR_RELAY_URL }}
+          ESTHMR_RELAY_TOKEN: ${{ secrets.ESTHMR_RELAY_TOKEN }}
+        run: python3 scripts/fragility/fetch.py
+
+      - name: Read the model
+        run: python3 -W ignore::ResourceWarning scripts/fragility/reading.py
+
+      - name: Commit if anything moved
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add -A data-source/fragility public/esthmr/backtest/model_reading.json
+          if git diff --cached --quiet; then
+            echo 'nothing moved'
+            exit 0
+          fi
+          git diff --cached --stat
+          git commit -m 'data: crash-warning reading'
+          # Nothing else writes these files, so a lost race is somebody else's
+          # commit to rebase over. A conflict in these files means another run
+          # of this job pushed first, and this run's reading is the newer one.
+          for attempt in 1 2 3; do
+            if git pull --rebase --autostash origin main; then
+              git push origin main && exit 0
+            fi
+            unmerged=$(git diff --name-only --diff-filter=U)
+            if [ -n "$unmerged" ]; then
+              if echo "$unmerged" | grep -qvE '^(data-source/fragility/|public/esthmr/backtest/model_reading\.json$)'; then
+                echo "conflict outside this job's own output:"; echo "$unmerged"
+                git rebase --abort || true
+                exit 1
+              fi
+              echo "$unmerged" | while read -r f; do
+                git checkout --theirs -- "$f" 2>/dev/null || true
+                git add -- "$f"
+              done
+              GIT_EDITOR=true git rebase --continue >/dev/null 2>&1 || true
+              git push origin main && exit 0
+            fi
+            echo "push attempt $attempt lost the race; retrying"
+            sleep 5
+          done
+          echo 'could not push after three attempts'
+          exit 1
+
+      # After the commit, so a stale input still publishes what the rest could
+      # read, and the run turns red where it can be seen.
+      - name: Every input is current
+        run: python3 scripts/fragility/reading.py --check-inputs

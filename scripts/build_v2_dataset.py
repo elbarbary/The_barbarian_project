@@ -64,7 +64,13 @@ def get_aligned_point_in_time(series: dict[str, float], dates: list[str]) -> np.
     return out
 
 
-def build_v2_dataset() -> dict:
+def compute_v2_dataset() -> tuple[dict, list[dict], list[str]]:
+    """The dataset in memory: its metadata, its rows and their column order.
+
+    build_v2_dataset() writes it. The model's daily reading
+    (scripts/fragility/reading.py) takes only the sessions after the
+    research's last one from it, so the research rows stay as published.
+    """
     print("── 1. Loading EGX & Domestic Series...")
     egx30_raw = load_json(DATA_DIR / "egx30.json")
     egx70_raw = load_json(DATA_DIR / "egx70ewi.json")
@@ -650,18 +656,24 @@ def build_v2_dataset() -> dict:
         }
         rows.append(row)
 
+    metadata = {
+        "version": "2.0",
+        "architecture": "Dual-Engine (Strategic Internal Fragility x Tactical External Shock)",
+        "start_date": all_dates[0],
+        "end_date": all_dates[-1],
+        "total_sessions": T,
+        "crises_count": len(episodes),
+        "episodes": episodes,
+    }
+    return metadata, rows, fieldnames
+
+
+def build_v2_dataset() -> int:
+    metadata, rows, fieldnames = compute_v2_dataset()
     print("── 7. Writing V2 Dataset Files...")
     out_json = DATA_DIR / "v2_dataset_daily.json"
     out_json.write_text(json.dumps({
-        "metadata": {
-            "version": "2.0",
-            "architecture": "Dual-Engine (Strategic Internal Fragility x Tactical External Shock)",
-            "start_date": all_dates[0],
-            "end_date": all_dates[-1],
-            "total_sessions": T,
-            "crises_count": len(episodes),
-            "episodes": episodes,
-        },
+        "metadata": metadata,
         "rows": rows,
     }, indent=1), encoding="utf-8")
 

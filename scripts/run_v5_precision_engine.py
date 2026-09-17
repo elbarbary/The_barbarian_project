@@ -327,14 +327,41 @@ def build_state_machine_alert(
     return al
 
 
-def main():
-    print("=" * 80)
-    print("EGX FRAGILITY ENGINE V5: PRECISION-FIRST META-MODEL RUNNER")
-    print("=" * 80)
+def _classifier(fitted, year, name, C, X, y, weights):
+    """One walk-forward logistic regression, fitted here or rebuilt from a saved fit.
 
-    rows, metadata, episodes, dates, returns, prices, T, years, test_indices, test_years, eval_years = load_data()
-    print(f"Total sessions: {T} | Test period: 2008-2026 ({eval_years:.2f} years) | Severe crises: {len(episodes)}")
+    With `fitted` None this is exactly the fit the research ran. The daily
+    reading passes the research's own fits instead: the solver stops at a
+    slightly different point on a different machine's maths library, which
+    on GitHub's runners moved the 9 September score from 0.4528 to 0.4540.
+    A fit this call makes is added to `fitted`, so it can be saved and reused.
+    """
+    key = f"{int(year)}:{name}"
+    clf = LogisticRegression(C=C, class_weight="balanced", max_iter=1000, random_state=42)
+    if fitted is not None and key in fitted:
+        saved = fitted[key]
+        clf.classes_ = np.array(saved["classes"])
+        clf.coef_ = np.array([saved["coef"]], dtype=float)
+        clf.intercept_ = np.array(saved["intercept"], dtype=float)
+        clf.n_features_in_ = len(saved["coef"])
+        return clf
+    clf.fit(X, y, sample_weight=weights)
+    if fitted is not None:
+        fitted[key] = {"classes": clf.classes_.tolist(), "coef": clf.coef_[0].tolist(),
+                       "intercept": clf.intercept_.tolist()}
+    return clf
 
+
+def score_arrays(rows, metadata, dates, returns, prices, T, years, test_years, fitted=None) -> dict:
+    """The engine's daily arrays: the score, its two halves, its slope and the stress count.
+
+    Everything main() evaluates is built on these, and so is the model's
+    reading on the site (scripts/fragility/reading.py), which calls this
+    rather than a copy of it. Each test year's models are fitted only on
+    sessions at least 25 before that year starts, so adding sessions after
+    the last one changes nothing already computed until a new year begins.
+    `fitted`, when given, holds each year's classifiers (see _classifier).
+    """
     # Targets & Clean Risk Set
     y_tactical = np.zeros(T, dtype=int)
     y_early = np.zeros(T, dtype=int)
@@ -481,16 +508,14 @@ def main():
         sc_a = RobustScaler()
         X_tr_a = sc_a.fit_transform(X_a[idx_tr])
         X_te_a = sc_a.transform(X_a[idx_te])
-        clf_a = LogisticRegression(C=0.5, class_weight="balanced", max_iter=1000, random_state=42)
-        clf_a.fit(X_tr_a, y_strategic[idx_tr], sample_weight=weights)
+        clf_a = _classifier(fitted, y, "a", 0.5, X_tr_a, y_strategic[idx_tr], weights)
         s_a_oof[idx_te] = clf_a.predict_proba(X_te_a)[:, 1]
 
         y_tr_ext = np.maximum(y_early[idx_tr], y_tactical[idx_tr])
         sc_b = RobustScaler()
         X_tr_b = sc_b.fit_transform(X_b[idx_tr])
         X_te_b = sc_b.transform(X_b[idx_te])
-        clf_b = LogisticRegression(C=0.5, class_weight="balanced", max_iter=1000, random_state=42)
-        clf_b.fit(X_tr_b, y_tr_ext, sample_weight=weights)
+        clf_b = _classifier(fitted, y, "b", 0.5, X_tr_b, y_tr_ext, weights)
         s_b_oof[idx_te] = clf_b.predict_proba(X_te_b)[:, 1]
 
     meta_features = np.column_stack([
@@ -512,12 +537,10 @@ def main():
         X_tr_m = sc_m.fit_transform(meta_features[idx_tr])
         X_te_m = sc_m.transform(meta_features[idx_te])
 
-        clf_e = LogisticRegression(C=0.4, class_weight="balanced", max_iter=1000, random_state=42)
-        clf_e.fit(X_tr_m, y_early[idx_tr], sample_weight=weights)
+        clf_e = _classifier(fitted, y, "early", 0.4, X_tr_m, y_early[idx_tr], weights)
         p_early_oof[idx_te] = clf_e.predict_proba(X_te_m)[:, 1]
 
-        clf_s = LogisticRegression(C=0.4, class_weight="balanced", max_iter=1000, random_state=42)
-        clf_s.fit(X_tr_m, y_strategic[idx_tr], sample_weight=weights)
+        clf_s = _classifier(fitted, y, "strategic", 0.4, X_tr_m, y_strategic[idx_tr], weights)
         p_strat_oof[idx_te] = clf_s.predict_proba(X_te_m)[:, 1]
 
     raw_int = 0.50 * s_a_oof + 0.30 * p_strat_oof + 0.20 * p_early_oof
@@ -576,6 +599,26 @@ def main():
             g6 = 1 if (peer_ret20[i] <= th_peer or stress_breadth[i] >= 0.40) else 0
             g7 = 1 if commodity[i] >= th_comm else 0
             stress_count[i] = g1 + g2 + g3 + g4 + g5 + g6 + g7
+
+    return {
+        "s_v4": s_v4, "s_slope5": s_slope5, "u_int": u_int, "u_ext": u_ext,
+        "stress_count": stress_count, "breadth": breadth, "delta_beta": delta_beta,
+        "ret20": ret20, "vol_accel": vol_accel, "fx_strain": fx_strain,
+    }
+
+
+def main():
+    print("=" * 80)
+    print("EGX FRAGILITY ENGINE V5: PRECISION-FIRST META-MODEL RUNNER")
+    print("=" * 80)
+
+    rows, metadata, episodes, dates, returns, prices, T, years, test_indices, test_years, eval_years = load_data()
+    print(f"Total sessions: {T} | Test period: 2008-2026 ({eval_years:.2f} years) | Severe crises: {len(episodes)}")
+
+    arrays = score_arrays(rows, metadata, dates, returns, prices, T, years, test_years)
+    s_v4, s_slope5, u_int, u_ext = arrays["s_v4"], arrays["s_slope5"], arrays["u_int"], arrays["u_ext"]
+    stress_count, breadth, delta_beta = arrays["stress_count"], arrays["breadth"], arrays["delta_beta"]
+    ret20, vol_accel, fx_strain = arrays["ret20"], arrays["vol_accel"], arrays["fx_strain"]
 
     # 1. Baseline V4 Model (Recommended in V4: th=0.92, hold=8, cd=20)
     al_v4 = np.zeros(T, dtype=int)

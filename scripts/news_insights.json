@@ -1619,6 +1619,10 @@
     "meaning": "Daily agricultural commodity price tracking reflects real-time spot market transactions and pricing mechanisms determined by supply chain deliveries and distribution costs in wholesale and retail markets.",
     "meaning_ar": "يعكس التتبع اليومي لأسعار السلع الزراعية المعاملات الفورية في الأسواق وآليات التسعير المحددة بحجم المعروض وتكاليف التوزيع في أسواق الجملة والتجزئة."
   },
+  "اسعار الخضروات والفاكهه والبصل والزيتون اليوم الخميس 17-9-2026 في سوق العبور": {
+    "meaning": "Daily wholesale pricing bulletins from the Obour wholesale market establish the base cost benchmark for agricultural produce, reflecting immediate physical supply levels and setting the baseline for retail distribution chains.",
+    "meaning_ar": "تحدد النشرات اليومية لأسعار الجملة بسوق العبور المعيار الأساسي لتكلفة المنتجات الزراعية، حيث تعكس مستويات المعروض الفعلي وتؤسس لقاعدة تسعير سلاسل التوزيع بالتجزئة."
+  },
   "اسعار الخضروات والفاكهه والبطاطس والطماطم اليوم السبت 5-9-2026": {
     "meaning": "Daily agricultural price reporting reflects spot wholesale and retail commodity market valuations based on current supply chain volumes and harvest cycles, serving as a primary component of headline consumer price inflation metrics.",
     "meaning_ar": "تعكس التقارير اليومية لأسعار السلع الزراعية تقييمات أسواق الجملة والتجزئة الحالية وفقاً لحجم المعروض ومواسم الحصاد، وتشكل عنصراً رئيسياً في قياس معدلات التضخم لأسعار المستهلكين."
@@ -2351,6 +2355,10 @@
     "meaning": "The listing of capital increase shares records additional equity on the stock exchange, expanding the company's total issued share count and legal capital base for trading.",
     "meaning_ar": "يُدرج قيد أسهم زيادة رأس المال أسهماً جديدة في البورصة، مما يرفع إجمالي عدد الأسهم المصدرة وقاعدة رأس المال القانوني للشركة والمتاحة للتداول."
   },
+  "البورصه تواصل ارتفاعها بمنتصف التعاملات والثلاثيني يصعد 0.65%": {
+    "meaning": "During the mid-session trading window, aggregate purchasing orders exceed executed selling transactions across constituents of the benchmark EGX30 index, lifting the market capitalization-weighted index by 0.65% relative to its previous close.",
+    "meaning_ar": "تتجاوز أوامر الشراء المنفذة صفقات البيع على أسهم المؤشر الرئيسي EGX30 بحلول منتصف جلسة التداول، مما يرفع المؤشر المرجح بالقيمة السوقية بنسبة 0.65% مقارنة بمستوى الإغلاق السابق."
+  },
   "البورصه تواصل تراجعها بمنتصف التعاملات.. والثلاثيني ينخفض 0.90%": {
     "meaning": "Mid-session trading reflects an excess of order volume executed on the bid side across the thirty constituent blue-chip equities, driving a net aggregate index contraction of 0.90%.",
     "meaning_ar": "تعكس تعاملات منتصف الجلسة تفوقاً في حجم أوامر البيع المنفذة على أوامر الشراء لأسهم الشركات الثلاثين الكبرى، وهو ما يؤدي إلى تراجع المؤشر الرئيسي بنسبة 0.90%."
@@ -2534,6 +2542,10 @@
   "الحكومه تعتمد نظام عمل المجلس القومي للاجور": {
     "meaning": "The formal operational framework governs the procedural mechanism through which the National Council for Wages establishes the statutory minimum wage and reviews compensation policies across the private sector. This formalizes the administrative process for wage adjustments, directly defining labor cost standards for operating companies.",
     "meaning_ar": "يحدد نظام العمل الإطار الإجرائي والتنظيمي لآلية وضع الحد الأدنى القانوني للأجور ومراجعة سياسات التعويضات في القطاع الخاص، مما يقنن المسار الإداري لتعديل الأجور ويضع المعايير الحاكمة لتكاليف العمالة في الشركات العاملة."
+  },
+  "الحكومه تعلن بدء تطبيق موازنه البرامج والاداء تجريبيا مع بدايه العام المالي 2027-2028": {
+    "meaning": "Program and performance budgeting links public expenditure directly to specific strategic operational targets and measurable Key Performance Indicators (KPIs) rather than traditional line-item resource allocations across ministries.",
+    "meaning_ar": "تربط موازنة البرامج والأداء بنود الإنفاق الحكومي مباشرةً بأهداف تشغيلية استراتيجية ومؤشرات قياس أداء محددة، بدلاً من نظام مخصصات البنود المحاسبية التقليدية الموزعة بين الوزارات."
   },
   "الحكومه تعلن عن تعيين 43 الف معلم دفعه واحده الفتره المقبله": {
     "meaning": "The appointment of 43,000 public sector teachers increases government operational expenditures and the public payroll allocation within the state budget, while addressing staffing capacity in the public education system.",
@@ -4924,6 +4936,10 @@
     "meaning": "Antitrust approval clears the regulatory condition for Genel Energy to take operational control and ownership of Capricorn Energy's upstream oil and gas concession interests in Egypt.",
     "meaning_ar": "يمثل قرار جهاز حماية المنافسة استيفاءً للمتطلبات التنظيمية اللازمة لنقل حقوق الملكية والتشغيل لأصول امتيازات استكشاف وإنتاج النفط والغاز التابعة لشركة كابريكورن في مصر إلى شركة جينيل إنرجي."
   },
+  "حيازات الاجانب من السندات الامريكيه عند ادني مستوي في 9 اشهر": {
+    "meaning": "Foreign holdings of US Treasuries reflect cross-border sovereign and private capital allocations toward dollar-denominated debt securities, where lower aggregated balances indicate net liquidations or a reallocation of international foreign exchange reserves into other asset classes or domestic liquidity.",
+    "meaning_ar": "تعكس حيازات الأجانب من السندات الأمريكية توزيعات رؤوس الأموال السيادية والخاصة الدولية في أدوات الدين المقومة بالدولار، حيث يمثل انخفاض إجمالي هذه الأرصدة عمليات تسييل صافية أو إعادة توجيه للاحتياطيات النقدية الأجنبية نحو فئات أصول أخرى أو سيولة نقدية محلية."
+  },
   "خالد سعد: 4 مصانع صينيه جديده للصناعات المغذيه للسيارات تدخل الانتاج في 2027": {
     "meaning": "Establishing four Chinese auto-feeder plants introduces direct manufacturing facilities for vehicle components within the local supply chain, setting operations on a project timeline aimed at 2027.",
     "meaning_ar": "يُمثّل إنشاء أربعة مصانع صينية للصناعات المغذية إدخال منشآت تصنيع مباشر لمكونات المركبات ضمن سلاسل الإمداد المحلية، بجدول زمني تشغيلي يستهدف عام 2027."
@@ -6341,6 +6357,10 @@
     "meaning": "This transaction represents capital expenditure allocation toward manufacturing infrastructure, expanding operational capacity through new production lines and upgrading existing facilities.",
     "meaning_ar": "يمثل هذا الإجراء توجيه نفقات رأسمالية نحو البنية التحتية التصنيعية، مما يوسع الطاقة التشغيلية عبر إضافة خطوط إنتاج جديدة وتحديث المنشآت القائمة."
   },
+  "فاروق: نعمل علي دعم زراعه الكتان وتامين سلاسل الامداد لخدمه الصناعه الوطنيه": {
+    "meaning": "The initiative expands domestic agricultural supply of flax as a raw material, directly linking primary crop production with local industrial processing and textile manufacturing chains.",
+    "meaning_ar": "تعتمد هذه المبادرة على توفير محصول الكتان كمدخل إنتاج زراعي محلي، وربطه تشغيلياً بسلاسل التوريد الخاصة بالمصانع وقطاع الغزل والنسيج المحلي."
+  },
   "فاليو تعلن رسميا اولي محطات رحلتها في الاردن": {
     "meaning": "The expansion marks the company's geographical entry into the Jordanian consumer finance market, operating cross-border non-banking financial services through local operational networks.",
     "meaning_ar": "يمثل هذا التوسع الدخول الجغرافي للشركة إلى سوق التمويل الاستهلاكي الأردني، وتقديم خدمات مالية غير مصرفية عابرة للحدود عبر شبكات تشغيلية محلية."
@@ -6532,6 +6552,10 @@
   "كيف افتتحت المصارف تعاملات الريال السعودي بالتزامن مع زياره ولي العهد؟": {
     "meaning": "Commercial banks update their opening exchange rates for the Saudi Riyal against the Egyptian Pound based on interbank foreign currency liquidity, trade settlement flows, and daily foreign exchange reserve management.",
     "meaning_ar": "تحدد البنوك التجارية أسعار افتتاح تداول الريال السعودي مقابل الجنيه المصري وفقاً لمستويات السيولة النقدية الأجنبية في سوق الإنتربنك وتدفقات التسوية التجارية وإدارة الاحتياطيات اليومية."
+  },
+  "كيف تباينت اسعار اللحوم البقري والضاني في المنافذ وفي محال الجزاره اليوم الخميس 17سبتمبر 2026؟": {
+    "meaning": "Price variance between state-affiliated outlets and private butcher shops reflects differing cost structures, where government distribution channels operate under subsidised logistics and supply contracts while private retailers price according to spot-market feed, transport, and commercial overheads.",
+    "meaning_ar": "يعكس تباين الأسعار بين المنافذ التابعة للدولة ومحال الجزارة الخاصة اختلاف هياكل التكاليف، حيث تعمل قنوات التوزيع الحكومية عبر تعاقدات توريد ودعم لوجستي، بينما يسعّر تجار التجزئة في القطاع الخاص وفقاً لتكاليف الأعلاف والنقل والأعباء التشغيلية في السوق الفورية."
   },
   "كيف تتاكد من ان شركه الحاق العماله بالخارج مرخصه؟": {
     "meaning": "Official verification of overseas employment agencies operates through the Ministry of Manpower's regulatory registry, where licensed intermediaries process labor contracts in compliance with statutory legal frameworks and official fee schedules.",
@@ -8188,6 +8212,10 @@
   "​الرقابه الماليه تعلن مواعيد اكتتاب زياده راسمال شركه هيبكو الي 108 ملايين جنيه": {
     "meaning": "The Financial Regulatory Authority establishes the subscription timeline for HEPCO to issue new shares, raising its issued capital to EGP 108 million through equity financing from existing or new shareholders.",
     "meaning_ar": "تحدد الهيئة العامة للرقابة المالية الجدول الزمني لاكتتاب شركة هيبكو في أسهم جديدة، مما يرفع رأسمالها المصدر إلى 108 ملايين جنيه عبر التمويل بحقوق الملكية من المساهمين الحاليين أو الجدد."
+  },
+  "​”زهراء المعادي” تقر عرض تطوير قطعه ارض بقيمه 82 مليار جنيه": {
+    "meaning": "The company approves a land development proposal that operates as a co-development or revenue-sharing arrangement, where the developer undertakes construction on the land plot in exchange for a contractually defined contractual share.",
+    "meaning_ar": "تعتمد الشركة عرضاً لتطوير قطعة أرض بنظام المشاركة في التطوير العقاري، حيث يتولى المطور أعمال التشييد والبناء مقابل حصة تعاقدية محددة من المشروع."
   },
   "‎كم سجلت اسعار الخشب اليوم في السوق المصريه؟": {
     "meaning": "Lumber prices in the domestic market reflect the landed import costs of raw materials, foreign exchange rates, and international shipping freight, which directly determine input cost structures for furniture manufacturers and construction contractors.",

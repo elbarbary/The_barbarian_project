@@ -256,6 +256,12 @@
   .fo-places > div { display: grid; gap: 2px; }
   .fo-places dt { font-size: 13px; color: var(--faint); }
   .fo-places dd { margin: 0; font-size: 15px; font-weight: 500; color: var(--ink); }
+  .fo-places dd.fo-place-note { font-size: 13px; font-weight: 400; color: var(--faint); }
+  .fo-recent { display: grid; gap: 8px; border-top: 1px solid var(--rule2); padding-top: 12px; }
+  .fo-recent-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .fo-recent-list li { display: grid; grid-template-columns: minmax(96px, auto) 1fr 44px auto; align-items: center; gap: 10px; font-size: 13.5px; color: var(--t2); }
+  .fo-recent-list .fo-num { color: var(--ink); text-align: end; }
+  .fo-recent-flag { font-size: 12px; color: var(--down); }
   .fo-reading-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; font-size: 13.5px; color: var(--t2); border-top: 1px solid var(--rule2); padding-top: 12px; }
   .fo-reading-foot a, .fo-jumps a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 
@@ -361,13 +367,16 @@
     waiting.textContent = t(lang, 'loading');
     root.replaceChildren(waiting);
     try {
-      const [series, episodes, attribution] = await Promise.all([
+      const [series, episodes, attribution, reading] = await Promise.all([
         get('backtest/world_monitor_simulation_series.json'),
         get('backtest/c_v2_alert_episodes.json'),
         // Only the tax line reads this, and the page stands without it.
         get('backtest/ladder_attribution_matrix.json').catch(() => null),
+        // The model run each day on that day's closes. Without it the card
+        // shows the research run's last session and says so.
+        get('backtest/model_reading.json').catch(() => null),
       ]);
-      mount(root, { series, episodes, attribution }, { lang, end });
+      mount(root, { series, episodes, attribution, reading }, { lang, end });
       settleOnHash();
     } catch (error) {
       console.error(error);

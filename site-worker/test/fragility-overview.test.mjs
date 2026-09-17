@@ -13,6 +13,12 @@
  * shows its reading again, from backtest/model_reading.json. The tests below
  * hold both to the same rule: the research's own numbers, never a copy typed
  * somewhere they cannot move with it.
+ *
+ * The same day that file became the model run each day on that day's closes
+ * (scripts/fragility/reading.py). Whether it is the research's model is held
+ * in Python, where scripts/fragility/test_reading.py replays every published
+ * session; here, that the page and the Tools tab read it, and that it
+ * continues the research rather than contradicting it.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -39,7 +45,8 @@ const v5Results = JSON.parse(await read('public/data/v1/backtest/v5_experiment_r
 const logic = await read('public/esthmr/logic.js');
 const template = await read('public/esthmr/template.html');
 
-const m = fo.model(seriesDoc, episodes, attribution);
+const m = fo.model(seriesDoc, episodes, attribution, readingDoc);
+const researchOnly = fo.model(seriesDoc, episodes, attribution);
 const LEDGER = { hold: 'buy_and_hold', rule: 'cv2_cash_sma', ladder: 'cv2_ladder', s100: 's100', partial: 'cv5_p' };
 const close = (a, b, eps, what) => assert.ok(Math.abs(a - b) <= eps, `${what}: ${a} vs ${b}`);
 
@@ -130,19 +137,33 @@ test('the tax line quotes the research’s own cash audit', () => {
   assert.ok(m.tax.taxed < m.tax.gross);
 });
 
-test('the latest reading is dated to the run it came from', () => {
-  assert.equal(m.latest.date, seriesDoc.latest_live.date);
-  assert.equal(m.latest.date, m.last, 'the reading and the series end on the same session');
-});
-
-test('the model’s reading card carries the run’s last reading, whole', () => {
+test('the research run’s last reading stays dated to the run', () => {
   const live = seriesDoc.latest_live;
-  assert.deepEqual(m.latest, {
+  assert.equal(m.research.date, m.last, 'the research reading and the series end on the same session');
+  assert.deepEqual(m.research, {
     date: live.date, price: live.price, on: Boolean(live.al_v2), score: live.s_v4,
     outside: live.wm_p, gold: live.gold_stress, oil: live.petrol_stress, swings: live.vol_stress,
     vol20: live.vol20, brake: Boolean(live.vol_brake_active),
+    rule: 100 * m.series.weight.rule.at(-1),
     equity: live.active_equity_exposure, partial: live.dynamic_hedge_p,
+    daily: false, sessions: [],
   });
+  // Without the daily file, the card falls back to it and says which it is.
+  assert.deepEqual(researchOnly.latest, m.research);
+});
+
+test('the reading card carries the daily reading, whole', () => {
+  const r = readingDoc;
+  assert.deepEqual(m.latest, {
+    date: r.date, price: r.egx30, on: r.warning, score: r.score,
+    outside: r.outside, gold: r.gold, oil: r.oil, swings: r.swings,
+    vol20: r.vol20, brake: r.volBrakeActive, rule: r.rulePercent,
+    equity: r.equityPercent, partial: r.partialPercent,
+    daily: true, researchEnd: r.researchEnd, sessions: r.sessions,
+  });
+  // A daily file older than the research is not a newer reading.
+  const stale = fo.model(seriesDoc, episodes, attribution, { ...r, date: '2026-09-01' });
+  assert.equal(stale.latest.daily, false);
 });
 
 test('the reading’s alert line and volatility brake are the notebook’s own', () => {
@@ -152,45 +173,37 @@ test('the reading’s alert line and volatility brake are the notebook’s own',
   assert.ok(notebookHtml.includes(`Re-entry Safe (&lt; ${fo.VOL_BRAKE}%)`), `the notebook states a different brake from ${fo.VOL_BRAKE}%`);
 });
 
-test('the app’s reading file is copied from the research files, not written down', () => {
-  const live = seriesDoc.latest_live;
-  const last = Object.fromEntries(v5Series.columns.map((name, i) => [name, v5Series.series.at(-1)[i]]));
+test('the daily reading file continues the research', () => {
   const production = v5Results.v5_recommended_production;
-  assert.equal(last.date, live.date, 'the engine series and the reading end on the same session');
-  assert.deepEqual(readingDoc, {
-    schemaVersion: 1,
-    date: live.date,
-    egx30: live.price,
-    warning: Boolean(live.al_v2),
-    score: live.s_v4,
-    alertLine: fo.ALERT_LINE,
-    engineInternal: last.u_int,
-    engineExternal: last.u_ext,
-    stressGroups: last.stress_count,
-    stressGroupsOf: readingDoc.stressGroupsOf,
-    transmission: Boolean(last.has_trans),
-    outside: live.wm_p,
-    gold: live.gold_stress,
-    oil: live.petrol_stress,
-    swings: live.vol_stress,
-    vol20: live.vol20,
-    volBrakeActive: Boolean(live.vol_brake_active),
-    equityPercent: live.active_equity_exposure,
-    partialPercent: live.dynamic_hedge_p,
-    v5: {
-      model: v5Results.metadata.recommended_model_name,
-      years: v5Results.metadata.eval_years,
-      earlyHits: production.early,
-      crises: production.total_crises,
-      hardFalseAlarmsPerYear: production.hard_fa_yr,
-      occupancyPercent: production.occ,
-      precisionPercent: production.precision,
-      leadSessions: production.lead,
-      utility: production.utility,
-    },
-  }, 'model_reading.json is out of date: run python3 scripts/build_model_reading.py');
+  assert.equal(readingDoc.schemaVersion, 2);
+  assert.equal(readingDoc.researchEnd, seriesDoc.meta.end_date, 'the file names a different end for the research');
+  assert.ok(readingDoc.date > readingDoc.researchEnd, 'the daily reading is not after the research');
+  assert.equal(readingDoc.alertLine, fo.ALERT_LINE);
+  // The sessions scored since the research, oldest first, ending on the reading's own.
+  const days = readingDoc.sessions.map((s) => s.date);
+  assert.ok(days.length > 0 && days.every((d, i) => d > readingDoc.researchEnd && (i === 0 || d > days[i - 1])));
+  const newest = readingDoc.sessions.at(-1);
+  assert.deepEqual([newest.date, newest.egx30, newest.score, newest.warning, newest.outside, newest.rulePercent, newest.equityPercent],
+    [readingDoc.date, readingDoc.egx30, readingDoc.score, readingDoc.warning, readingDoc.outside, readingDoc.rulePercent, readingDoc.equityPercent]);
+  for (const key of ['score', 'engineInternal', 'engineExternal', 'outside', 'gold', 'oil', 'swings']) {
+    assert.ok(readingDoc[key] >= 0 && readingDoc[key] <= 1, `${key} is outside 0 to 1`);
+  }
+  assert.equal(readingDoc.score, Math.max(readingDoc.engineInternal, readingDoc.engineExternal), 'the score is the larger of its two halves');
   const counts = v5Series.series.map((row) => row[v5Series.columns.indexOf('stress_count')]);
   assert.ok(Math.max(...counts) <= readingDoc.stressGroupsOf, 'more stress groups counted than the engine has');
+  assert.ok(readingDoc.stressGroups <= readingDoc.stressGroupsOf);
+  // The research's test figures travel with it, copied, not recomputed.
+  assert.deepEqual(readingDoc.v5, {
+    model: v5Results.metadata.recommended_model_name,
+    years: v5Results.metadata.eval_years,
+    earlyHits: production.early,
+    crises: production.total_crises,
+    hardFalseAlarmsPerYear: production.hard_fa_yr,
+    occupancyPercent: production.occ,
+    precisionPercent: production.precision,
+    leadSessions: production.lead,
+    utility: production.utility,
+  });
 });
 
 /* ── words ──────────────────────────────────────────────────────────────── */
@@ -281,7 +294,8 @@ test('the full research sits below the account, outside what re-renders', () => 
   assert.ok(rootAt >= 0 && researchAt > rootAt && endAt > researchAt, 'the account, then the research, then the sources');
   assert.match(page.slice(researchAt, page.indexOf('>', researchAt)), /class="fe-notebook" data-theme="light"/);
   assert.ok(page.includes('<link rel="stylesheet" href="./fragility-notebook.css">'));
-  assert.ok(page.includes('mount(root, { series, episodes, attribution }, { lang, end });'), 'the account renders into #fo-root and #fo-end');
+  assert.ok(page.includes('mount(root, { series, episodes, attribution, reading }, { lang, end });'), 'the account renders into #fo-root and #fo-end');
+  assert.ok(page.includes("get('backtest/model_reading.json').catch(() => null)"), 'the page does not read the daily reading, or cannot stand without it');
   const loader = page.slice(page.indexOf('async function loadResearch'));
   const inserted = loader.indexOf('research.innerHTML = await response.text();');
   const scripted = loader.indexOf("script.src = 'fragility-notebook.js';");
