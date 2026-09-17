@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-09-17T12:07:58.608Z",
+ "updated_at": "2026-09-17T12:45:07.381Z",
  "sessions": [
   {
    "date": "2025-11-17",
@@ -2970,14 +2970,14 @@
    },
    "breadth": {
     "up": 151,
-    "down": 76,
-    "flat": 61,
+    "down": 77,
+    "flat": 60,
     "counted": 288,
     "basis": "session"
    },
    "metals": {
-    "XAU": 4361.6,
-    "XAG": 65.43
+    "XAU": 4372.5,
+    "XAG": 65.57
    }
   }
  ]

@@ -3120,6 +3120,86 @@
    "publishedAt": "2026-07-05T13:18:00",
    "sessionDate": null,
    "source": "https://www.egx.com.eg/downloads/Bulletins/340551_1.pdf"
+  },
+  "294857": {
+   "investorName": "مصطفى خليل الفاروق مصطفى خليل",
+   "investorNameEn": "Mostafa Khalil El Farouk Mostafa Khalil",
+   "relationship": null,
+   "ticker": "IFAP",
+   "action": "buy",
+   "shares": 232171,
+   "price": 20.35,
+   "ownershipBeforePercent": 4.97,
+   "ownershipAfterPercent": 5.019,
+   "nameScript": "ar",
+   "filingId": "294857",
+   "publishedAt": "2026-09-17T15:21:09",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/344365_1.pdf"
+  },
+  "290829": {
+   "investorName": "الحصن للاستشارات",
+   "investorNameEn": "Al Hosn Lil Istisharat",
+   "relationship": null,
+   "ticker": "ADPC",
+   "action": "sell",
+   "shares": 12000000,
+   "price": 3.35,
+   "ownershipBeforePercent": 6.16,
+   "ownershipAfterPercent": 3.76,
+   "nameScript": "ar",
+   "filingId": "290829",
+   "publishedAt": "2026-07-05T11:04:32",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340555_1.pdf"
+  },
+  "290798": {
+   "investorName": "اشرف علي محمد عيسي",
+   "investorNameEn": "Ashraf Ali Mohamed Eissa",
+   "relationship": null,
+   "ticker": "UTOP",
+   "action": "sell",
+   "shares": 7649,
+   "price": 79.21,
+   "ownershipBeforePercent": 12,
+   "ownershipAfterPercent": 11.75,
+   "nameScript": "ar",
+   "filingId": "290798",
+   "publishedAt": "2026-07-05T09:33:01",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340525_1.pdf"
+  },
+  "290796": {
+   "investorName": "سامح احمد عبدالله البيك",
+   "investorNameEn": "Sameh Ahmed Abdullah El-Beik",
+   "relationship": null,
+   "ticker": "UTOP",
+   "action": "sell",
+   "shares": 10000,
+   "price": 79.19,
+   "ownershipBeforePercent": 21.11,
+   "ownershipAfterPercent": 20.78,
+   "nameScript": "ar",
+   "filingId": "290796",
+   "publishedAt": "2026-07-05T09:30:18",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340526_1.pdf"
+  },
+  "290794": {
+   "investorName": "رشدي احمد عبدالله حسن",
+   "investorNameEn": "Roshdy Ahmed Abdallah Hassan",
+   "relationship": null,
+   "ticker": "UTOP",
+   "action": "sell",
+   "shares": 10000,
+   "price": 79.21,
+   "ownershipBeforePercent": 6.13,
+   "ownershipAfterPercent": 5.79,
+   "nameScript": "ar",
+   "filingId": "290794",
+   "publishedAt": "2026-07-05T09:26:54",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340527_1.pdf"
   }
  },
  "refused": {
@@ -3128,6 +3208,7 @@
   "293888": "a purchase that lowers the stake (5.339 -> 4.04)",
   "294308": "action is neither buy nor sell: None",
   "291129": "action is neither buy nor sell: None",
-  "290836": "action is neither buy nor sell: None"
+  "290836": "action is neither buy nor sell: None",
+  "290814": "share count is not a positive integer: None"
  }
 }
