@@ -2203,6 +2203,10 @@
     "meaning": "Intraday trading dynamics offset early session declines as buying activity absorbs morning sell orders, resulting in higher closing benchmark indices.",
     "meaning_ar": "تعكس حركة التداول استيعاب طلبات الشراء لضغوط البيع الصباحية على مدار الجلسة، مما يؤدي إلى تعويض التراجعات المبكرة وإغلاق المؤشرات الرئيسية على ارتفاع."
   },
+  "الاسواق الاوروبيه تغلق علي ارتفاع جماعي بقياده بورصتي لندن وفرانكفورت": {
+    "meaning": "Broad gains in major European indices indicate net capital inflows into large-cap equities across key trading hubs, reflecting international portfolio adjustments in response to regional economic data.",
+    "meaning_ar": "يعكس الارتفاع الجماعي للمؤشرات الأوروبية الرئيسية تدفقات رأسمالية صافية نحو الأسهم القيادية في المراكز المالية الكبرى، نتيجة لإعادة موازنة المحافظ الاستثمارية الدولية بناءً على البيانات الاقتصادية الإقليمية."
+  },
   "الاقتصاد الامريكي يضيف 162 الف وظيفه في اغسطس متجاوزا التوقعات باكثر من 3 اضعاف": {
     "meaning": "Higher-than-expected US non-farm payroll additions reflect elevated labor market activity, which correlates with benchmark interest rate settings and global capital flow allocations.",
     "meaning_ar": "تعكس إضافة وظائف في الاقتصاد الأمريكي بأعلى من التقديرات قوة النشاط في سوق العمل، وهو ما يرتبط بمحددات أسعار الفائدة وتدفقات السيولة ورؤوس الأموال عالمياً."
@@ -6552,6 +6556,10 @@
   "فرنسا تخفض توقعات النمو خلال 2026 الي 0.5%": {
     "meaning": "Lower official GDP growth projections establish a reduced baseline for national economic expansion and domestic consumption, directly recalibrating sovereign budget planning models and bilateral trade demand metrics.",
     "meaning_ar": "يحدد خفض التقديرات الرسمية لنمو الناتج المحلي الإجمالي خط أساس أدنى للتوسع الاقتصادي والاستهلاك الداخلي، مما يعيد ضبط نماذج الموازنة العامة ومعايير الطلب التجاري الثنائي."
+  },
+  "فرنسا تستهدف خفض الانفاق ب54 مليار يورو في موازنه 2027": {
+    "meaning": "This fiscal consolidation program outlines a reduction in French sovereign expenditure, constraining public sector procurement and operational outlays across state departments.",
+    "meaning_ar": "يحدد برنامج الانضباط المالي هذا مساراً لتقليص الإنفاق السيادي الفرنسي، مما يحد من حجم المشتريات الحكومية والمصروفات التشغيلية لمختلف القطاعات العامة."
   },
   "فشل انعقاد عموميه “ابن سينا” لعدم اكتمال النصاب القانوني": {
     "meaning": "The postponement of Ibnsina Pharma's general assembly due to a lack of legal quorum delays formal shareholder voting and corporate approvals on scheduled agenda items, such as dividend distributions, financial statements, or board elections, until a second meeting is convened pursuant to regulatory requirements.",
