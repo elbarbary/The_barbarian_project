@@ -30,6 +30,39 @@ const byTicker = (a, b) => (a.ticker < b.ticker ? -1 : a.ticker > b.ticker ? 1 :
 const tone = (v) => (!finite(v) ? 'quiet' : v > 0 ? 'up' : v < 0 ? 'down' : 'quiet');
 const openCompany = (component, ticker) => () => component.setState({ screen: 'company', ticker, companyPanel: 'overview' });
 
+/** All prices stay on the forecast's ORIGINAL basis, never today's quote. */
+export function forecastPrices(company, model, horizon) {
+  const saved = company?.models?.[model];
+  const basis = saved?.basisClose ?? company?.close;
+  const change = saved?.returns?.[String(horizon)];
+  const point = finite(basis) && basis > 0 && finite(change) && change > -100
+    ? basis * (1 + change / 100) : null;
+  const path = saved?.pricePath;
+  const complete = Array.isArray(path) && path.length >= horizon
+    && path.slice(0, horizon).every((v) => finite(v) && v > 0);
+  const window = complete ? path.slice(0, horizon) : [];
+  return { basis, point, low: complete ? Math.min(...window) : null,
+    high: complete ? Math.max(...window) : null,
+    average: complete ? window.reduce((a, b) => a + b, 0) / window.length : null };
+}
+
+function priceStrip(company, model, horizon, basisDate, quote, ar) {
+  const p = forecastPrices(company, model, horizon);
+  const t = (en, arabic) => ar ? arabic : en;
+  const hasQuote = finite(quote?.close) && quote.close > 0 && quote.quoteAsOf;
+  const latest = hasQuote ? quote.close : company?.latestClose ?? company?.close;
+  const date = hasQuote ? quote.quoteAsOf : company?.latestSession || basisDate;
+  const price = (v) => finite(v) ? plain(v, v < 1 ? 4 : 2) : '—';
+  return h('span', { class: 'aix-price-detail' },
+    h('span', { class: 'aix-price-grid' }, [
+      [hasQuote ? t('Current price', 'السعر الحالي') : t('Latest saved close', 'آخر إغلاق محفوظ'), latest], [t('Predicted low', 'أدنى توقع'), p.low],
+      [t('Average close', 'متوسط الإغلاق'), p.average], [t('Predicted high', 'أعلى توقع'), p.high],
+      [t('End of window', 'نهاية المدة'), p.point],
+    ].map(([label, value]) => h('span', null, h('small', null, label), h('b', { dir: 'ltr' }, price(value))))),
+    h('small', { class: 'aix-price-caption' },
+      `${quote?.currency || 'EGP'} · ${t('Price as of', 'السعر بتاريخ')} ${date || '—'} · ${t('Forecast basis', 'مرجع التوقع')} ${price(p.basis)} (${day(basisDate, ar)})`));
+}
+
 /** Arabic counts agree with their noun. */
 const countAr = (n, one, two, few, many) => (n === 1 ? one : n === 2 ? two : n >= 3 && n <= 10 ? `${n} ${few}` : `${n} ${many}`);
 /** "5 جلسات", "20 جلسة": a count of sessions, agreeing. */
@@ -173,8 +206,8 @@ export function rankingTiles(ctx, ar) {
       percent(whole), t(`the middle of all ${ranking.rows.length} companies`, `الوسط بين ${ranking.rows.length} شركة`), tone(whole)),
     tile(t('COMPANIES RANKED', 'شركات مرتّبة'), String(ranking.rows.length),
       ctx.leftOut
-        ? t(`every company with a clean price history; ${ctx.leftOut} left out — no exchange ticker, or gaps or impossible jumps in their prices`,
-          `كل شركة لها سجل أسعار سليم؛ استُبعدت ${ctx.leftOut} — بلا رمز تداول، أو بفجوات أو قفزات مستحيلة في أسعارها`)
+        ? t(`${ctx.leftOut} left out of the current view: known OTC/delisted names, no exchange ticker, or broken price histories. Earlier records are not rewritten.`,
+          `استُبعدت ${ctx.leftOut} من العرض الحالي: مشطوب أو خارج المقصورة، أو بلا رمز تداول، أو بسجل أسعار غير سليم. لا نعيد كتابة السجل السابق.`)
         : t('every company it had a number for in this run', 'كل شركة لديه رقم لها في هذا التشغيل')));
 }
 
@@ -261,7 +294,15 @@ export function rankingCard(component, data, ctx, ar) {
     h('span', { class: 'aix-company-name' }, h('b', null, r.ticker), name !== r.ticker ? h('small', null, name) : null,
       skipped ? h('em', { class: 'aix-rank-passed' }, t('did not trade — passed over', 'لم تُتداول — تخطّاها السجل')) : null),
     h('strong', { class: choice.gemini ? '' : tone(move(r.value)), dir: 'ltr' }, figure),
-    extra);
+    extra,
+    says.kind === 'return' ? priceStrip(ctx.scenarios?.companies?.[r.ticker], choice.model, n,
+      ctx.basis, data.companies?.find((c) => c.ticker === r.ticker), ar) : null,
+    (ctx.scenarios?.companies?.[r.ticker]?.risk?.flags || []).length ? h('span', { class: 'aix-risk-note' },
+      t('Risk context: ', 'سياق المخاطر: '),
+      ar ? (ctx.scenarios.companies[r.ticker].risk.flagsAr || []).join(' · ')
+        : ctx.scenarios.companies[r.ticker].risk.flags.join(' · '),
+      (ctx.scenarios.companies[r.ticker].risk.events || []).map((event) =>
+        h('small', null, ` · EGX #${event.id} · ${day(event.date, ar)}`))) : null);
   };
 
   const list = [];
@@ -306,7 +347,15 @@ export function rankingCard(component, data, ctx, ar) {
       note ? h('blockquote', { class: 'aix-quote', dir: 'auto' }, note)
         : h('p', null, t('No explanation was saved for this reading. We do not invent one.', 'لم يُحفظ تفسير لهذه القراءة. لا نختلق تفسيراً.')),
       h('small', null, t('Gemini’s own summary of the whole ranking — not a checked reason for any one company.',
-        'ملخص Gemini للترتيب كله، وليس سبباً موثّقاً لأي شركة بعينها.'))) : null,
+        'ملخص Gemini للترتيب كله، وليس سبباً موثّقاً لأي شركة بعينها.')),
+      h('small', null, t('Price models cannot read company news. A high score is not proof of sound finances or a verified recovery. Known OTC/delisted names are excluded from this current view; historical records remain unchanged.',
+        'نماذج الأسعار لا تقرأ أخبار الشركة. الدرجة المرتفعة ليست دليلاً على سلامة القوائم أو تعافٍ موثّق. نستبعد المشطوب وخارج المقصورة من العرض الحالي، ونحفظ السجل التاريخي كما هو.')),
+      !reading?.riskContextRead ? h('small', null,
+        t('This older reading predates the mandatory risk-context check. Any risk notes shown now were not necessarily read by Gemini.',
+          'هذه القراءة أقدم من فحص المخاطر الإلزامي. ملاحظات المخاطر الظاهرة الآن لم يقرأها Gemini بالضرورة.')) : null) : null,
+    says.kind === 'return' ? h('p', { class: 'aix-note' },
+      t(`Price outlook · ${words.model} · ${words.horizon}. Low, average and high describe its predicted daily closes in this window—not probability bounds or intraday extremes. A dash means the original run did not save that data. New quotes do not change a frozen forecast.`,
+        `توقعات الأسعار · ${words.model} · ${words.horizon}. الأدنى والمتوسط والأعلى لإغلاقات النموذج اليومية خلال المدة، وليست حدود احتمال أو أسعاراً داخل الجلسة. الشرطة تعني أن التشغيل الأصلي لم يحفظ البيانات. الأسعار الجديدة لا تغيّر التوقع المحفوظ.`)) : null,
     rows.length ? h('div', { class: `aix-rank-head${choice.gemini ? ' is-gemini' : ''}`, 'aria-hidden': 'true' },
       h('span', null, '#'), h('span', null, t('Company', 'الشركة')), h('span', null, valueHead), h('span', null, extraHead)) : null,
     h('div', { class: `aix-rank-list${choice.gemini ? ' is-gemini' : ''}` }, list),
@@ -330,9 +379,9 @@ export function returnsCards(component, data, view, words, ar) {
   const { summary } = view;
 
   const fan = card('aix-fan-card',
-    t(`Where ${modelName} thinks the whole market goes`, `إلى أين يرى ${modelName} أن السوق كله يتجه`),
-    t('Grey is what these companies did before the close. The line is the middle estimate after it; the bands hold the middle half and the middle 80% of the companies’ estimates — how far apart the companies are, not how sure the model is.',
-      'الرمادي ما فعلته الشركات قبل الإغلاق. الخط هو التقدير الأوسط بعده؛ والنطاقان يضمان النصف الأوسط و80% الأوسط من تقديرات الشركات — أي مدى تباعد الشركات، لا مدى ثقة النموذج.'),
+    t(`${modelName} · company outlook · ${words.horizon}`, `${modelName} · توقعات الشركات · ${words.horizon}`),
+    t('Not an EGX index forecast. Grey shows the companies’ average past move; the future line shows their median forecast. Bands show the middle 50% and 80% across companies—not confidence limits. The chart ends at your selected horizon.',
+      'ليس توقعاً لمؤشر البورصة. الرمادي متوسط حركة الشركات السابقة؛ والخط المستقبلي وسيط توقعاتها. النطاقان يضمان 50% و80% الأوسط من الشركات، وليسا حدود ثقة. ينتهي الرسم عند المدة المختارة.'),
     h('div', { class: 'aix-legend' },
       h('span', null, h('i', { class: 'aix-key-band50' }), t('middle 50%', 'النصف الأوسط')),
       h('span', null, h('i', { class: 'aix-key-band80' }), t('middle 80%', '80% الأوسط')),

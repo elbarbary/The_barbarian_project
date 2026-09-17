@@ -2264,7 +2264,7 @@ class ContextTest(unittest.TestCase):
                 (self.assertIn if layer in layers else self.assertNotIn)(
                     f"<{layer} evidence>", text, (layers, layer))
         alone = rr.prompt("2026-09-14", "ticker\nAAA", 1, context, ())
-        self.assertIn("nothing but the forecasts", alone)
+        self.assertIn("forecasts and mandatory risk facts only", alone)
 
     def test_every_reading_asks_a_different_question(self):
         context = {layer: {"text": f"<{layer}>"} for layer in rr.LAYERS}

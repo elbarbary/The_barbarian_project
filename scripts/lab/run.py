@@ -64,6 +64,7 @@ import commit as cm
 import forecast as fc
 import panel as pricing
 import timestamp as ts
+import eligibility
 
 REPO = pathlib.Path(__file__).resolve().parent.parent.parent
 OUT = REPO / "data-source" / "lab"
@@ -209,7 +210,13 @@ def universe(scan: dict, *, today=None,
             for ticker, bars in built["panel"].items()
             if len(bars) >= MIN_BARS and listed(ticker) and ticker not in broken]
     rows.sort(key=lambda r: r["ticker"])
+    known = eligibility.directory()
+    basis = basis_session(rows)
+    excluded = {r["ticker"]: why for r in rows
+                if (why := eligibility.exclusion(known.get(r["ticker"], {}), basis))}
+    rows = [r for r in rows if r["ticker"] not in excluded]
     sources = dict(built["sources"])
+    sources["ineligible"] = excluded
     # Counted, never dropped silently.
     sources["withoutTicker"] = sorted(t for t in built["panel"] if not listed(t))
     sources["unreadable"] = dict(sorted(broken.items()))
@@ -260,6 +267,10 @@ def run_models(rows: list[dict], basis: str, models: dict) -> dict:
         made, declined = [], []
         for row in rows:
             bars = trim(row["bars"], basis)
+            if not bars or bars[-1].get("date") != basis:
+                declined.append(fc.Abstention(row["ticker"], basis, name,
+                                              "no completed close for the basis session"))
+                continue
             if len(bars) < MIN_BARS:
                 declined.append(fc.Abstention(row["ticker"], basis, name,
                                               f"{len(bars)} bars to the basis"))
@@ -288,6 +299,9 @@ def as_record(f: fc.Forecast) -> dict:
         out["quantiles"] = f.quantiles
     if f.note:
         out["note"] = f.note
+    if f.price_path:
+        out["price_path"] = f.price_path
+        out["basis_close"] = f.basis_close
     return out
 
 

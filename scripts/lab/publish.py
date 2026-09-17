@@ -430,6 +430,11 @@ def scenarios(document: dict, panel: dict, sessions: list[str]) -> dict:
     reader asks for that combination of evidence.
     """
     basis = document["basisSession"]
+    import eligibility
+    known = eligibility.directory()
+    measurements = rr._read(eligibility.DATA / "measures.json")
+    measured = {r["ticker"]: r for r in measurements.get("rows", [])}
+    events = eligibility.issuer_clarifications(basis)
     dates = [d for d in sessions if d <= basis][-(PATH_SESSIONS + 1):]
     companies: dict = {}
     left: dict = {}
@@ -449,10 +454,19 @@ def scenarios(document: dict, panel: dict, sessions: list[str]) -> dict:
                                     else ev.lab.unreadable(
                                         [b for b in ev.bars_of(panel, ticker) if b["date"] <= basis]))
                 continue
+            why = eligibility.exclusion(known.get(ticker, {}))
+            if why:
+                left[ticker] = why
+                continue
             row = companies.setdefault(ticker, {"ticker": ticker, "models": {}})
             returns = {h: record["returns"].get(str(h))
                        for h in fc.HORIZONS if record.get("returns", {}).get(str(h)) is not None}
             entry = {"returns": {str(k): round(v, 4) for k, v in returns.items()}}
+            if record.get("price_path") and record.get("basis_close"):
+                entry["pricePath"] = record["price_path"]
+                entry["basisClose"] = record["basis_close"]
+            if record.get("note"):
+                entry["note"] = record["note"]
             ranked_by = record.get("ranked_by") or {}
             if ranked_by:
                 entry["rankedBy"] = {k: round(v, 4) for k, v in ranked_by.items()}
@@ -466,6 +480,13 @@ def scenarios(document: dict, panel: dict, sessions: list[str]) -> dict:
         at = next((b for b in reversed(bars) if b.get("date") == basis), None)
         if at and isinstance(at.get("close"), (int, float)):
             row["close"] = round(at["close"], 4)
+        if bars:
+            row["latestClose"] = bars[-1].get("close")
+            row["latestSession"] = bars[-1].get("date")
+        measure = measured.get(ticker, {})
+        risk_date = measure.get("as_of") or basis
+        row["risk"] = dict(eligibility.risk_facts(known.get(ticker, {}), measure, risk_date, events.get(ticker, ())),
+                           asOf=risk_date)
         if dates and dates[-1] == basis:
             row["path"] = path_of(panel, ticker, dates)
 
@@ -547,6 +568,8 @@ def agreement(scores: dict[str, float], other: dict[str, float],
 def reading_documents(document: dict, built: str, panel: dict | None = None) -> dict[str, dict]:
     """One gated file per reading: its scores, and how its order compares."""
     models = document.get("models") or {}
+    import eligibility
+    known = eligibility.directory()
     basis = document.get("basisSession")
     plain = models.get(rr.name_of(())) or {}
     plain_scores = scores_of(plain, panel, basis)
@@ -558,6 +581,7 @@ def reading_documents(document: dict, built: str, panel: dict | None = None) -> 
         if not block:
             continue
         scores = scores_of(block, panel, basis)
+        scores = {t: v for t, v in scores.items() if not eligibility.exclusion(known.get(t, {}))}
         against_forecasters = sc.rank_ic([(scores[t], middle[t])
                                           for t in sorted(set(scores) & set(middle))])
         compared = (agreement(scores, plain_scores, block.get("count"), plain.get("count"))
@@ -569,6 +593,8 @@ def reading_documents(document: dict, built: str, panel: dict | None = None) -> 
             "ranAt": block.get("ranAt"),
             "key": rr.key_of(layers),
             "forecastHorizon": 5,
+            "riskContextRead": bool(((document.get("layers") or {}).get(rr.NAME) or {})
+                                    .get("evidence", {}).get("safety")),
             "name": name,
             "layers": list(layers),
             "default": name == rr.NAME,

@@ -51,6 +51,19 @@ class SnapshotTest(unittest.TestCase):
         snapshot.stamp(*bundle)
         snapshot.validate(*bundle)
 
+    def test_price_path_must_match_the_frozen_return(self):
+        bundle = self.bundle()
+        model = {'basisClose': 100, 'pricePath': list(range(101, 121)),
+                 'returns': {'1': 1, '5': 5, '20': 20}}
+        bundle[2]['companies']['AAA']['models'] = {'kronos': model}
+        snapshot.stamp(*bundle)
+        model['returns']['5'] = 50
+        with self.assertRaisesRegex(ValueError, 'path does not match'):
+            snapshot.stamp(*bundle)
+        model['pricePath'][-1] = float('nan')
+        with self.assertRaisesRegex(ValueError, 'invalid saved price path'):
+            snapshot.stamp(*bundle)
+
     def test_current_published_bundle_is_semantically_consistent(self):
         root = pathlib.Path(__file__).resolve().parents[2] / "public/data/v1"
         read = lambda path: json.loads(path.read_text())

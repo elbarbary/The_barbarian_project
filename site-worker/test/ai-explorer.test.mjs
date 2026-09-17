@@ -13,7 +13,7 @@ import { readFile, access } from 'node:fs/promises';
 import { installDom } from './dom-stub.mjs';
 import { aiCards, heroModel } from '../../public/esthmr/ai-cards.js';
 import { heroChart, histogram, fanChart, nextRun, reorderChart, nightsChart, recordRows } from '../../public/esthmr/ai-visuals.js';
-import { saidParts } from '../../public/esthmr/scenario-visuals.js';
+import { saidParts, forecastPrices, returnsCards } from '../../public/esthmr/scenario-visuals.js';
 import { readingProblem, mixedSnapshot } from '../../public/esthmr/lab-snapshot.js';
 import {
   scenariosScreen, warningLines, ACCEPTED_KEY, readingKey, baseModels, choiceOf, recordOf, nightsOf,
@@ -478,7 +478,7 @@ test('companies left out of the run are counted beside the ranking', () => {
   const withLeft = { ...scenarios, leftOut: { SUCE: 'no close for 98 days, 2026-06-03 to 2026-09-09', EGS659O1C015: 'no exchange ticker' } };
   const node = screen(component({ scModel: 'kronos' }), { ...data, scenarios: withLeft });
   const tiles = byClass(node, 'aix-tile').map(text);
-  assert.match(tiles[2], /2 left out — no exchange ticker, or gaps or impossible jumps in their prices/);
+  assert.match(tiles[2], /2 left out of the current view: known OTC\/delisted names, no exchange ticker, or broken price histories/);
   assert.doesNotMatch(text(byClass(node, 'aix-ranking-card')[0]), /SUCE/);
 });
 
@@ -611,6 +611,46 @@ test('a forecaster’s view of the whole market counts agreement honestly', () =
   assert.deepEqual(view.past, [-1 / 3, -1 / 6, 0]);
   assert.equal(view.byModel.find((m) => m.id === 'flat').median, 0);
   assert.equal(view.pointingUp, 2);
+});
+
+test('the company outlook graph actually changes for 1, 5 and 20 sessions', () => {
+  const paths = [];
+  for (const horizon of [1, 5, 20]) {
+    const view = returnsView(scenarios, { model: 'kronos', horizon }, ['AAA', 'BBB', 'CCC']);
+    assert.equal(Math.max(...view.horizons), horizon);
+    assert.equal(Math.max(...Object.keys(view.ahead).map(Number)), horizon);
+    const chart = fanChart(view);
+    paths.push(byClass(chart, 'aix-median')[0].attrs.d);
+    const card = returnsCards(component(), {}, view, {model: 'Kronos', horizon: `${horizon} sessions`}, false)[0];
+    assert.match(text(card), /Not an EGX index forecast/);
+    assert.match(text(card), new RegExp(`${horizon} sessions`));
+  }
+  assert.equal(new Set(paths).size, 3);
+});
+
+test('forecast prices use a frozen basis, with true path low high and mean', () => {
+  const company = {close: 200, latestClose: 300, models: {kronos: {
+    basisClose: 100, pricePath: [101, 99, 102, 104, 103], returns: {'1': 1, '5': 3},
+  }}};
+  const five = forecastPrices(company, 'kronos', 5);
+  assert.equal(five.basis, 100);
+  assert.equal(five.point, 103);
+  assert.equal(five.low, 99);
+  assert.equal(five.high, 104);
+  assert.equal(five.average, 101.8);
+  assert.equal(forecastPrices(company, 'kronos', 1).average, 101);
+  assert.equal(forecastPrices(company, 'kronos', 20).average, null);
+  assert.equal(forecastPrices(scenarios.companies.AAA, 'kronos', 5).average, null);
+  assert.equal(forecastPrices(scenarios.companies.AAA, 'momentum20', 5).point, null);
+});
+
+test('OTC names are hidden from raw and Gemini current rankings, even with old cached files', () => {
+  const directory = [{ticker: 'AAA', listing: {status: 'delisted', market: 'OTC'}}];
+  for (const gemini of [false, true]) {
+    const rank = rankingOf(scenarios, {model: 'kronos', horizon: 5, gemini},
+      {scores: {AAA: 100, BBB: 20, UNKNOWN: 100}}, directory);
+    assert.ok(!rank.rows.some((r) => r.ticker === 'AAA' || r.ticker === 'UNKNOWN'));
+  }
 });
 
 test('companies left tied share a place when movement is measured', () => {

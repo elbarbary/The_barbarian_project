@@ -631,6 +631,7 @@ export async function live() {
       // documents no longer use — it is the fallback, not the source.
       sectorAr: c.sector_ar || SECTOR_AR[c.sector] || (c.sector ? c.sector : UNCLASSIFIED.ar),
       close: q.close ?? '—',
+      quoteAsOf: now && typeof now.c === 'number' ? feed.as_of || null : held.date || market.date || null,
       // Eleven of the exchange's listings are quoted in DOLLARS. Printed in a
       // column where every other figure is pounds, CFGH at 0.117 reads as
       // eleven piastres and is eleven cents — and the market value beside it

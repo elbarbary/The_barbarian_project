@@ -62,6 +62,8 @@ from __future__ import annotations
 import functools
 import os
 import pathlib
+import datetime
+import math
 
 import forecast as fc
 
@@ -97,6 +99,7 @@ KRONOS = {
     "model": "NeoQuasar/Kronos-small",
     "model_revision": "901c26c1332695a2a8f243eb2f37243a37bea320",
     "tokenizer": "NeoQuasar/Kronos-Tokenizer-base",
+    "tokenizer_revision": "0e0117387f39004a9016484a186a908917e22426",
     "context": 512,
 }
 
@@ -131,11 +134,35 @@ TRIAL: frozenset[str] = frozenset()
 LOOKBACK = 90
 
 # How many paths Kronos samples. It is generative — each path is a different
-# future — and the forecast is the median across them. Five is what the
+# future — and the upstream predictor averages them. Five is what the
 # August run used. More would be steadier and slower; the number is pinned
 # rather than tuned, because tuning it against outcomes already seen is how a
 # backtest flatters itself.
 SAMPLES = 5
+
+
+def future_sessions(basis, count, closures=()):
+    """EGX weekdays, excluding supplied announced closures.
+
+    No authoritative future holiday feed is currently wired in. Record that
+    limitation rather than using pandas' US Monday–Friday business calendar.
+    """
+    day = datetime.date.fromisoformat(str(basis)[:10])
+    result = []
+    while len(result) < count:
+        day += datetime.timedelta(days=1)
+        if day.weekday() not in (4, 5) and day.isoformat() not in closures:
+            result.append(day.isoformat())
+    return result
+
+
+def path_forecast(ticker, basis, model, path, last, note=""):
+    path = [float(value) for value in path]
+    if len(path) < max(fc.HORIZONS) or not all(math.isfinite(v) and v > 0 for v in path):
+        return fc.Abstention(ticker, basis, model, "incomplete or non-positive/non-finite price path")
+    returns = {h: (path[h - 1] / last - 1) * 100 for h in fc.HORIZONS}
+    return fc.Forecast(ticker, basis, model, returns, note=note,
+                       price_path=path, basis_close=float(last))
 
 
 def _seed(basis: str, ticker: str) -> int:
@@ -204,8 +231,10 @@ def _kronos():
 
     from model import Kronos, KronosPredictor, KronosTokenizer  # noqa: PLC0415
 
-    tokenizer = KronosTokenizer.from_pretrained(KRONOS["tokenizer"])
-    weights = Kronos.from_pretrained(KRONOS["model"])
+    tokenizer = KronosTokenizer.from_pretrained(KRONOS["tokenizer"],
+                                              revision=KRONOS["tokenizer_revision"]).eval()
+    weights = Kronos.from_pretrained(KRONOS["model"],
+                                    revision=KRONOS["model_revision"]).eval()
     return KronosPredictor(weights, tokenizer, device="cpu",
                            max_context=KRONOS["context"])
 
@@ -213,10 +242,8 @@ def _kronos():
 def kronos(ticker: str, basis: str, bars: list[dict]) -> fc.Forecast | fc.Abstention:
     """Kronos-small over this company's candles.
 
-    The model returns a price path per sample. The forecast is the median
-    across paths at each horizon, expressed as a return from the basis close
-    — a median rather than a mean because one path that runs away should not
-    move the answer, and because the August record was built on medians.
+    The pinned upstream predictor returns the MEAN across sampled paths,
+    not their median. It does not expose the sample distribution here.
     """
     import pandas as pd
 
@@ -263,8 +290,7 @@ def kronos(ticker: str, basis: str, bars: list[dict]) -> fc.Forecast | fc.Absten
     history = frame[["open", "high", "low", "close", "volume"]]
     stamps = frame["timestamps"]
     ahead = max(fc.HORIZONS)
-    future = pd.Series(pd.date_range(stamps.iloc[-1] + pd.Timedelta(days=1),
-                                     periods=ahead, freq="B"))
+    future = pd.Series(pd.to_datetime(future_sessions(basis, ahead)))
 
     # One call, `SAMPLES` paths — not a loop of single-path calls.
     #
@@ -279,22 +305,12 @@ def kronos(ticker: str, basis: str, bars: list[dict]) -> fc.Forecast | fc.Absten
                               y_timestamp=future, pred_len=ahead,
                               T=1.0, top_p=0.9, sample_count=SAMPLES,
                               verbose=False)
-    # The predictor returns the median path across samples. Its own spread
-    # is gone by then, so the agreement count below is over what it gives
-    # back rather than over paths this file never sees.
+    # Upstream auto_regressive_inference uses np.mean(preds, axis=1).
+    # Its sample spread is gone; do not label this a median or confidence band.
     path = list(drawn["close"])
-
-    import statistics
-    returns, quantiles = {}, {}
-    for horizon in fc.HORIZONS:
-        if horizon > ahead or horizon > len(path):
-            continue
-        moves = [(path[horizon - 1] / last - 1) * 100]
-        returns[horizon] = statistics.median(moves)
-    if not returns:
-        return fc.Abstention(ticker, basis, "kronos", "no path reached a horizon")
-    return fc.Forecast(ticker, basis, "kronos", returns,
-                       note=f"{SAMPLES} sampled paths, median"
+    return path_forecast(ticker, basis, "kronos", path, last,
+                       note=f"adapter v2; {SAMPLES} sampled paths, upstream mean; "
+                            "Sun–Thu calendar, future holiday coverage unverified"
                             + (f"; {skipped} sessions without a whole candle "
                                "were passed over" if skipped else ""))
 
@@ -453,11 +469,7 @@ def _close_only(kind: str, ticker: str, basis: str,
     # writes as "np.float32(-0.43)" or refuses outright depending on the
     # encoder — a forecast that cannot be serialised is a forecast that is
     # not in the record.
-    returns = {h: float((median[h - 1] / last - 1) * 100)
-               for h in fc.HORIZONS if h <= len(median)}
-    if not returns:
-        return fc.Abstention(ticker, basis, kind, "no horizon returned")
-    return fc.Forecast(ticker, basis, kind, returns)
+    return path_forecast(ticker, basis, kind, median, last)
 
 
 def chronos2(ticker, basis, bars):

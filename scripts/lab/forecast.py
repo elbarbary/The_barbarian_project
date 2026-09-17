@@ -74,6 +74,10 @@ class Forecast:
     ranked_by: dict[int, float] | None = None
     quantiles: dict[int, dict[str, float]] | None = None
     note: str = ""
+    # Central daily closing-price path, NOT a probability interval. Retained
+    # before sealing so window low/high/mean never need to be invented later.
+    price_path: list[float] | None = None
+    basis_close: float | None = None
 
     def rank_value(self, horizon: int) -> float | None:
         """What to sort this company by at this horizon."""
@@ -126,7 +130,8 @@ def flat(ticker: str, basis: str, bars: list[dict]) -> Forecast | Abstention:
     if not closes(bars):
         return Abstention(ticker, basis, "flat", "no usable close")
     return Forecast(ticker, basis, "flat", {h: 0.0 for h in HORIZONS},
-                    ranked_by={h: 0.0 for h in HORIZONS})
+                    ranked_by={h: 0.0 for h in HORIZONS},
+                    price_path=[closes(bars)[-1]] * max(HORIZONS), basis_close=closes(bars)[-1])
 
 
 def drift(ticker: str, basis: str, bars: list[dict], window: int = 60) -> Forecast | Abstention:
@@ -145,7 +150,9 @@ def drift(ticker: str, basis: str, bars: list[dict], window: int = 60) -> Foreca
         return Abstention(ticker, basis, "drift", "no usable session returns")
     per_session = statistics.mean(steps)
     return Forecast(ticker, basis, "drift",
-                    {h: ((1 + per_session) ** h - 1) * 100 for h in HORIZONS})
+                    {h: ((1 + per_session) ** h - 1) * 100 for h in HORIZONS},
+                    price_path=[series[-1] * (1 + per_session) ** h for h in range(1, max(HORIZONS) + 1)],
+                    basis_close=series[-1])
 
 
 def momentum(ticker: str, basis: str, bars: list[dict], look: int = 20) -> Forecast | Abstention:

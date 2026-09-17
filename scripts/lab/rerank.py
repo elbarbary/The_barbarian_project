@@ -96,6 +96,7 @@ import measures as ms
 import panel as pricing
 import run as lab
 import timestamp as ts
+import eligibility
 
 REPO = pathlib.Path(__file__).resolve().parent.parent.parent
 RUNS = REPO / "data-source" / "lab"
@@ -221,7 +222,7 @@ def _number(value) -> str:
     return f"{value:.4g}"
 
 
-def table(document: dict) -> tuple[list[str], str]:
+def table(document: dict, excluded=()) -> tuple[list[str], str]:
     """One row per company: what every forecaster said.
 
     Compact on purpose. The whole market has to fit in one call, because a
@@ -233,7 +234,7 @@ def table(document: dict) -> tuple[list[str], str]:
     for model in models:
         for guess in document["models"][model].get("forecasts") or []:
             ticker = guess.get("ticker")
-            if ticker:
+            if ticker and ticker not in excluded:
                 by_ticker.setdefault(ticker, {})[model] = guess
 
     tickers = sorted(by_ticker)
@@ -430,7 +431,33 @@ def gather(document: dict, *, until: datetime.datetime,
     block = measures_block(measures, tickers)
     block.update(excluded=excluded, excludedCompanies=len(excluded),
                  refreshed=panel is not None, inputSessions=input_sessions)
+    # Mandatory risk facts are not an optional investment thesis. They travel
+    # with ALL readings, even 'models only', and are recorded in the seal.
+    try:
+        known = eligibility.directory(data)
+    except (OSError, ValueError, KeyError):
+        known = {}
+    measure_rows = {r['ticker']: r for r in measures.get('rows', [])}
+    ineligible = {t: why for t in tickers
+                  if (why := eligibility.exclusion(known.get(t, {}), basis))}
+    events = eligibility.issuer_clarifications(basis)
+    facts = {t: eligibility.risk_facts(known.get(t, {}), measure_rows.get(t, {}), basis, events.get(t, ()))
+             for t in sorted(tickers)}
+    # Compact CSV keeps sixteen context combinations affordable. The richer
+    # bilingual metadata stays in the sealed evidence, not in every prompt.
+    lines = ["ticker,financial_period,period_age_days,change20_pct,income_growth_pct,warnings"]
+    for ticker, fact in facts.items():
+        if ticker in ineligible:
+            continue
+        values = [ticker, fact["financialPeriod"] or "unknown", fact["financialAgeDays"],
+                  fact["change20"], fact["netIncomeGrowth"], "; ".join(fact["flags"])]
+        lines.append(",".join("" if v is None else str(v) for v in values))
+        for event in fact["events"]:
+            lines.append(f"SOURCE {ticker} {event['date']} {event['link']} {event['excerpt']}")
+    safety = {"version": 1, "asOf": basis, "excluded": ineligible, "companies": facts,
+              "text": "\n".join(lines)}
     return {
+        "safety": safety,
         "filings": filings_block(_read(data / "disclosures" / "latest.json"),
                                  tickers, basis, until),
         "news": news_block(_read(data / "news" / "latest.json"), tickers, until),
@@ -472,7 +499,7 @@ def prompt(basis: str, body: str, count: int, context: dict | None = None,
     context = context or {}
     given = (" Weigh the forecasts against the evidence below."
              if ordered else
-             " You are given nothing but the forecasts: rank from them alone.")
+             " Rank from the forecasts and mandatory risk facts only; no optional evidence is supplied.")
     sections = []
     for layer in ordered:
         title, lead = SECTIONS[layer]
@@ -484,6 +511,16 @@ def prompt(basis: str, body: str, count: int, context: dict | None = None,
             pass
         sections.append(f"{title}\n{lead}\n\n{block.get('text') or '(not available)'}")
     extra = ("\n\n" + "\n\n".join(sections)) if sections else ""
+    safety = (context.get("safety") or {}).get("text", "Risk metadata unavailable; not evidence of safety.")
+    extra += ("\n\nMANDATORY RISK FACTS (apply with every context combination):\n"
+              + safety + "\nPrice models do not know listing status, reporting quality, "
+              "issuer denials or wrongdoing. A large forecast or fall is not evidence "
+              "of a recovery. Missing/stale financials earn no fundamental support. "
+              "Downgrade unsupported reversals and severe evidence gaps; count may be zero. "
+              "A dated issuer denial is negative evidence, not proof of manipulation; "
+              "only a later verified material filing can explain a subsequent move. "
+              "Never infer manipulation from a price pattern. Headlines are not full filings; "
+              "absence from the short news window is not proof there were no earlier adverse events.")
     return f"""You are one entrant in a forecasting contest on the Egyptian Exchange.
 
 Below is every forecasting model's answer for the session that closed on
@@ -588,7 +625,12 @@ def rank(document: dict, *, today: str | None, layers=DEFAULT,
         import gemini
         ask = gemini.generate
 
-    tickers, body = table(document)
+    known = eligibility.directory()
+    candidates, _ = table(document)
+    excluded = {t for t in candidates
+                if eligibility.exclusion(known.get(t, {}), document["basisSession"])}
+    excluded.update(((context or {}).get("safety") or {}).get("excluded") or {})
+    tickers, body = table(document, excluded)
     if not tickers:
         return {"forecasts": [], "answered": 0, "abstained": 0,
                 "abstentions": {"no other model answered, so there was "

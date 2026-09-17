@@ -28,6 +28,22 @@ def validate(top5, picks, scenarios, readings, *, require_id=True):
     indexed = (scenarios.get("rerank") or {}).get("readings") or {}
     if set(indexed) != set(readings):
         errors.append("reading files do not match the published index")
+    for ticker, company in (scenarios.get("companies") or {}).items():
+        for name, model in company.get("models", {}).items():
+            path = model.get("pricePath")
+            if path is None:
+                continue  # Older sealed runs did not retain daily paths.
+            basis_close = model.get("basisClose")
+            valid = lambda v: (not isinstance(v, bool) and isinstance(v, (int, float))
+                               and math.isfinite(v) and v > 0)
+            if (not isinstance(path, list) or len(path) < max(scenarios.get("horizons") or [20])
+                    or not all(valid(v) for v in path) or not valid(basis_close)):
+                errors.append(f"{ticker}/{name}: invalid saved price path")
+                continue
+            for horizon, value in model.get("returns", {}).items():
+                h = int(horizon)
+                if h <= 0 or h > len(path) or abs((path[h - 1] / basis_close - 1) * 100 - value) > 0.001:
+                    errors.append(f"{ticker}/{name}: path does not match frozen return")
     for key, doc in readings.items():
         index = indexed.get(key) or {}
         if doc.get("basisSession") != basis or doc.get("key") != key:

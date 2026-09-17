@@ -276,9 +276,16 @@ const byValue = (a, b) => (b[0] - a[0]) || (a[1] < b[1] ? -1 : a[1] > b[1] ? 1 :
  * model's forecasts when evidence is switched on — every company, highest
  * first, with where the chosen model put it.
  */
-export function rankingOf(scenarios, choice, reading) {
+export function eligibleTicker(ticker, directory = []) {
+  const listing = directory.find((c) => c.ticker === ticker)?.listing;
+  return listed(ticker) && !(['delisted', 'unlisted', 'suspended'].includes(listing?.status)
+    || ['OTC', 'UNLISTED'].includes(String(listing?.market || '').toUpperCase()));
+}
+
+export function rankingOf(scenarios, choice, reading, directory = []) {
   const companies = (scenarios && scenarios.companies) || {};
-  const base = Object.keys(companies).filter(listed)
+  const eligible = (ticker) => companies[ticker] && eligibleTicker(ticker, directory);
+  const base = Object.keys(companies).filter(eligible)
     .map((ticker) => [saidOf(scenarios, choice.model, choice.horizon, ticker), ticker])
     .filter(([value]) => finite(value)).sort(byValue);
   const baseRank = new Map(base.map(([, ticker], i) => [ticker, i + 1]));
@@ -291,7 +298,7 @@ export function rankingOf(scenarios, choice, reading) {
   const baseFrequency = frequencies(base);
   const scores = (reading && reading.scores) || {};
   const order = choice.gemini
-    ? Object.keys(scores).filter(listed).map((ticker) => [scores[ticker], ticker]).filter(([value]) => finite(value)).sort(byValue)
+    ? Object.keys(scores).filter(eligible).map((ticker) => [scores[ticker], ticker]).filter(([value]) => finite(value)).sort(byValue)
     : base;
   const scoreFrequency = frequencies(order);
   // How many of the other forecasters point the same way as the chosen one.
@@ -344,7 +351,8 @@ export function pathOf(scenarios, tickers) {
 
 /** A forecaster's view of the whole market, for the charts under the ranking. */
 export function returnsView(scenarios, draft, tickers) {
-  const horizons = ((scenarios && scenarios.horizons) || []).map(Number);
+  const horizons = ((scenarios && scenarios.horizons) || []).map(Number)
+    .filter((h) => h <= Number(draft.horizon)).sort((a, b) => a - b);
   const companies = scenarios.companies || {};
   const models = returnModels(scenarios);
   // A model that says the same about every company takes no side, so it is
@@ -373,7 +381,7 @@ export function returnsView(scenarios, draft, tickers) {
     ...m, median: median(tickers.map((t) => at(t, m.id, draft.horizon)).filter(finite)),
   }));
   return {
-    model: draft.model, horizons, rows, ahead,
+    model: draft.model, horizon: draft.horizon, horizons, rows, ahead,
     summary: summaryOf(rows.map((r) => r.value)),
     past: pathOf(scenarios, tickers),
     byModel,
@@ -592,9 +600,9 @@ export function scenariosScreen(component, data, ar) {
     view: gemini ? t(`Gemini re-rank with ${evidenceWords.length > 1 ? `${evidenceWords.slice(0, -1).join(', ')} and ${evidenceWords.at(-1)}` : (evidenceWords[0] || '')}`,
       `إعادة ترتيب Gemini مع ${evidenceWords.join('، ')}`) : modelName,
   };
-  const ranking = scenarios ? rankingOf(scenarios, choice, reading) : null;
+  const ranking = scenarios ? rankingOf(scenarios, choice, reading, data.companies) : null;
   const ctx = {
-    choice, entry, nights, record, said, words, next, indexed, ranking, reading,
+    choice, entry, nights, record, said, words, next, indexed, ranking, reading, scenarios,
     // The night the ranking is from, to tell its own record apart from an older one.
     basis: scenarios?.basisSession || null,
     // What the numbers in the past runs are: Gemini's scores when it is on.
@@ -602,7 +610,8 @@ export function scenariosScreen(component, data, ar) {
     topCount: picks?.topCount ?? top5?.topCount ?? 5,
     // Answered that night, but not ranked: no exchange ticker, or recent
     // closes with a long gap or a move no daily limit allows (`run.unreadable`).
-    leftOut: Object.keys(scenarios?.leftOut || {}).length,
+    leftOut: new Set([...Object.keys(scenarios?.leftOut || {}),
+      ...Object.keys(scenarios?.companies || {}).filter((ticker) => !eligibleTicker(ticker, data.companies))]).size,
     loading: !picks && !!st.extrasLoading,
     readingLoading: gemini && !reading && !!(st.scLoading && st.scLoading[key]),
     readingFailed: readingIssue
@@ -619,7 +628,8 @@ export function scenariosScreen(component, data, ar) {
   };
 
   // The whole market as the chosen forecaster sees it, under its ranking.
-  const tickers = Object.keys((scenarios && scenarios.companies) || {}).filter(listed).sort();
+  const tickers = Object.keys((scenarios && scenarios.companies) || {})
+    .filter((ticker) => eligibleTicker(ticker, data.companies)).sort();
   const charts = scenarios && model && returnModels(scenarios).some((m) => m.id === model)
     ? returnsCards(component, data, returnsView(scenarios, choice, tickers), words, ar) : [];
 

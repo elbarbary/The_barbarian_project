@@ -331,6 +331,16 @@
 .aix-rank-head span:first-child { text-align: center; }
 .aix-rank-head span:nth-child(n+3) { text-align: end; }
 .aix-rank-list { display: flex; flex-direction: column; }
+.aix-price-detail { grid-column: 2 / -1; display: grid; gap: 7px; padding-block: 10px 4px; }
+.aix-price-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.aix-price-grid > span { display: grid; gap: 4px; }
+.aix-price-grid small, .aix-price-caption { color: var(--aix-muted); font-size: 11px; line-height: 1.5; }
+.aix-price-grid b { font-size: 14px; font-variant-numeric: tabular-nums; }
+.aix-risk-note { grid-column: 2 / -1; font-size: 12px; line-height: 1.5; color: var(--aix-ink); }
+@media (max-width: 600px) {
+  .aix-price-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 12px; }
+  .aix-price-detail, .aix-risk-note { grid-column: 1 / -1; }
+}
 #app .aix-rank-row {
   all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: var(--rank-cols);
   align-items: center; column-gap: 12px; row-gap: 3px; padding: 10px 6px; border-bottom: 1px solid var(--aix-hair2);
