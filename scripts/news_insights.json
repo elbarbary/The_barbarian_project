@@ -3955,6 +3955,10 @@
     "meaning": "A corporate demerger splits legal entities, requiring the transfer and reallocation of employee files and social insurance contribution records between the resulting commercial registrations to maintain statutory labor compliance.",
     "meaning_ar": "يترتب على تقسيم الشركات إعادة توزيع ونقل السجلات التأمينية وملفات العاملين بين الكيانات القانونية المنبثقة حديثاً لضمان استمرار قيد المشتركين وفقاً لأرقام المنشآت الجديدة."
   },
+  "بعد تهديدات ترامب وترحيب كارني.. الاتحاد الاوروبي: الشراكه مع كندا ليست ضد احد": {
+    "meaning": "Bilateral trade frameworks such as the EU-Canada partnership govern tariff schedules, regulatory alignment, and supply chain continuity between the signatory blocs amidst external trade pressures.",
+    "meaning_ar": "تحدد أطر التجارة الثنائية مثل الشراكة بين الاتحاد الأوروبي وكندا الجداول الجمركية والتوافق التنظيمي واستمرارية سلاسل الإمداد بين الأطراف الموقعة في مواجهة الضغوط التجارية الخارجية."
+  },
   "بعد مغادرته القاهره.. ولي العهد السعودي يبعث برقيه شكر الي الرييس السيسي": {
     "meaning": "Diplomatic visits and state-level communications between Egypt and Saudi Arabia serve as the formal framework for bilateral economic agreements, cross-border investment treaties, and sovereign financial cooperation.",
     "meaning_ar": "تُمثل الزيارات الدبلوماسية والمراسلات الرسمية بين مصر والمملكة العربية السعودية الإطار التنظيمي الحاكم لتفعيل الاتفاقيات الاقتصادية الثنائية، وتنسيق تدفقات الاستثمارات المشتركة والتعاون المالي الحكومي."
@@ -5603,6 +5607,10 @@
   "سعر الريال السعودي في مصر اليوم الخميس 17/9/2026": {
     "meaning": "The exchange rate of the Saudi Riyal reflects the official and banking clearing pricing against the Egyptian Pound, which directly determines transaction settlements for bilateral trade, religious tourism expenses, and worker remittance conversions between Egypt and Saudi Arabia.",
     "meaning_ar": "يعكس سعر صرف الريال السعودي أسعار التسوية الرسمية والمصرفية مقابل الجنيه المصري، وهو ما يحدد تكلفة تسوية المعاملات التجارية البينية، ونفقات السياحة الدينية، وقيم تحويلات العاملين بين مصر والمملكة العربية السعودية."
+  },
+  "سعر الريال السعودي في مصر اليوم الخميس 17/9/2026.. تراجع 5 قروش": {
+    "meaning": "A decline in the exchange rate of the Saudi Riyal against the Egyptian Pound lowers the local currency settlement costs for bilateral trade, cross-border remittances, and religious travel operational expenses.",
+    "meaning_ar": "يؤدي تراجع سعر صرف الريال السعودي مقابل الجنيه المصري إلى خفض تكلفة التسوية بالعملة المحلية للتبادل التجاري، والتحويلات الخارجية، ونفقات التشغيل الخاصة برحلات العمرة والحج."
   },
   "سعر الريال السعودي في مصر اليوم السبت 12/9/2026": {
     "meaning": "Official and parallel market quotations for the Saudi Riyal against the Egyptian Pound establish the current operational clearing cost for bilateral trade, religious tourism expenditures, and worker remittance conversions between Egypt and Saudi Arabia.",
@@ -8472,6 +8480,10 @@
   "“المركزي” يحذر من استهداف عملاء “انستاباي”": {
     "meaning": "The Central Bank of Egypt enforces operational security directives across the national Instant Payment Network (InstaPay) to mitigate electronic fraud and protect digital banking infrastructure. This operational framework mandates adherence to strict cybersecurity protocols and customer data verification mechanisms across participating banks.",
     "meaning_ar": "يُفعّل البنك المركزي المصري توجيهات الأمان التشغيلي عبر شبكة المدفوعات اللحظية (إنستاباي) للحد من الاحتيال الإلكتروني وتأمين البنية التحتية المصرفية الرقمية. يُلزم هذا الإطار التشغيلي البنوك المشاركة بتطبيق بروتوكولات الأمن السيبراني وآليات التحقق من بيانات العملاء."
+  },
+  "“المركزي” يشارك في موتمر للذكاء الاصطناعي علي هامش اجتماعات “AACB”": {
+    "meaning": "The Central Bank of Egypt's participation in an artificial intelligence forum alongside the Association of African Central Banks involves the exchange of technical frameworks for deploying automation, risk modeling, and supervisory technologies across the banking sector.",
+    "meaning_ar": "تتضمن مشاركة البنك المركزي المصري في منتدى للذكاء الاصطناعي على هامش اجتماعات جمعية البنوك المركزية الأفريقية تبادل أطر العمل الفنية الخاصة بتطبيق تقنيات الأتمتة، ونمذجة المخاطر، والرقابة التكنولوجية في القطاع المصرفي."
   },
   "“المركزي” يطلق النسخه الرابعه من مسابقه FinTech Got Talent 2026": {
     "meaning": "The Central Bank of Egypt operates this recurring regulatory initiative to source and evaluate early-stage financial technology applications from university students within the domestic banking ecosystem.",
