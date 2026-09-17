@@ -13,7 +13,7 @@ import { readFile, access } from 'node:fs/promises';
 import { installDom } from './dom-stub.mjs';
 import { aiCards, heroModel } from '../../public/esthmr/ai-cards.js';
 import { heroChart, histogram, fanChart, nextRun, reorderChart, nightsChart, recordRows } from '../../public/esthmr/ai-visuals.js';
-import { saidParts, forecastPrices, returnsCards } from '../../public/esthmr/scenario-visuals.js';
+import { saidParts, forecastPrices, returnsCards, quoteWhen } from '../../public/esthmr/scenario-visuals.js';
 import { readingProblem, mixedSnapshot } from '../../public/esthmr/lab-snapshot.js';
 import {
   scenariosScreen, warningLines, ACCEPTED_KEY, readingKey, baseModels, choiceOf, recordOf, nightsOf,
@@ -670,11 +670,45 @@ test('price cards show dated current quotes, frozen targets and bilingual risk w
       assert.match(text(prices), /9\.90/);
       assert.match(text(prices), /10\.40/);
       assert.match(text(prices), /10\.20/); // Frozen 2% endpoint, not 2% of today's 12.
-      assert.match(text(prices), /2026-09-17T10:00:00Z/);
+      // The feed's UTC stamp, read on a Cairo clock.
+      assert.match(text(prices), ar ? /17 .* 2026 · 13:00 بتوقيت القاهرة/ : /17 Sep 2026 · 13:00 Cairo/);
+      assert.doesNotMatch(text(prices), /2026-09-17T10:00:00Z/);
       assert.match(text(node), /291659/);
       assert.doesNotMatch(text(node), /undefined|NaN|Infinity/);
     }
   }
+});
+
+test('a night saved without daily paths says so instead of printing three dashes', () => {
+  // Every run sealed before 17 Sep 2026 kept three endpoint returns and no
+  // path. The owner read the dashes that stood for low, average and high as
+  // the numbers failing to load.
+  const d = structuredClone(data);
+  Object.assign(d.companies[0], {close: 12, quoteAsOf: '2026-09-17T10:00:00Z'});
+  d.scenarios.companies.AAA.close = 10;
+  delete d.scenarios.companies.AAA.models.kronos.pricePath;
+  for (const ar of [false, true]) {
+    const node = screen(component({scModel: 'kronos', scHorizon: 5}), d, ar);
+    const words = text(byClass(node, 'aix-price-detail')[0]);
+    assert.match(words, /12\.00/, 'the current price is there');
+    assert.match(words, /10\.20/, 'the end of the window is there');
+    assert.doesNotMatch(words, ar ? /أدنى توقع|أعلى توقع/ : /Predicted low|Predicted high/);
+    assert.doesNotMatch(words, /—\s*—/);
+    // Said once, above the ranking, not under every company.
+    const notes = byClass(node, 'aix-note').map(text).filter((n) => (ar ? /المسار اليومي/ : /daily path/).test(n));
+    assert.equal(notes.length, 1);
+  }
+  // No close on the night: the strip says the starting price is not in the file.
+  delete d.scenarios.companies.AAA.close;
+  const words = text(byClass(screen(component({scModel: 'kronos', scHorizon: 5}), d, false), 'aix-price-detail')[0]);
+  assert.match(words, /did not trade that session/);
+});
+
+test('a quote stamp reads on a Cairo clock, and a bare day stays a day', () => {
+  assert.equal(quoteWhen('2026-09-17T09:14:47.232Z', false), '17 Sep 2026 · 12:14 Cairo');
+  assert.equal(quoteWhen('2026-09-16T22:30:00Z', false), '17 Sep 2026 · 01:30 Cairo');
+  assert.equal(quoteWhen('2026-09-17', false), '17 Sep 2026');
+  assert.equal(quoteWhen('', false), '—');
 });
 
 test('companies left tied share a place when movement is measured', () => {

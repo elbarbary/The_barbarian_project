@@ -179,11 +179,18 @@ test('the top of every model’s ranking on screen is the five its record follow
   // passed over and the next one down is scored (15 Sep 2026, after the close:
   // Kronos's WATP and GRCA). So the five are the ranking with those taken out,
   // and every one taken out ranked above the last of the five.
+  //
+  // From 17 Sep 2026 the current view also leaves out shares the exchange
+  // delisted (scenarios.leftOut), and new runs never forecast them. A night
+  // sealed before that can still hold one in its five: Kronos's WATP on
+  // 16 Sep. The record keeps it, the screen says under the ranking that its
+  // first five may differ, and every other name must still lead in order.
   const mod = await import('../../public/esthmr/scenarios.js');
+  const excluded = new Set(Object.keys(scenarios.leftOut || {}));
   const same = (rows, night, label) => {
     const passed = new Set(night.skipped || []);
-    const five = night.picks.map((p) => p.ticker);
-    assert.deepEqual(rows.filter((r) => !passed.has(r.ticker)).slice(0, 5).map((r) => r.ticker), five, label);
+    const five = night.picks.map((p) => p.ticker).filter((t) => !excluded.has(t));
+    assert.deepEqual(rows.filter((r) => !passed.has(r.ticker)).slice(0, five.length).map((r) => r.ticker), five, label);
     const last = Math.max(...rows.filter((r) => five.includes(r.ticker)).map((r) => r.rank));
     for (const t of passed) assert.ok(rows.find((r) => r.ticker === t)?.rank < last, `${label}: ${t} was passed over but ranks below the five`);
   };

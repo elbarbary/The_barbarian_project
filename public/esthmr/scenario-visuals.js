@@ -46,19 +46,47 @@ export function forecastPrices(company, model, horizon) {
     average: complete ? window.reduce((a, b) => a + b, 0) / window.length : null };
 }
 
+/** When a quote was read, as a reader in Cairo reads a clock: "17 Sep 2026 · 12:14 Cairo".
+ *  The live feed stamps quotes in UTC, and the strip printed that stamp raw. */
+export function quoteWhen(stamp, ar) {
+  const text = String(stamp || '');
+  if (!text) return '—';
+  const at = text.length > 10 ? new Date(text) : null;
+  if (!at || Number.isNaN(at.getTime())) return day(text, ar);
+  const parts = Object.fromEntries(new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Africa/Cairo', year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+  }).formatToParts(at).map((part) => [part.type, part.value]));
+  return `${day(`${parts.year}-${parts.month}-${parts.day}`, ar)} · ${parts.hour}:${parts.minute} ${ar ? 'بتوقيت القاهرة' : 'Cairo'}`;
+}
+
 function priceStrip(company, model, horizon, basisDate, quote, ar) {
   const p = forecastPrices(company, model, horizon);
   const t = (en, arabic) => ar ? arabic : en;
   const hasQuote = finite(quote?.close) && quote.close > 0 && quote.quoteAsOf;
   const latest = hasQuote ? quote.close : company?.latestClose ?? company?.close;
-  const date = hasQuote ? quote.quoteAsOf : company?.latestSession || basisDate;
+  const date = hasQuote ? quoteWhen(quote.quoteAsOf, ar) : day(company?.latestSession || basisDate, ar);
   const price = (v) => finite(v) ? plain(v, v < 1 ? 4 : 2) : '—';
+  // A low, an average and a high are read off the model's daily path. Runs
+  // sealed before 17 Sep 2026 kept only the three endpoints, so for those
+  // nights the three figures are left out and the strip says why, rather
+  // than printing three dashes a reader takes for a fault.
+  const pathSaved = finite(p.low) && finite(p.high) && finite(p.average);
+  const cells = [[hasQuote ? t('Current price', 'السعر الحالي') : t('Latest saved close', 'آخر إغلاق محفوظ'), latest]];
+  if (pathSaved) {
+    cells.push([t('Predicted low', 'أدنى توقع'), p.low], [t('Average close', 'متوسط الإغلاق'), p.average],
+      [t('Predicted high', 'أعلى توقع'), p.high]);
+  }
+  cells.push([t('End of window', 'نهاية المدة'), p.point]);
+  // Why the night saved no path is said once, above the ranking. What is
+  // particular to a company is said here.
+  const why = finite(p.basis) ? null
+    : t(`No close on ${day(basisDate)}: the company did not trade that session, so the price its forecast started from is not in this night’s file.`,
+      `لا إغلاق يوم ${day(basisDate, true)}: لم تُتداول الشركة في تلك الجلسة، فسعر بداية توقعها غير موجود في ملف هذه الليلة.`);
   return h('span', { class: 'aix-price-detail' },
-    h('span', { class: 'aix-price-grid' }, [
-      [hasQuote ? t('Current price', 'السعر الحالي') : t('Latest saved close', 'آخر إغلاق محفوظ'), latest], [t('Predicted low', 'أدنى توقع'), p.low],
-      [t('Average close', 'متوسط الإغلاق'), p.average], [t('Predicted high', 'أعلى توقع'), p.high],
-      [t('End of window', 'نهاية المدة'), p.point],
-    ].map(([label, value]) => h('span', null, h('small', null, label), h('b', { dir: 'ltr' }, price(value))))),
+    h('span', { class: `aix-price-grid${pathSaved ? '' : ' is-short'}` },
+      cells.map(([label, value]) => h('span', null, h('small', null, label), h('b', { dir: 'ltr' }, price(value))))),
+    why ? h('small', { class: 'aix-price-caption' }, why) : null,
     h('small', { class: 'aix-price-caption' },
       `${quote?.currency || 'EGP'} · ${t('Price as of', 'السعر بتاريخ')} ${date || '—'} · ${t('Forecast basis', 'مرجع التوقع')} ${price(p.basis)} (${day(basisDate, ar)})`));
 }
@@ -357,8 +385,11 @@ export function rankingCard(component, data, ctx, ar) {
         t('This older reading predates the mandatory risk-context check. Any risk notes shown now were not necessarily read by Gemini.',
           'هذه القراءة أقدم من فحص المخاطر الإلزامي. ملاحظات المخاطر الظاهرة الآن لم يقرأها Gemini بالضرورة.')) : null) : null,
     says.kind === 'return' ? h('p', { class: 'aix-note' },
-      t(`Price outlook · ${words.model} · ${words.horizon}. Low, average and high describe its predicted daily closes in this window—not probability bounds or intraday extremes. A dash means the original run did not save that data. New quotes do not change a frozen forecast.`,
-        `توقعات الأسعار · ${words.model} · ${words.horizon}. الأدنى والمتوسط والأعلى لإغلاقات النموذج اليومية خلال المدة، وليست حدود احتمال أو أسعاراً داخل الجلسة. الشرطة تعني أن التشغيل الأصلي لم يحفظ البيانات. الأسعار الجديدة لا تغيّر التوقع المحفوظ.`)) : null,
+      Object.values(ctx.scenarios?.companies || {}).some((c) => Array.isArray(c?.models?.[choice.model]?.pricePath))
+        ? t(`Price outlook · ${words.model} · ${words.horizon}. Low, average and high describe its predicted daily closes in this window—not probability bounds or intraday extremes. New quotes do not change a frozen forecast.`,
+          `توقعات الأسعار · ${words.model} · ${words.horizon}. الأدنى والمتوسط والأعلى لإغلاقات النموذج اليومية خلال المدة، وليست حدود احتمال أو أسعاراً داخل الجلسة. الأسعار الجديدة لا تغيّر التوقع المحفوظ.`)
+        : t(`Price outlook · ${words.model} · ${words.horizon}. This night’s run saved each forecast at 1, 5 and 20 sessions only, so each company shows today’s price and the price at the end of the window. A low, average and high are read off the model’s daily path, which runs save from 17 Sep 2026 on. New quotes do not change a frozen forecast.`,
+          `توقعات الأسعار · ${words.model} · ${words.horizon}. حفظ تشغيل هذه الليلة كل توقع بعد 1 و5 و20 جلسة فقط، لذا تعرض كل شركة سعر اليوم والسعر في نهاية المدة. الأدنى والمتوسط والأعلى تُقرأ من المسار اليومي للنموذج، وتحفظه التشغيلات بدءاً من 17 سبتمبر 2026. الأسعار الجديدة لا تغيّر التوقع المحفوظ.`)) : null,
     choice.model === 'kronos' && ctx.scenarios && !Object.values(ctx.scenarios.companies || {})
       .some((c) => c.models?.kronos?.note?.includes('adapter v2')) ? h('p', { class: 'aix-note' },
       t('Legacy Kronos run: future timestamps used a Monday–Friday calendar. Corrected runs use Sunday–Thursday; the original forecast is retained for an honest record. Future holiday coverage remains unverified.',
