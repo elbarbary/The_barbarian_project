@@ -25,6 +25,10 @@ What feeds the ownership side, and what moves it on CI:
   `build_insider_tracker.py` then reads them into
   `scripts/insider_bulletin_rows.json`, which is committed and remembers which
   bulletins it has read. The live-data build only rebuilds from that store.
+  A trade no company alias matched keeps the name its bulletin printed and is
+  matched again each time the store is published, so a new alias in
+  `load_company_directory` reaches trades already held without reading any
+  bulletin again.
 - **Named holders and their stakes** (the ownership board,
   `insider-people.json`) come from post-execution forms, read six a daily build
   and newest first by `build_named_insiders.py`, and from board and

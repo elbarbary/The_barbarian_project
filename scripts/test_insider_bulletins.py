@@ -261,18 +261,25 @@ class Reading(unittest.TestCase):
         (self.pdfs / f"egx-{filing}-{filing}_101.pdf").write_bytes(b"%PDF-1.4 test")
         self.texts[str(filing)] = text
 
-    def read(self, write=True, which="/usr/bin/pdftotext"):
+    def read(self, write=True, which="/usr/bin/pdftotext", aliases=ALIASES, directory=None):
         def pdftotext(cmd, **kwargs):
             filing = re.search(r"egx-(\d+)-", cmd[2]).group(1)
             return subprocess.CompletedProcess(cmd, 0, stdout=self.texts[filing], stderr="")
         with mock.patch.object(tracker.subprocess, "run", side_effect=pdftotext), \
              mock.patch.object(tracker.shutil, "which", return_value=which), \
              contextlib.redirect_stdout(io.StringIO()) as out:
-            rows = tracker.parse_bulletin_pdfs(ALIASES, {}, write=write)
+            rows = tracker.parse_bulletin_pdfs(aliases, directory or {}, write=write)
         return rows, out.getvalue()
 
     def held(self):
         return json.loads(self.store.read_text(encoding="utf-8"))
+
+    def hold(self, filing, session, rows):
+        """The store as the machine that read these rows out of `filing` left it."""
+        self.store.write_text(json.dumps({
+            "schemaVersion": 2,
+            "read": {filing: {"session": session, "rows": len(rows), "parser": tracker.PARSER}},
+            "rows": [dict(row, parser=tracker.PARSER) for row in rows]}), encoding="utf-8")
 
     def test_a_bulletin_is_read_into_its_session_and_numbered_within_itself(self):
         session, rows, unread = tracker.bulletin_rows(SESSION_14_SEP, "294700", ALIASES, {})
@@ -433,6 +440,44 @@ class Reading(unittest.TestCase):
         self.ledger_of(("279878", "2025-11-23", "2025-10-20"))
         _, out = self.read()
         self.assertIn("Its 1 trades are published without a date.", out)
+
+    def test_a_trade_read_before_its_alias_was_added_is_published_under_it(self):
+        # The bulletins printed AMII as Arab Valves Company until the session
+        # of 20 Jul 2026, and no alias matched it: 170 rows held with no
+        # ticker, on no company. A bulletin is read again only by a new parser,
+        # and the aliases are not the parser.
+        then = tracker.bulletin_rows(ARAB_VALVES_20_JUL, "291756", BEFORE_ARAB_VALVES, AMII)[1]
+        self.hold("291756", "2026-07-20", then)
+        rows, _ = self.read(aliases=MANUAL_ALIASES, directory=AMII)
+        self.assertEqual([(r["ticker"], r["company"], r["sector"]) for r in rows], [
+            (None, "Sinai Cement", ""),
+            ("AMII", "Arabian Metal Industries and Industrial Investments", "Building Materials"),
+            (None, "Gourmet Egypt.Com Foods", "")])
+        self.assertEqual(rows, tracker.bulletin_rows(ARAB_VALVES_20_JUL, "291756", MANUAL_ALIASES, AMII)[1],
+                         "published otherwise than the bulletin reads today")
+        self.assertEqual(self.held()["rows"], [dict(row, parser=tracker.PARSER) for row in then],
+                         "the store keeps what was read, so a runner never carries it into a rebase")
+
+    def test_subscription_rights_held_with_no_ticker_are_published_with_none(self):
+        # The reader gives them none on purpose: matched now, 24,358,079 rights
+        # would be published as Creast Mark shares.
+        then = tracker.bulletin_rows(RIGHTS_1_OCT, "277127", MANUAL_ALIASES, {})[1]
+        self.hold("277127", None, then)
+        rows, _ = self.read(aliases=MANUAL_ALIASES)
+        self.assertEqual([(r["company"], r["ticker"]) for r in rows], [
+            ("MM Group Industrial & International Trade (In Kind)", "MTIE"),
+            ("Subscription Rights Of Creast Mark For Contracting& Real Est", None),
+            ("E-Finance For Digital and Financial Investements SAE", "EFIH")])
+
+    def test_a_session_filed_again_after_an_alias_was_added_is_published_once(self):
+        # Held as read before the alias, and read again from a second filing
+        # with it: the same trades under two names are still one session's.
+        self.hold("291756", "2026-07-20",
+                  tracker.bulletin_rows(ARAB_VALVES_20_JUL, "291756", BEFORE_ARAB_VALVES, AMII)[1])
+        self.on_disk(291757, ARAB_VALVES_20_JUL)
+        rows, _ = self.read(aliases=MANUAL_ALIASES, directory=AMII)
+        self.assertEqual([r["id"] for r in rows],
+                         ["bulletin-291756-1", "bulletin-291756-2", "bulletin-291756-3"])
 
     def test_undated_trades_in_two_bulletins_are_two_trades(self):
         self.store.write_text(json.dumps(
@@ -758,6 +803,21 @@ RIGHTS_1_OCT = """\
   Financial Investements SAE                insider
 """
 
+# 291756, the session of 20 Jul 2026: its head and three of its rows. AMII
+# traded as Arab Valves Company until 22 Jul 2026.
+ARAB_VALVES_20_JUL = """\
+ Trading of Insiders, Major Shareholders & Their Related Parties on Listed
+                  Companies: Trading Session 20/07/2026
+
+        Company Name                       Position          Transaction   Volume
+
+           Sinai Cement                      insider            sell        113
+
+       Arab Valves Company                   insider            buy        200000
+
+    Gourmet Egypt.Com Foods                  insider            sell       114487
+"""
+
 def manual_aliases():
     """The tracker's own aliases without the published directory, so that a
     company is named the way its bulletin prints it."""
@@ -769,6 +829,13 @@ def manual_aliases():
 
 
 MANUAL_ALIASES = manual_aliases()
+# The aliases as they were before AMII's old name was added to them.
+BEFORE_ARAB_VALVES = {name: ticker for name, ticker in MANUAL_ALIASES.items()
+                      if name != tracker.canonical("Arab Valves Company")}
+# AMII as the directory lists it on 17 Sep 2026.
+AMII = {"AMII": {"ticker": "AMII", "name": "Arabian Metal Industries and Industrial Investments",
+                 "nameAr": "العربية للصناعات المعدنية والاستثمارات الصناعية",
+                 "sector": "Building Materials", "sectorAr": "مواد البناء", "close": None}}
 
 
 def read(text, filing="0"):
@@ -974,7 +1041,9 @@ class Tickers(unittest.TestCase):
                 ("Egyptian Arabian (cmar) Securities Brokerage and Bonds EAC", "EASB"),
                 ("Alexandria Medical Services", "AMES"),
                 ("Engineering Industries (ICON)", "ENGC"),
-                ("Al Khair River For Development Agricultural Investment&Envir", "KRDI")):
+                ("Al Khair River For Development Agricultural Investment&Envir", "KRDI"),
+                # AMII's name until 22 Jul 2026.
+                ("Arab Valves Company", "AMII")):
             self.assertEqual(tracker.resolve_ticker(printed, MANUAL_ALIASES), ticker, printed)
 
 

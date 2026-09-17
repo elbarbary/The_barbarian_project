@@ -78,6 +78,10 @@ def load_company_directory() -> tuple[dict[str, dict], dict[str, str]]:
         canonical("Oriental Weavers"): "ORWE",
         canonical("Sabaa International Company For Pharmaceutical and Chemical"): "SIPC",
         canonical("Arabian Metal Industries And Industrial Investments"): "AMII",
+        # AMII's name until 22 Jul 2026, when the exchange listed its new name
+        # and code, ARVA.CA to AMII.CA (NewsID 291839). The bulletins printed
+        # it from October 2025 to the session of 20 Jul 2026.
+        canonical("Arab Valves Company"): "AMII",
         canonical("Ibnsina Pharma"): "ISPH",
         canonical("Commercial International Bank- Egypt (CIB)"): "COMI",
         canonical("Commercial International Bank"): "COMI",
@@ -757,6 +761,38 @@ def _reading_source() -> str:
 PARSER = hashlib.sha256(_reading_source().encode("utf-8")).hexdigest()[:12]
 
 
+def as_published(row: dict, alias_map: dict[str, str], by_ticker: dict[str, dict]) -> dict:
+    """A trade the store holds, as the lens is given it.
+
+    A row keeps the ticker it was read with, and a bulletin is read again only
+    when the parser changes. The aliases are not the parser, so a name no alias
+    matched stayed unmatched however many were added after it: the 169 trades
+    the bulletins printed as Arab Valves Company, AMII's name until 22 Jul
+    2026, were published with no ticker and attached to no company. A row read
+    with no ticker still holds the name its bulletin printed, so it is matched
+    again each time it is published, and named the way the reader names a
+    match. Subscription rights stay unmatched, as the reader leaves them.
+    """
+    # Which parser read it is the store's business, not the lens's.
+    record = {field: value for field, value in row.items() if field != "parser"}
+    printed = record.get("company") or ""
+    if record.get("ticker") or _RIGHTS.match(printed):
+        return record
+    ticker = resolve_ticker(printed, alias_map)
+    if ticker is None:
+        return record
+    co_meta = by_ticker.get(ticker, {})
+    company = co_meta.get("name") or printed
+    company_ar = co_meta.get("nameAr") or printed
+    act, shares = record["action"], record["shares"]
+    record.update(
+        ticker=ticker, company=company, companyAr=company_ar,
+        sector=co_meta.get("sector") or "", sectorAr=co_meta.get("sectorAr") or "",
+        title=f"تعامل على أسهم {company_ar} ({'شراء' if act == 'bought' else 'مبيعات'}): {shares:,} سهم",
+        titleEn=f"Transaction on {company} ({act}): {shares:,} shares")
+    return record
+
+
 def parse_bulletin_pdfs(alias_map: dict[str, str], by_ticker: dict[str, dict],
                         write: bool = True) -> list[dict]:
     """Every transaction held, with whatever this machine has on disk read afresh.
@@ -863,15 +899,17 @@ def parse_bulletin_pdfs(alias_map: dict[str, str], by_ticker: dict[str, dict],
         here: dict[str, int] = {}
         for row in by_filing[filing_id]:
             kept.append(row)
+            # Matched first, so a session re-issued after an alias was added
+            # is the same trade under its old reading and its new one.
+            record = as_published(row, alias_map, by_ticker)
             # An undated trade is only ever the same trade within its bulletin.
-            k = (f"{row.get('date') or 'undated-' + filing_id}:"
-                 f"{row.get('ticker') or row.get('company')}:"
-                 f"{row.get('action')}:{row.get('shares')}:{row.get('relationship')}")
+            k = (f"{record.get('date') or 'undated-' + filing_id}:"
+                 f"{record.get('ticker') or record.get('company')}:"
+                 f"{record.get('action')}:{record.get('shares')}:{record.get('relationship')}")
             here[k] = here.get(k, 0) + 1
             if here[k] <= published.get(k, 0):
                 continue
-            # Which parser read it is the store's business, not the lens's.
-            records.append({field: value for field, value in row.items() if field != "parser"})
+            records.append(record)
         for k, copies in here.items():
             published[k] = max(published.get(k, 0), copies)
 
