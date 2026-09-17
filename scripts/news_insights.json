@@ -2139,6 +2139,10 @@
     "meaning": "European equities reflect a daily technical rebound at the market close, while the cumulative weekly performance captures net capital outflows across trading sessions.",
     "meaning_ar": "تعكس الأسهم الأوروبية ارتداداً فنياً يومياً عند الإغلاق، بينما يسجل الأداء الأسبوعي التراكمي صافي تدفقات نقدية خارجة عبر جلسات التداول."
   },
+  "الاسهم الاوروبيه تسجل الخميس افضل اداء لها في شهرين عقب قرار الاحتياطي الفيدرالي": {
+    "meaning": "Monetary policy decisions by the US Federal Reserve influence global capital flows and discount rates, which directly reprices risk assets across European equity bourses.",
+    "meaning_ar": "تؤثر قرارات السياسة النقدية الصادرة عن الاحتياطي الفيدرالي الأمريكي في تدفقات رؤوس الأموال ومعدلات الخصم عالمياً، مما ينعكس بصورة مباشرة على إعادة تسعير الأصول في أسواق الأسهم الأوروبية."
+  },
   "الاسهم الاوروبيه تصعد الاربعاء للمره الاولي منذ ثلاثه جلسات": {
     "meaning": "European equities trade higher after two consecutive sessions of net declines, as purchasing volume across regional indices outpaces prevailing selling orders. This intraday movement reflects day-to-day liquidity flows and price adjustments across constituent sectors.",
     "meaning_ar": "تسجل الأسهم الأوروبية ارتفاعاً بعد جلستين متتاليتين من التراجع، مع تجاوز حجم طلبات الشراء لأوامر البيع عبر المؤشرات الإقليمية. وتوضح هذه الحركة التغيرات اليومية في تدفقات السيولة وإعادة تسعير المراكز المالية في القطاعات المكونة للسوق."
@@ -6953,6 +6957,10 @@
     "meaning": "This initiative establishes a direct-to-consumer distribution channel by coordinating state entities—Supply, Agriculture, and Military Production—to supply staple goods directly in Cairo, bypassing traditional wholesale and retail intermediary layers.",
     "meaning_ar": "تنشئ هذه المبادرة قناة توزيع مباشرة للمستهلكين من خلال تنسيق جهات حكومية تشمل التموين والزراعة والإنتاج الحربي لتوفير السلع الأساسية في القاهرة، متجاوزةً حلقات الوساطة التقليدية لتجارة الجملة والتجزئة."
   },
+  "محافظ بنك انجلترا: افاق السياسه النقديه تتسم بقدر كبير من عدم اليقين": {
+    "meaning": "High uncertainty in Bank of England monetary policy reflects shifting interest rate paths, directly affecting sovereign bond yields, currency valuations, and global cross-border capital flows.",
+    "meaning_ar": "يعكس عدم اليقين في السياسة النقدية لبنك إنجلترا تغير مسارات أسعار الفائدة، مما يؤثر مباشرة على عوائد السندات السيادية، وتقييمات العملات، وتدفقات رؤوس الأموال الدولية."
+  },
   "محافظه الاسكندريه تطرح استغلال 3 شواطي لمده 3 سنوات": {
     "meaning": "This public tender offers concession and operational rights for local beach facilities to commercial operators under a fixed three-year lease framework.",
     "meaning_ar": "يمثل هذا الطرح مزايدة عامة لمنح حقوق استغلال وتشغيل منشآت الشواطئ للشركات بموجب عقود إيجار محددة بمدة ثلاث سنوات."
@@ -7644,6 +7652,10 @@
   "نايب رييس القابضه للكهرباء: لا سحب لعدادات المغتربين.. ومنع الفواتير غير المصوره نهاييا": {
     "meaning": "The operational directive standardizes electricity billing governance by mandating photographic verification for meter readings and retaining inactive meters for expatriates, which establishes data verification controls within state utility revenue collection.",
     "meaning_ar": "يحدد هذا التوجيه التشغيلي آليات حوكمة تحصيل فواتير الكهرباء عبر إلزامية التوثيق المصور لقراءات العدادات مع الإبقاء على عدادات المغتربين، مما يرسخ ضوابط التحقق من البيانات ضمن منظومة تحصيل إيرادات المرافق العامة."
+  },
+  "نايب رييس الوزراء للشيون الاقتصاديه يتابع الاستعدادات لبدء تطبيق موازنه البرامج والاداء": {
+    "meaning": "Program and performance budgeting links public financial allocations directly to specific operational deliverables and strategic targets, replacing traditional line-item accounting across government entities.",
+    "meaning_ar": "تربط موازنة البرامج والأداء المخصصات المالية العامة مباشرةً بمخرجات تشغيلية ومستهدفات محددة، وذلك كبديل لنظام موازنة البنود التقليدي في الجهات الحكومية."
   },
   "نايب رييس الوزراء: نتطلع لزياده استثمارات الاوروبي لاعاده الاعمار في السوق المصريه": {
     "meaning": "Partnerships with multilateral development institutions like the EBRD inject direct foreign financing and long-term concessional lending into domestic infrastructure and private sector projects.",
