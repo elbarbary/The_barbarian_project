@@ -223,6 +223,10 @@
     "meaning": "An 83% acceptance rate of the targeted shares satisfies the execution condition of the mandatory tender offer, transferring effective controlling equity of the leasing company to the bank's balance sheet.",
     "meaning_ar": "يمثل استجابة 83% من الأسهم المستهدفة استيفاءً لشروط تنفيذ عرض الشراء الإجباري، مما ينقل حصة الأغلبية والسيطرة الفعلية على شركة التأجير التمويلي إلى القوائم المالية للبنك."
   },
+  "883 مليون جنيه توريقا جديدا ل”سهوله” بمشاركه “سي اي كابيتال” و”الاهلي فاروس”": {
+    "meaning": "This transaction converts 883 million Egyptian pounds of Souhoola's consumer finance loan portfolio into tradable, asset-backed debt securities arranged by CI Capital and Al Ahly Pharos, replacing illiquid receivables on its balance sheet with immediate cash liquidity.",
+    "meaning_ar": "تحول هذه العملية محفظة تمويل استهلاكي بقيمة 883 مليون جنيه تابعة لشركة «سهولة» إلى أوراق مالية ومديونية مدعومة بأصول وقابلة للتداول عبر مديري الإصدار «سي آي كابيتال» و«الأهلي فاروس»، مما يستبدل المستحقات الآجلة في ميزانيتها بسيولة نقدية فورية."
+  },
   "ABB تنفذ مشروعا للطاقه الشمسيه بقدره 3.3 ميجاوات في مصانعها بمصر": {
     "meaning": "Installing an on-site 3.3 MW solar power system integrates captive renewable generation into the company's manufacturing facilities, supplying electricity directly to industrial operations and substituting a portion of consumption from the national grid.",
     "meaning_ar": "يؤدي إنشاء محطة طاقة شمسية بقدرة 3.3 ميجاوات داخل المنشآت إلى دمج التوليد الذاتي للطاقة المتجددة في العمليات الصناعية للشركة، وتوفير الكهرباء ذاتياً ليحل محل جزء من الاستهلاك المسحوب من الشبكة القومية."
@@ -1354,6 +1358,10 @@
   "ارتفاع جماعي للموشرات بمستهل التعاملات.. والثلاثيني يصعد بنسبه 0.31%": {
     "meaning": "Initial trading shows a net inflow of liquidity across listed equities, leading to price gains in constituents across the main benchmark EGX 30 and broader market indices.",
     "meaning_ar": "تعكس بداية الجلسة تدفقات نقدية شرائية على الأسهم المقيدة، مما يؤدي إلى تحركات سعرية صاعدة في مكونات مؤشر إيجي إكس 30 والمؤشرات العامة للسوق."
+  },
+  "ارتفاع جماعي لموشرات البورصه بمستهل التعاملات": {
+    "meaning": "Broad-based upward movement across indices at the open reflects aggregate buy-order volumes exceeding sell orders across large, mid, and small-cap segments during the initial price-discovery phase.",
+    "meaning_ar": "يعكس الارتفاع الجماعي للمؤشرات مع بداية الجلسة تفوق حجم طلبات الشراء المفتوحة على عروض البيع عبر مختلف قطاعات الشركات الكبرى والمتوسطة والصغيرة خلال مرحلة التسعير الافتتاحية."
   },
   "ارتفاع جماعي.. كم سجل سعر الدينار الكويتي بختام تعاملات اليوم الثلاثاء 15-9-2026؟": {
     "meaning": "A collective increase in the Kuwaiti Dinar exchange rate against the Egyptian Pound across banks reflects higher interbank pricing, directly raising the local-currency cost of bilateral trade settlements and imports invoiced in KWD.",
@@ -6433,6 +6441,10 @@
     "meaning": "Elevated tanker freight rates widen the price spread required for US crude to remain competitive against Middle Eastern grades in Asian refining hubs, altering global maritime arbitrage flows.",
     "meaning_ar": "يؤدي ارتفاع تكاليف الشحن عبر الناقلات إلى توسيع الفارق السعري المطلوب للحفاظ على تنافسية الخام الأمريكي مقابل الخامات الشرق أوسطية في مصافي آسيا، مما يغير مسارات المراجحة البحرية العالمية."
   },
+  "كم سجل سعر الريال العماني اليوم الخميس 17-9-2026 بالتزامن مع رفع الفايده؟": {
+    "meaning": "Central bank interest rate decisions alter domestic carry trade yields and adjust the exchange pricing of foreign currencies, including the Omani Rial, against the Egyptian Pound across official banking channels.",
+    "meaning_ar": "تؤدي قرارات أسعار الفائدة الصادرة عن البنك المركزي إلى تعديل عوائد أدوات الدين وتغيير أسعار صرف العملات الأجنبية، بما فيها الريال العماني، أمام الجنيه المصري عبر القنوات المصرفية الرسمية."
+  },
   "كمال الدسوقي: القطاع الخاص حجر الزاويه في تنفيذ برنامج التحول الاقتصادي": {
     "meaning": "Economic transformation programs rely on private sector enterprises for capital expenditure, industrial production capacity, and employment allocation alongside state-led structural reforms.",
     "meaning_ar": "تعتمد برامج التحول الاقتصادي على شركات القطاع الخاص في الإنفاق الرأسمالي، وتوفير الطاقة الإنتاجية الصناعية، وتوزيع العمالة بالتوازي مع الإصلاحات الهيكلية الحكومية."
@@ -8104,6 +8116,10 @@
   "ڤاليو تطلق رسميا اول مرحله من اعمالها في الاردن": {
     "meaning": "This operational rollout establishes cross-border geographic expansion, deploying the company's consumer finance technology platform and merchant partner network into the Jordanian market.",
     "meaning_ar": "يمثل هذا الإطلاق توسعاً جغرافياً خارجياً للشركة عبر تفعيل منصتها التكنولوجية للتمويل الاستهلاكي وشبكة التجار التابعة لها داخل السوق الأردني."
+  },
+  "ڤودافون مصر تدمج حلول الذكاء الاصطناعي بمواقع شبكتها بمعالجات اريكسون": {
+    "meaning": "Vodafone Egypt deploys Ericsson processors to run artificial intelligence applications directly across its physical base stations and network infrastructure, representing a capital expenditure in telecom hardware and automated traffic management.",
+    "meaning_ar": "تدمج شركة ڤودافون مصر معالجات من شركة إريكسون لتشغيل تطبيقات الذكاء الاصطناعي عبر محطات وأبراج شبكتها، وهو ما يمثل إنفاقاً رأسمالياً على البنية التحتية لمعدات الاتصالات والإدارة الآلية للبيانات."
   },
   "​الرقابه الماليه تعتمد اضافه نشاط “بيع الطاقه الكهرباييه ل”فيركيم”": {
     "meaning": "Regulatory approval allows the company to amend its corporate purpose to include the commercial supply and distribution of electricity, formally integrating power generation and distribution into its authorized operating activities.",
