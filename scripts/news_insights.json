@@ -1983,6 +1983,10 @@
     "meaning": "Sanction threats by a sovereign state against offshore energy operations create jurisdictional and regulatory disputes that alter the operating and legal frameworks for concession holders.",
     "meaning_ar": "تؤدي التهديدات بفرض عقوبات سيادية على عمليات الطاقة البحرية إلى نشوء نزاعات تنظيمية وقانونية تغير الأطر التشغيلية لشركات الامتياز."
   },
+  "الارصاد الجويه تصدر تنويها هاما بشان حاله الطقس غدا الخميس": {
+    "meaning": "Official weather alerts establish operational baselines for outdoor-dependent sectors, including agricultural harvesting, maritime shipping schedules, and land transport logistics across Egyptian transport networks.",
+    "meaning_ar": "تحدد التنبيهات الجوية الرسمية أطر التشغيل للقطاعات المعتمدة على الظروف المناخية الخارجية، بما يشمل الحصاد الزراعي، ومواعيد الشحن البحري، والخدمات اللوجستية للنقل البري عبر شبكات النقل المصرية."
+  },
   "الاستثمار تعزز تمويل الشركات الناشيه وتدعم التوسع خارج السوق المصريه": {
     "meaning": "The Ministry of Investment provides capital channels and regulatory backing for early-stage ventures while establishing operational frameworks for cross-border expansion.",
     "meaning_ar": "توفر وزارة الاستثمار قنوات تمويلية وأطراً تنظيمية للشركات الناشئة مع إتاحة مسارات مؤسسية لنقل وتوسيع العمليات خارج الحدود المحلية."
@@ -4907,6 +4911,10 @@
   "دراسه: انخفاض اسعار الادويه في امريكا قد يطيل فترات انتظار المرضي الاوروبيين": {
     "meaning": "Pharmaceutical manufacturers allocate commercial launch timelines and supply volumes based on jurisdictional pricing tiers, where reductions in reference prices alter product distribution prioritization across regional markets.",
     "meaning_ar": "تحدد شركات صناعة الأدوية أولويات التوزيع وجداول الإطلاق التجاري بناءً على مستويات التسعير في الأسواق، حيث يؤدي خفض الأسعار المرجعية إلى إعادة ترتيب حصص التوريد بين المناطق الجغرافية."
+  },
+  "درجات الحراره غدا الخميس.. حراره شديده ورطوبه مرتفعه تصل بالاحساس ل4 درجات اضافيه": {
+    "meaning": "Elevated temperatures and humidity directly raise electrical grid loads from industrial and commercial cooling systems, altering utility operating cost structures and retail foot traffic patterns.",
+    "meaning_ar": "يؤدي ارتفاع درجات الحرارة ومستويات الرطوبة مباشرة إلى زيادة الأحمال التشغيلية على شبكة الكهرباء عبر نظم التبريد الصناعية والتجارية، ما يغير هيكل التكاليف التشغيلية للمرافق ونمط حركة المستهلكين داخل المتاجر."
   },
   "درجات الحراره غدا.. طقس حار ورطب علي اغلب الانحاء وشديد الحراره جنوبا": {
     "meaning": "Elevated temperatures drive electricity load requirements on the national power grid and operational cooling needs across industrial and agricultural facilities.",
