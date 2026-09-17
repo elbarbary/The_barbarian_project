@@ -74,15 +74,15 @@ The model cache key includes the pinned tokenizer revision. Publication
 validation now checks saved paths for positive finite values and agreement
 with every frozen endpoint return. Authentication and its gate are unchanged.
 
-No old forecasts, outcomes or Gemini scores were regenerated during this
+No stored forecasts, outcomes or Gemini scores were rewritten during this
 review. Full price-path fields appear only after the next newly sealed run.
 
 ## Verification
 
-- Full site suite: 840 tests passed before final copy/quote-timestamp polish;
-  focused post-polish suite: 91 passed.
-- Python suite: 293 tests run, 292 passed, one optional-dependency test skipped
-  under the system interpreter. Compilation, whitespace checks, existing
+- Full site suite on the refreshed branch: 840 tests passed;
+  focused checks after the final warning/price-card polish: 92 passed.
+- Python suite: all 293 passed using the isolated inference dependencies
+  (the optional tensor test also ran). Compilation, whitespace checks, existing
   publication validation and workflow YAML parsing passed.
 - Real CPU inference smoke test using pinned upstream Kronos/tokenizer on
   saved COMI, BTFH and BIOC candles through 15 September: all produced finite,

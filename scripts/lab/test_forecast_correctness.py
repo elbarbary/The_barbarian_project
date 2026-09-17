@@ -35,6 +35,8 @@ class ForecastCorrectness(unittest.TestCase):
     def test_incomplete_invalid_paths_abstain(self):
         for path in ([1] * 19, [1] * 19 + [float('nan')], [1] * 19 + [0], [1] * 19 + [-1]):
             self.assertIsInstance(neural.path_forecast('AAA', '2026-09-17', 'kronos', path, 1), fc.Abstention)
+        for basis in [0, -1, float('nan'), float('inf')]:
+            self.assertIsInstance(neural.path_forecast('AAA', '2026-09-17', 'kronos', [1] * 20, basis), fc.Abstention)
 
     def test_listing_effective_date(self):
         row = {'listing': {'status': 'delisted', 'market': 'OTC', 'delisted_on': '2026-09-01'}}

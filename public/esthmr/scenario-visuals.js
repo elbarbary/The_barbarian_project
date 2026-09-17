@@ -310,7 +310,10 @@ export function rankingCard(component, data, ctx, ar) {
     list.push(cell(r));
     // The line under the five the record follows, where the list is whole.
     if (!q && r.rank === lineAfter && shown[i + 1]) {
-      list.push(h('p', { key: 'cut', class: 'aix-rank-cut' }, passed.size
+      list.push(h('p', { key: 'cut', class: 'aix-rank-cut' }, ctx.venueExcluded
+        ? t('Current view excludes known OTC/delisted shares. Its first five may differ from the original five in the unchanged historical record below.',
+          'العرض الحالي يستبعد المشطوب وخارج المقصورة. أول خمس شركات هنا قد تختلف عن الخمس الأصلية في السجل التاريخي المحفوظ أدناه.')
+        : passed.size
         ? t(`Above the line: the five its record scored. ${listWords([...passed], false)} did not trade through ${n === 1 ? 'the session' : `the ${n} sessions`}, so the next one down took ${passed.size === 1 ? 'its place' : 'each place'}.`,
           `فوق الخط: الخمس التي قيّمها السجل. ${listWords([...passed], true)} لم تُتداول طوال المدة، فحلّت التالية محلّ كل منها.`)
         : t(`Above the line: the five its record follows — scored against the market ${scoredWhen}.`,
@@ -356,6 +359,10 @@ export function rankingCard(component, data, ctx, ar) {
     says.kind === 'return' ? h('p', { class: 'aix-note' },
       t(`Price outlook · ${words.model} · ${words.horizon}. Low, average and high describe its predicted daily closes in this window—not probability bounds or intraday extremes. A dash means the original run did not save that data. New quotes do not change a frozen forecast.`,
         `توقعات الأسعار · ${words.model} · ${words.horizon}. الأدنى والمتوسط والأعلى لإغلاقات النموذج اليومية خلال المدة، وليست حدود احتمال أو أسعاراً داخل الجلسة. الشرطة تعني أن التشغيل الأصلي لم يحفظ البيانات. الأسعار الجديدة لا تغيّر التوقع المحفوظ.`)) : null,
+    choice.model === 'kronos' && ctx.scenarios && !Object.values(ctx.scenarios.companies || {})
+      .some((c) => c.models?.kronos?.note?.includes('adapter v2')) ? h('p', { class: 'aix-note' },
+      t('Legacy Kronos run: future timestamps used a Monday–Friday calendar. Corrected runs use Sunday–Thursday; the original forecast is retained for an honest record. Future holiday coverage remains unverified.',
+        'تشغيل Kronos قديم: استُخدم تقويم الإثنين–الجمعة للتواريخ المستقبلية. التشغيل المصحح يستخدم الأحد–الخميس؛ نحفظ التوقع الأصلي لأمانة السجل. تغطية العطلات المستقبلية لم تُوثّق بعد.')) : null,
     rows.length ? h('div', { class: `aix-rank-head${choice.gemini ? ' is-gemini' : ''}`, 'aria-hidden': 'true' },
       h('span', null, '#'), h('span', null, t('Company', 'الشركة')), h('span', null, valueHead), h('span', null, extraHead)) : null,
     h('div', { class: `aix-rank-list${choice.gemini ? ' is-gemini' : ''}` }, list),

@@ -612,6 +612,8 @@ export function scenariosScreen(component, data, ar) {
     // closes with a long gap or a move no daily limit allows (`run.unreadable`).
     leftOut: new Set([...Object.keys(scenarios?.leftOut || {}),
       ...Object.keys(scenarios?.companies || {}).filter((ticker) => !eligibleTicker(ticker, data.companies))]).size,
+    venueExcluded: Object.values(scenarios?.leftOut || {}).some((why) => /OTC|delisted|unlisted/.test(String(why)))
+      || Object.keys(scenarios?.companies || {}).some((ticker) => listed(ticker) && !eligibleTicker(ticker, data.companies)),
     loading: !picks && !!st.extrasLoading,
     readingLoading: gemini && !reading && !!(st.scLoading && st.scLoading[key]),
     readingFailed: readingIssue

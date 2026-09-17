@@ -653,6 +653,30 @@ test('OTC names are hidden from raw and Gemini current rankings, even with old c
   }
 });
 
+test('price cards show dated current quotes, frozen targets and bilingual risk warnings', () => {
+  const d = structuredClone(data);
+  Object.assign(d.companies[0], {close: 12, quoteAsOf: '2026-09-17T10:00:00Z'});
+  d.scenarios.companies.AAA.models.kronos.pricePath = [10.1, 9.9, 10.2, 10.4, 10.3];
+  d.scenarios.companies.AAA.models.kronos.basisClose = 10;
+  d.scenarios.companies.AAA.models.kronos.note = 'adapter v2';
+  d.scenarios.companies.AAA.risk = {flags: ['financial recency unverified'],
+    flagsAr: ['حداثة القوائم غير موثّقة'], events: [{id: 291659, date: '2026-07-20'}]};
+  for (const layers of [[], GEMINI]) {
+    const c = component({scModel: 'kronos', scHorizon: 5, scLayers: layers});
+    for (const ar of [false, true]) {
+      const node = screen(c, d, ar);
+      const prices = byClass(node, 'aix-price-detail')[0];
+      assert.match(text(prices), /12\.00/);
+      assert.match(text(prices), /9\.90/);
+      assert.match(text(prices), /10\.40/);
+      assert.match(text(prices), /10\.20/); // Frozen 2% endpoint, not 2% of today's 12.
+      assert.match(text(prices), /2026-09-17T10:00:00Z/);
+      assert.match(text(node), /291659/);
+      assert.doesNotMatch(text(node), /undefined|NaN|Infinity/);
+    }
+  }
+});
+
 test('companies left tied share a place when movement is measured', () => {
   assert.deepEqual(standing({ A: 5, B: 5, C: 1 }), { A: 1.5, B: 1.5, C: 3 });
   assert.equal(spearman([[1, 1], [2, 2], [3, 3]]), 1);

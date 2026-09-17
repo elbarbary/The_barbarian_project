@@ -157,6 +157,8 @@ def future_sessions(basis, count, closures=()):
 
 
 def path_forecast(ticker, basis, model, path, last, note=""):
+    if not isinstance(last, (int, float)) or not math.isfinite(last) or last <= 0:
+        return fc.Abstention(ticker, basis, model, "invalid basis close")
     path = [float(value) for value in path]
     if len(path) < max(fc.HORIZONS) or not all(math.isfinite(v) and v > 0 for v in path):
         return fc.Abstention(ticker, basis, model, "incomplete or non-positive/non-finite price path")
