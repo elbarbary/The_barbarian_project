@@ -2643,6 +2643,10 @@
     "meaning": "The partnership provides technical assistance and institutional support from the European Bank for Reconstruction and Development to the Financial Regulatory Authority, updating the regulatory frameworks and governance standards governing non-banking financial institutions.",
     "meaning_ar": "توفر هذه الشراكة دعماً فنياً ومؤسسياً من البنك الأوروبي لإعادة الإعمار والتنمية للهيئة العامة للرقابة المالية، وتعمل على تحديث الأطر التنظيمية ومعايير الحوكمة المنظمة للأنشطة المالية غير المصرفية."
   },
+  "الرقابه الماليه تحظر تمويل المعادن الثمينه من شركات التمويل الاستهلاكي": {
+    "meaning": "The regulatory decision restricts consumer finance companies from offering credit facilities for the purchase of precious metals, confining transactions in these assets to cash or traditional bank financing channels.",
+    "meaning_ar": "يقصر القرار الرقابي تمويل شراء المعادن الثمينة على السيولة النقدية أو القنوات المصرفية التقليدية، عبر منع شركات التمويل الاستهلاكي من تقديم تسهيلات ائتمانية لشراء هذه الأصول."
+  },
   "الرقابه الماليه تخفف اشتراطات مراقبي حسابات الشركات المهنيه في مجال التامين": {
     "meaning": "The Financial Regulatory Authority lowers the eligibility criteria for professional accounting firms auditing insurance entities, which expands the registry of accredited statutory auditors serving the sector.",
     "meaning_ar": "تُخفّض الهيئة العامة للرقابة المالية معايير القيد لمكاتب المحاسبة والشركات المهنية المراجِعة للجهات التأمينية، مما يوسع قاعدة مراقبي الحسابات المعتمدين لمزاولة أعمال التدقيق في القطاع."
@@ -6681,6 +6685,10 @@
     "meaning": "Extending the regularization window allows undocumented foreign residents to obtain legal status against the payment of administrative fees in foreign currency deposited through the formal banking system.",
     "meaning_ar": "يتيح تمديد مهلة توفيق الأوضاع تقنين إقامة المقيمين بصورة غير شرعية مقابل سداد رسوم إدارية بالعملة الأجنبية عبر القنوات المصرفية الرسمية."
   },
+  "مدبولي يتابع استعدادات استضافه اجتماع المنتدي الاقتصادي العالمي في نوفمبر": {
+    "meaning": "Hosting the World Economic Forum special meeting convenes international policymakers, institutional investors, and corporate leaders directly in Egypt, establishing an operational platform for official bilateral discussions and the presentation of local infrastructure and private-sector investment pipelines.",
+    "meaning_ar": "توفر استضافة اجتماع المنتدى الاقتصادي العالمي منصة تشغيلية تجمع صانعي السياسات والمستثمرين الدوليين مباشرة في مصر، وتتيح إجراء مباحثات ثنائية رسمية وعرض مشاريع البنية التحتية والاستثمارات المتاحة."
+  },
   "مدبولي يتابع تكليفات الرييس بتخضير القاهره ويوجه بتشجير الطريق الدايري": {
     "meaning": "These state-directed urban greening and infrastructure directives involve public procurement allocations for landscaping, agricultural supplies, and municipal contracting services.",
     "meaning_ar": "تتضمن هذه التوجيهات الحكومية الخاصة بالتشجير وتطوير البنية التحتية تخصيصات للمشتريات العامة في مجالات تنسيق الحدائق، والتوريدات الزراعية، وخدمات المقاولات العامة."
@@ -8232,6 +8240,10 @@
   "“اودن” تشتري 2.8 مليون سهم *المصريين للاسكان”": {
     "meaning": "This transaction represents an equity stake acquisition that increases Odin's ownership and voting interest in Egyptians for Housing & Development, altering the firm's shareholder structure and reducing the volume of freely traded shares on the exchange.",
     "meaning_ar": "تعكس هذه العملية زيادة في حصة ملكية وحقوق تصويت شركة أودن داخل شركة المصريين للإسكان والتنمية، مما يغير هيكل المساهمين ويؤثر على نسبة الأسهم حرة التداول في البورصة."
+  },
+  "“اورا كوميونيكيشن” تنشي مركز تعهيد جديدا في القاهره": {
+    "meaning": "Establishing an outsourcing facility in Cairo adds physical service delivery infrastructure, utilizing local operational labor to provide business process services to clients.",
+    "meaning_ar": "يضيف إنشاء مركز تعهيد في القاهرة بنية تحتية تشغيلية لتقديم الخدمات، مستفيداً من العمالة المحلية لتنفيذ خدمات الأعمال للعملاء."
   },
   "“اي اف چي هيرميس” تتيح التحقق الرقمي للاجانب عبر جوازات السفر الالكترونيه": {
     "meaning": "EFG Hermes integrates digital biometric passport verification into its onboarding infrastructure, establishing a remote identity authentication mechanism for foreign investors without physical branch verification.",
