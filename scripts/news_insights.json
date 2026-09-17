@@ -795,6 +795,10 @@
     "meaning": "An application to list shares on the EGX initiates the regulatory review process with the Financial Regulatory Authority and the exchange to register the company's equity on the public market, transforming it into a publicly traded corporate entity.",
     "meaning_ar": "يمثل التقدم بطلب لقيد الأسهم في البورصة المصرية بدء إجراءات المراجعة التنظيمية مع الهيئة العامة للرقابة المالية وإدارة البورصة لتسجيل أسهم الشركة في السوق المفتوح، مما يحولها إلى كيان مساهم متداول علنًا."
   },
+  "nasr city free zone attracts 22 projects": {
+    "meaning": "Establishing 22 new projects in the Nasr City Free Zone allocates industrial and commercial space under special customs and tax regimes, expanding physical operations and export-oriented capacity.",
+    "meaning_ar": "تأسيس 22 مشروعاً جديداً في المنطقة الحرة بمدينة نصر يخصص مساحات صناعية وتجارية تعمل بنظم جمركية وضريبية خاصة، مما يوسع العمليات التشغيلية والطاقة الإنتاجية الموجهة للتصدير."
+  },
   "paytabs to acquire amazon payment services mena operations": {
     "meaning": "This acquisition consolidates digital payment processing infrastructure and merchant portfolios across the MENA region under a single fintech operator.",
     "meaning_ar": "تدمج عملية الاستحواذ هذه البنية التحتية لمعالجة المدفوعات الرقمية ومحافظ التجار في منطقة الشرق الأوسط وشمال أفريقيا تحت مظلة مشغل تكنولوجيا مالية واحد."
@@ -2383,6 +2387,10 @@
     "meaning": "An acceleration in UK inflation raises aggregate price levels and strengthens the operational case for central bank interest rate adjustments, directly affecting cross-border debt yields and sterling currency valuation.",
     "meaning_ar": "يؤدي تسارع التضخم في بريطانيا إلى ارتفاع المستوى العام للأسعار وتعزيز مبررات تعديل أسعار الفائدة من قبل البنك المركزي، مما يؤثر مباشرة على عوائد الديون العابرة للحدود وتقييم الجنيه الإسترليني."
   },
+  "التموين تستهدف تحويل 100 منفذ جمعيتي وبدال الي كاري اون قبل نهايه اكتوبر المقبل": {
+    "meaning": "This operational conversion integrates traditional subsidy distribution outlets into a modern mini-market retail model, shifting inventory management, store layout, and point-of-sale systems under the standardised 'Carry On' brand structure.",
+    "meaning_ar": "يمثل هذا التحول التشغيلي دمجاً لمنافذ صرف السلع التموينية التقليدية ضمن نموذج تجارة تجزئة حديث، مما يغير نظم إدارة المخزون، وتصميم الفروع، ونقاط البيع وفق الهوية الموحدة لعلامة 'كاري أون'."
+  },
   "التموين تطرح 12 صنفا باسعار مخفضه.. تصل الي 30 سلعه بنهايه الشهر الجاري": {
     "meaning": "The Ministry of Supply expands its discounted inventory across state-affiliated consumer complexes, distributing 12 basic commodities with scheduled additions reaching 30 items through public retail channels.",
     "meaning_ar": "تتوسع وزارة التموين في طرح السلع المخفضة عبر المجمعات الاستهلاكية التابعة لها، حيث تضخ 12 سلعة أساسية مع جدولة زيادتها إلى 30 سلعة عبر منافذ التوزيع الحكومية."
@@ -3738,6 +3746,10 @@
   "اين يباع ارخص كيلو لحمه في مصر؟": {
     "meaning": "State-run consumer complexes and government distribution outlets supply staple proteins, such as meat, below private retail market rates by utilizing direct public procurement channels and subsidized logistics networks.",
     "meaning_ar": "تعتمد المجمعات الاستهلاكية ومنافذ التوزيع الحكومية على التعاقدات المركزية وشبكات الإمداد العامة لطرح السلع الغذائية الأساسية، كإمدادات اللحوم، بأسعار تقل عن مستويات تجارة التجزئة في السوق الحرة."
+  },
+  "ايني الايطاليه تستثمر 500-400 مليون دولار لتنفيذ برنامج حفر استكشافي جديد بمصر": {
+    "meaning": "This direct capital expenditure allocates $400–$500 million from foreign corporate balance sheets directly into upstream exploration activities and rig operations within Egypt's energy sector.",
+    "meaning_ar": "يُمثّل هذا الإجراء تدفقاً استثمارياً رأسمالياً مباشراً يوجّه بين 400 و500 مليون دولار من الميزانية العمومية للشركة الإيطالية نحو أنشطة الحفر والاستكشاف وتشغيل منصات الاستخراج بقطاع الطاقة المصري."
   },
   "باتاغونيا الارجنتينيه تجذب استثمارات مراكز البيانات الضخمه بقدرات تصل الي 500 ميجاوات": {
     "meaning": "Hyperscale data center developments require substantial grid allocation, securing up to 500 megawatts of dedicated power infrastructure and digital hosting capacity in the region.",
@@ -5424,6 +5436,10 @@
     "meaning": "Official end-of-day Saudi Riyal exchange rates establish the baseline valuation for bilateral trade settlements, cross-border remittances, and corporate foreign currency balance sheet conversions within the banking sector.",
     "meaning_ar": "تحدد أسعار إغلاق الريال السعودي الرسمية القيمة المرجعية لتسوية المعاملات التجارية البينية، وتحويلات العاملين بالخارج، وإعادة تقييم مراكز العملات الأجنبية في القوائم المالية للبنوك والشركات."
   },
+  "سعر الريال السعودي في مصر اليوم الخميس 17/9/2026": {
+    "meaning": "The exchange rate of the Saudi Riyal reflects the official and banking clearing pricing against the Egyptian Pound, which directly determines transaction settlements for bilateral trade, religious tourism expenses, and worker remittance conversions between Egypt and Saudi Arabia.",
+    "meaning_ar": "يعكس سعر صرف الريال السعودي أسعار التسوية الرسمية والمصرفية مقابل الجنيه المصري، وهو ما يحدد تكلفة تسوية المعاملات التجارية البينية، ونفقات السياحة الدينية، وقيم تحويلات العاملين بين مصر والمملكة العربية السعودية."
+  },
   "سعر الريال السعودي في مصر اليوم السبت 12/9/2026": {
     "meaning": "Official and parallel market quotations for the Saudi Riyal against the Egyptian Pound establish the current operational clearing cost for bilateral trade, religious tourism expenditures, and worker remittance conversions between Egypt and Saudi Arabia.",
     "meaning_ar": "تحدد أسعار صرف الريال السعودي مقابل الجنيه المصري في السوقين الرسمية والموازية تكلفة التسوية المباشرة للتبادل التجاري، ونفقات السياحة الدينية، وتحويلات العاملين بين مصر والمملكة العربية السعودية."
@@ -6856,6 +6872,10 @@
   "مصادر حكوميه تكشف تكلفه تحويل فروع المجمعات الاستهلاكيه الي «كاري اون»": {
     "meaning": "This involves capital expenditure allocations by the state to renovate and rebrand traditional state-owned consumer cooperative outlets under a modern retail convenience model operated in partnership with the private sector.",
     "meaning_ar": "يتضمن هذا تخصيص نفقات رأسمالية حكومية لتطوير فروع المجمعات الاستهلاكية التابعة للدولة وإعادة هيكلتها تحت نموذج تجزئة حديث بالشراكة مع القطاع الخاص."
+  },
+  "مصادر: 1.5 مليار دولار حجم تعاملات سوق الانتربنك خلال 3 ايام": {
+    "meaning": "An interbank foreign exchange volume of $1.5 billion reflects direct currency trading and liquidity clearing between licensed domestic commercial banks without central bank intervention.",
+    "meaning_ar": "يعكس تسجيل حجم تعاملات بقيمة 1.5 مليار دولار في سوق الإنتربنك حركة التداول المباشر ومقاصة السيولة النقدية الأجنبية بين البنوك التجارية المحلية دون تدخل من البنك المركزي."
   },
   "مصادر: ارجاء مفاجي لمعرض سيتي سكيب مصر 2026 بسبب انخفاض المشاركه": {
     "meaning": "Postponing a major real estate exhibition suspends a centralized direct sales and marketing platform that brings developers and property buyers together for project launches.",
