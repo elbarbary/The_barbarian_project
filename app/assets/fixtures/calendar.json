@@ -153,7 +153,7 @@
    "date": "2026-07-05",
    "kind": "rights_close",
    "note": "Rights issue subscription closes",
-   "ticker": "ICMI",
+   "ticker": "FCMD",
    "title": "Future care for medical industries (FCMI) (ICMI.CA) - Rights Issue (SMEs Market)",
    "title_ar": "فيوتشر كير للصناعات الطبية (ICMI.CA) - حق اكتتاب (سوق الشركات الصغيرة والمتوسطة)",
    "filed": "2026-06-04",
@@ -187,6 +187,18 @@
   },
   {
    "date": "2026-07-08",
+   "kind": "rights_close",
+   "note": "Rights issue subscription closes",
+   "ticker": "FCMD",
+   "title": "Future care for medical industries (FCMI) (ICMI.CA) - Rights Issue",
+   "title_ar": "فيوتشر كير للصناعات الطبية (ICMI.CA) - حق اكتتاب",
+   "filed": "2026-06-10",
+   "section": "Corporate Actions",
+   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=289662",
+   "id": "egx-289662"
+  },
+  {
+   "date": "2026-07-08",
    "kind": "dividend_payment",
    "note": "Cash dividend payment",
    "ticker": "HDBK",
@@ -208,18 +220,6 @@
    "section": "Corporate Actions",
    "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=290293",
    "id": "egx-290293"
-  },
-  {
-   "date": "2026-07-08",
-   "kind": "rights_close",
-   "note": "Rights issue subscription closes",
-   "ticker": "ICMI",
-   "title": "Future care for medical industries (FCMI) (ICMI.CA) - Rights Issue",
-   "title_ar": "فيوتشر كير للصناعات الطبية (ICMI.CA) - حق اكتتاب",
-   "filed": "2026-06-10",
-   "section": "Corporate Actions",
-   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=289662",
-   "id": "egx-289662"
   },
   {
    "date": "2026-07-08",
@@ -5843,23 +5843,6 @@
    "observations": 9
   },
   {
-   "date": "2027-03-14",
-   "kind": "results_expected",
-   "note": "FY results usually filed around now",
-   "ticker": "MOED",
-   "title": "Egyptian Modern Education Systems — FY results expected",
-   "title_ar": "المصرية لنظم التعليم الحديثة ش م م — نتائج السنة المالية مرتقبة",
-   "filed": "",
-   "section": "Estimated",
-   "link": "",
-   "id": "due-MOED-FY-2026-12-31",
-   "estimated": true,
-   "period_end": "2026-12-31",
-   "window_start": "2027-01-27",
-   "window_end": "2027-07-12",
-   "observations": 12
-  },
-  {
    "date": "2027-03-15",
    "kind": "results_expected",
    "note": "FY results usually filed around now",
@@ -6028,6 +6011,23 @@
    "window_start": "2027-03-04",
    "window_end": "2027-06-03",
    "observations": 11
+  },
+  {
+   "date": "2027-03-18",
+   "kind": "results_expected",
+   "note": "FY results usually filed around now",
+   "ticker": "MOED",
+   "title": "Egyptian Modern Education Systems — FY results expected",
+   "title_ar": "المصرية لنظم التعليم الحديثة ش م م — نتائج السنة المالية مرتقبة",
+   "filed": "",
+   "section": "Estimated",
+   "link": "",
+   "id": "due-MOED-FY-2026-12-31",
+   "estimated": true,
+   "period_end": "2026-12-31",
+   "window_start": "2027-01-27",
+   "window_end": "2027-07-12",
+   "observations": 13
   },
   {
    "date": "2027-03-19",

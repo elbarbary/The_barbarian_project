@@ -1,4 +1,23 @@
 {
- "steps": {},
+ "steps": {
+  "Disclosures": {
+   "last": "exit 1",
+   "runs": 1,
+   "since": "2026-09-17T08:21:22+00:00",
+   "sinceRun": "35196717297"
+  },
+  "Filed documents": {
+   "last": "it had work to do and finished none of it",
+   "runs": 1,
+   "since": "2026-09-17T08:35:15+00:00",
+   "sinceRun": "35196717297"
+  },
+  "Named insiders": {
+   "last": "it had work to do and finished none of it",
+   "runs": 1,
+   "since": "2026-09-17T08:32:44+00:00",
+   "sinceRun": "35196717297"
+  }
+ },
  "stuckAfter": 6
 }
