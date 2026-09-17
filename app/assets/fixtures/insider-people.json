@@ -1,15 +1,15 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-17T06:52:19+00:00",
+ "generated": "2026-09-17T07:56:02+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1314,
- "tradeCount": 153,
+ "peopleCount": 1315,
+ "tradeCount": 159,
  "tickerCount": 241,
  "tradedTickerCount": 68,
  "firmCount": 437,
- "personCount": 877,
+ "personCount": 878,
  "aliasCount": 140,
  "registerCount": 240,
  "overDisclosed": [],
@@ -863,6 +863,57 @@
    ]
   },
   {
+   "id": "سي بي سي للاستشارات CPC Advisory",
+   "name": "سي بي سي للاستشارات CPC Advisory",
+   "nameEn": "CBC Advisory",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "CPME"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 0,
+   "soldCount": 2,
+   "value": 295428000.0,
+   "singleCompanyMove": {
+    "ticker": "CPME",
+    "from": 49.229,
+    "to": 44.7,
+    "change": -4.529
+   },
+   "trades": [
+    {
+     "filingId": "292009",
+     "date": "2026-07-27",
+     "ticker": "CPME",
+     "company": null,
+     "companyAr": "كاتليست بارتنرز ميديل ايست",
+     "action": "sell",
+     "shares": 6000000,
+     "price": 20.013,
+     "value": 120078000.00000001,
+     "stakeBefore": 49.229,
+     "stakeAfter": 47.311,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341737_1.PDF"
+    },
+    {
+     "filingId": "294065",
+     "date": "2026-08-30",
+     "ticker": "CPME",
+     "company": null,
+     "companyAr": "كاتليست بارتنرز ميديل ايست",
+     "action": "sell",
+     "shares": 5000000,
+     "price": 35.07,
+     "value": 175350000.0,
+     "stakeBefore": 46.35,
+     "stakeAfter": 44.7,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343612_1.PDF"
+    }
+   ]
+  },
+  {
    "id": "إيهاب شكري رياض",
    "name": "إيهاب شكري رياض",
    "nameEn": "Ihab Shokry Riad",
@@ -1188,6 +1239,43 @@
      "stakeBefore": 6.06,
      "stakeAfter": 3.46,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343740_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "شركه عبد القادر المهيدب واولاده",
+   "name": "شركه عبد القادر المهيدب واولاده",
+   "nameEn": "Sharikat Abd Al-Qadir Al-Muhaidib wa Awladuh",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "GDWA"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 156000000.0,
+   "singleCompanyMove": {
+    "ticker": "GDWA",
+    "from": 13.914,
+    "to": 10.178,
+    "change": -3.736
+   },
+   "trades": [
+    {
+     "filingId": "292007",
+     "date": "2026-07-27",
+     "ticker": "GDWA",
+     "company": null,
+     "companyAr": "جدوى للتنمية الصناعية",
+     "action": "sell",
+     "shares": 200000000,
+     "price": 0.78,
+     "value": 156000000.0,
+     "stakeBefore": 13.914,
+     "stakeAfter": 10.178,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341576_1.pdf"
     }
    ]
   },
@@ -1712,43 +1800,6 @@
    ]
   },
   {
-   "id": "سي بي سي للاستشارات CPC Advisory",
-   "name": "سي بي سي للاستشارات CPC Advisory",
-   "nameEn": "CBC Advisory",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": null,
-   "tickers": [
-    "CPME"
-   ],
-   "tradeCount": 1,
-   "boughtCount": 0,
-   "soldCount": 1,
-   "value": 175350000.0,
-   "singleCompanyMove": {
-    "ticker": "CPME",
-    "from": 46.35,
-    "to": 44.7,
-    "change": -1.65
-   },
-   "trades": [
-    {
-     "filingId": "294065",
-     "date": "2026-08-30",
-     "ticker": "CPME",
-     "company": null,
-     "companyAr": "كاتليست بارتنرز ميديل ايست",
-     "action": "sell",
-     "shares": 5000000,
-     "price": 35.07,
-     "value": 175350000.0,
-     "stakeBefore": 46.35,
-     "stakeAfter": 44.7,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343612_1.PDF"
-    }
-   ]
-  },
-  {
    "id": "هشام سليمان فهمي عبد اللطيف ابو حسين",
    "name": "هشام سليمان فهمي عبد اللطيف ابو حسين",
    "nameEn": "Hesham Soliman Fahmy Abdel Latif Abo Hussein",
@@ -1991,6 +2042,43 @@
      "stakeBefore": 9.04,
      "stakeAfter": 7.67,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343792_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "أسامة فوزي محمد بحير",
+   "name": "أسامة فوزي محمد بحير",
+   "nameEn": "Osama Fawzy Mohamed Behir",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "FIRE"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 1230616.74,
+   "singleCompanyMove": {
+    "ticker": "FIRE",
+    "from": 1.2649,
+    "to": 0.024168,
+    "change": -1.2407
+   },
+   "trades": [
+    {
+     "filingId": "292010",
+     "date": "2026-07-28",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 249618,
+     "price": 4.93,
+     "value": 1230616.74,
+     "stakeBefore": 1.2649,
+     "stakeAfter": 0.024168,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341739_1.pdf"
     }
    ]
   },
@@ -3607,6 +3695,218 @@
    ]
   },
   {
+   "id": "جمال عبد الفتاح عثمان حسن",
+   "name": "جمال عبد الفتاح عثمان حسن",
+   "nameEn": "Gamal Abd El Fattah Othman Hassan",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "جمال عبدالفتاح عثمان حسن"
+   ],
+   "tickers": [
+    "AIDC",
+    "AIH"
+   ],
+   "tradeCount": 7,
+   "boughtCount": 0,
+   "soldCount": 7,
+   "value": 363527174.81,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "292088",
+     "date": "2026-07-28",
+     "ticker": "AIDC",
+     "company": null,
+     "companyAr": "ارابيا للاستثمار والتنمية",
+     "action": "sell",
+     "shares": 68425000,
+     "price": 0.72,
+     "value": 49266000.0,
+     "stakeBefore": 28.26,
+     "stakeAfter": 23.871,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341813_1.pdf"
+    },
+    {
+     "filingId": "292089",
+     "date": "2026-07-28",
+     "ticker": "AIDC",
+     "company": null,
+     "companyAr": "ارابيا للاستثمار والتنمية",
+     "action": "sell",
+     "shares": 53657891,
+     "price": 0.753,
+     "value": 40404391.923,
+     "stakeBefore": 31.71,
+     "stakeAfter": 28.26,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341812_1.pdf"
+    },
+    {
+     "filingId": "292193",
+     "date": "2026-07-30",
+     "ticker": "AIDC",
+     "company": null,
+     "companyAr": "ارابيا للاستثمار والتنمية",
+     "action": "sell",
+     "shares": 82000000,
+     "price": 0.725,
+     "value": 59450000.0,
+     "stakeBefore": 23.871,
+     "stakeAfter": 18.61,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341884_1.pdf"
+    },
+    {
+     "filingId": "293716",
+     "date": "2026-08-23",
+     "ticker": "AIH",
+     "company": null,
+     "companyAr": "ارابيا انفستمنتس هولدنج",
+     "action": "sell",
+     "shares": 210000000,
+     "price": 0.531,
+     "value": 111510000.0,
+     "stakeBefore": 31.706,
+     "stakeAfter": 18.23,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343238_1.pdf"
+    },
+    {
+     "filingId": "293800",
+     "date": "2026-08-24",
+     "ticker": "AIH",
+     "company": null,
+     "companyAr": "ارابيا انفستمنتس هولدنج",
+     "action": "sell",
+     "shares": 49000000,
+     "price": 0.474,
+     "value": 23226000.0,
+     "stakeBefore": 18.23,
+     "stakeAfter": 15.08,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343312_1.pdf"
+    },
+    {
+     "filingId": "294145",
+     "date": "2026-08-31",
+     "ticker": "AIDC",
+     "company": null,
+     "companyAr": "ارابيا للاستثمار والتنمية",
+     "action": "sell",
+     "shares": 11490890,
+     "price": 0.801,
+     "value": 9204202.89,
+     "stakeBefore": 15.06,
+     "stakeAfter": 14.324,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343623_1.pdf"
+    },
+    {
+     "filingId": "294184",
+     "date": "2026-08-31",
+     "ticker": "AIH",
+     "company": null,
+     "companyAr": "ارابيا انفستمنتس هولدنج",
+     "action": "sell",
+     "shares": 116860000,
+     "price": 0.603,
+     "value": 70466580.0,
+     "stakeBefore": 15.08,
+     "stakeAfter": 7.59,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343680_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "الحصن للاستشارات",
+   "name": "الحصن للاستشارات",
+   "nameEn": "El Hosn Lilistisharat",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": [
+    "شركة الحصن للاستشارات",
+    "شركة الحصن للاستشارات (مجموعة مرتبطة )"
+   ],
+   "tickers": [
+    "ADPC",
+    "ELEC",
+    "UNIP"
+   ],
+   "tradeCount": 5,
+   "boughtCount": 0,
+   "soldCount": 5,
+   "value": 636869693.58,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "292092",
+     "date": "2026-07-28",
+     "ticker": "ADPC",
+     "company": null,
+     "companyAr": "العربية لمنتجات الألبان\" آراب ديرى - باندا\" (آراب ديري-باندا)",
+     "action": "sell",
+     "shares": 2000000,
+     "price": 4.027,
+     "value": 8054000.0,
+     "stakeBefore": 3.48,
+     "stakeAfter": 3.08,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341817_1.pdf"
+    },
+    {
+     "filingId": "292169",
+     "date": "2026-07-30",
+     "ticker": "ADPC",
+     "company": null,
+     "companyAr": "العربية لمنتجات الألبان\" آراب ديرى - باندا\" (آراب ديري-باندا)",
+     "action": "sell",
+     "shares": 600000,
+     "price": 4.121,
+     "value": 2472600.0000000005,
+     "stakeBefore": 3.08,
+     "stakeAfter": 2.96,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341883_1.pdf"
+    },
+    {
+     "filingId": "293339",
+     "date": "2026-08-16",
+     "ticker": "UNIP",
+     "company": null,
+     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
+     "action": "sell",
+     "shares": 68890000,
+     "price": 0.424,
+     "value": 29209360.0,
+     "stakeBefore": 3.01,
+     "stakeAfter": 0.003,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342886_1.pdf"
+    },
+    {
+     "filingId": "293499",
+     "date": "2026-08-18",
+     "ticker": "ELEC",
+     "company": null,
+     "companyAr": "الكابلات الكهربائية المصرية",
+     "action": "sell",
+     "shares": 275000000,
+     "price": 2.09,
+     "value": 574750000.0,
+     "stakeBefore": 19.86,
+     "stakeAfter": 11.561,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343069_1.pdf"
+    },
+    {
+     "filingId": "293596",
+     "date": "2026-08-19",
+     "ticker": "ADPC",
+     "company": null,
+     "companyAr": "العربية لمنتجات الألبان\" آراب ديرى - باندا\" (آراب ديري-باندا)",
+     "action": "sell",
+     "shares": 5149474,
+     "price": 4.3468,
+     "value": 22383733.5832,
+     "stakeBefore": 2.02,
+     "stakeAfter": 1.98,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343136_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "شركه اموال العربيه للاقطان ش م م",
    "name": "شركه اموال العربيه للاقطان ش م م",
    "nameEn": "Sharikat Amwal Al Arabiya Lil Aqtan S.M.M.",
@@ -3700,97 +4000,6 @@
      "stakeBefore": 3.99,
      "stakeAfter": 5.07,
      "source": "https://www.egx.com.eg/downloads/Bulletins/344280_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "جمال عبد الفتاح عثمان حسن",
-   "name": "جمال عبد الفتاح عثمان حسن",
-   "nameEn": "Gamal Abd El Fattah Othman Hassan",
-   "script": "ar",
-   "kind": "person",
-   "aliases": [
-    "جمال عبدالفتاح عثمان حسن"
-   ],
-   "tickers": [
-    "AIDC",
-    "AIH"
-   ],
-   "tradeCount": 5,
-   "boughtCount": 0,
-   "soldCount": 5,
-   "value": 273856782.89,
-   "singleCompanyMove": null,
-   "trades": [
-    {
-     "filingId": "292193",
-     "date": "2026-07-30",
-     "ticker": "AIDC",
-     "company": null,
-     "companyAr": "ارابيا للاستثمار والتنمية",
-     "action": "sell",
-     "shares": 82000000,
-     "price": 0.725,
-     "value": 59450000.0,
-     "stakeBefore": 23.871,
-     "stakeAfter": 18.61,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341884_1.pdf"
-    },
-    {
-     "filingId": "293716",
-     "date": "2026-08-23",
-     "ticker": "AIH",
-     "company": null,
-     "companyAr": "ارابيا انفستمنتس هولدنج",
-     "action": "sell",
-     "shares": 210000000,
-     "price": 0.531,
-     "value": 111510000.0,
-     "stakeBefore": 31.706,
-     "stakeAfter": 18.23,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343238_1.pdf"
-    },
-    {
-     "filingId": "293800",
-     "date": "2026-08-24",
-     "ticker": "AIH",
-     "company": null,
-     "companyAr": "ارابيا انفستمنتس هولدنج",
-     "action": "sell",
-     "shares": 49000000,
-     "price": 0.474,
-     "value": 23226000.0,
-     "stakeBefore": 18.23,
-     "stakeAfter": 15.08,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343312_1.pdf"
-    },
-    {
-     "filingId": "294145",
-     "date": "2026-08-31",
-     "ticker": "AIDC",
-     "company": null,
-     "companyAr": "ارابيا للاستثمار والتنمية",
-     "action": "sell",
-     "shares": 11490890,
-     "price": 0.801,
-     "value": 9204202.89,
-     "stakeBefore": 15.06,
-     "stakeAfter": 14.324,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343623_1.pdf"
-    },
-    {
-     "filingId": "294184",
-     "date": "2026-08-31",
-     "ticker": "AIH",
-     "company": null,
-     "companyAr": "ارابيا انفستمنتس هولدنج",
-     "action": "sell",
-     "shares": 116860000,
-     "price": 0.603,
-     "value": 70466580.0,
-     "stakeBefore": 15.08,
-     "stakeAfter": 7.59,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343680_1.pdf"
     }
    ]
   },
@@ -3960,85 +4169,6 @@
      "stakeBefore": 1.691,
      "stakeAfter": 0,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343711_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "الحصن للاستشارات",
-   "name": "الحصن للاستشارات",
-   "nameEn": "El Hosn Lilistisharat",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": [
-    "شركة الحصن للاستشارات",
-    "شركة الحصن للاستشارات (مجموعة مرتبطة )"
-   ],
-   "tickers": [
-    "ADPC",
-    "ELEC",
-    "UNIP"
-   ],
-   "tradeCount": 4,
-   "boughtCount": 0,
-   "soldCount": 4,
-   "value": 628815693.58,
-   "singleCompanyMove": null,
-   "trades": [
-    {
-     "filingId": "292169",
-     "date": "2026-07-30",
-     "ticker": "ADPC",
-     "company": null,
-     "companyAr": "العربية لمنتجات الألبان\" آراب ديرى - باندا\" (آراب ديري-باندا)",
-     "action": "sell",
-     "shares": 600000,
-     "price": 4.121,
-     "value": 2472600.0000000005,
-     "stakeBefore": 3.08,
-     "stakeAfter": 2.96,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341883_1.pdf"
-    },
-    {
-     "filingId": "293339",
-     "date": "2026-08-16",
-     "ticker": "UNIP",
-     "company": null,
-     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
-     "action": "sell",
-     "shares": 68890000,
-     "price": 0.424,
-     "value": 29209360.0,
-     "stakeBefore": 3.01,
-     "stakeAfter": 0.003,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342886_1.pdf"
-    },
-    {
-     "filingId": "293499",
-     "date": "2026-08-18",
-     "ticker": "ELEC",
-     "company": null,
-     "companyAr": "الكابلات الكهربائية المصرية",
-     "action": "sell",
-     "shares": 275000000,
-     "price": 2.09,
-     "value": 574750000.0,
-     "stakeBefore": 19.86,
-     "stakeAfter": 11.561,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343069_1.pdf"
-    },
-    {
-     "filingId": "293596",
-     "date": "2026-08-19",
-     "ticker": "ADPC",
-     "company": null,
-     "companyAr": "العربية لمنتجات الألبان\" آراب ديرى - باندا\" (آراب ديري-باندا)",
-     "action": "sell",
-     "shares": 5149474,
-     "price": 4.3468,
-     "value": 22383733.5832,
-     "stakeBefore": 2.02,
-     "stakeAfter": 1.98,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343136_1.pdf"
     }
    ]
   },
@@ -12669,21 +12799,6 @@
   {
    "id": "رموز للتنمية",
    "name": "رموز للتنمية",
-   "nameEn": null,
-   "script": null,
-   "kind": "firm",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "شركه عبد القادر المهيدب واولاده",
-   "name": "شركه عبد القادر المهيدب واولاده",
    "nameEn": null,
    "script": null,
    "kind": "firm",
@@ -24144,9 +24259,13 @@
    "basis": "trade",
    "filingId": "294065",
    "source": "https://www.egx.com.eg/downloads/Bulletins/343612_1.PDF",
-   "openedAt": "2026-08-30",
-   "openingPercent": 46.35,
+   "openedAt": "2026-07-27",
+   "openingPercent": 49.229,
    "history": [
+    {
+     "date": "2026-07-27",
+     "percent": 47.311
+    },
     {
      "date": "2026-08-30",
      "percent": 44.7
@@ -27465,9 +27584,17 @@
    "basis": "trade",
    "filingId": "294145",
    "source": "https://www.egx.com.eg/downloads/Bulletins/343623_1.pdf",
-   "openedAt": "2026-07-30",
-   "openingPercent": 23.871,
+   "openedAt": "2026-07-28",
+   "openingPercent": 28.26,
    "history": [
+    {
+     "date": "2026-07-28",
+     "percent": 23.871
+    },
+    {
+     "date": "2026-07-28",
+     "percent": 28.26
+    },
     {
      "date": "2026-07-30",
      "percent": 18.61
@@ -27705,20 +27832,6 @@
      "percent": 13.87
     }
    ]
-  },
-  {
-   "holder": "شركه عبد القادر المهيدب واولاده",
-   "kind": "firm",
-   "ticker": "GDWA",
-   "percent": 13.82,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291367",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/341056_1.pdf",
-   "shares": 744793750,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
   },
   {
    "holder": "دينا وجدى قلتة ميخائيل",
@@ -29139,6 +29252,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "شركه عبد القادر المهيدب واولاده",
+   "kind": "firm",
+   "ticker": "GDWA",
+   "percent": 10.178,
+   "asOf": "2026-07-27",
+   "basis": "trade",
+   "filingId": "292007",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341576_1.pdf",
+   "openedAt": "2026-07-27",
+   "openingPercent": 13.914,
+   "history": [
+    {
+     "date": "2026-07-27",
+     "percent": 10.178
+    }
+   ]
   },
   {
    "holder": "Taha Al-Telbany",
@@ -36952,9 +37083,13 @@
    "basis": "trade",
    "filingId": "293596",
    "source": "https://www.egx.com.eg/downloads/Bulletins/343136_1.pdf",
-   "openedAt": "2026-07-30",
-   "openingPercent": 3.08,
+   "openedAt": "2026-07-28",
+   "openingPercent": 3.48,
    "history": [
+    {
+     "date": "2026-07-28",
+     "percent": 3.08
+    },
     {
      "date": "2026-07-30",
      "percent": 2.96
@@ -43092,6 +43227,24 @@
    "history": []
   },
   {
+   "holder": "أسامة فوزي محمد بحير",
+   "kind": "person",
+   "ticker": "FIRE",
+   "percent": 0.024168,
+   "asOf": "2026-07-28",
+   "basis": "trade",
+   "filingId": "292010",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341739_1.pdf",
+   "openedAt": "2026-07-28",
+   "openingPercent": 1.2649,
+   "history": [
+    {
+     "date": "2026-07-28",
+     "percent": 0.024168
+    }
+   ]
+  },
+  {
    "holder": "صندوق التامين الاجتماعي للعاملين بالقطاع الحكومي حساب ٦",
    "kind": "firm",
    "ticker": "HRHO",
@@ -45572,20 +45725,30 @@
    "end": "2026-07-30",
    "label": "26–30 Jul",
    "labelAr": "26–30 يوليو",
-   "sessions": 2,
+   "sessions": 4,
    "buys": 5,
-   "sells": 7,
-   "value": 188254401.7,
+   "sells": 13,
+   "value": 563287410.37,
    "moves": [
     {
      "holder": "جمال عبد الفتاح عثمان حسن",
      "kind": "person",
      "ticker": "AIDC",
-     "from": 23.871,
+     "from": 28.26,
      "to": 18.61,
+     "trades": 3,
+     "value": 149120391.92,
+     "change": -9.65
+    },
+    {
+     "holder": "شركه عبد القادر المهيدب واولاده",
+     "kind": "firm",
+     "ticker": "GDWA",
+     "from": 13.914,
+     "to": 10.178,
      "trades": 1,
-     "value": 59450000.0,
-     "change": -5.261
+     "value": 156000000.0,
+     "change": -3.736
     },
     {
      "holder": "مي محمود حسن جاب الله",
@@ -45608,6 +45771,16 @@
      "change": -2.61
     },
     {
+     "holder": "سي بي سي للاستشارات CPC Advisory",
+     "kind": "firm",
+     "ticker": "CPME",
+     "from": 49.229,
+     "to": 47.311,
+     "trades": 1,
+     "value": 120078000.0,
+     "change": -1.918
+    },
+    {
      "holder": "محمد اشرف عمر عمر",
      "kind": "person",
      "ticker": "OBRI",
@@ -45616,6 +45789,16 @@
      "trades": 1,
      "value": 17697264.0,
      "change": -1.3
+    },
+    {
+     "holder": "أسامة فوزي محمد بحير",
+     "kind": "person",
+     "ticker": "FIRE",
+     "from": 1.2649,
+     "to": 0.024168,
+     "trades": 1,
+     "value": 1230616.74,
+     "change": -1.2407
     },
     {
      "holder": "وادي للاستشارات",
@@ -45648,6 +45831,16 @@
      "change": 0.825
     },
     {
+     "holder": "الحصن للاستشارات",
+     "kind": "firm",
+     "ticker": "ADPC",
+     "from": 3.48,
+     "to": 2.96,
+     "trades": 2,
+     "value": 10526600.0,
+     "change": -0.52
+    },
+    {
      "holder": "أسامة فوزي محمد سعيد",
      "kind": "person",
      "ticker": "FIRE",
@@ -45665,16 +45858,6 @@
      "to": 13.213,
      "trades": 1,
      "value": 1172040.0,
-     "change": -0.12
-    },
-    {
-     "holder": "الحصن للاستشارات",
-     "kind": "firm",
-     "ticker": "ADPC",
-     "from": 3.08,
-     "to": 2.96,
-     "trades": 1,
-     "value": 2472600.0,
      "change": -0.12
     },
     {

@@ -8,11 +8,11 @@
  "sector_ar": "خدمات مالية غير مصرفية",
  "market": {
   "last_close": 0.442,
-  "date": "2026-09-16",
-  "open": 0.44,
-  "high": 0.455,
+  "date": "2026-09-17",
+  "open": 0.442,
+  "high": 0.443,
   "low": 0.437,
-  "volume": 96336629
+  "volume": 4952674
  },
  "price_history": [
   {
@@ -717,8 +717,8 @@
   },
   {
    "date": "2026-03-15",
-   "close": 0.2366,
-   "volume": 15560253
+   "close": 0.2406,
+   "volume": 12870337
   },
   {
    "date": "2026-03-16",
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 3900000000,
   "free_float": 0.901744,
   "float_shares": 3516801600,
-  "perf_1w": -5.150214592274683,
-  "perf_1m": -18.148148148148152,
+  "perf_1w": 2.0785219399538124,
+  "perf_1m": -19.636363636363644,
   "perf_3m": 43.97394136807818,
-  "avg_volume_30d": 110029632.43333334,
-  "relative_volume_10d": 0.7142348402982366,
+  "avg_volume_30d": 109154001.56666666,
+  "relative_volume_10d": 0.035949571528426885,
   "median_volume_20d": 105750412,
   "rv20": 0.9109811222295758,
   "normal_value_30d": 40890593.7025,
@@ -1332,8 +1332,8 @@
   "history_bars": 120,
   "market_cap": 1723800000.0,
   "market_cap_source": "EGX",
-  "trades": 1039,
-  "turnover": 43008830
+  "trades": 112,
+  "turnover": 3059232
  },
  "financials": {
   "annual": [
