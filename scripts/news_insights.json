@@ -211,6 +211,10 @@
     "meaning": "Egypt Post expands its operational role as an administrative service provider by utilizing 500 branches to process data updates for suspended ration cards under the Ministry of Supply's subsidy verification framework.",
     "meaning_ar": "توسع الهيئة القومية للبريد دورها التشغيلي كمقدم للخدمات الإدارية الحكومية من خلال تخصيص 500 مكتب بريد لتحديث بيانات البطاقات التموينية المتوقفة ضمن منظومة التحقق من الدعم التابعة لوزارة التموين."
   },
+  "500 مليون دولار حجم استثمارات الشركات السنغافوريه في مصر": {
+    "meaning": "This figure represents the aggregate capital stock deployed by Singaporean corporate entities into physical assets, operating facilities, and equity holdings across the Egyptian market.",
+    "meaning_ar": "يمثل هذا الرقم إجمالي الرصيد التراكمي لرؤوس الأموال الموظفة من قبل الشركات السنغافورية في الأصول الرأسمالية والمنشآت التشغيلية وحصص الملكية داخل السوق المصري."
+  },
   "80 % من الاغذيه المعباه في الهند تحت التهديد": {
     "meaning": "Stricter food quality standards and regulatory compliance frameworks require widespread recipe reformulations, labeling adjustments, and operational changes across packaged food manufacturing supply chains.",
     "meaning_ar": "تتطلب الاشتراطات التنظيمية ومعايير سلامة الغذاء في السوق تعديل تركيبات المنتجات وتحديث ملصقات التعبئة والتغليف وإجراء مواءمات تشغيلية عبر سلاسل إمداد تصنيع الأغذية المعبأة."
@@ -2758,6 +2762,10 @@
   "الرقابه الماليه تمنح 4 شركات موافقات لمزاوله انشطه ماليه باستخدام التكنولوجيا": {
     "meaning": "Regulatory licensing enables four non-banking financial companies to deploy digital platforms and automated infrastructure to deliver financial services under the FRA's supervisory framework.",
     "meaning_ar": "يتيح هذا الترخيص الرقابي لأربع شركات تفعيل منصات رقمية وبنية تكنولوجية لتقديم الخدمات المالية غير المصرفية ضمن الإطار التنظيمي للهيئة العامة للرقابة المالية."
+  },
+  "الرقابه الماليه تمنح شركه افريكا مهله جديده للتقدم بعرض الاستحواذ علي ايجيترانس": {
+    "meaning": "A regulatory extension establishes an expanded administrative window for the prospective acquirer to finalize required due diligence, valuation, and formal filing procedures for a mandatory tender offer under Egyptian capital market rules.",
+    "meaning_ar": "يمنح التمديد الرقابي مهلة إدارية إضافية للطرف الراغب في الاستحواذ لاستكمال أعمال الفحص المالي والنافي للجهالة وإجراءات تقديم عرض الشراء الإجباري وفقاً لقواعد سوق المال المصرية."
   },
   "الرقابه الماليه توافق علي دعوه عموميه بنيان للنظر في زياده راس المال المصدر": {
     "meaning": "Regulatory approval allows the company to convene its general assembly to vote on expanding its issued capital base via new equity issuance or reserves capitalisation.",
@@ -5841,6 +5849,10 @@
     "meaning": "State-owned enterprises auction non-core land parcels to convert unutilised real estate assets into upfront corporate liquidity on their balance sheets.",
     "meaning_ar": "تطرح الشركات المملوكة للدولة قطع أراضٍ غير مستغلة في مزادات لتحويل الأصول العقارية الراكدة إلى سيولة نقدية مباشرة في ميزانياتها العمومية."
   },
+  "شركات سنغافوريه تتطلع لتعميق التعاون التجاري مع مصر وضخ استثمارات اضافيه": {
+    "meaning": "Foreign direct capital flows from Singapore introduce cross-border equity funding and commercial trade partnerships into the domestic market, expanding the capital base and operational capacities of targeted sectors.",
+    "meaning_ar": "تضخ تدفقات رأس المال الأجنبي المباشر من سنغافورة تمويلات ملكية وشراكات تجارية عبر الحدود داخل السوق المحلي، مما يوسع القاعدة الرأسمالية والقدرات التشغيلية للقطاعات المستهدفة."
+  },
   "شركتا اكس-برس فيدرز وتي اس لاينز تطلقان خدمات اقليميه جديده": {
     "meaning": "The launch adds maritime shipping routes and scheduled feeder vessel capacity across regional ports, expanding the operational transport network of both carriers.",
     "meaning_ar": "يضيف إطلاق هذه الخدمات مسارات ملاحية منتظمة وطاقة استيعابية لسفن التغذية عبر الموانئ الإقليمية، مما يوسع الشبكة التشغيلية للنقل البحري للشركتين."
@@ -7116,6 +7128,10 @@
   "مصر للطيران تعزز قدرات التدريب بمحاكي كامل الحركه Reality 7e و10 طايرات Cessna وشراكات اقليميه": {
     "meaning": "This capital expenditure adds fixed assets to EgyptAir's pilot training infrastructure via a Reality 7e full-flight simulator and a 10-aircraft Cessna fleet, establishing in-house commercial aviation training capabilities alongside regional service agreements.",
     "meaning_ar": "يمثل هذا الإنفاق الرأسمالي إضافة أصول ثابتة إلى البنية التحتية لتدريب الطيارين في مصر للطيران من خلال جهاز محاكاة كامل الحركة من طراز Reality 7e وأسطول مكون من 10 طائرات سيسنا، مما يتيح تقديم خدمات تدريب الطيران التجاري محلياً إلى جانب إبرام اتفاقيات شراكة إقليمية."
+  },
+  "مصر للفنادق تقرر توزيع كوبون علي المساهمين": {
+    "meaning": "A dividend coupon distribution pays out retained corporate earnings directly to shareholders on record, which reduces cash balances on the company's balance sheet and triggers a corresponding downward adjustment in the stock price on the ex-dividend date.",
+    "meaning_ar": "يمثل توزيع الكوبون النقدي صرفاً لجزء من الأرباح المحتجزة مباشرة للمساهمين المقيدين، مما يخفض الرصيد النقدي في الميزانية العمومية للشركة ويستتبع خصم قيمة الكوبون من سعر السهم السوقي في تاريخ تداوله بدون الحق."
   },
   "مصر و7 دول ترحب بقرار بريطانيا فرض قيود علي سلع وخدمات المستوطنات الاسراييليه": {
     "meaning": "The British trade restrictions enforce targeted customs screening and regulatory barriers on goods and services originating from specific geographic zones. This establishes distinct compliance, origin-verification, and documentation requirements for bilateral cross-border supply chains entering the UK market.",
