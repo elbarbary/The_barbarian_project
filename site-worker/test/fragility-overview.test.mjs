@@ -6,6 +6,13 @@
  * stance: 100% in Egyptian stocks" from a week-old snapshot. So these tests
  * hold the figures to the research's own documents, hold the words to the
  * rules every other screen keeps, and fail if a figure is typed in again.
+ *
+ * On 17 Sep 2026 the owner asked for what the rewrite had taken away: the
+ * model's current reading, and the notebook's tables and charts. The notebook
+ * is back in full below the account (fragility-notebook.*), and the Tools tab
+ * shows its reading again, from backtest/model_reading.json. The tests below
+ * hold both to the same rule: the research's own numbers, never a copy typed
+ * somewhere they cannot move with it.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -21,7 +28,14 @@ const attribution = JSON.parse(await read('public/esthmr/backtest/ladder_attribu
 const ledger = JSON.parse(await read('public/esthmr/backtest/executed_trades_history.json')).systems;
 const page = await read('public/esthmr/fragility.html');
 const pageScript = await read('public/esthmr/fragility-overview.js');
-const notebook = await read('public/esthmr/fragility-research.html');
+const notebookHtml = await read('public/esthmr/fragility-notebook.html');
+const notebookJs = await read('public/esthmr/fragility-notebook.js');
+const notebookCss = await read('public/esthmr/fragility-notebook.css');
+const notebook = notebookHtml + notebookJs;
+const oldAddress = await read('public/esthmr/fragility-research.html');
+const readingDoc = JSON.parse(await read('public/esthmr/backtest/model_reading.json'));
+const v5Series = JSON.parse(await read('public/esthmr/backtest/v5_simulation_series.json'));
+const v5Results = JSON.parse(await read('public/data/v1/backtest/v5_experiment_results.json'));
 const logic = await read('public/esthmr/logic.js');
 const template = await read('public/esthmr/template.html');
 
@@ -121,6 +135,64 @@ test('the latest reading is dated to the run it came from', () => {
   assert.equal(m.latest.date, m.last, 'the reading and the series end on the same session');
 });
 
+test('the model’s reading card carries the run’s last reading, whole', () => {
+  const live = seriesDoc.latest_live;
+  assert.deepEqual(m.latest, {
+    date: live.date, price: live.price, on: Boolean(live.al_v2), score: live.s_v4,
+    outside: live.wm_p, gold: live.gold_stress, oil: live.petrol_stress, swings: live.vol_stress,
+    vol20: live.vol20, brake: Boolean(live.vol_brake_active),
+    equity: live.active_equity_exposure, partial: live.dynamic_hedge_p,
+  });
+});
+
+test('the reading’s alert line and volatility brake are the notebook’s own', () => {
+  const line = fo.ALERT_LINE.toFixed(3);
+  assert.ok(notebookHtml.includes(`S<sub>v4</sub>[t] &ge; ${line} &amp;&amp; S<sub>v4</sub>[t&minus;1] &ge; ${line}`),
+    `the notebook states a different trigger from ${line}`);
+  assert.ok(notebookHtml.includes(`Re-entry Safe (&lt; ${fo.VOL_BRAKE}%)`), `the notebook states a different brake from ${fo.VOL_BRAKE}%`);
+});
+
+test('the app’s reading file is copied from the research files, not written down', () => {
+  const live = seriesDoc.latest_live;
+  const last = Object.fromEntries(v5Series.columns.map((name, i) => [name, v5Series.series.at(-1)[i]]));
+  const production = v5Results.v5_recommended_production;
+  assert.equal(last.date, live.date, 'the engine series and the reading end on the same session');
+  assert.deepEqual(readingDoc, {
+    schemaVersion: 1,
+    date: live.date,
+    egx30: live.price,
+    warning: Boolean(live.al_v2),
+    score: live.s_v4,
+    alertLine: fo.ALERT_LINE,
+    engineInternal: last.u_int,
+    engineExternal: last.u_ext,
+    stressGroups: last.stress_count,
+    stressGroupsOf: readingDoc.stressGroupsOf,
+    transmission: Boolean(last.has_trans),
+    outside: live.wm_p,
+    gold: live.gold_stress,
+    oil: live.petrol_stress,
+    swings: live.vol_stress,
+    vol20: live.vol20,
+    volBrakeActive: Boolean(live.vol_brake_active),
+    equityPercent: live.active_equity_exposure,
+    partialPercent: live.dynamic_hedge_p,
+    v5: {
+      model: v5Results.metadata.recommended_model_name,
+      years: v5Results.metadata.eval_years,
+      earlyHits: production.early,
+      crises: production.total_crises,
+      hardFalseAlarmsPerYear: production.hard_fa_yr,
+      occupancyPercent: production.occ,
+      precisionPercent: production.precision,
+      leadSessions: production.lead,
+      utility: production.utility,
+    },
+  }, 'model_reading.json is out of date: run python3 scripts/build_model_reading.py');
+  const counts = v5Series.series.map((row) => row[v5Series.columns.indexOf('stress_count')]);
+  assert.ok(Math.max(...counts) <= readingDoc.stressGroupsOf, 'more stress groups counted than the engine has');
+});
+
 /* ── words ──────────────────────────────────────────────────────────────── */
 
 test('both languages say the same things with the same blanks', () => {
@@ -145,6 +217,8 @@ test('nothing on the page tells a reader what to do', () => {
     }
   }
   for (const pattern of instruction) assert.ok(!pattern.test(page), `fragility.html: ${pattern}`);
+  // The notebook is on the same page now, so it keeps the same rule.
+  for (const pattern of instruction) assert.ok(!pattern.test(notebook), `the notebook: ${pattern}`);
   assert.match(fo.COPY.en.notAdvice, /not advice/);
   assert.match(fo.COPY.ar.notAdvice, /ليس نصيحة/);
 });
@@ -166,28 +240,101 @@ test('no figure from a research run is typed into the page', () => {
   }
 });
 
-test('the Tools tab opens the research and carries none of its figures', () => {
-  const block = logic.slice(logic.indexOf('fragilityData: {'), logic.indexOf('isToolsTabSim'));
-  assert.ok(block.length > 0);
-  for (const stale of ['liveScore', 'livePrice', 'recallMetric', 'hardFaMetric', 'occupancyMetric', 'leadMetric', 'utilityMetric', 'engineA']) {
-    assert.ok(!block.includes(stale), `fragilityData.${stale} is back`);
+test('the Tools tab shows the model’s reading from the published file, with nothing typed in', () => {
+  const block = logic.slice(logic.indexOf('fragilityData: (() => {'), logic.indexOf('isToolsTabSim'));
+  assert.ok(block.length > 0, 'the Tools tab’s data moved');
+  const tabStart = template.indexOf('TAB 4: CRASH WARNING RESEARCH');
+  const tab = template.slice(tabStart, template.indexOf('</section>', template.indexOf('fragilityData.researchOpenLabel')));
+  assert.ok(tabStart > 0 && tab.length > 0, 'the Tools tab’s markup moved');
+  assert.match(logic, /fetch\('backtest\/model_reading\.json'\)/);
+  // Every figure on the card is read off the loaded file…
+  for (const field of ['r.score', 'r.alertLine', 'r.egx30', 'r.engineInternal', 'r.engineExternal', 'r.stressGroups', 'r.stressGroupsOf',
+    'r.transmission', 'v5.earlyHits', 'v5.crises', 'v5.hardFalseAlarmsPerYear', 'v5.occupancyPercent', 'v5.leadSessions',
+    'v5.precisionPercent', 'v5.utility', 'v5.years']) {
+    assert.ok(block.includes(field), `the Tools tab no longer reads ${field}`);
   }
-  assert.ok(!/\d+\.\d+|\d+ ?%/.test(block.replace(/100,000|2008|2026/g, '')), 'a typed figure in the Tools tab');
-  assert.ok(!/fragilityData\.(live|engine|recall|stress)/.test(template), 'the template still reads a typed figure');
+  for (const binding of ['score', 'engineA', 'engineB', 'stressGroups', 'transmission', 'recall', 'hardFa', 'occupancy', 'lead', 'precision', 'utility']) {
+    assert.ok(tab.includes(`{{ fragilityData.${binding} }}`), `the Tools tab no longer shows ${binding}`);
+  }
+  // …and none is typed, in the data or the markup. These are the 9 Sep run's
+  // own figures as the card prints them, which is how they were typed before.
+  for (const literal of ['0.45', '0.4528', '0.2505', '56,280', '15 / 17', '88.2', '11.49', '52.9', '16.0', '76.55', '0.93', '0.92', '1 / 7']) {
+    assert.ok(!block.includes(literal), `logic.js types ${literal} into the Tools tab`);
+    assert.ok(!tab.includes(literal), `template.html types ${literal} into the Tools tab`);
+  }
   assert.match(block, /openFullHref: 'fragility'/);
+  assert.match(block, /researchHref: 'fragility#research'/);
 });
 
-test('the research notebook no longer gives a stance or calls a snapshot live', () => {
+test('the research notebook gives no stance and calls no snapshot live', () => {
   for (const phrase of ['Recommended Stance', 'Capture Upside', 'Real-time tape', 'zero reason to panic', "shouldn't I just sell"]) {
-    assert.ok(!notebook.includes(phrase), `fragility-research.html still says "${phrase}"`);
+    assert.ok(!notebook.includes(phrase), `the notebook still says "${phrase}"`);
   }
-  assert.match(notebook, /href="fragility"/, 'the notebook points readers to the plain account');
+});
+
+/* ── the full research, on the same page ────────────────────────────────── */
+
+test('the full research sits below the account, outside what re-renders', () => {
+  const rootAt = page.indexOf('<div id="fo-root">');
+  const researchAt = page.indexOf('<section id="research"');
+  const endAt = page.indexOf('<div id="fo-end">');
+  assert.ok(rootAt >= 0 && researchAt > rootAt && endAt > researchAt, 'the account, then the research, then the sources');
+  assert.match(page.slice(researchAt, page.indexOf('>', researchAt)), /class="fe-notebook" data-theme="light"/);
+  assert.ok(page.includes('<link rel="stylesheet" href="./fragility-notebook.css">'));
+  assert.ok(page.includes('mount(root, { series, episodes, attribution }, { lang, end });'), 'the account renders into #fo-root and #fo-end');
+  const loader = page.slice(page.indexOf('async function loadResearch'));
+  const inserted = loader.indexOf('research.innerHTML = await response.text();');
+  const scripted = loader.indexOf("script.src = 'fragility-notebook.js';");
+  assert.ok(loader.includes("fetch('fragility-notebook.html')"));
+  assert.ok(inserted > 0 && scripted > inserted, 'the notebook’s script looks its elements up as it runs, so it must come after them');
+});
+
+test('every element the notebook’s script looks for is in its markup', () => {
+  const wanted = new Set([...notebookJs.matchAll(/getElementById\(\s*['"]([\w-]+)['"]\s*\)/g)].map((x) => x[1]));
+  const present = new Set([...notebookHtml.matchAll(/\bid="([\w-]+)"/g)].map((x) => x[1]));
+  assert.ok(wanted.size > 100, `only ${wanted.size} ids: the script was cut short`);
+  // Three gauges the notebook had stopped drawing before 16 Sep 2026. Its
+  // script checks for each one before it writes to it.
+  const retired = ['liveCatComm', 'liveCatRisk', 'liveEngineB'];
+  assert.deepEqual([...wanted].filter((id) => !present.has(id)).sort(), retired);
+});
+
+test('opening the quantitative view draws the timeline it was hiding', () => {
+  // The timeline sizes itself to its box, which is 0 by 0 while this view is
+  // hidden, and redraws only on a resize.
+  const setMode = notebookJs.slice(notebookJs.indexOf('function setPageMode'), notebookJs.indexOf('window.setPageMode'));
+  const quant = setMode.slice(setMode.indexOf("if (mode === 'quant')"), setMode.indexOf('} else {'));
+  assert.ok(quant.includes("window.dispatchEvent(new Event('resize'))"), 'the quantitative view opens with a blank timeline');
+  assert.match(notebookJs, /window\.addEventListener\('resize', \(\) => drawTimeline\(\)\)/);
+});
+
+test('the notebook’s styles stop at the notebook', () => {
+  const css = notebookCss.replace(/\/\*[\s\S]*?\*\//g, '');
+  const selectors = [...css.matchAll(/([^{}@;]+)\{/g)]
+    .flatMap((x) => x[1].split(','))
+    .map((s) => s.trim())
+    .filter((s) => s && !/^(from|to|\d+%)$/.test(s) && !/^(media|keyframes|supports)\b/.test(s));
+  const loose = selectors.filter((s) => !/^([.#]|body\.mode-)/.test(s));
+  assert.deepEqual(loose, [], 'a rule here would restyle the account above the notebook');
+  assert.ok(!/(^|[\s,}]):root\b/.test(css), 'the notebook’s colours must resolve inside its light section, not at :root');
+});
+
+test('every jump from the account lands on a section of the notebook', () => {
+  const targets = [...pageScript.matchAll(/(?:jump\(|href: )'#([\w-]+)'/g)].map((x) => x[1]);
+  assert.ok(targets.length >= 7, `only ${targets.length} jumps found`);
+  for (const id of targets) assert.ok(notebookHtml.includes(`id="${id}"`), `#${id} is not in the notebook`);
+});
+
+test('the old notebook address forwards to the research on the page', () => {
+  assert.ok(oldAddress.includes('<meta http-equiv="refresh" content="0; url=fragility#research">'));
+  assert.ok(oldAddress.includes("location.replace('fragility#research')"));
+  assert.ok(oldAddress.length < 2000, 'the notebook is being kept in two places again');
 });
 
 test('the public copies of the research files are the published ones', async () => {
   // /data/v1/ is behind sign-in, so the page reads these; a rerun that
   // refreshes one and not the other would publish two different researches.
-  for (const name of ['world_monitor_simulation_series.json', 'executed_trades_history.json', 'ladder_attribution_matrix.json', 'c_v2_alert_episodes.json']) {
+  for (const name of ['world_monitor_simulation_series.json', 'executed_trades_history.json', 'ladder_attribution_matrix.json', 'c_v2_alert_episodes.json', 'v5_simulation_series.json']) {
     assert.equal(await read(`public/esthmr/backtest/${name}`), await read(`public/data/v1/backtest/${name}`), name);
   }
 });

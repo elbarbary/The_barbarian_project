@@ -35,6 +35,34 @@ function simulatorWhenReady(redraw) {
   }
   return null;
 }
+
+/* The crash-warning model's last reading, fetched when its Tools tab opens.
+ *
+ * The tab's figures were typed into this file on 9 Sep 2026 and could not
+ * move with the research, so on 16 Sep the card went; on 17 Sep it was asked
+ * for back. They now come from backtest/model_reading.json, which
+ * scripts/build_model_reading.py copies out of the published research files.
+ * Loaded the simulator's way: once, and again on the next render after a
+ * failure.
+ */
+let fragilityReading = null;
+let fragilityReadingPending = null;
+let fragilityReadingFailed = false;
+
+function fragilityReadingWhenReady(redraw) {
+  if (fragilityReading) return fragilityReading;
+  if (!fragilityReadingPending) {
+    fragilityReadingFailed = false;
+    fragilityReadingPending = fetch('backtest/model_reading.json')
+      .then((response) => {
+        if (!response.ok) throw new Error(`model_reading.json answered ${response.status}`);
+        return response.json();
+      })
+      .then((doc) => { fragilityReading = doc; redraw(); })
+      .catch(() => { fragilityReadingPending = null; fragilityReadingFailed = true; redraw(); });
+  }
+  return null;
+}
 /* The screens, ported from the Claude Design canvas.
  *
  * Everything below `class Component` is the design's own logic, carried over
@@ -4001,6 +4029,9 @@ export class Component extends Base {
       : { L: {} };
     const simPending = wantsSim && !simModule && !simulatorFailed;
     const simUnavailable = wantsSim && simulatorFailed;
+    // And the crash-warning reading, only when its tab is the one open.
+    const wantsReading = wantsSim && st.toolsTab === 'fragility';
+    const reading = wantsReading ? fragilityReadingWhenReady(() => this.setState({})) : null;
     const storyPeriod = st.storyPeriod || 'week';
     const storyKind = st.screen === 'calendar' ? 'filing' : (st.storyKind || 'all');
     const story = marketStory(D, {period:storyPeriod,kind:storyKind,lang:st.lang,
@@ -4618,21 +4649,73 @@ export class Component extends Base {
       showToolsCalc: st.toolsTab === 'calc',
       showToolsGuide: st.toolsTab === 'guide',
       showToolsFragility: st.toolsTab === 'fragility',
-      fragilityData: {
-        eyebrow: ar ? 'بحث · مؤشر EGX 30 من 2008 إلى 2026' : 'Research · EGX 30, 2008 to 2026',
-        title: ar ? 'هل كان إنذار مبكر سيخفّف أسوأ انهيارات البورصة؟' : 'Could an early warning have softened the EGX’s worst crashes?',
-        subtitle: ar
-          ? 'قاعدة واحدة اختُبرت على كل يوم تداول: عند الإنذار تنتقل الأموال إلى أذون الخزانة، ولا تعود إلى المؤشر إلا بعد أن يتحسّن الاتجاه.'
-          : 'One rule tested on every trading day: when the warning switches on the money moves into Treasury bills, and returns to the index only once the trend turns.',
-        points: [
-          { title: ar ? 'ماذا أصبحت 100,000 جنيه' : 'What 100,000 EGP became', body: ar ? 'بالقاعدة وبالاحتفاظ بالمؤشر، بعد خصم العمولات.' : 'With the rule and holding the index, after fees.' },
-          { title: ar ? 'أين ساعدت وأين أضرّت' : 'Where it helped, and where it hurt', body: ar ? 'سنوات الانهيار، والصعود الهادئ، والصدمات.' : 'The crash years, the calm rise and the shocks.' },
-          { title: ar ? 'كل إنذار وكل انهيار' : 'Every warning and every crash', body: ar ? 'بما فيها الإنذارات الكاذبة والانهيارات التي تراجعت فيها القاعدة أكثر.' : 'False alarms included, and the crashes where the rule fell further.' },
-        ],
-        note: ar ? 'اختبار على أسعار سابقة، وليس نصيحة استثمارية.' : 'A test on past prices, not advice.',
-        openFullLabel: ar ? 'افتح البحث' : 'Open the research',
-        openFullHref: 'fragility'
-      },
+      // Every figure below is formatted from `reading`, the published
+      // backtest/model_reading.json, and none is typed here.
+      fragilityData: (() => {
+        const r = reading;
+        const v5 = (r && r.v5) || {};
+        const fixed = (value, digits) => (Number.isFinite(value) ? value.toFixed(digits) : '—');
+        const signed = (value, digits) => (Number.isFinite(value) ? `${value < 0 ? '−' : '+'}${Math.abs(value).toFixed(digits)}` : '—');
+        const on = Boolean(r && r.warning);
+        const date = r ? new Date(`${r.date}T00:00:00Z`).toLocaleDateString(ar ? 'ar-EG-u-nu-latn' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }) : '';
+        const price = r ? Number(r.egx30).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '';
+        const years = r ? Math.floor(v5.years) : '';
+        return {
+          eyebrow: ar ? 'بحث · مؤشر EGX 30 من 2008 إلى 2026' : 'Research · EGX 30, 2008 to 2026',
+          title: ar ? 'هل كان إنذار مبكر سيخفّف أسوأ انهيارات البورصة؟' : 'Could an early warning have softened the EGX’s worst crashes?',
+          subtitle: ar
+            ? 'قاعدة واحدة اختُبرت على كل يوم تداول: عند الإنذار تنتقل الأموال إلى أذون الخزانة، ولا تعود إلى المؤشر إلا بعد أن يتحسّن الاتجاه.'
+            : 'One rule tested on every trading day: when the warning switches on the money moves into Treasury bills, and returns to the index only once the trend turns.',
+          note: ar ? 'اختبار على أسعار سابقة، وليس نصيحة استثمارية. القراءة من آخر تشغيل للبحث ولا تُحدَّث يوميًا.' : 'A test on past prices, not advice. The reading is from the last research run and does not update daily.',
+          openFullLabel: ar ? 'افتح البحث' : 'Open the research',
+          openFullHref: 'fragility',
+          readingReady: Boolean(r),
+          readingPending: wantsReading && !r && !fragilityReadingFailed,
+          readingUnavailable: wantsReading && !r && fragilityReadingFailed,
+          pendingLabel: ar ? 'جارٍ تحميل قراءة النموذج…' : 'Loading the model’s reading…',
+          unavailableLabel: ar ? 'تعذّر تحميل قراءة النموذج. افتح التبويب مرة أخرى للمحاولة.' : 'The model’s reading did not load. Open the tab again to try again.',
+          readingTitle: ar ? `قراءة النموذج في آخر تشغيل · ${date}` : `The model’s reading at the last run · ${date}`,
+          statusLabel: on ? (ar ? 'الإنذار قائم' : 'Warning on') : (ar ? 'لا يوجد إنذار' : 'No warning'),
+          statusFg: on ? 'var(--down)' : 'var(--up)',
+          statusBg: on ? 'var(--downTint)' : 'var(--upTint)',
+          score: r ? fixed(r.score, 2) : '',
+          scoreLabel: ar ? 'الضغط داخل البورصة، من 0 إلى 1' : 'Stress inside the EGX, from 0 to 1',
+          scoreNote: r
+            ? (ar ? `EGX 30 عند ${price} · يعمل الإنذار عند ${fixed(r.alertLine, 2)} أو أعلى في جلستين متتاليتين` : `EGX 30 at ${price} · the warning switches on at ${fixed(r.alertLine, 2)} or higher on two sessions in a row`)
+            : '',
+          engineALabel: ar ? 'المحرّك الداخلي' : 'Engine A (inside)',
+          engineA: r ? fixed(r.engineInternal, 4) : '',
+          engineBLabel: ar ? 'المحرّك الخارجي' : 'Engine B (outside)',
+          engineB: r ? fixed(r.engineExternal, 4) : '',
+          stressLabel: ar ? 'مجموعات الضغط' : 'Stress groups',
+          stressGroups: r ? `${r.stressGroups} / ${r.stressGroupsOf}` : '',
+          transmissionLabel: ar ? 'انتقال العدوى' : 'Transmission',
+          transmission: r ? (r.transmission ? (ar ? 'نشط ومراقَب' : 'Active (guarded)') : (ar ? 'غير نشط' : 'Inactive')) : '',
+          testTitle: ar ? `محرّك V5 · اختبار ${years} سنة` : `V5 engine · ${years}-year test`,
+          recallLabel: ar ? 'إنذارات مبكرة' : 'Strict early recall',
+          recall: r ? `${v5.earlyHits} / ${v5.crises} (${fixed((v5.earlyHits / v5.crises) * 100, 1)}%)` : '',
+          recallNote: ar ? 'قبل بداية الانهيار بين 25 و5 جلسات' : '25 to 5 sessions before the onset',
+          hardFaLabel: ar ? 'إنذارات كاذبة صريحة' : 'Hard false alarms',
+          hardFa: r ? (ar ? `${fixed(v5.hardFalseAlarmsPerYear, 2)} في السنة` : `${fixed(v5.hardFalseAlarmsPerYear, 2)} / yr`) : '',
+          hardFaNote: ar ? 'إنذار لم يتبعه هبوط' : 'A warning with no fall after it',
+          occupancyLabel: ar ? 'الوقت تحت الإنذار' : 'Warning occupancy',
+          occupancy: r ? `${fixed(v5.occupancyPercent, 2)}%` : '',
+          occupancyNote: ar ? 'من كل جلسات التداول' : 'Of all sessions',
+          leadLabel: ar ? 'متوسط الإنذار المسبق' : 'Median warning lead',
+          lead: r ? (ar ? `${fixed(v5.leadSessions, 1)} جلسة` : `${fixed(v5.leadSessions, 1)} sessions`) : '',
+          leadNote: ar ? 'قبل بداية الانهيار' : 'Before the crash began',
+          precisionLabel: ar ? 'الدقة' : 'Precision',
+          precision: r ? `${fixed(v5.precisionPercent, 1)}%` : '',
+          utilityLabel: ar ? 'المنفعة الصافية' : 'Net utility',
+          utility: r ? signed(v5.utility, 2) : '',
+          researchLabel: ar ? 'كل الجداول والرسوم والمحاكي التفاعلي' : 'Every table, chart and the interactive simulator',
+          researchBody: ar
+            ? 'نتائج كل طريقة، ومختبر السيناريوهات، وسجل الصفقات، وتشريح الإنذارات الكاذبة، وكل أزمة على حدة.'
+            : 'Results for every approach, the scenario lab, the trades ledger, the false-alarm autopsy and every crisis on its own.',
+          researchOpenLabel: ar ? 'افتح البحث الكامل ↗' : 'Open the full research ↗',
+          researchHref: 'fragility#research',
+        };
+      })(),
       isToolsTabSim: (st.toolsTab || 'sim') === 'sim',
       isToolsTabCalc: st.toolsTab === 'calc',
       isToolsTabGuide: st.toolsTab === 'guide',

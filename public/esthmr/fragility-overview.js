@@ -1,6 +1,7 @@
 /* The crash-warning research, told so a reader can follow it.
  *
- * The research notebook (fragility-research.html) is the lab: seven models,
+ * The research notebook (fragility-notebook.html, shown in full below this
+ * account on the same page since 17 Sep 2026) is the lab: seven models,
  * three annualisation conventions and tables from more than one rerun, side by
  * side. Read as a page it contradicted itself — one yearly rate for a strategy
  * in one box and another in the next, a strategy that "WON" the 2015–2019 rise
@@ -22,6 +23,12 @@
  *
  * And nothing here tells a reader what to do. The latest reading is dated to
  * the research run it came from and labelled as not a signal.
+ *
+ * That reading has its own card near the top: the score, the outside
+ * pressure, the volatility and where each approach stood on the last session
+ * of the run. All of it comes from the series' `latest_live`. The page lost
+ * it on 16 Sep 2026 along with the notebook's tables, and the owner asked for
+ * both back the next day.
  */
 
 export const SYSTEMS = {
@@ -42,6 +49,12 @@ export const KINDS = {
 export const KIND_ORDER = ['early', 'during', 'false', 'smaller'];
 export const CRASH_WINDOW = 60;
 export const START_CAPITAL = 100000;
+// The rule's own settings, as the notebook states them. The warning switches
+// on when the score is at or above ALERT_LINE on two sessions in a row. The
+// volatility-brake variant does not buy back while 20-day volatility is
+// above VOL_BRAKE percent.
+export const ALERT_LINE = 0.93;
+export const VOL_BRAKE = 28;
 
 const DAY = 86400000;
 export const years = (from, to) => (Date.parse(to) - Date.parse(from)) / DAY / 365.25;
@@ -203,7 +216,20 @@ export function model(seriesDoc, episodes, attribution) {
     tax: audit?.gross_1y_tbill && audit?.taxed_20pct_tbill
       ? { gross: audit.gross_1y_tbill.wealth_100k, taxed: audit.taxed_20pct_tbill.wealth_100k }
       : null,
-    latest: latest && latest.date ? { date: latest.date, price: latest.price, on: Boolean(latest.al_v2) } : null,
+    latest: latest && latest.date ? {
+      date: latest.date,
+      price: latest.price,
+      on: Boolean(latest.al_v2),
+      score: latest.s_v4,
+      outside: latest.wm_p,
+      gold: latest.gold_stress,
+      oil: latest.petrol_stress,
+      swings: latest.vol_stress,
+      vol20: latest.vol20,
+      brake: Boolean(latest.vol_brake_active),
+      equity: latest.active_equity_exposure,
+      partial: latest.dynamic_hedge_p,
+    } : null,
   };
 }
 
@@ -271,7 +297,7 @@ export const COPY = {
     back: 'ESTHMR',
     pageName: 'Crash warning research',
     otherLang: 'العربية',
-    notebook: 'Research notebook',
+    notebook: 'Full research',
     eyebrow: 'Research · EGX 30 · {from} – {to}',
     title: 'Could an early warning have softened the EGX’s worst crashes?',
     lede: 'We tested one rule on {days} trading days. When the warning switches on, the money moves from the EGX 30 into Treasury bills. It moves back only after the index closes above its average of the last 20 days. Every switch happens at the next day’s open and pays a 0.20% fee.',
@@ -282,6 +308,27 @@ export const COPY = {
     withRule: 'with the rule',
     holding: 'holding the index',
     falseOfThem: 'of them false alarms',
+    readingTitle: 'The model’s reading on the last session of the run',
+    readingSub: 'Computed for {date}. It is shown as it was computed and does not update daily.',
+    readingOff: 'No warning',
+    readingOn: 'Warning on',
+    readingScore: 'Stress inside the EGX',
+    readingScoreNote: 'The warning switches on at {line} or higher on two sessions in a row.',
+    readingOutside: 'Pressure from outside',
+    readingOutsideNote: 'Gold, oil and market swings, each from 0 to 1, weighted 45, 35 and 20.',
+    readingGold: 'Gold',
+    readingOil: 'Oil',
+    readingSwings: 'Swings',
+    readingVol: 'Volatility over 20 days',
+    readingVolNote: 'The volatility-brake version does not buy back while it is above {brake}.',
+    readingPlaces: 'Where each approach stood',
+    readingRule: 'The rule',
+    readingRuleValue: '{eq} in the index · {bills} in Treasury bills',
+    readingPartial: 'Partial protection',
+    readingPartialValue: '{p} in Treasury bills',
+    readingIndex: 'EGX 30 close',
+    readingFoot: 'A reading from a test on past prices, not a signal to act on.',
+    readingMore: 'Every gauge and the what-if scenarios',
     chartTitle: 'What 100,000 EGP became',
     chartSub: 'After fees. Shaded stripes are the days the warning was on.',
     periodAll: 'All years',
@@ -376,18 +423,30 @@ export const COPY = {
     dlSeries: 'Daily series for every approach (JSON)',
     dlWarnings: 'Every warning (JSON)',
     dlTrades: 'Every switch, trade by trade (JSON)',
-    dlNotebook: 'The full research notebook, with the engine’s internals',
+    dlNotebook: 'Every model, table and chart, further down this page',
+    researchTitle: 'The full research',
+    researchSub: 'Every model, table and chart from the research runs, as they were published, in English. Some figures there are annualised over 250 trading days a year or come from earlier reruns, so they can differ from the account above, which works every figure out from the daily series.',
+    researchJump: 'Go straight to',
+    jumpReading: 'Every gauge of the model',
+    jumpTable: 'The 18-year results table',
+    jumpLab: 'Scenario lab and wealth chart',
+    jumpTrades: 'Trades ledger',
+    jumpAttribution: 'Where the return came from',
+    jumpCrises: 'The 17 crises',
+    jumpQuant: 'Simulator, false-alarm autopsy and all 76 warnings',
     legal: 'ESTHMR is a publisher and is not licensed by the Financial Regulatory Authority. We do not buy, we do not sell, and we do not advise. Nothing here is a recommendation to trade any security.',
     loading: 'Loading the research…',
     failed: 'The research data did not load.',
     retry: 'Try again',
+    researchLoading: 'Loading the full research…',
+    researchFailed: 'The full research did not load.',
   },
   ar: {
     docTitle: 'بحث إنذار الانهيارات · ESTHMR',
     back: 'ESTHMR',
     pageName: 'بحث إنذار الانهيارات',
     otherLang: 'English',
-    notebook: 'دفتر البحث',
+    notebook: 'البحث الكامل',
     eyebrow: 'بحث · مؤشر EGX 30 · {from} – {to}',
     title: 'هل كان إنذار مبكر سيخفّف أسوأ انهيارات البورصة المصرية؟',
     lede: 'اختبرنا قاعدة واحدة على {days} يوم تداول: عندما يعمل الإنذار تنتقل الأموال من مؤشر EGX 30 إلى أذون الخزانة، ولا تعود إلى المؤشر إلا بعد أن يغلق فوق متوسط آخر 20 يومًا. كل تحويل يتم عند افتتاح اليوم التالي ويدفع عمولة 0.20%.',
@@ -398,6 +457,27 @@ export const COPY = {
     withRule: 'بالقاعدة',
     holding: 'بالاحتفاظ بالمؤشر',
     falseOfThem: 'منها إنذارات كاذبة',
+    readingTitle: 'قراءة النموذج في آخر جلسة من تشغيل البحث',
+    readingSub: 'محسوبة ليوم {date}. تُعرض كما حُسبت ولا تُحدَّث يوميًا.',
+    readingOff: 'لا يوجد إنذار',
+    readingOn: 'الإنذار قائم',
+    readingScore: 'الضغط داخل البورصة المصرية',
+    readingScoreNote: 'يعمل الإنذار عند {line} أو أعلى في جلستين متتاليتين.',
+    readingOutside: 'الضغط من الخارج',
+    readingOutsideNote: 'الذهب والبترول وتقلبات الأسواق، كلٌّ من 0 إلى 1، بأوزان 45 و35 و20.',
+    readingGold: 'الذهب',
+    readingOil: 'البترول',
+    readingSwings: 'التقلبات',
+    readingVol: 'التقلب خلال 20 يومًا',
+    readingVolNote: 'نسخة مكبح التقلب لا تعود إلى الأسهم ما دام أعلى من {brake}.',
+    readingPlaces: 'أين كانت كل طريقة',
+    readingRule: 'القاعدة',
+    readingRuleValue: '{eq} في المؤشر · {bills} في أذون الخزانة',
+    readingPartial: 'الحماية الجزئية',
+    readingPartialValue: '{p} في أذون الخزانة',
+    readingIndex: 'إغلاق EGX 30',
+    readingFoot: 'قراءة من اختبار على أسعار سابقة، وليست إشارة للتصرّف.',
+    readingMore: 'كل مقاييس النموذج وسيناريوهات «ماذا لو»',
     chartTitle: 'ماذا أصبحت 100,000 جنيه',
     chartSub: 'بعد خصم العمولات. الشرائط المظلّلة هي الأيام التي كان فيها الإنذار قائمًا.',
     periodAll: 'كل السنوات',
@@ -492,11 +572,23 @@ export const COPY = {
     dlSeries: 'السلسلة اليومية لكل الطرق (JSON)',
     dlWarnings: 'كل الإنذارات (JSON)',
     dlTrades: 'كل تحويل، صفقة بصفقة (JSON)',
-    dlNotebook: 'دفتر البحث الكامل بتفاصيل المحرّك',
+    dlNotebook: 'كل النماذج والجداول والرسوم، في أسفل هذه الصفحة',
+    researchTitle: 'البحث الكامل',
+    researchSub: 'كل النماذج والجداول والرسوم من تشغيلات البحث كما نُشرت، وبالإنجليزية. بعض الأرقام هناك محسوبة سنويًا على 250 يوم تداول أو مأخوذة من تشغيلات سابقة، لذا قد تختلف عن العرض أعلاه الذي يحسب كل رقم من السلسلة اليومية.',
+    researchJump: 'انتقل مباشرةً إلى',
+    jumpReading: 'كل مقاييس النموذج',
+    jumpTable: 'جدول نتائج 18 سنة',
+    jumpLab: 'مختبر السيناريوهات ورسم الثروة',
+    jumpTrades: 'سجل الصفقات',
+    jumpAttribution: 'من أين جاء العائد',
+    jumpCrises: 'الأزمات الـ17',
+    jumpQuant: 'المحاكي وتشريح الإنذارات الكاذبة وكل الإنذارات الـ76',
     legal: 'ESTHMR ناشر وغير مرخّص من الهيئة العامة للرقابة المالية. نحن لا نشتري ولا نبيع ولا نقدّم مشورة. لا شيء هنا توصية بالتعامل في أي ورقة مالية.',
     loading: 'جارٍ تحميل البحث…',
     failed: 'تعذّر تحميل بيانات البحث.',
     retry: 'حاول مرة أخرى',
+    researchLoading: 'جارٍ تحميل البحث الكامل…',
+    researchFailed: 'تعذّر تحميل البحث الكامل.',
   },
 };
 
@@ -798,7 +890,7 @@ export function mount(root, docs, options = {}) {
       el('a', { class: 'fo-brand', href: links.home || 'index.html' }, L('back')),
       el('span', { class: 'fo-top-name' }, L('pageName')),
       el('nav', { class: 'fo-top-links' },
-        el('a', { href: links.notebook || 'fragility-research' }, L('notebook')),
+        el('a', { href: links.notebook || '#research' }, L('notebook')),
         el('button', { type: 'button', class: 'fo-lang', lang: lang === 'ar' ? 'en' : 'ar', onclick: () => setLang(lang === 'ar' ? 'en' : 'ar') }, L('otherLang'))));
 
     const hero = el('section', { class: 'fo-hero' },
@@ -816,6 +908,55 @@ export function mount(root, docs, options = {}) {
       figure(L('figGrowth'), moneyNode(START_CAPITAL * full.rule.growth, lang), L('withRule'), moneyNode(START_CAPITAL * full.hold.growth, lang), L('holding')),
       figure(L('figFall'), numNode(fall(full.rule.worstFall, 0)), L('withRule'), numNode(fall(full.hold.worstFall, 0)), L('holding')),
       figure(L('figWarnings', { years: iso(years1) }), numNode(whole(m.warnings.total)), '', numNode(whole(m.warnings.false)), L('falseOfThem'), 'is-plain'));
+
+    // The model's own reading on the last session of the run, from the
+    // series' latest_live and nothing else.
+    const reading = m.latest && Number.isFinite(m.latest.score) ? (() => {
+      const r = m.latest;
+      const two = (value) => Number(value).toFixed(2);
+      const share = (value) => `${Math.max(0, Math.min(1, value)) * 100}%`;
+      const meter = (value, line, tone) => el('span', { class: `fo-meter ${tone || ''}`, 'aria-hidden': 'true' },
+        el('span', { class: 'fo-meter-fill', style: `--w:${share(value)}` }),
+        el('span', { class: 'fo-meter-line', style: `--at:${share(line)}` }));
+      const gauge = (label, value, extra, note) => el('div', { class: 'fo-gauge' },
+        el('p', { class: 'fo-gauge-label' }, label),
+        el('p', { class: 'fo-gauge-value' }, numNode(value)),
+        extra,
+        note ? el('p', { class: 'fo-gauge-note' }, note) : null);
+      const mini = (label, value) => el('div', { class: 'fo-pair-row' },
+        el('span', { class: 'fo-pair-who' }, label),
+        el('span', { class: 'fo-bar-track' }, el('span', { class: 'fo-bar fo-c-rule', style: `--w:${share(value)}` })),
+        el('b', { class: 'fo-num', dir: 'ltr' }, two(value)));
+      const scale = 50;
+      return el('section', { class: 'fo-panel fo-reading', id: 'model-reading', 'aria-labelledby': 'fo-reading-title' },
+        el('div', { class: 'fo-panel-head' },
+          el('div', {},
+            el('h2', { id: 'fo-reading-title' }, L('readingTitle')),
+            el('p', { class: 'fo-sub' }, L('readingSub', { date: day(r.date, lang) }))),
+          el('p', { class: `fo-status ${r.on ? 'is-on' : 'is-off'}` },
+            el('span', { class: 'fo-status-dot', 'aria-hidden': 'true' }),
+            r.on ? L('readingOn') : L('readingOff'))),
+        el('div', { class: 'fo-gauges' },
+          gauge(L('readingScore'), two(r.score), meter(r.score, ALERT_LINE, r.on ? 'is-on' : ''),
+            L('readingScoreNote', { line: iso(ALERT_LINE.toFixed(2)) })),
+          gauge(L('readingOutside'), two(r.outside),
+            el('div', { class: 'fo-minis' }, mini(L('readingGold'), r.gold), mini(L('readingOil'), r.oil), mini(L('readingSwings'), r.swings)),
+            L('readingOutsideNote')),
+          gauge(L('readingVol'), `${Number(r.vol20).toFixed(1)}%`, meter(r.vol20 / scale, VOL_BRAKE / scale, r.brake ? 'is-on' : ''),
+            L('readingVolNote', { brake: iso(`${VOL_BRAKE}%`) })),
+          el('div', { class: 'fo-gauge' },
+            el('p', { class: 'fo-gauge-label' }, L('readingPlaces')),
+            el('dl', { class: 'fo-places' },
+              el('div', {}, el('dt', {}, L('readingRule')),
+                el('dd', {}, L('readingRuleValue', { eq: iso(`${Math.round(r.equity)}%`), bills: iso(`${Math.round(100 - r.equity)}%`) }))),
+              el('div', {}, el('dt', {}, L('readingPartial')),
+                el('dd', {}, L('readingPartialValue', { p: iso(`${Number(r.partial).toFixed(1)}%`) }))),
+              el('div', {}, el('dt', {}, L('readingIndex')),
+                el('dd', {}, numNode(Number(r.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }))))))),
+        el('p', { class: 'fo-reading-foot' },
+          el('span', {}, L('readingFoot')),
+          el('a', { href: '#live-regime' }, L('readingMore'))));
+    })() : null;
 
     const ranges = [{ id: 'full', from: 0, to: m.sessions - 1 }, ...m.periods];
     const current = ranges.find((r) => r.id === state.range) || ranges[0];
@@ -962,11 +1103,34 @@ export function mount(root, docs, options = {}) {
           el('li', {}, el('a', { href: links.series || 'backtest/world_monitor_simulation_series.json', download: '' }, L('dlSeries'))),
           el('li', {}, el('a', { href: links.episodes || 'backtest/c_v2_alert_episodes.json', download: '' }, L('dlWarnings'))),
           el('li', {}, el('a', { href: links.trades || 'backtest/executed_trades_history.json', download: '' }, L('dlTrades'))),
-          el('li', {}, el('a', { href: links.notebook || 'fragility-research' }, L('dlNotebook'))))));
+          el('li', {}, el('a', { href: links.notebook || '#research' }, L('dlNotebook'))))));
+
+    // The notebook itself sits outside this root (a render here must not
+    // throw it away), so this is only its door, in the reader's language.
+    const jump = (href, label, onclick) => el('li', {}, el('a', { href, onclick }, label));
+    const researchIntro = el('section', { class: 'fo-section fo-research-intro', 'aria-labelledby': 'fo-research-title' },
+      el('h2', { id: 'fo-research-title' }, L('researchTitle')),
+      el('p', { class: 'fo-sub' }, L('researchSub')),
+      el('p', { class: 'fo-jump-label' }, L('researchJump')),
+      el('ul', { class: 'fo-jumps' },
+        jump('#live-regime', L('jumpReading')),
+        jump('#executive-comparison', L('jumpTable')),
+        jump('#scenarios-lab', L('jumpLab')),
+        jump('#executedTradesSection', L('jumpTrades')),
+        jump('#ladder-attribution-research', L('jumpAttribution')),
+        jump('#crises', L('jumpCrises')),
+        // Those three sit in the notebook's quantitative view.
+        jump('#simulator', L('jumpQuant'), () => { if (typeof window.setPageMode === 'function') window.setPageMode('quant'); })));
 
     const footer = el('footer', { class: 'fo-legal' }, L('legal'));
 
-    root.replaceChildren(header, el('main', { class: 'fo-main' }, hero, figures, chart, how, periodCards, warnings, crashRows, compare, limits, about), footer);
+    const main = el('main', { class: 'fo-main' }, hero, figures, reading, chart, how, periodCards, warnings, crashRows, compare, limits, researchIntro);
+    if (options.end) {
+      root.replaceChildren(header, main);
+      options.end.replaceChildren(el('div', { class: 'fo-main fo-main-end' }, about), footer);
+    } else {
+      root.replaceChildren(header, main, el('div', { class: 'fo-main fo-main-end' }, about), footer);
+    }
     drawChart();
     laneHost.replaceChildren(...warningStrip(m, lang, laneHost, detail));
   }

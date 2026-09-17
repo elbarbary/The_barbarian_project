@@ -3375,29 +3375,82 @@
       </sc-if>
 
       <!-- ══ TAB 4: CRASH WARNING RESEARCH ══
-           A door to the research page, and nothing the page itself computes.
-           This tab used to carry a "Live Status (Today)" deck — a score, an
-           EGX 30 level and hit rates typed into logic.js on 9 Sep 2026 — that
-           never moved again and disagreed with the page it opened. -->
+           The model's reading at the last research run and the V5 engine's
+           test results, with the way into the full research. Every figure
+           comes from backtest/model_reading.json through logic.js: this deck
+           was typed in on 9 Sep 2026, removed on 16 Sep for that, and asked
+           back for on 17 Sep. -->
       <sc-if value="{{ showToolsFragility }}">
       <section style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);padding:26px 28px;display:grid;gap:18px">
-        <div style="display:grid;gap:8px;max-width:68ch">
-          <div style="font-size:12.5px;font-weight:600;color:var(--accent)">{{ fragilityData.eyebrow }}</div>
-          <h2 style="font-family:'Bricolage Grotesque','IBM Plex Sans Arabic',serif;font-size:26px;font-weight:600;letter-spacing:-.02em;margin:0;color:var(--ink);text-wrap:balance">{{ fragilityData.title }}</h2>
-          <p style="margin:0;font-size:15px;color:var(--t2);line-height:1.7">{{ fragilityData.subtitle }}</p>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px">
-          <sc-for list="{{ fragilityData.points }}" as="point">
-            <div style="padding:16px 18px;border-radius:16px;background:var(--sunk);border:1px solid var(--rule2);display:grid;gap:6px;align-content:start">
-              <strong style="font-size:14.5px;color:var(--ink)">{{ point.title }}</strong>
-              <span style="font-size:13.5px;color:var(--t2);line-height:1.6">{{ point.body }}</span>
-            </div>
-          </sc-for>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px 20px;flex-wrap:wrap">
-          <span style="font-size:13px;color:var(--faint);max-width:60ch">{{ fragilityData.note }}</span>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:14px 20px;flex-wrap:wrap">
+          <div style="display:grid;gap:8px;max-width:68ch">
+            <div style="font-size:12.5px;font-weight:600;color:var(--accent)">{{ fragilityData.eyebrow }}</div>
+            <h2 style="font-family:'Bricolage Grotesque','IBM Plex Sans Arabic',serif;font-size:26px;font-weight:600;letter-spacing:-.02em;margin:0;color:var(--ink);text-wrap:balance">{{ fragilityData.title }}</h2>
+            <p style="margin:0;font-size:15px;color:var(--t2);line-height:1.7">{{ fragilityData.subtitle }}</p>
+          </div>
           <a href="{{ fragilityData.openFullHref }}" style="display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:12px;background:var(--ink);color:var(--surface);font-size:14px;font-weight:600;text-decoration:none">{{ fragilityData.openFullLabel }}</a>
         </div>
+
+        <sc-if value="{{ fragilityData.readingPending }}">
+          <div role="status" aria-live="polite" style="padding:18px;border-radius:16px;background:var(--sunk);color:var(--t2);font-size:14px">{{ fragilityData.pendingLabel }}</div>
+        </sc-if>
+        <sc-if value="{{ fragilityData.readingUnavailable }}">
+          <div role="status" style="padding:18px;border-radius:16px;background:var(--sunk);color:var(--t2);font-size:14px">{{ fragilityData.unavailableLabel }}</div>
+        </sc-if>
+
+        <sc-if value="{{ fragilityData.readingReady }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
+          <!-- The reading -->
+          <div style="padding:20px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn);display:grid;gap:14px;align-content:space-between">
+            <div style="display:grid;gap:10px">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+                <span style="font-size:13px;font-weight:600;color:var(--t2)">{{ fragilityData.readingTitle }}</span>
+                <span style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:{{ fragilityData.statusBg }};color:{{ fragilityData.statusFg }};font-size:12.5px;font-weight:700">
+                  <span style="width:7px;height:7px;border-radius:50%;background:currentColor"></span>
+                  {{ fragilityData.statusLabel }}
+                </span>
+              </div>
+              <div style="display:grid;gap:2px">
+                <span style="font-size:12.5px;color:var(--faint)">{{ fragilityData.scoreLabel }}</span>
+                <span dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:42px;font-weight:600;color:var(--ink);line-height:1.05;justify-self:start">{{ fragilityData.score }}</span>
+              </div>
+              <p style="font-size:12.5px;color:var(--t2);margin:0;line-height:1.55">{{ fragilityData.scoreNote }}</p>
+            </div>
+            <div style="padding-top:12px;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;font-size:12.5px">
+              <div style="display:grid;gap:2px"><span style="color:var(--faint)">{{ fragilityData.engineALabel }}</span><strong dir="ltr" style="font-family:'IBM Plex Mono',monospace;color:var(--ink);justify-self:start">{{ fragilityData.engineA }}</strong></div>
+              <div style="display:grid;gap:2px"><span style="color:var(--faint)">{{ fragilityData.engineBLabel }}</span><strong dir="ltr" style="font-family:'IBM Plex Mono',monospace;color:var(--ink);justify-self:start">{{ fragilityData.engineB }}</strong></div>
+              <div style="display:grid;gap:2px"><span style="color:var(--faint)">{{ fragilityData.stressLabel }}</span><strong dir="ltr" style="font-family:'IBM Plex Mono',monospace;color:var(--ink);justify-self:start">{{ fragilityData.stressGroups }}</strong></div>
+              <div style="display:grid;gap:2px"><span style="color:var(--faint)">{{ fragilityData.transmissionLabel }}</span><strong style="color:var(--accent)">{{ fragilityData.transmission }}</strong></div>
+            </div>
+          </div>
+
+          <!-- The V5 engine's test -->
+          <div style="padding:20px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn);display:grid;gap:14px;align-content:space-between">
+            <div style="display:grid;gap:14px">
+              <span style="font-size:13px;font-weight:600;color:var(--t2)">{{ fragilityData.testTitle }}</span>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                <div style="display:grid;gap:2px"><span style="font-size:12px;color:var(--faint)">{{ fragilityData.recallLabel }}</span><strong dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:20px;color:var(--accent);justify-self:start">{{ fragilityData.recall }}</strong><span style="font-size:11.5px;color:var(--t2)">{{ fragilityData.recallNote }}</span></div>
+                <div style="display:grid;gap:2px"><span style="font-size:12px;color:var(--faint)">{{ fragilityData.hardFaLabel }}</span><strong style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:20px;color:var(--ink)">{{ fragilityData.hardFa }}</strong><span style="font-size:11.5px;color:var(--t2)">{{ fragilityData.hardFaNote }}</span></div>
+                <div style="display:grid;gap:2px"><span style="font-size:12px;color:var(--faint)">{{ fragilityData.occupancyLabel }}</span><strong dir="ltr" style="font-family:'IBM Plex Mono',monospace;font-size:20px;color:var(--ink);justify-self:start">{{ fragilityData.occupancy }}</strong><span style="font-size:11.5px;color:var(--t2)">{{ fragilityData.occupancyNote }}</span></div>
+                <div style="display:grid;gap:2px"><span style="font-size:12px;color:var(--faint)">{{ fragilityData.leadLabel }}</span><strong style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:20px;color:var(--ink)">{{ fragilityData.lead }}</strong><span style="font-size:11.5px;color:var(--t2)">{{ fragilityData.leadNote }}</span></div>
+              </div>
+            </div>
+            <div style="padding-top:10px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--faint);display:flex;flex-wrap:wrap;gap:4px 14px">
+              <span>{{ fragilityData.precisionLabel }}: <strong dir="ltr" style="color:var(--ink)">{{ fragilityData.precision }}</strong></span>
+              <span>{{ fragilityData.utilityLabel }}: <strong dir="ltr" style="color:var(--accent)">{{ fragilityData.utility }}</strong></span>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px 20px;padding:16px 20px;border-radius:14px;background:var(--accTint);border:1px solid color-mix(in oklab, var(--accent) 30%, transparent);flex-wrap:wrap">
+          <div style="display:grid;gap:4px;max-width:64ch">
+            <strong style="font-size:14px;color:var(--ink)">{{ fragilityData.researchLabel }}</strong>
+            <span style="font-size:13px;color:var(--t2);line-height:1.6">{{ fragilityData.researchBody }}</span>
+          </div>
+          <a href="{{ fragilityData.researchHref }}" style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:10px;background:var(--accent);color:var(--surface);font-size:13.5px;font-weight:600;text-decoration:none">{{ fragilityData.researchOpenLabel }}</a>
+        </div>
+        <span style="font-size:13px;color:var(--faint);max-width:72ch">{{ fragilityData.note }}</span>
       </section>
       </sc-if>
     </div>

@@ -15,6 +15,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./design.css">
 <link rel="stylesheet" href="./shell.css">
+<!-- The full research below the account; every rule in it stops at .fe-notebook. -->
+<link rel="stylesheet" href="./fragility-notebook.css">
 <script>
   /* The reader's own choices, before anything paints: the site's theme and
      language, read from the same keys the app writes. */
@@ -233,6 +235,45 @@
   .fo-links a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
   .fo-legal { max-width: 1080px; margin: 0 auto; padding: 22px 20px 48px; font-size: 13px; color: var(--faint); border-top: 1px solid var(--rule); }
 
+  /* ── the model's reading ── */
+  .fo-reading { scroll-margin-top: 72px; }
+  .fo-status { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; border-radius: 999px; padding: 6px 14px; flex: 0 0 auto; }
+  .fo-status.is-off { color: var(--up); background: var(--upTint); }
+  .fo-status.is-on { color: var(--down); background: var(--downTint); }
+  .fo-status-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+  .fo-gauges { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
+  .fo-gauge { background: var(--sunk); border: 1px solid var(--rule2); border-radius: 14px; padding: 14px 16px; display: grid; gap: 8px; align-content: start; }
+  .fo-gauge-label { font-size: 14px; color: var(--t2); }
+  .fo-gauge-value .fo-num { font-size: 30px; font-weight: 600; line-height: 1.1; color: var(--ink); }
+  .fo-gauge-note { font-size: 13px; color: var(--faint); }
+  .fo-meter { position: relative; display: block; height: 10px; border-radius: 99px; background: var(--rule2); }
+  .fo-meter-fill { position: absolute; inset-block: 0; inset-inline-start: 0; width: var(--w); border-radius: 99px; background: var(--accent); }
+  .fo-meter.is-on .fo-meter-fill { background: var(--down); }
+  .fo-meter-line { position: absolute; inset-block: -4px; inset-inline-start: var(--at); width: 2px; margin-inline-start: -1px; border-radius: 1px; background: var(--down); }
+  .fo-minis { display: grid; gap: 6px; }
+  .fo-minis .fo-pair-row { grid-template-columns: minmax(56px, auto) 1fr 44px; }
+  .fo-places { margin: 0; display: grid; gap: 10px; }
+  .fo-places > div { display: grid; gap: 2px; }
+  .fo-places dt { font-size: 13px; color: var(--faint); }
+  .fo-places dd { margin: 0; font-size: 15px; font-weight: 500; color: var(--ink); }
+  .fo-reading-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; font-size: 13.5px; color: var(--t2); border-top: 1px solid var(--rule2); padding-top: 12px; }
+  .fo-reading-foot a, .fo-jumps a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+  /* ── the door to the full research ── */
+  .fo-research-intro { border-top: 1px solid var(--rule); padding-top: 32px; }
+  .fo-jump-label { font-size: 13px; color: var(--faint); margin-top: 4px; }
+  .fo-jumps { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 10px; }
+  .fo-jumps li { background: var(--surface); border: 1px solid var(--rule); border-radius: 999px; padding: 6px 14px; font-size: 14px; }
+  .fo-main-end { padding-block: 0 8px; }
+
+  /* The notebook paints much of itself light inline, so its section keeps the
+     light palette in either theme: a sheet of research paper on the page. */
+  #research { color-scheme: light; background: var(--bg); border-block: 1px solid var(--rule); scroll-margin-top: 57px; }
+  #research [id] { scroll-margin-top: 110px; }
+  #research .fe-score-ticker { top: 57px; }
+  .fo-research-state { max-width: 1080px; margin: 0 auto; padding: 48px 20px; display: grid; gap: 12px; justify-items: start; color: #455B6E; font: 400 15px/1.6 'IBM Plex Sans', system-ui, sans-serif; }
+  .fo-research-state button { font: inherit; border: 1px solid rgba(27,25,23,.10); background: #FAFCFE; color: #192C3C; border-radius: 10px; padding: 8px 14px; cursor: pointer; }
+
   @media (max-width: 640px) {
     .fo-top { gap: 10px; }
     .fo-top-name { display: none; }
@@ -252,13 +293,62 @@
 </head>
 <body>
 <div id="fo-root"><p class="fo-state">…</p></div>
+<!-- The research notebook: every model, table and chart from the research
+     runs, loaded from fragility-notebook.html. Outside #fo-root, because the
+     account re-renders that on every language switch and resize. -->
+<section id="research" class="fe-notebook" data-theme="light" dir="ltr" lang="en" aria-label="Full research"></section>
+<div id="fo-end"></div>
 <script type="module">
   import { mount, t } from './fragility-overview.js';
 
   const root = document.getElementById('fo-root');
+  const research = document.getElementById('research');
+  const end = document.getElementById('fo-end');
   const lang = (() => {
     try { return localStorage.getItem('esthmr:lang') === 'en' ? 'en' : 'ar'; } catch { return 'ar'; }
   })();
+
+  // A link into the notebook names an element that does not exist until the
+  // notebook has loaded, so the browser's own jump is repeated once it has.
+  const settleOnHash = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const target = id && document.getElementById(id);
+    if (target) target.scrollIntoView();
+  };
+
+  const state = (text, retry) => {
+    const box = document.createElement('div');
+    box.className = 'fo-research-state';
+    const said = document.createElement('p');
+    said.textContent = text;
+    box.append(said);
+    if (retry) {
+      const again = document.createElement('button');
+      again.type = 'button';
+      again.textContent = t(lang, 'retry');
+      again.addEventListener('click', retry);
+      box.append(again);
+    }
+    research.replaceChildren(box);
+  };
+
+  async function loadResearch() {
+    state(t(lang, 'researchLoading'));
+    try {
+      const response = await fetch('fragility-notebook.html');
+      if (!response.ok) throw new Error(`fragility-notebook.html answered ${response.status}`);
+      research.innerHTML = await response.text();
+      // Its script finds its elements by id as it runs, so it goes in after them.
+      const script = document.createElement('script');
+      script.src = 'fragility-notebook.js';
+      script.addEventListener('load', settleOnHash);
+      script.addEventListener('error', () => state(t(lang, 'researchFailed'), loadResearch));
+      document.body.append(script);
+    } catch (error) {
+      console.error(error);
+      state(t(lang, 'researchFailed'), loadResearch);
+    }
+  }
 
   const get = (path) => fetch(path).then((response) => {
     if (!response.ok) throw new Error(`${path} answered ${response.status}`);
@@ -277,7 +367,8 @@
         // Only the tax line reads this, and the page stands without it.
         get('backtest/ladder_attribution_matrix.json').catch(() => null),
       ]);
-      mount(root, { series, episodes, attribution }, { lang });
+      mount(root, { series, episodes, attribution }, { lang, end });
+      settleOnHash();
     } catch (error) {
       console.error(error);
       const box = document.createElement('div');
@@ -294,6 +385,7 @@
   }
 
   load();
+  loadResearch();
 </script>
 </body>
 </html>

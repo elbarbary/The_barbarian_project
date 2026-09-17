@@ -1,0 +1,32 @@
+{
+ "schemaVersion": 1,
+ "date": "2026-09-09",
+ "egx30": 56280.4,
+ "warning": false,
+ "score": 0.4528,
+ "alertLine": 0.93,
+ "engineInternal": 0.4528,
+ "engineExternal": 0.2505,
+ "stressGroups": 1,
+ "stressGroupsOf": 7,
+ "transmission": true,
+ "outside": 0.33,
+ "gold": 0.09,
+ "oil": 0.54,
+ "swings": 0.5,
+ "vol20": 10.7,
+ "volBrakeActive": false,
+ "equityPercent": 100.0,
+ "partialPercent": 36.5,
+ "v5": {
+  "model": "V5: Recommended Production (1.00 Hard FA/yr)",
+  "years": 18.07,
+  "earlyHits": 15,
+  "crises": 17,
+  "hardFalseAlarmsPerYear": 1.0,
+  "occupancyPercent": 11.49,
+  "precisionPercent": 52.9,
+  "leadSessions": 16.0,
+  "utility": 76.55
+ }
+}
