@@ -1363,6 +1363,10 @@
     "meaning": "Initial trading shows a net inflow of liquidity across listed equities, leading to price gains in constituents across the main benchmark EGX 30 and broader market indices.",
     "meaning_ar": "تعكس بداية الجلسة تدفقات نقدية شرائية على الأسهم المقيدة، مما يؤدي إلى تحركات سعرية صاعدة في مكونات مؤشر إيجي إكس 30 والمؤشرات العامة للسوق."
   },
+  "ارتفاع جماعي لموشرات البورصه بختام تعاملات اليوم": {
+    "meaning": "Trading activity concludes with net price gains across the benchmark indices, reflecting aggregate daily demand exceeding supply across both large-cap and small/mid-cap listed equities.",
+    "meaning_ar": "تغلق جلسة التداول على صعود عام لكافة مؤشرات السوق، مما يعكس تفوق أوامر الشراء المنفذة على عروض البيع عبر الأسهم القيادية والمتوسطة والصغيرة خلال اليوم."
+  },
   "ارتفاع جماعي لموشرات البورصه بمستهل التعاملات": {
     "meaning": "Broad-based upward movement across indices at the open reflects aggregate buy-order volumes exceeding sell orders across large, mid, and small-cap segments during the initial price-discovery phase.",
     "meaning_ar": "يعكس الارتفاع الجماعي للمؤشرات مع بداية الجلسة تفوق حجم طلبات الشراء المفتوحة على عروض البيع عبر مختلف قطاعات الشركات الكبرى والمتوسطة والصغيرة خلال مرحلة التسعير الافتتاحية."
@@ -6589,6 +6593,10 @@
     "meaning": "Elevated tanker freight rates widen the price spread required for US crude to remain competitive against Middle Eastern grades in Asian refining hubs, altering global maritime arbitrage flows.",
     "meaning_ar": "يؤدي ارتفاع تكاليف الشحن عبر الناقلات إلى توسيع الفارق السعري المطلوب للحفاظ على تنافسية الخام الأمريكي مقابل الخامات الشرق أوسطية في مصافي آسيا، مما يغير مسارات المراجحة البحرية العالمية."
   },
+  "كلييرليك كابيتال تحسم سيطرتها علي نادي تشيلسي الانجليزي": {
+    "meaning": "Clearlake Capital consolidating control shifts the club's corporate governance structure into a single-entity private equity management model, centralising capital allocation and operational oversight.",
+    "meaning_ar": "يؤدي حسم شركة كلييرليك كابيتال لسيطرتها إلى تحويل هيكل حوكمة النادي إلى نموذج إدارة خاضع لصندوق استثمار مباشر واحد، مما يركز سلطات تخصيص رأس المال والرقابة التشغيلية في جهة واحدة."
+  },
   "كم سجل سعر الريال العماني اليوم الخميس 17-9-2026 بالتزامن مع رفع الفايده؟": {
     "meaning": "Central bank interest rate decisions alter domestic carry trade yields and adjust the exchange pricing of foreign currencies, including the Omani Rial, against the Egyptian Pound across official banking channels.",
     "meaning_ar": "تؤدي قرارات أسعار الفائدة الصادرة عن البنك المركزي إلى تعديل عوائد أدوات الدين وتغيير أسعار صرف العملات الأجنبية، بما فيها الريال العماني، أمام الجنيه المصري عبر القنوات المصرفية الرسمية."
@@ -7176,6 +7184,10 @@
   "مصر تتعاون مع شركه صينيه لتطوير محطتي محولات كهرباء بمنطقه القناه": {
     "meaning": "This agreement brings foreign engineering expertise and capital goods into the domestic utility sector to upgrade transmission infrastructure in the Canal Zone.",
     "meaning_ar": "يتضمن هذا الاتفاق إدخال خبرات هندسية وسلع رأسمالية أجنبية إلى قطاع المرافق المحلي لتحديث البنية التحتية لنقل الكهرباء في منطقة القناة."
+  },
+  "مصر تتوقع استقبال 20 مليون سايح بنهايه 2026": {
+    "meaning": "Tourism targets involve capacity expansion across hotel rooms, airport logistics, and transport infrastructure, linking directly to foreign currency liquidity in the banking system and operational utilization rates in hospitality and aviation sectors.",
+    "meaning_ar": "ترتبط مستهدفات أعداد السائحين بتوسيع الطاقة الاستيعابية للغرف الفندقية والخدمات اللوجستية بالمطارات والنقل، وتنعكس مباشرة على حجم السيولة بالنقد الأجنبي داخل القطاع المصرفي ومعدلات التشغيل التشغيلية لقطاعي الضيافة والطيران."
   },
   "مصر تدعو الشركات السلوفاكيه لتوسيع استثماراتها والتصنيع المشترك": {
     "meaning": "Bilateral joint manufacturing agreements involve cross-border capital deployment, technology transfer, and the integration of local industrial facilities into foreign supply chains.",
@@ -7961,6 +7973,10 @@
     "meaning": "Political backing for expanding the Carry On retail chain integrates state-level logistics and municipal coordination into the enterprise's store rollout footprint.",
     "meaning_ar": "يعكس الدعم الحكومي لتوسيع سلسلة كاري أون دمجاً مباشراً بين التنسيق الإداري واللوجستي للدولة وخطط الانتشار الجغرافي لفروع السلسلة."
   },
+  "وزير التموين: تطوير منظومه التخزين محور رييسي في استراتيجيه الدوله": {
+    "meaning": "Modernizing the state storage system centers on establishing automated logistics hubs and modern silos to manage strategic commodity reserves and physical crop handling.",
+    "meaning_ar": "يرتكز تطوير منظومة التخزين الحكومية على إنشاء مراكز لوجستية مميكنة وصوامع حديثة لإدارة الاحتياطيات الاستراتيجية من السلع وعمليات التداول الفعلي للمحاصيل."
+  },
   "وزير التموين: سرعه بحث طلبات النواب بما يحقق صالح المواطنين": {
     "meaning": "The Ministry of Supply coordinates administrative and regulatory oversight over subsidized commodity distribution and consumer supply chains through legislative feedback channels.",
     "meaning_ar": "تتولى وزارة التموين التنسيق والرقابة الإدارية والتنظيمية على سلاسل إمداد السلع والمنظومة التموينية عبر قنوات المتابعة والتواصل البرلماني."
@@ -8088,6 +8104,10 @@
   "وزير الصناعه ومحافظ الجيزه: تسهيلات جديده لدعم مستثمري جرزا وعرب ابوساعد": {
     "meaning": "The joint administrative initiative provides streamlined industrial licensing, land tenure regularisation, and utility infrastructure coordination for operating facilities in the Girza and Arab Abu Saed zones.",
     "meaning_ar": "تتضمن المبادرة الإدارية المشتركة تبسيط إجراءات التراخيص الصناعية، وتقنين أوضاع الأراضي، وتنسيق ربط المرافق والخدمات للمنشآت القائمة في منطقتي جرزا وعرب أبوساعد."
+  },
+  "وزير الصناعه ومحافظ القليوبيه يتفقدان مركز شركه فوتون اكس للوقوف علي احدث تطبيقات التكنولوجيا": {
+    "meaning": "Official site inspections of industrial technology centers represent institutional oversight and alignment with the state's industrial digitization framework, reflecting operational coordination between regulatory authorities and private manufacturing facilities.",
+    "meaning_ar": "تمثل الجولات الميدانية للمراكز التكنولوجية الصناعية متابعة مؤسسية وتنسيقاً ميدانياً بين الجهات التنظيمية والمنشآت التصنيعية، بما يعكس آليات الرقابة ومواءمة العمليات مع أطر التحول الرقمي الصناعي."
   },
   "وزير الصناعه يبحث مع السفير الاسباني سبل تعزيز التعاون": {
     "meaning": "Bilateral ministerial meetings between Egypt and Spain establish formal diplomatic channels to review joint manufacturing frameworks, cross-border industrial investments, and bilateral trade flows.",
