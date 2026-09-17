@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-16T17:47:29.962565+00:00",
+  "builtAt": "2026-09-17T05:33:59.719708+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
     "items": 192481,
     "withoutTickerInHeading": 36281,
-    "tickerNotInThisDirectory": 28867,
-    "attributedToAnIssuer": 127333,
+    "tickerNotInThisDirectory": 28276,
+    "attributedToAnIssuer": 127924,
     "months": [
       {
         "month": "2005-01",
@@ -1840,7 +1840,7 @@
   },
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
-    "items": 619,
+    "items": 623,
     "failures": {}
   },
   "issuers": [
@@ -3107,6 +3107,16 @@
       "irArchiveStatus": "unverified"
     },
     {
+      "ticker": "FERC",
+      "egxFilingCount": 553,
+      "latestEgxFilingId": "294461",
+      "latestEgxFilingAt": "2026-09-08T14:48:28",
+      "candidateIssuerWebsite": "https://www.ferchem.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/FERC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
       "ticker": "FIRE",
       "egxFilingCount": 585,
       "latestEgxFilingId": "294491",
@@ -3911,6 +3921,16 @@
       "latestEgxFilingAt": "2026-08-13T10:38:39",
       "candidateIssuerWebsite": "https://www.naeemholding.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/NAHO/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "NAPR",
+      "egxFilingCount": 38,
+      "latestEgxFilingId": "293273",
+      "latestEgxFilingAt": "2026-08-16T12:18:38",
+      "candidateIssuerWebsite": "https://www.nationalprinting.net/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/NAPR/profile",
       "websiteStatus": null,
       "irArchiveStatus": "unverified"
     },
@@ -4874,9 +4894,9 @@
     }
   ],
   "coverage": {
-    "issuers": 286,
-    "withEgxFilings": 280,
-    "withCandidateWebsite": 257,
+    "issuers": 288,
+    "withEgxFilings": 282,
+    "withCandidateWebsite": 259,
     "websitesProbed": 20,
     "verifiedIrArchives": 0
   },
