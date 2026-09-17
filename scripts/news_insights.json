@@ -1791,6 +1791,10 @@
     "meaning": "Daily spot prices on the poultry exchange represent the wholesale market-clearing rate determined by current farmgate supply and retail distribution demand. These benchmark figures serve as the base pricing reference across domestic livestock supply chains and consumer retail channels.",
     "meaning_ar": "تعكس الأسعار الفورية المعلنة في بورصة الدواجن معدلات التداول اليومية في سوق الجملة وفق توازن المعروض من المزارع والطلب لدى الموزعين، وتعمل كمرجع تسعيري لتكاليف الإمداد في منافذ التجزئة بالسوق المحلي."
   },
+  "اسعار الفراخ في بورصه الدواجن اليوم الخميس 17-9-2026": {
+    "meaning": "The poultry exchange quotation reflects the daily spot pricing for live birds, determined by farm-gate supply volumes and local feed-cost structures.",
+    "meaning_ar": "تعكس أسعار بورصة الدواجن التسعير الفوري اليومي للطيور الحية، والذي يتحدد بناءً على حجم المعروض من المزارع وهيكل تكاليف الأعلاف محلياً."
+  },
   "اسعار الفراخ في بورصه الدواجن اليوم السبت 12-9-2026": {
     "meaning": "Poultry exchange price bulletins reflect the spot equilibrium rate for wholesale live birds, determined by farmgate production costs, feedstock availability, and daily trade volumes across commercial distribution channels.",
     "meaning_ar": "تعكس نشرات بورصة الدواجن السعر الفوري لتداول الطيور الحية بالجملة، والذي يتحدد بناءً على تكاليف الإنتاج من أرض المزرعة، ومدخلات الأعلاف، وأحجام التداول اليومية عبر قنوات التوزيع التجارية."
@@ -2594,6 +2598,10 @@
   "الدولار الامريكي يرتفع امام اليورو والفرنك بعد بيانات التضخم": {
     "meaning": "Higher inflation data sustains elevated US benchmark interest rates, shifting foreign exchange flows toward the US dollar and lowering the exchange values of the euro and the Swiss franc.",
     "meaning_ar": "تؤدي بيانات التضخم المرتفعة إلى استمرار الفائدة المرتفعة على الدولار الأمريكي، مما يوجه التدفقات النقدية نحوه ويخفض القيمة الصرفية لليورو والفرنك السويسري أمامه."
+  },
+  "الدولار عند اعلي مستوي في 7 اسابيع بعد رفع الفايده الامريكيه": {
+    "meaning": "Higher US interest rates increase yields on dollar-denominated assets, driving global capital toward the US dollar and exerting direct foreign exchange pressure on emerging market currencies, including the Egyptian pound, which raises local import and sovereign debt servicing costs.",
+    "meaning_ar": "يؤدي رفع أسعار الفائدة الأمريكية إلى زيادة العائد على الأصول المقومة بالدولار وتدفق رؤوس الأموال نحوه، مما يفرض ضغوطاً على العملات المحلية في الأسواق الناشئة ومنها الجنيه المصري، ويرفع تكلفة الواردات وأعباء خدمة الديون الخارجية."
   },
   "الدولار يتعثر رغم ارتفاع رهانات رفع الفايده الامريكيه في سبتمبر": {
     "meaning": "The US dollar diverges from benchmark interest rate expectations as currency pricing reflects counterbalancing global macroeconomic data and cross-asset capital flows.",
@@ -5572,6 +5580,10 @@
     "meaning": "Egg carton retail pricing reflects daily farm-gate supply adjustments combined with distribution margins across wholesale and retail transport channels.",
     "meaning_ar": "تعكس أسعار كرتونة البيض للمستهلك التغيرات اليومية في تكاليف المعروض من المزارع مضافاً إليها هوامش التوزيع عبر حلقات النقل بالجملة والتجزئة."
   },
+  "سعر كرتونه البيض اليوم 17/9/2026 للمستهلك في السوق المحليه": {
+    "meaning": "Egg carton retail pricing reflects daily farm-gate supply adjustments, feed input costs, and distribution markups across the local poultry value chain.",
+    "meaning_ar": "تعكس أسعار كرتونة البيض للمستهلك التغيرات اليومية في تكاليف الإنتاج بالمزارع، وأسعار الأعلاف، وهامش تكلفة التوزيع عبر سلاسل الإمداد في السوق المحلية."
+  },
   "سعر كرتونه البيض اليوم 4/9/2026 للمستهلك في السوق المحليه": {
     "meaning": "This reflects the daily domestic retail pricing updates for table eggs, driven by poultry feed supply costs, farm-gate production expenses, and local consumer demand dynamics.",
     "meaning_ar": "يعكس هذا تحديثات أسعار التجزئة اليومية لبيض المائدة في السوق المحلي، والتي تتحدد بناءً على تكاليف الأعلاف ومصروفات الإنتاج في المزارع ومستويات الطلب الاستهلاكي."
@@ -7156,6 +7168,10 @@
   "مكاسب بختام التعاملات.. اسعار الريال السعودي بالتزامن مع رحلات العمره": {
     "meaning": "Seasonal demand for foreign currency to cover Umrah travel expenses directly absorbs retail foreign exchange liquidity and drives price movements in the Saudi Riyal exchange rate.",
     "meaning_ar": "يؤدي الطلب الموسمي على العملة الأجنبية لتغطية نفقات رحلات العمرة إلى امتصاص السيولة النقدية المتاحة من الريال السعودي، مما يحدد اتجاهات أسعار صرفه في السوق المصرفي."
+  },
+  "مكاسب محدوده لصناديق الاستثمار الاسبوع الماضي": {
+    "meaning": "Investment funds record low single-period net asset value (NAV) appreciation, reflecting marginal price increases across their underlying Egyptian equity and fixed-income portfolio holdings.",
+    "meaning_ar": "تسجل صناديق الاستثمار نمواً طفيفاً في صافي قيمة أصولها خلال الفترة، وهو ما يعكس تحركات سعرية محدودة في الأوراق المالية المكونة لمحافظها من أسهم وأدوات دخل ثابت."
   },
   "ملف.. صناع يعلقون امالا واسعه علي برنامج التحول الاقتصادي": {
     "meaning": "Economic transformation programs alter the operational framework for manufacturers through structural adjustments, including industrial incentives, infrastructure updates, and regulatory revisions. These measures directly modify input costs, localized production capacities, and capital allocation models across the industrial sector.",
