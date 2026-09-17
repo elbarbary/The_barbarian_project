@@ -1,16 +1,16 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-17T10:55:49+00:00",
+ "generated": "2026-09-17T11:58:18+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
  "peopleCount": 1320,
- "tradeCount": 183,
- "tickerCount": 236,
- "tradedTickerCount": 76,
+ "tradeCount": 188,
+ "tickerCount": 237,
+ "tradedTickerCount": 78,
  "firmCount": 437,
  "personCount": 883,
- "aliasCount": 142,
+ "aliasCount": 145,
  "registerCount": 236,
  "overDisclosed": [],
  "supersededByRegister": [
@@ -1668,88 +1668,6 @@
    ]
   },
   {
-   "id": "أسامة فوزي محمد سعيد",
-   "name": "أسامة فوزي محمد سعيد",
-   "nameEn": "Osama Fawzy Mohamed Saeed",
-   "script": "ar",
-   "kind": "person",
-   "aliases": [
-    "أسامة فوزى محمد سعيد",
-    "اسامة فوزي محمد سعيد"
-   ],
-   "tickers": [
-    "FIRE"
-   ],
-   "tradeCount": 4,
-   "boughtCount": 2,
-   "soldCount": 2,
-   "value": 2010785.7,
-   "singleCompanyMove": {
-    "ticker": "FIRE",
-    "from": 3.0124,
-    "to": 0.24199,
-    "change": -2.7704
-   },
-   "trades": [
-    {
-     "filingId": "291251",
-     "date": "2026-07-13",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "sell",
-     "shares": 95057,
-     "price": 0.519,
-     "value": 49334.583,
-     "stakeBefore": 3.0124,
-     "stakeAfter": 2.29155,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/340978_1.pdf"
-    },
-    {
-     "filingId": "291836",
-     "date": "2026-07-22",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "buy",
-     "shares": 307316,
-     "price": 5.61,
-     "value": 1724042.76,
-     "stakeBefore": 24.26,
-     "stakeAfter": 25.6149,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341580_1.pdf"
-    },
-    {
-     "filingId": "292120",
-     "date": "2026-07-29",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "buy",
-     "shares": 24535,
-     "price": 4.98,
-     "value": 122184.30000000002,
-     "stakeBefore": 0.24186,
-     "stakeAfter": 0.56064,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341849_1.pdf"
-    },
-    {
-     "filingId": "292378",
-     "date": "2026-08-03",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "sell",
-     "shares": 24589,
-     "price": 4.686,
-     "value": 115224.054,
-     "stakeBefore": 0.25017,
-     "stakeAfter": 0.24199,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf"
-    }
-   ]
-  },
-  {
    "id": "ALPHA ORYX LIMITED ألفا أوريكس المحدودة",
    "name": "ALPHA ORYX LIMITED ألفا أوريكس المحدودة",
    "nameEn": null,
@@ -1931,6 +1849,43 @@
      "stakeBefore": 5.01,
      "stakeAfter": 2.88,
      "source": "https://www.egx.com.eg/downloads/Bulletins/344158_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "عبد السلام مسعود عبد الكريم",
+   "name": "عبد السلام مسعود عبد الكريم",
+   "nameEn": "Abd El Salam Masoud Abd El Karim",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "ARAB"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 112989409.46,
+   "singleCompanyMove": {
+    "ticker": "ARAB",
+    "from": 6.3391,
+    "to": 4.2839,
+    "change": -2.0552
+   },
+   "trades": [
+    {
+     "filingId": "291081",
+     "date": "2026-07-09",
+     "ticker": "ARAB",
+     "company": null,
+     "companyAr": "المطورون العرب القابضة",
+     "action": "sell",
+     "shares": 491258302,
+     "price": 0.23,
+     "value": 112989409.46000001,
+     "stakeBefore": 6.3391,
+     "stakeAfter": 4.2839,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340754_1.pdf"
     }
    ]
   },
@@ -2481,6 +2436,45 @@
    ]
   },
   {
+   "id": "محمد إبراهيم عبد المنعم النحاس",
+   "name": "محمد إبراهيم عبد المنعم النحاس",
+   "nameEn": "Mohamed Ibrahim Abdel Moneim El Nahas",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "محمد ابراهيم عبد المنعم النحاس"
+   ],
+   "tickers": [
+    "COPR"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 7206000.0,
+   "singleCompanyMove": {
+    "ticker": "COPR",
+    "from": 9.513,
+    "to": 10.464,
+    "change": 0.951
+   },
+   "trades": [
+    {
+     "filingId": "294848",
+     "date": "2026-09-17",
+     "ticker": "COPR",
+     "company": null,
+     "companyAr": "كوبر للاستثمار التجارى و التطوير العقارى",
+     "action": "buy",
+     "shares": 15000000,
+     "price": 0.4804,
+     "value": 7206000.0,
+     "stakeBefore": 9.513,
+     "stakeAfter": 10.464,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344342_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "نواف بن عبد الله بن ابراهيم بن دابل",
    "name": "نواف بن عبد الله بن ابراهيم بن دابل",
    "nameEn": "Nawaf bin Abdullah bin Ibrahim bin Dabel",
@@ -2985,6 +2979,45 @@
    ]
   },
   {
+   "id": "محمد النوبي احمد سليم",
+   "name": "محمد النوبي احمد سليم",
+   "nameEn": "Mohamed El Nouby Ahmed Selim",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "محمد النوبي أحمد سليم"
+   ],
+   "tickers": [
+    "FIRE"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 303783.92,
+   "singleCompanyMove": {
+    "ticker": "FIRE",
+    "from": 5.1,
+    "to": 4.73,
+    "change": -0.37
+   },
+   "trades": [
+    {
+     "filingId": "291130",
+     "date": "2026-07-09",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 64361,
+     "price": 4.72,
+     "value": 303783.92,
+     "stakeBefore": 5.1,
+     "stakeAfter": 4.73,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340798_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "محمد حيان عبد العزيز العبان",
    "name": "محمد حيان عبد العزيز العبان",
    "nameEn": "Mohamed Hayan Abdel Aziz Al-Aiban",
@@ -3383,6 +3416,45 @@
      "stakeBefore": 5.4,
      "stakeAfter": 4.5,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343654_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "عاطف عبدالحميد غالب عبدالله الشرقاوى",
+   "name": "عاطف عبدالحميد غالب عبدالله الشرقاوى",
+   "nameEn": "Atef Abdel Hamid Ghaleb Abdullah El Sharkawy",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "عاطف عبد الحميد غالب عبد الله الشرقاوي"
+   ],
+   "tickers": [
+    "ELNA"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 656618.51,
+   "singleCompanyMove": {
+    "ticker": "ELNA",
+    "from": 8.772,
+    "to": 8.987,
+    "change": 0.215
+   },
+   "trades": [
+    {
+     "filingId": "291240",
+     "date": "2026-07-12",
+     "ticker": "ELNA",
+     "company": null,
+     "companyAr": "النصر لتصنيع الحاصلات الزراعية",
+     "action": "buy",
+     "shares": 16938,
+     "price": 38.766,
+     "value": 656618.5079999999,
+     "stakeBefore": 8.772,
+     "stakeAfter": 8.987,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340891_1.pdf"
     }
    ]
   },
@@ -4073,6 +4145,102 @@
      "stakeBefore": 6.294,
      "stakeAfter": 4.62,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342129_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "أسامة فوزي محمد سعيد",
+   "name": "أسامة فوزي محمد سعيد",
+   "nameEn": "Osama Fawzy Mohamed Saeed",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "أسامة فوزى محمد سعيد",
+    "اسامة فوزي محمد سعيد"
+   ],
+   "tickers": [
+    "FIRE"
+   ],
+   "tradeCount": 5,
+   "boughtCount": 3,
+   "soldCount": 2,
+   "value": 2382422.7,
+   "singleCompanyMove": {
+    "ticker": "FIRE",
+    "from": 0.24187,
+    "to": 0.24199,
+    "change": 0.0001
+   },
+   "trades": [
+    {
+     "filingId": "291186",
+     "date": "2026-07-12",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 728186,
+     "price": 0.51036,
+     "value": 371637.00696,
+     "stakeBefore": 0.24187,
+     "stakeAfter": 3.0254,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340884_1.pdf"
+    },
+    {
+     "filingId": "291251",
+     "date": "2026-07-13",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 95057,
+     "price": 0.519,
+     "value": 49334.583,
+     "stakeBefore": 3.0124,
+     "stakeAfter": 2.29155,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340978_1.pdf"
+    },
+    {
+     "filingId": "291836",
+     "date": "2026-07-22",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 307316,
+     "price": 5.61,
+     "value": 1724042.76,
+     "stakeBefore": 24.26,
+     "stakeAfter": 25.6149,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341580_1.pdf"
+    },
+    {
+     "filingId": "292120",
+     "date": "2026-07-29",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 24535,
+     "price": 4.98,
+     "value": 122184.30000000002,
+     "stakeBefore": 0.24186,
+     "stakeAfter": 0.56064,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341849_1.pdf"
+    },
+    {
+     "filingId": "292378",
+     "date": "2026-08-03",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 24589,
+     "price": 4.686,
+     "value": 115224.054,
+     "stakeBefore": 0.25017,
+     "stakeAfter": 0.24199,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf"
     }
    ]
   },
@@ -5726,21 +5894,6 @@
    "trades": []
   },
   {
-   "id": "عبد السلام مسعود عبد الكريم",
-   "name": "عبد السلام مسعود عبد الكريم",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
    "id": "الشركة القابضة للصناعات الكيماوية",
    "name": "الشركة القابضة للصناعات الكيماوية",
    "nameEn": null,
@@ -6514,21 +6667,6 @@
   {
    "id": "روان محمد عبد الحميد غالب عبد الله الشرقاوي",
    "name": "روان محمد عبد الحميد غالب عبد الله الشرقاوي",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "عاطف عبد الحميد غالب عبد الله الشرقاوي",
-   "name": "عاطف عبد الحميد غالب عبد الله الشرقاوي",
    "nameEn": null,
    "script": null,
    "kind": "person",
@@ -18398,21 +18536,6 @@
    "trades": []
   },
   {
-   "id": "محمد النوبي أحمد سليم",
-   "name": "محمد النوبي أحمد سليم",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
    "id": "شركة مجموعة جلاكسو المحدودة",
    "name": "شركة مجموعة جلاكسو المحدودة",
    "nameEn": null,
@@ -18805,21 +18928,6 @@
   {
    "id": "ايمن محمد حامد محمد شريف",
    "name": "ايمن محمد حامد محمد شريف",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "محمد ابراهيم عبد المنعم النحاس",
-   "name": "محمد ابراهيم عبد المنعم النحاس",
    "nameEn": null,
    "script": null,
    "kind": "person",
@@ -29576,6 +29684,24 @@
    "history": []
   },
   {
+   "holder": "محمد إبراهيم عبد المنعم النحاس",
+   "kind": "person",
+   "ticker": "COPR",
+   "percent": 10.464,
+   "asOf": "2026-09-17",
+   "basis": "trade",
+   "filingId": "294848",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/344342_1.pdf",
+   "openedAt": "2026-09-17",
+   "openingPercent": 9.513,
+   "history": [
+    {
+     "date": "2026-09-17",
+     "percent": 10.464
+    }
+   ]
+  },
+  {
    "holder": "ALNAEEM FOR REAL ESTATE INVESTMENT MANAGEMENT LIMITED",
    "kind": "firm",
    "ticker": "NARE",
@@ -30594,20 +30720,6 @@
    "history": []
   },
   {
-   "holder": "محمد ابراهيم عبد المنعم النحاس",
-   "kind": "person",
-   "ticker": "COPR",
-   "percent": 9.513,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291643",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/341330_1.pdf",
-   "shares": 150000000,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
-  },
-  {
    "holder": "جهاز مستقبل مصر للتنميه المستدامه",
    "kind": "firm",
    "ticker": "FCMD",
@@ -31010,6 +31122,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "عاطف عبدالحميد غالب عبدالله الشرقاوى",
+   "kind": "person",
+   "ticker": "ELNA",
+   "percent": 8.987,
+   "asOf": "2026-07-12",
+   "basis": "trade",
+   "filingId": "291240",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340891_1.pdf",
+   "openedAt": "2026-07-12",
+   "openingPercent": 8.772,
+   "history": [
+    {
+     "date": "2026-07-12",
+     "percent": 8.987
+    }
+   ]
   },
   {
    "holder": "فهد بن حمد إبراهيم الحرقان",
@@ -31983,20 +32113,6 @@
    "history": []
   },
   {
-   "holder": "عبد السلام مسعود عبد الكريم",
-   "kind": "person",
-   "ticker": "ARAB",
-   "percent": 7.19,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291753",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/341422_1.pdf",
-   "shares": 1000000012,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
-  },
-  {
    "holder": "كريم جورج فيكتور نعمه",
    "kind": "person",
    "ticker": "ACTF",
@@ -32826,20 +32942,6 @@
    "filingId": "291296",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340998_1.pdf",
    "shares": 29208798,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
-  },
-  {
-   "holder": "محمد النوبي أحمد سليم",
-   "kind": "person",
-   "ticker": "FIRE",
-   "percent": 6.18,
-   "asOf": "2024-06-30",
-   "basis": "register",
-   "filingId": "291483",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/341096_1.pdf",
-   "shares": 850000,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -34958,6 +35060,24 @@
    "history": []
   },
   {
+   "holder": "محمد النوبي احمد سليم",
+   "kind": "person",
+   "ticker": "FIRE",
+   "percent": 4.73,
+   "asOf": "2026-07-09",
+   "basis": "trade",
+   "filingId": "291130",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340798_1.pdf",
+   "openedAt": "2026-07-09",
+   "openingPercent": 5.1,
+   "history": [
+    {
+     "date": "2026-07-09",
+     "percent": 4.73
+    }
+   ]
+  },
+  {
    "holder": "دينا محمد يسري سعد زغلول",
    "kind": "person",
    "ticker": "RREI",
@@ -35322,6 +35442,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "عبد السلام مسعود عبد الكريم",
+   "kind": "person",
+   "ticker": "ARAB",
+   "percent": 4.2839,
+   "asOf": "2026-07-09",
+   "basis": "trade",
+   "filingId": "291081",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340754_1.pdf",
+   "openedAt": "2026-07-09",
+   "openingPercent": 6.3391,
+   "history": [
+    {
+     "date": "2026-07-09",
+     "percent": 4.2839
+    }
+   ]
   },
   {
    "holder": "محمد اشرف عمر عمر",
@@ -40844,7 +40982,7 @@
    "history": []
   },
   {
-   "holder": "عاطف عبد الحميد غالب عبد الله الشرقاوي",
+   "holder": "عاطف عبدالحميد غالب عبدالله الشرقاوى",
    "kind": "person",
    "ticker": "BIDI",
    "percent": 0.38,
@@ -41346,9 +41484,13 @@
    "basis": "trade",
    "filingId": "292378",
    "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf",
-   "openedAt": "2026-07-13",
-   "openingPercent": 3.0124,
+   "openedAt": "2026-07-12",
+   "openingPercent": 0.24187,
    "history": [
+    {
+     "date": "2026-07-12",
+     "percent": 3.0254
+    },
     {
      "date": "2026-07-13",
      "percent": 2.29155
@@ -46170,14 +46312,46 @@
    ]
   },
   {
+   "start": "2026-07-05",
+   "end": "2026-07-09",
+   "label": "5–9 Jul",
+   "labelAr": "5–9 يوليو",
+   "sessions": 1,
+   "buys": 0,
+   "sells": 2,
+   "value": 113293193.38,
+   "moves": [
+    {
+     "holder": "عبد السلام مسعود عبد الكريم",
+     "kind": "person",
+     "ticker": "ARAB",
+     "from": 6.3391,
+     "to": 4.2839,
+     "trades": 1,
+     "value": 112989409.46,
+     "change": -2.0552
+    },
+    {
+     "holder": "محمد النوبي احمد سليم",
+     "kind": "person",
+     "ticker": "FIRE",
+     "from": 5.1,
+     "to": 4.73,
+     "trades": 1,
+     "value": 303783.92,
+     "change": -0.37
+    }
+   ]
+  },
+  {
    "start": "2026-07-12",
    "end": "2026-07-16",
    "label": "12–16 Jul",
    "labelAr": "12–16 يوليو",
-   "sessions": 3,
-   "buys": 6,
+   "sessions": 4,
+   "buys": 8,
    "sells": 5,
-   "value": 92218874.33,
+   "value": 93247129.85,
    "moves": [
     {
      "holder": "علاء الدين احمد فتوح فرحات",
@@ -46210,6 +46384,16 @@
      "change": -3.657
     },
     {
+     "holder": "أسامة فوزي محمد سعيد",
+     "kind": "person",
+     "ticker": "FIRE",
+     "from": 0.24187,
+     "to": 2.29155,
+     "trades": 2,
+     "value": 420971.59,
+     "change": 2.0497
+    },
+    {
      "holder": "محمد ابراهيم السيد عبد السلام",
      "kind": "person",
      "ticker": "AMPI",
@@ -46228,16 +46412,6 @@
      "trades": 1,
      "value": 1821512.14,
      "change": -0.73
-    },
-    {
-     "holder": "أسامة فوزي محمد سعيد",
-     "kind": "person",
-     "ticker": "FIRE",
-     "from": 3.0124,
-     "to": 2.29155,
-     "trades": 1,
-     "value": 49334.58,
-     "change": -0.7208
     },
     {
      "holder": "محمد اشرف عمر عمر",
@@ -46288,6 +46462,16 @@
      "trades": 1,
      "value": 3225152.0,
      "change": 0.254
+    },
+    {
+     "holder": "عاطف عبدالحميد غالب عبدالله الشرقاوى",
+     "kind": "person",
+     "ticker": "ELNA",
+     "from": 8.772,
+     "to": 8.987,
+     "trades": 1,
+     "value": 656618.51,
+     "change": 0.215
     }
    ]
   },
@@ -47619,13 +47803,13 @@
   },
   {
    "start": "2026-09-13",
-   "end": "2026-09-16",
-   "label": "13–16 Sep",
-   "labelAr": "13–16 سبتمبر",
-   "sessions": 4,
-   "buys": 4,
+   "end": "2026-09-17",
+   "label": "13–17 Sep",
+   "labelAr": "13–17 سبتمبر",
+   "sessions": 5,
+   "buys": 5,
    "sells": 7,
-   "value": 230350342.27,
+   "value": 237556342.27,
    "moves": [
     {
      "holder": "المجموعه الاستثماريه العقاريه الكويتيه ش م ك مقفله",
@@ -47676,6 +47860,16 @@
      "trades": 1,
      "value": 9443500.0,
      "change": 1.08
+    },
+    {
+     "holder": "محمد إبراهيم عبد المنعم النحاس",
+     "kind": "person",
+     "ticker": "COPR",
+     "from": 9.513,
+     "to": 10.464,
+     "trades": 1,
+     "value": 7206000.0,
+     "change": 0.951
     },
     {
      "holder": "ابراهيم محمد ابراهيم احمد هيبه",
@@ -49709,7 +49903,7 @@
    "seats": [
     {
      "name": "عاطف عبد الحميد غالب عبد الله الشرقاوي",
-     "holder": "عاطف عبد الحميد غالب عبد الله الشرقاوي",
+     "holder": "عاطف عبدالحميد غالب عبدالله الشرقاوى",
      "role": "رئيس مجلس الإدارة",
      "representing": "عن نفسة"
     },
@@ -50837,7 +51031,7 @@
     },
     {
      "name": "محمد ابراهيم عبد المنعم النحاس",
-     "holder": "محمد ابراهيم عبد المنعم النحاس",
+     "holder": "محمد إبراهيم عبد المنعم النحاس",
      "role": "عضو مجلس الادارة والعضو المنتدب لشئون الاستثمار",
      "representing": null
     },
