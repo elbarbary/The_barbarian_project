@@ -1,22 +1,10 @@
 {
- "generated": "2026-09-16",
+ "generated": "2026-09-17",
  "source": "EGX disclosures — scheduled dates the issuer has filed",
  "past_days": 90,
- "count": 439,
+ "count": 438,
  "estimated": 377,
  "events": [
-  {
-   "date": "2026-06-18",
-   "kind": "rights_open",
-   "note": "Rights issue subscription opens",
-   "ticker": "ICMI",
-   "title": "Future care for medical industries (FCMI) (ICMI.CA) - Rights Issue (SMEs Market)",
-   "title_ar": "فيوتشر كير للصناعات الطبية (ICMI.CA) - حق اكتتاب (سوق الشركات الصغيرة والمتوسطة)",
-   "filed": "2026-06-04",
-   "section": "Corporate Actions",
-   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=289421",
-   "id": "egx-289421"
-  },
   {
    "date": "2026-06-21",
    "kind": "dividend_payment",

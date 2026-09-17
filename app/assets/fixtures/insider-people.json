@@ -1,15 +1,15 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-16T22:01:46+00:00",
+ "generated": "2026-09-17T06:21:26+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1313,
- "tradeCount": 141,
+ "peopleCount": 1314,
+ "tradeCount": 147,
  "tickerCount": 241,
  "tradedTickerCount": 68,
  "firmCount": 437,
- "personCount": 876,
+ "personCount": 877,
  "aliasCount": 139,
  "registerCount": 240,
  "overDisclosed": [],
@@ -472,6 +472,62 @@
    ]
   },
   {
+   "id": "سمو للإستشارات",
+   "name": "سمو للإستشارات",
+   "nameEn": "Somou for Consultations",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": [
+    "سمو للاستشارات",
+    "شركة سمو للاستشارات",
+    "شركة سمو للاستشارات (مجموعة مرتبطة )",
+    "شركة سمو للاستشارات ش . م . م"
+   ],
+   "tickers": [
+    "ELEC"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 0,
+   "soldCount": 2,
+   "value": 477891000.0,
+   "singleCompanyMove": {
+    "ticker": "ELEC",
+    "from": 21.05,
+    "to": 14,
+    "change": -7.05
+   },
+   "trades": [
+    {
+     "filingId": "293763",
+     "date": "2026-08-23",
+     "ticker": "ELEC",
+     "company": null,
+     "companyAr": "الكابلات الكهربائية المصرية",
+     "action": "sell",
+     "shares": 23810000,
+     "price": 2.1,
+     "value": 50001000.0,
+     "stakeBefore": 21.05,
+     "stakeAfter": 20.328,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343315_1.pdf"
+    },
+    {
+     "filingId": "294406",
+     "date": "2026-09-07",
+     "ticker": "ELEC",
+     "company": null,
+     "companyAr": "الكابلات الكهربائية المصرية",
+     "action": "sell",
+     "shares": 209750000,
+     "price": 2.04,
+     "value": 427890000.0,
+     "stakeBefore": 20.33,
+     "stakeAfter": 14,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343894_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "شركة النصر للملابس والمنسوجات كابو",
    "name": "شركة النصر للملابس والمنسوجات كابو",
    "nameEn": "El-Nasr Clothing & Textiles Co. (KABO)",
@@ -928,6 +984,71 @@
      "stakeBefore": 5.0527,
      "stakeAfter": 0,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342133_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "الشركة الوطنية للتجارة والتنمية (انتاد)",
+   "name": "الشركة الوطنية للتجارة والتنمية (انتاد)",
+   "nameEn": "National Company for Trading and Development (ENTAD)",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "KWIN"
+   ],
+   "tradeCount": 3,
+   "boughtCount": 0,
+   "soldCount": 3,
+   "value": 38473587.9,
+   "singleCompanyMove": {
+    "ticker": "KWIN",
+    "from": 15.99,
+    "to": 11.8,
+    "change": -4.19
+   },
+   "trades": [
+    {
+     "filingId": "292191",
+     "date": "2026-07-30",
+     "ticker": "KWIN",
+     "company": null,
+     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
+     "action": "sell",
+     "shares": 274098,
+     "price": 105.16,
+     "value": 28824145.68,
+     "stakeBefore": 15.99,
+     "stakeAfter": 13.38,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341887_1.pdf"
+    },
+    {
+     "filingId": "294356",
+     "date": "2026-09-06",
+     "ticker": "KWIN",
+     "company": null,
+     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
+     "action": "sell",
+     "shares": 60000,
+     "price": 105.72,
+     "value": 6343200.0,
+     "stakeBefore": 13.38,
+     "stakeAfter": 12.81,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343876_1.pdf"
+    },
+    {
+     "filingId": "294525",
+     "date": "2026-09-09",
+     "ticker": "KWIN",
+     "company": null,
+     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
+     "action": "sell",
+     "shares": 34347,
+     "price": 96.26,
+     "value": 3306242.22,
+     "stakeBefore": 12.13,
+     "stakeAfter": 11.8,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344019_1.pdf"
     }
    ]
   },
@@ -1614,57 +1735,6 @@
    ]
   },
   {
-   "id": "الشركة الوطنية للتجارة والتنمية (انتاد)",
-   "name": "الشركة الوطنية للتجارة والتنمية (انتاد)",
-   "nameEn": "National Company for Trading and Development (ENTAD)",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": null,
-   "tickers": [
-    "KWIN"
-   ],
-   "tradeCount": 2,
-   "boughtCount": 0,
-   "soldCount": 2,
-   "value": 9649442.22,
-   "singleCompanyMove": {
-    "ticker": "KWIN",
-    "from": 13.38,
-    "to": 11.8,
-    "change": -1.58
-   },
-   "trades": [
-    {
-     "filingId": "294356",
-     "date": "2026-09-06",
-     "ticker": "KWIN",
-     "company": null,
-     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
-     "action": "sell",
-     "shares": 60000,
-     "price": 105.72,
-     "value": 6343200.0,
-     "stakeBefore": 13.38,
-     "stakeAfter": 12.81,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343876_1.pdf"
-    },
-    {
-     "filingId": "294525",
-     "date": "2026-09-09",
-     "ticker": "KWIN",
-     "company": null,
-     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
-     "action": "sell",
-     "shares": 34347,
-     "price": 96.26,
-     "value": 3306242.22,
-     "stakeBefore": 12.13,
-     "stakeAfter": 11.8,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/344019_1.pdf"
-    }
-   ]
-  },
-  {
    "id": "خالد عبد الرازق محمد عبد الغنى",
    "name": "خالد عبد الرازق محمد عبد الغنى",
    "nameEn": "Khaled Abdel Razek Mohamed Abdel Ghani",
@@ -2203,48 +2273,6 @@
      "stakeBefore": 0,
      "stakeAfter": 0.73,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342295_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "سمو للإستشارات",
-   "name": "سمو للإستشارات",
-   "nameEn": "Somou for Consultations",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": [
-    "سمو للاستشارات",
-    "شركة سمو للاستشارات",
-    "شركة سمو للاستشارات (مجموعة مرتبطة )",
-    "شركة سمو للاستشارات ش . م . م"
-   ],
-   "tickers": [
-    "ELEC"
-   ],
-   "tradeCount": 1,
-   "boughtCount": 0,
-   "soldCount": 1,
-   "value": 50001000.0,
-   "singleCompanyMove": {
-    "ticker": "ELEC",
-    "from": 21.05,
-    "to": 20.328,
-    "change": -0.722
-   },
-   "trades": [
-    {
-     "filingId": "293763",
-     "date": "2026-08-23",
-     "ticker": "ELEC",
-     "company": null,
-     "companyAr": "الكابلات الكهربائية المصرية",
-     "action": "sell",
-     "shares": 23810000,
-     "price": 2.1,
-     "value": 50001000.0,
-     "stakeBefore": 21.05,
-     "stakeAfter": 20.328,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343315_1.pdf"
     }
    ]
   },
@@ -3118,6 +3146,43 @@
    ]
   },
   {
+   "id": "مارتينا فوزي فؤاد بخيت نخلة",
+   "name": "مارتينا فوزي فؤاد بخيت نخلة",
+   "nameEn": "Martina Fawzy Fouad Bakhit Nakhla",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "EHDR"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 1089530.0,
+   "singleCompanyMove": {
+    "ticker": "EHDR",
+    "from": 1.6767,
+    "to": 1.6206,
+    "change": -0.0561
+   },
+   "trades": [
+    {
+     "filingId": "292209",
+     "date": "2026-07-30",
+     "ticker": "EHDR",
+     "company": null,
+     "companyAr": "المصريين للاسكان والتنمية والتعمير ش م م",
+     "action": "sell",
+     "shares": 377000,
+     "price": 2.89,
+     "value": 1089530.0,
+     "stakeBefore": 1.6767,
+     "stakeAfter": 1.6206,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341917_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "محمد تيسير محمد علي طباع",
    "name": "محمد تيسير محمد علي طباع",
    "nameEn": "Mohamed Taysir Mohamed Ali Tabbaa",
@@ -3535,6 +3600,97 @@
    ]
   },
   {
+   "id": "جمال عبد الفتاح عثمان حسن",
+   "name": "جمال عبد الفتاح عثمان حسن",
+   "nameEn": "Gamal Abd El Fattah Othman Hassan",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "جمال عبدالفتاح عثمان حسن"
+   ],
+   "tickers": [
+    "AIDC",
+    "AIH"
+   ],
+   "tradeCount": 5,
+   "boughtCount": 0,
+   "soldCount": 5,
+   "value": 273856782.89,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "292193",
+     "date": "2026-07-30",
+     "ticker": "AIDC",
+     "company": null,
+     "companyAr": "ارابيا للاستثمار والتنمية",
+     "action": "sell",
+     "shares": 82000000,
+     "price": 0.725,
+     "value": 59450000.0,
+     "stakeBefore": 23.871,
+     "stakeAfter": 18.61,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341884_1.pdf"
+    },
+    {
+     "filingId": "293716",
+     "date": "2026-08-23",
+     "ticker": "AIH",
+     "company": null,
+     "companyAr": "ارابيا انفستمنتس هولدنج",
+     "action": "sell",
+     "shares": 210000000,
+     "price": 0.531,
+     "value": 111510000.0,
+     "stakeBefore": 31.706,
+     "stakeAfter": 18.23,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343238_1.pdf"
+    },
+    {
+     "filingId": "293800",
+     "date": "2026-08-24",
+     "ticker": "AIH",
+     "company": null,
+     "companyAr": "ارابيا انفستمنتس هولدنج",
+     "action": "sell",
+     "shares": 49000000,
+     "price": 0.474,
+     "value": 23226000.0,
+     "stakeBefore": 18.23,
+     "stakeAfter": 15.08,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343312_1.pdf"
+    },
+    {
+     "filingId": "294145",
+     "date": "2026-08-31",
+     "ticker": "AIDC",
+     "company": null,
+     "companyAr": "ارابيا للاستثمار والتنمية",
+     "action": "sell",
+     "shares": 11490890,
+     "price": 0.801,
+     "value": 9204202.89,
+     "stakeBefore": 15.06,
+     "stakeAfter": 14.324,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343623_1.pdf"
+    },
+    {
+     "filingId": "294184",
+     "date": "2026-08-31",
+     "ticker": "AIH",
+     "company": null,
+     "companyAr": "ارابيا انفستمنتس هولدنج",
+     "action": "sell",
+     "shares": 116860000,
+     "price": 0.603,
+     "value": 70466580.0,
+     "stakeBefore": 15.08,
+     "stakeAfter": 7.59,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343680_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "محمد محمود حسن جاب الله",
    "name": "محمد محمود حسن جاب الله",
    "nameEn": "Mohamed Mahmoud Hassan Gaballah",
@@ -3606,83 +3762,6 @@
      "stakeBefore": 1.691,
      "stakeAfter": 0,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343711_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "جمال عبد الفتاح عثمان حسن",
-   "name": "جمال عبد الفتاح عثمان حسن",
-   "nameEn": "Gamal Abd El Fattah Othman Hassan",
-   "script": "ar",
-   "kind": "person",
-   "aliases": [
-    "جمال عبدالفتاح عثمان حسن"
-   ],
-   "tickers": [
-    "AIDC",
-    "AIH"
-   ],
-   "tradeCount": 4,
-   "boughtCount": 0,
-   "soldCount": 4,
-   "value": 214406782.89,
-   "singleCompanyMove": null,
-   "trades": [
-    {
-     "filingId": "293716",
-     "date": "2026-08-23",
-     "ticker": "AIH",
-     "company": null,
-     "companyAr": "ارابيا انفستمنتس هولدنج",
-     "action": "sell",
-     "shares": 210000000,
-     "price": 0.531,
-     "value": 111510000.0,
-     "stakeBefore": 31.706,
-     "stakeAfter": 18.23,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343238_1.pdf"
-    },
-    {
-     "filingId": "293800",
-     "date": "2026-08-24",
-     "ticker": "AIH",
-     "company": null,
-     "companyAr": "ارابيا انفستمنتس هولدنج",
-     "action": "sell",
-     "shares": 49000000,
-     "price": 0.474,
-     "value": 23226000.0,
-     "stakeBefore": 18.23,
-     "stakeAfter": 15.08,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343312_1.pdf"
-    },
-    {
-     "filingId": "294145",
-     "date": "2026-08-31",
-     "ticker": "AIDC",
-     "company": null,
-     "companyAr": "ارابيا للاستثمار والتنمية",
-     "action": "sell",
-     "shares": 11490890,
-     "price": 0.801,
-     "value": 9204202.89,
-     "stakeBefore": 15.06,
-     "stakeAfter": 14.324,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343623_1.pdf"
-    },
-    {
-     "filingId": "294184",
-     "date": "2026-08-31",
-     "ticker": "AIH",
-     "company": null,
-     "companyAr": "ارابيا انفستمنتس هولدنج",
-     "action": "sell",
-     "shares": 116860000,
-     "price": 0.603,
-     "value": 70466580.0,
-     "stakeBefore": 15.08,
-     "stakeAfter": 7.59,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343680_1.pdf"
     }
    ]
   },
@@ -3767,6 +3846,67 @@
    ]
   },
   {
+   "id": "محمد اشرف عمر عمر",
+   "name": "محمد اشرف عمر عمر",
+   "nameEn": "Mohamed Ashraf Omar Omar",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "HBCO",
+    "OBRI"
+   ],
+   "tradeCount": 3,
+   "boughtCount": 1,
+   "soldCount": 2,
+   "value": 41926008.0,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "292222",
+     "date": "2026-07-30",
+     "ticker": "OBRI",
+     "company": null,
+     "companyAr": "العبور للاستثمار العقارى",
+     "action": "sell",
+     "shares": 520000,
+     "price": 34.0332,
+     "value": 17697264.0,
+     "stakeBefore": 10.025,
+     "stakeAfter": 8.725,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341916_1.pdf"
+    },
+    {
+     "filingId": "292382",
+     "date": "2026-08-03",
+     "ticker": "HBCO",
+     "company": null,
+     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
+     "action": "buy",
+     "shares": 534000,
+     "price": 8.866,
+     "value": 4734444.0,
+     "stakeBefore": 9.986,
+     "stakeAfter": 10.728,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342042_1.pdf"
+    },
+    {
+     "filingId": "292479",
+     "date": "2026-08-04",
+     "ticker": "OBRI",
+     "company": null,
+     "companyAr": "العبور للاستثمار العقارى",
+     "action": "sell",
+     "shares": 600000,
+     "price": 32.4905,
+     "value": 19494300.0,
+     "stakeBefore": 5.75,
+     "stakeAfter": 4.25,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342099_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "الحصن للاستشارات",
    "name": "الحصن للاستشارات",
    "nameEn": "El Hosn Lilistisharat",
@@ -3832,6 +3972,70 @@
    ]
   },
   {
+   "id": "نواف بن عبد الله بن ابراهيم بن دايل",
+   "name": "نواف بن عبد الله بن ابراهيم بن دايل",
+   "nameEn": "Nawaf bin Abdullah bin Ibrahim bin Dayel",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "نواف بن عبدالله بن إبراهيم بن دايل"
+   ],
+   "tickers": [
+    "ASPI",
+    "ELEC",
+    "GDWA"
+   ],
+   "tradeCount": 3,
+   "boughtCount": 2,
+   "soldCount": 1,
+   "value": 135244082.96,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "292194",
+     "date": "2026-07-30",
+     "ticker": "ASPI",
+     "company": null,
+     "companyAr": "اسباير كابيتال القابضة للاستثمارات المالية",
+     "action": "buy",
+     "shares": 18822823,
+     "price": 0.4155,
+     "value": 7820882.956499999,
+     "stakeBefore": 4.15,
+     "stakeAfter": 5.1,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341886_1.pdf"
+    },
+    {
+     "filingId": "293573",
+     "date": "2026-08-19",
+     "ticker": "GDWA",
+     "company": null,
+     "companyAr": "جدوى للتنمية الصناعية",
+     "action": "sell",
+     "shares": 7200000,
+     "price": 0.811,
+     "value": 5839200.0,
+     "stakeBefore": 5.002,
+     "stakeAfter": 4.868,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343134_1.pdf"
+    },
+    {
+     "filingId": "294437",
+     "date": "2026-09-08",
+     "ticker": "ELEC",
+     "company": null,
+     "companyAr": "الكابلات الكهربائية المصرية",
+     "action": "buy",
+     "shares": 59600000,
+     "price": 2.04,
+     "value": 121584000.0,
+     "stakeBefore": 3.44,
+     "stakeAfter": 5.239,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343920_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "هشام إبراهيم عبد المنعم النحاس",
    "name": "هشام إبراهيم عبد المنعم النحاس",
    "nameEn": "Hesham Ibrahim Abdel Moneim El Nahas",
@@ -3882,53 +4086,6 @@
      "stakeBefore": 3.805,
      "stakeAfter": 2.537,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342354_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "محمد اشرف عمر عمر",
-   "name": "محمد اشرف عمر عمر",
-   "nameEn": "Mohamed Ashraf Omar Omar",
-   "script": "ar",
-   "kind": "person",
-   "aliases": null,
-   "tickers": [
-    "HBCO",
-    "OBRI"
-   ],
-   "tradeCount": 2,
-   "boughtCount": 1,
-   "soldCount": 1,
-   "value": 24228744.0,
-   "singleCompanyMove": null,
-   "trades": [
-    {
-     "filingId": "292382",
-     "date": "2026-08-03",
-     "ticker": "HBCO",
-     "company": null,
-     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
-     "action": "buy",
-     "shares": 534000,
-     "price": 8.866,
-     "value": 4734444.0,
-     "stakeBefore": 9.986,
-     "stakeAfter": 10.728,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342042_1.pdf"
-    },
-    {
-     "filingId": "292479",
-     "date": "2026-08-04",
-     "ticker": "OBRI",
-     "company": null,
-     "companyAr": "العبور للاستثمار العقارى",
-     "action": "sell",
-     "shares": 600000,
-     "price": 32.4905,
-     "value": 19494300.0,
-     "stakeBefore": 5.75,
-     "stakeAfter": 4.25,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342099_1.pdf"
     }
    ]
   },
@@ -4027,55 +4184,6 @@
      "stakeBefore": 6.426,
      "stakeAfter": 3.807,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343284_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "نواف بن عبد الله بن ابراهيم بن دايل",
-   "name": "نواف بن عبد الله بن ابراهيم بن دايل",
-   "nameEn": "Nawaf bin Abdullah bin Ibrahim bin Dayel",
-   "script": "ar",
-   "kind": "person",
-   "aliases": [
-    "نواف بن عبدالله بن إبراهيم بن دايل"
-   ],
-   "tickers": [
-    "ELEC",
-    "GDWA"
-   ],
-   "tradeCount": 2,
-   "boughtCount": 1,
-   "soldCount": 1,
-   "value": 127423200.0,
-   "singleCompanyMove": null,
-   "trades": [
-    {
-     "filingId": "293573",
-     "date": "2026-08-19",
-     "ticker": "GDWA",
-     "company": null,
-     "companyAr": "جدوى للتنمية الصناعية",
-     "action": "sell",
-     "shares": 7200000,
-     "price": 0.811,
-     "value": 5839200.0,
-     "stakeBefore": 5.002,
-     "stakeAfter": 4.868,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343134_1.pdf"
-    },
-    {
-     "filingId": "294437",
-     "date": "2026-09-08",
-     "ticker": "ELEC",
-     "company": null,
-     "companyAr": "الكابلات الكهربائية المصرية",
-     "action": "buy",
-     "shares": 59600000,
-     "price": 2.04,
-     "value": 121584000.0,
-     "stakeBefore": 3.44,
-     "stakeAfter": 5.239,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343920_1.pdf"
     }
    ]
   },
@@ -26019,24 +26127,6 @@
    "history": []
   },
   {
-   "holder": "سمو للإستشارات",
-   "kind": "firm",
-   "ticker": "ELEC",
-   "percent": 20.328,
-   "asOf": "2026-08-23",
-   "basis": "trade",
-   "filingId": "293763",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/343315_1.pdf",
-   "openedAt": "2026-08-23",
-   "openingPercent": 21.05,
-   "history": [
-    {
-     "date": "2026-08-23",
-     "percent": 20.328
-    }
-   ]
-  },
-  {
    "holder": "مازن بن محمد بن عبدالرحمن السعيد",
    "kind": "person",
    "ticker": "ARVA",
@@ -27273,9 +27363,13 @@
    "basis": "trade",
    "filingId": "294145",
    "source": "https://www.egx.com.eg/downloads/Bulletins/343623_1.pdf",
-   "openedAt": "2026-08-31",
-   "openingPercent": 15.06,
+   "openedAt": "2026-07-30",
+   "openingPercent": 23.871,
    "history": [
+    {
+     "date": "2026-07-30",
+     "percent": 18.61
+    },
     {
      "date": "2026-08-31",
      "percent": 14.324
@@ -27407,6 +27501,28 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "سمو للإستشارات",
+   "kind": "firm",
+   "ticker": "ELEC",
+   "percent": 14,
+   "asOf": "2026-09-07",
+   "basis": "trade",
+   "filingId": "294406",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/343894_1.pdf",
+   "openedAt": "2026-08-23",
+   "openingPercent": 21.05,
+   "history": [
+    {
+     "date": "2026-08-23",
+     "percent": 20.328
+    },
+    {
+     "date": "2026-09-07",
+     "percent": 14
+    }
+   ]
   },
   {
    "holder": "يس إبراهيم لطفي منصور",
@@ -28145,9 +28261,13 @@
    "basis": "trade",
    "filingId": "294525",
    "source": "https://www.egx.com.eg/downloads/Bulletins/344019_1.pdf",
-   "openedAt": "2026-09-06",
-   "openingPercent": 13.38,
+   "openedAt": "2026-07-30",
+   "openingPercent": 15.99,
    "history": [
+    {
+     "date": "2026-07-30",
+     "percent": 13.38
+    },
     {
      "date": "2026-09-06",
      "percent": 12.81
@@ -33313,6 +33433,24 @@
    "history": []
   },
   {
+   "holder": "نواف بن عبد الله بن ابراهيم بن دايل",
+   "kind": "person",
+   "ticker": "ASPI",
+   "percent": 5.1,
+   "asOf": "2026-07-30",
+   "basis": "trade",
+   "filingId": "292194",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341886_1.pdf",
+   "openedAt": "2026-07-30",
+   "openingPercent": 4.15,
+   "history": [
+    {
+     "date": "2026-07-30",
+     "percent": 5.1
+    }
+   ]
+  },
+  {
    "holder": "رانيا اسماعيل محمد مهدى",
    "kind": "person",
    "ticker": "EOSB",
@@ -34562,9 +34700,13 @@
    "basis": "trade",
    "filingId": "292479",
    "source": "https://www.egx.com.eg/downloads/Bulletins/342099_1.pdf",
-   "openedAt": "2026-08-04",
-   "openingPercent": 5.75,
+   "openedAt": "2026-07-30",
+   "openingPercent": 10.025,
    "history": [
+    {
+     "date": "2026-07-30",
+     "percent": 8.725
+    },
     {
      "date": "2026-08-04",
      "percent": 4.25
@@ -37307,6 +37449,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "مارتينا فوزي فؤاد بخيت نخلة",
+   "kind": "person",
+   "ticker": "EHDR",
+   "percent": 1.6206,
+   "asOf": "2026-07-30",
+   "basis": "trade",
+   "filingId": "292209",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341917_1.pdf",
+   "openedAt": "2026-07-30",
+   "openingPercent": 1.6767,
+   "history": [
+    {
+     "date": "2026-07-30",
+     "percent": 1.6206
+    }
+   ]
   },
   {
    "holder": "شركه مصر الدوليه للسيراميك",
@@ -45283,14 +45443,54 @@
   },
   {
    "start": "2026-07-26",
-   "end": "2026-07-29",
-   "label": "26–29 Jul",
-   "labelAr": "26–29 يوليو",
-   "sessions": 1,
-   "buys": 1,
-   "sells": 0,
-   "value": 9268701.04,
+   "end": "2026-07-30",
+   "label": "26–30 Jul",
+   "labelAr": "26–30 يوليو",
+   "sessions": 2,
+   "buys": 2,
+   "sells": 4,
+   "value": 124150523.67,
    "moves": [
+    {
+     "holder": "جمال عبد الفتاح عثمان حسن",
+     "kind": "person",
+     "ticker": "AIDC",
+     "from": 23.871,
+     "to": 18.61,
+     "trades": 1,
+     "value": 59450000.0,
+     "change": -5.261
+    },
+    {
+     "holder": "الشركة الوطنية للتجارة والتنمية (انتاد)",
+     "kind": "firm",
+     "ticker": "KWIN",
+     "from": 15.99,
+     "to": 13.38,
+     "trades": 1,
+     "value": 28824145.68,
+     "change": -2.61
+    },
+    {
+     "holder": "محمد اشرف عمر عمر",
+     "kind": "person",
+     "ticker": "OBRI",
+     "from": 10.025,
+     "to": 8.725,
+     "trades": 1,
+     "value": 17697264.0,
+     "change": -1.3
+    },
+    {
+     "holder": "نواف بن عبد الله بن ابراهيم بن دايل",
+     "kind": "person",
+     "ticker": "ASPI",
+     "from": 4.15,
+     "to": 5.1,
+     "trades": 1,
+     "value": 7820882.96,
+     "change": 0.95
+    },
     {
      "holder": "السيد صابر السيد حميد",
      "kind": "person",
@@ -45300,6 +45500,16 @@
      "trades": 1,
      "value": 9268701.04,
      "change": 0.825
+    },
+    {
+     "holder": "مارتينا فوزي فؤاد بخيت نخلة",
+     "kind": "person",
+     "ticker": "EHDR",
+     "from": 1.6767,
+     "to": 1.6206,
+     "trades": 1,
+     "value": 1089530.0,
+     "change": -0.0561
     }
    ]
   },
@@ -46210,8 +46420,8 @@
    "labelAr": "6–10 سبتمبر",
    "sessions": 5,
    "buys": 5,
-   "sells": 10,
-   "value": 5904588909.19,
+   "sells": 11,
+   "value": 6332478909.19,
    "moves": [
     {
      "holder": "ناس للاستثمارات القابضة المحدودة",
@@ -46222,6 +46432,16 @@
      "trades": 1,
      "value": 5012500000.0,
      "change": 25
+    },
+    {
+     "holder": "سمو للإستشارات",
+     "kind": "firm",
+     "ticker": "ELEC",
+     "from": 20.33,
+     "to": 14,
+     "trades": 1,
+     "value": 427890000.0,
+     "change": -6.33
     },
     {
      "holder": "لايم فست بارتنرز للرعاية الصحية",
