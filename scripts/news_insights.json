@@ -3755,6 +3755,10 @@
     "meaning": "The International Fund for Agricultural Development (IFAD) deploys development financing and concessional funding structures across a global network of approximately 100 countries, directly allocating capital toward smallholder agricultural supply chains and rural production infrastructure.",
     "meaning_ar": "يوجه الصندوق الدولي للتنمية الزراعية (إيفاد) تمويلات تنموية وتسهيلات تمويلية عبر شبكة عالمية تضم نحو 100 دولة، حيث يخصص رأس المال مباشرة لسلاسل الإمداد الزراعية لصغار المزارعين والبنية التحتية للإنتاج الريفي."
   },
+  "اين تجد اعلي سعر لشراء وبيع اليورو في التحديث الصباحي لاسعار العملات؟": {
+    "meaning": "Commercial banks update foreign exchange bid and ask quotations at the start of daily operations based on interbank liquidity levels, treasury cash flows, and currency inventory positions.",
+    "meaning_ar": "تُحدّث البنوك التجارية أسعار عرض وطلب العملات الأجنبية في بداية المعاملات اليومية وفقاً لمستويات السيولة بين البنوك وتدفقات الخزانة النقدية ومراكز العملات المتاحة لديها."
+  },
   "اين وصل سعر الدينار الكويتي اليوم الاحد في البنوك؟": {
     "meaning": "Official foreign exchange quotations reflect the daily clearing rates between the Egyptian Pound and the Kuwaiti Dinar within the formal banking sector, which directly determine conversion costs for expatriate remittances and import settlement charges from Kuwait.",
     "meaning_ar": "تعكس أسعار الصرف الرسمية المعلنة أسعار المقاصة اليومية بين الجنيه المصري والدينار الكويتي داخل القطاع المصرفي، وهي الآلية التي تحدد تكلفة تحويلات العاملين بالخارج وتسوية المدفوعات التجارية للواردات من دولة الكويت."
@@ -6544,6 +6548,10 @@
   "ماونتن ڤيو تطلق المرحله الثانيه من مشروع Mountain View 1.1 في القاهره الجديده": {
     "meaning": "Launching the second phase of a real estate development releases additional residential inventory onto the primary market and commits working capital to land development and construction works under the project timeline.",
     "meaning_ar": "يمثل إطلاق المرحلة الثانية من مشروع تطوير عقاري طرح وحدات سكنية إضافية في السوق الأولية، وتوجيه رأس مال عامل نحو أعمال التطوير والإنشاءات المقررة ضمن الجدول الزمني للمشروع."
+  },
+  "مباحثات يابانيه امريكيه لتصنيع الرقايق ضمن اتفاقيه بقيمه 550 مليار دولار": {
+    "meaning": "This bilateral framework allocates capital expenditures toward semiconductor manufacturing infrastructure and establishes cross-border technology transfer between the two countries.",
+    "meaning_ar": "يُخصص هذا الإطار الثنائي نفقات رأسمالية للبنية التحتية لتصنيع أشباه الموصلات، ويحدد آليات لنقل التكنولوجيا عبر الحدود بين البلدين."
   },
   "مبادله الاماراتيه تستثمر مليار دولار في لوكين كوفي مع سنتوريوم كابيتال": {
     "meaning": "A co-investment of this scale injects institutional private equity directly into the target company's capital structure, expanding its cash reserves and allocating equity ownership across institutional asset managers.",
