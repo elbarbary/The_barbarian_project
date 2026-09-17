@@ -4147,6 +4147,10 @@
     "meaning": "Core inflation measures persistent consumer price changes excluding volatile food and energy components, serving as an operational benchmark for central bank monetary policy adjustments that dictate borrowing costs across global financial markets.",
     "meaning_ar": "يقيس التضخم الأساسي التغيرات المستمرة في أسعار المستهلكين بعد استبعاد بنود الغذاء والطاقة المتقلبة، ويشكل المعيار التشغيلي الذي تعتمد عليه البنوك المركزية لتحديد أسعار الفائدة وتكاليف الاقتراض في الأسواق المالية."
   },
+  "بنك مصر يطلق خدمه الزياره المنزليه المجانيه لكبار السن وذوي الهمم": {
+    "meaning": "This initiative represents an expansion of direct retail distribution channels, deploying bank personnel to provide standard operational services off-premises to specific customer segments.",
+    "meaning_ar": "يمثل هذا الإجراء توسيعاً لقنوات التوزيع المصرفي المباشر للأفراد، حيث يتم إرسال موظفي البنك لتقديم الخدمات المصرفية المعتادة خارج المقرات الرسمية لشرائح محددة من العملاء."
+  },
   "بنك مصر يواصل تالقه في مسابقات العاب القوي باولمبياد الشركات بالاسكندريه": {
     "meaning": "This represents internal corporate sports participation and employee engagement activities, which operate within the bank's human resources and public relations budgets without impacting core banking operations.",
     "meaning_ar": "يمثل هذا الخبر مشاركة في الأنشطة الرياضية والفعاليات العمالية للشركات، والتي تندرج ضمن ميزانيات الموارد البشرية والعلاقات العامة بالبنك دون التأثير على العمليات المصرفية الأساسية."
@@ -4371,6 +4375,10 @@
   "تراجع اسعار النحاس في بورصه لندن مع ارتفاع الدولار": {
     "meaning": "Dollar-denominated copper prices on international exchanges adjust downward as the US dollar strengthens, altering procurement costs for industrial manufacturers and cable producers.",
     "meaning_ar": "تتراجع أسعار النحاس المقومة بالدولار في البورصات العالمية مع صعود العملة الأمريكية، مما يغير تكاليف الشراء للشركات الصناعية ومصنعي الكابلات."
+  },
+  "تراجع اسعار النفط مع زياده صادرات السعوديه عبر هرمز": {
+    "meaning": "Higher crude oil exports expand the available physical supply in global energy markets, lowering immediate procurement prices. For Egypt, lower global oil prices directly decrease the import bill for petroleum products and adjust input costs for energy-intensive domestic industries.",
+    "meaning_ar": "يؤدي ارتفاع صادرات النفط الخام إلى زيادة المعروض الفعلي في أسواق الطاقة العالمية، مما يخفض أسعار التداول الفورية. وبالنسبة لمصر، يقلص تراجع أسعار النفط العالمية تكلفة فاتورة استيراد المنتجات البترولية ويعدل تكاليف المدخلات التشغيلية للقطاعات الصناعية كثيفة الاستهلاك للطاقة."
   },
   "تراجع الاسترليني وعوايد السندات البريطانيه عقب قرار بنك انجلترا": {
     "meaning": "The Bank of England's monetary policy decision shifts capital flows, resulting in simultaneous repricing that lowers the exchange rate of the British pound and reduces yields across UK sovereign debt instruments.",
@@ -6801,6 +6809,10 @@
     "meaning": "The cancellation of a planned insider share disposition maintains the current insider ownership percentage and prevents the entry of additional existing shares into the open market float.",
     "meaning_ar": "يؤدي إلغاء خطة تخارج أحد كبار المساهمين الداخليين إلى الإبقاء على نسبة ملكيته الحالية دون تغيير، ويمنع طرح حصة إضافية من الأسهم القائمة للتداول الحر في السوق."
   },
+  "لاول مره في تاريخ العلاقات بين البلدين.. «الزراعه» تنظم اكبر تجمع مصري اوزبكي": {
+    "meaning": "The bilateral agricultural forum establishes direct institutional and commercial communication channels between Egyptian and Uzbek agribusiness firms, technical agencies, and commodity traders. Operationally, it facilitates direct cross-border trade negotiations, seed and crop technology exchanges, and contract farming frameworks.",
+    "meaning_ar": "يؤسس المنتدى الزراعي الثنائي قنوات اتصال مؤسسية وتجارية مباشرة بين الشركات الزراعية والهيئات الفنية وتجار السلع في مصر وأوزبكستان، مما يوفر إطاراً للمفاوضات التجارية المباشرة ونقل التكنولوجيا الزراعية والتقاوي وترتيبات الزراعة التعاقدية."
+  },
   "لايم فست بارتنرز تقلص حصتها في الاسكندريه للخدمات الطبيه الي": {
     "meaning": "A shareholder reducing its equity ownership alters the company's ownership structure and shifts the proportion of shares held as free float on the exchange.",
     "meaning_ar": "يؤدي تقليص أحد المساهمين لنسبة ملكيته إلى تعديل هيكل ملكية الشركة وتغيير نسبة الأسهم المتاحة للتداول الحر في البورصة."
@@ -6812,6 +6824,10 @@
   "لجنه القيد تحدد موعد ادراج سهم ام ان تي تيك القابضه": {
     "meaning": "The listing committee sets the official date on which the company's shares are registered on the exchange's trading platform, transitioning the security from unlisted status to an active financial instrument accessible in the secondary market.",
     "meaning_ar": "تحدد لجنة القيد الموعد الرسمي لتسجيل أسهم الشركة على شاشات التداول بالبورصة، وهو الإجراء الذي ينقل الورقة المالية من وضع غير المقيد إلى أداة مالية متاحة في السوق الثانوية."
+  },
+  "لماذا ارتفعت اسعار الفضه في مصر؟.. عيار 999 يسجل 106 جنيهات": {
+    "meaning": "Domestic silver pricing reflects changes in global spot commodity benchmarks combined with the prevailing official and parallel exchange rates of the Egyptian pound, alongside local supply-demand dynamics and manufacturing premiums.",
+    "meaning_ar": "يعكس تسعير الفضة محلياً التغيرات في الأسعار الفورية للسلع عالمياً مضافاً إليها أسعار صرف الجنيه المصري السائدة، بجانب حركة العرض والطلب وتكاليف المصنعية في السوق المحلي."
   },
   "لماذا ترتفع عوايد السندات العالميه؟ «جولدمان ساكس» يحدد اسباب موجه البيع": {
     "meaning": "A widespread sell-off of sovereign debt securities lowers bond prices and mechanically pushes yields upward, reflecting an adjustment to prevailing macroeconomic factors and global interest rate structures.",
