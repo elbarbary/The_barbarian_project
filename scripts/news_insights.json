@@ -2443,6 +2443,10 @@
     "meaning": "An acceleration in UK inflation raises aggregate price levels and strengthens the operational case for central bank interest rate adjustments, directly affecting cross-border debt yields and sterling currency valuation.",
     "meaning_ar": "يؤدي تسارع التضخم في بريطانيا إلى ارتفاع المستوى العام للأسعار وتعزيز مبررات تعديل أسعار الفائدة من قبل البنك المركزي، مما يؤثر مباشرة على عوائد الديون العابرة للحدود وتقييم الجنيه الإسترليني."
   },
+  "التموين تبحث مع «الاسلامي للتنميه» تمويل صوامع جديده وصهاريج لزيوت الطعام": {
+    "meaning": "This bilateral engagement involves securing external development financing to fund the capital expenditures required for bulk grain silos and edible oil storage infrastructure.",
+    "meaning_ar": "تتضمن هذه المباحثات تدبير تمويلات تنموية خارجية لتغطية النفقات الرأسمالية الخاصة بإنشاء صوامع تخزين الحبوب وصهاريج زيوت الطعام."
+  },
   "التموين تستهدف تحويل 100 منفذ جمعيتي وبدال الي كاري اون قبل نهايه اكتوبر المقبل": {
     "meaning": "This operational conversion integrates traditional subsidy distribution outlets into a modern mini-market retail model, shifting inventory management, store layout, and point-of-sale systems under the standardised 'Carry On' brand structure.",
     "meaning_ar": "يمثل هذا التحول التشغيلي دمجاً لمنافذ صرف السلع التموينية التقليدية ضمن نموذج تجارة تجزئة حديث، مما يغير نظم إدارة المخزون، وتصميم الفروع، ونقاط البيع وفق الهوية الموحدة لعلامة 'كاري أون'."
@@ -2702,6 +2706,10 @@
   "الذهب يتجه لمكاسب اسبوعيه طفيفه وسط ترقب بيانات الوظايف الامريكيه": {
     "meaning": "Gold prices trade with narrow weekly gains as market participants price in interest rate expectations ahead of official US employment data.",
     "meaning_ar": "تتداول أسعار الذهب بمكاسب أسبوعية طفيفة مع تسعير المتعاملين لتوقعات أسعار الفائدة قبيل صدور بيانات التوظيف الأمريكية الرسمية."
+  },
+  "الذهب يربح 50 جنيها والاوقيه تصعد 61 دولارا بعد قرار الفيدرالي الامريكي": {
+    "meaning": "Domestic gold pricing directly reflects international spot rate adjustments driven by US Federal Reserve monetary policy changes, alongside prevailing official and parallel exchange rates.",
+    "meaning_ar": "يعكس تسعير الذهب محلياً التغيرات الفورية في الأسعار العالمية الناتجة عن قرارات السياسة النقدية لمجلس الاحتياطي الفيدرالي الأمريكي، بالتوازي مع حركة أسعار صرف العملة الأجنبية."
   },
   "الذهب يهبط بعدما عززت بيانات الوظايف الامريكيه توقعات رفع الفايده": {
     "meaning": "Strong US labor data increases the likelihood of higher interest rates, which raises sovereign bond yields and the opportunity cost of holding non-yielding assets like gold, leading to price declines on global and local exchanges.",
@@ -7792,6 +7800,10 @@
   "وزاره الكهرباء تتراجع عن اشتراط موافقه الهييه الهندسيه لتركيب العدادات الكوديه": {
     "meaning": "Removing the Armed Forces Engineering Authority pre-approval requirement streamlines the administrative process for installing prepayment code meters, accelerating the transition of informal electricity consumption onto formal utility billing systems.",
     "meaning_ar": "يؤدي إلغاء اشتراط الموافقة المسبقة من الهيئة الهندسية للقوات المسلحة إلى تبسيط الإجراءات الإدارية لتركيب العدادات الكودية، مما يسرّع وتيرة تحويل استهلاك الكهرباء غير الرسمي إلى منظومة الفوترة والتحصيل الرسمية."
+  },
+  "وزاره الماليه: نستهدف مساعده المحافظات علي تنميه مواردها بدلا من الاكتفاء بتوفير الاعتمادات": {
+    "meaning": "This policy shifts fiscal management from central budget allocations to local revenue generation through municipal asset management, local fees, and public-private partnerships.",
+    "meaning_ar": "تتحول هذه السياسة المالية من الاعتماد على المخصصات المركزية المباشرة إلى تفعيل آليات تنمية الموارد الذاتية للمحافظات عبر إدارة الأصول المحلية، وتحصيل الرسوم، والشراكات الاستثمارية."
   },
   "وزاره النقل ترفع درجه الاستعداد بالسكك الحديديه والمترو استعدادا للعام الدراسي الجديد": {
     "meaning": "This operational measure increases capacity and operating frequency across the public transport network, accommodating higher seasonal passenger volumes and driving ticket revenues for the state-run rail and metro authorities.",
