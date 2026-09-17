@@ -17,7 +17,7 @@ import { saidParts, forecastPrices, returnsCards, quoteWhen } from '../../public
 import { readingProblem, mixedSnapshot } from '../../public/esthmr/lab-snapshot.js';
 import {
   scenariosScreen, warningLines, ACCEPTED_KEY, readingKey, baseModels, choiceOf, recordOf, nightsOf,
-  rankingOf, returnsView, standing, spearman, saysOf, listed,
+  rankingOf, returnsView, standing, spearman, saysOf, listed, pullOf,
 } from '../../public/esthmr/scenarios.js';
 
 installDom();
@@ -626,6 +626,38 @@ test('the company outlook graph actually changes for 1, 5 and 20 sessions', () =
     assert.match(text(card), new RegExp(`${horizon} sessions`));
   }
   assert.equal(new Set(paths).size, 3);
+});
+
+test('a forecast that is mostly each company going back to its average says so, for that model and window only', () => {
+  const d = structuredClone(data);
+  // 16 Sep 2026 as published: Kronos-small's 20-session forecasts correlated
+  // 0.95 with the move back to each company's 90-session average.
+  d.scenarios.pull = { sessions: 90, companies: 239, above: 183, medianMove: -8.69, noteFrom: 0.8,
+    models: { kronos: { 1: 0.27, 5: 0.48, 20: 0.95 }, drift: { 20: -0.82 } } };
+  for (const layers of [[], GEMINI]) {
+    for (const ar of [false, true]) {
+      const node = screen(component({ scModel: 'kronos', scHorizon: 20, scLayers: layers }), d, ar);
+      const notes = byClass(node, 'aix-pull-note');
+      assert.equal(notes.length, 1);
+      assert.match(text(notes[0]), /0\.95/);
+      assert.match(text(notes[0]), /-8\.69%/);
+      assert.match(text(notes[0]), ar ? /90 جلسة/ : /last 90 sessions/);
+      assert.match(text(notes[0]), ar ? /239 شركة/ : /239 companies/);
+      assert.match(text(byClass(node, 'aix-pull-compare')[0]), /-8\.69%/);
+      assert.doesNotMatch(text(node), /undefined|NaN/);
+    }
+  }
+  // Not where the figure is low, not for a drift that carries every trend on
+  // (it correlates the other way), and not on a night published without it.
+  for (const state of [{ scModel: 'kronos', scHorizon: 5 }, { scModel: 'kronos', scHorizon: 1 }, { scModel: 'drift', scHorizon: 20 }]) {
+    const node = screen(component(state), d);
+    assert.equal(byClass(node, 'aix-pull-note').length, 0, JSON.stringify(state));
+    assert.equal(byClass(node, 'aix-pull-compare').length, 0, JSON.stringify(state));
+  }
+  const before = screen(component({ scModel: 'kronos', scHorizon: 20 }));
+  assert.equal(byClass(before, 'aix-pull-note').length, 0);
+  assert.equal(pullOf(scenarios, 'kronos', 20), null);
+  assert.deepEqual(pullOf(d.scenarios, 'kronos', 20), { r: 0.95, sessions: 90, companies: 239, median: -8.69 });
 });
 
 test('forecast prices use a frozen basis, with true path low high and mean', () => {

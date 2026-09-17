@@ -2582,6 +2582,48 @@ class PublishTest(unittest.TestCase):
         self.assertFalse(pb.distinguishes(flat))
         self.assertTrue(pb.distinguishes(drift))
 
+    def test_a_forecast_that_is_mostly_a_return_to_the_average_is_measured(self):
+        import publish as pb
+        # Sixty companies, each flat at 100 and then stepped to its own close
+        # on the basis, so the move back to the 90-session average differs
+        # from one to the next.
+        basis = "2026-09-16"
+        start = datetime.date(2026, 4, 1)
+        dates = [(start + datetime.timedelta(days=i)).isoformat() for i in range(pb.PULL_SESSIONS - 1)] + [basis]
+        tickers = [f"T{i:02d}" for i in range(60)]
+        lasts = {t: 80.0 + i for i, t in enumerate(tickers)}
+        panel = panel_of({t: {d: (lasts[t] if d == basis else 100.0) for d in dates} for t in tickers})
+        move = {t: ((100.0 * (pb.PULL_SESSIONS - 1) + lasts[t]) / pb.PULL_SESSIONS / lasts[t] - 1) * 100
+                for t in tickers}
+        # Kronos says the move back and a little past it; the other model's
+        # numbers have nothing to do with it; flat tells no company apart.
+        companies = {t: {"ticker": t, "models": {
+            "kronos": {"returns": {"20": 1.2 * move[t] - 1.0, "1": ((i * 7919) % 13) - 6.0}},
+            "chronos2": {"returns": {"20": float((i * 7919) % 17)}},
+            "flat": {"returns": {"20": 0.0}},
+            "momentum20": {"returns": {}, "rankedBy": {"20": move[t]}},
+        }} for i, t in enumerate(tickers)}
+        # A company without a close on the basis is not measured.
+        companies["LATE"] = {"ticker": "LATE", "models": {"kronos": {"returns": {"20": 50.0}}}}
+        panel["LATE"] = {d: {"date": d, "close": 100.0} for d in dates[:-1]}
+
+        drawn = pb.pull(companies, panel, basis)
+        self.assertEqual(drawn["sessions"], pb.PULL_SESSIONS)
+        self.assertEqual(drawn["companies"], 60)
+        self.assertEqual(drawn["above"], 39)  # closes of 101 to 139
+        self.assertEqual(drawn["noteFrom"], pb.PULL_NOTE_FROM)
+        self.assertEqual(drawn["models"]["kronos"]["20"], 1.0)
+        self.assertLess(abs(drawn["models"]["kronos"]["1"]), pb.PULL_NOTE_FROM)
+        self.assertLess(abs(drawn["models"]["chronos2"]["20"]), pb.PULL_NOTE_FROM)
+        # No returns, or none that differ: nothing to correlate.
+        self.assertNotIn("flat", drawn["models"])
+        self.assertNotIn("momentum20", drawn["models"])
+        self.assertAlmostEqual(drawn["medianMove"], round(sorted(move.values())[29] / 2 + sorted(move.values())[30] / 2, 2))
+
+        # Too few companies and no figure is published at all.
+        few = {t: companies[t] for t in tickers[:pb.PULL_MINIMUM - 1]}
+        self.assertEqual(pb.pull(few, panel, basis)["models"], {})
+
     def test_the_record_publishes_its_own_minimum(self):
         import publish as pb
         self.assertGreaterEqual(pb.MINIMUM_SESSIONS, 3)

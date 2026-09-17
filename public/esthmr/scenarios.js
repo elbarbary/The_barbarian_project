@@ -32,7 +32,7 @@
 import { React as R } from './react-shim.js';
 import { finite, day, shortDay, cairoTime, nextRun, summaryOf } from './ai-visuals.js';
 import {
-  divider, viewSwitch, rankingTiles, rankingCard, returnsCards, recordCard, nightsCard,
+  divider, viewSwitch, pullNote, rankingTiles, rankingCard, returnsCards, recordCard, nightsCard,
 } from './scenario-visuals.js';
 import { modelsCard } from './ai-record.js';
 import { readingProblem, mixedSnapshot } from './lab-snapshot.js';
@@ -349,6 +349,17 @@ export function pathOf(scenarios, tickers) {
   });
 }
 
+/** How much of a forecaster's numbers is each company returning to its own
+ *  recent average, where that night's figure is high enough to say so
+ *  (`publish.pull`). Only a pull TOWARDS the average: a drift that carries
+ *  every trend on correlates the other way and is what it says it is. */
+export function pullOf(scenarios, model, horizon) {
+  const pull = scenarios?.pull;
+  const r = pull?.models?.[model]?.[String(horizon)];
+  if (!finite(r) || !finite(pull.noteFrom) || r < pull.noteFrom || !finite(pull.medianMove)) return null;
+  return { r, sessions: pull.sessions, companies: pull.companies, median: pull.medianMove };
+}
+
 /** A forecaster's view of the whole market, for the charts under the ranking. */
 export function returnsView(scenarios, draft, tickers) {
   const horizons = ((scenarios && scenarios.horizons) || []).map(Number)
@@ -384,6 +395,7 @@ export function returnsView(scenarios, draft, tickers) {
     model: draft.model, horizon: draft.horizon, horizons, rows, ahead,
     summary: summaryOf(rows.map((r) => r.value)),
     past: pathOf(scenarios, tickers),
+    pull: pullOf(scenarios, draft.model, draft.horizon),
     byModel,
     pointingUp: byModel.filter((m) => m.distinguishes && finite(m.median) && m.median > 0).length,
   };
@@ -614,6 +626,9 @@ export function scenariosScreen(component, data, ar) {
       ...Object.keys(scenarios?.companies || {}).filter((ticker) => !eligibleTicker(ticker, data.companies))]).size,
     venueExcluded: Object.values(scenarios?.leftOut || {}).some((why) => /OTC|delisted|unlisted/.test(String(why)))
       || Object.keys(scenarios?.companies || {}).some((ticker) => listed(ticker) && !eligibleTicker(ticker, data.companies)),
+    // Where the chosen forecaster's numbers are mostly a return to each
+    // company's recent average (Kronos-small over 20 sessions).
+    pull: pullOf(scenarios, choice.model, choice.horizon),
     loading: !picks && !!st.extrasLoading,
     readingLoading: gemini && !reading && !!(st.scLoading && st.scLoading[key]),
     readingFailed: readingIssue
@@ -674,6 +689,7 @@ export function scenariosScreen(component, data, ar) {
           onModel: () => set({ scLayers: [] }),
           onGemini: () => set({ scLayers: layers.length ? layers : choice.standard }),
         }),
+        pullNote(ctx, ar),
         rankingTiles(ctx, ar),
         rankingCard(component, data, ctx, ar),
         ...charts,

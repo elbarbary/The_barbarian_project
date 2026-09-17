@@ -87,6 +87,15 @@ PATH_SESSIONS = 20
 # names, and the file says how many older nights it left out.
 PICK_NIGHTS = 20
 
+# The average a company's price is measured back to for `pull`: its closes over
+# the sessions every model reads (`run.MIN_BARS`, `neural.LOOKBACK`).
+PULL_SESSIONS = 90
+# Fewer companies than this and a correlation is not published at all.
+PULL_MINIMUM = 30
+# From this correlation up the workbench says what the forecasts mostly are.
+# Written into the file, so the screen reads it rather than keeping its own.
+PULL_NOTE_FROM = 0.8
+
 # The models a reader meets on Home, in the order the record keeps them. The
 # screen may sort by the record; the file does not.
 ORDER = ["rerank", "kronos", "chronos2", "timesfm25", "toto2", "sundial",
@@ -421,6 +430,63 @@ def path_of(panel: dict, ticker: str, dates: list[str]) -> list[float | None]:
         out.append(round((close / start - 1) * 100, 2)
                    if isinstance(close, (int, float)) else None)
     return out
+
+
+def pull(companies: dict, panel: dict, basis: str) -> dict:
+    """How closely each forecaster's numbers follow one other number: the move
+    that would take each company's close back to its own average close over
+    the last `PULL_SESSIONS` sessions.
+
+    Measured on 17 September 2026, Kronos-small's twenty-session forecasts
+    correlated 0.94 to 0.97 with that move on every night from 13 September,
+    and went past it (slope about 1.2). Nothing about those companies was
+    being forecast. Rerun on made-up prices with the pinned weights, a steady
+    rise from 100 to 130 drew -16% and a steady fall +21%, and the correlation
+    on random walks fell only when the model was given far more history
+    (0.98 at 90 candles, 0.86 at 250, 0.13 at 500). After a rally left most
+    companies above their average, that alone put its middle forecast at
+    -10% to -13% while the other models said -1% to -4%.
+
+    The record is not changed for it. Each night's figure is published beside
+    the forecasts it describes, and the workbench says what they mostly are.
+    """
+    moves: dict[str, float] = {}
+    for ticker in companies:
+        bars = [b for b in ev.bars_of(panel, ticker) if (b.get("date") or "") <= basis]
+        closes = [b.get("close") for b in bars[-PULL_SESSIONS:]]
+        if (len(closes) < PULL_SESSIONS or bars[-1].get("date") != basis
+                or not all(isinstance(c, (int, float)) and c > 0 for c in closes)):
+            continue
+        moves[ticker] = (statistics.fmean(closes) / closes[-1] - 1) * 100
+
+    def correlation(pairs):
+        if len(pairs) < PULL_MINIMUM:
+            return None
+        xs, ys = zip(*pairs)
+        if statistics.pstdev(xs) == 0 or statistics.pstdev(ys) == 0:
+            return None
+        return round(statistics.correlation(xs, ys), 2)
+
+    names = [n for n in ORDER if any(n in (c.get("models") or {}) for c in companies.values())]
+    models = {}
+    for name in names:
+        horizons = {}
+        for horizon in fc.HORIZONS:
+            pairs = [(moves[t], value) for t, c in companies.items() if t in moves
+                     and isinstance(value := ((c["models"].get(name) or {}).get("returns") or {}).get(str(horizon)),
+                                    (int, float))]
+            if (r := correlation(pairs)) is not None:
+                horizons[str(horizon)] = r
+        if horizons:
+            models[name] = horizons
+    return {
+        "sessions": PULL_SESSIONS,
+        "companies": len(moves),
+        "above": sum(1 for m in moves.values() if m < 0),
+        "medianMove": round(statistics.median(moves.values()), 2) if moves else None,
+        "noteFrom": PULL_NOTE_FROM,
+        "models": models,
+    }
 
 
 def scenarios(document: dict, panel: dict, sessions: list[str]) -> dict:
@@ -802,6 +868,9 @@ def main(argv=None) -> int:
             # rank: no exchange ticker, or recent closes that are not one
             # series. `run.listed`, `run.unreadable`.
             "leftOut": drawn["leftOut"],
+            # How much of each forecaster's number is a return to the
+            # company's own recent average (see `pull`).
+            "pull": pull(drawn["companies"], panel, latest["basisSession"]),
             "rerank": None if not reading_files else {
                 "ranAt": (default or next(iter(reading_files.values())))["ranAt"],
                 "layers": list(rr.LAYERS),

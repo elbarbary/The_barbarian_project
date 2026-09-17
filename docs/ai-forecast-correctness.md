@@ -24,6 +24,37 @@
 Upstream implementation:
 https://github.com/shiyu-coder/Kronos/blob/67b630e67f6a18c9e9be918d9b4337c960db1e9a/model/kronos.py
 
+## Kronos-small's 20-session forecasts are mostly a return to the average
+
+The company-outlook chart draws the saved numbers correctly (16 September:
+−0.19%, −1.77% and −10.51% for 1, 5 and 20 sessions). The problem is in the
+numbers. Kronos-small's 20-session forecasts correlate 0.94–0.97, on every
+night from 13 to 16 September, with the move that would take each company
+back to its average close over the 90 candles it reads. They also overshoot
+that move (slope about 1.2). After the rally 77% of companies closed above
+that average, so Kronos's middle forecast was −10.5% to −13.3%. The other
+models sat between −1.0% and −4.4%, and their correlations were 0.16–0.67.
+
+Rerun locally with the pinned weights and code:
+
+- A 60-candle window moves the median forecast from −13.5% (at 90) to −4.0%.
+  Each window's forecasts track that window's own average.
+- A steady rise from 100 to 130 draws −16% over 20 sessions, and a steady fall
+  draws +21%.
+- On random walks the correlation is 0.98 at 90 candles, 0.86 at 250 and 0.13
+  at 500. Only a long context removes it. At 500 candles each company costs
+  6.2 times as long, about 2.6 h on the four-core runner for the market.
+
+A plausible cause, not confirmed for the released weights: the upstream
+finetuning code normalised each sample over past and future together until
+PR #227.
+
+The sealed record is unchanged. `publish.pull` publishes each night's
+correlation for every model and horizon, and the workbench says so where it
+reaches 0.8. The owner's decision (17 September) is to add a second Kronos
+given a long history, judged only on nights after it starts, rather than to
+change the pinned one.
+
 ## Prices shown
 
 The current quote is timestamped separately from the frozen forecast basis.

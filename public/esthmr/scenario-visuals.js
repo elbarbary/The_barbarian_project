@@ -191,6 +191,25 @@ export function viewSwitch(component, ctx, ar, { onModel, onGemini } = {}) {
         `يرتّب Gemini للجلسات الخمس التالية. اختيار ${words.horizon} يغيّر الفترة التي يُقيَّم عليها السجل أدناه، لا ترتيب Gemini.`)) : null);
 }
 
+/** Said where a forecaster's numbers are mostly each company going back to
+ *  its own recent average, measured that night (`publish.pull`). On 16 Sep
+ *  2026 Kronos-small's 20-session forecasts correlated 0.95 with that move,
+ *  which alone put its middle forecast near -10% after a rally. */
+export function pullNote(ctx, ar) {
+  const pull = ctx.pull;
+  if (!pull) return null;
+  const { words } = ctx;
+  const r = h('bdi', { dir: 'ltr' }, pull.r.toFixed(2));
+  const move = h('bdi', { dir: 'ltr' }, percent(pull.median));
+  return h('p', { class: 'aix-note aix-pull-note', role: 'note' }, ar
+    ? [`توقعات ${words.model} خلال ${words.horizon}، من هذا الإغلاق، تتبع رقماً واحداً تقريباً: الحركة التي تعيد كل شركة إلى متوسط سعرها خلال آخر ${sessionsAr(pull.sessions)} (معامل ارتباط `,
+      r, ` عبر ${pull.companies} شركة، و1 يعني تطابقاً تاماً). للشركة في الوسط تبلغ هذه الحركة `, move,
+      '. معظم ما يتوقعه هو هذه العودة إلى المتوسط، لا رؤية مستقلة لاتجاه الأسعار.']
+    : [`${words.model}’s forecasts over ${words.horizon}, from this close, follow one number almost exactly: the move that would take each company back to its average price over the last ${pull.sessions} sessions (correlation `,
+      r, ` across ${pull.companies} companies; 1 would mean exactly). For the middle company that move is `, move,
+      '. Most of what it forecasts is that return to the average, not a separate view of where prices are heading.']);
+}
+
 const avg = (values) => (values.length ? values.reduce((s, v) => s + v, 0) / values.length : null);
 
 /** Three plain numbers over the ranking — the same three places in both
@@ -425,7 +444,14 @@ export function returnsCards(component, data, view, words, ar) {
       h('span', null, h('i', { class: 'aix-key-band80' }), t('middle 80%', '80% الأوسط')),
       h('span', null, h('i', { class: 'aix-key-past' }), t('before the close', 'قبل الإغلاق'))),
     fanChart({ past: view.past, ahead: view.ahead, horizons: view.horizons }, ar)
-      || h('p', { class: 'aix-empty' }, t('This model gave no estimates for these companies.', 'لم يقدم هذا النموذج تقديرات لهذه الشركات.')));
+      || h('p', { class: 'aix-empty' }, t('This model gave no estimates for these companies.', 'لم يقدم هذا النموذج تقديرات لهذه الشركات.')),
+    // Beside a line that is mostly a return to the average, what that return
+    // alone would be (`pullNote` above the ranking says why).
+    view.pull ? h('p', { class: 'aix-note aix-pull-compare' },
+      t(`For comparison: going back to its average price over the last ${view.pull.sessions} sessions would be `,
+        `للمقارنة: العودة إلى متوسط السعر خلال آخر ${sessionsAr(view.pull.sessions)} تعني `),
+      h('bdi', { dir: 'ltr' }, percent(view.pull.median)),
+      t(' for the middle company.', ' للشركة في الوسط.')) : null);
 
   const hist = card('aix-hist-card', t('Every estimate for this horizon', 'كل تقدير لهذه المدة'),
     t(`${summary.count} estimates across ${view.rows.length} companies · ${summary.up} above zero, ${summary.down} below`,

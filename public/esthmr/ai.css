@@ -320,6 +320,12 @@
   margin: 12px 0 0; padding-inline-start: 12px; border-inline-start: 3px solid var(--aix-teal);
   font-size: 12px; line-height: 1.65; color: var(--aix-body);
 }
+/* A forecaster whose numbers are mostly a return to each company's average. */
+.aix-pull-note {
+  padding: 10px 14px; border: 1px solid var(--aix-beta-line); border-radius: 12px;
+  background: var(--aix-beta-bg); color: var(--aix-beta-ink); font-size: 12.5px; line-height: 1.55;
+}
+.aix-pull-compare { margin-top: 10px; }
 
 .aix-ranking-card { --rank-cols: 40px minmax(0, 1.6fr) minmax(96px, .7fr) minmax(0, 1fr); }
 .aix-ranking-card header { align-items: flex-end; }
