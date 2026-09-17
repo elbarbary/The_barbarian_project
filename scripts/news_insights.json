@@ -4976,6 +4976,10 @@
     "meaning": "Egypt's leadership of the government group at the Arab Labour Conference positions the Ministry of Labour to coordinate regional cross-border workforce policies, regulatory frameworks, and bilateral labor mobility mechanisms among member states.",
     "meaning_ar": "تولي مصر رئاسة فريق الحكومات في مؤتمر العمل العربي يضع وزارة العمل في موقع التنسيق للسياسات الإقليمية المنظمة للعمالة، والأطر التنظيمية، وآليات تنقل العمالة البينية بين الدول الأعضاء."
   },
+  "حسن عبد الله يشارك في موتمر الذكاء الاصطناعي للبنوك المركزيه الافريقيه في نيروبي": {
+    "meaning": "The Central Bank of Egypt participates in regional multilateral forums to benchmark operational frameworks, regulatory technology, and data analytics standards across African central banking systems.",
+    "meaning_ar": "تشارك البنوك المركزية، ومن بينها البنك المركزي المصري، في المنتديات الإقليمية متعددة الأطراف لتبادل المعايير التشغيلية وتنسيق أطر التكنولوجيا الرقابية وأنظمة تحليل البيانات المصرفية."
+  },
   "حسين ابوصدام : السحابه السوداء تلقي بظلالها علي الفلاحين في عيدهم ال74": {
     "meaning": "The seasonal enforcement of agricultural burning regulations imposes direct compliance costs, machinery rental fees for biomass shredding, and regulatory fines on smallholder farming operations.",
     "meaning_ar": "يفرض التطبيق الموسمي للضوابط البيئية المنظمة للتخلص من المخلفات الزراعية تكاليف تشغيلية مباشرة تشمل استئجار معدات فرم وتدوير القش بالإضافة إلى الغرامات التنظيمية على المزارعين."
@@ -5451,6 +5455,10 @@
   "زياده راتب رييس وزراء سنغافوره بمقدار 1.1 مليون دولار سنويا": {
     "meaning": "Public sector executive compensation adjustments link senior government remuneration to private sector benchmarks, aligning state administrative costs directly with prevailing executive market pay scales.",
     "meaning_ar": "يعتمد تعديل مخصصات رواتب القيادات الحكومية على ربط أجور القطاع العام بمؤشرات ومتوسطات رواتب كبار التنفيذيين في القطاع الخاص كمعيار للمحاكاة المالية."
+  },
+  "زياده مرتقبه لاسعار الديزل في بريطانيا مع تصاعد ازمه الامدادات": {
+    "meaning": "Supply constraints in European fuel markets raise diesel prices, directly increasing operational and transportation costs for logistics and industrial sectors reliant on fuel inputs.",
+    "meaning_ar": "تؤدي قيود الإمداد في أسواق الوقود الأوروبية إلى ارتفاع أسعار الديزل، مما يرفع تكاليف التشغيل والنقل مباشرة للقطاعات الصناعية واللوجستية المعتمدة على الوقود."
   },
   "ساروج كومار جها يكتب: 28% من موازنات المياه لا تنفق.. اين تتعطل الاستثمارات؟": {
     "meaning": "An unspent rate of 28% in water sector budgets reflects capital expenditure underutilization driven by administrative, procurement, and execution bottlenecks in infrastructure projects despite allocated funding.",
@@ -6701,6 +6709,10 @@
     "meaning": "A shareholder reducing its equity ownership alters the company's ownership structure and shifts the proportion of shares held as free float on the exchange.",
     "meaning_ar": "يؤدي تقليص أحد المساهمين لنسبة ملكيته إلى تعديل هيكل ملكية الشركة وتغيير نسبة الأسهم المتاحة للتداول الحر في البورصة."
   },
+  "لتقليص الاعتماد علي الدولار.. الصين توسع المقاصه لعملات جديده باليوان": {
+    "meaning": "The expansion integrates additional foreign currencies into China's cross-border clearing architecture, processing bilateral trade transactions directly through yuan-denominated settlement accounts instead of routing payment traffic through intermediary currencies.",
+    "meaning_ar": "يتضمن هذا التوسع إدراج عملات أجنبية إضافية ضمن منظومة المقاصة الصينية العابرة للحدود، لتسوية المعاملات التجارية المتبادلة مباشرة عبر حسابات مقومة باليوان دون المرور بعملات وسيطة."
+  },
   "لجنه القيد تحدد موعد ادراج سهم ام ان تي تيك القابضه": {
     "meaning": "The listing committee sets the official date on which the company's shares are registered on the exchange's trading platform, transitioning the security from unlisted status to an active financial instrument accessible in the secondary market.",
     "meaning_ar": "تحدد لجنة القيد الموعد الرسمي لتسجيل أسهم الشركة على شاشات التداول بالبورصة، وهو الإجراء الذي ينقل الورقة المالية من وضع غير المقيد إلى أداة مالية متاحة في السوق الثانوية."
@@ -6864,6 +6876,10 @@
   "محافظ الجيزه يكلف بصيانه اسوار كوبري فيصل وتركيب الباكيات المفقوده": {
     "meaning": "Municipal infrastructure maintenance directives generate localized procurement contracts for public works contractors and suppliers of structural steel and metal fabrications funded via provincial public expenditure budgets.",
     "meaning_ar": "تولد تكليفات صيانة البنية التحتية المحلية عقود توريد ومقاولات لأعمال الطرق وتوريد الهياكل المعدنية بتمويل من مخصصات الإنفاق العام للمحافظة."
+  },
+  "محافظ القاهره : لن يتم اصدار اي تراخيص جديده لاقامه اكشاك": {
+    "meaning": "This administrative decision caps the supply of informal and micro-retail street kiosks across Cairo, establishing a fixed operating capacity for existing licensed units and directing retail expansion into formal commercial real estate and designated retail zones.",
+    "meaning_ar": "يضع هذا القرار الإداري حداً أقصى لمعروض أكشاك التجزئة الصغيرة في محافظة القاهرة، مما يثبت الطاقة التشغيلية للوحدات القائمة المرخصة ويوجه التوسع في تجارة التجزئة نحو المساحات التجارية الرسمية والأسواق المنظمة."
   },
   "محافظ القاهره يفتتح المهرجان الوطني للسلع بمشاركه «التموين» و«الزراعه» و«الانتاج الحربي»": {
     "meaning": "This initiative establishes a direct-to-consumer distribution channel by coordinating state entities—Supply, Agriculture, and Military Production—to supply staple goods directly in Cairo, bypassing traditional wholesale and retail intermediary layers.",
@@ -7441,6 +7457,10 @@
     "meaning": "The Egyptian capital market operates on digital brokerage and electronic trading systems accessible via mobile applications, shifting trading operations and retail investor access away from physical presence and traditional paper-based investment arrangements.",
     "meaning_ar": "يعمل سوق المال المصري حالياً عبر أنظمة التداول الإلكتروني وتطبيقات الهواتف الذكية للوساطة المالية، مما ينقل تنفيذ المعاملات ووصول المستثمرين الأفراد من القنوات التقليدية والتعاملات غير الرسمية إلى منصات رقمية منظمة."
   },
+  "منتدي الاستثمار في قطاع السيارات الافريقي ينعقد بالعلمين اكتوبر المقبل": {
+    "meaning": "Hosting the African automotive investment forum convenes regional manufacturers, component suppliers, and policymakers to negotiate industrial partnerships and cross-border supply chain integration under regional trade frameworks.",
+    "meaning_ar": "يجمع استضافة منتدى الاستثمار في قطاع السيارات الإفريقي بين المصنعين الإقليميين وموردي المكونات والجهات التنظيمية لتنسيق الشراكات الصناعية وتكامل سلاسل التوريد عبر الحدود ضمن أطر التجارة الإقليمية."
+  },
   "منتصر عبد المنعم يضيف لابداعاته 19 فرعا جديدا من “كاري اون”": {
     "meaning": "Opening 19 new branches expands the company's physical retail footprint and operational capacity within the domestic market.",
     "meaning_ar": "يؤدي افتتاح 19 فرعاً جديداً إلى توسيع النطاق الجغرافي لمنافذ البيع بالتجزئة وزيادة القدرة التشغيلية المباشرة للشركة في السوق المحلي."
@@ -7972,6 +7992,10 @@
   "وزير التموين: التوسع في سلسله كاري اون يحظي باهتمام كبير من القياده السياسيه": {
     "meaning": "Political backing for expanding the Carry On retail chain integrates state-level logistics and municipal coordination into the enterprise's store rollout footprint.",
     "meaning_ar": "يعكس الدعم الحكومي لتوسيع سلسلة كاري أون دمجاً مباشراً بين التنسيق الإداري واللوجستي للدولة وخطط الانتشار الجغرافي لفروع السلسلة."
+  },
+  "وزير التموين: تطوير منظومه التخزين محور رييسي في استراتيجيتنا": {
+    "meaning": "Modernizing the storage system involves upgrading silo infrastructure and logistics networks to manage strategic commodity reserves and physical post-harvest inventory loss.",
+    "meaning_ar": "يتضمن تطوير منظومة التخزين تحديث البنية التحتية للصوامع وشبكات الخدمات اللوجستية لإدارة احتياطيات السلع الاستراتيجية ومعالجة الفاقد الفعلي في المخزون بعد الحصاد."
   },
   "وزير التموين: تطوير منظومه التخزين محور رييسي في استراتيجيه الدوله": {
     "meaning": "Modernizing the state storage system centers on establishing automated logistics hubs and modern silos to manage strategic commodity reserves and physical crop handling.",
