@@ -185,6 +185,9 @@ test('the top of every model’s ranking on screen is the five its record follow
   // sealed before that can still hold one in its five: Kronos's WATP on
   // 16 Sep. The record keeps it, the screen says under the ranking that its
   // first five may differ, and every other name must still lead in order.
+  // The same goes for a name the record passed over: after the close on
+  // 17 Sep, WATP (OTC, Mondays and Wednesdays only) had no close for
+  // Kronos's one-session night and is not on screen to rank above anything.
   const mod = await import('../../public/esthmr/scenarios.js');
   const excluded = new Set(Object.keys(scenarios.leftOut || {}));
   const same = (rows, night, label) => {
@@ -192,7 +195,10 @@ test('the top of every model’s ranking on screen is the five its record follow
     const five = night.picks.map((p) => p.ticker).filter((t) => !excluded.has(t));
     assert.deepEqual(rows.filter((r) => !passed.has(r.ticker)).slice(0, five.length).map((r) => r.ticker), five, label);
     const last = Math.max(...rows.filter((r) => five.includes(r.ticker)).map((r) => r.rank));
-    for (const t of passed) assert.ok(rows.find((r) => r.ticker === t)?.rank < last, `${label}: ${t} was passed over but ranks below the five`);
+    for (const t of passed) {
+      if (excluded.has(t)) continue;
+      assert.ok(rows.find((r) => r.ticker === t)?.rank < last, `${label}: ${t} was passed over but ranks below the five`);
+    }
   };
   let compared = 0;
   for (const [id, entry] of Object.entries(picks.models)) {
