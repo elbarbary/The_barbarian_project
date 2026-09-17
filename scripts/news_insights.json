@@ -2543,6 +2543,10 @@
     "meaning": "The formal operational framework governs the procedural mechanism through which the National Council for Wages establishes the statutory minimum wage and reviews compensation policies across the private sector. This formalizes the administrative process for wage adjustments, directly defining labor cost standards for operating companies.",
     "meaning_ar": "يحدد نظام العمل الإطار الإجرائي والتنظيمي لآلية وضع الحد الأدنى القانوني للأجور ومراجعة سياسات التعويضات في القطاع الخاص، مما يقنن المسار الإداري لتعديل الأجور ويضع المعايير الحاكمة لتكاليف العمالة في الشركات العاملة."
   },
+  "الحكومه تعلن بدء تطبيق موازنه البرامج والاداء تجريبيا مع بدايه العام المالي 2027-2028": {
+    "meaning": "Program and performance budgeting links public expenditure directly to specific strategic operational targets and measurable Key Performance Indicators (KPIs) rather than traditional line-item resource allocations across ministries.",
+    "meaning_ar": "تربط موازنة البرامج والأداء بنود الإنفاق الحكومي مباشرةً بأهداف تشغيلية استراتيجية ومؤشرات قياس أداء محددة، بدلاً من نظام مخصصات البنود المحاسبية التقليدية الموزعة بين الوزارات."
+  },
   "الحكومه تعلن عن تعيين 43 الف معلم دفعه واحده الفتره المقبله": {
     "meaning": "The appointment of 43,000 public sector teachers increases government operational expenditures and the public payroll allocation within the state budget, while addressing staffing capacity in the public education system.",
     "meaning_ar": "يؤدي تعيين 43 ألف معلم في القطاع الحكومي إلى زيادة النفقات التشغيلية ومخصصات الأجور في الموازنة العامة للدولة، بالتوازي مع معالجة الطاقة الاستيعابية للكادر الوظيفي في منظومة التعليم العام."
@@ -6353,6 +6357,10 @@
     "meaning": "This transaction represents capital expenditure allocation toward manufacturing infrastructure, expanding operational capacity through new production lines and upgrading existing facilities.",
     "meaning_ar": "يمثل هذا الإجراء توجيه نفقات رأسمالية نحو البنية التحتية التصنيعية، مما يوسع الطاقة التشغيلية عبر إضافة خطوط إنتاج جديدة وتحديث المنشآت القائمة."
   },
+  "فاروق: نعمل علي دعم زراعه الكتان وتامين سلاسل الامداد لخدمه الصناعه الوطنيه": {
+    "meaning": "The initiative expands domestic agricultural supply of flax as a raw material, directly linking primary crop production with local industrial processing and textile manufacturing chains.",
+    "meaning_ar": "تعتمد هذه المبادرة على توفير محصول الكتان كمدخل إنتاج زراعي محلي، وربطه تشغيلياً بسلاسل التوريد الخاصة بالمصانع وقطاع الغزل والنسيج المحلي."
+  },
   "فاليو تعلن رسميا اولي محطات رحلتها في الاردن": {
     "meaning": "The expansion marks the company's geographical entry into the Jordanian consumer finance market, operating cross-border non-banking financial services through local operational networks.",
     "meaning_ar": "يمثل هذا التوسع الدخول الجغرافي للشركة إلى سوق التمويل الاستهلاكي الأردني، وتقديم خدمات مالية غير مصرفية عابرة للحدود عبر شبكات تشغيلية محلية."
@@ -6544,6 +6552,10 @@
   "كيف افتتحت المصارف تعاملات الريال السعودي بالتزامن مع زياره ولي العهد؟": {
     "meaning": "Commercial banks update their opening exchange rates for the Saudi Riyal against the Egyptian Pound based on interbank foreign currency liquidity, trade settlement flows, and daily foreign exchange reserve management.",
     "meaning_ar": "تحدد البنوك التجارية أسعار افتتاح تداول الريال السعودي مقابل الجنيه المصري وفقاً لمستويات السيولة النقدية الأجنبية في سوق الإنتربنك وتدفقات التسوية التجارية وإدارة الاحتياطيات اليومية."
+  },
+  "كيف تباينت اسعار اللحوم البقري والضاني في المنافذ وفي محال الجزاره اليوم الخميس 17سبتمبر 2026؟": {
+    "meaning": "Price variance between state-affiliated outlets and private butcher shops reflects differing cost structures, where government distribution channels operate under subsidised logistics and supply contracts while private retailers price according to spot-market feed, transport, and commercial overheads.",
+    "meaning_ar": "يعكس تباين الأسعار بين المنافذ التابعة للدولة ومحال الجزارة الخاصة اختلاف هياكل التكاليف، حيث تعمل قنوات التوزيع الحكومية عبر تعاقدات توريد ودعم لوجستي، بينما يسعّر تجار التجزئة في القطاع الخاص وفقاً لتكاليف الأعلاف والنقل والأعباء التشغيلية في السوق الفورية."
   },
   "كيف تتاكد من ان شركه الحاق العماله بالخارج مرخصه؟": {
     "meaning": "Official verification of overseas employment agencies operates through the Ministry of Manpower's regulatory registry, where licensed intermediaries process labor contracts in compliance with statutory legal frameworks and official fee schedules.",
