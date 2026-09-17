@@ -1375,6 +1375,10 @@
     "meaning": "Higher long-term U.S. borrowing costs raise global discount rates and expand sovereign debt yields across emerging markets, increasing capital costs for dollar-denominated refinancing and corporate debt issuances.",
     "meaning_ar": "يؤدي ارتفاع تكاليف الاقتراض طويل الأجل في الولايات المتحدة إلى رفع معدلات الخصم العالمية وعائدات الديون السيادية في الأسواق الناشئة، مما يرفع تكلفة رأس المال لإعادة التمويل وإصدارات سندات الشركات المقومة بالدولار."
   },
+  "ارتفاع سنوي في تصاريح بناء المنازل الامريكيه لكنها تنخفض شهريا": {
+    "meaning": "Building permits serve as a leading indicator of real estate pipeline activity; an annual increase alongside a monthly decline reflects higher year-over-year planned construction volume despite a month-over-month contraction in new authorizations.",
+    "meaning_ar": "تُعد تصاريح البناء مؤشرًا قياديًا لمشروعات التطوير العقاري المستقبلية؛ ويعكس ارتفاعها السنوي مع انخفاضها الشهري حجم إنشاءات مخططًا أعلى مقارنة بالعام السابق، على الرغم من انكماش التراخيص الجديدة مقارنة بالشهر السابق."
+  },
   "ارتفاع سهم “فولكس فاجن” 9% عقب اتفاق لاعاده الهيكله": {
     "meaning": "The share price gain reflects market absorption of a corporate restructuring agreement, which typically involves operational cost reductions, capacity realignment, and capital reallocation to improve operational efficiency.",
     "meaning_ar": "يعكس ارتفاع السهم استجابة السوق لاتفاق إعادة الهيكلة، والذي يتضمن عادةً خفض التكاليف التشغيلية وإعادة تنظيم الطاقات الإنتاجية وتوجيه رأس المال لتحسين الكفاءة التشغيلية للشركة."
@@ -3003,6 +3007,10 @@
     "meaning": "The geological discovery identifies a 110-million-ton domestic reserve base of rare earth elements and uranium, establishing upstream resource assets that undergo exploration, commercial assessment, and mining infrastructure development within the national industrial supply chain.",
     "meaning_ar": "يحدد هذا الكشف الجيولوجي قاعدة احتياطيات محلية بحجم 110 ملايين طن من المعادن النادرة واليورانيوم، مما يضيف أصولاً تعدينية أولية تخضع للاستكشاف والتقييم التجاري وتطوير البنية التحتية للاستخراج ضمن سلاسل التوريد الصناعية."
   },
+  "السعوديه تعول علي القطاع الخاص لدفع التوسع السياحي": {
+    "meaning": "This model shifts the funding and operational execution of tourism infrastructure and hospitality assets from the state budget to corporate balance sheets and public-private partnerships.",
+    "meaning_ar": "ينقل هذا النموذج أعباء تمويل وتشغيل البنية التحتية والأصول الفندقية من الموازنة العامة للدولة إلى ميزانيات الشركات الخاصة وعقود الشراكة بين القطاعين."
+  },
   "السعوديه تعيد توجيه شحنات النفط قباله عمان عقب استهداف خط انابيب": {
     "meaning": "The operational rerouting of crude oil shipments alters regional maritime logistics routes and shipping lead times in response to pipeline infrastructure disruptions.",
     "meaning_ar": "يُعد التعديل التشغيلي لمسارات شحنات النفط الخام تغييراً في خطوط النقل البحري الإقليمية وجداول التسليم الزمنية لمواجهة تعطل البنية التحتية لخطوط الأنابيب."
@@ -4423,6 +4431,10 @@
   "تراجع طفيف لعدد طلبات اعانه البطاله الامريكيه": {
     "meaning": "A decline in initial jobless claims reflects ongoing resilience in the US labor market, which maintains wage pressures and directly informs the Federal Reserve's benchmark interest rate decisions, influencing global foreign currency liquidity and international capital allocation.",
     "meaning_ar": "يعكس انخفاض طلبات إعانة البطالة استمرار مرونة سوق العمل الأمريكي، وهو ما يُبقي على الضغوط المرتبطة بالأجور ويحدد مسار أسعار الفائدة لدى الاحتياطي الفيدرالي، مما يؤثر على سيولة النقد الأجنبي وحركة تدفقات رؤوس الأموال عالمياً."
+  },
+  "تراجع عدد طلبات اعانه البطاله الامريكيه الي ادني مستوياته منذ يوليو": {
+    "meaning": "A decline in US jobless claims reflects tighter labor market conditions, which maintains upward pressure on wage costs and influences US Federal Reserve interest rate decisions, directly affecting foreign capital flows and borrowing costs across emerging markets like Egypt.",
+    "meaning_ar": "يعكس انخفاض طلبات إعانة البطالة الأمريكية قوة سوق العمل، مما يولد ضغوطاً على تكاليف الأجور ويؤثر على قرارات الفائدة لدى الفيدرالي الأمريكي، وهو ما يرتبط بحركة تدفقات رؤوس الأموال الأجنبية وتكلفة الاقتراض في الأسواق الناشئة ومنها مصر."
   },
   "تراجع عوايد السندات العالميه طويله الاجل بعد رفع الفايده الامريكيه": {
     "meaning": "A decline in long-term global bond yields following a US interest rate hike reflects capital reallocation into longer-duration sovereign debt, flattening the yield curve and lowering baseline benchmark borrowing costs for emerging market sovereign issuers.",
@@ -8120,6 +8132,10 @@
   "وزير الصناعه: صناعه الاثاث المصريه تمتلك مقومات توهلها لتحقيق نمو غير مسبوق": {
     "meaning": "Official industrial policy identifies the domestic furniture sector as an operation with competitive production fundamentals, encompassing local manufacturing capacities, supply chain infrastructure, and export readiness.",
     "meaning_ar": "تحدد السياسة الصناعية الرسمية قطاع الأثاث المحلي كنشاط يعتمد على مقومات تصنيع قائمة، تشمل القدرات الإنتاجية المحلية، وبنية سلاسل الإمداد، والتجهيزات التصديرية."
+  },
+  "وزير الصناعه: نستهدف تحويل الابحاث العلميه والافكار الابداعيه الي نتايج قابله للتطبيق": {
+    "meaning": "The commercialization of applied research links academic intellectual property with domestic manufacturing infrastructure, integrating development pipelines directly into factory production lines.",
+    "meaning_ar": "يربط تحويل الأبحاث التطبيقية الملكية الفكرية الأكاديمية بالبنية التحتية للتصنيع المحلي، مما يدمج مسارات التطوير مباشرة داخل خطوط الإنتاج بالمصانع."
   },
   "وزير الصناعه: نستهدف جذب الشركات الاسبانيه المتوسطه والصغيره لضخ استثمارات جديده في مصر": {
     "meaning": "The policy targets foreign direct investment inflows by creating bilateral industrial partnerships that introduce foreign capital, equipment, and production technology directly into the domestic manufacturing base.",
