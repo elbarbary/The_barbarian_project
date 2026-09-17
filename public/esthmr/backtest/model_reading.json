@@ -11,15 +11,15 @@
  "stressGroups": 2,
  "stressGroupsOf": 7,
  "transmission": true,
- "outside": 0.43,
+ "outside": 0.41,
  "gold": 0.06,
  "oil": 0.65,
- "swings": 0.89,
+ "swings": 0.75,
  "vol20": 12.0,
  "volBrakeActive": false,
  "rulePercent": 100.0,
  "equityPercent": 100.0,
- "partialPercent": 40.2,
+ "partialPercent": 39.2,
  "sessions": [
   {
    "date": "2026-09-10",
@@ -62,7 +62,7 @@
    "egx30": 54822.66,
    "score": 0.6833,
    "warning": false,
-   "outside": 0.43,
+   "outside": 0.41,
    "rulePercent": 100.0,
    "equityPercent": 100.0
   }
@@ -86,7 +86,7 @@
   "south_africa_top40": "2026-09-16",
   "brazil_bovespa": "2026-09-16",
   "gold": "2026-09-16",
-  "ovx": "2026-09-15",
+  "ovx": "2026-09-16",
   "gold_oil_ratio": "2026-09-16",
   "brent_realized_vol20": "2026-09-16"
  },
