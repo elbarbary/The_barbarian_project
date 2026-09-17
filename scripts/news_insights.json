@@ -4472,6 +4472,10 @@
     "meaning": "A decline in US jobless claims reflects tighter labor market conditions, which maintains upward pressure on wage costs and influences US Federal Reserve interest rate decisions, directly affecting foreign capital flows and borrowing costs across emerging markets like Egypt.",
     "meaning_ar": "يعكس انخفاض طلبات إعانة البطالة الأمريكية قوة سوق العمل، مما يولد ضغوطاً على تكاليف الأجور ويؤثر على قرارات الفائدة لدى الفيدرالي الأمريكي، وهو ما يرتبط بحركة تدفقات رؤوس الأموال الأجنبية وتكلفة الاقتراض في الأسواق الناشئة ومنها مصر."
   },
+  "تراجع عوايد السندات الامريكيه مع انخفاض اسعار النفط": {
+    "meaning": "Lower oil prices diminish headline inflation pressures, which corresponds with a decline in US sovereign bond yields as fixed-income securities adjust to altered inflation components.",
+    "meaning_ar": "يؤدي انخفاض أسعار النفط إلى تقليص الضغوط التضخمية، وهو ما يتزامن مع تراجع عوائد سندات الخزانة الأمريكية نتيجة تكيف أدوات الدخل الثابت مع تغير محددات التضخم."
+  },
   "تراجع عوايد السندات العالميه طويله الاجل بعد رفع الفايده الامريكيه": {
     "meaning": "A decline in long-term global bond yields following a US interest rate hike reflects capital reallocation into longer-duration sovereign debt, flattening the yield curve and lowering baseline benchmark borrowing costs for emerging market sovereign issuers.",
     "meaning_ar": "يعكس تراجع عوائد السندات العالمية طويلة الأجل عقب رفع الفائدة الأمريكية إعادة توجيه السيولة نحو أدوات الدين السيادية الأطول أجلاً، مما يؤدي إلى تسطيح منحنى العائد وخفض تكاليف الاقتراض المرجعية للأسواق الناشئة."
@@ -5423,6 +5427,10 @@
   "رييس الوزراء يوكد مواصله برنامج الطروحات الحكوميه للشركات المملوكه للدوله": {
     "meaning": "The state IPO program transfers equity stakes in state-owned enterprises to private and institutional investors via the Egyptian Exchange or direct strategic sales, altering corporate ownership structures and capital distribution.",
     "meaning_ar": "يقوم برنامج الطروحات الحكومية على نقل حصص من ملكية الشركات المملوكة للدولة إلى مستثمرين من القطاع الخاص والمؤسسات عبر البورصة المصرية أو الصفقات المباشرة، مما يغير هيكل الملكية وتوزيع رأس المال في تلك الشركات."
+  },
+  "رييس الوزراء: 5 قطاعات محوريه تقود برنامج التحول الاقتصادي الوطني": {
+    "meaning": "The designation of five core sectors establishes them as primary targets for public capital allocation, state infrastructure projects, and regulatory coordination under the national economic framework.",
+    "meaning_ar": "يحدد هذا الإعلان خمسة قطاعات رئيسية لتكون المستهدف الأساسي لتخصيصات رأس المال العام، ومشاريع البنية التحتية الحكومية، والتنسيق التنظيمي ضمن الإطار الاقتصادي للدولة."
   },
   "رييس الوزراء: الحكومه تواصل العمل لتحسين جوده الخدمات المقدمه للمواطنين": {
     "meaning": "Government initiatives to enhance public service quality involve public expenditure allocations toward infrastructure, digital platforms, and utility operations that interact with private sector contracting and service delivery frameworks.",
