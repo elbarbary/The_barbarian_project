@@ -1275,6 +1275,10 @@
     "meaning": "Higher natural gas prices raise operational energy costs for European industrial corporations and compress current profit margins across energy-intensive sectors, while existing supply diversification and elevated gas storage levels differentiate current market conditions from 2022.",
     "meaning_ar": "يؤدي ارتفاع أسعار الغاز الطبيعي إلى زيادة تكاليف الطاقة التشغيلية للشركات الصناعية الأوروبية والضغط على هوامش الأرباح الحالية للقطاعات كثيفة الاستهلاك، بينما تختلف ظروف السوق الحالية عن عام 2022 في ظل تنوع مصادر الإمداد وارتفاع مستويات المخزون."
   },
+  "ارتفاع اسعار النحاس مع تعافي الطلب في الصين": {
+    "meaning": "Higher global copper prices increase raw material procurement costs for industrial manufacturers and cable producers on the Egyptian Exchange, directly raising cost of goods sold.",
+    "meaning_ar": "يؤدي ارتفاع أسعار النحاس عالمياً إلى زيادة تكاليف شراء المواد الخام لشركات الصناعة ومصنعي الكابلات في البورصة المصرية، مما يرفع تكلفة البضاعة المباعة بشكل مباشر."
+  },
   "ارتفاع اسعار الوقود في اوروبا يهدد بزياده الضغوط التضخميه مع نقص قدرات التكرير": {
     "meaning": "Refinery capacity shortages restrict the supply of refined petroleum products, raising fuel prices and directly increasing transportation and operational input costs across supply chains.",
     "meaning_ar": "يؤدي نقص قدرات التكرير إلى تقليص المعروض من المشتقات البترولية، مما يرفع أسعار الوقود ويزيد تكاليف النقل والتشغيل المباشرة عبر سلاسل التوريد."
@@ -5969,6 +5973,10 @@
     "meaning": "The headline reports an opening session where bid volume exceeds ask volume across listed equities, lifting the benchmark EGX30 index by 0.63% alongside the broader market indices.",
     "meaning_ar": "يوضح الخبر تسجيل جلسة التداول الصباحية تفوقاً في أحجام عروض الشراء على عروض البيع عبر الأسهم المقيدة، مما يرفع مؤشر إيجي إكس 30 بنسبة 0.63% بالتوازي مع صعود باقي مؤشرات السوق."
   },
+  "صعود جماعي لموشرات البورصه بالتعاملات الصباحيه والثلاثيني يرتفع 1.12%": {
+    "meaning": "An early-session aggregate rise indicates broad-based net buying across listed equities, expanding total market capitalization as the benchmark EGX30 index advances by 1.12%.",
+    "meaning_ar": "يعكس الصعود الجماعي في بداية الجلسة غلبة صافي عمليات الشراء عبر مختلف الأسهم المدرجة، مما يرفع القيمة السوقية الإجمالية بالتزامن مع نمو المؤشر الرئيسي بنسبة 1.12%."
+  },
   "صعود جماعي.. اين وصل سعر الريال السعودي في ختام التعاملات؟": {
     "meaning": "An appreciation of the Saudi Riyal against the Egyptian Pound increases the domestic currency cost of imports from Saudi Arabia and raises the conversion value of remittances sent by Egyptian expatriates.",
     "meaning_ar": "يؤدي ارتفاع سعر صرف الريال السعودي أمام الجنيه المصري إلى زيادة التكلفة بالعملة المحلية للواردات القادمة من المملكة العربية السعودية ورفع قيمة التحويلات الواردة من العاملين بالخارج عند تحويلها إلى الجنيه."
@@ -6064,6 +6072,10 @@
   "عاجل.. 5.3 جنيه القيمه العادله لسهم بنك القاهره": {
     "meaning": "An equity valuation assesses Banque du Caire's underlying assets, loan book, and capital structure to establish a baseline per-share financial benchmark.",
     "meaning_ar": "يحدد التقييم المالي معياراً محاسبياً لقيمة السهم بناءً على فحص الأصول الرأسمالية والمحفظة الائتمانية وهيكل حقوق الملكية الخاص ببنك القاهرة."
+  },
+  "عاجل.. 60 يوم عمل مهله لتقديم AGL عرض الاستحواذ علي ايجيترانس نوسكو": {
+    "meaning": "The regulatory authority establishes a 60-working-day statutory timeframe for the acquirer to complete due diligence and submit a mandatory or voluntary tender offer under Egyptian capital market regulations.",
+    "meaning_ar": "تحدد الهيئة الرقابية مهلة قانونية قدرها 60 يوم عمل للطرف المشتري لاستكمال الفحص النافي للجهالة وتقديم عرض الشراء الإجباري أو الاختياري وفقاً لقواعد سوق المال المصرية."
   },
   "عاجل.. استخدام رمز (OTP) في منظومه التحقق من هويه عملاء التمويل الاستهلاكي وتمويل المشروعات خلال شهرين": {
     "meaning": "The regulatory requirement mandates consumer finance and micro/SME lending institutions to integrate one-time password (OTP) verification protocols into their customer identity verification workflows within a two-month implementation window.",
@@ -8252,6 +8264,10 @@
   "“القومي لتنظيم الاعلانات” يواصل جولاته لرصد تطبيق المنظومه بمحافظه الجيزه": {
     "meaning": "Regulatory inspections enforce standardized outdoor advertising rules and licensing compliance for media agencies and billboard operators across Giza.",
     "meaning_ar": "تفرض الجولات الرقابية تطبيق القواعد الموحدة لتنظيم إعلانات الطرق والتحقق من التزام وكالات الدعاية والإعلان بتراخيص التشغيل في محافظة الجيزة."
+  },
+  "“الماليه” تستهدف دعم المحافظات لتعظيم مواردها وتحسين كفاءه الانفاق": {
+    "meaning": "The Ministry of Finance establishes technical and administrative coordination mechanisms with local governorates to structure local fee collection and audit municipal expenditure frameworks.",
+    "meaning_ar": "تضع وزارة المالية آليات تنسيق فنية وإدارية مع المحافظات لتنظيم تحصيل الرسوم المحلية وتدقيق أطر الإنفاق في الإدارات المحلية."
   },
   "“المجتمعات العمرانيه” تطرح 12 فرصه استثماريه في “العاشر” ب1.5 مليار جنيه": {
     "meaning": "The New Urban Communities Authority allocates state-owned land plots in 10th of Ramadan City through commercial and industrial investment tenders with a total baseline transaction value of EGP 1.5 billion.",
