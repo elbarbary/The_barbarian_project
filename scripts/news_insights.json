@@ -1299,6 +1299,10 @@
     "meaning": "Equity prices reflect market positioning and the repricing of capital costs ahead of central bank monetary policy announcements, where interest rate decisions directly establish baseline borrowing costs and corporate valuation discount rates across the economy.",
     "meaning_ar": "تعكس أسعار الأسهم مراكز التداول وإعادة تسعير تكلفة رأس المال قبيل إعلانات السياسة النقدية للبنوك المركزية، حيث تحدد قرارات أسعار الفائدة تكاليف الاقتراض الأساسية ومعدلات خصم التقييم للشركات في السوق."
   },
+  "ارتفاع الاسهم الاوروبيه مع تراجع اسعار النفط": {
+    "meaning": "Lower crude oil prices decrease operating and energy expenses across energy-intensive industries, while equity markets concurrently register upward price movements.",
+    "meaning_ar": "يؤدي تراجع أسعار النفط الخام إلى خفض تكاليف التشغيل والطاقة في القطاعات كثيفة الاستهلاك، بالتزامن مع تسجيل أسواق الأسهم تحركات سعرية صعودية."
+  },
   "ارتفاع الاسهم الاوروبيه وسط مكاسب قطاعي التعدين والبنوك": {
     "meaning": "European equities advance as increased commodity valuations raise revenue metrics for mining companies, while interest rate environments sustain net interest income across the banking sector.",
     "meaning_ar": "ترتفع الأسهم الأوروبية بالتزامن مع زيادة تقييمات السلع الأساسية التي ترفع إيرادات شركات التعدين، إلى جانب استقرار مستويات أسعار الفائدة التي تدعم صافي دخل الفوائد في القطاع المصرفي."
@@ -1414,6 +1418,10 @@
   "ارتفاع موشر بورصه قطر في ختام التعاملات": {
     "meaning": "The headline reports a net appreciation in Qatar's primary equity benchmark at market close, reflecting an aggregate daily balance of trade where executed buying volumes outpace executed selling volumes across constituent shares.",
     "meaning_ar": "يشير الخبر إلى تسجيل المؤشر الرئيسي لبورصة قطر مكاسب صافية مع إغلاق جلسة التداول، وهو ما يعكس محصلة يومية تجاوزت فيها أحجام الشراء المنفذة أحجام البيع عبر الأسهم المكونة للمؤشر."
+  },
+  "ارتفاع موشر نيكي مع ترقب صدور قرار بنك اليابان": {
+    "meaning": "Equities on the Tokyo Stock Exchange experience upward price adjustments as market participants reposition portfolios ahead of the Bank of Japan's interest rate policy announcement. Central bank policy rate decisions directly govern benchmark borrowing costs, currency valuations, and liquidity conditions across the banking system.",
+    "meaning_ar": "تشهد الأسهم في بورصة طوكيو تحركات سعرية صعودية مع إعادة هيكلة المحافظ المالية قبل إعلان قرار سعر الفائدة من بنك اليابان. تحدد قرارات السياسة النقدية للبنوك المركزية تكاليف الاقتراض الأساسية، وأسعار صرف العملات، ومستويات السيولة النقدية في النظام المصرفي."
   },
   "ارتفاع موشرات البورصه المصريه بشكل جماعي في ختام تعاملات الاحد": {
     "meaning": "A collective rise across EGX benchmark indices reflects aggregate net buying liquidity exceeding selling pressure across broad market segments, resulting in an increase in total listed market capitalization at market close.",
@@ -5691,6 +5699,10 @@
   "سي اي كابيتال تستهدف اطلاق صندوق تحوط للاسهم": {
     "meaning": "Launching an equity hedge fund introduces an alternative investment structure that utilizes long and short positions alongside derivatives to manage market exposure. This operational step expands the financial institution's asset management product lineup under local capital market regulations.",
     "meaning_ar": "يمثل إطلاق صندوق تحوط للأسهم توفير أداة استثمارية تعتمد على استراتيجيات المراكز الشرائية والبيعية والمشتقات لإدارة التعرض لمخاطر السوق، مما يوسع محفظة منتجات إدارة الأصول للمؤسسة المالية وفقاً للقواعد المنظمة لسوق المال."
+  },
+  "سي اي كابيتال والاهلي فاروس يتمان اصدار سندات توريق بقيمه 883 مليون جنيه لصالح سهوله": {
+    "meaning": "This transaction converts consumer finance receivables originated by Souhoola into tradable debt securities managed by CI Capital and Al Ahly Pharos, providing upfront non-bank liquidity directly against outstanding loan portfolios.",
+    "meaning_ar": "تحول هذه العملية محفظة الحقوق المالية الآجلة لشركة سهولة للتمويل الاستهلاكي إلى أوراق مالية قابلة للتداول بإدارة سي آي كابيتال والأهلي فاروس، مما يوفر سيولة نقدية فورية مقابل مديونيات العملاء القائمة."
   },
   "سياتل تايمز ونيوزداي تقاضيان اوبن ايه اي ومايكروسوفت بتهمه انتهاك حقوق النشر": {
     "meaning": "Copyright litigation by news publishers against artificial intelligence developers introduces legal liability and directly involves the intellectual property licensing framework for training datasets.",
