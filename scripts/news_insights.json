@@ -4083,6 +4083,10 @@
     "meaning": "The market index exhibits low price volatility over the trading period, reflecting equilibrium between incoming bid volumes and ask orders across major listed equities.",
     "meaning_ar": "يُظهر المؤشر العام تقلبات سعرية منخفضة على مدار فترة التداول، مما يعكس توازناً بين أحجام أوامر الشراء وطلبات البيع عبر الأسهم القيادية المدرجة."
   },
+  "بوش تحذر من تصاعد المنافسه الصينيه في سوق السيارات الاوروبيه": {
+    "meaning": "Chinese automotive manufacturers expand their supply chain presence and lower-cost vehicle offerings in the European market, altering competitive dynamics for established regional component suppliers like Bosch.",
+    "meaning_ar": "يوسع مصنعو السيارات الصينيون سلاسل الإمداد ويطرحون مركبات بتكلفة أقل داخل السوق الأوروبية، مما يغير ديناميكيات المنافسة أمام موردي المكونات التقليديين في المنطقة مثل شركة بوش."
+  },
   "بي ان بي باريبا يرفع تقييمه لسندات منطقه اليورو الي «ايجابي»": {
     "meaning": "An upgraded sovereign credit assessment reflects institutional reassessment of underlying debt issuance fundamentals, debt-servicing metrics, and prevailing interest rate frameworks across eurozone economies.",
     "meaning_ar": "يعكس رفع التقييم الائتماني للسندات السيادية إعادة تقييم مؤسسية للمؤشرات الأساسية لإصدارات الديون ومعدلات خدمة الدين وأطر أسعار الفائدة السائدة عبر اقتصاديات منطقة اليورو."
@@ -6580,6 +6584,10 @@
   "كيف تتعامل الشركات الكنديه مع رسوم “ترامب” الجمركيه؟": {
     "meaning": "Tariffs impose cross-border levies on exported goods, requiring companies to adjust export pricing structures, absorb additional import duties within their supply chains, or relocate manufacturing operations to target markets.",
     "meaning_ar": "تفرض الرسوم الجمركية تكاليف إضافية على السلع المصدرة، مما يدفع الشركات إلى تعديل هياكل أسعار التصدير، أو استيعاب الرسوم الإضافية ضمن سلاسل الإمداد، أو نقل العمليات التصنيعية إلى الأسواق المستهدفة."
+  },
+  "كيف تحركت اسعار الخشب اليوم في مصر؟": {
+    "meaning": "Tracking domestic timber prices reflects changes in import costs, foreign exchange liquidity, and direct input expenses for the construction, real estate, and furniture manufacturing sectors.",
+    "meaning_ar": "يعكس رصد أسعار الأخشاب المحلية التغيرات في تكاليف الاستيراد وتوافر السيولة من النقد الأجنبي، بالإضافة إلى تكلفة المدخلات المباشرة لقطاعات التشييد والتطوير العقاري وصناعة الأثاث."
   },
   "كيف تحصل علي فرصه من وزاره العمل؟.. خطوات التسجيل والتقديم": {
     "meaning": "The Ministry of Labor operates a centralized labor intermediation mechanism that registers job seekers and coordinates their placement into verified vacancies across private and public sector entities.",
