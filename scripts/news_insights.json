@@ -2267,6 +2267,10 @@
     "meaning": "The Egyptian Exchange serves as the host venue for a multi-jurisdiction financial analysis research competition, gathering industry practitioners and professional societies from nine countries for equity evaluation benchmarks.",
     "meaning_ar": "تستضيف البورصة المصرية مسابقة إقليمية لبحوث التحليل المالي تجمع جمعيات مهنية ومشاركين من تسع دول لتطبيق معايير التقييم المالي للأوراق المالية."
   },
+  "البورصه المصريه تستعرض مزايا القيد واحدث الادوات الماليه مع جمعيه رجال الاعمال": {
+    "meaning": "The Egyptian Exchange engages directly with business associations to present regulatory listing requirements, debt financing options, and alternative capital-raising instruments available to private enterprises.",
+    "meaning_ar": "تتواصل البورصة المصرية مباشرة مع جمعيات رجال الأعمال لعرض متطلبات القيد التنظيمية، وخيارات التمويل عبر أدوات الدين، والآليات المتاحة للشركات الخاصة لزيادة رؤوس أموالها."
+  },
   "البورصه المصريه تنهي تعاملات الاحد بالمنطقه الخضراء والثلاثيني يصعد": {
     "meaning": "A positive close for the trading session reflects net buying liquidity exceeding selling volume across listed equities, raising aggregate market capitalisation and lifting the benchmark index.",
     "meaning_ar": "يعكس إغلاق السوق في المنطقة الخضراء تجاوز أحجام الشراء لعروض البيع خلال جلسة التداول، مما يرفع القيمة السوقية الإجمالية للأسهم ويدفع المؤشر الرئيسي للصعود."
@@ -2274,6 +2278,10 @@
   "البورصه المصريه تنهي جلسه اليوم علي تباين في الموشرات": {
     "meaning": "A mixed close across indices reflects divergent trading activity, where capital flows and price movements differ between large-cap institutional equities and small-to-mid-cap stocks within the same session.",
     "meaning_ar": "يشير التباين في أداء المؤشرات إلى اختلاف مسارات الأسعار وتوزيع السيولة النقدية بين الأسهم القيادية وأسهم الشركات الصغيرة والمتوسطة خلال جلسة التداول."
+  },
+  "البورصه المصريه وجمعيه رجال الاعمال المصريين (EBA) تبحثان مزايا القيد": {
+    "meaning": "Institutional discussions between stock exchange operators and business associations involve presenting regulatory procedures, capital-raising mechanisms, and corporate disclosure requirements directly to unlisted private enterprises.",
+    "meaning_ar": "تشمل المباحثات المؤسسية بين إدارة البورصة وجمعيات الأعمال استعراض الإجراءات التنظيمية، وآليات زيادة رؤوس الأموال، ومتطلبات الإفصاح والحوكمة مباشرةً أمام الشركات غير المقيدة."
   },
   "البورصه تتحدي ضغوط المبيعات وجني الارباح لاستعاده المسار الصاعد": {
     "meaning": "During market sessions characterized by profit-taking, incoming buy orders absorb the volume of executed sell orders, which directly determines the net movement of benchmark indices.",
@@ -3779,6 +3787,10 @@
     "meaning": "Commercial banks update foreign exchange bid and ask quotations at the start of daily operations based on interbank liquidity levels, treasury cash flows, and currency inventory positions.",
     "meaning_ar": "تُحدّث البنوك التجارية أسعار عرض وطلب العملات الأجنبية في بداية المعاملات اليومية وفقاً لمستويات السيولة بين البنوك وتدفقات الخزانة النقدية ومراكز العملات المتاحة لديها."
   },
+  "اين تحصل علي اعلي قيم لتحويل 1000 ريال قطري اليوم الخميس؟": {
+    "meaning": "Retail foreign exchange spreads for Gulf currencies vary across authorized Egyptian banks based on treasury liquidity management and intraday interbank pricing.",
+    "meaning_ar": "تتفاوت هوامش أسعار صرف العملات الخليجية للأفراد بين البنوك المصرية المعتمدة وفقاً لإدارة السيولة بالخزانة وتسعير المعاملات بين البنوك خلال اليوم."
+  },
   "اين وصل سعر الدينار الكويتي اليوم الاحد في البنوك؟": {
     "meaning": "Official foreign exchange quotations reflect the daily clearing rates between the Egyptian Pound and the Kuwaiti Dinar within the formal banking sector, which directly determine conversion costs for expatriate remittances and import settlement charges from Kuwait.",
     "meaning_ar": "تعكس أسعار الصرف الرسمية المعلنة أسعار المقاصة اليومية بين الجنيه المصري والدينار الكويتي داخل القطاع المصرفي، وهي الآلية التي تحدد تكلفة تحويلات العاملين بالخارج وتسوية المدفوعات التجارية للواردات من دولة الكويت."
@@ -4824,6 +4836,10 @@
     "meaning": "GB Auto adds the Haval V7 to its local passenger vehicle distribution portfolio, establishing an official retail price baseline starting at EGP 1.82 million.",
     "meaning_ar": "تضيف شركة جي بي أوتو طراز هافال V7 إلى محفظة توزيع سيارات الركوب المحلية، مع تحديد مستوى التسعير الرسمي للبيع بالتجزئة ليبدأ من 1.82 مليون جنيه."
   },
+  "جي بي اوتو تطلق Hyundai Venue المجمعه محليا بسعر يبدا من 850 الف جنيه": {
+    "meaning": "Local assembly of this vehicle model utilizes existing domestic manufacturing facilities and operates under Egypt's automotive industry tariff structure, replacing fully built-up import logistics with component assembly.",
+    "meaning_ar": "يعتمد التجميع المحلي لهذا الطراز على استخدام خطوط التصنيع القائمة في مصر والاستفادة من التعريفات الجمركية المخصصة للمكونات بدلاً من استيراد السيارات كاملة الصنع."
+  },
   "جي بي كوربوريشن تعين نيفين الطاهري عضوا مستقلا بمجلس الاداره": {
     "meaning": "The appointment of an independent board member adds non-executive oversight to the company's governance structure, aligning corporate management with regulatory board-composition standards on the EGX.",
     "meaning_ar": "يضيف تعيين عضو مستقل في مجلس الإدارة رقابة غير تنفيذية إلى هيكل حوكمة الشركة، بما يتوافق مع المعايير التنظيمية لتشكيل مجالس الإدارة في البورصة المصرية."
@@ -5403,6 +5419,10 @@
   "سعر الذهب العالمي يهبط مع عوده مخاوف التضخم وترقب قرار المركزي الامريكي": {
     "meaning": "Persistent inflation data keeps US interest rates elevated, which increases sovereign bond yields and raises the opportunity cost of holding non-yielding gold.",
     "meaning_ar": "يؤدي استمرار الضغوط التضخمية إلى الإبقاء على أسعار الفائدة الأمريكية مرتفعة، مما يرفع عوائد السندات السيادية ويزيد من تكلفة الفرصة البديلة لحيازة الذهب غير المدر لعائد."
+  },
+  "سعر الذهب يصعد عالميا بعد رفع الفايده الامريكيه": {
+    "meaning": "International gold spot prices adjust to Federal Reserve interest rate actions, which directly dictate the domestic pricing benchmarks for gold bullion and jewelry across the Egyptian retail and wholesale commodity markets.",
+    "meaning_ar": "تتأثر أسعار الذهب الفورية عالمياً بقرارات الفائدة الصادرة عن مجلس الاحتياطي الفيدرالي، وهي تشكل المعيار المباشر لتسعير السبائك والمشغولات الذهبية في أسواق التجزئة والجملة المحلية داخل مصر."
   },
   "سعر الريال السعودي اليوم الاثنين 7-9-2026 في بدايه التعاملات": {
     "meaning": "Official opening exchange rate data for the Saudi Riyal reflects the current interbank foreign currency pricing mechanism, determining the direct transaction costs for bilateral trade settlements, travel expenditures, and cross-border remittances between Egypt and Saudi Arabia.",
@@ -6233,6 +6253,10 @@
     "meaning": "An increase in authorized, issued, and paid-in capital expands the company's equity base on the balance sheet by injecting new funds or capitalizing reserves, thereby raising its formal borrowing capacity and the legal ceiling for future share issuances.",
     "meaning_ar": "تؤدي زيادة رأس المال المرخص به والمُصدر والمدفوع إلى توسيع قاعدة حقوق الملكية في الميزانية العمومية عبر ضخ أموال جديدة أو رسملة الاحتياطيات، مما يرفع السقف القانوني لإصدارات الأسهم المستقبلية والحد الائتماني المتاح للشركة."
   },
+  "عموميه مصر للفنادق تقر توزيع كوبون نقدي علي المساهمين": {
+    "meaning": "Approval of a cash dividend allocates a portion of accumulated retained earnings directly to shareholders as liquid capital, which reduces the company's cash balances and total shareholders' equity on the balance sheet.",
+    "meaning_ar": "يؤدي اعتماد توزيع الكوبون النقدي إلى تخصيص جزء من الأرباح المرحلة لتوزيعه كسيولة نقدية على المساهمين، مما يترتب عليه خصم القيمة الإجمالية للتوزيعات من الرصيد النقدي وحقوق الملكية في الميزانية العمومية للشركة."
+  },
   "عموميه “ابن سينا” تقر توزيع 13 قرشا للسهم": {
     "meaning": "Approval of the cash dividend allocates corporate retained earnings to direct cash payouts of 0.13 EGP per share, which reduces liquid treasury balances and shareholders' equity on the balance sheet.",
     "meaning_ar": "يُمثل إقرار توزيع الأرباح النقدية تخصيصاً للأرباح المحتجزة لصرف مبالغ مباشرة بواقع 13 قرشاً لكل سهم، وهو ما يخفض أرصدة السيولة النقدية وحقوق الملكية في الميزانية العمومية للشركة."
@@ -6480,6 +6504,10 @@
   "كوريا الجنوبيه تقترب من اتفاق استثماري مع امريكا ب100 مليار دولار": {
     "meaning": "Bilateral investment agreements of this scale involve structured direct capital allocations across specific industrial and manufacturing supply chains between the participating nations.",
     "meaning_ar": "تتضمن الاتفاقيات الاستثمارية الثنائية بهذا الحجم تخصيصات رأسمالية مباشرة وموجهة عبر سلاسل إمداد صناعية وإنتاجية محددة بين الدولتين المشاركتين."
+  },
+  "كيف اثرت قرارات السياسه النقديه العالميه علي اسعار العملات اليوم؟": {
+    "meaning": "Global monetary policy decisions shift benchmark interest rate differentials across central banks, altering relative cross-border capital flows and directly pricing foreign exchange rates.",
+    "meaning_ar": "تغير قرارات السياسة النقدية العالمية فروق أسعار الفائدة الأساسية بين البنوك المركزية، مما يعيد توجيه التدفقات الرأسمالية عبر الحدود ويحدد أسعار صرف العملات مباشرة."
   },
   "كيف افتتحت المصارف تعاملات الريال السعودي بالتزامن مع زياره ولي العهد؟": {
     "meaning": "Commercial banks update their opening exchange rates for the Saudi Riyal against the Egyptian Pound based on interbank foreign currency liquidity, trade settlement flows, and daily foreign exchange reserve management.",
@@ -6912,6 +6940,10 @@
   "مساهم يتخارج من “الاهرام للطباعه” بقيمه 1.69 مليون جنيه": {
     "meaning": "A shareholder executed a complete equity divestment in El Ahram for Printing and Packaging with a transaction value of EGP 1.69 million, shifting the company's ownership structure and free-float distribution on the EGX.",
     "meaning_ar": "قام أحد المساهمين بتنفيذ تخارج كامل من هيكل ملكية شركة الأهرام للطباعة والتغليف بقيمة تداول بلغت 1.69 مليون جنيه، مما يعيد توزيع الحصص ونسبة الأسهم حرة التداول في البورصة المصرية."
+  },
+  "مساهم يرفع حصته في راسمال كوبر للاستثمار بقيمه 7.2 مليون جنيه": {
+    "meaning": "An equity stake increase by an existing shareholder reallocates voting rights and ownership concentration on the company's cap table via a secondary market transaction of 7.2 million Egyptian pounds.",
+    "meaning_ar": "تؤدي زيادة حصة مساهم قائم إلى إعادة توزيع نسب الملكية وحقوق التصويت في هيكل رأس مال الشركة عبر صفقة في السوق الثانوي بقيمة 7.2 مليون جنيه مصري."
   },
   "مستثمرو صناديق السندات الامريكيه يهربون الي الاجال القصيره مع تصاعد مخاطر الفايده": {
     "meaning": "Rising interest rate risk increases duration risk on fixed-income portfolios, prompting bond funds to reallocate capital into short-term maturities that carry lower price sensitivity to interest rate changes.",
