@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-17T10:11:16Z",
+ "generated": "2026-09-17T10:49:25Z",
  "basis": "A move is placed against its own two years of same-length moves — a record of what has already happened, never a statement about the next one. Each list of companies is the complete set that filed the figure, in alphabetical order, with the filing beside it. Nothing here says what any of it means for a share price.",
  "basisAr": "تُقاس كل حركة مقابل سنتين من حركات بالطول نفسه — سجل لما حدث بالفعل، وليس قولاً عما سيحدث. وكل قائمة شركات هي المجموعة الكاملة التي أودعت الرقم، بالترتيب الأبجدي، ومعها الإفصاح الذي جاء منه. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
  "windows": [
@@ -53,13 +53,13 @@
   "paid": {
    "label": "Overnight interbank",
    "labelAr": "سعر الإقراض بين البنوك لليلة واحدة",
-   "percent": 19.526,
-   "token": "19.526%",
-   "asOf": "2026-09-15",
+   "percent": 19.497,
+   "token": "19.497%",
+   "asOf": "2026-09-16",
    "carried": false
   },
   "source": "cbe.org.eg monetary policy, effective 2026-02-15",
-  "at": 0.526,
+  "at": 0.497,
   "inside": true
  },
  "world": [
@@ -511,29 +511,29 @@
    "id": "EGX30",
    "label": "EGX 30",
    "asOf": "2026-09-17",
-   "close": 55185.9,
+   "close": 55345.1,
    "sessions": 204,
    "moves": {
     "week": {
-     "change": -1.94,
+     "change": -1.66,
      "against": {
-      "percentile": 50.3,
+      "percentile": 44.7,
       "observations": 199,
-      "typical": 1.94
+      "typical": 1.92
      }
     },
     "month": {
-     "change": 1.24,
+     "change": 1.53,
      "against": {
-      "percentile": 20.8,
+      "percentile": 21.9,
       "observations": 183,
       "typical": 4.02
      }
     },
     "quarter": {
-     "change": 4.87,
+     "change": 5.18,
      "against": {
-      "percentile": 22.7,
+      "percentile": 24.8,
       "observations": 141,
       "typical": 9.15
      }
@@ -544,27 +544,27 @@
    "id": "EGX70EWI",
    "label": "EGX 70",
    "asOf": "2026-09-17",
-   "close": 20904.8,
+   "close": 20957,
    "sessions": 204,
    "moves": {
     "week": {
-     "change": -2.33,
+     "change": -2.09,
      "against": {
-      "percentile": 51.3,
+      "percentile": 44.7,
       "observations": 199,
-      "typical": 2.26
+      "typical": 2.24
      }
     },
     "month": {
-     "change": -0.27,
+     "change": -0.02,
      "against": {
-      "percentile": 1.1,
+      "percentile": 0.5,
       "observations": 183,
       "typical": 5.81
      }
     },
     "quarter": {
-     "change": 34.49,
+     "change": 34.83,
      "against": {
       "percentile": 75.2,
       "observations": 141,
@@ -577,29 +577,29 @@
    "id": "EGX100EWI",
    "label": "EGX 100",
    "asOf": "2026-09-17",
-   "close": 27460.1,
+   "close": 27542.3,
    "sessions": 204,
    "moves": {
     "week": {
-     "change": -1.92,
+     "change": -1.63,
      "against": {
-      "percentile": 43.7,
+      "percentile": 39.7,
       "observations": 199,
       "typical": 2.17
      }
     },
     "month": {
-     "change": 1.01,
+     "change": 1.31,
      "against": {
-      "percentile": 10.9,
+      "percentile": 14.2,
       "observations": 183,
       "typical": 5.11
      }
     },
     "quarter": {
-     "change": 28.59,
+     "change": 28.97,
      "against": {
-      "percentile": 77.3,
+      "percentile": 79.4,
       "observations": 141,
       "typical": 19.31
      }
@@ -6915,52 +6915,52 @@
   }
  ],
  "foreignMoney": {
-  "asOf": "2026-09-17T12:53:12",
+  "asOf": "2026-09-17T13:32:41",
   "basis": "period to date, as published by the exchange",
   "source": "beta.egx.com.eg /api/bff/egx/investor-full-statistics",
   "byNationality": [
    {
     "party": "Egyptians",
     "party_ar": "مصريين",
-    "buy_percent": 81.27,
-    "sell_percent": 51.94,
-    "percent": 66.61,
-    "buy": 35137918539.6224,
-    "sell": 22458297470.8964,
-    "net": 12679621068.726,
+    "buy_percent": 84.34,
+    "sell_percent": 58.75,
+    "percent": 71.55,
+    "buy": 45948321938.1441,
+    "sell": 32006192397.0685,
+    "net": 13942129541.0756,
     "combined": false
    },
    {
     "party": "Arab",
     "party_ar": "عرب",
-    "buy_percent": 8.51,
-    "sell_percent": 10.4,
-    "percent": 9.46,
-    "buy": 3681200687.216,
-    "sell": 4498313041.7469,
-    "net": -817112354.5309,
+    "buy_percent": 6.83,
+    "sell_percent": 8.4,
+    "percent": 7.61,
+    "buy": 3721526518.996,
+    "sell": 4575333830.623,
+    "net": -853807311.627,
     "combined": false
    },
    {
     "party": "Non-Arab Foreigners",
     "party_ar": "أجانب",
-    "buy_percent": 10.21,
-    "sell_percent": 37.65,
-    "percent": 23.93,
-    "buy": 4416197402.3039,
-    "sell": 16278706116.499,
-    "net": -11862508714.1951,
+    "buy_percent": 8.83,
+    "sell_percent": 32.85,
+    "percent": 20.84,
+    "buy": 4808174872.1364,
+    "sell": 17896497101.585,
+    "net": -13088322229.4486,
     "combined": false
    },
    {
     "party": "Arabs & Foreigners",
     "party_ar": "عرب وأجانب",
-    "buy_percent": 18.72,
-    "sell_percent": 48.05,
-    "percent": 33.39,
-    "buy": 8097398089.5199,
-    "sell": 20777019158.2459,
-    "net": -12679621068.726,
+    "buy_percent": 15.66,
+    "sell_percent": 41.25,
+    "percent": 28.45,
+    "buy": 8529701391.1324,
+    "sell": 22471830932.208,
+    "net": -13942129541.0756,
     "combined": true
    }
   ],

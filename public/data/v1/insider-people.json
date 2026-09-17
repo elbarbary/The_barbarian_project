@@ -1,16 +1,16 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-17T10:19:35+00:00",
+ "generated": "2026-09-17T10:55:49+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1318,
- "tradeCount": 177,
+ "peopleCount": 1320,
+ "tradeCount": 183,
  "tickerCount": 236,
- "tradedTickerCount": 74,
- "firmCount": 436,
- "personCount": 882,
- "aliasCount": 141,
+ "tradedTickerCount": 76,
+ "firmCount": 437,
+ "personCount": 883,
+ "aliasCount": 142,
  "registerCount": 236,
  "overDisclosed": [],
  "supersededByRegister": [
@@ -44,7 +44,15 @@
    "percent": 58.9,
    "asOf": "2026-09-02",
    "filingId": "294260",
-   "why": "the filed register for GGCC does not list this name, and counting both made the company 123.45% owned"
+   "why": "the filed register for GGCC does not list this name, and counting both made the company 129.14% owned"
+  },
+  {
+   "holder": "محمد اشرف عمر عمر",
+   "ticker": "GGCC",
+   "percent": 5.688,
+   "asOf": "2026-07-15",
+   "filingId": "291405",
+   "why": "the filed register for GGCC does not list this name, and counting both made the company 129.14% owned"
   },
   {
    "holder": "وادي للاستشارات",
@@ -52,7 +60,7 @@
    "percent": 0.84,
    "asOf": "2026-09-01",
    "filingId": "294240",
-   "why": "the filed register for GGCC does not list this name, and counting both made the company 123.45% owned"
+   "why": "the filed register for GGCC does not list this name, and counting both made the company 129.14% owned"
   },
   {
    "holder": "محمد حيان عبد العزيز العبان",
@@ -165,73 +173,6 @@
      "stakeBefore": 0,
      "stakeAfter": 25,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343969_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "أسامة فوزي محمد سعيد",
-   "name": "أسامة فوزي محمد سعيد",
-   "nameEn": "Osama Fawzy Mohamed Saeed",
-   "script": "ar",
-   "kind": "person",
-   "aliases": [
-    "أسامة فوزى محمد سعيد"
-   ],
-   "tickers": [
-    "FIRE"
-   ],
-   "tradeCount": 3,
-   "boughtCount": 2,
-   "soldCount": 1,
-   "value": 1961451.11,
-   "singleCompanyMove": {
-    "ticker": "FIRE",
-    "from": 24.26,
-    "to": 0.24199,
-    "change": -24.018
-   },
-   "trades": [
-    {
-     "filingId": "291836",
-     "date": "2026-07-22",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "buy",
-     "shares": 307316,
-     "price": 5.61,
-     "value": 1724042.76,
-     "stakeBefore": 24.26,
-     "stakeAfter": 25.6149,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341580_1.pdf"
-    },
-    {
-     "filingId": "292120",
-     "date": "2026-07-29",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "buy",
-     "shares": 24535,
-     "price": 4.98,
-     "value": 122184.30000000002,
-     "stakeBefore": 0.24186,
-     "stakeAfter": 0.56064,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341849_1.pdf"
-    },
-    {
-     "filingId": "292378",
-     "date": "2026-08-03",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "sell",
-     "shares": 24589,
-     "price": 4.686,
-     "value": 115224.054,
-     "stakeBefore": 0.25017,
-     "stakeAfter": 0.24199,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf"
     }
    ]
   },
@@ -978,6 +919,45 @@
    ]
   },
   {
+   "id": "بنك قناة السويس",
+   "name": "بنك قناة السويس",
+   "nameEn": "Bank Qanat Al-Suways",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": [
+    "بنك قناه السويس"
+   ],
+   "tickers": [
+    "NHPS"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 53540107.91,
+   "singleCompanyMove": {
+    "ticker": "NHPS",
+    "from": 7.43,
+    "to": 2.726,
+    "change": -4.704
+   },
+   "trades": [
+    {
+     "filingId": "291302",
+     "date": "2026-07-13",
+     "ticker": "NHPS",
+     "company": null,
+     "companyAr": "الوطنية للاسكان للنقابات المهنية",
+     "action": "sell",
+     "shares": 752522,
+     "price": 71.147565,
+     "value": 53540107.90893,
+     "stakeBefore": 7.43,
+     "stakeAfter": 2.726,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341001_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "تعد للاستثمارات والتنميه ش م م",
    "name": "تعد للاستثمارات والتنميه ش م م",
    "nameEn": "Taad Lilistithmarat Wal Tanmiya S.A.E.",
@@ -1688,6 +1668,88 @@
    ]
   },
   {
+   "id": "أسامة فوزي محمد سعيد",
+   "name": "أسامة فوزي محمد سعيد",
+   "nameEn": "Osama Fawzy Mohamed Saeed",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "أسامة فوزى محمد سعيد",
+    "اسامة فوزي محمد سعيد"
+   ],
+   "tickers": [
+    "FIRE"
+   ],
+   "tradeCount": 4,
+   "boughtCount": 2,
+   "soldCount": 2,
+   "value": 2010785.7,
+   "singleCompanyMove": {
+    "ticker": "FIRE",
+    "from": 3.0124,
+    "to": 0.24199,
+    "change": -2.7704
+   },
+   "trades": [
+    {
+     "filingId": "291251",
+     "date": "2026-07-13",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 95057,
+     "price": 0.519,
+     "value": 49334.583,
+     "stakeBefore": 3.0124,
+     "stakeAfter": 2.29155,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340978_1.pdf"
+    },
+    {
+     "filingId": "291836",
+     "date": "2026-07-22",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 307316,
+     "price": 5.61,
+     "value": 1724042.76,
+     "stakeBefore": 24.26,
+     "stakeAfter": 25.6149,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341580_1.pdf"
+    },
+    {
+     "filingId": "292120",
+     "date": "2026-07-29",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 24535,
+     "price": 4.98,
+     "value": 122184.30000000002,
+     "stakeBefore": 0.24186,
+     "stakeAfter": 0.56064,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341849_1.pdf"
+    },
+    {
+     "filingId": "292378",
+     "date": "2026-08-03",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 24589,
+     "price": 4.686,
+     "value": 115224.054,
+     "stakeBefore": 0.25017,
+     "stakeAfter": 0.24199,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "ALPHA ORYX LIMITED ألفا أوريكس المحدودة",
    "name": "ALPHA ORYX LIMITED ألفا أوريكس المحدودة",
    "nameEn": null,
@@ -1947,6 +2009,43 @@
      "stakeBefore": 0,
      "stakeAfter": 1.91,
      "source": "https://www.egx.com.eg/downloads/Bulletins/341308_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "محمد ابراهيم السيد عبد السلام",
+   "name": "محمد ابراهيم السيد عبد السلام",
+   "nameEn": "Mohamed Ibrahim El Sayed Abdel Salam",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "AMPI"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 1310132.46,
+   "singleCompanyMove": {
+    "ticker": "AMPI",
+    "from": 3.3,
+    "to": 5.0,
+    "change": 1.7
+   },
+   "trades": [
+    {
+     "filingId": "291423",
+     "date": "2026-07-15",
+     "ticker": "AMPI",
+     "company": null,
+     "companyAr": "نوفيدا للاستثمار والتكنولوجيا",
+     "action": "buy",
+     "shares": 492531,
+     "price": 2.66,
+     "value": 1310132.46,
+     "stakeBefore": 3.3,
+     "stakeAfter": 5.0,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340815_1.pdf"
     }
    ]
   },
@@ -3087,6 +3186,43 @@
    ]
   },
   {
+   "id": "Intage Holdings LTD",
+   "name": "Intage Holdings LTD",
+   "nameEn": null,
+   "script": "latin",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "LCSW"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 7303351.75,
+   "singleCompanyMove": {
+    "ticker": "LCSW",
+    "from": 15.37,
+    "to": 15.66,
+    "change": 0.29
+   },
+   "trades": [
+    {
+     "filingId": "291426",
+     "date": "2026-07-15",
+     "ticker": "LCSW",
+     "company": null,
+     "companyAr": "ليسيكو - مصر",
+     "action": "buy",
+     "shares": 231485,
+     "price": 31.55,
+     "value": 7303351.75,
+     "stakeBefore": 15.37,
+     "stakeAfter": 15.66,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341136_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "محمد شعبان عبد العزيز المحلاوي",
    "name": "محمد شعبان عبد العزيز المحلاوي",
    "nameEn": "Mohamed Shaaban Abdel Aziz El Mahalawy",
@@ -3941,6 +4077,126 @@
    ]
   },
   {
+   "id": "محمد اشرف عمر عمر",
+   "name": "محمد اشرف عمر عمر",
+   "nameEn": "Mohamed Ashraf Omar Omar",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "AMER",
+    "GGCC",
+    "HBCO",
+    "OBRI",
+    "UEGC"
+   ],
+   "tradeCount": 7,
+   "boughtCount": 4,
+   "soldCount": 3,
+   "value": 100998649.54,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "291281",
+     "date": "2026-07-13",
+     "ticker": "UEGC",
+     "company": null,
+     "companyAr": "الصعيد العامة للمقاولات والاستثمار العقاري SCCD",
+     "action": "buy",
+     "shares": 1840000,
+     "price": 1.7528,
+     "value": 3225152.0,
+     "stakeBefore": 4.998,
+     "stakeAfter": 5.252,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340966_1.pdf"
+    },
+    {
+     "filingId": "291405",
+     "date": "2026-07-15",
+     "ticker": "GGCC",
+     "company": null,
+     "companyAr": "الجيزة العامة للمقاولات والاستثمار العقارى ش م م",
+     "action": "buy",
+     "shares": 15000000,
+     "price": 0.6148,
+     "value": 9222000.0,
+     "stakeBefore": 4.995,
+     "stakeAfter": 5.688,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341106_1.pdf"
+    },
+    {
+     "filingId": "291660",
+     "date": "2026-07-20",
+     "ticker": "AMER",
+     "company": null,
+     "companyAr": "مجموعة عامر القابضة (عامر جروب)",
+     "action": "buy",
+     "shares": 11375443,
+     "price": 3.4019,
+     "value": 38698119.5417,
+     "stakeBefore": 4.99,
+     "stakeAfter": 6.25,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341196_1.pdf"
+    },
+    {
+     "filingId": "291755",
+     "date": "2026-07-21",
+     "ticker": "OBRI",
+     "company": null,
+     "companyAr": "العبور للاستثمار العقارى",
+     "action": "sell",
+     "shares": 220000,
+     "price": 36.0335,
+     "value": 7927369.999999999,
+     "stakeBefore": 15.015,
+     "stakeAfter": 14.465,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341388_1.pdf"
+    },
+    {
+     "filingId": "292222",
+     "date": "2026-07-30",
+     "ticker": "OBRI",
+     "company": null,
+     "companyAr": "العبور للاستثمار العقارى",
+     "action": "sell",
+     "shares": 520000,
+     "price": 34.0332,
+     "value": 17697264.0,
+     "stakeBefore": 10.025,
+     "stakeAfter": 8.725,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341916_1.pdf"
+    },
+    {
+     "filingId": "292382",
+     "date": "2026-08-03",
+     "ticker": "HBCO",
+     "company": null,
+     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
+     "action": "buy",
+     "shares": 534000,
+     "price": 8.866,
+     "value": 4734444.0,
+     "stakeBefore": 9.986,
+     "stakeAfter": 10.728,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342042_1.pdf"
+    },
+    {
+     "filingId": "292479",
+     "date": "2026-08-04",
+     "ticker": "OBRI",
+     "company": null,
+     "companyAr": "العبور للاستثمار العقارى",
+     "action": "sell",
+     "shares": 600000,
+     "price": 32.4905,
+     "value": 19494300.0,
+     "stakeBefore": 5.75,
+     "stakeAfter": 4.25,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342099_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "جدوى للتنمية الصناعية",
    "name": "جدوى للتنمية الصناعية",
    "nameEn": "Gadwa for Industrial Development",
@@ -4265,96 +4521,6 @@
      "stakeBefore": 5.12,
      "stakeAfter": 3.4,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342366_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "محمد اشرف عمر عمر",
-   "name": "محمد اشرف عمر عمر",
-   "nameEn": "Mohamed Ashraf Omar Omar",
-   "script": "ar",
-   "kind": "person",
-   "aliases": null,
-   "tickers": [
-    "AMER",
-    "HBCO",
-    "OBRI"
-   ],
-   "tradeCount": 5,
-   "boughtCount": 2,
-   "soldCount": 3,
-   "value": 88551497.54,
-   "singleCompanyMove": null,
-   "trades": [
-    {
-     "filingId": "291660",
-     "date": "2026-07-20",
-     "ticker": "AMER",
-     "company": null,
-     "companyAr": "مجموعة عامر القابضة (عامر جروب)",
-     "action": "buy",
-     "shares": 11375443,
-     "price": 3.4019,
-     "value": 38698119.5417,
-     "stakeBefore": 4.99,
-     "stakeAfter": 6.25,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341196_1.pdf"
-    },
-    {
-     "filingId": "291755",
-     "date": "2026-07-21",
-     "ticker": "OBRI",
-     "company": null,
-     "companyAr": "العبور للاستثمار العقارى",
-     "action": "sell",
-     "shares": 220000,
-     "price": 36.0335,
-     "value": 7927369.999999999,
-     "stakeBefore": 15.015,
-     "stakeAfter": 14.465,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341388_1.pdf"
-    },
-    {
-     "filingId": "292222",
-     "date": "2026-07-30",
-     "ticker": "OBRI",
-     "company": null,
-     "companyAr": "العبور للاستثمار العقارى",
-     "action": "sell",
-     "shares": 520000,
-     "price": 34.0332,
-     "value": 17697264.0,
-     "stakeBefore": 10.025,
-     "stakeAfter": 8.725,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341916_1.pdf"
-    },
-    {
-     "filingId": "292382",
-     "date": "2026-08-03",
-     "ticker": "HBCO",
-     "company": null,
-     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
-     "action": "buy",
-     "shares": 534000,
-     "price": 8.866,
-     "value": 4734444.0,
-     "stakeBefore": 9.986,
-     "stakeAfter": 10.728,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342042_1.pdf"
-    },
-    {
-     "filingId": "292479",
-     "date": "2026-08-04",
-     "ticker": "OBRI",
-     "company": null,
-     "companyAr": "العبور للاستثمار العقارى",
-     "action": "sell",
-     "shares": 600000,
-     "price": 32.4905,
-     "value": 19494300.0,
-     "stakeBefore": 5.75,
-     "stakeAfter": 4.25,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342099_1.pdf"
     }
    ]
   },
@@ -6083,23 +6249,6 @@
    "kind": "person",
    "aliases": [
     "البنك الاهلي المصري"
-   ],
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "بنك قناة السويس",
-   "name": "بنك قناة السويس",
-   "nameEn": null,
-   "script": null,
-   "kind": "firm",
-   "aliases": [
-    "بنك قناه السويس"
    ],
    "tickers": [],
    "tradeCount": 0,
@@ -27617,6 +27766,24 @@
    ]
   },
   {
+   "holder": "Intage Holdings LTD",
+   "kind": "firm",
+   "ticker": "LCSW",
+   "percent": 15.66,
+   "asOf": "2026-07-15",
+   "basis": "trade",
+   "filingId": "291426",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341136_1.pdf",
+   "openedAt": "2026-07-15",
+   "openingPercent": 15.37,
+   "history": [
+    {
+     "date": "2026-07-15",
+     "percent": 15.66
+    }
+   ]
+  },
+  {
    "holder": "يحي بن محمد بن عوض بن لادن",
    "kind": "person",
    "ticker": "DOMT",
@@ -30313,20 +30480,6 @@
      "percent": 9.714
     }
    ]
-  },
-  {
-   "holder": "بنك قناة السويس",
-   "kind": "firm",
-   "ticker": "NHPS",
-   "percent": 9.7,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291024",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/340720_1.pdf",
-   "shares": 1552000,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
   },
   {
    "holder": "Amr Salaheldin Mohamed Mahmoud",
@@ -33776,6 +33929,24 @@
    "history": []
   },
   {
+   "holder": "محمد اشرف عمر عمر",
+   "kind": "person",
+   "ticker": "UEGC",
+   "percent": 5.252,
+   "asOf": "2026-07-13",
+   "basis": "trade",
+   "filingId": "291281",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340966_1.pdf",
+   "openedAt": "2026-07-13",
+   "openingPercent": 4.998,
+   "history": [
+    {
+     "date": "2026-07-13",
+     "percent": 5.252
+    }
+   ]
+  },
+  {
    "holder": "نواف بن عبد الله بن ابراهيم بن دايل",
    "kind": "person",
    "ticker": "ELEC",
@@ -34406,6 +34577,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "محمد ابراهيم السيد عبد السلام",
+   "kind": "person",
+   "ticker": "AMPI",
+   "percent": 5.0,
+   "asOf": "2026-07-15",
+   "basis": "trade",
+   "filingId": "291423",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340815_1.pdf",
+   "openedAt": "2026-07-15",
+   "openingPercent": 3.3,
+   "history": [
+    {
+     "date": "2026-07-15",
+     "percent": 5.0
+    }
+   ]
   },
   {
    "holder": "اتحاد العاملين المساهمين بشركة اسكندرية للادوية",
@@ -36569,6 +36758,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "بنك قناة السويس",
+   "kind": "firm",
+   "ticker": "NHPS",
+   "percent": 2.726,
+   "asOf": "2026-07-13",
+   "basis": "trade",
+   "filingId": "291302",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341001_1.pdf",
+   "openedAt": "2026-07-13",
+   "openingPercent": 7.43,
+   "history": [
+    {
+     "date": "2026-07-13",
+     "percent": 2.726
+    }
+   ]
   },
   {
    "holder": "Sol Global Holding Limited",
@@ -41139,9 +41346,13 @@
    "basis": "trade",
    "filingId": "292378",
    "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf",
-   "openedAt": "2026-07-22",
-   "openingPercent": 24.26,
+   "openedAt": "2026-07-13",
+   "openingPercent": 3.0124,
    "history": [
+    {
+     "date": "2026-07-13",
+     "percent": 2.29155
+    },
     {
      "date": "2026-07-22",
      "percent": 25.6149
@@ -45963,10 +46174,10 @@
    "end": "2026-07-16",
    "label": "12–16 Jul",
    "labelAr": "12–16 يوليو",
-   "sessions": 2,
-   "buys": 2,
-   "sells": 3,
-   "value": 17568795.63,
+   "sessions": 3,
+   "buys": 6,
+   "sells": 5,
+   "value": 92218874.33,
    "moves": [
     {
      "holder": "علاء الدين احمد فتوح فرحات",
@@ -45979,6 +46190,16 @@
      "change": 22.87
     },
     {
+     "holder": "بنك قناة السويس",
+     "kind": "firm",
+     "ticker": "NHPS",
+     "from": 7.43,
+     "to": 2.726,
+     "trades": 1,
+     "value": 53540107.91,
+     "change": -4.704
+    },
+    {
      "holder": "نجيبه نور الدين احمد حلاوة",
      "kind": "person",
      "ticker": "BIGP",
@@ -45989,6 +46210,16 @@
      "change": -3.657
     },
     {
+     "holder": "محمد ابراهيم السيد عبد السلام",
+     "kind": "person",
+     "ticker": "AMPI",
+     "from": 3.3,
+     "to": 5.0,
+     "trades": 1,
+     "value": 1310132.46,
+     "change": 1.7
+    },
+    {
      "holder": "احمد عز الدين احمد زين زين",
      "kind": "person",
      "ticker": "UTOP",
@@ -45997,6 +46228,26 @@
      "trades": 1,
      "value": 1821512.14,
      "change": -0.73
+    },
+    {
+     "holder": "أسامة فوزي محمد سعيد",
+     "kind": "person",
+     "ticker": "FIRE",
+     "from": 3.0124,
+     "to": 2.29155,
+     "trades": 1,
+     "value": 49334.58,
+     "change": -0.7208
+    },
+    {
+     "holder": "محمد اشرف عمر عمر",
+     "kind": "person",
+     "ticker": "GGCC",
+     "from": 4.995,
+     "to": 5.688,
+     "trades": 1,
+     "value": 9222000.0,
+     "change": 0.693
     },
     {
      "holder": "أحمد حمدى أحمد محمد زياد الدبيكي",
@@ -46017,6 +46268,26 @@
      "trades": 1,
      "value": 1371605.49,
      "change": -0.483
+    },
+    {
+     "holder": "Intage Holdings LTD",
+     "kind": "firm",
+     "ticker": "LCSW",
+     "from": 15.37,
+     "to": 15.66,
+     "trades": 1,
+     "value": 7303351.75,
+     "change": 0.29
+    },
+    {
+     "holder": "محمد اشرف عمر عمر",
+     "kind": "person",
+     "ticker": "UEGC",
+     "from": 4.998,
+     "to": 5.252,
+     "trades": 1,
+     "value": 3225152.0,
+     "change": 0.254
     }
    ]
   },
