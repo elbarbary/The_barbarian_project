@@ -2099,6 +2099,10 @@
     "meaning": "Broad gains in US benchmark equities reflect net capital inflows into blue-chip components, which raises the aggregate market valuation of index-listed corporations.",
     "meaning_ar": "يعكس الارتفاع العام للأسهم الأمريكية تدفقات رأسمالية صافية نحو أسهم الشركات القيادية، مما يرفع القيمة السوقية الإجمالية للشركات المدرجة بالمؤشر."
   },
+  "الاسهم الامريكيه ترتفع بدعم من تراجع عوايد السندات واسعار النفط": {
+    "meaning": "Lower bond yields reduce corporate borrowing costs and decrease the discount rate applied to future equity cash flows, while declining oil prices reduce input and transportation expenses across operating businesses.",
+    "meaning_ar": "يؤدي تراجع عوائد السندات إلى خفض تكلفة الاقتراض ومعدل الخصم المستخدم لتقييم التدفقات النقدية للشركات، بينما يؤدي انخفاض أسعار النفط إلى تقليص تكاليف الإنتاج والتشغيل والنقل."
+  },
   "الاسهم الامريكيه تواجه مخاطر صدمات مفاجيه مع اقتراب انتخابات التجديد النصفي": {
     "meaning": "Political election cycles introduce policy uncertainty regarding taxation, regulatory frameworks, and government spending, which correlates with heightened pricing volatility and repricing of risk across equity markets.",
     "meaning_ar": "تؤدي الدورات الانتخابية السياسية إلى حالة من عدم اليقين بشأن السياسات الضريبية والأطر التنظيمية والإنفاق الحكومي، وهو ما يرتبط بارتفاع تقلبات التسعير وإعادة تقييم المخاطر في أسواق الأسهم."
@@ -2606,6 +2610,10 @@
   "الحكومه تناقش مقترحات لدعم الشركات الناشيه في التوسع والنفاذ الي الاسواق الخارجيه": {
     "meaning": "Government initiatives targeting startup export access focus on standardizing cross-border regulatory procedures, facilitating foreign currency transactions, and providing institutional channels into foreign trade networks.",
     "meaning_ar": "تركز المبادرات الحكومية الموجهة لدعم تصدير الشركات الناشئة على توحيد الإجراءات التنظيمية العابرة للحدود، وتيسير المعاملات بالنقد الأجنبي، وتوفير قنوات مؤسسية للنفاذ إلى شبكات التجارة الخارجية."
+  },
+  "الحكومه تنتهي من المسوده الاولي لبرنامج التحول الاقتصادي تمهيدا لعرضها علي الرييس": {
+    "meaning": "Drafting an economic transformation program establishes the regulatory framework, fiscal priorities, and state ownership policies that govern public expenditure and sector allocations across the domestic economy.",
+    "meaning_ar": "تحدد صياغة برنامج التحول الاقتصادي الأطر التنظيمية والأولويات المالية وسياسات ملكية الدولة التي تحكم الإنفاق العام وتوزيع الموارد على مختلف القطاعات الاقتصادية."
   },
   "الحكومه تنفي فرض ضريبه علي تصاريح دفن الموتي: لم تصدر قرارات رسميه بهذا الشان": {
     "meaning": "Official denials of new administrative levies maintain the existing fee schedule for public services without altering consumer cost structures.",
@@ -5928,6 +5936,10 @@
   "شراكات استراتيجيه بين مصر للطيران وكيانات وطنيه لتطوير خدمات القطاع": {
     "meaning": "These strategic partnerships integrate service provision, ground handling, or operational logistics between EgyptAir and domestic entities under joint contractual frameworks. The mechanism coordinates resource sharing and local procurement across state-linked aviation and tourism supply chains.",
     "meaning_ar": "تدمج هذه الشراكات الاستراتيجية تقديم الخدمات أو المناولة الأرضية أو الخدمات اللوجستية التشغيلية بين مصر للطيران وكيانات محلية بموجب أطر تعاقدية مشتركة، وتعمل الآلية على تنسيق تقاسم الموارد وسلاسل التوريد المحلية ضمن قطاعي الطيران والسياحة."
+  },
+  "شراكه استراتيجيه بين فيزا ولاليجا لتعزيز تجارب الجماهير بالشرق الاوسط وافريقيا": {
+    "meaning": "This agreement establishes Visa as the official digital payment partner for LaLiga events and customer engagement programs across the Middle East and Africa, integrating its payment infrastructure into the league's regional commercial operations.",
+    "meaning_ar": "تحدد هذه الاتفاقية شركة فيزا كشريك رسمي للمدفوعات الرقمية للفعاليات وبرامج التفاعل مع الجماهير الخاصة برابطة الدوري الإسباني (لاليجا) في منطقة الشرق الأوسط وأفريقيا، مع دمج بنيتها التحتية للدفع ضمن العمليات التجارية الإقليمية للرابطة."
   },
   "شراكه بين DHL وAlibaba لتقديم خدمات لوجستيه مدعومه بالذكاء الاصطناعي للشركات الصغيره والمتوسطه": {
     "meaning": "This agreement integrates DHL's cross-border logistics network with Alibaba's e-commerce infrastructure, deploying automated routing and inventory tracking tools for small and medium-sized enterprise shipments.",
