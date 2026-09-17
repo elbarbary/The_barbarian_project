@@ -5,6 +5,23 @@ retrained Kronos, tested on months it never saw, before it may join the lab.
 Nothing here has been run beyond the measurements quoted, and nothing in the
 lab changes until stage 3.
 
+## Status
+
+- **17 Sep 2026, approved by the owner:** the Mac GPU, the stage 1 stop rule
+  and the stage 2 pass rule, and start the pilot.
+- **Pilot data frozen before training.** 258 companies (896,608 candles
+  fetched), cut into 500 clean segments. Windows: 686,106 train, 47,207
+  validation, 80,229 test. The only cleaning drops were 4,443 candles traded
+  after 13 companies were delisted. The manifest's SHA-256 begins `beaefae8`.
+- **Preregistered, also before training:** 23 validation origins (every 10th
+  session, 2 Jan to 2 Dec 2024), 120 of the 216 companies that cover the
+  year, and 20,000 fixed validation windows. Both files are in
+  `data-source/lab/retrain/pilot/`; the candles stay off this repository.
+- **Pilot training started 12:47 UTC:** 3 epochs of 2,000 steps × 50 windows
+  on the M4 GPU.
+- **Original weights, measured on the preregistered set:** validation loss
+  3.4601, and −16.21% on the steady rise.
+
 ## Why
 
 Kronos-small's forecasts are mostly a pull back to the average price of the
