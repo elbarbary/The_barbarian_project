@@ -2343,6 +2343,10 @@
     "meaning": "The main stock index advances by 0.72% as executed buy orders outweigh sell orders, with aggregate transaction turnover across listed securities reaching EGP 15.5 billion during the trading session.",
     "meaning_ar": "يرتفع المؤشر الرئيسي للبورصة بنسبة 0.72% نتيجة تفوق أوامر الشراء المنفذة على أوامر البيع، مع تسجيل إجمالي قيمة تداولات على الأوراق المالية المقيدة بلغت 15.5 مليار جنيه خلال جلسة التداول."
   },
+  "البورصه تصعد 1.23% وسط تداولات بقيمه 15 مليار جنيه": {
+    "meaning": "An index increase accompanied by 15 billion EGP in turnover reflects net equity inflows and active capital rotation across listed assets within the session.",
+    "meaning_ar": "يعكس صعود المؤشر مصحوباً بقيم تداولات تبلغ 15 مليار جنيه تدفقات نقدية صافية وحركة تدوير سيولة نشطة بين الأسهم المقيدة خلال الجلسة."
+  },
   "البورصه تعلن ضوابط وتداول حق اكتتاب زياده راسمال شركه باكين": {
     "meaning": "The Egyptian Exchange defines the operational rules and schedule for trading the rights issue of Pachin, allowing current shareholders to either subscribe to the new capital increase shares or trade their subscription rights separately on the secondary market.",
     "meaning_ar": "تحدد البورصة المصرية القواعد والجدول الزمني لتداول حق اكتتاب زيادة رأسمال شركة باكين، مما يتيح للمساهمين القدامى ممارسة حق الاكتتاب في أسهم الزيادة أو تداول هذه الحقوق بشكل منفصل في السوق الثانوي."
@@ -4296,6 +4300,10 @@
     "meaning": "Dollar-denominated copper prices on international exchanges adjust downward as the US dollar strengthens, altering procurement costs for industrial manufacturers and cable producers.",
     "meaning_ar": "تتراجع أسعار النحاس المقومة بالدولار في البورصات العالمية مع صعود العملة الأمريكية، مما يغير تكاليف الشراء للشركات الصناعية ومصنعي الكابلات."
   },
+  "تراجع الاسترليني وعوايد السندات البريطانيه عقب قرار بنك انجلترا": {
+    "meaning": "The Bank of England's monetary policy decision shifts capital flows, resulting in simultaneous repricing that lowers the exchange rate of the British pound and reduces yields across UK sovereign debt instruments.",
+    "meaning_ar": "يؤدي قرار السياسة النقدية لبنك إنجلترا إلى إعادة تسعير فورية في أسواق رأس المال، ينتج عنها انخفاض سعر صرف الجنيه الإسترليني وتراجع عوائد سندات السيادة البريطانية بالتزامن."
+  },
   "تراجع الاسهم الامريكيه في المستهل مع ترقب بيانات التضخم": {
     "meaning": "Equity prices adjust downward at the market open as market participants reprice assets to reflect interest rate sensitivities ahead of macroeconomic inflation releases.",
     "meaning_ar": "تتراجع أسعار الأسهم عند افتتاح جلسة التداول مع قيام المتعاملين بإعادة تسعير الأصول وفقاً لمحددات أسعار الفائدة قبيل صدور بيانات التضخم الاقتصادية."
@@ -5687,6 +5695,10 @@
   "سعر اليورو في مصر اليوم الخميس 10/9/2026.. قرب 60 جنيها": {
     "meaning": "A euro exchange rate approaching 60 Egyptian pounds raises the local-currency cost of European imports and adjusts the conversion rate for foreign currency assets and liabilities denominated in euros on corporate balance sheets.",
     "meaning_ar": "يؤدي اقتراب سعر صرف اليورو من مستوى 60 جنيهاً مصرياً إلى رفع تكلفة الواردات الأوروبية بالعملة المحلية، وتعديل تقييم الأصول والالتزامات المقومة باليورو في الميزانيات العمومية للشركات."
+  },
+  "سعر اليورو في مصر اليوم الخميس 17/9/2026.. ختام تعاملات الاسبوع": {
+    "meaning": "Official and commercial banking exchange rates establish the daily settlement cost for euro-denominated trade invoices, import letters of credit, and foreign currency liabilities at the close of the Egyptian business week.",
+    "meaning_ar": "تحدد أسعار الصرف الرسمية في القطاع المصرفي تكلفة التسوية اليومية للفواتير التجارية المقومة باليورو، وخطابات الاعتماد المستندية، والالتزامات بالعملة الأجنبية مع ختام التعاملات الأسبوعية في مصر."
   },
   "سعر اليورو في مصر اليوم السبت 12/9/2026": {
     "meaning": "Official foreign exchange rates published by banks establish the operational valuation benchmark for settling euro-denominated commercial transactions and corporate balance sheet conversions. During bank weekend closures, rates reflect the closing quotes from the preceding business day.",
@@ -8572,6 +8584,10 @@
   "“بي شين تاي شان” لتكنولوجيا مواد البناء تفتتح مصنعا في السخنه باستثمارات 10 ملايين دولار": {
     "meaning": "Establishing a new manufacturing facility deploys direct capital expenditure into building materials production and creates a localized operational base in the Sokhna industrial zone.",
     "meaning_ar": "يمثل تدشين المنشأة الصناعية الجديدة ضخاً لنفقات رأسمالية مباشرة في تصنيع مواد البناء وتأسيساً لقاعدة إنتاجية محلية في منطقة السخنة الصناعية."
+  },
+  "“بي واي دي” تخطط لانشاء 4 مصانع في اوروبا علي المدي الطويل": {
+    "meaning": "Establishing regional production facilities shifts vehicle assembly closer to the target consumer base, replacing export shipping logistics with local manufacturing and direct European distribution networks.",
+    "meaning_ar": "يؤدي إنشاء منشآت إنتاج إقليمية إلى نقل عمليات تجميع المركبات بالقرب من قاعدة المستهلكين المستهدفة، مما يحل شبكات التصنيع والتوزيع المحلية داخل أوروبا محل الشحن الخارجي."
   },
   "“بيتي للصناعات الغذاييه” تعتزم ضخ 6 مليارات جنيه استثمارات في مصر": {
     "meaning": "This capital expenditure commitment allocates corporate funds directly into expanding production lines, processing facilities, and supply chain infrastructure within the domestic food manufacturing sector.",
