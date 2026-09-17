@@ -1619,6 +1619,10 @@
     "meaning": "Daily agricultural commodity price tracking reflects real-time spot market transactions and pricing mechanisms determined by supply chain deliveries and distribution costs in wholesale and retail markets.",
     "meaning_ar": "يعكس التتبع اليومي لأسعار السلع الزراعية المعاملات الفورية في الأسواق وآليات التسعير المحددة بحجم المعروض وتكاليف التوزيع في أسواق الجملة والتجزئة."
   },
+  "اسعار الخضروات والفاكهه والبصل والزيتون اليوم الخميس 17-9-2026 في سوق العبور": {
+    "meaning": "Daily wholesale pricing bulletins from the Obour wholesale market establish the base cost benchmark for agricultural produce, reflecting immediate physical supply levels and setting the baseline for retail distribution chains.",
+    "meaning_ar": "تحدد النشرات اليومية لأسعار الجملة بسوق العبور المعيار الأساسي لتكلفة المنتجات الزراعية، حيث تعكس مستويات المعروض الفعلي وتؤسس لقاعدة تسعير سلاسل التوزيع بالتجزئة."
+  },
   "اسعار الخضروات والفاكهه والبطاطس والطماطم اليوم السبت 5-9-2026": {
     "meaning": "Daily agricultural price reporting reflects spot wholesale and retail commodity market valuations based on current supply chain volumes and harvest cycles, serving as a primary component of headline consumer price inflation metrics.",
     "meaning_ar": "تعكس التقارير اليومية لأسعار السلع الزراعية تقييمات أسواق الجملة والتجزئة الحالية وفقاً لحجم المعروض ومواسم الحصاد، وتشكل عنصراً رئيسياً في قياس معدلات التضخم لأسعار المستهلكين."
@@ -2350,6 +2354,10 @@
   "البورصه تقر قيد اسهم زياده راسمال ايديتا للصناعات الغذاييه": {
     "meaning": "The listing of capital increase shares records additional equity on the stock exchange, expanding the company's total issued share count and legal capital base for trading.",
     "meaning_ar": "يُدرج قيد أسهم زيادة رأس المال أسهماً جديدة في البورصة، مما يرفع إجمالي عدد الأسهم المصدرة وقاعدة رأس المال القانوني للشركة والمتاحة للتداول."
+  },
+  "البورصه تواصل ارتفاعها بمنتصف التعاملات والثلاثيني يصعد 0.65%": {
+    "meaning": "During the mid-session trading window, aggregate purchasing orders exceed executed selling transactions across constituents of the benchmark EGX30 index, lifting the market capitalization-weighted index by 0.65% relative to its previous close.",
+    "meaning_ar": "تتجاوز أوامر الشراء المنفذة صفقات البيع على أسهم المؤشر الرئيسي EGX30 بحلول منتصف جلسة التداول، مما يرفع المؤشر المرجح بالقيمة السوقية بنسبة 0.65% مقارنة بمستوى الإغلاق السابق."
   },
   "البورصه تواصل تراجعها بمنتصف التعاملات.. والثلاثيني ينخفض 0.90%": {
     "meaning": "Mid-session trading reflects an excess of order volume executed on the bid side across the thirty constituent blue-chip equities, driving a net aggregate index contraction of 0.90%.",
@@ -4923,6 +4931,10 @@
   "حمايه المنافسه يوافق علي استحواذ جينيل انرجي البريطانيه علي اصول كابريكورن في مصر": {
     "meaning": "Antitrust approval clears the regulatory condition for Genel Energy to take operational control and ownership of Capricorn Energy's upstream oil and gas concession interests in Egypt.",
     "meaning_ar": "يمثل قرار جهاز حماية المنافسة استيفاءً للمتطلبات التنظيمية اللازمة لنقل حقوق الملكية والتشغيل لأصول امتيازات استكشاف وإنتاج النفط والغاز التابعة لشركة كابريكورن في مصر إلى شركة جينيل إنرجي."
+  },
+  "حيازات الاجانب من السندات الامريكيه عند ادني مستوي في 9 اشهر": {
+    "meaning": "Foreign holdings of US Treasuries reflect cross-border sovereign and private capital allocations toward dollar-denominated debt securities, where lower aggregated balances indicate net liquidations or a reallocation of international foreign exchange reserves into other asset classes or domestic liquidity.",
+    "meaning_ar": "تعكس حيازات الأجانب من السندات الأمريكية توزيعات رؤوس الأموال السيادية والخاصة الدولية في أدوات الدين المقومة بالدولار، حيث يمثل انخفاض إجمالي هذه الأرصدة عمليات تسييل صافية أو إعادة توجيه للاحتياطيات النقدية الأجنبية نحو فئات أصول أخرى أو سيولة نقدية محلية."
   },
   "خالد سعد: 4 مصانع صينيه جديده للصناعات المغذيه للسيارات تدخل الانتاج في 2027": {
     "meaning": "Establishing four Chinese auto-feeder plants introduces direct manufacturing facilities for vehicle components within the local supply chain, setting operations on a project timeline aimed at 2027.",
@@ -8188,6 +8200,10 @@
   "​الرقابه الماليه تعلن مواعيد اكتتاب زياده راسمال شركه هيبكو الي 108 ملايين جنيه": {
     "meaning": "The Financial Regulatory Authority establishes the subscription timeline for HEPCO to issue new shares, raising its issued capital to EGP 108 million through equity financing from existing or new shareholders.",
     "meaning_ar": "تحدد الهيئة العامة للرقابة المالية الجدول الزمني لاكتتاب شركة هيبكو في أسهم جديدة، مما يرفع رأسمالها المصدر إلى 108 ملايين جنيه عبر التمويل بحقوق الملكية من المساهمين الحاليين أو الجدد."
+  },
+  "​”زهراء المعادي” تقر عرض تطوير قطعه ارض بقيمه 82 مليار جنيه": {
+    "meaning": "The company approves a land development proposal that operates as a co-development or revenue-sharing arrangement, where the developer undertakes construction on the land plot in exchange for a contractually defined contractual share.",
+    "meaning_ar": "تعتمد الشركة عرضاً لتطوير قطعة أرض بنظام المشاركة في التطوير العقاري، حيث يتولى المطور أعمال التشييد والبناء مقابل حصة تعاقدية محددة من المشروع."
   },
   "‎كم سجلت اسعار الخشب اليوم في السوق المصريه؟": {
     "meaning": "Lumber prices in the domestic market reflect the landed import costs of raw materials, foreign exchange rates, and international shipping freight, which directly determine input cost structures for furniture manufacturers and construction contractors.",
