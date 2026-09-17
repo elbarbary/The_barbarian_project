@@ -2103,6 +2103,10 @@
     "meaning": "Lower bond yields reduce corporate borrowing costs and decrease the discount rate applied to future equity cash flows, while declining oil prices reduce input and transportation expenses across operating businesses.",
     "meaning_ar": "يؤدي تراجع عوائد السندات إلى خفض تكلفة الاقتراض ومعدل الخصم المستخدم لتقييم التدفقات النقدية للشركات، بينما يؤدي انخفاض أسعار النفط إلى تقليص تكاليف الإنتاج والتشغيل والنقل."
   },
+  "الاسهم الامريكيه تصعد الخميس بدعم من تراجع اسعار النفط وعوايد السندات": {
+    "meaning": "Lower crude prices lower operational and transportation expenses for corporate balances, while declining bond yields lower capital costs and enhance equity valuation models.",
+    "meaning_ar": "يؤدي انخفاض أسعار النفط إلى خفض تكاليف التشغيل والنقل للشركات، بينما يؤدي تراجع عوائد السندات إلى تقليص تكلفة التمويل ورفع تقييمات الأسهم في نماذج التدفقات النقدية."
+  },
   "الاسهم الامريكيه تواجه مخاطر صدمات مفاجيه مع اقتراب انتخابات التجديد النصفي": {
     "meaning": "Political election cycles introduce policy uncertainty regarding taxation, regulatory frameworks, and government spending, which correlates with heightened pricing volatility and repricing of risk across equity markets.",
     "meaning_ar": "تؤدي الدورات الانتخابية السياسية إلى حالة من عدم اليقين بشأن السياسات الضريبية والأطر التنظيمية والإنفاق الحكومي، وهو ما يرتبط بارتفاع تقلبات التسعير وإعادة تقييم المخاطر في أسواق الأسهم."
@@ -3782,6 +3786,10 @@
   "اوروبا تنفق 7.28 مليار يورو علي الغاز الروسي المسال خلال 8 اشهر": {
     "meaning": "European utilities continue off-taking Russian liquefied natural gas under existing supply arrangements, directing commercial payments through active maritime energy trade channels to maintain storage inventories.",
     "meaning_ar": "تستمر شركات المرافق الأوروبية في استلام شحنات الغاز الطبيعي المسال الروسي بموجب ترتيبات التوريد الحالية، مع توجيه المدفوعات التجارية عبر قنوات التجارة البحرية للطاقة لتغذية المخزونات."
+  },
+  "اوكرانيا تضرب مصفاه نفط روسيه قرب موسكو": {
+    "meaning": "Physical disruptions to oil refining infrastructure interrupt crude processing operations and alter refined petroleum product flows across global energy markets.",
+    "meaning_ar": "يؤدي تضرر البنية التحتية لتكرير النفط إلى تعطيل عمليات معالجة الخام وتغيير مسارات تدفق المنتجات البترولية المكررة في أسواق الطاقة العالمية."
   },
   "اول اسبوع تصديري يسجل 2121 طنا من القطن": {
     "meaning": "The execution of 2,121 tonnes in cotton export shipments marks the commencement of seasonal outflow volumes in the agricultural trading market.",
