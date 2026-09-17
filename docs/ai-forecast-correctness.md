@@ -41,9 +41,16 @@ Rerun locally with the pinned weights and code:
   Each window's forecasts track that window's own average.
 - A steady rise from 100 to 130 draws −16% over 20 sessions, and a steady fall
   draws +21%.
-- On random walks the correlation is 0.98 at 90 candles, 0.86 at 250 and 0.13
-  at 500. Only a long context removes it. At 500 candles each company costs
-  6.2 times as long, about 2.6 h on the four-core runner for the market.
+- On random walks the correlation falls as the history lengthens: 0.98 at 90
+  candles, 0.86 at 250, and 0.13 to 0.53 at 400 to 512.
+- EGX prices are not random walks. The middle company rose 2.7 times over the
+  last 500 sessions. On 77 real companies with 500 split-adjusted candles
+  (basis 16 September), Kronos-small's forecasts still tracked the average,
+  with correlation 0.75 to the 500-session average and 0.85 to the 90-session
+  one. The middle forecast fell further, to −26% over 20 sessions and −18%
+  over 5. A longer history is not a fix on this market.
+- It also costs more: 3.1 s a company on an M4 at 500 candles, against 0.6 s
+  at 90. Batching companies saves nothing on a CPU.
 
 A plausible cause, not confirmed for the released weights: the upstream
 finetuning code normalised each sample over past and future together until
@@ -51,9 +58,11 @@ PR #227.
 
 The sealed record is unchanged. `publish.pull` publishes each night's
 correlation for every model and horizon, and the workbench says so where it
-reaches 0.8. The owner's decision (17 September) is to add a second Kronos
-given a long history, judged only on nights after it starts, rather than to
-change the pinned one.
+reaches 0.8. On 17 September the owner chose to add a second Kronos given a
+long history. The real-data test above found that it would not remove the
+pull, so it has not been built and the choice has gone back to the owner.
+Changing the input does not fix it; the pull comes from the pretrained
+weights.
 
 ## Prices shown
 

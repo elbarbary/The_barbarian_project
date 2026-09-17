@@ -441,11 +441,11 @@ def pull(companies: dict, panel: dict, basis: str) -> dict:
     correlated 0.94 to 0.97 with that move on every night from 13 September,
     and went past it (slope about 1.2). Nothing about those companies was
     being forecast. Rerun on made-up prices with the pinned weights, a steady
-    rise from 100 to 130 drew -16% and a steady fall +21%, and the correlation
-    on random walks fell only when the model was given far more history
-    (0.98 at 90 candles, 0.86 at 250, 0.13 at 500). After a rally left most
-    companies above their average, that alone put its middle forecast at
-    -10% to -13% while the other models said -1% to -4%.
+    rise from 100 to 130 drew -16% and a steady fall +21%. After a rally left
+    most companies above their average, that alone put its middle forecast
+    at -10% to -13% while the other models said -1% to -4%. More history does
+    not cure it on this market: given 500 candles, 77 real companies still
+    tracked their average (0.75) and the middle forecast fell to -26%.
 
     The record is not changed for it. Each night's figure is published beside
     the forecasts it describes, and the workbench says what they mostly are.
