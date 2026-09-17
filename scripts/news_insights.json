@@ -4035,6 +4035,10 @@
     "meaning": "The Bank of Japan's rate hike increases the cost of borrowing the Japanese yen, directly raising funding expenses for global carry trade positions and altering international interest rate differentials.",
     "meaning_ar": "يؤدي رفع بنك اليابان لسعر الفائدة إلى زيادة تكلفة الاقتراض بالين الياباني، مما يرفع تكاليف تمويل مراكز تجارة الفائدة العالمية (Carry Trade) ويعدل فروق أسعار الفائدة بين العملات الدولية."
   },
+  "بنك انجلترا يبقي معدلات الفايده دون تغيير عند 3.75%": {
+    "meaning": "The Bank of England's decision keeps sterling borrowing costs and interbank lending benchmarks at their current level of 3.75%, maintaining existing debt-servicing conditions for pound-denominated corporate facilities and trade finance.",
+    "meaning_ar": "يُبقي قرار بنك إنجلترا تكاليف الاقتراض بالجنيه الإسترليني وأسعار الفائدة بين البنوك عند مستواها الحالي البالغ 3.75%، وهو ما يثبت شروط خدمة الدين الحالية للتسهيلات الائتمانية وتمويل التجارة المقومة بالإسترليني."
+  },
   "بنك انجلترا يثبت الفايده عند 3.75%": {
     "meaning": "The Bank of England keeps its benchmark interest rate unchanged at 3.75%, holding the cost of borrowing and yields on pound-denominated debt instruments at their existing levels.",
     "meaning_ar": "يُبقي بنك إنجلترا سعر الفائدة القياسي دون تغيير عند 3.75%، مما يثبت تكلفة الاقتراض وعوائد أدوات الدين المقومة بالجنيه الإسترليني عند مستوياتها الحالية."
@@ -5015,6 +5019,10 @@
   "خبيره: تقرير التوظيف القوي يمهد لاقتصاد جديد في امريكا": {
     "meaning": "Strong labor market data reflects high employment levels and steady wage distribution, which form the baseline for domestic consumer spending and monetary policy interest rate decisions.",
     "meaning_ar": "تعكس بيانات سوق العمل القوية مستويات توظيف مرتفعة وتدفقات أجور مستمرة، وهي العوامل المحددة للإنفاق الاستهلاكي المحلي وتوجهات أسعار الفائدة في السياسة النقدية."
+  },
+  "خساير النصر للحاصلات الزراعيه تهبط الي 495 الف جنيه خلال 3 اشهر": {
+    "meaning": "The contraction in quarterly net losses reflects a narrowing deficit between operating revenues and production overheads, reducing the net negative cash burn on the company's balance sheet over the three-month period.",
+    "meaning_ar": "يعكس تراجع الخسائر الفصلية تقلص الفجوة بين الإيرادات التشغيلية وتكاليف الإنتاج، مما يحد من معدل استنزاف السيولة النقدية في الميزانية العمومية للشركة خلال فترة الأشهر الثلاثة."
   },
   "خطه حكوميه لتطبيق نموذج متكامل لزراعه وتجهيز وتصنيع الكتان": {
     "meaning": "The plan establishes vertical integration across the domestic flax supply chain by linking agricultural cultivation directly with intermediate processing and industrial textile manufacturing.",
