@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-09-17T12:12:19Z",
+ "builtAt": "2026-09-17T13:05:20Z",
  "topCount": 5,
  "minimumSessions": 5,
  "horizons": [
@@ -21,15 +21,16 @@
   "2026-09-13",
   "2026-09-14",
   "2026-09-15",
-  "2026-09-16"
+  "2026-09-16",
+  "2026-09-17"
  ],
  "latest": {
-  "basisSession": "2026-09-16",
-  "ranAt": "2026-09-16T17:55:50Z",
-  "universeSize": 244,
+  "basisSession": "2026-09-17",
+  "ranAt": "2026-09-17T12:49:15Z",
+  "universeSize": 235,
   "forecasters": 11,
   "readings": 16,
-  "rerankedAt": "2026-09-16T18:25:43Z",
+  "rerankedAt": "2026-09-17T13:01:34Z",
   "rerankReads": [
    "filings",
    "news",
@@ -45,7 +46,7 @@
    "label": "Gemini re-rank",
    "labelAr": "إعادة ترتيب Gemini",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -86,7 +87,12 @@
      ],
      "sd": 0.835,
      "t": -0.593,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -107,6 +113,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -129,6 +139,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -138,7 +152,7 @@
    "label": "Kronos-small",
    "labelAr": "Kronos-small",
    "group": "neural",
-   "nights": 13,
+   "nights": 14,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -251,7 +265,12 @@
      ],
      "sd": 2.3659,
      "t": -0.249,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 9,
@@ -361,6 +380,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -387,6 +410,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -396,7 +423,7 @@
    "label": "Chronos-2",
    "labelAr": "Chronos-2",
    "group": "neural",
-   "nights": 4,
+   "nights": 5,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -437,7 +464,12 @@
      ],
      "sd": 3.2237,
      "t": -0.036,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -462,6 +494,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -488,6 +524,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -497,7 +537,7 @@
    "label": "TimesFM 2.5",
    "labelAr": "TimesFM 2.5",
    "group": "neural",
-   "nights": 4,
+   "nights": 5,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -538,7 +578,12 @@
      ],
      "sd": 0.4014,
      "t": 2.534,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -563,6 +608,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -589,6 +638,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -598,7 +651,7 @@
    "label": "Toto 2.0",
    "labelAr": "Toto 2.0",
    "group": "neural",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -628,7 +681,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -645,6 +703,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -663,6 +725,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -672,7 +738,7 @@
    "label": "Sundial",
    "labelAr": "Sundial",
    "group": "neural",
-   "nights": 2,
+   "nights": 3,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -702,7 +768,12 @@
        "beatTheMarket": false
       }
      ],
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -719,6 +790,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -737,6 +812,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -746,7 +825,7 @@
    "label": "Momentum, 20 sessions",
    "labelAr": "الزخم، 20 جلسة",
    "group": "baseline",
-   "nights": 13,
+   "nights": 14,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -859,7 +938,12 @@
      ],
      "sd": 3.5706,
      "t": -0.041,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 9,
@@ -969,6 +1053,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -1031,6 +1119,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -1040,7 +1132,7 @@
    "label": "Momentum, 60 sessions",
    "labelAr": "الزخم، 60 جلسة",
    "group": "baseline",
-   "nights": 13,
+   "nights": 14,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -1153,7 +1245,12 @@
      ],
      "sd": 2.3177,
      "t": -0.562,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 9,
@@ -1263,6 +1360,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -1325,6 +1426,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -1334,7 +1439,7 @@
    "label": "Reversal, 1 session",
    "labelAr": "الانعكاس، جلسة",
    "group": "baseline",
-   "nights": 13,
+   "nights": 14,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -1447,7 +1552,12 @@
      ],
      "sd": 2.9518,
      "t": -0.65,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 9,
@@ -1557,6 +1667,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -1619,6 +1733,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -1628,7 +1746,7 @@
    "label": "Reversal, 5 sessions",
    "labelAr": "الانعكاس، 5 جلسات",
    "group": "baseline",
-   "nights": 13,
+   "nights": 14,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -1741,7 +1859,12 @@
      ],
      "sd": 3.3509,
      "t": 0.868,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 9,
@@ -1851,6 +1974,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -1913,6 +2040,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -1922,7 +2053,7 @@
    "label": "Drift",
    "labelAr": "الانجراف",
    "group": "baseline",
-   "nights": 13,
+   "nights": 14,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -2035,7 +2166,12 @@
      ],
      "sd": 2.8657,
      "t": -1.231,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 9,
@@ -2145,6 +2281,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2207,6 +2347,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2216,7 +2360,7 @@
    "label": "Flat, says nothing",
    "labelAr": "ثابت، لا يقول شيئًا",
    "group": "baseline",
-   "nights": 13,
+   "nights": 14,
    "distinguishes": false,
    "horizons": {
     "1": {
@@ -2329,7 +2473,12 @@
      ],
      "sd": 0.8605,
      "t": -0.445,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 9,
@@ -2439,6 +2588,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2501,6 +2654,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2512,7 +2669,7 @@
    "label": "rerank:models",
    "labelAr": "rerank:models",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -2553,7 +2710,12 @@
      ],
      "sd": 1.1824,
      "t": -0.211,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -2574,6 +2736,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2596,6 +2762,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2606,7 +2776,7 @@
    "label": "rerank:filings",
    "labelAr": "rerank:filings",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -2647,7 +2817,12 @@
      ],
      "sd": 1.2137,
      "t": 0.125,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -2668,6 +2843,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2690,6 +2869,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2702,7 +2885,7 @@
    "label": "rerank:news",
    "labelAr": "rerank:news",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -2743,7 +2926,12 @@
      ],
      "sd": 1.1601,
      "t": -0.094,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -2764,6 +2952,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2786,6 +2978,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2798,7 +2994,7 @@
    "label": "rerank:rulebook",
    "labelAr": "rerank:rulebook",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -2839,7 +3035,12 @@
      ],
      "sd": 1.6055,
      "t": 0.748,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -2860,6 +3061,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2882,6 +3087,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2894,7 +3103,7 @@
    "label": "rerank:measures",
    "labelAr": "rerank:measures",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -2935,7 +3144,12 @@
      ],
      "sd": 1.5315,
      "t": 0.387,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -2956,6 +3170,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -2978,6 +3196,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -2990,7 +3212,7 @@
    "label": "rerank:filings-news",
    "labelAr": "rerank:filings-news",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3031,7 +3253,12 @@
      ],
      "sd": 0.8937,
      "t": -0.294,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3052,6 +3279,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3074,6 +3305,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3087,7 +3322,7 @@
    "label": "rerank:filings-rulebook",
    "labelAr": "rerank:filings-rulebook",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3128,7 +3363,12 @@
      ],
      "sd": 1.3153,
      "t": 0.444,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3149,6 +3389,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3171,6 +3415,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3184,7 +3432,7 @@
    "label": "rerank:filings-measures",
    "labelAr": "rerank:filings-measures",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3225,7 +3473,12 @@
      ],
      "sd": 1.2848,
      "t": 0.461,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3246,6 +3499,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3268,6 +3525,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3281,7 +3542,7 @@
    "label": "rerank:news-rulebook",
    "labelAr": "rerank:news-rulebook",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3322,7 +3583,12 @@
      ],
      "sd": 1.2474,
      "t": 0.029,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3343,6 +3609,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3365,6 +3635,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3378,7 +3652,7 @@
    "label": "rerank:news-measures",
    "labelAr": "rerank:news-measures",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3419,7 +3693,12 @@
      ],
      "sd": 1.1963,
      "t": 0.239,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3440,6 +3719,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3462,6 +3745,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3475,7 +3762,7 @@
    "label": "rerank:rulebook-measures",
    "labelAr": "rerank:rulebook-measures",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3516,7 +3803,12 @@
      ],
      "sd": 1.5032,
      "t": -0.079,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3537,6 +3829,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3559,6 +3855,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3572,7 +3872,7 @@
    "label": "Gemini re-rank",
    "labelAr": "إعادة ترتيب Gemini",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3613,7 +3913,12 @@
      ],
      "sd": 0.835,
      "t": -0.593,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3634,6 +3939,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3656,6 +3965,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3670,7 +3983,7 @@
    "label": "rerank:filings-news-measures",
    "labelAr": "rerank:filings-news-measures",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3711,7 +4024,12 @@
      ],
      "sd": 1.6726,
      "t": 0.258,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3732,6 +4050,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3754,6 +4076,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3768,7 +4094,7 @@
    "label": "rerank:filings-rulebook-measures",
    "labelAr": "rerank:filings-rulebook-measures",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3809,7 +4135,12 @@
      ],
      "sd": 1.4149,
      "t": 0.055,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3830,6 +4161,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3852,6 +4187,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3866,7 +4205,7 @@
    "label": "rerank:news-rulebook-measures",
    "labelAr": "rerank:news-rulebook-measures",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -3907,7 +4246,12 @@
      ],
      "sd": 1.3248,
      "t": 0.416,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -3928,6 +4272,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -3950,6 +4298,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -3964,7 +4316,7 @@
    "label": "rerank:filings-news-rulebook-measures",
    "labelAr": "rerank:filings-news-rulebook-measures",
    "group": "rerank",
-   "nights": 3,
+   "nights": 4,
    "distinguishes": true,
    "horizons": {
     "1": {
@@ -4005,7 +4357,12 @@
      ],
      "sd": 1.381,
      "t": 0.503,
-     "waiting": []
+     "waiting": [
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
+      }
+     ]
     },
     "5": {
      "sessions": 0,
@@ -4026,6 +4383,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     },
@@ -4048,6 +4409,10 @@
       {
        "basisSession": "2026-09-16",
        "sessionsClosed": 1
+      },
+      {
+       "basisSession": "2026-09-17",
+       "sessionsClosed": 0
       }
      ]
     }
@@ -4060,5 +4425,5 @@
    ]
   }
  },
- "publicationId": "4691dce20934b2c6a2db72ddc94e8eb924a099d717998dae1efe7ebc0707a9dd"
+ "publicationId": "d6defe473f22a66ee0efbd1be5613d6ab896572ef0288751f12b9a7977c69a11"
 }
