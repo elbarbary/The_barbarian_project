@@ -3787,6 +3787,10 @@
     "meaning": "The deployment of $7.5 million in capital expenditure allocates funding directly into physical production assets and modern lighting manufacturing lines at the facility.",
     "meaning_ar": "يُمثل هذا الإجراء ضخاً لنفقات رأسمالية بقيمة 7.5 مليون دولار في الأصول الإنتاجية وخطوط تصنيع أنظمة الإضاءة الحديثة بالمنشأة الصناعية."
   },
+  "بالتزامن مع قرارات الفيدرالي والمركزي السعودي.. اعرف تحركات سعر الريال في البنوك": {
+    "meaning": "The exchange rate of the Saudi Riyal in Egyptian commercial banks reflects monetary policy decisions from the Federal Reserve and the Saudi Central Bank (SAMA) via the pegged USD/SAR cross-currency rate and local FX liquidity conditions.",
+    "meaning_ar": "يعكس سعر صرف الريال السعودي في البنوك المصرية قرارات السياسة النقدية الصادرة عن الفيدرالي الأمريكي والبنك المركزي السعودي عبر آلية الربط الثابت للريال بالدولار ومحددات السيولة الأجنبية في السوق المحلي."
+  },
   "بالمير للتطوير تتعاقد مع كيان للمقاولات لتنفيذ انشاءات مشروعي Avenue وResidence بالشيخ زايد الجديده": {
     "meaning": "The agreement transitions the two real estate projects into the active construction phase by outsourcing site execution to an external general contractor under a service agreement.",
     "meaning_ar": "ينقل هذا التعاقد المشروعين العقاريين إلى مرحلة التنفيذ الإنشائي الفعلي عبر إسناد أعمال الموقع إلى مقاول عام خارجي بموجب عقد مقاولة."
@@ -4919,6 +4923,10 @@
   "خبيره: تقرير التوظيف القوي يمهد لاقتصاد جديد في امريكا": {
     "meaning": "Strong labor market data reflects high employment levels and steady wage distribution, which form the baseline for domestic consumer spending and monetary policy interest rate decisions.",
     "meaning_ar": "تعكس بيانات سوق العمل القوية مستويات توظيف مرتفعة وتدفقات أجور مستمرة، وهي العوامل المحددة للإنفاق الاستهلاكي المحلي وتوجهات أسعار الفائدة في السياسة النقدية."
+  },
+  "خطه حكوميه لتطبيق نموذج متكامل لزراعه وتجهيز وتصنيع الكتان": {
+    "meaning": "The plan establishes vertical integration across the domestic flax supply chain by linking agricultural cultivation directly with intermediate processing and industrial textile manufacturing.",
+    "meaning_ar": "تؤسس الخطة نموذجاً للتكامل الرأسي عبر سلاسل إمداد الكتان المحلية من خلال الربط المباشر بين مراحل الزراعة، والتجهيز الوسيط، والتصنيع الصناعي للنسيج."
   },
   "د. محمد عوض: مصر وايطاليا امام فرصه حقيقيه للانتقال بالشراكه الاقتصاديه الي افاق اكثر تاثيرا": {
     "meaning": "Bilateral economic partnerships between Egypt and Italy involve direct cross-border trade, joint industrial ventures, and technological cooperation across energy, manufacturing, and agricultural sectors.",
@@ -7984,6 +7992,10 @@
   "وزير الماليه: معدلات الامتثال الطوعي للضرايب تتزايد.. والايرادات تنمو": {
     "meaning": "Rising voluntary tax compliance broadens the formal fiscal base, directly expanding sovereign revenue collections without altering headline tax rates.",
     "meaning_ar": "يؤدي ارتفاع معدلات الامتثال الضريبي الطوعي إلى توسيع القاعدة الضريبية الرسمية وزيادة الحصيلة السيادية المحصلة دون تغيير أسعار الضرائب المقررة."
+  },
+  "وزير الماليه: موازنه 2026-2027 تحقق التوازن بين مسانده المواطن والاستقرار المالي": {
+    "meaning": "The fiscal budget framework allocates state capital between social spending programs and debt service reduction targets, determining sovereign borrowing requirements in the domestic debt market.",
+    "meaning_ar": "يحدد إطار الموازنة العامة آلية توزيع المخصصات المالية بين بنود الإنفاق الاجتماعي ومستهدفات خدمة الدين، وهو ما يحدد متطلبات الاقتراض الحكومي في سوق أدوات الدين المحلي."
   },
   "وزير الماليه: نتايج مبشره للتسهيلات الضريبيه والايرادات تنمو دون فرض اي اعباء اضافيه": {
     "meaning": "Tax facilitation packages function by expanding the tax base through higher compliance and the formalization of unrecorded economic activities, generating public revenue from a broader taxpayer pool rather than raised statutory tax rates.",
