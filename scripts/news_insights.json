@@ -879,6 +879,10 @@
     "meaning": "This transaction constitutes a capital expenditure (CapEx) of EGP 40 million on equipment, allocating funds to property, plant, and equipment for internal transport machinery that transfers containers between berths and storage yards.",
     "meaning_ar": "يمثل هذا الإجراء إنفاقاً رأسمالياً بقيمة 40 مليون جنيه لشراء أصول ومعدات تشغيلية، تُستخدم في عمليات النقل الداخلي للحاويات بين أرصفة الشحن وساحات التخزين داخل المحطة."
   },
+  "«الاهرام للبلاستيك» تعتزم انشاء مصنع ل«البوب كاستنج» باستثمارات 10 مليارات جنيه": {
+    "meaning": "This project constitutes a capital expenditure allocation of EGP 10 billion dedicated to developing an industrial facility for BOPP/cast film plastic manufacturing, expanding the company's asset base and domestic production capacity.",
+    "meaning_ar": "يمثل هذا المشروع إنفاقاً رأسمالياً بقيمة 10 مليارات جنيه مخصصاً لإنشاء منشأة صناعية لإنتاج أفلام البلاستيك، مما يوسع القاعدة الرأسمالية والطاقة الإنتاجية المحلية للشركة."
+  },
   "«البورصه السلعيه» تتداول 1000 طن قمح ديورم في ثاني جلسه": {
     "meaning": "The Egyptian Commodities Exchange (EGYCOMEX) executes spot transactions for durum wheat through an electronic platform, functioning as an organized wholesale distribution channel directly linking state silos and commercial pasta producers.",
     "meaning_ar": "تنفذ البورصة المصرية للسلع تعاملات فورية على قمح الديورم عبر منصة إلكترونية، لتعمل كقناة تداول جملة منظمة تربط الصوامع الحكومية بشركات إنتاج المكرونة بشكل مباشر."
@@ -5756,6 +5760,10 @@
   "شركات السيارات الكهرباييه تراهن علي الروبوتات الشبيهه بالبشر": {
     "meaning": "Electric vehicle manufacturers integrate humanoid robotics into assembly lines to automate complex physical tasks and reallocate capital expenditures toward advanced manufacturing infrastructure.",
     "meaning_ar": "تدمج شركات تصنيع السيارات الكهربائية الروبوتات الشبيهة بالبشر في خطوط التجميع لأتمتة المهام الصناعية وتعديل هيكل تخصيص النفقات الرأسمالية في العمليات التشغيلية."
+  },
+  "شركات الصناعات الغذاييه تحت ضغط البصمه الكربونيه": {
+    "meaning": "Food manufacturing companies face compliance mandates and export requirements that tie operational access and international contracts directly to the measurement and reporting of greenhouse gas emissions across their supply chains.",
+    "meaning_ar": "تواجه شركات الصناعات الغذائية معايير امتثال واشتراطات تصديرية تربط النفاذ للأسواق والتعاقدات الدولية مباشرة بقياس الإفصاح عن الانبعاثات الكربونية عبر سلاسل الإمداد والتصنيع."
   },
   "شركات الطيران تطالب بفتح سوق قطع غيار محركات الطايرات المستعمله امام المنافسه": {
     "meaning": "Opening the used aircraft engine parts market to competition expands the supplier base beyond original equipment manufacturers (OEMs), shifting procurement toward independent third-party vendors and surplus material channels.",
