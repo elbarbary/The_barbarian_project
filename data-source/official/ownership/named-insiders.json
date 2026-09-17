@@ -3200,6 +3200,86 @@
    "publishedAt": "2026-07-05T09:26:54",
    "sessionDate": null,
    "source": "https://www.egx.com.eg/downloads/Bulletins/340527_1.pdf"
+  },
+  "290759": {
+   "investorName": "مي محمود حسن جاب الله",
+   "investorNameEn": "Mai Mahmoud Hassan Gaballah",
+   "relationship": null,
+   "ticker": "AIDC",
+   "action": "buy",
+   "shares": 65900000,
+   "price": 0.662,
+   "ownershipBeforePercent": 2.156,
+   "ownershipAfterPercent": 6.386,
+   "nameScript": "ar",
+   "filingId": "290759",
+   "publishedAt": "2026-07-01T09:59:15",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340494_1.pdf"
+  },
+  "290599": {
+   "investorName": "احمد علي علي الجمل",
+   "investorNameEn": "Ahmed Ali Ali El Gamal",
+   "relationship": null,
+   "ticker": "ARVA",
+   "action": "sell",
+   "shares": 1155324,
+   "price": 11.008,
+   "ownershipBeforePercent": 4.074,
+   "ownershipAfterPercent": 2.532,
+   "nameScript": "ar",
+   "filingId": "290599",
+   "publishedAt": "2026-06-29T15:17:21",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340392_1.pdf"
+  },
+  "290598": {
+   "investorName": "شركة الجمل للاستثمار",
+   "investorNameEn": "Sharikat Al Gamal Lilistithmar",
+   "relationship": null,
+   "ticker": "ARVA",
+   "action": "sell",
+   "shares": 1000000,
+   "price": 11,
+   "ownershipBeforePercent": 2.749,
+   "ownershipAfterPercent": 1.415,
+   "nameScript": "ar",
+   "filingId": "290598",
+   "publishedAt": "2026-06-29T15:15:05",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340393_1.pdf"
+  },
+  "290592": {
+   "investorName": "طارق محمد محمود محمد يوسف",
+   "investorNameEn": "Tarek Mohamed Mahmoud Mohamed Youssef",
+   "relationship": null,
+   "ticker": "ACTF",
+   "action": "sell",
+   "shares": 38899779,
+   "price": 2.506,
+   "ownershipBeforePercent": 11.954,
+   "ownershipAfterPercent": 8.5494,
+   "nameScript": "ar",
+   "filingId": "290592",
+   "publishedAt": "2026-06-29T14:46:22",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340391_1.pdf"
+  },
+  "290578": {
+   "investorName": "لؤي نصر زهران محمد",
+   "investorNameEn": "Louay Nasr Zahran Mohamed",
+   "relationship": null,
+   "ticker": "FIRE",
+   "action": "sell",
+   "shares": 50000,
+   "price": 4.28,
+   "ownershipBeforePercent": 5.28,
+   "ownershipAfterPercent": 4.92,
+   "nameScript": "ar",
+   "filingId": "290578",
+   "publishedAt": "2026-06-29T13:40:19",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340355_1.pdf"
   }
  },
  "refused": {
@@ -3209,6 +3289,7 @@
   "294308": "action is neither buy nor sell: None",
   "291129": "action is neither buy nor sell: None",
   "290836": "action is neither buy nor sell: None",
-  "290814": "share count is not a positive integer: None"
+  "290814": "share count is not a positive integer: None",
+  "290577": "action is neither buy nor sell: None"
  }
 }

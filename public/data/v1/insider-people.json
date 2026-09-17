@@ -1,16 +1,16 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-17T13:04:01+00:00",
+ "generated": "2026-09-17T15:56:50+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1321,
- "tradeCount": 198,
+ "peopleCount": 1322,
+ "tradeCount": 203,
  "tickerCount": 237,
  "tradedTickerCount": 79,
- "firmCount": 437,
+ "firmCount": 438,
  "personCount": 884,
- "aliasCount": 146,
+ "aliasCount": 147,
  "registerCount": 236,
  "overDisclosed": [],
  "supersededByRegister": [
@@ -354,6 +354,59 @@
      "stakeBefore": 21.04,
      "stakeAfter": 14.96,
      "source": "https://www.egx.com.eg/downloads/Bulletins/344231_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "مي محمود حسن جاب الله",
+   "name": "مي محمود حسن جاب الله",
+   "nameEn": "Mai Mahmoud Hassan Gab Allah",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "مى محمود حسن جاب الله"
+   ],
+   "tickers": [
+    "AIDC"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 2,
+   "soldCount": 0,
+   "value": 76873652.69,
+   "singleCompanyMove": {
+    "ticker": "AIDC",
+    "from": 2.156,
+    "to": 10.948,
+    "change": 8.792
+   },
+   "trades": [
+    {
+     "filingId": "290759",
+     "date": "2026-07-01",
+     "ticker": "AIDC",
+     "company": null,
+     "companyAr": "ارابيا للاستثمار والتنمية",
+     "action": "buy",
+     "shares": 65900000,
+     "price": 0.662,
+     "value": 43625800.0,
+     "stakeBefore": 2.156,
+     "stakeAfter": 6.386,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340494_1.pdf"
+    },
+    {
+     "filingId": "292125",
+     "date": "2026-07-29",
+     "ticker": "AIDC",
+     "company": null,
+     "companyAr": "ارابيا للاستثمار والتنمية",
+     "action": "buy",
+     "shares": 45985965,
+     "price": 0.723,
+     "value": 33247852.695,
+     "stakeBefore": 7.997,
+     "stakeAfter": 10.948,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341862_1.pdf"
     }
    ]
   },
@@ -1620,45 +1673,6 @@
    ]
   },
   {
-   "id": "مي محمود حسن جاب الله",
-   "name": "مي محمود حسن جاب الله",
-   "nameEn": "Mai Mahmoud Hassan Gab Allah",
-   "script": "ar",
-   "kind": "person",
-   "aliases": [
-    "مى محمود حسن جاب الله"
-   ],
-   "tickers": [
-    "AIDC"
-   ],
-   "tradeCount": 1,
-   "boughtCount": 1,
-   "soldCount": 0,
-   "value": 33247852.7,
-   "singleCompanyMove": {
-    "ticker": "AIDC",
-    "from": 7.997,
-    "to": 10.948,
-    "change": 2.951
-   },
-   "trades": [
-    {
-     "filingId": "292125",
-     "date": "2026-07-29",
-     "ticker": "AIDC",
-     "company": null,
-     "companyAr": "ارابيا للاستثمار والتنمية",
-     "action": "buy",
-     "shares": 45985965,
-     "price": 0.723,
-     "value": 33247852.695,
-     "stakeBefore": 7.997,
-     "stakeAfter": 10.948,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341862_1.pdf"
-    }
-   ]
-  },
-  {
    "id": "طارق عبد الرازق محمد عبد الغني",
    "name": "طارق عبد الرازق محمد عبد الغني",
    "nameEn": "Tarek Abdel Razek Mohamed Abdel Ghani",
@@ -1766,6 +1780,59 @@
      "stakeBefore": 8.34,
      "stakeAfter": 5.99,
      "source": "https://www.egx.com.eg/downloads/Bulletins/328378_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "طارق محمد محمود محمود محمد يوسف",
+   "name": "طارق محمد محمود محمود محمد يوسف",
+   "nameEn": "Tarek Mohamed Mahmoud Mahmoud Mohamed Youssef",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "طارق محمد محمود محمد يوسف"
+   ],
+   "tickers": [
+    "ACTF"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 1,
+   "soldCount": 1,
+   "value": 124382846.17,
+   "singleCompanyMove": {
+    "ticker": "ACTF",
+    "from": 11.954,
+    "to": 9.714,
+    "change": -2.24
+   },
+   "trades": [
+    {
+     "filingId": "290592",
+     "date": "2026-06-29",
+     "ticker": "ACTF",
+     "company": null,
+     "companyAr": "اكت فاينانشال للاستشارات",
+     "action": "sell",
+     "shares": 38899779,
+     "price": 2.506,
+     "value": 97482846.174,
+     "stakeBefore": 11.954,
+     "stakeAfter": 8.5494,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340391_1.pdf"
+    },
+    {
+     "filingId": "294275",
+     "date": "2026-09-02",
+     "ticker": "ACTF",
+     "company": null,
+     "companyAr": "اكت فاينانشال للاستشارات",
+     "action": "buy",
+     "shares": 10000000,
+     "price": 2.69,
+     "value": 26900000.0,
+     "stakeBefore": 8.838,
+     "stakeAfter": 9.714,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343793_1.pdf"
     }
    ]
   },
@@ -2072,6 +2139,45 @@
    ]
   },
   {
+   "id": "احمد علي علي الجمل",
+   "name": "احمد علي علي الجمل",
+   "nameEn": "Ahmed Ali Ali El Gamal",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "أحمد علي علي الجمل"
+   ],
+   "tickers": [
+    "AMII"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 12717806.59,
+   "singleCompanyMove": {
+    "ticker": "AMII",
+    "from": 4.074,
+    "to": 2.532,
+    "change": -1.542
+   },
+   "trades": [
+    {
+     "filingId": "290599",
+     "date": "2026-06-29",
+     "ticker": "AMII",
+     "company": null,
+     "companyAr": "العربية للصناعات المعدنية والاستثمارات الصناعية",
+     "action": "sell",
+     "shares": 1155324,
+     "price": 11.008,
+     "value": 12717806.591999998,
+     "stakeBefore": 4.074,
+     "stakeAfter": 2.532,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340392_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "خالد عبد الرازق محمد عبد الغنى",
    "name": "خالد عبد الرازق محمد عبد الغنى",
    "nameEn": "Khaled Abdel Razek Mohamed Abdel Ghani",
@@ -2275,6 +2381,43 @@
      "stakeBefore": 9.04,
      "stakeAfter": 7.67,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343792_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "شركة الجمل للاستثمار",
+   "name": "شركة الجمل للاستثمار",
+   "nameEn": "Sharikat Al Gamal Lilistithmar",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "AMII"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 11000000,
+   "singleCompanyMove": {
+    "ticker": "AMII",
+    "from": 2.749,
+    "to": 1.415,
+    "change": -1.334
+   },
+   "trades": [
+    {
+     "filingId": "290598",
+     "date": "2026-06-29",
+     "ticker": "AMII",
+     "company": null,
+     "companyAr": "العربية للصناعات المعدنية والاستثمارات الصناعية",
+     "action": "sell",
+     "shares": 1000000,
+     "price": 11,
+     "value": 11000000,
+     "stakeBefore": 2.749,
+     "stakeAfter": 1.415,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340393_1.pdf"
     }
    ]
   },
@@ -2575,43 +2718,6 @@
      "stakeBefore": 14.96,
      "stakeAfter": 15.87,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343974_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "طارق محمد محمود محمود محمد يوسف",
-   "name": "طارق محمد محمود محمود محمد يوسف",
-   "nameEn": "Tarek Mohamed Mahmoud Mahmoud Mohamed Youssef",
-   "script": "ar",
-   "kind": "person",
-   "aliases": null,
-   "tickers": [
-    "ACTF"
-   ],
-   "tradeCount": 1,
-   "boughtCount": 1,
-   "soldCount": 0,
-   "value": 26900000.0,
-   "singleCompanyMove": {
-    "ticker": "ACTF",
-    "from": 8.838,
-    "to": 9.714,
-    "change": 0.876
-   },
-   "trades": [
-    {
-     "filingId": "294275",
-     "date": "2026-09-02",
-     "ticker": "ACTF",
-     "company": null,
-     "companyAr": "اكت فاينانشال للاستشارات",
-     "action": "buy",
-     "shares": 10000000,
-     "price": 2.69,
-     "value": 26900000.0,
-     "stakeBefore": 8.838,
-     "stakeAfter": 9.714,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343793_1.pdf"
     }
    ]
   },
@@ -3079,6 +3185,43 @@
      "stakeBefore": 18.19,
      "stakeAfter": 17.83,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343104_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "لؤي نصر زهران محمد",
+   "name": "لؤي نصر زهران محمد",
+   "nameEn": "Louay Nasr Zahran Mohamed",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "FIRE"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 214000.0,
+   "singleCompanyMove": {
+    "ticker": "FIRE",
+    "from": 5.28,
+    "to": 4.92,
+    "change": -0.36
+   },
+   "trades": [
+    {
+     "filingId": "290578",
+     "date": "2026-06-29",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 50000,
+     "price": 4.28,
+     "value": 214000.0,
+     "stakeBefore": 5.28,
+     "stakeAfter": 4.92,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340355_1.pdf"
     }
    ]
   },
@@ -16800,23 +16943,6 @@
    "trades": []
   },
   {
-   "id": "احمد علي علي الجمل",
-   "name": "احمد علي علي الجمل",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": [
-    "أحمد علي علي الجمل"
-   ],
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
    "id": "حازم محمد بيومى سمور",
    "name": "حازم محمد بيومى سمور",
    "nameEn": null,
@@ -22045,21 +22171,6 @@
   {
    "id": "بيت الخبرة كارما",
    "name": "بيت الخبرة كارما",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "طارق محمد محمود محمد يوسف",
-   "name": "طارق محمد محمود محمد يوسف",
    "nameEn": null,
    "script": null,
    "kind": "person",
@@ -29737,9 +29848,13 @@
    "basis": "trade",
    "filingId": "292125",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341862_1.pdf",
-   "openedAt": "2026-07-29",
-   "openingPercent": 7.997,
+   "openedAt": "2026-07-01",
+   "openingPercent": 2.156,
    "history": [
+    {
+     "date": "2026-07-01",
+     "percent": 6.386
+    },
     {
      "date": "2026-07-29",
      "percent": 10.948
@@ -30841,9 +30956,13 @@
    "basis": "trade",
    "filingId": "294275",
    "source": "https://www.egx.com.eg/downloads/Bulletins/343793_1.pdf",
-   "openedAt": "2026-09-02",
-   "openingPercent": 8.838,
+   "openedAt": "2026-06-29",
+   "openingPercent": 11.954,
    "history": [
+    {
+     "date": "2026-06-29",
+     "percent": 8.5494
+    },
     {
      "date": "2026-09-02",
      "percent": 9.714
@@ -31556,20 +31675,6 @@
    "filingId": "291395",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341108_1.pdf",
    "shares": 90002607,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
-  },
-  {
-   "holder": "طارق محمد محمود محمد يوسف",
-   "kind": "person",
-   "ticker": "ACTF",
-   "percent": 8.55,
-   "asOf": "2026-07-15",
-   "basis": "register",
-   "filingId": "291666",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/341420_1.pdf",
-   "shares": 97683553,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -35085,6 +35190,24 @@
    ]
   },
   {
+   "holder": "لؤي نصر زهران محمد",
+   "kind": "person",
+   "ticker": "FIRE",
+   "percent": 4.92,
+   "asOf": "2026-06-29",
+   "basis": "trade",
+   "filingId": "290578",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340355_1.pdf",
+   "openedAt": "2026-06-29",
+   "openingPercent": 5.28,
+   "history": [
+    {
+     "date": "2026-06-29",
+     "percent": 4.92
+    }
+   ]
+  },
+  {
    "holder": "نيفين عبد المنعم سيف",
    "kind": "person",
    "ticker": "IFAP",
@@ -37328,9 +37451,14 @@
    "filingId": "291777",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341508_1.pdf",
    "shares": 1895614,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
+   "openedAt": "2026-06-29",
+   "openingPercent": 4.074,
+   "history": [
+    {
+     "date": "2026-06-29",
+     "percent": 2.532
+    }
+   ]
   },
   {
    "holder": "+ طارق محمدي ناصف",
@@ -38862,6 +38990,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "شركة الجمل للاستثمار",
+   "kind": "firm",
+   "ticker": "AMII",
+   "percent": 1.415,
+   "asOf": "2026-06-29",
+   "basis": "trade",
+   "filingId": "290598",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340393_1.pdf",
+   "openedAt": "2026-06-29",
+   "openingPercent": 2.749,
+   "history": [
+    {
+     "date": "2026-06-29",
+     "percent": 1.415
+    }
+   ]
   },
   {
    "holder": "صندوق التأمين للعاملين بقطاع الأعمال العام والخاص",
@@ -46581,6 +46727,68 @@
      "trades": 1,
      "value": 4074193.86,
      "change": 0.05
+    }
+   ]
+  },
+  {
+   "start": "2026-06-28",
+   "end": "2026-07-01",
+   "label": "28 Jun – 1 Jul",
+   "labelAr": "28 يونيو – 1 يوليو",
+   "sessions": 2,
+   "buys": 1,
+   "sells": 4,
+   "value": 165040452.77,
+   "moves": [
+    {
+     "holder": "مي محمود حسن جاب الله",
+     "kind": "person",
+     "ticker": "AIDC",
+     "from": 2.156,
+     "to": 6.386,
+     "trades": 1,
+     "value": 43625800.0,
+     "change": 4.23
+    },
+    {
+     "holder": "طارق محمد محمود محمود محمد يوسف",
+     "kind": "person",
+     "ticker": "ACTF",
+     "from": 11.954,
+     "to": 8.5494,
+     "trades": 1,
+     "value": 97482846.17,
+     "change": -3.4046
+    },
+    {
+     "holder": "احمد علي علي الجمل",
+     "kind": "person",
+     "ticker": "AMII",
+     "from": 4.074,
+     "to": 2.532,
+     "trades": 1,
+     "value": 12717806.59,
+     "change": -1.542
+    },
+    {
+     "holder": "شركة الجمل للاستثمار",
+     "kind": "firm",
+     "ticker": "AMII",
+     "from": 2.749,
+     "to": 1.415,
+     "trades": 1,
+     "value": 11000000.0,
+     "change": -1.334
+    },
+    {
+     "holder": "لؤي نصر زهران محمد",
+     "kind": "person",
+     "ticker": "FIRE",
+     "from": 5.28,
+     "to": 4.92,
+     "trades": 1,
+     "value": 214000.0,
+     "change": -0.36
     }
    ]
   },
