@@ -67,6 +67,10 @@
     "meaning": "A 33% increase in private car licensing reflects higher transaction volumes and vehicle registrations across traffic units, directly linking to automotive distribution inventory turnover, import flow, and consumer auto financing activity.",
     "meaning_ar": "يعكس نمو تراخيص السيارات الملاكي بنسبة 33% زيادة في حجم مبيعات وتسجيل المركبات لدى وحدات المرور، وهو ما يرتبط بمعدلات تدوير مخزون شبكات توزيع السيارات وتدفقات الاستيراد ونشاط التمويل الاستهلاكي."
   },
+  "%35 نموا في رحلات الطيران العارض الي مطار العلمين خلال 2026": {
+    "meaning": "A 35% increase in charter flights expands operational flight capacity and slot utilization at El Alamein Airport, directly increasing inbound passenger throughput for the aviation and North Coast hospitality sectors.",
+    "meaning_ar": "تؤدي زيادة رحلات الطيران العارض بنسبة 35% إلى توسيع الطاقة التشغيلية وجداول الرحلات في مطار العلمين، مما يرفع حجم الركاب الوافدين لقطاعي الطيران والضيافة في الساحل الشمالي."
+  },
   "1 اكتوبر.. عموميه “شارم دريمز” تناقش اعاده تشكيل مجلس الاداره وعقود المعاوضه": {
     "meaning": "An ordinary general assembly convenes shareholders to vote on corporate governance procedures, specifically the reconstitution of the board of directors and the approval of related-party transactions (contracts of reciprocal interest) pursuant to corporate governance regulations.",
     "meaning_ar": "تنعقد الجمعية العامة العادية لممارسة المساهمين حقوق التصويت على إجراءات الحوكمة، والتي تتضمن إعادة تشكيل مجلس الإدارة والترخيص بعقود المعاوضة مع الأطراف المرتبطة وفقاً للضوابط القانونية المنظمة."
@@ -3766,6 +3770,10 @@
   "اول اسبوع تصديري يسجل 2121 طنا من القطن": {
     "meaning": "The execution of 2,121 tonnes in cotton export shipments marks the commencement of seasonal outflow volumes in the agricultural trading market.",
     "meaning_ar": "يمثل تنفيذ تصدير 2121 طناً من القطن بدء تدفق أحجام الشحنات التصديرية الموسمية في سوق الحاصلات الزراعية."
+  },
+  "اي اف چي القابضه تحصل علي شهاده ISO 14001 للاداره البيييه": {
+    "meaning": "The ISO 14001 certification audits and verifies the group's internal operations against global environmental management standards, integrating formal sustainability criteria into its operational framework and corporate governance disclosures.",
+    "meaning_ar": "تُثبت شهادة ISO 14001 مطابقة العمليات التشغيلية للمجموعة للمعايير الدولية للإدارة البيئية، مما يُدمج معايير الاستدامة الرسمية ضمن أطر الحوكمة المؤسسية والإفصاح البيئي الخاصة بالشركة."
   },
   "اي البنوك تقدم اعلي سعر لشراء الدينار الكويتي في بدايه تعاملات اليوم؟": {
     "meaning": "Commercial banks adjust bid exchange rates for foreign currencies based on individual interbank liquidity positions, sovereign reserve requirements, and daytime clearing volumes.",
