@@ -2483,6 +2483,10 @@
     "meaning": "Government initiatives targeting startup export access focus on standardizing cross-border regulatory procedures, facilitating foreign currency transactions, and providing institutional channels into foreign trade networks.",
     "meaning_ar": "تركز المبادرات الحكومية الموجهة لدعم تصدير الشركات الناشئة على توحيد الإجراءات التنظيمية العابرة للحدود، وتيسير المعاملات بالنقد الأجنبي، وتوفير قنوات مؤسسية للنفاذ إلى شبكات التجارة الخارجية."
   },
+  "الحكومه تنفي فرض ضريبه علي تصاريح دفن الموتي: لم تصدر قرارات رسميه بهذا الشان": {
+    "meaning": "Official denials of new administrative levies maintain the existing fee schedule for public services without altering consumer cost structures.",
+    "meaning_ar": "يُبقي النفي الرسمي لفرض رسوم إدارية جديدة على جدول الرسوم الحالي للخدمات العامة دون تعديل في هيكل التكاليف على المواطنين."
+  },
   "الحكومه تنفي مزاعم فرض ضريبه علي تصاريح دفن الموتي": {
     "meaning": "Official denials of new administrative fees maintain the current public service tariff schedule and leave household administrative expenditure structures unchanged.",
     "meaning_ar": "يُبقي النفي الرسمي لفرض رسوم إدارية جديدة على جدول تعريفة الخدمات العامة الحالية دون تعديل في هيكل المصروفات الإدارية للقطاع العائلي."
@@ -2906,6 +2910,10 @@
   "السيسي خلال لقايه جوتيريش: المساس بامن السودان خط احمر لن تسمح مصر بتجاوزه": {
     "meaning": "Regional security stability on Egypt's southern border directly governs cross-border land freight logistics, livestock import supply chains, and bilateral trade flows through the Qustul and Arqin crossings.",
     "meaning_ar": "يرتبط الاستقرار الأمني على الحدود الجنوبية لمصر بشكل مباشر بانتظام حركة الشحن البري للبضائع، وسلاسل توريد الماشية الحية، والتبادل التجاري عبر معبري قسطل وأرقين."
+  },
+  "السيسي لرييسه تنزانيا: حريصون علي تعزيز التعاون في مختلف المجالات ومن بينها ملف المياه": {
+    "meaning": "Bilateral coordination between Egypt and Tanzania operates through government-backed infrastructure partnerships, involving joint projects such as the Julius Nyerere Hydropower Plant executed by Egyptian engineering and construction contractors in the East African market.",
+    "meaning_ar": "يعمل التنسيق الثنائي بين مصر وتنزانيا عبر شراكات بنية تحتية مدعومة حكومياً، تتضمن تنفيذ مشروعات مشتركة مثل سد يوليوس نيريري للطاقة الكهرومائية بواسطة شركات مقاولات وهندسة مصرية في سوق شرق أفريقيا."
   },
   "السيسي لولي العهد السعودي: امن المملكه وساير الدول العربيه يعد امتدادا للامن القومي المصري": {
     "meaning": "Bilateral strategic and security coordination between Egypt and Saudi Arabia provides the foundational framework for cross-border capital flows, sovereign investment partnerships, and intergovernmental financial arrangements between both economies.",
@@ -6856,6 +6864,10 @@
   "مصر تتعاون مع شركه صينيه لتطوير محطتي محولات كهرباء بمنطقه القناه": {
     "meaning": "This agreement brings foreign engineering expertise and capital goods into the domestic utility sector to upgrade transmission infrastructure in the Canal Zone.",
     "meaning_ar": "يتضمن هذا الاتفاق إدخال خبرات هندسية وسلع رأسمالية أجنبية إلى قطاع المرافق المحلي لتحديث البنية التحتية لنقل الكهرباء في منطقة القناة."
+  },
+  "مصر تدين محاوله استهداف مكه المكرمه: انتهاك صارخ لحرمه المقدسات الدينيه وقواعد واحكام القانون الدولي": {
+    "meaning": "Official diplomatic statements on regional security events represent non-financial geopolitical developments that do not alter the balance sheets, operating structures, or direct commercial contracts of companies listed on the Egyptian Exchange.",
+    "meaning_ar": "تمثل البيانات الدبلوماسية الرسمية بشأن التطورات الأمنية الإقليمية أحداثاً جيوسياسية غير مالية لا تغير في الميزانيات العمومية أو الهياكل التشغيلية أو العقود التجارية المباشرة للشركات المقيدة في البورصة المصرية."
   },
   "مصر تستضيف منتدي GS1 الاقليمي لبحث مستقبل التجاره الرقميه": {
     "meaning": "GS1 forums align domestic retail, logistics, and e-commerce operations with standardized international product identification codes, supply chain traceability protocols, and digital data synchronization systems.",
