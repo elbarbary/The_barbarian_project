@@ -34,6 +34,7 @@ import json
 import pathlib
 
 import insider_identity
+import listing_codes
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 STORE = REPO / "data-source" / "official" / "ownership" / "named-insiders.json"
@@ -41,6 +42,9 @@ REGISTERS = REPO / "data-source" / "official" / "ownership" / "shareholder-struc
 OUT = REPO / "public" / "data" / "v1" / "insider-people.json"
 FIXTURE = REPO / "app" / "assets" / "fixtures" / "insider-people.json"
 COMPANIES = REPO / "public" / "data" / "v1" / "companies.json"
+# Where a company's earlier codes are read from. See `listing_codes`.
+FILINGS = listing_codes.FILINGS
+SESSION = listing_codes.SESSION
 
 
 def key(name: str) -> str:
@@ -92,7 +96,7 @@ def week_label(start: str, end: str, months) -> str:
     return f"{a.day} {months[a.month - 1]} – {b.day} {months[b.month - 1]}"
 
 
-def registers() -> dict:
+def registers(company=None) -> dict:
     """The filed shareholder structures, keyed by ticker.
 
     Only the reading for each company is kept, not the whole store, and the
@@ -100,6 +104,11 @@ def registers() -> dict:
     session it was filed for and then to the day it was published. A register
     dated by our fetch rather than by the document would claim a freshness the
     document does not have.
+
+    `company` turns the code a register was filed under into the company's
+    ticker today, so ICMI's March register and FCMD's June one are two readings
+    of one company and the June one stands. Two of the same date go to the
+    later filing, which is the one the company filed last.
     """
     if not REGISTERS.exists():
         return {}
@@ -112,14 +121,18 @@ def registers() -> dict:
         ticker = reading.get("ticker")
         if not ticker:
             continue
+        if company:
+            ticker = company(ticker)
         asof = (reading.get("asOfDate") or reading.get("sessionDate")
                 or (reading.get("publishedAt") or "")[:10]) or None
         held_row = out.get(ticker)
-        if held_row and (held_row.get("asOf") or "") >= (asof or ""):
+        if held_row and ((held_row.get("asOf") or ""), held_row["filed"]) >= (
+                (asof or ""), _filed(reading)):
             continue
         out[ticker] = {
             "ticker": ticker,
             "asOf": asof,
+            "filed": _filed(reading),
             "filingId": reading.get("filingId"),
             "source": reading.get("source"),
             "totalShares": reading.get("totalShares"),
@@ -128,6 +141,12 @@ def registers() -> dict:
             "namedWithoutAStake": reading.get("namedWithoutAStake") or [],
         }
     return out
+
+
+def _filed(reading) -> tuple[str, str]:
+    """When a reading's document was filed, as something that orders."""
+    return ((reading.get("publishedAt") or ""),
+            str(reading.get("filingId") or "").zfill(12))
 
 
 def _dedupe(trades):
@@ -178,20 +197,38 @@ def main(argv=None) -> int:
     except (OSError, json.JSONDecodeError):
         pass
 
+    # A company is one company under every code it has filed under. Each form
+    # is keyed by the code in its own title, so a rename split the board in
+    # two: on 17 Sep 2026 AMII's register and 14 of its holders were drawn
+    # under ARVA, a code the directory does not list and the map attaches to
+    # nothing, and Derayah Financial held AMII twice. Folded here, a holder's
+    # stakes filed under both codes are one company's history, and the latest
+    # filed level stands exactly as it does under one code. The stores keep
+    # the code each document printed.
+    codes = listing_codes.renamed(FILINGS, SESSION, COMPANIES)
+    folded = collections.Counter()
+
+    def company(ticker):
+        if ticker in codes:
+            folded[(ticker, codes[ticker])] += 1
+            return codes[ticker]
+        return ticker
+
     people = collections.defaultdict(lambda: {"trades": []})
     for r in readings:
-        k = filer(r.get("investorName"), r.get("ticker"))
+        ticker = company(r.get("ticker"))
+        k = filer(r.get("investorName"), ticker)
         if not k:
             continue
         p = people[k]
         p.setdefault("name", r.get("investorName"))
         p.setdefault("nameEn", r.get("investorNameEn"))
         p.setdefault("script", r.get("nameScript"))
-        co = names.get(r.get("ticker")) or {}
+        co = names.get(ticker) or {}
         p["trades"].append({
             "filingId": r.get("filingId"),
             "date": (r.get("sessionDate") or (r.get("publishedAt") or "")[:10]) or None,
-            "ticker": r.get("ticker"),
+            "ticker": ticker,
             "company": co.get("en"),
             "companyAr": co.get("ar"),
             "action": r.get("action"),
@@ -208,7 +245,7 @@ def main(argv=None) -> int:
     # list, and their stakes read as separate holdings — `شركة اموال العربيه
     # للاقطان` and `شركه ...`, one letter apart, made KABO look 82% disclosed
     # when one firm holds 41% of it.
-    books = registers()
+    books = registers(company)
 
     # Register holders go through the SAME identity resolution as the traders,
     # so a man who filed a trade in August and appears in his company's October
@@ -515,6 +552,9 @@ def main(argv=None) -> int:
           f"{len({p['ticker'] for p in live})} companies, "
           f"{len(periods)} trading weeks")
     print(f"   {doc['registerCount']} filed registers, {doc['seatCount']} board seats")
+    for (old, new), count in sorted(folded.items()):
+        print(f"   {count} form{'s' if count != 1 else ''} filed as {old}, "
+              f"{new}'s earlier code, published under {new}")
     for row in over:
         print(f"   ! {row['ticker']}: {row['holders']} named holders add to "
               f"{row['percent']}% — two documents naming one party twice")
@@ -537,12 +577,32 @@ def main(argv=None) -> int:
         except (OSError, json.JSONDecodeError):
             standing = {}
         was = len(standing.get("people") or ())
+        # Except a holder the published file drew only under a company's
+        # earlier code. Folded, that company's older register gives way to its
+        # newer one, and a holder named only in the older one is gone because
+        # a later document left them out, not because the store forgot them.
+        # PORT's March register named two holders ARAB's June register does
+        # not, and counted as a loss they held back the whole board. The store
+        # still has to know everyone else the file names.
+        drawn = collections.defaultdict(set)
+        for position in standing.get("positions") or ():
+            drawn[position.get("holder")].add(position.get("ticker"))
+        for person in standing.get("people") or ():
+            drawn[person.get("id")].update(person.get("tickers") or ())
+        kept = {r["id"] for r in rows}
+        renamed_away = [holder for holder, tickers in drawn.items()
+                        if holder not in kept and tickers and tickers <= set(codes)]
+        was -= len(renamed_away)
         if was > len(rows):
             print(f"   refusing to publish: {len(rows)} holders would replace "
                   f"{was} already published. The reading store is thinner than "
                   f"the file — collect the forms, or pass --force if the loss "
                   f"is intended.")
             return 0
+        if renamed_away:
+            print(f"   {len(renamed_away)} published holder id"
+                  f"{'s' if len(renamed_away) != 1 else ''} drawn only under a "
+                  f"company's earlier code, not in this build")
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8")

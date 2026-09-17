@@ -51,6 +51,7 @@ import re
 import build_signals
 import egx_dates
 import filing_types as ft
+import listing_codes
 import listing_status
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
@@ -72,6 +73,8 @@ COMPANIES = REPO / "public" / "data" / "v1" / "companies.json"
 # harvest_company_names.py — the file build_market_api.py fills companies.json
 # `name_ar` from.
 NAMES_AR = pathlib.Path(__file__).resolve().parent / "company_names_ar.json"
+# Where a company's earlier codes are read from. See `listing_codes`.
+SESSION = listing_codes.SESSION
 
 TICKER = re.compile(r"\(([A-Z0-9]{2,8})\.CA\)")
 # The heading of a filing that names two listings writes them inside one pair
@@ -160,8 +163,20 @@ def harvested_filings():
         yield from doc.get("items", [])
 
 
+def current_codes() -> dict[str, str]:
+    """A company's earlier codes → the ticker the directory lists it under.
+
+    A filing keeps the code it was titled with. Arab Valves filed as ARVA.CA
+    until July 2026 and is AMII now, and a row keyed by the title's code put
+    64 of its filings under a ticker whose chip opened a company that does not
+    exist, where a reader searching AMII could not find them.
+    """
+    return listing_codes.renamed(FILINGS, SESSION, COMPANIES)
+
+
 def build(*, on_or_after: datetime.date | None) -> list[dict]:
     rows: dict[tuple, dict] = {}
+    codes = current_codes()
     for item in harvested_filings():
         try:
             filed = datetime.date.fromisoformat(item["dateStamp"][:10])
@@ -172,7 +187,7 @@ def build(*, on_or_after: datetime.date | None) -> list[dict]:
         body = strip(item.get("content"))
         section = (item.get("section") or "").strip()
         tick = TICKER.search(heading)
-        ticker = tick.group(1) if tick else None
+        ticker = codes.get(tick.group(1), tick.group(1)) if tick else None
 
         for kind, when, note in events_for(section, heading, body):
             # A scheduled event is after the filing that announced it. This drops
@@ -338,6 +353,7 @@ def filed_rows() -> dict[str, list[dict]]:
     pages show, indexed by date instead of by company.
     """
     months: dict[str, list[dict]] = {}
+    codes = current_codes()
     for item in harvested_filings():
         stamp = (item.get("dateStamp") or "")[:10]
         if len(stamp) != 10:
@@ -347,7 +363,7 @@ def filed_rows() -> dict[str, list[dict]]:
         tick = ANY_TICKER.search(heading) or ANY_TICKER.search(arabic)
         months.setdefault(stamp[:7], []).append({
             "date": stamp,
-            "ticker": tick.group(1) if tick else None,
+            "ticker": codes.get(tick.group(1), tick.group(1)) if tick else None,
             "title": arabic or heading,
             "title_en": heading,
             "type": ft.classify_rules(arabic) or ft.classify_rules(heading),

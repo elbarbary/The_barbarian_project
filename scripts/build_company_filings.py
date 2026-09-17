@@ -37,6 +37,7 @@ import pathlib
 import re
 
 import filing_types as ft
+import listing_codes
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 FILINGS = REPO / "data-source" / "egx-beta" / "filings"
@@ -55,6 +56,8 @@ RECENT = 50
 # funds, bonds and delisted names the directory has never heard of, and a
 # document for a company that cannot be opened is bytes nobody fetches.
 DIRECTORY = REPO / "public" / "data" / "v1" / "companies.json"
+# Where a company's earlier codes are read from. See `listing_codes`.
+SESSION = listing_codes.SESSION
 
 
 def known_tickers() -> set[str]:
@@ -105,6 +108,11 @@ def row(item: dict) -> dict:
 
 def collect() -> dict[str, list[dict]]:
     known = known_tickers()
+    # A filing titled with a company's earlier code is that company's filing.
+    # AMII was ARVA until July 2026, and its page carried the 13 filings
+    # titled AMII.CA while the 464 titled ARVA.CA, back to 2010, went on no
+    # page at all, because ARVA is not a ticker the directory lists.
+    codes = listing_codes.renamed(FILINGS, SESSION, DIRECTORY)
     by_ticker: dict[str, dict[str, dict]] = collections.defaultdict(dict)
     for path in sorted(glob.glob(str(FILINGS / "*.json.gz"))):
         for item in json.loads(
@@ -112,7 +120,8 @@ def collect() -> dict[str, list[dict]]:
         ).get("items", []):
             heading = item.get("heading") or ""
             arabic = item.get("headingArabic") or ""
-            tickers = set(TICKER.findall(heading)) | set(TICKER.findall(arabic))
+            tickers = {codes.get(t, t) for t in
+                       set(TICKER.findall(heading)) | set(TICKER.findall(arabic))}
             for ticker in tickers:
                 if known and ticker not in known:
                     continue

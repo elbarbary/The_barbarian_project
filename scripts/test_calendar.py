@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """The forward calendar reads only what the issuer scheduled, never guesses."""
 import datetime
+import gzip
 import json
 import pathlib
 import tempfile
@@ -184,6 +185,70 @@ class ArabicNames(unittest.TestCase):
         self.assertEqual(cal.arabic_names(), {})
         self._with(companies=[], names=["not", "a", "map"])
         self.assertEqual(cal.arabic_names(), {})
+
+
+ARVA_ISIN = "EGS3E1E1C013"
+
+
+def egx(news_id, stamp, heading, arabic="", *, section="General", body=""):
+    return {"code": news_id, "dateStamp": f"{stamp}T10:00:00", "heading": heading,
+            "headingArabic": arabic, "section": section, "secId": 3,
+            "isin": ARVA_ISIN, "content": body}
+
+
+class EarlierCodes(unittest.TestCase):
+    """A filing titled with a company's earlier code is that company's row.
+
+    Arab Valves filed as ARVA.CA until the Listing Committee changed its name
+    and code to AMII.CA on 22 Jul 2026 (NewsID 291839). The filed archive's
+    ticker chip opens the company screen, and on 17 Sep 2026 64 rows opened
+    ARVA, which the directory does not list.
+    """
+
+    def setUp(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        root = pathlib.Path(tmp.name)
+        saved = cal.FILINGS, cal.SESSION, cal.COMPANIES
+        self.addCleanup(lambda: (setattr(cal, "FILINGS", saved[0]),
+                                 setattr(cal, "SESSION", saved[1]),
+                                 setattr(cal, "COMPANIES", saved[2])))
+        cal.FILINGS, cal.SESSION = root / "archive", root / "watch.json"
+        cal.COMPANIES = root / "companies.json"
+        cal.FILINGS.mkdir()
+        items = [
+            egx(277098, "2025-10-02", "Arab Valves Company (ARVA.CA) - Listing Committee Decision",
+                "العربية للمحابس (ARVA.CA) - قرار لجنة القيد"),
+            egx(289000, "2026-06-01", "Arab Valves Company (ARVA.CA) Declares Cash Dividend",
+                section="Corporate Actions", body="Payment Date : 21/06/2026"),
+            # Titled with both: ARVA in English, AMII in Arabic.
+            egx(291943, "2026-07-27",
+                "Arab Valves Company (ARVA.CA) - Auditor's Report on Corporate Governance Report",
+                "العربية للمحابس (AMII.CA) - تقرير مراقب الحسابات على تقرير الحوكمة"),
+            egx(291940, "2026-07-27", "Arab Valves Company (AMII.CA) - Minutes of the BoD Meeting",
+                "العربية للمحابس (AMII.CA) - محضر اجتماع مجلس إدارة الشركة"),
+        ]
+        (cal.FILINGS / "2026-07.json.gz").write_bytes(
+            gzip.compress(json.dumps({"items": items}).encode("utf-8")))
+        cal.SESSION.write_text(json.dumps({"isins": {ARVA_ISIN: {"code": "AMII"}}}),
+                               encoding="utf-8")
+        cal.COMPANIES.write_text(json.dumps({"companies": [{"ticker": "AMII"}]}),
+                                 encoding="utf-8")
+
+    def test_every_filed_row_is_under_the_companys_ticker(self):
+        rows = [r for month in cal.filed_rows().values() for r in month]
+        self.assertEqual(sorted((r["id"], r["ticker"]) for r in rows),
+                         [("egx-277098", "AMII"), ("egx-289000", "AMII"),
+                          ("egx-291940", "AMII"), ("egx-291943", "AMII")])
+
+    def test_the_title_still_says_what_the_exchange_printed(self):
+        rows = {r["id"]: r for month in cal.filed_rows().values() for r in month}
+        self.assertIn("(ARVA.CA)", rows["egx-277098"]["title_en"])
+
+    def test_a_scheduled_date_announced_under_the_earlier_code_is_the_companys(self):
+        rows = cal.build(on_or_after=None)
+        self.assertEqual([(r["kind"], r["ticker"]) for r in rows],
+                         [("dividend_payment", "AMII")])
 
 
 if __name__ == "__main__":

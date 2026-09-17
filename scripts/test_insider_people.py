@@ -12,6 +12,7 @@ Run: python3 -m unittest discover -s scripts -p 'test_*.py'
 from __future__ import annotations
 
 import contextlib
+import gzip
 import io
 import json
 import pathlib
@@ -45,28 +46,57 @@ def register(ticker, holders, board=(), as_of="2026-06-30", filing="900"):
     }
 
 
-def build(readings, companies=None, books=()):
+def exchange(root, renamed, listed=()):
+    """A filing archive, a market watch and a directory in which each old code
+    in `renamed` is the earlier code of its new one: one ISIN, the old code
+    filing from 2010 and the new one from 2026, the watch quoting the new one.
+
+    Returns the directory's rows, for `companies`.
+    """
+    archive = root / "archive"
+    archive.mkdir()
+    items, watch = [], {}
+    for n, (old, new) in enumerate(sorted(renamed.items()), start=1):
+        isin = f"EGS{n:09d}"
+        watch[isin] = {"code": new, "stated": "2026-09-17T00:00:00Z"}
+        for k, (code, stamp) in enumerate(((old, "2010-02-03"), (new, "2026-07-27"))):
+            items.append({"code": n * 10 + k, "dateStamp": f"{stamp}T10:00:00",
+                          "heading": f"Some Company ({code}.CA) - Board of Directors' Decisions",
+                          "headingArabic": "", "secId": 3, "isin": isin, "content": ""})
+    (archive / "2026-07.json.gz").write_bytes(
+        gzip.compress(json.dumps({"items": items}).encode("utf-8")))
+    (root / "watch.json").write_text(json.dumps({"isins": watch}), encoding="utf-8")
+    return [{"ticker": t} for t in sorted(set(renamed.values()) | set(listed))]
+
+
+def build(readings, companies=None, books=(), renamed=None, listed=()):
     """Run the builder against throwaway stores and read back what it wrote.
 
     `REGISTERS` has to be redirected with the rest. Left pointing at the real
     file, every test in here silently merged in the whole exchange — which is
     how a test asking for one position got a filing id from a company it had
-    never heard of.
+    never heard of. The filing archive and the market watch the builder reads
+    a company's earlier codes from are redirected for the same reason:
+    `renamed` (old code → new) writes a throwaway pair of them.
     """
     with tempfile.TemporaryDirectory() as tmp:
         root = pathlib.Path(tmp)
         store, out = root / "store.json", root / "out.json"
         companies_file = root / "companies.json"
         registers_file = root / "registers.json"
+        if renamed:
+            companies = (companies or []) + exchange(root, renamed, listed)
         store.write_text(json.dumps({"readings": {r["filingId"]: r for r in readings}}),
                          encoding="utf-8")
         registers_file.write_text(
             json.dumps({"readings": {b["filingId"]: b for b in books}}), encoding="utf-8")
         companies_file.write_text(json.dumps({"companies": companies or []}),
                                   encoding="utf-8")
-        saved = (bip.STORE, bip.OUT, bip.FIXTURE, bip.COMPANIES, bip.REGISTERS)
+        saved = (bip.STORE, bip.OUT, bip.FIXTURE, bip.COMPANIES, bip.REGISTERS,
+                 bip.FILINGS, bip.SESSION)
         bip.STORE, bip.OUT, bip.COMPANIES = store, out, companies_file
         bip.REGISTERS = registers_file
+        bip.FILINGS, bip.SESSION = root / "archive", root / "watch.json"
         bip.FIXTURE = root / "missing" / "fixture.json"
         try:
             with contextlib.redirect_stdout(io.StringIO()):
@@ -74,7 +104,7 @@ def build(readings, companies=None, books=()):
             return json.loads(out.read_text(encoding="utf-8"))
         finally:
             (bip.STORE, bip.OUT, bip.FIXTURE, bip.COMPANIES,
-             bip.REGISTERS) = saved
+             bip.REGISTERS, bip.FILINGS, bip.SESSION) = saved
 
 
 AMWAL = "شركة اموال العربيه للاقطان"
@@ -214,19 +244,23 @@ class NeverShrinks(unittest.TestCase):
     it managed to read that morning, and report success doing it.
     """
 
-    def _build_into(self, out, readings, force=False):
+    def _build_into(self, out, readings, force=False, books=(), renamed=None, listed=()):
         with tempfile.TemporaryDirectory() as tmp:
             root = pathlib.Path(tmp)
             store = root / "store.json"
             companies_file = root / "companies.json"
             store.write_text(json.dumps({"readings": {r["filingId"]: r for r in readings}}),
                              encoding="utf-8")
-            companies_file.write_text(json.dumps({"companies": []}), encoding="utf-8")
+            companies = exchange(root, renamed, listed) if renamed else []
+            companies_file.write_text(json.dumps({"companies": companies}), encoding="utf-8")
             registers_file = root / "registers.json"
-            registers_file.write_text(json.dumps({"readings": {}}), encoding="utf-8")
-            saved = (bip.STORE, bip.OUT, bip.FIXTURE, bip.COMPANIES, bip.REGISTERS)
+            registers_file.write_text(
+                json.dumps({"readings": {b["filingId"]: b for b in books}}), encoding="utf-8")
+            saved = (bip.STORE, bip.OUT, bip.FIXTURE, bip.COMPANIES, bip.REGISTERS,
+                     bip.FILINGS, bip.SESSION)
             bip.STORE, bip.OUT, bip.COMPANIES = store, out, companies_file
             bip.REGISTERS = registers_file
+            bip.FILINGS, bip.SESSION = root / "archive", root / "watch.json"
             bip.FIXTURE = root / "missing" / "fixture.json"
             try:
                 with contextlib.redirect_stdout(io.StringIO()) as said:
@@ -234,7 +268,7 @@ class NeverShrinks(unittest.TestCase):
                 return said.getvalue()
             finally:
                 (bip.STORE, bip.OUT, bip.FIXTURE, bip.COMPANIES,
-                 bip.REGISTERS) = saved
+                 bip.REGISTERS, bip.FILINGS, bip.SESSION) = saved
 
     def _fat(self, out):
         self._build_into(out, [
@@ -397,16 +431,19 @@ class OnePartyTwoAlphabets(unittest.TestCase):
                 ],
             }}}), encoding="utf-8")
             companies_file.write_text(json.dumps({"companies": []}), encoding="utf-8")
-            saved = (bip.STORE, bip.REGISTERS, bip.OUT, bip.FIXTURE, bip.COMPANIES)
+            saved = (bip.STORE, bip.REGISTERS, bip.OUT, bip.FIXTURE, bip.COMPANIES,
+                     bip.FILINGS, bip.SESSION)
             bip.STORE, bip.REGISTERS, bip.OUT = store, books, out
             bip.COMPANIES = companies_file
+            bip.FILINGS, bip.SESSION = root / "archive", root / "watch.json"
             bip.FIXTURE = root / "missing" / "fixture.json"
             try:
                 with contextlib.redirect_stdout(io.StringIO()):
                     bip.main([])
                 return json.loads(out.read_text(encoding="utf-8"))
             finally:
-                bip.STORE, bip.REGISTERS, bip.OUT, bip.FIXTURE, bip.COMPANIES = saved
+                (bip.STORE, bip.REGISTERS, bip.OUT, bip.FIXTURE, bip.COMPANIES,
+                 bip.FILINGS, bip.SESSION) = saved
 
     def test_the_register_wins_when_both_cannot_be_true(self):
         doc = self._both(53.35, 50.76)          # 119.94% between them
@@ -504,3 +541,127 @@ class PartylessNames(unittest.TestCase):
             register("BBB", [(AMWAL_HAA, 12.0)], filing="902"),
         ])
         self.assertEqual(len({p["holder"] for p in out["positions"]}, ), 1)
+
+
+class RenamedCodes(unittest.TestCase):
+    """A company is one ring and one board under every code it filed under.
+
+    Shaped on AMII, which filed as ARVA.CA until the Listing Committee changed
+    its name and code on 22 Jul 2026 (NewsID 291839). Its register, filed the
+    day before (291777), named its holders under ARVA; its trade forms since
+    are titled AMII; Derayah Financial filed under both. On 17 Sep 2026 the
+    board drew ARVA's 14 holders on a company the directory does not list.
+    """
+
+    DERAYAH = "شركة دراية المالية مساهمة مقفلة"
+    AYMAN = "أيمن بن مختار بن إبراهيم خليفه"
+    UNION = "اتحاد العاملين المساهمين"
+
+    def test_a_register_filed_under_the_earlier_code_is_the_companys(self):
+        out = build([reading("292662", "زالدي للاستثمارت", "AMII", "2026-08-09", 0.5, 0.73,
+                             action="buy")],
+                    books=[register("ARVA", [("مازن بن محمد بن عبدالرحمن السعيد", 20.09)],
+                                    board=[("مازن بن محمد بن عبدالرحمن السعيد", "رئيس مجلس الاداره")],
+                                    filing="291777")],
+                    renamed={"ARVA": "AMII"})
+        self.assertEqual({p["ticker"] for p in out["positions"]}, {"AMII"})
+        self.assertEqual([b["ticker"] for b in out["boards"]], ["AMII"])
+
+    def test_a_holder_filed_under_both_codes_holds_the_company_once_at_the_latest_level(self):
+        # The register's 10.01% is as of 30 Jun; the AMII trade form left 9.88%
+        # on 3 Aug. Under one code the later form stands, and it does here.
+        out = build([reading("277500", self.DERAYAH, "ARVA", "2025-10-14", 3.5, 5.72,
+                             action="buy"),
+                     reading("292428", self.DERAYAH, "AMII", "2026-08-03", 10.01, 9.88)],
+                    books=[register("ARVA", [(self.DERAYAH, 10.01)], filing="291777")],
+                    renamed={"ARVA": "AMII"})
+        self.assertEqual([(p["ticker"], p["percent"], p["basis"]) for p in out["positions"]],
+                         [("AMII", 9.88, "trade")])
+        self.assertEqual([p["tickers"] for p in out["people"]], [["AMII"]])
+
+    def test_the_newer_register_under_the_current_code_stands(self):
+        # ICMI's register as of 31 Mar 2026 (286156) and FCMD's as of 30 Jun
+        # (291336) are two readings of one company.
+        out = build([], books=[
+            register("ICMI", [(self.AYMAN, 11.977)], board=[(self.AYMAN, "عضو")],
+                     as_of="2026-03-31", filing="286156"),
+            register("FCMD", [(self.AYMAN, 5.071)], board=[(self.AYMAN, "عضو")],
+                     as_of="2026-06-30", filing="291336"),
+        ], renamed={"ICMI": "FCMD"})
+        self.assertEqual([(p["ticker"], p["percent"], p["filingId"]) for p in out["positions"]],
+                         [("FCMD", 5.071, "291336")])
+        self.assertEqual([(b["ticker"], b["filingId"]) for b in out["boards"]],
+                         [("FCMD", "291336")])
+
+    def test_two_registers_of_one_date_leave_the_later_filing_standing(self):
+        # A June register filed under the old code, then filed again under the
+        # new one. The one the company filed last is its register.
+        out = build([], books=[
+            register("ICMI", [(self.AYMAN, 11.977)], board=[(self.AYMAN, "عضو")],
+                     as_of="2026-06-30", filing="291000"),
+            register("FCMD", [(self.AYMAN, 5.071)], board=[(self.AYMAN, "عضو")],
+                     as_of="2026-06-30", filing="291336"),
+        ], renamed={"ICMI": "FCMD"})
+        self.assertEqual([b["filingId"] for b in out["boards"]], ["291336"])
+        self.assertEqual([p["percent"] for p in out["positions"]], [5.071])
+
+    def test_a_week_that_moved_under_the_earlier_code_is_the_companys_week(self):
+        out = build([reading("277091", "محمود شعبان سليم على", "ICMI", "2025-10-02", 14.999, 11.99)],
+                    renamed={"ICMI": "FCMD"})
+        self.assertEqual([m["ticker"] for m in out["periods"][0]["moves"]], ["FCMD"])
+
+    def test_a_body_with_no_name_is_one_holder_across_its_companys_codes(self):
+        # The union of one company's shareholding employees, on its register
+        # under both codes. Scoped to the company, which is one company.
+        out = build([], books=[
+            register("ARVA", [(self.UNION, 4.0)], as_of="2026-03-31", filing="286000"),
+            register("AMII", [(self.UNION, 4.2)], as_of="2026-09-01", filing="294000"),
+        ], renamed={"ARVA": "AMII"})
+        self.assertEqual([(p["holder"], p["percent"]) for p in out["positions"]],
+                         [(f"{self.UNION} (AMII)", 4.2)])
+
+    def test_stakes_in_two_companies_are_still_two_and_never_added(self):
+        out = build([reading("292428", self.DERAYAH, "AMII", "2026-08-03", 10.01, 9.88),
+                     reading("300000", self.DERAYAH, "HBCO", "2026-08-04", 2.0, 1.5)],
+                    books=[register("ARVA", [(self.DERAYAH, 10.01)], filing="291777")],
+                    renamed={"ARVA": "AMII"}, listed=["HBCO"])
+        self.assertEqual(sorted((p["ticker"], p["percent"]) for p in out["positions"]),
+                         [("AMII", 9.88), ("HBCO", 1.5)])
+
+
+class RenamedAndNeverShrinks(unittest.TestCase):
+    """A newer register replacing an earlier code's is not a thinner store."""
+
+    _build_into = NeverShrinks._build_into
+
+    PORT_MARCH = [("احمد طارق خليل علي", 25.5), ("أسماك م م ح", 3.15),
+                  ("مروه محمد الأمين رجب أحمد", 3.57)]
+
+    def test_an_earlier_codes_register_giving_way_is_not_a_loss(self):
+        # PORT's register as of 31 Mar 2026 (286586) named two holders that
+        # ARAB's as of 30 Jun (291753) does not. Counted as lost, they held
+        # back the whole board with the split still in it.
+        books = [register("PORT", self.PORT_MARCH, as_of="2026-03-31", filing="286586"),
+                 register("ARAB", [("احمد طارق خليل علي", 26.0)], as_of="2026-06-30",
+                          filing="291753")]
+        with tempfile.TemporaryDirectory() as tmp:
+            out = pathlib.Path(tmp) / "out.json"
+            self._build_into(out, [], books=books)
+            said = self._build_into(out, [], books=books, renamed={"PORT": "ARAB"})
+            doc = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual({p["ticker"] for p in doc["positions"]}, {"ARAB"}, said)
+            self.assertEqual(doc["peopleCount"], 1)
+
+    def test_a_thin_store_is_still_refused_when_a_code_was_renamed(self):
+        fat = [register("PORT", [("أسماك م م ح", 3.15)], as_of="2026-03-31", filing="286586"),
+               register("ARAB", [("احمد طارق خليل علي", 26.0)], as_of="2026-06-30",
+                        filing="291753"),
+               register("HBCO", [("محمد اشرف عمر عمر", 9.25), ("وادي للاستشارات", 1.0)],
+                        filing="291900")]
+        with tempfile.TemporaryDirectory() as tmp:
+            out = pathlib.Path(tmp) / "out.json"
+            self._build_into(out, [], books=fat)
+            said = self._build_into(out, [], books=fat[:2], renamed={"PORT": "ARAB"},
+                                    listed=["HBCO"])
+            self.assertIn("refusing to publish", said)
+            self.assertEqual(json.loads(out.read_text(encoding="utf-8"))["peopleCount"], 4)
