@@ -7,12 +7,12 @@
  "sector": "IT , Media & Communication Services",
  "sector_ar": "اتصالات و  اعلام و تكنولوجيا المعلومات",
  "market": {
-  "last_close": 2.17,
+  "last_close": 2.18,
   "date": "2026-09-17",
   "open": 2.16,
   "high": 2.19,
   "low": 2.15,
-  "volume": 22872652
+  "volume": 23371846
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 5245690620,
   "free_float": 0.48338700000000007,
   "float_shares": 2535698651.7299404,
-  "perf_1w": 1.8779342723004713,
-  "perf_1m": 22.59887005649717,
-  "perf_3m": 58.39416058394159,
-  "avg_volume_30d": 72799248.49999996,
-  "relative_volume_10d": 0.473880055149103,
+  "perf_1w": 2.3474178403755994,
+  "perf_1m": 23.163841807909613,
+  "perf_3m": 59.12408759124087,
+  "avg_volume_30d": 72815888.29999995,
+  "relative_volume_10d": 0.4842224535841468,
   "median_volume_20d": 58086062.5,
   "rv20": 0.7553827219739675,
   "normal_value_30d": 119027616.025,
@@ -1332,8 +1332,8 @@
   "history_bars": 120,
   "market_cap": 11435605551.6,
   "market_cap_source": "EGX",
-  "trades": 378,
-  "turnover": 50401264,
+  "trades": 458,
+  "turnover": 53492849,
   "shares_outstanding_source": "EGX"
  },
  "financials": {

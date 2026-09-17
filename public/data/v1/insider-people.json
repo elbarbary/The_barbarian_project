@@ -1,16 +1,16 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-17T09:02:16+00:00",
+ "generated": "2026-09-17T09:38:07+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
  "peopleCount": 1314,
- "tradeCount": 165,
+ "tradeCount": 171,
  "tickerCount": 236,
- "tradedTickerCount": 68,
- "firmCount": 437,
- "personCount": 877,
- "aliasCount": 138,
+ "tradedTickerCount": 70,
+ "firmCount": 436,
+ "personCount": 878,
+ "aliasCount": 140,
  "registerCount": 236,
  "overDisclosed": [],
  "supersededByRegister": [
@@ -236,116 +236,6 @@
    ]
   },
   {
-   "id": "جدوى للتنمية الصناعية",
-   "name": "جدوى للتنمية الصناعية",
-   "nameEn": "Gadwa for Industrial Development",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": [
-    "جدوى للتنميه الصناعيه",
-    "شركة جدوى للتنمية الصناعية"
-   ],
-   "tickers": [
-    "UNIP"
-   ],
-   "tradeCount": 6,
-   "boughtCount": 0,
-   "soldCount": 6,
-   "value": 146727573.84,
-   "singleCompanyMove": {
-    "ticker": "UNIP",
-    "from": 33.38,
-    "to": 13.87,
-    "change": -19.51
-   },
-   "trades": [
-    {
-     "filingId": "293570",
-     "date": "2026-08-19",
-     "ticker": "UNIP",
-     "company": null,
-     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
-     "action": "sell",
-     "shares": 79586982,
-     "price": 0.405,
-     "value": 32232727.71,
-     "stakeBefore": 33.38,
-     "stakeAfter": 29.91,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343135_1.pdf"
-    },
-    {
-     "filingId": "293672",
-     "date": "2026-08-20",
-     "ticker": "UNIP",
-     "company": null,
-     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
-     "action": "sell",
-     "shares": 133000000,
-     "price": 0.386,
-     "value": 51338000.0,
-     "stakeBefore": 29.91,
-     "stakeAfter": 24.11,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343213_1.pdf"
-    },
-    {
-     "filingId": "293748",
-     "date": "2026-08-23",
-     "ticker": "UNIP",
-     "company": null,
-     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
-     "action": "sell",
-     "shares": 68461024,
-     "price": 0.359,
-     "value": 24577507.616,
-     "stakeBefore": 24.11,
-     "stakeAfter": 21.12,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343289_1.pdf"
-    },
-    {
-     "filingId": "293798",
-     "date": "2026-08-24",
-     "ticker": "UNIP",
-     "company": null,
-     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
-     "action": "sell",
-     "shares": 61160000,
-     "price": 0.375,
-     "value": 22935000.0,
-     "stakeBefore": 21.12,
-     "stakeAfter": 18.45,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343368_1.pdf"
-    },
-    {
-     "filingId": "293882",
-     "date": "2026-08-25",
-     "ticker": "UNIP",
-     "company": null,
-     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
-     "action": "sell",
-     "shares": 15000000,
-     "price": 0.372,
-     "value": 5580000.0,
-     "stakeBefore": 18.45,
-     "stakeAfter": 17.79,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343441_1.pdf"
-    },
-    {
-     "filingId": "294588",
-     "date": "2026-09-13",
-     "ticker": "UNIP",
-     "company": null,
-     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
-     "action": "sell",
-     "shares": 26141139,
-     "price": 0.385,
-     "value": 10064338.515,
-     "stakeBefore": 15.01,
-     "stakeAfter": 13.87,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/344094_1.pdf"
-    }
-   ]
-  },
-  {
    "id": "ايمن اسماعيل صلاح عبد المجيد العبد",
    "name": "ايمن اسماعيل صلاح عبد المجيد العبد",
    "nameEn": "Ayman Ismail Salah Abdel Meguid El Abd",
@@ -516,6 +406,45 @@
    ]
   },
   {
+   "id": "عبد الله بن ناصر بن محمد العبيد",
+   "name": "عبد الله بن ناصر بن محمد العبيد",
+   "nameEn": "Abdullah bin Nasser bin Mohammed Al Obeid",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "عبدالله بن ناصر بن محمد العبيد"
+   ],
+   "tickers": [
+    "BIDI"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 3206250.0,
+   "singleCompanyMove": {
+    "ticker": "BIDI",
+    "from": 8.16,
+    "to": 0.0,
+    "change": -8.16
+   },
+   "trades": [
+    {
+     "filingId": "291603",
+     "date": "2026-07-20",
+     "ticker": "BIDI",
+     "company": null,
+     "companyAr": "بي اي دي - البدر للاستثمار والتنمية",
+     "action": "sell",
+     "shares": 1875000,
+     "price": 1.71,
+     "value": 3206250.0,
+     "stakeBefore": 8.16,
+     "stakeAfter": 0.0,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341339_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "ايمان احمد كمال عبد القادر محمد عامر",
    "name": "ايمان احمد كمال عبد القادر محمد عامر",
    "nameEn": "Iman Ahmed Kamal Abdel Kader Mohamed Amer",
@@ -549,6 +478,85 @@
      "stakeBefore": 0,
      "stakeAfter": 7.812,
      "source": "https://www.egx.com.eg/downloads/Bulletins/328552_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "الشركة الوطنية للتجارة والتنمية (انتاد)",
+   "name": "الشركة الوطنية للتجارة والتنمية (انتاد)",
+   "nameEn": "National Company for Trading and Development (ENTAD)",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "KWIN"
+   ],
+   "tradeCount": 4,
+   "boughtCount": 0,
+   "soldCount": 4,
+   "value": 62845587.9,
+   "singleCompanyMove": {
+    "ticker": "KWIN",
+    "from": 19.096,
+    "to": 11.8,
+    "change": -7.296
+   },
+   "trades": [
+    {
+     "filingId": "291633",
+     "date": "2026-07-20",
+     "ticker": "KWIN",
+     "company": null,
+     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
+     "action": "sell",
+     "shares": 300000,
+     "price": 81.24,
+     "value": 24372000.0,
+     "stakeBefore": 19.096,
+     "stakeAfter": 16.24,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341329_1.pdf"
+    },
+    {
+     "filingId": "292191",
+     "date": "2026-07-30",
+     "ticker": "KWIN",
+     "company": null,
+     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
+     "action": "sell",
+     "shares": 274098,
+     "price": 105.16,
+     "value": 28824145.68,
+     "stakeBefore": 15.99,
+     "stakeAfter": 13.38,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341887_1.pdf"
+    },
+    {
+     "filingId": "294356",
+     "date": "2026-09-06",
+     "ticker": "KWIN",
+     "company": null,
+     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
+     "action": "sell",
+     "shares": 60000,
+     "price": 105.72,
+     "value": 6343200.0,
+     "stakeBefore": 13.38,
+     "stakeAfter": 12.81,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343876_1.pdf"
+    },
+    {
+     "filingId": "294525",
+     "date": "2026-09-09",
+     "ticker": "KWIN",
+     "company": null,
+     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
+     "action": "sell",
+     "shares": 34347,
+     "price": 96.26,
+     "value": 3306242.22,
+     "stakeBefore": 12.13,
+     "stakeAfter": 11.8,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344019_1.pdf"
     }
    ]
   },
@@ -1170,71 +1178,6 @@
      "stakeBefore": 5.0527,
      "stakeAfter": 0,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342133_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "الشركة الوطنية للتجارة والتنمية (انتاد)",
-   "name": "الشركة الوطنية للتجارة والتنمية (انتاد)",
-   "nameEn": "National Company for Trading and Development (ENTAD)",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": null,
-   "tickers": [
-    "KWIN"
-   ],
-   "tradeCount": 3,
-   "boughtCount": 0,
-   "soldCount": 3,
-   "value": 38473587.9,
-   "singleCompanyMove": {
-    "ticker": "KWIN",
-    "from": 15.99,
-    "to": 11.8,
-    "change": -4.19
-   },
-   "trades": [
-    {
-     "filingId": "292191",
-     "date": "2026-07-30",
-     "ticker": "KWIN",
-     "company": null,
-     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
-     "action": "sell",
-     "shares": 274098,
-     "price": 105.16,
-     "value": 28824145.68,
-     "stakeBefore": 15.99,
-     "stakeAfter": 13.38,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341887_1.pdf"
-    },
-    {
-     "filingId": "294356",
-     "date": "2026-09-06",
-     "ticker": "KWIN",
-     "company": null,
-     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
-     "action": "sell",
-     "shares": 60000,
-     "price": 105.72,
-     "value": 6343200.0,
-     "stakeBefore": 13.38,
-     "stakeAfter": 12.81,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343876_1.pdf"
-    },
-    {
-     "filingId": "294525",
-     "date": "2026-09-09",
-     "ticker": "KWIN",
-     "company": null,
-     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
-     "action": "sell",
-     "shares": 34347,
-     "price": 96.26,
-     "value": 3306242.22,
-     "stakeBefore": 12.13,
-     "stakeAfter": 11.8,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/344019_1.pdf"
     }
    ]
   },
@@ -1968,6 +1911,45 @@
      "stakeBefore": 3.097,
      "stakeAfter": 5.022,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343684_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "بنادر الاستثماريه",
+   "name": "بنادر الاستثماريه",
+   "nameEn": "Banader Al Istithmariya",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "شركة بنادر الاستثمارية"
+   ],
+   "tickers": [
+    "PRDC"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 175000000.0,
+   "singleCompanyMove": {
+    "ticker": "PRDC",
+    "from": 0,
+    "to": 1.91,
+    "change": 1.91
+   },
+   "trades": [
+    {
+     "filingId": "291547",
+     "date": "2026-07-19",
+     "ticker": "PRDC",
+     "company": null,
+     "companyAr": "بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب",
+     "action": "buy",
+     "shares": 20000000,
+     "price": 8.75,
+     "value": 175000000.0,
+     "stakeBefore": 0,
+     "stakeAfter": 1.91,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341308_1.pdf"
     }
    ]
   },
@@ -3851,6 +3833,126 @@
    ]
   },
   {
+   "id": "جدوى للتنمية الصناعية",
+   "name": "جدوى للتنمية الصناعية",
+   "nameEn": "Gadwa for Industrial Development",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": [
+    "جدوى للتنميه الصناعيه",
+    "شركة جدوى للتنمية الصناعية"
+   ],
+   "tickers": [
+    "ADPC",
+    "UNIP"
+   ],
+   "tradeCount": 7,
+   "boughtCount": 0,
+   "soldCount": 7,
+   "value": 159749573.84,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "291526",
+     "date": "2026-07-19",
+     "ticker": "ADPC",
+     "company": null,
+     "companyAr": "العربية لمنتجات الألبان\" آراب ديرى - باندا\" (آراب ديري-باندا)",
+     "action": "sell",
+     "shares": 3400000,
+     "price": 3.83,
+     "value": 13022000.0,
+     "stakeBefore": 36.25,
+     "stakeAfter": 35.57,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341224_1.pdf"
+    },
+    {
+     "filingId": "293570",
+     "date": "2026-08-19",
+     "ticker": "UNIP",
+     "company": null,
+     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
+     "action": "sell",
+     "shares": 79586982,
+     "price": 0.405,
+     "value": 32232727.71,
+     "stakeBefore": 33.38,
+     "stakeAfter": 29.91,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343135_1.pdf"
+    },
+    {
+     "filingId": "293672",
+     "date": "2026-08-20",
+     "ticker": "UNIP",
+     "company": null,
+     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
+     "action": "sell",
+     "shares": 133000000,
+     "price": 0.386,
+     "value": 51338000.0,
+     "stakeBefore": 29.91,
+     "stakeAfter": 24.11,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343213_1.pdf"
+    },
+    {
+     "filingId": "293748",
+     "date": "2026-08-23",
+     "ticker": "UNIP",
+     "company": null,
+     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
+     "action": "sell",
+     "shares": 68461024,
+     "price": 0.359,
+     "value": 24577507.616,
+     "stakeBefore": 24.11,
+     "stakeAfter": 21.12,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343289_1.pdf"
+    },
+    {
+     "filingId": "293798",
+     "date": "2026-08-24",
+     "ticker": "UNIP",
+     "company": null,
+     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
+     "action": "sell",
+     "shares": 61160000,
+     "price": 0.375,
+     "value": 22935000.0,
+     "stakeBefore": 21.12,
+     "stakeAfter": 18.45,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343368_1.pdf"
+    },
+    {
+     "filingId": "293882",
+     "date": "2026-08-25",
+     "ticker": "UNIP",
+     "company": null,
+     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
+     "action": "sell",
+     "shares": 15000000,
+     "price": 0.372,
+     "value": 5580000.0,
+     "stakeBefore": 18.45,
+     "stakeAfter": 17.79,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343441_1.pdf"
+    },
+    {
+     "filingId": "294588",
+     "date": "2026-09-13",
+     "ticker": "UNIP",
+     "company": null,
+     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
+     "action": "sell",
+     "shares": 26141139,
+     "price": 0.385,
+     "value": 10064338.515,
+     "stakeBefore": 15.01,
+     "stakeAfter": 13.87,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344094_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "جمال عبد الفتاح عثمان حسن",
    "name": "جمال عبد الفتاح عثمان حسن",
    "nameEn": "Gamal Abd El Fattah Othman Hassan",
@@ -4686,6 +4788,60 @@
    ]
   },
   {
+   "id": "بنك مصر",
+   "name": "بنك مصر",
+   "nameEn": "Banque Misr",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": [
+    "بنك مصـــــــــر",
+    "بنك مـــــــصر"
+   ],
+   "tickers": [
+    "GTWL"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 0,
+   "soldCount": 2,
+   "value": 135533287.5,
+   "singleCompanyMove": {
+    "ticker": "GTWL",
+    "from": 3.363,
+    "to": 3.363,
+    "change": 0.0
+   },
+   "trades": [
+    {
+     "filingId": "291627",
+     "date": "2026-07-20",
+     "ticker": "GTWL",
+     "company": null,
+     "companyAr": "جولدن تكس للاصواف",
+     "action": "sell",
+     "shares": 480350,
+     "price": 97.65,
+     "value": 46906177.5,
+     "stakeBefore": 3.363,
+     "stakeAfter": 0.0,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341393_1.pdf"
+    },
+    {
+     "filingId": "291628",
+     "date": "2026-07-20",
+     "ticker": "GTWL",
+     "company": null,
+     "companyAr": "جولدن تكس للاصواف",
+     "action": "sell",
+     "shares": 849000,
+     "price": 104.39,
+     "value": 88627110.0,
+     "stakeBefore": 9.307,
+     "stakeAfter": 3.363,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341387_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "د/ هاشم السيد هاشم دسوقى.",
    "name": "د/ هاشم السيد هاشم دسوقى.",
    "nameEn": "Dr. Hashem El Sayed Hashem Desouky",
@@ -5372,24 +5528,6 @@
    "trades": []
   },
   {
-   "id": "بنك مصر",
-   "name": "بنك مصر",
-   "nameEn": null,
-   "script": null,
-   "kind": "firm",
-   "aliases": [
-    "بنك مصـــــــــر",
-    "بنك مـــــــصر"
-   ],
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
    "id": "كريم عصام ألبير الضبع",
    "name": "كريم عصام ألبير الضبع",
    "nameEn": null,
@@ -6060,21 +6198,6 @@
   {
    "id": "عبدالله بن محمد بن صالح ابالخيل",
    "name": "عبدالله بن محمد بن صالح ابالخيل",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "عبدالله بن ناصر بن محمد العبيد",
-   "name": "عبدالله بن ناصر بن محمد العبيد",
    "nameEn": null,
    "script": null,
    "kind": "person",
@@ -6876,21 +6999,6 @@
   {
    "id": "نعد للاستثمارات والتنمية ش.م.م",
    "name": "نعد للاستثمارات والتنمية ش.م.م",
-   "nameEn": null,
-   "script": null,
-   "kind": "firm",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "شركة بنادر الاستثمارية",
-   "name": "شركة بنادر الاستثمارية",
    "nameEn": null,
    "script": null,
    "kind": "firm",
@@ -24596,20 +24704,6 @@
    "history": []
   },
   {
-   "holder": "جدوى للتنمية الصناعية",
-   "kind": "firm",
-   "ticker": "ADPC",
-   "percent": 36.218,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291519",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/341214_1.pdf",
-   "shares": 181093734,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
-  },
-  {
    "holder": "ابراهيم سيد أحمد سيد أحمد الطحان",
    "kind": "person",
    "ticker": "IBCT",
@@ -24622,6 +24716,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "جدوى للتنمية الصناعية",
+   "kind": "firm",
+   "ticker": "ADPC",
+   "percent": 35.57,
+   "asOf": "2026-07-19",
+   "basis": "trade",
+   "filingId": "291526",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341224_1.pdf",
+   "openedAt": "2026-07-19",
+   "openingPercent": 36.25,
+   "history": [
+    {
+     "date": "2026-07-19",
+     "percent": 35.57
+    }
+   ]
   },
   {
    "holder": "شركة Glacers Asset Holdings Limited",
@@ -28501,9 +28613,13 @@
    "basis": "trade",
    "filingId": "294525",
    "source": "https://www.egx.com.eg/downloads/Bulletins/344019_1.pdf",
-   "openedAt": "2026-07-30",
-   "openingPercent": 15.99,
+   "openedAt": "2026-07-20",
+   "openingPercent": 19.096,
    "history": [
+    {
+     "date": "2026-07-20",
+     "percent": 16.24
+    },
     {
      "date": "2026-07-30",
      "percent": 13.38
@@ -28764,20 +28880,6 @@
    "filingId": "291305",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341006_1.pdf",
    "shares": 126069729,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
-  },
-  {
-   "holder": "بنك مصر",
-   "kind": "firm",
-   "ticker": "GTWL",
-   "percent": 11.141,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291604",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/341335_1.pdf",
-   "shares": 1591350,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -30850,20 +30952,6 @@
    "filingId": "291857",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341607_1.pdf",
    "shares": 82273062,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
-  },
-  {
-   "holder": "عبدالله بن ناصر بن محمد العبيد",
-   "kind": "person",
-   "ticker": "BIDI",
-   "percent": 8.16,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291034",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/340718_1.pdf",
-   "shares": 1875000,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -34515,8 +34603,8 @@
    ]
   },
   {
-   "holder": "شركة بنادر الاستثمارية",
-   "kind": "firm",
+   "holder": "بنادر الاستثماريه",
+   "kind": "person",
    "ticker": "EPCO",
    "percent": 4.61,
    "asOf": "2026-06-30",
@@ -35559,6 +35647,28 @@
     {
      "date": "2026-08-11",
      "percent": 3.4
+    }
+   ]
+  },
+  {
+   "holder": "بنك مصر",
+   "kind": "firm",
+   "ticker": "GTWL",
+   "percent": 3.363,
+   "asOf": "2026-07-20",
+   "basis": "trade",
+   "filingId": "291628",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341387_1.pdf",
+   "openedAt": "2026-07-20",
+   "openingPercent": 3.363,
+   "history": [
+    {
+     "date": "2026-07-20",
+     "percent": 0.0
+    },
+    {
+     "date": "2026-07-20",
+     "percent": 3.363
     }
    ]
   },
@@ -37074,6 +37184,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "بنادر الاستثماريه",
+   "kind": "person",
+   "ticker": "PRDC",
+   "percent": 1.91,
+   "asOf": "2026-07-19",
+   "basis": "trade",
+   "filingId": "291547",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341308_1.pdf",
+   "openedAt": "2026-07-19",
+   "openingPercent": 0,
+   "history": [
+    {
+     "date": "2026-07-19",
+     "percent": 1.91
+    }
+   ]
   },
   {
    "holder": "+شركة بيت الخبرة للاستثمار الاقتصادي - تكنو انفستمنت",
@@ -45309,6 +45437,24 @@
    ]
   },
   {
+   "holder": "عبد الله بن ناصر بن محمد العبيد",
+   "kind": "person",
+   "ticker": "BIDI",
+   "percent": 0.0,
+   "asOf": "2026-07-20",
+   "basis": "trade",
+   "filingId": "291603",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341339_1.pdf",
+   "openedAt": "2026-07-20",
+   "openingPercent": 8.16,
+   "history": [
+    {
+     "date": "2026-07-20",
+     "percent": 0.0
+    }
+   ]
+  },
+  {
    "holder": "محمد محمود حسن جاب الله",
    "kind": "person",
    "ticker": "EPPK",
@@ -45555,11 +45701,21 @@
    "end": "2026-07-22",
    "label": "19–22 Jul",
    "labelAr": "19–22 يوليو",
-   "sessions": 3,
-   "buys": 2,
-   "sells": 3,
-   "value": 65441868.7,
+   "sessions": 4,
+   "buys": 3,
+   "sells": 8,
+   "value": 416575406.2,
    "moves": [
+    {
+     "holder": "عبد الله بن ناصر بن محمد العبيد",
+     "kind": "person",
+     "ticker": "BIDI",
+     "from": 8.16,
+     "to": 0.0,
+     "trades": 1,
+     "value": 3206250.0,
+     "change": -8.16
+    },
     {
      "holder": "ايمن اسماعيل صلاح عبد المجيد العبد",
      "kind": "person",
@@ -45569,6 +45725,26 @@
      "trades": 1,
      "value": 15760400.0,
      "change": -3.81
+    },
+    {
+     "holder": "الشركة الوطنية للتجارة والتنمية (انتاد)",
+     "kind": "firm",
+     "ticker": "KWIN",
+     "from": 19.096,
+     "to": 16.24,
+     "trades": 1,
+     "value": 24372000.0,
+     "change": -2.856
+    },
+    {
+     "holder": "بنادر الاستثماريه",
+     "kind": "person",
+     "ticker": "PRDC",
+     "from": 0,
+     "to": 1.91,
+     "trades": 1,
+     "value": 175000000.0,
+     "change": 1.91
     },
     {
      "holder": "أسامة فوزي محمد سعيد",
@@ -45591,6 +45767,16 @@
      "change": 1.26
     },
     {
+     "holder": "جدوى للتنمية الصناعية",
+     "kind": "firm",
+     "ticker": "ADPC",
+     "from": 36.25,
+     "to": 35.57,
+     "trades": 1,
+     "value": 13022000.0,
+     "change": -0.68
+    },
+    {
      "holder": "محمد اشرف عمر عمر",
      "kind": "person",
      "ticker": "OBRI",
@@ -45609,6 +45795,16 @@
      "trades": 1,
      "value": 1331936.4,
      "change": -0.2382
+    },
+    {
+     "holder": "بنك مصر",
+     "kind": "firm",
+     "ticker": "GTWL",
+     "from": 3.363,
+     "to": 3.363,
+     "trades": 2,
+     "value": 135533287.5,
+     "change": 0.0
     }
    ]
   },
