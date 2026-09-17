@@ -982,6 +982,15 @@ export async function company(ticker) {
     // The exchange's final delisting notice, when there is one: the share
     // trades over the counter now, and the header says so.
     listing: d.listing || null,
+    // The newest session the document holds, volume included — which prices/
+    // does not carry. A share that trades only on Mondays and Wednesdays
+    // shows Wednesday's price all Thursday, and this is how the header tells
+    // a price from today apart from the last one it had.
+    lastSession: (() => {
+      const bars = d.price_history || [];
+      const bar = bars.length ? bars[bars.length - 1] : null;
+      return bar && bar.date ? { date: bar.date, close: bar.close ?? null, volume: bar.volume ?? null } : null;
+    })(),
     name: d.name,
     brief: brief ? (brief.story || brief.history || '') : '',
     briefAr: brief ? (brief.story_ar || brief.history_ar || '') : '',

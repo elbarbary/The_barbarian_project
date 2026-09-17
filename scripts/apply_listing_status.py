@@ -16,6 +16,8 @@ So the directory row and the company document each carry a `listing` note:
       "delisted_on": "2021-06-14", "news_id": 211501,
       "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=211501",
       "kind": "voluntary",
+      "trading_days": ["monday", "wednesday"],
+      "trading_days_link": "https://www.egx.com.eg/en/OTC-Overview.aspx",
       "note": "Delisted from the Egyptian Exchange — …",
       "note_ar": "مشطوبة من البورصة المصرية — …"
     }
@@ -24,6 +26,23 @@ Every figure in it is the exchange's own notice, read by `listing_status`; the
 two sentences are fixed templates around those figures, and say no more than
 the notices do. Thirteen of the fourteen notices name the over-the-counter
 system outright, and the vendor still reports trades for all of them.
+
+THE TWO DAYS
+------------
+The system does not trade every session. The exchange's own page on it
+(OTC-Overview.aspx) says the orders mechanism for delisted shares runs "weekly
+on Monday and Wednesday at a settlement (T+3)" — in Arabic, "بيومي الأثنين
+والأربعاء من كل أسبوع". The prices agree. On 17 September 2026 thirteen of
+these companies had prices after their final notice, 4,578 sessions between
+them, and 4,575 fell on a Monday or a Wednesday. The other three, one each
+for IRAX, PACH and DCRC, came within four days of the notice, before the
+pattern starts.
+
+A reader was not told. The price on a Thursday is Wednesday's, and it was
+printed "as of" Thursday with Wednesday's move beside it — ALEX's −7.8% sat
+fifth among Thursday's largest moves on the exchange, on a day it cannot
+trade. So the note names the days, and carries them as data for the screens
+that date a price.
 
 What a delisted company does NOT get is decided elsewhere and stays that way:
 no calendar window for results it will never file with the exchange
@@ -58,6 +77,11 @@ FIXTURES = REPO / "app" / "assets" / "fixtures"
 
 KEY = "listing"
 
+# Where the exchange states the days, and the days it states. English day
+# names, lower case, so a screen can key its own label off them.
+OTC_RULES = "https://www.egx.com.eg/en/OTC-Overview.aspx"
+OTC_DAYS = ("monday", "wednesday")
+
 
 def note(record: dict) -> dict:
     """The note for one delisted company, from its final notice."""
@@ -71,13 +95,16 @@ def note(record: dict) -> dict:
         "news_id": code,
         "link": record["link"],
         "kind": record.get("kind"),
+        "trading_days": list(OTC_DAYS),
+        "trading_days_link": OTC_RULES,
         "note": (f"Delisted from the Egyptian Exchange — final delisting notice of "
                  f"{date} (EGX NewsID {code}). Its shares trade over the counter, "
-                 f"not on the exchange."),
+                 f"not on the exchange, and only on Mondays and Wednesdays."),
         # "خارج المقصورة" is the exchange's own phrase for the OTC system, in
         # the notices themselves (211501: "بنظام نقل الملكية (خارج المقصورة)").
         "note_ar": (f"مشطوبة من البورصة المصرية — إخطار الشطب النهائي بتاريخ {date} "
-                    f"(رقم {code}). تُتداول أسهمها خارج المقصورة، وليس في البورصة."),
+                    f"(رقم {code}). تُتداول أسهمها خارج المقصورة، وليس في البورصة، "
+                    f"يومي الاثنين والأربعاء فقط."),
     }
 
 

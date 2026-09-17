@@ -171,6 +171,46 @@ export function heatColour(pct) {
 
 export const DIRECTIVE = /\b(buy|sell|hold|avoid|accumulate|overweight|underweight|undervalued|overvalued|cheap|expensive|bargain|verdicts?|recommend\w*|target price|price target|should (buy|sell|own|avoid)|go (long|short)|(long|short) position|will (rise|fall|reach|hit))\b/i;
 
+/* The days a delisted share trades, in the reader's language.
+ *
+ * The exchange's over-the-counter orders system for delisted shares runs on
+ * Mondays and Wednesdays only (EGX, OTC-Overview.aspx), and the pipeline puts
+ * the days on the company's `listing` note as English day names. Nothing here
+ * decides the days; a note without them gives an empty string, and the line
+ * that would print them is not drawn. */
+const WEEKDAYS = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+const OTC_DAY_NAMES = {
+  sunday: ['Sundays', 'الأحد'], monday: ['Mondays', 'الاثنين'], tuesday: ['Tuesdays', 'الثلاثاء'],
+  wednesday: ['Wednesdays', 'الأربعاء'], thursday: ['Thursdays', 'الخميس'],
+};
+export function otcDaysText(listing, ar) {
+  const days = ((listing && Array.isArray(listing.trading_days)) ? listing.trading_days : [])
+    .map((d) => OTC_DAY_NAMES[d]).filter(Boolean).map((n) => n[ar ? 1 : 0]);
+  if (!days.length) return '';
+  if (ar) return (days.length === 1 ? 'يوم ' : 'يومي ') + days.join(' و');
+  return days.length === 1 ? days[0] : days.slice(0, -1).join(', ') + ' and ' + days[days.length - 1];
+}
+
+/* Which session an over-the-counter price is from.
+ *
+ * The vendor keeps quoting a delisted share's last trade, and the market
+ * document stamps every quote with the exchange's session date. So TORA's
+ * Wednesday trade, 61.13 and −4.48% on 16 September 2026, was printed "as of"
+ * Thursday the 17th, a day it cannot trade. The document's newest session is
+ * the trade's own date. The one time the quote is newer is during a Monday or
+ * Wednesday session, before the evening build writes it, and then the quote
+ * differs from that session and has volume.
+ */
+export function otcTradeDate(listing, last, quote, marketDate) {
+  if (!listing || !last || !last.date) return null;
+  const days = Array.isArray(listing.trading_days) ? listing.trading_days : [];
+  const at = marketDate ? new Date(marketDate + 'T00:00:00Z') : null;
+  const tradingDay = Boolean(at && !isNaN(at) && days.includes(WEEKDAYS[at.getUTCDay()]));
+  const traded = typeof quote.volume === 'number' && quote.volume > 0
+    && (quote.close !== last.close || quote.volume !== last.volume);
+  return tradingDay && traded && marketDate > last.date ? marketDate : last.date;
+}
+
 
 /* How a company's filings are grouped on its Filings tab.
  *
@@ -662,6 +702,8 @@ export class Component extends Base {
       noMatchTitle:'Nothing matches', noMatchBody:'No company in the filed set matches this search and this sector.', clearFilters:'Clear filters',
       lastClose:'Last close', asOf:'As of', priceHistory:'Price history', sessionsShown:'Sessions', whoTheyAre:'Who they are',
       otcTag:'OTC', delistingNotice:'EGX notice',
+      otcLastPrice:'Last OTC price', otcTraded:'Traded', otcRules:'EGX rules', otcOn:'on {day}',
+      otcDays:'{days} only', otcDaysShort:'OTC · {days} only',
       asFiled:'Financials, as filed', egpMillions:'EGP millions unless stated', period:'Period', revenue:'Revenue',
       grossProfit:'Gross profit', operatingIncome:'Operating income', netIncome:'Net income',
       cumulativeWarning:'Periods are cumulative as the exchange files them. H1 and 9M are year-to-date and are not comparable to a single quarter. Nothing here is subtracted to synthesise a quarter, and a blank is a figure the filing did not state — not a zero.',
@@ -1036,6 +1078,8 @@ export class Component extends Base {
       noMatchTitle:'لا نتائج', noMatchBody:'لا توجد شركة في المجموعة المُفصح عنها تطابق هذا البحث وهذا القطاع.', clearFilters:'مسح التصفية',
       lastClose:'آخر إغلاق', asOf:'بتاريخ', priceHistory:'تاريخ السعر', sessionsShown:'جلسات', whoTheyAre:'نبذة عن الشركة',
       otcTag:'خارج المقصورة', delistingNotice:'إخطار البورصة',
+      otcLastPrice:'آخر سعر خارج المقصورة', otcTraded:'تداول', otcRules:'قواعد البورصة', otcOn:'يوم {day}',
+      otcDays:'{days} فقط', otcDaysShort:'خارج المقصورة · {days} فقط',
       asFiled:'القوائم المالية كما وردت', egpMillions:'بملايين الجنيهات ما لم يُذكر غير ذلك', period:'الفترة', revenue:'الإيرادات',
       grossProfit:'الربح الإجمالي', operatingIncome:'الربح التشغيلي', netIncome:'صافي الربح',
       cumulativeWarning:'الفترات تراكمية كما تُقدّمها البورصة. النصف الأول وتسعة أشهر أرقام من بداية العام ولا تُقارن بربع واحد. لا يُطرح شيء لاستخراج ربع، والخانة الفارغة رقم لم يذكره الإفصاح — وليست صفراً.',
@@ -1765,6 +1809,11 @@ export class Component extends Base {
       // Delisted by the exchange and dealt in over the counter. The row stays,
       // because a holder can still find the share; the tag says where it trades.
       otc: Boolean(c.listing), otcTag: L.otcTag,
+      // On hover, the days it trades: the row's move is from the last of them.
+      otcTitle: (() => {
+        const days = c.listing ? otcDaysText(c.listing, ar) : '';
+        return days ? L.otcDaysShort.replace('{days}', days) : '';
+      })(),
       // A price in another currency says which. It is one word, and without
       // it the figure is wrong by a factor of fifty.
       close: c.close === '\u2014' ? '\u2014'
@@ -1804,7 +1853,12 @@ export class Component extends Base {
         this.onWatch && this.onWatch(c.ticker); } });
 
     // home
-    const byMove = D.companies.filter(c => c.pct !== null).slice().sort((a,b) => Math.abs(b.pct) - Math.abs(a.pct));
+    // Not a delisted share. It trades over the counter on Mondays and
+    // Wednesdays, and its quote holds the last of those all week: on Thursday
+    // 17 September 2026 ALEX's Wednesday −7.83% was fifth among the session's
+    // largest moves, on a day it cannot trade. The busiest block below leaves
+    // these out for the same reason.
+    const byMove = D.companies.filter(c => c.pct !== null && !c.listing).slice().sort((a,b) => Math.abs(b.pct) - Math.abs(a.pct));
     const movers = byMove.slice(0,9).map(mkRow);
     // The design named five tickers; a real dataset may not contain them, and a
     // demo deliberately does not. Prefer the named ones when present, then fill
@@ -2084,9 +2138,10 @@ export class Component extends Base {
     // exist, at 12.40, with a description explaining what briefs/KORA.json
     // would have said. Under a real ticker in the header, that is an invented
     // company file.
-    const co = D.demo ? Object.assign({ delisted: false, listingNote: '', listingLink: '' }, coDesign) : {
+    const otcDefaults = { closeLabel: L.lastClose, closeWhen: L.asOf, otcDays: '', otcRulesLink: '' };
+    const co = D.demo ? Object.assign({ delisted: false, listingNote: '', listingLink: '' }, otcDefaults, coDesign) : {
       ticker: st.ticker || '—', sector:'—', sectorKey:'', exchange:'EGX',
-      delisted: false, listingNote: '', listingLink: '',
+      delisted: false, listingNote: '', listingLink: '', ...otcDefaults,
       nameEn: st.ticker || '—', nameAr: st.ticker || '—',
       primaryName: st.ticker || '—', secondaryName: '',
       primaryFont: ar ? "'IBM Plex Sans Arabic',sans-serif" : "'Bricolage Grotesque',serif",
@@ -2105,6 +2160,17 @@ export class Component extends Base {
       const sessionValue = num(loaded.turnover) ?? num(p.turnover);
       const perf = (v) => (v === null || v === undefined ? '—' : this.pct(v));
       const whole = (v) => (v === null || v === undefined ? '—' : this.num(v, 0));
+      // A delisted share's price is dated by its own last trade, and labelled
+      // an over-the-counter price once that trade is after the notice. RMTV's
+      // last print came on the exchange before its notice, and stays a close.
+      const otcDate = loaded.listing
+        ? otcTradeDate(loaded.listing, loaded.lastSession,
+          { close: loaded.close, volume: loaded.volume }, D.marketDate)
+        : null;
+      const otcPrice = Boolean(otcDate && loaded.listing.delisted_on && otcDate > loaded.listing.delisted_on);
+      // "In the session" is the exchange's session. A delisted share's volume
+      // is its last over-the-counter day's, so the tiles name that day.
+      const sessionNote = otcDate ? L.otcOn.replace('{day}', this.shortDay(otcDate)) : (ar?'في الجلسة':'in the session');
       Object.assign(co, {
         // Delisted by the exchange, still dealt in over the counter. The page
         // stays — a holder can still read it — and says so under the name,
@@ -2119,6 +2185,15 @@ export class Component extends Base {
         })(),
         listingLink: (loaded.listing && loaded.listing.link) || '',
         exchange: loaded.listing ? L.otcTag : co.exchange,
+        // Beside the price, where the date is read: which days it can trade,
+        // with the exchange's page that says so.
+        otcDays: (() => {
+          const days = otcDaysText(loaded.listing, ar);
+          return days ? L.otcDays.replace('{days}', days) : '';
+        })(),
+        otcRulesLink: (loaded.listing && loaded.listing.trading_days_link) || '',
+        closeLabel: otcPrice ? L.otcLastPrice : L.lastClose,
+        closeWhen: otcPrice ? L.otcTraded : L.asOf,
         brief: (() => { const b = (ar ? loaded.briefAr : loaded.brief) || ''; return (b && !DIRECTIVE.test(b) ? b : '') || L.nothingYet; })(),
         briefFacts: [
           { label: ar?'القطاع':'Sector', value: sectorName(loaded.sector) },
@@ -2151,7 +2226,7 @@ export class Component extends Base {
           // 3,192,564 against an actual 5,780,737 already in memory. The
           // average is worth having and now says that it is one.
           { label: ar?'الحجم':'Volume', value: whole(loaded.volume), color:'var(--ink)',
-            note: ar?'في الجلسة':'in the session' },
+            note: sessionNote },
           { label: ar?'متوسط ٣٠ يوماً':'30-day average', value: whole(p.avg_volume_30d),
             color:'var(--t2)', note:'' },
           /* How many times the share changed hands, and for how much.
@@ -2170,11 +2245,11 @@ export class Component extends Base {
            */
           { label: ar?'الصفقات':'Trades',
             value: whole(sessionTrades), color: sessionTrades === null ? 'var(--faint)' : 'var(--ink)',
-            note: sessionTrades === null ? '' : (ar?'في الجلسة':'in the session') },
+            note: sessionTrades === null ? '' : sessionNote },
           { label: ar?'قيمة التداول':'Turnover',
             value: sessionValue === null ? '\u2014' : this.money(sessionValue),
             color: sessionValue === null ? 'var(--faint)' : 'var(--ink)',
-            note: sessionValue === null ? '' : (ar?'في الجلسة':'in the session') },
+            note: sessionValue === null ? '' : sessionNote },
           // The multiple the pipeline published, beside the price it was struck
           // against. This used to prefer the review document's figure, which is
           // a different claim wearing the same two letters: the review divides
@@ -2246,7 +2321,10 @@ export class Component extends Base {
         color: this.dcol(pct),
         // As above: exactly flat is not a fall.
         arrow: !pct ? '' : (pct > 0 ? '\u2197' : '\u2198'),
-        closeDate: loaded.closeDate || D.marketDate || co.closeDate,
+        // The weekday is the point for a share that trades two days a week:
+        // "Wednesday 16 September 2026" answers what "2026-09-16" does not.
+        closeDate: otcDate ? this.weekdayDate(otcDate)
+          : (loaded.closeDate || D.marketDate || co.closeDate),
         briefSource: loaded.briefSource || `companies/${loaded.ticker}.json`,
       });
     }
@@ -5215,6 +5293,23 @@ export class Component extends Base {
     if (isNaN(at)) return iso;
     return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
       { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(at);
+  }
+
+  /** "2026-09-16" with its weekday, for a share that trades on two of them. */
+  weekdayDate(iso) {
+    if (!iso) return '—';
+    const at = new Date(String(iso).slice(0, 10) + 'T00:00:00Z');
+    if (isNaN(at)) return String(iso);
+    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
+      { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(at);
+  }
+
+  /** "Wed 16 Sep", for a tile note under a delisted share's volume. */
+  shortDay(iso) {
+    const at = new Date(String(iso || '').slice(0, 10) + 'T00:00:00Z');
+    if (isNaN(at)) return String(iso || '');
+    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
+      { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' }).format(at);
   }
 
   /** A clock reading in Cairo, which is the only clock the exchange keeps.

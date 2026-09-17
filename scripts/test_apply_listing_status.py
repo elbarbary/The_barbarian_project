@@ -34,6 +34,17 @@ class TheNote(unittest.TestCase):
         # The exchange's own phrase for where the shares went.
         self.assertIn("خارج المقصورة", got["note_ar"])
 
+    def test_it_names_the_two_days_the_system_trades(self):
+        # EGX's OTC overview: "weekly on Monday and Wednesday". A Thursday
+        # price is Wednesday's, and a reader who is not told reads it as
+        # Thursday's.
+        got = apply.note(NCGC)
+        self.assertEqual(got["trading_days"], ["monday", "wednesday"])
+        self.assertEqual(got["trading_days_link"],
+                         "https://www.egx.com.eg/en/OTC-Overview.aspx")
+        self.assertIn("only on Mondays and Wednesdays", got["note"])
+        self.assertIn("يومي الاثنين والأربعاء فقط", got["note_ar"])
+
     def test_it_states_a_fact_and_advises_nothing(self):
         # §8. "Trades over the counter" is where the shares are dealt, not a
         # suggestion to deal in them.
