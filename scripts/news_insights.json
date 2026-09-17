@@ -2479,6 +2479,10 @@
     "meaning": "The discussions involve the operational framework and state-level cooperation with Intesa Sanpaolo, the majority shareholder of Bank of Alexandria, regarding its banking presence and credit activities in the domestic market.",
     "meaning_ar": "تتناول المباحثات أطر التعاون المؤسسي والتنظيمي مع مجموعة إنتيسا سان باولو، بصفتها المساهم الرئيسي في بنك الإسكندرية، فيما يخص أنشطتها المصرفية والتمويلية داخل السوق المحلية."
   },
+  "الحكومه تبحث مقترحا لتنفيذ نموذج متكامل لزراعه وتصنيع الكتان": {
+    "meaning": "The proposal establishes a vertically integrated supply chain model that links domestic flax cultivation directly to industrial processing facilities, establishing local inputs for textile and fiber manufacturing operations.",
+    "meaning_ar": "يتضمن المقترح نموذجاً لسلاسل إمداد متكاملة رأسياً يربط زراعة الكتان المحلية مباشرة بمصانع التحويل والتصنيع، لتوفير مدخلات إنتاج محلية لصناعات الغزل والنسيج والألياف."
+  },
   "الحكومه تبدا تشجير الطريق الدايري وعدد من المحاور والطرق الرييسيه": {
     "meaning": "The project allocates public infrastructure expenditures directly to the landscaping, agricultural supply, and urban contracting sectors.",
     "meaning_ar": "يوجّه المشروع مخصصات الإنفاق على البنية التحتية العامة مباشرة نحو قطاعات التشجير، والتوريدات الزراعية، والمقاولات العامة."
@@ -4419,6 +4423,10 @@
   "ترامب يطالب زيلينسكي بوقف استهداف البنيه التحتيه للديزل في روسيا": {
     "meaning": "Attacks on refining assets affect Russian diesel export capacities and global middle-distillate supply balances, which directly influence benchmark energy input costs and shipping freight rates across import-dependent markets.",
     "meaning_ar": "تؤثر الهجمات على منشآت التكرير في الطاقة التصديرية للديزل الروسي وفي توازنات المعروض العالمي من المشتقات الوسيطة، وهو ما ينعكس مباشرة على تكاليف مدخلات الطاقة وأسعار الشحن البحري في الأسواق المعتمدة على الاستيراد."
+  },
+  "ترامب يهدد الاتحاد الاوروبي بتقليص التبادل التجاري بسبب خطه الشراكه مع كندا": {
+    "meaning": "Tariff and trade restriction threats between major economic blocs alter international commercial terms, realigning global export volumes and supply chain routing.",
+    "meaning_ar": "يؤدي التهديد بفرض قيود جمركية وتجارية بين التكتلات الاقتصادية الكبرى إلى تعديل الشروط التجارية الدولية وإعادة توجيه مسارات سلاسل الإمداد وحركة الصادرات العالمية."
   },
   "ترامب: 5 الاف دولار لكل امريكي حال فوز الجمهوريين بالانتخابات النصفيه": {
     "meaning": "Direct cash transfers to citizens represent fiscal expansion funded through government debt or budget reallocations, which alters aggregate consumer liquidity and sovereign debt levels in the United States.",
@@ -7252,6 +7260,10 @@
   "مطاحن الاسكندريه تتراجع بارباحها بنهايه يونيو": {
     "meaning": "The company's full-year or fiscal period financial statements reflect a decrease in net income at the close of June, indicating that total revenues grew at a slower pace than operating expenses and production inputs such as wheat and energy.",
     "meaning_ar": "تُظهر القوائم المالية للشركة تراجعاً في صافي أرباح الفترة المنتهية في يونيو، وهو ما يعكس نمو الإيرادات بمعدل أقل من التكاليف التشغيلية ومدخلات الإنتاج مثل القمح والطاقة."
+  },
+  "مطاحن غرب الدلتا تقرر توزيع ارباح علي المساهمين": {
+    "meaning": "A cash dividend distribution transfers accrued net earnings directly from the company's retained earnings account to shareholders, reducing total cash balances on the balance sheet.",
+    "meaning_ar": "يؤدي توزيع الأرباح النقدية إلى تحويل جزء من الأرباح الصافية المحققة من حساب الأرباح المرحلة إلى المساهمين، مما يترتب عليه تخفيض الرصيد النقدي في الميزانية العمومية للشركة."
   },
   "مطالب بفرص عادله للشركات الصغيره والمتوسطه في “شمس الصناعه”": {
     "meaning": "The headline refers to industry calls to allocate defined quotas or participation frameworks for small and medium-sized enterprises within the 'Shams El-Senaa' (Industry Sun) initiative, integrating them into the procurement and supply chains of larger national industrial projects.",
