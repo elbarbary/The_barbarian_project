@@ -1,16 +1,16 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-17T09:38:07+00:00",
+ "generated": "2026-09-17T10:19:35+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1314,
- "tradeCount": 171,
+ "peopleCount": 1318,
+ "tradeCount": 177,
  "tickerCount": 236,
- "tradedTickerCount": 70,
+ "tradedTickerCount": 74,
  "firmCount": 436,
- "personCount": 878,
- "aliasCount": 140,
+ "personCount": 882,
+ "aliasCount": 141,
  "registerCount": 236,
  "overDisclosed": [],
  "supersededByRegister": [
@@ -232,6 +232,43 @@
      "stakeBefore": 0.25017,
      "stakeAfter": 0.24199,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "علاء الدين احمد فتوح فرحات",
+   "name": "علاء الدين احمد فتوح فرحات",
+   "nameEn": "Alaa El Din Ahmed Fattouh Farahat",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "BIDI"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 9159505.0,
+   "singleCompanyMove": {
+    "ticker": "BIDI",
+    "from": 0.0,
+    "to": 22.87,
+    "change": 22.87
+   },
+   "trades": [
+    {
+     "filingId": "291465",
+     "date": "2026-07-16",
+     "ticker": "BIDI",
+     "company": null,
+     "companyAr": "بي اي دي - البدر للاستثمار والتنمية",
+     "action": "buy",
+     "shares": 5249000,
+     "price": 1.745,
+     "value": 9159505.0,
+     "stakeBefore": 0.0,
+     "stakeAfter": 22.87,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341168_1.pdf"
     }
    ]
   },
@@ -1358,81 +1395,41 @@
    ]
   },
   {
-   "id": "السيد صابر السيد حميد",
-   "name": "السيد صابر السيد حميد",
-   "nameEn": "El Sayed Saber El Sayed Hameed",
+   "id": "نجيبه نور الدين احمد حلاوة",
+   "name": "نجيبه نور الدين احمد حلاوة",
+   "nameEn": "Nagiba Nour El Din Ahmed Halawa",
    "script": "ar",
    "kind": "person",
-   "aliases": null,
-   "tickers": [
-    "RREI"
+   "aliases": [
+    "نجيبه نور الدين احمد حلاوه"
    ],
-   "tradeCount": 4,
-   "boughtCount": 3,
+   "tickers": [
+    "BIGP"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
    "soldCount": 1,
-   "value": 55323332.89,
+   "value": 4640400.0,
    "singleCompanyMove": {
-    "ticker": "RREI",
-    "from": 0.0,
-    "to": 3.4,
-    "change": 3.4
+    "ticker": "BIGP",
+    "from": 10.29,
+    "to": 6.633,
+    "change": -3.657
    },
    "trades": [
     {
-     "filingId": "292144",
-     "date": "2026-07-29",
-     "ticker": "RREI",
+     "filingId": "291427",
+     "date": "2026-07-15",
+     "ticker": "BIGP",
      "company": null,
-     "companyAr": "الاستثمار العقاري العربي - اليكو",
-     "action": "buy",
-     "shares": 2033948,
-     "price": 4.557,
-     "value": 9268701.036,
-     "stakeBefore": 0.0,
-     "stakeAfter": 5.12,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341848_1.pdf"
-    },
-    {
-     "filingId": "292348",
-     "date": "2026-07-29",
-     "ticker": "RREI",
-     "company": null,
-     "companyAr": "الاستثمار العقاري العربي - اليكو",
-     "action": "buy",
-     "shares": 2033948,
-     "price": 4.557,
-     "value": 9268701.036,
-     "stakeBefore": 0,
-     "stakeAfter": 0.825,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342023_1.pdf"
-    },
-    {
-     "filingId": "292381",
-     "date": "2026-08-03",
-     "ticker": "RREI",
-     "company": null,
-     "companyAr": "الاستثمار العقاري العربي - اليكو",
-     "action": "buy",
-     "shares": 3500000,
-     "price": 4.683,
-     "value": 16390500.0,
-     "stakeBefore": 3.7,
-     "stakeAfter": 5.12,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342031_1.pdf"
-    },
-    {
-     "filingId": "292751",
-     "date": "2026-08-11",
-     "ticker": "RREI",
-     "company": null,
-     "companyAr": "الاستثمار العقاري العربي - اليكو",
+     "companyAr": "بى اى جى للتجارة والاستثمار",
      "action": "sell",
-     "shares": 4227558,
-     "price": 4.8244,
-     "value": 20395430.8152,
-     "stakeBefore": 5.12,
-     "stakeAfter": 3.4,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342366_1.pdf"
+     "shares": 12000000,
+     "price": 0.3867,
+     "value": 4640400.0,
+     "stakeBefore": 10.29,
+     "stakeAfter": 6.633,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341135_1.pdf"
     }
    ]
   },
@@ -2572,6 +2569,43 @@
    ]
   },
   {
+   "id": "احمد عز الدين احمد زين زين",
+   "name": "احمد عز الدين احمد زين زين",
+   "nameEn": "Ahmed Ezz El Din Ahmed Zein Zein",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "UTOP"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 1821512.14,
+   "singleCompanyMove": {
+    "ticker": "UTOP",
+    "from": 5.67,
+    "to": 4.94,
+    "change": -0.73
+   },
+   "trades": [
+    {
+     "filingId": "291508",
+     "date": "2026-07-16",
+     "ticker": "UTOP",
+     "company": null,
+     "companyAr": "يوتوبيا للاستثمار العقاري والسياحي",
+     "action": "sell",
+     "shares": 21938,
+     "price": 83.03,
+     "value": 1821512.1400000001,
+     "stakeBefore": 5.67,
+     "stakeAfter": 4.94,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341233_1.PDF"
+    }
+   ]
+  },
+  {
    "id": "دعاء علوى فهمى محمد",
    "name": "دعاء علوى فهمى محمد",
    "nameEn": "Doaa Alawi Fahmy Mohamed",
@@ -2605,6 +2639,43 @@
      "stakeBefore": 4.979,
      "stakeAfter": 5.66,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343107_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "أحمد حمدى أحمد محمد زياد الدبيكي",
+   "name": "أحمد حمدى أحمد محمد زياد الدبيكي",
+   "nameEn": "Ahmed Hamdy Ahmed Mohamed Ziad El Debaiky",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "AMPI"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 575773.0,
+   "singleCompanyMove": {
+    "ticker": "AMPI",
+    "from": 2.873,
+    "to": 3.498,
+    "change": 0.625
+   },
+   "trades": [
+    {
+     "filingId": "291509",
+     "date": "2026-07-16",
+     "ticker": "AMPI",
+     "company": null,
+     "companyAr": "نوفيدا للاستثمار والتكنولوجيا",
+     "action": "buy",
+     "shares": 187000,
+     "price": 3.079,
+     "value": 575773.0,
+     "stakeBefore": 2.873,
+     "stakeAfter": 3.498,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341234_1.pdf"
     }
    ]
   },
@@ -2720,6 +2791,43 @@
      "stakeBefore": 4.817,
      "stakeAfter": 5.333,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342100_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "المتوكل علي الله جمعه محمد",
+   "name": "المتوكل علي الله جمعه محمد",
+   "nameEn": "Al Motawakel Ala Allah Gomaa Mohamed",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "DGTZ"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 1371605.49,
+   "singleCompanyMove": {
+    "ticker": "DGTZ",
+    "from": 10.462,
+    "to": 9.979,
+    "change": -0.483
+   },
+   "trades": [
+    {
+     "filingId": "291463",
+     "date": "2026-07-16",
+     "ticker": "DGTZ",
+     "company": null,
+     "companyAr": "ديچيتايز للاستثمار والتكنولوجيا",
+     "action": "sell",
+     "shares": 521523,
+     "price": 2.63,
+     "value": 1371605.49,
+     "stakeBefore": 10.462,
+     "stakeAfter": 9.979,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341171_1.pdf"
     }
    ]
   },
@@ -4068,6 +4176,95 @@
      "stakeBefore": 15.08,
      "stakeAfter": 7.59,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343680_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "السيد صابر السيد حميد",
+   "name": "السيد صابر السيد حميد",
+   "nameEn": "El Sayed Saber El Sayed Hameed",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "PRCL",
+    "RREI"
+   ],
+   "tradeCount": 5,
+   "boughtCount": 4,
+   "soldCount": 1,
+   "value": 58076892.89,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "291525",
+     "date": "2026-07-19",
+     "ticker": "PRCL",
+     "company": null,
+     "companyAr": "العامة لمنتجات الخزف والصيني (شينى)",
+     "action": "buy",
+     "shares": 82000,
+     "price": 33.58,
+     "value": 2753560.0,
+     "stakeBefore": 4.999,
+     "stakeAfter": 5.16,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341223_1.pdf"
+    },
+    {
+     "filingId": "292144",
+     "date": "2026-07-29",
+     "ticker": "RREI",
+     "company": null,
+     "companyAr": "الاستثمار العقاري العربي - اليكو",
+     "action": "buy",
+     "shares": 2033948,
+     "price": 4.557,
+     "value": 9268701.036,
+     "stakeBefore": 0.0,
+     "stakeAfter": 5.12,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341848_1.pdf"
+    },
+    {
+     "filingId": "292348",
+     "date": "2026-07-29",
+     "ticker": "RREI",
+     "company": null,
+     "companyAr": "الاستثمار العقاري العربي - اليكو",
+     "action": "buy",
+     "shares": 2033948,
+     "price": 4.557,
+     "value": 9268701.036,
+     "stakeBefore": 0,
+     "stakeAfter": 0.825,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342023_1.pdf"
+    },
+    {
+     "filingId": "292381",
+     "date": "2026-08-03",
+     "ticker": "RREI",
+     "company": null,
+     "companyAr": "الاستثمار العقاري العربي - اليكو",
+     "action": "buy",
+     "shares": 3500000,
+     "price": 4.683,
+     "value": 16390500.0,
+     "stakeBefore": 3.7,
+     "stakeAfter": 5.12,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342031_1.pdf"
+    },
+    {
+     "filingId": "292751",
+     "date": "2026-08-11",
+     "ticker": "RREI",
+     "company": null,
+     "companyAr": "الاستثمار العقاري العربي - اليكو",
+     "action": "sell",
+     "shares": 4227558,
+     "price": 4.8244,
+     "value": 20395430.8152,
+     "stakeBefore": 5.12,
+     "stakeAfter": 3.4,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342366_1.pdf"
     }
    ]
   },
@@ -13990,21 +14187,6 @@
   {
    "id": "MANSOUR FAISAL ELBARBARI",
    "name": "MANSOUR FAISAL ELBARBARI",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "نجيبه نور الدين احمد حلاوه",
-   "name": "نجيبه نور الدين احمد حلاوه",
    "nameEn": null,
    "script": null,
    "kind": "person",
@@ -26099,6 +26281,24 @@
    "history": []
   },
   {
+   "holder": "علاء الدين احمد فتوح فرحات",
+   "kind": "person",
+   "ticker": "BIDI",
+   "percent": 22.87,
+   "asOf": "2026-07-16",
+   "basis": "trade",
+   "filingId": "291465",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341168_1.pdf",
+   "openedAt": "2026-07-16",
+   "openingPercent": 0.0,
+   "history": [
+    {
+     "date": "2026-07-16",
+     "percent": 22.87
+    }
+   ]
+  },
+  {
    "holder": "طارق جمال الدين محمود حسن",
    "kind": "person",
    "ticker": "FTNS",
@@ -29251,20 +29451,6 @@
    "history": []
   },
   {
-   "holder": "نجيبه نور الدين احمد حلاوه",
-   "kind": "person",
-   "ticker": "BIGP",
-   "percent": 10.29,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291431",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/341156_1.pdf",
-   "shares": 33760525,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
-  },
-  {
    "holder": "محمد بن صالح بن عبدالعزيز الراجحي",
    "kind": "person",
    "ticker": "EDFM",
@@ -29775,6 +29961,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "المتوكل علي الله جمعه محمد",
+   "kind": "person",
+   "ticker": "DGTZ",
+   "percent": 9.979,
+   "asOf": "2026-07-16",
+   "basis": "trade",
+   "filingId": "291463",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341171_1.pdf",
+   "openedAt": "2026-07-16",
+   "openingPercent": 10.462,
+   "history": [
+    {
+     "date": "2026-07-16",
+     "percent": 9.979
+    }
+   ]
   },
   {
    "holder": "نيو كايرو للدعاية والاعلان",
@@ -32088,6 +32292,24 @@
    "history": []
   },
   {
+   "holder": "نجيبه نور الدين احمد حلاوة",
+   "kind": "person",
+   "ticker": "BIGP",
+   "percent": 6.633,
+   "asOf": "2026-07-15",
+   "basis": "trade",
+   "filingId": "291427",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341135_1.pdf",
+   "openedAt": "2026-07-15",
+   "openingPercent": 10.29,
+   "history": [
+    {
+     "date": "2026-07-15",
+     "percent": 6.633
+    }
+   ]
+  },
+  {
    "holder": "BARBADOS PROPERTIES INC",
    "kind": "firm",
    "ticker": "DAPH",
@@ -33614,6 +33836,24 @@
    "history": []
   },
   {
+   "holder": "السيد صابر السيد حميد",
+   "kind": "person",
+   "ticker": "PRCL",
+   "percent": 5.16,
+   "asOf": "2026-07-19",
+   "basis": "trade",
+   "filingId": "291525",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341223_1.pdf",
+   "openedAt": "2026-07-19",
+   "openingPercent": 4.999,
+   "history": [
+    {
+     "date": "2026-07-19",
+     "percent": 5.16
+    }
+   ]
+  },
+  {
    "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
    "kind": "firm",
    "ticker": "AMOC",
@@ -34238,20 +34478,6 @@
    "history": []
   },
   {
-   "holder": "السيد صابر السيد حميد",
-   "kind": "person",
-   "ticker": "PRCL",
-   "percent": 4.999414,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291230",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/340855_1.pdf",
-   "shares": 2518000,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
-  },
-  {
    "holder": "أ/ سامي احمد احمد زمزم",
    "kind": "person",
    "ticker": "SPIN",
@@ -34281,6 +34507,24 @@
     {
      "date": "2025-10-02",
      "percent": 5.99
+    }
+   ]
+  },
+  {
+   "holder": "احمد عز الدين احمد زين زين",
+   "kind": "person",
+   "ticker": "UTOP",
+   "percent": 4.94,
+   "asOf": "2026-07-16",
+   "basis": "trade",
+   "filingId": "291508",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341233_1.PDF",
+   "openedAt": "2026-07-16",
+   "openingPercent": 5.67,
+   "history": [
+    {
+     "date": "2026-07-16",
+     "percent": 4.94
     }
    ]
   },
@@ -35509,6 +35753,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "أحمد حمدى أحمد محمد زياد الدبيكي",
+   "kind": "person",
+   "ticker": "AMPI",
+   "percent": 3.498,
+   "asOf": "2026-07-16",
+   "basis": "trade",
+   "filingId": "291509",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/341234_1.pdf",
+   "openedAt": "2026-07-16",
+   "openingPercent": 2.873,
+   "history": [
+    {
+     "date": "2026-07-16",
+     "percent": 3.498
+    }
+   ]
   },
   {
    "holder": "اتحاد نقابات المهن الطبية",
@@ -45697,14 +45959,76 @@
    ]
   },
   {
+   "start": "2026-07-12",
+   "end": "2026-07-16",
+   "label": "12–16 Jul",
+   "labelAr": "12–16 يوليو",
+   "sessions": 2,
+   "buys": 2,
+   "sells": 3,
+   "value": 17568795.63,
+   "moves": [
+    {
+     "holder": "علاء الدين احمد فتوح فرحات",
+     "kind": "person",
+     "ticker": "BIDI",
+     "from": 0.0,
+     "to": 22.87,
+     "trades": 1,
+     "value": 9159505.0,
+     "change": 22.87
+    },
+    {
+     "holder": "نجيبه نور الدين احمد حلاوة",
+     "kind": "person",
+     "ticker": "BIGP",
+     "from": 10.29,
+     "to": 6.633,
+     "trades": 1,
+     "value": 4640400.0,
+     "change": -3.657
+    },
+    {
+     "holder": "احمد عز الدين احمد زين زين",
+     "kind": "person",
+     "ticker": "UTOP",
+     "from": 5.67,
+     "to": 4.94,
+     "trades": 1,
+     "value": 1821512.14,
+     "change": -0.73
+    },
+    {
+     "holder": "أحمد حمدى أحمد محمد زياد الدبيكي",
+     "kind": "person",
+     "ticker": "AMPI",
+     "from": 2.873,
+     "to": 3.498,
+     "trades": 1,
+     "value": 575773.0,
+     "change": 0.625
+    },
+    {
+     "holder": "المتوكل علي الله جمعه محمد",
+     "kind": "person",
+     "ticker": "DGTZ",
+     "from": 10.462,
+     "to": 9.979,
+     "trades": 1,
+     "value": 1371605.49,
+     "change": -0.483
+    }
+   ]
+  },
+  {
    "start": "2026-07-19",
    "end": "2026-07-22",
    "label": "19–22 Jul",
    "labelAr": "19–22 يوليو",
    "sessions": 4,
-   "buys": 3,
+   "buys": 4,
    "sells": 8,
-   "value": 416575406.2,
+   "value": 419328966.2,
    "moves": [
     {
      "holder": "عبد الله بن ناصر بن محمد العبيد",
@@ -45795,6 +46119,16 @@
      "trades": 1,
      "value": 1331936.4,
      "change": -0.2382
+    },
+    {
+     "holder": "السيد صابر السيد حميد",
+     "kind": "person",
+     "ticker": "PRCL",
+     "from": 4.999,
+     "to": 5.16,
+     "trades": 1,
+     "value": 2753560.0,
+     "change": 0.161
     },
     {
      "holder": "بنك مصر",
