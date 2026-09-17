@@ -3040,6 +3040,86 @@
    "publishedAt": "2026-07-09T10:25:34",
    "sessionDate": null,
    "source": "https://www.egx.com.eg/downloads/Bulletins/340754_1.pdf"
+  },
+  "291041": {
+   "investorName": "ايمن اسماعيل صلاح عبد المجيد العبد",
+   "investorNameEn": "Ayman Ismail Salah Abdel Majeed El Abd",
+   "relationship": null,
+   "ticker": "LUTS",
+   "action": "sell",
+   "shares": 10500000,
+   "price": 0.7313,
+   "ownershipBeforePercent": 42.064,
+   "ownershipAfterPercent": 41.064,
+   "nameScript": "ar",
+   "filingId": "291041",
+   "publishedAt": "2026-07-08T14:27:04",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340745_1.pdf"
+  },
+  "290949": {
+   "investorName": "وائل حسين سيد احمد ابراهيم القط",
+   "investorNameEn": "Wael Hussein Sayed Ahmed Ibrahim El Qatt",
+   "relationship": null,
+   "ticker": "UPMS",
+   "action": "sell",
+   "shares": 28589,
+   "price": 12.993,
+   "ownershipBeforePercent": 10.028,
+   "ownershipAfterPercent": 9.819,
+   "nameScript": "ar",
+   "filingId": "290949",
+   "publishedAt": "2026-07-07T10:44:40",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340678_1.pdf"
+  },
+  "290935": {
+   "investorName": "جمال عبد القادر عبد البصير عبد القادر",
+   "investorNameEn": "Gamal Abdel Kader Abdel Basser Abdel Kader",
+   "relationship": null,
+   "ticker": "ARAB",
+   "action": "buy",
+   "shares": 40998761,
+   "price": 0.204,
+   "ownershipBeforePercent": 14.077,
+   "ownershipAfterPercent": 14.372,
+   "nameScript": "ar",
+   "filingId": "290935",
+   "publishedAt": "2026-07-07T09:52:31",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340653_1.pdf"
+  },
+  "290857": {
+   "investorName": "بنك قناة السويس",
+   "investorNameEn": "Bank Qanat Al-Suwais",
+   "relationship": null,
+   "ticker": "NHPS",
+   "action": "sell",
+   "shares": 411239,
+   "price": 69.718064,
+   "ownershipBeforePercent": 10,
+   "ownershipAfterPercent": 7.43,
+   "nameScript": "ar",
+   "filingId": "290857",
+   "publishedAt": "2026-07-05T15:29:56",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340570_1.pdf"
+  },
+  "290840": {
+   "investorName": "الحصن للاستشارات",
+   "investorNameEn": "Al Hosn Lil Istisharat",
+   "relationship": null,
+   "ticker": "ELEC",
+   "action": "sell",
+   "shares": 88000000,
+   "price": 2.0,
+   "ownershipBeforePercent": 22.516,
+   "ownershipAfterPercent": 19.86,
+   "nameScript": "ar",
+   "filingId": "290840",
+   "publishedAt": "2026-07-05T13:18:00",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340551_1.pdf"
   }
  },
  "refused": {
@@ -3047,6 +3127,7 @@
   "293883": "share count is not a positive integer: None",
   "293888": "a purchase that lowers the stake (5.339 -> 4.04)",
   "294308": "action is neither buy nor sell: None",
-  "291129": "action is neither buy nor sell: None"
+  "291129": "action is neither buy nor sell: None",
+  "290836": "action is neither buy nor sell: None"
  }
 }

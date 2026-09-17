@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-17T11:53:28Z",
+ "generated": "2026-09-17T12:18:50Z",
  "basis": "A move is placed against its own two years of same-length moves — a record of what has already happened, never a statement about the next one. Each list of companies is the complete set that filed the figure, in alphabetical order, with the filing beside it. Nothing here says what any of it means for a share price.",
  "basisAr": "تُقاس كل حركة مقابل سنتين من حركات بالطول نفسه — سجل لما حدث بالفعل، وليس قولاً عما سيحدث. وكل قائمة شركات هي المجموعة الكاملة التي أودعت الرقم، بالترتيب الأبجدي، ومعها الإفصاح الذي جاء منه. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
  "windows": [
@@ -511,29 +511,29 @@
    "id": "EGX30",
    "label": "EGX 30",
    "asOf": "2026-09-17",
-   "close": 55375.9,
+   "close": 55498.7,
    "sessions": 204,
    "moves": {
     "week": {
-     "change": -1.61,
+     "change": -1.39,
      "against": {
-      "percentile": 43.2,
+      "percentile": 37.7,
       "observations": 199,
       "typical": 1.92
      }
     },
     "month": {
-     "change": 1.58,
+     "change": 1.81,
      "against": {
-      "percentile": 21.9,
+      "percentile": 23.0,
       "observations": 183,
       "typical": 4.02
      }
     },
     "quarter": {
-     "change": 5.23,
+     "change": 5.47,
      "against": {
-      "percentile": 25.5,
+      "percentile": 27.7,
       "observations": 141,
       "typical": 9.15
      }
@@ -544,29 +544,29 @@
    "id": "EGX70EWI",
    "label": "EGX 70",
    "asOf": "2026-09-17",
-   "close": 20951.8,
+   "close": 21061.1,
    "sessions": 204,
    "moves": {
     "week": {
-     "change": -2.11,
+     "change": -1.6,
      "against": {
-      "percentile": 46.2,
+      "percentile": 36.2,
       "observations": 199,
       "typical": 2.24
      }
     },
     "month": {
-     "change": -0.05,
+     "change": 0.47,
      "against": {
-      "percentile": 0.5,
+      "percentile": 2.7,
       "observations": 183,
       "typical": 5.81
      }
     },
     "quarter": {
-     "change": 34.79,
+     "change": 35.5,
      "against": {
-      "percentile": 75.2,
+      "percentile": 77.3,
       "observations": 141,
       "typical": 21.51
      }
@@ -577,27 +577,27 @@
    "id": "EGX100EWI",
    "label": "EGX 100",
    "asOf": "2026-09-17",
-   "close": 27556,
+   "close": 27682,
    "sessions": 204,
    "moves": {
     "week": {
-     "change": -1.58,
+     "change": -1.13,
      "against": {
-      "percentile": 36.7,
+      "percentile": 26.1,
       "observations": 199,
       "typical": 2.17
      }
     },
     "month": {
-     "change": 1.36,
+     "change": 1.83,
      "against": {
-      "percentile": 14.2,
+      "percentile": 18.0,
       "observations": 183,
       "typical": 5.11
      }
     },
     "quarter": {
-     "change": 29.04,
+     "change": 29.63,
      "against": {
       "percentile": 79.4,
       "observations": 141,

@@ -1,11 +1,11 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-17T11:58:18+00:00",
+ "generated": "2026-09-17T12:26:00+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
  "peopleCount": 1320,
- "tradeCount": 188,
+ "tradeCount": 193,
  "tickerCount": 237,
  "tradedTickerCount": 78,
  "firmCount": 437,
@@ -223,17 +223,31 @@
    "tickers": [
     "LUTS"
    ],
-   "tradeCount": 4,
+   "tradeCount": 5,
    "boughtCount": 0,
-   "soldCount": 4,
-   "value": 163733832.17,
+   "soldCount": 5,
+   "value": 171412482.17,
    "singleCompanyMove": {
     "ticker": "LUTS",
-    "from": 41.064,
+    "from": 42.064,
     "to": 29.424,
-    "change": -11.64
+    "change": -12.64
    },
    "trades": [
+    {
+     "filingId": "291041",
+     "date": "2026-07-08",
+     "ticker": "LUTS",
+     "company": null,
+     "companyAr": "لوتس للتنمية والاستثمار الزراعى",
+     "action": "sell",
+     "shares": 10500000,
+     "price": 0.7313,
+     "value": 7678649.999999999,
+     "stakeBefore": 42.064,
+     "stakeAfter": 41.064,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340745_1.pdf"
+    },
     {
      "filingId": "291635",
      "date": "2026-07-20",
@@ -535,6 +549,59 @@
      "stakeBefore": 12.13,
      "stakeAfter": 11.8,
      "source": "https://www.egx.com.eg/downloads/Bulletins/344019_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "بنك قناة السويس",
+   "name": "بنك قناة السويس",
+   "nameEn": "Bank Qanat Al-Suways",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": [
+    "بنك قناه السويس"
+   ],
+   "tickers": [
+    "NHPS"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 0,
+   "soldCount": 2,
+   "value": 82210894.83,
+   "singleCompanyMove": {
+    "ticker": "NHPS",
+    "from": 10,
+    "to": 2.726,
+    "change": -7.274
+   },
+   "trades": [
+    {
+     "filingId": "290857",
+     "date": "2026-07-05",
+     "ticker": "NHPS",
+     "company": null,
+     "companyAr": "الوطنية للاسكان للنقابات المهنية",
+     "action": "sell",
+     "shares": 411239,
+     "price": 69.718064,
+     "value": 28670786.921296,
+     "stakeBefore": 10,
+     "stakeAfter": 7.43,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340570_1.pdf"
+    },
+    {
+     "filingId": "291302",
+     "date": "2026-07-13",
+     "ticker": "NHPS",
+     "company": null,
+     "companyAr": "الوطنية للاسكان للنقابات المهنية",
+     "action": "sell",
+     "shares": 752522,
+     "price": 71.147565,
+     "value": 53540107.90893,
+     "stakeBefore": 7.43,
+     "stakeAfter": 2.726,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341001_1.pdf"
     }
    ]
   },
@@ -915,45 +982,6 @@
      "stakeBefore": 16.05,
      "stakeAfter": 11.05,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342890_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "بنك قناة السويس",
-   "name": "بنك قناة السويس",
-   "nameEn": "Bank Qanat Al-Suways",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": [
-    "بنك قناه السويس"
-   ],
-   "tickers": [
-    "NHPS"
-   ],
-   "tradeCount": 1,
-   "boughtCount": 0,
-   "soldCount": 1,
-   "value": 53540107.91,
-   "singleCompanyMove": {
-    "ticker": "NHPS",
-    "from": 7.43,
-    "to": 2.726,
-    "change": -4.704
-   },
-   "trades": [
-    {
-     "filingId": "291302",
-     "date": "2026-07-13",
-     "ticker": "NHPS",
-     "company": null,
-     "companyAr": "الوطنية للاسكان للنقابات المهنية",
-     "action": "sell",
-     "shares": 752522,
-     "price": 71.147565,
-     "value": 53540107.90893,
-     "stakeBefore": 7.43,
-     "stakeAfter": 2.726,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341001_1.pdf"
     }
    ]
   },
@@ -3219,6 +3247,43 @@
    ]
   },
   {
+   "id": "جمال عبد القادر عبد البصير عبد القادر",
+   "name": "جمال عبد القادر عبد البصير عبد القادر",
+   "nameEn": "Gamal Abdel Kader Abdel Basser Abdel Kader",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "ARAB"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 8363747.24,
+   "singleCompanyMove": {
+    "ticker": "ARAB",
+    "from": 14.077,
+    "to": 14.372,
+    "change": 0.295
+   },
+   "trades": [
+    {
+     "filingId": "290935",
+     "date": "2026-07-07",
+     "ticker": "ARAB",
+     "company": null,
+     "companyAr": "المطورون العرب القابضة",
+     "action": "buy",
+     "shares": 40998761,
+     "price": 0.204,
+     "value": 8363747.243999999,
+     "stakeBefore": 14.077,
+     "stakeAfter": 14.372,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340653_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "Intage Holdings LTD",
    "name": "Intage Holdings LTD",
    "nameEn": null,
@@ -3492,6 +3557,43 @@
      "stakeBefore": 5.04,
      "stakeAfter": 4.83,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343685_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "وائل حسين سيد احمد ابراهيم القط",
+   "name": "وائل حسين سيد احمد ابراهيم القط",
+   "nameEn": "Wael Hussein Sayed Ahmed Ibrahim El Qatt",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "UPMS"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 371456.88,
+   "singleCompanyMove": {
+    "ticker": "UPMS",
+    "from": 10.028,
+    "to": 9.819,
+    "change": -0.209
+   },
+   "trades": [
+    {
+     "filingId": "290949",
+     "date": "2026-07-07",
+     "ticker": "UPMS",
+     "company": null,
+     "companyAr": "الاتحاد الصيدلى للخدمات الطبية والاستثمار",
+     "action": "sell",
+     "shares": 28589,
+     "price": 12.993,
+     "value": 371456.87700000004,
+     "stakeBefore": 10.028,
+     "stakeAfter": 9.819,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340678_1.pdf"
     }
    ]
   },
@@ -4604,6 +4706,113 @@
    ]
   },
   {
+   "id": "الحصن للاستشارات",
+   "name": "الحصن للاستشارات",
+   "nameEn": "El Hosn Lilistisharat",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": [
+    "شركة الحصن للاستشارات",
+    "شركة الحصن للاستشارات (مجموعة مرتبطة )"
+   ],
+   "tickers": [
+    "ADPC",
+    "ELEC",
+    "UNIP"
+   ],
+   "tradeCount": 6,
+   "boughtCount": 0,
+   "soldCount": 6,
+   "value": 812869693.58,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "290840",
+     "date": "2026-07-05",
+     "ticker": "ELEC",
+     "company": null,
+     "companyAr": "الكابلات الكهربائية المصرية",
+     "action": "sell",
+     "shares": 88000000,
+     "price": 2.0,
+     "value": 176000000.0,
+     "stakeBefore": 22.516,
+     "stakeAfter": 19.86,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340551_1.pdf"
+    },
+    {
+     "filingId": "292092",
+     "date": "2026-07-28",
+     "ticker": "ADPC",
+     "company": null,
+     "companyAr": "العربية لمنتجات الألبان\" آراب ديرى - باندا\" (آراب ديري-باندا)",
+     "action": "sell",
+     "shares": 2000000,
+     "price": 4.027,
+     "value": 8054000.0,
+     "stakeBefore": 3.48,
+     "stakeAfter": 3.08,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341817_1.pdf"
+    },
+    {
+     "filingId": "292169",
+     "date": "2026-07-30",
+     "ticker": "ADPC",
+     "company": null,
+     "companyAr": "العربية لمنتجات الألبان\" آراب ديرى - باندا\" (آراب ديري-باندا)",
+     "action": "sell",
+     "shares": 600000,
+     "price": 4.121,
+     "value": 2472600.0000000005,
+     "stakeBefore": 3.08,
+     "stakeAfter": 2.96,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341883_1.pdf"
+    },
+    {
+     "filingId": "293339",
+     "date": "2026-08-16",
+     "ticker": "UNIP",
+     "company": null,
+     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
+     "action": "sell",
+     "shares": 68890000,
+     "price": 0.424,
+     "value": 29209360.0,
+     "stakeBefore": 3.01,
+     "stakeAfter": 0.003,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342886_1.pdf"
+    },
+    {
+     "filingId": "293499",
+     "date": "2026-08-18",
+     "ticker": "ELEC",
+     "company": null,
+     "companyAr": "الكابلات الكهربائية المصرية",
+     "action": "sell",
+     "shares": 275000000,
+     "price": 2.09,
+     "value": 574750000.0,
+     "stakeBefore": 19.86,
+     "stakeAfter": 11.561,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343069_1.pdf"
+    },
+    {
+     "filingId": "293596",
+     "date": "2026-08-19",
+     "ticker": "ADPC",
+     "company": null,
+     "companyAr": "العربية لمنتجات الألبان\" آراب ديرى - باندا\" (آراب ديري-باندا)",
+     "action": "sell",
+     "shares": 5149474,
+     "price": 4.3468,
+     "value": 22383733.5832,
+     "stakeBefore": 2.02,
+     "stakeAfter": 1.98,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343136_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "السيد صابر السيد حميد",
    "name": "السيد صابر السيد حميد",
    "nameEn": "El Sayed Saber El Sayed Hameed",
@@ -4689,99 +4898,6 @@
      "stakeBefore": 5.12,
      "stakeAfter": 3.4,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342366_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "الحصن للاستشارات",
-   "name": "الحصن للاستشارات",
-   "nameEn": "El Hosn Lilistisharat",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": [
-    "شركة الحصن للاستشارات",
-    "شركة الحصن للاستشارات (مجموعة مرتبطة )"
-   ],
-   "tickers": [
-    "ADPC",
-    "ELEC",
-    "UNIP"
-   ],
-   "tradeCount": 5,
-   "boughtCount": 0,
-   "soldCount": 5,
-   "value": 636869693.58,
-   "singleCompanyMove": null,
-   "trades": [
-    {
-     "filingId": "292092",
-     "date": "2026-07-28",
-     "ticker": "ADPC",
-     "company": null,
-     "companyAr": "العربية لمنتجات الألبان\" آراب ديرى - باندا\" (آراب ديري-باندا)",
-     "action": "sell",
-     "shares": 2000000,
-     "price": 4.027,
-     "value": 8054000.0,
-     "stakeBefore": 3.48,
-     "stakeAfter": 3.08,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341817_1.pdf"
-    },
-    {
-     "filingId": "292169",
-     "date": "2026-07-30",
-     "ticker": "ADPC",
-     "company": null,
-     "companyAr": "العربية لمنتجات الألبان\" آراب ديرى - باندا\" (آراب ديري-باندا)",
-     "action": "sell",
-     "shares": 600000,
-     "price": 4.121,
-     "value": 2472600.0000000005,
-     "stakeBefore": 3.08,
-     "stakeAfter": 2.96,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341883_1.pdf"
-    },
-    {
-     "filingId": "293339",
-     "date": "2026-08-16",
-     "ticker": "UNIP",
-     "company": null,
-     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
-     "action": "sell",
-     "shares": 68890000,
-     "price": 0.424,
-     "value": 29209360.0,
-     "stakeBefore": 3.01,
-     "stakeAfter": 0.003,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342886_1.pdf"
-    },
-    {
-     "filingId": "293499",
-     "date": "2026-08-18",
-     "ticker": "ELEC",
-     "company": null,
-     "companyAr": "الكابلات الكهربائية المصرية",
-     "action": "sell",
-     "shares": 275000000,
-     "price": 2.09,
-     "value": 574750000.0,
-     "stakeBefore": 19.86,
-     "stakeAfter": 11.561,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343069_1.pdf"
-    },
-    {
-     "filingId": "293596",
-     "date": "2026-08-19",
-     "ticker": "ADPC",
-     "company": null,
-     "companyAr": "العربية لمنتجات الألبان\" آراب ديرى - باندا\" (آراب ديري-باندا)",
-     "action": "sell",
-     "shares": 5149474,
-     "price": 4.3468,
-     "value": 22383733.5832,
-     "stakeBefore": 2.02,
-     "stakeAfter": 1.98,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343136_1.pdf"
     }
    ]
   },
@@ -12468,21 +12584,6 @@
    "nameEn": null,
    "script": null,
    "kind": "firm",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "جمال عبد القادر عبد البصير عبد القادر",
-   "name": "جمال عبد القادر عبد البصير عبد القادر",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
    "aliases": null,
    "tickers": [],
    "tradeCount": 0,
@@ -23383,21 +23484,6 @@
    "trades": []
   },
   {
-   "id": "وائل حسين سيد احمد ابراهيم القط",
-   "name": "وائل حسين سيد احمد ابراهيم القط",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
    "id": "محمد خالد عبد الله و مجموعته المرتبطة",
    "name": "محمد خالد عبد الله و مجموعته المرتبطة",
    "nameEn": null,
@@ -25743,9 +25829,13 @@
    "basis": "trade",
    "filingId": "293848",
    "source": "https://www.egx.com.eg/downloads/Bulletins/343391_1.pdf",
-   "openedAt": "2026-07-20",
-   "openingPercent": 41.064,
+   "openedAt": "2026-07-08",
+   "openingPercent": 42.064,
    "history": [
+    {
+     "date": "2026-07-08",
+     "percent": 41.064
+    },
     {
      "date": "2026-07-20",
      "percent": 37.254
@@ -28226,6 +28316,24 @@
    "history": []
   },
   {
+   "holder": "جمال عبد القادر عبد البصير عبد القادر",
+   "kind": "person",
+   "ticker": "ARAB",
+   "percent": 14.372,
+   "asOf": "2026-07-07",
+   "basis": "trade",
+   "filingId": "290935",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340653_1.pdf",
+   "openedAt": "2026-07-07",
+   "openingPercent": 14.077,
+   "history": [
+    {
+     "date": "2026-07-07",
+     "percent": 14.372
+    }
+   ]
+  },
+  {
    "holder": "جمال عبد الفتاح عثمان حسن",
    "kind": "person",
    "ticker": "AIDC",
@@ -29188,9 +29296,13 @@
    "basis": "trade",
    "filingId": "293499",
    "source": "https://www.egx.com.eg/downloads/Bulletins/343069_1.pdf",
-   "openedAt": "2026-08-18",
-   "openingPercent": 19.86,
+   "openedAt": "2026-07-05",
+   "openingPercent": 22.516,
    "history": [
+    {
+     "date": "2026-07-05",
+     "percent": 19.86
+    },
     {
      "date": "2026-08-18",
      "percent": 11.561
@@ -29711,20 +29823,6 @@
    "filingId": "291073",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340800_1.pdf",
    "shares": 13324706,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
-  },
-  {
-   "holder": "وائل حسين سيد احمد ابراهيم القط",
-   "kind": "person",
-   "ticker": "UPMS",
-   "percent": 10.372,
-   "asOf": "2026-06-30",
-   "basis": "register",
-   "filingId": "291106",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/340771_1.pdf",
-   "shares": 1417653,
    "openedAt": null,
    "openingPercent": null,
    "history": []
@@ -30532,6 +30630,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "وائل حسين سيد احمد ابراهيم القط",
+   "kind": "person",
+   "ticker": "UPMS",
+   "percent": 9.819,
+   "asOf": "2026-07-07",
+   "basis": "trade",
+   "filingId": "290949",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340678_1.pdf",
+   "openedAt": "2026-07-07",
+   "openingPercent": 10.028,
+   "history": [
+    {
+     "date": "2026-07-07",
+     "percent": 9.819
+    }
+   ]
   },
   {
    "holder": "شركة إم زد للإستثمارات",
@@ -36906,9 +37022,13 @@
    "basis": "trade",
    "filingId": "291302",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341001_1.pdf",
-   "openedAt": "2026-07-13",
-   "openingPercent": 7.43,
+   "openedAt": "2026-07-05",
+   "openingPercent": 10,
    "history": [
+    {
+     "date": "2026-07-05",
+     "percent": 7.43
+    },
     {
      "date": "2026-07-13",
      "percent": 2.726
@@ -46316,11 +46436,31 @@
    "end": "2026-07-09",
    "label": "5–9 Jul",
    "labelAr": "5–9 يوليو",
-   "sessions": 1,
-   "buys": 0,
-   "sells": 2,
-   "value": 113293193.38,
+   "sessions": 4,
+   "buys": 1,
+   "sells": 6,
+   "value": 334377834.42,
    "moves": [
+    {
+     "holder": "الحصن للاستشارات",
+     "kind": "firm",
+     "ticker": "ELEC",
+     "from": 22.516,
+     "to": 19.86,
+     "trades": 1,
+     "value": 176000000.0,
+     "change": -2.656
+    },
+    {
+     "holder": "بنك قناة السويس",
+     "kind": "firm",
+     "ticker": "NHPS",
+     "from": 10,
+     "to": 7.43,
+     "trades": 1,
+     "value": 28670786.92,
+     "change": -2.57
+    },
     {
      "holder": "عبد السلام مسعود عبد الكريم",
      "kind": "person",
@@ -46332,6 +46472,16 @@
      "change": -2.0552
     },
     {
+     "holder": "ايمن اسماعيل صلاح عبد المجيد العبد",
+     "kind": "person",
+     "ticker": "LUTS",
+     "from": 42.064,
+     "to": 41.064,
+     "trades": 1,
+     "value": 7678650.0,
+     "change": -1.0
+    },
+    {
      "holder": "محمد النوبي احمد سليم",
      "kind": "person",
      "ticker": "FIRE",
@@ -46340,6 +46490,26 @@
      "trades": 1,
      "value": 303783.92,
      "change": -0.37
+    },
+    {
+     "holder": "جمال عبد القادر عبد البصير عبد القادر",
+     "kind": "person",
+     "ticker": "ARAB",
+     "from": 14.077,
+     "to": 14.372,
+     "trades": 1,
+     "value": 8363747.24,
+     "change": 0.295
+    },
+    {
+     "holder": "وائل حسين سيد احمد ابراهيم القط",
+     "kind": "person",
+     "ticker": "UPMS",
+     "from": 10.028,
+     "to": 9.819,
+     "trades": 1,
+     "value": 371456.88,
+     "change": -0.209
     }
    ]
   },
