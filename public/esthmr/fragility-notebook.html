@@ -25,7 +25,7 @@
     </div>
     <div class="fe-ticker-divider"></div>
     <div class="fe-ticker-item">
-      <span class="fe-ticker-lbl">Rule position, 9 Sep 2026 run</span>
+      <span class="fe-ticker-lbl" id="tkRunLabel">Partial protection, 9 Sep 2026 run</span>
       <strong class="fe-ticker-val" id="tkAlloc" style="color:#235238;">100.0% Stocks · 0.0% T-Bills</strong>
     </div>
     <div class="fe-ticker-divider"></div>
@@ -134,7 +134,7 @@
     <aside class="fe-card" id="live-regime" aria-label="Current EGX Fragility State">
       <div class="fe-card-head">
         <div>
-          <span style="font-family:var(--fe-mono); font-size:0.7rem; font-weight:600; color:var(--fe-faint); text-transform:uppercase;">Egyptian Market Status · 9 Sep 2026 run</span>
+          <span style="font-family:var(--fe-mono); font-size:0.7rem; font-weight:600; color:var(--fe-faint); text-transform:uppercase;" id="liveRunLabel">Egyptian Market Status · 9 Sep 2026 run</span>
           <div style="margin-top:4px;">
             <span class="fe-status-pill fe-pill-green" id="livePill">
               <span style="width:6px; height:6px; border-radius:50%; background:#3F6B52;"></span>
@@ -151,7 +151,7 @@
       <!-- HUMAN ACTION CARD -->
       <div id="liveActionCard" style="background:#F0FDF4; border:1px solid rgba(63,107,82,0.25); border-radius:10px; padding:12px 14px; margin-bottom:14px; transition:all 0.25s ease;">
         <div style="display:flex; justify-content:space-between; align-items:baseline;">
-          <span style="font-family:var(--fe-mono); font-size:0.68rem; font-weight:700; color:#166534; text-transform:uppercase;">Model reading, 9 Sep 2026 run:</span>
+          <span style="font-family:var(--fe-mono); font-size:0.68rem; font-weight:700; color:#166534; text-transform:uppercase;" id="liveActionLabel">Model reading, 9 Sep 2026 run:</span>
           <span class="fe-badge-metric fe-b-good" id="liveActionBadge" style="font-size:0.68rem;">No warning</span>
         </div>
         <div id="liveActionTitle" style="font-family:var(--fe-display); font-size:1.25rem; font-weight:800; color:#166534; margin:4px 0 2px;">
@@ -219,7 +219,7 @@
       </div>
 
       <div style="background:rgba(27,25,23,0.03); border:1px solid var(--fe-edge); border-radius:8px; padding:10px; font-size:0.78rem;">
-        <span style="font-family:var(--fe-mono); font-size:0.68rem; font-weight:600; color:var(--fe-faint); text-transform:uppercase;">Forward Drop Risk</span>
+        <span style="font-family:var(--fe-mono); font-size:0.68rem; font-weight:600; color:var(--fe-faint); text-transform:uppercase;">Forward Drop Risk · 9 Sep 2026 run</span>
         <div style="display:flex; justify-content:space-between; margin-top:6px;">
           <span>5-Day Shock Risk: <strong id="fwd5">3.2%</strong></span>
           <span>25-Day Drop (&gt;15%): <strong id="fwd25" style="color:var(--fe-up);">9.8% (Benign)</strong></span>
@@ -230,7 +230,7 @@
       <div class="fe-scenarios-box">
         <p>What-If Stress Sandbox (Test System Reactions)</p>
         <div class="fe-scenarios-btns">
-          <button class="fe-btn-sc is-active" data-sc="real">9 Sep 2026 reading (calm)</button>
+          <button class="fe-btn-sc is-active" data-sc="real" id="scRealLabel">9 Sep 2026 reading (calm)</button>
           <button class="fe-btn-sc" data-sc="comm">Oil Spike Shock</button>
           <button class="fe-btn-sc" data-sc="vix">Global Panic Wave</button>
           <button class="fe-btn-sc" data-sc="decay">2-Day Danger Alert</button>

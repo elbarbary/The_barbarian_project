@@ -1,0 +1,12 @@
+# The crash-warning model's reading, pinned to the versions the research ran on.
+#
+# The engine fits logistic regressions with an iterative solver and ranks their
+# outputs, so a different numpy, scipy or scikit-learn can move a score in its
+# fourth decimal. These are the versions of the environment that produced the
+# published research on 9–12 September 2026, and test_reading.py replays that
+# research to the published digit before any reading is written.
+numpy==2.5.2
+scipy==1.18.1
+scikit-learn==1.9.0
+joblib==1.5.3
+threadpoolctl==3.6.0

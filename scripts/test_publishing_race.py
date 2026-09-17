@@ -528,7 +528,7 @@ class QueuedRunTest(unittest.TestCase):
                                      f"{path.name} builds on the commit it was queued at")
         # Guards the loop: a detector that finds no publisher passes vacuously.
         for name in ("publish-app-data.yml", "publish-live-data.yml", "publish-prices.yml",
-                     "publish-official-sources.yml", "lab-nightly.yml"):
+                     "publish-official-sources.yml", "lab-nightly.yml", "publish-fragility-reading.yml"):
             self.assertIn(name, publishers)
 
 

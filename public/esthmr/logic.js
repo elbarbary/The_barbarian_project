@@ -36,14 +36,14 @@ function simulatorWhenReady(redraw) {
   return null;
 }
 
-/* The crash-warning model's last reading, fetched when its Tools tab opens.
+/* The crash-warning model's newest reading, fetched when its Tools tab opens.
  *
  * The tab's figures were typed into this file on 9 Sep 2026 and could not
  * move with the research, so on 16 Sep the card went; on 17 Sep it was asked
  * for back. They now come from backtest/model_reading.json, which
- * scripts/build_model_reading.py copies out of the published research files.
- * Loaded the simulator's way: once, and again on the next render after a
- * failure.
+ * scripts/fragility/reading.py writes each day: the research's own model, run
+ * on that day's closes. Loaded the simulator's way: once, and again on the
+ * next render after a failure.
  */
 let fragilityReading = null;
 let fragilityReadingPending = null;
@@ -4744,7 +4744,7 @@ export class Component extends Base {
           subtitle: ar
             ? 'قاعدة واحدة اختُبرت على كل يوم تداول: عند الإنذار تنتقل الأموال إلى أذون الخزانة، ولا تعود إلى المؤشر إلا بعد أن يتحسّن الاتجاه.'
             : 'One rule tested on every trading day: when the warning switches on the money moves into Treasury bills, and returns to the index only once the trend turns.',
-          note: ar ? 'اختبار على أسعار سابقة، وليس نصيحة استثمارية. القراءة من آخر تشغيل للبحث ولا تُحدَّث يوميًا.' : 'A test on past prices, not advice. The reading is from the last research run and does not update daily.',
+          note: ar ? 'اختبار على أسعار سابقة، وليس نصيحة استثمارية. تُحسب القراءة كل يوم بنموذج البحث نفسه على أسعار إغلاق ذلك اليوم.' : 'A test on past prices, not advice. The reading is recomputed each day by the research’s own model, from that day’s closes.',
           openFullLabel: ar ? 'افتح البحث' : 'Open the research',
           openFullHref: 'fragility',
           readingReady: Boolean(r),
@@ -4752,7 +4752,7 @@ export class Component extends Base {
           readingUnavailable: wantsReading && !r && fragilityReadingFailed,
           pendingLabel: ar ? 'جارٍ تحميل قراءة النموذج…' : 'Loading the model’s reading…',
           unavailableLabel: ar ? 'تعذّر تحميل قراءة النموذج. افتح التبويب مرة أخرى للمحاولة.' : 'The model’s reading did not load. Open the tab again to try again.',
-          readingTitle: ar ? `قراءة النموذج في آخر تشغيل · ${date}` : `The model’s reading at the last run · ${date}`,
+          readingTitle: ar ? `قراءة النموذج لإغلاق ${date}` : `The model’s reading for the close of ${date}`,
           statusLabel: on ? (ar ? 'الإنذار قائم' : 'Warning on') : (ar ? 'لا يوجد إنذار' : 'No warning'),
           statusFg: on ? 'var(--down)' : 'var(--up)',
           statusBg: on ? 'var(--downTint)' : 'var(--upTint)',

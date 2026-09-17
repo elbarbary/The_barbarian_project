@@ -1406,3 +1406,10 @@ body.mode-quant .investor-only {
   color: var(--fe-t2);
   line-height: 1.6;
 }
+
+/* A file path in running text is one unbroken word. At a phone's 375px,
+   public/data/v1/backtest/ladder_attribution_engine.py ran 72px past the edge
+   and gave the whole page a sideways scroll. */
+.fe-notebook code {
+  overflow-wrap: anywhere;
+}

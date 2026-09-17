@@ -186,7 +186,7 @@ export function crashes(series, crises, episodes) {
   }).filter(Boolean);
 }
 
-export function model(seriesDoc, episodes, attribution) {
+export function model(seriesDoc, episodes, attribution, readingDoc = null) {
   const series = readSeries(seriesDoc);
   const last = series.dates.length - 1;
   const full = Object.fromEntries(Object.keys(SYSTEMS).map((key) => [key, stats(series, key)]));
@@ -198,7 +198,44 @@ export function model(seriesDoc, episodes, attribution) {
   }));
   const list = crashes(series, seriesDoc.crises, episodes);
   const audit = attribution?.cash_sleeve_audit || null;
-  const latest = seriesDoc.latest_live || null;
+  const live = seriesDoc.latest_live || null;
+  const research = live && live.date ? {
+    date: live.date,
+    price: live.price,
+    on: Boolean(live.al_v2),
+    score: live.s_v4,
+    outside: live.wm_p,
+    gold: live.gold_stress,
+    oil: live.petrol_stress,
+    swings: live.vol_stress,
+    vol20: live.vol20,
+    brake: Boolean(live.vol_brake_active),
+    rule: 100 * series.weight.rule[last],
+    equity: live.active_equity_exposure,
+    partial: live.dynamic_hedge_p,
+    daily: false,
+    sessions: [],
+  } : null;
+  // The model run each day on that day's closes (scripts/fragility/reading.py),
+  // when its file is there and continues the series rather than predating it.
+  const daily = readingDoc && readingDoc.schemaVersion === 2 && readingDoc.date >= series.dates[last] ? {
+    date: readingDoc.date,
+    price: readingDoc.egx30,
+    on: Boolean(readingDoc.warning),
+    score: readingDoc.score,
+    outside: readingDoc.outside,
+    gold: readingDoc.gold,
+    oil: readingDoc.oil,
+    swings: readingDoc.swings,
+    vol20: readingDoc.vol20,
+    brake: Boolean(readingDoc.volBrakeActive),
+    rule: readingDoc.rulePercent,
+    equity: readingDoc.equityPercent,
+    partial: readingDoc.partialPercent,
+    daily: true,
+    researchEnd: readingDoc.researchEnd,
+    sessions: Array.isArray(readingDoc.sessions) ? readingDoc.sessions : [],
+  } : null;
   return {
     series,
     first: series.dates[0],
@@ -216,20 +253,8 @@ export function model(seriesDoc, episodes, attribution) {
     tax: audit?.gross_1y_tbill && audit?.taxed_20pct_tbill
       ? { gross: audit.gross_1y_tbill.wealth_100k, taxed: audit.taxed_20pct_tbill.wealth_100k }
       : null,
-    latest: latest && latest.date ? {
-      date: latest.date,
-      price: latest.price,
-      on: Boolean(latest.al_v2),
-      score: latest.s_v4,
-      outside: latest.wm_p,
-      gold: latest.gold_stress,
-      oil: latest.petrol_stress,
-      swings: latest.vol_stress,
-      vol20: latest.vol20,
-      brake: Boolean(latest.vol_brake_active),
-      equity: latest.active_equity_exposure,
-      partial: latest.dynamic_hedge_p,
-    } : null,
+    latest: daily || research,
+    research,
   };
 }
 
@@ -308,8 +333,9 @@ export const COPY = {
     withRule: 'with the rule',
     holding: 'holding the index',
     falseOfThem: 'of them false alarms',
-    readingTitle: 'The model’s reading on the last session of the run',
-    readingSub: 'Computed for {date}. It is shown as it was computed and does not update daily.',
+    readingTitle: 'The model’s latest reading',
+    readingSub: 'For {date}, the last session of the research run. The daily reading did not load.',
+    readingSubDaily: 'For the close of {date}. The research’s own model, run each day on that day’s closes; the research itself ends on {end}.',
     readingOff: 'No warning',
     readingOn: 'Warning on',
     readingScore: 'Stress inside the EGX',
@@ -325,9 +351,12 @@ export const COPY = {
     readingRule: 'The rule',
     readingRuleValue: '{eq} in the index · {bills} in Treasury bills',
     readingPartial: 'Partial protection',
-    readingPartialValue: '{p} in Treasury bills',
+    readingPartialValue: '{eq} in the index · {bills} in Treasury bills',
+    readingPartialNote: 'On a warning it would move {p} into Treasury bills.',
     readingIndex: 'EGX 30 close',
     readingFoot: 'A reading from a test on past prices, not a signal to act on.',
+    readingRecent: 'Each session since the research',
+    readingRecentOn: 'warning on',
     readingMore: 'Every gauge and the what-if scenarios',
     chartTitle: 'What 100,000 EGP became',
     chartSub: 'After fees. Shaded stripes are the days the warning was on.',
@@ -415,10 +444,10 @@ export const COPY = {
     limit3: 'Treasury-bill interest is counted before the 20% tax on it. With the tax taken off, the research’s test of the step-by-step version ends at {taxed} instead of {gross}.',
     limit4: 'The next crash will not look exactly like the last ones.',
     aboutTitle: 'About this data',
-    aboutRun: 'Last research run: {date}. On that day the warning was {state} and the EGX 30 closed at {price}.',
+    aboutRun: 'Last research run: {date}. On that day the warning was {state}, with the EGX 30 at {price} when the run read it.',
     stateOn: 'on',
     stateOff: 'off',
-    aboutNote: 'This page shows the research as it was last run. It does not update daily, and it is not a signal to act on.',
+    aboutNote: 'The research on this page is shown as it was last run. Only the model’s reading at the top is recomputed each day. Neither is a signal to act on.',
     researchersTitle: 'For researchers',
     dlSeries: 'Daily series for every approach (JSON)',
     dlWarnings: 'Every warning (JSON)',
@@ -457,8 +486,9 @@ export const COPY = {
     withRule: 'بالقاعدة',
     holding: 'بالاحتفاظ بالمؤشر',
     falseOfThem: 'منها إنذارات كاذبة',
-    readingTitle: 'قراءة النموذج في آخر جلسة من تشغيل البحث',
-    readingSub: 'محسوبة ليوم {date}. تُعرض كما حُسبت ولا تُحدَّث يوميًا.',
+    readingTitle: 'أحدث قراءة للنموذج',
+    readingSub: 'ليوم {date}، آخر جلسة في تشغيل البحث. لم تُحمَّل القراءة اليومية.',
+    readingSubDaily: 'لإغلاق يوم {date}. نموذج البحث نفسه، يُشغَّل كل يوم على أسعار إغلاق ذلك اليوم؛ أما البحث نفسه فينتهي في {end}.',
     readingOff: 'لا يوجد إنذار',
     readingOn: 'الإنذار قائم',
     readingScore: 'الضغط داخل البورصة المصرية',
@@ -474,9 +504,12 @@ export const COPY = {
     readingRule: 'القاعدة',
     readingRuleValue: '{eq} في المؤشر · {bills} في أذون الخزانة',
     readingPartial: 'الحماية الجزئية',
-    readingPartialValue: '{p} في أذون الخزانة',
+    readingPartialValue: '{eq} في المؤشر · {bills} في أذون الخزانة',
+    readingPartialNote: 'عند الإنذار تنقل {p} إلى أذون الخزانة.',
     readingIndex: 'إغلاق EGX 30',
     readingFoot: 'قراءة من اختبار على أسعار سابقة، وليست إشارة للتصرّف.',
+    readingRecent: 'كل جلسة منذ نهاية البحث',
+    readingRecentOn: 'الإنذار قائم',
     readingMore: 'كل مقاييس النموذج وسيناريوهات «ماذا لو»',
     chartTitle: 'ماذا أصبحت 100,000 جنيه',
     chartSub: 'بعد خصم العمولات. الشرائط المظلّلة هي الأيام التي كان فيها الإنذار قائمًا.',
@@ -564,10 +597,10 @@ export const COPY = {
     limit3: 'فائدة أذون الخزانة محسوبة قبل ضريبة الـ20% عليها. بعد خصم الضريبة تنتهي نسخة العودة على مراحل في اختبار البحث عند {taxed} بدلًا من {gross}.',
     limit4: 'الانهيار القادم لن يشبه تمامًا الانهيارات السابقة.',
     aboutTitle: 'عن هذه البيانات',
-    aboutRun: 'آخر تشغيل للبحث: {date}. في ذلك اليوم كان الإنذار {state} وأغلق مؤشر EGX 30 عند {price}.',
+    aboutRun: 'آخر تشغيل للبحث: {date}. في ذلك اليوم كان الإنذار {state}، وكان مؤشر EGX 30 عند {price} وقت قراءة التشغيل له.',
     stateOn: 'قائمًا',
     stateOff: 'غير قائم',
-    aboutNote: 'تعرض هذه الصفحة البحث كما شُغّل آخر مرة. لا تُحدَّث يوميًا، وليست إشارة للتصرّف.',
+    aboutNote: 'يُعرض البحث في هذه الصفحة كما شُغّل آخر مرة، ولا يُعاد حساب إلا قراءة النموذج في أعلاها كل يوم. ولا أيٌّ منهما إشارة للتصرّف.',
     researchersTitle: 'للباحثين',
     dlSeries: 'السلسلة اليومية لكل الطرق (JSON)',
     dlWarnings: 'كل الإنذارات (JSON)',
@@ -868,7 +901,7 @@ function warningStrip(m, lang, host, detail) {
 
 export function mount(root, docs, options = {}) {
   const state = { lang: options.lang === 'en' ? 'en' : 'ar', range: 'full' };
-  const m = model(docs.series, docs.episodes, docs.attribution);
+  const m = model(docs.series, docs.episodes, docs.attribution, docs.reading || null);
   const links = options.links || {};
 
   const setLang = (lang) => {
@@ -909,8 +942,8 @@ export function mount(root, docs, options = {}) {
       figure(L('figFall'), numNode(fall(full.rule.worstFall, 0)), L('withRule'), numNode(fall(full.hold.worstFall, 0)), L('holding')),
       figure(L('figWarnings', { years: iso(years1) }), numNode(whole(m.warnings.total)), '', numNode(whole(m.warnings.false)), L('falseOfThem'), 'is-plain'));
 
-    // The model's own reading on the last session of the run, from the
-    // series' latest_live and nothing else.
+    // The model's newest reading: the daily file when it loaded, the
+    // research run's last session when it did not.
     const reading = m.latest && Number.isFinite(m.latest.score) ? (() => {
       const r = m.latest;
       const two = (value) => Number(value).toFixed(2);
@@ -928,11 +961,23 @@ export function mount(root, docs, options = {}) {
         el('span', { class: 'fo-bar-track' }, el('span', { class: 'fo-bar fo-c-rule', style: `--w:${share(value)}` })),
         el('b', { class: 'fo-num', dir: 'ltr' }, two(value)));
       const scale = 50;
+      // Every session the daily run has scored since the research, newest
+      // first: the score against the warning line, as the gauge above draws it.
+      const sessions = r.daily ? [...r.sessions].reverse().slice(0, 10) : [];
+      const recent = sessions.length ? el('div', { class: 'fo-recent' },
+        el('p', { class: 'fo-gauge-label' }, L('readingRecent')),
+        el('ol', { class: 'fo-recent-list' }, sessions.map((s) => el('li', { class: s.warning ? 'is-on' : '' },
+          el('span', { class: 'fo-recent-day' }, day(s.date, lang)),
+          meter(s.score, ALERT_LINE, s.warning ? 'is-on' : ''),
+          el('b', { class: 'fo-num', dir: 'ltr' }, two(s.score)),
+          s.warning ? el('span', { class: 'fo-recent-flag' }, L('readingRecentOn')) : null)))) : null;
       return el('section', { class: 'fo-panel fo-reading', id: 'model-reading', 'aria-labelledby': 'fo-reading-title' },
         el('div', { class: 'fo-panel-head' },
           el('div', {},
             el('h2', { id: 'fo-reading-title' }, L('readingTitle')),
-            el('p', { class: 'fo-sub' }, L('readingSub', { date: day(r.date, lang) }))),
+            el('p', { class: 'fo-sub' }, r.daily
+              ? L('readingSubDaily', { date: day(r.date, lang), end: day(r.researchEnd, lang) })
+              : L('readingSub', { date: day(r.date, lang) }))),
           el('p', { class: `fo-status ${r.on ? 'is-on' : 'is-off'}` },
             el('span', { class: 'fo-status-dot', 'aria-hidden': 'true' }),
             r.on ? L('readingOn') : L('readingOff'))),
@@ -948,11 +993,13 @@ export function mount(root, docs, options = {}) {
             el('p', { class: 'fo-gauge-label' }, L('readingPlaces')),
             el('dl', { class: 'fo-places' },
               el('div', {}, el('dt', {}, L('readingRule')),
-                el('dd', {}, L('readingRuleValue', { eq: iso(`${Math.round(r.equity)}%`), bills: iso(`${Math.round(100 - r.equity)}%`) }))),
+                el('dd', {}, L('readingRuleValue', { eq: iso(`${Math.round(r.rule)}%`), bills: iso(`${Math.round(100 - r.rule)}%`) }))),
               el('div', {}, el('dt', {}, L('readingPartial')),
-                el('dd', {}, L('readingPartialValue', { p: iso(`${Number(r.partial).toFixed(1)}%`) }))),
+                el('dd', {}, L('readingPartialValue', { eq: iso(`${Math.round(r.equity)}%`), bills: iso(`${Math.round(100 - r.equity)}%`) })),
+                r.on ? null : el('dd', { class: 'fo-place-note' }, L('readingPartialNote', { p: iso(`${Number(r.partial).toFixed(1)}%`) }))),
               el('div', {}, el('dt', {}, L('readingIndex')),
                 el('dd', {}, numNode(Number(r.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }))))))),
+        recent,
         el('p', { class: 'fo-reading-foot' },
           el('span', {}, L('readingFoot')),
           el('a', { href: '#live-regime' }, L('readingMore'))));
@@ -1093,8 +1140,8 @@ export function mount(root, docs, options = {}) {
     const about = el('section', { class: 'fo-about' },
       el('div', {},
         el('h2', {}, L('aboutTitle')),
-        m.latest ? el('p', {}, L('aboutRun', {
-          date: day(m.latest.date, lang), state: m.latest.on ? L('stateOn') : L('stateOff'), price: iso(m.latest.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })),
+        m.research ? el('p', {}, L('aboutRun', {
+          date: day(m.research.date, lang), state: m.research.on ? L('stateOn') : L('stateOff'), price: iso(m.research.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })),
         })) : null,
         el('p', { class: 'fo-sub' }, L('aboutNote'))),
       el('div', {},

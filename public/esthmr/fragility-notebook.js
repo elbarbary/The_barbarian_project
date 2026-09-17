@@ -645,6 +645,8 @@ window.setPageMode = setPageMode;
         if (liveActionTitle) { liveActionTitle.textContent = "40% In Stocks · 60% In Egyptian T-Bills"; liveActionTitle.style.color = "#991B1B"; }
         if (liveActionDesc) { liveActionDesc.textContent = "Severe systemic cascade across both domestic breadth and global markets. Maximum 60% defensive hedge deployed."; liveActionDesc.style.color = "#B91C1C"; }
       }
+      // Back from a what-if, the card shows the newest reading again.
+      if (sc === 'real' && dailyReading) showLiveCard(dailyReading);
     });
   });
 
@@ -657,6 +659,91 @@ window.setPageMode = setPageMode;
       return r.json();
     });
   }
+
+  // The model run each day on that day's closes (scripts/fragility/reading.py).
+  // Once it loads, the ticker and the status card show it; every table, chart
+  // and what-if below stays the 9 Sep 2026 research run's own. Until
+  // 17 Sep 2026 both showed that run's last session with nothing recomputing it.
+  let dailyReading = null;
+
+  function readingDay(r) {
+    return new Date(`${r.date}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+  }
+
+  function showLiveCard(r) {
+    const byId = (id) => document.getElementById(id);
+    const on = Boolean(r.warning);
+    const bills = Math.round((100 - r.equityPercent) * 10) / 10;
+    const pill = byId('livePill');
+    if (pill) {
+      pill.className = on ? "fe-status-pill fe-pill-red" : "fe-status-pill fe-pill-green";
+      pill.innerHTML = on
+        ? '<span style="width:6px; height:6px; border-radius:50%; background:#A3402F;"></span> Warning on'
+        : '<span style="width:6px; height:6px; border-radius:50%; background:#3F6B52;"></span> No warning';
+    }
+    const price = byId('livePrice');
+    if (price) price.textContent = Number(r.egx30).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const score = byId('liveScore');
+    if (score) score.textContent = r.score.toFixed(2);
+    const bar = byId('liveBar');
+    if (bar) bar.style.width = `${(Math.max(0, Math.min(1, r.score)) * 100).toFixed(1)}%`;
+    const engine = byId('liveEngineA');
+    if (engine) engine.textContent = r.engineInternal.toFixed(4);
+    const hedge = `${r.partialPercent.toFixed(1)}%`;
+    for (const id of ['liveWMScore', 'liveHedgeRatio']) { const el = byId(id); if (el) el.textContent = hedge; }
+    const gold = byId('liveGoldStress');
+    if (gold) gold.textContent = `${r.gold.toFixed(2)} / 1.00`;
+    const oil = byId('livePetrolStress');
+    if (oil) oil.textContent = `${r.oil.toFixed(2)} / 1.00`;
+    for (const id of ['liveVolStress', 'liveVol20']) { const el = byId(id); if (el) el.textContent = `${r.vol20.toFixed(1)}%`; }
+    const brake = byId('liveBrakeStatus');
+    if (brake) {
+      brake.className = r.volBrakeActive ? "fe-badge-metric fe-b-alert" : "fe-badge-metric fe-b-good";
+      brake.textContent = r.volBrakeActive ? "Brake on (> 28% and rising)" : "Re-entry Safe (< 28%)";
+    }
+    const card = byId('liveActionCard');
+    if (card) {
+      card.style.background = on ? "#FEF2F2" : "#F0FDF4";
+      card.style.borderColor = on ? "rgba(163,64,47,0.3)" : "rgba(63,107,82,0.25)";
+    }
+    const badge = byId('liveActionBadge');
+    if (badge) { badge.className = on ? "fe-badge-metric fe-b-alert" : "fe-badge-metric fe-b-good"; badge.textContent = on ? "Warning on" : "No warning"; }
+    const title = byId('liveActionTitle');
+    if (title) { title.textContent = `${r.equityPercent.toFixed(1)}% In Egyptian Stocks · ${bills.toFixed(1)}% In T-Bills`; title.style.color = on ? "#991B1B" : "#166534"; }
+    const desc = byId('liveActionDesc');
+    if (desc) {
+      desc.textContent = on
+        ? `A crash warning is on. The partial protection holds ${bills.toFixed(1)}% in T-bills while it lasts.`
+        : `No crash warning is on. The score is ${r.score.toFixed(2)} against the ${r.alertLine.toFixed(3)} line.`;
+      desc.style.color = on ? "#B91C1C" : "#15803d";
+    }
+    const label = byId('liveActionLabel');
+    if (label) label.textContent = `Model reading, ${readingDay(r)} close:`;
+  }
+
+  function showDailyReading(r) {
+    const when = readingDay(r);
+    updateStickyBar({
+      price: r.egx30, s_v4: r.score, al_v2: r.warning ? 1 : 0, wm_p: r.outside,
+      gold_stress: r.gold, petrol_stress: r.oil, vol_stress: r.swings,
+      dynamic_hedge_p: r.partialPercent, active_equity_exposure: r.equityPercent, vol20: r.vol20,
+    });
+    const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+    set('tkRunLabel', `Partial protection, ${when} close`);
+    set('liveRunLabel', `Egyptian Market Status · reading for ${when}`);
+    set('scRealLabel', `${when} reading (${r.warning ? 'warning on' : 'no warning'})`);
+    const active = document.querySelector('.fe-btn-sc.is-active');
+    if (!active || active.dataset.sc === 'real') showLiveCard(r);
+  }
+
+  loadData('/esthmr/backtest/model_reading.json')
+    .catch(() => loadData('backtest/model_reading.json'))
+    .then((r) => {
+      if (!r || r.schemaVersion !== 2) return;
+      dailyReading = r;
+      showDailyReading(r);
+    })
+    .catch((err) => console.warn("Could not load the daily reading:", err));
 
   loadData('/esthmr/backtest/v5_simulation_series.json')
     .catch(() => loadData('backtest/v5_simulation_series.json'))
@@ -801,7 +888,7 @@ window.setPageMode = setPageMode;
       .then(d => {
         wmPayload = d;
         initScenarioLab();
-        updateStickyBar(d.latest_live);
+        if (dailyReading) showDailyReading(dailyReading); else updateStickyBar(d.latest_live);
         updateScenarioView();
       })
       .catch(err => {
