@@ -315,6 +315,14 @@
     "meaning": "Non-bank financial institutions transmit real-time customer borrowing and default data directly to credit bureaus upon occurrence rather than through periodic batch updates, altering compliance workflows and integrating operational reporting systems with the regulator's network.",
     "meaning_ar": "تقوم المؤسسات المالية غير المصرفية بإرسال بيانات الاقتراض والتعثر الخاصة بالعملاء لحظياً إلى شركات الاستعلام الائتماني فور حدوثها بدلاً من التحديثات الدورية المجمعة، مما يغير إجراءات الامتثال ويربط الأنظمة التشغيلية للشركات بشبكة الهيئة الرقابية."
   },
+  "Fan loyalty needs more than match day": {
+    "meaning": "Sports enterprises diversify commercial operations beyond match-day ticket sales into year-round merchandising, digital media content, and recurring membership programs.",
+    "meaning_ar": "تنوّع المنشآت الرياضية عملياتها التجارية إلى ما يتجاوز مبيعات تذاكر المباريات، لتشمل بيع البضائع ومحتوى الوسائط الرقمية وبرامج الاشتراكات المستمرة على مدار العام."
+  },
+  "Fed hikes rates for the first time in three years": {
+    "meaning": "A Federal Reserve rate hike increases global borrowing costs in US dollars and alters international capital allocations across emerging markets.",
+    "meaning_ar": "يؤدي رفع الفيدرالي الأمريكي لأسعار الفائدة إلى زيادة تكلفة الاقتراض العالمي بالدولار وإعادة توزيع التدفقات النقدية الدولية عبر الأسواق الناشئة."
+  },
   "Five years into RISE, safety metric frozen as World Bank ratchets up fiduciary risk on Egypt’s railway loan": {
     "meaning": "An elevated fiduciary risk rating tied to multilateral railway financing triggers tighter loan conditionality, enhanced oversight procedures, and potential delays in capital disbursements for infrastructure modernisation projects.",
     "meaning_ar": "يؤدي رفع تصنيف المخاطر الائتمانية والرقابية المرتبطة بتمويلات السكك الحديدية الدولية إلى تشديد شروط الإقراض، وزيادة إجراءات الرقابة، وربما إبطاء صرف الدفعات التمويلية المخصصة لمشروعات تحديث البنية التحتية."
@@ -403,6 +411,14 @@
     "meaning": "3D concrete printing introduces additive manufacturing technology to the domestic construction and building materials sector, automating on-site material deposition and altering standard construction supply chains.",
     "meaning_ar": "يُدخل قطاع الطباعة الخرسانية ثلاثية الأبعاد تقنيات التصنيع المضاف إلى قطاع التشييد ومواد البناء المحلي، مما يؤتمت عمليات صب الخرسانة ويغير سلاسل الإمداد الإنشائية التقليدية."
   },
+  "Modon is looking for an EGP 35 bn syndicated loan to fund infrastructure in Wadi Yamm": {
+    "meaning": "Modon uses a syndicated facility to distribute large-scale infrastructure debt exposure across multiple lending banks rather than relying on a single balance sheet. This structures project liabilities under shared covenants to cover capital expenditures in Wadi Yamm.",
+    "meaning_ar": "تعتمد شركة مدن على تمويل مصرفي مشترك لتوزيع مخاطر ديون البنية التحتية الكبيرة على عدة بنوك مقرضة بدلاً من الاعتماد على بنك واحد، حيث تجري هيكلة التزامات المشروع عبر شروط تعاقدية موحدة لتغطية النفقات الرأسمالية في وادي يم."
+  },
+  "My Morning Routine: Nadine Okasha, Sodic’s chief strategy, brand, and sustainability officer": {
+    "meaning": "This profile features executive leadership commentary on corporate strategy, brand management, and sustainability operations within the real estate developer SODIC.",
+    "meaning_ar": "يتناول هذا التقرير تصريحات من الإدارة التنفيذية لشركة سوديك العقارية بشأن استراتيجية الشركة التشغيلية وإدارة العلامة التجارية والاستدامة."
+  },
   "Nawy Now offloaded another EGP 633 mn of mortgages to a fund, freeing up balance-sheet capacity": {
     "meaning": "This transaction transfers mortgage receivables from the company's books to a specialized fund, converting long-term illiquid assets into immediate liquid capital and removing debt from the balance sheet.",
     "meaning_ar": "تتضمن هذه العملية تحويل محافظ التمويل العقاري من الدفاتر المالية للشركة إلى صندوق متخصص، مما يحول الأصول طويلة الأجل غير السائلة إلى سيولة نقدية مباشرة ويزيل هذه الالتزامات من الميزانية العمومية."
@@ -442,6 +458,10 @@
   "Ten sessions for the people side of management": {
     "meaning": "The program consists of structured managerial training focused on human resources and internal team administration, allocating corporate capital toward human capital development through operational workshops.",
     "meaning_ar": "يتضمن البرنامج دورات تدريبية إدارية منظمة متخصصة في إدارة الموارد البشرية وفرق العمل، مما يمثل توجيهاً للنفقات التشغيلية نحو تطوير رأس المال البشري."
+  },
+  "The EGX’s first single-stock futures have completed their first full lifecycle": {
+    "meaning": "This marks the operational execution and final settlement of the exchange's initial standardized derivative contracts linked to individual underlying equities, establishing active clearing and settlement infrastructure for local derivatives.",
+    "meaning_ar": "يمثل هذا الإتمام التشغيلي والتسوية النهائية لأول عقود مشتقات نمطية مرتبطة بأسهم فردية في البورصة، مما يفعّل البنية التحتية للمقاصة والتسوية للمشتقات المالية محلياً."
   },
   "The business behind the game": {
     "meaning": "Sports industry operations rely on a commercial framework integrating broadcast rights monetization, corporate sponsorships, merchandising, and gate receipts to finance club balance sheets and event logistics.",
