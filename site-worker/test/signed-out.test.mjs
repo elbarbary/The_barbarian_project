@@ -123,3 +123,93 @@ test('admin by address has no lookalike domain on the list', () => {
   assert.deepEqual(listed, ['elbarbary@aucegypt.edu', 'barbary@yozo.ai']);
   assert.ok(!block.includes('auceypt.edu'), 'a typo of the university domain is still an admin');
 });
+
+/* ── the door itself ──────────────────────────────────────────────────────
+ *
+ * Redesigned 18 September 2026 from the Claude Design project (turn 2). It
+ * had been a modal with a stock photograph of a terminal, a headline calling
+ * the product "the Bloomberg of the EGX", and three feature bullets — which
+ * named another company, promised a terminal, and never said what the reader
+ * would understand. It is now the promise the product is measured against,
+ * three illustrative shapes, and the sign-in.
+ *
+ * Every rule below is about the fact that this is the ONLY page a signed-out
+ * reader — or a crawler — can see.
+ */
+
+test('the door no longer claims to be another company\'s product', () => {
+  /* Against `code`, not `main`: the comment that explains the removal has to
+     name the thing it removed. */
+  for (const source of [html, code]) {
+    assert.ok(!/بلومبرج/.test(source), 'the Bloomberg claim is still in the door');
+    assert.ok(!/Bloomberg of the EGX/i.test(source), 'the Bloomberg claim is still in the door');
+  }
+});
+
+test('the one public page carries no figure about a named company', () => {
+  /* The door is what a bot reads. A real ticker with a made-up number on it
+     is the exact thing the door exists to prevent, and it would be read by
+     everything that cannot get past it. */
+  const doorStart = html.indexOf('<div id="gate"');
+  const door = html.slice(doorStart, html.indexOf('</div>\n\n<!-- Signing in', doorStart));
+  assert.ok(doorStart > 0, 'the door is gone');
+  for (const ticker of ['COMI', 'TMGH', 'SWDY', 'ABUK', 'EGX 30', 'EGX30']) {
+    assert.ok(!door.includes(ticker), `${ticker} is named on the signed-out door`);
+  }
+  assert.doesNotMatch(door, /\b\d{1,3}(,\d{3})+(\.\d+)?\b/, 'a price is written into the door');
+  assert.doesNotMatch(door, /[+-]\d+(\.\d+)?%/, 'a signed percentage is written into the door');
+});
+
+test('every drawing on the door says it is illustrative, in both languages', () => {
+  const marks = [...html.matchAll(/data-gate-illustrative/g)];
+  const figures = [...html.matchAll(/<figure class="gate-shot">/g)];
+  assert.equal(marks.length, figures.length,
+    `${figures.length} drawings but ${marks.length} illustrative marks`);
+  assert.ok(figures.length >= 2, 'the door lost its product visuals');
+  assert.match(main, /illustrative: 'توضيحي · شركة أ'/);
+  assert.match(main, /illustrative: 'illustrative · Company A'/);
+  assert.match(main, /data-gate-illustrative/, 'the mark is never set from the copy table');
+});
+
+test('the door says it is not FRA-licensed, in both languages', () => {
+  /* §8. Said where it is read, not only in a footer on a page behind the
+     door. ESTHMR reports; it is not licensed to advise. */
+  assert.match(html, /id="gate-legal"/);
+  assert.match(main, /setTxt\('gate-legal', words\.legal\);/);
+  assert.match(main, /legal: 'إستثمر جهة نشر بحثي وليست مرخّصة من الهيئة العامة للرقابة المالية/);
+  assert.match(main, /not licensed by the Financial[\s\S]{0,40}Regulatory Authority/);
+  assert.match(main, /We do not give investment advice/);
+});
+
+test('an English reader can turn the door around', () => {
+  /* Arabic first — but the language switch used to live in the sidebar,
+     which is behind the sign-in. An English reader met a page they could not
+     read and no way out of it. */
+  assert.match(html, /id="gate-lang"/);
+  assert.match(main, /gateLang\.onclick/);
+  assert.match(main, /lang: component\.state\.lang === 'ar' \? 'en' : 'ar'/);
+  assert.match(main, /setTxt\('gate-lang', lang === 'ar' \? 'EN' : 'العربية'\);/);
+});
+
+test('the door is not forced left-to-right', () => {
+  /* It was `direction: ltr !important`, and the door is Arabic: every
+     sentence rendered with its full stop on the left-hand end. */
+  const bare = shell.replace(/\/\*[\s\S]*?\*\//g, '');
+  const gate = bare.slice(bare.indexOf('.gate {'), bare.indexOf('.gate[hidden]'));
+  assert.ok(!/direction:\s*ltr/.test(gate), 'the door forces LTR onto Arabic copy');
+});
+
+test('signed out there is one sign-in, not two', () => {
+  /* The account bar carries its own sign-in button and floated on top of the
+     card. Signed out there is no account to show. */
+  assert.match(shell, /body\[data-signed="no"\] \.account \{ display: none/);
+});
+
+test('the door stays flat, like every other island', () => {
+  /* `design.css` switches shadows off on purpose: an island is told apart by
+     its edge and its ground. The old card had a 28px radius and an 80px
+     drop shadow. */
+  const card = shell.slice(shell.indexOf('.gate-card {'), shell.indexOf('.gate-head {'));
+  assert.match(card, /box-shadow:\s*none/, 'the door card has a shadow again');
+  assert.match(card, /border-radius:\s*var\(--radius-island\)/, 'the door card sets its own radius');
+});

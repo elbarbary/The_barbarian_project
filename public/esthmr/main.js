@@ -41,14 +41,26 @@ document.documentElement.dataset.theme = component.state.theme || 'light';
 /* The chrome around the screens, in the reader's language. */
 const CHROME = {
   en: {
-    eyebrow: 'Egyptian Exchange · Real-Time Intelligence',
-    lead: 'The Bloomberg of the EGX — Free for Every Investor',
-    body: 'Company disclosures as filed, insider trading radar, and debt fragility index. Instant access, no paywalls.',
-    f1: 'Instant filings & earnings reports',
-    f2: 'Insider & major holder radar',
-    f3: 'Debt & solvency fragility index',
-    heroCta: 'Start Exploring Free (Google / Email)',
-    trust: '🔒 Instant passwordless login · No card required',
+    /* The door said "The Bloomberg of the EGX". It named another company's
+       product, promised a terminal, and spent the whole first screen on the
+       claim — while the three things it listed were features rather than a
+       reason. What replaced it is the promise the product is measured against
+       and the sentence that keeps it inside §8: we report, we do not advise. */
+    eyebrow: 'Sign in · one account',
+    lead: 'Understand what changed in the Egyptian market at a glance.',
+    body: 'Every figure traces to a published document: a session, a financial statement, or a filing.',
+    f1: 'Price against the index',
+    f2: 'Profit against the same period',
+    f3: 'Sector share of trading',
+    c1: '60 sessions · against the index',
+    c2: 'EGP m · consolidated',
+    c3: 'share of covered traded value',
+    illustrative: 'illustrative · Company A',
+    panelTitle: 'Sign in to read the data',
+    legal: 'ESTHMR is a research publisher and is not licensed by the Financial '
+      + 'Regulatory Authority. We do not give investment advice.',
+    heroCta: 'Continue with Google or email',
+    trust: 'Your email and a six-digit code. No password.',
     signIn: 'Sign in with email',
     signOut: 'Sign out',
     storyPill: '📱 Story',
@@ -58,14 +70,21 @@ const CHROME = {
       + 'about you is sold or shared.',
   },
   ar: {
-    eyebrow: 'البورصة المصرية · معلومات مالية فورية',
-    lead: 'بلومبرج البورصة المصرية... مجاناً لكل مستثمر',
-    body: 'إفصاحات الشركات الحقيقية فور إيداعها، رادار صفقات الداخليين، ومؤشر أعباء الديون والسيولة. بدون اشتراكات.',
-    f1: 'إفصاحات وتقارير مالية فورية',
-    f2: 'رادار كبار المطلعين والصفقات',
-    f3: 'مؤشر أعباء الديون والهشاشة',
-    heroCta: 'ابدأ المتابعة مجاناً (جوجل أو البريد)',
-    trust: '🔒 وصول فوري وآمن بدون كلمة سر',
+    eyebrow: 'الدخول · حساب واحد',
+    lead: 'اعرف ما تغيّر في السوق المصري، وفي الشركات التي تتابعها، من نظرة واحدة.',
+    body: 'كل رقم في إستثمر يرجع إلى مستند منشور: جلسة، قائمة مالية، أو إفصاح.',
+    f1: 'حركة السهم مقابل المؤشر',
+    f2: 'الربح مقابل نفس الفترة',
+    f3: 'نصيب القطاعات من التداول',
+    c1: '60 جلسة · مقابل المؤشر',
+    c2: 'مليون جنيه · مجمّعة',
+    c3: 'نصيب من القيمة المتداولة المغطاة',
+    illustrative: 'توضيحي · شركة أ',
+    panelTitle: 'ادخل للاطّلاع على البيانات',
+    legal: 'إستثمر جهة نشر بحثي وليست مرخّصة من الهيئة العامة للرقابة المالية. '
+      + 'لا نقدّم توصيات استثمارية.',
+    heroCta: 'الدخول بحساب Google أو البريد',
+    trust: 'بريدك ورمز من ستة أرقام. بلا كلمة سر.',
     signIn: 'سجّل الدخول بالبريد',
     signOut: 'تسجيل الخروج',
     storyPill: '📱 ستوري',
@@ -197,6 +216,16 @@ function setChrome(lang) {
   setTxt('gate-f1', words.f1);
   setTxt('gate-f2', words.f2);
   setTxt('gate-f3', words.f3);
+  setTxt('gate-c1', words.c1);
+  setTxt('gate-c2', words.c2);
+  setTxt('gate-c3', words.c3);
+  setTxt('gate-panel-title', words.panelTitle);
+  /* Three cards carry the same word, so it is set by attribute rather than by
+     three ids that would have to be kept in step with the markup. */
+  document.querySelectorAll('[data-gate-illustrative]')
+    .forEach((el) => { el.textContent = words.illustrative; });
+  setTxt('gate-legal', words.legal);
+  setTxt('gate-lang', lang === 'ar' ? 'EN' : 'العربية');
   setTxt('gate-hero-cta-text', words.heroCta);
   setTxt('gate-trust', words.trust);
   // Why the door is there, in the reader's language.
@@ -413,6 +442,13 @@ if (heroCta) {
     openSignIn(async (email) => { setSigned(email); await load(email); },
       component.state.lang);
   };
+}
+
+/* The door's own language switch. It writes the same state the sidebar's
+   toggle does, so the choice survives signing in. */
+const gateLang = document.getElementById('gate-lang');
+if (gateLang) {
+  gateLang.onclick = () => component.setState({ lang: component.state.lang === 'ar' ? 'en' : 'ar' });
 }
 
 document.getElementById('signout').onclick = async () => {

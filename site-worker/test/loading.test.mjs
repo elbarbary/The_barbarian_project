@@ -14,7 +14,11 @@ function boot(overrides = {}) {
   const identity = defer(), live = defer();
   const elements = new Map();
   const document = { body: { dataset:{} }, documentElement: {dataset:{}},
-    getElementById(id) { if (!elements.has(id)) elements.set(id, {}); return elements.get(id); } };
+    getElementById(id) { if (!elements.has(id)) elements.set(id, {}); return elements.get(id); },
+    /* The door sets one word on three cards by attribute rather than by three
+       ids. The stub answers nothing, which is the truthful answer for a page
+       that was never built — the point is that `setChrome` does not throw. */
+    querySelectorAll() { return []; } };
   class Component {
     constructor() { component=this; this.state={lang:'en',screen:'home',ticker:''}; this._d={}; }
     data() { return this._d; }

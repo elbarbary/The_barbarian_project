@@ -10,9 +10,13 @@ body[data-signed="no"] #app,
 body[data-signed="no"] .ticker-tape { display: none !important; }
 /* Why the door is there, said inside it. */
 .gate-why {
-  margin: 12px 0 0; padding: 10px 12px; border-radius: 10px;
-  background: rgba(134, 207, 210, .10); border: 1px solid rgba(134, 207, 210, .35);
-  color: var(--ink, #EDF4FA); font-size: 12.5px; line-height: 1.6;
+  /* Neutral, not teal. The tint here was the accent at 10% with an accent
+     border, which makes the brand colour carry a meaning — and the one rule
+     the palette keeps is that teal is brand and navigation and is never a
+     status. A reason is not a status either way. */
+  margin: 0; padding: 12px 14px; border-radius: var(--radius-control);
+  background: var(--sunk); border: 1px solid var(--rule);
+  color: var(--t2); font-size: 13px; line-height: 1.65;
 }
 
 
@@ -98,7 +102,12 @@ body[data-signed="no"] .ticker-tape { display: none !important; }
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  direction: ltr !important;
+  /* NOT `direction: ltr`. It was, and the door is Arabic: a forced LTR
+     container puts the full stop of every sentence on the left-hand end, so
+     the lede read ".اعرف ما تغيّر" — the one screen a new reader sees, with
+     the punctuation visibly wrong on all of it. The document's own dir is set
+     by `setChrome`, and this inherits it. */
+  direction: inherit !important;
   padding: 20px !important;
   box-sizing: border-box !important;
   pointer-events: auto !important;
@@ -122,259 +131,131 @@ body[data-signed="no"] .ticker-tape { display: none !important; }
   -webkit-backdrop-filter: blur(8px) !important;
   z-index: 1 !important;
 }
+/* ── THE DOOR ───────────────────────────────────────────
+ *
+ * The only page a reader sees before signing in, and since the site was closed
+ * it is the only public surface this product has — so it is designed, not left
+ * as a modal with a stock photo in it.
+ *
+ * It is flat. The card used to carry a 28px radius and an 80px shadow, which
+ * is the one thing `design.css` switched off on purpose: an island is told
+ * apart from the page by its edge and its ground. The scrim stays, because
+ * here there genuinely is something behind it.
+ */
 .gate-card {
   position: relative !important;
   z-index: 2 !important;
-  width: min(840px, calc(100vw - 32px)) !important;
-  min-height: 480px !important;
-  max-height: calc(100vh - 48px) !important;
-  background: #FFFFFF !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  border-radius: 28px !important;
-  box-shadow: 0 32px 80px -16px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
-  display: grid !important;
-  grid-template-columns: 1fr 1.15fr !important;
-  overflow: hidden !important;
-  direction: ltr !important;
-  animation: admFloatIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both !important;
-}
-[data-theme="dark"] .gate-card {
-  background: #131F2C !important;
-  border-color: rgba(255, 255, 255, 0.08) !important;
-}
-.gate-media {
-  position: relative !important;
-  background: #EBEAE6 !important;
-  overflow: hidden !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-[data-theme="dark"] .gate-media {
-  background: #0D161F !important;
-}
-.gate-img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center !important;
+  width: min(1180px, calc(100vw - 32px)) !important;
+  max-height: calc(100vh - 40px) !important;
+  overflow-y: auto !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--rule) !important;
+  border-radius: var(--radius-island) !important;
+  box-shadow: none !important;
   display: block !important;
+  direction: inherit !important;
 }
-.gate-content {
-  position: relative !important;
-  padding: 46px 42px 42px 38px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: flex-start !important;
-  gap: 14px !important;
-  box-sizing: border-box !important;
-  text-align: start !important;
+.gate-head {
+  display: flex; align-items: baseline; gap: 12px;
+  padding: 18px 28px; border-bottom: 1px solid var(--rule);
 }
-[dir="rtl"] .gate-content {
-  direction: rtl !important;
-  text-align: right !important;
-  align-items: flex-start !important;
-  padding: 46px 38px 42px 42px !important;
+.gate-mark {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 19px; font-weight: 600; letter-spacing: .08em; color: var(--accent);
 }
-.gate-close {
-  position: absolute !important;
-  top: 22px !important;
-  right: 22px !important;
-  width: 36px !important;
-  height: 36px !important;
-  border-radius: 50% !important;
-  background: rgba(0, 0, 0, 0.05) !important;
-  border: 0 !important;
-  color: var(--t2) !important;
-  font-size: 20px !important;
-  line-height: 1 !important;
-  cursor: pointer !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: all 0.15s ease !important;
-  z-index: 5 !important;
+.gate-mark-ar { font-size: 15px; color: var(--t2); }
+.gate-lang {
+  margin-inline-start: auto; cursor: pointer;
+  min-height: 44px; min-width: 44px; padding: 0 14px;
+  border-radius: var(--radius-control); border: 1px solid var(--rule);
+  background: var(--surface); color: var(--t2);
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace; font-size: 13px;
 }
-.gate-close:hover {
-  background: rgba(0, 0, 0, 0.1) !important;
-  color: var(--ink) !important;
+.gate-lang:hover { border-color: var(--accent); color: var(--accent); }
+.gate-lang:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Pitch beside panel on a desktop; the panel is a fixed 420 because a sign-in
+   column that grows with the window stops looking like one. */
+.gate-grid {
+  display: grid; grid-template-columns: minmax(0, 1fr) 420px;
+  gap: 40px; padding: 40px 28px 34px; align-items: start;
 }
-[data-theme="dark"] .gate-close {
-  background: rgba(255, 255, 255, 0.08) !important;
-  color: var(--t2) !important;
-}
-[data-theme="dark"] .gate-close:hover {
-  background: rgba(255, 255, 255, 0.16) !important;
-  color: #fff !important;
-}
-.gate-badge {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 7px !important;
-  padding: 4px 12px !important;
-  border-radius: 999px !important;
-  background: var(--accTint) !important;
-  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent) !important;
-  font-size: 11px !important;
-  font-weight: 600 !important;
-  color: var(--accent) !important;
-  width: fit-content !important;
-}
-.gate-badge-pulse {
-  width: 6px !important;
-  height: 6px !important;
-  border-radius: 50% !important;
-  background: var(--up) !important;
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7) !important;
-  animation: gatePulse 2s infinite !important;
-}
-@keyframes gatePulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-}
+.gate-pitch { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
 .gate-lead {
-  margin: 0 !important;
-  font-size: clamp(21px, 2.2vw, 26px) !important;
-  font-weight: 700 !important;
-  letter-spacing: -0.02em !important;
-  color: var(--ink) !important;
-  line-height: 1.35 !important;
-  font-family: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif !important;
+  margin: 0 !important; font-size: 36px !important; line-height: 1.35 !important;
+  font-weight: 600 !important; max-width: 22ch; color: var(--ink) !important;
 }
 .gate-body {
-  margin: 0 !important;
-  font-size: 14px !important;
-  line-height: 1.6 !important;
-  color: var(--t2) !important;
-  max-width: 44ch !important;
+  margin: 0 !important; font-size: 16px !important; line-height: 1.6 !important;
+  color: var(--t2) !important; max-width: 56ch;
 }
-.gate-actions {
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-  flex-wrap: wrap !important;
-  margin-top: 8px !important;
+.gate-shots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.gate-shot {
+  margin: 0; padding: 14px; display: flex; flex-direction: column; gap: 9px;
+  border: 1px solid var(--rule); border-radius: var(--radius-island);
 }
-.gate-hero-btn {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  min-height: 46px !important;
-  padding: 0 24px !important;
-  border-radius: 9999px !important;
-  background: var(--accent) !important;
-  color: #FFFFFF !important;
-  border: 0 !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  cursor: pointer !important;
-  box-shadow: 0 4px 14px color-mix(in srgb, var(--accent) 35%, transparent) !important;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease !important;
+/* The mark that keeps this page legal. These three shapes are what the
+   product draws, not what the market did — and this is the one page a bot can
+   read, so the word sits ON the card and not in a caption underneath. */
+.gate-ill {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 11px; color: var(--faint);
 }
-.gate-hero-btn:hover {
-  transform: translateY(-1px) !important;
-  box-shadow: 0 6px 20px color-mix(in srgb, var(--accent) 45%, transparent) !important;
-  filter: brightness(1.08) !important;
+.gate-shot-title { font-size: 15px; font-weight: 600; color: var(--ink); }
+.gate-shot-note {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 11px; color: var(--faint); line-height: 1.45;
 }
-.gate-sec-btn {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  min-height: 46px !important;
-  padding: 0 22px !important;
-  border-radius: 9999px !important;
-  background: transparent !important;
-  border: 1.5px solid var(--rule) !important;
-  color: var(--ink) !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  cursor: pointer !important;
-  transition: all 0.15s ease !important;
+.gate-svg { display: block; width: 100%; direction: ltr; }
+.gate-share {
+  display: flex; height: 26px; border-radius: 8px; overflow: hidden;
+  border: 1px solid var(--rule); direction: ltr;
 }
-.gate-sec-btn:hover {
-  border-color: var(--accent) !important;
-  color: var(--accent) !important;
-  background: var(--accTint) !important;
+.gate-share i { display: block; height: 100%; }
+.gate-share-rest {
+  background: repeating-linear-gradient(135deg, var(--hatch) 0 6px, var(--hatchBg) 6px 12px);
 }
 
-@media (max-width: 740px) {
-  .gate {
-    padding: 12px !important;
-  }
-  .gate-card {
-    grid-template-columns: 1fr !important;
-    min-height: 0 !important;
-    width: 100% !important;
-    max-width: 400px !important;
-    max-height: calc(100vh - 24px) !important;
-    border-radius: 24px !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    box-sizing: border-box !important;
-  }
-  .gate-close {
-    top: 12px !important;
-    right: 12px !important;
-    background: rgba(0, 0, 0, 0.5) !important;
-    color: #FFFFFF !important;
-    backdrop-filter: blur(6px) !important;
-    -webkit-backdrop-filter: blur(6px) !important;
-    z-index: 10 !important;
-  }
-  .gate-media {
-    height: 170px !important;
-    min-height: 170px !important;
-    width: 100% !important;
-  }
-  .gate-content {
-    padding: 20px 16px 18px !important;
-    align-items: stretch !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-  [dir="rtl"] .gate-content {
-    padding: 20px 16px 18px !important;
-    align-items: stretch !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-  .gate-lead {
-    font-size: 19px !important;
-    line-height: 1.3 !important;
-  }
-  .gate-body {
-    font-size: 12.5px !important;
-    line-height: 1.5 !important;
-    max-width: 100% !important;
-  }
-  .gate-actions {
-    flex-direction: column !important;
-    width: 100% !important;
-    gap: 8px !important;
-  }
-  .gate-hero-btn {
-    width: 100% !important;
-    min-height: 44px !important;
-    padding: 0 12px !important;
-    font-size: 12.5px !important;
-    white-space: normal !important;
-    text-align: center !important;
-    box-sizing: border-box !important;
-  }
-  .gate-sec-btn {
-    width: 100% !important;
-    min-height: 42px !important;
-    padding: 0 12px !important;
-    font-size: 12.5px !important;
-    white-space: normal !important;
-    text-align: center !important;
-    box-sizing: border-box !important;
-  }
+.gate-panel {
+  display: flex; flex-direction: column; gap: 14px;
+  border: 1px solid var(--rule); border-radius: var(--radius-island); padding: 24px;
+}
+.gate-panel-eyebrow {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 12px; color: var(--faint);
+}
+.gate-panel-title { font-size: 20px; font-weight: 600; color: var(--ink); }
+.gate-actions { display: flex; flex-direction: column; gap: 10px; }
+.gate-hero-btn {
+  cursor: pointer; width: 100%; min-height: 48px;
+  border-radius: var(--radius-control) !important;
+  border: 1px solid var(--accent) !important;
+  background: var(--accent) !important; color: var(--surface) !important;
+  font-size: 16px !important; font-weight: 600 !important;
+}
+.gate-hero-btn:hover { background: var(--accentPress) !important; border-color: var(--accentPress) !important; }
+.gate-hero-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.gate-trust { margin: 0; font-size: 13px; color: var(--faint); line-height: 1.6; }
+.gate-rule { height: 1px; background: var(--rule); }
+.gate-legal { margin: 0; font-size: 13px; color: var(--faint); line-height: 1.6; }
+
+@media (max-width: 860px) {
+  .gate { padding: 12px !important; align-items: flex-start !important; }
+  .gate-card { width: calc(100vw - 24px) !important; max-height: calc(100vh - 24px) !important; }
+  .gate-head { padding: 14px 18px; }
+  .gate-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 22px 18px 24px; }
+  .gate-lead { font-size: 25px !important; line-height: 1.4 !important; }
+  /* One column of cards, not three squeezed to 100px: an Arabic card title
+     wraps to four lines at that width and the chart underneath is a smear. */
+  .gate-shots { grid-template-columns: minmax(0, 1fr); }
+  .gate-panel { padding: 18px; }
+  .gate-hero-btn { min-height: 50px; }
 }
 body[data-signed="yes"] .gate { display: none !important; }
+/* The door has a sign-in button in it. The account bar has another, and
+   signed out the two sat on top of each other — one of them floating over
+   the card. Signed out there is no account to show. */
+body[data-signed="no"] .account { display: none !important; }
 
 /* ── ACCOUNT BAR ────────────────────────────────────── */
 .gate-cta, .account button {
