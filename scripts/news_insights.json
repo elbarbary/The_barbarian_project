@@ -1695,6 +1695,10 @@
     "meaning": "This headline reports daily spot prices for poultry in the domestic market, reflecting current supply chain costs including feed inputs, farm-gate pricing, and distribution margins.",
     "meaning_ar": "يعرض هذا العنوان أسعار التداول الفورية اليومية للدواجن في السوق المحلي، والتي تعكس تكاليف سلاسل الإمداد الحالية بما تشمله من أسعار الأعلاف، وتكلفة التسليم من المزارع، وهوامش التوزيع."
   },
+  "اسعار الدواجن اليوم الجمعه 18-9-2026 في مصر": {
+    "meaning": "Daily poultry price updates reflect spot market rates driven by farm-gate operational costs, including feed grain imports, energy, and transportation, alongside real-time consumer supply and demand balances.",
+    "meaning_ar": "تعكس التحديثات اليومية لأسعار الدواجن أسعار السوق الفورية المحددة بناءً على تكاليف التشغيل بالمزارع، والتي تشمل استيراد حبوب الأعلاف والطاقة والنقل، بالإضافة إلى موازين العرض والطلب الاستهلاكية اللحظية."
+  },
   "اسعار الدواجن اليوم الجمعه 4-9-2026 في مصر": {
     "meaning": "Daily poultry price updates reflect ongoing supply-and-demand dynamics, feed input costs, and distribution expenses across the Egyptian livestock and food production sector.",
     "meaning_ar": "تعكس التحديثات اليومية لأسعار الدواجن حركة العرض والطلب وتكاليف الأعلاف ومصروفات التوزيع في قطاع الإنتاج الداجني والغذائي المصري."
