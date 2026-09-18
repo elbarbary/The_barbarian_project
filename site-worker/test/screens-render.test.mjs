@@ -119,3 +119,77 @@ test('every screen renders on the barest dataset live() can leave', () => {
   assert.deepEqual(sweep({ demo: false, companies: FULL.companies, series: [], fins: [] }).slice(0, 5), []);
   assert.deepEqual(sweep({ demo: false, companies: [], series: [], fins: [] }).slice(0, 5), []);
 });
+
+/* ── the template's own bindings ─────────────────────────────────────────
+ *
+ * `renderVals()` returning cleanly is only half of it. The template then
+ * READS those values, and `{{ investors.dateline }}` against a null
+ * `investors` does not throw — `dc.js` catches it, logs "could not evaluate"
+ * to a console nobody is watching, and silently drops that subtree. The card
+ * is simply not there, for exactly the readers whose documents were slow.
+ *
+ * That is a class of bug, not an incident: any `{{ a.b }}` read OUTSIDE the
+ * `sc-if` that proves `a` arrived. `mount()` needs a real HTML parser and the
+ * stub here has none, so this reads the template instead — tracking which
+ * `sc-if` conditions and `sc-for` aliases are in scope at each binding — and
+ * checks every dotted root against the values each screen really produces
+ * when one document failed to load.
+ */
+const ALWAYS = new Set(['L', 'Math', 'JSON', 'String', 'Number']);
+
+/** Every `{{ a.b }}` in the template, with what was guarding it. */
+function dottedBindings(template) {
+  const out = [];
+  const guards = [];   // sc-if conditions still open
+  const aliases = [];  // sc-for aliases still in scope
+  const token = /<sc-if\b[^>]*value="\{\{([^}]*)\}\}"|<sc-for\b[^>]*as="([^"]*)"|<\/sc-(if|for)>|\{\{([^}]*)\}\}/g;
+  for (const m of template.matchAll(token)) {
+    if (m[1] !== undefined) { guards.push(m[1]); continue; }
+    if (m[2] !== undefined) { aliases.push(m[2]); continue; }
+    if (m[3] === 'if') { guards.pop(); continue; }
+    if (m[3] === 'for') { aliases.pop(); continue; }
+    const expr = (m[4] || '').trim();
+    const dot = /^([A-Za-z_$][\w$]*)\s*\./.exec(expr);
+    if (!dot) continue;
+    const root = dot[1];
+    if (ALWAYS.has(root) || aliases.includes(root)) continue;
+    /* A guard counts when it names the thing: `{{ investors }}` or the
+       site's companion-boolean idiom, `{{ hasDebt }}` around `debt.*`. */
+    const named = root.toLowerCase();
+    if (guards.some((g) => g.toLowerCase().includes(named))) continue;
+    out.push({ expr, root });
+  }
+  return out;
+}
+
+test('no binding reads through a document that has not arrived', async () => {
+  const template = await readFile(new URL('public/esthmr/template.html', ROOT), 'utf8');
+  const reads = dottedBindings(template);
+  assert.ok(reads.length > 5, 'the template scan found nothing, so it is testing nothing');
+
+  const broken = new Set();
+  // Every optional document absent in turn: the state a slow loader produces.
+  for (const missing of ['', ...OPTIONAL, 'flowTrackers', 'sectorOwnership', 'top5', 'scenarios', 'picks']) {
+    const D = { ...FULL };
+    if (missing) delete D[missing];
+    for (const screen of SCREENS) {
+      for (const lang of ['ar', 'en']) {
+        const c = new Component({});
+        Object.assign(c.state, { lang, screen });
+        if (screen === 'company') c.state.ticker = (D.companies?.[0]?.ticker) || 'COMI';
+        c.setData(D);
+        let vals;
+        try { vals = c.renderVals(); } catch { continue; }
+        for (const { expr, root } of reads) {
+          if (!(root in vals)) continue;          // never built on this screen
+          const value = vals[root];
+          if (value === null || value === undefined) {
+            broken.add(`{{ ${expr} }} — ${root} is ${value} on ${screen} without ${missing || 'nothing'}`);
+          }
+        }
+      }
+    }
+  }
+  assert.deepEqual([...broken].slice(0, 6), [],
+    'a binding reads a field off a value that is null, and dc.js drops its subtree without throwing');
+});

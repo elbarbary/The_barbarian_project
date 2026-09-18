@@ -2655,13 +2655,6 @@ export class Component extends Base {
         // cumulative figures with no date at all, and "period to date" named
         // no period. The stamp is Cairo local time as the exchange publishes it.
         asOfLine: d.asOf ? L.investorsAsOf + ' ' + String(d.asOf).replace('T', ' ').slice(0, 16) + ' (Cairo)' : '',
-        /* The card's dateline. The exchange does not always stamp this
-           document — `as_of` is null until it does — and an empty dateline
-           reads as a card with no provenance at all, so what is always true
-           of the figures stands in its place: whose classification they are,
-           and what they are counted in. Never a date this end invented. */
-        dateline: [d.asOf ? L.investorsAsOf + ' ' + String(d.asOf).slice(0, 10) : '', L.investorsFrom]
-          .filter(Boolean).join(' · '),
         equitiesLine: (d.equities && d.equities.length)
           ? L.investorsEquities + ' ' + d.equities.map((p) => (ar ? p.partyAr : p.party) + ' ' + (p.percent === null ? '—' : p.percent.toFixed(2) + '%')).join(' · ')
           : '',
@@ -4716,6 +4709,17 @@ export class Component extends Base {
       arBg: ar ? 'var(--surface)' : 'transparent', arFg: ar ? 'var(--ink)' : 'var(--t2)', arSh: ar ? 'var(--shPill)' : 'none',
       themeIcon: st.theme === 'light' ? 'M12 4.6V2.8M12 21.2v-1.8M4.6 12H2.8M21.2 12h-1.8M6.8 6.8 5.5 5.5M18.5 18.5l-1.3-1.3M6.8 17.2l-1.3 1.3M18.5 5.5l-1.3 1.3M12 7.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8' : 'M20.4 14.6A8.8 8.8 0 0 1 9.4 3.6a8.8 8.8 0 1 0 11 11',
       isHome: st.screen === 'home', isToday: st.screen === 'today', isMarket: st.screen === 'market',
+      /* Read above the `sc-if` that proves the document arrived, so it is a
+         string here rather than a field on a record that is null until then:
+         `{{ investors.dateline }}` on a null `investors` takes the whole
+         subtree out of the render — the DC engine logs "could not evaluate"
+         and drops it, which is silent to anyone not watching the console.
+         The exchange leaves `as_of` null until it stamps the document, so
+         when there is no date the line carries what is always true of the
+         figures instead: whose classification they are, and what they are
+         counted in. Never a date this end invented. */
+      investorsDateline: [D.investors?.asOf ? L.investorsAsOf + ' ' + String(D.investors.asOf).slice(0, 10) : '',
+        L.investorsFrom].filter(Boolean).join(' · '),
       flowViews: flowTrackers(this, D, ar),
       /* Three things that changed, each drawn in a different primitive and
          each carrying the sentence that keeps it a measurement. Built for

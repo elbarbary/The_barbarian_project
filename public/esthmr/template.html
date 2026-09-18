@@ -174,7 +174,7 @@
         <h2>{{ insightHeading }}</h2>
         <div class="insight-grid">
           <article class="insight-card insight-investors">
-            <p class="card-dateline"><span>{{ investors.dateline }}</span><button type="button" onClick="{{ goInvestors }}">{{ L.investorsOpen }} ↗</button></p>
+            <p class="card-dateline"><span>{{ investorsDateline }}</span><button type="button" onClick="{{ goInvestors }}">{{ L.investorsOpen }} ↗</button></p>
             <header class="island-heading"><h3>{{ L.investorsWho }}</h3></header>
             <sc-if value="{{ investors }}">
               <p class="card-lead">{{ L.investorsTwoSides }}</p>
