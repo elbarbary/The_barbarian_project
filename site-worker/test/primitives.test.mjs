@@ -153,3 +153,31 @@ test('numbers inside Arabic prose stay attached to their sign', () => {
   assert.match(sheet, /unicode-bidi:\s*isolate/, 'figures are not isolated in RTL');
   assert.match(code, /export function figure/);
 });
+
+/* ── the page is flat, and its accent is readable ───────────────────────── */
+
+test('no reading surface is frosted glass', async () => {
+  /* The comp is paper: a surface, an edge, a radius. `backdrop-filter` on a
+     card is the look it replaced, and it is also the single most expensive
+     thing to composite on a phone — the site had eight of them inline in one
+     template. A scrim behind a modal is a different job and is left alone. */
+  const template = await readFile(here('template.html'), 'utf8');
+  assert.doesNotMatch(template, /backdrop-filter/, 'a card in the template is still frosted');
+});
+
+test('text on the accent is a token, not the palette ink', async () => {
+  /* `#1B1917` was the ink for chips sitting ON the accent, back when the
+     accent was a pale warm teal. It is #126B75 now and dark ink on it fails
+     contrast — which is why a rule existed that repainted every such chip in
+     the light theme and left the dark theme wrong. */
+  for (const file of ['template.html', 'logic.js']) {
+    const src = await readFile(here(file), 'utf8');
+    assert.doesNotMatch(src, /#1B1917/, `${file} paints text with the old ink`);
+  }
+  const sheet = await readFile(here('journal.css'), 'utf8');
+  assert.doesNotMatch(sheet, /#1B1917/, 'the light-theme patch for that ink is still here');
+  const light = design.slice(design.indexOf('[data-theme="light"]'), design.indexOf('[data-theme="dark"]'));
+  const dark = design.slice(design.indexOf('[data-theme="dark"]'));
+  assert.ok(light.includes('--onAccent:'), '--onAccent is not declared for the light theme');
+  assert.ok(dark.includes('--onAccent:'), '--onAccent is not declared for the dark theme');
+});

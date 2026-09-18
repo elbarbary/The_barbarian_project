@@ -5,6 +5,7 @@ import { marketStory } from './market-story.js';
 import { pairsExplorer } from './pairs.js';
 import { valuationExplorer } from './valuation.js';
 import { flowTrackers } from './flow-trackers.js';
+import { sectorTable } from './sector-lens.js';
 import { aiCards } from './ai-cards.js';
 import { scenariosScreen } from './scenarios.js';
 
@@ -1608,7 +1609,7 @@ export class Component extends Base {
         // Picking the ratio already on is how you turn the test off.
         go: () => set({ m: rq.m === m.id ? '' : m.id }),
         bg: rq.m === m.id ? 'var(--accent)' : 'transparent',
-        color: rq.m === m.id ? '#1B1917' : 'var(--t2)',
+        color: rq.m === m.id ? 'var(--onAccent)' : 'var(--t2)',
         border: rq.m === m.id ? 'transparent' : 'var(--rule)',
       })),
       ops: [['gt', ar ? 'أكبر من' : 'more than'], ['lt', ar ? 'أقل من' : 'less than'],
@@ -1738,7 +1739,7 @@ export class Component extends Base {
     const measureChips = chipDefs.map((d) => ({
       label: d.label, note: d.note, on: onNow(d.id),
       bg: onNow(d.id) ? 'var(--accent)' : 'transparent',
-      color: onNow(d.id) ? '#1B1917' : 'var(--t2)',
+      color: onNow(d.id) ? 'var(--onAccent)' : 'var(--t2)',
       border: onNow(d.id) ? 'transparent' : 'var(--rule)',
       go: () => this.setState((x) => {
         const cur = Array.isArray(x.rqs) ? x.rqs : [];
@@ -1808,7 +1809,7 @@ export class Component extends Base {
     const sectorChips = sectorList.map(s => {
       const on = st.sector === s;
       return { label: s === 'All' ? (ar?'الكل':'All sectors') : sectorName(s), go: () => this.setState({ sector:s }),
-        border: on ? 'transparent' : 'var(--rule)', color: on ? '#1B1917' : 'var(--t2)', bg: on ? 'var(--accent)' : 'transparent', sh: on ? 'var(--shPill)' : 'none' };
+        border: on ? 'transparent' : 'var(--rule)', color: on ? 'var(--onAccent)' : 'var(--t2)', bg: on ? 'var(--accent)' : 'transparent', sh: on ? 'var(--shPill)' : 'none' };
     });
 
     // Above mkRow, which reads it — and mkRow is called by the movers and the
@@ -3846,7 +3847,7 @@ export class Component extends Base {
       const doc = (D.indexMembers || []).find((i) => i.id === id);
       return { label, count: doc ? String(doc.count) : String(D.companies.length),
         go: () => this.setState({ heat: id, heatSector: '' }),
-        color: on ? '#1B1917' : 'var(--t2)', bg: on ? 'var(--accent)' : 'transparent',
+        color: on ? 'var(--onAccent)' : 'var(--t2)', bg: on ? 'var(--accent)' : 'transparent',
         border: on ? 'transparent' : 'var(--rule)', sh: on ? 'var(--shPill)' : 'none' };
     });
 
@@ -4715,6 +4716,10 @@ export class Component extends Base {
       themeIcon: st.theme === 'light' ? 'M12 4.6V2.8M12 21.2v-1.8M4.6 12H2.8M21.2 12h-1.8M6.8 6.8 5.5 5.5M18.5 18.5l-1.3-1.3M6.8 17.2l-1.3 1.3M18.5 5.5l-1.3 1.3M12 7.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8' : 'M20.4 14.6A8.8 8.8 0 0 1 9.4 3.6a8.8 8.8 0 1 0 11 11',
       isHome: st.screen === 'home', isToday: st.screen === 'today', isMarket: st.screen === 'market',
       flowViews: flowTrackers(this, D, ar),
+      // Size, activity and movement on one scale. Built only for the screen
+      // that shows it: it walks every member of every sector.
+      sectorTable: st.screen === 'sectors'
+        ? sectorTable(D.flowTrackers, { ar, t: (en, arabic) => (ar ? arabic : en) }) : null,
       // Home, in its own module. This file is the longest on the site and
       // Home was five hundred lines of template inside it; the screen it
       // replaced is a different product, not a rearrangement of the old one.

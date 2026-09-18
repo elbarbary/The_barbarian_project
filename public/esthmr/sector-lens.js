@@ -459,3 +459,118 @@ export function shareLines(doc, { ar, t, focus, onPick, months = LINE_MONTHS }) 
     }, e.sector.length > 26 ? `${e.sector.slice(0, 25)}…` : e.sector))
   ));
 }
+
+/* ── the sectors, on aligned bars ───────────────────────────────────────── */
+
+/**
+ * Size, activity and movement, separated and aligned.
+ *
+ * The screen showed sectors as a grid of cards, and a card grid cannot answer
+ * the question this table exists for: is this sector big, or is it busy?
+ * Those are different facts and a card puts them in different places on every
+ * tile. On one scale, down one column, a reader can see that a sector holding
+ * a twentieth of the market's value took a fifth of its trading — which is
+ * the whole observation.
+ *
+ * Three rules the numbers have to keep:
+ *
+ * Traded value is not money entering. Every trade has two sides; a sector
+ * with high turnover had a lot of shares change hands, and the note under
+ * the title says exactly that, because "activity" is read as "inflow" by
+ * default.
+ *
+ * A company that did not trade is not a company that held steady. It gets
+ * its own hatched band in the breadth bar, never the "unchanged" grey, and
+ * it is counted in the denominator so the bar cannot silently rescale.
+ *
+ * The weighted return is the exchange's own arithmetic on this document
+ * (`sizeWeightedReturn`), not something re-derived here from the members.
+ */
+export function sectorTable(doc, { ar, t }) {
+  const sectors = (doc && Array.isArray(doc.sectors) ? doc.sectors : [])
+    .filter((s) => s && Array.isArray(s.members) && s.members.length);
+  if (!sectors.length) return null;
+
+  const valueOf = (s) => s.members.reduce((sum, m) => sum + (finite(m.value) ? m.value : 0), 0);
+  const capOf = (s) => (finite(s.cap) ? s.cap
+    : s.members.reduce((sum, m) => sum + (finite(m.cap) ? m.cap : 0), 0));
+  const totalCap = sectors.reduce((sum, s) => sum + capOf(s), 0);
+  const totalValue = sectors.reduce((sum, s) => sum + valueOf(s), 0);
+  if (!totalCap || !totalValue) return null;
+
+  const pct = (v) => `${(v * 100).toFixed(1)}%`;
+  const signed = (v) => (finite(v) ? `${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(v).toFixed(2)}%` : '—');
+
+  const rows = sectors.map((s) => {
+    const cap = capOf(s), value = valueOf(s);
+    // A reading each way. `change === null` is a company the session has no
+    // move for: it did not trade, which is the opposite fact to "unchanged".
+    let up = 0, down = 0, flat = 0, none = 0;
+    for (const m of s.members) {
+      if (!finite(m.change)) none += 1;
+      else if (m.change > 0) up += 1;
+      else if (m.change < 0) down += 1;
+      else flat += 1;
+    }
+    const counted = s.members.length || 1;
+    const width = (n) => `${((n / counted) * 100).toFixed(2)}%`;
+    return {
+      id: s.id, name: ar ? (s.nameAr || s.name) : s.name,
+      size: cap / totalCap, act: value / totalValue,
+      ret: finite(s.sizeWeightedReturn) ? s.sizeWeightedReturn : null,
+      up, down, flat, none, counted,
+      upW: width(up), downW: width(down), flatW: width(flat), noneW: width(none),
+    };
+  }).sort((a, b) => b.act - a.act);
+
+  // Both bars are drawn against the LARGEST sector, not against the whole
+  // market: at 1% of the total every bar is a sliver and the column stops
+  // being readable. The percentage beside it is the real share.
+  const maxSize = Math.max(...rows.map((r) => r.size));
+  const maxAct = Math.max(...rows.map((r) => r.act));
+
+  const bar = (share, max, cls) => h('span', { class: 'sx-track' },
+    h('span', { class: `sx-fill ${cls}`, style: `width:${((share / max) * 100).toFixed(2)}%` }));
+
+  const head = h('div', { class: 'sx-head' },
+    h('span', null, t('Sector', 'القطاع')),
+    h('span', null, t('Size · share of covered market value', 'حجم · نصيب من القيمة السوقية المغطاة')),
+    h('span', null, t('Activity · share of traded value', 'نشاط · نصيب من القيمة المتداولة')),
+    h('span', null, t('Movement · weighted return and breadth', 'حركة · عائد مرجّح واتساع')));
+
+  const body = rows.map((r) => h('div', { key: r.id, class: 'sx-row' },
+    h('span', { class: 'sx-name' }, r.name),
+    h('span', { class: 'sx-cell' }, bar(r.size, maxSize, 'is-size'),
+      h('b', { dir: 'ltr' }, pct(r.size))),
+    h('span', { class: 'sx-cell' }, bar(r.act, maxAct, 'is-act'),
+      h('b', { dir: 'ltr' }, pct(r.act))),
+    h('span', { class: 'sx-cell sx-move' },
+      h('b', { class: r.ret > 0 ? 'up' : r.ret < 0 ? 'down' : '', dir: 'ltr' }, signed(r.ret)),
+      h('span', { class: 'sx-breadth', role: 'img',
+        'aria-label': ar
+          ? `${r.up} صعدت · ${r.flat} بلا تغيّر · ${r.down} هبطت · ${r.none} لم تتداول`
+          : `${r.up} rose · ${r.flat} unchanged · ${r.down} fell · ${r.none} did not trade` },
+      h('i', { class: 'is-up', style: `width:${r.upW}` }),
+      h('i', { class: 'is-flat', style: `width:${r.flatW}` }),
+      h('i', { class: 'is-down', style: `width:${r.downW}` }),
+      h('i', { class: 'is-none', style: `width:${r.noneW}` })),
+      h('small', { dir: 'ltr' }, `${r.up}/${r.counted}`))));
+
+  return h('section', { class: 'sx-table', 'aria-label': t('Sectors this session', 'القطاعات في هذه الجلسة') },
+    h('p', { class: 'card-dateline' },
+      h('span', null, doc.asOf
+        ? t(`${doc.asOf} · ${doc.isClose ? 'completed session' : 'session in progress'} · ${sectors.length} sectors`,
+          `${doc.asOf} · ${doc.isClose ? 'جلسة مكتملة' : 'جلسة جارية'} · ${sectors.length} قطاعاً`)
+        : t(`${sectors.length} sectors`, `${sectors.length} قطاعاً`))),
+    h('h2', { class: 'sx-title' }, t('Sectors', 'القطاعات')),
+    h('p', { class: 'card-lead' }, t(
+      'Traded value is trading, not money coming in — every trade has two sides.',
+      'القيمة المتداولة قيمة تداول، لا «أموال داخلة» — لكل صفقة طرفان.')),
+    head,
+    h('div', { class: 'sx-rows' }, body),
+    h('p', { class: 'sx-key' },
+      h('span', null, h('i', { class: 'is-up' }), t('rose', 'صعدت')),
+      h('span', null, h('i', { class: 'is-flat' }), t('unchanged', 'بلا تغيّر')),
+      h('span', null, h('i', { class: 'is-down' }), t('fell', 'هبطت')),
+      h('span', null, h('i', { class: 'is-none' }), t('did not trade', 'لم تتداول'))));
+}

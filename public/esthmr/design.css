@@ -28,6 +28,11 @@
        the stripe used for "did not trade" and for an unknown remainder: a
        texture reads as absence where a flat grey reads as a value. */
     --accentPress:#0E555D;
+    /* Text ON the accent. The palette's ink was used for this while the
+       accent was a pale warm teal; it is #126B75 now, and dark ink on it is
+       unreadable — which is why journal.css carried a rule that repainted
+       every such chip in the light theme and left the dark one wrong. */
+    --onAccent:#FAFCFE;
     /* Share bars need a THIRD and FOURTH step that are still visible on
        --surface. --accTint/--irisTint are 10% and vanish; these are the same
        two hues at a strength a reader can actually see a boundary at. */
@@ -69,6 +74,7 @@
     --activeBg:rgba(240,235,229,.09);
     --radius-island:20px;--radius-control:12px;
     --accentPress:#A8E0E2;
+    --onAccent:#111D29;
     --accMid:rgba(134,207,210,.42);--irisMid:rgba(167,184,235,.42);
     --hatch:rgba(240,235,229,.20);--hatchBg:rgba(240,235,229,.05);
     --stStale:#9BADBE;--stEstimated:#A7B8EB;--stNone:#8E857D;

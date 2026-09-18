@@ -1,10 +1,10 @@
 <div class="{{ dataShellClass }}" data-theme="{{ theme }}" dir="{{ dir }}" style="min-height:100vh;background:var(--bg);background-image:radial-gradient(1100px 600px at 12% -8%,var(--wash1),transparent 62%),radial-gradient(900px 520px at 96% 4%,var(--wash2),transparent 60%);color:var(--ink);font-family:{{ bodyFont }};font-size:15px;line-height:1.5;font-variant-numeric:tabular-nums">
 
-  <aside class="om-rail" style="position:fixed;inset-block:14px;inset-inline-start:14px;width:250px;border-radius:26px;background:var(--glass);backdrop-filter:blur(24px) saturate(1.5);border:1px solid var(--edge);box-shadow:var(--sh);padding:24px 18px 20px;display:flex;flex-direction:column;gap:24px;overflow-y:auto;overscroll-behavior:contain;z-index:5">
+  <aside class="om-rail" style="position:fixed;inset-block:14px;inset-inline-start:14px;width:250px;border-radius:26px;background:var(--glass);border:1px solid var(--edge);box-shadow:var(--sh);padding:24px 18px 20px;display:flex;flex-direction:column;gap:24px;overflow-y:auto;overscroll-behavior:contain;z-index:5">
     <div class="om-brand" style="padding-inline:8px">
       <div style="display:flex;align-items:center;gap:9px">
         <div style="width:30px;height:30px;border-radius:11px;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:var(--shPill)">
-          <span style="font-family:var(--font-heading);font-weight:700;font-size:16px;color:#1B1917;letter-spacing:-.04em">E</span>
+          <span style="font-family:var(--font-heading);font-weight:700;font-size:16px;color:var(--onAccent);letter-spacing:-.04em">E</span>
         </div>
         <div style="font-family:var(--font-heading);font-weight:700;font-size:22px;letter-spacing:-.04em">ESTHMR</div>
       </div>
@@ -196,7 +196,7 @@
       </section>
       {{ flowViews.home }}
       <sc-if value="{{ screen }}">
-        <section class="market-measures" style="margin-top:18px;padding:20px 22px 18px;border-radius:20px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shCard)">
+        <section class="market-measures" style="margin-top:18px;padding:20px 22px 18px;border-radius:20px;background:var(--glass);border:1px solid var(--edge);box-shadow:var(--shCard)">
           <div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap">
             <h2 style="font-family:var(--font-heading);font-size:24px;font-weight:600;letter-spacing:-.02em;margin:0">{{ L.screenTitle }}</h2>
           </div>
@@ -503,11 +503,11 @@
           <sc-if value="{{ homeIsClose }}"><div style="font-size:13.5px;color:var(--t2)">{{ L.closeOf }} {{ marketDate }}</div></sc-if>
           <sc-if value="{{ homeIsLive }}"><div style="font-size:13.5px;color:var(--t2)">{{ sessionState }}</div></sc-if>
         </div>
-        <div onClick="{{ goMarket }}" title="{{ L.marketTitle }}" aria-label="{{ L.marketTitle }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:999px;border:1px solid var(--edge);background:var(--glass);backdrop-filter:blur(18px);margin-inline-end:2px;font-size:12.5px;color:var(--t2);transition:background .15s,color .15s,border-color .15s" style-hover="background:var(--sunk);color:var(--ink);border-color:var(--accent)">
+        <div onClick="{{ goMarket }}" title="{{ L.marketTitle }}" aria-label="{{ L.marketTitle }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:999px;border:1px solid var(--edge);background:var(--glass);margin-inline-end:2px;font-size:12.5px;color:var(--t2);transition:background .15s,color .15s,border-color .15s" style-hover="background:var(--sunk);color:var(--ink);border-color:var(--accent)">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ searchIcon }}"></path></svg>
           <span>{{ L.marketTitle }}</span>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shPill);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">
+        <div style="display:flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:var(--glass);border:1px solid var(--edge);box-shadow:var(--shPill);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">
           <span style="width:7px;height:7px;border-radius:50%;background:var(--accent)"></span>{{ homeNote }}
         </div>
       </div>
@@ -970,7 +970,7 @@
         <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);text-align:end;line-height:1.6">{{ marketVisibleCount }} / {{ totalCount }}<br>{{ marketDate }}</div>
       </div>
 
-      <div class="om-search" style="border-radius:22px;background:var(--glass);backdrop-filter:blur(20px) saturate(1.4);border:1px solid var(--edge);box-shadow:var(--sh);padding:16px;transition:box-shadow .18s,border-color .18s">
+      <div class="om-search" style="border-radius:22px;background:var(--glass);border:1px solid var(--edge);box-shadow:var(--sh);padding:16px;transition:box-shadow .18s,border-color .18s">
         <div style="display:flex;align-items:center;gap:10px;padding:0 4px 12px">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.7" stroke-linecap="round" style="width:17px;height:17px"><path d="M10.6 17.2a6.6 6.6 0 1 0 0-13.2 6.6 6.6 0 0 0 0 13.2M15.4 15.4 20.4 20.4"></path></svg>
           <input id="om-market-search" name="market-search" autocomplete="off" aria-label="{{ searchPlaceholder }}" value="{{ query }}" onChange="{{ onQuery }}" placeholder="{{ searchPlaceholder }}" style="flex:1;min-width:0;padding:10px 0;border:none;background:transparent;color:var(--ink);font-family:inherit;font-size:15px;outline:none">
@@ -1794,7 +1794,7 @@
           <div style="font-size:30px;line-height:1;color:var(--faint)">☆</div>
           <div style="font-family:var(--font-heading);font-size:25px;font-weight:500;letter-spacing:-.025em;margin-top:14px">{{ L.followEmptyTitle }}</div>
           <div style="font-size:13.5px;color:var(--t2);margin-top:9px;max-width:46ch;margin-inline:auto;line-height:1.6;text-wrap:pretty">{{ L.followEmpty }}</div>
-          <div onClick="{{ goMarket }}" style="cursor:pointer;display:inline-flex;margin-top:20px;padding:9px 18px;border-radius:999px;background:var(--accent);color:#1B1917;box-shadow:var(--shPill);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase">{{ L.followBrowse }}</div>
+          <div onClick="{{ goMarket }}" style="cursor:pointer;display:inline-flex;margin-top:20px;padding:9px 18px;border-radius:999px;background:var(--accent);color:var(--onAccent);box-shadow:var(--shPill);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase">{{ L.followBrowse }}</div>
         </div>
       </sc-if>
 
@@ -1817,7 +1817,7 @@
         <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:30px;align-items:flex-start">
           <div style="min-width:0">
             <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-              <span style="padding:4px 11px;border-radius:999px;background:var(--accent);color:#1B1917;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.06em">{{ co.ticker }}</span>
+              <span style="padding:4px 11px;border-radius:999px;background:var(--accent);color:var(--onAccent);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.06em">{{ co.ticker }}</span>
               <!-- Follow, on the screen a reader is most likely to decide on:
                    the one company they came to read about. -->
               <sc-if value="{{ canFollowCompany }}">
@@ -2440,6 +2440,7 @@
         <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);text-align:end;line-height:1.6">{{ sectorCount }} {{ L.sectorsWord }}<br>{{ marketDate }}</div>
       </div>
       <sc-if value="{{ noOpenSector }}">
+      {{ sectorTable }}
       <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px">
         <sc-for list="{{ sectorCards }}" as="s" hint-placeholder-count="9">
           <div onClick="{{ s.open }}" title="{{ L.secOpen }}" style="cursor:pointer;border-radius:20px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 20px;display:flex;flex-direction:column;gap:14px;min-width:0;min-height:222px;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:var(--shLift)">
@@ -2567,7 +2568,7 @@
     <div class="om-scr screen-calendar" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 8px 0">
         <h1 style="font-family:var(--font-heading);font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ story.calendarLabel }}</h1>
-        <div style="display:flex;gap:3px;padding:4px;border-radius:14px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shPill)">
+        <div style="display:flex;gap:3px;padding:4px;border-radius:14px;background:var(--glass);border:1px solid var(--edge);box-shadow:var(--shPill)">
           <sc-for list="{{ months }}" as="m" hint-placeholder-count="4">
             <div onClick="{{ m.go }}" style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:7px 13px;border-radius:11px;color:{{ m.color }};background:{{ m.bg }};box-shadow:{{ m.sh }}">{{ m.label }}<span style="color:var(--faint);margin-inline-start:7px;font-size:9.5px;opacity:.8">· {{ m.count }}</span></div>
           </sc-for>
@@ -2596,7 +2597,7 @@
         </div>
       </div>
 
-      <div class="om-search" style="border-radius:20px;background:var(--glass);backdrop-filter:blur(20px) saturate(1.4);border:1px solid var(--edge);box-shadow:var(--sh);padding:14px 16px">
+      <div class="om-search" style="border-radius:20px;background:var(--glass);border:1px solid var(--edge);box-shadow:var(--sh);padding:14px 16px">
         <div style="display:flex;align-items:center;gap:10px">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.7" stroke-linecap="round" style="width:16px;height:16px;flex:none"><path d="M10.6 17.2a6.6 6.6 0 1 0 0-13.2 6.6 6.6 0 0 0 0 13.2M15.4 15.4 20.4 20.4"></path></svg>
           <input id="om-filed-search" name="filed-search" autocomplete="off" aria-label="{{ L.filedSearch }}" value="{{ filedQ }}" onChange="{{ onFiledQuery }}" placeholder="{{ L.filedSearch }}" style="flex:1;min-width:0;padding:7px 0;border:none;background:transparent;color:var(--ink);font-family:inherit;font-size:14.5px;outline:none">
@@ -2743,7 +2744,7 @@
       <header class="context-intro"><p>{{ exchangeIntro }}</p></header>
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0">
         <h1 style="font-family:var(--font-heading);font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.exchangeTitle }}</h1>
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shPill);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--glass);border:1px solid var(--edge);box-shadow:var(--shPill);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">
           <span style="width:7px;height:7px;border-radius:50%;background:var(--iris)"></span>{{ L.delayed15 }}
         </div>
       </div>
@@ -3828,10 +3829,10 @@
   </sc-if>
 
   <!-- legal -->
-  <footer style="margin-top:20px;border-radius:22px;background:var(--glass);backdrop-filter:blur(20px) saturate(1.4);border:1px solid var(--edge);box-shadow:var(--sh);padding:20px 24px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:start">
+  <footer style="margin-top:20px;border-radius:var(--radius-island);background:var(--surface);border:1px solid var(--rule);padding:18px 20px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center">
     <div style="display:flex;align-items:center;gap:8px">
       <div style="width:24px;height:24px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center">
-        <span style="font-family:var(--font-heading);font-weight:700;font-size:13px;color:#1B1917">E</span>
+        <span style="font-family:var(--font-heading);font-weight:700;font-size:13px;color:var(--onAccent)">E</span>
       </div>
       <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)">{{ L.publisherStamp }}</div>
     </div>

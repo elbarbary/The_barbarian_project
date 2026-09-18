@@ -221,7 +221,6 @@
 .financial-mobile-label { display:none; }
 #app [data-theme="dark"] [style*="color:#3F6B52"] { color:var(--up) !important; }
 #app [data-theme="dark"] [style*="color:#A3402F"] { color:var(--down) !important; }
-#app [data-theme="light"] [style*="background:var(--accent)"][style*="color:#1B1917"] { color:#fff7ef !important; }
 @media (hover:hover) {
   .company-sections button:hover, .journal-subnav button:hover { background:var(--sunk); }
   .island-move:hover, .scenario-card:hover { outline:1px solid var(--rule); }
@@ -1046,3 +1045,67 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
   padding: 0 !important; min-height: 32px;
 }
 #app .island-heading button:hover { color: var(--ink) !important; background: transparent; }
+
+/* ── SECTORS ON ALIGNED BARS ─────────────────────────────────────────────
+ * One grid, four columns, every bar on the same scale down its column. The
+ * screen showed cards, and a card cannot answer "is this sector big or is it
+ * busy?" — the two facts land in different places on every tile.
+ */
+#app .sx-table {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: var(--radius-island); padding: 20px; min-width: 0;
+}
+#app .sx-title { font-size: 21px; font-weight: 600; margin: 0 0 4px; }
+#app .sx-head, #app .sx-row {
+  display: grid; grid-template-columns: 150px 1fr 1fr 210px; gap: 14px; align-items: center;
+}
+#app .sx-head {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 11.5px; color: var(--faint); line-height: 1.5;
+  padding-bottom: 10px; border-bottom: 1px solid var(--rule);
+}
+#app .sx-rows { display: flex; flex-direction: column; }
+#app .sx-row { padding: 13px 0; border-bottom: 1px solid var(--rule2); }
+#app .sx-name { font-size: 15px; font-weight: 500; min-width: 0; }
+#app .sx-cell { display: flex; align-items: center; gap: 10px; min-width: 0; }
+#app .sx-cell > b {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 400;
+  color: var(--t2); width: 42px; flex: none; text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+#app .sx-track { flex: 1; min-width: 0; height: 8px; border-radius: 4px; background: var(--sunk); overflow: hidden; }
+#app .sx-fill { display: block; height: 100%; border-radius: 4px; }
+/* Size is a fact about the market and stays neutral; activity is what this
+   screen is asking about, so it takes the accent. */
+#app .sx-fill.is-size { background: var(--thread); }
+#app .sx-fill.is-act { background: var(--accent); }
+#app .sx-move > b { width: 62px; font-size: 13.5px; font-weight: 600; }
+#app .sx-move > b.up { color: var(--up); }
+#app .sx-move > b.down { color: var(--down); }
+#app .sx-move > small {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--faint); width: 44px; flex: none;
+}
+#app .sx-breadth { flex: 1; min-width: 0; display: flex; height: 10px; border-radius: 3px; overflow: hidden; direction: ltr; }
+#app .sx-breadth i { display: block; height: 100%; }
+#app .sx-breadth i.is-up, #app .sx-key i.is-up { background: var(--up); }
+#app .sx-breadth i.is-flat, #app .sx-key i.is-flat { background: var(--rule); }
+#app .sx-breadth i.is-down, #app .sx-key i.is-down { background: var(--down); }
+/* A company that did not trade is not a company that held steady. Hatched,
+   never the unchanged grey, and counted in the denominator. */
+#app .sx-breadth i.is-none, #app .sx-key i.is-none {
+  background: repeating-linear-gradient(135deg,
+    var(--irisMid) 0 4px, var(--irisTint) 4px 8px);
+}
+#app .sx-key {
+  display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 14px 0 0;
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 11.5px; color: var(--t2);
+}
+#app .sx-key span { display: inline-flex; align-items: center; gap: 6px; }
+#app .sx-key i { width: 12px; height: 10px; border-radius: 2px; display: inline-block; }
+@media (max-width: 860px) {
+  #app .sx-head { display: none; }
+  #app .sx-row { grid-template-columns: 1fr; gap: 8px; }
+  #app .sx-cell > b { width: auto; }
+  #app .sx-table { padding: 16px; }
+}
