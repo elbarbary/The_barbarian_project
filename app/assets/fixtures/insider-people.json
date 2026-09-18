@@ -1,14 +1,14 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-17T17:38:57+00:00",
+ "generated": "2026-09-18T10:08:53+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1323,
- "tradeCount": 215,
+ "peopleCount": 1324,
+ "tradeCount": 220,
  "tickerCount": 237,
- "tradedTickerCount": 82,
- "firmCount": 438,
+ "tradedTickerCount": 83,
+ "firmCount": 439,
  "personCount": 885,
  "aliasCount": 149,
  "registerCount": 236,
@@ -307,6 +307,99 @@
    ]
   },
   {
+   "id": "الشركة الوطنية للتجارة والتنمية (انتاد)",
+   "name": "الشركة الوطنية للتجارة والتنمية (انتاد)",
+   "nameEn": "National Company for Trading and Development (ENTAD)",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "KWIN"
+   ],
+   "tradeCount": 5,
+   "boughtCount": 0,
+   "soldCount": 5,
+   "value": 105215587.9,
+   "singleCompanyMove": {
+    "ticker": "KWIN",
+    "from": 23.86,
+    "to": 11.8,
+    "change": -12.06
+   },
+   "trades": [
+    {
+     "filingId": "290156",
+     "date": "2026-06-22",
+     "ticker": "KWIN",
+     "company": null,
+     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
+     "action": "sell",
+     "shares": 500000,
+     "price": 84.74,
+     "value": 42370000.0,
+     "stakeBefore": 23.86,
+     "stakeAfter": 19.095,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339984_1.pdf"
+    },
+    {
+     "filingId": "291633",
+     "date": "2026-07-20",
+     "ticker": "KWIN",
+     "company": null,
+     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
+     "action": "sell",
+     "shares": 300000,
+     "price": 81.24,
+     "value": 24372000.0,
+     "stakeBefore": 19.096,
+     "stakeAfter": 16.24,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341329_1.pdf"
+    },
+    {
+     "filingId": "292191",
+     "date": "2026-07-30",
+     "ticker": "KWIN",
+     "company": null,
+     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
+     "action": "sell",
+     "shares": 274098,
+     "price": 105.16,
+     "value": 28824145.68,
+     "stakeBefore": 15.99,
+     "stakeAfter": 13.38,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341887_1.pdf"
+    },
+    {
+     "filingId": "294356",
+     "date": "2026-09-06",
+     "ticker": "KWIN",
+     "company": null,
+     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
+     "action": "sell",
+     "shares": 60000,
+     "price": 105.72,
+     "value": 6343200.0,
+     "stakeBefore": 13.38,
+     "stakeAfter": 12.81,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343876_1.pdf"
+    },
+    {
+     "filingId": "294525",
+     "date": "2026-09-09",
+     "ticker": "KWIN",
+     "company": null,
+     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
+     "action": "sell",
+     "shares": 34347,
+     "price": 96.26,
+     "value": 3306242.22,
+     "stakeBefore": 12.13,
+     "stakeAfter": 11.8,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344019_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "المجموعه الاستثماريه العقاريه الكويتيه ش م ك مقفله",
    "name": "المجموعه الاستثماريه العقاريه الكويتيه ش م ك مقفله",
    "nameEn": "Al-Majmu'ah Al-Istithmariyah Al-Aqariyah Al-Kuwaytiyah Sh.M.K. Muqfalah",
@@ -523,85 +616,6 @@
      "stakeBefore": 0,
      "stakeAfter": 7.812,
      "source": "https://www.egx.com.eg/downloads/Bulletins/328552_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "الشركة الوطنية للتجارة والتنمية (انتاد)",
-   "name": "الشركة الوطنية للتجارة والتنمية (انتاد)",
-   "nameEn": "National Company for Trading and Development (ENTAD)",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": null,
-   "tickers": [
-    "KWIN"
-   ],
-   "tradeCount": 4,
-   "boughtCount": 0,
-   "soldCount": 4,
-   "value": 62845587.9,
-   "singleCompanyMove": {
-    "ticker": "KWIN",
-    "from": 19.096,
-    "to": 11.8,
-    "change": -7.296
-   },
-   "trades": [
-    {
-     "filingId": "291633",
-     "date": "2026-07-20",
-     "ticker": "KWIN",
-     "company": null,
-     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
-     "action": "sell",
-     "shares": 300000,
-     "price": 81.24,
-     "value": 24372000.0,
-     "stakeBefore": 19.096,
-     "stakeAfter": 16.24,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341329_1.pdf"
-    },
-    {
-     "filingId": "292191",
-     "date": "2026-07-30",
-     "ticker": "KWIN",
-     "company": null,
-     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
-     "action": "sell",
-     "shares": 274098,
-     "price": 105.16,
-     "value": 28824145.68,
-     "stakeBefore": 15.99,
-     "stakeAfter": 13.38,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341887_1.pdf"
-    },
-    {
-     "filingId": "294356",
-     "date": "2026-09-06",
-     "ticker": "KWIN",
-     "company": null,
-     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
-     "action": "sell",
-     "shares": 60000,
-     "price": 105.72,
-     "value": 6343200.0,
-     "stakeBefore": 13.38,
-     "stakeAfter": 12.81,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343876_1.pdf"
-    },
-    {
-     "filingId": "294525",
-     "date": "2026-09-09",
-     "ticker": "KWIN",
-     "company": null,
-     "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
-     "action": "sell",
-     "shares": 34347,
-     "price": 96.26,
-     "value": 3306242.22,
-     "stakeBefore": 12.13,
-     "stakeAfter": 11.8,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/344019_1.pdf"
     }
    ]
   },
@@ -2763,6 +2777,43 @@
    ]
   },
   {
+   "id": "EGYCAP INVESTMENT LTD BRITISH VIRGIN ISLAND",
+   "name": "EGYCAP INVESTMENT LTD BRITISH VIRGIN ISLAND",
+   "nameEn": null,
+   "script": "latin",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "PRDC"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 72000000.0,
+   "singleCompanyMove": {
+    "ticker": "PRDC",
+    "from": 5.187,
+    "to": 4.232,
+    "change": -0.955
+   },
+   "trades": [
+    {
+     "filingId": "290138",
+     "date": "2026-06-21",
+     "ticker": "PRDC",
+     "company": null,
+     "companyAr": "بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب",
+     "action": "sell",
+     "shares": 10000000,
+     "price": 7.2,
+     "value": 72000000.0,
+     "stakeBefore": 5.187,
+     "stakeAfter": 4.232,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339981_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "محمد إبراهيم عبد المنعم النحاس",
    "name": "محمد إبراهيم عبد المنعم النحاس",
    "nameEn": "Mohamed Ibrahim Abdel Moneim El Nahas",
@@ -2887,17 +2938,31 @@
    "tickers": [
     "FCMD"
    ],
-   "tradeCount": 1,
-   "boughtCount": 0,
+   "tradeCount": 2,
+   "boughtCount": 1,
    "soldCount": 1,
-   "value": 3297000.0,
+   "value": 8857000.0,
    "singleCompanyMove": {
     "ticker": "FCMD",
-    "from": 3.467,
+    "from": 1.73,
     "to": 2.557,
-    "change": -0.91
+    "change": 0.827
    },
    "trades": [
+    {
+     "filingId": "290304",
+     "date": "2026-06-24",
+     "ticker": "FCMD",
+     "company": null,
+     "companyAr": "فيوتشر كير للصناعات الطبية",
+     "action": "buy",
+     "shares": 800000,
+     "price": 6.95,
+     "value": 5560000.0,
+     "stakeBefore": 1.73,
+     "stakeAfter": 3.12,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340116_1.pdf"
+    },
     {
      "filingId": "290533",
      "date": "2026-06-29",
@@ -3690,6 +3755,43 @@
      "stakeBefore": 15.37,
      "stakeAfter": 15.66,
      "source": "https://www.egx.com.eg/downloads/Bulletins/341136_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "KINGSWAY FUND FRONTIER CONSUMER FRANCHISES",
+   "name": "KINGSWAY FUND FRONTIER CONSUMER FRANCHISES",
+   "nameEn": null,
+   "script": "latin",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "EFID"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 115004000.0,
+   "singleCompanyMove": {
+    "ticker": "EFID",
+    "from": 4.44,
+    "to": 4.16,
+    "change": -0.28
+   },
+   "trades": [
+    {
+     "filingId": "290155",
+     "date": "2026-06-22",
+     "ticker": "EFID",
+     "company": null,
+     "companyAr": "ايديتا للصناعات الغذائية",
+     "action": "sell",
+     "shares": 4000000,
+     "price": 28.751,
+     "value": 115004000.0,
+     "stakeBefore": 4.44,
+     "stakeAfter": 4.16,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339983_1.pdf"
     }
    ]
   },
@@ -5775,6 +5877,70 @@
    ]
   },
   {
+   "id": "فهد بن حمد بن ابراهيم الحرقان",
+   "name": "فهد بن حمد بن ابراهيم الحرقان",
+   "nameEn": "Fahad bin Hamad bin Ibrahim Al-Harqan",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "فهد بن حمد بن إبراهيم الحرقان"
+   ],
+   "tickers": [
+    "GSSC",
+    "NARE",
+    "PRMH"
+   ],
+   "tradeCount": 3,
+   "boughtCount": 1,
+   "soldCount": 2,
+   "value": 47132589.54,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "290157",
+     "date": "2026-06-22",
+     "ticker": "NARE",
+     "company": null,
+     "companyAr": "مجموعة النعيم العقارية القابضة",
+     "action": "sell",
+     "shares": 1774508,
+     "price": 11.7983,
+     "value": 20936177.736399997,
+     "stakeBefore": 2.976,
+     "stakeAfter": 1.587,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339985_1.pdf"
+    },
+    {
+     "filingId": "290443",
+     "date": "2026-06-25",
+     "ticker": "PRMH",
+     "company": null,
+     "companyAr": "برايم القابضة للاستثمارات المالية",
+     "action": "sell",
+     "shares": 8766250,
+     "price": 2.6168,
+     "value": 22939523.0,
+     "stakeBefore": 20.0046,
+     "stakeAfter": 17.5,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340254_1.pdf"
+    },
+    {
+     "filingId": "294749",
+     "date": "2026-09-15",
+     "ticker": "GSSC",
+     "company": null,
+     "companyAr": "العامة للصوامع والتخزين",
+     "action": "buy",
+     "shares": 11352,
+     "price": 286.9,
+     "value": 3256888.8,
+     "stakeBefore": 4.9847,
+     "stakeAfter": 5.0496,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/344250_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "هشام إبراهيم عبد المنعم النحاس",
    "name": "هشام إبراهيم عبد المنعم النحاس",
    "nameEn": "Hesham Ibrahim Abdel Moneim El Nahas",
@@ -5974,55 +6140,6 @@
      "stakeBefore": 9.61,
      "stakeAfter": 0.0,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343545_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "فهد بن حمد بن ابراهيم الحرقان",
-   "name": "فهد بن حمد بن ابراهيم الحرقان",
-   "nameEn": "Fahad bin Hamad bin Ibrahim Al-Harqan",
-   "script": "ar",
-   "kind": "person",
-   "aliases": [
-    "فهد بن حمد بن إبراهيم الحرقان"
-   ],
-   "tickers": [
-    "GSSC",
-    "PRMH"
-   ],
-   "tradeCount": 2,
-   "boughtCount": 1,
-   "soldCount": 1,
-   "value": 26196411.8,
-   "singleCompanyMove": null,
-   "trades": [
-    {
-     "filingId": "290443",
-     "date": "2026-06-25",
-     "ticker": "PRMH",
-     "company": null,
-     "companyAr": "برايم القابضة للاستثمارات المالية",
-     "action": "sell",
-     "shares": 8766250,
-     "price": 2.6168,
-     "value": 22939523.0,
-     "stakeBefore": 20.0046,
-     "stakeAfter": 17.5,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/340254_1.pdf"
-    },
-    {
-     "filingId": "294749",
-     "date": "2026-09-15",
-     "ticker": "GSSC",
-     "company": null,
-     "companyAr": "العامة للصوامع والتخزين",
-     "action": "buy",
-     "shares": 11352,
-     "price": 286.9,
-     "value": 3256888.8,
-     "stakeBefore": 4.9847,
-     "stakeAfter": 5.0496,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/344250_1.pdf"
     }
    ]
   },
@@ -19661,21 +19778,6 @@
    "trades": []
   },
   {
-   "id": "KINGSWAY FUND FRONTIER CONSUMER FRANCHISES",
-   "name": "KINGSWAY FUND FRONTIER CONSUMER FRANCHISES",
-   "nameEn": null,
-   "script": null,
-   "kind": "firm",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
    "id": "KINGSWAY FUND FRONTIER CONSUMER FRANCHISES EXTOBA",
    "name": "KINGSWAY FUND FRONTIER CONSUMER FRANCHISES EXTOBA",
    "nameEn": null,
@@ -29671,9 +29773,13 @@
    "basis": "trade",
    "filingId": "294525",
    "source": "https://www.egx.com.eg/downloads/Bulletins/344019_1.pdf",
-   "openedAt": "2026-07-20",
-   "openingPercent": 19.096,
+   "openedAt": "2026-06-22",
+   "openingPercent": 23.86,
    "history": [
+    {
+     "date": "2026-06-22",
+     "percent": 19.095
+    },
     {
      "date": "2026-07-20",
      "percent": 16.24
@@ -29702,9 +29808,13 @@
    "filingId": "291336",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340863_1.pdf",
    "shares": 6804550,
-   "openedAt": "2026-06-29",
-   "openingPercent": 3.467,
+   "openedAt": "2026-06-24",
+   "openingPercent": 1.73,
    "history": [
+    {
+     "date": "2026-06-24",
+     "percent": 3.12
+    },
     {
      "date": "2026-06-29",
      "percent": 2.557
@@ -36149,6 +36259,24 @@
    ]
   },
   {
+   "holder": "EGYCAP INVESTMENT LTD BRITISH VIRGIN ISLAND",
+   "kind": "firm",
+   "ticker": "PRDC",
+   "percent": 4.232,
+   "asOf": "2026-06-21",
+   "basis": "trade",
+   "filingId": "290138",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339981_1.pdf",
+   "openedAt": "2026-06-21",
+   "openingPercent": 5.187,
+   "history": [
+    {
+     "date": "2026-06-21",
+     "percent": 4.232
+    }
+   ]
+  },
+  {
    "holder": "محمد ابراهيم ابراهيم الصعيدي",
    "kind": "person",
    "ticker": "ACGC",
@@ -36222,9 +36350,14 @@
    "filingId": "291824",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341550_1.pdf",
    "shares": 58220302,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
+   "openedAt": "2026-06-22",
+   "openingPercent": 4.44,
+   "history": [
+    {
+     "date": "2026-06-22",
+     "percent": 4.16
+    }
+   ]
   },
   {
    "holder": "EGYCAP INVESTMENTS LTD",
@@ -39001,6 +39134,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "فهد بن حمد بن ابراهيم الحرقان",
+   "kind": "person",
+   "ticker": "NARE",
+   "percent": 1.587,
+   "asOf": "2026-06-22",
+   "basis": "trade",
+   "filingId": "290157",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339985_1.pdf",
+   "openedAt": "2026-06-22",
+   "openingPercent": 2.976,
+   "history": [
+    {
+     "date": "2026-06-22",
+     "percent": 1.587
+    }
+   ]
   },
   {
    "holder": "كلارا نعيم ناصر رمسيس (مجموعه مرتبطة)",
@@ -47012,11 +47163,21 @@
    "end": "2026-06-25",
    "label": "21–25 Jun",
    "labelAr": "21–25 يونيو",
-   "sessions": 2,
-   "buys": 1,
-   "sells": 5,
-   "value": 69182779.42,
+   "sessions": 4,
+   "buys": 2,
+   "sells": 9,
+   "value": 325052957.15,
    "moves": [
+    {
+     "holder": "الشركة الوطنية للتجارة والتنمية (انتاد)",
+     "kind": "firm",
+     "ticker": "KWIN",
+     "from": 23.86,
+     "to": 19.095,
+     "trades": 1,
+     "value": 42370000.0,
+     "change": -4.765
+    },
     {
      "holder": "فهد بن حمد بن ابراهيم الحرقان",
      "kind": "person",
@@ -47048,6 +47209,36 @@
      "change": 1.46
     },
     {
+     "holder": "محمود محمد شعبان سليم",
+     "kind": "person",
+     "ticker": "FCMD",
+     "from": 1.73,
+     "to": 3.12,
+     "trades": 1,
+     "value": 5560000.0,
+     "change": 1.39
+    },
+    {
+     "holder": "فهد بن حمد بن ابراهيم الحرقان",
+     "kind": "person",
+     "ticker": "NARE",
+     "from": 2.976,
+     "to": 1.587,
+     "trades": 1,
+     "value": 20936177.74,
+     "change": -1.389
+    },
+    {
+     "holder": "EGYCAP INVESTMENT LTD BRITISH VIRGIN ISLAND",
+     "kind": "firm",
+     "ticker": "PRDC",
+     "from": 5.187,
+     "to": 4.232,
+     "trades": 1,
+     "value": 72000000.0,
+     "change": -0.955
+    },
+    {
      "holder": "القلعة للاستشارات المالية",
      "kind": "firm",
      "ticker": "ASCM",
@@ -47066,6 +47257,16 @@
      "trades": 1,
      "value": 288936.0,
      "change": -0.6
+    },
+    {
+     "holder": "KINGSWAY FUND FRONTIER CONSUMER FRANCHISES",
+     "kind": "firm",
+     "ticker": "EFID",
+     "from": 4.44,
+     "to": 4.16,
+     "trades": 1,
+     "value": 115004000.0,
+     "change": -0.28
     },
     {
      "holder": "محمد احمد خليل يسرى",

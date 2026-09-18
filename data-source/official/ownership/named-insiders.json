@@ -3472,6 +3472,86 @@
    "publishedAt": "2026-06-24T12:49:50",
    "sessionDate": null,
    "source": "https://www.egx.com.eg/downloads/Bulletins/340118_1.pdf"
+  },
+  "290304": {
+   "investorName": "محمود محمد شعبان سليم",
+   "investorNameEn": "Mahmoud Mohamed Shaaban Selim",
+   "relationship": null,
+   "ticker": "FCMD",
+   "action": "buy",
+   "shares": 800000,
+   "price": 6.95,
+   "ownershipBeforePercent": 1.73,
+   "ownershipAfterPercent": 3.12,
+   "nameScript": "ar",
+   "filingId": "290304",
+   "publishedAt": "2026-06-24T11:20:49",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/340116_1.pdf"
+  },
+  "290157": {
+   "investorName": "فهد بن حمد بن إبراهيم الحرقان",
+   "investorNameEn": "Fahd bin Hamad bin Ibrahim Al-Harqan",
+   "relationship": null,
+   "ticker": "NARE",
+   "action": "sell",
+   "shares": 1774508,
+   "price": 11.7983,
+   "ownershipBeforePercent": 2.976,
+   "ownershipAfterPercent": 1.587,
+   "nameScript": "ar",
+   "filingId": "290157",
+   "publishedAt": "2026-06-22T09:25:30",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339985_1.pdf"
+  },
+  "290156": {
+   "investorName": "الشركة الوطنية للتجارة والتنمية (انتاد)",
+   "investorNameEn": "El Sharkeya El Wataneya Lel Tegara Wel Tanmeya (Entad)",
+   "relationship": "مساهم",
+   "ticker": "KWIN",
+   "action": "sell",
+   "shares": 500000,
+   "price": 84.74,
+   "ownershipBeforePercent": 23.86,
+   "ownershipAfterPercent": 19.095,
+   "nameScript": "ar",
+   "filingId": "290156",
+   "publishedAt": "2026-06-22T09:22:39",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339984_1.pdf"
+  },
+  "290155": {
+   "investorName": "KINGSWAY FUND FRONTIER CONSUMER FRANCHISES",
+   "investorNameEn": null,
+   "relationship": null,
+   "ticker": "EFID",
+   "action": "sell",
+   "shares": 4000000,
+   "price": 28.751,
+   "ownershipBeforePercent": 4.44,
+   "ownershipAfterPercent": 4.16,
+   "nameScript": "latin",
+   "filingId": "290155",
+   "publishedAt": "2026-06-22T09:20:00",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339983_1.pdf"
+  },
+  "290138": {
+   "investorName": "EGYCAP INVESTMENT LTD BRITISH VIRGIN ISLAND",
+   "investorNameEn": null,
+   "relationship": null,
+   "ticker": "PRDC",
+   "action": "sell",
+   "shares": 10000000,
+   "price": 7.2,
+   "ownershipBeforePercent": 5.187,
+   "ownershipAfterPercent": 4.232,
+   "nameScript": "latin",
+   "filingId": "290138",
+   "publishedAt": "2026-06-21T15:34:07",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339981_1.pdf"
   }
  },
  "refused": {
@@ -3482,6 +3562,7 @@
   "291129": "action is neither buy nor sell: None",
   "290836": "action is neither buy nor sell: None",
   "290814": "share count is not a positive integer: None",
-  "290577": "action is neither buy nor sell: None"
+  "290577": "action is neither buy nor sell: None",
+  "290172": "action is neither buy nor sell: None"
  }
 }
