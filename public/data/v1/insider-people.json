@@ -1,15 +1,15 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-18T10:08:53+00:00",
+ "generated": "2026-09-18T12:41:40+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1324,
- "tradeCount": 220,
+ "peopleCount": 1327,
+ "tradeCount": 226,
  "tickerCount": 237,
  "tradedTickerCount": 83,
- "firmCount": 439,
- "personCount": 885,
+ "firmCount": 440,
+ "personCount": 887,
  "aliasCount": 149,
  "registerCount": 236,
  "overDisclosed": [],
@@ -451,6 +451,57 @@
    ]
   },
   {
+   "id": "سماح سليمان السيد سليمان ابو العلا",
+   "name": "سماح سليمان السيد سليمان ابو العلا",
+   "nameEn": "Samah Soliman El Sayed Soliman Abou El Ela",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "CRST"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 2,
+   "soldCount": 0,
+   "value": 15979421.88,
+   "singleCompanyMove": {
+    "ticker": "CRST",
+    "from": 6.49,
+    "to": 15.329,
+    "change": 8.839
+   },
+   "trades": [
+    {
+     "filingId": "277146",
+     "date": "2025-10-02",
+     "ticker": "CRST",
+     "company": null,
+     "companyAr": "كرستمارك للمقاولات والتطوير العقاري",
+     "action": "buy",
+     "shares": 24358079,
+     "price": 0.137,
+     "value": 3337056.8230000003,
+     "stakeBefore": 6.49,
+     "stakeAfter": 10.83,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/328439_1.pdf"
+    },
+    {
+     "filingId": "290004",
+     "date": "2026-06-17",
+     "ticker": "CRST",
+     "company": null,
+     "companyAr": "كرستمارك للمقاولات والتطوير العقاري",
+     "action": "buy",
+     "shares": 9807886,
+     "price": 1.289,
+     "value": 12642365.054,
+     "stakeBefore": 14.456,
+     "stakeAfter": 15.329,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339842_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "مي محمود حسن جاب الله",
    "name": "مي محمود حسن جاب الله",
    "nameEn": "Mai Mahmoud Hassan Gab Allah",
@@ -741,10 +792,10 @@
    "tickers": [
     "AMII"
    ],
-   "tradeCount": 2,
-   "boughtCount": 1,
+   "tradeCount": 3,
+   "boughtCount": 2,
    "soldCount": 1,
-   "value": 15332472.0,
+   "value": 16567972.0,
    "singleCompanyMove": {
     "ticker": "AMII",
     "from": 3.5,
@@ -765,6 +816,20 @@
      "stakeBefore": 3.5,
      "stakeAfter": 5.72,
      "source": "https://www.egx.com.eg/downloads/Bulletins/328726_1.pdf"
+    },
+    {
+     "filingId": "289939",
+     "date": "2026-06-16",
+     "ticker": "AMII",
+     "company": null,
+     "companyAr": "العربية للصناعات المعدنية والاستثمارات الصناعية",
+     "action": "buy",
+     "shares": 100000,
+     "price": 12.355,
+     "value": 1235500.0,
+     "stakeBefore": 9.86,
+     "stakeAfter": 10.006,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339768_1.pdf"
     },
     {
      "filingId": "292428",
@@ -1220,43 +1285,6 @@
    ]
   },
   {
-   "id": "سماح سليمان السيد سليمان ابو العلا",
-   "name": "سماح سليمان السيد سليمان ابو العلا",
-   "nameEn": "Samah Soliman El Sayed Soliman Abou El Ela",
-   "script": "ar",
-   "kind": "person",
-   "aliases": null,
-   "tickers": [
-    "CRST"
-   ],
-   "tradeCount": 1,
-   "boughtCount": 1,
-   "soldCount": 0,
-   "value": 3337056.82,
-   "singleCompanyMove": {
-    "ticker": "CRST",
-    "from": 6.49,
-    "to": 10.83,
-    "change": 4.34
-   },
-   "trades": [
-    {
-     "filingId": "277146",
-     "date": "2025-10-02",
-     "ticker": "CRST",
-     "company": null,
-     "companyAr": "كرستمارك للمقاولات والتطوير العقاري",
-     "action": "buy",
-     "shares": 24358079,
-     "price": 0.137,
-     "value": 3337056.8230000003,
-     "stakeBefore": 6.49,
-     "stakeAfter": 10.83,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/328439_1.pdf"
-    }
-   ]
-  },
-  {
    "id": "تولين السيد صابر السيد حميد",
    "name": "تولين السيد صابر السيد حميد",
    "nameEn": "Toleen El Sayed Saber El Sayed Hameed",
@@ -1688,6 +1716,43 @@
      "stakeBefore": 5.05,
      "stakeAfter": 1.79,
      "source": "https://www.egx.com.eg/downloads/Bulletins/341670_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "عبد الرحمن السيد عبد البين محمد البين",
+   "name": "عبد الرحمن السيد عبد البين محمد البين",
+   "nameEn": "Abdel Rahman El Sayed Abdel Bayen Mohamed El Bayen",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "SIPC"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 7958000.0,
+   "singleCompanyMove": {
+    "ticker": "SIPC",
+    "from": 5.76,
+    "to": 2.68,
+    "change": -3.08
+   },
+   "trades": [
+    {
+     "filingId": "290048",
+     "date": "2026-06-21",
+     "ticker": "SIPC",
+     "company": null,
+     "companyAr": "سبأ الدولية للأدوية والصناعات الكيماوية",
+     "action": "sell",
+     "shares": 2300000,
+     "price": 3.46,
+     "value": 7958000.0,
+     "stakeBefore": 5.76,
+     "stakeAfter": 2.68,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339880_1.pdf"
     }
    ]
   },
@@ -4711,6 +4776,153 @@
    ]
   },
   {
+   "id": "أسامة فوزي محمد عيد",
+   "name": "أسامة فوزي محمد عيد",
+   "nameEn": "Osama Fawzy Mohamed Eid",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "FIRE"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 1365865.14,
+   "singleCompanyMove": {
+    "ticker": "FIRE",
+    "from": 0.25078,
+    "to": 0.23063,
+    "change": -0.0202
+   },
+   "trades": [
+    {
+     "filingId": "290083",
+     "date": "2026-06-21",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 295067,
+     "price": 4.629,
+     "value": 1365865.143,
+     "stakeBefore": 0.25078,
+     "stakeAfter": 0.23063,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339878_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "أسامة فوزي محمد سعيد",
+   "name": "أسامة فوزي محمد سعيد",
+   "nameEn": "Osama Fawzy Mohamed Saeed",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "أسامة فوزى محمد سعيد",
+    "اسامة فوزي محمد سعيد"
+   ],
+   "tickers": [
+    "FIRE"
+   ],
+   "tradeCount": 6,
+   "boughtCount": 4,
+   "soldCount": 2,
+   "value": 4222728.37,
+   "singleCompanyMove": {
+    "ticker": "FIRE",
+    "from": 0.22197,
+    "to": 0.24199,
+    "change": 0.02
+   },
+   "trades": [
+    {
+     "filingId": "290021",
+     "date": "2026-06-17",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 386944,
+     "price": 4.756,
+     "value": 1840305.664,
+     "stakeBefore": 0.22197,
+     "stakeAfter": 6.25088,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339804_1.pdf"
+    },
+    {
+     "filingId": "291186",
+     "date": "2026-07-12",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 728186,
+     "price": 0.51036,
+     "value": 371637.00696,
+     "stakeBefore": 0.24187,
+     "stakeAfter": 3.0254,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340884_1.pdf"
+    },
+    {
+     "filingId": "291251",
+     "date": "2026-07-13",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 95057,
+     "price": 0.519,
+     "value": 49334.583,
+     "stakeBefore": 3.0124,
+     "stakeAfter": 2.29155,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340978_1.pdf"
+    },
+    {
+     "filingId": "291836",
+     "date": "2026-07-22",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 307316,
+     "price": 5.61,
+     "value": 1724042.76,
+     "stakeBefore": 24.26,
+     "stakeAfter": 25.6149,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341580_1.pdf"
+    },
+    {
+     "filingId": "292120",
+     "date": "2026-07-29",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 24535,
+     "price": 4.98,
+     "value": 122184.30000000002,
+     "stakeBefore": 0.24186,
+     "stakeAfter": 0.56064,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341849_1.pdf"
+    },
+    {
+     "filingId": "292378",
+     "date": "2026-08-03",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 24589,
+     "price": 4.686,
+     "value": 115224.054,
+     "stakeBefore": 0.25017,
+     "stakeAfter": 0.24199,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "أسامة فوزي محمد سمير",
    "name": "أسامة فوزي محمد سمير",
    "nameEn": "Osama Fawzy Mohamed Samir",
@@ -4835,102 +5047,6 @@
      "stakeBefore": 6.294,
      "stakeAfter": 4.62,
      "source": "https://www.egx.com.eg/downloads/Bulletins/342129_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "أسامة فوزي محمد سعيد",
-   "name": "أسامة فوزي محمد سعيد",
-   "nameEn": "Osama Fawzy Mohamed Saeed",
-   "script": "ar",
-   "kind": "person",
-   "aliases": [
-    "أسامة فوزى محمد سعيد",
-    "اسامة فوزي محمد سعيد"
-   ],
-   "tickers": [
-    "FIRE"
-   ],
-   "tradeCount": 5,
-   "boughtCount": 3,
-   "soldCount": 2,
-   "value": 2382422.7,
-   "singleCompanyMove": {
-    "ticker": "FIRE",
-    "from": 0.24187,
-    "to": 0.24199,
-    "change": 0.0001
-   },
-   "trades": [
-    {
-     "filingId": "291186",
-     "date": "2026-07-12",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "buy",
-     "shares": 728186,
-     "price": 0.51036,
-     "value": 371637.00696,
-     "stakeBefore": 0.24187,
-     "stakeAfter": 3.0254,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/340884_1.pdf"
-    },
-    {
-     "filingId": "291251",
-     "date": "2026-07-13",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "sell",
-     "shares": 95057,
-     "price": 0.519,
-     "value": 49334.583,
-     "stakeBefore": 3.0124,
-     "stakeAfter": 2.29155,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/340978_1.pdf"
-    },
-    {
-     "filingId": "291836",
-     "date": "2026-07-22",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "buy",
-     "shares": 307316,
-     "price": 5.61,
-     "value": 1724042.76,
-     "stakeBefore": 24.26,
-     "stakeAfter": 25.6149,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341580_1.pdf"
-    },
-    {
-     "filingId": "292120",
-     "date": "2026-07-29",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "buy",
-     "shares": 24535,
-     "price": 4.98,
-     "value": 122184.30000000002,
-     "stakeBefore": 0.24186,
-     "stakeAfter": 0.56064,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341849_1.pdf"
-    },
-    {
-     "filingId": "292378",
-     "date": "2026-08-03",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "sell",
-     "shares": 24589,
-     "price": 4.686,
-     "value": 115224.054,
-     "stakeBefore": 0.25017,
-     "stakeAfter": 0.24199,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf"
     }
    ]
   },
@@ -6226,6 +6342,38 @@
      "stakeBefore": 78.41,
      "stakeAfter": null,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343679_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "Gold Era For Gold Trading عصر الذهب لتجاره الذهب",
+   "name": "Gold Era For Gold Trading عصر الذهب لتجاره الذهب",
+   "nameEn": null,
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "PRMH"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 151262361.0,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "289913",
+     "date": "2026-06-16",
+     "ticker": "PRMH",
+     "company": null,
+     "companyAr": "برايم القابضة للاستثمارات المالية",
+     "action": "buy",
+     "shares": 52467000,
+     "price": 2.883,
+     "value": 151262361.0,
+     "stakeBefore": null,
+     "stakeAfter": 14.99,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339721_1.pdf"
     }
    ]
   },
@@ -28633,6 +28781,28 @@
    "history": []
   },
   {
+   "holder": "سماح سليمان السيد سليمان ابو العلا",
+   "kind": "person",
+   "ticker": "CRST",
+   "percent": 15.329,
+   "asOf": "2026-06-17",
+   "basis": "trade",
+   "filingId": "290004",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339842_1.pdf",
+   "openedAt": "2025-10-02",
+   "openingPercent": 6.49,
+   "history": [
+    {
+     "date": "2025-10-02",
+     "percent": 10.83
+    },
+    {
+     "date": "2026-06-17",
+     "percent": 15.329
+    }
+   ]
+  },
+  {
    "holder": "٣- نبيلة اسماعيل محمد البرهامي",
    "kind": "person",
    "ticker": "HBCO",
@@ -28747,6 +28917,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "Gold Era For Gold Trading عصر الذهب لتجاره الذهب",
+   "kind": "firm",
+   "ticker": "PRMH",
+   "percent": 14.99,
+   "asOf": "2026-06-16",
+   "basis": "trade",
+   "filingId": "289913",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339721_1.pdf",
+   "openedAt": "2026-06-16",
+   "openingPercent": null,
+   "history": [
+    {
+     "date": "2026-06-16",
+     "percent": 14.99
+    }
+   ]
   },
   {
    "holder": "عصر الدهب لتجارة الدهب GOLD ERA",
@@ -30260,24 +30448,6 @@
    "history": []
   },
   {
-   "holder": "سماح سليمان السيد سليمان ابو العلا",
-   "kind": "person",
-   "ticker": "CRST",
-   "percent": 10.83,
-   "asOf": "2025-10-02",
-   "basis": "trade",
-   "filingId": "277146",
-   "source": "https://www.egx.com.eg/downloads/Bulletins/328439_1.pdf",
-   "openedAt": "2025-10-02",
-   "openingPercent": 6.49,
-   "history": [
-    {
-     "date": "2025-10-02",
-     "percent": 10.83
-    }
-   ]
-  },
-  {
    "holder": "MLM FOUNDATION",
    "kind": "firm",
    "ticker": "MTIE",
@@ -31096,6 +31266,10 @@
     {
      "date": "2025-10-12",
      "percent": 5.72
+    },
+    {
+     "date": "2026-06-16",
+     "percent": 10.006
     },
     {
      "date": "2026-08-03",
@@ -37784,6 +37958,24 @@
    "history": []
   },
   {
+   "holder": "عبد الرحمن السيد عبد البين محمد البين",
+   "kind": "person",
+   "ticker": "SIPC",
+   "percent": 2.68,
+   "asOf": "2026-06-21",
+   "basis": "trade",
+   "filingId": "290048",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339880_1.pdf",
+   "openedAt": "2026-06-21",
+   "openingPercent": 5.76,
+   "history": [
+    {
+     "date": "2026-06-21",
+     "percent": 2.68
+    }
+   ]
+  },
+  {
    "holder": "بيت الخبرة القابضة- كامار",
    "kind": "firm",
    "ticker": "NINH",
@@ -42331,9 +42523,13 @@
    "basis": "trade",
    "filingId": "292378",
    "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf",
-   "openedAt": "2026-07-12",
-   "openingPercent": 0.24187,
+   "openedAt": "2026-06-17",
+   "openingPercent": 0.22197,
    "history": [
+    {
+     "date": "2026-06-17",
+     "percent": 6.25088
+    },
     {
      "date": "2026-07-12",
      "percent": 3.0254
@@ -42415,6 +42611,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "أسامة فوزي محمد عيد",
+   "kind": "person",
+   "ticker": "FIRE",
+   "percent": 0.23063,
+   "asOf": "2026-06-21",
+   "basis": "trade",
+   "filingId": "290083",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339878_1.pdf",
+   "openedAt": "2026-06-21",
+   "openingPercent": 0.25078,
+   "history": [
+    {
+     "date": "2026-06-21",
+     "percent": 0.23063
+    }
+   ]
   },
   {
    "holder": "سلوى قاصد جيد مرقص (مجموعه مرتبطة)",
@@ -47159,14 +47373,66 @@
    ]
   },
   {
+   "start": "2026-06-14",
+   "end": "2026-06-17",
+   "label": "14–17 Jun",
+   "labelAr": "14–17 يونيو",
+   "sessions": 2,
+   "buys": 4,
+   "sells": 0,
+   "value": 166980531.72,
+   "moves": [
+    {
+     "holder": "أسامة فوزي محمد سعيد",
+     "kind": "person",
+     "ticker": "FIRE",
+     "from": 0.22197,
+     "to": 6.25088,
+     "trades": 1,
+     "value": 1840305.66,
+     "change": 6.0289
+    },
+    {
+     "holder": "سماح سليمان السيد سليمان ابو العلا",
+     "kind": "person",
+     "ticker": "CRST",
+     "from": 14.456,
+     "to": 15.329,
+     "trades": 1,
+     "value": 12642365.05,
+     "change": 0.873
+    },
+    {
+     "holder": "شركة دراية المالية مساهمة مقفلة",
+     "kind": "firm",
+     "ticker": "AMII",
+     "from": 9.86,
+     "to": 10.006,
+     "trades": 1,
+     "value": 1235500.0,
+     "change": 0.146
+    },
+    {
+     "holder": "Gold Era For Gold Trading عصر الذهب لتجاره الذهب",
+     "kind": "firm",
+     "ticker": "PRMH",
+     "from": null,
+     "to": 14.99,
+     "trades": 1,
+     "value": 151262361.0,
+     "change": null
+    }
+   ]
+  },
+  {
    "start": "2026-06-21",
    "end": "2026-06-25",
    "label": "21–25 Jun",
    "labelAr": "21–25 يونيو",
    "sessions": 4,
    "buys": 2,
-   "sells": 9,
-   "value": 325052957.15,
+   "sells": 11,
+   "value": 334376822.3,
    "moves": [
     {
      "holder": "الشركة الوطنية للتجارة والتنمية (انتاد)",
@@ -47177,6 +47443,16 @@
      "trades": 1,
      "value": 42370000.0,
      "change": -4.765
+    },
+    {
+     "holder": "عبد الرحمن السيد عبد البين محمد البين",
+     "kind": "person",
+     "ticker": "SIPC",
+     "from": 5.76,
+     "to": 2.68,
+     "trades": 1,
+     "value": 7958000.0,
+     "change": -3.08
     },
     {
      "holder": "فهد بن حمد بن ابراهيم الحرقان",
@@ -47277,6 +47553,16 @@
      "trades": 1,
      "value": 7050000.0,
      "change": -0.1
+    },
+    {
+     "holder": "أسامة فوزي محمد عيد",
+     "kind": "person",
+     "ticker": "FIRE",
+     "from": 0.25078,
+     "to": 0.23063,
+     "trades": 1,
+     "value": 1365865.14,
+     "change": -0.0202
     }
    ]
   },
