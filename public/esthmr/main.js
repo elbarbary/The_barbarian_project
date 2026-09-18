@@ -1155,7 +1155,7 @@ function formatAdminDate(isoStr) {
   try {
     const d = new Date(isoStr);
     if (isNaN(d.getTime())) return '—';
-    return d.toLocaleDateString('ar-EG', {
+    return d.toLocaleDateString('ar-EG-u-nu-latn', {
       day: 'numeric',
       month: 'short',
       year: 'numeric',

@@ -169,7 +169,12 @@ test('the session stamps come from the documents, not from a literal', () => {
   assert.match(screen(LIVE, 'ar').generatedAt, /^حُدِّث /);
   assert.equal(v.dataVersion, '14274003b1cf7c8d');
   assert.equal(v.totalCount, 2);          // the directory, not a hardcoded 282
-  assert.equal(screen(LIVE, 'ar').marketDate.includes('٢٠٢٦'), true);
+  /* Western digits in Arabic too — the owner's call, and the redesign's.
+     The date is still Arabic: an Arabic month name with a Western year. */
+  const arabic = screen(LIVE, 'ar').marketDate;
+  assert.equal(arabic.includes('2026'), true, arabic);
+  assert.doesNotMatch(arabic, /[٠-٩]/, arabic);
+  assert.match(arabic, /[\u0600-\u06FF]/, arabic);
 });
 
 /* ── the index cards ───────────────────────────────────────────────────── */

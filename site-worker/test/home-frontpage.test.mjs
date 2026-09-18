@@ -111,9 +111,9 @@ const ISLAND = tpl.slice(tpl.indexOf('<section class="island island-crossings">'
 const FP_START = logic.indexOf('    const fp = (() => {');
 const FP = logic.slice(FP_START, logic.indexOf('\n    })();\n', FP_START));
 
-const dayLabel = (iso, lang = 'en') => new Intl.DateTimeFormat(lang === 'ar' ? 'ar-EG' : 'en-GB',
+const dayLabel = (iso, lang = 'en') => new Intl.DateTimeFormat(lang === 'ar' ? 'ar-EG-u-nu-latn' : 'en-GB',
   { day: 'numeric', month: 'short', timeZone: 'UTC' }).format(new Date(iso + 'T00:00:00Z'));
-const clock = (iso, lang = 'en') => new Intl.DateTimeFormat(lang === 'ar' ? 'ar-EG' : 'en-GB',
+const clock = (iso, lang = 'en') => new Intl.DateTimeFormat(lang === 'ar' ? 'ar-EG-u-nu-latn' : 'en-GB',
   { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Africa/Cairo' }).format(new Date(iso));
 
 const rowsOf = (v) => v.fpTiers.flatMap((t) => t.rows);
@@ -185,7 +185,9 @@ test('J3 the tier split is a date, and an empty day says when it was built', () 
   assert.ok(none.fpNoneLine.includes(dayLabel(NEWEST)), none.fpNoneLine);
   assert.ok(none.fpNoneLine.includes(clock('2026-09-06T13:47:07+00:00')), none.fpNoneLine);
   assert.ok(!none.fpNoneLine.includes('{'), none.fpNoneLine);
-  // In Arabic the clock reads in Arabic-Indic digits, as the rest of the site does.
+  // In Arabic the clock reads in Western digits, as every figure on the site
+  // does since the owner settled it: a price and the time beside it should not
+  // be set in two different alphabets of digit.
   const ar = screen({ ...LIVE, crossings: doc([item('AAAA', [filing('2026-09-03'), story('2026-09-04')])]) }, 'ar');
   assert.ok(ar.fpNoneLine.includes(clock('2026-09-06T13:47:07+00:00', 'ar')), ar.fpNoneLine);
   // A one-day earlier tier reads as one date, not a range of one.

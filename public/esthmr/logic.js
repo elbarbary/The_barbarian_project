@@ -518,6 +518,8 @@ export class Component extends Base {
       investorsTable:'By investor type', investorsType:'Type',
       investorsBuying:'a net buyer', investorsSelling:'a net seller',
       investorsEgpM:'EGP millions, bought less sold',
+      investorsFrom:'exchange classification · EGP million',
+      investorsTwoSides:'Buying against selling, for each class. Every trade has two sides, so the difference is not money entering or leaving the market.',
       investorsBasis:'The exchange states these period to date for its current reporting period, not for a single session. The period resets when the exchange starts a new one, and the date beside the figures is the exchange\u2019s own.',
       investorsAsOf:'Exchange figures as of', investorsTotal:'Value traded in the period:',
       investorsEquities:'The split above counts government bonds and T-bills too. Shares alone:',
@@ -911,6 +913,8 @@ export class Component extends Base {
       investorsTable:'تعاملات فئات المستثمرين', investorsType:'فئة المستثمر',
       investorsBuying:'صافي شراء', investorsSelling:'صافي بيع',
       investorsEgpM:'مليون جنيه (صافي تعاملات)',
+      investorsFrom:'تصنيف البورصة · مليون جنيه',
+      investorsTwoSides:'شراء مقابل بيع لكل فئة. لكل صفقة طرفان، والفرق ليس «أموالاً داخلة» ولا خارجة من السوق.',
       investorsBasis:'تنشر البورصة هذه الأرقام تراكمياً للفترة الحالية (منذ بداية العام أو بداية الشهر). وتُحدّث البيانات فور إعلان البورصة للفترة الجديدة، والتاريخ المجاور هو تاريخ البورصة نفسها.',
       investorsAsOf:'بيانات البورصة الرسمية كما في', investorsTotal:'إجمالي قيمة التداول في الفترة:',
       investorsEquities:'الجدول أعلاه يشمل الأسهم والسندات وأذون الخزانة. تعاملات الأسهم المقيدة فقط:',
@@ -2509,7 +2513,7 @@ export class Component extends Base {
     const fp = (() => {
       const src = D.crossings;
       const items = (src && src.items) || [];
-      const off = { fpShow: false, fpEmpty: true, fpTiers: [], fpHasFresh: false, fpFresh: '',
+      const off = { fpShow: false, fpEmpty: true, fpTiers: [], fpHasFresh: false, fpFresh: '', fpWhen: '',
         fpHasSentence: false, fpSentence: '', fpShowNone: false, fpNoneLine: '',
         fpHasCounts: false, fpCounts: '' };
       if (!items.length) return off;
@@ -2601,6 +2605,12 @@ export class Component extends Base {
       return {
         fpShow: true, fpEmpty: false, fpTiers: tiers,
         fpHasFresh: Boolean(fresh), fpFresh: fresh,
+        // The card's dateline: the window the crossings were read over, and
+        // how many companies fell in it. Never the freshness line, which is
+        // sometimes empty and would leave the card with no date at all.
+        fpWhen: dates.from && dates.date
+          ? `${dates.from} – ${dates.date}${counts ? ` · ${counts}` : ''}`
+          : (dates.date || ''),
         fpHasSentence: Boolean(sentence), fpSentence: sentence,
         // A statement about the document at its build time, never a claim of
         // absence in the world; and not made at all when the news feed has
@@ -2643,6 +2653,13 @@ export class Component extends Base {
         // cumulative figures with no date at all, and "period to date" named
         // no period. The stamp is Cairo local time as the exchange publishes it.
         asOfLine: d.asOf ? L.investorsAsOf + ' ' + String(d.asOf).replace('T', ' ').slice(0, 16) + ' (Cairo)' : '',
+        /* The card's dateline. The exchange does not always stamp this
+           document — `as_of` is null until it does — and an empty dateline
+           reads as a card with no provenance at all, so what is always true
+           of the figures stands in its place: whose classification they are,
+           and what they are counted in. Never a date this end invented. */
+        dateline: [d.asOf ? L.investorsAsOf + ' ' + String(d.asOf).slice(0, 10) : '', L.investorsFrom]
+          .filter(Boolean).join(' · '),
         equitiesLine: (d.equities && d.equities.length)
           ? L.investorsEquities + ' ' + d.equities.map((p) => (ar ? p.partyAr : p.party) + ' ' + (p.percent === null ? '—' : p.percent.toFixed(2) + '%')).join(' · ')
           : '',
@@ -5237,7 +5254,7 @@ export class Component extends Base {
   dayLabel(iso) {
     const at = new Date(String(iso) + 'T00:00:00Z');
     if (isNaN(at)) return iso || '';
-    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
+    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG-u-nu-latn' : 'en-GB',
       { day: 'numeric', month: 'short', timeZone: 'UTC' }).format(at);
   }
 
@@ -5245,7 +5262,7 @@ export class Component extends Base {
   monthOf(iso) {
     const at = new Date(String(iso || '') + 'T00:00:00Z');
     if (isNaN(at)) return '';
-    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
+    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG-u-nu-latn' : 'en-GB',
       { month: 'long', timeZone: 'UTC' }).format(at);
   }
 
@@ -5266,7 +5283,7 @@ export class Component extends Base {
   monthLabel(id) {
     const at = new Date(String(id) + '-01T00:00:00Z');
     if (isNaN(at)) return id;
-    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
+    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG-u-nu-latn' : 'en-GB',
       { month: 'short', year: 'numeric', timeZone: 'UTC' }).format(at);
   }
 
@@ -5296,7 +5313,7 @@ export class Component extends Base {
     if (!iso) return '—';
     const at = new Date(iso + (iso.length === 10 ? 'T00:00:00Z' : ''));
     if (isNaN(at)) return iso;
-    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
+    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG-u-nu-latn' : 'en-GB',
       { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(at);
   }
 
@@ -5305,7 +5322,7 @@ export class Component extends Base {
     if (!iso) return '—';
     const at = new Date(String(iso).slice(0, 10) + 'T00:00:00Z');
     if (isNaN(at)) return String(iso);
-    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
+    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG-u-nu-latn' : 'en-GB',
       { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(at);
   }
 
@@ -5313,7 +5330,7 @@ export class Component extends Base {
   shortDay(iso) {
     const at = new Date(String(iso || '').slice(0, 10) + 'T00:00:00Z');
     if (isNaN(at)) return String(iso || '');
-    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
+    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG-u-nu-latn' : 'en-GB',
       { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' }).format(at);
   }
 
@@ -5327,7 +5344,7 @@ export class Component extends Base {
     if (!iso) return '—';
     const at = new Date(iso);
     if (isNaN(at)) return String(iso);
-    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
+    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG-u-nu-latn' : 'en-GB',
       { hour: '2-digit', minute: '2-digit', hour12: false,
         timeZone: 'Africa/Cairo' }).format(at);
   }
@@ -5360,7 +5377,7 @@ export class Component extends Base {
     if (!iso) return '';
     const at = new Date(String(iso).slice(0, 10) + 'T00:00:00Z');
     if (isNaN(at)) return String(iso);
-    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
+    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG-u-nu-latn' : 'en-GB',
       { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(at);
   }
 
