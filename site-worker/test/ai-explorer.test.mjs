@@ -206,7 +206,7 @@ test('alphabetical tie breaking does not masquerade as Gemini rank movement', ()
 
 /* ── Home: the card at the top ──────────────────────────────────────────── */
 
-test('the card leads with the system, and every figure on it comes from the record', () => {
+test('the card carries the system’s record, and every figure on it comes from the record', () => {
   const node = aiCards(component(), data, false);
   const system = byClass(node, 'aix-system')[0];
   assert.match(text(system), /THE SYSTEM’S FIVE · FIVE SESSIONS/);
@@ -219,25 +219,40 @@ test('the card leads with the system, and every figure on it comes from the reco
   moved.latest.forecasters = 6;
   const again = aiCards(component(), { ...data, top5: moved }, false);
   assert.match(text(byClass(again, 'aix-system')[0]), /-7\.25%/);
-  assert.match(text(again), /Six models rank every company/);
   assert.match(text(again), /Six public models rank every listed company/);
   assert.doesNotMatch(text(again), /Nine/);
 });
 
-test('the card is compact: no model list and no window chips on it, the steps underneath', () => {
+test('the card is one card: three saved facts, no model list and no window chips', () => {
+  /* The redesign's card. It replaced a hero with a headline, a three-step
+     explainer and a separate record panel; what it must not grow back into
+     is the workbench, which is a screen of its own behind a warning. */
   const node = aiCards(component(), data, false);
-  const hero = byClass(node, 'aix-hero')[0];
-  assert.ok(hero, 'the card is missing');
-  assert.match(text(hero), /Run AI models on the EGX\./);
+  const lab = byClass(node, 'aix-lab')[0];
+  assert.ok(lab, 'the card is missing');
+  assert.match(text(lab), /The model lab/);
   assert.equal(byClass(node, 'aix-model-row').length, 0);
   assert.equal(byClass(node, 'aix-seg').length, 0);
-  assert.equal(byClass(hero, 'aix-pipeline').length, 0, 'the steps are inside the card');
-  assert.equal(byClass(node, 'aix-pipeline').length, 1);
+  assert.equal(byClass(node, 'aix-pipeline').length, 0, 'the explainer came back');
+  assert.ok(byClass(node, 'aix-fact').length <= 3, 'the card grew a fourth fact');
   // The market here is every company scored, equally weighted — never named
   // as an index it is not.
   assert.doesNotMatch(text(node), /EGX 30/);
   assert.match(text(node), /not an index/);
   assert.doesNotMatch(text(node), /question/i);
+});
+
+test('the card says it is a saved record, and that this publisher neither holds nor advises', () => {
+  /* It names companies now. What keeps that the right side of the line is
+     this sentence, so it is asserted rather than left to a reviewer's eye. */
+  const node = aiCards(component(), data, false);
+  const lead = text(byClass(node, 'aix-lab-lead')[0]);
+  assert.match(lead, /saved record/, 'the card does not say the record is saved');
+  assert.match(lead, /run no new calculation/, 'it reads as if a model runs when the page opens');
+  assert.match(lead, /hold nothing/);
+  assert.match(lead, /advise nothing/);
+  const ar = text(byClass(aiCards(component(), data, true), 'aix-lab-lead')[0]);
+  assert.match(ar, /ولا نملك ولا نوصي/, 'the Arabic card drops the disclaimer');
 });
 
 /* The system's card below the record's minimum, the way 15 Sep 2026 had it:
@@ -329,7 +344,7 @@ test('a model that tells no companies apart is left off the list', () => {
 test('both ways in open the workbench, and one lands on what the picks returned', () => {
   const c = component({ scSearch: 'old search', scShowAll: true });
   const node = aiCards(c, data, false);
-  button(node, 'Run a model').events.click();
+  button(node, 'See the model’s results').events.click();
   assert.equal(c.state.screen, 'scenarios');
   // On a model's own ranking, with Gemini one switch away.
   assert.deepEqual(c.state.scLayers, []);
@@ -338,7 +353,7 @@ test('both ways in open the workbench, and one lands on what the picks returned'
   assert.equal(c.state.scShowAll, false);
   assert.equal(c.state.scFocus, null);
   const d = component();
-  button(aiCards(d, data, false), 'See what they returned').events.click();
+  button(aiCards(d, data, false), 'What came back?').events.click();
   assert.equal(d.state.screen, 'scenarios');
   assert.equal(d.state.scFocus, 'past');
 });
@@ -349,7 +364,7 @@ test('the beta pill opens the warning, and accepting it opens the workbench', ()
   try {
     const c = component({ scAccepted: 0 });
     let node = aiCards(c, data, false);
-    byClass(node, 'aix-beta')[0].events.click();
+    byClass(node, 'aix-preview-pill')[0].events.click();
     assert.equal(c.state.aiWarning, true);
     node = aiCards(c, data, false);
     assert.equal(all(node).filter((n) => n.tag === 'dialog').length, 1);

@@ -56,7 +56,7 @@
   align-self: flex-start; display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
   background: var(--aix-beta-bg); border: 1px solid var(--aix-beta-line); color: var(--aix-beta-ink);
   font-family: var(--aix-mono) !important; font-size: 10.5px; letter-spacing: .11em;
-  padding: 5px 10px; border-radius: 999px; white-space: nowrap;
+  padding: 5px 10px; border-radius:var(--radius-island); white-space: nowrap;
 }
 #app .aix-beta:hover { background: var(--aix-beta-hover); }
 .aix-beta i { width: 5px; height: 5px; border-radius: 50%; background: var(--aix-beta-dot); animation: aix-pulse 2s infinite; }
@@ -71,7 +71,7 @@
    record — and the three steps underneath it. */
 .ai-cards { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .aix-hero {
-  background: var(--aix-hero-bg); border: 1px solid var(--aix-hero-line); border-radius: 22px;
+  background: var(--aix-hero-bg); border: 1px solid var(--aix-hero-line); border-radius:var(--radius-island);
   padding: 22px 24px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 22px;
   align-items: center; box-shadow: var(--aix-shadow); min-width: 0;
 }
@@ -99,10 +99,10 @@
 
 .aix-seg {
   display: flex; background: var(--aix-seg-bg); border: 1px solid var(--aix-seg-line);
-  border-radius: 999px; padding: 3px; gap: 2px; max-width: 100%; overflow-x: auto;
+  border-radius:var(--radius-island); padding: 3px; gap: 2px; max-width: 100%; overflow-x: auto;
 }
 #app .aix-seg button {
-  border: 0; cursor: pointer; font-size: 13px; font-weight: 500; padding: 8px 15px; border-radius: 999px;
+  border: 0; cursor: pointer; font-size: 13px; font-weight: 500; padding: 8px 15px; border-radius:var(--radius-island);
   background: transparent; color: var(--aix-muted); white-space: nowrap; min-height: 36px;
 }
 #app .aix-seg button.on { background: var(--aix-invert); color: var(--aix-invert-ink); }
@@ -110,7 +110,7 @@
 #app .aix-seg.is-small button { font-size: 12.5px; padding: 7px 13px; min-height: 32px; }
 
 .aix-system {
-  background: var(--aix-deep); border-radius: 18px; padding: 18px 20px; display: flex; flex-direction: column;
+  background: var(--aix-deep); border-radius:var(--radius-control); padding: 18px 20px; display: flex; flex-direction: column;
   gap: 10px; color: #fff; min-width: 0;
 }
 .aix-system .aix-eyebrow { color: #A8CFCA; }
@@ -157,7 +157,7 @@
 
 .aix-pipeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .aix-pipeline li {
-  background: var(--aix-pipe-bg); border: 1px solid var(--aix-line); border-radius: 14px;
+  background: var(--aix-pipe-bg); border: 1px solid var(--aix-line); border-radius:var(--radius-control);
   padding: 13px 15px; display: flex; gap: 10px; align-items: flex-start; min-width: 0;
 }
 .aix-pipeline b {
@@ -240,7 +240,7 @@
 
 .aix-bench-grid { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 16px; align-items: start; }
 .aix-controls {
-  background: var(--aix-surface); border: 1px solid var(--aix-line); border-radius: 16px; padding: 18px;
+  background: var(--aix-surface); border: 1px solid var(--aix-line); border-radius:var(--radius-control); padding: 18px;
   display: flex; flex-direction: column; gap: 16px; min-width: 0;
 }
 .aix-group { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
@@ -248,7 +248,7 @@
 .aix-step b { font-size: 10px; font-weight: 500; color: var(--aix-teal-ink); letter-spacing: 0; }
 .aix-chips { display: flex; flex-wrap: wrap; gap: 7px; }
 #app .aix-chip {
-  cursor: pointer; font-size: 13px; font-weight: 500; padding: 8px 13px; border-radius: 999px; min-height: 36px;
+  cursor: pointer; font-size: 13px; font-weight: 500; padding: 8px 13px; border-radius:var(--radius-island); min-height: 36px;
   background: var(--aix-surface); color: var(--aix-ink); border: 1px solid var(--aix-line);
 }
 #app .aix-chip:hover { border-color: var(--aix-teal-ink); }
@@ -262,7 +262,7 @@
 .aix-toggle span { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
 .aix-toggle strong { font-size: 13.5px; font-weight: 500; color: var(--aix-ink); }
 .aix-toggle small { font-size: 11.5px; color: var(--aix-muted); }
-.aix-switch { flex: 0 0 36px; height: 21px; border-radius: 999px; background: var(--aix-line); position: relative; transition: background .18s; }
+.aix-switch { flex: 0 0 36px; height: 21px; border-radius:var(--radius-island); background: var(--aix-line); position: relative; transition: background .18s; }
 .aix-switch b {
   position: absolute; top: 3px; inset-inline-start: 3px; width: 15px; height: 15px; border-radius: 50%; background: #fff;
   box-shadow: 0 1px 3px rgba(22, 36, 47, .3); transition: inset-inline-start .18s;
@@ -284,7 +284,7 @@
 
 .aix-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
 .aix-tile {
-  background: var(--aix-surface); border: 1px solid var(--aix-line); border-radius: 14px; padding: 15px 17px;
+  background: var(--aix-surface); border: 1px solid var(--aix-line); border-radius:var(--radius-control); padding: 15px 17px;
   display: flex; flex-direction: column; gap: 5px; min-width: 0;
 }
 .aix-tile .aix-eyebrow { font-size: 10px; color: var(--aix-muted); }
@@ -308,7 +308,7 @@
 .aix-view-switch { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 #app .aix-view-switch button {
   cursor: pointer; display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 7px 16px 7px 7px;
-  border-radius: 999px; border: 1px solid var(--aix-line); background: var(--aix-surface); color: var(--aix-ink);
+  border-radius:var(--radius-island); border: 1px solid var(--aix-line); background: var(--aix-surface); color: var(--aix-ink);
   font-size: 14px; font-weight: 600;
 }
 #app .aix-view-switch button b {
@@ -385,7 +385,7 @@
 .aix-said { display: flex; flex-direction: column; gap: 6px; }
 .aix-said .aix-eyebrow { font-size: 10px; color: var(--aix-muted); }
 #app .aix-reason {
-  margin: 16px 0 20px; padding: 16px; border: 1px solid var(--aix-rule); border-radius: 16px;
+  margin: 16px 0 20px; padding: 16px; border: 1px solid var(--aix-rule); border-radius:var(--radius-control);
   background: var(--aix-record-bg);
 }
 #app .aix-reason .aix-quote { margin: 10px 0; font-size: 14px; line-height: 1.65; }
@@ -417,7 +417,7 @@
 .aix-night-when { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
 .aix-night-when > b { font-family: var(--aix-mono); font-size: 13px; font-weight: 600; }
 .aix-status {
-  font-family: var(--aix-mono); font-size: 9.5px; letter-spacing: .08em; padding: 2px 7px; border-radius: 999px;
+  font-family: var(--aix-mono); font-size: 9.5px; letter-spacing: .08em; padding: 2px 7px; border-radius:var(--radius-island);
   border: 1px solid var(--aix-line); color: var(--aix-muted); white-space: nowrap;
 }
 .aix-status.is-ahead { color: var(--aix-teal-ink); border-color: var(--aix-teal-ink); }
@@ -447,7 +447,7 @@
 .sc-skeleton.is-short { height: 72px; }
 
 .aix-card {
-  background: var(--aix-surface); border: 1px solid var(--aix-line); border-radius: 16px; padding: 20px 22px;
+  background: var(--aix-surface); border: 1px solid var(--aix-line); border-radius:var(--radius-control); padding: 20px 22px;
   display: flex; flex-direction: column; gap: 12px; min-width: 0;
 }
 .aix-card header { display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; justify-content: space-between; }
@@ -502,8 +502,8 @@
 .aix-agree-row { display: grid; grid-template-columns: minmax(52px, 34%) minmax(80px, 1fr) 62px; align-items: center; gap: 9px; }
 .aix-agree-row > span:first-child { font-size: 12.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .aix-agree-row.is-selected > span:first-child { font-weight: 700; }
-.aix-agree-row .aix-track { height: 7px; border-radius: 999px; grid-column: auto; }
-.aix-agree-row .aix-bar { top: 0; bottom: 0; border-radius: 999px; }
+.aix-agree-row .aix-track { height: 7px; border-radius:var(--radius-control); grid-column: auto; }
+.aix-agree-row .aix-bar { top: 0; bottom: 0; border-radius:var(--radius-control); }
 .aix-agree-row b { text-align: end; font-family: var(--aix-mono); font-size: 12px; font-weight: 500; }
 
 .aix-company-name { display: flex; flex-direction: column; min-width: 0; }
@@ -511,7 +511,7 @@
 .aix-company-name small { font-size: 11.5px; color: var(--aix-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #app .aix-more {
   cursor: pointer; align-self: flex-start; background: transparent; border: 1px dashed var(--aix-line); color: var(--aix-teal-ink);
-  font-size: 13px; padding: 8px 14px; border-radius: 999px; min-height: 40px;
+  font-size: 13px; padding: 8px 14px; border-radius:var(--radius-island); min-height: 40px;
 }
 #app .aix-quiet {
   cursor: pointer; background: transparent; border: 1px solid var(--aix-line); color: var(--aix-ink);
@@ -540,7 +540,7 @@
 .aix-proof p { margin: 6px 0; font-size: 12.5px; color: var(--aix-muted); }
 .sc-root { display: block; overflow-wrap: anywhere; font-size: 11px; max-width: 100%; color: var(--aix-muted); }
 .sc-loading { display: flex; flex-direction: column; gap: 12px; }
-.sc-skeleton { height: 170px; background: var(--aix-track); border: 1px solid var(--aix-line); border-radius: 16px; animation: aix-breathe 1.4s ease-in-out infinite alternate; }
+.sc-skeleton { height: 170px; background: var(--aix-track); border: 1px solid var(--aix-line); border-radius:var(--radius-control); animation: aix-breathe 1.4s ease-in-out infinite alternate; }
 @keyframes aix-breathe { to { opacity: .45; } }
 
 /* ── the warning ────────────────────────────────────────────────────────── */
@@ -551,7 +551,7 @@ dialog.aix-dialog {
 }
 dialog.aix-dialog::backdrop { background: rgba(22, 36, 47, .5); }
 .aix-dialog-card {
-  box-sizing: border-box; background: var(--aix-surface); border-radius: 18px; padding: 26px; display: flex;
+  box-sizing: border-box; background: var(--aix-surface); border-radius:var(--radius-control); padding: 26px; display: flex;
   flex-direction: column; gap: 14px; box-shadow: 0 30px 70px -30px rgba(22, 36, 47, .6); animation: aix-rise .22s ease;
 }
 #app .aix-dialog-card h2 { margin: 0; font-family: var(--aix-sans) !important; font-size: 22px !important; line-height: 1.25 !important; font-weight: 700; letter-spacing: -.02em; }
@@ -574,7 +574,7 @@ dialog.aix-dialog::backdrop { background: rgba(22, 36, 47, .5); }
   .aix-bench-clock { text-align: start; }
 }
 @media (max-width: 600px) {
-  .aix-hero { padding: 18px; border-radius: 20px; gap: 16px; }
+  .aix-hero { padding: 18px; border-radius:var(--radius-control); gap: 16px; }
   .aix-hero { --aix-h1: 25px; }
   .aix-hero-lead { font-size: 13.5px; }
   .aix-pipeline { grid-template-columns: minmax(0, 1fr); }
@@ -631,7 +631,7 @@ dialog.aix-dialog::backdrop { background: rgba(22, 36, 47, .5); }
   font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
   font-size: 11px; letter-spacing: .09em;
   color: var(--iris); background: var(--irisTint);
-  border-radius: 999px; padding: 4px 10px; white-space: nowrap;
+  border-radius:var(--radius-island); padding: 4px 10px; white-space: nowrap;
 }
 #app .aix-status.is-scored .aix-status-pill { color: var(--accent); background: var(--accTint); }
 #app .aix-status-text { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink); }
@@ -642,4 +642,96 @@ dialog.aix-dialog::backdrop { background: rgba(22, 36, 47, .5); }
 @media (max-width: 860px) {
   #app .aix-status { padding: 12px 14px; gap: 10px; }
   #app .aix-status-text { font-size: 14px; }
+}
+
+/* ── THE MODEL LAB, ON HOME ──────────────────────────────────────────────
+ * The redesign's card. Flat: a surface, an edge and a radius, with no
+ * gradient and no shadow, because every other card on Home is now that and a
+ * lifted one would read as an advertisement among them.
+ *
+ * It names companies. The three facts are told apart by what they can still
+ * do — a path that is still open, an order that moved, a window that has
+ * closed — and not by colour, which is why none of the three is tinted. */
+#app .aix-lab {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: var(--radius-island); padding: 20px; min-width: 0;
+}
+#app .aix-lab-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 10px; margin-bottom: 8px;
+}
+#app .aix-dateline {
+  margin: 0; font-family: var(--aix-mono); font-size: 11.5px; color: var(--faint);
+}
+#app .aix-preview-pill {
+  flex: none; cursor: pointer; border: 0;
+  font-family: var(--aix-mono); font-size: 10px; letter-spacing: .09em;
+  color: var(--iris); background: var(--irisTint);
+  border-radius: 999px; padding: 3px 8px; min-height: 24px;
+}
+#app .aix-preview-pill:hover { color: var(--ink); }
+#app .aix-lab-title { font-size: 16.5px; font-weight: 600; margin: 0 0 4px; line-height: 1.45; }
+#app .aix-lab-lead {
+  margin: 0 0 14px; font-size: 14px; line-height: 1.55; color: var(--t2); text-wrap: pretty;
+}
+#app .aix-facts {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;
+}
+#app .aix-fact {
+  min-width: 0; border: 1px solid var(--rule); border-radius: var(--radius-control);
+  padding: 14px; display: flex; flex-direction: column; gap: 8px;
+}
+#app .aix-fact-label {
+  font-family: var(--aix-mono); font-size: 10.5px; color: var(--faint); line-height: 1.45;
+}
+#app .aix-fact-figures {
+  display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11.5px; color: var(--t2);
+}
+#app .aix-fact-line { margin: 0; font-size: 13px; color: var(--t2); line-height: 1.5; }
+#app .aix-fact-note {
+  margin: 0; font-family: var(--aix-mono); font-size: 10px; color: var(--faint); line-height: 1.5;
+}
+/* A figure in its own direction, so an Arabic sentence cannot carry a price's
+   digits — or a minus sign — out of order. */
+#app .aix-n {
+  font-family: var(--aix-mono); direction: ltr; unicode-bidi: isolate;
+  font-variant-numeric: tabular-nums;
+}
+#app .aix-reorder-rows { display: flex; flex-direction: column; gap: 9px; }
+#app .aix-reorder-row { display: flex; align-items: center; gap: 9px; font-size: 12px; }
+#app .aix-reorder-name {
+  flex: 1; min-width: 0; font-family: var(--aix-sans); font-size: 13px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+#app .aix-reorder-row .aix-n { color: var(--faint); }
+#app .aix-reorder-arrow { color: var(--faint); }
+#app .aix-reorder-row .aix-reorder-up { font-weight: 600; color: var(--up); }
+#app .aix-reorder-row .aix-reorder-down { font-weight: 600; color: var(--down); }
+#app .aix-rule { height: 1px; background: var(--rule); margin: 14px 0; }
+#app .aix-lab-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap;
+}
+#app .aix-lab-foot .aix-status { margin: 0; }
+#app .aix-lab-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+#app .aix-lab-actions .aix-cta,
+#app .aix-lab-actions .aix-cta-quiet {
+  min-height: 44px; padding: 0 14px; font-size: 14px;
+}
+
+/* The saved path. The divider is the session the two sides were split on:
+   left of it the exchange printed the price, right of it a model said it and
+   has not been allowed to revise it since. */
+#app .aix-saved-chart { display: block; width: 100%; height: 64px; }
+#app .aix-saved-floor { stroke: var(--rule); stroke-width: 1; }
+#app .aix-saved-split { stroke: var(--thread); stroke-width: 1; stroke-dasharray: 3 3; }
+#app .aix-saved-past { fill: none; stroke: var(--ink); stroke-width: 2.2; }
+#app .aix-saved-ahead { fill: none; stroke: var(--iris); stroke-width: 2.2; stroke-dasharray: 5 4; }
+#app .aix-saved-end { fill: var(--iris); }
+
+@media (max-width: 860px) {
+  #app .aix-facts { grid-template-columns: 1fr; }
+  #app .aix-lab { padding: 16px; }
+  #app .aix-lab-actions { width: 100%; }
+  #app .aix-lab-actions .aix-cta, #app .aix-lab-actions .aix-cta-quiet { flex: 1; }
 }

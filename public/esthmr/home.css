@@ -62,7 +62,7 @@
 /* ── the session ────────────────────────────────────────────────────────── */
 
 .breadth-bar {
-  display: flex; margin-top: 16px; height: 10px; border-radius: 999px;
+  display: flex; margin-top: 16px; height: 10px; border-radius:var(--radius-island);
   overflow: hidden; background: var(--sunk);
 }
 .breadth-bar span { display: block; min-width: 2px; }

@@ -416,3 +416,44 @@ export function reorderChart(pairs, ar = false) {
         class: moved > 20 ? 'aix-dot-moved' : 'aix-dot-still' });
     })));
 }
+
+/* ── the saved path, as the redesign draws it ───────────────────────────── */
+
+/**
+ * One company's own recent closes, then the path a model saved for it.
+ *
+ * Two facts this shape has to keep apart, because a single continuous line
+ * would hide both. The left of the divider is what the exchange printed; the
+ * right is what a model said on one night and has not been allowed to revise
+ * since. So the past is solid and the saved path is dashed, and the divider
+ * carries the session they were split on.
+ *
+ * Prices, not percentages: the card beside it names the low, the average and
+ * the high of where the models' paths END, and a reader cannot compare those
+ * to a line drawn in percent.
+ */
+export function savedPathChart({ past, ahead }, ar = false) {
+  const left = (Array.isArray(past) ? past : []).filter(finite);
+  const right = (Array.isArray(ahead) ? ahead : []).filter(finite);
+  if (left.length < 2 || right.length < 2) return null;
+  const W = 250, H = 64, PAD = 6, FLOOR = 54;
+  const all = left.concat(right);
+  const lo = Math.min(...all), hi = Math.max(...all);
+  const span = hi - lo || 1;
+  // The join is one point: the basis close ends the past and starts the path,
+  // so the two lines meet rather than leaving a step at the divider.
+  const total = left.length + right.length - 1;
+  const x = (i) => PAD + (i / Math.max(total - 1, 1)) * (W - PAD * 2);
+  const y = (v) => PAD + (1 - (v - lo) / span) * (FLOOR - PAD * 2);
+  const split = fix(x(left.length - 1));
+  const end = [x(total - 1), y(right[right.length - 1])];
+  return h('svg', {
+    class: 'aix-saved-chart', viewBox: `0 0 ${W} ${H}`, role: 'img', dir: 'ltr',
+    'aria-label': ar ? 'إغلاقات سابقة، ثم مسار محفوظ' : 'Past closes, then a saved path',
+  },
+  h('line', { x1: 0, y1: FLOOR, x2: W, y2: FLOOR, class: 'aix-saved-floor' }),
+  h('line', { x1: split, y1: PAD, x2: split, y2: FLOOR, class: 'aix-saved-split' }),
+  h('path', { d: path(left.map((v, i) => [x(i), y(v)])), class: 'aix-saved-past' }),
+  h('path', { d: path(right.map((v, i) => [x(left.length - 1 + i), y(v)])), class: 'aix-saved-ahead' }),
+  h('circle', { cx: fix(end[0]), cy: fix(end[1]), r: 3.5, class: 'aix-saved-end' }));
+}

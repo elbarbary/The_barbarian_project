@@ -67,7 +67,11 @@ test('the copy does not promise, and the beta label is on the surface', () => {
   for (const word of ['best', 'top pick', 'buy', 'recommend', 'should', 'will return', 'guarantee']) {
     assert.ok(!cardsSrc.toLowerCase().includes(`'${word}`), `the hero says "${word}"`);
   }
-  assert.match(cardsSrc, /ESTHMR AI · BETA · READ THIS/);
+  // The word itself, in both languages, on the card rather than behind the
+  // dialog it opens: a reader has to be told this is unfinished before they
+  // are shown a number about a company they can go and buy.
+  assert.match(cardsSrc, /BETA/, 'the beta label left the surface');
+  assert.match(cardsSrc, /تجريبي/, 'the Arabic card carries no beta label');
   assert.match(cardsSrc, /advise nothing/);
   assert.match(cardsSrc, /not an index/);
 });

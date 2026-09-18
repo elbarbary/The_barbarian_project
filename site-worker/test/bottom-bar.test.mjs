@@ -32,8 +32,13 @@ test('the bar is an island, clear of all four edges', () => {
     'the bar is back on the left and right edges');
   assert.match(block, /calc\(10px \+ env\(safe-area-inset-bottom\)\)/,
     'the bar sits on the bottom edge rather than floating clear of it');
-  // One radius, not two: "24px 24px 0 0" is a strip the page ends at.
-  assert.match(block, /border-radius:\s*26px\s*!important/,
+  // One radius, not two: "24px 24px 0 0" is a strip the page ends at. The
+  // value itself is the palette's island radius and may move with it; what
+  // must not come back is a second value, which rounds only two corners.
+  const radius = /border-radius:\s*([^;]+);/.exec(block);
+  assert.ok(radius, 'the bar sets no radius at all');
+  const value = radius[1].replace(/!important/, '').trim();
+  assert.doesNotMatch(value, /(px|\))\s+\S/,
     'the corners are not all rounded, so it reads as a strip and not an island');
   assert.match(block, /border:\s*1px solid/,
     'an island needs an edge all the way round, not just along the top');
