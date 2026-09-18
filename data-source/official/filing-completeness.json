@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-17T10:13:02.272430+00:00",
+  "builtAt": "2026-09-18T05:33:54.765088+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 192508,
-    "withoutTickerInHeading": 36294,
+    "items": 192533,
+    "withoutTickerInHeading": 36313,
     "tickerNotInThisDirectory": 28277,
-    "attributedToAnIssuer": 127937,
+    "attributedToAnIssuer": 127943,
     "months": [
       {
         "month": "2005-01",
@@ -1831,8 +1831,8 @@
       {
         "month": "2026-09",
         "harvested": "2026-09-17",
-        "items": 619,
-        "expected": 619,
+        "items": 644,
+        "expected": 644,
         "status": "complete"
       }
     ],
@@ -1840,7 +1840,7 @@
   },
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
-    "items": 625,
+    "items": 628,
     "failures": {}
   },
   "issuers": [
@@ -2386,9 +2386,9 @@
     },
     {
       "ticker": "BONY",
-      "egxFilingCount": 53,
-      "latestEgxFilingId": "294827",
-      "latestEgxFilingAt": "2026-09-17T11:49:28",
+      "egxFilingCount": 54,
+      "latestEgxFilingId": "294849",
+      "latestEgxFilingAt": "2026-09-17T13:54:31",
       "candidateIssuerWebsite": "https://www.bonyanegypt.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/BONY/profile",
       "websiteStatus": null,
@@ -2550,9 +2550,9 @@
     },
     {
       "ticker": "COPR",
-      "egxFilingCount": 226,
-      "latestEgxFilingId": "294765",
-      "latestEgxFilingAt": "2026-09-16T09:37:58",
+      "egxFilingCount": 227,
+      "latestEgxFilingId": "294848",
+      "latestEgxFilingAt": "2026-09-17T13:48:48",
       "candidateIssuerWebsite": "https://www.copper-invest.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/COPR/profile",
       "websiteStatus": null,
@@ -2954,9 +2954,9 @@
     },
     {
       "ticker": "ELNA",
-      "egxFilingCount": 624,
-      "latestEgxFilingId": "292906",
-      "latestEgxFilingAt": "2026-08-12T15:19:30",
+      "egxFilingCount": 625,
+      "latestEgxFilingId": "294846",
+      "latestEgxFilingAt": "2026-09-17T13:41:33",
       "candidateIssuerWebsite": null,
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ELNA/profile",
       "websiteStatus": {
@@ -3048,9 +3048,9 @@
     },
     {
       "ticker": "ETEL",
-      "egxFilingCount": 1079,
-      "latestEgxFilingId": "294552",
-      "latestEgxFilingAt": "2026-09-10T11:47:30",
+      "egxFilingCount": 1080,
+      "latestEgxFilingId": "294855",
+      "latestEgxFilingAt": "2026-09-17T14:12:14",
       "candidateIssuerWebsite": "https://www.te.eg/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ETEL/profile",
       "websiteStatus": null,
@@ -3058,9 +3058,9 @@
     },
     {
       "ticker": "ETRS",
-      "egxFilingCount": 1095,
-      "latestEgxFilingId": "293721",
-      "latestEgxFilingAt": "2026-08-23T10:02:57",
+      "egxFilingCount": 1096,
+      "latestEgxFilingId": "294847",
+      "latestEgxFilingAt": "2026-09-17T13:45:46",
       "candidateIssuerWebsite": "https://www.egytrans.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ETRS/profile",
       "websiteStatus": null,
@@ -3446,9 +3446,9 @@
     },
     {
       "ticker": "IFAP",
-      "egxFilingCount": 611,
-      "latestEgxFilingId": "294396",
-      "latestEgxFilingAt": "2026-09-07T10:18:36",
+      "egxFilingCount": 612,
+      "latestEgxFilingId": "294857",
+      "latestEgxFilingAt": "2026-09-17T15:21:09",
       "candidateIssuerWebsite": "https://www.mahaseel.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/IFAP/profile",
       "websiteStatus": null,
