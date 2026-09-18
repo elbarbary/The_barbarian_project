@@ -97,7 +97,14 @@
   font-size: 12px !important; letter-spacing: normal !important;
 }
 #app [dir="rtl"] .om-scr :is([style*="IBM Plex Mono"]):not(svg *):not(.om-heat *) { letter-spacing: normal !important; }
-.account, body[data-signed="yes"] .account { position: absolute; top: 16px; }
+/* Under the strips across the top, not on them. `top: 16px` was written when
+   nothing was up there; with the ticker tape and the signed-out disclosure the
+   email chip, the sign-out button and the story button sat over both. Both
+   heights are measured in main.js (`measureTopChrome`) and are 0 when that
+   strip is not on screen. */
+.account, body[data-signed="yes"] .account {
+  position: absolute; top: calc(var(--demo-note-h, 0px) + var(--tape-h, 0px) + 16px);
+}
 @media (max-width: 860px) {
   #app .om-main {
     margin-inline-start: 0 !important;
@@ -163,7 +170,11 @@
   #app .om-idx > div > div:first-child > div:first-child { font-size: 11px !important; }
   .journal-subnav { gap: 4px; }
   .journal-subnav button { padding-inline: 10px; font-size: 13px !important; }
-  .account, body[data-signed="yes"] .account { position: absolute !important; top: 12px !important; bottom: auto !important; inset-block-end: auto !important; }
+  .account, body[data-signed="yes"] .account {
+    position: absolute !important;
+    top: calc(var(--demo-note-h, 0px) + var(--tape-h, 0px) + 12px) !important;
+    bottom: auto !important; inset-block-end: auto !important;
+  }
   #app .om-scr > section { padding: 20px 16px !important; }
   #app .journal-pulse > div:first-child > div:first-child { flex-wrap: wrap; }
 }

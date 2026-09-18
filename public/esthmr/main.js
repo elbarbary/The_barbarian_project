@@ -160,16 +160,38 @@ function rateRows(d) {
 var currentTickerData = [];
 var tickerRates = null;
 
-/** How tall the disclosure strip is, for the tape that sits under it. The
- *  sentence wraps to two lines on a phone, so this is measured, not assumed. */
-function measureDemoNote() {
-  const note = document.getElementById('demo-note');
-  if (!note || typeof note.getBoundingClientRect !== 'function') return;
-  const height = Math.round(note.getBoundingClientRect().height);
-  if (height > 0) document.documentElement.style.setProperty('--demo-note-h', `${height}px`);
+/** How tall the two strips across the top are, for everything that has to sit
+ *  under them: the tape under the disclosure, and the account buttons under
+ *  both. Measured rather than assumed — the disclosure wraps to three lines on
+ *  a phone, and either strip can be absent — because the account buttons were
+ *  pinned 48px down and landed on top of the words. A hidden strip measures
+ *  zero, so signing in brings everything back up by itself. */
+function measureTopChrome() {
+  const root = document.documentElement;
+  if (!root || !root.style || typeof root.style.setProperty !== 'function') return;
+  const tall = (id) => {
+    const el = document.getElementById(id);
+    if (!el || typeof el.getBoundingClientRect !== 'function') return 0;
+    if (el.hidden) return 0;
+    const box = el.getBoundingClientRect();
+    return Math.round(box.height);
+  };
+  root.style.setProperty('--demo-note-h', `${tall('demo-note')}px`);
+  root.style.setProperty('--tape-h', `${tall('ticker-tape')}px`);
 }
 if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
-  window.addEventListener('resize', measureDemoNote);
+  window.addEventListener('resize', measureTopChrome);
+  // A resize event fires for the window; the sentence rewraps for the element.
+  // Watching the strips themselves catches a language change, a font that
+  // loads late and a narrower pane, which a window listener alone missed —
+  // the tape once sat 19px below a strip that had already shrunk.
+  if (typeof ResizeObserver === 'function') {
+    const watcher = new ResizeObserver(() => measureTopChrome());
+    for (const id of ['demo-note', 'ticker-tape']) {
+      const el = document.getElementById(id);
+      if (el) watcher.observe(el);
+    }
+  }
 }
 
 /** Put the page itself into the reader's language, chrome and all. */
@@ -195,7 +217,7 @@ function setChrome(lang) {
   setTxt('demo-note-lead', words.demoLead);
   setTxt('demo-note-body', words.demoBody);
   setTxt('gate-demo', `${words.demoLead} ${words.demoBody}`);
-  measureDemoNote();
+  measureTopChrome();
   setTxt('signin', words.signIn);
   setTxt('signout', words.signOut);
   const storyBtn = document.getElementById('story-btn');
@@ -782,6 +804,7 @@ function renderTickerTrack(lang) {
     // Nothing sourced yet: an empty tape, not a made-up one.
     track.innerHTML = '';
     if (tape) tape.hidden = true;
+    measureTopChrome();
     return;
   }
   if (tape) tape.hidden = false;
@@ -799,6 +822,8 @@ function renderTickerTrack(lang) {
       + `<span class="ticker-sep">/</span>`
       + `</div>`;
   }).join('');
+
+  measureTopChrome();
 
   track.querySelectorAll?.('.ticker-item')?.forEach?.((el) => {
     el.onclick = () => {
