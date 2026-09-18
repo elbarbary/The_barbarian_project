@@ -92,24 +92,20 @@
   <sc-if value="{{ isFlowTracker }}">{{ flowViews.screen }}</sc-if>
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     <div class="om-scr journal-home" style="display:flex;flex-direction:column;gap:20px">
-      <!-- The models' own record, first on the page.
-           Built in public/esthmr/ai-cards.js. Each card is a statement about a
-           MODEL — how the five companies it ranked highest actually did against
-           the market — and names no security. Clicking one opens the scenario
-           workbench, which does name securities and is gated accordingly. -->
-      {{ aiCards }}
       <header class="journal-intro">
         <p class="journal-eyebrow">{{ marketDate }} · {{ sessionState }}</p>
         <h1>{{ overviewTitle }}</h1>
       </header>
-      <div class="quick-paths"><sc-for list="{{ quickActions }}" as="q">
-        <button type="button" onClick="{{ q.go }}"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="{{ q.icon }}"></path></svg><span><strong>{{ q.label }}</strong><small>{{ q.note }}</small></span><span class="quick-arrow" aria-hidden="true">↗</span></button>
-      </sc-for></div>
-      <!-- The three index levels first and biggest. They were under a 50px
-           page title and a session note, at 21-32px — the smallest headline
-           figures on a screen whose whole subject is where the market closed,
-           and the first thing anybody opens this for. Title and note now sit
-           beside them rather than above. -->
+      <!-- The market, first.
+           The three index levels were already the biggest figures here, but
+           they sat under the models' own record and a row of shortcuts — so a
+           visitor met the machinery, then the navigation, and only then the
+           thing they opened the page for. Order now: what the market did, then
+           what the models said about it.
+
+           The models' record stays high on the page rather than being pushed
+           to the bottom: it is the product's own work and the owner wants it
+           read. It is second, not first. -->
       <div class="om-idx" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-top:4px">
         <sc-for list="{{ indices }}" as="ix" hint-placeholder-count="3">
           <div onClick="{{ ix.go }}" aria-label="{{ ix.label }} {{ ix.value }} {{ ix.pct }}" style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 22px 18px;min-width:0;overflow:hidden;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:var(--shLift)">
@@ -129,6 +125,15 @@
 </sc-if>
 
       </div>
+
+      <!-- Built in public/esthmr/ai-cards.js. Each card is a statement about a
+           MODEL — how the five companies it ranked highest actually did against
+           the market — and names no security. Clicking one opens the scenario
+           workbench, which does name securities and is gated accordingly. -->
+      {{ aiCards }}
+      <div class="quick-paths"><sc-for list="{{ quickActions }}" as="q">
+        <button type="button" onClick="{{ q.go }}"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="{{ q.icon }}"></path></svg><span><strong>{{ q.label }}</strong><small>{{ q.note }}</small></span><span class="quick-arrow" aria-hidden="true">↗</span></button>
+      </sc-for></div>
 
       <section class="insight-shelf">
         <h2>{{ insightHeading }}</h2>

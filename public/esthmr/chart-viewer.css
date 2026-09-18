@@ -16,10 +16,10 @@ html[dir=rtl] .chart-viewer-content{direction:rtl}
 .chart-viewer output{min-width:58px;text-align:center;font-variant-numeric:tabular-nums;direction:ltr}
 .chart-viewer>p{margin:0;text-align:center;font-size:12px;line-height:1.5;color:var(--t2);flex:none}
 @media(max-width:600px){
- .journal-home>*{order:3}
+ .journal-home>*{order:4}
  .journal-home>.journal-intro{order:0}
  .journal-home>.om-idx{order:1}
- .journal-home>.quick-paths{order:2;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .journal-home>.quick-paths{order:3;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
  .journal-home>.quick-paths button{min-height:64px;flex-direction:row;padding:12px;border-radius:20px;text-align:start}
  .journal-home>.quick-paths strong{font-size:13px;line-height:1.5}
  .journal-home>.quick-paths svg{flex:none;width:22px;height:22px}

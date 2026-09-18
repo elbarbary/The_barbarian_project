@@ -72,16 +72,30 @@ test('the copy does not promise, and the beta label is on the surface', () => {
   assert.match(cardsSrc, /not an index/);
 });
 
-test('the cards sit at the top of Home on a phone', async () => {
-  // chart-viewer.css reorders Home's children under 600px and puts anything
-  // it does not name at order 3, so a new section lands below the fold
-  // however early it is in the markup.
+test('the cards sit high on Home, under the market', async () => {
+  /* They used to be FIRST, above the index levels, on a phone by `order: -1`
+     and on a desktop by being first in the markup. That is the thing the
+     review objected to: a visitor met the machinery before the market.
+     The owner's call is market first, models immediately after — still above
+     the fold, which is what the rule was for.
+
+     chart-viewer.css reorders Home's children under 600px and puts anything
+     it does not name last, so the markup order alone does not decide this. */
   const css = await read('public/esthmr/ai.css');
-  assert.match(css, /#app \.journal-home > \.ai-cards \{ order: -1; \}/);
+  assert.match(css, /#app \.journal-home > \.ai-cards \{ order: 2; \}/);
+  const phone = await read('public/esthmr/chart-viewer.css');
+  const order = (sel) => Number((phone.match(new RegExp(`\\.journal-home>\\${sel}\\{order:(\\d+)`)) || [])[1]);
+  assert.equal(order('.om-idx'), 1, 'the indices are not first after the header');
+  assert.ok(order('.quick-paths') > 2, 'the shortcuts still come before the record');
+  assert.ok(Number((phone.match(/\.journal-home>\*\{order:(\d+)/) || [])[1]) > 2,
+            'unnamed sections would land above the record');
+
   const template = await read('public/esthmr/template.html');
   const home = template.indexOf('{{ isHome }}');
-  assert.ok(template.indexOf('{{ aiCards }}', home) < template.indexOf('journal-intro', home),
-            'the cards are not first in the markup either');
+  const at = (s) => template.indexOf(s, home);
+  assert.ok(at('journal-intro') < at('om-idx'), 'the session header is not first');
+  assert.ok(at('om-idx') < at('{{ aiCards }}'), 'the machinery is above the market again');
+  assert.ok(at('{{ aiCards }}') < at('quick-paths'), 'the record fell below the shortcuts');
 });
 
 test('restoring Home did not cost it the sections it had', async () => {

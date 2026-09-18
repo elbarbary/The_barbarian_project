@@ -208,7 +208,12 @@
    above that rule, which loads after this file and would otherwise win on
    equal specificity. */
 @media (max-width: 600px) {
-  #app .journal-home > .ai-cards { order: -1; }
+  /* Second on a phone, not first. `order: -1` put the models' own record
+     above the index levels, so the one figure a reader opens this page for was
+     under a block about the machinery that reads them. The market goes first
+     and the record follows it immediately — it is still above the fold, which
+     is what this rule was for. */
+  #app .journal-home > .ai-cards { order: 2; }
 }
 
 /* ── the workbench ──────────────────────────────────────────────────────── */
