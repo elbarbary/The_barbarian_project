@@ -1471,6 +1471,10 @@
     "meaning": "An upward adjustment in both the bid and ask exchange rates reflects a higher local currency cost for acquiring euro liquidity in the interbank foreign exchange market.",
     "meaning_ar": "يعكس ارتفاع أسعار العرض والطلب زيادة التكلفة الفعلية بالعملة المحلية للحصول على سيولة اليورو في سوق الصرف بين البنوك."
   },
+  "ارتفاع معظم موشرات الاسهم الاسيويه خلال التداولات اليوم": {
+    "meaning": "Widespread gains across Asian equity indices reflect positive regional market breadth driven by overnight international market performance and regional macroeconomic data releases.",
+    "meaning_ar": "يعكس صعود معظم مؤشرات الأسهم الآسيوية اتساع نطاق التداول الإيجابي في الأسواق الإقليمية، مدفوعاً بحركة التداول في البورصات العالمية السابقة وبيانات الاقتصاد الكلي الإقليمية الصادرة."
+  },
   "ارتفاع موشر \"ازدهار الخدمات اللوجستيه\" في الصين الي 50.9% في اغسطس": {
     "meaning": "A reading above the 50% threshold places the Chinese logistics sector in expansion territory, reflecting operational activity in freight movement, warehousing capacity utilization, and supply chain turnover rates.",
     "meaning_ar": "يعكس تجاوز المؤشر لمستوى 50% وجود قطاع الخدمات اللوجستية الصيني في نطاق التوسع التشغيلي، وهو ما يرصد حركة تدفق الشحن، ومعدلات إشغال المستودعات، وسرعة دوران البضائع عبر سلاسل الإمداد."
@@ -7740,6 +7744,10 @@
   "موسسه البترول الكويتيه تعرض نقل شحنات من سفينه لاخري خارج مضيق هرمز": {
     "meaning": "Ship-to-ship (STS) cargo transfer outside the Strait of Hormuz establishes an alternative maritime logistics mechanism that shifts crude oil loading operations beyond a regional chokepoint.",
     "meaning_ar": "يمثل تفريغ ونقل الشحنات من سفينة إلى أخرى خارج مضيق هرمز آلية لوجستية بحرية بديلة تنقل عمليات تحميل وتداول النفط الخام إلى نقاط جغرافية تقع خارج هذا الممر المائي."
+  },
+  "موسسه نوبل ترفع قيمه الجايزه الماليه الي 1.2 مليون دولار": {
+    "meaning": "The Nobel Foundation adjusts its award disbursements based on the capital returns and balance-sheet valuation of its investment portfolio, reflecting the fund's asset performance and currency management.",
+    "meaning_ar": "تحدد مؤسسة نوبل قيمة مخصصات الجوائز النقدية بناءً على العوائد الاستثمارية والقيمة الدفترية لمحفظة أصولها الوقفية، مما يعكس الأداء المالي وإدارة السيولة للوقف."
   },
   "موشر EGX30 يقترب من 57 الف نقطه.. هل تبدا موجه صعود جديده؟": {
     "meaning": "The headline tracks the benchmark EGX30 index testing the 57,000-point numerical threshold, which measures the aggregate market-capitalization-weighted performance of the 30 most liquid equities traded on the Egyptian Exchange.",
