@@ -2599,6 +2599,10 @@
     "meaning": "This initiative executes state-funded public works contracts for landscaping, municipal tree supply, and irrigation infrastructure along major transport corridors.",
     "meaning_ar": "تفعّل هذه المبادرة عقود أشغال عامة ممولة حكومياً لتوريد الأشجار وأعمال التشجير وتمديد شبكات الري على طول المحاور المرورية الرئيسية."
   },
+  "الحكومه تحظر انشاء حسابات للاطفال اقل من 13 عاما علي مواقع التواصل الاجتماعي": {
+    "meaning": "The mandate introduces compliance requirements for digital platforms operating in Egypt, requiring the integration of age verification infrastructure and technical controls to restrict user onboarding under the age threshold.",
+    "meaning_ar": "يفرض هذا الإجراء متطلبات امتثال تنظيمي على المنصات الرقمية العاملة في مصر، مما يلزمها بدمج بنية تحتية للتحقق من السن وضوابط تقنية لتقييد تسجيل المستخدمين دون الحد العمري المحدد."
+  },
   "الحكومه تخطط لطرح سندات «باندا» في الصين ب500 مليون دولار": {
     "meaning": "Panda bonds are Chinese yuan-denominated sovereign debt instruments issued by foreign entities in the Chinese domestic market. This issuance structure utilizes non-traditional debt markets to fulfill foreign financing requirements.",
     "meaning_ar": "تُمثل سندات الباندا أدوات دين سيادية مقومة باليوان الصيني تُصدرها جهات أجنبية داخل السوق المالية المحلية في الصين. وتعمل هذه الآلية على استخدام أسواق دين غير تقليدية لتلبية المتطلبات التمويلية الخارجية."
@@ -3994,6 +3998,10 @@
   "بتروتشاينا تتوقع استقرار الطلب علي الغاز الطبيعي المسال في الصين هذا العام": {
     "meaning": "Stable LNG import demand in China maintains current spot market procurement volumes and keeps existing term contract off-take levels unchanged across international supply chains.",
     "meaning_ar": "استقرار الطلب على واردات الغاز الطبيعي المسال في الصين يحافظ على أحجام الشراء الحالية في السوق الفورية، ويبقي على معدلات السحب الحالية المحددة في عقود التوريد الدولية طويلة الأجل دون تغيير."
+  },
+  "بدء التشغيل التجريبي للمرحله الثانيه للاتوبيس الترددي دون جمهور اعتبارا من غد السبت": {
+    "meaning": "The non-passenger trial operation of the Bus Rapid Transit (BRT) second phase is an infrastructure testing procedure to verify fleet readiness, electronic ticketing systems, and dedicated road lane integration prior to commercial launch.",
+    "meaning_ar": "يمثل التشغيل التجريبي بدون ركاب للمرحلة الثانية من مشروع الأتوبيس الترددي إجراءً فنياً لاختبار البنية التحتية، والتحقق من جاهزية الأسطول، وتكامل أنظمة التذاكر الإلكترونية ومسارات السير المخصصة قبل بدء التشغيل التجاري."
   },
   "بدء التشغيل التجريبي لمحطه بضايع “مواني مصر” في “السخنه”": {
     "meaning": "Pilot operations initiate the functional testing phase of cargo handling equipment, yard systems, and berth logistics prior to commercial commissioning, expanding Egypt Ports' active infrastructure footprint at the Sokhna maritime hub.",
