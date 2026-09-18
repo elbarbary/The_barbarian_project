@@ -1903,6 +1903,10 @@
     "meaning": "Daily chick prices represent the baseline input cost for poultry farm production cycles, determined by the interaction of hatchery supply volumes and feed costs across the domestic livestock value chain.",
     "meaning_ar": "تمثل الأسعار اليومية للكتاكيت تكلفة المدخلات الأساسية لدورات الإنتاج في مزارع الدواجن، وتتحدد بناءً على حجم معروض معامل التفريخ وتكاليف الأعلاف ضمن سلاسل إمداد الثروة الداجنة المحلية."
   },
+  "اسعار اللحوم .. استقرار الكندوز والمواشي والقطعيات المستورده اليوم الجمعه 18 سبتمبر 2026": {
+    "meaning": "Price stability across local and imported meat categories reflects a temporary balance between retail market demand and supply availability from local livestock and import channels, keeping operational input costs steady for food distribution networks.",
+    "meaning_ar": "يعكس استقرار أسعار اللحوم المحلية والمستوردة توازناً آنياً بين حجم المعروض من الماشية والشحنات المستوردة ومستويات الطلب الاستهلاكي، مما يثبت تكاليف الإمداد التشغيلية لشبكات التوزيع وتجارة التجزئة."
+  },
   "اسعار اللحوم الجملي والضاني والبقري والمفروم اليوم الجمعه 4-9-2026": {
     "meaning": "Daily tracking of retail meat prices reflects underlying shifts in livestock supply chains, feed costs, and domestic consumer demand patterns affecting the broader food and protein sector.",
     "meaning_ar": "تعكس المتابعة اليومية لأسعار اللحوم بالتجزئة التغيرات في سلاسل إمداد الثروة الحيوانية وتكاليف الأعلاف ومستويات الطلب الاستهلاكي المحلي المؤثرة على قطاع الصناعات الغذائية والبروتينية."
