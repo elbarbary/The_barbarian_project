@@ -367,3 +367,32 @@ test('breadth is a bar beside the indices, not a ring in the board', async () =>
   assert.match(phone, /\.journal-home>\.breadth-strip\{order:1\}/,
                'the bar is not pinned beside the indices on a phone');
 });
+
+test('the company chart comes before the metric tiles', async () => {
+  /* Ten tiles stood between a reader and the one picture the page exists for.
+     Both blocks sit outside `companyOverview`, so this is purely an order
+     change — neither appears on a different panel than before. */
+  const template = await read('public/esthmr/template.html');
+  const co = template.slice(template.indexOf('{{ isCompany }}'));
+  const screen = co.slice(0, co.indexOf('{{ isHeat }}') > 0 ? co.indexOf('{{ isHeat }}') : 60000);
+  assert.ok(screen.includes('{{ L.priceHistory }}'), 'the price chart left the company screen');
+  assert.ok(screen.includes('om-stats'), 'the metric tiles left the company screen');
+  assert.ok(screen.indexOf('{{ L.priceHistory }}') < screen.indexOf('om-stats'),
+            'the tiles are above the chart again');
+});
+
+test('no comment in the template swallows the markup after it', async () => {
+  /* Moving a block whose explanation sits above it can leave the `<!--` behind
+     and carry the `-->` away, and an unterminated comment eats every element
+     until the next one — here it would have eaten the whole chart section,
+     silently, with the page still rendering. */
+  const template = await read('public/esthmr/template.html');
+  assert.equal((template.match(/<!--/g) || []).length, (template.match(/-->/g) || []).length,
+               'an HTML comment is unterminated');
+  for (const marker of ['{{ L.priceHistory }}', '{{ chart }}', 'om-stats', '{{ aiCards }}', 'breadth-strip']) {
+    const at = template.indexOf(marker);
+    const before = template.slice(0, at);
+    assert.ok(before.lastIndexOf('<!--') <= before.lastIndexOf('-->'),
+              `${marker} is inside a comment`);
+  }
+});

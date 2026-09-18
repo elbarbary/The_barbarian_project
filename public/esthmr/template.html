@@ -1848,6 +1848,30 @@
             </sc-if>
           </div>
         </div>
+        <!-- The chart, before the tiles.
+             Ten metric tiles stood between a reader and the one picture the
+             page is for. The order is the design's: who this is and what it
+             closed at, then the shape of it, then the accounting. Both blocks
+             sit outside `companyOverview` exactly as before, so this swaps
+             their order and changes nothing about which panels show them. -->
+      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 24px 18px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:9px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M3.4 16.6 8.2 10l3.6 3.2 4-5.4 4.8 5"></path></svg>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.priceHistory }}</div>
+          </div>
+          <div style="display:flex;gap:3px;padding:4px;border-radius:13px;background:var(--sunk)">
+            <sc-for list="{{ ranges }}" as="rg" hint-placeholder-count="5">
+              <div onClick="{{ rg.go }}" style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:6px 12px;border-radius:10px;color:{{ rg.color }};background:{{ rg.bg }};box-shadow:{{ rg.sh }}">{{ rg.label }}</div>
+            </sc-for>
+          </div>
+        </div>
+        <div data-chart-title="{{ chartFrom }} – {{ chartTo }}" style="position:relative;margin-top:18px">{{ chart }}</div>
+        <div dir="ltr" style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);margin-top:10px">
+          <span>{{ chartFrom }}</span><span>{{ L.sessionsShown }} {{ chartCount }}</span><span>{{ chartTo }}</span>
+        </div>
+      </section>
+
         <!-- A grid, not a wrapping flex row. Flex sized every tile to its own
              number, so nine tiles of nine different widths broke wherever they
              happened to run out of room and left the last one stranded beside
@@ -1908,23 +1932,6 @@
       </section>
       </details></sc-if>
 
-      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 24px 18px">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
-          <div style="display:flex;align-items:center;gap:9px">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M3.4 16.6 8.2 10l3.6 3.2 4-5.4 4.8 5"></path></svg>
-            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.priceHistory }}</div>
-          </div>
-          <div style="display:flex;gap:3px;padding:4px;border-radius:13px;background:var(--sunk)">
-            <sc-for list="{{ ranges }}" as="rg" hint-placeholder-count="5">
-              <div onClick="{{ rg.go }}" style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:6px 12px;border-radius:10px;color:{{ rg.color }};background:{{ rg.bg }};box-shadow:{{ rg.sh }}">{{ rg.label }}</div>
-            </sc-for>
-          </div>
-        </div>
-        <div data-chart-title="{{ chartFrom }} – {{ chartTo }}" style="position:relative;margin-top:18px">{{ chart }}</div>
-        <div dir="ltr" style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);margin-top:10px">
-          <span>{{ chartFrom }}</span><span>{{ L.sessionsShown }} {{ chartCount }}</span><span>{{ chartTo }}</span>
-        </div>
-      </section>
 
       <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 26px">
         <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.whoTheyAre }}</div>
