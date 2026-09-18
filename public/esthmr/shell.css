@@ -1,77 +1,427 @@
-/* The frame around the design: the demo banner, the account strip, and the
-   sign-in sheet. The screens themselves are styled entirely by design.css. */
-.gate {
-  position: sticky; top: 0; z-index: 40;
-  display: flex; gap: 16px; align-items: center; justify-content: center;
-  /* room for the account control now sitting in the same corner */
-  padding-inline-end: 210px;
-  flex-wrap: wrap;
-  padding: 10px 18px;
-  background: #1B1917; color: #F5F1EC;
-  font: 400 13.5px/1.5 "IBM Plex Sans", system-ui, sans-serif;
+/* The frame around the design: the ticker tape, the hero gate, the account strip,
+   and the sign-in sheet. The screens themselves are styled entirely by design.css. */
+
+/* ── LIVE TICKER TAPE HEADER ───────────────────────── */
+.ticker-tape {
+  position: sticky; top: 0; z-index: 55;
+  width: 100%; height: 38px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+  display: flex; align-items: center;
+  user-select: none;
+  font-family: "IBM Plex Mono", "IBM Plex Sans Arabic", monospace;
+  font-size: 11.5px;
+  line-height: 1;
 }
-.gate p { margin: 0; max-width: 74ch; }
-.gate strong { color: #86CFD2; font-weight: 600; }
-/* The way in, and the way out. 44px, because they are what a thumb is
-   reaching for and they were 135x29 — comfortably under the 44x44 a finger
-   needs, on the two controls that decide whether a reader sees real data. */
+.ticker-track {
+  display: inline-flex; align-items: center;
+  white-space: nowrap; gap: 24px;
+  will-change: transform;
+  animation: tickerMarquee 45s linear infinite;
+  padding-inline: 16px;
+}
+.ticker-tape:hover .ticker-track {
+  animation-play-state: paused;
+}
+@keyframes tickerMarquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+[dir="rtl"] .ticker-track {
+  animation: tickerMarqueeRtl 45s linear infinite;
+}
+@keyframes tickerMarqueeRtl {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(50%, 0, 0); }
+}
+.ticker-item {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 10px; border-radius: 8px;
+  transition: background 0.15s ease;
+  cursor: pointer;
+}
+.ticker-item:hover { background: var(--activeBg); }
+.ticker-sym {
+  font-weight: 600; color: var(--ink);
+  font-family: "IBM Plex Sans", "IBM Plex Sans Arabic", sans-serif;
+  letter-spacing: -0.01em;
+}
+.ticker-val {
+  color: var(--ink); font-weight: 500;
+}
+.ticker-chg {
+  font-size: 11px; font-weight: 600;
+  padding: 2px 7px; border-radius: 999px;
+}
+.ticker-chg.up {
+  background: var(--mosaic-up);
+  color: var(--mosaic-up-ink);
+}
+.ticker-chg.down {
+  background: var(--mosaic-down);
+  color: var(--mosaic-down-ink);
+}
+.ticker-chg.flat {
+  background: var(--sunk);
+  color: var(--faint);
+}
+.ticker-sep {
+  color: var(--rule); opacity: 0.8; font-size: 11px;
+}
+
+/* ── FLOATING WELCOME POPUP MODAL (JETSON / MUTE STYLE) ─ */
+.gate {
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 95 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  direction: ltr !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+  pointer-events: auto !important;
+}
+.gate[hidden],
+#gate[hidden] {
+  display: none !important;
+  pointer-events: none !important;
+}
+.gate-scrim {
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(10, 18, 28, 0.72) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  z-index: 1 !important;
+}
+.gate-card {
+  position: relative !important;
+  z-index: 2 !important;
+  width: min(840px, calc(100vw - 32px)) !important;
+  min-height: 480px !important;
+  max-height: calc(100vh - 48px) !important;
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 28px !important;
+  box-shadow: 0 32px 80px -16px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1.15fr !important;
+  overflow: hidden !important;
+  direction: ltr !important;
+  animation: admFloatIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+}
+[data-theme="dark"] .gate-card {
+  background: #131F2C !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.gate-media {
+  position: relative !important;
+  background: #EBEAE6 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+[data-theme="dark"] .gate-media {
+  background: #0D161F !important;
+}
+.gate-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+}
+.gate-content {
+  position: relative !important;
+  padding: 46px 42px 42px 38px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  gap: 14px !important;
+  box-sizing: border-box !important;
+  text-align: start !important;
+}
+[dir="rtl"] .gate-content {
+  direction: rtl !important;
+  text-align: right !important;
+  align-items: flex-start !important;
+  padding: 46px 38px 42px 42px !important;
+}
+.gate-close {
+  position: absolute !important;
+  top: 22px !important;
+  right: 22px !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 0 !important;
+  color: var(--t2) !important;
+  font-size: 20px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.15s ease !important;
+  z-index: 5 !important;
+}
+.gate-close:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+  color: var(--ink) !important;
+}
+[data-theme="dark"] .gate-close {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: var(--t2) !important;
+}
+[data-theme="dark"] .gate-close:hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+  color: #fff !important;
+}
+.gate-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  padding: 4px 12px !important;
+  border-radius: 999px !important;
+  background: var(--accTint) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: var(--accent) !important;
+  width: fit-content !important;
+}
+.gate-badge-pulse {
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background: var(--up) !important;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7) !important;
+  animation: gatePulse 2s infinite !important;
+}
+@keyframes gatePulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+.gate-lead {
+  margin: 0 !important;
+  font-size: clamp(21px, 2.2vw, 26px) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--ink) !important;
+  line-height: 1.35 !important;
+  font-family: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif !important;
+}
+.gate-body {
+  margin: 0 !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  color: var(--t2) !important;
+  max-width: 44ch !important;
+}
+.gate-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+  margin-top: 8px !important;
+}
+.gate-hero-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  min-height: 46px !important;
+  padding: 0 24px !important;
+  border-radius: 9999px !important;
+  background: var(--accent) !important;
+  color: #FFFFFF !important;
+  border: 0 !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--accent) 35%, transparent) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease !important;
+}
+.gate-hero-btn:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--accent) 45%, transparent) !important;
+  filter: brightness(1.08) !important;
+}
+.gate-sec-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 46px !important;
+  padding: 0 22px !important;
+  border-radius: 9999px !important;
+  background: transparent !important;
+  border: 1.5px solid var(--rule) !important;
+  color: var(--ink) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+.gate-sec-btn:hover {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+  background: var(--accTint) !important;
+}
+
+@media (max-width: 740px) {
+  .gate {
+    padding: 12px !important;
+  }
+  .gate-card {
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+    width: 100% !important;
+    max-width: 400px !important;
+    max-height: calc(100vh - 24px) !important;
+    border-radius: 24px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+  .gate-close {
+    top: 12px !important;
+    right: 12px !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    color: #FFFFFF !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    z-index: 10 !important;
+  }
+  .gate-media {
+    height: 170px !important;
+    min-height: 170px !important;
+    width: 100% !important;
+  }
+  .gate-content {
+    padding: 20px 16px 18px !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  [dir="rtl"] .gate-content {
+    padding: 20px 16px 18px !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .gate-lead {
+    font-size: 19px !important;
+    line-height: 1.3 !important;
+  }
+  .gate-body {
+    font-size: 12.5px !important;
+    line-height: 1.5 !important;
+    max-width: 100% !important;
+  }
+  .gate-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+  .gate-hero-btn {
+    width: 100% !important;
+    min-height: 44px !important;
+    padding: 0 12px !important;
+    font-size: 12.5px !important;
+    white-space: normal !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
+  .gate-sec-btn {
+    width: 100% !important;
+    min-height: 42px !important;
+    padding: 0 12px !important;
+    font-size: 12.5px !important;
+    white-space: normal !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
+}
+body[data-signed="yes"] .gate { display: none !important; }
+
+/* ── ACCOUNT BAR ────────────────────────────────────── */
 .gate-cta, .account button {
   font: 500 14px/1 "IBM Plex Sans", system-ui, sans-serif;
   display: inline-flex; align-items: center; justify-content: center;
-  min-height: 44px; padding: 0 18px; border-radius: 999px; cursor: pointer;
-  background: #126B75; color: #fff; border: 0;
+  min-height: 44px; padding: 0 16px; border-radius: 999px; cursor: pointer;
+  background: var(--accent); color: #fff; border: 0;
 }
-.gate-cta:hover { background: #105963; }
+[data-theme="dark"] .gate-cta { color: #111D29; }
+.gate-cta:hover { filter: brightness(1.08); }
 
-/* The banner is hidden HERE, not by main.js setting `bar.hidden = true`.
-   `hidden` is only a user-agent rule — `[hidden] { display: none }` — and any
-   author rule beats it. `.gate` above sets `display: flex`, so the attribute
-   was silently doing nothing and the "you are looking at an invented market"
-   line stayed on screen after signing in, over data that was by then real.
-   The account strip two rules down was always hidden this way; the banner
-   simply never got the same treatment. */
-body[data-signed="yes"] .gate { display: none; }
-
-/* Top right, and always there: signed out it offers the way in, signed in it
-   says who you are and offers the way out. It used to be bottom-right and
-   signed-in only, while the way IN was a button in the middle of the demo
-   banner — so the control moved across the page the moment you used it. */
 .account {
-  position: fixed; inset-inline-end: 18px; top: 14px; z-index: 60;
-  display: flex; gap: 10px; align-items: center;
+  position: fixed; inset-inline-end: 18px; top: 48px; z-index: 60;
+  display: flex; gap: 8px; align-items: center;
   font: 400 12.5px/1 "IBM Plex Mono", ui-monospace, monospace;
   color: var(--t2);
 }
-body[data-signed="yes"] .account { top: 18px; }
+body[data-signed="yes"] .account { top: 48px; }
 body[data-signed="yes"] #signin,
 body[data-signed="no"]  #signout,
-/* Signed out there is no address to print, and #who now carries an author
-   `display` of its own — so the state needs a rule, not just the attribute. */
-body[data-signed="no"]  #who { display: none; }
-/* The account controls are hidden BY ATTRIBUTE in main.js as well as by the
-   two rules above, and they gained an author `display` when they were made
-   44px — which is exactly how the demo banner and the sign-in steps each
-   ended up ignoring `hidden` for months. The guard, once, for all three. */
-#who[hidden], #signin[hidden], #signout[hidden] { display: none !important; }
+body[data-signed="no"]  #admin-link,
+body[data-signed="no"]  #who { display: none !important; }
+#who[hidden], #signin[hidden], #signout[hidden], #admin-link[hidden], #story-btn[hidden] { display: none !important; }
+
 .account #who {
   display: inline-flex; align-items: center; min-height: 44px;
   padding: 0 14px; border-radius: 999px;
   background: var(--surface); border: 1px solid var(--edgeIn);
   max-width: 46vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
+.account #admin-link {
+  display: none !important;
+  align-items: center; min-height: 44px;
+  padding: 0 14px; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--accent);
+  color: var(--accent); font-weight: 600; text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+body.is-admin .account #admin-link:not([hidden]),
+body.is-admin #admin-link:not([hidden]) {
+  display: inline-flex !important;
+}
+.account #admin-link:hover {
+  background: var(--accTint);
+  border-color: var(--accent);
+}
+.account #story-btn {
+  display: inline-flex; align-items: center; min-height: 44px;
+  padding: 0 14px; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--rule);
+  color: var(--t2); font-weight: 500; cursor: pointer;
+  transition: all 0.15s ease;
+}
+.account #story-btn:hover {
+  color: var(--ink); border-color: var(--accent); background: var(--accTint);
+}
 .account #signout { background: var(--surface); color: var(--t2); border: 1px solid var(--edgeIn); }
 .account #signout:hover { color: var(--ink); border-color: var(--rule); }
 
-/* The account control is FIXED, so it floats over whatever is at the top of
-   the screen — which on Home is the third index card, and the email chip sat
-   across EGX 100's level. Reserve the strip it occupies rather than move it:
-   the corner is where it belongs, and the page can start below it.
-
-   Applied to `main` rather than to a screen, because every screen has
-   something at the top and Home was only the first to collide. The demo
-   banner is sticky and already pushes content down, so the reservation is
-   needed on the signed-in path — where there is no banner — most of all. */
-.om-main { padding-top: 62px !important; }
+.om-main { padding-top: 72px !important; }
 body[data-signed="no"] .om-main { padding-top: 26px !important; }
 
 /* Sign-in sheet */
@@ -322,4 +672,376 @@ body[data-signed="no"] .om-main { padding-top: 26px !important; }
      the height, so its own last card grows by nothing. */
   #app .home-col > section:last-child,
   #app .home-col > sc-if:last-child > section { flex: 1 1 auto; }
+}
+
+/* ── INSTAGRAM / TIKTOK STORY MODAL ─────────────────── */
+.story-modal {
+  position: fixed; inset: 0; z-index: 90;
+  display: grid; place-items: center;
+  padding: 16px;
+}
+.story-modal[hidden] { display: none !important; }
+.story-scrim {
+  position: absolute; inset: 0;
+  background: rgba(10, 17, 24, 0.75);
+  backdrop-filter: blur(8px);
+}
+.story-dialog {
+  position: relative; z-index: 2;
+  width: min(840px, calc(100vw - 32px));
+  max-height: 90vh;
+  background: var(--surface);
+  border: 1px solid var(--edgeIn);
+  border-radius: 24px;
+  padding: 24px 28px 28px;
+  box-shadow: 0 24px 64px -12px rgba(0, 0, 0, 0.45);
+  display: flex; flex-direction: column; gap: 20px;
+  overflow-y: auto;
+}
+.story-modal-top {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 16px;
+}
+.story-modal-heading {
+  display: flex; align-items: center; gap: 12px;
+}
+.story-ico {
+  font-size: 28px;
+  padding: 8px; border-radius: 12px;
+  background: var(--accTint);
+}
+.story-modal-title {
+  margin: 0; font-size: 18px; font-weight: 700; color: var(--ink);
+}
+.story-modal-sub {
+  margin: 4px 0 0; font-size: 13px; color: var(--t2);
+}
+.story-close-btn {
+  background: var(--sunk); border: 1px solid var(--rule);
+  color: var(--t2); font-size: 20px; line-height: 1;
+  width: 36px; height: 36px; border-radius: 50%;
+  cursor: pointer; display: grid; place-items: center;
+  transition: all 0.15s ease;
+}
+.story-close-btn:hover {
+  background: var(--activeBg); color: var(--ink); border-color: var(--edgeIn);
+}
+.story-modal-content {
+  display: grid; grid-template-columns: 1fr 300px; gap: 24px;
+  align-items: start;
+}
+@media (max-width: 760px) {
+  .story-modal-content { grid-template-columns: 1fr; }
+  .gate-pills { flex-direction: column; width: 100%; }
+  .gate-pill { width: 100%; justify-content: center; }
+}
+.story-config {
+  display: flex; flex-direction: column; gap: 16px;
+}
+.story-field {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.story-field label {
+  font-size: 12.5px; font-weight: 600; color: var(--t2);
+}
+.story-field select,
+.story-field input {
+  padding: 10px 14px; border-radius: 12px;
+  background: var(--sunk); border: 1px solid var(--edgeIn);
+  color: var(--ink); font-family: inherit; font-size: 14px;
+  outline: none; transition: border-color 0.15s ease;
+}
+.story-field select:focus,
+.story-field input:focus {
+  border-color: var(--accent);
+}
+.story-buttons {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-top: 8px;
+}
+.story-btn-primary {
+  min-height: 46px; padding: 0 20px; border-radius: 999px;
+  background: var(--accent); color: #fff; border: 0;
+  font-weight: 600; font-size: 14px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  transition: all 0.15s ease;
+}
+[data-theme="dark"] .story-btn-primary { color: #111D29; }
+.story-btn-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.story-btn-secondary {
+  min-height: 42px; padding: 0 20px; border-radius: 999px;
+  background: var(--sunk); color: var(--ink); border: 1px solid var(--rule);
+  font-weight: 500; font-size: 13.5px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  transition: all 0.15s ease;
+}
+.story-btn-secondary:hover { background: var(--activeBg); border-color: var(--edgeIn); }
+
+.story-preview-container {
+  display: flex; justify-content: center; align-items: center;
+}
+.story-phone-mockup {
+  width: 260px; height: 462px;
+  border-radius: 32px;
+  border: 4px solid var(--edgeIn);
+  background: #0A1118;
+  box-shadow: 0 16px 36px rgba(0,0,0,0.35);
+  overflow: hidden;
+  position: relative;
+}
+.story-phone-mockup canvas {
+  width: 100%; height: 100%;
+  display: block; object-fit: contain;
+}
+
+/* ── ADMIN TELEMETRY POPUP MODAL ───────────────────── */
+.admin-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 99999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px !important;
+  box-sizing: border-box !important;
+  pointer-events: auto !important;
+}
+.admin-modal[hidden] {
+  display: none !important;
+  pointer-events: none !important;
+}
+.admin-scrim {
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(8, 14, 21, 0.78) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  z-index: 1 !important;
+}
+.admin-dialog {
+  position: relative !important;
+  z-index: 2 !important;
+  width: min(580px, calc(100vw - 32px)) !important;
+  height: min(580px, calc(100vh - 32px)) !important;
+  max-width: 580px !important;
+  max-height: calc(100vh - 32px) !important;
+  aspect-ratio: 1 / 1 !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--edgeIn) !important;
+  border-radius: 12px !important;
+  padding: 18px 20px 18px !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 32px 80px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  overflow-y: auto !important;
+  animation: admFloatIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+}
+@keyframes admFloatIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.adm-top {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 10px;
+}
+.adm-heading {
+  display: flex; align-items: center; gap: 10px;
+}
+.adm-crown {
+  font-size: 22px; line-height: 1;
+  padding: 6px; border-radius: 8px;
+  background: var(--accTint);
+}
+.adm-title {
+  margin: 0; font-size: 16px; font-weight: 700; color: var(--ink);
+  font-family: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif;
+}
+.adm-sub {
+  margin: 2px 0 0; font-size: 11px; color: var(--t2);
+  font-family: "IBM Plex Mono", monospace;
+  letter-spacing: 0.01em;
+}
+.adm-top-actions {
+  display: flex; align-items: center; gap: 10px;
+}
+.adm-live-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  padding: 4px 10px; border-radius: 999px;
+  background: var(--upTint); color: var(--up);
+  font-weight: 600;
+}
+.adm-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--up);
+  animation: admPulse 2s infinite ease-in-out;
+}
+@keyframes admPulse {
+  0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+.adm-close {
+  background: var(--sunk); border: 1px solid var(--rule);
+  color: var(--t2); font-size: 20px; line-height: 1;
+  width: 32px; height: 32px; border-radius: 8px;
+  cursor: pointer; display: grid; place-items: center;
+  transition: all 0.15s ease;
+}
+.adm-close:hover {
+  background: var(--activeBg); color: var(--ink); border-color: var(--edgeIn);
+}
+
+/* KPIs */
+.adm-kpis {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.adm-kpi {
+  background: var(--sunk); border: 1px solid var(--edgeIn);
+  border-radius: 10px; padding: 10px 12px;
+  display: flex; flex-direction: column; gap: 3px;
+  transition: border-color 0.15s ease;
+}
+.adm-kpi:hover { border-color: var(--rule); }
+.adm-kpi-lbl { font-size: 11px; color: var(--t2); font-weight: 500; }
+.adm-kpi-val {
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", sans-serif;
+  font-size: 20px; font-weight: 700; line-height: 1.1;
+  color: var(--ink);
+}
+.adm-val-up { color: var(--up); }
+.adm-kpi-hint {
+  font-size: 10px; color: var(--faint);
+  font-family: "IBM Plex Mono", monospace;
+}
+
+/* Domain breakdown */
+.adm-domains-box {
+  background: var(--sunk); border: 1px solid var(--edgeIn);
+  border-radius: 10px; padding: 10px 12px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.adm-box-head {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 11.5px; font-weight: 600; color: var(--t2);
+}
+.adm-badge {
+  font-family: "IBM Plex Mono", monospace; font-size: 10.5px;
+  padding: 1px 7px; border-radius: 6px;
+  background: var(--surface); border: 1px solid var(--edgeIn);
+  color: var(--accent);
+}
+.adm-domain-pills {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.adm-dpill {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: "IBM Plex Mono", monospace; font-size: 11px;
+  padding: 3px 9px; border-radius: 6px;
+  background: var(--surface); border: 1px solid var(--edgeIn);
+  color: var(--ink); cursor: pointer;
+  transition: all 0.15s ease;
+}
+.adm-dpill:hover {
+  border-color: var(--accent); background: var(--accTint);
+}
+.adm-dpill.auc {
+  border-color: var(--accent); background: var(--accTint);
+  color: var(--accent); font-weight: 600;
+}
+
+/* Toolbar */
+.adm-toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px;
+}
+.adm-search-wrap {
+  flex: 1; min-width: 160px;
+}
+#adm-search-input {
+  width: 100%; height: 36px; padding: 0 12px; border-radius: 8px;
+  background: var(--sunk); border: 1px solid var(--edgeIn);
+  color: var(--ink); font-family: "IBM Plex Mono", monospace; font-size: 12px;
+  outline: none; transition: border-color 0.15s ease;
+  box-sizing: border-box;
+}
+#adm-search-input:focus { border-color: var(--accent); }
+.adm-actions-group {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+.adm-btn {
+  height: 34px; padding: 0 12px; border-radius: 8px;
+  background: var(--surface); border: 1px solid var(--rule);
+  color: var(--ink); font-size: 11.5px; font-weight: 500;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+  transition: all 0.15s ease;
+}
+.adm-btn:hover {
+  border-color: var(--accent); background: var(--accTint);
+}
+.adm-btn-accent {
+  background: var(--accent); color: #ffffff;
+  border-color: var(--accent); font-weight: 600;
+}
+.adm-btn-accent:hover { filter: brightness(1.08); }
+
+/* Table */
+.adm-table-wrap {
+  border: 1px solid var(--edgeIn); border-radius: 8px;
+  overflow: hidden; max-height: 180px; overflow-y: auto;
+  background: var(--surface);
+}
+.adm-table {
+  width: 100%; border-collapse: collapse; text-align: start;
+}
+.adm-table th {
+  position: sticky; top: 0; background: var(--sunk); z-index: 1;
+  padding: 8px 10px; font-size: 11px; font-weight: 600;
+  color: var(--t2); border-bottom: 1px solid var(--edgeIn);
+  text-align: start;
+}
+.adm-table td {
+  padding: 7px 10px; border-bottom: 1px solid var(--rule2);
+  font-family: "IBM Plex Mono", monospace; font-size: 11.5px;
+  color: var(--ink);
+}
+.adm-table tbody tr:hover { background: var(--activeBg); }
+.adm-auc-tag {
+  display: inline-flex; padding: 1px 6px; border-radius: 4px;
+  background: var(--accTint); color: var(--accent);
+  font-weight: 700; font-size: 10.5px; margin-inline-start: 6px;
+}
+.adm-login-tag {
+  display: inline-flex; padding: 2px 7px; border-radius: 6px;
+  background: var(--sunk); border: 1px solid var(--edgeIn);
+  font-size: 11px;
+}
+.adm-login-tag.active {
+  background: var(--upTint); color: var(--up); border-color: transparent;
 }

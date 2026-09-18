@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import worker, { recordUser, sha256 } from '../index.js';
+import worker, { recordUser, sha256, sign, isSuperAdmin, buildUsersStats } from '../index.js';
 
 function mockKv() {
   const store = new Map();
@@ -227,4 +227,77 @@ test('syncFromResend recovers emails from Resend /emails and /audiences and upda
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test('super admin session can access /auth/users and /auth/stats while non-admin gets 403', async () => {
+  const kv = mockKv();
+  const sessionSecret = 'test-session-secret-at-least-32-bytes-long';
+  const env = {
+    ESTHMR_AUTH: kv,
+    STATUS_TOKEN: 'admin-token',
+    SESSION_SECRET: sessionSecret,
+  };
+
+  const adminEmail = 'elbarbary@aucegypt.edu';
+  const regularEmail = 'normal@gmail.com';
+
+  await kv.put('users:all', JSON.stringify([adminEmail, regularEmail]));
+  await kv.put(`user:${adminEmail}`, JSON.stringify({ email: adminEmail, created_at: new Date().toISOString(), logins: 10 }));
+  await kv.put(`user:${regularEmail}`, JSON.stringify({ email: regularEmail, created_at: new Date().toISOString(), logins: 1 }));
+
+  // Mint signed session tokens
+  const adminToken = await sign({ e: adminEmail, x: Math.floor(Date.now() / 1000) + 3600 }, sessionSecret);
+  const regularToken = await sign({ e: regularEmail, x: Math.floor(Date.now() / 1000) + 3600 }, sessionSecret);
+
+  // 1. Regular user gets 403 Forbidden on /auth/users and /auth/stats
+  const regUserReq = new Request('https://esthmr.com/esthmr/api/auth/users', {
+    headers: { cookie: `esthmr_session=${regularToken}` },
+  });
+  const regUserRes = await worker.fetch(regUserReq, env);
+  assert.equal(regUserRes.status, 403);
+  assert.equal((await regUserRes.json()).error, 'forbidden');
+
+  const regStatsReq = new Request('https://esthmr.com/esthmr/api/auth/stats', {
+    headers: { cookie: `esthmr_session=${regularToken}` },
+  });
+  const regStatsRes = await worker.fetch(regStatsReq, env);
+  assert.equal(regStatsRes.status, 403);
+
+  // 2. Super admin gets 200 OK on /auth/users without needing STATUS_TOKEN
+  const adminUserReq = new Request('https://esthmr.com/esthmr/api/auth/users', {
+    headers: { cookie: `esthmr_session=${adminToken}` },
+  });
+  const adminUserRes = await worker.fetch(adminUserReq, env);
+  assert.equal(adminUserRes.status, 200);
+  const userData = await adminUserRes.json();
+  assert.equal(userData.count, 2);
+
+  // 3. Super admin gets 200 OK on /auth/stats with computed metrics
+  const adminStatsReq = new Request('https://esthmr.com/esthmr/api/auth/stats', {
+    headers: { cookie: `esthmr_session=${adminToken}` },
+  });
+  const adminStatsRes = await worker.fetch(adminStatsReq, env);
+  assert.equal(adminStatsRes.status, 200);
+  const statsData = await adminStatsRes.json();
+  assert.equal(statsData.total, 2);
+  assert.equal(statsData.stats.new24h, 2);
+  assert.equal(statsData.stats.returning, 1);
+  assert.equal(statsData.stats.totalLogins, 11);
+  assert.ok(Array.isArray(statsData.stats.topDomains));
+  assert.equal(statsData.users.length, 2);
+
+  // 4. /auth/me?admin=1 reflects admin status
+  const meAdminReq = new Request('https://esthmr.com/esthmr/api/auth/me?admin=1', {
+    headers: { cookie: `esthmr_session=${adminToken}` },
+  });
+  const meAdminRes = await worker.fetch(meAdminReq, env);
+  assert.equal(meAdminRes.status, 200);
+  assert.deepEqual(await meAdminRes.json(), { email: adminEmail, admin: true });
+
+  const meRegReq = new Request('https://esthmr.com/esthmr/api/auth/me?admin=1', {
+    headers: { cookie: `esthmr_session=${regularToken}` },
+  });
+  const meRegRes = await worker.fetch(meRegReq, env);
+  assert.equal(meRegRes.status, 200);
+  assert.deepEqual(await meRegRes.json(), { email: regularEmail, admin: false });
 });

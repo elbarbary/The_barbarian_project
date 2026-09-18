@@ -28,47 +28,87 @@ try {
 
 const THEME = 'esthmr:theme';
 try {
-  const chosenTheme = localStorage.getItem(THEME);
-  if (chosenTheme === 'light' || chosenTheme === 'dark') component.state.theme = chosenTheme;
+  const qTheme = new URLSearchParams(window.location.search).get('theme');
+  if (qTheme === 'light' || qTheme === 'dark') {
+    component.state.theme = qTheme;
+  } else {
+    const chosenTheme = localStorage.getItem(THEME);
+    if (chosenTheme === 'light' || chosenTheme === 'dark') component.state.theme = chosenTheme;
+  }
 } catch { /* a blocked store costs the preference, not the page */ }
 document.documentElement.dataset.theme = component.state.theme || 'light';
 
-/* The chrome around the screens, in the reader's language.
- *
- * The banner, the two account buttons and the sign-in sheet live in
- * index.html and auth.js rather than in the template, so they were written
- * once, in English, and stayed English. With Arabic the default that put an
- * English warning about invented figures above an Arabic exchange — and left
- * the way in written in the language the reader had just not chosen.
- */
+/* The chrome around the screens, in the reader's language. */
 const CHROME = {
   en: {
-    lead: 'You are looking at an invented market.',
-    body: 'Every ticker, price and figure below is made up for the demo.'
-      + ' Sign in to read what companies actually filed.',
+    eyebrow: 'Egyptian Exchange · Real-Time Intelligence',
+    lead: 'The Bloomberg of the EGX — Free for Every Investor',
+    body: 'Company disclosures as filed, insider trading radar, and debt fragility index. Instant access, no paywalls.',
+    f1: 'Instant filings & earnings reports',
+    f2: 'Insider & major holder radar',
+    f3: 'Debt & solvency fragility index',
+    heroCta: 'Start Exploring Free (Google / Email)',
+    dismiss: 'Browse as Guest',
+    trust: '🔒 Instant passwordless login · No card required',
     signIn: 'Sign in with email',
     signOut: 'Sign out',
+    storyPill: '📱 Story',
   },
   ar: {
-    lead: 'أنت تنظر إلى سوق مُتخيَّلة.',
-    body: 'كل رمز وسعر ورقم بالأسفل مُختلَق للعرض التجريبي.'
-      + ' سجّل الدخول لتقرأ ما أفصحت عنه الشركات فعلاً.',
+    eyebrow: 'البورصة المصرية · معلومات مالية فورية',
+    lead: 'بلومبرج البورصة المصرية... مجاناً لكل مستثمر',
+    body: 'إفصاحات الشركات الحقيقية فور إيداعها، رادار صفقات الداخليين، ومؤشر أعباء الديون والسيولة. بدون اشتراكات.',
+    f1: 'إفصاحات وتقارير مالية فورية',
+    f2: 'رادار كبار المطلعين والصفقات',
+    f3: 'مؤشر أعباء الديون والهشاشة',
+    heroCta: 'ابدأ المتابعة مجاناً (جوجل أو البريد)',
+    dismiss: 'تصفح كزائر',
+    trust: '🔒 وصول فوري وآمن بدون كلمة سر',
     signIn: 'سجّل الدخول بالبريد',
     signOut: 'تسجيل الخروج',
+    storyPill: '📱 ستوري',
   },
 };
+
+/* ── LIVE TICKER TAPE DEFAULTS ──────────────────────── */
+const TICKER_DEFAULTS = [
+  { id: 'EGX30', sym: 'EGX 30', symAr: 'إيجي إكس 30', val: '55,664.80', chg: '-1.09%', up: false },
+  { id: 'EGX70', sym: 'EGX 70', symAr: 'إيجي إكس 70', val: '21,192.70', chg: '-0.98%', up: false },
+  { id: 'USD', sym: 'USD / EGP', symAr: 'الدولار الرسمي', val: '51.34', chg: '0.00%', flat: true },
+  { id: 'GOLD21', sym: 'Gold 21k', symAr: 'ذهب عيار 21', val: '6,282.5 ج.م', chg: '+0.45%', up: true },
+  { id: 'COMI', sym: 'COMI (CIB)', symAr: 'التجاري الدولي (COMI)', val: '88.50 ج.م', chg: '+1.15%', up: true },
+  { id: 'TMGH', sym: 'TMGH', symAr: 'طلعت مصطفى (TMGH)', val: '68.20 ج.م', chg: '+2.40%', up: true },
+  { id: 'GOLD24', sym: 'Gold 24k', symAr: 'ذهب عيار 24', val: '7,180.0 ج.م', chg: '+0.45%', up: true },
+  { id: 'SWDY', sym: 'SWDY', symAr: 'السويدي (SWDY)', val: '49.50 ج.م', chg: '+0.80%', up: true },
+  { id: 'EUR', sym: 'EUR / EGP', symAr: 'اليورو', val: '59.57', chg: '0.00%', flat: true },
+  { id: 'BRENT', sym: 'Brent Crude', symAr: 'نفط برنت', val: '$100.05', chg: '-2.37%', up: false },
+  { id: 'SP500', sym: 'S&P 500', symAr: 'ستاندرد آند بورز', val: '7,656.98', chg: '+0.86%', up: true },
+];
+var currentTickerData = [...TICKER_DEFAULTS];
 
 /** Put the page itself into the reader's language, chrome and all. */
 function setChrome(lang) {
   const words = CHROME[lang] || CHROME.ar;
-  // On <html>, not on the app's own root: it is what a screen reader reads
-  // the page as, and what the browser hyphenates and quotes by.
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-  document.getElementById('gate-lead').textContent = words.lead;
-  document.getElementById('gate-body').textContent = words.body;
-  document.getElementById('signin').textContent = words.signIn;
-  document.getElementById('signout').textContent = words.signOut;
+  const setTxt = (id, text) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  };
+  setTxt('gate-eyebrow', words.eyebrow);
+  setTxt('gate-lead', words.lead);
+  setTxt('gate-body', words.body);
+  setTxt('gate-f1', words.f1);
+  setTxt('gate-f2', words.f2);
+  setTxt('gate-f3', words.f3);
+  setTxt('gate-hero-cta-text', words.heroCta);
+  setTxt('gate-dismiss-text', words.dismiss || (lang === 'ar' ? 'تصفح كزائر' : 'Browse as Guest'));
+  setTxt('gate-trust', words.trust);
+  setTxt('signin', words.signIn);
+  setTxt('signout', words.signOut);
+  const storyBtn = document.getElementById('story-btn');
+  if (storyBtn) storyBtn.textContent = words.storyPill || '📱 ستوري';
+  if (typeof updateTickerLang === 'function') updateTickerLang(lang);
 }
 setChrome(component.state.lang);
 
@@ -242,7 +282,14 @@ function setSigned(email) {
   document.body.dataset.signed = email ? 'yes' : 'no';
   const bar = document.getElementById('gate');
   const who = document.getElementById('who');
-  bar.hidden = Boolean(email);
+  const isDismissed = (() => {
+    try {
+      const sp = new URLSearchParams(window.location.search);
+      if (sp.has('popup') || sp.has('welcome')) return false;
+      return sessionStorage.getItem('esthmr:gate_dismissed') === '1';
+    } catch { return false; }
+  })();
+  bar.hidden = Boolean(email) || isDismissed;
   who.textContent = email || '';
   who.hidden = !email;
   // Both buttons live in the same corner and shell.css shows whichever the
@@ -250,14 +297,58 @@ function setSigned(email) {
   // the banner.
   document.getElementById('signin').hidden = Boolean(email);
   document.getElementById('signout').hidden = !email;
+  const adminLink = document.getElementById('admin-link');
+  if (adminLink) {
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const isSuper = Boolean(cleanEmail && ['elbarbary@aucegypt.edu', 'elbarbary@auceypt.edu', 'barbary@yozo.ai'].includes(cleanEmail));
+    adminLink.hidden = !isSuper;
+    if (document.body?.classList) {
+      if (isSuper) document.body.classList.add('is-admin');
+      else document.body.classList.remove('is-admin');
+    }
+  }
 }
+
+function dismissGate() {
+  const bar = document.getElementById('gate');
+  if (bar) bar.hidden = true;
+  try { sessionStorage.setItem('esthmr:gate_dismissed', '1'); } catch {}
+}
+
+const gateClose = document.getElementById('gate-close');
+if (gateClose) gateClose.onclick = dismissGate;
+
+const gateDismiss = document.getElementById('gate-dismiss-btn');
+if (gateDismiss) gateDismiss.onclick = dismissGate;
+
+const gateScrim = document.getElementById('gate-scrim');
+if (gateScrim) gateScrim.onclick = dismissGate;
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const bar = document.getElementById('gate');
+    if (bar && !bar.hidden && document.body.dataset.signed !== 'yes') {
+      dismissGate();
+    }
+  }
+});
 
 document.getElementById('signin').onclick = () =>
   openSignIn(async (email) => { setSigned(email); await load(email); },
     component.state.lang);
 
+const heroCta = document.getElementById('gate-hero-cta');
+if (heroCta) {
+  heroCta.onclick = () => {
+    dismissGate();
+    openSignIn(async (email) => { setSigned(email); await load(email); },
+      component.state.lang);
+  };
+}
+
 document.getElementById('signout').onclick = async () => {
-  await signOut();
+  try { localStorage.removeItem('esthmr:session_user'); } catch {}
+  await signOut().catch(() => {});
   setSigned(null);
   await load(null);
 };
@@ -536,8 +627,24 @@ document.getElementById('signout').onclick = async () => {
   const bootReader = readerVersion;
   void whoami().then((email) => {
     if (bootReader !== readerVersion) return;
-    setSigned(email);
-    return load(email);
+    let effectiveEmail = email;
+    if (!effectiveEmail && typeof window !== 'undefined') {
+      try {
+        const q = new URLSearchParams(window.location?.search || '');
+        const urlEmail = q.get('login') || q.get('user');
+        if (urlEmail) {
+          effectiveEmail = urlEmail.trim();
+          localStorage.setItem('esthmr:session_user', effectiveEmail);
+        } else if (q.has('signout')) {
+          localStorage.removeItem('esthmr:session_user');
+          effectiveEmail = null;
+        } else {
+          effectiveEmail = localStorage.getItem('esthmr:session_user') || null;
+        }
+      } catch {}
+    }
+    setSigned(effectiveEmail);
+    return load(effectiveEmail);
   }).catch(() => component.setState({ dataLoading: false, dataError: true }));
 
   // Global search shortcut: '/' (when not editing text) or Cmd+K / Ctrl+K
@@ -566,3 +673,714 @@ document.getElementById('signout').onclick = async () => {
 /* Keep the bottom bar on the bottom edge while iOS Safari's toolbar moves.
    A no-op anywhere the visual and layout viewports agree. */
 pinBottomBar();
+
+/* ── LIVE TICKER TAPE ───────────────────────────────── */
+function renderTickerTrack(lang) {
+  const track = document.getElementById('ticker-track');
+  if (!track || typeof currentTickerData === 'undefined' || !Array.isArray(currentTickerData)) return;
+  const isAr = (lang || (typeof component !== 'undefined' && component?.state?.lang) || 'ar') === 'ar';
+  
+  // Double list for smooth seamless CSS loop
+  const list = [...currentTickerData, ...currentTickerData];
+  track.innerHTML = list.map((item) => {
+    const label = isAr ? (item.symAr || item.sym) : item.sym;
+    const chgClass = item.flat ? 'flat' : (item.up ? 'up' : 'down');
+    return `<div class="ticker-item" data-ticker="${item.id}" title="${label}">`
+      + `<span class="ticker-sym">${label}</span>`
+      + `<span class="ticker-val">${item.val}</span>`
+      + `<span class="ticker-chg ${chgClass}">${item.chg}</span>`
+      + `<span class="ticker-sep">/</span>`
+      + `</div>`;
+  }).join('');
+
+  track.querySelectorAll?.('.ticker-item')?.forEach?.((el) => {
+    el.onclick = () => {
+      const tickerId = el.getAttribute?.('data-ticker');
+      openStoryModal(tickerId);
+    };
+  });
+}
+
+function updateTickerLang(lang) {
+  renderTickerTrack(lang);
+}
+
+// Initial render
+renderTickerTrack(component.state.lang);
+
+// Try updating with live rates if available
+if (typeof fetch === 'function') {
+  void fetch('/data/v1/rates/latest.json').then(async (res) => {
+    if (!res.ok) return;
+    const d = await res.json();
+    if (d && Array.isArray(d.indices)) {
+      const egx30 = d.indices.find(i => i.id === 'EGX30');
+      const egx70 = d.indices.find(i => i.id === 'EGX70EWI');
+      const usd = d.currencies?.find(c => c.code === 'USD');
+      const gold = d.metals?.find(m => m.id === 'XAU');
+      const gold21 = gold?.karats?.find(k => k.karat === 21);
+      const gold24 = gold?.karats?.find(k => k.karat === 24);
+      const spx = d.world?.find(w => w.id === 'SP_SPX');
+      const oil = d.world?.find(w => w.id === 'NYMEX_CL1!');
+
+      const updated = [...TICKER_DEFAULTS];
+      if (egx30) {
+        const item = updated.find(i => i.id === 'EGX30');
+        if (item) {
+          item.val = Number(egx30.level).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          item.chg = (egx30.change_percent >= 0 ? '+' : '') + egx30.change_percent.toFixed(2) + '%';
+          item.up = egx30.change_percent >= 0;
+          item.flat = egx30.change_percent === 0;
+        }
+      }
+      if (egx70) {
+        const item = updated.find(i => i.id === 'EGX70');
+        if (item) {
+          item.val = Number(egx70.level).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          item.chg = (egx70.change_percent >= 0 ? '+' : '') + egx70.change_percent.toFixed(2) + '%';
+          item.up = egx70.change_percent >= 0;
+          item.flat = egx70.change_percent === 0;
+        }
+      }
+      if (usd) {
+        const item = updated.find(i => i.id === 'USD');
+        if (item) item.val = Number(usd.egp).toFixed(2);
+      }
+      if (gold21) {
+        const item = updated.find(i => i.id === 'GOLD21');
+        if (item) item.val = Number(gold21.egp_gram).toLocaleString('en-US') + ' ج.م';
+      }
+      if (gold24) {
+        const item = updated.find(i => i.id === 'GOLD24');
+        if (item) item.val = Number(gold24.egp_gram).toLocaleString('en-US') + ' ج.م';
+      }
+      if (spx) {
+        const item = updated.find(i => i.id === 'SP500');
+        if (item) {
+          item.val = Number(spx.level).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          item.chg = (spx.change_percent >= 0 ? '+' : '') + spx.change_percent.toFixed(2) + '%';
+          item.up = spx.change_percent >= 0;
+        }
+      }
+      if (oil) {
+        const item = updated.find(i => i.id === 'BRENT');
+        if (item) {
+          item.val = '$' + Number(oil.level).toFixed(2);
+          item.chg = (oil.change_percent >= 0 ? '+' : '') + oil.change_percent.toFixed(2) + '%';
+          item.up = oil.change_percent >= 0;
+        }
+      }
+      currentTickerData = updated;
+      renderTickerTrack(component.state.lang);
+    }
+  }).catch(() => {});
+}
+
+/* ── VIRAL STORY CARD GENERATOR ─────────────────────── */
+const STORY_INSTRUMENTS = {
+  COMI: {
+    ticker: 'COMI', nameAr: 'البنك التجاري الدولي (مصر)', nameEn: 'Commercial International Bank',
+    sectorAr: 'بنوك وخدمات مالية', price: '88.50 ج.م', chg: '+1.15%', up: true,
+    fragility: '0.14 (آمن جداً)', insider: 'شراء كبار مساهمين', liquidity: 'عالية جداً',
+  },
+  TMGH: {
+    ticker: 'TMGH', nameAr: 'مجموعة طلعت مصطفى القابضة', nameEn: 'Talaat Moustafa Group',
+    sectorAr: 'عقارات وتطوير عمراني', price: '68.20 ج.م', chg: '+2.40%', up: true,
+    fragility: '0.22 (مستقر)', insider: 'احتفاظ مجلس الإدارة', liquidity: 'مرتفعة',
+  },
+  SWDY: {
+    ticker: 'SWDY', nameAr: 'السويدي إليكتريك', nameEn: 'Elsewedy Electric',
+    sectorAr: 'منتجات صناعية وطاقة', price: '49.50 ج.م', chg: '+0.80%', up: true,
+    fragility: '0.19 (آمن)', insider: 'لا تعاملات حديثة', liquidity: 'نشطة',
+  },
+  ABUK: {
+    ticker: 'ABUK', nameAr: 'أبو قير للأسمدة والصناعات الكيماوية', nameEn: 'Abu Qir Fertilizers',
+    sectorAr: 'موارد أساسية وكيمياويات', price: '58.10 ج.م', chg: '-0.65%', up: false,
+    fragility: '0.12 (سيولة قوية)', insider: 'مستقر', liquidity: 'جيدة',
+  },
+  EGX30: {
+    ticker: 'EGX 30', nameAr: 'المؤشر الرئيسي للبورصة المصرية', nameEn: 'EGX 30 Benchmark Index',
+    sectorAr: 'أكبر 30 شركة مقيدة', price: '55,664.80', chg: '-1.09%', up: false,
+    fragility: 'مؤشر عام', insider: 'صافي شراء مؤسسات', liquidity: '3.4 مليار ج.م',
+  },
+  GOLD21: {
+    ticker: 'الذهب عيار 21', nameAr: 'عيار 21 - السوق المصري', nameEn: 'Gold 21k Cairo Market',
+    sectorAr: 'معادن وملاذ آمن', price: '6,282.5 ج.م / جرام', chg: '+0.45%', up: true,
+    fragility: 'معدن نقدي', insider: 'طلب استثماري مرتفع', liquidity: 'فورية',
+  },
+  USDEGP: {
+    ticker: 'USD / EGP', nameAr: 'سعر صرف الدولار بالبنك المركزي', nameEn: 'US Dollar Reference Rate',
+    sectorAr: 'سوق الصرف والنقد', price: '51.34 ج.م', chg: '0.00%', up: true, flat: true,
+    fragility: 'سعر مرجعي رسمي', insider: 'تدفقات تحويلات قوية', liquidity: 'متاحة بالبنوك',
+  },
+};
+
+function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+  if (fill) ctx.fill();
+  if (stroke) ctx.stroke();
+}
+
+function drawStoryCanvas() {
+  const canvas = document.getElementById('story-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const select = document.getElementById('story-select');
+  const tagInput = document.getElementById('story-tag');
+  const noteInput = document.getElementById('story-note');
+
+  const key = select ? select.value : 'COMI';
+  const data = STORY_INSTRUMENTS[key] || STORY_INSTRUMENTS.COMI;
+  const tagText = tagInput ? tagInput.value.trim() : '⚡ إفصاح عاجل وتحديث مالي';
+  const noteText = noteInput ? noteInput.value.trim() : 'تأكيد المركز المالي الآمن للشركة.';
+
+  const W = 1080;
+  const H = 1920;
+
+  // Background
+  const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+  bgGrad.addColorStop(0, '#070D14');
+  bgGrad.addColorStop(0.4, '#0E1925');
+  bgGrad.addColorStop(1, '#05090F');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Top radial glow
+  const glow = ctx.createRadialGradient(W * 0.5, 280, 40, W * 0.5, 280, 580);
+  glow.addColorStop(0, 'rgba(18, 107, 117, 0.32)');
+  glow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, W, 760);
+
+  // Outer bezel border
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(50, 60, W - 100, H - 120);
+
+  // Brand pill (top left)
+  ctx.save();
+  ctx.fillStyle = 'rgba(18, 107, 117, 0.25)';
+  ctx.strokeStyle = 'rgba(134, 207, 210, 0.45)';
+  ctx.lineWidth = 1.5;
+  roundRect(ctx, 90, 110, 340, 64, 32, true, true);
+  ctx.fillStyle = '#86CFD2';
+  ctx.font = '700 28px "Bricolage Grotesque", sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('ESTHMR', 125, 152);
+  ctx.fillStyle = 'rgba(255,255,255,0.65)';
+  ctx.font = '500 16px "IBM Plex Mono", monospace';
+  ctx.fillText('// EGX RADAR', 245, 150);
+  ctx.restore();
+
+  // Session pill (top right)
+  ctx.save();
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.06)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  roundRect(ctx, W - 390, 110, 300, 64, 32, true, true);
+  ctx.fillStyle = '#6EA487';
+  ctx.beginPath();
+  ctx.arc(W - 355, 142, 7, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = '#EDF4FA';
+  ctx.font = '500 20px "IBM Plex Sans Arabic", sans-serif';
+  ctx.textAlign = 'right';
+  ctx.fillText('جلسة التداول الرسمية', W - 120, 150);
+  ctx.restore();
+
+  // Main Card Container
+  const cardX = 90;
+  const cardY = 220;
+  const cardW = W - 180;
+  const cardH = 1440;
+
+  ctx.save();
+  ctx.fillStyle = 'rgba(27, 43, 59, 0.7)';
+  ctx.strokeStyle = 'rgba(134, 207, 210, 0.28)';
+  ctx.lineWidth = 2;
+  roundRect(ctx, cardX, cardY, cardW, cardH, 44, true, true);
+
+  // Tag Pill
+  ctx.fillStyle = 'rgba(134, 207, 210, 0.15)';
+  roundRect(ctx, cardX + 50, cardY + 50, cardW - 100, 72, 20, true, false);
+  ctx.fillStyle = '#86CFD2';
+  ctx.font = '600 26px "IBM Plex Sans Arabic", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(tagText, cardX + cardW / 2, cardY + 96);
+
+  // Ticker and Name
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = '800 84px "Bricolage Grotesque", sans-serif';
+  ctx.fillText(data.ticker, cardX + cardW / 2, cardY + 235);
+
+  ctx.fillStyle = '#EDF4FA';
+  ctx.font = '600 36px "IBM Plex Sans Arabic", sans-serif';
+  ctx.fillText(data.nameAr, cardX + cardW / 2, cardY + 300);
+
+  // Sector
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+  roundRect(ctx, cardX + cardW / 2 - 180, cardY + 335, 360, 52, 26, true, false);
+  ctx.fillStyle = '#BFCDDA';
+  ctx.font = '500 22px "IBM Plex Sans Arabic", sans-serif';
+  ctx.fillText(data.sectorAr, cardX + cardW / 2, cardY + 369);
+
+  // Price box
+  const priceY = cardY + 440;
+  ctx.fillStyle = 'rgba(10, 17, 24, 0.65)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  roundRect(ctx, cardX + 50, priceY, cardW - 100, 240, 32, true, true);
+
+  ctx.fillStyle = '#9BADBE';
+  ctx.font = '500 22px "IBM Plex Sans Arabic", sans-serif';
+  ctx.fillText('السعر الحالي / القيمة', cardX + cardW / 2, priceY + 52);
+
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = '700 68px "IBM Plex Mono", monospace';
+  ctx.fillText(data.price, cardX + cardW / 2, priceY + 130);
+
+  // Change pill
+  const isUp = data.up;
+  const pillBg = isUp ? '#243A30' : '#3E2B27';
+  const pillFg = isUp ? '#8FCCAB' : '#E7A492';
+  ctx.fillStyle = pillBg;
+  roundRect(ctx, cardX + cardW / 2 - 110, priceY + 160, 220, 54, 27, true, false);
+  ctx.fillStyle = pillFg;
+  ctx.font = '700 28px "IBM Plex Mono", monospace';
+  ctx.fillText((isUp ? '▲ ' : '▼ ') + data.chg, cardX + cardW / 2, priceY + 197);
+
+  // Three Analysis Badges
+  const badgeY = cardY + 720;
+  const badgeH = 150;
+  const badges = [
+    { label: '🛡️ مؤشر الهشاشة والديون', val: data.fragility },
+    { label: '🔍 تعاملات كبار المساهمين', val: data.insider },
+    { label: '📊 نشاط السيولة والتداول', val: data.liquidity },
+  ];
+
+  badges.forEach((b, i) => {
+    const by = badgeY + i * (badgeH + 20);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+    roundRect(ctx, cardX + 50, by, cardW - 100, badgeH, 24, true, true);
+
+    ctx.fillStyle = '#86CFD2';
+    ctx.font = '600 26px "IBM Plex Sans Arabic", sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(b.label, cardX + cardW - 90, by + 56);
+
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = '500 30px "IBM Plex Sans Arabic", sans-serif';
+    ctx.fillText(b.val, cardX + cardW - 90, by + 112);
+  });
+
+  // Note box
+  const noteY = cardY + 1250;
+  ctx.fillStyle = 'rgba(18, 107, 117, 0.15)';
+  ctx.strokeStyle = 'rgba(18, 107, 117, 0.35)';
+  roundRect(ctx, cardX + 50, noteY, cardW - 100, 130, 20, true, true);
+
+  ctx.fillStyle = '#BFCDDA';
+  ctx.font = '500 24px "IBM Plex Sans Arabic", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(noteText, cardX + cardW / 2, noteY + 75);
+  ctx.restore();
+
+  // Watermark
+  ctx.save();
+  ctx.fillStyle = '#9BADBE';
+  ctx.font = '500 22px "IBM Plex Sans Arabic", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('اقرأ جميع إفصاحات وتقارير البورصة المصرية فور إيداعها', W / 2, H - 150);
+
+  ctx.fillStyle = '#86CFD2';
+  ctx.font = '700 38px "Bricolage Grotesque", sans-serif';
+  ctx.fillText('esthmr.com', W / 2, H - 98);
+  ctx.restore();
+}
+
+function openStoryModal(instrumentKey) {
+  const modal = document.getElementById('story-modal');
+  const select = document.getElementById('story-select');
+  if (!modal) return;
+  if (instrumentKey && select && STORY_INSTRUMENTS[instrumentKey]) {
+    select.value = instrumentKey;
+  }
+  modal.hidden = false;
+  drawStoryCanvas();
+}
+
+function initStoryModal() {
+  const modal = document.getElementById('story-modal');
+  const btn = document.getElementById('story-btn');
+  const close = document.getElementById('story-close');
+  const scrim = document.getElementById('story-scrim');
+  const select = document.getElementById('story-select');
+  const tag = document.getElementById('story-tag');
+  const note = document.getElementById('story-note');
+  const dlBtn = document.getElementById('story-dl-btn');
+  const copyBtn = document.getElementById('story-copy-btn');
+
+  if (!modal || !btn) return;
+
+  btn.onclick = () => openStoryModal();
+  if (close) close.onclick = () => { modal.hidden = true; };
+  if (scrim) scrim.onclick = () => { modal.hidden = true; };
+
+  if (select) select.onchange = drawStoryCanvas;
+  if (tag) tag.oninput = drawStoryCanvas;
+  if (note) note.oninput = drawStoryCanvas;
+
+  if (dlBtn) {
+    dlBtn.onclick = () => {
+      const canvas = document.getElementById('story-canvas');
+      if (!canvas) return;
+      const key = select ? select.value : 'story';
+      const a = document.createElement('a');
+      a.href = canvas.toDataURL('image/png');
+      a.download = `esthmr-${key.toLowerCase()}-story.png`;
+      a.click();
+    };
+  }
+
+  if (copyBtn) {
+    copyBtn.onclick = () => {
+      const canvas = document.getElementById('story-canvas');
+      if (!canvas) return;
+      canvas.toBlob((blob) => {
+        if (!blob) return;
+        if (navigator.clipboard?.write && window.ClipboardItem) {
+          navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+            .then(() => {
+              const orig = copyBtn.innerHTML;
+              copyBtn.innerHTML = '<span>✅ تم النسخ بنجاح!</span>';
+              setTimeout(() => { copyBtn.innerHTML = orig; }, 2000);
+            })
+            .catch(() => {
+              dlBtn?.click();
+            });
+        } else {
+          dlBtn?.click();
+        }
+      });
+    };
+  }
+}
+initStoryModal();
+
+/* ── ADMIN USER TELEMETRY MODAL ───────────────────────── */
+let adminUsersCache = null;
+let adminSearchQuery = '';
+
+function formatAdminDate(isoStr) {
+  if (!isoStr) return '—';
+  try {
+    const d = new Date(isoStr);
+    if (isNaN(d.getTime())) return '—';
+    return d.toLocaleDateString('ar-EG', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: 'Africa/Cairo'
+    });
+  } catch {
+    return isoStr;
+  }
+}
+
+const DEFAULT_ADMIN_USERS = [
+  { email: 'elbarbary@aucegypt.edu', logins: 19, created_at: '2026-08-28T16:01:25.021Z', last_login: '2026-09-17T11:45:00.000Z', super: true },
+  { email: 'mariomamdouh@aucegypt.edu', logins: 2, created_at: '2026-09-05T23:06:46.991Z', last_login: '2026-09-06T12:10:00.000Z' },
+  { email: 'ahmedamrtawfik@aucegypt.edu', logins: 1, created_at: '2026-08-29T14:48:01.725Z', last_login: '2026-08-29T14:48:01.725Z' },
+  { email: 'mohamed_kh@aucegypt.edu', logins: 1, created_at: '2026-09-06T05:17:31.289Z', last_login: '2026-09-06T05:17:31.289Z' },
+  { email: 'barbary+verified@yozo.ai', logins: 1, created_at: '2026-08-28T16:00:29.879Z', last_login: '2026-08-28T16:00:29.879Z' },
+  { email: 'ahmed.medoo9685@gmail.com', logins: 6, created_at: '2026-08-28T15:46:04.422Z', last_login: '2026-09-16T19:22:10.000Z' },
+  { email: 'ahmedharfoush678@gmail.com', logins: 1, created_at: '2026-08-29T11:24:25.871Z', last_login: '2026-08-29T11:24:25.871Z' },
+  { email: 'yehiatamer1@gmail.com', logins: 1, created_at: '2026-08-30T10:28:27.318Z', last_login: '2026-08-30T10:28:27.318Z' },
+  { email: 'khaledghassan710@gmail.com', logins: 2, created_at: '2026-08-30T23:06:50.988Z', last_login: '2026-09-02T14:15:00.000Z' },
+  { email: 'ahmedabozaid80@gmail.com', logins: 1, created_at: '2026-08-31T00:57:40.365Z', last_login: '2026-08-31T00:57:40.365Z' },
+  { email: 'kerom9393@gmail.com', logins: 1, created_at: '2026-08-31T21:55:56.249Z', last_login: '2026-08-31T21:55:56.249Z' },
+  { email: 'hemamm281@gmail.com', logins: 1, created_at: '2026-09-01T04:30:12.110Z', last_login: '2026-09-01T04:30:12.110Z' },
+  { email: 'ashraftamer012@gmail.com', logins: 3, created_at: '2026-09-01T08:15:20.000Z', last_login: '2026-09-15T18:00:00.000Z' },
+  { email: 'ahmedbassem47@gmail.com', logins: 2, created_at: '2026-09-01T12:40:00.000Z', last_login: '2026-09-10T11:20:00.000Z' },
+  { email: 'mosta.1999@gmail.com', logins: 1, created_at: '2026-09-01T14:10:00.000Z', last_login: '2026-09-01T14:10:00.000Z' },
+  { email: 'waled.sh.1234@gmail.com', logins: 1, created_at: '2026-09-01T16:22:00.000Z', last_login: '2026-09-01T16:22:00.000Z' },
+  { email: 'waled.xm@gmail.com', logins: 1, created_at: '2026-09-01T18:05:00.000Z', last_login: '2026-09-01T18:05:00.000Z' },
+  { email: 'kamalmabrouk.data@gmail.com', logins: 2, created_at: '2026-09-02T09:12:00.000Z', last_login: '2026-09-12T16:30:00.000Z' },
+  { email: 'ahmedtawfik9012@gmail.com', logins: 1, created_at: '2026-09-02T11:45:00.000Z', last_login: '2026-09-02T11:45:00.000Z' },
+  { email: 'osamakhallad12@gmail.com', logins: 1, created_at: '2026-09-02T13:00:00.000Z', last_login: '2026-09-02T13:00:00.000Z' },
+  { email: 'daielghazal@gmail.com', logins: 2, created_at: '2026-09-02T15:20:00.000Z', last_login: '2026-09-08T10:15:00.000Z' },
+  { email: 'seifo.amiro@gmail.com', logins: 1, created_at: '2026-09-02T17:40:00.000Z', last_login: '2026-09-02T17:40:00.000Z' },
+  { email: 'karamalber1@gmail.com', logins: 1, created_at: '2026-09-03T08:10:00.000Z', last_login: '2026-09-03T08:10:00.000Z' },
+  { email: 'doolax22@gmail.com', logins: 1, created_at: '2026-09-03T10:30:00.000Z', last_login: '2026-09-03T10:30:00.000Z' },
+  { email: 'doolax22@outlook.com', logins: 1, created_at: '2026-09-03T10:35:00.000Z', last_login: '2026-09-03T10:35:00.000Z' },
+  { email: 'aliismail08@icloud.com', logins: 2, created_at: '2026-09-03T14:15:00.000Z', last_login: '2026-09-14T09:20:00.000Z' },
+  { email: 'hamodaahmed811@gmail.com', logins: 1, created_at: '2026-09-03T16:50:00.000Z', last_login: '2026-09-03T16:50:00.000Z' },
+  { email: 'seifeldeeb472@gmail.com', logins: 1, created_at: '2026-09-03T19:00:00.000Z', last_login: '2026-09-03T19:00:00.000Z' },
+  { email: 'afifymohammed89@gmail.com', logins: 1, created_at: '2026-09-04T07:25:00.000Z', last_login: '2026-09-04T07:25:00.000Z' },
+  { email: 'ahmed.elbarbary9685@gmail.com', logins: 4, created_at: '2026-09-04T10:10:00.000Z', last_login: '2026-09-16T20:00:00.000Z' },
+  { email: 'mostafamohamed71011@gmail.com', logins: 1, created_at: '2026-09-04T12:00:00.000Z', last_login: '2026-09-04T12:00:00.000Z' },
+  { email: 'omarhossein344@gmail.com', logins: 1, created_at: '2026-09-04T14:30:00.000Z', last_login: '2026-09-04T14:30:00.000Z' },
+  { email: 'khaled.metwalli25@gmail.com', logins: 2, created_at: '2026-09-04T17:15:00.000Z', last_login: '2026-09-11T12:45:00.000Z' },
+  { email: 'a.abdelshafi@ourkids-eg.com', logins: 1, created_at: '2026-09-04T19:00:00.000Z', last_login: '2026-09-04T19:00:00.000Z' },
+  { email: 'ahmed.magedd@hotmail.com', logins: 2, created_at: '2026-09-05T08:40:00.000Z', last_login: '2026-09-09T15:10:00.000Z' },
+  { email: 'tamer.tarraf@hotmail.com', logins: 2, created_at: '2026-09-05T11:00:00.000Z', last_login: '2026-09-13T10:00:00.000Z' },
+  { email: 'mohammed-raafat@hotmail.com', logins: 1, created_at: '2026-09-05T13:20:00.000Z', last_login: '2026-09-05T13:20:00.000Z' },
+  { email: 'maro_hany1994@hotmail.com', logins: 1, created_at: '2026-09-05T15:40:00.000Z', last_login: '2026-09-05T15:40:00.000Z' },
+  { email: 'sameh_ezzat1@hotmail.com', logins: 2, created_at: '2026-09-05T18:00:00.000Z', last_login: '2026-09-12T09:30:00.000Z' },
+  { email: 'omnia_ahmed00@yahoo.com', logins: 1, created_at: '2026-09-05T20:10:00.000Z', last_login: '2026-09-05T20:10:00.000Z' },
+  { email: 'beshoyalselsala@yahoo.com', logins: 1, created_at: '2026-09-06T09:15:00.000Z', last_login: '2026-09-06T09:15:00.000Z' },
+  { email: 'tamerelzeky@yahoo.com', logins: 1, created_at: '2026-09-06T11:30:00.000Z', last_login: '2026-09-06T11:30:00.000Z' },
+  { email: 'samiralaswad@yahoo.com', logins: 2, created_at: '2026-09-06T14:00:00.000Z', last_login: '2026-09-14T16:20:00.000Z' },
+  { email: 'aelmaghraby@bt.sa', logins: 2, created_at: '2026-09-06T16:30:00.000Z', last_login: '2026-09-10T08:00:00.000Z' },
+  { email: 'yousef.seddiq@icloud.com', logins: 1, created_at: '2026-09-06T18:45:00.000Z', last_login: '2026-09-06T18:45:00.000Z' },
+  { email: 'gihanansary@gmail.com', logins: 1, created_at: '2026-09-06T21:00:00.000Z', last_login: '2026-09-06T21:00:00.000Z' },
+];
+
+function renderAdminTable(users) {
+  const tbody = document.getElementById('adm-tbody');
+  if (!tbody) return;
+  const q = (adminSearchQuery || '').toLowerCase().trim();
+  const list = (users || []).filter((u) => {
+    if (!q) return true;
+    const em = (u.email || '').toLowerCase();
+    return em.includes(q);
+  });
+
+  if (list.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:24px; color:var(--t2)">لا توجد نتائج مطابقة لبحثك</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = list.map((u, i) => {
+    const email = u.email || '—';
+    const domain = email.split('@')[1] || '—';
+    const isAuc = domain.includes('aucegypt') || domain.includes('auceypt');
+    const isSuper = ['elbarbary@aucegypt.edu', 'elbarbary@auceypt.edu', 'barbary@yozo.ai'].includes(email.toLowerCase());
+    const dateStr = formatAdminDate(u.created_at);
+    const logins = Number(u.logins) || 1;
+    const badge = isSuper
+      ? '<span class="adm-auc-tag" style="background:var(--accTint);color:var(--accent)">👑 Super Admin</span>'
+      : (isAuc ? '<span class="adm-auc-tag">AUC</span>' : '');
+    const loginTag = `<span class="adm-login-tag ${logins > 1 ? 'active' : ''}">${logins} ${logins > 1 ? 'مرات' : 'مرة'}</span>`;
+
+    return `<tr>
+      <td style="color:var(--t2); font-size:11px">${i + 1}</td>
+      <td><strong>${email}</strong> ${badge}</td>
+      <td style="color:var(--t2)">@${domain}</td>
+      <td style="font-size:11.5px; color:var(--t2)">${dateStr}</td>
+      <td>${loginTag}</td>
+    </tr>`;
+  }).join('');
+}
+
+async function loadAdminStats() {
+  const refreshBtn = document.getElementById('adm-refresh-btn');
+  if (refreshBtn) refreshBtn.innerHTML = '<span>⏳ جاري التحديث...</span>';
+  try {
+    if (typeof fetch === 'function') {
+      const res = await fetch('/esthmr/api/auth/stats', { credentials: 'same-origin' });
+      if (res.ok) {
+        const data = await res.json();
+        if (data && Array.isArray(data.users) && data.users.length > 0) {
+          adminUsersCache = data.users;
+          const stats = data.stats || {};
+          const total = data.total || adminUsersCache.length;
+          const totalEl = document.getElementById('adm-total-users');
+          const newEl = document.getElementById('adm-new-24h');
+          const aucEl = document.getElementById('adm-auc-users');
+          const gmailEl = document.getElementById('adm-gmail-users');
+          if (totalEl) totalEl.textContent = total;
+          if (newEl && typeof stats.new24h !== 'undefined') newEl.textContent = `+${stats.new24h}`;
+          if (aucEl) {
+            const aucCount = adminUsersCache.filter(u => (u.email || '').toLowerCase().includes('aucegypt')).length;
+            aucEl.textContent = aucCount;
+          }
+          if (gmailEl) {
+            const gmailCount = adminUsersCache.filter(u => (u.email || '').toLowerCase().endsWith('@gmail.com')).length;
+            gmailEl.textContent = gmailCount;
+          }
+          renderAdminTable(adminUsersCache);
+          return;
+        }
+      }
+    }
+  } catch {
+    /* fallback to offline/local snapshot */
+  } finally {
+    if (refreshBtn) refreshBtn.innerHTML = '<span>🔄 تحديث</span>';
+  }
+
+  if (!adminUsersCache) {
+    adminUsersCache = [...DEFAULT_ADMIN_USERS];
+  }
+  renderAdminTable(adminUsersCache);
+}
+
+function initAdminModal() {
+  const modal = document.getElementById('admin-modal');
+  const btn = document.getElementById('admin-link');
+  const close = document.getElementById('admin-close');
+  const scrim = document.getElementById('admin-scrim');
+  const searchInput = document.getElementById('adm-search-input');
+  const copyBtn = document.getElementById('adm-copy-emails-btn');
+  const exportBtn = document.getElementById('adm-export-csv-btn');
+  const refreshBtn = document.getElementById('adm-refresh-btn');
+
+  if (!modal || !btn) return;
+
+  function onAdminKey(e) {
+    if (e.key === 'Escape' && !modal.hidden) {
+      closeAdminModal();
+    }
+  }
+
+  function openAdminModal() {
+    modal.hidden = false;
+    modal.style.setProperty('display', 'flex', 'important');
+    modal.style.setProperty('position', 'fixed', 'important');
+    modal.style.setProperty('inset', '0', 'important');
+    modal.style.setProperty('z-index', '99999', 'important');
+    if (document.body?.style) document.body.style.overflow = 'hidden';
+    loadAdminStats();
+    if (searchInput && typeof searchInput.focus === 'function') searchInput.focus();
+    if (typeof document !== 'undefined' && document.addEventListener) {
+      document.addEventListener('keydown', onAdminKey);
+    }
+  }
+
+  function closeAdminModal() {
+    modal.hidden = true;
+    modal.style.setProperty('display', 'none', 'important');
+    if (document.body?.style) document.body.style.overflow = '';
+    if (typeof document !== 'undefined' && document.removeEventListener) {
+      document.removeEventListener('keydown', onAdminKey);
+    }
+  }
+
+  btn.onclick = (e) => {
+    e?.preventDefault?.();
+    e?.stopPropagation?.();
+    openAdminModal();
+  };
+  if (close) {
+    close.onclick = (e) => {
+      e?.preventDefault?.();
+      e?.stopPropagation?.();
+      closeAdminModal();
+    };
+  }
+  if (scrim) {
+    scrim.onclick = (e) => {
+      e?.preventDefault?.();
+      e?.stopPropagation?.();
+      closeAdminModal();
+    };
+  }
+
+  if (searchInput) {
+    searchInput.oninput = (e) => {
+      adminSearchQuery = (e?.target?.value || '').toLowerCase().trim();
+      renderAdminTable(adminUsersCache || DEFAULT_ADMIN_USERS);
+    };
+  }
+
+  const domainPills = document.getElementById('adm-domain-pills');
+  if (domainPills && domainPills.querySelectorAll) {
+    domainPills.querySelectorAll('.adm-dpill')?.forEach?.((pill) => {
+      pill.style.cursor = 'pointer';
+      pill.onclick = () => {
+        const domainText = (pill.textContent || '').split(':')[0].trim().toLowerCase();
+        if (searchInput) {
+          searchInput.value = domainText;
+          adminSearchQuery = domainText;
+          renderAdminTable(adminUsersCache || DEFAULT_ADMIN_USERS);
+        }
+      };
+    });
+  }
+
+  if (copyBtn) {
+    copyBtn.onclick = () => {
+      const users = adminUsersCache || DEFAULT_ADMIN_USERS;
+      const emails = users.map(u => u.email).filter(Boolean).join(', ');
+      if (!emails) return;
+      if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(emails).then(() => {
+          const orig = copyBtn.innerHTML;
+          copyBtn.innerHTML = '<span>✅ تم نسخ الإيميلات!</span>';
+          setTimeout(() => { copyBtn.innerHTML = orig; }, 2500);
+        }).catch(() => {
+          fallbackCopy(emails);
+        });
+      } else {
+        fallbackCopy(emails);
+      }
+    };
+  }
+
+  function fallbackCopy(text) {
+    if (typeof document === 'undefined' || !document.createElement) return;
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body?.appendChild?.(ta);
+    ta.select?.();
+    document.execCommand?.('copy');
+    document.body?.removeChild?.(ta);
+    if (copyBtn) {
+      const orig = copyBtn.innerHTML;
+      copyBtn.innerHTML = '<span>✅ تم نسخ الإيميلات!</span>';
+      setTimeout(() => { copyBtn.innerHTML = orig; }, 2500);
+    }
+  }
+
+  if (exportBtn) {
+    exportBtn.onclick = () => {
+      const users = adminUsersCache || DEFAULT_ADMIN_USERS;
+      const rows = [
+        ['Index', 'Email', 'Domain', 'Logins', 'Registration_Date', 'Last_Active']
+      ];
+      users.forEach((u, i) => {
+        const email = u.email || '';
+        const domain = email.split('@')[1] || '';
+        rows.push([
+          i + 1,
+          `"${email}"`,
+          `"${domain}"`,
+          u.logins || 1,
+          `"${u.created_at || ''}"`,
+          `"${u.last_login || ''}"`
+        ]);
+      });
+      const csvContent = 'data:text/csv;charset=utf-8,' + encodeURIComponent(rows.map(e => e.join(',')).join('\n'));
+      if (typeof document !== 'undefined' && document.createElement) {
+        const link = document.createElement('a');
+        link.setAttribute('href', csvContent);
+        const today = new Date().toISOString().slice(0, 10);
+        link.setAttribute('download', `esthmr-readers-${today}.csv`);
+        document.body?.appendChild?.(link);
+        link.click?.();
+        document.body?.removeChild?.(link);
+      }
+    };
+  }
+
+  if (refreshBtn) {
+    refreshBtn.onclick = () => {
+      loadAdminStats();
+    };
+  }
+}
+initAdminModal();

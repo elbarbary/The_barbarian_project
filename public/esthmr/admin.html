@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ESTHMR // Platform Admin & User Stats</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./design.css">
+<link rel="stylesheet" href="./shell.css">
+<style>
+  :root {
+    --adm-max-w: 1200px;
+  }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+  }
+  .adm-container {
+    max-width: var(--adm-max-w);
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+  /* Top Nav */
+  .adm-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 28px;
+  }
+  .adm-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .adm-logo {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .adm-tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: var(--surface);
+    border: 1px solid var(--edgeIn);
+    padding: 3px 9px;
+    border-radius: 6px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .adm-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .adm-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 38px;
+    padding: 0 14px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 999px;
+    border: 1px solid var(--edgeIn);
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .adm-btn:hover {
+    border-color: var(--rule);
+    background: var(--activeBg);
+  }
+  .adm-btn-accent {
+    background: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+  }
+  .adm-btn-accent:hover {
+    filter: brightness(1.08);
+  }
+  .adm-live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--edgeIn);
+    color: var(--t2);
+  }
+  .adm-live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    animation: admPulse 2s infinite;
+  }
+  @keyframes admPulse {
+    0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    70% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+    100% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  }
+
+  /* Telegram / Notification Idea Banner */
+  .adm-idea-box {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .adm-idea-text {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .adm-idea-text strong {
+    font-weight: 600;
+  }
+
+  /* KPI Grid */
+  .adm-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .adm-kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--edgeIn);
+    border-radius: 16px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color 0.15s ease;
+  }
+  .adm-kpi-card:hover {
+    border-color: var(--rule);
+  }
+  .adm-kpi-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    color: var(--t2);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .adm-kpi-val {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .adm-kpi-pill {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: var(--upTint);
+    color: var(--up);
+    font-weight: 600;
+  }
+
+  /* Domains Strip */
+  .adm-domains-card {
+    background: var(--surface);
+    border: 1px solid var(--edgeIn);
+    border-radius: 16px;
+    padding: 18px 20px;
+    margin-bottom: 28px;
+  }
+  .adm-domains-header {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--t2);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .adm-domain-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .adm-domain-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: var(--bg);
+    border: 1px solid var(--edgeIn);
+    color: var(--ink);
+  }
+  .adm-domain-chip.auc {
+    border-color: var(--accent);
+    background: var(--accTint);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .adm-domain-chip .cnt {
+    font-weight: 600;
+    color: var(--t2);
+  }
+
+  /* Table Controls */
+  .adm-table-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .adm-search-box {
+    position: relative;
+    flex: 1;
+    min-width: 260px;
+    max-width: 440px;
+  }
+  .adm-search-input {
+    width: 100%;
+    height: 42px;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: 1px solid var(--edgeIn);
+    background: var(--surface);
+    color: var(--ink);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease;
+  }
+  .adm-search-input:focus {
+    border-color: var(--accent);
+  }
+  .adm-filter-pills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .adm-tab-pill {
+    height: 36px;
+    padding: 0 14px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    border-radius: 999px;
+    border: 1px solid var(--edgeIn);
+    background: var(--surface);
+    color: var(--t2);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .adm-tab-pill.active {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* Table */
+  .adm-table-wrapper {
+    background: var(--surface);
+    border: 1px solid var(--edgeIn);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .adm-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    text-align: left;
+  }
+  .adm-table th {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--t2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--surface);
+  }
+  .adm-table td {
+    padding: 13px 18px;
+    border-bottom: 1px solid var(--rule2);
+    color: var(--ink);
+    vertical-align: middle;
+  }
+  .adm-table tr:last-child td {
+    border-bottom: none;
+  }
+  .adm-table tr:hover td {
+    background: var(--activeBg);
+  }
+  .adm-email-cell {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .adm-auc-badge {
+    font-size: 10px;
+    background: var(--accTint);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .adm-time-cell {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--t2);
+  }
+  .adm-login-pill {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--bg);
+    border: 1px solid var(--edgeIn);
+    font-weight: 600;
+  }
+  .adm-login-pill.active {
+    background: var(--upTint);
+    color: var(--up);
+    border-color: rgba(63,107,82,.2);
+  }
+
+  /* State overlays */
+  .adm-state-box {
+    text-align: center;
+    padding: 80px 20px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .adm-state-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+  .adm-state-title {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .adm-state-desc {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--t2);
+    margin-bottom: 24px;
+  }
+
+  /* Modal */
+  .adm-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .adm-modal {
+    background: var(--surface);
+    border: 1px solid var(--edgeIn);
+    border-radius: 16px;
+    max-width: 520px;
+    width: 100%;
+    padding: 28px;
+    position: relative;
+  }
+  .adm-modal h3 {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: 20px;
+    margin: 0 0 12px 0;
+  }
+  .adm-modal p {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--t2);
+    margin-bottom: 16px;
+  }
+  .adm-modal code {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    background: var(--bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .adm-modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--t2);
+  }
+
+  @media (max-width: 768px) {
+    .adm-container { padding: 16px 14px 60px; }
+    .adm-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .adm-table { min-width: 620px; }
+    .adm-kpi-val { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="adm-container">
+  <!-- Auth Gate Checking -->
+  <div id="adm-gate-loading" class="adm-state-box">
+    <div class="adm-state-icon">⏳</div>
+    <div class="adm-state-title">Verifying Administrator Access...</div>
+    <div class="adm-state-desc">Connecting to ESTHMR edge isolate and verifying signed credentials.</div>
+  </div>
+
+  <!-- Access Denied / 403 -->
+  <div id="adm-gate-denied" class="adm-state-box" style="display: none;">
+    <div class="adm-state-icon">🔒</div>
+    <div class="adm-state-title">403 — Access Restricted</div>
+    <div class="adm-state-desc" id="adm-denied-reason">
+      This telemetry dashboard and the user directory are strictly restricted to <code>elbarbary@aucegypt.edu</code>.
+    </div>
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <a href="/" class="adm-btn adm-btn-accent">← Return to Exchange Terminal</a>
+      <button id="adm-switch-btn" class="adm-btn">Sign in as Admin</button>
+    </div>
+  </div>
+
+  <!-- Authenticated Admin View -->
+  <div id="adm-content" style="display: none;">
+    <!-- Top Navigation -->
+    <header class="adm-nav">
+      <div class="adm-brand">
+        <span class="adm-logo">ESTHMR</span>
+        <span class="adm-tag">Admin Console</span>
+        <div class="adm-live-badge">
+          <span class="adm-live-dot"></span>
+          <span id="adm-live-label">Live</span>
+        </div>
+      </div>
+      <div class="adm-nav-actions">
+        <span id="adm-user-pill" style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--accent); font-weight:600;">👑 elbarbary@aucegypt.edu</span>
+        <button id="adm-refresh-btn" class="adm-btn" title="Refresh Live Data">🔄 Refresh</button>
+        <button id="adm-theme-btn" class="adm-btn" title="Toggle Theme">🌓</button>
+        <a href="/" class="adm-btn">← Market Terminal</a>
+        <button id="adm-signout-btn" class="adm-btn">Sign out</button>
+      </div>
+    </header>
+
+    <!-- Better Idea Banner: Instant Telegram Alert Setup -->
+    <div class="adm-idea-box">
+      <div class="adm-idea-text">
+        <strong>💡 Pro tip — Don't want to check this dashboard manually?</strong><br>
+        Receive an instant Telegram push alert to your phone the exact second a new user signs up on ESTHMR!
+      </div>
+      <button id="adm-telegram-setup-btn" class="adm-btn adm-btn-accent">🔔 Configure Instant Alerts</button>
+    </div>
+
+    <!-- KPI Metric Cards -->
+    <section class="adm-kpi-grid">
+      <div class="adm-kpi-card">
+        <div class="adm-kpi-label">
+          <span>Total Readers</span>
+          <span class="adm-kpi-pill" id="kpi-milestone">200+ Club</span>
+        </div>
+        <div class="adm-kpi-val" id="kpi-total">—</div>
+      </div>
+
+      <div class="adm-kpi-card">
+        <div class="adm-kpi-label">
+          <span>New Today (24h)</span>
+          <span class="adm-kpi-pill" id="kpi-24h-pct">Today</span>
+        </div>
+        <div class="adm-kpi-val" id="kpi-new-24h" style="color:var(--up);">—</div>
+      </div>
+
+      <div class="adm-kpi-card">
+        <div class="adm-kpi-label">
+          <span>Active Readers (7d)</span>
+        </div>
+        <div class="adm-kpi-val" id="kpi-active-7d">—</div>
+      </div>
+
+      <div class="adm-kpi-card">
+        <div class="adm-kpi-label">
+          <span>Returning Readers</span>
+          <span class="adm-kpi-pill" id="kpi-retention-rate">—%</span>
+        </div>
+        <div class="adm-kpi-val" id="kpi-returning">—</div>
+      </div>
+
+      <div class="adm-kpi-card">
+        <div class="adm-kpi-label">
+          <span>Total Logins</span>
+        </div>
+        <div class="adm-kpi-val" id="kpi-total-logins">—</div>
+      </div>
+    </section>
+
+    <!-- Top Domains Breakdown -->
+    <section class="adm-domains-card">
+      <div class="adm-domains-header">
+        <span>Audience Distribution by Email Domain</span>
+        <span id="domains-count-label">0 domains</span>
+      </div>
+      <div class="adm-domain-tags" id="domains-list">
+        <!-- populated dynamically -->
+      </div>
+    </section>
+
+    <!-- User Table Controls -->
+    <div class="adm-table-controls">
+      <div class="adm-search-box">
+        <input type="text" id="adm-search" class="adm-search-input" placeholder="Search readers by email or domain...">
+      </div>
+      <div class="adm-filter-pills">
+        <button class="adm-tab-pill active" data-filter="all">All (<span id="count-all">0</span>)</button>
+        <button class="adm-tab-pill" data-filter="today">New Today (<span id="count-today">0</span>)</button>
+        <button class="adm-tab-pill" data-filter="auc">AUC Community (<span id="count-auc">0</span>)</button>
+        <button class="adm-tab-pill" data-filter="returning">Returning (<span id="count-returning">0</span>)</button>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button id="adm-copy-emails-btn" class="adm-btn" title="Copy comma-separated emails to clipboard">📋 Copy All Emails</button>
+        <button id="adm-export-csv-btn" class="adm-btn" title="Download users CSV">📥 Export CSV</button>
+      </div>
+    </div>
+
+    <!-- Users Table -->
+    <div class="adm-table-wrapper">
+      <table class="adm-table">
+        <thead>
+          <tr>
+            <th style="width: 40px;">#</th>
+            <th>Reader Email</th>
+            <th>Registered (Cairo Time)</th>
+            <th>Last Active</th>
+            <th>Total Logins</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="adm-table-body">
+          <tr><td colspan="6" style="text-align:center; padding: 40px; color:var(--t2);">Loading user directory...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Telegram Alert Modal -->
+<div id="adm-telegram-modal" class="adm-modal-backdrop" style="display: none;">
+  <div class="adm-modal">
+    <button class="adm-modal-close" id="adm-modal-close-btn">&times;</button>
+    <h3>Instant Telegram Alerts</h3>
+    <p>Get instant push pings to your iPhone or Apple Watch the second someone signs up from your TikTok (6k) or Instagram (10k) campaigns!</p>
+    <div style="background:var(--bg); border:1px solid var(--edgeIn); border-radius:10px; padding:16px; margin-bottom:18px; font-size:13px; line-height:1.6;">
+      <strong>Setup in 60 Seconds:</strong><br>
+      1. Open Telegram and search for <code>@BotFather</code>.<br>
+      2. Type <code>/newbot</code>, choose a name (e.g. <code>EsthmrAlertsBot</code>), and copy the <strong>HTTP API Token</strong>.<br>
+      3. Message your bot and get your Chat ID from <code>@userinfobot</code>.<br>
+      4. Set these two Cloudflare Secrets:
+      <pre style="background:var(--surface); padding:8px; border-radius:6px; font-family:'IBM Plex Mono',monospace; font-size:11.5px; margin:8px 0; overflow-x:auto;">
+wrangler secret put TELEGRAM_BOT_TOKEN
+wrangler secret put TELEGRAM_CHAT_ID</pre>
+      5. The Worker is already wired up in <code>recordUser()</code> to automatically send instant messages on every signup!
+    </div>
+    <div style="text-align: right;">
+      <button id="adm-modal-done-btn" class="adm-btn adm-btn-accent">Got it!</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { whoami, signOut } from './auth.js';
+
+  const SUPER_ADMINS = ['elbarbary@aucegypt.edu', 'elbarbary@auceypt.edu', 'barbary@yozo.ai'];
+  let allUsers = [];
+  let currentFilter = 'all';
+  let searchQuery = '';
+  let autoRefreshTimer = null;
+
+  // Theme support
+  const THEME_KEY = 'esthmr:theme';
+  function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem(THEME_KEY, theme);
+  }
+  const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
+  applyTheme(savedTheme);
+
+  document.getElementById('adm-theme-btn').onclick = () => {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+  };
+
+  // Sign out
+  document.getElementById('adm-signout-btn').onclick = async () => {
+    await signOut();
+    window.location.href = '/';
+  };
+  document.getElementById('adm-switch-btn').onclick = () => {
+    window.location.href = '/';
+  };
+
+  // Telegram modal
+  const tgModal = document.getElementById('adm-telegram-modal');
+  document.getElementById('adm-telegram-setup-btn').onclick = () => { tgModal.style.display = 'flex'; };
+  document.getElementById('adm-modal-close-btn').onclick = () => { tgModal.style.display = 'none'; };
+  document.getElementById('adm-modal-done-btn').onclick = () => { tgModal.style.display = 'none'; };
+
+  // Formatting helpers
+  function formatCairoDate(isoStr) {
+    if (!isoStr) return '—';
+    try {
+      const d = new Date(isoStr);
+      if (isNaN(d.getTime())) return '—';
+      return d.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'Africa/Cairo'
+      }) + ' Cairo';
+    } catch {
+      return isoStr;
+    }
+  }
+
+  function formatRelative(isoStr) {
+    if (!isoStr) return '—';
+    const time = new Date(isoStr).getTime();
+    if (isNaN(time)) return '—';
+    const diffSec = Math.floor((Date.now() - time) / 1000);
+    if (diffSec < 60) return 'just now';
+    if (diffSec < 3600) return `${Math.floor(diffSec / 60)}m ago`;
+    if (diffSec < 86400) return `${Math.floor(diffSec / 3600)}h ago`;
+    const days = Math.floor(diffSec / 86400);
+    if (days === 1) return 'yesterday';
+    if (days < 30) return `${days}d ago`;
+    return `${Math.floor(days / 30)}mo ago`;
+  }
+
+  // Load and render stats
+  async function loadStats() {
+    const refreshBtn = document.getElementById('adm-refresh-btn');
+    refreshBtn.textContent = '⏳ Loading...';
+    try {
+      const res = await fetch('/esthmr/api/auth/stats', { credentials: 'same-origin' });
+      if (!res.ok) {
+        if (res.status === 401 || res.status === 403) {
+          showDenied('Unauthorized session. Only elbarbary@aucegypt.edu can view this telemetry.');
+          return;
+        }
+        throw new Error(`HTTP ${res.status}`);
+      }
+      const data = await res.json();
+      renderDashboard(data);
+    } catch (err) {
+      console.error('[admin] loadStats error:', err);
+    } finally {
+      refreshBtn.textContent = '🔄 Refresh';
+    }
+  }
+
+  function renderDashboard(data) {
+    allUsers = Array.isArray(data.users) ? data.users : [];
+    const stats = data.stats || {};
+
+    // KPIs
+    document.getElementById('kpi-total').textContent = data.total || allUsers.length;
+    document.getElementById('kpi-new-24h').textContent = `+${stats.new24h ?? 0}`;
+    document.getElementById('kpi-active-7d').textContent = stats.active7d ?? 0;
+    document.getElementById('kpi-returning').textContent = stats.returning ?? 0;
+    document.getElementById('kpi-retention-rate').textContent = `${stats.retentionRate ?? 0}% retention`;
+    document.getElementById('kpi-total-logins').textContent = stats.totalLogins ?? 0;
+
+    // Filter counts
+    document.getElementById('count-all').textContent = allUsers.length;
+    const now = Date.now();
+    const todayUsers = allUsers.filter(u => u.created_at && (now - new Date(u.created_at).getTime()) <= 86400000);
+    document.getElementById('count-today').textContent = todayUsers.length;
+    const aucUsers = allUsers.filter(u => (u.email || '').toLowerCase().endsWith('@aucegypt.edu') || (u.email || '').toLowerCase().endsWith('@auceypt.edu'));
+    document.getElementById('count-auc').textContent = aucUsers.length;
+    const returningUsers = allUsers.filter(u => (u.logins || 1) > 1);
+    document.getElementById('count-returning').textContent = returningUsers.length;
+
+    // Domain chips
+    const domainsList = document.getElementById('domains-list');
+    domainsList.innerHTML = '';
+    const topDomains = stats.topDomains || [];
+    document.getElementById('domains-count-label').textContent = `${topDomains.length} unique domains`;
+    topDomains.slice(0, 14).forEach(({ domain, count }) => {
+      const chip = document.createElement('div');
+      const isAuc = domain.includes('aucegypt') || domain.includes('auceypt');
+      chip.className = `adm-domain-chip ${isAuc ? 'auc' : ''}`;
+      chip.innerHTML = `<span>@${domain}</span><span class="cnt">${count}</span>`;
+      chip.style.cursor = 'pointer';
+      chip.onclick = () => {
+        document.getElementById('adm-search').value = domain;
+        searchQuery = domain.toLowerCase();
+        renderTable();
+      };
+      domainsList.appendChild(chip);
+    });
+
+    renderTable();
+  }
+
+  function renderTable() {
+    const tbody = document.getElementById('adm-table-body');
+    tbody.innerHTML = '';
+
+    const now = Date.now();
+    let filtered = allUsers.filter(u => {
+      const email = (u.email || '').toLowerCase();
+      // Search
+      if (searchQuery && !email.includes(searchQuery)) return false;
+
+      // Filter tab
+      if (currentFilter === 'today') {
+        return u.created_at && (now - new Date(u.created_at).getTime()) <= 86400000;
+      }
+      if (currentFilter === 'auc') {
+        return email.endsWith('@aucegypt.edu') || email.endsWith('@auceypt.edu');
+      }
+      if (currentFilter === 'returning') {
+        return (u.logins || 1) > 1;
+      }
+      return true;
+    });
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:36px; color:var(--t2);">No matching readers found for this filter.</td></tr>`;
+      return;
+    }
+
+    filtered.forEach((u, i) => {
+      const email = u.email || '—';
+      const isAuc = email.toLowerCase().endsWith('@aucegypt.edu') || email.toLowerCase().endsWith('@auceypt.edu');
+      const logins = Number(u.logins) || 1;
+      const createdCairo = formatCairoDate(u.created_at);
+      const createdRel = formatRelative(u.created_at);
+      const lastCairo = formatCairoDate(u.last_login);
+      const lastRel = formatRelative(u.last_login);
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td style="font-family:'IBM Plex Mono',monospace; color:var(--t2); font-size:11.5px;">${i + 1}</td>
+        <td>
+          <div class="adm-email-cell">
+            <span>${email}</span>
+            ${isAuc ? '<span class="adm-auc-badge">AUC</span>' : ''}
+          </div>
+        </td>
+        <td class="adm-time-cell" title="${createdCairo}">${createdRel} <span style="opacity:0.6; font-size:11px;">(${createdCairo.split(' ')[0]} ${createdCairo.split(' ')[1]})</span></td>
+        <td class="adm-time-cell" title="${lastCairo}">${lastRel}</td>
+        <td>
+          <span class="adm-login-pill ${logins > 1 ? 'active' : ''}">${logins} ${logins === 1 ? 'visit' : 'visits'}</span>
+        </td>
+        <td>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:${logins > 1 ? 'var(--up)' : 'var(--t2)'}; font-weight:600;">
+            ${logins > 1 ? '● Returning' : '○ Single'}
+          </span>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Filter tabs
+  document.querySelectorAll('.adm-tab-pill').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.adm-tab-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      renderTable();
+    };
+  });
+
+  // Search input
+  document.getElementById('adm-search').oninput = (e) => {
+    searchQuery = e.target.value.toLowerCase().trim();
+    renderTable();
+  };
+
+  // Copy emails
+  document.getElementById('adm-copy-emails-btn').onclick = () => {
+    if (allUsers.length === 0) return;
+    const list = allUsers.map(u => u.email).filter(Boolean).join(', ');
+    navigator.clipboard.writeText(list).then(() => {
+      const btn = document.getElementById('adm-copy-emails-btn');
+      const orig = btn.textContent;
+      btn.textContent = '✅ Copied Emails!';
+      setTimeout(() => { btn.textContent = orig; }, 2000);
+    });
+  };
+
+  // Export CSV
+  document.getElementById('adm-export-csv-btn').onclick = () => {
+    if (allUsers.length === 0) return;
+    const rows = [
+      ['Index', 'Email', 'Domain', 'Logins', 'Created_At', 'Last_Login']
+    ];
+    allUsers.forEach((u, i) => {
+      const domain = (u.email || '').split('@')[1] || '';
+      rows.push([
+        i + 1,
+        `"${u.email || ''}"`,
+        `"${domain}"`,
+        u.logins || 1,
+        `"${u.created_at || ''}"`,
+        `"${u.last_login || ''}"`
+      ]);
+    });
+    const csvContent = 'data:text/csv;charset=utf-8,' + rows.map(e => e.join(',')).join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    const today = new Date().toISOString().slice(0, 10);
+    link.setAttribute('download', `esthmr-users-${today}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  document.getElementById('adm-refresh-btn').onclick = () => {
+    loadStats();
+  };
+
+  function showDenied(reason) {
+    document.getElementById('adm-gate-loading').style.display = 'none';
+    document.getElementById('adm-content').style.display = 'none';
+    const denied = document.getElementById('adm-gate-denied');
+    denied.style.display = 'block';
+    if (reason) document.getElementById('adm-denied-reason').textContent = reason;
+  }
+
+  // Boot verification
+  (async () => {
+    try {
+      const email = await whoami();
+      if (!email) {
+        showDenied('You must be signed into ESTHMR to access the admin console.');
+        return;
+      }
+      const isSuper = SUPER_ADMINS.includes(email.toLowerCase());
+      if (!isSuper) {
+        showDenied(`Signed in as ${email}. This console is strictly restricted to elbarbary@aucegypt.edu.`);
+        return;
+      }
+
+      // Authorized!
+      document.getElementById('adm-user-pill').textContent = `👑 ${email}`;
+      document.getElementById('adm-gate-loading').style.display = 'none';
+      document.getElementById('adm-gate-denied').style.display = 'none';
+      document.getElementById('adm-content').style.display = 'block';
+
+      await loadStats();
+
+      // Auto refresh every 30 seconds
+      autoRefreshTimer = setInterval(loadStats, 30000);
+    } catch (err) {
+      showDenied('Could not verify administrator session: ' + err.message);
+    }
+  })();
+</script>
+</body>
+</html>
+<!-- esthmr-admin-build-v1 -->

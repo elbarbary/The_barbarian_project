@@ -128,13 +128,13 @@ async function hmacKey(secret) {
     false, ['sign', 'verify']);
 }
 
-async function sign(payload, secret) {
+export async function sign(payload, secret) {
   const body = b64url(enc.encode(JSON.stringify(payload)));
   const mac = b64url(await crypto.subtle.sign('HMAC', await hmacKey(secret), enc.encode(body)));
   return `${body}.${mac}`;
 }
 
-async function unsign(token, secret) {
+export async function unsign(token, secret) {
   if (typeof token !== 'string' || token.length > 2048
       || !/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]{43}$/.test(token)) return null;
   const [body, mac] = token.split('.');
@@ -1057,9 +1057,28 @@ export async function recordUser(env, email, ctx) {
       const indexKey = 'users:all';
       const held = await env.ESTHMR_AUTH.get(indexKey, 'json');
       const users = Array.isArray(held) ? held : [];
+      let isNewSignup = false;
       if (!users.includes(email)) {
         users.push(email);
         await env.ESTHMR_AUTH.put(indexKey, JSON.stringify(users));
+        isNewSignup = true;
+      }
+
+      // Optional real-time notification to Telegram on new reader signup:
+      if (isNewSignup && env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID) {
+        const cairoTime = new Date().toLocaleString('en-GB', { timeZone: 'Africa/Cairo' });
+        const msg = `🎉 *New Reader on ESTHMR!* 🇪🇬\n\n👤 *Email:* \`${email}\`\n📈 *Total Users:* ${users.length}\n🕒 *Cairo:* ${cairoTime}\n\n👉 [Admin Dashboard](https://esthmr.com/admin)`;
+        const ping = fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: env.TELEGRAM_CHAT_ID,
+            text: msg,
+            parse_mode: 'Markdown',
+            disable_web_page_preview: true,
+          }),
+        }).catch((err) => console.warn('[auth] Telegram alert failed:', err && err.message));
+        if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(ping);
       }
     }
   } catch (err) {
@@ -1254,6 +1273,113 @@ export async function syncFromResend(env, ctx) {
   };
 }
 
+export const SUPER_ADMIN_EMAILS = new Set([
+  'elbarbary@aucegypt.edu',
+  'elbarbary@auceypt.edu',
+  'barbary@yozo.ai',
+]);
+
+export function isSuperAdmin(email) {
+  if (!email || typeof email !== 'string') return false;
+  return SUPER_ADMIN_EMAILS.has(email.trim().toLowerCase());
+}
+
+/** Aggregate registration analytics, growth metrics, and full profiles for admin view. */
+export async function buildUsersStats(env, userEmails = []) {
+  const emails = Array.isArray(userEmails) ? userEmails : [];
+  const records = await Promise.all(
+    emails.map(async (email) => {
+      try {
+        const data = env.ESTHMR_AUTH ? await env.ESTHMR_AUTH.get(`user:${email}`, 'json') : null;
+        if (data && typeof data === 'object') {
+          return {
+            email,
+            created_at: data.created_at || null,
+            last_login: data.last_login || null,
+            logins: Number(data.logins) || 1,
+          };
+        }
+      } catch { /* ignore read error */ }
+      return { email, created_at: null, last_login: null, logins: 1 };
+    })
+  );
+
+  const now = Date.now();
+  const DAY_MS = 86400000;
+  const WEEK_MS = 7 * DAY_MS;
+  const MONTH_MS = 30 * DAY_MS;
+
+  let new24h = 0;
+  let new7d = 0;
+  let new30d = 0;
+  let active24h = 0;
+  let active7d = 0;
+  let returning = 0;
+  let totalLogins = 0;
+  const domains = {};
+  const dailySignups = {};
+
+  for (const r of records) {
+    totalLogins += (r.logins || 1);
+    if (r.logins > 1) returning++;
+
+    const domain = (r.email.split('@')[1] || '').toLowerCase();
+    if (domain) domains[domain] = (domains[domain] || 0) + 1;
+
+    if (r.created_at) {
+      const createdTime = new Date(r.created_at).getTime();
+      if (!Number.isNaN(createdTime)) {
+        const age = now - createdTime;
+        if (age <= DAY_MS) new24h++;
+        if (age <= WEEK_MS) new7d++;
+        if (age <= MONTH_MS) new30d++;
+        const dateStr = new Date(createdTime + 2 * 3600000).toISOString().slice(0, 10);
+        dailySignups[dateStr] = (dailySignups[dateStr] || 0) + 1;
+      }
+    }
+
+    if (r.last_login) {
+      const loginTime = new Date(r.last_login).getTime();
+      if (!Number.isNaN(loginTime)) {
+        const age = now - loginTime;
+        if (age <= DAY_MS) active24h++;
+        if (age <= WEEK_MS) active7d++;
+      }
+    }
+  }
+
+  const topDomains = Object.entries(domains)
+    .map(([domain, count]) => ({ domain, count }))
+    .sort((a, b) => b.count - a.count);
+
+  const sortedUsers = [...records].sort((a, b) => {
+    const timeA = new Date(a.created_at || a.last_login || 0).getTime();
+    const timeB = new Date(b.created_at || b.last_login || 0).getTime();
+    return timeB - timeA;
+  });
+
+  const total = emails.length;
+  const retentionRate = total > 0 ? Math.round((returning / total) * 100) : 0;
+
+  return {
+    total,
+    count: total,
+    stats: {
+      new24h,
+      new7d,
+      new30d,
+      active24h,
+      active7d,
+      returning,
+      totalLogins,
+      retentionRate,
+      topDomains,
+      dailySignups,
+    },
+    users: sortedUsers,
+  };
+}
+
 async function api(request, env, url, ctx) {
   const path = url.pathname.replace('/esthmr/api', '');
   const ip = request.headers.get('cf-connecting-ip') || 'unknown';
@@ -1429,7 +1555,10 @@ async function api(request, env, url, ctx) {
   if (path === '/auth/me') {
     if (request.method !== 'GET') return json({ error: 'method' }, 405, { allow: 'GET' });
     const who = await session(request, env);
-    return who ? json({ email: who.e }) : json({ error: 'signed out' }, 401);
+    if (!who) return json({ error: 'signed out' }, 401);
+    const meData = { email: who.e };
+    if (url.searchParams.get('admin') === '1') meData.admin = isSuperAdmin(who.e);
+    return json(meData);
   }
 
   if (path === '/auth/signout') {
@@ -1518,8 +1647,6 @@ async function api(request, env, url, ctx) {
    * most sensitive data.
    */
   async function admin(request, env, url, ip) {
-    const secret = env.STATUS_TOKEN;
-    if (!secret) return json({ error: 'not configured' }, 503);
     if (url.searchParams.has('token')) {
       // Said plainly rather than silently ignored: whoever is holding it this
       // way needs to stop, and the answer must not depend on whether the
@@ -1529,11 +1656,28 @@ async function api(request, env, url, ctx) {
     if (await overLimit(env, 'admin', ip, LIMITS.adminPerIp)) {
       return json({ error: 'too many requests' }, 429);
     }
-    const offered = (request.headers.get('authorization') || '').replace(/^Bearer\s+/i, '');
-    if (!offered || !timingSafe(offered, secret)) {
-      return json({ error: 'unauthorized' }, 401);
+
+    // 1. Session check: if the caller holds an authenticated session cookie or bearer token
+    const who = await session(request, env);
+    if (who && isSuperAdmin(who.e)) {
+      return null;                      // super-admin session authorized
     }
-    return null;                      // null means "carry on"
+
+    // 2. Token check: if caller provides STATUS_TOKEN in Authorization header
+    const secret = env.STATUS_TOKEN;
+    if (!secret) return json({ error: 'not configured' }, 503);
+
+    const offered = (request.headers.get('authorization') || '').replace(/^Bearer\s+/i, '');
+    if (offered && timingSafe(offered, secret)) {
+      return null;                      // authorized via STATUS_TOKEN
+    }
+
+    // Authenticated non-admin reader is strictly forbidden
+    if (who) {
+      return json({ error: 'forbidden' }, 403);
+    }
+
+    return json({ error: 'unauthorized' }, 401);
   }
 
   if (path === '/auth/users') {
@@ -1585,7 +1729,23 @@ async function api(request, env, url, ctx) {
     }
     const held = env.ESTHMR_AUTH ? await env.ESTHMR_AUTH.get('users:all', 'json') : [];
     const users = Array.isArray(held) ? held : [];
+
+    if (url.searchParams.get('detailed') === '1' || url.searchParams.has('stats')) {
+      const payload = await buildUsersStats(env, users);
+      return json(payload, 200, { 'cache-control': 'no-store' });
+    }
+
     return json({ count: users.length, users }, 200, { 'cache-control': 'no-store' });
+  }
+
+  if (path === '/auth/stats') {
+    if (request.method !== 'GET') return json({ error: 'method' }, 405, { allow: 'GET' });
+    const refused = await admin(request, env, url, ip);
+    if (refused) return refused;
+    const held = env.ESTHMR_AUTH ? await env.ESTHMR_AUTH.get('users:all', 'json') : [];
+    const users = Array.isArray(held) ? held : [];
+    const payload = await buildUsersStats(env, users);
+    return json(payload, 200, { 'cache-control': 'no-store' });
   }
 
   if (path === '/auth/sync-resend') {
