@@ -61,6 +61,41 @@ lab changes until stage 3.
   comparison are imported from `scripts/lab/score.py` — the same code that
   marks every published night — and the baselines are `scripts/lab/forecast.py`
   unchanged, given the same 90 candles Kronos gets.
+- **Stage 2 read once, 18 Sep, 16:56 UTC — the answer is STOP**
+  (`data-source/lab/retrain/test/decision.json`). Three of the four conditions
+  passed and one did not:
+
+  | Check | kronos_original | kronos_egx | Rule | |
+  |---|---|---|---|---|
+  | Pull at 20 sessions | 0.9797 | **−0.1303** | ≤ 0.5 | PASS |
+  | Rank IC at 5 | 0.02620 | **0.04144** | ≥ original | PASS |
+  | Rank IC at 5 above zero | — | 0.04144 | > 0 | PASS |
+  | Rank IC at 20 | 0.03717 | **0.03653** | ≥ original | **FAIL** |
+
+  It is short at 20 sessions by **0.000636**. Paired on the same origins the
+  difference is −0.00064 with a t of −0.04, ahead on 39 of 72 — a dead heat,
+  and the rule breaks a tie against the challenger. It is not retuned. The
+  rule was written down before these months were read precisely so that a gap
+  this small could not be argued into a pass afterwards.
+
+  What it did win: at one session +0.0883 against +0.0625, paired t 2.77, and
+  it beats every lab baseline there (`reversal1`, the best of them, draws
+  +0.0608). At five, +0.0414 against +0.0262. Its five best names returned
+  +1.39% above the equal-weighted market at 20 sessions where the original's
+  returned −0.50%.
+
+  **Why the original scores as well as it does at 20 sessions is the pull.**
+  On a mean-reverting window "how far is this above its own average" is a
+  serviceable ranking, so the defect was buying most of that +0.0372. The
+  retrained model gives the crutch up and lands in the same place. That is a
+  real finding and it is still not a pass.
+
+- **Stage 3 is not started.** Shipping `kronos_egx` as a lab model needs a
+  reading that passes. The honest routes are: leave it unshipped; or run a
+  SECOND reading on test months that did not exist when the checkpoint was
+  frozen — August 2026 onward — and label it as a second reading. Narrowing
+  the claim to 1 and 5 sessions after seeing the result would be choosing the
+  horizons the model won on, which is the thing this stage exists to stop.
 
 ## Why
 

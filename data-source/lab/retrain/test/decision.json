@@ -1,0 +1,98 @@
+{
+ "decision": "stop",
+ "readings": 1,
+ "checks": [
+  {
+   "rule": "pullAt20",
+   "threshold": "<= 0.5",
+   "original": 0.9797,
+   "kronos_egx": -0.1303,
+   "passed": true
+  },
+  {
+   "rule": "rankIC at 5 not below original",
+   "threshold": "kronos_egx >= kronos_original",
+   "original": 0.026202,
+   "kronos_egx": 0.041444,
+   "passed": true
+  },
+  {
+   "rule": "rankIC at 20 not below original",
+   "threshold": "kronos_egx >= kronos_original",
+   "original": 0.037167,
+   "kronos_egx": 0.036531,
+   "passed": false
+  },
+  {
+   "rule": "rankIC at 5 above zero",
+   "threshold": "> 0",
+   "original": 0.026202,
+   "kronos_egx": 0.041444,
+   "passed": true
+  }
+ ],
+ "checkpoint": {
+  "epoch": 7,
+  "validationLoss": 2.876661,
+  "originalValidationLoss": 3.46011,
+  "modelSha256": "9a3e0e244c7646ee9101b8467cf88b00efc2dfea1c13438af9d1c4ee9a0734cd",
+  "configSha256": "5e0f6a605d5f81b5c9b559fe5cf716a1acb041c744e6f41bd05b097b7a685396"
+ },
+ "origins": 72,
+ "window": [
+  "2025-01-02",
+  "2026-06-29"
+ ],
+ "paired": {
+  "1": {
+   "dates": 72,
+   "mean_difference": 0.025793,
+   "t": 2.7695,
+   "ahead": 44
+  },
+  "5": {
+   "dates": 72,
+   "mean_difference": 0.015242,
+   "t": 1.0225,
+   "ahead": 42
+  },
+  "20": {
+   "dates": 72,
+   "mean_difference": -0.000636,
+   "t": -0.0362,
+   "ahead": 39
+  }
+ },
+ "baselines": {
+  "flat": {
+   "1": null,
+   "5": null,
+   "20": null
+  },
+  "drift": {
+   "1": -0.039068,
+   "5": -0.041552,
+   "20": -0.041899
+  },
+  "momentum20": {
+   "1": -0.033571,
+   "5": -0.021533,
+   "20": -0.019485
+  },
+  "momentum60": {
+   "1": -0.038499,
+   "5": -0.039382,
+   "20": -0.040039
+  },
+  "reversal1": {
+   "1": 0.060808,
+   "5": 0.029524,
+   "20": 0.011198
+  },
+  "reversal5": {
+   "1": 0.064977,
+   "5": 0.028997,
+   "20": -0.005436
+  }
+ }
+}
