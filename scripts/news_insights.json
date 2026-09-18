@@ -235,6 +235,10 @@
     "meaning": "This transaction converts 883 million Egyptian pounds of Souhoola's consumer finance loan portfolio into tradable, asset-backed debt securities arranged by CI Capital and Al Ahly Pharos, replacing illiquid receivables on its balance sheet with immediate cash liquidity.",
     "meaning_ar": "تحول هذه العملية محفظة تمويل استهلاكي بقيمة 883 مليون جنيه تابعة لشركة «سهولة» إلى أوراق مالية ومديونية مدعومة بأصول وقابلة للتداول عبر مديري الإصدار «سي آي كابيتال» و«الأهلي فاروس»، مما يستبدل المستحقات الآجلة في ميزانيتها بسيولة نقدية فورية."
   },
+  "A book about Downtown Cairo’s places, its street wanderers, and the economic forces that made them": {
+    "meaning": "The publication documents urban economics and commercial history, analyzing how real estate development, commercial zoning, and informal labor markets structure Downtown Cairo's spatial economy.",
+    "meaning_ar": "يوثق الإصدار الاقتصاد الحضري والتاريخ التجاري لمنطقة وسط القاهرة، موضحاً دور التطوير العقاري والتنظيم التجاري وأسواق العمل غير الرسمية في تشكيل الهيكل الاقتصادي والمكاني للمنطقة."
+  },
   "ABB تنفذ مشروعا للطاقه الشمسيه بقدره 3.3 ميجاوات في مصانعها بمصر": {
     "meaning": "Installing an on-site 3.3 MW solar power system integrates captive renewable generation into the company's manufacturing facilities, supplying electricity directly to industrial operations and substituting a portion of consumption from the national grid.",
     "meaning_ar": "يؤدي إنشاء محطة طاقة شمسية بقدرة 3.3 ميجاوات داخل المنشآت إلى دمج التوليد الذاتي للطاقة المتجددة في العمليات الصناعية للشركة، وتوفير الكهرباء ذاتياً ليحل محل جزء من الاستهلاك المسحوب من الشبكة القومية."
@@ -383,6 +387,10 @@
     "meaning": "Under this rule, trading restrictions for corporate insiders are tied exclusively to the official earnings release schedule rather than event-driven or discretionary blackout windows. This sets fixed, predetermined dates during which insiders cannot execute transactions in company shares around financial reporting disclosures.",
     "meaning_ar": "بموجب هذه القاعدة، ترتبط فترات حظر تداول المطلعين حصرياً بالجدول الزمني الرسمي للإفصاح عن القوائم المالية بدلاً من الفترات المرتبطة بالأحداث الجوهرية غير المحددة، مما يحدد تواريخ مسبقة وثابتة يُمنع خلالها المطلعون من تنفيذ أي تعاملات على أسهم الشركة."
   },
+  "Is our overuse of memes making us less socially intelligent?": {
+    "meaning": "This headline addresses sociological and cultural trends rather than operational, financial, or capital market mechanisms affecting listed companies on the Egyptian Exchange.",
+    "meaning_ar": "يتناول هذا العنوان اتجاهات اجتماعية وثقافية ولا يرتبط بأي آليات تشغيلية أو مالية أو سوقية تؤثر على الشركات المقيدة في البورصة المصرية."
+  },
   "JPMorgan’s new frontier index gives Egypt its biggest possible weighting": {
     "meaning": "Index weighting determines the mandatory asset allocation ratios for passive funds tracking the benchmark, with Egypt assigned the maximum constituent cap permitted by the index rules.",
     "meaning_ar": "يحدد وزن المؤشر نسب التخصيص الإلزامية للأصول للمحافظ غير النشطة التي تتبع هذا المؤشر، حيث خُصص لمصر الحد الأقصى المسموح به للمكونات وفقاً لقواعد المؤشر."
@@ -402,6 +410,10 @@
   "MENA PE stays near record pace in 1H — but exits are heading for their weakest year since 2017": {
     "meaning": "Private equity firms continue deploying capital into regional acquisitions while slower initial public offering and secondary sale markets extend the holding periods of existing portfolio assets. This dynamic keeps invested capital locked on fund balance sheets and delays distributions to limited partners.",
     "meaning_ar": "تواصل شركات الاستثمار المباشر ضخ رؤوس الأموال في صفقات الاستحواذ الإقليمية، بينما يؤدي تباطؤ أسواق الطروحات العامة والمبيعات الثانوية إلى إطالة فترات الاحتفاظ بالأصول القائمة. وتُبقي هذه الآلية رؤوس الأموال المستثمرة مقيدة في ميزانيات الصناديق مع تأخير التوزيعات النقدية للشركاء المحدودين."
+  },
+  "MNT-Halan lines up blockbuster EGX debut": {
+    "meaning": "An initial public offering on the Egyptian Exchange converts a private fintech company into a publicly traded entity, listing shares on the bourse and requiring regular disclosures under Financial Regulatory Authority governance standards.",
+    "meaning_ar": "يُحوّل الطرح العام الأولي في البورصة المصرية شركة التكنولوجيا المالية الخاصة إلى كيان مدرج للتداول العام، مما يدرج أسهمها في السوق ويُلزمها بالإفصاح الدوري وفق معايير الحوكمة الصادرة عن الهيئة العامة للرقابة المالية."
   },
   "MNT-Halan’s local arm is heading to the EGX": {
     "meaning": "An initial public offering on the EGX lists a company's shares for public trading on the regulated exchange, which broadens its institutional and retail shareholder base and subjects its financial reporting to local capital market disclosure regulations.",
@@ -435,6 +447,10 @@
     "meaning": "This transaction transfers mortgage receivables from the company's books to a specialized fund, converting long-term illiquid assets into immediate liquid capital and removing debt from the balance sheet.",
     "meaning_ar": "تتضمن هذه العملية تحويل محافظ التمويل العقاري من الدفاتر المالية للشركة إلى صندوق متخصص، مما يحول الأصول طويلة الأجل غير السائلة إلى سيولة نقدية مباشرة ويزيل هذه الالتزامات من الميزانية العمومية."
   },
+  "New Cairo’s The Brasserie turns dinner into a full night out": {
+    "meaning": "The venue operates an experiential dining model in New Cairo, integrating extended entertainment services directly into food and beverage operations to lengthen customer dwell time.",
+    "meaning_ar": "تعتمد المنشأة نموذج الضيافة الترفيهية في القاهرة الجديدة، حيث تدمج خدمات الترفيه ضمن أنشطة الأغذية والمشروبات بهدف تمديد فترة بقاء العملاء داخل الموقع."
+  },
   "Nine new factories go live in Sokhna as SCZone manufacturing base hits 212 plants": {
     "meaning": "The commencement of operations at nine new facilities expands the active industrial capacity within the Suez Canal Economic Zone (SCZone) to 212 manufacturing plants, increasing the volume of localized production infrastructure in the Sokhna industrial cluster.",
     "meaning_ar": "يؤدي بدء تشغيل تسعة مصانع جديدة إلى توسيع الطاقة الصناعية العاملة داخل المنطقة الاقتصادية لقناة السويس لتصل إلى 212 منشأة تصنيعية، مما يرفع حجم البنية التحتية للإنتاج المحلي في مجمع السخنة الصناعي."
@@ -455,6 +471,10 @@
     "meaning": "Establishing operations in the Dubai International Financial Centre (DIFC) creates a cross-border financial infrastructure that directly links Egyptian expatriates in the UAE to domestic electronic bill payment and collection networks in Egypt.",
     "meaning_ar": "يؤسس إطلاق العمليات في مركز دبي المالي العالمي قناة للبنية التحتية للمدفوعات عبر الحدود، تربط المغتربين المصريين في الإمارات مباشرة بشبكات سداد الفواتير والتحصيل الإلكتروني المحلية في مصر."
   },
+  "Sandra Bullock and Nicole Kidman reunite for Practical Magic 2": {
+    "meaning": "Production studios leverage established intellectual property and existing talent relationships to initiate sequel development within entertainment sector operations.",
+    "meaning_ar": "تعتمد استوديوهات الإنتاج على استغلال الملكية الفكرية القائمة وعقود المواهب لتطوير أجزاء تابعة للأعمال الفنية ضمن العمليات التشغيلية لقطاع الترفيه."
+  },
   "Seven courses, one path to senior leadership": {
     "meaning": "Structured executive training frameworks standardise workforce capability development and internal succession planning within corporate governance systems.",
     "meaning_ar": "تحدد برامج التدريب التنفيذي المنظمة معايير تطوير الكفاءات المهنية وتخطيط التعاقب الوظيفي الداخلي ضمن نظم الحوكمة المؤسسية."
@@ -474,6 +494,10 @@
   "The EGX’s first single-stock futures have completed their first full lifecycle": {
     "meaning": "This marks the operational execution and final settlement of the exchange's initial standardized derivative contracts linked to individual underlying equities, establishing active clearing and settlement infrastructure for local derivatives.",
     "meaning_ar": "يمثل هذا الإتمام التشغيلي والتسوية النهائية لأول عقود مشتقات نمطية مرتبطة بأسهم فردية في البورصة، مما يفعّل البنية التحتية للمقاصة والتسوية للمشتقات المالية محلياً."
+  },
+  "The Guardian’s Black Box: The Chatbots dissects AI psychosis": {
+    "meaning": "Media investigations into generative AI behavioral anomalies document operational risks, data governance challenges, and system integrity issues for technology developers and platform operators.",
+    "meaning_ar": "ترصد التحقيقات الإعلامية في اختلالات نماذج الذكاء الاصطناعي التوليدي المخاطر التشغيلية وتحديات حوكمة البيانات وسلامة الأنظمة لدى مطوري التكنولوجيا ومشغلي المنصات."
   },
   "The business behind the game": {
     "meaning": "Sports industry operations rely on a commercial framework integrating broadcast rights monetization, corporate sponsorships, merchandising, and gate receipts to finance club balance sheets and event logistics.",
