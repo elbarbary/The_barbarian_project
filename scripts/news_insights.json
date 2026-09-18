@@ -7765,6 +7765,10 @@
     "meaning": "Publishing daily train schedules reflects the operational availability of state-run passenger transit capacity, which facilitates the routine intercity movement of labor and commercial traffic between Cairo and Upper Egypt.",
     "meaning_ar": "يعكس إعلان جداول القطارات اليومية الطاقة التشغيلية المتاحة لشبكة السكك الحديدية لنقل الركاب، وهو ما ينظم حركة تنقل الأفراد والنشاط التجاري بين القاهرة ومحافظات الصعيد."
   },
+  "مواعيد القطارات من القاهره الي محافظات الوجه البحري والاسكندريه اليوم 18-9-2026": {
+    "meaning": "Daily passenger train schedules reflect routine public transport operations between major industrial and commercial hubs, supporting workforce mobility and intercity domestic connectivity without altering listed corporate fundamentals.",
+    "meaning_ar": "تعكس جداول قطارات الركاب اليومية العمليات التشغيلية الروتينية لشبكة النقل العام بين المراكز الصناعية والتجارية، وتحدد حركة تنقل الأيدي العاملة والربط المحلي بين المدن دون تأثير مباشر على البيانات المالية للشركات المقيدة."
+  },
   "موجه بيع السندات تعيد توزيع فاتوره الدين عالميا": {
     "meaning": "A widespread drop in bond prices raises benchmark yields, which alters the structure of borrowing costs and debt service obligations for sovereign and corporate issuers across global markets.",
     "meaning_ar": "يؤدي انخفاض أسعار السندات إلى ارتفاع العوائد القياسية، مما يغير هيكل تكاليف الاقتراض وخدمة الدين للجهات السيادية والشركات عبر الأسواق المالية العالمية."
@@ -7940,6 +7944,10 @@
   "هاير مصر تضخ استثمارات جديده وتفتتح المرحله الثانيه من مجمع العاشر نوفمبر المقبل": {
     "meaning": "The expansion represents capital expenditure allocated to industrial capacity, adding a second operational phase to the manufacturing complex in 10th of Ramadan City to expand domestic production lines.",
     "meaning_ar": "يمثل هذا التوسع إنفاقاً رأسمالياً موجهاً للطاقة الصناعية، حيث يضيف مرحلة تشغيلية ثانية إلى المجمع التصنيعي في مدينة العاشر من رمضان لزيادة خطوط الإنتاج المحلي."
+  },
+  "هبوط اسعار القمح في اوروبا مع استمرار اضطرابات البحر الاسود": {
+    "meaning": "European wheat prices adjust downwards as global market dynamics absorb Black Sea export disruptions, altering import cost benchmarks for Egyptian grain procurement agencies and milling companies.",
+    "meaning_ar": "يؤدي تراجع أسعار القمح الأوروبي في ظل اضطرابات صادرات البحر الأسود إلى تعديل تكلفة التعاقدات الاستيرادية للهيئات التموينية وشركات المطاحن في مصر."
   },
   "هبوط اسهم سوفت بنك 13% مع تصاعد المخاوف بشان الذكاء الاصطناعي": {
     "meaning": "SoftBank's market valuation reflects high portfolio concentration in technology and artificial intelligence assets, making its share price directly sensitive to sector-wide valuation adjustments.",
