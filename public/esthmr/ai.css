@@ -1,44 +1,42 @@
-/* The AI hero on Home and the scenario workbench, from the ESTHMR AI System
- * design. Scoped to .aix-* so the rest of Home keeps its own look.
+/* The AI card on Home and the scenario workbench.
  *
- * The design's colours are tokens here, with a dark counterpart for the
- * site's dark theme: the design was drawn light, and a teal card on a light
- * gradient pasted into a dark page would be the one bright rectangle on it. */
+ * These surfaces used to carry a palette of their own: forty hexes shadowing
+ * the site's own tokens, because the design they came from was drawn before
+ * `design.css` existed. It is why they never quite matched the rest of the
+ * page — #FFFFFF beside #FAFCFE, #DCE4F0 beside the ink-based rule, a teal
+ * two steps darker than the accent — and why the dark theme needed a second
+ * copy of all forty.
+ *
+ * Every name is kept, because a few hundred rules ask for them by name. What
+ * changed is what they answer: the palette, which already flips itself. The
+ * one set that stays its own is the beta warning — amber is not in this
+ * palette and a warning is the one thing that should not look like the page.
+ */
 
 .ai-cards, .aix-hero, .aix-bench, .aix-dialog {
-  --aix-sans: 'Archivo', 'IBM Plex Sans Arabic', 'IBM Plex Sans', system-ui, sans-serif;
+  --aix-sans: 'IBM Plex Sans Arabic', 'IBM Plex Sans', system-ui, sans-serif;
   --aix-mono: 'IBM Plex Mono', 'IBM Plex Sans Arabic', ui-monospace, monospace;
-  --aix-ink: #16242F; --aix-body: #41505E; --aix-muted: #566370; --aix-quiet: #3D4C5A;
-  --aix-teal: #0E5C5C; --aix-teal-hover: #0A4747; --aix-teal-ink: #0E5C5C;
-  --aix-deep: #0E4C4C; --aix-up: #3F8B85; --aix-down: #A8372A; --aix-down-soft: #C98376;
-  --aix-surface: #FFFFFF; --aix-soft: #FFFFFFC7; --aix-line: #DCE4F0; --aix-hair: #EEF2F9; --aix-hair2: #F1F4FA;
-  --aix-grid: #EDF1F8; --aix-split: #C9D4E4; --aix-past: #A9B6C6; --aix-range: #D8E4E4; --aix-track: #F6F9FD;
-  --aix-track-system: #EAF3F1; --aix-track-quiet: #FAFBFE; --aix-row-hover: #F7FAFE;
-  --aix-hero-bg: linear-gradient(158deg, #E7F1EF, #F5F9FC 62%); --aix-hero-line: #CFE0DC; --aix-hero-foot: #D5E2DF;
-  --aix-step-line: #D9E5E2; --aix-seg-bg: #FFFFFFCC; --aix-seg-line: #D3E1DE;
+  --aix-ink: var(--ink); --aix-body: var(--t2); --aix-muted: var(--faint); --aix-quiet: var(--t2);
+  --aix-teal: var(--accent); --aix-teal-hover: var(--accentPress); --aix-teal-ink: var(--accent);
+  --aix-deep: var(--sunk); --aix-up: var(--up); --aix-down: var(--down); --aix-down-soft: var(--down);
+  --aix-surface: var(--surface); --aix-soft: var(--surface); --aix-line: var(--rule);
+  --aix-hair: var(--rule2); --aix-hair2: var(--rule2);
+  --aix-grid: var(--rule2); --aix-split: var(--thread); --aix-past: var(--faint);
+  --aix-range: var(--accTint); --aix-track: var(--sunk);
+  --aix-track-system: var(--accTint); --aix-track-quiet: var(--sunk); --aix-row-hover: var(--sunk);
+  --aix-hero-bg: var(--surface); --aix-hero-line: var(--rule); --aix-hero-foot: var(--rule);
+  --aix-step-line: var(--rule); --aix-seg-bg: var(--sunk); --aix-seg-line: var(--rule);
   --aix-beta-bg: #FFF4E2; --aix-beta-line: #E0B268; --aix-beta-ink: #7A4F12; --aix-beta-dot: #B8791B; --aix-beta-hover: #FDEBCE;
-  --aix-invert: #16242F; --aix-invert-ink: #FFFFFF;
-  --aix-pipe-bg: #FAFCFE; --aix-quiet-bg: #FFFFFFCC; --aix-quiet-line: #CFE0DC;
-  --aix-rule: #E2E8F3; --aix-record-bg: #F7FAFB; --aix-record-line: #D5E2DF;
-  --aix-shadow: 0 18px 44px -28px rgba(14, 92, 92, .5);
+  --aix-invert: var(--ink); --aix-invert-ink: var(--surface);
+  --aix-pipe-bg: var(--surface); --aix-quiet-bg: var(--sunk); --aix-quiet-line: var(--rule);
+  --aix-rule: var(--rule); --aix-record-bg: var(--sunk); --aix-record-line: var(--rule);
+  --aix-shadow: none;
   color: var(--aix-ink); font-family: var(--aix-sans);
 }
 [data-theme="dark"] .aix-hero, [data-theme="dark"] .aix-bench, [data-theme="dark"] .aix-dialog, [data-theme="dark"] .ai-cards {
-  --aix-ink: #EDF4FA; --aix-body: #C9D6E2; --aix-muted: #9BADBE; --aix-quiet: #BFCDDA;
-  --aix-teal: #2A7C79; --aix-teal-hover: #33918D; --aix-teal-ink: #86CFD2;
-  --aix-deep: #0F3A3A; --aix-up: #6FBDB5; --aix-down: #E08A70; --aix-down-soft: #C27B66;
-  --aix-surface: #1B2B3B; --aix-soft: rgba(27, 43, 59, .78); --aix-line: rgba(240, 235, 229, .13); --aix-hair: rgba(240, 235, 229, .08); --aix-hair2: rgba(240, 235, 229, .06);
-  --aix-grid: rgba(240, 235, 229, .07); --aix-split: rgba(240, 235, 229, .22); --aix-past: #7E8C9B; --aix-range: rgba(134, 207, 210, .22); --aix-track: rgba(240, 235, 229, .05);
-  --aix-track-system: rgba(134, 207, 210, .10); --aix-track-quiet: rgba(240, 235, 229, .03); --aix-row-hover: rgba(240, 235, 229, .05);
-  --aix-hero-bg: linear-gradient(158deg, #15302F, #172838 62%); --aix-hero-line: #28413F; --aix-hero-foot: #2A3E45;
-  --aix-step-line: #2A4144; --aix-seg-bg: rgba(17, 29, 41, .6); --aix-seg-line: #2B4442;
+  /* Only the warning, which is the one set that is not the palette's. */
   --aix-beta-bg: #3A2C14; --aix-beta-line: #8A6424; --aix-beta-ink: #F2C98A; --aix-beta-dot: #E0A94A; --aix-beta-hover: #4A3918;
-  --aix-invert: #EDF4FA; --aix-invert-ink: #111D29;
-  --aix-pipe-bg: rgba(27, 43, 59, .72); --aix-quiet-bg: rgba(17, 29, 41, .55); --aix-quiet-line: #2B4442;
-  --aix-rule: rgba(240, 235, 229, .12); --aix-record-bg: #182838; --aix-record-line: #2A3E45;
-  --aix-shadow: 0 18px 44px -28px rgba(0, 0, 0, .6);
 }
-
 #app .ai-cards button, #app .aix-bench button, #app .aix-dialog button { font-family: var(--aix-sans); }
 .ai-cards :is(button, summary, a):focus-visible, .aix-bench :is(button, summary, a, input, select):focus-visible,
 .aix-dialog button:focus-visible { outline: 3px solid var(--aix-teal-ink); outline-offset: 2px; }
@@ -109,28 +107,38 @@
 .aix-seg.is-small { background: var(--aix-track); border-color: var(--aix-line); }
 #app .aix-seg.is-small button { font-size: 12.5px; padding: 7px 13px; min-height: 32px; }
 
+/* The record, on Home. It used to be an inverted teal panel with its own
+ * white-on-dark chart palette — the one lifted object on a page of flat
+ * cards, which read as the thing being sold. It is now the third of three
+ * facts and looks like the other two: a bordered box on the surface.
+ *
+ * Its chart follows suit. The two lines were #5CC4B4 and #7FA9A5, hexes that
+ * only worked on that dark ground and resolved to nothing in the dark theme;
+ * they are the palette's ink and its faint now, solid and dashed, which is
+ * also exactly what the note underneath says they are. */
 .aix-system {
-  background: var(--aix-deep); border-radius:var(--radius-control); padding: 18px 20px; display: flex; flex-direction: column;
-  gap: 10px; color: #fff; min-width: 0;
+  display: flex; flex-direction: column; gap: 10px; min-width: 0; color: inherit;
 }
-.aix-system .aix-eyebrow { color: #A8CFCA; }
-.aix-system-figure { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.aix-system .aix-eyebrow { color: var(--faint); }
+.aix-system-figure { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
 .aix-system-value {
-  font-family: var(--aix-mono); font-size: 36px; font-weight: 600; line-height: 1; letter-spacing: -.03em;
-  color: #fff; text-align: start;
+  font-family: var(--aix-mono); font-size: 26px; font-weight: 600; line-height: 1;
+  letter-spacing: -.02em; color: var(--ink); text-align: start;
 }
-.aix-system-versus { margin: 0; max-width: 190px; font-size: 12.5px; line-height: 1.35; color: #D5E7E4; text-wrap: pretty; }
+.aix-system-versus {
+  margin: 0; max-width: 24ch; font-size: 12px; line-height: 1.4; color: var(--t2); text-wrap: pretty;
+}
 .aix-system-chart { height: 58px; display: flex; }
 .aix-hero-chart { display: block; width: 100%; height: 58px; overflow: visible; }
-.aix-hero-chart .aix-zero { stroke: #2E6B6B; stroke-width: 1; vector-effect: non-scaling-stroke; }
-.aix-hero-area { fill: #5CC4B4; opacity: .18; }
-.aix-hero-market { fill: none; stroke: #7FA9A5; stroke-width: 2; stroke-dasharray: 4 4; vector-effect: non-scaling-stroke; }
-.aix-hero-system { fill: none; stroke: #5CC4B4; stroke-width: 2.8; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-.aix-system-legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 11.5px; color: #BEDCD8; }
+.aix-hero-chart .aix-zero { stroke: var(--rule); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.aix-hero-area { fill: var(--accent); opacity: .10; }
+.aix-hero-market { fill: none; stroke: var(--faint); stroke-width: 2; stroke-dasharray: 4 4; vector-effect: non-scaling-stroke; }
+.aix-hero-system { fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.aix-system-legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 11.5px; color: var(--faint); }
 .aix-system-legend span { display: inline-flex; align-items: center; gap: 6px; }
 .aix-system-legend i { display: block; width: 14px; height: 2px; }
-.aix-key-system { background: #5CC4B4; }
-.aix-key-market { background: repeating-linear-gradient(90deg, #7FA9A5 0 4px, transparent 4px 7px); }
+.aix-key-system { background: var(--ink); }
+.aix-key-market { background: repeating-linear-gradient(90deg, var(--faint) 0 4px, transparent 4px 7px); }
 /* The record filling in: a row per night's five, a square per session held.
    The line stands after the last session in the record; left of it, closed. */
 /* Wide enough for "14 سبتمبر", the longer of the two languages' dates. */
@@ -141,19 +149,19 @@
 .aix-fill-now {
   position: absolute; top: 0; left: calc(var(--label-w) + (100% - var(--label-w)) * var(--now) / var(--cols));
   transform: translateX(calc(var(--now) / var(--cols) * -100%));
-  font-family: var(--aix-mono); font-size: 10px; line-height: 1; letter-spacing: .06em; color: #D5E7E4; white-space: nowrap;
+  font-family: var(--aix-mono); font-size: 10px; line-height: 1; letter-spacing: .06em; color: var(--faint); white-space: nowrap;
 }
 .aix-fill-row { display: grid; grid-template-columns: var(--label-w) minmax(0, 1fr); align-items: center; }
-.aix-fill-label { font-family: var(--aix-mono); font-size: 10.5px; line-height: 1; color: #A8CFCA; white-space: nowrap; }
+.aix-fill-label { font-family: var(--aix-mono); font-size: 10.5px; line-height: 1; color: var(--faint); white-space: nowrap; }
 .aix-fill-track { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 3px; }
-.aix-fill-track i { display: block; height: 11px; border-radius: 3px; border: 1.5px solid #5CC4B4; box-sizing: border-box; }
-.aix-fill-track i.is-closed { background: #5CC4B4; }
-.aix-fill-row:not(.is-read) .aix-fill-track i { border-style: dashed; border-color: #5E9995; }
+.aix-fill-track i { display: block; height: 11px; border-radius: 3px; border: 1.5px solid var(--accent); box-sizing: border-box; }
+.aix-fill-track i.is-closed { background: var(--accent); }
+.aix-fill-row:not(.is-read) .aix-fill-track i { border-style: dashed; border-color: var(--accMid); }
 .aix-fill-rows::after {
-  content: ''; position: absolute; top: 12px; bottom: -4px; width: 0; border-left: 1.5px solid #D5E7E4;
+  content: ''; position: absolute; top: 12px; bottom: -4px; width: 0; border-left: 1.5px solid var(--thread);
   left: calc(var(--label-w) + (100% - var(--label-w)) * var(--now) / var(--cols));
 }
-.aix-fill-axis { display: flex; justify-content: flex-end; font-size: 11px; line-height: 1.3; color: #D5E7E4; text-align: end; }
+.aix-fill-axis { display: flex; justify-content: flex-end; font-size: 11px; line-height: 1.3; color: var(--faint); text-align: end; }
 
 .aix-pipeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .aix-pipeline li {
@@ -631,7 +639,7 @@ dialog.aix-dialog::backdrop { background: rgba(22, 36, 47, .5); }
   font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
   font-size: 11px; letter-spacing: .09em;
   color: var(--iris); background: var(--irisTint);
-  border-radius:var(--radius-island); padding: 4px 10px; white-space: nowrap;
+  border-radius: 999px; padding: 4px 10px; white-space: nowrap;
 }
 #app .aix-status.is-scored .aix-status-pill { color: var(--accent); background: var(--accTint); }
 #app .aix-status-text { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink); }
@@ -735,3 +743,11 @@ dialog.aix-dialog::backdrop { background: rgba(22, 36, 47, .5); }
   #app .aix-lab-actions { width: 100%; }
   #app .aix-lab-actions .aix-cta, #app .aix-lab-actions .aix-cta-quiet { flex: 1; }
 }
+
+/* In the lab card's foot the strip is a sentence, not a panel: it already sits
+   inside a card, and a bordered box inside a bordered box reads as a second
+   object rather than the first one's own status line. */
+#app .aix-lab-foot .aix-status {
+  border: 0; background: transparent; padding: 0; margin: 0; gap: 10px; flex: 1; min-width: 0;
+}
+#app .aix-lab-foot .aix-status-text { font-size: 14px; color: var(--t2); line-height: 1.5; }

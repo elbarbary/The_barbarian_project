@@ -26,7 +26,7 @@
   --fe-edge: var(--edge, rgba(27, 25, 23, 0.10));
   --fe-mono: 'IBM Plex Mono', ui-monospace, monospace;
   --fe-sans: 'IBM Plex Sans', system-ui, sans-serif;
-  --fe-display: 'Bricolage Grotesque', var(--fe-sans);
+  --fe-display: 'IBM Plex Sans', var(--fe-sans);
 }
 
 .fe-notebook, .fe-notebook * { box-sizing: border-box; margin: 0; padding: 0; }

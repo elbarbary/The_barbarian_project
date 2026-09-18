@@ -1,0 +1,23 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>harness</title>
+<link rel="stylesheet" href="./design.css"><link rel="stylesheet" href="./shell.css">
+<link rel="stylesheet" href="./journal.css"><link rel="stylesheet" href="./ai.css">
+<link rel="stylesheet" href="./home.css"><link rel="stylesheet" href="./primitives.css">
+<style>body{padding:28px;background:var(--bg)}#app{max-width:1180px;margin:0 auto}</style>
+</head><body data-theme="light"><div id="app"><div class="om-scr journal-home" style="display:flex;flex-direction:column;gap:18px"></div></div>
+<script type="module">
+import { aiCards } from './ai-cards.js';
+const j = (p) => fetch('../data/v1/' + p).then((r) => r.json());
+const [top5, scenarios, picks, reading] = await Promise.all([
+  j('research/top5.json'), j('lab/scenarios.json'), j('lab/picks.json'),
+  j('lab/rerank/filings-news-rulebook.json'),
+]);
+const key = scenarios.rerank.default.join('-');
+const data = { top5, scenarios, picks, readings: { [key]: reading }, companies: [] };
+const component = { state: {}, setState(p) { Object.assign(this.state, p); }, loadReading() {} };
+const lang = new URLSearchParams(location.search).get('lang') || 'ar';
+document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+const node = aiCards(component, data, lang === 'ar');
+document.querySelector('.journal-home').appendChild(node);
+window.__ready = true;
+</script></body></html>

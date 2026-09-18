@@ -2099,7 +2099,7 @@ export class Component extends Base {
       nameAr: (demoCo0.name && demoCo0.name.ar) || 'شركة تجريبية ١',
       primaryName: ar ? ((demoCo0.name && demoCo0.name.ar) || 'شركة تجريبية ١') : ((demoCo0.name && demoCo0.name.en) || 'Sample Company 1'),
       secondaryName: ar ? ((demoCo0.name && demoCo0.name.en) || 'Sample Company 1') : ((demoCo0.name && demoCo0.name.ar) || 'شركة تجريبية ١'),
-      primaryFont: ar ? "'IBM Plex Sans Arabic',sans-serif" : "'Bricolage Grotesque',serif",
+      primaryFont: ar ? "'IBM Plex Sans Arabic',sans-serif" : "'IBM Plex Sans',sans-serif",
       close: this.num(demoCo0.close), chg: this.signed(typeof demoCo0.close === 'number' && typeof demoCo0.pct === 'number'
         ? demoCo0.close - demoCo0.close / (1 + demoCo0.pct / 100) : null),
       pct: this.pct(demoCo0.pct), color: this.dcol(demoCo0.pct),
@@ -2149,7 +2149,7 @@ export class Component extends Base {
       delisted: false, listingNote: '', listingLink: '', ...otcDefaults,
       nameEn: st.ticker || '—', nameAr: st.ticker || '—',
       primaryName: st.ticker || '—', secondaryName: '',
-      primaryFont: ar ? "'IBM Plex Sans Arabic',sans-serif" : "'Bricolage Grotesque',serif",
+      primaryFont: ar ? "'IBM Plex Sans Arabic',sans-serif" : "'IBM Plex Sans',sans-serif",
       close:'—', chg:'—', pct:'—', color:'var(--faint)', arrow:'', closeDate:'—',
       brief: L.nothingYet, briefFacts: [], briefSource:'—', stats: [], ttmWorking:'',
     };
@@ -2300,7 +2300,7 @@ export class Component extends Base {
         secondaryName: ar
           ? (loaded.name && loaded.name.en ? loaded.name.en : '')
           : (loaded.name && loaded.name.ar ? loaded.name.ar : ''),
-        primaryFont: ar ? "'IBM Plex Sans Arabic',sans-serif" : "'Bricolage Grotesque',serif",
+        primaryFont: ar ? "'IBM Plex Sans Arabic',sans-serif" : "'IBM Plex Sans',sans-serif",
         sector: sectorName(loaded.sector) || co.sector,
         sectorKey: loaded.sector || co.sectorKey || '',
         // Eleven listings are quoted in dollars. The market table says so;

@@ -942,7 +942,7 @@ function drawStoryCanvas() {
   ctx.lineWidth = 1.5;
   roundRect(ctx, 90, 110, 340, 64, 32, true, true);
   ctx.fillStyle = '#86CFD2';
-  ctx.font = '700 28px "Bricolage Grotesque", sans-serif';
+  ctx.font = '700 28px "IBM Plex Sans", sans-serif';
   ctx.textAlign = 'left';
   ctx.fillText('ESTHMR', 125, 152);
   ctx.fillStyle = 'rgba(255,255,255,0.65)';
@@ -987,7 +987,7 @@ function drawStoryCanvas() {
 
   // Ticker and Name
   ctx.fillStyle = '#FFFFFF';
-  ctx.font = '800 84px "Bricolage Grotesque", sans-serif';
+  ctx.font = '700 84px "IBM Plex Sans", sans-serif';
   ctx.fillText(data.ticker, cardX + cardW / 2, cardY + 235);
 
   ctx.fillStyle = '#EDF4FA';
@@ -1070,7 +1070,7 @@ function drawStoryCanvas() {
   ctx.fillText('اقرأ جميع إفصاحات وتقارير البورصة المصرية فور إيداعها', W / 2, H - 150);
 
   ctx.fillStyle = '#86CFD2';
-  ctx.font = '700 38px "Bricolage Grotesque", sans-serif';
+  ctx.font = '700 38px "IBM Plex Sans", sans-serif';
   ctx.fillText('esthmr.com', W / 2, H - 98);
   ctx.restore();
 }

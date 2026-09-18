@@ -839,7 +839,7 @@ body[data-signed="no"] .om-main { padding-top: 62px !important; }
 .adm-kpi:hover { border-color: var(--rule); }
 .adm-kpi-lbl { font-size: 11px; color: var(--t2); font-weight: 500; }
 .adm-kpi-val {
-  font-family: "Bricolage Grotesque", "IBM Plex Sans", sans-serif;
+  font-family: var(--font-heading);
   font-size: 20px; font-weight: 700; line-height: 1.1;
   color: var(--ink);
 }
