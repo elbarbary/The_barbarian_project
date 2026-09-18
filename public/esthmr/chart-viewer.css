@@ -20,6 +20,10 @@ html[dir=rtl] .chart-viewer-content{direction:rtl}
  .journal-home>.journal-intro{order:0}
  .journal-home>.om-idx{order:1}
  .journal-home>.breadth-strip{order:1}
+ /* The record, then what changed, then the shortcuts. Anything this list
+    does not name lands at 4, which is why a new block has to be named here
+    or it silently falls to the bottom of the phone. */
+ .journal-home>.ct-shelf{order:2}
  .journal-home>.quick-paths{order:3;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
  .journal-home>.quick-paths button{min-height:64px;flex-direction:row;padding:12px;border-radius:var(--radius-control);text-align:start}
  .journal-home>.quick-paths strong{font-size:13px;line-height:1.5}

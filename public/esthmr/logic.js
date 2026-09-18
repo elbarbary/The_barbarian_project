@@ -6,6 +6,7 @@ import { pairsExplorer } from './pairs.js';
 import { valuationExplorer } from './valuation.js';
 import { flowTrackers } from './flow-trackers.js';
 import { sectorTable } from './sector-lens.js';
+import { changedToday } from './changed-today.js';
 import { aiCards } from './ai-cards.js';
 import { scenariosScreen } from './scenarios.js';
 
@@ -4716,6 +4717,17 @@ export class Component extends Base {
       themeIcon: st.theme === 'light' ? 'M12 4.6V2.8M12 21.2v-1.8M4.6 12H2.8M21.2 12h-1.8M6.8 6.8 5.5 5.5M18.5 18.5l-1.3-1.3M6.8 17.2l-1.3 1.3M18.5 5.5l-1.3 1.3M12 7.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8' : 'M20.4 14.6A8.8 8.8 0 0 1 9.4 3.6a8.8 8.8 0 1 0 11 11',
       isHome: st.screen === 'home', isToday: st.screen === 'today', isMarket: st.screen === 'market',
       flowViews: flowTrackers(this, D, ar),
+      /* Three things that changed, each drawn in a different primitive and
+         each carrying the sentence that keeps it a measurement. Built for
+         Home only; a card whose two published figures are missing is simply
+         not drawn, so the row can be three, two or nothing. */
+      changedToday: st.screen === 'home'
+        ? changedToday({ ...D, marketDate: D.marketDate }, ar, {
+          openCompany: (ticker) => this.setState({ screen: 'company', ticker }),
+          openMarket: () => this.setState({ screen: 'market' }),
+          heading: ar ? 'ما تغيّر اليوم' : 'What changed today',
+          note: ar ? 'لكل واقعة مستند' : 'a document for every one',
+        }) : null,
       // Size, activity and movement on one scale. Built only for the screen
       // that shows it: it walks every member of every sector.
       sectorTable: st.screen === 'sectors'

@@ -179,3 +179,48 @@
   #app .breadth-strip { padding: 16px; }
   #app .breadth-keys { gap: 6px 14px; font-size: 11.5px; }
 }
+
+/* ── WHAT CHANGED TODAY ──────────────────────────────────────────────────
+ * The redesign's business card, three across. Every one carries the same
+ * six parts in the same order — dateline, the shape it is drawn in, one
+ * sentence, the picture, what the picture does not say, the document — so
+ * the row reads as a publication rather than three widgets.
+ */
+#app .ct-shelf { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+#app .ct-shelf-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+#app .ct-shelf-head h2 { font-size: 18px; font-weight: 600; margin: 0; }
+#app .ct-shelf-note {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 12px; color: var(--faint);
+}
+#app .ct-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+#app .ct-card {
+  min-width: 0; background: var(--surface); border: 1px solid var(--rule);
+  border-radius: var(--radius-island); padding: 18px;
+  display: flex; flex-direction: column; gap: 11px;
+}
+#app .ct-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+#app .ct-dateline {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 11.5px; color: var(--faint);
+}
+/* The name of the shape. It is here because the five primitives are a closed
+   set: saying which one this is teaches the vocabulary a page at a time. */
+#app .ct-primitive {
+  flex: none; font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 10px; letter-spacing: .09em; color: var(--t2);
+  background: var(--sunk); border-radius: 999px; padding: 3px 8px; white-space: nowrap;
+}
+#app .ct-title { font-size: 16px; font-weight: 600; line-height: 1.45; margin: 0; }
+#app .ct-rule { height: 1px; background: var(--rule); }
+#app .ct-visual { min-width: 0; }
+#app .ct-limit { margin: 0; font-size: 14.5px; color: var(--t2); line-height: 1.55; }
+#app .ct-foot { display: flex; flex-direction: column; gap: 8px; }
+#app .ct-more {
+  border: 0; background: transparent; cursor: pointer; padding: 0;
+  font-size: 14px; font-weight: 600; color: var(--accent) !important;
+  min-height: 32px; display: flex; align-items: center; text-align: start;
+}
+#app .ct-more:hover { color: var(--ink) !important; }
+@media (max-width: 1100px) { #app .ct-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 720px) { #app .ct-grid { grid-template-columns: 1fr; } }

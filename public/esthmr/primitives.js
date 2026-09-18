@@ -268,22 +268,31 @@ export function pairedBars({ groups = [], width = 400, height = 120, ar = false 
       const mid = slot * i + slot / 2;
       const a = mid - barW - 4, b = mid + 4;
       const out = [];
+      /* A bar is at least three pixels tall while its value is not zero.
+         Two periods 143 times apart draw the smaller one as a hairline on
+         the axis, and a reader sees ONE bar — which is the opposite of what
+         a paired comparison is for. Three pixels says "there was one, and it
+         was too small to see", which is the true statement. */
+      const tall = (v) => Math.max(Math.abs(yOf(v) - zero), v === 0 ? 1 : 3);
       if (finite(g.prior)) {
         const yy = Math.min(yOf(g.prior), zero);
-        out.push(h('rect', { key: `p${i}`, x: a, y: yy, width: barW,
-          height: Math.abs(yOf(g.prior) - zero) || 1, fill: 'var(--sunk)', stroke: 'var(--rule)' }));
+        out.push(h('rect', { key: `p${i}`, x: a, y: g.prior >= 0 ? zero - tall(g.prior) : yy,
+          width: barW, height: tall(g.prior), fill: 'var(--sunk)', stroke: 'var(--rule)' }));
+        out.push(h('text', { key: `pv${i}`, x: a + barW / 2, y: zero - tall(g.prior) - 5,
+          textAnchor: 'middle', fill: 'var(--faint)', fontSize: 10, fontFamily: MONO },
+        g.priorValue || ''));
       }
       if (g.missing) {
         out.push(h('rect', { key: `m${i}`, x: b, y: top, width: barW, height: floor - top,
           fill: `url(#${hatch})`, stroke: 'var(--thread)', strokeDasharray: '4 3' }));
       } else if (finite(g.now)) {
         const up = g.now >= 0;
-        out.push(h('rect', { key: `n${i}`, x: b, y: Math.min(yOf(g.now), zero), width: barW,
-          height: Math.abs(yOf(g.now) - zero) || 1, fill: up ? 'var(--up)' : 'var(--down)' }));
-        if (!up) {
-          out.push(h('text', { key: `v${i}`, x: b, y: zero - 5, fill: 'var(--down)',
-            fontSize: 10, fontFamily: MONO }, g.nowLabel || ''));
-        }
+        out.push(h('rect', { key: `n${i}`, x: b, y: up ? zero - tall(g.now) : zero, width: barW,
+          height: tall(g.now), fill: up ? 'var(--up)' : 'var(--down)' }));
+        out.push(h('text', { key: `nv${i}`, x: b + barW / 2,
+          y: up ? zero - tall(g.now) - 5 : zero + tall(g.now) + 12, textAnchor: 'middle',
+          fill: up ? 'var(--up)' : 'var(--down)', fontSize: 10, fontFamily: MONO },
+        g.nowValue || ''));
       }
       out.push(h('text', { key: `la${i}`, x: a + barW / 2, y: height - 8, textAnchor: 'middle',
         fill: 'var(--faint)', fontSize: 10, fontFamily: MONO }, g.priorLabel || ''));
