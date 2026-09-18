@@ -4307,6 +4307,10 @@
     "meaning": "Official trade balance figures show divergent momentum across export and import sectors, leading equities in export-focused industries to decouple from domestic consumer and import-reliant equities.",
     "meaning_ar": "تُظهر بيانات الميزان التجاري تفاوتًا في أداء قطاعي الصادرات والواردات، مما يؤدي إلى تباين في حركة أسهم الشركات المعتمدة على التصدير مقارنة بأسهم القطاعات الاستهلاكية وتلك المعتمدة على الاستيراد."
   },
+  "تباين اداء الاسهم اليابانيه عقب قرار رفع الفايده": {
+    "meaning": "An interest rate hike alters capital costs and exchange rates, which redistributes market liquidity unevenly between export-driven companies affected by currency appreciation and domestic financial institutions operating with wider lending margins.",
+    "meaning_ar": "يؤدي رفع أسعار الفائدة إلى تغيير تكلفة رأس المال وسعر الصرف، مما يعيد توزيع السيولة النقدية بصورة متباينة بين الشركات التصديرية المتأثرة بارتفاع العملة المحلية والمؤسسات المالية التي تعمل بهوامش إقراض أوسع."
+  },
   "تباين الاسهم الامريكيه عقب صدور تقرير الوظايف": {
     "meaning": "Official employment data provides data points on labor market tightness, causing equity sectors to trade in diverging directions based on their varying sensitivities to benchmark interest rate trajectories.",
     "meaning_ar": "توفر بيانات التوظيف الرسمية مؤشرات حول مرونة سوق العمل، مما يؤدي إلى تباين أداء القطاعات في أسواق الأسهم وفقاً لدرجة تأثر كل قطاع باتجاهات أسعار الفائدة."
@@ -4423,6 +4427,10 @@
   "تراجع الاسهم الامريكيه في المستهل مع ترقب بيانات التضخم": {
     "meaning": "Equity prices adjust downward at the market open as market participants reprice assets to reflect interest rate sensitivities ahead of macroeconomic inflation releases.",
     "meaning_ar": "تتراجع أسعار الأسهم عند افتتاح جلسة التداول مع قيام المتعاملين بإعادة تسعير الأصول وفقاً لمحددات أسعار الفائدة قبيل صدور بيانات التضخم الاقتصادية."
+  },
+  "تراجع الاسهم الاوروبيه عقب صدور بيانات اقتصاديه": {
+    "meaning": "Weak economic indicators prompt asset repricing across equity markets as market participants adjust valuation models to reflect lower activity levels.",
+    "meaning_ar": "تؤدي البيانات الاقتصادية الضعيفة إلى إعادة تسعير الأصول في أسواق الأسهم مع تعديل نماذج التقييم لتعكس تراجع مستويات النشاط الاقتصادي."
   },
   "تراجع الاسهم الاوروبيه في الختام بعد قرار رفع الفايده": {
     "meaning": "Higher benchmark interest rates raise borrowing costs for corporations and discount the present value of future cash flows in equity valuation models.",
