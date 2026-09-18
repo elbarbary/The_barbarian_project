@@ -32,6 +32,15 @@
 </head>
 <body data-signed="no">
 
+<!-- Says plainly what is on screen, because an invented market that does not
+     announce itself is a fabricated financial figure. It is NOT the welcome
+     pop-up below: that one sells the site and can be dismissed, and a reader
+     who dismisses it is still reading a made-up market. shell.css shows this
+     strip only while `body[data-signed="no"]`, and nothing hides it. -->
+<div id="demo-note" class="demo-note">
+  <p><strong id="demo-note-lead"></strong> <span id="demo-note-body"></span></p>
+</div>
+
 <!-- Live Ticker Tape Header -->
 <div id="ticker-tape" class="ticker-tape" aria-label="Market Ticker">
   <div class="ticker-track" id="ticker-track"></div>
@@ -52,6 +61,7 @@
       </div>
       <h2 id="gate-lead" class="gate-lead">بلومبرج البورصة المصرية... مجاناً لكل مستثمر</h2>
       <p id="gate-body" class="gate-body">إفصاحات الشركات الحقيقية فور إيداعها، رادار صفقات الداخليين، ومؤشر أعباء الديون والسيولة. بدون اشتراكات.</p>
+      <p id="gate-demo" class="gate-demo">حتى تسجّل الدخول، كل رمز وسعر ورقم على هذه الصفحة مُختلَق للعرض التجريبي.</p>
       <div class="gate-actions">
         <button type="button" id="gate-hero-cta" class="gate-hero-btn">
           <span id="gate-hero-cta-text">ابدأ المتابعة مجاناً (جوجل أو البريد)</span>
@@ -96,23 +106,20 @@
       <div class="story-config">
         <div class="story-field">
           <label for="story-select">السهم أو المؤشر:</label>
-          <select id="story-select">
-            <option value="EGX30">مؤشر EGX 30</option>
-            <option value="COMI" selected>البنك التجاري الدولي (COMI)</option>
-            <option value="TMGH">مجموعة طلعت مصطفى (TMGH)</option>
-            <option value="SWDY">السويدي إلكتريك (SWDY)</option>
-            <option value="ABUK">أبو قير للأسمدة (ABUK)</option>
-            <option value="GOLD21">الذهب عيار 21 بمصر</option>
-            <option value="USDEGP">سعر الدولار الرسمي (USD/EGP)</option>
-          </select>
+          <!-- Filled from the reader's own market data by `fillStorySelect`,
+               so the picker can never offer a card this site has no close for. -->
+          <select id="story-select"></select>
         </div>
         <div class="story-field">
           <label for="story-tag">شارة الإشارة:</label>
-          <input type="text" id="story-tag" value="⚡ إفصاح عاجل وتحديث مالي" />
+          <input type="text" id="story-tag" value="📊 إغلاق الجلسة" />
         </div>
         <div class="story-field">
           <label for="story-note">ملاحظة التحليل:</label>
-          <input type="text" id="story-note" value="ارتفاع حجم التداول وتأكيد المركز المالي الآمن للشركة." />
+          <!-- Empty by default: the shipped default asserted a "safe financial
+               position" for whichever company was picked. Whatever a reader
+               types here is their own sentence, not this site's reading. -->
+          <input type="text" id="story-note" value="" placeholder="اكتب ملاحظتك (اختياري)" />
         </div>
         <div class="story-buttons">
           <button type="button" id="story-dl-btn" class="story-btn-primary">

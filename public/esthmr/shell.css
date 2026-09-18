@@ -2,6 +2,37 @@
    and the sign-in sheet. The screens themselves are styled entirely by design.css. */
 
 /* ── LIVE TICKER TAPE HEADER ───────────────────────── */
+/* The demo disclosure, above everything, for as long as the reader is signed
+   out. Hidden HERE, by the signed-in state on <body>, and not by the `hidden`
+   attribute: `[hidden] { display: none }` is only a user-agent rule and any
+   author rule beats it — which is how the old banner once stayed on screen
+   over real data. The welcome pop-up can be dismissed; this cannot, because a
+   made-up market that stops announcing itself is a fabricated financial
+   figure. */
+.demo-note {
+  position: sticky; top: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; flex-wrap: wrap;
+  padding: 8px 18px;
+  background: #1B1917; color: #F5F1EC;
+  font: 400 13px/1.45 "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  text-align: center;
+}
+.demo-note p { margin: 0; max-width: 74ch; }
+.demo-note strong { color: #86CFD2; font-weight: 600; }
+body[data-signed="yes"] .demo-note { display: none; }
+/* The strip takes the top edge; the tape sits under it. Its height is measured
+   rather than assumed: the sentence wraps to two lines on a phone, and a fixed
+   offset put the tape over the words. */
+body[data-signed="no"] .ticker-tape { top: var(--demo-note-h, 54px); }
+/* Said in the pop-up too, before anyone dismisses it. */
+.gate-demo {
+  margin: 10px 0 0; padding: 8px 12px; border-radius: 10px;
+  background: rgba(134, 207, 210, .10); border: 1px solid rgba(134, 207, 210, .35);
+  color: var(--ink, #EDF4FA); font-size: 12.5px; line-height: 1.5;
+}
+body[data-signed="yes"] .gate-demo { display: none; }
+
 .ticker-tape {
   position: sticky; top: 0; z-index: 55;
   width: 100%; height: 38px;

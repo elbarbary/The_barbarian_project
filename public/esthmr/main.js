@@ -53,6 +53,9 @@ const CHROME = {
     signIn: 'Sign in with email',
     signOut: 'Sign out',
     storyPill: '📱 Story',
+    demoLead: 'You are looking at an invented market.',
+    demoBody: 'Every ticker, price and figure below is made up for the demo.'
+      + ' Sign in to read what companies actually filed.',
   },
   ar: {
     eyebrow: 'البورصة المصرية · معلومات مالية فورية',
@@ -67,24 +70,107 @@ const CHROME = {
     signIn: 'سجّل الدخول بالبريد',
     signOut: 'تسجيل الخروج',
     storyPill: '📱 ستوري',
+    demoLead: 'أنت تنظر إلى سوق مُتخيَّلة.',
+    demoBody: 'كل رمز وسعر ورقم بالأسفل مُختلَق للعرض التجريبي.'
+      + ' سجّل الدخول لتقرأ ما أفصحت عنه الشركات فعلاً.',
   },
 };
 
 /* ── LIVE TICKER TAPE DEFAULTS ──────────────────────── */
-const TICKER_DEFAULTS = [
-  { id: 'EGX30', sym: 'EGX 30', symAr: 'إيجي إكس 30', val: '55,664.80', chg: '-1.09%', up: false },
-  { id: 'EGX70', sym: 'EGX 70', symAr: 'إيجي إكس 70', val: '21,192.70', chg: '-0.98%', up: false },
-  { id: 'USD', sym: 'USD / EGP', symAr: 'الدولار الرسمي', val: '51.34', chg: '0.00%', flat: true },
-  { id: 'GOLD21', sym: 'Gold 21k', symAr: 'ذهب عيار 21', val: '6,282.5 ج.م', chg: '+0.45%', up: true },
-  { id: 'COMI', sym: 'COMI (CIB)', symAr: 'التجاري الدولي (COMI)', val: '88.50 ج.م', chg: '+1.15%', up: true },
-  { id: 'TMGH', sym: 'TMGH', symAr: 'طلعت مصطفى (TMGH)', val: '68.20 ج.م', chg: '+2.40%', up: true },
-  { id: 'GOLD24', sym: 'Gold 24k', symAr: 'ذهب عيار 24', val: '7,180.0 ج.م', chg: '+0.45%', up: true },
-  { id: 'SWDY', sym: 'SWDY', symAr: 'السويدي (SWDY)', val: '49.50 ج.م', chg: '+0.80%', up: true },
-  { id: 'EUR', sym: 'EUR / EGP', symAr: 'اليورو', val: '59.57', chg: '0.00%', flat: true },
-  { id: 'BRENT', sym: 'Brent Crude', symAr: 'نفط برنت', val: '$100.05', chg: '-2.37%', up: false },
-  { id: 'SP500', sym: 'S&P 500', symAr: 'ستاندرد آند بورز', val: '7,656.98', chg: '+0.86%', up: true },
+/* ── WHAT THE TAPE AND THE STORY CARDS MAY SAY ───────
+ *
+ * Every number either of them shows is read from a document this site
+ * published: `/data/v1/rates/latest.json` for the indices, the pound, gold and
+ * the world's markets, and the reader's own loaded market data for a company.
+ * None is written here.
+ *
+ * The tape shipped with prices built into the source — EGX 30 at 55,664.80,
+ * COMI at 88.50 +1.15%, TMGH at 68.20, SWDY at 49.50 — shown before any fetch
+ * and, for the three companies, never replaced by one. The story card carried
+ * the same invented prices plus invented lines of its own ("0.14 (very safe)",
+ * "major shareholders buying") under the heading "the official trading
+ * session", with a download button for Instagram. An invented figure about a
+ * named company is the one mistake this project has already made once, and it
+ * is not shipped again — so the rows below carry labels only, and a row with
+ * no value is left out of the tape rather than filled in.
+ */
+const TICKER_ROWS = [
+  { id: 'EGX30', sym: 'EGX 30', symAr: 'إيجي إكس 30' },
+  { id: 'EGX70', sym: 'EGX 70', symAr: 'إيجي إكس 70' },
+  { id: 'USD', sym: 'USD / EGP', symAr: 'الدولار الرسمي' },
+  { id: 'EUR', sym: 'EUR / EGP', symAr: 'اليورو' },
+  { id: 'GOLD21', sym: 'Gold 21k', symAr: 'ذهب عيار 21' },
+  { id: 'GOLD24', sym: 'Gold 24k', symAr: 'ذهب عيار 24' },
+  { id: 'BRENT', sym: 'Brent Crude', symAr: 'نفط برنت' },
+  { id: 'SP500', sym: 'S&P 500', symAr: 'ستاندرد آند بورز' },
 ];
-var currentTickerData = [...TICKER_DEFAULTS];
+/* The companies the tape carries when the reader's own market data holds them.
+   Names come from that data too, so a renamed company is not renamed here. */
+const TICKER_COMPANIES = ['COMI', 'TMGH', 'SWDY', 'ABUK'];
+
+const fin = (v) => typeof v === 'number' && Number.isFinite(v);
+const signed = (pct) => (pct >= 0 ? '+' : '\u2212') + Math.abs(pct).toFixed(2) + '%';
+const level = (v, places = 2) => Number(v).toLocaleString('en-US', { minimumFractionDigits: places, maximumFractionDigits: places });
+
+/** The reader's own market data, or null while it is the signed-out demo:
+ *  the demo's DEMO01..DEMO16 are invented and may not leave the screen. */
+function realMarket() {
+  const d = (typeof component !== 'undefined' && typeof component.data === 'function') ? component.data() : null;
+  return d && !d.demo && Array.isArray(d.companies) && d.companies.length ? d : null;
+}
+
+/** One row per company the tape names and the data holds, from its own close. */
+function companyRows() {
+  const d = realMarket();
+  if (!d) return [];
+  const held = new Map(d.companies.map((c) => [c.ticker, c]));
+  return TICKER_COMPANIES.map((ticker) => {
+    const c = held.get(ticker);
+    if (!c || !fin(c.close) || !fin(c.pct)) return null;
+    return { id: ticker, sym: `${ticker}`, symAr: `${c.name && c.name.ar ? c.name.ar : ticker} (${ticker})`,
+             val: `${level(c.close)} ج.م`, chg: signed(c.pct), up: c.pct > 0, flat: c.pct === 0 };
+  }).filter(Boolean);
+}
+
+/** The published rates file, as tape rows. Anything it does not carry is left out. */
+function rateRows(d) {
+  const find = (list, key, value) => (Array.isArray(list) ? list.find((x) => x[key] === value) : null);
+  const gold = find(d.metals, 'id', 'XAU');
+  const karat = (k) => (gold && Array.isArray(gold.karats) ? gold.karats.find((x) => x.karat === k) : null);
+  const move = (row, source) => (source && fin(source.change_percent)
+    ? { ...row, chg: signed(source.change_percent), up: source.change_percent > 0, flat: source.change_percent === 0 }
+    : row);
+  const values = {
+    EGX30: () => { const i = find(d.indices, 'id', 'EGX30'); return i && fin(i.level) ? move({ val: level(i.level) }, i) : null; },
+    EGX70: () => { const i = find(d.indices, 'id', 'EGX70EWI'); return i && fin(i.level) ? move({ val: level(i.level) }, i) : null; },
+    USD: () => { const c = find(d.currencies, 'code', 'USD'); return c && fin(c.egp) ? { val: level(c.egp) } : null; },
+    EUR: () => { const c = find(d.currencies, 'code', 'EUR'); return c && fin(c.egp) ? { val: level(c.egp) } : null; },
+    GOLD21: () => { const k = karat(21); return k && fin(k.egp_gram) ? { val: `${level(k.egp_gram, 1)} ج.م` } : null; },
+    GOLD24: () => { const k = karat(24); return k && fin(k.egp_gram) ? { val: `${level(k.egp_gram, 1)} ج.م` } : null; },
+    BRENT: () => { const w = find(d.world, 'id', 'NYMEX_CL1!'); return w && fin(w.level) ? move({ val: `$${level(w.level)}` }, w) : null; },
+    SP500: () => { const w = find(d.world, 'id', 'SP_SPX'); return w && fin(w.level) ? move({ val: level(w.level) }, w) : null; },
+  };
+  return TICKER_ROWS.map((row) => {
+    const value = values[row.id] ? values[row.id]() : null;
+    return value ? { ...row, chg: '', flat: true, ...value } : null;
+  }).filter(Boolean);
+}
+
+/* Empty until a document says otherwise, and the tape stays hidden that long. */
+var currentTickerData = [];
+var tickerRates = null;
+
+/** How tall the disclosure strip is, for the tape that sits under it. The
+ *  sentence wraps to two lines on a phone, so this is measured, not assumed. */
+function measureDemoNote() {
+  const note = document.getElementById('demo-note');
+  if (!note || typeof note.getBoundingClientRect !== 'function') return;
+  const height = Math.round(note.getBoundingClientRect().height);
+  if (height > 0) document.documentElement.style.setProperty('--demo-note-h', `${height}px`);
+}
+if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
+  window.addEventListener('resize', measureDemoNote);
+}
 
 /** Put the page itself into the reader's language, chrome and all. */
 function setChrome(lang) {
@@ -104,6 +190,12 @@ function setChrome(lang) {
   setTxt('gate-hero-cta-text', words.heroCta);
   setTxt('gate-dismiss-text', words.dismiss || (lang === 'ar' ? 'تصفح كزائر' : 'Browse as Guest'));
   setTxt('gate-trust', words.trust);
+  // The disclosure, in two places: the strip that stays, and one line inside
+  // the pop-up so it is said before anybody dismisses it.
+  setTxt('demo-note-lead', words.demoLead);
+  setTxt('demo-note-body', words.demoBody);
+  setTxt('gate-demo', `${words.demoLead} ${words.demoBody}`);
+  measureDemoNote();
   setTxt('signin', words.signIn);
   setTxt('signout', words.signOut);
   const storyBtn = document.getElementById('story-btn');
@@ -119,6 +211,10 @@ async function load(email) {
   if (!email) {
     component.setState({ dataLoading: false, dataError: false, extrasLoading: false, extrasError: false });
     component.setData(data.demo());
+    // Signed out: the tape drops its company rows and the story card is shut,
+    // because DEMO01..DEMO16 are invented and may not leave the screen.
+    refreshTicker();
+    setStoryReady();
     // The arena is public — it names no security, and a record a stranger
     // cannot fetch is not a record anybody can check — so a signed-out reader
     // sees the models on record too, over the demo's invented market.
@@ -140,6 +236,9 @@ async function load(email) {
     if (version !== loadVersion) return;
     component.setData(base);
     component.setState({ dataLoading: false });
+    // The tape and the story cards read this, and only this, for a company.
+    refreshTicker();
+    setStoryReady();
     // The rest of the screens, in parallel and each on its own: one document
     // failing should cost that screen its content, not the whole session.
     const patch = (fields) => {
@@ -677,7 +776,15 @@ pinBottomBar();
 /* ── LIVE TICKER TAPE ───────────────────────────────── */
 function renderTickerTrack(lang) {
   const track = document.getElementById('ticker-track');
-  if (!track || typeof currentTickerData === 'undefined' || !Array.isArray(currentTickerData)) return;
+  const tape = document.getElementById('ticker-tape');
+  if (!track || !Array.isArray(currentTickerData)) return;
+  if (!currentTickerData.length) {
+    // Nothing sourced yet: an empty tape, not a made-up one.
+    track.innerHTML = '';
+    if (tape) tape.hidden = true;
+    return;
+  }
+  if (tape) tape.hidden = false;
   const isAr = (lang || (typeof component !== 'undefined' && component?.state?.lang) || 'ar') === 'ar';
   
   // Double list for smooth seamless CSS loop
@@ -708,127 +815,78 @@ function updateTickerLang(lang) {
 // Initial render
 renderTickerTrack(component.state.lang);
 
-// Try updating with live rates if available
+/** Rebuild the tape from whatever is sourced right now: the rates file if it
+ *  answered, and the reader's own market data if it is loaded and real. */
+function refreshTicker() {
+  currentTickerData = [...(tickerRates ? rateRows(tickerRates) : []), ...companyRows()];
+  renderTickerTrack(typeof component !== 'undefined' ? component.state.lang : 'ar');
+}
+
 if (typeof fetch === 'function') {
   void fetch('/data/v1/rates/latest.json').then(async (res) => {
     if (!res.ok) return;
-    const d = await res.json();
-    if (d && Array.isArray(d.indices)) {
-      const egx30 = d.indices.find(i => i.id === 'EGX30');
-      const egx70 = d.indices.find(i => i.id === 'EGX70EWI');
-      const usd = d.currencies?.find(c => c.code === 'USD');
-      const gold = d.metals?.find(m => m.id === 'XAU');
-      const gold21 = gold?.karats?.find(k => k.karat === 21);
-      const gold24 = gold?.karats?.find(k => k.karat === 24);
-      const spx = d.world?.find(w => w.id === 'SP_SPX');
-      const oil = d.world?.find(w => w.id === 'NYMEX_CL1!');
-
-      const updated = [...TICKER_DEFAULTS];
-      if (egx30) {
-        const item = updated.find(i => i.id === 'EGX30');
-        if (item) {
-          item.val = Number(egx30.level).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-          item.chg = (egx30.change_percent >= 0 ? '+' : '') + egx30.change_percent.toFixed(2) + '%';
-          item.up = egx30.change_percent >= 0;
-          item.flat = egx30.change_percent === 0;
-        }
-      }
-      if (egx70) {
-        const item = updated.find(i => i.id === 'EGX70');
-        if (item) {
-          item.val = Number(egx70.level).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-          item.chg = (egx70.change_percent >= 0 ? '+' : '') + egx70.change_percent.toFixed(2) + '%';
-          item.up = egx70.change_percent >= 0;
-          item.flat = egx70.change_percent === 0;
-        }
-      }
-      if (usd) {
-        const item = updated.find(i => i.id === 'USD');
-        if (item) item.val = Number(usd.egp).toFixed(2);
-      }
-      if (gold21) {
-        const item = updated.find(i => i.id === 'GOLD21');
-        if (item) item.val = Number(gold21.egp_gram).toLocaleString('en-US') + ' ج.م';
-      }
-      if (gold24) {
-        const item = updated.find(i => i.id === 'GOLD24');
-        if (item) item.val = Number(gold24.egp_gram).toLocaleString('en-US') + ' ج.م';
-      }
-      if (spx) {
-        const item = updated.find(i => i.id === 'SP500');
-        if (item) {
-          item.val = Number(spx.level).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-          item.chg = (spx.change_percent >= 0 ? '+' : '') + spx.change_percent.toFixed(2) + '%';
-          item.up = spx.change_percent >= 0;
-        }
-      }
-      if (oil) {
-        const item = updated.find(i => i.id === 'BRENT');
-        if (item) {
-          item.val = '$' + Number(oil.level).toFixed(2);
-          item.chg = (oil.change_percent >= 0 ? '+' : '') + oil.change_percent.toFixed(2) + '%';
-          item.up = oil.change_percent >= 0;
-        }
-      }
-      currentTickerData = updated;
-      renderTickerTrack(component.state.lang);
+    const doc = await res.json();
+    if (doc && typeof doc === 'object') {
+      tickerRates = doc;
+      refreshTicker();
     }
   }).catch(() => {});
 }
 
 /* ── VIRAL STORY CARD GENERATOR ─────────────────────── */
-const STORY_INSTRUMENTS = {
-  COMI: {
-    ticker: 'COMI', nameAr: 'البنك التجاري الدولي (مصر)', nameEn: 'Commercial International Bank',
-    sectorAr: 'بنوك وخدمات مالية', price: '88.50 ج.م', chg: '+1.15%', up: true,
-    fragility: '0.14 (آمن جداً)', insider: 'شراء كبار مساهمين', liquidity: 'عالية جداً',
-  },
-  TMGH: {
-    ticker: 'TMGH', nameAr: 'مجموعة طلعت مصطفى القابضة', nameEn: 'Talaat Moustafa Group',
-    sectorAr: 'عقارات وتطوير عمراني', price: '68.20 ج.م', chg: '+2.40%', up: true,
-    fragility: '0.22 (مستقر)', insider: 'احتفاظ مجلس الإدارة', liquidity: 'مرتفعة',
-  },
-  SWDY: {
-    ticker: 'SWDY', nameAr: 'السويدي إليكتريك', nameEn: 'Elsewedy Electric',
-    sectorAr: 'منتجات صناعية وطاقة', price: '49.50 ج.م', chg: '+0.80%', up: true,
-    fragility: '0.19 (آمن)', insider: 'لا تعاملات حديثة', liquidity: 'نشطة',
-  },
-  ABUK: {
-    ticker: 'ABUK', nameAr: 'أبو قير للأسمدة والصناعات الكيماوية', nameEn: 'Abu Qir Fertilizers',
-    sectorAr: 'موارد أساسية وكيمياويات', price: '58.10 ج.م', chg: '-0.65%', up: false,
-    fragility: '0.12 (سيولة قوية)', insider: 'مستقر', liquidity: 'جيدة',
-  },
-  EGX30: {
-    ticker: 'EGX 30', nameAr: 'المؤشر الرئيسي للبورصة المصرية', nameEn: 'EGX 30 Benchmark Index',
-    sectorAr: 'أكبر 30 شركة مقيدة', price: '55,664.80', chg: '-1.09%', up: false,
-    fragility: 'مؤشر عام', insider: 'صافي شراء مؤسسات', liquidity: '3.4 مليار ج.م',
-  },
-  GOLD21: {
-    ticker: 'الذهب عيار 21', nameAr: 'عيار 21 - السوق المصري', nameEn: 'Gold 21k Cairo Market',
-    sectorAr: 'معادن وملاذ آمن', price: '6,282.5 ج.م / جرام', chg: '+0.45%', up: true,
-    fragility: 'معدن نقدي', insider: 'طلب استثماري مرتفع', liquidity: 'فورية',
-  },
-  USDEGP: {
-    ticker: 'USD / EGP', nameAr: 'سعر صرف الدولار بالبنك المركزي', nameEn: 'US Dollar Reference Rate',
-    sectorAr: 'سوق الصرف والنقد', price: '51.34 ج.م', chg: '0.00%', up: true, flat: true,
-    fragility: 'سعر مرجعي رسمي', insider: 'تدفقات تحويلات قوية', liquidity: 'متاحة بالبنوك',
-  },
-};
+/** What a story card may be made of: a company the reader's own market data
+ *  holds, with its close, its move, and the session both belong to. The three
+ *  lines the card used to carry — a fragility score, "major shareholders
+ *  buying", a liquidity word — were written into the source for six real
+ *  companies and are gone: the card now shows the volume and turnover the
+ *  exchange published beside that close, and nothing when they are missing. */
+function storyInstruments() {
+  const d = realMarket();
+  if (!d) return {};
+  const out = {};
+  for (const c of d.companies) {
+    if (!fin(c.close) || !fin(c.pct)) continue;
+    out[c.ticker] = {
+      ticker: c.ticker,
+      nameAr: (c.name && c.name.ar) || c.ticker,
+      nameEn: (c.name && c.name.en) || c.ticker,
+      sectorAr: c.sector || '',
+      price: `${level(c.close)} ج.م`,
+      chg: signed(c.pct),
+      up: c.pct > 0,
+      session: d.marketDate || null,
+      volume: fin(c.volume) ? c.volume : null,
+      turnover: fin(c.turnover) ? c.turnover : null,
+    };
+  }
+  return out;
+}
 
-function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
-  ctx.beginPath();
-  ctx.moveTo(x + radius, y);
-  ctx.lineTo(x + width - radius, y);
-  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-  ctx.lineTo(x + width, y + height - radius);
-  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-  ctx.lineTo(x + radius, y + height);
-  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-  ctx.lineTo(x, y + radius);
-  ctx.quadraticCurveTo(x, y, x + radius, y);
-  ctx.closePath();
-  if (fill) ctx.fill();
-  if (stroke) ctx.stroke();
+/** The picker carries the companies the data holds, so it can never offer a
+ *  card this site has no numbers for. */
+function fillStorySelect() {
+  const select = document.getElementById('story-select');
+  if (!select) return;
+  const held = storyInstruments();
+  const keys = Object.keys(held).sort();
+  const chosen = select.value;
+  select.innerHTML = keys.map((k) => `<option value="${k}">${held[k].nameAr} (${k})</option>`).join('');
+  if (keys.includes(chosen)) select.value = chosen;
+}
+
+/** The card is open only while there is real data to draw. Signed out, the
+ *  button says why rather than exporting the demo. */
+function setStoryReady() {
+  const btn = document.getElementById('story-btn');
+  const modal = document.getElementById('story-modal');
+  const ready = Object.keys(storyInstruments()).length > 0;
+  if (btn) {
+    btn.disabled = !ready;
+    btn.title = ready ? 'Instagram / TikTok Story Card'
+      : 'سجّل الدخول لصنع بطاقة من أرقام البورصة الحقيقية';
+  }
+  if (ready) fillStorySelect();
+  else if (modal) modal.hidden = true;
 }
 
 function drawStoryCanvas() {
@@ -841,10 +899,16 @@ function drawStoryCanvas() {
   const tagInput = document.getElementById('story-tag');
   const noteInput = document.getElementById('story-note');
 
-  const key = select ? select.value : 'COMI';
-  const data = STORY_INSTRUMENTS[key] || STORY_INSTRUMENTS.COMI;
-  const tagText = tagInput ? tagInput.value.trim() : '⚡ إفصاح عاجل وتحديث مالي';
-  const noteText = noteInput ? noteInput.value.trim() : 'تأكيد المركز المالي الآمن للشركة.';
+  const held = storyInstruments();
+  const key = (select && held[select.value]) ? select.value : Object.keys(held)[0];
+  const data = held[key];
+  if (!data) {
+    // Nothing sourced: an empty canvas rather than a card of invented numbers.
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    return;
+  }
+  const tagText = tagInput ? tagInput.value.trim() : '📊 إغلاق الجلسة';
+  const noteText = noteInput ? noteInput.value.trim() : '';
 
   const W = 1080;
   const H = 1920;
@@ -896,7 +960,7 @@ function drawStoryCanvas() {
   ctx.fillStyle = '#EDF4FA';
   ctx.font = '500 20px "IBM Plex Sans Arabic", sans-serif';
   ctx.textAlign = 'right';
-  ctx.fillText('جلسة التداول الرسمية', W - 120, 150);
+  ctx.fillText(data.session ? `إغلاق ${data.session}` : 'إغلاق البورصة المصرية', W - 120, 150);
   ctx.restore();
 
   // Main Card Container
@@ -963,10 +1027,10 @@ function drawStoryCanvas() {
   const badgeY = cardY + 720;
   const badgeH = 150;
   const badges = [
-    { label: '🛡️ مؤشر الهشاشة والديون', val: data.fragility },
-    { label: '🔍 تعاملات كبار المساهمين', val: data.insider },
-    { label: '📊 نشاط السيولة والتداول', val: data.liquidity },
-  ];
+    data.session ? { label: '📅 جلسة الإغلاق', val: data.session } : null,
+    data.volume ? { label: '📊 حجم التداول (سهم)', val: Number(data.volume).toLocaleString('en-US') } : null,
+    data.turnover ? { label: '💵 قيمة التداول (ج.م)', val: Number(data.turnover).toLocaleString('en-US', { maximumFractionDigits: 0 }) } : null,
+  ].filter(Boolean);
 
   badges.forEach((b, i) => {
     const by = badgeY + i * (badgeH + 20);
@@ -1013,7 +1077,8 @@ function openStoryModal(instrumentKey) {
   const modal = document.getElementById('story-modal');
   const select = document.getElementById('story-select');
   if (!modal) return;
-  if (instrumentKey && select && STORY_INSTRUMENTS[instrumentKey]) {
+  fillStorySelect();
+  if (instrumentKey && select && storyInstruments()[instrumentKey]) {
     select.value = instrumentKey;
   }
   modal.hidden = false;
@@ -1033,7 +1098,8 @@ function initStoryModal() {
 
   if (!modal || !btn) return;
 
-  btn.onclick = () => openStoryModal();
+  setStoryReady();
+  btn.onclick = () => { if (!btn.disabled) openStoryModal(); };
   if (close) close.onclick = () => { modal.hidden = true; };
   if (scrim) scrim.onclick = () => { modal.hidden = true; };
 

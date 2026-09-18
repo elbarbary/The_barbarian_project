@@ -1273,9 +1273,15 @@ export async function syncFromResend(env, ctx) {
   };
 }
 
+/* The addresses that may read the user list from a signed-in session.
+ *
+ * `elbarbary@auceypt.edu` was on this list beside the real `aucegypt.edu` one
+ * — a typo of a domain nobody here owns. Anyone who registered it could have
+ * signed in with that address and been handed every reader's email, because
+ * the check below is by address alone. A misspelling is not a second account:
+ * it is a door with the key left in a domain registrar. */
 export const SUPER_ADMIN_EMAILS = new Set([
   'elbarbary@aucegypt.edu',
-  'elbarbary@auceypt.edu',
   'barbary@yozo.ai',
 ]);
 
