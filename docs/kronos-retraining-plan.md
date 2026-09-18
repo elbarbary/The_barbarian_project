@@ -36,7 +36,31 @@ lab changes until stage 3.
   percentile −9.5%, 90th +6.3%, 42 of 114 above zero, against 8 of 114 for
   the original). Scaling a training window with its own future was the cause.
 - **Stage 2 runs on the owner's Pop!_OS box** (RTX 3060, CUDA), not the Mac:
-  43 minutes an epoch there was 30 epochs of a working day.
+  43 minutes an epoch there was 30 epochs of a working day. The box holds the
+  same frozen candles; the original weights scored 3.46011 there against
+  3.460098 on the Mac, so the two machines are the same experiment.
+- **Full training, 18 Sep, 13:22–14:57 UTC.** 211 windows a second; ten epochs
+  of 2,000 steps × 50 windows. Early stopping ended it at epoch 10 under the
+  preregistered patience of 3. The kept checkpoint is **epoch 7**, validation
+  loss **2.876661** against the original's **3.46011**. Epochs 5, 6 and 7 sit
+  within 0.0005 of each other and 8–10 drift back up, so the run converged
+  rather than being cut off. `data-source/lab/retrain/full/metrics.json`.
+- **The stage 1 measures, re-read on the kept checkpoint** (same 23 origins,
+  same 120 companies, `full/eval-kronos-egx.json`): pull at 20 sessions
+  **−0.0689**, steady rise **+0.64%**. The original pulled above +0.95 at
+  every one of the 23 origins; the retrained model is inside ±0.5 at all 23
+  (−0.493 to +0.072). This is a like-for-like reading against the original and
+  the pilot — but **it is not held out**: early stopping chose epoch 7 using a
+  validation loss computed from 2024 windows, and these origins are 2024.
+- **Stage 2 frozen 18 Sep, 15:20 UTC, before a single test origin was read**
+  (`data-source/lab/retrain/test/test-preregistration.json`): 72 origins,
+  every 5th session from 2 Jan 2025 to 29 Jun 2026; all 258 companies asked,
+  225 scorable at the median origin; the checkpoint pinned by SHA-256
+  (`9a3e0e24…0734cd`); the two Kronos variants and the lab's six baselines;
+  and the pass rule copied from this plan. Rank IC, the summary and the paired
+  comparison are imported from `scripts/lab/score.py` — the same code that
+  marks every published night — and the baselines are `scripts/lab/forecast.py`
+  unchanged, given the same 90 candles Kronos gets.
 
 ## Why
 
