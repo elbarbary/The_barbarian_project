@@ -6,20 +6,20 @@
  "warning": false,
  "score": 0.8376,
  "alertLine": 0.93,
- "engineInternal": 0.7245,
+ "engineInternal": 0.6512,
  "engineExternal": 0.8376,
  "stressGroups": 2,
  "stressGroupsOf": 7,
  "transmission": true,
- "outside": 0.35,
+ "outside": 0.32,
  "gold": 0.0,
  "oil": 0.58,
- "swings": 0.75,
+ "swings": 0.57,
  "vol20": 11.7,
  "volBrakeActive": false,
  "rulePercent": 100.0,
  "equityPercent": 100.0,
- "partialPercent": 37.3,
+ "partialPercent": 36.1,
  "sessions": [
   {
    "date": "2026-09-10",
@@ -71,7 +71,7 @@
    "egx30": 55498.72,
    "score": 0.8376,
    "warning": false,
-   "outside": 0.35,
+   "outside": 0.32,
    "rulePercent": 100.0,
    "equityPercent": 100.0
   }
@@ -95,7 +95,7 @@
   "south_africa_top40": "2026-09-17",
   "brazil_bovespa": "2026-09-17",
   "gold": "2026-09-17",
-  "ovx": "2026-09-16",
+  "ovx": "2026-09-17",
   "gold_oil_ratio": "2026-09-17",
   "brent_realized_vol20": "2026-09-17"
  },
