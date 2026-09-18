@@ -4804,6 +4804,10 @@
     "meaning": "Digitizing Ministry of Labor clearance inquiries standardizes regulatory compliance verification for corporate administrative workflows and labor audit processes.",
     "meaning_ar": "تُمكّن خدمة الاستعلام الإلكتروني عن المخالصة من ميكنة إجراءات التحقق من الامتثال التنظيمي للشركات ومطابقتها للمعايير العمالية المقررة."
   },
+  "تعرف علي خطوات تسجيل الشركات الغذاييه للمشاركه في المعارض الدوليه": {
+    "meaning": "The registration process establishes the operational and regulatory framework for domestic food manufacturers to list their products in cross-border trade exhibitions under export council oversight.",
+    "meaning_ar": "تحدد إجراءات التسجيل الإطار التنظيمي والتشغيلي الذي يتيح لشركات الصناعات الغذائية المحلية عرض منتجاتها في المعارض التجارية الخارجية تحت إشراف المجالس التصديرية."
+  },
   "تعرف علي خطوات قيد الشركات الغذاييه في سجل المصدرين": {
     "meaning": "Registration in the exporters' registry establishes the legal and regulatory compliance required for food companies to clear customs and execute cross-border sales under the General Organization for Export and Import Control (GOEIC) rules.",
     "meaning_ar": "يُعد القيد في سجل المصدرين إجراءً تنظيمياً إلزامياً يمنح شركات الصناعات الغذائية الصلاحية القانونية للتخليص الجمركي وإتمام عمليات التصدير وفق ضوابط الهيئة العامة للرقابة على الصادرات والواردات."
@@ -6916,6 +6920,10 @@
   "كيف تحصل علي فرصه من وزاره العمل؟.. خطوات التسجيل والتقديم": {
     "meaning": "The Ministry of Labor operates a centralized labor intermediation mechanism that registers job seekers and coordinates their placement into verified vacancies across private and public sector entities.",
     "meaning_ar": "تمثل هذه الإجراءات آلية وساطة في سوق العمل تديرها وزارة العمل لتسجيل طالبي الوظائف ومطابقتهم مع الشواغر المتاحة لدى منشآت القطاعين العام والخاص."
+  },
+  "كيف تستفيد الشركات الصغيره والمتوسطه من برامج دعم صادرات الصناعات الغذاييه؟": {
+    "meaning": "Export rebate programs for the food processing sector disburse direct cash subsidies or tariff refunds based on documented shipping volumes, offsetting cross-border logistics and compliance costs for small and medium-sized manufacturers.",
+    "meaning_ar": "توفر برامج دعم الصادرات لقطاع الصناعات الغذائية مساندة نقدية مباشرة أو ردًا للأعباء الجمركية وفقًا لحجم الشحنات الموثقة، مما يغطي تكاليف الشحن والامتثال للمواصفات الخارجية لدى الشركات الصغيرة والمتوسطة."
   },
   "كيف تستفيد الشركات الغذاييه من خدمات المجلس التصديري؟": {
     "meaning": "The Export Council provides food manufacturing companies with international trade missions, market intelligence, compliance guidelines for foreign standards, and logistics coordination under state export rebate frameworks.",
