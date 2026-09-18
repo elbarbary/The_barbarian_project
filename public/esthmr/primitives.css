@@ -1,0 +1,173 @@
+/* The redesign's component layer. Tokens live in `design.css`; this file owns
+ * nothing but the shapes in `primitives.js`.
+ *
+ * Every rule is prefixed `#app`, because the shell's own
+ * `#app button { color: inherit; font: inherit }` and its `h1`/`h2` rules
+ * carry `!important` and would otherwise win against a bare component class.
+ * That is a fact about this site, not a preference.
+ */
+
+/* ── the dateline ─────────────────────────────────────────────────────── */
+#app .pv-dateline {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 11.5px; color: var(--faint); margin-bottom: 12px;
+}
+
+#app .pv-rule { height: 1px; background: var(--rule); margin: 12px 0; }
+
+#app .pv-nothing {
+  font-size: 13.5px; color: var(--t2); line-height: 1.5;
+  padding: 18px 0; text-align: center;
+}
+
+#app .pv-note {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 10.5px; color: var(--faint); margin-top: 8px; line-height: 1.5;
+}
+
+#app .pv-svg { display: block; width: 100%; }
+
+/* A figure inside Arabic prose. `unicode-bidi: isolate` is what keeps a
+ * minus sign attached to its own number instead of drifting to the end of
+ * the sentence, where it reads as belonging to the next figure. */
+#app .pv-figure {
+  font-family: 'IBM Plex Mono', monospace;
+  direction: ltr; unicode-bidi: isolate;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── evidence chip ────────────────────────────────────────────────────── */
+#app .pv-chip {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 13px; line-height: 1.5;
+  color: var(--faint); background: var(--sunk);
+  border: 1px solid var(--rule); border-radius: var(--radius-control);
+  padding: 8px 12px; min-height: 44px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px;
+  text-decoration: none;
+}
+#app a.pv-chip:hover { border-color: var(--accent); color: var(--accent); }
+#app a.pv-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#app .pv-chip-lead {
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+#app .pv-chip-source { white-space: nowrap; }
+
+/* The six states, on the chip. Each is a different colour AND a different
+ * edge, so the difference survives a greyscale print and a colour-blind
+ * reader — which "stale vs unchanged" did not, when both were grey. */
+#app .pv-chip[data-state="stale"] {
+  color: var(--stStale); border-style: dashed;
+}
+#app .pv-chip[data-state="estimated"] {
+  color: var(--stEstimated); border-color: var(--stEstimated); background: transparent;
+}
+#app .pv-chip[data-state="didNotTrade"] {
+  color: var(--stNone);
+  background: repeating-linear-gradient(135deg,
+    var(--hatch) 0 6px, var(--hatchBg) 6px 12px);
+}
+#app .pv-chip[data-state="unavailable"] { opacity: .85; font-style: italic; }
+
+/* ── the state vocabulary swatch ──────────────────────────────────────── */
+#app .pv-state {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 14px; border-radius: var(--radius-control); background: var(--sunk);
+}
+#app .pv-state-swatch {
+  height: 52px; border-radius: var(--radius-control);
+  border: 1px solid var(--rule); background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: var(--ink);
+}
+#app .pv-state-ar { font-size: 15px; font-weight: 600; }
+#app .pv-state-en {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: .09em; color: var(--faint);
+}
+#app .pv-state-stale .pv-state-swatch { border-style: dashed; color: var(--stStale); }
+#app .pv-state-estimated .pv-state-swatch { border-color: var(--stEstimated); color: var(--stEstimated); }
+#app .pv-state-didNotTrade .pv-state-swatch {
+  color: var(--stNone);
+  background: repeating-linear-gradient(135deg,
+    var(--hatch) 0 6px, var(--hatchBg) 6px 12px);
+}
+#app .pv-state-unavailable .pv-state-swatch { color: var(--faint); }
+
+/* ── density switch ───────────────────────────────────────────────────── */
+#app .pv-density {
+  display: inline-flex; gap: 3px; padding: 3px;
+  background: var(--sunk); border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+}
+#app .pv-density-tab {
+  cursor: pointer; border: 0; border-radius: 10px;
+  padding: 9px 14px; min-height: 40px;
+  background: transparent; color: var(--t2);
+  font-size: 14px; font-weight: 400;
+}
+#app .pv-density-tab[aria-pressed="true"] {
+  background: var(--surface); color: var(--ink); font-weight: 600;
+}
+#app .pv-density-tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* ── share bar ────────────────────────────────────────────────────────── */
+#app .pv-share-bar {
+  display: flex; height: 34px; border-radius: 8px; overflow: hidden;
+  border: 1px solid var(--rule);
+}
+#app .pv-share-part { height: 100%; }
+/* The remainder is hatched, never a flat grey. A flat grey block sits in the
+ * bar looking like a fourth holder; a texture reads as "not known". */
+#app .pv-share-rest {
+  height: 100%;
+  background: repeating-linear-gradient(135deg,
+    var(--hatch) 0 6px, var(--hatchBg) 6px 12px);
+}
+#app .pv-share-keys {
+  display: flex; flex-wrap: wrap; gap: 8px 12px; margin-top: 10px;
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 11px; color: var(--t2);
+}
+#app .pv-share-key { display: inline-flex; align-items: center; gap: 6px; }
+#app .pv-share-key i {
+  width: 10px; height: 10px; border-radius: 2px; display: inline-block;
+  border: 1px solid var(--rule);
+}
+#app .pv-share-key-rest i {
+  background: repeating-linear-gradient(135deg,
+    var(--hatch) 0 3px, var(--hatchBg) 3px 6px);
+}
+
+/* ── skeletons ────────────────────────────────────────────────────────── */
+#app .pv-skel {
+  border: 1px solid var(--rule); border-radius: var(--radius-island);
+  padding: 18px; display: flex; flex-direction: column; gap: 12px;
+}
+#app .pv-skel-line { height: 12px; border-radius: 4px; background: var(--rule2); }
+#app .pv-skel-strong { height: 20px; border-radius: 5px; background: var(--rule); }
+#app .pv-skel-plot {
+  height: 104px; border-radius: var(--radius-control);
+  background: repeating-linear-gradient(135deg,
+    var(--hatchBg) 0 7px, transparent 7px 14px);
+}
+#app .pv-skel-row {
+  height: 56px; border-radius: var(--radius-control);
+  background: var(--sunk); border: 1px solid var(--rule2);
+}
+#app .pv-skel-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 9px 14px; }
+#app .pv-skel-cell { height: 11px; border-radius: 3px; background: var(--rule2); }
+
+/* The skeleton does not pulse. An animated placeholder reads as work in
+ * progress even after the request has failed, and this product would rather
+ * say "unavailable" than imply it is still trying. */
+@media (prefers-reduced-motion: reduce) {
+  #app .pv-skel * { animation: none !important; }
+}
+
+/* ── phone ────────────────────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  #app .pv-chip { font-size: 12.5px; }
+  #app .pv-share-keys { font-size: 10.5px; }
+  #app .pv-density-tab { padding: 9px 12px; }
+}

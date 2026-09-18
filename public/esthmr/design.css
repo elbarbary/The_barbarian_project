@@ -21,6 +21,19 @@
     --sh:none;--shLift:none;--shPill:none;
     --activeBg:rgba(27,25,23,.05);
     --radius-island:20px;--radius-control:12px;
+    /* The redesign's component layer (`primitives.js`). A pressed accent, and
+       the six data states — each one a fill, an edge and an ink, because the
+       whole point of the vocabulary is that they are told apart by shape and
+       texture rather than by a shade a reader has to remember. `--hatch` is
+       the stripe used for "did not trade" and for an unknown remainder: a
+       texture reads as absence where a flat grey reads as a value. */
+    --accentPress:#0E555D;
+    /* Share bars need a THIRD and FOURTH step that are still visible on
+       --surface. --accTint/--irisTint are 10% and vanish; these are the same
+       two hues at a strength a reader can actually see a boundary at. */
+    --accMid:rgba(18,107,117,.38);--irisMid:rgba(83,104,163,.38);
+    --hatch:rgba(27,25,23,.16);--hatchBg:rgba(27,25,23,.04);
+    --stStale:#607487;--stEstimated:#5368A3;--stNone:#8E857D;
     /* Home's mosaic and island tints, moved here with the rest of the palette. */
     --mosaic-up:#DCE9E0;--mosaic-up-ink:#2C5B44;--mosaic-down:#F3DFDA;--mosaic-down-ink:#8A3527;
     --island-peach:#E3EEF5;--island-mint:#E4F0EC;
@@ -55,6 +68,10 @@
     --sh:none;--shLift:none;--shPill:none;
     --activeBg:rgba(240,235,229,.09);
     --radius-island:20px;--radius-control:12px;
+    --accentPress:#A8E0E2;
+    --accMid:rgba(134,207,210,.42);--irisMid:rgba(167,184,235,.42);
+    --hatch:rgba(240,235,229,.20);--hatchBg:rgba(240,235,229,.05);
+    --stStale:#9BADBE;--stEstimated:#A7B8EB;--stNone:#8E857D;
     /* Lifted for the dark ground: the light set reads as mud at 12% opacity
        over #111D29, and these are the same six hues taken up in value. */
     --own1:#86CFD2;--own2:#A7B8EB;--own3:#D8A46B;--own4:#D3A0C6;--own5:#8FC2DC;--own6:#C6BE6A;
