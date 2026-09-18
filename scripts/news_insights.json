@@ -5172,6 +5172,10 @@
     "meaning": "The proposed framework establishes a debt or blended finance mechanism between the European Bank for Reconstruction and Development and Egyptian authorities to fund utility infrastructure—including power, water, and road networks—for industrial zones, shifting the capital expenditure burden from developer balance sheets to a structured institutional facility.",
     "meaning_ar": "يحدد هذا التصور آلية تمويل مؤسسية مشتركة بين البنك الأوروبي لإعادة الإعمار والتنمية والجهات الحكومية لتمويل شبكات المرافق والخدمات الأساسية في المناطق الصناعية، مما ينقل عبء الإنفاق الرأسمالي لتجهيز البنية التحتية إلى برنامج تمويلي مخصص."
   },
+  "خام الحديد يتجه لتحقيق مكاسب اسبوعيه رغم ضعف الطلب الصيني": {
+    "meaning": "Weekly price gains in iron ore alongside weak Chinese demand reflect market movements driven by supply-side dynamics, such as mining output constraints and shipment volumes, or shifts in trader inventory holding rather than downstream consumption.",
+    "meaning_ar": "تعكس المكاسب الأسبوعية لأسعار خام الحديد في ظل ضعف الطلب الصيني تحركات مدفوعة بعوامل العرض، مثل قيود الإنتاج في المناجم وأحجام الشحن، أو تغيرات في مستويات المخزون لدى المتداولين بمعزل عن معدلات الاستهلاك الفعلي."
+  },
   "خام الحديد يتجه لتسجيل اكبر خساره اسبوعيه منذ يونيو": {
     "meaning": "A decline in international iron ore spot prices lowers raw material procurement costs for primary steel manufacturers and directly alters input pricing across the metals and construction supply chains.",
     "meaning_ar": "يؤدي تراجع الأسعار الفورية لخام الحديد عالمياً إلى خفض تكلفة شراء المواد الخام لشركات إنتاج الصلب المتكاملة، كما يؤثر مباشرة على تسعير المدخلات الإنتاجية في سلاسل إمداد قطاعي المعادن والتشييد."
@@ -6596,6 +6600,10 @@
   "فاركو للادويه تستثمر اكثر من مليار جنيه خلال 2026 لانشاء خطوط انتاج جديده ورفع كفاءه الحاليه": {
     "meaning": "This transaction represents capital expenditure allocation toward manufacturing infrastructure, expanding operational capacity through new production lines and upgrading existing facilities.",
     "meaning_ar": "يمثل هذا الإجراء توجيه نفقات رأسمالية نحو البنية التحتية التصنيعية، مما يوسع الطاقة التشغيلية عبر إضافة خطوط إنتاج جديدة وتحديث المنشآت القائمة."
+  },
+  "فاروق: توجيهات رياسيه بالارتقاء بالتعاون الزراعي ودعم الشراكه مع اوزبكستان": {
+    "meaning": "Bilateral agricultural agreements establish institutional frameworks for cross-border technical exchange, seed technology sharing, and trade facilitation between agribusiness sectors.",
+    "meaning_ar": "تؤسس الاتفاقيات الزراعية الثنائية أطراً مؤسسية للتبادل الفني، ونقل تكنولوجيا البذور، وتسهيل التبادل التجاري بين قطاعات الإنتاج الزراعي في البلدين."
   },
   "فاروق: نعمل علي دعم زراعه الكتان وتامين سلاسل الامداد لخدمه الصناعه الوطنيه": {
     "meaning": "The initiative expands domestic agricultural supply of flax as a raw material, directly linking primary crop production with local industrial processing and textile manufacturing chains.",
