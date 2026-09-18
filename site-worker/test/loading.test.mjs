@@ -86,15 +86,18 @@ test('company requests reject stale A→B→A responses and can retry failure', 
   assert.equal(app.c.state.companyError,false);
 });
 
-test('late company data cannot enter the signed-out demo', async () => {
+test('late company data cannot reach a signed-out screen', async () => {
   const pending=defer();
   const app=boot({company:()=>pending.promise}); await app.ready();
   app.c.setState({screen:'company',ticker:'A'});
   await app.document.getElementById('signout').onclick();
   pending.resolve({fins:['private']}); await tick();
-  assert.equal(app.c.data().demo,true);
+  // Signing out used to install the demo; since 18 Sep it installs nothing.
+  assert.equal(app.c.data().demo,false);
+  assert.equal((app.c.data().companies || []).length, 0);
   assert.equal(app.c._co,null);
-  assert.equal(app.c.data().fins,undefined);
+  // The private document resolved after the sign-out and must not be in it.
+  assert.equal((app.c.data().fins || []).length, 0);
 });
 
 test('partial archive search exposes failure and retries only missing months', async () => {
@@ -135,20 +138,21 @@ test('flow history is loaded on demand once and retries after failure', async ()
   assert.equal(app.c.data().flowTrackers.schemaVersion,1);
 });
 
-test('late ownership history never enters the signed-out demo', async () => {
+test('late ownership history never reaches a signed-out screen', async () => {
   const pending=defer();const app=boot({flowTrackers:()=>pending.promise});
   await app.ready();app.c.setState({screen:'ownership'});
   await app.document.getElementById('signout').onclick();
   pending.resolve({schemaVersion:1,events:[{investorName:'private'}]});await tick();
-  assert.equal(app.c.data().demo,true);assert.equal(app.c.data().flowTrackers,undefined);
+  assert.equal(app.c.data().demo,false);assert.equal((app.c.data().companies || []).length, 0);
+  assert.equal(app.c.data().flowTrackers,undefined);
 });
 
 /* The load a reader walked away from.
  *
- * Signing out installs the demo. If the exchange documents already in flight
+ * Signing out empties the screen. If the exchange documents already in flight
  * for the account are still allowed to land when they arrive, the screen fills
- * with the previous reader's companies on a page whose banner says nobody is
- * signed in. Version the load, or the race decides which one the reader sees. */
+ * with the previous reader's companies on a page nobody is signed in to.
+ * Version the load, or the race decides which one the reader sees. */
 test('market data in flight when a reader signs out never reaches the screen', async () => {
   const app = boot();
   // Identity only: the account's documents are still on their way.
@@ -157,11 +161,11 @@ test('market data in flight when a reader signs out never reaches the screen', a
   assert.equal(app.c.state.dataLoading, true, 'the account load has not finished');
 
   await app.document.getElementById('signout').onclick();
-  assert.equal(app.c.data().demo, true, 'signing out shows the demo');
+  assert.equal((app.c.data().companies || []).length, 0, 'signing out empties the screen');
 
   app.live.resolve({ demo: false, companies: [{ ticker: 'PRIVATE' }], series: [], fins: [] });
   await tick();
-  assert.equal(app.c.data().demo, true, 'a signed-out screen must stay on the demo');
+  assert.equal((app.c.data().companies || []).length, 0, 'a signed-out screen must stay empty');
   assert.equal(app.c.state.dataLoading, false, 'the spinner outlived the load it belonged to');
   assert.equal((app.c.data().companies || []).some((c) => c.ticker === 'PRIVATE'), false,
     'the signed-out reader was shown the account\u2019s companies');

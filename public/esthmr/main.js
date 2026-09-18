@@ -48,14 +48,14 @@ const CHROME = {
     f2: 'Insider & major holder radar',
     f3: 'Debt & solvency fragility index',
     heroCta: 'Start Exploring Free (Google / Email)',
-    dismiss: 'Browse as Guest',
     trust: '🔒 Instant passwordless login · No card required',
     signIn: 'Sign in with email',
     signOut: 'Sign out',
     storyPill: '📱 Story',
-    demoLead: 'You are looking at an invented market.',
-    demoBody: 'Every ticker, price and figure below is made up for the demo.'
-      + ' Sign in to read what companies actually filed.',
+    why: 'Why sign in: everything here is read from what companies filed with '
+      + 'the exchange, and an open page is copied within hours by bots and AI '
+      + 'crawlers. Your email and a six-digit code — no password, and nothing '
+      + 'about you is sold or shared.',
   },
   ar: {
     eyebrow: 'البورصة المصرية · معلومات مالية فورية',
@@ -65,14 +65,14 @@ const CHROME = {
     f2: 'رادار كبار المطلعين والصفقات',
     f3: 'مؤشر أعباء الديون والهشاشة',
     heroCta: 'ابدأ المتابعة مجاناً (جوجل أو البريد)',
-    dismiss: 'تصفح كزائر',
     trust: '🔒 وصول فوري وآمن بدون كلمة سر',
     signIn: 'سجّل الدخول بالبريد',
     signOut: 'تسجيل الخروج',
     storyPill: '📱 ستوري',
-    demoLead: 'أنت تنظر إلى سوق مُتخيَّلة.',
-    demoBody: 'كل رمز وسعر ورقم بالأسفل مُختلَق للعرض التجريبي.'
-      + ' سجّل الدخول لتقرأ ما أفصحت عنه الشركات فعلاً.',
+    why: 'لماذا التسجيل: كل ما هنا مقروء مما أفصحت عنه الشركات للبورصة، '
+      + 'والصفحة المفتوحة تُنسَخ خلال ساعات بواسطة الروبوتات وزواحف الذكاء '
+      + 'الاصطناعي. بريدك ورمز من ستة أرقام — بلا كلمة سر، ولا نبيع بياناتك '
+      + 'ولا نشاركها.',
   },
 };
 
@@ -160,37 +160,25 @@ function rateRows(d) {
 var currentTickerData = [];
 var tickerRates = null;
 
-/** How tall the two strips across the top are, for everything that has to sit
- *  under them: the tape under the disclosure, and the account buttons under
- *  both. Measured rather than assumed — the disclosure wraps to three lines on
- *  a phone, and either strip can be absent — because the account buttons were
- *  pinned 48px down and landed on top of the words. A hidden strip measures
- *  zero, so signing in brings everything back up by itself. */
+/** How tall the ticker tape is, for the account buttons that sit under it.
+ *  Measured rather than assumed — it is not there at all signed out — because
+ *  those buttons were pinned 16px down and landed on top of it. */
 function measureTopChrome() {
   const root = document.documentElement;
   if (!root || !root.style || typeof root.style.setProperty !== 'function') return;
-  const tall = (id) => {
-    const el = document.getElementById(id);
-    if (!el || typeof el.getBoundingClientRect !== 'function') return 0;
-    if (el.hidden) return 0;
-    const box = el.getBoundingClientRect();
-    return Math.round(box.height);
-  };
-  root.style.setProperty('--demo-note-h', `${tall('demo-note')}px`);
-  root.style.setProperty('--tape-h', `${tall('ticker-tape')}px`);
+  const el = document.getElementById('ticker-tape');
+  const height = (el && !el.hidden && typeof el.getBoundingClientRect === 'function')
+    ? Math.round(el.getBoundingClientRect().height) : 0;
+  root.style.setProperty('--tape-h', `${height}px`);
 }
 if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
   window.addEventListener('resize', measureTopChrome);
-  // A resize event fires for the window; the sentence rewraps for the element.
-  // Watching the strips themselves catches a language change, a font that
-  // loads late and a narrower pane, which a window listener alone missed —
-  // the tape once sat 19px below a strip that had already shrunk.
+  // A resize event fires for the window; the tape changes height on its own
+  // when it is hidden, shown or rewrapped, which a window listener misses.
   if (typeof ResizeObserver === 'function') {
     const watcher = new ResizeObserver(() => measureTopChrome());
-    for (const id of ['demo-note', 'ticker-tape']) {
-      const el = document.getElementById(id);
-      if (el) watcher.observe(el);
-    }
+    const tape = document.getElementById('ticker-tape');
+    if (tape) watcher.observe(tape);
   }
 }
 
@@ -210,13 +198,9 @@ function setChrome(lang) {
   setTxt('gate-f2', words.f2);
   setTxt('gate-f3', words.f3);
   setTxt('gate-hero-cta-text', words.heroCta);
-  setTxt('gate-dismiss-text', words.dismiss || (lang === 'ar' ? 'تصفح كزائر' : 'Browse as Guest'));
   setTxt('gate-trust', words.trust);
-  // The disclosure, in two places: the strip that stays, and one line inside
-  // the pop-up so it is said before anybody dismisses it.
-  setTxt('demo-note-lead', words.demoLead);
-  setTxt('demo-note-body', words.demoBody);
-  setTxt('gate-demo', `${words.demoLead} ${words.demoBody}`);
+  // Why the door is there, in the reader's language.
+  setTxt('gate-why', words.why);
   measureTopChrome();
   setTxt('signin', words.signIn);
   setTxt('signout', words.signOut);
@@ -226,30 +210,22 @@ function setChrome(lang) {
 }
 setChrome(component.state.lang);
 
-/** Swap the whole dataset — demo for signed-out, the exchange for signed-in. */
+/** The exchange for a signed-in reader; for anybody else, nothing at all.
+ *
+ * Until 18 September a signed-out reader was given `data.demo()`, an openly
+ * invented exchange, so the site had something to show. The owner closed the
+ * site that day: bots and AI crawlers copy an open page within hours, and the
+ * demo was the only thing left to copy. Signed out there is now no dataset,
+ * no ticker tape and no screens — the way in is the page.
+ */
 let loadVersion = 0;
 async function load(email) {
   const version = ++loadVersion;
   if (!email) {
     component.setState({ dataLoading: false, dataError: false, extrasLoading: false, extrasError: false });
-    component.setData(data.demo());
-    // Signed out: the tape drops its company rows and the story card is shut,
-    // because DEMO01..DEMO16 are invented and may not leave the screen.
+    component.setData({ demo: false, companies: [], series: [], fins: [] });
     refreshTicker();
     setStoryReady();
-    // The arena is public — it names no security, and a record a stranger
-    // cannot fetch is not a record anybody can check — so a signed-out reader
-    // sees the models on record too, over the demo's invented market.
-    Promise.all([
-      (data.arena ? data.arena() : Promise.resolve(null)).catch(() => null),
-      (data.top5 ? data.top5() : Promise.resolve(null)).catch(() => null),
-    ]).then(([arena, top5]) => {
-      if (version !== loadVersion) return;
-      const patch = {};
-      if (arena) patch.arena = arena;
-      if (top5) patch.top5 = top5;
-      if (Object.keys(patch).length) component.setData({ ...component.data(), ...patch });
-    });
     return;
   }
   component.setState({ dataLoading: true, dataError: false });
@@ -331,7 +307,7 @@ async function load(email) {
     // into the demo, with a valid session still in their cookie jar.
     if (error && error.unauthorized) {
       setSigned(null);
-      component.setData(data.demo());
+      component.setData({ demo: false, companies: [], series: [], fins: [] });
       component.setState({ dataError:false });
     }
   }
@@ -403,14 +379,10 @@ function setSigned(email) {
   document.body.dataset.signed = email ? 'yes' : 'no';
   const bar = document.getElementById('gate');
   const who = document.getElementById('who');
-  const isDismissed = (() => {
-    try {
-      const sp = new URLSearchParams(window.location.search);
-      if (sp.has('popup') || sp.has('welcome')) return false;
-      return sessionStorage.getItem('esthmr:gate_dismissed') === '1';
-    } catch { return false; }
-  })();
-  bar.hidden = Boolean(email) || isDismissed;
+  // Signing in is the only thing that takes it off screen. It used to be
+  // dismissible ("Browse as Guest"), which was the demo's door; there is no
+  // demo behind it now.
+  bar.hidden = Boolean(email);
   who.textContent = email || '';
   who.hidden = !email;
   // Both buttons live in the same corner and shell.css shows whichever the
@@ -421,7 +393,9 @@ function setSigned(email) {
   const adminLink = document.getElementById('admin-link');
   if (adminLink) {
     const cleanEmail = (email || '').trim().toLowerCase();
-    const isSuper = Boolean(cleanEmail && ['elbarbary@aucegypt.edu', 'elbarbary@auceypt.edu', 'barbary@yozo.ai'].includes(cleanEmail));
+    // The same two addresses the worker holds (`SUPER_ADMIN_EMAILS`), minus
+    // the typo of the university domain that was on both lists.
+    const isSuper = Boolean(cleanEmail && ['elbarbary@aucegypt.edu', 'barbary@yozo.ai'].includes(cleanEmail));
     adminLink.hidden = !isSuper;
     if (document.body?.classList) {
       if (isSuper) document.body.classList.add('is-admin');
@@ -430,45 +404,18 @@ function setSigned(email) {
   }
 }
 
-function dismissGate() {
-  const bar = document.getElementById('gate');
-  if (bar) bar.hidden = true;
-  try { sessionStorage.setItem('esthmr:gate_dismissed', '1'); } catch {}
-}
-
-const gateClose = document.getElementById('gate-close');
-if (gateClose) gateClose.onclick = dismissGate;
-
-const gateDismiss = document.getElementById('gate-dismiss-btn');
-if (gateDismiss) gateDismiss.onclick = dismissGate;
-
-const gateScrim = document.getElementById('gate-scrim');
-if (gateScrim) gateScrim.onclick = dismissGate;
-
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    const bar = document.getElementById('gate');
-    if (bar && !bar.hidden && document.body.dataset.signed !== 'yes') {
-      dismissGate();
-    }
-  }
-});
-
-document.getElementById('signin').onclick = () =>
-  openSignIn(async (email) => { setSigned(email); await load(email); },
-    component.state.lang);
+/* `dismissGate` and its four handlers — the close cross, "Browse as Guest",
+   the scrim and Escape — are gone with the demo they opened. */
 
 const heroCta = document.getElementById('gate-hero-cta');
 if (heroCta) {
   heroCta.onclick = () => {
-    dismissGate();
     openSignIn(async (email) => { setSigned(email); await load(email); },
       component.state.lang);
   };
 }
 
 document.getElementById('signout').onclick = async () => {
-  try { localStorage.removeItem('esthmr:session_user'); } catch {}
   await signOut().catch(() => {});
   setSigned(null);
   await load(null);
@@ -746,26 +693,20 @@ document.getElementById('signout').onclick = async () => {
   // The shell and loading state are already interactive while identity and
   // market feeds arrive. Secondary feeds never hold up the first render.
   const bootReader = readerVersion;
+  /* Who the reader is comes from the server and from nowhere else.
+   *
+   * A `?login=<address>` parameter, and a copy of it in localStorage, were
+   * added on 18 September: with either one the page called itself signed in
+   * as whatever address it was handed, showed that address in the corner and
+   * asked the admin endpoint for its telemetry. The exchange data stayed
+   * behind the real session cookie, so nothing leaked — but the site now has
+   * nothing to show a reader who is not signed in, and an identity anybody
+   * can type into the address bar is not a sign-in. `whoami()` asks the
+   * worker, which reads a signed cookie it issued. */
   void whoami().then((email) => {
     if (bootReader !== readerVersion) return;
-    let effectiveEmail = email;
-    if (!effectiveEmail && typeof window !== 'undefined') {
-      try {
-        const q = new URLSearchParams(window.location?.search || '');
-        const urlEmail = q.get('login') || q.get('user');
-        if (urlEmail) {
-          effectiveEmail = urlEmail.trim();
-          localStorage.setItem('esthmr:session_user', effectiveEmail);
-        } else if (q.has('signout')) {
-          localStorage.removeItem('esthmr:session_user');
-          effectiveEmail = null;
-        } else {
-          effectiveEmail = localStorage.getItem('esthmr:session_user') || null;
-        }
-      } catch {}
-    }
-    setSigned(effectiveEmail);
-    return load(effectiveEmail);
+    setSigned(email);
+    return load(email);
   }).catch(() => component.setState({ dataLoading: false, dataError: true }));
 
   // Global search shortcut: '/' (when not editing text) or Cmd+K / Ctrl+K

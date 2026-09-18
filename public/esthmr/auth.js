@@ -106,8 +106,10 @@ function loadGoogle() {
 const WORDS = {
   en: {
     title: 'See the real exchange',
-    lead: 'You are looking at an invented market. Sign in with your email and we '
-      + 'will send a six-digit code — no password to choose, and nothing to remember.',
+    lead: 'Everything here is read from what companies filed with the exchange, '
+      + 'and an open page is copied within hours by bots and AI crawlers — so the '
+      + 'site is behind this door. Sign in with your email and we will send a '
+      + 'six-digit code: no password to choose, and nothing to remember.',
     email: 'Email', send: 'Send me a code',
     code: 'The six digits we just sent', go: 'Sign in',
     back: 'Use a different email', busy: 'One moment…', close: 'Close',
@@ -115,13 +117,10 @@ const WORDS = {
   },
   ar: {
     title: 'اطّلع على البورصة الحقيقية',
-    // The Arabic sheet lost "أنت تنظر إلى سوق مُتخيَّلة" on 18 Sep while the
-    // English one kept it, so the two languages disagreed about whether the
-    // market on screen is real. The sentence leads again; the rest of what the
-    // sheet now offers follows it.
-    lead: 'أنت تنظر إلى سوق مُتخيَّلة. إفصاحات الشركات الحقيقية، رادار صفقات '
-      + 'الداخليين، ومؤشر أعباء الديون والسيولة — مجاناً وبلا اشتراكات. سجّل '
-      + 'الدخول ببريدك ونرسل لك رمزاً من ستة أرقام \u2014 بلا كلمة سر تختارها.',
+    lead: 'كل ما هنا مقروء مما أفصحت عنه الشركات للبورصة، والصفحة المفتوحة '
+      + 'تُنسَخ خلال ساعات بواسطة الروبوتات وزواحف الذكاء الاصطناعي — لذلك '
+      + 'الموقع خلف هذا الباب. سجّل الدخول ببريدك ونرسل لك رمزاً من ستة أرقام: '
+      + 'بلا كلمة سر تختارها ولا شيء تحفظه.',
     email: 'البريد الإلكتروني', send: 'أرسل لي الرمز',
     code: 'الأرقام الستة التي أرسلناها', go: 'تسجيل الدخول',
     back: 'استخدم بريداً آخر', busy: 'لحظة…', close: 'إغلاق',

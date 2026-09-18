@@ -12,8 +12,10 @@
 # its budget on the pages instead of collecting refusals, and so that anything
 # ignoring it has been told plainly.
 #
-# The pages are open and meant to be found. search=yes is the point of
-# publishing them.
+# From 18 September 2026 the app itself answers only to a signed-in session
+# too: signed out there is no dataset, no screens and no ticker — the sign-in
+# page is the page. The landing page stays crawlable, because being found is
+# how a reader arrives at it; there is nothing behind it to take.
 
 User-agent: *
 Disallow: /data/v1/

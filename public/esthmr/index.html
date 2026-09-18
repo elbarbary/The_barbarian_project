@@ -32,15 +32,6 @@
 </head>
 <body data-signed="no">
 
-<!-- Says plainly what is on screen, because an invented market that does not
-     announce itself is a fabricated financial figure. It is NOT the welcome
-     pop-up below: that one sells the site and can be dismissed, and a reader
-     who dismisses it is still reading a made-up market. shell.css shows this
-     strip only while `body[data-signed="no"]`, and nothing hides it. -->
-<div id="demo-note" class="demo-note">
-  <p><strong id="demo-note-lead"></strong> <span id="demo-note-body"></span></p>
-</div>
-
 <!-- Live Ticker Tape Header -->
 <div id="ticker-tape" class="ticker-tape" aria-label="Market Ticker">
   <div class="ticker-track" id="ticker-track"></div>
@@ -50,7 +41,6 @@
 <div id="gate" class="gate" role="dialog" aria-modal="true" aria-labelledby="gate-lead">
   <div class="gate-scrim" id="gate-scrim"></div>
   <div class="gate-card">
-    <button type="button" id="gate-close" class="gate-close" aria-label="Close">×</button>
     <div class="gate-media">
       <img src="./assets/terminal_esthmr_square.jpg" alt="ESTHMR Egyptian Market Intelligence Terminal" class="gate-img" loading="eager" />
     </div>
@@ -61,14 +51,13 @@
       </div>
       <h2 id="gate-lead" class="gate-lead">بلومبرج البورصة المصرية... مجاناً لكل مستثمر</h2>
       <p id="gate-body" class="gate-body">إفصاحات الشركات الحقيقية فور إيداعها، رادار صفقات الداخليين، ومؤشر أعباء الديون والسيولة. بدون اشتراكات.</p>
-      <p id="gate-demo" class="gate-demo">حتى تسجّل الدخول، كل رمز وسعر ورقم على هذه الصفحة مُختلَق للعرض التجريبي.</p>
+      <!-- Why there is a door at all. Set in both languages by main.js. -->
+      <p id="gate-why" class="gate-why"></p>
       <div class="gate-actions">
         <button type="button" id="gate-hero-cta" class="gate-hero-btn">
           <span id="gate-hero-cta-text">ابدأ المتابعة مجاناً (جوجل أو البريد)</span>
         </button>
-        <button type="button" id="gate-dismiss-btn" class="gate-sec-btn">
-          <span id="gate-dismiss-text">تصفح كزائر</span>
-        </button>
+
       </div>
     </div>
   </div>
