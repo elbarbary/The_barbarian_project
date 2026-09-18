@@ -544,7 +544,7 @@ export function scenariosScreen(component, data, ar) {
 
   if (!scenarios && !picks) {
     return { screen: h('div', { class: 'home-screen sc-screen aix-bench' },
-      h('header', { class: 'aix-bench-head' }, h('h1', null, t('Scenario workbench', 'مختبر السيناريوهات'))),
+      h('header', { class: 'aix-bench-head' }, h('h1', null, t('The model lab', 'مختبر النماذج'))),
       h('div', { class: 'sc-loading', role: 'status' },
         h('div', { class: 'sc-skeleton', 'aria-hidden': 'true' }),
         h('p', { class: 'aix-note' }, t('Loading the saved model run—not generating a new forecast.', 'جارٍ تحميل تشغيل النموذج المحفوظ، وليس إنشاء توقع جديد.'))),
@@ -604,16 +604,16 @@ export function scenariosScreen(component, data, ar) {
 
   const controls = h('aside', { class: 'aix-controls' },
     h('div', { class: 'aix-group' },
-      h('p', { class: 'aix-step' }, h('b', null, '01'), t('CHOOSE A MODEL', 'اختر نموذجاً')),
+      h('p', { class: 'aix-step' }, h('b', null, '1'), h('span', null, t('Choose a model', 'اختر نموذجًا'))),
       h('div', { class: 'aix-chips' }, choice.models.map((m) => chip(ar ? m.labelAr : m.label, model === m.id,
         () => set({ scModel: m.id, scFrom: null }), m.id))),
       choice.meta ? h('p', { class: 'aix-note aix-model-about' }, aboutModel(choice.meta, ar)) : null),
     h('div', { class: 'aix-group' },
-      h('p', { class: 'aix-step' }, h('b', null, '02'), t('HORIZON', 'المدى')),
+      h('p', { class: 'aix-step' }, h('b', null, '2'), h('span', null, t('The time window', 'النافذة الزمنية'))),
       h('div', { class: 'aix-chips' }, choice.horizons.map((n) => chip(chipWords(n, ar),
         horizon === n, () => set({ scHorizon: n }), n)))),
     order.length ? h('div', { class: `aix-group aix-layers${gemini ? ' is-on' : ''}` },
-      h('p', { class: 'aix-step' }, h('b', null, '03'), t('CONTEXT THE RE-RANK READS', 'السياق الذي تقرؤه إعادة الترتيب')),
+      h('p', { class: 'aix-step' }, h('b', null, '3'), h('span', null, t('What Gemini reads', 'ما يقرأه Gemini'))),
       h('p', { class: 'aix-note aix-layers-lead' }, choice.readable
         ? (gemini
           ? t(`Showing Gemini’s saved ranking. It combines all models with the selected evidence; ${modelName} remains the comparison. Turn everything off for the model’s original order.`,
@@ -695,7 +695,14 @@ export function scenariosScreen(component, data, ar) {
         h('button', { type: 'button', class: 'aix-back', onClick: () => component.setState({ screen: 'home' }) },
           ar ? '→ العودة إلى الصفحة الرئيسية' : '← BACK TO THE HOME PAGE'),
         h('div', { class: 'aix-bench-name' },
-          h('h1', null, t('Scenario workbench', 'مختبر السيناريوهات')),
+          // What a reader has to know before the first figure: these numbers
+          // were saved, they stop at a close that has already happened, and
+          // nothing on the page has been marked right or wrong yet.
+          h('p', { class: 'aix-bench-dateline' }, basis
+            ? t(`Saved record · inputs to the close of ${day(basis, false)} · not scored yet`,
+              `سجل محفوظ · مدخلات حتى إغلاق ${day(basis, true)} · لم يُقيَّم بعد`)
+            : t('Saved record · not scored yet', 'سجل محفوظ · لم يُقيَّم بعد')),
+          h('h1', null, t('The model lab', 'مختبر النماذج')),
           h('button', { type: 'button', class: 'aix-beta', onClick: () => component.setState({ scWarning: true }) },
             h('i', { 'aria-hidden': 'true' }), t('BETA · READ THIS', 'تجريبي · اقرأ هذا'))),
         h('p', null, t(`Choose a model to see the companies it ranks highest and what it predicts for them. Switch on what Gemini reads to see the same companies after Gemini re-ranks them. Future is from the close${basis ? ` of ${day(basis, false)}` : ''} and not scored yet; past runs already are.`,

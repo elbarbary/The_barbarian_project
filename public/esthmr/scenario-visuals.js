@@ -60,6 +60,46 @@ export function quoteWhen(stamp, ar) {
   return `${day(`${parts.year}-${parts.month}-${parts.day}`, ar)} · ${parts.hour}:${parts.minute} ${ar ? 'بتوقيت القاهرة' : 'Cairo'}`;
 }
 
+/**
+ * One company's forecast window, as one picture.
+ *
+ * The row used to carry five loose figures in a grid — current, low, average,
+ * high, end of window — and a reader had to hold four of them in their head
+ * to see what the fifth meant. The redesign draws them instead: the band is
+ * the lowest to the highest close the saved path reaches, the upright mark is
+ * what the share costs now, and the dot is the average close.
+ *
+ * The band is NOT a confidence interval and the note under the card says so.
+ * It is the range of a saved path, which is a different thing and a weaker
+ * one: nothing here estimates how likely any of it is.
+ */
+function rangeBar(price, low, avg, high, ar) {
+  const vals = [price, low, avg, high].filter(finite);
+  if (vals.length < 4) return null;
+  const lo = Math.min(price, low), hi = Math.max(price, high);
+  const span = hi - lo || 1;
+  const at = (v) => 42 + ((v - lo) / span) * 306;
+  const fmt = (v) => plain(v, v < 1 ? 4 : 2);
+  const round = (v) => Number(v.toFixed(2));
+  // The price and the average can land on top of each other, and two labels
+  // in the same place read as one wrong number. The second drops a line.
+  const crowded = Math.abs(at(price) - at(avg)) < 52;
+  return h('svg', {
+    class: 'aix-range', viewBox: '0 0 390 62', dir: 'ltr', role: 'img',
+    'aria-label': ar
+      ? `السعر ${fmt(price)} · المسار المحفوظ من ${fmt(low)} إلى ${fmt(high)} · المتوسط ${fmt(avg)}`
+      : `price ${fmt(price)} · saved path ${fmt(low)} to ${fmt(high)} · average ${fmt(avg)}`,
+  },
+  h('line', { x1: 8, y1: 28, x2: 382, y2: 28, class: 'aix-range-axis' }),
+  h('rect', { x: round(at(low)), y: 22, width: round(at(high) - at(low)), height: 12, rx: 3, class: 'aix-range-band' }),
+  h('line', { x1: round(at(price)), y1: 16, x2: round(at(price)), y2: 40, class: 'aix-range-now' }),
+  h('circle', { cx: round(at(avg)), cy: 28, r: 5.5, class: 'aix-range-avg' }),
+  h('text', { x: round(at(low)), y: 13, class: 'aix-range-edge', 'text-anchor': 'middle' }, fmt(low)),
+  h('text', { x: round(at(high)), y: 13, class: 'aix-range-edge', 'text-anchor': 'middle' }, fmt(high)),
+  h('text', { x: round(at(price)), y: 49, class: 'aix-range-price', 'text-anchor': 'middle' }, fmt(price)),
+  h('text', { x: round(at(avg)), y: crowded ? 61 : 49, class: 'aix-range-mean', 'text-anchor': 'middle' }, fmt(avg)));
+}
+
 function priceStrip(company, model, horizon, basisDate, quote, ar) {
   const p = forecastPrices(company, model, horizon);
   const t = (en, arabic) => ar ? arabic : en;
@@ -83,9 +123,15 @@ function priceStrip(company, model, horizon, basisDate, quote, ar) {
   const why = finite(p.basis) ? null
     : t(`No close on ${day(basisDate)}: the company did not trade that session, so the price its forecast started from is not in this night’s file.`,
       `لا إغلاق يوم ${day(basisDate, true)}: لم تُتداول الشركة في تلك الجلسة، فسعر بداية توقعها غير موجود في ملف هذه الليلة.`);
+  // With the whole path saved the row is the picture; without it there is
+  // nothing to draw, and the two figures that DO exist are printed instead.
+  const drawn = pathSaved ? rangeBar(latest, p.low, p.average, p.high, ar) : null;
   return h('span', { class: 'aix-price-detail' },
-    h('span', { class: `aix-price-grid${pathSaved ? '' : ' is-short'}` },
+    drawn || h('span', { class: `aix-price-grid${pathSaved ? '' : ' is-short'}` },
       cells.map(([label, value]) => h('span', null, h('small', null, label), h('b', { dir: 'ltr' }, price(value))))),
+    drawn ? h('small', { class: 'aix-price-caption' }, t(
+      `The band is the lowest and highest close on the saved path, the mark is the price now, the dot is the average close. Not probability bounds. End of window ${price(p.point)}.`,
+      `الشريط من أدنى إلى أعلى إغلاق على المسار المحفوظ، والعلامة هي السعر الآن، والنقطة متوسط الإغلاق. ليست حدود احتمال. نهاية المدة ${price(p.point)}.`)) : null,
     why ? h('small', { class: 'aix-price-caption' }, why) : null,
     h('small', { class: 'aix-price-caption' },
       `${quote?.currency || 'EGP'} · ${t('Price as of', 'السعر بتاريخ')} ${date || '—'} · ${t('Forecast basis', 'مرجع التوقع')} ${price(p.basis)} (${day(basisDate, ar)})`));
@@ -329,7 +375,15 @@ export function rankingCard(component, data, ctx, ar) {
             says.kind === 'return' ? t('Forecast: ', 'التوقع: ') : t('Past move: ', 'الحركة السابقة: ')),
           percent(move(r.baseValue))) : null);
     } else if (says.kind === 'return') {
-      extra = h('small', { class: 'aix-rank-agree' }, r.of ? t(`${r.agree} of ${r.of} agree`, `${r.agree} من ${r.of} تتفق`) : '');
+      /* How many of the other models point the same way, counted AND drawn.
+         The count is the fact; the ticks are so a reader scanning ten rows
+         can see which ones the models agree about without reading any of
+         them. Filled is agreement, empty is a model that pointed elsewhere —
+         never a model that had no figure, which is left out of `r.of`. */
+      extra = r.of ? h('small', { class: 'aix-rank-agree' },
+        h('span', { class: 'aix-agree-ticks', 'aria-hidden': 'true' },
+          Array.from({ length: r.of }, (_, i) => h('i', { key: i, class: i < r.agree ? 'is-on' : '' }))),
+        t(`${r.agree} of ${r.of} agree`, `${r.agree} من ${r.of} تتفق`)) : null;
     }
     const skipped = passed.has(r.ticker);
     return h('button', {

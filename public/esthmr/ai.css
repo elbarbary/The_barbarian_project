@@ -252,8 +252,18 @@
   display: flex; flex-direction: column; gap: 16px; min-width: 0;
 }
 .aix-group { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.aix-step { margin: 0; display: flex; align-items: baseline; gap: 8px; font-family: var(--aix-mono); font-size: 10.5px; letter-spacing: .11em; color: var(--aix-muted); }
-.aix-step b { font-size: 10px; font-weight: 500; color: var(--aix-teal-ink); letter-spacing: 0; }
+/* A step in the control column. The comp numbers them 1, 2, 3 in a filled
+   square and sets the label as a heading — three things to do in order,
+   rather than three mono captions a reader skims past. */
+.aix-step { margin: 0; display: flex; align-items: center; gap: 9px; }
+.aix-step b {
+  font-family: var(--aix-mono); font-size: 12px; font-weight: 600; letter-spacing: 0;
+  background: var(--ink); color: var(--surface); border-radius: 6px; padding: 3px 8px;
+}
+.aix-step > span { font-size: 15.5px; font-weight: 600; color: var(--ink); letter-spacing: 0; }
+.aix-bench-dateline {
+  margin: 0 0 6px; font-family: var(--aix-mono); font-size: 12px; color: var(--faint);
+}
 .aix-chips { display: flex; flex-wrap: wrap; gap: 7px; }
 #app .aix-chip {
   cursor: pointer; font-size: 13px; font-weight: 500; padding: 8px 13px; border-radius:var(--radius-island); min-height: 36px;
@@ -751,3 +761,25 @@ dialog.aix-dialog::backdrop { background: rgba(22, 36, 47, .5); }
   border: 0; background: transparent; padding: 0; margin: 0; gap: 10px; flex: 1; min-width: 0;
 }
 #app .aix-lab-foot .aix-status-text { font-size: 14px; color: var(--t2); line-height: 1.5; }
+
+/* ── THE FORECAST WINDOW, AS ONE PICTURE ─────────────────────────────────
+ * Replaces the five-figure grid on a ranking row. Every part is a token, and
+ * the band is deliberately the softest thing on the row: it is the widest
+ * claim being made and the least certain, so it should not out-shout the
+ * price, which is a fact. */
+#app .aix-range { display: block; width: 100%; height: 62px; }
+#app .aix-range-axis { stroke: var(--rule); stroke-width: 1; }
+#app .aix-range-band { fill: var(--accent); fill-opacity: .16; }
+#app .aix-range-now { stroke: var(--ink); stroke-width: 2; }
+#app .aix-range-avg { fill: var(--accent); }
+#app .aix-range text { font-family: var(--aix-mono); font-size: 13px; }
+#app .aix-range-edge { fill: var(--faint); }
+#app .aix-range-price { fill: var(--ink); }
+#app .aix-range-mean { fill: var(--accent); font-weight: 600; }
+@media (max-width: 860px) {
+  #app .aix-range text { font-size: 15px; }
+}
+/* The models' agreement, drawn beside the count. */
+#app .aix-agree-ticks { display: inline-flex; gap: 2px; margin-inline-end: 6px; vertical-align: -2px; }
+#app .aix-agree-ticks i { display: block; width: 8px; height: 15px; border-radius: 2px; background: var(--rule); }
+#app .aix-agree-ticks i.is-on { background: var(--accent); }

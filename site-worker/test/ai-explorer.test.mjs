@@ -418,7 +418,10 @@ test('what a model’s number is follows its name', () => {
 test('the controls are a model, a horizon and the re-rank’s context, and ask no question', () => {
   const node = screen(component({ scModel: 'kronos' }));
   const steps = byClass(node, 'aix-step').map((n) => text(n).replace(/\s+/g, ' ').trim());
-  assert.deepEqual(steps, ['01 CHOOSE A MODEL', '02 HORIZON', '03 CONTEXT THE RE-RANK READS']);
+  /* Three things to do, in order, each a numbered heading rather than a mono
+     caption. The words matter as much as the count: "horizon" and "context
+     the re-rank reads" are this project's vocabulary, not a reader's. */
+  assert.deepEqual(steps, ['1 Choose a model', '2 The time window', '3 What Gemini reads']);
   assert.ok(button(node, 'next session'));
   // The switches work over every model: they are how Gemini is turned on.
   const toggles = byClass(node, 'aix-toggle');
@@ -1081,4 +1084,57 @@ test('the workbench says where the record stands before it shows numbers', () =>
   assert.match(scored.className, /is-scored/);
 
   assert.equal(statusStrip(null, false), null, 'no record should draw no strip');
+});
+
+/* ── the forecast window, as one picture ────────────────────────────────── */
+
+/* A night that saved the whole daily path — the only kind that has a low, an
+   average and a high to draw. Nights sealed before 17 Sep 2026 kept three
+   endpoints only, and those rows fall back to figures. */
+function withPath() {
+  const d = structuredClone(data);
+  d.scenarios.companies.AAA.models.kronos.pricePath = [10.1, 9.9, 10.2, 10.4, 10.3];
+  d.scenarios.companies.AAA.models.kronos.basisClose = 10;
+  d.scenarios.companies.BBB.models.kronos.pricePath = [19.4, 19.1, 19.6, 19.2, 19.0];
+  d.scenarios.companies.BBB.models.kronos.basisClose = 20;
+  return d;
+}
+
+test('a ranking row draws the forecast window instead of five loose figures', () => {
+  const node = screen(component({ scModel: 'kronos', scHorizon: 5 }), withPath());
+  const bars = byClass(node, 'aix-range');
+  assert.ok(bars.length > 0, 'no row draws its forecast window');
+  const bar = bars[0];
+  const marks = all(bar);
+  /* Four things, and each one is a different fact: the band is the lowest and
+     highest close on the saved path, the upright line is the price now, the
+     dot is the average close. A band alone would read as a probability
+     interval, which is the one thing it is not. */
+  assert.equal(marks.filter((n) => (n.attrs.class || '') === 'aix-range-band').length, 1, 'no band');
+  assert.equal(marks.filter((n) => (n.attrs.class || '') === 'aix-range-now').length, 1, 'the price now is not marked');
+  assert.equal(marks.filter((n) => (n.attrs.class || '') === 'aix-range-avg').length, 1, 'the average close is not marked');
+  assert.equal(marks.filter((n) => n.tag === 'text').length, 4, 'the four figures are not all labelled');
+  // Every coordinate finite: a NaN in a path erases the drawing silently.
+  for (const n of marks) {
+    for (const k of ['x', 'y', 'x1', 'x2', 'y1', 'y2', 'cx', 'cy', 'width', 'height']) {
+      if (n.attrs[k] === undefined) continue;
+      assert.ok(Number.isFinite(Number(n.attrs[k])), `${n.tag}.${k} is ${n.attrs[k]}`);
+    }
+  }
+  assert.ok(Number(marks.find((n) => n.attrs.class === 'aix-range-band').attrs.width) >= 0,
+    'the band has a negative width, so the low and the high are the wrong way round');
+});
+
+test('the window says it is a saved path and not a probability bound', () => {
+  const said = text(screen(component({ scModel: 'kronos', scHorizon: 5 }), withPath()));
+  assert.match(said, /Not probability bounds/,
+    'the band can be read as a confidence interval, which is a claim this run does not make');
+  const ar = text(screen(component({ scModel: 'kronos', scHorizon: 5 }), withPath(), true));
+  assert.match(ar, /ليست حدود احتمال/, 'the Arabic screen drops the limit');
+});
+
+test('a night that saved no path prints the figures it has instead of an empty drawing', () => {
+  const node = screen(component({ scModel: 'kronos', scHorizon: 5 }));
+  assert.equal(byClass(node, 'aix-range').length, 0, 'a window was drawn from figures that were never saved');
+  assert.ok(byClass(node, 'aix-price-grid').length > 0, 'the row shows nothing at all');
 });
