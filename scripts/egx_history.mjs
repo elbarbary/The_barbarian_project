@@ -29,6 +29,9 @@
 // `series_completed`, or an error.
 
 export const HISTORY_DEFAULTS = {
+  // Daily candles asked of each series. The scan keeps 120; the Kronos
+  // retraining pilot asks for thousands (scripts/lab/retrain/fetch_candles.mjs).
+  bars: 120,
   // Symbols asked on one socket, pass by pass. The last pass asks one symbol
   // per socket, so a listing that never answers costs nothing but itself.
   // Five, as before: a chart session refuses a tenth series outright
@@ -122,7 +125,8 @@ export function statusOf(record, answers) {
 // are none), or null for an error that is not an answer — and whether the
 // socket connected at all.
 export function fetchBatch(batch, options) {
-  const { WebSocket, url, origin, session, symbolTimeoutMs, gapMs, warn } = options;
+  const settings = { ...HISTORY_DEFAULTS, ...options };
+  const { WebSocket, url, origin, session, symbolTimeoutMs, gapMs, warn } = settings;
   const socket = new WebSocket(url, { headers: { Origin: origin } });
   const answers = new Map();
   let connected = false;
@@ -175,7 +179,7 @@ export function fetchBatch(batch, options) {
         session: "regular",
       })}`;
       socket.send(frame("resolve_symbol", [session, waiting.symbolId, descriptor]));
-      socket.send(frame("create_series", [session, waiting.seriesId, waiting.seriesId, waiting.symbolId, "1D", 120]));
+      socket.send(frame("create_series", [session, waiting.seriesId, waiting.seriesId, waiting.symbolId, "1D", settings.bars]));
     };
 
     // `remove` only for a series the server holds. Removing one it does not

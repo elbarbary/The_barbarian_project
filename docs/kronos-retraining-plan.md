@@ -21,6 +21,22 @@ lab changes until stage 3.
   on the M4 GPU.
 - **Original weights, measured on the preregistered set:** validation loss
   3.4601, and −16.21% on the steady rise.
+- **Stage 1 passed on 18 Sep, all three checks (`data-source/lab/retrain/pilot/decision.json`):**
+
+  | Check | Original | Pilot | Threshold |
+  |---|---|---|---|
+  | Pull at 20 sessions | 0.9742 | −0.2862 | ≤ 0.5 |
+  | Steady rise at 20 sessions | −16.21% | +0.35% | > −5% |
+  | Validation loss | 3.4601 | 2.8969 | below the original |
+
+  The original pulled to the average on all 23 origins (0.954–0.989); the
+  pilot on none of them (−0.487 to −0.073). Its middle 20-session forecast
+  moved from −9.05% to −2.70% while the move back to the average was −6.04%,
+  and its forecasts still tell companies apart (at the first origin, 10th
+  percentile −9.5%, 90th +6.3%, 42 of 114 above zero, against 8 of 114 for
+  the original). Scaling a training window with its own future was the cause.
+- **Stage 2 runs on the owner's Pop!_OS box** (RTX 3060, CUDA), not the Mac:
+  43 minutes an epoch there was 30 epochs of a working day.
 
 ## Why
 

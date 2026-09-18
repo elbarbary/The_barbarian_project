@@ -1,0 +1,41 @@
+{
+ "epochs": [
+  {
+   "epoch": 1,
+   "trainLoss": 3.047868,
+   "validation": {
+    "loss": 2.912035,
+    "s1": 3.345733,
+    "s2": 2.478337
+   },
+   "seconds": 2579
+  },
+  {
+   "epoch": 2,
+   "trainLoss": 2.983425,
+   "validation": {
+    "loss": 2.89883,
+    "s1": 3.329627,
+    "s2": 2.468034
+   },
+   "seconds": 2820
+  },
+  {
+   "epoch": 3,
+   "trainLoss": 2.976551,
+   "validation": {
+    "loss": 2.896929,
+    "s1": 3.32763,
+    "s2": 2.466227
+   },
+   "seconds": 2622
+  }
+ ],
+ "original": {
+  "loss": 3.460098,
+  "s1": 3.873422,
+  "s2": 3.046773,
+  "seconds": 116
+ },
+ "bestEpoch": 3
+}
