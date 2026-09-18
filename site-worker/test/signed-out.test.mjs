@@ -213,3 +213,17 @@ test('the door stays flat, like every other island', () => {
   assert.match(card, /box-shadow:\s*none/, 'the door card has a shadow again');
   assert.match(card, /border-radius:\s*var\(--radius-island\)/, 'the door card sets its own radius');
 });
+
+test('signing out forgets the Google account as well as the cookie', () => {
+  /* Two halves. `post('/signout')` clears this site's cookie; Google keeps its
+     own record that this browser picked an account here, and while that record
+     stands it can hand a credential back without asking — which looks exactly
+     like a sign-out that did nothing. `disableAutoSelect` is Google's answer,
+     and it must not be able to stop the cookie being cleared. */
+  assert.match(auth, /export function forgetGoogle/);
+  assert.match(auth, /disableAutoSelect/);
+  assert.match(auth, /export const signOut = \(\) => \{ forgetGoogle\(\); return post\('\/signout'\); \};/);
+  const body = (auth.match(/export function forgetGoogle\(\) \{[\s\S]*?\n\}/) || [''])[0];
+  assert.match(body, /try \{/, 'forgetGoogle can throw out of the sign-out path');
+  assert.match(body, /catch/, 'forgetGoogle can throw out of the sign-out path');
+});

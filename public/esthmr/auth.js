@@ -66,7 +66,25 @@ export async function whoami() {
 export const requestCode = (email, turnstile) =>
   post('/request', turnstile ? { email, turnstile } : { email });
 export const verifyCode = (email, code) => post('/verify', { email, code });
-export const signOut = () => post('/signout');
+/* Signing out has TWO halves, and only one of them is ours.
+ *
+ * `post('/signout')` clears this site's cookie. Google keeps its own record
+ * that this browser chose an account here, and while that record stands the
+ * sheet renders the personalised "continue as …" button and Google may hand
+ * a credential back without asking anyone — so a reader who signed out can be
+ * signed straight back in, which looks from the outside like a sign-out that
+ * did nothing.
+ *
+ * `disableAutoSelect` is Google's own answer to that and is best-effort by
+ * design: no GSI on the page, a blocked script, or an older library simply
+ * means there was no record to forget. It must never keep the cookie from
+ * being cleared, which is why it cannot throw out of here.
+ */
+export function forgetGoogle() {
+  try { window.google?.accounts?.id?.disableAutoSelect?.(); } catch { /* nothing to forget */ }
+}
+
+export const signOut = () => { forgetGoogle(); return post('/signout'); };
 /* The credential Google hands the browser, sent on for verification. It is
    NOT trusted here: the Worker checks its signature against Google's keys,
    its audience, its issuer and its expiry before it mints anything. */
