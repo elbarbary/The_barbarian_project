@@ -327,3 +327,43 @@ test('the scenario document is a forecast and is therefore gated data', async ()
   assert.ok(!open.includes('rerank'), 'research/rerank/ is public — readings name securities');
   assert.ok(!open.includes('picks.json'), 'research/picks.json is public — it names securities');
 });
+
+test('breadth is a bar beside the indices, not a ring in the board', async () => {
+  /* It was a 160px conic-gradient ring at the far end of a four-island board.
+     A ring is read by comparing arc lengths, which nobody can do, and the
+     comparison it exists to make sat two screens below where the market's
+     close is printed. */
+  const template = await read('public/esthmr/template.html');
+  const home = template.slice(template.indexOf('{{ isHome }}'), template.indexOf('{{ isToday }}'));
+  assert.ok(!home.includes('island-breadth'), 'the ring is still in the board');
+  assert.ok(!home.includes('{{ breadthRing }}'), 'the conic gradient is still bound');
+  assert.ok(home.includes('breadth-strip'), 'the breadth bar is missing from Home');
+  assert.ok(home.indexOf('om-idx') < home.indexOf('breadth-strip'),
+            'breadth is above the index levels');
+  assert.ok(home.indexOf('breadth-strip') < home.indexOf('quick-paths'),
+            'breadth fell below the shortcuts');
+
+  /* Every binding the bar reads has to exist, or it draws an empty bar and
+     says nothing — which is how the ring's numbers would have gone stale. */
+  const logic = await read('public/esthmr/logic.js');
+  for (const bound of ['hasBreadth', 'breadthBars', 'breadthCounted', 'breadthNote']) {
+    assert.ok(new RegExp(`${bound}\\s*[:,]`).test(logic), `${bound} is bound in the template but not built`);
+  }
+  for (const field of ['width', 'count', 'pct', 'color', 'label']) {
+    assert.ok(home.includes(`{{ b.${field} }}`), `the bar does not read b.${field}`);
+  }
+
+  /* The third band is companies that TRADED and did not move. One that did not
+     trade has no percentage and is not counted at all — opposite facts, and
+     the note is what stops the band being read as "no trading". */
+  assert.match(logic, /breadthNote:'“Unchanged” is a recorded reading, not an absence of trading\./);
+  assert.match(logic, /breadthNote:'«بلا تغيّر» قراءة مسجّلة، وليست غياب تداول\./);
+  assert.ok(home.includes('{{ L.breadthNote }}'), 'the note is never rendered');
+
+  /* chart-viewer.css reorders Home's children on a phone and sends anything it
+     does not name to the back, so a new section needs naming or it lands
+     below the fold however early it is in the markup. */
+  const phone = await read('public/esthmr/chart-viewer.css');
+  assert.match(phone, /\.journal-home>\.breadth-strip\{order:1\}/,
+               'the bar is not pinned beside the indices on a phone');
+});

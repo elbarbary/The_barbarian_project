@@ -126,6 +126,40 @@
 
       </div>
 
+      <!-- What the market did, beside what it closed at.
+           This was a 160px donut at the far end of a four-island board, which
+           is a long way from the index levels it belongs with — and a ring is
+           read by comparing arc lengths, which nobody can do. The same three
+           numbers as one bar, in proportion, with the counts on the bar.
+
+           The third band is companies that traded and did not move. One that
+           did not trade has no percentage and is not counted at all, so it is
+           in neither the bar nor its denominator: "unchanged" and "did not
+           trade" are opposite facts and the note under the bar says which one
+           this is. -->
+      <sc-if value="{{ hasBreadth }}">
+        <section class="breadth-strip" aria-label="{{ breadthCounted }}">
+          <div class="breadth-head">
+            <h2>{{ L.breadthWord }}</h2>
+            <span class="breadth-of">{{ marketDate }} · {{ breadthCounted }}</span>
+          </div>
+          <div class="breadth-bar" role="img" aria-label="{{ breadthCounted }}">
+            <sc-for list="{{ breadthBars }}" as="b">
+              <i style="width:{{ b.width }};background:{{ b.color }}" title="{{ b.label }} {{ b.count }}"></i>
+            </sc-for>
+          </div>
+          <div class="breadth-keys"><sc-for list="{{ breadthBars }}" as="b">
+            <span class="breadth-key">
+              <i aria-hidden="true" style="background:{{ b.color }}"></i>
+              <span>{{ b.label }}</span>
+              <strong>{{ b.count }}</strong>
+              <small>{{ b.pct }}</small>
+            </span>
+          </sc-for></div>
+          <p class="breadth-note">{{ L.breadthNote }}</p>
+        </section>
+      </sc-if>
+
       <!-- Built in public/esthmr/ai-cards.js. Each card is a statement about a
            MODEL — how the five companies it ranked highest actually did against
            the market — and names no security. Clicking one opens the scenario
@@ -251,18 +285,6 @@
             </button>
           </sc-for></div>
           <sc-if value="{{ noMosaic }}"><p>{{ L.nothingYet }}</p></sc-if>
-        </section>
-        <section class="island island-breadth">
-          <header class="island-heading"><h2>{{ L.breadthWord }}</h2><span>{{ marketDate }}</span></header>
-          <sc-if value="{{ hasBreadth }}">
-            <div class="island-ring" style="background:{{ breadthRing }}" role="img" aria-label="{{ breadthCounted }}">
-              <div><strong>{{ breadthTotal }}</strong><span>{{ breadthTotalLabel }}</span></div>
-            </div>
-            <div class="island-legend"><sc-for list="{{ breadthBars }}" as="b">
-              <div><span class="island-dot" style="background:{{ b.color }}"></span><span>{{ b.label }}</span><strong>{{ b.count }}</strong></div>
-            </sc-for></div>
-          </sc-if>
-          <sc-if value="{{ noBreadth }}"><p>{{ L.nothingYet }}</p></sc-if>
         </section>
         <section class="island island-moves">
           <header class="island-heading"><h2>{{ snapshotMovesLabel }}</h2><button type="button" onClick="{{ goMarket }}">{{ browseLabel }} ↗</button></header>

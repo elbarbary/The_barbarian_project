@@ -475,6 +475,10 @@ export class Component extends Base {
       filedClear:'Clear', filedNothing:'No filing this month matches that.',
       breadthLine:'{up} rose, {down} fell and {flat} held, of {counted} counted in the {date} session.',
       breadthWord:'How widely', breadthOf:'{n} shares counted',
+      // `flat` counts only companies that HAVE a recorded change of zero:
+      // one that did not trade has no pct and is left out of `counted`
+      // altogether. The two are opposite facts and the bar says so.
+      breadthNote:'“Unchanged” is a recorded reading, not an absence of trading.',
       calWindow:'Filed between {from} and {to} in {n} past years.',
       yieldWord:'yield',
       macroMoved:'Moved with the EGX 30 {r} over {n} sessions.',
@@ -870,6 +874,7 @@ export class Component extends Base {
       filedClear:'مسح', filedNothing:'لا يوجد إفصاح هذا الشهر يطابق ذلك.',
       breadthLine:'صعد {up} سهماً وتراجع {down} وثبت {flat}، من إجمالي {counted} سهماً في جلسة {date}.',
       breadthWord:'اتساع حركة السوق', breadthOf:'{n} سهماً محسوباً',
+      breadthNote:'«بلا تغيّر» قراءة مسجّلة، وليست غياب تداول.',
       calWindow:'أُودعت بين {from} و{to} في {n} سنوات سابقة.',
       yieldWord:'عائد الكوبون',
       macroMoved:'تحرك مع إيجي إكس 30 بمقدار {r} على مدى {n} جلسة.',
