@@ -6141,6 +6141,10 @@
     "meaning": "Transitioning from in-kind subsidies to direct cash transfers links fiscal disbursements to national digital payment systems and real-time consumer data infrastructure.",
     "meaning_ar": "يربط التحول من الدعم العيني إلى الدعم النقدي المباشر بين المصروفات المالية العامة ومنظومات الدفع الإلكتروني الوطنية وبنية بيانات الاستهلاك اللحظية."
   },
+  "شعبه الاتصالات تطالب المصانع المحليه بتوضيح اسباب الارتفاع المتكرر لاسعار الاجهزه": {
+    "meaning": "The inquiry initiates a regulatory and trade review of domestic device manufacturing cost structures, focusing on import-dependent component pricing, operational overheads, and exchange rate transmission along the local supply chain.",
+    "meaning_ar": "يمثل هذا الإجراء مراجعة قطاعية لهياكل تكاليف تصنيع الأجهزة محلياً، مع التركيز على تسعير المكونات المستوردة، والمصروفات التشغيلية، وأثر تحركات سعر الصرف على سلاسل الإمداد والتوزيع."
+  },
   "شعبه المواد الغذاييه: تطوير المحلات المنضمه الي كاري اون علي حساب التاجر": {
     "meaning": "Under this retail partnership model, participating grocery merchants fund their own store upgrades and capital expenditures directly, while the CarryOn platform provides the branding, operational standards, and digital network integration.",
     "meaning_ar": "بموجب هذا النموذج التجاري، يتحمل التجار المنضمون التكاليف الرأسمالية وأعمال التطوير لمتاجرهم بشكل مباشر، بينما تقدم منصة «كاري أون» معايير التشغيل، والهوية التجارية، والربط بالشبكة الرقمية."
@@ -7296,6 +7300,10 @@
   "مصانع الصلصه تعاني من شحيه المعروض من الطماطم": {
     "meaning": "A shortage in raw tomato supplies directly constrains input availability for paste manufacturing facilities, operating utilization rates, and raw material procurement costs across the food processing sector.",
     "meaning_ar": "يؤدي نقص المعروض من محصول الطماطم الخام إلى تقييد توافر المدخلات الإنتاجية لمصانع الصلصة، مما يؤثر على معدلات التشغيل وتكاليف توريد المواد الخام في قطاع الصناعات الغذائية."
+  },
+  "مصدر امني ينفي اضراب نزلاء بمراكز الاصلاح والتاهيل بالمنيا عن الطعام": {
+    "meaning": "This security and administrative statement relates to institutional public order and carries no direct operational, balance sheet, or financial mechanism for companies listed on the Egyptian Exchange.",
+    "meaning_ar": "يتعلق هذا البيان الأمني والإداري بالنظام المؤسسي العام، ولا ينطوي على أي آلية تشغيلية أو مالية أو محاسبية مباشرة تؤثر على الشركات المقيدة في البورصة المصرية."
   },
   "مصر السيادي يطلق صندوقا للاستثمار الصناعي براس مال مرخص 10 مليارات جنيه": {
     "meaning": "The Sovereign Fund of Egypt establishes a dedicated industrial investment vehicle with an authorized capital framework of EGP 10 billion, providing direct equity participation and structuring co-investments in manufacturing assets.",
