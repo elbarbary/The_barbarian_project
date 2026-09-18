@@ -17,7 +17,7 @@ import { saidParts, forecastPrices, returnsCards, quoteWhen } from '../../public
 import { readingProblem, mixedSnapshot } from '../../public/esthmr/lab-snapshot.js';
 import {
   scenariosScreen, warningLines, ACCEPTED_KEY, readingKey, baseModels, choiceOf, recordOf, nightsOf,
-  rankingOf, returnsView, standing, spearman, saysOf, listed, pullOf,
+  rankingOf, returnsView, standing, spearman, saysOf, listed, pullOf, statusStrip,
 } from '../../public/esthmr/scenarios.js';
 
 installDom();
@@ -1040,4 +1040,30 @@ test('the workbench and hero carry a dark theme, not a light rectangle on a dark
   assert.match(css, /#app \.aix-cta-quiet \{/);
   assert.match(css, /\.aix-divider \{/);
   assert.match(css, /\.aix-card\.aix-record-card \{ background: var\(--aix-record-bg\)/);
+});
+
+test('the workbench says where the record stands before it shows numbers', () => {
+  /* Maturity was a caption under a chart, which a reader reaches after they
+     have already read the forecast as though it were scored. "0 of 5" is the
+     sharpest case: it reads as nought right out of five when it means the
+     opposite — nothing has been marked yet. */
+  const pending = statusStrip({ sessions: 0, minimum: 5, enough: false }, false);
+  const pendingText = text(pending);
+  assert.match(pendingText, /First evaluation after/);
+  assert.match(pendingText, /5/);
+  assert.match(pendingText, /No measured accuracy yet/);
+  assert.ok(!/\b0\s*(of|\/)\s*5\b/.test(pendingText), 'it still prints a nought out of five');
+
+  const part = statusStrip({ sessions: 2, minimum: 5, enough: false }, false);
+  assert.match(text(part), /After 3 more completed sessions|after\s*3\s*more/i);
+
+  const arabic = statusStrip({ sessions: 0, minimum: 5, enough: false }, true);
+  assert.match(text(arabic), /أول تقييم بعد/);
+  assert.match(text(arabic), /لا توجد دقة مقيسة بعد/);
+
+  const scored = statusStrip({ sessions: 7, minimum: 5, enough: true }, false);
+  assert.match(text(scored), /Scored over/);
+  assert.match(scored.className, /is-scored/);
+
+  assert.equal(statusStrip(null, false), null, 'no record should draw no strip');
 });

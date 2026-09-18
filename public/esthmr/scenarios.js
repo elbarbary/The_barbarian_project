@@ -500,6 +500,36 @@ function aboutModel(meta, ar) {
   return t('Forecasts a return for every company and ranks them by it.', 'يتوقع عائداً لكل شركة ويرتّبها به.');
 }
 
+/* Where this model's record stands, said before any of its numbers.
+ *
+ * The maturity of an evaluation was a caption under a chart, which is where a
+ * reader finds it after they have already read the forecast as though it were
+ * scored. "0 of 5" in particular reads as an accuracy — nought right out of
+ * five — when it means the opposite: nothing has been marked yet.
+ *
+ * So it is a row of its own, above the cards, and it says what is missing
+ * rather than printing a zero for it.
+ */
+export function statusStrip(record, ar) {
+  const t = (en, arabic) => (ar ? arabic : en);
+  if (!record) return null;
+  const left = Math.max(0, (record.minimum || 0) - (record.sessions || 0));
+  const figure = (v) => h('bdi', { dir: 'ltr', class: 'aix-status-n' }, String(v));
+  const body = record.enough
+    ? [t('Scored over ', 'مُقيَّم على '), figure(record.sessions),
+       t(record.sessions === 1 ? ' completed session.' : ' completed sessions.', ' جلسة مكتملة.')]
+    : left > 0
+      ? [t('First evaluation after ', 'أول تقييم بعد '), figure(left),
+         t(left === 1 ? ' more completed session. No measured accuracy yet.'
+                      : ' more completed sessions. No measured accuracy yet.',
+           ' جلسة مكتملة. لا توجد دقة مقيسة بعد.')]
+      : [t('Waiting on the sessions it holds to close. No measured accuracy yet.',
+           'في انتظار إغلاق الجلسات التي يحتفظ بها. لا توجد دقة مقيسة بعد.')];
+  return h('div', { class: record.enough ? 'aix-status is-scored' : 'aix-status' },
+    h('span', { class: 'aix-status-pill' }, t('EVALUATION', 'حالة التقييم')),
+    h('p', { class: 'aix-status-text' }, ...body));
+}
+
 export function scenariosScreen(component, data, ar) {
   const t = (en, arabic) => (ar ? arabic : en);
   const st = component.state;
@@ -679,6 +709,7 @@ export function scenariosScreen(component, data, ar) {
         h('dt', null, t('NEXT SCHEDULED', 'الموعد التالي')),
         h('dd', null, next ? [h('bdi', null, shortDay(next.date, ar)), ' · ', h('bdi', { dir: 'ltr' }, next.time)] : '—'),
         h('small', null, t('Cairo time · after the close, runs can start late', 'بتوقيت القاهرة · بعد الإغلاق، وقد يتأخر التشغيل')))),
+    statusStrip(record, ar),
     h('div', { class: 'aix-bench-grid' },
       controls,
       h('div', { class: 'aix-results' },

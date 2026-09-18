@@ -611,3 +611,35 @@ dialog.aix-dialog::backdrop { background: rgba(22, 36, 47, .5); }
   .aix-dialog-card { animation: none; }
   .aix-switch, .aix-switch b { transition: none; }
 }
+
+/* ── EVALUATION STATUS ──────────────────────────────────
+ *
+ * Where a model's record stands, said above its numbers instead of in a
+ * caption under them. A reader who meets the forecast first has already read
+ * it as though it were scored.
+ *
+ * It is deliberately not coloured like a result. An amber or green strip
+ * here would read as a verdict on the model, and the whole point of the row
+ * is that there is no verdict yet.
+ */
+#app .aix-status {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  border: 1px solid var(--rule); border-radius: var(--radius-island);
+  background: var(--surface); padding: 14px 18px; margin-bottom: 16px;
+}
+#app .aix-status-pill {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 11px; letter-spacing: .09em;
+  color: var(--iris); background: var(--irisTint);
+  border-radius: 999px; padding: 4px 10px; white-space: nowrap;
+}
+#app .aix-status.is-scored .aix-status-pill { color: var(--accent); background: var(--accTint); }
+#app .aix-status-text { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink); }
+#app .aix-status-n {
+  font-family: 'IBM Plex Mono', monospace; font-weight: 600;
+  direction: ltr; unicode-bidi: isolate;
+}
+@media (max-width: 860px) {
+  #app .aix-status { padding: 12px 14px; gap: 10px; }
+  #app .aix-status-text { font-size: 14px; }
+}
