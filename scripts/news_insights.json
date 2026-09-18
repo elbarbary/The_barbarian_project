@@ -1391,6 +1391,10 @@
     "meaning": "A rise in the Japanese yen increases the direct acquisition cost of JPY-denominated imports and raises the local-currency carrying value of yen-denominated liabilities.",
     "meaning_ar": "يؤدي ارتفاع الين الياباني إلى زيادة التكلفة المباشرة للواردات المسعرة بالين، ورفع القيمة المعادلة بالعملة المحلية للالتزامات والديون القائمة بالعملة اليابانية."
   },
+  "ارتفاع اليوان الصيني الي اعلي مستوياته في اربع سنوات": {
+    "meaning": "A stronger Chinese yuan raises the direct local-currency cost of importing intermediate inputs and finished consumer goods invoiced in CNY, while altering the settlement pricing for bilateral cross-border trade transactions.",
+    "meaning_ar": "يؤدي ارتفاع سعر صرف اليوان الصيني إلى زيادة التكلفة المباشرة بالعملة المحلية لاستيراد المدخلات الوسيطة والسلع تامة الصنع المسعرة باليوان، مع تعديل تسعير التسويات في المعاملات التجارية البينية."
+  },
   "ارتفاع تكاليف الاقتراض في بريطانيا يدفع الاسر الي مراجعه الرهون العقاريه وتكاليف المعيشه": {
     "meaning": "Higher benchmark interest rates raise debt-servicing expenses on variable-rate and refinancing mortgages, increasing the allocation of disposable household income toward interest obligations.",
     "meaning_ar": "يؤدي ارتفاع أسعار الفائدة المرجعية إلى زيادة أعباء خدمة الدين على الرهون العقارية ذات الفائدة المتغيرة وتلك المعاد تمويلها، مما يرفع نسبة الفوائد المسددة من الدخل المتاح للأسر."
@@ -6788,6 +6792,10 @@
   "كوريا الجنوبيه تقترب من اتفاق استثماري مع امريكا ب100 مليار دولار": {
     "meaning": "Bilateral investment agreements of this scale involve structured direct capital allocations across specific industrial and manufacturing supply chains between the participating nations.",
     "meaning_ar": "تتضمن الاتفاقيات الاستثمارية الثنائية بهذا الحجم تخصيصات رأسمالية مباشرة وموجهة عبر سلاسل إمداد صناعية وإنتاجية محددة بين الدولتين المشاركتين."
+  },
+  "كوريا الجنوبيه تمدد خفض ضريبه الوقود حتي نوفمبر": {
+    "meaning": "Extending the fuel tax cut maintains domestic retail petroleum prices below the standard statutory fiscal rate, directly fixing fuel-related operating and logistics costs at current levels.",
+    "meaning_ar": "يؤدي تمديد خفض ضريبة الوقود إلى إبقاء أسعار بيع المنتجات البترولية للمستهلكين دون المعدل الضريبي الرسمي، مما يثبت تكاليف التشغيل والنقل عند مستوياتها الحالية."
   },
   "كونتننتال الامريكيه توقع مذكره تفاهم لتطوير رقعه نفطيه ضخمه في فنزويلا": {
     "meaning": "A memorandum of understanding establishes a preliminary operational framework for upstream exploration and development activities between the company and host authorities. This agreement outlines the technical and legal scope for assessing oilfield assets prior to entering binding concession contracts.",
