@@ -2111,6 +2111,10 @@
     "meaning": "Egypt's net international reserves consist of foreign currencies, gold, and Special Drawing Rights held by the Central Bank to meet external debt obligations and finance sovereign import requirements.",
     "meaning_ar": "يمثل صافي الاحتياطي الدولي لمصر الأصول من النقد الأجنبي والذهب وحقوق السحب الخاصة المودعة لدى البنك المركزي، وتُستخدم لسداد الالتزامات الخارجية وتمويل واردات السلع الاستراتيجية."
   },
+  "الاحتياطي الفيدرالي الامريكي يقترب من تعديل اختبارات الضغط للبنوك الكبري": {
+    "meaning": "The Federal Reserve's stress tests determine the minimum capital reserves large banks must hold against simulated economic shocks, and modifying these frameworks recalibrates the regulatory capital buffers required for lending operations and shareholder distributions.",
+    "meaning_ar": "تحدد اختبارات الضغط التي يجريها الاحتياطي الفيدرالي الحد الأدنى من الاحتياطيات الرأسمالية الإلزامية للبنوك الكبرى لمواجهة الصدمات الاقتصادية المفترضة، ويؤدي تعديل هذه الأطر إلى إعادة ضبط المصدات الرأسمالية التنظيمية المرتبطة بعمليات الإقراض والتوزيعات."
+  },
   "الاحصاء: 418.1 مليون دولار صادرات مصر من العنب الطازج خلال 6 اشهر": {
     "meaning": "These export figures reflect foreign currency inflows generated from agricultural trade, directly influencing the trade balance and liquidity within agribusiness supply chains.",
     "meaning_ar": "تعكس بيانات التصدير هذه تدفقات نقدية بالعملة الأجنبية ناتجة عن التجارة الزراعية، مما يؤثر بشكل مباشر على الميزان التجاري ومستويات السيولة في سلاسل إمداد القطاع الزراعي."
@@ -2590,6 +2594,10 @@
   "التضخم في بريطانيا يتسارع الي 3.1% خلال اغسطس": {
     "meaning": "An acceleration in UK inflation raises aggregate price levels and strengthens the operational case for central bank interest rate adjustments, directly affecting cross-border debt yields and sterling currency valuation.",
     "meaning_ar": "يؤدي تسارع التضخم في بريطانيا إلى ارتفاع المستوى العام للأسعار وتعزيز مبررات تعديل أسعار الفائدة من قبل البنك المركزي، مما يؤثر مباشرة على عوائد الديون العابرة للحدود وتقييم الجنيه الإسترليني."
+  },
+  "التفاول بشان الاسهم الاوروبيه يسجل اعلي مستوي منذ 8 سنوات": {
+    "meaning": "Surveys and positioning data track institutional fund allocations and risk appetite toward European equities, reflecting net portfolio exposure relative to global benchmarks.",
+    "meaning_ar": "ترصد استطلاعات الرأي وبيانات المراكز المالية حجم مخصصات الصناديق المؤسسية ومستويات الإقبال على المخاطر تجاه الأسهم الأوروبية، مما يعكس صافي انكشاف المحافظ الاستثمارية مقارنة بالمؤشرات العالمية."
   },
   "التموين تبحث مع «الاسلامي للتنميه» تمويل صوامع جديده وصهاريج لزيوت الطعام": {
     "meaning": "This bilateral engagement involves securing external development financing to fund the capital expenditures required for bulk grain silos and edible oil storage infrastructure.",
@@ -6641,6 +6649,10 @@
     "meaning": "Broad-based inflation across non-energy sectors reflects underlying core pricing pressures, keeping monetary policy elevated and sustaining high dollar-borrowing costs for global and emerging markets.",
     "meaning_ar": "يشير اتساع الضغوط التضخمية خارج قطاع الطاقة إلى استمرار معدلات التضخم الأساسي، مما يثبت مسار السياسة النقدية المرتفعة وتكلفة الاقتراض بالدولار في الأسواق العالمية والناشئة."
   },
+  "عضو ب”المركزي الاوروبي”: قوه الاقتصاد تفتح الباب امام رفع الفايده": {
+    "meaning": "Economic expansion increases aggregate demand and upward price pressures, leading central banks to raise benchmark interest rates to tighten monetary policy and manage inflation.",
+    "meaning_ar": "يؤدي النمو الاقتصادي إلى زيادة الطلب الكلي والضغوط التضخمية، مما يدفع البنوك المركزية إلى رفع أسعار الفائدة الأساسية لتشديد السياسة النقدية وكبح التضخم."
+  },
   "عقود الديزل الامريكيه تتجاوز 5 دولارات للجالون لاول مره منذ 2022": {
     "meaning": "Global diesel prices serve as a direct benchmark for industrial transport, shipping, and power generation operational inputs across import-reliant energy markets.",
     "meaning_ar": "تشكل أسعار الديزل العالمية معياراً تسعيرياً مباشراً لمدخلات تشغيل قطاعات النقل الصناعي والشحن وتوليد الطاقة في الأسواق المعتمدة على استيراد المشتقات البترولية."
@@ -8133,6 +8145,10 @@
     "meaning": "The headline tracks daily wholesale and retail pricing dynamics for fresh agricultural commodities, reflecting immediate equilibrium adjustments between daily farm harvests, logistics flows, and consumer demand.",
     "meaning_ar": "يرصد العنوان حركة الأسعار اليومية لسلع الخضر والفاكهة في أسواق الجملة والتجزئة، والتي تعكس التوازن الآني بين حجم المعروض من المحاصيل الزراعية وتكاليف النقل ومستويات الاستهلاك."
   },
+  "هل استقرت اسعار اللحوم البقري والجملي والكبده والسجق اليوم السبت 19-9-2026 بمحلات الجزاره؟": {
+    "meaning": "Retail meat price tracking monitors domestic consumer food price indices and daily butcher wholesale-to-retail transmission costs influenced by livestock feed pricing and farmgate supply levels.",
+    "meaning_ar": "يعكس رصد أسعار اللحوم بالتجزئة مؤشرات أسعار المستهلكين للأغذية وتكلفة انتقال السلع من أسواق الجملة للمجازر إلى محلات الجزارة وفق تكاليف الأعلاف وحجم المعروض المحلي."
+  },
   "هل انتصرت “الاعتمادات المستنديه” للبنوك علي التوترات الجيوسياسيه؟": {
     "meaning": "Letters of credit serve as bank-guaranteed payment instruments that facilitate cross-border trade settlements by shifting counterparty default risk to issuing financial institutions amidst regional geopolitical instability.",
     "meaning_ar": "تُمثل الاعتمادات المستندية أداة دفع مصرفية تضمن تسوية المعاملات التجارية الخارجية عن طريق تحويل مخاطر التخلف عن السداد إلى البنوك المصدرة في ظل الاضطرابات الجيوسياسية."
@@ -9248,6 +9264,10 @@
   "“سولف فاست” لحلول التحول الرقمي تتوسع في الشرق الاوسط وافريقيا خلال 2028": {
     "meaning": "Geographic expansion into Middle Eastern and African markets involves establishing regional operational infrastructure, deploying digital transformation services across cross-border jurisdictions, and expanding the enterprise client base beyond the domestic market.",
     "meaning_ar": "يتضمن التوسع الجغرافي في أسواق الشرق الأوسط وأفريقيا إنشاء بنية تحتية تشغيلية إقليمية، وتقديم خدمات التحول الرقمي عبر أسواق متعددة، وتوسيع قاعدة العملاء من الشركات خارج السوق المحلي."
+  },
+  "“سي ام ايه سي جي ام” الفرنسيه ترفع رسوم الشحن الاضافيه": {
+    "meaning": "Raising freight surcharges increases per-container ocean transport fees for cargo owners and freight forwarders utilizing the carrier's maritime routes. This adjustment reflects the direct pass-through of elevated operational, security, or bunker expenses into supply chain landed costs.",
+    "meaning_ar": "تؤدي زيادة رسوم الشحن الإضافية إلى رفع تكاليف النقل البحري للحاويات على الشاحنين والمستوردين المتعاملين مع الخط الملاحي. وينقل هذا الإجراء ارتفاع المصاريف التشغيلية والملاحية مباشرة إلى التكلفة الإجمالية للسلع المنقولة عبر سلاسل الإمداد."
   },
   "“سي ان بي سي”: المستثمرون يستعدون لبقاء اسعار الفايده الامريكيه مرتفعه لفتره اطول": {
     "meaning": "Sustained high US interest rates anchor global capital in dollar-denominated assets, maintaining higher borrowing costs for emerging markets and placing persistent pressure on foreign exchange liquidity and sovereign debt servicing.",
