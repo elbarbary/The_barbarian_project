@@ -231,6 +231,10 @@
     "meaning": "This figure represents the aggregate value of executed transactions across listed equities, fixed-income instruments, and government bonds during the weekly trading cycle.",
     "meaning_ar": "يمثل هذا الرقم القيمة الإجمالية للصفقات المنفذة على الأسهم وأدوات الدين المقيدة وسندات الخزانة خلال جلسات التداول الأسبوعية."
   },
+  "788 مليون دولار مبيعات الاجانب في ادوات الدين الحكوميه الاسبوع الماضي": {
+    "meaning": "This outflow represents a net liquidation of treasury bills and bonds by foreign institutional investors, which shifts portfolio holdings to domestic counterparties and transfers the corresponding foreign currency value through the interbank market.",
+    "meaning_ar": "يمثل هذا التخارج تصفية صافية من جانب المستثمرين الأجانب لأذون وسندات الخزانة، مما يحول حيازة تلك الأدوات إلى جهات محلية مع تحويل القيمة المقابلة بالنقد الأجنبي عبر سوق المعاملات بين البنوك (الإنتربنك)."
+  },
   "80 % من الاغذيه المعباه في الهند تحت التهديد": {
     "meaning": "Stricter food quality standards and regulatory compliance frameworks require widespread recipe reformulations, labeling adjustments, and operational changes across packaged food manufacturing supply chains.",
     "meaning_ar": "تتطلب الاشتراطات التنظيمية ومعايير سلامة الغذاء في السوق تعديل تركيبات المنتجات وتحديث ملصقات التعبئة والتغليف وإجراء مواءمات تشغيلية عبر سلاسل إمداد تصنيع الأغذية المعبأة."
