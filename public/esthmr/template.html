@@ -1926,6 +1926,29 @@
       <sc-if value="{{ companyLoading }}"><div class="feed-status" role="status"><span class="loading-dot" aria-hidden="true"></span>{{ companyLoadingLabel }}</div></sc-if>
       <sc-if value="{{ companyError }}"><div class="data-status" role="alert">{{ companyErrorLabel }}<button type="button" onClick="{{ retryCompany }}">{{ retryLabel }}</button></div></sc-if>
       <sc-if value="{{ companyOverview }}">
+      <!-- §11.5's three changes, with one word changed: the comp calls them the
+           three most IMPORTANT, and nothing this site publishes says which of a
+           company's filings mattered. Ranking them here would be this publisher
+           forming a view about a named security. They are the three most
+           RECENT, which is a fact about the archive. -->
+      <sc-if value="{{ hasRecentChanges }}">
+        <section class="co-changes">
+          <p class="card-dateline"><span>{{ recentChanges.dateline }}</span></p>
+          <h3 class="co-changes-title">{{ recentChanges.title }}</h3>
+          <div class="co-changes-grid">
+            <sc-for list="{{ recentChanges.rows }}" as="ch" hint-placeholder-count="3">
+              <div class="co-change">
+                <span class="co-change-date">{{ ch.date }}</span>
+                <span class="co-change-text" dir="auto">{{ ch.text }}</span>
+                <span class="co-change-basis">{{ ch.basis }}</span>
+                <sc-if value="{{ ch.hasHref }}">
+                  <a class="co-change-chip" href="{{ ch.href }}" target="_blank" rel="noopener">{{ ch.chip }} ↗</a>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </sc-if>
       <!-- §11.5: who has filed a stake, and the part nobody has. -->
       {{ companyOwnership }}
       <!-- A rail of every listed company, so changing company does not mean going

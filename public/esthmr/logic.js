@@ -610,6 +610,10 @@ export class Component extends Base {
       investorsTable:'By investor type', investorsType:'Type',
       investorsBuying:'a net buyer', investorsSelling:'a net seller',
       investorsEgpM:'EGP millions, bought less sold',
+      changesTitle:'The last three documented events',
+      changesDateline:'{n} events, each with a filing behind it',
+      changesBasis:'as filed with the exchange',
+      changesChip:'EGX filing',
       todayJob:'What happened today, newest first.',
       dotsJob:'An announcement, then a filing that names it, then a price that moved in the same session. Coincidence is not cause.',
       investorsFrom:'exchange classification · EGP million',
@@ -1009,6 +1013,10 @@ export class Component extends Base {
       investorsTable:'تعاملات فئات المستثمرين', investorsType:'فئة المستثمر',
       investorsBuying:'صافي شراء', investorsSelling:'صافي بيع',
       investorsEgpM:'مليون جنيه (صافي تعاملات)',
+      changesTitle:'آخر ثلاث وقائع موثّقة',
+      changesDateline:'{n} وقائع، لكل منها إفصاح',
+      changesBasis:'كما أُفصح للبورصة',
+      changesChip:'إفصاح EGX',
       todayJob:'ما حدث اليوم، مرتّباً بالأحدث.',
       dotsJob:'إعلان، ثم إفصاح يذكره، ثم سعر تحرّك في الجلسة نفسها. التزامن ليس سببية.',
       investorsFrom:'تصنيف البورصة · مليون جنيه',
@@ -3609,6 +3617,42 @@ export class Component extends Base {
           };
         });
     })();
+    /* §11.5's three changes, with one word changed.
+     *
+     * The comp calls this strip "the three most important changes". This site
+     * cannot rank importance — nothing it publishes says which of a company's
+     * filings mattered, and deciding here would be this publisher forming a
+     * view about a named security, which is the §8 line. So it is the three
+     * most RECENT documented events, which is a fact about the archive.
+     *
+     * Each row carries the kind of document it is rather than a sentence
+     * about what it means: a basis a reader can check, not a reading.
+     */
+    const recentChanges = (() => {
+      const rows = filingRows
+        .filter((f) => f && f.date && (f.title || f.titleAr))
+        .slice()
+        .sort((a2, b2) => String(b2.date).localeCompare(String(a2.date)))
+        .slice(0, 3);
+      if (!rows.length) return null;
+      const kindOf = (row) => {
+        const id = filingGroupOf(row);
+        const found = FILING_GROUPS.find(([gid]) => gid === id);
+        return found ? (ar ? found[2] : found[1]) : '';
+      };
+      return {
+        dateline: L.changesDateline.replace('{n}', this.num(rows.length, 0)),
+        title: L.changesTitle,
+        rows: rows.map((f) => ({
+          date: this.shortDate(f.date),
+          text: (ar ? (f.titleAr || f.title) : (f.title || f.titleAr)) || '',
+          basis: [kindOf(f), L.changesBasis].filter(Boolean).join(' · '),
+          chip: `${this.shortDate(f.date)} · ${L.changesChip}`,
+          href: f.href || '',
+          hasHref: Boolean(f.href),
+        })),
+      };
+    })();
     const companyInsiderItems = (D.insiders && Array.isArray(D.insiders.items) && curTicker)
       ? D.insiders.items.filter((r) => r.ticker === curTicker).slice(0, 8).map((r) => {
           let actLabel = ar ? (r.actionLabelAr || r.actionLabel) : (r.actionLabel || r.actionLabelAr);
@@ -4333,6 +4377,8 @@ export class Component extends Base {
       companyInsiderItems,
       hasCompanyInsiderItems: companyInsiderItems.length > 0,
       filingGroups,
+      recentChanges,
+      hasRecentChanges: Boolean(recentChanges),
       hasFilingGroups: filingGroups.length > 0,
       filingsLoading: archiveLoading,
       noFilingArchive: wantsFilings && !archiveLoading && filingGroups.length === 0,

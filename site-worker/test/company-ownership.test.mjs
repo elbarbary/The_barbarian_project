@@ -77,3 +77,41 @@ test('the card is on the company screen and styled', async () => {
   const css = await read('public/esthmr/journal.css');
   assert.ok(css.includes('.co-own'), 'the card has no styling');
 });
+
+/* ── the last three documented events ───────────────────────────────────── */
+
+test('the three changes are the most recent, never the most important', async () => {
+  /* The comp calls this strip "the three most important changes". Nothing
+     ESTHMR publishes says which of a company's filings mattered, and deciding
+     here would be this publisher forming a view about a named security — the
+     §8 line. Recency is a fact about the archive; importance is an opinion. */
+  const logic = await read('public/esthmr/logic.js');
+  const at = logic.indexOf('const recentChanges = (() => {');
+  assert.ok(at > 0, 'the strip is not built');
+  const body = logic.slice(at, logic.indexOf('\n    })();', at));
+  assert.match(body, /localeCompare/, 'the rows are not ordered by date at all');
+  assert.match(body, /slice\(0, 3\)/, 'the strip is not three');
+  for (const word of ['important', 'best', 'biggest', 'score', 'rank']) {
+    assert.ok(!body.toLowerCase().includes(word), `the strip ${word}s a company's filings`);
+  }
+  // English and Arabic both say what they are.
+  assert.match(logic, /changesTitle:'The last three documented events'/);
+  assert.match(logic, /changesTitle:'آخر ثلاث وقائع موثّقة'/);
+});
+
+test('every change carries a basis a reader can check', async () => {
+  const logic = await read('public/esthmr/logic.js');
+  // The kind of document, not a sentence about what it means.
+  assert.match(logic, /changesBasis:'as filed with the exchange'/);
+  assert.match(logic, /changesBasis:'كما أُفصح للبورصة'/);
+  const template = await read('public/esthmr/template.html');
+  const at = template.indexOf('co-changes-grid');
+  assert.ok(at > 0, 'the strip is never rendered');
+  const block = template.slice(at, at + 900);
+  for (const field of ['ch.date', 'ch.text', 'ch.basis', 'ch.chip']) {
+    assert.ok(block.includes(field), `a change row drops ${field}`);
+  }
+  // The link is only drawn when there is one: a chip that goes nowhere reads
+  // as a document this site is hiding.
+  assert.match(block, /sc-if value="\{\{ ch\.hasHref \}\}"/);
+});
