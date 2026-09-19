@@ -51,13 +51,20 @@ test('rankings and pairs round-trip through reload and Back routes',()=>{
   assert.equal(readRoute('?view=market&mode=volume').marketMode,'volume');
   assert.equal(readRoute('?view=market&rank=unknown').rankMetric,'cap');
 });
-test('price ranking does not compare dollars as pounds and News is named directly',()=>{
+test('price ranking does not compare dollars as pounds, and the destination is named for all three things in it',()=>{
   const c=fixture();c.data().companies[1].foreignCurrency=true;c.data().companies[1].currency='USD';
   c.state.rankMetric='close';
   assert.equal(c.renderVals().explorer.rows.at(-1).ticker,'BBB');
-  assert.equal(c.renderVals().primaryNav.find(n=>n.id==='today').label,'News');
+  /* It was "News", which was accurate while the destination held the news
+     feed and nothing else. §4 gives it three: the news, the official
+     disclosure archive, and the connected stories. Naming a destination after
+     one of the three things in it sends a reader looking for a filing to the
+     wrong tab, so it takes the review's own label. */
+  assert.equal(c.renderVals().primaryNav.find(n=>n.id==='today').label,'Updates');
+  assert.deepEqual(c.renderVals().primaryNav.find(n=>n.id==='today').screens,
+    ['today','calendar','crossings']);
   c.state.lang='ar';
-  assert.equal(c.renderVals().primaryNav.find(n=>n.id==='today').label,'الأخبار');
+  assert.equal(c.renderVals().primaryNav.find(n=>n.id==='today').label,'المستجدات');
 });
 
 /* §8.6, on the Home screen.

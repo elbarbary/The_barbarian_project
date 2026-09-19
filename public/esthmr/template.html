@@ -49,7 +49,19 @@
   <header class="journal-toolbar">
     <span class="journal-wordmark">ESTHMR <span>{{ journalLabel }}</span></span>
     <button type="button" class="journal-search" onClick="{{ goMarket }}">{{ findCompany }}</button>
-    <button type="button" class="journal-preferences" onClick="{{ togglePreferences }}" aria-expanded="{{ preferencesOpen }}">{{ preferencesLabel }}</button>
+    <!-- §4: "Mobile header: brand, company search, account icon."
+         It was a text button reading "Language & appearance", beside a fixed
+         corner strip holding the reader's email, sign-out, the share button
+         and — for one account — an admin pill. At 390px those crowded the
+         header, and the admin button gave the founder a differently shaped
+         header from every reader's. One icon now opens all of it. -->
+    <button type="button" class="journal-account" onClick="{{ togglePreferences }}"
+            aria-expanded="{{ preferencesOpen }}" aria-label="{{ preferencesLabel }}"
+            title="{{ preferencesLabel }}">
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="8" r="3.4"></circle><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"></path>
+      </svg>
+    </button>
   </header>
   <sc-if value="{{ preferencesOpen }}">
     <div class="journal-preferences-panel">
@@ -60,6 +72,19 @@
   </sc-if>
   <sc-if value="{{ secondaryNav.length }}"><nav class="journal-subnav" aria-label="{{ sectionNavigationLabel }}">
     <sc-for list="{{ secondaryNav }}" as="n"><button type="button" onClick="{{ n.go }}" aria-current="{{ n.current }}">{{ n.label }}</button></sc-for>
+  </nav></sc-if>
+  <!-- §4: under Stocks the strip arrives in three named groups.
+       Eleven equal buttons made a reader choose an analysis technique before
+       seeing an answer. The same destinations, under Companies / Sectors /
+       Maps, so the first choice is a kind of question rather than a piece of
+       this site's vocabulary. Nothing was removed and no route changed. -->
+  <sc-if value="{{ secondaryGroups.length }}"><nav class="journal-subnav journal-subnav-grouped" aria-label="{{ sectionNavigationLabel }}">
+    <sc-for list="{{ secondaryGroups }}" as="g">
+      <span class="subnav-group">
+        <span class="subnav-group-label">{{ g.label }}</span>
+        <sc-for list="{{ g.items }}" as="n"><button type="button" onClick="{{ n.go }}" aria-current="{{ n.current }}">{{ n.label }}</button></sc-for>
+      </span>
+    </sc-for>
   </nav></sc-if>
 
   <sc-if value="{{ dataLoading }}"><div class="loading-islands" role="status"><div class="data-status"><span class="loading-dot" aria-hidden="true"></span>{{ loadingLabel }}</div><div class="loading-island-grid" aria-hidden="true"><div><i></i><b></b><span></span></div><div><i></i><b></b><span></span></div><div><i></i><b></b><span></span></div></div></div></sc-if>

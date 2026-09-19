@@ -1235,3 +1235,51 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
   font: inherit; font-size: 13px; cursor: pointer;
 }
 #app .insiders-down button:hover { background: var(--sunk); }
+
+/* §4: the Stocks strip, in three named groups.
+ * The label is a quiet mono caption rather than another button, so a reader
+ * can see at a glance that there are three kinds of thing here and not
+ * fourteen equal ones. The groups are separated by a rule instead of a gap,
+ * because a gap at this size reads as an accident of wrapping. */
+#app .journal-subnav-grouped { flex-wrap: wrap; gap: 0 4px; align-items: center; }
+#app .subnav-group { display: inline-flex; align-items: center; gap: 4px; }
+#app .subnav-group + .subnav-group {
+  margin-inline-start: 10px; padding-inline-start: 12px;
+  border-inline-start: 1px solid var(--rule);
+}
+#app .subnav-group-label {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 9.5px; letter-spacing: .13em; text-transform: uppercase;
+  color: var(--faint); padding-inline-end: 4px; white-space: nowrap;
+}
+@media (max-width: 700px) {
+  /* On a phone the rule between groups becomes a line break instead: three
+     short rows read better than one that wraps mid-group. */
+  #app .journal-subnav-grouped { flex-direction: column; align-items: flex-start; gap: 8px; }
+  #app .subnav-group + .subnav-group {
+    margin-inline-start: 0; padding-inline-start: 0; border-inline-start: 0;
+  }
+  #app .subnav-group { flex-wrap: wrap; }
+}
+
+/* §4: the account icon, and the overflow it opens.
+ *
+ * The header is brand, search, account — and nothing else. Everything that
+ * used to sit in the fixed corner strip (email, sign out, share, admin) opens
+ * under it, together with language and appearance.
+ *
+ * The strip's nodes are NOT moved. They live outside `#app`, which dc.js
+ * rebuilds on every redraw, so a node relocated into it would come back
+ * without the listeners main.js binds by id. CSS repositions them instead,
+ * and `--head-h` (measured in main.js) says where the header ends. */
+#app .journal-account {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; min-width: 44px; height: 44px; padding: 0;
+  border-radius: 999px; background: var(--surface);
+  border: 1px solid var(--edgeIn); color: var(--t2); cursor: pointer;
+}
+#app .journal-account svg { width: 19px; height: 19px; }
+#app .journal-account:hover { color: var(--ink); }
+#app .journal-account[aria-expanded="true"] {
+  background: var(--activeBg); color: var(--ink); border-color: var(--rule);
+}

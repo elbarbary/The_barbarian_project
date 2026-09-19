@@ -202,6 +202,26 @@ function measureTopChrome() {
   const height = (el && !el.hidden && typeof el.getBoundingClientRect === 'function')
     ? Math.round(el.getBoundingClientRect().height) : 0;
   root.style.setProperty('--tape-h', `${height}px`);
+
+  /* §4: where the account sheet hangs from on a phone.
+     The account controls — the reader's email, sign out, the share button and,
+     for one account, admin — used to sit in a fixed corner strip over the
+     header. At 390px they crowded it, and the admin button made the founder's
+     header a different shape from every reader's.
+     They are now a sheet that opens under the header, which means something
+     has to know where the header ends. Measured rather than assumed for the
+     same reason `--tape-h` is: the strip above changes height, the language
+     panel opens and closes beneath the toolbar, and a hard-coded offset would
+     put the sheet through the middle of whatever is actually there.
+     The nodes themselves never move. They live outside `#app`, and `#app` is
+     rebuilt on every redraw, so a node relocated into it would lose the
+     listeners main.js binds by id. */
+  const bar = document.querySelector('.journal-toolbar');
+  const panel = document.querySelector('.journal-preferences-panel');
+  const anchor = panel || bar;
+  const bottom = (anchor && typeof anchor.getBoundingClientRect === 'function')
+    ? Math.round(anchor.getBoundingClientRect().bottom) : 0;
+  root.style.setProperty('--head-h', `${Math.max(bottom, height)}px`);
 }
 if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
   window.addEventListener('resize', measureTopChrome);

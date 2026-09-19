@@ -928,11 +928,26 @@ test('a Home row for a model with nothing to rank explains why the workbench sho
   assert.match(text(screen(c)), /Flat, says nothing ranks nothing of its own to show/);
 });
 
-test('the workbench has no tab of its own: Home’s buttons open it', async () => {
+test('the workbench is reachable from More, and previewed on Home', async () => {
+  /* THIS REVERSES A RULE THAT WAS RIGHT WHEN IT WAS WRITTEN.
+     The workbench had no navigation entry, because it sat in a destination of
+     its own beside Home and "a row of one tab under the header is a selector
+     with nothing to select". True then. §4 rebuilt the destinations into five,
+     and More now holds eight screens — so an entry here is one of eight, not
+     a row of one, and the original objection no longer applies.
+     §4 also names it: "More: AI lab, calculators, valuation map, world
+     context, and detailed research", with "AI remains visible through a
+     compact homepage preview, not hidden exclusively in More". Both, then:
+     an entry under More AND the preview on Home. Without the entry it could
+     be opened from Home and from nowhere else. */
   const logic = await read('public/esthmr/logic.js');
-  assert.doesNotMatch(logic, /\['scenarios', ar\?/);
-  assert.match(logic, /screens: \['home', 'scenarios'\]/);
+  assert.match(logic, /\['scenarios', ar\?'مختبر النماذج':'Model lab'/);
+  assert.match(logic, /id: 'tools', label: ar \? 'المزيد' : 'More'/);
+  assert.match(logic, /screens: \['tools', 'scenarios'/);
   assert.match(logic, /secondaryNav: secondaryNav\.length > 1 \? secondaryNav : \[\]/);
+  // And Home still previews it, so More is not the only way in.
+  const template = await read('public/esthmr/template.html');
+  assert.ok(template.includes('{{ aiCards }}'), 'Home lost the lab preview');
 });
 
 test('the questions are gone: no screen, no route, no picker, no saved-question store', async () => {

@@ -4326,7 +4326,11 @@ export class Component extends Base {
       ['valuation', ar ? 'التقييم والديون' : 'Valuation & Debt', ''],
       ['pairs', ar ? 'فروق الأسعار والتسوية' : 'Pairs & Arbitrage', ''],
       ['fragility', ar ? 'بحث إنذار الانهيارات' : 'Crash warning research', ''],
-      ['today', ar ? 'الموجز' : 'Today', ''],
+      /* `today` was defined twice, here and above. The second definition won
+         wherever a lookup took the last match and lost wherever it took the
+         first, so the same screen carried two names — "News" and "الموجز" —
+         depending on which list was being read. One entry, the one that says
+         what is on the screen. */
       ['calendar', ar ? 'الإفصاحات' : 'Disclosures', ''],
       // The crossings were a block on Today under the news. They are a
       // different claim — one company in more than one feed at once — and
@@ -4339,6 +4343,14 @@ export class Component extends Base {
       ['ownership', ar?'عدسة الملكية':'Ownership lens', ''],
       ['world', ar?'مرصد العالم':'World monitor', ''],
       ['tools', ar?'حاسبة المستثمر':'Tools', ''],
+      /* The workbench had no entry here, under a rule that a destination with
+         one screen is "a selector with nothing to select". That was true when
+         it sat alone beside Home. It now sits in More with seven others, and
+         §4 puts it there by name — "More: AI lab, calculators, valuation map,
+         world context, and detailed research" — while keeping the compact
+         preview on Home so it is not hidden behind a menu either. Without an
+         entry it could be opened from Home and from nowhere else. */
+      ['scenarios', ar?'مختبر النماذج':'Model lab', ''],
       // Only where there is something to open. `studies` is the demo's three
       // mock-up papers and nothing else — no research document is published —
       // so every signed-in reader who clicked this got a 50px heading and the
@@ -4355,22 +4367,67 @@ export class Component extends Base {
         dot: on ? acc : 'transparent' };
     });
 
-    // Organize by the reader's task, keeping every existing screen reachable.
+    /* §4: FIVE DESTINATIONS, AND EXPLORE'S ELEVEN IN THREE NAMED GROUPS.
+       "Explore exposes 11 subsection choices before its search/filter/table
+       experience. Feature names compete; users must choose an analysis
+       technique before seeing an answer." Eleven equal buttons is not a menu,
+       it is a quiz about this site's vocabulary — and the reader has to pass
+       it before seeing a single figure.
+       Nothing is removed and no route changes: every screen below is still one
+       or two clicks from where it was, and `fragility` keeps its own URL. What
+       changes is that the eleven arrive in three named groups, so a reader
+       picks a KIND of question first. The groups are the review's own:
+       Companies, Sectors, Maps & Research.
+
+       Where each screen sits was settled by batching all nineteen through Jev
+       against the five destinations. It agreed with the review outright on ten
+       — home, market, company, investors, sectors, liquidity, fragility,
+       research, tools, scenarios, all at 0.83 or better. It put `heat`,
+       `ownership` and `calendar` elsewhere, but the review names those
+       destinations in its own words, so the review wins where it speaks. It
+       settled the two the review is silent on: `pairs` and `exchange`. */
+    const STOCK_GROUPS = [
+      { id: 'companies', label: ar ? 'الشركات' : 'Companies',
+        screens: ['market', 'company', 'investors'] },
+      { id: 'sectors', label: ar ? 'القطاعات' : 'Sectors',
+        screens: ['sectors', 'liquidity'] },
+      { id: 'maps', label: ar ? 'خرائط' : 'Maps',
+        screens: ['heat', 'ownership'] },
+    ];
+    const STOCK_SCREENS = STOCK_GROUPS.flatMap((g) => g.screens);
     const groups = [
-      { id: 'home', label: ar ? 'نظرة عامة' : 'Overview', screens: ['home', 'scenarios'] },
-      { id: 'market', label: ar ? 'استكشف' : 'Explore', screens: ['market', 'heat', 'sectors', 'valuation', 'pairs', 'fragility', 'company', 'investors', 'exchange', 'liquidity', 'ownership', 'world'] },
-      { id: 'today', label: ar ? 'الأخبار' : 'News', screens: ['today', 'calendar', 'crossings', 'research'] },
-      { id: 'watchlist', label: ar ? 'متابعتي' : 'Watchlist', screens: ['watchlist'] },
-      { id: 'tools', label: ar ? 'الأدوات' : 'Tools', screens: ['tools'] },
+      { id: 'home', label: ar ? 'اليوم' : 'Today', screens: ['home'] },
+      { id: 'market', label: ar ? 'الأسهم' : 'Stocks', screens: STOCK_SCREENS },
+      { id: 'watchlist', label: ar ? 'متابعتي' : 'Following', screens: ['watchlist'] },
+      { id: 'today', label: ar ? 'المستجدات' : 'Updates',
+        screens: ['today', 'calendar', 'crossings'] },
+      { id: 'tools', label: ar ? 'المزيد' : 'More',
+        screens: ['tools', 'scenarios', 'valuation', 'pairs', 'world', 'research',
+          'fragility', 'exchange'] },
     ];
     const activeGroup = groups.find(g => g.screens.includes(st.screen)) || groups[0];
     const primaryNav = groups.map(g => ({ ...g, icon: ICON[g.id],
       current: activeGroup.id === g.id ? 'page' : null,
       go: this.go(g.id) }));
-    const secondaryNav = navDef.filter(([id]) => activeGroup.screens.includes(id)
-      && (id !== 'company' || st.ticker)).map(([id, label]) => ({
-        label, current: st.screen === id ? 'page' : null, go: id === 'fragility' ? () => { window.location.href = 'fragility'; } : this.go(id),
-      }));
+    const byId = new Map(navDef.map(([id, label, meta]) => [id, { label, meta }]));
+    const reach = (id) => ({
+      id,
+      label: (byId.get(id) || {}).label || id,
+      meta: (byId.get(id) || {}).meta || '',
+      current: st.screen === id ? 'page' : null,
+      /* `fragility` is served at its own URL rather than as a screen of this
+         app, and always has been. It keeps that URL. */
+      go: id === 'fragility' ? () => { window.location.href = 'fragility'; } : this.go(id),
+    });
+    const reachable = (id) => byId.has(id) && (id !== 'company' || st.ticker);
+    /* Under Stocks the strip is grouped; everywhere else it is the flat list
+       it was, because two screens do not need headings over them. */
+    const secondaryGroups = activeGroup.id === 'market'
+      ? STOCK_GROUPS.map((g) => ({ label: g.label, items: g.screens.filter(reachable).map(reach) }))
+        .filter((g) => g.items.length)
+      : [];
+    const secondaryNav = secondaryGroups.length ? []
+      : activeGroup.screens.filter(reachable).map(reach);
 
     const marketExplorer = explorer(this, D.companies, ar, D.trends);
     const pairsData = pairsExplorer(this, D, ar, React);
@@ -4408,7 +4465,12 @@ export class Component extends Base {
     const out = {
       story, showStoryHub:!st.dataLoading&&!st.dataError&&(st.screen==='crossings'||st.screen==='calendar'),
       L, theme: st.theme, dir: ar ? 'rtl' : 'ltr',
-      primaryNav, secondaryNav: secondaryNav.length > 1 ? secondaryNav : [],
+      primaryNav,
+      /* One destination with one screen under it needs no strip; the tab
+         already says where the reader is. */
+      secondaryNav: secondaryNav.length > 1 ? secondaryNav : [],
+      secondaryGroups: secondaryGroups.reduce((n, g) => n + g.items.length, 0) > 1
+        ? secondaryGroups : [],
       navigationLabel: ar ? 'التنقل الرئيسي' : 'Main navigation',
       sectionNavigationLabel: ar ? 'أقسام الصفحة' : 'Section navigation',
       findCompany: ar ? 'ابحث عن شركة' : 'Find a company',
@@ -4542,9 +4604,26 @@ export class Component extends Base {
       showHomeDetails: st.showHomeDetails !== false,
       toggleHomeDetails: () => this.setState({ showHomeDetails: st.showHomeDetails === false }),
       overviewIntro: ar ? 'ابدأ بملخص الجلسة، ثم انتقل إلى الشركة والدليل وراء أرقامها.' : 'Start with the session, then explore a company and the evidence behind its figures.',
-      preferencesLabel: ar ? 'اللغة والمظهر' : 'Language & appearance',
+      /* The button is an icon now and the panel behind it is the account
+         overflow, so the label is what a screen reader reads rather than what
+         is printed on it. */
+      preferencesLabel: ar ? 'الحساب واللغة والمظهر' : 'Account, language and appearance',
       preferencesOpen: st.preferencesOpen,
-      togglePreferences: () => this.setState({ preferencesOpen: !st.preferencesOpen }),
+      togglePreferences: () => {
+        const open = !st.preferencesOpen;
+        /* The account controls sit outside `#app` — `#app` is rebuilt on every
+           redraw and would destroy the listeners main.js binds by id — so the
+           sheet is opened by an attribute on <body> that CSS reads, not by
+           rendering them here. Set in the handler rather than in render,
+           because a render that writes to the document is a render that fires
+           again. */
+        try {
+          const body = document.body;
+          if (open) body.setAttribute('data-account-open', '');
+          else body.removeAttribute('data-account-open');
+        } catch { /* not in a browser */ }
+        this.setState({ preferencesOpen: open });
+      },
       filtersOpen: st.filtersOpen,
       filterLabel: ar ? 'القطاع والمقاييس' : 'Sector & measures',
       toggleFilters: () => this.setState({ filtersOpen: !st.filtersOpen }),

@@ -953,3 +953,38 @@ body[data-signed="no"] .om-main { padding-top: 62px !important; }
 .adm-login-tag.active {
   background: var(--upTint); color: var(--up); border-color: transparent;
 }
+
+/* §4: on a phone the account controls are an overflow, not a floating strip.
+ *
+ * "At 390 px, the email/account controls crowd the header; the founder sees
+ * an additional admin button." Both halves of that matter: the strip took
+ * space the header needed, and because the admin pill only exists for one
+ * account, the person building the site saw a header no reader ever sees.
+ *
+ * Closed, they are not in the layout at all. Open, they are a sheet hanging
+ * from the measured bottom of the header. `#signin` is deliberately left out
+ * of this rule — signing in is the one thing a signed-out visitor must be
+ * able to reach without first finding a menu. */
+@media (max-width: 700px) {
+  body .account { display: none !important; }
+  body[data-account-open] .account {
+    display: flex !important;
+    position: fixed !important;
+    top: calc(var(--head-h, 92px) + 8px) !important;
+    inset-inline: 12px !important;
+    flex-direction: column; align-items: stretch; gap: 8px;
+    padding: 12px; border-radius: var(--radius-island);
+    background: var(--surface); border: 1px solid var(--edgeIn);
+    box-shadow: var(--shLift); z-index: 80;
+  }
+  body[data-account-open] .account #who { max-width: none; }
+  /* Full width inside the sheet, so they are a stack of choices rather than a
+     row that wraps unevenly. */
+  body[data-account-open] .account button,
+  body[data-account-open] .account #who { justify-content: center; width: 100%; }
+  /* The signed-out visitor keeps the sign-in button in the corner, where it
+     has always been and where it is the only thing they need. */
+  body[data-signed="no"] .account { display: flex !important; }
+  body[data-signed="no"] .account #who,
+  body[data-signed="no"] .account #story-btn { display: none !important; }
+}
