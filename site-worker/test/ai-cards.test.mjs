@@ -76,17 +76,33 @@ test('the copy does not promise, and the beta label is on the surface', () => {
   assert.match(cardsSrc, /not an index/);
 });
 
-test('the cards sit high on Home, under the market', async () => {
-  /* They used to be FIRST, above the index levels, on a phone by `order: -1`
-     and on a desktop by being first in the markup. That is the thing the
-     review objected to: a visitor met the machinery before the market.
-     The owner's call is market first, models immediately after — still above
-     the fold, which is what the rule was for.
-
-     chart-viewer.css reorders Home's children under 600px and puts anything
-     it does not name last, so the markup order alone does not decide this. */
+test('the lab leads the desktop page, and the market still leads a phone', async () => {
+  /* THIS REVERSES AN EARLIER DECISION, ON THE DESKTOP ONLY.
+   *
+   * The cards were once first, above the index levels. A review objected —
+   * a visitor met the machinery before the market — and the owner's call was
+   * market first, models immediately after. That is what this test used to
+   * pin.
+   *
+   * Turn 6 of the redesign, headed "CORRECTED AGAINST THE LIVE SITE", puts
+   * مختبر النماذج back at the top of the desktop page. It is the later
+   * instruction and it was written with the live site in front of it, so it
+   * wins where it speaks. The argument it makes is a good one: the market
+   * head is the same three indices every session, while the lab card is the
+   * only block on Home whose content changed because a night ran.
+   *
+   * The comp is a desktop 1440 mock and says nothing about a phone, where the
+   * original objection still holds — the fold is one card tall and the index
+   * level is the figure the page is opened for. So the phone ordering is
+   * unchanged, and this test now pins BOTH: lab first in the markup, market
+   * first under 600px.
+   *
+   * chart-viewer.css reorders Home's children under 600px and puts anything
+   * it does not name last, so the markup order alone does not decide the
+   * phone. */
   const css = await read('public/esthmr/ai.css');
-  assert.match(css, /#app \.journal-home > \.ai-cards \{ order: 2; \}/);
+  assert.match(css, /#app \.journal-home > \.ai-cards \{ order: 2; \}/,
+    'the phone no longer puts the market above the record');
   const phone = await read('public/esthmr/chart-viewer.css');
   const order = (sel) => Number((phone.match(new RegExp(`\\.journal-home>\\${sel}\\{order:(\\d+)`)) || [])[1]);
   assert.equal(order('.om-idx'), 1, 'the indices are not first after the header');
@@ -96,10 +112,13 @@ test('the cards sit high on Home, under the market', async () => {
 
   const template = await read('public/esthmr/template.html');
   const home = template.indexOf('{{ isHome }}');
-  const at = (s) => template.indexOf(s, home);
-  assert.ok(at('journal-intro') < at('om-idx'), 'the session header is not first');
-  assert.ok(at('om-idx') < at('{{ aiCards }}'), 'the machinery is above the market again');
-  assert.ok(at('{{ aiCards }}') < at('quick-paths'), 'the record fell below the shortcuts');
+  const at = (s2) => template.indexOf(s2, home);
+  assert.ok(at('journal-intro') < at('{{ aiCards }}'), 'the session header is not first');
+  assert.ok(at('{{ aiCards }}') < at('om-idx'),
+    'turn 6 puts the lab above the market head on a desktop');
+  assert.ok(at('om-idx') < at('quick-paths'), 'the market fell below the shortcuts');
+  assert.ok(at('{{ aiCards }}') < at('{{ changedToday }}'),
+    'the two Home shelves swapped places');
 });
 
 test('restoring Home did not cost it the sections it had', async () => {

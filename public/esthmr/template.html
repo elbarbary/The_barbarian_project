@@ -96,6 +96,20 @@
         <p class="journal-eyebrow">{{ marketDate }} · {{ sessionState }}</p>
         <h1>{{ overviewTitle }}</h1>
       </header>
+
+      <!-- §T6: the model lab opens the page.
+           The comp puts it above the market head, and the reason holds up: the
+           market head is the same three indices every session, while this card
+           is the only thing on Home that changed because a night ran. Under the
+           indices it read as a footnote to them; above, it is what it is — the
+           one block whose content is ours rather than the exchange's.
+
+           Built in public/esthmr/ai-cards.js. Each card is a statement about a
+           MODEL — how the five companies it ranked highest actually did against
+           the market — and names no security. Clicking one opens the scenario
+           workbench, which does name securities and is gated accordingly. -->
+      {{ aiCards }}
+
       <!-- The market, first.
            The three index levels were already the biggest figures here, but
            they sat under the models' own record and a row of shortcuts — so a
@@ -123,7 +137,8 @@
             <div style="display:flex;gap:10px;align-items:baseline;margin-top:7px;font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:500;color:{{ ix.color }}">
               <span>{{ ix.chg }}</span><span>{{ ix.pct }}</span>
             </div>
-            <div style="margin-top:14px">{{ ix.spark }}</div>
+            <div class="idx-chart" style="margin-top:14px">{{ ix.spark }}</div>
+            <div class="idx-chart-note">{{ ix.sparkNote }}</div>
           </div>
         </sc-for>
 <sc-if value="{{ noIndices }}">
@@ -167,13 +182,40 @@
       </sc-if>
       </div>
 
+      <!-- Turn 6, block 9: the reader's own list, on Home.
+           The comp puts المتابَعة between the market head and ما تغيّر اليوم,
+           and the argument is that a reader who has followed four companies
+           opens this page to see those four — not to be sent to another
+           screen for them. It is a strip rather than the full table: code,
+           name, close, move, and the company's own line. The full list is one
+           click away and keeps everything this leaves out.
 
-      <!-- Built in public/esthmr/ai-cards.js. Each card is a statement about a
-           MODEL — how the five companies it ranked highest actually did against
-           the market — and names no security. Clicking one opens the scenario
-           workbench, which does name securities and is gated accordingly. -->
-      {{ aiCards }}
+           Absent entirely when nobody is followed. An empty four-up grid of
+           placeholder cards is worse than no block, and an invitation to
+           follow something already sits on every company row. -->
+      <sc-if value="{{ hasFollowed }}">
+        <section class="home-watch" aria-label="{{ L.followTitle }}">
+          <p class="card-dateline">
+            <span>{{ followWhen }}</span>
+            <button type="button" onClick="{{ goWatchlist }}">{{ L.followOpenList }} ↗</button>
+          </p>
+          <h2 class="home-watch-title">{{ L.followTitle }}</h2>
+          <div class="home-watch-grid">
+            <sc-for list="{{ followed }}" as="w" hint-placeholder-count="4">
+              <button type="button" class="home-watch-card" onClick="{{ w.go }}">
+                <span class="hw-code">{{ w.ticker }}</span>
+                <span class="hw-name">{{ w.name }}</span>
+                <span class="hw-close">{{ w.close }}</span>
+                <span class="hw-pct" style="color:{{ w.color }}">{{ w.pct }}</span>
+                <span class="hw-spark">{{ w.spark }}</span>
+                <span class="hw-note">{{ w.sparkNote }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </section>
+      </sc-if>
       {{ changedToday }}
+
       <div class="quick-paths"><sc-for list="{{ quickActions }}" as="q">
         <button type="button" onClick="{{ q.go }}"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="{{ q.icon }}"></path></svg><span><strong>{{ q.label }}</strong><small>{{ q.note }}</small></span><span class="quick-arrow" aria-hidden="true">↗</span></button>
       </sc-for></div>
@@ -1892,6 +1934,15 @@
         <div dir="ltr" style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);margin-top:10px">
           <span>{{ chartFrom }}</span><span>{{ L.sessionsShown }} {{ chartCount }}</span><span>{{ chartTo }}</span>
         </div>
+        <!-- What the dashed line is. A chart with two lines and one caption is
+             a chart with an unexplained line, and an unlabelled ghost behind a
+             share price is read as the share's own second reading. Rendered
+             only when the line was actually drawn. -->
+        <sc-if value="{{ chartBench }}">
+          <p class="co-bench-key">
+            <span class="co-bench-mark" aria-hidden="true"></span>{{ chartBenchNote }}
+          </p>
+        </sc-if>
       </section>
 
         <!-- A grid, not a wrapping flex row. Flex sized every tile to its own
@@ -1949,6 +2000,11 @@
           </div>
         </section>
       </sc-if>
+      <!-- Turn 4, block 11: two readings drawn about this company alone.
+           Above the ownership bar rather than below it, because both are
+           measurements of the last session and the ownership filing is often
+           months old — the page reads newest-first down the column. -->
+      {{ companyCards }}
       <!-- §11.5: who has filed a stake, and the part nobody has. -->
       {{ companyOwnership }}
       <!-- A rail of every listed company, so changing company does not mean going

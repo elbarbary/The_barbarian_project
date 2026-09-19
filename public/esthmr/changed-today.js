@@ -44,17 +44,28 @@ function card({ dateline, primitive, title, visual, limit, chip, more, key }) {
 }
 
 /**
- * The busiest company in the session, against its own normal.
+ * The busiest companies in the session, each against its own normal.
  *
- * Two bars and nothing else: the median of its last twenty sessions, then
- * this one. The ratio is already on Home as a figure; the point of drawing
- * it is that "16×" means nothing until a reader sees what it was 16 times.
+ * WHY THE BARS ARE MULTIPLES AND NOT SHARE COUNTS
+ * The obvious chart — four companies' session volumes on one axis — cannot be
+ * drawn honestly. On this exchange the busiest name trades billions of shares
+ * and the fourth-busiest trades hundreds of thousands, so a shared axis draws
+ * three of the four as hairlines on the floor and the card says "one company
+ * traded and the others did not", which is false.
+ *
+ * So each company is drawn against ITSELF: its own twenty-session median is
+ * the bar of 1, and this session is however many times that it reached. Now
+ * the four are comparable, because the question the card asks — how far above
+ * its own normal did this go — is the same question for each of them. The real
+ * share count sits under its own bar so the multiple is never the only number
+ * a reader leaves with.
  */
-function volumeCard(data, ar, t, open) {
+function volumeCard(data, ar, t, open, day) {
   const rows = (data.companies || []).filter((c) => finite(c.rv) && finite(c.volume)
     && finite(c.medianVolume) && c.medianVolume > 0 && !c.listing);
   if (!rows.length) return null;
-  const top = rows.reduce((best, c) => (c.rv > best.rv ? c : best), rows[0]);
+  const top = rows.slice().sort((a, b) => b.rv - a.rv).slice(0, 4);
+  const lead = top[0];
   /* A directory row carries its name as `{ en, ar }`, not as a string —
      `data.live()` builds it that way so a screen can pick a language without
      a second lookup. Reading it as a string printed "[object Object]" in the
@@ -64,25 +75,29 @@ function volumeCard(data, ar, t, open) {
     if (n && typeof n === 'object') return (ar ? n.ar : n.en) || row.ticker;
     return n || row.ticker;
   };
-  const name = named(top);
+  const name = named(lead);
   return card({
     key: 'volume',
-    dateline: t(`${data.marketDate} · close`, `${data.marketDate} · إغلاق`),
+    dateline: t(`${day(data.marketDate)} · close · ${top.length} companies`,
+      `${day(data.marketDate)} · إغلاق · ${top.length} شركات`),
     primitive: t('PAIRED BARS', 'أعمدة مزدوجة'),
-    title: t(`${top.ticker} · ${name} traded ${top.rv.toFixed(1)}× its usual volume`,
-      `${top.ticker} · ${name} تداولت ${top.rv.toFixed(1)}× حجمها المعتاد`),
-    visual: pairedBars({ ar, height: 104, groups: [{
-      prior: top.medianVolume, now: top.volume,
-      priorLabel: t('usual', 'المعتاد'), nowLabel: t('this session', 'هذه الجلسة'),
-      priorValue: compact(top.medianVolume), nowValue: compact(top.volume),
-      unit: t('shares', 'سهم'),
-    }] }),
-    limit: t('Volume is activity, not interest. A session can be busy because one holder sold.',
-      'الحجم نشاط وليس اهتماماً. قد تكون الجلسة نشطة لأن مالكاً واحداً باع.'),
-    chip: evidenceChip({ ar, date: data.marketDate,
+    title: top.length > 1
+      ? t(`${lead.ticker} · ${name} traded ${lead.rv.toFixed(1)}× its usual volume, and it was not alone`,
+        `${lead.ticker} · ${name} تداولت ${lead.rv.toFixed(1)}× حجمها المعتاد، ولم تكن وحدها`)
+      : t(`${lead.ticker} · ${name} traded ${lead.rv.toFixed(1)}× its usual volume`,
+        `${lead.ticker} · ${name} تداولت ${lead.rv.toFixed(1)}× حجمها المعتاد`),
+    visual: pairedBars({ ar, width: 460, height: 136, groups: top.map((c, i) => ({
+      prior: 1, now: c.rv,
+      priorValue: '1×', nowValue: `${c.rv.toFixed(1)}×`,
+      priorLabel: c.ticker, nowPeriodLabel: compact(c.volume),
+      unit: i === 0 ? t('× its own usual', '× حجمها المعتاد') : '',
+    })) }),
+    limit: t('Each bar is measured against that company’s own usual volume, never against another company’s. Volume is activity, not interest: a session can be busy because one holder sold.',
+      'كل عمود يُقاس على الحجم المعتاد للشركة نفسها، لا على شركة أخرى. الحجم نشاط وليس اهتماماً: قد تكون الجلسة نشطة لأن مالكاً واحداً باع.'),
+    chip: evidenceChip({ ar, date: day(data.marketDate),
       basis: t('session volume ÷ median of 20 sessions', 'حجم الجلسة ÷ وسيط 20 جلسة'),
       source: 'EGX' }),
-    more: h('button', { type: 'button', class: 'ct-more', onClick: () => open(top.ticker) },
+    more: h('button', { type: 'button', class: 'ct-more', onClick: () => open(lead.ticker) },
       t('Open the company ↗', 'افتح الشركة ↗')),
   });
 }
@@ -94,7 +109,7 @@ function volumeCard(data, ar, t, open) {
  * ghost line so it reads as a reference, and the limit line says the crossing
  * is not an event.
  */
-function indexCard(data, ar, t, open) {
+function indexCard(data, ar, t, open, day) {
   const idx = (data.indices || []).find((i) => Array.isArray(i.points) && i.points.length >= 10);
   if (!idx) return null;
   const points = idx.points.filter(finite);
@@ -104,8 +119,8 @@ function indexCard(data, ar, t, open) {
   const below = points[points.length - 1] < mean;
   return card({
     key: 'index',
-    dateline: t(`${data.marketDate} · close · ${points.length} sessions`,
-      `${data.marketDate} · إغلاق · ${points.length} جلسة`),
+    dateline: t(`${day(data.marketDate)} · close · ${points.length} sessions`,
+      `${day(data.marketDate)} · إغلاق · ${points.length} جلسة`),
     primitive: t('LINE', 'خط'),
     title: below
       ? t(`${name} closed below its ${points.length}-session average`,
@@ -117,7 +132,7 @@ function indexCard(data, ar, t, open) {
         `نقطة · ${points.length} جلسة · المتوسط متقطّع`) }),
     limit: t('Where it sits against its own recent closes. A crossing is a description, not an event.',
       'موضعه مقابل إغلاقاته الأخيرة. التقاطع وصف، وليس واقعة.'),
-    chip: evidenceChip({ ar, date: data.marketDate,
+    chip: evidenceChip({ ar, date: day(data.marketDate),
       basis: t('official close', 'إغلاق رسمي'), source: t('EGX session bulletin', 'نشرة جلسة EGX') }),
     more: h('button', { type: 'button', class: 'ct-more', onClick: () => open(null) },
       t('The whole market ↗', 'السوق كله ↗')),
@@ -125,46 +140,82 @@ function indexCard(data, ar, t, open) {
 }
 
 /**
- * The newest disclosed cross-holding, and how much of the company is not
- * disclosed at all.
+ * The newest disclosed cross-holdings — one bar per company.
  *
  * This is the card the share bar was built for. The disclosed stakes are
  * named; everything else is one hatched band that says "not disclosed" —
  * never normalised away, because "we know 12% of this" and "12% is all there
  * is" are opposite statements.
+ *
+ * THREE COMPANIES, THREE BARS, NOT ONE BAR OF THREE COMPANIES
+ * Putting three companies in one bar would make the segments read as shares
+ * of a single pot, and three companies' capital is not one pot. Each company
+ * keeps its own bar, so each remainder is that company's own undisclosed
+ * share rather than an average of three.
  */
-function ownershipCard(data, ar, t, open) {
+function ownershipCard(data, ar, t, open, day) {
   const links = (data.sectorOwnership?.links || []).filter((l) => l && finite(l.percent) && l.held);
   if (!links.length) return null;
-  const newest = links.reduce((best, l) => ((l.asOf || '') > (best.asOf || '') ? l : best), links[0]);
-  const same = links.filter((l) => l.held === newest.held)
-    .sort((a, b) => b.percent - a.percent).slice(0, 3);
-  const heldName = ar ? (newest.heldNameAr || newest.heldName) : (newest.heldName || newest.held);
-  const known = same.reduce((s, l) => s + l.percent, 0);
-  if (known <= 0 || known >= 100) return null;
+
+  /* Newest filing first, then one entry per company so the card never spends
+     two of its three bars on the same name. */
+  const byCompany = new Map();
+  links.slice().sort((x, y) => String(y.asOf || '').localeCompare(String(x.asOf || '')))
+    .forEach((l) => { if (!byCompany.has(l.held)) byCompany.set(l.held, []); byCompany.get(l.held).push(l); });
+
+  const picked = [];
+  for (const [held, all] of byCompany) {
+    const parts = all.slice().sort((x, y) => y.percent - x.percent).slice(0, 3);
+    const known = parts.reduce((sum, l) => sum + l.percent, 0);
+    /* A company whose disclosed stakes already sum to 100% has no undisclosed
+       remainder to show, and one at 0% has nothing to draw. Neither is a bar. */
+    if (known <= 0 || known >= 100) continue;
+    picked.push({ held, parts, known, asOf: all[0].asOf,
+      name: ar ? (all[0].heldNameAr || all[0].heldName) : (all[0].heldName || held) });
+    if (picked.length === 3) break;
+  }
+  if (!picked.length) return null;
+
+  const newest = picked[0];
   return card({
     key: 'ownership',
-    dateline: t(`${newest.asOf} · ownership filing`, `${newest.asOf} · إفصاح ملكية`),
+    dateline: t(`${day(newest.asOf)} · ownership filings · ${picked.length} companies`,
+      `${day(newest.asOf)} · إفصاحات ملكية · ${picked.length} شركات`),
     primitive: t('SHARE BAR', 'شريط نصيب'),
-    title: t(`${newest.held} · ${heldName}: ${known.toFixed(2)}% is disclosed`,
-      `${newest.held} · ${heldName}: المُعلن ${known.toFixed(2)}%`),
-    visual: shareBar({ ar,
-      parts: same.map((l) => ({ label: ar ? (l.ownerNameAr || l.ownerName) : l.ownerName, value: l.percent })),
-      caption: t('of the company’s capital', 'من رأس مال الشركة') }),
-    limit: t('What is filed, not what is held. A stake under the disclosure threshold never appears here.',
-      'ما أُفصح عنه، لا ما هو مملوك. الحصة دون حدّ الإفصاح لا تظهر هنا أبداً.'),
-    chip: evidenceChip({ ar, date: newest.asOf,
+    title: picked.length > 1
+      ? t(`What is disclosed of ${picked.length} companies, and what is not`,
+        `المُعلن من ${picked.length} شركات، وما ليس معلناً`)
+      : t(`${newest.held} · ${newest.name}: ${newest.known.toFixed(2)}% is disclosed`,
+        `${newest.held} · ${newest.name}: المُعلن ${newest.known.toFixed(2)}%`),
+    visual: h('div', { class: 'ct-own-stack' }, picked.map((co) => h('div',
+      { key: co.held, class: 'ct-own-row' },
+      h('button', { type: 'button', class: 'ct-own-name', onClick: () => open(co.held) },
+        h('span', { class: 'ct-own-code' }, co.held),
+        h('span', { class: 'ct-own-label' }, co.name),
+        h('span', { class: 'ct-own-known' }, t(`${co.known.toFixed(2)}% disclosed`,
+          `المُعلن ${co.known.toFixed(2)}%`))),
+      shareBar({ ar, parts: co.parts.map((l) => ({
+        label: ar ? (l.ownerNameAr || l.ownerName) : l.ownerName, value: l.percent })) })))),
+    limit: t('What is filed, not what is held. A stake under the disclosure threshold never appears here, and each bar is one company’s own capital.',
+      'ما أُفصح عنه، لا ما هو مملوك. الحصة دون حدّ الإفصاح لا تظهر هنا أبداً، وكل شريط هو رأس مال شركة واحدة.'),
+    chip: evidenceChip({ ar, date: day(newest.asOf),
       basis: t('Articles 29 & 38', 'إفصاحات المادتين 29 و 38'), source: 'EGX' }),
     more: h('button', { type: 'button', class: 'ct-more', onClick: () => open(newest.held) },
       t('Open the company ↗', 'افتح الشركة ↗')),
   });
 }
 
-export function changedToday(data, ar, { openCompany, openMarket, heading, note }) {
+export function changedToday(data, ar, { openCompany, openMarket, heading, note, longDate }) {
   const t = (en, arabic) => (ar ? arabic : en);
+  /* Every other dateline on the site runs through `longDate`; these three
+     were handed the raw ISO string, so a card headed "17 سبتمبر 2026 · إغلاق"
+     everywhere else read "2026-09-17 · إغلاق" here — a bare machine date
+     wedged into an Arabic sentence, with its digits fighting the RTL run
+     around them. */
+  const day = typeof longDate === 'function' ? longDate : (iso) => iso;
   const open = (ticker) => (ticker ? openCompany(ticker) : openMarket());
-  const cards = [volumeCard(data, ar, t, open), indexCard(data, ar, t, open),
-    ownershipCard(data, ar, t, open)].filter(Boolean);
+  const cards = [volumeCard(data, ar, t, open, day), indexCard(data, ar, t, open, day),
+    ownershipCard(data, ar, t, open, day)].filter(Boolean);
   if (!cards.length) return null;
   return h('section', { class: 'ct-shelf', 'aria-label': heading },
     h('div', { class: 'ct-shelf-head' },

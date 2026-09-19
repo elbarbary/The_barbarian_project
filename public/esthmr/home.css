@@ -249,6 +249,20 @@
      into this grid's first column, and the lead index clips its own level. */
   #app .market-head > .om-idx { display: contents !important; }
   #app .market-head > .om-idx > div:first-child { grid-column: 1; grid-row: 1 / span 2; }
+  /* The lead card spans two rows, so it is as tall as a tile plus the breadth
+     strip beside it. Before this the chart was a 32px sparkline pinned under
+     the level with the rest of the card left empty — the single most
+     "unfinished" thing on the page. The card becomes a column and the chart
+     slot takes what is left, so the line reaches the bottom edge.
+
+     `!important` on the height: sparkOf() sets height:32px inline on the svg
+     itself, and an inline style beats a stylesheet. */
+  #app .market-head > .om-idx > div:first-child { display: flex; flex-direction: column; }
+  #app .market-head > .om-idx > div:first-child > .idx-chart {
+    flex: 1; min-height: 132px; display: flex; align-items: stretch;
+  }
+  #app .market-head > .om-idx > div:first-child > .idx-chart > svg,
+  #app .market-head > .om-idx > div:first-child > .idx-chart > div { height: 100% !important; }
   #app .market-head > .om-idx > div:nth-child(2) { grid-column: 2; grid-row: 1; }
   #app .market-head > .om-idx > div:nth-child(3) { grid-column: 3; grid-row: 1; }
   #app .market-head > .breadth-strip { grid-column: 2 / span 2; grid-row: 2; }
@@ -260,3 +274,89 @@
 /* A phone keeps the home column's own ordering, so the wrapper steps out of
    the way entirely rather than nesting a second grid inside a flex column. */
 @media (max-width: 899px) { #app .market-head { display: contents; } }
+
+/* What the index line is drawn from.
+ *
+ * The lead card stretches its chart to fill the card, which rescales the
+ * y-axis to the window's own high and low: the same fortnight can look like a
+ * cliff or a ripple depending on how tall the card is. The caption is the
+ * fixed part — how many closes are in the line, and that they are the
+ * exchange's official ones — so the shape is always read against a stated
+ * basis rather than an implied one. */
+#app .idx-chart-note {
+  margin-top: 8px;
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 10.5px; letter-spacing: .04em; color: var(--faint);
+}
+
+/* One share bar per company in ما تغيّر اليوم.
+ *
+ * Each row is its own company's capital: a name a reader can open, the share
+ * that is disclosed as a figure, and the bar under it. The rows are separated
+ * by space rather than by rules, because three ruled rows inside a card that
+ * already has two rules of its own reads as a table nested in a card. */
+#app .ct-own-stack { display: flex; flex-direction: column; gap: 14px; }
+#app .ct-own-row { display: flex; flex-direction: column; gap: 6px; }
+#app .ct-own-name {
+  display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+  background: none; border: 0; padding: 0; cursor: pointer;
+  text-align: start; color: inherit; font: inherit;
+}
+#app .ct-own-name:hover .ct-own-label { text-decoration: underline; }
+#app .ct-own-code {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
+  letter-spacing: .06em; color: var(--ink); font-weight: 600;
+}
+#app .ct-own-label { font-size: 13px; color: var(--t2); min-width: 0; }
+#app .ct-own-known {
+  margin-inline-start: auto; font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--faint);
+}
+
+/* Turn 6, block 9: the reader's own list, on Home.
+ *
+ * Four cards across at desk width, two on a tablet, one on a phone — the
+ * comp's own 4-up, but the count follows the space rather than the design
+ * width, so a card never falls below the ~150px its close and move need.
+ * The card is a button because every one of them goes somewhere. */
+#app .home-watch {
+  border-radius: var(--radius-island); background: var(--surface);
+  border: 1px solid var(--edgeIn); box-shadow: var(--sh); padding: 20px 22px 18px;
+}
+#app .home-watch-title { font: 600 16.5px/1.45 var(--font-heading); margin: 0 0 14px; }
+#app .home-watch-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px;
+}
+#app .home-watch-card {
+  display: grid; grid-template-columns: 1fr auto; gap: 2px 10px;
+  align-items: baseline; text-align: start; min-width: 0;
+  padding: 14px; border-radius: var(--radius-control);
+  background: var(--sunk); border: 1px solid var(--edgeIn);
+  color: inherit; font: inherit; cursor: pointer;
+  transition: transform .18s cubic-bezier(.2,.7,.3,1), box-shadow .18s;
+}
+#app .home-watch-card:hover { transform: translateY(-2px); box-shadow: var(--shLift); }
+#app .hw-code {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
+  letter-spacing: .06em; font-weight: 600;
+}
+/* The move sits beside the code, so the two things a follower checks first
+   are on one line and the name below can take the width it needs. */
+#app .hw-pct {
+  grid-column: 2; grid-row: 1; justify-self: end;
+  font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; font-weight: 500;
+}
+#app .hw-name {
+  grid-column: 1; grid-row: 2; font-size: 13px; color: var(--t2);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+#app .hw-close {
+  grid-column: 2; grid-row: 2; justify-self: end;
+  font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+}
+#app .hw-spark { grid-column: 1 / -1; grid-row: 3; margin-top: 10px; }
+#app .hw-note {
+  grid-column: 1 / -1; grid-row: 4; margin-top: 4px;
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 10px; color: var(--faint);
+}

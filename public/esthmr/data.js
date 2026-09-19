@@ -827,7 +827,26 @@ export async function attention() {
     doc('market-history.json').catch(() => null),
     doc('signals.json').catch(() => null),
   ]);
-  return { history, signals, breadth: breadthOf(history) };
+  return { history, signals, breadth: breadthOf(history), benchmark: benchmarkOf(history) };
+}
+
+/** The lead index's closes, each one still carrying its date.
+ *
+ * `indexCards` throws the dates away — a sparkline only needs the shape. The
+ * company chart needs them: it draws the market behind one company's price,
+ * and the only honest way to do that is to match the two series date by date.
+ * A company that did not trade on a session the index moved has no point
+ * there, and inventing one by carrying the previous close forward would draw
+ * a flat step the company never had.
+ */
+export function benchmarkOf(history, id = 'EGX30') {
+  const sessions = (history && history.sessions) || [];
+  const out = [];
+  for (const s of sessions) {
+    const level = (s.indices || {})[id];
+    if (s.date && typeof level === 'number') out.push({ date: s.date, close: level });
+  }
+  return out.length > 1 ? { id, points: out } : null;
 }
 
 /** How many shares rose, fell and held, in the last session that counted them.

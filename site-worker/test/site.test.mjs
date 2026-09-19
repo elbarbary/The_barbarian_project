@@ -60,12 +60,22 @@ test('visual home keeps its evidence and opens real destinations', () => {
   c.setData(LIVE);
   const v = c.renderVals();
   assert.equal(v.primaryNav.length, 5);
-  assert.equal(v.showHomeDetails, false);
+  /* Home opens with everything on the page.
+     It used to open with its second half folded behind one button, so a
+     first-time reader saw about a third of what had been published for that
+     session — sector pulse, the ownership lens, liquidity and the sources all
+     behind a control most people never press. The comp keeps every block on
+     the page and the owner asked to see all of it, so the default flipped.
+     The button still folds it; `showHomeDetails === false` is now a state the
+     reader chose rather than the one they are given. */
+  assert.equal(v.showHomeDetails, true);
   assert.equal(v.snapshotMoves.length, 2);
   assert.match(v.breadthRing, /50%/);
   assert.equal(v.breadthTotal, '2');
   v.toggleHomeDetails();
-  assert.equal(c.renderVals().showHomeDetails, true);
+  assert.equal(c.renderVals().showHomeDetails, false, 'the button no longer folds the page away');
+  c.renderVals().toggleHomeDetails();
+  assert.equal(c.renderVals().showHomeDetails, true, 'and no longer brings it back');
   v.goToday();
   assert.equal(c.state.screen, 'today');
 });
@@ -3874,10 +3884,26 @@ test('the watchlist is a ticker and nothing else, kept per reader', async () => 
   } finally { delete globalThis.localStorage; }
 });
 
-test('the watchlist has a screen of its own, and Home no longer keeps one', async () => {
-  // It was a block half way down Home, under the day's summary, being
-  // scrolled past. A list a reader BUILDS is not a summary of the day, and a
-  // place to go back to has to be somewhere you can go.
+test('the watchlist has a screen of its own, and a strip near the top of Home', async () => {
+  /* THIS PARTLY REVERSES AN EARLIER DECISION, AND THE PLACEMENT IS WHY.
+   *
+   * The block was removed from Home once, for a good reason: it sat half way
+   * down, under the day's summary, being scrolled past. A list a reader
+   * BUILDS is not a summary of the day, and a place to go back to has to be
+   * somewhere you can go — hence the screen, which stays.
+   *
+   * Turn 6 puts المتابَعة back on Home, but not where it was: immediately
+   * under the market head, above everything else. That answers the original
+   * objection rather than ignoring it. A reader who has followed four
+   * companies opens this page to see those four, and the complaint was never
+   * that the block existed — it was that it was buried.
+   *
+   * The other rule that made the removal attractive was "exactly one loop
+   * over the list, so the same companies cannot be drawn in two places and
+   * drift apart". That still holds, and is asserted below in the form that
+   * actually prevents drift: both loops read the SAME `{{ followed }}`
+   * binding, so there is one list built once and rendered twice. Two loops
+   * over two different bindings is the thing to keep out. */
   const v = screen(LIVE);
   const entry = v.nav.find((n) => n.label === 'Watchlist');
   assert.ok(entry, 'the rail offers it');
@@ -3886,9 +3912,20 @@ test('the watchlist has a screen of its own, and Home no longer keeps one', asyn
   const { readFile } = await import('node:fs/promises');
   const template = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
   assert.equal(template.includes('{{ isWatchlist }}'), true, 'the screen exists');
-  // Exactly one loop over the list, so the same companies cannot be drawn in
-  // two places and drift apart.
-  assert.equal(template.split('list="{{ followed }}"').length - 1, 1);
+  // The strip on Home and the table on its own screen: two renderings, one
+  // list. Anything looping over a SECOND followed-companies binding would be
+  // a second list that can disagree with this one.
+  assert.equal(template.split('list="{{ followed }}"').length - 1, 2,
+    'Home lost its watchlist strip, or grew a third rendering of the list');
+  const loops = [...template.matchAll(/<sc-for list="\{\{ (follow[A-Za-z]*) \}\}"/g)]
+    .map((m) => m[1]);
+  assert.deepEqual([...new Set(loops)], ['followed'],
+    `a second followed-companies list was introduced: ${loops.join(', ')}`);
+  // And the strip is above the fold, which is the whole reason it came back.
+  const home = template.indexOf('{{ isHome }}');
+  const at = (x) => template.indexOf(x, home);
+  assert.ok(at('home-watch') < at('{{ changedToday }}'),
+    'the strip is buried again, which is what got it removed the first time');
 
   const c = fresh();
   c.setData(LIVE);

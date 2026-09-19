@@ -306,7 +306,8 @@ async function load(email) {
     };
     const calendar = slice(data.calendar(), (c) => ({ filedEvents: c.filed, expectedEvents: c.expected }));
     const exchange = slice(data.exchange(), (e) => ({ rates: e.rates, seriesTo: e.seriesTo, macro: e.macro }));
-    const attention = slice(data.attention(), (a) => ({ breadth: a.breadth }));
+    const attention = slice(data.attention(),
+      (a) => ({ breadth: a.breadth, benchmark: a.benchmark }));
     component.setState({ extrasLoading: true, extrasError: false });
     await Promise.all([
       slice(data.news(), (feed) => ({ feed })),

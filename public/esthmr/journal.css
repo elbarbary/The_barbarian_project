@@ -441,7 +441,13 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
 .data-status button { min-height:44px; padding:8px 16px; border:1px solid var(--rule); border-radius:var(--radius-control); background:var(--sunk); cursor:pointer; }
 .loading-dot { width:12px; height:12px; border-radius:50%; background:var(--accent); flex:none; }
 .insight-shelf > h2 { margin:0 4px 14px; font-size:24px; }
-.insight-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+/* §T6: one card per row, not two side by side.
+   Paired in a 2-up grid, "who traded it" and "traded unusually" were two
+   half-width cards whose content wants the width — a four-party buy/sell
+   breakdown and a ranked list of companies both get squeezed to about 480px
+   and wrap badly. The comp gives each its own full-width card, which is also
+   what makes them read as separate answers rather than one two-column block. */
+.insight-grid { display:grid; grid-template-columns:1fr; gap:18px; }
 .insight-card { border-radius:var(--radius-island); padding:20px; background:var(--surface); min-width:0; box-shadow:var(--sh); }
 .insight-card h3 { font:600 16.5px/1.45 var(--font-heading); margin:0; }
 .insight-investors .investor-party { padding-bottom:10px; }
@@ -459,7 +465,6 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
 .measure-threshold { font-size:13px; font-weight:600; line-height:1.6; margin:10px 0 6px; color:var(--accent); }
 .measure-meaning, .measure-detail { font-size:12px; line-height:1.6; margin:6px 0; color:var(--t2); }
 #app .measure-open { border:1px solid var(--rule); background:var(--surface); color:var(--accent); border-radius:var(--radius-control); min-height:44px; padding:8px 10px; margin-top:12px; width:100%; cursor:pointer; font-size:12px; }
-@media (min-width:1101px) { .insight-grid { align-items:stretch; } }
 .insight-card .island-heading { align-items:flex-start; gap:8px; }
 .insight-caption { color:var(--faint); font-size:12px; line-height:1.7; margin:12px 0 0; }
 .insight-line { display:flex; justify-content:space-between; align-items:center; gap:10px; font-size:12px; padding:10px 0; border-bottom:1px solid var(--rule2); }
@@ -558,7 +563,6 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
   .volume-preview-row { gap:8px; }
   .ranking-controls button { padding:8px 10px; }
 }
-@media (max-width:1100px) { .insight-grid { grid-template-columns:1fr; } }
 #app .om-idx { grid-template-columns:1.25fr 1fr 1fr !important; gap:16px !important; }
 #app .om-idx > div { padding:24px !important; position:relative; }
 #app .om-idx > div:first-child { background:var(--island-peach) !important; }
@@ -659,7 +663,7 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
   #app .om-idx > div > div:first-child > div:last-child { width:26px !important; height:26px !important; }
   .island-heading { align-items:flex-start; gap:8px; }
   .island-heading h2, .insight-shelf > h2 { font-size:20px; line-height:1.5; }
-  .insight-grid { grid-template-columns:1fr; gap:16px; }
+  .insight-grid { gap:16px; }
   .insight-card { padding:18px; border-radius:var(--radius-island); }
   #app .market-measures { padding:18px !important; }
   .market-measure-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:10px !important; }
@@ -1199,4 +1203,16 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
   #app .co-changes-grid { grid-template-columns: 1fr; gap: 16px; }
   #app .co-change { border-inline-start: 0; padding-inline: 0; padding-top: 16px; border-top: 1px solid var(--rule); }
   #app .co-change:first-child { padding-top: 0; border-top: 0; }
+}
+
+/* The key for the market line drawn behind a company's price.
+ * The mark is the line itself at reading size — a dashed rule in the same
+ * colour and dash pattern — rather than a coloured dot, so a reader matches
+ * it to the chart by shape instead of by memory. */
+#app .co-bench-key {
+  display: flex; align-items: center; gap: 9px; margin: 8px 0 0;
+  font-size: 12px; line-height: 1.55; color: var(--t2);
+}
+#app .co-bench-mark {
+  flex: 0 0 26px; height: 0; border-top: 1.4px dashed var(--thread);
 }

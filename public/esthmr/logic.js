@@ -7,6 +7,7 @@ import { pairsExplorer } from './pairs.js';
 import { valuationExplorer } from './valuation.js';
 import { flowTrackers } from './flow-trackers.js';
 import { sectorTable, companyOwnership } from './sector-lens.js';
+import { companyCards } from './company-cards.js';
 import { changedToday } from './changed-today.js';
 import { aiCards } from './ai-cards.js';
 import { scenariosScreen } from './scenarios.js';
@@ -364,6 +365,28 @@ class Base {
 }
 
 
+/** An index's closes put on one company's scale, matched date by date.
+ *
+ * Exported and pure so the date-matching can be tested without a component:
+ * the whole point of this function is that it joins on `date` and never on
+ * array position, and that is a property a test has to be able to assert
+ * directly. Returns `values` the same length as `pts`, holding `null` at every
+ * session the index did not record.
+ */
+export function rebaseTo(pts, bench) {
+  const rows = bench && Array.isArray(bench.points) ? bench.points : null;
+  if (!rows || !Array.isArray(pts) || pts.length < 2) return null;
+  const level = new Map(rows.map((r) => [r.date, r.close]));
+  const base = pts.find((p) => level.has(p.date) && typeof p.close === 'number');
+  if (!base) return null;
+  const b0 = level.get(base.date);
+  if (!(b0 > 0)) return null;
+  const scale = base.close / b0;
+  const out = pts.map((p) => (level.has(p.date) ? level.get(p.date) * scale : null));
+  return out.filter((v) => v !== null).length > 1
+    ? { values: out, id: bench.id, from: base.date } : null;
+}
+
 export class Component extends Base {
   // `month` is deliberately empty. It was the literal '2026-08', which is right
   // until 1 September: the archive index rolls, the Calendar keeps opening on
@@ -553,10 +576,10 @@ export class Component extends Base {
       nothingUnusual:'Nothing unusual today',
       busyWorkings:'Shares traded in the session \u00f7 the median of the last 20 sessions. At 2.0 or above, this app says the day was unusual.',
       busyYardstick:'Twice the usual is the line, and it is this app\u2019s line rather than the exchange\u2019s \u2014 nobody publishes an official one. It is set where it is because a day at twice a company\u2019s normal volume is uncommon enough to be worth a look and common enough to happen without anything being wrong.',
-      trendsTitle:'Price Trends & 52-Week Highs',
-      trendsLead:'Track relative strength, 52-week breakout candidates, and structural price momentum across the Egyptian Exchange.',
-      trendsWorkings:'Measures price distance from 52-week high, trailing 1-year and 3-month returns, and 50-day moving averages across the last 250 trading sessions.',
-      trendsYardstick:'A structural trend radar for relative strength analysis. Breakout alerts highlight historical price action without evaluating or judging individual equities.',
+      trendsTitle:'How close each share is to its best price of the year',
+      trendsLead:'How far every listed share has travelled from its own highest close of the last year, and how it has moved over one year and over three months.',
+      trendsWorkings:'Measured from the last 250 sessions: the distance from the highest close of the year, what the share did over a year and over three months, and its average close over 50 sessions.',
+      trendsYardstick:'A description of where a price has been, not a view on where it goes. Nothing here rates a share or says what to do about one.',
       archiveNote:'Showing the {shown} most recent of {total} filings published in {month}.',
       archiveSearched:'Showing the {shown} most recent of {total} matches across {months} months of the archive, newest first. Pick a month above to narrow it.',
       archiveSearchedMonth:'Showing the {shown} most recent of {total} matches in {month}. Clear the month to search the whole archive.',
@@ -623,8 +646,8 @@ export class Component extends Base {
       investorsEquities:'The split above counts government bonds and T-bills too. Shares alone:',
       investorsNoIntraday:'The exchange publishes no intraday breakdown, so there is no curve here \u2014 only where the period stands.',
       investorsTabBoth:'Overview & All', investorsTabMacro:'Macro Breakdown', investorsTabInsiders:'Insider & Treasury Tracker',
-      insiderTitle:'Insider & Treasury Flow Tracker',
-      insiderLead:'Official EGX session filings disclosing insider, board, major shareholder, and treasury share transactions.',
+      insiderTitle:'When the people inside a company traded its shares',
+      insiderLead:'When the people who run a company, or own a large part of it, bought or sold its shares — as filed with the exchange.',
       insiderRuleBadge:'Articles 29 & 38 · EGX Official Disclosures',
       insiderFilterAll:'All', insiderFilterBuys:'Purchases', insiderFilterSells:'Sales',
       insiderFilterTreasury:'Treasury Shares', insiderFilterInsiders:'Board & Insiders', insiderFilterMajor:'Major Holders',
@@ -632,8 +655,8 @@ export class Component extends Base {
       insiderKpiTotal:'Disclosed Events', insiderKpiBuy:'Insider Purchases', insiderKpiSell:'Insider Sales',
       insiderKpiTreasury:'Treasury Purchases', insiderKpiActiveFirms:'Active Companies',
       insiderShares:'shares', insiderTransactions:'filings', insiderOfficialDoc:'Official Filing',
-      insiderEmpty:'No insider or treasury transactions found matching current filters.',
-      insiderDiscloseNote:'Under EGX Listing Rules (Articles 29 & 38), board members, major shareholders (>5%), and connected groups must file post-execution transaction forms. Companies similarly disclose treasury share buybacks, sales, and cancellations.',
+      insiderEmpty:'Nothing was filed that matches what you have chosen. Widen the dates, or clear a filter.',
+      insiderDiscloseNote:'Board members, anyone holding more than 5%, and connected groups must file a form after they trade the company’s shares. A company must also file when it buys, sells or cancels its own shares. Both are required by EGX listing rules, Articles 29 & 38.',
       insiderCrossLink:'Insider & Treasury Tracker',
       insiderSessionLabel:'Session',
       insiderColDate:'Session',
@@ -643,16 +666,16 @@ export class Component extends Base {
       insiderColVolume:'Volume (Shares)',
       insiderColFiling:'Filing',
       insiderOfficialNotice:'Official Disclosure',
-      insiderViewTable:'📋 Transactions Table',
+      insiderViewTable:'Every filing',
       insiderFlowNoVolume:'filings with no share count disclosed',
-      insiderViewMap:'🗺️ Activity Map',
-      insiderViewFlow:'📊 Sector Flows',
-      insiderMapLegendBuy:'Net Insider Purchases',
-      insiderMapLegendSell:'Net Insider Sales',
-      insiderMapLegendTreasury:'Treasury Share Programs',
-      insiderMapHint:'Tile size represents total traded shares; color represents net transaction direction.',
-      insiderFlowTitle:'Insider & Treasury Flows by Sector',
-      insiderFlowSubtitle:'Comparative aggregate volume of insider accumulation versus selling across economic sectors.',
+      insiderViewMap:'On a map',
+      insiderViewFlow:'By sector',
+      insiderMapLegendBuy:'Bought more than they sold',
+      insiderMapLegendSell:'Sold more than they bought',
+      insiderMapLegendTreasury:'The company bought its own shares',
+      insiderMapHint:'The bigger the square, the more shares changed hands. The colour says which way the balance went.',
+      insiderFlowTitle:'Where insiders bought, and where they sold',
+      insiderFlowSubtitle:'Sector by sector: the shares insiders and companies bought, set against the ones they sold.',
       insiderFlowNet:'Net Volume',
       insiderFlowBuys:'Purchases',
       insiderFlowSells:'Sales',
@@ -661,7 +684,7 @@ export class Component extends Base {
       insiderFlowNoData:'No sector flow data matching current criteria.',
       insiderFilteredFor:'Filtered by stock',
       insiderShowProfile:'Company Profile',
-      insiderCompanyDeals:'Insider & Treasury Transactions',
+      insiderCompanyDeals:'Who bought and sold, and when',
       insiderViewFullTracker:'View in Full Tracker',
       homeTitle:'The close', homeTitleLive:'The session', closeOf:'Official close of', movers:'Largest moves', readNow:'What to read now', watchlist:'Largest by market value',
       following:'Following', follow:'Follow', unfollow:'Following',
@@ -673,11 +696,13 @@ export class Component extends Base {
       followBrowse:'Open the market',
       followClear:'Empty the list',
       followSessions:'{n} sessions',
+      indexSessions:'{n} sessions · official closes',
       followNoSeries:'No published price series',
       followKeptAccount:'Kept to your account, so the same list opens in another browser. A ticker and nothing else: no share count, no price paid, nothing about what you own.',
       followKeptDevice:'Kept in this browser only, because there is no account to keep it against while you are signed out. Sign in and it follows you.',
       followRose:'Rose', followFell:'Fell', followFlat:'Unchanged',
       followOfCount:'of {n}',
+      followOpenList:'The whole list',
       // ── one sector, opened ──
       secOpen:'Open the sector',
       secBack:'All sectors',
@@ -962,10 +987,10 @@ export class Component extends Base {
       nothingUnusual:'لا توجد أحجام تداول استثنائية اليوم',
       busyWorkings:'الأسهم المتداولة في الجلسة \u00f7 وسيط آخر 20 جلسة. وعند 2.0 فأكثر، يصف هذا التطبيق اليوم بأنه استثنائي.',
       busyYardstick:'الضعف هو الحد الفاصل، وهو حد إحصائي يضعه هذا التطبيق لا البورصة لتسليط الضوء على النشاط الاستثنائي دون أن يمثل ذلك حكماً أو توصية.',
-      trendsTitle:'اتجاهات الأسعار وقوة الصعود (Price Trends)',
-      trendsLead:'رصد الأسهم ذات القوة النسبية، واختراق القمم السنوية، والزخم الهيكلي في البورصة المصرية.',
-      trendsWorkings:'حسابات المسافة من القمة السنوية (52 أسبوعاً)، وعوائد سنة و3 أشهر، والمتوسط المتحرك لـ 50 يوماً عبر آخر 250 جلسة.',
-      trendsYardstick:'رادار هيكلي لرصد القوة النسبية والزخم. إشارات الاقتراب من القمم ترصد الحركة السعرية دون إصدار أحكام أو تقييمات للأسهم.',
+      trendsTitle:'كم يبعد كل سهم عن أفضل سعر له هذا العام',
+      trendsLead:'كم ابتعد كل سهم مدرج عن أعلى إغلاق له خلال السنة الماضية، وكيف تحرّك خلال سنة وخلال ثلاثة أشهر.',
+      trendsWorkings:'محسوبة من آخر 250 جلسة: المسافة من أعلى إغلاق خلال السنة، وما فعله السهم خلال سنة وخلال ثلاثة أشهر، ومتوسط إغلاقه خلال 50 جلسة.',
+      trendsYardstick:'وصف لما مرّ به السعر، وليس رأياً في وجهته. لا شيء هنا يُقيّم سهماً ولا يقول ماذا تفعل بشأنه.',
       archiveNote:'عرض أحدث {shown} من {total} إفصاحاً نُشرت في {month}.',
       archiveSearched:'عرض أحدث {shown} من {total} نتيجة عبر {months} شهراً من الأرشيف، الأحدث أولاً. اختر شهراً بالأعلى لتضييق النطاق.',
       archiveSearchedMonth:'عرض أحدث {shown} من {total} نتيجة في {month}. ألغِ اختيار الشهر للبحث في الأرشيف كاملاً.',
@@ -1026,8 +1051,8 @@ export class Component extends Base {
       investorsEquities:'الجدول أعلاه يشمل الأسهم والسندات وأذون الخزانة. تعاملات الأسهم المقيدة فقط:',
       investorsNoIntraday:'لا تنشر البورصة تقسيماً لحظياً لفئات المستثمرين خلال ساعات الجلسة، لذا تُعرض أحدث فترة معلنة رسمياً.',
       investorsTabBoth:'عرض شامل', investorsTabMacro:'توزيع السيولة (كلي)', investorsTabInsiders:'تعاملات الداخليين والخزينة',
-      insiderTitle:'راصد تعاملات الداخليين وأسهم الخزينة',
-      insiderLead:'بيانات وإفصاحات البورصة المصرية الرسمية لتعاملات أعضاء مجالس الإدارة والداخليين وكبار المساهمين والمجموعات المرتبطة وعمليات أسهم الخزينة.',
+      insiderTitle:'متى تعامل أهل الشركة في أسهمها',
+      insiderLead:'متى اشترى من يديرون الشركة، أو من يملكون جزءاً كبيراً منها، أسهمها أو باعوها — كما أُفصح عنه للبورصة.',
       insiderRuleBadge:'المادتان ٢٩ و٣٨ · إفصاحات رسمية معتمدة',
       insiderFilterAll:'الكل', insiderFilterBuys:'شراء فقط', insiderFilterSells:'مبيعات وتخارج',
       insiderFilterTreasury:'أسهم الخزينة', insiderFilterInsiders:'أعضاء ومطلعون', insiderFilterMajor:'كبار المساهمين',
@@ -1035,8 +1060,8 @@ export class Component extends Base {
       insiderKpiTotal:'إجمالي الإفصاحات', insiderKpiBuy:'مشتريات الداخليين', insiderKpiSell:'مبيعات الداخليين',
       insiderKpiTreasury:'شراء أسهم خزينة', insiderKpiActiveFirms:'شركات ذات تعاملات',
       insiderShares:'سهم', insiderTransactions:'إفصاح / صفقة', insiderOfficialDoc:'المستند الرسمي بالبورصة',
-      insiderEmpty:'لا توجد تعاملات للداخليين أو أسهم الخزينة تطابق معايير التصفية الحالية.',
-      insiderDiscloseNote:'وفق المادتين ٢٩ و٣٨ من قواعد القيد بالبورصة المصرية، يلتزم أعضاء مجلس الإدارة والداخليين وكبار المساهمين (أكثر من ٥٪) والمجموعات المرتبطة بالإفصاح عن تعاملاتهم عقب التنفيذ، وتعلن الشركات عن برامج شراء وبيع أسهم الخزينة لدعم السهم.',
+      insiderEmpty:'لم يُفصح عن شيء يطابق ما اخترته. وسّع المدى الزمني، أو أزِل أحد عوامل التصفية.',
+      insiderDiscloseNote:'على أعضاء مجلس الإدارة، وكل من يملك أكثر من ٥٪، والمجموعات المرتبطة، تقديم نموذج بعد تعاملهم في أسهم الشركة. وعلى الشركة أيضاً الإفصاح إذا اشترت أسهمها أو باعتها أو ألغتها. وكلاهما مطلوب بقواعد القيد بالبورصة المصرية، المادتان ٢٩ و٣٨.',
       insiderCrossLink:'راصد الداخليين والخزينة',
       insiderSessionLabel:'جلسة',
       insiderColDate:'الجلسة',
@@ -1046,16 +1071,16 @@ export class Component extends Base {
       insiderColVolume:'عدد الأسهم',
       insiderColFiling:'المستند',
       insiderOfficialNotice:'إفصاح رسمي',
-      insiderViewTable:'📋 جدول الصفقات',
+      insiderViewTable:'كل إفصاح',
       insiderFlowNoVolume:'إفصاحات لم تذكر عدد الأسهم',
-      insiderViewMap:'🗺️ خريطة النشاط',
-      insiderViewFlow:'📊 تدفق القطاعات',
-      insiderMapLegendBuy:'صافي مشتريات داخلية',
-      insiderMapLegendSell:'صافي مبيعات وتخارج',
-      insiderMapLegendTreasury:'شراء أسهم خزينة',
-      insiderMapHint:'حجم المربع يعكس إجمالي الأسهم المتداولة، ولون المربع يعكس اتجاه صافي الصفقات.',
-      insiderFlowTitle:'تدفقات الداخليين وأسهم الخزينة حسب القطاع',
-      insiderFlowSubtitle:'مقارنة إجمالي أحجام مشتريات ومبيعات الداخليين وأسهم الخزينة عبر القطاعات الاقتصادية.',
+      insiderViewMap:'على خريطة',
+      insiderViewFlow:'حسب القطاع',
+      insiderMapLegendBuy:'اشتروا أكثر مما باعوا',
+      insiderMapLegendSell:'باعوا أكثر مما اشتروا',
+      insiderMapLegendTreasury:'الشركة اشترت أسهمها',
+      insiderMapHint:'كلما كبر المربع زادت الأسهم التي تداولت. واللون يقول إلى أي جهة مال الميزان.',
+      insiderFlowTitle:'أين اشترى الداخليون، وأين باعوا',
+      insiderFlowSubtitle:'قطاعاً بقطاع: الأسهم التي اشتراها الداخليون والشركات، مقابل التي باعوها.',
       insiderFlowNet:'صافي الأسهم',
       insiderFlowBuys:'مشتريات',
       insiderFlowSells:'مبيعات',
@@ -1064,7 +1089,7 @@ export class Component extends Base {
       insiderFlowNoData:'لا توجد بيانات تدفق قطاعية مطابقة لمعايير البحث الحالية.',
       insiderFilteredFor:'تصفية حسب السهم',
       insiderShowProfile:'ملف الشركة',
-      insiderCompanyDeals:'تعاملات الداخليين وأسهم الخزينة',
+      insiderCompanyDeals:'من اشترى ومن باع، ومتى',
       insiderViewFullTracker:'عرض في الراصد الشامل',
       homeTitle:'إغلاق السوق', homeTitleLive:'تداولات الجلسة', closeOf:'الإغلاق الرسمي ليوم', movers:'أنشط الأسهم تحركاً', readNow:'أبرز الأخبار والإفصاحات', watchlist:'الأكبر وزناً وقيمة سوقية',
       following:'في قائمة المتابعة', follow:'أضف للمتابعة', unfollow:'في قائمة المتابعة',
@@ -1076,11 +1101,13 @@ export class Component extends Base {
       followBrowse:'تصفح جدول السوق',
       followClear:'إفراغ القائمة بالكامل',
       followSessions:'{n} جلسة',
+      indexSessions:'{n} جلسة · إغلاق رسمي',
       followNoSeries:'لا توجد سلسلة أسعار منشورة',
       followKeptAccount:'محفوظة في حسابك، فتفتح القائمة نفسها في أي متصفح. يُحفظ الرمز فقط: لا عدد أسهم، ولا سعر شراء، ولا شيء عمّا تملكه.',
       followKeptDevice:'محفوظة في هذا المتصفح وحده. سجّل الدخول لتنتقل قائمتك معك تلقائياً.',
       followRose:'صعدت', followFell:'تراجعت', followFlat:'دون تغيّر',
       followOfCount:'من {n}',
+      followOpenList:'القائمة كاملة',
       // ── قطاع واحد، مفتوحاً ──
       secOpen:'افتح القطاع',
       secBack:'كل القطاعات',
@@ -2089,7 +2116,19 @@ export class Component extends Base {
     const indexById = new Map();
     const indices = say(D.indices || [], ['label']).map((ix) => {
       indexById.set(ix.id, ix);
-      return Object.assign({}, ix, { spark: this.sparkOf(ix.points, ix.up), go: this.go('exchange') });
+      /* The lead index card is the tallest thing on Home, and its chart is
+         stretched to fill it. A stretched y-axis amplifies every move, so the
+         card has to say what the line is drawn from — how many sessions, and
+         that they are official closes — or the shape reads as bigger news
+         than it is. A card with fewer than two closes draws no line and says
+         so rather than captioning an empty box. */
+      const held = (ix.points || []).filter((v) => typeof v === 'number');
+      return Object.assign({}, ix, {
+        spark: this.sparkOf(ix.points, ix.up),
+        sparkNote: held.length > 1
+          ? L.indexSessions.replace('{n}', String(held.length)) : L.followNoSeries,
+        go: this.go('exchange'),
+      });
     });
 
     const readNow = say(D.readNow || [], ['kind', 'title', 'stamp']).map((r) => Object.assign({}, r, {
@@ -2177,6 +2216,14 @@ export class Component extends Base {
       color: st.range === k ? 'var(--ink)' : 'var(--t2)', bg: st.range === k ? 'var(--surface)' : 'transparent', sh: st.range === k ? 'var(--shPill)' : 'none' }));
     const slice = D.series.slice(-rangeMap[st.range]);
     const chart = this.buildChart(slice);
+    /* The same call buildChart makes, so the key under the chart appears when
+       and only when the line above it was drawn. */
+    const benchRebased = this.rebasedBenchmark(slice);
+    const chartBenchNote = benchRebased
+      ? (ar
+        ? `الخط المتقطّع هو ${benchRebased.id}، مُعاد ضبطه ليبدأ من إغلاق الشركة في ${benchRebased.from}. المسافة بين الخطين هي فرق الأداء عن السوق، لا سعراً.`
+        : `The dashed line is ${benchRebased.id}, rebased to start at this company’s close on ${benchRebased.from}. The gap between the lines is the difference from the market, not a price.`)
+      : '';
 
     // The company on screen. `this._co` is the loaded document, set by main.js
     // when a ticker is opened; the block below is the demo's worked example and
@@ -4357,7 +4404,13 @@ export class Component extends Base {
       snapshotMoves: movers.slice(0, 6),
       ...fp,
       goToday: this.go('today'),
-      detailLabel: ar ? 'التفاصيل والمصادر' : 'Details & sources',
+      /* The label names what the button DOES, not what is under it. Home
+         opens with everything shown, so the button's job is to fold it away;
+         "Details & sources" read as "there is more" above a section that was
+         already open. */
+      detailLabel: st.showHomeDetails === false
+        ? (ar ? 'اعرض التفاصيل والمصادر' : 'Show details & sources')
+        : (ar ? 'اطوِ التفاصيل والمصادر' : 'Fold away details & sources'),
       browseLabel: ar ? 'عرض الكل' : 'View all',
       snapshotMovesLabel: ar ? 'أكبر التحركات' : 'Largest moves',
       breadthRing: breadth ? `conic-gradient(var(--up) 0 ${breadth.up / breadth.counted * 100}%, var(--down) ${breadth.up / breadth.counted * 100}% ${(breadth.up + breadth.down) / breadth.counted * 100}%, var(--rule) ${(breadth.up + breadth.down) / breadth.counted * 100}% 100%)` : 'none',
@@ -4411,8 +4464,16 @@ export class Component extends Base {
       afterOne: ar ? 'بعد سنة · ج.م' : 'After 1 year · EGP',
       afterThree: ar ? 'بعد ٣ سنوات · ج.م' : 'After 3 years · EGP',
       breadthTotalLabel: ar ? 'سهم' : 'shares',
-      showHomeDetails: Boolean(st.showHomeDetails),
-      toggleHomeDetails: () => this.setState({ showHomeDetails: !st.showHomeDetails }),
+      /* Open unless the reader folded it.
+         Home used to open with its second half collapsed behind one button,
+         so the page a first-time reader saw was about a third of what had
+         been published for that session — sector pulse, the ownership lens,
+         liquidity and the sources all sat behind a control most people never
+         press. The comp keeps every block on the page; so does this. `=== false`
+         rather than a truthiness test, because "never touched" and "folded"
+         are different states and only the second one should collapse. */
+      showHomeDetails: st.showHomeDetails !== false,
+      toggleHomeDetails: () => this.setState({ showHomeDetails: st.showHomeDetails === false }),
       overviewIntro: ar ? 'ابدأ بملخص الجلسة، ثم انتقل إلى الشركة والدليل وراء أرقامها.' : 'Start with the session, then explore a company and the evidence behind its figures.',
       preferencesLabel: ar ? 'اللغة والمظهر' : 'Language & appearance',
       preferencesOpen: st.preferencesOpen,
@@ -4879,12 +4940,31 @@ export class Component extends Base {
           openMarket: () => this.setState({ screen: 'market' }),
           heading: ar ? 'ما تغيّر اليوم' : 'What changed today',
           note: ar ? 'لكل واقعة مستند' : 'a document for every one',
+          longDate: (iso) => this.longDate(iso),
         }) : null,
       /* Who has filed a stake in this company, and the part nobody has.
          Built only on the company screen, and only for the company on it. */
       companyOwnership: st.screen === 'company' && st.ticker
         ? companyOwnership(D.sectorOwnership, st.ticker,
           { ar, t: (en, arabic) => (ar ? arabic : en), shareBar }) : null,
+      /* Turn 4, block 11: the company's own business cards. Same frame as ما
+         تغيّر اليوم, scoped to this one company, and built only on the screen
+         that shows them. `curTicker` rather than `st.ticker`, so a company
+         opened from a row and a company opened from a URL get the same cards. */
+      companyCards: st.screen === 'company' && curTicker
+        ? companyCards({
+          row: D.companies.find((c) => c.ticker === curTicker) || null,
+          filings: (archiveRows && archiveRows.length) ? archiveRows : (D.filings || []),
+          marketDate: D.marketDate || '', ar,
+          heading: ar ? 'قراءتان عن هذه الشركة' : 'Two readings of this company',
+          kindOf: (row) => {
+            const id = filingGroupOf(row);
+            const found = FILING_GROUPS.find(([gid]) => gid === id);
+            return found ? (ar ? found[2] : found[1]) : '';
+          },
+          shortDate: (d) => this.shortDate(d),
+          longDate: (d) => this.longDate(d),
+        }) : null,
       // Size, activity and movement on one scale. Built only for the screen
       // that shows it: it walks every member of every sector.
       sectorTable: st.screen === 'sectors'
@@ -5064,6 +5144,22 @@ export class Component extends Base {
       followDown: String(followPriced.filter((c) => c.pct < 0).length),
       followFlatCount: String(followPriced.filter((c) => c.pct === 0).length),
       followOf: L.followOfCount.replace('{n}', String(followPriced.length)),
+      goWatchlist: this.go('watchlist'),
+      /* The dateline over Home's watchlist strip: the session, how many the
+         reader follows, and how those closed. Counted off `followPriced` for
+         the same reason the screen's own counts are — a row shows an empty
+         arrow both for a share that closed exactly flat and for one with no
+         price at all, and those are not the same fact. */
+      followWhen: (() => {
+        const up = followPriced.filter((c) => c.pct > 0).length;
+        const down = followPriced.filter((c) => c.pct < 0).length;
+        const flat = followPriced.filter((c) => c.pct === 0).length;
+        const when = this.longDate(D.marketDate);
+        const n = followed.length;
+        return ar
+          ? `${when} · إغلاق · ${n} شركة تتابعها · ${up} صعدت · ${down} هبطت · ${flat} بلا تغيّر`
+          : `${when} · close · ${n} followed · ${up} up · ${down} down · ${flat} unchanged`;
+      })(),
       // The market table's own labels, minus the sort: the order here is the
       // order they were followed in, which is the reader's and not a ranking.
       followCols: colDef.map(([, label, align]) => ({ label, align })),
@@ -5233,7 +5329,7 @@ export class Component extends Base {
       noRows: rows.length === 0,
       clearFilters: () => this.setState({ q:'', sector:'All' }),
       onQuery: e => this.setState({ q: e.target.value }),
-      co, ranges, chart, rateSeriesNote: L.rateNoSeries.replace('{n}',
+      co, ranges, chart, chartBench: Boolean(benchRebased), chartBenchNote, rateSeriesNote: L.rateNoSeries.replace('{n}',
         String(rates.filter((r) => ((indexById.get(r.id) || {}).points || r.points || []).length > 1).length))
         + (D.seriesTo ? ' ' + L.rateSeriesTo.replace('{at}', this.shortDate(D.seriesTo)) : ''),
       ratesArrowed: rates.map((r) => {
@@ -5605,6 +5701,34 @@ export class Component extends Base {
     return b ? (this.state.lang === 'ar' ? 'حتى ' + b : 'to ' + b) : '';
   }
 
+  /** The market's own line, rebased to start where the company's line starts.
+   *
+   * WHY REBASE, AND WHY IT IS NOT A SECOND AXIS
+   * The question a reader actually has in front of a price chart is "is this
+   * the company, or is it just the market?" — and it cannot be answered by a
+   * price against an index, because 18.42 pounds and 55,498 points share no
+   * scale. Two y-axes would be the usual answer and it is the wrong one: with
+   * two axes the crossing point is chosen by whoever drew the chart, so the
+   * same fortnight can be made to show the company ahead or behind.
+   *
+   * Rebasing removes that freedom. Both lines start at the same place — the
+   * company's first close in the window — and every later index point is
+   * moved by the same proportion the index moved. The gap between the lines
+   * is then the only thing on the chart, and it means one thing: how far the
+   * company has run ahead of, or behind, the market since that day.
+   *
+   * MATCHED BY DATE, NEVER BY POSITION
+   * The two series are zipped on their dates, not their indexes. A company
+   * that was suspended for three sessions has fewer points than the index
+   * over the same fortnight, and lining the arrays up by position would slide
+   * its whole line sideways against the market and draw a divergence that is
+   * purely an off-by-three. Sessions the company did not trade are simply
+   * absent from the ghost line.
+   */
+  rebasedBenchmark(pts) {
+    return rebaseTo(pts, (this.data() || {}).benchmark);
+  }
+
   buildChart(pts) {
     // A company's price series arrives after its document does, and the market
     // screens carry none at all. An empty chart is a blank frame, not a crash.
@@ -5615,12 +5739,24 @@ export class Component extends Base {
       }, '—');
     }
     const W = 1000, H = 260, pad = 4;
-    const vals = pts.map(p => p.close);
+    const ghost = this.rebasedBenchmark(pts);
+    /* The market's line shares the company's axis, so its own high and low
+       have to widen that axis or the ghost runs off the top of the frame. */
+    const vals = pts.map(p => p.close)
+      .concat(ghost ? ghost.values.filter((v) => typeof v === 'number') : []);
     const lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals), sp = (hi - lo) || 1;
     const x = i => (i / Math.max(1, pts.length - 1)) * W;
     const y = v => pad + (1 - (v - lo) / sp) * (H - pad * 2);
     const line = pts.map((p,i) => (i ? 'L' : 'M') + x(i).toFixed(2) + ' ' + y(p.close).toFixed(2)).join(' ');
     const area = line + ' L' + W + ' ' + H + ' L0 ' + H + ' Z';
+    /* One `M` after every gap, so a suspension is a break in the ghost rather
+       than a straight line drawn through days that were not recorded. */
+    let broken = true;
+    const ghostPath = ghost ? ghost.values.map((v, i) => {
+      if (typeof v !== 'number') { broken = true; return ''; }
+      const cmd = broken ? 'M' : 'L'; broken = false;
+      return cmd + x(i).toFixed(2) + ' ' + y(v).toFixed(2);
+    }).filter(Boolean).join(' ') : '';
     const grid = this.props.showChartGrid === false ? [] : [0.25,0.5,0.75].map((f,i) =>
       React.createElement('line', { key:'g'+i, x1:0, x2:W, y1:H*f, y2:H*f, stroke:'var(--rule2)', strokeWidth:1 }));
     const last = pts[pts.length-1];
@@ -5631,6 +5767,9 @@ export class Component extends Base {
           React.createElement('stop', { offset:'100%', stopColor:'var(--accent)', stopOpacity:0 }))),
         grid,
         React.createElement('path', { d:area, fill:'url(#esth-fade)' }),
+        ghostPath ? React.createElement('path', { key:'bench', d:ghostPath, fill:'none',
+          stroke:'var(--thread)', strokeWidth:1.4, strokeDasharray:'5 4',
+          vectorEffect:'non-scaling-stroke', strokeLinejoin:'round', strokeLinecap:'round' }) : null,
         React.createElement('path', { d:line, fill:'none', stroke:'var(--ink)', strokeWidth:1.7, vectorEffect:'non-scaling-stroke', strokeLinejoin:'round', strokeLinecap:'round' }),
         React.createElement('circle', { cx:x(pts.length-1), cy:y(last.close), r:9, fill:'var(--accent)', opacity:0.18 }),
         React.createElement('circle', { cx:x(pts.length-1), cy:y(last.close), r:3.6, fill:'var(--accent)' })
