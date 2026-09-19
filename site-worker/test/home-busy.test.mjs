@@ -22,10 +22,15 @@ test('the volume multiple says which session it belongs to', () => {
     'the busiest card draws no session date');
   assert.match(logic, /busyWhen:/, 'busyWhen is never computed');
 
-  // Both languages, or half the readership gets a card with no date on it.
-  const en = logic.slice(logic.indexOf("busiest:'Traded with abnormal volume'"));
-  assert.match(en.slice(0, 2000), /busyOn:'Close of \{date\}'/, 'no English close phrasing');
-  assert.match(en.slice(0, 2000), /busyOnLive:/, 'no English live-session phrasing');
+  /* Both languages, or half the readership gets a card with no date on it.
+     This used to find the English dictionary by searching for the heading
+     "Traded with abnormal volume" and reading 2000 characters on from it. That
+     made a copy edit anywhere near the heading break a test about DATES: the
+     heading changed, the landmark vanished, and the failure said "no English
+     close phrasing" about a line that had not moved. Assert the phrasing
+     itself, wherever it lives. */
+  assert.match(logic, /busyOn:'Close of \{date\}'/, 'no English close phrasing');
+  assert.match(logic, /busyOnLive:'[^']*\{date\}/, 'no English live-session phrasing');
   assert.equal((logic.match(/busyOn:'/g) || []).length, 2, 'busyOn is not in both languages');
   assert.equal((logic.match(/busyOnLive:'/g) || []).length, 2,
     'busyOnLive is not in both languages');
