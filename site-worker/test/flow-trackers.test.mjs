@@ -90,7 +90,9 @@ test('turn 6 gives the three their own cards, and the liquidity limit survives',
       relationshipLabel:'Insider / Board'}]}});
   const home=flowTrackers(c,c.data(),false).home;
   const titles=all(home,'h2').map(n=>text(n).trim());
-  assert.deepEqual(titles,['Sector pulse','Ownership lens','Market liquidity'],
+  // The heading is now the reader's question with the card's name after it as
+  // a small term; the order of the three cards is what this pins.
+  assert.deepEqual(titles.map((x) => x.replace(/^[^?]*\?\s*/, '').trim()),['Sector pulse','Ownership lens','Market liquidity'],
     `the three were folded together again: ${titles.join(', ')}`);
   /* The sentence that stops traded value in rising shares being read as money
      entering the market. Every executed trade has both sides. */

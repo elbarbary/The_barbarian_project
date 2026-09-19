@@ -252,7 +252,9 @@ test('the card says it is a saved record, and that this publisher neither holds 
   assert.match(lead, /hold nothing/);
   assert.match(lead, /advise nothing/);
   const ar = text(byClass(aiCards(component(), data, true), 'aix-lab-lead')[0]);
-  assert.match(ar, /ولا نملك ولا نوصي/, 'the Arabic card drops the disclaimer');
+  // «نوصي» is on the Arabic §8 list (arabic-directive.test.mjs); the denial
+  // says the same thing without the word, as the English one says "advise".
+  assert.match(ar, /لا نملك شيئاً ولا نُقدّم نصيحة/, 'the Arabic card drops the disclaimer');
 });
 
 /* The system's card below the record's minimum, the way 15 Sep 2026 had it:

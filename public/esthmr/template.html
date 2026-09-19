@@ -120,6 +120,7 @@
       <header class="journal-intro">
         <p class="journal-eyebrow">{{ marketDate }} · {{ sessionState }}</p>
         <h1>{{ overviewTitle }}</h1>
+        <p class="journal-lead">{{ L.overviewLead }}</p>
       </header>
 
       <!-- ── THE MARKET, FIRST ──────────────────────────────────────────── -->
@@ -298,7 +299,7 @@
         <div class="insight-grid">
           <article class="insight-card insight-investors">
             <p class="card-dateline"><span>{{ investorsDateline }}</span><button type="button" onClick="{{ goInvestors }}">{{ L.investorsOpen }} ↗</button></p>
-            <header class="island-heading"><h3>{{ L.investorsWho }}</h3></header>
+            <header class="island-heading"><h3>{{ L.investorsWhoQuestion }} <small class="h-term">{{ L.investorsWho }}</small></h3></header>
             <sc-if value="{{ investors }}">
               <p class="card-lead">{{ L.investorsTwoSides }}</p>
               <div class="investor-mini-bar"><sc-for list="{{ investors.nationalityBar }}" as="s"><span style="width:{{ s.width }};background:{{ s.color }}"></span></sc-for></div>
@@ -332,7 +333,7 @@
            as four competing sections is now one place to go looking. -->
       <section class="explore-further" aria-labelledby="explore-further-title">
         <header class="ef-head">
-          <h2 id="explore-further-title">{{ L.exploreTitle }}</h2>
+          <h2 id="explore-further-title">{{ L.exploreTitleQuestion }} <small class="h-term">{{ L.exploreTitle }}</small></h2>
           <p>{{ L.exploreLead }}</p><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.exploreLeadNuance }}</div></details>
         </header>
       <div class="quick-paths"><sc-for list="{{ quickActions }}" as="q">
@@ -422,7 +423,7 @@
       <div class="island-board">
         <section class="island island-mosaic">
           <p class="card-dateline"><span>{{ mosaicNote }}</span><button type="button" onClick="{{ openHeat }}">{{ browseLabel }} ↗</button></p>
-          <header class="island-heading"><h2>{{ mosaicTitle }}</h2></header>
+          <header class="island-heading"><h2>{{ mosaicQuestion }} <small class="h-term">{{ mosaicTitle }}</small></h2></header>
           <div class="market-mosaic"><sc-for list="{{ mosaicTiles }}" as="m">
             <button type="button" onClick="{{ m.go }}" title="{{ m.name }}" aria-label="{{ m.name }} {{ m.pct }}" style="background:{{ m.tileBg }};color:{{ m.tileInk }}">
               <span>{{ m.ticker }}</span><strong>{{ m.pct }}</strong><small class="mosaic-company" dir="auto">{{ m.name }}</small>
@@ -433,6 +434,7 @@
         <section class="island island-moves">
           <p class="card-dateline"><span>{{ marketDate }} · {{ sessionState }}</span><button type="button" onClick="{{ goMarket }}">{{ browseLabel }} ↗</button></p>
           <header class="island-heading"><h2>{{ snapshotMovesLabel }}</h2></header>
+          <p class="island-lede">{{ L.moversLede }}</p>
           <div class="island-move-grid"><sc-for list="{{ snapshotMoves }}" as="m">
             <button type="button" class="island-move" onClick="{{ m.go }}" style="--move-color:{{ m.color }}">
               <span class="island-ticker">{{ m.ticker }}</span><strong>{{ m.pct }}</strong><span class="island-company">{{ m.name }}</span>
@@ -448,7 +450,7 @@
              sentence. Nothing here toggles `hidden`. -->
         <section class="island island-crossings">
           <p class="card-dateline"><span>{{ fpWhen }}</span><button type="button" onClick="{{ openConnections }}">{{ L.dotsLabel }} ↗</button></p>
-          <header class="island-heading"><h2>{{ L.fpTitle }}</h2></header>
+          <header class="island-heading"><h2>{{ L.fpTitleQuestion }} <small class="h-term">{{ L.fpTitle }}</small></h2></header>
           <sc-if value="{{ fpHasFresh }}"><p class="fp-fresh">{{ fpFresh }}</p></sc-if>
           <sc-if value="{{ fpHasSentence }}"><p class="fp-sentence">{{ fpSentence }}</p></sc-if>
           <sc-for list="{{ fpTiers }}" as="t">
@@ -1686,7 +1688,7 @@
              can be a quarter of the market and still have taken money off the
              table. -->
         <section class="investor-full-summary ranking-panel">
-          <header class="island-heading"><h2>{{ L.investorsWho }}</h2><span>{{ investors.asOfLine }}</span></header>
+          <header class="island-heading"><h2>{{ L.investorsWhoQuestion }} <small class="h-term">{{ L.investorsWho }}</small></h2><span>{{ investors.asOfLine }}</span></header>
           <p class="insight-caption">{{ investors.totalLine }}</p>
           <div class="investor-summary-grid">
             <div><h3>{{ L.investorsShareQuestion }} <small class="h-term">{{ L.investorsShare }}</small></h3><div class="investor-mini-bar"><sc-for list="{{ investors.nationalityBar }}" as="s"><span style="width:{{ s.width }};background:{{ s.color }}"></span></sc-for></div><div class="investor-type-legend"><sc-for list="{{ investors.nationalityBar }}" as="s"><span>{{ s.label }} <strong>{{ s.percent }}</strong></span></sc-for></div></div>

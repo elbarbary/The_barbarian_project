@@ -2008,13 +2008,14 @@ export function flowTrackers(component, data, ar) {
    * `flow-preview.json` already publishes every figure below.
    */
   const latest = (s) => (s.history && s.history.at(-1)) || {};
-  const flowCard = ({ key, dateline, link, go: onGo, title, lede, rows, limit }) => h('article', {
+  const flowCard = ({ key, dateline, link, go: onGo, title, question, lede, rows, limit }) => h('article', {
     key, className: 'ft-card',
   },
   h('p', { className: 'ft-card-dateline' },
     h('span', null, dateline),
     onGo ? h('button', { type: 'button', className: 'ft-card-open', onClick: onGo }, link) : null),
-  h('h2', { className: 'ft-card-title' }, title),
+  // The heading is the reader's question; the card's name follows as a small term.
+  h('h2', { className: 'ft-card-title' }, question || title, question ? ' ' : null, question ? h('small', { className: 'h-term' }, title) : null),
   h('p', { className: 'ft-card-lede' }, lede),
   h('div', { className: 'ft-card-rows' }, rows),
   h('p', { className: 'ft-card-limit' }, limit));
@@ -2034,8 +2035,9 @@ export function flowTrackers(component, data, ar) {
       `${asOf} · أعلى تدفّق ${compact(totalFlow)} جنيه`),
     link: t('Sector liquidity ↗', 'سيولة القطاعات ↗'), go: () => go('liquidity'),
     title: t('Sector pulse', 'نبض القطاعات'),
-    lede: t('Where activity meets the size of the sector. Traded value, and the size-weighted move.',
-      'حيث يلتقي النشاط بحجم القطاع. القيمة المتداولة، والعائد المرجّح.'),
+    question: t('Which sectors moved today?', 'أي القطاعات تحرّك اليوم؟'),
+    lede: t('What traded in each sector today against its size: a sector trading above its size is where the attention is.',
+      'قيمة ما تُدوول في كل قطاع اليوم مقارنة بحجمه: القطاع الذي يتداول فوق حجمه هو حيث الانتباه.'),
     rows: topSectors.map((s) => h('div', { key: s.id, className: 'ft-card-row' },
       h('span', { className: 'ft-row-name' }, titleOf(s)),
       h('span', { className: 'ft-row-val', dir: 'ltr' }, compact(latest(s).value)),
@@ -2049,8 +2051,9 @@ export function flowTrackers(component, data, ar) {
     dateline: t('Articles 29 & 38 disclosures', 'إفصاحات المادتين 29 و 38'),
     link: t('Open the map ↗', 'افتح الخريطة ↗'), go: () => go('ownership'),
     title: t('Ownership lens', 'عدسة الملكية'),
-    lede: t('When insiders changed what they hold. The denominator is the company’s own capital.',
-      'متى غيّر المطّلعون نسبتهم في الشركات. المقام هو رأس مال الشركة.'),
+    question: t('Who bought and who sold from inside the companies?', 'من اشترى ومن باع من داخل الشركات؟'),
+    lede: t('When a director or a large holder adds to or cuts a stake in their own company, they must declare it. Here is the latest they declared, as a share of the company.',
+      'حين يشتري مدير أو مساهم كبير أسهماً في شركته أو يبيعها، عليه أن يعلن ذلك. هنا آخر ما أعلنوه، كنسبة من الشركة.'),
     rows: topEvents.slice(0, 5).map((n) => h('div', { key: n.id, className: 'ft-card-row ft-card-row-wide' },
       h('button', { type: 'button', className: 'ft-row-code',
         onClick: () => component.setState({ screen: 'company', ticker: n.ticker }) }, n.ticker),
@@ -2066,8 +2069,9 @@ export function flowTrackers(component, data, ar) {
     dateline: t(`${asOf} · traded value covered`, `${asOf} · قيمة متداولة مغطاة`),
     link: t('Explore ↗', 'استكشف ↗'), go: () => go('liquidity'),
     title: t('Market liquidity', 'سيولة السوق'),
-    lede: t('How the session’s traded value split between shares that rose and shares that fell.',
-      'كيف انقسمت قيمة تداول الجلسة بين الأسهم الصاعدة والهابطة.'),
+    question: t('Did today’s trading go to the rising shares or the falling ones?', 'هل ذهب التداول اليوم إلى الأسهم الصاعدة أم الهابطة؟'),
+    lede: t('Traded value in rising shares against falling ones. When it concentrates in the risers, the move is broad, not one trade.',
+      'قيمة التداول في الأسهم الصاعدة مقابل الهابطة. حين تتركز في الصاعدة فالحركة عريضة لا صفقة واحدة.'),
     rows: [
       h('div', { key: 'up', className: 'ft-card-row' },
         h('span', { className: 'ft-row-name' }, t('In rising shares', 'في أسهم صاعدة')),

@@ -43,13 +43,16 @@ const compact = (v) => (finite(v)
   : '—');
 
 /** The card frame every one of the three shares. */
-function card({ dateline, primitive, title, visual, limit, chip, more, key }) {
+function card({ dateline, primitive, title, lede, visual, limit, chip, more, key }) {
   if (!visual) return null;
   return h('article', { key, class: 'ct-card' },
     h('div', { class: 'ct-head' },
       h('span', { class: 'ct-dateline' }, dateline),
       h('span', { class: 'ct-primitive' }, primitive)),
     h('h3', { class: 'ct-title' }, title),
+    // One plain line before the drawing: what this card means for the reader.
+    // The limit line below the drawing keeps its job of saying what it is not.
+    lede ? h('p', { class: 'ct-lede' }, lede) : null,
     h('div', { class: 'ct-rule' }),
     h('div', { class: 'ct-visual' }, visual),
     h('p', { class: 'ct-limit' }, limit),
@@ -102,6 +105,8 @@ function volumeCard(data, ar, t, open, day) {
     dateline: t(`${day(data.marketDate)} · close · ${top.length} companies`,
       `${day(data.marketDate)} · إغلاق · ${top.length} شركات`),
     primitive: t('PAIRED BARS', 'أعمدة مزدوجة'),
+    lede: t('Something drew attention to this share today; the filings and the news say what, the volume alone does not.',
+      'شيء جذب الانتباه إلى هذا السهم اليوم؛ الإفصاحات والأخبار تقول ماذا، لا الحجم وحده.'),
     title: top.length > 1
       ? t(`${lead.ticker} · ${name} traded ${lead.rv.toFixed(1)}× its usual volume, and it was not alone`,
         `${lead.ticker} · ${name} تداولت ${lead.rv.toFixed(1)}× حجمها المعتاد، ولم تكن وحدها`)
@@ -153,6 +158,11 @@ function indexCard(data, ar, t, open, day) {
     dateline: t(`${day(data.marketDate)} · close · ${points.length} sessions`,
       `${day(data.marketDate)} · إغلاق · ${points.length} جلسة`),
     primitive: t('LINE', 'خط'),
+    lede: below
+      ? t('The index sits below its recent average: the last weeks were weaker than their own average. Where it is, not where it goes.',
+        'المؤشر اليوم تحت متوسطه في الأسابيع الأخيرة، أي إن الأيام الأخيرة كانت أضعف من المعتاد. يصف أين هو، لا إلى أين يذهب.')
+      : t('The index sits above its recent average: the last weeks were better than their own average. Where it is, not where it goes.',
+        'المؤشر اليوم فوق متوسطه في الأسابيع الأخيرة، أي إن الأيام الأخيرة كانت أفضل من المعتاد. يصف أين هو، لا إلى أين يذهب.'),
     title: below
       ? t(`${name} closed below its ${points.length}-session average`,
         `${name} أغلق أدنى من متوسط ${points.length} جلسة`)
@@ -219,6 +229,8 @@ function ownershipCard(data, ar, t, open, day) {
     dateline: t(`${day(newest.asOf)} · ownership filings · ${picked.length} companies`,
       `${day(newest.asOf)} · إفصاحات ملكية · ${picked.length} شركات`),
     primitive: t('SHARE BAR', 'شريط نصيب'),
+    lede: t('Whoever holds a large stake has filed it; the bar shows what is disclosed and what remains unknown.',
+      'من يملك حصة كبيرة أفصح عنها؛ الشريط يريك المُعلن وما بقي مجهولاً.'),
     title: picked.length > 1
       ? t(`What is disclosed of ${picked.length} companies, and what is not`,
         `المُعلن من ${picked.length} شركات، وما ليس معلناً`)
@@ -277,5 +289,8 @@ export function changedToday(data, ar, { openCompany, openMarket, heading, note,
     h('div', { class: 'ct-shelf-head' },
       h('h2', null, heading),
       h('span', { class: 'ct-shelf-note' }, note)),
+    h('p', { class: 'ct-shelf-lede' }, t(
+      'What actually happened today, with a drawing and a document for each fact — no opinions: who traded far above usual, where the index stands, and who declared a stake.',
+      'ما حدث فعلاً اليوم، برسم ومستند لكل واقعة — لا آراء: من تداول أكثر من عادته بكثير، وأين يقف المؤشر، ومن أعلن عن حصته.')),
     h('div', { class: 'ct-grid' }, shy ? cards.concat([shy]) : cards));
 }
