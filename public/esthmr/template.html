@@ -1241,6 +1241,19 @@
       </div>
 
       <!-- ══ INSIDER & TREASURY FLOW TRACKER ══ -->
+      <!-- The filings could not be read.
+           Distinct from "nothing matches your filter", which is what
+           `insiderEmpty` says inside the panel: no filter change fixes a
+           failed fetch, and the button that helps is retry. Before this a
+           failed document rendered nothing at all, so a broken fetch and a
+           quiet week looked exactly alike. -->
+      <sc-if value="{{ insidersUnavailable }}">
+        <section class="insiders-down" role="status">
+          <h3>{{ L.insidersDownTitle }}</h3>
+          <p>{{ L.insidersDownBody }}</p>
+          <button type="button" onClick="{{ retryData }}">{{ retryLabel }}</button>
+        </section>
+      </sc-if>
       <sc-if value="{{ showInsiderTracker }}">
         <section class="insider-tracker-panel" style="display:flex;flex-direction:column;gap:18px">
           <!-- Double-Bezel Header Card -->

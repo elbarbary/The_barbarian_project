@@ -1829,12 +1829,34 @@ export async function insiderPeople() {
   return d;
 }
 
+/** Who inside a company dealt in its shares, as filed — or nothing.
+ *
+ * THIS USED TO FALL BACK TO THE DEMO, AND THAT WAS THE LAST PLACE IT COULD.
+ * On any failure — a 401, a 429, a 500, an empty document, a malformed one —
+ * it returned `demo().insiders`: five invented transactions carrying
+ * `filingId: '294408'`, `sourceType: 'bulletin'`, and the attribution
+ * "Official exchange disclosures filed under Capital Market Law Articles 29
+ * & 38". The companies are the demo's own DEMO01..DEMO16, so no real security
+ * was ever named; what was fabricated was the provenance. A reader was shown
+ * transactions that claimed to be filed under two named articles of Egyptian
+ * law and were filed nowhere.
+ *
+ * It was also the last function in this file with a `demo()` fallback, and
+ * since 18 September the demo is served to nobody — signed out there is no
+ * dataset at all (see main.js `load`). So every reader who could still reach
+ * this line was a signed-in one whose document had failed, looking at a real
+ * exchange everywhere else on the page.
+ *
+ * Absence is now absence. The screen says the filings could not be read and
+ * offers to try again, which is a true statement about a failed fetch; five
+ * invented rows are not.
+ */
 export async function insiders() {
   try {
     const d = await doc('insiders.json');
     if (d && Array.isArray(d.items) && d.items.length > 0) return d;
-  } catch {}
-  return demo().insiders;
+  } catch { /* unreachable, unauthorised, rate-limited or malformed */ }
+  return null;
 }
 
 /** The per-company blocks the company screen shows under its statements. */

@@ -658,6 +658,8 @@ export class Component extends Base {
       insiderKpiTreasury:'Treasury Purchases', insiderKpiActiveFirms:'Active Companies',
       insiderShares:'shares', insiderTransactions:'filings', insiderOfficialDoc:'Official Filing',
       insiderEmpty:'Nothing was filed that matches what you have chosen. Widen the dates, or clear a filter.',
+      insidersDownTitle:'These filings could not be read',
+      insidersDownBody:'The disclosure document did not load. Nothing is shown rather than something approximate — every row here is one filed document, and we do not have them.',
       insiderDiscloseNote:'Board members, anyone holding more than 5%, and connected groups must file a form after they trade the company’s shares. A company must also file when it buys, sells or cancels its own shares. Both are required by EGX listing rules, Articles 29 & 38.',
       insiderCrossLink:'Insider & Treasury Tracker',
       insiderSessionLabel:'Session',
@@ -1067,6 +1069,8 @@ export class Component extends Base {
       insiderKpiTreasury:'شراء أسهم خزينة', insiderKpiActiveFirms:'شركات ذات تعاملات',
       insiderShares:'سهم', insiderTransactions:'إفصاح / صفقة', insiderOfficialDoc:'المستند الرسمي بالبورصة',
       insiderEmpty:'لم يُفصح عن شيء يطابق ما اخترته. وسّع المدى الزمني، أو أزِل أحد عوامل التصفية.',
+      insidersDownTitle:'تعذّرت قراءة هذه الإفصاحات',
+      insidersDownBody:'لم يُحمَّل مستند الإفصاحات. لا نعرض شيئاً بدلاً من عرض ما يقاربه — كل صف هنا مستند مُفصح عنه، وهي ليست لدينا.',
       insiderDiscloseNote:'على أعضاء مجلس الإدارة، وكل من يملك أكثر من ٥٪، والمجموعات المرتبطة، تقديم نموذج بعد تعاملهم في أسهم الشركة. وعلى الشركة أيضاً الإفصاح إذا اشترت أسهمها أو باعتها أو ألغتها. وكلاهما مطلوب بقواعد القيد بالبورصة المصرية، المادتان ٢٩ و٣٨.',
       insiderCrossLink:'راصد الداخليين والخزينة',
       insiderSessionLabel:'جلسة',
@@ -2926,14 +2930,13 @@ export class Component extends Base {
 
     // ── Official Insider & Treasury Flow Tracker ──
     const insiderTracker = (() => {
-      let src = (D.insiders && Array.isArray(D.insiders.items) && D.insiders.items.length > 0)
+      /* One test, once. The second branch that stood here asked whether we
+         were in the demo and then re-checked the identical condition, so it
+         could never fire — dead code that read as a sanctioned demo path and
+         outlived the demo itself. */
+      const src = (D.insiders && Array.isArray(D.insiders.items) && D.insiders.items.length > 0)
         ? D.insiders
         : null;
-
-      if (!src && D.demo && D.insiders && Array.isArray(D.insiders.items) && D.insiders.items.length > 0) {
-        src = D.insiders;
-      }
-
       if (!src) return null;
       const rawItems = src.items || [];
       const summary = src.summary || {};
@@ -5242,6 +5245,14 @@ export class Component extends Base {
       goInsiderTracker: () => this.setState({ screen: 'investors', investorTab: 'insiders' }),
       investors, noInvestors: investors === null,
       investorTab, investorTabOptions, showMacroInvestors, showInsiderTracker,
+      /* TWO DIFFERENT ABSENCES, AND THEY ARE NOT THE SAME SENTENCE.
+         `insiderEmpty` is "the document loaded and nothing in it matches what
+         you chose" — widen the dates. This is "the document did not load",
+         which no filter change will fix and which the reader can retry. Until
+         now the second case had no words at all: the panel simply did not
+         render, so a failed fetch and a quiet week looked identical. */
+      insidersUnavailable: (investorTab === 'insiders' || investorTab === 'both')
+        && insiderTracker === null,
       insiderTracker, noInsiderTracker: insiderTracker === null,
       // Bound to the company ON SCREEN rather than to the ticker in the state.
       // They are the same thing live. They are not on the demo, where every

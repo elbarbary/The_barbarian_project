@@ -1216,3 +1216,22 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
 #app .co-bench-mark {
   flex: 0 0 26px; height: 0; border-top: 1.4px dashed var(--thread);
 }
+
+/* The insider filings could not be read.
+ * Styled as a statement rather than an alarm: the document failing is an
+ * ordinary event, and the page around it is still correct. The dashed edge is
+ * the same one the quiet-day card uses, so "we have nothing here" looks the
+ * same wherever the site says it. */
+#app .insiders-down {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+  padding: 22px; border-radius: var(--radius-island);
+  background: var(--sunk); border: 1px dashed var(--rule);
+}
+#app .insiders-down h3 { margin: 0; font: 600 16.5px/1.45 var(--font-heading); }
+#app .insiders-down p { margin: 0; font-size: 13.5px; line-height: 1.65; color: var(--t2); max-width: 64ch; }
+#app .insiders-down button {
+  min-height: 44px; padding: 0 16px; border-radius: var(--radius-control);
+  border: 1px solid var(--rule); background: var(--surface); color: var(--ink);
+  font: inherit; font-size: 13px; cursor: pointer;
+}
+#app .insiders-down button:hover { background: var(--sunk); }
