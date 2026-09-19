@@ -1799,6 +1799,10 @@
     "meaning": "This reports daily retail and wholesale prices for fish, which reflect prevailing local supply from fisheries and aquaculture alongside commercial transport and distribution costs in Egypt's food sector.",
     "meaning_ar": "يعرض هذا التقرير أسعار بيع الأسماك بالجملة والتجزئة يومياً، والتي تعكس حجم المعروض المحلي من المصايد والمزارع السمكية بالإضافة إلى تكاليف النقل والتوزيع التجاري في قطاع الأغذية المصري."
   },
+  "اسعار السمك اليوم السبت 19-9-2026 في مصر": {
+    "meaning": "The headline tracks daily spot prices for fish in the local wholesale and retail markets, reflecting the intersection of daily coastal catch volumes, aquaculture supply, transportation logistics, and household food consumption patterns.",
+    "meaning_ar": "يرصد العنوان الأسعار الفورية اليومية للأسماك في أسواق الجملة والتجزئة المحلية، مما يعكس حركة التداول اليومية القائمة على حجم الصيد والاستزراع السمكي وتكاليف النقل ومعدلات الاستهلاك الغذائي."
+  },
   "اسعار السمك اليوم السبت 5-9-2026 في مصر": {
     "meaning": "Daily fish price updates reflect spot pricing across wholesale and retail markets, determined by daily supply volumes from aquaculture and commercial landings alongside transportation costs.",
     "meaning_ar": "تعكس تحديثات أسعار الأسماك اليومية مستويات التسعير الفوري في أسواق الجملة والتجزئة، وتحددها أحجام المعروض اليومي من الاستزراع السمكي والصيد إلى جانب تكاليف النقل."
@@ -4728,6 +4732,10 @@
     "meaning": "Infrastructure privatization transfers the operational management, maintenance, and toll collection rights of state-owned bridges and highways to private concessionaires in exchange for concession fees paid to the government.",
     "meaning_ar": "تنقل خصخصة البنية التحتية حقوق الإدارة التشغيلية والصيانة وتحصيل رسوم المرور الخاصة بالجسور والطرق السريعة المملوكة للدولة إلى شركات امتياز من القطاع الخاص مقابل رسوم امتياز تُسدد للحكومة."
   },
+  "تركيا تلغي ترخيص تشغيل بنك ملت الايراني وسط اجراءات امريكيه": {
+    "meaning": "Revoking a commercial banking license halts the entity's access to domestic clearing systems, cross-border payment rails, and bilateral trade settlement operations in the host jurisdiction.",
+    "meaning_ar": "يؤدي إلغاء رخصة التشغيل المصرفي إلى وقف وصول المؤسسة إلى أنظمة المقاصة المحلية وقنوات المدفوعات عبر الحدود وعمليات تسوية التجارة البينية في الدولة المضيفة."
+  },
   "تريليون دولار حجم التجاره الافريقيه وفرص واعده امام الشركات المصريه": {
     "meaning": "African trade operates through continental trade corridors and regional frameworks that structure cross-border supply chains and export channels for Egyptian commercial and industrial enterprises.",
     "meaning_ar": "تعتمد التجارة الإفريقية على ممرات تجارية عابرة للحدود وأطر إقليمية تُحدد قنوات التصدير وسلاسل الإمداد للشركات التجارية والصناعية المصرية داخل الأسواق القارية."
@@ -5991,6 +5999,10 @@
   "سعر كرتونه البيض اليوم 17/9/2026 للمستهلك في السوق المحليه": {
     "meaning": "Egg carton retail pricing reflects daily farm-gate supply adjustments, feed input costs, and distribution markups across the local poultry value chain.",
     "meaning_ar": "تعكس أسعار كرتونة البيض للمستهلك التغيرات اليومية في تكاليف الإنتاج بالمزارع، وأسعار الأعلاف، وهامش تكلفة التوزيع عبر سلاسل الإمداد في السوق المحلية."
+  },
+  "سعر كرتونه البيض اليوم 19/9/2026 للمستهلك في السوق المحليه": {
+    "meaning": "Egg carton retail pricing reflects daily supply-demand dynamics in the domestic poultry market, driven by farmgate production costs, feed input expenses, and distribution margins through local retail channels.",
+    "meaning_ar": "يعكس سعر كرتونة البيض للمستهلك التوازن اليومي بين العرض والطلب في السوق المحلية، متأثراً بتكاليف الإنتاج بالمزارع، وأسعار الأعلاف، وهامش التوزيع عبر قنوات التجزئة."
   },
   "سعر كرتونه البيض اليوم 4/9/2026 للمستهلك في السوق المحليه": {
     "meaning": "This reflects the daily domestic retail pricing updates for table eggs, driven by poultry feed supply costs, farm-gate production expenses, and local consumer demand dynamics.",
