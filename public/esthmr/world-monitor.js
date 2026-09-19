@@ -36,9 +36,9 @@ const tone = (v) => (v > 0 ? 'var(--up)' : v < 0 ? 'var(--down)' : 'var(--t2)');
 /* What the rows are, in the order a reader meets them. */
 export const GROUPS = [
   ['egypt', 'The price of money in Egypt', 'سعر المال في مصر'],
-  ['currencies', 'Against the pound', 'مقابل الجنيه'],
-  ['world', 'Commodities and indices', 'السلع والمؤشرات'],
-  ['metals', 'Metals', 'المعادن'],
+  ['currencies', 'Against the pound', 'العملات مقابل الجنيه'],
+  ['world', 'Commodities and indices', 'النفط والنحاس والبورصات الكبرى'],
+  ['metals', 'Metals', 'الذهب والفضة'],
 ];
 
 export const WINDOWS = [
@@ -59,11 +59,17 @@ export function remark(against, t) {
   if (!against || !finite(against.percentile)) {
     return t('not enough history to compare', 'لا يوجد تاريخ كافٍ للمقارنة');
   }
+  // The word first, the measurement after it. "Larger than 87% of them" is
+  // the fact; a reader who never studied finance wants to know whether that
+  // is rare. Rare, unusual, ordinary: thresholds on the two-year record, a
+  // description of frequency and nothing about what comes next.
+  const p = against.percentile;
+  const word = p >= 80 ? t('A rare move', 'حركة نادرة') : p >= 60 ? t('An unusual move', 'حركة غير معتادة') : t('An ordinary move', 'حركة عادية');
   return t(
-    `larger, up or down, than ${against.percentile.toFixed(0)}% of them; `
+    `${word}: larger, up or down, than ${p.toFixed(0)}% of them; `
     + `the middle one moved ${against.typical}%`,
-    `أكبر، صعوداً أو هبوطاً، من ${against.percentile.toFixed(0)}٪ منها؛ `
-    + `وتحرك الأوسط ${against.typical}٪`);
+    `${word}: أكبر، صعوداً أو هبوطاً، من ${p.toFixed(0)}٪ من حركات السنتين الماضيتين؛ `
+    + `والمعتاد ${against.typical}٪`);
 }
 
 /* Stated filters, never a ranking.
@@ -322,6 +328,7 @@ function channelPanel(channel, state, on, ar, t) {
       h('div', null,
         h('span', { className: 'ft-eyebrow' }, t(spec.eyebrow[0], spec.eyebrow[1])),
         h('h2', null, ar ? channel.questionAr : channel.question),
+        (ar ? channel.plainAr : channel.plain) ? h('p', { className: 'wm-lede' }, ar ? channel.plainAr : channel.plain) : null,
         h('small', null, t(`${channel.count} companies filed a figure`,
                            `${channel.count} شركة أودعت رقماً`))
       ),
@@ -428,6 +435,9 @@ export function worldMonitor(component, data, ar) {
       h('span', { className: 'ft-range-badge', dir: 'ltr' }, doc.generated.slice(0, 10))
     ),
     h('h1', null, t('What moved, and where it lands', 'ما الذي تحرك، وأين يصل')),
+    h('p', { className: 'wm-lede' }, t(
+      'Currencies, gold, oil and the big exchanges this week — was each move ordinary or rare? Then which Egyptian companies that reaches, through their own filings.',
+      'العملات والذهب والنفط والبورصات الكبرى هذا الأسبوع — هل كانت كل حركة عادية أم نادرة؟ ثم أي الشركات المصرية تصلها هذه الحركة عبر إفصاحاتها.')),
     h('p', { className: 'ft-note' }, ar ? doc.basisAr : doc.basis),
 
     h('div', { className: 'ft-pills wm-windows' },
@@ -442,7 +452,7 @@ export function worldMonitor(component, data, ar) {
     ),
 
     h('section', { className: 'ft-detail wm-block' },
-      h('h2', null, t('Outside Egypt', 'خارج مصر')),
+      h('h2', null, t('What did the world do this week?', 'ماذا فعل العالم هذا الأسبوع؟'), ' ', h('small', { className: 'h-term' }, t('Outside Egypt', 'خارج مصر'))),
       // Grouped by what the thing is. Flat alphabetical put the euro between
       // copper and the FTSE, and twelve unrelated numbers read as a list
       // rather than as three kinds of thing — which is most of why this did
@@ -467,7 +477,7 @@ export function worldMonitor(component, data, ar) {
     ),
 
     h('section', { className: 'ft-detail wm-block' },
-      h('h2', null, t('This exchange, measured the same way', 'هذه البورصة، بالقياس نفسه')),
+      h('h2', null, t('And did the Egyptian exchange move as much?', 'وهل تحركت البورصة المصرية بقدر مماثل؟'), ' ', h('small', { className: 'h-term' }, t('This exchange, measured the same way', 'هذه البورصة، بالقياس نفسه'))),
       h('p', { className: 'ft-note' },
         t('The comparison is the point: a week that was remarkable for oil and ordinary here is a different fact from one that was remarkable for both.',
           'المقارنة هي المقصد: أسبوع استثنائي للنفط وعادي هنا ليس كأسبوع استثنائي لكليهما.')),
@@ -489,7 +499,7 @@ export function worldMonitor(component, data, ar) {
     }, ar, t)),
 
     doc.foreignMoney && h('section', { className: 'ft-detail wm-block' },
-      h('h2', null, t('Who was on each side', 'من كان في كل جانب')),
+      h('h2', null, t('Who was buying and who was selling: Egyptians or foreigners?', 'من كان يشتري ومن كان يبيع: مصريون أم أجانب؟'), ' ', h('small', { className: 'h-term' }, t('Who was on each side', 'من كان في كل جانب'))),
       h('div', { className: 'ft-metrics' },
         (doc.foreignMoney.byNationality || []).map((row) => h('div', {
           key: row.nationality || row.label, className: 'ft-metric',

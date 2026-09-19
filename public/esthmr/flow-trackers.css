@@ -1167,3 +1167,6 @@ button.om-holder-row:hover span { color: var(--accent); }
   margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--rule);
   font-size: 12px; line-height: 1.6; color: var(--faint);
 }
+
+/* One plain line under a heading on the world monitor: what the block is for. */
+#app .ft-lede, #app .wm-lede { margin: 6px 0 10px; font-size: 14.5px; line-height: 1.6; color: var(--t2); max-width: 70ch; }

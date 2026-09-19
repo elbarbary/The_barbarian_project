@@ -285,7 +285,7 @@ function renderSectorFlowMap(sectors, selectedSector, onSelectSector, ar, t) {
     h('div', { className: 'ft-drawing-header' },
       h('div', null,
         h('span', { className: 'ft-drawing-tag' }, t('INTERACTIVE FLOW SYSTEM', 'نظام التدفق التفاعلي')),
-        h('h3', null, t('Capital Gravitational Map & Member Satellites', 'خريطة الجاذبية الرأسمالية وتوزيع الأسهم')),
+        h('h3', null, t('Which sectors are big, and where is the trading?', 'أي القطاعات كبيرة، وأين يجري التداول؟'), ' ', h('small', { className: 'h-term' }, t('Capital Gravitational Map & Member Satellites', 'خريطة الجاذبية الرأسمالية وتوزيع الأسهم'))),
         h('p', null, t('Node size represents Sector Market Cap. Flow conduits stream Inflow (Bought) vs Outflow (Sold). Orbiting satellites show member stocks sized by weight and colored by return.',
           'حجم الدائرة يمثل القيمة السوقية للقطاع. مسارات السيولة توضح التدفق الداخل (المشتريات) والخارج (المبيعات). الأقمار المدارية تظهر الأسهم بوزنها وعائدها.'))
       ),
@@ -1801,6 +1801,8 @@ function renderTradingShare(doc, selected, ar, t, onPick, focusId) {
       h('span', { className: 'ft-range-badge', dir: 'ltr' },
         `${rows[0].month} → ${rows[rows.length - 1].month}`)
     ),
+    h('p', { className: 'ft-lede' }, t('Two lines: a sector taking a larger share of the trading, and one losing it. The shape is the movement; nothing needs counting.',
+      'خطان: قطاع يأخذ نصيباً أكبر من التداول وآخر يفقده. الشكل هو الحركة، ولا يلزمك عدّ شيء.')),
     h('p', { className: 'ft-note' }, ar ? doc.basisAr : doc.basis),
     // The shape first: a line rising while another falls IS the movement, and
     // a reader sees it without counting anything.
@@ -1839,8 +1841,9 @@ function renderRotation(d, sectors, month, ar, t, onPickSector, selectedId) {
     h('div', { className: 'ft-section-heading' },
       h('div', null,
         h('span', { className: 'ft-eyebrow' }, t('WHERE IT ROTATED', 'إلى أين تحوّل')),
-        h('h2', null, t('Share of the month\u2019s trading, against the month before',
-                        'نصيب القطاع من تداول الشهر، مقابل الشهر السابق'))
+        h('h2', null, t('Which sectors gained a share of the trading this month, and which lost one?', 'أي القطاعات كسبت نصيباً من التداول هذا الشهر، وأيها خسر؟'), ' ',
+          h('small', { className: 'h-term' }, t('Share of the month\u2019s trading, against the month before',
+                        'نصيب القطاع من تداول الشهر، مقابل الشهر السابق')))
       ),
       h('span', { className: 'ft-range-badge', dir: 'ltr' }, `${before.month} → ${now.month}`)
     ),
@@ -1910,6 +1913,8 @@ function renderSectorsInsideSectors(doc, ar, t, focus, onPick, onCompany) {
       h('span', { className: 'ft-range-badge', dir: 'ltr' },
         `${doc.linkCount} ${t('stakes', 'حصة')}`)
     ),
+    h('p', { className: 'ft-lede' }, t('When a company moves, its owner can move with it. This is a map of who owns whom among listed companies, as filed.',
+      'حين تتحرك شركة قد تتحرك معها مالكتها. هذه خريطة من يملك من بين الشركات المقيدة، كما أُفصح عنها.')),
     h('p', { className: 'ft-note' }, t(
       `${doc.linkCount} ${plural(doc.linkCount, 'filed stake')} are one listed `
       + 'company\u2019s holding in another. '
@@ -2085,17 +2090,26 @@ export function flowTrackers(component, data, ar) {
   }) : null) : null;
 
 
-  const header = title => h('header', { className: 'ft-heading' },
+  // The title is the reader's question, the screen's name follows as a small
+  // term, and the line under it says what the page is for before it says
+  // what it is not.
+  const header = (title, question, lede) => h('header', { className: 'ft-heading' },
     h('span', { className: 'ft-eyebrow' }, 'ESTHMR / ' + t('MARKET OBSERVATORY', 'مرصد السوق')),
-    h('h1', null, title),
-    h('p', null, t('Published observations, not investment instructions.', 'بيانات منشورة، وليست توجيهات استثمارية.'))
+    h('h1', null, question || title, question ? ' ' : null, question ? h('small', { className: 'h-term' }, title) : null),
+    h('p', null, (lede ? lede + ' ' : '') + t('Published observations, not investment instructions.', 'بيانات منشورة، وليست توجيهات استثمارية.'))
   );
+  const sectorQuestion = t('Where did the trading go this month?', 'أين ذهب التداول هذا الشهر؟');
+  const sectorLede = t('Each sector’s share of the market’s trading, month by month: who took a larger share and who gave one up, and what followed the other times.',
+    'نصيب كل قطاع من تداول السوق، شهراً بشهر: من أخذ نصيباً أكبر ومن تنازل عنه، وماذا تلا ذلك في المرات السابقة.');
+  const ownerQuestion = t('Who bought and who sold from inside the companies?', 'من اشترى ومن باع من داخل الشركات؟');
+  const ownerLede = t('Directors and large holders must declare it when their stake changes. Here is what they declared, company by company, as a share of each company’s capital.',
+    'أعضاء المجالس وكبار المساهمين يعلنون حين تتغير حصتهم. هنا ما أعلنوه، شركةً بشركة، كنسبة من رأس مال كل شركة.');
 
   if (!ready) {
     return {
       home,
       screen: h('section', { className: 'ft-screen' },
-        header(st.screen === 'ownership' ? ownerTitle : sectorTitle),
+        header(st.screen === 'ownership' ? ownerTitle : sectorTitle, st.screen === 'ownership' ? ownerQuestion : sectorQuestion, st.screen === 'ownership' ? ownerLede : sectorLede),
         h('div', { className: 'ft-empty', role: 'status' },
           data.demo
             ? t('Sign in to explore published sector and ownership data. No invented holdings are shown here.', 'سجّل الدخول لاستكشاف بيانات القطاعات والملكية المنشورة. لا نعرض حصصاً افتراضية هنا.')
@@ -2207,7 +2221,7 @@ export function flowTrackers(component, data, ar) {
       h('div', { className: 'ft-stock-breakdown' },
         h('div', { className: 'ft-section-heading' },
           h('div', null,
-            h('h3', null, t('Stock Movements Relative to Size', 'حركة الأسهم بالنسبة لحجمها')),
+            h('h3', null, t('Which shares moved the sector?', 'أي الأسهم حرّكت القطاع؟'), ' ', h('small', { className: 'h-term' }, t('Stock Movements Relative to Size', 'حركة الأسهم بالنسبة لحجمها'))),
             h('p', { className: 'ft-note' }, t('How much each stock went up or down and its weighted impact on the sector.', 'كيف تحرك كل سهم ومقدار أثره المرجّح في عائد القطاع.'))
           )
         ),
@@ -2266,7 +2280,7 @@ export function flowTrackers(component, data, ar) {
     return {
       home,
       screen: h('section', { className: 'ft-screen' },
-        header(sectorTitle),
+        header(sectorTitle, sectorQuestion, sectorLede),
         h('div', { className: 'ft-market-ribbon' },
           ribbonCard(t('Market Covered Turnover', 'إجمالي تداول السوق المغطى'),
             compact(totalTradedAcross) + ' EGP', null,
