@@ -2843,6 +2843,10 @@
     "meaning": "Official validation of Banque du Caire's updated valuation report satisfies the regulatory precondition established by Egyptian capital market authorities for proceeding with public asset transactions.",
     "meaning_ar": "يُعد اعتماد التقييم المحدث لبنك القاهرة استيفاءً للمتطلبات الإجرائية والتنظيمية التي تحددها هيئات سوق المال المصرية لتنفيذ طروحات الأصول العامة."
   },
+  "الحوافز الضريبيه تختبر شهيه الشركات للادراج في البورصه": {
+    "meaning": "Tax incentives for initial public offerings lower the fiscal cost of public listing relative to private ownership, balancing compliance expenses against tax deductions on the corporate balance sheet.",
+    "meaning_ar": "تؤدي الحوافز الضريبية الخاصة بالطروحات العامة إلى خفض الأعباء المالية المرتبطة بالقيد مقارنة بالشركات غير المقيدة، مما يوازن بين تكاليف الامتثال والإعفاءات الضريبية في الميزانية العمومية للشركات."
+  },
   "الخارجيه: 16 مصريا بين الناجين من غرق قارب هجره غير شرعيه امام اليونان": {
     "meaning": "This is a humanitarian and consular development concerning irregular migration, with no direct operational, balance sheet, or financial mechanism affecting companies listed on the Egyptian Exchange.",
     "meaning_ar": "يمثل هذا الخبر تطوراً إنسانياً وقنصلياً يتعلق بالهجرة غير الشرعية، ولا يرتبط بأي آليات تشغيلية أو مالية تؤثر على الشركات المدرجة في البورصة المصرية."
@@ -6964,6 +6968,10 @@
   "فرنسا تستهدف خفض الانفاق ب54 مليار يورو في موازنه 2027": {
     "meaning": "This fiscal consolidation program outlines a reduction in French sovereign expenditure, constraining public sector procurement and operational outlays across state departments.",
     "meaning_ar": "يحدد برنامج الانضباط المالي هذا مساراً لتقليص الإنفاق السيادي الفرنسي، مما يحد من حجم المشتريات الحكومية والمصروفات التشغيلية لمختلف القطاعات العامة."
+  },
+  "فرنسا: نسبه الدين العام الي الناتج المحلي الاجمالي ستصل الي 119.3% عام 2026": {
+    "meaning": "A sovereign debt-to-GDP ratio measures a government's gross financial obligations relative to the nominal size of its annual economic output, determining sovereign debt service allocations within the national budget.",
+    "meaning_ar": "تقيس نسبة الدين العام إلى الناتج المحلي الإجمالي إجمالي الالتزامات المالية للحكومة مقارنة بالحجم الاسمي لإنتاجها الاقتصادي السنوي، وهو ما يحدد مخصصات خدمة الدين السيادي داخل الموازنة العامة."
   },
   "فشل انعقاد عموميه “ابن سينا” لعدم اكتمال النصاب القانوني": {
     "meaning": "The postponement of Ibnsina Pharma's general assembly due to a lack of legal quorum delays formal shareholder voting and corporate approvals on scheduled agenda items, such as dividend distributions, financial statements, or board elections, until a second meeting is convened pursuant to regulatory requirements.",
