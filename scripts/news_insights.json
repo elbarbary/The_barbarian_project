@@ -219,6 +219,10 @@
     "meaning": "This figure represents the aggregate capital stock deployed by Singaporean corporate entities into physical assets, operating facilities, and equity holdings across the Egyptian market.",
     "meaning_ar": "يمثل هذا الرقم إجمالي الرصيد التراكمي لرؤوس الأموال الموظفة من قبل الشركات السنغافورية في الأصول الرأسمالية والمنشآت التشغيلية وحصص الملكية داخل السوق المصري."
   },
+  "525 مليار جنيه تداولات الاوراق الماليه المقيده بالبورصه المصريه خلال اسبوع": {
+    "meaning": "This figure represents the aggregate value of executed transactions across listed equities, fixed-income instruments, and government bonds during the weekly trading cycle.",
+    "meaning_ar": "يمثل هذا الرقم القيمة الإجمالية للصفقات المنفذة على الأسهم وأدوات الدين المقيدة وسندات الخزانة خلال جلسات التداول الأسبوعية."
+  },
   "80 % من الاغذيه المعباه في الهند تحت التهديد": {
     "meaning": "Stricter food quality standards and regulatory compliance frameworks require widespread recipe reformulations, labeling adjustments, and operational changes across packaged food manufacturing supply chains.",
     "meaning_ar": "تتطلب الاشتراطات التنظيمية ومعايير سلامة الغذاء في السوق تعديل تركيبات المنتجات وتحديث ملصقات التعبئة والتغليف وإجراء مواءمات تشغيلية عبر سلاسل إمداد تصنيع الأغذية المعبأة."
@@ -3366,6 +3370,10 @@
   "الصين تكشف عن خطه خمسيه لتعزيز تطوير الشركات الصغيره والمتوسطه": {
     "meaning": "Government five-year development plans for small and medium-sized enterprises establish regulatory frameworks, allocate state-directed financing and tax incentives, and set procurement quotas across industrial supply chains.",
     "meaning_ar": "تحدد الخطط الخمسية الحكومية للمشروعات الصغيرة والمتوسطة الأطر التنظيمية، وتوجه التمويل والحوافز الضريبية المعتمدة من الدولة، وتضع معايير المشتريات ضمن سلاسل التوريد الصناعية."
+  },
+  "الصين توسس اكثر من 42 الف شركه بتمويل اجنبي خلال 8 اشهر": {
+    "meaning": "Establishing foreign-funded enterprises channels direct capital into the host jurisdiction's corporate sector, expanding the operational base of multinational entities within domestic supply chains.",
+    "meaning_ar": "يؤدي تأسيس الشركات ذات التمويل الأجنبي إلى ضخ رؤوس أموال مباشرة في قطاع الأعمال بالدولة المضيفة، مما يوسع القاعدة التشغيلية للكيانات متعددة الجنسيات داخل سلاسل الإمداد المحلية."
   },
   "الصين والولايات المتحده تتفاوضان لخفض متبادل للرسوم الجمركيه يشمل سلعا ب 30 مليار دولار": {
     "meaning": "Bilateral tariff reduction negotiations directly alter import duty rates and landing costs for cross-border shipments, modifying trade flows and supply chain pricing across the covered goods sectors.",
@@ -6848,6 +6856,10 @@
   "غدا.. بدء التقديم علي 10 الاف وحده سكنيه بنظام الايجار المنتهي بالتملك": {
     "meaning": "The rent-to-own structure functions as an asset-financing mechanism where recurring lease payments allocate a portion toward equity acquisition, converting real estate inventory into long-term receivables for the issuing entity.",
     "meaning_ar": "يعمل نظام الإيجار المنتهي بالتملك كآلية تمويل أصول تُخصص فيها دفعات الإيجار الدورية جزءاً لسداد القيمة الرأسمالية، مما يحول المخزون العقاري إلى مستحقات مالية طويلة الأجل للجهة المطورة."
+  },
+  "غدا.. بدء التقديم علي 25 الف وحده سكنيه بنظامي «الايجار» و«الايجار المنتهي بالتملك»": {
+    "meaning": "The program releases public residential inventory into the housing market through long-term leases and rent-to-own contracts, serving as an alternative mechanism for state housing allocation without requiring upfront capital purchases.",
+    "meaning_ar": "يطرح البرنامج مخزوناً من الوحدات السكنية الحكومية عبر عقود إيجار طويل الأجل وإيجار منتهٍ بالتملك، كآلية لتخصيص الإسكان دون اشتراط سداد سيولة نقدية كاملة مقدماً."
   },
   "غدا.. بدء صرف معاش تكافل وكرامه بقيمه تتجاوز 4 مليارات جنيه": {
     "meaning": "The disbursement of over EGP 4 billion in cash subsidies directly injects government social protection funds into the retail and consumer goods sectors through beneficiary spending on essential commodities.",
