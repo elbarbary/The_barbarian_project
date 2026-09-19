@@ -20,6 +20,7 @@ import { installDom } from './dom-stub.mjs';
 installDom();
 
 const logic = readFileSync(new URL('../../public/esthmr/logic.js', import.meta.url), 'utf8');
+const template = readFileSync(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
 const { DIRECTIVE } = await import('../../public/esthmr/logic.js');
 
 /* Every `      key:'value',` line in the two label dictionaries. */
@@ -40,6 +41,22 @@ test('no emoji in a user-facing label', () => {
   const emoji = /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/u;
   const bad = labels.filter((l) => emoji.test(l.value));
   assert.deepEqual(bad.map((l) => `${l.key}: ${l.value}`), []);
+});
+
+test('no emoji in the markup either', () => {
+  /* THIS GUARD USED TO SCAN ONLY THE LABEL DICTIONARIES.
+     It passed while nine pictographic emoji sat in the template as section
+     markers — a shield on the insider blocks, a trophy, an abacus, a book, a
+     bulb — because they are written in the markup rather than in `L`. The
+     comp marks sections with drawn strokes in the site's own weight; an emoji
+     renders as a different glyph on every platform, and as a blank box beside
+     an Arabic label on some Android builds. */
+  const emoji = /[\u{1F300}-\u{1FAFF}]/u;
+  const lines = template.split('\n')
+    .map((line, i) => [i + 1, line])
+    .filter(([, line]) => emoji.test(line))
+    .map(([n, line]) => `${n}: ${line.trim().slice(0, 60)}`);
+  assert.deepEqual(lines, []);
 });
 
 test('the trends screen still refuses to be a recommendation', () => {

@@ -795,7 +795,7 @@
       <!-- Shortcut to Insider & Treasury Flow Tracker -->
       <div onClick="{{ goInsiderTracker }}" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 18px;border-radius:var(--radius-control);background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);transition:all .15s" style-hover="border-color:var(--accent);background:var(--sunk)">
         <div style="display:flex;align-items:center;gap:12px;min-width:0">
-          <span style="font-size:18px;flex:none">🛡</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:19px;height:19px;flex:none"><path d="M12 3.4 4.8 6.2v5.1c0 4.3 3 8.2 7.2 9.3 4.2-1.1 7.2-5 7.2-9.3V6.2z"></path></svg>
           <div style="min-width:0">
             <div style="font-size:13.5px;font-weight:600;color:var(--ink)">{{ L.insiderCrossLink }}</div>
             <div style="font-size:11.5px;color:var(--t2);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ L.insiderLead }}</div>
@@ -1336,7 +1336,7 @@
                   <span style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;letter-spacing:-.03em;color:#0284c7">{{ insiderTracker.treasuryBuyCount }}</span>
                   <span style="font-size:11.5px;color:var(--t2)">{{ L.insiderTransactions }}</span>
                 </div>
-                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--t2);margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ insiderTracker.activeTreasuryList }}">🛡 {{ insiderTracker.activeTreasuryList }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--t2);margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ insiderTracker.activeTreasuryList }}"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;flex:none;vertical-align:-2px"><path d="M12 3.4 4.8 6.2v5.1c0 4.3 3 8.2 7.2 9.3 4.2-1.1 7.2-5 7.2-9.3V6.2z"></path></svg> {{ insiderTracker.activeTreasuryList }}</div>
               </div>
             </div>
           </div>
@@ -1636,7 +1636,7 @@
                         <sc-if value="{{ sec.hasTreasury }}">
                           <div style="display:flex;flex-direction:column;gap:3px">
                             <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--t2)">
-                              <span style="color:#0284c7;font-weight:600">🛡 {{ L.insiderFlowTreasury }}</span>
+                              <span style="color:#0284c7;font-weight:600;display:inline-flex;align-items:center;gap:5px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex:none"><path d="M12 3.4 4.8 6.2v5.1c0 4.3 3 8.2 7.2 9.3 4.2-1.1 7.2-5 7.2-9.3V6.2z"></path></svg>{{ L.insiderFlowTreasury }}</span>
                               <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--ink)">{{ sec.treasurySharesFormatted }}</span>
                             </div>
                             <div style="height:6px;width:100%;background:var(--rule);border-radius:999px;overflow:hidden">
@@ -1991,7 +1991,7 @@
               <span onClick="{{ companyFollow }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:var(--sunk);border:1px solid {{ companyWatchBorder }};font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:{{ companyWatchColor }}" style-hover="border-color:var(--accent)"><span style="font-size:13px;line-height:1">{{ companyStar }}</span>{{ companyWatchLabel }}</span>
               </sc-if>
               <span onClick="{{ toggleCompanyAudio }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:var(--sunk);border:1px solid var(--edgeIn);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--accent)" style-hover="border-color:var(--accent)">{{ companyAudioLabel }}</span>
-              <span onClick="{{ openCalculatorForCompany }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:var(--sunk);border:1px solid var(--edgeIn);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--accent)" style-hover="border-color:var(--accent)">🧮 {{ L.calcCompanyAction }}</span>
+              <span onClick="{{ openCalculatorForCompany }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:var(--sunk);border:1px solid var(--edgeIn);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--accent)" style-hover="border-color:var(--accent)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex:none"><path d="M4.4 4.6h15.2v14.8H4.4zM4.4 9.2h15.2M4.4 14h15.2M9.2 4.6v4.6M14.4 9.2v4.8M9.2 14v5.4"></path></svg> {{ L.calcCompanyAction }}</span>
               <span style="padding:4px 11px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">{{ co.sector }}</span>
               <span style="padding:4px 11px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--t2)">{{ co.exchange }}</span>
             </div>
@@ -2772,6 +2772,21 @@
     <sc-if value="{{ archiveLoading }}"><div class="feed-status" role="status">{{ archiveLoadingLabel }}</div></sc-if>
     <sc-if value="{{ archiveError }}"><div class="feed-status" role="status">{{ archiveErrorLabel }}<button type="button" onClick="{{ retryArchive }}">{{ retryLabel }}</button></div></sc-if>
     <div class="om-scr screen-calendar" style="display:flex;flex-direction:column;gap:16px">
+      <!-- §7 / turn 4: "Same group, three jobs: what happened / the archive /
+           the dated chain. Different first row each."
+           News and Connecting the dots each got a head of their own in §11.6;
+           this one still opened on a month picker, so the destination that is
+           an ARCHIVE announced itself with a date control. The head says what
+           this place is — the official record, how many documents are in it,
+           and that the two language pages of one filing are one document.
+           That last line is not a footnote: the same NewsID is published in
+           Arabic and in English, and counting both doubles the archive. -->
+      <header class="screen-head">
+        <p class="card-dateline"><span>{{ archiveScale }}</span></p>
+        <h1>{{ story.calendarLabel }}</h1>
+        <p class="card-lead">{{ L.archiveJob }}</p>
+        <p class="archive-onedoc">{{ L.archiveOneDoc }}</p>
+      </header>
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 8px 0">
         <h1 style="font-family:var(--font-heading);font-size:21px;font-weight:600;letter-spacing:-.01em;line-height:1.3;margin:0">{{ story.calendarLabel }}</h1>
         <div style="display:flex;gap:3px;padding:4px;border-radius:var(--radius-control);background:var(--glass);border:1px solid var(--edge);box-shadow:var(--shPill)">
@@ -2791,7 +2806,7 @@
       <!-- Shortcut to Insider & Treasury Flow Tracker -->
       <div onClick="{{ goInsiderTracker }}" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 18px;border-radius:var(--radius-control);background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);transition:all .15s" style-hover="border-color:var(--accent);background:var(--sunk)">
         <div style="display:flex;align-items:center;gap:12px;min-width:0">
-          <span style="font-size:18px;flex:none">🛡</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:19px;height:19px;flex:none"><path d="M12 3.4 4.8 6.2v5.1c0 4.3 3 8.2 7.2 9.3 4.2-1.1 7.2-5 7.2-9.3V6.2z"></path></svg>
           <div style="min-width:0">
             <div style="font-size:13.5px;font-weight:600;color:var(--ink)">{{ L.insiderCrossLink }}</div>
             <div style="font-size:11.5px;color:var(--t2);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ L.insiderLead }}</div>
@@ -2867,16 +2882,19 @@
                       <span style="padding:2px 8px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)">{{ df.kind }}</span>
                     </sc-if>
                   </div>
-                  <a href="{{ df.href }}" target="_blank" style="display:block;font-size:13.5px;color:var(--t2);line-height:1.5;margin-top:7px;text-wrap:pretty">{{ df.what }}</a>
-                  <!-- What this KIND of filing is, from the disclosure feed.
-                       About the instrument, never about this company's
-                       prospects. -->
+                  <!-- §7: "Event cards lead with what happened, not the
+                       document title."
+                       A filing's own title is the exchange's filing language —
+                       "تعامل على أسهم … (شراء)", "إفصاح وفق المادة 38" — which
+                       tells a reader who already knows the form what kind of
+                       form it is. The plain line goes first and the document
+                       title follows as what it is: the source. Where no plain
+                       line was extracted the title leads, because a factual
+                       title beats an invented reading. -->
                   <sc-if value="{{ df.hasMeaning }}">
-                    <div style="margin-top:9px;padding:11px 13px;border-radius:var(--radius-control);background:var(--sunk)">
-                      <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">{{ L.whatItMeans }}</div>
-                      <div style="font-size:12.5px;color:var(--t2);line-height:1.6;margin-top:6px;text-wrap:pretty">{{ df.meaning }}</div>
-                    </div>
+                    <p style="font-size:14.5px;color:var(--ink);line-height:1.5;margin:9px 0 0;text-wrap:pretty">{{ df.meaning }}</p>
                   </sc-if>
+                  <a href="{{ df.href }}" target="_blank" style="display:block;font-size:12.5px;color:var(--t2);line-height:1.5;margin-top:7px;text-wrap:pretty">{{ df.what }}</a>
                 </div>
               </sc-for>
             </div>
@@ -3394,7 +3412,7 @@
           <!-- Best Broker Winner Banner -->
           <div style="margin-top:20px;padding:16px 20px;border-radius:var(--radius-control);background:rgba(5, 150, 105, 0.08);border:1px solid rgba(5, 150, 105, 0.3);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
             <div style="display:flex;align-items:center;gap:12px">
-              <span style="font-size:24px;line-height:1">🏆</span>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;flex:none"><path d="M7.2 4.2h9.6v4.1a4.8 4.8 0 0 1-9.6 0zM7.2 5.6H4.6v1.3a3 3 0 0 0 3 3M16.8 5.6h2.6v1.3a3 3 0 0 1-3 3M12 13.1v3.6M8.8 20.4h6.4l-.9-3.7H9.7z"></path></svg>
               <div>
                 <div style="font-size:14px;font-weight:700;color:#059669">
                   {{ simData.L.winnerNotice }}
@@ -3492,7 +3510,7 @@
       <section style="border-radius:var(--radius-island);background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:26px 28px;position:relative;overflow:hidden">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:20px">
           <div style="display:flex;align-items:center;gap:10px">
-            <span style="font-size:22px;line-height:1">🧮</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:21px;height:21px;flex:none"><path d="M4.4 4.6h15.2v14.8H4.4zM4.4 9.2h15.2M4.4 14h15.2M9.2 4.6v4.6M14.4 9.2v4.8M9.2 14v5.4"></path></svg>
             <h2 style="font-family:var(--font-heading);font-size:22px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ L.calcDivTitle }}</h2>
           </div>
         </div>
@@ -3597,7 +3615,7 @@
       <!-- Section 3: Plain Language Valuation Guide -->
       <section style="border-radius:var(--radius-island);background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:26px 28px">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
-          <span style="font-size:22px;line-height:1">📖</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:21px;height:21px;flex:none"><path d="M4.4 5.1h5.6a2 2 0 0 1 2 2v11.4a1.7 1.7 0 0 0-1.7-1.5H4.4zM19.6 5.1H14a2 2 0 0 0-2 2v11.4a1.7 1.7 0 0 1 1.7-1.5h5.9z"></path></svg>
           <h2 style="font-family:var(--font-heading);font-size:22px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ L.calcGuideTitle }}</h2>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
@@ -3826,7 +3844,7 @@
         <!-- Editorial Insight Card -->
         <section style="border-radius:var(--radius-island);background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 28px">
           <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px">
-            <span style="font-size:20px;line-height:1">💡</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;flex:none"><path d="M9.4 17.2a5.4 5.4 0 1 1 5.2 0M9.7 20.3h4.6M10.2 17.2h3.6"></path></svg>
             <h2 style="font-family:var(--font-heading);font-size:20px;font-weight:600;margin:0;color:var(--ink)">{{ pairsData.insightTitle }}</h2>
           </div>
           <p style="font-size:14px;line-height:1.75;color:var(--t2);margin:0;text-wrap:pretty">{{ pairsData.insight }}</p>

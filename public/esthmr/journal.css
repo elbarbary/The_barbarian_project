@@ -1283,3 +1283,12 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
 #app .journal-account[aria-expanded="true"] {
   background: var(--activeBg); color: var(--ink); border-color: var(--rule);
 }
+
+/* §7 / turn 4: the line under the archive's head.
+ * The exchange publishes one filing twice — an Arabic page and an English one
+ * sharing a NewsID — and counting both doubles the archive. The note says so
+ * where the count is, not in a footnote nobody reaches. */
+#app .archive-onedoc {
+  margin: 8px 0 0; font-size: 12px; line-height: 1.6; color: var(--faint);
+  max-width: 68ch;
+}

@@ -581,6 +581,11 @@ export class Component extends Base {
       trendsWorkings:'Measured from the last 250 sessions: the distance from the highest close of the year, what the share did over a year and over three months, and its average close over 50 sessions.',
       trendsYardstick:'A description of where a price has been, not a view on where it goes. Nothing here rates a share or says what to do about one.',
       archiveNote:'Showing the {shown} most recent of {total} filings published in {month}.',
+      archiveJob:'The official record, as filed. Search it, or narrow it to a kind of document.',
+      archiveScale:'The official archive · {n} documents',
+      archiveScaleMonth:'The official archive · {n} documents this month',
+      archiveScaleNone:'The official archive',
+      archiveOneDoc:'The exchange publishes the same filing on an Arabic page and an English one. They share a NewsID and count here as one document.',
       archiveSearched:'Showing the {shown} most recent of {total} matches across {months} months of the archive, newest first. Pick a month above to narrow it.',
       archiveSearchedMonth:'Showing the {shown} most recent of {total} matches in {month}. Clear the month to search the whole archive.',
       filedShowing:'{n} filings match {what}.', filedShowingOne:'1 filing matches {what}.',
@@ -998,6 +1003,11 @@ export class Component extends Base {
       trendsWorkings:'محسوبة من آخر 250 جلسة: المسافة من أعلى إغلاق خلال السنة، وما فعله السهم خلال سنة وخلال ثلاثة أشهر، ومتوسط إغلاقه خلال 50 جلسة.',
       trendsYardstick:'وصف لما مرّ به السعر، وليس رأياً في وجهته. لا شيء هنا يُقيّم سهماً ولا يقول ماذا تفعل بشأنه.',
       archiveNote:'عرض أحدث {shown} من {total} إفصاحاً نُشرت في {month}.',
+      archiveJob:'السجل الرسمي كما أُودع. ابحث فيه، أو ضيّقه إلى نوع من المستندات.',
+      archiveScale:'الأرشيف الرسمي · {n} مستنداً',
+      archiveScaleMonth:'الأرشيف الرسمي · {n} مستنداً هذا الشهر',
+      archiveScaleNone:'الأرشيف الرسمي',
+      archiveOneDoc:'تنشر البورصة الإفصاح نفسه على صفحة عربية وأخرى إنجليزية. تشتركان في NewsID وتُحسبان هنا مستنداً واحداً.',
       archiveSearched:'عرض أحدث {shown} من {total} نتيجة عبر {months} شهراً من الأرشيف، الأحدث أولاً. اختر شهراً بالأعلى لتضييق النطاق.',
       archiveSearchedMonth:'عرض أحدث {shown} من {total} نتيجة في {month}. ألغِ اختيار الشهر للبحث في الأرشيف كاملاً.',
       filedShowing:'{n} إفصاحاً يطابق {what}.', filedShowingOne:'إفصاح واحد يطابق {what}.',
@@ -3913,6 +3923,18 @@ export class Component extends Base {
         });
       }
     }
+    /* How big the archive is, said on the screen that is the archive.
+       Counted off the months index rather than the open month, because "the
+       official record" is the whole of it and a reader landing in a quiet
+       month should not be told the archive holds eleven documents.
+       `filedMonths` is published newest-first with a count on each entry; when
+       it carries none, the head says how many are in this month instead of
+       inventing a total. */
+    const archiveTotal = ((D.filedMonths || []).reduce(
+      (n, m) => n + (typeof m.count === 'number' ? m.count : 0), 0)) || 0;
+    const archiveScale = archiveTotal
+      ? L.archiveScale.replace('{n}', this.num(archiveTotal, 0))
+      : (inMonth.length ? L.archiveScaleMonth.replace('{n}', this.num(inMonth.length, 0)) : L.archiveScaleNone);
     const meanings = D.disclosureMeanings || null;
     const dayFilings = !st.day ? [] : inMonth
       .filter((e) => e.date === st.day)
@@ -4463,7 +4485,15 @@ export class Component extends Base {
     story.openFilings = ()=>this.setState({screen:'calendar',storyKind:'filing'});
     story.range = story.from+' — '+story.to;
     const out = {
-      story, showStoryHub:!st.dataLoading&&!st.dataError&&(st.screen==='crossings'||st.screen==='calendar'),
+      story,
+      /* §7: one hub, on the destination whose job it is.
+         The same header, the same three counts and the same period controls
+         opened both Disclosures and Connecting the dots — "the two
+         destinations have no immediately visible difference in purpose", and
+         this was most of why. The hub counts news, filings, and the companies
+         carrying both: that IS the dated chain, so it belongs to Connecting
+         the dots. Disclosures now opens on what it is, an archive. */
+      showStoryHub:!st.dataLoading&&!st.dataError&&st.screen==='crossings',
       L, theme: st.theme, dir: ar ? 'rtl' : 'ltr',
       primaryNav,
       /* One destination with one screen under it needs no strip; the tab
@@ -4971,7 +5001,7 @@ export class Component extends Base {
           : L.filedShowing.replace('{n}', filtered.length).replace('{what}', what);
       })(),
       filedNoMatch: Boolean(filtered && filtered.length === 0),
-      dayFilings, dayNote, hasDay: Boolean(st.day),
+      dayFilings, dayNote, hasDay: Boolean(st.day), archiveScale,
       // Searching spans the year, so the note cannot go on naming one month.
       // It says what was actually looked through, which is the only way a
       // reader can tell "no filings" from "none in the month you are on".
