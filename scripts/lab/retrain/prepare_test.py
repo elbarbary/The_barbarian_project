@@ -13,13 +13,21 @@ this file exists, the only honest thing left to do is run the models and read
 the result. The plan's rule: one reading. A failed test is not retuned against
 the test months, because a backtest that is allowed a second attempt is only
 measuring how many attempts it was allowed.
+
+`--reading` exists because that rule was tested on 19 September. Reading 1 said
+STOP, and the honest routes were to leave the model unshipped or to read months
+reading 1 never touched. The second is allowed only on these terms, all of them
+recorded in the file this writes: the origins are outside reading 1's window;
+the checkpoint is chosen on 2024 validation origins alone; the rule is stricter
+than the one that failed; and the reading is NUMBERED, so nobody later reads a
+second attempt as a first.
 """
 
+import argparse
 import collections
 import hashlib
 import json
 import pathlib
-import sys
 
 import candles as cd
 
@@ -30,7 +38,12 @@ ORIGIN_EVERY = 5          # plan, stage 2: "forecast every 5th test session"
 # unchanged from `scripts/lab/forecast.py` so that "no lower than the
 # original's" is measured against the same code the nightly run uses.
 MODELS = ["kronos_original", "kronos_egx",
-          "flat", "drift", "momentum20", "momentum60", "reversal1", "reversal5"]
+          "flat", "drift", "momentum20", "momentum60", "reversal1", "reversal5",
+          # Added for reading 2, by the owner's decision of 19 September, after
+          # reading 1 showed that the original's 20-session score was mostly a
+          # 90-session mean reversion it was computing by accident — and that
+          # the subtraction itself does it better than either Kronos.
+          "reversal90"]
 
 # The plan's pass rule, copied here so the decision reads its own copy and
 # never the prose. Both must hold.
@@ -43,6 +56,14 @@ RULES = {
     },
     "rankIC": {
         "notBelowOriginalAt": [5, 20],
+        # Reading 1's gate asked only that the challenger beat the model it
+        # replaces. That turned out to be a low bar dressed as a high one: at
+        # 20 sessions both Kronos variants lose to one subtraction. Clearing
+        # `reversal90` at the horizons where the model claims to rank is the
+        # same question asked of something that cannot be flattered by a
+        # defect. This makes the gate HARDER than the one reading 1 failed,
+        # which is the only direction a rule may be changed after a failure.
+        "notBelowAt": {"reversal90": [5, 20]},
         "aboveZeroAt": [5],
         "what": "mean rank IC (Spearman, scripts/lab/score.py) over test origins; "
                 "kronos_egx must not be below kronos_original at 5 and at 20 "
@@ -82,8 +103,20 @@ def market_sessions(companies: dict, first: str, last: str) -> list[str]:
     return sorted(out)
 
 
-def main(argv):
-    data, checkpoint, out = map(pathlib.Path, argv)
+def main(argv=None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument("data", type=pathlib.Path)
+    parser.add_argument("checkpoint", type=pathlib.Path)
+    parser.add_argument("out", type=pathlib.Path)
+    parser.add_argument("--reading", type=int, default=1,
+                        help="which reading of a test window this is; 1 was 18 September")
+    parser.add_argument("--from", dest="first", default=None,
+                        help="first origin date; defaults to the test split's start")
+    parser.add_argument("--to", dest="last", default=None,
+                        help="last date the origins and their futures may use")
+    parser.add_argument("--every", type=int, default=ORIGIN_EVERY)
+    args = parser.parse_args(argv)
+    data, checkpoint, out = args.data, args.checkpoint, args.out
     frozen = json.loads((data / "frozen" / "manifest.json").read_text())
     train_metrics = json.loads((checkpoint.parent / "metrics.json").read_text())
     directory = {r["ticker"]: r for r in json.loads((data / "companies.json").read_text())["companies"]}
@@ -92,11 +125,12 @@ def main(argv):
         raise SystemExit("the candles are not the frozen set")
 
     first, last = cd.SPLITS["test"]
+    first, last = args.first or first, args.last or last
     sessions = market_sessions(companies, first, last)
     # An origin needs its 20th following session to exist, or there is no
     # outcome to mark the 20-session forecast against.
     usable = [d for i, d in enumerate(sessions) if i + cd.HORIZON < len(sessions)]
-    origins = usable[::ORIGIN_EVERY]
+    origins = usable[::args.every]
 
     # Every company in the frozen set is asked. There is no sampling: a
     # company that cannot be forecast at an origin — too little history, a
@@ -118,6 +152,7 @@ def main(argv):
     prereg = {
         "writtenBeforeAnyTestOriginWasRead": True,
         "stage": 2,
+        "reading": args.reading,
         "manifestSha256": manifest["sha256"],
         "checkpoint": {
             "epoch": best["epoch"],
@@ -127,7 +162,8 @@ def main(argv):
             "configSha256": digest(checkpoint / "config.json"),
         },
         "split": {"test": list(cd.SPLITS["test"])},
-        "originEvery": ORIGIN_EVERY,
+        "window": [first, last],
+        "originEvery": args.every,
         "origins": origins,
         "companies": roster,
         "companiesScorablePerOrigin": {
@@ -147,9 +183,17 @@ def main(argv):
                       "None below 30 companies or on a degenerate ranking)",
         },
         "rules": RULES,
-        "oneReading": "A failed test is not retuned against these months. A second "
-                      "attempt would need test months that do not exist yet, and "
-                      "would be labelled as one.",
+        "oneReading": (
+            "A failed test is not retuned against these months. A second attempt "
+            "needs months the first reading did not touch, and is labelled as one."
+            if args.reading == 1 else
+            f"Reading {args.reading}. Reading 1 was 18 September, over "
+            f"{cd.SPLITS['test'][0]} to 2026-06-29, and it said STOP. These origins "
+            "were not in it. The checkpoint was chosen on 2024 validation origins "
+            "alone — no score from reading 1's months entered that choice — and the "
+            "rule below is stricter than reading 1's, not looser. A second reading "
+            "is still a second chance, and the count is in this file so that the "
+            "result is read as one."),
     }
 
     out.mkdir(parents=True, exist_ok=True)
@@ -164,4 +208,4 @@ def main(argv):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main()

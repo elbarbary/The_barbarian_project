@@ -59,8 +59,10 @@ class ContractTest(unittest.TestCase):
         # Not a zero, not the ranking value wearing a percentage sign. A
         # number in the returns column is a magnitude the model never
         # claimed, sitting in the column every other model fills with one.
-        for name in ("momentum20", "momentum60", "reversal1", "reversal5"):
-            out = fc.run_baseline(name, "AAA", "2026-09-10", rising(70))
+        # 95 closes, not 70: reversal90 needs ninety and would otherwise
+        # abstain here, which is a different assertion than this one.
+        for name in ("momentum20", "momentum60", "reversal1", "reversal5", "reversal90"):
+            out = fc.run_baseline(name, "AAA", "2026-09-10", rising(95))
             self.assertEqual(out.returns, {}, name)
             self.assertNotEqual(out.rank_value(1), 0)
 
@@ -103,6 +105,32 @@ class BaselineTest(unittest.TestCase):
         self.assertGreater(up.rank_value(1), 0)
         self.assertLess(back.rank_value(1), 0)
 
+    def test_reversal90_measures_distance_below_the_average_not_a_return(self):
+        # A hill: up from 100 to 150 over 45 sessions and back to 100 over 45.
+        # Point to point the company is unchanged, so every reversal in the
+        # existing family ranks it at zero. Against its own 90-session average
+        # of about 125 it is a quarter below, which is the whole signal. If
+        # this ever becomes reversal(look=90) the test fails here.
+        up = [100 + i * (50 / 45) for i in range(46)]
+        down = [150 - i * (50 / 45) for i in range(1, 45)]
+        rows = bars(*[(f"2026-{(i // 28) + 1:02d}-{(i % 28) + 1:02d}", c)
+                      for i, c in enumerate(up + down)])
+        out = fc.run_baseline("reversal90", "AAA", "2026-09-10", rows)
+        self.assertIsInstance(out, fc.Forecast)
+        self.assertEqual(out.returns, {})
+        self.assertGreater(out.rank_value(20), 20)
+        # The same bars, read point to point, say nothing at all.
+        flat_ends = fc.run_baseline("reversal5", "AAA", "2026-09-10", rows)
+        self.assertLess(abs(flat_ends.rank_value(20)), abs(out.rank_value(20)))
+
+    def test_reversal90_abstains_rather_than_shortening_its_own_window(self):
+        # A baseline that quietly averages 40 closes when it is asked for 90
+        # is a different model on exactly the companies that are hardest to
+        # forecast — the newly listed and the thinly traded.
+        out = fc.run_baseline("reversal90", "AAA", "2026-09-10", rising(40))
+        self.assertIsInstance(out, fc.Abstention)
+        self.assertIn("90 needed", out.reason)
+
     def test_the_lookbacks_are_separate_models_not_one_with_a_dial(self):
         # momentum-60 was twice as wrong as momentum-20 over the scored
         # dates. Averaging them into one "momentum" would hide that.
@@ -110,6 +138,7 @@ class BaselineTest(unittest.TestCase):
         self.assertIn("momentum60", fc.BASELINES)
         self.assertIn("reversal1", fc.BASELINES)
         self.assertIn("reversal5", fc.BASELINES)
+        self.assertIn("reversal90", fc.BASELINES)
 
     def test_no_baseline_is_marked_as_the_one_to_use(self):
         # A default among the baselines is the publisher's judgment arriving

@@ -197,6 +197,47 @@ def reversal(ticker: str, basis: str, bars: list[dict], look: int = 1) -> Foreca
                     {}, ranked_by={h: -value for h in HORIZONS})
 
 
+def mean_reversion(ticker: str, basis: str, bars: list[dict],
+                   look: int = 90) -> Forecast | Abstention:
+    """How far the last close sits BELOW the average of the window's closes.
+
+    Registered as `reversal90`, and deliberately not `reversal(look=90)`. The
+    reversal family is point to point — today's close against the close `look`
+    sessions ago. This is today's close against the MEAN of the last ninety.
+    Different statistics, and on this market they score differently: over the
+    23 validation origins of the Kronos retraining, mean distance averaged a
+    rank IC of +0.1124 at twenty sessions and was positive on 19 of 23, where
+    point to point managed +0.1031 on 16 of 23.
+
+    It is in the lab because of what the retraining found. Kronos-small's own
+    twenty-session ranking correlates **+0.97** with this number — the
+    foundation model was mostly computing it — and it does so less well:
+    +0.1047 against this baseline's +0.1124 on validation, +0.0372 against
+    +0.0382 over the retraining's held-out months. A model that cannot beat
+    one subtraction at a horizon has not earned that column, and until this
+    ran there was nothing in the lab that would say so: `reversal1` and
+    `reversal5` look back one session and five, and both are near zero at
+    twenty (+0.0112 and −0.0054 on those months).
+
+    Its live record starts the night it is added. The sealed nights before
+    that are not backfilled, even though the arithmetic is deterministic and
+    the candles are already in them: this baseline was chosen for the lab
+    AFTER its backtest was read, and a record that quietly includes dates
+    picked with that knowledge is not a sealed record.
+    """
+    series = closes(bars)
+    if len(series) < look:
+        return Abstention(ticker, basis, f"reversal{look}",
+                          f"{len(series)} closes, {look} needed")
+    window = series[-look:]
+    last = window[-1]
+    if not last:
+        return Abstention(ticker, basis, f"reversal{look}", "a close of zero")
+    value = (statistics.fmean(window) / last - 1) * 100
+    return Forecast(ticker, basis, f"reversal{look}",
+                    {}, ranked_by={h: value for h in HORIZONS})
+
+
 # Every baseline, by the name it is registered and scored under.
 #
 # The two momentum lookbacks and the two reversal lookbacks are separate
@@ -209,6 +250,10 @@ BASELINES = {
     "momentum60": lambda t, b, x: momentum(t, b, x, 60),
     "reversal1": lambda t, b, x: reversal(t, b, x, 1),
     "reversal5": lambda t, b, x: reversal(t, b, x, 5),
+    # NOT reversal(t, b, x, 90). Distance below the window's MEAN, which is a
+    # different statistic from the point-to-point return the two above use,
+    # and the one Kronos-small's twenty-session ranking turned out to be.
+    "reversal90": lambda t, b, x: mean_reversion(t, b, x, 90),
 }
 
 

@@ -97,6 +97,76 @@ lab changes until stage 3.
   the claim to 1 and 5 sessions after seeing the result would be choosing the
   horizons the model won on, which is the thing this stage exists to stop.
 
+- **19 Sep 2026, the owner's decision: fix it and run it again, with
+  `reversal90` added to the gate.** What follows was worked out on the 2024
+  VALIDATION origins. No score from reading 1's months entered any of it.
+
+  **The 20-session weakness is real, and larger than the test made it look.**
+
+  | Mean rank IC, 23 validation origins | 1 | 5 | 20 |
+  |---|---|---|---|
+  | kronos_original | +0.0616 | +0.0306 | **+0.1047** |
+  | kronos_egx | **+0.1267** | +0.0494 | +0.0541 |
+
+  The dead heat on the test months was not a near miss. On validation the
+  retrained model is half the original at 20 sessions. That makes it a thing
+  that can be worked on honestly, because validation is where it shows.
+
+  **What each model's 20-session ranking actually is.** Correlating each
+  model's ordering against candidate explanations, on the same origins:
+  `kronos_original` sits at **+0.97** with the distance below the 90-candle
+  average and **−0.59** with 20-session trend. `kronos_egx` sits at **−0.13**
+  and **+0.17**. The retraining did not merely remove the pull; it turned the
+  sign over, and mild trend-following is a losing ordering on this exchange
+  (`momentum20` and `momentum60` are negative at every horizon).
+
+  **And then the finding that changed the gate.** If the original's 20-session
+  score is really just "how far is this below its own 90-session average",
+  that subtraction should score the same alone. It scores better:
+
+  | Mean rank IC at 20 sessions | validation | reading 1's months |
+  |---|---|---|
+  | **reversal90** — one subtraction | **+0.1124** | **+0.0382** |
+  | kronos_original | +0.1047 | +0.0372 |
+  | kronos_egx | +0.0541 | +0.0365 |
+
+  It beats both Kronos variants on both sets, and on reading 1's months it
+  beats `kronos_egx` at five sessions too (+0.0431 against +0.0414). The
+  retrained model's one clear win over everything, including `reversal1`, is
+  at a single session: **+0.0883** against +0.0625 for the original, +0.0608
+  for `reversal1` and +0.0436 for `reversal90`.
+
+  So the gate reading 1 failed by 0.000636 was a contest between two
+  approximations of a baseline that neither of them beats. Passing it would
+  not have meant the model had earned its 20-session column.
+
+  Two consequences, both shipped before reading 2 is written:
+
+  1. **`reversal90` is now a lab baseline** (`scripts/lab/forecast.py`,
+     `mean_reversion`). It is deliberately NOT `reversal(look=90)`: the
+     reversal family is point to point, this is the distance below the
+     window's mean, and on validation the two differ (+0.1124 on 19 of 23
+     origins against +0.1031 on 16 of 23). Its live record starts the night it
+     is added and the sealed nights before that are **not** backfilled, even
+     though the arithmetic is deterministic — it was chosen for the lab after
+     its backtest was read.
+  2. **The gate is stricter.** `kronos_egx` must now also be no lower than
+     `reversal90` at 5 and at 20 sessions (`notBelowAt` in the
+     preregistration). This raises the bar the model already failed rather
+     than lowering it, which is the only direction a rule may move after a
+     failure. Reading 1's decision still reproduces byte-for-byte, because its
+     preregistration has no `notBelowAt` in it.
+
+- **Reading 2, not yet written.** Its window is the 34 origins from
+  **30 June to 18 August 2026**, every session with a complete 20-session
+  future inside the frozen snapshot, 234 names at the median origin. Reading 1
+  ran to 29 June 2026 and did not touch them. The checkpoint will be chosen on
+  the validation origins by rank IC, not by cross-entropy loss: epoch 7 was
+  kept for having the lowest validation loss, and nothing ever checked that
+  this agrees with what the gate measures. All ten saved epochs are being
+  scored on validation first. The preregistration numbers the reading, so a
+  second attempt cannot later be read as a first.
+
 ## Why
 
 Kronos-small's forecasts are mostly a pull back to the average price of the

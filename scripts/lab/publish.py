@@ -99,7 +99,8 @@ PULL_NOTE_FROM = 0.8
 # The models a reader meets on Home, in the order the record keeps them. The
 # screen may sort by the record; the file does not.
 ORDER = ["rerank", "kronos", "chronos2", "timesfm25", "toto2", "sundial",
-         "momentum20", "momentum60", "reversal1", "reversal5", "drift", "flat"]
+         "momentum20", "momentum60", "reversal1", "reversal5", "reversal90",
+         "drift", "flat"]
 
 LABELS = {
     "kronos": ("Kronos-small", "Kronos-small", "neural"),
@@ -112,6 +113,12 @@ LABELS = {
     "momentum60": ("Momentum, 60 sessions", "الزخم، 60 جلسة", "baseline"),
     "reversal1": ("Reversal, 1 session", "الانعكاس، جلسة", "baseline"),
     "reversal5": ("Reversal, 5 sessions", "الانعكاس، 5 جلسات", "baseline"),
+    # Named for the family it joins, but it measures the distance below the
+    # window's average rather than a point-to-point return, so the label says
+    # so in both languages. A reader who sees "Reversal, 90 sessions" would
+    # read it as the other two with a longer memory, which it is not.
+    "reversal90": ("Reversion to the 90-session average",
+                   "الارتداد إلى متوسط 90 جلسة", "baseline"),
     "drift": ("Drift", "الانجراف", "baseline"),
     "flat": ("Flat, says nothing", "ثابت، لا يقول شيئًا", "baseline"),
 }
