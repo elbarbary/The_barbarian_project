@@ -1615,6 +1615,10 @@
     "meaning": "Egg price reporting tracks spot rates set by poultry farm exchanges and wholesale distribution networks, reflecting daily feed input costs and live-stock supply balances across the consumer food sector.",
     "meaning_ar": "ترصد أسعار البيض أسعار التداول الفورية المحددة عبر بورصات الدواجن وشبكات التوزيع بالجملة، مما يعكس التكاليف اليومية للأعلاف ومدخلات الإنتاج وحجم المعروض في قطاع السلع الغذائية."
   },
+  "اسعار البيض اليوم السبت 19-9-2026 في مصر": {
+    "meaning": "Daily poultry and table egg price updates reflect current wholesale farm-gate rates and retail trading levels, which respond to spot supply volumes and operating costs such as imported feed.",
+    "meaning_ar": "تعكس التحديثات اليومية لأسعار بيض المائدة مستويات التداول الحالية في المزارع والأسواق، والتي تتحدد بناءً على حجم المعروض الفعلي وتكاليف التشغيل ومدخلات الأعلاف."
+  },
   "اسعار البيض اليوم السبت 5-9-2026 في مصر": {
     "meaning": "Daily egg price reporting reflects current wholesale farm-gate and retail market clearing rates shaped by poultry feed input costs and daily supply chain distribution volumes.",
     "meaning_ar": "يعكس رصد أسعار بيض المائدة اليومية مستويات التوازن السعرية الحالية في المزارع ومنافذ التجزئة، والتي تتحدد بناءً على تكاليف مدخلات الأعلاف وحجم المعروض اليومي في سلاسل الإمداد."
@@ -5867,6 +5871,10 @@
   "سعر الريال السعودي في مصر اليوم السبت 12/9/2026": {
     "meaning": "Official and parallel market quotations for the Saudi Riyal against the Egyptian Pound establish the current operational clearing cost for bilateral trade, religious tourism expenditures, and worker remittance conversions between Egypt and Saudi Arabia.",
     "meaning_ar": "تحدد أسعار صرف الريال السعودي مقابل الجنيه المصري في السوقين الرسمية والموازية تكلفة التسوية المباشرة للتبادل التجاري، ونفقات السياحة الدينية، وتحويلات العاملين بين مصر والمملكة العربية السعودية."
+  },
+  "سعر الريال السعودي في مصر اليوم السبت 19/9/2026": {
+    "meaning": "Official foreign exchange quotations for the Saudi Riyal determine the direct Egyptian Pound settlement rates for bilateral commercial trade, regional remittance conversions, and religious travel expenditures.",
+    "meaning_ar": "تحدد أسعار صرف الريال السعودي الرسمية تكلفة التسوية المباشرة بالجنيه المصري للمعاملات التجارية البينية، وتحويلات العاملين بالخارج، ونفقات السفر الديني."
   },
   "سعر الغاز الاوروبي يرتفع صوب ذروه 3 سنوات وسط المنافسه علي الشحنات": {
     "meaning": "Higher European natural gas prices driven by intensified competition for liquefied natural gas (LNG) cargoes directly raise global feedstock and energy benchmarks across energy-importing markets, including Egypt's LNG import costs and industrial production inputs.",
