@@ -354,7 +354,12 @@ test('a model that tells no companies apart is left off the list', () => {
 test('both ways in open the workbench, and one lands on what the picks returned', () => {
   const c = component({ scSearch: 'old search', scShowAll: true });
   const node = aiCards(c, data, false);
-  button(node, 'See the model’s results').events.click();
+  /* §10: "The label 'Run a model' should become 'Explore model results' where
+     the operation reads a precomputed document." There was no "Run a model"
+     left to rename, but this one had the same defect in a quieter form —
+     "See the model's results" still reads as a thing about to be produced.
+     Nothing is produced: the document was sealed days ago. */
+  button(node, 'Explore model results').events.click();
   assert.equal(c.state.screen, 'scenarios');
   // On a model's own ranking, with Gemini one switch away.
   assert.deepEqual(c.state.scLayers, []);
@@ -428,10 +433,16 @@ test('what a model’s number is follows its name', () => {
 test('the controls are a model, a horizon and the re-rank’s context, and ask no question', () => {
   const node = screen(component({ scModel: 'kronos' }));
   const steps = byClass(node, 'aix-step').map((n) => text(n).replace(/\s+/g, ' ').trim());
-  /* Three things to do, in order, each a numbered heading rather than a mono
-     caption. The words matter as much as the count: "horizon" and "context
-     the re-rank reads" are this project's vocabulary, not a reader's. */
-  assert.deepEqual(steps, ['1 Choose a model', '2 The time window', '3 What Gemini reads']);
+  /* THE NUMBERS ARE GONE, AND THAT IS THE POINT OF §10.
+     They were right when the controls came first: three things to do, in
+     order. But numbered steps are a form, and a form tells a reader the page
+     cannot answer until they fill it in. Nothing here is computed on demand —
+     every figure is read from a record sealed days ago, with a model and a
+     window already chosen. So the answer comes first and these become what
+     they are: a way to change an answer already on screen.
+     The words still matter as much as the count. "Horizon" and "context the
+     re-rank reads" are this project's vocabulary, not a reader's. */
+  assert.deepEqual(steps, ['The model', 'The time window', 'What Gemini reads']);
   assert.ok(button(node, 'next session'));
   // The switches work over every model: they are how Gemini is turned on.
   const toggles = byClass(node, 'aix-toggle');
@@ -1162,4 +1173,60 @@ test('a night that saved no path prints the figures it has instead of an empty d
   const node = screen(component({ scModel: 'kronos', scHorizon: 5 }));
   assert.equal(byClass(node, 'aix-range').length, 0, 'a window was drawn from figures that were never saved');
   assert.ok(byClass(node, 'aix-price-grid').length > 0, 'the row shows nothing at all');
+});
+
+/* ── §10: the answer before the form ─────────────────────────────────────── */
+
+const BENCH_SRC = await read('public/esthmr/scenarios.js')
+  + await read('public/esthmr/ai-cards.js');
+
+test('the results come before the setup, in the DOM and not only in CSS', () => {
+  /* "Show an already-computed model result immediately, with the chosen model
+     visible." Ordering this with CSS alone would leave a screen reader, and
+     anyone tabbing, still walking through the controls first. */
+  const node = screen(component({ scModel: 'kronos' }));
+  const kids = [...(node.children || [])];
+  const grid = kids.find((n) => String(n.attrs?.class || '').includes('aix-bench-grid'));
+  assert.ok(grid, 'the workbench lost its grid');
+  const order = (grid.children || []).map((n) => String(n.attrs?.class || '').split(' ')[0]);
+  assert.deepEqual(order, ['aix-results', 'aix-controls'],
+    `setup is above the results again: ${order.join(', ')}`);
+});
+
+test('the setup says what is selected while it is shut', () => {
+  /* The review asks for the chosen model to be VISIBLE, not one click away.
+     A collapsed panel that says only "Change model and evidence" hides the
+     one fact a reader needs to read the numbers above it. */
+  const node = screen(component({ scModel: 'kronos', scHorizon: 5 }));
+  const summary = byClass(node, 'aix-setup-now')[0];
+  assert.ok(summary, 'the shut panel names nothing');
+  const said = text(summary);
+  assert.match(said, /Kronos/i, `the model is not named: ${said}`);
+  assert.match(said, /session/i, `the window is not named: ${said}`);
+  assert.match(said, /model only/i, 'the evidence state is not named');
+});
+
+test('the setup panel survives using it', () => {
+  /* Picking a model calls setState, which redraws. An uncontrolled <details>
+     would come back shut, so the panel would close the instant it was used —
+     the reader would have to reopen it for every change. */
+  const c = component({ scModel: 'kronos', scSetupOpen: true });
+  const node = screen(c);
+  const panel = byClass(node, 'aix-controls')[0];
+  // The dom stub stringifies attributes, as a real setAttribute would.
+  assert.equal(String(panel.attrs.open), 'true', 'the open panel renders shut');
+  assert.ok(panel.events && panel.events.toggle, 'nothing records the reader opening it');
+  panel.events.toggle({ target: { open: false } });
+  assert.equal(c.state.scSetupOpen, false, 'closing it is not remembered');
+});
+
+test('nothing on the workbench says a model is about to run', () => {
+  /* Every figure is read from a sealed document. A label in the future tense
+     is a claim that something is being computed for this reader now. */
+  const src = BENCH_SRC;
+  for (const phrase of ['Run a model', 'Running the model', 'Calculating', 'جارٍ الحساب']) {
+    assert.ok(!src.includes(phrase), `the workbench says "${phrase}"`);
+  }
+  assert.match(src, /Explore model results/);
+  assert.match(src, /استكشف نتائج النماذج/);
 });

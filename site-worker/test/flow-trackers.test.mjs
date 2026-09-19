@@ -95,3 +95,60 @@ test('heavy histories are lazy-loaded and existing auth files are not involved',
   for(const screen of ['liquidity','ownership','world'])
     assert.match(lazy[1],new RegExp(`'${screen}'`),screen);
 });
+
+/* ── §8: the latest session leads, the history is a second view ──────────── */
+
+test('a sector opens on its latest session, not on a year of charts', async () => {
+  /* "Sector Liquidity opens with stacked aggregate numbers and substantial
+     method text; a large monthly matrix appears early."
+     The panel was one scroll — four totals, four more, four history charts,
+     then the companies — so a reader asking what a sector did today scrolled
+     past a year of daily turnover to reach the rows that explain it. */
+  const src = await readFile(new URL('../../public/esthmr/flow-trackers.js', import.meta.url), 'utf8');
+  assert.match(src, /const detailTab = component\.state\.flowDetailTab === 'history' \? 'history' : 'latest'/,
+    'the default is no longer the latest session');
+  assert.match(src, /flowSector: id, flowDetailTab: 'latest'/,
+    'opening a different sector keeps the previous sector’s view');
+  // Both views exist and are named.
+  assert.match(src, /t\('Latest session', 'آخر جلسة'\)/);
+  assert.match(src, /t\('Historical', 'تاريخي'\)/);
+});
+
+test('nothing was removed from the sector panel, only separated', async () => {
+  /* The charts and the methodology note are the study; they are one click
+     away, not gone. A split that quietly drops a chart is indistinguishable
+     from one that hides it well. */
+  const src = await readFile(new URL('../../public/esthmr/flow-trackers.js', import.meta.url), 'utf8');
+  for (const kept of [
+    'Historical Liquidity & Move Trajectories',
+    'Daily traded value',
+    'Advancing market cap vs Declining market cap',
+    'Stock Movements Relative to Size',
+    'Companies & calculation notes',
+  ]) assert.ok(src.includes(kept), `the split lost "${kept}"`);
+  // And the constituent rows moved INTO the latest view, where they explain
+  // the session's figures rather than trailing the history.
+  const panel = src.slice(src.indexOf("detailTab === 'history' ? ["));
+  const latest = panel.slice(panel.indexOf('] : ['));
+  assert.ok(latest.indexOf('ft-stock-breakdown') > 0, 'the companies left the latest view');
+});
+
+test('the tab strip cannot reach the ownership lens', async () => {
+  /* `.ft-detail` and `.ft-charts` serve the ownership lens too, and it has no
+     tabs. An unscoped rule would grow it some. */
+  const css = await readFile(new URL('../../public/esthmr/flow-trackers.css', import.meta.url), 'utf8');
+  const rules = [...css.matchAll(/^(\.[^{\n]*ft-detail-tab[^{\n]*)\{/gm)].map((m) => m[1].trim());
+  assert.ok(rules.length >= 2, 'the tab strip has no styles at all');
+  for (const rule of rules) {
+    assert.ok(rule.startsWith('.ft-detail '), `unscoped rule could reach ownership: ${rule}`);
+  }
+});
+
+test('“activity, not net inflow” survives the split', async () => {
+  /* The single most important sentence on this screen: every executed trade
+     has both sides, so traded value in rising stocks is not money entering.
+     It sits in the latest view, beside the figures it qualifies. */
+  const src = await readFile(new URL('../../public/esthmr/flow-trackers.js', import.meta.url), 'utf8');
+  assert.match(src, /Activity, not net inflow/);
+  assert.match(src, /Every executed trade has a buyer and seller/);
+});

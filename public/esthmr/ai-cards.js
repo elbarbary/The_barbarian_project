@@ -253,7 +253,7 @@ export function aiCards(component, data, ar) {
         statusStrip(record, ar),
         h('div', { class: 'aix-lab-actions' },
           h('button', { type: 'button', class: 'aix-cta', onClick: () => open(component, { ...into, scLayers: [], scFocus: null }) },
-            t('See the model’s results', 'استعرض نتائج النموذج')),
+            t('Explore model results', 'استكشف نتائج النماذج')),
           h('button', { type: 'button', class: 'aix-cta-quiet', onClick: () => open(component, { ...into, scFocus: 'past' }) },
             t('What came back?', 'ما الذي عاد؟'))))),
     warning);

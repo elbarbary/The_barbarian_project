@@ -2138,8 +2138,12 @@ export function flowTrackers(component, data, ar) {
     const totalAdvancingVal = rows.reduce((acc, s) => acc + (s.latest.upValue || 0), 0);
     const totalDecliningVal = rows.reduce((acc, s) => acc + (s.latest.downValue || 0), 0);
 
+    /* A sector opened from the list always lands on its latest session. A
+       reader studying one sector's history who clicks another has asked about
+       the other sector, not to stay in the history view. */
+    const detailTab = component.state.flowDetailTab === 'history' ? 'history' : 'latest';
     const openSector = id => {
-      component.setState({ flowSector: id });
+      component.setState({ flowSector: id, flowDetailTab: 'latest' });
       if (typeof requestAnimationFrame === 'function') {
         requestAnimationFrame(() => {
           const panel = document.getElementById('ft-sector-detail');
@@ -2157,6 +2161,37 @@ export function flowTrackers(component, data, ar) {
         ),
         h('span', { className: 'ft-range-badge', dir: 'ltr' }, `${selected.from} → ${selected.to}`)
       ),
+      /* §8: THE LATEST SESSION IS THE ANSWER; THE HISTORY IS THE STUDY.
+         "Sector Liquidity opens with stacked aggregate numbers and substantial
+         method text; a large monthly matrix appears early. Visual complexity
+         still requires specialist interpretation."
+         The panel was one scroll: four totals, four more totals, four history
+         charts, then the companies. A reader opening a sector wants to know
+         what it did in the session that just closed — and had to scroll past a
+         year of daily turnover to reach the companies that explain it. The
+         review says open on Latest session with Historical secondary, so the
+         two are separated and the session leads.
+         Nothing is removed: every chart and every note is one click away, and
+         `openSector` resets to Latest so a new sector never opens mid-study. */
+      h('div', { className: 'ft-detail-tabs', role: 'tablist' },
+        [['latest', t('Latest session', 'آخر جلسة')], ['history', t('Historical', 'تاريخي')]]
+          .map(([id, label]) => h('button', {
+            key: id, type: 'button', role: 'tab', className: 'ft-detail-tab',
+            'aria-selected': String(detailTab === id),
+            onClick: () => component.setState({ flowDetailTab: id }),
+          }, label))),
+      detailTab === 'history' ? [
+      h('div', { className: 'ft-charts-heading' },
+        h('h3', null, t('Historical Liquidity & Move Trajectories', 'مسارات السيولة وحركة الأسعار التاريخية')),
+        h('p', null, t('Variation in daily turnover, weighted moves, and advancing vs declining liquidity.', 'تغير قيمة التداول اليومية والحركة المرجّحة وتوزيع السيولة الصاعدة والهابطة.'))
+      ),
+      h('div', { className: 'ft-charts' },
+        chart(selected.history, 'value', t('Daily traded value · EGP (estimated where needed)', 'قيمة التداول اليومية · ج.م (تقديرية عند الحاجة)'), compact, 'var(--accent)', true),
+        chart(selected.history, 'change', t('Daily price move · current size weights', 'حركة السعر اليومية · بأوزان الحجم الحالي'), signed, tone(selected.latest.change), false),
+        dualChart(selected.history, 'upValue', 'downValue', t('Bought amount (up stocks) vs Sold amount (down stocks) · EGP', 'المشتريات (أسهم صاعدة) مقابل المبيعات (أسهم هابطة) · ج.م'), t('Advancing turnover', 'سيولة الأسهم الصاعدة'), t('Declining turnover', 'سيولة الأسهم الهابطة'), compact),
+        dualChart(selected.history, 'upCap', 'downCap', t('Advancing market cap vs Declining market cap · EGP', 'رأس المال الصاعد مقابل الهابط · ج.م'), t('Advancing cap', 'رأس مال صاعد'), t('Declining cap', 'رأس مال هابط'), compact)
+      )
+      ] : [
       h('div', { className: 'ft-metrics' },
         metric(t('Market size · EGP', 'القيمة السوقية · ج.م'), compact(selected.cap), `${selected.capCount}/${selected.members.length} ` + t('companies sized', 'شركة لها قيمة سوقية')),
         metric(t('Traded value · EGP', 'قيمة التداول · ج.م'), compact(selected.value), t('Selected window; estimates included', 'الفترة المختارة؛ تشمل تقديرات')),
@@ -2168,16 +2203,6 @@ export function flowTrackers(component, data, ar) {
         metric(t('Sold in declining stocks', 'مبيعات الأسهم الهابطة'), compact(selected.latest.downValue) + ' EGP', `${selected.latest.downCount || 0} ` + t('decliners', 'أسهم خاسرة'), -1),
         metric(t('Gaining capital size', 'رأس مال الأسهم الصاعدة'), compact(selected.latest.upCap) + ' EGP', t('Weighted breadth', 'اتساع مرجّح')),
         metric(t('Falling capital size', 'رأس مال الأسهم الهابطة'), compact(selected.latest.downCap) + ' EGP', t('Weighted risk', 'مخاطر مرجّحة'))
-      ),
-      h('div', { className: 'ft-charts-heading' },
-        h('h3', null, t('Historical Liquidity & Move Trajectories', 'مسارات السيولة وحركة الأسعار التاريخية')),
-        h('p', null, t('Variation in daily turnover, weighted moves, and advancing vs declining liquidity.', 'تغير قيمة التداول اليومية والحركة المرجّحة وتوزيع السيولة الصاعدة والهابطة.'))
-      ),
-      h('div', { className: 'ft-charts' },
-        chart(selected.history, 'value', t('Daily traded value · EGP (estimated where needed)', 'قيمة التداول اليومية · ج.م (تقديرية عند الحاجة)'), compact, 'var(--accent)', true),
-        chart(selected.history, 'change', t('Daily price move · current size weights', 'حركة السعر اليومية · بأوزان الحجم الحالي'), signed, tone(selected.latest.change), false),
-        dualChart(selected.history, 'upValue', 'downValue', t('Bought amount (up stocks) vs Sold amount (down stocks) · EGP', 'المشتريات (أسهم صاعدة) مقابل المبيعات (أسهم هابطة) · ج.م'), t('Advancing turnover', 'سيولة الأسهم الصاعدة'), t('Declining turnover', 'سيولة الأسهم الهابطة'), compact),
-        dualChart(selected.history, 'upCap', 'downCap', t('Advancing market cap vs Declining market cap · EGP', 'رأس المال الصاعد مقابل الهابط · ج.م'), t('Advancing cap', 'رأس مال صاعد'), t('Declining cap', 'رأس مال هابط'), compact)
       ),
       h('div', { className: 'ft-stock-breakdown' },
         h('div', { className: 'ft-section-heading' },
@@ -2217,7 +2242,8 @@ export function flowTrackers(component, data, ar) {
             );
           })
         )
-      ),
+      )
+      ],
       h('div', { className: 'ft-balanced' },
         metric(t('Total matched purchases', 'إجمالي المشتريات المقابلة'), compact(selected.value) + ' EGP'),
         h('b', { 'aria-hidden': 'true' }, '='),

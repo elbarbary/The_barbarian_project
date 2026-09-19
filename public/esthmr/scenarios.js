@@ -602,18 +602,48 @@ export function scenariosScreen(component, data, ar) {
   const indexed = index[key];
   const modelName = choice.meta ? (ar ? choice.meta.labelAr : choice.meta.label) : '—';
 
-  const controls = h('aside', { class: 'aix-controls' },
+  /* §10: RESULTS FIRST, SETUP UNDERNEATH.
+     "Show an already-computed model result immediately, with the chosen model
+     visible" and "put model selection in a compact selector".
+     This opened with three numbered steps — choose a model, choose a window,
+     choose what Gemini reads — before a single figure. Numbered steps are a
+     form, and a form says the reader must supply something before the page can
+     answer. Nothing here is computed on demand: every figure is read from a
+     record sealed days ago, and a default model and window are already
+     selected. So the answer comes first and the controls become what they
+     actually are — a way to change an answer that is already on screen.
+
+     The three groups keep their content and their order; what they lose is
+     the numbering, and the panel is shut until asked for. */
+  const setupSummary = [modelName, horizonWords(horizon, ar),
+    layers.length
+      ? t(`${layers.length} evidence layers`, `${layers.length} طبقات أدلة`)
+      : t('model only', 'النموذج وحده')].join(' · ');
+  /* Controlled, not native. Changing a model calls setState, which redraws —
+     and an uncontrolled <details> would come back shut, so the panel would
+     close the instant a reader used it. `onToggle` records what the reader
+     did so the next draw puts it back. */
+  const controls = h('details', {
+    class: 'aix-controls', open: Boolean(st.scSetupOpen),
+    onToggle: (e) => {
+      const open = Boolean(e && e.target && e.target.open);
+      if (open !== Boolean(component.state.scSetupOpen)) component.setState({ scSetupOpen: open });
+    },
+  },
+    h('summary', { class: 'aix-setup-summary' },
+      h('span', { class: 'aix-setup-what' }, t('Change model and evidence', 'غيّر النموذج والأدلة')),
+      h('span', { class: 'aix-setup-now' }, setupSummary)),
     h('div', { class: 'aix-group' },
-      h('p', { class: 'aix-step' }, h('b', null, '1'), h('span', null, t('Choose a model', 'اختر نموذجًا'))),
+      h('p', { class: 'aix-step' }, h('span', null, t('The model', 'النموذج'))),
       h('div', { class: 'aix-chips' }, choice.models.map((m) => chip(ar ? m.labelAr : m.label, model === m.id,
         () => set({ scModel: m.id, scFrom: null }), m.id))),
       choice.meta ? h('p', { class: 'aix-note aix-model-about' }, aboutModel(choice.meta, ar)) : null),
     h('div', { class: 'aix-group' },
-      h('p', { class: 'aix-step' }, h('b', null, '2'), h('span', null, t('The time window', 'النافذة الزمنية'))),
+      h('p', { class: 'aix-step' }, h('span', null, t('The time window', 'النافذة الزمنية'))),
       h('div', { class: 'aix-chips' }, choice.horizons.map((n) => chip(chipWords(n, ar),
         horizon === n, () => set({ scHorizon: n }), n)))),
     order.length ? h('div', { class: `aix-group aix-layers${gemini ? ' is-on' : ''}` },
-      h('p', { class: 'aix-step' }, h('b', null, '3'), h('span', null, t('What Gemini reads', 'ما يقرأه Gemini'))),
+      h('p', { class: 'aix-step' }, h('span', null, t('What Gemini reads', 'ما يقرأه Gemini'))),
       h('p', { class: 'aix-note aix-layers-lead' }, choice.readable
         ? (gemini
           ? t(`Showing Gemini’s saved ranking. It combines all models with the selected evidence; ${modelName} remains the comparison. Turn everything off for the model’s original order.`,
@@ -718,7 +748,6 @@ export function scenariosScreen(component, data, ar) {
         h('small', null, t('Cairo time · after the close, runs can start late', 'بتوقيت القاهرة · بعد الإغلاق، وقد يتأخر التشغيل')))),
     statusStrip(record, ar),
     h('div', { class: 'aix-bench-grid' },
-      controls,
       h('div', { class: 'aix-results' },
         from,
         divider('aix-future', t('FUTURE · NOT SCORED YET', 'المستقبل · لم يُقيَّم بعد'),
@@ -744,7 +773,8 @@ export function scenariosScreen(component, data, ar) {
           onPick: (id) => (id === 'rerank'
             ? set({ scLayers: layers.length ? layers : choice.standard, scFocus: 'future' })
             : set({ scModel: id, scLayers: [], scFrom: null, scFocus: 'future' })),
-          onWindow: (n) => set({ scHorizon: n }) }))),
+          onWindow: (n) => set({ scHorizon: n }) })),
+      controls),
     h('footer', { class: 'sc-proof aix-proof' },
       h('details', null,
         h('summary', null, t('About this saved run & its timestamp', 'عن هذا التشغيل المحفوظ وتوثيقه الزمني')),
