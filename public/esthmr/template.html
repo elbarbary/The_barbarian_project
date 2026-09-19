@@ -2225,6 +2225,9 @@
                           <div style="font-size:12.5px;color:var(--t2);line-height:1.6;margin-top:6px;text-wrap:pretty">{{ rt.body }}</div>
                         </div>
                       </sc-if>
+                      <sc-if value="{{ rt.hasNuance }}">
+                        <details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ rt.nuance }}</div></details>
+                      </sc-if>
                       <sc-if value="{{ rt.hasOrient }}">
                         <div>
                           <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.revOrientLabel }}</div>

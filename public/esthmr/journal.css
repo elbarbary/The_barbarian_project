@@ -1343,6 +1343,11 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
     z-index: 60;
   }
   #app .om-rail > .om-brand, #app .om-rail > .om-session { display: none !important; }
+  /* journal.css:392 hangs the rail 128px down for a signed-out visitor, with
+     a selector that beats this block's. The rail is hidden on the gate page,
+     so it never showed — but computed top:128px + bottom:18px is a stretched
+     island waiting for the day it does. */
+  body[data-signed="no"] #app .om-rail { inset-block-start: auto !important; }
 
   #app .om-nav { flex-direction: row !important; gap: 4px !important; margin: 0 !important; }
   #app .om-nav > button {
@@ -1383,3 +1388,16 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
     #app .om-nav > button > span, #app .om-nav > button { transition: none; }
   }
 }
+
+/* The review card's caveats, behind a disclosure. The plain sentence stands
+ * alone above it; a reader who wants the expert reading opens this. */
+#app .rev-nuance { margin-top: 2px; }
+#app .rev-nuance > summary {
+  cursor: pointer; list-style: none; font-size: 12px; color: var(--accent);
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+}
+#app .rev-nuance > summary::-webkit-details-marker { display: none; }
+#app .rev-nuance > summary::before { content: '+ '; }
+#app .rev-nuance[open] > summary::before { content: '\2212 '; }
+#app .rev-nuance > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+#app .rev-nuance > div { font-size: 12.5px; color: var(--t2); line-height: 1.6; margin-top: 6px; text-wrap: pretty; }

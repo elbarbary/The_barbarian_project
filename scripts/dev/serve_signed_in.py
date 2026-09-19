@@ -25,8 +25,10 @@ leaves /data/v1/* ungated. Nothing here is deployed or committed — it exists s
 a change can be seen rendering before it ships.
 """
 import http.server, socketserver, os, json, posixpath
+import re
 
 ROOT = '/Users/barbary/esthmr-wt/public'
+SAVE_DIR = os.environ.get('ESTHMR_DEV_SAVE', '/private/tmp/claude-501/-Users-barbary/e6294343-1b2d-44cb-8af2-0c1cd02de568/scratchpad/sweep')
 PORT = 8899
 
 class H(http.server.SimpleHTTPRequestHandler):
@@ -77,6 +79,20 @@ class H(http.server.SimpleHTTPRequestHandler):
         return super().do_GET()
 
     def do_POST(self):
+        # A browser sweep collects what a reader sees and posts it here, so the
+        # collection can be judged (Jev) without a 60KB tool result. Dev only;
+        # the name is a slug and the file lands in SAVE_DIR.
+        p = self.path.split('?', 1)
+        if p[0] == '/esthmr/__dev/save' and len(p) > 1:
+            name = dict(x.split('=', 1) for x in p[1].split('&') if '=' in x).get('name', '')
+            if re.fullmatch(r'[a-z0-9-]{1,40}', name):
+                n = int(self.headers.get('Content-Length') or 0)
+                body = self.rfile.read(n)
+                os.makedirs(SAVE_DIR, exist_ok=True)
+                with open(os.path.join(SAVE_DIR, name + '.json'), 'wb') as f:
+                    f.write(body)
+                return self._json({'ok': True, 'bytes': n, 'file': os.path.join(SAVE_DIR, name + '.json')})
+            return self._json({'ok': False}, 400)
         return self._json({'ok': True})
 
     def end_headers(self):

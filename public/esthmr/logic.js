@@ -490,6 +490,7 @@ export class Component extends Base {
       revProofNote:'These are the values the direction was read from — the exchange\'s filed figures, oldest first.',
       revProofTitle:'The figure, period by period',
       revOrientLabel:'Which way reads better',
+      revNuanceLabel:'The detail and the caveats',
       revPeBody:'Market value divided by profit: how much you pay for each pound the company earns. A falling P/E can mean the price got cheaper or the earnings got better — those are different stories. Rising with fast growth can mean the market is paying for what comes next; rising with flat growth is a stretch. Never read it without the earnings line below it.',
       revPbBody:'Market value divided by shareholders\' equity. Below 1 means the market values the company under its accounting equity — which is only a bargain if the assets are productive. Read it beside return on equity: low price to book with a high return is a different company from low price to book with a poor one.',
       revYieldBody:'The annual dividend against the share price, as the exchange publishes it. A yield can climb simply because the price collapsed, and a company paying out heavily may be keeping too little to invest. Read it beside profit and debt.',
@@ -934,6 +935,7 @@ export class Component extends Base {
       revMeansTitle:'ما هو',
       revProofNote:'من هذه القيم حددنا اتجاه التغير. كلها أرقام مودعة لدى البورصة، وتظهر من الأقدم إلى الأحدث لتتضح حركة الرقم بمرور الوقت.',
       revProofTitle:'الرقم، فترة بفترة',
+      revNuanceLabel:'التفاصيل والتحفظات',
       revOrientLabel:'أي اتجاه يُقرأ أفضل',
       revPeBody:'القيمة السوقية مقسومة على الربح: كم تدفع مقابل كل جنيه تربحه الشركة. انخفاض المضاعف قد يعني أن السعر رخص أو أن الأرباح تحسّنت، وهما حكايتان مختلفتان. وارتفاعه مع نمو سريع قد يعني أن السوق يدفع مقابل ما هو آتٍ؛ وارتفاعه مع نمو ثابت توسّع في التقييم. لا تقرأه أبداً بمعزل عن سطر الأرباح تحته.',
       revPbBody:'سعر الشركة في السوق مقابل ما تملكه على الورق. وأقل من 1 يعني أن السوق يقيّمها دون حقوق ملكيتها الدفترية — وهذا لا يكون فرصة إلا إذا كانت الأصول مُنتِجة. اقرأه بجوار العائد على حقوق الملكية.',
@@ -1372,16 +1374,16 @@ export class Component extends Base {
     if (!review || !Array.isArray(review.metrics)) return [];
     // label, the question, what it is, and which way reads better.
     const NAME = {
-      pe: [L.revPe, L.revPeAsk, L.revPeBody, L.revOrientPe],
-      pb: [L.revPb, L.revPbAsk, L.revPbBody, L.revOrientPb],
-      dividend_yield: [L.revYield, L.revYieldAsk, L.revYieldBody, L.revOrientYield],
-      profit: [L.revProfit, L.revProfitAsk, L.revProfitBody, L.revOrientHigherMore],
-      eps: [L.revEps, L.revEpsAsk, L.revEpsBody, L.revOrientHigherMore],
-      assets: [L.revAssets, L.revAssetsAsk, L.revAssetsBody, L.revOrientAssets],
-      cash_conversion: [L.revCash, L.revCashAsk, L.revCashBody, L.revOrientCash],
-      roe: [L.revRoe, L.revRoeAsk, L.revRoeBody, L.revOrientReturn],
-      roa: [L.revRoa, L.revRoaAsk, L.revRoaBody, L.revOrientReturn],
-      debt_equity: [L.revDebt, L.revDebtAsk, L.revDebtBody, L.revOrientDebt],
+      pe: [L.revPe, L.revPeAsk, L.revPeBody, L.revOrientPe, 'revPe'],
+      pb: [L.revPb, L.revPbAsk, L.revPbBody, L.revOrientPb, 'revPb'],
+      dividend_yield: [L.revYield, L.revYieldAsk, L.revYieldBody, L.revOrientYield, 'revYield'],
+      profit: [L.revProfit, L.revProfitAsk, L.revProfitBody, L.revOrientHigherMore, 'revProfit'],
+      eps: [L.revEps, L.revEpsAsk, L.revEpsBody, L.revOrientHigherMore, 'revEps'],
+      assets: [L.revAssets, L.revAssetsAsk, L.revAssetsBody, L.revOrientAssets, 'revAssets'],
+      cash_conversion: [L.revCash, L.revCashAsk, L.revCashBody, L.revOrientCash, 'revCash'],
+      roe: [L.revRoe, L.revRoeAsk, L.revRoeBody, L.revOrientReturn, 'revRoe'],
+      roa: [L.revRoa, L.revRoaAsk, L.revRoaBody, L.revOrientReturn, 'revRoa'],
+      debt_equity: [L.revDebt, L.revDebtAsk, L.revDebtBody, L.revOrientDebt, 'revDebt'],
     };
     const fmt = (v, unit, key) => {
       if (typeof v !== 'number' || !isFinite(v)) return '\u2014';
@@ -1400,7 +1402,18 @@ export class Component extends Base {
     return review.metrics.map((m) => {
       const named = NAME[m.key];
       if (!named) return null;      // an unknown key degrades to nothing, never to a raw key
-      const [label, ask, body, orient] = named;
+      const [label, ask, body0, orient, base] = named;
+      // THE SENTENCE THAT DID TWO JOBS.
+      // Every body here was a plain statement followed by the expert caveat in
+      // one paragraph, and no better opening could rescue that shape: a
+      // Jev-picked lead moved revPbBody by +0.02. So the dictionary may carry
+      // <base>Plain — ONE sentence, what the figure means for the reader — and
+      // <base>Nuance, the caveats, behind a disclosure. Nothing is dropped:
+      // the nuance keeps every fact the old body carried. A metric with no
+      // Plain yet still shows its old body.
+      const plain = (base && L[base + 'Plain']) || '';
+      const nuance = (base && L[base + 'Nuance']) || '';
+      const body = plain || body0;
       const rising = m.direction === 'rising';
       const falling = m.direction === 'falling';
       const answer = ar ? (m.answer_ar || m.answer) : m.answer;
@@ -1418,7 +1431,7 @@ export class Component extends Base {
       const priced = m.key === 'pe';
       const lastPeriod = ((m.series || [])[(m.series || []).length - 1] || {}).p || '';
       return {
-        key: m.key, label, ask,
+        key: m.key, label, ask, nuance, hasNuance: Boolean(nuance),
         value: fmt(m.value, m.unit, m.key),
         asAt: priced && lastPeriod
           ? L.revAtClose.replace('{period}', lastPeriod) : '',

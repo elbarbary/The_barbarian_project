@@ -37,6 +37,10 @@ test('the island sits at the bottom, centred, clear of the edges', () => {
   assert.match(rail, /backdrop-filter: blur/, 'the island is opaque over the content it floats on');
 });
 
+test('the signed-out rail offset cannot stretch the island', () => {
+  assert.match(dock, /body\[data-signed="no"\] #app \.om-rail \{ inset-block-start: auto !important; \}/);
+});
+
 test('the brand and the session stamp are not on the dock', () => {
   assert.match(dock, /#app \.om-rail > \.om-brand, #app \.om-rail > \.om-session \{ display: none !important; \}/);
 });
