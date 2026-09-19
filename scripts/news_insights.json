@@ -4756,6 +4756,10 @@
     "meaning": "Tariff and trade restriction threats between major economic blocs alter international commercial terms, realigning global export volumes and supply chain routing.",
     "meaning_ar": "يؤدي التهديد بفرض قيود جمركية وتجارية بين التكتلات الاقتصادية الكبرى إلى تعديل الشروط التجارية الدولية وإعادة توجيه مسارات سلاسل الإمداد وحركة الصادرات العالمية."
   },
+  "ترامب يوقع قانونا لفرض رسوم علي مشتري نفط روسيا": {
+    "meaning": "Secondary sanctions impose financial duties and regulatory penalties on entities that transact with Russian crude exporters, altering trade clearing pathways and raising compliance overhead across global supply chains.",
+    "meaning_ar": "تفرض العقوبات الثانوية رسوماً مالية وجزاءات تنظيمية على الكيانات المتعاملة مع مصدري النفط الروسي، مما يغير مسارات التسوية التجارية ويرفع تكاليف الامتثال عبر سلاسل الإمداد العالمية."
+  },
   "ترامب: 5 الاف دولار لكل امريكي حال فوز الجمهوريين بالانتخابات النصفيه": {
     "meaning": "Direct cash transfers to citizens represent fiscal expansion funded through government debt or budget reallocations, which alters aggregate consumer liquidity and sovereign debt levels in the United States.",
     "meaning_ar": "تمثل التحويلات النقدية المباشرة للمواطنين سياسة توسع مالي يتم تمويلها عبر الدين العام أو إعادة توزيع مخصصات الموازنة، وهو ما يغير مستويات السيولة الاستهلاكية وحجم الدين السيادي في الولايات المتحدة."
@@ -4799,6 +4803,10 @@
   "تركيا تلغي ترخيص تشغيل بنك ملت الايراني وسط اجراءات امريكيه": {
     "meaning": "Revoking a commercial banking license halts the entity's access to domestic clearing systems, cross-border payment rails, and bilateral trade settlement operations in the host jurisdiction.",
     "meaning_ar": "يؤدي إلغاء رخصة التشغيل المصرفي إلى وقف وصول المؤسسة إلى أنظمة المقاصة المحلية وقنوات المدفوعات عبر الحدود وعمليات تسوية التجارة البينية في الدولة المضيفة."
+  },
+  "تركيا تلغي ترخيص “بنك ملت” الايراني وتوقف رحلات “ماهان اير”": {
+    "meaning": "The revocation of Bank Mellat's banking licence halts its clearing and direct cross-border financial transactions in Turkey, while grounding Mahan Air terminates direct air transit routes and commercial freight capacity between the two markets.",
+    "meaning_ar": "يؤدي إلغاء ترخيص بنك ملت إلى وقف عمليات المقاصة والمعاملات المالية المباشرة عبر الحدود داخل تركيا، بينما ينهي تعليق رحلات ماهان إير مسارات النقل الجوي المباشر وسعة الشحن التجاري بين السوقين."
   },
   "تريليون دولار حجم التجاره الافريقيه وفرص واعده امام الشركات المصريه": {
     "meaning": "African trade operates through continental trade corridors and regional frameworks that structure cross-border supply chains and export channels for Egyptian commercial and industrial enterprises.",
@@ -5051,6 +5059,10 @@
   "تنميه تحصل علي الشهاده الذهبيه لحمايه العملاء": {
     "meaning": "The Gold Client Protection Certification verifies that the microfinance company adheres to international operational standards regarding pricing transparency, responsible lending, and consumer data privacy. This credential reflects compliance with standardized governance and client relationship benchmarks set for non-banking financial institutions.",
     "meaning_ar": "تفيد الشهادة الذهبية لحماية العملاء بالتزام شركة التمويل متناهي الصغر بالمعايير التشغيلية الدولية المتعلقة بشفافية التسعير، والإقراض المسئول، وخصوصية بيانات العملاء. ويعكس هذا الاعتماد التوافق مع معايير الحوكمة وإدارة علاقات العملاء المحددة للمؤسسات المالية غير المصرفية."
+  },
+  "توتال تجذب 1.8 مليار دولار من بلاك روك لاصولها بافريقيا": {
+    "meaning": "This transaction represents an equity or capital partnership where an institutional asset manager allocates funds directly into an energy company's African asset portfolio, restructuring asset ownership and injecting direct capital into regional operations.",
+    "meaning_ar": "تمثل هذه الصفقة شراكة رأسمالية يضخ من خلالها مدير أصول مؤسسي سيولة نقدية مباشرة في محفظة أصول شركة الطاقة بإفريقيا، مما يعيد هيكلة ملكية هذه الأصول ويوفر تمويلاً لعملياتها التشغيلية الإقليمية."
   },
   "توسعات جديده لمصنع الاسمده بالسخنه": {
     "meaning": "Physical plant expansions add production lines and operational capacity to fertilizer manufacturing facilities, altering capital expenditure allocations and industrial output volumes.",
@@ -8820,6 +8832,10 @@
   "وزير النقل: تسريع تنفيذ مجمع الستوم ببرج العرب لبدء تشغيله في اقرب وقت": {
     "meaning": "Accelerating project execution advances the operational timeline for Alstom's industrial complex in Borg El Arab, establishing local manufacturing capacity for railway systems and rolling stock.",
     "meaning_ar": "يُقدّم تسريع وتيرة التنفيذ الجدول الزمني للتشغيل الفعلي لمجمع ألستوم الصناعي في برج العرب، وهو ما يؤسس لطاقة تصنيع محلي لأنظمة السكك الحديدية والوحدات المتحركة."
+  },
+  "وزير النقل: تطوير ميناء العريش يسهم في تحقيق التنميه الشامله بسيناء": {
+    "meaning": "Upgrading the port of Arish expands commercial maritime capacity, maritime logistics access, and bulk cargo handling infrastructure for industrial and mining operations in northern Sinai.",
+    "meaning_ar": "يؤدي تطوير ميناء العريش إلى توسيع الطاقة الاستيعابية للشحن البحري وربط العمليات اللوجستية وتداول بضائع الصب الخاصة بالأنشطة الصناعية والتعدينية في شمال سيناء."
   },
   "وزير قطاع الاعمال البريطاني يستبعد تقديم خطه انقاذ مالي ل”جاكوار لاند روفر”": {
     "meaning": "The exclusion of state-backed financial aid requires the automaker to rely entirely on private liquidity sources, commercial borrowing, or internal operational adjustments to manage its obligations.",
