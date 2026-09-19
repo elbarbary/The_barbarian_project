@@ -105,24 +105,46 @@ function homeModelsGrid(top5, horizon, ar, component, forecasters) {
   const t = (en, arabic) => (ar ? arabic : en);
   const minSessions = top5.minimumSessions || 5;
   const n = Number(horizon);
-  const targetModels = [
-    { id: 'kronos', labelEn: 'KRONOS-SMALL', labelAr: 'KRONOS-SMALL' },
-    { id: 'chronos2', labelEn: 'CHRONOS-2', labelAr: 'CHRONOS-2' },
-    { id: 'timesfm25', labelEn: 'TIMESFM 2.5', labelAr: 'TIMESFM 2.5' },
-    // The count comes from the published record, never a literal: the
-    // document states 11 forecasters today and a hard-coded "nine" was wrong
-    // the day it was written. ai-record.js's kindLabel does the same, and
-    // falls back to the word when the figure is absent rather than guessing.
-    { id: 'rerank',
-      labelEn: `GEMINI, READING THE OTHER ${finite(forecasters) ? word(forecasters).toUpperCase() : 'MODELS'}`,
-      labelAr: 'GEMINI · قراءة النماذج الأخرى' },
-  ];
+  // WHICH MODELS APPEAR: the ones the record has something to say about.
+  //
+  // This was a hard-coded four — kronos, chronos2, timesfm25, rerank. At the
+  // five-session horizon exactly one of those had a record and the other
+  // three drew "no record yet", while six models that HAD a full nine-session
+  // record (the baselines, and the flat control) were not on the page at all.
+  // A reader asking "where are the other models" was right: the list was a
+  // literal, not a reading of the document.
+  //
+  // Every model the record carries, in the order the document lists them,
+  // foundation models before baselines so the neural ones lead. Cards are
+  // built for the models with a record; the count still waiting is stated
+  // under them rather than drawn as empty boxes.
+  const GROUP_ORDER = { neural: 0, rerank: 1, baseline: 2 };
+  const catalogue = Object.entries(top5.models || {}).map(([id, entry], i) => {
+    const hzData = entry && entry.horizons ? entry.horizons[horizon] : null;
+    return {
+      id,
+      entry,
+      hzData,
+      order: i,
+      group: (entry && entry.group) || 'baseline',
+      scored: Boolean(hzData && hzData.sessions >= minSessions && finite(hzData.meanReturn)),
+      // The re-rank names what it reads; every other model names itself, from
+      // the record's own label rather than a literal in this file.
+      label: id === 'rerank'
+        ? t(`GEMINI, READING THE OTHER ${finite(forecasters) ? word(forecasters).toUpperCase() : 'MODELS'}`,
+          'GEMINI · قراءة النماذج الأخرى')
+        : (ar ? ((entry && entry.labelAr) || (entry && entry.label) || id) : ((entry && entry.label) || id)),
+    };
+  }).sort((a, b) => (GROUP_ORDER[a.group] ?? 3) - (GROUP_ORDER[b.group] ?? 3) || a.order - b.order);
 
-  const cards = targetModels.map((m) => {
-    const entry = top5.models?.[m.id];
-    const hzData = entry?.horizons?.[horizon];
-    const isScored = Boolean(hzData && hzData.sessions >= minSessions && finite(hzData.meanReturn));
-    const label = t(m.labelEn, m.labelAr);
+  const scoredModels = catalogue.filter((m) => m.scored);
+  const waiting = catalogue.length - scoredModels.length;
+  // Nothing scored at this horizon yet: say so once, rather than drawing a
+  // row of identical empty cards.
+  const shown = scoredModels.length ? scoredModels : catalogue.slice(0, 4);
+
+  const cards = shown.map((m) => {
+    const { hzData, scored: isScored, label } = m;
 
     if (isScored) {
       const val = hzData.meanReturn;
@@ -158,11 +180,15 @@ function homeModelsGrid(top5, horizon, ar, component, forecasters) {
       }, t('Open the workbench ↗', 'افتح منصة النماذج ↗')));
   });
 
-  const scoredModels = targetModels.map((m) => {
-    const hzData = top5.models?.[m.id]?.horizons?.[horizon];
-    const isScored = Boolean(hzData && hzData.sessions >= minSessions && finite(hzData.meanReturn));
-    return { ...m, isScored, hzData };
-  }).filter((m) => m.isScored);
+  // The sentence under the grid answers the question the grid raises: these
+  // are the models with a record, and here is how many are still waiting.
+  // Both counts come from the document. The Arabic branch used to say "the
+  // four public models" as a literal, which stopped being true the moment a
+  // model was added.
+  const waitingLine = waiting > 0
+    ? t(` ${waiting} more ${waiting === 1 ? 'model has' : 'models have'} not reached ${minSessions} scored sessions on this window yet.`,
+      ` و${waiting} ${waiting === 1 ? 'نموذج آخر لم يصل' : 'نماذج أخرى لم تصل'} إلى ${minSessions} جلسات مقيّمة على هذه النافذة بعد.`)
+    : '';
 
   let summaryNote = null;
   if (scoredModels.length > 0) {
@@ -171,13 +197,13 @@ function homeModelsGrid(top5, horizon, ar, component, forecasters) {
     const totalSessions = Math.max(...scoredModels.map((m) => m.hzData.sessions));
     const diff = avgReturn - avgMarket;
     summaryNote = t(
-      `Across the ${scoredModels.length} of ${targetModels.length} with a record, the five they ranked highest returned ${percent(avgReturn)} against the market's ${percent(avgMarket)} — ${percent(diff)}. Five companies over ${totalSessions} sessions is a very small sample, and the sign of these numbers has changed from one week to the next.`,
-      `من بين ${scoredModels.length} من ${targetModels.length} لها سجل، حققت الشركات الخمس الأعلى ترتيباً ${percent(avgReturn)} مقابل ${percent(avgMarket)} للسوق — ${percent(diff)}. خمس شركات على مدار ${totalSessions} جلسات عينة صغيرة جداً، وإشارة هذه الأرقام تغيّرت من أسبوع لآخر.`
+      `Across the ${scoredModels.length} of ${catalogue.length} with a record, the five they ranked highest returned ${percent(avgReturn)} against the market's ${percent(avgMarket)} — ${percent(diff)}. Five companies over ${totalSessions} sessions is a very small sample, and the sign of these numbers has changed from one week to the next.${waitingLine}`,
+      `من بين ${scoredModels.length} من ${catalogue.length} لها سجل، حققت الشركات الخمس الأعلى ترتيباً ${percent(avgReturn)} مقابل ${percent(avgMarket)} للسوق — ${percent(diff)}. خمس شركات على مدار ${totalSessions} جلسات عينة صغيرة جداً، وإشارة هذه الأرقام تغيّرت من أسبوع لآخر.${waitingLine}`
     );
   } else {
     summaryNote = t(
-      `None of the ${targetModels.length} public models have reached ${minSessions} scored sessions on this window yet. Five companies over a handful of sessions is a very small sample.`,
-      `لم يصل أي من النماذج الأربعة العامة إلى ${minSessions} جلسات مقيّمة على هذه النافذة بعد. خمس شركات على مدار عدد قليل من الجلسات عينة صغيرة جداً.`
+      `None of the ${catalogue.length} public models have reached ${minSessions} scored sessions on this window yet. Five companies over a handful of sessions is a very small sample.`,
+      `لم يصل أي من النماذج العامة الـ${catalogue.length} إلى ${minSessions} جلسات مقيّمة على هذه النافذة بعد. خمس شركات على مدى جلسات قليلة عينة صغيرة جداً.`
     );
   }
 
@@ -263,8 +289,7 @@ export function aiCards(component, data, ar) {
       heroChart(system.byDate, ar),
       h('p', { class: 'aix-fact-note' }, t(
         'The five solid · the market dashed. Each point is one night over its own window — every company scored, equally weighted, and not an index.',
-        'الخمس المختارة متصل · السوق متقطّع. كل نقطة ليلة واحدة على نافذتها — كل شركة مُقيَّمة بأوزان متساوية، وليست مؤشراً.')),
-      homeModelsGrid(top5, horizon, ar, component, forecasters));
+        'الخمس المختارة متصل · السوق متقطّع. كل نقطة ليلة واحدة على نافذتها — كل شركة مُقيَّمة بأوزان متساوية، وليست مؤشراً.')));
   } else if (system) {
     // Below the minimum: how many NIGHTS are scored, and the nights still to
     // come drawn as the sessions each is held. "0/5 sessions scored" beside
@@ -316,8 +341,7 @@ export function aiCards(component, data, ar) {
         h('strong', { class: 'aix-system-value is-words' }, headWords),
         h('p', { class: 'aix-system-versus' }, versus)),
       rows.length ? recordChart(rows, n, ar, { label: `${legend} ${end}`, end }) : null,
-      h('p', { class: 'aix-fact-note' }, legend),
-      homeModelsGrid(top5, horizon, ar, component, forecasters));
+      h('p', { class: 'aix-fact-note' }, legend));
   }
 
   /* ONE VISUAL ON HOME, NOT THREE.
@@ -368,6 +392,13 @@ export function aiCards(component, data, ar) {
         `${models ? `${Word(models)} public models` : 'Public models'} rank every listed company after each close, and after five sessions we measure what they got right and what they got wrong. We read a saved record and run no new calculation; we hold nothing and we advise nothing.`,
         `${models ? countAr(models, 'نموذج عام واحد', 'نموذجان عامان', 'نماذج عامة', 'نموذجًا عامًا') : 'نماذج عامة'} ترتّب كل شركة مدرجة بعد كل إغلاق، وبعد خمس جلسات نقيس ما أصاب وما أخطأ. نقرأ سجلاً محفوظاً ولا نُجري حساباً جديداً؛ لا نملك شيئاً ولا نُقدّم نصيحة.`)),
       h('div', { class: 'aix-facts' }, facts),
+      // Full width, beside the facts row and not inside it. This was the last
+      // child of one fact card, and `.aix-facts` is a three-column grid: the
+      // models grid inherited a 263px cell, divided it into its own four
+      // columns, and gave each model card 57px. Every percentage collided
+      // with the one next to it. Nothing was wrong with the grid; it was
+      // nested one level too deep.
+      homeModelsGrid(top5, horizon, ar, component, forecasters),
       h('div', { class: 'aix-rule' }),
       h('div', { class: 'aix-lab-foot' },
         statusStrip(record, ar),
