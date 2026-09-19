@@ -1,4 +1,5 @@
 import { explorer } from './explorer.js';
+import { distributionDot } from './primitives.js';
 import { SECTOR_AR } from './data.js';
 import { archiveOf, archiveFailed } from './filings-store.js';
 import { marketStory } from './market-story.js';
@@ -50,6 +51,93 @@ function simulatorWhenReady(redraw) {
 let fragilityReading = null;
 let fragilityReadingPending = null;
 let fragilityReadingFailed = false;
+
+/* The model's own history, and the only thing that makes today's reading
+ * readable. 0.84 is not high or low until you know the model has spent
+ * eighteen years between 0 and 1 and sits at 0.50 on a median session.
+ *
+ * A quantile ladder rather than the 4,518-session series: the series is
+ * 388 KB and the only question asked of it here is "where does this sit",
+ * which a hundred published quantiles answer exactly at their own
+ * resolution. It is frozen research — the series ends where the research
+ * does — so it is fetched once and never again.
+ */
+let readingHistory = null;
+let readingHistoryPending = null;
+
+function readingHistoryWhenReady(redraw) {
+  if (readingHistory) return readingHistory;
+  if (!readingHistoryPending) {
+    readingHistoryPending = fetch('backtest/reading_history.json')
+      .then((response) => (response.ok ? response.json() : Promise.reject(new Error(String(response.status)))))
+      .then((doc) => { readingHistory = doc; redraw(); })
+      .catch(() => { readingHistoryPending = null; });
+  }
+  return null;
+}
+
+/** Where a reading falls in that history, as a percentile, or null. */
+export function placeOf(history, score) {
+  const ladder = history && Array.isArray(history.quantiles) ? history.quantiles : null;
+  if (!ladder || ladder.length < 2 || typeof score !== 'number' || !Number.isFinite(score)) return null;
+  /* The share of the history at or below this reading — so the TOP of a tied
+     block, not its bottom. The model's quietest sessions all read exactly
+     0.00 and fill the first ten rungs; a reading of 0.00 is then "as quiet as
+     the quietest tenth of its history", which is the true statement, where
+     "the 0th percentile" would imply it had been quieter before and never
+     this quiet again. */
+  let at = 0;
+  while (at < ladder.length && ladder[at] <= score) at += 1;
+  return Math.max(0, Math.min(100, at - 1));
+}
+
+/**
+ * The crash-warning reading, drawn as what it is.
+ *
+ * §11.9 of the redesign, and the one rule it states twice: a distribution,
+ * never a gauge. A dial with a needle in a red arc is read as a forecast —
+ * the needle is POINTING somewhere — and this publisher is not licensed to
+ * make one. A dot on the model's own history is a measurement, which it is
+ * allowed to make, and it is also the more informative drawing: 0.84 means
+ * nothing until a reader can see that the same model sits at 0.50 on a
+ * median session and has spent eighteen years between 0 and 1.
+ *
+ * Three figures beside it, from the comp: the reading, where it falls in
+ * that history, and the state the methodology's own threshold puts it in.
+ * The threshold is the published `alertLine`, drawn as a tick — not a red
+ * zone, because the band either side of it is not more or less dangerous,
+ * it is simply the line the rule uses.
+ */
+function readingPlace(reading, history, ar) {
+  const t = (en, arabic) => (ar ? arabic : en);
+  const score = Number(reading.score);
+  if (!Number.isFinite(score)) return null;
+  const place = placeOf(history, score);
+  const alert = Number(reading.alertLine);
+  const dot = distributionDot({
+    ar, min: history.min, max: history.max, low: history.p25, high: history.p75,
+    value: score, priors: Number.isFinite(alert) ? [alert] : [],
+    valueLabel: t(`today ${score.toFixed(2)}`, `اليوم ${score.toFixed(2)}`),
+    note: t(
+      `The band is the middle half of ${history.sessions} sessions, ${history.from} to ${history.to}; the tick is the alert line at ${alert.toFixed(2)}. A reading is a model's state measured on its own history, not a statement about what comes next.`,
+      `الشريط هو النصف الأوسط من ${history.sessions} جلسة، من ${history.from} إلى ${history.to}؛ والعلامة هي خط الإنذار عند ${alert.toFixed(2)}. القراءة حالة نموذج تُقاس على تاريخه، وليست تصريحاً عمّا سيأتي.`),
+  });
+  const cell = (label, value) => React.createElement('div', { className: 'rp-cell' },
+    React.createElement('span', { className: 'rp-label' }, label),
+    React.createElement('span', { className: 'rp-value', dir: 'ltr' }, value));
+  const state = !Number.isFinite(alert) ? t('unstated', 'غير محدد')
+    : score >= alert ? t('at the alert line', 'عند خط الإنذار')
+      : place !== null && place >= 75 ? t('high for this model', 'مرتفعة لهذا النموذج')
+        : place !== null && place <= 25 ? t('low for this model', 'منخفضة لهذا النموذج')
+          : t('mid-range for this model', 'متوسطة لهذا النموذج');
+  return React.createElement('div', { className: 'reading-place' },
+    React.createElement('div', { className: 'rp-figures' },
+      cell(t('the reading today', 'القراءة اليوم'), score.toFixed(2)),
+      cell(t('where it falls in its history', 'موقعها في تاريخها'),
+        place === null ? '—' : t(`${place}th percentile`, `المئين ${place}`)),
+      cell(t('the model\u2019s state', 'حالة النموذج'), state)),
+    dot);
+}
 
 function fragilityReadingWhenReady(redraw) {
   if (fragilityReading) return fragilityReading;
@@ -4127,6 +4215,7 @@ export class Component extends Base {
     // And the crash-warning reading, only when its tab is the one open.
     const wantsReading = wantsSim && st.toolsTab === 'fragility';
     const reading = wantsReading ? fragilityReadingWhenReady(() => this.setState({})) : null;
+    const readingPast = wantsReading ? readingHistoryWhenReady(() => this.setState({})) : null;
     const storyPeriod = st.storyPeriod || 'week';
     const storyKind = st.screen === 'calendar' ? 'filing' : (st.storyKind || 'all');
     const story = marketStory(D, {period:storyPeriod,kind:storyKind,lang:st.lang,
@@ -4799,6 +4888,15 @@ export class Component extends Base {
           statusLabel: on ? (ar ? 'الإنذار قائم' : 'Warning on') : (ar ? 'لا يوجد إنذار' : 'No warning'),
           statusFg: on ? 'var(--down)' : 'var(--up)',
           statusBg: on ? 'var(--downTint)' : 'var(--upTint)',
+          /* The reading, placed on its own history rather than on a dial.
+             A gauge with a needle in a red arc reads as a forecast, and this
+             is a measurement of a model's state: a dot on eighteen years of
+             the same model's readings, with the alert line marked where the
+             methodology puts it. The band is the middle half of that history
+             — where this model spends most of its life — so a reading above
+             it is high FOR THIS MODEL, which is the only sense in which a
+             number between 0 and 1 can be high at all. */
+          readingStrip: r && readingPast ? readingPlace(r, readingPast, ar) : null,
           score: r ? fixed(r.score, 2) : '',
           scoreLabel: ar ? 'الضغط داخل البورصة، من 0 إلى 1' : 'Stress inside the EGX, from 0 to 1',
           scoreNote: r

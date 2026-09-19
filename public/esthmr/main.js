@@ -334,6 +334,13 @@ async function load(email) {
       slice(data.indices(), (idx) => ({ indexMembers: idx.list })),
       slice(data.arena ? data.arena() : Promise.resolve(null),
             (arena) => ({ arena: arena || undefined })),
+      // 42 KB, and the only document on the page that carries a disclosed
+      // stake with the filing behind it. It rode with the ownership screens'
+      // lazy load, which meant Home's "what changed today" could never draw
+      // the one card the share bar exists for — the disclosed holders of a
+      // company and the part nobody has filed. Eager, like the picks.
+      slice(data.sectorOwnership ? data.sectorOwnership() : Promise.resolve(null),
+            (sectorOwnership) => ({ sectorOwnership: sectorOwnership || undefined })),
       // The models' record, and what they said last night. The first is
       // public and the second is not; both are one document and neither is
       // worth delaying the exchange for, so they ride with the extras.

@@ -1109,3 +1109,30 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
   #app .sx-cell > b { width: auto; }
   #app .sx-table { padding: 16px; }
 }
+
+/* ── THE CRASH-WARNING READING, PLACED ───────────────────────────────────
+ * Three figures and a distribution. Deliberately not a dial: a needle in a
+ * red arc points, and a publisher who is not FRA-licensed may not point.
+ */
+#app .reading-place {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: var(--radius-island); padding: 20px; margin-bottom: 14px;
+  display: flex; flex-direction: column; gap: 16px; min-width: 0;
+}
+#app .rp-figures { display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: flex-start; }
+#app .rp-cell { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+#app .rp-label {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 11px; color: var(--faint); line-height: 1.5;
+}
+#app .rp-value {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 17px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums;
+}
+/* The reading itself is the one figure worth the size. */
+#app .rp-cell:first-child .rp-value { font-size: 32px; line-height: 1.05; letter-spacing: -.02em; }
+@media (max-width: 860px) {
+  #app .reading-place { padding: 16px; }
+  #app .rp-figures { gap: 14px 20px; }
+  #app .rp-cell:first-child .rp-value { font-size: 28px; }
+}
