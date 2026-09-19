@@ -191,7 +191,11 @@
 .skip-content:focus { transform:none; }
 #app .om-scr { min-width:0; }
 #app .om-scr > section, #app .om-scr > div[style*="background:var(--surface)"] { border-radius:var(--radius-island) !important; box-shadow:var(--sh) !important; }
-#app .om-scr h1 { font-size:clamp(28px,3.5vw,44px) !important; line-height:1.3 !important; }
+/* A screen title is a title, not a poster. The comp opens every screen the
+   same way — a dateline, then the name of the screen at 21px, then what the
+   screen is for — and the 44px setting fought it: the name of the section
+   outweighed every figure under it, on eleven screens. */
+#app .om-scr h1 { font-size:21px !important; line-height:1.3 !important; letter-spacing:-.01em !important; }
 #app .om-scr h2 { font-size:clamp(20px,2.2vw,28px); line-height:1.4 !important; }
 #app [dir="rtl"] .om-scr [style*="Bricolage Grotesque"] { font-family:var(--font-heading) !important; line-height:1.6 !important; letter-spacing:0 !important; }
 #app .om-scr > div:first-child { flex-wrap:wrap; }
@@ -1136,3 +1140,9 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
   #app .rp-figures { gap: 14px 20px; }
   #app .rp-cell:first-child .rp-value { font-size: 28px; }
 }
+
+/* Every screen opens the same way: when and how many, the name of the
+   screen, then what this screen is for. Three lines, in that order. */
+#app .screen-head { display: flex; flex-direction: column; gap: 0; padding: 6px 0 0; }
+#app .screen-head .card-dateline { margin-bottom: 6px; }
+#app .screen-head .card-lead { margin: 6px 0 0; max-width: 78ch; }
