@@ -1979,6 +1979,10 @@
     "meaning": "Record EU fuel prices elevate input and operating expenses across European logistics and manufacturing networks, altering cross-border transport tariffs for trade partners.",
     "meaning_ar": "يؤدي تسجيل أسعار الوقود في الاتحاد الأوروبي لمستويات قياسية إلى زيادة تكاليف المدخلات والتشغيل عبر شبكات الخدمات اللوجستية والتصنيع الأوروبية، مما يغير تعريفات النقل والشحن للشركاء التجاريين."
   },
+  "اسعار وقود الطايرات تقترب من اعلي مستوياتها منذ اندلاع حرب ايران": {
+    "meaning": "Jet fuel represents a major variable component of airline operational expenses, and rising fuel prices directly inflate direct operating costs across aviation and air cargo transportation fleets.",
+    "meaning_ar": "يمثل وقود الطائرات مكوناً رئيساً ضمن المصروفات التشغيلية لشركات الطيران، ويؤدي ارتفاع أسعاره إلى زيادة التكاليف التشغيلية المباشرة لأساطيل النقل الجوي والشحن."
+  },
   "اسهم الصين تجذب الباحثين عن بديل لرهانات الذكاء الاصطناعي المزدحمه": {
     "meaning": "Capital reallocates from concentrated positions in global artificial intelligence equities toward Chinese equity markets as part of cross-border portfolio rebalancing driven by relative valuation differentials.",
     "meaning_ar": "تتحول تدفقات رؤوس الأموال من المراكز المركزة في أسهم قطاع الذكاء الاصطناعي العالمية نحو الأسهم الصينية، ضمن آلية إعادة موازنة المحافظ الاستثمارية بناءً على الفروق في التقييمات السعرية بين الأسواق."
@@ -3126,6 +3130,10 @@
   "الرييس السيسي: اهميه الارتقاء بالتعاون البناء مع قبرص في المجالات التجاريه والاستثماريه": {
     "meaning": "Bilateral commercial cooperation agreements between Egypt and Cyprus establish institutional frameworks for cross-border trade flows, joint infrastructure coordination, and direct investments between Mediterranean markets.",
     "meaning_ar": "تؤسس اتفاقيات التعاون التجاري الثنائي بين مصر وقبرص أطراً مؤسسية لحركة التبادل التجاري عبر الحدود، وتنسيق مشروعات البنية التحتية المشتركة، والاستثمارات المباشرة بين أسواق منطقة شرق المتوسط."
+  },
+  "الرييس السيسي: ضروره جذب استثمارات في الحوسبه السحابيه والذكاء الاصطناعي": {
+    "meaning": "Attracting cloud computing and artificial intelligence investments directs capital expenditures toward digital infrastructure, establishing local data centers, power supply agreements, and enterprise connectivity frameworks across the telecommunications and technology sectors.",
+    "meaning_ar": "يوجّه جذب استثمارات الحوسبة السحابية والذكاء الاصطناعي النفقات الرأسمالية نحو البنية التحتية الرقمية، عبر إنشاء مراكز بيانات محلية وإبرام عقود لإمدادات الطاقة وربط شبكات الاتصالات في قطاع التكنولوجيا."
   },
   "الرييس السيسي: مصر حريصه علي تذليل تحديات تنفيذ المشروعات المشتركه مع روسيا": {
     "meaning": "Bilateral coordination focuses on addressing administrative, logistical, and funding procedures governing joint initiatives, primarily the Dabaa nuclear power plant and the Russian Industrial Zone in the Suez Canal Economic Zone.",
@@ -6544,6 +6552,10 @@
   "صندوق الثروه السياديه الافضل اداء في العالم يحذر من تراجع وشيك في سوق الاسهم الامريكيه": {
     "meaning": "Sovereign wealth funds manage multi-asset global portfolios, and public cautionary assessments from their managers reflect internal macroeconomic risk metrics, valuation benchmarks, and institutional asset allocation models concerning equity exposure.",
     "meaning_ar": "تدير صناديق الثروة السيادية محافظ استثمارية عالمية متعددة الأصول، وتستند تقييماتها الفنية المعلنة إلى مؤشرات المخاطر الاقتصادية الكلية، ومعايير تقييم الأسعار، ونماذج توزيع الأصول المؤسسية الخاصة بأسواق الأسهم."
+  },
+  "صندوق النقد يطالب لبنان بتحميل المساهمين الخساير قبل المودعين": {
+    "meaning": "This principle represents a standard bank resolution framework known as a 'bail-in', where accumulated losses are absorbed sequentially by writing down bank equity and shareholder capital before imposing any haircuts on customer deposits.",
+    "meaning_ar": "يمثل هذا الإجراء آلية إعادة هيكلة مصرفية تُعرف بالإنقاذ الداخلي (bail-in)، حيث يتم استيعاب الخسائر المتراكمة عبر شطب حقوق الملكية ورؤوس أموال المساهمين أولاً قبل تطبيق أي اقتطاع على ودائع العملاء."
   },
   "صندوق يبيع 224.8 الف سهم في فوري بقيمه تتجاوز 4.3 مليون جنيه": {
     "meaning": "An institutional fund executes an equity transaction offloading 224.8 thousand shares of Fawry via the Egyptian Exchange for over 4.3 million EGP, reallocating ownership to other market participants and adjusting the fund's asset exposure.",
