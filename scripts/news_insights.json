@@ -167,6 +167,10 @@
     "meaning": "The figures reflect the daily cargo throughput at Damietta Port, which operates as an exit node for outbound bulk and general freight within Egypt's maritime trade network.",
     "meaning_ar": "تعكس هذه الأرقام حركة التداول اليومي للبضائع في ميناء دمياط، والذي يمثل نقطة تفريغ وشحن رئيسية لتدفقات الصادرات العامة عبر شبكة التجارة البحرية المصرية."
   },
+  "33.1 الف طن صادرات البضايع العامه بميناء دمياط خلال 24 ساعه": {
+    "meaning": "This throughput figure reflects the daily general cargo export run-rate through Damietta Port, indicating active commercial freight turnover and utilization of maritime logistical infrastructure.",
+    "meaning_ar": "يعكس هذا الرقم معدل تداول صادرات البضائع العامة اليومي عبر ميناء دمياط، موضحاً مستوى حركة الشحن التجاري ومعدل استخدام البنية التحتية اللوجستية البحرية."
+  },
   "34 الف طن صادرات البضايع العامه بميناء الاسكندريه خلال 24 ساعه": {
     "meaning": "This daily operational throughput reflects current outbound general cargo handling capacity and logistics flow through the Port of Alexandria.",
     "meaning_ar": "يعكس حجم التداول اليومي هذا الطاقة التشغيلية الحالية لمناولة بضائع الصب العام وحركة التدفقات اللوجستية للصادرات عبر ميناء الإسكندرية."
@@ -178,6 +182,10 @@
   "397 مليون دولار مبيعات الاجانب في ادوات الدين الحكوميه": {
     "meaning": "Foreign portfolio outflows from sovereign debt instruments involve the liquidation of treasury bills or bonds, which converts local currency proceeds into foreign currency through the banking system.",
     "meaning_ar": "تتمثل تخارجات المحافظ الأجنبية من أدوات الدين السيادي في تسييل أذون أو سندات الخزانة، مما يترتب عليه تحويل الحصيلة النقدية من العملة المحلية إلى عملات أجنبية عبر القطاع المصرفي."
+  },
+  "4 بنوك تستحوذ علي 386 مليار جنيه من تداولات البورصه المصريه خلال اسبوع": {
+    "meaning": "This concentration indicates that market liquidity for the week is predominantly channeled through transactions involving the banking sector, particularly wholesale brokerage arms or debt and equity instruments of four primary financial institutions.",
+    "meaning_ar": "يعكس هذا التركز توجيه غالبية سيولة التداول الأسبوعية في السوق عبر أدوات وأسهم القطاع المصرفي، وتحديداً من خلال أربع مؤسسات مالية رئيسية عبر تعاملات الأسهم أو أدوات الدين."
   },
   "4 تحديات تواجه مراكز البيانات في الفضاء قبل طفره الذكاء الاصطناعي": {
     "meaning": "Operating orbital data centers for artificial intelligence workloads involves specific structural constraints, including high launch capital expenditures, in-orbit thermal management, radiation shielding requirements, and ground-to-space transmission bandwidth limitations.",
@@ -8669,6 +8677,10 @@
     "meaning": "This bilateral coordination integrates the Ministry of Agriculture's operational assets and logistics directly into the supply chain of the Food Industries Holding Company, centralizing state raw agricultural inputs for public food processing operations.",
     "meaning_ar": "يضع هذا التنسيق المشترك الإمكانيات التشغيلية واللوجستية لوزارة الزراعة ضمن سلاسل إمداد الشركة القابضة للصناعات الغذائية، مما يربط توريد المدخلات الزراعية الأولية المملوكة للدولة بعمليات التصنيع الغذائي الحكومية بصورة مباشرة."
   },
+  "وزير الزراعه: طفره غير مسبوقه في المشروعات القوميه لتحقيق الامن الغذايي ودعم الاقتصاد الوطني": {
+    "meaning": "National agricultural projects expand domestic cultivation acreage and allocate state capital toward local food production infrastructure and supply chains.",
+    "meaning_ar": "تتضمن المشروعات القومية الزراعية توسيع الرقعة المنزرعة محلياً وتوجيه استثمارات رأسمالية حكومية نحو البنية التحتية لإنتاج الغذاء وسلاسل الإمداد."
+  },
   "وزير الزراعه: لا توجد سوق سوداء للاسمده": {
     "meaning": "Fertilizer distribution operates through state-monitored channels and subsidized quota allocations, enforcing official pricing mechanisms across domestic agricultural networks.",
     "meaning_ar": "تعتمد منظومة تداول الأسمدة على قنوات التوريد الرسمية والحصص المدعومة المقررة، مع تطبيق التسعير الإلزامي عبر منافذ التوزيع والجمعيات الزراعية المعتمدة."
@@ -9364,6 +9376,10 @@
   "“ريمت” تطلق خدمه الايداع المباشر للحوالات الوارده الي الحسابات البنكيه والمحافظ": {
     "meaning": "The service integrates inward cross-border remittance processing directly into local commercial bank accounts and electronic mobile wallets, automating clearing and settlement between international transfer networks and domestic payment infrastructure.",
     "meaning_ar": "تربط هذه الخدمة معالجة الحوالات المالية الواردة من الخارج مباشرة بالحسابات المصرفية المحلية والمحافظ الإلكترونية، مما يتيح المقاصة والتسوية الآلية بين شبكات التحويل الدولية والبنية التحتية للمدفوعات المحلية."
+  },
+  "“زهراء المعادي”.. شراكه جديده تدفع النمو": {
+    "meaning": "The company enters into a partnership agreement that combines land assets with co-developer capital and operational capacity for real estate project execution.",
+    "meaning_ar": "تبرم الشركة اتفاقية شراكة تدمج الأصول العقارية مع رؤوس أموال وقدرات تشغيلية لمطورين مشاركين لتنفيذ المشروعات العقارية."
   },
   "“زيتا” للادويه تستهدف 3 مليارات جنيه مبيعات بنهايه 2026": {
     "meaning": "Setting a medium-term sales target establishes a corporate benchmark that ties operational capacity, distribution networks, and production volume to a defined revenue scale within the pharmaceutical sector.",
