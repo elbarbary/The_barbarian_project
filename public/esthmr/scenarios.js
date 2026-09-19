@@ -33,7 +33,7 @@ import { React as R } from './react-shim.js';
 import { finite, day, shortDay, cairoTime, nextRun, summaryOf } from './ai-visuals.js';
 import {
   divider, viewSwitch, pullNote, rankingTiles, rankingCard, returnsCards, recordCard, nightsCard,
-  top5VsMarketChart, rerankComparisonCard,
+  top5VsMarketChart, rerankComparisonCard, modelScoreboard,
 } from './scenario-visuals.js';
 import { modelsCard } from './ai-record.js';
 import { readingProblem, mixedSnapshot } from './lab-snapshot.js';
@@ -800,6 +800,11 @@ export function scenariosScreen(component, data, ar) {
                 isWaiting ? t('waiting', 'في الانتظار') : t('scored', 'مُقيَّم')),
             ]);
           }))) : null),
+    /* The comparison leads the screen, and states no verdict.
+       The owner's call, 19 September: show every model against the market and
+       let the reader draw the conclusion. Choosing a model to explore is what
+       follows it, not what the screen opens with. */
+    modelScoreboard(top5, horizon, ar, (id) => set({ scModel: id === 'rerank' ? 'kronos' : id, scGemini: id === 'rerank', scFrom: null })),
     statusStrip(record, ar),
     h('div', { class: 'aix-bench-grid' },
       h('div', { class: 'aix-results' },

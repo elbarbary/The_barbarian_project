@@ -769,3 +769,96 @@ export function rerankComparisonCard(ctx, ar) {
       t('Re-ranking changes positions only, and never touches saved forecast prices.',
         'إعادة الترتيب تغيّر المواضع، ولا تمسّ الأسعار المتوقّعة المحفوظة.')));
 }
+
+/* ── THE SCOREBOARD ──────────────────────────────────────────────────────────
+ *
+ * Every model with a record, against the market, on one scale.
+ *
+ * The owner's instruction for this screen was "show the comparison, let the
+ * reader draw the conclusion, no verdict". So there is no sentence here
+ * saying the models did or did not beat the market. There is a drawing in
+ * which that is visible, and the reader decides what it means.
+ *
+ * Each row is a dumbbell: a filled dot for what the model's five returned, a
+ * hollow one for the market over the same sessions, joined by a line. The
+ * market dot is drawn PER MODEL rather than as a single vertical rule,
+ * because each model is scored over its own set of sessions and its own
+ * benchmark differs slightly — one shared line would be a small lie that made
+ * the picture tidier.
+ *
+ * All rows share one horizontal scale, so the eye compares lengths and
+ * directions without reading a single number. Models that have not reached
+ * the minimum number of scored sessions are not plotted at all: a dot at zero
+ * would read as a result of zero rather than as an absence of one. They are
+ * counted underneath in words.
+ */
+export function modelScoreboard(top5, horizon, ar, onPick) {
+  const t = (en, arabic) => (ar ? arabic : en);
+  const min = top5?.minimumSessions || 5;
+  const rows = Object.entries(top5?.models || {}).map(([id, m]) => {
+    const hz = m && m.horizons ? m.horizons[horizon] : null;
+    return {
+      id,
+      label: (ar ? (m.labelAr || m.label) : m.label) || id,
+      group: (m && m.group) || 'baseline',
+      own: hz && finite(hz.meanReturn) ? hz.meanReturn : null,
+      market: hz && finite(hz.meanMarket) ? hz.meanMarket : null,
+      sessions: hz ? hz.sessions || 0 : 0,
+      ahead: hz ? hz.ahead || 0 : 0,
+    };
+  });
+  const scored = rows.filter((r) => r.own !== null && r.market !== null && r.sessions >= min);
+  const waiting = rows.length - scored.length;
+  if (!scored.length) return null;
+
+  const ORDER = { neural: 0, rerank: 1, baseline: 2 };
+  scored.sort((a, b) => (ORDER[a.group] ?? 3) - (ORDER[b.group] ?? 3) || b.own - a.own);
+
+  const values = scored.flatMap((r) => [r.own, r.market]);
+  const lo = Math.min(...values, 0);
+  const hi = Math.max(...values, 0);
+  const span = (hi - lo) || 1;
+  const pad = span * 0.08;
+  const at = (v) => ((v - (lo - pad)) / (span + pad * 2)) * 100;
+  const zero = at(0);
+
+  const row = (r) => {
+    const a = at(r.own), b = at(r.market);
+    const left = Math.min(a, b), width = Math.abs(a - b);
+    const better = r.own > r.market;
+    return h('button', {
+      key: r.id, type: 'button', class: 'sb-row',
+      onClick: onPick ? () => onPick(r.id) : undefined,
+      'aria-label': `${r.label}: ${percent(r.own)} ${t('against the market', 'مقابل السوق')} ${percent(r.market)}`,
+    },
+    h('span', { class: 'sb-name' }, r.label),
+    h('span', { class: 'sb-track' },
+      // The zero line, so a reader can see which side of nothing each sits on.
+      h('i', { class: 'sb-zero', style: { insetInlineStart: `${zero}%` } }),
+      h('i', { class: `sb-link ${better ? 'is-up' : 'is-down'}`,
+        style: { insetInlineStart: `${left}%`, width: `${width}%` } }),
+      h('i', { class: 'sb-market', style: { insetInlineStart: `${b}%` },
+        title: t('the market over the same sessions', 'السوق خلال الجلسات نفسها') }),
+      h('i', { class: `sb-own ${better ? 'is-up' : 'is-down'}`, style: { insetInlineStart: `${a}%` },
+        title: t('what this model’s five returned', 'ما حققته الشركات الخمس لهذا النموذج') })),
+    h('span', { class: 'sb-figure', dir: 'ltr' }, percent(r.own)),
+    h('span', { class: 'sb-versus', dir: 'ltr' }, percent(r.market)));
+  };
+
+  return h('section', { class: 'sb', 'aria-label': t('Every model against the market', 'كل نموذج مقابل السوق') },
+    h('header', { class: 'sb-head' },
+      h('h2', null, t('Every model against the market', 'كل نموذج مقابل السوق')),
+      h('p', { class: 'sb-lede' }, t(
+        'One row per model that has a record. The filled dot is what its five highest-ranked companies returned; the hollow one is the market over the same sessions.',
+        'صف لكل نموذج له سجل. النقطة الممتلئة ما حققته الشركات الخمس الأعلى ترتيباً عنده، والنقطة المفرغة السوق خلال الجلسات نفسها.'))),
+    h('div', { class: 'sb-legend' },
+      h('span', null, h('i', { class: 'sb-own is-up' }), t('the model’s five', 'الخمس المختارة')),
+      h('span', null, h('i', { class: 'sb-market' }), t('the market', 'السوق')),
+      h('span', null, h('i', { class: 'sb-zero-key' }), t('no change', 'بلا تغيّر'))),
+    h('div', { class: 'sb-rows' }, scored.map(row)),
+    h('p', { class: 'sb-note' }, t(
+      `Five companies over ${Math.max(...scored.map((r) => r.sessions))} sessions is a very small sample, and the sign of these numbers has changed from one week to the next.`
+        + (waiting ? ` ${waiting} more ${waiting === 1 ? 'model has' : 'models have'} not reached ${min} scored sessions on this window.` : ''),
+      `خمس شركات على مدى ${Math.max(...scored.map((r) => r.sessions))} جلسات عينة صغيرة جداً، وإشارة هذه الأرقام تغيّرت من أسبوع لآخر.`
+        + (waiting ? ` و${waiting} ${waiting === 1 ? 'نموذج آخر لم يصل' : 'نماذج أخرى لم تصل'} إلى ${min} جلسات مقيّمة على هذه النافذة.` : ''))));
+}
