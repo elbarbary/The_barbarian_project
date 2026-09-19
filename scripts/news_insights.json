@@ -1891,6 +1891,10 @@
     "meaning": "Poultry exchange price bulletins reflect the spot equilibrium rate for wholesale live birds, determined by farmgate production costs, feedstock availability, and daily trade volumes across commercial distribution channels.",
     "meaning_ar": "تعكس نشرات بورصة الدواجن السعر الفوري لتداول الطيور الحية بالجملة، والذي يتحدد بناءً على تكاليف الإنتاج من أرض المزرعة، ومدخلات الأعلاف، وأحجام التداول اليومية عبر قنوات التوزيع التجارية."
   },
+  "اسعار الفراخ في بورصه الدواجن اليوم السبت 19-9-2026": {
+    "meaning": "Poultry exchange price quotations reflect daily wholesale benchmark prices determined by spot market supply and demand dynamics across commercial farms and distribution channels.",
+    "meaning_ar": "تعكس أسعار بورصة الدواجن الأسعار الاسترشادية اليومية للبيع بالجملة، والتي تتحدد وفقاً لآليات العرض والطلب الفوري بين المزارع التجارية وقنوات التوزيع."
+  },
   "اسعار الفراخ في بورصه الدواجن اليوم السبت 5-9-2026": {
     "meaning": "The poultry exchange publishes daily spot wholesale prices, establishing the benchmark reference rate for trading live birds between commercial farms, distributors, and retail markets.",
     "meaning_ar": "تحدد بورصة الدواجن الأسعار اليومية الفورية لتداول الدواجن الحية بالجملة، مما يوفر السعر المرجعي المنظم للتعاملات بين المزارع والموزعين ومنافذ البيع بالتجزئة."
@@ -2226,6 +2230,10 @@
   "الاسهم الاوروبيه تغلق مستقره وسط ضغوط من ارتفاع النفط": {
     "meaning": "Rising crude oil prices elevate operational and transport input costs for general industrial sectors while simultaneously raising energy sector revenues, neutralizing broad equity index movements.",
     "meaning_ar": "يؤدي ارتفاع أسعار النفط الخام إلى زيادة تكاليف المدخلات التشغيلية والنقل للقطاعات الصناعية، بالتوازي مع رفع إيرادات شركات الطاقة، مما يحقق توازناً في حركة مؤشرات الأسهم العامة."
+  },
+  "الاسهم الاوروبيه تغلق منخفضه وتسجل خساير للاسبوع الثالث": {
+    "meaning": "A three-week decline in major European equity indices reflects sustained net capital outflows and broad-based valuation contractions across European listed companies.",
+    "meaning_ar": "يعكس تراجع المؤشرات الرئيسية للأسهم الأوروبية على مدار ثلاثة أسابيع تدفقات رأسمالية خارجة صافية ومستمرة، مع انكماش في القيمة السوقية للشركات المقيدة عبر مختلف القطاعات."
   },
   "الاسهم الاوروبيه تنهي تعاملات الاربعاء علي ارتفاع جماعي": {
     "meaning": "A collective rise in European equities reflects net buying activity across key benchmark indices during the trading session, reflecting cross-border risk appetite and asset valuations across major regional sectors.",
