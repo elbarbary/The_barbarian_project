@@ -10,6 +10,19 @@ import { pinBottomBar } from './navbar.js';
 
 const root = document.getElementById('app');
 const component = new Component({ accent: 'var(--accent)' });
+/* The page opens in its loading state, and it is set HERE — before the first
+ * `await` in this module, not after one.
+ *
+ * It used to be assigned on the line above `mount()`, which runs after the
+ * template fetch resolves. `whoami()` and `load()` race that fetch, and when
+ * the data won — a warm HTTP cache, a slow template, production rather than a
+ * local file server — `load()` had already finished and set `dataLoading`
+ * false, and this line raised it again with nothing left to lower it. The
+ * reader got "loading market data" forever, over a page whose data had
+ * already arrived: the ticker showed live prices above a permanent spinner.
+ *
+ * `load()` owns this flag from here on. Nothing after an await may set it. */
+component.state.dataLoading = true;
 Object.assign(component.state, readRoute(location.search));
 
 /* Whichever language the reader last chose.
@@ -489,7 +502,6 @@ document.getElementById('signout').onclick = async () => {
     return response.text();
   });
   const template = await readTemplate('./template').catch(() => readTemplate('./template.html'));
-  component.state.dataLoading = true;
   mount(template, root, component);
 
   // Choosing a month loads that month of the filed archive. The pills used to
