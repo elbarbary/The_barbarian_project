@@ -2267,6 +2267,10 @@
     "meaning": "Global equity prices reflect baseline adjustments as trading desks rebalance positions ahead of benchmark interest rate decisions by the European Central Bank and corporate earnings disclosures from major technology firms.",
     "meaning_ar": "تعكس أسعار الأسهم العالمية تعديلات في المراكز المالية للمتعاملين لإعادة موازنة المحافظ تزامناً مع قرارات أسعار الفائدة الأساسية للبنك المركزي الأوروبي وإفصاحات النتائج المالية لشركات التكنولوجيا الكبرى."
   },
+  "الاسهم العالميه تسجل اكبر تخارجات اسبوعيه في 9 اشهر": {
+    "meaning": "Large-scale weekly outflows from global equities reflect a net reallocation of institutional and retail capital away from equity funds toward cash reserves, sovereign bonds, or alternative asset classes.",
+    "meaning_ar": "تعكس التخارجات الأسبوعية القياسية من الأسهم العالمية إعادة توزيع صافية للسيولة الاستثمارية والمؤسسية بعيداً عن صناديق الأسهم ونقلها نحو الاحتياطيات النقدية أو أدوات الدين السيادية."
+  },
   "الاسهم القياديه تعيد البورصه الي اعتاب القمه التاريخيه مجددا": {
     "meaning": "Large-cap equities with high index weightings drive the main benchmark index upward through concentrated trading volume, bringing the index level near its historical high.",
     "meaning_ar": "تقود الأسهم ذات الوزن النسبي المرتفع المؤشر الرئيسي نحو الصعود عبر تركز أحجام التداول، مما يضع مستوى المؤشر قرب قمته التاريخية."
@@ -4359,6 +4363,10 @@
     "meaning": "A subsidiary of MNT-Halan submits a listing application to the Egyptian Exchange (EGX), initiating the formal regulatory review process to register its shares under local market listing and disclosure rules.",
     "meaning_ar": "تتقدم إحدى الشركات التابعة لـ«إم إن تى حالا» بطلب رسمي لقيد أسهمها في البورصة المصرية، لتبدأ بذلك إجراءات المراجعة التنظيمية استيفاءً لقواعد القيد والإفصاح المعمول بها في السوق."
   },
+  "تاسيس 42582 شركه اجنبيه في الصين باول 8 اشهر 2026": {
+    "meaning": "The registration of 42,582 foreign-invested enterprises expands direct foreign capital participation in China's domestic corporate sector and incorporates external operating entities into local industrial supply chains.",
+    "meaning_ar": "يؤدي تسجيل 42,582 شركة أجنبية إلى توسيع مشاركة رأس المال الأجنبي المباشر في قطاع الشركات المحلي بالصين ودمج كيانات تشغيلية خارجية ضمن سلاسل التوريد الصناعية المحلية."
+  },
   "تاسيس 5 الاف شركه اجنبيه في مصر خلال 6 اشهر من 2026": {
     "meaning": "Establishing foreign companies entails direct corporate registrations, capital deployment under local regulatory frameworks, and operational integration into the domestic business infrastructure.",
     "meaning_ar": "يتمثل تأسيس الشركات الأجنبية في قيد الكيانات المؤسسية وضخ رؤوس الأموال وفق الأطر التنظيمية المحلية، مع ربط أنشطتها التشغيلية بالسوق المحلية."
@@ -5187,6 +5195,10 @@
   "جيه بي مورجان يتوقع رفع بنك انجلترا للفايده في نوفمبر وفبراير": {
     "meaning": "Central bank policy rate increases raise borrowing costs on sterling-denominated credit and alter sovereign bond yields across maturity curves, impacting funding expenses for corporate debt issuers and modifying cross-border capital flows.",
     "meaning_ar": "يؤدي رفع أسعار الفائدة من قبل البنوك المركزية إلى زيادة تكلفة الاقتراض على الائتمان المقوم بالإسترليني وتغيير عوائد السندات السيادية عبر منحنى الآجال، مما يؤثر على أعباء تمويل ديون الشركات وحركة تدفقات رؤوس الأموال عبر الحدود."
+  },
+  "جيه بي مورجان يقر بصعوبه تقدير التداعيات الاقتصاديه للصراع الامريكي الايراني": {
+    "meaning": "Geopolitical conflicts introduce variable risk premiums across global energy markets and supply routes, which limits the reliability of baseline macroeconomic forecasting models for investment banks.",
+    "meaning_ar": "تفرض النزاعات الجيوسياسية علاوات مخاطر متغيرة على أسواق الطاقة العالمية ومسارات الإمداد، مما يحد من دقة نماذج التنبؤ الاقتصادي الكلي المعتمدة لدى بنوك الاستثمار."
   },
   "جيه بي مورجان يوسع اعمال الخدمات المصرفيه للشركات في اليونان": {
     "meaning": "JPMorgan establishes and broadens its local corporate banking infrastructure and product coverage in Greece, providing lending, cash management, and advisory services directly to domestic corporate entities and institutional clients.",
