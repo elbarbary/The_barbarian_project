@@ -6,7 +6,7 @@
         <div style="width:30px;height:30px;border-radius:11px;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:var(--shPill)">
           <span style="font-family:var(--font-heading);font-weight:700;font-size:16px;color:var(--onAccent);letter-spacing:-.04em">E</span>
         </div>
-        <div style="font-family:var(--font-heading);font-weight:700;font-size:22px;letter-spacing:-.04em">ESTHMR</div>
+        <div style="font-family:var(--font-heading);font-weight:600;font-size:17px;letter-spacing:-.015em">ESTHMR</div>
       </div>
       <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-top:9px">{{ L.publisher }}</div>
     </div>
@@ -106,6 +106,12 @@
            The models' record stays high on the page rather than being pushed
            to the bottom: it is the product's own work and the owner wants it
            read. It is second, not first. -->
+      <!-- §11.4: the market's own head. One index leads at the size its chart
+           needs, the others are tiles beside it, and the breadth bar sits
+           under them — the three of them one object, because they are three
+           readings of the same session. `display: contents` on a phone, so
+           the home flex order still owns its children. -->
+      <div class="market-head">
       <div class="om-idx" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-top:4px">
         <sc-for list="{{ indices }}" as="ix" hint-placeholder-count="3">
           <div onClick="{{ ix.go }}" aria-label="{{ ix.label }} {{ ix.value }} {{ ix.pct }}" style="border-radius:var(--radius-island);background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 22px 18px;min-width:0;overflow:hidden;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:var(--shLift)">
@@ -159,6 +165,8 @@
           <p class="breadth-note">{{ L.breadthNote }}</p>
         </section>
       </sc-if>
+      </div>
+
 
       <!-- Built in public/esthmr/ai-cards.js. Each card is a statement about a
            MODEL — how the five companies it ranked highest actually did against

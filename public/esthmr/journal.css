@@ -63,7 +63,16 @@
   background: transparent; text-align: start; cursor: pointer;
 }
 .journal-nav svg { width: 20px; height: 20px; flex: none; }
+/* §11.10: the current destination carries WEIGHT, a MARK and a GROUND —
+   not colour alone. Colour alone fails twice over: on a greyscale print, and
+   for the readers who cannot separate this teal from this ink. The mark is a
+   filled square that only the current item has, so what distinguishes it is
+   presence rather than hue. */
 .journal-nav button[aria-current="page"] { background: var(--sunk); color: var(--accent) !important; font-weight: 600 !important; }
+#app .journal-nav button[aria-current="page"]::after {
+  content: ''; width: 6px; height: 6px; border-radius: 2px;
+  background: currentColor; margin-inline-start: auto; flex: none;
+}
 .journal-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding-block: 0 24px; border-bottom: 1px solid var(--rule); }
 .journal-wordmark { font: 700 18px var(--font-heading); margin-inline-end: auto; }
 .journal-wordmark > span { display: block; font: 400 12px var(--font-reading); color: var(--faint); margin-top: 4px; }

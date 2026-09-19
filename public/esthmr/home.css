@@ -224,3 +224,39 @@
 #app .ct-more:hover { color: var(--ink) !important; }
 @media (max-width: 1100px) { #app .ct-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 720px) { #app .ct-grid { grid-template-columns: 1fr; } }
+
+/* ── THE MARKET'S OWN HEAD ───────────────────────────────────────────────
+ * §11.4. One index leads at the size its chart needs, the others are tiles
+ * beside it, and the breadth bar sits under them. Three readings of the same
+ * session laid out as one object, rather than a row of three equals and a
+ * separate strip — which is how a reader ends up comparing an index level to
+ * a company count and finding them the same size.
+ *
+ * Nothing is hidden to get there. The other indices keep their sparkline and
+ * every figure they had; what changes is the size of the number, because
+ * three identical 46px figures say the three are equally the point, and on
+ * this exchange they are not.
+ */
+@media (min-width: 900px) {
+  #app .market-head {
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 18px; align-items: start;
+  }
+  /* The row steps out of the way so its cards are the head's own items and
+     can be placed one by one. `!important` because the row carries its own
+     three-equal-columns grid as an inline style, and an inline style beats a
+     stylesheet: without it the cards stay inside a 3-column grid squeezed
+     into this grid's first column, and the lead index clips its own level. */
+  #app .market-head > .om-idx { display: contents !important; }
+  #app .market-head > .om-idx > div:first-child { grid-column: 1; grid-row: 1 / span 2; }
+  #app .market-head > .om-idx > div:nth-child(2) { grid-column: 2; grid-row: 1; }
+  #app .market-head > .om-idx > div:nth-child(3) { grid-column: 3; grid-row: 1; }
+  #app .market-head > .breadth-strip { grid-column: 2 / span 2; grid-row: 2; }
+  /* A tile is a level and its move, at the size those need. */
+  #app .market-head > .om-idx > div:not(:first-child) [style*="clamp(30px"] {
+    font-size: 24px !important; letter-spacing: -.02em !important;
+  }
+}
+/* A phone keeps the home column's own ordering, so the wrapper steps out of
+   the way entirely rather than nesting a second grid inside a flex column. */
+@media (max-width: 899px) { #app .market-head { display: contents; } }
