@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-09-18T09:59:08Z",
+ "builtAt": "2026-09-19T08:37:32Z",
  "dates": [
   "2026-08-20",
   "2026-08-23",
@@ -77,6 +77,12 @@
       "mean_difference": -0.175621,
       "t": -1.4222,
       "ahead": 1
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -126,6 +132,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -171,6 +183,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -222,6 +240,12 @@
       "mean_difference": -0.142184,
       "t": -2.8206,
       "ahead": 2
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -267,6 +291,12 @@
       "mean_difference": -0.165479,
       "t": -2.4314,
       "ahead": 2
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -306,6 +336,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -355,6 +391,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -398,6 +440,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -437,6 +485,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -494,6 +548,12 @@
       "mean_difference": -0.014706,
       "t": -0.4176,
       "ahead": 7
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -545,6 +605,12 @@
       "mean_difference": 0.054378,
       "t": 1.9742,
       "ahead": 7
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -590,6 +656,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -641,6 +713,12 @@
       "mean_difference": -0.116988,
       "t": -2.5793,
       "ahead": 3
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -686,6 +764,12 @@
       "mean_difference": -0.092145,
       "t": -1.6331,
       "ahead": 2
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -725,6 +809,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -776,6 +866,12 @@
       "mean_difference": -0.136077,
       "t": -2.7073,
       "ahead": 2
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -821,6 +917,12 @@
       "mean_difference": -0.16413,
       "t": -2.4612,
       "ahead": 2
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -860,6 +962,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -923,6 +1031,12 @@
       "mean_difference": -0.140948,
       "t": -1.9837,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -972,6 +1086,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -1017,6 +1137,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -1080,6 +1206,12 @@
       "mean_difference": -0.043352,
       "t": -0.4331,
       "ahead": 1
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -1129,6 +1261,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -1174,6 +1312,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -1237,6 +1381,12 @@
       "mean_difference": -0.062655,
       "t": -0.6756,
       "ahead": 1
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -1286,6 +1436,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -1331,6 +1487,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -1394,6 +1556,12 @@
       "mean_difference": -0.085551,
       "t": -1.0567,
       "ahead": 1
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -1443,6 +1611,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -1488,6 +1662,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -1551,6 +1731,12 @@
       "mean_difference": -0.076326,
       "t": -1.244,
       "ahead": 1
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -1600,6 +1786,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -1645,6 +1837,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -1708,6 +1906,12 @@
       "mean_difference": -0.060382,
       "t": -0.714,
       "ahead": 1
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -1757,6 +1961,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -1802,6 +2012,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -1865,6 +2081,12 @@
       "mean_difference": -0.097771,
       "t": -1.0635,
       "ahead": 1
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -1914,6 +2136,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -1959,6 +2187,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -2022,6 +2256,12 @@
       "mean_difference": -0.043151,
       "t": -0.5198,
       "ahead": 2
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -2071,6 +2311,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -2116,6 +2362,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -2179,6 +2431,12 @@
       "mean_difference": -0.059228,
       "t": -0.6623,
       "ahead": 1
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -2228,6 +2486,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -2273,6 +2537,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -2336,6 +2606,12 @@
       "mean_difference": -0.076062,
       "t": -0.7889,
       "ahead": 1
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -2385,6 +2661,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -2430,6 +2712,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -2493,6 +2781,12 @@
       "mean_difference": -0.064014,
       "t": -0.707,
       "ahead": 1
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -2542,6 +2836,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -2587,6 +2887,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -2650,6 +2956,12 @@
       "mean_difference": -0.076386,
       "t": -0.5676,
       "ahead": 1
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -2699,6 +3011,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -2744,6 +3062,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -2807,6 +3131,12 @@
       "mean_difference": -0.082649,
       "t": -1.0232,
       "ahead": 1
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -2856,6 +3186,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -2901,6 +3237,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -2964,6 +3306,12 @@
       "mean_difference": -0.068724,
       "t": -0.8402,
       "ahead": 1
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -3013,6 +3361,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -3058,6 +3412,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -3121,6 +3481,12 @@
       "mean_difference": -0.064791,
       "t": -0.7535,
       "ahead": 1
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -3170,6 +3536,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -3215,6 +3587,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -3278,6 +3656,12 @@
       "mean_difference": -0.08226,
       "t": -0.9201,
       "ahead": 1
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -3327,6 +3711,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -3372,6 +3762,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -3423,6 +3819,12 @@
       "mean_difference": -0.017316,
       "t": -0.5751,
       "ahead": 3
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -3468,6 +3870,12 @@
       "mean_difference": -0.002787,
       "t": -0.0526,
       "ahead": 6
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -3507,6 +3915,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -3558,6 +3972,12 @@
       "mean_difference": 0.017316,
       "t": 0.5751,
       "ahead": 8
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -3603,6 +4023,12 @@
       "mean_difference": 0.002787,
       "t": 0.0526,
       "ahead": 3
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -3642,6 +4068,12 @@
       "ahead": 0
      },
      "reversal1": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -3697,6 +4129,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -3746,6 +4184,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -3791,6 +4235,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -3848,6 +4298,12 @@
       "mean_difference": -0.072485,
       "t": -0.8414,
       "ahead": 2
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -3897,6 +4353,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -3942,6 +4404,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,
@@ -3997,6 +4465,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -4046,6 +4520,12 @@
       "mean_difference": null,
       "t": null,
       "ahead": 0
+     },
+     "reversal90": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
      }
     }
    },
@@ -4091,6 +4571,12 @@
       "ahead": 0
      },
      "reversal5": {
+      "dates": 0,
+      "mean_difference": null,
+      "t": null,
+      "ahead": 0
+     },
+     "reversal90": {
       "dates": 0,
       "mean_difference": null,
       "t": null,

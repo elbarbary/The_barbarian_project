@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "builtAt": "2026-09-18T12:29:54Z",
+ "builtAt": "2026-09-19T08:37:40Z",
  "topCount": 5,
  "minimumSessions": 5,
  "horizons": [
@@ -2046,6 +2046,42 @@
        "sessionsClosed": 0
       }
      ]
+    }
+   }
+  },
+  "reversal90": {
+   "label": "Reversion to the 90-session average",
+   "labelAr": "الارتداد إلى متوسط 90 جلسة",
+   "group": "baseline",
+   "nights": 0,
+   "distinguishes": false,
+   "horizons": {
+    "1": {
+     "sessions": 0,
+     "meanReturn": null,
+     "meanMarket": null,
+     "meanAdvantage": null,
+     "ahead": 0,
+     "byDate": [],
+     "waiting": []
+    },
+    "5": {
+     "sessions": 0,
+     "meanReturn": null,
+     "meanMarket": null,
+     "meanAdvantage": null,
+     "ahead": 0,
+     "byDate": [],
+     "waiting": []
+    },
+    "20": {
+     "sessions": 0,
+     "meanReturn": null,
+     "meanMarket": null,
+     "meanAdvantage": null,
+     "ahead": 0,
+     "byDate": [],
+     "waiting": []
     }
    }
   },
@@ -4425,5 +4461,5 @@
    ]
   }
  },
- "publicationId": "fbe92d6415d15cf2c65dd4908b307327f7037205840382a69961a0733940b63c"
+ "publicationId": "9fd63e141d863108488c7783ed0ddc070341f4c899f1113f095baf6b5b33277a"
 }
