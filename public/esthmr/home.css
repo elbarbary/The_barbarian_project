@@ -240,7 +240,12 @@
 @media (min-width: 900px) {
   #app .market-head {
     display: grid; grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 18px; align-items: start;
+    gap: 18px;
+    /* `start` left the lead card at its content height, so the chart under it
+       had nothing to grow into: `flex: 1` resolved to its own min-height and
+       the card ended 150px shorter than the two rows it spans. Stretch is what
+       makes "the chart reaches the bottom" true. */
+    align-items: stretch;
   }
   /* The row steps out of the way so its cards are the head's own items and
      can be placed one by one. `!important` because the row carries its own
@@ -259,10 +264,17 @@
      itself, and an inline style beats a stylesheet. */
   #app .market-head > .om-idx > div:first-child { display: flex; flex-direction: column; }
   #app .market-head > .om-idx > div:first-child > .idx-chart {
-    flex: 1; min-height: 132px; display: flex; align-items: stretch;
+    /* A block, not a flex row. As a flex container the svg sized itself from
+       its own viewBox aspect ratio — 232px wide over a 100×28 box is 65px —
+       and neither the inline height nor a stretched cross-axis reached it.
+       A block parent with a definite height gives `height: 100%` something to
+       resolve against. */
+    flex: 1 1 auto; min-height: 150px; display: block;
   }
   #app .market-head > .om-idx > div:first-child > .idx-chart > svg,
-  #app .market-head > .om-idx > div:first-child > .idx-chart > div { height: 100% !important; }
+  #app .market-head > .om-idx > div:first-child > .idx-chart > div {
+    height: 100% !important; width: 100% !important; display: block;
+  }
   #app .market-head > .om-idx > div:nth-child(2) { grid-column: 2; grid-row: 1; }
   #app .market-head > .om-idx > div:nth-child(3) { grid-column: 3; grid-row: 1; }
   #app .market-head > .breadth-strip { grid-column: 2 / span 2; grid-row: 2; }
@@ -437,3 +449,11 @@
 #app .hw-mark > i {
   flex: 0 0 6px; height: 6px; border-radius: 999px; background: var(--accent);
 }
+
+/* The evidence cards size to what they hold.
+ * Grid items stretch by default, so two cards in a row took the height of the
+ * taller and the shorter one ended in dead space under its own limit line —
+ * a card with a picture 104px tall stretched to 476px. The ownership card is
+ * now three share bars and is legitimately the tallest of the three; that is
+ * a reason for the others to stop growing, not to grow with it. */
+#app .ct-grid { align-items: start; }

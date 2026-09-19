@@ -988,3 +988,44 @@ body[data-signed="no"] .om-main { padding-top: 62px !important; }
   body[data-signed="no"] .account #who,
   body[data-signed="no"] .account #story-btn { display: none !important; }
 }
+
+/* The tape and the bar under it line up with the same column.
+ *
+ * The tape ran the full window while the toolbar under it stopped at the
+ * rail — 1024px against 746px at desk width — so the two bars across the top
+ * of every page had different right edges and the header looked broken before
+ * a reader had read a word of it. The rail is a fixed 278px column; the tape
+ * takes the same inset the main column does, and the two ends meet.
+ * Below 900px the rail is not a column and the tape is full width again. */
+@media (min-width: 900px) {
+  .ticker-tape { margin-inline-start: 278px; width: auto; }
+}
+
+/* The account controls are an overflow at EVERY width, not only on a phone.
+ *
+ * They were a fixed strip pinned under the tape, which is exactly where the
+ * toolbar is: measured at desk width the strip sat at y 54–98 and the toolbar
+ * at 38–107, so the reader's email and sign-out were printed ON TOP of the
+ * brand, the search box and the account button. The §4 header is brand,
+ * search, account — and the account button opens the rest, on a phone and on
+ * a desktop alike.
+ *
+ * `#signin` stays out of this: a signed-out visitor has one thing to do and
+ * it may not go behind a menu. */
+@media (min-width: 701px) {
+  body[data-signed="yes"] .account { display: none !important; }
+  body[data-signed="yes"][data-account-open] .account {
+    display: flex !important;
+    position: fixed !important;
+    top: calc(var(--head-h, 96px) + 8px) !important;
+    inset-inline-end: 18px !important; inset-inline-start: auto !important;
+    flex-direction: column; align-items: stretch; gap: 8px;
+    min-width: 240px; padding: 12px;
+    border-radius: var(--radius-island);
+    background: var(--surface); border: 1px solid var(--edgeIn);
+    box-shadow: var(--shLift); z-index: 80;
+  }
+  body[data-signed="yes"][data-account-open] .account #who { max-width: none; }
+  body[data-signed="yes"][data-account-open] .account button,
+  body[data-signed="yes"][data-account-open] .account #who { justify-content: center; width: 100%; }
+}

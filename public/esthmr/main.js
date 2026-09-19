@@ -592,7 +592,12 @@ document.getElementById('signout').onclick = async () => {
    */
   const seriesAsked = new Set();
   const loadWatchSeries = () => {
-    if (!reader || component.state.dataLoading || component.state.screen !== 'watchlist' || component.data().demo) return;
+    /* Home carries the same followed companies as a strip, with the same line
+       under each. This gate named one screen, so the strip on Home drew every
+       card with an empty 32px box where its line should be — the series were
+       never asked for. Both screens, one request per ticker per load. */
+    const wants = component.state.screen === 'watchlist' || component.state.screen === 'home';
+    if (!reader || component.state.dataLoading || !wants || component.data().demo) return;
     for (const ticker of (component._watch || []).slice(0, 30)) {
       if (seriesAsked.has(ticker)) continue;
       seriesAsked.add(ticker);
