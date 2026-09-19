@@ -2427,6 +2427,10 @@
     "meaning": "Divergence across market indices reflects split trading dynamics, where capital flows into large-cap constituents of the main benchmark while small and mid-cap equities move inversely, or vice versa, based on differing liquidity allocation across segments.",
     "meaning_ar": "يعكس تباين المؤشرات تفاوت اتجاهات السيولة داخل السوق، حيث تتجه التدفقات النقدية نحو أسهم المؤشر الرئيسي في حين تتحرك أسهم الشركات الصغيرة والمتوسطة في اتجاه معاكس، أو العكس، وفقاً لنمط توزيع السيولة بين القطاعات المختلفة."
   },
+  "البورصه المصريه تخسر 0.26% من راسمالها السوقي خلال اسبوع": {
+    "meaning": "A 0.26% decline in total market capitalization reflects a net reduction in the aggregate market valuation of listed equities, derived directly from the closing prices of individual shares over the weekly trading sessions.",
+    "meaning_ar": "يعكس تراجع رأس المال السوقي بنسبة 0.26% انخفاضاً في القيمة الإجمالية للشركات المقيدة في البورصة، محسوباً وفقاً لأسعار إغلاق الأسهم بنهاية جلسات التداول الأسبوعية."
+  },
   "البورصه المصريه ترتفع جماعيا في مستهل تعاملات الاثنين": {
     "meaning": "The headline indicates an opening market condition where aggregate buying volume exceeds selling volume across the main and secondary benchmark indices (EGX30, EGX70, EGX100), resulting in immediate upward price adjustments across listed equities.",
     "meaning_ar": "يشير العنوان إلى حالة افتتاحية في السوق تفوق فيها أحجام طلبات الشراء عروض البيع عبر المؤشرات الرئيسية والثانوية (EGX30 وEGX70 وEGX100)، مما يؤدي إلى تحركات سعرية فورية نحو الارتفاع في معظم الأسهم المدرجة."
@@ -6841,9 +6845,17 @@
     "meaning": "Government commodity price reduction initiatives operate through coordinated arrangements between state authorities, producers, and retail networks to apply reduced pricing margins on essential consumer goods alongside logistical and customs clearance facilitation.",
     "meaning_ar": "تعمل المبادرات الحكومية لخفض الأسعار عبر آليات تنسيقية بين الجهات التنظيمية والمنتجين وشبكات التجزئة لتطبيق هوامش تسعير مخفضة على السلع الأساسية بالتزامن مع تيسيرات في سلاسل الإمداد والإفراج الجمركي."
   },
+  "غدا.. بدء التقديم علي 10 الاف وحده سكنيه بنظام الايجار المنتهي بالتملك": {
+    "meaning": "The rent-to-own structure functions as an asset-financing mechanism where recurring lease payments allocate a portion toward equity acquisition, converting real estate inventory into long-term receivables for the issuing entity.",
+    "meaning_ar": "يعمل نظام الإيجار المنتهي بالتملك كآلية تمويل أصول تُخصص فيها دفعات الإيجار الدورية جزءاً لسداد القيمة الرأسمالية، مما يحول المخزون العقاري إلى مستحقات مالية طويلة الأجل للجهة المطورة."
+  },
   "غدا.. بدء صرف معاش تكافل وكرامه بقيمه تتجاوز 4 مليارات جنيه": {
     "meaning": "The disbursement of over EGP 4 billion in cash subsidies directly injects government social protection funds into the retail and consumer goods sectors through beneficiary spending on essential commodities.",
     "meaning_ar": "يضخ صرف المساعدات النقدية المشروطة التي تتجاوز قيمتها 4 مليارات جنيه مخصصات الحماية الاجتماعية مباشرة في قطاعي التجزئة والسلع الاستهلاكية عبر إنفاق المستفيدين على الاحتياجات الأساسية."
+  },
+  "غدا.. فتح باب التقدم ل25 الف وحده سكنيه جديده بنظامي الايجار والايجار المنتهي بالتملك": {
+    "meaning": "The program introduces 25,000 state-backed housing units to the market via fixed-term rental and rent-to-own contracts, functioning as structured public social housing allocations with defined operational disbursement phases.",
+    "meaning_ar": "يطرح البرنامج 25 ألف وحدة سكنية حكومية في السوق عبر عقود إيجار محددة المدة وإيجار منتهٍ بالتملك، كآلية للتخصيص المنظم للإسكان الاجتماعي بموجب شروط تعاقدية محددة."
   },
   "فاركو للادويه تستثمر اكثر من مليار جنيه خلال 2026 لانشاء خطوط انتاج جديده ورفع كفاءه الحاليه": {
     "meaning": "This transaction represents capital expenditure allocation toward manufacturing infrastructure, expanding operational capacity through new production lines and upgrading existing facilities.",
