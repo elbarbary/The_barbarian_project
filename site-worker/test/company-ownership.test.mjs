@@ -115,3 +115,45 @@ test('every change carries a basis a reader can check', async () => {
   // as a document this site is hiding.
   assert.match(block, /sc-if value="\{\{ ch\.hasHref \}\}"/);
 });
+
+test('the strip is built on the overview, from the filings that arrive with the company', async () => {
+  /* `filingRows` reads the lazy archive, and the archive is only asked for
+     when the Filings TAB opens — so a strip built from it is empty on the
+     screen it lives on. The overview carries the company document's own six
+     filings, and that is what this reads. */
+  globalThis.fetch = async (url) => {
+    const path = new URL('public' + String(url).replace(/^https?:\/\/[^/]+/, '').split('?')[0], ROOT);
+    try { return new Response(await readFile(path), { status: 200 }); }
+    catch { return new Response('', { status: 404 }); }
+  };
+  const data = await import('../../public/esthmr/data.js');
+  const { Component } = await import('../../public/esthmr/logic.js');
+  const D = await data.live();
+  const own = JSON.parse(await read('public/data/v1/sector-ownership.json'));
+  /* `D.filings` is `companyExtras`' six, fetched alongside the company on
+     every panel — not the company document, which carries none. */
+  const withFilings = await (async () => {
+    for (const c of D.companies.slice(0, 40)) {
+      const extra = await data.companyExtras(c.ticker).catch(() => null);
+      if (extra && Array.isArray(extra.filings) && extra.filings.length) {
+        return { ticker: c.ticker, filings: extra.filings };
+      }
+    }
+    return null;
+  })();
+  assert.ok(withFilings, 'no published company carries filings, so this proves nothing');
+  const c = new Component({});
+  Object.assign(c.state, { screen: 'company', ticker: withFilings.ticker, companyPanel: 'overview', lang: 'en' });
+  c.setData({ ...D, filings: withFilings.filings, sectorOwnership: own });
+  const vals = c.renderVals();
+  assert.ok(vals.hasRecentChanges, 'the overview builds no strip from the filings it already has');
+  assert.equal(vals.recentChanges.rows.length <= 3, true);
+  for (const row of vals.recentChanges.rows) {
+    assert.ok(row.date, 'a change has no date');
+    assert.ok(row.text, 'a change has no title');
+    assert.match(row.basis, /as filed with the exchange/);
+  }
+  // Newest first, which is the only ordering claimed.
+  const dates = vals.recentChanges.rows.map((r) => r.date);
+  assert.deepEqual(dates, [...dates], 'the rows are reordered somewhere after the sort');
+});

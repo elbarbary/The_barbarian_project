@@ -3629,7 +3629,12 @@ export class Component extends Base {
      * about what it means: a basis a reader can check, not a reading.
      */
     const recentChanges = (() => {
-      const rows = filingRows
+      /* `filingRows` is empty on the overview: it reads the lazy archive, or
+         the company document's filings only once the Filings tab has asked
+         for them. This strip sits on the overview, so it reads the company's
+         own filing list directly — the one that arrives with the company. */
+      const source = (archiveRows && archiveRows.length) ? archiveRows : (D.filings || []);
+      const rows = source
         .filter((f) => f && f.date && (f.title || f.titleAr))
         .slice()
         .sort((a2, b2) => String(b2.date).localeCompare(String(a2.date)))
