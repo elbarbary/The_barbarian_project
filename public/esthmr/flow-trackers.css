@@ -1113,3 +1113,57 @@ button.om-holder-row:hover span { color: var(--accent); }
   box-shadow: var(--shPill);
 }
 .ft-detail .ft-detail-tab:hover { color: var(--ink); }
+
+/* Turn 6, blocks 16/17/28: sector pulse, ownership lens, market liquidity.
+ *
+ * Three cards where there were two portals. The portals were each one
+ * card-sized <button>, which made every row inside unreachable on its own and
+ * put a button inside a button. These are articles with one small link out,
+ * so the ticker in an ownership row can be its own control. */
+#app .ft-cards {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px; align-items: start;
+}
+#app .ft-card {
+  display: flex; flex-direction: column; min-width: 0;
+  padding: 20px 22px 18px; border-radius: var(--radius-island);
+  background: var(--surface); border: 1px solid var(--edgeIn); box-shadow: var(--sh);
+}
+#app .ft-card-dateline {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px; margin: 0 0 10px;
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: 11.5px; color: var(--faint);
+}
+#app .ft-card-open {
+  flex: none; background: none; border: 0; padding: 0; cursor: pointer;
+  color: var(--accent); font: inherit; white-space: nowrap;
+}
+#app .ft-card-open:hover { text-decoration: underline; }
+#app .ft-card-title { margin: 0; font: 600 16.5px/1.45 var(--font-heading); }
+#app .ft-card-lede { margin: 6px 0 14px; font-size: 14px; line-height: 1.55; color: var(--t2); }
+#app .ft-card-rows { display: flex; flex-direction: column; gap: 2px; }
+#app .ft-card-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: baseline; gap: 10px; padding: 7px 0;
+  border-top: 1px solid var(--edgeIn); font-size: 13px;
+}
+#app .ft-card-row:first-child { border-top: 0; }
+#app .ft-card-row-wide { grid-template-columns: auto minmax(0, 1fr) auto auto; }
+#app .ft-row-name, #app .ft-row-who {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--t2);
+}
+#app .ft-row-val, #app .ft-row-ret, #app .ft-row-when, #app .ft-row-stake {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;
+}
+#app .ft-row-when { color: var(--faint); font-size: 11px; }
+#app .ft-row-code {
+  background: none; border: 0; padding: 0; cursor: pointer; color: var(--ink);
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600;
+  letter-spacing: .04em;
+}
+#app .ft-row-code:hover { text-decoration: underline; }
+#app .ft-card-limit {
+  margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--rule);
+  font-size: 12px; line-height: 1.6; color: var(--faint);
+}

@@ -53,13 +53,49 @@ test('published trackers render every company selection and Arabic without inval
     assert.doesNotMatch(text(c.renderVals().flowViews.screen),/NaN|undefined|Infinity/);
   }
 });
-test('home entry cards navigate and do not require the large history file',()=>{
+test('home cards navigate and do not require the large history file',()=>{
+  /* The point of this test is the SECOND clause: Home draws these from
+     `flow-preview.json`, never from the full history document. What changed is
+     that each card now needs its own rows — turn 6 gives them separate
+     datelines and figures — so the fixture supplies the little each one reads,
+     and the card with nothing to show is asserted absent below. */
   const c=fixture({screen:'home'});
-  const preview={schemaVersion:1,sectors:[],eventCount:353};
+  const preview={schemaVersion:1,eventCount:353,asOf:'2026-09-17',
+    sectors:[{id:'Banks',name:'Banks',nameAr:'بنوك',sizeWeightedReturn:1.2,
+      history:[{date:'2026-09-17',value:1e9,upValue:6e8,downValue:4e8}]}],
+    topEvents:[{id:'e1',ticker:'COMI',date:'2026-09-16',referencePercent:0.31,
+      relationshipLabel:'Insider / Board',relationshipLabelAr:'مجلس إدارة / داخلي'}]};
   c.setData({demo:false,companies:[],flowPreview:preview});
-  const cards=all(flowTrackers(c,c.data(),false).home,'button');
-  cards[0].events.click();assert.equal(c.state.screen,'liquidity');
-  cards[1].events.click();assert.equal(c.state.screen,'ownership');
+  const home=flowTrackers(c,c.data(),false).home;
+  const open=all(home,'button').filter(n=>String(n.attrs?.class||n.attrs?.className||'').includes('ft-card-open'));
+  assert.equal(open.length,3,'a card lost its way out');
+  open[0].events.click();assert.equal(c.state.screen,'liquidity');
+  open[1].events.click();assert.equal(c.state.screen,'ownership');
+});
+
+test('a card with nothing published is absent, not an empty frame',()=>{
+  /* The portals this replaced rendered their chrome whatever the document
+     held, so a reader could meet a headed, ruled card with no rows in it. */
+  const c=fixture({screen:'home'});
+  c.setData({demo:false,companies:[],flowPreview:{schemaVersion:1,sectors:[],topEvents:[]}});
+  assert.equal(flowTrackers(c,c.data(),false).home,null);
+});
+
+test('turn 6 gives the three their own cards, and the liquidity limit survives',()=>{
+  const c=fixture({screen:'home'});
+  c.setData({demo:false,companies:[],flowPreview:{schemaVersion:1,asOf:'2026-09-17',
+    sectors:[{id:'Banks',name:'Banks',nameAr:'بنوك',sizeWeightedReturn:1.2,
+      history:[{date:'2026-09-17',value:1e9,upValue:6e8,downValue:4e8}]}],
+    topEvents:[{id:'e1',ticker:'COMI',date:'2026-09-16',referencePercent:0.31,
+      relationshipLabel:'Insider / Board'}]}});
+  const home=flowTrackers(c,c.data(),false).home;
+  const titles=all(home,'h2').map(n=>text(n).trim());
+  assert.deepEqual(titles,['Sector pulse','Ownership lens','Market liquidity'],
+    `the three were folded together again: ${titles.join(', ')}`);
+  /* The sentence that stops traded value in rising shares being read as money
+     entering the market. Every executed trade has both sides. */
+  assert.match(text(home),/NOT money entering or leaving/);
+  assert.match(text(home),/every executed trade has a buyer and a seller/);
 });
 test('range, company and party controls update independent state',()=>{
   const c=fixture();let v=flowTrackers(c,c.data(),false);

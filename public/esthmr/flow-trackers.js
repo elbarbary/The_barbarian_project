@@ -1973,117 +1973,102 @@ export function flowTrackers(component, data, ar) {
   const ready = d?.schemaVersion === 1;
   const preview = ready ? d : data.flowPreview;
   const sectors = preview?.sectors || [];
+  /* The session these figures describe, taken from the document rather than
+     from the clock: the preview is built after the close and read all day. */
+  const asOf = preview?.asOf || data.marketDate || '';
   const titleOf = s => ar ? (s.nameAr || s.name) : s.name;
   const topSectors = [...sectors].sort((a, b) => (b.history?.at(-1)?.value || 0) - (a.history?.at(-1)?.value || 0)).slice(0, 5);
   const totalFlow = topSectors.reduce((s, x) => s + (x.history?.at(-1)?.value || 0), 0);
   const topEvents = preview?.topEvents || (d?.events ? d.events.filter(r => finite(r.referencePercent) || finite(r.currentMarkedValue)).slice(0, 8) : []);
   const topOwnershipLinks = preview?.topOwnershipLinks || (d?.ownershipGraph?.links || []);
 
-  const home = h('section', { className: 'ft-portals', 'aria-label': t('Follow the money and ownership', 'تتبّع التداول والملكية') },
-    // 1. Sector Liquidity Portal Button (Double-Bezel)
-    h('button', {
-      type: 'button',
-      className: 'ft-portal ft-portal-sector',
-      onClick: () => go('liquidity'),
-      'aria-label': t('Explore sector liquidity', 'استكشف سيولة القطاعات')
-    },
-      h('div', { className: 'ft-portal-shell' },
-        h('div', { className: 'ft-portal-core' },
-          h('div', { className: 'ft-portal-header' },
-            h('div', { className: 'ft-eyebrow-line' },
-              h('span', { className: 'ft-eyebrow' }, t('SECTOR PULSE & LIQUIDITY', 'نبض وسيولة القطاعات')),
-              h('span', { className: 'ft-pulse-badge' }, h('i', { className: 'ft-pulse-dot', 'aria-hidden': 'true' }), t('FLOW RADAR', 'رادار السيولة'))
-            ),
-            h('h2', null, sectorTitle),
-            h('p', null, t('Where activity meets market size · Advancing vs declining capital.', 'حجم التداول بجوار وزن القطاع · رأس المال الصاعد مقابل الهابط.'))
-          ),
-          h('div', { className: 'ft-portal-visual' },
-            renderHomeSectorConstellation(sectors, ar, t),
-            topSectors.length ? h('div', { className: 'ft-preview-grid' },
-              topSectors.slice(0, 3).map(s => {
-                const lat = s.history?.at(-1) || {};
-                return h('div', { key: s.id, className: 'ft-preview-item' },
-                  h('div', { className: 'ft-preview-info' },
-                    h('span', { className: 'ft-preview-name' }, titleOf(s)),
-                    h('b', { className: 'ft-preview-val', dir: 'ltr' }, compact(lat.value) + ' EGP')
-                  ),
-                  h('div', { className: 'ft-preview-row-center' },
-                    band(s, lat),
-                    h('strong', { className: 'ft-preview-badge', dir: 'ltr', style: { color: tone(lat.change) } }, signed(lat.change))
-                  )
-                );
-              })
-            ) : h('div', { className: 'ft-empty-mini' }, t('Sector size · trading value · price movement', 'حجم القطاع · قيمة التداول · حركة السعر'))
-          ),
-          h('div', { className: 'ft-portal-meta' },
-            h('span', null, t('Size in rising / falling stocks · ', 'الحجم في الأسهم الصاعدة / الهابطة · ') + (preview?.asOf || '')),
-            totalFlow > 0 ? h('span', { className: 'ft-market-turnover', dir: 'ltr' }, t('Top flow: ', 'إجمالي النشط: ') + compact(totalFlow) + ' EGP') : null
-          ),
-          h('div', { className: 'ft-portal-foot' },
-            h('span', null, t('Explore sector liquidity', 'استكشف سيولة القطاعات')),
-            h('span', { className: 'ft-arrow-pill', 'aria-hidden': 'true' }, '↗')
-          )
-        )
-      )
-    ),
-    // 2. Ownership Lens Portal Button (Double-Bezel)
-    h('button', {
-      type: 'button',
-      className: 'ft-portal ft-portal-owner',
-      onClick: () => go('ownership'),
-      'aria-label': t('See stake & value context', 'شاهد سياق الحصة والقيمة')
-    },
-      h('div', { className: 'ft-portal-shell' },
-        h('div', { className: 'ft-portal-core' },
-          h('div', { className: 'ft-portal-header' },
-            h('div', { className: 'ft-eyebrow-line' },
-              h('span', { className: 'ft-eyebrow' }, t('INSIDER DEALING & STAKES', 'تعاملات الداخليين والحصص')),
-              h('span', { className: 'ft-tag-pill' }, t('% Stake > Share Count', 'النسبة أهم من عدد الأسهم'))
-            ),
-            h('h2', null, ownerTitle),
-            h('p', null, t('Tracking when insiders change their percentage in companies over time.', 'تتبّع تغير حصص الداخليين في الشركات عبر الزمن.'))
-          ),
-          h('div', { className: 'ft-portal-visual ft-owner-stream' },
-            renderHomeOwnershipWeb(topOwnershipLinks, ar, t),
-            topEvents.length ? h('div', { className: 'ft-stake-feed' },
-              topEvents.slice(0, 2).map(ev => {
-                const dir = direction(ev.action);
-                const pct = ev.referencePercent;
-                const val = ev.currentMarkedValue;
-                const rel = ar ? (ev.relationshipLabelAr || ev.relationship) : (ev.relationshipLabel || ev.relationship);
-                return h('div', { key: ev.id, className: 'ft-stake-feed-item' },
-                  h('div', { className: 'ft-feed-top' },
-                    h('span', { className: 'ft-feed-ticker' }, ev.ticker),
-                    h('span', { className: 'ft-feed-rel' }, rel || ev.company),
-                    h('time', { className: 'ft-feed-date' }, ev.date)
-                  ),
-                  h('div', { className: 'ft-feed-bottom' },
-                    finite(pct) ? h('span', { className: 'ft-stake-badge', style: { color: tone(dir), borderColor: tone(dir) }, dir: 'ltr' },
-                      `${dir > 0 ? '+' : dir < 0 ? '−' : ''}${pct.toFixed(2)}% ` + t('of Co', 'من الشركة')
-                    ) : h('span', { className: 'ft-stake-badge' }, ev.actionLabel || t('Disclosure', 'إفصاح')),
-                    finite(val) ? h('b', { className: 'ft-feed-value', dir: 'ltr' }, compact(val) + ' EGP') : null
-                  )
-                );
-              })
-            ) : h('div', { className: 'ft-orbit-wrap' },
-              h('div', { className: 'ft-orbit', 'aria-hidden': 'true' }, h('span', null, '%')),
-              h('div', null,
-                h('strong', null, compact(preview?.eventCount || 0)),
-                h('span', null, t('disclosures to explore', 'إفصاح للاستكشاف'))
-              )
-            )
-          ),
-          h('div', { className: 'ft-portal-meta' },
-            h('span', null, t('Denominator is company share capital · Marked at current price', 'المقام هو إجمالي أسهم الشركة · مقيمة بسعر اليوم'))
-          ),
-          h('div', { className: 'ft-portal-foot' },
-            h('span', null, t('See stake & value context', 'شاهد سياق الحصة والقيمة')),
-            h('span', { className: 'ft-arrow-pill', 'aria-hidden': 'true' }, '↗')
-          )
-        )
-      )
-    )
-  );
+  /* TURN 6, BLOCKS 16, 17 AND 28: THREE CARDS, NOT TWO PORTALS.
+   *
+   * "Nothing removed: ... sector pulse, ownership lens, ... liquidity."
+   * All three were on Home already, but folded into two big "portals", each of
+   * which was one <button> wrapping an entire card. That costs three things
+   * the comp asks for: the sector pulse and market liquidity are different
+   * questions and shared one box; a card-sized button means the rows inside it
+   * cannot be reached on their own; and a nested button inside a button is
+   * invalid markup a keyboard cannot reach at all.
+   *
+   * The comp's shape for each: a dateline, a small link out, the title, one
+   * sentence, the rows, and the limit under them. Same data, same documents —
+   * `flow-preview.json` already publishes every figure below.
+   */
+  const latest = (s) => (s.history && s.history.at(-1)) || {};
+  const flowCard = ({ key, dateline, link, go: onGo, title, lede, rows, limit }) => h('article', {
+    key, className: 'ft-card',
+  },
+  h('p', { className: 'ft-card-dateline' },
+    h('span', null, dateline),
+    onGo ? h('button', { type: 'button', className: 'ft-card-open', onClick: onGo }, link) : null),
+  h('h2', { className: 'ft-card-title' }, title),
+  h('p', { className: 'ft-card-lede' }, lede),
+  h('div', { className: 'ft-card-rows' }, rows),
+  h('p', { className: 'ft-card-limit' }, limit));
+
+  /* Traded value in rising stocks and in falling stocks, summed over every
+     sector the preview covers. NOT money entering and leaving: every executed
+     trade has both sides, and the limit line under the card says so. */
+  const upValue = sectors.reduce((n, s) => n + (latest(s).upValue || 0), 0);
+  const downValue = sectors.reduce((n, s) => n + (latest(s).downValue || 0), 0);
+
+  const home = (topSectors.length || topEvents.length) ? h('section', {
+    className: 'ft-cards', 'aria-label': t('Follow the money and ownership', 'تتبّع التداول والملكية'),
+  },
+  topSectors.length ? flowCard({
+    key: 'pulse',
+    dateline: t(`${asOf} · highest flow ${compact(totalFlow)} EGP`,
+      `${asOf} · أعلى تدفّق ${compact(totalFlow)} جنيه`),
+    link: t('Sector liquidity ↗', 'سيولة القطاعات ↗'), go: () => go('liquidity'),
+    title: t('Sector pulse', 'نبض القطاعات'),
+    lede: t('Where activity meets the size of the sector. Traded value, and the size-weighted move.',
+      'حيث يلتقي النشاط بحجم القطاع. القيمة المتداولة، والعائد المرجّح.'),
+    rows: topSectors.map((s) => h('div', { key: s.id, className: 'ft-card-row' },
+      h('span', { className: 'ft-row-name' }, titleOf(s)),
+      h('span', { className: 'ft-row-val', dir: 'ltr' }, compact(latest(s).value)),
+      h('span', { className: 'ft-row-ret', dir: 'ltr',
+        style: { color: tone(s.sizeWeightedReturn) } }, signed(s.sizeWeightedReturn)))),
+    limit: t(`Traded value in rising and falling shares · ${asOf}. Activity, not money entering the market.`,
+      `حجم في الأسهم الصاعدة والهابطة · ${asOf}. نشاط، وليس أموالاً داخلة إلى السوق.`),
+  }) : null,
+  topEvents.length ? flowCard({
+    key: 'ownership',
+    dateline: t('Articles 29 & 38 disclosures', 'إفصاحات المادتين 29 و 38'),
+    link: t('Open the map ↗', 'افتح الخريطة ↗'), go: () => go('ownership'),
+    title: t('Ownership lens', 'عدسة الملكية'),
+    lede: t('When insiders changed what they hold. The denominator is the company’s own capital.',
+      'متى غيّر المطّلعون نسبتهم في الشركات. المقام هو رأس مال الشركة.'),
+    rows: topEvents.slice(0, 5).map((n) => h('div', { key: n.id, className: 'ft-card-row ft-card-row-wide' },
+      h('button', { type: 'button', className: 'ft-row-code',
+        onClick: () => component.setState({ screen: 'company', ticker: n.ticker }) }, n.ticker),
+      h('span', { className: 'ft-row-who' }, ar ? (n.relationshipLabelAr || n.relationshipLabel) : n.relationshipLabel),
+      h('span', { className: 'ft-row-when', dir: 'ltr' }, n.date),
+      h('span', { className: 'ft-row-stake', dir: 'ltr' },
+        finite(n.referencePercent) ? `${n.referencePercent.toFixed(2)}%` : '—'))),
+    limit: t('What was filed, not what is held. A stake under the disclosure threshold never appears here.',
+      'ما أُفصح عنه، لا ما هو مملوك. الحصة دون حدّ الإفصاح لا تظهر هنا أبداً.'),
+  }) : null,
+  (upValue || downValue) ? flowCard({
+    key: 'liquidity',
+    dateline: t(`${asOf} · traded value covered`, `${asOf} · قيمة متداولة مغطاة`),
+    link: t('Explore ↗', 'استكشف ↗'), go: () => go('liquidity'),
+    title: t('Market liquidity', 'سيولة السوق'),
+    lede: t('How the session’s traded value split between shares that rose and shares that fell.',
+      'كيف انقسمت قيمة تداول الجلسة بين الأسهم الصاعدة والهابطة.'),
+    rows: [
+      h('div', { key: 'up', className: 'ft-card-row' },
+        h('span', { className: 'ft-row-name' }, t('In rising shares', 'في أسهم صاعدة')),
+        h('span', { className: 'ft-row-val', dir: 'ltr' }, compact(upValue))),
+      h('div', { key: 'down', className: 'ft-card-row' },
+        h('span', { className: 'ft-row-name' }, t('In falling shares', 'في أسهم هابطة')),
+        h('span', { className: 'ft-row-val', dir: 'ltr' }, compact(downValue))),
+    ],
+    limit: t('Traded value in rising and falling shares. NOT money entering or leaving — every executed trade has a buyer and a seller.',
+      'قيمة متداولة في أسهم صاعدة وهابطة. ليست «أموالاً داخلة أو خارجة» — لكل صفقة منفذة مشترٍ وبائع.'),
+  }) : null) : null;
+
 
   const header = title => h('header', { className: 'ft-heading' },
     h('span', { className: 'ft-eyebrow' }, 'ESTHMR / ' + t('MARKET OBSERVATORY', 'مرصد السوق')),
