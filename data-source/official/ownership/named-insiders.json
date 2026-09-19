@@ -3648,6 +3648,86 @@
    "publishedAt": "2026-06-16T11:31:07",
    "sessionDate": null,
    "source": "https://www.egx.com.eg/downloads/Bulletins/339721_1.pdf"
+  },
+  "289912": {
+   "investorName": "محمد فواز بن عبد الغني بن عبد السلام البشري",
+   "investorNameEn": "Mohamed Fawaz bin Abdul Ghani bin Abdul Salam Al-Bishri",
+   "relationship": null,
+   "ticker": "PRMH",
+   "action": "sell",
+   "shares": 32150000,
+   "price": 2.9,
+   "ownershipBeforePercent": 9.186,
+   "ownershipAfterPercent": 0,
+   "nameScript": "ar",
+   "filingId": "289912",
+   "publishedAt": "2026-06-16T11:28:49",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339722_1.pdf"
+  },
+  "289905": {
+   "investorName": "سعيد بن عوضه بن سعيد العسيري",
+   "investorNameEn": "Saeed bin Awadah bin Saeed Al-Asiri",
+   "relationship": null,
+   "ticker": "FCMD",
+   "action": "sell",
+   "shares": 3380000,
+   "price": 8.222,
+   "ownershipBeforePercent": 5.8607,
+   "ownershipAfterPercent": 0.0,
+   "nameScript": "ar",
+   "filingId": "289905",
+   "publishedAt": "2026-06-16T10:54:04",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339766_1.pdf"
+  },
+  "289902": {
+   "investorName": "ايمن بن مختار بن ابراهيم خليفة",
+   "investorNameEn": "Ayman bin Mokhtar bin Ibrahim Khalifa",
+   "relationship": null,
+   "ticker": "FCMD",
+   "action": "sell",
+   "shares": 2310000,
+   "price": 15.1253,
+   "ownershipBeforePercent": 9.0338,
+   "ownershipAfterPercent": 5.028,
+   "nameScript": "ar",
+   "filingId": "289902",
+   "publishedAt": "2026-06-16T10:41:25",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339706_1.pdf"
+  },
+  "289881": {
+   "investorName": "أصول للاستثمارات",
+   "investorNameEn": "Osool Lelestethmarat",
+   "relationship": null,
+   "ticker": "MPCI",
+   "action": "buy",
+   "shares": 27447,
+   "price": 222,
+   "ownershipBeforePercent": 1.69,
+   "ownershipAfterPercent": 1.89,
+   "nameScript": "ar",
+   "filingId": "289881",
+   "publishedAt": "2026-06-16T09:05:51",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339707_1.pdf"
+  },
+  "289879": {
+   "investorName": "طارق عبد الرازق محمد عبد الغني",
+   "investorNameEn": "Tarek Abdel Razek Mohamed Abdel Ghani",
+   "relationship": null,
+   "ticker": "MPCO",
+   "action": "sell",
+   "shares": 7500000,
+   "price": 1.781,
+   "ownershipBeforePercent": 4.913,
+   "ownershipAfterPercent": 4.163,
+   "nameScript": "ar",
+   "filingId": "289879",
+   "publishedAt": "2026-06-15T15:17:54",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339705_1.pdf"
   }
  },
  "refused": {
@@ -3659,6 +3739,7 @@
   "290836": "action is neither buy nor sell: None",
   "290814": "share count is not a positive integer: None",
   "290577": "action is neither buy nor sell: None",
-  "290172": "action is neither buy nor sell: None"
+  "290172": "action is neither buy nor sell: None",
+  "289903": "a purchase that lowers the stake (0.51031 -> 0.1132)"
  }
 }

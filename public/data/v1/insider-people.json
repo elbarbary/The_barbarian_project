@@ -1,16 +1,16 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-18T12:41:40+00:00",
+ "generated": "2026-09-19T08:48:28+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1327,
- "tradeCount": 226,
+ "peopleCount": 1329,
+ "tradeCount": 231,
  "tickerCount": 237,
- "tradedTickerCount": 83,
- "firmCount": 440,
- "personCount": 887,
- "aliasCount": 149,
+ "tradedTickerCount": 84,
+ "firmCount": 441,
+ "personCount": 888,
+ "aliasCount": 150,
  "registerCount": 236,
  "overDisclosed": [],
  "supersededByRegister": [
@@ -447,6 +447,43 @@
      "stakeBefore": 21.04,
      "stakeAfter": 14.96,
      "source": "https://www.egx.com.eg/downloads/Bulletins/344231_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "محمد فواز بن عبد الغني بن عبد السلام البشري",
+   "name": "محمد فواز بن عبد الغني بن عبد السلام البشري",
+   "nameEn": "Mohamed Fawaz bin Abdul Ghani bin Abdul Salam Al-Bishri",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "PRMH"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 93235000.0,
+   "singleCompanyMove": {
+    "ticker": "PRMH",
+    "from": 9.186,
+    "to": 0,
+    "change": -9.186
+   },
+   "trades": [
+    {
+     "filingId": "289912",
+     "date": "2026-06-16",
+     "ticker": "PRMH",
+     "company": null,
+     "companyAr": "برايم القابضة للاستثمارات المالية",
+     "action": "sell",
+     "shares": 32150000,
+     "price": 2.9,
+     "value": 93235000.0,
+     "stakeBefore": 9.186,
+     "stakeAfter": 0,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339722_1.pdf"
     }
    ]
   },
@@ -952,6 +989,43 @@
    ]
   },
   {
+   "id": "سعيد بن عوضه بن سعيد العسيري",
+   "name": "سعيد بن عوضه بن سعيد العسيري",
+   "nameEn": "Saeed bin Awadah bin Saeed Al-Asiri",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "FCMD"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 27790360.0,
+   "singleCompanyMove": {
+    "ticker": "FCMD",
+    "from": 5.8607,
+    "to": 0.0,
+    "change": -5.8607
+   },
+   "trades": [
+    {
+     "filingId": "289905",
+     "date": "2026-06-16",
+     "ticker": "FCMD",
+     "company": null,
+     "companyAr": "فيوتشر كير للصناعات الطبية",
+     "action": "sell",
+     "shares": 3380000,
+     "price": 8.222,
+     "value": 27790360.0,
+     "stakeBefore": 5.8607,
+     "stakeAfter": 0.0,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339766_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "اميرالد للاتصالات وتكنولوجيا المعلومات",
    "name": "اميرالد للاتصالات وتكنولوجيا المعلومات",
    "nameEn": "Emerald for Communication and Information Technology",
@@ -1336,6 +1410,57 @@
    ]
   },
   {
+   "id": "طارق عبد الرازق محمد عبد الغني",
+   "name": "طارق عبد الرازق محمد عبد الغني",
+   "nameEn": "Tarek Abdel Razek Mohamed Abdel Ghani",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "MPCO"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 0,
+   "soldCount": 2,
+   "value": 13357500.0,
+   "singleCompanyMove": {
+    "ticker": "MPCO",
+    "from": 4.913,
+    "to": 0.763,
+    "change": -4.15
+   },
+   "trades": [
+    {
+     "filingId": "289879",
+     "date": "2026-06-15",
+     "ticker": "MPCO",
+     "company": null,
+     "companyAr": "المنصورة للدواجن",
+     "action": "sell",
+     "shares": 7500000,
+     "price": 1.781,
+     "value": 13357500.0,
+     "stakeBefore": 4.913,
+     "stakeAfter": 4.163,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339705_1.pdf"
+    },
+    {
+     "filingId": "292251",
+     "date": "2026-08-02",
+     "ticker": "MPCO",
+     "company": null,
+     "companyAr": "المنصورة للدواجن",
+     "action": "sell",
+     "shares": 28000000,
+     "price": null,
+     "value": null,
+     "stakeBefore": 3.563,
+     "stakeAfter": 0.763,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341940_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "لايم فست بارتنرز للرعاية الصحية",
    "name": "لايم فست بارتنرز للرعاية الصحية",
    "nameEn": "LimeVest Partners for Healthcare",
@@ -1383,6 +1508,46 @@
      "stakeBefore": 59.4,
      "stakeAfter": 56.08,
      "source": "https://www.egx.com.eg/downloads/Bulletins/344016_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "ايمن بن مختار بن ابراهيم خليفة",
+   "name": "ايمن بن مختار بن ابراهيم خليفة",
+   "nameEn": "Ayman bin Mokhtar bin Ibrahim Khalifa",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "أيمن بن مختار بن إبراهيم خليفه",
+    "ايمن بن مختار بن إبراهيم خليفه"
+   ],
+   "tickers": [
+    "FCMD"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 34939443.0,
+   "singleCompanyMove": {
+    "ticker": "FCMD",
+    "from": 9.0338,
+    "to": 5.028,
+    "change": -4.0058
+   },
+   "trades": [
+    {
+     "filingId": "289902",
+     "date": "2026-06-16",
+     "ticker": "FCMD",
+     "company": null,
+     "companyAr": "فيوتشر كير للصناعات الطبية",
+     "action": "sell",
+     "shares": 2310000,
+     "price": 15.1253,
+     "value": 34939443.0,
+     "stakeBefore": 9.0338,
+     "stakeAfter": 5.028,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339706_1.pdf"
     }
    ]
   },
@@ -1827,43 +1992,6 @@
      "stakeBefore": 14.999,
      "stakeAfter": 11.99,
      "source": "https://www.egx.com.eg/downloads/Bulletins/328380_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "طارق عبد الرازق محمد عبد الغني",
-   "name": "طارق عبد الرازق محمد عبد الغني",
-   "nameEn": "Tarek Abdel Razek Mohamed Abdel Ghani",
-   "script": "ar",
-   "kind": "person",
-   "aliases": null,
-   "tickers": [
-    "MPCO"
-   ],
-   "tradeCount": 1,
-   "boughtCount": 0,
-   "soldCount": 1,
-   "value": null,
-   "singleCompanyMove": {
-    "ticker": "MPCO",
-    "from": 3.563,
-    "to": 0.763,
-    "change": -2.8
-   },
-   "trades": [
-    {
-     "filingId": "292251",
-     "date": "2026-08-02",
-     "ticker": "MPCO",
-     "company": null,
-     "companyAr": "المنصورة للدواجن",
-     "action": "sell",
-     "shares": 28000000,
-     "price": null,
-     "value": null,
-     "stakeBefore": 3.563,
-     "stakeAfter": 0.763,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341940_1.pdf"
     }
    ]
   },
@@ -4177,6 +4305,43 @@
    ]
   },
   {
+   "id": "أصول للاستثمارات",
+   "name": "أصول للاستثمارات",
+   "nameEn": "Osool Lelestethmarat",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "MPCI"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 6093234,
+   "singleCompanyMove": {
+    "ticker": "MPCI",
+    "from": 1.69,
+    "to": 1.89,
+    "change": 0.2
+   },
+   "trades": [
+    {
+     "filingId": "289881",
+     "date": "2026-06-16",
+     "ticker": "MPCI",
+     "company": null,
+     "companyAr": "ممفيس للادوية والصناعات الكيماوية",
+     "action": "buy",
+     "shares": 27447,
+     "price": 222,
+     "value": 6093234,
+     "stakeBefore": 1.69,
+     "stakeAfter": 1.89,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339707_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "ياسر فاروق مصطفى محمد",
    "name": "ياسر فاروق مصطفى محمد",
    "nameEn": "Yasser Farouk Mostafa Mohamed",
@@ -6485,23 +6650,6 @@
    "trades": []
   },
   {
-   "id": "أيمن بن مختار بن إبراهيم خليفه",
-   "name": "أيمن بن مختار بن إبراهيم خليفه",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": [
-    "ايمن بن مختار بن إبراهيم خليفه"
-   ],
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
    "id": "Industrial Engineering Company For Construction And Development ( Icon )",
    "name": "Industrial Engineering Company For Construction And Development ( Icon )",
    "nameEn": null,
@@ -6762,21 +6910,6 @@
    "nameEn": null,
    "script": null,
    "kind": "firm",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "سعيد بن عوضه بن سعيد العسيري",
-   "name": "سعيد بن عوضه بن سعيد العسيري",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
    "aliases": null,
    "tickers": [],
    "tradeCount": 0,
@@ -31988,9 +32121,14 @@
    "filingId": "291336",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340863_1.pdf",
    "shares": 5200000,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
+   "openedAt": "2026-06-16",
+   "openingPercent": 5.8607,
+   "history": [
+    {
+     "date": "2026-06-16",
+     "percent": 0.0
+    }
+   ]
   },
   {
    "holder": "المجموعة المصرية العقارية",
@@ -34400,7 +34538,7 @@
    "history": []
   },
   {
-   "holder": "أيمن بن مختار بن إبراهيم خليفه",
+   "holder": "ايمن بن مختار بن ابراهيم خليفة",
    "kind": "person",
    "ticker": "GPIM",
    "percent": 5.683333,
@@ -35166,7 +35304,7 @@
    "history": []
   },
   {
-   "holder": "أيمن بن مختار بن إبراهيم خليفه",
+   "holder": "ايمن بن مختار بن ابراهيم خليفة",
    "kind": "person",
    "ticker": "FCMD",
    "percent": 5.071,
@@ -35175,9 +35313,14 @@
    "filingId": "291336",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340863_1.pdf",
    "shares": 2925000,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
+   "openedAt": "2026-06-16",
+   "openingPercent": 9.0338,
+   "history": [
+    {
+     "date": "2026-06-16",
+     "percent": 5.028
+    }
+   ]
   },
   {
    "holder": "عبد المحسن بن عبد العزيز الحكير",
@@ -38870,6 +39013,24 @@
    "history": []
   },
   {
+   "holder": "أصول للاستثمارات",
+   "kind": "firm",
+   "ticker": "MPCI",
+   "percent": 1.89,
+   "asOf": "2026-06-16",
+   "basis": "trade",
+   "filingId": "289881",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339707_1.pdf",
+   "openedAt": "2026-06-16",
+   "openingPercent": 1.69,
+   "history": [
+    {
+     "date": "2026-06-16",
+     "percent": 1.89
+    }
+   ]
+  },
+  {
    "holder": "الدكتور / حاتم مصطفي مصطفي الجبلي",
    "kind": "person",
    "ticker": "FERC",
@@ -40795,9 +40956,13 @@
    "basis": "trade",
    "filingId": "292251",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341940_1.pdf",
-   "openedAt": "2026-08-02",
-   "openingPercent": 3.563,
+   "openedAt": "2026-06-15",
+   "openingPercent": 4.913,
    "history": [
+    {
+     "date": "2026-06-15",
+     "percent": 4.163
+    },
     {
      "date": "2026-08-02",
      "percent": 0.763
@@ -47193,6 +47358,24 @@
    ]
   },
   {
+   "holder": "محمد فواز بن عبد الغني بن عبد السلام البشري",
+   "kind": "person",
+   "ticker": "PRMH",
+   "percent": 0,
+   "asOf": "2026-06-16",
+   "basis": "trade",
+   "filingId": "289912",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339722_1.pdf",
+   "openedAt": "2026-06-16",
+   "openingPercent": 9.186,
+   "history": [
+    {
+     "date": "2026-06-16",
+     "percent": 0
+    }
+   ]
+  },
+  {
    "holder": "تولين السيد صابر السيد حميد",
    "kind": "person",
    "ticker": "RREI",
@@ -47377,11 +47560,21 @@
    "end": "2026-06-17",
    "label": "14–17 Jun",
    "labelAr": "14–17 يونيو",
-   "sessions": 2,
-   "buys": 4,
-   "sells": 0,
-   "value": 166980531.72,
+   "sessions": 3,
+   "buys": 5,
+   "sells": 4,
+   "value": 342396068.72,
    "moves": [
+    {
+     "holder": "محمد فواز بن عبد الغني بن عبد السلام البشري",
+     "kind": "person",
+     "ticker": "PRMH",
+     "from": 9.186,
+     "to": 0,
+     "trades": 1,
+     "value": 93235000.0,
+     "change": -9.186
+    },
     {
      "holder": "أسامة فوزي محمد سعيد",
      "kind": "person",
@@ -47393,6 +47586,26 @@
      "change": 6.0289
     },
     {
+     "holder": "سعيد بن عوضه بن سعيد العسيري",
+     "kind": "person",
+     "ticker": "FCMD",
+     "from": 5.8607,
+     "to": 0.0,
+     "trades": 1,
+     "value": 27790360.0,
+     "change": -5.8607
+    },
+    {
+     "holder": "ايمن بن مختار بن ابراهيم خليفة",
+     "kind": "person",
+     "ticker": "FCMD",
+     "from": 9.0338,
+     "to": 5.028,
+     "trades": 1,
+     "value": 34939443.0,
+     "change": -4.0058
+    },
+    {
      "holder": "سماح سليمان السيد سليمان ابو العلا",
      "kind": "person",
      "ticker": "CRST",
@@ -47401,6 +47614,26 @@
      "trades": 1,
      "value": 12642365.05,
      "change": 0.873
+    },
+    {
+     "holder": "طارق عبد الرازق محمد عبد الغني",
+     "kind": "person",
+     "ticker": "MPCO",
+     "from": 4.913,
+     "to": 4.163,
+     "trades": 1,
+     "value": 13357500.0,
+     "change": -0.75
+    },
+    {
+     "holder": "أصول للاستثمارات",
+     "kind": "firm",
+     "ticker": "MPCI",
+     "from": 1.69,
+     "to": 1.89,
+     "trades": 1,
+     "value": 6093234.0,
+     "change": 0.2
     },
     {
      "holder": "شركة دراية المالية مساهمة مقفلة",
@@ -54894,7 +55127,7 @@
    "seats": [
     {
      "name": "ايمن بن مختار بن إبراهيم خليفه",
-     "holder": "أيمن بن مختار بن إبراهيم خليفه",
+     "holder": "ايمن بن مختار بن ابراهيم خليفة",
      "role": "رئيس مجلس ادارة",
      "representing": "نفسة"
     },
