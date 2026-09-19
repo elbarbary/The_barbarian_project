@@ -6637,6 +6637,10 @@
     "meaning": "Persistent inflation erodes consumer purchasing power and raises input costs for businesses, which prompts central banks to maintain higher interest rates and tighten borrowing conditions across the economy.",
     "meaning_ar": "يؤدي استمرار التضخم إلى تآكل القوة الشرائية للمستهلكين وارتفاع تكاليف المدخلات للشركات، مما يدفع البنوك المركزية إلى الإبقاء على أسعار فائدة مرتفعة وتشديد شروط الاقتراض في الاقتصاد."
   },
+  "عضو ب”الفيدرالي الامريكي”: الضغوط التضخميه لا تقتصر علي اسعار الطاقه": {
+    "meaning": "Broad-based inflation across non-energy sectors reflects underlying core pricing pressures, keeping monetary policy elevated and sustaining high dollar-borrowing costs for global and emerging markets.",
+    "meaning_ar": "يشير اتساع الضغوط التضخمية خارج قطاع الطاقة إلى استمرار معدلات التضخم الأساسي، مما يثبت مسار السياسة النقدية المرتفعة وتكلفة الاقتراض بالدولار في الأسواق العالمية والناشئة."
+  },
   "عقود الديزل الامريكيه تتجاوز 5 دولارات للجالون لاول مره منذ 2022": {
     "meaning": "Global diesel prices serve as a direct benchmark for industrial transport, shipping, and power generation operational inputs across import-reliant energy markets.",
     "meaning_ar": "تشكل أسعار الديزل العالمية معياراً تسعيرياً مباشراً لمدخلات تشغيل قطاعات النقل الصناعي والشحن وتوليد الطاقة في الأسواق المعتمدة على استيراد المشتقات البترولية."
@@ -9137,6 +9141,10 @@
     "meaning": "This transaction reallocates corporate liquidity to purchase the company's own equity from the open market, absorbing one million shares into treasury stock, which reduces the free float and removes those voting and dividend rights.",
     "meaning_ar": "تعيد هذه العملية توجيه السيولة النقدية للشركة للاستحواذ على أسهمها من السوق المفتوح، مما يدرج مليون سهم كأسهُم خزينة ويقلص عدد الأسهم حرة التداول مع تعليق حقوق التصويت وتوزيعات الأرباح المرتبطة بها."
   },
+  "“بنك اوف امريكا” يحذر من سيناريو تجاوز الفايده 5%": {
+    "meaning": "A benchmark interest rate exceeding 5% establishes higher corporate borrowing costs, which expands debt-servicing expenses on corporate balance sheets and shifts capital allocations toward fixed-income instruments.",
+    "meaning_ar": "يؤدي تجاوز سعر الفائدة القياسي لمستوى 5% إلى ارتفاع تكاليف الاقتراض للشركات، مما يرفع أعباء خدمة الدين في الميزانيات العمومية ويوجه السيولة نحو أدوات الدخل الثابت."
+  },
   "“بوست ايتالياني” تستحوذ علي 66.6% من “تيليكوم ايطاليا”": {
     "meaning": "Acquiring a 66.6% majority stake gives Poste Italiane operational and strategic control over Telecom Italia, integrating telecommunications assets into its broader corporate network and consolidating the entity's financial statements.",
     "meaning_ar": "يمنح الاستحواذ على حصة أغلبية بنسبة 66.6% شركة «بوست إيتالياني» السيطرة التشغيلية والاستراتيجية الكاملة على «تيليكوم إيطاليا»، مما يدمج أصول الاتصالات ضمن شبكة أعمالها ويوحد القوائم المالية للكيانين."
@@ -9209,6 +9217,10 @@
     "meaning": "Regulatory clearance permits the legal transfer of Capricorn Energy's upstream assets to Genel Energy, consolidating ownership and operational control under the acquiring entity within the local oil and gas sector.",
     "meaning_ar": "تتيح الموافقة التنظيمية نقل الملكية القانونية لأصول الاستكشاف والإنتاج من 'كابريكورن إنرجي' إلى 'جينيل إنرجي'، مما يدمج السيطرة التشغيلية وإدارة الأصول تحت مظلة الشركة المستحوذة داخل قطاع النفط والغاز المحلي."
   },
+  "“دويتشه بنك” يعتزم اغلاق صندوق عقاري امريكي عقب موجه استردادات": {
+    "meaning": "Heavy redemption requests deplete an open-ended real estate fund's liquid reserves, compelling the fund manager to liquidate underlying property assets to satisfy withdrawal obligations and wind down operations.",
+    "meaning_ar": "تؤدي طلبات الاسترداد الكثيفة إلى استنزاف الاحتياطيات النقدية للصندوق العقاري المفتوح، مما يدفع مدير الصندوق إلى تسييل الأصول العقارية لتلبية التزامات التخارج وإنهاء العمليات التشغيلية للصندوق."
+  },
   "“رايه القابضه” تشتري 1.45 مليون سهم خزينه": {
     "meaning": "This transaction reallocates corporate cash reserves to absorb outstanding equity into the company's balance sheet, reducing the total volume of shares actively circulating in the market.",
     "meaning_ar": "تُحوّل هذه العملية جزءاً من السيولة النقدية للشركة لحيازة أسهمها المصدرة كأصول خزينة، مما يخفّض كمية الأسهم المتاحة للتداول الحر في السوق."
@@ -9280,6 +9292,10 @@
   "“علاء” ل”البورصه”: 10 مليارات دولار استثمارات صينيه في مصر": {
     "meaning": "This announcement represents foreign direct investment (FDI) capital allocations from Chinese entities into Egyptian industrial and infrastructure projects, involving cross-border capital transfers to establish local operational and production assets.",
     "meaning_ar": "يمثل هذا الإعلان تخصيصات لرؤوس أموال استثمار أجنبي مباشر من جهات صينية في مشروعات صناعية وبنية تحتية داخل مصر، وتتضمن تحويلات رأسمالية لإنشاء أصول تشغيلية وخطوط إنتاج محلية."
+  },
+  "“فولكس فاجن” تحذر من تراجع الارباح بفعل انكماش السوق الصينيه": {
+    "meaning": "Contracting vehicle sales in China directly lowers operational delivery volumes and top-line operating profit contributions from the automaker's primary geographic market.",
+    "meaning_ar": "يؤدي انكماش مبيعات المركبات في الصين إلى خفض أحجام التسليم التشغيلية المباشرة وحصيلة أرباح التشغيل المتولدة من السوق الجغرافي الأساسي للشركة."
   },
   "“فيتش”: حرب ايران تدفع اقتصاد قطر لانكماش 18.8% خلال 2026": {
     "meaning": "Fitch models a mechanism where regional military conflict disrupts maritime shipping lanes and energy infrastructure in the Gulf, halting hydrocarbon exports and contracting overall gross domestic product.",
