@@ -24,6 +24,20 @@ import { pairedBars, line, shareBar, evidenceChip, finite } from './primitives.j
 
 const h = R.createElement;
 
+/* A session at twice a company's own usual volume. Chosen as the point where
+   "it traded" becomes "it traded unusually" — see the note in volumeCard. */
+const UNUSUAL = 2;
+/* How recent an ownership filing has to be to count as today's news. */
+const FILING_DAYS = 45;
+
+/** The ISO date `days` before `iso`, or '' when the date is unreadable. */
+function recentSince(iso, days) {
+  const at = new Date(`${String(iso || '')}T00:00:00Z`);
+  if (Number.isNaN(at.getTime())) return '';
+  at.setUTCDate(at.getUTCDate() - days);
+  return at.toISOString().slice(0, 10);
+}
+
 const compact = (v) => (finite(v)
   ? new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(v)
   : '—');
@@ -62,7 +76,14 @@ function card({ dateline, primitive, title, visual, limit, chip, more, key }) {
  */
 function volumeCard(data, ar, t, open, day) {
   const rows = (data.companies || []).filter((c) => finite(c.rv) && finite(c.volume)
-    && finite(c.medianVolume) && c.medianVolume > 0 && !c.listing);
+    && finite(c.medianVolume) && c.medianVolume > 0 && !c.listing
+    /* UNUSUAL, OR IT IS NOT A CHANGE.
+       This shelf is headed "what changed today". Every session has a busiest
+       company, so drawing whichever one it is guarantees a card on the
+       quietest day of the year — and a card on a page with that heading
+       asserts that something happened. Twice its own usual volume is the bar;
+       below it the company simply traded. */
+    && c.rv >= UNUSUAL);
   if (!rows.length) return null;
   const top = rows.slice().sort((a, b) => b.rv - a.rv).slice(0, 4);
   const lead = top[0];
@@ -117,6 +138,16 @@ function indexCard(data, ar, t, open, day) {
   const name = ar ? (idx.labelAr || idx.label) : idx.label;
   const mean = points.reduce((s, v) => s + v, 0) / points.length;
   const below = points[points.length - 1] < mean;
+  /* A CROSSING, NOT A POSITION.
+     An index is always on one side of its own average, and it was on that
+     side yesterday too. Drawing where it sits makes a standing condition look
+     like today's news — and since it is true every day, it filled a slot on
+     this shelf every day. The card is drawn only on the session the index
+     changed sides. Its own limit line still says a crossing is a description
+     and not an event; what changed is that the drawing is now about something
+     that happened today. */
+  const priorBelow = points[points.length - 2] < mean;
+  if (below === priorBelow) return null;
   return card({
     key: 'index',
     dateline: t(`${day(data.marketDate)} · close · ${points.length} sessions`,
@@ -163,8 +194,14 @@ function ownershipCard(data, ar, t, open, day) {
   links.slice().sort((x, y) => String(y.asOf || '').localeCompare(String(x.asOf || '')))
     .forEach((l) => { if (!byCompany.has(l.held)) byCompany.set(l.held, []); byCompany.get(l.held).push(l); });
 
+  /* Recent, or it is not "today".
+     The archive always holds an ownership filing, so the newest one is drawn
+     whether it landed this week or last spring. Outside this window the card
+     is silent rather than presenting an old disclosure as a change. */
+  const horizon = recentSince(data.marketDate, FILING_DAYS);
   const picked = [];
   for (const [held, all] of byCompany) {
+    if (horizon && String(all[0].asOf || '') < horizon) continue;
     const parts = all.slice().sort((x, y) => y.percent - x.percent).slice(0, 3);
     const known = parts.reduce((sum, l) => sum + l.percent, 0);
     /* A company whose disclosed stakes already sum to 100% has no undisclosed
@@ -217,9 +254,28 @@ export function changedToday(data, ar, { openCompany, openMarket, heading, note,
   const cards = [volumeCard(data, ar, t, open, day), indexCard(data, ar, t, open, day),
     ownershipCard(data, ar, t, open, day)].filter(Boolean);
   if (!cards.length) return null;
+  /* THE QUIET DAY IS A REAL ANSWER.
+     Three slots and three card builders is an arrangement that fills itself:
+     whatever each builder found became a card, so the shelf said "three things
+     changed today" on a session where nothing did. Each builder now has a bar
+     it has to clear, which means the shelf can come back with one card, or
+     two. Saying so is the honest end of the sentence — the alternative is
+     lowering a bar until the row looks full, which is how a page that
+     promises evidence starts manufacturing it.
+
+     Drawn as a card in the empty slot rather than a footnote, because a row of
+     two cards and a gap reads as something that failed to load. */
+  const shy = cards.length < 3
+    ? h('article', { key: 'none', class: 'ct-card ct-none' },
+      h('p', { class: 'ct-none-line' },
+        t('No further verified changes.', 'لا تغيّرات موثّقة أخرى.')),
+      h('p', { class: 'ct-none-why' },
+        t('Every card here rests on a published document. On a quiet session there are fewer, and this shelf does not fill the space with something that did not happen.',
+          'كل بطاقة هنا تستند إلى مستند منشور. في الجلسات الهادئة تكون أقل، ولا يملأ هذا الرفّ الفراغ بما لم يحدث.')))
+    : null;
   return h('section', { class: 'ct-shelf', 'aria-label': heading },
     h('div', { class: 'ct-shelf-head' },
       h('h2', null, heading),
       h('span', { class: 'ct-shelf-note' }, note)),
-    h('div', { class: 'ct-grid' }, cards));
+    h('div', { class: 'ct-grid' }, shy ? cards.concat([shy]) : cards));
 }

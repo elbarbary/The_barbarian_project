@@ -216,12 +216,12 @@
    above that rule, which loads after this file and would otherwise win on
    equal specificity. */
 @media (max-width: 600px) {
-  /* Second on a phone, not first. `order: -1` put the models' own record
-     above the index levels, so the one figure a reader opens this page for was
-     under a block about the machinery that reads them. The market goes first
-     and the record follows it immediately — it is still above the fold, which
-     is what this rule was for. */
-  #app .journal-home > .ai-cards { order: 2; }
+  /* Fifth, matching the markup exactly.
+     The review's first P1 is that a reader met the machinery before the
+     market. The answer is the same on both: market, participation, the
+     reader's own list, what changed, THEN the lab as a preview. This number
+     is the markup's position, not a separate opinion about phones. */
+  #app .journal-home > .ai-cards { order: 5; }
 }
 
 /* ── the workbench ──────────────────────────────────────────────────────── */
@@ -783,3 +783,13 @@ dialog.aix-dialog::backdrop { background: rgba(22, 36, 47, .5); }
 #app .aix-agree-ticks { display: inline-flex; gap: 2px; margin-inline-end: 6px; vertical-align: -2px; }
 #app .aix-agree-ticks i { display: block; width: 8px; height: 15px; border-radius: 2px; background: var(--rule); }
 #app .aix-agree-ticks i.is-on { background: var(--accent); }
+
+/* The pending-evaluation headline is a sentence, not a figure.
+ * `.aix-system-value` is sized for a number like "+2.4pts"; the same size on
+ * a sentence would shout it across the card. This keeps the position and the
+ * weight — it is still the headline — at a size a sentence can hold. */
+.aix-system-value.is-words {
+  font-family: inherit; font-size: 17px; line-height: 1.35;
+  letter-spacing: -.01em; text-wrap: balance;
+}
+@media (max-width: 600px) { .aix-system-value.is-words { font-size: 16px; } }

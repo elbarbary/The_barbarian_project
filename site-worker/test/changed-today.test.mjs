@@ -86,7 +86,13 @@ test('a card with no published figures is absent, not empty', () => {
     false, hooks);
   assert.equal(bare, null, 'an empty shelf was drawn anyway');
   const one = changedToday({ ...DATA, companies: [], sectorOwnership: null }, false, hooks);
-  assert.equal(byClass(one, 'ct-card').length, 1, 'the missing cards left placeholders');
+  /* One real card, plus the quiet-day card that says so. `ct-none` is not a
+     placeholder for a card that failed — it is the shelf's answer when there
+     is nothing else verified, and the review asks for it in as many words. */
+  const real = byClass(one, 'ct-card').filter((n) => !String(n.attrs.class).includes('ct-none'));
+  assert.equal(real.length, 1, 'the missing cards left placeholders');
+  assert.equal(byClass(one, 'ct-none').length, 1, 'the quiet day says nothing at all');
+  assert.match(text(one), /No further verified changes/);
   // A stake set that already accounts for the whole company has no remainder
   // to name, and the card is about the remainder.
   const whole = changedToday({ ...DATA, companies: [], indices: [],
@@ -98,13 +104,102 @@ test('a card with no published figures is absent, not empty', () => {
 test('the shelf is on Home, ordered, and styled', async () => {
   const template = await read('public/esthmr/template.html');
   const home = template.indexOf('{{ isHome }}');
-  assert.ok(template.indexOf('{{ changedToday }}', home) > template.indexOf('{{ aiCards }}', home),
-    'the shelf is not placed after the record');
+  /* Above the lab, not below it. The 18 September review puts the market and
+     the reader's own list first and the lab last of the four, as a preview —
+     what changed today is evidence about the market, and the lab is a reading
+     of it. */
+  assert.ok(template.indexOf('{{ changedToday }}', home) < template.indexOf('{{ aiCards }}', home),
+    'the shelf fell below the lab preview again');
   const phone = await read('public/esthmr/chart-viewer.css');
-  assert.match(phone, /\.journal-home>\.ct-shelf\{order:2\}/,
+  assert.match(phone, /\.journal-home>\.ct-shelf\{order:4\}/,
     'unnamed blocks fall to the bottom of the phone, and this one is not named');
   const css = await read('public/esthmr/home.css');
   for (const rule of ['.ct-card', '.ct-primitive', '.ct-limit']) {
     assert.ok(css.includes(rule), `${rule} has no styling`);
   }
+});
+
+/* ── the bar each card has to clear ──────────────────────────────────────
+ *
+ * The shelf is headed "what changed today" and every session has a busiest
+ * company, an index sitting on one side of its own average, and an ownership
+ * filing somewhere in the archive. Three builders and three slots is an
+ * arrangement that fills itself, so the shelf said three things changed on a
+ * session where nothing did.
+ *
+ * The 18 September review: "Do not manufacture three stories on quiet days.
+ * Show fewer with an honest 'No further verified changes.'"
+ */
+const quiet = (over) => changedToday({ ...DATA, ...over }, false, hooks);
+
+test('an ordinary session is not a change', () => {
+  /* 1.3x a company's own usual volume is a company trading. The card claims
+     it traded unusually, and on this shelf that claim is the whole point. */
+  const ordinary = quiet({
+    companies: [{ ticker: 'AAA', name: { en: 'Alpha', ar: 'ألفا' }, rv: 1.3,
+      volume: 1300000, medianVolume: 1000000 }],
+    indices: [], sectorOwnership: null,
+  });
+  assert.equal(ordinary, null, 'an ordinary session was drawn as a change');
+  const unusual = quiet({
+    companies: [{ ticker: 'AAA', name: { en: 'Alpha', ar: 'ألفا' }, rv: 4.1,
+      volume: 4100000, medianVolume: 1000000 }],
+    indices: [], sectorOwnership: null,
+  });
+  assert.match(text(unusual), /4\.1× its usual volume/);
+});
+
+test('an index on the side of its average it was on yesterday is not news', () => {
+  /* An index is always on one side of its own 30-session average, and it was
+     on that side yesterday too. Drawn as a card it made a standing condition
+     look like today's event — and being true every day, it took a slot every
+     day. */
+  const below = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 1, 1];
+  const standing = quiet({ companies: [], sectorOwnership: null,
+    indices: [{ label: 'EGX 30', points: below }] });
+  assert.equal(standing, null, 'a standing condition was drawn as a change');
+
+  // Same series, but the last session is the one that crossed.
+  const crossing = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 10];
+  const event = quiet({ companies: [], sectorOwnership: null,
+    indices: [{ label: 'EGX 30', points: crossing }] });
+  assert.ok(event, 'the session it crossed was not drawn');
+  assert.match(text(event), /closed above its .* average/);
+});
+
+test('a filing from last spring is not today', () => {
+  const co = (asOf) => ({ companies: [], indices: [], marketDate: '2026-09-17',
+    sectorOwnership: { links: [
+      { held: 'C', heldName: 'G', ownerName: 'O', percent: 30, asOf },
+      { held: 'C', heldName: 'G', ownerName: 'P', percent: 12, asOf }] } });
+  assert.equal(changedToday(co('2026-04-02'), false, hooks), null,
+    'a filing five months old was drawn as today’s change');
+  const fresh = changedToday(co('2026-09-14'), false, hooks);
+  assert.ok(fresh, 'a filing from three days ago was dropped');
+  assert.match(text(fresh), /is disclosed|companies/);
+});
+
+test('a quiet day says so instead of filling the row', () => {
+  const one = quiet({
+    companies: [{ ticker: 'AAA', name: { en: 'Alpha', ar: 'ألفا' }, rv: 9,
+      volume: 9000000, medianVolume: 1000000 }],
+    indices: [], sectorOwnership: null,
+  });
+  const cards = byClass(one, 'ct-card');
+  const none = byClass(one, 'ct-none');
+  assert.equal(cards.length - none.length, 1, 'more cards were drawn than had evidence');
+  assert.equal(none.length, 1);
+  assert.match(text(none[0]), /No further verified changes/);
+  // And it explains itself rather than looking like a card that failed.
+  assert.match(text(none[0]), /rests on a published document/);
+});
+
+test('the quiet day reads in Arabic too', () => {
+  const one = changedToday({ ...DATA,
+    companies: [{ ticker: 'AAA', name: { en: 'Alpha', ar: 'ألفا' }, rv: 9,
+      volume: 9000000, medianVolume: 1000000 }],
+    indices: [], sectorOwnership: null },
+  true, { ...hooks, heading: 'ما تغيّر اليوم' });
+  assert.match(text(one), /لا تغيّرات موثّقة أخرى/);
+  assert.doesNotMatch(text(one), /No further verified/);
 });

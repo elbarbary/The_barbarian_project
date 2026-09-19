@@ -587,11 +587,13 @@ export class Component extends Base {
       filedSearch:'Filter by company or ticker',
       filedClear:'Clear', filedNothing:'No filing this month matches that.',
       breadthLine:'{up} rose, {down} fell and {flat} held, of {counted} counted in the {date} session.',
-      breadthWord:'How widely', breadthOf:'{n} shares counted',
+      breadthWord:'How widely', breadthOf:'{n} shares counted', didNotTrade:'did not trade',
+      exploreTitle:'Explore further',
+      exploreLead:'The market on a colour map, four measures of it, and the tools to rank it your own way. None of it is needed to read the page above.',
       // `flat` counts only companies that HAVE a recorded change of zero:
       // one that did not trade has no pct and is left out of `counted`
       // altogether. The two are opposite facts and the bar says so.
-      breadthNote:'“Unchanged” is a recorded reading, not an absence of trading.',
+      breadthNote:'“Unchanged” is a share that traded and closed where it opened. A share nobody dealt in is in the hatched band, not that one.',
       calWindow:'Filed between {from} and {to} in {n} past years.',
       yieldWord:'yield',
       macroMoved:'Moved with the EGX 30 {r} over {n} sessions.',
@@ -703,6 +705,8 @@ export class Component extends Base {
       followRose:'Rose', followFell:'Fell', followFlat:'Unchanged',
       followOfCount:'of {n}',
       followOpenList:'The whole list',
+      followEmptyLead:'You are not following anything yet. These are the largest companies on the exchange by market value — a published ranking, not our pick.',
+      followNotOwning:'Following a company shows its close and its filings here. It records nothing about what you own.',
       // ── one sector, opened ──
       secOpen:'Open the sector',
       secBack:'All sectors',
@@ -998,8 +1002,10 @@ export class Component extends Base {
       filedSearch:'تصفية بالشركة أو الرمز',
       filedClear:'مسح', filedNothing:'لا يوجد إفصاح هذا الشهر يطابق ذلك.',
       breadthLine:'صعد {up} سهماً وتراجع {down} وثبت {flat}، من إجمالي {counted} سهماً في جلسة {date}.',
-      breadthWord:'اتساع حركة السوق', breadthOf:'{n} سهماً محسوباً',
-      breadthNote:'«بلا تغيّر» قراءة مسجّلة، وليست غياب تداول.',
+      breadthWord:'اتساع حركة السوق', breadthOf:'{n} سهماً محسوباً', didNotTrade:'لم تتداول',
+      exploreTitle:'استكشف أكثر',
+      exploreLead:'السوق على خريطة ملوّنة، وأربعة مقاييس له، وأدوات ترتّبه بطريقتك. لا شيء منها لازم لقراءة ما سبق.',
+      breadthNote:'«ثابتة» سهم تداول وأغلق حيث فتح. والسهم الذي لم يتعامل عليه أحد في الشريط المخطّط، لا في ذاك.',
       calWindow:'أُودعت بين {from} و{to} في {n} سنوات سابقة.',
       yieldWord:'عائد الكوبون',
       macroMoved:'تحرك مع إيجي إكس 30 بمقدار {r} على مدى {n} جلسة.',
@@ -1108,6 +1114,8 @@ export class Component extends Base {
       followRose:'صعدت', followFell:'تراجعت', followFlat:'دون تغيّر',
       followOfCount:'من {n}',
       followOpenList:'القائمة كاملة',
+      followEmptyLead:'لا تتابع شيئاً بعد. هذه أكبر الشركات في البورصة بالقيمة السوقية — ترتيب منشور، وليس اختياراً منّا.',
+      followNotOwning:'متابعة شركة تعرض إغلاقها وإفصاحاتها هنا. ولا تسجّل شيئاً عمّا تملكه.',
       // ── قطاع واحد، مفتوحاً ──
       secOpen:'افتح القطاع',
       secBack:'كل القطاعات',
@@ -1991,6 +1999,9 @@ export class Component extends Base {
       star: watchedSet.has(c.ticker) ? '\u2605' : '\u2606',
       starColor: watchedSet.has(c.ticker) ? 'var(--accent)' : 'var(--faint)',
       followLabel: watchedSet.has(c.ticker) ? L.unfollow : L.follow,
+      /* `aria-pressed` needs the state as a string, and a star glyph is not
+         one a screen reader can read as pressed or not. */
+      followed: String(watchedSet.has(c.ticker)),
       follow: (e) => { if (e && e.stopPropagation) e.stopPropagation();
         this.onWatch && this.onWatch(c.ticker); } });
 
@@ -2016,11 +2027,36 @@ export class Component extends Base {
     // A card each, with the company's own closes under it. `_series` is what
     // main.js fetches per followed ticker; a company with no published series
     // keeps its card and loses its line rather than getting an invented one.
+    /* A MARKER MEANS A DOCUMENT, NOT ATTENTION.
+       The review asks each followed tile for "one new-event marker", and is
+       specific that a marker "means a real new event since a stored reading
+       boundary, not a generic attention badge".
+       There is no stored reading boundary yet — read-state is phase 5 of the
+       delivery plan — so this does not claim one. It says what it can check:
+       this company filed something in the last week, on that date, of that
+       kind. A tile with no filing in the window carries no mark at all, which
+       is the difference between a marker and a badge. */
+    const markSince = (() => {
+      const at = new Date(`${String(D.marketDate || '')}T00:00:00Z`);
+      if (Number.isNaN(at.getTime())) return '';
+      at.setUTCDate(at.getUTCDate() - 7);
+      return at.toISOString().slice(0, 10);
+    })();
+    const newestFiling = new Map();
+    for (const e of (D.filedEvents || [])) {
+      if (!e || !e.ticker || !e.date || (markSince && e.date < markSince)) continue;
+      const held = newestFiling.get(e.ticker);
+      if (!held || e.date > held.date) newestFiling.set(e.ticker, e);
+    }
     const followed = followedCos.map((c) => {
       const row = mkRow(c);
       const points = ((this._series || {})[c.ticker] || []).slice(-90);
       const up = (c.pct || 0) >= 0;
+      const mark = newestFiling.get(c.ticker) || null;
       return Object.assign(row, {
+        hasMark: Boolean(mark),
+        markKind: mark ? (ar ? (mark.kindAr || mark.kind) : (mark.kind || mark.kindAr)) : '',
+        markWhen: mark ? this.shortDate(mark.date) : '',
         spark: this.sparkOf(points, up),
         hasSpark: points.length > 1,
         sparkNote: points.length > 1
@@ -2077,14 +2113,42 @@ export class Component extends Base {
        and each carries the day's percentage, so the same three numbers can be
        counted from them. `counted` travels with the result and is drawn, so
        the denominator is never implied. */
+    /* A SHARE THAT DID NOT TRADE IS NOT A SHARE THAT DID NOT MOVE.
+       The exchange lists a percentage for every company whether or not one
+       share changed hands, and for the ones that did not it lists 0.00%. Both
+       the published breadth block and the count taken from the directory read
+       that as "unchanged" — so on 17 September 2026, 46 of the 288 companies
+       had zero volume and every one of them sat in a band captioned as a
+       session reading. Sixteen per cent of the bar was silence drawn as
+       stillness.
+
+       The review is explicit: "Stale quotes and unquoted companies are not
+       'unchanged'." So they get a band of their own and the denominator keeps
+       them — dropping them would quietly shrink the market instead. The four
+       bands sum to the coverage, which is the number printed beside the bar.
+
+       Counted from the directory rather than taken from the published block,
+       because the published block has three numbers and this needs four; the
+       block is the fallback for a reader whose directory carries no volumes. */
     const breadth = (() => {
+      const rows = (D.companies || []).filter((c) => typeof c.pct === 'number');
+      const priced = rows.filter((c) => typeof c.volume === 'number');
+      if (priced.length) {
+        const traded = priced.filter((c) => c.volume > 0);
+        const up = traded.filter((c) => c.pct > 0).length;
+        const down = traded.filter((c) => c.pct < 0).length;
+        return { up, down, flat: traded.length - up - down,
+          idle: rows.length - traded.length, counted: rows.length, date: D.marketDate };
+      }
       const pub = D.breadth;
-      if (pub && typeof pub.counted === 'number' && pub.counted > 0) return pub;
-      const moved = (D.companies || []).filter((c) => typeof c.pct === 'number');
-      if (!moved.length) return null;
-      const up = moved.filter((c) => c.pct > 0).length;
-      const down = moved.filter((c) => c.pct < 0).length;
-      return { up, down, flat: moved.length - up - down, counted: moved.length, date: D.marketDate };
+      if (pub && typeof pub.counted === 'number' && pub.counted > 0) {
+        return Object.assign({ idle: 0 }, pub);
+      }
+      if (!rows.length) return null;
+      const up = rows.filter((c) => c.pct > 0).length;
+      const down = rows.filter((c) => c.pct < 0).length;
+      return { up, down, flat: rows.length - up - down, idle: 0,
+        counted: rows.length, date: D.marketDate };
     })();
 
     // Not a share the exchange delisted. It still trades over the counter —
@@ -4877,12 +4941,18 @@ export class Component extends Base {
         { n: breadth.up, color: 'var(--up)', label: L.rose, ink: '#fff' },
         { n: breadth.down, color: 'var(--down)', label: L.fell, ink: '#fff' },
         { n: breadth.flat, color: 'var(--rule2)', label: L.flat, ink: 'var(--t2)' },
-      ].map((b) => Object.assign({}, b, {
+        /* Drawn hatched rather than in a fourth colour: it is the absence of a
+           reading, and a solid band beside three solid bands reads as a fourth
+           kind of move. */
+        { n: breadth.idle || 0, color: 'var(--sunk)', label: L.didNotTrade,
+          ink: 'var(--t2)', hatched: true },
+      ].filter((b) => b.n > 0).map((b) => Object.assign({}, b, {
         width: Math.round((b.n / Math.max(1, breadth.counted)) * 100) + '%',
         // The count and its share travel with the band so the bar can be read
         // without the sentence under it. A stacked bar with no numbers on it
         // is a decoration.
         count: this.num(b.n, 0),
+        mark: b.hatched ? 'is-idle' : '',
         pct: Math.round((b.n / Math.max(1, breadth.counted)) * 100) + '%',
       })) : [],
       breadthCounted: breadth

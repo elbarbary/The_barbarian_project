@@ -83,16 +83,6 @@ function openForecast(scenarios, picks, model, horizon) {
   };
 }
 
-/** The four companies the re-rank moved furthest, and where it moved them. */
-function reorderRows(scenarios, reading, model, horizon, directory) {
-  if (!reading) return [];
-  const { rows } = rankingOf(scenarios, { model, horizon, gemini: true }, reading, directory);
-  return rows
-    .filter((r) => finite(r.baseRank) && finite(r.rank))
-    .sort((a, b) => Math.abs(b.baseRank - b.rank) - Math.abs(a.baseRank - a.rank))
-    .slice(0, 4)
-    .map((r) => ({ ticker: r.ticker, from: r.baseRank, to: r.rank, up: r.rank < r.baseRank }));
-}
 
 export function aiCards(component, data, ar) {
   const t = (en, arabic) => (ar ? arabic : en);
@@ -124,8 +114,6 @@ export function aiCards(component, data, ar) {
     ? scenarios.rerank.default.join('-') : null;
   if (readingKey) ensureReadings(component, data, [readingKey]);
   const reading = readingKey ? data.readings?.[readingKey] || null : null;
-  const reorder = scenarios && reading
-    ? reorderRows(scenarios, reading, modelId, horizon, data.companies || []) : [];
 
   const warning = st.aiWarning ? warningDialog(component, data, ar, {
     onAccept: () => open(component, {}),
@@ -148,17 +136,7 @@ export function aiCards(component, data, ar) {
       'Where the saved paths end. Not probability bounds, and not drawn as a band.',
       'حيث تنتهي المسارات المحفوظة. ليست حدود احتمال، ولا تُرسم كنطاق.'))) : null;
 
-  const reorderCard = reorder.length ? h('div', { class: 'aix-fact' },
-    h('span', { class: 'aix-fact-label' }, t('GEMINI RE-RANK · ORDER ONLY', 'إعادة ترتيب Gemini · الترتيب فقط')),
-    h('div', { class: 'aix-reorder-rows' }, reorder.map((r) => h('div', { key: r.ticker, class: 'aix-reorder-row' },
-      h('span', { class: 'aix-reorder-name' }, r.ticker),
-      h('span', { class: 'aix-n' }, String(r.from)),
-      h('span', { 'aria-hidden': 'true', class: 'aix-reorder-arrow' }, '←'),
-      h('span', { class: r.up ? 'aix-n aix-reorder-up' : 'aix-n aix-reorder-down' }, String(r.to))))),
-    h('p', { class: 'aix-fact-note' }, t(
-      'The saved model prices did not change.', 'لم تتغيّر أسعار النموذج المحفوظة.'))) : null;
-
-  // The third fact is the record itself, and it has two states. A window has
+  // The fact Home shows, and it has two states. A window has
   // closed, so the result is a measurement — or it has not, and the honest
   // thing to draw is how many sessions each night it is still holding has
   // left to run. Never a zero, and never an average it does not have.
@@ -192,12 +170,31 @@ export function aiCards(component, data, ar) {
     const last = rowsEnd(rows, n);
     const toRead = rows.some((r) => !r.read);
     const sessionsAfterAr = (k) => countAr(k, 'جلسة واحدة', 'جلستين', 'جلسات', 'جلسة');
-    const versus = next !== null
+    /* WHY THE BIG FIGURE IS A SENTENCE AND NOT "0 of 5".
+       The design review's second P1: a dominant "0 of 5" is read by a novice
+       as zero correct predictions out of five. It is not a score at all — it
+       counts how many nights have aged far enough to be marked, which is a
+       fact about the calendar, not about the model. A figure that large, in
+       the position a headline number occupies, cannot be rescued by the words
+       under it, so the headline is the words and the count moves into the
+       supporting line where it reads as a tally of nights.
+
+       The review gives the wording: "First evaluation pending · after N
+       completed sessions". */
+    const headWords = system.sessions
+      ? t('Evaluation in progress', 'التقييم جارٍ')
+      : t('First evaluation pending', 'التقييم الأول لم يبدأ بعد');
+    const afterWords = last !== null
+      ? t(`after ${sessionsLabel(last, false)} completed`, `بعد ${sessionsAfterAr(last)} مكتملة`)
+      : '';
+    const tally = t(`${system.sessions} of ${minimum} nights read`,
+      `${system.sessions} من ${minimum} ليالٍ مقروءة`);
+    const nextWords = next !== null
       ? (system.sessions
-        ? t(`nights scored · the next in ${sessionsLabel(next, false)}`, `ليالٍ مُقيَّمة · التالية بعد ${sessionsAfterAr(next)}`)
-        : t(`nights scored · the first in ${sessionsLabel(next, false)}`, `ليالٍ مُقيَّمة · الأولى بعد ${sessionsAfterAr(next)}`))
-      : system.nights ? t('nights scored', 'ليالٍ مُقيَّمة')
-        : t('nights scored · it has not read a night yet', 'ليالٍ مُقيَّمة · لم يقرأ أي ليلة بعد');
+        ? t(`the next in ${sessionsLabel(next, false)}`, `التالية بعد ${sessionsAfterAr(next)}`)
+        : t(`the first in ${sessionsLabel(next, false)}`, `الأولى بعد ${sessionsAfterAr(next)}`))
+      : (system.nights ? '' : t('it has not read a night yet', 'لم يقرأ أي ليلة بعد'));
+    const versus = [afterWords, tally, nextWords].filter(Boolean).join(' · ');
     const legend = rows.length
       ? t(`Each row is one night’s five, held ${word(n)} ${n === 1 ? 'session' : 'sessions'}: filled squares have closed${toRead ? ', dashed rows are nights still to read' : ''}.`,
         `كل صف أعلى خمس شركات في ليلة، تُتابَع ${sessionsLabel(n, true)}: المربعات الممتلئة أُغلقت${toRead ? '، والصفوف المتقطعة ليالٍ لم تُقرأ بعد' : ''}.`)
@@ -211,14 +208,27 @@ export function aiCards(component, data, ar) {
     scoredCard = h('div', { class: 'aix-fact aix-system aix-system-pending' },
       h('span', { class: 'aix-fact-label' }, t('EVALUATION IN PROGRESS', 'تقييم جارٍ')),
       h('div', { class: 'aix-system-figure' },
-        h('strong', { class: 'aix-system-value', dir: ar ? 'rtl' : 'ltr' },
-          t(`${system.sessions} of ${minimum}`, `${system.sessions} من ${minimum}`)),
+        h('strong', { class: 'aix-system-value is-words' }, headWords),
         h('p', { class: 'aix-system-versus' }, versus)),
       rows.length ? recordChart(rows, n, ar, { label: `${legend} ${end}`, end }) : null,
       h('p', { class: 'aix-fact-note' }, legend));
   }
 
-  const facts = [forecastCard, reorderCard, scoredCard].filter(Boolean);
+  /* ONE VISUAL ON HOME, NOT THREE.
+     The design review asks the homepage for "one forecast visual OR one
+     completed comparison". Three fact tiles are what made this block a
+     proposition rather than a preview — a reader met a forecast, a re-ranking
+     and an evaluation counter before the market.
+
+     Which one: the completed comparison whenever the record has enough
+     scored nights to have one, and the evaluation-pending card otherwise.
+     Both reviewers flagged the alternative — the named-company forecast with
+     its low/average/high — as the figure most easily read as a price target,
+     and it is the one card here that names a security. It keeps its place in
+     the workbench, behind the warning, where a reader arrives having asked.
+     The Gemini re-ranking goes with it, for the same reason: "12 → 3" beside
+     a company name reads as advice however it is captioned. */
+  const facts = [scoredCard || forecastCard].filter(Boolean);
   if (!facts.length) return warning;
 
   const record = system

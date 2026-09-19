@@ -268,8 +268,15 @@ const squares = (row, cls) => all(row).filter((n) => n.tag === 'i' && (cls === u
 
 test('below the record’s minimum the system counts nights, and draws the sessions each is held', () => {
   const card = systemOf(waitingRecord([{ basisSession: '2026-09-14', sessionsClosed: 0 }]));
-  assert.match(text(card), /0 of 5/);
-  assert.match(text(card), /nights scored · the first in 5 sessions/);
+  /* The count still has to be on the card — a reader is entitled to know how
+     far along the evaluation is. What changed is where it sits: the headline
+     is the review's wording and the tally is in the line under it, which is
+     the difference between "this model scored 0" and "no night has aged far
+     enough to mark yet". */
+  assert.match(text(card), /First evaluation pending/);
+  assert.match(text(card), /0 of 5 nights read/);
+  assert.match(text(card), /after 9 sessions completed/);
+  assert.match(text(card), /the first in 5 sessions/);
   // Never the word that also names the window: that was the confusion.
   assert.doesNotMatch(text(card), /sessions scored|\d\/\d/);
   assert.doesNotMatch(text(card), /\+3\.50%/);
@@ -320,9 +327,12 @@ test('with some nights scored it counts them, and only the nights still needed a
 test('in Arabic the counts agree with their nouns and read the right way round', () => {
   const card = systemOf(waitingRecord([{ basisSession: '2026-09-14', sessionsClosed: 0 }]), true);
   const value = byClass(card, 'aix-system-value')[0];
-  assert.equal(text(value).trim(), '0 من 5');
-  assert.equal(value.attrs.dir, 'rtl', 'left to right, "0 من 5" reads as five of none');
-  assert.match(text(card), /ليالٍ مُقيَّمة · الأولى بعد 5 جلسات/);
+  /* The headline is a sentence now, so there is no bare "0 من 5" for a
+     right-to-left run to reverse into "five of none". The count keeps its
+     Arabic agreement in the supporting line, which is what this test is for. */
+  assert.equal(text(value).trim(), 'التقييم الأول لم يبدأ بعد');
+  assert.match(text(card), /0 من 5 ليالٍ مقروءة/);
+  assert.match(text(card), /الأولى بعد 5 جلسات/);
   assert.match(text(card), /المتوسط بعد 9 جلسات على الأقل/);
   assert.match(text(card), /14 سبتمبر/);
   assert.doesNotMatch(text(card), /undefined|NaN/);

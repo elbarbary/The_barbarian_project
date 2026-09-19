@@ -16,15 +16,23 @@ html[dir=rtl] .chart-viewer-content{direction:rtl}
 .chart-viewer output{min-width:58px;text-align:center;font-variant-numeric:tabular-nums;direction:ltr}
 .chart-viewer>p{margin:0;text-align:center;font-size:12px;line-height:1.5;color:var(--t2);flex:none}
 @media(max-width:600px){
- .journal-home>*{order:4}
+ /* ONE ORDER, PHONE AND DESKTOP.
+    These used to disagree with the markup, so the page a phone showed was not
+    the page the template described and two files had to be read to know which
+    block came first. The numbers below are the markup's own sequence, written
+    out only because `.market-head` is `display:contents` here and its two
+    children become Home's own items.
+    Anything this list does not name lands at 9, which is why a NEW block has
+    to be named here or it silently falls to the bottom of the phone. */
+ .journal-home>*{order:9}
  .journal-home>.journal-intro{order:0}
  .journal-home>.om-idx{order:1}
- .journal-home>.breadth-strip{order:1}
- /* The record, then what changed, then the shortcuts. Anything this list
-    does not name lands at 4, which is why a new block has to be named here
-    or it silently falls to the bottom of the phone. */
- .journal-home>.ct-shelf{order:2}
- .journal-home>.quick-paths{order:3;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .journal-home>.breadth-strip{order:2}
+ .journal-home>.home-watch{order:3}
+ .journal-home>.ct-shelf{order:4}
+ .journal-home>.insight-shelf{order:6}
+ .journal-home>.ft-portals{order:7}
+ .journal-home>.quick-paths{order:8;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
  .journal-home>.quick-paths button{min-height:64px;flex-direction:row;padding:12px;border-radius:var(--radius-control);text-align:start}
  .journal-home>.quick-paths strong{font-size:13px;line-height:1.5}
  .journal-home>.quick-paths svg{flex:none;width:22px;height:22px}

@@ -360,3 +360,80 @@
   font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
   font-size: 10px; color: var(--faint);
 }
+
+/* The quiet-day card in ما تغيّر اليوم.
+ * Deliberately the same size and position as a real card but without its
+ * furniture — no dateline, no primitive name, no rule, no chip — so it reads
+ * as an answer rather than as a card that failed to load. */
+#app .ct-card.ct-none {
+  display: flex; flex-direction: column; justify-content: center; gap: 8px;
+  background: var(--sunk); border-style: dashed;
+}
+#app .ct-none-line { margin: 0; font: 600 15px/1.45 var(--font-heading); color: var(--t2); }
+#app .ct-none-why { margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--faint); }
+
+/* The empty Following shelf: recognisable companies, each with its own Follow.
+ *
+ * The card splits into two controls because it does two things — open the
+ * company, or follow it — and one <button> inside another is invalid HTML
+ * that a keyboard cannot reach. They sit in one bordered tile so the pair
+ * still reads as one company. */
+#app .home-watch-lead { margin: 0 0 14px; font-size: 14px; line-height: 1.6; color: var(--t2); max-width: 62ch; }
+#app .home-watch-note { margin: 14px 0 0; font-size: 12.5px; line-height: 1.6; color: var(--faint); }
+#app .home-watch-card.is-offer {
+  display: flex; flex-direction: column; gap: 0; padding: 0; overflow: hidden;
+  cursor: default; transform: none;
+}
+#app .home-watch-card.is-offer:hover { transform: none; box-shadow: none; }
+#app .hw-open {
+  display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: baseline;
+  padding: 14px; background: none; border: 0; color: inherit; font: inherit;
+  text-align: start; cursor: pointer; min-width: 0;
+}
+#app .hw-open:hover .hw-name { text-decoration: underline; }
+#app .hw-follow {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  min-height: 44px; padding: 0 12px; cursor: pointer;
+  border: 0; border-top: 1px solid var(--edgeIn); background: var(--surface);
+  color: var(--t2); font: inherit; font-size: 12.5px;
+}
+#app .hw-follow:hover { background: var(--sunk); color: var(--ink); }
+
+/* The band for shares nobody dealt in.
+ * Hatched rather than a fourth colour: three solid bands are three kinds of
+ * move, and this is the absence of one. The same hatch the sector table uses
+ * for its did-not-trade share, so the mark means one thing across the site. */
+#app .breadth-bar > i.is-idle,
+#app .breadth-key > i.is-idle {
+  background-image: repeating-linear-gradient(
+    -45deg, transparent 0 3px, var(--rule) 3px 4px);
+  border: 1px solid var(--rule);
+}
+
+/* Explore further: one shelf holding what used to be four sections.
+ * No card of its own — a bordered island around four bordered islands is the
+ * nested-card pattern this design keeps out. A rule and a heading are enough
+ * to say "everything under here is optional". */
+#app .explore-further {
+  display: flex; flex-direction: column; gap: 18px;
+  padding-top: 20px; border-top: 1px solid var(--rule);
+}
+#app .ef-head { display: flex; flex-direction: column; gap: 6px; }
+#app .ef-head h2 { margin: 0; font: 600 21px/1.35 var(--font-heading); letter-spacing: -.02em; }
+#app .ef-head p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--t2); max-width: 68ch; }
+/* The members already carry their own margins from when they were siblings. */
+#app .explore-further > .market-measures { margin-top: 0 !important; }
+
+/* The new-event marker on a followed company.
+ * It names the document and its date, because a bare dot would be the
+ * "generic attention badge" the review rules out — a reader cannot tell a
+ * dividend from a rights issue from a coloured spot, and a mark that could
+ * mean anything is read as "look at this", which is advice. */
+#app .hw-mark {
+  grid-column: 1 / -1; grid-row: 5; display: flex; align-items: center; gap: 6px;
+  margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--edgeIn);
+  font-size: 11.5px; line-height: 1.45; color: var(--t2);
+}
+#app .hw-mark > i {
+  flex: 0 0 6px; height: 6px; border-radius: 999px; background: var(--accent);
+}

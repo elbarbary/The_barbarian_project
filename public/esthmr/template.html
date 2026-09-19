@@ -97,19 +97,16 @@
         <h1>{{ overviewTitle }}</h1>
       </header>
 
-      <!-- §T6: the model lab opens the page.
-           The comp puts it above the market head, and the reason holds up: the
-           market head is the same three indices every session, while this card
-           is the only thing on Home that changed because a night ran. Under the
-           indices it read as a footnote to them; above, it is what it is — the
-           one block whose content is ours rather than the exchange's.
+      <!-- ── THE MARKET, FIRST ──────────────────────────────────────────── -->
+      <!-- The redesign review's first P1: "Home starts with a large AI
+           proposition, two actions, a research-maturity graphic, and three
+           explanatory steps before the EGX cards. Visitors must understand
+           the machinery before seeing the market."
 
-           Built in public/esthmr/ai-cards.js. Each card is a statement about a
-           MODEL — how the five companies it ranked highest actually did against
-           the market — and names no security. Clicking one opens the scenario
-           workbench, which does name securities and is gated accordingly. -->
-      {{ aiCards }}
-
+           So the market leads and the lab is a preview further down. This
+           reverses the ordering taken from turn 6 of the comp, which put the
+           lab on top; the review is the later instruction and is explicit
+           that the lab above the indices is the defect, not the layout. -->
       <!-- The market, first.
            The three index levels were already the biggest figures here, but
            they sat under the models' own record and a row of shortcuts — so a
@@ -166,12 +163,12 @@
           </div>
           <div class="breadth-bar" role="img" aria-label="{{ breadthCounted }}">
             <sc-for list="{{ breadthBars }}" as="b">
-              <i style="width:{{ b.width }};background:{{ b.color }}" title="{{ b.label }} {{ b.count }}"></i>
+              <i class="{{ b.mark }}" style="width:{{ b.width }};background:{{ b.color }}" title="{{ b.label }} {{ b.count }}"></i>
             </sc-for>
           </div>
           <div class="breadth-keys"><sc-for list="{{ breadthBars }}" as="b">
             <span class="breadth-key">
-              <i aria-hidden="true" style="background:{{ b.color }}"></i>
+              <i aria-hidden="true" class="{{ b.mark }}" style="background:{{ b.color }}"></i>
               <span>{{ b.label }}</span>
               <strong>{{ b.count }}</strong>
               <small>{{ b.pct }}</small>
@@ -182,6 +179,7 @@
       </sc-if>
       </div>
 
+      <!-- ── WHAT THE READER FOLLOWS ──────────────────────────────────────────── -->
       <!-- Turn 6, block 9: the reader's own list, on Home.
            The comp puts المتابَعة between the market head and ما تغيّر اليوم,
            and the argument is that a reader who has followed four companies
@@ -193,6 +191,40 @@
            Absent entirely when nobody is followed. An empty four-up grid of
            placeholder cards is worse than no block, and an invitation to
            follow something already sits on every company row. -->
+      <!-- Nobody followed yet.
+           The review: "If the list is empty, show recognizable company choices
+           with explicit Follow buttons, not fictional ownership or a forced
+           multi-step questionnaire." Recognisable here means the largest
+           companies on the exchange by market value, which is a published
+           fact and not a selection — the heading says so, because a list this
+           publisher chose would be a recommendation.
+
+           Following is interest, not holding. The note says that in as many
+           words: nothing here records that a reader owns anything. -->
+      <sc-if value="{{ noFollowed }}">
+        <section class="home-watch home-watch-empty" aria-label="{{ L.followTitle }}">
+          <p class="card-dateline"><span>{{ L.watchlist }}</span></p>
+          <h2 class="home-watch-title">{{ L.followTitle }}</h2>
+          <p class="home-watch-lead">{{ L.followEmptyLead }}</p>
+          <div class="home-watch-grid">
+            <sc-for list="{{ watchlist }}" as="w" hint-placeholder-count="6">
+              <div class="home-watch-card is-offer">
+                <button type="button" class="hw-open" onClick="{{ w.go }}">
+                  <span class="hw-code">{{ w.ticker }}</span>
+                  <span class="hw-name">{{ w.name }}</span>
+                  <span class="hw-close">{{ w.close }}</span>
+                  <span class="hw-pct" style="color:{{ w.color }}">{{ w.pct }}</span>
+                </button>
+                <button type="button" class="hw-follow" onClick="{{ w.follow }}" aria-pressed="{{ w.followed }}">
+                  <span aria-hidden="true" style="color:{{ w.starColor }}">{{ w.star }}</span>
+                  <span>{{ w.followLabel }}</span>
+                </button>
+              </div>
+            </sc-for>
+          </div>
+          <p class="home-watch-note">{{ L.followNotOwning }}</p>
+        </section>
+      </sc-if>
       <sc-if value="{{ hasFollowed }}">
         <section class="home-watch" aria-label="{{ L.followTitle }}">
           <p class="card-dateline">
@@ -209,17 +241,33 @@
                 <span class="hw-pct" style="color:{{ w.color }}">{{ w.pct }}</span>
                 <span class="hw-spark">{{ w.spark }}</span>
                 <span class="hw-note">{{ w.sparkNote }}</span>
+                <sc-if value="{{ w.hasMark }}">
+                  <span class="hw-mark"><i aria-hidden="true"></i>{{ w.markKind }} · {{ w.markWhen }}</span>
+                </sc-if>
               </button>
             </sc-for>
           </div>
         </section>
       </sc-if>
+
+      <!-- ── WHAT CHANGED — THREE EVIDENCE CARDS ──────────────────────────────────────────── -->
       {{ changedToday }}
 
-      <div class="quick-paths"><sc-for list="{{ quickActions }}" as="q">
-        <button type="button" onClick="{{ q.go }}"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="{{ q.icon }}"></path></svg><span><strong>{{ q.label }}</strong><small>{{ q.note }}</small></span><span class="quick-arrow" aria-hidden="true">↗</span></button>
-      </sc-for></div>
+      <!-- ── THE MODEL LAB, AS A PREVIEW ──────────────────────────────────────────── -->
+      <!-- §T6: the model lab opens the page.
+           The comp puts it above the market head, and the reason holds up: the
+           market head is the same three indices every session, while this card
+           is the only thing on Home that changed because a night ran. Under the
+           indices it read as a footnote to them; above, it is what it is — the
+           one block whose content is ours rather than the exchange's.
 
+           Built in public/esthmr/ai-cards.js. Each card is a statement about a
+           MODEL — how the five companies it ranked highest actually did against
+           the market — and names no security. Clicking one opens the scenario
+           workbench, which does name securities and is gated accordingly. -->
+      {{ aiCards }}
+
+      <!-- ── SECTORS AND OWNERSHIP ──────────────────────────────────────────── -->
       <section class="insight-shelf">
         <h2>{{ insightHeading }}</h2>
         <div class="insight-grid">
@@ -246,6 +294,25 @@
         </div>
       </section>
       {{ flowViews.home }}
+
+      <!-- ── EXPLORE FURTHER ──────────────────────────────────────────── -->
+      <!-- One shelf, not four sections.
+           The review's last row is "Explore further: heatmap, four measures,
+           market context", and both independent reads of the live code said
+           the same thing about it — present, but fragmented across the
+           measures block, the ranking launcher, the heatmap and the crossings,
+           each arriving with its own heading as though it were the point of
+           the page. They are the tools a reader reaches for after the answer,
+           so they share one heading that says as much, and what a reader met
+           as four competing sections is now one place to go looking. -->
+      <section class="explore-further" aria-labelledby="explore-further-title">
+        <header class="ef-head">
+          <h2 id="explore-further-title">{{ L.exploreTitle }}</h2>
+          <p>{{ L.exploreLead }}</p>
+        </header>
+      <div class="quick-paths"><sc-for list="{{ quickActions }}" as="q">
+        <button type="button" onClick="{{ q.go }}"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="{{ q.icon }}"></path></svg><span><strong>{{ q.label }}</strong><small>{{ q.note }}</small></span><span class="quick-arrow" aria-hidden="true">↗</span></button>
+      </sc-for></div>
       <sc-if value="{{ screen }}">
         <section class="market-measures" style="margin-top:18px;padding:20px 22px 18px;border-radius:var(--radius-island);background:var(--glass);border:1px solid var(--edge);box-shadow:var(--shCard)">
           <div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap">
@@ -390,6 +457,7 @@
           <sc-if value="{{ fpEmpty }}"><p>{{ L.nothingYet }}</p></sc-if>
         </section>
       </div>
+      </section>
       <button type="button" class="island-details-toggle" onClick="{{ toggleHomeDetails }}" aria-expanded="{{ showHomeDetails }}">{{ detailLabel }} <span>⌄</span></button>
       <sc-if value="{{ showHomeDetails }}">
       <!-- ── The session in one card ──

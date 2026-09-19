@@ -76,49 +76,78 @@ test('the copy does not promise, and the beta label is on the surface', () => {
   assert.match(cardsSrc, /not an index/);
 });
 
-test('the lab leads the desktop page, and the market still leads a phone', async () => {
-  /* THIS REVERSES AN EARLIER DECISION, ON THE DESKTOP ONLY.
+test('the market leads the page, and the lab is a preview under it', async () => {
+  /* THE ORDER CHANGED TWICE. THIS IS THE THIRD AND CURRENT ONE.
    *
-   * The cards were once first, above the index levels. A review objected —
-   * a visitor met the machinery before the market — and the owner's call was
-   * market first, models immediately after. That is what this test used to
-   * pin.
+   * It began with the lab first. A review objected — a visitor met the
+   * machinery before the market — and the owner's call was market first.
+   * Turn 6 of the comp then put the lab back on top, and that shipped.
    *
-   * Turn 6 of the redesign, headed "CORRECTED AGAINST THE LIVE SITE", puts
-   * مختبر النماذج back at the top of the desktop page. It is the later
-   * instruction and it was written with the live site in front of it, so it
-   * wins where it speaks. The argument it makes is a good one: the market
-   * head is the same three indices every session, while the lab card is the
-   * only block on Home whose content changed because a night ran.
+   * The 18 September design review reverses it again, and unlike the comp it
+   * argues the case: "Home starts with a large AI proposition, two actions, a
+   * research-maturity graphic, and three explanatory steps before the EGX
+   * cards. Visitors must understand the machinery before seeing the market."
+   * It is the later instruction, it scores visual focus 1/10 for exactly this,
+   * and its section 5 lays out the order below. Both the codex and the
+   * Antigravity reads of the live code named the same block as the single
+   * worst violation. So: market, participation, the reader's own list, what
+   * changed, then the lab as a preview.
    *
-   * The comp is a desktop 1440 mock and says nothing about a phone, where the
-   * original objection still holds — the fold is one card tall and the index
-   * level is the figure the page is opened for. So the phone ordering is
-   * unchanged, and this test now pins BOTH: lab first in the markup, market
-   * first under 600px.
-   *
-   * chart-viewer.css reorders Home's children under 600px and puts anything
-   * it does not name last, so the markup order alone does not decide the
-   * phone. */
-  const css = await read('public/esthmr/ai.css');
-  assert.match(css, /#app \.journal-home > \.ai-cards \{ order: 2; \}/,
-    'the phone no longer puts the market above the record');
-  const phone = await read('public/esthmr/chart-viewer.css');
-  const order = (sel) => Number((phone.match(new RegExp(`\\.journal-home>\\${sel}\\{order:(\\d+)`)) || [])[1]);
-  assert.equal(order('.om-idx'), 1, 'the indices are not first after the header');
-  assert.ok(order('.quick-paths') > 2, 'the shortcuts still come before the record');
-  assert.ok(Number((phone.match(/\.journal-home>\*\{order:(\d+)/) || [])[1]) > 2,
-            'unnamed sections would land above the record');
-
+   * Phone and desktop now carry ONE order — the markup's — rather than the
+   * markup saying one thing and chart-viewer.css another. */
   const template = await read('public/esthmr/template.html');
   const home = template.indexOf('{{ isHome }}');
   const at = (s2) => template.indexOf(s2, home);
-  assert.ok(at('journal-intro') < at('{{ aiCards }}'), 'the session header is not first');
-  assert.ok(at('{{ aiCards }}') < at('om-idx'),
-    'turn 6 puts the lab above the market head on a desktop');
-  assert.ok(at('om-idx') < at('quick-paths'), 'the market fell below the shortcuts');
-  assert.ok(at('{{ aiCards }}') < at('{{ changedToday }}'),
-    'the two Home shelves swapped places');
+  assert.ok(at('journal-intro') < at('om-idx'), 'the session header is not first');
+  assert.ok(at('om-idx') < at('home-watch'), 'the market is not above the reader’s list');
+  assert.ok(at('home-watch') < at('{{ changedToday }}'), 'Following fell below what changed');
+  assert.ok(at('{{ changedToday }}') < at('{{ aiCards }}'),
+    'the lab is above what changed again');
+  assert.ok(at('{{ aiCards }}') < at('quick-paths'),
+    'the shortcuts climbed above the lab preview');
+
+  /* The phone's explicit orders are the same sequence. A block missing from
+     that list silently falls to the bottom of the phone, which is how the two
+     came apart the first time. */
+  const phone = await read('public/esthmr/chart-viewer.css');
+  const order = (sel) => Number((phone.match(new RegExp(`\\.journal-home>\\${sel}\\{order:(\\d+)`)) || [])[1]);
+  const css = await read('public/esthmr/ai.css');
+  const lab = Number((css.match(/\.journal-home > \.ai-cards \{ order: (\d+)/) || [])[1]);
+  const seq = [order('.journal-intro'), order('.om-idx'), order('.breadth-strip'),
+    order('.home-watch'), order('.ct-shelf'), lab, order('.insight-shelf'),
+    order('.ft-portals'), order('.quick-paths')];
+  assert.ok(seq.every(Number.isFinite), `a block has no phone order: ${seq.join(',')}`);
+  assert.deepEqual(seq, [...seq].sort((x, y) => x - y),
+    `the phone order disagrees with the markup: ${seq.join(',')}`);
+  assert.equal(new Set(seq).size, seq.length, `two blocks share a phone order: ${seq.join(',')}`);
+});
+
+test('the homepage preview is one visual, and not the one that names a company', async () => {
+  /* The review asks Home for "one forecast visual OR one completed
+     comparison". Three fact tiles are what made this a proposition rather
+     than a preview.
+     Of the two the review allows, the completed comparison is the one that
+     ships: the forecast card carries a named company with a low, an average
+     and a high beside it, and both independent reads of this code named that
+     as the figure most easily taken for a price target. It keeps its place in
+     the workbench, behind the warning, where a reader arrives having asked. */
+  assert.match(cardsSrc, /const facts = \[scoredCard \|\| forecastCard\]/);
+  assert.doesNotMatch(cardsSrc, /reorderCard/,
+    'the Gemini re-rank tile is back on the homepage');
+  assert.doesNotMatch(cardsSrc, /function reorderRows/,
+    'the re-rank builder is dead code rather than removed');
+});
+
+test('the pending record is a sentence, not a score-shaped ratio', async () => {
+  /* The review's second P1: a dominant "0 of 5" is read as zero correct
+     predictions. It counts nights that have aged far enough to be marked —
+     a fact about the calendar. The headline is the review's own wording and
+     the count moves into the supporting line. */
+  assert.match(cardsSrc, /First evaluation pending/);
+  assert.match(cardsSrc, /التقييم الأول لم يبدأ بعد/);
+  assert.match(cardsSrc, /nights read/, 'the tally lost the word that says what it counts');
+  assert.doesNotMatch(cardsSrc, /\$\{system\.sessions\} of \$\{minimum\}`\)/,
+    'the bare ratio is the headline figure again');
 });
 
 test('restoring Home did not cost it the sections it had', async () => {
@@ -376,18 +405,36 @@ test('breadth is a bar beside the indices, not a ring in the board', async () =>
     assert.ok(home.includes(`{{ b.${field} }}`), `the bar does not read b.${field}`);
   }
 
-  /* The third band is companies that TRADED and did not move. One that did not
-     trade has no percentage and is not counted at all — opposite facts, and
-     the note is what stops the band being read as "no trading". */
-  assert.match(logic, /breadthNote:'“Unchanged” is a recorded reading, not an absence of trading\./);
-  assert.match(logic, /breadthNote:'«بلا تغيّر» قراءة مسجّلة، وليست غياب تداول\./);
+  /* THE ASSUMPTION THIS TEST USED TO ENCODE WAS FALSE.
+     It said "one that did not trade has no percentage and is not counted at
+     all", and rested the whole distinction on a note under the bar. The
+     exchange publishes a percentage for every listed company whether or not a
+     share changed hands, and 0.00% for the ones where none did — so those
+     companies were counted, and they were counted in the band captioned as a
+     session reading. On 17 September 2026 that was 46 of 288.
+
+     The note is still there and still needed, but it no longer carries the
+     distinction on its own: the bar draws it. */
+  assert.match(logic, /breadthNote:'“Unchanged” is a share that traded and closed where it opened/);
+  assert.match(logic, /A share nobody dealt in is in the hatched band, not that one\./);
+  assert.match(logic, /didNotTrade:'did not trade'/);
+  assert.ok(home.includes('{{ b.mark }}'), 'the hatched band has no mark to draw it with');
+  assert.match(logic, /breadthNote:'«ثابتة» سهم تداول وأغلق حيث فتح/);
+  assert.match(logic, /didNotTrade:'لم تتداول'/);
   assert.ok(home.includes('{{ L.breadthNote }}'), 'the note is never rendered');
 
   /* chart-viewer.css reorders Home's children on a phone and sends anything it
      does not name to the back, so a new section needs naming or it lands
      below the fold however early it is in the markup. */
   const phone = await read('public/esthmr/chart-viewer.css');
-  assert.match(phone, /\.journal-home>\.breadth-strip\{order:1\}/,
+  /* Directly after the indices, whatever number that is. It used to share
+     order:1 with them, which worked but made two blocks fight for one slot;
+     the phone list is now the markup's sequence with a slot each, so what
+     this test needs is adjacency, not a literal. */
+  const at = (sel) => Number((phone.match(new RegExp(`\\.journal-home>\\${sel}\\{order:(\\d+)`)) || [])[1]);
+  assert.ok(Number.isFinite(at('.om-idx')) && Number.isFinite(at('.breadth-strip')),
+    'the indices or the bar have no phone order at all');
+  assert.equal(at('.breadth-strip'), at('.om-idx') + 1,
                'the bar is not pinned beside the indices on a phone');
 });
 
