@@ -1847,6 +1847,10 @@
     "meaning": "Higher domestic prices for fresh tomatoes increase raw material procurement costs for food processing companies, raising the final production cost of tomato paste and concentrates relative to international market price levels.",
     "meaning_ar": "يؤدي ارتفاع الأسعار المحلية للطماطم الطازجة إلى زيادة تكاليف شراء المواد الخام لشركات التصنيع الغذائي، مما يرفع تكلفة الإنتاج الإجمالية لمعجون الطماطم والمركزات مقارنة بمستويات الأسعار في الأسواق الدولية."
   },
+  "اسعار العملات اليوم السبت 19 سبتمبر 2026": {
+    "meaning": "Official foreign exchange rates reflect the current pricing for foreign currency conversion across the banking sector, establishing the baseline valuations used for corporate cross-border trade settlements, foreign-denominated obligations, and daily bank reconciliations.",
+    "meaning_ar": "تعكس أسعار الصرف الرسمية التسعير الحالي لتحويل العملات الأجنبية في القطاع المصرفي، محددةً التقييمات الأساسية المستخدمة في تسوية المعاملات التجارية الخارجية للشركات، والالتزامات المقومة بالنقد الأجنبي، والمطابقات المصرفية اليومية."
+  },
   "اسعار العملات اليوم.. الدينار الكويتي يتصدر والدولار عند 51.37 جنيه": {
     "meaning": "Official foreign exchange rates reflect the current pricing for cross-border settlements, directly setting import procurement costs and foreign currency balance sheet valuations for Egyptian companies.",
     "meaning_ar": "تعكس أسعار الصرف الرسمية التكلفة الحالية لتسوية المعاملات العابرة للحدود، وتحدد مباشرة تكاليف تدبير السلع المستوردة وإعادة تقييم بنود العملات الأجنبية في الميزانيات العمومية للشركات المصرية."
@@ -2078,6 +2082,10 @@
   "الاتحاد الاوروبي يفتح الباب امام عضويه كندا المنتسبه لتعزيز التجاره والاستثمار": {
     "meaning": "Associate membership structures establish harmonized regulatory frameworks and lower non-tariff barriers between jurisdictions, integrating cross-border supply chains and capital flows under standard trade treaties.",
     "meaning_ar": "تؤسس أطر العضوية المنتسبة معايير تنظيمية موحدة وتزيل الحواجز غير الجمركية بين الأطراف، مما يربط سلاسل التوريد وتدفقات رؤوس الأموال العابرة للحدود بموجب اتفاقيات تجارية مشتركة."
+  },
+  "الاتحاد الاوروبي يفرض تدابير تجاريه موقته لحمايه الصلب الكهربايي": {
+    "meaning": "The European Union applies provisional trade defense measures, such as tariffs or quotas, on imports of electrical steel to restrict foreign supply and shield domestic manufacturers from lower-priced external competition.",
+    "meaning_ar": "يُطبّق الاتحاد الأوروبي تدابير تجارية وقائية مؤقتة، مثل الرسوم الجمركية أو الحصص الاستيرادية، على واردات الصلب الكهربائي للحد من تدفقات المعروض الأجنبي وحماية المصنّعين المحليين من المنافسة السعرية الخارجية."
   },
   "الاتحاد الاوروبي يلغي فرض رسوم تصدير علي خرده الالومنيوم بضغط هندي": {
     "meaning": "The cancellation of export duties maintains the cross-border flow of European aluminum scrap without additional tariff costs, securing existing raw material supply chains for external smelting and recycling markets.",
@@ -2346,6 +2354,10 @@
   "الاهلي المصري يوقع بروتوكول تعاون مع «ساي شيلد» لتعزيز الامن السيبراني وتوظيف الذكاء الاصطناعي": {
     "meaning": "The agreement integrates CyShield's cybersecurity protocols and artificial intelligence technologies into the National Bank of Egypt's digital banking infrastructure.",
     "meaning_ar": "يدمج هذا البروتوكول تقنيات الأمن السيبراني والذكاء الاصطناعي الخاصة بشركة «ساي شيلد» ضمن البنية التحتية الرقمية للبنك الأهلي المصري."
+  },
+  "البرلمان البريطاني: خطه انقاذ “بريتيش ستيل” تفتقر للمصداقيه": {
+    "meaning": "Parliamentary skepticism over a corporate bailout plan signals unresolved operational restructuring, capital expenditure financing gaps, and ongoing state aid scrutiny for the industrial manufacturer.",
+    "meaning_ar": "يعكس تشكيك البرلمان في خطة الإنقاذ استمرار تعثر إعادة الهيكلة التشغيلية، ووجود فجوات تمويلية للنفقات الرأسمالية، مع خضوع الدعم الحكومي للرقابة والتدقيق."
   },
   "البنتاجون يستثمر 450 مليون دولار في شركه لانتاج التنجستن لمواجهه الصين": {
     "meaning": "This transaction provides direct non-dilutive government capital to fund mining infrastructure, processing facilities, and supply chain capacity for strategic critical minerals.",
@@ -6237,6 +6249,10 @@
     "meaning": "Electric vehicle manufacturers integrate humanoid robotics into assembly lines to automate complex physical tasks and reallocate capital expenditures toward advanced manufacturing infrastructure.",
     "meaning_ar": "تدمج شركات تصنيع السيارات الكهربائية الروبوتات الشبيهة بالبشر في خطوط التجميع لأتمتة المهام الصناعية وتعديل هيكل تخصيص النفقات الرأسمالية في العمليات التشغيلية."
   },
+  "شركات السيارات تضغط علي “ترامب” لابعاد الصين عن السوق الامريكيه": {
+    "meaning": "Automotive manufacturers lobby for trade barriers and regulatory restrictions against Chinese imports to limit foreign competition within the domestic US supply chain and retail market.",
+    "meaning_ar": "تمارس شركات تصنيع السيارات ضغوطاً لفرض حواجز تجارية وقيود تنظيمية ضد الواردات الصينية، بهدف الحد من المنافسة الخارجية داخل سلاسل الإمداد وسوق التجزئة الأمريكية."
+  },
   "شركات الصناعات الغذاييه تحت ضغط البصمه الكربونيه": {
     "meaning": "Food manufacturing companies face compliance mandates and export requirements that tie operational access and international contracts directly to the measurement and reporting of greenhouse gas emissions across their supply chains.",
     "meaning_ar": "تواجه شركات الصناعات الغذائية معايير امتثال واشتراطات تصديرية تربط النفاذ للأسواق والتعاقدات الدولية مباشرة بقياس الإفصاح عن الانبعاثات الكربونية عبر سلاسل الإمداد والتصنيع."
@@ -7801,6 +7817,10 @@
     "meaning": "Reaching 10.7 million users on the governmental services platform reflects the operational scale of state digital infrastructure, which processes public transactions electronically and integrates with licensed electronic payment and digital transformation service providers.",
     "meaning_ar": "يعكس وصول عدد مستخدمي منصة الخدمات الحكومية إلى 10.7 مليون مستخدم النطاق التشغيلي للبنية التحتية الرقمية للدولة، والتي تنفذ المعاملات العامة إلكترونياً وتتكامل مع مزودي خدمات الدفع الإلكتروني والتحول الرقمي المرخصين."
   },
+  "معنويات المستثمرين الامريكيين تتراجع لادني مستوي منذ مايو 2025": {
+    "meaning": "A decline in investor sentiment measures a shift in portfolio asset allocations from equities toward lower-risk money market instruments and cash reserves.",
+    "meaning_ar": "يقيس تراجع معنويات المستثمرين تحولاً في تخصيص الأصول بالمحافظ الاستثمارية من الأسهم نحو أدوات سوق النقد منخفضة المخاطر والاحتياطيات النقدية."
+  },
   "معيط: جزء كبير من عدم شعور المواطن بالتحسن الاقتصادي بسبب الصدمات الخارجيه": {
     "meaning": "Global macroeconomic shocks, including imported commodity price inflation and exchange rate fluctuations, directly transmit into the domestic cost structure, offsetting the transmission of aggregate fiscal stabilization to consumer-level purchasing power.",
     "meaning_ar": "تنتقل الصدمات الاقتصادية العالمية، كارتفاع أسعار السلع المستوردة وتقلبات أسعار الصرف، مباشرة إلى هيكل التكاليف المحلي، مما يعوض أثر استقرار المؤشرات المالية الكلية على القوة الشرائية للمستهلكين."
@@ -8136,6 +8156,10 @@
   "هل تنجح السياسات التقدميه في بناء اقتصاد اكثر عداله؟": {
     "meaning": "Progressive economic frameworks operate through mechanisms such as graduated income taxation, expanded public social spending, and labor market regulations to redistribute national income across households.",
     "meaning_ar": "تعمل الأطر الاقتصادية التقاعدية والتقدمية من خلال آليات مثل الضرائب التصاعدية على الدخل، وتوسيع الإنفاق الاجتماعي الحكومي، والضوابط التنظيمية لسوق العمل لإعادة توزيع الدخل القومي بين فئات المجتمع."
+  },
+  "هل صعدت اسعار الخضروات والطماطم والبطاطس والفاكهه اليوم السبت 19-9-2026 بسوق العبور؟": {
+    "meaning": "Obour Market operates as Egypt's primary wholesale terminal where daily agricultural supply volumes intersect with commercial retailer demand to establish baseline wholesale prices for fresh produce, directly influencing the food component of the headline Consumer Price Index (CPI).",
+    "meaning_ar": "يمثل سوق العبور المنصة المركزية لتجارة الجملة في مصر، حيث تتحدد الأسعار الأساسية للمحاصيل الزراعية وفقاً لأحجام المعروض اليومي وطلبات تجار التجزئة، مما يؤثر بشكل مباشر على بند الغذاء والمشروبات في مؤشر أسعار المستهلكين."
   },
   "هل فقد وادي السيليكون ثقه الجمهور في الذكاء الاصطناعي؟": {
     "meaning": "Public scrutiny of technology sector practices alters consumer adoption rates and prompts reassessments of capital allocation toward artificial intelligence research and infrastructure.",
