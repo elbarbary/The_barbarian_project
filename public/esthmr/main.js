@@ -261,6 +261,10 @@ setChrome(component.state.lang);
  * no ticker tape and no screens — the way in is the page.
  */
 let loadVersion = 0;
+/** How long a load may leave the page saying "loading" before the page says
+ *  so instead. Longer than every deadline underneath it (20s a document, 6s
+ *  the quote feed) plus room for a slow phone on a slow network. */
+const STRANDED_MS = 45000;
 async function load(email) {
   const version = ++loadVersion;
   if (!email) {
@@ -271,6 +275,17 @@ async function load(email) {
     return;
   }
   component.setState({ dataLoading: true, dataError: false });
+  /* A spinner that outlives its load is worse than an error: the page looks
+     busy forever and a reader waits instead of retrying. Every read below is
+     deadline-bounded, so this only fires when a path returns without clearing
+     the flag it raised — which is what production did on 18 September, over
+     data that had already arrived. It asks for nothing: it turns an invisible
+     hang into the retry the reader can act on. */
+  const stranded = setTimeout(() => {
+    if (version === loadVersion && component.state.dataLoading) {
+      component.setState({ dataLoading: false, dataError: true, extrasLoading: false });
+    }
+  }, STRANDED_MS);
   try {
     const base = await data.live();
     if (version !== loadVersion) return;
@@ -351,6 +366,15 @@ async function load(email) {
       setSigned(null);
       component.setData({ demo: false, companies: [], series: [], fins: [] });
       component.setState({ dataError:false });
+    }
+  } finally {
+    clearTimeout(stranded);
+    /* The load that is current when it ends always lowers the flag it raised.
+       A load superseded by a newer one leaves it deliberately: the newer one
+       owns it, and will clear it here in its own turn. Both early returns
+       above pass through this. */
+    if (version === loadVersion && component.state.dataLoading) {
+      component.setState({ dataLoading: false, extrasLoading: false });
     }
   }
 }

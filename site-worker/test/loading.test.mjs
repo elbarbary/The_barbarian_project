@@ -35,7 +35,14 @@ function boot(overrides = {}) {
     insiderPeople:async()=>({schemaVersion:1,people:[],timeline:[]}),
     flowTrackers:async()=>({schemaVersion:1,sectors:[],events:[]}),
     companyExtras:async()=>({}), ...overrides };
+  /* Timers, recorded rather than scheduled. `load()` arms a watchdog that
+     turns a stranded spinner into the error state; a real 45-second timer
+     would either never fire inside a test or hold the process open until it
+     did, so the harness keeps them and lets a test fire one by hand. */
+  const timers = [];
   vm.runInNewContext(source, { Component, document, data,
+    setTimeout: (fn, ms) => timers.push({ fn, ms, live: true }),
+    clearTimeout: (id) => { if (id && timers[id - 1]) timers[id - 1].live = false; },
     mount:()=> { mounted=true; component.onChange=()=>{}; },
     watch:{read:()=>[],sync:async()=>[],activate:()=>{}},
     readRoute:()=>({}),connectNavigation:()=>()=>{},
@@ -48,7 +55,9 @@ function boot(overrides = {}) {
     // import has to be named here or main.js throws before it mounts.
     pinBottomBar:()=>()=>{},
   });
-  return { c:component, identity, live, document, mounted:()=>mounted,
+  return { c:component, identity, live, document, mounted:()=>mounted, timers,
+    /** Fire every watchdog that has not been cancelled. */
+    strand() { for (const t of timers) if (t && t.live) t.fn(); },
     async ready() {
       identity.resolve('reader@example.com');
       live.resolve({demo:false,companies:[{ticker:'A'},{ticker:'B'}],series:[],fins:[]});
@@ -188,4 +197,31 @@ test('an absent optional document does not strand the other extras', async () =>
   assert.equal(app.c.state.extrasLoading, false,
     'extras must settle even when a document the build has not published yet is absent');
   assert.equal(app.c.data().companies.length, 2, 'and the market data still arrives');
+});
+
+/* ── the spinner can always come down ───────────────────────────────────── */
+
+test('a load that never settles still takes the spinner down', async () => {
+  /* What production served on 18 September: "loading market data for your
+     account", permanently, over documents that had already arrived. The tape
+     printed live prices along the top of a page with no cards on it.
+     Whatever leaves a load in that state, the reader gets a way out. */
+  const app = boot({});
+  app.identity.resolve('reader@example.com');
+  await tick();
+  assert.equal(app.c.state.dataLoading, true, 'the load never started');
+  // `live` is never resolved: the load is still in flight, and stays there.
+  app.strand();
+  assert.equal(app.c.state.dataLoading, false, 'the spinner outlived its load');
+  assert.equal(app.c.state.dataError, true, 'it came down silently, with nothing to retry');
+});
+
+test('a watchdog is cancelled by the load it was watching', async () => {
+  // Or every slow-but-successful load reports an error after it has already
+  // drawn the market.
+  const app = boot({});
+  await app.ready();
+  const armed = app.timers.filter((t) => t && t.live);
+  assert.deepEqual(armed, [], 'a watchdog is still armed after the load finished');
+  assert.ok(app.timers.length > 0, 'no watchdog was ever armed');
 });

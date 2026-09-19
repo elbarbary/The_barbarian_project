@@ -36,15 +36,35 @@ test('the loading flag is raised before the first await, and never after one', (
   assert.ok(mountAt > 0 && writes[0] < mountAt, 'the flag is raised at mount time rather than at boot');
 });
 
-test('only load() lowers it, and it lowers it on every path it owns', () => {
+test('the load that is current when it ends always lowers the flag it raised', () => {
+  /* Not "every path clears it" — a superseded load must NOT clear a flag the
+     newer one now owns. The invariant is narrower and stronger: whichever
+     load is current when it finishes takes the spinner down, including on
+     both early returns, which is what a `finally` is for. */
   const at = code.indexOf('async function load(');
-  const end = code.indexOf('\n}\n', code.indexOf('catch (error)', at));
+  const end = code.indexOf('\n}\n', code.indexOf('finally', at));
   const body = code.slice(at, end);
   assert.ok(body.includes('dataLoading: true'), 'load() does not claim the flag');
-  // The signed-out branch, the success path and the failure path each clear
-  // it. A path that returns without clearing strands the spinner.
-  assert.ok((body.match(/dataLoading:\s*false/g) || []).length >= 3,
-    'a path through load() returns without clearing the loading state');
+  assert.match(body, /\}\s*finally\s*\{/, 'load() has no finally, so an early return strands the spinner');
+  const tail = body.slice(body.indexOf('finally'));
+  assert.match(tail, /version === loadVersion/,
+    'the finally clears the flag without checking it still owns it, so a stale load blanks a fresh one');
+  assert.match(tail, /dataLoading:\s*false/, 'the finally does not lower the flag');
+});
+
+test('a load that never settles still gives the reader a way out', () => {
+  /* The failure mode this whole file exists for is invisible: the page says
+     "loading market data" and means it forever. A deadline turns that into
+     the error state, which carries a retry. */
+  const at = code.indexOf('async function load(');
+  const body = code.slice(at, code.indexOf('\n}\n', code.indexOf('finally', at)));
+  assert.match(body, /setTimeout\(/, 'nothing bounds the loading state itself');
+  assert.match(body, /dataError:\s*true/, 'the deadline does not surface an error the reader can retry');
+  assert.match(body, /clearTimeout\(/, 'the deadline is never cancelled, so a slow load errors after succeeding');
+  const ms = /const STRANDED_MS = (\d+)/.exec(code);
+  assert.ok(ms, 'the deadline is a magic number with no name');
+  // Longer than every read underneath it: 20s a document, 6s the quote feed.
+  assert.ok(Number(ms[1]) > 20000, `${ms[1]}ms would fire while a slow document is still legitimately in flight`);
 });
 
 test('a component that has never been loaded does not claim to have data', async () => {
