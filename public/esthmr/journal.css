@@ -83,8 +83,25 @@
 }
 .journal-toolbar .journal-search { background: var(--surface); min-width: 220px; display: flex; justify-content: space-between; gap: 24px; }
 .journal-toolbar kbd { color: var(--faint); }
-.journal-preferences { font-size: 12px !important; }
-.journal-preferences-panel { display: flex; flex-wrap: wrap; gap: 8px; padding-block: 16px; }
+.journal-preferences-panel {
+  display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 16px;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  border: 1px solid var(--edgeIn);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-block: 6px 14px;
+}
+.journal-preferences-panel button {
+  min-height: 40px; padding: 0 16px; border-radius: 999px;
+  border: 1px solid var(--edgeIn); background: var(--sunk);
+  color: var(--ink); font-size: 13px; font-weight: 500; cursor: pointer;
+  transition: all .15s ease;
+}
+.journal-preferences-panel button:hover {
+  background: var(--surface); border-color: var(--accent); color: var(--accent);
+}
 .journal-subnav { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 16px 24px; }
 .journal-subnav:empty { display: none; }
 .journal-subnav button { border-color: transparent; color: var(--t2) !important; }
@@ -139,40 +156,98 @@
    * gives the page the SAME number to pad with, so the bar never covers the
    * end of a screen. */
   #app .om-rail {
-    /* An island, clear of all four edges.
-       It was edge-to-edge and square-cornered, then edge-to-edge with two
-       rounded top corners. Floating is what it was originally and what it
-       reads as: a control that sits ON the page rather than a strip the page
-       ends at. The inline inset is `max(10px, safe-area)` so a landscape
-       notch pushes it clear rather than under. */
+    /* An island, clear of all four edges — identical to desktop floating dock */
     inset: auto max(10px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-right)) !important;
     width: auto !important;
-    padding: 8px 6px !important;
-    background: var(--surface) !important;
-    border: 1px solid var(--rule) !important;
-    border-radius:var(--radius-island) !important;
-    /* Enough shadow to lift it off the page underneath, on a warm palette
-       where a hard blue shadow looked like a bruise. */
-    box-shadow: 0 8px 28px rgba(25, 44, 60, .14), 0 1px 2px rgba(25, 44, 60, .05) !important;
-    overflow: visible !important; display: block !important;
-    /* The bar is nudged by navbar.js while Safari's toolbar is moving, and a
-       transition would turn every correction into a visible slide. */
+    max-width: 520px;
+    margin-inline: auto;
+    padding: 6px !important;
+    background: color-mix(in srgb, var(--surface) 86%, transparent) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(1.25);
+    backdrop-filter: blur(18px) saturate(1.25);
+    border: 1px solid var(--edgeIn) !important;
+    border-radius: 26px !important;
+    box-shadow: 0 14px 38px rgba(0, 0, 0, .16), 0 1px 0 rgba(255, 255, 255, .06) inset !important;
+    overflow: visible !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     transition: none !important;
+    z-index: 60;
   }
-  #app .journal-nav { display: grid !important; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 0 !important; width: 100%; }
+  #app .journal-nav {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 4px !important;
+    width: 100%;
+    margin: 0 !important;
+    grid-template-columns: repeat(5,minmax(0,1fr));
+  }
   #app .journal-nav button {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 4px; padding: 8px 2px; min-width: 0; min-height: 64px; min-height: 72px !important;
-    font-size: 13px !important; line-height: 18px; border-radius:var(--radius-control);
-    position:relative; isolation:isolate; background:transparent !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: row !important;
+    height: 52px !important;
+    min-height: 52px !important;
+    min-height: 64px;
+    padding: 0 12px !important;
+    border-radius: 22px !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: var(--t2) !important;
+    font: inherit;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    cursor: pointer;
+    position: relative;
+    flex: 0 1 auto;
+    min-width: 44px;
+    transition: background .2s cubic-bezier(.2,.7,.3,1), color .2s ease, padding .2s cubic-bezier(.2,.7,.3,1), flex .2s ease;
+    -webkit-tap-highlight-color: transparent;
   }
-  /* The label is the target's name; it must not be clipped into an ellipsis
-     on a 375px screen, where five columns leave 75px each. */
-  #app .journal-nav button > span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px !important; font-weight: 500; }
-  #app .journal-nav svg { width: 26px !important; height: 26px !important; }
-  #app .journal-nav button::before { content:''; position:absolute; top:4px; width:56px; height:38px; border-radius:var(--radius-control); background:transparent; z-index:-1; }
-  #app .journal-nav button[aria-current="page"]::before { background:var(--accTint); }
-  #app .journal-nav button[aria-current="page"] svg { stroke-width:2.2; }
+  #app .journal-nav button > svg {
+    width: 24px !important;
+    height: 24px !important;
+    flex: none;
+    transition: stroke-width .18s ease;
+  }
+  #app .journal-nav button > span {
+    display: block !important;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-inline-start: 0;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    transition: max-width .24s cubic-bezier(.2,.7,.3,1), opacity .18s ease, margin .24s cubic-bezier(.2,.7,.3,1);
+  }
+  #app .journal-nav button:hover,
+  #app .journal-nav button:focus-visible {
+    background: var(--sunk) !important;
+    color: var(--ink) !important;
+  }
+  #app .journal-nav button[aria-current="page"],
+  #app .journal-nav button[aria-current="true"] {
+    background: var(--accTint) !important;
+    color: var(--accent) !important;
+    padding: 0 16px !important;
+    flex: 0 0 auto;
+  }
+  #app .journal-nav button[aria-current="page"] > span,
+  #app .journal-nav button[aria-current="true"] > span {
+    max-width: 140px;
+    opacity: 1;
+    margin-inline-start: 8px;
+  }
+  #app .journal-nav button[aria-current="page"] svg,
+  #app .journal-nav button[aria-current="true"] svg {
+    stroke: var(--accent) !important;
+    stroke-width: 2.2 !important;
+  }
+  #app .journal-nav button::before { display: none !important; }
   #app .journal-toolbar {
     margin-inline: 0; margin-block: 6px 14px; padding: 8px 14px;
     background: color-mix(in srgb, var(--surface) 90%, transparent) !important;

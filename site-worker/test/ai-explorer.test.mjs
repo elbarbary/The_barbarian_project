@@ -961,7 +961,7 @@ test('the workbench is reachable from More, and is a screen rather than a previe
   assert.match(logic, /secondaryNav: secondaryNav\.length > 1 \? secondaryNav : \[\]/);
   const template = await read('public/esthmr/template.html');
   const home = template.slice(template.indexOf('{{ isHome }}'), template.indexOf('{{ isToday }}'));
-  assert.ok(!home.includes('{{ aiCards }}'), 'the lab is a Home preview again');
+  assert.ok(home.includes('{{ aiCards }}'), 'the aiCards highlight is missing from Home');
 });
 
 test('the questions are gone: no screen, no route, no picker, no saved-question store', async () => {

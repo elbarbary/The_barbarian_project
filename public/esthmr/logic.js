@@ -5345,6 +5345,7 @@ export class Component extends Base {
           note: ar ? 'لكل واقعة مستند' : 'a document for every one',
           longDate: (iso) => this.longDate(iso),
         }) : null,
+      aiCards: st.screen === 'home' ? aiCards(this, D, ar) : null,
       /* Who has filed a stake in this company, and the part nobody has.
          Built only on the company screen, and only for the company on it. */
       companyOwnership: st.screen === 'company' && st.ticker

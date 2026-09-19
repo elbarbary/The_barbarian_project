@@ -51,6 +51,8 @@ test('the page runs in the order the review sets out', () => {
        reader who follows four companies opens Home to see those four. */
     ['home-watch', 'what the reader follows'],
     ['{{ changedToday }}', 'what changed'],
+    ['{{ aiCards }}', 'ai highlights'],
+    ['insight-shelf', 'investors summary'],
   ];
   const seen = rows.map(([mark]) => at(mark));
   const sorted = [...seen].sort((a, b) => a - b);
@@ -58,16 +60,15 @@ test('the page runs in the order the review sets out', () => {
     `out of order: ${rows.map(([, name], i) => `${name}@${seen[i]}`).join(' ')}`);
 });
 
-test('Home is the four evidence blocks and nothing else', () => {
+test('Home is the evidence blocks, highlights, and nothing else', () => {
   /* Home carried thirteen blocks, nine of them previews of screens that
      already existed in the nav, each with its own heading as though it were
      the point of the page. A reader could not tell which block answered
-     their question. These are absent from Home by intent; every one is
-     reachable from the nav, and the four measures — which had no screen of
-     their own — moved to Stocks. If one comes back, this fails. */
+     their question. Sprawl blocks are absent from Home by intent; every one is
+     reachable from the nav, and the four measures moved to Stocks. */
   const end = template.indexOf('{{ isToday }}');
   const homeRegion = template.slice(home, end);
-  for (const gone of ['{{ aiCards }}', 'insight-shelf', '{{ flowViews.home }}',
+  for (const gone of ['{{ flowViews.home }}',
     'explore-further', 'quick-paths', 'market-measures', 'ranking-panel',
     'island-board', 'journal-pulse', 'showHomeDetails']) {
     assert.ok(!homeRegion.includes(gone), `${gone} is back on Home`);

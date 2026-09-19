@@ -577,7 +577,7 @@ test('Home carries no standing board at all', async () => {
      itself still reads in order. */
   const page = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
   const home = page.slice(page.indexOf('{{ isHome }}'), page.indexOf('{{ isToday }}'));
-  for (const board of ['class="insight-shelf"', '{{ flowViews.home }}']) {
+  for (const board of ['{{ flowViews.home }}', 'class="island-board"']) {
     assert.ok(!home.includes(board), `${board} is a standing board and is back on Home`);
   }
   const logic = await readFile(new URL('../../public/esthmr/logic.js', import.meta.url), 'utf8');

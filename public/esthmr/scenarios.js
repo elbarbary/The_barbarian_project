@@ -632,7 +632,7 @@ export function scenariosScreen(component, data, ar) {
      close the instant a reader used it. `onToggle` records what the reader
      did so the next draw puts it back. */
   const controls = h('details', {
-    class: 'aix-controls', open: Boolean(st.scSetupOpen),
+    class: 'aix-controls', open: st.scSetupOpen !== false,
     onToggle: (e) => {
       const open = Boolean(e && e.target && e.target.open);
       if (open !== Boolean(component.state.scSetupOpen)) component.setState({ scSetupOpen: open });
@@ -641,58 +641,62 @@ export function scenariosScreen(component, data, ar) {
     h('summary', { class: 'aix-setup-summary' },
       h('span', { class: 'aix-setup-what' }, t('Change model and evidence', 'غيّر النموذج والأدلة')),
       h('span', { class: 'aix-setup-now' }, setupSummary)),
-    h('div', { class: 'aix-group aix-models-grouped' },
-      h('p', { class: 'aix-step' }, h('span', null, t('The model', 'النموذج'))),
+    h('div', { class: 'aix-step-card aix-models-grouped' },
+      h('div', { class: 'aix-step-head' },
+        h('span', { class: 'aix-step-badge' }, '1'),
+        h('p', { class: 'aix-step' }, h('span', { class: 'aix-step-title' }, t('The model', 'اختر نموذجًا')))),
       (() => {
-        // By the group each model declares, not by "not a baseline". The
-        // catalogue has three groups — neural, baseline and rerank — and the
-        // heading below claims these are pre-trained neural models. A rerank
-        // model reaching this picker would be filed under that claim and
-        // described as something it is not. Anything unrecognised stays out
-        // of both buckets rather than being mislabelled.
         const foundations = choice.models.filter((m) => m.group === 'neural');
         const baselines = choice.models.filter((m) => m.group === 'baseline');
         return [
           foundations.length ? h('div', { class: 'aix-model-subgroup', key: 'foundations' },
             h('div', { class: 'aix-model-subhead' },
-              h('span', { class: 'aix-subhead-title' }, t('Foundation models', 'نماذج الأساس')),
+              h('span', { class: 'aix-subhead-title' }, t('Foundation models', 'نماذج تأسيسية')),
               h('span', { class: 'aix-subhead-count' }, String(foundations.length))),
-            h('p', { class: 'aix-subhead-note' }, t('Pre-trained neural models forecasting return distributions.', 'نماذج عامة مدرَّبة مسبقاً، تحسب توقعات احتمالية للأسعار.')),
+            h('p', { class: 'aix-subhead-note' }, t('Pre-trained time-series models predicting return per company.', 'نماذج سلاسل زمنية مدرّبة مسبقًا، تتوقّع عائدًا لكل شركة.')),
             h('div', { class: 'aix-chips' }, foundations.map((m) => chip(ar ? m.labelAr : m.label, model === m.id,
               () => set({ scModel: m.id, scFrom: null }), m.id)))) : null,
           baselines.length ? h('div', { class: 'aix-model-subgroup', key: 'baselines' },
             h('div', { class: 'aix-model-subhead' },
-              h('span', { class: 'aix-subhead-title' }, t('Simple baselines', 'خطوط الأساس الإحصائية')),
+              h('span', { class: 'aix-subhead-title' }, t('Simple baselines', 'مقاييس مرجعية بسيطة')),
               h('span', { class: 'aix-subhead-count' }, String(baselines.length))),
-            h('p', { class: 'aix-subhead-note' }, t('Mechanical rules for comparison to verify model value.', 'قواعد حسابية بسيطة للمقارنة لمعرفة القيمة المضافة.')),
+            h('p', { class: 'aix-subhead-note' }, t('Explicit mechanical rules measured against foundation models.', 'قواعد صريحة تُقاس النماذج التأسيسية مقابلها.')),
             h('div', { class: 'aix-chips' }, baselines.map((m) => chip(ar ? m.labelAr : m.label, model === m.id,
               () => set({ scModel: m.id, scFrom: null }), m.id)))) : null,
         ];
       })(),
-      choice.meta ? h('p', { class: 'aix-note aix-model-about' }, aboutModel(choice.meta, ar)) : null),
-    h('div', { class: 'aix-group' },
-      h('p', { class: 'aix-step' }, h('span', null, t('The time window', 'النافذة الزمنية'))),
+      h('div', { class: 'aix-step-divider' }),
+      choice.meta ? h('p', { class: 'aix-step-note' }, aboutModel(choice.meta, ar))
+        : h('p', { class: 'aix-step-note' }, t(`${modelName} predicts return for each company, then ranks by it.`, `${modelName} يتوقّع عائدًا لكل شركة ثم يرتّبها به.`))),
+    h('div', { class: 'aix-step-card' },
+      h('div', { class: 'aix-step-head' },
+        h('span', { class: 'aix-step-badge' }, '2'),
+        h('p', { class: 'aix-step' }, h('span', { class: 'aix-step-title' }, t('The time window', 'النافذة الزمنية')))),
       h('div', { class: 'aix-chips' }, choice.horizons.map((n) => chip(chipWords(n, ar),
-        horizon === n, () => set({ scHorizon: n }), n)))),
-    order.length ? h('div', { class: `aix-group aix-layers${gemini ? ' is-on' : ''}` },
-      h('p', { class: 'aix-step' }, h('span', null, t('What Gemini reads', 'ما يقرأه Gemini'))),
-      h('p', { class: 'aix-note aix-layers-lead' }, choice.readable
+        horizon === n, () => set({ scHorizon: n }), n))),
+      h('p', { class: 'aix-step-note' }, t('All figures below are computed on this window.', 'كل الأرقام أدناه محسوبة على هذه النافذة.'))),
+    order.length ? h('div', { class: `aix-step-card aix-layers${gemini ? ' is-on' : ''}` },
+      h('div', { class: 'aix-step-head' },
+        h('span', { class: 'aix-step-badge' }, '3'),
+        h('p', { class: 'aix-step' }, h('span', { class: 'aix-step-title' }, t('What Gemini reads', 'ما يقرأه Gemini')))),
+      h('p', { class: 'aix-step-note' }, choice.readable
         ? (gemini
           ? t(`Showing Gemini’s saved ranking. It combines all models with the selected evidence; ${modelName} remains the comparison. Turn everything off for the model’s original order.`,
             `نعرض ترتيب Gemini المحفوظ. يجمع كل النماذج مع الأدلة المختارة؛ ويظل ${modelName} مرجع المقارنة. أوقف الخيارات لترى ترتيب النموذج الأصلي.`)
-          : t(`Switch any of these on to see the ranking after Gemini re-reads the models’ forecasts with it.`,
-            'فعّل أياً منها لترى الترتيب بعد أن يعيد Gemini قراءة توقعات النماذج معه.'))
+          : t(`Switch any of these on to see the ranking after Gemini re-reads the models’ forecasts with it. Saved prices do not change.`,
+            'شغّل أيًّا منها لترى الترتيب بعد أن يُعيد Gemini قراءة توقّعات النماذج بها. الأسعار المحفوظة لا تتغيّر.'))
         : t('No Gemini re-rank was published for this run.', 'لم تُنشر إعادة ترتيب Gemini لهذا التشغيل.')),
-      order.map((layer) => {
-        const on = layers.includes(layer);
-        return h('button', {
-          key: layer, type: 'button', class: 'aix-toggle', role: 'switch', 'aria-checked': String(on),
-          disabled: !choice.readable,
-          onClick: () => set({ scLayers: on ? layers.filter((l) => l !== layer) : [...layers, layer] }),
-        },
-        h('span', null, h('strong', null, LAYER_TEXT[layer]?.[ar ? 'ar' : 'en'] || layer), h('small', null, hints[layer])),
-        h('i', { class: 'aix-switch', 'aria-hidden': 'true' }, h('b')));
-      }),
+      h('div', { class: 'aix-toggle-group' },
+        order.map((layer) => {
+          const on = layers.includes(layer);
+          return h('button', {
+            key: layer, type: 'button', class: 'aix-toggle', role: 'switch', 'aria-checked': String(on),
+            disabled: !choice.readable,
+            onClick: () => set({ scLayers: on ? layers.filter((l) => l !== layer) : [...layers, layer] }),
+          },
+          h('span', null, h('strong', null, LAYER_TEXT[layer]?.[ar ? 'ar' : 'en'] || layer), h('small', null, hints[layer])),
+          h('i', { class: `aix-switch ${on ? 'is-on' : ''}`, 'aria-hidden': 'true' }, h('b')));
+        })),
       gemini && indexed && !indexed.answered
         ? h('p', { class: 'aix-note aix-warn' }, t(`This combination did not answer that night${indexed.reason ? `: ${indexed.reason}` : ''}.`,
           `هذه التركيبة لم تُجب تلك الليلة${indexed.reason ? `: ${indexed.reason}` : ''}.`)) : null) : null);

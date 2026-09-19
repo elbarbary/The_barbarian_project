@@ -136,12 +136,41 @@ function volumeCard(data, ar, t, open, day) {
         `${lead.ticker} · ${name} تداولت ${lead.rv.toFixed(1)}× حجمها المعتاد، ولم تكن وحدها`)
       : t(`${lead.ticker} · ${name} traded ${lead.rv.toFixed(1)}× its usual volume`,
         `${lead.ticker} · ${name} تداولت ${lead.rv.toFixed(1)}× حجمها المعتاد`),
-    visual: pairedBars({ ar, width: 460, height: 136, groups: top.map((c, i) => ({
-      prior: 1, now: c.rv,
-      priorValue: '1×', nowValue: `${c.rv.toFixed(1)}×`,
-      priorLabel: c.ticker, nowPeriodLabel: compact(c.volume),
-      unit: i === 0 ? t('× its own usual', '× حجمها المعتاد') : '',
-    })) }),
+    visual: h('div', { class: 'ct-volume-block' },
+      pairedBars({ ar, width: 460, height: 136, groups: top.map((c, i) => ({
+        prior: 1, now: c.rv,
+        priorValue: '1×', nowValue: `${c.rv.toFixed(1)}×`,
+        priorLabel: c.ticker, nowPeriodLabel: compact(c.volume),
+        unit: i === 0 ? t('× its own usual', '× حجمها المعتاد') : '',
+      })) }),
+      h('div', { class: 'ct-abnormal-list', 'aria-label': t('Abnormal volume companies', 'الشركات ذات الحجم غير المعتاد') },
+        top.map((c) => {
+          const cName = named(c);
+          const isUp = (c.pct || 0) >= 0;
+          const maxRv = top[0]?.rv || 1;
+          const barWidth = Math.min(100, Math.max(10, Math.round((c.rv / maxRv) * 100)));
+          return h('button', {
+            type: 'button',
+            key: c.ticker,
+            class: 'ct-abnormal-row',
+            onClick: () => open(c.ticker),
+          }, [
+            h('span', { class: 'ct-abnormal-co' }, [
+              h('b', { class: 'ct-abnormal-code' }, c.ticker),
+              h('small', { class: 'ct-abnormal-name' }, cName),
+            ]),
+            h('span', { class: 'ct-abnormal-bar-wrap' }, [
+              h('span', { class: 'ct-abnormal-bar' }, [
+                h('i', { style: { width: `${barWidth}%` } }),
+              ]),
+              h('small', { class: 'ct-abnormal-bar-lbl' }, t('vs normal', 'مقابل المعتاد')),
+            ]),
+            h('span', { class: 'ct-abnormal-mult', dir: 'ltr' }, `${c.rv.toFixed(1)}×`),
+            finite(c.pct) ? h('span', { class: `ct-abnormal-pct ${isUp ? 'up' : 'down'}`, dir: 'ltr' },
+              `${isUp ? '+' : ''}${c.pct.toFixed(2)}%`) : null,
+            h('span', { class: 'ct-abnormal-arrow', 'aria-hidden': 'true' }, '↗'),
+          ]);
+        }))),
     limit: t('Each bar is measured against that company’s own usual volume, never against another company’s. Volume is activity, not interest: a session can be busy because one holder sold.',
       'كل عمود يُقاس على الحجم المعتاد للشركة نفسها، لا على شركة أخرى. الحجم نشاط وليس اهتماماً: قد تكون الجلسة نشطة لأن مالكاً واحداً باع.'),
     chip: evidenceChip({ ar, date: day(data.marketDate),

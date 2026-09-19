@@ -94,7 +94,8 @@ test('the market leads the page, and the lab is a screen of its own', async () =
   const home = template.slice(template.indexOf('{{ isHome }}'), template.indexOf('{{ isToday }}'));
   assert.ok(home.indexOf('home-headline') < home.indexOf('om-idx'), 'the sentence does not lead');
   assert.ok(home.indexOf('om-idx') < home.indexOf('{{ changedToday }}'), 'the market does not lead the evidence');
-  assert.ok(!home.includes('{{ aiCards }}'), 'the lab is back on Home');
+  assert.ok(home.includes('{{ aiCards }}'), 'the lab highlight is missing from Home');
+  assert.ok(home.indexOf('{{ changedToday }}') < home.indexOf('{{ aiCards }}'), 'the market evidence does not lead the lab highlight');
   // And it is still reachable, with its own screen in the navigation.
   const logic = await read('public/esthmr/logic.js');
   assert.match(logic, /'scenarios'/, 'the lab has no screen to be reached at');

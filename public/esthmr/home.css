@@ -366,40 +366,51 @@
  * comp's own 4-up, but the count follows the space rather than the design
  * width, so a card never falls below the ~150px its close and move need.
  * The card is a button because every one of them goes somewhere. */
+/* The reader's followed companies.
+ * Four cards across at desk width, two on a tablet, one on a phone — the
+ * comp's own 4-up, but the count follows the space rather than the design
+ * width, so a card never falls below the ~150px its close and move need.
+ * The card is a button because every one of them goes somewhere. */
 #app .home-watch {
   border-radius: var(--radius-island); background: var(--surface);
-  border: 1px solid var(--edgeIn); box-shadow: var(--sh); padding: 20px 22px 18px;
+  border: 1px solid var(--edgeIn); box-shadow: var(--sh); padding: 22px 24px 20px;
+  transition: box-shadow .2s ease;
 }
-#app .home-watch-title { font: 600 16.5px/1.45 var(--font-heading); margin: 0 0 14px; }
+#app .home-watch-title {
+  font: 600 17.5px/1.4 var(--font-heading); margin: 0 0 16px;
+  letter-spacing: -.01em; color: var(--ink);
+}
 #app .home-watch-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px;
 }
 #app .home-watch-card {
-  display: grid; grid-template-columns: 1fr auto; gap: 2px 10px;
+  display: grid; grid-template-columns: 1fr auto; gap: 3px 10px;
   align-items: baseline; text-align: start; min-width: 0;
-  padding: 14px; border-radius: var(--radius-control);
+  padding: 15px 16px; border-radius: 14px;
   background: var(--sunk); border: 1px solid var(--edgeIn);
   color: inherit; font: inherit; cursor: pointer;
-  transition: transform .18s cubic-bezier(.2,.7,.3,1), box-shadow .18s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: transform .18s cubic-bezier(.2,.7,.3,1), box-shadow .18s, border-color .18s;
 }
-#app .home-watch-card:hover { transform: translateY(-2px); box-shadow: var(--shLift); }
+#app .home-watch-card:hover { transform: translateY(-2px); box-shadow: var(--shLift); border-color: var(--accent); }
 #app .hw-code {
-  font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
-  letter-spacing: .06em; font-weight: 600;
+  font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+  letter-spacing: .05em; font-weight: 700; color: var(--ink);
 }
 /* The move sits beside the code, so the two things a follower checks first
    are on one line and the name below can take the width it needs. */
 #app .hw-pct {
   grid-column: 2; grid-row: 1; justify-self: end;
-  font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; font-weight: 500;
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600;
+  padding: 2px 7px; border-radius: 6px; background: rgba(18,107,117,.08);
 }
 #app .hw-name {
-  grid-column: 1; grid-row: 2; font-size: 13px; color: var(--t2);
+  grid-column: 1; grid-row: 2; font-size: 12.5px; color: var(--t2);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 #app .hw-close {
   grid-column: 2; grid-row: 2; justify-self: end;
-  font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600; color: var(--ink);
 }
 #app .hw-spark { grid-column: 1 / -1; grid-row: 3; margin-top: 10px; }
 #app .hw-note {
@@ -429,22 +440,72 @@
 #app .home-watch-note { margin: 14px 0 0; font-size: 12.5px; line-height: 1.6; color: var(--faint); }
 #app .home-watch-card.is-offer {
   display: flex; flex-direction: column; gap: 0; padding: 0; overflow: hidden;
-  cursor: default; transform: none;
+  border-radius: 14px; background: var(--sunk); border: 1px solid var(--edgeIn);
+  cursor: default; transform: none; box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  transition: border-color .18s, box-shadow .18s;
 }
-#app .home-watch-card.is-offer:hover { transform: none; box-shadow: none; }
+#app .home-watch-card.is-offer:hover { transform: none; border-color: var(--accent); box-shadow: var(--shLift); }
 #app .hw-open {
-  display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: baseline;
-  padding: 14px; background: none; border: 0; color: inherit; font: inherit;
+  display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: baseline;
+  padding: 14px 14px 10px; background: none; border: 0; color: inherit; font: inherit;
   text-align: start; cursor: pointer; min-width: 0;
 }
-#app .hw-open:hover .hw-name { text-decoration: underline; }
+#app .hw-open:hover .hw-name { text-decoration: underline; color: var(--accent); }
 #app .hw-follow {
-  display: flex; align-items: center; justify-content: center; gap: 7px;
-  min-height: 44px; padding: 0 12px; cursor: pointer;
-  border: 0; border-top: 1px solid var(--edgeIn); background: var(--surface);
-  color: var(--t2); font: inherit; font-size: 12.5px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 36px; margin: 0 12px 12px; cursor: pointer;
+  border-radius: 999px; border: 1px solid var(--edgeIn); background: var(--surface);
+  color: var(--accent); font: inherit; font-size: 12px; font-weight: 600;
+  transition: all .15s ease;
 }
-#app .hw-follow:hover { background: var(--sunk); color: var(--ink); }
+#app .hw-follow:hover { background: var(--accent); color: #FAFCFE; border-color: var(--accent); }
+
+/* Abnormal Volume List directly under abnormal volume graph */
+#app .ct-volume-block { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+#app .ct-abnormal-list {
+  display: flex; flex-direction: column; gap: 8px;
+  margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--rule);
+}
+#app .ct-abnormal-row {
+  display: flex; align-items: center; gap: 10px; padding: 8px 12px;
+  border-radius: 10px; background: var(--surface); border: 1px solid var(--edgeIn);
+  color: inherit; font: inherit; cursor: pointer; text-align: start;
+  transition: all .15s cubic-bezier(.2,.7,.3,1); width: 100%;
+}
+#app .ct-abnormal-row:hover {
+  background: var(--sunk); border-color: var(--accent); transform: translateY(-1px);
+}
+#app .ct-abnormal-co {
+  display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0;
+}
+#app .ct-abnormal-code {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; font-weight: 700; color: var(--ink);
+}
+#app .ct-abnormal-name {
+  font-size: 11.5px; color: var(--t2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+#app .ct-abnormal-bar-wrap {
+  flex: 0 0 76px; display: flex; flex-direction: column; gap: 2px;
+}
+#app .ct-abnormal-bar {
+  height: 6px; border-radius: 3px; background: rgba(27,25,23,.08); overflow: hidden; display: block;
+}
+#app .ct-abnormal-bar i {
+  display: block; height: 100%; background: #5368A3; border-radius: 3px;
+}
+#app .ct-abnormal-bar-lbl {
+  font-size: 9.5px; color: var(--faint); font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+#app .ct-abnormal-mult {
+  font-family: 'IBM Plex Mono', monospace; font-size: 13.5px; font-weight: 700; color: #5368A3;
+}
+#app .ct-abnormal-pct {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; font-weight: 600;
+  width: 52px; text-align: end;
+}
+#app .ct-abnormal-pct.up { color: var(--up); }
+#app .ct-abnormal-pct.down { color: var(--down); }
+#app .ct-abnormal-arrow { font-size: 12px; color: var(--faint); flex: none; }
 
 /* The band for shares nobody dealt in.
  * Hatched rather than a fourth colour: three solid bands are three kinds of
@@ -517,5 +578,16 @@
  * row; the number has the width it needs and the chart is legible. */
 @media (max-width: 600px) {
   #app .market-head > .om-idx { grid-template-columns: minmax(0, 1fr) !important; }
-  #app .market-head > .om-idx > div { grid-column: auto !important; grid-row: auto !important; }
+  #app .market-head > .om-idx { gap: 10px !important; }
+  #app .market-head > .om-idx > div { grid-column: auto !important; grid-row: auto !important; padding: 14px 16px !important; }
+  #app .home-watch { padding: 18px 16px; }
+  #app .home-watch-grid { grid-template-columns: 1fr; gap: 10px; }
+  #app .home-watch-card { padding: 14px 14px; min-height: 48px; }
+  #app .home-watch-title { font-size: 16px; margin-bottom: 12px; }
+  #app .breadth-strip { padding: 16px 14px; }
+  #app .breadth-head h2 { font-size: 15px; }
+  #app .ct-card { padding: 18px 16px; }
+  #app .ct-abnormal-row { padding: 9px 10px; min-height: 44px; }
+  #app .ct-abnormal-bar-wrap { flex: 0 0 56px; }
+  #app .insight-card { padding: 18px 16px !important; }
 }

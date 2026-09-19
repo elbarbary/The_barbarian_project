@@ -303,6 +303,28 @@
 
       <!-- ── WHAT CHANGED — THREE EVIDENCE CARDS ──────────────────────────────────────────── -->
       {{ changedToday }}
+
+      <!-- ── THE MODEL LAB, AS A PREVIEW ──────────────────────────────────────────── -->
+      {{ aiCards }}
+
+      <!-- ── INVESTORS SUMMARY ──────────────────────────────────────────── -->
+      <section class="insight-shelf" aria-label="{{ L.investorsWho }}">
+        <div class="insight-grid">
+          <article class="insight-card insight-investors">
+            <p class="card-dateline"><span>{{ investorsDateline }}</span><button type="button" onClick="{{ goInvestors }}">{{ L.investorsOpen }} ↗</button></p>
+            <header class="island-heading"><h2>{{ L.investorsWhoQuestion }} <small class="h-term">{{ L.investorsWho }}</small></h2></header>
+            <sc-if value="{{ investors }}">
+              <p class="card-lead">{{ L.investorsTwoSides }}</p>
+              <div class="investor-mini-bar"><sc-for list="{{ investors.nationalityBar }}" as="s"><span style="width:{{ s.width }};background:{{ s.color }}"></span></sc-for></div>
+              <sc-for list="{{ investors.parties }}" as="p"><div class="investor-party"><div class="investor-summary-row"><span>{{ p.party }} <strong>{{ p.percent }}</strong></span><span>{{ L.investorsNet }} <b style="color:{{ p.netColor }}">{{ p.net }}</b></span></div><div class="trade-side"><span>{{ buyingLabel }}</span><div><i style="width:{{ p.buyW }};background:var(--up)"></i></div><b>{{ p.buy }}</b></div><div class="trade-side"><span>{{ sellingLabel }}</span><div><i style="width:{{ p.sellW }};background:var(--down)"></i></div><b>{{ p.sell }}</b></div><div class="trade-shares"><span>{{ p.buyShare }}</span><span>{{ p.sellShare }}</span></div></div></sc-for>
+              <p class="insight-caption">{{ L.investorsEgpM }}</p>
+              <sc-if value="{{ investors.hasTypeBar }}"><div class="investor-mini-bar"><sc-for list="{{ investors.typeBar }}" as="s"><span style="width:{{ s.width }};background:{{ s.color }}"></span></sc-for></div><div class="investor-type-legend"><sc-for list="{{ investors.typeBar }}" as="s"><span>{{ s.label }} <strong>{{ s.percent }}</strong></span></sc-for></div></sc-if>
+              <p class="insight-caption">{{ investors.basis }}</p>
+            </sc-if>
+            <sc-if value="{{ noInvestors }}"><p class="insight-caption">{{ insightMissing }}</p></sc-if>
+          </article>
+        </div>
+      </section>
     </div>
   </sc-if>
   <!-- ══ TODAY ══ -->

@@ -798,33 +798,192 @@ dialog.aix-dialog::backdrop { background: rgba(22, 36, 47, .5); }
  * `.aix-controls` was the grid's first column; the results now take the full
  * width and the panel follows as a shut disclosure. It keeps a column at desk
  * width only because its chips read better in one. */
-.aix-bench-grid { grid-template-columns: minmax(0, 1fr) !important; }
-details.aix-controls { padding: 0; }
-details.aix-controls > .aix-setup-summary {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 12px; flex-wrap: wrap; cursor: pointer; list-style: none;
-  min-height: 44px; padding: 10px 14px;
-  border-radius: var(--radius-control); background: var(--sunk);
-  border: 1px solid var(--edgeIn);
+/* 7a Layout: Desktop 2-column with 330px sidebar and 1fr results */
+.aix-bench-grid {
+  display: grid !important;
+  grid-template-columns: 330px minmax(0, 1fr) !important;
+  gap: 20px !important;
+  align-items: start !important;
 }
-details.aix-controls > .aix-setup-summary::-webkit-details-marker { display: none; }
-details.aix-controls[open] > .aix-setup-summary { margin-bottom: 14px; }
+.aix-controls {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+.aix-results {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+@media (max-width: 900px) {
+  .aix-bench-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .aix-controls {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .aix-results {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
+
+details.aix-controls { padding: 0; border: 0; background: transparent; }
+details.aix-controls > .aix-setup-summary {
+  display: none;
+}
+@media (max-width: 900px) {
+  details.aix-controls > .aix-setup-summary {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; cursor: pointer; list-style: none;
+    min-height: 44px; padding: 10px 14px;
+    border-radius: var(--radius-control); background: var(--sunk);
+    border: 1px solid var(--edgeIn);
+  }
+}
 .aix-setup-what { font-size: 13.5px; font-weight: 600; }
-.aix-setup-what::after { content: ' ⌄'; color: var(--faint); }
-details.aix-controls[open] .aix-setup-what::after { content: ' ⌃'; }
-/* What is selected right now, so the panel can stay shut and still answer
-   "which model am I looking at?" — the review asks for the chosen model to be
-   visible, not for it to be one click away. */
 .aix-setup-now {
   font-family: var(--aix-mono); font-size: 11.5px; color: var(--t2);
   text-align: end;
 }
-/* The steps are no longer numbered, so the marker that held the number goes. */
-.aix-step > b { display: none; }
-@media (min-width: 900px) {
-  details.aix-controls[open] > .aix-group { break-inside: avoid; }
-  details.aix-controls[open] { column-count: 2; column-gap: 20px; }
-  details.aix-controls[open] > .aix-setup-summary { column-span: all; }
+
+/* Step cards from 7a */
+.aix-step-card {
+  border: 1px solid var(--edgeIn);
+  border-radius: 20px;
+  padding: 18px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+.aix-step-head {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+}
+.aix-step-badge {
+  font-family: var(--aix-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: #FAFCFE;
+  background: #192C3C;
+  border-radius: 6px;
+  padding: 3px 8px;
+  line-height: 1;
+}
+.aix-step-title {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.aix-model-subgroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.aix-model-subhead {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.aix-subhead-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.aix-subhead-count {
+  font-family: var(--aix-mono);
+  font-size: 11px;
+  color: var(--faint);
+}
+.aix-subhead-note {
+  font-size: 12.5px;
+  color: var(--faint);
+  line-height: 1.5;
+  margin: 0;
+}
+.aix-step-divider {
+  height: 1px;
+  background: var(--rule);
+}
+.aix-step-note {
+  font-size: 12.5px;
+  color: var(--t2);
+  line-height: 1.55;
+  margin: 0;
+}
+.aix-toggle-group {
+  display: flex;
+  flex-direction: column;
+}
+.aix-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
+  background: transparent;
+  cursor: pointer;
+  text-align: start;
+  font: inherit;
+  color: inherit;
+  width: 100%;
+}
+.aix-toggle:first-child { border-top: 0; }
+.aix-toggle > span {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.aix-toggle strong {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.aix-toggle small {
+  font-family: var(--aix-mono);
+  font-size: 11px;
+  color: var(--faint);
+}
+.aix-switch {
+  flex: 0 0 44px;
+  height: 26px;
+  border-radius: 999px;
+  background: rgba(27,25,23,.06);
+  border: 1px solid rgba(27,25,23,.10);
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  transition: all .2s ease;
+  justify-content: flex-end;
+}
+.aix-switch.is-on, .aix-toggle[aria-checked="true"] .aix-switch {
+  background: #126B75;
+  border-color: #126B75;
+  justify-content: flex-start;
+}
+.aix-switch b {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #FAFCFE;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  display: block;
 }
 
 /* ── Home AI card: Horizon toggle & 4-model status grid ─────────────── */

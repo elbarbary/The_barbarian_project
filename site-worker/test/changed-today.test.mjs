@@ -114,7 +114,7 @@ test('the shelf is on Home, ordered, and styled', async () => {
   const end = template.indexOf('{{ isToday }}');
   assert.ok(shelf > 0 && shelf < end, 'the shelf is gone from Home');
   assert.ok(watch < shelf, 'the shelf rose above the reader’s own companies');
-  assert.ok(!template.slice(home, end).includes('{{ aiCards }}'), 'the lab preview is back on Home');
+  assert.ok(template.indexOf('{{ aiCards }}', home) > shelf, 'the aiCards highlight does not follow changedToday');
   const phone = await read('public/esthmr/chart-viewer.css');
   assert.match(phone, /\.journal-home>\.ct-shelf\{order:4\}/,
     'unnamed blocks fall to the bottom of the phone, and this one is not named');
