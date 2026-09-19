@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "fetchedAt": "2026-09-18T09:58:06.206195+00:00",
+  "fetchedAt": "2026-09-19T05:33:19.314851+00:00",
   "source": "https://www.mcdr.com.eg/en/members-subscribers/issuing-companies",
-  "sourceSha256": "bdc527a7717ad6a238c1fd2f2b0126ba5f3be3d889700c30b8df14d618780884",
+  "sourceSha256": "fc2c1dbedbe433138f471a73fd799df79cc06ce0627dbcc69b1f85a796436a82",
   "issuers": [
     {
       "isin": "EGS01041C010",
