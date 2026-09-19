@@ -147,13 +147,13 @@
        notch pushes it clear rather than under. */
     inset: auto max(10px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-right)) !important;
     width: auto !important;
-    padding: 6px 4px !important;
+    padding: 8px 6px !important;
     background: var(--surface) !important;
     border: 1px solid var(--rule) !important;
     border-radius:var(--radius-island) !important;
     /* Enough shadow to lift it off the page underneath, on a warm palette
        where a hard blue shadow looked like a bruise. */
-    box-shadow: 0 6px 24px rgba(25, 44, 60, .10), 0 1px 2px rgba(25, 44, 60, .05) !important;
+    box-shadow: 0 8px 28px rgba(25, 44, 60, .14), 0 1px 2px rgba(25, 44, 60, .05) !important;
     overflow: visible !important; display: block !important;
     /* The bar is nudged by navbar.js while Safari's toolbar is moving, and a
        transition would turn every correction into a visible slide. */
@@ -162,20 +162,48 @@
   #app .journal-nav { display: grid !important; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 0 !important; width: 100%; }
   #app .journal-nav button {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 4px; padding: 8px 2px; min-width: 0; min-height: 64px;
-    font-size: 12px !important; line-height: 18px; border-radius:var(--radius-control);
+    gap: 4px; padding: 8px 2px; min-width: 0; min-height: 64px; min-height: 72px !important;
+    font-size: 13px !important; line-height: 18px; border-radius:var(--radius-control);
     position:relative; isolation:isolate; background:transparent !important;
   }
   /* The label is the target's name; it must not be clipped into an ellipsis
      on a 375px screen, where five columns leave 75px each. */
-  #app .journal-nav button > span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  #app .journal-nav svg { width: 22px; height: 22px; }
-  #app .journal-nav button::before { content:''; position:absolute; top:5px; width:48px; height:32px; border-radius:var(--radius-control); background:transparent; z-index:-1; }
+  #app .journal-nav button > span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px !important; font-weight: 500; }
+  #app .journal-nav svg { width: 26px !important; height: 26px !important; }
+  #app .journal-nav button::before { content:''; position:absolute; top:4px; width:56px; height:38px; border-radius:var(--radius-control); background:transparent; z-index:-1; }
   #app .journal-nav button[aria-current="page"]::before { background:var(--accTint); }
-  #app .journal-nav button[aria-current="page"] svg { stroke-width:2; }
-  .journal-toolbar { gap: 8px; padding-bottom: 16px; }
-  .journal-wordmark { flex: 1; }
-  .journal-toolbar .journal-search { order: 3; min-width: 0; width: 100%; }
+  #app .journal-nav button[aria-current="page"] svg { stroke-width:2.2; }
+  #app .journal-toolbar {
+    margin-inline: 0; margin-block: 6px 14px; padding: 8px 14px;
+    background: color-mix(in srgb, var(--surface) 90%, transparent) !important;
+    backdrop-filter: blur(18px) saturate(1.25);
+    border: 1px solid var(--edgeIn) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+    gap: 8px; display: flex; align-items: center; flex-wrap: wrap;
+  }
+  #app .journal-wordmark {
+    flex: 1; display: inline-flex; align-items: center; gap: 8px;
+    font-weight: 700; font-size: 15.5px; color: var(--ink);
+  }
+  #app .journal-wordmark .om-logo-badge {
+    width: 26px; height: 26px; border-radius: 7px; background: #126B75; color: #FAFCFE;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; font-family: 'IBM Plex Mono', monospace;
+  }
+  #app .journal-toolbar .journal-search {
+    order: 3; min-width: 0; width: 100%; min-height: 40px;
+    background: var(--sunk); border: 1px solid var(--edgeIn);
+    border-radius: 999px; color: var(--faint); font-size: 13px; padding: 0 14px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  #app .journal-toolbar .journal-account {
+    width: 38px; height: 38px; flex: 0 0 38px; border-radius: 50% !important;
+    background: var(--sunk) !important; border: 1px solid var(--edgeIn) !important;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--t2); cursor: pointer; padding: 0;
+  }
+  #app .journal-toolbar .journal-account svg { width: 19px; height: 19px; }
   #app .om-idx { grid-template-columns: repeat(3,minmax(0,1fr)) !important; }
   #app .om-idx > div { padding: 8px !important; }
   #app .om-idx > div > div:nth-child(2) { font-size: 16px !important; }
@@ -996,17 +1024,47 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
  */
 @media (min-width:861px) {
   #app .journal-toolbar {
-    margin-inline: -28px; margin-block: -12px 0; padding: 12px 28px;
-    background: var(--surface); border-bottom: 1px solid var(--rule);
-    border-radius: 0; gap: 16px;
+    margin-inline: 0; margin-block: 8px 18px; padding: 8px 18px;
+    background: color-mix(in srgb, var(--surface) 88%, transparent) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(1.25);
+    backdrop-filter: blur(18px) saturate(1.25);
+    border: 1px solid var(--edgeIn) !important;
+    border-radius: 26px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08), 0 1px 0 rgba(255,255,255,0.06) inset !important;
+    gap: 16px; display: flex; align-items: center; justify-content: space-between;
   }
   #app .journal-toolbar .journal-search {
-    flex: 1; max-width: 400px; min-height: 44px; background: var(--sunk);
-    border: 1px solid var(--rule); border-radius: var(--radius-control);
-    color: var(--faint); font-size: 14.5px; padding: 0 14px;
+    flex: 1; max-width: 440px; min-height: 44px; background: var(--sunk);
+    border: 1px solid var(--edgeIn); border-radius: 999px;
+    color: var(--faint); font-size: 14px; padding: 0 18px;
+    display: flex; align-items: center; justify-content: space-between;
   }
-  #app .journal-toolbar .journal-search:hover { border-color: var(--accent); color: var(--ink); }
-  #app .journal-wordmark { margin-inline-end: 0; }
+  #app .journal-toolbar .journal-search:hover { border-color: var(--accent); color: var(--ink); background: var(--surface); }
+  #app .journal-toolbar .journal-account {
+    width: 42px; height: 42px; flex: 0 0 42px; border-radius: 50% !important;
+    background: var(--sunk) !important; border: 1px solid var(--edgeIn) !important;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--t2); cursor: pointer; padding: 0;
+    transition: background .18s, color .18s, border-color .18s, transform .18s;
+  }
+  #app .journal-toolbar .journal-account:hover {
+    background: var(--surface) !important; color: var(--ink) !important;
+    border-color: var(--accent) !important; transform: rotate(30deg);
+  }
+  #app .journal-toolbar .journal-account svg { width: 20px; height: 20px; }
+  #app .journal-wordmark {
+    margin-inline-end: 0; display: inline-flex; align-items: center; gap: 9px;
+    font-weight: 700; font-size: 16.5px; letter-spacing: .04em; color: var(--ink);
+  }
+  #app .journal-wordmark .om-logo-badge {
+    width: 28px; height: 28px; border-radius: 8px; background: #126B75; color: #FAFCFE;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; font-family: 'IBM Plex Mono', monospace;
+    box-shadow: 0 2px 6px rgba(18, 107, 117, 0.25);
+  }
+  #app .journal-wordmark > span:not(.om-logo-badge) {
+    font-size: 12px; font-weight: 500; color: var(--faint); letter-spacing: 0; margin-inline-start: 4px;
+  }
 
   /* The destinations inside a section, as tabs: an underline that belongs to
      the row rather than a pill that floats above it. */
@@ -1349,21 +1407,21 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
      island waiting for the day it does. */
   body[data-signed="no"] #app .om-rail { inset-block-start: auto !important; }
 
-  #app .om-nav { flex-direction: row !important; gap: 4px !important; margin: 0 !important; }
+  #app .om-nav { flex-direction: row !important; gap: 6px !important; margin: 0 !important; }
   #app .om-nav > button {
     display: inline-flex !important; align-items: center !important;
-    height: 46px !important; padding: 0 12px !important;
-    border-radius: 20px !important; border: 0 !important;
+    height: 52px !important; padding: 0 16px !important;
+    border-radius: 22px !important; border: 0 !important;
     background: transparent !important; color: var(--t2) !important;
     font: inherit; cursor: pointer;
     transition: background .18s ease, color .18s ease;
   }
-  #app .om-nav > button > svg { width: 22px !important; height: 22px !important; flex: none; }
+  #app .om-nav > button > svg { width: 25px !important; height: 25px !important; flex: none; }
   /* The name: closed by default, opened by hover, focus or being the place
      the reader is already in. max-width rather than display so it slides. */
   #app .om-nav > button > span {
     display: block !important; max-width: 0; opacity: 0; overflow: hidden;
-    white-space: nowrap; margin-inline-start: 0; font-size: 13.5px; font-weight: 600;
+    white-space: nowrap; margin-inline-start: 0; font-size: 14.5px; font-weight: 600;
     transition: max-width .24s ease, opacity .18s ease, margin .24s ease;
   }
   #app .om-nav > button:hover, #app .om-nav > button:focus-visible {

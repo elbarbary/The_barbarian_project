@@ -84,6 +84,102 @@ function openForecast(scenarios, picks, model, horizon) {
 }
 
 
+function sparklineSvg(byDate, val, ar) {
+  const rows = (Array.isArray(byDate) ? byDate : []).filter((d) => d && finite(d.chosenReturn));
+  if (rows.length < 2) return null;
+  const W = 200, H = 38, PAD = 4;
+  const vals = rows.map((r) => r.chosenReturn);
+  const lo = Math.min(...vals), hi = Math.max(...vals);
+  const span = hi - lo || 1;
+  const x = (i) => PAD + (i / (rows.length - 1)) * (W - PAD * 2);
+  const y = (v) => H - PAD - ((v - lo) / span) * (H - PAD * 2);
+  const pts = rows.map((r, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(1)} ${y(r.chosenReturn).toFixed(1)}`).join(' ');
+  const strokeColor = val < 0 ? 'var(--down, #A8372A)' : 'var(--up, #3F6F4F)';
+  return h('svg', {
+    class: 'aix-grid-sparkline', viewBox: `0 0 ${W} ${H}`, preserveAspectRatio: 'none',
+    role: 'img', 'aria-label': ar ? 'مسار أداء النموذج' : 'Model return path',
+  }, h('path', { d: pts, fill: 'none', stroke: strokeColor, strokeWidth: '2.2', strokeLinejoin: 'round' }));
+}
+
+function homeModelsGrid(top5, horizon, ar, component) {
+  const t = (en, arabic) => (ar ? arabic : en);
+  const minSessions = top5.minimumSessions || 5;
+  const n = Number(horizon);
+  const targetModels = [
+    { id: 'kronos', labelEn: 'KRONOS-SMALL', labelAr: 'KRONOS-SMALL' },
+    { id: 'chronos2', labelEn: 'CHRONOS-2', labelAr: 'CHRONOS-2' },
+    { id: 'timesfm25', labelEn: 'TIMESFM 2.5', labelAr: 'TIMESFM 2.5' },
+    { id: 'rerank', labelEn: 'GEMINI, READING THE OTHER NINE', labelAr: 'GEMINI · قراءة النماذج الأخرى' },
+  ];
+
+  const cards = targetModels.map((m) => {
+    const entry = top5.models?.[m.id];
+    const hzData = entry?.horizons?.[horizon];
+    const isScored = Boolean(hzData && hzData.sessions >= minSessions && finite(hzData.meanReturn));
+    const label = t(m.labelEn, m.labelAr);
+
+    if (isScored) {
+      const val = hzData.meanReturn;
+      const mkt = hzData.meanMarket;
+      const ahead = hzData.ahead;
+      const sessions = hzData.sessions;
+      const isDown = val < 0;
+
+      return h('div', { class: 'aix-home-model-card is-scored', key: m.id },
+        h('div', { class: 'aix-grid-hdr' }, label),
+        h('strong', { class: `aix-grid-num ${isDown ? 'is-down' : 'is-up'}`, dir: 'ltr' }, percent(val)),
+        h('div', { class: 'aix-grid-vs' },
+          t(`${percent(val)} against the market's ${percent(mkt)}`,
+            `${percent(val)} مقابل ${percent(mkt)} للسوق`)),
+        sparklineSvg(hzData.byDate, val, ar),
+        h('div', { class: 'aix-grid-stat' },
+          t(`ahead on ${ahead} of ${sessions} sessions`,
+            `متقدم في ${ahead} من ${sessions} جلسات`)),
+        h('button', {
+          type: 'button', class: 'aix-grid-link',
+          onClick: () => open(component, { scModel: m.id === 'rerank' ? 'kronos' : m.id, scHorizon: n, scGemini: m.id === 'rerank' }),
+        }, t('Open the workbench ↗', 'افتح منصة النماذج ↗')));
+    }
+
+    return h('div', { class: 'aix-home-model-card is-pending', key: m.id },
+      h('div', { class: 'aix-grid-hdr' }, label),
+      h('div', { class: 'aix-grid-norecord' }, t('No record yet', 'لم يُسجَّل بعد')),
+      h('p', { class: 'aix-grid-desc' },
+        t('It has not run on enough sessions to be scored.', 'لم يمرّ بعدد جلسات كافٍ لاحتساب النتيجة.')),
+      h('button', {
+        type: 'button', class: 'aix-grid-link',
+        onClick: () => open(component, { scModel: m.id === 'rerank' ? 'kronos' : m.id, scHorizon: n, scGemini: m.id === 'rerank' }),
+      }, t('Open the workbench ↗', 'افتح منصة النماذج ↗')));
+  });
+
+  const scoredModels = targetModels.map((m) => {
+    const hzData = top5.models?.[m.id]?.horizons?.[horizon];
+    const isScored = Boolean(hzData && hzData.sessions >= minSessions && finite(hzData.meanReturn));
+    return { ...m, isScored, hzData };
+  }).filter((m) => m.isScored);
+
+  let summaryNote = null;
+  if (scoredModels.length > 0) {
+    const avgReturn = scoredModels.reduce((s, m) => s + m.hzData.meanReturn, 0) / scoredModels.length;
+    const avgMarket = scoredModels.reduce((s, m) => s + m.hzData.meanMarket, 0) / scoredModels.length;
+    const totalSessions = Math.max(...scoredModels.map((m) => m.hzData.sessions));
+    const diff = avgReturn - avgMarket;
+    summaryNote = t(
+      `Across the ${scoredModels.length} of ${targetModels.length} with a record, the five they ranked highest returned ${percent(avgReturn)} against the market's ${percent(avgMarket)} — ${percent(diff)}. Five companies over ${totalSessions} sessions is a very small sample, and the sign of these numbers has changed from one week to the next.`,
+      `من بين ${scoredModels.length} من ${targetModels.length} لها سجل، حققت الشركات الخمس الأعلى ترتيباً ${percent(avgReturn)} مقابل ${percent(avgMarket)} للسوق — ${percent(diff)}. خمس شركات على مدار ${totalSessions} جلسات عينة صغيرة جداً، وإشارة هذه الأرقام تغيّرت من أسبوع لآخر.`
+    );
+  } else {
+    summaryNote = t(
+      `None of the ${targetModels.length} public models have reached ${minSessions} scored sessions on this window yet. Five companies over a handful of sessions is a very small sample.`,
+      `لم يصل أي من النماذج الأربعة العامة إلى ${minSessions} جلسات مقيّمة على هذه النافذة بعد. خمس شركات على مدار عدد قليل من الجلسات عينة صغيرة جداً.`
+    );
+  }
+
+  return h('div', { class: 'aix-home-models-wrap' },
+    h('div', { class: 'aix-home-models-grid' }, cards),
+    summaryNote ? h('p', { class: 'aix-home-summary-note' }, summaryNote) : null);
+}
+
 export function aiCards(component, data, ar) {
   const t = (en, arabic) => (ar ? arabic : en);
   const top5 = data && data.top5;
@@ -95,7 +191,9 @@ export function aiCards(component, data, ar) {
   // Home reads one window, the record's five-session one where it has it;
   // every window and every model is on the workbench.
   const horizons = (Array.isArray(top5.horizons) ? top5.horizons : []).map(String);
-  const horizon = horizons.includes('5') ? '5' : horizons[0];
+  const horizon = (st.homeAiHorizon && horizons.includes(String(st.homeAiHorizon)))
+    ? String(st.homeAiHorizon)
+    : (horizons.includes('5') ? '5' : horizons[0]);
   const m = heroModel(top5, horizon);
   const system = m.system;
   const n = Number(horizon);
@@ -159,7 +257,8 @@ export function aiCards(component, data, ar) {
       heroChart(system.byDate, ar),
       h('p', { class: 'aix-fact-note' }, t(
         'The five solid · the market dashed. Each point is one night over its own window — every company scored, equally weighted, and not an index.',
-        'الخمس المختارة متصل · السوق متقطّع. كل نقطة ليلة واحدة على نافذتها — كل شركة مُقيَّمة بأوزان متساوية، وليست مؤشراً.')));
+        'الخمس المختارة متصل · السوق متقطّع. كل نقطة ليلة واحدة على نافذتها — كل شركة مُقيَّمة بأوزان متساوية، وليست مؤشراً.')),
+      homeModelsGrid(top5, horizon, ar, component));
   } else if (system) {
     // Below the minimum: how many NIGHTS are scored, and the nights still to
     // come drawn as the sessions each is held. "0/5 sessions scored" beside
@@ -211,7 +310,8 @@ export function aiCards(component, data, ar) {
         h('strong', { class: 'aix-system-value is-words' }, headWords),
         h('p', { class: 'aix-system-versus' }, versus)),
       rows.length ? recordChart(rows, n, ar, { label: `${legend} ${end}`, end }) : null,
-      h('p', { class: 'aix-fact-note' }, legend));
+      h('p', { class: 'aix-fact-note' }, legend),
+      homeModelsGrid(top5, horizon, ar, component));
   }
 
   /* ONE VISUAL ON HOME, NOT THREE.
@@ -241,8 +341,20 @@ export function aiCards(component, data, ar) {
           ? t(`Saved record ${day(basis, false)} · ${models ? `${models} public models` : 'public models'}`,
             `سجل محفوظ ${day(basis, true)} · ${models ? `${models} نموذجًا عامًا` : 'نماذج عامة'}`)
           : t('Saved record', 'سجل محفوظ')),
-        h('button', { type: 'button', class: 'aix-preview-pill', onClick: () => component.setState({ aiWarning: true }) },
-          t('PREVIEW · BETA', 'معاينة · تجريبي'))),
+        h('div', { class: 'aix-lab-head-controls' },
+          h('div', { class: 'aix-horizon-pills', role: 'group', 'aria-label': t('Forecast horizon', 'أفق التنبؤ') },
+            ['1', '5'].filter((hz) => horizons.includes(hz)).map((hz) => {
+              const active = hz === horizon;
+              return h('button', {
+                type: 'button',
+                key: hz,
+                class: `aix-hz-pill ${active ? 'is-active' : ''}`,
+                'aria-pressed': String(active),
+                onClick: () => component.setState({ homeAiHorizon: hz }),
+              }, hz === '1' ? t('1 session', 'جلسة واحدة') : t(`${hz} sessions`, `${hz} جلسات`));
+            })),
+          h('button', { type: 'button', class: 'aix-preview-pill', onClick: () => component.setState({ aiWarning: true }) },
+            t('PREVIEW · BETA', 'معاينة · تجريبي')))),
       h('h2', { id: 'aix-lab-title', class: 'aix-lab-title' },
         t('Do forecasting models get it right? We test them in public', 'هل تُصيب نماذج التنبؤ؟ نختبرها علناً'), ' ',
         h('small', { class: 'h-term' }, t('The model lab', 'مختبر النماذج'))),

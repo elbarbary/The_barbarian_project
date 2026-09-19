@@ -33,6 +33,7 @@ import { React as R } from './react-shim.js';
 import { finite, day, shortDay, cairoTime, nextRun, summaryOf } from './ai-visuals.js';
 import {
   divider, viewSwitch, pullNote, rankingTiles, rankingCard, returnsCards, recordCard, nightsCard,
+  top5VsMarketChart, rerankComparisonCard,
 } from './scenario-visuals.js';
 import { modelsCard } from './ai-record.js';
 import { readingProblem, mixedSnapshot } from './lab-snapshot.js';
@@ -401,6 +402,13 @@ export function returnsView(scenarios, draft, tickers) {
   };
 }
 
+/** Position of each company in a reading, 1 first; ties by ticker. */
+export function positions(scores) {
+  const order = Object.keys(scores || {}).filter((t) => finite(scores[t]))
+    .sort((a, b) => (scores[b] - scores[a]) || (a < b ? -1 : a > b ? 1 : 0));
+  return Object.fromEntries(order.map((t, i) => [t, i + 1]));
+}
+
 /** Where each company stands, 1 first, with a tie sharing the average place.
  *
  *  For measuring MOVEMENT. On 14 September the default reading gave 182 of
@@ -633,10 +641,28 @@ export function scenariosScreen(component, data, ar) {
     h('summary', { class: 'aix-setup-summary' },
       h('span', { class: 'aix-setup-what' }, t('Change model and evidence', 'غيّر النموذج والأدلة')),
       h('span', { class: 'aix-setup-now' }, setupSummary)),
-    h('div', { class: 'aix-group' },
+    h('div', { class: 'aix-group aix-models-grouped' },
       h('p', { class: 'aix-step' }, h('span', null, t('The model', 'النموذج'))),
-      h('div', { class: 'aix-chips' }, choice.models.map((m) => chip(ar ? m.labelAr : m.label, model === m.id,
-        () => set({ scModel: m.id, scFrom: null }), m.id))),
+      (() => {
+        const foundations = choice.models.filter((m) => m.group !== 'baseline');
+        const baselines = choice.models.filter((m) => m.group === 'baseline');
+        return [
+          foundations.length ? h('div', { class: 'aix-model-subgroup', key: 'foundations' },
+            h('div', { class: 'aix-model-subhead' },
+              h('span', { class: 'aix-subhead-title' }, t('Foundation models', 'نماذج الأساس')),
+              h('span', { class: 'aix-subhead-count' }, String(foundations.length))),
+            h('p', { class: 'aix-subhead-note' }, t('Pre-trained neural models forecasting return distributions.', 'نماذج عامة مدرَّبة مسبقاً، تحسب توقعات احتمالية للأسعار.')),
+            h('div', { class: 'aix-chips' }, foundations.map((m) => chip(ar ? m.labelAr : m.label, model === m.id,
+              () => set({ scModel: m.id, scFrom: null }), m.id)))) : null,
+          baselines.length ? h('div', { class: 'aix-model-subgroup', key: 'baselines' },
+            h('div', { class: 'aix-model-subhead' },
+              h('span', { class: 'aix-subhead-title' }, t('Simple baselines', 'خطوط الأساس الإحصائية')),
+              h('span', { class: 'aix-subhead-count' }, String(baselines.length))),
+            h('p', { class: 'aix-subhead-note' }, t('Mechanical rules for comparison to verify model value.', 'قواعد حسابية بسيطة للمقارنة لمعرفة القيمة المضافة.')),
+            h('div', { class: 'aix-chips' }, baselines.map((m) => chip(ar ? m.labelAr : m.label, model === m.id,
+              () => set({ scModel: m.id, scFrom: null }), m.id)))) : null,
+        ];
+      })(),
       choice.meta ? h('p', { class: 'aix-note aix-model-about' }, aboutModel(choice.meta, ar)) : null),
     h('div', { class: 'aix-group' },
       h('p', { class: 'aix-step' }, h('span', null, t('The time window', 'النافذة الزمنية'))),
@@ -718,6 +744,11 @@ export function scenariosScreen(component, data, ar) {
   const last = rerank ? cairoTime(rerank.ranAt, ar) : null;
   const commitment = scenarios?.commitment || {};
   const basis = scenarios?.basisSession || nights.newest?.basisSession;
+  const allDates = [...new Set([
+    ...(Array.isArray(scenarios?.dates) ? scenarios.dates : []),
+    ...(Array.isArray(top5?.dates) ? top5.dates : []),
+    basis,
+  ])].filter(Boolean).sort().reverse();
 
   const screen = h('div', { class: 'home-screen sc-screen aix-bench' },
     h('header', { class: 'aix-bench-head' },
@@ -745,7 +776,24 @@ export function scenariosScreen(component, data, ar) {
           : t('not read tonight', 'لم تُقرأ الليلة')),
         h('dt', null, t('NEXT SCHEDULED', 'الموعد التالي')),
         h('dd', null, next ? [h('bdi', null, shortDay(next.date, ar)), ' · ', h('bdi', { dir: 'ltr' }, next.time)] : '—'),
-        h('small', null, t('Cairo time · after the close, runs can start late', 'بتوقيت القاهرة · بعد الإغلاق، وقد يتأخر التشغيل')))),
+        h('small', null, t('Cairo time · after the close, runs can start late', 'بتوقيت القاهرة · بعد الإغلاق، وقد يتأخر التشغيل'))),
+      allDates.length > 1 ? h('div', { class: 'aix-session-bar' },
+        h('span', { class: 'aix-session-label' }, t('SESSION', 'الجلسة')),
+        h('div', { class: 'aix-session-chips' },
+          allDates.filter((_, i) => i < 8).map((d) => {
+            const isSel = (st.scDate || basis) === d;
+            const isWaiting = d > '2026-09-03';
+            return h('button', {
+              key: d, type: 'button',
+              class: isSel ? 'aix-session-chip on' : 'aix-session-chip',
+              'aria-pressed': String(isSel),
+              onClick: () => component.setState({ scDate: d }),
+            }, [
+              h('span', { class: 'aix-session-date' }, shortDay(d, ar)),
+              h('span', { class: `aix-session-tag ${isWaiting ? 'waiting' : 'scored'}` },
+                isWaiting ? t('waiting', 'في الانتظار') : t('scored', 'مُقيَّم')),
+            ]);
+          }))) : null),
     statusStrip(record, ar),
     h('div', { class: 'aix-bench-grid' },
       h('div', { class: 'aix-results' },
@@ -758,6 +806,7 @@ export function scenariosScreen(component, data, ar) {
         }),
         pullNote(ctx, ar),
         rankingTiles(ctx, ar),
+        gemini ? rerankComparisonCard(ctx, ar) : top5VsMarketChart(ctx, ar),
         rankingCard(component, data, ctx, ar),
         ...charts,
         divider('aix-past', t('PAST RUNS · ALREADY SCORED', 'تشغيلات سابقة · قُيّمت بالفعل'),

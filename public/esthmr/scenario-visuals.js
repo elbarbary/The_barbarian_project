@@ -653,3 +653,119 @@ export function nightsCard(component, data, ctx, ar) {
     nights.older ? h('p', { class: 'aix-note' }, t(`${nights.older} older ${nights.older === 1 ? 'night is' : 'nights are'} in the averages but not listed.`,
       `${nights.older} ليالٍ أقدم ضمن المتوسطات لكنها غير معروضة.`)) : null);
 }
+
+export function top5VsMarketChart(ctx, ar) {
+  const t = (en, arabic) => (ar ? arabic : en);
+  const { choice, ranking, words } = ctx;
+  if (!ranking || !ranking.rows.length || choice.gemini) return null;
+  const says = choice.meta?.says || { kind: 'return' };
+  const move = (v) => (says.kind === 'reversal' ? -v : v);
+  const top = ranking.rows.slice(0, 5);
+  const topValues = top.map((r) => r.baseValue).filter(finite).map(move);
+  const topFigure = avg(topValues);
+  const whole = summaryOf(ranking.rows.map((r) => r.value).map(move)).median;
+  if (!finite(topFigure) || !finite(whole)) return null;
+
+  const maxAbs = Math.max(Math.abs(topFigure), Math.abs(whole), 4);
+  const scale = 270 / maxAbs;
+  const zeroX = 350;
+  const topW = Math.max(Math.min(Math.abs(topFigure) * scale, 280), 4);
+  const wholeW = Math.max(Math.min(Math.abs(whole) * scale, 280), 4);
+  const topX = topFigure >= 0 ? zeroX : zeroX - topW;
+  const wholeX = whole >= 0 ? zeroX : zeroX - wholeW;
+  const topColor = topFigure >= 0 ? '#3F6B52' : '#A3402F';
+  const wholeColor = whole >= 0 ? '#3F6B52' : '#A3402F';
+
+  return h('section', { class: 'aix-card aix-compare-card' },
+    h('header', null,
+      h('span', { class: 'aix-compare-meta' },
+        t(`Model forecast over ${words.horizon} · ${ranking.rows.length} companies with figures in this run`,
+          `توقّع النموذج على ${words.horizon} · ${ranking.rows.length} شركة لها رقم في هذه الجولة`)),
+      h('h3', null, t('Top 5 vs whole market', 'أعلى خمسة مقابل السوق كله'))),
+    h('div', { class: 'aix-compare-graphic' },
+      h('svg', { viewBox: '0 0 700 108', width: '100%', height: '108', style: { display: 'block', direction: 'ltr' } },
+        h('line', { x1: zeroX, y1: 8, x2: zeroX, y2: 86, stroke: 'var(--ink, #192C3C)', 'stroke-width': 1.25 }),
+        h('text', { x: zeroX, y: 102, fill: 'var(--faint, #607487)', 'font-size': 11, 'font-family': "'IBM Plex Mono', monospace", 'text-anchor': 'middle' }, '0%'),
+        // Top 5 bar
+        h('rect', { x: topX, y: 16, width: topW, height: 26, fill: topColor, rx: 4 }),
+        h('text', {
+          x: topFigure >= 0 ? topX + topW + 8 : topX - 8,
+          y: 34, fill: topColor, 'font-size': 13, 'font-weight': 600,
+          'font-family': "'IBM Plex Mono', monospace", 'text-anchor': topFigure >= 0 ? 'start' : 'end'
+        }, percent(topFigure)),
+        h('text', {
+          x: topFigure >= 0 ? zeroX - 10 : zeroX + 10,
+          y: 34, fill: 'var(--t2, #455B6E)', 'font-size': 12,
+          'font-family': ar ? "'IBM Plex Sans Arabic', sans-serif" : "'IBM Plex Sans', sans-serif",
+          'text-anchor': topFigure >= 0 ? 'end' : 'start'
+        }, t('Top five', 'أعلى خمسة')),
+        // Whole market bar
+        h('rect', { x: wholeX, y: 52, width: wholeW, height: 26, fill: wholeColor, rx: 4 }),
+        h('text', {
+          x: whole >= 0 ? wholeX + wholeW + 8 : wholeX - 8,
+          y: 70, fill: wholeColor, 'font-size': 13, 'font-weight': 600,
+          'font-family': "'IBM Plex Mono', monospace", 'text-anchor': whole >= 0 ? 'start' : 'end'
+        }, percent(whole)),
+        h('text', {
+          x: whole >= 0 ? zeroX - 10 : zeroX + 10,
+          y: 70, fill: 'var(--t2, #455B6E)', 'font-size': 12,
+          'font-family': ar ? "'IBM Plex Sans Arabic', sans-serif" : "'IBM Plex Sans', sans-serif",
+          'text-anchor': whole >= 0 ? 'end' : 'start'
+        }, t(`Whole market median (${ranking.rows.length})`, `وسيط الـ ${ranking.rows.length} شركة`)))),
+    h('p', { class: 'aix-note' },
+      t('Average of top 5 forecasts versus median of all companies, on the same horizon. Model figure, not realised return.',
+        'متوسط أعلى خمسة توقعات مقابل وسيط كل الشركات، على نفس النافذة. رقم نموذج، وليس عائداً محققاً.')));
+}
+
+export function rerankComparisonCard(ctx, ar) {
+  const t = (en, arabic) => (ar ? arabic : en);
+  const { choice, ranking, words, reading } = ctx;
+  if (!choice.gemini || !ranking || !ranking.rows.length || !reading) return null;
+  const says = choice.meta?.says || { kind: 'return' };
+  const move = (v) => (says.kind === 'reversal' ? -v : v);
+
+  const geminiTop = ranking.rows.slice(0, 5);
+  const modelTopTickers = ranking.baseTop || [];
+  const modelTopRows = modelTopTickers.slice(0, 5).map((ticker, i) => {
+    const r = ranking.rows.find((row) => row.ticker === ticker);
+    return {
+      rank: i + 1,
+      ticker,
+      name: r?.name || ticker,
+      exp: r ? percent(move(r.baseValue)) : '—',
+    };
+  });
+
+  const changedCount = geminiTop.filter((r) => r.baseRank !== r.rank).length;
+
+  return h('section', { class: 'aix-card aix-rerank-card' },
+    h('header', null,
+      h('div', { class: 'aix-rerank-title-row' },
+        h('h3', null, t('Re-rank effect', 'أثر إعادة الترتيب')),
+        h('span', { class: 'aix-rerank-badge' }, t('Order only', 'الترتيب فقط'))),
+      h('p', null,
+        t(`Active context: ${words.evidence || 'selected layers'} · ${changedCount} positions moved`,
+          `السياق المُشغَّل: ${words.evidence || 'الطبقات المختارة'} · ${changedCount} مواضع تغيّرت`))),
+    h('div', { class: 'aix-rerank-cols' },
+      h('div', { class: 'aix-rerank-col' },
+        h('div', { class: 'aix-rerank-col-head' }, t(`Ranked by ${words.model}`, `كما رتّبها ${words.model}`)),
+        modelTopRows.map((r) => h('div', { class: 'aix-rerank-row', key: r.ticker },
+          h('span', { class: 'aix-rerank-pos' }, String(r.rank)),
+          h('span', { class: 'aix-rerank-ticker' }, r.ticker),
+          h('span', { class: 'aix-rerank-val' }, r.exp)))),
+      h('div', { class: 'aix-rerank-arrow' }, h('span', null, ar ? '←' : '→')),
+      h('div', { class: 'aix-rerank-col is-gemini' },
+        h('div', { class: 'aix-rerank-col-head' }, t('After Gemini re-read', 'بعد إعادة قراءة Gemini')),
+        geminiTop.map((r) => {
+          const delta = finite(r.baseRank) ? r.baseRank - r.rank : 0;
+          const deltaText = delta > 0 ? `+${delta}` : delta < 0 ? `${delta}` : (ar ? 'دون تغيير' : 'unchanged');
+          const toneClass = delta > 0 ? 'is-up' : delta < 0 ? 'is-down' : 'is-flat';
+          return h('div', { class: `aix-rerank-row ${toneClass}`, key: r.ticker },
+            h('span', { class: 'aix-rerank-pos' }, String(r.rank)),
+            h('span', { class: 'aix-rerank-ticker' }, r.ticker),
+            h('span', { class: `aix-rerank-move ${toneClass}` }, deltaText));
+        }))),
+    h('p', { class: 'aix-note' },
+      t('Re-ranking changes positions only, and never touches saved forecast prices.',
+        'إعادة الترتيب تغيّر المواضع، ولا تمسّ الأسعار المتوقّعة المحفوظة.')));
+}

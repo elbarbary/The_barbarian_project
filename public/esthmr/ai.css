@@ -826,3 +826,245 @@ details.aix-controls[open] .aix-setup-what::after { content: ' ⌃'; }
   details.aix-controls[open] { column-count: 2; column-gap: 20px; }
   details.aix-controls[open] > .aix-setup-summary { column-span: all; }
 }
+
+/* ── Home AI card: Horizon toggle & 4-model status grid ─────────────── */
+
+#app .aix-lab-head-controls {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-inline-start: auto;
+}
+
+#app .aix-horizon-pills {
+  display: inline-flex; align-items: center; gap: 4px; background: var(--sunk);
+  border: 1px solid var(--rule); border-radius: 999px; padding: 2px;
+}
+
+#app .aix-hz-pill {
+  border: 0; cursor: pointer; background: transparent; color: var(--t2);
+  font-family: var(--aix-sans); font-size: 12.5px; font-weight: 600;
+  padding: 5px 12px; border-radius: 999px; transition: background .15s ease, color .15s ease;
+  white-space: nowrap; line-height: 1.3;
+}
+
+#app .aix-hz-pill:hover { color: var(--ink); }
+
+#app .aix-hz-pill.is-active {
+  background: var(--accent); color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.12);
+}
+
+#app .aix-home-models-wrap {
+  margin-top: 14px; display: flex; flex-direction: column; gap: 12px; width: 100%;
+}
+
+#app .aix-home-models-grid {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; width: 100%;
+}
+
+#app .aix-home-model-card {
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 14px;
+  padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+#app .aix-home-model-card:hover {
+  border-color: var(--edgeHover, var(--rule));
+}
+
+#app .aix-grid-hdr {
+  font-family: var(--aix-mono); font-size: 11px; letter-spacing: .08em;
+  color: var(--faint); text-transform: uppercase; font-weight: 600;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+#app .aix-grid-num {
+  font-family: var(--aix-mono); font-size: 24px; font-weight: 700; line-height: 1.1;
+  letter-spacing: -.02em; margin-top: 2px;
+}
+
+#app .aix-grid-num.is-down { color: var(--down); }
+#app .aix-grid-num.is-up { color: var(--up); }
+
+#app .aix-grid-vs {
+  font-size: 12px; line-height: 1.35; color: var(--t2); text-wrap: pretty;
+}
+
+#app .aix-grid-sparkline {
+  width: 100%; height: 36px; display: block; margin: 4px 0; overflow: visible;
+}
+
+#app .aix-grid-stat {
+  font-size: 11.5px; line-height: 1.35; color: var(--faint); margin-top: auto;
+}
+
+#app .aix-grid-norecord {
+  font-family: var(--aix-mono); font-size: 16px; font-weight: 600; color: var(--ink);
+  margin-top: 6px;
+}
+
+#app .aix-grid-desc {
+  font-size: 12px; line-height: 1.45; color: var(--t2); margin: 0; min-height: 34px;
+}
+
+#app .aix-grid-link {
+  background: transparent; border: 0; cursor: pointer; color: var(--accent);
+  font-family: var(--aix-sans); font-size: 12px; font-weight: 600;
+  padding: 6px 0 0 0; display: inline-flex; align-items: center; gap: 4px;
+  align-self: flex-start; margin-top: auto;
+}
+
+#app .aix-grid-link:hover { text-decoration: underline; color: var(--accentPress); }
+
+#app .aix-home-summary-note {
+  font-size: 12.5px; line-height: 1.55; color: var(--t2); margin: 0;
+  padding-top: 10px; border-top: 1px solid var(--rule); text-wrap: pretty;
+}
+
+@media (max-width: 960px) {
+  #app .aix-home-models-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 540px) {
+  #app .aix-home-models-grid { grid-template-columns: 1fr; }
+  #app .aix-lab-head-controls { width: 100%; justify-content: space-between; }
+}
+
+/* ── Workbench: Session selector & Grouped models ────────────────────── */
+
+#app .aix-session-bar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 12px;
+  padding: 10px 14px; background: var(--sunk); border: 1px solid var(--rule); border-radius: 12px;
+}
+
+#app .aix-session-label {
+  font-family: var(--aix-mono); font-size: 11px; letter-spacing: .1em; color: var(--faint); font-weight: 600;
+}
+
+#app .aix-session-chips {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap; overflow-x: auto;
+}
+
+#app .aix-session-chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px;
+  border-radius: 8px; border: 1px solid var(--rule); background: var(--surface);
+  color: var(--t2); font-size: 12px; cursor: pointer; transition: all .15s ease;
+}
+
+#app .aix-session-chip:hover { border-color: var(--accent); color: var(--ink); }
+
+#app .aix-session-chip.on {
+  background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
+}
+
+#app .aix-session-date { font-family: var(--aix-mono); }
+
+#app .aix-session-tag {
+  font-size: 10px; padding: 1px 5px; border-radius: 4px; font-family: var(--aix-sans);
+}
+
+#app .aix-session-chip:not(.on) .aix-session-tag.waiting {
+  background: var(--accTint); color: var(--accent);
+}
+
+#app .aix-session-chip:not(.on) .aix-session-tag.scored {
+  background: rgba(63, 111, 79, .12); color: var(--up);
+}
+
+#app .aix-session-chip.on .aix-session-tag {
+  background: rgba(255, 255, 255, .25); color: #fff;
+}
+
+#app .aix-models-grouped {
+  display: flex; flex-direction: column; gap: 14px;
+}
+
+#app .aix-model-subgroup {
+  display: flex; flex-direction: column; gap: 8px; padding: 12px 14px;
+  border-radius: 12px; background: var(--sunk); border: 1px solid var(--rule);
+}
+
+#app .aix-model-subhead {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+
+#app .aix-subhead-title {
+  font-size: 13.5px; font-weight: 700; color: var(--ink);
+}
+
+#app .aix-subhead-count {
+  font-family: var(--aix-mono); font-size: 11px; background: var(--rule); color: var(--t2);
+  padding: 1px 7px; border-radius: 999px; font-weight: 600;
+}
+
+#app .aix-subhead-note {
+  font-size: 11.5px; color: var(--faint); line-height: 1.4; margin: 0;
+}
+
+/* ── Workbench: Turn 7 Visuals (Top 5 vs Market & Re-rank Card) ─────── */
+
+#app .aix-compare-card, #app .aix-rerank-card {
+  margin-top: 14px;
+}
+
+#app .aix-rerank-card {
+  display: flex; flex-direction: column; gap: 14px;
+}
+
+#app .aix-rerank-title-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+
+#app .aix-rerank-badge {
+  font-family: var(--aix-mono); font-size: 10.5px; letter-spacing: .08em;
+  padding: 2px 8px; border-radius: 999px; background: var(--accTint); color: var(--accent);
+}
+
+#app .aix-rerank-cols {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 14px; align-items: center;
+}
+
+#app .aix-rerank-col {
+  background: var(--sunk); border: 1px solid var(--rule); border-radius: 12px; padding: 12px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+#app .aix-rerank-col.is-gemini {
+  border-color: var(--accent); background: var(--surface);
+}
+
+#app .aix-rerank-col-head {
+  font-size: 12px; font-weight: 700; color: var(--t2); border-bottom: 1px solid var(--rule);
+  padding-bottom: 6px;
+}
+
+#app .aix-rerank-row {
+  display: flex; align-items: center; gap: 8px; font-size: 12.5px; padding: 4px 0;
+}
+
+#app .aix-rerank-pos {
+  font-family: var(--aix-mono); font-size: 11px; color: var(--faint); width: 18px;
+}
+
+#app .aix-rerank-ticker {
+  font-family: var(--aix-mono); font-weight: 600; color: var(--ink); flex: 1;
+}
+
+#app .aix-rerank-val {
+  font-family: var(--aix-mono); font-size: 12px; color: var(--t2);
+}
+
+#app .aix-rerank-move {
+  font-family: var(--aix-mono); font-size: 11.5px; font-weight: 600; padding: 1px 6px; border-radius: 4px;
+}
+
+#app .aix-rerank-move.is-up { background: rgba(63, 111, 79, .15); color: var(--up); }
+#app .aix-rerank-move.is-down { background: rgba(168, 55, 42, .15); color: var(--down); }
+#app .aix-rerank-move.is-flat { background: var(--rule); color: var(--faint); }
+
+#app .aix-rerank-arrow {
+  font-size: 18px; color: var(--faint); display: flex; align-items: center; justify-content: center;
+}
+
+@media (max-width: 640px) {
+  #app .aix-rerank-cols { grid-template-columns: 1fr; }
+  #app .aix-rerank-arrow { transform: rotate(90deg); margin: 4px 0; }
+}
+
