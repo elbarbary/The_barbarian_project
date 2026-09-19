@@ -1172,11 +1172,18 @@ test('market cap is whole pounds, printed at a scale a person can read', () => {
   const c = new Component({});
   // The design divided by a thousand and suffixed "B", turning COMI's
   // 474,267,676,058 into "474267676.1B" — not a quantity at any scale.
+  // The suffix follows the page language: "bn" is not a word in Arabic, and
+  // the Arabic page (the default) printed "62.90bn" under Arabic labels.
+  c.state.lang = 'en';
   assert.equal(c.money(474267676058), '474.3bn');
   assert.equal(c.money(273816133123), '273.8bn');
   assert.equal(c.money(4190000000), '4.19bn');
   assert.equal(c.money(812000000), '812m');
   assert.equal(c.money(19043202), '19.0m');
+  c.state.lang = 'ar';
+  assert.equal(c.money(474267676058), '474.3 مليار');
+  assert.equal(c.money(812000000), '812 مليون');
+  c.state.lang = 'en';
   // A dash means "the filing did not state it", so only genuine absence gets
   // one. This used to include every negative, which is how 41 companies' filed
   // losses became data gaps — a net-profit card reading "—" above a proof

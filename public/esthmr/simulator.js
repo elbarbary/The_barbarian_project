@@ -435,14 +435,14 @@ export function simulatorExplorer(component, D, ar, React) {
   const entryTimeOptions = [
     { id: 'close', label: ar ? 'عند إغلاق الجلسة (2:30 م)' : 'Market Close (2:30 PM)' },
     { id: 'open', label: ar ? 'عند افتتاح الجلسة (10:00 ص)' : 'Market Open (10:00 AM)' },
-    { id: '10:30', label: '10:30 AM' },
-    { id: '11:00', label: '11:00 AM' },
-    { id: '11:30', label: '11:30 AM' },
+    { id: '10:30', label: ar ? '10:30 ص' : '10:30 AM' },
+    { id: '11:00', label: ar ? '11:00 ص' : '11:00 AM' },
+    { id: '11:30', label: ar ? '11:30 ص' : '11:30 AM' },
     { id: 'noon', label: ar ? 'الظهيرة (12:00 م)' : 'Noon (12:00 PM)' },
-    { id: '12:30', label: '12:30 PM' },
-    { id: '13:00', label: '1:00 PM' },
-    { id: '13:30', label: '1:30 PM' },
-    { id: '14:00', label: '2:00 PM' }
+    { id: '12:30', label: ar ? '12:30 م' : '12:30 PM' },
+    { id: '13:00', label: ar ? '1:00 م' : '1:00 PM' },
+    { id: '13:30', label: ar ? '1:30 م' : '1:30 PM' },
+    { id: '14:00', label: ar ? '2:00 م' : '2:00 PM' }
   ];
 
   // There is no separate exit list. One stood here with ids `close_same` and
@@ -463,7 +463,7 @@ export function simulatorExplorer(component, D, ar, React) {
   const statutoryItems = STANDARD_STATUTORY_FEES.items.map(item => ({
     id: item.id,
     name: ar ? item.nameAr : item.nameEn,
-    pct: item.pct
+    pct: ar ? (item.pctAr || item.pct) : item.pct
   }));
 
   return {
@@ -515,7 +515,7 @@ export function simulatorExplorer(component, D, ar, React) {
     onHoldChange: e => component.setState({simHoldSessions:Number(e.target.value)}),
     onEveryChange: e => component.setState({simEverySessions:Number(e.target.value)}),
     onFillsChange: e => component.setState({simFillCount:Number(e.target.value)}),
-    dataWarning: ar ? 'مصدر التوقيت: شموع TradingView نصف ساعة، معدّلة وفق طلب splits، بتوقيت القاهرة. سعر التوقيت هو أول تداول داخل الشمعة وليس ضمان تنفيذ في الثانية المحددة. الإغلاق آخر سعر شمعة متاحة. النتائج محاكاة لا عائداً تاريخياً موثقاً؛ التوزيعات وتأثيرات إجراءات الشركات تحتاج مراجعة.' : 'Timing source: TradingView 30-minute bars, requested with splits adjustment, in Africa/Cairo time. Clock-time prices are the first trade in that bar—not guaranteed fills at that exact instant. Close is the last available bar close. Results remain simulations; dividends and corporate-action effects require review.',
+    dataWarning: ar ? 'مصدر التوقيت: شموع TradingView نصف ساعة، معدّلة وفق تجزئة الأسهم، بتوقيت القاهرة. سعر التوقيت هو أول تداول داخل الشمعة وليس ضمان تنفيذ في الثانية المحددة. الإغلاق آخر سعر شمعة متاحة. النتائج محاكاة لا عائداً تاريخياً موثقاً؛ التوزيعات وتأثيرات إجراءات الشركات تحتاج مراجعة.' : 'Timing source: TradingView 30-minute bars, requested with splits adjustment, in Africa/Cairo time. Clock-time prices are the first trade in that bar—not guaranteed fills at that exact instant. Close is the last available bar close. Results remain simulations; dividends and corporate-action effects require review.',
     coverageLabel: `${ar ? 'البيانات المستخدمة' : 'Data used'}: ${firstSession[0]} → ${lastSession[0]} · ${activeSessions.length} ${ar ? 'جلسة مختارة' : 'selected sessions'}`,
     rangeClipped,
     clippedLabel: ar ? `الفترة المطلوبة تبدأ ${requestedStartDate}، لكن بيانات التوقيت تبدأ ${earliestDate}. النتيجة للفترة المتاحة فقط.` : `Requested start: ${requestedStartDate}. This timing dataset begins ${earliestDate}; the result covers only the available dates.`,

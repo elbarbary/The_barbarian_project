@@ -124,7 +124,9 @@ export function applyFilter(channel, key) {
  */
 function corridorFigure(c, ar, t) {
   if (!c || !c.floor || !c.ceiling) return null;
-  const name = (r) => (ar ? (r.labelAr || r.label) : r.label);
+  // Rows arrive from rates/latest.json with `label_ar`, not `labelAr`; the
+  // first form alone left every instrument in English on the Arabic page.
+  const name = (r) => (ar ? (r.labelAr || r.label_ar || r.label) : r.label);
   const at = finite(c.at) ? c.at : null;
   const other = [c.main, c.discount].filter(Boolean);
   return h('div', { className: 'wm-corridor' },
@@ -175,7 +177,13 @@ function corridorFigure(c, ar, t) {
         'الحد الأدنى هو ما يكسبه البنك من إيداع أمواله لدى البنك المركزي، '
         + 'والحد الأقصى ما يدفعه للاقتراض منه، فلا يتعامل بنك مع آخر خارجهما. '
         + 'وليس أي منها السعر الذي تدفعه شركة على قرضها.')),
-    h('p', { className: 'ft-note', dir: 'ltr' }, c.source)
+    // build_rates_api.py stamps "cbe.org.eg monetary policy, effective <date>"
+    // on the corridor. It is a source line, so it arrives in English.
+    (() => {
+      const m = ar && /^cbe\.org\.eg monetary policy, effective (\S+)$/.exec(c.source || '');
+      return m ? h('p', { className: 'ft-note' }, 'البنك المركزي المصري، السياسة النقدية السارية من ' + m[1])
+               : h('p', { className: 'ft-note', dir: 'ltr' }, c.source);
+    })()
   );
 }
 
@@ -186,7 +194,8 @@ function moveRow(row, window_, ar, t) {
   const share = against && finite(against.percentile) ? against.percentile : 0;
   return h('div', { key: row.id, className: 'wm-move' },
     h('div', { className: 'wm-move-name' },
-      h('strong', null, row.label),
+      // The document carries label_ar for every row; this printed the English.
+      h('strong', null, ar ? (row.labelAr || row.label_ar || row.label) : row.label),
       h('small', { dir: 'ltr' }, `${row.asOf} · ${money(row.close)}`)
     ),
     h('strong', { className: 'wm-move-change', dir: 'ltr', style: { color: tone(move.change) } },
@@ -330,7 +339,7 @@ function channelPanel(channel, state, on, ar, t) {
       channel.today && h('div', { className: 'wm-today' },
         h('div', { className: 'wm-today-rates' },
           channel.today.rates.map((r) => h('span', { key: r.code },
-            h('small', null, ar ? r.labelAr : r.label),
+            h('small', null, ar ? (r.labelAr || r.label_ar || r.label) : r.label),
             h('b', { dir: 'ltr' }, r.token)))),
         h('small', { className: 'wm-today-note' },
           `${channel.today.asOf} · ${ar ? channel.today.noteAr : channel.today.note}`)),

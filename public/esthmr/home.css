@@ -325,6 +325,41 @@
   font-size: 11px; color: var(--faint);
 }
 
+/* THE CARD THAT WAS TWICE ITS NEIGHBOURS' HEIGHT.
+ *
+ * Three ct-cards sit in one row. Two came to 398 and 476; this one came to
+ * 767, so the row was as tall as the tallest and the other two had ~300px of
+ * dead space under them. That dead space is the "weird gap below" in the
+ * report, and it was never a gap property — it was one card growing.
+ *
+ * It grew because nothing here was held to a line. A holder's name is long
+ * enough to claim a whole legend line on its own, so three holders became
+ * three stacked lines; and the disclosed percentage, pushed to the far end by
+ * margin, wrapped to a second line whenever the company name was long. A row
+ * that should be name / bar / legend was running to five and six lines.
+ *
+ * So hold each row to three lines. The company name and its disclosed figure
+ * share one line and the descriptive label yields first, because the code and
+ * the percentage are the data and the label is the courtesy. The legend runs
+ * on one line with the names shortened to fit.
+ *
+ * Nothing is dropped: every holder still has its swatch and its share of the
+ * bar, and the whole row opens the ownership board where the names are set
+ * out in full with room to read them. This is the preview, not the record. */
+#app .ct-own-row .ct-own-name { flex-wrap: nowrap; }
+#app .ct-own-row .ct-own-label {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 0 1 auto;
+}
+#app .ct-own-row .ct-own-code,
+#app .ct-own-row .ct-own-known { flex: 0 0 auto; }
+#app .ct-own-row .pv-share-keys {
+  flex-wrap: nowrap; margin-top: 7px; gap: 0 10px; overflow: hidden;
+}
+#app .ct-own-row .pv-share-key {
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+#app .ct-own-row .pv-share-key i { flex: 0 0 auto; }
+
 /* Turn 6, block 9: the reader's own list, on Home.
  *
  * Four cards across at desk width, two on a tablet, one on a phone — the
@@ -456,4 +491,19 @@
  * a card with a picture 104px tall stretched to 476px. The ownership card is
  * now three share bars and is legitimately the tallest of the three; that is
  * a reason for the others to stop growing, not to grow with it. */
-#app .ct-grid { align-items: start; }
+/* THE ROW WITH THREE DIFFERENT BOTTOMS.
+ *
+ * `align-items: start` was the first answer to one card standing twice as tall
+ * as the others: let each card be its own height. It stopped the two short
+ * cards stretching, and left the row with three ragged bottom edges — which is
+ * the other way a row of cards looks broken. The cause was never the alignment
+ * anyway; it was one card's rows running to six lines, fixed above.
+ *
+ * With the rows held, the natural heights are close enough that stretching is
+ * right again: three cards in one row are one composed object and should
+ * share a bottom edge. The slack goes where it belongs — between the reading
+ * and the footer — by anchoring the footer rule to the bottom, so the title,
+ * the drawing and the limit stay at the top where the eye starts, and the
+ * source line sits at the foot of every card at the same height. */
+#app .ct-grid { align-items: stretch; }
+#app .ct-card > .ct-rule:has(+ .ct-foot) { margin-top: auto; }

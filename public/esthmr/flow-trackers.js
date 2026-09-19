@@ -1,4 +1,5 @@
 import { React as R } from './react-shim.js';
+import { SECTOR_AR } from './data.js';
 
 import * as OM from './ownership-map.js';
 import * as SL from './sector-lens.js';
@@ -7,6 +8,16 @@ import { worldMonitor } from './world-monitor.js';
 const h = R.createElement;
 const finite = v => typeof v === 'number' && Number.isFinite(v);
 const signed = v => finite(v) ? `${v > 0 ? '+' : ''}${v.toFixed(2)}%` : '—';
+
+// build_flow_trackers.py used to write the English key into `nameAr` when the
+// directory had no Arabic, so `nameAr || name` handed the English straight
+// through. Trust the field only when it differs from the English; else the
+// app's own table; else the English.
+const sectorLabel = (s, ar) => {
+  if (!ar) return s.name;
+  if (s.nameAr && s.nameAr !== s.name) return s.nameAr;
+  return SECTOR_AR[s.name] || (s.name === 'Unclassified' ? 'غير مصنّف' : s.name);
+};
 const compact = v => finite(v) ? new Intl.NumberFormat('en', { notation:'compact', maximumFractionDigits:2 }).format(v) : '—';
 const tone = v => v > 0 ? 'var(--up)' : v < 0 ? 'var(--down)' : 'var(--t2)';
 // `1 filed stakes` is a typo the reader sees every time a sector holds one.
@@ -321,7 +332,7 @@ function renderSectorFlowMap(sectors, selectedSector, onSelectSector, ar, t) {
       h('g', { className: 'ft-hubs' },
         hubs.map(hub => {
           const s = hub.sector;
-          const name = ar ? (s.nameAr || s.name) : s.name;
+          const name = sectorLabel(s, ar);
           const shortName = name.length > 18 ? name.slice(0, 16) + '…' : name;
           const toneColor = hub.net >= 0 ? 'var(--up)' : 'var(--down)';
 
@@ -403,7 +414,7 @@ function renderSectorFlowMap(sectors, selectedSector, onSelectSector, ar, t) {
       h('div', { className: 'ft-focus-head' },
         h('div', null,
           h('span', { className: 'ft-focus-eyebrow' }, t('ACTIVE GRAVITATIONAL HUB', 'القطاع المالي النشط')),
-          h('h4', null, ar ? (activeSector.nameAr || activeSector.name) : activeSector.name)
+          h('h4', null, sectorLabel(activeSector, ar))
         ),
         h('div', { className: 'ft-focus-actions' },
           h('span', { className: 'ft-focus-pill', style: { color: tone(activeSector.netFlow || 0) } },
@@ -1976,7 +1987,7 @@ export function flowTrackers(component, data, ar) {
   /* The session these figures describe, taken from the document rather than
      from the clock: the preview is built after the close and read all day. */
   const asOf = preview?.asOf || data.marketDate || '';
-  const titleOf = s => ar ? (s.nameAr || s.name) : s.name;
+  const titleOf = s => sectorLabel(s, ar);
   const topSectors = [...sectors].sort((a, b) => (b.history?.at(-1)?.value || 0) - (a.history?.at(-1)?.value || 0)).slice(0, 5);
   const totalFlow = topSectors.reduce((s, x) => s + (x.history?.at(-1)?.value || 0), 0);
   const topEvents = preview?.topEvents || (d?.events ? d.events.filter(r => finite(r.referencePercent) || finite(r.currentMarkedValue)).slice(0, 8) : []);

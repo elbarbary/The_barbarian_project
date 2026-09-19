@@ -84,11 +84,23 @@ test('a followed company gets its line on Home, not only on the watchlist', () =
     'the loader is gated to one screen again');
 });
 
-test('the evidence cards size to what they hold', () => {
-  /* Grid items stretch by default, so a card with a 104px picture stretched
-     to 476px to match the taller one beside it and ended in dead space under
-     its own limit line. */
-  assert.match(home, /#app \.ct-grid \{ align-items: start; \}/);
+test('the three evidence cards share a bottom edge, and the tall one is held', () => {
+  /* First answer: `align-items: start`, so a card with a 104px picture stopped
+     stretching to 476px beside the taller one. That traded dead space inside
+     two cards for three ragged bottom edges, and never touched the cause: the
+     ownership card's rows were running to six lines each, so it stood at 767.
+     Now the rows are held to three lines, the row stretches again, and each
+     footer rule is anchored to the bottom so the slack sits above the source
+     line rather than under it. All three parts, or the fault comes back in
+     one of its two shapes. */
+  assert.match(home, /#app \.ct-grid \{ align-items: stretch; \}/, 'the row no longer shares a bottom edge');
+  assert.match(home, /#app \.ct-card > \.ct-rule:has\(\+ \.ct-foot\) \{ margin-top: auto; \}/,
+    'the footer is not anchored, so the slack lands under the source line');
+  assert.match(home, /#app \.ct-own-row \.ct-own-name \{ flex-wrap: nowrap; \}/,
+    'the name row wraps again, so the ownership card grows past its neighbours');
+  assert.match(home, /#app \.ct-own-row \.pv-share-keys \{[^}]*flex-wrap: nowrap/,
+    'the legend stacks one holder per line again');
+  assert.ok(!/#app \.ct-grid \{ align-items: start; \}/.test(home), 'the old start rule is back');
 });
 
 test('the local signed-in server is kept, because looking at the page is the fix', () => {

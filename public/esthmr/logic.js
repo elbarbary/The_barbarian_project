@@ -612,6 +612,9 @@ export class Component extends Base {
       sigLastFiling:'Last filing {date}.',
       sigStreak:'Streak', sigFirst:'First of its kind', sigSilence:'Silence',
       sigDue:'Results due', sigEstimate:'estimate',
+      // A stamp says where a card came from. "signals.json" told a reader
+      // nothing; the company's own filing record is what these are read from.
+      sigSource:'from the company\u2019s filing record',
       sigDueOn:'A {label} filing is expected in {month} on the company\u2019s own history',
       sigDueWindow:'Drawn from {n} past filings, which put it between {from} and {to}.',
       sigFootnote:'Counts off the exchange\u2019s own record. A first loss is not a signal to sell and a return to profit is not a signal to buy \u2014 this is what happened, and what you make of it is yours.',
@@ -636,6 +639,13 @@ export class Component extends Base {
       investorsOfBuying:'{n} of all buying', investorsOfSelling:'{n} of all selling',
       investorsSides:'Two figures per category: what it bought and what it sold. The percentage is within its own side, not the whole market.',
       investorsWho:'Who traded it', investorsTypeSplit:'Institutions against individuals',
+      // build_investors_api.py stamps this exact phrase on the document. It is
+      // data, so it arrives in English on the Arabic page unless matched here.
+      investorsBasisShort:'period to date, as published by the exchange',
+      pairsEyebrow:'ESTHMR · MARKET INEFFICIENCY', valuationEyebrow:'ESTHMR · ENTERPRISE VALUATION & LEVERAGE',
+      valBasePe:'Base P/E', valDebtEq:'Debt / Eq', valDebtAdj:'Debt-Adj Multiple',
+      feeSrcOrders:'Thndr · Order fees ↗', feeSrcTrader:'Thndr · Trader ↗',
+      sessionsWord:'sessions',
       investorsOpen:'The full split',
       investorsTable:'By investor type', investorsType:'Type',
       investorsBuying:'a net buyer', investorsSelling:'a net seller',
@@ -765,7 +775,7 @@ export class Component extends Base {
       heatUnsized:'{n} more in this sector carry no market value on file. There is no honest size to give them, so they are named rather than drawn:',
       heatZoomOut:'Showing one sector. Tap it again, or the name above, for the whole map.',
       heatSliver:'{n} are drawn as a hairline. The largest company here is worth {times} times the smallest and the map is to scale — putting a floor under the small ones would draw a rounding error at the weight of a real company. Use the market table to open those.',
-      closeNote:'Official close from market.json. Not a live price.',
+      closeNote:'The official close as the exchange published it. Not a live price.',
       closeNoteLive:'Live feed, delayed — not the official close.',
       todayTitle:'News', newestFirst:'Newest first', readAtSource:'Read at source', outletImage:'Outlet picture',
       // ── connecting the dots ──
@@ -908,7 +918,7 @@ export class Component extends Base {
       ttmWorking:'رقم الاثني عشر شهراً هو {window}، أي {eps} جنيه للسهم. ثلاثة أرقام مُفصح عنها وطرح — لا شيء هنا متوقَّع.',
       compareTitle:'السطر نفسه، فترة بفترة',
       compareNote:'لا تُقارَن إلا الفترات المتساوية في الطول. فالنصف الأول ستة أشهر والسنة اثنا عشر شهراً، والبورصة تودعهما تراكمياً — ووضعهما في صف واحد يقارن نصف عام بعام كامل.',
-      compareNothing:'لا يوجد سطر مُودع لأكثر من فترة واحدة من الطول نفسه بعد.',
+      compareNothing:'لا توجد بعد فترتان بالمدة نفسها في البيانات المودعة. لذلك لا تظهر مقارنة زمنية هنا.',
       moreFigures:'+{n} مُودعة',
       fullStatements:'{n} من {total} فترة تحمل قائمة كاملة. والباقي إعلانات، ذكرت فيها البورصة ربحاً ولا شيء غيره.',
       pickDay:'اختر يوماً',
@@ -922,7 +932,7 @@ export class Component extends Base {
       revGroupReturns:'عائده على',
       revGroupRisk:'كيف يُموَّل',
       revMeansTitle:'ما هو',
-      revProofNote:'هذه هي القيم التي قُرئ منها الاتجاه — أرقام البورصة المودعة، من الأقدم إلى الأحدث.',
+      revProofNote:'من هذه القيم حددنا اتجاه التغير. كلها أرقام مودعة لدى البورصة، وتظهر من الأقدم إلى الأحدث لتتضح حركة الرقم بمرور الوقت.',
       revProofTitle:'الرقم، فترة بفترة',
       revOrientLabel:'أي اتجاه يُقرأ أفضل',
       revPeBody:'القيمة السوقية مقسومة على الربح: كم تدفع مقابل كل جنيه تربحه الشركة. انخفاض المضاعف قد يعني أن السعر رخص أو أن الأرباح تحسّنت، وهما حكايتان مختلفتان. وارتفاعه مع نمو سريع قد يعني أن السوق يدفع مقابل ما هو آتٍ؛ وارتفاعه مع نمو ثابت توسّع في التقييم. لا تقرأه أبداً بمعزل عن سطر الأرباح تحته.',
@@ -994,9 +1004,9 @@ export class Component extends Base {
       volumeKicker:'تداول {ratio}\u00d7 حجمه المعتاد',
       busyOn:'إغلاق {date}',
       busyOnLive:'جلسة {date} حتى الآن',
-      busyCut:'الأسهم الأكثر نشاطاً: {shown} من {all} شركة تداولت في جلسة {date} بأكثر من ضعف متوسط حجمها المعتاد.',
+      busyCut:'الأسهم الأكثر نشاطاً هنا هي {shown} من {all} شركة سجلت في جلسة {date} حجماً يتجاوز ضعف متوسطها المعتاد؛ والمقصود بالنشاط عدد الأسهم التي جرى تداولها.',
       nothingUnusual:'كل الأحجام اليوم قريبة من المعتاد.',
-      busyWorkings:'الأسهم المتداولة في الجلسة \u00f7 وسيط آخر 20 جلسة. وعند 2.0 فأكثر، يصف هذا التطبيق اليوم بأنه استثنائي.',
+      busyWorkings:'لمقارنة الجلسة بالمعتاد، نستخدم عدد أسهمها المتداولة مقسوماً على وسيط أحجام آخر ٢٠ جلسة، وهو القيمة الوسطى بينها بعد ترتيبها. يصنف التطبيق اليوم استثنائياً إذا كانت النتيجة ٢٫٠ فأكثر، أي الضعف على الأقل.',
       busyYardstick:'الضعف هو الحد الفاصل، وهو حد إحصائي يضعه هذا التطبيق لا البورصة لتسليط الضوء على النشاط الاستثنائي دون أن يمثل ذلك حكماً أو توصية.',
       trendsTitle:'كم يبعد كل سهم عن أفضل سعر له هذا العام',
       trendsLead:'كم ابتعد كل سهم مدرج عن أعلى إغلاق له خلال السنة الماضية، وكيف تحرّك خلال سنة وخلال ثلاثة أشهر.',
@@ -1007,7 +1017,7 @@ export class Component extends Base {
       archiveScale:'الأرشيف الرسمي · {n} مستنداً',
       archiveScaleMonth:'الأرشيف الرسمي · {n} مستنداً هذا الشهر',
       archiveScaleNone:'الأرشيف الرسمي',
-      archiveOneDoc:'تنشر البورصة الإفصاح نفسه على صفحة عربية وأخرى إنجليزية. تشتركان في NewsID وتُحسبان هنا مستنداً واحداً.',
+      archiveOneDoc:'تنشر البورصة الإفصاح نفسه على صفحة عربية وأخرى إنجليزية، وتحملان رقماً واحداً — فيُحسبان هنا مستنداً واحداً.',
       archiveSearched:'عرض أحدث {shown} من {total} نتيجة عبر {months} شهراً من الأرشيف، الأحدث أولاً. اختر شهراً بالأعلى لتضييق النطاق.',
       archiveSearchedMonth:'عرض أحدث {shown} من {total} نتيجة في {month}. ألغِ اختيار الشهر للبحث في الأرشيف كاملاً.',
       filedShowing:'{n} إفصاحاً يطابق {what}.', filedShowingOne:'إفصاح واحد يطابق {what}.',
@@ -1018,7 +1028,7 @@ export class Component extends Base {
       exploreTitle:'استكشف أكثر',
       exploreLead:'السوق على خريطة ملوّنة، وأربعة مقاييس له، وأدوات ترتّبه بطريقتك. لا شيء منها لازم لقراءة ما سبق.',
       breadthNote:'«ثابتة» سهم تداول وأغلق حيث فتح. والسهم الذي لم يتعامل عليه أحد في الشريط المخطّط، لا في ذاك.',
-      calWindow:'أُودعت بين {from} و{to} في {n} سنوات سابقة.',
+      calWindow:'يغطي السجل {n} سنوات سابقة أُودعت فيها الإفصاحات بين {from} و{to}. النطاق يصف المواعيد التي حدثت بالفعل.',
       yieldWord:'عائد الكوبون',
       macroMoved:'تحرك مع إيجي إكس 30 بمقدار {r} على مدى {n} جلسة.',
       macroBarely:'يكاد لا يتحرك مع إيجي إكس 30، {r} على مدى {n} جلسة.',
@@ -1031,6 +1041,7 @@ export class Component extends Base {
       sigLastFiling:'آخر إفصاح {date}.',
       sigStreak:'سلسلة', sigFirst:'الأولى من نوعها', sigSilence:'فترة سكون',
       sigDue:'نتائج مرتقبة', sigEstimate:'تقدير زمني',
+      sigSource:'من سجل إفصاحات الشركة',
       sigDueOn:'يُتوقع إيداع قوائم {label} في {month} بحسب سجل إفصاحات الشركة',
       sigDueWindow:'مبني على {n} إفصاحاً سابقاً، تضعه بين {from} و{to}.',
       sigFootnote:'أرقام محسوبة من سجل البورصة نفسه. أول خسارة ليست إشارة بيع، والعودة إلى الربح ليست إشارة شراء \u2014 هذا ما حدث، وما تراه فيه يخصك وحدك.',
@@ -1043,15 +1054,20 @@ export class Component extends Base {
       sessionClose:'أسعار إغلاق',
       sessionNoneToday:'أسعار إغلاق — لم تُنشر جلسة لليوم',
       sessionLive:'الجلسة جارية — الأسعار غير نهائية',
-      sessionFeed:'الجلسة جارية — بتأخير {delay} دقيقة، قُرئت {at}',
+      sessionFeed:'هذه بيانات جلسة جارية بتأخير {delay} دقيقة؛ وقت قراءتها {at}، وليست أسعاراً لحظية.',
       priceFrom:'{egx} من هذه الأسعار أرقام البورصة نفسها، و{vendor} من مزوّد بيانات لأن البورصة لا تنشرها. وكلاهما بتأخير.',
       sessionHeld:'الجلسة جارية — الأسعار غير نهائية، رُصدت {at}',
       investorsTitle:'تعاملات فئات المستثمرين', investorsLead:'بيانات البورصة الرسمية لتعاملات فئات المستثمرين وأحجام السيولة.',
       investorsShare:'نسبة الاستحواذ من إجمالي التداول', investorsNet:'صافي التعاملات (شراء / بيع)',
       investorsBought:'إجمالي الشراء', investorsSold:'إجمالي البيع',
       investorsOfBuying:'{n} من إجمالي الشراء', investorsOfSelling:'{n} من إجمالي البيع',
-      investorsSides:'لكل فئة رقمان: كم اشترت وكم باعت. النسبة محسوبة داخل جانبها، لا على السوق كله.',
+      investorsSides:'إذا قرأت «15% من إجمالي الشراء» أمام فئة، فهذا يعني أنها اشترت سُبع ما اشتراه السوق كله في تلك الفترة — لا أنها تملك 15% من السوق. ولكل فئة رقم مثله على جانب البيع.',
       investorsWho:'فئات المتعاملين', investorsTypeSplit:'المؤسسات في مواجهة الأفراد',
+      investorsBasisShort:'منذ بداية الفترة، كما نشرته البورصة',
+      pairsEyebrow:'إستثمر · فروق الأسعار والتسعير', valuationEyebrow:'إستثمر · التقييم والديون',
+      valBasePe:'مكرر الربحية', valDebtEq:'الدين / حقوق الملكية', valDebtAdj:'المضاعف المعدّل بالدين',
+      feeSrcOrders:'ثندر · رسوم الأوامر ↗', feeSrcTrader:'ثندر · باقة تريدر ↗',
+      sessionsWord:'جلسة',
       investorsOpen:'تفاصيل تعاملات الفئات',
       investorsTable:'تعاملات فئات المستثمرين', investorsType:'فئة المستثمر',
       investorsBuying:'صافي شراء', investorsSelling:'صافي بيع',
@@ -1063,7 +1079,7 @@ export class Component extends Base {
       todayJob:'ما حدث اليوم، مرتّباً بالأحدث.',
       dotsJob:'إعلان، ثم إفصاح يذكره، ثم سعر تحرّك في الجلسة نفسها. التزامن ليس سببية.',
       investorsFrom:'تصنيف البورصة · مليون جنيه',
-      investorsTwoSides:'شراء مقابل بيع لكل فئة. لكل صفقة طرفان، والفرق ليس «أموالاً داخلة» ولا خارجة من السوق.',
+      investorsTwoSides:'لا تقرأ الفرق بين الرقمين على أنه أموال داخلة أو خارجة. كل جنيه اشتراه أحدهم باعه آخر في اللحظة نفسها؛ ما يتغير هو من يملك السهم، لا حجم المال في السوق.',
       investorsBasis:'تنشر البورصة هذه الأرقام تراكمياً للفترة الحالية (منذ بداية العام أو بداية الشهر). وتُحدّث البيانات فور إعلان البورصة للفترة الجديدة، والتاريخ المجاور هو تاريخ البورصة نفسها.',
       investorsAsOf:'بيانات البورصة الرسمية كما في', investorsTotal:'إجمالي قيمة التداول في الفترة:',
       investorsEquities:'الجدول أعلاه يشمل الأسهم والسندات وأذون الخزانة. تعاملات الأسهم المقيدة فقط:',
@@ -1172,7 +1188,7 @@ export class Component extends Base {
       heatUnsized:'{n} أخرى في هذا القطاع بلا قيمة سوقية مسجّلة. لا حجم صادق يُعطى لها، فتُذكر بالاسم بدل أن تُرسم:',
       heatZoomOut:'قطاع واحد معروض. اضغطه مرة أخرى، أو الاسم أعلاه، للخريطة كاملة.',
       heatSliver:'{n} تُرسم كخيط رفيع. أكبر شركة هنا تساوي {times} ضعف أصغرها والخريطة بالمقياس \u2014 ووضع حد أدنى للحجم يرسم فارقاً لا يُذكر بوزن شركة حقيقية. افتح تلك الشركات من جدول السوق.',
-      closeNote:'الإغلاق الرسمي من market.json، وليس سعراً لحظياً.',
+      closeNote:'الإغلاق الرسمي كما نشرته البورصة، وليس سعراً لحظياً.',
       closeNoteLive:'تغذية لحظية متأخرة — وليست الإغلاق الرسمي.',
       todayTitle:'الأخبار', newestFirst:'الأحدث أولاً', readAtSource:'اقرأ في المصدر', outletImage:'صورة الجهة الناشرة',
       // ── ربط النقاط ──
@@ -1203,7 +1219,7 @@ export class Component extends Base {
       fpBeforeOne:'قبل ذلك: {date}',
       fpNoneOn:'لم تظهر أي شركة في أكثر من مكان يوم {date} حتى تحديث {time}.',
       fpNoName:'الاسم غير متاح في الدليل',
-      fpYardstick:'الظهور في أكثر من مكان سؤال وليس حكمًا: يقول إن الشركة كانت نشطة بأكثر من طريقة، ولا يقول إن ذلك جيد.',
+      fpYardstick:'شركة أغلقت مرتفعة، وتداولت أضعاف حجمها المعتاد، وأودعت إفصاحاً في اليوم نفسه: تظهر في ثلاث قوائم هنا. اجتماعها سؤال يستحق النظر، وليس حكمًا على الشركة.',
       marketTitle:'السوق', searchPlaceholder:'ابحث في {n} شركة — بالعربية أو الإنجليزية',
       foldNote:'يوحّد البحث الإملاء العربي: أ إ آ ٱ ← ا، ة ← ه، ى ئ ← ي، ؤ ← و، مع حذف الحركات والتطويل من الطرفين.',
       marketFoot:'الترتيب والتصفية يتمّان على الأرقام كما وردت في الإفصاح. لا يُنشر أي تصنيف للشركات.',
@@ -1229,7 +1245,7 @@ export class Component extends Base {
       screenVol:'متوسط حجم تداول ثلاثين يوماً عند وسيط السوق أو أعلى، {v} سهم — حجم يمكن التعامل معه دون تحريك السعر.',
       screenCash:'تحويل نقدي عند ١٫٠ أو أفضل حيثما أُفصح عنه: حصّلت الشركة نقداً لا يقل عمّا أعلنته ربحاً.',
       screenCashNone:'التحويل النقدي غير مُفصح عنه لأي شركة في هذه المجموعة، لذا تعذّر تطبيق هذا الاختبار.',
-      screenActionNone:'لم يُحمّل التقويم بعد، لذا لم يُستبعد أي إفصاح مرتقب.',
+      screenActionNone:'لا توجد استبعادات تخص الإفصاحات القادمة حتى الآن، إذ لم يُحمّل التقويم. هذا نقص في بيانات المواعيد، وليس تأكيداً لغياب الإفصاحات.',
       screenAction:'لا إفصاح مرتقب في نافذة التقويم — يصعب قراءة السعر أمام زيادة رأس مال أو توزيع لم يُعلن بعد.',
       screenOpen:'تطبيق أول مقياس على جدول الأسهم',
       screenHowOpen:'ما معنى هذه المقاييس', screenHowClose:'إخفاء',
@@ -1238,7 +1254,7 @@ export class Component extends Base {
       chipsNote:'كل مقياس هو وسط السوق نفسه، وتضيق النتائج معاً. أطفئ واحداً فيتّسع الجدول من جديد.',
       screenBeside:'النوع نفسه من السؤال، مطروحاً على السوق كلها بدل شركة بعينها. التقاطع يسأل إن كانت شركة واحدة ظهرت في أكثر من مكان خلال أيام قليلة؛ وهذه المقاييس الأربعة تسأل أين يقع وسط البورصة نفسها، وكم من السوق يقع على كل جانب منه. ولا يجيب أيٌّ منهما عن كون ذلك جيداً.',
       screenNoBack:'لا يُعرض أي عائد سابق لهذه الاختبارات. قياسها تاريخياً يتطلب ترتيب البورصة كما كان في كل تاريخ ماضٍ، وإعادة بنائه من أرقام اليوم تُسقط الشركات التي شُطبت منذ ذلك الحين — وهو اختبار يُجمّل نفسه. الاختبارات مذكورة كي يحكم عليها القارئ مباشرة.',
-      peFoot:'مضاعف الربحية = آخر إغلاق مقسوماً على ربحية السهم السنوية كما وردت في آخر إفصاح. ويُترك فارغاً — دون تقدير — إذا سجّلت الشركة خسارة، أو لم تُفصح عن ربح سنوي، أو إذا لم يتّسق عدد الأسهم مع السعر والقيمة السوقية. وقد يعود ذلك الإفصاح إلى عشرين شهراً مضت، لذا تحمل صفحة كل شركة النسبة نفسها محسوبة على آخر اثني عشر شهراً أفصحت عنها.',
+      peFoot:'كم يبلغ سعر السهم مقابل جنيه من ربحه السنوي؟ نحسب ذلك بقسمة آخر إغلاق على ربحية السهم السنوية في أحدث إفصاح. لا نضع تقديراً ونترك الخانة خالية عند الخسارة، أو غياب الربح السنوي المعلن، أو عدم اتساق عدد الأسهم مع السعر والقيمة السوقية. ولأن عمر الإفصاح قد يصل إلى عشرين شهراً، تعرض صفحة الشركة الحساب نفسه لآخر اثني عشر شهراً أفصحت عنها.',
       noMatchTitle:'لا نتائج', noMatchBody:'لا توجد شركة في المجموعة المُفصح عنها تطابق هذا البحث وهذا القطاع.', clearFilters:'مسح التصفية',
       lastClose:'آخر إغلاق', asOf:'بتاريخ', priceHistory:'تاريخ السعر', sessionsShown:'جلسات', whoTheyAre:'نبذة عن الشركة',
       otcTag:'خارج المقصورة', delistingNotice:'إخطار البورصة',
@@ -1516,7 +1532,7 @@ export class Component extends Base {
           ? fill(L.sigDueWindow, { n: r.observations, from: this.dayLabel(r.window_start),
                                    to: this.dayLabel(r.window_end) })
           : '',
-        stamp: 'signals.json \u00b7 ' + L.sigEstimate,
+        stamp: L.sigSource + ' \u00b7 ' + L.sigEstimate,
         href: '', hasHref: false,
       });
     }
@@ -1526,7 +1542,7 @@ export class Component extends Base {
         kind: L.sigSilence,
         title: fill(L.sigQuiet, { days: q.silent_days ?? '', gap: q.typical_gap ?? '' }),
         because: q.last_filed ? fill(L.sigLastFiling, { date: q.last_filed }) : '',
-        stamp: 'signals.json',
+        stamp: L.sigSource,
         href: '', hasHref: false,
       });
     }
@@ -1553,6 +1569,30 @@ export class Component extends Base {
    * companies.json states market_cap in whole EGP. The design divided by a
    * thousand and suffixed "B", which turned COMI's 474,267,676,058 into
    * "474267676.1B" — a string with no meaning at any scale. */
+  // companies.json says "US$" for the few listings quoted in dollars. That is
+  // the exchange's own label and it is right in English; under Arabic labels
+  // the reader wants the word.
+  // The exchange files every disclosure under one of eight sections. The
+  // calendar printed the section as the kind when no finer event matched, so
+  // the Arabic page read "General" 413 times a month.
+  sectionWord(section) {
+    const ar = this.state && this.state.lang === 'ar';
+    if (!ar || !section) return section || '';
+    return ({
+      'General': 'عام',
+      'Listing Announcements': 'إعلانات القيد',
+      'Financial Results': 'نتائج مالية',
+      'General Assemblies': 'جمعيات عمومية',
+      'Shareholding Structure': 'هيكل المساهمين',
+      'Insider Trading Executions/Treasury Stocks': 'تعاملات الداخليين وأسهم الخزينة',
+      'Trading Notices': 'إخطارات التداول',
+      'Corporate Actions': 'إجراءات الشركات',
+    })[section] || section;
+  }
+  currencyWord(cur) {
+    const ar = this.state && this.state.lang === 'ar';
+    return ar && cur === 'US$' ? 'دولار' : (cur || '');
+  }
   money(v) {
     // An em dash on this site means "the filing did not state it". A filed
     // loss is a stated figure, and this returned the dash for every one of
@@ -1565,8 +1605,12 @@ export class Component extends Base {
     // capitalisation cannot be one — guards at its own call site.
     if (typeof v !== 'number' || !isFinite(v)) return '—';
     const a = Math.abs(v), sign = v < 0 ? '-' : '';
-    if (a >= 1e9) return sign + (a / 1e9).toFixed(a >= 1e11 ? 1 : 2) + 'bn';
-    if (a >= 1e6) return sign + (a / 1e6).toFixed(a >= 1e8 ? 0 : 1) + 'm';
+    // The Arabic page printed "62.90bn" under Arabic labels. A reader who
+    // never studied finance does not know "bn", and it is not a word in the
+    // language the rest of the line is in.
+    const ar = this.state && this.state.lang === 'ar';
+    if (a >= 1e9) return sign + (a / 1e9).toFixed(a >= 1e11 ? 1 : 2) + (ar ? ' مليار' : 'bn');
+    if (a >= 1e6) return sign + (a / 1e6).toFixed(a >= 1e8 ? 0 : 1) + (ar ? ' مليون' : 'm');
     return this.num(v, 0);
   }
 
@@ -1981,7 +2025,7 @@ export class Component extends Base {
       // A price in another currency says which. It is one word, and without
       // it the figure is wrong by a factor of fifty.
       close: c.close === '\u2014' ? '\u2014'
-        : (c.foreignCurrency ? c.currency + ' ' : '') + this.num(c.close),
+        : (c.foreignCurrency ? this.currencyWord(c.currency) + ' ' : '') + this.num(c.close),
       pct: this.pct(c.pct), color: this.dcol(c.pct),
       // A market capitalisation cannot be negative; anything that says so
       // is a units error, not a small company.
@@ -2543,7 +2587,7 @@ export class Component extends Base {
         // figure is pounds.
         close: loaded.close === null || loaded.close === undefined
           ? '—'
-          : (loaded.currency ? loaded.currency + ' ' : '') + this.num(loaded.close),
+          : (loaded.currency ? this.currencyWord(loaded.currency) + ' ' : '') + this.num(loaded.close),
         pct: pct === null ? '—' : this.pct(pct),
         // The move in pounds, beside the move in percent. Every real company
         // printed a literal em dash here — the design's default, which the
@@ -2556,7 +2600,7 @@ export class Component extends Base {
           if (pct === null || typeof c !== 'number' || pct <= -100) return '—';
           // Signed the same way `pct` beside it is, so the header does not put
           // a typographic minus next to an arithmetic one.
-          return (loaded.currency ? loaded.currency + ' ' : '') + this.signed(c - c / (1 + pct / 100));
+          return (loaded.currency ? this.currencyWord(loaded.currency) + ' ' : '') + this.signed(c - c / (1 + pct / 100));
         })(),
         color: this.dcol(pct),
         // As above: exactly flat is not a fall.
@@ -2878,7 +2922,8 @@ export class Component extends Base {
       }));
 
       return {
-        basis: d.basis, source: d.source, updatedAt: d.updatedAt,
+        basis: d.basis === 'period to date, as published by the exchange' ? L.investorsBasisShort : d.basis,
+        source: d.source, updatedAt: d.updatedAt,
         // The exchange's own date on the figures — not the fetch time — and the
         // value traded in the window. Without these the screen showed
         // cumulative figures with no date at all, and "period to date" named
@@ -2888,7 +2933,7 @@ export class Component extends Base {
           ? L.investorsEquities + ' ' + d.equities.map((p) => (ar ? p.partyAr : p.party) + ' ' + (p.percent === null ? '—' : p.percent.toFixed(2) + '%')).join(' · ')
           : '',
         totalLine: typeof d.totalValue === 'number'
-          ? L.investorsTotal + ' EGP ' + this.num(d.totalValue / 1e9, 2) + 'bn' : '',
+          ? L.investorsTotal + (ar ? ' ' + this.num(d.totalValue / 1e9, 2) + ' مليار جنيه' : ' EGP ' + this.num(d.totalValue / 1e9, 2) + 'bn') : '',
         // Egyptians against Arabs against non-Arab foreigners.
         nationalityBar: stack(d.parties, partyName, (r) => r.percent),
         // And institutions against individuals, over turnover — see data.js.
@@ -3012,6 +3057,7 @@ export class Component extends Base {
         return this.num(n, 0);
       };
 
+      const shown = Math.max(60, Number(st.insiderShown) || 0);
       const mappedItems = filtered.map((r) => {
         let actLabel = ar ? (r.actionLabelAr || r.actionLabel) : (r.actionLabel || r.actionLabelAr);
         let actColor = 'var(--accent)';
@@ -3320,9 +3366,18 @@ export class Component extends Base {
         hasQ: Boolean(st.insiderQ),
         onQ: (e) => this.setState({ insiderQ: e.target.value }),
         clearQ: () => this.setState({ insiderQ: '' }),
-        items: mappedItems,
+        // THE SCREEN THAT WAS 421,012 PIXELS TALL.
+        // Every filed insider row rendered at once — 5,735 of them at 73px —
+        // so opening Investors built a page taller than a hundred screens and
+        // the browser laid every row out before the reader saw the first.
+        // Sixty rows is more than a screen; the rest come sixty at a time.
+        items: mappedItems.slice(0, shown),
         hasItems: mappedItems.length > 0,
         noItems: mappedItems.length === 0,
+        hasMore: mappedItems.length > shown,
+        moreLabel: ar ? 'عرض ' + Math.min(60, mappedItems.length - shown) + ' صفاً أخرى من ' + mappedItems.length
+                      : 'Show ' + Math.min(60, mappedItems.length - shown) + ' more of ' + mappedItems.length,
+        showMore: () => this.setState({ insiderShown: shown + 60 }),
       };
     })();
 
@@ -3675,9 +3730,9 @@ export class Component extends Base {
     const signals = (D.signals && !Array.isArray(D.signals))
       ? this.signalCards(D.signals, L, ar)
       : D.signals ? say(D.signals, ['kind','title','because']) : !D.demo ? [] : [
-      { kind: ar?'انقطاع نمط':'Streak break', title: ar?'أول جلسة هبوط بعد خمس جلسات صاعدة':'First falling session after five rising ones', because: ar?'market.json يذكر −٣٫١٢٪ يوم ٢٦ أغسطس، بعد خمس جلسات مغلقة على ارتفاع.':'market.json states −3.12% on 26 August, following five consecutive higher closes.', stamp:'signals/demo · 2026-08-26', href:'', hasHref:false },
+      { kind: ar?'انقطاع نمط':'Streak break', title: ar?'أول جلسة هبوط بعد خمس جلسات صاعدة':'First falling session after five rising ones', because: ar?'سجل الإغلاقات يذكر −٣٫١٢٪ يوم ٢٦ أغسطس، بعد خمس جلسات مغلقة على ارتفاع.':'The close record states −3.12% on 26 August, following five consecutive higher closes.', stamp: ar?'عيّنة · 2026-08-26':'sample · 2026-08-26', href:'', hasHref:false },
       { kind: ar?'حركة القروض':'Borrowings moved', title: ar?'القروض قصيرة الأجل أعلى بـ ٢٩٧٫١ مليون منها في ٣١ ديسمبر':'Short-term borrowings 297.1 higher than at 31 December', because: ar?'١٧٩٥٫٥ مقابل ١٤٩٨٫٣ في العمود المقارن للميزانية نفسها.':'1,795.5 against 1,498.3 in the statement’s own prior column.', stamp:'signals/demo · demo-000293', href:'', hasHref:false },
-      { kind: ar?'نتائج مرتقبة':'Results due', title: ar?'إفصاح تسعة أشهر متوقع في نوفمبر بحسب سجل الشركة':'A 9M filing is expected in November on the company’s own history', because: ar?'أُودعت الإفصاحات المكافئة في ١١ نوفمبر ٢٠٢٥ و١٢ نوفمبر ٢٠٢٤. تقدير، وليس إعلاناً.':'Equivalent filings landed on 11 November 2025 and 12 November 2024. An estimate, not an announcement.', stamp:'calendar.json · estimate' }
+      { kind: ar?'نتائج مرتقبة':'Results due', title: ar?'إفصاح تسعة أشهر متوقع في نوفمبر بحسب سجل الشركة':'A 9M filing is expected in November on the company’s own history', because: ar?'أُودعت الإفصاحات المكافئة في ١١ نوفمبر ٢٠٢٥ و١٢ نوفمبر ٢٠٢٤. تقدير، وليس إعلاناً.':'Equivalent filings landed on 11 November 2025 and 12 November 2024. An estimate, not an announcement.', stamp: ar?'سجل الإفصاحات · تقدير زمني':'filing record · estimate' }
     ];
 
     const filings = D.filings ? say(D.filings, ['title']) : !D.demo ? [] : [
@@ -3942,7 +3997,7 @@ export class Component extends Base {
         const m = meanings && meanings.get ? meanings.get(e.id) : null;
         return Object.assign({}, e, {
           what: (m && m.titleEn && !ar) ? m.titleEn : (ar ? (e.whatAr || e.what) : e.what),
-          kind: m ? (ar ? m.labelAr : m.label) : (e.section || ''),
+          kind: m ? (ar ? m.labelAr : m.label) : this.sectionWord(e.section),
           hasKind: Boolean(m || e.section),
           // The plain-language line, where the disclosure feed carries one.
           meaning: m ? (ar ? m.meaningAr : m.meaning) : '',
@@ -4015,7 +4070,7 @@ export class Component extends Base {
           // The exchange's own document. Every row in the archive carries one
           // — 1,467 of 1,467 in August — and the panel bound none of them, so
           // a row with a hover state and a pointer opened nothing at all.
-          day: this.dayLabel(e.date), kind: e.section, hasKind: Boolean(e.section), basis: '',
+          day: this.dayLabel(e.date), kind: this.sectionWord(e.section), hasKind: Boolean(e.section), basis: '',
           hasHref: Boolean(e.href), noHref: !e.href,
           // The ticker goes to the company; the row goes to the filing. Two
           // different questions about the same line, and a reader who wants

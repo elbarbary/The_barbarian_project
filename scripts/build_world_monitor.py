@@ -47,6 +47,8 @@ import json
 import pathlib
 import statistics
 
+import rates_ar
+
 REPO = pathlib.Path(__file__).resolve().parent.parent
 DATA = REPO / "public" / "data" / "v1"
 RATES_HISTORY = DATA / "rates" / "history.json"
@@ -175,6 +177,26 @@ def corridor() -> dict | None:
     return out
 
 
+def arabic_labels() -> dict[str, str]:
+    """English label -> Arabic label, from every row of rates/latest.json that
+    carries both. Cached after the first read."""
+    if not hasattr(arabic_labels, "_map"):
+        found: dict[str, str] = {}
+        if RATES_LATEST.exists():
+            def walk(node):
+                if isinstance(node, dict):
+                    if node.get("label") and node.get("label_ar"):
+                        found.setdefault(str(node["label"]), str(node["label_ar"]))
+                    for v in node.values():
+                        walk(v)
+                elif isinstance(node, list):
+                    for v in node:
+                        walk(v)
+            walk(json.loads(RATES_LATEST.read_text(encoding="utf-8")))
+        arabic_labels._map = found
+    return arabic_labels._map
+
+
 def world() -> list[dict]:
     if not RATES_HISTORY.exists():
         return []
@@ -187,6 +209,10 @@ def world() -> list[dict]:
         rows.append({
             "id": series.get("id"),
             "label": series.get("label"),
+            # rates/history.json names its series in English only; the Arabic
+            # lives beside the same label in rates/latest.json. Without it the
+            # monitor printed "Euro" and "Copper" under Arabic headings.
+            "labelAr": arabic_labels().get(series.get("label")) or rates_ar.label(series.get("id") or "", ""),
             "group": series.get("group") or "world",
             "source": series.get("source"),
             "asOf": sessions[-1]["date"],
@@ -230,7 +256,8 @@ def exchange() -> list[dict]:
         sessions.sort(key=lambda s: s["date"])
         if len(sessions) <= WINDOWS[-1][1]:
             continue
-        rows.append({"id": key, "label": label, "asOf": sessions[-1]["date"],
+        rows.append({"id": key, "label": label, "labelAr": rates_ar.label(key, label),
+                     "asOf": sessions[-1]["date"],
                      "close": sessions[-1]["close"], "sessions": len(sessions),
                      "moves": series_moves(sessions)})
     return rows

@@ -47,6 +47,8 @@ REVIEW_INDEX = REPO / "public" / "data" / "v1" / "review.json"
 # build_sector_reads.py and merged in here so this stays network-free.
 READS = pathlib.Path(__file__).resolve().parent / "sector_reads.json"
 
+from sector_names_ar import SECTOR_AR as SECTOR_AR_FALLBACK
+
 
 def fingerprint(tickers) -> str:
     """The membership a read was written about, in twelve characters.
@@ -169,6 +171,12 @@ def build(today: datetime.date) -> tuple[dict, dict]:
     # the middle of a sentence.
     sector_ar_of = {c.get("sector"): c.get("sector_ar")
                     for c in directory if c.get("sector") and c.get("sector_ar")}
+    # Twelve of the vendor's sector names have no Arabic in the directory, so
+    # the Arabic read opened "في قطاع Finance". These are the same strings the
+    # app's SECTOR_AR table carries (public/esthmr/data.js); the directory's
+    # own Arabic still wins where it exists.
+    for name, name_ar in SECTOR_AR_FALLBACK.items():
+        sector_ar_of.setdefault(name, name_ar)
 
     review_index = load(REVIEW_INDEX)
     medians = review_index.get("sector_medians") or {}

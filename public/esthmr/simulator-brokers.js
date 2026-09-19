@@ -21,10 +21,10 @@ export const STANDARD_STATUTORY_FEES = {
   regPctFmt: '0.055% T0 / 0.08% T1+',
   mcdrTicket: 0,
   items: [
-    {id:'egx', nameEn:'EGX', nameAr:'البورصة', pct:'0.01% · max 5,000 EGP'},
-    {id:'mcdr', nameEn:'MCDR', nameAr:'المقاصة', pct:'0.01% · max 5,000 EGP'},
-    {id:'fra', nameEn:'FRA per fill', nameAr:'الرقابة لكل تنفيذ جزئي', pct:'0.005% · min 1 / max 250 EGP'},
-    {id:'risk', nameEn:'Risk insurance', nameAr:'تأمين المخاطر', pct:'0.005% · max 5,000 EGP'},
+    {id:'egx', nameEn:'EGX', nameAr:'البورصة', pct:'0.01% · max 5,000 EGP', pctAr:'0.01% · بحد أقصى 5,000 جنيه'},
+    {id:'mcdr', nameEn:'MCDR', nameAr:'المقاصة', pct:'0.01% · max 5,000 EGP', pctAr:'0.01% · بحد أقصى 5,000 جنيه'},
+    {id:'fra', nameEn:'FRA per fill', nameAr:'الرقابة لكل تنفيذ جزئي', pct:'0.005% · min 1 / max 250 EGP', pctAr:'0.005% · بحد أدنى 1 / أقصى 250 جنيه'},
+    {id:'risk', nameEn:'Risk insurance', nameAr:'تأمين المخاطر', pct:'0.005% · max 5,000 EGP', pctAr:'0.005% · بحد أقصى 5,000 جنيه'},
     {id:'stamp', nameEn:'Stamp duty', nameAr:'الدمغة', pct:'0.025% T0 / 0.05% T1+'}
   ]
 };

@@ -34,6 +34,12 @@ class H(http.server.SimpleHTTPRequestHandler):
         path = path.split('?', 1)[0].split('#', 1)[0]
         if path in ('/', '/esthmr', '/esthmr/'):
             return os.path.join(ROOT, 'esthmr', 'index.html')
+        # The app sends the reader to /esthmr/fragility with no extension; the
+        # worker maps that to the notebook page. Without this the page 404'd
+        # here and a sweep that clicked it lost the tab.
+        for route in ('fragility', 'fragility-research', 'template'):
+            if path.rstrip('/') == '/esthmr/' + route:
+                return os.path.join(ROOT, 'esthmr', route + '.html')
         return os.path.join(ROOT, posixpath.normpath(path).lstrip('/'))
 
     def _json(self, obj, code=200):
@@ -47,6 +53,21 @@ class H(http.server.SimpleHTTPRequestHandler):
 
     def do_GET(self):
         p = self.path.split('?', 1)[0]
+        # A hidden browser tab never fires requestAnimationFrame, and dc.js
+        # coalesces redraws behind one rAF — so an automated look at the page
+        # (the desktop app's browser pane is a hidden tab) hung on a blank
+        # shell whenever the first redraw was queued before a patch landed.
+        # The shim is served with the page, before any module runs. Dev only.
+        if p in ('/', '/esthmr', '/esthmr/'):
+            html = open(os.path.join(ROOT, 'esthmr', 'index.html'), 'rb').read()
+            shim = (b'<script>if (document.hidden) { window.requestAnimationFrame = '
+                    b'(cb) => setTimeout(() => cb(performance.now()), 16); }</script>')
+            html = html.replace(b'</head>', shim + b'</head>', 1)
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.send_header('Content-Length', str(len(html)))
+            self.end_headers()
+            return self.wfile.write(html)
         if p == '/esthmr/api/auth/me':
             return self._json({'email': 'test@local', 'admin': False})
         if p.startswith('/esthmr/api/watchlist'):

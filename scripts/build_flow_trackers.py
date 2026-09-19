@@ -8,6 +8,7 @@ import json
 import math
 from collections import defaultdict, OrderedDict
 from pathlib import Path
+from sector_names_ar import sector_ar
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -152,7 +153,7 @@ def build(directory, market, documents, insiders):
             continue
         key = co.get('sector') or 'Unclassified'
         sec = sectors.setdefault(key, dict(id=key, name=key,
-            nameAr=co.get('sector_ar') or key, members=[], history=[]))
+            nameAr=sector_ar(key, co.get('sector_ar')), members=[], history=[]))
         daily = []
         for i, bar in enumerate(bars):
             v = bar.get('volume')

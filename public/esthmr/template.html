@@ -1482,6 +1482,7 @@
                         </div>
                       </div>
                     </sc-for>
+                    <sc-if value="{{ insiderTracker.hasMore }}"><div onClick="{{ insiderTracker.showMore }}" style="margin:14px auto 4px;width:fit-content;padding:10px 22px;border-radius:999px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--shPill);font-size:13px;color:var(--t2);cursor:pointer">{{ insiderTracker.moreLabel }}</div></sc-if>
                   </div>
                 </div>
               </sc-if>
@@ -3294,7 +3295,7 @@
             </div>
             <p style="margin:4px 0 10px;font-size:12px;color:var(--t2);line-height:1.45">{{ simData.L.statutorySectionDesc }}</p>
             <p class="sim-assumption">{{ simData.L.feeSourceNote }}</p>
-            <div class="sim-fee-sources"><a href="https://support.thndr.app/en/articles/638558-thndr-order-fees" target="_blank" rel="noopener">Thndr · Order fees ↗</a><a href="https://support.thndr.app/en/articles/657048-thndr-trader-subscription" target="_blank" rel="noopener">Thndr · Trader ↗</a></div>
+            <div class="sim-fee-sources"><a href="https://support.thndr.app/en/articles/638558-thndr-order-fees" target="_blank" rel="noopener">{{ L.feeSrcOrders }}</a><a href="https://support.thndr.app/en/articles/657048-thndr-trader-subscription" target="_blank" rel="noopener">{{ L.feeSrcTrader }}</a></div>
             <div style="display:flex;gap:6px;flex-wrap:wrap">
               <sc-for list="{{ simData.statutoryItems }}" as="si">
                 <div style="padding:4px 8px;border-radius:8px;background:var(--surface);border:1px solid var(--rule2);font-size:11px;display:flex;align-items:center;gap:5px">
@@ -3320,7 +3321,7 @@
                 </div>
               </div>
               <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint)">
-                {{ simData.startDateFmt }} ➔ {{ simData.endDateFmt }} · {{ simData.totalSessionsCount }} sessions
+                {{ simData.startDateFmt }} ➔ {{ simData.endDateFmt }} · {{ simData.totalSessionsCount }} {{ L.sessionsWord }}
               </div>
             </div>
 
@@ -3772,7 +3773,7 @@
       <!-- Title row -->
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0;flex-wrap:wrap">
         <div>
-          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px">ESTHMR · MARKET INEFFICIENCY</div>
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px">{{ L.pairsEyebrow }}</div>
           <h1 style="font-family:var(--font-heading);font-size:46px;font-weight:600;letter-spacing:-.04em;line-height:1.05;margin:0">{{ pairsData.title }}</h1>
           <p style="margin:10px 0 0;font-size:14.5px;color:var(--t2);line-height:1.6;max-width:76ch;text-wrap:pretty">{{ pairsData.lead }}</p>
         </div>
@@ -3879,7 +3880,7 @@
       <!-- Title row -->
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0;flex-wrap:wrap">
         <div>
-          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px">ESTHMR · ENTERPRISE VALUATION & LEVERAGE</div>
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px">{{ L.valuationEyebrow }}</div>
           <h1 style="font-family:var(--font-heading);font-size:46px;font-weight:600;letter-spacing:-.04em;line-height:1.05;margin:0">{{ valData.title }}</h1>
           <p style="margin:10px 0 0;font-size:14.5px;color:var(--t2);line-height:1.6;max-width:76ch;text-wrap:pretty">{{ valData.lead }}</p>
         </div>
@@ -3973,7 +3974,7 @@
 
               <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:14px;padding:12px 14px;border-radius:var(--radius-control);background:var(--surface);border:1px solid var(--edgeIn)">
                 <div>
-                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">Base P/E</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">{{ L.valBasePe }}</div>
                   <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;color:var(--ink);margin-top:2px">{{ valData.selectedCompany.peText }}</div>
                 </div>
                 <div>
@@ -3981,7 +3982,7 @@
                   <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;color:var(--ink);margin-top:2px">{{ valData.selectedCompany.deText }}</div>
                 </div>
                 <div>
-                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">Debt-Adj Multiple</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">{{ L.valDebtAdj }}</div>
                   <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;color:var(--accent);margin-top:2px">{{ valData.selectedCompany.peAdjText }}</div>
                 </div>
                 <div>
@@ -4035,15 +4036,15 @@
               </div>
               <div style="display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--rule)">
                 <div>
-                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">Base P/E</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">{{ L.valBasePe }}</div>
                   <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--ink);margin-top:2px">{{ comp.peText }}</div>
                 </div>
                 <div>
-                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">Debt / Eq</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">{{ L.valDebtEq }}</div>
                   <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--ink);margin-top:2px">{{ comp.deText }}</div>
                 </div>
                 <div>
-                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">Debt-Adj Multiple</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">{{ L.valDebtAdj }}</div>
                   <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--accent);margin-top:2px">{{ comp.peAdjText }}</div>
                 </div>
               </div>

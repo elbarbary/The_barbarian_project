@@ -926,8 +926,8 @@ export function readNowCards(signals, expectedTotal, expectedFrom) {
       kindColor: 'var(--iris)', tint: 'var(--irisTint)',
       title: `${quiet.name || quiet.ticker} has filed nothing since ${quiet.last_filed}`,
       titleAr: `${quiet.name_ar || quiet.name || quiet.ticker} لم تُفصح عن شيء منذ ${quiet.last_filed}`,
-      stamp: `signals.json · ${quiet.silent_days} days`,
-      stampAr: `signals.json · ${quiet.silent_days} يوماً`,
+      stamp: `from the company’s filing record · ${quiet.silent_days} days`,
+      stampAr: `من سجل إفصاحات الشركة · ${quiet.silent_days} يوماً`,
       ticker: quiet.ticker,
     });
   }
@@ -941,7 +941,7 @@ export function readNowCards(signals, expectedTotal, expectedFrom) {
       titleAr: expectedFrom
         ? `${expectedTotal} إفصاحاً متوقعاً اعتباراً من ${expectedFrom} بحسب سجل الشركات`
         : `${expectedTotal} إفصاحاً متوقعاً بحسب سجل الشركات`,
-      stamp: 'calendar.json · estimate', stampAr: 'calendar.json · تقدير',
+      stamp: 'filing record · estimate', stampAr: 'سجل الإفصاحات · تقدير زمني',
       screen: 'calendar',
     });
   }

@@ -50,9 +50,14 @@ export function valuationExplorer(component, D, ar, React) {
 
   // Extract distinct sectors that have measurable companies
   const sectorCounts = new Map();
+  // The buttons printed the English key on the Arabic page. Each company
+  // already carries the Arabic beside its sector; remember it per sector.
+  const sectorArOf = new Map();
   measurable.forEach(c => {
     sectorCounts.set(c.sector, (sectorCounts.get(c.sector) || 0) + 1);
+    if (c.sectorAr && !sectorArOf.has(c.sector)) sectorArOf.set(c.sector, c.sectorAr);
   });
+  const sectorWord = (s) => (ar ? (sectorArOf.get(s) || s) : s);
 
   const availableSectors = Array.from(sectorCounts.entries())
     .filter(([_, count]) => count >= 2)
@@ -514,12 +519,12 @@ export function valuationExplorer(component, D, ar, React) {
       ? 'مضاعف الربحية (P/E) يسعّر حقوق الملكية فقط ويتجاهل ديون الشركة. توضح هذه الخريطة موقع كل شركة عند دمج حجم الرافعة المالية، لتفريق القيمة الحقيقية عن فخاخ الديون.'
       : 'Standard P/E only prices equity, ignoring corporate borrowings. This map factors debt-to-equity leverage into earnings multiples to separate genuine bargains from debt traps.',
     activeSector,
-    sectorLabel: activeSector === 'All' ? (ar ? 'جميع القطاعات' : 'All Sectors') : activeSector,
+    sectorLabel: activeSector === 'All' ? (ar ? 'جميع القطاعات' : 'All Sectors') : sectorWord(activeSector),
     sectors: [
       { id: 'All', label: ar ? 'جميع القطاعات' : 'All Sectors', selected: activeSector === 'All', go: () => component.setState({ valSector: 'All', valSelectedTicker: null }) },
       ...availableSectors.map(s => ({
         id: s,
-        label: s,
+        label: sectorWord(s),
         selected: s === activeSector,
         go: () => component.setState({ valSector: s, valSelectedTicker: null })
       }))

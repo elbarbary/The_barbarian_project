@@ -22,6 +22,12 @@
 
 import { React as R } from './react-shim.js';
 import { hueOf } from './ownership-map.js';
+import { SECTOR_AR } from './data.js';
+
+// The lens documents carry an Arabic name only for the sectors the exchange
+// names in Arabic. The vendor's twelve fell through to English on the Arabic
+// page — as a row name, a heat-map row and a share-line title.
+const sectorWord = (s, ar) => (ar ? (SECTOR_AR[s] || (s === 'Unclassified' ? 'غير مصنّف' : s)) : s);
 
 const h = R.createElement;
 const finite = (v) => typeof v === 'number' && Number.isFinite(v);
@@ -176,7 +182,7 @@ export function ownershipRing(doc, { ar, t, focus, onPick }) {
   if (!model.nodes.length) return null;
   const { view } = model;
   const lit = (id) => !focus || id === focus;
-  const nameOf = (node) => (ar ? (node.nameAr || node.id) : node.id);
+  const nameOf = (node) => (ar ? ((node.nameAr && node.nameAr !== node.id) ? node.nameAr : sectorWord(node.id, ar)) : node.id);
 
   return h('svg', {
     className: 'sl-ring', viewBox: `0 0 ${view.w} ${view.h}`,
@@ -317,7 +323,7 @@ export function shareHeatmap(doc, { ar, t, onPick, month, focus }) {
         className: `sl-heat-row${focus === s ? ' sl-heat-on' : ''}`,
         onClick: () => onPick && onPick(s),
       },
-        h('th', { scope: 'row', className: 'sl-heat-side', title: s }, s),
+        h('th', { scope: 'row', className: 'sl-heat-side', title: sectorWord(s, ar) }, sectorWord(s, ar)),
         rows.map((r) => {
           const v = (r.changes || {})[s];
           const ink = inkFor(v, doc.notable);
@@ -325,7 +331,7 @@ export function shareHeatmap(doc, { ar, t, onPick, month, focus }) {
             key: r.month, dir: 'ltr',
             className: 'sl-heat-cell',
             style: ink ? { color: ink.colour, fontWeight: 600 } : null,
-            title: `${s} · ${r.month} · ${finite(v) ? v.toFixed(2) : '0'} pp`,
+            title: `${sectorWord(s, ar)} · ${r.month} · ${finite(v) ? v.toFixed(2) : '0'} pp`,
           }, finite(v) && Math.abs(v) >= 0.05
             ? `${v > 0 ? '+' : ''}${v.toFixed(1)}` : '·');
         })
@@ -447,7 +453,7 @@ export function shareLines(doc, { ar, t, focus, onPick, months = LINE_MONTHS }) 
         opacity: !focus || on ? 1 : 0.22,
         className: 'sl-line',
         onClick: () => onPick && onPick(s),
-      }, h('title', null, `${s} · ${((rows[rows.length - 1].shares || {})[s] || 0).toFixed(1)}%`));
+      }, h('title', null, `${sectorWord(s, ar)} · ${((rows[rows.length - 1].shares || {})[s] || 0).toFixed(1)}%`));
     }),
 
     ends.map((e) => h('text', {
@@ -456,7 +462,7 @@ export function shareLines(doc, { ar, t, focus, onPick, months = LINE_MONTHS }) 
       fill: !focus || focus === e.sector ? lineColour(e.i, drawn.length) : 'var(--faint)',
       'font-weight': focus === e.sector ? 700 : 500,
       onClick: () => onPick && onPick(e.sector),
-    }, e.sector.length > 26 ? `${e.sector.slice(0, 25)}…` : e.sector))
+    }, (w => (w.length > 26 ? `${w.slice(0, 25)}…` : w))(sectorWord(e.sector, ar))))
   ));
 }
 
@@ -515,7 +521,7 @@ export function sectorTable(doc, { ar, t }) {
     const counted = s.members.length || 1;
     const width = (n) => `${((n / counted) * 100).toFixed(2)}%`;
     return {
-      id: s.id, name: ar ? (s.nameAr || s.name) : s.name,
+      id: s.id, name: ar ? ((s.nameAr && s.nameAr !== s.name) ? s.nameAr : sectorWord(s.name, ar)) : s.name,
       size: cap / totalCap, act: value / totalValue,
       ret: finite(s.sizeWeightedReturn) ? s.sizeWeightedReturn : null,
       up, down, flat, none, counted,
