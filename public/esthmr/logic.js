@@ -591,7 +591,9 @@ export class Component extends Base {
       newsUnreachable:'Not reachable today: {outlets}.',
       noBorrowings:'No filing held for this company states borrowings.',
       publisher:'Publisher · EGX filings', session:'Session', builtAt:'Built', theme:'Theme', dataVersion:'data_version',
-      sessionClose:'Closing prices', sessionLive:'Session in progress — prices not final',
+      sessionClose:'Closing prices',
+      sessionNoneToday:'Closing prices — no session has been published for today',
+      sessionLive:'Session in progress — prices not final',
       // A price with no age is the thing §49 forbids, and during a session
       // "not final" was the whole of what the screen said while showing a
       // capture three hours old.
@@ -991,7 +993,9 @@ export class Component extends Base {
       newsUnreachable:'تعذّر الوصول اليوم إلى: {outlets}.',
       noBorrowings:'لا يوجد إفصاح محفوظ لهذه الشركة يذكر قروضاً.',
       publisher:'ناشر · إفصاحات البورصة', session:'الجلسة', builtAt:'حُدِّث', theme:'المظهر', dataVersion:'إصدار البيانات',
-      sessionClose:'أسعار إغلاق', sessionLive:'الجلسة جارية — الأسعار غير نهائية',
+      sessionClose:'أسعار إغلاق',
+      sessionNoneToday:'أسعار إغلاق — لم تُنشر جلسة لليوم',
+      sessionLive:'الجلسة جارية — الأسعار غير نهائية',
       sessionFeed:'الجلسة جارية — بتأخير {delay} دقيقة، قُرئت {at}',
       priceFrom:'{egx} من هذه الأسعار أرقام البورصة نفسها، و{vendor} من مزوّد بيانات لأن البورصة لا تنشرها. وكلاهما بتأخير.',
       sessionHeld:'الجلسة جارية — الأسعار غير نهائية، رُصدت {at}',
@@ -5495,9 +5499,33 @@ export class Component extends Base {
         .replace('{delay}', String(Math.round((D.liveDelaySeconds || 0) / 60)))
         .replace('{at}', this.clock(D.liveAsOf));
     }
-    if (D.isClose) return L.sessionClose;
+    /* §11.4's quiet day. On a Friday, a Saturday or a holiday the newest
+       document is Thursday's and `is_close` is true, so the line read
+       "Closing prices" over a date a reader had to notice was not today.
+       True, and not the whole truth: what a reader wants to know on a closed
+       day is that the exchange is shut, and this says it from the documents
+       rather than from a trading calendar this site does not publish — no
+       session has been published for today is a fact about the archive, and
+       naming the NEXT session would be a claim about holidays it cannot
+       check. */
+    if (D.isClose) {
+      return this.sessionIsOld(D.marketDate) ? L.sessionNoneToday : L.sessionClose;
+    }
     if (D.capturedAt) return L.sessionHeld.replace('{at}', this.clock(D.capturedAt));
     return L.sessionLive;
+  }
+
+  /** Is the newest published session older than today, in Cairo?
+   *
+   * Cairo rather than the reader's own clock: a reader in Tokyo opening the
+   * page on their Friday evening is in Cairo's Friday too, and one in Los
+   * Angeles is not. The exchange's day is the one that decides. */
+  sessionIsOld(iso) {
+    const date = String(iso || '').slice(0, 10);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return false;
+    const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Africa/Cairo',
+      year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+    return date < today;
   }
 
   /** "1 Jul 2013", short enough to sit under a period label. */

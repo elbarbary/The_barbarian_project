@@ -661,9 +661,21 @@ test('a feed that is down, stale or shut costs freshness and nothing else', asyn
 test('the session line says where the prices came from and when', async () => {
   const c = fresh();
 
-  // Settled closes are the session's last word and need no clock.
-  c.setData({ ...LIVE, isClose: true });
+  /* A settled close is the session's last word and needs no clock — but only
+     while it IS today's session. The fixture's date is fixed in the past, so
+     "today" is supplied here the way Cairo supplies it to the page. */
+  const cairoToday = new Intl.DateTimeFormat('en-CA', { timeZone: 'Africa/Cairo',
+    year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+  c.setData({ ...LIVE, isClose: true, marketDate: cairoToday });
   assert.equal(c.renderVals().sessionState, c.renderVals().L.sessionClose);
+
+  /* On a Friday, a Saturday or a holiday the newest document is Thursday's.
+     "Closing prices" over a date that is not today is true and not the whole
+     truth: what a reader wants to know on a closed day is that no session has
+     been published for it. */
+  c.setData({ ...LIVE, isClose: true, marketDate: '2026-08-27' });
+  assert.equal(c.renderVals().sessionState, c.renderVals().L.sessionNoneToday);
+  assert.match(c.renderVals().sessionState, /no session has been published for today/);
 
   // The two flags disagree exactly when it matters. `is_close` belongs to the
   // last published capture, and the first hours of a session are spent under
@@ -2824,7 +2836,9 @@ test('a company header shows the move in pounds, not an em dash', () => {
 /* ── whether the prices are final ──────────────────────────────────────── */
 
 test('a session still running is not printed as a close', () => {
-  assert.equal(screen({ ...LIVE, isClose: true }).sessionState, 'Closing prices');
+  const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Africa/Cairo',
+    year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+  assert.equal(screen({ ...LIVE, isClose: true, marketDate: today }).sessionState, 'Closing prices');
   const live = screen({ ...LIVE, isClose: false });
   assert.equal(live.sessionState, 'Session in progress — prices not final');
   assert.notEqual(live.sessionColor, screen({ ...LIVE, isClose: true }).sessionColor);
@@ -4254,4 +4268,40 @@ test('§8 the calculator opens on nothing it made up about a real company', asyn
     assert.ok(!assigns.test(logic), `${ticker} still carries a hardcoded price`);
   }
   assert.ok(!/setPreset[A-Za-z]+:/.test(logic), 'a hardcoded ticker preset is back');
+});
+
+/* ── the quiet day ──────────────────────────────────────────────────────── */
+
+test('a closed day says so from the archive, and never names a date it cannot check', () => {
+  /* §11.4's quiet day. The EGX trades Sunday to Thursday, so on a Friday the
+     newest document is Thursday's and `is_close` is true. The comp names the
+     next session; this site cannot, because naming it means knowing the
+     holidays, and it publishes no trading calendar. What it CAN say is a fact
+     about its own archive: no session has been published for today. */
+  const c = fresh();
+  const line = (marketDate) => { c.setData({ ...LIVE, isClose: true, marketDate }); return c.renderVals().sessionState; };
+  const cairo = (at) => new Intl.DateTimeFormat('en-CA', { timeZone: 'Africa/Cairo',
+    year: 'numeric', month: '2-digit', day: '2-digit' }).format(at);
+  const today = cairo(new Date());
+  const yesterday = cairo(new Date(Date.now() - 86400000));
+  assert.notEqual(line(yesterday), line(today), 'an old session reads the same as today’s');
+  assert.match(line(yesterday), /no session/);
+  // It is the exchange's day that decides, not the reader's: a reader in
+  // Tokyo on their Friday evening is in Cairo's Friday too.
+  assert.match(c.renderVals().L.sessionNoneToday, /published for today/);
+  assert.ok(!/next|Sunday|tomorrow/i.test(c.renderVals().L.sessionNoneToday),
+    'the line names a session it has no calendar to check');
+  c.state.lang = 'ar';
+  assert.match(c.renderVals().L.sessionNoneToday, /لم تُنشر جلسة لليوم/);
+  assert.ok(!/الأحد|التالية/.test(c.renderVals().L.sessionNoneToday),
+    'the Arabic line names a next session it cannot check');
+});
+
+test('a malformed or absent session date is not read as an old one', () => {
+  // A missing date must not turn every close into "no session today".
+  const c = fresh();
+  for (const bad of [null, undefined, '', 'not-a-date', 20260827]) {
+    c.setData({ ...LIVE, isClose: true, marketDate: bad });
+    assert.equal(c.renderVals().sessionState, c.renderVals().L.sessionClose, String(bad));
+  }
 });
