@@ -1292,3 +1292,94 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
   margin: 8px 0 0; font-size: 12px; line-height: 1.6; color: var(--faint);
   max-width: 68ch;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE DOCK.  Desktop, 861px and up.
+
+   The owner's brief: move the desktop tab selector to the bottom, exactly
+   like the phone's, as a clean floating island on its own — the Dock on a
+   Mac — icons only, each icon growing to show its name.
+
+   What that replaces: a 278px side rail holding the brand, the session stamp,
+   five destinations, the language and theme switches and the data version.
+   The brand already sits in the toolbar and the session date is printed at
+   the top of every screen, so the rail was carrying three things twice and
+   costing a fifth of the width to do it.
+
+   How it reads: the five destinations sit in a pill centred at the bottom.
+   The current one is open — tinted, its name showing — so a reader always
+   knows where they are without hovering; the other four are icons until the
+   pointer or the keyboard reaches them, when the name slides out. Language,
+   theme and the data version are not on the dock: on desktop the rail's
+   `.om-tools` is already hidden (line 58) and the same switches live in the
+   toolbar's preferences popover. A dock holds places, not settings.
+
+   Everything that assumed the rail — the main column's margin, the tape's
+   offset — is undone here, in the same block, so the page is one column
+   again and centred at its 1440px ceiling. Bottom padding on the column keeps
+   the last card clear of the island.
+
+   Declared last in this file on purpose: the rail rules above it are also
+   `!important`, and at equal specificity the later declaration wins. */
+@media (min-width: 861px) {
+  #app .om-rail {
+    position: fixed !important;
+    inset: auto auto 18px 50% !important;
+    transform: translateX(-50%);
+    width: max-content !important;
+    max-width: calc(100vw - 32px) !important;
+    max-height: none !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 6px !important;
+    border-radius: 26px !important;
+    background: color-mix(in srgb, var(--surface) 86%, transparent) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(1.25);
+    backdrop-filter: blur(18px) saturate(1.25);
+    border: 1px solid var(--edgeIn) !important;
+    box-shadow: 0 14px 38px rgba(0, 0, 0, .16), 0 1px 0 rgba(255, 255, 255, .06) inset !important;
+    overflow: visible !important;
+    z-index: 60;
+  }
+  #app .om-rail > .om-brand, #app .om-rail > .om-session { display: none !important; }
+
+  #app .om-nav { flex-direction: row !important; gap: 4px !important; margin: 0 !important; }
+  #app .om-nav > button {
+    display: inline-flex !important; align-items: center !important;
+    height: 46px !important; padding: 0 12px !important;
+    border-radius: 20px !important; border: 0 !important;
+    background: transparent !important; color: var(--t2) !important;
+    font: inherit; cursor: pointer;
+    transition: background .18s ease, color .18s ease;
+  }
+  #app .om-nav > button > svg { width: 22px !important; height: 22px !important; flex: none; }
+  /* The name: closed by default, opened by hover, focus or being the place
+     the reader is already in. max-width rather than display so it slides. */
+  #app .om-nav > button > span {
+    display: block !important; max-width: 0; opacity: 0; overflow: hidden;
+    white-space: nowrap; margin-inline-start: 0; font-size: 13.5px; font-weight: 600;
+    transition: max-width .24s ease, opacity .18s ease, margin .24s ease;
+  }
+  #app .om-nav > button:hover, #app .om-nav > button:focus-visible {
+    background: var(--sunk) !important; color: var(--ink) !important;
+  }
+  #app .om-nav > button:hover > span, #app .om-nav > button:focus-visible > span,
+  #app .om-nav > button[aria-current="page"] > span, #app .om-nav > button[aria-current="true"] > span {
+    max-width: 180px; opacity: 1; margin-inline-start: 9px;
+  }
+  #app .om-nav > button[aria-current="page"], #app .om-nav > button[aria-current="true"] {
+    background: var(--accTint) !important; color: var(--accent) !important;
+  }
+  #app .om-nav > button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* The page is one column again. */
+  #app .om-main {
+    margin-inline: auto !important; padding-inline: 28px !important;
+    padding-bottom: 128px !important;
+  }
+  .ticker-tape { margin-inline-start: 0 !important; width: 100% !important; }
+  @media (prefers-reduced-motion: reduce) {
+    #app .om-nav > button > span, #app .om-nav > button { transition: none; }
+  }
+}

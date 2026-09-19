@@ -19,8 +19,9 @@ import { readFile } from 'node:fs/promises';
 
 const ROOT = new URL('../../', import.meta.url);
 const read = (p) => readFile(new URL(p, ROOT), 'utf8');
-const [home, shell, main] = await Promise.all([
+const [home, shell, main, journal] = await Promise.all([
   read('public/esthmr/home.css'), read('public/esthmr/shell.css'), read('public/esthmr/main.js'),
+  read('public/esthmr/journal.css'),
 ]);
 
 test('the lead index card stretches, or its chart has nothing to grow into', () => {
@@ -51,8 +52,13 @@ test('the index chart fills its slot instead of its own aspect ratio', () => {
 test('the tape and the bar under it share one column', () => {
   /* The tape ran the full window while the toolbar stopped at the rail —
      1024 against 746 at desk width — so the two bars across the top of every
-     page had different right edges. */
-  assert.match(shell, /@media \(min-width: 900px\) \{\s*\.ticker-tape \{ margin-inline-start: 278px/);
+     page had different right edges. The first fix pushed the tape past the
+     rail. Then the rail became the dock at the bottom, and both bars run the
+     full width: the fix is now the absence of any rail offset, on either. */
+  assert.doesNotMatch(shell, /\.ticker-tape \{[^}]*margin-inline-start: 278px/, 'the tape is offset for a rail that is gone');
+  const dock = journal.slice(journal.indexOf('THE DOCK'));
+  assert.match(dock, /\.ticker-tape \{ margin-inline-start: 0 !important; width: 100% !important; \}/);
+  assert.match(dock, /#app \.om-main \{[^}]*margin-inline: auto !important/, 'the main column still leaves room for a side rail');
 });
 
 test('the account controls are an overflow at every width', () => {

@@ -997,9 +997,6 @@ body[data-signed="no"] .om-main { padding-top: 62px !important; }
  * a reader had read a word of it. The rail is a fixed 278px column; the tape
  * takes the same inset the main column does, and the two ends meet.
  * Below 900px the rail is not a column and the tape is full width again. */
-@media (min-width: 900px) {
-  .ticker-tape { margin-inline-start: 278px; width: auto; }
-}
 
 /* The account controls are an overflow at EVERY width, not only on a phone.
  *
