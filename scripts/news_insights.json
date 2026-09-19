@@ -3059,6 +3059,10 @@
     "meaning": "The Financial Regulatory Authority establishes a standard governance framework for insurance pools, standardizing operational rules, capital management, and risk-sharing structures across participating insurers.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً حوكمياً موحداً لمجمعات التأمين، يحدد القواعد التشغيلية وإدارة رؤوس الأموال وهياكل توزيع المخاطر بين الشركات المشاركة."
   },
+  "الريال السعودي اليوم السبت.. خريطه الاسعار قبل استيناف عمل البنوك": {
+    "meaning": "Foreign exchange desks publish static Saudi Riyal rates during the weekend based on Thursday's closing interbank levels, serving as the clearing benchmark before physical bank branches and electronic trading resume.",
+    "meaning_ar": "تعلن شاشات الصرف أسعار الريال السعودي في العطلة الأسبوعية وفقاً لمستويات إغلاق التعاملات بين البنوك يوم الخميس، وتعمل هذه الأسعار كمرجعية للمقاصة قبل إعادة فتح الفروع واستئناف التداول الإلكتروني."
+  },
   "الريال السعودي يستقر عند 13.66 جنيه.. ماذا تترقب السوق مع عوده البنوك؟": {
     "meaning": "The Saudi Riyal trades at 13.66 EGP as the banking sector resumes operations, establishing the baseline clearing rate for commercial trade settlements, remittances, and foreign exchange transactions across the interbank market.",
     "meaning_ar": "يستقر سعر صرف الريال السعودي عند 13.66 جنيه مع استئناف القطاع المصرفي لعملياته، مما يحدد سعر التسوية المرجعي للتعاملات التجارية والتحويلات وتدفقات النقد الأجنبي عبر سوق الصرف بين البنوك."
@@ -5899,6 +5903,10 @@
   "سعر الدينار الكويتي اليوم الخميس 10-9-2026 في نهايه التعاملات": {
     "meaning": "End-of-day foreign exchange quotations for the Kuwaiti Dinar establish the official clearing rates for cross-border remittances, corporate settlement of bilateral trade, and balance-sheet revaluations in Egyptian pounds.",
     "meaning_ar": "تحدد أسعار صرف الدينار الكويتي في نهاية التعاملات اليومية أسعار المقاصة الرسمية للتحويلات المالية الخارجية، وتسوية المعاملات التجارية البينية للشركات، وإعادة تقييم الالتزامات والأصول بالجنيه المصري."
+  },
+  "سعر الدينار الكويتي اليوم.. 169.94 جنيه اعلي سعر للشراء": {
+    "meaning": "This quotation establishes the highest exchange rate commercial banks offer to acquire Kuwaiti Dinar liquidity against the Egyptian Pound, determining the daily conversion rate for trade settlement and cross-border remittances between the two countries.",
+    "meaning_ar": "يحدد هذا السعر أعلى قيمة شراء تقدمها البنوك للحصول على سيولة الدينار الكويتي مقابل الجنيه المصري، وهو ما يحكم التسعير الفعلي لتحويلات العاملين والالتزامات التجارية المتبادلة بين الجانبين."
   },
   "سعر الذهب العالمي يغلق منخفضا وسط توقعات قويه برفع الفايده الامريكيه": {
     "meaning": "Higher US interest rates increase the opportunity cost of holding non-yielding bullion and strengthen the US dollar, an asset inversely correlated with dollar-denominated gold prices.",
