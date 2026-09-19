@@ -55,7 +55,16 @@ function volumeCard(data, ar, t, open) {
     && finite(c.medianVolume) && c.medianVolume > 0 && !c.listing);
   if (!rows.length) return null;
   const top = rows.reduce((best, c) => (c.rv > best.rv ? c : best), rows[0]);
-  const name = ar ? (top.nameAr || top.name || top.ticker) : (top.name || top.ticker);
+  /* A directory row carries its name as `{ en, ar }`, not as a string —
+     `data.live()` builds it that way so a screen can pick a language without
+     a second lookup. Reading it as a string printed "[object Object]" in the
+     middle of an Arabic sentence. */
+  const named = (row) => {
+    const n = row && row.name;
+    if (n && typeof n === 'object') return (ar ? n.ar : n.en) || row.ticker;
+    return n || row.ticker;
+  };
+  const name = named(top);
   return card({
     key: 'volume',
     dateline: t(`${data.marketDate} · close`, `${data.marketDate} · إغلاق`),

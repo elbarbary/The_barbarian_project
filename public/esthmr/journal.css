@@ -1146,3 +1146,16 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
 #app .screen-head { display: flex; flex-direction: column; gap: 0; padding: 6px 0 0; }
 #app .screen-head .card-dateline { margin-bottom: 6px; }
 #app .screen-head .card-lead { margin: 6px 0 0; max-width: 78ch; }
+
+/* ── ONE COMPANY'S DISCLOSED OWNERSHIP ───────────────────────────────────
+ * The share bar's home case: named holders, and one hatched band for the
+ * part nobody was required to name. Never normalised to 100%.
+ */
+#app .co-own {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: var(--radius-island); padding: 20px; min-width: 0;
+}
+#app .co-own-title { font-size: 16.5px; font-weight: 600; margin: 0 0 12px; line-height: 1.45; }
+#app .co-own-note {
+  margin: 12px 0 0; font-size: 13px; color: var(--t2); line-height: 1.55; text-wrap: pretty;
+}

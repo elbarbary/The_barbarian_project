@@ -24,7 +24,10 @@ const hooks = { openCompany() {}, openMarket() {}, heading: 'What changed today'
 const DATA = {
   marketDate: '17 September 2026',
   companies: [
-    { ticker: 'AAA', name: 'Alpha', nameAr: 'ألفا', rv: 16.3, volume: 129552852, medianVolume: 7940108 },
+    /* The shape `data.live()` really builds: the name is a record with a
+       language in each field, not a string. Read as a string it printed
+       "[object Object]" in the middle of an Arabic sentence. */
+    { ticker: 'AAA', name: { en: 'Alpha', ar: 'ألفا' }, rv: 16.3, volume: 129552852, medianVolume: 7940108 },
     { ticker: 'BBB', name: 'Beta', rv: 1.1, volume: 100, medianVolume: 90 },
   ],
   indices: [{ label: 'EGX 30', labelAr: 'إيجي إكس 30',
@@ -59,6 +62,9 @@ test('every card says what its picture does not say', () => {
 test('the volume card compares the session against the company’s own normal', () => {
   const node = changedToday(DATA, false, hooks);
   assert.match(text(byClass(node, 'ct-title')[0]), /AAA · Alpha traded 16\.3× its usual volume/);
+  assert.doesNotMatch(text(node), /\[object /, 'the company name was read as a string');
+  assert.match(text(byClass(changedToday(DATA, true, hooks), 'ct-title')[0]), /ألفا/,
+    'the Arabic card shows the English name');
   // Both bars drawn, and the smaller one visible: 16× apart, a hairline on
   // the axis reads as one bar and no comparison at all.
   const bars = all(byClass(node, 'ct-visual')[0]).filter((n) => n.tag === 'rect');

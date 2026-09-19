@@ -1,12 +1,12 @@
 import { explorer } from './explorer.js';
-import { distributionDot } from './primitives.js';
+import { distributionDot, shareBar } from './primitives.js';
 import { SECTOR_AR } from './data.js';
 import { archiveOf, archiveFailed } from './filings-store.js';
 import { marketStory } from './market-story.js';
 import { pairsExplorer } from './pairs.js';
 import { valuationExplorer } from './valuation.js';
 import { flowTrackers } from './flow-trackers.js';
-import { sectorTable } from './sector-lens.js';
+import { sectorTable, companyOwnership } from './sector-lens.js';
 import { changedToday } from './changed-today.js';
 import { aiCards } from './ai-cards.js';
 import { scenariosScreen } from './scenarios.js';
@@ -4825,6 +4825,11 @@ export class Component extends Base {
           heading: ar ? 'ما تغيّر اليوم' : 'What changed today',
           note: ar ? 'لكل واقعة مستند' : 'a document for every one',
         }) : null,
+      /* Who has filed a stake in this company, and the part nobody has.
+         Built only on the company screen, and only for the company on it. */
+      companyOwnership: st.screen === 'company' && st.ticker
+        ? companyOwnership(D.sectorOwnership, st.ticker,
+          { ar, t: (en, arabic) => (ar ? arabic : en), shareBar }) : null,
       // Size, activity and movement on one scale. Built only for the screen
       // that shows it: it walks every member of every sector.
       sectorTable: st.screen === 'sectors'

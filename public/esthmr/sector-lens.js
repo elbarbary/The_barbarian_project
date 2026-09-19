@@ -574,3 +574,42 @@ export function sectorTable(doc, { ar, t }) {
       h('span', null, h('i', { class: 'is-down' }), t('fell', 'هبطت')),
       h('span', null, h('i', { class: 'is-none' }), t('did not trade', 'لم تتداول'))));
 }
+
+/* ── one company's disclosed ownership ──────────────────────────────────── */
+
+/**
+ * Who has filed a stake in this company, and how much of it nobody has.
+ *
+ * §11.5's ownership card. The disclosed holders are named and the rest is
+ * one hatched band that says "not disclosed" — never normalised away, because
+ * "we know a third of this" and "a third is all there is" are opposite
+ * statements, and a bar that adds to 100% makes the second one silently.
+ *
+ * The threshold is the reason the remainder exists at all: a stake under the
+ * disclosure floor is never filed, so it is not missing data, it is data that
+ * was never required. The note says so rather than leaving a reader to assume
+ * the gap is a gap in this site's coverage.
+ */
+export function companyOwnership(doc, ticker, { ar, t, shareBar }) {
+  const links = (doc && Array.isArray(doc.links) ? doc.links : [])
+    .filter((l) => l && l.held === ticker && finite(l.percent) && l.percent > 0)
+    .sort((a, b) => b.percent - a.percent);
+  if (!links.length) return null;
+  const known = links.reduce((sum, l) => sum + l.percent, 0);
+  if (known >= 100) return null;
+  const newest = links.reduce((best, l) => ((l.asOf || '') > (best.asOf || '') ? l : best), links[0]);
+  return h('section', { class: 'co-own' },
+    h('p', { class: 'card-dateline' },
+      h('span', null, newest.asOf
+        ? t(`Latest ownership filing ${newest.asOf}`, `آخر إفصاح ملكية ${newest.asOf}`)
+        : t('Ownership filings', 'إفصاحات الملكية'))),
+    h('h3', { class: 'co-own-title' }, t('Ownership', 'الملكية')),
+    shareBar({ ar,
+      parts: links.slice(0, 4).map((l) => ({
+        label: ar ? (l.ownerNameAr || l.ownerName || l.owner) : (l.ownerName || l.owner),
+        value: l.percent })),
+      caption: t('of the company’s capital', 'من رأس مال الشركة') }),
+    h('p', { class: 'co-own-note' }, t(
+      'Filed stakes only. A holding under the disclosure threshold is never filed, so the remainder is not a gap in this record — it is a part nobody was required to name.',
+      'الحصص المُفصح عنها فقط. الحصة دون حدّ الإفصاح لا تُقدَّم أصلاً، فالباقي ليس نقصاً في هذا السجل — بل جزء لم يُلزَم أحد بتسميته.')));
+}

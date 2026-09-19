@@ -1918,6 +1918,8 @@
       <sc-if value="{{ companyLoading }}"><div class="feed-status" role="status"><span class="loading-dot" aria-hidden="true"></span>{{ companyLoadingLabel }}</div></sc-if>
       <sc-if value="{{ companyError }}"><div class="data-status" role="alert">{{ companyErrorLabel }}<button type="button" onClick="{{ retryCompany }}">{{ retryLabel }}</button></div></sc-if>
       <sc-if value="{{ companyOverview }}">
+      <!-- §11.5: who has filed a stake, and the part nobody has. -->
+      {{ companyOwnership }}
       <!-- A rail of every listed company, so changing company does not mean going
            back to the market table to find it. Grouped by sector: 282 tickers in
            one strip is a haystack, and the sector already on screen is the one a
