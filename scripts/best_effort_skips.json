@@ -1,11 +1,4 @@
 {
- "steps": {
-  "Filed documents": {
-   "last": "it had work to do and finished none of it",
-   "runs": 2,
-   "since": "2026-09-19T08:48:37+00:00",
-   "sinceRun": "35432205166"
-  }
- },
+ "steps": {},
  "stuckAfter": 6
 }

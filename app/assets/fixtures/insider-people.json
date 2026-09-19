@@ -1,16 +1,16 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-19T11:31:35+00:00",
+ "generated": "2026-09-19T12:49:19+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1332,
- "tradeCount": 237,
+ "peopleCount": 1334,
+ "tradeCount": 243,
  "tickerCount": 237,
- "tradedTickerCount": 84,
- "firmCount": 443,
- "personCount": 889,
- "aliasCount": 150,
+ "tradedTickerCount": 85,
+ "firmCount": 444,
+ "personCount": 890,
+ "aliasCount": 151,
  "registerCount": 236,
  "overDisclosed": [],
  "supersededByRegister": [
@@ -136,6 +136,130 @@
      "stakeBefore": 89.041147,
      "stakeAfter": 62.791147,
      "source": "https://www.egx.com.eg/downloads/Bulletins/328700_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "أسامة فوزي محمد سعيد",
+   "name": "أسامة فوزي محمد سعيد",
+   "nameEn": "Osama Fawzy Mohamed Saeed",
+   "script": "ar",
+   "kind": "person",
+   "aliases": [
+    "أسامة فوزى محمد سعيد",
+    "اسامة فوزي محمد سعيد"
+   ],
+   "tickers": [
+    "FIRE"
+   ],
+   "tradeCount": 7,
+   "boughtCount": 4,
+   "soldCount": 3,
+   "value": 4649073.76,
+   "singleCompanyMove": {
+    "ticker": "FIRE",
+    "from": 25.64,
+    "to": 0.24199,
+    "change": -25.398
+   },
+   "trades": [
+    {
+     "filingId": "289655",
+     "date": "2026-06-10",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 105688,
+     "price": 4.034,
+     "value": 426345.392,
+     "stakeBefore": 25.64,
+     "stakeAfter": 24.87,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339474_1.pdf"
+    },
+    {
+     "filingId": "290021",
+     "date": "2026-06-17",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 386944,
+     "price": 4.756,
+     "value": 1840305.664,
+     "stakeBefore": 0.22197,
+     "stakeAfter": 6.25088,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339804_1.pdf"
+    },
+    {
+     "filingId": "291186",
+     "date": "2026-07-12",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 728186,
+     "price": 0.51036,
+     "value": 371637.00696,
+     "stakeBefore": 0.24187,
+     "stakeAfter": 3.0254,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340884_1.pdf"
+    },
+    {
+     "filingId": "291251",
+     "date": "2026-07-13",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 95057,
+     "price": 0.519,
+     "value": 49334.583,
+     "stakeBefore": 3.0124,
+     "stakeAfter": 2.29155,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340978_1.pdf"
+    },
+    {
+     "filingId": "291836",
+     "date": "2026-07-22",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 307316,
+     "price": 5.61,
+     "value": 1724042.76,
+     "stakeBefore": 24.26,
+     "stakeAfter": 25.6149,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341580_1.pdf"
+    },
+    {
+     "filingId": "292120",
+     "date": "2026-07-29",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 24535,
+     "price": 4.98,
+     "value": 122184.30000000002,
+     "stakeBefore": 0.24186,
+     "stakeAfter": 0.56064,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341849_1.pdf"
+    },
+    {
+     "filingId": "292378",
+     "date": "2026-08-03",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 24589,
+     "price": 4.686,
+     "value": 115224.054,
+     "stakeBefore": 0.25017,
+     "stakeAfter": 0.24199,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf"
     }
    ]
   },
@@ -666,6 +790,80 @@
    ]
   },
   {
+   "id": "اكوينوكس فارما هولدنج ليميتد",
+   "name": "اكوينوكس فارما هولدنج ليميتد",
+   "nameEn": "Equinox Pharma Holding Limited",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "RMDA"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 846513564.0,
+   "singleCompanyMove": {
+    "ticker": "RMDA",
+    "from": 8.348,
+    "to": 0,
+    "change": -8.348
+   },
+   "trades": [
+    {
+     "filingId": "289604",
+     "date": "2026-06-09",
+     "ticker": "RMDA",
+     "company": null,
+     "companyAr": "العاشر من رمضان للصناعات الدوائية والمستحضرات تشخيصية-راميدا",
+     "action": "sell",
+     "shares": 166965200,
+     "price": 5.07,
+     "value": 846513564.0,
+     "stakeBefore": 8.348,
+     "stakeAfter": 0,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339442_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "LVP PHARMA",
+   "name": "LVP PHARMA",
+   "nameEn": null,
+   "script": "latin",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "RMDA"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 846513564.0,
+   "singleCompanyMove": {
+    "ticker": "RMDA",
+    "from": 23.15,
+    "to": 31.498,
+    "change": 8.348
+   },
+   "trades": [
+    {
+     "filingId": "289603",
+     "date": "2026-06-09",
+     "ticker": "RMDA",
+     "company": null,
+     "companyAr": "العاشر من رمضان للصناعات الدوائية والمستحضرات تشخيصية-راميدا",
+     "action": "buy",
+     "shares": 166965200,
+     "price": 5.07,
+     "value": 846513564.0,
+     "stakeBefore": 23.15,
+     "stakeAfter": 31.498,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339441_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "احمد طارق خليل علي",
    "name": "احمد طارق خليل علي",
    "nameEn": "Ahmed Tarek Khalil Ali",
@@ -903,10 +1101,10 @@
    "tickers": [
     "AMII"
    ],
-   "tradeCount": 4,
-   "boughtCount": 2,
+   "tradeCount": 5,
+   "boughtCount": 3,
    "soldCount": 2,
-   "value": 17812072.0,
+   "value": 20021072.0,
    "singleCompanyMove": {
     "ticker": "AMII",
     "from": 3.5,
@@ -927,6 +1125,20 @@
      "stakeBefore": 3.5,
      "stakeAfter": 5.72,
      "source": "https://www.egx.com.eg/downloads/Bulletins/328726_1.pdf"
+    },
+    {
+     "filingId": "289648",
+     "date": "2026-06-10",
+     "ticker": "AMII",
+     "company": null,
+     "companyAr": "العربية للصناعات المعدنية والاستثمارات الصناعية",
+     "action": "buy",
+     "shares": 200000,
+     "price": 11.045,
+     "value": 2209000.0,
+     "stakeBefore": 9.7,
+     "stakeAfter": 10.006,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339481_1.pdf"
     },
     {
      "filingId": "289768",
@@ -1677,57 +1889,6 @@
    ]
   },
   {
-   "id": "بلتون ذو العائد تراكمي للاستثمار في الاسهم (صندوق بلتون بمائة / مائة)",
-   "name": "بلتون ذو العائد تراكمي للاستثمار في الاسهم (صندوق بلتون بمائة / مائة)",
-   "nameEn": "Beltone Zoo El Aed Tarakomy Lelesstethmar Fi El Ashom (Sondooq Beltone Bema'ah / Ma'ah)",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": null,
-   "tickers": [
-    "ASPI"
-   ],
-   "tradeCount": 2,
-   "boughtCount": 1,
-   "soldCount": 1,
-   "value": 27902914.33,
-   "singleCompanyMove": {
-    "ticker": "ASPI",
-    "from": 7.36,
-    "to": 3.46,
-    "change": -3.9
-   },
-   "trades": [
-    {
-     "filingId": "293006",
-     "date": "2026-08-13",
-     "ticker": "ASPI",
-     "company": null,
-     "companyAr": "اسباير كابيتال القابضة للاستثمارات المالية",
-     "action": "buy",
-     "shares": 4290388,
-     "price": 0.504721,
-     "value": 2165448.9217479997,
-     "stakeBefore": 7.36,
-     "stakeAfter": 7.57,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342696_1.pdf"
-    },
-    {
-     "filingId": "294292",
-     "date": "2026-09-03",
-     "ticker": "ASPI",
-     "company": null,
-     "companyAr": "اسباير كابيتال القابضة للاستثمارات المالية",
-     "action": "sell",
-     "shares": 51903341,
-     "price": 0.495873,
-     "value": 25737465.411693,
-     "stakeBefore": 6.06,
-     "stakeAfter": 3.46,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343740_1.pdf"
-    }
-   ]
-  },
-  {
    "id": "القلعة للاستشارات المالية",
    "name": "القلعة للاستشارات المالية",
    "nameEn": "Al Qalaa Lil Istithmarat Al Maliya",
@@ -2108,6 +2269,43 @@
      "stakeBefore": 2.02,
      "stakeAfter": 5.05,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343833_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "فوزي فؤاد بخيت نخلة",
+   "name": "فوزي فؤاد بخيت نخلة",
+   "nameEn": "Fawzy Fouad Bekheit Nakhla",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "UNIP"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 22524716.95,
+   "singleCompanyMove": {
+    "ticker": "UNIP",
+    "from": 3.745,
+    "to": 6.772,
+    "change": 3.027
+   },
+   "trades": [
+    {
+     "filingId": "289573",
+     "date": "2026-06-08",
+     "ticker": "UNIP",
+     "company": null,
+     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
+     "action": "buy",
+     "shares": 69349498,
+     "price": 0.3248,
+     "value": 22524716.9504,
+     "stakeBefore": 3.745,
+     "stakeAfter": 6.772,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339418_1.pdf"
     }
    ]
   },
@@ -3232,6 +3430,73 @@
      "stakeBefore": 9.513,
      "stakeAfter": 10.464,
      "source": "https://www.egx.com.eg/downloads/Bulletins/344342_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "بلتون ذو العائد تراكمي للاستثمار في الاسهم (صندوق بلتون بمائة / مائة)",
+   "name": "بلتون ذو العائد تراكمي للاستثمار في الاسهم (صندوق بلتون بمائة / مائة)",
+   "nameEn": "Beltone Zoo El Aed Tarakomy Lelesstethmar Fi El Ashom (Sondooq Beltone Bema'ah / Ma'ah)",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": [
+    "بلتون ذو العائد تراكمي للاستثمار في الاسهم (صندوق بلتون مائة / مائة)"
+   ],
+   "tickers": [
+    "ASPI"
+   ],
+   "tradeCount": 3,
+   "boughtCount": 2,
+   "soldCount": 1,
+   "value": 47218219.3,
+   "singleCompanyMove": {
+    "ticker": "ASPI",
+    "from": 4.408,
+    "to": 3.46,
+    "change": -0.948
+   },
+   "trades": [
+    {
+     "filingId": "289585",
+     "date": "2026-06-09",
+     "ticker": "ASPI",
+     "company": null,
+     "companyAr": "اسباير كابيتال القابضة للاستثمارات المالية",
+     "action": "buy",
+     "shares": 49526423,
+     "price": 0.39,
+     "value": 19315304.97,
+     "stakeBefore": 4.408,
+     "stakeAfter": 6.88,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339435_1.pdf"
+    },
+    {
+     "filingId": "293006",
+     "date": "2026-08-13",
+     "ticker": "ASPI",
+     "company": null,
+     "companyAr": "اسباير كابيتال القابضة للاستثمارات المالية",
+     "action": "buy",
+     "shares": 4290388,
+     "price": 0.504721,
+     "value": 2165448.9217479997,
+     "stakeBefore": 7.36,
+     "stakeAfter": 7.57,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342696_1.pdf"
+    },
+    {
+     "filingId": "294292",
+     "date": "2026-09-03",
+     "ticker": "ASPI",
+     "company": null,
+     "companyAr": "اسباير كابيتال القابضة للاستثمارات المالية",
+     "action": "sell",
+     "shares": 51903341,
+     "price": 0.495873,
+     "value": 25737465.411693,
+     "stakeBefore": 6.06,
+     "stakeAfter": 3.46,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343740_1.pdf"
     }
    ]
   },
@@ -5150,116 +5415,6 @@
      "stakeBefore": 0.25078,
      "stakeAfter": 0.23063,
      "source": "https://www.egx.com.eg/downloads/Bulletins/339878_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "أسامة فوزي محمد سعيد",
-   "name": "أسامة فوزي محمد سعيد",
-   "nameEn": "Osama Fawzy Mohamed Saeed",
-   "script": "ar",
-   "kind": "person",
-   "aliases": [
-    "أسامة فوزى محمد سعيد",
-    "اسامة فوزي محمد سعيد"
-   ],
-   "tickers": [
-    "FIRE"
-   ],
-   "tradeCount": 6,
-   "boughtCount": 4,
-   "soldCount": 2,
-   "value": 4222728.37,
-   "singleCompanyMove": {
-    "ticker": "FIRE",
-    "from": 0.22197,
-    "to": 0.24199,
-    "change": 0.02
-   },
-   "trades": [
-    {
-     "filingId": "290021",
-     "date": "2026-06-17",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "buy",
-     "shares": 386944,
-     "price": 4.756,
-     "value": 1840305.664,
-     "stakeBefore": 0.22197,
-     "stakeAfter": 6.25088,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/339804_1.pdf"
-    },
-    {
-     "filingId": "291186",
-     "date": "2026-07-12",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "buy",
-     "shares": 728186,
-     "price": 0.51036,
-     "value": 371637.00696,
-     "stakeBefore": 0.24187,
-     "stakeAfter": 3.0254,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/340884_1.pdf"
-    },
-    {
-     "filingId": "291251",
-     "date": "2026-07-13",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "sell",
-     "shares": 95057,
-     "price": 0.519,
-     "value": 49334.583,
-     "stakeBefore": 3.0124,
-     "stakeAfter": 2.29155,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/340978_1.pdf"
-    },
-    {
-     "filingId": "291836",
-     "date": "2026-07-22",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "buy",
-     "shares": 307316,
-     "price": 5.61,
-     "value": 1724042.76,
-     "stakeBefore": 24.26,
-     "stakeAfter": 25.6149,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341580_1.pdf"
-    },
-    {
-     "filingId": "292120",
-     "date": "2026-07-29",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "buy",
-     "shares": 24535,
-     "price": 4.98,
-     "value": 122184.30000000002,
-     "stakeBefore": 0.24186,
-     "stakeAfter": 0.56064,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/341849_1.pdf"
-    },
-    {
-     "filingId": "292378",
-     "date": "2026-08-03",
-     "ticker": "FIRE",
-     "company": null,
-     "companyAr": "الأولى للاستثمار والتنمية العقارية",
-     "action": "sell",
-     "shares": 24589,
-     "price": 4.686,
-     "value": 115224.054,
-     "stakeBefore": 0.25017,
-     "stakeAfter": 0.24199,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf"
     }
    ]
   },
@@ -21945,21 +22100,6 @@
    "trades": []
   },
   {
-   "id": "LVP PHARMA",
-   "name": "LVP PHARMA",
-   "nameEn": null,
-   "script": null,
-   "kind": "firm",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
    "id": "الشركه السعوديه السابعه للاستثمار",
    "name": "الشركه السعوديه السابعه للاستثمار",
    "nameEn": null,
@@ -26676,9 +26816,14 @@
    "filingId": "291527",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341228_1.pdf",
    "shares": 629965200,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
+   "openedAt": "2026-06-09",
+   "openingPercent": 23.15,
+   "history": [
+    {
+     "date": "2026-06-09",
+     "percent": 31.498
+    }
+   ]
   },
   {
    "holder": "الشركة القابضة للصناعات الغذائية",
@@ -31584,6 +31729,10 @@
      "percent": 5.72
     },
     {
+     "date": "2026-06-10",
+     "percent": 10.006
+    },
+    {
      "date": "2026-06-14",
      "percent": 9.86
     },
@@ -33645,6 +33794,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "فوزي فؤاد بخيت نخلة",
+   "kind": "person",
+   "ticker": "UNIP",
+   "percent": 6.772,
+   "asOf": "2026-06-08",
+   "basis": "trade",
+   "filingId": "289573",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339418_1.pdf",
+   "openedAt": "2026-06-08",
+   "openingPercent": 3.745,
+   "history": [
+    {
+     "date": "2026-06-08",
+     "percent": 6.772
+    }
+   ]
   },
   {
    "holder": "سميح انسي نجيب ساويرس",
@@ -37502,9 +37669,13 @@
    "basis": "trade",
    "filingId": "294292",
    "source": "https://www.egx.com.eg/downloads/Bulletins/343740_1.pdf",
-   "openedAt": "2026-08-13",
-   "openingPercent": 7.36,
+   "openedAt": "2026-06-09",
+   "openingPercent": 4.408,
    "history": [
+    {
+     "date": "2026-06-09",
+     "percent": 6.88
+    },
     {
      "date": "2026-08-13",
      "percent": 7.57
@@ -42929,9 +43100,13 @@
    "basis": "trade",
    "filingId": "292378",
    "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf",
-   "openedAt": "2026-06-17",
-   "openingPercent": 0.22197,
+   "openedAt": "2026-06-10",
+   "openingPercent": 25.64,
    "history": [
+    {
+     "date": "2026-06-10",
+     "percent": 24.87
+    },
     {
      "date": "2026-06-17",
      "percent": 6.25088
@@ -47617,6 +47792,24 @@
    ]
   },
   {
+   "holder": "اكوينوكس فارما هولدنج ليميتد",
+   "kind": "firm",
+   "ticker": "RMDA",
+   "percent": 0,
+   "asOf": "2026-06-09",
+   "basis": "trade",
+   "filingId": "289604",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339442_1.pdf",
+   "openedAt": "2026-06-09",
+   "openingPercent": 8.348,
+   "history": [
+    {
+     "date": "2026-06-09",
+     "percent": 0
+    }
+   ]
+  },
+  {
    "holder": "تولين السيد صابر السيد حميد",
    "kind": "person",
    "ticker": "RREI",
@@ -47801,11 +47994,61 @@
    "end": "2026-06-10",
    "label": "7–10 Jun",
    "labelAr": "7–10 يونيو",
-   "sessions": 1,
-   "buys": 1,
-   "sells": 0,
-   "value": 5025000.0,
+   "sessions": 3,
+   "buys": 5,
+   "sells": 2,
+   "value": 1742527495.31,
    "moves": [
+    {
+     "holder": "اكوينوكس فارما هولدنج ليميتد",
+     "kind": "firm",
+     "ticker": "RMDA",
+     "from": 8.348,
+     "to": 0,
+     "trades": 1,
+     "value": 846513564.0,
+     "change": -8.348
+    },
+    {
+     "holder": "LVP PHARMA",
+     "kind": "firm",
+     "ticker": "RMDA",
+     "from": 23.15,
+     "to": 31.498,
+     "trades": 1,
+     "value": 846513564.0,
+     "change": 8.348
+    },
+    {
+     "holder": "فوزي فؤاد بخيت نخلة",
+     "kind": "person",
+     "ticker": "UNIP",
+     "from": 3.745,
+     "to": 6.772,
+     "trades": 1,
+     "value": 22524716.95,
+     "change": 3.027
+    },
+    {
+     "holder": "بلتون ذو العائد تراكمي للاستثمار في الاسهم (صندوق بلتون بمائة / مائة)",
+     "kind": "firm",
+     "ticker": "ASPI",
+     "from": 4.408,
+     "to": 6.88,
+     "trades": 1,
+     "value": 19315304.97,
+     "change": 2.472
+    },
+    {
+     "holder": "أسامة فوزي محمد سعيد",
+     "kind": "person",
+     "ticker": "FIRE",
+     "from": 25.64,
+     "to": 24.87,
+     "trades": 1,
+     "value": 426345.39,
+     "change": -0.77
+    },
     {
      "holder": "زالدي للاستثمارات",
      "kind": "firm",
@@ -47815,6 +48058,16 @@
      "trades": 1,
      "value": 5025000.0,
      "change": 0.75
+    },
+    {
+     "holder": "شركة دراية المالية مساهمة مقفلة",
+     "kind": "firm",
+     "ticker": "AMII",
+     "from": 9.7,
+     "to": 10.006,
+     "trades": 1,
+     "value": 2209000.0,
+     "change": 0.306
     }
    ]
   },
