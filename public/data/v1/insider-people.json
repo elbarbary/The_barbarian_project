@@ -1,15 +1,15 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-19T08:48:28+00:00",
+ "generated": "2026-09-19T11:31:35+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1329,
- "tradeCount": 231,
+ "peopleCount": 1332,
+ "tradeCount": 237,
  "tickerCount": 237,
  "tradedTickerCount": 84,
- "firmCount": 441,
- "personCount": 888,
+ "firmCount": 443,
+ "personCount": 889,
  "aliasCount": 150,
  "registerCount": 236,
  "overDisclosed": [],
@@ -210,6 +210,80 @@
      "stakeBefore": 0.0,
      "stakeAfter": 22.87,
      "source": "https://www.egx.com.eg/downloads/Bulletins/341168_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "W Z Investment دبليو زد انفستمنت للاستثمار والتجارة",
+   "name": "W Z Investment دبليو زد انفستمنت للاستثمار والتجارة",
+   "nameEn": "W Z Investment Dabliyo Zid Infirstmint lil-Istithmar wal-Tijarah",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "GDWA"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 891726932.67,
+   "singleCompanyMove": {
+    "ticker": "GDWA",
+    "from": 0,
+    "to": 21.29,
+    "change": 21.29
+   },
+   "trades": [
+    {
+     "filingId": "289828",
+     "date": "2026-06-15",
+     "ticker": "GDWA",
+     "company": null,
+     "companyAr": "جدوى للتنمية الصناعية",
+     "action": "buy",
+     "shares": 1147653710,
+     "price": 0.777,
+     "value": 891726932.6700001,
+     "stakeBefore": 0,
+     "stakeAfter": 21.29,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339668_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "وليد محمد زكي",
+   "name": "وليد محمد زكي",
+   "nameEn": "Waleed Mohamed Zaki",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "PRDC"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 1338748406.51,
+   "singleCompanyMove": {
+    "ticker": "PRDC",
+    "from": 29.85,
+    "to": 8.6,
+    "change": -21.25
+   },
+   "trades": [
+    {
+     "filingId": "289784",
+     "date": "2026-06-14",
+     "ticker": "PRDC",
+     "company": null,
+     "companyAr": "بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب",
+     "action": "sell",
+     "shares": 222605322,
+     "price": 6.014,
+     "value": 1338748406.5080001,
+     "stakeBefore": 29.85,
+     "stakeAfter": 8.6,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339643_1.pdf"
     }
    ]
   },
@@ -829,10 +903,10 @@
    "tickers": [
     "AMII"
    ],
-   "tradeCount": 3,
+   "tradeCount": 4,
    "boughtCount": 2,
-   "soldCount": 1,
-   "value": 16567972.0,
+   "soldCount": 2,
+   "value": 17812072.0,
    "singleCompanyMove": {
     "ticker": "AMII",
     "from": 3.5,
@@ -853,6 +927,20 @@
      "stakeBefore": 3.5,
      "stakeAfter": 5.72,
      "source": "https://www.egx.com.eg/downloads/Bulletins/328726_1.pdf"
+    },
+    {
+     "filingId": "289768",
+     "date": "2026-06-14",
+     "ticker": "AMII",
+     "company": null,
+     "companyAr": "العربية للصناعات المعدنية والاستثمارات الصناعية",
+     "action": "sell",
+     "shares": 110000,
+     "price": 11.31,
+     "value": 1244100.0,
+     "stakeBefore": 10.006,
+     "stakeAfter": 9.86,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339608_1.pdf"
     },
     {
      "filingId": "289939",
@@ -1848,6 +1936,71 @@
    ]
   },
   {
+   "id": "محمود محمد شعبان سليم",
+   "name": "محمود محمد شعبان سليم",
+   "nameEn": "Mahmoud Mohamed Shaaban Selim",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "FCMD"
+   ],
+   "tradeCount": 3,
+   "boughtCount": 1,
+   "soldCount": 2,
+   "value": 12368500.0,
+   "singleCompanyMove": {
+    "ticker": "FCMD",
+    "from": 6.008,
+    "to": 2.557,
+    "change": -3.451
+   },
+   "trades": [
+    {
+     "filingId": "289854",
+     "date": "2026-06-15",
+     "ticker": "FCMD",
+     "company": null,
+     "companyAr": "فيوتشر كير للصناعات الطبية",
+     "action": "sell",
+     "shares": 2500000,
+     "price": 1.4046,
+     "value": 3511500.0,
+     "stakeBefore": 6.008,
+     "stakeAfter": 1.673,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339693_1.pdf"
+    },
+    {
+     "filingId": "290304",
+     "date": "2026-06-24",
+     "ticker": "FCMD",
+     "company": null,
+     "companyAr": "فيوتشر كير للصناعات الطبية",
+     "action": "buy",
+     "shares": 800000,
+     "price": 6.95,
+     "value": 5560000.0,
+     "stakeBefore": 1.73,
+     "stakeAfter": 3.12,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340116_1.pdf"
+    },
+    {
+     "filingId": "290533",
+     "date": "2026-06-29",
+     "ticker": "FCMD",
+     "company": null,
+     "companyAr": "فيوتشر كير للصناعات الطبية",
+     "action": "sell",
+     "shares": 525000,
+     "price": 6.28,
+     "value": 3297000.0,
+     "stakeBefore": 3.467,
+     "stakeAfter": 2.557,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340370_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "احمد محمد سعد سعيد",
    "name": "احمد محمد سعد سعيد",
    "nameEn": "Ahmed Mohamed Saad Saeed",
@@ -2580,6 +2733,43 @@
    ]
   },
   {
+   "id": "امابيل حازم السيد احمد بدوي",
+   "name": "امابيل حازم السيد احمد بدوي",
+   "nameEn": "Amabil Hazem El Sayed Ahmed Badawy",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "FIRE"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 905093.3,
+   "singleCompanyMove": {
+    "ticker": "FIRE",
+    "from": 3.71,
+    "to": 5.19,
+    "change": 1.48
+   },
+   "trades": [
+    {
+     "filingId": "289870",
+     "date": "2026-06-15",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 204310,
+     "price": 4.43,
+     "value": 905093.2999999999,
+     "stakeBefore": 3.71,
+     "stakeAfter": 5.19,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339606_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "مازن بن محمد بن عبدالرحمن السعيد",
    "name": "مازن بن محمد بن عبدالرحمن السعيد",
    "nameEn": "Mazen bin Mohammed bin Abdulrahman Al-Saeed",
@@ -3122,57 +3312,6 @@
    ]
   },
   {
-   "id": "محمود محمد شعبان سليم",
-   "name": "محمود محمد شعبان سليم",
-   "nameEn": "Mahmoud Mohamed Shaaban Selim",
-   "script": "ar",
-   "kind": "person",
-   "aliases": null,
-   "tickers": [
-    "FCMD"
-   ],
-   "tradeCount": 2,
-   "boughtCount": 1,
-   "soldCount": 1,
-   "value": 8857000.0,
-   "singleCompanyMove": {
-    "ticker": "FCMD",
-    "from": 1.73,
-    "to": 2.557,
-    "change": 0.827
-   },
-   "trades": [
-    {
-     "filingId": "290304",
-     "date": "2026-06-24",
-     "ticker": "FCMD",
-     "company": null,
-     "companyAr": "فيوتشر كير للصناعات الطبية",
-     "action": "buy",
-     "shares": 800000,
-     "price": 6.95,
-     "value": 5560000.0,
-     "stakeBefore": 1.73,
-     "stakeAfter": 3.12,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/340116_1.pdf"
-    },
-    {
-     "filingId": "290533",
-     "date": "2026-06-29",
-     "ticker": "FCMD",
-     "company": null,
-     "companyAr": "فيوتشر كير للصناعات الطبية",
-     "action": "sell",
-     "shares": 525000,
-     "price": 6.28,
-     "value": 3297000.0,
-     "stakeBefore": 3.467,
-     "stakeAfter": 2.557,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/340370_1.pdf"
-    }
-   ]
-  },
-  {
    "id": "برايم سمارت لإدارة و تطوير المشروعات",
    "name": "برايم سمارت لإدارة و تطوير المشروعات",
    "nameEn": "Prime Smart for Projects Management and Development",
@@ -3206,6 +3345,43 @@
      "stakeBefore": 6.56,
      "stakeAfter": 5.78,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343170_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "زالدي للاستثمارات",
+   "name": "زالدي للاستثمارات",
+   "nameEn": "Zaldi lil-Istithmarat",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": null,
+   "tickers": [
+    "ICID"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 5025000.0,
+   "singleCompanyMove": {
+    "ticker": "ICID",
+    "from": 0,
+    "to": 0.75,
+    "change": 0.75
+   },
+   "trades": [
+    {
+     "filingId": "289676",
+     "date": "2026-06-10",
+     "ticker": "ICID",
+     "company": null,
+     "companyAr": "العالمية للاستثمار والتنمية",
+     "action": "buy",
+     "shares": 750000,
+     "price": 6.7,
+     "value": 5025000.0,
+     "stakeBefore": 0,
+     "stakeAfter": 0.75,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339521_1.pdf"
     }
    ]
   },
@@ -14371,21 +14547,6 @@
   {
    "id": "عياد مهنى ميخائيل برسوم",
    "name": "عياد مهنى ميخائيل برسوم",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "وليد محمد زكي",
-   "name": "وليد محمد زكي",
    "nameEn": null,
    "script": null,
    "kind": "person",
@@ -27695,6 +27856,24 @@
    "history": []
   },
   {
+   "holder": "W Z Investment دبليو زد انفستمنت للاستثمار والتجارة",
+   "kind": "firm",
+   "ticker": "GDWA",
+   "percent": 21.29,
+   "asOf": "2026-06-15",
+   "basis": "trade",
+   "filingId": "289828",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339668_1.pdf",
+   "openedAt": "2026-06-15",
+   "openingPercent": 0,
+   "history": [
+    {
+     "date": "2026-06-15",
+     "percent": 21.29
+    }
+   ]
+  },
+  {
    "holder": "دبليو زد انفستمنت للاستثمار والتجارة",
    "kind": "firm",
    "ticker": "GDWA",
@@ -30129,9 +30308,13 @@
    "filingId": "291336",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340863_1.pdf",
    "shares": 6804550,
-   "openedAt": "2026-06-24",
-   "openingPercent": 1.73,
+   "openedAt": "2026-06-15",
+   "openingPercent": 6.008,
    "history": [
+    {
+     "date": "2026-06-15",
+     "percent": 1.673
+    },
     {
      "date": "2026-06-24",
      "percent": 3.12
@@ -31401,6 +31584,10 @@
      "percent": 5.72
     },
     {
+     "date": "2026-06-14",
+     "percent": 9.86
+    },
+    {
      "date": "2026-06-16",
      "percent": 10.006
     },
@@ -32337,6 +32524,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "وليد محمد زكي",
+   "kind": "person",
+   "ticker": "PRDC",
+   "percent": 8.6,
+   "asOf": "2026-06-14",
+   "basis": "trade",
+   "filingId": "289784",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339643_1.pdf",
+   "openedAt": "2026-06-14",
+   "openingPercent": 29.85,
+   "history": [
+    {
+     "date": "2026-06-14",
+     "percent": 8.6
+    }
+   ]
   },
   {
    "holder": "Waleed M Zaki",
@@ -35118,6 +35323,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "امابيل حازم السيد احمد بدوي",
+   "kind": "person",
+   "ticker": "FIRE",
+   "percent": 5.19,
+   "asOf": "2026-06-15",
+   "basis": "trade",
+   "filingId": "289870",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339606_1.pdf",
+   "openedAt": "2026-06-15",
+   "openingPercent": 3.71,
+   "history": [
+    {
+     "date": "2026-06-15",
+     "percent": 5.19
+    }
+   ]
   },
   {
    "holder": "سيف الله ناجي محمد عزب",
@@ -40982,6 +41205,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "زالدي للاستثمارات",
+   "kind": "firm",
+   "ticker": "ICID",
+   "percent": 0.75,
+   "asOf": "2026-06-10",
+   "basis": "trade",
+   "filingId": "289676",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339521_1.pdf",
+   "openedAt": "2026-06-10",
+   "openingPercent": 0,
+   "history": [
+    {
+     "date": "2026-06-10",
+     "percent": 0.75
+    }
+   ]
   },
   {
    "holder": "شركه إعمار العقارية – شركه ذات مسئوليه محدودة",
@@ -47556,15 +47797,57 @@
    ]
   },
   {
+   "start": "2026-06-07",
+   "end": "2026-06-10",
+   "label": "7–10 Jun",
+   "labelAr": "7–10 يونيو",
+   "sessions": 1,
+   "buys": 1,
+   "sells": 0,
+   "value": 5025000.0,
+   "moves": [
+    {
+     "holder": "زالدي للاستثمارات",
+     "kind": "firm",
+     "ticker": "ICID",
+     "from": 0,
+     "to": 0.75,
+     "trades": 1,
+     "value": 5025000.0,
+     "change": 0.75
+    }
+   ]
+  },
+  {
    "start": "2026-06-14",
    "end": "2026-06-17",
    "label": "14–17 Jun",
    "labelAr": "14–17 يونيو",
-   "sessions": 3,
-   "buys": 5,
-   "sells": 4,
-   "value": 342396068.72,
+   "sessions": 4,
+   "buys": 7,
+   "sells": 7,
+   "value": 2578532101.2,
    "moves": [
+    {
+     "holder": "W Z Investment دبليو زد انفستمنت للاستثمار والتجارة",
+     "kind": "firm",
+     "ticker": "GDWA",
+     "from": 0,
+     "to": 21.29,
+     "trades": 1,
+     "value": 891726932.67,
+     "change": 21.29
+    },
+    {
+     "holder": "وليد محمد زكي",
+     "kind": "person",
+     "ticker": "PRDC",
+     "from": 29.85,
+     "to": 8.6,
+     "trades": 1,
+     "value": 1338748406.51,
+     "change": -21.25
+    },
     {
      "holder": "محمد فواز بن عبد الغني بن عبد السلام البشري",
      "kind": "person",
@@ -47596,6 +47879,16 @@
      "change": -5.8607
     },
     {
+     "holder": "محمود محمد شعبان سليم",
+     "kind": "person",
+     "ticker": "FCMD",
+     "from": 6.008,
+     "to": 1.673,
+     "trades": 1,
+     "value": 3511500.0,
+     "change": -4.335
+    },
+    {
      "holder": "ايمن بن مختار بن ابراهيم خليفة",
      "kind": "person",
      "ticker": "FCMD",
@@ -47604,6 +47897,16 @@
      "trades": 1,
      "value": 34939443.0,
      "change": -4.0058
+    },
+    {
+     "holder": "امابيل حازم السيد احمد بدوي",
+     "kind": "person",
+     "ticker": "FIRE",
+     "from": 3.71,
+     "to": 5.19,
+     "trades": 1,
+     "value": 905093.3,
+     "change": 1.48
     },
     {
      "holder": "سماح سليمان السيد سليمان ابو العلا",
@@ -47639,11 +47942,11 @@
      "holder": "شركة دراية المالية مساهمة مقفلة",
      "kind": "firm",
      "ticker": "AMII",
-     "from": 9.86,
+     "from": 10.006,
      "to": 10.006,
-     "trades": 1,
-     "value": 1235500.0,
-     "change": 0.146
+     "trades": 2,
+     "value": 2479600.0,
+     "change": 0.0
     },
     {
      "holder": "Gold Era For Gold Trading عصر الذهب لتجاره الذهب",
