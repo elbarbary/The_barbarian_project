@@ -1,15 +1,15 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-19T13:24:26+00:00",
+ "generated": "2026-09-19T13:55:10+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
- "peopleCount": 1334,
- "tradeCount": 246,
+ "peopleCount": 1337,
+ "tradeCount": 251,
  "tickerCount": 237,
  "tradedTickerCount": 85,
  "firmCount": 444,
- "personCount": 890,
+ "personCount": 893,
  "aliasCount": 151,
  "registerCount": 236,
  "overDisclosed": [],
@@ -1033,62 +1033,6 @@
    ]
   },
   {
-   "id": "سمو للإستشارات",
-   "name": "سمو للإستشارات",
-   "nameEn": "Somou for Consultations",
-   "script": "ar",
-   "kind": "firm",
-   "aliases": [
-    "سمو للاستشارات",
-    "شركة سمو للاستشارات",
-    "شركة سمو للاستشارات (مجموعة مرتبطة )",
-    "شركة سمو للاستشارات ش . م . م"
-   ],
-   "tickers": [
-    "ELEC"
-   ],
-   "tradeCount": 2,
-   "boughtCount": 0,
-   "soldCount": 2,
-   "value": 477891000.0,
-   "singleCompanyMove": {
-    "ticker": "ELEC",
-    "from": 21.05,
-    "to": 14,
-    "change": -7.05
-   },
-   "trades": [
-    {
-     "filingId": "293763",
-     "date": "2026-08-23",
-     "ticker": "ELEC",
-     "company": null,
-     "companyAr": "الكابلات الكهربائية المصرية",
-     "action": "sell",
-     "shares": 23810000,
-     "price": 2.1,
-     "value": 50001000.0,
-     "stakeBefore": 21.05,
-     "stakeAfter": 20.328,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343315_1.pdf"
-    },
-    {
-     "filingId": "294406",
-     "date": "2026-09-07",
-     "ticker": "ELEC",
-     "company": null,
-     "companyAr": "الكابلات الكهربائية المصرية",
-     "action": "sell",
-     "shares": 209750000,
-     "price": 2.04,
-     "value": 427890000.0,
-     "stakeBefore": 20.33,
-     "stakeAfter": 14,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/343894_1.pdf"
-    }
-   ]
-  },
-  {
    "id": "محمود محمد شعبان سليم",
    "name": "محمود محمد شعبان سليم",
    "nameEn": "Mahmoud Mohamed Shaaban Selim",
@@ -1931,6 +1875,43 @@
    ]
   },
   {
+   "id": "عبد الرحمن السيد عبد النبي محمد السيد",
+   "name": "عبد الرحمن السيد عبد النبي محمد السيد",
+   "nameEn": "Abdel Rahman El Sayed Abdel Nabi Mohamed El Sayed",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "SIPC"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 9438000.0,
+   "singleCompanyMove": {
+    "ticker": "SIPC",
+    "from": 4.72,
+    "to": 0.76,
+    "change": -3.96
+   },
+   "trades": [
+    {
+     "filingId": "289394",
+     "date": "2026-06-03",
+     "ticker": "SIPC",
+     "company": null,
+     "companyAr": "سبأ الدولية للأدوية والصناعات الكيماوية",
+     "action": "sell",
+     "shares": 2600000,
+     "price": 3.63,
+     "value": 9438000.0,
+     "stakeBefore": 4.72,
+     "stakeAfter": 0.76,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339285_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "يوسف محمد مدحت يوسف الفار",
    "name": "يوسف محمد مدحت يوسف الفار",
    "nameEn": "Youssef Mohamed Medhat Youssef El Far",
@@ -2639,6 +2620,43 @@
    ]
   },
   {
+   "id": "سيف محمود حسن جاب الله حسان",
+   "name": "سيف محمود حسن جاب الله حسان",
+   "nameEn": "Seif Mahmoud Hassan Gaballah Hassan",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "EPPK"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 2120227.99,
+   "singleCompanyMove": {
+    "ticker": "EPPK",
+    "from": 9.593,
+    "to": 11.712,
+    "change": 2.119
+   },
+   "trades": [
+    {
+     "filingId": "289341",
+     "date": "2026-06-02",
+     "ticker": "EPPK",
+     "company": null,
+     "companyAr": "الاهرام للطباعة و التغليف",
+     "action": "buy",
+     "shares": 176333,
+     "price": 12.024,
+     "value": 2120227.9919999996,
+     "stakeBefore": 9.593,
+     "stakeAfter": 11.712,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339231_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "عبد السلام مسعود عبد الكريم",
    "name": "عبد السلام مسعود عبد الكريم",
    "nameEn": "Abd El Salam Masoud Abd El Karim",
@@ -3220,6 +3238,43 @@
      "stakeBefore": 1.2649,
      "stakeAfter": 0.024168,
      "source": "https://www.egx.com.eg/downloads/Bulletins/341739_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "علي نسيم محي الدين عرفات الجلاد",
+   "name": "علي نسيم محي الدين عرفات الجلاد",
+   "nameEn": "Ali Naseem Mohy El Din Arafat El Galad",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "EPPK"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 1201000.0,
+   "singleCompanyMove": {
+    "ticker": "EPPK",
+    "from": 18.03,
+    "to": 16.83,
+    "change": -1.2
+   },
+   "trades": [
+    {
+     "filingId": "289389",
+     "date": "2026-06-03",
+     "ticker": "EPPK",
+     "company": null,
+     "companyAr": "الاهرام للطباعة و التغليف",
+     "action": "sell",
+     "shares": 100000,
+     "price": 12.01,
+     "value": 1201000.0,
+     "stakeBefore": 18.03,
+     "stakeAfter": 16.83,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339274_1.pdf"
     }
    ]
   },
@@ -4015,6 +4070,43 @@
      "stakeBefore": 23.56,
      "stakeAfter": 23.98,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343798_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "نسيم محي الدين عرفات الجلاد",
+   "name": "نسيم محي الدين عرفات الجلاد",
+   "nameEn": "Naseem Mohie El Din Arafat El Galad",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "EPPK"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 425600.0,
+   "singleCompanyMove": {
+    "ticker": "EPPK",
+    "from": 3.0,
+    "to": 2.58,
+    "change": -0.42
+   },
+   "trades": [
+    {
+     "filingId": "289390",
+     "date": "2026-06-03",
+     "ticker": "EPPK",
+     "company": null,
+     "companyAr": "الاهرام للطباعة و التغليف",
+     "action": "sell",
+     "shares": 35000,
+     "price": 12.16,
+     "value": 425600.0,
+     "stakeBefore": 3.0,
+     "stakeAfter": 2.58,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339254_1.pdf"
     }
    ]
   },
@@ -6513,6 +6605,72 @@
      "stakeBefore": 3.44,
      "stakeAfter": 5.239,
      "source": "https://www.egx.com.eg/downloads/Bulletins/343920_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "سمو للإستشارات",
+   "name": "سمو للإستشارات",
+   "nameEn": "Somou for Consultations",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": [
+    "سمو للاستشارات",
+    "شركة سمو للاستشارات",
+    "شركة سمو للاستشارات (مجموعة مرتبطة )",
+    "شركة سمو للاستشارات ش . م . م"
+   ],
+   "tickers": [
+    "ADPC",
+    "ELEC"
+   ],
+   "tradeCount": 3,
+   "boughtCount": 0,
+   "soldCount": 3,
+   "value": 512378484.29,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "289415",
+     "date": "2026-06-04",
+     "ticker": "ADPC",
+     "company": null,
+     "companyAr": "العربية لمنتجات الألبان\" آراب ديرى - باندا\" (آراب ديري-باندا)",
+     "action": "sell",
+     "shares": 9133338,
+     "price": 3.776,
+     "value": 34487484.287999995,
+     "stakeBefore": 3.01,
+     "stakeAfter": 1.18,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339007_1.pdf"
+    },
+    {
+     "filingId": "293763",
+     "date": "2026-08-23",
+     "ticker": "ELEC",
+     "company": null,
+     "companyAr": "الكابلات الكهربائية المصرية",
+     "action": "sell",
+     "shares": 23810000,
+     "price": 2.1,
+     "value": 50001000.0,
+     "stakeBefore": 21.05,
+     "stakeAfter": 20.328,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343315_1.pdf"
+    },
+    {
+     "filingId": "294406",
+     "date": "2026-09-07",
+     "ticker": "ELEC",
+     "company": null,
+     "companyAr": "الكابلات الكهربائية المصرية",
+     "action": "sell",
+     "shares": 209750000,
+     "price": 2.04,
+     "value": 427890000.0,
+     "stakeBefore": 20.33,
+     "stakeAfter": 14,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343894_1.pdf"
     }
    ]
   },
@@ -12674,21 +12832,6 @@
   {
    "id": "محمد عبد الفتاح عثمان حسن",
    "name": "محمد عبد الفتاح عثمان حسن",
-   "nameEn": null,
-   "script": null,
-   "kind": "person",
-   "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "سيف محمود حسن جاب الله حسان",
-   "name": "سيف محمود حسن جاب الله حسان",
    "nameEn": null,
    "script": null,
    "kind": "person",
@@ -28807,6 +28950,24 @@
    "history": []
   },
   {
+   "holder": "علي نسيم محي الدين عرفات الجلاد",
+   "kind": "person",
+   "ticker": "EPPK",
+   "percent": 16.83,
+   "asOf": "2026-06-03",
+   "basis": "trade",
+   "filingId": "289389",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339274_1.pdf",
+   "openedAt": "2026-06-03",
+   "openingPercent": 18.03,
+   "history": [
+    {
+     "date": "2026-06-03",
+     "percent": 16.83
+    }
+   ]
+  },
+  {
    "holder": "شركة الطيبات للمقاولات",
    "kind": "firm",
    "ticker": "UTOP",
@@ -30548,6 +30709,24 @@
    "openedAt": null,
    "openingPercent": null,
    "history": []
+  },
+  {
+   "holder": "سيف محمود حسن جاب الله حسان",
+   "kind": "person",
+   "ticker": "EPPK",
+   "percent": 11.712,
+   "asOf": "2026-06-02",
+   "basis": "trade",
+   "filingId": "289341",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339231_1.pdf",
+   "openedAt": "2026-06-02",
+   "openingPercent": 9.593,
+   "history": [
+    {
+     "date": "2026-06-02",
+     "percent": 11.712
+    }
+   ]
   },
   {
    "holder": "منال بنت محمد بن احمد الحسن",
@@ -38578,6 +38757,24 @@
    "history": []
   },
   {
+   "holder": "نسيم محي الدين عرفات الجلاد",
+   "kind": "person",
+   "ticker": "EPPK",
+   "percent": 2.58,
+   "asOf": "2026-06-03",
+   "basis": "trade",
+   "filingId": "289390",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339254_1.pdf",
+   "openedAt": "2026-06-03",
+   "openingPercent": 3.0,
+   "history": [
+    {
+     "date": "2026-06-03",
+     "percent": 2.58
+    }
+   ]
+  },
+  {
    "holder": "هناء ابراهيم ابراهيم الصعيدي",
    "kind": "person",
    "ticker": "ACGC",
@@ -41415,6 +41612,24 @@
    ]
   },
   {
+   "holder": "عبد الرحمن السيد عبد النبي محمد السيد",
+   "kind": "person",
+   "ticker": "SIPC",
+   "percent": 0.76,
+   "asOf": "2026-06-03",
+   "basis": "trade",
+   "filingId": "289394",
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339285_1.pdf",
+   "openedAt": "2026-06-03",
+   "openingPercent": 4.72,
+   "history": [
+    {
+     "date": "2026-06-03",
+     "percent": 0.76
+    }
+   ]
+  },
+  {
    "holder": "الاستاذ/ عبد الله خالد عبد الله",
    "kind": "person",
    "ticker": "AXPH",
@@ -41828,9 +42043,14 @@
    "filingId": "291519",
    "source": "https://www.egx.com.eg/downloads/Bulletins/341214_1.pdf",
    "shares": 2998723,
-   "openedAt": null,
-   "openingPercent": null,
-   "history": []
+   "openedAt": "2026-06-04",
+   "openingPercent": 3.01,
+   "history": [
+    {
+     "date": "2026-06-04",
+     "percent": 1.18
+    }
+   ]
   },
   {
    "holder": "*Zenith Insurance Company",
@@ -48045,11 +48265,21 @@
    "end": "2026-06-04",
    "label": "31 May – 4 Jun",
    "labelAr": "31 مايو – 4 يونيو",
-   "sessions": 1,
-   "buys": 0,
-   "sells": 1,
-   "value": 18559800.0,
+   "sessions": 3,
+   "buys": 1,
+   "sells": 5,
+   "value": 66232112.28,
    "moves": [
+    {
+     "holder": "عبد الرحمن السيد عبد النبي محمد السيد",
+     "kind": "person",
+     "ticker": "SIPC",
+     "from": 4.72,
+     "to": 0.76,
+     "trades": 1,
+     "value": 9438000.0,
+     "change": -3.96
+    },
     {
      "holder": "محمود محمد شعبان سليم",
      "kind": "person",
@@ -48059,6 +48289,46 @@
      "trades": 1,
      "value": 18559800.0,
      "change": -3.121
+    },
+    {
+     "holder": "سيف محمود حسن جاب الله حسان",
+     "kind": "person",
+     "ticker": "EPPK",
+     "from": 9.593,
+     "to": 11.712,
+     "trades": 1,
+     "value": 2120227.99,
+     "change": 2.119
+    },
+    {
+     "holder": "سمو للإستشارات",
+     "kind": "firm",
+     "ticker": "ADPC",
+     "from": 3.01,
+     "to": 1.18,
+     "trades": 1,
+     "value": 34487484.29,
+     "change": -1.83
+    },
+    {
+     "holder": "علي نسيم محي الدين عرفات الجلاد",
+     "kind": "person",
+     "ticker": "EPPK",
+     "from": 18.03,
+     "to": 16.83,
+     "trades": 1,
+     "value": 1201000.0,
+     "change": -1.2
+    },
+    {
+     "holder": "نسيم محي الدين عرفات الجلاد",
+     "kind": "person",
+     "ticker": "EPPK",
+     "from": 3.0,
+     "to": 2.58,
+     "trades": 1,
+     "value": 425600.0,
+     "change": -0.42
     }
    ]
   },

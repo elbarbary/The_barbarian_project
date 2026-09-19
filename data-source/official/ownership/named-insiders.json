@@ -3968,6 +3968,86 @@
    "publishedAt": "2026-06-04T15:01:34",
    "sessionDate": null,
    "source": "https://www.egx.com.eg/downloads/Bulletins/339291_1.pdf"
+  },
+  "289415": {
+   "investorName": "سمو للاستشارات",
+   "investorNameEn": "Sumou For Consultations",
+   "relationship": null,
+   "ticker": "ADPC",
+   "action": "sell",
+   "shares": 9133338,
+   "price": 3.776,
+   "ownershipBeforePercent": 3.01,
+   "ownershipAfterPercent": 1.18,
+   "nameScript": "ar",
+   "filingId": "289415",
+   "publishedAt": "2026-06-04T14:29:04",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339007_1.pdf"
+  },
+  "289394": {
+   "investorName": "عبد الرحمن السيد عبد النبي محمد السيد",
+   "investorNameEn": "Abdel Rahman El Sayed Abdel Nabi Mohamed El Sayed",
+   "relationship": null,
+   "ticker": "SIPC",
+   "action": "sell",
+   "shares": 2600000,
+   "price": 3.63,
+   "ownershipBeforePercent": 4.72,
+   "ownershipAfterPercent": 0.76,
+   "nameScript": "ar",
+   "filingId": "289394",
+   "publishedAt": "2026-06-03T15:21:12",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339285_1.pdf"
+  },
+  "289390": {
+   "investorName": "نسيم محي الدين عرفات الجلاد",
+   "investorNameEn": "Naseem Mohie El Din Arafat El Galad",
+   "relationship": null,
+   "ticker": "EPPK",
+   "action": "sell",
+   "shares": 35000,
+   "price": 12.16,
+   "ownershipBeforePercent": 3.0,
+   "ownershipAfterPercent": 2.58,
+   "nameScript": "ar",
+   "filingId": "289390",
+   "publishedAt": "2026-06-03T12:32:38",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339254_1.pdf"
+  },
+  "289389": {
+   "investorName": "علي نسيم محي الدين عرفات الجلاد",
+   "investorNameEn": "Ali Naseem Mohy El Din Arafat El Galad",
+   "relationship": "المساهم",
+   "ticker": "EPPK",
+   "action": "sell",
+   "shares": 100000,
+   "price": 12.01,
+   "ownershipBeforePercent": 18.03,
+   "ownershipAfterPercent": 16.83,
+   "nameScript": "ar",
+   "filingId": "289389",
+   "publishedAt": "2026-06-03T12:30:03",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339274_1.pdf"
+  },
+  "289341": {
+   "investorName": "سيف محمود حسن جاب الله حسان",
+   "investorNameEn": "Seif Mahmoud Hassan Gaballah Hassan",
+   "relationship": null,
+   "ticker": "EPPK",
+   "action": "buy",
+   "shares": 176333,
+   "price": 12.024,
+   "ownershipBeforePercent": 9.593,
+   "ownershipAfterPercent": 11.712,
+   "nameScript": "ar",
+   "filingId": "289341",
+   "publishedAt": "2026-06-02T14:07:31",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339231_1.pdf"
   }
  },
  "refused": {
@@ -3983,6 +4063,7 @@
   "289903": "a purchase that lowers the stake (0.51031 -> 0.1132)",
   "289528": "not a usable name: None",
   "289449": "action is neither buy nor sell: None",
-  "289446": "action is neither buy nor sell: None"
+  "289446": "action is neither buy nor sell: None",
+  "289267": "action is neither buy nor sell: None"
  }
 }

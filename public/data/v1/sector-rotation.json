@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-19T13:22:23Z",
+ "generated": "2026-09-19T13:52:19Z",
  "basis": "Each month's share of the exchange's traded value, by sector, and how that share changed from the month before. Turnover is close times volume from the daily archive. A month is only included when the companies reporting in it cover at least 70% of today's listings, and a change is only measured between two months that are next to each other in the calendar and both included.",
  "basisAr": "نصيب كل قطاع من قيمة التداول شهرياً، وكيف تغير هذا النصيب عن الشهر السابق. قيمة التداول هي سعر الإغلاق مضروباً في الكمية من الأرشيف اليومي. ولا يُحتسب الشهر إلا إذا غطت الشركات المتداولة فيه ما لا يقل عن ٧٠٪ من الشركات المقيدة اليوم، ولا يُقاس التغير إلا بين شهرين متتاليين في التقويم وكلاهما محتسب.",
  "refuses": "No arrow, flow or pair between sectors is published. The strongest lead-lag pair in this record lifts a sector's own base rate by 16.8 points, and shuffling each sector's months two hundred times — keeping how often it moves, destroying when — produces a best pair of 16.7. It is the best of some nine hundred pairs, which is to say it is noise. Turnover shows where trading happened, not that money left one sector for another.",

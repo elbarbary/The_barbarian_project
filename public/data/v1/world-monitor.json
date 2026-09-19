@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-19T13:17:57Z",
+ "generated": "2026-09-19T13:48:15Z",
  "basis": "A move is placed against its own two years of same-length moves — a record of what has already happened, never a statement about the next one. Each list of companies is the complete set that filed the figure, in alphabetical order, with the filing beside it. Nothing here says what any of it means for a share price.",
  "basisAr": "تُقاس كل حركة مقابل سنتين من حركات بالطول نفسه — سجل لما حدث بالفعل، وليس قولاً عما سيحدث. وكل قائمة شركات هي المجموعة الكاملة التي أودعت الرقم، بالترتيب الأبجدي، ومعها الإفصاح الذي جاء منه. ولا شيء هنا يقول ماذا يعني ذلك لسعر أي سهم.",
  "windows": [
@@ -628,6 +628,8 @@
    "id": "rates",
    "question": "Where does a change in the cost of money land?",
    "questionAr": "أين تصل تغيرات تكلفة الاقتراض؟",
+   "plain": "When interest rates change, companies that borrow feel it first. Here is every company that filed a borrowings figure, and how much of it reprices within a year.",
+   "plainAr": "حين يتغير سعر الفائدة تشعر به الشركات المقترضة أولاً. هنا كل شركة أودعت رقم قروضها، وكم منها يُعاد تسعيره خلال عام.",
    "filter": "every company whose filed balance sheet shows borrowings",
    "filterAr": "كل شركة تُظهر ميزانيتها المودعة قروضاً",
    "count": 120,
@@ -2438,6 +2440,8 @@
    "id": "inputs",
    "question": "Where does a change in what things cost land?",
    "questionAr": "أين تصل تغيرات تكلفة المدخلات؟",
+   "plain": "When oil or the dollar moves, companies that get their inputs from abroad feel it. Here is every company that filed revenue and gross profit; the gap between them is what absorbs a shock.",
+   "plainAr": "حين يتحرك النفط أو الدولار تشعر به الشركات التي تشتري موادها من الخارج. هنا كل شركة أودعت إيراداتها ومجمل ربحها؛ والفارق بينهما هو ما يمتصّ الصدمة.",
    "filter": "every company whose filed statement shows revenue and gross profit, giving the cushion between them",
    "filterAr": "كل شركة تُظهر قوائمها المودعة إيرادات ومجمل ربح، فيظهر الفارق بينهما",
    "count": 147,
@@ -4065,6 +4069,8 @@
    "id": "currency",
    "question": "Where does a move in the pound land?",
    "questionAr": "أين تصل حركة الجنيه؟",
+   "plain": "When the pound moves, companies holding money in other currencies gain or lose on paper. Here is every company whose filings print such a figure.",
+   "plainAr": "حين يتحرك الجنيه تربح الشركات التي تحتفظ بأموال بعملات أخرى أو تخسر على الورق. هنا كل شركة تطبع قوائمها رقماً من هذا النوع.",
    "filter": "every company whose filed foreign-currency note prints a figure — a net position held in another currency, or an exchange gain or loss already taken",
    "filterAr": "كل شركة يطبع إيضاح العملات الأجنبية في قوائمها رقماً — صافي مركز بعملة أخرى، أو أرباح أو خسائر فروق عملة تم الاعتراف بها",
    "count": 137,
@@ -6980,6 +6986,7 @@
     "combined": true
    }
   ],
-  "note": "The exchange states these for its current reporting period to date, not for one session, and resets them when it starts a new period. A rise here is not money arriving today."
+  "note": "The exchange states these for its current reporting period to date, not for one session, and resets them when it starts a new period. A rise here is not money arriving today.",
+  "noteAr": "تنشر البورصة هذه الأرقام تراكمياً من بداية الفترة الحالية، لا لجلسة واحدة، وتبدأ من الصفر مع كل فترة جديدة. فالارتفاع هنا ليس مالاً وصل اليوم."
  }
 }
