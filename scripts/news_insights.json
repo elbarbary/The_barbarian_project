@@ -5552,6 +5552,10 @@
     "meaning": "Copper trading at higher prices relative to nickel reflects a divergence from historical pricing ratios between the two base metals, shifting input cost dynamics for industrial consumers and manufacturers.",
     "meaning_ar": "يعكس تداول النحاس بأسعار تتفوق على النيكل تغيراً في نسب التسعير التاريخية بين المعدنين الأساسيين، مما يغير ديناميكيات تكلفة المدخلات للمصنعين والمستهلكين في القطاع الصناعي."
   },
+  "ديفيد فيكلينج يكتب: ثالث ازمه غاز في 8 سنوات.. هل تتحول امريكا من المنقذ الي شراره الازمه العالميه؟": {
+    "meaning": "The article analyzes the operational dynamics of global liquefied natural gas (LNG) supply chains and the sensitivity of international gas balances to US export capacities and domestic policy decisions.",
+    "meaning_ar": "يحلل المقال الآليات التشغيلية لسلاسل إمداد الغاز الطبيعي المسال عالمياً، ومدى حساسية توازن الأسواق الدولية للطاقات التصديرية والقرارات التنظيمية في الولايات المتحدة."
+  },
   "ديفيد فيكلينج يكتب: هل تنجح واشنطن في “الشحن النووي” دون بكين؟": {
     "meaning": "The article examines international nuclear supply chain dependencies, specifically the operational and trade mechanisms required for developing nuclear energy infrastructure independently of Chinese manufacturing and critical mineral inputs.",
     "meaning_ar": "يتناول المقال سلاسل إمداد الطاقة النووية العالمية، موضحاً الآليات التشغيلية والتجارية اللازمة لتطوير البنية التحتية للطاقة النووية بمعزل عن سلاسل التوريد والمدخلات التصنيعية الصينية."
@@ -7488,6 +7492,11 @@
   "محيي الدين: 15% فقط من اهداف التنميه المستدامه العالميه في مسارها الصحيح": {
     "meaning": "The off-track status of the majority of global sustainable development goals indicates a structural deficit in international development financing and green capital allocation across emerging markets, maintaining a reliance on conventional funding mechanisms.",
     "meaning_ar": "يشير تعثر معظم أهداف التنمية المستدامة عالمياً إلى وجود عجز هيكلي في تدفقات التمويل الإنمائي ورؤوس الأموال الخضراء نحو الأسواق الناشئة، مما يُبقي على الاعتماد القائم على آليات التمويل التقليدية."
+  },
+  "محيي الدين: 2026 الاقل نموا بالشرق الاوسط.. ونتوقع ارتفاعه الي 3.7% في 2027": {
+    "meaning": "",
+    "meaning_ar": "",
+    "refused": 1
   },
   "محيي الدين: مصر تحتاج خلال اسابيع برنامجا اقتصاديا جديدا يتجاوز اداره الموشرات الماليه والنقديه": {
     "meaning": "The proposal refers to expanding economic policy beyond monetary and fiscal metrics, such as interest rates and budget deficits, to target real-sector structural shifts, including industrial capacity, regulatory conditions, and export infrastructure.",
