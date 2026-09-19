@@ -5164,6 +5164,10 @@
     "meaning": "Bilateral business forums serve as institutional platforms for direct cross-border corporate networking, information exchange on regulatory frameworks, and identification of joint commercial partnerships between the two countries.",
     "meaning_ar": "تُعد منتديات الأعمال الثنائية منصات مؤسسية للتواصل المباشر بين الشركات عبر الحدود، وتبادل المعلومات حول الأطر التنظيمية، وتحديد الشراكات التجارية المشتركة بين البلدين."
   },
+  "جمعيه شباب الاعمال: منحه الحكومه لتاهيل الشركات للتصدير تفتح اسواقا جديده امام المنتج المصري": {
+    "meaning": "Government qualification grants offset compliance and technical certification expenses for local manufacturers seeking alignment with foreign market import specifications.",
+    "meaning_ar": "تغطي المنح الحكومية للتأهيل تكاليف الامتثال وإصدار الشهادات الفنية للمصنعين المحليين لتلبية متطلبات المواصفات القياسية لأسواق الاستيراد الخارجية."
+  },
   "جنرال الكتريك تستحوذ علي CPP مقابل 12 مليار دولار لتامين امدادات محركات الطايرات": {
     "meaning": "This transaction represents vertical integration within the aerospace supply chain, bringing the production of critical jet engine components directly under internal manufacturing control.",
     "meaning_ar": "تمثل هذه الصفقة تكاملاً رأسياً ضمن سلاسل إمداد قطاع الطيران، حيث تضع عمليات تصنيع المكونات الحيوية لمحركات الطائرات تحت السيطرة التشغيلية المباشرة للشركة."
@@ -5267,6 +5271,10 @@
   "حرب ايران تستنزف امدادات الديزل في الاسواق العالميه": {
     "meaning": "Regional geopolitical conflict disrupts refining capacity and marine shipping routes, lowering available physical inventories of diesel in international commodity markets.",
     "meaning_ar": "تؤدي النزاعات الجيوسياسية الإقليمية إلى تعطيل طاقات التكرير ومسارات الشحن البحري، مما يخفض المخزونات المادية المتاحة من الديزل في أسواق السلع العالمية."
+  },
+  "حرب ايران تصل الي خزاين الملابس مع قفزه تكاليف الانتاج": {
+    "meaning": "Regional geopolitical tensions elevate global crude oil and energy prices, which directly drives up the input costs for synthetic fibers, dyes, and international freight in textile and apparel manufacturing.",
+    "meaning_ar": "تؤدي التوترات الجيوسياسية الإقليمية إلى رفع أسعار النفط الخام والطاقة عالمياً، مما يرفع تكاليف المدخلات الصناعية مثل الألياف الصناعية والأصباغ ومصروفات الشحن الدولي في قطاع صناعة الملابس والمنسوجات."
   },
   "حرب ايران تضغط علي السيوله لدي المستهلكين الامريكيين": {
     "meaning": "Geopolitical conflict involving Iran raises global oil prices and shipping costs, which directly increases energy and transportation expenses for US consumers and reduces their available discretionary cash flow.",
@@ -7120,6 +7128,10 @@
   "لجنه القيد تحدد موعد ادراج سهم ام ان تي تيك القابضه": {
     "meaning": "The listing committee sets the official date on which the company's shares are registered on the exchange's trading platform, transitioning the security from unlisted status to an active financial instrument accessible in the secondary market.",
     "meaning_ar": "تحدد لجنة القيد الموعد الرسمي لتسجيل أسهم الشركة على شاشات التداول بالبورصة، وهو الإجراء الذي ينقل الورقة المالية من وضع غير المقيد إلى أداة مالية متاحة في السوق الثانوية."
+  },
+  "لجنه مبيدات الافات الزراعيه تجدد اعتمادها الدولي ايزو 9001 : 2026": {
+    "meaning": "The renewal of the ISO 9001 quality management certification confirms that the regulatory oversight, testing procedures, and registration standards for agricultural pesticides adhere to standardized international protocols.",
+    "meaning_ar": "يؤكد تجديد شهادة إدارة الجودة أيزو 9001 مطابقة إجراءات الرقابة التنظيمية وفحص وتسجيل مبيدات الآفات الزراعية للمعايير والبروتوكولات الدولية المعتمدة."
   },
   "لماذا ارتفعت اسعار الفضه في مصر؟.. عيار 999 يسجل 106 جنيهات": {
     "meaning": "Domestic silver pricing reflects changes in global spot commodity benchmarks combined with the prevailing official and parallel exchange rates of the Egyptian pound, alongside local supply-demand dynamics and manufacturing premiums.",
@@ -9252,6 +9264,10 @@
   "“جدوي” تتكبد خساير 378.5 مليون جنيه في النصف الاول": {
     "meaning": "Operating costs and financing expenses exceed total generated revenues for the six-month period, reducing retained earnings on the balance sheet.",
     "meaning_ar": "تتجاوز تكاليف التشغيل والأعباء التمويلية إجمالي الإيرادات المحققة خلال فترة الستة أشهر، مما يؤدي إلى خفض الأرباح المرحلة في الميزانية العمومية."
+  },
+  "“جوجل” تكشف عن اختراقات نفذها نموذجها للذكاء الاصطناعي": {
+    "meaning": "Deploying artificial intelligence models to discover and execute cyber exploits shifts technology company spending toward automated cybersecurity testing and internal research and development operations.",
+    "meaning_ar": "يؤدي توظيف نماذج الذكاء الاصطناعي في رصد وتنفيذ الاختراقات السيبرانية إلى توجيه الإنفاق التشغيلي لشركات التكنولوجيا نحو أدوات الفحص الأمني الآلي وعمليات البحث والتطوير."
   },
   "“جولدمان ساكس” يجمع 11.7 مليار دولار لصناديق الاستثمار المباشر الجديده": {
     "meaning": "Capital commitments of $11.7 billion expand the firm's uncalled private equity reserves, providing operational liquidity specifically allocated for direct corporate acquisitions, co-investments, and structural equity financing.",
