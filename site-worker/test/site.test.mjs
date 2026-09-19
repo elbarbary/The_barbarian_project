@@ -3165,9 +3165,14 @@ test('Arabic bidi marks reach the reader and never the stylesheet', async () => 
   // And dc.js applies it to text nodes only — the attribute branch takes the
   // raw value, which is the whole point.
   const dc = await readFile(new URL('../../public/esthmr/dc.js', import.meta.url), 'utf8');
-  assert.match(dc, /TEXT_NODE[\s\S]{0,400}interpolate\(text, scope, TEXT\)/);
+  const textBranch = dc.slice(dc.indexOf('TEXT_NODE'), dc.indexOf('ELEMENT_NODE'));
+  assert.match(textBranch, /\(text, scope, TEXT\)/,
+    'the text branch no longer hands the hook down, so Arabic figures come apart');
   assert.ok(!/interpolate\(attr\.value, scope, TEXT\)/.test(dc),
     'dc.js runs the text hook over attribute values');
+  const attrBranch = dc.slice(dc.indexOf('for (const attr'));
+  assert.ok(!/\bTEXT\b/.test(attrBranch.slice(0, 600)),
+    'the attribute branch reaches for the text hook, which is what broke every bar on the site');
 });
 
 test('a company that filed nine times does not get a card twice the height', () => {

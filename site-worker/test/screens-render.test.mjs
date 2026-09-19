@@ -193,3 +193,45 @@ test('no binding reads through a document that has not arrived', async () => {
   assert.deepEqual([...broken].slice(0, 6), [],
     'a binding reads a field off a value that is null, and dc.js drops its subtree without throwing');
 });
+
+/* ── two bindings in one text node ──────────────────────────────────────── */
+
+test('a second binding on the line below the first does not delete them both', async () => {
+  /* Half this site's screens are assembled as element trees and handed to the
+     template through a `{{ binding }}` — the AI card, the sector table, every
+     chart. `interpolate` returns an element only when the binding is ALONE in
+     its text node, so two of them in one text node fell to string
+     interpolation, where an element becomes the text "[object HTMLDivElement]".
+     Writing `{{ changedToday }}` on the line under `{{ aiCards }}` was enough
+     to delete both, and nothing failed: the page rendered cleanly without
+     either card, on every screen that shows one. */
+  const { pieces } = await import('../../public/esthmr/dc.js');
+  const doc = globalThis.document;
+  const one = doc.createElement('div'); one.className = 'first';
+  const two = doc.createElement('div'); two.className = 'second';
+  const out = pieces('\n  {{ one }}\n  {{ two }}\n  {{ plain }}\n', { one, two, plain: 'a word' }, null);
+  assert.ok(out.includes(one), 'the first element binding was stringified away');
+  assert.ok(out.includes(two), 'the second element binding was stringified away');
+  const text = out.map((n) => (n.text !== undefined ? n.text : '')).join('');
+  assert.doesNotMatch(text, /\[object /, 'an element was rendered as its own type name');
+  assert.match(text, /a word/, 'the plain binding beside them was lost');
+  // The whitespace between them is kept, or the cards run together.
+  assert.equal(out.length, 7, out.length);
+});
+
+test('one binding alone in its text node still comes back as itself', async () => {
+  const { pieces } = await import('../../public/esthmr/dc.js');
+  const card = globalThis.document.createElement('section');
+  assert.deepEqual(pieces('{{ card }}', { card }, null), [card]);
+  // And the hook still runs over a scalar: Arabic figures need their isolate.
+  const wrapped = pieces('{{ n }}', { n: '43%' }, (v) => `<${v}>`);
+  assert.equal(wrapped[0].text, '<43%>');
+});
+
+test('the template does not rely on a binding being alone on its line', async () => {
+  // Belt and braces: if the rule ever comes back, this names the file to fix.
+  const template = await readFile(new URL('public/esthmr/template.html', ROOT), 'utf8');
+  const crowded = [...template.matchAll(/\{\{[^}]*\}\}[^<\n]*\{\{[^}]*\}\}/g)];
+  assert.ok(crowded.length > 0,
+    'the scan found no text node with two bindings, so it is proving nothing');
+});

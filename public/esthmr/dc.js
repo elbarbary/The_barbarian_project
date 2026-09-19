@@ -89,6 +89,37 @@ export function interpolate(text, scope, wrap) {
  */
 let TEXT = null;
 
+/**
+ * A text node's contents, in order, as the nodes it should become.
+ *
+ * A binding may resolve to a real element — the AI card, the sector table,
+ * every chart on this site is an element tree and not a string — and
+ * `interpolate` returns one only when the binding is ALONE in its text node.
+ * Two of them in one text node fell to string interpolation, where an element
+ * becomes the text "[object HTMLDivElement]": writing `{{ changedToday }}` on
+ * the line under `{{ aiCards }}` deleted both, and nothing failed. The page
+ * rendered cleanly without either card.
+ *
+ * So each binding is resolved in turn and the text between them is kept as
+ * its own text node, which is what `interpolate` already did for one.
+ */
+export function pieces(text, scope, wrap) {
+  const out = [];
+  const add = (value) => {
+    out.push(value instanceof Node ? value
+      : document.createTextNode(value === null || value === undefined ? '' : String(value)));
+  };
+  let at = 0;
+  for (const m of text.matchAll(/\{\{((?:(?!\}\})[\s\S])*)\}\}/g)) {
+    if (m.index > at) out.push(document.createTextNode(text.slice(at, m.index)));
+    const value = evaluate(m[1], scope);
+    add(wrap ? wrap(value) : value);
+    at = m.index + m[0].length;
+  }
+  if (at < text.length) out.push(document.createTextNode(text.slice(at)));
+  return out;
+}
+
 function renderNode(node, scope, into) {
   if (node.nodeType === Node.TEXT_NODE) {
     const text = node.nodeValue;
@@ -96,12 +127,7 @@ function renderNode(node, scope, into) {
       into.appendChild(document.createTextNode(text));
       return;
     }
-    const value = interpolate(text, scope, TEXT);
-    // A binding may resolve to a real node — the design's charts are built as
-    // element trees, not strings — so it is appended rather than stringified.
-    into.appendChild(value instanceof Node
-      ? value
-      : document.createTextNode(value === null || value === undefined ? '' : String(value)));
+    for (const piece of pieces(text, scope, TEXT)) into.appendChild(piece);
     return;
   }
   if (node.nodeType !== Node.ELEMENT_NODE) return;
