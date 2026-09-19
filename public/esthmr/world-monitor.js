@@ -176,11 +176,13 @@ function corridorFigure(c, ar, t) {
     // Said in words, because a reader who takes this for "the rate a company
     // pays its bank" has read the whole figure wrong.
     h('p', { className: 'ft-note' },
-      t('The floor is what a bank earns leaving money at the central bank and '
+      t('Shows the baseline cost of borrowing in the Egyptian economy, which directly affects the profits and dividend capabilities of indebted companies. '
+        + 'The floor is what a bank earns leaving money at the central bank and '
         + 'the ceiling is what it pays to borrow there, so no bank deals with '
         + 'another outside them. None of these is the rate a company pays on '
         + 'its own loan.',
-        'الحد الأدنى هو ما يكسبه البنك من إيداع أمواله لدى البنك المركزي، '
+        'يوضح هذا المؤشر تكلفة التمويل الأساسية في الاقتصاد المصري، وهي العامل الأكبر الذي يؤثر على أرباح الشركات المقترضة وتوزيعات أرباحها. '
+        + 'الحد الأدنى هو ما يكسبه البنك من إيداع أمواله لدى البنك المركزي، '
         + 'والحد الأقصى ما يدفعه للاقتراض منه، فلا يتعامل بنك مع آخر خارجهما. '
         + 'وليس أي منها السعر الذي تدفعه شركة على قرضها.')),
     // build_rates_api.py stamps "cbe.org.eg monetary policy, effective <date>"
@@ -453,6 +455,10 @@ export function worldMonitor(component, data, ar) {
 
     h('section', { className: 'ft-detail wm-block' },
       h('h2', null, t('What did the world do this week?', 'ماذا فعل العالم هذا الأسبوع؟'), ' ', h('small', { className: 'h-term' }, t('Outside Egypt', 'خارج مصر'))),
+      h('p', { className: 'ft-lede' }, t(
+        'Monitor global markets that affect your savings and investments: how major currencies and commodities moved and their impact on the local exchange.',
+        'راقب الأسواق العالمية التي تنعكس على مدخراتك واستثماراتك: كيف تحركت العملات والسلع الكبرى وما أثرها على السوق المحلي.'
+      )),
       // Grouped by what the thing is. Flat alphabetical put the euro between
       // copper and the FTSE, and twelve unrelated numbers read as a list
       // rather than as three kinds of thing — which is most of why this did
@@ -478,6 +484,10 @@ export function worldMonitor(component, data, ar) {
 
     h('section', { className: 'ft-detail wm-block' },
       h('h2', null, t('And did the Egyptian exchange move as much?', 'وهل تحركت البورصة المصرية بقدر مماثل؟'), ' ', h('small', { className: 'h-term' }, t('This exchange, measured the same way', 'هذه البورصة، بالقياس نفسه'))),
+      h('p', { className: 'ft-lede' }, t(
+        'Shows how sensitive the Egyptian market is to global events: if oil or gold swung sharply while the local exchange remained calm, it reflects independence from external shocks.',
+        'توضح لك هذه المقارنة مدى حساسية السوق المصري للأحداث العالمية: إذا تحرك النفط أو الذهب بقوة وبقيت البورصة هادئة، فذلك يعكس استقرارها أمام موجات الخارج.'
+      )),
       h('p', { className: 'ft-note' },
         t('The comparison is the point: a week that was remarkable for oil and ordinary here is a different fact from one that was remarkable for both.',
           'المقارنة هي المقصد: أسبوع استثنائي للنفط وعادي هنا ليس كأسبوع استثنائي لكليهما.')),

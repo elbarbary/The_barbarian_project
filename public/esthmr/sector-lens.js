@@ -348,8 +348,10 @@ export function followedPanel(doc, sector, { ar, t }) {
 
   return h('div', { className: 'sl-followed' },
     h('h3', null, t('What followed, the other times', 'ماذا تلا ذلك في المرات الأخرى')),
-    h('p', { className: 'ft-lede' }, t('The other times this sector gained a share like this, here is what happened to its share the month after — a record of what recurred, not a forecast.',
-      'في المرات السابقة التي كسب فيها هذا القطاع نصيباً كهذا، هذا ما حدث لنصيبه في الشهر التالي — سجل لما تكرر، لا توقّع.')),
+    h('p', { className: 'ft-lede' }, t(
+      'Shows whether a sector historically tends to cool down following large spikes in trading share, revealing its recurring pattern over time.',
+      'يوضح هذا السجل ما إذا كان نصيب القطاع يميل تاريخياً للتهدئة بعد طفرات الشراء الكبيرة، لتعرف السلوك المتكرر في السوق.'
+    )),
     h('p', { className: 'ft-note' },
       record.count === 0
         ? t(`This sector has not gained ${record.qualify} points of share in a single month in this record.`,

@@ -286,8 +286,10 @@ function renderSectorFlowMap(sectors, selectedSector, onSelectSector, ar, t) {
       h('div', null,
         h('span', { className: 'ft-drawing-tag' }, t('INTERACTIVE FLOW SYSTEM', 'نظام التدفق التفاعلي')),
         h('h3', null, t('Which sectors are big, and where is the trading?', 'أي القطاعات كبيرة، وأين يجري التداول؟'), ' ', h('small', { className: 'h-term' }, t('Capital Gravitational Map & Member Satellites', 'خريطة الجاذبية الرأسمالية وتوزيع الأسهم'))),
-        h('p', null, t('Node size represents Sector Market Cap. Flow conduits stream Inflow (Bought) vs Outflow (Sold). Orbiting satellites show member stocks sized by weight and colored by return.',
-          'حجم الدائرة يمثل القيمة السوقية للقطاع. مسارات السيولة توضح التدفق الداخل (المشتريات) والخارج (المبيعات). الأقمار المدارية تظهر الأسهم بوزنها وعائدها.'))
+        h('p', null, t(
+          'Shows the relative size of each market sector and the flow of trading in its shares, making it easy to see where market weight and activity concentrate.',
+          'توضح هذه الخريطة الحجم النسبي لكل قطاع ومسار السيولة المتداولة في أسهمه، لترى أين يتركز ثقل السوق وحركته دون قراءة جداول معقدة.'
+        ))
       ),
       h('div', { className: 'ft-drawing-legend' },
         h('span', { className: 'ft-legend-item' }, h('i', { style: { background: 'var(--up)' } }), t('Bought / Inflow', 'شراء / تدفق داخل')),
@@ -1801,8 +1803,10 @@ function renderTradingShare(doc, selected, ar, t, onPick, focusId) {
       h('span', { className: 'ft-range-badge', dir: 'ltr' },
         `${rows[0].month} → ${rows[rows.length - 1].month}`)
     ),
-    h('p', { className: 'ft-lede' }, t('Two lines: a sector taking a larger share of the trading, and one losing it. The shape is the movement; nothing needs counting.',
-      'خطان: قطاع يأخذ نصيباً أكبر من التداول وآخر يفقده. الشكل هو الحركة، ولا يلزمك عدّ شيء.')),
+    h('p', { className: 'ft-lede' }, t(
+      'Shows whether investor interest in each sector is expanding or contracting over time: is one sector currently absorbing most of the market’s activity?',
+      'يريك الرسم صعود أو تراجع اهتمام المتداولين بكل قطاع عبر الشهور: هل يستحوذ قطاع معين على سيولة السوق حالياً؟'
+    )),
     h('p', { className: 'ft-note' }, ar ? doc.basisAr : doc.basis),
     // The shape first: a line rising while another falls IS the movement, and
     // a reader sees it without counting anything.
@@ -1847,6 +1851,10 @@ function renderRotation(d, sectors, month, ar, t, onPickSector, selectedId) {
       ),
       h('span', { className: 'ft-range-badge', dir: 'ltr' }, `${before.month} → ${now.month}`)
     ),
+    h('p', { className: 'ft-lede' }, t(
+      'Shows which sectors saw a shift in investor activity compared to last month: which ones gained momentum and which ones saw trading quiet down.',
+      'يريك هذا الجدول إلى أين انتقلت سيولة المتداولين بين الشهور: أي القطاعات جذبت نشاطاً أكبر، وأيها تراجع اهتمام السوق بها.'
+    )),
     h('p', { className: 'ft-note' }, t(
       'Every sector with a figure in either month, in alphabetical order. '
       + 'This is a record of where trading has already been, and nothing here says which sector is next: '
@@ -1913,8 +1921,10 @@ function renderSectorsInsideSectors(doc, ar, t, focus, onPick, onCompany) {
       h('span', { className: 'ft-range-badge', dir: 'ltr' },
         `${doc.linkCount} ${t('stakes', 'حصة')}`)
     ),
-    h('p', { className: 'ft-lede' }, t('When a company moves, its owner can move with it. This is a map of who owns whom among listed companies, as filed.',
-      'حين تتحرك شركة قد تتحرك معها مالكتها. هذه خريطة من يملك من بين الشركات المقيدة، كما أُفصح عنها.')),
+    h('p', { className: 'ft-lede' }, t(
+      'Reveals which listed companies own shares in other listed firms, showing how gains in one company can flow back to its owners.',
+      'تكشف لك هذه الخريطة أي الشركات تمتلك حصصاً في شركات أخرى بالبورصة، لتفهم كيف يؤثر صعود شركة ما على مالكيها المقيدين.'
+    )),
     h('p', { className: 'ft-note' }, t(
       `${doc.linkCount} ${plural(doc.linkCount, 'filed stake')} are one listed `
       + 'company\u2019s holding in another. '
@@ -2099,8 +2109,10 @@ export function flowTrackers(component, data, ar) {
     h('p', null, (lede ? lede + ' ' : '') + t('Published observations, not investment instructions.', 'بيانات منشورة، وليست توجيهات استثمارية.'))
   );
   const sectorQuestion = t('Where did the trading go this month?', 'أين ذهب التداول هذا الشهر؟');
-  const sectorLede = t('Each sector’s share of the market’s trading, month by month: who took a larger share and who gave one up, and what followed the other times.',
-    'نصيب كل قطاع من تداول السوق، شهراً بشهر: من أخذ نصيباً أكبر ومن تنازل عنه، وماذا تلا ذلك في المرات السابقة.');
+  const sectorLede = t(
+    'Track trading activity across market sectors: where investor money is moving this month, and whether your preferred sector is gaining momentum or cooling off.',
+    'تتبع حركة السيولة بين قطاعات البورصة: إلى أين تتجه أموال المتداولين هذا الشهر، وهل يكتسب قطاعك اهتماماً متزايداً أم يتراجع؟'
+  );
   const ownerQuestion = t('Who bought and who sold from inside the companies?', 'من اشترى ومن باع من داخل الشركات؟');
   const ownerLede = t('Directors and large holders must declare it when their stake changes. Here is what they declared, company by company, as a share of each company’s capital.',
     'أعضاء المجالس وكبار المساهمين يعلنون حين تتغير حصتهم. هنا ما أعلنوه، شركةً بشركة، كنسبة من رأس مال كل شركة.');
@@ -2222,7 +2234,10 @@ export function flowTrackers(component, data, ar) {
         h('div', { className: 'ft-section-heading' },
           h('div', null,
             h('h3', null, t('Which shares moved the sector?', 'أي الأسهم حرّكت القطاع؟'), ' ', h('small', { className: 'h-term' }, t('Stock Movements Relative to Size', 'حركة الأسهم بالنسبة لحجمها'))),
-            h('p', { className: 'ft-note' }, t('How much each stock went up or down and its weighted impact on the sector.', 'كيف تحرك كل سهم ومقدار أثره المرجّح في عائد القطاع.'))
+            h('p', { className: 'ft-note' }, t(
+              'Shows which stocks had the biggest impact on the sector’s rise or fall today, based on price move and company size.',
+              'يريك هذا الجدول الأسهم الأكثر تأثيراً في صعود القطاع أو هبوطه، بحسب نسبة تغير سعر السهم ووزنه الإجمالي.'
+            ))
           )
         ),
         h('div', { className: 'ft-stock-grid' },
@@ -2284,16 +2299,16 @@ export function flowTrackers(component, data, ar) {
         h('div', { className: 'ft-market-ribbon' },
           ribbonCard(t('Market Covered Turnover', 'إجمالي تداول السوق المغطى'),
             compact(totalTradedAcross) + ' EGP', null,
-            t('Every trade on the exchange, added up, in the sectors this site covers — price times shares for each company, then summed. It is turnover, not money entering the market: a share bought and sold again the same day counts twice.',
-              'كل ما جرى تداوله في البورصة مجموعاً، في القطاعات التي يغطيها الموقع — سعر السهم في عدد الأسهم لكل شركة ثم الحاصل مجموعاً. هي قيمة تداول لا أموال داخلة إلى السوق: السهم الذي يُشترى ويُباع في اليوم نفسه يُحتسب مرتين.'), t),
+            t('Total value of trades executed today across all covered market sectors, showing overall market activity. Every trade on the exchange, added up, in the sectors this site covers — price times shares for each company, then summed. It is turnover, not money entering the market: a share bought and sold again the same day counts twice.',
+              'إجمالي قيمة الصفقات المنفذة اليوم في قطاعات السوق المغطاة، لتعرف حجم النشاط الكلي وما إذا كانت السيولة قوية اليوم. الحساب: سعر السهم مضروباً في كمية التداول لكل شركة ثم الجمع. هي قيمة تداول لا أموال داخلة إلى السوق: السهم الذي يُشترى ويُباع في اليوم نفسه يُحتسب مرتين.'), t),
           ribbonCard(t('Advancing Capital Flow', 'سيولة رأس المال الصاعد'),
             compact(totalAdvancingVal) + ' EGP', 'var(--up)',
-            t('The part of that turnover done in companies whose price closed higher than the session before. It says where the trading was, not that anybody made money: the buyer and the seller are both in this number.',
-              'الجزء من قيمة التداول الذي جرى في شركات أغلقت أعلى من الجلسة السابقة. يبيّن أين جرى التداول، لا أن أحداً ربح: المشتري والبائع كلاهما داخل هذا الرقم.'), t),
+            t('Shows how much trading focused on advancing stocks today, revealing whether gains were backed by broad market activity. The part of that turnover done in companies whose price closed higher than the session before. It says where the trading was, not that anybody made money: the buyer and the seller are both in this number.',
+              'يوضح لك كم من أموال التداول تركزت في أسهم رابحة اليوم، لتعرف إن كان الصعود مدعوماً بنشاط حقيقي واسع. الجزء من قيمة التداول الذي جرى في شركات أغلقت أعلى من الجلسة السابقة. يبيّن أين جرى التداول، لا أن أحداً ربح: المشتري والبائع كلاهما داخل هذا الرقم.'), t),
           ribbonCard(t('Declining Capital Flow', 'سيولة رأس المال الهابط'),
             compact(totalDecliningVal) + ' EGP', 'var(--down)',
-            t('The same total for companies that closed lower. Advancing and declining do not add to the covered turnover: anything that closed unchanged, or had no previous close to compare with, is in neither.',
-              'المجموع نفسه للشركات التي أغلقت أدنى. الصاعد والهابط لا يساويان مجموع التداول المغطى: ما أغلق دون تغيّر، أو ما لا إغلاق سابق له للمقارنة، ليس في أيٍّ منهما.'), t)
+            t('Shows how much trading focused on declining stocks today, revealing whether selling pressure was broad or isolated. The same total for companies that closed lower. Advancing and declining do not add to the covered turnover: anything that closed unchanged, or had no previous close to compare with, is in neither.',
+              'يوضح لك كم من أموال التداول تركزت في أسهم خاسرة اليوم، لتعرف إن كان التراجع واسعاً أم محصوراً في أسهم قليلة. المجموع نفسه للشركات التي أغلقت أدنى. الصاعد والهابط لا يساويان مجموع التداول المغطى: ما أغلق دون تغيّر، أو ما لا إغلاق سابق له للمقارنة، ليس في أيٍّ منهما.'), t)
         ),
         renderTradingShare(data.sectorRotation, selected, ar, t,
           (id) => component.setState({ flowShareSector: id }),
