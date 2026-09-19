@@ -959,6 +959,10 @@
     "meaning": "The Agricultural Export Council coordinates export logistics, phytosanitary compliance, and packaging capacities to align citrus supply chain volumes with a 3-million-ton export target.",
     "meaning_ar": "ينسق المجلس التصديري للحاصلات الزراعية العمليات اللوجستية، وتدابير الصحة النباتية، وقدرات الفرز والتعبئة لمواءمة سلاسل إمداد الموالح مع مستهدف تصديري يبلغ 3 ملايين طن."
   },
+  "«الربوه» تستهدف مضاعفه انتاج زيت الزيتون الي 500 طن خلال 3 سنوات": {
+    "meaning": "The company expands its operational processing capacity and agricultural output over a multi-year horizon to raise physical olive oil supply to 500 tonnes.",
+    "meaning_ar": "تقوم الشركة بزيادة طاقتها التشغيلية والإنتاجية الزراعية على مدى زمني متعدد السنوات لرفع المعروض الفعلي من زيت الزيتون إلى 500 طن."
+  },
   "«الرقابه الماليه» تشكل لجنه لاعداد نموذج موحد للنظام الاساسي لمجمعات التامين": {
     "meaning": "The Financial Regulatory Authority establishes a standardized operational and governance framework for insurance pools across the sector. This aligns administrative guidelines, risk-sharing structures, and compliance standards across participating underwriters.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً تشغيلياً وحوكمياً موحداً لمجمعات التأمين في القطاع، مما يوحد القواعد الإدارية، وهياكل توزيع المخاطر، ومعايير الامتثال بين الشركات المشاركة."
@@ -5151,6 +5155,10 @@
   "تيلدا تتيح ربط بطاقتها بتطبيق انستاباي بالتعاون مع بنك القاهره": {
     "meaning": "This integration connects Telda prepaid cards directly to the Central Bank of Egypt's Instant Payment Network (IPN) through Banque du Caire as the sponsoring settlement bank, enabling real-time fund transfers between Telda accounts and the domestic banking network.",
     "meaning_ar": "يربط هذا التكامل بطاقات تيلدا مسبقة الدفع مباشرة بشبكة المدفوعات اللحظية (IPN) التابعة للبنك المركزي المصري عبر بنك القاهرة كبنك راعٍ للتسوية، مما يتيح التحويلات المالية الفورية بين حسابات تيلدا والشبكة المصرفية المحلية."
+  },
+  "ثاندر تتصدر شركات الوساطه في البورصه المصريه ب24.7 مليار جنيه خلال اسبوع": {
+    "meaning": "This reflects the brokerage firm capturing the largest weekly market share by executing 24.7 billion Egyptian pounds in buy and sell turnover on the Egyptian Exchange. Brokerage firms generate transaction fee revenues directly proportional to the total value of trades processed across their order-routing infrastructure.",
+    "meaning_ar": "يعكس ذلك استحواذ شركة السمسرة على الحصة السوقية الأكبر أسبوعياً عبر تنفيذ تداولات بيع وشراء بقيمة 24.7 مليار جنيه في البورصة المصرية؛ حيث تعتمد إيرادات شركات الوساطة على تحصيل عمولات تتناسب طردياً مع إجمالي قيم العمليات المنفذة عبر منصاتها."
   },
   "ثاندر تحدد القيمه العادله لسهم سيرا للتعليم عند 73 جنيها بزياده 90% عن سعره الحالي": {
     "meaning": "Brokerage research desks publish independent equity valuation reports derived from discounted cash flows and operational metrics, establishing a comparative theoretical reference against prevailing exchange trading prices.",
