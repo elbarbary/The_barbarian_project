@@ -3920,6 +3920,54 @@
    "publishedAt": "2026-06-08T16:02:47",
    "sessionDate": null,
    "source": "https://www.egx.com.eg/downloads/Bulletins/339418_1.pdf"
+  },
+  "289505": {
+   "investorName": "محمد اشرف عمر عمر",
+   "investorNameEn": "Mohamed Ashraf Omar Omar",
+   "relationship": null,
+   "ticker": "OBRI",
+   "action": "sell",
+   "shares": 280000,
+   "price": 34.8817,
+   "ownershipBeforePercent": 20.175,
+   "ownershipAfterPercent": 19.475,
+   "nameScript": "ar",
+   "filingId": "289505",
+   "publishedAt": "2026-06-07T13:45:28",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339373_1.pdf"
+  },
+  "289439": {
+   "investorName": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي",
+   "investorNameEn": "Sundūq al-Ta'mīn al-Ijtimā'ī lil-'Āmilīn bil-Qiṭā' al-Ḥukūmī",
+   "relationship": null,
+   "ticker": "",
+   "action": "sell",
+   "shares": 10780718,
+   "price": 3.22,
+   "ownershipBeforePercent": 5.011,
+   "ownershipAfterPercent": 4.91,
+   "nameScript": "ar",
+   "filingId": "289439",
+   "publishedAt": "2026-06-07T10:22:17",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339319_1.pdf"
+  },
+  "289422": {
+   "investorName": "محمود محمد شعبان سليم",
+   "investorNameEn": "Mahmoud Mohamed Shaaban Selim",
+   "relationship": null,
+   "ticker": "ICMI",
+   "action": "sell",
+   "shares": 1800000,
+   "price": 10.311,
+   "ownershipBeforePercent": 9.129,
+   "ownershipAfterPercent": 6.008,
+   "nameScript": "ar",
+   "filingId": "289422",
+   "publishedAt": "2026-06-04T15:01:34",
+   "sessionDate": null,
+   "source": "https://www.egx.com.eg/downloads/Bulletins/339291_1.pdf"
   }
  },
  "refused": {
@@ -3932,6 +3980,9 @@
   "290814": "share count is not a positive integer: None",
   "290577": "action is neither buy nor sell: None",
   "290172": "action is neither buy nor sell: None",
-  "289903": "a purchase that lowers the stake (0.51031 -> 0.1132)"
+  "289903": "a purchase that lowers the stake (0.51031 -> 0.1132)",
+  "289528": "not a usable name: None",
+  "289449": "action is neither buy nor sell: None",
+  "289446": "action is neither buy nor sell: None"
  }
 }

@@ -1,11 +1,11 @@
 {
  "schemaVersion": 1,
- "generated": "2026-09-19T12:49:19+00:00",
+ "generated": "2026-09-19T13:24:26+00:00",
  "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ) and board & shareholder-structure forms (نموذج إفصاح عن مجلس الإدارة وهيكل المساهمين)",
  "basis": "Read from the scanned filings themselves, which are the only documents that name the party: a post-execution form states the stake one trade left behind, and a structure form states the register. The daily EGX summary gives the relationship and never the name.",
  "basisAr": "مقروءة من الإفصاحات الممسوحة نفسها، وهي المستندات الوحيدة التي تذكر الأسماء: نموذج ما بعد التنفيذ يذكر الحصة بعد الصفقة، ونموذج هيكل المساهمين يذكر السجل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
  "peopleCount": 1334,
- "tradeCount": 243,
+ "tradeCount": 246,
  "tickerCount": 237,
  "tradedTickerCount": 85,
  "firmCount": 444,
@@ -1089,6 +1089,85 @@
    ]
   },
   {
+   "id": "محمود محمد شعبان سليم",
+   "name": "محمود محمد شعبان سليم",
+   "nameEn": "Mahmoud Mohamed Shaaban Selim",
+   "script": "ar",
+   "kind": "person",
+   "aliases": null,
+   "tickers": [
+    "FCMD"
+   ],
+   "tradeCount": 4,
+   "boughtCount": 1,
+   "soldCount": 3,
+   "value": 30928300.0,
+   "singleCompanyMove": {
+    "ticker": "FCMD",
+    "from": 9.129,
+    "to": 2.557,
+    "change": -6.572
+   },
+   "trades": [
+    {
+     "filingId": "289422",
+     "date": "2026-06-04",
+     "ticker": "FCMD",
+     "company": null,
+     "companyAr": "فيوتشر كير للصناعات الطبية",
+     "action": "sell",
+     "shares": 1800000,
+     "price": 10.311,
+     "value": 18559800.0,
+     "stakeBefore": 9.129,
+     "stakeAfter": 6.008,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339291_1.pdf"
+    },
+    {
+     "filingId": "289854",
+     "date": "2026-06-15",
+     "ticker": "FCMD",
+     "company": null,
+     "companyAr": "فيوتشر كير للصناعات الطبية",
+     "action": "sell",
+     "shares": 2500000,
+     "price": 1.4046,
+     "value": 3511500.0,
+     "stakeBefore": 6.008,
+     "stakeAfter": 1.673,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339693_1.pdf"
+    },
+    {
+     "filingId": "290304",
+     "date": "2026-06-24",
+     "ticker": "FCMD",
+     "company": null,
+     "companyAr": "فيوتشر كير للصناعات الطبية",
+     "action": "buy",
+     "shares": 800000,
+     "price": 6.95,
+     "value": 5560000.0,
+     "stakeBefore": 1.73,
+     "stakeAfter": 3.12,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340116_1.pdf"
+    },
+    {
+     "filingId": "290533",
+     "date": "2026-06-29",
+     "ticker": "FCMD",
+     "company": null,
+     "companyAr": "فيوتشر كير للصناعات الطبية",
+     "action": "sell",
+     "shares": 525000,
+     "price": 6.28,
+     "value": 3297000.0,
+     "stakeBefore": 3.467,
+     "stakeAfter": 2.557,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/340370_1.pdf"
+    }
+   ]
+  },
+  {
    "id": "شركة دراية المالية مساهمة مقفلة",
    "name": "شركة دراية المالية مساهمة مقفلة",
    "nameEn": "Derayah Financial Company Closed Joint Stock",
@@ -2093,71 +2172,6 @@
      "stakeBefore": 10.29,
      "stakeAfter": 6.633,
      "source": "https://www.egx.com.eg/downloads/Bulletins/341135_1.pdf"
-    }
-   ]
-  },
-  {
-   "id": "محمود محمد شعبان سليم",
-   "name": "محمود محمد شعبان سليم",
-   "nameEn": "Mahmoud Mohamed Shaaban Selim",
-   "script": "ar",
-   "kind": "person",
-   "aliases": null,
-   "tickers": [
-    "FCMD"
-   ],
-   "tradeCount": 3,
-   "boughtCount": 1,
-   "soldCount": 2,
-   "value": 12368500.0,
-   "singleCompanyMove": {
-    "ticker": "FCMD",
-    "from": 6.008,
-    "to": 2.557,
-    "change": -3.451
-   },
-   "trades": [
-    {
-     "filingId": "289854",
-     "date": "2026-06-15",
-     "ticker": "FCMD",
-     "company": null,
-     "companyAr": "فيوتشر كير للصناعات الطبية",
-     "action": "sell",
-     "shares": 2500000,
-     "price": 1.4046,
-     "value": 3511500.0,
-     "stakeBefore": 6.008,
-     "stakeAfter": 1.673,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/339693_1.pdf"
-    },
-    {
-     "filingId": "290304",
-     "date": "2026-06-24",
-     "ticker": "FCMD",
-     "company": null,
-     "companyAr": "فيوتشر كير للصناعات الطبية",
-     "action": "buy",
-     "shares": 800000,
-     "price": 6.95,
-     "value": 5560000.0,
-     "stakeBefore": 1.73,
-     "stakeAfter": 3.12,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/340116_1.pdf"
-    },
-    {
-     "filingId": "290533",
-     "date": "2026-06-29",
-     "ticker": "FCMD",
-     "company": null,
-     "companyAr": "فيوتشر كير للصناعات الطبية",
-     "action": "sell",
-     "shares": 525000,
-     "price": 6.28,
-     "value": 3297000.0,
-     "stakeBefore": 3.467,
-     "stakeAfter": 2.557,
-     "source": "https://www.egx.com.eg/downloads/Bulletins/340370_1.pdf"
     }
    ]
   },
@@ -5560,12 +5574,26 @@
     "OBRI",
     "UEGC"
    ],
-   "tradeCount": 8,
+   "tradeCount": 9,
    "boughtCount": 5,
-   "soldCount": 3,
-   "value": 107957359.94,
+   "soldCount": 4,
+   "value": 117724235.94,
    "singleCompanyMove": null,
    "trades": [
+    {
+     "filingId": "289505",
+     "date": "2026-06-07",
+     "ticker": "OBRI",
+     "company": null,
+     "companyAr": "العبور للاستثمار العقارى",
+     "action": "sell",
+     "shares": 280000,
+     "price": 34.8817,
+     "value": 9766876.0,
+     "stakeBefore": 20.175,
+     "stakeAfter": 19.475,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339373_1.pdf"
+    },
     {
      "filingId": "290384",
      "date": "2026-06-24",
@@ -6870,6 +6898,44 @@
      "stakeBefore": null,
      "stakeAfter": 14.99,
      "source": "https://www.egx.com.eg/downloads/Bulletins/339721_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي",
+   "name": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي",
+   "nameEn": "Sundūq al-Ta'mīn al-Ijtimā'ī lil-'Āmilīn bil-Qiṭā' al-Ḥukūmī",
+   "script": "ar",
+   "kind": "firm",
+   "aliases": [
+    "صندوق التأمين الإجتماعي للعاملين بالقطاع الحكومى",
+    "صندوق التأمين الإجتماعي للعاملين بالقطاع الحكومي",
+    "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومى",
+    "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
+    "صندوق التامين الاجتماعى للعاملين بالقطاع الحكومى",
+    "صندوق التامين الاجتماعى للعاملين بالقطاع الحكومي",
+    "صندوق التامين الاجتماعي للعاملين بالقطاع الحكومي"
+   ],
+   "tickers": [],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 34713911.96,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "289439",
+     "date": "2026-06-07",
+     "ticker": "",
+     "company": null,
+     "companyAr": null,
+     "action": "sell",
+     "shares": 10780718,
+     "price": 3.22,
+     "value": 34713911.96,
+     "stakeBefore": 5.011,
+     "stakeAfter": 4.91,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/339319_1.pdf"
     }
    ]
   },
@@ -13276,29 +13342,6 @@
    "script": null,
    "kind": "firm",
    "aliases": null,
-   "tickers": [],
-   "tradeCount": 0,
-   "boughtCount": 0,
-   "soldCount": 0,
-   "value": null,
-   "singleCompanyMove": null,
-   "trades": []
-  },
-  {
-   "id": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
-   "name": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
-   "nameEn": null,
-   "script": null,
-   "kind": "firm",
-   "aliases": [
-    "صندوق التأمين الإجتماعي للعاملين بالقطاع الحكومى",
-    "صندوق التأمين الإجتماعي للعاملين بالقطاع الحكومي",
-    "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومى",
-    "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي",
-    "صندوق التامين الاجتماعى للعاملين بالقطاع الحكومى",
-    "صندوق التامين الاجتماعى للعاملين بالقطاع الحكومي",
-    "صندوق التامين الاجتماعي للعاملين بالقطاع الحكومي"
-   ],
    "tickers": [],
    "tradeCount": 0,
    "boughtCount": 0,
@@ -28167,7 +28210,7 @@
    "history": []
   },
   {
-   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
+   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي",
    "kind": "firm",
    "ticker": "SKPC",
    "percent": 20.75,
@@ -28437,7 +28480,7 @@
    "history": []
   },
   {
-   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
+   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي",
    "kind": "firm",
    "ticker": "EGCH",
    "percent": 19.27,
@@ -30453,9 +30496,13 @@
    "filingId": "291336",
    "source": "https://www.egx.com.eg/downloads/Bulletins/340863_1.pdf",
    "shares": 6804550,
-   "openedAt": "2026-06-15",
-   "openingPercent": 6.008,
+   "openedAt": "2026-06-04",
+   "openingPercent": 9.129,
    "history": [
+    {
+     "date": "2026-06-04",
+     "percent": 6.008
+    },
     {
      "date": "2026-06-15",
      "percent": 1.673
@@ -32230,7 +32277,7 @@
    "history": []
   },
   {
-   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
+   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي",
    "kind": "firm",
    "ticker": "EFIC",
    "percent": 9.357256,
@@ -32555,7 +32602,7 @@
    "history": []
   },
   {
-   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
+   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي",
    "kind": "firm",
    "ticker": "HRHO",
    "percent": 8.873,
@@ -32931,7 +32978,7 @@
    "history": []
   },
   {
-   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
+   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي",
    "kind": "firm",
    "ticker": "CIEB",
    "percent": 7.982,
@@ -33038,7 +33085,7 @@
    ]
   },
   {
-   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
+   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي",
    "kind": "firm",
    "ticker": "COMI",
    "percent": 7.8,
@@ -34418,7 +34465,7 @@
    "history": []
   },
   {
-   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
+   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي",
    "kind": "firm",
    "ticker": "TMGH",
    "percent": 6.13,
@@ -35542,7 +35589,7 @@
    ]
   },
   {
-   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
+   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي",
    "kind": "firm",
    "ticker": "AMOC",
    "percent": 5.156,
@@ -36362,7 +36409,7 @@
    "history": []
   },
   {
-   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
+   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي",
    "kind": "firm",
    "ticker": "BTFH",
    "percent": 4.89,
@@ -36948,9 +36995,13 @@
    "basis": "trade",
    "filingId": "292479",
    "source": "https://www.egx.com.eg/downloads/Bulletins/342099_1.pdf",
-   "openedAt": "2026-07-21",
-   "openingPercent": 15.015,
+   "openedAt": "2026-06-07",
+   "openingPercent": 20.175,
    "history": [
+    {
+     "date": "2026-06-07",
+     "percent": 19.475
+    },
     {
      "date": "2026-07-21",
      "percent": 14.465
@@ -38638,7 +38689,7 @@
    "history": []
   },
   {
-   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي (مساهم رئيسي)",
+   "holder": "صندوق التأمين الاجتماعي للعاملين بالقطاع الحكومي",
    "kind": "firm",
    "ticker": "EGAL",
    "percent": 2.5,
@@ -47990,14 +48041,36 @@
    ]
   },
   {
+   "start": "2026-05-31",
+   "end": "2026-06-04",
+   "label": "31 May – 4 Jun",
+   "labelAr": "31 مايو – 4 يونيو",
+   "sessions": 1,
+   "buys": 0,
+   "sells": 1,
+   "value": 18559800.0,
+   "moves": [
+    {
+     "holder": "محمود محمد شعبان سليم",
+     "kind": "person",
+     "ticker": "FCMD",
+     "from": 9.129,
+     "to": 6.008,
+     "trades": 1,
+     "value": 18559800.0,
+     "change": -3.121
+    }
+   ]
+  },
+  {
    "start": "2026-06-07",
    "end": "2026-06-10",
    "label": "7–10 Jun",
    "labelAr": "7–10 يونيو",
-   "sessions": 3,
+   "sessions": 4,
    "buys": 5,
-   "sells": 2,
-   "value": 1742527495.31,
+   "sells": 3,
+   "value": 1752294371.31,
    "moves": [
     {
      "holder": "اكوينوكس فارما هولدنج ليميتد",
@@ -48058,6 +48131,16 @@
      "trades": 1,
      "value": 5025000.0,
      "change": 0.75
+    },
+    {
+     "holder": "محمد اشرف عمر عمر",
+     "kind": "person",
+     "ticker": "OBRI",
+     "from": 20.175,
+     "to": 19.475,
+     "trades": 1,
+     "value": 9766876.0,
+     "change": -0.7
     },
     {
      "holder": "شركة دراية المالية مساهمة مقفلة",
