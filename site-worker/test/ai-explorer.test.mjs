@@ -941,26 +941,27 @@ test('a Home row for a model with nothing to rank explains why the workbench sho
   assert.match(text(screen(c)), /Flat, says nothing ranks nothing of its own to show/);
 });
 
-test('the workbench is reachable from More, and previewed on Home', async () => {
-  /* THIS REVERSES A RULE THAT WAS RIGHT WHEN IT WAS WRITTEN.
-     The workbench had no navigation entry, because it sat in a destination of
-     its own beside Home and "a row of one tab under the header is a selector
-     with nothing to select". True then. §4 rebuilt the destinations into five,
-     and More now holds eight screens — so an entry here is one of eight, not
-     a row of one, and the original objection no longer applies.
-     §4 also names it: "More: AI lab, calculators, valuation map, world
-     context, and detailed research", with "AI remains visible through a
-     compact homepage preview, not hidden exclusively in More". Both, then:
-     an entry under More AND the preview on Home. Without the entry it could
-     be opened from Home and from nowhere else. */
+test('the workbench is reachable from More, and is a screen rather than a preview', async () => {
+  /* THIS REVERSES A RULE TWICE, AND BOTH REVERSALS HAD REASONS.
+     The workbench first had no navigation entry, because it sat in a
+     destination of its own beside Home and "a row of one tab under the header
+     is a selector with nothing to select". §4 rebuilt the destinations into
+     five and More now holds eight screens, so an entry became one of eight
+     and the objection lapsed — §4 asked for the entry AND a compact preview
+     on Home.
+
+     On 19 September the owner rebuilt Home as one headline and its evidence,
+     and the preview went with everything else that was a preview of another
+     screen. The entry under More is what makes that safe: without it the lab
+     would be reachable from nowhere. */
   const logic = await read('public/esthmr/logic.js');
   assert.match(logic, /\['scenarios', ar\?'مختبر النماذج':'Model lab'/);
   assert.match(logic, /id: 'tools', label: ar \? 'المزيد' : 'More'/);
   assert.match(logic, /screens: \['tools', 'scenarios'/);
   assert.match(logic, /secondaryNav: secondaryNav\.length > 1 \? secondaryNav : \[\]/);
-  // And Home still previews it, so More is not the only way in.
   const template = await read('public/esthmr/template.html');
-  assert.ok(template.includes('{{ aiCards }}'), 'Home lost the lab preview');
+  const home = template.slice(template.indexOf('{{ isHome }}'), template.indexOf('{{ isToday }}'));
+  assert.ok(!home.includes('{{ aiCards }}'), 'the lab is a Home preview again');
 });
 
 test('the questions are gone: no screen, no route, no picker, no saved-question store', async () => {

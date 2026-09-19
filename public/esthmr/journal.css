@@ -1476,3 +1476,13 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
 #app .island-lede { margin: 6px 0 12px; font-size: 14px; line-height: 1.55; color: var(--t2); max-width: 70ch; }
 #app .ct-lede { margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink); }
 #app .ct-shelf-lede { margin: 4px 0 0; font-size: 14px; line-height: 1.55; color: var(--t2); max-width: 70ch; }
+
+/* The session in one sentence. Larger than the lead under it, because it is
+ * the thing a reader who stops after one line should have. Its own row in
+ * the intro's flex, so it never shares a line with the date. */
+#app .journal-intro .home-headline {
+  flex-basis: 100%; margin: 10px 0 0; max-width: 40ch;
+  font: 600 clamp(19px, 2vw, 26px)/1.45 var(--font-heading);
+  letter-spacing: -.015em; color: var(--ink); text-wrap: balance;
+}
+#app .journal-intro .home-headline + .journal-lead { margin-top: 8px; }

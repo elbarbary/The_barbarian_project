@@ -76,50 +76,28 @@ test('the copy does not promise, and the beta label is on the surface', () => {
   assert.match(cardsSrc, /not an index/);
 });
 
-test('the market leads the page, and the lab is a preview under it', async () => {
-  /* THE ORDER CHANGED TWICE. THIS IS THE THIRD AND CURRENT ONE.
+test('the market leads the page, and the lab is a screen of its own', async () => {
+  /* THE ORDER CHANGED FOUR TIMES. THIS IS THE FOURTH AND CURRENT ONE.
    *
-   * It began with the lab first. A review objected — a visitor met the
-   * machinery before the market — and the owner's call was market first.
-   * Turn 6 of the comp then put the lab back on top, and that shipped.
+   * Lab first; then market first after a review objected that a visitor met
+   * the machinery before the market; then lab first again from turn 6 of the
+   * comp; then market first again from the 18 September review, which argued
+   * the case and scored visual focus 1/10.
    *
-   * The 18 September design review reverses it again, and unlike the comp it
-   * argues the case: "Home starts with a large AI proposition, two actions, a
-   * research-maturity graphic, and three explanatory steps before the EGX
-   * cards. Visitors must understand the machinery before seeing the market."
-   * It is the later instruction, it scores visual focus 1/10 for exactly this,
-   * and its section 5 lays out the order below. Both the codex and the
-   * Antigravity reads of the live code named the same block as the single
-   * worst violation. So: market, participation, the reader's own list, what
-   * changed, then the lab as a preview.
-   *
-   * Phone and desktop now carry ONE order — the markup's — rather than the
-   * markup saying one thing and chart-viewer.css another. */
+   * On 19 September the owner settled it differently: Home is one headline
+   * and its evidence, and the lab is not on it at all. It has its own screen,
+   * reached from More, where it has room to show every model rather than a
+   * preview of one. Home leads with the market because the market is what
+   * the headline sentence is about.
+   */
   const template = await read('public/esthmr/template.html');
-  const home = template.indexOf('{{ isHome }}');
-  const at = (s2) => template.indexOf(s2, home);
-  assert.ok(at('journal-intro') < at('om-idx'), 'the session header is not first');
-  assert.ok(at('om-idx') < at('home-watch'), 'the market is not above the reader’s list');
-  assert.ok(at('home-watch') < at('{{ changedToday }}'), 'Following fell below what changed');
-  assert.ok(at('{{ changedToday }}') < at('{{ aiCards }}'),
-    'the lab is above what changed again');
-  assert.ok(at('{{ aiCards }}') < at('quick-paths'),
-    'the shortcuts climbed above the lab preview');
-
-  /* The phone's explicit orders are the same sequence. A block missing from
-     that list silently falls to the bottom of the phone, which is how the two
-     came apart the first time. */
-  const phone = await read('public/esthmr/chart-viewer.css');
-  const order = (sel) => Number((phone.match(new RegExp(`\\.journal-home>\\${sel}\\{order:(\\d+)`)) || [])[1]);
-  const css = await read('public/esthmr/ai.css');
-  const lab = Number((css.match(/\.journal-home > \.ai-cards \{ order: (\d+)/) || [])[1]);
-  const seq = [order('.journal-intro'), order('.om-idx'), order('.breadth-strip'),
-    order('.home-watch'), order('.ct-shelf'), lab, order('.insight-shelf'),
-    order('.ft-portals'), order('.quick-paths')];
-  assert.ok(seq.every(Number.isFinite), `a block has no phone order: ${seq.join(',')}`);
-  assert.deepEqual(seq, [...seq].sort((x, y) => x - y),
-    `the phone order disagrees with the markup: ${seq.join(',')}`);
-  assert.equal(new Set(seq).size, seq.length, `two blocks share a phone order: ${seq.join(',')}`);
+  const home = template.slice(template.indexOf('{{ isHome }}'), template.indexOf('{{ isToday }}'));
+  assert.ok(home.indexOf('home-headline') < home.indexOf('om-idx'), 'the sentence does not lead');
+  assert.ok(home.indexOf('om-idx') < home.indexOf('{{ changedToday }}'), 'the market does not lead the evidence');
+  assert.ok(!home.includes('{{ aiCards }}'), 'the lab is back on Home');
+  // And it is still reachable, with its own screen in the navigation.
+  const logic = await read('public/esthmr/logic.js');
+  assert.match(logic, /'scenarios'/, 'the lab has no screen to be reached at');
 });
 
 test('the homepage preview is one visual, and not the one that names a company', async () => {
@@ -150,14 +128,33 @@ test('the pending record is a sentence, not a score-shaped ratio', async () => {
     'the bare ratio is the headline figure again');
 });
 
-test('restoring Home did not cost it the sections it had', async () => {
-  // The rebuild that replaced this page deleted the mosaic, the movers, the
-  // busiest card and the ranking panel. They are the page the owner wants.
+test('the sections Home gave up are still reachable', async () => {
+  /* This test was written after a rebuild deleted the mosaic, the movers, the
+     busiest card and the ranking panel from Home and the owner rejected it as
+     a downgrade. Its point was never that those blocks must sit on Home — it
+     was that a rebuild must not make them disappear.
+     
+     On 19 September the owner asked for Home to be rebuilt from the beginning
+     and for these blocks to move to their own screens. So the assertion moves
+     with them: each one still exists, on a screen in the navigation. The rule
+     it enforces is unchanged — a rebuild may relocate, never silently drop. */
   const template = await read('public/esthmr/template.html');
   const home = template.slice(template.indexOf('{{ isHome }}'), template.indexOf('{{ isToday }}'));
-  for (const kept of ['quick-paths', 'om-idx', 'insight-shelf', 'market-mosaic',
-                      'island-board', 'ranking-panel', 'L.busiest', 'journal-pulse']) {
-    assert.ok(home.includes(kept), `Home lost ${kept}`);
+  const elsewhere = template.slice(template.indexOf('{{ isToday }}'));
+  const logic = await read('public/esthmr/logic.js');
+  for (const [part, where] of [
+    // Home's mosaic was a simpler preview of the heat screen's own treemap;
+    // the capability is what must survive, not the preview's class name.
+    ['{{ heatTiles }}', elsewhere], ['ranking-panel', elsewhere],
+    ['L.busiest', elsewhere], ['market-measures', elsewhere],
+  ]) {
+    assert.ok(where.includes(part), `${part} left Home and exists nowhere else`);
+    assert.ok(!home.includes(part), `${part} is still on Home`);
+  }
+  // The index cards are the one block that stayed, because the headline is about them.
+  assert.ok(home.includes('om-idx'), 'Home lost the index cards');
+  for (const screen of ['heat', 'market', 'investors', 'liquidity', 'ownership']) {
+    assert.match(logic, new RegExp(`'${screen}'`), `${screen} is not a screen any more`);
   }
 });
 
@@ -399,8 +396,10 @@ test('breadth is a bar beside the indices, not a ring in the board', async () =>
   assert.ok(home.includes('breadth-strip'), 'the breadth bar is missing from Home');
   assert.ok(home.indexOf('om-idx') < home.indexOf('breadth-strip'),
             'breadth is above the index levels');
-  assert.ok(home.indexOf('breadth-strip') < home.indexOf('quick-paths'),
-            'breadth fell below the shortcuts');
+  // Was "above quick-paths"; the shortcuts left Home with the explore shelf,
+  // and what follows breadth now is the evidence for the headline.
+  assert.ok(home.indexOf('breadth-strip') < home.indexOf('{{ changedToday }}'),
+            'breadth fell below what changed');
 
   /* Every binding the bar reads has to exist, or it draws an empty bar and
      says nothing — which is how the ring's numbers would have gone stale. */

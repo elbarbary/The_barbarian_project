@@ -139,10 +139,16 @@ test('every screen renders in both languages and both themes', () => {
 });
 
 test('index graphs remain visible in the visual home template', async () => {
+  /* They had to sit above the details drawer so they could not be collapsed
+     out of sight. The drawer went with the 19 September rebuild, so what is
+     asserted is that the graphs are on Home at all, and inside the market
+     head the headline sentence is about. */
   const { readFile } = await import('node:fs/promises');
   const template = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
-  assert.match(template, /\{\{ ix\.spark \}\}/);
-  assert.ok(template.indexOf('{{ ix.spark }}') < template.indexOf('value="{{ showHomeDetails }}"'));
+  const home = template.slice(template.indexOf('{{ isHome }}'), template.indexOf('{{ isToday }}'));
+  assert.match(home, /\{\{ ix\.spark \}\}/, 'the index graphs are gone from Home');
+  assert.ok(home.indexOf('market-head') < home.indexOf('{{ ix.spark }}'), 'the graphs escaped the market head');
+  assert.ok(!home.includes('showHomeDetails'), 'the details drawer is back on Home');
   assert.equal(screen({ ...LIVE, companies: [] }).breadthRing, 'none');
 });
 
@@ -2430,24 +2436,23 @@ test('§8 the threshold is named as ours, not as the exchange\'s', () => {
   assert.ok(!DIRECTIVE.test(v.busy[0].kicker));
 });
 
-test('the busiest rows sit above the movers on Home', async () => {
+test('the busiest rows sit above the movers on the market screen', async () => {
+  /* Both were in Home's details drawer, busiest first, because a big move on
+     ordinary volume is just a price. Home was rebuilt on 19 September and
+     both moved to the market screen — the order is the thing that mattered
+     and it travels with them. */
   const { readFile } = await import('node:fs/promises');
   const t = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
-  const detailStart = t.indexOf('value="{{ showHomeDetails }}"');
-  const busy = t.indexOf('{{ L.busiest }}', detailStart);
-  const movers = t.indexOf('{{ L.movers }}');
-  assert.ok(busy > 0 && movers > 0, 'a block is missing');
+  const market = t.slice(t.indexOf('{{ isMarket }}'));
+  const busy = market.indexOf('{{ L.busiest }}');
+  const movers = market.indexOf('{{ snapshotMovesLabel }}');
+  assert.ok(busy > 0 && movers > 0, 'a block is missing from the market screen');
   assert.ok(busy < movers, 'the movers come first — a big move on ordinary volume is just a price');
-  // Both belong to ONE column. Three children in a two-column grid pushes the
-  // movers into the rail and wraps the rail below it — which is exactly what
-  // happened the first time this block went in.
-  const grid = t.indexOf('grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr)');
-  assert.ok(grid > 0 && grid < busy, 'the Home grid moved');
-  assert.match(t.slice(grid, busy), /flex-direction:column/,
-    'the two sections are separate grid children');
+  // And neither came back to Home, which is the headline and its evidence.
+  const home = t.slice(t.indexOf('{{ isHome }}'), t.indexOf('{{ isToday }}'));
+  assert.ok(!home.includes('{{ L.busiest }}') && !home.includes('{{ snapshotMovesLabel }}'),
+    'the ranked rows are back on Home');
 });
-
-/* ── phones ────────────────────────────────────────────────────────────── */
 
 test('the layout has a phone case, and the rail stops eating the screen', async () => {
   const { readFile } = await import('node:fs/promises');

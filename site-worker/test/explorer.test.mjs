@@ -84,29 +84,52 @@ test('§8 the explorer offers Home no shortlist, only the way to the whole table
   assert.equal(typeof v.open,'function');
   assert.match(v.compareLabel,/Compare the market/);
 });
-test('§8 the Home ranking panel renders controls and a launcher, never a ranked row',async()=>{
+test('§8 Home shows no ranked row, and the ranked table lives on the market screen', async () => {
+  /* Home carried a LAUNCHER: the explorer's controls and a "show results"
+     button, deliberately WITHOUT the ranked table, because a ranked list of
+     companies on the front page is the publisher ranking securities.
+
+     Home was rebuilt on 19 September and the launcher went with it — the
+     navigation does that job now. The rule it existed to enforce is what
+     matters, so it is asserted directly instead of through the panel: nothing
+     on Home ranks companies, and the ranked table sits on the market screen
+     where a reader has asked for it. */
   const {readFile}=await import('node:fs/promises');
   const html=await readFile(new URL('../../public/esthmr/template.html',import.meta.url),'utf8');
-  const start=html.indexOf('<section class="ranking-panel">');
-  assert.ok(start>0,'the Home ranking panel is gone entirely — the test needs updating, not deleting');
-  const panel=html.slice(start,html.indexOf('</section>',start));
-  assert.ok(!panel.includes('explorer-table'),'a table of ranked companies is back on Home');
-  assert.ok(!panel.includes('columnheader">#'),'a rank column is back on Home');
-  assert.ok(!panel.includes('explorer.preview')&&!panel.includes('explorer.rows'),'Home is drawing ranked rows');
-  assert.ok(panel.includes('{{ explorer.resultsLabel }}'),'the explicit results action is missing');
-  assert.match(panel, /<button[^>]*class="results-button"[^>]*onClick="{{ explorer.open }}"/, 'results must be a working keyboard-accessible button');
-  assert.ok(panel.includes('{{ explorer.metrics }}'),'the measure controls should stay');
+  const home=html.slice(html.indexOf('{{ isHome }}'),html.indexOf('{{ isToday }}'));
+  assert.ok(!home.includes('explorer-table'),'a table of ranked companies is back on Home');
+  assert.ok(!home.includes('columnheader">#'),'a rank column is back on Home');
+  assert.ok(!home.includes('explorer.preview')&&!home.includes('explorer.rows'),'Home is drawing ranked rows');
+  const market=html.slice(html.indexOf('{{ isMarket }}'));
+  assert.ok(market.includes('explorer-table'),'the ranked table exists nowhere');
+  assert.ok(market.includes('{{ explorer.metrics }}'),'the measure controls are gone');
 });
 
-test('four market measures stay visible without expanding Home details',async()=>{
+test('the four measures are visible without expanding anything', async () => {
+  /* They sat on Home above the details drawer so they could not be collapsed
+     out of sight. They moved to the market screen on 19 September and the
+     rule travels with them: in the markup unconditionally, not behind a
+     toggle. */
   const {readFile}=await import('node:fs/promises');
   const html=await readFile(new URL('../../public/esthmr/template.html',import.meta.url),'utf8');
-  const measures=html.indexOf('class="market-measures"');
-  const details=html.indexOf('<sc-if value="{{ showHomeDetails }}">');
-  assert.ok(measures>0 && measures<details);
-  assert.ok(html.slice(measures,details).includes('list="{{ screen.tests }}"'));
-  const home=html.slice(0,details);
-  for(const field of ['p.buy','p.sell','p.buyW','p.sellW']) assert.ok(home.includes('{{ '+field+' }}'),field);
+  const market=html.slice(html.indexOf('{{ isMarket }}'));
+  const measures=market.indexOf('class="market-measures"');
+  assert.ok(measures>0,'the four measures exist nowhere');
+  assert.ok(market.includes('list="{{ screen.tests }}"'),'the measures draw no tests');
+  assert.ok(!market.includes('showHomeDetails'),'the measures are behind a toggle again');
+
+  /* This test also carried the investor party bars — `p.buy`, `p.sell` and
+     the two widths — because on Home they shared the same "visible without
+     expanding" rule. They were never part of the four measures. The bars went
+     to the investors screen with the rest of that block, where the split is
+     drawn per party and needs no toggle either. The widths are bound as
+     `p.width` there rather than buyW/sellW, so the assertion follows the
+     drawing rather than the old binding's name. */
+  const investors = html.slice(html.indexOf('{{ isInvestors }}'), html.indexOf('{{ isHeat }}'));
+  for (const field of ['investors.parties', 'p.buy', 'p.sell', 'p.width']) {
+    assert.ok(investors.includes('{{ ' + field + ' }}'), `the investors screen lost ${field}`);
+  }
+  assert.ok(!investors.includes('showHomeDetails'), 'the party split is behind a toggle');
 });
 
 test('price trends view displays 52W highs, distance, momentum, and filters', () => {

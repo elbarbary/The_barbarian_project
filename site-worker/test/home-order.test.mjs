@@ -30,16 +30,27 @@ const at = (s) => {
 };
 
 test('the page runs in the order the review sets out', () => {
+  /* Set a fourth time, 19 September 2026, on the owner's instruction to
+     rebuild Home from the beginning: "one headline, then the evidence".
+     The page states the session in one sentence and everything under it is
+     that sentence's evidence, in the order the sentence names it — the index
+     that moved, the split of what rose and fell, the things that were filed,
+     and then the reader's own companies.
+
+     What changed from the 18 September order: `changedToday` now comes ABOVE
+     Following. The sentence names the market before it names the reader, and
+     the evidence has to follow the sentence or the order argues with it. */
   const rows = [
     ['journal-intro', 'session and date'],
+    ['home-headline', 'the session in one sentence'],
     ['om-idx', 'the index charts'],
     ['breadth-strip', 'the participation strip'],
+    /* Following stays directly under the market head. It was buried half way
+       down the page once and the owner's fix was to lift it here, not to
+       remove it; "one headline then the evidence" does not overrule that. A
+       reader who follows four companies opens Home to see those four. */
     ['home-watch', 'what the reader follows'],
     ['{{ changedToday }}', 'what changed'],
-    ['{{ aiCards }}', 'the lab preview'],
-    ['insight-shelf', 'who traded it'],
-    ['{{ flowViews.home }}', 'sector and ownership'],
-    ['explore-further', 'everything optional'],
   ];
   const seen = rows.map(([mark]) => at(mark));
   const sorted = [...seen].sort((a, b) => a - b);
@@ -47,16 +58,39 @@ test('the page runs in the order the review sets out', () => {
     `out of order: ${rows.map(([, name], i) => `${name}@${seen[i]}`).join(' ')}`);
 });
 
-test('the optional tools are one shelf, not four competing sections', () => {
-  const open = at('explore-further');
-  const close = template.indexOf('island-details-toggle', home);
-  const inside = template.slice(open, close);
-  for (const part of ['quick-paths', 'market-measures', 'ranking-panel', 'island-board']) {
-    assert.ok(inside.includes(part), `${part} is outside the explore shelf`);
+test('Home is the four evidence blocks and nothing else', () => {
+  /* Home carried thirteen blocks, nine of them previews of screens that
+     already existed in the nav, each with its own heading as though it were
+     the point of the page. A reader could not tell which block answered
+     their question. These are absent from Home by intent; every one is
+     reachable from the nav, and the four measures — which had no screen of
+     their own — moved to Stocks. If one comes back, this fails. */
+  const end = template.indexOf('{{ isToday }}');
+  const homeRegion = template.slice(home, end);
+  for (const gone of ['{{ aiCards }}', 'insight-shelf', '{{ flowViews.home }}',
+    'explore-further', 'quick-paths', 'market-measures', 'ranking-panel',
+    'island-board', 'journal-pulse', 'showHomeDetails']) {
+    assert.ok(!homeRegion.includes(gone), `${gone} is back on Home`);
   }
-  // And it says what it is, in both languages.
-  assert.match(LOGIC, /exploreTitle:'Explore further'/);
-  assert.match(LOGIC, /exploreTitle:'استكشف أكثر'/);
+});
+
+test('what left Home arrived somewhere a reader can reach', () => {
+  /* Moving a block out of Home is only honest if it still exists. The four
+     measures had no screen of their own, so they moved to Stocks; the rest
+     were previews of screens the nav already carries. */
+  const end = template.indexOf('{{ isToday }}');
+  const market = template.slice(template.indexOf('{{ isMarket }}'));
+  assert.ok(market.includes('market-measures'), 'the four measures left Home and landed nowhere');
+  assert.ok(market.includes('{{ L.screenTitle }}'), 'the measures lost their heading in the move');
+  // The screens that already existed, still in the navigation.
+  for (const screen of ['heat', 'ownership', 'liquidity', 'investors', 'crossings', 'scenarios']) {
+    assert.match(LOGIC, new RegExp(`'${screen}'`), `${screen} is not a screen any more`);
+  }
+  /* A sprawl guard, not a style rule. Home was ~34,000 characters over
+     thirteen blocks; it is ~11,700 over four. The bound has headroom for the
+     blocks that are there to grow, and fires if a fifth and sixth arrive. */
+  assert.ok(template.slice(home, end).length < 16000,
+    `Home is ${template.slice(home, end).length} characters; it is meant to be one headline and its evidence`);
 });
 
 test('a share that did not trade is not a share that did not move', () => {

@@ -19,9 +19,23 @@ test('mobile navigation reserves the phone safe area and keeps five named destin
 });
 
 test('mobile comparisons retain identity, the four measures, and the full-results action', () => {
-  assert.match(template, /class="mosaic-company"[^>]*>{{ m.name }}/);
+  /* All three lived on Home and moved on 19 September: the mosaic to the heat
+     screen, whose treemap is the fuller version of it, and the measures and
+     the explorer's results action to the market screen. What matters is that
+     a phone reader still gets a company's identity on a tile, the measures
+     without expanding anything, and a way to the full results. */
+  const heat = template.slice(template.indexOf('{{ isHeat }}'));
+  assert.match(heat, /\{\{ h\.name \}\}|\{\{ m\.name \}\}/, 'the heat tiles carry no company identity');
+  const market = template.indexOf('{{ isMarket }}');
   const summary = template.indexOf('class="market-measure-grid"');
-  assert.ok(summary > 0 && summary < template.indexOf('<sc-if value="{{ showHomeDetails }}">'));
-  assert.match(template, /class="results-button" onClick="{{ explorer.open }}"/);
+  assert.ok(summary > market, 'the four measures are not on the market screen');
+  assert.ok(!template.slice(market).includes('showHomeDetails'), 'the measures are behind a toggle');
+  /* "Full results" was a button on Home's launcher, which showed controls and
+     no rows: the action existed because the results were somewhere else. On
+     the market screen the reader IS at the results, so what has to be true is
+     that the rows are actually rendered rather than previewed. */
+  assert.ok(template.slice(market).includes('explorer-table'), 'the market screen shows no results table');
+  assert.ok(template.slice(market).includes('{{ explorer.metrics }}'), 'the measure controls are gone');
   assert.match(css, /\.market-measure-grid \{ grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
 });
+

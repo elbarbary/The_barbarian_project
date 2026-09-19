@@ -25,17 +25,29 @@ html[dir=rtl] .chart-viewer-content{direction:rtl}
     Anything this list does not name lands at 9, which is why a NEW block has
     to be named here or it silently falls to the bottom of the phone. */
  .journal-home>*{order:9}
+ /* Home's phone order, rewritten 19 September 2026 with the rebuild.
+  *
+  * These named .om-idx and .breadth-strip, which are no longer children of
+  * .journal-home — they sit inside .market-head. Both selectors had quietly
+  * stopped matching, so the index cards fell to the catch-all order:9 and a
+  * phone reader met the page in the order: headline, what changed, the
+  * companies they follow, and the market LAST. The desktop markup said one
+  * thing and this file said another, which is the exact fault the order was
+  * unified to prevent.
+  *
+  * One order, the markup's: the sentence, the market it is about, the
+  * evidence, then the reader's own companies. The blocks that left Home
+  * (insight shelf, flow portals, quick paths) have no rules here any more. */
  .journal-home>.journal-intro{order:0}
+ /* .market-head is `display: contents` under 900px (home.css), so it has no
+  * box on a phone and its children ARE the flex items — which is why these
+  * name .om-idx and .breadth-strip rather than their wrapper. Giving the
+  * wrapper an order does nothing; it was measured at height 0 while the
+  * index cards sat wherever the catch-all put them. */
  .journal-home>.om-idx{order:1}
  .journal-home>.breadth-strip{order:2}
  .journal-home>.home-watch{order:3}
  .journal-home>.ct-shelf{order:4}
- .journal-home>.insight-shelf{order:6}
- .journal-home>.ft-portals{order:7}
- .journal-home>.quick-paths{order:8;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
- .journal-home>.quick-paths button{min-height:64px;flex-direction:row;padding:12px;border-radius:var(--radius-control);text-align:start}
- .journal-home>.quick-paths strong{font-size:13px;line-height:1.5}
- .journal-home>.quick-paths svg{flex:none;width:22px;height:22px}
  .chart-viewer{gap:8px!important;padding-inline:10px}
  .chart-viewer header strong{font-size:14px}
  .chart-viewer-stage{border-radius:var(--radius-control)}

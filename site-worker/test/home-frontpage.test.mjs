@@ -103,7 +103,11 @@ function doc(items, extra = {}) {
 }
 
 /** The template between the board's opening tag and the details toggle. */
-const BOARD = tpl.slice(tpl.indexOf('<div class="island-board">'), tpl.indexOf('class="island-details-toggle"'));
+/* The crossings board sat inside Home's island-board, between it and the
+   details toggle. Home was rebuilt on 19 September and the board moved to the
+   crossings screen, which is its subject; the slice follows it there. */
+const BOARD = tpl.slice(tpl.indexOf('<section class="island island-crossings">'),
+  tpl.indexOf('</section>', tpl.indexOf('<section class="island island-crossings">')) + 10);
 /** The island itself. */
 const ISLAND = tpl.slice(tpl.indexOf('<section class="island island-crossings">'),
   tpl.indexOf('</section>', tpl.indexOf('<section class="island island-crossings">')));
@@ -119,7 +123,10 @@ const clock = (iso, lang = 'en') => new Intl.DateTimeFormat(lang === 'ar' ? 'ar-
 const rowsOf = (v) => v.fpTiers.flatMap((t) => t.rows);
 
 /* ── J1 ─────────────────────────────────────────────────────────────────── */
-test('J1 the island-board carries the crossings, not two picked stories', () => {
+test('J1 the crossings board carries the crossings, not two picked stories', () => {
+  /* The board moved from Home to the crossings screen on 19 September: it is
+     that screen's own subject, and on Home it was a preview of it. What the
+     board must contain is unchanged. */
   assert.ok(BOARD.length > 500, 'the island-board slice is empty — the scan is broken');
   assert.ok(FP.length > 500, 'the fp block was not found in logic.js');
   assert.doesNotMatch(BOARD, /snapshotStories/, 'the board still binds the two picked stories');
@@ -558,22 +565,25 @@ test('J18 a title nobody vetted is not shown either — only the builder\'s true
   }
 });
 
-test('the day comes before the standing boards on Home', async () => {
-  // Home reads top to bottom as a day: what moved, who traded it, what traded
-  // unusually. The sector-liquidity and ownership blocks are standing boards —
-  // they answer a question a reader arrives with, not one the session raised —
-  // and they sat above all three, so the first thing on the page after the
-  // indices was a board that had not changed since yesterday.
+test('Home carries no standing board at all', async () => {
+  /* Home read top to bottom as a day — what moved, who traded it, what traded
+     unusually — and the sector-liquidity and ownership boards sat above all
+     three, so the first thing after the indices was a board that had not
+     changed since yesterday. The fix then was to order them below the day.
+
+     On 19 September the boards left Home for their own screens, so the rule
+     holds by construction: there is no standing board on Home to sit above
+     anything. Each is asserted to exist where it now lives, and the day
+     itself still reads in order. */
   const page = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
-  const shelf = page.indexOf('class="insight-shelf"');
-  const boards = page.indexOf('{{ flowViews.home }}');
-  assert.ok(shelf > 0, 'the insight shelf is gone from Home');
-  assert.ok(boards > 0, 'the flow-tracker blocks are gone from Home');
-  assert.ok(boards > shelf,
-            'the standing boards are back above the session the page is about');
-  // And all three of the day's cards are inside that shelf, above them.
-  const inShelf = page.slice(shelf, boards);
-  for (const key of ['{{ insightHeading }}', '{{ L.investorsWho }}', '{{ L.busiest }}']) {
-    assert.ok(inShelf.includes(key), `${key} is no longer above the standing boards`);
+  const home = page.slice(page.indexOf('{{ isHome }}'), page.indexOf('{{ isToday }}'));
+  for (const board of ['class="insight-shelf"', '{{ flowViews.home }}']) {
+    assert.ok(!home.includes(board), `${board} is a standing board and is back on Home`);
   }
+  const logic = await readFile(new URL('../../public/esthmr/logic.js', import.meta.url), 'utf8');
+  for (const screen of ['liquidity', 'ownership', 'investors']) {
+    assert.match(logic, new RegExp(`'${screen}'`), `${screen} is not a screen any more`);
+  }
+  assert.ok(home.indexOf('om-idx') < home.indexOf('home-watch'), 'the market no longer leads the day');
+  assert.ok(home.indexOf('home-watch') < home.indexOf('{{ changedToday }}'), 'what changed moved above Following');
 });

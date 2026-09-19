@@ -42,6 +42,30 @@ const compact = (v) => (finite(v)
   ? new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(v)
   : '—');
 
+/* Whether the session settled, in one word.
+ *
+ * These datelines said "close" unconditionally. Mid-session the volume in a
+ * card is a PART of a day divided by twenty whole ones, so the multiple can
+ * only climb until the bell: 3.2x at eleven o'clock and 3.2x at the close are
+ * different readings, and calling the first one a close is the same class of
+ * error as a demo banner over live data. The session state is already on the
+ * data this module is handed; it was simply not read. */
+/* A dateline from the parts that exist.
+ *
+ * `market.json` is not always there, and a multiple stamped with the wrong
+ * day — or with the word `undefined` where the day should be — is worse than
+ * one carrying no date at all. Joining a fixed template printed exactly that.
+ * Drop what is missing and join what is left. */
+function stamp(parts) {
+  return parts.filter((x) => x !== null && x !== undefined && String(x).trim() !== ''
+    && !/undefined|NaN|Invalid/.test(String(x))).join(' · ');
+}
+
+function sessionWord(data, ar) {
+  const settled = data.isClose && !data.livePrices;
+  return settled ? (ar ? 'إغلاق' : 'close') : (ar ? 'الجلسة حتى الآن' : 'session so far');
+}
+
 /** The card frame every one of the three shares. */
 function card({ dateline, primitive, title, lede, visual, limit, chip, more, key }) {
   if (!visual) return null;
@@ -102,8 +126,8 @@ function volumeCard(data, ar, t, open, day) {
   const name = named(lead);
   return card({
     key: 'volume',
-    dateline: t(`${day(data.marketDate)} · close · ${top.length} companies`,
-      `${day(data.marketDate)} · إغلاق · ${top.length} شركات`),
+    dateline: t(stamp([day(data.marketDate), sessionWord(data, false), `${top.length} companies`]),
+      stamp([day(data.marketDate), sessionWord(data, true), `${top.length} شركات`])),
     primitive: t('PAIRED BARS', 'أعمدة مزدوجة'),
     lede: t('Something drew attention to this share today; the filings and the news say what, the volume alone does not.',
       'شيء جذب الانتباه إلى هذا السهم اليوم؛ الإفصاحات والأخبار تقول ماذا، لا الحجم وحده.'),
@@ -155,8 +179,8 @@ function indexCard(data, ar, t, open, day) {
   if (below === priorBelow) return null;
   return card({
     key: 'index',
-    dateline: t(`${day(data.marketDate)} · close · ${points.length} sessions`,
-      `${day(data.marketDate)} · إغلاق · ${points.length} جلسة`),
+    dateline: t(stamp([day(data.marketDate), sessionWord(data, false), `${points.length} sessions`]),
+      stamp([day(data.marketDate), sessionWord(data, true), `${points.length} جلسة`])),
     primitive: t('LINE', 'خط'),
     lede: below
       ? t('The index sits below its recent average: the last weeks were weaker than their own average. Where it is, not where it goes.',
@@ -226,8 +250,8 @@ function ownershipCard(data, ar, t, open, day) {
   const newest = picked[0];
   return card({
     key: 'ownership',
-    dateline: t(`${day(newest.asOf)} · ownership filings · ${picked.length} companies`,
-      `${day(newest.asOf)} · إفصاحات ملكية · ${picked.length} شركات`),
+    dateline: t(stamp([day(newest.asOf), 'ownership filings', `${picked.length} companies`]),
+      stamp([day(newest.asOf), 'إفصاحات ملكية', `${picked.length} شركات`])),
     primitive: t('SHARE BAR', 'شريط نصيب'),
     lede: t('Whoever holds a large stake has filed it; the bar shows what is disclosed and what remains unknown.',
       'من يملك حصة كبيرة أفصح عنها؛ الشريط يريك المُعلن وما بقي مجهولاً.'),

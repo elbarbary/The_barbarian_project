@@ -469,11 +469,9 @@ body[data-signed="no"] .om-main { padding-top: 62px !important; }
      separate lines. */
   [style*="grid-template-columns:repeat(3,minmax(0,1fr))"],
   [style*="grid-template-columns:repeat(4,minmax(0,1fr))"],
-  [style*="grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr)"],
   [style*="grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)"],
   [style*="grid-template-columns:minmax(0,1fr) minmax(0,1fr)"],
   [style*="grid-template-columns:minmax(0,1fr) minmax(210px,288px)"],
-  [style*="grid-template-columns:minmax(0,1fr) minmax(140px,208px)"],
   [style*="grid-template-columns:minmax(150px,240px) minmax(80px,130px) minmax(0,1fr)"],
   [style*="grid-template-columns:minmax(116px,176px)"],
   [style*="grid-template-columns:minmax(0,1.2fr) minmax(320px,1fr)"],
@@ -487,13 +485,11 @@ body[data-signed="no"] .om-main { padding-top: 62px !important; }
   .om-scr [style*="padding:28px 28px 22px"],
   .om-scr [style*="padding:24px 28px"] { padding: 18px 16px !important; }
 
-  /* The news picture sits above its headline rather than beside it, and stops
-     being a 4:3 slab of a small screen. */
-  [style*="grid-template-columns:minmax(0,1fr) minmax(140px,208px)"] > div:last-child,
-  [style*="grid-template-columns:minmax(0,1fr) minmax(140px,208px)"] > a:last-child {
-    aspect-ratio: 16/9 !important;
-    order: -1;
-  }
+  /* A rule for a news layout whose grid no longer exists in the template —
+     `minmax(0,1fr) minmax(140px,208px)` matched nothing before this rebuild
+     and nothing after it. These selectors match verbatim, so a dead one is
+     indistinguishable from one broken by a reformatted declaration; the
+     phone-collapse list is checked against the template by test now. */
 
   /* Seven columns of market data will not fit a phone at any type size. The
      card scrolls; the page does not. */
@@ -562,25 +558,13 @@ body[data-signed="no"] .om-main { padding-top: 62px !important; }
   .om-heat { aspect-ratio: 3 / 4 !important; }
 }
 
-/* HOME'S TWO COLUMNS END TOGETHER.
-   The left column holds the busiest shares and the largest moves; the right
-   holds what to read now and the largest by market value. They were laid out
-   `align-items:start`, so each ran to its own natural length and the shorter
-   one stopped ~360px early, leaving a ragged step across the bottom of the
-   page. Most of that gap is now closed by content — the busiest list is eight
-   rows rather than nine, the market-value list twelve rather than five — and
-   the stretch below takes up whatever a day's data leaves over, so the two
-   always finish level.
-   Desktop only. Under 861px shell.css collapses this grid to one column, and
-   there is nothing left to line up. */
-@media (min-width: 861px) {
-  #app .home-cols { align-items: stretch !important; }
-  #app .home-col { min-height: 100%; }
-  /* The last card in each column absorbs the slack. The taller column sets
-     the height, so its own last card grows by nothing. */
-  #app .home-col > section:last-child,
-  #app .home-col > sc-if:last-child > section { flex: 1 1 auto; }
-}
+/* Home had two columns, and they ended at different heights until the last
+ * card in each was told to absorb the slack. Home was rebuilt on 19 September
+ * as a single column — one headline and its evidence — so the grid, and the
+ * rules that squared it up, have nothing to act on. Removed rather than left
+ * dead: a selector that matches nothing is indistinguishable from one that is
+ * quietly broken. */
+
 
 /* ── INSTAGRAM / TIKTOK STORY MODAL ─────────────────── */
 .story-modal {

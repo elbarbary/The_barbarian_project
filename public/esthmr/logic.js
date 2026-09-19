@@ -4684,6 +4684,48 @@ export class Component extends Base {
       findCompany: ar ? 'ابحث عن شركة' : 'Find a company',
       journalLabel: ar ? 'البورصة المصرية، من المصدر' : 'The Egyptian Exchange, from the source',
       overviewTitle: ar ? 'السوق في لمحة' : 'Market at a glance',
+      /* THE HEADLINE.
+       *
+       * The whole session in one sentence, so a reader who gives this page
+       * five seconds leaves knowing what happened. Everything below it is the
+       * evidence for this sentence, in the order the sentence names it.
+       *
+       * Every figure is read from a published document: the index move from
+       * indices.json, the counts from the session's own stocks. No clause is
+       * written unless its figure is there — a missing index drops its
+       * clause rather than guessing at one, and a session with no breadth
+       * reading says only what it knows. It states what happened and stops;
+       * it never says what it means for a price, which is §8's line and also
+       * the honest limit of two numbers. */
+      homeHeadline: (() => {
+        const lead = (indices || [])[0];
+        const parts = [];
+        /* The index object carries a FORMATTED percentage and an `up` flag —
+           there is no raw number on it, in either the live or the demo
+           branch. Read what is there: strip the sign the formatter added and
+           let `up` choose the verb. A dash means the document had no figure,
+           and then the clause is not written at all. */
+        const pct = lead && typeof lead.pct === 'string' ? lead.pct : '';
+        const mag = pct && pct !== '—' ? pct.replace(/^[+\u2212-]/, '') : '';
+        if (lead && mag) {
+          const name = (ar ? (lead.labelAr || lead.label) : lead.label) || '';
+          parts.push(lead.up
+            ? (ar ? `صعد ${name} ${mag}` : `${name} rose ${mag}`)
+            : (ar ? `تراجع ${name} ${mag}` : `${name} fell ${mag}`));
+        }
+        if (breadth && breadth.counted) {
+          const total = this.num(breadth.counted, 0);
+          const up = this.num(breadth.up, 0);
+          const down = this.num(breadth.down, 0);
+          parts.push(ar
+            ? `ومن ${total} سهماً تداول، صعد ${up} وتراجع ${down}`
+            : `of ${total} shares that traded, ${up} rose and ${down} fell`);
+        }
+        if (!parts.length) return '';
+        return parts.join(ar ? '، ' : ', ') + '.';
+      })(),
+      hasHomeHeadline: Boolean(((indices || [])[0] && typeof (indices || [])[0].pct === 'string'
+        && (indices || [])[0].pct !== '\u2014') || (breadth && breadth.counted)),
       welcomeLabel: ar ? 'مساحتك لفهم البورصة' : 'Your space to understand the market',
       mosaicTitle: ar ? 'السوق بالألوان' : 'The market in colour',
       mosaicQuestion: ar ? 'أي الشركات صعدت وأيها هبطت، بحجمها؟' : 'Which companies rose and which fell, sized by value?',
@@ -5210,12 +5252,12 @@ export class Component extends Base {
       // Empty when the date is unknown rather than filled with today's — the
       // exchange's last published session is often not the current day, and a
       // multiple stamped with the wrong day is worse than one with none.
-      busyWhen: (() => {
-        const day = this.longDate(D.marketDate);
-        if (!busy.length || !day) return '';
-        return (D.isClose && !D.livePrices ? L.busyOn : L.busyOnLive)
-          .replace('{date}', day);
-      })(),
+      /* `busyWhen` stood here: the session date for Home's busiest card,
+         choosing between "Close of {date}" and "{date} session, so far". The
+         card left Home with the insight shelf on 19 September and this was
+         computed on every redraw and bound nowhere. The distinction it made
+         was the valuable part, and it moved to changed-today.js's
+         `sessionWord`, which the evidence cards' datelines now use. */
       // Said out loud, because a list that is a slice and does not say so is a
       // list that claims to be all of them.
       busyCut: busyAll.length > busy.length
@@ -5335,7 +5377,10 @@ export class Component extends Base {
       // replaced is a different product, not a rearrangement of the old one.
       // Home is the page it always was. What is new sits at the top of it:
       // the models' own record, which names no security.
-      aiCards: aiCards(this, D, ar),
+      /* The lab moved to its own screen on 19 September. This built the whole
+         module on every Home redraw and bound it nowhere — the expensive half
+         of the same mistake the breadth comment below describes: a figure
+         computed and not shown is a figure nobody notices going stale. */
       isScenarios: st.screen === 'scenarios',
       scenariosView: st.screen === 'scenarios' ? scenariosScreen(this, D, ar).screen : null,
       isFlowTracker: ['liquidity', 'ownership', 'world'].includes(st.screen),

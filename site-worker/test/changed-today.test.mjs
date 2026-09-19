@@ -104,12 +104,17 @@ test('a card with no published figures is absent, not empty', () => {
 test('the shelf is on Home, ordered, and styled', async () => {
   const template = await read('public/esthmr/template.html');
   const home = template.indexOf('{{ isHome }}');
-  /* Above the lab, not below it. The 18 September review puts the market and
-     the reader's own list first and the lab last of the four, as a preview —
-     what changed today is evidence about the market, and the lab is a reading
-     of it. */
-  assert.ok(template.indexOf('{{ changedToday }}', home) < template.indexOf('{{ aiCards }}', home),
-    'the shelf fell below the lab preview again');
+  /* It sat above the lab preview, because what changed today is evidence
+     about the market and the lab was a reading of it. The lab left Home for
+     its own screen on 19 September, so the shelf's neighbours are what pin
+     it now: after the reader's own companies, and last on the page, because
+     Home is the headline and then its evidence. */
+  const shelf = template.indexOf('{{ changedToday }}', home);
+  const watch = template.indexOf('home-watch', home);
+  const end = template.indexOf('{{ isToday }}');
+  assert.ok(shelf > 0 && shelf < end, 'the shelf is gone from Home');
+  assert.ok(watch < shelf, 'the shelf rose above the reader’s own companies');
+  assert.ok(!template.slice(home, end).includes('{{ aiCards }}'), 'the lab preview is back on Home');
   const phone = await read('public/esthmr/chart-viewer.css');
   assert.match(phone, /\.journal-home>\.ct-shelf\{order:4\}/,
     'unnamed blocks fall to the bottom of the phone, and this one is not named');
@@ -131,6 +136,7 @@ test('the shelf is on Home, ordered, and styled', async () => {
  * Show fewer with an honest 'No further verified changes.'"
  */
 const quiet = (over) => changedToday({ ...DATA, ...over }, false, hooks);
+
 
 test('an ordinary session is not a change', () => {
   /* 1.3x a company's own usual volume is a company trading. The card claims
@@ -202,4 +208,21 @@ test('the quiet day reads in Arabic too', () => {
   true, { ...hooks, heading: 'ما تغيّر اليوم' });
   assert.match(text(one), /لا تغيّرات موثّقة أخرى/);
   assert.doesNotMatch(text(one), /No further verified/);
+});
+
+test('no date is invented when the session date is unknown', () => {
+  /* `market.json` is not always there, and a multiple stamped with the wrong
+     day is worse than one carrying none. This guarded `busyWhen` in logic.js
+     until Home was rebuilt on 19 September; the cards carry the session date
+     themselves now, so it is asserted against what they draw. */
+  const none = changedToday({ ...DATA, marketDate: undefined }, false, hooks);
+  for (const line of byClass(none, 'ct-dateline').map(text)) {
+    assert.doesNotMatch(line, /undefined|NaN|Invalid/, `a date was invented: ${line}`);
+  }
+  // And the honest wording is still chosen — the absence of a date does not
+  // silently turn a live session into a close.
+  const live = changedToday({ ...DATA, isClose: false, livePrices: true }, false, hooks);
+  const dl = byClass(live, 'ct-dateline').map(text).join(' | ');
+  assert.match(dl, /session so far/, `a live session was labelled a close: ${dl}`);
+  assert.doesNotMatch(dl, /· close ·/, `a live session was labelled a close: ${dl}`);
 });
