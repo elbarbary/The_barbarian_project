@@ -5320,6 +5320,10 @@
     "meaning": "Strong labor market data reflects high employment levels and steady wage distribution, which form the baseline for domestic consumer spending and monetary policy interest rate decisions.",
     "meaning_ar": "تعكس بيانات سوق العمل القوية مستويات توظيف مرتفعة وتدفقات أجور مستمرة، وهي العوامل المحددة للإنفاق الاستهلاكي المحلي وتوجهات أسعار الفائدة في السياسة النقدية."
   },
+  "خريطه اسعار الريال السعودي اليوم السبت 19-9-2026 في البنوك": {
+    "meaning": "Egyptian commercial banks publish daily bid and ask exchange rates for the Saudi Riyal based on foreign currency liquidity, interbank market pricing, and cross-currency valuations against the US dollar.",
+    "meaning_ar": "تنشر البنوك التجارية المصرية أسعار الشراء والبيع اليومية للريال السعودي بناءً على مستويات سيولة النقد الأجنبي، وتسعير سوق الصرف بين البنوك (الإنتربنك)، وتقييمات أسعار الصرف التقاطعية مقابل الدولار الأمريكي."
+  },
   "خساير النصر للحاصلات الزراعيه تهبط الي 495 الف جنيه خلال 3 اشهر": {
     "meaning": "The contraction in quarterly net losses reflects a narrowing deficit between operating revenues and production overheads, reducing the net negative cash burn on the company's balance sheet over the three-month period.",
     "meaning_ar": "يعكس تراجع الخسائر الفصلية تقلص الفجوة بين الإيرادات التشغيلية وتكاليف الإنتاج، مما يحد من معدل استنزاف السيولة النقدية في الميزانية العمومية للشركة خلال فترة الأشهر الثلاثة."
@@ -6309,6 +6313,10 @@
     "meaning": "Venture capital backing finances the transition from defense prototype development to high-volume manufacturing, utilizing standardized, low-cost components to establish an annual assembly line capacity of 12,000 units.",
     "meaning_ar": "يُموّل رأس المال المخاطر الانتقال من مرحلة تطوير النماذج الأولية إلى التصنيع الكمي المكثف، عبر استخدام مكونات معيارية منخفضة التكلفة لتشغيل خط تجميع بطاقة سنوية تبلغ 12 ألف وحدة."
   },
+  "شركه مدعومه من “انفيديا” و”مايكروسوفت” تتقدم بطلب طرح عام اولي": {
+    "meaning": "Filing for an initial public offering initiates the regulatory process to list a company's shares on a public exchange, transitioning its ownership structure from private equity backing to public equity markets.",
+    "meaning_ar": "يُعد التقدم بطلب للطرح العام الأولي بدءاً للإجراءات التنظيمية لإدراج أسهم الشركة في البورصة، مما ينقل هيكل الملكية من مساهمين من القطاع الخاص إلى سوق التداول العام."
+  },
   "شركه نيوبرينت للتداول تنوي زياده راس المال وتعزيز ادوات التكنولوجيا الماليه": {
     "meaning": "A capital increase raises the firm's equity base on the balance sheet, providing direct funding for deploying digital infrastructure and financial technology systems.",
     "meaning_ar": "ترفع زيادة رأس المال قاعدة حقوق الملكية في الميزانية العمومية للشركة، مما يوفر تمويلاً مباشراً لنشر البنية التحتية الرقمية وأنظمة التكنولوجيا المالية."
@@ -6632,6 +6640,10 @@
   "علاء فاروق: امكانات «الزراعه» متاحه لدعم التوسع في منافذ كاري اون": {
     "meaning": "The Ministry of Agriculture provides state logistical infrastructure, land, and commodity supply channels to partner retail chains like Carry On under a public-private operational cooperation framework.",
     "meaning_ar": "تتيح وزارة الزراعة بنيتها التحتية اللوجستية ومنافذها ومصادر إمداد السلع لسلاسل التجزئة مثل «كاري أون» ضمن إطار تعاون تشغيلي بين القطاعين العام والخاص."
+  },
+  "علاوات نفط بحر الشمال تقفز لمستويات قياسيه وسط تفاقم ازمه الامداد": {
+    "meaning": "Physical crude supply deficits in the North Sea elevate the cash premiums traded above the baseline Brent benchmark, raising the direct procurement cost of light sweet crude for import-dependent refiners.",
+    "meaning_ar": "يؤدي عجز المعروض الفعلي من خام بحر الشمال إلى رفع العلاوات السعرية المتداولة فوق السعر القياسي لخام برنت، مما يرفع تكلفة الشراء المباشرة للخامات الخفيفة على مصافي التكرير المعتمدة على الاستيراد."
   },
   "علي الغمراوي: نقل التكنولوجيا وتوطين التقنيات الحديثه يعززان تطوير الصناعه الدواييه": {
     "meaning": "Technology transfer and the localization of modern pharmaceutical manufacturing processes involve the acquisition of specialized intellectual property and production assets by domestic facilities, establishing direct domestic output of formulations previously dependent on foreign supply chains.",
@@ -8036,6 +8048,10 @@
   "نيسان: بريطانيا قد تضطر الي فرض رسوم جمركيه علي السيارات الصينيه": {
     "meaning": "The imposition of import tariffs on Chinese electric vehicles creates a protective trade barrier that increases the landed cost of imported units relative to domestically manufactured alternatives.",
     "meaning_ar": "يؤدي فرض رسوم جمركية على السيارات الكهربائية الصينية المستوردة إلى إنشاء حاجز تجاري حمائي يرفع التكلفة الإجمالية للوحدات المستوردة مقارنة بالبدائل المصنعة محلياً."
+  },
+  "هاني جنينه: الفايده المجزيه واستمرار برنامج الاصلاح يدعمان استقرار سعر الصرف": {
+    "meaning": "High real interest rates on domestic currency assets combined with ongoing structural reform commitments maintain foreign portfolio capital within the banking system and regulate foreign exchange liquidity conditions.",
+    "meaning_ar": "تؤدي أسعار الفائدة الحقيقية المرتفعة على الأصول بالعملة المحلية بالتوازي مع تنفيذ الإصلاحات الهيكلية إلى جذب التدفقات النقدية الأجنبية داخل القطاع المصرفي وتنظيم مستويات السيولة من النقد الأجنبي."
   },
   "هاير مصر تضخ 80 مليون دولار في المرحله الثانيه لمجمعها الصناعي": {
     "meaning": "This foreign direct investment allocates $80 million in capital expenditure to add physical production lines and expand manufacturing capacity at the company's local industrial complex.",
