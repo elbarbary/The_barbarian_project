@@ -77,10 +77,16 @@ const CHROME = {
     signIn: 'Sign in with email',
     signOut: 'Sign out',
     storyPill: '📱 Story',
-    why: 'Why sign in: everything here is read from what companies filed with '
-      + 'the exchange, and an open page is copied within hours by bots and AI '
-      + 'crawlers. Your email and a six-digit code — no password, and nothing '
-      + 'about you is sold or shared.',
+    /* Turn 2 gives this line one job. It carried three — where the figures
+       come from, why the door exists, and how signing in works — and the
+       first of those is already the lede above it ("every number goes back to
+       a published document"), so it was being made twice and the door was
+       explaining itself instead of opening. Jev scored the tighter wording
+       plainer in both languages (2.87 against 2.62 in English, 2.61 against
+       2.31 in Arabic) at the same willingness to hand over an email. */
+    why: 'The whole site is behind sign-in to keep out bots and automated '
+      + 'scrapers, not to sell your data. Your email and a six-digit code — '
+      + 'no password.',
   },
   ar: {
     eyebrow: 'الدخول · حساب واحد',
@@ -101,10 +107,8 @@ const CHROME = {
     signIn: 'سجّل الدخول بالبريد',
     signOut: 'تسجيل الخروج',
     storyPill: '📱 ستوري',
-    why: 'لماذا التسجيل: كل ما هنا مقروء مما أفصحت عنه الشركات للبورصة، '
-      + 'والصفحة المفتوحة تُنسَخ خلال ساعات بواسطة الروبوتات وزواحف الذكاء '
-      + 'الاصطناعي. بريدك ورمز من ستة أرقام — بلا كلمة سر، ولا نبيع بياناتك '
-      + 'ولا نشاركها.',
+    why: 'الموقع بالكامل خلف تسجيل الدخول لمنع الروبوتات وبرامج جمع البيانات '
+      + 'الآلية، لا لبيع بياناتك. بريدك ورمز من ستة أرقام — بلا كلمة سر.',
   },
 };
 

@@ -69,12 +69,24 @@ test('the sign-in sheet opens above the gate it is the way through', () => {
 test('the door says why it is there, in both languages', () => {
   assert.match(html, /id="gate-why"/);
   assert.match(main, /setTxt\('gate-why', words\.why\);/);
-  // English and Arabic both name the reason and promise no password.
-  assert.match(main, /why: 'Why sign in:[\s\S]*?bots and AI[\s\S]*?six-digit code/);
-  assert.match(main, /why: 'لماذا التسجيل:[\s\S]*?الروبوتات وزواحف الذكاء[\s\S]*?بلا كلمة سر/);
-  // The sign-in sheet says the same thing rather than the old demo sentence.
-  assert.match(auth, /an open page is copied within hours by bots and AI crawlers/);
-  assert.match(auth, /تُنسَخ خلال ساعات بواسطة الروبوتات وزواحف الذكاء الاصطناعي/);
+  /* THE REASON HAS TO MATCH; THE WORDING DOES NOT, AND SHOULD NOT.
+     This used to pin both places to one sentence. They are different rooms:
+     the door's line is read while deciding whether to go in, and turn 2 gives
+     it one job — the site is gated to keep out bots, not to sell anyone's
+     data. The sheet's line is read after that decision, by someone who wants
+     to know how it works, and can afford to be longer.
+     What must hold in both, in both languages, is the reason and the promise:
+     bots or scrapers, and no password. */
+  for (const src of [main, auth]) {
+    assert.match(src, /bots and (AI crawlers|automated scrapers)/);
+    assert.match(src, /(الروبوتات وزواحف الذكاء|الروبوتات وبرامج جمع البيانات)/);
+    assert.match(src, /(no password|بلا كلمة سر)/);
+  }
+  // And the door's own line is the short one, not the sheet's paragraph.
+  const why = main.slice(main.indexOf("why: '"), main.indexOf("why: '") + 320);
+  assert.match(why, /not to sell your data/);
+  assert.doesNotMatch(why, /filed with the exchange/,
+    'the door is explaining provenance again, which its lede already does');
   assert.ok(!auth.includes('You are looking at an invented market'),
     'the sheet still describes a demo that is no longer shown');
 });
