@@ -101,7 +101,7 @@ function sparklineSvg(byDate, val, ar) {
   }, h('path', { d: pts, fill: 'none', stroke: strokeColor, strokeWidth: '2.2', strokeLinejoin: 'round' }));
 }
 
-function homeModelsGrid(top5, horizon, ar, component) {
+function homeModelsGrid(top5, horizon, ar, component, forecasters) {
   const t = (en, arabic) => (ar ? arabic : en);
   const minSessions = top5.minimumSessions || 5;
   const n = Number(horizon);
@@ -109,7 +109,13 @@ function homeModelsGrid(top5, horizon, ar, component) {
     { id: 'kronos', labelEn: 'KRONOS-SMALL', labelAr: 'KRONOS-SMALL' },
     { id: 'chronos2', labelEn: 'CHRONOS-2', labelAr: 'CHRONOS-2' },
     { id: 'timesfm25', labelEn: 'TIMESFM 2.5', labelAr: 'TIMESFM 2.5' },
-    { id: 'rerank', labelEn: 'GEMINI, READING THE OTHER NINE', labelAr: 'GEMINI · قراءة النماذج الأخرى' },
+    // The count comes from the published record, never a literal: the
+    // document states 11 forecasters today and a hard-coded "nine" was wrong
+    // the day it was written. ai-record.js's kindLabel does the same, and
+    // falls back to the word when the figure is absent rather than guessing.
+    { id: 'rerank',
+      labelEn: `GEMINI, READING THE OTHER ${finite(forecasters) ? word(forecasters).toUpperCase() : 'MODELS'}`,
+      labelAr: 'GEMINI · قراءة النماذج الأخرى' },
   ];
 
   const cards = targetModels.map((m) => {
@@ -258,7 +264,7 @@ export function aiCards(component, data, ar) {
       h('p', { class: 'aix-fact-note' }, t(
         'The five solid · the market dashed. Each point is one night over its own window — every company scored, equally weighted, and not an index.',
         'الخمس المختارة متصل · السوق متقطّع. كل نقطة ليلة واحدة على نافذتها — كل شركة مُقيَّمة بأوزان متساوية، وليست مؤشراً.')),
-      homeModelsGrid(top5, horizon, ar, component));
+      homeModelsGrid(top5, horizon, ar, component, forecasters));
   } else if (system) {
     // Below the minimum: how many NIGHTS are scored, and the nights still to
     // come drawn as the sessions each is held. "0/5 sessions scored" beside
@@ -311,7 +317,7 @@ export function aiCards(component, data, ar) {
         h('p', { class: 'aix-system-versus' }, versus)),
       rows.length ? recordChart(rows, n, ar, { label: `${legend} ${end}`, end }) : null,
       h('p', { class: 'aix-fact-note' }, legend),
-      homeModelsGrid(top5, horizon, ar, component));
+      homeModelsGrid(top5, horizon, ar, component, forecasters));
   }
 
   /* ONE VISUAL ON HOME, NOT THREE.

@@ -402,12 +402,12 @@ export function returnsView(scenarios, draft, tickers) {
   };
 }
 
-/** Position of each company in a reading, 1 first; ties by ticker. */
-export function positions(scores) {
-  const order = Object.keys(scores || {}).filter((t) => finite(scores[t]))
-    .sort((a, b) => (scores[b] - scores[a]) || (a < b ? -1 : a > b ? 1 : 0));
-  return Object.fromEntries(order.map((t, i) => [t, i + 1]));
-}
+/* There is deliberately no "position" helper that breaks ties by ticker.
+ * One was added and removed on 19 September: `standing()` below exists
+ * BECAUSE of that arithmetic. A reading that gives 182 of 257 companies the
+ * same score, ordered alphabetically, hands each of them a distinct place —
+ * and every comparison against the next reading then shows those companies
+ * "moving" by nothing but the alphabet. Ties must share a place. */
 
 /** Where each company stands, 1 first, with a tie sharing the average place.
  *
@@ -644,7 +644,13 @@ export function scenariosScreen(component, data, ar) {
     h('div', { class: 'aix-group aix-models-grouped' },
       h('p', { class: 'aix-step' }, h('span', null, t('The model', 'النموذج'))),
       (() => {
-        const foundations = choice.models.filter((m) => m.group !== 'baseline');
+        // By the group each model declares, not by "not a baseline". The
+        // catalogue has three groups — neural, baseline and rerank — and the
+        // heading below claims these are pre-trained neural models. A rerank
+        // model reaching this picker would be filed under that claim and
+        // described as something it is not. Anything unrecognised stays out
+        // of both buckets rather than being mislabelled.
+        const foundations = choice.models.filter((m) => m.group === 'neural');
         const baselines = choice.models.filter((m) => m.group === 'baseline');
         return [
           foundations.length ? h('div', { class: 'aix-model-subgroup', key: 'foundations' },

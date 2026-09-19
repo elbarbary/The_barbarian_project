@@ -195,7 +195,14 @@ test('every company in the run is shown, none cut to a number', async () => {
   const tickers = Object.keys(scenarios.companies).sort();
   const view = mod.returnsView(scenarios, { model: 'kronos', horizon: 5 }, tickers);
   assert.equal(view.rows.length, tickers.length);
-  const body = scSrc.slice(scSrc.indexOf('export function returnsView'), scSrc.indexOf('export function positions'));
+  // To the NEXT export, found rather than named. This read `indexOf('export
+  // function positions')`, and that function did not exist: indexOf returned
+  // -1, slice(start, -1) ran to the end of the file, and the assertion below
+  // was scanning every function after this one instead of this one.
+  const from = scSrc.indexOf('export function returnsView');
+  const next = scSrc.indexOf('\nexport ', from + 1);
+  const body = scSrc.slice(from, next === -1 ? scSrc.length : next);
+  assert.ok(next > from, 'no export follows returnsView; the slice would run to EOF');
   assert.ok(!/slice\(0,\s*\d/.test(body), 'the view is cut to a number');
   // The list on screen shows twelve and says how many more there are.
   const visuals = await read('public/esthmr/scenario-visuals.js');
