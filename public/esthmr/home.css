@@ -507,3 +507,15 @@
  * source line sits at the foot of every card at the same height. */
 #app .ct-grid { align-items: stretch; }
 #app .ct-card > .ct-rule:has(+ .ct-foot) { margin-top: auto; }
+
+/* ONE INDEX CARD PER ROW ON A PHONE.
+ *
+ * Seen at 390px: EGX 30 full width, then EGX 70 and EGX 100 side by side in
+ * 170px each — "27,682.00" clipped to ",682.00" and the name wrapped to
+ * three lines. journal.css keeps the three-across grid down to 860px and the
+ * phone rule that undoes it lost to it. Under 600px each index is its own
+ * row; the number has the width it needs and the chart is legible. */
+@media (max-width: 600px) {
+  #app .market-head > .om-idx { grid-template-columns: minmax(0, 1fr) !important; }
+  #app .market-head > .om-idx > div { grid-column: auto !important; grid-row: auto !important; }
+}

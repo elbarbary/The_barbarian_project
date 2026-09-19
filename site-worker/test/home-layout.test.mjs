@@ -109,6 +109,14 @@ test('the three evidence cards share a bottom edge, and the tall one is held', (
   assert.ok(!/#app \.ct-grid \{ align-items: start; \}/.test(home), 'the old start rule is back');
 });
 
+test('on a phone each index card has the row to itself', () => {
+  /* At 390px two index cards shared a row at 170px each: the level clipped
+     and the name wrapped to three lines. */
+  const phone = home.slice(home.indexOf('ONE INDEX CARD PER ROW ON A PHONE'));
+  assert.match(phone, /@media \(max-width: 600px\)/);
+  assert.match(phone, /#app \.market-head > \.om-idx \{ grid-template-columns: minmax\(0, 1fr\) !important; \}/);
+});
+
 test('the local signed-in server is kept, because looking at the page is the fix', () => {
   /* The assertions above are the cheap half. None of them would have caught
      an overlap nobody looked at. */
