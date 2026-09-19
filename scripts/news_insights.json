@@ -1719,6 +1719,10 @@
     "meaning": "Daily poultry price reporting reflects current farm-gate and retail clearing prices driven by prevailing feed input costs, local supply volumes, and consumer demand in the domestic market.",
     "meaning_ar": "تعكس نشرة أسعار الدواجن اليومية أسعار التداول الحالية في المزارع والأسواق الاستهلاكية، والتي تتحدد بناءً على تكاليف الأعلاف وحجم المعروض ومستويات الطلب المحلي السائدة."
   },
+  "اسعار الدواجن اليوم السبت 19-9-2026 في مصر": {
+    "meaning": "Daily poultry price updates reflect spot market clearing levels determined by live-bird farm-gate quotes, feed input costs, and local distribution overheads.",
+    "meaning_ar": "تعكس التحديثات اليومية لأسعار الدواجن مستويات توازن السوق الفورية المحددة بناءً على أسعار التسليم من المزارع، وتكاليف الأعلاف، ومصروفات سلاسل التوزيع المحلية."
+  },
   "اسعار الدواجن اليوم السبت 5-9-2026 في مصر": {
     "meaning": "Daily poultry price updates reflect current spot market rates determined by feed input costs, farm-level operational expenses, and prevailing supply-demand dynamics in the domestic market.",
     "meaning_ar": "تعكس النشرات اليومية لأسعار الدواجن مستويات الأسعار الفورية في السوق المحلي، والتي تتحدد بناءً على تكاليف مدخلات الأعلاف ومصروفات التشغيل في المزارع وتوازنات العرض والطلب."
@@ -3483,6 +3487,10 @@
     "meaning": "The company sets an internal operational target to expand its maritime agency, freight, and cargo handling turnover by 10% through higher service volume or adjusted tariff structures.",
     "meaning_ar": "تحدد الشركة هدفاً تشغيلياً لزيادة حجم أعمالها في خدمات الوكالة الملاحية وتداول البضائع بنسبة 10% عبر التوسع في حجم الخدمات المؤداة أو تعديل هيكل التعريفات."
   },
+  "القومي لتنظيم الاتصالات: استخدام محدود وامن لمنصات التواصل للاطفال من 13 الي 15 عاما": {
+    "meaning": "The National Telecommunications Regulatory Authority establishes regulatory compliance requirements for digital platforms operating in Egypt, requiring operational modifications to age-verification protocols, data collection frameworks, and content-filtering infrastructure for the 13-15 demographic.",
+    "meaning_ar": "يحدد الجهاز القومي لتنظيم الاتصالات متطلبات امتثال تنظيمي للمنصات الرقمية العاملة في مصر، مما يستوجب تعديلات تشغيلية في بروتوكولات التحقق من العمر، وأطر جمع البيانات، وبنية تصفية المحتوى للفئة العمرية من 13 إلى 15 عامًا."
+  },
   "الكاكاو يتجه لخساره اسبوعيه مع تقييم افاق السوق": {
     "meaning": "Cocoa futures experience price adjustments as global commodity markets reassess underlying supply and demand fundamentals, directly determining raw material procurement benchmarks for food and confectionery manufacturers.",
     "meaning_ar": "تشهد أسعار عقود الكاكاو تحركات سوقية ناتجة عن إعادة تقييم توازنات العرض والطلب العالمية، مما يحدد التكلفة المرجعية لتوريد المواد الخام لشركات الصناعات الغذائية والحلويات."
@@ -5012,6 +5020,10 @@
     "meaning": "Anticipation of central bank monetary tightening narrows interest rate differentials between the Japanese yen and other major currencies, altering carry trade positions and shifting the spot exchange rate upward.",
     "meaning_ar": "تؤدي توقعات تشديد السياسة النقدية إلى تضييق الفوارق في أسعار الفائدة بين الين الياباني والعملات الرئيسية الأخرى، مما يغير مراكز تجارة الفائدة ويرفع سعر الصرف الفوري للعملة."
   },
+  "توقيع بروتوكول تعاون بين وزاره العمل وصندوق الخدمات الاجتماعيه لتفعيل احكام قانون العمل": {
+    "meaning": "This protocol activates statutory compliance mechanisms under the Labor Law, governing institutional contributions and financial distributions from employers to the Social Services Fund for corporate workforce benefits.",
+    "meaning_ar": "يُفعّل هذا البروتوكول الآليات التنفيذية المنصوص عليها في قانون العمل لتحصيل اشتراكات المنشآت وتوريدها إلى صندوق الخدمات الاجتماعية لتغطية الالتزامات والخدمات المقررة للعاملين."
+  },
   "توقيع عقد توريد 10 طايرات تدريب جديده للاكاديميه المصريه لعلوم الطيران": {
     "meaning": "The agreement constitutes a capital expenditure on fixed aviation assets that expands the academy's physical fleet and operational training capacity.",
     "meaning_ar": "يمثل الاتفاق إنفاقاً رأسمالياً على أصول طيران ثابتة يؤدي إلى توسيع الأسطول الفعلي للأكاديمية وزيادة طاقتها التدريبية التشغيلية."
@@ -5971,6 +5983,10 @@
   "سعر اليورو في مصر اليوم السبت 12/9/2026": {
     "meaning": "Official foreign exchange rates published by banks establish the operational valuation benchmark for settling euro-denominated commercial transactions and corporate balance sheet conversions. During bank weekend closures, rates reflect the closing quotes from the preceding business day.",
     "meaning_ar": "تحدد أسعار صرف النقد الأجنبي المعلنة في البنوك المعيار المحاسبي لتسوية المعاملات التجارية المقومة باليورو وتقييم بنود الميزانيات العمومية، وتعتمد تعاملات العطلات الأسبوعية على أسعار إغلاق يوم العمل السابق."
+  },
+  "سعر اليورو في مصر اليوم السبت 19/9/2026": {
+    "meaning": "The euro exchange rate against the Egyptian pound reflects the official and banking market clearing price for European currency transactions, determining the operational cost base for trade settlements, import invoices, and foreign debt obligations denominated in euros.",
+    "meaning_ar": "يعكس سعر صرف اليورو أمام الجنيه المصري سعر التسوية في القطاع المصرفي للتعاملات بالعملة الأوروبية، وهو ما يحدد التكلفة التشغيلية المباشرة لتسوية المعاملات التجارية وفواتير الاستيراد والالتزامات المالية المقومة باليورو."
   },
   "سعر خام الحديد يتجاوز 100 دولار للطن في سنغافوره": {
     "meaning": "Iron ore acts as the primary raw material for integrated steel manufacturers, directly determining input costs across heavy industrial supply chains.",
