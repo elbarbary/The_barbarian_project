@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-09-19T05:33:17.045622+00:00",
+  "fetchedAt": "2026-09-19T09:39:53.412269+00:00",
   "sources": {
     "exchangeRates": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
     "interbank": "https://www.cbe.org.eg/en/economic-research/statistics/daily-interbank-rates-and-volumes",

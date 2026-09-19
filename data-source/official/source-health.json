@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-19T05:33:43.208112+00:00",
+  "builtAt": "2026-09-19T09:40:25.353770+00:00",
   "sources": {
     "egxCheckpointArchive": {
       "path": "data-source/egx-beta/snapshot-history/manifest.jsonl",
-      "observedAt": "2026-09-19T05:33:21Z",
-      "observations": 34,
+      "observedAt": "2026-09-19T09:40:00Z",
+      "observations": 35,
       "status": "available",
-      "ageHours": 0.006
+      "ageHours": 0.007
     },
     "ownershipLedger": {
       "path": "data-source/official/ownership/ownership-ledger.json",
@@ -20,23 +20,23 @@
     },
     "fraLedger": {
       "path": "data-source/official/fra/fra-ledger.json",
-      "observedAt": "2026-09-19T05:33:04.928659+00:00",
+      "observedAt": "2026-09-19T09:39:41.032950+00:00",
       "items": 628,
       "status": "available",
-      "ageHours": 0.011
+      "ageHours": 0.012
     },
     "mcdrRegistry": {
       "path": "data-source/official/mcdr/issuer-registry.json",
-      "observedAt": "2026-09-19T05:33:19.314851+00:00",
+      "observedAt": "2026-09-19T09:39:55.743434+00:00",
       "matchedAtMcdr": 248,
       "exactIsinsQueried": 261,
       "notYetIndividuallyQueried": 0,
       "status": "partial",
-      "ageHours": 0.007
+      "ageHours": 0.008
     },
     "filingCompleteness": {
       "path": "data-source/official/filing-completeness.json",
-      "observedAt": "2026-09-19T05:33:42.914864+00:00",
+      "observedAt": "2026-09-19T09:40:25.056933+00:00",
       "issuers": 288,
       "verifiedIrArchives": 0,
       "status": "partial",
@@ -44,10 +44,10 @@
     },
     "cbeContext": {
       "path": "data-source/official/cbe/cbe-context.json",
-      "observedAt": "2026-09-19T05:33:17.045622+00:00",
+      "observedAt": "2026-09-19T09:39:53.412269+00:00",
       "officialFxDate": "17/09/2026",
       "status": "available",
-      "ageHours": 0.007
+      "ageHours": 0.009
     }
   },
   "capabilities": {
