@@ -1975,6 +1975,10 @@
     "meaning": "Copper serves as a primary raw material for industrial and infrastructure sectors, particularly cable and electronics manufacturing, where price fluctuations directly alter immediate procurement costs and inventory valuations.",
     "meaning_ar": "يُعد النحاس مادة خام أساسية لقطاعات الصناعة والبنية التحتية، لا سيما تصنيع الكابلات والإلكترونيات، حيث تنعكس تقلبات أسعاره بصورة مباشرة على تكاليف التوريد الفورية وتقييمات المخزون."
   },
+  "اسعار الوقود في الاتحاد الاوروبي تسجل مستويات قياسيه": {
+    "meaning": "Record EU fuel prices elevate input and operating expenses across European logistics and manufacturing networks, altering cross-border transport tariffs for trade partners.",
+    "meaning_ar": "يؤدي تسجيل أسعار الوقود في الاتحاد الأوروبي لمستويات قياسية إلى زيادة تكاليف المدخلات والتشغيل عبر شبكات الخدمات اللوجستية والتصنيع الأوروبية، مما يغير تعريفات النقل والشحن للشركاء التجاريين."
+  },
   "اسهم الصين تجذب الباحثين عن بديل لرهانات الذكاء الاصطناعي المزدحمه": {
     "meaning": "Capital reallocates from concentrated positions in global artificial intelligence equities toward Chinese equity markets as part of cross-border portfolio rebalancing driven by relative valuation differentials.",
     "meaning_ar": "تتحول تدفقات رؤوس الأموال من المراكز المركزة في أسهم قطاع الذكاء الاصطناعي العالمية نحو الأسهم الصينية، ضمن آلية إعادة موازنة المحافظ الاستثمارية بناءً على الفروق في التقييمات السعرية بين الأسواق."
@@ -2886,6 +2890,10 @@
   "الذهب يهبط مع توقعات رفع الفايده الامريكيه": {
     "meaning": "Higher US interest rates increase the yield on fixed-income dollar assets, raising the opportunity cost of holding non-yielding commodities like gold and exerting downward price pressure on the metal.",
     "meaning_ar": "يؤدي رفع أسعار الفائدة الأمريكية إلى زيادة عائد الأصول الدولارية ذات الدخل الثابت، مما يرفع تكلفة الفرصة البديلة لحيازة الذهب كأصل لا يدر عائدًا ويضغط على أسعاره عالميًا."
+  },
+  "الربوه للاستثمار الزراعي تستهدف مضاعفه انتاج زيت الزيتون خلال 3 سنوات": {
+    "meaning": "The company's expansion plan involves capital allocation toward scaling up olive cultivation acreage and adding industrial processing capacity for olive oil extraction over a three-year horizon.",
+    "meaning_ar": "تتضمن الخطة التوسعية للشركة توجيه نفقات رأسمالية لزيادة المساحات المزروعة بأشجار الزيتون وإضافة طاقات تصنيعية جديدة لعصر واستخلاص الزيت على مدار ثلاث سنوات."
   },
   "الربوه للاستثمار الزراعي تعتزم تركيب خط جديد للانتاج والتعبيه بمصنع 6 اكتوبر": {
     "meaning": "Installing a new production and packaging line constitutes a capital expenditure that adds physical operational capacity and equipment to the company's manufacturing facility.",
@@ -3867,6 +3875,10 @@
     "meaning": "Consecutive quarters of positive adjusted operating profit reflect core operating revenues exceeding direct operational expenses, excluding non-cash, one-time, and financing charges. This metric establishes an audited operational track record required under institutional pre-listing disclosure frameworks.",
     "meaning_ar": "يعكس تحقيق أرباح تشغيلية معدلة لربعين متتاليين تجاوز الإيرادات التشغيلية الأساسية للمصروفات النقدية المباشرة، مع استبعاد البنود غير المتكررة والتمويلية، وهو ما يشكل سجلاً مالياً متطلباً ضمن معايير الإفصاح المؤسسي السابقة للطروحات العامة."
   },
+  "انثروبيك تدرس اصدار نموذج جديد للذكاء الاصطناعي قبل الطرح العام": {
+    "meaning": "Releasing a software product ahead of an initial public offering establishes the company's active product baseline and operational capability in the market prior to the public share subscription.",
+    "meaning_ar": "يمثل إطلاق منتج برمجي قبيل الطرح العام الأولي تحديداً للقدرات التشغيلية والتقنية القائمة للشركة في السوق قبل بدء مرحلة الاكتتاب في الأسهم."
+  },
   "انخفاض اسعار النفط مع ترقب بيانات المخزونات في امريكا": {
     "meaning": "Oil price movements directly affect domestic fuel subsidy expenditures, industrial production input costs, and foreign currency outflows required for energy imports.",
     "meaning_ar": "تؤثر تحركات أسعار النفط العالمية بشكل مباشر على تكاليف استيراد الطاقة، وحجم مخصصات دعم الوقود في الموازنة العامة، وتكاليف مدخلات الإنتاج للشركات الصناعية."
@@ -3922,6 +3934,10 @@
   "اوبر تعين بنوكا لترتيب اول طرح لها لسندات دين متعدده الشرايح مقومه باليورو": {
     "meaning": "Mandating investment banks to arrange a multi-tranche euro-denominated debt issuance accesses the European institutional bond market to raise foreign-currency capital across varied maturity profiles.",
     "meaning_ar": "يمثل تفويض بنوك استثمار لترتيب طرح سندات دين متعددة الشرائح مقومة باليورو آلية لدخول سوق السندات المؤسسية الأوروبية وجمع سيولة بالعملة الأجنبية عبر آجال استحقاق مختلفة."
+  },
+  "اوبن ايه اي تتوقع انفاق نحو 280 مليار دولار بحلول 2030": {
+    "meaning": "This projection reflects long-term capital expenditure allocations toward computing infrastructure, advanced chip procurement, and operational data center capacity. These expenditures expand the balance sheet's fixed-asset base and direct funding into the global semiconductor and cloud hosting supply chains.",
+    "meaning_ar": "تعكس هذه التقديرات تخصيصات الإنفاق الرأسمالي طويل الأجل للبنية التحتية للحوسبة، وشراء الرقائق المتقدمة، وتشغيل مراكز البيانات، مما يوجه التدفقات النقدية مباشرة نحو سلاسل إمداد أشباه الموصلات واستضافة السحابة الإلكترونية ويغير هيكل الأصول الرأسمالية للشركة."
   },
   "اوتاوا تسرع الاحكام الضريبيه للاستثمارات الكبري بقيمه مليار دولار كندي": {
     "meaning": "Expedited tax rulings provide binding administrative determinations on tax liabilities for capital projects exceeding one billion Canadian dollars prior to asset deployment. This process shortens the regulatory review phase and incorporates verified fiscal parameters directly into corporate balance sheet planning.",
@@ -5235,6 +5251,10 @@
   "حرب الرسوم بين واشنطن واوتاوا تنعش قطاعات غير متوقعه في كندا": {
     "meaning": "Tariff disputes redirect cross-border supply chains and substitute imported goods with domestic alternatives, shifting procurement flows toward secondary local producers.",
     "meaning_ar": "تؤدي النزاعات الجمركية إلى إعادة توجيه سلاسل التوريد البينية واستبدال السلع المستوردة ببدائل محلية، مما يحول مسار المشتريات نحو المنتجين المحليين في قطاعات غير أساسية."
+  },
+  "حرب ايران تستنزف امدادات الديزل في الاسواق العالميه": {
+    "meaning": "Regional geopolitical conflict disrupts refining capacity and marine shipping routes, lowering available physical inventories of diesel in international commodity markets.",
+    "meaning_ar": "تؤدي النزاعات الجيوسياسية الإقليمية إلى تعطيل طاقات التكرير ومسارات الشحن البحري، مما يخفض المخزونات المادية المتاحة من الديزل في أسواق السلع العالمية."
   },
   "حرب ايران تضغط علي السيوله لدي المستهلكين الامريكيين": {
     "meaning": "Geopolitical conflict involving Iran raises global oil prices and shipping costs, which directly increases energy and transportation expenses for US consumers and reduces their available discretionary cash flow.",
@@ -8736,6 +8756,10 @@
   "وزير العمل يستعرض امام نظيره العماني تجربه مصر في الحمايه الاجتماعيه للعمال ووحدات التدريب المتنقله": {
     "meaning": "Bilateral labor discussions focus on standardizing vocational training frameworks and workforce protection systems to regulate cross-border labor mobility between Egypt and Oman.",
     "meaning_ar": "تركز المباحثات العمالية الثنائية على توحيد أطر التدريب المهني ومنظومات الحماية الاجتماعية لتنظيم حركة انتقال العمالة بين مصر وسلطنة عمان."
+  },
+  "وزير العمل يشهد توقيع بروتوكول تعاون مع صندوق الخدمات الاجتماعيه والصحيه والثقافيه": {
+    "meaning": "This protocol establishes a formal framework between the Ministry of Labor and the social fund to coordinate the financing and delivery of welfare, healthcare, and training programs for workers.",
+    "meaning_ar": "يضع هذا البروتوكول إطاراً رسمياً بين وزارة العمل وصندوق الخدمات لتنسيق تمويل وتقديم برامج الرعاية الاجتماعية والصحية والتدريبية للعمالة."
   },
   "وزير العمل يمنح شركات الحاق العماله بالخارج مهله 6 اشهر لتوفيق اوضاعها": {
     "meaning": "The decision grants foreign employment agencies a six-month regulatory grace period to align operational procedures, licensing requirements, and legal documentation with Ministry of Labor standards.",
