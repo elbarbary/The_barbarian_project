@@ -1401,3 +1401,12 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
 #app .rev-nuance[open] > summary::before { content: '\2212 '; }
 #app .rev-nuance > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 #app .rev-nuance > div { font-size: 12.5px; color: var(--t2); line-height: 1.6; margin-top: 6px; text-wrap: pretty; }
+
+/* A heading that used to name a metric now asks the question the block
+ * answers; the metric's name stays after it as a small term, for the reader
+ * who knows the word and wants it. */
+#app h1 .h-term, #app h2 .h-term, #app h3 .h-term {
+  font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
+  font-size: .58em; font-weight: 500; letter-spacing: .02em; color: var(--faint);
+  margin-inline-start: 8px; vertical-align: middle; white-space: nowrap;
+}

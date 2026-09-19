@@ -183,7 +183,7 @@
       <sc-if value="{{ hasBreadth }}">
         <section class="breadth-strip" aria-label="{{ breadthCounted }}">
           <div class="breadth-head">
-            <h2>{{ L.breadthWord }}</h2>
+            <h2>{{ L.breadthWordQuestion }} <small class="h-term">{{ L.breadthWord }}</small></h2>
             <span class="breadth-of">{{ marketDate }} · {{ breadthCounted }}</span>
           </div>
           <div class="breadth-bar" role="img" aria-label="{{ breadthCounted }}">
@@ -199,7 +199,7 @@
               <small>{{ b.pct }}</small>
             </span>
           </sc-for></div>
-          <p class="breadth-note">{{ L.breadthNote }}</p>
+          <p class="breadth-note">{{ L.breadthNote }}</p><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.breadthNoteNuance }}</div></details>
         </section>
       </sc-if>
       </div>
@@ -230,7 +230,7 @@
         <section class="home-watch home-watch-empty" aria-label="{{ L.followTitle }}">
           <p class="card-dateline"><span>{{ L.watchlist }}</span></p>
           <h2 class="home-watch-title">{{ L.followTitle }}</h2>
-          <p class="home-watch-lead">{{ L.followEmptyLead }}</p>
+          <p class="home-watch-lead">{{ L.followEmptyLead }}</p><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.followEmptyLeadNuance }}</div></details>
           <div class="home-watch-grid">
             <sc-for list="{{ watchlist }}" as="w" hint-placeholder-count="6">
               <div class="home-watch-card is-offer">
@@ -247,7 +247,7 @@
               </div>
             </sc-for>
           </div>
-          <p class="home-watch-note">{{ L.followNotOwning }}</p>
+          <p class="home-watch-note">{{ L.followNotOwning }}</p><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.followNotOwningNuance }}</div></details>
         </section>
       </sc-if>
       <sc-if value="{{ hasFollowed }}">
@@ -333,7 +333,7 @@
       <section class="explore-further" aria-labelledby="explore-further-title">
         <header class="ef-head">
           <h2 id="explore-further-title">{{ L.exploreTitle }}</h2>
-          <p>{{ L.exploreLead }}</p>
+          <p>{{ L.exploreLead }}</p><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.exploreLeadNuance }}</div></details>
         </header>
       <div class="quick-paths"><sc-for list="{{ quickActions }}" as="q">
         <button type="button" onClick="{{ q.go }}"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="{{ q.icon }}"></path></svg><span><strong>{{ q.label }}</strong><small>{{ q.note }}</small></span><span class="quick-arrow" aria-hidden="true">↗</span></button>
@@ -357,7 +357,7 @@
             <div onClick="{{ screen.toggleHow }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;background:var(--sunk);border:1px solid var(--rule);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)" style-hover="border-color:var(--accent)">{{ screen.howLabel }} <span>{{ screen.howCaret }}</span></div>
           </div>
           <sc-if value="{{ screen.howOn }}">
-            <div style="margin-top:11px;font-size:11.5px;color:var(--faint);line-height:1.55;max-width:70ch;text-wrap:pretty">{{ L.screenBarsShort }}</div>
+            <div style="margin-top:11px;font-size:11.5px;color:var(--faint);line-height:1.55;max-width:70ch;text-wrap:pretty">{{ L.screenBarsShort }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.screenBarsShortNuance }}</div></details>
           </sc-if>
           <div class="market-measure-grid" style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(186px,1fr));gap:20px 22px">
             <sc-for list="{{ screen.tests }}" as="t" hint-placeholder-count="4">
@@ -477,7 +477,7 @@
           <sc-if value="{{ fpHasCounts }}"><p class="fp-counts">{{ fpCounts }}</p></sc-if>
           <sc-if value="{{ fpShow }}">
             <div class="fp-legend"><span>{{ L.dotsLegend }}</span><sc-for list="{{ crossLegend }}" as="g" hint-placeholder-count="3"><span class="fp-legend-item"><span class="fp-dot" style="background:{{ g.color }}"></span>{{ g.label }}</span></sc-for></div>
-            <p class="fp-yard">{{ L.fpYardstick }}</p>
+            <p class="fp-yard">{{ L.fpYardstick }}</p><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.fpYardstickNuance }}</div></details>
           </sc-if>
           <sc-if value="{{ fpEmpty }}"><p>{{ L.nothingYet }}</p></sc-if>
         </section>
@@ -634,7 +634,7 @@
                 </div>
               </sc-for>
             </div>
-            <div style="font-size:11px;color:var(--faint);line-height:1.55;margin-top:11px;text-wrap:pretty">{{ L.investorsSides }}</div>
+            <div style="font-size:11px;color:var(--faint);line-height:1.55;margin-top:11px;text-wrap:pretty">{{ L.investorsSides }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.investorsSidesNuance }}</div></details>
           </div>
           <div style="font-size:11.5px;color:var(--faint);line-height:1.55;margin-top:14px;text-wrap:pretty">{{ L.investorsBasis }}</div>
           <sc-if value="{{ investors.asOfLine }}"><div style="font-size:11.5px;color:var(--faint);line-height:1.55;margin-top:6px">{{ investors.asOfLine }}</div></sc-if>
@@ -899,7 +899,7 @@
       <header class="screen-head">
         <p class="card-dateline"><span>{{ crossCount }}</span></p>
         <h1 style="font-family:var(--font-heading);font-size:21px;font-weight:600;letter-spacing:-.01em;line-height:1.3;margin:0">{{ L.dotsLabel }}</h1>
-        <p class="card-lead">{{ L.dotsJob }}</p>
+        <p class="card-lead">{{ L.dotsJob }}</p><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.dotsJobNuance }}</div></details>
       </header>
       <sc-if value="{{ noCrossings }}">
         <div style="border-radius:var(--radius-island);background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:34px 24px;text-align:center;color:var(--faint);font-size:13.5px">{{ L.nothingYet }}</div>
@@ -935,7 +935,7 @@
           <sc-if value="{{ crossOpen }}">
             <div style="border-radius:var(--radius-control);background:var(--sunk);border:1px solid var(--edgeIn);padding:16px 18px;display:flex;flex-direction:column;gap:10px">
               <div style="font-size:13px;color:var(--t2);line-height:1.65;text-wrap:pretty">{{ crossWorkings }}</div>
-              <div style="font-size:13px;color:var(--t2);line-height:1.65;text-wrap:pretty">{{ L.dotsYardstick }}</div>
+              <div style="font-size:13px;color:var(--t2);line-height:1.65;text-wrap:pretty">{{ L.dotsYardstick }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.dotsYardstickNuance }}</div></details>
             </div>
           </sc-if>
 
@@ -1107,7 +1107,7 @@
           </div>
           <div style="padding-top:12px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:9px;font-size:11.5px;color:var(--faint);line-height:1.65;text-wrap:pretty">
             <div>{{ L.screenBars }}</div>
-            <div>{{ L.screenQuestion }}</div>
+            <div>{{ L.screenQuestion }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.screenQuestionNuance }}</div></details>
             <div>{{ L.screenNoBack }}</div>
           </div>
         </section>
@@ -1204,7 +1204,7 @@
           <sc-if value="{{ explorer.empty }}"><p>{{ L.noMatchBody }}</p></sc-if>
           <sc-if value="{{ explorer.isRanking }}"><p class="insight-caption">{{ explorer.note }}</p></sc-if>
           <sc-if value="{{ explorer.isVolume }}"><p class="insight-caption">{{ L.busyYardstick }}</p></sc-if>
-          <sc-if value="{{ explorer.isTrends }}"><p class="insight-caption">{{ L.trendsYardstick }}</p></sc-if>
+          <sc-if value="{{ explorer.isTrends }}"><p class="insight-caption">{{ L.trendsYardstick }}</p><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.trendsYardstickNuance }}</div></details></sc-if>
         </section>
       </sc-if>
       <sc-if value="{{ explorer.isPrices }}">
@@ -1237,7 +1237,7 @@
       </div>
       <div style="display:flex;flex-direction:column;gap:6px;padding:0 10px;font-size:11.5px;color:var(--faint);line-height:1.55;text-wrap:pretty">
         <sc-if value="{{ hasPriceSource }}"><div>{{ priceSource }}</div></sc-if>
-        <div>{{ L.foldNote }}</div><div>{{ L.marketFoot }}</div><div>{{ L.peFoot }}</div>
+        <div>{{ L.foldNote }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.foldNoteNuance }}</div></details><div>{{ L.marketFoot }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.marketFootNuance }}</div></details><div>{{ L.peFoot }}</div>
       </div>
       </sc-if>
     </div>
@@ -1253,8 +1253,8 @@
     <div class="om-scr screen-investors" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 8px 0">
         <div style="min-width:0">
-          <h1 style="font-family:var(--font-heading);font-size:21px;font-weight:600;letter-spacing:-.01em;line-height:1.3;margin:0">{{ L.investorsTitle }}</h1>
-          <div style="font-size:13.5px;color:var(--t2);margin-top:9px;max-width:60ch;text-wrap:pretty">{{ L.investorsLead }}</div>
+          <h1 style="font-family:var(--font-heading);font-size:21px;font-weight:600;letter-spacing:-.01em;line-height:1.3;margin:0">{{ L.investorsTitleQuestion }} <small class="h-term">{{ L.investorsTitle }}</small></h1>
+          <div style="font-size:13.5px;color:var(--t2);margin-top:9px;max-width:60ch;text-wrap:pretty">{{ L.investorsLead }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.investorsLeadNuance }}</div></details>
         </div>
       </div>
 
@@ -1567,7 +1567,7 @@
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap">
                   <div>
                     <h3 style="font-family:var(--font-heading);font-size:18px;font-weight:600;color:var(--ink);margin:0">{{ L.insiderFlowTitle }}</h3>
-                    <div style="font-size:12.5px;color:var(--t2);margin-top:4px;max-width:70ch">{{ L.insiderFlowSubtitle }}</div>
+                    <div style="font-size:12.5px;color:var(--t2);margin-top:4px;max-width:70ch">{{ L.insiderFlowSubtitle }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.insiderFlowSubtitleNuance }}</div></details>
                   </div>
                   <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px">
                     <span style="display:inline-flex;align-items:center;gap:5px;color:var(--up)">
@@ -1689,7 +1689,7 @@
           <header class="island-heading"><h2>{{ L.investorsWho }}</h2><span>{{ investors.asOfLine }}</span></header>
           <p class="insight-caption">{{ investors.totalLine }}</p>
           <div class="investor-summary-grid">
-            <div><h3>{{ L.investorsShare }}</h3><div class="investor-mini-bar"><sc-for list="{{ investors.nationalityBar }}" as="s"><span style="width:{{ s.width }};background:{{ s.color }}"></span></sc-for></div><div class="investor-type-legend"><sc-for list="{{ investors.nationalityBar }}" as="s"><span>{{ s.label }} <strong>{{ s.percent }}</strong></span></sc-for></div></div>
+            <div><h3>{{ L.investorsShareQuestion }} <small class="h-term">{{ L.investorsShare }}</small></h3><div class="investor-mini-bar"><sc-for list="{{ investors.nationalityBar }}" as="s"><span style="width:{{ s.width }};background:{{ s.color }}"></span></sc-for></div><div class="investor-type-legend"><sc-for list="{{ investors.nationalityBar }}" as="s"><span>{{ s.label }} <strong>{{ s.percent }}</strong></span></sc-for></div></div>
             <sc-if value="{{ investors.hasTypeBar }}"><div><h3>{{ L.investorsTypeSplit }}</h3><div class="investor-mini-bar"><sc-for list="{{ investors.typeBar }}" as="s"><span style="width:{{ s.width }};background:{{ s.color }}"></span></sc-for></div><div class="investor-type-legend"><sc-for list="{{ investors.typeBar }}" as="s"><span>{{ s.label }} <strong>{{ s.percent }}</strong></span></sc-for></div></div></sc-if>
           </div>
           <p class="insight-caption">{{ L.investorsBasis }}</p>
@@ -1763,7 +1763,7 @@
         </section>
 
         <div style="display:flex;flex-direction:column;gap:6px;padding:0 10px;font-size:11.5px;color:var(--faint);line-height:1.55">
-          <div>{{ L.investorsSides }}</div>
+          <div>{{ L.investorsSides }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.investorsSidesNuance }}</div></details>
           <div>{{ L.investorsBasis }}</div>
           <sc-if value="{{ investors.asOfLine }}"><div>{{ investors.asOfLine }}</div></sc-if>
           <sc-if value="{{ investors.totalLine }}"><div>{{ investors.totalLine }}</div></sc-if>
@@ -1789,7 +1789,7 @@
     <div class="om-scr screen-heat" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 8px 0">
         <div style="min-width:0">
-          <h1 style="font-family:var(--font-heading);font-size:21px;font-weight:600;letter-spacing:-.01em;line-height:1.3;margin:0">{{ L.heatTitle }}</h1>
+          <h1 style="font-family:var(--font-heading);font-size:21px;font-weight:600;letter-spacing:-.01em;line-height:1.3;margin:0">{{ L.heatTitleQuestion }} <small class="h-term">{{ L.heatTitle }}</small></h1>
           <div style="font-size:13.5px;color:var(--t2);margin-top:9px;max-width:68ch;text-wrap:pretty">{{ L.heatLead }}</div>
         </div>
         <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);text-align:end;line-height:1.6">{{ marketDate }}<br>{{ sessionState }}</div>
@@ -1893,7 +1893,7 @@
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 8px 0">
         <div style="min-width:0">
           <h1 style="font-family:var(--font-heading);font-size:21px;font-weight:600;letter-spacing:-.01em;line-height:1.3;margin:0">{{ L.followTitle }}</h1>
-          <div style="font-size:13.5px;color:var(--t2);margin-top:9px;max-width:62ch;text-wrap:pretty">{{ L.followLead }}</div>
+          <div style="font-size:13.5px;color:var(--t2);margin-top:9px;max-width:62ch;text-wrap:pretty">{{ L.followLead }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.followLeadNuance }}</div></details>
         </div>
         <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);text-align:end;line-height:1.6">{{ followedCount }}<br>{{ marketDate }}</div>
       </div>
@@ -2274,7 +2274,7 @@
                               <div style="flex:1;min-width:0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--t2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ bx.v }}</div>
                             </sc-for>
                           </div>
-                          <div style="font-size:11px;color:var(--faint);line-height:1.55;margin-top:8px;text-wrap:pretty">{{ L.revProofNote }}</div>
+                          <div style="font-size:11px;color:var(--faint);line-height:1.55;margin-top:8px;text-wrap:pretty">{{ L.revProofNote }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.revProofNoteNuance }}</div></details>
                         </div>
                       </sc-if>
                     </div>
@@ -2519,13 +2519,13 @@
             </div>
           </div>
         </sc-if>
-        <div style="font-size:12px;color:var(--faint);padding-top:14px;line-height:1.55;text-wrap:pretty">{{ L.notCreditRating }}</div>
+        <div style="font-size:12px;color:var(--faint);padding-top:14px;line-height:1.55;text-wrap:pretty">{{ L.notCreditRating }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.notCreditRatingNuance }}</div></details>
       </section>
       </sc-if>
       <sc-if value="{{ noDebt }}">
         <section style="border-radius:var(--radius-island);background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px">
           <h2 style="font-family:var(--font-heading);font-size:29px;font-weight:600;letter-spacing:-.03em;margin:0">{{ L.borrowingsTitle }}</h2>
-          <div style="margin-top:12px;color:var(--faint);font-size:13px">{{ L.noBorrowings }}</div>
+          <div style="margin-top:12px;color:var(--faint);font-size:13px">{{ L.noBorrowings }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.noBorrowingsNuance }}</div></details>
         </section>
       </sc-if>
 
@@ -2788,8 +2788,8 @@
       <header class="screen-head">
         <p class="card-dateline"><span>{{ archiveScale }}</span></p>
         <h1>{{ story.calendarLabel }}</h1>
-        <p class="card-lead">{{ L.archiveJob }}</p>
-        <p class="archive-onedoc">{{ L.archiveOneDoc }}</p>
+        <p class="card-lead">{{ L.archiveJob }}</p><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.archiveJobNuance }}</div></details>
+        <p class="archive-onedoc">{{ L.archiveOneDoc }}</p><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.archiveOneDocNuance }}</div></details>
       </header>
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 8px 0">
         <h1 style="font-family:var(--font-heading);font-size:21px;font-weight:600;letter-spacing:-.01em;line-height:1.3;margin:0">{{ story.calendarLabel }}</h1>
@@ -2960,7 +2960,7 @@
               </div>
             </div>
           </sc-for>
-          <div style="font-size:11.5px;color:var(--faint);padding:14px 10px 0;line-height:1.5">{{ L.estimateNote }}</div>
+          <div style="font-size:11.5px;color:var(--faint);padding:14px 10px 0;line-height:1.5">{{ L.estimateNote }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.estimateNoteNuance }}</div></details>
         </div>
       </div>
     </div>
@@ -3515,7 +3515,7 @@
         <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:20px">
           <div style="display:flex;align-items:center;gap:10px">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:21px;height:21px;flex:none"><path d="M4.4 4.6h15.2v14.8H4.4zM4.4 9.2h15.2M4.4 14h15.2M9.2 4.6v4.6M14.4 9.2v4.8M9.2 14v5.4"></path></svg>
-            <h2 style="font-family:var(--font-heading);font-size:22px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ L.calcDivTitle }}</h2>
+            <h2 style="font-family:var(--font-heading);font-size:22px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ L.calcDivTitleQuestion }} <small class="h-term">{{ L.calcDivTitle }}</small></h2>
           </div>
         </div>
 
@@ -3565,9 +3565,9 @@
               </div>
             </sc-if>
             <sc-if value="{{ calcPickedNeedsDividend }}">
-              <div style="font-size:11.5px;color:var(--t2);margin-top:6px;line-height:1.5">{{ L.calcNeedsDividend }}</div>
+              <div style="font-size:11.5px;color:var(--t2);margin-top:6px;line-height:1.5">{{ L.calcNeedsDividend }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.calcNeedsDividendNuance }}</div></details>
             </sc-if>
-            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;color:var(--faint);margin-top:8px;line-height:1.5">{{ L.calcSearchNote }}</div>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;color:var(--faint);margin-top:8px;line-height:1.5">{{ L.calcSearchNote }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.calcSearchNoteNuance }}</div></details>
           </div>
 
           <div>
@@ -3625,19 +3625,19 @@
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
           <div style="padding:18px;border-radius:var(--radius-control);background:var(--sunk);border:1px solid var(--edgeIn)">
             <div style="font-family:var(--font-heading);font-size:16px;font-weight:600;color:var(--ink);margin-bottom:6px">{{ L.revPe }}</div>
-            <p style="margin:0;font-size:13px;color:var(--t2);line-height:1.6">{{ L.revPeBody }}</p>
+            <p style="margin:0;font-size:13px;color:var(--t2);line-height:1.6">{{ L.revPePlain }}</p><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.revPeNuance }}</div></details>
           </div>
           <div style="padding:18px;border-radius:var(--radius-control);background:var(--sunk);border:1px solid var(--edgeIn)">
             <div style="font-family:var(--font-heading);font-size:16px;font-weight:600;color:var(--ink);margin-bottom:6px">{{ L.revPb }}</div>
-            <p style="margin:0;font-size:13px;color:var(--t2);line-height:1.6">{{ L.revPbBody }}</p>
+            <p style="margin:0;font-size:13px;color:var(--t2);line-height:1.6">{{ L.revPbPlain }}</p><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.revPbNuance }}</div></details>
           </div>
           <div style="padding:18px;border-radius:var(--radius-control);background:var(--sunk);border:1px solid var(--edgeIn)">
             <div style="font-family:var(--font-heading);font-size:16px;font-weight:600;color:var(--ink);margin-bottom:6px">{{ L.revRoe }}</div>
-            <p style="margin:0;font-size:13px;color:var(--t2);line-height:1.6">{{ L.revRoeBody }}</p>
+            <p style="margin:0;font-size:13px;color:var(--t2);line-height:1.6">{{ L.revRoePlain }}</p><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.revRoeNuance }}</div></details>
           </div>
           <div style="padding:18px;border-radius:var(--radius-control);background:var(--sunk);border:1px solid var(--edgeIn)">
             <div style="font-family:var(--font-heading);font-size:16px;font-weight:600;color:var(--ink);margin-bottom:6px">{{ L.revCash }}</div>
-            <p style="margin:0;font-size:13px;color:var(--t2);line-height:1.6">{{ L.revCashBody }}</p>
+            <p style="margin:0;font-size:13px;color:var(--t2);line-height:1.6">{{ L.revCashPlain }}</p><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.revCashNuance }}</div></details>
           </div>
         </div>
         <div style="margin-top:16px;padding:12px 16px;border-radius:var(--radius-control);background:var(--sunk);border:1px solid var(--rule);font-size:12px;color:var(--faint);line-height:1.6">
@@ -3735,7 +3735,7 @@
     <div class="om-scr screen-research" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0">
         <h1 style="font-family:var(--font-heading);font-size:21px;font-weight:600;letter-spacing:-.01em;line-height:1.3;margin:0">{{ L.researchTitle }}</h1>
-        <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);text-align:end;max-width:32ch;line-height:1.6">{{ L.researchNote }}</div>
+        <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);text-align:end;max-width:32ch;line-height:1.6">{{ L.researchNote }}</div><details class="rev-nuance"><summary>{{ L.revNuanceLabel }}</summary><div>{{ L.researchNoteNuance }}</div></details>
       </div>
       <sc-for list="{{ studies }}" as="s" hint-placeholder-count="3">
         <div style="border-radius:var(--radius-island);background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(210px,288px);gap:24px">

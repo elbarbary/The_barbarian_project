@@ -497,7 +497,7 @@ export function worldMonitor(component, data, ar) {
           h('span', null, ar ? (row.label_ar || row.nationality) : (row.label || row.nationality)),
           h('strong', { dir: 'ltr' }, finite(row.percent) ? `${row.percent.toFixed(2)}%` : '—')
         ))),
-      h('p', { className: 'ft-note' }, doc.foreignMoney.note)
+      h('p', { className: 'ft-note' }, ar ? (doc.foreignMoney.noteAr || doc.foreignMoney.note) : doc.foreignMoney.note)
     )
   );
 }

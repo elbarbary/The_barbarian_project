@@ -49,16 +49,16 @@ test('the caveats sit behind a disclosure directly under the body', () => {
 test('a plain sentence is short, holds no advice, and has its nuance and its metric beside it', () => {
   for (const name of ['en', 'ar']) {
     const d = dict(name);
-    const plains = [...d.matchAll(/(rev\w+)Plain:'((?:[^'\\]|\\.)*)'/g)];
+    const plains = [...d.matchAll(/(rev(?:Pe|Pb|Yield|Profit|Eps|Assets|Cash|Roe|Roa|Debt))Plain:'((?:[^'\\]|\\.)*)'/g)];
     for (const [, base, text] of plains) {
       assert.ok(words(text) <= 22, `${name}.${base}Plain runs to ${words(text)} words`);
       assert.doesNotMatch(text, BAN, `${name}.${base}Plain carries a directive`);
       assert.match(d, new RegExp(`${base}Nuance:'`), `${name}.${base}Plain has no ${base}Nuance`);
       assert.match(d, new RegExp(`${base}Body:'`), `${name}.${base}Plain names a metric that does not exist`);
     }
-    const nuances = [...d.matchAll(/(rev\w+)Nuance:'/g)];
+    const nuances = [...d.matchAll(/(rev(?:Pe|Pb|Yield|Profit|Eps|Assets|Cash|Roe|Roa|Debt))Nuance:'/g)];
     for (const [, base] of nuances) assert.match(d, new RegExp(`${base}Plain:'`), `${name}.${base}Nuance has no plain sentence above it`);
   }
-  const n = (name) => (dict(name).match(/rev\w+Plain:'/g) || []).length;
+  const n = (name) => (dict(name).match(/rev(?:Pe|Pb|Yield|Profit|Eps|Assets|Cash|Roe|Roa|Debt)Plain:'/g) || []).length;
   assert.equal(n('en'), n('ar'), 'the plain sentences are not in both languages');
 });

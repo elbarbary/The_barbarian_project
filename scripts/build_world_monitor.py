@@ -430,6 +430,11 @@ def foreign_money() -> dict | None:
         "note": "The exchange states these for its current reporting period to "
                 "date, not for one session, and resets them when it starts a "
                 "new period. A rise here is not money arriving today.",
+        # The page is Arabic by default; without this the block printed the
+        # English sentence under an Arabic heading.
+        "noteAr": "تنشر البورصة هذه الأرقام تراكمياً من بداية الفترة الحالية، لا "
+                  "لجلسة واحدة، وتبدأ من الصفر مع كل فترة جديدة. فالارتفاع هنا "
+                  "ليس مالاً وصل اليوم.",
     }
 
 

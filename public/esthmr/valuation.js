@@ -475,7 +475,7 @@ export function valuationExplorer(component, D, ar, React) {
         explanation: found.quadrant === 'safe_value'
           ? (ar ? 'مكرر ربحية مغرٍ مع ميزانية خالية من أعباء الديون، مما يمنح المستثمر هامش أمان متين.' : 'Trades at an attractive earnings multiple backed by conservative leverage and clean balance sheet.')
           : found.quadrant === 'leveraged_value'
-          ? (ar ? 'يبدو السهم رخيصاً بمكرر الربحية المجرد، لكن الديون الضخمة ترفع المضاعف الفعلي ومخاطر خدمة الدين.' : 'Looks cheap on equity P/E alone, but significant debt raises enterprise cost and financing sensitivity.')
+          ? (ar ? 'قد يبدو مكرر الربحية المجرد منخفضاً، لكن الديون الضخمة ترفع المضاعف الفعلي ومخاطر خدمة الدين.' : 'Looks low on equity P/E alone, but significant debt raises enterprise cost and financing sensitivity.')
           : found.quadrant === 'quality_clean'
           ? (ar ? 'مكرر ربحية فوق المتوسط يعكس تسعيراً لجودة الشركة وقوتها التسعيرية دون مخاطر ديون.' : 'Commands a quality valuation premium supported by robust cash flows and negligible balance sheet debt.')
           : (ar ? 'تقييم متضخم مصحوباً بعبء مديونية ثقيل؛ الشركة تفتقر لهامش الأمان من الجانبين.' : 'High valuation multiple paired with heavy borrowing; lacks fundamental margin of safety.'),
